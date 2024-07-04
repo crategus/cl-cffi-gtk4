@@ -8,32 +8,32 @@
 ;;;     GtkFlattenListModel
 
 (test gtk-flatten-list-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFlattenListModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:flatten-list-model
           (glib:symbol-for-gtype "GtkFlattenListModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFlattenListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_flatten_list_model_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_flatten_list_model_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFlattenListModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFlattenListModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFlattenListModel")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (list-interfaces "GtkFlattenListModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFlattenListModel")))
+  ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (list-properties "GtkFlattenListModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFlattenListModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFlattenListModel")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFlattenListModel" 
+             (gtk-test:list-signals "GtkFlattenListModel")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFlattenListModel"
                                              GTK-FLATTEN-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSectionModel")
@@ -58,4 +58,4 @@
 ;;;     gtk_flatten_list_model_new
 ;;;     gtk_flatten_list_model_get_model_for_item
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

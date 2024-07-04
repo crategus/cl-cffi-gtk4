@@ -21,18 +21,18 @@
           (g:type-parent "GtkProgressBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkProgressBar")))
+             (gtk-test:list-children "GtkProgressBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (list-interfaces "GtkProgressBar")))
+             (gtk-test:list-interfaces "GtkProgressBar")))
   ;; Check properties
   (is (equal '("ellipsize" "fraction" "inverted" "orientation" "pulse-step"
                "show-text" "text")
-             (list-properties "GtkProgressBar")))
+             (gtk-test:list-properties "GtkProgressBar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkProgressBar")))
+             (gtk-test:list-signals "GtkProgressBar")))
   ;; Check CSS information
   (is (string= "progressbar"
                (gtk:widget-class-css-name "GtkProgressBar")))

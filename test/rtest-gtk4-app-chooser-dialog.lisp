@@ -22,17 +22,17 @@
           (g:type-parent "GtkAppChooserDialog")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAppChooserDialog")))
+             (gtk-test:list-children "GtkAppChooserDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkAppChooser")
-             (list-interfaces "GtkAppChooserDialog")))
+             (gtk-test:list-interfaces "GtkAppChooserDialog")))
   ;; Check properties
   (is (equal '("content-type" "gfile" "heading")
-             (list-properties "GtkAppChooserDialog")))
+             (gtk-test:list-properties "GtkAppChooserDialog")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkAppChooserDialog")))
+             (gtk-test:list-signals "GtkAppChooserDialog")))
   ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAppChooserDialog")))

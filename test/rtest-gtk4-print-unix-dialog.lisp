@@ -24,14 +24,14 @@
                "GTK_PRINT_CAPABILITY_GENERATE_PS" "GTK_PRINT_CAPABILITY_PREVIEW"
                "GTK_PRINT_CAPABILITY_NUMBER_UP"
                "GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT")
-             (list-flags-item-name "GtkPrintCapabilities")))
+             (gtk-test:list-flags-item-name "GtkPrintCapabilities")))
   ;; Check values
   (is (equal '(1 2 4 8 16 32 64 128 256 512)
-             (list-flags-item-value "GtkPrintCapabilities")))
+             (gtk-test:list-flags-item-value "GtkPrintCapabilities")))
   ;; Check nick names
   (is (equal '("page-set" "copies" "collate" "reverse" "scale" "generate-pdf"
                "generate-ps" "preview" "number-up" "number-up-layout")
-             (list-flags-item-nick "GtkPrintCapabilities")))
+             (gtk-test:list-flags-item-nick "GtkPrintCapabilities")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkPrintCapabilities"
                                       GTK-PRINT-CAPABILITIES
@@ -68,29 +68,23 @@
             (g:type-parent "GtkPrintUnixDialog")))
     ;; Check children
     (is (equal '()
-               (list-children "GtkPrintUnixDialog")))
+               (gtk-test:list-children "GtkPrintUnixDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (list-interfaces "GtkPrintUnixDialog")))
+               (gtk-test:list-interfaces "GtkPrintUnixDialog")))
     ;; Check properties
     (is (equal '("current-page" "embed-page-setup" "has-selection"
                  "manual-capabilities" "page-setup" "print-settings"
                  "selected-printer" "support-selection")
-               (list-properties "GtkPrintUnixDialog")))
+               (gtk-test:list-properties "GtkPrintUnixDialog")))
     ;; Check signals
     (is (equal '()
-               (list-signals "GtkPrintUnixDialog")))
+               (gtk-test:list-signals "GtkPrintUnixDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkPrintUnixDialog")))
-    ;; Check CSS classes
-    ;; FIXME: Calling make-instance for GtkPrintUnixDialog causes errors or
-    ;; warnings.
-    #+nil
-    (is (equal '("background" "csd" "dialog" "print")
-               (gtk:widget-css-classes (make-instance 'gtk:print-unix-dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkPrintUnixDialog")))
     ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog"
@@ -174,4 +168,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; 2024-4-30
+;;; 2024-7-3

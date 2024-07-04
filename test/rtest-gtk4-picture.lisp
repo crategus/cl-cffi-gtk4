@@ -19,13 +19,13 @@
   ;; Check names
   (is (equal '("GTK_CONTENT_FIT_FILL" "GTK_CONTENT_FIT_CONTAIN"
                "GTK_CONTENT_FIT_COVER" "GTK_CONTENT_FIT_SCALE_DOWN")
-             (list-enum-item-name "GtkContentFit")))
+             (gtk-test:list-enum-item-name "GtkContentFit")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkContentFit")))
+             (gtk-test:list-enum-item-value "GtkContentFit")))
   ;; Check nick names
   (is (equal '("fill" "contain" "cover" "scale-down")
-             (list-enum-item-nick "GtkContentFit")))
+             (gtk-test:list-enum-item-nick "GtkContentFit")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkContentFit" GTK-CONTENT-FIT
                                      (:EXPORT T
@@ -53,17 +53,17 @@
           (g:type-parent "GtkPicture")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkPicture")))
+             (gtk-test:list-children "GtkPicture")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkPicture")))
+             (gtk-test:list-interfaces "GtkPicture")))
   ;; Check properties
   (is (equal '("alternative-text" "can-shrink" "content-fit" "file"
                "keep-aspect-ratio" "paintable")
-             (list-properties "GtkPicture")))
+             (gtk-test:list-properties "GtkPicture")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkPicture")))
+             (gtk-test:list-signals "GtkPicture")))
   ;; Check CSS information
   (is (string= "picture"
                (gtk:widget-class-css-name "GtkPicture")))

@@ -21,16 +21,16 @@
           (g:type-parent "GtkCustomLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCustomLayout")))
+             (gtk-test:list-children "GtkCustomLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCustomLayout")))
+             (gtk-test:list-interfaces "GtkCustomLayout")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkCustomLayout")))
+             (gtk-test:list-properties "GtkCustomLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCustomLayout")))
+             (gtk-test:list-signals "GtkCustomLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomLayout" GTK-CUSTOM-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T
@@ -47,4 +47,4 @@
 
 ;;;     gtk_custom_layout_new
 
-;;; 2024-4-23
+;;; 2024-7-3

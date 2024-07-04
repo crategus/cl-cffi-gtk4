@@ -22,17 +22,17 @@
   ;; Check children
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkPrintBackend"))))
+                 (gtk-test:list-children "GtkPrintBackend"))))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPrintBackend")))
+             (gtk-test:list-interfaces "GtkPrintBackend")))
   ;; Check properties
   (is (equal '("status")
-             (list-properties "GtkPrintBackend")))
+             (gtk-test:list-properties "GtkPrintBackend")))
   ;; Check signals
   (is (equal '("printer-added" "printer-list-changed" "printer-list-done"
                "printer-removed" "printer-status-changed" "request-password")
-             (list-signals "GtkPrintBackend")))
+             (gtk-test:list-signals "GtkPrintBackend")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintBackend" GTK-PRINT-BACKEND
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -58,18 +58,18 @@
   ;; Check children
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkPrinter"))))
+                 (gtk-test:list-children "GtkPrinter"))))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPrinter")))
+             (gtk-test:list-interfaces "GtkPrinter")))
   ;; Check properties
   (is (equal '("accepting-jobs" "accepts-pdf" "accepts-ps" "backend"
                "icon-name" "is-virtual" "job-count" "location" "name" "paused"
                "state-message")
-             (list-properties "GtkPrinter")))
+             (gtk-test:list-properties "GtkPrinter")))
   ;; Check signals
   (is (equal '("details-acquired")
-             (list-signals "GtkPrinter")))
+             (gtk-test:list-signals "GtkPrinter")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrinter" GTK-PRINTER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

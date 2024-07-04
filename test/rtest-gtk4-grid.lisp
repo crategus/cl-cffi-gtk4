@@ -21,18 +21,18 @@
           (g:type-parent "GtkGrid")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkGrid")))
+             (gtk-test:list-children "GtkGrid")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkGrid")))
+             (gtk-test:list-interfaces "GtkGrid")))
   ;; Check properties
   (is (equal '("baseline-row" "column-homogeneous" "column-spacing"
                "orientation" "row-homogeneous" "row-spacing")
-             (list-properties "GtkGrid")))
+             (gtk-test:list-properties "GtkGrid")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkGrid")))
+             (gtk-test:list-signals "GtkGrid")))
   ;; Check CSS name
   (is (string= "grid"
                (gtk:widget-class-css-name "GtkGrid")))

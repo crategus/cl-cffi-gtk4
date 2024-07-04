@@ -22,16 +22,16 @@
   ;; Check children
   (is (equal '("GtkConstraintLayoutChild" "GtkFixedLayoutChild"
                "GtkGridLayoutChild" "GtkOverlayLayoutChild")
-             (list-children "GtkLayoutChild")))
+             (gtk-test:list-children "GtkLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkLayoutChild")))
+             (gtk-test:list-interfaces "GtkLayoutChild")))
   ;; Check properties
   (is (equal '("child-widget" "layout-manager")
-             (list-properties "GtkLayoutChild")))
+             (gtk-test:list-properties "GtkLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkLayoutChild")))
+             (gtk-test:list-signals "GtkLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLayoutChild" GTK-LAYOUT-CHILD
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

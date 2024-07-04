@@ -8,30 +8,30 @@
 ;;;     GtkMultiSorter
 
 (test gtk-multi-sorter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMultiSorter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:multi-sorter
           (glib:symbol-for-gtype "GtkMultiSorter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMultiSorter")
           (g:gtype (cffi:foreign-funcall "gtk_multi_sorter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkSorter")
           (g:type-parent "GtkMultiSorter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkMultiSorter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMultiSorter")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkBuildable")
-             (list-interfaces "GtkMultiSorter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkMultiSorter")))
+  ;; Check properties
   (is (equal '("item-type" "n-items")
-             (list-properties "GtkMultiSorter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkMultiSorter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMultiSorter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkMultiSorter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSorter" GTK-MULTI-SORTER
                                (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
                                 ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
@@ -53,4 +53,4 @@
 ;;;     gtk_multi_sorter_append
 ;;;     gtk_multi_sorter_remove
 
-;;; --- 2023-9-5 ---------------------------------------------------------------
+;;; 2024-7-3

@@ -21,17 +21,17 @@
           (g:type-parent "GtkComboBoxText")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkComboBoxText")))
+             (gtk-test:list-children "GtkComboBoxText")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
-             (list-interfaces "GtkComboBoxText")))
+             (gtk-test:list-interfaces "GtkComboBoxText")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkComboBoxText")))
+             (gtk-test:list-properties "GtkComboBoxText")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkComboBoxText")))
+             (gtk-test:list-signals "GtkComboBoxText")))
   ;; Check CSS name
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBoxText")))

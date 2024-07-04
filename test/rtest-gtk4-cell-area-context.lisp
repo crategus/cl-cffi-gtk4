@@ -8,32 +8,32 @@
 ;;;     GtkCellAreaContext
 
 (test gtk-cell-area-context-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellAreaContext"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-area-context
           (glib:symbol-for-gtype "GtkCellAreaContext")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellAreaContext")
           (g:gtype (cffi:foreign-funcall "gtk_cell_area_context_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkCellAreaContext")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkCellAreaBoxContext")
-             (list-children "GtkCellAreaContext")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkCellAreaContext")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellAreaContext")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkCellAreaContext")))
+  ;; Check class properties
   (is (equal '("area" "minimum-height" "minimum-width"
                       "natural-height" "natural-width")
-             (list-properties "GtkCellAreaContext")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkCellAreaContext")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellAreaContext")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkCellAreaContext")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellAreaContext" GTK-CELL-AREA-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_cell_area_context_get_type")

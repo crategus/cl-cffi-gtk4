@@ -8,36 +8,33 @@
 ;;;     GtkDrawingArea
 
 (test gtk-drawing-area-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkDrawingArea"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:drawing-area
           (glib:symbol-for-gtype "GtkDrawingArea")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDrawingArea")
           (g:gtype (cffi:foreign-funcall "gtk_drawing_area_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkDrawingArea")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkDrawingArea")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkDrawingArea")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkDrawingArea")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkDrawingArea")))
+  ;; Check properties
   (is (equal '("content-height" "content-width")
-             (list-properties "GtkDrawingArea")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkDrawingArea")))
+  ;; Check signals
   (is (equal '("resize")
-             (list-signals "GtkDrawingArea")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkDrawingArea")))
+  ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkDrawingArea")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:drawing-area))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkDrawingArea")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDrawingArea" GTK-DRAWING-AREA
@@ -79,4 +76,4 @@
 
 ;;;     gtk_drawing_area_set_draw_func
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-7-4

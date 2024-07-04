@@ -8,30 +8,30 @@
 ;;;     GtkGestureLongPress
 
 (test gesture-long-press-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureLongPress"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-long-press
           (glib:symbol-for-gtype "GtkGestureLongPress")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureLongPress")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_long_press_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureLongPress")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureLongPress")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureLongPress")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureLongPress")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureLongPress")))
+  ;; Check properties
   (is (equal '("delay-factor")
-             (list-properties "GtkGestureLongPress")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureLongPress")))
+  ;; Check signals
   (is (equal '("cancelled" "pressed")
-             (list-signals "GtkGestureLongPress")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureLongPress")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureLongPress"
                                              GTK-GESTURE-LONG-PRESS
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES

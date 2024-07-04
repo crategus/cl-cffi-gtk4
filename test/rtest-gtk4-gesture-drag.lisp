@@ -8,30 +8,30 @@
 ;;;     GtkGestureDrag
 
 (test gesture-drag-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureDrag"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-drag
           (glib:symbol-for-gtype "GtkGestureDrag")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureDrag")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_drag_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureDrag")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkGesturePan")
-             (list-children "GtkGestureDrag")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureDrag")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureDrag")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureDrag")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkGestureDrag")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureDrag")))
+  ;; Check signals
   (is (equal '("drag-begin" "drag-end" "drag-update")
-             (list-signals "GtkGestureDrag")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureDrag")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureDrag" GTK-GESTURE-DRAG
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_drag_get_type")
@@ -63,4 +63,4 @@
   (let ((gesture (gtk:gesture-drag-new)))
     (is-false (gtk:gesture-drag-offset gesture))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

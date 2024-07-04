@@ -21,17 +21,17 @@
           (g:type-parent "GtkTreeStore")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeStore")))
+             (gtk-test:list-children "GtkTreeStore")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeDragSource" "GtkTreeDragDest"
                "GtkTreeSortable" "GtkBuildable")
-             (list-interfaces "GtkTreeStore")))
+             (gtk-test:list-interfaces "GtkTreeStore")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkTreeStore")))
+             (gtk-test:list-properties "GtkTreeStore")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkTreeStore")))
+             (gtk-test:list-signals "GtkTreeStore")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeStore" GTK-TREE-STORE
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES

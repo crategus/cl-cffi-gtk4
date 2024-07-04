@@ -20,13 +20,13 @@
   ;; Check names
   (is (equal '("GTK_FILE_CHOOSER_ACTION_OPEN" "GTK_FILE_CHOOSER_ACTION_SAVE"
                "GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER")
-             (list-enum-item-name "GtkFileChooserAction")))
+             (gtk-test:list-enum-item-name "GtkFileChooserAction")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkFileChooserAction")))
+             (gtk-test:list-enum-item-value "GtkFileChooserAction")))
   ;; Check nick names
   (is (equal '("open" "save" "select-folder")
-             (list-enum-item-nick "GtkFileChooserAction")))
+             (gtk-test:list-enum-item-nick "GtkFileChooserAction")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFileChooserAction"
                              GTK-FILE-CHOOSER-ACTION
@@ -51,14 +51,14 @@
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkFileChooser")))
-  ;; Check interface properties.
+             (gtk-test:list-interface-prerequisites "GtkFileChooser")))
+  ;; Check interface properties
   (is (equal '("action" "create-folders" "filter" "filters" "select-multiple"
                "shortcut-folders")
-             (list-interface-properties "GtkFileChooser")))
+             (gtk-test:list-interface-properties "GtkFileChooser")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkFileChooser")))
+             (gtk-test:list-signals "GtkFileChooser")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkFileChooser" GTK-FILE-CHOOSER
                                   (:EXPORT T

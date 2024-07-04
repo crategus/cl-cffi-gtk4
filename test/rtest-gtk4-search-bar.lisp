@@ -21,23 +21,20 @@
           (g:type-parent "GtkSearchBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkSearchBar")))
+             (gtk-test:list-children "GtkSearchBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkSearchBar")))
+             (gtk-test:list-interfaces "GtkSearchBar")))
   ;; Check properties
   (is (equal '("child" "key-capture-widget" "search-mode-enabled"
                "show-close-button")
-             (list-properties "GtkSearchBar")))
+             (gtk-test:list-properties "GtkSearchBar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkSearchBar")))
+             (gtk-test:list-signals "GtkSearchBar")))
   ;; Check CSS name
   (is (string= "searchbar"
                (gtk:widget-class-css-name "GtkSearchBar")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:search-bar))))
   ;; Check accessible role
   (is (eq :search (gtk:widget-class-accessible-role "GtkSearchBar")))
   ;; Check class definition

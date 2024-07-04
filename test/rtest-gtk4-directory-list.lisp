@@ -8,31 +8,31 @@
 ;;;     GtkDirectoryList
 
 (test gtk-directory-list-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkDirectoryList"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:directory-list
           (glib:symbol-for-gtype "GtkDirectoryList")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDirectoryList")
           (g:gtype (cffi:foreign-funcall "gtk_directory_list_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkDirectoryList")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkDirectoryList")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkDirectoryList")))
+  ;; Check interfaces
   (is (equal '("GListModel")
-             (list-interfaces "GtkDirectoryList")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkDirectoryList")))
+  ;; Check properties
   (is (equal '("attributes" "error" "file" "io-priority" "item-type" "loading"
                "monitored" "n-items")
-             (list-properties "GtkDirectoryList")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkDirectoryList")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkDirectoryList")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkDirectoryList")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDirectoryList"
                                              GTK-DIRECTORY-LIST
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -90,4 +90,4 @@
 
 ;;;     gtk_directory_list_is_loading
 
-;;; --- 2023-9-7 ---------------------------------------------------------------
+;;; 2024-7-4

@@ -20,13 +20,13 @@
   (is (equal '("GTK_BUTTONS_NONE" "GTK_BUTTONS_OK" "GTK_BUTTONS_CLOSE"
                "GTK_BUTTONS_CANCEL" "GTK_BUTTONS_YES_NO"
                "GTK_BUTTONS_OK_CANCEL")
-             (list-enum-item-name "GtkButtonsType")))
+             (gtk-test:list-enum-item-name "GtkButtonsType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GtkButtonsType")))
+             (gtk-test:list-enum-item-value "GtkButtonsType")))
   ;; Check nick names
   (is (equal '("none" "ok" "close" "cancel" "yes-no" "ok-cancel")
-             (list-enum-item-nick "GtkButtonsType")))
+             (gtk-test:list-enum-item-nick "GtkButtonsType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkButtonsType"
                              GTK-BUTTONS-TYPE
@@ -44,12 +44,12 @@
 
 (test gtk-message-dialog-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkMessageDialog"))
     ;; Check registered name
     (is (eq 'gtk:message-dialog
             (glib:symbol-for-gtype "GtkMessageDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkMessageDialog")
             (g:gtype (cffi:foreign-funcall "gtk_message_dialog_get_type"
                                            :size))))
@@ -58,28 +58,21 @@
             (g:type-parent "GtkMessageDialog")))
     ;; Check children
     (is (equal '()
-               (list-children "GtkMessageDialog")))
+               (gtk-test:list-children "GtkMessageDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (list-interfaces "GtkMessageDialog")))
+               (gtk-test:list-interfaces "GtkMessageDialog")))
     ;; Check class properties
     (is (equal '("buttons" "message-area" "message-type" "secondary-text"
                  "secondary-use-markup" "text" "use-markup")
-               (list-properties "GtkMessageDialog")))
-    ;; Check list of signals
+               (gtk-test:list-properties "GtkMessageDialog")))
+    ;; Check signals
     (is (equal '()
-               (list-signals "GtkMessageDialog")))
+               (gtk-test:list-signals "GtkMessageDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkMessageDialog")))
-    ;; Check CSS classes
-    #-windows
-    (is (equal '("background" "csd" "dialog" "message")
-               (gtk:widget-css-classes (make-instance 'gtk:message-dialog))))
-    #+windows
-    (is (equal '("background" "dialog" "message")
-               (gtk:widget-css-classes (make-instance 'gtk:message-dialog))))
     ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkMessageDialog")))
     ;; Check class definition

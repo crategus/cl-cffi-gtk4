@@ -22,16 +22,16 @@
           (g:type-parent "GtkTreeModelFilter")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeModelFilter")))
+             (gtk-test:list-children "GtkTreeModelFilter")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeDragSource")
-             (list-interfaces "GtkTreeModelFilter")))
+             (gtk-test:list-interfaces "GtkTreeModelFilter")))
   ;; Check properties
   (is (equal '("child-model" "virtual-root")
-             (list-properties "GtkTreeModelFilter")))
+             (gtk-test:list-properties "GtkTreeModelFilter")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkTreeModelFilter")))
+             (gtk-test:list-signals "GtkTreeModelFilter")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeModelFilter"
                                              GTK-TREE-MODEL-FILTER

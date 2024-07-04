@@ -21,16 +21,16 @@
           (g:type-parent "GtkPageSetup")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkPageSetup")))
+             (gtk-test:list-children "GtkPageSetup")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPageSetup")))
+             (gtk-test:list-interfaces "GtkPageSetup")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkPageSetup")))
+             (gtk-test:list-properties "GtkPageSetup")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkPageSetup")))
+             (gtk-test:list-signals "GtkPageSetup")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPageSetup" GTK-PAGE-SETUP
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

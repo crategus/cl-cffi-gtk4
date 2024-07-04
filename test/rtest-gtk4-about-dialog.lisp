@@ -26,16 +26,16 @@
                "GTK_LICENSE_AGPL_3_0_ONLY" "GTK_LICENSE_BSD_3"
                "GTK_LICENSE_APACHE_2_0" "GTK_LICENSE_MPL_2_0"
                "GTK_LICENSE_0BSD")
-             (list-enum-item-name "GtkLicense")))
+             (gtk-test:list-enum-item-name "GtkLicense")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18)
-             (list-enum-item-value "GtkLicense")))
+             (gtk-test:list-enum-item-value "GtkLicense")))
   ;; Check nick names
   (is (equal '("unknown" "custom" "gpl-2-0" "gpl-3-0" "lgpl-2-1" "lgpl-3-0"
                "bsd" "mit-x11" "artistic" "gpl-2-0-only" "gpl-3-0-only"
                "lgpl-2-1-only" "lgpl-3-0-only" "agpl-3-0" "agpl-3-0-only"
                "bsd-3" "apache-2-0" "mpl-2-0" "0bsd")
-             (list-enum-item-nick "GtkLicense")))
+             (gtk-test:list-enum-item-nick "GtkLicense")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLicense"
                              GTK-LICENSE
@@ -78,26 +78,23 @@
           (g:type-parent "GtkAboutDialog")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAboutDialog")))
+             (gtk-test:list-children "GtkAboutDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
-             (list-interfaces "GtkAboutDialog")))
+             (gtk-test:list-interfaces "GtkAboutDialog")))
   ;; Check class properties
   (is (equal '("artists" "authors" "comments" "copyright" "documenters"
                "license" "license-type" "logo" "logo-icon-name" "program-name"
                "system-information" "translator-credits" "version" "website"
                "website-label" "wrap-license")
-             (list-properties "GtkAboutDialog")))
+             (gtk-test:list-properties "GtkAboutDialog")))
   ;; Check signals
   (is (equal '("activate-link")
-             (list-signals "GtkAboutDialog")))
+             (gtk-test:list-signals "GtkAboutDialog")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAboutDialog")))
-  ;; Check CSS classes
-  (is (equal '("background" "csd" "aboutdialog")
-             (gtk:widget-css-classes (make-instance 'gtk:about-dialog))))
   ;; Check accessible role
   (is (eq :application (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check the class definition

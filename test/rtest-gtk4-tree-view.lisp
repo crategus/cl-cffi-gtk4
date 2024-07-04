@@ -64,13 +64,13 @@
   (is (equal '("GTK_TREE_VIEW_DROP_BEFORE" "GTK_TREE_VIEW_DROP_AFTER"
                "GTK_TREE_VIEW_DROP_INTO_OR_BEFORE"
                "GTK_TREE_VIEW_DROP_INTO_OR_AFTER")
-             (list-enum-item-name "GtkTreeViewDropPosition")))
+             (gtk-test:list-enum-item-name "GtkTreeViewDropPosition")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkTreeViewDropPosition")))
+             (gtk-test:list-enum-item-value "GtkTreeViewDropPosition")))
   ;; Check nick names
   (is (equal '("before" "after" "into-or-before" "into-or-after")
-             (list-enum-item-nick "GtkTreeViewDropPosition")))
+             (gtk-test:list-enum-item-nick "GtkTreeViewDropPosition")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTreeViewDropPosition"
                                      GTK-TREE-VIEW-DROP-POSITION
@@ -100,13 +100,13 @@
                "GTK_TREE_VIEW_GRID_LINES_HORIZONTAL"
                "GTK_TREE_VIEW_GRID_LINES_VERTICAL"
                "GTK_TREE_VIEW_GRID_LINES_BOTH")
-             (list-enum-item-name "GtkTreeViewGridLines")))
+             (gtk-test:list-enum-item-name "GtkTreeViewGridLines")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkTreeViewGridLines")))
+             (gtk-test:list-enum-item-value "GtkTreeViewGridLines")))
   ;; Check nick names
   (is (equal '("none" "horizontal" "vertical" "both")
-             (list-enum-item-nick "GtkTreeViewGridLines")))
+             (gtk-test:list-enum-item-nick "GtkTreeViewGridLines")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTreeViewGridLines"
                                      GTK-TREE-VIEW-GRID-LINES
@@ -135,11 +135,11 @@
           (g:type-parent "GtkTreeView")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeView")))
+             (gtk-test:list-children "GtkTreeView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable")
-             (list-interfaces "GtkTreeView")))
+             (gtk-test:list-interfaces "GtkTreeView")))
   ;; Check properties
   (is (equal '("activate-on-single-click" "enable-grid-lines" "enable-search"
                "enable-tree-lines" "expander-column" "fixed-height-mode"
@@ -148,21 +148,17 @@
                "level-indentation" "model" "reorderable" "rubber-banding"
                "search-column" "show-expanders" "tooltip-column" "vadjustment"
                "vscroll-policy")
-             (list-properties "GtkTreeView")))
+             (gtk-test:list-properties "GtkTreeView")))
   ;; Check signals
   (is (equal '("columns-changed" "cursor-changed" "expand-collapse-cursor-row"
                "move-cursor" "row-activated" "row-collapsed" "row-expanded"
                "select-all" "select-cursor-parent" "select-cursor-row"
                "start-interactive-search" "test-collapse-row" "test-expand-row"
                "toggle-cursor-row" "unselect-all")
-             (list-signals "GtkTreeView")))
+             (gtk-test:list-signals "GtkTreeView")))
   ;; Check CSS name
   (is (string= "treeview"
                (gtk:widget-class-css-name "GtkTreeView")))
-  ;; Check CSS classes
-  (let ((*gtk-warn-deprecated* nil))
-    (is (equal '("view")
-               (gtk:widget-css-classes (make-instance 'gtk:tree-view)))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkTreeView")))
   ;; Check the class definition

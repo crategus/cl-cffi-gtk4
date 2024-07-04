@@ -6,34 +6,34 @@
 ;;;     GtkListItemFactory
 
 (test gtk-list-item-factory-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListItemFactory"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-item-factory
           (glib:symbol-for-gtype "GtkListItemFactory")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListItemFactory")
           (g:gtype (cffi:foreign-funcall "gtk_list_item_factory_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListItemFactory")))
-  ;; Check the children
+  ;; Check children
   (is (or (equal '("GtkBuilderListItemFactory" "GtkSignalListItemFactory")
-                 (list-children "GtkListItemFactory"))
+                 (gtk-test:list-children "GtkListItemFactory"))
           (equal '("GtkBuilderListItemFactory" "GtkColumnListItemFactory"
                    "GtkSignalListItemFactory")
-                 (list-children "GtkListItemFactory"))))
-  ;; Check the interfaces
+                 (gtk-test:list-children "GtkListItemFactory"))))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkListItemFactory")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkListItemFactory")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkListItemFactory")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkListItemFactory")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkListItemFactory")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkListItemFactory")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListItemFactory"
                                              GTK-LIST-ITEM-FACTORY
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -47,31 +47,31 @@
 ;;;     GtkSignalListItemFactory
 
 (test gtk-signal-list-item-factory-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSignalListItemFactory"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:signal-list-item-factory
           (glib:symbol-for-gtype "GtkSignalListItemFactory")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSignalListItemFactory")
           (g:gtype (cffi:foreign-funcall "gtk_signal_list_item_factory_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkListItemFactory")
           (g:type-parent "GtkSignalListItemFactory")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSignalListItemFactory")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSignalListItemFactory")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkSignalListItemFactory")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSignalListItemFactory")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkSignalListItemFactory")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSignalListItemFactory")))
+  ;; Check signals
   (is (equal '("bind" "setup" "teardown" "unbind")
-             (list-signals "GtkSignalListItemFactory")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSignalListItemFactory")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSignalListItemFactory"
                                GTK-SIGNAL-LIST-ITEM-FACTORY
                                (:SUPERCLASS GTK-LIST-ITEM-FACTORY :EXPORT T
@@ -99,31 +99,31 @@
 ;;;     GtkBuilderListItemFactory
 
 (test gtk-builder-list-item-factory-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkBuilderListItemFactory"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:builder-list-item-factory
           (glib:symbol-for-gtype "GtkBuilderListItemFactory")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBuilderListItemFactory")
           (g:gtype (cffi:foreign-funcall "gtk_builder_list_item_factory_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkListItemFactory")
           (g:type-parent "GtkBuilderListItemFactory")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkBuilderListItemFactory")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkBuilderListItemFactory")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkBuilderListItemFactory")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkBuilderListItemFactory")))
+  ;; Check properties
   (is (equal '("bytes" "resource" "scope")
-             (list-properties "GtkBuilderListItemFactory")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkBuilderListItemFactory")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkBuilderListItemFactory")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkBuilderListItemFactory")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBuilderListItemFactory"
                                GTK-BUILDER-LIST-ITEM-FACTORY
                                (:SUPERCLASS GTK-LIST-ITEM-FACTORY :EXPORT T
@@ -185,4 +185,4 @@
 
 ;;;     gtk_builder_list_item_factory_new_from_resource
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-7-4

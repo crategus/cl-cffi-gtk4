@@ -8,34 +8,34 @@
 ;;;     GtkATContext
 
 (test gtk-at-context-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkATContext"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:at-context
           (glib:symbol-for-gtype "GtkATContext")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkATContext")
           (g:gtype (cffi:foreign-funcall "gtk_at_context_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkATContext")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (is (equal '("GtkAtSpiContext")
-             (list-children "GtkATContext")))
+             (gtk-test:list-children "GtkATContext")))
   #+windows
   (is (equal '("GtkTestATContext")
-             (list-children "GtkATContext")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkATContext")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkATContext")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkATContext")))
+  ;; Check properties
   (is (equal '("accessible" "accessible-role" "display")
-             (list-properties "GtkATContext")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkATContext")))
+  ;; Check signals
   (is (equal '("state-change")
-             (list-signals "GtkATContext")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkATContext")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkATContext" GTK-A-T-CONTEXT
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
                                ((ACCESSIBLE GTK-A-T-CONTEXT-ACCESSIBLE
@@ -74,4 +74,4 @@
         (button (make-instance 'gtk:button)))
     (is (typep (gtk:at-context-create :button button display) 'gtk:at-context))))
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-7-4

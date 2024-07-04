@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_cell_layout_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkCellLayout")))
+             (gtk-test:list-interface-prerequisites "GtkCellLayout")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkCellLayout")))
+             (gtk-test:list-interface-properties "GtkCellLayout")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkCellLayout")))
+             (gtk-test:list-signals "GtkCellLayout")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkCellLayout" GTK-CELL-LAYOUT
                             (:EXPORT T :TYPE-INITIALIZER

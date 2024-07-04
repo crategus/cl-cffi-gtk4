@@ -21,23 +21,23 @@
           (g:type-parent "GtkScrollbar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkScrollbar")))
+             (gtk-test:list-children "GtkScrollbar")))
   ;; Check interfaces
   ;; The GtkAccessibleRange interface is missing on Ubuntu. Why?!
   #-windows
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkScrollbar")))
+             (gtk-test:list-interfaces "GtkScrollbar")))
   #+windows
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (list-interfaces "GtkScrollbar")))
+             (gtk-test:list-interfaces "GtkScrollbar")))
   ;; Check properties
   (is (equal '("adjustment" "orientation")
-             (list-properties "GtkScrollbar")))
+             (gtk-test:list-properties "GtkScrollbar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkScrollbar")))
+             (gtk-test:list-signals "GtkScrollbar")))
   ;; Check CSS name
   (is (string= "scrollbar"
                (gtk:widget-class-css-name "GtkScrollbar")))
@@ -80,4 +80,4 @@
   (is (typep (gtk:scrollbar-new :vertical (make-instance 'gtk:adjustment))
              'gtk:scrollbar)))
 
-;;; 2024-6-1
+;;; 2024-7-3

@@ -8,30 +8,30 @@
 ;;;     GtkNumericSorter
 
 (test gtk-numeric-sorter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkNumericSorter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:numeric-sorter
           (glib:symbol-for-gtype "GtkNumericSorter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNumericSorter")
           (g:gtype (cffi:foreign-funcall "gtk_numeric_sorter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkSorter")
           (g:type-parent "GtkNumericSorter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkNumericSorter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkNumericSorter")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkNumericSorter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkNumericSorter")))
+  ;; Check properties
   (is (equal '("expression" "sort-order")
-             (list-properties "GtkNumericSorter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkNumericSorter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkNumericSorter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkNumericSorter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNumericSorter" GTK-NUMERIC-SORTER
                                (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
                                 NIL :TYPE-INITIALIZER
@@ -51,4 +51,4 @@
 
 ;;;     gtk_numeric_sorter_new
 
-;;; --- 2023-9-5 ---------------------------------------------------------------
+;;; 2024-7-4

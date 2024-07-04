@@ -24,16 +24,16 @@
           (g:type-parent "GtkNativeDialog")))
   ;; Check children
   (is (equal '("GtkFileChooserNative")
-             (list-children "GtkNativeDialog")))
+             (gtk-test:list-children "GtkNativeDialog")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkNativeDialog")))
+             (gtk-test:list-interfaces "GtkNativeDialog")))
   ;; Check properties
   (is (equal '("modal" "title" "transient-for" "visible")
-             (list-properties "GtkNativeDialog")))
+             (gtk-test:list-properties "GtkNativeDialog")))
   ;; Check signals
   (is (equal '("response")
-             (list-signals "GtkNativeDialog")))
+             (gtk-test:list-signals "GtkNativeDialog")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNativeDialog" GTK-NATIVE-DIALOG
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

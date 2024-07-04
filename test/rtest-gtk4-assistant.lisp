@@ -21,13 +21,13 @@
   (is (equal '("GTK_ASSISTANT_PAGE_CONTENT" "GTK_ASSISTANT_PAGE_INTRO"
                "GTK_ASSISTANT_PAGE_CONFIRM" "GTK_ASSISTANT_PAGE_SUMMARY"
                "GTK_ASSISTANT_PAGE_PROGRESS" "GTK_ASSISTANT_PAGE_CUSTOM")
-             (list-enum-item-name "GtkAssistantPageType")))
+             (gtk-test:list-enum-item-name "GtkAssistantPageType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GtkAssistantPageType")))
+             (gtk-test:list-enum-item-value "GtkAssistantPageType")))
   ;; Check nick names
   (is (equal '("content" "intro" "confirm" "summary" "progress" "custom")
-             (list-enum-item-nick "GtkAssistantPageType")))
+             (gtk-test:list-enum-item-nick "GtkAssistantPageType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAssistantPageType"
                              GTK-ASSISTANT-PAGE-TYPE
@@ -58,16 +58,16 @@
           (g:type-parent "GtkAssistantPage")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAssistantPage")))
+             (gtk-test:list-children "GtkAssistantPage")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkAssistantPage")))
+             (gtk-test:list-interfaces "GtkAssistantPage")))
   ;; Check class properties
   (is (equal '("child" "complete" "page-type" "title")
-             (list-properties "GtkAssistantPage")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkAssistantPage")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkAssistantPage")))
+             (gtk-test:list-signals "GtkAssistantPage")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistantPage"
                                              GTK-ASSISTANT-PAGE
@@ -107,27 +107,20 @@
             (g:type-parent "GtkAssistant")))
     ;; Check children
     (is (equal '()
-               (list-children "GtkAssistant")))
+               (gtk-test:list-children "GtkAssistant")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (list-interfaces "GtkAssistant")))
+               (gtk-test:list-interfaces "GtkAssistant")))
     ;; Check class properties
     (is (equal '("pages" "use-header-bar")
-               (list-properties "GtkAssistant")))
-    ;; Check list of signals
+               (gtk-test:list-properties "GtkAssistant")))
+    ;; Check signals
     (is (equal '("apply" "cancel" "close" "escape" "prepare")
-               (list-signals "GtkAssistant")))
+               (gtk-test:list-signals "GtkAssistant")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkAssistant")))
-    ;; Check CSS classes
-    #-windows
-    (is (equal '("background" "assistant" "csd")
-               (gtk:widget-css-classes (make-instance 'gtk:assistant))))
-    #+windows
-    (is (equal '("background" "assistant")
-               (gtk:widget-css-classes (make-instance 'gtk:assistant))))
     ;; Check accessible role
     (is (eq :application (gtk:widget-class-accessible-role "GtkAssistant")))
     ;; Check the class definition

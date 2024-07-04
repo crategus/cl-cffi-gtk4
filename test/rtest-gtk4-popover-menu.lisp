@@ -23,23 +23,23 @@
           (g:type-parent "GtkPopoverMenu")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkPopoverMenu")))
+             (gtk-test:list-children "GtkPopoverMenu")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (list-interfaces "GtkPopoverMenu")))
+             (gtk-test:list-interfaces "GtkPopoverMenu")))
   ;; Check properties
   (is (equal '("flags" "menu-model" "visible-submenu")
-             (list-properties "GtkPopoverMenu")))
+             (gtk-test:list-properties "GtkPopoverMenu")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkPopoverMenu")))
+             (gtk-test:list-signals "GtkPopoverMenu")))
   ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopoverMenu")))
   ;; Check accessible role
   (is (eq :menu (gtk:widget-class-accessible-role "GtkPopoverMenu")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopoverMenu" GTK-POPOVER-MENU
                                (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -70,4 +70,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; 2024-5-28
+;;; 2024-7-3

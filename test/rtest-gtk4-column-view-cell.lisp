@@ -8,31 +8,31 @@
 ;;;     GtkColumnViewCell
 
 (test gtk-column-view-cell-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColumnViewCell"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:column-view-cell
           (glib:symbol-for-gtype "GtkColumnViewCell")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColumnViewCell")
           (g:gtype (cffi:foreign-funcall "gtk_column_view_cell_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkListItem")
           (g:type-parent "GtkColumnViewCell")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkColumnViewCell")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkColumnViewCell")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkColumnViewCell")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkColumnViewCell")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkColumnViewCell")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkColumnViewCell")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkColumnViewCell")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkColumnViewCell")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewCell"
                                              GTK-COLUMN-VIEW-CELL
                                (:SUPERCLASS GTK-LIST-ITEM :EXPORT T :INTERFACES
@@ -52,12 +52,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     focusable
-;;;     item
-;;;     position
-;;;     selected
-
 (test gtk-column-view-cell-properties
   (let ((cell (make-instance 'gtk:column-view-cell)))
     (is-false (gtk:column-view-cell-child cell))
@@ -67,5 +61,5 @@
            (gtk:column-view-cell-position cell)))
     (is-false (gtk:column-view-cell-selected cell))))
 
-;;; --- 2023-11-27 -------------------------------------------------------------
+;;; 2024-7-4
 

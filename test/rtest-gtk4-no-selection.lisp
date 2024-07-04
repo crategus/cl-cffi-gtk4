@@ -8,30 +8,30 @@
 ;;;     GtkNoSelection
 
 (test gtk-no-selection-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkNoSelection"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:no-selection
           (glib:symbol-for-gtype "GtkNoSelection")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNoSelection")
           (g:gtype (cffi:foreign-funcall "gtk_no_selection_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkNoSelection")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkNoSelection")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkNoSelection")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
-             (list-interfaces "GtkNoSelection")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkNoSelection")))
+  ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (list-properties "GtkNoSelection")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkNoSelection")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkNoSelection")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkNoSelection")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNoSelection" GTK-NO-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSectionModel"
@@ -66,4 +66,4 @@
   (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
              'gtk:no-selection)))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

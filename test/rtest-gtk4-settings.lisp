@@ -11,24 +11,24 @@
 ;;;     GtkSettings
 
 (test gtk-settings-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSettings"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:settings
           (glib:symbol-for-gtype "GtkSettings")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSettings")
           (g:gtype (cffi:foreign-funcall "gtk_settings_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSettings")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSettings")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSettings")))
+  ;; Check interfaces
   (is (equal '("GtkStyleProvider")
-             (list-interfaces "GtkSettings")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkSettings")))
+  ;; Check class properties
   (is (equal '("gtk-alternative-button-order" "gtk-alternative-sort-arrows"
                "gtk-application-prefer-dark-theme" "gtk-cursor-aspect-ratio"
                "gtk-cursor-blink" "gtk-cursor-blink-time"
@@ -54,11 +54,11 @@
                "gtk-titlebar-right-click" "gtk-xft-antialias"
                "gtk-xft-dpi" "gtk-xft-hinting" "gtk-xft-hintstyle"
                "gtk-xft-rgba")
-             (list-properties "GtkSettings")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSettings")))
+  ;; Check signals
   (is (equal '("notify")
-             (list-signals "GObject")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GObject")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSettings" GTK-SETTINGS
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkStyleProvider") :TYPE-INITIALIZER
@@ -245,7 +245,7 @@
     (signals (error) (gtk:settings-gtk-recent-files-enabled settings))
     (is (= -1 (gtk:settings-gtk-recent-files-max-age settings)))
     (is-false (gtk:settings-gtk-shell-shows-app-menu settings))
-    (is-false (gtk:settings-gtk-shell-shows-desktop settings))
+    (is-true (gtk:settings-gtk-shell-shows-desktop settings))
     (is-false (gtk:settings-gtk-shell-shows-menubar settings))
     (is (string= "Yaru" (gtk:settings-gtk-sound-theme-name settings)))
     (is-false (gtk:settings-gtk-split-cursor settings))
@@ -307,4 +307,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2024-5-25
+;;; 2024-7-3

@@ -22,17 +22,17 @@
           (g:type-parent "GtkConstraintGuide")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkConstraintGuide")))
+             (gtk-test:list-children "GtkConstraintGuide")))
   ;; Check interfaces
   (is (equal '("GtkConstraintTarget")
-             (list-interfaces "GtkConstraintGuide")))
+             (gtk-test:list-interfaces "GtkConstraintGuide")))
   ;; Check properties
   (is (equal '("max-height" "max-width" "min-height" "min-width" "name"
                "nat-height" "nat-width" "strength")
-             (list-properties "GtkConstraintGuide")))
+             (gtk-test:list-properties "GtkConstraintGuide")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkConstraintGuide")))
+             (gtk-test:list-signals "GtkConstraintGuide")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraintGuide" GTK-CONSTRAINT-GUIDE
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -83,4 +83,4 @@
 ;;;     gtk_constraint_guide_set_max_size
 ;;;     gtk_constraint_guide_get_max_size
 
-;;; 2024-4-23
+;;; 2024-7-3

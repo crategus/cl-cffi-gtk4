@@ -21,19 +21,19 @@
           (g:type-parent "GtkFontButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFontButton")))
+             (gtk-test:list-children "GtkFontButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFontChooser")
-             (list-interfaces "GtkFontButton")))
+             (gtk-test:list-interfaces "GtkFontButton")))
   ;; Check properties
   (is (equal '("font" "font-desc" "font-features" "language" "level" "modal"
                "preview-text" "show-preview-entry" "title" "use-font"
                "use-size")
-             (list-properties "GtkFontButton")))
+             (gtk-test:list-properties "GtkFontButton")))
   ;; Check signals
   (is (equal '("activate" "font-set")
-             (list-signals "GtkFontButton")))
+             (gtk-test:list-signals "GtkFontButton")))
   ;; Check CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontButton")))

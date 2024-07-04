@@ -8,25 +8,25 @@
 ;;;     GtkPrintOperationPreview
 
 (test gtk-print-operation-preview-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkPrintOperationPreview"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-operation-preview
           (glib:symbol-for-gtype "GtkPrintOperationPreview")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintOperationPreview")
           (g:gtype (cffi:foreign-funcall "gtk_print_operation_preview_get_type"
                                          :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkPrintOperationPreview")))
-  ;; Get the names of the interface properties.
+             (gtk-test:list-interface-prerequisites "GtkPrintOperationPreview")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkPrintOperationPreview")))
-  ;; Check the interface signals
+             (gtk-test:list-interface-properties "GtkPrintOperationPreview")))
+  ;; Check interface signals
   (is (equal '("got-page-size" "ready")
-             (list-signals "GtkPrintOperationPreview")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkPrintOperationPreview")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkPrintOperationPreview"
                                   GTK-PRINT-OPERATION-PREVIEW
                                   (:EXPORT T
@@ -45,4 +45,4 @@
 ;;;     gtk_print_operation_preview_is_selected
 ;;;     gtk_print_operation_preview_render_page
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-7-4

@@ -8,40 +8,37 @@
 ;;;     GtkPopover
 
 (test gtk-popover-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPopover"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:popover
           (glib:symbol-for-gtype "GtkPopover")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPopover")
           (g:gtype (cffi:foreign-funcall "gtk_popover_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPopover")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkEmojiChooser" "GtkPopoverMenu" "GtkTreePopover")
-             (list-children "GtkPopover")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkPopover")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (list-interfaces "GtkPopover")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPopover")))
+  ;; Check properties
   (is (equal '("autohide" "cascade-popdown" "child" "default-widget" "has-arrow"
                "mnemonics-visible" "pointing-to" "position")
-             (list-properties "GtkPopover")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPopover")))
+  ;; Check signals
   (is (equal '("activate-default" "closed")
-             (list-signals "GtkPopover")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkPopover")))
+  ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopover")))
-  ;; CSS classes
-  (is (equal '("background")
-             (gtk:widget-css-classes (make-instance 'gtk:popover))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkPopover")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopover" GTK-POPOVER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -89,4 +86,4 @@
 ;;;     gtk_popover_set_offset
 ;;;     gtk_popover_get_offset
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-7-4

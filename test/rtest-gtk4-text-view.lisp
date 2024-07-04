@@ -23,13 +23,13 @@
   (is (equal '("GTK_TEXT_WINDOW_WIDGET" "GTK_TEXT_WINDOW_TEXT"
                "GTK_TEXT_WINDOW_LEFT" "GTK_TEXT_WINDOW_RIGHT"
                "GTK_TEXT_WINDOW_TOP" "GTK_TEXT_WINDOW_BOTTOM")
-             (list-enum-item-name "GtkTextWindowType")))
+             (gtk-test:list-enum-item-name "GtkTextWindowType")))
   ;; Check values
   (is (equal '(1 2 3 4 5 6)
-             (list-enum-item-value "GtkTextWindowType")))
+             (gtk-test:list-enum-item-value "GtkTextWindowType")))
   ;; Check nick names
   (is (equal '("widget" "text" "left" "right" "top" "bottom")
-             (list-enum-item-nick "GtkTextWindowType")))
+             (gtk-test:list-enum-item-nick "GtkTextWindowType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextWindowType"
                                      GTK-TEXT-WINDOW-TYPE
@@ -59,13 +59,13 @@
   ;; Check names
   (is (equal '("GTK_TEXT_EXTEND_SELECTION_WORD"
                "GTK_TEXT_EXTEND_SELECTION_LINE")
-             (list-enum-item-name "GtkTextExtendSelection")))
+             (gtk-test:list-enum-item-name "GtkTextExtendSelection")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkTextExtendSelection")))
+             (gtk-test:list-enum-item-value "GtkTextExtendSelection")))
   ;; Check nick names
   (is (equal '("word" "line")
-             (list-enum-item-nick "GtkTextExtendSelection")))
+             (gtk-test:list-enum-item-nick "GtkTextExtendSelection")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextExtendSelection"
                                      GTK-TEXT-EXTEND-SELECTION
@@ -77,6 +77,8 @@
              (gobject:get-g-type-definition "GtkTextExtendSelection"))))
 
 ;;;     GtkWrapMode                                        gtk.enumerations.lisp
+
+;;; ----------------------------------------------------------------------------
 
 ;;;     GtkTextChildAnchor
 
@@ -95,16 +97,16 @@
           (g:type-parent "GtkTextChildAnchor")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTextChildAnchor")))
+             (gtk-test:list-children "GtkTextChildAnchor")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkTextChildAnchor")))
+             (gtk-test:list-interfaces "GtkTextChildAnchor")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkTextChildAnchor")))
+             (gtk-test:list-properties "GtkTextChildAnchor")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkTextChildAnchor")))
+             (gtk-test:list-signals "GtkTextChildAnchor")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextChildAnchor"
                                              GTK-TEXT-CHILD-ANCHOR
@@ -113,6 +115,35 @@
                                 "gtk_text_child_anchor_get_type")
                                NIL)
              (gobject:get-g-type-definition "GtkTextChildAnchor"))))
+
+;;;     gtk_text_child_anchor_new
+
+(test gtk-text-child-anchor-new
+  (is (typep (gtk:text-child-anchor-new) 'gtk:text-child-anchor)))
+
+;;;     gtk_text_child_anchor_new_with_replacement          Since 4.6
+
+(test gtk-text-child-anchor-new-with-replacement
+  (is (typep (gtk:text-child-anchor-new-with-replacement "&")
+             'gtk:text-child-anchor)))
+
+;;;     gtk_text_child_anchor_get_widgets
+;;;     gtk_text_child_anchor_get_deleted
+
+(test gtk-text-child-anchor-widgets
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text."))
+         (iter (gtk:text-buffer-start-iter buffer))
+         (anchor (gtk:text-buffer-create-child-anchor buffer iter))
+         (view (gtk:text-view-new-with-buffer buffer))
+         (child (gtk:button-new-with-label "label")))
+    (is-false (gtk:text-view-add-child-at-anchor view child anchor))
+    (is (member child (gtk:text-child-anchor-widgets anchor) :test #'eq))
+    (is-false (gtk:text-child-anchor-deleted anchor))
+    (setf (gtk:text-buffer-text buffer) "")
+    (is-true (gtk:text-child-anchor-deleted anchor))))
+
+;;; ----------------------------------------------------------------------------
 
 ;;;     GTK_TEXT_VIEW_PRIORITY_VALIDATE
 
@@ -132,11 +163,11 @@
           (g:type-parent "GtkTextView")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTextView")))
+             (gtk-test:list-children "GtkTextView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable" "GtkAccessibleText")
-             (list-interfaces "GtkTextView")))
+             (gtk-test:list-interfaces "GtkTextView")))
   ;; Check properties
   (is (equal '("accepts-tab" "bottom-margin" "buffer" "cursor-visible"
                "editable" "extra-menu" "hadjustment" "hscroll-policy"
@@ -145,14 +176,14 @@
                "pixels-above-lines" "pixels-below-lines" "pixels-inside-wrap"
                "right-margin" "tabs" "top-margin" "vadjustment" "vscroll-policy"
                "wrap-mode")
-             (list-properties "GtkTextView")))
+             (gtk-test:list-properties "GtkTextView")))
   ;; Check signals
   (is (equal '("backspace" "copy-clipboard" "cut-clipboard" "delete-from-cursor"
                "extend-selection" "insert-at-cursor" "insert-emoji"
                "move-cursor" "move-viewport" "paste-clipboard" "preedit-changed"
                "select-all" "set-anchor" "toggle-cursor-visible"
                "toggle-overwrite")
-             (list-signals "GtkTextView")))
+             (gtk-test:list-signals "GtkTextView")))
   ;; Check CSS name
   (is (string= "textview"
                (gtk:widget-class-css-name "GtkTextView")))
@@ -295,15 +326,6 @@
 ;;;     gtk_text_view_add_child_at_anchor
 ;;;     gtk_text_view_remove
 
-;;;     gtk_text_child_anchor_new
-
-(test gtk-text-child-anchor-new
-  (is (typep (gtk:text-child-anchor-new) 'gtk:text-child-anchor)))
-
-;;;     gtk_text_child_anchor_new_with_replacement         Since 4.6
-;;;     gtk_text_child_anchor_get_widgets
-;;;     gtk_text_child_anchor_get_deleted
-
 ;;;     gtk_text_view_get_gutter
 ;;;     gtk_text_view_set_gutter
 ;;;     gtk_text_view_add_overlay
@@ -314,4 +336,4 @@
 ;;;     gtk_text_view_get_ltr_context                      Since 4.4
 ;;;     gtk_text_view_get_rtl_context                      Since 4.4
 
-;;; 2024-5-26
+;;; 2024-7-4

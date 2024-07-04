@@ -8,31 +8,31 @@
 ;;;     GtkSelectionFilterModel
 
 (test gtk-selection-filter-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSelectionFilterModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:selection-filter-model
           (glib:symbol-for-gtype "GtkSelectionFilterModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSelectionFilterModel")
           (g:gtype (cffi:foreign-funcall "gtk_selection_filter_model_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSelectionFilterModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSelectionFilterModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSelectionFilterModel")))
+  ;; Check interfaces
   (is (equal '("GListModel")
-             (list-interfaces "GtkSelectionFilterModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSelectionFilterModel")))
+  ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (list-properties "GtkSelectionFilterModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSelectionFilterModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSelectionFilterModel")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSelectionFilterModel")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSelectionFilterModel"
                                GTK-SELECTION-FILTER-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -56,4 +56,4 @@
 
 ;;;     gtk_selection_filter_model_new
 
-;;; --- 2023-9-6 ---------------------------------------------------------------
+;;; 2024-7-4

@@ -17,19 +17,19 @@
   (is (eq (g:gtype "GtkCellRendererState")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_state_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_CELL_RENDERER_SELECTED" "GTK_CELL_RENDERER_PRELIT"
                "GTK_CELL_RENDERER_INSENSITIVE" "GTK_CELL_RENDERER_SORTED"
                "GTK_CELL_RENDERER_FOCUSED" "GTK_CELL_RENDERER_EXPANDABLE"
                "GTK_CELL_RENDERER_EXPANDED")
-             (list-flags-item-name "GtkCellRendererState")))
+             (gtk-test:list-flags-item-name "GtkCellRendererState")))
   ;; Check values
   (is (equal '(1 2 4 8 16 32 64)
-             (list-flags-item-value "GtkCellRendererState")))
+             (gtk-test:list-flags-item-value "GtkCellRendererState")))
   ;; Check nick names
   (is (equal '("selected" "prelit" "insensitive" "sorted" "focused"
                "expandable" "expanded")
-             (list-flags-item-nick "GtkCellRendererState")))
+             (gtk-test:list-flags-item-nick "GtkCellRendererState")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkCellRendererState"
                               GTK-CELL-RENDERER-STATE
@@ -54,20 +54,20 @@
   (is (eq (g:gtype "GtkCellRendererMode")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_mode_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-mode
           (glib:symbol-for-gtype "GtkCellRendererMode")))
   ;; Check names
   (is (equal '("GTK_CELL_RENDERER_MODE_INERT"
                "GTK_CELL_RENDERER_MODE_ACTIVATABLE"
                "GTK_CELL_RENDERER_MODE_EDITABLE")
-             (list-enum-item-name "GtkCellRendererMode")))
+             (gtk-test:list-enum-item-name "GtkCellRendererMode")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkCellRendererMode")))
+             (gtk-test:list-enum-item-value "GtkCellRendererMode")))
   ;; Check nick names
   (is (equal '("inert" "activatable" "editable")
-             (list-enum-item-nick "GtkCellRendererMode")))
+             (gtk-test:list-enum-item-nick "GtkCellRendererMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererMode"
                              GTK-CELL-RENDERER-MODE
@@ -97,18 +97,18 @@
   (is (equal '("GtkCellRendererPixbuf" "GtkCellRendererProgress"
                "GtkCellRendererSpinner" "GtkCellRendererText"
                "GtkCellRendererToggle")
-             (list-children "GtkCellRenderer")))
+             (gtk-test:list-children "GtkCellRenderer")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRenderer")))
+             (gtk-test:list-interfaces "GtkCellRenderer")))
   ;; Check class properties
   (is (equal '("cell-background" "cell-background-rgba" "cell-background-set"
                "editing" "height" "is-expanded" "is-expander" "mode" "sensitive"
                "visible" "width" "xalign" "xpad" "yalign" "ypad")
-             (list-properties "GtkCellRenderer")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkCellRenderer")))
+  ;; Check signals
   (is (equal '("editing-canceled" "editing-started")
-             (list-signals "GtkCellRenderer")))
+             (gtk-test:list-signals "GtkCellRenderer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRenderer" GTK-CELL-RENDERER
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES

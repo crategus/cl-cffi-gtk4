@@ -8,32 +8,32 @@
 ;;;     GtkMultiSelection
 
 (test gtk-multi-selection-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMultiSelection"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:multi-selection
           (glib:symbol-for-gtype "GtkMultiSelection")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMultiSelection")
           (g:gtype (cffi:foreign-funcall "gtk_multi_selection_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkMultiSelection")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkMultiSelection")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMultiSelection")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
-             (list-interfaces "GtkMultiSelection")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkMultiSelection")))
+  ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (list-properties "GtkMultiSelection")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkMultiSelection")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMultiSelection")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection"  
+             (gtk-test:list-signals "GtkMultiSelection")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection"
                                              GTK-MULTI-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSectionModel"
@@ -58,4 +58,4 @@
 
 ;;;     gtk_multi_selection_new
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

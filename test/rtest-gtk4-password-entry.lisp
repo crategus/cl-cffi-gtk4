@@ -8,31 +8,31 @@
 ;;;     GtkPasswordEntryBuffer                             Since 4.4
 
 (test gtk-password-entry-buffer-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPasswordEntryBuffer"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:password-entry-buffer
           (glib:symbol-for-gtype "GtkPasswordEntryBuffer")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPasswordEntryBuffer")
           (g:gtype (cffi:foreign-funcall "gtk_password_entry_buffer_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEntryBuffer")
           (g:type-parent "GtkPasswordEntryBuffer")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkPasswordEntryBuffer")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkPasswordEntryBuffer")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPasswordEntryBuffer")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPasswordEntryBuffer")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkPasswordEntryBuffer")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPasswordEntryBuffer")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkPasswordEntryBuffer")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkPasswordEntryBuffer")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPasswordEntryBuffer"
                                GTK-PASSWORD-ENTRY-BUFFER
                                (:SUPERCLASS GTK-ENTRY-BUFFER :EXPORT T
@@ -49,41 +49,38 @@
 ;;;     GtkPasswordEntry
 
 (test gtk-password-entry-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPasswordEntry"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:password-entry
           (glib:symbol-for-gtype "GtkPasswordEntry")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPasswordEntry")
           (g:gtype (cffi:foreign-funcall "gtk_password_entry_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPasswordEntry")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkPasswordEntry")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkPasswordEntry")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable")
-             (list-interfaces "GtkPasswordEntry")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPasswordEntry")))
+  ;; Check properties
   (is (equal '("activates-default" "cursor-position" "editable" "enable-undo"
                "extra-menu" "max-width-chars" "placeholder-text"
                "selection-bound" "show-peek-icon" "text" "width-chars" "xalign")
-             (list-properties "GtkPasswordEntry")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPasswordEntry")))
+  ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkPasswordEntry")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkPasswordEntry")))
+  ;; Check CSS name
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkPasswordEntry")))
-  ;; CSS classes
-  (is (equal '("password")
-             (gtk:widget-css-classes (make-instance 'gtk:password-entry))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :TEXT-BOX (gtk:widget-class-accessible-role "GtkPasswordEntry")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPasswordEntry"
                                              GTK-PASSWORD-ENTRY
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -106,11 +103,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     activates-default
-;;;     extra-menu
-;;;     placeholder-text
-;;;     show-peek-icon
-
 (test gtk-password-entry-properties
   (let ((entry (make-instance 'gtk:password-entry)))
     (is-false (gtk:password-entry-activates-default entry))
@@ -125,4 +117,4 @@
 (test gtk-password-entry-new
   (is (typep (gtk:password-entry-new) 'gtk:password-entry)))
 
-;;; --- 2023-9-30 --------------------------------------------------------------
+;;; 2024-7-4

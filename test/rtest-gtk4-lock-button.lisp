@@ -21,18 +21,18 @@
           (g:type-parent "GtkLockButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkLockButton")))
+             (gtk-test:list-children "GtkLockButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkLockButton")))
+             (gtk-test:list-interfaces "GtkLockButton")))
   ;; Check properties
   (is (equal '("permission" "text-lock" "text-unlock" "tooltip-lock"
                "tooltip-not-authorized" "tooltip-unlock")
-             (list-properties "GtkLockButton")))
+             (gtk-test:list-properties "GtkLockButton")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkLockButton")))
+             (gtk-test:list-signals "GtkLockButton")))
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLockButton")))

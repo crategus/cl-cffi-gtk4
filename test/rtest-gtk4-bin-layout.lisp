@@ -21,16 +21,16 @@
           (g:type-parent "GtkBinLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkBinLayout")))
+             (gtk-test:list-children "GtkBinLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkBinLayout")))
+             (gtk-test:list-interfaces "GtkBinLayout")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkBinLayout")))
+             (gtk-test:list-properties "GtkBinLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkBinLayout")))
+             (gtk-test:list-signals "GtkBinLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBinLayout" GTK-BIN-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

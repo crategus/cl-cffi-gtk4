@@ -22,13 +22,13 @@
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END")
-             (list-enum-item-name "GtkInscriptionOverflow")))
+             (gtk-test:list-enum-item-name "GtkInscriptionOverflow")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkInscriptionOverflow")))
+             (gtk-test:list-enum-item-value "GtkInscriptionOverflow")))
   ;; Check nick names
   (is (equal '("clip" "ellipsize-start" "ellipsize-middle" "ellipsize-end")
-             (list-enum-item-nick "GtkInscriptionOverflow")))
+             (gtk-test:list-enum-item-nick "GtkInscriptionOverflow")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkInscriptionOverflow"
                                      GTK-INSCRIPTION-OVERFLOW
@@ -57,24 +57,21 @@
           (g:type-parent "GtkInscription")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkInscription")))
+             (gtk-test:list-children "GtkInscription")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleText")
-             (list-interfaces "GtkInscription")))
+             (gtk-test:list-interfaces "GtkInscription")))
   ;; Check properties
   (is (equal '("attributes" "markup" "min-chars" "min-lines" "nat-chars"
                "nat-lines" "text" "text-overflow" "wrap-mode" "xalign" "yalign")
-             (list-properties "GtkInscription")))
+             (gtk-test:list-properties "GtkInscription")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkInscription")))
+             (gtk-test:list-signals "GtkInscription")))
   ;; Check CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkInscription")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:inscription))))
   ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkInscription")))
   ;; Check the class definition

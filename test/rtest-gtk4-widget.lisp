@@ -73,7 +73,7 @@
  "GtkText" "GtkTextHandle" "GtkTextView" "GtkTooltipWindow" "GtkTreeExpander"
  "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow" "GtkWindowControls"
  "GtkWindowHandle")
-                 (list-children "GtkWidget")))
+                 (gtk-test:list-children "GtkWidget")))
       (is  (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
  "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
  "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
@@ -96,7 +96,7 @@
  "GtkText" "GtkTextHandle" "GtkTextView" "GtkTooltipWindow" "GtkTreeExpander"
  "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow" "GtkWindowControls"
  "GtkWindowHandle")
-                 (list-children "GtkWidget"))))
+                 (gtk-test:list-children "GtkWidget"))))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
@@ -118,10 +118,10 @@
  "GtkSwitch" "GtkText" "GtkTextHandle" "GtkTextView" "GtkTooltipWindow"
  "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow"
  "GtkWindowControls" "GtkWindowHandle")
-                 (list-children "GtkWidget"))))
+                 (gtk-test:list-children "GtkWidget"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkWidget")))
+             (gtk-test:list-interfaces "GtkWidget")))
   ;; Check class properties
   (is (equal '("accessible-role" "can-focus" "can-target" "css-classes"
                "css-name" "cursor" "focus-on-click" "focusable" "halign"
@@ -131,12 +131,12 @@
                "overflow" "parent" "receives-default" "root" "scale-factor"
                "sensitive" "tooltip-markup" "tooltip-text" "valign" "vexpand"
                "vexpand-set" "visible" "width-request")
-             (list-properties "GtkWidget")))
+             (gtk-test:list-properties "GtkWidget")))
   ;; Check signals
   (is (equal '("destroy" "direction-changed" "hide" "keynav-failed" "map"
                "mnemonic-activate" "move-focus" "query-tooltip" "realize" "show"
                "state-flags-changed" "unmap" "unrealize")
-             (list-signals "GtkWidget")))
+             (gtk-test:list-signals "GtkWidget")))
   ;; Check CSS information
   ;; No CSS information for a abstract class
   ;; Check class definition

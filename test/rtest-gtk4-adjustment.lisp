@@ -8,31 +8,31 @@
 ;;;     GtkAdjustment
 
 (test gtk-adjustment-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAdjustment"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:adjustment
           (glib:symbol-for-gtype "GtkAdjustment")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAdjustment")
           (g:gtype (cffi:foreign-funcall "gtk_adjustment_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkAdjustment")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkAdjustment")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkAdjustment")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkAdjustment")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkAdjustment")))
+  ;; Check properties
   (is (equal '("lower" "page-increment" "page-size" "step-increment" "upper"
                "value")
-             (list-properties "GtkAdjustment")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkAdjustment")))
+  ;; Check signals
   (is (equal '("changed" "value-changed")
-             (list-signals "GtkAdjustment")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkAdjustment")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAdjustment" GTK-ADJUSTMENT
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_adjustment_get_type")
@@ -125,4 +125,4 @@
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; --- 2023-9-2 ---------------------------------------------------------------
+;;; 2024-7-4

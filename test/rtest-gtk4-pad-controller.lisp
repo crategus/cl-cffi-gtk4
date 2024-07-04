@@ -8,25 +8,25 @@
 ;;;     GtkPadActionType
 
 (test gtk-pad-action-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPadActionType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPadActionType")
           (g:gtype (cffi:foreign-funcall "gtk_pad_action_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:pad-action-type
           (glib:symbol-for-gtype "GtkPadActionType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PAD_ACTION_BUTTON" "GTK_PAD_ACTION_RING"
                "GTK_PAD_ACTION_STRIP")
-             (list-enum-item-name "GtkPadActionType")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GtkPadActionType")))
+  ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkPadActionType")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GtkPadActionType")))
+  ;; Check nick names
   (is (equal '("button" "ring" "strip")
-             (list-enum-item-nick "GtkPadActionType")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GtkPadActionType")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPadActionType"
                              GTK-PAD-ACTION-TYPE
                              (:EXPORT T
@@ -39,30 +39,30 @@
 ;;;     GtkPadController
 
 (test gtk-pad-controller-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPadController"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:pad-controller
           (glib:symbol-for-gtype "GtkPadController")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPadController")
           (g:gtype (cffi:foreign-funcall "gtk_pad_controller_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkPadController")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkPadController")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkPadController")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPadController")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPadController")))
+  ;; Check properties
   (is (equal '("action-group" "pad")
-             (list-properties "GtkPadController")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPadController")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkPadController")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkPadController")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPadController" GTK-PAD-CONTROLLER
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_pad_controller_get_type")

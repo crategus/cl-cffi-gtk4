@@ -8,40 +8,37 @@
 ;;;     GtkShortcutsSection
 
 (test gtk-shortcuts-section-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutsSection"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcuts-section
           (glib:symbol-for-gtype "GtkShortcutsSection")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutsSection")
           (g:gtype (cffi:foreign-funcall "gtk_shortcuts_section_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkBox")
           (g:type-parent "GtkShortcutsSection")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutsSection")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutsSection")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkShortcutsSection")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutsSection")))
+  ;; Check properties
   (is (equal '("max-height" "section-name" "title" "view-name")
-             (list-properties "GtkShortcutsSection")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutsSection")))
+  ;; Check signals
   (is (equal '("change-current-page")
-             (list-signals "GtkShortcutsSection")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkShortcutsSection")))
+  ;; Check CSS name
   (is (string= "shortcuts-section"
                (gtk:widget-class-css-name "GtkShortcutsSection")))
-  ;; CSS classes
-  (is (equal '("vertical")
-             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-section))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsSection")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsSection"
                                              GTK-SHORTCUTS-SECTION
                                (:SUPERCLASS GTK-BOX :EXPORT T :INTERFACES

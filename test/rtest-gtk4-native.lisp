@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_native_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (list-interface-prerequisites "GtkNative")))
-  ;; Check interface properties.
+             (gtk-test:list-interface-prerequisites "GtkNative")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkNative")))
+             (gtk-test:list-interface-properties "GtkNative")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkNative")))
+             (gtk-test:list-signals "GtkNative")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkNative"
                                   GTK-NATIVE
@@ -101,4 +101,4 @@
     (is-false (gtk:native-realize window))
 ))
 
-;;; 2024-4-10
+;;; 2024-7-3

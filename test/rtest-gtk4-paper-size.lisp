@@ -18,13 +18,13 @@
           (glib:symbol-for-gtype "GtkUnit")))
   ;; Check the names
   (is (equal '("GTK_UNIT_NONE" "GTK_UNIT_POINTS" "GTK_UNIT_INCH" "GTK_UNIT_MM")
-             (list-enum-item-name "GtkUnit")))
+             (gtk-test:list-enum-item-name "GtkUnit")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkUnit")))
+             (gtk-test:list-enum-item-value "GtkUnit")))
   ;; Check the nick names
   (is (equal '("none" "points" "inch" "mm")
-             (list-enum-item-nick "GtkUnit")))
+             (gtk-test:list-enum-item-nick "GtkUnit")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkUnit" GTK-UNIT
                 (:EXPORT T :TYPE-INITIALIZER "gtk_unit_get_type")
@@ -251,4 +251,4 @@ Height=297
     (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new-from-gvariant value))))
     (is (string= "iso_a4" (gtk:paper-size-name (gtk:paper-size-new-from-gvariant value))))))
 
-;;; --- 2023-7-21 --------------------------------------------------------------
+;;; 2024-7-4

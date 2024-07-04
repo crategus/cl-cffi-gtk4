@@ -8,35 +8,35 @@
 ;;;     GtkWindowHandle
 
 (test gtk-window-handle-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkWindowHandle"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:window-handle
           (glib:symbol-for-gtype "GtkWindowHandle")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkWindowHandle")
           (g:gtype (cffi:foreign-funcall "gtk_window_handle_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkWindowHandle")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkWindowHandle")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkWindowHandle")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkWindowHandle")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkWindowHandle")))
+  ;; Check properties
   (is (equal '("child")
-             (list-properties "GtkWindowHandle")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkWindowHandle")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkWindowHandle")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkWindowHandle")))
+  ;; Check CSS name
   (is (string= "windowhandle"
                (gtk:widget-class-css-name "GtkWindowHandle")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkWindowHandle")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowHandle" GTK-WINDOW-HANDLE
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -61,4 +61,4 @@
 (test gtk-window-handle-new
   (is (typep (gtk:window-handle-new) 'gtk:window-handle)))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

@@ -8,31 +8,31 @@
 ;;;     GtkFileDialog
 
 (test gtk-file-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFileDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:file-dialog
           (glib:symbol-for-gtype "GtkFileDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFileDialog")
           (g:gtype (cffi:foreign-funcall "gtk_file_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFileDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFileDialog")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFileDialog")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkFileDialog")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFileDialog")))
+  ;; Check properties
   (is (equal '("accept-label" "default-filter" "filters" "initial-file"
                "initial-folder" "initial-name" "modal" "title")
-             (list-properties "GtkFileDialog")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFileDialog")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFileDialog")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkFileDialog")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileDialog" GTK-FILE-DIALOG
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_file_dialog_get_type")
@@ -79,9 +79,9 @@
         (filters (g:list-store-new "GtkFileFilter"))
         (filename (sys-path "rtest-gtk4-file-dialog.lisp")))
     ;; Append two file filter to the list store
-    (g:list-store-append filters 
+    (g:list-store-append filters
                          (make-instance 'gtk:file-filter :name "filter1"))
-    (g:list-store-append filters 
+    (g:list-store-append filters
                          (make-instance 'gtk:file-filter :name "filter2"))
     ;; accept-label
     (is (string= "label" (setf (gtk:file-dialog-accept-label dialog) "label")))
@@ -132,4 +132,4 @@
 ;;;     gtk_file_dialog_select_multiple_folders
 ;;;     gtk_file_dialog_select_multiple_folders_finish
 
-;;; --- 2023-7-22 --------------------------------------------------------------
+;;; 2024-7-3

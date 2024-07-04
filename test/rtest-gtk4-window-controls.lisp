@@ -8,36 +8,36 @@
 ;;;     GtkWindowControls
 
 (test gtk-window-controls-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkWindowControls"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:window-controls
           (glib:symbol-for-gtype "GtkWindowControls")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkWindowControls")
           (g:gtype (cffi:foreign-funcall "gtk_window_controls_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkWindowControls")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkWindowControls")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkWindowControls")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkWindowControls")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkWindowControls")))
+  ;; Check properties
   (is (equal '("decoration-layout" "empty" "side")
-             (list-properties "GtkWindowControls")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkWindowControls")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkWindowControls")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkWindowControls")))
+  ;; Check CSS name
   (is (string= "windowcontrols"
                (gtk:widget-class-css-name "GtkWindowControls")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkWindowControls")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowControls"
                                              GTK-WINDOW-CONTROLS
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -74,4 +74,4 @@
   (is (typep (gtk:window-controls-new :start) 'gtk:window-controls))
   (is (typep (gtk:window-controls-new :end) 'gtk:window-controls)))
 
-;;; --- 2023-8-9 ---------------------------------------------------------------
+;;; 2024-7-4

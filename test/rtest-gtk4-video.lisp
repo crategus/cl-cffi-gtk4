@@ -20,16 +20,16 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkVideo")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkVideo")))
+             (gtk-test:list-children "GtkVideo")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkVideo")))
+             (gtk-test:list-interfaces "GtkVideo")))
   ;; Check class properties
   (is (equal '("autoplay" "file" "graphics-offload" "loop" "media-stream")
-             (list-properties "GtkVideo")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkVideo")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkVideo")))
+             (gtk-test:list-signals "GtkVideo")))
   ;; Check CSS name
   (is (string= "video"
                (gtk:widget-class-css-name "GtkVideo")))

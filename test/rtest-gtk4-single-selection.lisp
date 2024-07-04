@@ -13,32 +13,32 @@
 ;;;     GtkSingleSelection
 
 (test gtk-single-selection-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSingleSelection"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:single-selection
           (glib:symbol-for-gtype "GtkSingleSelection")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSingleSelection")
           (g:gtype (cffi:foreign-funcall "gtk_single_selection_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSingleSelection")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSingleSelection")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSingleSelection")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
-             (list-interfaces "GtkSingleSelection")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSingleSelection")))
+  ;; Check properties
   (is (equal '("autoselect" "can-unselect" "item-type" "model" "n-items"
                "selected" "selected-item")
-             (list-properties "GtkSingleSelection")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSingleSelection")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSingleSelection")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSingleSelection")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection"
                                              GTK-SINGLE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -95,4 +95,4 @@
   (is (typep (gtk:single-selection-new (g:list-store-new "GObject"))
              'gtk:single-selection)))
 
-;;; --- 2023-11-26 -------------------------------------------------------------
+;;; 2024-7-4

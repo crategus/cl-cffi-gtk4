@@ -79,24 +79,24 @@
 ;;;     GtkBuildable
 
 (test gtk-buildable-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkBuildable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:buildable
           (glib:symbol-for-gtype "GtkBuildable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBuildable")
           (g:gtype (cffi:foreign-funcall "gtk_buildable_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkBuildable")))
-  ;; Get the names of the interface properties.
+             (gtk-test:list-interface-prerequisites "GtkBuildable")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkBuildable")))
-  ;; Check the signals
+             (gtk-test:list-interface-properties "GtkBuildable")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkBuildable")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkBuildable")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkBuildable" GTK-BUILDABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_buildable_get_type"))
              (gobject:get-g-type-definition "GtkBuildable"))))
@@ -125,4 +125,4 @@
 ;;;     gtk_buildable_parse_context_pop                    not implemented
 ;;;     gtk_buildable_parse_context_push                   not implemented
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-7-4

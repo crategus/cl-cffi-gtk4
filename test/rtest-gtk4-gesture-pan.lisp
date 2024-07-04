@@ -8,25 +8,25 @@
 ;;;     GtkPanDirection
 
 (test gtk-pan-direction
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPanDirection"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPanDirection")
           (g:gtype (cffi:foreign-funcall "gtk_pan_direction_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:pan-direction
           (glib:symbol-for-gtype "GtkPanDirection")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PAN_DIRECTION_LEFT" "GTK_PAN_DIRECTION_RIGHT"
                "GTK_PAN_DIRECTION_UP" "GTK_PAN_DIRECTION_DOWN")
-             (list-enum-item-name "GtkPanDirection")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GtkPanDirection")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPanDirection")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GtkPanDirection")))
+  ;; Check nick names
   (is (equal '("left" "right" "up" "down")
-             (list-enum-item-nick "GtkPanDirection")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GtkPanDirection")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPanDirection" GTK-PAN-DIRECTION
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -40,30 +40,30 @@
 ;;;     GtkGesturePan
 
 (test gesture-pan-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGesturePan"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-pan
           (glib:symbol-for-gtype "GtkGesturePan")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGesturePan")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_pan_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureDrag")
           (g:type-parent "GtkGesturePan")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGesturePan")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGesturePan")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGesturePan")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGesturePan")))
+  ;; Check properties
   (is (equal '("orientation")
-             (list-properties "GtkGesturePan")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGesturePan")))
+  ;; Check signals
   (is (equal '("pan")
-             (list-signals "GtkGesturePan")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGesturePan")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGesturePan" GTK-GESTURE-PAN
                        (:SUPERCLASS GTK-GESTURE-DRAG :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_pan_get_type")

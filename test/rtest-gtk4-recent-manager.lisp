@@ -25,16 +25,16 @@
           (g:type-parent "GtkRecentManager")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkRecentManager")))
+             (gtk-test:list-children "GtkRecentManager")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkRecentManager")))
+             (gtk-test:list-interfaces "GtkRecentManager")))
   ;; Check class properties
   (is (equal '("filename" "size")
-             (list-properties "GtkRecentManager")))
+             (gtk-test:list-properties "GtkRecentManager")))
   ;; Check signals
   (is (equal '("changed")
-             (list-signals "GtkRecentManager")))
+             (gtk-test:list-signals "GtkRecentManager")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRecentManager" GTK-RECENT-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -164,4 +164,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2024-5-9
+;;; 2024-7-3

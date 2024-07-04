@@ -8,31 +8,31 @@
 ;;;     GtkEventControllerMotion
 
 (test event-controller-motion-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkEventControllerMotion"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:event-controller-motion
           (glib:symbol-for-gtype "GtkEventControllerMotion")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEventControllerMotion")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_motion_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerMotion")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkEventControllerMotion")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkEventControllerMotion")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkEventControllerMotion")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkEventControllerMotion")))
+  ;; Check properties
   (is (equal '("contains-pointer" "is-pointer")
-             (list-properties "GtkEventControllerMotion")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkEventControllerMotion")))
+  ;; Check signals
   (is (equal '("enter" "leave" "motion")
-             (list-signals "GtkEventControllerMotion")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkEventControllerMotion")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerMotion"
                                      GTK-EVENT-CONTROLLER-MOTION
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
@@ -60,4 +60,4 @@
 
 ;;;     gtk_event_controller_motion_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

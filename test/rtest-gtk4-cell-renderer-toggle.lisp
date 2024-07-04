@@ -22,16 +22,16 @@
           (g:type-parent "GtkCellRendererToggle")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererToggle")))
+             (gtk-test:list-children "GtkCellRendererToggle")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererToggle")))
+             (gtk-test:list-interfaces "GtkCellRendererToggle")))
   ;; Check properties
   (is (equal '("activatable" "active" "inconsistent" "radio")
-             (list-properties "GtkCellRendererToggle")))
+             (gtk-test:list-properties "GtkCellRendererToggle")))
   ;; Check signals
   (is (equal '("toggled")
-             (list-signals "GtkCellRendererToggle")))
+             (gtk-test:list-signals "GtkCellRendererToggle")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererToggle"
                                GTK-CELL-RENDERER-TOGGLE

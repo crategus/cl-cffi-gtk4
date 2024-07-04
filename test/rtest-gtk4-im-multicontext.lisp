@@ -8,31 +8,31 @@
 ;;;     GtkIMMulticontext
 
 (test gtk-im-multicontext-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIMMulticontext"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:im-multicontext
           (glib:symbol-for-gtype "GtkIMMulticontext")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIMMulticontext")
           (g:gtype (cffi:foreign-funcall "gtk_im_multicontext_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkIMContext")
           (g:type-parent "GtkIMMulticontext")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkIMMulticontext")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkIMMulticontext")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkIMMulticontext")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkIMMulticontext")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkIMMulticontext")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkIMMulticontext")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkIMMulticontext")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkIMMulticontext")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMMulticontext"
                                              GTK-I-M-MULTICONTEXT
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)

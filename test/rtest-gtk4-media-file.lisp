@@ -8,30 +8,30 @@
 ;;;     GtkMediaFile
 
 (test gtk-media-file-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMediaFile"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:media-file
           (glib:symbol-for-gtype "GtkMediaFile")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMediaFile")
           (g:gtype (cffi:foreign-funcall "gtk_media_file_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkMediaStream")
           (g:type-parent "GtkMediaFile")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkGstMediaFile" "GtkNoMediaFile")
-             (list-children "GtkMediaFile")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMediaFile")))
+  ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (list-interfaces "GtkMediaFile")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkMediaFile")))
+  ;; Check class properties
   (is (equal '("file" "input-stream")
-             (list-properties "GtkMediaFile")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkMediaFile")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMediaFile")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkMediaFile")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaFile" GTK-MEDIA-FILE
                        (:SUPERCLASS GTK-MEDIA-STREAM :EXPORT T :INTERFACES
                         ("GdkPaintable") :TYPE-INITIALIZER
@@ -61,4 +61,4 @@
 ;;;     gtk_media_file_set_input_stream
 ;;;     gtk_media_file_get_input_stream
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-3

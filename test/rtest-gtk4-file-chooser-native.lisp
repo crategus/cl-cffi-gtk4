@@ -22,17 +22,17 @@
           (g:type-parent "GtkFileChooserNative")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFileChooserNative")))
+             (gtk-test:list-children "GtkFileChooserNative")))
   ;; Check interfaces
   (is (equal '("GtkFileChooser")
-             (list-interfaces "GtkFileChooserNative")))
+             (gtk-test:list-interfaces "GtkFileChooserNative")))
   ;; Check properties
   (is (equal '("accept-label" "action" "cancel-label" "create-folders" "filter"
                "filters" "select-multiple" "shortcut-folders")
-             (list-properties "GtkFileChooserNative")))
+             (gtk-test:list-properties "GtkFileChooserNative")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFileChooserNative")))
+             (gtk-test:list-signals "GtkFileChooserNative")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserNative" GTK-FILE-CHOOSER-NATIVE
                        (:SUPERCLASS GTK-NATIVE-DIALOG :EXPORT T :INTERFACES

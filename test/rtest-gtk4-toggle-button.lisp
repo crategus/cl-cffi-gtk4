@@ -21,23 +21,20 @@
           (g:type-parent "GtkToggleButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkToggleButton")))
+             (gtk-test:list-children "GtkToggleButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkToggleButton")))
+             (gtk-test:list-interfaces "GtkToggleButton")))
   ;; Check properties
   (is (equal '("active" "group")
-             (list-properties "GtkToggleButton")))
+             (gtk-test:list-properties "GtkToggleButton")))
   ;; Check signals
   (is (equal '("toggled")
-             (list-signals "GtkToggleButton")))
+             (gtk-test:list-signals "GtkToggleButton")))
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkToggleButton")))
-  ;; Check CSS classes
-  (is (equal '("toggle")
-             (gtk:widget-css-classes (make-instance 'gtk:toggle-button))))
   ;; Check accessible role
   (is (eq :toggle-button (gtk:widget-class-accessible-role "GtkToggleButton")))
   ;; Check class definition

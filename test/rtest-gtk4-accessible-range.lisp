@@ -8,29 +8,29 @@
 ;;;     GtkAccessibleRange
 
 (test gtk-accessible-range-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkAccessibleRange"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:accessible-range
           (glib:symbol-for-gtype "GtkAccessibleRange")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAccessibleRange")
           (g:gtype (cffi:foreign-funcall "gtk_accessible_range_get_type"
                                          :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GtkAccessible" "GObject")
-             (list-interface-prerequisites "GtkAccessibleRange")))
-  ;; Check the interface properties
+             (gtk-test:list-interface-prerequisites "GtkAccessibleRange")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkAccessibleRange")))
-  ;; Check the interface signals
+             (gtk-test:list-interface-properties "GtkAccessibleRange")))
+  ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkAccessibleRange")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkAccessibleRange")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessibleRange"
                                           GTK-ACCESSIBLE-RANGE
                             (:EXPORT T :TYPE-INITIALIZER
                              "gtk_accessible_range_get_type"))
              (gobject:get-g-type-definition "GtkAccessibleRange"))))
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-7-4

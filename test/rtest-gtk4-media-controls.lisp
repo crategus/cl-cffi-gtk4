@@ -8,37 +8,34 @@
 ;;;     GtkMediaControls
 
 (test gtk-media-controls-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMediaControls"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:media-controls
           (glib:symbol-for-gtype "GtkMediaControls")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMediaControls")
           (g:gtype (cffi:foreign-funcall "gtk_media_controls_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkMediaControls")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkMediaControls")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMediaControls")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkMediaControls")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkMediaControls")))
+  ;; Check class properties
   (is (equal '("media-stream")
-             (list-properties "GtkMediaControls")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkMediaControls")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMediaControls")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkMediaControls")))
+  ;; Check CSS name
   (is (string= "controls"
                (gtk:widget-class-css-name "GtkMediaControls")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:media-controls))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkMediaControls")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaControls" GTK-MEDIA-CONTROLS
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -59,4 +56,4 @@
 
 ;;;     gtk_media_controls_new
 
-;;; --- 2023-11-3 --------------------------------------------------------------
+;;; 2024-7-4

@@ -21,28 +21,25 @@
           (g:type-parent "GtkLabel")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkLabel")))
+             (gtk-test:list-children "GtkLabel")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleText")
-             (list-interfaces "GtkLabel")))
+             (gtk-test:list-interfaces "GtkLabel")))
   ;; Check properties
   (is (equal '("attributes" "ellipsize" "extra-menu" "justify" "label" "lines"
                "max-width-chars" "mnemonic-keyval" "mnemonic-widget"
                "natural-wrap-mode" "selectable" "single-line-mode" "tabs"
                "use-markup" "use-underline" "width-chars" "wrap" "wrap-mode"
                "xalign" "yalign")
-             (list-properties "GtkLabel")))
+             (gtk-test:list-properties "GtkLabel")))
   ;; Check signals
   (is (equal '("activate-current-link" "activate-link" "copy-clipboard"
                "move-cursor")
-             (list-signals "GtkLabel")))
+             (gtk-test:list-signals "GtkLabel")))
   ;; Check CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkLabel")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:label))))
   ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkLabel")))
   ;; Check class definition

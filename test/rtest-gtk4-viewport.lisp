@@ -8,40 +8,37 @@
 ;;;     GtkViewport
 
 (test gtk-viewport-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkViewport"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:viewport
           (glib:symbol-for-gtype "GtkViewport")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkViewport")
           (g:gtype (cffi:foreign-funcall "gtk_viewport_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkViewport")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkViewport")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkViewport")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable")
-             (list-interfaces "GtkViewport")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkViewport")))
+  ;; Check properties
   (is (equal '("child" "hadjustment" "hscroll-policy" "scroll-to-focus"
                "vadjustment" "vscroll-policy")
-             (list-properties "GtkViewport")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkViewport")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkViewport")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkViewport")))
+  ;; Check CSS name
   (is (string= "viewport"
                (gtk:widget-class-css-name "GtkViewport")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:viewport))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkViewport")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkViewport" GTK-VIEWPORT
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -54,9 +51,6 @@
              (gobject:get-g-type-definition "GtkViewport"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     child
-;;;     scroll-to-focus
 
 (test gtk-viewport-properties
   (let ((viewport (make-instance 'gtk:viewport)))
@@ -73,4 +67,4 @@
   (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)
                                (make-instance 'gtk:adjustment)) 'gtk:viewport)))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

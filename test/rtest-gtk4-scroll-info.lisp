@@ -40,4 +40,4 @@
     (is-false (setf (gtk:scroll-info-enable-vertical scrollinfo) nil))
     (is-false (gtk:scroll-info-enable-vertical scrollinfo))))
 
-;;; --- 2023-11-16 -------------------------------------------------------------
+;;; 2024-7-4

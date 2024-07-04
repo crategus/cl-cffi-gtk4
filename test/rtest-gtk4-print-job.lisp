@@ -8,30 +8,30 @@
 ;;;     GtkPrintJob
 
 (test gtk-print-job-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPrintJob"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-job
           (glib:symbol-for-gtype "GtkPrintJob")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintJob")
           (g:gtype (cffi:foreign-funcall "gtk_print_job_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkPrintJob")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkPrintJob")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkPrintJob")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkPrintJob")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPrintJob")))
+  ;; Check properties
   (is (equal '("page-setup" "printer" "settings" "title" "track-print-status")
-             (list-properties "GtkPrintJob")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPrintJob")))
+  ;; Check signals
   (is (equal '("status-changed")
-             (list-signals "GtkPrintJob")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkPrintJob")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintJob" GTK-PRINT-JOB
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_print_job_get_type")
@@ -91,4 +91,4 @@
 ;;;     gtk_print_job_get_reverse
 ;;;     gtk_print_job_set_reverse
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-7-4

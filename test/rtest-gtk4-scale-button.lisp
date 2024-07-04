@@ -21,17 +21,17 @@
           (g:type-parent "GtkScaleButton")))
   ;; Check children
   (is (equal '("GtkVolumeButton")
-             (list-children "GtkScaleButton")))
+             (gtk-test:list-children "GtkScaleButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (list-interfaces "GtkScaleButton")))
+             (gtk-test:list-interfaces "GtkScaleButton")))
   ;; Check properties
   (is (equal '("active" "adjustment" "has-frame" "icons" "orientation" "value")
-             (list-properties "GtkScaleButton")))
+             (gtk-test:list-properties "GtkScaleButton")))
   ;; Check signals
   (is (equal '("popdown" "popup" "value-changed")
-             (list-signals "GtkScaleButton")))
+             (gtk-test:list-signals "GtkScaleButton")))
   ;; Check CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkScaleButton")))

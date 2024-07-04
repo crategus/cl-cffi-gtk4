@@ -8,30 +8,30 @@
 ;;;     GtkGestureRotate
 
 (test gesture-rotate-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureRotate"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-rotate
           (glib:symbol-for-gtype "GtkGestureRotate")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureRotate")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_rotate_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureRotate")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureRotate")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureRotate")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureRotate")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureRotate")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkGestureRotate")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureRotate")))
+  ;; Check signals
   (is (equal '("angle-changed")
-             (list-signals "GtkGestureRotate")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureRotate")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureRotate" GTK-GESTURE-ROTATE
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_rotate_get_type")

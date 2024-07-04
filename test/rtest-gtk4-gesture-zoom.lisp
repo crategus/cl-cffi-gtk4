@@ -8,30 +8,30 @@
 ;;;     GtkGestureZoom
 
 (test gesture-zoom-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureZoom"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-zoom
           (glib:symbol-for-gtype "GtkGestureZoom")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureZoom")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_zoom_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureZoom")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureZoom")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureZoom")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureZoom")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureZoom")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkGestureZoom")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureZoom")))
+  ;; Check signals
   (is (equal '("scale-changed")
-             (list-signals "GtkGestureZoom")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureZoom")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureZoom" GTK-GESTURE-ZOOM
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_zoom_get_type")

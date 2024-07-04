@@ -8,35 +8,35 @@
 ;;;     GtkIMContext
 
 (test gtk-im-context-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIMContext"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:im-context
           (glib:symbol-for-gtype "GtkIMContext")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIMContext")
           (g:gtype (cffi:foreign-funcall "gtk_im_context_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIMContext")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (is (equal '("GtkIMContextSimple" "GtkIMMulticontext" "IBusIMContext")
-             (list-children "GtkIMContext")))
+             (gtk-test:list-children "GtkIMContext")))
   #+windows
   (is (equal '("GtkIMContextIME" "GtkIMContextSimple" "GtkIMMulticontext")
-             (list-children "GtkIMContext")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkIMContext")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkIMContext")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkIMContext")))
+  ;; Check class properties
   (is (equal '("input-hints" "input-purpose")
-             (list-properties "GtkIMContext")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkIMContext")))
+  ;; Check signals
   (is (equal '("commit" "delete-surrounding" "preedit-changed" "preedit-end"
                "preedit-start" "retrieve-surrounding")
-             (list-signals "GtkIMContext")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkIMContext")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContext" GTK-I-M-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
                        ((INPUT-HINTS GTK-I-M-CONTEXT-INPUT-HINTS "input-hints"
@@ -171,4 +171,4 @@
 ;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
 ;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-7-4

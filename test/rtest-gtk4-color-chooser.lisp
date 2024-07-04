@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkColorChooser")))
-  ;; Check interface properties.
+             (gtk-test:list-interface-prerequisites "GtkColorChooser")))
+  ;; Check interface properties
   (is (equal '("rgba" "use-alpha")
-             (list-interface-properties "GtkColorChooser")))
+             (gtk-test:list-interface-properties "GtkColorChooser")))
   ;; Check interface signals
   (is (equal '("color-activated")
-             (list-signals "GtkColorChooser")))
+             (gtk-test:list-signals "GtkColorChooser")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkColorChooser" GTK-COLOR-CHOOSER
                     (:EXPORT T :TYPE-INITIALIZER "gtk_color_chooser_get_type")

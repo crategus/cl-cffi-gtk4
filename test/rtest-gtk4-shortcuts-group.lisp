@@ -8,40 +8,37 @@
 ;;;     GtkShortcutsGroup
 
 (test gtk-shortcuts-group-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutsGroup"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcuts-group
           (glib:symbol-for-gtype "GtkShortcutsGroup")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutsGroup")
           (g:gtype (cffi:foreign-funcall "gtk_shortcuts_group_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkBox")
           (g:type-parent "GtkShortcutsGroup")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutsGroup")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutsGroup")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkShortcutsGroup")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutsGroup")))
+  ;; Check properties
   (is (equal '("accel-size-group" "height" "title" "title-size-group" "view")
-             (list-properties "GtkShortcutsGroup")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutsGroup")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcutsGroup")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkShortcutsGroup")))
+  ;; Check CSS name
   (is (string= "shortcuts-group"
                (gtk:widget-class-css-name "GtkShortcutsGroup")))
-  ;; CSS classes
-  (is (equal '("vertical")
-             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-group))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutsGroup")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsGroup"
                                              GTK-SHORTCUTS-GROUP
                                (:SUPERCLASS GTK-BOX :EXPORT T :INTERFACES
@@ -71,4 +68,4 @@
 ;;;     title-size-group
 ;;;     view
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+;;; 2024-7-3

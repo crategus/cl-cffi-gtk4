@@ -22,16 +22,16 @@
           (g:type-parent "GtkCellRendererCombo")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererCombo")))
+             (gtk-test:list-children "GtkCellRendererCombo")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererCombo")))
+             (gtk-test:list-interfaces "GtkCellRendererCombo")))
   ;; Check properties
   (is (equal '("has-entry" "model" "text-column")
-             (list-properties "GtkCellRendererCombo")))
+             (gtk-test:list-properties "GtkCellRendererCombo")))
   ;; Check signals
   (is (equal '("changed")
-             (list-signals "GtkCellRendererCombo")))
+             (gtk-test:list-signals "GtkCellRendererCombo")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererCombo"
                                              GTK-CELL-RENDERER-COMBO

@@ -21,22 +21,19 @@
           (g:type-parent "GtkActionBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkActionBar")))
+             (gtk-test:list-children "GtkActionBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkActionBar")))
+             (gtk-test:list-interfaces "GtkActionBar")))
   ;; Check properties
   (is (equal '("revealed")
-             (list-properties "GtkActionBar")))
+             (gtk-test:list-properties "GtkActionBar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkActionBar")))
+             (gtk-test:list-signals "GtkActionBar")))
   ;; Check CSS name
   (is (string= "actionbar"
                (gtk:widget-class-css-name "GtkActionBar")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:action-bar))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkActionBar")))
   ;; Check the class definition

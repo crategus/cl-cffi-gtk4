@@ -8,34 +8,34 @@
 ;;;     GtkEmojiChooser
 
 (test gtk-emoji-chooser-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkEmojiChooser"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:emoji-chooser
           (glib:symbol-for-gtype "GtkEmojiChooser")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEmojiChooser")
           (g:gtype (cffi:foreign-funcall "gtk_emoji_chooser_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkPopover")
           (g:type-parent "GtkEmojiChooser")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkEmojiChooser")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkEmojiChooser")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (list-interfaces "GtkEmojiChooser")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkEmojiChooser")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkEmojiChooser")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkEmojiChooser")))
+  ;; Check signals
   (is (equal '("emoji-picked")
-             (list-signals "GtkEmojiChooser")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkEmojiChooser")))
+  ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkEmojiChooser")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEmojiChooser" GTK-EMOJI-CHOOSER
                                (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -56,4 +56,4 @@
 (test gtk-emoji-chooser-new
   (is (typep (gtk:emoji-chooser-new) 'gtk:emoji-chooser)))
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-7-4

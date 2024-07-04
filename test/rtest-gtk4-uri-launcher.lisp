@@ -8,30 +8,30 @@
 ;;;     GtkUriLauncher
 
 (test gtk-uri-launcher-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkUriLauncher"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:uri-launcher
           (glib:symbol-for-gtype "GtkUriLauncher")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkUriLauncher")
           (g:gtype (cffi:foreign-funcall "gtk_uri_launcher_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkUriLauncher")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkUriLauncher")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkUriLauncher")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkUriLauncher")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkUriLauncher")))
+  ;; Check properties
   (is (equal '("uri")
-             (list-properties "GtkUriLauncher")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkUriLauncher")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkUriLauncher")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkUriLauncher")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkUriLauncher" GTK-URI-LAUNCHER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_uri_launcher_get_type")
@@ -49,4 +49,4 @@
 ;;;     gtk_uri_launcher_launch
 ;;;     gtk_uri_launcher_launch_finish
 
-;;; --- 2023-9-2 ---------------------------------------------------------------
+;;; 2024-7-4

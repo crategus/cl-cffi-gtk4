@@ -8,32 +8,32 @@
 ;;;     GtkSortListModel
 
 (test gtk-sort-list-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSortListModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:sort-list-model
           (glib:symbol-for-gtype "GtkSortListModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSortListModel")
           (g:gtype (cffi:foreign-funcall "gtk_sort_list_model_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSortListModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSortListModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSortListModel")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (list-interfaces "GtkSortListModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSortListModel")))
+  ;; Check properties
   (is (equal '("incremental" "item-type" "model" "n-items" "pending"
                "section-sorter" "sorter")
-             (list-properties "GtkSortListModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSortListModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSortListModel")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSortListModel")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSortListModel"
                                              GTK-SORT-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -81,4 +81,4 @@
 ;;;     gtk_sort_list_model_get_section_sorter             Since 4.12
 ;;;     gtk_sort_list_model_set_section_sorter             Since 4.12
 
-;;; --- 2023-9-3 ---------------------------------------------------------------
+;;; 2024-7-4

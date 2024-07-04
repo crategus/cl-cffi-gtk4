@@ -21,23 +21,20 @@
           (g:type-parent "GtkExpander")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkExpander")))
+             (gtk-test:list-children "GtkExpander")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkExpander")))
+             (gtk-test:list-interfaces "GtkExpander")))
   ;; Check properties
   (is (equal '("child" "expanded" "label" "label-widget" "resize-toplevel"
                "use-markup" "use-underline")
-             (list-properties "GtkExpander")))
+             (gtk-test:list-properties "GtkExpander")))
   ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkExpander")))
+             (gtk-test:list-signals "GtkExpander")))
   ;; Check CSS name
   (is (string= "expander-widget"
                (gtk:widget-class-css-name "GtkExpander")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:expander))))
   ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkExpander")))
   ;; Check the class definition

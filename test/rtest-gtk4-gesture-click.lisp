@@ -8,30 +8,30 @@
 ;;;     GtkGestureClick
 
 (test gesture-click-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureClick"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-click
           (glib:symbol-for-gtype "GtkGestureClick")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureClick")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_click_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureClick")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureClick")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureClick")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureClick")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureClick")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkGestureClick")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureClick")))
+  ;; Check signals
   (is (equal '("pressed" "released" "stopped" "unpaired-release")
-             (list-signals "GtkGestureClick")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureClick")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureClick" GTK-GESTURE-CLICK
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_click_get_type")
@@ -49,4 +49,4 @@
 
 ;;;     gtk_gesture_click_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

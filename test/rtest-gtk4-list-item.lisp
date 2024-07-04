@@ -8,31 +8,31 @@
 ;;;     GtkListItem
 
 (test gtk-list-item-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListItem"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-item
           (glib:symbol-for-gtype "GtkListItem")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListItem")
           (g:gtype (cffi:foreign-funcall "gtk_list_item_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListItem")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkColumnViewCell")
-             (list-children "GtkListItem")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkListItem")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkListItem")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkListItem")))
+  ;; Check properties
   (is (equal '("accessible-description" "accessible-label" "activatable"
                "child" "focusable" "item" "position" "selectable" "selected")
-             (list-properties "GtkListItem")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkListItem")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkListItem")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkListItem")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListItem" GTK-LIST-ITEM
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_list_item_get_type")
@@ -60,13 +60,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     activatable
-;;;     child
-;;;     item
-;;;     position
-;;;     selectable
-;;;     selected
-
 (test gtk-list-item-properties
   (let ((item (make-instance 'gtk:list-item)))
     (is-true (gtk:list-item-activatable item))
@@ -76,4 +69,4 @@
     (is-true (gtk:list-item-selectable item))
     (is-false (gtk:list-item-selected item))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

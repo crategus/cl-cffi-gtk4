@@ -9,45 +9,38 @@
 
 (test gtk-page-setup-unix-dialog-class
  (let ((*gtk-warn-deprecated*))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkPageSetupUnixDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:page-setup-unix-dialog
             (glib:symbol-for-gtype "GtkPageSetupUnixDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkPageSetupUnixDialog")
             (g:gtype (cffi:foreign-funcall "gtk_page_setup_unix_dialog_get_type"
                                            :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkDialog")
             (g:type-parent "GtkPageSetupUnixDialog")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
-               (list-children "GtkPageSetupUnixDialog")))
-    ;; Check the interfaces
+               (gtk-test:list-children "GtkPageSetupUnixDialog")))
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (list-interfaces "GtkPageSetupUnixDialog")))
-    ;; Check the properties
+               (gtk-test:list-interfaces "GtkPageSetupUnixDialog")))
+    ;; Check properties
     (is (equal '()
-               (list-properties "GtkPageSetupUnixDialog")))
-    ;; Check the signals
+               (gtk-test:list-properties "GtkPageSetupUnixDialog")))
+    ;; Check signals
     (is (equal '()
-               (list-signals "GtkPageSetupUnixDialog")))
-    ;; CSS name
+               (gtk-test:list-signals "GtkPageSetupUnixDialog")))
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkPageSetupUnixDialog")))
-    ;; CSS classes
-    ;; FIXME: Calling make-instance for GtkPageSetupUnixDialog causes errors or
-    ;; warnings.
-    #+nil
-    (is (equal '("background" "csd" "dialog" "pagesetup")
-               (gtk:widget-css-classes
-                   (make-instance 'gtk:page-setup-unix-dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog
             (gtk:widget-class-accessible-role "GtkPageSetupUnixDialog")))
-    ;; Check the class definition
+    ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPageSetupUnixDialog"
                                  GTK-PAGE-SETUP-UNIX-DIALOG
                                  (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -67,4 +60,4 @@
 ;;;     gtk_page_setup_unix_dialog_set_print_settings
 ;;;     gtk_page_setup_unix_dialog_get_print_settings
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

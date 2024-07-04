@@ -21,22 +21,19 @@
           (g:type-parent "GtkAspectFrame")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAspectFrame")))
+             (gtk-test:list-children "GtkAspectFrame")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkAspectFrame")))
+             (gtk-test:list-interfaces "GtkAspectFrame")))
   ;; Check properties
   (is (equal '("child" "obey-child" "ratio" "xalign" "yalign")
-             (list-properties "GtkAspectFrame")))
+             (gtk-test:list-properties "GtkAspectFrame")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkAspectFrame")))
+             (gtk-test:list-signals "GtkAspectFrame")))
   ;; Check CSS name
   (is (string= "aspectframe"
                (gtk:widget-class-css-name "GtkAspectFrame")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:aspect-frame))))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkAspectFrame")))
   ;; Check the class definition

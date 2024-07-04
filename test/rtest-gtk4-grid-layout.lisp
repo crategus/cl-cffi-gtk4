@@ -22,16 +22,16 @@
           (g:type-parent "GtkGridLayoutChild")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkGridLayoutChild")))
+             (gtk-test:list-children "GtkGridLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGridLayoutChild")))
+             (gtk-test:list-interfaces "GtkGridLayoutChild")))
   ;; Check properties
   (is (equal '("column" "column-span" "row" "row-span")
-             (list-properties "GtkGridLayoutChild")))
+             (gtk-test:list-properties "GtkGridLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkGridLayoutChild")))
+             (gtk-test:list-signals "GtkGridLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGridLayoutChild" GTK-GRID-LAYOUT-CHILD
                                (:SUPERCLASS GTK-LAYOUT-CHILD :EXPORT T
@@ -72,17 +72,17 @@
           (g:type-parent "GtkGridLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkGridLayout")))
+             (gtk-test:list-children "GtkGridLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGridLayout")))
+             (gtk-test:list-interfaces "GtkGridLayout")))
   ;; Check properties
   (is (equal '("baseline-row" "column-homogeneous" "column-spacing"
                "row-homogeneous" "row-spacing")
-             (list-properties "GtkGridLayout")))
+             (gtk-test:list-properties "GtkGridLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkGridLayout")))
+             (gtk-test:list-signals "GtkGridLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGridLayout" GTK-GRID-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

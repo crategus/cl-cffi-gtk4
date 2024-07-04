@@ -8,31 +8,31 @@
 ;;;     GtkColorDialogButton
 
 (test gtk-color-dialog-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColorDialogButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:color-dialog-button
           (glib:symbol-for-gtype "GtkColorDialogButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColorDialogButton")
           (g:gtype (cffi:foreign-funcall "gtk_color_dialog_button_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkColorDialogButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkColorDialogButton")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkColorDialogButton")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkColorDialogButton")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkColorDialogButton")))
+  ;; Check properties
   (is (equal '("dialog" "rgba")
-             (list-properties "GtkColorDialogButton")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkColorDialogButton")))
+  ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkColorDialogButton")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkColorDialogButton")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorDialogButton"
                                              GTK-COLOR-DIALOG-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -82,4 +82,4 @@
   (let ((dialog (make-instance 'gtk:color-dialog)))
     (is (typep (gtk:color-dialog-button-new dialog) 'gtk:color-dialog-button))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

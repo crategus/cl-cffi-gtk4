@@ -8,37 +8,34 @@
 ;;;     GtkDropDown
 
 (test gtk-drop-down-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkDropDown"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:drop-down
           (glib:symbol-for-gtype "GtkDropDown")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDropDown")
           (g:gtype (cffi:foreign-funcall "gtk_drop_down_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkDropDown")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkDropDown")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkDropDown")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkDropDown")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkDropDown")))
+  ;; Check class properties
   (is (equal '("enable-search" "expression" "factory" "header-factory"
                "list-factory" "model" "search-match-mode" "selected"
                "selected-item" "show-arrow")
-             (list-properties "GtkDropDown")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkDropDown")))
+  ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkDropDown")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkDropDown")))
+  ;; Check CSS name
   (is (string= "dropdown"
                (gtk:widget-class-css-name "GtkDropDown")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:drop-down))))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"

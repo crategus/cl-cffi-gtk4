@@ -8,30 +8,30 @@
 ;;;     GtkGestureStylus
 
 (test gtk-gesture-stylus-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureStylus"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-stylus
           (glib:symbol-for-gtype "GtkGestureStylus")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureStylus")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_stylus_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureStylus")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureStylus")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureStylus")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureStylus")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureStylus")))
+  ;; Check properties
   (is (equal '("stylus-only")
-             (list-properties "GtkGestureStylus")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureStylus")))
+  ;; Check signals
   (is (equal '("down" "motion" "proximity" "up")
-             (list-signals "GtkGestureStylus")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureStylus")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureStylus" GTK-GESTURE-STYLUS
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_stylus_get_type")

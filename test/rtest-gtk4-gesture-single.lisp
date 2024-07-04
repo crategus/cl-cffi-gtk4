@@ -8,31 +8,31 @@
 ;;;     GtkGestureSingle
 
 (test gtk-gesture-single-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureSingle"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-single
           (glib:symbol-for-gtype "GtkGestureSingle")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureSingle")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_single_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureSingle")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkDragSource" "GtkGestureClick" "GtkGestureDrag"
                "GtkGestureLongPress" "GtkGestureStylus" "GtkGestureSwipe")
-             (list-children "GtkGestureSingle")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureSingle")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureSingle")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureSingle")))
+  ;; Check properties
   (is (equal '("button" "exclusive" "touch-only")
-             (list-properties "GtkGestureSingle")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureSingle")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkGestureSingle")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureSingle")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSingle" GTK-GESTURE-SINGLE
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_single_get_type")

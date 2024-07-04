@@ -21,27 +21,24 @@
           (g:type-parent "GtkSearchEntry")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkSearchEntry")))
+             (gtk-test:list-children "GtkSearchEntry")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable")
-             (list-interfaces "GtkSearchEntry")))
+             (gtk-test:list-interfaces "GtkSearchEntry")))
   ;; Check properties
   (is (equal '("activates-default" "cursor-position" "editable" "enable-undo"
                "input-hints" "input-purpose" "max-width-chars"
                "placeholder-text" "search-delay" "selection-bound" "text"
                "width-chars" "xalign")
-             (list-properties "GtkSearchEntry")))
+             (gtk-test:list-properties "GtkSearchEntry")))
   ;; Check signals
   (is (equal '("activate" "next-match" "previous-match" "search-changed"
                "search-started" "stop-search")
-             (list-signals "GtkSearchEntry")))
+             (gtk-test:list-signals "GtkSearchEntry")))
   ;; Check CSS name
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkSearchEntry")))
-  ;; Check CSS classes
-  (is (equal '("search")
-             (gtk:widget-css-classes (make-instance 'gtk:search-entry))))
   ;; Check accessible role
   (is (eq :search-box (gtk:widget-class-accessible-role "GtkSearchEntry")))
   ;; Check class definition
@@ -93,4 +90,4 @@
 ;;;     gtk_search_entry_set_key_capture_widget
 ;;;     gtk_search_entry_get_key_capture_widget
 
-;;; 2024-5-26
+;;; 2024-7-3

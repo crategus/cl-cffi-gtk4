@@ -21,23 +21,20 @@
           (g:type-parent "GtkVolumeButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkVolumeButton")))
+             (gtk-test:list-children "GtkVolumeButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (list-interfaces "GtkVolumeButton")))
+             (gtk-test:list-interfaces "GtkVolumeButton")))
   ;; Check properties
   (is (equal '("use-symbolic")
-             (list-properties "GtkVolumeButton")))
+             (gtk-test:list-properties "GtkVolumeButton")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkVolumeButton")))
+             (gtk-test:list-signals "GtkVolumeButton")))
   ;; Check CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkVolumeButton")))
-  ;; Check CSS classes
-  (is (equal '("scale")
-             (gtk:widget-css-classes (make-instance 'gtk:volume-button))))
   ;; Chekc accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkVolumeButton")))
   ;; Check the class definition

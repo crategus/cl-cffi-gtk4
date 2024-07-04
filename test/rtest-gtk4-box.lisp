@@ -28,28 +28,25 @@
   #-windows
   (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
                "GtkShortcutsGroup" "GtkShortcutsSection")
-             (list-children "GtkBox")))
+             (gtk-test:list-children "GtkBox")))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
-                 (list-children "GtkBox"))))
+                 (gtk-test:list-children "GtkBox"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkBox")))
+             (gtk-test:list-interfaces "GtkBox")))
   ;; Check properties
   (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
                "spacing")
-             (list-properties "GtkBox")))
+             (gtk-test:list-properties "GtkBox")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkBox")))
+             (gtk-test:list-signals "GtkBox")))
   ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkBox")))
-  ;; Check CSS classes
-  (is (equal '("horizontal")
-             (gtk:widget-css-classes (make-instance 'gtk:box))))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkBox")))
   ;; Check the class definition

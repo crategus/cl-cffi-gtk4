@@ -8,31 +8,31 @@
 ;;;     GtkEventControllerKey
 
 (test event-controller-key-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkEventControllerKey"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:event-controller-key
           (glib:symbol-for-gtype "GtkEventControllerKey")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEventControllerKey")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_key_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerKey")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkEventControllerKey")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkEventControllerKey")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkEventControllerKey")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkEventControllerKey")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkEventControllerKey")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkEventControllerKey")))
+  ;; Check signals
   (is (equal '("im-update" "key-pressed" "key-released" "modifiers")
-             (list-signals "GtkEventControllerKey")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkEventControllerKey")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerKey"
                                      GTK-EVENT-CONTROLLER-KEY
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
@@ -56,4 +56,4 @@
 ;;;     gtk_event_controller_key_forward
 ;;;     gtk_event_controller_key_get_group
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

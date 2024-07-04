@@ -7,20 +7,20 @@
 
 ;;;     GtkOrientable
 
-(test orientable-interface
-  ;; Type check
+(test gtk-orientable-interface
+  ;; Check type
   (is (g:type-is-interface "GtkOrientable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:orientable
           (glib:symbol-for-gtype "GtkOrientable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkOrientable")
           (g:gtype (cffi:foreign-funcall "gtk_orientable_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties
   (is (equal '("orientation")
              (mapcar #'g:param-spec-name
                      (g:object-interface-list-properties "GtkOrientable"))))
-  ;; Get the interface definition
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkOrientable"
                                   GTK-ORIENTABLE
                                   (:EXPORT T
@@ -34,7 +34,7 @@
 
 ;;;     orientation
 
-(test orientable-properties
+(test gtk-orientable-properties
   (let ((orientable (make-instance 'gtk:box)))
     (is (eq :horizontal
             (gtk:orientable-orientation orientable)))
@@ -43,4 +43,4 @@
     (is (eq :vertical
             (gtk:orientable-orientation orientable)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

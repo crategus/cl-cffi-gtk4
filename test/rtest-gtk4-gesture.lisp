@@ -8,26 +8,26 @@
 ;;;     GtkEventSequenceState
 
 (test event-sequence-state
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkEventSequenceState"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEventSequenceState")
           (g:gtype (cffi:foreign-funcall "gtk_event_sequence_state_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:event-sequence-state
           (glib:symbol-for-gtype "GtkEventSequenceState")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_EVENT_SEQUENCE_NONE" "GTK_EVENT_SEQUENCE_CLAIMED"
                "GTK_EVENT_SEQUENCE_DENIED")
-             (list-enum-item-name "GtkEventSequenceState")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GtkEventSequenceState")))
+  ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkEventSequenceState")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GtkEventSequenceState")))
+  ;; Check nick names
   (is (equal '("none" "claimed" "denied")
-             (list-enum-item-nick "GtkEventSequenceState")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GtkEventSequenceState")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkEventSequenceState"
                              GTK-EVENT-SEQUENCE-STATE
                              (:EXPORT T
@@ -41,30 +41,30 @@
 ;;;     GtkGesture
 
 (test gesture-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGesture"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture
           (glib:symbol-for-gtype "GtkGesture")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGesture")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkGesture")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkGestureRotate" "GtkGestureSingle" "GtkGestureZoom")
-             (list-children "GtkGesture")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGesture")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGesture")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkGesture")))
+  ;; Check class properties
   (is (equal '("n-points")
-             (list-properties "GtkGesture")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkGesture")))
+  ;; Check signals
   (is (equal '("begin" "cancel" "end" "sequence-state-changed" "update")
-             (list-signals "GtkGesture")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGesture")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGesture" GTK-GESTURE
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_get_type")
@@ -114,7 +114,7 @@
 
 (test gtk-gesture-sequences
   (let ((gesture (make-instance 'gtk:gesture-click)))
-  
+
     (is-false (gtk:gesture-sequences gesture))
 ))
 

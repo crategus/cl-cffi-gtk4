@@ -22,17 +22,17 @@
           (g:type-parent "GtkCellRendererPixbuf")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererPixbuf")))
+             (gtk-test:list-children "GtkCellRendererPixbuf")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererPixbuf")))
+             (gtk-test:list-interfaces "GtkCellRendererPixbuf")))
   ;; Check properties
   (is (equal '("gicon" "icon-name" "icon-size" "pixbuf" "pixbuf-expander-closed"
                "pixbuf-expander-open" "texture")
-             (list-properties "GtkCellRendererPixbuf")))
+             (gtk-test:list-properties "GtkCellRendererPixbuf")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellRendererPixbuf")))
+             (gtk-test:list-signals "GtkCellRendererPixbuf")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererPixbuf"
                                              GTK-CELL-RENDERER-PIXBUF

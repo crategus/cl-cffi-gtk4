@@ -5,39 +5,6 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkSensitivityType
-
-(test gtk-sensitivity-type
-  ;; Check type
-  (is (g:type-is-enum "GtkSensitivityType"))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkSensitivityType")
-          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
-                                         :size))))
-  ;; Check registered name
-  (is (eq 'gtk:sensitivity-type
-          (glib:symbol-for-gtype "GtkSensitivityType")))
-  ;; Check names
-  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
-               "GTK_SENSITIVITY_OFF")
-             (list-enum-item-name "GtkSensitivityType")))
-  ;; Check values
-  (is (equal '(0 1 2)
-             (list-enum-item-value "GtkSensitivityType")))
-  ;; Check nick names
-  (is (equal '("auto" "on" "off")
-             (list-enum-item-nick "GtkSensitivityType")))
-  ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
-                                     GTK-SENSITIVITY-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_sensitivity_type_get_type")
-                                     (:AUTO 0)
-                                     (:ON 1)
-                                     (:OFF 2))
-             (gobject:get-g-type-definition "GtkSensitivityType"))))
-
 ;;;     GtkComboBox
 
 (test gtk-combo-box-class
@@ -53,20 +20,20 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkComboBox")))
   ;; Check children
   (is (equal '("GtkComboBoxText")
-             (list-children "GtkComboBox")))
+             (gtk-test:list-children "GtkComboBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
-             (list-interfaces "GtkComboBox")))
+             (gtk-test:list-interfaces "GtkComboBox")))
   ;; Check class properties
   (is (equal '("active" "active-id" "button-sensitivity" "child"
                "editing-canceled" "entry-text-column" "has-entry" "has-frame"
                "id-column" "model" "popup-fixed-width" "popup-shown")
-             (list-properties "GtkComboBox")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkComboBox")))
+  ;; Check signals
   (is (equal '("activate" "changed" "format-entry-text" "move-active" "popdown"
                "popup")
-             (list-signals "GtkComboBox")))
+             (gtk-test:list-signals "GtkComboBox")))
   ;; Check CSS information
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBox")))

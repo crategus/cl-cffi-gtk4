@@ -22,16 +22,16 @@
           (g:type-parent "GtkCellRendererSpin")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererSpin")))
+             (gtk-test:list-children "GtkCellRendererSpin")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererSpin")))
+             (gtk-test:list-interfaces "GtkCellRendererSpin")))
   ;; Check properties
   (is (equal '("adjustment" "climb-rate" "digits")
-             (list-properties "GtkCellRendererSpin")))
+             (gtk-test:list-properties "GtkCellRendererSpin")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellRendererSpin")))
+             (gtk-test:list-signals "GtkCellRendererSpin")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererSpin"
                                              GTK-CELL-RENDERER-SPIN

@@ -8,30 +8,30 @@
 ;;;     GtkTooltip
 
 (test gtk-tooltip-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkTooltip"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tooltip
           (glib:symbol-for-gtype "GtkTooltip")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTooltip")
           (g:gtype (cffi:foreign-funcall "gtk_tooltip_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkTooltip")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkTooltip")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkTooltip")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkTooltip")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkTooltip")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkTooltip")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkTooltip")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkTooltip")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkTooltip")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTooltip" GTK-TOOLTIP
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_tooltip_get_type")

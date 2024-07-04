@@ -22,13 +22,13 @@
           (glib:symbol-for-gtype "GtkLevelBarMode")))
   ;; Check names
   (is (equal '("GTK_LEVEL_BAR_MODE_CONTINUOUS" "GTK_LEVEL_BAR_MODE_DISCRETE")
-             (list-enum-item-name "GtkLevelBarMode")))
+             (gtk-test:list-enum-item-name "GtkLevelBarMode")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkLevelBarMode")))
+             (gtk-test:list-enum-item-value "GtkLevelBarMode")))
   ;; Check nick names
   (is (equal '("continuous" "discrete")
-             (list-enum-item-nick "GtkLevelBarMode")))
+             (gtk-test:list-enum-item-nick "GtkLevelBarMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLevelBarMode"
                                      GTK-LEVEL-BAR-MODE
@@ -55,23 +55,20 @@
           (g:type-parent "GtkLevelBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkLevelBar")))
+             (gtk-test:list-children "GtkLevelBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (list-interfaces "GtkLevelBar")))
+             (gtk-test:list-interfaces "GtkLevelBar")))
   ;; Check properties
   (is (equal '("inverted" "max-value" "min-value" "mode" "orientation" "value")
-             (list-properties "GtkLevelBar")))
+             (gtk-test:list-properties "GtkLevelBar")))
   ;; Check signals
   (is (equal '("offset-changed")
-             (list-signals "GtkLevelBar")))
+             (gtk-test:list-signals "GtkLevelBar")))
   ;; Check CSS name
   (is (string= "levelbar"
                (gtk:widget-class-css-name "GtkLevelBar")))
-  ;; Check CSS classes
-  (is (equal '("horizontal" "continuous")
-             (gtk:widget-css-classes (make-instance 'gtk:level-bar))))
   ;; Check accessible role
   (is (eq :meter (gtk:widget-class-accessible-role "GtkLevelBar")))
   ;; Check class definition

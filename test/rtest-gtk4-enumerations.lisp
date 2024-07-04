@@ -20,14 +20,14 @@
   (is (equal '("GTK_ALIGN_FILL" "GTK_ALIGN_START" "GTK_ALIGN_END"
                "GTK_ALIGN_CENTER" "GTK_ALIGN_BASELINE_FILL" "GTK_ALIGN_BASELINE"
                "GTK_ALIGN_BASELINE_CENTER")
-             (list-enum-item-name "GtkAlign")))
+             (gtk-test:list-enum-item-name "GtkAlign")))
   ;; Check values
   (is (equal '(0 1 2 3 4 4 5)
-             (list-enum-item-value "GtkAlign")))
+             (gtk-test:list-enum-item-value "GtkAlign")))
   ;; Check nick names
   (is (equal '("fill" "start" "end" "center" "baseline-fill" "baseline"
                "baseline-center")
-             (list-enum-item-nick "GtkAlign")))
+             (gtk-test:list-enum-item-nick "GtkAlign")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAlign" GTK-ALIGN
                                      (:EXPORT T
@@ -55,13 +55,13 @@
   ;; Check names
   (is (equal '("GTK_BASELINE_POSITION_TOP" "GTK_BASELINE_POSITION_CENTER"
                "GTK_BASELINE_POSITION_BOTTOM")
-             (list-enum-item-name "GtkBaselinePosition")))
+             (gtk-test:list-enum-item-name "GtkBaselinePosition")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkBaselinePosition")))
+             (gtk-test:list-enum-item-value "GtkBaselinePosition")))
   ;; Check nick names
   (is (equal '("top" "center" "bottom")
-             (list-enum-item-nick "GtkBaselinePosition")))
+             (gtk-test:list-enum-item-nick "GtkBaselinePosition")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkBaselinePosition"
                              GTK-BASELINE-POSITION
@@ -88,14 +88,14 @@
                "GTK_DELETE_DISPLAY_LINES" "GTK_DELETE_DISPLAY_LINE_ENDS"
                "GTK_DELETE_PARAGRAPH_ENDS" "GTK_DELETE_PARAGRAPHS"
                "GTK_DELETE_WHITESPACE")
-             (list-enum-item-name "GtkDeleteType")))
+             (gtk-test:list-enum-item-name "GtkDeleteType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (list-enum-item-value "GtkDeleteType")))
+             (gtk-test:list-enum-item-value "GtkDeleteType")))
   ;; Check nick names
   (is (equal '("chars" "word-ends" "words" "display-lines" "display-line-ends"
                "paragraph-ends" "paragraphs" "whitespace")
-             (list-enum-item-nick "GtkDeleteType")))
+             (gtk-test:list-enum-item-nick "GtkDeleteType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkDeleteType"
                              GTK-DELETE-TYPE
@@ -125,13 +125,13 @@
   ;; Check names
   (is (equal '("GTK_DIR_TAB_FORWARD" "GTK_DIR_TAB_BACKWARD" "GTK_DIR_UP"
                "GTK_DIR_DOWN" "GTK_DIR_LEFT" "GTK_DIR_RIGHT")
-             (list-enum-item-name "GtkDirectionType")))
+             (gtk-test:list-enum-item-name "GtkDirectionType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GtkDirectionType")))
+             (gtk-test:list-enum-item-value "GtkDirectionType")))
   ;; Check nick names
   (is (equal '("tab-forward" "tab-backward" "up" "down" "left" "right")
-             (list-enum-item-nick "GtkDirectionType")))
+             (gtk-test:list-enum-item-nick "GtkDirectionType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkDirectionType" GTK-DIRECTION-TYPE
                                      (:EXPORT T
@@ -159,13 +159,13 @@
   ;; Check names
   (is (equal '("GTK_ICON_SIZE_INHERIT" "GTK_ICON_SIZE_NORMAL"
                "GTK_ICON_SIZE_LARGE")
-             (list-enum-item-name "GtkIconSize")))
+             (gtk-test:list-enum-item-name "GtkIconSize")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkIconSize")))
+             (gtk-test:list-enum-item-value "GtkIconSize")))
   ;; Check nick names
   (is (equal '("inherit" "normal" "large")
-             (list-enum-item-nick "GtkIconSize")))
+             (gtk-test:list-enum-item-nick "GtkIconSize")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkIconSize" GTK-ICON-SIZE
                                      (:EXPORT T
@@ -191,14 +191,14 @@
                "GTK_RESPONSE_DELETE_EVENT" "GTK_RESPONSE_OK"
                "GTK_RESPONSE_CANCEL" "GTK_RESPONSE_CLOSE" "GTK_RESPONSE_YES"
                "GTK_RESPONSE_NO" "GTK_RESPONSE_APPLY" "GTK_RESPONSE_HELP")
-             (list-enum-item-name "GtkResponseType")))
+             (gtk-test:list-enum-item-name "GtkResponseType")))
   ;; Check values
   (is (equal '(-1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11)
-             (list-enum-item-value "GtkResponseType")))
+             (gtk-test:list-enum-item-value "GtkResponseType")))
   ;; Check nick names
   (is (equal '("none" "reject" "accept" "delete-event" "ok" "cancel" "close"
                "yes" "no" "apply" "help")
-             (list-enum-item-nick "GtkResponseType")))
+             (gtk-test:list-enum-item-nick "GtkResponseType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkResponseType"
                              GTK-RESPONSE-TYPE
@@ -222,7 +222,7 @@
 (test gtk-sensitivity-type
   ;; Check type
   (is (g:type-is-enum "GtkSensitivityType"))
-  ;; Check type initializer
+  ;; Check the type initializer
   (is (eq (g:gtype "GtkSensitivityType")
           (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
                                          :size))))
@@ -230,17 +230,26 @@
   (is (eq 'gtk:sensitivity-type
           (glib:symbol-for-gtype "GtkSensitivityType")))
   ;; Check names
-  (is (equal '()
-             (list-enum-item-name "GtkSensitivityType")))
+  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
+               "GTK_SENSITIVITY_OFF")
+             (gtk-test:list-enum-item-name "GtkSensitivityType")))
   ;; Check values
-  (is (equal '()
-             (list-enum-item-value "GtkSensitivityType")))
+  (is (equal '(0 1 2)
+             (gtk-test:list-enum-item-value "GtkSensitivityType")))
   ;; Check nick names
-  (is (equal '()
-             (list-enum-item-nick "GtkSensitivityType")))
+  (is (equal '("auto" "on" "off")
+             (gtk-test:list-enum-item-nick "GtkSensitivityType")))
   ;; Check enum definition
-  (is (equal '()
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
+                                     GTK-SENSITIVITY-TYPE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_sensitivity_type_get_type")
+                                     (:AUTO 0)
+                                     (:ON 1)
+                                     (:OFF 2))
              (gobject:get-g-type-definition "GtkSensitivityType"))))
+
 
 ;;;     GtkTextDirection
 
@@ -255,13 +264,13 @@
           (glib:symbol-for-gtype "GtkTextDirection")))
   ;; Check names
   (is (equal '("GTK_TEXT_DIR_NONE" "GTK_TEXT_DIR_LTR" "GTK_TEXT_DIR_RTL")
-             (list-enum-item-name "GtkTextDirection")))
+             (gtk-test:list-enum-item-name "GtkTextDirection")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkTextDirection")))
+             (gtk-test:list-enum-item-value "GtkTextDirection")))
   ;; Check nick names
   (is (equal '("none" "ltr" "rtl")
-             (list-enum-item-nick "GtkTextDirection")))
+             (gtk-test:list-enum-item-nick "GtkTextDirection")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextDirection" GTK-TEXT-DIRECTION
                                      (:EXPORT T
@@ -286,13 +295,13 @@
   ;; Check names
   (is (equal '("GTK_JUSTIFY_LEFT" "GTK_JUSTIFY_RIGHT" "GTK_JUSTIFY_CENTER"
                "GTK_JUSTIFY_FILL")
-             (list-enum-item-name "GtkJustification")))
+             (gtk-test:list-enum-item-name "GtkJustification")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkJustification")))
+             (gtk-test:list-enum-item-value "GtkJustification")))
   ;; Check nick names
   (is (equal '("left" "right" "center" "fill")
-             (list-enum-item-nick "GtkJustification")))
+             (gtk-test:list-enum-item-nick "GtkJustification")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkJustification" GTK-JUSTIFICATION
                                      (:EXPORT T
@@ -318,13 +327,13 @@
   ;; Check names
   (is (equal '("GTK_MESSAGE_INFO" "GTK_MESSAGE_WARNING" "GTK_MESSAGE_QUESTION"
                "GTK_MESSAGE_ERROR" "GTK_MESSAGE_OTHER")
-             (list-enum-item-name "GtkMessageType")))
+             (gtk-test:list-enum-item-name "GtkMessageType")))
   ;; Check values
   (is (equal '(0 1 2 3 4)
-             (list-enum-item-value "GtkMessageType")))
+             (gtk-test:list-enum-item-value "GtkMessageType")))
   ;; Check nick names
   (is (equal '("info" "warning" "question" "error" "other")
-             (list-enum-item-nick "GtkMessageType")))
+             (gtk-test:list-enum-item-nick "GtkMessageType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkMessageType"
                              GTK-MESSAGE-TYPE
@@ -354,15 +363,15 @@
                "GTK_MOVEMENT_DISPLAY_LINE_ENDS" "GTK_MOVEMENT_PARAGRAPHS"
                "GTK_MOVEMENT_PARAGRAPH_ENDS" "GTK_MOVEMENT_PAGES"
                "GTK_MOVEMENT_BUFFER_ENDS" "GTK_MOVEMENT_HORIZONTAL_PAGES")
-             (list-enum-item-name "GtkMovementStep")))
+             (gtk-test:list-enum-item-name "GtkMovementStep")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (list-enum-item-value "GtkMovementStep")))
+             (gtk-test:list-enum-item-value "GtkMovementStep")))
   ;; Check nick names
   (is (equal '("logical-positions" "visual-positions" "words" "display-lines"
                "display-line-ends" "paragraphs" "paragraph-ends" "pages"
                "buffer-ends" "horizontal-pages")
-             (list-enum-item-nick "GtkMovementStep")))
+             (gtk-test:list-enum-item-nick "GtkMovementStep")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkMovementStep" GTK-MOVEMENT-STEP
                                      (:EXPORT T
@@ -396,13 +405,13 @@
   ;; Check names
   (is (equal '("GTK_NATURAL_WRAP_INHERIT" "GTK_NATURAL_WRAP_NONE"
                "GTK_NATURAL_WRAP_WORD")
-             (list-enum-item-name "GtkNaturalWrapMode")))
+             (gtk-test:list-enum-item-name "GtkNaturalWrapMode")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkNaturalWrapMode")))
+             (gtk-test:list-enum-item-value "GtkNaturalWrapMode")))
   ;; Check nick names
   (is (equal '("inherit" "none" "word")
-             (list-enum-item-nick "GtkNaturalWrapMode")))
+             (gtk-test:list-enum-item-nick "GtkNaturalWrapMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkNaturalWrapMode"
                                      GTK-NATURAL-WRAP-MODE
@@ -429,13 +438,13 @@
           (glib:symbol-for-gtype "GtkOrientation")))
   ;; Check names
   (is (equal '("GTK_ORIENTATION_HORIZONTAL" "GTK_ORIENTATION_VERTICAL")
-             (list-enum-item-name "GtkOrientation")))
+             (gtk-test:list-enum-item-name "GtkOrientation")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkOrientation")))
+             (gtk-test:list-enum-item-value "GtkOrientation")))
   ;; Check nick names
   (is (equal '("horizontal" "vertical")
-             (list-enum-item-nick "GtkOrientation")))
+             (gtk-test:list-enum-item-nick "GtkOrientation")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkOrientation"
                              GTK-ORIENTATION
@@ -458,13 +467,13 @@
           (glib:symbol-for-gtype "GtkOverflow")))
   ;; Check names
   (is (equal '("GTK_OVERFLOW_VISIBLE" "GTK_OVERFLOW_HIDDEN")
-             (list-enum-item-name "GtkOverflow")))
+             (gtk-test:list-enum-item-name "GtkOverflow")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkOverflow")))
+             (gtk-test:list-enum-item-value "GtkOverflow")))
   ;; Check nick names
   (is (equal '("visible" "hidden")
-             (list-enum-item-nick "GtkOverflow")))
+             (gtk-test:list-enum-item-nick "GtkOverflow")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkOverflow" GTK-OVERFLOW
                                      (:EXPORT T
@@ -486,13 +495,13 @@
           (glib:symbol-for-gtype "GtkPackType")))
   ;; Check names
   (is (equal '("GTK_PACK_START" "GTK_PACK_END")
-             (list-enum-item-name "GtkPackType")))
+             (gtk-test:list-enum-item-name "GtkPackType")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkPackType")))
+             (gtk-test:list-enum-item-value "GtkPackType")))
   ;; Check nick names
   (is (equal '("start" "end")
-             (list-enum-item-nick "GtkPackType")))
+             (gtk-test:list-enum-item-nick "GtkPackType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPackType" GTK-PACK-TYPE
                                      (:EXPORT T
@@ -515,13 +524,13 @@
           (glib:symbol-for-gtype "GtkPositionType")))
   ;; Check names
   (is (equal '("GTK_POS_LEFT" "GTK_POS_RIGHT" "GTK_POS_TOP" "GTK_POS_BOTTOM")
-             (list-enum-item-name "GtkPositionType")))
+             (gtk-test:list-enum-item-name "GtkPositionType")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPositionType")))
+             (gtk-test:list-enum-item-value "GtkPositionType")))
   ;; Check nick names
   (is (equal '("left" "right" "top" "bottom")
-             (list-enum-item-nick "GtkPositionType")))
+             (gtk-test:list-enum-item-nick "GtkPositionType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPositionType" GTK-POSITION-TYPE
                                      (:EXPORT T
@@ -552,15 +561,15 @@
                "GTK_SCROLL_PAGE_DOWN" "GTK_SCROLL_STEP_LEFT"
                "GTK_SCROLL_STEP_RIGHT" "GTK_SCROLL_PAGE_LEFT"
                "GTK_SCROLL_PAGE_RIGHT" "GTK_SCROLL_START" "GTK_SCROLL_END")
-             (list-enum-item-name "GtkScrollType")))
+             (gtk-test:list-enum-item-name "GtkScrollType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)
-             (list-enum-item-value "GtkScrollType")))
+             (gtk-test:list-enum-item-value "GtkScrollType")))
   ;; Check nick names
   (is (equal '("none" "jump" "step-backward" "step-forward" "page-backward"
                "page-forward" "step-up" "step-down" "page-up" "page-down"
                "step-left" "step-right" "page-left" "page-right" "start" "end")
-             (list-enum-item-nick "GtkScrollType")))
+             (gtk-test:list-enum-item-nick "GtkScrollType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkScrollType" GTK-SCROLL-TYPE
                                      (:EXPORT T
@@ -598,13 +607,13 @@
   ;; Check names
   (is (equal '("GTK_SELECTION_NONE" "GTK_SELECTION_SINGLE"
                "GTK_SELECTION_BROWSE" "GTK_SELECTION_MULTIPLE")
-             (list-enum-item-name "GtkSelectionMode")))
+             (gtk-test:list-enum-item-name "GtkSelectionMode")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkSelectionMode")))
+             (gtk-test:list-enum-item-value "GtkSelectionMode")))
   ;; Check nick names
   (is (equal '("none" "single" "browse" "multiple")
-             (list-enum-item-nick "GtkSelectionMode")))
+             (gtk-test:list-enum-item-nick "GtkSelectionMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSelectionMode" GTK-SELECTION-MODE
                                      (:EXPORT T
@@ -630,13 +639,13 @@
   ;; Check names
   (is (equal '("GTK_WRAP_NONE" "GTK_WRAP_CHAR" "GTK_WRAP_WORD"
                "GTK_WRAP_WORD_CHAR")
-             (list-enum-item-name "GtkWrapMode")))
+             (gtk-test:list-enum-item-name "GtkWrapMode")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkWrapMode")))
+             (gtk-test:list-enum-item-value "GtkWrapMode")))
   ;; Check nick names
   (is (equal '("none" "char" "word" "word-char")
-             (list-enum-item-nick "GtkWrapMode")))
+             (gtk-test:list-enum-item-nick "GtkWrapMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkWrapMode"
                                      GTK-WRAP-MODE
@@ -662,13 +671,13 @@
           (glib:symbol-for-gtype "GtkSortType")))
   ;; Check names
   (is (equal '("GTK_SORT_ASCENDING" "GTK_SORT_DESCENDING")
-             (list-enum-item-name "GtkSortType")))
+             (gtk-test:list-enum-item-name "GtkSortType")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkSortType")))
+             (gtk-test:list-enum-item-value "GtkSortType")))
   ;; Check nick names
   (is (equal '("ascending" "descending")
-             (list-enum-item-nick "GtkSortType")))
+             (gtk-test:list-enum-item-nick "GtkSortType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSortType" GTK-SORT-TYPE
                                      (:EXPORT T
@@ -692,13 +701,13 @@
   ;; Check names
   (is (equal '("GTK_ORDERING_SMALLER" "GTK_ORDERING_EQUAL"
                "GTK_ORDERING_LARGER")
-             (list-enum-item-name "GtkOrdering")))
+             (gtk-test:list-enum-item-name "GtkOrdering")))
   ;; Check values
   (is (equal '(-1 0 1)
-             (list-enum-item-value "GtkOrdering")))
+             (gtk-test:list-enum-item-value "GtkOrdering")))
   ;; Check nick names
   (is (equal '("smaller" "equal" "larger")
-             (list-enum-item-nick "GtkOrdering")))
+             (gtk-test:list-enum-item-nick "GtkOrdering")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkOrdering" GTK-ORDERING
                                      (:EXPORT T
@@ -722,13 +731,13 @@
   ;; Check names
   (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
                "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
-             (list-enum-item-name "GtkSizeGroupMode")))
+             (gtk-test:list-enum-item-name "GtkSizeGroupMode")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkSizeGroupMode")))
+             (gtk-test:list-enum-item-value "GtkSizeGroupMode")))
   ;; Check nick names
   (is (equal '("none" "horizontal" "vertical" "both")
-             (list-enum-item-nick "GtkSizeGroupMode")))
+             (gtk-test:list-enum-item-nick "GtkSizeGroupMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSizeGroupMode"
                              GTK-SIZE-GROUP-MODE
@@ -756,13 +765,13 @@
   (is (equal '("GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH"
                "GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT"
                "GTK_SIZE_REQUEST_CONSTANT_SIZE")
-             (list-enum-item-name "GtkSizeRequestMode")))
+             (gtk-test:list-enum-item-name "GtkSizeRequestMode")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkSizeRequestMode")))
+             (gtk-test:list-enum-item-value "GtkSizeRequestMode")))
   ;; Check nick names
   (is (equal '("height-for-width" "width-for-height" "constant-size")
-             (list-enum-item-nick "GtkSizeRequestMode")))
+             (gtk-test:list-enum-item-nick "GtkSizeRequestMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSizeRequestMode" GTK-SIZE-REQUEST-MODE
                                      (:EXPORT T
@@ -793,15 +802,15 @@
                "GTK_STATE_FLAG_LINK" "GTK_STATE_FLAG_VISITED"
                "GTK_STATE_FLAG_CHECKED" "GTK_STATE_FLAG_DROP_ACTIVE"
                "GTK_STATE_FLAG_FOCUS_VISIBLE" "GTK_STATE_FLAG_FOCUS_WITHIN")
-             (list-flags-item-name "GtkStateFlags")))
+             (gtk-test:list-flags-item-name "GtkStateFlags")))
   ;; Check values
   (is (equal '(0 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384)
-             (list-flags-item-value "GtkStateFlags")))
+             (gtk-test:list-flags-item-value "GtkStateFlags")))
   ;; Check nick names
   (is (equal '("normal" "active" "prelight" "selected" "insensitive"
                "inconsistent" "focused" "backdrop" "dir-ltr" "dir-rtl" "link"
                "visited" "checked" "drop-active" "focus-visible" "focus-within")
-             (list-flags-item-nick "GtkStateFlags")))
+             (gtk-test:list-flags-item-nick "GtkStateFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkStateFlags" GTK-STATE-FLAGS
                                       (:EXPORT T
@@ -842,14 +851,14 @@
                "GTK_BORDER_STYLE_OUTSET" "GTK_BORDER_STYLE_DOTTED"
                "GTK_BORDER_STYLE_DASHED" "GTK_BORDER_STYLE_DOUBLE"
                "GTK_BORDER_STYLE_GROOVE" "GTK_BORDER_STYLE_RIDGE")
-             (list-enum-item-name "GtkBorderStyle")))
+             (gtk-test:list-enum-item-name "GtkBorderStyle")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (list-enum-item-value "GtkBorderStyle")))
+             (gtk-test:list-enum-item-value "GtkBorderStyle")))
   ;; Check nick names
   (is (equal '("none" "hidden" "solid" "inset" "outset" "dotted" "dashed"
                "double" "groove" "ridge")
-             (list-enum-item-nick "GtkBorderStyle")))
+             (gtk-test:list-enum-item-nick "GtkBorderStyle")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkBorderStyle" GTK-BORDER-STYLE
                                      (:EXPORT T
@@ -885,14 +894,14 @@
                "GTK_INPUT_PURPOSE_EMAIL" "GTK_INPUT_PURPOSE_NAME"
                "GTK_INPUT_PURPOSE_PASSWORD" "GTK_INPUT_PURPOSE_PIN"
  "GTK_INPUT_PURPOSE_TERMINAL")
-             (list-enum-item-name "GtkInputPurpose")))
+             (gtk-test:list-enum-item-name "GtkInputPurpose")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10)
-             (list-enum-item-value "GtkInputPurpose")))
+             (gtk-test:list-enum-item-value "GtkInputPurpose")))
   ;; Check nick names
   (is (equal '("free-form" "alpha" "digits" "number" "phone" "url" "email"
                "name" "password" "pin" "terminal")
-             (list-enum-item-nick "GtkInputPurpose")))
+             (gtk-test:list-enum-item-nick "GtkInputPurpose")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkInputPurpose" GTK-INPUT-PURPOSE
                                      (:EXPORT T
@@ -931,15 +940,15 @@
                "GTK_INPUT_HINT_INHIBIT_OSK" "GTK_INPUT_HINT_VERTICAL_WRITING"
                "GTK_INPUT_HINT_EMOJI" "GTK_INPUT_HINT_NO_EMOJI"
                "GTK_INPUT_HINT_PRIVATE")
-             (list-flags-item-name "GtkInputHints")))
+             (gtk-test:list-flags-item-name "GtkInputHints")))
   ;; Check values
   (is (equal '(0 1 2 4 8 16 32 64 128 256 512 1024 2048)
-             (list-flags-item-value "GtkInputHints")))
+             (gtk-test:list-flags-item-value "GtkInputHints")))
   ;; Check nick names
   (is (equal '("none" "spellcheck" "no-spellcheck" "word-completion" "lowercase"
                "uppercase-chars" "uppercase-words" "uppercase-sentences"
                "inhibit-osk" "vertical-writing" "emoji" "no-emoji" "private")
-             (list-flags-item-nick "GtkInputHints")))
+             (gtk-test:list-flags-item-nick "GtkInputHints")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkInputHints" GTK-INPUT-HINTS
                                       (:EXPORT T
@@ -974,13 +983,13 @@
   ;; Check names
   (is (equal '("GTK_PICK_DEFAULT" "GTK_PICK_INSENSITIVE"
                "GTK_PICK_NON_TARGETABLE")
-             (list-flags-item-name "GtkPickFlags")))
+             (gtk-test:list-flags-item-name "GtkPickFlags")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-flags-item-value "GtkPickFlags")))
+             (gtk-test:list-flags-item-value "GtkPickFlags")))
   ;; Check nick names
   (is (equal '("default" "insensitive" "non-targetable")
-             (list-flags-item-nick "GtkPickFlags")))
+             (gtk-test:list-flags-item-nick "GtkPickFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkPickFlags" GTK-PICK-FLAGS
                                       (:EXPORT T
@@ -1006,13 +1015,13 @@
   ;; Check names
   (is (equal '("GTK_CONSTRAINT_RELATION_LE" "GTK_CONSTRAINT_RELATION_EQ"
                "GTK_CONSTRAINT_RELATION_GE")
-             (list-enum-item-name "GtkConstraintRelation")))
+             (gtk-test:list-enum-item-name "GtkConstraintRelation")))
   ;; Check values
   (is (equal '(-1 0 1)
-             (list-enum-item-value "GtkConstraintRelation")))
+             (gtk-test:list-enum-item-value "GtkConstraintRelation")))
   ;; Check nick names
   (is (equal '("le" "eq" "ge")
-             (list-enum-item-nick "GtkConstraintRelation")))
+             (gtk-test:list-enum-item-nick "GtkConstraintRelation")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkConstraintRelation"
                                      GTK-CONSTRAINT-RELATION
@@ -1041,13 +1050,13 @@
                "GTK_CONSTRAINT_STRENGTH_STRONG"
                "GTK_CONSTRAINT_STRENGTH_MEDIUM"
                "GTK_CONSTRAINT_STRENGTH_WEAK")
-             (list-enum-item-name "GtkConstraintStrength")))
+             (gtk-test:list-enum-item-name "GtkConstraintStrength")))
   ;; Check values
   (is (equal '(1001001000 1000000000 1000 1)
-             (list-enum-item-value "GtkConstraintStrength")))
+             (gtk-test:list-enum-item-value "GtkConstraintStrength")))
   ;; Check nick names
   (is (equal '("required" "strong" "medium" "weak")
-             (list-enum-item-nick "GtkConstraintStrength")))
+             (gtk-test:list-enum-item-nick "GtkConstraintStrength")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkConstraintStrength"
                                      GTK-CONSTRAINT-STRENGTH
@@ -1082,14 +1091,14 @@
                "GTK_CONSTRAINT_ATTRIBUTE_CENTER_X"
                "GTK_CONSTRAINT_ATTRIBUTE_CENTER_Y"
                "GTK_CONSTRAINT_ATTRIBUTE_BASELINE")
-             (list-enum-item-name "GtkConstraintAttribute")))
+             (gtk-test:list-enum-item-name "GtkConstraintAttribute")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11)
-             (list-enum-item-value "GtkConstraintAttribute")))
+             (gtk-test:list-enum-item-value "GtkConstraintAttribute")))
   ;; Check nick names
   (is (equal '("none" "left" "right" "top" "bottom" "start" "end" "width"
                "height" "center-x" "center-y" "baseline")
-             (list-enum-item-nick "GtkConstraintAttribute")))
+             (gtk-test:list-enum-item-nick "GtkConstraintAttribute")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkConstraintAttribute"
                                      GTK-CONSTRAINT-ATTRIBUTE
@@ -1129,13 +1138,13 @@
                "GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_METRIC"
                "GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_PRIORITY"
                "GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_RELATION")
-             (list-enum-item-name "GtkConstraintVflParserError")))
+             (gtk-test:list-enum-item-name "GtkConstraintVflParserError")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GtkConstraintVflParserError")))
+             (gtk-test:list-enum-item-value "GtkConstraintVflParserError")))
   ;; Check nick names
   (is (equal '("symbol" "attribute" "view" "metric" "priority" "relation")
-             (list-enum-item-nick "GtkConstraintVflParserError")))
+             (gtk-test:list-enum-item-nick "GtkConstraintVflParserError")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkConstraintVflParserError"
                                      GTK-CONSTRAINT-VFL-PARSER-ERROR
@@ -1164,13 +1173,13 @@
   ;; Check names
   (is (equal '("GTK_SYMBOLIC_COLOR_FOREGROUND" "GTK_SYMBOLIC_COLOR_ERROR"
                "GTK_SYMBOLIC_COLOR_WARNING" "GTK_SYMBOLIC_COLOR_SUCCESS")
-             (list-enum-item-name "GtkSymbolicColor")))
+             (gtk-test:list-enum-item-name "GtkSymbolicColor")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkSymbolicColor")))
+             (gtk-test:list-enum-item-value "GtkSymbolicColor")))
   ;; Check nick names
   (is (equal '("foreground" "error" "warning" "success")
-             (list-enum-item-nick "GtkSymbolicColor")))
+             (gtk-test:list-enum-item-nick "GtkSymbolicColor")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSymbolicColor" GTK-SYMBOLIC-COLOR
                                      (:EXPORT T
@@ -1240,13 +1249,13 @@
                "GTK_ACCESSIBLE_ROLE_APPLICATION" "GTK_ACCESSIBLE_ROLE_PARAGRAPH"
                "GTK_ACCESSIBLE_ROLE_BLOCK_QUOTE" "GTK_ACCESSIBLE_ROLE_ARTICLE"
                "GTK_ACCESSIBLE_ROLE_COMMENT" "GTK_ACCESSIBLE_ROLE_TERMINAL")
-             (list-enum-item-name "GtkAccessibleRole")))
+             (gtk-test:list-enum-item-name "GtkAccessibleRole")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
                47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
                69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84)
-             (list-enum-item-value "GtkAccessibleRole")))
+             (gtk-test:list-enum-item-value "GtkAccessibleRole")))
   ;; Check nick names
   (is (equal '("alert" "alert-dialog" "banner" "button" "caption" "cell"
                "checkbox" "column-header" "combo-box" "command" "composite"
@@ -1263,7 +1272,7 @@
                "toolbar" "tooltip" "tree" "tree-grid" "tree-item" "widget"
                "window" "toggle-button" "application" "paragraph" "block-quote"
                "article" "comment" "terminal")
-             (list-enum-item-nick "GtkAccessibleRole")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleRole")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRole"
                              GTK-ACCESSIBLE-ROLE
@@ -1378,14 +1387,14 @@
                "GTK_ACCESSIBLE_STATE_PRESSED"
                "GTK_ACCESSIBLE_STATE_SELECTED"
                "GTK_ACCESSIBLE_STATE_VISITED")
-             (list-enum-item-name "GtkAccessibleState")))
+             (gtk-test:list-enum-item-name "GtkAccessibleState")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8)
-             (list-enum-item-value "GtkAccessibleState")))
+             (gtk-test:list-enum-item-value "GtkAccessibleState")))
   ;; Check nick names
   (is (equal '("busy" "checked" "disabled" "expanded" "hidden" "invalid"
                "pressed" "selected" "visited")
-             (list-enum-item-nick "GtkAccessibleState")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleState")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleState"
                              GTK-ACCESSIBLE-STATE
@@ -1434,16 +1443,16 @@
                "GTK_ACCESSIBLE_PROPERTY_VALUE_MIN"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_NOW"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT")
-             (list-enum-item-name "GtkAccessibleProperty")))
+             (gtk-test:list-enum-item-name "GtkAccessibleProperty")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18)
-             (list-enum-item-value "GtkAccessibleProperty")))
+             (gtk-test:list-enum-item-value "GtkAccessibleProperty")))
   ;; Check nick names
   (is (equal '("autocomplete" "description" "has-popup" "key-shortcuts" "label"
                "level" "modal" "multi-line" "multi-selectable" "orientation"
                "placeholder" "read-only" "required" "role-description" "sort"
                "value-max" "value-min" "value-now" "value-text")
-             (list-enum-item-nick "GtkAccessibleProperty")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleProperty")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleProperty"
                              GTK-ACCESSIBLE-PROPERTY
@@ -1502,16 +1511,16 @@
                "GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT"
                "GTK_ACCESSIBLE_RELATION_ROW_SPAN"
                "GTK_ACCESSIBLE_RELATION_SET_SIZE")
-             (list-enum-item-name "GtkAccessibleRelation")))
+             (gtk-test:list-enum-item-name "GtkAccessibleRelation")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
-             (list-enum-item-value "GtkAccessibleRelation")))
+             (gtk-test:list-enum-item-value "GtkAccessibleRelation")))
   ;; Check nick names
   (is (equal '("active-descendant" "col-count" "col-index" "col-index-text"
                "col-span" "controls" "described-by" "details" "error-message"
                "flow-to" "labelled-by" "owns" "pos-in-set" "row-count"
                "row-index" "row-index-text" "row-span" "set-size")
-             (list-enum-item-nick "GtkAccessibleRelation")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleRelation")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRelation"
                              GTK-ACCESSIBLE-RELATION
@@ -1554,13 +1563,13 @@
   (is (equal '("GTK_ACCESSIBLE_TRISTATE_FALSE"
                "GTK_ACCESSIBLE_TRISTATE_TRUE"
                "GTK_ACCESSIBLE_TRISTATE_MIXED")
-             (list-enum-item-name "GtkAccessibleTristate")))
+             (gtk-test:list-enum-item-name "GtkAccessibleTristate")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkAccessibleTristate")))
+             (gtk-test:list-enum-item-value "GtkAccessibleTristate")))
   ;; Check nick names
   (is (equal '("false" "true" "mixed")
-             (list-enum-item-nick "GtkAccessibleTristate")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleTristate")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleTristate"
                              GTK-ACCESSIBLE-TRISTATE
@@ -1589,13 +1598,13 @@
                "GTK_ACCESSIBLE_INVALID_TRUE"
                "GTK_ACCESSIBLE_INVALID_GRAMMAR"
                "GTK_ACCESSIBLE_INVALID_SPELLING")
-             (list-enum-item-name "GtkAccessibleInvalidState")))
+             (gtk-test:list-enum-item-name "GtkAccessibleInvalidState")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkAccessibleInvalidState")))
+             (gtk-test:list-enum-item-value "GtkAccessibleInvalidState")))
   ;; Check nick names
   (is (equal '("false" "true" "grammar" "spelling")
-             (list-enum-item-nick "GtkAccessibleInvalidState")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleInvalidState")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleInvalidState"
                              GTK-ACCESSIBLE-INVALID-STATE
@@ -1625,13 +1634,13 @@
                "GTK_ACCESSIBLE_AUTOCOMPLETE_INLINE"
                "GTK_ACCESSIBLE_AUTOCOMPLETE_LIST"
                "GTK_ACCESSIBLE_AUTOCOMPLETE_BOTH")
-             (list-enum-item-name "GtkAccessibleAutocomplete")))
+             (gtk-test:list-enum-item-name "GtkAccessibleAutocomplete")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkAccessibleAutocomplete")))
+             (gtk-test:list-enum-item-value "GtkAccessibleAutocomplete")))
   ;; Check nick names
   (is (equal '("none" "inline" "list" "both")
-             (list-enum-item-nick "GtkAccessibleAutocomplete")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleAutocomplete")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleAutocomplete"
                              GTK-ACCESSIBLE-AUTOCOMPLETE
@@ -1661,13 +1670,13 @@
                "GTK_ACCESSIBLE_SORT_ASCENDING"
                "GTK_ACCESSIBLE_SORT_DESCENDING"
                "GTK_ACCESSIBLE_SORT_OTHER")
-             (list-enum-item-name "GtkAccessibleSort")))
+             (gtk-test:list-enum-item-name "GtkAccessibleSort")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkAccessibleSort")))
+             (gtk-test:list-enum-item-value "GtkAccessibleSort")))
   ;; Check nick names
   (is (equal '("none" "ascending" "descending" "other")
-             (list-enum-item-nick "GtkAccessibleSort")))
+             (gtk-test:list-enum-item-nick "GtkAccessibleSort")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleSort"
                              GTK-ACCESSIBLE-SORT
@@ -1679,4 +1688,4 @@
                              (:OTHER 3))
              (gobject:get-g-type-definition "GtkAccessibleSort"))))
 
-;;; 2024-5-25
+;;; 2024-7-3

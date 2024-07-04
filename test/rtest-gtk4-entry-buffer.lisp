@@ -25,16 +25,16 @@
           (g:type-parent "GtkEntryBuffer")))
   ;; Check children
   (is (equal '("GtkPasswordEntryBuffer")
-             (list-children "GtkEntryBuffer")))
+             (gtk-test:list-children "GtkEntryBuffer")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkEntryBuffer")))
+             (gtk-test:list-interfaces "GtkEntryBuffer")))
   ;; Check class properties
   (is (equal '("length" "max-length" "text")
-             (list-properties "GtkEntryBuffer")))
+             (gtk-test:list-properties "GtkEntryBuffer")))
   ;; Check signals
   (is (equal '("deleted-text" "inserted-text")
-             (list-signals "GtkEntryBuffer")))
+             (gtk-test:list-signals "GtkEntryBuffer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryBuffer" GTK-ENTRY-BUFFER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -156,4 +156,4 @@
           nil))
     (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
 
-;;; 2024-5-17
+;;; 2024-7-3

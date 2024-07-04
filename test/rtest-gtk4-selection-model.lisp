@@ -8,26 +8,26 @@
 ;;;     GtkSelectionModel
 
 (test gtk-selection-model-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkSelectionModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:selection-model
           (glib:symbol-for-gtype "GtkSelectionModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSelectionModel")
-          (g:gtype (cffi:foreign-funcall "gtk_selection_model_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_selection_model_get_type"
                                          :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GListModel" "GObject")
-             (list-interface-prerequisites "GtkSelectionModel")))
-  ;; Check the interface properties
+             (gtk-test:list-interface-prerequisites "GtkSelectionModel")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkSelectionModel")))
-  ;; Check the signals
+             (gtk-test:list-interface-properties "GtkSelectionModel")))
+  ;; Check signals
   (is (equal '("selection-changed")
-             (list-signals "GtkSelectionModel")))
-  ;; Get the interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSelectionModel" 
+             (gtk-test:list-signals "GtkSelectionModel")))
+  ;; Check interface definition
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSelectionModel"
                                           GTK-SELECTION-MODEL
                             (:EXPORT T :TYPE-INITIALIZER
                              "gtk_selection_model_get_type"))
@@ -38,10 +38,10 @@
 ;;;     selection-changed
 
 (test gtk-selection-model-signal-selection-changed
-  (let ((query (g:signal-query (g:signal-lookup "selection-changed" 
+  (let ((query (g:signal-query (g:signal-lookup "selection-changed"
                                                 "GtkSelectionModel"))))
     (is (string= "selection-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkSelectionModel" 
+    (is (string= "GtkSelectionModel"
                  (g:type-name (g:signal-query-owner-type query))))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
@@ -52,16 +52,16 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_selection_model_is_selected 
-;;;     gtk_selection_model_get_selection 
-;;;     gtk_selection_model_get_selection_in_range 
-;;;     gtk_selection_model_select_item 
-;;;     gtk_selection_model_unselect_item 
-;;;     gtk_selection_model_select_range 
-;;;     gtk_selection_model_unselect_range 
-;;;     gtk_selection_model_select_all 
-;;;     gtk_selection_model_unselect_all 
-;;;     gtk_selection_model_set_selection 
-;;;     gtk_selection_model_selection_changed 
+;;;     gtk_selection_model_is_selected
+;;;     gtk_selection_model_get_selection
+;;;     gtk_selection_model_get_selection_in_range
+;;;     gtk_selection_model_select_item
+;;;     gtk_selection_model_unselect_item
+;;;     gtk_selection_model_select_range
+;;;     gtk_selection_model_unselect_range
+;;;     gtk_selection_model_select_all
+;;;     gtk_selection_model_unselect_all
+;;;     gtk_selection_model_set_selection
+;;;     gtk_selection_model_selection_changed
 
-;;; --- 2023-8-10 --------------------------------------------------------------
+;;; 2024-7-4

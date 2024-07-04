@@ -21,13 +21,13 @@
   (is (equal '("GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE"
                "GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED"
                "GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE")
-             (list-enum-item-name "GtkAccessiblePlatformState")))
+             (gtk-test:list-enum-item-name "GtkAccessiblePlatformState")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkAccessiblePlatformState")))
+             (gtk-test:list-enum-item-value "GtkAccessiblePlatformState")))
   ;; Check nick names
   (is (equal '("focusable" "focused" "active")
-             (list-enum-item-nick "GtkAccessiblePlatformState")))
+             (gtk-test:list-enum-item-nick "GtkAccessiblePlatformState")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessiblePlatformState"
                                      GTK-ACCESSIBLE-PLATFORM-STATE
@@ -42,24 +42,24 @@
 ;;;     GtkAccessible
 
 (test gtk-accessible-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkAccessible"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:accessible
           (glib:symbol-for-gtype "GtkAccessible")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAccessible")
           (g:gtype (cffi:foreign-funcall "gtk_accessible_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkAccessible")))
-  ;; Check the interface properties.
+             (gtk-test:list-interface-prerequisites "GtkAccessible")))
+  ;; Check interface properties
   (is (equal '("accessible-role")
-             (list-interface-properties "GtkAccessible")))
-  ;; Check the interface signals
+             (gtk-test:list-interface-properties "GtkAccessible")))
+  ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkAccessible")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkAccessible")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessible"
                                   GTK-ACCESSIBLE
                                   (:EXPORT T

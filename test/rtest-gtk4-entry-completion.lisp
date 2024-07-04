@@ -22,18 +22,18 @@
           (g:type-parent "GtkEntryCompletion")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkEntryCompletion")))
+             (gtk-test:list-children "GtkEntryCompletion")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (list-interfaces "GtkEntryCompletion")))
+             (gtk-test:list-interfaces "GtkEntryCompletion")))
   ;; Check properties
   (is (equal '("cell-area" "inline-completion" "inline-selection"
                "minimum-key-length" "model" "popup-completion" "popup-set-width"
                "popup-single-match" "text-column")
-             (list-properties "GtkEntryCompletion")))
+             (gtk-test:list-properties "GtkEntryCompletion")))
   ;; Check signals
   (is (equal '("cursor-on-match" "insert-prefix" "match-selected" "no-matches")
-             (list-signals "GtkEntryCompletion")))
+             (gtk-test:list-signals "GtkEntryCompletion")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion"
                                              GTK-ENTRY-COMPLETION

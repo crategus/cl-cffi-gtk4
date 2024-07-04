@@ -21,16 +21,16 @@
           (g:type-parent "GtkTreeModelSort")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeModelSort")))
+             (gtk-test:list-children "GtkTreeModelSort")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeSortable" "GtkTreeDragSource")
-             (list-interfaces "GtkTreeModelSort")))
+             (gtk-test:list-interfaces "GtkTreeModelSort")))
   ;; Check properties
   (is (equal '("model")
-             (list-properties "GtkTreeModelSort")))
+             (gtk-test:list-properties "GtkTreeModelSort")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkTreeModelSort")))
+             (gtk-test:list-signals "GtkTreeModelSort")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeModelSort"
                                              GTK-TREE-MODEL-SORT

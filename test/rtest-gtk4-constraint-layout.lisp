@@ -24,16 +24,16 @@
           (g:type-parent "GtkConstraintLayoutChild")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkConstraintLayoutChild")))
+             (gtk-test:list-children "GtkConstraintLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkConstraintLayoutChild")))
+             (gtk-test:list-interfaces "GtkConstraintLayoutChild")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkConstraintLayoutChild")))
+             (gtk-test:list-properties "GtkConstraintLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkConstraintLayoutChild")))
+             (gtk-test:list-signals "GtkConstraintLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraintLayoutChild"
                                GTK-CONSTRAINT-LAYOUT-CHILD
@@ -62,16 +62,16 @@
           (g:type-parent "GtkConstraintLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkConstraintLayout")))
+             (gtk-test:list-children "GtkConstraintLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GObject")))
+             (gtk-test:list-interfaces "GObject")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkConstraintLayout")))
+             (gtk-test:list-properties "GtkConstraintLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkConstraintLayout")))
+             (gtk-test:list-signals "GtkConstraintLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraintLayout" GTK-CONSTRAINT-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

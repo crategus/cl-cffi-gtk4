@@ -22,18 +22,18 @@
           (g:type-parent "GtkFontChooserWidget")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFontChooserWidget")))
+             (gtk-test:list-children "GtkFontChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFontChooser")
-             (list-interfaces "GtkFontChooserWidget")))
+             (gtk-test:list-interfaces "GtkFontChooserWidget")))
   ;; Check properties
   (is (equal '("font" "font-desc" "font-features" "language" "level"
                "preview-text" "show-preview-entry" "tweak-action")
-             (list-properties "GtkFontChooserWidget")))
+             (gtk-test:list-properties "GtkFontChooserWidget")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFontChooserWidget")))
+             (gtk-test:list-signals "GtkFontChooserWidget")))
   ;; Check CSS name
   (is (string= "fontchooser"
                (gtk:widget-class-css-name "GtkFontChooserWidget")))

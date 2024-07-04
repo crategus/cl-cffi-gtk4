@@ -21,17 +21,17 @@
           (g:type-parent "GtkCellArea")))
   ;; Check children
   (is (equal '("GtkCellAreaBox")
-             (list-children "GtkCellArea")))
+             (gtk-test:list-children "GtkCellArea")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (list-interfaces "GtkCellArea")))
+             (gtk-test:list-interfaces "GtkCellArea")))
   ;; Check class properties
   (is (equal '("edit-widget" "edited-cell" "focus-cell")
-             (list-properties "GtkCellArea")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkCellArea")))
+  ;; Check signals
   (is (equal '("add-editable" "apply-attributes" "focus-changed"
                "remove-editable")
-             (list-signals "GtkCellArea")))
+             (gtk-test:list-signals "GtkCellArea")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES

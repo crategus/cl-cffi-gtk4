@@ -21,11 +21,11 @@
           (g:type-parent "GtkText")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkText")))
+             (gtk-test:list-children "GtkText")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkAccessibleText")
-             (list-interfaces "GtkText")))
+             (gtk-test:list-interfaces "GtkText")))
   ;; Check class properties
   (is (equal '("activates-default" "attributes" "buffer" "cursor-position"
                "editable" "enable-emoji-completion" "enable-undo" "extra-menu"
@@ -34,13 +34,13 @@
                "overwrite-mode" "placeholder-text" "propagate-text-width"
                "scroll-offset" "selection-bound" "tabs" "text"
                "truncate-multiline" "visibility" "width-chars" "xalign")
-             (list-properties "GtkText")))
+             (gtk-test:list-properties "GtkText")))
   ;; Check signals
   (is (equal '("activate" "backspace" "copy-clipboard" "cut-clipboard"
                "delete-from-cursor" "insert-at-cursor" "insert-emoji"
                "move-cursor" "paste-clipboard" "preedit-changed"
                "toggle-overwrite")
-             (list-signals "GtkText")))
+             (gtk-test:list-signals "GtkText")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkText" GTK-TEXT
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -385,4 +385,4 @@
       (is (=  0.0 (graphene:rect-width weak)))
       (is (= 17.0 (graphene:rect-height weak))))))
 
-;;; 2024-5-26
+;;; 2024-7-3

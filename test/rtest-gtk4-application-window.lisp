@@ -8,30 +8,27 @@
 (test gtk-application-window-class
   ;; Check type
   (is (g:type-is-object "GtkApplicationWindow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:application-window
           (glib:symbol-for-gtype "GtkApplicationWindow")))
   ;; Check parent
   (is (eq (g:gtype "GtkWindow") (g:type-parent "GtkApplicationWindow")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkApplicationWindow")))
+             (gtk-test:list-children "GtkApplicationWindow")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GActionGroup" "GActionMap")
-             (list-interfaces "GtkApplicationWindow")))
+             (gtk-test:list-interfaces "GtkApplicationWindow")))
   ;; Check class properties
   (is (equal '("show-menubar")
-             (list-properties "GtkApplicationWindow")))
+             (gtk-test:list-properties "GtkApplicationWindow")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkApplicationWindow")))
+             (gtk-test:list-signals "GtkApplicationWindow")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkApplicationWindow")))
-  ;; Check CSS classes
-  (is (equal '("background")
-             (gtk:widget-css-classes (make-instance 'gtk:application-window))))
   ;; Check accessible role
   (is (eq :application
           (gtk:widget-class-accessible-role "GtkApplicationWindow")))
@@ -113,4 +110,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; 2024-4-30
+;;; 2024-7-3

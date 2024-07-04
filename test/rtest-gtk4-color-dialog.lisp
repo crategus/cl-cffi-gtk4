@@ -8,30 +8,30 @@
 ;;;     GtkColorDialog
 
 (test gtk-color-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColorDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:color-dialog
           (glib:symbol-for-gtype "GtkColorDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColorDialog")
           (g:gtype (cffi:foreign-funcall "gtk_color_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkColorDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkColorDialog")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkColorDialog")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkColorDialog")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkColorDialog")))
+  ;; Check properties
   (is (equal '("modal" "title" "with-alpha")
-             (list-properties "GtkColorDialog")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkColorDialog")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkColorDialog")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkColorDialog")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorDialog" GTK-COLOR-DIALOG
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_color_dialog_get_type")
@@ -65,4 +65,4 @@
 ;;;     gtk_color_dialog_choose_rgba
 ;;;     gtk_color_dialog_choose_rgba_finish
 
-;;; --- 2023-7-28 --------------------------------------------------------------
+;;; 2024-7-4

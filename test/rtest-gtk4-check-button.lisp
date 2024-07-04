@@ -21,18 +21,18 @@
           (g:type-parent "GtkCheckButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCheckButton")))
+             (gtk-test:list-children "GtkCheckButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkCheckButton")))
+             (gtk-test:list-interfaces "GtkCheckButton")))
   ;; Check properties
   (is (equal '("action-name" "action-target" "active" "child" "group"
                "inconsistent" "label" "use-underline")
-             (list-properties "GtkCheckButton")))
+             (gtk-test:list-properties "GtkCheckButton")))
   ;; Check signals
   (is (equal '("activate" "toggled")
-             (list-signals "GtkCheckButton")))
+             (gtk-test:list-signals "GtkCheckButton")))
   ;; Check CSS information
   (is (string= "checkbutton"
                (gtk:widget-class-css-name "GtkCheckButton")))

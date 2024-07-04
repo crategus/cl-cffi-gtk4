@@ -21,14 +21,14 @@
   (is (equal '("GTK_ICON_VIEW_NO_DROP" "GTK_ICON_VIEW_DROP_INTO"
                "GTK_ICON_VIEW_DROP_LEFT" "GTK_ICON_VIEW_DROP_RIGHT"
                "GTK_ICON_VIEW_DROP_ABOVE" "GTK_ICON_VIEW_DROP_BELOW")
-             (list-enum-item-name "GtkIconViewDropPosition")))
+             (gtk-test:list-enum-item-name "GtkIconViewDropPosition")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GtkIconViewDropPosition")))
+             (gtk-test:list-enum-item-value "GtkIconViewDropPosition")))
   ;; Check nick names
   (is (equal '("no-drop" "drop-into" "drop-left" "drop-right" "drop-above"
                "drop-below")
-             (list-enum-item-nick "GtkIconViewDropPosition")))
+             (gtk-test:list-enum-item-nick "GtkIconViewDropPosition")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkIconViewDropPosition"
                                      GTK-ICON-VIEW-DROP-POSITION
@@ -59,23 +59,23 @@
           (g:type-parent "GtkIconView")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkIconView")))
+             (gtk-test:list-children "GtkIconView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkScrollable")
-             (list-interfaces "GtkIconView")))
+             (gtk-test:list-interfaces "GtkIconView")))
   ;; Check properties
   (is (equal '("activate-on-single-click" "cell-area" "column-spacing" "columns"
                "hadjustment" "hscroll-policy" "item-orientation" "item-padding"
                "item-width" "margin" "markup-column" "model" "pixbuf-column"
                "reorderable" "row-spacing" "selection-mode" "spacing"
                "text-column" "tooltip-column" "vadjustment" "vscroll-policy")
-             (list-properties "GtkIconView")))
+             (gtk-test:list-properties "GtkIconView")))
   ;; Check signals
   (is (equal '("activate-cursor-item" "item-activated" "move-cursor"
                "select-all" "select-cursor-item" "selection-changed"
                "toggle-cursor-item" "unselect-all")
-             (list-signals "GtkIconView")))
+             (gtk-test:list-signals "GtkIconView")))
   ;; Check CSS name
   (is (string= "iconview"
                (gtk:widget-class-css-name "GtkIconView")))

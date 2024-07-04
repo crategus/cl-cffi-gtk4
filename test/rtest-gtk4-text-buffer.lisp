@@ -21,20 +21,20 @@
           (g:type-parent "GtkTextBuffer")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTextBuffer")))
+             (gtk-test:list-children "GtkTextBuffer")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkTextBuffer")))
+             (gtk-test:list-interfaces "GtkTextBuffer")))
   ;; Check properties
   (is (equal '("can-redo" "can-undo" "cursor-position" "enable-undo"
                "has-selection" "tag-table" "text")
-             (list-properties "GtkTextBuffer")))
+             (gtk-test:list-properties "GtkTextBuffer")))
   ;; Check signals
   (is (equal '("apply-tag" "begin-user-action" "changed" "delete-range"
                "end-user-action" "insert-child-anchor" "insert-paintable"
                "insert-text" "mark-deleted" "mark-set" "modified-changed"
                "paste-done" "redo" "remove-tag" "undo")
-             (list-signals "GtkTextBuffer")))
+             (gtk-test:list-signals "GtkTextBuffer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextBuffer" GTK-TEXT-BUFFER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -247,24 +247,170 @@
                                             (gtk:text-buffer-end-iter buffer)
                                             nil)))))
 
-;;;     gtk_text_buffer_insert_child_anchor
 ;;;     gtk_text_buffer_create_child_anchor
+;;;     gtk_text_buffer_get_iter_at_child_anchor
+
+(test gtk-text-buffer-create-child-anchor
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the text buffer."))
+         (iter (gtk:text-buffer-iter-at-offset buffer 5))
+         anchor iter1)
+
+    (setf anchor (gtk:text-buffer-create-child-anchor buffer iter))
+    (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
+
+    (is (eq #\t (gtk:text-iter-char iter)))
+    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))))
+
+;;;     gtk_text_buffer_insert_child_anchor
+
+(test gtk-text-buffer-insert-child-anchor
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the text buffer."))
+         (iter (gtk:text-buffer-iter-at-offset buffer 5))
+         anchor iter1)
+
+    (is (typep (setf anchor (gtk:text-child-anchor-new)) 'gtk:text-child-anchor))
+    (is (typep (gtk:text-buffer-insert-child-anchor buffer
+                                                    iter
+                                                    anchor)
+               'gtk:text-child-anchor))
+    (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
+
+    (is (eq #\t (gtk:text-iter-char iter)))
+    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))))
+
 ;;;     gtk_text_buffer_create_mark
 ;;;     gtk_text_buffer_move_mark
 ;;;     gtk_text_buffer_move_mark_by_name
+
+(test gtk-text-buffer-create/move-mark
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                               :text "Some text for the text buffer."))
+         (iter (gtk:text-buffer-iter-at-offset buffer 5))
+         mark)
+
+    (is (typep (setf mark
+                     (gtk:text-buffer-create-mark buffer "Mark" iter))
+               'gtk:text-mark))
+    (is (eq #\t (gtk:text-iter-char iter)))
+    (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer "Mark"))))
+
+    (is-true (gtk:text-iter-move iter))
+    (is-false (gtk:text-buffer-move-mark buffer "Mark" iter))
+    (is (eq #\e (gtk:text-iter-char iter)))
+    (is (eq #\e (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer "Mark"))))
+
+    (is-true (gtk:text-iter-move iter))
+    (is-false (gtk:text-buffer-move-mark buffer mark iter))
+    (is (eq #\x (gtk:text-iter-char iter)))
+    (is (eq #\x (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer "Mark"))))))
+
 ;;;     gtk_text_buffer_add_mark
 ;;;     gtk_text_buffer_delete_mark
 ;;;     gtk_text_buffer_delete_mark_by_name
 ;;;     gtk_text_buffer_get_mark
+
+(test gtk-text-buffer-add/delete-mark
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                               :text "Some text for the text buffer."))
+         (iter (gtk:text-buffer-iter-at-offset buffer 5))
+         (mark (gtk:text-mark-new "Mark" nil)))
+
+    (is-false (gtk:text-buffer-add-mark buffer mark iter))
+    (is (eq mark (gtk:text-buffer-mark buffer "Mark")))
+    (is-false (gtk:text-buffer-delete-mark buffer mark))
+    (is-false (gtk:text-buffer-mark buffer "Mark"))
+
+    (is-false (gtk:text-buffer-add-mark buffer mark iter))
+    (is (eq mark (gtk:text-buffer-mark buffer "Mark")))
+    (is-false (gtk:text-buffer-delete-mark buffer "Mark"))
+    (is-false (gtk:text-buffer-mark buffer "Mark"))))
+
 ;;;     gtk_text_buffer_get_insert
 ;;;     gtk_text_buffer_get_selection_bound
 ;;;     gtk_text_buffer_place_cursor
+
+(test gtk-text-buffer-insert/selection-bound
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the text buffer."))
+         (iter (gtk:text-buffer-iter-at-offset buffer 5))
+         (insert (gtk:text-buffer-mark buffer "insert"))
+         (selection (gtk:text-buffer-mark buffer "selection_bound")))
+
+    (is (typep (gtk:text-buffer-get-insert buffer) 'gtk:text-mark))
+    (is (typep (gtk:text-buffer-selection-bound buffer) 'gtk:text-mark))
+
+    (is (eq insert (gtk:text-buffer-get-insert buffer)))
+    (is (eq selection (gtk:text-buffer-selection-bound buffer)))
+
+    (is-false (gtk:text-buffer-place-cursor buffer iter))
+    (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer insert))))
+    (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer selection))))))
+
 ;;;     gtk_text_buffer_select_range
+
+(test gtk-text-buffer-select-range
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the buffer."))
+         (start (gtk:text-buffer-iter-at-offset buffer 5))
+         (end (gtk:text-buffer-iter-at-offset buffer 10)))
+    (is-false (gtk:text-buffer-select-range buffer start end))
+    (is-true (gtk:text-buffer-delete-selection buffer))
+    (is (string= "Some for the buffer." (gtk:text-buffer-text buffer)))))
+
 ;;;     gtk_text_buffer_apply_tag
-;;;     gtk_text_buffer_remove_tag
 ;;;     gtk_text_buffer_apply_tag_by_name
+;;;     gtk_text_buffer_remove_tag
 ;;;     gtk_text_buffer_remove_tag_by_name
+
+(test gtk-text-buffer-apply/remove-tag
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the buffer."))
+         (start (gtk:text-buffer-iter-at-offset buffer 5))
+         (end (gtk:text-buffer-iter-at-offset buffer 9))
+         (tag1 (gtk:text-tag-new "tag1" :weight 100))
+         (tag2 (gtk:text-tag-new "tag2" :weight 200)))
+
+    (is-true (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag1))
+    (is-true (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag2))
+    (is (= 2 (gtk:text-tag-table-size (gtk:text-buffer-tag-table buffer))))
+
+    (is-false (gtk:text-buffer-apply-tag buffer tag1 start end))
+    (is-false (gtk:text-buffer-apply-tag buffer "tag2" start end))
+
+    (is (member tag1 (gtk:text-iter-tags start) :test #'eq))
+    (is (member tag2 (gtk:text-iter-tags start) :test #'eq))
+
+    (is-false (gtk:text-buffer-remove-tag buffer "tag1" start end))
+    (is-false (member tag1 (gtk:text-iter-tags start) :test #'eq))
+    (is-false (gtk:text-buffer-remove-tag buffer tag2 start end))
+    (is-false (member tag2 (gtk:text-iter-tags start) :test #'eq))))
+
 ;;;     gtk_text_buffer_remove_all_tags
+
+(test gtk-text-buffer-remove-all-tags
+  (let* ((buffer (make-instance 'gtk:text-buffer
+                                :text "Some text for the buffer."))
+         (start (gtk:text-buffer-iter-at-offset buffer 5))
+         (end (gtk:text-buffer-iter-at-offset buffer 9))
+         (tag1 (gtk:text-tag-new "tag1" :weight 100))
+         (tag2 (gtk:text-tag-new "tag2" :weight 200)))
+
+    (is-true (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag1))
+    (is-true (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag2))
+    (is (= 2 (gtk:text-tag-table-size (gtk:text-buffer-tag-table buffer))))
+
+    (is-false (gtk:text-buffer-apply-tag buffer tag1 start end))
+    (is-false (gtk:text-buffer-apply-tag buffer "tag2" start end))
+
+    (is (member tag1 (gtk:text-iter-tags start) :test #'eq))
+    (is (member tag2 (gtk:text-iter-tags start) :test #'eq))
+
+    (is-false (gtk:text-buffer-remove-all-tags buffer start end))
+
+    (is-false (member tag1 (gtk:text-iter-tags start) :test #'eq))
+    (is-false (member tag2 (gtk:text-iter-tags start) :test #'eq))))
 
 ;;;     gtk_text_buffer_create_tag
 
@@ -305,20 +451,78 @@
 
 ;;;     gtk_text_buffer_get_iter_at_offset
 ;;;     gtk_text_buffer_get_iter_at_line
+
+(test gtk-text-buffer-iter-at-offset/line
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*))
+        iter)
+
+    (setf iter (gtk:text-buffer-iter-at-offset buffer 54))
+    (is (eq #\G (gtk:text-iter-char iter)))
+
+    (setf iter (gtk:text-buffer-iter-at-line buffer 1))
+    (is (eq #\G (gtk:text-iter-char iter)))))
+
 ;;;     gtk_text_buffer_get_iter_at_line_index
+
+(test gtk-text-buffer-iter-at-line-index
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*))
+        iter)
+    (is (typep (setf iter (gtk:text-buffer-iter-at-line-index buffer 3 5))
+               'gtk:text-iter))
+    (is (eq #\s (gtk:text-iter-char iter)))))
+
 ;;;     gtk_text_buffer_get_iter_at_mark
-;;;     gtk_text_buffer_get_iter_at_child_anchor
+
+(test gtk-text-buffer-get-iter-at-mark
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*)))
+    (is (typep (gtk:text-buffer-iter-at-mark buffer "insert") 'gtk:text-iter))
+    (is (typep (gtk:text-buffer-iter-at-mark buffer "selection_bound")
+               'gtk:text-iter))))
+
 ;;;     gtk_text_buffer_get_start_iter
 ;;;     gtk_text_buffer_get_end_iter
+
+(test gtk-text-buffer-start/end-iter
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*))
+        start end)
+    (is (typep (setf start (gtk:text-buffer-start-iter buffer)) 'gtk:text-iter))
+    (is-true (gtk:text-iter-is-start start))
+    (is (typep (setf end (gtk:text-buffer-end-iter buffer)) 'gtk:text-iter))
+    (is-true (gtk:text-iter-is-end end))))
+
 ;;;     gtk_text_buffer_get_bounds
+
+(test gtk-text-buffer-bounds
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*)))
+    (multiple-value-bind (start end)
+        (gtk:text-buffer-bounds buffer)
+      (is-true (gtk:text-iter-is-start start))
+      (is-true (gtk:text-iter-is-end end)))))
+
 ;;;     gtk_text_buffer_get_modified
 ;;;     gtk_text_buffer_set_modified
+
+(test gtk-text-buffer-bounds
+  (let ((buffer (make-instance 'gtk:text-buffer
+                               :text *some-lines*)))
+    (is-true (gtk:text-buffer-modified buffer))
+    (is-false (setf (gtk:text-buffer-modified buffer) nil))
+    (is-false (gtk:text-buffer-modified buffer))))
+
 ;;;     gtk_text_buffer_delete_selection
+
 ;;;     gtk_text_buffer_paste_clipboard
 ;;;     gtk_text_buffer_copy_clipboard
 ;;;     gtk_text_buffer_cut_clipboard
+
 ;;;     gtk_text_buffer_get_selection_bounds
 ;;;     gtk_text_buffer_get_selection_content
+
 ;;;     gtk_text_buffer_begin_user_action
 ;;;     gtk_text_buffer_end_user_action
 ;;;     gtk_text_buffer_add_selection_clipboard
@@ -330,4 +534,4 @@
 ;;;     gtk_text_buffer_begin_irreversible_action
 ;;;     gtk_text_buffer_end_irreversible_action
 
-;;; 2024-5-31
+;;; 2024-7-3

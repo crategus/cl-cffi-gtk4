@@ -21,16 +21,16 @@
           (g:type-parent "GtkFileLauncher")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFileLauncher")))
+             (gtk-test:list-children "GtkFileLauncher")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkFileLauncher")))
+             (gtk-test:list-interfaces "GtkFileLauncher")))
   ;; Check properties
   (is (equal '("always-ask" "file" "writable")
-             (list-properties "GtkFileLauncher")))
+             (gtk-test:list-properties "GtkFileLauncher")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFileLauncher")))
+             (gtk-test:list-signals "GtkFileLauncher")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileLauncher" GTK-FILE-LAUNCHER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

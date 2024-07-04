@@ -8,32 +8,32 @@
 ;;;     GtkColumnViewRow
 
 (test gtk-column-view-row-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColumnViewRow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:column-view-row
           (glib:symbol-for-gtype "GtkColumnViewRow")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColumnViewRow")
           (g:gtype (cffi:foreign-funcall "gtk_column_view_row_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkColumnViewRow")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkColumnViewRow")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkColumnViewRow")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkColumnViewRow")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkColumnViewRow")))
+  ;; Check properties
   (is (equal '("accessible-description" "accessible-label" "activatable"
                "focusable" "item" "position" "selectable" "selected")
-             (list-properties "GtkColumnViewRow")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkColumnViewRow")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkColumnViewRow")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkColumnViewRow")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewRow"
                                              GTK-COLUMN-VIEW-ROW
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -81,5 +81,5 @@
     (is-true (gtk:column-view-row-selectable row))
     (is-false (gtk:column-view-row-selected row))))
 
-;;; --- 2023-11-27 -------------------------------------------------------------
+;;; 2024-7-4
 

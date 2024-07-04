@@ -8,31 +8,31 @@
 ;;;     GtkSliceListModel
 
 (test gtk-slice-list-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSliceListModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:slice-list-model
           (glib:symbol-for-gtype "GtkSliceListModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSliceListModel")
           (g:gtype (cffi:foreign-funcall "gtk_slice_list_model_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSliceListModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSliceListModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSliceListModel")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (list-interfaces "GtkSliceListModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSliceListModel")))
+  ;; Check properties
   (is (equal '("item-type" "model" "n-items" "offset" "size")
-             (list-properties "GtkSliceListModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSliceListModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSliceListModel")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSliceListModel")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSliceListModel"
                                              GTK-SLICE-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -69,4 +69,4 @@
 ;;;     gtk_slice_list_model_set_size
 ;;;     gtk_slice_list_model_get_size
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

@@ -16,13 +16,13 @@
   ;; Check names
   (is (equal '("GTK_APPLICATION_INHIBIT_LOGOUT" "GTK_APPLICATION_INHIBIT_SWITCH"
                "GTK_APPLICATION_INHIBIT_SUSPEND" "GTK_APPLICATION_INHIBIT_IDLE")
-             (list-flags-item-name "GtkApplicationInhibitFlags")))
+             (gtk-test:list-flags-item-name "GtkApplicationInhibitFlags")))
   ;; Check values
   (is (equal '(1 2 4 8)
-             (list-flags-item-value "GtkApplicationInhibitFlags")))
+             (gtk-test:list-flags-item-value "GtkApplicationInhibitFlags")))
   ;; Check nick names
   (is (equal '("logout" "switch" "suspend" "idle")
-             (list-flags-item-nick "GtkApplicationInhibitFlags")))
+             (gtk-test:list-flags-item-nick "GtkApplicationInhibitFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
                               GTK-APPLICATION-INHIBIT-FLAGS
@@ -50,19 +50,19 @@
   (is (eq (g:gtype "GApplication") (g:type-parent "GtkApplication")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkApplication")))
+             (gtk-test:list-children "GtkApplication")))
   ;; Check interfaces
   (is (equal '("GActionGroup" "GActionMap")
-             (list-interfaces "GtkApplication")))
+             (gtk-test:list-interfaces "GtkApplication")))
   ;; Check properties
   (is (equal '("active-window" "menubar" "register-session"
                "screensaver-active")
-             (list-properties "GtkApplication")))
+             (gtk-test:list-properties "GtkApplication")))
   (is (equal '("query-end" "window-added" "window-removed")
-             (list-signals "GtkApplication")))
+             (gtk-test:list-signals "GtkApplication")))
   ;; Check signals
   (is (equal '("query-end" "window-added" "window-removed")
-             (list-signals "GtkApplication")))
+             (gtk-test:list-signals "GtkApplication")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplication" GTK-APPLICATION
                        (:SUPERCLASS G-APPLICATION :EXPORT T :INTERFACES

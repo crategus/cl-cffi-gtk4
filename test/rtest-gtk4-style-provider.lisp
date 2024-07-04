@@ -21,24 +21,24 @@
 ;;;     GtkStyleProvider
 
 (test gtk-style-provider-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkStyleProvider"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:style-provider
           (glib:symbol-for-gtype "GtkStyleProvider")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStyleProvider")
           (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkStyleProvider")))
-  ;; Get the the interface properties
+             (gtk-test:list-interface-prerequisites "GtkStyleProvider")))
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkStyleProvider")))
-  ;; Check the interface signals
+             (gtk-test:list-interface-properties "GtkStyleProvider")))
+  ;; Check interface signals
   (is (equal '("gtk-private-changed")
-             (list-signals "GtkStyleProvider")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkStyleProvider")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkStyleProvider" GTK-STYLE-PROVIDER
                     (:EXPORT T :TYPE-INITIALIZER "gtk_style_provider_get_type"))
              (gobject:get-g-type-definition "GtkStyleProvider"))))

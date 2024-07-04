@@ -6,21 +6,21 @@
 ;;; --- GtkActionable ----------------------------------------------------------
 
 (test gtk-actionable-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkActionable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:actionable
           (glib:symbol-for-gtype "GtkActionable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkActionable")
           (g:gtype (cffi:foreign-funcall "gtk_actionable_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (list-interface-prerequisites "GtkActionable")))
-  ;; Get the names of the interface properties.
+             (gtk-test:list-interface-prerequisites "GtkActionable")))
+  ;; Check interface properties
   (is (equal '("action-name" "action-target")
-             (list-interface-properties "GtkActionable")))
-  ;; Get the interface definition
+             (gtk-test:list-interface-properties "GtkActionable")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkActionable" GTK-ACTIONABLE
                        (:EXPORT T
                         :TYPE-INITIALIZER "gtk_actionable_get_type")
@@ -61,4 +61,4 @@
 
 ;;; See gtk-actionable-properties for an example
 
-;;; --- 2023-9-2 ---------------------------------------------------------------
+;;; 2024-7-4

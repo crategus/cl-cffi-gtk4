@@ -38,13 +38,13 @@
   (is (equal '("GTK_PAGE_ORIENTATION_PORTRAIT" "GTK_PAGE_ORIENTATION_LANDSCAPE"
                "GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT"
                "GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE")
-             (list-enum-item-name "GtkPageOrientation")))
+             (gtk-test:list-enum-item-name "GtkPageOrientation")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPageOrientation")))
+             (gtk-test:list-enum-item-value "GtkPageOrientation")))
   ;; Check the nick names
   (is (equal '("portrait" "landscape" "reverse-portrait" "reverse-landscape")
-             (list-enum-item-nick "GtkPageOrientation")))
+             (gtk-test:list-enum-item-nick "GtkPageOrientation")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPageOrientation" GTK-PAGE-ORIENTATION
                                      (:EXPORT T
@@ -70,13 +70,13 @@
   ;; Check the names
   (is (equal '("GTK_PRINT_DUPLEX_SIMPLEX" "GTK_PRINT_DUPLEX_HORIZONTAL"
                "GTK_PRINT_DUPLEX_VERTICAL")
-             (list-enum-item-name "GtkPrintDuplex")))
+             (gtk-test:list-enum-item-name "GtkPrintDuplex")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkPrintDuplex")))
+             (gtk-test:list-enum-item-value "GtkPrintDuplex")))
   ;; Check the nick names
   (is (equal '("simplex" "horizontal" "vertical")
-             (list-enum-item-nick "GtkPrintDuplex")))
+             (gtk-test:list-enum-item-nick "GtkPrintDuplex")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintDuplex" GTK-PRINT-DUPLEX
                                      (:EXPORT T
@@ -101,13 +101,13 @@
   ;; Check the names
   (is (equal '("GTK_PRINT_QUALITY_LOW" "GTK_PRINT_QUALITY_NORMAL"
                "GTK_PRINT_QUALITY_HIGH" "GTK_PRINT_QUALITY_DRAFT")
-             (list-enum-item-name "GtkPrintQuality")))
+             (gtk-test:list-enum-item-name "GtkPrintQuality")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPrintQuality")))
+             (gtk-test:list-enum-item-value "GtkPrintQuality")))
   ;; Check the nick names
   (is (equal '("low" "normal" "high" "draft")
-             (list-enum-item-nick "GtkPrintQuality")))
+             (gtk-test:list-enum-item-nick "GtkPrintQuality")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintQuality" GTK-PRINT-QUALITY
                                      (:EXPORT T
@@ -139,13 +139,13 @@
                "GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT"
                "GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT"
                "GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT")
-             (list-enum-item-name "GtkNumberUpLayout")))
+             (gtk-test:list-enum-item-name "GtkNumberUpLayout")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (list-enum-item-value "GtkNumberUpLayout")))
+             (gtk-test:list-enum-item-value "GtkNumberUpLayout")))
   ;; Check the nick names
   (is (equal '("lrtb" "lrbt" "rltb" "rlbt" "tblr" "tbrl" "btlr" "btrl")
-             (list-enum-item-nick "GtkNumberUpLayout")))
+             (gtk-test:list-enum-item-nick "GtkNumberUpLayout")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkNumberUpLayout" GTK-NUMBER-UP-LAYOUT
                                      (:EXPORT T
@@ -175,13 +175,13 @@
   ;; Check the names
   (is (equal '("GTK_PRINT_PAGES_ALL" "GTK_PRINT_PAGES_CURRENT"
                "GTK_PRINT_PAGES_RANGES" "GTK_PRINT_PAGES_SELECTION")
-             (list-enum-item-name "GtkPrintPages")))
+             (gtk-test:list-enum-item-name "GtkPrintPages")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPrintPages")))
+             (gtk-test:list-enum-item-value "GtkPrintPages")))
   ;; Check the nick names
   (is (equal '("all" "current" "ranges" "selection")
-             (list-enum-item-nick "GtkPrintPages")))
+             (gtk-test:list-enum-item-nick "GtkPrintPages")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintPages" GTK-PRINT-PAGES
                                      (:EXPORT T
@@ -208,13 +208,13 @@
           (glib:symbol-for-gtype "GtkPageSet")))
   ;; Check the names
   (is (equal '("GTK_PAGE_SET_ALL" "GTK_PAGE_SET_EVEN" "GTK_PAGE_SET_ODD")
-             (list-enum-item-name "GtkPageSet")))
+             (gtk-test:list-enum-item-name "GtkPageSet")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkPageSet")))
+             (gtk-test:list-enum-item-value "GtkPageSet")))
   ;; Check the nick names
   (is (equal '("all" "even" "odd")
-             (list-enum-item-nick "GtkPageSet")))
+             (gtk-test:list-enum-item-nick "GtkPageSet")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPageSet" GTK-PAGE-SET
                                      (:EXPORT T
@@ -227,30 +227,30 @@
 ;;;     GtkPrintSettings
 
 (test gtk-print-settings-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPrintSettings"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-settings
           (glib:symbol-for-gtype "GtkPrintSettings")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintSettings")
           (g:gtype (cffi:foreign-funcall "gtk_print_settings_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkPrintSettings")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkPrintSettings")))
+             (gtk-test:list-children "GtkPrintSettings")))
   ;; Check the interfaces
   (is (equal '()
-             (list-interfaces "GtkPrintSettings")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkPrintSettings")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkPrintSettings")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkPrintSettings")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkPrintSettings")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkPrintSettings")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintSettings"
                                              GTK-PRINT-SETTINGS
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

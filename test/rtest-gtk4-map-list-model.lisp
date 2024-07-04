@@ -8,30 +8,30 @@
 ;;;     GtkMapListModel
 
 (test gtk-map-list-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMapListModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:map-list-model
           (glib:symbol-for-gtype "GtkMapListModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMapListModel")
           (g:gtype (cffi:foreign-funcall "gtk_map_list_model_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkMapListModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkMapListModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMapListModel")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (list-interfaces "GtkMapListModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkMapListModel")))
+  ;; Check properties
   (is (equal '("has-map" "item-type" "model" "n-items")
-             (list-properties "GtkMapListModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkMapListModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMapListModel")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkMapListModel")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMapListModel"
                                              GTK-MAP-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -65,4 +65,4 @@
 ;;;     gtk_map_list_model_get_model
 ;;;     gtk_map_list_model_has_map
 
-;;; --- 2023-9-3 ---------------------------------------------------------------
+;;; 2024-7-4

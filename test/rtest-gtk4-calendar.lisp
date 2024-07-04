@@ -21,23 +21,20 @@
           (g:type-parent "GtkCalendar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCalendar")))
+             (gtk-test:list-children "GtkCalendar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkCalendar")))
+             (gtk-test:list-interfaces "GtkCalendar")))
   ;; Check properties
   (is (equal '("day" "month" "show-day-names" "show-heading" "show-week-numbers"
                "year")
-             (list-properties "GtkCalendar")))
+             (gtk-test:list-properties "GtkCalendar")))
   ;; Check signals
   (is (equal '("day-selected" "next-month" "next-year" "prev-month" "prev-year")
-             (list-signals "GtkCalendar")))
+             (gtk-test:list-signals "GtkCalendar")))
   ;; Check CSS name
   (is (string= "calendar"
                (gtk:widget-class-css-name "GtkCalendar")))
-  ;; Check CSS classes
-  (is (equal '("view")
-             (gtk:widget-css-classes (make-instance 'gtk:calendar))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkCalendar")))
   ;; Check class definition

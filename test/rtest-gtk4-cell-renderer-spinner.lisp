@@ -22,16 +22,16 @@
           (g:type-parent "GtkCellRendererSpinner")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererSpinner")))
+             (gtk-test:list-children "GtkCellRendererSpinner")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererSpinner")))
+             (gtk-test:list-interfaces "GtkCellRendererSpinner")))
   ;; Check properties
   (is (equal '("active" "pulse" "size")
-             (list-properties "GtkCellRendererSpinner")))
+             (gtk-test:list-properties "GtkCellRendererSpinner")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellRendererSpinner")))
+             (gtk-test:list-signals "GtkCellRendererSpinner")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererSpinner"
                                GTK-CELL-RENDERER-SPINNER

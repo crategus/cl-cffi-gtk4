@@ -8,37 +8,37 @@
 ;;; GtkShortcutsWindow
 
 (test gtk-shortcuts-window-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutsWindow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcuts-window
           (glib:symbol-for-gtype "GtkShortcutsWindow")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutsWindow")
           (g:gtype (cffi:foreign-funcall "gtk_shortcuts_window_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkShortcutsWindow")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutsWindow")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutsWindow")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
-             (list-interfaces "GtkShortcutsWindow")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutsWindow")))
+  ;; Check properties
   (is (equal '("section-name" "view-name")
-             (list-properties "GtkShortcutsWindow")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutsWindow")))
+  ;; Check signals
   (is (equal '("close" "search")
-             (list-signals "GtkShortcutsWindow")))
-  ;; CSS classes
-  (is (equal '("background" "csd" "shortcuts")
-             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-window))))
-  ;; Accessible role
+             (gtk-test:list-signals "GtkShortcutsWindow")))
+  ;; Check CSS name
+  (is (string= "window"
+               (gtk:widget-class-css-name "GtkShortcutsWindow")))
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsWindow")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow"
                                              GTK-SHORTCUTS-WINDOW
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -92,4 +92,4 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;; 2024-2-18
+;;; 2024-7-3

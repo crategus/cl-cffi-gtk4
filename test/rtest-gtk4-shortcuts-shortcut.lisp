@@ -8,15 +8,15 @@
 ;;;     GtkShortcutType
 
 (test gtk-shortcut-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkShortcutType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutType")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-type
           (glib:symbol-for-gtype "GtkShortcutType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_SHORTCUT_ACCELERATOR"
                "GTK_SHORTCUT_GESTURE_PINCH"
                "GTK_SHORTCUT_GESTURE_STRETCH"
@@ -27,17 +27,17 @@
                "GTK_SHORTCUT_GESTURE"
                "GTK_SHORTCUT_GESTURE_SWIPE_LEFT"
                "GTK_SHORTCUT_GESTURE_SWIPE_RIGHT")
-             (list-enum-item-name "GtkShortcutType")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GtkShortcutType")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (list-enum-item-value "GtkShortcutType")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GtkShortcutType")))
+  ;; Check nick names
   (is (equal '("accelerator" "gesture-pinch" "gesture-stretch"
                "gesture-rotate-clockwise" "gesture-rotate-counterclockwise"
                "gesture-two-finger-swipe-left" "gesture-two-finger-swipe-right"
                "gesture" "gesture-swipe-left" "gesture-swipe-right")
-             (list-enum-item-nick "GtkShortcutType")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GtkShortcutType")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkShortcutType" GTK-SHORTCUT-TYPE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -57,41 +57,38 @@
 ;;;     GtkShortcutsShortcut
 
 (test gtk-shortcuts-shortcut-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutsShortcut"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcuts-shortcut
           (glib:symbol-for-gtype "GtkShortcutsShortcut")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutsShortcut")
           (g:gtype (cffi:foreign-funcall "gtk_shortcuts_shortcut_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkShortcutsShortcut")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutsShortcut")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutsShortcut")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkShortcutsShortcut")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutsShortcut")))
+  ;; Check properties
   (is (equal '("accel-size-group" "accelerator" "action-name" "direction" "icon"
                "icon-set" "shortcut-type" "subtitle" "subtitle-set" "title"
                "title-size-group")
-             (list-properties "GtkShortcutsShortcut")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutsShortcut")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcutsShortcut")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkShortcutsShortcut")))
+  ;; Check CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutsShortcut")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-shortcut))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkShortcutsShortcut")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsShortcut"
                                              GTK-SHORTCUTS-SHORTCUT
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

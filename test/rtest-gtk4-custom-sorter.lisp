@@ -8,30 +8,30 @@
 ;;;     GtkCustomSorter
 
 (test gtk-custom-sorter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCustomSorter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:custom-sorter
           (glib:symbol-for-gtype "GtkCustomSorter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCustomSorter")
           (g:gtype (cffi:foreign-funcall "gtk_custom_sorter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkSorter")
           (g:type-parent "GtkCustomSorter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkCustomSorter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkCustomSorter")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCustomSorter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkCustomSorter")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkCustomSorter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkCustomSorter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkCustomSorter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkCustomSorter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomSorter" GTK-CUSTOM-SORTER
                                (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
                                 NIL :TYPE-INITIALIZER
@@ -63,4 +63,4 @@
                                                        ((> item1 item2) +1)
                                                        (t 0)))))))
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-7-4

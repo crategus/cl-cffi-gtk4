@@ -19,13 +19,13 @@
           (glib:symbol-for-gtype "GtkScrollablePolicy")))
   ;; Check names
   (is (equal '("GTK_SCROLL_MINIMUM" "GTK_SCROLL_NATURAL")
-             (list-enum-item-name "GtkScrollablePolicy")))
+             (gtk-test:list-enum-item-name "GtkScrollablePolicy")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkScrollablePolicy")))
+             (gtk-test:list-enum-item-value "GtkScrollablePolicy")))
   ;; Check nick names
   (is (equal '("minimum" "natural")
-             (list-enum-item-nick "GtkScrollablePolicy")))
+             (gtk-test:list-enum-item-nick "GtkScrollablePolicy")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkScrollablePolicy"
                              GTK-SCROLLABLE-POLICY
@@ -49,13 +49,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_scrollable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkScrollable")))
-  ;; Check interface properties.
+             (gtk-test:list-interface-prerequisites "GtkScrollable")))
+  ;; Check interface properties
   (is (equal '("hadjustment" "hscroll-policy" "vadjustment" "vscroll-policy")
-             (list-interface-properties "GtkScrollable")))
+             (gtk-test:list-interface-properties "GtkScrollable")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkScrollable")))
+             (gtk-test:list-signals "GtkScrollable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkScrollable" GTK-SCROLLABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_scrollable_get_type")

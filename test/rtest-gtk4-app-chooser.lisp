@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_app_chooser_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (list-interface-prerequisites "GtkAppChooser")))
+             (gtk-test:list-interface-prerequisites "GtkAppChooser")))
   ;; Check interface properties
   (is (equal '("content-type")
-             (list-interface-properties "GtkAppChooser")))
+             (gtk-test:list-interface-properties "GtkAppChooser")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkAppChooser")))
+             (gtk-test:list-signals "GtkAppChooser")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAppChooser" GTK-APP-CHOOSER
                             (:EXPORT T :TYPE-INITIALIZER

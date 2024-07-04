@@ -21,16 +21,16 @@
           (g:type-parent "GtkStringObject")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkStringObject")))
+             (gtk-test:list-children "GtkStringObject")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkStringObject")))
+             (gtk-test:list-interfaces "GtkStringObject")))
   ;; Check properties
   (is (equal '("string")
-             (list-properties "GtkStringObject")))
+             (gtk-test:list-properties "GtkStringObject")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkStringObject")))
+             (gtk-test:list-signals "GtkStringObject")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringObject" GTK-STRING-OBJECT
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -87,16 +87,16 @@
           (g:type-parent "GtkStringList")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkStringList")))
+             (gtk-test:list-children "GtkStringList")))
   ;; Check interfaces
   (is (equal '("GtkBuildable" "GListModel")
-             (list-interfaces "GtkStringList")))
+             (gtk-test:list-interfaces "GtkStringList")))
   ;; Check properties
   (is (equal '("item-type" "n-items" "strings")
-             (list-properties "GtkStringList")))
+             (gtk-test:list-properties "GtkStringList")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkStringList")))
+             (gtk-test:list-signals "GtkStringList")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringList" GTK-STRING-LIST
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES

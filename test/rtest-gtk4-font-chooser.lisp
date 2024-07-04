@@ -21,13 +21,13 @@
   (is (equal '("GTK_FONT_CHOOSER_LEVEL_FAMILY" "GTK_FONT_CHOOSER_LEVEL_STYLE"
                "GTK_FONT_CHOOSER_LEVEL_SIZE" "GTK_FONT_CHOOSER_LEVEL_VARIATIONS"
                "GTK_FONT_CHOOSER_LEVEL_FEATURES")
-             (list-flags-item-name "GtkFontChooserLevel")))
+             (gtk-test:list-flags-item-name "GtkFontChooserLevel")))
   ;; Check values
   (is (equal '(0 1 2 4 8)
-             (list-flags-item-value "GtkFontChooserLevel")))
+             (gtk-test:list-flags-item-value "GtkFontChooserLevel")))
   ;; Check nick names
   (is (equal '("family" "style" "size" "variations" "features")
-             (list-flags-item-nick "GtkFontChooserLevel")))
+             (gtk-test:list-flags-item-nick "GtkFontChooserLevel")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkFontChooserLevel"
                                       GTK-FONT-CHOOSER-LEVEL
@@ -54,14 +54,14 @@
           (g:gtype (cffi:foreign-funcall "gtk_font_chooser_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkFontChooser")))
+             (gtk-test:list-interface-prerequisites "GtkFontChooser")))
   ;; Check interface properties
   (is (equal '("font" "font-desc" "font-features" "language" "level"
                "preview-text" "show-preview-entry")
-             (list-interface-properties "GtkFontChooser")))
+             (gtk-test:list-interface-properties "GtkFontChooser")))
   ;; Check interface signals
   (is (equal '("font-activated")
-             (list-signals "GtkFontChooser")))
+             (gtk-test:list-signals "GtkFontChooser")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkFontChooser" GTK-FONT-CHOOSER
                             (:EXPORT T :TYPE-INITIALIZER

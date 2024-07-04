@@ -155,16 +155,16 @@
           (g:type-parent "GtkArrayListStore")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkArrayListStore")))
+             (gtk-test:list-children "GtkArrayListStore")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel")
-             (list-interfaces "GtkArrayListStore")))
+             (gtk-test:list-interfaces "GtkArrayListStore")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkArrayListStore")))
+             (gtk-test:list-properties "GtkArrayListStore")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkArrayListStore")))
+             (gtk-test:list-signals "GtkArrayListStore")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkArrayListStore"
                                              GTK-ARRAY-LIST-STORE

@@ -10,31 +10,31 @@
 ;;;     GtkShortcutController
 
 (test gtk-shortcut-controller-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutController"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-controller
           (glib:symbol-for-gtype "GtkShortcutController")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutController")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_controller_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkShortcutController")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutController")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutController")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkBuildable")
-             (list-interfaces "GtkShortcutController")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutController")))
+  ;; Check properties
   (is (equal '("item-type" "mnemonic-modifiers" "model" "n-items" "scope")
-             (list-properties "GtkShortcutController")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutController")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcutController")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkShortcutController")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutController"
                                              GTK-SHORTCUT-CONTROLLER
                        (:SUPERCLASS GTK-EVENT-CONTROLLER
@@ -84,4 +84,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; --- 2023-7-23 --------------------------------------------------------------
+;;; 2024-7-4

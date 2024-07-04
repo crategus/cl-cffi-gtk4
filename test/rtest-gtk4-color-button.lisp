@@ -21,18 +21,18 @@
           (g:type-parent "GtkColorButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkColorButton")))
+             (gtk-test:list-children "GtkColorButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkColorChooser")
-             (list-interfaces "GtkColorButton")))
+             (gtk-test:list-interfaces "GtkColorButton")))
   ;; Check properties
   ;; RGBA and USE-ALPHA are inherited from the GtkColorChooser interface
   (is (equal '("modal" "rgba" "show-editor" "title" "use-alpha")
-             (list-properties "GtkColorButton")))
+             (gtk-test:list-properties "GtkColorButton")))
   ;; Check signals
   (is (equal '("activate" "color-set")
-             (list-signals "GtkColorButton")))
+             (gtk-test:list-signals "GtkColorButton")))
   ;; Check CSS information
   (is (string= "colorbutton"
                (gtk:widget-class-css-name "GtkColorButton")))

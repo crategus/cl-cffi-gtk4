@@ -100,16 +100,16 @@
           (g:type-parent "GtkBuilder")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkBuilder")))
+             (gtk-test:list-children "GtkBuilder")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkBuilder")))
+             (gtk-test:list-interfaces "GtkBuilder")))
   ;; Check class properties
   (is (equal '("current-object" "scope" "translation-domain")
-             (list-properties "GtkBuilder")))
+             (gtk-test:list-properties "GtkBuilder")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkBuilder")))
+             (gtk-test:list-signals "GtkBuilder")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBuilder" GTK-BUILDER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

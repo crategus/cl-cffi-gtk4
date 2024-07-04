@@ -13,30 +13,30 @@
 ;;;     GtkFileFilter
 
 (test gtk-file-filter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFileFilter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:file-filter
           (glib:symbol-for-gtype "GtkFileFilter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFileFilter")
           (g:gtype (cffi:foreign-funcall "gtk_file_filter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkFilter")
           (g:type-parent "GtkFileFilter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFileFilter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFileFilter")))
+  ;; Check interfaces
   (is (equal '("GtkBuildable")
-             (list-interfaces "GtkFileFilter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFileFilter")))
+  ;; Check properties
   (is (equal '("mime-types" "name" "patterns" "suffixes")
-             (list-properties "GtkFileFilter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFileFilter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFileFilter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkFileFilter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileFilter" GTK-FILE-FILTER
                        (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
                         ("GtkBuildable") :TYPE-INITIALIZER
@@ -139,4 +139,4 @@
     (is (string= "('.mhjl-Dateityp', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-7-4

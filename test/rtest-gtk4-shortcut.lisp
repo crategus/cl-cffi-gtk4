@@ -8,30 +8,30 @@
 ;;;     GtkShortcut
 
 (test gtk-shortcut-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcut"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut
           (glib:symbol-for-gtype "GtkShortcut")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcut")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkShortcut")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcut")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcut")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkShortcut")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkShortcut")))
+  ;; Check class properties
   (is (equal '("action" "arguments" "trigger")
-             (list-properties "GtkShortcut")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkShortcut")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcut")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkShortcut")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcut" GTK-SHORTCUT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_get_type")
@@ -86,4 +86,4 @@
 
 ;;;     gtk_shortcut_new_with_arguments
 
-;;; --- 2023-7-23 --------------------------------------------------------------
+;;; 2024-7-4

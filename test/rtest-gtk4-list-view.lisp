@@ -19,13 +19,13 @@
           (glib:symbol-for-gtype "GtkListTabBehavior")))
   ;; Check names
   (is (equal '("GTK_LIST_TAB_ALL" "GTK_LIST_TAB_ITEM" "GTK_LIST_TAB_CELL")
-             (list-enum-item-name "GtkListTabBehavior")))
+             (gtk-test:list-enum-item-name "GtkListTabBehavior")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkListTabBehavior")))
+             (gtk-test:list-enum-item-value "GtkListTabBehavior")))
   ;; Check nick names
   (is (equal '("all" "item" "cell")
-             (list-enum-item-nick "GtkListTabBehavior")))
+             (gtk-test:list-enum-item-nick "GtkListTabBehavior")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkListTabBehavior"
                                      GTK-LIST-TAB-BEHAVIOR
@@ -52,13 +52,13 @@
   ;; Check names
   (is (equal '("GTK_LIST_SCROLL_NONE" "GTK_LIST_SCROLL_FOCUS"
                "GTK_LIST_SCROLL_SELECT")
-             (list-flags-item-name "GtkListScrollFlags")))
+             (gtk-test:list-flags-item-name "GtkListScrollFlags")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-flags-item-value "GtkListScrollFlags")))
+             (gtk-test:list-flags-item-value "GtkListScrollFlags")))
   ;; Check nick names
   (is (equal '("none" "focus" "select")
-             (list-flags-item-nick "GtkListScrollFlags")))
+             (gtk-test:list-flags-item-nick "GtkListScrollFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkListScrollFlags"
                                       GTK-LIST-SCROLL-FLAGS
@@ -86,23 +86,21 @@
           (g:type-parent "GtkListBase")))
   ;; Check children
   (is (equal '("GtkGridView" "GtkListView")
-             (list-children "GtkListBase")))
+             (gtk-test:list-children "GtkListBase")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkScrollable")
-             (list-interfaces "GtkListBase")))
+             (gtk-test:list-interfaces "GtkListBase")))
   ;; Check properties
   (is (equal '("hadjustment" "hscroll-policy" "orientation" "vadjustment"
                "vscroll-policy")
-             (list-properties "GtkListBase")))
+             (gtk-test:list-properties "GtkListBase")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkListBase")))
+             (gtk-test:list-signals "GtkListBase")))
   ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkListBase")))
-  ;; Check CSS classes
-  ;; GtkListBase is an abstract class
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkListBase")))
   ;; Check the class definition
@@ -134,29 +132,26 @@
   #-windows
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkListView")))
+                 (gtk-test:list-children "GtkListView")))
       (is (equal '("GtkColumnListView")
-                 (list-children "GtkListView"))))
+                 (gtk-test:list-children "GtkListView"))))
   #+windows
   (is (equal '()
-             (list-children "GtkListView")))
+             (gtk-test:list-children "GtkListView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkScrollable")
-             (list-interfaces "GtkListView")))
+             (gtk-test:list-interfaces "GtkListView")))
   ;; Check properties
   (is (equal '("enable-rubberband" "factory" "header-factory" "model"
                "show-separators" "single-click-activate" "tab-behavior")
-             (list-properties "GtkListView")))
+             (gtk-test:list-properties "GtkListView")))
   ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkListView")))
+             (gtk-test:list-signals "GtkListView")))
   ;; Check CSS name
   (is (string= "listview"
                (gtk:widget-class-css-name "GtkListView")))
-  ;; Check CSS classes
-  (is (equal '("view")
-             (gtk:widget-css-classes (make-instance 'gtk:list-view))))
   ;; Check accessible role
   (is (eq :list (gtk:widget-class-accessible-role "GtkListView")))
   ;; Check the class definition

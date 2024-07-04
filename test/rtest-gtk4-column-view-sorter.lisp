@@ -8,31 +8,31 @@
 ;;;     GtkColumnViewSorter
 
 (test gtk-column-view-sorter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColumnViewSorter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:column-view-sorter
           (glib:symbol-for-gtype "GtkColumnViewSorter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColumnViewSorter")
           (g:gtype (cffi:foreign-funcall "gtk_column_view_sorter_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkSorter")
           (g:type-parent "GtkColumnViewSorter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkColumnViewSorter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkColumnViewSorter")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkColumnViewSorter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkColumnViewSorter")))
+  ;; Check properties
   (is (equal '("primary-sort-column" "primary-sort-order")
-             (list-properties "GtkColumnViewSorter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkColumnViewSorter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkColumnViewSorter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkColumnViewSorter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewSorter"
                                              GTK-COLUMN-VIEW-SORTER
                                (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
@@ -63,4 +63,4 @@
 ;;;     gtk_column_view_sorter_get_n_sort_columns
 ;;;     gtk_column_view_sorter_get_nth_sort_column
 
-;;; --- 2023-10-13 -------------------------------------------------------------
+;;; 2024-7-4

@@ -20,13 +20,13 @@
   ;; Check names
   (is (equal '("GTK_TREE_VIEW_COLUMN_GROW_ONLY" "GTK_TREE_VIEW_COLUMN_AUTOSIZE"
                "GTK_TREE_VIEW_COLUMN_FIXED")
-             (list-enum-item-name "GtkTreeViewColumnSizing")))
+             (gtk-test:list-enum-item-name "GtkTreeViewColumnSizing")))
   ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GtkTreeViewColumnSizing")))
+             (gtk-test:list-enum-item-value "GtkTreeViewColumnSizing")))
   ;; Check nick names
   (is (equal '("grow-only" "autosize" "fixed")
-             (list-enum-item-nick "GtkTreeViewColumnSizing")))
+             (gtk-test:list-enum-item-nick "GtkTreeViewColumnSizing")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTreeViewColumnSizing"
                                      GTK-TREE-VIEW-COLUMN-SIZING
@@ -55,19 +55,19 @@
           (g:type-parent "GtkTreeViewColumn")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeViewColumn")))
+             (gtk-test:list-children "GtkTreeViewColumn")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (list-interfaces "GtkTreeViewColumn")))
+             (gtk-test:list-interfaces "GtkTreeViewColumn")))
   ;; Check properties
   (is (equal '("alignment" "cell-area" "clickable" "expand" "fixed-width"
                "max-width" "min-width" "reorderable" "resizable" "sizing"
                "sort-column-id" "sort-indicator" "sort-order" "spacing" "title"
                "visible" "widget" "width" "x-offset")
-             (list-properties "GtkTreeViewColumn")))
+             (gtk-test:list-properties "GtkTreeViewColumn")))
   ;; Check signals
   (is (equal '("clicked")
-             (list-signals "GtkTreeViewColumn")))
+             (gtk-test:list-signals "GtkTreeViewColumn")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeViewColumn"
                                              GTK-TREE-VIEW-COLUMN

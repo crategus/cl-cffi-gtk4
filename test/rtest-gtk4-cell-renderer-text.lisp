@@ -23,10 +23,10 @@
   ;; Check children
   (is (equal '("GtkCellRendererAccel" "GtkCellRendererCombo"
                "GtkCellRendererSpin")
-             (list-children "GtkCellRendererText")))
+             (gtk-test:list-children "GtkCellRendererText")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererText")))
+             (gtk-test:list-interfaces "GtkCellRendererText")))
   ;; Check properties
   (is (equal '("align-set" "alignment" "attributes" "background"
                "background-rgba" "background-set" "editable" "editable-set"
@@ -39,10 +39,10 @@
                "style-set" "text" "underline" "underline-set" "variant"
                "variant-set" "weight" "weight-set" "width-chars" "wrap-mode"
                "wrap-width")
-             (list-properties "GtkCellRendererText")))
+             (gtk-test:list-properties "GtkCellRendererText")))
   ;; Check the signals
   (is (equal '("edited")
-             (list-signals "GtkCellRendererText")))
+             (gtk-test:list-signals "GtkCellRendererText")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererText" GTK-CELL-RENDERER-TEXT
                                (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T

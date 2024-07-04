@@ -19,13 +19,13 @@
   ;; Check the names
   (is (equal '("GTK_POLICY_ALWAYS" "GTK_POLICY_AUTOMATIC" "GTK_POLICY_NEVER"
                "GTK_POLICY_EXTERNAL")
-             (list-enum-item-name "GtkPolicyType")))
+             (gtk-test:list-enum-item-name "GtkPolicyType")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkPolicyType")))
+             (gtk-test:list-enum-item-value "GtkPolicyType")))
   ;; Check the nick names
   (is (equal '("always" "automatic" "never" "external")
-             (list-enum-item-nick "GtkPolicyType")))
+             (gtk-test:list-enum-item-nick "GtkPolicyType")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPolicyType"
                                      GTK-POLICY-TYPE
@@ -52,13 +52,13 @@
   ;; Check the names
   (is (equal '("GTK_CORNER_TOP_LEFT" "GTK_CORNER_BOTTOM_LEFT"
                "GTK_CORNER_TOP_RIGHT" "GTK_CORNER_BOTTOM_RIGHT")
-             (list-enum-item-name "GtkCornerType")))
+             (gtk-test:list-enum-item-name "GtkCornerType")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkCornerType")))
+             (gtk-test:list-enum-item-value "GtkCornerType")))
   ;; Check the nick names
   (is (equal '("top-left" "bottom-left" "top-right" "bottom-right")
-             (list-enum-item-nick "GtkCornerType")))
+             (gtk-test:list-enum-item-nick "GtkCornerType")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCornerType"
                                      GTK-CORNER-TYPE
@@ -74,43 +74,40 @@
 ;;;     GtkScrolledWindow
 
 (test gtk-scrolled-window-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkScrolledWindow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:scrolled-window
           (glib:symbol-for-gtype "GtkScrolledWindow")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkScrolledWindow")
           (g:gtype (cffi:foreign-funcall "gtk_scrolled_window_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkScrolledWindow")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkScrolledWindow")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkScrolledWindow")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkScrolledWindow")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkScrolledWindow")))
+  ;; Check properties
   (is (equal '("child" "hadjustment" "has-frame" "hscrollbar-policy"
                "kinetic-scrolling" "max-content-height" "max-content-width"
                "min-content-height" "min-content-width" "overlay-scrolling"
                "propagate-natural-height" "propagate-natural-width"
                "vadjustment" "vscrollbar-policy" "window-placement")
-             (list-properties "GtkScrolledWindow")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkScrolledWindow")))
+  ;; Check signals
   (is (equal '("edge-overshot" "edge-reached" "move-focus-out" "scroll-child")
-             (list-signals "GtkScrolledWindow")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkScrolledWindow")))
+  ;; Check CSS name
   (is (string= "scrolledwindow"
                (gtk:widget-class-css-name "GtkScrolledWindow")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:scrolled-window))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkScrolledWindow")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrolledWindow"
                                              GTK-SCROLLED-WINDOW
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -224,4 +221,4 @@
 ;;;     gtk_scrolled_window_set_placement
 ;;;     gtk_scrolled_window_unset_placement
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

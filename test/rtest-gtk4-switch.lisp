@@ -21,17 +21,17 @@
           (g:type-parent "GtkSwitch")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkSwitch")))
+             (gtk-test:list-children "GtkSwitch")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkSwitch")))
+             (gtk-test:list-interfaces "GtkSwitch")))
   ;; Check properties
   (is (equal '("action-name" "action-target" "active" "state")
-             (list-properties "GtkSwitch")))
+             (gtk-test:list-properties "GtkSwitch")))
   ;; Check signals
   (is (equal '("activate" "state-set")
-             (list-signals "GtkSwitch")))
+             (gtk-test:list-signals "GtkSwitch")))
   ;; Check CSS information
   (is (string= "switch"
                (gtk:widget-class-css-name "GtkSwitch")))

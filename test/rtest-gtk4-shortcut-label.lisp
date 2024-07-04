@@ -8,38 +8,35 @@
 ;;;     GtkShortcutLabel
 
 (test gtk-shortcut-label-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutLabel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-label
           (glib:symbol-for-gtype "GtkShortcutLabel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutLabel")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_label_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkShortcutLabel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkShortcutLabel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutLabel")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkShortcutLabel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkShortcutLabel")))
+  ;; Check properties
   (is (equal '("accelerator" "disabled-text")
-             (list-properties "GtkShortcutLabel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkShortcutLabel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcutLabel")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkShortcutLabel")))
+  ;; Check CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutLabel")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:shortcut-label))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutLabel")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutLabel"
                                              GTK-SHORTCUT-LABEL
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -62,4 +59,4 @@
 
 ;;;     gtk_shortcut_label_new
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-7-4

@@ -8,30 +8,30 @@
 ;;;     GtkBoolFilter
 
 (test gtk-bool-filter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkBoolFilter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:bool-filter
           (glib:symbol-for-gtype "GtkBoolFilter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBoolFilter")
           (g:gtype (cffi:foreign-funcall "gtk_bool_filter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkFilter")
           (g:type-parent "GtkBoolFilter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkBoolFilter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkBoolFilter")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkBoolFilter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkBoolFilter")))
+  ;; Check properties
   (is (equal '("expression" "invert")
-             (list-properties "GtkBoolFilter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkBoolFilter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkBoolFilter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkBoolFilter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBoolFilter" GTK-BOOL-FILTER
                                (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
                                 NIL :TYPE-INITIALIZER
@@ -64,4 +64,4 @@
       (is (cffi:pointer-eq expression (gtk:bool-filter-expression filter)))
       (is-false (gtk:bool-filter-invert filter)))))
 
-;;; --- 2023-9-9 ---------------------------------------------------------------
+;;; 2024-7-4

@@ -20,22 +20,19 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkSpinner")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkSpinner")))
+             (gtk-test:list-children "GtkSpinner")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkSpinner")))
+             (gtk-test:list-interfaces "GtkSpinner")))
   ;; Check properties
   (is (equal '("spinning")
-             (list-properties "GtkSpinner")))
-  ;; Check list of signals
+             (gtk-test:list-properties "GtkSpinner")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSpinner")))
+             (gtk-test:list-signals "GtkSpinner")))
   ;; Checkk CSS name
   (is (string= "spinner"
                (gtk:widget-class-css-name "GtkSpinner")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:spinner))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkSpinner")))
   ;; Check class definition

@@ -21,17 +21,17 @@
           (g:type-parent "GtkAlertDialog")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAlertDialog")))
+             (gtk-test:list-children "GtkAlertDialog")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkAlertDialog")))
+             (gtk-test:list-interfaces "GtkAlertDialog")))
   ;; Check properties
   (is (equal '("buttons" "cancel-button" "default-button" "detail" "message"
                "modal")
-             (list-properties "GtkAlertDialog")))
+             (gtk-test:list-properties "GtkAlertDialog")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkAlertDialog")))
+             (gtk-test:list-signals "GtkAlertDialog")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAlertDialog" GTK-ALERT-DIALOG
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

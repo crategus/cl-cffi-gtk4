@@ -19,13 +19,13 @@
           (glib:symbol-for-gtype "GtkEntryIconPosition")))
   ;; Check names
   (is (equal '("GTK_ENTRY_ICON_PRIMARY" "GTK_ENTRY_ICON_SECONDARY")
-             (list-enum-item-name "GtkEntryIconPosition")))
+             (gtk-test:list-enum-item-name "GtkEntryIconPosition")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkEntryIconPosition")))
+             (gtk-test:list-enum-item-value "GtkEntryIconPosition")))
   ;; Check nick names
   (is (equal '("primary" "secondary")
-             (list-enum-item-nick "GtkEntryIconPosition")))
+             (gtk-test:list-enum-item-nick "GtkEntryIconPosition")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkEntryIconPosition"
                              GTK-ENTRY-ICON-POSITION
@@ -54,16 +54,16 @@
   #-windows
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkEntry")))
+                 (gtk-test:list-children "GtkEntry")))
       (is (equal '("GtkFileChooserEntry")
-                 (list-children "GtkEntry"))))
+                 (gtk-test:list-children "GtkEntry"))))
   #+windows
   (is (equal '()
-             (list-children "GtkEntry")))
+             (gtk-test:list-children "GtkEntry")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkCellEditable")
-             (list-interfaces "GtkEntry")))
+             (gtk-test:list-interfaces "GtkEntry")))
   ;; Check properties
   (is (equal '("activates-default" "attributes" "buffer" "completion"
                "cursor-position" "editable" "editing-canceled"
@@ -81,11 +81,11 @@
                "secondary-icon-tooltip-markup" "secondary-icon-tooltip-text"
                "selection-bound" "show-emoji-icon" "tabs" "text" "text-length"
                "truncate-multiline" "visibility" "width-chars" "xalign")
-             (list-properties "GtkEntry")))
+             (gtk-test:list-properties "GtkEntry")))
   ;; Check signals
   (is (equal '("activate" "icon-press" "icon-release")
-             (list-signals "GtkEntry")))
-  ;; Check CSS information
+             (gtk-test:list-signals "GtkEntry")))
+  ;; Check CSS name
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkEntry")))
   ;; Check accessible role
@@ -348,4 +348,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2024-5-21
+;;; 2024-7-3

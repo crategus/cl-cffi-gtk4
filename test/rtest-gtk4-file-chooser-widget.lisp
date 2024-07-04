@@ -22,21 +22,21 @@
           (g:type-parent "GtkFileChooserWidget")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFileChooserWidget")))
+             (gtk-test:list-children "GtkFileChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFileChooser")
-             (list-interfaces "GtkFileChooserWidget")))
+             (gtk-test:list-interfaces "GtkFileChooserWidget")))
   ;; Check properties
   (is (equal '("action" "create-folders" "filter" "filters" "search-mode"
                "select-multiple" "shortcut-folders" "show-time" "subtitle")
-             (list-properties "GtkFileChooserWidget")))
+             (gtk-test:list-properties "GtkFileChooserWidget")))
   ;; Check signals
   (is (equal '("desktop-folder" "down-folder" "home-folder" "location-popup"
                "location-popup-on-paste" "location-toggle-popup"
                "places-shortcut" "quick-bookmark" "recent-shortcut"
                "search-shortcut" "show-hidden" "up-folder")
-             (list-signals "GtkFileChooserWidget")))
+             (gtk-test:list-signals "GtkFileChooserWidget")))
   ;; Check CSS information
   (is (string= "filechooser"
                (gtk:widget-class-css-name "GtkFileChooserWidget")))

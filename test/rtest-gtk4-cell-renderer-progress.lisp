@@ -22,17 +22,17 @@
           (g:type-parent "GtkCellRendererProgress")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererProgress")))
+             (gtk-test:list-children "GtkCellRendererProgress")))
   ;; Check interfaces
   (is (equal '("GtkOrientable")
-             (list-interfaces "GtkCellRendererProgress")))
+             (gtk-test:list-interfaces "GtkCellRendererProgress")))
   ;; Check properties
   (is (equal '("inverted" "orientation" "pulse" "text" "text-xalign"
                "text-yalign" "value")
-             (list-properties "GtkCellRendererProgress")))
+             (gtk-test:list-properties "GtkCellRendererProgress")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellRendererProgress")))
+             (gtk-test:list-signals "GtkCellRendererProgress")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererProgress"
                                GTK-CELL-RENDERER-PROGRESS

@@ -21,22 +21,22 @@
           (g:type-parent "GtkInfoBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkInfoBar")))
+             (gtk-test:list-children "GtkInfoBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkInfoBar")))
+             (gtk-test:list-interfaces "GtkInfoBar")))
   ;; Check properties
   (is (equal '("message-type" "revealed" "show-close-button")
-             (list-properties "GtkInfoBar")))
+             (gtk-test:list-properties "GtkInfoBar")))
   ;; Check signals
   (is (equal '("close" "response")
-             (list-signals "GtkInfoBar")))
+             (gtk-test:list-signals "GtkInfoBar")))
   ;; Check CSS name
   (is (string= "infobar"
                (gtk:widget-class-css-name "GtkInfoBar")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkInfoBar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInfoBar" GTK-INFO-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"

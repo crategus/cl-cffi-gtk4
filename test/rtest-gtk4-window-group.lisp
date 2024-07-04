@@ -21,16 +21,16 @@
           (g:type-parent "GtkWindowGroup")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkWindowGroup")))
+             (gtk-test:list-children "GtkWindowGroup")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkWindowGroup")))
+             (gtk-test:list-interfaces "GtkWindowGroup")))
   ;; Check class properties
   (is (equal '()
-             (list-properties "GtkWindowGroup")))
+             (gtk-test:list-properties "GtkWindowGroup")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkWindowGroup")))
+             (gtk-test:list-signals "GtkWindowGroup")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowGroup" GTK-WINDOW-GROUP
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

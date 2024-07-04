@@ -22,18 +22,18 @@
           (g:type-parent "GtkAppChooserButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAppChooserButton")))
+             (gtk-test:list-children "GtkAppChooserButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAppChooser")
-             (list-interfaces "GtkAppChooserButton")))
+             (gtk-test:list-interfaces "GtkAppChooserButton")))
   ;; Check properties
   (is (equal '("content-type" "heading" "modal" "show-default-item"
                "show-dialog-item")
-             (list-properties "GtkAppChooserButton")))
+             (gtk-test:list-properties "GtkAppChooserButton")))
   ;; Check signals
   (is (equal '("activate" "changed" "custom-item-activated")
-             (list-signals "GtkAppChooserButton")))
+             (gtk-test:list-signals "GtkAppChooserButton")))
   ;; Check CSS name
   (is (string= "appchooserbutton"
                (gtk:widget-class-css-name "GtkAppChooserButton")))

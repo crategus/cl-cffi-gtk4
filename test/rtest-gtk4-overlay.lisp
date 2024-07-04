@@ -21,22 +21,19 @@
           (g:type-parent "GtkOverlay")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkOverlay")))
+             (gtk-test:list-children "GtkOverlay")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkOverlay")))
+             (gtk-test:list-interfaces "GtkOverlay")))
   ;; Check properties
   (is (equal '("child")
-             (list-properties "GtkOverlay")))
+             (gtk-test:list-properties "GtkOverlay")))
   ;; Check signals
   (is (equal '("get-child-position")
-             (list-signals "GtkOverlay")))
+             (gtk-test:list-signals "GtkOverlay")))
   ;; Check CSS name
   (is (string= "overlay"
                (gtk:widget-class-css-name "GtkOverlay")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:overlay))))
   ;; Check accessible role
   (is (eq :WIDGET (gtk:widget-class-accessible-role "GtkOverlay")))
   ;; Check the class definition

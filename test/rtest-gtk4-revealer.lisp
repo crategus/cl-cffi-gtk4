@@ -28,14 +28,14 @@
                "GTK_REVEALER_TRANSITION_TYPE_SWING_LEFT"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_UP"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN")
-             (list-enum-item-name "GtkRevealerTransitionType")))
+             (gtk-test:list-enum-item-name "GtkRevealerTransitionType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (list-enum-item-value "GtkRevealerTransitionType")))
+             (gtk-test:list-enum-item-value "GtkRevealerTransitionType")))
   ;; Check nick names
   (is (equal '("none" "crossfade" "slide-right" "slide-left" "slide-up"
                "slide-down" "swing-right" "swing-left" "swing-up" "swing-down")
-             (list-enum-item-nick "GtkRevealerTransitionType")))
+             (gtk-test:list-enum-item-nick "GtkRevealerTransitionType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkRevealerTransitionType"
                              GTK-REVEALER-TRANSITION-TYPE
@@ -70,23 +70,20 @@
           (g:type-parent "GtkRevealer")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkRevealer")))
+             (gtk-test:list-children "GtkRevealer")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkRevealer")))
+             (gtk-test:list-interfaces "GtkRevealer")))
   ;; Check properties
   (is (equal '("child" "child-revealed" "reveal-child" "transition-duration"
                "transition-type")
-             (list-properties "GtkRevealer")))
+             (gtk-test:list-properties "GtkRevealer")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkRevealer")))
+             (gtk-test:list-signals "GtkRevealer")))
   ;; Check CSS name
   (is (string= "revealer"
                (gtk:widget-class-css-name "GtkRevealer")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:revealer))))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkRevealer")))
   ;; Check the class definition

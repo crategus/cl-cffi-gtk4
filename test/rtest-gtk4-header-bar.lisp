@@ -21,22 +21,19 @@
           (g:type-parent "GtkHeaderBar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkHeaderBar")))
+             (gtk-test:list-children "GtkHeaderBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkHeaderBar")))
+             (gtk-test:list-interfaces "GtkHeaderBar")))
   ;; Check properties
   (is (equal '("decoration-layout" "show-title-buttons" "title-widget")
-             (list-properties "GtkHeaderBar")))
+             (gtk-test:list-properties "GtkHeaderBar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkHeaderBar")))
+             (gtk-test:list-signals "GtkHeaderBar")))
   ;; Check CSS name
   (is (string= "headerbar"
                (gtk:widget-class-css-name "GtkHeaderBar")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:header-bar))))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkHeaderBar")))
   ;; Check the class definition

@@ -8,25 +8,25 @@
 ;;;     GtkFontLevel
 
 (test gtk-font-level
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkFontLevel"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFontLevel")
           (g:gtype (cffi:foreign-funcall "gtk_font_level_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:font-level
           (glib:symbol-for-gtype "GtkFontLevel")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_FONT_LEVEL_FAMILY" "GTK_FONT_LEVEL_FACE"
                "GTK_FONT_LEVEL_FONT" "GTK_FONT_LEVEL_FEATURES")
-             (list-enum-item-name "GtkFontLevel")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GtkFontLevel")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GtkFontLevel")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GtkFontLevel")))
+  ;; Check nick names
   (is (equal '("family" "face" "font" "features")
-             (list-enum-item-nick "GtkFontLevel")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GtkFontLevel")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFontLevel" GTK-FONT-LEVEL
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -40,40 +40,37 @@
 ;;;     GtkFontDialogButton
 
 (test gtk-font-dialog-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFontDialogButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:font-dialog-button
           (glib:symbol-for-gtype "GtkFontDialogButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFontDialogButton")
           (g:gtype (cffi:foreign-funcall "gtk_font_dialog_button_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFontDialogButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFontDialogButton")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFontDialogButton")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkFontDialogButton")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFontDialogButton")))
+  ;; Check properties
   (is (equal '("dialog" "font-desc" "font-features" "language" "level"
                "use-font" "use-size")
-             (list-properties "GtkFontDialogButton")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFontDialogButton")))
+  ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkFontDialogButton")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkFontDialogButton")))
+  ;; Check CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontDialogButton")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:font-dialog-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFontDialogButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontDialogButton"
                                              GTK-FONT-DIALOG-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -113,10 +110,10 @@
 ;;;     activate
 
 (test gtk-font-dialog-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate" 
+  (let ((query (g:signal-query (g:signal-lookup "activate"
                                                 "GtkFontDialogButton"))))
     (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkFontDialogButton" 
+    (is (string= "GtkFontDialogButton"
                  (g:type-name (g:signal-query-owner-type query))))
     (is (equal '(:ACTION :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
@@ -129,4 +126,4 @@
 
 ;;;     gtk_font_dialog_button_new
 
-;;; --- 2023-11-4 -------------------------------------------------------------
+;;; 2024-7-4

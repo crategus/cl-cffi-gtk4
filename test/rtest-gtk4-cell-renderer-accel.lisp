@@ -20,13 +20,13 @@
   ;; Check names
   (is (equal '("GTK_CELL_RENDERER_ACCEL_MODE_GTK"
                "GTK_CELL_RENDERER_ACCEL_MODE_OTHER")
-             (list-enum-item-name "GtkCellRendererAccelMode")))
+             (gtk-test:list-enum-item-name "GtkCellRendererAccelMode")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkCellRendererAccelMode")))
+             (gtk-test:list-enum-item-value "GtkCellRendererAccelMode")))
   ;; Check nick names
   (is (equal '("gtk" "other")
-             (list-enum-item-nick "GtkCellRendererAccelMode")))
+             (gtk-test:list-enum-item-nick "GtkCellRendererAccelMode")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererAccelMode"
                                      GTK-CELL-RENDERER-ACCEL-MODE
@@ -54,16 +54,16 @@
           (g:type-parent "GtkCellRendererAccel")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellRendererAccel")))
+             (gtk-test:list-children "GtkCellRendererAccel")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCellRendererAccel")))
+             (gtk-test:list-interfaces "GtkCellRendererAccel")))
   ;; Check properties
   (is (equal '("accel-key" "accel-mode" "accel-mods" "keycode")
-             (list-properties "GtkCellRendererAccel")))
+             (gtk-test:list-properties "GtkCellRendererAccel")))
   ;; Check signals
   (is (equal '("accel-cleared" "accel-edited")
-             (list-signals "GtkCellRendererAccel")))
+             (gtk-test:list-signals "GtkCellRendererAccel")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererAccel"
                                              GTK-CELL-RENDERER-ACCEL

@@ -21,16 +21,16 @@
           (g:type-parent "GtkCellAreaBox")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellAreaBox")))
+             (gtk-test:list-children "GtkCellAreaBox")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable" "GtkOrientable")
-             (list-interfaces "GtkCellAreaBox")))
+             (gtk-test:list-interfaces "GtkCellAreaBox")))
   ;; Check properties
   (is (equal '("orientation" "spacing")
-             (list-properties "GtkCellAreaBox")))
+             (gtk-test:list-properties "GtkCellAreaBox")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellAreaBox")))
+             (gtk-test:list-signals "GtkCellAreaBox")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellAreaBox" GTK-CELL-AREA-BOX
                                (:SUPERCLASS GTK-CELL-AREA :EXPORT T :INTERFACES

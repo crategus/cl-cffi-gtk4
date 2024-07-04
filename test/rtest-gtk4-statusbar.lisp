@@ -21,16 +21,16 @@
           (g:type-parent "GtkStatusbar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkStatusbar")))
+             (gtk-test:list-children "GtkStatusbar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkStatusbar")))
+             (gtk-test:list-interfaces "GtkStatusbar")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkStatusbar")))
+             (gtk-test:list-properties "GtkStatusbar")))
   ;; Check signals
   (is (equal '("text-popped" "text-pushed")
-             (list-signals "GtkStatusbar")))
+             (gtk-test:list-signals "GtkStatusbar")))
   ;; Check CSS name
   (is (string= "statusbar"
                (gtk:widget-class-css-name "GtkStatusbar")))

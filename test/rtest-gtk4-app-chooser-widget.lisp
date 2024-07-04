@@ -22,18 +22,18 @@
           (g:type-parent "GtkAppChooserWidget")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkAppChooserWidget")))
+             (gtk-test:list-children "GtkAppChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAppChooser")
-             (list-interfaces "GtkAppChooserWidget")))
+             (gtk-test:list-interfaces "GtkAppChooserWidget")))
   ;; Check properties
   (is (equal '("content-type" "default-text" "show-all" "show-default"
                "show-fallback" "show-other" "show-recommended")
-             (list-properties "GtkAppChooserWidget")))
+             (gtk-test:list-properties "GtkAppChooserWidget")))
   ;; Check signals
   (is (equal '("application-activated" "application-selected")
-             (list-signals "GtkAppChooserWidget")))
+             (gtk-test:list-signals "GtkAppChooserWidget")))
   ;; Check CSS name
   (is (string= "appchooser"
                (gtk:widget-class-css-name "GtkAppChooserWidget")))

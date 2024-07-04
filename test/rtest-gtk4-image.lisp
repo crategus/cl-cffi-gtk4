@@ -61,7 +61,7 @@
   (is (equal '("file" "gicon" "icon-name" "icon-size" "paintable" "pixel-size"
                "resource" "storage-type" "use-fallback")
              (gtk-test:list-properties "GtkImage")))
-  ;; Check list of signals
+  ;; Check signals
   (is (equal '()
              (gtk-test:list-signals "GtkImage")))
   ;; Check CSS name

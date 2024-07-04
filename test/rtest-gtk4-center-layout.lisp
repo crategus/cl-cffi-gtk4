@@ -21,16 +21,16 @@
           (g:type-parent "GtkCenterLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCenterLayout")))
+             (gtk-test:list-children "GtkCenterLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCenterLayout")))
+             (gtk-test:list-interfaces "GtkCenterLayout")))
   ;; Check properties
   (is (equal '("shrink-center-last")
-             (list-properties "GtkCenterLayout")))
+             (gtk-test:list-properties "GtkCenterLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCenterLayout")))
+             (gtk-test:list-signals "GtkCenterLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterLayout" GTK-CENTER-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

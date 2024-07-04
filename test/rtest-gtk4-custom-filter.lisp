@@ -8,30 +8,30 @@
 ;;;     GtkCustomFilter
 
 (test gtk-custom-filter-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCustomFilter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:custom-filter
           (glib:symbol-for-gtype "GtkCustomFilter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCustomFilter")
           (g:gtype (cffi:foreign-funcall "gtk_custom_filter_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkFilter")
           (g:type-parent "GtkCustomFilter")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkCustomFilter")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkCustomFilter")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCustomFilter")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkCustomFilter")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkCustomFilter")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkCustomFilter")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkCustomFilter")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkCustomFilter")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomFilter" GTK-CUSTOM-FILTER
                                (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
                                 NIL :TYPE-INITIALIZER
@@ -44,4 +44,4 @@
 ;;;     gtk_custom_filter_new
 ;;;     gtk_custom_filter_set_filter_func
 
-;;; --- 2023-9-6 ---------------------------------------------------------------
+;;; 2024-7-4

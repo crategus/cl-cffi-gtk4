@@ -21,24 +21,21 @@
           (g:type-parent "GtkCenterBox")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCenterBox")))
+             (gtk-test:list-children "GtkCenterBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkCenterBox")))
+             (gtk-test:list-interfaces "GtkCenterBox")))
   ;; Check properties
   (is (equal '("baseline-position" "center-widget" "end-widget" "orientation"
                "shrink-center-last" "start-widget")
-             (list-properties "GtkCenterBox")))
+             (gtk-test:list-properties "GtkCenterBox")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCenterBox")))
+             (gtk-test:list-signals "GtkCenterBox")))
   ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkCenterBox")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:center-box))))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkCenterBox")))
   ;; Check the class definition

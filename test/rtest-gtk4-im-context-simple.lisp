@@ -10,35 +10,35 @@
 ;;;     GtkIMContextSimple
 
 (test gtk-im-context-simple-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIMContextSimple"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:im-context-simple
           (glib:symbol-for-gtype "GtkIMContextSimple")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIMContextSimple")
           (g:gtype (cffi:foreign-funcall "gtk_im_context_simple_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkIMContext")
           (g:type-parent "GtkIMContextSimple")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (is (equal '("GtkIMContextBroadway" "GtkIMContextWayland")
-             (list-children "GtkIMContextSimple")))
+             (gtk-test:list-children "GtkIMContextSimple")))
   #+windows
   (is (equal '()
-             (list-children "GtkIMContextSimple")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkIMContextSimple")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkIMContextSimple")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkIMContextSimple")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkIMContextSimple")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkIMContextSimple")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkIMContextSimple")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkIMContextSimple")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContextSimple"
                                              GTK-I-M-CONTEXT-SIMPLE
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
@@ -58,4 +58,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-7-4

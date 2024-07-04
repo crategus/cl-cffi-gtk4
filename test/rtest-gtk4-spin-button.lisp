@@ -19,13 +19,13 @@
           (glib:symbol-for-gtype "GtkSpinButtonUpdatePolicy")))
   ;; Check names
   (is (equal '("GTK_UPDATE_ALWAYS" "GTK_UPDATE_IF_VALID")
-             (list-enum-item-name "GtkSpinButtonUpdatePolicy")))
+             (gtk-test:list-enum-item-name "GtkSpinButtonUpdatePolicy")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkSpinButtonUpdatePolicy")))
+             (gtk-test:list-enum-item-value "GtkSpinButtonUpdatePolicy")))
   ;; Check nick names
   (is (equal '("always" "if-valid")
-             (list-enum-item-nick "GtkSpinButtonUpdatePolicy")))
+             (gtk-test:list-enum-item-nick "GtkSpinButtonUpdatePolicy")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSpinButtonUpdatePolicy"
                                      GTK-SPIN-BUTTON-UPDATE-POLICY
@@ -51,14 +51,14 @@
   (is (equal '("GTK_SPIN_STEP_FORWARD" "GTK_SPIN_STEP_BACKWARD"
                "GTK_SPIN_PAGE_FORWARD" "GTK_SPIN_PAGE_BACKWARD" "GTK_SPIN_HOME"
                "GTK_SPIN_END" "GTK_SPIN_USER_DEFINED")
-             (list-enum-item-name "GtkSpinType")))
+             (gtk-test:list-enum-item-name "GtkSpinType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (list-enum-item-value "GtkSpinType")))
+             (gtk-test:list-enum-item-value "GtkSpinType")))
   ;; Check nick names
   (is (equal '("step-forward" "step-backward" "page-forward" "page-backward"
                "home" "end" "user-defined")
-             (list-enum-item-nick "GtkSpinType")))
+             (gtk-test:list-enum-item-nick "GtkSpinType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSpinType" GTK-SPIN-TYPE
                                      (:EXPORT T
@@ -89,23 +89,23 @@
           (g:type-parent "GtkSpinButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkSpinButton")))
+             (gtk-test:list-children "GtkSpinButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange" "GtkEditable"
                "GtkCellEditable")
-             (list-interfaces "GtkSpinButton")))
+             (gtk-test:list-interfaces "GtkSpinButton")))
   ;; Check properties
   (is (equal '("activates-default" "adjustment" "climb-rate" "cursor-position"
                "digits" "editable"
                "editing-canceled" "enable-undo" "max-width-chars" "numeric"
                "orientation" "selection-bound" "snap-to-ticks" "text"
                "update-policy" "value" "width-chars" "wrap" "xalign")
-             (list-properties "GtkSpinButton")))
+             (gtk-test:list-properties "GtkSpinButton")))
   ;; Check signals
   (is (equal '("activate" "change-value" "input" "output" "value-changed"
                "wrapped")
-             (list-signals "GtkSpinButton")))
+             (gtk-test:list-signals "GtkSpinButton")))
   ;; Check CSS name
   (is (string= "spinbutton"
                (gtk:widget-class-css-name "GtkSpinButton")))

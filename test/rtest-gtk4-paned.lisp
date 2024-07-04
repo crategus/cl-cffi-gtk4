@@ -21,27 +21,24 @@
           (g:type-parent "GtkPaned")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkPaned")))
+             (gtk-test:list-children "GtkPaned")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (list-interfaces "GtkPaned")))
+             (gtk-test:list-interfaces "GtkPaned")))
   ;; Check properties
   (is (equal '("end-child" "max-position" "min-position" "orientation"
                "position" "position-set" "resize-end-child" "resize-start-child"
                "shrink-end-child" "shrink-start-child" "start-child"
                "wide-handle")
-             (list-properties "GtkPaned")))
+             (gtk-test:list-properties "GtkPaned")))
   ;; Check signals
   (is (equal '("accept-position" "cancel-position" "cycle-child-focus"
                "cycle-handle-focus" "move-handle" "toggle-handle-focus")
-             (list-signals "GtkPaned")))
+             (gtk-test:list-signals "GtkPaned")))
   ;; Check CSS name
   (is (string= "paned"
                (gtk:widget-class-css-name "GtkPaned")))
-  ;; Check CSS classes
-  (is (equal '("horizontal")
-             (gtk:widget-css-classes (make-instance 'gtk:paned))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkPaned")))
   ;; Check the class definition

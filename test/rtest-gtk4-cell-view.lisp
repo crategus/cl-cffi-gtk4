@@ -21,18 +21,18 @@
           (g:type-parent "GtkCellView")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkCellView")))
+             (gtk-test:list-children "GtkCellView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkOrientable")
-             (list-interfaces "GtkCellView")))
+             (gtk-test:list-interfaces "GtkCellView")))
   ;; Check properties
   (is (equal '("cell-area" "cell-area-context" "draw-sensitive" "fit-model"
                "model" "orientation")
-             (list-properties "GtkCellView")))
+             (gtk-test:list-properties "GtkCellView")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkCellView")))
+             (gtk-test:list-signals "GtkCellView")))
   ;; Check CSS name
   (is (string= "cellview"
                (gtk:widget-class-css-name "GtkCellView")))

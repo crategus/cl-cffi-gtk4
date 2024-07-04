@@ -8,30 +8,30 @@
 ;;;     GtkFontDialog
 
 (test gtk-font-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFontDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:font-dialog
           (glib:symbol-for-gtype "GtkFontDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFontDialog")
           (g:gtype (cffi:foreign-funcall "gtk_font_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFontDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFontDialog")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFontDialog")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkFontDialog")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFontDialog")))
+  ;; Check properties
   (is (equal '("filter" "font-map" "language" "modal" "title")
-             (list-properties "GtkFontDialog")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFontDialog")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFontDialog")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkFontDialog")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontDialog" GTK-FONT-DIALOG
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_font_dialog_get_type")
@@ -68,4 +68,4 @@
 ;;;     gtk_font_dialog_choose_font_and_features_finish
 ;;;     gtk_font_dialog_choose_font_finish
 
-;;; --- 2023-8-27 --------------------------------------------------------------
+;;; 2024-7-3

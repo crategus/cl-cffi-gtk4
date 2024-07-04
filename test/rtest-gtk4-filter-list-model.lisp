@@ -8,31 +8,31 @@
 ;;;     GtkFilterListModel
 
 (test gtk-filter-list-model-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFilterListModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:filter-list-model
           (glib:symbol-for-gtype "GtkFilterListModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFilterListModel")
           (g:gtype (cffi:foreign-funcall "gtk_filter_list_model_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFilterListModel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFilterListModel")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFilterListModel")))
+  ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (list-interfaces "GtkFilterListModel")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFilterListModel")))
+  ;; Check properties
   (is (equal '("filter" "incremental" "item-type" "model" "n-items" "pending")
-             (list-properties "GtkFilterListModel")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFilterListModel")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFilterListModel")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkFilterListModel")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFilterListModel"
                                              GTK-FILTER-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES

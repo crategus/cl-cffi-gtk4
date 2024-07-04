@@ -8,19 +8,19 @@
 ;;;     GtkSymbolicPaintable
 
 (test gtk-symbolic-paintable-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkSymbolicPaintable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:symbolic-paintable
           (glib:symbol-for-gtype "GtkSymbolicPaintable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSymbolicPaintable")
           (g:gtype (cffi:foreign-funcall "gtk_symbolic_paintable_get_type"
                                          :size))))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties
   (is (equal '()
-             (list-interfaces "GtkSymbolicPaintable")))
-  ;; Get the interface definition
+             (gtk-test:list-interfaces "GtkSymbolicPaintable")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSymbolicPaintable"
                                           GTK-SYMBOLIC-PAINTABLE
                     (:EXPORT T :TYPE-INITIALIZER
@@ -30,30 +30,30 @@
 ;;;     GtkIconPaintable
 
 (test gtk-icon-paintable-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIconPaintable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:icon-paintable
           (glib:symbol-for-gtype "GtkIconPaintable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIconPaintable")
           (g:gtype (cffi:foreign-funcall "gtk_icon_paintable_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIconPaintable")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkIconPaintable")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkIconPaintable")))
+  ;; Check interfaces
   (is (equal '("GdkPaintable" "GtkSymbolicPaintable")
-             (list-interfaces "GtkIconPaintable")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkIconPaintable")))
+  ;; Check class properties
   (is (equal '("file" "icon-name" "is-symbolic")
-             (list-properties "GtkIconPaintable")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkIconPaintable")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkIconPaintable")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkIconPaintable")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconPaintable"
                                              GTK-ICON-PAINTABLE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -67,10 +67,6 @@
              (gobject:get-g-type-definition "GtkIconPaintable"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     file
-;;;     icon-name
-;;;     is-symbolic
 
 (test gtk-icon-paintable-properties
   (let ((paintable (make-instance 'gtk:icon-paintable)))
@@ -91,4 +87,4 @@
     (is-false (gtk:icon-paintable-icon-name paintable))
     (is-false (gtk:icon-paintable-is-symbolic paintable))))
 
-;;; --- 2023-8-30 --------------------------------------------------------------
+;;; 2024-7-4

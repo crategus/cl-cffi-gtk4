@@ -8,21 +8,21 @@
 ;;;     GtkCellEditable
 
 (test gtk-cell-editable-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkCellEditable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-editable
           (glib:symbol-for-gtype "GtkCellEditable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellEditable")
           (g:gtype (cffi:foreign-funcall "gtk_cell_editable_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties
   (is (equal '("editing-canceled")
-             (list-interface-properties "GtkCellEditable")))
-  ;; Check the signals
+             (gtk-test:list-interface-properties "GtkCellEditable")))
+  ;; Check signals
   (is (equal '("editing-done" "remove-widget")
-             (list-signals "GtkCellEditable")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GtkCellEditable")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkCellEditable" GTK-CELL-EDITABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_cell_editable_get_type")
                     (EDITING-CANCELED GTK-CELL-EDITABLE-EDITING-CANCELED
@@ -44,4 +44,4 @@
 ;;;     gtk_cell_editable_editing_done
 ;;;     gtk_cell_editable_remove_widget
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; 2024-7-4

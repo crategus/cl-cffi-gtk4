@@ -21,16 +21,16 @@
           (g:type-parent "GtkTreeSelection")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkTreeSelection")))
+             (gtk-test:list-children "GtkTreeSelection")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkTreeSelection")))
+             (gtk-test:list-interfaces "GtkTreeSelection")))
   ;; Check properties
   (is (equal '("mode")
-             (list-properties "GtkTreeSelection")))
+             (gtk-test:list-properties "GtkTreeSelection")))
   ;; Check signals
   (is (equal '("changed")
-             (list-signals "GtkTreeSelection")))
+             (gtk-test:list-signals "GtkTreeSelection")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeSelection" GTK-TREE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -83,4 +83,4 @@
 ;;;     gtk_tree_selection_select_range
 ;;;     gtk_tree_selection_unselect_range
 
-;;; 2024-5-3
+;;; 2024-7-3

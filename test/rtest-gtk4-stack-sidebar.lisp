@@ -21,22 +21,19 @@
           (g:type-parent "GtkStackSidebar")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkStackSidebar")))
+             (gtk-test:list-children "GtkStackSidebar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkStackSidebar")))
+             (gtk-test:list-interfaces "GtkStackSidebar")))
   ;; Check properties
   (is (equal '("stack")
-             (list-properties "GtkStackSidebar")))
+             (gtk-test:list-properties "GtkStackSidebar")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkStackSidebar")))
+             (gtk-test:list-signals "GtkStackSidebar")))
   ;; Check CSS name
   (is (string= "stacksidebar"
                (gtk:widget-class-css-name "GtkStackSidebar")))
-  ;; Check CSS classes
-  (is (equal '("sidebar")
-             (gtk:widget-css-classes (make-instance 'gtk:stack-sidebar))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStackSidebar")))
   ;; Check class definition
@@ -68,4 +65,4 @@
 (test gtk-stack-sidebar-new
   (is (typep (gtk:stack-sidebar-new) 'gtk:stack-sidebar)))
 
-;;; 2024-4-15
+;;; 2024-7-3

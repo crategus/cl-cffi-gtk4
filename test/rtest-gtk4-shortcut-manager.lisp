@@ -8,21 +8,21 @@
 ;;;     GtkShortcutManager
 
 (test shortcut-manager
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkShortcutManager"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-manager
           (glib:symbol-for-gtype "GtkShortcutManager")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutManager")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_manager_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkShortcutManager")))
-  ;; Get the interface definition
+             (gtk-test:list-interface-properties "GtkShortcutManager")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkShortcutManager" GTK-SHORTCUT-MANAGER
                     (:EXPORT T :TYPE-INITIALIZER
                      "gtk_shortcut_manager_get_type"))
              (gobject:get-g-type-definition "GtkShortcutManager"))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

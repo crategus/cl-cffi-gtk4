@@ -8,7 +8,7 @@
 ;;;     GtkAccessibleText
 
 (test gtk-accessible-text-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkAccessibleText"))
   ;; Check registered name
   (is (eq 'gtk:accessible-text
@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_text_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkAccessible" "GObject")
-             (list-interface-prerequisites "GtkAccessibleText")))
+             (gtk-test:list-interface-prerequisites "GtkAccessibleText")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkAccessibleText")))
+             (gtk-test:list-interface-properties "GtkAccessibleText")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkAccessibleText")))
+             (gtk-test:list-signals "GtkAccessibleText")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessibleText"
                                           GTK-ACCESSIBLE-TEXT

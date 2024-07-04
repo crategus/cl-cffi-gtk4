@@ -22,17 +22,17 @@
           (g:type-parent "GtkColorChooserDialog")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkColorChooserDialog")))
+             (gtk-test:list-children "GtkColorChooserDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkColorChooser")
-             (list-interfaces "GtkColorChooserDialog")))
+             (gtk-test:list-interfaces "GtkColorChooserDialog")))
   ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
-             (list-properties "GtkColorChooserDialog")))
+             (gtk-test:list-properties "GtkColorChooserDialog")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkColorChooserDialog")))
+             (gtk-test:list-signals "GtkColorChooserDialog")))
   ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkColorChooserDialog")))

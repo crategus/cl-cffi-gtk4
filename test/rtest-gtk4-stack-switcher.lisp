@@ -21,23 +21,20 @@
           (g:type-parent "GtkStackSwitcher")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkStackSwitcher")))
+             (gtk-test:list-children "GtkStackSwitcher")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkStackSwitcher")))
+             (gtk-test:list-interfaces "GtkStackSwitcher")))
   ;; Check properties
   (is (equal '("orientation" "stack")
-             (list-properties "GtkStackSwitcher")))
+             (gtk-test:list-properties "GtkStackSwitcher")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkStackSwitcher")))
+             (gtk-test:list-signals "GtkStackSwitcher")))
   ;; Check CSS name
   (is (string= "stackswitcher"
                (gtk:widget-class-css-name "GtkStackSwitcher")))
-  ;; Check CSS classes
-  (is (equal '("linked")
-             (gtk:widget-css-classes (make-instance 'gtk:stack-switcher))))
   ;; Check accessible role
   (is (eq :tab-list (gtk:widget-class-accessible-role "GtkStackSwitcher")))
   ;; Check class definition

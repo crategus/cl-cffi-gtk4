@@ -21,19 +21,19 @@
           (g:type-parent "GtkEditableLabel")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkEditableLabel")))
+             (gtk-test:list-children "GtkEditableLabel")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable")
-             (list-interfaces "GtkEditableLabel")))
+             (gtk-test:list-interfaces "GtkEditableLabel")))
   ;; Check properties
   (is (equal '("cursor-position" "editable" "editing" "enable-undo"
                "max-width-chars" "selection-bound" "text" "width-chars"
                "xalign")
-             (list-properties "GtkEditableLabel")))
+             (gtk-test:list-properties "GtkEditableLabel")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkEditableLabel")))
+             (gtk-test:list-signals "GtkEditableLabel")))
   ;; Check CSS name
   (is (string= "editablelabel"
                (gtk:widget-class-css-name "GtkEditableLabel")))

@@ -22,17 +22,17 @@
           (g:type-parent "GtkColorChooserWidget")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkColorChooserWidget")))
+             (gtk-test:list-children "GtkColorChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkColorChooser")
-             (list-interfaces "GtkColorChooserWidget")))
+             (gtk-test:list-interfaces "GtkColorChooserWidget")))
   ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
-             (list-properties "GtkColorChooserWidget")))
+             (gtk-test:list-properties "GtkColorChooserWidget")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkColorChooserWidget")))
+             (gtk-test:list-signals "GtkColorChooserWidget")))
   ;; Check CSS name
   (is (string= "colorchooser"
                (gtk:widget-class-css-name "GtkColorChooserWidget")))

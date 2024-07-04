@@ -8,25 +8,25 @@
 ;;;     GtkShortcutActionFlags
 
 (test gtk-shortcut-action-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkShortcutActionFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-action-flags
           (glib:symbol-for-gtype "GtkShortcutActionFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutActionFlags")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_action_flags_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_SHORTCUT_ACTION_EXCLUSIVE")
-             (list-flags-item-name "GtkShortcutActionFlags")))
-  ;; Check the values
+             (gtk-test:list-flags-item-name "GtkShortcutActionFlags")))
+  ;; Check values
   (is (equal '(1)
-             (list-flags-item-value "GtkShortcutActionFlags")))
-  ;; Check the nick names
+             (gtk-test:list-flags-item-value "GtkShortcutActionFlags")))
+  ;; Check nick names
   (is (equal '("exclusive")
-             (list-flags-item-nick "GtkShortcutActionFlags")))
-  ;; Check the flags definition
+             (gtk-test:list-flags-item-nick "GtkShortcutActionFlags")))
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkShortcutActionFlags"
                                       GTK-SHORTCUT-ACTION-FLAGS
                               (:EXPORT T
@@ -38,31 +38,31 @@
 ;;;     GtkShortcutAction
 
 (test gtk-shortcut-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkShortcutAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:shortcut-action
           (glib:symbol-for-gtype "GtkShortcutAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkShortcutAction")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkShortcutAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkActivateAction" "GtkCallbackAction" "GtkMnemonicAction"
                "GtkNamedAction" "GtkNothingAction" "GtkSignalAction")
-             (list-children "GtkShortcutAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkShortcutAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkShortcutAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkShortcutAction")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkShortcutAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkShortcutAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkShortcutAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkShortcutAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutAction"
                                              GTK-SHORTCUT-ACTION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -73,30 +73,30 @@
 ;;;     GtkNothingAction
 
 (test gtk-nothing-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkNothingAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:nothing-action
           (glib:symbol-for-gtype "GtkNothingAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNothingAction")
           (g:gtype (cffi:foreign-funcall "gtk_nothing_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkNothingAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkNothingAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkNothingAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkNothingAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkNothingAction")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkNothingAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkNothingAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkNothingAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkNothingAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNothingAction"
                                              GTK-NOTHING-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
@@ -107,30 +107,30 @@
 ;;;     GtkCallbackAction
 
 (test gtk-callback-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCallbackAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:callback-action
           (glib:symbol-for-gtype "GtkCallbackAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCallbackAction")
           (g:gtype (cffi:foreign-funcall "gtk_callback_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkCallbackAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkCallbackAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkCallbackAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkCallbackAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkCallbackAction")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkCallbackAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkCallbackAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkCallbackAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkCallbackAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCallbackAction"
                                              GTK-CALLBACK-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
@@ -141,30 +141,30 @@
 ;;;     GtkMnemonicAction
 
 (test gtk-mnemonic-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMnemonicAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:mnemonic-action
           (glib:symbol-for-gtype "GtkMnemonicAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMnemonicAction")
           (g:gtype (cffi:foreign-funcall "gtk_mnemonic_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkMnemonicAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkMnemonicAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkMnemonicAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkMnemonicAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkMnemonicAction")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkMnemonicAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkMnemonicAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkMnemonicAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkMnemonicAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMnemonicAction"
                                              GTK-MNEMONIC-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
@@ -175,30 +175,30 @@
 ;;;     GtkActivateAction
 
 (test gtk-activate-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkActivateAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:activate-action
           (glib:symbol-for-gtype "GtkActivateAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkActivateAction")
           (g:gtype (cffi:foreign-funcall "gtk_activate_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkActivateAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkActivateAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkActivateAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkActivateAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkActivateAction")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkActivateAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkActivateAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkActivateAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkActivateAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkActivateAction"
                                              GTK-ACTIVATE-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
@@ -209,30 +209,30 @@
 ;;;     GtkSignalAction
 
 (test gtk-signal-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSignalAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:signal-action
           (glib:symbol-for-gtype "GtkSignalAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSignalAction")
           (g:gtype (cffi:foreign-funcall "gtk_signal_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkSignalAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSignalAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSignalAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkSignalAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkSignalAction")))
+  ;; Check class properties
   (is (equal '("signal-name")
-             (list-properties "GtkSignalAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkSignalAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSignalAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSignalAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSignalAction" GTK-SIGNAL-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_signal_action_get_type")
@@ -249,30 +249,30 @@
 ;;;     GtkNamedAction
 
 (test gtk-named-action-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkNamedAction"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:named-action
           (glib:symbol-for-gtype "GtkNamedAction")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNamedAction")
           (g:gtype (cffi:foreign-funcall "gtk_named_action_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkShortcutAction")
           (g:type-parent "GtkNamedAction")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkNamedAction")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkNamedAction")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkNamedAction")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkNamedAction")))
+  ;; Check class properties
   (is (equal '("action-name")
-             (list-properties "GtkNamedAction")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkNamedAction")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkNamedAction")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkNamedAction")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNamedAction" GTK-NAMED-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_named_action_get_type")
@@ -345,4 +345,4 @@
 (test gtk-named-action-new
   (is (typep (gtk:named-action-new "named") 'gtk:named-action)))
 
-;;; --- 2023-7-23 --------------------------------------------------------------
+;;; 2024-7-4

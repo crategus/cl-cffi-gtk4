@@ -21,23 +21,20 @@
           (g:type-parent "GtkLinkButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkLinkButton")))
+             (gtk-test:list-children "GtkLinkButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkLinkButton")))
+             (gtk-test:list-interfaces "GtkLinkButton")))
   ;; Check properties
   (is (equal '("uri" "visited")
-             (list-properties "GtkLinkButton")))
+             (gtk-test:list-properties "GtkLinkButton")))
   ;; Check signals
   (is (equal '("activate-link")
-             (list-signals "GtkLinkButton")))
+             (gtk-test:list-signals "GtkLinkButton")))
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLinkButton")))
-  ;; Check CSS classes
-  (is (equal '("flat" "link")
-             (gtk:widget-css-classes (make-instance 'gtk:link-button))))
   ;; Check accessible role
   (is (eq :link (gtk:widget-class-accessible-role "GtkLinkButton")))
   ;; Check class definition

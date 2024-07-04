@@ -23,13 +23,13 @@
                                          :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GtkConstraintTarget")))
+             (gtk-test:list-interface-prerequisites "GtkConstraintTarget")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkConstraintTarget")))
+             (gtk-test:list-interface-properties "GtkConstraintTarget")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkConstraintTarget")))
+             (gtk-test:list-signals "GtkConstraintTarget")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkConstraintTarget"
                                           GTK-CONSTRAINT-TARGET
@@ -53,17 +53,17 @@
           (g:type-parent "GtkConstraint")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkConstraint")))
+             (gtk-test:list-children "GtkConstraint")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkConstraint")))
+             (gtk-test:list-interfaces "GtkConstraint")))
   ;; Check properties
   (is (equal '("constant" "multiplier" "relation" "source" "source-attribute"
                "strength" "target" "target-attribute")
-             (list-properties "GtkConstraint")))
+             (gtk-test:list-properties "GtkConstraint")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkConstraint")))
+             (gtk-test:list-signals "GtkConstraint")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraint" GTK-CONSTRAINT
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL

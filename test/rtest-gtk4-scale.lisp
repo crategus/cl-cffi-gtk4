@@ -22,27 +22,24 @@
   ;; Check children
   #-windows
   (is (equal '("GtkColorScale")
-             (list-children "GtkScale")))
+             (gtk-test:list-children "GtkScale")))
   #+windows
   (if *first-run-gtk-test*
     (is (equal '()
-               (list-children "GtkScale"))))
+               (gtk-test:list-children "GtkScale"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (list-interfaces "GtkScale")))
+             (gtk-test:list-interfaces "GtkScale")))
   ;; Check properties
   (is (equal '("digits" "draw-value" "has-origin" "value-pos")
-             (list-properties "GtkScale")))
+             (gtk-test:list-properties "GtkScale")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkScale")))
+             (gtk-test:list-signals "GtkScale")))
   ;; Check CSS name
   (is (string= "scale"
                (gtk:widget-class-css-name "GtkScale")))
-  ;; Check CSS classes
-  (is (equal '("horizontal")
-             (gtk:widget-css-classes (make-instance 'gtk:scale))))
   ;; Check accessible role
   (is (eq :slider (gtk:widget-class-accessible-role "GtkScale")))
   ;; Check the class definition

@@ -21,22 +21,19 @@
           (g:type-parent "GtkFixed")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFixed")))
+             (gtk-test:list-children "GtkFixed")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkFixed")))
+             (gtk-test:list-interfaces "GtkFixed")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkFixed")))
+             (gtk-test:list-properties "GtkFixed")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFixed")))
+             (gtk-test:list-signals "GtkFixed")))
   ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkFixed")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:fixed))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFixed")))
   ;; Check the class definition

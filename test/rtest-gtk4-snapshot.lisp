@@ -8,30 +8,30 @@
 ;;;     GtkSnapshot
 
 (test gtk-snapshot-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSnapshot"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:snapshot
           (glib:symbol-for-gtype "GtkSnapshot")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSnapshot")
           (g:gtype (cffi:foreign-funcall "gtk_snapshot_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GdkSnapshot")
           (g:type-parent "GtkSnapshot")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSnapshot")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSnapshot")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkSnapshot")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkSnapshot")))
+  ;; Check class properties
   (is (equal '()
-             (list-properties "GtkSnapshot")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkSnapshot")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSnapshot")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkSnapshot")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSnapshot" GTK-SNAPSHOT
                        (:SUPERCLASS GDK-SNAPSHOT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_snapshot_get_type")
@@ -98,4 +98,4 @@
 ;;;     gtk_snapshot_translate
 ;;;     gtk_snapshot_translate_3d
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; 2024-7-4

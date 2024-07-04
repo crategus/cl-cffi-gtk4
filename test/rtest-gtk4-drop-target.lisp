@@ -8,30 +8,30 @@
 ;;;     GtkDropTarget
 
 (test gtk-drop-target-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkDropTarget"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:drop-target
           (glib:symbol-for-gtype "GtkDropTarget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDropTarget")
           (g:gtype (cffi:foreign-funcall "gtk_drop_target_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkDropTarget")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkDropTarget")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkDropTarget")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkDropTarget")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkDropTarget")))
+  ;; Check properties
   (is (equal '("actions" "current-drop" "drop" "formats" "preload" "value")
-             (list-properties "GtkDropTarget")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkDropTarget")))
+  ;; Check signals
   (is (equal '("accept" "drop" "enter" "leave" "motion")
-             (list-signals "GtkDropTarget")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkDropTarget")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropTarget" GTK-DROP-TARGET
                                (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T
                                 :INTERFACES NIL :TYPE-INITIALIZER
@@ -75,14 +75,14 @@
 ;;;     gtk_drop_target_get_gtypes
 
 (test gtk-drop-target-gtypes.1
-  (let ((target (gtk:drop-target-new "GtkBox" :none)))  
+  (let ((target (gtk:drop-target-new "GtkBox" :none)))
     (is (equal '("GtkBox")
                (mapcar #'g:type-name (gtk:drop-target-gtypes target))))))
 
 (test gtk-drop-target-gtypes.2
-  (let ((target (gtk:drop-target-new nil :none)))  
+  (let ((target (gtk:drop-target-new nil :none)))
     (is (equal '("GtkButton" "GtkLabel")
-               (mapcar #'g:type-name 
+               (mapcar #'g:type-name
                        (setf (gtk:drop-target-gtypes target)
                              '("GtkButton" "GtkLabel")))))
     (is (equal '("GtkButton" "GtkLabel")
@@ -90,4 +90,4 @@
 
 ;;;     gtk_drop_target_reject
 
-;;; --- 2023-7-31 --------------------------------------------------------------
+;;; 2024-7-4

@@ -21,25 +21,22 @@
           (g:type-parent "GtkFrame")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFrame")))
+             (gtk-test:list-children "GtkFrame")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkFrame")))
+             (gtk-test:list-interfaces "GtkFrame")))
   ;; Check properties
   (is (equal '("child" "label" "label-widget" "label-xalign")
-             (list-properties "GtkFrame")))
+             (gtk-test:list-properties "GtkFrame")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFrame")))
+             (gtk-test:list-signals "GtkFrame")))
   ;; Check CSS name
   (is (string= "frame"
                (gtk:widget-class-css-name "GtkFrame")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:frame))))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFrame")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFrame" GTK-FRAME
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")

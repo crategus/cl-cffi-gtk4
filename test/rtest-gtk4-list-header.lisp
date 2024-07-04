@@ -8,30 +8,30 @@
 ;;;     GtkListHeader
 
 (test gtk-list-header-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListHeader"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-header
           (glib:symbol-for-gtype "GtkListHeader")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListHeader")
           (g:gtype (cffi:foreign-funcall "gtk_list_header_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListHeader")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkListHeader")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkListHeader")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkListHeader")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkListHeader")))
+  ;; Check properties
   (is (equal '("child" "end" "item" "n-items" "start")
-             (list-properties "GtkListHeader")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkListHeader")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkListHeader")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkListHeader")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListHeader" GTK-LIST-HEADER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_list_header_get_type")
@@ -62,5 +62,5 @@
     (is (= 0 (gtk:list-header-n-items header)))
     (is (= gtk:+invalid-list-position+ (gtk:list-header-start header)))))
 
-;;; --- 2023-11-27 -------------------------------------------------------------
+;;; 2024-7-4
 

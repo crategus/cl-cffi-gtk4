@@ -21,17 +21,17 @@
           (g:type-parent "GtkBoxLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkBoxLayout")))
+             (gtk-test:list-children "GtkBoxLayout")))
   ;; Check interfaces
   (is (equal '("GtkOrientable")
-             (list-interfaces "GtkBoxLayout")))
+             (gtk-test:list-interfaces "GtkBoxLayout")))
   ;; Check properties
   (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
                "spacing")
-             (list-properties "GtkBoxLayout")))
+             (gtk-test:list-properties "GtkBoxLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkBoxLayout")))
+             (gtk-test:list-signals "GtkBoxLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBoxLayout" GTK-BOX-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

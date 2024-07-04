@@ -22,16 +22,16 @@
           (g:type-parent "GtkFixedLayoutChild")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFixedLayoutChild")))
+             (gtk-test:list-children "GtkFixedLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkFixedLayoutChild")))
+             (gtk-test:list-interfaces "GtkFixedLayoutChild")))
   ;; Check properties
   (is (equal '("transform")
-             (list-properties "GtkFixedLayoutChild")))
+             (gtk-test:list-properties "GtkFixedLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkFixedLayoutChild")))
+             (gtk-test:list-signals "GtkFixedLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixedLayoutChild" GTK-FIXED-LAYOUT-CHILD
                        (:SUPERCLASS GTK-LAYOUT-CHILD :EXPORT T :INTERFACES NIL
@@ -67,30 +67,30 @@
 ;;;     GtkFixedLayout
 
 (test gtk-fixed-layout-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFixedLayout"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:fixed-layout
           (glib:symbol-for-gtype "GtkFixedLayout")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFixedLayout")
           (g:gtype (cffi:foreign-funcall "gtk_fixed_layout_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkLayoutManager")
           (g:type-parent "GtkFixedLayout")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkFixedLayout")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkFixedLayout")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkFixedLayout")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkFixedLayout")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkFixedLayout")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkFixedLayout")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkFixedLayout")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkFixedLayout")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixedLayout" GTK-FIXED-LAYOUT
                        (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_fixed_layout_get_type")
@@ -104,4 +104,4 @@
 (test gtk-fixed-layout-new
   (is (typep (gtk:fixed-layout-new) 'gtk:fixed-layout)))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

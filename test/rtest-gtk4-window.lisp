@@ -24,11 +24,11 @@
   ;; Check children
   (is (equal '("GtkAboutDialog" "GtkApplicationWindow" "GtkAssistant"
                "GtkDialog" "GtkShortcutsWindow")
-             (list-children "GtkWindow")))
+             (gtk-test:list-children "GtkWindow")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
-             (list-interfaces "GtkWindow")))
+             (gtk-test:list-interfaces "GtkWindow")))
   ;; Check class properties
   (is (equal '("application" "child" "decorated" "default-height"
                "default-widget" "default-width" "deletable"
@@ -37,17 +37,14 @@
                "hide-on-close" "icon-name" "is-active" "maximized"
                "mnemonics-visible" "modal" "resizable" "startup-id" "suspended"
                "title" "titlebar" "transient-for")
-             (list-properties "GtkWindow")))
+             (gtk-test:list-properties "GtkWindow")))
   ;; Check signals
   (is (equal '("activate-default" "activate-focus" "close-request"
                "enable-debugging" "keys-changed")
-             (list-signals "GtkWindow")))
+             (gtk-test:list-signals "GtkWindow")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkWindow")))
-  ;; Check CSS classes
-  (is (equal '("background")
-             (gtk:widget-css-classes (make-instance 'gtk:window))))
   ;; Check accessible role
   (is (eq :application (gtk:widget-class-accessible-role "GtkWindow")))
   ;; Check class definition

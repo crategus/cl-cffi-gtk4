@@ -23,18 +23,18 @@
             (g:type-parent "GtkFileChooserDialog")))
     ;; Check children
     (is (equal '()
-               (list-children "GtkFileChooserDialog")))
+               (gtk-test:list-children "GtkFileChooserDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot" "GtkFileChooser")
-               (list-interfaces "GtkFileChooserDialog")))
+               (gtk-test:list-interfaces "GtkFileChooserDialog")))
     ;; Check properties
     (is (equal '("action" "create-folders" "filter" "filters" "select-multiple"
                  "shortcut-folders")
-               (list-properties "GtkFileChooserDialog")))
+               (gtk-test:list-properties "GtkFileChooserDialog")))
     ;; Check signals
     (is (equal '()
-               (list-signals "GtkFileChooserDialog")))
+               (gtk-test:list-signals "GtkFileChooserDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkFileChooserDialog")))

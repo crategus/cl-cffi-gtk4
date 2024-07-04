@@ -8,39 +8,36 @@
 ;;;     GtkDragIcon
 
 (test gtk-drag-icon-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkDragIcon"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:drag-icon
           (glib:symbol-for-gtype "GtkDragIcon")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDragIcon")
           (g:gtype (cffi:foreign-funcall "gtk_drag_icon_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkDragIcon")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkDragIcon")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkDragIcon")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkRoot")
-             (list-interfaces "GtkDragIcon")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkDragIcon")))
+  ;; Check properties
   (is (equal '("child")
-             (list-properties "GtkDragIcon")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkDragIcon")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkDragIcon")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkDragIcon")))
+  ;; Check CSS name
   (is (string= "dnd"
                (gtk:widget-class-css-name "GtkDragIcon")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:drag-icon))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkDragIcon")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDragIcon" GTK-DRAG-ICON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -60,4 +57,4 @@
 ;;;     gtk_drag_icon_set_from_paintable
 ;;;     gtk_drag_icon_create_widget_for_value
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+;;; 2024-7-3

@@ -22,16 +22,16 @@
           (g:type-parent "GtkOverlayLayoutChild")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkOverlayLayoutChild")))
+             (gtk-test:list-children "GtkOverlayLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkOverlayLayoutChild")))
+             (gtk-test:list-interfaces "GtkOverlayLayoutChild")))
   ;; Check properties
   (is (equal '("clip-overlay" "measure")
-             (list-properties "GtkOverlayLayoutChild")))
+             (gtk-test:list-properties "GtkOverlayLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkOverlayLayoutChild")))
+             (gtk-test:list-signals "GtkOverlayLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkOverlayLayoutChild" GTK-OVERLAY-LAYOUT-CHILD
                                (:SUPERCLASS GTK-LAYOUT-CHILD :EXPORT T
@@ -67,16 +67,16 @@
           (g:type-parent "GtkOverlayLayout")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkOverlayLayout")))
+             (gtk-test:list-children "GtkOverlayLayout")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkOverlayLayout")))
+             (gtk-test:list-interfaces "GtkOverlayLayout")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GtkOverlayLayout")))
+             (gtk-test:list-properties "GtkOverlayLayout")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkOverlayLayout")))
+             (gtk-test:list-signals "GtkOverlayLayout")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkOverlayLayout" GTK-OVERLAY-LAYOUT
                                (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T

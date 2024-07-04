@@ -21,18 +21,18 @@
           (g:type-parent "GtkButton")))
   ;; Check children
   (is (equal '("GtkLinkButton" "GtkLockButton" "GtkToggleButton")
-             (list-children "GtkButton")))
+             (gtk-test:list-children "GtkButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (list-interfaces "GtkButton")))
+             (gtk-test:list-interfaces "GtkButton")))
   ;; Check class properties
   (is (equal '("action-name" "action-target" "can-shrink" "child" "has-frame"
                "icon-name" "label" "use-underline")
-             (list-properties "GtkButton")))
+             (gtk-test:list-properties "GtkButton")))
   ;; Check signals
   (is (equal '("activate" "clicked")
-             (list-signals "GtkButton")))
+             (gtk-test:list-signals "GtkButton")))
   ;; Check CSS information
   (is (string="button"
                (gtk:widget-class-css-name "GtkButton")))

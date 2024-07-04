@@ -8,30 +8,30 @@
 ;;;     GtkGestureSwipe
 
 (test gesture-swipe-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGestureSwipe"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:gesture-swipe
           (glib:symbol-for-gtype "GtkGestureSwipe")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGestureSwipe")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_swipe_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureSwipe")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkGestureSwipe")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkGestureSwipe")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkGestureSwipe")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkGestureSwipe")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GtkGestureSwipe")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkGestureSwipe")))
+  ;; Check signals
   (is (equal '("swipe")
-             (list-signals "GtkGestureSwipe")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkGestureSwipe")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSwipe" GTK-GESTURE-SWIPE
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_swipe_get_type")

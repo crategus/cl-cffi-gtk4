@@ -8,26 +8,26 @@
 ;;;     GtkIconLookupFlags
 
 (test gtk-icon-lookup-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkIconLookupFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:icon-lookup-flags
           (glib:symbol-for-gtype "GtkIconLookupFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIconLookupFlags")
           (g:gtype (cffi:foreign-funcall "gtk_icon_lookup_flags_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_ICON_LOOKUP_FORCE_REGULAR" "GTK_ICON_LOOKUP_FORCE_SYMBOLIC"
                "GTK_ICON_LOOKUP_PRELOAD")
-             (list-flags-item-name "GtkIconLookupFlags")))
-  ;; Check the values
+             (gtk-test:list-flags-item-name "GtkIconLookupFlags")))
+  ;; Check values
   (is (equal '(1 2 4)
-             (list-flags-item-value "GtkIconLookupFlags")))
-  ;; Check the nick names
+             (gtk-test:list-flags-item-value "GtkIconLookupFlags")))
+  ;; Check nick names
   (is (equal '("force-regular" "force-symbolic" "preload")
-             (list-flags-item-nick "GtkIconLookupFlags")))
-  ;; Check the flags definition
+             (gtk-test:list-flags-item-nick "GtkIconLookupFlags")))
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkIconLookupFlags"
                                       GTK-ICON-LOOKUP-FLAGS
                                       (:EXPORT T
@@ -41,31 +41,31 @@
 ;;;     GtkIconTheme
 
 (test gtk-icon-theme-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIconTheme"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:icon-theme
           (glib:symbol-for-gtype "GtkIconTheme")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIconTheme")
           (g:gtype (cffi:foreign-funcall "gtk_icon_theme_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIconTheme")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkIconTheme")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkIconTheme")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkIconTheme")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GtkIconTheme")))
+  ;; Check class properties
   (is (equal '("display" "icon-names" "resource-path" "search-path"
                "theme-name")
-             (list-properties "GtkIconTheme")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GtkIconTheme")))
+  ;; Check signals
   (is (equal '("changed")
-             (list-signals "GtkIconTheme")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkIconTheme")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconTheme" GTK-ICON-THEME
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_icon_theme_get_type")
@@ -150,4 +150,4 @@
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; 2024-7-4

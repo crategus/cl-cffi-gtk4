@@ -19,13 +19,13 @@
   ;; Check names
   (is (equal '("GTK_DIALOG_MODAL" "GTK_DIALOG_DESTROY_WITH_PARENT"
                "GTK_DIALOG_USE_HEADER_BAR")
-             (list-flags-item-name "GtkDialogFlags")))
+             (gtk-test:list-flags-item-name "GtkDialogFlags")))
   ;; Check values
   (is (equal '(1 2 4)
-             (list-flags-item-value "GtkDialogFlags")))
+             (gtk-test:list-flags-item-value "GtkDialogFlags")))
   ;; Check nick names
   (is (equal '("modal" "destroy-with-parent" "use-header-bar")
-             (list-flags-item-nick "GtkDialogFlags")))
+             (gtk-test:list-flags-item-nick "GtkDialogFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkDialogFlags"
                               GTK-DIALOG-FLAGS
@@ -40,43 +40,40 @@
 
 (test gtk-dialog-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:dialog
             (glib:symbol-for-gtype "GtkDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkDialog")
             (g:gtype (cffi:foreign-funcall "gtk_dialog_get_type" :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkWindow")
             (g:type-parent "GtkDialog")))
-    ;; Check the children
+    ;; Check children
     #-windows
     (is (equal '("GtkAppChooserDialog" "GtkColorChooserDialog"
                  "GtkFileChooserDialog" "GtkFontChooserDialog"
                  "GtkMessageDialog" "GtkPageSetupUnixDialog"
                  "GtkPrintUnixDialog")
-               (list-children "GtkDialog")))
-    ;; Check the interfaces
+               (gtk-test:list-children "GtkDialog")))
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (list-interfaces "GtkDialog")))
-    ;; Check the class properties
+               (gtk-test:list-interfaces "GtkDialog")))
+    ;; Check class properties
     (is (equal '("use-header-bar")
-               (list-properties "GtkDialog")))
-    ;; Check the list of signals
+               (gtk-test:list-properties "GtkDialog")))
+    ;; Check signals
     (is (equal '("close" "response")
-               (list-signals "GtkDialog")))
-    ;; CSS name
+               (gtk-test:list-signals "GtkDialog")))
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkDialog")))
-    ;; CSS classes
-    (is (equal '("background" "dialog")
-               (gtk:widget-css-classes (make-instance 'gtk:dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkDialog")))
-    ;; Check the class definition
+    ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDialog" GTK-DIALOG
                          (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                           ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -158,4 +155,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-7-4

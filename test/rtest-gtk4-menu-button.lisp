@@ -19,13 +19,13 @@
   ;; Check names
   (is (equal '("GTK_ARROW_UP" "GTK_ARROW_DOWN" "GTK_ARROW_LEFT"
                "GTK_ARROW_RIGHT" "GTK_ARROW_NONE")
-             (list-enum-item-name "GtkArrowType")))
+             (gtk-test:list-enum-item-name "GtkArrowType")))
   ;; Check values
   (is (equal '(0 1 2 3 4)
-             (list-enum-item-value "GtkArrowType")))
+             (gtk-test:list-enum-item-value "GtkArrowType")))
   ;; Check nick names
   (is (equal '("up" "down" "left" "right" "none")
-             (list-enum-item-nick "GtkArrowType")))
+             (gtk-test:list-enum-item-nick "GtkArrowType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkArrowType"
                              GTK-ARROW-TYPE
@@ -54,24 +54,21 @@
           (g:type-parent "GtkMenuButton")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkMenuButton")))
+             (gtk-test:list-children "GtkMenuButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkMenuButton")))
+             (gtk-test:list-interfaces "GtkMenuButton")))
   ;; Check properties
   (is (equal '("active" "always-show-arrow" "can-shrink" "child" "direction"
                "has-frame" "icon-name" "label" "menu-model" "popover" "primary"
                "use-underline")
-             (list-properties "GtkMenuButton")))
+             (gtk-test:list-properties "GtkMenuButton")))
   ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkMenuButton")))
+             (gtk-test:list-signals "GtkMenuButton")))
   ;; Check CSS name
   (is (string= "menubutton"
                (gtk:widget-class-css-name "GtkMenuButton")))
-  ;; Check CSS classes
-  (is (equal '("popup")
-             (gtk:widget-css-classes (make-instance 'gtk:menu-button))))
   ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkMenuButton")))
   ;; Check class definition

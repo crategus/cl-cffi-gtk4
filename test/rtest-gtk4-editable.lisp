@@ -20,14 +20,14 @@
           (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (list-interface-prerequisites "GtkEditable")))
+             (gtk-test:list-interface-prerequisites "GtkEditable")))
   ;; Check interface properties
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
-             (list-interface-properties "GtkEditable")))
+             (gtk-test:list-interface-properties "GtkEditable")))
   ;; Check signals
   (is (equal '("changed" "delete-text" "insert-text")
-             (list-signals "GtkEditable")))
+             (gtk-test:list-signals "GtkEditable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkEditable"
                                   GTK-EDITABLE

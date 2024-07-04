@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_tree_sortable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkTreeModel" "GObject")
-             (list-interface-prerequisites "GtkTreeSortable")))
+             (gtk-test:list-interface-prerequisites "GtkTreeSortable")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkTreeSortable")))
+             (gtk-test:list-interface-properties "GtkTreeSortable")))
   ;; Check interface signals
   (is (equal '("sort-column-changed")
-             (list-signals "GtkTreeSortable")))
+             (gtk-test:list-signals "GtkTreeSortable")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeSortable" GTK-TREE-SORTABLE
                             (:EXPORT T :TYPE-INITIALIZER

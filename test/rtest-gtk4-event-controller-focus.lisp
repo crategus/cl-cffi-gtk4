@@ -8,31 +8,31 @@
 ;;;     GtkEventControllerFocus
 
 (test event-controller-focus-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GObject"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:event-controller-focus
           (glib:symbol-for-gtype "GtkEventControllerFocus")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEventControllerFocus")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_focus_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerFocus")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkEventControllerFocus")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkEventControllerFocus")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkEventControllerFocus")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkEventControllerFocus")))
+  ;; Check properties
   (is (equal '("contains-focus" "is-focus")
-             (list-properties "GtkEventControllerFocus")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkEventControllerFocus")))
+  ;; Check signals
   (is (equal '("enter" "leave")
-             (list-signals "GtkEventControllerFocus")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkEventControllerFocus")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerFocus"
                                      GTK-EVENT-CONTROLLER-FOCUS
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
@@ -59,4 +59,4 @@
 
 ;;;     gtk_event_controller_focus_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

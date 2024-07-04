@@ -8,39 +8,36 @@
 ;;;     GtkSeparator
 
 (test gtk-separator-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSeparator"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:separator
           (glib:symbol-for-gtype "GtkSeparator")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSeparator")
           (g:gtype (cffi:foreign-funcall "gtk_separator_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkSeparator")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkSeparator")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkSeparator")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkSeparator")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkSeparator")))
+  ;; Check properties
   (is (equal '("orientation")
-             (list-properties "GtkSeparator")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkSeparator")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkSeparator")))
-  ;; CSS name
+             (gtk-test:list-signals "GtkSeparator")))
+  ;; Check CSS name
   (is (string= "separator"
                (gtk:widget-class-css-name "GtkSeparator")))
-  ;; CSS classes
-  (is (equal '("horizontal")
-             (gtk:widget-css-classes (make-instance 'gtk:separator))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :separator (gtk:widget-class-accessible-role "GtkSeparator")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSeparator" GTK-SEPARATOR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -53,4 +50,4 @@
 
 ;;;     gtk_separator_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-7-4

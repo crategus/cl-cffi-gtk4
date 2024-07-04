@@ -18,13 +18,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_tree_drag_source_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '()
-             (list-interface-prerequisites "GtkTreeDragSource")))
+             (gtk-test:list-interface-prerequisites "GtkTreeDragSource")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkTreeDragSource")))
+             (gtk-test:list-interface-properties "GtkTreeDragSource")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkTreeDragSource")))
+             (gtk-test:list-signals "GtkTreeDragSource")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeDragSource"
                                           GTK-TREE-DRAG-SOURCE
@@ -45,13 +45,13 @@
           (g:gtype (cffi:foreign-funcall "gtk_tree_drag_dest_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '()
-             (list-interface-prerequisites "GtkTreeDragDest")))
+             (gtk-test:list-interface-prerequisites "GtkTreeDragDest")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GtkTreeDragDest")))
+             (gtk-test:list-interface-properties "GtkTreeDragDest")))
   ;; Check interface signals
   (is (equal '()
-             (list-signals "GtkTreeDragDest")))
+             (gtk-test:list-signals "GtkTreeDragDest")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeDragDest" GTK-TREE-DRAG-DEST
                             (:EXPORT T :TYPE-INITIALIZER

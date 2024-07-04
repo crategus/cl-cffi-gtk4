@@ -8,24 +8,24 @@
 ;;;     GtkTextTag
 
 (test gtk-text-tag-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkTextTag"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:text-tag
           (glib:symbol-for-gtype "GtkTextTag")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTextTag")
           (g:gtype (cffi:foreign-funcall "gtk_text_tag_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkTextTag")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GtkTextTag")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GtkTextTag")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkTextTag")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GtkTextTag")))
+  ;; Check properties
   (is (equal '("accumulative-margin" "allow-breaks" "allow-breaks-set"
                "background" "background-full-height"
                "background-full-height-set" "background-rgba" "background-set"
@@ -51,11 +51,11 @@
                "underline-rgba-set" "underline-set" "variant" "variant-set"
                "weight" "weight-set" "word" "word-set" "wrap-mode"
                "wrap-mode-set")
-             (list-properties "GtkTextTag")))
-  ;; Check the signals
+             (gtk-test:list-properties "GtkTextTag")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GtkTextTag")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GtkTextTag")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextTag" GTK-TEXT-TAG
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_text_tag_get_type")
@@ -526,4 +526,4 @@
     (is (= 20 (setf (gtk:text-tag-indent tag) 20)))
     (is (equal '("indent" "indent") message))))
 
-;;; 2024-3-8
+;;; 2024-7-2
