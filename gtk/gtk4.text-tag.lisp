@@ -141,9 +141,6 @@
 
 (in-package :gtk)
 
-;; TODO: Implement the PangoTextTransform enumeration. It is available since
-;; Pango Version 1.50
-
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextTag
 ;;; ----------------------------------------------------------------------------
@@ -433,7 +430,7 @@
 
 #+liber-documentation
 (setf (documentation 'text-tag 'type)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @begin{short}
     A tag that can be applied to text contained in a @class{gtk:text-buffer}
     object.
@@ -447,9 +444,9 @@
   @fun{gtk:text-buffer-create-tag} function is the best way to create tags.
 
   For each property of the @class{gtk:text-tag} class, there is a @code{set}
-  property, e.g. @code{font-set} corresponds to @code{font}. These @code{set}
-  properties reflect whether a property has been set or not. They are maintained
-  by GTK and you should not set them independently.
+  property, for example, @code{font-set} corresponds to @code{font}. These
+  @code{set} properties reflect whether a property has been set or not. They
+  are maintained by GTK and you should not set them independently.
   @see-constructor{gtk:text-tag-new}
   @see-slot{gtk:text-tag-accumulative-margin}
   @see-slot{gtk:text-tag-allow-breaks}
@@ -564,7 +561,7 @@
 (setf (liber:alias-for-function 'text-tag-accumulative-margin)
       "Accessor"
       (documentation 'text-tag-accumulative-margin 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-accumulative-margin object) => setting}
   @syntax{(setf (gtk:text-tag-accumulative-margin object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -591,7 +588,7 @@
 (setf (liber:alias-for-function 'text-tag-allow-breaks)
       "Accessor"
       (documentation 'text-tag-allow-breaks 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-allow-breaks object) => setting}
   @syntax{(setf (gtk:text-tag-allow-breaks object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -616,7 +613,7 @@
 (setf (liber:alias-for-function 'text-tag-allow-breaks-set)
       "Accessor"
       (documentation 'text-tag-allow-breaks-set 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-allow-breaks-set object) => setting}
   @syntax{(setf (gtk:text-tag-allow-breaks-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -633,14 +630,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "background" 'text-tag) t)
  "The @code{background} property of type @code{:string} (Write) @br{}
-  Background color as a string. @br{}
+  The background color as a string. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-background)
       "Accessor"
       (documentation 'text-tag-background 'function)
- "@version{2023-10-24}
+ "@version{2024-7-2}
   @syntax{(setf (gtk:text-tag-background object) background)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[background]{a string with the background color}
@@ -648,7 +645,7 @@
     Accessor of the @slot[gtk:text-tag]{background} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin{notes}
     The @slot[gtk:text-tag]{background} property is not readable, but writable.
     @begin{pre}
 (defvar tag (gtk:text-tag-new nil)) => TAG
@@ -656,7 +653,7 @@
 (gtk:text-tag-background-rgba tag)
 => #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
     @end{pre}
-  @end{dictionary}
+  @end{notes}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background-rgba}
   @see-function{gtk:text-tag-background-set}")
@@ -676,7 +673,7 @@
 (setf (liber:alias-for-function 'text-tag-background-full-height)
       "Accessor"
       (documentation 'text-tag-background-full-height 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-background-full-height object) => setting}
   @syntax{(setf (gtk:text-tag-background-full-height object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -705,7 +702,7 @@
 (setf (liber:alias-for-function 'text-tag-background-full-height-set)
       "Accessor"
       (documentation 'text-tag-background-full-height-set 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-background-full-height-set object) => setting}
   @syntax{(setf (gtk:text-tag-background-full-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -730,7 +727,7 @@
 (setf (liber:alias-for-function 'text-tag-background-rgba)
       "Accessor"
       (documentation 'text-tag-background-rgba 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-background-rgba object) => color}
   @syntax{(setf (gtk:text-tag-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -758,7 +755,7 @@
 (setf (liber:alias-for-function 'text-tag-background-set)
       "Accessor"
       (documentation 'text-tag-background-set 'function)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-background-set object) => setting}
   @syntax{(setf (gtk:text-tag-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -778,14 +775,15 @@
 (setf (documentation (liber:slot-documentation "direction" 'text-tag) t)
  "The @code{direction} property of type @symbol{gtk:text-direction}
   (Read / Write) @br{}
-  Text direction, e.g. the @code{:ltr} value for left-to-right. @br{}
+  The text direction, for example, the @code{:ltr} value for left-to-right.
+  @br{}
   Default value: @code{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-direction)
       "Accessor"
       (documentation 'text-tag-direction 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-direction object) => direction}
   @syntax{(setf (gtk:text-tag-direction object) direction)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -810,7 +808,7 @@
 (setf (liber:alias-for-function 'text-tag-editable)
       "Accessor"
       (documentation 'text-tag-editable 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-editable object) => editable}
   @syntax{(setf (gtk:text-tag-editable object) editable)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -835,7 +833,7 @@
 (setf (liber:alias-for-function 'text-tag-editable-set)
       "Accessor"
       (documentation 'text-tag-editable-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-editable-set object) => setting}
   @syntax{(setf (gtk:text-tag-editable-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -861,7 +859,7 @@
 (setf (liber:alias-for-function 'text-tag-fallback)
       "Accessor"
       (documentation 'text-tag-fallback 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-fallback object) => fallback}
   @syntax{(setf (gtk:text-tag-fallback object) fallback)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -887,7 +885,7 @@
 (setf (liber:alias-for-function 'text-tag-fallback-set)
       "Accessor"
       (documentation 'text-tag-fallback-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-fallback-set object) => setting}
   @syntax{(setf (gtk:text-tag-fallback-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -904,14 +902,15 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "family" 'text-tag) t)
  "The @code{family} property of type @code{:string} (Read / Write) @br{}
-  Name of the font family, e.g. Sans, Helvetica, Times, Monospace. @br{}
+  The name of the font family, for example, Sans, Helvetica, Times, Monospace.
+  @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-family)
       "Accessor"
       (documentation 'text-tag-family 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-family object) => family}
   @syntax{(setf (gtk:text-tag-family object) family)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -920,7 +919,7 @@
     Accessor of the @slot[gtk:text-tag]{family} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+  The name of the font family, for example, Sans, Helvetica, Times, Monospace.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-family-set}")
 
@@ -936,7 +935,7 @@
 (setf (liber:alias-for-function 'text-tag-family-set)
       "Accessor"
       (documentation 'text-tag-family-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-family-set object) => setting}
   @syntax{(setf (gtk:text-tag-family-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -954,16 +953,16 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font" 'text-tag) t)
  "The @code{font} property of type @code{:string} (Read / Write) @br{}
-  Font description as string, e.g. \"Sans Italic 12\". Note that the initial
-  value of this property depends on the internals of the Pango font description.
-  @br{}
+  The font description as string, for example, \"Sans Italic 12\". Note that
+  the initial value of this property depends on the internals of the Pango font
+  description. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-font)
       "Accessor"
       (documentation 'text-tag-font 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-font object) => font}
   @syntax{(setf (gtk:text-tag-font object) font)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -972,8 +971,8 @@
     Accessor of the @slot[gtk:text-tag]{font} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font description as string, e.g. \"Sans Italic 12\". Note that the initial
-  value of this property depends on the internals of the
+  The font description as string, for example, \"Sans Italic 12\". Note that
+  the initial value of this property depends on the internals of the
   @class{pango:font-description} structure.
   @see-class{gtk:text-tag}
   @see-class{pango:font-description}")
@@ -984,13 +983,13 @@
 (setf (documentation (liber:slot-documentation "font-desc" 'text-tag) t)
  "The @code{font-desc} property of type @class{pango:font-description}
   (Read / Write) @br{}
-  Font description as a Pango font description.")
+  The font description as a Pango font description.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-font-desc)
       "Accessor"
       (documentation 'text-tag-font-desc 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-font-desc object) => font-desc}
   @syntax{(setf (gtk:text-tag-font object) font-desc)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1000,7 +999,7 @@
     Accessor of the @slot[gtk:text-tag]{font-desc} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font description as a Pango font description.
+  The font description as a Pango font description.
   @see-class{gtk:text-tag}
   @see-class{pango:font-description}")
 
@@ -1009,14 +1008,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-features" 'text-tag) t)
  "The @code{font-features} property of type @code{:string} (Read / Write) @br{}
-  OpenType font features, as a string. @br{}
+  The OpenType font features, as a string. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-font-features)
       "Accessor"
       (documentation 'text-tag-font-features 'function)
- "@version{2024-3-9}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-font-features object) => features}
   @syntax{(setf (gtk:text-tag-font-features object) features)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1025,7 +1024,7 @@
     Accessor of the @slot[gtk:text-tag]{font-features} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  OpenType font features, as a string.
+  The OpenType font features, as a string.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-font-features-set}")
 
@@ -1042,7 +1041,7 @@
 (setf (liber:alias-for-function 'text-tag-font-features-set)
       "Accessor"
       (documentation 'text-tag-font-features-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-font-features-set object) => setting}
   @syntax{(setf (gtk:text-tag-font-features-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1060,14 +1059,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "foreground" 'text-tag) t)
  "The @code{foreground} property of type @code{:string} (Write) @br{}
-  Foreground color as a string. @br{}
+  The foreground color as a string. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-foreground)
       "Accessor"
       (documentation 'text-tag-foreground 'function)
- "@version{2023-10-24}
+ "@version{2024-7-2}
   @syntax{(setf (gtk:text-tag-foreground object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string with the foreground color}
@@ -1075,7 +1074,7 @@
     Accessor of the @slot[gtk:text-tag]{foreground} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin{notes}
     The @slot[gtk:text-tag]{foreground} property is not readable, but writable.
     @begin{pre}
 (defvar tag (gtk:text-tag-new nil)) => TAG
@@ -1083,7 +1082,7 @@
 (gtk:text-tag-foreground-rgba tag)
 => #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
     @end{pre}
-  @end{dictionary}
+  @end{notes}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-foreground-rgba}
   @see-function{gtk:text-tag-foreground-set}")
@@ -1100,7 +1099,7 @@
 (setf (liber:alias-for-function 'text-tag-foreground-rgba)
       "Accessor"
       (documentation 'text-tag-foreground-rgba 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-foreground-rgba object) => color}
   @syntax{(setf (gtk:text-tag-foreground-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1128,7 +1127,7 @@
 (setf (liber:alias-for-function 'text-tag-foreground-set)
       "Accessor"
       (documentation 'text-tag-foreground-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-foreground-set object) => setting}
   @syntax{(setf (gtk:text-tag-foreground-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1147,14 +1146,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "indent" 'text-tag) t)
  "The @code{indent} property of type @code{:int} (Read / Write) @br{}
-  Amount to indent the paragraph, in pixels. @br{}
+  The amount to indent the paragraph, in pixels. @br{}
   Default value: 0")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-indent)
       "Accessor"
       (documentation 'text-tag-indent 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-indent object) => indent}
   @syntax{(setf (gtk:text-tag-indent object) indent)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1163,7 +1162,7 @@
     Accessor of the @slot[gtk:text-tag]{indent} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Amount to indent the paragraph, in pixels.
+  The amount to indent the paragraph, in pixels.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-indent-set}")
 
@@ -1179,7 +1178,7 @@
 (setf (liber:alias-for-function 'text-tag-indent-set)
       "Accessor"
       (documentation 'text-tag-indent-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-indent-set object) => setting}
   @syntax{(setf (gtk:text-tag-indent-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1205,7 +1204,7 @@
 (setf (liber:alias-for-function 'text-tag-insert-hyphens)
       "Accessor"
       (documentation 'text-tag-insert-hyphens 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-insert-hyphens object) => setting}
   @syntax{(setf (gtk:text-tag-insert-hyphens object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1232,7 +1231,7 @@
 (setf (liber:alias-for-function 'text-tag-insert-hyphens-set)
       "Accessor"
       (documentation 'text-tag-insert-hyphens-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-insert-hyphens-set object) => setting}
   @syntax{(setf (gtk:text-tag-insert-hyphens-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1259,7 +1258,7 @@
 (setf (liber:alias-for-function 'text-tag-invisible)
       "Accessor"
       (documentation 'text-tag-invisible 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-invisible object) => invisible}
   @syntax{(setf (gtk:text-tag-invisible object) invisible)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1286,7 +1285,7 @@
 (setf (liber:alias-for-function 'text-tag-invisible-set)
       "Accessor"
       (documentation 'text-tag-invisible-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-invisible-set object) => setting}
   @syntax{(setf (gtk:text-tag-invisible-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1305,14 +1304,14 @@
 (setf (documentation (liber:slot-documentation "justification" 'text-tag) t)
  "The @code{justification} property of type @symbol{gtk:justification}
   (Read / Write) @br{}
-  Left, right, or center justification. @br{}
+  The left, right, or center justification. @br{}
   Default value: @code{:left}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-justification)
       "Accessor"
       (documentation 'text-tag-justification 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-justification object) => justification}
   @syntax{(setf (gtk:text-tag-justification object) justification)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1321,7 +1320,7 @@
     Accessor of the @slot[gtk:text-tag]{justification} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Left, right, or center justification.
+  The left, right, or center justification.
   @see-class{gtk:text-tag}
   @see-symbol{gtk:justification}
   @see-function{gtk:text-tag-justification-set}")
@@ -1339,7 +1338,7 @@
 (setf (liber:alias-for-function 'text-tag-justification-set)
       "Accessor"
       (documentation 'text-tag-justification-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-justification-set object) => setting}
   @syntax{(setf (gtk:text-tag-justification-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1367,7 +1366,7 @@
 (setf (liber:alias-for-function 'text-tag-language)
       "Accessor"
       (documentation 'text-tag-language 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-language object) => language}
   @syntax{(setf (gtk:text-tag-language object) language)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1396,7 +1395,7 @@
 (setf (liber:alias-for-function 'text-tag-language-set)
       "Accessor"
       (documentation 'text-tag-language-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-language-set object) => setting}
   @syntax{(setf (gtk:text-tag-language-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1414,7 +1413,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "left-margin" 'text-tag) t)
  "The @code{left-margin} property of type @code{:int} (Read / Write) @br{}
-  Width of the left margin in pixels. @br{}
+  The width of the left margin in pixels. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1422,7 +1421,7 @@
 (setf (liber:alias-for-function 'text-tag-left-margin)
       "Accessor"
       (documentation 'text-tag-left-margin 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-left-margin object) => margin}
   @syntax{(setf (gtk:text-tag-left-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1431,7 +1430,7 @@
     Accessor of the @slot[gtk:text-tag]{left-margin} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Width of the left margin in pixels.
+  The width of the left margin in pixels.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-left-margin-set}")
 
@@ -1448,7 +1447,7 @@
 (setf (liber:alias-for-function 'text-tag-left-margin-set)
       "Accessor"
       (documentation 'text-tag-left-margin-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-left-margin-set object) => setting}
   @syntax{(setf (gtk:text-tag-left-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1466,7 +1465,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "letter-spacing" 'text-tag) t)
  "The @code{letter-spacing} property of type @code{:int} (Read / Write) @br{}
-  Extra spacing between graphemes, in Pango units. @br{}
+  The extra spacing between graphemes, in Pango units. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1474,7 +1473,7 @@
 (setf (liber:alias-for-function 'text-tag-letter-spacing)
       "Accessor"
       (documentation 'text-tag-letter-spacing 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-letter-spacing object) => spacing}
   @syntax{(setf (gtk:text-tag-letter-spacing object) spacing)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1484,7 +1483,7 @@
     Accessor of the @slot[gtk:text-tag]{letter-spacing} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Extra spacing between graphemes, in Pango units.
+  The extra spacing between graphemes, in Pango units.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-letter-spacing-set}")
 
@@ -1502,7 +1501,7 @@
 (setf (liber:alias-for-function 'text-tag-letter-spacing-set)
       "Accessor"
       (documentation 'text-tag-letter-spacing-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-letter-spacing-set object) => setting}
   @syntax{(setf (gtk:text-tag-letter-spacing-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1520,13 +1519,13 @@
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "line-height" 'text-tag) t)
  "The @code{line-height} property of type @code{:float} (Read / Write) @br{}
-  Factor to scale line height by. Since 4.6")
+  The factor to scale line height by. Since 4.6")
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-function 'text-tag-line-height)
       "Accessor"
       (documentation 'text-tag-line-height 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-line-height object) => height}
   @syntax{(setf (gtk:text-tag-line-height object) height)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1535,7 +1534,7 @@
     Accessor of the @slot[gtk:text-tag]{line-height} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Factor to scale line height by.
+  The factor to scale line height by.
 
   Since 4.6
   @see-class{gtk:text-tag}
@@ -1554,7 +1553,7 @@
 (setf (liber:alias-for-function 'text-tag-line-height-set)
       "Accessor"
       (documentation 'text-tag-line-height-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-line-height-set object) => setting}
   @syntax{(setf (gtk:text-tag-line-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1575,14 +1574,14 @@
 (setf (documentation (liber:slot-documentation "name" 'text-tag) t)
  "The @code{name} property of type @code{:string} (Read / Write / Construct)
   @br{}
-  Name used to refer to the text tag, @code{nil} for anonymous tags. @br{}
+  The name used to refer to the text tag, @code{nil} for anonymous tags. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-name)
       "Accessor"
       (documentation 'text-tag-name 'function)
- "@version{2023-10-5}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-name object) => name}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[name]{a string with the name of the text tag}
@@ -1590,7 +1589,7 @@
     Accessor of the @slot[gtk:text-tag]{name} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Name used to refer to the text tag, @code{nil} for anonymous tags.
+  The name used to refer to the text tag, @code{nil} for anonymous tags.
   @see-class{gtk:text-tag}")
 
 ;;; --- gtk:text-tag-overline --------------------------------------------------
@@ -1599,14 +1598,14 @@
 (setf (documentation (liber:slot-documentation "overline" 'text-tag) t)
  "The @code{overline} property of type @symbol{pango:overline} (Read / Write)
   @br{}
-  Style of overline for this text. @br{}
+  The style of overline for this text. @br{}
   Default value: @code{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-overline)
       "Accessor"
       (documentation 'text-tag-overline 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-overline object) => setting}
   @syntax{(setf (gtk:text-tag-overline object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1615,7 +1614,7 @@
     Accessor of the @slot[gtk:text-tag]{overline} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Style of overline for this text.
+  The style of overline for this text.
   @see-class{gtk:text-tag}")
 
 ;;; --- gtk:text-tag-overline-rgba ---------------------------------------------
@@ -1624,13 +1623,13 @@
 (setf (documentation (liber:slot-documentation "overline-rgba" 'text-tag) t)
  "The @code{overline-rgba} property of type @class{gdk:rgba} (Read / Write)
   @br{}
-  Color of overline for this text.")
+  The color of overline for this text.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-overline-rgba)
       "Accessor"
       (documentation 'text-tag-overline-rgba 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-overline-rgba object) => rgba}
   @syntax{(setf (gtk:text-tag-overline-rgba object) rgba}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1639,7 +1638,7 @@
     Accessor of the @slot[gtk:text-tag]{overline-rgba} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Color of overline for this text.
+  The color of overline for this text.
   @see-class{gtk:text-tag}
   @see-class{gdk:rgba}
   @see-function{gtk:text-tag-overline-rgba-set}")
@@ -1657,7 +1656,7 @@
 (setf (liber:alias-for-function 'text-tag-overline-rgba-set)
       "Accessor"
       (documentation 'text-tag-overline-rgba-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-overline-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-overline-rgba-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1682,7 +1681,7 @@
 (setf (liber:alias-for-function 'text-tag-overline-set)
       "Accessor"
       (documentation 'text-tag-overline-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-overline-set object) => setting}
   @syntax{(setf (gtk:text-tag-overline-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1708,7 +1707,7 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background)
       "Accessor"
       (documentation 'text-tag-paragraph-background 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-paragraph-background object) => color}
   @syntax{(setf (gtk:text-tag-paragraph-background object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1735,7 +1734,7 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background-rgba)
       "Accessor"
       (documentation 'text-tag-paragraph-background-rgba 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-paragraph-background-rgba object) => color}
   @syntax{(setf (gtk:text-tag-paragraph-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1764,7 +1763,7 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background-set)
       "Accessor"
       (documentation 'text-tag-paragraph-background-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-paragraph-background-set object) => setting}
   @syntax{(setf (gtk:text-tag-paragraph-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1786,7 +1785,7 @@
                                                'text-tag) t)
  "The @code{pixels-above-lines} property of type @code{:int} (Read / Write)
   @br{}
-  Pixels of blank space above paragraphs. @br{}
+  The pixels of blank space above paragraphs. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1794,7 +1793,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-above-lines)
       "Accessor"
       (documentation 'text-tag-pixels-above-lines 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-above-lines object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-above-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1803,7 +1802,7 @@
     Accessor of the @slot[gtk:text-tag]{pixels-above-lines} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Pixels of blank space above paragraphs.
+  The pixels of blank space above paragraphs.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-above-lines-set}")
 
@@ -1821,7 +1820,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-above-lines-set)
       "Accessor"
       (documentation 'text-tag-pixels-above-lines-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-above-lines-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-above-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1842,7 +1841,7 @@
                                                'text-tag) t)
  "The @code{pixels-below-lines} property of type @code{:int}
   (Read / Write) @br{}
-  Pixels of blank space below paragraphs. @br{}
+  The pixels of blank space below paragraphs. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1850,7 +1849,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-below-lines)
       "Accessor"
       (documentation 'text-tag-pixels-below-lines 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-below-lines object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-below-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1877,7 +1876,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-below-lines-set)
       "Accessor"
       (documentation 'text-tag-pixels-below-lines-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-below-lines-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-below-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1898,7 +1897,7 @@
                                                'text-tag) t)
  "The @code{pixels-inside-wrap} property of type @code{:int} (Read / Write)
   @br{}
-  Pixels of blank space between wrapped lines in a paragraph. @br{}
+  The pixels of blank space between wrapped lines in a paragraph. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1906,7 +1905,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-inside-wrap)
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-inside-wrap object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-inside-wrap object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1916,7 +1915,7 @@
     Accessor of the @slot[gtk:text-tag]{pixels-inside-wrap} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Pixels of blank space between wrapped lines in a paragraph.
+  The pixels of blank space between wrapped lines in a paragraph.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-inside-wrap-set}")
 
@@ -1934,7 +1933,7 @@
 (setf (liber:alias-for-function 'text-tag-pixels-inside-wrap-set)
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-pixels-inside-wrap-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-inside-wrap-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1953,7 +1952,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "right-margin" 'text-tag) t)
  "The @code{right-margin} property of type @code{:int} (Read / Write) @br{}
-  Width of the right margin in pixels. @br{}
+  The width of the right margin in pixels. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1961,7 +1960,7 @@
 (setf (liber:alias-for-function 'text-tag-right-margin)
       "Accessor"
       (documentation 'text-tag-right-margin 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-right-margin object) => margin}
   @syntax{(setf (gtk:text-tag-right-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1970,7 +1969,7 @@
     Accessor of the @slot[gtk:text-tag]{right-margin} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Width of the right margin in pixels.
+  The width of the right margin in pixels.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-right-margin-set}")
 
@@ -1987,7 +1986,7 @@
 (setf (liber:alias-for-function 'text-tag-right-margin-set)
       "Accessor"
       (documentation 'text-tag-right-margin-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-right-margin-set object) => setting}
   @syntax{(setf (gtk:text-tag-right-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2005,7 +2004,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rise" 'text-tag) t)
  "The @code{rise} property of type @code{:int} (Read / Write) @br{}
-  Offset of text above the baseline (below the baseline if rise is negative)
+  The offset of text above the baseline, below the baseline if rise is negative,
   in Pango units. @br{}
   Default value: 0")
 
@@ -2013,7 +2012,7 @@
 (setf (liber:alias-for-function 'text-tag-rise)
       "Accessor"
       (documentation 'text-tag-rise 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-rise object) => rise}
   @syntax{(setf (gtk:text-tag-rise object) rise)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2023,7 +2022,7 @@
     Accessor of the @slot[gtk:text-tag]{rise} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Offset of text above the baseline (below the baseline if rise is negative)
+  The offset of text above the baseline, below the baseline if rise is negative,
   in Pango units.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-rise-set}")
@@ -2040,7 +2039,7 @@
 (setf (liber:alias-for-function 'text-tag-rise-set)
       "Accessor"
       (documentation 'text-tag-rise-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-rise-set object) => setting}
   @syntax{(setf (gtk:text-tag-rise-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2058,9 +2057,9 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scale" 'text-tag) t)
  "The @code{scale} property of type @code{:double} (Read / Write) @br{}
-  Font size as a scale factor relative to the default font size. This properly
-  adapts to theme changes etc. so is recommended. Pango predefines some scales
-  such as the @var{pango:+scale-x-large+} value. @br{}
+  The font size as a scale factor relative to the default font size. This
+  properly adapts to theme changes etc. so is recommended. Pango predefines
+  some scales such as the @var{pango:+scale-x-large+} value. @br{}
   Allowed values: >= 0 @br{}
   Default value: 1")
 
@@ -2068,7 +2067,7 @@
 (setf (liber:alias-for-function 'text-tag-scale)
       "Accessor"
       (documentation 'text-tag-scale 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-scale object) => scale}
   @syntax{(setf (gtk:text-tag-scale object) scale)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2077,9 +2076,9 @@
     Accessor of the @slot[gtk:text-tag]{scale} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font size as a scale factor relative to the default font size. This property
-  adapts to theme changes etc. so is recommended. Pango predefines some scales
-  such as the @var{pango:+scale-x-large+} value.
+  The font size as a scale factor relative to the default font size. This
+  property adapts to theme changes etc. so is recommended. Pango predefines
+  some scales such as the @var{pango:+scale-x-large+} value.
   @see-class{gtk:text-tag}
   @see-variable{pango:+scale-x-large+}
   @see-function{gtk:text-tag-scale-set}")
@@ -2096,7 +2095,7 @@
 (setf (liber:alias-for-function 'text-tag-scale-set)
       "Accessor"
       (documentation 'text-tag-scale-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-scale-set object) => setting}
   @syntax{(setf (gtk:text-tag-scale-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2115,13 +2114,14 @@
 (setf (documentation (liber:slot-documentation "sentence" 'text-tag) t)
  "The @code{sentence} property of type @code{:boolean} (Read / Write) @br{}
   Whether this tag represents a single sentence. This affects cursor movement.
-  Since 4.6")
+  Since 4.6 @br{}
+  Default value: @em{false}")
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-function 'text-tag-sentence)
       "Accessor"
       (documentation 'text-tag-sentence 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-sentence object) => setting}
   @syntax{(setf (gtk:text-tag-sentence object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2148,7 +2148,7 @@
 (setf (liber:alias-for-function 'text-tag-sentence-set)
       "Accessor"
       (documentation 'text-tag-sentence-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-sentence-set object) => setting}
   @syntax{(setf (gtk:text-tag-sentence-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2176,7 +2176,7 @@
 (setf (liber:alias-for-function 'text-tag-show-spaces)
       "Accessor"
       (documentation 'text-tag-show-spaces 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-show-spaces object) => setting}
   @syntax{(setf (gtk:text-tag-show-spaces object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2203,7 +2203,7 @@
 (setf (liber:alias-for-function 'text-tag-show-spaces-set)
       "Accessor"
       (documentation 'text-tag-show-spaces-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-show-spaces-set object) => setting}
   @syntax{(setf (gtk:text-tag-show-spaces-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2222,7 +2222,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size" 'text-tag) t)
  "The @code{size} property of type @code{:int} (Read / Write) @br{}
-  Font size in Pango units. @br{}
+  The font size in Pango units. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -2230,7 +2230,7 @@
 (setf (liber:alias-for-function 'text-tag-size)
       "Accessor"
       (documentation 'text-tag-size 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-size object) => size}
   @syntax{(setf (gtk:text-tag-size object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2239,7 +2239,7 @@
     Accessor of the @slot[gtk:text-tag]{size} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font size in Pango units.
+  The font size in Pango units.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-size-points}
   @see-function{gtkt-text-tag-size-set}")
@@ -2249,7 +2249,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size-points" 'text-tag) t)
  "The @code{size-points} property of type @code{:double} (Read / Write) @br{}
-  Font size in points. @br{}
+  The font size in points. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -2257,7 +2257,7 @@
 (setf (liber:alias-for-function 'text-tag-size-points)
       "Accessor"
       (documentation 'text-tag-size-points 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-size-points object) => size}
   @syntax{(setf (gtk:text-tag-size-points object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2266,7 +2266,7 @@
     Accessor of the @slot[gtk:text-tag]{size-points} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font size in points.
+  The font size in points.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-size}
   @see-function{gtk:text-tag-size-set}")
@@ -2283,7 +2283,7 @@
 (setf (liber:alias-for-function 'text-tag-size-set)
       "Accessor"
       (documentation 'text-tag-size-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-size-set object) => setting}
   @syntax{(setf (gtk:text-tag-size-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2303,14 +2303,14 @@
 (setf (documentation (liber:slot-documentation "stretch" 'text-tag) t)
  "The @code{stretch} property of type @symbol{pango:stretch} (Read / Write)
   @br{}
-  Font stretch, e.g. the @code{:condensed} value. @br{}
+  The font stretch, for example, the @code{:condensed} value. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-stretch)
       "Accessor"
       (documentation 'text-tag-stretch 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-stretch object) => stretch}
   @syntax{(setf (gtk:text-tag-stretch object) stretch)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2319,8 +2319,8 @@
     Accessor of the @slot[gtk:text-tag]{stretch} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font stretch as a value of the @symbol{pango:stretch} enumeration, e.g. the
-  @code{:condensed} value.
+  The font stretch as a value of the @symbol{pango:stretch} enumeration, for
+  example, the @code{:condensed} value.
   @see-class{gtk:text-tag}
   @see-symbol{pango:stretch}
   @see-function{gtk:text-tag-stretch-set}")
@@ -2337,7 +2337,7 @@
 (setf (liber:alias-for-function 'text-tag-stretch-set)
       "Accessor"
       (documentation 'text-tag-stretch-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-stretch-set object) => setting}
   @syntax{(setf (gtk:text-tag-stretch-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2362,7 +2362,7 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough)
       "Accessor"
       (documentation 'text-tag-strikethrough 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-strikethrough object) => strikethrough}
   @syntax{(setf (gtk:text-tag-strikethrough object) strikethrough)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2390,7 +2390,7 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough-rgba)
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-strikethrough-rgba object) => color}
   @syntax{(setf (gtk:text-tag-strikethrough-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2413,14 +2413,14 @@
                                                'text-tag) t)
  "The @code{strikethrough-rgba-set} property of type @code{:boolean}
   (Read / Write) @br{}
-  If the @code{strikethrough-rgba} property has been set. @br{}
+  Whether the @code{strikethrough-rgba} property has been set. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-strikethrough-rgba-set)
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-strikethrough-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-strikethrough-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2430,7 +2430,7 @@
     Accessor of the @slot[gtk:text-tag]{strikethrough-rgba-set} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  If the @slot[gtk:text-tag]{strikethrough-rgba} property has been set.
+  Whether the @slot[gtk:text-tag]{strikethrough-rgba} property has been set.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-strikethrough-rgba}")
 
@@ -2447,7 +2447,7 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough-set)
       "Accessor"
       (documentation 'text-tag-strikethrough-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-strikethrough-set object) => setting}
   @syntax{(setf (gtk:text-tag-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2465,14 +2465,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "style" 'text-tag) t)
  "The @code{style} property of type @symbol{pango:style} (Read / Write) @br{}
-  Font style, e.g. the @code{:italic} value. @br{}
+  The font style, for example, the @code{:italic} value. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-style)
       "Accessor"
       (documentation 'text-tag-style 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-style object) => style}
   @syntax{(setf (gtk:text-tag-style object) style)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2481,8 +2481,8 @@
     Accessor of the @slot[gtk:text-tag]{style} slot of the @class{gtk:text-tag}
     class.
   @end{short}
-  Font style as a value of the @symbol{pango:style} enumeration, e.g. the
-  @code{:italic} value.
+  The font style as a value of the @symbol{pango:style} enumeration, for
+  example, the @code{:italic} value.
   @see-class{gtk:text-tag}
   @see-symbol{pango:style}
   @see-function{gtk:text-tag-style-set}")
@@ -2499,7 +2499,7 @@
 (setf (liber:alias-for-function 'text-tag-style-set)
       "Accessor"
       (documentation 'text-tag-style-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-style-set object) => setting}
   @syntax{(setf (gtk:text-tag-style-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2517,13 +2517,13 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tabs" 'text-tag) t)
  "The @code{tabs} property of type @class{pango:tab-array} (Read / Write) @br{}
-  Custom tabs for this text.")
+  The custom tabs for this text.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-tabs)
       "Accessor"
       (documentation 'text-tag-tabs 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-tabs object) => tabs}
   @syntax{(setf (gtk:text-tag-tabs object) tabs)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2532,7 +2532,7 @@
     Accessor of the @slot[gtk:text-tag]{tabs} slot of the @class{gtk:text-tag}
     class.
   @end{short}
-  Custom tabs for this text.
+  The custom tabs for this text.
   @see-class{gtk:text-tag}
   @see-class{pango:tab-array}
   @see-function{gtk:text-tag-tabs-set}")
@@ -2549,7 +2549,7 @@
 (setf (liber:alias-for-function 'text-tag-tabs-set)
       "Accessor"
       (documentation 'text-tag-tabs-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-tabs-set object) => setting}
   @syntax{(setf (gtk:text-tag-tabs-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2568,13 +2568,14 @@
 (setf (documentation (liber:slot-documentation "text-transform" 'text-tag) t)
  "The @code{text-transform} property of type @symbol{pango:text-transform}
   (Read / Write) @br{}
-  How to transform the text for display. Since 4.6")
+  How to transform the text for display. Since 4.6 @br{}
+  Default value: @code{:none}")
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-function 'text-tag-text-transform)
       "Accessor"
       (documentation 'text-tag-text-transform 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-text-transform object) => transform}
   @syntax{(setf (gtk:text-tag-text-transform object) transform)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2604,7 +2605,7 @@
 (setf (liber:alias-for-function 'text-tag-text-transform-set)
       "Accessor"
       (documentation 'text-tag-text-transform-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-text-transform-set object) => setting}
   @syntax{(setf (gtk:text-tag-text-transform-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2626,14 +2627,14 @@
 (setf (documentation (liber:slot-documentation "underline" 'text-tag) t)
  "The @code{underline} property of type @symbol{pango:underline} (Read / Write)
   @br{}
-  Style of underline for this text. @br{}
+  The style of underline for this text. @br{}
   Default value: @code{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-underline)
       "Accessor"
       (documentation 'text-tag-underline 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-underline object) => underline}
   @syntax{(setf (gtk:text-tag-underline object) underline)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2642,7 +2643,7 @@
     Accessor of the @slot[gtk:text-tag]{underline} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Style of underline for this text.
+  The style of underline for this text.
   @see-class{gtk:text-tag}
   @see-symbol{pango:underline}
   @see-function{gtk:text-tag-underline-rgba}
@@ -2655,16 +2656,16 @@
  "The @code{underline-rgba} property of type @class{gdk:rgba} (Read / Write)
   @br{}
   This property modifies the color of underlines. If not set, underlines will
-  use the forground color. If the @code{underline} property is set to the
-  @code{:error} value of the @symbol{pango:underline} enumeration, an alternate
-  color may be applied instead of the foreground. Setting this property will
-  always override those defaults.")
+  use the forground color. If the @slot[gtk:text-tag]{underline} property is set
+  to the @code{:error} value of the @symbol{pango:underline} enumeration, an
+  alternate color may be applied instead of the foreground. Setting this
+  property will always override those defaults.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-underline-rgba)
       "Accessor"
       (documentation 'text-tag-underline-rgba 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-underline-rgba object) => color}
   @syntax{(setf (gtk:text-tag-underline-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2691,14 +2692,14 @@
                                                'text-tag) t)
  "The @code{underline-rgba-set} property of type @code{:boolean} (Read / Write)
   @br{}
-  If the @code{underline-rgba} property has been set. @br{}
+  Whether the @code{underline-rgba} property has been set. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-underline-rgba-set)
       "Accessor"
       (documentation 'text-tag-underline-rgba-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-underline-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-underline-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2708,7 +2709,7 @@
     Accessor of the @slot[gtk:text-tag]{underline-rgba-set} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  If the @slot[gtk:text-tag]{underline-rgba} property has been set.
+  Whether the @slot[gtk:text-tag]{underline-rgba} property has been set.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-underline-rgba}")
 
@@ -2724,7 +2725,7 @@
 (setf (liber:alias-for-function 'text-tag-underline-set)
       "Accessor"
       (documentation 'text-tag-underline-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-underline-set object) => setting}
   @syntax{(setf (gtk:text-tag-underline-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2744,14 +2745,14 @@
 (setf (documentation (liber:slot-documentation "variant" 'text-tag) t)
  "The @code{variant} property of type @symbol{pango:variant}
   (Read / Write) @br{}
-  Font variant, e.g. the @code{:small-caps} value. @br{}
+  The font variant, for example, the @code{:small-caps} value. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-tag-variant)
       "Accessor"
       (documentation 'text-tag-variant 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-variant object) => variant}
   @syntax{(setf (gtk:text-tag-variant object) variant)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2760,8 +2761,8 @@
     Accessor of the @slot[gtk:text-view]{variant} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Font variant as a value of the @symbol{pango:variant} enumeration, e.g. the
-  @code{:small-caps} value.
+  The font variant as a value of the @symbol{pango:variant} enumeration, for
+  example, the @code{:small-caps} value.
   @see-class{gtk:text-tag}
   @see-symbol{pango:variant}
   @see-function{gtk:text-tag-variant-set}")
@@ -2778,7 +2779,7 @@
 (setf (liber:alias-for-function 'text-tag-variant-set)
       "Accessor"
       (documentation 'text-tag-variant-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-variant-set object) => setting}
   @syntax{(setf (gtk:text-tag-variant-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2796,8 +2797,8 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "weight" 'text-tag) t)
  "The @code{weight} property of type @code{:int} (Read / Write) @br{}
-  Font weight as an integer, see predefined values in the @symbol{pango:weight}
-  enumeration, for example, the @code{:bold} value. @br{}
+  The font weight as an integer, see predefined values in the
+  @symbol{pango:weight} enumeration, for example, the @code{:bold} value. @br{}
   Allowed values: >= 0 @br{}
   Default value: 400")
 
@@ -2805,7 +2806,7 @@
 (setf (liber:alias-for-function 'text-tag-weight)
       "Accessor"
       (documentation 'text-tag-weight 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-weight object) => weight}
   @syntax{(setf (gtk:text-tag-weight object) weight)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2814,8 +2815,8 @@
     Accessor of the @slot[gtk:text-tag]{weight} slot of the @class{gtk:text-tag}
     class.
   @end{short}
-  Font weight as an integer, see predefined values in the @symbol{pango:weight}
-  enumeration, for example, the @code{:bold} value.
+  The font weight as an integer, see predefined values in the
+  @symbol{pango:weight} enumeration, for example, the @code{:bold} value.
   @see-class{gtk:text-tag}
   @see-symbol{pango:weight}
   @see-function{gtk:text-tag-weight-set}")
@@ -2832,7 +2833,7 @@
 (setf (liber:alias-for-function 'text-tag-weight-set)
       "Accessor"
       (documentation 'text-tag-weight-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-weight-set object) => setting}
   @syntax{(setf (gtk:text-tag-weight-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2857,7 +2858,7 @@
 (setf (liber:alias-for-function 'text-tag-word)
       "Accessor"
       (documentation 'text-tag-word 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-word object) => setting}
   @syntax{(setf (gtk:text-tag-word object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2885,7 +2886,7 @@
 (setf (liber:alias-for-function 'text-tag-word-set)
       "Accessor"
       (documentation 'text-tag-word-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-word-set object) => setting}
   @syntax{(setf (gtk:text-tag-word-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2915,11 +2916,11 @@
 (setf (liber:alias-for-function 'text-tag-wrap-mode)
       "Accessor"
       (documentation 'text-tag-wrap-mode 'function)
- "@version{2024-3-8}
-  @syntax{(gtk:text-tag-wrap-mode object) => wrap-mode}
-  @syntax{(setf (gtk:text-tag-wrap-mode object) wrap-mode)}
+ "@version{2024-7-2}
+  @syntax{(gtk:text-tag-wrap-mode object) => mode}
+  @syntax{(setf (gtk:text-tag-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:text-tag} object}
-  @argument[wrap-mode]{a @symbol{gtk:wrap-mode} value}
+  @argument[mode]{a @symbol{gtk:wrap-mode} value}
   @begin{short}
     Accessor of the @slot[gtk:text-tag]{wrap-mode} slot of the
     @class{gtk:text-tag} class.
@@ -2941,7 +2942,7 @@
 (setf (liber:alias-for-function 'text-tag-wrap-mode-set)
       "Accessor"
       (documentation 'text-tag-wrap-mode-set 'function)
- "@version{2024-3-8}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-wrap-mode-set object) => setting}
   @syntax{(setf (gtk:text-tag-wrap-mode-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -2960,20 +2961,20 @@
 
 (defun text-tag-new (name &rest args)
  #+liber-documentation
- "@version{2023-10-24}
+ "@version{2024-7-2}
   @argument[name]{a string with the tag name, or @code{nil}}
   @argument[args]{list of property keywords and values}
   @return{The new @class{gtk:text-tag} object.}
   @begin{short}
     Creates a new tag.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin{examples}
     Create a tag with name \"font-italic\":
     @begin{pre}
 (gtk:text-tag-new \"font-italic\" :font \"fixed\" :style :italic)
 => #<gtk:text-tag {1006C86E63@}>
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:text-tag}"
   (if name
       (apply #'make-instance 'text-tag :name name args)
@@ -2995,27 +2996,26 @@
 
 (cffi:defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
  #+liber-documentation
- "@version{2023-10-24}
+ "@version{2024-7-2}
   @syntax{(gtk:text-tag-priority tag) => priority}
   @syntax{(setf (gtk:text-tag-priority tag) priority)}
   @argument[tag]{a @class{gtk:text-tag} object}
   @argument[priority]{an integer with the priority of the tag}
   @begin{short}
-    Accessor for the priority of a @class{gtk:text-tag} object.
+    The @fun{gtk:text-tag-priority} function gets the tag priority.
   @end{short}
-  The @fun{gtk:text-tag-priority} function gets the tag priority. The
-  @setf{gtk:text-tag-priority} function sets the priority.
+  The @setf{gtk:text-tag-priority} function sets the priority.
 
   Valid priorities start at 0 and go to one less than the value of the result
   of the @fun{gtk:text-tag-table-size} function. Each tag in a
-  @class{gt:tag-table} object has a unique priority. Setting the priority of one
-  tag shifts the priorities of all the other tags in the tag table to maintain a
-  unique priority for each tag. Higher priority tags \"win\" if two tags both
-  set the same text attribute. When adding a tag to a tag table, it will be
-  assigned the highest priority in the tag table by default. So normally the
-  precedence of a set of tags is the order in which they were added to the tag
-  table, or created with the @fun{gtk:text-buffer-create-tag} function, which
-  adds the tag to the tag table of the text buffer automatically.
+  @class{gtk:tag-table} object has a unique priority. Setting the priority of
+  one tag shifts the priorities of all the other tags in the tag table to
+  maintain a unique priority for each tag. Higher priority tags \"win\" if two
+  tags both set the same text attribute. When adding a tag to a tag table, it
+  will be assigned the highest priority in the tag table by default. So normally
+  the precedence of a set of tags is the order in which they were added to the
+  tag table, or created with the @fun{gtk:text-buffer-create-tag} function,
+  which adds the tag to the tag table of the text buffer automatically.
   @see-class{gtk:text-tag}
   @see-class{gtk:text-tag-table}
   @see-function{gtk:text-tag-table-size}
@@ -3030,7 +3030,7 @@
 
 (cffi:defcfun ("gtk_text_tag_changed" text-tag-changed) :void
  #+liber-documentation
- "@version{2023-10-24}
+ "@version{2024-7-2}
   @argument[tag]{a @class{gtk:text-tag} object}
   @argument[changed]{a boolean whether the change affects the
     @class{gtk:text-view} layout}

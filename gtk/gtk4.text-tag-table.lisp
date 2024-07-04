@@ -77,7 +77,7 @@
 
 #+liber-documentation
 (setf (documentation 'text-tag-table 'type)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @begin{short}
     A tag table defines a set of tags that can be used together.
   @end{short}
@@ -117,7 +117,7 @@ lambda (table tag changed)    :run-last
         @entry[table]{The @class{gtk:text-tag-table} object which received the
           signal.}
         @entry[tag]{The changed @class{gtk:text-tag} object.}
-        @entry[changed]{A boolean whether the size has been changed.}
+        @entry[changed]{The boolean whether the size has been changed.}
       @end{table}
     @subheading{The \"tag-removed\" signal}
       @begin{pre}
@@ -134,32 +134,6 @@ lambda (table tag)    :run-last
   @see-class{gtk:text-tag}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTextTagTableForeach
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcallback text-tag-table-foreach-func :void
-    ((tag (g:object text-tag))
-     (data :pointer))
-  (let ((func (glib:get-stable-pointer-value data)))
-    (funcall func tag)))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'text-tag-table-foreach-func)
-      "Callback"
-      (liber:symbol-documentation 'text-tag-table-foreach-func)
- "@version{#2024-5-4}
-  @syntax{lambda (tag)}
-  @argument[tag]{a @class{gtk:text-tag} object}
-  @begin{short}
-    The type of callback function passed to the @fun{gtk:text-tag-table-foreach}
-    function.
-  @end{short}
-  @see-class{gtk:text-tag-table}
-  @see-function{gtk:text-tag-table-foreach}")
-
-(export 'text-tag-table-foreach-func)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_text_tag_table_new
 ;;; ----------------------------------------------------------------------------
 
@@ -167,7 +141,7 @@ lambda (table tag)    :run-last
 
 (defun text-tag-table-new ()
  #+liber-documentation
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @return{The new @class{gtk:text-tag-table} object.}
   @begin{short}
     Creates a new tag table.
@@ -184,10 +158,10 @@ lambda (table tag)    :run-last
 
 (cffi:defcfun ("gtk_text_tag_table_add" text-tag-table-add) :boolean
  #+liber-documentation
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[tag]{a @class{gtk:text-tag} object}
-  @return{The boolean which is @em{true} on success.}
+  @return{@em{True} on success.}
   @begin{short}
     Adds a tag to the tag table.
   @end{short}
@@ -207,7 +181,7 @@ lambda (table tag)    :run-last
 
 (cffi:defcfun ("gtk_text_tag_table_remove" text-tag-table-remove) :void
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[tag]{a @class{gtk:text-tag} object}
   @begin{short}
@@ -229,19 +203,45 @@ lambda (table tag)    :run-last
 (cffi:defcfun ("gtk_text_tag_table_lookup" text-tag-table-lookup)
     (g:object gtk:text-tag)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[name]{a string with the name of a tag}
-  @return{The tag, or @code{nil} if none by that @arg{name} is in the tag
-  table.}
+  @return{The @class{gtk:text-tag} object, or @code{nil} if none by that
+    @arg{name} is in the tag table.}
   @begin{short}
-    Look up a named tag.
+    Look up a named tag in the tag table.
   @end{short}
   @see-class{gtk:text-tag-table}"
   (table (g:object text-tag-table))
   (name (:string :free-to-foreign t)))
 
 (export 'text-tag-table-lookup)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkTextTagTableForeach
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcallback text-tag-table-foreach-func :void
+    ((tag (g:object text-tag))
+     (data :pointer))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func tag)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'text-tag-table-foreach-func)
+      "Callback"
+      (liber:symbol-documentation 'text-tag-table-foreach-func)
+ "@version{2024-7-2}
+  @syntax{lambda (tag)}
+  @argument[tag]{a @class{gtk:text-tag} object}
+  @begin{short}
+    The type of callback function passed to the @fun{gtk:text-tag-table-foreach}
+    function.
+  @end{short}
+  @see-class{gtk:text-tag-table}
+  @see-function{gtk:text-tag-table-foreach}")
+
+(export 'text-tag-table-foreach-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_tag_table_foreach
@@ -254,7 +254,7 @@ lambda (table tag)    :run-last
 
 (defun text-tag-table-foreach (table func)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[func]{a @symbol{gtk:text-tag-table-foreach-func} callback function
     to call on each tag}
@@ -262,7 +262,7 @@ lambda (table tag)    :run-last
     Calls @arg{func} on each tag in the tag table.
   @end{short}
   Note that the tag table may not be modified while iterating over it, you
-  cannot add/remove tags.
+  cannot add or remove tags.
   @see-class{gtk:text-tag-table}
   @see-symbol{gtk:text-tag-table-foreach-func}"
   (glib:with-stable-pointer (ptr func)
@@ -278,11 +278,11 @@ lambda (table tag)    :run-last
 
 (cffi:defcfun ("gtk_text_tag_table_get_size" text-tag-table-size) :int
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @return{The integer with the number of tags in @arg{table}.}
   @begin{short}
-    Returns the size of the number of tags in the tag table.
+    Returns the number of tags in the tag table.
   @end{short}
   @see-class{gtk:text-tag-table}"
   (table (g:object text-tag-table)))

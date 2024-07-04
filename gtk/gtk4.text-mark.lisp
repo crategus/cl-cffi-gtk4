@@ -79,12 +79,12 @@
 
 #+liber-documentation
 (setf (documentation 'text-mark 'type)
- "@version{2023-8-26}
+ "@version{2024-7-2}
   @begin{short}
-    A @class{gtk:text-mark} object is like a bookmark in a text buffer.
+    The @class{gtk:text-mark} object is like a bookmark in a text buffer.
   @end{short}
-  It preserves a position in the text. You can convert the text mark to an
-  iterator using the @fun{gtk:text-buffer-iter-at-mark} function. Unlike
+  It preserves a position in the text buffer. You can convert the text mark to
+  an iterator using the @fun{gtk:text-buffer-iter-at-mark} function. Unlike
   iterators, text marks remain valid across buffer mutations, because their
   behavior is defined when text is inserted or deleted. When text containing a
   text mark is deleted, the text mark remains in the position originally
@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'text-mark-left-gravity)
       "Accessor"
       (documentation 'text-mark-left-gravity 'function)
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-mark-left-gravity object) => gravity}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[gravity]{@em{true} if the text mark has left gravity}
@@ -156,7 +156,7 @@
 (setf (liber:alias-for-function 'text-mark-name)
       "Accessor"
       (documentation 'text-mark-name 'function)
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-mark-name object) => name}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[name]{a string with the name of the text mark}
@@ -172,24 +172,24 @@
 ;;; gtk_text_mark_new
 ;;; ----------------------------------------------------------------------------
 
-(defun text-mark-new (name left-gravity)
+(defun text-mark-new (name &optional gravity)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[name]{a string with the name of the text mark or @code{nil}}
-  @argument[left-gravity]{a boolean whether the text mark should have left
-    gravity}
-  @return{New @class{gtk:text-mark} object.}
+  @argument[gravity]{an optional boolean whether the text mark should have left
+    gravity, the default is @em{false}}
+  @return{The new @class{gtk:text-mark} object.}
   @begin{short}
     Creates a text mark.
   @end{short}
   Add the text mark to a text buffer using the @fun{gtk:text-buffer-add-mark}
-  function. If @arg{name} is @code{nil}, the text mark is anonymous. Otherwise,
-  the text mark can be retrieved by @arg{name} using the
+  function. If the @arg{name} argument is @code{nil}, the text mark is
+  anonymous. Otherwise, the text mark can be retrieved by @arg{name} using the
   @fun{gtk:text-buffer-mark} function. If a text mark has left gravity, and text
-  is inserted at the text mark's current location, the text mark will be moved
-  to the left of the newly inserted text. If the text mark has right gravity,
-  @arg{left-gravity} is @em{false}, the text mark will end up on the right of
-  newly inserted text. The standard left-to-right cursor is a text mark with
+  is inserted at the text current location of the text mark, the text mark will
+  be moved to the left of the newly inserted text. If the text mark has right
+  gravity, @arg{gravity} is @em{false}, the text mark will end up on the right
+  of newly inserted text. The standard left-to-right cursor is a text mark with
   right gravity, when you type, the cursor stays on the right side of the text
   you are typing.
   @see-class{gtk:text-mark}
@@ -198,9 +198,9 @@
   (if name
       (make-instance 'text-mark
                      :name name
-                     :left-gravity left-gravity)
+                     :left-gravity gravity)
       (make-instance 'text-mark
-                     :left-gravity left-gravity)))
+                     :left-gravity gravity)))
 
 (export 'text-mark-new)
 
@@ -218,20 +218,19 @@
 
 (cffi:defcfun ("gtk_text_mark_get_visible" text-mark-visible) :boolean
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @syntax{(gtk:text-mark-visible mark) => visibility}
   @syntax{(setf (gtk:text-mark-visible mark) visibility)}
   @argument[mark]{a @class{gtk:text-mark} object}
   @argument[visibility]{a boolean whether the text mark is visible}
   @return{@em{True} if the text mark is visible.}
   @begin{short}
-    Accessor for the visibility of a text mark.
+    The @fun{gtk:text-mark-visible} function returns @em{true} if the text mark
+    is visible, that is a cursor is displayed for it.
   @end{short}
-  The @fun{gtk:text-mark-visible} function returns @em{true} if the text mark
-  is visible, i.e. a cursor is displayed for it. The
-  @setf{gtk:text-mark-visible} function sets the visibility.
+  The @setf{gtk:text-mark-visible} function sets the visibility.
 
-  The insertion point is normally visible, i.e. you can see it as a vertical
+  The insertion point is normally visible, that is, you can see it as a vertical
   bar. Also, the text widget uses a visible text mark to indicate where a drop
   will occur when dragging-and-dropping text. Most other text marks are not
   visible. Text marks are not visible by default.
@@ -246,9 +245,9 @@
 
 (cffi:defcfun ("gtk_text_mark_get_deleted" text-mark-deleted) :boolean
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[mark]{a @class{gtk:text-mark} object}
-  @return{The boolean whether the text mark is deleted.}
+  @return{@em{True} if the text mark is deleted.}
   @begin{short}
     Returns @em{true} if the text mark has been removed from its text buffer
     with the @fun{gtk:text-buffer-delete-mark} function.
@@ -269,7 +268,7 @@
 (cffi:defcfun ("gtk_text_mark_get_buffer" text-mark-buffer)
     (g:object text-buffer)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2024-7-2}
   @argument[mark]{a @class{gtk:text-mark} object}
   @return{The @class{gtk:text-buffer} object of the text mark.}
   @begin{short}

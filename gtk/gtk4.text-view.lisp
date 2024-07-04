@@ -2,7 +2,7 @@
 ;;; gtk4.text-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -41,8 +41,6 @@
 ;;;     GtkWrapMode                                        gtk.enumerations.lisp
 ;;;
 ;;;     GtkTextChildAnchor
-;;;
-;;;     GTK_TEXT_VIEW_PRIORITY_VALIDATE
 ;;;
 ;;; Accessors
 ;;;
@@ -232,7 +230,7 @@
 (setf (liber:alias-for-symbol 'text-window-type)
       "GEnum"
       (liber:symbol-documentation 'text-window-type)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @begin{declaration}
 (gobject:define-g-enum \"GtkTextWindowType\" text-window-type
   (:export t
@@ -273,7 +271,7 @@
 (setf (liber:alias-for-symbol 'text-extend-selection)
       "GEnum"
       (liber:symbol-documentation 'text-extend-selection)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @begin{declaration}
 (gobject:define-g-enum \"GtkTextExtendSelection\" text-extend-selection
   (:export t
@@ -308,9 +306,9 @@
 
 #+liber-documentation
 (setf (documentation 'text-child-anchor 'type)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @begin{short}
-    A @class{gtk:text-child-anchor} object is a spot in the text buffer where
+    The @class{gtk:text-child-anchor} object is a spot in the text buffer where
     child widgets can be \"anchored\", inserted inline, as if they were
     characters.
   @end{short}
@@ -322,11 +320,14 @@
 ;;; gtk_text_child_anchor_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline text-child-anchor-new))
+;; Note: It is wrong to use the MAKE-INSTANCE function to create and return
+;; a GTK:TEXT-CHILD-ANCHOR object. The replacement character will not be
+;; initialized correctly and the code crashes that uses this child anchor.
 
-(defun text-child-anchor-new ()
+(cffi:defcfun ("gtk_text_child_anchor_new" text-child-anchor-new)
+    (g:object text-child-anchor)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2024-7-4}
   @return{The new @class{gtk:text-child-anchor} object.}
   @begin{short}
     Creates a new @class{gtk:text-child-anchor} object.
@@ -337,8 +338,7 @@
   @fun{gtk:text-buffer-create-child-anchor} function.
   @see-class{gtk:text-child-anchor}
   @see-function{gtk:text-buffer-insert-child-anchor}
-  @see-function{gtk:text-buffer-create-child-anchor}"
-  (make-instance 'text-child-anchor))
+  @see-function{gtk:text-buffer-create-child-anchor}")
 
 (export 'text-child-anchor-new)
 
@@ -351,7 +351,7 @@
                text-child-anchor-new-with-replacement)
     (g:object text-child-anchor)
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-7-4}
   @argument[character]{a string with a replacement character}
   @return{The new @class{gtk:text-child-anchor} object.}
   @begin{short}
@@ -374,10 +374,14 @@
 ;;; gtk_text_child_anchor_get_widgets
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_child_anchor_get_widgets" text-child-anchor-widgets)
-    (g:list-t (g:object widget))
+(cffi:defcfun ("gtk_text_child_anchor_get_widgets" %text-child-anchor-widgets)
+    :pointer
+  (anchor (g:object text-child-anchor))
+  (len (:pointer :uint)))
+
+(defun text-child-anchor-widgets (anchor)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2024-7-4}
   @argument[anchor]{a @class{gtk:text-child-anchor} object}
   @return{List of @class{gtk:widget} objects anchored at @arg{anchor}.}
   @begin{short}
@@ -385,7 +389,13 @@
   @end{short}
   @see-class{gtk:text-child-anchor}
   @see-class{gtk:widget}"
-  (anchor (g:object text-child-anchor)))
+  (cffi:with-foreign-objects ((len :uint))
+    (let ((ptr (%text-child-anchor-widgets anchor len)))
+      (unwind-protect
+        (iter (for n from 0 below (cffi:mem-ref len :uint))
+              (for widget = (cffi:mem-aref ptr '(g:object widget) n))
+              (collect widget))
+        (glib:free ptr)))))
 
 (export 'text-child-anchor-widgets)
 
@@ -396,7 +406,7 @@
 (cffi:defcfun ("gtk_text_child_anchor_get_deleted" text-child-anchor-deleted)
     :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2024-7-4}
   @argument[anchor]{a @class{gtk:text-child-anchor} object}
   @return{@em{True} if the anchor has been deleted from its text buffer.}
   @begin{short}
@@ -409,15 +419,6 @@
   (anchor (g:object text-child-anchor)))
 
 (export 'text-child-anchor-deleted)
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_TEXT_VIEW_PRIORITY_VALIDATE
-;;;
-;;; #define GTK_TEXT_VIEW_PRIORITY_VALIDATE (GDK_PRIORITY_REDRAW + 5)
-;;;
-;;; The priority at which the text view validates onscreen lines in an idle job
-;;; in the background.
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextView
@@ -498,7 +499,7 @@
 
 #+liber-documentation
 (setf (documentation 'text-view 'type)
- "@version{2024-5-24}
+ "@version{2024-7-4}
   @begin{short}
     GTK has a powerful framework for multiline text editing.
   @end{short}
@@ -659,8 +660,8 @@ lambda (view step count extend)    :action
 lambda (view step count)    :action
       @end{pre}
       The signal is a keybinding signal which can be bound to key combinations
-      to allow the user to move the viewport, i.e. change what part of the text
-      view is visible in a containing scrolled window. There are no default
+      to allow the user to move the viewport, that is, to change what part of
+      the text view is visible in a scrolled window. There are no default
       bindings for this signal.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
@@ -781,7 +782,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-accepts-tab)
       "Accessor"
       (documentation 'text-view-accepts-tab 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-accepts-tab object) => accepts}
   @syntax{(setf (gtk:text-view-accepts-tab object) accepts)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -817,7 +818,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-bottom-margin)
       "Accessor"
       (documentation 'text-view-bottom-margin 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-bottom-margin object) => margin}
   @syntax{(setf (gtk:text-view-bottom-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -846,7 +847,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-buffer)
       "Accessor"
       (documentation 'text-view-buffer 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-buffer object) => buffer}
   @syntax{(setf (gtk:text-view-buffer object) buffer)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -874,7 +875,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-cursor-visible)
       "Accessor"
       (documentation 'text-view-cursor-visible 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-cursor-visible object) => setting}
   @syntax{(setf (gtk:text-view-cursor-visible object) setting)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -903,7 +904,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-editable)
       "Accessor"
       (documentation 'text-view-editable 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-editable object) => setting}
   @syntax{(setf (gtk:text-view-editable object) setting)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -933,7 +934,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-extra-menu)
       "Accessor"
       (documentation 'text-view-extra-menu 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-extra-menu object) => menu}
   @syntax{(setf (gtk:text-view-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -964,7 +965,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-im-module)
       "Accessor"
       (documentation 'text-view-im-module 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-im-module object) => module}
   @syntax{(setf (gtk:text-view-im-module object) module)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -993,7 +994,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-indent)
       "Accessor"
       (documentation 'text-view-indent 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-indent object) => indent}
   @syntax{(setf (gtk:text-view-indent object) indent)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1024,7 +1025,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-input-hints)
       "Accessor"
       (documentation 'text-view-input-hints 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-input-hints object) => hints}
   @syntax{(setf (gtk:text-view-input-hints object) hints)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1054,7 +1055,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-input-purpose)
       "Accessor"
       (documentation 'text-view-input-purpose 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-input-purpose object) => purpose}
   @syntax{(setf (gtk:text-view-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1083,7 +1084,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-justification)
       "Accessor"
       (documentation 'text-view-justification 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-justification object) => justification}
   @syntax{(setf (gtk:text-view-justification object) justification)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1114,7 +1115,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-left-margin)
       "Accessor"
       (documentation 'text-view-left-margin 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-left-margin object) => margin}
   @syntax{(setf (gtk:text-view-left-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1143,7 +1144,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-monospace)
       "Accessor"
       (documentation 'text-view-monospace 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-monospace object) => monospace}
   @syntax{(setf (gtk:text-view-monospace object) monospace)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1170,7 +1171,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-overwrite)
       "Accessor"
       (documentation 'text-view-overwrite 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-overwrite object) => overwrite}
   @syntax{(setf (gtk:text-view-overwrite object) overwrite)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1200,7 +1201,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-above-lines)
       "Accessor"
       (documentation 'text-view-pixels-above-lines 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-pixels-above-lines object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-above-lines object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1233,7 +1234,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-below-lines)
       "Accessor"
       (documentation 'text-view-pixels-below-lines 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-pixels-below-lines object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-below-lines object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1266,7 +1267,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-inside-wrap)
       "Accessor"
       (documentation 'text-view-pixels-inside-wrap 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-pixels-inside-wrap object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-inside-wrap object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1298,7 +1299,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-right-margin)
       "Accessor"
       (documentation 'text-view-right-margin 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-right-margin object) => margin}
   @syntax{(setf (gtk:text-view-right-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1326,7 +1327,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-tabs)
       "Accessor"
       (documentation 'text-view-tabs 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-tabs object) => tabs}
   @syntax{(setf (gtk:text-view-tabs object) tabs)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1360,7 +1361,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-top-margin)
       "Accessor"
       (documentation 'text-view-top-margin 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-top-margin object) => margin}
   @syntax{(setf (gtk:text-view-top-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1391,7 +1392,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-wrap-mode)
       "Accessor"
       (documentation 'text-view-wrap-mode 'function)
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @syntax{(gtk:text-view-wrap-mode object) => mode}
   @syntax{(setf (gtk:text-view-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -1413,7 +1414,7 @@ lambda (view)    :action
 
 (defun text-view-new ()
  #+liber-documentation
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @return{The new @class{gtk:text-view} widget.}
   @begin{short}
     Creates a new text view.
@@ -1439,7 +1440,7 @@ lambda (view)    :action
 
 (defun text-view-new-with-buffer (buffer)
  #+liber-documentation
- "@version{2023-10-4}
+ "@version{2024-7-4}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @return{The new @class{gtk:text-view} widget.}
   @begin{short}
@@ -1472,7 +1473,7 @@ lambda (view)    :action
                                                 (xalign 0.0 xalign-p)
                                                 (yalign 0.0 yalign-p))
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[mark]{a @class{gtk:text-mark} object}
   @argument[margin]{a double float margin as a [0.0, 0.5) fraction of screen
@@ -1490,10 +1491,10 @@ lambda (view)    :action
   arguments, the text scrolls the minimal distance to get the mark onscreen,
   possibly not scrolling at all. The effective screen for purposes of this
   function is reduced by a margin of size @arg{margin}.
-  @begin[Note]{dictionary}
-    The double float arguments take any number, which is coerced to a double
-    float.
-  @end{dictionary}
+  @begin{notes}
+    The double float arguments take any number. The numbers are coerced to
+    double float values.
+  @end{notes}
   @see-class{gtk:text-view}
   @see-class{gtk:text-mark}"
   (%text-view-scroll-to-mark view
@@ -1521,7 +1522,7 @@ lambda (view)    :action
                                                 (xalign 0.0 xalign-p)
                                                 (yalign 0.0 yalign-p))
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @argument[margin]{a double float margin as a [0.0, 0.5) fraction of screen
@@ -1547,10 +1548,10 @@ lambda (view)    :action
   computations. To avoid oddness, consider using the
   @fun{gtk:text-view-scroll-to-mark} function which saves a point to be scrolled
   to after line validation.
-  @begin[Note]{dictionary}
-    The double float arguments take any number, which is coerced to a double
-    float.
-  @end{dictionary}
+  @begin{notes}
+    The double float arguments take any number. The numbers are coerced to
+    double float values.
+  @end{notes}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-scroll-to-mark}"
@@ -1570,7 +1571,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_scroll_mark_onscreen"
                text-view-scroll-mark-onscreen) :void
  #+liber-documentation
- "@version{2023-10-5}
+ "@version{2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[mark]{a @class{gtk:text-mark} object in the text buffer for the
     text view}
@@ -1592,7 +1593,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_move_mark_onscreen"
                text-view-move-mark-onscreen) :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[mark]{a @class{gtk:text-mark} object}
   @return{@em{True} if the mark moved, was not already onscreen.}
@@ -1614,7 +1615,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_place_cursor_onscreen"
                 text-view-place-cursor-onscreen) :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @return{@em{True} if the cursor had to be moved.}
   @begin{short}
@@ -1632,11 +1633,11 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_get_visible_rect" %text-view-visible-rect) :void
   (view (g:object text-view))
-  (visible-rect (g:boxed gdk:rectangle)))
+  (rect (g:boxed gdk:rectangle)))
 
 (defun text-view-visible-rect (view)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @return{The @class{gdk:rectangle} instance with the current visible region.}
   @begin{short}
@@ -1664,11 +1665,11 @@ lambda (view)    :action
 
 (defun text-view-iter-location (view iter)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @begin{return}
-    A @class{gdk:rectangle} instance with the bounds of the character at
+    The @class{gdk:rectangle} instance with the bounds of the character at
     @arg{iter}.
   @end{return}
   @begin{short}
@@ -1701,7 +1702,7 @@ lambda (view)    :action
 
 (defun text-view-cursor-locations (view iter)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @begin{return}
@@ -1752,7 +1753,7 @@ lambda (view)    :action
 
 (defun text-view-line-at-y (view y)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[y]{an integer with the y coordinate}
   @begin{return}
@@ -1789,7 +1790,7 @@ lambda (view)    :action
 
 (defun text-view-line-yrange (view iter)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @begin{return}
@@ -1825,12 +1826,12 @@ lambda (view)    :action
 
 (defun text-view-iter-at-location (view x y)
  #+liber-documentation
- "@version{2023-10-17}
+ "@version{2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[x]{an integer with the x position, in text buffer coordinates}
   @argument[y]{an integer with the y position, in text buffer coordinates}
   @begin{return}
-    A @class{gtk:text-iter} iterator at text buffer coordinates.
+    The @class{gtk:text-iter} iterator at text buffer coordinates.
   @end{return}
   @begin{short}
     Retrieves the iterator at text buffer coordinates @arg{x} and @arg{y}.
@@ -1862,7 +1863,7 @@ lambda (view)    :action
 
 (defun text-view-iter-at-position (view x y)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[x]{an integer with the x position, in text buffer coordinates}
   @argument[y]{an integer with the y position, in text buffer coordinates}
@@ -1882,7 +1883,8 @@ lambda (view)    :action
   @fun{gtk:text-view-window-to-buffer-coords} function.
 
   Note that this is different from the @fun{gtk:text-view-iter-at-location}
-  function, which returns cursor locations, i.e. positions between characters.
+  function, which returns cursor locations, that is, positions between
+  characters.
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-window-to-buffer-coords}
@@ -1909,7 +1911,7 @@ lambda (view)    :action
 
 (defun text-view-buffer-to-window-coords (view wtype xbuffer ybuffer)
  #+liber-documentation
- "@version{#2023-10-17}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[wtype]{a @symbol{gtk:text-window-type} value, except
     @code{:private}}
@@ -1949,7 +1951,7 @@ lambda (view)    :action
 
 (defun text-view-window-to-buffer-coords (view wtype xwindow ywindow)
  #+liber-documentation
- "@version{2023-10-17}
+ "@version{2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[wtype]{a @symbol{gtk:text-window-type} value, except
     @code{:private}}
@@ -1976,16 +1978,43 @@ lambda (view)    :action
 (export 'text-view-window-to-buffer-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; text-view-move-display-line
+;;; gtk:text-view-move-display-line
+;;;
+;;; gtk_text_view_forward_display_line                      not exported
+;;; gtk_text_view_backward_display_line                     not exported
+;;; gtk_text_view_forward_display_line_end                  not exported
+;;; gtk_text_view_backward_display_line_start               not exported
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_view_forward_display_line"
+               text-view-forward-display-line) :boolean
+  (view (g:object text-view))
+  (iter (g:boxed text-iter)))
+
+(cffi:defcfun ("gtk_text_view_backward_display_line"
+               text-view-backward-display-line) :boolean
+  (view (g:object text-view))
+  (iter (g:boxed text-iter)))
+
+(cffi:defcfun ("gtk_text_view_forward_display_line_end"
+               text-view-forward-display-line-end) :boolean
+  (view (g:object text-view))
+  (iter (g:boxed text-iter)))
+
+(cffi:defcfun ("gtk_text_view_backward_display_line_start"
+               text-view-backward-display-line-start) :boolean
+  (view (g:object text-view))
+  (iter (g:boxed text-iter)))
+
 ;;; ----------------------------------------------------------------------------
 
 (defun text-view-move-display-line (view iter &key (direction :forward)
                                                    (start-or-end nil))
  #+liber-documentation
- "@version{#2021-10-21}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
-  @argument[direction]{the @code{:forward} or @code{:backward} keyword, the
+  @argument[direction]{a @code{:forward} or @code{:backward} keyword value, the
     default value is @code{:forward}}
   @argument[start-or-end]{@em{true} to go the end of the next or the start of
     the previous display line, the default value is @em{false}}
@@ -2004,13 +2033,13 @@ lambda (view)    :action
   paragraphs will be the same. Display lines are divided differently for each
   view, since they depend on the width of the text view. Paragraphs are the
   same in all text views, since they depend on the contents of the text buffer.
-  @begin[Note]{dictionary}
+  @begin{notes}
     This function combines the @code{gtk_text_view_forward_display_line ()},
     @code{gtk_text_view_forward_display_line_end()},
     @code{gtk_text_view_backward_display_line()}, and
     @code{gtk_text_view_backward_display_line_start()} functions into one
     Lisp function.
-  @end{dictionary}
+  @end{notes}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}"
   (assert (typep direction '(member :forward :backward)))
@@ -2027,113 +2056,13 @@ lambda (view)    :action
 (export 'text-view-move-display-line)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_view_forward_display_line                     not exported
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_text_view_forward_display_line"
-               text-view-forward-display-line) :boolean
- #+liber-documentation
- "@version{#2021-10-16}
-  @argument[view]{a @class{gtk:text-view} widget}
-  @argument[iter]{a @class{gtk:text-iter} iterator}
-  @return{@em{True} if @arg{iter} was moved and is not on the end iterator.}
-  @begin{short}
-    Moves the given @arg{iter} forward by one display (wrapped) line.
-  @end{short}
-  A display line is different from a paragraph. Paragraphs are separated by
-  newlines or other paragraph separator characters. Display lines are created
-  by line-wrapping a paragraph. If wrapping is turned off, display lines and
-  paragraphs will be the same. Display lines are divided differently for each
-  view, since they depend on the width of the text view. Paragraphs are the
-  same in all text views, since they depend on the contents of the text buffer.
-  @see-class{gtk:text-view}
-  @see-class{gtk:text-iter}"
-  (view (g:object text-view))
-  (iter (g:boxed text-iter)))
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_text_view_backward_display_line                    not exported
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_text_view_backward_display_line"
-               text-view-backward-display-line) :boolean
- #+liber-documentation
- "@version{#2021-10-16}
-  @argument[view]{a @class{gtk:text-view} widget}
-  @argument[iter]{a @class{gtk:text-iter} iterator}
-  @return{@em{True} if @arg{iter} was moved and is not on the end iterator.}
-  @begin{short}
-    Moves the given @arg{iter} backward by one display (wrapped) line.
-  @end{short}
-  A display line is different from a paragraph. Paragraphs are separated by
-  newlines or other paragraph separator characters. Display lines are created
-  by line-wrapping a paragraph. If wrapping is turned off, display lines and
-  paragraphs will be the same. Display lines are divided differently for each
-  view, since they depend on the width of the text view. Paragraphs are the
-  same in all text views, since they depend on the contents of the text buffer.
-  @see-class{gtk:text-view}
-  @see-class{gtk:text-iter}"
-  (view (g:object text-view))
-  (iter (g:boxed text-iter)))
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_text_view_forward_display_line_end                 not exported
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_text_view_forward_display_line_end"
-               text-view-forward-display-line-end) :boolean
- #+liber-documentation
- "@version{#2021-10-16}
-  @argument[view]{a @class{gtk:text-view} widget}
-  @argument[iter]{a @class{gtk:text-iter} iterator}
-  @return{@em{True} if @arg{iter} was moved and is not on the end iterator.}
-  @begin{short}
-    Moves the given @arg{iter} forward to the next display line end.
-  @end{short}
-  A display line is different from a paragraph. Paragraphs are separated by
-  newlines or other paragraph separator characters. Display lines are created
-  by line-wrapping a paragraph. If wrapping is turned off, display lines and
-  paragraphs will be the same. Display lines are divided differently for each
-  view, since they depend on the width of the text view. Paragraphs are the
-  same in all views, since they depend on the contents of the text buffer.
-  @see-class{gtk:text-view}
-  @see-class{gtk:text-iter}"
-  (view (g:object text-view))
-  (iter (g:boxed text-iter)))
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_text_view_backward_display_line_start              not exported
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_text_view_backward_display_line_start"
-               text-view-backward-display-line-start) :boolean
- #+liber-documentation
- "@version{#2021-10-16}
-  @argument[view]{a @class{gtk:text-view} widget}
-  @argument[iter]{a @class{gtk:text-iter} iterator}
-  @return{@em{True} if @arg{iter} was moved and is not on the end iterator.}
-  @begin{short}
-    Moves the given @arg{iter} backward to the next display line start.
-  @end{short}
-  A display line is different from a paragraph. Paragraphs are separated by
-  newlines or other paragraph separator characters. Display lines are created
-  by line-wrapping a paragraph. If wrapping is turned off, display lines and
-  paragraphs will be the same. Display lines are divided differently for each
-  view, since they depend on the width of the text view. Paragraphs are the
-  same in all views, since they depend on the contents of the text buffer.
-  @see-class{gtk:text-view}
-  @see-class{gtk:text-iter}"
-  (view (g:object text-view))
-  (iter (g:boxed text-iter)))
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_text_view_starts_display_line
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_view_starts_display_line"
                text-view-starts-display-line) :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @return{@em{True} if @arg{iter} begins a wrapped line.}
@@ -2156,7 +2085,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_move_visually" text-view-move-visually) :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @argument[count]{an integer with the number of characters to move, negative
@@ -2189,7 +2118,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_add_child_at_anchor"
                text-view-add-child-at-anchor) :void
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[child]{a @class{gtk:widget} widget}
   @argument[anchor]{a @class{gtk:text-child-anchor} object in the text buffer
@@ -2212,7 +2141,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_remove" text-view-remove) :void
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} object}
   @argument[child]{a @class{gtk:widget} widget to remove}
   @short{Removes a child widget from the text view.}
@@ -2238,11 +2167,11 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_get_gutter" text-view-gutter) (g:object widget)
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{#2024-7-4}
   @syntax{(gtk:text-view-gutter view win) => widget}
   @syntax{(setf (gtk:text-view-gutter view win) widget)}
   @argument[view]{a @class{gtk:text-view} widget}
-  @argument[win]{a @symbol{gtk:text-window-type} value}
+  @argument[wtype]{a @symbol{gtk:text-window-type} value}
   @argument[widget]{a @class{gtk:widget} widget or @code{nil}}
   @begin{short}
     The @fun{gtk:text-view-gutter} function gets @arg{widget} that has
@@ -2251,14 +2180,14 @@ lambda (view)    :action
   The @setf{gtk:text-view-gutter} function places @arg{widget} into the gutter
   specified by @arg{win}.
 
-  The @arg{win} argument must be one of the values @code{:left}, @code{:right},
-  @code{:top}, or @code{:bottom} of the @symbol{gtk:text-window-type}
-  enumeration.
+  The @arg{wtype} argument must be one of the values @code{:left},
+  @code{:right}, @code{:top}, or @code{:bottom} of the
+  @symbol{gtk:text-window-type} enumeration.
   @see-class{gtk:text-view}
   @see-class{gtk:widget}
   @see-symbol{gtk:text-window-type}"
   (view (g:object text-view))
-  (win text-window-type))
+  (wtype text-window-type))
 
 (export 'text-view-gutter)
 
@@ -2268,7 +2197,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_add_overlay" text-view-add-overlay) :void
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[xpos]{an integer with the x position of @arg{child} in window
@@ -2303,7 +2232,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_text_view_move_overlay" text-view-move-overlay) :void
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[child]{a @class{gtk:widget} child widget already added}
   @argument[xpos]{an integer with the new x position of @arg{child} in buffer
@@ -2331,15 +2260,16 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_reset_cursor_blink" text-view-reset-cursor-blink)
     :void
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @begin{short}
-    Ensures that the cursor is shown, i.e. not in an 'off' blink interval, and
-    resets the time that it will stay blinking, or visible, in case blinking is
-    disabled.
+    Ensures that the cursor is shown, that is, not in an 'off' blink interval,
+    and resets the time that it will stay blinking, or visible, in case blinking
+    is disabled.
   @end{short}
-  This function should be called in response to user input, e.g. from derived
-  classes that override the \"key-press-event\" handler of the text view.
+  This function should be called in response to user input, for example, from
+  derived classes that override the @code{\"key-press-event\"} handler of the
+  text view.
   @see-class{gtk:text-view}"
   (view (g:object text-view)))
 
@@ -2354,7 +2284,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_im_context_filter_keypress"
                text-view-im-context-filter-keypress) :boolean
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[event]{a @class{gdk:event} key event}
   @return{@em{True} if the input method handled the key event.}
@@ -2402,7 +2332,7 @@ gtk_foo_bar_key_press_event (GtkWidget   *widget,
 (cffi:defcfun ("gtk_text_view_reset_im_context" text-view-reset-im-context)
     :void
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @begin{short}
     Reset the input method context of the text view if needed.
@@ -2415,14 +2345,14 @@ gtk_foo_bar_key_press_event (GtkWidget   *widget,
 (export 'text-view-reset-im-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_view_get_ltr_context                          Since 4.4
+;;; gtk_text_view_get_ltr_context                           Since 4.4
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
 (cffi:defcfun ("gtk_text_view_get_ltr_context" text-view-ltr-context)
     (g:object pango:context)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @return{The @class{pango:context} object.}
   @begin{short}
@@ -2446,7 +2376,7 @@ gtk_foo_bar_key_press_event (GtkWidget   *widget,
 (cffi:defcfun ("gtk_text_view_get_rtl_context" text-view-rtl-context)
     (g:object pango:context)
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
   @return{The @class{pango:context} object.}
   @begin{short}
