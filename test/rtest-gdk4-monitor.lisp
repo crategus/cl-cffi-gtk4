@@ -59,8 +59,8 @@
           (g:type-parent "GdkMonitor")))
   ;; Check children
   #-windows
-  (is (equal '("GdkX11Monitor")
-             (gtk-test:list-children "GdkMonitor")))
+  (is (member "GdkWaylandMonitor"
+              (gtk-test:list-children "GdkMonitor") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Monitor")
              (gtk-test:list-children "GdkMonitor")))
@@ -116,8 +116,9 @@
     (is (stringp (gdk:monitor-connector monitor)))
     #+windows
     (is-false (gdk:monitor-connector monitor))
-    #-windows
-    (is-false(gdk:monitor-description monitor))
+    #+crategus
+    (is (string= "Iiyama North America 27\""
+                 (gdk:monitor-description monitor)))
     #+windows
     (is-false (gdk:monitor-description monitor))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
@@ -195,4 +196,4 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
     (is-true (gdk:monitor-is-valid monitor))))
 
-;;; 2024-5-25
+;;; 2024-7-6

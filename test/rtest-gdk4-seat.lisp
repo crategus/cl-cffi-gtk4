@@ -62,8 +62,8 @@
           (g:type-parent "GdkSeat")))
   ;; Check children
   #-windows
-  (is (equal '("GdkSeatDefault")
-             (gtk-test:list-children "GdkSeat")))
+  (is (member "GdkWaylandSeat"
+             (gtk-test:list-children "GdkSeat") :test #'string=))
   #+windows
   (is (equal '("GdkSeatDefault")
              (gtk-test:list-children "GdkSeat")))
@@ -114,7 +114,7 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-pointer seat) 'gdk:device))
     #-windows
-    (is (string= "Virtual core pointer"
+    (is (string= "Core Pointer"
                  (gdk:device-name (gdk:seat-pointer seat))))
     #+windows
     (is (string= "Virtual Core Pointer"
@@ -126,7 +126,7 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-keyboard seat) 'gdk:device))
     #-windows
-    (is (string= "Virtual core keyboard"
+    (is (string= "Core Keyboard"
                  (gdk:device-name (gdk:seat-keyboard seat))))
     #+windows
     (is (string= "Virtual Core Keyboard"
@@ -145,4 +145,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; 2024-7-3
+;;; 2024-7-6

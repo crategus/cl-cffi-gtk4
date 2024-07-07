@@ -67,4 +67,12 @@
   (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)
                                (make-instance 'gtk:adjustment)) 'gtk:viewport)))
 
-;;; 2024-7-4
+;;;     gtk_viewport_scroll_to                              Since 4.12
+
+(test gtk-view-port-scroll-to
+  (let ((viewport (gtk:viewport-new))
+        (area (gtk:drawing-area-new)))
+    (is (typep (setf (gtk:viewport-child viewport) area) 'gtk:drawing-area))
+    (is-false (gtk:viewport-scroll-to viewport area (gtk:scroll-info-new)))))
+
+;;; 2024-7-5

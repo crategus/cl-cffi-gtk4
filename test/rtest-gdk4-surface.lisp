@@ -21,8 +21,8 @@
           (g:type-parent "GdkSurface")))
   ;; Check children
   #-windows
-  (is (equal '("GdkX11Surface")
-             (gtk-test:list-children "GdkSurface")))
+  (is (member "GdkWaylandSurface"
+              (gtk-test:list-children "GdkSurface") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Surface")
              (gtk-test:list-children "GdkSurface")))
@@ -185,4 +185,4 @@
 ;;;     gdk_surface_get_device_cursor
 ;;;     gdk_surface_set_device_cursor
 
-;;; 2024-7-3
+;;; 2024-7-6

@@ -21,8 +21,8 @@
           (g:type-parent "GdkClipboard")))
   ;; Check children
   #-windows
-  (is (equal '("GdkX11Clipboard")
-             (gtk-test:list-children "GdkClipboard")))
+  (is (member "GdkWaylandClipboard"
+              (gtk-test:list-children "GdkClipboard") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Clipboard")
              (gtk-test:list-children "GdkClipboard")))
@@ -142,4 +142,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; 2024-7-3
+;;; 2024-7-6

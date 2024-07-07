@@ -160,22 +160,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     hadjustment
-;;;     has-frame
-;;;     hscrollbar-policy
-;;;     kinetic-scrolling
-;;;     max-content-height
-;;;     max-content-width
-;;;     min-content-height
-;;;     min-content-width
-;;;     overlay-scrolling
-;;;     propagate-natural-height
-;;;     propagate-natural-width
-;;;     vadjustment
-;;;     vscrollbar-policy
-;;;     window-placement
-
 (test gtk-scrolled-window-properties
   (let ((window (make-instance 'gtk:scrolled-window)))
     (is-false (gtk:scrolled-window-child window))
@@ -197,9 +181,76 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     edge-overshot
+
+(test gtk-scrolled-window-edge-overshot-signal
+  (let* ((name "edge-overshot")
+         (gtype (g:gtype "GtkScrolledWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GtkPositionType")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     edge-reached
+
+(test gtk-scrolled-window-edge-reached-signal
+  (let* ((name "edge-reached")
+         (gtype (g:gtype "GtkScrolledWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GtkPositionType")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     move-focus-out
+
+(test gtk-scrolled-window-move-focus-out-signal
+  (let* ((name "move-focus-out")
+         (gtype (g:gtype "GtkScrolledWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GtkDirectionType")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     scroll-child
+
+(test gtk-scrolled-window-scroll-child-signal
+  (let* ((name "scroll-child")
+         (gtype (g:gtype "GtkScrolledWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GtkScrollType" "gboolean")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -215,10 +266,36 @@
 
 ;;;     gtk_scrolled_window_get_hscrollbar
 ;;;     gtk_scrolled_window_get_vscrollbar
+
+(test gtk-scrolled-window-scrollbar
+  (let ((scrolled (gtk:scrolled-window-new)))
+    (is (typep (gtk:scrolled-window-hscrollbar scrolled) 'gtk:scrollbar))
+    (is (typep (gtk:scrolled-window-vscrollbar scrolled) 'gtk:scrollbar))))
+
 ;;;     gtk_scrolled_window_get_policy
 ;;;     gtk_scrolled_window_set_policy
+
+(test gtk-scrolled-window-policy
+  (let ((scrolled (gtk:scrolled-window-new)))
+    (is (equal '(:automatic :automatic)
+               (multiple-value-list (gtk:scrolled-window-policy scrolled))))
+    (is (equal '(:always :never)
+               (multiple-value-list (setf (gtk:scrolled-window-policy scrolled)
+                                          '(:always :never)))))
+    (is (equal '(:always :never)
+               (multiple-value-list (gtk:scrolled-window-policy scrolled))))))
+
 ;;;     gtk_scrolled_window_get_placement
 ;;;     gtk_scrolled_window_set_placement
 ;;;     gtk_scrolled_window_unset_placement
 
-;;; 2024-7-4
+(test gtk-scrolled-window-placement
+  (let ((scrolled (gtk:scrolled-window-new)))
+    (is (eq :top-left (gtk:scrolled-window-placement scrolled)))
+    (is (eq :bottom-left
+            (setf (gtk:scrolled-window-placement scrolled) :bottom-left)))
+    (is (eq :bottom-left (gtk:scrolled-window-placement scrolled)))
+    (is-false (gtk:scrolled-window-unset-placement scrolled))
+    (is (eq :top-left (gtk:scrolled-window-placement scrolled)))))
+
+;;; 2024-7-5

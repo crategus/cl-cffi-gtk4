@@ -73,10 +73,94 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     day-selected
+
+(test gtk-calendar-day-selected-signal
+  (let* ((name "day-selected")
+         (gtype (g:gtype "GtkCalendar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     next-month
+
+(test gtk-calendar-next-month-signal
+  (let* ((name "next-month")
+         (gtype (g:gtype "GtkCalendar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     next-year
+
+(test gtk-calendar-next-year-signal
+  (let* ((name "next-year")
+         (gtype (g:gtype "GtkCalendar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     prev-month
+
+(test gtk-calendar-prev-month-signal
+  (let* ((name "prev-month")
+         (gtype (g:gtype "GtkCalendar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     prev-year
+
+(test gtk-calendar-prev-year-signal
+  (let* ((name "prev-year")
+         (gtype (g:gtype "GtkCalendar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -86,10 +170,34 @@
   (is (typep (gtk:calendar-new) 'gtk:calendar)))
 
 ;;;     gtk_calendar_select_day
+;;;     gtk_calendar_get_date
+
+(test gtk-calendar-select-day
+  (let ((calendar (gtk:calendar-new)))
+    (is-false (gtk:calendar-select-day calendar 2024 7 5))
+    (is (equal '(2024 7 5) (multiple-value-list (gtk:calendar-date calendar))))))
+
 ;;;     gtk_calendar_mark_day
 ;;;     gtk_calendar_unmark_day
 ;;;     gtk_calendar_get_day_is_marked
-;;;     gtk_calendar_clear_marks
-;;;     gtk_calendar_get_date
 
-;;; 2024-4-25
+(test gtk-calendar-mark/unmark-day
+  (let ((calendar (gtk:calendar-new)))
+    (is-false (gtk:calendar-mark-day calendar 5))
+    (is-true (gtk:calendar-day-is-marked calendar 5))
+    (is-false (gtk:calendar-unmark-day calendar 5))
+    (is-false (gtk:calendar-day-is-marked calendar 5))))
+
+;;;     gtk_calendar_clear_marks
+
+(test gtk-calendar-clear-marks
+  (let ((calendar (gtk:calendar-new)))
+    (is-false (gtk:calendar-mark-day calendar 5))
+    (is-false (gtk:calendar-mark-day calendar 6))
+    (is-true (gtk:calendar-day-is-marked calendar 5))
+    (is-true (gtk:calendar-day-is-marked calendar 6))
+    (is-false (gtk:calendar-clear-marks calendar))
+    (is-false (gtk:calendar-day-is-marked calendar 5))
+    (is-false (gtk:calendar-day-is-marked calendar 6))))
+
+;;; 2024-7-5

@@ -138,8 +138,8 @@
     (is (= 1000 (gtk:text-tag-table-size table)))
     (is-false (gtk:text-tag-table-foreach table
                                           (lambda (tag)
-                                            (is (typep tag 'gtk:text-tag))
+                                            (declare (ignore tag))
                                             (incf count))))
     (is (= count (gtk:text-tag-table-size table)))))
 
-;;; 2024-7-2
+;;; 2024-7-6

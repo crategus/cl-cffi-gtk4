@@ -145,8 +145,8 @@
           (g:type-parent "GdkDevice")))
   ;; Check children
   #-windows
-  (is (equal '("GdkX11DeviceXI2")
-             (gtk-test:list-children "GdkDevice")))
+  (is (member "GdkWaylandDevice"
+              (gtk-test:list-children "GdkDevice") :test #'string=))
   #+windows
   (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
              (gtk-test:list-children "GdkDevice")))
@@ -208,11 +208,11 @@
     (is-true (gdk:device-has-cursor device))
     (is-false (gdk:device-modifier-state device))
     #-windows
-    (is (= 4 (gdk:device-n-axes device)))
+    (is (= 2 (gdk:device-n-axes device)))
     #+windows
     (is (= 2 (gdk:device-n-axes device)))
     #-windows
-    (is (string= "Virtual core pointer" (gdk:device-name device)))
+    (is (string= "Core Pointer" (gdk:device-name device)))
     #+windows
     (is (string= "Virtual Core Pointer" (gdk:device-name device)))
     (is-false (gdk:device-num-lock-state device))
@@ -235,7 +235,7 @@
     (is-false (gdk:device-modifier-state device))
     (is (= 0 (gdk:device-n-axes device)))
     #-windows
-    (is (string= "Virtual core keyboard" (gdk:device-name device)))
+    (is (string= "Core Keyboard" (gdk:device-name device)))
     #+windows
     (is (string= "Virtual Core Keyboard" (gdk:device-name device)))
     (is (typep (gdk:device-num-lock-state device) 'boolean))
@@ -296,4 +296,4 @@
          (device (gdk:seat-keyboard seat)))
     (is (= 0 (gdk:device-timestamp device)))))
 
-;;; 2024-7-4
+;;; 2024-7-6

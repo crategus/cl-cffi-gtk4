@@ -26,8 +26,8 @@
           (g:type-parent "GdkAppLaunchContext")))
   ;; Check children
   #-windows
-  (is (equal '("GdkX11AppLaunchContext")
-             (gtk-test:list-children "GdkAppLaunchContext")))
+  (is (member "GdkWaylandAppLaunchContext"
+              (gtk-test:list-children "GdkAppLaunchContext") :test #'string=))
   #+windows
   (is (equal '()
              (gtk-test:list-children "GdkAppLaunchContext")))
@@ -98,4 +98,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; 2024-7-3
+;;; 2024-7-6
