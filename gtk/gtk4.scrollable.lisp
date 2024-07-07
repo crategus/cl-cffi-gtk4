@@ -129,8 +129,9 @@
     The @class{gtk:scrollable} interface is an interface that is implemented by
     widgets with native scrolling ability.
   @end{short}
-  To implement this interface you should override the @code{hadjustment}
-  and @code{vadjustment} properties.
+  To implement this interface you should override the
+  @slot[gtk:scrollable]{hadjustment} and
+  @slot[gtk:scrollable]{vadjustment} properties.
 
   @subheading{Creating a scrollable widget}
   All scrollable widgets should do the following:
@@ -140,7 +141,8 @@
       the widget should populate the @slot[gtk:adjustment]{lower},
       @slot[gtk:adjustment]{upper}, @slot[gtk:adjustment]{step-increment},
       @slot[gtk:adjustment]{page-increment} and @slot[gtk:adjustment]{page-size}
-      properties of the adjustment and connect to the \"value-changed\" signal.
+      properties of the adjustment and connect to the @code{\"value-changed\"}
+      signal.
     @end{item}
     @begin{item}
       Because its preferred size is the size for a fully expanded widget, the
@@ -153,8 +155,8 @@
       widget should update the properties of the adjustments with new values.
     @end{item}
     @begin{item}
-      When any of the adjustments emits the \"value-changed\" signal, the
-      scrollable widget should scroll its contents.
+      When any of the adjustments emits the @code{\"value-changed\"} signal,
+      the scrollable widget should scroll its contents.
     @end{item}
   @end{itemize}
   @see-slot{gtk:scrollable-hadjustment}
@@ -174,7 +176,7 @@
 (setf (documentation (liber:slot-documentation "hadjustment" 'scrollable) t)
  "The @code{hadjustment} property of type @class{gtk:adjustment}
   (Read / Write / Construct) @br{}
-  Horizontal adjustment of the scrollable widget. This adjustment is shared
+  The horizontal adjustment of the scrollable widget. This adjustment is shared
   between the scrollable widget and its parent.")
 
 #+liber-documentation
@@ -188,11 +190,11 @@
   @argument[hadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{hadjustment} slot of the
-    @class{gtk:scrollable} class.
+    @class{gtk:scrollable} interface.
   @end{short}
-  The @fun{gtk:scrollabe-hadjustment} function retrieves the adjustment used for
-  horizontal scrolling. The @setf{gtk:scrollabe-hadjustment} function sets the
-  horizontal adjustment.
+  The @fun{gtk:scrollable-hadjustment} function retrieves the adjustment used
+  for horizontal scrolling. The @setf{gtk:scrollable-hadjustment} function sets
+  the horizontal adjustment.
   @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-vadjustment}")
@@ -220,7 +222,7 @@
     scrolling policy}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{hscroll-policy} slot of the
-    @class{gtk:scrollable} class.
+    @class{gtk:scrollable} interface.
   @end{short}
   The @fun{gtk:scrollable-hscroll-policy} function gets the horizontal scrolling
   policy which determines whether horizontal scrolling should start below the
@@ -237,7 +239,7 @@
 (setf (documentation (liber:slot-documentation "vadjustment" 'scrollable) t)
  "The @code{vadjustment} property of type @class{gtk:adjustment}
   (Read / Write / Construct) @br{}
-  Vertical adjustment of the scrollable widget. This adjustment is shared
+  The vertical adjustment of the scrollable widget. This adjustment is shared
   between the scrollable widget and its parent.")
 
 #+liber-documentation
@@ -251,7 +253,7 @@
   @argument[vadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{vadjustment} slot of the
-    @class{gtk:scrollable} class.
+    @class{gtk:scrollable} interface.
   @end{short}
   The @fun{gtk:scrollable-vadjustment} function retrieves the adjustment used
   for vertical scrolling. The @setf{gtk:scrollable-vadjustment} function sets
@@ -283,7 +285,7 @@
     scrolling policy}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{vscroll-policy} slot of the
-    @class{gtk:scrollable} class.
+    @class{gtk:scrollable} interface.
   @end{short}
   The @fun{gtk:scrollable-vscroll-policy} function gets the vertical scrolling
   policy which determines whether vertical scrolling should start below the
@@ -308,7 +310,7 @@
   @return{The @class{gtk:border} instance or @code{nil}.}
   @begin{short}
     Returns the size of a non-scrolling border around the outside of the
-    scrollable.
+    scrollable widget.
   @end{short}
   An example for this would be tree view headers. GTK can use this information
   to display overlayed graphics, like the overshoot indication, at the right

@@ -640,7 +640,7 @@ lambda (notebook page)    :run-last
       A handler for this signal can create a window containing a notebook where
       the tab will be attached. It is also responsible for moving/resizing the
       window and adding the necessary properties to the notebook, for example,
-      the @code{group-name} property.
+      the @slot[gtk:notebook]{group-name} property.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[page]{The @class{gtk:widget} tab of @arg{notebook} that is being
@@ -786,7 +786,7 @@ lambda (notebook page num)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group-name" 'notebook) t)
  "The @code{group-name} property of type @code{:string} (Read / Write) @br{}
-  Group name for tab drag and drop. @br{}
+  The group name for tab drag and drop. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation

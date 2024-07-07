@@ -2,7 +2,7 @@
 ;;; gtk4.scrollbar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,7 +87,7 @@
  "@version{2024-6-1}
   @begin{short}
     The @class{gtk:scrollbar} widget is a horizontal or vertical scrollbar,
-    depending on the value of the @slot[orientable]{orientation} property.
+    depending on the value of the @slot[gtk:orientable]{orientation} property.
   @end{short}
 
   @image[scrollbar]{Figure: GtkScrollbar}
@@ -102,8 +102,8 @@
   @slot[gtk:adjustment]{step-increment} and
   @slot[gtk:adjustment]{page-increment} properties are added to or subtracted
   from the @slot[gtk:adjustment]{value} property when the user asks to move by
-  a step, using e.g. the cursor arrow keys, or by a page, using e.g. the
-  @kbd{Page Down}/@kbd{Page Up} keys.
+  a step, using, for example, the cursor arrow keys, or by a page, using, for
+  example, the @kbd{Page Down}/@kbd{Page Up} keys.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 scrollbar

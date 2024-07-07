@@ -90,7 +90,7 @@
 
 #+liber-documentation
 (setf (documentation 'viewport 'type)
- "@version{2023-8-6}
+ "@version{2024-7-5}
   @begin{short}
     The @class{gtk:viewport} widget acts as an adaptor class, implementing
     scrollability for child widgets that lack their own scrolling capabilities.
@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'viewport-child)
       "Accessor"
       (documentation 'viewport-child 'function)
- "@version{2023-8-6}
+ "@version{2024-7-5}
   @syntax{(gtk:viewport-child object) => child}
   @syntax{(setf (gtk:viewport-child object) child)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -155,7 +155,7 @@
 (setf (liber:alias-for-function 'viewport-scroll-to-focus)
       "Accessor"
       (documentation 'viewport-scroll-to-focus 'function)
- "@version{2023-8-6}
+ "@version{2024-7-5}
   @syntax{(gtk:viewport-scroll-to-focus object) => setting}
   @syntax{(setf (gtk:viewport-scroll-to-focus object) setting)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -179,12 +179,12 @@
 
 (defun viewport-new (&optional (hadjustment nil) (vadjustment nil))
  #+liber-documentation
- "@version{2023-8-6}
-  @argument[hadjustment]{a horizontal @class{gtk:adjustment} object}
-  @argument[vadjustment]{a vertical @class{gtk:adjustment} object}
+ "@version{2024-7-5}
+  @argument[hadjustment]{an optional horizontal @class{gtk:adjustment} object}
+  @argument[vadjustment]{an optional vertical @class{gtk:adjustment} object}
   @return{The new @class{gtk:viewport} widget.}
   @begin{short}
-    Creates a new viewport with the given adjustments, of with default
+    Creates a new viewport with the given adjustments, or with default
     adjustments if none are given.
   @end{short}
   @see-class{gtk:viewport}
@@ -196,11 +196,29 @@
 (export 'viewport-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_viewport_scroll_to
-;;;
-;;; Scrolls a descendant of the viewport into view.
-;;;
-;;; Since 4.12
+;;; gtk_viewport_scroll_to                                  Since 4.12
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_viewport_scroll_to" viewport-scroll-to) :void
+ #+liber-documentation
+ "@version{2024-7-5}
+  @argument[viewport]{a @class{gtk:viewport} widget}
+  @argument[descendant]{a descendant @class{gtk:widget} widget of the viewport}
+  @argument[scroll]{a @class{gtk:scroll-info} instance}
+  @begin{short}
+    Scrolls a descendant of the viewport into view.
+  @end{short}
+  The viewport and the descendant widget must be visible and mapped for this
+  function to work, otherwise no scrolling will be performed.
+
+  Since 4.12
+  @see-class{gtk:viewport}
+  @see-class{gtk:widget}
+  @see-class{gtk:scroll-info}"
+  (viewport (g:object viewport))
+  (descendant (g:object widget))
+  (scroll (g:boxed scroll-info)))
+
+(export 'viewport-scroll-to)
 
 ;;; --- End of file gtk4.viewport.lisp -----------------------------------------

@@ -118,7 +118,7 @@
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @begin{short}
     The @class{gtk:calendar} widget displays a Gregorian calendar, one month at
     a time.
@@ -237,7 +237,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calender-day object) => day}
   @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -266,7 +266,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calendar-month object) => month}
   @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -291,7 +291,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-day-names)
       "Accessor"
       (documentation 'calendar-show-day-names 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calendar-show-day-names object) => setting}
   @syntax{(setf (gtk:calendar-show-day-names object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -315,7 +315,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-heading)
       "Accessor"
       (documentation 'calendar-show-heading 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calendar-show-heading object) => setting}
   @syntax{(setf (gtk:calendar-show-heading object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -340,7 +340,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-week-numbers)
       "Accessor"
       (documentation 'calendar-show-week-numbers 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calendar-show-week-numbers object) => setting}
   @syntax{(setf (gtk:calendar-show-week-numbers object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -365,7 +365,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2024-4-25}
+ "@version{2024-7-5}
   @syntax{(gtk:calendar-year object) => year}
   @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -386,7 +386,7 @@ lambda (calendar)    :run-first
 
 (defun calendar-new ()
  #+liber-documentation
- "@version{2024-3-25}
+ "@version{2024-7-5}
   @return{The newly @class{gtk:calendar} widget.}
   @begin{short}
     Creates a new calendar, with the current date being selected.
@@ -407,7 +407,7 @@ lambda (calendar)    :run-first
 
 (defun calendar-select-day (calendar year month day)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[year]{an integer with the year}
   @argument[month]{an integer with the month}
@@ -418,7 +418,8 @@ lambda (calendar)    :run-first
   @see-class{gtk:calendar}"
   (setf (calendar-year calendar) year
         (calendar-month calendar) month
-        (calendar-day calendar) day))
+        (calendar-day calendar) day)
+  nil)
 
 (export 'calendar-select-day)
 
@@ -426,9 +427,9 @@ lambda (calendar)    :run-first
 ;;; gtk_calendar_mark_day
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_calendar_mark_day" calendar-mark-day) :boolean
+(cffi:defcfun ("gtk_calendar_mark_day" calendar-mark-day) :void
  #+liber-documentation
- "@version{2023-9-21}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[day]{an unsigned integer with the day to mark between 1 and 31}
   @begin{short}
@@ -447,9 +448,9 @@ lambda (calendar)    :run-first
 ;;; gtk_calendar_unmark_day
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_calendar_unmark_day" calendar-unmark-day) :boolean
+(cffi:defcfun ("gtk_calendar_unmark_day" calendar-unmark-day) :void
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[day]{an unsigned integer with the day to unmark between 1 and 31}
   @begin{short}
@@ -470,7 +471,7 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_get_day_is_marked" calendar-day-is-marked) :boolean
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[day]{an unsigned integer with the day between 1 and 31}
   @return{The boolean whether the day is marked.}
@@ -491,7 +492,7 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_clear_marks" calendar-clear-marks) :void
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @begin{short}
     Remove all visual markers.
@@ -512,10 +513,11 @@ lambda (calendar)    :run-first
 
 (defun calendar-date (calendar)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-7-5}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @begin{return}
-    @arg{year} -- an integer with the year as a decimal number, e.g. 2021 @br{}
+    @arg{year} -- an integer with the year as a decimal number, for example
+      2024 @br{}
     @arg{month} -- an integer with the month number, between 0 and 11 @br{}
     @arg{day} -- an integer with the day number, between 1 and 31
   @end{return}

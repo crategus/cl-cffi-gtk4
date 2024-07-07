@@ -1580,7 +1580,6 @@ GtkCellRenderer         GtkWidget
       @about-function{picture-set-resource}
     @end{subsection}
     @begin[GtkSpinner]{subsection}
-      Show a spinner animation.
       @about-class{spinner}
       @about-generic{spinner-spinning}
       @about-function{spinner-new}
@@ -1588,7 +1587,6 @@ GtkCellRenderer         GtkWidget
       @about-function{spinner-stop}
     @end{subsection}
     @begin[GtkProgressBar]{subsection}
-      A widget which indicates progress visually
       @about-class{progress-bar}
       @about-generic{progress-bar-ellipsize}
       @about-generic{progress-bar-fraction}
@@ -1600,7 +1598,6 @@ GtkCellRenderer         GtkWidget
       @about-function{progress-bar-pulse}
     @end{subsection}
     @begin[GtkLevelBar]{subsection}
-      A bar that can used as a level indicator.
       @about-symbol{level-bar-mode}
       @about-class{level-bar}
       @about-generic{level-bar-inverted}
@@ -1615,7 +1612,6 @@ GtkCellRenderer         GtkWidget
       @about-function{level-bar-offset-value}
     @end{subsection}
     @begin[GtkCalendar]{subsection}
-      Displays a calendar and allows the user to select a date.
       @about-class{calendar}
       @about-generic{calendar-day}
       @about-generic{calendar-month}
@@ -2757,7 +2753,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Interfaces]{section}
     @begin[GtkActionable]{subsection}
-      An interface for widgets that can be associated with actions.
       @about-class{actionable}
       @about-generic{actionable-action-name}
       @about-generic{actionable-action-target}
@@ -2765,14 +2760,12 @@ GtkCellRenderer         GtkWidget
       @about-function{actionable-set-detailed-action-name}
     @end{subsection}
     @begin[GtkOrientable]{subsection}
-      An interface for flippable widgets.
       @about-class{orientable}
       @about-generic{orientable-orientation}
     @end{subsection}
   @end{section}
   @begin[Abstract Base Classes]{section}
     @begin[GtkWidget]{subsection}
-      Base class for all widgets.
       @about-class{cairo-context}
       @about-symbol{requested-size}
       @about-struct{requisition}
@@ -2940,7 +2933,6 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-action-set-enabled}
     @end{subsection}
     @begin[GtkRange]{subsection}
-      Base class for widgets which visualize an adjustment.
       @about-class{range}
       @about-generic{range-adjustment}
       @about-generic{range-fill-level}
@@ -3000,7 +2992,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-run-page-setup-dialog-async}
     @end{subsection}
     @begin[GtkPrintContext]{subsection}
-      Encapsulates context for drawing pages.
       @about-class{print-context}
       @about-function{print-context-cairo-context}
       @about-function{print-context-set-cairo-context}
@@ -3015,7 +3006,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-context-hard-margins}
     @end{subsection}
     @begin[GtkPaperSize]{subsection}
-      Support for named paper sizes.
       @about-symbol{unit}
       @about-class{paper-size}
       @about-function{paper-size-new}
@@ -3045,7 +3035,6 @@ GtkCellRenderer         GtkWidget
       @about-function{paper-size-to-gvariant}
     @end{subsection}
     @begin[GtkPrintSettings]{subsection}
-      Stores print settings.
       @about-symbol{page-orientation}
       @about-symbol{print-duplex}
       @about-symbol{print-quality}
@@ -3104,7 +3093,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-settings-to-gvariant}
     @end{subsection}
     @begin[GtkPageSetup]{subsection}
-      Stores page setup information.
       @about-class{page-setup}
       @about-function{page-setup-new}
       @about-function{page-setup-new-from-file}
@@ -3129,7 +3117,6 @@ GtkCellRenderer         GtkWidget
       @about-function{page-setup-to-gvariant}
     @end{subsection}
     @begin[GtkPrinter]{subsection}
-      Represents a printer.
       @about-class{print-backend}
       @about-class{printer}
       @about-generic{printer-accepting-jobs}
@@ -3161,7 +3148,6 @@ GtkCellRenderer         GtkWidget
       @about-function{enumerate-printers}
     @end{subsection}
     @begin[GtkPrintJob]{subsection}
-      Represents a print job.
       @about-class{print-job}
       @about-generic{print-job-page-setup}
       @about-generic{print-job-printer}
@@ -3186,7 +3172,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-job-reverse}
     @end{subsection}
     @begin[GtkPrintUnixDialog]{subsection}
-      A print dialog.
       @about-symbol{print-capabilities}
       @about-class{print-unix-dialog}
       @about-generic{print-unix-dialog-current-page}
@@ -3203,7 +3188,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-unix-dialog-page-setup-set}
     @end{subsection}
     @begin[GtkPageSetupUnixDialog]{subsection}
-      A page setup dialog.
       @about-class{page-setup-unix-dialog}
       @about-function{page-setup-unix-dialog-new}
       @about-function{page-setup-unix-dialog-page-setup}
@@ -4412,7 +4396,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-model-filter-clear-cache}
     @end{subsection}
     @begin[GtkCellArea]{subsection}
-      An abstract class for laying out GtkCellRenderers.
       @about-class{cell-area}
       @about-generic{cell-area-edit-widget}
       @about-generic{cell-area-edited-cell}
@@ -4463,7 +4446,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-area-request-renderer}
     @end{subsection}
     @begin[GtkCellAreaBox]{subsection}
-      A cell area that renders GtkCellRenderers into a row or a column.
       @about-class{cell-area-box}
       @about-generic{cell-area-box-spacing}
       @about-function{cell-area-box-new}
@@ -4471,7 +4453,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-area-box-pack-end}
     @end{subsection}
     @begin[GtkCellAreaContext]{subsection}
-      Stores geometrical information for a series of rows in a GtkCellArea.
       @about-class{cell-area-context}
       @about-generic{cell-area-context-area}
       @about-generic{cell-area-context-minimum-height}
@@ -4489,7 +4470,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-area-context-push-preferred-height}
     @end{subsection}
     @begin[GtkCellEditable]{subsection}
-      Interface for widgets that can be used for editing cells.
       @about-class{cell-editable}
       @about-generic{cell-editable-editing-canceled}
       @about-function{cell-editable-start-editing}
