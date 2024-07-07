@@ -393,7 +393,14 @@
        ":window"
        "DO-CALENDAR"
        "gtk4-example"
-       "calendar.lisp"))
+       "calendar.lisp"
+       :keywords
+       "GtkCalendar"
+       "gtk:calendar"
+       "gtk:calendar-day"
+       "gtk:calendar-month"
+       "gtk:calendar-year"
+       "gtk:calendar-mark-day"))
 
      "List-based widgets"
      (("Application Launcher"

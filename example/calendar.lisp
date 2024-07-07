@@ -18,28 +18,24 @@
 ;;;; calendar in most countries, it was adopted progressively between 1582 and
 ;;;; 1929. Display before these dates is likely to be historically incorrect.
 ;;;;
-;;;; 2024-4-4
+;;;; 2024-7-5
 
 (in-package :gtk4-example)
 
 (defun do-calendar (&optional application)
-    (let* ((calendar (make-instance 'gtk:calendar
-                                    :margin-top 12
-                                    :margin-bottom 12
-                                    :margin-start 12
-                                    :margin-end 12))
+    (let* ((calendar (make-instance 'gtk:calendar))
            (window (make-instance 'gtk:window
                                   :title "Calendar"
                                   :child calendar
                                   :application application)))
-      ;; Connect a signal handler to print the selected day
+      ;; Connect a signal handler to print the selected day in the title
       (g:signal-connect calendar "day-selected"
                         (lambda (widget)
-                          (declare (ignore widget))
-                          (format t "Selected: year ~A month ~A day ~A~%"
-                                  (gtk:calendar-year calendar)
-                                  (1+ (gtk:calendar-month calendar))
-                                  (gtk:calendar-day calendar))))
+                          (setf (gtk:window-title window)
+                                (format nil "Calendar - ~a.~a.~a"
+                                       (gtk:calendar-day widget)
+                                       (1+ (gtk:calendar-month widget))
+                                       (gtk:calendar-year widget)))))
       ;; Mark a day
       (gtk:calendar-mark-day calendar 6)
       (gtk:window-present window)))
