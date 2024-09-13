@@ -54,6 +54,7 @@
      (:file "gdk4.paintable")
      (:file "gdk4.texture")
      (:file "gdk4.texture-downloader"             :if-feature :gtk-4-10)
+     (:file "gdk4.dmabuf-texture"                 :if-feature :gtk-4-14)
 
      ;; Events
      (:file "gdk4.event")
@@ -386,8 +387,8 @@
      (:file "gtk4.page-setup")
      (:file "gtk4.page-setup-unix-dialog"         :if-feature (:not :windows))
      (:file "gtk4.print-unix-dialog"              :if-feature (:not :windows))
-     (:file "gtk4.print-job"                      :if-feature (:not :windows))
      (:file "gtk4.printer"                        :if-feature (:not :windows))
+     (:file "gtk4.print-job"                      :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "gtk4.shortcuts-window")
@@ -549,8 +550,8 @@
 
      ;; Miscellaneous
      (:file "rtest-gdk4-cursor")
-;    (:file "rtest-gdk4-frame-timings")
-;    (:file "rtest-gdk4-frame-clock")
+     (:file "rtest-gdk4-frame-timings")
+     (:file "rtest-gdk4-frame-clock")
 
      ;; Pixbuf, Pango, Cairo, Backends interaction
 ;    (:file "rtest-gdk4-pixbuf-interaction")
@@ -838,8 +839,8 @@
      (:file "rtest-gtk4-page-setup")
      (:file "rtest-gtk4-page-setup-unix-dialog"   :if-feature (:not :windows))
      (:file "rtest-gtk4-print-unix-dialog"        :if-feature (:not :windows))
-     (:file "rtest-gtk4-print-job"                :if-feature (:not :windows))
      (:file "rtest-gtk4-printer"                  :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-job"                :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "rtest-gtk4-shortcuts-window")

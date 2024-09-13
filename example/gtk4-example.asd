@@ -26,6 +26,7 @@
                (:file "box-append")
                (:file "box-center")
                (:file "grid-spacing")
+               (:file "grid-buildable")
                (:file "revealer")
                (:file "revealer-icon")
                (:file "list-box-complex")
@@ -146,7 +147,7 @@
                (:file "cursors")
                (:file "size-group")
                (:file "emblemed-icon")
-;               (:file "event-controller")
+               (:file "event-controller")
 
                ;; Theming in GTK
                (:file "css-accordion")
