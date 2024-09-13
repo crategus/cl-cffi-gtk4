@@ -7,7 +7,7 @@
 
 ;;;     GtkPropagationPhase
 
-(test propagation-phase
+(test gtk-propagation-phase
   ;; Check type
   (is (g:type-is-enum "GtkPropagationPhase"))
   ;; Check type initializer
@@ -41,7 +41,7 @@
 
 ;;;     GtkPropagationLimit
 
-(test propagation-limit
+(test gtk-propagation-limit
   ;; Check type
   (is (g:type-is-enum "GtkPropagationLimit"))
   ;; Check type initializer
@@ -70,7 +70,7 @@
 
 ;;;     GtkEventController
 
-(test event-controller-class
+(test gtk-event-controller-class
   ;; Check type
   (is (g:type-is-object "GtkEventController"))
   ;; Check registered name
@@ -99,7 +99,8 @@
   (is (equal '()
              (gtk-test:list-signals "GtkEventController")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventController" GTK-EVENT-CONTROLLER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventController"
+                                             GTK-EVENT-CONTROLLER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_event_controller_get_type")
                        ((NAME GTK-EVENT-CONTROLLER-NAME "name" "gchararray" T
@@ -116,17 +117,51 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     name
-;;;     propagation-limit
-;;;     propagation-phase
-;;;     widget
+(test gtk-event-controller-properties.1
+  (let ((controller (gtk:event-controller-key-new)))
+    (is-false (gtk:event-controller-name controller))
+    (is (eq :same-native (gtk:event-controller-propagation-limit controller)))
+    (is (eq :bubble (gtk:event-controller-propagation-phase controller)))
+    (is-false (gtk:event-controller-widget controller))))
+
+(test gtk-event-controller-properties.2
+  (let ((controller (gtk:event-controller-motion-new)))
+    (is-false (gtk:event-controller-name controller))
+    (is (eq :same-native (gtk:event-controller-propagation-limit controller)))
+    (is (eq :bubble (gtk:event-controller-propagation-phase controller)))
+    (is-false (gtk:event-controller-widget controller))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_event_controller_reset
+
+(test gtk-event-controller-reset
+  (let ((controller (gtk:event-controller-key-new)))
+    (is-false (gtk:event-controller-reset controller))))
+
 ;;;     gtk_event_controller_get_current_event
+
+(test gtk-event-controller-current-event
+  (let ((controller (gtk:event-controller-key-new)))
+    (is-false (gtk:event-controller-current-event controller))))
+
 ;;;     gtk_event_controller_get_current_event_device
+
+(test gtk-event-controller-current-event-device
+  (let ((controller (gtk:event-controller-key-new)))
+    (is-false (gtk:event-controller-current-event-device controller))))
+
 ;;;     gtk_event_controller_get_current_event_state
+
+(test gtk-event-controller-current-event-state
+  (let ((controller (gtk:event-controller-key-new)))
+    (is-false (gtk:event-controller-current-event-state controller))))
+
 ;;;     gtk_event_controller_get_current_event_time
 
-;;; 2024-7-4
+(test gtk-event-controller-current-event-time
+  (let ((controller (gtk:event-controller-key-new)))
+    (is (= gdk:+current-time+
+           (gtk:event-controller-current-event-time controller)))))
+
+;;; 2024-7-27

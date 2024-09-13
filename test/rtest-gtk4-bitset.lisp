@@ -75,9 +75,15 @@
     (is-false (gtk:bitset-remove-all bitset))
     (is-true (gtk:bitset-is-empty bitset))))
 
-;;;     gtk_bitset_add
 ;;;     gtk_bitset_get_minimum
 ;;;     gtk_bitset_get_maximum
+
+(test gtk-bitset-minimum/maximum
+  (let ((bitset (gtk:bitset-new-empty)))
+    (is (= 0 (gtk:bitset-maximum bitset)))
+    (is (= #xffffffff (gtk:bitset-minimum bitset)))))
+
+;;;     gtk_bitset_add
 ;;;     gtk_bitset_get_size
 ;;;     gtk_bitset_get_nth
 

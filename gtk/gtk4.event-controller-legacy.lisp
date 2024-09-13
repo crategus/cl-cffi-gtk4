@@ -2,11 +2,11 @@
 ;;; gtk4.event-controller-legacy.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -53,7 +53,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventControllerLegacy
+;;; GtkEventControllerLegacy
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventControllerLegacy" event-controller-legacy
@@ -65,7 +65,7 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller-legacy 'type)
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @begin{short}
     The @class{gtk:event-controller-legacy} object is an event controller that
     gives you direct access to the event stream.
@@ -81,7 +81,8 @@ lambda (controller event)    :run-last
       @begin{table}
         @entry[controller]{The @class{gtk:event-controller-legacy} object which
           received the signal.}
-        @entry[event]{The @class{gdk:event} event which triggered the signal.}
+        @entry[event]{The @class{gdk:event} instance which triggered the
+          signal.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked for
           the event and the emission of this signal. @em{False} to propagate
           the event further.}
@@ -91,12 +92,12 @@ lambda (controller event)    :run-last
   @see-class{gtk:event-controller}")
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_event_controller_legacy_new ()
+;;;gtk_event_controller_legacy_new
 ;;; ----------------------------------------------------------------------------
 
 (defun event-controller-legacy-new ()
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @return{The newly created @class{gtk:event-controller-legacy} object.}
   @short{Creates a new legacy event controller.}
   @see-class{gtk:event-controller-legacy}"

@@ -390,7 +390,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{2024-5-2}
+ "@version{2024-7-30}
   @syntax{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -406,7 +406,7 @@ lambda (widget)    :run-last
   the search key for the entry completion to be at least @arg{length}.
 
   This is useful for long lists, where completing using a small key takes a
-  lot of time and will come up with meaningless results anyway, i.e., a too
+  lot of time and will come up with meaningless results anyway, that is, a too
   large dataset.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.

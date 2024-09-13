@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureLongPress
 
-(test gesture-long-press-class
+(test gtk-gesture-long-press-class
   ;; Check type
   (is (g:type-is-object "GtkGestureLongPress"))
   ;; Check registered name
@@ -42,8 +42,6 @@
              (gobject:get-g-type-definition "GtkGestureLongPress"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     delay-factor
 
 (test gtk-gesture-long-press-properties
   (let ((gesture (make-instance 'gtk:gesture-long-press)))
@@ -88,4 +86,4 @@
 (test gtk-gesture-long-press-new
   (is (typep (gtk:gesture-long-press-new) 'gtk:gesture-long-press)))
 
-;;; 2024-2-19
+;;; 2024-7-27

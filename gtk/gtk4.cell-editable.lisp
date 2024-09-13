@@ -93,9 +93,10 @@ lambda (editable)    :run-last
       The signal is a sign for the cell renderer to update its value from the
       @arg{editable} argument. Implementations of the @class{gtk:cell-editable}
       class are responsible for emitting the signal when they are done editing,
-      e.g. the @class{gtk:entry} widget is emitting it when the user presses
-      the @kbd{Enter} key. The @fun{gtk:cell-editable-editing-done} function is
-      a convenience method for emitting the \"editing-done\" signal.
+      for example, the @class{gtk:entry} widget is emitting it when the user
+      presses the @kbd{Enter} key. The @fun{gtk:cell-editable-editing-done}
+      function is a convenience method for emitting the @code{\"editing-done\"}
+      signal.
       @begin[code]{table}
         @entry[editable]{The @class{gtk:cell-editable} object on which the
           signal was emitted.}
@@ -107,11 +108,11 @@ lambda (editable)    :run-last
       The signal is meant to indicate that the cell is finished editing, and
       the widget may now be destroyed. Implementations of the
       @class{gtk:cell-editable} class are responsible for emitting the signal
-      when they are done editing. It must be emitted after the \"editing-done\"
-      signal, to give the cell renderer a chance to update the value of the cell
-      before the widget is removed. The @fun{gtk:cell-editable-remove-widget}
-      function is a convenience method for emitting the \"remove-widget\"
-      signal.
+      when they are done editing. It must be emitted after the
+      @code{\"editing-done\"} signal, to give the cell renderer a chance to
+      update the value of the cell before the widget is removed. The
+      @fun{gtk:cell-editable-remove-widget} function is a convenience method
+      for emitting the @code{\"remove-widget\"} signal.
       @begin[code]{table}
         @entry[editable]{The @class{gtk:cell-editable} object on which the
           signal was emitted.}
@@ -161,9 +162,9 @@ lambda (editable)    :run-last
 (cffi:defcfun ("gtk_cell_editable_start_editing" cell-editable-start-editing)
     :void
  #+liber-documentation
- "@version{#2022-7-25}
+ "@version{#2024-7-26}
   @argument[editable]{a @class{gtk:cell-editable} object}
-  @argument[event]{a @class{gdk:event} event that began the editing process,
+  @argument[event]{a @class{gdk:event} instance that began the editing process,
     or @code{nil} if editing was initiated programmatically}
   @begin{short}
     Begins editing on a cell editable.
@@ -174,8 +175,8 @@ lambda (editable)    :run-last
   @class{gtk:cell-renderer} type.
 
   The @fun{gtk:cell-editable-start-editing} function can then set up the
-  @arg{editable} argument suitably for editing a cell, e.g. making the
-  @kbd{Esc} key emit the \"editing-done\" signal.
+  @arg{editable} argument suitably for editing a cell, for example, making the
+  @kbd{Esc} key emit the @code{\"editing-done\"} signal.
 
   Note that the @arg{editable} argument is created on-demand for the current
   edit. Its lifetime is temporary and does not persist across other edits
@@ -203,7 +204,7 @@ lambda (editable)    :run-last
  "@version{#2022-7-25}
   @argument[editable]{a @class{gtk:cell-editable} object}
   @begin{short}
-    Emits the \"editing-done\" signal.
+    Emits the @code{\"editing-done\"} signal.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-editable} implementation is deprecated since 4.10,
@@ -224,7 +225,7 @@ lambda (editable)    :run-last
  "@version{#2022-7-25}
   @argument[editable]{a @class{gtk:cell-editable} object}
   @begin{short}
-    Emits the \"remove-widget\" signal.
+    Emits the @code{\"remove-widget\"} signal.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-editable} implementation is deprecated since 4.10,

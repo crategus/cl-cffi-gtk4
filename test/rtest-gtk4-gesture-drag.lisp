@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureDrag
 
-(test gesture-drag-class
+(test gtk-gesture-drag-class
   ;; Check type
   (is (g:type-is-object "GtkGestureDrag"))
   ;; Check registered name
@@ -41,8 +41,58 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     drag-begin
+
+(test gtk-gesture-drag-drag-begin-signal
+  (let* ((name "drag-begin")
+         (gtype (g:gtype "GtkGestureDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drag-end
+
+(test gtk-gesture-drag-drag-end-signal
+  (let* ((name "drag-end")
+         (gtype (g:gtype "GtkGestureDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drag-update
+
+(test gtk-gesture-drag-drag-update-signal
+  (let* ((name "drag-update")
+         (gtype (g:gtype "GtkGestureDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -63,4 +113,4 @@
   (let ((gesture (gtk:gesture-drag-new)))
     (is-false (gtk:gesture-drag-offset gesture))))
 
-;;; 2024-7-4
+;;; 2024-7-27

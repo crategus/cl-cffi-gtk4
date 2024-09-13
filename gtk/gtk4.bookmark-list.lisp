@@ -108,7 +108,7 @@
     the @class{g:bookmark-file} class.
   @end{short}
   It presents a @class{g:list-model} object and fills it asynchronously with
-  the @class{g:file-infos} objects returned from that function.
+  the @class{g:file-info} objects returned from that function.
 
   The @class{g:file-info} objects in the list have some attributes in the
   recent namespace added: @code{recent::private (boolean)} and

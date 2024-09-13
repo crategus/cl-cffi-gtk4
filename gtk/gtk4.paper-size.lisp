@@ -237,7 +237,7 @@
   see the @fun{gtk:paper-size-default} function.
   @see-class{gtk:paper-size}
   @see-function{gtk:paper-size-default}"
-  (let ((name (if name name (cffi:null-pointer))))
+  (let ((name (or name (cffi:null-pointer))))
     (%paper-size-new name)))
 
 (export 'paper-size-new)

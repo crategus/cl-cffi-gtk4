@@ -121,24 +121,38 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+(defun create-string-list-for-package (&optional (package "GTK"))
+  (let ((store (gtk:string-list-new '())))
+    (do-external-symbols (symbol (find-package package))
+      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+    store))
+
 ;;;     gtk_filter_match
 ;;;     gtk_filter_get_strictness
 
 (test gtk-filter-match/strictness
-  (let* ((store (gtk:string-list-new '()))
+  (let* ((store (create-string-list-for-package))
          (expression (gtk:property-expression-new "GtkStringObject"
                                                   nil "string"))
          (filter (gtk:string-filter-new expression))
          (model (gtk:filter-list-model-new store filter)))
-    (declare (ignore model))
-    ;; Fill the string list with strings
-    (do-external-symbols (symbol (find-package "GTK"))
-      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+
+    ;; Check the filter model
+    (is (eq filter (gtk:filter-list-model-filter model)))
+    (is-false (gtk:filter-list-model-incremental model))
+    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+    (is (eq store (gtk:filter-list-model-model model)))
+    (is (= 3328 (gtk:filter-list-model-n-items model)))
+    (is (= 0 (gtk:filter-list-model-pending model)))
+
     ;; At this point we have a filter list model with string objects
     (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
-    (is (eq :all (gtk:filter-strictness filter)))
     (is (eq :exact (gtk:string-filter-match-mode filter)))
+
+    (is (eq :all (gtk:filter-strictness filter)))
+
     (is-true (gtk:string-filter-ignore-case filter))
+
     ;; Match strings in the model
     (is-true (gtk:filter-match filter
                                (gtk:string-object-new "gtk:string-filter")))

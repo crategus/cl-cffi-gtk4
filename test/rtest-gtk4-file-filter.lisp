@@ -67,7 +67,6 @@
 
 ;;;     gtk_file_filter_add_mime_type
 
-
 (test gtk-file-filter-add-mime-type
   (let ((filter (gtk:file-filter-new)))
     (is-false (gtk:file-filter-add-mime-type filter "text/plain"))))

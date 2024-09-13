@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-zoom.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-zoom 'type)
- "@version{2024-2-21}
+ "@version{2024-7-27}
   @begin{short}
     The @class{gtk:gesture-zoom} class is a @class{gtk:gesture} implementation
     for 2-finger pinch/zoom gestures.
@@ -84,7 +84,7 @@ lambda (gesture scale)    :run-first
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-zoom} object on which the signal
           is emitted.}
-        @entry[scale]{A double float with the scale delta, taking the initial
+        @entry[scale]{The double float with the scale delta, taking the initial
           state as 1:1.}
     @end{table}
   @end{dictionary}
@@ -92,31 +92,31 @@ lambda (gesture scale)    :run-first
   @see-class{gtk:gesture-rotate}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_zoom_new ()
+;;; gtk_gesture_zoom_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-zoom-new))
 
 (defun gesture-zoom-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-7-27}
   @return{The newly created @class{gtk:gesture-zoom} object.}
   @begin{short}
     Returns a newly created gesture that recognizes pinch/zoom gestures.
   @end{short}
-  @see-class{gtk:gesture-rotate}"
+  @see-class{gtk:gesture-zoom}"
   (make-instance 'gesture-zoom))
 
 (export 'gesture-zoom-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_zoom_get_scale_delta ()
+;;; gtk_gesture_zoom_get_scale_delta
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_zoom_get_scale_delta" gesture-zoom-scale-delta)
     :double
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-7-27}
   @argument[widget]{a @class{gtk:gesture-zoom} object}
   @return{The double float with the scale delta.}
   @begin{short}
@@ -124,7 +124,7 @@ lambda (gesture scale)    :run-first
     the gesture was recognized, hence the starting point is considered 1:1.
   @end{short}
   If the gesture is not active, 1.0d0 is returned.
-  @see-class{gtk:gesture-rotate}"
+  @see-class{gtk:gesture-zoom}"
   (gesture (g:object gesture-zoom)))
 
 (export 'gesture-zoom-scale-delta)

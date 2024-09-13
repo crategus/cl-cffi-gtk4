@@ -419,7 +419,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new-with-buttons (title parent flags &rest buttons)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2024-8-16}
   @argument[title]{a string with the title for the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent for the dialog,
     or @code{nil}}
@@ -470,7 +470,7 @@ lambda (dialog response)    :run-last
   @see-symbol{gtk:dialog-flags}
   @see-symbol{gtk:response-type}"
   (let ((dialog (make-instance 'dialog))
-        (flags (if (listp flags) flags (list flags))))
+        (flags (glib-sys:mklist flags)))
     (when title
       (setf (window-title dialog) title))
     (when parent

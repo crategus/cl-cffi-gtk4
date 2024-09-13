@@ -277,8 +277,8 @@ lambda (renderer path text)    :run-last
       @begin[code]{table}
         @entry[renderer]{The @class{gtk:cell-renderer-text} object which
           received the signal.}
-        @entry[path]{A string with the path identifying the edited cell.}
-        @entry[text]{A string with the new text.}
+        @entry[path]{The string with the path identifying the edited cell.}
+        @entry[text]{The string with the new text.}
       @end{table}
   @end{dictionary}
   @begin[Warning]{dictionary}
@@ -411,7 +411,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{attributes} property of type @class{pango:attr-list} (Read / Write)
   @br{}
-  A list of style attributes to apply to the text of the renderer.")
+  The list of style attributes to apply to the text of the renderer.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-text-attributes)
@@ -440,7 +440,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "background"
                                                'cell-renderer-text) t)
  "The @code{background} property of type @code{:string} (Write) @br{}
-  Background color as a string. @br{}
+  The background color as a string. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -468,7 +468,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{background-rgba} property of type @class{gdk:rgba} (Read / Write)
   @br{}
-  Background color.")
+  The background color.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-text-background-rgba)
@@ -646,10 +646,10 @@ lambda (renderer path text)    :run-last
 ;;; --- gtk:cell-renderer-text-family ------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "family"
-                                               'cell-renderer-text) t)
+(setf (documentation (liber:slot-documentation "family" 'cell-renderer-text) t)
  "The @code{family} property of type @code{:string} (Read / Write) @br{}
-  Name of the font family, e.g. Sans, Helvetica, Times, Monospace. @br{}
+  The name of the font family, for example, Sans, Helvetica, Times, Monospace.
+  @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -665,7 +665,7 @@ lambda (renderer path text)    :run-last
     Accessor of the @slot[gtk:cell-renderer-text]{family} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-  Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+  Name of the font family, for example, Sans, Helvetica, Times, Monospace.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -707,7 +707,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "font"
                                                'cell-renderer-text) t)
  "The @code{font} property of type @code{:string} (Read / Write) @br{}
-  Font description as a string, e.g. \"Sans Italic 12\". @br{}
+  The font description as a string, for example, \"Sans Italic 12\". @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -723,7 +723,7 @@ lambda (renderer path text)    :run-last
     Accessor of the @slot[gtk:cell-renderer-text]{font} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-  Font description as a string, e.g. \"Sans Italic 12\".
+  Font description as a string, for example \"Sans Italic 12\".
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -737,7 +737,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{font-desc} property of type @class{pango:font-description}
   (Read / Write) @br{}
-  A Pango font description.")
+  The Pango font description.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-text-font-desc)
@@ -766,7 +766,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "foreground"
                                                'cell-renderer-text) t)
  "The @code{foreground} property of type @code{:string} (Write) @br{}
-  Foreground color as a string. @br{}
+  The foreground color as a string. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -794,7 +794,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{foreground-rgba} property of type @class{gdk:rgba} (Read / Write)
   @br{}
-  Foreground color.")
+  The foreground color.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-text-foreground-rgba)
@@ -913,7 +913,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{markup} property of type @code{:string} (Write) @br{}
   Marked up text to render. @br{}
-  Default value: @code{nil}")
+  The default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-text-markup)
@@ -1014,7 +1014,7 @@ lambda (renderer path text)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rise" 'cell-renderer-text) t)
  "The @code{rise} property of type @code{:int} (Read / Write) @br{}
-  Offset of text above the baseline, below the baseline if this property is
+  The offset of text above the baseline, below the baseline if this property is
   negative. @br{}
   Allowed values: >= -2147483647 @br{}
   Default value: 0")
@@ -1074,7 +1074,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "scale"
                                                'cell-renderer-text) t)
  "The @code{scale} property of type @code{:double} (Read / Write) @br{}
-  Font scaling factor. @br{}
+  The font scaling factor. @br{}
   Allowed values: >= 0 @br{}
   Default value: 1")
 
@@ -1160,7 +1160,7 @@ lambda (renderer path text)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size" 'cell-renderer-text) t)
  "The @code{size} property of type @code{:int} (Read / Write) @br{}
-  Font size. @br{}
+  The font size. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1189,7 +1189,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "size-points"
                                                'cell-renderer-text) t)
  "The @code{size-points} property of type @code{:double} (Read / Write) @br{}
-  Font size in points. @br{}
+  The font size in points. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1247,7 +1247,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{stretch} property of type @symbol{pango:stretch} (Read / Write)
   @br{}
-  Font stretch. @br{}
+  The font stretch. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
@@ -1361,7 +1361,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "style"
                                                'cell-renderer-text) t)
  "The @code{style} property of type @symbol{pango:style} (Read / Write) @br{}
-  Font style. @br{}
+  The font style. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
@@ -1418,7 +1418,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "text"
                                                'cell-renderer-text) t)
  "The @code{text} property of type @code{:string} (Read / Write) @br{}
-  Text to render. @br{}
+  The text to render. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -1447,7 +1447,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{underline} property of type @symbol{pango:underline} (Read / Write)
   @br{}
-  Style of underline for this text. @br{}
+  The style of underline for this text. @br{}
   Default value: @code{:none}")
 
 #+liber-documentation
@@ -1506,7 +1506,7 @@ lambda (renderer path text)    :run-last
                                                'cell-renderer-text) t)
  "The @code{variant} property of type @symbol{pango:variant} (Read / Write)
   @br{}
-  Font variant. @br{}
+  The font variant. @br{}
   Default value: @code{:normal}")
 
 #+liber-documentation
@@ -1563,7 +1563,7 @@ lambda (renderer path text)    :run-last
 (setf (documentation (liber:slot-documentation "weight"
                                                'cell-renderer-text) t)
  "The @code{weight} property of type @code{:int} (Read / Write) @br{}
-  Font weight. @br{}
+  The font weight. @br{}
   Allowed values: >= 0 @br{}
   Default value: 400")
 
@@ -1773,7 +1773,7 @@ lambda (renderer path text)    :run-last
   Further changes in these properties do not affect the height, so they must be
   accompanied by a subsequent call to this function. Using this function is
   unflexible, and should really only be used if calculating the size of a cell
-  is too slow, i.e., a massive number of cells displayed. If the
+  is too slow, that is, a massive number of cells displayed. If the
   @arg{number-of-rows} argument is -1, then the fixed height is unset, and the
   height is determined by the properties again.
   @begin[Warning]{dictionary}

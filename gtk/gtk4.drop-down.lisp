@@ -497,7 +497,7 @@ lambda (dropdown)    :action
 
 (defun drop-down-new (model expression)
  #+liber-documentation
- "@version{2024-1-10}
+ "@version{2024-8-16}
   @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
   @argument[expression]{a @class{gtk:expression} instance to use, or @code{nil}
     for none}
@@ -509,7 +509,7 @@ lambda (dropdown)    :action
   to map its items to widgets.
   @see-class{gtk:drop-down}
   @see-function{gtk:drop-down-factory}"
-  (let ((expression (if expression expression (cffi:null-pointer))))
+  (let ((expression (or expression (cffi:null-pointer))))
     (%drop-down-new model expression)))
 
 (export 'drop-down-new)

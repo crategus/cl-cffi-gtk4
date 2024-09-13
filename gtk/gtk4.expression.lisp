@@ -2,7 +2,7 @@
 ;;; gtk4.expression.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,6 +99,12 @@
       "GBoxed"
       (documentation 'expression-watch 'type)
  "@version{2023-11-6}
+  @begin{declaration}
+(glib:define-g-boxed-opaque expression-watch \"GtkExpressionWatch\"
+  :export t
+  :type-initializer \"gtk_expression_watch_get_type\"
+  :alloc (error \"GtkExpressionWatch cannot be created from the Lisp side.\"))
+  @end{declaration}
   @begin{short}
     An opaque structure representing a watched @class{gtk:expression} instance.
   @end{short}
@@ -164,17 +170,14 @@
 
   Here is an example of a complex expression:
   @begin{pre}
-color_expr = gtk_property_expression_new (GTK_TYPE_LIST_ITEM,
-                                          NULL, \"item\");
-expression = gtk_property_expression_new (GTK_TYPE_COLOR,
-                                          color_expr, \"name\");
+(setf color (gtk:property-expression-new \"GtkListItem\" nil \"item\"))
+(setf expression (gtk:property-expression-new \"GtkColor\" color \"name\"))
   @end{pre}
   when evaluated with @code{this} being a @class{gtk:list-item} object, it will
   obtain the @slot[gtk:list-item]{item} property from the @class{gtk:list-item}
-  object, and then obtain the @code{name} property from the resulting object
-  (which is assumed to be of type GTK_TYPE_COLOR).
-
-  A more concise way to describe this would be
+  object, and then obtain the @code{name} property from the resulting object,
+  which is assumed to be of type \"GtkColor\". A more concise way to describe
+  this would be
   @begin{pre}
 this->item->name
   @end{pre}
@@ -600,8 +603,8 @@ case PROP_EXPRESSION:
 
 (defun property-expression-new (gtype expression property)
  #+liber-documentation
- "@version{2023-11-6}
-  @argument[gtype]{a @class{g:type-t} type to expect for the @arg{this} type}
+ "@version{2024-8-16}
+  @argument[gtype]{a @class{g:type-t} type ID to expect for the @arg{this} type}
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
   @argument[property]{a string with the name of the property}
@@ -614,7 +617,7 @@ case PROP_EXPRESSION:
   @arg{property} will be queried. Otherwise, this expression's evaluation will
   fail. The given @arg{gtype} must have a property with @arg{property}.
   @see-class{gtk:expression}"
-  (let ((expression (if expression expression (cffi:null-pointer))))
+  (let ((expression (or expression (cffi:null-pointer))))
     (%property-expression-new gtype expression property)))
 
 (export 'property-expression-new)

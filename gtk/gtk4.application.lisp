@@ -479,7 +479,7 @@ lambda (application window)    :run-first
 (declaim (inline application-new))
 
 (defun application-new (id flags)
- "@version{2023-8-2}
+ "@version{2024-8-16}
   @argument[id]{a string with the application ID, or @code{nil} for no
     application ID}
   @argument[flags]{a @symbol{g:application-flags} value with the application
@@ -493,10 +493,10 @@ lambda (application window)    :run-first
   gets registered as the primary instance.
 
   Concretely, the @fun{gtk:init} function is called in the default handler for
-  the \"GApplication::startup\" signal. Therefore, @class{gtk:application}
-  subclasses should always chain up in their \"GApplication::startup\" handler
-  before using any GTK API. Note that commandline arguments are not passed to
-  the @fun{gtk:init} function.
+  the @code{\"GApplication::startup\"} signal. Therefore,
+  @class{gtk:application} subclasses should always chain up in their
+  @code{\"GApplication::startup\"} handler before using any GTK API. Note that
+  commandline arguments are not passed to the @fun{gtk:init} function.
 
   The application ID must be valid. See the @fun{g:application-id-is-valid}
   function. If no application ID is given then some features, most notably
@@ -506,7 +506,7 @@ lambda (application window)    :run-first
   @see-function{gtk:init}
   @see-function{g:application-id-is-valid}"
   (make-instance 'application
-                 :application-id (if id id (cffi:null-pointer))
+                 :application-id (or id (cffi:null-pointer))
                  :flags flags))
 
 (export 'application-new)
@@ -760,14 +760,14 @@ lambda (application window)    :run-first
   (cffi:foreign-funcall "gtk_application_set_accels_for_action"
                         (g:object application) application
                         :string name
-                        g:strv-t (if (listp accels) accels (list accels))
+                        g:strv-t (glib-sys:mklist accels)
                         :void)
   accels)
 
 (cffi:defcfun ("gtk_application_get_accels_for_action"
                application-accels-for-action) g:strv-t
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-8-16}
   @syntax{(gtk:application-accels-for-action application name) => accels}
   @syntax{(setf (gtk:application-accels-for-action application name) accels)}
   @argument[application]{a @class{gtk:application} instance}
@@ -776,12 +776,11 @@ lambda (application window)    :run-first
   @argument[accels]{a string or a list of strings of accelerators in the format
     understood by the @fun{gtk:accelerator-parse} function}
   @begin{short}
-    Accessor of the accelerators that are associated with the given action.
+    The @fun{gtk:application-accels-for-action} function gets the keyboard
+    accelerators that will trigger the given action.
   @end{short}
-  The @fun{gtk:application-accels-for-action} function gets the keyboard
-  accelerators that will trigger the given action. The
-  @setf{gtk:application-accels-for-action} function sets zero or more keyboard
-  accelerators.
+  The @setf{gtk:application-accels-for-action} function sets zero or more
+  keyboard accelerators.
 
   The first item in the list of accelerators will be the primary accelerator,
   which may be displayed in the UI. To remove all accelerators for an action,

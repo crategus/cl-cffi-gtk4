@@ -413,7 +413,7 @@
 
 (defun text-iter-line-offset (iter &key (visible nil))
  #+liber-documentation
- "@version{2024-7-1}
+ "@version{2024-7-26}
   @syntax{(gtk:text-iter-line-offset iter) => offset}
   @syntax{(gtk:text-iter-line-offset iter :visible t) => offset}
   @syntax{(setf (gtk:text-iter-line-offset iter) offset)}
@@ -421,14 +421,14 @@
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[offset]{an integer with a character offset relative to the start of
     the current line of the iterator}
-  @argument[visible]{a boolean keyword argument, the default is @code{false}}
+  @argument[visible]{a boolean keyword argument, the default is @em{false}}
   @begin{short}
     The @fun{gtk:text-iter-line-offset} function returns the character offset
     of the iterator, counting from the start of a newline-terminated line.
   @end{short}
   The @setf{gtk:text-iter-line-offset} function moves the iterator within a
   line, to the new character offset. If the @arg{visible} keyword argument is
-  @code{true}, the function does not count characters that are invisible due
+  @em{true}, the function does not count characters that are invisible due
   to tags with the @slot[gtk:text-tag]{invisible} attribute toggled on.
 
   The first character on the line has offset 0. The given character offset must
@@ -479,7 +479,7 @@
 
 (defun text-iter-line-index (iter &key (visible nil))
  #+liber-documentation
- "@version{2024-7-1}
+ "@version{2024-7-26}
   @syntax{(gtk:text-iter-line-index iter) => index}
   @syntax{(gtk:text-iter-line-index iter :visible t) => index}
   @syntax{(setf (gtk:text-iter-line-offset iter) index)}
@@ -487,14 +487,14 @@
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[index]{an integer with a byte index relative to the start of the
     current line of the iterator}
-  @argument[visible]{a boolean keyword argument, the default is @code{false}}
+  @argument[visible]{a boolean keyword argument, the default is @em{false}}
   @begin{short}
     The @fun{gtk:text-iter-line-index} function returns the byte index of the
     iterator, counting from the start of a newline-terminated line.
   @end{short}
   The @setf{gtk:text-iter-line-index} function moves the iterator within a
   line, to the new byte index. If the @arg{visible} keyword argument is
-  @code{true}, the function does not count bytes that are invisible due to tags
+  @em{true}, the function does not count bytes that are invisible due to tags
   with the @slot[gtk:text-tag]{invisible} attribute toggled on.
 
   Remember that the text buffer encodes text in UTF-8, and that characters can
@@ -557,15 +557,15 @@
 
 (defun text-iter-slice (start end &key (visible nil))
  #+liber-documentation
- "@version{2024-7-1}
+ "@version{2024-7-26}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
-  @argument[visible]{a boolean keyword argument, the default is @code{false}}
+  @argument[visible]{a boolean keyword argument, the default is @em{false}}
   @return{The string with a slice of text from the text buffer.}
   @begin{short}
     Returns a string with the text in the given range.
   @end{short}
-  If the @arg{visible} keyword argument is @code{true}, invisible text is not
+  If the @arg{visible} keyword argument is @em{true}, invisible text is not
   included. Invisible text is usually invisible because a @class{gtk:text-tag}
   object with the @slot[gtk:text-tag]{invisible} attribute turned on has been
   applied to it.
@@ -604,15 +604,15 @@
 
 (defun text-iter-text (start end &key (visible nil))
  #+liber-documentation
- "@version{2024-7-1}
+ "@version{2024-7-26}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
-  @argument[visible]{a boolean keyword argument, the default is @code{false}}
+  @argument[visible]{a boolean keyword argument, the default is @em{false}}
   @return{The string with characters from the text buffer.}
   @begin{short}
     Returns a string with the text in the given range.
   @end{short}
-  If the @arg{visible} keyword argument is @code{true}, invisible text is not
+  If the @arg{visible} keyword argument is @em{true}, invisible text is not
   included. Invisible text is usually invisible because a @class{gtk:text-tag}
   object with the @slot[gtk:text-tag]{invisible} attribute turned on has been
   applied to it.

@@ -99,7 +99,7 @@
 (setf (liber:alias-for-symbol 'font-level)
       "GEnum"
       (liber:symbol-documentation 'font-level)
- "@version{2023-8-27}
+ "@version{2024-7-30}
   @begin{declaration}
 (gobject:define-g-enum \"GtkFontLevel\" font-level
   (:export t
@@ -112,9 +112,9 @@
   @begin{values}
     @begin[code]{table}
       @entry[:family]{Select a font family.}
-      @entry[:face]{Select a font face (i.e. a family and a style).}
-      @entry[:font]{Select a font (i.e. a face with a size, and possibly font
-        variations).}
+      @entry[:face]{Select a font face, that is a family and a style.}
+      @entry[:font]{Select a font, that is, a face with a size, and possibly
+        font variations).}
       @entry[:features]{Select a font and font features.}
     @end{table}
   @end{values}

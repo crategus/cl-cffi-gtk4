@@ -531,7 +531,7 @@
   has the same effect as using the @func{gtk:print-settings-unset} function.
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-unset}"
-  (%print-settings-set settings key (if value value (cffi:null-pointer))))
+  (%print-settings-set settings key (or value (cffi:null-pointer))))
 
 (export 'print-settings-set)
 
@@ -1470,14 +1470,15 @@
   @see-class{gtk:print-settings}"
   (let ((result nil)
         (value (print-settings-get settings "page-ranges")))
-    (setf value (split-sequence:split-sequence #\, value))
-    (dolist (range value)
-      (setf range (split-sequence:split-sequence #\- range))
-      (let ((start (first range)) (end (second range)))
-        (if (not end)
-            (push (list (parse-integer start)) result)
-            (push (list (parse-integer start) (parse-integer end)) result))))
-    (nreverse result)))
+    (when value
+      (setf value (split-sequence:split-sequence #\, value))
+      (dolist (range value)
+        (setf range (split-sequence:split-sequence #\- range))
+        (let ((start (first range)) (end (second range)))
+          (if (not end)
+              (push (list (parse-integer start)) result)
+              (push (list (parse-integer start) (parse-integer end)) result))))
+      (nreverse result))))
 
 (export 'print-settings-page-ranges)
 
@@ -1726,7 +1727,7 @@
   @see-function{gtk:print-settings-load-file}"
   (glib:with-g-error (err)
     (%print-settings-new-from-key-file keyfile
-                                       (if group group (cffi:null-pointer))
+                                       (or group (cffi:null-pointer))
                                        err)))
 
 (export 'print-settings-new-from-key-file)
@@ -1831,7 +1832,7 @@
   (glib:with-g-error (err)
     (%print-settings-load-key-file settings
                                    keyfile
-                                   (if group group (cffi:null-pointer))
+                                   (or group (cffi:null-pointer))
                                    err)))
 
 (export 'print-settings-load-key-file)
@@ -1887,7 +1888,7 @@
   @see-function{gtk:print-settings-new-from-key-file}"
   (%print-settings-to-key-file settings
                                keyfile
-                               (if group group (cffi:null-pointer))))
+                               (or group (cffi:null-pointer))))
 
 (export 'print-settings-to-key-file)
 

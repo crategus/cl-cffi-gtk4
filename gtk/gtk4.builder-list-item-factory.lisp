@@ -231,9 +231,11 @@
 ;;; gtk_builder_list_item_factory_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: GtkBuilderScope is not implemented
+
 (defun builder-list-item-factory-new-from-resource (scope path)
  #+liber-documentation
- "@version{#2023-9-21}
+ "@version{#2024-8-16}
   @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
   @argument[path]{a string with a valid path to a resource that contains the
     data}
@@ -249,7 +251,7 @@
   @see-class{gtk:builder-scope}"
   (make-instance 'builder-list-item-factory
                  :scope scope
-                 :resource (if path path (cffi:null-pointer))))
+                 :resource (or path (cffi:null-pointer))))
 
 (export 'builder-list-item-factory-new-from-resource)
 

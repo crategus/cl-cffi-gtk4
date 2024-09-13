@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-click.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,15 +70,15 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-click 'type)
- "@version{#2022-8-23}
+ "@version{2024-7-27}
   @begin{short}
     The @class{gtk:gesture-click} object is a @class{gtk:gesture} implementation
     for clicks.
   @end{short}
   It is able to recognize multiple clicks on a nearby zone, which can be
-  listened for through the \"pressed\" signal. Whenever time or distance between
-  clicks exceed the GTK defaults, the \"stopped\" signal is emitted, and the
-  click counter is reset.
+  listened for through the @code{\"pressed\"} signal. Whenever time or distance
+  between clicks exceed the GTK defaults, the @code{\"stopped\"} signal is
+  emitted, and the click counter is reset.
   @begin[Signal Details]{dictionary}
     @subheading{The \"pressed\" signal}
       @begin{pre}
@@ -90,9 +90,9 @@ lambda (gesture n x y)    :run-last
           signal.}
         @entry[n]{The integer with how many touch/button press happened with
           this one.}
-        @entry[x]{The double float with the X coordinate, in widget allocation
+        @entry[x]{The double float with the x coordinate, in widget allocation
           coordinates.}
-        @entry[y]{The double float with the Y coordinate, in widget allocation
+        @entry[y]{The double float with the y coordinate, in widget allocation
           coordinates.}
       @end{table}
     @subheading{The \"released\" signal}
@@ -101,16 +101,16 @@ lambda (gesture n x y)    :run-last
       @end{pre}
       The signal is emitted when a button or touch is released. The @arg{n}
       argument will report the number of press that is paired to this event,
-      note that the \"stopped\" signal may have been emitted between the press
-      and its release, @arg{n} will only start over at the next press.
+      note that the @code{\"stopped\"} signal may have been emitted between the
+      press and its release, @arg{n} will only start over at the next press.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
         @entry[n]{The integer with the number of presses that is paired with
           this release.}
-        @entry[x]{The double float with the X coordinate, in widget allocation
+        @entry[x]{The double float with the x coordinate, in widget allocation
           coordinates.}
-        @entry[y]{The double float with the Y coordinate, in widget allocation
+        @entry[y]{The double float with the y coordinate, in widget allocation
           coordinates.}
       @end{table}
     @subheading{The \"stopped\" signal}
@@ -134,10 +134,11 @@ lambda (gesture x y button sequence)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
-        @entry[x]{The double float with the X coordinate of the event.}
-        @entry[y]{The double float with the Y coordinate of the event.}
-        @entry[button]{An unsigned integer with the button being released.}
-        @entry[sequence]{A @class{gdk:event-sequence} instance being released.}
+        @entry[x]{The double float with the x coordinate of the event.}
+        @entry[y]{The double float with the y coordinate of the event.}
+        @entry[button]{The unsigned integer with the button being released.}
+        @entry[sequence]{The @class{gdk:event-sequence} instance being
+          released.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:gesture-click-new}
@@ -151,7 +152,7 @@ lambda (gesture x y button sequence)    :run-last
 
 (defun gesture-click-new ()
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-7-27}
   @return{The newly created @class{gtk:gesture-click} object.}
   @begin{short}
     Returns a newly created gesture that recognizes single and multiple presses.

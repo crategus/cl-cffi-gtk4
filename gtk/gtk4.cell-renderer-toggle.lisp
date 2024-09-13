@@ -233,7 +233,7 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-radio)
       "Accessor"
       (documentation 'cell-renderer-toggle-radio 'function)
- "@version{2024-2-22}
+ "@version{2024-7-30}
   @syntax{(gtk:cell-renderer-toggle-radio object) => radio}
   @syntax{(setf (gtk:cell-renderer-toggle-radio object) radio)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
@@ -243,12 +243,12 @@ lambda (renderer path)    :run-last
     @class{gtk:cell-renderer-toggle} class.
   @end{short}
   If the @arg{radio} argument is @em{true}, the cell renderer renders a radio
-  toggle, i.e. a toggle in a group of mutually-exclusive toggles. If @em{false},
-  it renders a check toggle, a standalone boolean option.
+  toggle, that is, a toggle in a group of mutually-exclusive toggles. If
+  @em{false}, it renders a check toggle, a standalone boolean option.
 
   This can be set globally for the cell renderer, or changed just before
   rendering each cell in the model, for the @class{gtk:tree-view} widget, you
-  set up a per-row setting using @class{gtk:tree-view-column} object to
+  set up a per-row setting using a @class{gtk:tree-view-column} object to
   associate model columns with cell renderer properties.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.

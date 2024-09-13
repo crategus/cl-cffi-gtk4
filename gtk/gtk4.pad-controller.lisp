@@ -2,7 +2,7 @@
 ;;; gtk4.pad-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -183,14 +183,14 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
                                                'pad-controller) t)
  "The @code{action-group} property of type @class{g:action-group}
   (Read / Write / Construct Only) @br{}
-  Action group to launch actions from.")
+  The action group to launch actions from.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'pad-controller-action-group)
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
  "@version{2023-3-11}
-  @syntax{(gtk:pad-controller-action-group object) => group)}
+  @syntax{(gtk:pad-controller-action-group object) => group}
   @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[group]{a @class{g:action-group} object}
@@ -207,14 +207,14 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (documentation (liber:slot-documentation "pad" 'pad-controller) t)
  "The @code{pad} property of type @class{gdk:device}
   (Read / Write / Construct Only) @br{}
-  Pad device to control.")
+  The pad device to control.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'pad-controller-pad)
       "Accessor"
       (documentation 'pad-controller-pad 'function)
  "@version{2023-3-11}
-  @syntax{(gtk:pad-controller-pad object) => pad)}
+  @syntax{(gtk:pad-controller-pad object) => pad}
   @syntax{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[pad]{a @class{gdk:device} object}

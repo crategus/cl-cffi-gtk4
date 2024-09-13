@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-swipe.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,7 +56,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGestureSwipe
+;;; GtkGestureSwipe
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkGestureSwipe" gesture-swipe
@@ -68,7 +68,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-swipe 'type)
- "@version{2024-2-19}
+ "@version{2024-7-27}
   @begin{short}
     The @class{gtk:gesture-swipe} class is a @class{gtk:gesture} implementation
     for swipe gestures.
@@ -79,7 +79,7 @@
 
   If the velocity is desired in intermediate points, the
   @fun{gtk:gesture-swipe-velocity} function can be called in a @code{\"update\"}
-  signal handler for the @class{gdk:fram-clock} object. All velocities are
+  signal handler for the @class{gdk:frame-clock} object. All velocities are
   reported in pixels/sec units.
   @begin[Signal Details]{dictionary}
     @subheading{The \"swipe\" signal}
@@ -91,9 +91,9 @@ lambda (gesture xvel yvel)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-swipe} object which received the
           signal.}
-        @entry[xvel]{A double float with the velocity in the x axis,
+        @entry[xvel]{The double float with the velocity in the x axis,
           in pixels/sec.}
-        @entry[yvel]{A double float with the velocity in the y axis,
+        @entry[yvel]{The double float with the velocity in the y axis,
           in pixels/sec.}
     @end{table}
   @end{dictionary}
@@ -101,7 +101,7 @@ lambda (gesture xvel yvel)    :run-last
   @see-class{gtk:gesture}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_swipe_new ()
+;;; gtk_gesture_swipe_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-swipe-new))
@@ -119,7 +119,7 @@ lambda (gesture xvel yvel)    :run-last
 (export 'gesture-swipe-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_swipe_get_velocity ()
+;;; gtk_gesture_swipe_get_velocity
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_swipe_get_velocity" %gesture-swipe-velocity)

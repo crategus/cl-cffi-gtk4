@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureSwipe
 
-(test gesture-swipe-class
+(test gtk-gesture-swipe-class
   ;; Check type
   (is (g:type-is-object "GtkGestureSwipe"))
   ;; Check registered name
@@ -67,4 +67,4 @@
   (let ((gesture (gtk:gesture-swipe-new)))
     (is-false (gtk:gesture-swipe-velocity gesture))))
 
-;;; 2024-2-19
+;;; 2024-7-27

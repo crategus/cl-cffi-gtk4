@@ -7,7 +7,7 @@ GTK 4 files
 
 GListModel support
 
-  gtk4.bitset.lisp                     GtkBitset                      GTK 4.12 .
+  gtk4.bitset.lisp                     GtkBitset                      GTK 4.14
   gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
 
   gtk4.filter.lisp                     GtkFilter                      GTK 4.12 .
@@ -15,7 +15,7 @@ GListModel support
   gtk4.multi-filter.lisp               GtkMultiFilter                 GTK 4.12 .
   gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.12 .
   gtk4.string-filter.lisp              GtkStringFilter                GTK 4.12 .
-  gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.12 .
+  gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.14 .
 
   gtk4.sorter.lisp                     GtkSorter                      GTK 4.12 .
   gtk4.custom-sorter.lisp              GtkCustomSorter                GTK 4.12 .
@@ -86,7 +86,7 @@ Layout Containers
 
   gtk4.box.lisp                        GtkBox                         GTK 4.12
   gtk4.center-box.lisp                 GtkCenterBox                   GTK 4.12
-  gtk4.grid.lisp                       GtkGrid                        GTK 4.12
+  gtk4.grid.lisp                       GtkGrid                        GTK 4.14 .
   gtk4.revealer.lisp                   GtkRevealer                    GTK 4.12
   gtk4.list-box.lisp                   GtkListBox                     GTK 4.12
   gtk4.flow-box.lisp                   GtkFlowBox                     GTK 4.12
@@ -226,7 +226,7 @@ Accessibility
 
   gtk4.accessible.lisp                 GtkAccessible                  GTK 4.12&.
   gtk4.accessible-range.lisp           GtkAccessibleRange             GTK 4.12 .
-  gtk4.accessible-text.lisp            GtkAccessibleText              GTK 4.15 +
+  gtk4.accessible-text.lisp            GtkAccessibleText              GTK 4.14 +
   gtk4.at-context.lisp                 GtkATContext                   GTK 4.12 .
 
 Input Methods
@@ -261,26 +261,26 @@ Recently Used Documents
 
 Gestures and event handling
 
-  gtk4.event-controller.lisp           GtkEventController             GTK 4.12 .
-  gtk4.event-controller-key.lisp       GtkEventControllerKey          GTK 4.12 .
-  gtk4.event-controller-focus.lisp     GtkEventControllerFocus        GTK 4.12 .
-  gtk4.event-controller-legacy.lisp    GtkEventControllerLegacy       GTK 4.12 .
-  gtk4.event-controller-scroll.lisp    GtkEventControllerScroll       GTK 4.12 .
-  gtk4.event-controller-motion.lisp    GtkEventControllerMotion       GTK 4.12 .
+  gtk4.event-controller.lisp           GtkEventController             GTK 4.14 .
+  gtk4.event-controller-key.lisp       GtkEventControllerKey          GTK 4.14 .
+  gtk4.event-controller-focus.lisp     GtkEventControllerFocus        GTK 4.14 .
+  gtk4.event-controller-legacy.lisp    GtkEventControllerLegacy       GTK 4.14 .
+  gtk4.event-controller-scroll.lisp    GtkEventControllerScroll       GTK 4.14 .
+  gtk4.event-controller-motion.lisp    GtkEventControllerMotion       GTK 4.14 .
 
-  gtk4.gesture.lisp                    GtkGesture                     GTK 4.12 .
-  gtk4.gesture-single.lisp             GtkGestureSingle               GTK 4.12 .
-  gtk4.gesture-drag.lisp               GtkGestureDrag                 GTK 4.12 .
-  gtk4.gesture-long-press.lisp         GtkGestureLongPress            GTK 4.12 .
-  gtk4.gesture-click.lisp              GtkGestureClick                GTK 4.12 .
-  gtk4.gesture-pan.lisp                GtkGesturePan                  GTK 4.12 .
-  gtk4.gesture-swipe.lisp              GtkGestureSwipe                GTK 4.12 .
-  gtk4.gesture-rotate.lisp             GtkGestureRotate               GTK 4.12 .
-  gtk4.gesture-zoom.lisp               GtkGestureZoom                 GTK 4.12 .
-  gtk4.gesture-stylus.lisp             GtkGestureStylus               GTK 4.12&.
+  gtk4.gesture.lisp                    GtkGesture                     GTK 4.14 .
+  gtk4.gesture-single.lisp             GtkGestureSingle               GTK 4.14 .
+  gtk4.gesture-drag.lisp               GtkGestureDrag                 GTK 4.14 .
+  gtk4.gesture-long-press.lisp         GtkGestureLongPress            GTK 4.14 .
+  gtk4.gesture-click.lisp              GtkGestureClick                GTK 4.14 .
+  gtk4.gesture-pan.lisp                GtkGesturePan                  GTK 4.14 .
+  gtk4.gesture-swipe.lisp              GtkGestureSwipe                GTK 4.14 .
+  gtk4.gesture-rotate.lisp             GtkGestureRotate               GTK 4.14 .
+  gtk4.gesture-zoom.lisp               GtkGestureZoom                 GTK 4.14 .
+  gtk4.gesture-stylus.lisp             GtkGestureStylus               GTK 4.14&.
 
-  gtk4.pad-controller.lisp             GtkPadController               GTK 4.12 .
-  gtk4.shortcut-controller.lisp        GtkShortcutController          GTK 4.12 .
+  gtk4.pad-controller.lisp             GtkPadController               GTK 4.14 .
+  gtk4.shortcut-controller.lisp        GtkShortcutController          GTK 4.14 .
 
 Keyboard shortcuts
 
@@ -335,21 +335,21 @@ Deprecated
   gtk4.tree-view.lisp                   GtkTreeView                   GTK 4.12
   gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop       GTK 4.12
 
-  gtk4.cell-layout.lisp                 GtkCellLayout                 GTK 4.12 .
-  gtk4.cell-view.lisp                   GtkCellView                   GTK 4.12 .
-  gtk4.icon-view.lisp                   GtkIconView                   GTK 4.12&.
+  gtk4.cell-layout.lisp                 GtkCellLayout                 GTK 4.12
+  gtk4.cell-view.lisp                   GtkCellView                   GTK 4.12
+  gtk4.icon-view.lisp                   GtkIconView                   GTK 4.12 .
 
-  gtk4.tree-sortable.lisp               GtkTreeSortable               GTK 4.12 .
-  gtk4.tree-model-sort.lisp             GtkTreeModelSort              GTK 4.12 .
-  gtk4.tree-model-filter.lisp           GtkTreeModelFilter            GTK 4.12 .
+  gtk4.tree-sortable.lisp               GtkTreeSortable               GTK 4.12
+  gtk4.tree-model-sort.lisp             GtkTreeModelSort              GTK 4.12
+  gtk4.tree-model-filter.lisp           GtkTreeModelFilter            GTK 4.12
 
-  gtk4.cell-area.lisp                   GtkCellArea                   GTK 4.12&.
-  gtk4.cell-area-box.lisp               GtkCellAreaBox                GTK 4.12 .
-  gtk4.cell-area-context.lisp           GtkCellAreaContext            GTK 4.12 .
+  gtk4.cell-area.lisp                   GtkCellArea                   GTK 4.12 &
+  gtk4.cell-area-box.lisp               GtkCellAreaBox                GTK 4.12
+  gtk4.cell-area-context.lisp           GtkCellAreaContext            GTK 4.12
 
-  gtk4.cell-editable.lisp               GtkCellEditable               GTK 4.12 .
-  gtk4.cell-renderer.lisp               GtkCellRenderer               GTK 4.12 .
-  gtk4.cell-renderer-text.lisp          GtkCellRendererText           GTK 4.12 .
+  gtk4.cell-editable.lisp               GtkCellEditable               GTK 4.12
+  gtk4.cell-renderer.lisp               GtkCellRenderer               GTK 4.12
+  gtk4.cell-renderer-text.lisp          GtkCellRendererText           GTK 4.12
   gtk4.cell-renderer-accel.lisp         GtkCellRendererAccel          GTK 4.12 .
   gtk4.cell-renderer-combo.lisp         GtkCellRendererCombo          GTK 4.12 .
   gtk4.cell-renderer-pixbuf.lisp        GtkCellRendererPixbuf         GTK 4.12 .
@@ -386,4 +386,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2024-5-23
+2024-7-9

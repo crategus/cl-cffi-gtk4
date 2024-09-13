@@ -56,12 +56,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     item-type
-;;;     mnemonic-modifiers
-;;;     model
-;;;     n-items
-;;;     scope
-
 (test gtk-shortcut-controller-properties
   (let ((controller (make-instance 'gtk:shortcut-controller)))
     ;; TODO: Returns a pointer? Why? Check this with a list model.

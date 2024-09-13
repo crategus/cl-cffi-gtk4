@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-rotate.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-rotate 'type)
- "@version{2024-2-19}
+ "@version{2024-7-27}
   @begin{short}
     The @class{gtk:gesture-rotate} class is a @class{gtk:gesture} implementation
     for 2-finger rotations.
@@ -83,12 +83,13 @@ lambda (gesture angle delta)    :run-first
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-rotate} object which received the
           signal.}
-        @entry[angle]{A double float with the current angle in radians.}
-        @entry[delta]{A double float with the difference with the starting
+        @entry[angle]{The double float with the current angle in radians.}
+        @entry[delta]{The double float with the difference with the starting
           angle, in radians.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:gesture-rotate-new}
+  @see-class{gtk:gesture}
   @see-class{gtk:gesture-zoom}")
 
 ;;; ----------------------------------------------------------------------------

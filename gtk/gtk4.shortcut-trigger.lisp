@@ -88,14 +88,14 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-trigger 'type)
- "@version{#2022-8-26}
+ "@version{#2024-7-26}
   @begin{short}
     A trigger for a key shortcut.
   @end{short}
   The @class{gtk:shortcut-trigger} object is the object used to track if a
   @class{gtk:shortcut} object should be activated. For this purpose, the
   @fun{gtk:shortcut-trigger-trigger} function can be called on a
-  @class{gdk:event} event.
+  @class{gdk:event} instance.
 
   The @class{gtk:shortcut-trigger} implementation contain functions that allow
   easy presentation to end users as well as being printed for debugging.
@@ -340,9 +340,9 @@
 (cffi:defcfun ("gtk_shortcut_trigger_trigger" shortcut-trigger-trigger)
     gdk:key-match
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{#2024-7-26}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
-  @argument[event]{a @class{gdk:event} event}
+  @argument[event]{a @class{gdk:event} instance}
   @argument[enable]{a boolean whether mnemonics should trigger}
   @return{The @symbol{gdk:key-match} value whether the event triggered the
     shortcut.}

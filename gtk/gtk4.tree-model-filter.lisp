@@ -130,9 +130,10 @@
   when unnecessary to not compromise the caching mechanism that is exposed by
   the reference counting scheme. If the child model implements reference
   counting, unnecessary signals may not be emitted because of reference
-  counting, see the @class{gtk:tree-model} documentation. Note that e.g. the
-  @class{gtk:tree-store} object does not implement reference counting and will
-  always emit all signals, even when the receiving node is not visible.
+  counting, see the @class{gtk:tree-model} documentation. Note that, for
+  example; the @class{gtk:tree-store} object does not implement reference
+  counting and will always emit all signals, even when the receiving node is
+  not visible.
 
   Because of this, limitations for possible visible functions do apply. In
   general, visible functions should only use data or properties from the node
@@ -324,8 +325,8 @@
   The function should return @em{true} if the given row should be visible and
   @em{false} otherwise.
 
-  If the condition calculated by the function changes over time, e.g. because
-  it depends on some global parameters, you must call the
+  If the condition calculated by the function changes over time, for example,
+  because it depends on some global parameters, you must call the
   @fun{gtk:tree-model-filter-refilter} function to keep the visibility
   information of the model uptodate.
 
@@ -369,8 +370,8 @@
   @argument[model]{a @class{gtk:tree-model-filter} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator pointing to the row whose
     display values are determined}
-  @argument[value]{a @symbol{g:value} which is already initialized for with
-    the correct type for the column @arg{column}}
+  @argument[value]{a @symbol{g:value} instance which is already initialized for
+    with the correct type for the column @arg{column}}
   @argument[column]{an integer with the column whose display value is
     determined}
   @begin{short}

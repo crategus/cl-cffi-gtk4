@@ -2,7 +2,7 @@
 ;;; gtk4.file-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -98,20 +98,20 @@
 
 #+liber-documentation
 (setf (documentation 'file-filter 'type)
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @begin{short}
-    A @class{gtk:file-filter} object can be used to restrict the files being
+    The @class{gtk:file-filter} object can be used to restrict the files being
     shown in a @class{gtk:file-chooser} widget.
   @end{short}
   Files can be filtered based on their name with the
   @fun{gtk:file-filter-add-pattern} function or on their mime type with the
   @fun{gtk:file-filter-add-mime-type} function.
 
-  Filtering by mime types handles aliasing and subclassing of mime types. E.g.
-  a filter for @file{text/plain} also matches a file with mime type
+  Filtering by mime types handles aliasing and subclassing of mime types. For
+  example, a filter for @file{text/plain} also matches a file with mime type
   @file{application/rtf}, since @file{application/rtf} is a subclass of
   @file{text/plain}. Note that the @class{gtk:file-filter} object allows
-  wildcards for the subtype of a mime type, so you can e.g. filter for
+  wildcards for the subtype of a mime type, so you can, for example, filter for
   @file{image/*}.
 
   Normally, file filters are used by adding them to a @class{gtk:file-chooser}
@@ -126,7 +126,7 @@
     calling the @fun{gtk:file-filter-add-mime-type} or
     @fun{gtk:file-filter-add-pattern} functions.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     An example of a UI definition fragment specifying @class{gtk:file-filter}
     rules:
     @begin{pre}
@@ -144,10 +144,11 @@
   </suffixes>
 </object>
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-constructor{gtk:file-filter-new}
   @see-constructor{gtk:file-filter-new-from-gvariant}
-  @see-slot{gtk:file-filter-name}")
+  @see-slot{gtk:file-filter-name}
+  @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -221,7 +222,7 @@
 
 (defun file-filter-new ()
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2024-8-21}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Creates a new file filter with no rules added to it.
@@ -230,14 +231,14 @@
   until you add rules with the @fun{gtk:file-filter-add-mime-type}, the
   @fun{gtk:file-filter-add-pattern}, or @fun{gtk:file-filter-add-pixbuf-formats}
   functions.
-  @begin[Example]{dictionary}
+  @begin{examples}
     To create a file filter that accepts any file, use:
     @begin{pre}
 (let ((filter (gtk:file-filter-new)))
   (gtk:file-filter-add-pattern filter \"*\")
   ... )
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:file-filter}
   @see-function{gtk:file-filter-add-mime-type}
   @see-function{gtk:file-filter-add-pattern}
@@ -253,7 +254,7 @@
 (cffi:defcfun ("gtk_file_filter_new_from_gvariant"
                file-filter-new-from-gvariant) (g:object file-filter)
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
@@ -273,7 +274,7 @@
 
 (cffi:defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[mime-type]{a string with the name of the MIME type}
   @short{Adds a rule allowing a given mime type to the file filter.}
@@ -332,7 +333,7 @@
 #+gtk-4-4
 (cffi:defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[suffix]{a string with the filename suffix to match}
   @begin{short}
@@ -356,7 +357,7 @@
 (cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The list of strings with the attributes.}
   @begin{short}
@@ -380,7 +381,7 @@
 (cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The new @type{g:variant} instance.}
   @short{Serialize a file filter to a @code{a{sv@}} variant.}

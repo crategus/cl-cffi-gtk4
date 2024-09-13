@@ -110,6 +110,7 @@ dead_acute a
   @end{pre}
   yields @code{U+00E! LATIN SMALL LETTER_A WITH ACUTE}, i.e. á. Note that this
   depends on the keyboard layout including dead keys.
+  @see-constructor{gtk:im-context-simple-new}
   @see-class{gtk:im-context}")
 
 ;;; ----------------------------------------------------------------------------

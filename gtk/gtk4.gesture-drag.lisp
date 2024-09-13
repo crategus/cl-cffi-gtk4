@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-drag.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -122,8 +122,7 @@ lambda (gesture xoffset yoffset)    :run-last
           start point.}
       @end{table}
   @end{dictionary}
-  @see-class{gtk:gesture}
-  @see-class{gtk:gesture-swipe}")
+  @see-class{gtk:gesture}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_drag_new

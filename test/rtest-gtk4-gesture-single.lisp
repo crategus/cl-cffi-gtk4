@@ -45,10 +45,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     button
-;;;     exclusive
-;;;     touch-only
-
 (test gtk-gesture-single-properties
   (let ((gesture (make-instance 'gtk:gesture-single)))
     (is (= 1 (gtk:gesture-single-button gesture)))
@@ -69,4 +65,4 @@
   (let ((gesture (make-instance 'gtk:gesture-single)))
     (is-false (gtk:gesture-single-current-sequence gesture))))
 
-;;; 2024-2-19
+;;; 2024-7-27

@@ -2677,7 +2677,7 @@ lambda (view)    :action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_enable_model_drag_dest"
-               %tree-view-enable-model-drag-dest) :void
+               tree-view-enable-model-drag-dest) :void
  #+liber-documentation
  "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
@@ -2709,7 +2709,7 @@ lambda (view)    :action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_enable_model_drag_source"
-               %tree-view-enable-model-drag-source) :void
+               tree-view-enable-model-drag-source) :void
  #+liber-documentation
  "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
@@ -2873,7 +2873,6 @@ lambda (view)    :action
   (path :pointer)
   (pos :pointer))
 
-#+nil
 (defun tree-view-get-dest-row-at-pos (view x y)
  #+liber-documentation
  "@version{#2024-5-28}

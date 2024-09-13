@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-motion.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,7 +65,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventControllerMotion
+;;; GtkEventControllerMotion
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventControllerMotion"
@@ -83,14 +83,16 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller-motion 'type)
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @begin{short}
     The @class{gtk:event-controller-motion} object is an event controller
     tracking the pointer position.
   @end{short}
-  The event controller offers \"enter\" and \"leave\" signals, as well as
-  @code{is-pointer} and @code{contains-pointer} properties which are updated to
-  reflect changes in the pointer position as it moves over the widget.
+  The event controller offers @code{\"enter\"} and @code{\"leave\"} signals, as
+  well as @slot[gtk:event-controller-motion]{is-pointer} and
+  @slot[gtk:event-controller-motion]{contains-pointer} properties which are
+  updated to reflect changes in the pointer position as it moves over the
+  widget.
   @begin[Signal Details]{dictionary}
     @subheading{The \"enter\" signal}
       @begin{pre}
@@ -124,6 +126,7 @@ lambda (controller x y)    :run-first
         @entry[y]{The double float with the y coordinate.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:event-controller-motion-new}
   @see-class{gtk:event-controller}")
 
 ;;; ----------------------------------------------------------------------------
@@ -137,16 +140,16 @@ lambda (controller x y)    :run-first
                                                'event-controller-motion) t)
  "The @code{contains-pointer} property of type @code{:boolean} (Read) @br{}
   @em{True} if the pointer is in the controllers widget or a descendant. When
-  handling crossing events, this property is updated before the \"enter\"
-  signal but after the \"leave\" signal is emitted. @br{}
-  Default value: @code{false}")
+  handling crossing events, this property is updated before the @code{\"enter\"}
+  signal but after the @code{\"leave\"} signal is emitted. @br{}
+  Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-motion-contains-pointer)
       "Accessor"
       (documentation 'event-controller-motion-contains-pointer 'function)
- "@version{#2022-8-23}
-  @syntax{(gtk:event-controller-motion-contains-pointer object) => contains)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[contains]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
@@ -168,14 +171,14 @@ lambda (controller x y)    :run-first
   to in a descendent widget. When handling crossing events, this property is
   updated before the \"enter\" signal, but after the \"leave\" signal is
   emitted. @br{}
-  Default value: @code{false}")
+  Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-motion-is-pointer)
       "Accessor"
       (documentation 'event-controller-motion-is-pointer 'function)
- "@version{#2022-8-23}
-  @syntax{(gtk:event-controller-motion-is-pointer object) => is-pointer)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[is-pointer]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
@@ -194,7 +197,7 @@ lambda (controller x y)    :run-first
 
 (defun event-controller-motion-new ()
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-7-26}
   @return{The new @class{gtk:event-controller-motion} object.}
   @short{Creates a new event controller that will handle motion events.}
   @see-class{gtk:event-controller-motion}"

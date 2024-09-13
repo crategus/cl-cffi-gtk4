@@ -977,7 +977,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-delete (buffer start end &key interactive editable)
  #+liber-documentation
- "@version{2024-7-3}
+ "@version{2024-7-26}
   @syntax{(gtk:text-buffer-delete buffer start end) => t}
   @syntax{(gtk:text-buffer-delete buffer start end :interactive t) => t}
   @syntax{(gtk:text-buffer-delete buffer start end :interactive t
@@ -1005,7 +1005,7 @@ lambda (buffer)    :run-last
   text for each editable sub range of [@arg{start}, @arg{end}). The @arg{start}
   and @arg{end} iterators are revalidated to point to the location of the last
   deleted range, or left untouched if no text was deleted. If the @arg{editable}
-  keyword argument is @code{true} deletes in addition the not editable text.
+  keyword argument is @em{true} deletes in addition the not editable text.
   This case is equivalent to calling the @fun{gtk:text-buffer-delete} function
   with the @code{nil} value for the @arg{interactive} keyword argument.
   @begin[Note]{dictionary}
@@ -1656,7 +1656,7 @@ lambda (buffer)    :run-last
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-new}"
-  (let* ((name (if name name (cffi:null-pointer)))
+  (let* ((name (or name (cffi:null-pointer)))
          (tag (apply #'make-instance 'text-tag :name name args)))
     (when (text-tag-table-add (text-buffer-tag-table buffer) tag)
       tag)))

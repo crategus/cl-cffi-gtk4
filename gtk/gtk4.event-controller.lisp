@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -97,7 +97,7 @@
 (setf (liber:alias-for-symbol 'propagation-phase)
       "GEnum"
       (liber:symbol-documentation 'propagation-phase)
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @begin{declaration}
 (gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
   (:export t
@@ -114,9 +114,9 @@
         phase happens before the bubble phase, runs from the toplevel down to
         the event widget. This option should only be used on containers that
         might possibly handle events before their children do.}
-      @entry[:bubble]{Events are delivered in the bubble phase. The bubble phase
-        happens after the capture phase, and before the default handlers are
-        run. This phase runs from the event widget, up to the toplevel.}
+      @entry[:bubble]{Events are delivered in the bubble phase. The bubble
+        phase happens after the capture phase, and before the default handlers
+        are run. This phase runs from the event widget, up to the toplevel.}
       @entry[:target]{Events are delivered in the default widget event handlers,
         note that widget implementations must chain up on button, motion, touch
         and grab broken handlers for controllers in this phase to be run.}
@@ -142,7 +142,7 @@
 (setf (liber:alias-for-symbol 'propagation-limit)
       "GEnum"
       (liber:symbol-documentation 'propagation-limit)
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @begin{declaration}
 (gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
   (:export t
@@ -189,20 +189,22 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller 'type)
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @begin{short}
     The @class{gtk:event-controller} class is the base class for event
     controllers.
   @end{short}
   These are ancillary objects associated to widgets, which react to
-  @class{gdk:event} events, and possibly trigger actions as a consequence.
+  @class{gdk:event} instances, and possibly trigger actions as a consequence.
 
   Event controllers are added to a widget with the
   @fun{gtk:widget-add-controller} function. It is rarely necessary to explicitly
   remove a controller with the @fun{gtk:widget-remove-controller} function.
 
-  See the chapter on input handling for an overview of the basic concepts, such
-  as the capture and bubble phases of even propagation.
+  See the GTK documentation on
+  @url[https://docs.gtk.org/gtk4/input-handling.html]{input handling} for an
+  overview of the basic concepts, such as the capture and bubble phases of even
+  propagation.
   @see-slot{gtk:event-controller-name}
   @see-slot{gtk:event-controller-propagation-limit}
   @see-slot{gtk:event-controller-propagation-phase}
@@ -226,8 +228,8 @@
 (setf (liber:alias-for-function 'event-controller-name)
       "Accessor"
       (documentation 'event-controller-name 'function)
- "@version{#2022-8-22}
-  @syntax{(gtk:event-controller-name object) => name)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-name object) => name}
   @syntax{(setf (gtk:event-controller-name object) name)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[name]{a string with the name for the controller}
@@ -254,8 +256,8 @@
 (setf (liber:alias-for-function 'event-controller-propagation-limit)
       "Accessor"
       (documentation 'event-controller-propagation-limit 'function)
- "@version{#2022-8-22}
-  @syntax{(gtk:event-controller-propagation-limit object) => limit)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-propagation-limit object) => limit}
   @syntax{(setf (gtk:event-controller-propagation-limit object) limit)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[limit]{a value of the @symbol{gtk:propagation-limit} enumeration}
@@ -287,8 +289,8 @@
 (setf (liber:alias-for-function 'event-controller-propagation-phase)
       "Accessor"
       (documentation 'event-controller-propagation-phase 'function)
- "@version{#2022-8-22}
-  @syntax{(gtk:event-controller-propagation-phase object) => phase)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-propagation-phase object) => phase}
   @syntax{(setf (gtk:event-controller-propagation-phase object) phase)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[phase]{a value of the @symbol{gtk:propagation-phase} enumeration}
@@ -311,24 +313,23 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "widget" 'event-controller) t)
  "The @code{widget} property of type @class{gtk:widget} (Read) @br{}
-  The widget receiving the @class{gdk:event} events that the controller will
+  The widget receiving the @class{gdk:event} instances that the controller will
   handle.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-widget)
       "Accessor"
       (documentation 'event-controller-widget 'function)
- "@version{#2022-8-22}
-  @syntax{(gtk:event-controller-widget object) => widget)}
-  @syntax{(setf (gtk:event-controller-widget object) widget)}
+ "@version{2024-7-26}
+  @syntax{(gtk:event-controller-widget object) => widget}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[widget]{a @class{gtk:widget} widget}
   @begin{short}
     Accessor of the @slot[gtk:event-controller]{widget} slot of the
     @class{gtk:event-controller} class.
   @end{short}
-  The @fun{gtk:event-controller-widget} function returns the @class{gtk:widget}
-  the event controller relates to.
+  The @fun{gtk:event-controller-widget} function returns the widget the event
+  controller relates to.
   @see-class{gtk:event-controller}
   @see-class{gtk:widget}")
 
@@ -338,16 +339,10 @@
 
 (cffi:defcfun ("gtk_event_controller_reset" event-controller-reset) :void
  #+liber-documentation
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @begin{short}
-    Resets the controller to a clean state.
-  @end{short}
-  Every interaction the controller did through the
-  @fun{gtk:event-controller-handle-event} function will be dropped at this
-  point.
-  @see-class{gtk:event-controller}
-  @see-function{gtk:event-controller-handle-event}"
+  @short{Resets the controller to a clean state.}
+  @see-class{gtk:event-controller}"
   (controller (g:object event-controller)))
 
 (export 'event-controller-reset)
@@ -357,19 +352,24 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event"
-               event-controller-current-event) gdk:event
+               %event-controller-current-event) gdk:event
+  (controller (g:object event-controller)))
+
+(defun event-controller-current-event (controller)
  #+liber-documentation
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The @class{gdk:event} event that is currently handled by
-    @arg{controller}.}
+  @return{The @class{gdk:event} instance that is currently handled by
+    @arg{controller}, or @code{nil}.}
   @begin{short}
     Returns the event that is currently being handled by the controller, and
     @code{nil} at other times.
   @end{short}
   @see-class{gtk:event-controller}
   @see-class{gdk:event}"
-  (controller (g:object event-controller)))
+  (let ((event (%event-controller-current-event controller)))
+    (unless (cffi:null-pointer-p event)
+      event)))
 
 (export 'event-controller-current-event)
 
@@ -380,7 +380,7 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_device"
                event-controller-current-event-device) (g:object gdk:device)
  #+liber-documentation
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller} object}
   @return{The @class{gdk:device} object that is currently handled by
     @arg{controller}.}
@@ -401,7 +401,7 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_state"
                event-controller-current-event-state) gdk:modifier-type
  #+liber-documentation
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller} object}
   @return{The @symbol{gdk:modifier-type} state that is currently handled by
     @arg{controller}.}
@@ -422,10 +422,10 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_time"
                event-controller-current-event-time) :uint32
  #+liber-documentation
- "@version{#2022-8-22}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller} object}
   @return{The unsigned integer with the timestamp of the event that is currently
-    handled @arg{controller}.}
+    handled by @arg{controller}.}
   @begin{short}
     Returns the timestamp of the event that is currently being handled by the
     controller, and 0 otherwise.

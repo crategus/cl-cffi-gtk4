@@ -50,9 +50,76 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     down
+
+(test gtk-gesture-stylus-down-signal
+  (let* ((name "down")
+         (gtype (g:gtype "GtkGestureStylus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     motion
+
+(test gtk-gesture-stylus-motion-signal
+  (let* ((name "motion")
+         (gtype (g:gtype "GtkGestureStylus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     proximity
+
+(test gtk-gesture-stylus-proximity-signal
+  (let* ((name "proximity")
+         (gtype (g:gtype "GtkGestureStylus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     up
+
+(test gtk-gesture-stylus-up-signal
+  (let* ((name "up")
+         (gtype (g:gtype "GtkGestureStylus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -76,4 +143,4 @@
   (let ((gesture (gtk:gesture-stylus-new)))
     (is-false (gtk:gesture-stylus-device-tool gesture))))
 
-;;; 2024-2-21
+;;; 2024-7-27

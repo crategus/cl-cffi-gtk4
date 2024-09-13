@@ -8,25 +8,25 @@
 ;;;     GtkPolicyType
 
 (test gtk-policy-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPolicyType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPolicyType")
           (g:gtype (cffi:foreign-funcall "gtk_policy_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:policy-type
           (glib:symbol-for-gtype "GtkPolicyType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_POLICY_ALWAYS" "GTK_POLICY_AUTOMATIC" "GTK_POLICY_NEVER"
                "GTK_POLICY_EXTERNAL")
              (gtk-test:list-enum-item-name "GtkPolicyType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3)
              (gtk-test:list-enum-item-value "GtkPolicyType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("always" "automatic" "never" "external")
              (gtk-test:list-enum-item-nick "GtkPolicyType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPolicyType"
                                      GTK-POLICY-TYPE
                                      (:EXPORT T
@@ -40,26 +40,26 @@
 
 ;;;     GtkCornerType
 
-(test gdk-window-type
-  ;; Check the type
+(test gtk-corner-type
+  ;; Check type
   (is (g:type-is-enum "GtkCornerType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCornerType")
           (g:gtype (cffi:foreign-funcall "gtk_corner_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:corner-type
           (glib:symbol-for-gtype "GtkCornerType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_CORNER_TOP_LEFT" "GTK_CORNER_BOTTOM_LEFT"
                "GTK_CORNER_TOP_RIGHT" "GTK_CORNER_BOTTOM_RIGHT")
              (gtk-test:list-enum-item-name "GtkCornerType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3)
              (gtk-test:list-enum-item-value "GtkCornerType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("top-left" "bottom-left" "top-right" "bottom-right")
              (gtk-test:list-enum-item-nick "GtkCornerType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCornerType"
                                      GTK-CORNER-TYPE
                                      (:EXPORT T
@@ -298,4 +298,4 @@
     (is-false (gtk:scrolled-window-unset-placement scrolled))
     (is (eq :top-left (gtk:scrolled-window-placement scrolled)))))
 
-;;; 2024-7-5
+;;; 2024-7-27

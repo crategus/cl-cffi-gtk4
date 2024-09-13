@@ -111,7 +111,7 @@
 
 #+liber-documentation
 (setf (documentation 'center-box 'type)
- "@version{2023-5-2}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:center-box} widget arranges three children in a horizontal or
     vertical arrangement, keeping the middle child centered as well as possible.
@@ -133,9 +133,9 @@
   @begin[CSS nodes]{dictionary}
     The @class{gtk:center-box} implementation uses a single CSS node with the
     name @code{box}. The first child of the @class{gtk:center-box} widet will be
-    allocated depending on the text direction, i.e. in left-to-right layouts it
-    will be allocated on the left and in right-to-left layouts on the right. In
-    vertical orientation, the nodes of the children are arranged from top to
+    allocated depending on the text direction, that is, in left-to-right layouts
+    it will be allocated on the left and in right-to-left layouts on the right.
+    In vertical orientation, the nodes of the children are arranged from top to
     bottom.
   @end{dictionary}
   @begin[Accessibility]{dictionary}

@@ -208,7 +208,7 @@
 
 #+liber-documentation
 (setf (documentation 'assistant-page 'type)
- "@version{2024-5-2}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:assistant-page} object is an auxiliary object used by
     the @class{gtk:assistant} class.
@@ -273,7 +273,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "complete" 'assistant-page) t)
  "The @code{complete} property of type @code{:boolean} (Read / Write) @br{}
-  Setting this property to @em{true} marks a page as complete, i.e. all the
+  Setting this property to @em{true} marks a page as complete, that is, all the
   required fields are filled out. GTK uses this information to control the
   sensitivity of the navigation buttons. @br{}
   Default value: @em{false}")

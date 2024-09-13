@@ -155,7 +155,7 @@
   @end{dictionary}
   @see-class{gtk:string-object}
   @see-class{g:list-model}"
-  (%string-object-new (if string string (cffi:null-pointer))))
+  (%string-object-new (or string (cffi:null-pointer))))
 
 (export 'string-object-new)
 

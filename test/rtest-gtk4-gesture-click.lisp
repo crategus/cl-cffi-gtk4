@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureClick
 
-(test gesture-click-class
+(test gtk-gesture-click-class
   ;; Check type
   (is (g:type-is-object "GtkGestureClick"))
   ;; Check registered name
@@ -41,12 +41,82 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     pressed
+
+(test gtk-gesture-click-pressed-signal
+  (let* ((name "pressed")
+         (gtype (g:gtype "GtkGestureClick"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gint" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     released
+
+(test gtk-gesture-click-released-signal
+  (let* ((name "released")
+         (gtype (g:gtype "GtkGestureClick"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gint" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     stopped
+
+(test gtk-gesture-click-stopped-signal
+  (let* ((name "stopped")
+         (gtype (g:gtype "GtkGestureClick"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     unpaired-release
+
+(test gtk-gesture-click-unpaired-release-signal
+  (let* ((name "unpaired-release")
+         (gtype (g:gtype "GtkGestureClick"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble" "guint" "GdkEventSequence")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_click_new
 
-;;; 2024-7-4
+(test gtk-gesture-click-new
+  (is (typep (gtk:gesture-click-new) 'gtk:gesture-click)))
+
+;;; 2024-7-27

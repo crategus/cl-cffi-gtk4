@@ -123,10 +123,10 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-accel 'type)
- "@version{2024-2-21}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:cell-renderer-accel} object displays a keyboard accelerator,
-    i.e. a key combination like @kbd{Control+a}.
+    that is a key combination like @kbd{Control+a}.
   @end{short}
   If the cell renderer is editable, the accelerator can be changed by simply
   typing the new combination.
@@ -144,24 +144,24 @@ lambda (accel path)    :run-last
       @begin[code]{table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
-        @entry[path]{A string with the path identifying the row of the edited
+        @entry[path]{The string with the path identifying the row of the edited
           cell.}
       @end{table}
     @subheading{The \"accel-edited\" signal}
       @begin{pre}
-lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
+lambda (accel path key mods keycode)    :run-last
       @end{pre}
       Gets emitted when the user has selected a new accelerator.
       @begin[code]{table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
-        @entry[path]{A string with the path identifying the row of the edited
+        @entry[path]{The string with the path identifying the row of the edited
           cell.}
-        @entry[accel-key]{An unsigned integer with the new accelerator keyval.}
-        @entry[accel-mods]{A @class{gdk:modifier-type} value with the new
+        @entry[key]{The unsigned integer with the new accelerator keyval.}
+        @entry[mods]{The @class{gdk:modifier-type} value with the new
           acclerator modifier mask.}
-        @entry[hardware-keycode]{An unsignend integer with the keycode of the
-          new accelerator.}
+        @entry[keycode]{The unsigned integer with the keycode of the new
+          accelerator.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-accel-new}

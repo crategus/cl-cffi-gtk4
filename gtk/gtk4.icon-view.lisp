@@ -380,8 +380,8 @@ lambda (view)    :action
       @begin{pre}
 lambda (view)    :run-first
       @end{pre}
-     The signal is emitted when the selection changes, i.e. the set of selected
-     items.
+     The signal is emitted when the selection changes, that is the set of
+     selected items.
      @begin[code]{table}
        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
          emitted.}
@@ -514,8 +514,7 @@ lambda (view)    :action
 ;;; --- gtk:icon-view-column-spacing -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "column-spacing"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "column-spacing" 'icon-view) t)
  "The @code{column-spacing} property of type @code{:int} (Read / Write) @br{}
   Specifies the space which is inserted between the columns of the icon view.
   @br{}
@@ -579,11 +578,10 @@ lambda (view)    :action
 ;;; --- gtk:icon-view-item-orientation -----------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "item-orientation"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "item-orientation" 'icon-view) t)
  "The @code{item-orientation} property of type @symbol{gtk:orientation}
   (Read / Write) @br{}
-  Specifies how the cells, i.e. the icon and the text, of the item are
+  Specifies how the cells, that is the icon and the text, of the item are
   positioned relative to each other. @br{}
   Default value: @code{:vertical}")
 
@@ -613,8 +611,7 @@ lambda (view)    :action
 ;;; --- gtk:icon-view-item-padding ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "item-padding"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "item-padding" 'icon-view) t)
  "The @code{item-padding} property of type @code{:int} (Read / Write) @br{}
   Specifies the padding around each of the icon view's item. @br{}
   Allowed values: >= 0 @br{}
@@ -707,14 +704,13 @@ lambda (view)    :action
 ;;; --- gtk:icon-view-markup-column --------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "markup-column"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "markup-column" 'icon-view) t)
  "The @code{markup-column} property of type @code{:int} (Read / Write) @br{}
   Contains the number of the model column containing markup information to be
-  displayed. The markup column must be of type \"gchararray\". If this
-  property and the @code{text-column} property are both set to column numbers,
-  it overrides the text column. If both are set to -1, no texts are displayed.
-  @br{}
+  displayed. The markup column must be of @code{\"gchararray\"} type. If this
+  property and the @slot[gtk:icon-view]{text-column} property are both set to
+  column numbers, it overrides the text column. If both are set to -1, no texts
+  are displayed. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -722,7 +718,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-markup-column)
       "Accessor"
       (documentation 'icon-view-markup-column 'function)
- "@version{2024-5-1}
+ "@version{2024-7-8}
   @syntax{(gtk:icon-view-markup-column object) => column}
   @syntax{(setf (gtk:icon-view-markup-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -784,8 +780,7 @@ lambda (view)    :action
 ;;; --- gtk:icon-view-pixbuf-column --------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "pixbuf-column"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "pixbuf-column" 'icon-view) t)
  "The @code{pixbuf-column} property of type @code{:int} (Read / Write) @br{}
   Contains the number of the model column containing the pixbufs which are
   displayed. The pixbuf column must be of @code{\"GdkPixbuf\"} type. Setting
@@ -939,7 +934,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "spacing" 'icon-view) t)
  "The @code{spacing} property of type @code{:int} (Read / Write) @br{}
-  Specifies the space which is inserted between the cells, i.e. the icon and
+  Specifies the space which is inserted between the cells, that is the icon and
   the text, of an item. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
@@ -948,7 +943,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-spacing)
       "Accessor"
       (documentation 'icon-view-spacing 'function)
- "@version{2024-5-1}
+ "@version{2024-7-8}
   @syntax{(gtk:icon-view-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -957,7 +952,7 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{spacing} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  Specifies the space which is inserted between the cells, i.e. the icon and
+  Specifies the space which is inserted between the cells, that is the icon and
   the text, of an item.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
@@ -972,9 +967,9 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "text-column" 'icon-view) t)
  "The @code{text-column} property of type @code{:int} (Read / Write) @br{}
   Contains the number of the model column containing the texts which are
-  displayed. The text column must be of type \"gchararray\". If this property
-  and the @code{markup-column} property are both set to -1, no texts are
-  displayed. @br{}
+  displayed. The text column must be of @code{\"gchararray\"} type. If this
+  property and the @slot[gtk:icon-view]{markup-column} property are both set to
+  -1, no texts are displayed. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1 ")
 
@@ -1709,7 +1704,7 @@ lambda (view)    :action
 
 (defun icon-view-tooltip-context (view x y tip)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-7-8}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[x]{an integer with the x coordinate, relative to widget coordinates}
   @argument[y]{an integer with the y coordinate, relative to widget coordinates}
@@ -1724,8 +1719,8 @@ lambda (view)    :action
     @arg{iter} -- a @class{gtk:tree-iter} iterator or @code{nil}
   @end{return}
   @begin{short}
-    This function is supposed to be used in a \"query-tooltip\" signal handler
-    for a @class{gtk:icon-view} widget.
+    This function is supposed to be used in a @code{\"query-tooltip\"} signal
+    handler for a @class{gtk:icon-view} widget.
   @end{short}
   The @arg{x}, @arg{y} and @arg{tip} values which are received in the signal
   handler, should be passed to this function without modification.
@@ -1820,26 +1815,16 @@ lambda (view)    :action
 ;;; gtk_icon_view_enable_model_drag_source
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: New implementation needed.
-
-#+nil
 (cffi:defcfun ("gtk_icon_view_enable_model_drag_source"
-               %icon-view-enable-model-drag-source) :void
-  (view (g:object icon-view))
-  (start-button-mask gdk:modifier-type)
-  (targets :pointer)
-  (n-targets :int)
-  (actions gdk-drag-action))
-
-#+nil
-(defun icon-view-enable-model-drag-source (view mask targets actions)
+               icon-view-enable-model-drag-source) :void
  #+liber-documentation
- "@version{#2021-10-2}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[mask]{the @symbol{gdk:modifier-type} flags of allowed buttons to
-    start drag}
-  @argument[targets]{a list of target entries that the drag will support}
-  @argument[actions]{the @symbol{gdk-drag-action} bitmask of possible actions
+  @argument[mask]{a @symbol{gdk:modifier-type} value with the allowed buttons
+    to start drag}
+  @argument[formats]{a @class{gdk:content-formats} instance with the formats
+    that the drag will support}
+  @argument[actions]{a @symbol{gdk:drag-action} value with the possible actions
     for a drag from this widget}
   @begin{short}
     Turns the icon view into a drag source for automatic DND.
@@ -1851,50 +1836,28 @@ lambda (view)    :action
     Use the @class{gtk:grid-view} implementation instead.
   @end{dictionary}
   @see-class{gtk:icon-view}
+  @see-class{gdk:content-formats}
   @see-symbol{gdk:modifier-type}
-  @see-symbol{gdk-drag-action}"
-  (let ((n-targets (length targets)))
-    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (iter (for i from 0 below n-targets)
-            (for target-ptr = (cffi:mem-aptr targets-ptr
-                                             '(:struct %target-entry) i))
-            (for entry in targets)
-            (cffi:with-foreign-slots ((target flags info)
-                                      target-ptr
-                                      (:struct %target-entry))
-              (setf target (first entry))
-              (setf flags (second entry))
-              (setf info (third entry))))
-      (%icon-view-enable-model-drag-source view
-                                           mask
-                                           targets-ptr
-                                           n-targets
-                                           actions))))
+  @see-symbol{gdk:drag-action}"
+  (view (g:object icon-view))
+  (mask gdk:modifier-type)
+  (formats (g:boxed gdk:content-formats))
+  (actions gdk:drag-action))
 
-#+nil
 (export 'icon-view-enable-model-drag-source)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_enable_model_drag_dest
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: New implementation needed.
-
-#+nil
 (cffi:defcfun ("gtk_icon_view_enable_model_drag_dest"
-               %icon-view-enable-model-drag-dest) :void
-  (view (g:object icon-view))
-  (targets :pointer)
-  (n-targets :int)
-  (actions gdk-drag-action))
-
-#+nil
-(defun icon-view-enable-model-drag-dest (view targets actions)
+               icon-view-enable-model-drag-dest) :void
  #+liber-documentation
- "@version{#2021-10-2}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[targets]{a list target entries that the drag will support}
-  @argument[actions]{the @symbol{gdk-drag-action} bitmask of possible actions
+  @argument[formats]{a @class{gdk:content-formats} instance with the formats
+    that the drag will support}
+  @argument[actions]{a @symbol{gdk:drag-action} value with the possible actions
     for a drag to this widget}
   @begin{short}
     Turns the icon view into a drop destination for automatic DND.
@@ -1906,36 +1869,21 @@ lambda (view)    :action
     Use the @class{gtk:grid-view} implementation instead.
   @end{dictionary}
   @see-class{gtk:icon-view}
-  @see-symbol{gdk-drag-action}"
-  (let ((n-targets (length targets)))
-    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (iter (for i from 0 below n-targets)
-            (for target-ptr = (cffi:mem-aptr targets-ptr
-                                             '(:struct %target-entry) i))
-            (for entry in targets)
-            (cffi:with-foreign-slots ((target flags info)
-                                      target-ptr
-                                      (:struct %target-entry))
-              (setf target (first entry))
-              (setf flags (second entry))
-              (setf info (third entry))))
-      (%icon-view-enable-model-drag-dest view
-                                         targets-ptr
-                                         n-targets
-                                         actions))))
+  @see-symbol{gdk:drag-action}"
+  (view (g:object icon-view))
+  (formats (g:boxed gdk:content-formats))
+  (actions gdk:drag-action))
 
-#+nil
 (export 'icon-view-enable-model-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_unset_model_drag_source
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_unset_model_drag_source"
                icon-view-unset-model-drag-source) :void
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:icon-view-enable-model-drag-source}
@@ -1951,18 +1899,16 @@ lambda (view)    :action
   @see-function{gtk:icon-view-enable-model-drag-source}"
   (view (g:object icon-view)))
 
-#+nil
 (export 'icon-view-unset-model-drag-source)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_unset_model_drag_dest
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_unset_model_drag_dest"
                icon-view-unset-model-drag-dest) :void
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:icon-view-enable-model-drag-dest}
@@ -1978,23 +1924,21 @@ lambda (view)    :action
   @see-function{gtk:icon-view-enable-model-drag-dest}"
   (view (g:object icon-view)))
 
-#+nil
 (export 'icon-view-unset-model-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_set_drag_dest_item
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_set_drag_dest_item" icon-view-set-drag-dest-item)
     :void
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[path]{the @class{gtk:tree-path} instance of the item to highlight,
+  @argument[path]{a @class{gtk:tree-path} instance of the item to highlight,
     or @code{nil}}
-  @argument[pos]{specifies where to drop, relative to the item as a value of
-    the @symbol{gtk:icon-view-drop-position} enumeration}
+  @argument[pos]{a @symbol{gtk:icon-view-drop-position} value which specifies
+    where to drop, relative to the item}
   @begin{short}
     Sets the item that is highlighted for feedback.
   @end{short}
@@ -2009,30 +1953,27 @@ lambda (view)    :action
   (path (g:boxed tree-path))
   (pos icon-view-drop-position))
 
-#+nil
 (export 'icon-view-set-drag-dest-item)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_get_drag_dest_item
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_get_drag_dest_item" %icon-view-get-drag-dest-item)
     :void
   (view (g:object icon-view))
   (path :pointer)
   (pos :pointer))
 
-#+nil
 (defun icon-view-get-drag-dest-item (view)
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
-    @arg{path} -- the @class{gtk:tree-path} instance of the highlighted item,
+    @arg{path} -- a @class{gtk:tree-path} instance for the highlighted item,
       or @code{nil} @br{}
-    @arg{pos} -- the @symbol{gtk:icon-view-drop-position} drop position, or
-      @code{nil}
+    @arg{pos} -- a @symbol{gtk:icon-view-drop-position} value with the drop
+      position, or @code{nil}
   @end{return}
   @begin{short}
     Gets information about the item that is highlighted for feedback.
@@ -2050,33 +1991,30 @@ lambda (view)    :action
     (values (cffi:mem-ref path '(g:boxed tree-path :return))
             (cffi:mem-ref pos 'icon-view-drop-position))))
 
-#+nil
 (export 'icon-view-get-drag-dest-item)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_get_dest_item_at_pos
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_get_dest_item_at_pos"
                %icon-view-dest-item-at-pos) :boolean
   (view (g:object icon-view))
-  (drag-x :int)
-  (drag-y :int)
+  (xdrag :int)
+  (ydrag :int)
   (path :pointer)
   (pos :pointer))
 
-#+nil
-(defun icon-view-dest-item-at-pos (view drag-x drag-y)
+(defun icon-view-dest-item-at-pos (view xdrag ydrag)
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[drag-x]{an integer with the position to determine the destination
+  @argument[xdrag]{an integer with the position to determine the destination
     item for}
-  @argument[drag-y]{an integer with the position to determine the destination
+  @argument[ydrag]{an integer with the position to determine the destination
     item for}
   @begin{return}
-    @arg{path} -- the @class{gtk:tree-path} instance of the item @br{}
+    @arg{path} -- a @class{gtk:tree-path} instance for the item @br{}
     @arg{pos} -- a @symbol{gtk:icon-view-drop-position} value
   @end{return}
   @begin{short}
@@ -2090,25 +2028,23 @@ lambda (view)    :action
   @see-class{gtk:tree-path}
   @see-symbol{gtk:icon-view-drop-position}"
   (cffi:with-foreign-objects ((path :pointer) (pos :pointer))
-    (when (%icon-view-dest-item-at-pos view drag-x drag-y path pos)
+    (when (%icon-view-dest-item-at-pos view xdrag ydrag path pos)
       (values (cffi:mem-ref path '(g:boxed tree-path :return))
               (cffi:mem-ref pos 'icon-view-drop-position)))))
 
-#+nil
 (export 'icon-view-dest-item-at-pos)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_view_create_drag_icon
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (cffi:defcfun ("gtk_icon_view_create_drag_icon" icon-view-create-drag-icon)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2024-7-9}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance}
-  @return{The newly-allocated @symbol{cairo:surface-t} surface of the drag
+  @return{The newly allocated @symbol{cairo:surface-t} surface for the drag
     icon.}
   @begin{short}
     Creates a @symbol{cairo:surface-t} representation of the item at @arg{path}.
@@ -2124,7 +2060,6 @@ lambda (view)    :action
   (view (g:object icon-view))
   (path (g:boxed tree-path)))
 
-#+nil
 (export 'icon-view-create-drag-icon)
 
 ;;; --- End of file gtk4.icon-view.lisp ----------------------------------------

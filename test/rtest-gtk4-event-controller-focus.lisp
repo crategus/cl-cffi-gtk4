@@ -7,7 +7,7 @@
 
 ;;;     GtkEventControllerFocus
 
-(test event-controller-focus-class
+(test gtk-event-controller-focus-class
   ;; Check type
   (is (g:type-is-object "GObject"))
   ;; Check registered name
@@ -47,16 +47,54 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     contains-focus
-;;;     is-focus
+(test gtk-event-controller-focus-properties
+  (let ((controller (make-instance 'gtk:event-controller-focus)))
+    (is-false (gtk:event-controller-focus-contains-focus controller))
+    (is-false (gtk:event-controller-focus-is-focus controller))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     enter
+
+(test gtk-event-controller-focus-enter-signal
+  (let* ((name "enter")
+         (gtype (g:gtype "GtkEventControllerFocus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     leave
+
+(test gtk-event-controller-focus-leave-signal
+  (let* ((name "leave")
+         (gtype (g:gtype "GtkEventControllerFocus"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_event_controller_focus_new
 
-;;; 2024-7-4
+(test gtk-event-controller-focus-new
+  (is (typep (gtk:event-controller-focus-new) 'gtk:event-controller-focus)))
+
+;;; 2024-7-27

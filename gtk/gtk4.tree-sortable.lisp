@@ -323,8 +323,8 @@
   If two iterators compare as equal, their order in the sorted model is
   undefined. To ensure that the @class{gtk:tree-sortable} object behaves as
   expected, the @symbol{gtk:tree-iter-compare-func} callback function must
-  define a partial order on the model, i.e. it must be reflexive, antisymmetric
-  and transitive.
+  define a partial order on the model, that is, it must be reflexive,
+  antisymmetric and transitive.
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-sortable}

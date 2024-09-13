@@ -76,7 +76,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-spinner 'type)
- "@version{2024-2-22}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:cell-renderer-spinner} class renders a spinning animation in
     a cell, very similar to the @class{gtk:spinner} widget.
@@ -85,11 +85,12 @@
   @class{gtk:cell-renderer-progress} object for displaying indefinite activity,
   instead of actual progress.
 
-  To start the animation in a cell, set the @code{active} property to @em{true}
-  and increment the @code{pulse} property at regular intervals. The usual way to
-  set the cell renderer properties for each cell is to bind them to columns in
-  your tree model using e.g. the @fun{gtk:tree-view-column-add-attribute}
-  function.
+  To start the animation in a cell, set the
+  @slot[gtk:cell-renderer-spinner]{active} property to @em{true} and increment
+  the @slot[gtk:cell-renderer-spinner]{pulse} property at regular intervals.
+  The usual way to set the cell renderer properties for each cell is to bind
+  them to columns in your tree model using, for example, the
+  @fun{gtk:tree-view-column-add-attribute} function.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. List views use widgets to display their contents. You should use
@@ -113,14 +114,14 @@
 (setf (documentation (liber:slot-documentation "active"
                                                'cell-renderer-spinner) t)
  "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
-  Whether the spinner is active, i.e. shown, in the cell. @br{}
+  Whether the spinner is active, that is, shown in the cell. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-spinner-active)
       "Accessor"
       (documentation 'cell-renderer-spinner-active 'function)
- "@version{2024-2-22}
+ "@version{2024-7-30}
   @syntax{(gtk:cell-renderer-spinner-active object) => active}
   @syntax{(setf (gtk:cell-renderer-spinner-active object) active)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
@@ -129,7 +130,7 @@
     Accessor of the @slot[gtk:cell-renderer-spinner]{active} slot of the
     @class{gtk:cell-renderer-spinner} class.
   @end{short}
-  Whether the spinner is active, i.e. shown, in the cell.
+  Whether the spinner is active, that is, shown in the cell.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -142,7 +143,7 @@
 (setf (documentation (liber:slot-documentation "pulse"
                                                'cell-renderer-spinner) t)
  "The @code{pulse} property of type @code{:uint} (Read / Write) @br{}
-  Pulse of the spinner. Increment this value to draw the next frame of the
+  The pulse of the spinner. Increment this value to draw the next frame of the
   spinner animation. Usually, you would update this value in a timeout. By
   default, the @class{gtk:spinner} widget draws one full cycle of the animation,
   consisting of 12 frames, in 750 milliseconds. @br{}
@@ -152,7 +153,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-pulse)
       "Accessor"
       (documentation 'cell-renderer-spinner-pulse 'function)
- "@version{2024-2-22}
+ "@version{2024-7-30}
   @syntax{(gtk:cell-renderer-spinner-pulse object) => pulse}
   @syntax{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
@@ -161,7 +162,7 @@
     Accessor of the @slot[gtk:cell-renderer-spinner]{pulse} slot of the
     @class{gtk:cell-renderer-spinner} class.
   @end{short}
-  Pulse of the spinner. Increment this value to draw the next frame of the
+  The pulse of the spinner. Increment this value to draw the next frame of the
   spinner animation. Usually, you would update this value in a timeout. By
   default, the @class{gtk:spinner} widget draws one full cycle of the animation,
   consisting of 12 frames, in 750 milliseconds.

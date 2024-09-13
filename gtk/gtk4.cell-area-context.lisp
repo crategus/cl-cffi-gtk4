@@ -390,17 +390,16 @@
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_width"
                %cell-area-context-preferred-width) :void
   (context (g:object cell-area-context))
-  (minium-width (:pointer :int))
-  (natural-width (:pointer :int)))
+  (minium (:pointer :int))
+  (natural (:pointer :int)))
 
 (defun cell-area-context-preferred-width (context)
  #+liber-documentation
  "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{return}
-    @arg{minimum-width} -- an integer with the minimum width, or @code{nil}
-      @br{}
-    @arg{natural-width} -- an integer with the natural width, or @code{nil}
+    @arg{minimum} -- an integer with the minimum width, or @code{nil} @br{}
+    @arg{natural} -- an integer with the natural width, or @code{nil}
   @end{return}
   @begin{short}
     Gets the accumulative preferred width for all rows which have been requested
@@ -414,12 +413,10 @@
   @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
-  (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
-    (%cell-area-context-preferred-width context
-                                        minimum-width
-                                        natural-width)
-    (values (cffi:mem-ref minimum-width :int)
-            (cffi:mem-ref natural-width :int))))
+  (cffi:with-foreign-objects ((minimum :int) (natural :int))
+    (%cell-area-context-preferred-width context minimum natural)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int))))
 
 (export 'cell-area-context-preferred-width)
 
@@ -430,17 +427,16 @@
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_height"
                %cell-area-context-preferred-height) :void
   (context (g:object cell-area-context))
-  (minium-height (:pointer :int))
-  (natural-height (:pointer :int)))
+  (minium (:pointer :int))
+  (natural (:pointer :int)))
 
 (defun cell-area-context-preferred-height (context)
  #+liber-documentation
  "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{return}
-    @arg{minimum-height} -- an integer with the minimum height, or @code{nil}
-      @br{}
-    @arg{natural-height} -- an integer with the natural height, or @code{nil}
+    @arg{minimum} -- an integer with the minimum height, or @code{nil} @br{}
+    @arg{natural} -- an integer with the natural height, or @code{nil}
   @end{return}
   @begin{short}
     Gets the accumulative preferred height for all rows which have been
@@ -455,12 +451,10 @@
   @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
-  (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
-    (%cell-area-context-preferred-height context
-                                         minimum-height
-                                         natural-height)
-    (values (cffi:mem-ref minimum-height :int)
-            (cffi:mem-ref natural-height :int))))
+  (cffi:with-foreign-objects ((minimum :int) (natural :int))
+    (%cell-area-context-preferred-height context minimum natural)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int))))
 
 (export 'cell-area-context-preferred-height)
 
@@ -472,8 +466,8 @@
                %cell-area-context-preferred-height-for-width) :void
   (context (g:object cell-area-context))
   (width :int)
-  (minium-height (:pointer :int))
-  (natural-height (:pointer :int)))
+  (minium (:pointer :int))
+  (natural (:pointer :int)))
 
 (defun cell-area-context-preferred-height-for-width (context width)
  #+liber-documentation
@@ -481,9 +475,9 @@
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer with a proposed width for allocation}
   @begin{return}
-    @arg{minimum-height} -- an integer with the minimum height, or @code{nil}
+    @arg{minimum} -- an integer with the minimum height, or @code{nil}
       @br{}
-    @arg{natural-height} -- an integer with the natural height, or @code{nil}
+    @arg{natural} -- an integer with the natural height, or @code{nil}
   @end{return}
   @begin{short}
     Gets the accumulative preferred height for @arg{width} for all rows which
@@ -498,13 +492,13 @@
   @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
-  (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
+  (cffi:with-foreign-objects ((minimum :int) (natural :int))
     (%cell-area-context-preferred-height-for-width context
                                                    width
-                                                   minimum-height
-                                                   natural-height)
-    (values (cffi:mem-ref minimum-height :int)
-            (cffi:mem-ref natural-height :int))))
+                                                   minimum
+                                                   natural)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int))))
 
 (export 'cell-area-context-preferred-height-for-width)
 
@@ -516,8 +510,8 @@
                %cell-area-context-preferred-width-for-height) :void
   (context (g:object cell-area-context))
   (height :int)
-  (minium-width (:pointer :int))
-  (natural-width (:pointer :int)))
+  (minium (:pointer :int))
+  (natural (:pointer :int)))
 
 (defun cell-area-context-preferred-width-for-height (context height)
  #+liber-documentation
@@ -525,9 +519,8 @@
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer with a proposed height for allocation}
   @begin{return}
-    @arg{minimum-width} -- an integer with the minimum width, or @code{nil}
-      @br{}
-    @arg{natural-width} -- an integer with the natural width, or @code{nil}
+    @arg{minimum} -- an integer with the minimum width, or @code{nil} @br{}
+    @arg{natural} -- an integer with the natural width, or @code{nil}
   @end{return}
   @begin{short}
     Gets the accumulative preferred width for @arg{height} for all rows which
@@ -542,13 +535,13 @@
   @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
-  (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
+  (cffi:with-foreign-objects ((minimum :int) (natural :int))
     (%cell-area-context-preferred-height-for-width context
                                                    height
-                                                   minimum-width
-                                                   natural-width)
-    (values (cffi:mem-ref minimum-width :int)
-            (cffi:mem-ref natural-width :int))))
+                                                   minimum
+                                                   natural)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int))))
 
 (export 'cell-area-context-preferred-width-for-height)
 
@@ -598,9 +591,9 @@
  #+liber-documentation
  "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
-  @argument[minimum-width]{an integer with the proposed new minimum width for
+  @argument[minimum]{an integer with the proposed new minimum width for
     @arg{context}}
-  @argument[natural-width]{an integer with the proposed new natural width for
+  @argument[natural]{an integer with the proposed new natural width for
     @arg{context}}
   @begin{short}
     Causes the minimum and/or natural width to grow if the new proposed sizes
@@ -618,8 +611,8 @@
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}"
   (context (g:object cell-area-context))
-  (minimum-width :int)
-  (natural-width :int))
+  (minimum :int)
+  (natural :int))
 
 (export 'cell-area-context-push-preferred-width)
 
@@ -632,9 +625,9 @@
  #+liber-documentation
  "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
-  @argument[minimum-height]{an integer with the proposed new minimum height for
+  @argument[minimum]{an integer with the proposed new minimum height for
     @arg{context}}
-  @argument[natural-height]{an integer with the proposed new natural height for
+  @argument[natural]{an integer with the proposed new natural height for
     @arg{context}}
   @begin{short}
     Causes the minimum and/or natural height to grow if the new proposed sizes
@@ -652,8 +645,8 @@
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}"
   (context (g:object cell-area-context))
-  (minimum-height :int)
-  (natural-height :int))
+  (minimum :int)
+  (natural :int))
 
 (export 'cell-area-context-push-preferred-height)
 

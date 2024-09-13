@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-long-press.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -141,7 +141,7 @@ lambda (gesture x y)    :run-last
       "Accessor"
       (documentation 'gesture-long-press-delay-factor 'function)
  "@version{2024-2-19}
-  @syntax{(gtk:gesture-long-press-delay-factor object) => factor)}
+  @syntax{(gtk:gesture-long-press-delay-factor object) => factor}
   @syntax{(setf (gtk:gesture-long-press-delay-factor object) factor)}
   @argument[object]{a @class{gtk:gesture-long-press} object}
   @argument[factor]{a double float with the factor by which to modify

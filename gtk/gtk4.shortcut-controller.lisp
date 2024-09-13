@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -148,10 +148,10 @@
     The @class{gtk:shortcut-controller} class is an event controller that
     manages shortcuts.
   @end{short}
-  Most common shortcuts are using this controller implicitly, e.g. by adding a
-  mnemonic underline to a @class{gtk:label} widget, or by installing a key
-  binding using the @fun{gtk:widget-class-add-binding} function, or by adding
-  accelerators to global actions using the
+  Most common shortcuts are using this controller implicitly, for example, by
+  adding a mnemonic underline to a @class{gtk:label} widget, or by installing a
+  key binding using the @fun{gtk:widget-class-add-binding} function, or by
+  adding accelerators to global actions using the
   @fun{gtk:application-accels-for-action} function. But it is possible to
   create your own shortcut controller, and add shortcuts to it.
 
@@ -210,7 +210,7 @@
       "Accessor"
       (documentation 'shortcut-controller-item-type 'function)
  "@version{2023-7-23}
-  @syntax{(gtk:shortcut-controller-item-type object) => gtype)}
+  @syntax{(gtk:shortcut-controller-item-type object) => gtype}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[gtype]{a @class{g:type-t} item type}
   @begin{short}
@@ -237,7 +237,7 @@
       "Accessor"
       (documentation 'shortcut-controller-mnemonic-modifiers 'function)
  "@version{2023-7-23}
-  @syntax{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers)}
+  @syntax{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers}
   @syntax{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value}
@@ -261,6 +261,7 @@
   managed shortcut controllers will have their shortcuts activated from other
   places which have their own modifiers for activating mnemonics.
   @see-class{gtk:shortcut-controller}
+  @see-class{gtk:popover-menu}
   @see-symbol{gdk:modifier-type}")
 
 ;;; --- gtk:shortcut-controller-model ------------------------------------------
@@ -269,14 +270,14 @@
 (setf (documentation (liber:slot-documentation "model" 'shortcut-controller) t)
  "The @code{model} property of type @class{g:list-model}
   (Write / Construct Only) @br{}
-  A list model to take shortcuts from.")
+  The list model to take shortcuts from.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-controller-model)
       "Accessor"
       (documentation 'shortcut-controller-model 'function)
  "@version{2023-7-23}
-  @syntax{(gtk:shortcut-controller-model object) => model)}
+  @syntax{(gtk:shortcut-controller-model object) => model}
   @syntax{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[model]{a @class{g:list-model} object}
@@ -302,7 +303,7 @@
       "Accessor"
       (documentation 'shortcut-controller-n-items 'function)
  "@version{2023-7-23}
-  @syntax{(gtk:shortcut-controller-n-items object) => n-items)}
+  @syntax{(gtk:shortcut-controller-n-items object) => n-items}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[n-items]{an unsigned integer with the number of items in the
     list model}
@@ -329,7 +330,7 @@
       "Accessor"
       (documentation 'shortcut-controller-scope 'function)
  "@version{2023-7-23}
-  @syntax{(gtk:shortcut-controller-scope object) => scope)}
+  @syntax{(gtk:shortcut-controller-scope object) => scope}
   @syntax{(setf (gtk:shortcut-controller-scope object) scope)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[scope]{a @symbol{gtk:shortcut-scope} value}

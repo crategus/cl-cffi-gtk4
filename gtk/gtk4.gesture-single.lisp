@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-single.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -130,7 +130,7 @@
       "Accessor"
       (documentation 'gesture-single-button 'function)
  "@version{2024-2-19}
-  @syntax{(gtk:gesture-single-button object) => button)}
+  @syntax{(gtk:gesture-single-button object) => button}
   @syntax{(setf (gtk:gesture-single-button object) button)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[button]{an unsigned integer with the button number to listen to,
@@ -160,7 +160,7 @@
       "Accessor"
       (documentation 'gesture-single-exclusive 'function)
  "@version{2024-2-19}
-  @syntax{(gtk:gesture-single-exclusive object) => exclusive)}
+  @syntax{(gtk:gesture-single-exclusive object) => exclusive}
   @syntax{(setf (gtk:gesture-single-exclusive object) exclusive)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[exclusive]{@em{true} to make the gesture exclusive}
@@ -188,7 +188,7 @@
       "Accessor"
       (documentation 'gesture-single-touch-only 'function)
  "@version{2024-2-19}
-  @syntax{(gtk:gesture-single-touch-only object) => touch-only)}
+  @syntax{(gtk:gesture-single-touch-only object) => touch-only}
   @syntax{(setf (gtk:gesture-single-touch-only object) touch-only)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[touch-only]{a boolean whether gesture handles only touch events}
@@ -233,7 +233,7 @@
  #+liber-documentation
  "@version{2024-2-19}
   @argument[gesture]{a @class{gtk:gesture-single} object}
-  @return{The current @class{gdk:event-sequence} sequence.}
+  @return{The current @class{gdk:event-sequence} instance.}
   @begin{short}
     Returns the event sequence currently interacting with the gesture.
   @end{short}

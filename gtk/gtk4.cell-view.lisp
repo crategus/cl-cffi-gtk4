@@ -176,11 +176,11 @@
 (setf (liber:alias-for-function 'cell-view-cell-area)
       "Accessor"
       (documentation 'cell-view-cell-area 'function)
- "@version{2024-5-20}
-  @syntax{(gtk:cell-view-cell-area object) => cellarea}
-  @syntax{(setf (gtk:cell-view-cell-area object) cellarea)}
+ "@version{2024-7-8}
+  @syntax{(gtk:cell-view-cell-area object) => area}
+  @syntax{(setf (gtk:cell-view-cell-area object) area)}
   @argument[object]{a @class{gtk:cell-view} object}
-  @argument[cellarea]{a @class{gtk:cell-area} object}
+  @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
     Accessor of the @slot[gtk:cell-view]{cell-area} slot of the
     @class{gtk:cell-view} class.
@@ -375,10 +375,10 @@
 
 (declaim (inline cell-view-new-with-context))
 
-(defun cell-view-new-with-context (cellarea context)
+(defun cell-view-new-with-context (area context)
  #+liber-documentation
- "@version{2024-5-20}
-  @argument[cellarea]{a @class{gtk:cell-area} object to layout cells}
+ "@version{2024-7-8}
+  @argument[area]{a @class{gtk:cell-area} object to layout cells}
   @argument[context]{a @class{gtk:cell-area-context} object in which to
     calculate cell geometry}
   @return{The newly created @class{gtk:cell-view} widget.}
@@ -397,7 +397,7 @@
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}"
   (make-instance 'cell-view
-                 :cell-area cellarea
+                 :cell-area area
                  :cell-area-context context))
 
 (export 'cell-view-new-with-context)

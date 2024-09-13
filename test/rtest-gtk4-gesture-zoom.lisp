@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureZoom
 
-(test gesture-zoom-class
+(test gtk-gesture-zoom-class
   ;; Check type
   (is (g:type-is-object "GtkGestureZoom"))
   ;; Check registered name
@@ -42,6 +42,22 @@
 
 ;;;     scale-changed
 
+(test gtk-gesture-zoom-scale-changed-signal
+  (let* ((name "scale-changed")
+         (gtype (g:gtype "GtkGestureZoom"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_zoom_new
@@ -55,4 +71,4 @@
   (let ((gesture (gtk:gesture-zoom-new)))
     (is (= 1.0d0 (gtk:gesture-zoom-scale-delta gesture)))))
 
-;;; 2024-2-21
+;;; 2024-7-27

@@ -39,7 +39,7 @@
 
 ;;;     GtkGesturePan
 
-(test gesture-pan-class
+(test gtk-gesture-pan-class
   ;; Check type
   (is (g:type-is-object "GtkGesturePan"))
   ;; Check registered name
@@ -103,4 +103,4 @@
   (is (typep (gtk:gesture-pan-new :horizontal) 'gtk:gesture-pan))
   (is (typep (gtk:gesture-pan-new :vertical) 'gtk:gesture-pan)))
 
-;;; 2024-2-19
+;;; 2024-7-27

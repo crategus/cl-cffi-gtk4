@@ -73,8 +73,10 @@
     (warn "GTK:CELL-LAYOUT is deprecated since 4.10")))
 
 #+liber-documentation
-(setf (documentation 'cell-layout 'type)
- "@version{2023-9-16}
+(setf (liber:alias-for-class 'cell-layout)
+      "Interface"
+      (documentation 'cell-layout 'type)
+ "@version{2024-7-8}
   @begin{short}
     The @class{gtk:cell-layout} interface is an interface to be implemented by
     all objects which want to provide a @class{gtk:tree-view-column} object
@@ -335,7 +337,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_add_attribute" cell-layout-add-attribute) :void
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2024-7-8}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[attribute]{a string with an attribute on the renderer}
@@ -347,8 +349,8 @@
   The @arg{column} argument is the column of the model to get a value from, and
   @arg{attribute} is the parameter on @arg{cell} to be set from the value. So
   for example if column 2 of the model contains strings, you could have the
-  \"text\" attribute of a @class{gtk:cell-renderer-text} object get its values
-  from column 2.
+  @slot[gtk:cell-renderer-text]{text} attribute of a
+  @class{gtk:cell-renderer-text} object get its values from column 2.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-layout} implementation is deprecated since 4.10. Please
     do not use it in newly written code.

@@ -7,7 +7,7 @@
 
 ;;;     GtkEventSequenceState
 
-(test event-sequence-state
+(test gtk-event-sequence-state
   ;; Check type
   (is (g:type-is-enum "GtkEventSequenceState"))
   ;; Check type initializer
@@ -40,7 +40,7 @@
 
 ;;;     GtkGesture
 
-(test gesture-class
+(test gtk-gesture-class
   ;; Check type
   (is (g:type-is-object "GtkGesture"))
   ;; Check registered name
@@ -74,36 +74,120 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test gesture-propertiers
+(test gtk-gesture-propertiers
   (let ((gesture (make-instance 'gtk:gesture-click)))
     (is (= 1 (gtk:gesture-n-points gesture)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     begin
+
+(test gtk-gesture-begin-signal
+  (let* ((name "begin")
+         (gtype (g:gtype "GtkGesture"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkEventSequence")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     cancel
+
+(test gtk-gesture-cancel-signal
+  (let* ((name "cancel")
+         (gtype (g:gtype "GtkGesture"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkEventSequence")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     end
+
+(test gtk-gesture-end-signal
+  (let* ((name "end")
+         (gtype (g:gtype "GtkGesture"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkEventSequence")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     sequence-state-changed
+
+(test gtk-gesture-sequence-state-changed-signal
+  (let* ((name "sequence-state-changed")
+         (gtype (g:gtype "GtkGesture"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkEventSequence" "GtkEventSequenceState")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     update
+
+(test gtk-gesture-update-signal
+  (let* ((name "update")
+         (gtype (g:gtype "GtkGesture"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkEventSequence")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_get_device
 
-(test gesture-device
-  (let ((gesture (make-instance 'gtk:gesture-click)))
+(test gtk-gesture-device
+  (let ((gesture (gtk:gesture-click-new)))
     (is-false (gtk:gesture-device gesture))))
 
 ;;;     gtk_gesture_is_active
 
-(test gesture-is-active
-  (let ((gesture (make-instance 'gtk:gesture-click)))
+(test gtk-gesture-is-active
+  (let ((gesture (gtk:gesture-click-new)))
     (is-false (gtk:gesture-is-active gesture))))
 
 ;;;     gtk_gesture_is_recognized
 
-(test gesture-is-recognized
-  (let ((gesture (make-instance 'gtk:gesture-click)))
+(test gtk-gesture-is-recognized
+  (let ((gesture (gtk:gesture-click-new)))
     (is-false (gtk:gesture-is-recognized gesture))))
 
 ;;;     gtk_gesture_get_sequence_state
@@ -113,10 +197,8 @@
 ;;;     gtk_gesture_get_sequences
 
 (test gtk-gesture-sequences
-  (let ((gesture (make-instance 'gtk:gesture-click)))
-
-    (is-false (gtk:gesture-sequences gesture))
-))
+  (let ((gesture (gtk:gesture-click-new)))
+    (is-false (gtk:gesture-sequences gesture))))
 
 ;;;     gtk_gesture_handles_sequence
 ;;;     gtk_gesture_get_last_updated_sequence
@@ -129,4 +211,4 @@
 ;;;     gtk_gesture_get_group
 ;;;     gtk_gesture_is_grouped_with
 
-;; --- 2023-10-2 ---------------------------------------------------------------
+;; 2024-7-27

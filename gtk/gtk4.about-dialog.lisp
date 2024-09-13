@@ -892,7 +892,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (let ((aboutdialog nil))
   (defun show-about-dialog (parent &rest args)
    #+liber-documentation
-   "@version{2024-4-11}
+   "@version{2024-8-16}
     @argument[parent]{a @class{gtk:window} transient parent, or @code{nil}
       for none}
     @argument[args]{pairs of property name and property value}
@@ -917,11 +917,10 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
                             (setf (widget-visible widget) nil)
                             t))
         (if parent
-            (progn
-              (setf (window-modal dialog) t)
-              (setf (window-transient-for dialog) parent)
-              (setf (window-destroy-with-parent dialog) t)
-              (setf (g:object-data parent "gtk:about-dialog") dialog))
+            (setf (window-modal dialog) t
+                  (window-transient-for dialog) parent
+                  (window-destroy-with-parent dialog) t
+                  (g:object-data parent "gtk:about-dialog") dialog)
             (setf aboutdialog dialog)))
       (window-present dialog))))
 

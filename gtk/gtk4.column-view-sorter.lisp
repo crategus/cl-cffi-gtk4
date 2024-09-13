@@ -73,7 +73,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-sorter 'type)
- "@version{2023-10-13}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:column-view-sorter} class is a sorter implementation that is
     geared towards the needs of the @class{gtk:column-view} widget.
@@ -86,8 +86,8 @@
   @class{gtk:column-view-sorter} API is designed to allow saving and restoring
   this configuration.
 
-  If you are only interested in the primary sort column, i.e. the column where
-  a sort indicator is shown in the header, then you can just look at the
+  If you are only interested in the primary sort column, that is, the column
+  where a sort indicator is shown in the header, then you can just look at the
   @slot[gtk:column-view-sorter]{primary-sort-column} and
   @slot[gtk:column-view-sorter]{primary-sort-order} properties.
 
@@ -96,17 +96,19 @@
   @fun{gtk:column-view-sorter-nth-sort-column} function. To get notified about
   changes, use the @code{\"changed\"} signal.
 
-  To restore a saved sort configuration on a @class{gtk:column-view} widget,
-  use code like:
-  @begin{pre}
+  Since 4.10
+  @begin{examples}
+    To restore a saved sort configuration on a @class{gtk:column-view} widget,
+    use code like:
+    @begin{pre}
 sorter = gtk_column_view_get_sorter (view);
 for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
   {
     column = gtk_column_view_sorter_get_nth_sort_column (sorter, i, &order);
     gtk_column_view_sort_by_column (view, column, order);
   @}
-  @end{pre}
-  Since 4.10
+    @end{pre}
+  @end{examples}
   @see-slot{gtk:column-view-sorter-primary-sort-column}
   @see-slot{gtk:column-view-sorter-primary-sort-order}
   @see-class{gtk:column-view}")

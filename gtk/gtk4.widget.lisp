@@ -621,7 +621,7 @@
 
 #+liber-documentation
 (setf (documentation 'widget 'type)
- "@version{2024-4-28}
+ "@version{2024-7-8}
   @begin{short}
     The @class{gtk:widget} class is the base class all widgets in GTK derive
     from. It manages the widget life cycle, layout, states and style.
@@ -837,15 +837,16 @@ lambda (widget direction)    :action
      @begin{pre}
 lambda (widget x y mode tooltip)    :run-last
      @end{pre}
-     Emitted when the @code{has-tooltip} property is @em{true} and the
-     @slot[gtk:settings]{gtk-tooltip-timeout} setting has expired with the
-     cursor hovering \"above\" widget, or emitted when the widget got focus in
-     keyboard mode. Using the given coordinates, the signal handler should
-     determine whether a tooltip should be shown for the widget. If this is the
-     case @em{true} should be returned, @em{false} otherwise. Note that if the
-     @arg{mode} argument is @em{true}, the @arg{x} and @arg{y} values are
-     undefined and should not be used. The signal handler is free to manipulate
-     the @arg{tooltip} argument with the therefore destined function calls.
+     Emitted when the tooltip of the widget is about to be shown. This happens
+     when the @slot[gtk:widget]{has-tooltip} property is @em{true} and the
+     hover timeout has expired with the cursor hovering \"above\" the widget or
+     emitted when the widget got focus in keyboard mode. Using the given
+     coordinates, the signal handler should determine whether a tooltip should
+     be shown for the widget. If this is the case @em{true} should be returned,
+     @em{false} otherwise. Note that if the @arg{mode} argument is @em{true},
+     the @arg{x} and @arg{y} values are undefined and should not be used. The
+     signal handler is free to manipulate the @arg{tooltip} argument with the
+     therefore destined function calls.
      @begin[code]{table}
        @entry[widget]{The @class{gtk:widget} object which received the signal.}
        @entry[x]{The integer with the x coordinate of the cursor position where
@@ -854,7 +855,7 @@ lambda (widget x y mode tooltip)    :run-last
          the request has been emitted, relative to the top of the widget.}
        @entry[mode]{@em{True} if the tooltip was trigged using the keyboard.}
        @entry[tooltip]{The @class{gtk:tooltip} object.}
-       @entry[Returns]{@em{True} if tooltip should be shown right now,
+       @entry[Returns]{@em{True} if the tooltip should be shown right now,
          @em{false} otherwise.}
      @end{table}
     @subheading{The \"realize\" signal}
@@ -1241,12 +1242,10 @@ lambda (widget)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-tooltip" 'widget) t)
  "The @code{has-tooltip} property of type @code{:boolean} (Read / Write) @br{}
-  Enables or disables the emission of the @code{\"query-tooltip\"} signal on
-  the widget. Enables or disables the emission of the @code{\"query-tooltip\"}
-  signal on the widget. A @em{true} value indicates that the widget can have a
-  tooltip, in this case the widget will be queried using the
-  @code{\"query-tooltip\"} signal to determine whether it will provide a tooltip
-  or not. @br{}
+  Enables or disables the emission of the @code{\"query-tooltip\"} signal on the
+  widget. A @em{true} value indicates that the widget can have a tooltip, in
+  this case the widget will be queried using the @code{\"query-tooltip\"} signal
+  to determine whether it will provide a tooltip or not. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -1837,7 +1836,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-markup)
       "Accessor"
       (documentation 'widget-tooltip-markup 'function)
- "@version{2024-4-28}
+ "@version{2024-7-8}
   @syntax{(gtk:widget-tooltip-markup object) => markup}
   @syntax{(setf (gtk:widget-tooltip-markup object) markup)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1852,8 +1851,8 @@ lambda (widget)    :run-last
   language.
 
   This function will take care of setting the @slot[gtk:widget]{has-tooltip}
-  property to @em{true} and of the default handler for the \"query-tooltip\"
-  signal.
+  property to @em{true} and of the default handler for the
+  @code{\"query-tooltip\"} signal.
 
   See also the @slot[gtk:widget]{tooltip-markup} property and the
   @fun{gtk:tooltip-set-markup} function.
@@ -1879,7 +1878,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-text)
       "Accessor"
       (documentation 'widget-tooltip-text 'function)
- "@version{2024-4-28}
+ "@version{2024-7-8}
   @syntax{(gtk:widget-tooltip-text object) => text}
   @syntax{(setf (gtk:widget-tooltip-text object) text)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1893,8 +1892,8 @@ lambda (widget)    :run-last
   the tooltip.
 
   This function will take care of setting the @slot[gtk:widget]{has-tooltip}
-  property to @em{true} and of the default handler for the \"query-tooltip\"
-  signal.
+  property to @em{true} and of the default handler for the
+  @code{\"query-tooltip\"} signal.
 
   See also the @slot[gtk:widget]{tooltip-text} property and the
   @fun{gtk:tooltip-set-text} function.
@@ -3214,7 +3213,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-font-options) (options widget)
-  (let ((options1 (if options options (cffi:null-pointer))))
+  (let ((options1 (or options (cffi:null-pointer))))
     (cffi:foreign-funcall "gtk_widget_set_font_options"
                           (g:object widget) widget
                           (:pointer (:struct cairo:font-options-t)) options1
@@ -3344,7 +3343,7 @@ lambda (widget)    :run-last
   @see-function{gdk:cursor-new-from-name}
   @see-function{gtk:widget-cursor}"
   (%widget-set-cursor-from-name widget
-                                (if name name (cffi:null-pointer))))
+                                (or name (cffi:null-pointer))))
 
 (export 'widget-set-cursor-from-name)
 
@@ -3855,8 +3854,6 @@ lambda (widget)    :run-last
   @begin{short}
     Returns the width that has currently been allocated to @arg{widget}.
   @end{short}
-  This function is intended to be used when implementing handlers for the
-  \"draw\" function.
   @begin[Note]{dictionary}
     The @fun{gtk:widget-allocated-width} function is equivalent to the call
     @begin{pre}
@@ -3886,14 +3883,12 @@ lambda (widget)    :run-last
 
 (defun widget-allocated-height (widget)
  #+liber-documentation
- "@version{#2023-9-18}
+ "@version{#2024-7-12}
   @argument[widget]{a @class{gtk:widget} object to query}
   @return{The integer with the height of the widget.}
   @begin{short}
     Returns the height that has currently been allocated to @arg{widget}.
   @end{short}
-  This function is intended to be used when implementing handlers for the
-  \"draw\" function.
   @begin[Note]{dictionary}
     The @fun{gtk:widget-allocated-height} function is equivalent to the call
     @begin{pre}
@@ -3982,14 +3977,12 @@ lambda (widget)    :run-last
 
 (defun widget-allocated-baseline (widget)
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2024-7-12}
   @argument[widget]{a @class{gtk:widget} object to query}
   @return{The integer with the baseline of the widget, or -1 if none}
   @begin{short}
     Returns the baseline that has currently been allocated to the widget.
   @end{short}
-  This function is intended to be used when implementing handlers for the
-  \"draw\" function, and when allocating child widgets in \"size_allocate\".
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the @fun{gtk:widget-baseline}
     function instead.
@@ -4401,17 +4394,17 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_has_visible_focus" widget-has-visible-focus) :boolean
  #+liber-documentation
- "@version{2024-2-16}
+ "@version{2024-7-12}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if the widget should display a focus rectangle.}
   @begin{short}
     Determines if the widget should show a visible indication that it has the
     global input focus.
   @end{short}
-  This is a convenience function for use in \"draw\" handlers that takes into
-  account whether focus indication should currently be shown in the toplevel
-  window of the widget. See the @fun{gtk:window-focus-visible} function for
-  more information about focus indication.
+  This is a convenience function that takes into account whether focus
+  indication should currently be shown in the toplevel window of @arg{widget}.
+  See the @fun{gtk:window-focus-visible} function for more information about
+  focus indication.
 
   To find out if the widget has the global input focus, use the
   @fun{gtk:widget-has-focus} function.
@@ -5050,11 +5043,11 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_compute_expand" widget-compute-expand) :boolean
  #+liber-documentation
- "@version{#2021-9-21}
+ "@version{2024-7-8}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[orientation]{a @symbol{gtk:orientation} value for the expand
+  @argument[orientation]{a @symbol{gtk:orientation} value with the expand
     direction}
-  @return{The boolean whether @arg{widget} tree rooted here should be expanded.}
+  @return{The boolean whether the widget tree rooted here should be expanded.}
   @begin{short}
     Computes whether a container should give this widget extra space when
     possible.

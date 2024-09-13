@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-key.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,10 +72,10 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller-key 'type)
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @begin{short}
-    The @class{gtk:event-controller-key} object is an event controller meant for
-    situations where you need access to key events.
+    The @class{gtk:event-controller-key} object is an event controller meant
+    for situations where you need access to key events.
   @end{short}
   @begin[Signal Details]{dictionary}
     @subheading{The \"im-update\" signal}
@@ -131,7 +131,7 @@ lambda (controller state)    :run-last
           which received the signal.}
         @entry[state]{The @symbol{gdk:modifier-type} bitmask, representing the
           state of modifier keys and pointer buttons.}
-        @entry[Returns]{The not documented boolean.}
+        @entry[Returns]{The boolean whether to ignore modifiers.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:event-controller-key-new}
@@ -145,7 +145,7 @@ lambda (controller state)    :run-last
 
 (defun event-controller-key-new ()
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-7-26}
   @return{The new @class{gtk:event-controller-key} object.}
   @short{Creates a new event controller that will handle key events.}
   @see-class{gtk:event-controller-key}"
@@ -165,20 +165,20 @@ lambda (controller state)    :run-last
                         :void)
   value)
 
-(cffi:defcfun ("gtk_event_controller-key_get_im_context"
+(cffi:defcfun ("gtk_event_controller_key_get_im_context"
                event-controller-key-im-context) (g:object im-context)
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @syntax{(gtk:event-controller-key-im-context controller) => context}
   @syntax{(setf (gtk:event-controller-key-im-context controller) context)}
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @argument[context]{a @class{gtk:im-context} object}
   @begin{short}
-    Accessor of the input method context of the key controller.
+    The @fun{gtk:event-controller-key-im-context} function gets the input method
+    context of the key controller.
   @end{short}
-  The @fun{gtk:event-controller-key-im-context} function gets the input method
-  context of the key controller. The @setf{gtk:event-controller-key-im-context}
-  function sets the input method context.
+  The @setf{gtk:event-controller-key-im-context} function sets the input method
+  context.
   @see-class{gtk:event-controller-key}
   @see-class{gtk:im-context}"
   (controller (g:object event-controller-key)))
@@ -192,7 +192,7 @@ lambda (controller state)    :run-last
 (cffi:defcfun ("gtk_event_controller_key_forward" event-controller-key-forward)
     :boolean
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{#2024-7-26}
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The boolean whether the widget handled the event}
@@ -215,12 +215,10 @@ lambda (controller state)    :run-last
 (cffi:defcfun ("gtk_event_controller_key_get_group" event-controller-key-group)
     :uint
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2024-7-26}
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @return{The unsigned integer with the key group.}
-  @begin{short}
-    Gets the key group of the current event of the controller.
-  @end{short}
+  @short{Gets the key group of the current event of the controller.}
   @see-class{gtk:event-controller-key}"
   (controller (g:object event-controller-key)))
 

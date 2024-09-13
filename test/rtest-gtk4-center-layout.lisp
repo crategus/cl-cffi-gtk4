@@ -51,7 +51,7 @@
 
 ;;;     gtk_center_layout_new
 
-(test gtk:center-layout-new
+(test gtk-center-layout-new
   (is (typep (gtk:center-layout-new) 'gtk:center-layout)))
 
 ;;;     gtk_center_layout_set_orientation
@@ -81,4 +81,4 @@
     (is (eq center (gtk:center-layout-center-widget layout)))
     (is (eq end (gtk:center-layout-end-widget layout)))))
 
-;;; 2024-4-19
+;;; 2024-7-27

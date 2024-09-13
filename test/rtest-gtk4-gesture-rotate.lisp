@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureRotate
 
-(test gesture-rotate-class
+(test gtk-gesture-rotate-class
   ;; Check type
   (is (g:type-is-object "GtkGestureRotate"))
   ;; Check registered name
@@ -42,6 +42,22 @@
 
 ;;;     angle-changed
 
+(test gtk-gesture-rotate-angle-changed-signal
+  (let* ((name "angle-changed")
+         (gtype (g:gtype "GtkGestureRotate"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_rotate_new
@@ -55,4 +71,4 @@
   (let ((gesture (gtk:gesture-rotate-new)))
     (is (= 0.0d0 (gtk:gesture-rotate-angle-delta gesture)))))
 
-;;; 2024-2-19
+;;; 2024-7-27

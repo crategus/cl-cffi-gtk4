@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,6 @@
   Free Pascal, and Eiffel.
   @begin[GListModel support]{section}
     @begin[GtkBitSet]{subsection}
-      Sets of integers.
       @about-class{bitset}
       @about-function{bitset-ref}
       @about-function{bitset-unref}
@@ -102,7 +101,6 @@
       @about-function{bitset-iter-is-valid}
     @end{subsection}
     @begin[GtkExpression]{subsection}
-      Expressions to values.
       @about-class{expression}
       @about-function{expression-ref}
       @about-function{expression-unref}
@@ -137,7 +135,6 @@
       @about-function{param-spec-expression}
     @end{subsection}
     @begin[GtkFilter]{subsection}
-      Filtering items.
       @about-symbol{filter-match}
       @about-symbol{filter-change}
       @about-class{filter}
@@ -146,14 +143,12 @@
       @about-function{filter-changed}
     @end{subsection}
     @begin[GtkCustomFilter]{subsection}
-      Filtering with callbacks.
       @about-class{custom-filter}
       @about-symbol{custom-filter-func}
       @about-function{custom-filter-new}
       @about-function{custom-filter-set-filter-func }
     @end{subsection}
     @begin[GtkMultiFilter]{subsection}
-      Combining multiple filters.
       @about-class{multi-filter}
       @about-function{multi-filter-item-type}
       @about-generic{multi-filter-n-items}
@@ -165,14 +160,12 @@
       @about-function{every-filter-new}
     @end{subsection}
     @begin[GtkBoolFilter]{subsection}
-      Filtering by boolean expressions.
       @about-class{bool-filter}
       @about-generic{bool-filter-expression}
       @about-generic{bool-filter-invert}
       @about-function{bool-filter-new}
     @end{subsection}
     @begin[GtkStringFilter]{subsection}
-      Filtering by strings.
       @about-symbol{string-filter-match-mode}
       @about-class{string-filter}
       @about-generic{string-filter-expression}
@@ -182,7 +175,6 @@
       @about-function{string-filter-new}
     @end{subsection}
     @begin[GtkFileFilter]{subsection}
-      Filtering files.
       @about-class{file-filter}
       @about-generic{file-filter-mime-types}
       @about-generic{file-filter-name}
@@ -198,7 +190,6 @@
       @about-function{file-filter-to-gvariant}
     @end{subsection}
     @begin[GtkSorter]{subsection}
-      Sorting items.
       @about-symbol{sorter-order}
       @about-symbol{sorter-change}
       @about-class{sorter}
@@ -208,13 +199,11 @@
       @about-function{ordering-from-cmpfunc}
     @end{subsection}
     @begin[GtkCustomSorter]{subsection}
-      Sorting with a callback function.
       @about-class{custom-sorter}
       @about-function{custom-sorter-new}
       @about-function{custom-sorter-set-sort-func}
     @end{subsection}
     @begin[GtkMultiSorter]{subsection}
-      Combining multiple sorters.
       @about-class{multi-sorter}
       @about-function{multi-sorter-item-type}
       @about-generic{multi-sorter-n-items}
@@ -223,7 +212,6 @@
       @about-function{multi-sorter-remove}
     @end{subsection}
     @begin[GtkStringSorter]{subsection}
-      Sort by comparing strings.
       @about-symbol{collation}
       @about-class{string-sorter}
       @about-generic{string-sorter-collation}
@@ -232,7 +220,6 @@
       @about-function{string-sorter-new}
     @end{subsection}
     @begin[GtkNumericSorter]{subsection}
-      Sort by comparing numbers.
       @about-class{numeric-sorter}
       @about-generic{numeric-sorter-expression}
       @about-generic{numeric-sorter-sort-order}
@@ -251,7 +238,6 @@
       @about-function{section-model-sections-changed}
     @end{subsection}
     @begin[GtkSelectionModel]{subsection}
-      Extension of the list model interface that handles selections.
       @about-class{selection-model}
       @about-function{selection-model-is-selected}
       @about-function{selection-model-selection}
@@ -266,7 +252,6 @@
       @about-function{selection-model-selection-changed}
     @end{subsection}
     @begin[GtkNoSelection]{subsection}
-      A selection model that does not allow selecting anything.
       @about-class{no-selection}
       @about-function{no-selection-item-type}
       @about-generic{no-selection-model}
@@ -274,7 +259,6 @@
       @about-function{no-selection-new}
     @end{subsection}
     @begin[GtkSingleSelection]{subsection}
-      A selection model that allows selecting a single item.
       @about-variable{gtk:+invalid-list-position+}
       @about-class{single-selection}
       @about-generic{single-selection-autoselect}
@@ -287,7 +271,6 @@
       @about-function{single-selection-new}
     @end{subsection}
     @begin[GtkMultiSelection]{subsection}
-      A selection model that allows selecting multiple items.
       @about-class{multi-selection}
       @about-function{multi-selection-item-type}
       @about-generic{multi-selection-model}
@@ -295,7 +278,6 @@
       @about-function{multi-selection-new}
     @end{subsection}
     @begin[GtkFilterListModel]{subsection}
-      A list model that filters its items.
       @about-class{filter-list-model}
       @about-generic{filter-list-model-filter}
       @about-generic{filter-list-model-incremental}
@@ -306,7 +288,6 @@
       @about-function{filter-list-model-new}
     @end{subsection}
     @begin[GtkFlattenListModel]{subsection}
-      A list model that flattens a list of lists.
       @about-class{flatten-list-model}
       @about-function{flatten-list-model-item-type}
       @about-generic{flatten-list-model-model}
@@ -315,7 +296,6 @@
       @about-function{flatten-list-model-model-for-item}
     @end{subsection}
     @begin[GtkMapListModel]{subsection}
-      A list model that transforms its items.
       @about-class{map-list-model}
       @about-generic{map-list-model-has-map}
       @about-function{map-list-model-item-type}
@@ -326,7 +306,6 @@
       @about-function{map-list-model-set-map-func}
     @end{subsection}
     @begin[GtkSliceListModel]{subsection}
-      A list model that presents a slice out of a larger list.
       @about-class{slice-list-model}
       @about-function{slice-list-model-item-type}
       @about-generic{slice-list-model-model}
@@ -336,7 +315,6 @@
       @about-function{slice-list-model-new}
     @end{subsection}
     @begin[GtkSortListModel]{subsection}
-      A list model that sorts its items.
       @about-class{sort-list-model}
       @about-generic{sort-list-model-incremental}
       @about-function{sort-list-model-item-type}
@@ -348,7 +326,6 @@
       @about-function{sort-list-model-new}
     @end{subsection}
     @begin[GtkSelectionFilterModel]{subsection}
-      A list model that turns a selection in a model.
       @about-class{selection-filter-model}
       @about-function{selection-filter-model-item-type}
       @about-generic{selection-filter-model-model}
@@ -356,7 +333,6 @@
       @about-function{selection-filter-model-new}
     @end{subsection}
     @begin[GtkBookmarkList]{subsection}
-      A list model for recently used files.
       @about-class{bookmark-list}
       @about-generic{bookmark-list-attributes}
       @about-generic{bookmark-list-filename}
@@ -368,7 +344,6 @@
       @about-function{bookmark-list-is-loading}
     @end{subsection}
     @begin[GtkDirectoryList]{subsection}
-      A list model for directory listings.
       @about-class{directory-list}
       @about-generic{directory-list-attributes}
       @about-generic{directory-list-error}
@@ -382,7 +357,6 @@
       @about-function{directory-list-is-loading}
     @end{subsection}
     @begin[GtkStringList]{subsection}
-      A list model for strings.
       @about-class{string-object}
       @about-generic{string-object-string}
       @about-function{string-object-new}
@@ -3360,7 +3334,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Gestures and event handling]{section}
     @begin[GtkEventController]{subsection}
-      Self-contained handler of series of events.
       @about-symbol{propagation-phase}
       @about-symbol{propagation-limit}
       @about-class{event-controller}
@@ -3375,7 +3348,6 @@ GtkCellRenderer         GtkWidget
       @about-function{event-controller-current-event-time}
     @end{subsection}
     @begin[GtkEventControllerKey]{subsection}
-      Event controller for key events.
       @about-class{event-controller-key}
       @about-function{event-controller-key-new}
       @about-function{event-controller-key-im-context}
@@ -3383,19 +3355,16 @@ GtkCellRenderer         GtkWidget
       @about-function{event-controller-key-group}
     @end{subsection}
     @begin[GtkEventControllerFocus]{subsection}
-      Event controller for focus.
       @about-class{event-controller-focus}
       @about-generic{event-controller-focus-contains-focus}
       @about-generic{event-controller-focus-is-focus}
       @about-function{event-controller-focus-new}
     @end{subsection}
     @begin[GtkEventControllerLegacy]{subsection}
-      Event controller for miscellaneous events.
       @about-class{event-controller-legacy}
       @about-function{event-controller-legacy-new}
     @end{subsection}
     @begin[GtkEventControllerScroll]{subsection}
-      Event controller for scroll events.
       @about-symbol{event-controller-scroll-flags}
       @about-class{event-controller-scroll}
       @about-generic{event-controller-scroll-flags}
@@ -3403,14 +3372,12 @@ GtkCellRenderer         GtkWidget
       @about-function{event-controller-scroll-unit}
     @end{subsection}
     @begin[GtkEventControllerMotion]{subsection}
-      Event controller for motion events.
       @about-class{event-controller-motion}
       @about-generic{event-controller-motion-contains-pointer}
       @about-generic{event-controller-motion-is-pointer}
       @about-function{event-controller-motion-new}
     @end{subsection}
     @begin[GtkGesture]{subsection}
-      Base class for gestures.
       @about-symbol{event-sequence-state}
       @about-class{gesture}
       @about-generic{gesture-n-points}
@@ -3432,7 +3399,6 @@ GtkCellRenderer         GtkWidget
       @about-function{gesture-is-grouped-with}
     @end{subsection}
     @begin[GtkGestureSingle]{subsection}
-      Base class for mouse/single-touch gestures.
       @about-class{gesture-single}
       @about-generic{gesture-single-button}
       @about-generic{gesture-single-exclusive}
@@ -3441,50 +3407,42 @@ GtkCellRenderer         GtkWidget
       @about-function{gesture-single-current-sequence}
     @end{subsection}
     @begin[GtkGestureDrag]{subsection}
-      Drag gesture.
       @about-class{gesture-drag}
       @about-function{gesture-drag-new}
       @about-function{gesture-drag-start-point}
       @about-function{gesture-drag-offset}
     @end{subsection}
     @begin[GtkGestureLongPress]{subsection}
-      \"Press and Hold\" gesture.
       @about-class{gesture-long-press}
       @about-generic{gesture-long-press-delay-factor}
       @about-function{gesture-long-press-new}
     @end{subsection}
     @begin[GtkGestureClick]{subsection}
-      Multipress gesture.
       @about-class{gesture-click}
       @about-function{gesture-click-new}
     @end{subsection}
     @begin[GtkGesturePan]{subsection}
-      Pan gesture.
       @about-symbol{pan-direction}
       @about-class{gesture-pan}
       @about-generic{gesture-pan-orientation}
       @about-function{gesture-pan-new}
     @end{subsection}
     @begin[GtkGestureSwipe]{subsection}
-      Swipe gesture.
       @about-class{gesture-swipe}
       @about-function{gesture-swipe-new}
       @about-function{gesture-swipe-velocity}
     @end{subsection}
     @begin[GtkGestureRotate]{subsection}
-      Rotate gesture.
       @about-class{gesture-rotate}
       @about-function{gesture-rotate-new}
       @about-function{gesture-rotate-angle-delta}
     @end{subsection}
     @begin[GtkGestureZoom]{subsection}
-      Zoom gesture.
       @about-class{gesture-zoom}
       @about-function{gesture-zoom-new}
       @about-function{gesture-zoom-scale-delta}
     @end{subsection}
     @begin[GtkGestureStylus]{subsection}
-      Gesture for stylus input.
       @about-class{gesture-stylus}
       @about-generic{gesture-stylus-stylus-only}
       @about-function{gesture-stylus-new}
@@ -3494,7 +3452,6 @@ GtkCellRenderer         GtkWidget
       @about-function{gesture-stylus-device-tool}
     @end{subsection}
     @begin[GtkPadController]{subsection}
-      Controller for drawing tablet pads.
       @about-symbol{pad-action-type}
       @about-class{pad-controller}
       @about-generic{pad-controller-action-group}
@@ -3504,7 +3461,6 @@ GtkCellRenderer         GtkWidget
       @about-function{pad-controller-set-action}
     @end{subsection}
     @begin[GtkShortcutController]{subsection}
-      Event controller for shortcuts.
       @about-symbol{shortcut-scope}
       @about-class{shortcut-controller}
       @about-generic{shortcut-controller-item-type}
@@ -3570,7 +3526,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Miscellaneous]{section}
     @begin[GtkAdjustment]{subsection}
-      A representation of an adjustable bounded value.
       @about-class{adjustment}
       @about-generic{adjustment-lower}
       @about-generic{adjustment-page-increment}
@@ -3584,7 +3539,6 @@ GtkCellRenderer         GtkWidget
       @about-function{adjustment-minimum-increment}
     @end{subsection}
     @begin[GtkSizeGroup]{subsection}
-      Grouping widgets so they request the same size.
       @about-class{size-group}
       @about-generic{size-group-mode}
       @about-function{size-group-new}
@@ -3593,7 +3547,6 @@ GtkCellRenderer         GtkWidget
       @about-function{size-group-widgets}
     @end{subsection}
     @begin[GtkSnapshot]{subsection}
-      Auxiliary object for snapshots.
       @about-class{snapshot}
       @about-function{snapshot-new}
       @about-function{snapshot-to-node}
@@ -3650,7 +3603,6 @@ GtkCellRenderer         GtkWidget
       @about-function{snapshot-render-layout}
     @end{subsection}
     @begin[GtkTooltip]{subsection}
-      Add tips to your widgets.
       @about-class{tooltip}
       @about-function{tooltip-set-markup}
       @about-function{tooltip-set-text}
@@ -3661,13 +3613,11 @@ GtkCellRenderer         GtkWidget
       @about-function{tooltip-set-tip-area}
     @end{subsection}
     @begin[GtkWidgetPaintable]{subsection}
-      Drawing a widget elsewhere.
       @about-class{widget-paintable}
       @about-function{widget-paintable-new}
       @about-function{widget-paintable-widget}
     @end{subsection}
     @begin[GtkWindowControls]{subsection}
-      A widget displaying window buttons.
       @about-class{window-controls}
       @about-generic{window-controls-decoration-layout}
       @about-generic{window-controls-empty}
@@ -3675,7 +3625,6 @@ GtkCellRenderer         GtkWidget
       @about-function{window-controls-new}
     @end{subsection}
     @begin[GtkWindowHandle]{subsection}
-      A titlebar area widget.
       @about-class{window-handle}
       @about-generic{window-handle-child}
       @about-function{window-handle-new}

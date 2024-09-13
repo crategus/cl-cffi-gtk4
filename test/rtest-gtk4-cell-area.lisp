@@ -120,13 +120,32 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     GtkCellCallback
-;;;     GtkCellAllocCallback
-
 ;;;     gtk_cell_area_add
 ;;;     gtk_cell_area_remove
 ;;;     gtk_cell_area_has_renderer
 
+(test gtk-cell-area-add/remove
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((area (gtk:cell-area-box-new))
+          (renderer1 (gtk:cell-renderer-pixbuf-new))
+          (renderer2 (gtk:cell-renderer-progress-new))
+          (renderer3 (gtk:cell-renderer-text-new)))
+      ;; Add cell renderer
+      (is-false (gtk:cell-area-add area renderer1))
+      (is-true (gtk:cell-area-has-renderer area renderer1))
+      (is-false (gtk:cell-area-add area renderer2))
+      (is-true (gtk:cell-area-has-renderer area renderer2))
+      (is-false (gtk:cell-area-add area renderer3))
+      (is-true (gtk:cell-area-has-renderer area renderer3))
+      ;; Remove cell renderer
+      (is-false (gtk:cell-area-remove area renderer1))
+      (is-false (gtk:cell-area-has-renderer area renderer1))
+      (is-false (gtk:cell-area-remove area renderer2))
+      (is-false (gtk:cell-area-has-renderer area renderer2))
+      (is-false (gtk:cell-area-remove area renderer3))
+      (is-false (gtk:cell-area-has-renderer area renderer3)))))
+
+;;;     GtkCellCallback
 ;;;     gtk_cell_area_foreach
 
 (test gtk-cell-area-foreach
@@ -150,53 +169,37 @@
                  GTK:CELL-RENDERER-TOGGLE)
                (reverse message)))))
 
+;;;     GtkCellAllocCallback
 ;;;     gtk_cell_area_foreach_alloc
-
-;; FIXME: This test crashes the testsuite later when calling GtkApplication.
-
-#+nil
-(test gtk-cell-area-foreach-alloc
-  (let ((area (gtk:cell-area-box-new))
-        (widget (make-instance 'gtk:window
-                               :width-request 120
-                               :height-request 60))
-        (message nil))
-    ;; Realize the window
-    (gtk:widget-realize widget)
-    ;; Add five cell renderers to the area box
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-text-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-toggle-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-pixbuf-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-progress-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-spinner-new))
-    ;; Collect for each renderer information about the layout
-    (gtk:cell-area-foreach-alloc
-            area
-            (gtk:cell-area-create-context area)
-            widget
-            (gtk:widget-allocation widget)
-            (gtk:widget-allocation widget)
-            (lambda (renderer cell background)
-              (push (list (type-of renderer)
-                          (list (gdk:rectangle-x cell)
-                                (gdk:rectangle-width cell))
-                          (list (gdk:rectangle-x background)
-                                (gdk:rectangle-width background)))
-                    message)
-              nil))
-    ;; Check the result
-    ;; TODO: The widget is no size. Therefore we can not layout the
-    ;; cell renderers. How can we allocate the size for a test?
-    (is (equal '((GTK:CELL-RENDERER-TEXT (0 0) (0 0)))
-               (reverse message)))))
 
 ;;;     gtk_cell_area_event
 ;;;     gtk_cell_area_snapshot
 ;;;     gtk_cell_area_get_cell_allocation
 ;;;     gtk_cell_area_get_cell_at_position
+
 ;;;     gtk_cell_area_create_context
+
+(test gtk-cell-area-create-context
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (gtk:cell-area-box-new)))
+    (is (typep (gtk:cell-area-create-context area) 'gtk:cell-area-context))))
+
 ;;;     gtk_cell_area_copy_context
+
+(test gtk-cell-area-copy-context
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (gtk:cell-area-box-new))
+         (context (gtk:cell-area-create-context area)))
+    (is (typep (gtk:cell-area-copy-context area context)
+               'gtk:cell-area-context))))
+
 ;;;     gtk_cell_area_get_request_mode
+
+(test gtk-cell-area-request-mode
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (gtk:cell-area-box-new)))
+    (is (eq :HEIGHT-FOR-WIDTH (gtk:cell-area-request-mode area)))))
+
 ;;;     gtk_cell_area_get_preferred_width
 ;;;     gtk_cell_area_get_preferred_height_for_width
 ;;;     gtk_cell_area_get_preferred_height
@@ -293,4 +296,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; 2024-5-18
+;;; 2024-7-7

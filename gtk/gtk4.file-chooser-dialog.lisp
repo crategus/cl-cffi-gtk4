@@ -89,7 +89,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-dialog 'type)
- "@version{2024-4-26}
+ "@version{2024-7-30}
   @begin{short}
     The @class{gtk:file-chooser-dialog} widget is a dialog suitable for use
     with \"File/Open\" or \"File/Save as\" commands.
@@ -133,8 +133,8 @@
     @end{itemize}
     In general, you should only cause the file chooser to show a specific folder
     when it is appropriate to use the @fun{gtk:file-chooser-file} function,
-    i.e. when you are doing a \"Save As\" command and you already have a file
-    saved somewhere.
+    that is, when you are doing a \"Save As\" command and you already have a
+    file saved somewhere.
   @end{dictionary}
   @begin[Response Codes]{dictionary}
     The @class{gtk:file-chooser-dialog} widget inherits from the

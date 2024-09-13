@@ -547,9 +547,11 @@
 ;;;     gtk_widget_get_width
 ;;;     gtk_widget_get_height
 ;;;     gtk_widget_get_size
+
 ;;;     gtk_widget_compute_bounds
 ;;;     gtk_widget_compute_transform
 ;;;     gtk_widget_compute_point
+
 ;;;     gtk_widget_contains
 ;;;     gtk_widget_pick
 ;;;     gtk_widget_get_focus_child
@@ -686,7 +688,29 @@
 ;;;     gtk_widget_get_request_mode
 ;;;     gtk_widget_get_preferred_size
 ;;;     gtk_distribute_natural_allocation
+
 ;;;     gtk_widget_compute_expand
+
+(test gtk-widget-compute-expand.1
+  (let ((box (gtk:box-new :horizontal))
+        (button (make-instance 'gtk:button
+                               :label "label"
+                               :hexpand t
+                               :vexpand nil)))
+    (is-false (gtk:box-append box button))
+    (is-true (gtk:widget-compute-expand box :horizontal))
+    (is-false (gtk:widget-compute-expand box :vertical))))
+
+(test gtk-widget-compute-expand.2
+  (let ((box (gtk:box-new :horizontal))
+        (button (make-instance 'gtk:button
+                               :label "label"
+                               :hexpand nil
+                               :vexpand t)))
+    (is-false (gtk:box-append box button))
+    (is-false (gtk:widget-compute-expand box :horizontal))
+    (is-true (gtk:widget-compute-expand box :vertical))))
+
 ;;;     gtk_widget_init_template
 ;;;     gtk_widget_class_set_template
 ;;;     gtk_widget_class_set_template_from_resource
