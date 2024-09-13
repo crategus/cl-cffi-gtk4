@@ -100,8 +100,8 @@
                        #\c :control-mask "win.copy"
                        #\x :control-mask "win.paste"
                        ;; TODO: GTK Demo has already F1 in use
-                       65470 :none "win.help"               ; key F1
-                       65476 :none "win.about")))           ; key F7
+                       65470 :no-modifier-mask "win.help"          ; key F1
+                       65476 :no-modifier-mask "win.about")))      ; key F7
       (iter (for (keyval modifier name) on shortcuts by #'cdddr)
             (gtk:shortcut-controller-add-shortcut
                     controller
