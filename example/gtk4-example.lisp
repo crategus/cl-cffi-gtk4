@@ -26,6 +26,7 @@
            #:do-box-append
            #:do-box-center
            #:do-grid-spacing
+           #:do-grid-buildable
            #:do-revealer
            #:do-revealer-icon
            #:do-list-box-complex

@@ -193,7 +193,21 @@
        ":window"
        "DO-GRID-SPACING"
        "gtk4-example"
-       "grid-spacing.lisp")
+       "grid-spacing.lisp"
+       :keywords
+       "GtkGrid"
+       "gtk:grid")
+      ("Grid buildable"
+       ":window"
+       "DO-GRID-BUILDABLE"
+       "gtk4-example"
+       "grid-buildable.lisp"
+       "resource/grid-buildable.ui"
+       :keywords
+       "GtkGrid"
+       "gtk:grid"
+       "gtk:builder-new-from-file"
+       "gtk:builder-object")
       ("Revealer"
        ":window"
        "DO-REVEALER"
