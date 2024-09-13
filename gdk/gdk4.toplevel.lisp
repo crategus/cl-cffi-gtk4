@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,7 +87,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkToplevelState
+;;; GdkToplevelState
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GdkToplevelState" toplevel-state
@@ -114,15 +114,8 @@
 (setf (liber:alias-for-symbol 'toplevel-state)
       "GFlags"
       (liber:symbol-documentation 'toplevel-state)
- "@version{2024-1-9}
-  @begin{short}
-    Specifies the state of a toplevel surface.
-  @end{short}
-  On platforms that support information about individual edges, the
-  @code{:state-tiled} state will be set whenever any of the individual tiled
-  states is set. On platforms that lack that support, the tiled state will give
-  an indication of tiledness without any of the per-edge states being set.
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-flags \"GdkToplevelState\" toplevel-state
   (:export t
    :type-initializer \"gdk_toplevel_state_get_type\")
@@ -142,30 +135,39 @@
   (:bottom-resizable #.(ash 1 13))
   (:left-tiled #.(ash 1 14))
   (:left-resizable #.(ash 1 15)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:minimized]{The surface is minimized.}
-    @entry[:maximized]{The surface is maximized.}
-    @entry[:sticky]{The surface is sticky.}
-    @entry[:fullscreen]{The surface is maximized without decorations.}
-    @entry[:above]{The surface is kept above other surfaces.}
-    @entry[:below]{The surface is kept below other surfaces.}
-    @entry[:focused]{The surface is presented as focused (with active
-      decorations).}
-    @entry[:tiled]{The surface is in a tiled state.}
-    @entry[:top-tiled]{Whether the top edge is tiled.}
-    @entry[:top-resizable]{Whether the top edge is resizable.}
-    @entry[:right-tiled]{Whether the right edge is tiled.}
-    @entry[:right-resizable]{Whether the right edge is resizable.}
-    @entry[:bottom-tiled]{Whether the bottom edge is tiled.}
-    @entry[:bottom-resizable]{Whether the bottom edge is resizable.}
-    @entry[:left-tiled]{Whether the left edge is tiled.}
-    @entry[:left-resizable]{Whether the left edge is resizable.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:minimized]{The surface is minimized.}
+      @entry[:maximized]{The surface is maximized.}
+      @entry[:sticky]{The surface is sticky.}
+      @entry[:fullscreen]{The surface is maximized without decorations.}
+      @entry[:above]{The surface is kept above other surfaces.}
+      @entry[:below]{The surface is kept below other surfaces.}
+      @entry[:focused]{The surface is presented as focused (with active
+        decorations).}
+      @entry[:tiled]{The surface is in a tiled state.}
+      @entry[:top-tiled]{Whether the top edge is tiled.}
+      @entry[:top-resizable]{Whether the top edge is resizable.}
+      @entry[:right-tiled]{Whether the right edge is tiled.}
+      @entry[:right-resizable]{Whether the right edge is resizable.}
+      @entry[:bottom-tiled]{Whether the bottom edge is tiled.}
+      @entry[:bottom-resizable]{Whether the bottom edge is resizable.}
+      @entry[:left-tiled]{Whether the left edge is tiled.}
+      @entry[:left-resizable]{Whether the left edge is resizable.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Specifies the state of a toplevel surface.
+  @end{short}
+  On platforms that support information about individual edges, the
+  @code{:state-tiled} state will be set whenever any of the individual tiled
+  states is set. On platforms that lack that support, the tiled state will give
+  an indication of tiledness without any of the per-edge states being set.
   @see-class{gdk:toplevel}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkFullscreenMode
+;;; GdkFullscreenMode
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkFullscreenMode" fullscreen-mode
@@ -178,26 +180,28 @@
 (setf (liber:alias-for-symbol 'fullscreen-mode)
       "GEnum"
       (liber:symbol-documentation 'fullscreen-mode)
- "@version{2024-1-9}
-  @begin{short}
-    Indicates which monitor (in a multi-head setup) a surface should span over
-    when in fullscreen mode.
-  @end{short}
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkFullscreenMode\" fullscreen-mode
   (:export t
    :type-initializer \"gdk_fullscreen_mode_get_type\")
   (:on-current-monitor 0)
   (:on-all-monitor 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:on-current-monitor]{Fullscreen on current monitor only.}
-    @entry[:on-all-monitor]{Span across all monitors when fullscreen.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:on-current-monitor]{Fullscreen on current monitor only.}
+      @entry[:on-all-monitor]{Span across all monitors when fullscreen.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Indicates which monitor (in a multi-head setup) a surface should span over
+    when in fullscreen mode.
+  @end{short}
   @see-class{gdk:toplevel}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkSurfaceEdge
+;;; GdkSurfaceEdge
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkSurfaceEdge" surface-edge
@@ -216,22 +220,35 @@
 (setf (liber:alias-for-symbol 'surface-edge)
       "GEnum"
       (liber:symbol-documentation 'surface-edge)
- "@version{2024-1-9}
+ "@version{2024-7-12}
+  @begin{declaration}
+(gobject:define-g-enum \"GdkSurfaceEdge\" surface-edge
+  (:export t
+   :type-initializer \"gdk_surface_edge_get_type\")
+  (:north-west 0)
+  (:north 1)
+  (:north-east 2)
+  (:west 3)
+  (:east 4)
+  (:south-west 5)
+  (:south 6)
+  (:south-east 7))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:north-west]{The top left corner.}
+      @entry[:north]{The top edge.}
+      @entry[:north-east]{The top right corner.}
+      @entry[:west]{The left edge.}
+      @entry[:east]{The right edge.}
+      @entry[:south-west]{The lower left corner.}
+      @entry[:south]{The lower edge.}
+      @entry[:south-east]{The lower right corner.}
+    @end{table}
+  @end{values}
   @begin{short}
     Determines a surface edge or corner.
   @end{short}
-  @begin{pre}
-  @end{pre}
-  @begin[code]{table}
-    @entry[:north-west]{The top left corner.}
-    @entry[:north]{The top edge.}
-    @entry[:north-east]{The top right corner.}
-    @entry[:west]{The left edge.}
-    @entry[:east]{The right edge.}
-    @entry[:south-west]{The lower left corner.}
-    @entry[:south]{The lower edge.}
-    @entry[:south-east]{The lower right corner.}
-  @end{table}
   @see-class{gdk:toplevel}")
 
 ;;; ----------------------------------------------------------------------------
@@ -250,24 +267,28 @@
 (setf (liber:alias-for-symbol 'titlebar-gesture)
       "GEnum"
       (liber:symbol-documentation 'titlebar-gesture)
- "@version{2024-1-9}
-  @begin{short}
-    No description available.
-  @end{short}
-  Since 4.4
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkTitlebarGesture\" titlebar-gesture
   (:export t
    :type-initializer \"gdk_titlebar_gesture_get_type\")
   (:double-click 0)
   (:right-click 1)
   (:middle-click 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:double-click]{No description available.}
-    @entry[:right-click]{No description available.}
-    @entry[:middle-click]{No description available.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:double-click]{No description available.}
+      @entry[:right-click]{No description available.}
+      @entry[:middle-click]{No description available.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The kind of title bar gesture to emit with the
+    @fun{gdk:toplevel-titlebar-gesture} function.
+  @end{short}
+
+  Since 4.4
   @see-class{gdk:toplevel}
   @see-function{gdk:toplevel-titlebar-gesture}")
 
@@ -353,7 +374,7 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:popup}")
 
 ;;; ----------------------------------------------------------------------------
-;;;Property and Accessor Details
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- gdk:toplevel-decorated -------------------------------------------------
@@ -361,7 +382,7 @@ lambda (toplevel size)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decorated" 'toplevel) t)
  "The @code{decorated} property of type @code{:boolean} (Read / Write) @br{}
-  Decorated. @br{}
+  Whether the toplevel is decorated. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -387,7 +408,7 @@ lambda (toplevel size)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "deletable" 'toplevel) t)
  "The @code{deletable} property of type @code{:boolean} (Read / Write) @br{}
-  Deletable. @br{}
+  Whether the toplevel is deletable. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -413,7 +434,7 @@ lambda (toplevel size)    :run-last
 (setf (documentation (liber:slot-documentation "fullscreen-mode" 'toplevel) t)
  "The @code{fullscreen-mode} property of type @symbol{gdk:fullscreen-mode}
   (Read / Write) @br{}
-  Fullscreen mode. @br{}
+  The fullscreen mode of the toplevel. @br{}
   Default value: @code{:on-current-monitor}")
 
 #+liber-documentation
@@ -465,7 +486,7 @@ lambda (toplevel size)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'toplevel) t)
  "The @code{modal} property of type @code{:boolean} (Read / Write) @br{}
-  Whether the surface is modal. @br{}
+  Whether the toplevel is modal. @br{}
   Default value: @em{false}")
 
 #+liber-documentation

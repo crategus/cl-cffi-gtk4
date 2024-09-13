@@ -139,7 +139,7 @@
 (setf (liber:alias-for-symbol 'drag-action)
       "GFlags"
       (liber:symbol-documentation 'drag-action)
- "@version{2024-5-2}
+ "@version{2024-7-12}
   @begin{declaration}
     @begin{pre}
 (gobject:define-g-flags \"GdkDragAction\" drag-action
@@ -155,8 +155,8 @@
   @begin{values}
     @begin[code]{table}
       @entry[:copy]{Copy the data.}
-      @entry[:move]{Move the data, i.e. first copy it, then delete it from the
-        source using the @code{DELETE} target of the X selection protocol.}
+      @entry[:move]{Move the data, that is, first copy it, then delete it from
+        the source using the @code{DELETE} target of the X selection protocol.}
       @entry[:link]{Add a link to the data. Note that this is only useful if
         source and destination agree on what it means, and is not supported on
         all platforms.}
@@ -573,14 +573,14 @@ lambda (drag)    :run-last
 
 (cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean
  #+liber-documentation
- "@version{#2023-8-6}
+ "@version{#2024-7-12}
   @argument[action]{a @symbol{gdk:drag-action} value}
   @return{@em{True} if exactly one action was given.}
   @begin{short}
     Checks if @arg{action} represents a single action or if it includes
     multiple flags that can be selected from.
   @end{short}
-  When @arg{action} is @code{:none} - i.e. no action was given, @em{true} is
+  When @arg{action} is @code{:none}, that is no action was given, @em{true} is
   returned.
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}"

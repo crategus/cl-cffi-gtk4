@@ -132,7 +132,7 @@
 (setf (liber:alias-for-function 'drop-actions)
       "Accessor"
       (documentation 'drop-actions 'function)
- "@version{#2023-8-7}
+ "@version{#2024-7-12}
   @syntax{(gdk:drop-actions object) => actions}
   @argument[object]{a @class{gdk:drop} object}
   @argument[actions]{a @symbol{gdk:drag-action} value}
@@ -141,8 +141,8 @@
     class.
   @end{short}
   The @fun{gdk:drop-actions} function returns the possible actions for the
-  drop object. If this value contains multiple actions - i.e. the
-  @fun{gdk:drag-action-is-unique} function returns @em{false} for the result -
+  drop object. If this value contains multiple actions, that is, the
+  @fun{gdk:drag-action-is-unique} function returns @em{false} for the result,
   the @fun{gdk:drop-finish} function must choose the action to use when
   accepting the drop. This will only happen if you passed @code{:ask} as one of
   the possible actions in the @fun{gdk:drop-status} function. The @code{:ask}

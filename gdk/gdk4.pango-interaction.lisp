@@ -2,11 +2,11 @@
 ;;; gdk4.pango-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -40,7 +40,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pango_layout_get_clip_region ()
+;;; gdk_pango_layout_get_clip_region
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pango_layout_get_clip_region" %pango-layout-clip-region)
@@ -53,15 +53,16 @@
 
 (defun pango-layout-clip-region (layout xorigin yorigin ranges)
  #+liber-documentation
- "@version{#2023-4-14}
+ "@version{#2024-7-16}
   @argument[layout]{a @class{pango:layout} object}
   @argument[xorigin]{an integer with the x pixel where you intend to draw the
     layout with this clip }
   @argument[yorigin]{an integer with the y pixel where you intend to draw the
     layout with this clip }
   @argument[ranges]{a list of integer with the byte indexes into the layout,
-    where even members of the list are start indexes and elements end indexes}
-  @return{A @symbol{cairo:region-t} instance with the clip region containing
+    where even members of the list are start indexes and odd elements end
+    indexes}
+  @return{The @symbol{cairo:region-t} instance with the clip region containing
     the given ranges.}
   @begin{short}
     Obtains a clip region which contains the areas where the given ranges of
@@ -87,10 +88,11 @@
 (export 'pango-layout-clip-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pango_layout_line_get_clip_region ()
+;;; gdk_pango_layout_line_get_clip_region
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_pango_layout_line_clip_region" %pango-layout-line-clip-region)
+(cffi:defcfun ("gdk_pango_layout_line_clip_region"
+               %pango-layout-line-clip-region)
     (:pointer (:struct cairo:region-t))
   (line (g:boxed pango:layout-line))
   (xorigin :int)
@@ -100,15 +102,16 @@
 
 (defun pango-layout-line-clip-region (line xorigin yorigin ranges)
  #+liber-documentation
- "@version{#2023-4-14}
+ "@version{#2024-7-16}
   @argument[line]{a @class{pango:layout-line} instance}
   @argument[xorigin]{an integer with the x pixel where you intend to draw the
     layout line with this clip }
   @argument[yorigin]{an integer with the y pixel where you intend to draw the
     layout line with this clip }
   @argument[ranges]{a list of integer with the byte indexes into the layout,
-    where even members of the list are start indexes and elements end indexes}
-  @return{A @symbol{cairo:region-t} instance with the clip region containing
+    where even members of the list are start indexes and odd elements end
+    indexes}
+  @return{The @symbol{cairo:region-t} instance with the clip region containing
     the given ranges.}
   @begin{short}
     Obtains a clip region which contains the areas where the given ranges of

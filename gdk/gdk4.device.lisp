@@ -2,7 +2,7 @@
 ;;; gdk4.device.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,7 +94,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkInputSource
+;;; GdkInputSource
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkInputSource" input-source
@@ -112,11 +112,8 @@
 (setf (liber:alias-for-symbol 'input-source)
       "GEnum"
       (liber:symbol-documentation 'input-source)
- "@version{2023-4-15}
-  @begin{short}
-    An enumeration describing the type of an input device in general terms.
-  @end{short}
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkInputSource\" input-source
   (:export t
    :type-initializer \"gdk_input_source_get_type\")
@@ -127,24 +124,30 @@
   :touchpad
   :trackpoint
   :tablet-pad)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:mouse]{The device is a mouse. This will be reported for the core
-      pointer, even if it is something else, such as a trackball.}
-    @entry[:pen]{The device is a stylus of a graphics tablet or similar device.}
-    @entry[:keyboard]{The device is a keyboard.}
-    @entry[:touchscreen]{The device is a direct-input touch device, such as a
-      touchscreen or tablet.}
-    @entry[:touchpad]{The device is an indirect touch device, such as a
-      touchpad.}
-    @entry[:trackpoint]{The device is a trackpoint.}
-    @entry[:tablet-pad]{The device is a \"pad\", a collection of buttons, rings
-      and strips found in drawing tablets.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:mouse]{The device is a mouse. This will be reported for the core
+        pointer, even if it is something else, such as a trackball.}
+      @entry[:pen]{The device is a stylus of a graphics tablet or similar
+        device.}
+      @entry[:keyboard]{The device is a keyboard.}
+      @entry[:touchscreen]{The device is a direct-input touch device, such as a
+        touchscreen or tablet.}
+      @entry[:touchpad]{The device is an indirect touch device, such as a
+        touchpad.}
+      @entry[:trackpoint]{The device is a trackpoint.}
+      @entry[:tablet-pad]{The device is a \"pad\", a collection of buttons,
+        rings and strips found in drawing tablets.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    An enumeration describing the type of an input device in general terms.
+  @end{short}
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkAxisUse
+;;; GdkAxisUse
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkAxisUse" axis-use
@@ -168,15 +171,8 @@
 (setf (liber:alias-for-symbol 'axis-use)
       "GEnum"
       (liber:symbol-documentation 'axis-use)
- "@version{2023-4-15}
-  @begin{short}
-    An enumeration describing the way in which a device axis (valuator) maps
-    onto the predefined valuator types that GTK understands.
-  @end{short}
-  Note that the X and Y axes are not really needed. Pointer devices report their
-  location via the x/y members of events regardless. Whether X and Y are present
-  as axes depends on the GDK backend.
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkAxisUse\" gdk-axis-use
   (:export t
    :type-initializer \"gdk_axis_use_get_type\")
@@ -193,26 +189,35 @@
   :rotation
   :slider
   :last)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:ignore]{The axis is ignored.}
-    @entry[:x]{The axis is used as the x axis.}
-    @entry[:y]{The axis is used as the y axis.}
-    @entry[:delta-x]{The axis is used as the scroll x delta.}
-    @entry[:delta-y]{The axis is used as the scroll y delta.}
-    @entry[:pressure]{The axis is used for pressure information.}
-    @entry[:xtilt]{The axis is used for x tilt information.}
-    @entry[:ytilt]{The axis is used for y tilt information.}
-    @entry[:wheel]{The axis is used for wheel information.}
-    @entry[:distance]{The axis is used for pen/tablet distance information.}
-    @entry[:rotation]{The axis is used for pen rotation information.}
-    @entry[:slider]{The axis is used for pen slider information.}
-    @entry[:last]{A constant equal to the numerically highest axis value.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:ignore]{The axis is ignored.}
+      @entry[:x]{The axis is used as the x axis.}
+      @entry[:y]{The axis is used as the y axis.}
+      @entry[:delta-x]{The axis is used as the scroll x delta.}
+      @entry[:delta-y]{The axis is used as the scroll y delta.}
+      @entry[:pressure]{The axis is used for pressure information.}
+      @entry[:xtilt]{The axis is used for x tilt information.}
+      @entry[:ytilt]{The axis is used for y tilt information.}
+      @entry[:wheel]{The axis is used for wheel information.}
+      @entry[:distance]{The axis is used for pen/tablet distance information.}
+      @entry[:rotation]{The axis is used for pen rotation information.}
+      @entry[:slider]{The axis is used for pen slider information.}
+      @entry[:last]{The constant equal to the numerically highest axis value.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    An enumeration describing the way in which a device axis (valuator) maps
+    onto the predefined valuator types that GTK understands.
+  @end{short}
+  Note that the X and Y axes are not really needed. Pointer devices report their
+  location via the x/y members of events regardless. Whether X and Y are present
+  as axes depends on the GDK backend.
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkAxisFlags
+;;; GdkAxisFlags
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GdkAxisFlags" axis-flags
@@ -234,11 +239,8 @@
 (setf (liber:alias-for-symbol 'axis-flags)
       "GFlags"
       (liber:symbol-documentation 'axis-flags)
- "@version{2023-4-15}
-  @begin{short}
-    Flags describing the current capabilities of a device/tool.
-  @end{short}
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-flags \"GdkAxisFlags\" axis-flags
   (:export t
    :type-initializer \"gdk_axis_flags_get_type\")
@@ -253,20 +255,25 @@
   (:distance #.(ash 1 9))
   (:rotation #.(ash 1 10))
   (:slider   #.(ash 1 11)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:x]{x axis is present.}
-    @entry[:y]{y axis is present.}
-    @entry[:delta-x]{Scroll X delta axis is present.}
-    @entry[:delta-y]{Scroll Y delta axis is present}
-    @entry[:pressure]{Pressure axis is present.}
-    @entry[:xtilt]{x tilt axis is present.}
-    @entry[:ytilt]{y tilt axis is present.}
-    @entry[:wheel]{Wheel axis is present.}
-    @entry[:distance]{Distance axis is present.}
-    @entry[:rotation]{z-axis rotation is present.}
-    @entry[:slider]{Slider axis is present.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:x]{x axis is present.}
+      @entry[:y]{y axis is present.}
+      @entry[:delta-x]{Scroll X delta axis is present.}
+      @entry[:delta-y]{Scroll Y delta axis is present}
+      @entry[:pressure]{Pressure axis is present.}
+      @entry[:xtilt]{x tilt axis is present.}
+      @entry[:ytilt]{y tilt axis is present.}
+      @entry[:wheel]{Wheel axis is present.}
+      @entry[:distance]{Distance axis is present.}
+      @entry[:rotation]{z-axis rotation is present.}
+      @entry[:slider]{Slider axis is present.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Flags describing the current capabilities of a device/tool.
+  @end{short}
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
@@ -329,7 +336,7 @@
 
 #+liber-documentation
 (setf (documentation 'device 'type)
- "@version{2024-1-7}
+ "@version{2024-7-12}
   @begin{short}
     The @class{gdk:device} object represents a single input device, such as a
     keyboard, a mouse, a touchpad, etc.
@@ -419,7 +426,7 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-direction)
       "Accessor"
       (documentation 'device-direction 'function)
- "@version{2024-1-7}
+ "@version{2024-7-12}
   @syntax{(gdk:device-direction object) => direction}
   @argument[object]{a @class{gdk:device} object}
   @argument[direction]{a @symbol{pango:direction} value}
@@ -430,7 +437,8 @@ lambda (device tool)    :run-last
   The @fun{gdk:device-direction} function returns the direction of the effective
   layout of the keyboard, if @arg{object} is a keyboard device. The direction of
   a layout is the direction of the majority of its symbols.
-  @see-class{gdk:device}")
+  @see-class{gdk:device}
+  @see-symbol{pango:direction}")
 
 ;;; --- gdk:device-display -----------------------------------------------------
 
@@ -521,10 +529,10 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-modifier-state)
       "Accessor"
       (documentation 'device-modifier-state 'function)
- "@version{2024-1-7}
+ "@version{2024-7-12}
   @syntax{(gdk:device-modifier-state object) => state}
   @argument[object]{a @class{gdk:device} object}
-  @argument[state]{a @symbol{gdk:modifier-state} value with the current modifier
+  @argument[state]{a @symbol{gdk:modifier-type} value with the current modifier
     state}
   @begin{short}
     Accessor of the @slot[gdk:device]{modifier-state} slot of the
@@ -540,7 +548,7 @@ lambda (device tool)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "n-axes" 'device) t)
  "The @code{n-axes} property of type @code{:uint} (Read) @br{}
-  Number of axes in the device. @br{}
+  The number of axes in the device. @br{}
   Default value: 0")
 
 #+liber-documentation
@@ -639,7 +647,7 @@ lambda (device tool)    :run-last
 (setf (documentation (liber:slot-documentation "product-id" 'device) t)
  "The @code{product-id} property of type @code{:string}
   (Read / Write / Construct Only) @br{}
-  Product ID of the device. @br{}
+  The product ID of the device. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -716,7 +724,7 @@ lambda (device tool)    :run-last
 (setf (documentation (liber:slot-documentation "source" 'device) t)
  "The @code{source} property of type @symbol{gdk:input-source}
   (Read / Write / Construct Only) @br{}
-  Source type of the device. @br{}
+  The source type of the device. @br{}
   Default value: @code{:mouse}")
 
 #+liber-documentation
@@ -765,7 +773,7 @@ lambda (device tool)    :run-last
 (setf (documentation (liber:slot-documentation "vendor-id" 'device) t)
  "The @code{vendor-id} property of type @code{:string}
   (Read / Write / Construct Only) @br{}
-  Vendor ID of this device. @br{}
+  The vendor ID of this device. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -787,13 +795,13 @@ lambda (device tool)    :run-last
   @see-class{gdk:device-product-id}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_get_device_tool ()
+;;; gdk_device_get_device_tool
 ;;; ----------------------------------------------------------------------------
 
 ;; Implemented as the gdk:device-tool function.
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_get_surface_at_position ()
+;;; gdk_device_get_surface_at_position
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_device_get_surface_at_position" %device-surface-at-position)
@@ -807,10 +815,11 @@ lambda (device tool)    :run-last
  "@version{2024-1-7}
   @argument[device]{a @class{gdk:device} object}
   @begin{return}
-    @arg{surface} -a @symbol{gdk:surface} object under the device position @br{}
-    @arg{xwin} - a double float with the x coordinate of the device location
+    @arg{surface} -- a @symbol{gdk:surface} object under the device position
+    @br{}
+    @arg{xwin} -- a double float with the x coordinate of the device location
       @br{}
-    @arg{ywin} - a double float with the y coordinate of the device location
+    @arg{ywin} -- a double float with the y coordinate of the device location
   @end{return}
   @begin{short}
     Obtains the surface underneath @arg{device}, returning the location of the
@@ -830,7 +839,7 @@ lambda (device tool)    :run-last
 (export 'device-surface-at-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_get_timestamp ()
+;;; gdk_device_get_timestamp
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-2

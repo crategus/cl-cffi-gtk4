@@ -71,6 +71,11 @@
       "GBoxed"
       (documentation 'toplevel-layout 'type)
  "@version{2024-1-9}
+  @begin{declaration}
+(glib:define-g-boxed-opaque toplevel-layout \"GdkToplevelLayout\"
+  :type-initializer \"gdk_toplevel_layout_get_type\"
+  :alloc (%toplevel-layout-new))
+  @end{declaration}
   @begin{short}
     Toplevel surfaces are sovereign windows that can be presented to the user
     in various states (maximized, on all workspaces, etc).
@@ -83,7 +88,7 @@
   @see-function{gdk:toplevel-present}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_new ()
+;;; gdk_toplevel_layout_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_layout_new" %toplevel-layout-new) :pointer)
@@ -108,34 +113,15 @@
 (export 'toplevel-layout-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_ref ()
-;;;
-;;; GdkToplevelLayout *
-;;; gdk_toplevel_layout_ref (GdkToplevelLayout *layout);
-;;;
-;;; Increases the reference count of layout .
-;;;
-;;; layout :
-;;;     a GdkToplevelLayout
-;;;
-;;; Returns :
-;;;     the same layout
+;;; gdk_toplevel_layout_ref ()                              not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_unref ()
-;;;
-;;; void
-;;; gdk_toplevel_layout_unref (GdkToplevelLayout *layout);
-;;;
-;;; Decreases the reference count of layout .
-;;;
-;;; layout :
-;;;     a GdkToplevelLayout
+;;; gdk_toplevel_layout_unref ()                            not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_copy ()
+;;; gdk_toplevel_layout_copy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
@@ -155,7 +141,7 @@
 (export 'toplevel-layout-copy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_equal ()
+;;; gdk_toplevel_layout_equal
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
@@ -175,8 +161,8 @@
 (export 'toplevel-layout-equal)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_set_maximized ()
-;;; gdk_toplevel_layout_get_maximized ()
+;;; gdk_toplevel_layout_set_maximized
+;;; gdk_toplevel_layout_get_maximized
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: The implementation is not quiet correct. The return value specifies
@@ -214,8 +200,8 @@
 (export 'toplevel-layout-maximized)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_get_fullscreen ()
-;;; gdk_toplevel_layout_set_fullscreen ()
+;;; gdk_toplevel_layout_get_fullscreen
+;;; gdk_toplevel_layout_set_fullscreen
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: The implementation is not quiet correct. The return value specifies
@@ -255,7 +241,7 @@
 (export 'toplevel-layout-fullscreen)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_get_fullscreen_monitor ()
+;;; gdk_toplevel_layout_get_fullscreen_monitor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
@@ -274,8 +260,8 @@
 (export 'toplevel-layout-fullscreen-monitor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_get_resizable ()
-;;; gdk_toplevel_layout_set_resizable ()
+;;; gdk_toplevel_layout_get_resizable
+;;; gdk_toplevel_layout_set_resizable
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf toplevel-layout-resizable) (resizable layout)

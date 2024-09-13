@@ -2,7 +2,7 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -44,7 +44,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_set_source_rgba ()
+;;; gdk_cairo_set_source_rgba
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
@@ -79,7 +79,7 @@
 (export 'cairo-set-source-rgba)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_set_source_pixbuf ()
+;;; gdk_cairo_set_source_pixbuf
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_set_source_pixbuf" %cairo-set-source-pixbuf) :void
@@ -90,9 +90,9 @@
 
 (defun cairo-set-source-pixbuf (cr pixbuf x y)
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{#2024-7-16}
   @argument[cr]{a @symbol{cairo:context-t} instance}
-  @argument[pixbuf]{a @class{gdk:pixbuf} object}
+  @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @argument[x]{a number coerced to a double float with the x coordinate to
     place upper left corner of @arg{pixbuf}}
   @argument[y]{a number coerced to a double float with the y coordinate to
@@ -105,7 +105,7 @@
   @arg{y}).
   @see-symbol{cairo:context-t}
   @see-symbol{cairo:extend-t}
-  @see-class{gdk:pixbuf}"
+  @see-class{gdk-pixbuf:pixbuf}"
   (%cairo-set-source-pixbuf cr
                             pixbuf
                             (coerce x 'double-float)
@@ -114,12 +114,12 @@
 (export 'cairo-set-source-pixbuf)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_rectangle ()
+;;; gdk_cairo_rectangle
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_rectangle" cairo-rectangle) :void
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{#2024-7-16}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[rectangle]{a @class{gdk:rectangle} instance}
   @begin{short}
@@ -133,12 +133,12 @@
 (export 'cairo-rectangle)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_region ()
+;;; gdk_cairo_region
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_region" cairo-region) :void
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{#2024-7-16}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[region]{a @symbol{cairo:region-t} instance}
   @begin{short}
@@ -152,17 +152,17 @@
 (export 'cairo-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_region_create_from_surface ()
+;;; gdk_cairo_region_create_from_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_region_create_from_surface"
                cairo-region-create-from-surface)
     (:pointer (:struct cairo:region-t))
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{#2024-7-16}
   @argument[surface]{a @symbol{cairo:surface-t} instance}
   @begin{return}
-    A @symbol{cairo:region-t} instance, must be freed with the
+    The @symbol{cairo:region-t} instance, must be freed with the
     @fun{cairo:region-destroy} function.
   @end{return}
   @begin{short}
@@ -170,17 +170,17 @@
     more than 50% opaque.
   @end{short}
   This function takes into account device offsets that might be set with
-  the @fun{cairo:surface-set-device-offset} function.
+  the @setf{cairo:surface-device-offset} function.
   @see-symbol{cairo:surface-t}
   @see-symbol{cairo:region-t}
   @see-function{cairo:region-destroy}
-  @see-function{cairo:surface-set-device-offset}"
+  @see-function{cairo:surface-device-offset}"
   (surface (:pointer (:struct cairo:surface-t))))
 
 (export 'cairo-region-create-from-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_draw_from_gl ()                              Since 4.6 deprecated
+;;; gdk_cairo_draw_from_gl                                  Deprecated 4.6
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_draw_from_gl" %cairo-draw-from-gl) :void
@@ -196,7 +196,7 @@
 
 (defun cairo-draw-from-gl (cr surface source type scale x y width height)
  #+liber-documentation
- "@version{2023-12-17}
+ "@version{#2024-7-16}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[surface]{a @class{gdk:surface} object we are rendering for,
     not necessarily into}
@@ -231,7 +231,7 @@
 
   Calling this may change the current GL context.
   @begin[Warning]{dictionary}
-    This function is depracted since 4.6. The function is overly complex and
+    This function is deprecated since 4.6. The function is overly complex and
     produces broken output in various combinations of arguments. If you want to
     draw with GL textures in GTK, use the @fun{gdk:gl-texture-new} function. If
     you want to use that texture in Cairo, use the @fun{gdk:texture-download}

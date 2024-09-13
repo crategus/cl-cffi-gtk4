@@ -74,11 +74,11 @@
 (cffi:defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{2023-4-7}
+ "@version{2024-7-12}
   @argument[context]{a @class{gdk:cairo-context} object that is currently
     drawing}
-  @return{A @symbol{cairo:context-t} instance with the Cairo context to be used
-    to draw the contents of the @class{gdk:surface} object. @code{NULL} is
+  @return{The @symbol{cairo:context-t} instance with the Cairo context to be
+    used to draw the contents of the @class{gdk:surface} object. @code{NULL} is
     returned when @arg{context} is not drawing.}
   @begin{short}
     Retrieves a Cairo context to be used to draw on the @class{gdk:surface}

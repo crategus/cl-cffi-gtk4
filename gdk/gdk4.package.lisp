@@ -2,7 +2,7 @@
 ;;; gdk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -220,8 +220,6 @@
       @about-function{dmabuf-formats-equal}
       @about-function{dmabuf-formats-format}
       @about-function{dmabuf-formats-n-formats}
-      @about-function{dmabuf-formats-ref}
-      @about-function{dmabuf-formats-unref}
     @end{subsection}
   @end{section}
   @begin[Displays, Devices, Monitors, and Seats]{section}
@@ -395,6 +393,24 @@
       @about-function{texture-downloader-format}
       @about-function{texture-downloader-texture}
     @end{subsection}
+    @begin[GdkDmabufTexture]{subsection}
+      @about-class{dmabuf-texture}
+      @about-class{dmabuf-texture-builder}
+      @about-generic{dmabuf-texture-builder-display}
+      @about-generic{dmabuf-texture-builder-fourcc}
+      @about-generic{dmabuf-texture-builder-height}
+      @about-generic{dmabuf-texture-builder-modifier}
+      @about-generic{dmabuf-texture-builder-n-planes}
+      @about-generic{dmabuf-texture-builder-premultiplied}
+      @about-generic{dmabuf-texture-builder-update-region}
+      @about-generic{dmabuf-texture-builder-update-texture}
+      @about-generic{dmabuf-texture-builder-width}
+      @about-function{dmabuf-texture-builder-new}
+      @about-function{dmabuf-texture-builder-build}
+      @about-function{dmabuf-texture-builder-fd}
+      @about-function{dmabuf-texture-builder-offset}
+      @about-function{dmabuf-texture-builder-stride}
+    @end{subsection}
   @end{section}
   @begin[Surfaces, Toplevels, Popups]{section}
     @begin[Surfaces]{subsection}
@@ -417,7 +433,6 @@
       @about-function{surface-scale}
       @about-function{surface-set-opaque-region}
       @about-function{surface-create-gl-context}
-      @about-function{surface-create-vulkan-context}
       @about-function{surface-create-cairo-context}
       @about-function{surface-create-similar-surface}
       @about-function{surface-queue-render}
@@ -822,17 +837,19 @@
     @end{subsection}
   @end{section}
   @begin[Pixbuf, Pango, and Backends interaction]{section}
-    @begin[GdkPixbuf Interaction]{subsection}
-      Functions for obtaining pixbufs. Pixbufs are client-side images. For
-      details on how to create and manipulate pixbufs, see the GdkPixbuf API
-      documentation. The functions described here allow to obtain pixbufs from
-      GdkSurfaces and Cairo surfaces.
+    @begin[Introduction to GdkPixbuf Interaction]{subsection}
+      Pixbufs are client-side images. For details on how to create and
+      manipulate pixbufs, see the GdkPixbuf API documentation. The functions
+      described here allow to obtain pixbufs from GdkSurfaces and Cairo
+      surfaces.
+    @end{subsection}
+    @begin[Functions for GDKPixbuf Interaction]{subsection}
       @about-function{pixbuf-from-surface}
       @about-function{pixbuf-from-texture}
     @end{subsection}
-    @begin[Pango Interaction]{subsection}
+    @begin[Introduction to Pango Interaction]{subsection}
       Pango is the text layout system used by GDK and GTK. The functions and
-      types in this section are used to obtain clip regions for PangoLayouts,
+      types in this section are used to obtain clip regions for Pango Layouts,
       and to get @class{pango:context} objects that can be used with GDK.
 
       Creating a @class{pango:layout} object is the first step in rendering
@@ -850,15 +867,19 @@
       Rendering a Pango layout is done most simply with the
       @fun{pango:cairo-show-layout} function. You can also draw pieces of the
       layout with the @fun{pango:cairo-show-layout-line} function.
+    @end{subsection}
+    @begin[Functions for Pango Interaction]{subsection}
       @about-function{pango-layout-clip-region}
       @about-function{pango-layout-line-clip-region}
     @end{subsection}
-    @begin[Cairo Interaction]{subsection}
+    @begin[Introduction to Cairo Interaction]{subsection}
       Functions to support using Cairo. GDK does not wrap the Cairo API,
       instead it allows to create Cairo contexts which can be used to draw on
-      GdkSurfaces. Additional functions allow use GdkRectangles with Cairo and
-      to use GdkRGBAs, GdkPixbufs and GdkSurfaces as sources for drawing
+      GdkSurfaces. Additional functions allow to use GdkRectangles with Cairo
+      and to use GdkRGBAs, GdkPixbufs and GdkSurfaces as sources for drawing
       operations.
+    @end{subsection}
+    @begin[Functions for Cairo Interaction]{subsection}
       @about-function{cairo-set-source-rgba}
       @about-function{cairo-set-source-pixbuf}
       @about-function{cairo-rectangle}

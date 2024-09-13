@@ -53,6 +53,22 @@
 
 ;;;     display-opened
 
+(test gdk-display-manager-display-opened-signal
+  (let* ((name "display-opened")
+         (gtype (g:gtype "GdkDisplayManager"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GdkDisplay")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_display_manager_get
@@ -85,4 +101,4 @@
 
 ;;;     gdk_set_allowed_backends
 
-;;; 2024-7-4
+;;; 2024-7-10

@@ -2,41 +2,43 @@ List of files for the GDK 4 Library
 
     +   - work is needed
     *   - needs update
+    .   - needs proofreading
     %   - not fully implemented
     &   - objects and structures are implemented, some functions are missing
 
  General
 
-  gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...   GDK 4.10 +
-  gdk4.rectangle.lisp              GdkRectangle                       GDK 4.12 .
-  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.12 .
-  gdk4.keyval.lisp                 Key Values                         GDK 4.10 +
-  gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.14 +
+  gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...   GDK 4.14 .
+  gdk4.rectangle.lisp              GdkRectangle                       GDK 4.14 .
+  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.14 .
+  gdk4.keyval.lisp                 Key Values                         GDK 4.14 .
+  gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.14 .
 
  Displays, Devices, Monitors, Seats
 
-  gdk4.display-manager.lisp        GdkDisplayManager                  GDK 4.10 +
-  gdk4.display.lisp                GdkDisplay                         GDK 4.12 .
-  gdk4.device-tool.lisp            GdkDeviceTool                      GDK 4.12 .
-  gdk4.device.lisp                 GdkDevice                          GDK 4.12 .
-  gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.10 +
-  gdk4.monitor.lisp                GdkMonitor                         GDK 4.10 +
-  gdk4.seat.lisp                   GdkSeat                            GDK 4.10 +
+  gdk4.display-manager.lisp        GdkDisplayManager                  GDK 4.14 .
+  gdk4.display.lisp                GdkDisplay                         GDK 4.14 .
+  gdk4.device-tool.lisp            GdkDeviceTool                      GDK 4.14 .
+  gdk4.device.lisp                 GdkDevice                          GDK 4.14 .
+  gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.14 .
+  gdk4.monitor.lisp                GdkMonitor                         GDK 4.14 .
+  gdk4.seat.lisp                   GdkSeat                            GDK 4.14 .
 
  Paintables, Textures
 
-  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.12 .
+  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.12 +
   gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ...  GDK 4.10&+
   gdk4.texture-downloader.lisp     GdkTextureDownloader               GDK 4.12 +
+  gdk4.dmabuf-texture.lisp         GdkDmabufTexture, ...              GDK 4.14 +
 
  Surfaces, Toplevels, Popups
 
-  gdk4.surface.lisp                GdkSurface                         GDK 4.12 .
-  gdk4.toplevel.lisp               GdkToplevel                        GDK 4.12 .
-  gdk4.toplevel-layout.lisp        GdkToplevelLayout                  GDK 4.12 .
-  gdk4.toplevel-size.lisp          GdkToplevelSize                    GDK 4.12 .
-  gdk4.popup.lisp                  GdkPopup                           GDK 4.12 .
-  gdk4.popup-layout.lisp           GdkPopupLayout                     GDK 4.12 .
+  gdk4.surface.lisp                GdkSurface                         GDK 4.14 .
+  gdk4.toplevel-size.lisp          GdkToplevelSize                    GDK 4.14 .
+  gdk4.toplevel-layout.lisp        GdkToplevelLayout                  GDK 4.12 +
+  gdk4.toplevel.lisp               GdkToplevel                        GDK 4.12 +
+  gdk4.popup.lisp                  GdkPopup                           GDK 4.12 +
+  gdk4.popup-layout.lisp           GdkPopupLayout                     GDK 4.12 +
 
  Draw Contexts
 
@@ -47,14 +49,14 @@ List of files for the GDK 4 Library
 
  Clipbord, Drag and Drop
 
-  gdk4.content-formats.lisp        GdkContentFormats                  GDK 4.12&.
+  gdk4.content-formats.lisp        GdkContentFormats                  GDK 4.12&+
   gdk4.content-provider.lisp       GdkContentProvider                 GDK 4.10&+
   gdk4.content-serializer.lisp     GdkContentSerializer               GDK 4.0  +
   gdk4.content-deserializer.lisp   GdkContentDeserializer             GDK 4.0  +
   gdk4.clipboard.lisp              GdkClipboard                       GDK 4.10&+
-  gdk4.drag.lisp                   GdkDrag                            GDK 4.12 .
+  gdk4.drag.lisp                   GdkDrag                            GDK 4.12 +
   gdk4.drop.lisp                   GdkDrop                            GDK 4.10 +
-  gdk4.drag-surface.lisp           GdkDragSurface                     GDK 4.12 .
+  gdk4.drag-surface.lisp           GdkDragSurface                     GDK 4.12 +
 
  Application launching
 
@@ -63,16 +65,16 @@ List of files for the GDK 4 Library
  Miscellaneous
 
   gdk4.event.lisp                  GdkEvent                           GDK 4.0  +
-  gdk4.cursor.lisp                 GdkCursor                          GDK 4.12 .
-  gdk4.frame-clock.lisp            GdkFrameClock                      GDK 4.12 .
-  gdk4.frame-timings.lisp          GdkFrameTimings                    GDK 4.12 .
+  gdk4.cursor.lisp                 GdkCursor                          GDK 4.12 +
+  gdk4.frame-clock.lisp            GdkFrameClock                      GDK 4.14 .
+  gdk4.frame-timings.lisp          GdkFrameTimings                    GDK 4.14 .
 
  Pixbuf, Pango, Cairo and Backends interaction
 
-  gdk4.pixbuf-interaction.lisp     GdkPixbuf interaction              GDK 4.12 .
-  gdk4.pango-interaction.lisp      Pango interaction                  GDK 4.0  +
-  gdk4.cairo-interaction.lisp      Cairo interaction                  GDK 4.10 +
-  gdk4.x11-interaction.lisp                                           GDK 4.0  +
-  gdk4.wayland-interaction.lisp                                       GDK 4.0  +
+  gdk4.pixbuf-interaction.lisp     GdkPixbuf interaction              GDK 4.14 .
+  gdk4.pango-interaction.lisp      Pango interaction                  GDK 4.14 .
+  gdk4.cairo-interaction.lisp      Cairo interaction                  GDK 4.14 .
+  gdk4.x11-interaction.lisp        X11 interaction                    GDK 4.0  +
+  gdk4.wayland-interaction.lisp    Wayland interaction                GDK 4.0  +
 
-2024-6-30
+2024-7-26

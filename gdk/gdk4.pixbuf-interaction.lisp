@@ -2,7 +2,7 @@
 ;;; gdk4.pixbuf-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,7 +40,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pixbuf_get_from_surface ()
+;;; gdk_pixbuf_get_from_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pixbuf_get_from_surface" %pixbuf-from-surface)
@@ -53,7 +53,7 @@
 
 (defun pixbuf-from-surface (surface xsrc ysrc width height)
  #+liber-documentation
- "@version{2023-12-17}
+ "@version{2024-7-16}
   @argument[surface]{a @symbol{cairo:surface-t} instance to copy from}
   @argument[xsrc]{an integer with the source x coordinate within @arg{surface}}
   @argument[ysrc]{an integer with the source y coordinate within @arg{surface}}
@@ -71,7 +71,7 @@
   will contain an alpha channel if the surface contains one.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the @class{gdk:texture} class
-    and subclasses instead Cairo surfaces and pixbufs.
+    and subclasses instead of Cairo surfaces and pixbufs.
   @end{dictionary}
   @see-class{gdk-pixbuf:pixbuf}
   @see-class{gdk:texture}
@@ -84,7 +84,7 @@
 (export 'pixbuf-from-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pixbuf_get_from_texture ()
+;;; gdk_pixbuf_get_from_texture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pixbuf_get_from_texture" %pixbuf-from-texture)
@@ -93,7 +93,7 @@
 
 (defun pixbuf-from-texture (texture)
  #+liber-documentation
- "@version{2023-12-17}
+ "@version{2024-7-16}
   @argument[texture]{a @class{gdk:texture} object}
   @return{The new @class{gdk-pixbuf:pixbuf} object, or @code{nil} on error.}
   @begin{short}
@@ -103,7 +103,7 @@
   almost certainly convert the pixbuf back into a texture to draw it on screen.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the @class{gdk:texture} class
-    and subclasses instead Cairo surfaces and pixbufs.
+    and subclasses instead of Cairo surfaces and pixbufs.
   @end{dictionary}
   @see-class{gdk:texture}
   @see-class{gdk-pixbuf:pixbuf}"

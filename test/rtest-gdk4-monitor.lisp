@@ -117,8 +117,10 @@
     #+windows
     (is-false (gdk:monitor-connector monitor))
     #+crategus
-    (is (string= "Iiyama North America 27\""
-                 (gdk:monitor-description monitor)))
+    (is (or (string= "Iiyama North America 27\""
+                     (gdk:monitor-description monitor))
+            (string= "Eingebaute Anzeige"
+                     (gdk:monitor-description monitor))))
     #+windows
     (is-false (gdk:monitor-description monitor))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
@@ -196,4 +198,4 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
     (is-true (gdk:monitor-is-valid monitor))))
 
-;;; 2024-7-6
+;;; 2024-7-7

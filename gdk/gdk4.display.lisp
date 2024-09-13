@@ -253,7 +253,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-dmabuf-formats)
       "Accessor"
       (documentation 'display-dmabuf-formats 'function)
- "@version{2024-5-26}
+ "@version{2024-7-11}
   @syntax{(gdk:display-dmabuf-formats object) => formats}
   @argument[object]{a @class{gdk:display} object}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
@@ -269,7 +269,7 @@ lambda (display setting)    :run-last
 
   Since 4.14
   @see-class{gdk:display}
-  @see-symbol{gdk:dmabuf-formats}
+  @see-class{gdk:dmabuf-formats}
   @see-class{gdk:dmabuf-texture-builder}")
 
 ;;; --- gdk:display-input-shapes -----------------------------------------------
@@ -363,10 +363,10 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_open" display-open) (g:object display)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2024-7-11}
   @argument[name]{a string with the name of the display to open}
   @begin{return}
-    A @class{gdk:display} object, or @code{nil} if the display could not be
+    The @class{gdk:display} object, or @code{nil} if the display could not be
     opened.
   @end{return}
   @begin{short}
@@ -526,9 +526,9 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_is_closed" display-is-closed) :boolean
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2024-7-11}
   @argument[display]{a @class{gdk:display} object}
-  @return{@em{true} if @arg{display} is closed.}
+  @return{@em{True} if @arg{display} is closed.}
   @short{Finds out if the display has been closed.}
   @see-class{gdk:display}"
   (display (g:object display)))
@@ -612,10 +612,10 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_app_launch_context"
                display-app-launch-context) (g:object app-launch-context)
  #+liber-documentation
- "@version{2023-9-2}
+ "@version{2024-7-11}
   @argument[display]{a @class{gdk:display} object}
   @begin{return}
-    A new @class{gdk:app-launch-context} object for @arg{display}.
+    The new @class{gdk:app-launch-context} object for @arg{display}.
   @end{return}
   @begin{short}
     Returns a @class{gdk:app-launch-context} object suitable for launching

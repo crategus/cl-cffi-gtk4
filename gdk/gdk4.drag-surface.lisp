@@ -114,7 +114,9 @@
   nil)
 
 #+liber-documentation
-(setf (documentation 'drag-surface 'type)
+(setf (liber:alias-for-class 'drag-surface)
+      "Interface"
+      (documentation 'drag-surface 'type)
  "@version{2023-11-4}
   @begin{short}
     The @class{gdk:drag-surface} interface is an interface for surfaces used

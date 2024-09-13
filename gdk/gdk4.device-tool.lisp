@@ -2,7 +2,7 @@
 ;;; gdk4.device-tool.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,7 +55,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkDeviceToolType
+;;; GdkDeviceToolType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkDeviceToolType" device-tool-type
@@ -74,12 +74,8 @@
 (setf (liber:alias-for-symbol 'device-tool-type)
       "GEnum"
       (liber:symbol-documentation 'device-tool-type)
- "@version{2024-1-7}
-  @begin{short}
-    Indicates the specific type of tool being used being a tablet.
-  @end{short}
-  Such as an airbrush, pencil, etc.
-  @begin{pre}
+ "@version{2024-7-11}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkDeviceToolType\" device-tool-type
   (:export t
    :type-initializer \"gdk_device_tool_type_get_type\")
@@ -91,17 +87,23 @@
   :airbrush
   :mouse
   :lens)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:unkown]{Tool is of an unknown type.}
-    @entry[:pen]{Tool is a standard tablet stylus.}
-    @entry[:eraser]{Tool is standard tablet eraser.}
-    @entry[:brush]{Tool is a brush stylus.}
-    @entry[:pencil]{Tool is a pencil stylus.}
-    @entry[:airbrush]{Tool is an airbrush stylus.}
-    @entry[:mouse]{Tool is a mouse.}
-    @entry[:lens]{Tool is a lens cursor.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:unkown]{Tool is of an unknown type.}
+      @entry[:pen]{Tool is a standard tablet stylus.}
+      @entry[:eraser]{Tool is standard tablet eraser.}
+      @entry[:brush]{Tool is a brush stylus.}
+      @entry[:pencil]{Tool is a pencil stylus.}
+      @entry[:airbrush]{Tool is an airbrush stylus.}
+      @entry[:mouse]{Tool is a mouse.}
+      @entry[:lens]{Tool is a lens cursor.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Indicates the specific type of tool being used being a tablet.
+  @end{short}
+  Such as an airbrush, pencil, etc.
   @see-class{gdk:device}
   @see-class{gdk:device-tool}")
 
@@ -224,8 +226,8 @@
     @class{gdk:device-tool} class.
   @end{short}
   The @fun{gdk:device-tool-serial} function gets the serial of the device tool,
-  the value can be used to identify a physical tool, e.g. a tablet pen, across
-  program executions.
+  the value can be used to identify a physical tool, for example, a tablet pen,
+  across program executions.
   @see-class{gdk:device-tool}")
 
 ;;; --- gdk:device-tool-tool-type ----------------------------------------------

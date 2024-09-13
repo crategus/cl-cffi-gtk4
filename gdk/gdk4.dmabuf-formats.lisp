@@ -83,37 +83,121 @@
   Since 4.14
   @see-class{gdk:dmabuf-texture-builder}")
 
-#|
-gdk_dmabuf_formats_contains
-Returns whether a given format is contained in formats.
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_contains
+;;; ----------------------------------------------------------------------------
 
-since: 4.14
+(cffi:defcfun ("gdk_dmabuf_formats_contains" dmabuf-formats-contains) :boolean
+ #+liber-documentation
+ "@version{2024-7-10}
+  @argument[formats]{a @class{gdk:dmabuf-formats} instance}
+  @argument[fourcc]{an integer with the format code}
+  @argument[modifier]{an integer with the format modifier}
+  @return{@em{True} if the format specified by the arguments is part of
+    @arg{formats}.}
+  @begin{short}
+    Returns whether a given format is contained in @arg{formats}.
+  @end{short}
 
-gdk_dmabuf_formats_equal
-Returns whether formats1 and formats2 contain the same dmabuf formats, in the
-same order.
+  Since 4.14
+  @see-class{gdk:dmabuf-formats}"
+  (formats (g:boxed dmabuf-formats))
+  (fourcc :uint32)
+  (modifier :uint64))
 
-since: 4.14
+(export 'dmabuf-formats-contains)
 
-gdk_dmabuf_formats_get_format
-Gets the fourcc code and modifier for a format that is contained in formats.
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_equal
+;;; ----------------------------------------------------------------------------
 
-since: 4.14
+(cffi:defcfun ("gdk_dmabuf_formats_equal" dmabuf-formats-equal) :boolean
+ #+liber-documentation
+ "@version{2024-7-10}
+  @argument[formats1]{a @class{gdk:dmabuf-formats} instance}
+  @argument[formats2]{another @class{gdk:dmabuf-formats} instance}
+  @return{@em{True} if @arg{formats1} and @arg{formats2} are equal.}
+  @begin{short}
+    Returns whether @arg{formats1} and @arg{formats2} contain the same dmabuf
+    formats, in the same order.
+  @end{short}
 
-gdk_dmabuf_formats_get_n_formats
-Returns the number of formats that the formats object contains.
+  Since 4.14
+  @see-class{gdk:dmabuf-formats}"
+  (formats1 (g:boxed dmabuf-formats))
+  (formats2 (g:boxed dmabuf-formats)))
 
-since: 4.14
+(export 'dmabuf-formats-equal)
 
-gdk_dmabuf_formats_ref
-Increases the reference count of formats.
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_get_format
+;;; ----------------------------------------------------------------------------
 
-since: 4.14
+(cffi:defcfun ("gdk_dmabuf_formats_get_format" %dmabuf-formats-format) :void
+  (formats (g:boxed dmabuf-formats))
+  (idx :size)
+  (fourcc (:pointer :uint32))
+  (modifier (:pointer :uint64)))
 
-gdk_dmabuf_formats_unref
-Decreases the reference count of formats.
+(defun dmabuf-formats-format (formats idx)
+ #+liber-documentation
+ "@version{2024-7-10}
+  @argument[formats]{a @class{gdk:dmabuf-formats} instance}
+  @argument[idx]{an integer with the index of the format to return}
+  @begin{return}
+    @arg{fourcc} -- an integer with the format code @br{}
+    @arg{modifier} -- an integer with the format modifier
+  @end{return}
+  @begin{short}
+    Gets the fourcc code and modifier for a format that is contained in
+    @arg{formats}.
+  @end{short}
 
-since: 4.14
-|#
+  Since 4.14
+  @see-class{gdk:dmabuf-formats}"
+  (cffi:with-foreign-objects ((fourcc :uint32) (modifier :uint64))
+    (%dmabuf-formats-format formats idx fourcc modifier)
+    (values (cffi:mem-ref fourcc :uint32)
+            (cffi:mem-ref modifier :uint64))))
+
+(export 'dmabuf-formats-format)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_get_n_formats
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_dmabuf_formats_get_n_formats" dmabuf-formats-n-formats)
+    :size
+ #+liber-documentation
+ "@version{2024-7-10}
+  @argument[formats]{a @class{gdk:dmabuf-formats} instance}
+  @return{The integer with the number for formats.}
+  @begin{short}
+    Returns the number of formats that the formats object contains.
+  @end{short}
+  Note that DMA buffers are a Linux concept, so on other platforms,
+  the @fun{gdk:dmabuf-formats-n-formats} function will always return zero.
+
+  Since 4.14
+  @see-class{gdk:dmabuf-formats}"
+  (formats (g:boxed dmabuf-formats)))
+
+(export 'dmabuf-formats-n-formats)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_ref                                  not needed
+;;;
+;;; Increases the reference count of formats.
+;;;
+;;; Since: 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_dmabuf_formats_unref                                not needed
+;;;
+;;; Decreases the reference count of formats.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gdk4.dmabuf-formats.lisp -----------------------------------

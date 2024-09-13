@@ -20,10 +20,43 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_dmabuf-formats-contains
-;;;     gdk_dmabuf-formats-equal
-;;;     gdk_dmabuf-formats-get_format
-;;;     gdk_dmabuf-formats-get_n_formats
-;;;     gdk_dmabuf-formats-ref
-;;;     gdk_dmabuf-formats-unref
 
-;;; 2024-5-26
+(test gdk-dmabuf-formats-contains
+  (let* ((display (gdk:display-default))
+         (formats (gdk:display-dmabuf-formats display)))
+    #-windows
+    (is-true (gdk:dmabuf-formats-contains formats 538982482 72057594037927937))
+    #+windows
+    (is-false (gdk:dmabuf-formats-contains formats 538982482 72057594037927937))))
+
+;;;     gdk_dmabuf-formats-equal
+
+(test gdk-dmabuf-formats-format
+  (let ((display (gdk:display-default)))
+    (is (gdk:dmabuf-formats-equal (gdk:display-dmabuf-formats display)
+                                  (gdk:display-dmabuf-formats display)))))
+
+;;;     gdk_dmabuf-formats-get_format
+
+#-windows
+(test gdk-dambuf-formats-format
+  (let* ((display (gdk:display-default))
+         (formats (gdk:display-dmabuf-formats display)))
+    (is (equal '(538982482 72057594037927937)
+               (multiple-value-list (gdk:dmabuf-formats-format formats 0))))
+    (is (equal '(538982482 72057594037927938)
+               (multiple-value-list (gdk:dmabuf-formats-format formats 1))))
+    (is (equal '(538982482 72057594037927937)
+               (multiple-value-list (gdk:dmabuf-formats-format formats 2))))))
+
+;;;     gdk_dmabuf-formats-get_n_formats
+
+(test gdk-dmabuf-formats-n-formats
+  (let* ((display (gdk:display-default))
+         (formats (gdk:display-dmabuf-formats display)))
+    #-windows
+    (is (= 268 (gdk:dmabuf-formats-n-formats formats)))
+    #+windows
+    (is (= 0 (gdk:dmabuf-formats-n-formats formats)))))
+
+;;; 2024-7-29

@@ -392,19 +392,19 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2023-4-12}
+ "@version{2024-7-12}
   @argument[path]{a pathname or namestring with the file to load, the value is
     a file system path, using the OS encoding}
-  @return{A newly created @class{gdk:texture} object.}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture by loading an image from a file.
   @end{short}
   The file format is detected automatically. The supported formats are PNG and
   JPEG, though more formats might be available.
 
-  This function is threadsafe, so that you can e.g. use @code{GTask} and the
-  @code{g_task_run_in_thread()} function to avoid blocking the main thread
-  while loading a big image.
+  This function is threadsafe, so that you can, for example, use the
+  @class{g:task} object and the @fun{g:task-run-in-thread} function to avoid
+  blocking the main thread while loading a big image.
 
   Since 4.6
   @see-class{gdk:texture}"
@@ -427,18 +427,18 @@
 #+gtk-4-6
 (defun texture-new-from-bytes (bytes)
  #+liber-documentation
- "@version{#2023-4-12}
+ "@version{#2024-7-12}
   @argument[bytes]{a @class{g:bytes} instance containing data to load}
-  @return{A newly created @class{gdk:texture} object.}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture by loading an image from a memory.
   @end{short}
   The file format is detected automatically. The supported formats are PNG,
   JPEG, and TIFF, though more formats might be available.
 
-  This function is threadsafe, so that you can e.g. use the @class{g:task}
-  object and the @fun{g:task-run-in-thread} function to avoid blocking the main
-  thread while loading a big image.
+  This function is threadsafe, so that you can, for example, use the
+  @class{g:task} object and the @fun{g:task-run-in-thread} function to avoid
+  blocking the main thread while loading a big image.
 
   Since 4.6
   @see-class{gdk:texture}

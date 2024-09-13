@@ -24,9 +24,6 @@
 (test gdk-toplevel-layout-new
   (is (typep (gdk:toplevel-layout-new) 'gdk:toplevel-layout)))
 
-;;;     gdk_toplevel_layout_ref
-;;;     gdk_toplevel_layout_unref
-
 ;;;     gdk_toplevel_layout_copy
 
 (test gdk-toplevel-layout-copy
@@ -71,4 +68,4 @@
     (is-false (setf (gdk:toplevel-layout-resizable layout) nil))
     (is-false (gdk:toplevel-layout-resizable layout))))
 
-;;; 2024-1-9
+;;; 2024-7-12

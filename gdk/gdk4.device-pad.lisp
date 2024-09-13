@@ -2,7 +2,7 @@
 ;;; gdk4.device-pad.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -52,7 +52,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkDevicePadFeature
+;;; GdkDevicePadFeature
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkDevicePadFeature" device-pad-feature
@@ -66,23 +66,25 @@
 (setf (liber:alias-for-symbol 'device-pad-feature)
       "GEnum"
       (liber:symbol-documentation 'device-pad-feature)
- "@version{2023-4-15}
-  @begin{short}
-    A pad feature.
-  @end{short}
-  @begin{pre}
+ "@version{2024-7-12}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkDevicePadFeature\" device-pad-feature
   (:export t
    :type-initializer \"gdk_device_pad_feature_get_type\")
   :button
   :ring
   :strip)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:button]{A button.}
-    @entry[:ring]{A ring-shaped interactive area.}
-    @entry[:strip]{A straight interactive area.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:button]{A button.}
+      @entry[:ring]{A ring-shaped interactive area.}
+      @entry[:strip]{A straight interactive area.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    A pad feature.
+  @end{short}
   @see-class{gdk:device-pad}")
 
 ;;; ----------------------------------------------------------------------------
@@ -122,7 +124,7 @@
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_pad_get_n_groups ()
+;;; gdk_device_pad_get_n_groups
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_device_pad_get_n_groups" device-pad-n-groups) :int
@@ -141,7 +143,7 @@
 (export 'device-pad-n-groups)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_pad_get_group_n_modes ()
+;;; gdk_device_pad_get_group_n_modes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_device_pad_get_group_n_modes" device-pad-group-n-modes) :int
@@ -161,7 +163,7 @@
 (export 'device-pad-group-n-modes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_pad_get_n_features ()
+;;; gdk_device_pad_get_n_features
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_device_pad_get_n_features" device-pad-n-features) :int
@@ -183,7 +185,7 @@
 (export 'device-pad-n-features)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_device_pad_get_feature_group ()
+;;; gdk_device_pad_get_feature_group
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_device_pad_get_feature_group" device-pad-feature-group) :int

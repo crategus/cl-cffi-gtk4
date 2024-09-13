@@ -143,7 +143,8 @@
 
 (defconstant +current-time+ 0
  #+liber-documentation
- "@version{2024-4-1}
+ "@version{2024-7-26}
+  @variable-value{0}
   @begin{short}
     Represents the current time, and can be used anywhere a time is expected.
   @end{short}")
@@ -289,7 +290,7 @@
 (setf (liber:alias-for-symbol 'event-type)
       "GEnum"
       (liber:symbol-documentation 'event-type)
- "@version{2024-5-26}
+ "@version{2024-7-12}
   @begin{declaration}
 (gobject:define-g-enum \"GdkEventType\" event-type
   (:export t
@@ -328,21 +329,21 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:nothing]{A special code to indicate a null event.}
+      @entry[:nothing]{The special code to indicate a null event.}
       @entry[:delete]{The window manager has requested that the toplevel window
         be hidden or destroyed, usually when the user clicks on a special icon
         in the title bar.}
       @entry[:motion-notify]{The pointer, usually a mouse, has moved.}
-      @entry[:button-press]{A mouse button has been pressed.}
-      @entry[:button-release]{A mouse button has been released.}
-      @entry[:key-press]{A key has been pressed.}
-      @entry[:key-release]{A key has been released.}
+      @entry[:button-press]{The mouse button has been pressed.}
+      @entry[:button-release]{The mouse button has been released.}
+      @entry[:key-press]{The key has been pressed.}
+      @entry[:key-release]{The key has been released.}
       @entry[:enter-notifiy]{The pointer has entered the window.}
       @entry[:leave-notify]{The pointer has left the window.}
       @entry[:focus-change]{The keyboard focus has entered or left the window.}
-      @entry[:proximity-in]{An input device has moved into contact with a
-        sensing surface, e.g. a touchscreen or graphics tablet.}
-      @entry[:proximity-out]{An input device has moved out of contact with a
+      @entry[:proximity-in]{The input device has moved into contact with a
+        sensing surface, for example, a touchscreen or graphics tablet.}
+      @entry[:proximity-out]{The input device has moved out of contact with a
         sensing surface.}
       @entry[:drag-enter]{The mouse has entered the window while a drag is in
         progress.}
@@ -350,23 +351,23 @@
         progress.}
       @entry[:drag-motion]{The mouse has moved in the window while a drag is in
         progress.}
-      @entry[:drop-start]{A drop operation onto the window has started.}
+      @entry[:drop-start]{The drop operation onto the window has started.}
       @entry[:scroll]{The scroll wheel was turned.}
-      @entry[:grab-broken]{A pointer or keyboard grab was broken.}
-      @entry[:touch-begin]{A new touch event sequence has just started.}
-      @entry[:touch-update]{A touch event sequence has been updated.}
-      @entry[:touch-end]{A touch event sequence has finished.}
-      @entry[:touch-cancel]{A touch event sequence has been canceled.}
-      @entry[:touchpad-swipe]{A touchpad swipe gesture event, the current state
-        is determined by its phase field.}
-      @entry[:touchpad-pinch]{A touchpad pinch gesture event, the current state
-        is determined by its phase field.}
-      @entry[:pad-button-press]{A tablet pad button press event.}
-      @entry[:pad-button-release]{A tablet pad button release event.}
-      @entry[:pad-ring]{A tablet pad axis event from a \"ring\".}
-      @entry[:pad-strip]{A tablet pad axis event from a \"strip\".}
-      @entry[:pad-group-mode]{A tablet pad group mode change.}
-      @entry[:touchpad-hold]{A touchpad hold gesture event, the current state
+      @entry[:grab-broken]{The pointer or keyboard grab was broken.}
+      @entry[:touch-begin]{The new touch event sequence has just started.}
+      @entry[:touch-update]{The touch event sequence has been updated.}
+      @entry[:touch-end]{The touch event sequence has finished.}
+      @entry[:touch-cancel]{The touch event sequence has been canceled.}
+      @entry[:touchpad-swipe]{The touchpad swipe gesture event, the current
+        state is determined by its phase field.}
+      @entry[:touchpad-pinch]{The touchpad pinch gesture event, the current
+        state is determined by its phase field.}
+      @entry[:pad-button-press]{The tablet pad button press event.}
+      @entry[:pad-button-release]{The tablet pad button release event.}
+      @entry[:pad-ring]{The tablet pad axis event from a \"ring\".}
+      @entry[:pad-strip]{The tablet pad axis event from a \"strip\".}
+      @entry[:pad-group-mode]{The tablet pad group mode change.}
+      @entry[:touchpad-hold]{The touchpad hold gesture event, the current state
         is determined by its phase field. Since 4.6}
       @entry[:event-last]{Marks the end of the @symbol{gdk:event-type}
         enumeration.}
@@ -461,7 +462,7 @@
 (setf (liber:alias-for-symbol 'touchpad-gesture-phase)
       "GEnum"
       (liber:symbol-documentation 'touchpad-gesture-phase)
- "@version{2024-5-26}
+ "@version{2024-7-12}
   @begin{declaration}
 (gobject:define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
   (:export t
@@ -493,10 +494,10 @@
 
   Cancelled gestures may be so for a variety of reasons, due to hardware or the
   compositor, or due to the gesture recognition layers hinting the gesture did
-  not finish resolutely, e.g. a 3rd finger being added during a pinch gesture.
-  In these cases, the last event will report the @code{:cancel} phase, this
-  should be used as a hint to undo any visible/permanent changes that were done
-  throughout the progress of the gesture.
+  not finish resolutely, for example, a 3rd finger being added during a pinch
+  gesture. In these cases, the last event will report the @code{:cancel} phase,
+  this should be used as a hint to undo any visible/permanent changes that were
+  done throughout the progress of the gesture.
   @see-class{gdk:touchpad-event}")
 
 ;;; ----------------------------------------------------------------------------
@@ -591,8 +592,8 @@
         event is synthetic as the pointer might have not left the window.}
       @entry[:touch-end]{Crossing because a touch sequence has ended, this
         event is synthetic as the pointer might have not left the window.}
-      @entry[:device-switch]{Crossing because of a device switch, i.e. a mouse
-        taking control of the pointer after a touch device, this event is
+      @entry[:device-switch]{Crossing because of a device switch, that is, a
+        mouse taking control of the pointer after a touch device, this event is
         synthetic as the pointer did not leave the window.}
     @end{table}
   @end{values}
@@ -726,8 +727,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkEvent
-;;;
-;;; This section describes functions dealing with events from the window system.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:define-foreign-type event ()
@@ -751,7 +750,7 @@
   @end{short}
   In GTK applications the events are handled automatically by toplevel widgets
   and passed on to the event controllers of appropriate widgets, so these
- functions are rarely needed.")
+  functions are rarely needed.")
 
 (export 'event)
 
@@ -1098,19 +1097,20 @@
 (cffi:defcfun ("gdk_event_get_device_tool" event-device-tool)
     (g:object device-tool)
  #+liber-documentation
- "@version{#2023-7-25}
+ "@version{#2024-7-12}
   @argument[event]{a @class{gdk:event} instance}
   @return{The @class{gdk:device-tool} object, or @code{nil}.}
   @begin{short}
-    If the event was generated by a device that supports different tools, e.g.
-    a tablet, this function will return a @class{gdk:device-tool} object
+    If the event was generated by a device that supports different tools, for
+    example a tablet, this function will return a @class{gdk:device-tool} object
     representing the tool that caused the event.
   @end{short}
   Otherwise, @code{nil} will be returned.
-
-  Note: The @class{gdk:device-tool} objects will be constant during the
-  application lifetime, if settings must be stored persistently across runs,
-  see the @fun{gdk:device-tool-serial} function.
+  @begin{notes}
+    The @class{gdk:device-tool} objects will be constant during the application
+    lifetime, if settings must be stored persistently across runs, see the
+    @fun{gdk:device-tool-serial} function.
+  @end{notes}
   @see-class{gdk:event}
   @see-symbol{gdk:device-tool}
   @see-function{gdk:device-tool-serial}"
@@ -1426,16 +1426,16 @@
 
 (cffi:defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
  #+liber-documentation
- "@version{#2023-7-25}
+ "@version{#2024-7-12}
   @argument[event]{a @class{gdk:event} instance}
   @return{@em{True} if the event is a scroll stop event.}
   @begin{short}
     Check whether a scroll event is a stop scroll event.
   @end{short}
   Scroll sequences with smooth scroll information may provide a stop scroll
-  event once the interaction with the device finishes, e.g. by lifting a finger.
-  This stop scroll event is the signal that a widget may trigger kinetic
-  scrolling based on the current velocity.
+  event once the interaction with the device finishes, for example, by lifting
+  a finger. This stop scroll event is the signal that a widget may trigger
+  kinetic scrolling based on the current velocity.
 
   Stop scroll events always have a delta of 0/0.
   @see-class{gdk:event}"

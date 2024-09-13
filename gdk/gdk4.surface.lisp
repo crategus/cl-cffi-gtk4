@@ -2,7 +2,7 @@
 ;;; gdk4.surface.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,7 +55,7 @@
 ;;;     gdk_surface_beep
 ;;;     gdk_surface_set_opaque_region
 ;;;     gdk_surface_create_gl_context
-;;;     gdk_surface_create_vulkan_context
+;;;     gdk_surface_create_vulkan_context                  Deprecated 4.14
 ;;;     gdk_surface_create_cairo_context
 ;;;     gdk_surface_create_similar_surface                 Deprecated 4.12
 ;;;     gdk_surface_queue_render
@@ -129,9 +129,9 @@
 
 #+liber-documentation
 (setf (documentation 'surface 'type)
- "@version{2024-1-8}
+ "@version{2024-7-12}
   @begin{short}
-    A @class{gdk:surface} object is a rectangular region on the screen.
+    The @class{gdk:surface} object is a rectangular region on the screen.
   @end{short}
   It is a low-level object, used to implement high-level objects such as the
   @class{gtk:window} or the @class{gtk:dialog} widgets in GTK.
@@ -147,8 +147,8 @@ lambda (surface monitor)    :run-first
       @end{pre}
       Emitted when @arg{surface} starts being present on the monitor.
       @begin[code]{table}
-       @entry[surface]{A @class{gdk:surface} object.}
-       @entry[monitor]{A @class{gdk:monitor} object.}
+       @entry[surface]{The @class{gdk:surface} object.}
+       @entry[monitor]{The @class{gdk:monitor} object.}
       @end{table}
     @subheading{The \"event\" signal}
       @begin{pre}
@@ -156,8 +156,8 @@ lambda (surface event)    :run-last
       @end{pre}
       Emitted when GDK receives an input event for @arg{surface}.
       @begin[code]{table}
-       @entry[surface]{A @class{gdk:surface} object.}
-       @entry[event]{A @class{gdk:event} instance to an input event.}
+       @entry[surface]{The @class{gdk:surface} object.}
+       @entry[event]{The @class{gdk:event} instance to an input event.}
        @entry[Returns]{@em{True} to indicate that the event has been handled.}
       @end{table}
     @subheading{The \"layout\" signal}
@@ -169,9 +169,9 @@ lambda (surface width height)    :run-first
       pixels\", not \"device pixels\". See the @fun{gdk:surface-scale-factor}
       function.
       @begin[code]{table}
-       @entry[surface]{A @class{gdk:surface} object.}
-       @entry[width]{An integer with the current width.}
-       @entry[height]{An integer with the current height.}
+       @entry[surface]{The @class{gdk:surface} object.}
+       @entry[width]{The integer with the current width.}
+       @entry[height]{The integer with the current height.}
       @end{table}
     @subheading{The \"leave-monitor\" signal}
       @begin{pre}
@@ -179,8 +179,8 @@ lambda (surface monitor)    :run-first
       @end{pre}
       Emitted when @arg{surface} stops being present on the monitor.
       @begin[code]{table}
-       @entry[surface]{A @class{gdk:surface} object.}
-       @entry[monitor]{A @class{gdk:monitor} object.}
+       @entry[surface]{The @class{gdk:surface} object.}
+       @entry[monitor]{The @class{gdk:monitor} object.}
       @end{table}
     @subheading{The \"render\" signal}
       @begin{pre}
@@ -188,8 +188,8 @@ lambda (surface region)    :run-last
       @end{pre}
       Emitted when part of the surface needs to be redrawn.
       @begin[code]{table}
-       @entry[surface]{A @class{gdk:surface} object.}
-       @entry[region]{A @symbol{cairo:region-t} instance that needs to be
+       @entry[surface]{The @class{gdk:surface} object.}
+       @entry[region]{The @symbol{cairo:region-t} instance that needs to be
          redrawn.}
        @entry[Returns]{@em{True} to indicate that the signal has been handled.}
       @end{table}
@@ -280,7 +280,7 @@ lambda (surface region)    :run-last
 (setf (documentation (liber:slot-documentation "frame-clock" 'surface) t)
  "The @code{frame-clock} property of type @class{gdk:frame-clock}
   (Read / Write / Construct only) @br{}
-  Frame clock.")
+  The frame clock for the surface.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'surface-frame-clock)
@@ -306,7 +306,7 @@ lambda (surface region)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "height" 'surface) t)
  "The @code{height} property of type @code{:int} (Read) @br{}
-  Height. @br{}
+  The height of the surface. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -334,7 +334,7 @@ lambda (surface region)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mapped" 'surface) t)
  "The @code{mapped} property of type @code{:boolean} (Read) @br{}
-  Mapped. @br{}
+  Whether the surface is mapped. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -381,8 +381,8 @@ lambda (surface region)    :run-last
   The @fun{gdk:surface-scale} function returns the internal scale that maps from
   surface coordinates to the actual device pixels. When the scale is bigger than
   1, the windowing system prefers to get buffers with a resolution that is
-  bigger than the surface size, e.g. to show the surface on a high-resolution
-  display, or in a magnifier.
+  bigger than the surface size, for example, to show the surface on a
+  high-resolution display, or in a magnifier.
 
   Compare with the @fun{gdk:surface-scale-factor} function, which returns the
   next larger integer.
@@ -390,7 +390,8 @@ lambda (surface region)    :run-last
   The scale may change during the lifetime of the surface.
 
   Since 4.12
-  @see-class{gdk:surface}")
+  @see-class{gdk:surface}
+  @see-function{gdk:surface-scale-factor}")
 
 ;;; --- gdk:surface-scale-factor -----------------------------------------------
 
@@ -432,7 +433,7 @@ lambda (surface region)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width" 'surface) t)
  "The @code{width} property of type @code{:int} (Read) @br{}
-  Width. @br{}
+  The width of the surface. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -456,7 +457,7 @@ lambda (surface region)    :run-last
   @see-function{gdk:surface-scale-factor}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_new_toplevel ()
+;;; gdk_surface_new_toplevel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_new_toplevel" surface-new-toplevel)
@@ -473,7 +474,7 @@ lambda (surface region)    :run-last
 (export 'surface-new-toplevel)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_new_popup ()
+;;; gdk_surface_new_popup
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_new_popup" surface-new-popup) (g:object surface)
@@ -496,7 +497,7 @@ lambda (surface region)    :run-last
 (export 'surface-new-popup)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_destroy ()
+;;; gdk_surface_destroy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_destroy" surface-destroy) :void
@@ -518,7 +519,7 @@ lambda (surface region)    :run-last
 (export 'surface-destroy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_is_destroyed ()
+;;; gdk_surface_is_destroyed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_is_destroyed" surface-is-destroyed) :boolean
@@ -533,7 +534,7 @@ lambda (surface region)    :run-last
 (export 'surface-is-destroyed)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_hide ()
+;;; gdk_surface_hide
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_hide" surface-hide) :void
@@ -553,7 +554,7 @@ lambda (surface region)    :run-last
 (export 'surface-hide)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_translate_coordinates ()
+;;; gdk_surface_translate_coordinates
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_translate_coordinates"
@@ -563,14 +564,18 @@ lambda (surface region)    :run-last
   (x (:pointer :int))
   (y (:pointer :int)))
 
-(defun surface-translate-coordinates (from to)
+(defun surface-translate-coordinates (from to x y)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2024-7-12}
   @argument[from]{a @class{gdk:surface} object with the origin surface}
   @argument[to]{a @class{gdk:surface} object with the target surface}
+  @argument[x]{a number coerced to a double float with the x coordinate to
+    translate}
+  @argument[x]{a number coerced to a double float with the y coordinate to
+    translate}
   @begin{return}
-    @arg{x} -- a double float with the x coordinate to translate @br{}
-    @arg{y} -- a double float with the y coordinate to translate
+    @arg{xnew} -- a double float with the result for the x coordinate @br{}
+    @arg{ynew} -- a double float with the result for the y coordinate
   @end{return}
   @begin{short}
     Translates the given coordinates from being relative to the @arg{from}
@@ -580,16 +585,19 @@ lambda (surface region)    :run-last
   transient-for to the same toplevel (directly or indirectly).
 
   The function returns @code{nil}, if the coordinates were not successfully
-  tanslated.
+  translated.
   @see-class{gdk:surface}"
-  (cffi:with-foreign-objects ((x :int) (y :int))
-    (when (%surface-translate-coordinates from to x y)
-      (values x y))))
+  (cffi:with-foreign-objects ((xnew :double) (ynew :double))
+    (setf (cffi:mem-ref xnew :double) (coerce x 'double-float))
+    (setf (cffi:mem-ref ynew :double) (coerce y 'double-float))
+    (when (%surface-translate-coordinates from to xnew ynew)
+      (values (cffi:mem-ref xnew :double)
+              (cffi:mem-ref ynew :double)))))
 
 (export 'surface-translate-coordinates)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_beep ()
+;;; gdk_surface_beep
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_beep" surface-beep) :void
@@ -609,7 +617,7 @@ lambda (surface region)    :run-last
 (export 'surface-beep)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_set_opaque_region ()
+;;; gdk_surface_set_opaque_region
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_set_opaque_region" %surface-set-opaque-region) :void
@@ -633,16 +641,15 @@ lambda (surface region)    :run-last
   opaque, as we know where the opaque regions are. If your surface background
   is not opaque, please update this property in your
   @code{GtkWidgetClass.css_changed()} handler.
-
   @see-class{gdk:surface}
   @see-symbol{cairo:region-t}"
   (%surface-set-opaque-region surface
-                              (if region region (cffi:null-pointer))))
+                              (or region (cffi:null-pointer))))
 
 (export 'surface-set-opaque-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_create_gl_context ()
+;;; gdk_surface_create_gl_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_create_gl_context" %surface-create-gl-context)
@@ -674,33 +681,11 @@ lambda (surface region)    :run-last
 (export 'surface-create-gl-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_create_vulkan_context ()
+;;; gdk_surface_create_vulkan_context                       not implemented
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_surface_create_vulkan_context"
-               %surface-create-vulkan-context) (g:object vulkan-context)
-  (surface (g:object surface))
-  (err :pointer))
-
-(defun surface-create-vulkan-context (surface)
- #+liber-documentation
- "@version{#2023-4-8}
-  @argument[surface]{a @class{gdk:surface} object}
-  @return{The newly created @class{gdk:vulkan-context} object, of @code{nil}
-    on error.}
-  @begin{short}
-    Creates a new @class{gdk:vulkan-context} object for rendering on
-    @arg{surface}.
-  @end{short}
-  @see-class{gdk:surface}
-  @see-class{gdk:vulkan-context}"
-  (glib:with-g-error (err)
-    (%surface-create-vulkan-context surface err)))
-
-(export 'surface-create-vulkan-context)
-
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_create_cairo_context ()
+;;; gdk_surface_create_cairo_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_create_cairo_context" surface-create-cairo-context)
@@ -720,7 +705,7 @@ lambda (surface region)    :run-last
 (export 'surface-create-cairo-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_create_similar_surface ()
+;;; gdk_surface_create_similar_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_create_similar_surface"
@@ -775,7 +760,7 @@ lambda (surface region)    :run-last
 (export 'surface-create-similar-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_queue_render ()
+;;; gdk_surface_queue_render
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_queue_render" surface-queue-render) :void
@@ -793,7 +778,7 @@ lambda (surface region)    :run-last
 (export 'surface-queue-render)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_request_layout ()
+;;; gdk_surface_request_layout
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_request_layout" surface-request-layout) :void
@@ -811,7 +796,7 @@ lambda (surface region)    :run-last
 (export 'surface-request-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_set_input_region ()
+;;; gdk_surface_set_input_region
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_set_input_region" surface-set-input-region) :void
@@ -841,7 +826,7 @@ lambda (surface region)    :run-last
 (export 'surface-set-input-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_get_device_position ()
+;;; gdk_surface_get_device_position
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_get_device_position" %surface-device-position)
@@ -876,8 +861,8 @@ lambda (surface region)    :run-last
 (export 'surface-device-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_get_device_cursor ()
-;;; gdk_surface_set_device_cursor ()
+;;; gdk_surface_get_device_cursor
+;;; gdk_surface_set_device_cursor
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf surface-device-cursor) (cursor surface device)

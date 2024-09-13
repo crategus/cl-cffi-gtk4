@@ -171,7 +171,20 @@
     (is-true (gdk:surface-is-destroyed surface))))
 
 ;;;     gdk_surface_hide
+
 ;;;     gdk_surface_translate_coordinates
+
+(test gdk-surface-translate-coordinates
+  (let* ((toplevel (gdk:surface-new-toplevel (gdk:display-default)))
+         (from (gdk:surface-new-popup toplevel nil))
+         (to (gdk:surface-new-popup toplevel nil)))
+    (is (typep toplevel 'gdk:surface))
+    (is (typep from 'gdk:surface))
+    (is (typep to 'gdk:surface))
+    (is (equal '(10.0d0 10.0d0)
+               (multiple-value-list
+                 (gdk:surface-translate-coordinates from to 10 10))))))
+
 ;;;     gdk_surface_beep
 ;;;     gdk_surface_set_opaque_region
 ;;;     gdk_surface_create_gl_context
@@ -185,4 +198,4 @@
 ;;;     gdk_surface_get_device_cursor
 ;;;     gdk_surface_set_device_cursor
 
-;;; 2024-7-6
+;;; 2024-7-12

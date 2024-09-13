@@ -2,7 +2,7 @@
 ;;; gdk4.display-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,47 +78,20 @@
 
 #+liber-documentation
 (setf (documentation 'display-manager 'type)
- "@version{2023-4-14}
+ "@version{2024-7-10}
   @begin{short}
     The purpose of the @class{gdk:display-manager} singleton object is to offer
     notification when displays appear or disappear or the default display
     changes.
   @end{short}
-
   You can use the @fun{gdk:display-manager-get} function to obtain the
   @class{gdk:display-manager} singleton, but that should be rarely necessary.
   Typically, initializing GTK opens a display that you can work with without
   ever accessing the @class{gdk:display-manager} object.
 
   The GDK library can be built with support for multiple backends. The
-  @class{gdk:display-manager} object determines which backend is used at runtime.
-
-  When writing backend specific code that is supposed to work with multiple
-  GDK backends, you have to consider both compile time and runtime. At compile
-  time, use the @code{GDK_WINDOWING_X11}, @code{GDK_WINDOWING_WIN32} macros,
-  etc. to find out which backends are present in the GDK library you are
-  building your application against. At runtime, use type check macros like
-  @code{GDK_IS_X11_DISPLAY()} to find out which backend is in use:
-  @begin[Example]{dictionary}
-    Backend specific code
-    @begin{pre}
-#ifdef GDK_WINDOWING_X11
-  if (GDK_IS_X11_DISPLAY (display))
-    {
-      /* make X11-specific calls here */
-    @}
-  else
-#endif
-#ifdef GDK_WINDOWING_QUARTZ
-  if (GDK_IS_QUARTZ_DISPLAY (display))
-    {
-      /* make Quartz-specific calls here */
-    @}
-  else
-#endif
-  g_error (\"Unsupported GDK backend\");
-    @end{pre}
-  @end{dictionary}
+  @class{gdk:display-manager} object determines which backend is used at
+  runtime.
   @begin[Signal Details]{dictionary}
     @subheading{The \"display-opened\" signal}
       @begin{pre}
@@ -152,7 +125,7 @@ lambda (manager display)    :run-last
 (setf (liber:alias-for-function 'display-manager-default-display)
       "Accessor"
       (documentation 'display-manager-default-display 'function)
- "@version{2023-4-14}
+ "@version{2024-7-10}
   @syntax{(gdk:display-manager-default-display object) => display}
   @syntax{(setf (gdk:display-manager-default-display object) display)}
   @argument[object]{a @class{gdk:display-manager} object}
@@ -165,23 +138,23 @@ lambda (manager display)    :run-last
   @class{gdk:display} object, or @code{nil} if there is no default display. The
   @setf{gdk:display-manager-default-display} function sets @arg{display}
   as the default display.
-  @begin[Example]{dictionary}
+  @begin{examples}
     @begin{pre}
 (gdk:display-manager-default-display (gdk:display-manager-get))
 => #<GDK:DISPLAY {1001F9A233@}>
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gdk:display}
   @see-class{gdk:display-manager}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_manager_get ()
+;;; gdk_display_manager_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_manager_get" display-manager-get)
     (g:object display-manager)
  #+liber-documentation
- "@version{2023-4-14}
+ "@version{2024-7-10}
   @return{The global @class{gdk:display-manager} singleton object.}
   @begin{short}
     Gets the @class{gdk:display-manager} singleton object.
@@ -189,26 +162,26 @@ lambda (manager display)    :run-last
   When called for the first time, this function consults the @code{GDK_BACKEND}
   environment variable to find out which of the supported GDK backends to use
   in case GDK has been compiled with multiple backends.
-  @begin[Example]{dictionary}
+  @begin{examples}
     @begin{pre}
 (gdk:display-manager-get)
 => #<GDK:DISPLAY-MANAGER {1001CFF103@}>
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gdk:display-manager}")
 
 (export 'display-manager-get)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_manager_list_displays ()
+;;; gdk_display_manager_list_displays
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_manager_list_displays" display-manager-list-displays)
-    (g:slist-t (g:object display))
+(cffi:defcfun ("gdk_display_manager_list_displays"
+               display-manager-list-displays) (g:slist-t (g:object display))
  #+liber-documentation
- "@version{2023-4-14}
+ "@version{2024-7-10}
   @argument[manager]{a @class{gdk:display-manager} object}
-  @return{A list of @class{gdk:display} objects.}
+  @return{The list of @class{gdk:display} objects.}
   @short{List all currently open displays.}
   @see-class{gdk:display}
   @see-class{gdk:display-manager}"
@@ -217,17 +190,17 @@ lambda (manager display)    :run-last
 (export 'display-manager-list-displays)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_manager_open_display ()
+;;; gdk_display_manager_open_display
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_manager_open_display" display-manager-open-display)
     (g:object display)
  #+liber-documentation
- "@version{2023-4-14}
+ "@version{2024-7-10}
   @argument[manager]{a @class{gdk:display-manager} object}
   @argument[name]{a string with the name of the display to open}
   @begin{return}
-    A @class{gdk:display} object, or @code{nil} if the display could not be
+    The @class{gdk:display} object, or @code{nil} if the display could not be
     opened.
   @end{return}
   @short{Opens a display.}
@@ -239,13 +212,13 @@ lambda (manager display)    :run-last
 (export 'display-manager-open-display)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_set_allowed_backends ()
+;;; gdk_set_allowed_backends
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_set_allowed_backends" set-allowed-backends) :void
  #+liber-documentation
- "@version{#2023-7-24}
-  @argument[backends]{a string with a comma-seprated list of backends}
+ "@version{#2024-7-10}
+  @argument[backends]{a string with a comma-separated list of backends}
   @begin{short}
     Sets a list of backends that GDK should try to use.
   @end{short}

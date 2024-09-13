@@ -6,6 +6,10 @@
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GDK_CURRENT_TIME
+
+(test gdk-current-time
+  (is (= 0 gdk:+current-time+)))
+
 ;;;     GDK_PRIORITY_EVENTS
 ;;;     GDK_PRIORITY_REDRAW
 

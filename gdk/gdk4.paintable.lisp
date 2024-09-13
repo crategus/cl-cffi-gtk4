@@ -83,13 +83,11 @@
       (liber:symbol-documentation 'paintable-flags)
  "@version{2024-5-5}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GdkPaintableFlags\" paintable-flags
   (:export t
    :type-initializer \"gdk_paintable_flags_get_type\")
   (:static-size #.(ash 1 0))
   (:static-contents #.(ash 1 1)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

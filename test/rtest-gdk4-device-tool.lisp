@@ -85,11 +85,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     axes
-;;;     hardware-id
-;;;     serial
-;;;     tool-type
-
 (test gdk-device-tool-properties
   (let ((tool (make-instance 'gdk:device-tool)))
     (is-false (gdk:device-tool-axes tool))
@@ -97,4 +92,4 @@
     (is (= 0 (gdk:device-tool-serial tool)))
     (is (eq :unknown (gdk:device-tool-tool-type tool)))))
 
-;;; 2024-1-7
+;;; 2024-7-11

@@ -57,7 +57,7 @@
 (test gdk-display-properties
   (let ((display (gdk:display-default)))
     (is-true (gdk:display-composited display))
-    (is-true (gdk:display-composited display))
+    (is (typep (gdk:display-dmabuf-formats display) 'gdk:dmabuf-formats))
     (is-true (gdk:display-input-shapes display))
     (is-true (gdk:display-rgba display))
     (is-true (gdk:display-shadow-width display))))
