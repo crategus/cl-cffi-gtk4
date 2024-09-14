@@ -5077,7 +5077,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_init_template" widget-init-template) :void
  #+liber-documentation
- "@version{#2021-9-21}
+ "@version{2024-9-14}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates and initializes child widgets defined in templates.
@@ -5087,17 +5087,13 @@ lambda (widget)    :run-last
   function.
 
   It is important to call this function in the instance initializer of a
-  GtkWidget subclass and not in @code{GObject.constructed()} or
-  @code{GObject.constructor()} for two reasons.
-
-  One reason is that generally derived widgets will assume that parent class
-  composite widgets have been created in their instance initializers.
-
-  Another reason is that when calling the @fun{g:object-new} function on a
-  widget with composite templates, it is important to build the composite
-  widgets before the construct properties are set. Properties passed to
-  the @fun{g:object-new} function should take precedence over properties set in
-  the private template XML.
+  GtkWidget subclass. One reason is that generally derived widgets will assume
+  that parent class composite widgets have been created in their instance
+  initializers. Another reason is that when calling the @fun{g:object-new}
+  function on a widget with composite templates, it is important to build the
+  composite widgets before the construct properties are set. Properties passed
+  to the @fun{g:object-new} function should take precedence over properties set
+  in the private template XML.
   @see-class{gtk:widget}
   @see-function{gtk:widget-class-set-template}
   @see-function{g:object-new}"
@@ -5107,65 +5103,57 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_dispose_template
-;;;
-;;; void
-;;; gtk_widget_dispose_template (GtkWidget* widget,
-;;;                              GType widget_type)
-;;;
-;;; Clears the template children for the given widget.
-;;;
-;;; This function is the opposite of gtk_widget_init_template(), and it is used
-;;; to clear all the template children from a widget instance. If you bound a
-;;; template child to a field in the instance structure, or in the instance
-;;; private data structure, the field will be set to NULL after this function
-;;; returns.
-;;;
-;;; You should call this function inside the GObjectClass.dispose()
-;;; implementation of any widget that called gtk_widget_init_template().
-;;; Typically, you will want to call this function last, right before chaining
-;;; up to the parent type’s dispose implementation, e.g.
-;;;
-;;; static void
-;;; some_widget_dispose (GObject *gobject)
-;;; {
-;;;   SomeWidget *self = SOME_WIDGET (gobject);
-;;;
-;;;   // Clear the template data for SomeWidget
-;;;   gtk_widget_dispose_template (GTK_WIDGET (self), SOME_TYPE_WIDGET);
-;;;
-;;;   G_OBJECT_CLASS (some_widget_parent_class)->dispose (gobject);
-;;; }
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; widget_type :
-;;;     The type of the widget to finalize the template for.
-;;;
-;;; Since 4.8
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-8
+(cffi:defcfun ("gtk_widget_dispose_template" widget-dispose-template) :void
+ #+liber-documentation
+ "@version{2024-9-14}
+  @argument[widget]{a @class{gtk:widget} object}
+  @argument[gtype]{a @class{g:type-t} type ID of the widget to finalize the
+    template for}
+  @begin{short}
+    Clears the template children for the given @arg{widget}.
+  @end{short}
+  This function is the opposite of the @fun{gtk:widget-init-template} function,
+  and it is used to clear all the template children from a widget instance. If
+  you bound a template child to a field in the instance structure, or in the
+  instance private data structure, the field will be set to @code{NULL} after
+  this function returns.
+
+  You should call this function inside the @code{GObjectClass.dispose()}
+  implementation of any widget that called the @fun{gtk:widget-init-template}
+  function. Typically, you will want to call this function last, right before
+  chaining up to the parent type’s dispose implementation.
+
+  Since 4.8
+  @see-class{gtk:widget}
+  @see-class{g:type-t}
+  @see-function{gtk:widget-init-template}"
+  (widget (g:object widget))
+  (gtype g:type-t))
+
+#+gtk-4-8
+(export 'widget-dispose-template)
+
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_template_child ()
+;;; gtk_widget_get_template_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
  #+liber-documentation
- "@version{#2021-9-22}
+ "@version{2024-9-14}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[gtype]{the @class{g:type-t} type ID to get a template child for}
-  @argument[name]{a string with the \"ID\" of the child defined in the template
-    XML}
+  @argument[gtype]{a @class{g:type-t} type ID to get a template child for}
+  @argument[name]{a string with the ID of the child defined in the template XML}
   @return{The @class{g:object} instance built in the template XML with the ID
     name.}
   @begin{short}
     Fetch an object build from the template XML for @arg{gtype} in this widget
     instance.
   @end{short}
-
   This will only report children which were previously declared with the
-  @fun{gtk:widget-class-bind-template-child-full} function or one of its
-  variants.
+  @fun{gtk:widget-class-bind-template-child} function or one of its variants.
 
   This function is only meant to be called for code which is private to the
   @arg{gtype} which declared the child and is meant for language bindings
@@ -5173,7 +5161,7 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}
   @see-class{g:object}
   @see-class{g:type-t}
-  @see-function{gtk:widget-class-bind-template-child-full}"
+  @see-function{gtk:widget-class-bind-template-child}"
   (widget (g:object widget))
   (gtype g:type-t)
   (name :string))
@@ -5184,20 +5172,21 @@ lambda (widget)    :run-last
 ;;; gtk_widget_class_set_template
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: This implementation does not work. What is wrong?
+
 (cffi:defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
   (class (:pointer (:struct gobject:type-class)))
   (template (g:boxed glib:bytes)))
 
 (defun widget-class-set-template (gtype template)
  #+liber-documentation
- "@version{#2021-9-22}
-  @argument[gtype]{the @class{g:type-t} type ID of the widget class}
+ "@version{2024-9-14}
+  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
   @argument[template]{a string holding the @class{gtk:builder} XML}
   @begin{short}
     This should be called at class initialization time to specify the
     @class{gtk:builder} XML to be used to extend a widget.
   @end{short}
-
   For convenience, the @fun{gtk:widget-class-set-template-from-resource}
   function is also provided.
 
@@ -5210,11 +5199,17 @@ lambda (widget)    :run-last
   (let ((class (gobject:type-class-ref gtype)))
     (multiple-value-bind (data len)
         (cffi:foreign-string-alloc template)
-      (unwind-protect
-        (%widget-class-set-template class (glib:bytes-new data len))
-        (progn
-          (gobject:type-class-unref class)
-          (cffi:foreign-string-free data))))))
+        (let ((bytes (glib:bytes-new data len)))
+          (format t "  data : ~a~%" (glib:bytes-data bytes))
+          (format t "  size : ~a~%" (glib:bytes-size bytes))
+          (format t "   str : ~a~%"
+                    (cffi:foreign-string-to-lisp (glib:bytes-data bytes)))
+          (unwind-protect
+            (%widget-class-set-template class bytes)
+            (progn
+              (gobject:type-class-unref class)
+;             (cffi:foreign-string-free data)
+))))))
 
 (export 'widget-class-set-template)
 
@@ -5229,8 +5224,8 @@ lambda (widget)    :run-last
 
 (defun widget-class-set-template-from-resource (gtype name)
  #+liber-documentation
- "@version{#2021-9-21}
-  @argument[gtype]{the @class{g:type-t} type ID of the widget class}
+ "@version{2024-9-14}
+  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
   @argument[name]{a string with the name of the resource to load the template
     from}
   @begin{short}
@@ -5295,6 +5290,30 @@ lambda (widget)    :run-last
 ;;; member_name :
 ;;;     name of the instance member in the instance struct for data_type
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_class_bind_template_child_full"
+               %widget-class-bind-template-child-full) :void
+  (class :pointer)
+  (name :string)
+  (internal :boolean)
+  (offset :size))
+
+(defun widget-class-bind-template-child (gtype name)
+ #+liber-documentation
+ "@version{2024-9-14}
+  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
+  @argument[name]{a string with the ID of the child defined in the template XML}
+  @begin{short}
+    Binds a child widget defined in a template to the widget class of type
+    @arg{gtype}.
+  @end{short}
+  @see-class{gtk:widget}"
+  (let ((class (gobject:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-bind-template-child-full class name nil 0)
+      (gobject:type-class-unref class))))
+
+(export 'widget-class-bind-template-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_bind_template_child_internal()

@@ -2883,6 +2883,7 @@ GtkCellRenderer         GtkWidget
       @about-function{distribute-natural-allocation}
       @about-function{widget-compute-expand}
       @about-function{widget-init-template}
+      @about-function{widget-dispose-template}
       @about-function{widget-class-set-template}
       @about-function{widget-class-set-template-from-resource}
       @about-function{widget-template-child}
