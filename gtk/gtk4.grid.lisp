@@ -120,7 +120,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid 'type)
- "@version{2023-3-19}
+ "@version{2024-9-14}
   @begin{short}
     The @class{gtk:grid} widget is a container which arranges its child widgets
     in rows and columns, with arbitrary positions and horizontal/vertical spans.
@@ -228,7 +228,7 @@
 (setf (liber:alias-for-function 'grid-baseline-row)
       "Accessor"
       (documentation 'grid-baseline-row 'function)
- "@version{2024-4-22}
+ "@version{2024-9-14}
   @syntax{(gtk:grid-baseline-row object) => row}
   @syntax{(setf (gtk:grid-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -257,7 +257,7 @@
 (setf (liber:alias-for-function 'grid-column-homogeneous)
       "Accessor"
       (documentation 'grid-column-homogeneous 'function)
- "@version{2024-4-22}
+ "@version{2024-9-14}
   @syntax{(gtk:grid-column-homogeneous object) => homogenous}
   @syntax{(setf (gtk:grid-column-homogeneous object) homogenous)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -285,7 +285,7 @@
 (setf (liber:alias-for-function 'grid-column-spacing)
       "Accessor"
       (documentation 'grid-column-spacing 'function)
- "@version{2024-4-22}
+ "@version{2024-9-14}
   @syntax{(gtk:grid-column-spacing object) => spacing}
   @syntax{(setf (gtk:grid-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -314,7 +314,7 @@
 (setf (liber:alias-for-function 'grid-row-homogeneous)
       "Accessor"
       (documentation 'grid-row-homogeneous 'function)
- "@version{2024-4-22}
+ "@version{2024-9-14}
   @syntax{(gtk:grid-row-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -342,7 +342,7 @@
 (setf (liber:alias-for-function 'grid-row-spacing)
       "Accessor"
       (documentation 'grid-row-spacing 'function)
- "@version{2024-4-22}
+ "@version{2024-9-14}
   @syntax{(gtk:grid-row-spacing object) => spacing}
   @syntax{(setf (gtk:grid-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -365,7 +365,7 @@
 
 (defun grid-new ()
  #+liber-documentation
- "@version{2024-4-12}
+ "@version{2024-9-14}
   @return{The new @class{gtk:grid} widget.}
   @short{Creates a new grid widget.}
   @see-class{gtk:grid}"
@@ -379,7 +379,7 @@
 
 (cffi:defcfun ("gtk_grid_attach" grid-attach) :void
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[left]{an integer with the column number to attach the left side of
@@ -414,7 +414,7 @@
 
 (cffi:defcfun ("gtk_grid_attach_next_to" grid-attach-next-to) :void
  #+liber-documentation
- "@version{#2024-4-22}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[sibling]{a @class{gtk:widget} sibling widget of the grid that
@@ -452,7 +452,7 @@
 
 (cffi:defcfun ("gtk_grid_remove" grid-remove) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @begin{short}
@@ -475,7 +475,7 @@
 
 (cffi:defcfun ("gtk_grid_get_child_at" grid-child-at) (g:object widget)
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[left]{an integer with the left edge of the cell}
   @argument[top]{an integer with the top edge of the cell}
@@ -499,7 +499,7 @@
 
 (cffi:defcfun ("gtk_grid_query_child" %grid-query-child) :void
   (grid (g:object grid))
-  (child (g:object widet))
+  (child (g:object widget))
   (column (:pointer :int))
   (row (:pointer :int))
   (width (:pointer :int))
@@ -507,7 +507,7 @@
 
 (defun grid-query-child (grid child)
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{return}
@@ -542,9 +542,9 @@
 
 (cffi:defcfun ("gtk_grid_insert_row" grid-insert-row) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
-  @argument[position]{an integer with the position to insert the row at}
+  @argument[pos]{an integer with the position to insert the row at}
   @begin{short}
     Inserts a row at the specified position.
   @end{short}
@@ -554,7 +554,7 @@
   @see-function{gtk:grid-insert-column}
   @see-function{gtk:grid-insert-next-to}"
   (grid (g:object grid))
-  (position :int))
+  (pos :int))
 
 (export 'grid-insert-row)
 
@@ -564,9 +564,9 @@
 
 (cffi:defcfun ("gtk_grid_insert_column" grid-insert-column) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
-  @argument[position]{an integer with the position to insert the column at}
+  @argument[pos]{an integer with the position to insert the column at}
   @begin{short}
     Inserts a column at the specified position.
   @end{short}
@@ -577,7 +577,7 @@
   @see-function{gtk:grid-insert-row}
   @see-function{gtk:grid-insert-next-to}"
   (grid (g:object grid))
-  (position :int))
+  (pos :int))
 
 (export 'grid-insert-column)
 
@@ -587,9 +587,9 @@
 
 (cffi:defcfun ("gtk_grid_remove_row" grid-remove-row) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
-  @argument[position]{an integer with the position of the row to remove}
+  @argument[pos]{an integer with the position of the row to remove}
   @begin{short}
     Removes a row from the grid.
   @end{short}
@@ -600,7 +600,7 @@
   @see-function{gtk:grid-remove-column}
   @see-function{gtk:grid-insert-row}"
   (grid (g:object grid))
-  (position :int))
+  (pos :int))
 
 (export 'grid-remove-row)
 
@@ -610,9 +610,9 @@
 
 (cffi:defcfun ("gtk_grid_remove_column" grid-remove-column) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
-  @argument[position]{an integer with the position of the column to remove}
+  @argument[pos]{an integer with the position of the column to remove}
   @begin{short}
     Removes a column from the grid.
   @end{short}
@@ -623,7 +623,7 @@
   @see-function{gtk:grid-remove-row}
   @see-function{gtk:grid-insert-column}"
   (grid (g:object grid))
-  (position :int))
+  (pos :int))
 
 (export 'grid-remove-column)
 
@@ -633,7 +633,7 @@
 
 (cffi:defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-9-14}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget of the grid that the
     new row or column will be placed next to}
@@ -643,8 +643,9 @@
     Inserts a row or column at the specified position.
   @end{short}
   The new row or column is placed next to @arg{sibling}, on the side determined
-  by @arg{side}. If side is @code{:top} or @code{:bottom}, a row is inserted.
-  If @arg{side} is @code{:left} of @code{:right}, a column is inserted.
+  by @arg{side}. If the @arg{side} argument is @code{:top} or @code{:bottom}, a
+  row is inserted. If the @arg{side} argument is @code{:left} of @code{:right},
+  a column is inserted.
   @see-class{gtk:grid}
   @see-class{gtk:widget}
   @see-symbol{gtk:position-type}
@@ -661,33 +662,33 @@
 ;;; gtk_grid_set_row_baseline_position
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf grid-row-baseline-position) (position grid row)
+(defun (setf grid-row-baseline-position) (pos grid row)
   (cffi:foreign-funcall "gtk_grid_set_row_baseline_position"
                         (g:object grid) grid
                         :int row
-                        position-type position
+                        position-type pos
                         :void)
-  position)
+  pos)
 
 (cffi:defcfun ("gtk_grid_get_row_baseline_position"
                grid-row-baseline-position) position-type
  #+liber-documentation
- "@version{#2022-1-15}
-  @syntax{(gtk:grid-row-baseline-position grid row) => position}
-  @syntax{(setf (gtk:grid-row-baseline-position grid row) position)}
+ "@version{2024-9-14}
+  @syntax{(gtk:grid-row-baseline-position grid row) => pos}
+  @syntax{(setf (gtk:grid-row-baseline-position grid row) pos)}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[row]{an integer with a row index}
-  @argument[position]{a value of the @symbol{gtk:positon-type} enumeration}
+  @argument[pos]{a value of the @symbol{gtk:baseline-position} enumeration}
   @begin{short}
-    Accessor of the baseline position of the @class{gtk:grid} widget.
+    The @fun{gtk:grid-row-baseline-position} function returns the baseline
+    position of @arg{row}.
   @end{short}
-  The @fun{gtk:grid-row-baseline-position} function returns the baseline
-  position of @arg{row}. The @setf{gtk:grid-row-baseline-position} function sets
-  how the baseline should be positioned on @arg{row} of the grid, in case that
-  @arg{row} is assigned more space than is requested. The default baseline
-  position is @code{:center}.
+  The @setf{gtk:grid-row-baseline-position} function sets how the baseline
+  should be positioned on @arg{row} of the grid, in case that @arg{row} is
+  assigned more space than is requested. The default baseline position is
+  @code{:center}.
   @see-class{gtk:grid}
-  @see-symbol{gtk:position-type}"
+  @see-symbol{gtk:baseline-position}"
   (grid (g:object grid))
   (row :int))
 

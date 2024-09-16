@@ -72,16 +72,148 @@
   (is (typep (gtk:grid-new) 'gtk:grid)))
 
 ;;;     gtk_grid_attach
-;;;     gtk_grid_attach_next_to
 ;;;     gtk_grid_remove
 ;;;     gtk_grid_get_child_at
 ;;;     gtk_grid_query_child
+
+(test gtk-grid-attach
+  (let ((grid (gtk:grid-new)))
+    (is-false (gtk:grid-attach grid
+                               (gtk:button-new-with-label "button1") 0 0 1 1))
+
+    (is (equal '(0 0 1 1)
+               (multiple-value-list
+                 (gtk:grid-query-child grid
+                                       (gtk:grid-child-at grid 0 0)))))
+
+    (is-false (gtk:grid-attach grid
+                               (gtk:button-new-with-label "button2") 2 2 2 3))
+    (is (equal '(2 2 2 3)
+               (multiple-value-list
+                 (gtk:grid-query-child grid
+                                       (gtk:grid-child-at grid 2 2)))))
+    (is-false (gtk:grid-remove grid
+                               (gtk:grid-child-at grid 0 0)))
+    (is-false (gtk:grid-remove grid
+                               (gtk:grid-child-at grid 2 2)))))
+
+
+;;;     gtk_grid_attach_next_to
+
+(test gtk-grid-attach-next-to.1
+  (let ((grid (gtk:grid-new))
+        (button (gtk:button-new-with-label "button")))
+    (is-false (gtk:grid-attach grid
+                               (gtk:button-new-with-label "button1") 0 0 3 4))
+    (is-false (gtk:grid-attach-next-to grid
+                                       button
+                                       (gtk:grid-child-at grid 0 0)
+                                       :bottom
+                                       3 4))
+    (is (equal '(0 4 3 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button))))))
+
+(test gtk-grid-attach-next-to.2
+  (let ((grid (gtk:grid-new))
+        (button (gtk:button-new-with-label "button")))
+    (is-false (gtk:grid-attach grid
+                               (gtk:button-new-with-label "button1") 0 0 3 4))
+    (is-false (gtk:grid-attach-next-to grid
+                                       button
+                                       nil
+                                       :right
+                                       3 4))
+    (is (equal '(3 0 3 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button))))))
+
 ;;;     gtk_grid_insert_row
 ;;;     gtk_grid_insert_column
 ;;;     gtk_grid_remove_row
 ;;;     gtk_grid_remove_column
+
+(test gtk-grid-insert-row/column
+  (let ((grid (gtk:grid-new))
+        (button1 (gtk:button-new))
+        (button2 (gtk:button-new)))
+    (gtk:grid-attach grid button1 0 0 2 2)
+    (gtk:grid-attach grid button2 2 2 4 4)
+    (is (equal '(0 0 2 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(2 2 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-insert-row grid 1))
+    (is (equal '(0 0 2 3)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(2 3 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-insert-column grid 1))
+    (is (equal '(0 0 3 3)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(3 3 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-remove-row grid 1))
+    (is (equal '(0 0 3 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(3 2 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-remove-column grid 1))
+    (is (equal '(0 0 2 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(2 2 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))))
+
 ;;;     gtk_grid_insert_next_to
+
+(test gtk-grid-insert-next-to
+  (let ((grid (gtk:grid-new))
+        (button1 (gtk:button-new))
+        (button2 (gtk:button-new)))
+    (gtk:grid-attach grid button1 0 0 2 2)
+    (gtk:grid-attach grid button2 2 2 4 4)
+    (is (equal '(0 0 2 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(2 2 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-insert-next-to grid button1 :right))
+    (is (equal '(0 0 2 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(3 2 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-insert-next-to grid button1 :bottom))
+    (is (equal '(0 0 2 2)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button1))))
+    (is (equal '(3 3 4 4)
+               (multiple-value-list
+                 (gtk:grid-query-child grid button2))))))
+
 ;;;     gtk_grid_get_row_baseline_position
 ;;;     gtk_grid_set_row_baseline_position
 
-;;; 2024-4-12
+(test gtk-grid-baseline-position
+  (let ((grid (gtk:grid-new))
+        (button1 (gtk:button-new))
+        (button2 (gtk:button-new)))
+    (gtk:grid-attach grid button1 0 0 2 2)
+    (gtk:grid-attach grid button2 2 2 4 4)
+    (is (eq :right (gtk:grid-row-baseline-position grid 0)))
+    (is (eq :left (setf (gtk:grid-row-baseline-position grid 0) :left)))
+    (is (eq :left (gtk:grid-row-baseline-position grid 0)))))
+
+;;; 2024-9-14
