@@ -2707,9 +2707,9 @@ lambda (widget)    :run-last
 (defun widget-class-layout-manager-type (gtype)
  #+liber-documentation
  "@version{2024-4-12}
-  @argument[gtype]{a @class{g:type-t} type}
-  @return{The @class{g:type-t} type for the @class{gtk:layout-manager} object,
-    or @code{nil}}
+  @argument[gtype]{a @class{g:type-t} type ID}
+  @return{The @class{g:type-t} type ID for the @class{gtk:layout-manager}
+    object, or @code{nil}}
   @begin{short}
     Retrieves the type of the @class{gtk:layout-manager} object used by the
     widget of the given @arg{gtype} type.
@@ -2940,7 +2940,7 @@ lambda (widget)    :run-last
  #+liber-documentation
  "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[gtype]{an ancestor @class{g:type-t} type}
+  @argument[gtype]{an ancestor @class{g:type-t} type ID}
   @return{The @class{gtk:widget} ancestor widget, or @arg{nil} if not found.}
   @begin{short}
     Gets the first ancestor of the widget with type @arg{gtype}.
@@ -3371,7 +3371,7 @@ lambda (widget)    :run-last
  "@version{2023-9-18}
   @syntax{(gtk:widget-class-accessible-role gtype) => role}
   @syntax{(setf (gtk:widget-class-accessible-role gtype) role)}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @argument[role]{a @symbol{gtk:accessible-role} value}
   @begin{short}
     Accessor of the accessible role of the widget class.

@@ -215,7 +215,7 @@
  "@version{#2023-9-3}
   @syntax{(gtk:sort-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:sort-list-model} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:sort-list-model]{item-type} slot of the
     @class{gtk:sort-list-model} class.

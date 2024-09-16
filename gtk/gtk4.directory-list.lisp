@@ -289,7 +289,7 @@
  "@version{#2023-9-7}
   @syntax{(gtk:directory-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:directory]{item-type} slot of the
     @class{gtk:directory-list} class.

@@ -212,7 +212,7 @@
  "@version{2023-7-23}
   @syntax{(gtk:shortcut-controller-item-type object) => gtype}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[gtype]{a @class{g:type-t} item type}
+  @argument[gtype]{a @class{g:type-t} item type ID}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{item-type} slot of the
     @class{gtk:shortcut-controller} class.

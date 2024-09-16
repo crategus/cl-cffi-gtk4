@@ -418,7 +418,7 @@
  #+liber-documentation
  "@version{#2023-8-7}
   @argument[drop]{a @class{gdk:drop} object}
-  @argument[gtype]{a @class{g:type-t} type to read}
+  @argument[gtype]{a @class{g:type-t} type ID to read}
   @argument[priority]{an integer with the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} object, @code{nil}
     to ignore}

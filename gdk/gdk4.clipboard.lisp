@@ -423,7 +423,7 @@ lambda (clipboard)    :run-last
  #+liber-documentation
  "@version{#2023-7-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[gtype]{a @class{g:type-t} type to read}
+  @argument[gtype]{a @class{g:type-t} type ID to read}
   @argument[priority]{an integer with the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
@@ -664,7 +664,7 @@ lambda (clipboard)    :run-last
  #+liber-documentation
  "@version{#2023-7-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[gtype]{a @class{g:type-t} type of value to set}
+  @argument[gtype]{a @class{g:type-t} type ID of value to set}
   @argument[value]{a Lisp value to be set}
   @begin{short}
     Sets the clipboard to contain the given @arg{value}.

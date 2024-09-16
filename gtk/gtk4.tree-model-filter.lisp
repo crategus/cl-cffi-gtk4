@@ -407,7 +407,7 @@
  #+liber-documentation
  "@version{#2024-4-29}
   @argument[filter]{a @class{gtk:tree-model-filter} object}
-  @argument[gtypes]{a list of @class{g:type-t} types of the columns}
+  @argument[gtypes]{a list of @class{g:type-t} type IDs of the columns}
   @argument[func]{a @symbol{gtk:tree-model-filter-modify-func} callback
     function}
   @begin{short}

@@ -446,7 +446,7 @@
  "@version{#2023-9-10}
   @syntax{(gtk:tree-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:tree-list-model} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-model]{item-type} slot of the
     @class{gtk:tree-list-model} class.

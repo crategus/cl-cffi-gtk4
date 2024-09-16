@@ -309,7 +309,7 @@ case PROP_EXPRESSION:
  #+liber-documentation
  "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
-  @return{The @class{g:type-t} type returned from the
+  @return{The @class{g:type-t} type ID returned from the
   @fun{gtk:expression-evaluate} function.}
   @begin{short}
     Gets the GType that this expression evaluates to.
@@ -633,21 +633,22 @@ case PROP_EXPRESSION:
 
 (defun property-expression-new-for-pspec (expression pspec)
  #+liber-documentation
- "@version{2023-11-6}
+ "@version{2024-9-13}
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
   @argument[pspec]{a @symbol{g:param-spec} instance for the property to query}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
-    Creates an expression that looks up a property via the given expression or
-    the @arg{this} argument when expression is @code{nil}.
+    Creates an expression that looks up a property via the given
+    @arg{expression} or the @arg{this} argument when the @arg{expression}
+    argument is @code{nil}.
   @end{short}
-  If the resulting object conforms to @arg{gtype}, its property specified by
-  @arg{pspec} will be queried. Otherwise, this expression's evaluation will
-  fail.
+  If the resulting object conforms to the type of @code{this}, its property
+  specified by @arg{pspec} will be queried. Otherwise, the evaluation of the
+  expression will fail.
   @see-class{gtk:expression}
   @see-symbol{g:param-spec}"
-  (let ((expression (if expression expression (cffi:null-pointer))))
+  (let ((expression (or expression (cffi:null-pointer))))
     (%property-expression-new-for-pspec expression pspec)))
 
 (export 'property-expression-new-for-pspec)
@@ -701,7 +702,7 @@ case PROP_EXPRESSION:
 (defun constant-expression-new (gtype value)
  #+liber-documentation
  "@version{2023-11-7}
-  @argument[gtype]{a @symbol{g:type-t} type}
+  @argument[gtype]{a @symbol{g:type-t} type ID}
   @argument[value]{a value corresponding to @arg{gtype}}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}

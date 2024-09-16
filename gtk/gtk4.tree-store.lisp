@@ -156,7 +156,7 @@
 (defun tree-store-new (&rest types)
  #+liber-documentation
  "@version{2024-5-16}
-  @argument[types]{all @class{g:type-t} types for the columns, from first to
+  @argument[types]{all @class{g:type-t} type IDs for the columns, from first to
     last}
   @return{The new @class{gtk:tree-store} object.}
   @begin{short}
@@ -214,7 +214,8 @@
  #+liber-documentation
  "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
-  @argument[types]{a list with the @class{g:type-t} types, one for each column}
+  @argument[types]{a list with the @class{g:type-t} type IDs, one for each
+    column}
   @begin{short}
     This function is meant primarily for GObjects that inherit from the
     @class{gtk:tree-store} class, and should only be used when constructing a

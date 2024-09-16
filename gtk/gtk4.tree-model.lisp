@@ -1293,7 +1293,7 @@ lambda (model path iter new-order)    :run-first
  "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[index]{an integer with the column index}
-  @return{The @class{g:type-t} type of the column.}
+  @return{The @class{g:type-t} type ID of the column.}
   @begin{short}
     Returns the type of the column.
   @end{short}

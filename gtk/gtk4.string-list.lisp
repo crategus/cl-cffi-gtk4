@@ -245,7 +245,7 @@
   @syntax{(gtk:string-list-item-type object) => type}
   @syntax{(setf (gtk:string-list-item-type object) type)}
   @argument[object]{a @class{gtk:string-list} object}
-  @argument[type]{a @class{g:type-t} type}
+  @argument[type]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:string-list]{item-type} slot of the
     @class{gtk:string-list} class.

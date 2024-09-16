@@ -415,7 +415,7 @@ lambda (target x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
  #+liber-documentation
  "@version{#2023-9-16}
-  @argument[gtype]{a @class{g:type-t} type with the supported type}
+  @argument[gtype]{a @class{g:type-t} type ID with the supported type}
   @argument[actions]{a @symbol{gdk:drag-action} value with the supported
     actions}
   @return{The new @class{gtk:drop-target} object.}
@@ -464,7 +464,7 @@ lambda (target x y)    :run-last
   @syntax{(gtk:drop-target-gtypes target) => gtypes}
   @syntax{(setf (gtk:drop-target-gtypes target) gtypes)}
   @argument[target]{a @class{gtk:drop-target} object}
-  @argument[gtypes]{a list of @class{g:type-t} types}
+  @argument[gtypes]{a list of @class{g:type-t} type IDs}
   @begin{short}
     The @fun{gtk:drop-target-gtypes} function gets the list of supported GTypes
     for @arg{target}.

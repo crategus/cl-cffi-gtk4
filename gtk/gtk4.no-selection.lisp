@@ -125,7 +125,7 @@
  "@version{2023-9-6}
   @syntax{(gtk:no-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:no-selection} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:no-selection]{item-type} slot of the
     @class{gtk:no-selection} class.

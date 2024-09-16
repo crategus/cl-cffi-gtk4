@@ -219,7 +219,7 @@
  "@version{2023-9-28}
   @syntax{(gtk:filter-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:filter-list-model} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:filter-list-model]{item-type} slot of the
     @class{gtk:filter-list-model} class.

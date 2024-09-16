@@ -231,7 +231,7 @@
                content-formats-new-for-gtype) (g:boxed content-formats :return)
  #+liber-documentation
  "@version{#2023-8-4}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Creates a new @class{gdk:content-formats} instance for a given @arg{gtype}.
@@ -327,11 +327,11 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{The list with the @class{g:type-t} types included in @arg{formats}}
+  @return{The list with the @class{g:type-t} type IDs included in @arg{formats}.}
   @begin{short}
-    Gets the @class{g:type-t} types included in @arg{formats}.
+    Gets the @class{g:type-t} type IDs included in @arg{formats}.
   @end{short}
-  Note that @arg{formats} may not contain any @class{g:type-t} types, in
+  Note that @arg{formats} may not contain any @class{g:type-t} type IDs, in
   particular when they are empty. In that case @code{nil} will be returned.
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
@@ -418,12 +418,12 @@
  "@version{#2023-8-4}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
-  @return{The first common @class{g:type-t} type or @code{nil} if none.}
+  @return{The first common @class{g:type-t} type ID or @code{nil} if none.}
   @begin{short}
-    Finds the first @class{g:type-t} type from @arg{first} that is also
+    Finds the first @class{g:type-t} type ID from @arg{first} that is also
     contained in @arg{second}.
   @end{short}
-  If no matching @class{g:type-t} type is found, @code{nil} is returned.
+  If no matching @class{g:type-t} type ID is found, @code{nil} is returned.
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
   (first (g:boxed content-formats))
@@ -447,7 +447,7 @@
     Finds the first mime type from @arg{first} that is also contained in
     @arg{second}.
   @end{short}
-  If no matching @class{g:type-t} type is found, @code{nil} is returned.
+  If no matching @class{g:type-t} type ID is found, @code{nil} is returned.
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
   (first (g:boxed content-formats))
@@ -464,7 +464,7 @@
  #+liber-documentation
  "@version{2023-11-5}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @return{@em{True} if given @arg{gtype} was found.}
   @short{Checks if a given @arg{gtype} is part of the given @arg{formats}.}
   @see-class{gdk:content-formats}
@@ -503,7 +503,7 @@
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add @class{g:type-t} types for the mime types in formats for which
+    Add @class{g:type-t} type IDs for the mime types in formats for which
     serializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -524,7 +524,7 @@
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add @class{g:type-t} types for the mime types in formats for which
+    Add @class{g:type-t} type IDs for the mime types in formats for which
     deserializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -545,8 +545,8 @@
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add mime types for @class{g:type-t} types in formats for which serializers
-    are registered.
+    Add mime types for @class{g:type-t} type IDs in formats for which
+    serializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
@@ -566,8 +566,8 @@
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add mime types for @class{g:type-t} types in formats for which deserializers
-    are registered.
+    Add mime types for @class{g:type-t} type IDs in formats for which
+    deserializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"

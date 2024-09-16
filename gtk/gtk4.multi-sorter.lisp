@@ -118,7 +118,7 @@
  "@version{#2023-9-5}
   @syntax{(gtk:multi-sorter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-sorter} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:multi-sorter]{item-type} slot of the
     @class{gtk:multi-sorter} class.
