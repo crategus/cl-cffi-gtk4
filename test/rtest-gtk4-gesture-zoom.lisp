@@ -21,22 +21,24 @@
           (g:type-parent "GtkGestureZoom")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureZoom")))
+             (glib-test:list-children "GtkGestureZoom")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureZoom")))
+             (glib-test:list-interfaces "GtkGestureZoom")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkGestureZoom")))
+             (glib-test:list-properties "GtkGestureZoom")))
   ;; Check signals
   (is (equal '("scale-changed")
-             (gtk-test:list-signals "GtkGestureZoom")))
+             (glib-test:list-signals "GtkGestureZoom")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureZoom" GTK-GESTURE-ZOOM
-                       (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureZoom" GTK:GESTURE-ZOOM
+                       (:SUPERCLASS GTK:GESTURE
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_zoom_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkGestureZoom"))))
+             (gobject:get-gtype-definition "GtkGestureZoom"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -71,4 +73,4 @@
   (let ((gesture (gtk:gesture-zoom-new)))
     (is (= 1.0d0 (gtk:gesture-zoom-scale-delta gesture)))))
 
-;;; 2024-7-27
+;;; 2024-9-20

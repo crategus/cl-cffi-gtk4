@@ -21,35 +21,34 @@
           (g:type-parent "GtkInfoBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkInfoBar")))
+             (glib-test:list-children "GtkInfoBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkInfoBar")))
+             (glib-test:list-interfaces "GtkInfoBar")))
   ;; Check properties
   (is (equal '("message-type" "revealed" "show-close-button")
-             (gtk-test:list-properties "GtkInfoBar")))
+             (glib-test:list-properties "GtkInfoBar")))
   ;; Check signals
   (is (equal '("close" "response")
-             (gtk-test:list-signals "GtkInfoBar")))
+             (glib-test:list-signals "GtkInfoBar")))
   ;; Check CSS name
   (is (string= "infobar"
                (gtk:widget-class-css-name "GtkInfoBar")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkInfoBar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInfoBar" GTK-INFO-BAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_info_bar_get_type")
-                               ((MESSAGE-TYPE GTK-INFO-BAR-MESSAGE-TYPE
-                                 "message-type" "GtkMessageType" T T)
-                                (REVEALED GTK-INFO-BAR-REVEALED "revealed"
-                                 "gboolean" T T)
-                                (SHOW-CLOSE-BUTTON
-                                 GTK-INFO-BAR-SHOW-CLOSE-BUTTON
-                                 "show-close-button" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkInfoBar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkInfoBar" GTK:INFO-BAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_info_bar_get_type")
+                      ((MESSAGE-TYPE INFO-BAR-MESSAGE-TYPE
+                        "message-type" "GtkMessageType" T T)
+                       (REVEALED INFO-BAR-REVEALED "revealed" "gboolean" T T)
+                       (SHOW-CLOSE-BUTTON INFO-BAR-SHOW-CLOSE-BUTTON
+                        "show-close-button" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkInfoBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -93,4 +92,4 @@
 ;;;     gtk_info_bar_add_child
 ;;;     gtk_info_bar_remove_child
 
-;;; 2024-5-18
+;;; 2024-9-20

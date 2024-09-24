@@ -20,23 +20,23 @@
   ;; Check names
   (is (equal '("GTK_TREE_VIEW_COLUMN_GROW_ONLY" "GTK_TREE_VIEW_COLUMN_AUTOSIZE"
                "GTK_TREE_VIEW_COLUMN_FIXED")
-             (gtk-test:list-enum-item-name "GtkTreeViewColumnSizing")))
+             (glib-test:list-enum-item-names "GtkTreeViewColumnSizing")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkTreeViewColumnSizing")))
+             (glib-test:list-enum-item-values "GtkTreeViewColumnSizing")))
   ;; Check nick names
   (is (equal '("grow-only" "autosize" "fixed")
-             (gtk-test:list-enum-item-nick "GtkTreeViewColumnSizing")))
+             (glib-test:list-enum-item-nicks "GtkTreeViewColumnSizing")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTreeViewColumnSizing"
-                                     GTK-TREE-VIEW-COLUMN-SIZING
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_tree_view_column_sizing_get_type")
-                                     (:GROW-ONLY 0)
-                                     (:AUTOSIZE 1)
-                                     (:FIXED 2))
-             (gobject:get-g-type-definition "GtkTreeViewColumnSizing"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkTreeViewColumnSizing"
+                                    GTK:TREE-VIEW-COLUMN-SIZING
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_tree_view_column_sizing_get_type")
+                                    (:GROW-ONLY 0)
+                                    (:AUTOSIZE 1)
+                                    (:FIXED 2))
+             (gobject:get-gtype-definition "GtkTreeViewColumnSizing"))))
 
 ;;;     GtkTreeViewColumn
 
@@ -55,67 +55,59 @@
           (g:type-parent "GtkTreeViewColumn")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTreeViewColumn")))
+             (glib-test:list-children "GtkTreeViewColumn")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkTreeViewColumn")))
+             (glib-test:list-interfaces "GtkTreeViewColumn")))
   ;; Check properties
   (is (equal '("alignment" "cell-area" "clickable" "expand" "fixed-width"
                "max-width" "min-width" "reorderable" "resizable" "sizing"
                "sort-column-id" "sort-indicator" "sort-order" "spacing" "title"
                "visible" "widget" "width" "x-offset")
-             (gtk-test:list-properties "GtkTreeViewColumn")))
+             (glib-test:list-properties "GtkTreeViewColumn")))
   ;; Check signals
   (is (equal '("clicked")
-             (gtk-test:list-signals "GtkTreeViewColumn")))
+             (glib-test:list-signals "GtkTreeViewColumn")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeViewColumn"
-                                             GTK-TREE-VIEW-COLUMN
-                               (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T
-                                :INTERFACES ("GtkBuildable" "GtkCellLayout")
-                                :TYPE-INITIALIZER
-                                "gtk_tree_view_column_get_type")
-                               ((ALIGNMENT GTK-TREE-VIEW-COLUMN-ALIGNMENT
-                                 "alignment" "gfloat" T T)
-                                (CELL-AREA GTK-TREE-VIEW-COLUMN-CELL-AREA
-                                 "cell-area" "GtkCellArea" T NIL)
-                                (CLICKABLE GTK-TREE-VIEW-COLUMN-CLICKABLE
-                                 "clickable" "gboolean" T T)
-                                (EXPAND GTK-TREE-VIEW-COLUMN-EXPAND "expand"
-                                 "gboolean" T T)
-                                (FIXED-WIDTH GTK-TREE-VIEW-COLUMN-FIXED-WIDTH
-                                 "fixed-width" "gint" T T)
-                                (MAX-WIDTH GTK-TREE-VIEW-COLUMN-MAX-WIDTH
-                                 "max-width" "gint" T T)
-                                (MIN-WIDTH GTK-TREE-VIEW-COLUMN-MIN-WIDTH
-                                 "min-width" "gint" T T)
-                                (REORDERABLE GTK-TREE-VIEW-COLUMN-REORDERABLE
-                                 "reorderable" "gboolean" T T)
-                                (RESIZABLE GTK-TREE-VIEW-COLUMN-RESIZABLE
-                                 "resizable" "gboolean" T T)
-                                (SIZING GTK-TREE-VIEW-COLUMN-SIZING "sizing"
-                                 "GtkTreeViewColumnSizing" T T)
-                                (SORT-COLUMN-ID
-                                 GTK-TREE-VIEW-COLUMN-SORT-COLUMN-ID
-                                 "sort-column-id" "gint" T T)
-                                (SORT-INDICATOR
-                                 GTK-TREE-VIEW-COLUMN-SORT-INDICATOR
-                                 "sort-indicator" "gboolean" T T)
-                                (SORT-ORDER GTK-TREE-VIEW-COLUMN-SORT-ORDER
-                                 "sort-order" "GtkSortType" T T)
-                                (SPACING GTK-TREE-VIEW-COLUMN-SPACING "spacing"
-                                 "gint" T T)
-                                (TITLE GTK-TREE-VIEW-COLUMN-TITLE "title"
-                                 "gchararray" T T)
-                                (VISIBLE GTK-TREE-VIEW-COLUMN-VISIBLE "visible"
-                                 "gboolean" T T)
-                                (WIDGET GTK-TREE-VIEW-COLUMN-WIDGET "widget"
-                                 "GtkWidget" T T)
-                                (WIDTH GTK-TREE-VIEW-COLUMN-WIDTH "width"
-                                 "gint" T NIL)
-                                (X-OFFSET GTK-TREE-VIEW-COLUMN-X-OFFSET
-                                 "x-offset" "gint" T NIL)))
-             (gobject:get-g-type-definition "GtkTreeViewColumn"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeViewColumn" GTK:TREE-VIEW-COLUMN
+                      (:SUPERCLASS G:INITIALLY-UNOWNED
+                       :EXPORT T
+                       :INTERFACES ("GtkBuildable" "GtkCellLayout")
+                       :TYPE-INITIALIZER "gtk_tree_view_column_get_type")
+                      ((ALIGNMENT TREE-VIEW-COLUMN-ALIGNMENT
+                        "alignment" "gfloat" T T)
+                       (CELL-AREA TREE-VIEW-COLUMN-CELL-AREA
+                        "cell-area" "GtkCellArea" T NIL)
+                       (CLICKABLE TREE-VIEW-COLUMN-CLICKABLE
+                        "clickable" "gboolean" T T)
+                       (EXPAND TREE-VIEW-COLUMN-EXPAND "expand" "gboolean" T T)
+                       (FIXED-WIDTH TREE-VIEW-COLUMN-FIXED-WIDTH
+                        "fixed-width" "gint" T T)
+                       (MAX-WIDTH TREE-VIEW-COLUMN-MAX-WIDTH
+                        "max-width" "gint" T T)
+                       (MIN-WIDTH TREE-VIEW-COLUMN-MIN-WIDTH
+                        "min-width" "gint" T T)
+                       (REORDERABLE TREE-VIEW-COLUMN-REORDERABLE
+                        "reorderable" "gboolean" T T)
+                       (RESIZABLE TREE-VIEW-COLUMN-RESIZABLE
+                        "resizable" "gboolean" T T)
+                       (SIZING TREE-VIEW-COLUMN-SIZING "sizing"
+                        "GtkTreeViewColumnSizing" T T)
+                       (SORT-COLUMN-ID TREE-VIEW-COLUMN-SORT-COLUMN-ID
+                        "sort-column-id" "gint" T T)
+                       (SORT-INDICATOR TREE-VIEW-COLUMN-SORT-INDICATOR
+                        "sort-indicator" "gboolean" T T)
+                       (SORT-ORDER TREE-VIEW-COLUMN-SORT-ORDER
+                        "sort-order" "GtkSortType" T T)
+                       (SPACING TREE-VIEW-COLUMN-SPACING "spacing" "gint" T T)
+                       (TITLE TREE-VIEW-COLUMN-TITLE "title" "gchararray" T T)
+                       (VISIBLE TREE-VIEW-COLUMN-VISIBLE
+                        "visible" "gboolean" T T)
+                       (WIDGET TREE-VIEW-COLUMN-WIDGET "widget" "GtkWidget" T T)
+                       (WIDTH TREE-VIEW-COLUMN-WIDTH "width" "gint" T NIL)
+                       (X-OFFSET TREE-VIEW-COLUMN-X-OFFSET
+                        "x-offset" "gint" T NIL)))
+             (gobject:get-gtype-definition "GtkTreeViewColumn"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -220,4 +212,4 @@
 ;;;     gtk_tree_view_column_queue_resize
 ;;;     gtk_tree_view_column_get_tree_view
 
-;;; 2024-4-27
+;;; 2024-9-20

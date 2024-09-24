@@ -21,23 +21,24 @@
           (g:type-parent "GtkBinLayout")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkBinLayout")))
+             (glib-test:list-children "GtkBinLayout")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkBinLayout")))
+             (glib-test:list-interfaces "GtkBinLayout")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkBinLayout")))
+             (glib-test:list-properties "GtkBinLayout")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBinLayout")))
+             (glib-test:list-signals "GtkBinLayout")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBinLayout" GTK-BIN-LAYOUT
-                               (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_bin_layout_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkBinLayout"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBinLayout" GTK:BIN-LAYOUT
+                      (:SUPERCLASS GTK:LAYOUT-MANAGER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_bin_layout_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkBinLayout"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -50,4 +51,4 @@
   (let* ((button (make-instance 'gtk:button)))
     (is (typep (gtk:widget-layout-manager button) 'gtk:bin-layout))))
 
-;;; 2024-4-19
+;;; 2024-9-19

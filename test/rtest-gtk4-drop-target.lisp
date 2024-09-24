@@ -21,34 +21,32 @@
           (g:type-parent "GtkDropTarget")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDropTarget")))
+             (glib-test:list-children "GtkDropTarget")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkDropTarget")))
+             (glib-test:list-interfaces "GtkDropTarget")))
   ;; Check properties
   (is (equal '("actions" "current-drop" "drop" "formats" "preload" "value")
-             (gtk-test:list-properties "GtkDropTarget")))
+             (glib-test:list-properties "GtkDropTarget")))
   ;; Check signals
   (is (equal '("accept" "drop" "enter" "leave" "motion")
-             (gtk-test:list-signals "GtkDropTarget")))
+             (glib-test:list-signals "GtkDropTarget")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropTarget" GTK-DROP-TARGET
-                               (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_drop_target_get_type")
-                               ((ACTIONS GTK-DROP-TARGET-ACTIONS "actions"
-                                 "GdkDragAction" T T)
-                                (CURRENT-DROP GTK-DROP-TARGET-CURRENT-DROP
-                                 "current-drop" "GdkDrop" T NIL)
-                                (DROP GTK-DROP-TARGET-DROP "drop" "GdkDrop" T
-                                 NIL)
-                                (FORMATS GTK-DROP-TARGET-FORMATS "formats"
-                                 "GdkContentFormats" T NIL)
-                                (PRELOAD GTK-DROP-TARGET-PRELOAD "preload"
-                                 "gboolean" T T)
-                                (VALUE GTK-DROP-TARGET-VALUE "value" "GValue" T
-                                 NIL)))
-             (gobject:get-g-type-definition "GtkDropTarget"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDropTarget" GTK:DROP-TARGET
+                      (:SUPERCLASS GTK:EVENT-CONTROLLER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_drop_target_get_type")
+                      ((ACTIONS DROP-TARGET-ACTIONS
+                        "actions" "GdkDragAction" T T)
+                       (CURRENT-DROP DROP-TARGET-CURRENT-DROP
+                        "current-drop" "GdkDrop" T NIL)
+                       (DROP DROP-TARGET-DROP "drop" "GdkDrop" T NIL)
+                       (FORMATS DROP-TARGET-FORMATS
+                        "formats" "GdkContentFormats" T NIL)
+                       (PRELOAD DROP-TARGET-PRELOAD "preload" "gboolean" T T)
+                       (VALUE DROP-TARGET-VALUE "value" "GValue" T NIL)))
+             (gobject:get-gtype-definition "GtkDropTarget"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -90,4 +88,4 @@
 
 ;;;     gtk_drop_target_reject
 
-;;; 2024-7-4
+;;; 2024-9-20

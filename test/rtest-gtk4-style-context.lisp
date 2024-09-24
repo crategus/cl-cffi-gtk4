@@ -21,24 +21,24 @@
   (is (equal '("GTK_STYLE_CONTEXT_PRINT_NONE" "GTK_STYLE_CONTEXT_PRINT_RECURSE"
                "GTK_STYLE_CONTEXT_PRINT_SHOW_STYLE"
                "GTK_STYLE_CONTEXT_PRINT_SHOW_CHANGE")
-             (gtk-test:list-flags-item-name "GtkStyleContextPrintFlags")))
+             (glib-test:list-flags-item-names "GtkStyleContextPrintFlags")))
   ;; Check values
   (is (equal '(0 1 2 4)
-             (gtk-test:list-flags-item-value "GtkStyleContextPrintFlags")))
+             (glib-test:list-flags-item-values "GtkStyleContextPrintFlags")))
   ;; Check nick names
   (is (equal '("none" "recurse" "show-style" "show-change")
-             (gtk-test:list-flags-item-nick "GtkStyleContextPrintFlags")))
+             (glib-test:list-flags-item-nicks "GtkStyleContextPrintFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkStyleContextPrintFlags"
-                              GTK-STYLE-CONTEXT-PRINT-FLAGS
-                              (:EXPORT T
-                               :TYPE-INITIALIZER
-                               "gtk_style_context_print_flags_get_type")
-                              (:NONE 0)
-                              (:RECURSE 1)
-                              (:SHOW-STYLE 2)
-                              (:SHOW-CHANGE 4))
-             (gobject:get-g-type-definition "GtkStyleContextPrintFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkStyleContextPrintFlags"
+                                     GTK:STYLE-CONTEXT-PRINT-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_style_context_print_flags_get_type")
+                                     (:NONE 0)
+                                     (:RECURSE 1)
+                                     (:SHOW-STYLE 2)
+                                     (:SHOW-CHANGE 4))
+             (gobject:get-gtype-definition "GtkStyleContextPrintFlags"))))
 
 ;;;     GtkBorder
 
@@ -83,23 +83,25 @@
           (g:type-parent "GtkStyleContext")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStyleContext")))
+             (glib-test:list-children "GtkStyleContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkStyleContext")))
+             (glib-test:list-interfaces "GtkStyleContext")))
   ;; Check properties
   (is (equal '("display")
-             (gtk-test:list-properties "GtkStyleContext")))
+             (glib-test:list-properties "GtkStyleContext")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStyleContext")))
+             (glib-test:list-signals "GtkStyleContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStyleContext" GTK-STYLE-CONTEXT
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_style_context_get_type")
-                       ((DISPLAY GTK-STYLE-CONTEXT-DISPLAY "display"
-                         "GdkDisplay" T T)))
-             (gobject:get-g-type-definition "GtkStyleContext"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStyleContext" GTK:STYLE-CONTEXT
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_style_context_get_type")
+                      ((DISPLAY STYLE-CONTEXT-DISPLAY
+                        "display" "GdkDisplay" T T)))
+             (gobject:get-gtype-definition "GtkStyleContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -256,4 +258,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; 2024-7-4
+;;; 2024-9-19

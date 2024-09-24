@@ -22,22 +22,21 @@
           (glib:symbol-for-gtype "GtkLevelBarMode")))
   ;; Check names
   (is (equal '("GTK_LEVEL_BAR_MODE_CONTINUOUS" "GTK_LEVEL_BAR_MODE_DISCRETE")
-             (gtk-test:list-enum-item-name "GtkLevelBarMode")))
+             (glib-test:list-enum-item-names "GtkLevelBarMode")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkLevelBarMode")))
+             (glib-test:list-enum-item-values "GtkLevelBarMode")))
   ;; Check nick names
   (is (equal '("continuous" "discrete")
-             (gtk-test:list-enum-item-nick "GtkLevelBarMode")))
+             (glib-test:list-enum-item-nicks "GtkLevelBarMode")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLevelBarMode"
-                                     GTK-LEVEL-BAR-MODE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_level_bar_mode_get_type")
-                                     (:CONTINUOUS 0)
-                                     (:DISCRETE 1))
-             (gobject:get-g-type-definition "GtkLevelBarMode"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkLevelBarMode" GTK:LEVEL-BAR-MODE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_level_bar_mode_get_type")
+                                    (:CONTINUOUS 0)
+                                    (:DISCRETE 1))
+             (gobject:get-gtype-definition "GtkLevelBarMode"))))
 
 ;;;     GtkLevelBar
 
@@ -55,40 +54,36 @@
           (g:type-parent "GtkLevelBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkLevelBar")))
+             (glib-test:list-children "GtkLevelBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (gtk-test:list-interfaces "GtkLevelBar")))
+             (glib-test:list-interfaces "GtkLevelBar")))
   ;; Check properties
   (is (equal '("inverted" "max-value" "min-value" "mode" "orientation" "value")
-             (gtk-test:list-properties "GtkLevelBar")))
+             (glib-test:list-properties "GtkLevelBar")))
   ;; Check signals
   (is (equal '("offset-changed")
-             (gtk-test:list-signals "GtkLevelBar")))
+             (glib-test:list-signals "GtkLevelBar")))
   ;; Check CSS name
   (is (string= "levelbar"
                (gtk:widget-class-css-name "GtkLevelBar")))
   ;; Check accessible role
   (is (eq :meter (gtk:widget-class-accessible-role "GtkLevelBar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLevelBar" GTK-LEVEL-BAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleRange"
-                                 "GtkBuildable" "GtkConstraintTarget"
-                                 "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_level_bar_get_type")
-                               ((INVERTED GTK-LEVEL-BAR-INVERTED "inverted"
-                                 "gboolean" T T)
-                                (MAX-VALUE GTK-LEVEL-BAR-MAX-VALUE "max-value"
-                                 "gdouble" T T)
-                                (MIN-VALUE GTK-LEVEL-BAR-MIN-VALUE "min-value"
-                                 "gdouble" T T)
-                                (MODE GTK-LEVEL-BAR-MODE "mode"
-                                 "GtkLevelBarMode" T T)
-                                (VALUE GTK-LEVEL-BAR-VALUE "value" "gdouble" T
-                                 T)))
-             (gobject:get-g-type-definition "GtkLevelBar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLevelBar" GTK:LEVEL-BAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_level_bar_get_type")
+                      ((INVERTED LEVEL-BAR-INVERTED "inverted" "gboolean" T T)
+                       (MAX-VALUE LEVEL-BAR-MAX-VALUE "max-value" "gdouble" T T)
+                       (MIN-VALUE LEVEL-BAR-MIN-VALUE "min-value" "gdouble" T T)
+                       (MODE LEVEL-BAR-MODE "mode" "GtkLevelBarMode" T T)
+                       (VALUE LEVEL-BAR-VALUE "value" "gdouble" T T)))
+             (gobject:get-gtype-definition "GtkLevelBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -120,4 +115,4 @@
 ;;;     gtk_level_bar_remove_offset_value
 ;;;     gtk_level_bar_get_offset_value
 
-;;; 2024-4-25
+;;; 2024-9-20

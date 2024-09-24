@@ -3,6 +3,12 @@
 (def-suite gtk-native-dialog :in gtk-suite)
 (in-suite gtk-native-dialog)
 
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  ;; FIXME: After loading GTK the symbol for "GtkNativeDialog" is not
+  ;; registered. Why?
+  (g:type-ensure "GtkNativeDialog")
+  (setf (glib:symbol-for-gtype "GtkNativeDialog") 'gtk:native-dialog))
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkNativeDialog
@@ -12,10 +18,8 @@
   (is (g:type-is-object "GtkNativeDialog"))
   ;; Check registered name
   ;; FIXME: We have no symbol for GtkNativeDialog. Why!?
-  #+nil
   (is (eq 'gtk:native-dialog
           (glib:symbol-for-gtype "GtkNativeDialog")))
-  (is-false (glib:symbol-for-gtype "GtkNativeDialog"))
   ;; Check type initializer
   (is (eq (g:gtype "GtkNativeDialog")
           (g:gtype (cffi:foreign-funcall "gtk_native_dialog_get_type" :size))))
@@ -24,28 +28,29 @@
           (g:type-parent "GtkNativeDialog")))
   ;; Check children
   (is (equal '("GtkFileChooserNative")
-             (gtk-test:list-children "GtkNativeDialog")))
+             (glib-test:list-children "GtkNativeDialog")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkNativeDialog")))
+             (glib-test:list-interfaces "GtkNativeDialog")))
   ;; Check properties
   (is (equal '("modal" "title" "transient-for" "visible")
-             (gtk-test:list-properties "GtkNativeDialog")))
+             (glib-test:list-properties "GtkNativeDialog")))
   ;; Check signals
   (is (equal '("response")
-             (gtk-test:list-signals "GtkNativeDialog")))
+             (glib-test:list-signals "GtkNativeDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNativeDialog" GTK-NATIVE-DIALOG
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNativeDialog" GTK:NATIVE-DIALOG
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_native_dialog_get_type")
-                       ((MODAL GTK-NATIVE-DIALOG-MODAL "modal" "gboolean" T T)
-                        (TITLE GTK-NATIVE-DIALOG-TITLE "title" "gchararray" T
-                         T)
-                        (TRANSIENT-FOR GTK-NATIVE-DIALOG-TRANSIENT-FOR
+                       ((MODAL NATIVE-DIALOG-MODAL "modal" "gboolean" T T)
+                        (TITLE NATIVE-DIALOG-TITLE "title" "gchararray" T T)
+                        (TRANSIENT-FOR NATIVE-DIALOG-TRANSIENT-FOR
                          "transient-for" "GtkWindow" T T)
-                        (VISIBLE GTK-NATIVE-DIALOG-VISIBLE "visible" "gboolean"
-                         T T)))
-             (gobject:get-g-type-definition "GtkNativeDialog"))))
+                        (VISIBLE NATIVE-DIALOG-VISIBLE
+                         "visible" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkNativeDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -64,4 +69,4 @@
 ;;;     gtk_native_dialog_hide
 ;;;     gtk_native_dialog_destroy
 
-;;; 2024-4-11
+;;; 2024-9-20

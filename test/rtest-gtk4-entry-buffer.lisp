@@ -25,25 +25,27 @@
           (g:type-parent "GtkEntryBuffer")))
   ;; Check children
   (is (equal '("GtkPasswordEntryBuffer")
-             (gtk-test:list-children "GtkEntryBuffer")))
+             (glib-test:list-children "GtkEntryBuffer")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEntryBuffer")))
+             (glib-test:list-interfaces "GtkEntryBuffer")))
   ;; Check class properties
   (is (equal '("length" "max-length" "text")
-             (gtk-test:list-properties "GtkEntryBuffer")))
+             (glib-test:list-properties "GtkEntryBuffer")))
   ;; Check signals
   (is (equal '("deleted-text" "inserted-text")
-             (gtk-test:list-signals "GtkEntryBuffer")))
+             (glib-test:list-signals "GtkEntryBuffer")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryBuffer" GTK-ENTRY-BUFFER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_entry_buffer_get_type")
-                       ((LENGTH GTK-ENTRY-BUFFER-LENGTH "length" "guint" T NIL)
-                        (MAX-LENGTH GTK-ENTRY-BUFFER-MAX-LENGTH "max-length"
-                         "gint" T T)
-                        (TEXT GTK-ENTRY-BUFFER-TEXT "text" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkEntryBuffer"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEntryBuffer" GTK:ENTRY-BUFFER
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_entry_buffer_get_type")
+                      ((LENGTH ENTRY-BUFFER-LENGTH "length" "guint" T NIL)
+                       (MAX-LENGTH ENTRY-BUFFER-MAX-LENGTH
+                        "max-length" "gint" T T)
+                       (TEXT ENTRY-BUFFER-TEXT "text" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkEntryBuffer"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -156,4 +158,4 @@
           nil))
     (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
 
-;;; 2024-7-3
+;;; 2024-9-19

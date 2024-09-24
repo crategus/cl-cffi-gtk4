@@ -21,23 +21,25 @@
           (g:type-parent "GtkGestureStylus")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureStylus")))
+             (glib-test:list-children "GtkGestureStylus")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureStylus")))
+             (glib-test:list-interfaces "GtkGestureStylus")))
   ;; Check properties
   (is (equal '("stylus-only")
-             (gtk-test:list-properties "GtkGestureStylus")))
+             (glib-test:list-properties "GtkGestureStylus")))
   ;; Check signals
   (is (equal '("down" "motion" "proximity" "up")
-             (gtk-test:list-signals "GtkGestureStylus")))
+             (glib-test:list-signals "GtkGestureStylus")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureStylus" GTK-GESTURE-STYLUS
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_gesture_stylus_get_type")
-                       ((STYLUS-ONLY GTK-GESTURE-STYLUS-STYLUS-ONLY
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureStylus" GTK:GESTURE-STYLUS
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_gesture_stylus_get_type")
+                       ((STYLUS-ONLY GESTURE-STYLUS-STYLUS-ONLY
                          "stylus-only" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkGestureStylus"))))
+             (gobject:get-gtype-definition "GtkGestureStylus"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -143,4 +145,4 @@
   (let ((gesture (gtk:gesture-stylus-new)))
     (is-false (gtk:gesture-stylus-device-tool gesture))))
 
-;;; 2024-7-27
+;;; 2024-9-20

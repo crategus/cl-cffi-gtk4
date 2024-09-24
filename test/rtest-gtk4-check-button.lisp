@@ -21,38 +21,39 @@
           (g:type-parent "GtkCheckButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCheckButton")))
+             (glib-test:list-children "GtkCheckButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkCheckButton")))
+             (glib-test:list-interfaces "GtkCheckButton")))
   ;; Check properties
   (is (equal '("action-name" "action-target" "active" "child" "group"
                "inconsistent" "label" "use-underline")
-             (gtk-test:list-properties "GtkCheckButton")))
+             (glib-test:list-properties "GtkCheckButton")))
   ;; Check signals
   (is (equal '("activate" "toggled")
-             (gtk-test:list-signals "GtkCheckButton")))
+             (glib-test:list-signals "GtkCheckButton")))
   ;; Check CSS information
   (is (string= "checkbutton"
                (gtk:widget-class-css-name "GtkCheckButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCheckButton" GTK-CHECK-BUTTON
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCheckButton" GTK:CHECK-BUTTON
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_check_button_get_type")
-                       ((ACTIVE GTK-CHECK-BUTTON-ACTIVE "active" "gboolean" T
-                         T)
-                        (CHILD GTK-CHECK-BUTTON-CHILD "child" "GtkWidget" T T)
-                        (GROUP GTK-CHECK-BUTTON-GROUP "group" "GtkCheckButton"
-                         NIL T)
-                        (INCONSISTENT GTK-CHECK-BUTTON-INCONSISTENT
+                       ((ACTIVE CHECK-BUTTON-ACTIVE "active" "gboolean" T T)
+                        (CHILD CHECK-BUTTON-CHILD "child" "GtkWidget" T T)
+                        (GROUP CHECK-BUTTON-GROUP
+                         "group" "GtkCheckButton" NIL T)
+                        (INCONSISTENT CHECK-BUTTON-INCONSISTENT
                          "inconsistent" "gboolean" T T)
-                        (LABEL GTK-CHECK-BUTTON-LABEL "label" "gchararray" T T)
-                        (USE-UNDERLINE GTK-CHECK-BUTTON-USE-UNDERLINE
+                        (LABEL CHECK-BUTTON-LABEL "label" "gchararray" T T)
+                        (USE-UNDERLINE CHECK-BUTTON-USE-UNDERLINE
                          "use-underline" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkCheckButton"))))
+             (gobject:get-gtype-definition "GtkCheckButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -123,4 +124,4 @@
     (is (string= "_label" (gtk:check-button-label button)))
     (is-true (gtk:check-button-use-underline button))))
 
-;;; 2024-5-4
+;;; 2024-9-20

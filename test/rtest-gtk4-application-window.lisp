@@ -15,17 +15,17 @@
   (is (eq (g:gtype "GtkWindow") (g:type-parent "GtkApplicationWindow")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkApplicationWindow")))
+             (glib-test:list-children "GtkApplicationWindow")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GActionGroup" "GActionMap")
-             (gtk-test:list-interfaces "GtkApplicationWindow")))
+             (glib-test:list-interfaces "GtkApplicationWindow")))
   ;; Check class properties
   (is (equal '("show-menubar")
-             (gtk-test:list-properties "GtkApplicationWindow")))
+             (glib-test:list-properties "GtkApplicationWindow")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkApplicationWindow")))
+             (glib-test:list-signals "GtkApplicationWindow")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkApplicationWindow")))
@@ -33,16 +33,18 @@
   (is (eq :application
           (gtk:widget-class-accessible-role "GtkApplicationWindow")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplicationWindow"
-                                             GTK-APPLICATION-WINDOW
-                       (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
-                        ("GActionGroup" "GActionMap" "GtkAccessible"
-                         "GtkBuildable" "GtkConstraintTarget" "GtkNative"
-                         "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_application_window_get_type")
-                       ((SHOW-MENUBAR GTK-APPLICATION-WINDOW-SHOW-MENUBAR
-                         "show-menubar" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkApplicationWindow"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkApplicationWindow"
+                                      GTK:APPLICATION-WINDOW
+                      (:SUPERCLASS GTK:WINDOW
+                       :EXPORT T
+                       :INTERFACES
+                       ("GActionGroup" "GActionMap" "GtkAccessible"
+                        "GtkBuildable" "GtkConstraintTarget" "GtkNative"
+                        "GtkRoot" "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_application_window_get_type")
+                      ((SHOW-MENUBAR APPLICATION-WINDOW-SHOW-MENUBAR
+                        "show-menubar" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkApplicationWindow"))))
 
 ;;; --- Properties and Accessors -----------------------------------------------
 

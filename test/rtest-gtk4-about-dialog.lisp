@@ -26,41 +26,40 @@
                "GTK_LICENSE_AGPL_3_0_ONLY" "GTK_LICENSE_BSD_3"
                "GTK_LICENSE_APACHE_2_0" "GTK_LICENSE_MPL_2_0"
                "GTK_LICENSE_0BSD")
-             (gtk-test:list-enum-item-name "GtkLicense")))
+             (glib-test:list-enum-item-names "GtkLicense")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18)
-             (gtk-test:list-enum-item-value "GtkLicense")))
+             (glib-test:list-enum-item-values "GtkLicense")))
   ;; Check nick names
   (is (equal '("unknown" "custom" "gpl-2-0" "gpl-3-0" "lgpl-2-1" "lgpl-3-0"
                "bsd" "mit-x11" "artistic" "gpl-2-0-only" "gpl-3-0-only"
                "lgpl-2-1-only" "lgpl-3-0-only" "agpl-3-0" "agpl-3-0-only"
                "bsd-3" "apache-2-0" "mpl-2-0" "0bsd")
-             (gtk-test:list-enum-item-nick "GtkLicense")))
+             (glib-test:list-enum-item-nicks "GtkLicense")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLicense"
-                             GTK-LICENSE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_license_get_type")
-                             (:UNKNOWN 0)
-                             (:CUSTOM 1)
-                             (:GPL-2-0 2)
-                             (:GPL-3-0 3)
-                             (:LGPL-2-1 4)
-                             (:LGPL-3-0 5)
-                             (:BSD 6)
-                             (:MIT-X11 7)
-                             (:ARTISTIC 8)
-                             (:GPL-2-0-ONLY 9)
-                             (:GPL-3-0-ONLY 10)
-                             (:LGPL-2-1-ONLY 11)
-                             (:LGPL-3-0-ONLY 12)
-                             (:AGPL-3-0 13)
-                             (:AGPL-3-0-ONLY 14)
-                             (:BSD-3 15)
-                             (:APACHE-2-0 16)
-                             (:MPL-2-0 17)
-                             (:0BSD 18))
-             (gobject:get-g-type-definition "GtkLicense"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkLicense" GTK:LICENSE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_license_get_type")
+                       (:UNKNOWN 0)
+                       (:CUSTOM 1)
+                       (:GPL-2-0 2)
+                       (:GPL-3-0 3)
+                       (:LGPL-2-1 4)
+                       (:LGPL-3-0 5)
+                       (:BSD 6)
+                       (:MIT-X11 7)
+                       (:ARTISTIC 8)
+                       (:GPL-2-0-ONLY 9)
+                       (:GPL-3-0-ONLY 10)
+                       (:LGPL-2-1-ONLY 11)
+                       (:LGPL-3-0-ONLY 12)
+                       (:AGPL-3-0 13)
+                       (:AGPL-3-0-ONLY 14)
+                       (:BSD-3 15)
+                       (:APACHE-2-0 16)
+                       (:MPL-2-0 17)
+                       (:0BSD 18))
+             (gobject:get-gtype-definition "GtkLicense"))))
 
 ;;;     GtkAboutDialog
 
@@ -78,63 +77,63 @@
           (g:type-parent "GtkAboutDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAboutDialog")))
+             (glib-test:list-children "GtkAboutDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
-             (gtk-test:list-interfaces "GtkAboutDialog")))
+             (glib-test:list-interfaces "GtkAboutDialog")))
   ;; Check class properties
   (is (equal '("artists" "authors" "comments" "copyright" "documenters"
                "license" "license-type" "logo" "logo-icon-name" "program-name"
                "system-information" "translator-credits" "version" "website"
                "website-label" "wrap-license")
-             (gtk-test:list-properties "GtkAboutDialog")))
+             (glib-test:list-properties "GtkAboutDialog")))
   ;; Check signals
   (is (equal '("activate-link")
-             (gtk-test:list-signals "GtkAboutDialog")))
+             (glib-test:list-signals "GtkAboutDialog")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAboutDialog")))
   ;; Check accessible role
   (is (eq :application (gtk:widget-class-accessible-role "GtkAboutDialog")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
-                       (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAboutDialog" GTK:ABOUT-DIALOG
+                       (:SUPERCLASS GTK:WINDOW
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")
                         :TYPE-INITIALIZER "gtk_about_dialog_get_type")
-                       ((ARTISTS GTK-ABOUT-DIALOG-ARTISTS "artists" "GStrv" T
-                         T)
-                        (AUTHORS GTK-ABOUT-DIALOG-AUTHORS "authors" "GStrv" T
-                         T)
-                        (COMMENTS GTK-ABOUT-DIALOG-COMMENTS "comments"
-                         "gchararray" T T)
-                        (COPYRIGHT GTK-ABOUT-DIALOG-COPYRIGHT "copyright"
-                         "gchararray" T T)
-                        (DOCUMENTERS GTK-ABOUT-DIALOG-DOCUMENTERS "documenters"
-                         "GStrv" T T)
-                        (LICENSE GTK-ABOUT-DIALOG-LICENSE "license"
-                         "gchararray" T T)
-                        (LICENSE-TYPE GTK-ABOUT-DIALOG-LICENSE-TYPE
+                       ((ARTISTS ABOUT-DIALOG-ARTISTS "artists" "GStrv" T T)
+                        (AUTHORS ABOUT-DIALOG-AUTHORS "authors" "GStrv" T T)
+                        (COMMENTS ABOUT-DIALOG-COMMENTS
+                         "comments" "gchararray" T T)
+                        (COPYRIGHT ABOUT-DIALOG-COPYRIGHT
+                         "copyright" "gchararray" T T)
+                        (DOCUMENTERS ABOUT-DIALOG-DOCUMENTERS
+                         "documenters" "GStrv" T T)
+                        (LICENSE ABOUT-DIALOG-LICENSE
+                         "license" "gchararray" T T)
+                        (LICENSE-TYPE ABOUT-DIALOG-LICENSE-TYPE
                          "license-type" "GtkLicense" T T)
-                        (LOGO GTK-ABOUT-DIALOG-LOGO "logo" "GdkPaintable" T T)
-                        (LOGO-ICON-NAME GTK-ABOUT-DIALOG-LOGO-ICON-NAME
+                        (LOGO ABOUT-DIALOG-LOGO "logo" "GdkPaintable" T T)
+                        (LOGO-ICON-NAME ABOUT-DIALOG-LOGO-ICON-NAME
                          "logo-icon-name" "gchararray" T T)
-                        (PROGRAM-NAME GTK-ABOUT-DIALOG-PROGRAM-NAME
+                        (PROGRAM-NAME ABOUT-DIALOG-PROGRAM-NAME
                          "program-name" "gchararray" T T)
-                        (SYSTEM-INFORMATION GTK-ABOUT-DIALOG-SYSTEM-INFORMATION
+                        (SYSTEM-INFORMATION ABOUT-DIALOG-SYSTEM-INFORMATION
                          "system-information" "gchararray" T T)
-                        (TRANSLATOR-CREDITS GTK-ABOUT-DIALOG-TRANSLATOR-CREDITS
+                        (TRANSLATOR-CREDITS ABOUT-DIALOG-TRANSLATOR-CREDITS
                          "translator-credits" "gchararray" T T)
-                        (VERSION GTK-ABOUT-DIALOG-VERSION "version"
-                         "gchararray" T T)
-                        (WEBSITE GTK-ABOUT-DIALOG-WEBSITE "website"
-                         "gchararray" T T)
-                        (WEBSITE-LABEL GTK-ABOUT-DIALOG-WEBSITE-LABEL
+                        (VERSION ABOUT-DIALOG-VERSION
+                         "version" "gchararray" T T)
+                        (WEBSITE ABOUT-DIALOG-WEBSITE
+                         "website" "gchararray" T T)
+                        (WEBSITE-LABEL ABOUT-DIALOG-WEBSITE-LABEL
                          "website-label" "gchararray" T T)
-                        (WRAP-LICENSE GTK-ABOUT-DIALOG-WRAP-LICENSE
+                        (WRAP-LICENSE ABOUT-DIALOG-WRAP-LICENSE
                          "wrap-license" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkAboutDialog"))))
+             (gobject:get-gtype-definition "GtkAboutDialog"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -182,4 +181,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2024-4-11
+;;; 2024-9-20

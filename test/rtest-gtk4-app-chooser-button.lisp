@@ -22,42 +22,40 @@
           (g:type-parent "GtkAppChooserButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAppChooserButton")))
+             (glib-test:list-children "GtkAppChooserButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAppChooser")
-             (gtk-test:list-interfaces "GtkAppChooserButton")))
+             (glib-test:list-interfaces "GtkAppChooserButton")))
   ;; Check properties
   (is (equal '("content-type" "heading" "modal" "show-default-item"
                "show-dialog-item")
-             (gtk-test:list-properties "GtkAppChooserButton")))
+             (glib-test:list-properties "GtkAppChooserButton")))
   ;; Check signals
   (is (equal '("activate" "changed" "custom-item-activated")
-             (gtk-test:list-signals "GtkAppChooserButton")))
+             (glib-test:list-signals "GtkAppChooserButton")))
   ;; Check CSS name
   (is (string= "appchooserbutton"
                (gtk:widget-class-css-name "GtkAppChooserButton")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkAppChooserButton")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserButton"
-                                             GTK-APP-CHOOSER-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_app_chooser_button_get_type")
-                               ((HEADING GTK-APP-CHOOSER-BUTTON-HEADING
-                                 "heading" "gchararray" T T)
-                                (MODAL GTK-APP-CHOOSER-BUTTON-MODAL "modal"
-                                 "gboolean" T T)
-                                (SHOW-DEFAULT-ITEM
-                                 GTK-APP-CHOOSER-BUTTON-SHOW-DEFAULT-ITEM
-                                 "show-default-item" "gboolean" T T)
-                                (SHOW-DIALOG-ITEM
-                                 GTK-APP-CHOOSER-BUTTON-SHOW-DIALOG-ITEM
-                                 "show-dialog-item" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkAppChooserButton"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAppChooserButton"
+                                      GTK:APP-CHOOSER-BUTTON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_app_chooser_button_get_type")
+                      ((HEADING APP-CHOOSER-BUTTON-HEADING
+                        "heading" "gchararray" T T)
+                       (MODAL APP-CHOOSER-BUTTON-MODAL "modal" "gboolean" T T)
+                       (SHOW-DEFAULT-ITEM APP-CHOOSER-BUTTON-SHOW-DEFAULT-ITEM
+                        "show-default-item" "gboolean" T T)
+                       (SHOW-DIALOG-ITEM APP-CHOOSER-BUTTON-SHOW-DIALOG-ITEM
+                        "show-dialog-item" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkAppChooserButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

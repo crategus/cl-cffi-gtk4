@@ -23,10 +23,10 @@
   ;; Check children
   (is (equal '("GtkCellRendererAccel" "GtkCellRendererCombo"
                "GtkCellRendererSpin")
-             (gtk-test:list-children "GtkCellRendererText")))
+             (glib-test:list-children "GtkCellRendererText")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererText")))
+             (glib-test:list-interfaces "GtkCellRendererText")))
   ;; Check properties
   (is (equal '("align-set" "alignment" "attributes" "background"
                "background-rgba" "background-set" "editable" "editable-set"
@@ -39,121 +39,104 @@
                "style-set" "text" "underline" "underline-set" "variant"
                "variant-set" "weight" "weight-set" "width-chars" "wrap-mode"
                "wrap-width")
-             (gtk-test:list-properties "GtkCellRendererText")))
-  ;; Check the signals
+             (glib-test:list-properties "GtkCellRendererText")))
+  ;; Check signals
   (is (equal '("edited")
-             (gtk-test:list-signals "GtkCellRendererText")))
+             (glib-test:list-signals "GtkCellRendererText")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererText" GTK-CELL-RENDERER-TEXT
-                               (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_text_get_type")
-                               ((ALIGN-SET GTK-CELL-RENDERER-TEXT-ALIGN-SET
-                                 "align-set" "gboolean" T T)
-                                (ALIGNMENT GTK-CELL-RENDERER-TEXT-ALIGNMENT
-                                 "alignment" "PangoAlignment" T T)
-                                (ATTRIBUTES GTK-CELL-RENDERER-TEXT-ATTRIBUTES
-                                 "attributes" "PangoAttrList" T T)
-                                (BACKGROUND GTK-CELL-RENDERER-TEXT-BACKGROUND
-                                 "background" "gchararray" NIL T)
-                                (BACKGROUND-RGBA
-                                 GTK-CELL-RENDERER-TEXT-BACKGROUND-RGBA
-                                 "background-rgba" "GdkRGBA" T T)
-                                (BACKGROUND-SET
-                                 GTK-CELL-RENDERER-TEXT-BACKGROUND-SET
-                                 "background-set" "gboolean" T T)
-                                (EDITABLE GTK-CELL-RENDERER-TEXT-EDITABLE
-                                 "editable" "gboolean" T T)
-                                (EDITABLE-SET
-                                 GTK-CELL-RENDERER-TEXT-EDITABLE-SET
-                                 "editable-set" "gboolean" T T)
-                                (ELLIPSIZE GTK-CELL-RENDERER-TEXT-ELLIPSIZE
-                                 "ellipsize" "PangoEllipsizeMode" T T)
-                                (ELLIPSIZE-SET
-                                 GTK-CELL-RENDERER-TEXT-ELLIPSIZE-SET
-                                 "ellipsize-set" "gboolean" T T)
-                                (FAMILY GTK-CELL-RENDERER-TEXT-FAMILY "family"
-                                 "gchararray" T T)
-                                (FAMILY-SET GTK-CELL-RENDERER-TEXT-FAMILY-SET
-                                 "family-set" "gboolean" T T)
-                                (FONT GTK-CELL-RENDERER-TEXT-FONT "font"
-                                 "gchararray" T T)
-                                (FONT-DESC GTK-CELL-RENDERER-TEXT-FONT-DESC
-                                 "font-desc" "PangoFontDescription" T T)
-                                (FOREGROUND GTK-CELL-RENDERER-TEXT-FOREGROUND
-                                 "foreground" "gchararray" NIL T)
-                                (FOREGROUND-RGBA
-                                 GTK-CELL-RENDERER-TEXT-FOREGROUND-RGBA
-                                 "foreground-rgba" "GdkRGBA" T T)
-                                (FOREGROUND-SET
-                                 GTK-CELL-RENDERER-TEXT-FOREGROUND-SET
-                                 "foreground-set" "gboolean" T T)
-                                (LANGUAGE GTK-CELL-RENDERER-TEXT-LANGUAGE
-                                 "language" "gchararray" T T)
-                                (LANGUAGE-SET
-                                 GTK-CELL-RENDERER-TEXT-LANGUAGE-SET
-                                 "language-set" "gboolean" T T)
-                                (MARKUP GTK-CELL-RENDERER-TEXT-MARKUP "markup"
-                                 "gchararray" NIL T)
-                                (MAX-WIDTH-CHARS
-                                 GTK-CELL-RENDERER-TEXT-MAX-WIDTH-CHARS
-                                 "max-width-chars" "gint" T T)
-                                (PLACEHOLDER-TEXT
-                                 GTK-CELL-RENDERER-TEXT-PLACEHOLDER-TEXT
-                                 "placeholder-text" "gchararray" T T)
-                                (RISE GTK-CELL-RENDERER-TEXT-RISE "rise" "gint"
-                                 T T)
-                                (RISE-SET GTK-CELL-RENDERER-TEXT-RISE-SET
-                                 "rise-set" "gboolean" T T)
-                                (SCALE GTK-CELL-RENDERER-TEXT-SCALE "scale"
-                                 "gdouble" T T)
-                                (SCALE-SET GTK-CELL-RENDERER-TEXT-SCALE-SET
-                                 "scale-set" "gboolean" T T)
-                                (SINGLE-PARAGRAPH-MODE
-                                 GTK-CELL-RENDERER-TEXT-SINGLE-PARAGRAPH-MODE
-                                 "single-paragraph-mode" "gboolean" T T)
-                                (SIZE GTK-CELL-RENDERER-TEXT-SIZE "size" "gint"
-                                 T T)
-                                (SIZE-POINTS GTK-CELL-RENDERER-TEXT-SIZE-POINTS
-                                 "size-points" "gdouble" T T)
-                                (SIZE-SET GTK-CELL-RENDERER-TEXT-SIZE-SET
-                                 "size-set" "gboolean" T T)
-                                (STRETCH GTK-CELL-RENDERER-TEXT-STRETCH
-                                 "stretch" "PangoStretch" T T)
-                                (STRETCH-SET GTK-CELL-RENDERER-TEXT-STRETCH-SET
-                                 "stretch-set" "gboolean" T T)
-                                (STRIKETHROUGH
-                                 GTK-CELL-RENDERER-TEXT-STRIKETHROUGH
-                                 "strikethrough" "gboolean" T T)
-                                (STRIKETHROUGH-SET
-                                 GTK-CELL-RENDERER-TEXT-STRIKETHROUGH-SET
-                                 "strikethrough-set" "gboolean" T T)
-                                (STYLE GTK-CELL-RENDERER-TEXT-STYLE "style"
-                                 "PangoStyle" T T)
-                                (STYLE-SET GTK-CELL-RENDERER-TEXT-STYLE-SET
-                                 "style-set" "gboolean" T T)
-                                (TEXT GTK-CELL-RENDERER-TEXT-TEXT "text"
-                                 "gchararray" T T)
-                                (UNDERLINE GTK-CELL-RENDERER-TEXT-UNDERLINE
-                                 "underline" "PangoUnderline" T T)
-                                (UNDERLINE-SET
-                                 GTK-CELL-RENDERER-TEXT-UNDERLINE-SET
-                                 "underline-set" "gboolean" T T)
-                                (VARIANT GTK-CELL-RENDERER-TEXT-VARIANT
-                                 "variant" "PangoVariant" T T)
-                                (VARIANT-SET GTK-CELL-RENDERER-TEXT-VARIANT-SET
-                                 "variant-set" "gboolean" T T)
-                                (WEIGHT GTK-CELL-RENDERER-TEXT-WEIGHT "weight"
-                                 "gint" T T)
-                                (WEIGHT-SET GTK-CELL-RENDERER-TEXT-WEIGHT-SET
-                                 "weight-set" "gboolean" T T)
-                                (WIDTH-CHARS GTK-CELL-RENDERER-TEXT-WIDTH-CHARS
-                                 "width-chars" "gint" T T)
-                                (WRAP-MODE GTK-CELL-RENDERER-TEXT-WRAP-MODE
-                                 "wrap-mode" "PangoWrapMode" T T)
-                                (WRAP-WIDTH GTK-CELL-RENDERER-TEXT-WRAP-WIDTH
-                                 "wrap-width" "gint" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererText"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererText"
+                                      GTK:CELL-RENDERER-TEXT
+                       (:SUPERCLASS GTK:CELL-RENDERER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_cell_renderer_text_get_type")
+                       ((ALIGN-SET CELL-RENDERER-TEXT-ALIGN-SET
+                         "align-set" "gboolean" T T)
+                        (ALIGNMENT CELL-RENDERER-TEXT-ALIGNMENT
+                         "alignment" "PangoAlignment" T T)
+                        (ATTRIBUTES CELL-RENDERER-TEXT-ATTRIBUTES
+                         "attributes" "PangoAttrList" T T)
+                        (BACKGROUND CELL-RENDERER-TEXT-BACKGROUND
+                         "background" "gchararray" NIL T)
+                        (BACKGROUND-RGBA CELL-RENDERER-TEXT-BACKGROUND-RGBA
+                         "background-rgba" "GdkRGBA" T T)
+                        (BACKGROUND-SET CELL-RENDERER-TEXT-BACKGROUND-SET
+                         "background-set" "gboolean" T T)
+                        (EDITABLE CELL-RENDERER-TEXT-EDITABLE
+                         "editable" "gboolean" T T)
+                        (EDITABLE-SET CELL-RENDERER-TEXT-EDITABLE-SET
+                         "editable-set" "gboolean" T T)
+                        (ELLIPSIZE CELL-RENDERER-TEXT-ELLIPSIZE
+                         "ellipsize" "PangoEllipsizeMode" T T)
+                        (ELLIPSIZE-SET CELL-RENDERER-TEXT-ELLIPSIZE-SET
+                         "ellipsize-set" "gboolean" T T)
+                        (FAMILY CELL-RENDERER-TEXT-FAMILY
+                         "family" "gchararray" T T)
+                        (FAMILY-SET CELL-RENDERER-TEXT-FAMILY-SET
+                         "family-set" "gboolean" T T)
+                        (FONT CELL-RENDERER-TEXT-FONT "font" "gchararray" T T)
+                        (FONT-DESC CELL-RENDERER-TEXT-FONT-DESC
+                         "font-desc" "PangoFontDescription" T T)
+                        (FOREGROUND CELL-RENDERER-TEXT-FOREGROUND
+                         "foreground" "gchararray" NIL T)
+                        (FOREGROUND-RGBA CELL-RENDERER-TEXT-FOREGROUND-RGBA
+                         "foreground-rgba" "GdkRGBA" T T)
+                        (FOREGROUND-SET CELL-RENDERER-TEXT-FOREGROUND-SET
+                         "foreground-set" "gboolean" T T)
+                        (LANGUAGE CELL-RENDERER-TEXT-LANGUAGE
+                         "language" "gchararray" T T)
+                        (LANGUAGE-SET CELL-RENDERER-TEXT-LANGUAGE-SET
+                         "language-set" "gboolean" T T)
+                        (MARKUP CELL-RENDERER-TEXT-MARKUP
+                         "markup" "gchararray" NIL T)
+                        (MAX-WIDTH-CHARS CELL-RENDERER-TEXT-MAX-WIDTH-CHARS
+                         "max-width-chars" "gint" T T)
+                        (PLACEHOLDER-TEXT CELL-RENDERER-TEXT-PLACEHOLDER-TEXT
+                         "placeholder-text" "gchararray" T T)
+                        (RISE CELL-RENDERER-TEXT-RISE "rise" "gint" T T)
+                        (RISE-SET CELL-RENDERER-TEXT-RISE-SET
+                         "rise-set" "gboolean" T T)
+                        (SCALE CELL-RENDERER-TEXT-SCALE "scale" "gdouble" T T)
+                        (SCALE-SET CELL-RENDERER-TEXT-SCALE-SET
+                         "scale-set" "gboolean" T T)
+                        (SINGLE-PARAGRAPH-MODE
+                         CELL-RENDERER-TEXT-SINGLE-PARAGRAPH-MODE
+                         "single-paragraph-mode" "gboolean" T T)
+                        (SIZE CELL-RENDERER-TEXT-SIZE "size" "gint" T T)
+                        (SIZE-POINTS CELL-RENDERER-TEXT-SIZE-POINTS
+                         "size-points" "gdouble" T T)
+                        (SIZE-SET CELL-RENDERER-TEXT-SIZE-SET
+                         "size-set" "gboolean" T T)
+                        (STRETCH CELL-RENDERER-TEXT-STRETCH
+                         "stretch" "PangoStretch" T T)
+                        (STRETCH-SET CELL-RENDERER-TEXT-STRETCH-SET
+                         "stretch-set" "gboolean" T T)
+                        (STRIKETHROUGH CELL-RENDERER-TEXT-STRIKETHROUGH
+                         "strikethrough" "gboolean" T T)
+                        (STRIKETHROUGH-SET CELL-RENDERER-TEXT-STRIKETHROUGH-SET
+                         "strikethrough-set" "gboolean" T T)
+                        (STYLE CELL-RENDERER-TEXT-STYLE "style" "PangoStyle" T T)
+                        (STYLE-SET CELL-RENDERER-TEXT-STYLE-SET
+                         "style-set" "gboolean" T T)
+                        (TEXT CELL-RENDERER-TEXT-TEXT "text" "gchararray" T T)
+                        (UNDERLINE CELL-RENDERER-TEXT-UNDERLINE
+                         "underline" "PangoUnderline" T T)
+                        (UNDERLINE-SET CELL-RENDERER-TEXT-UNDERLINE-SET
+                         "underline-set" "gboolean" T T)
+                        (VARIANT CELL-RENDERER-TEXT-VARIANT
+                         "variant" "PangoVariant" T T)
+                        (VARIANT-SET CELL-RENDERER-TEXT-VARIANT-SET
+                         "variant-set" "gboolean" T T)
+                        (WEIGHT CELL-RENDERER-TEXT-WEIGHT "weight" "gint" T T)
+                        (WEIGHT-SET CELL-RENDERER-TEXT-WEIGHT-SET
+                         "weight-set" "gboolean" T T)
+                        (WIDTH-CHARS CELL-RENDERER-TEXT-WIDTH-CHARS
+                         "width-chars" "gint" T T)
+                        (WRAP-MODE CELL-RENDERER-TEXT-WRAP-MODE
+                         "wrap-mode" "PangoWrapMode" T T)
+                        (WRAP-WIDTH CELL-RENDERER-TEXT-WRAP-WIDTH
+                         "wrap-width" "gint" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererText"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -246,4 +229,4 @@
 
 ;;;     gtk_cell_renderer_text_set_fixed_height_from_font
 
-;;; 2024-5-18
+;;; 2024-9-20

@@ -21,27 +21,26 @@
           (g:type-parent "GtkTreeModelSort")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTreeModelSort")))
+             (glib-test:list-children "GtkTreeModelSort")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeSortable" "GtkTreeDragSource")
-             (gtk-test:list-interfaces "GtkTreeModelSort")))
+             (glib-test:list-interfaces "GtkTreeModelSort")))
   ;; Check properties
   (is (equal '("model")
-             (gtk-test:list-properties "GtkTreeModelSort")))
+             (glib-test:list-properties "GtkTreeModelSort")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTreeModelSort")))
+             (glib-test:list-signals "GtkTreeModelSort")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeModelSort"
-                                             GTK-TREE-MODEL-SORT
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GtkTreeDragSource" "GtkTreeModel"
-                                 "GtkTreeSortable")
-                                :TYPE-INITIALIZER
-                                "gtk_tree_model_sort_get_type")
-                               ((MODEL GTK-TREE-MODEL-SORT-MODEL "model"
-                                 "GtkTreeModel" T NIL)))
-             (gobject:get-g-type-definition "GtkTreeModelSort"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeModelSort" GTK:TREE-MODEL-SORT
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkTreeDragSource" "GtkTreeModel" "GtkTreeSortable")
+                       :TYPE-INITIALIZER "gtk_tree_model_sort_get_type")
+                      ((MODEL TREE-MODEL-SORT-MODEL
+                        "model" "GtkTreeModel" T NIL)))
+             (gobject:get-gtype-definition "GtkTreeModelSort"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -74,4 +73,4 @@
 ;;;     gtk_tree_model_sort_clear_cache
 ;;;     gtk_tree_model_sort_iter_is_valid
 
-;;; 2024-5-9
+;;; 2024-9-20

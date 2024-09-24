@@ -20,23 +20,22 @@
   ;; Check names
   (is (equal '("GTK_ICON_LOOKUP_FORCE_REGULAR" "GTK_ICON_LOOKUP_FORCE_SYMBOLIC"
                "GTK_ICON_LOOKUP_PRELOAD")
-             (gtk-test:list-flags-item-name "GtkIconLookupFlags")))
+             (glib-test:list-flags-item-names "GtkIconLookupFlags")))
   ;; Check values
   (is (equal '(1 2 4)
-             (gtk-test:list-flags-item-value "GtkIconLookupFlags")))
+             (glib-test:list-flags-item-values "GtkIconLookupFlags")))
   ;; Check nick names
   (is (equal '("force-regular" "force-symbolic" "preload")
-             (gtk-test:list-flags-item-nick "GtkIconLookupFlags")))
+             (glib-test:list-flags-item-nicks "GtkIconLookupFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkIconLookupFlags"
-                                      GTK-ICON-LOOKUP-FLAGS
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gtk_icon_lookup_flags_get_type")
-                                      (:FORCE-REGULAR 1)
-                                      (:FORCE-SYMBOLIC 2)
-                                      (:PRELOAD 4))
-             (gobject:get-g-type-definition "GtkIconLookupFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkIconLookupFlags" GTK:ICON-LOOKUP-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_icon_lookup_flags_get_type")
+                                     (:FORCE-REGULAR 1)
+                                     (:FORCE-SYMBOLIC 2)
+                                     (:PRELOAD 4))
+             (gobject:get-gtype-definition "GtkIconLookupFlags"))))
 
 ;;;     GtkIconTheme
 
@@ -54,32 +53,33 @@
           (g:type-parent "GtkIconTheme")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkIconTheme")))
+             (glib-test:list-children "GtkIconTheme")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkIconTheme")))
+             (glib-test:list-interfaces "GtkIconTheme")))
   ;; Check class properties
   (is (equal '("display" "icon-names" "resource-path" "search-path"
                "theme-name")
-             (gtk-test:list-properties "GtkIconTheme")))
+             (glib-test:list-properties "GtkIconTheme")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GtkIconTheme")))
+             (glib-test:list-signals "GtkIconTheme")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconTheme" GTK-ICON-THEME
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_icon_theme_get_type")
-                       ((DISPLAY GTK-ICON-THEME-DISPLAY "display" "GdkDisplay"
-                         T T)
-                        (ICON-NAMES GTK-ICON-THEME-ICON-NAMES "icon-names"
-                         "GStrv" T NIL)
-                        (RESOURCE-PATH GTK-ICON-THEME-RESOURCE-PATH
-                         "resource-path" "GStrv" T T)
-                        (SEARCH-PATH GTK-ICON-THEME-SEARCH-PATH "search-path"
-                         "GStrv" T T)
-                        (THEME-NAME GTK-ICON-THEME-THEME-NAME "theme-name"
-                         "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkIconTheme"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkIconTheme" GTK:ICON-THEME
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_icon_theme_get_type")
+                      ((DISPLAY ICON-THEME-DISPLAY "display" "GdkDisplay" T T)
+                       (ICON-NAMES ICON-THEME-ICON-NAMES
+                        "icon-names" "GStrv" T NIL)
+                       (RESOURCE-PATH ICON-THEME-RESOURCE-PATH
+                        "resource-path" "GStrv" T T)
+                       (SEARCH-PATH ICON-THEME-SEARCH-PATH
+                        "search-path" "GStrv" T T)
+                       (THEME-NAME ICON-THEME-THEME-NAME
+                        "theme-name" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkIconTheme"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

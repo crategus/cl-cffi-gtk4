@@ -21,40 +21,37 @@
           (g:type-parent "GtkSearchBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSearchBar")))
+             (glib-test:list-children "GtkSearchBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkSearchBar")))
+             (glib-test:list-interfaces "GtkSearchBar")))
   ;; Check properties
   (is (equal '("child" "key-capture-widget" "search-mode-enabled"
                "show-close-button")
-             (gtk-test:list-properties "GtkSearchBar")))
+             (glib-test:list-properties "GtkSearchBar")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSearchBar")))
+             (glib-test:list-signals "GtkSearchBar")))
   ;; Check CSS name
   (is (string= "searchbar"
                (gtk:widget-class-css-name "GtkSearchBar")))
   ;; Check accessible role
   (is (eq :search (gtk:widget-class-accessible-role "GtkSearchBar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchBar" GTK-SEARCH-BAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_search_bar_get_type")
-                               ((CHILD GTK-SEARCH-BAR-CHILD "child" "GtkWidget"
-                                 T T)
-                                (KEY-CAPTURE-WIDGET
-                                 GTK-SEARCH-BAR-KEY-CAPTURE-WIDGET
-                                 "key-capture-widget" "GtkWidget" T T)
-                                (SEARCH-MODE-ENABLED
-                                 GTK-SEARCH-BAR-SEARCH-MODE-ENABLED
-                                 "search-mode-enabled" "gboolean" T T)
-                                (SHOW-CLOSE-BUTTON
-                                 GTK-SEARCH-BAR-SHOW-CLOSE-BUTTON
-                                 "show-close-button" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkSearchBar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSearchBar" GTK:SEARCH-BAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_search_bar_get_type")
+                      ((CHILD SEARCH-BAR-CHILD "child" "GtkWidget" T T)
+                       (KEY-CAPTURE-WIDGET SEARCH-BAR-KEY-CAPTURE-WIDGET
+                        "key-capture-widget" "GtkWidget" T T)
+                       (SEARCH-MODE-ENABLED SEARCH-BAR-SEARCH-MODE-ENABLED
+                        "search-mode-enabled" "gboolean" T T)
+                       (SHOW-CLOSE-BUTTON SEARCH-BAR-SHOW-CLOSE-BUTTON
+                        "show-close-button" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkSearchBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -74,4 +71,4 @@
 
 ;;;     gtk_search_bar_connect_entry
 
-;;; 2024-4-20
+;;; 2024-9-20

@@ -21,34 +21,33 @@
           (g:type-parent "GtkShortcutLabel")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcutLabel")))
+             (glib-test:list-children "GtkShortcutLabel")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkShortcutLabel")))
+             (glib-test:list-interfaces "GtkShortcutLabel")))
   ;; Check properties
   (is (equal '("accelerator" "disabled-text")
-             (gtk-test:list-properties "GtkShortcutLabel")))
+             (glib-test:list-properties "GtkShortcutLabel")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkShortcutLabel")))
+             (glib-test:list-signals "GtkShortcutLabel")))
   ;; Check CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutLabel")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutLabel")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutLabel"
-                                             GTK-SHORTCUT-LABEL
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_shortcut_label_get_type")
-                               ((ACCELERATOR GTK-SHORTCUT-LABEL-ACCELERATOR
-                                 "accelerator" "gchararray" T T)
-                                (DISABLED-TEXT GTK-SHORTCUT-LABEL-DISABLED-TEXT
-                                 "disabled-text" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkShortcutLabel"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutLabel" GTK:SHORTCUT-LABEL
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_shortcut_label_get_type")
+                      ((ACCELERATOR SHORTCUT-LABEL-ACCELERATOR
+                        "accelerator" "gchararray" T T)
+                       (DISABLED-TEXT SHORTCUT-LABEL-DISABLED-TEXT
+                        "disabled-text" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkShortcutLabel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -59,4 +58,4 @@
 
 ;;;     gtk_shortcut_label_new
 
-;;; 2024-7-4
+;;; 2024-9-20

@@ -21,23 +21,23 @@
   (is (equal '("GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE"
                "GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED"
                "GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE")
-             (gtk-test:list-enum-item-name "GtkAccessiblePlatformState")))
+             (glib-test:list-enum-item-names "GtkAccessiblePlatformState")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkAccessiblePlatformState")))
+             (glib-test:list-enum-item-values "GtkAccessiblePlatformState")))
   ;; Check nick names
   (is (equal '("focusable" "focused" "active")
-             (gtk-test:list-enum-item-nick "GtkAccessiblePlatformState")))
+             (glib-test:list-enum-item-nicks "GtkAccessiblePlatformState")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessiblePlatformState"
-                                     GTK-ACCESSIBLE-PLATFORM-STATE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_accessible_platform_state_get_type")
-                                     (:FOCUSABLE 0)
-                                     (:FOCUSED 1)
-                                     (:ACTIVE 2))
-             (gobject:get-g-type-definition "GtkAccessiblePlatformState"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessiblePlatformState"
+                                    GTK:ACCESSIBLE-PLATFORM-STATE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER
+                        "gtk_accessible_platform_state_get_type")
+                       (:FOCUSABLE 0)
+                       (:FOCUSED 1)
+                       (:ACTIVE 2))
+             (gobject:get-gtype-definition "GtkAccessiblePlatformState"))))
 
 ;;;     GtkAccessible
 
@@ -52,22 +52,20 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkAccessible")))
+             (glib-test:list-interface-prerequisites "GtkAccessible")))
   ;; Check interface properties
   (is (equal '("accessible-role")
-             (gtk-test:list-interface-properties "GtkAccessible")))
+             (glib-test:list-interface-properties "GtkAccessible")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAccessible")))
+             (glib-test:list-signals "GtkAccessible")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessible"
-                                  GTK-ACCESSIBLE
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_accessible_get_type")
-                                  (ACCESSIBLE-ROLE
-                                   GTK-ACCESSIBLE-ACCESSIBLE-ROLE
-                                   "accessible-role" "GtkAccessibleRole" T T))
-             (gobject:get-g-type-definition "GtkAccessible"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkAccessible" GTK:ACCESSIBLE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_accessible_get_type")
+                       (ACCESSIBLE-ROLE ACCESSIBLE-ACCESSIBLE-ROLE
+                        "accessible-role" "GtkAccessibleRole" T T))
+             (gobject:get-gtype-definition "GtkAccessible"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -126,4 +124,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; 2024-4-11
+;;; 2024-9-19

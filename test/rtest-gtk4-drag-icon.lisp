@@ -21,31 +21,32 @@
           (g:type-parent "GtkDragIcon")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDragIcon")))
+             (glib-test:list-children "GtkDragIcon")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkRoot")
-             (gtk-test:list-interfaces "GtkDragIcon")))
+             (glib-test:list-interfaces "GtkDragIcon")))
   ;; Check properties
   (is (equal '("child")
-             (gtk-test:list-properties "GtkDragIcon")))
+             (glib-test:list-properties "GtkDragIcon")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkDragIcon")))
+             (glib-test:list-signals "GtkDragIcon")))
   ;; Check CSS name
   (is (string= "dnd"
                (gtk:widget-class-css-name "GtkDragIcon")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkDragIcon")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDragIcon" GTK-DRAG-ICON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkNative" "GtkRoot")
-                                :TYPE-INITIALIZER "gtk_drag_icon_get_type")
-                               ((CHILD GTK-DRAG-ICON-CHILD "child" "GtkWidget"
-                                 T T)))
-             (gobject:get-g-type-definition "GtkDragIcon"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDragIcon" GTK:DRAG-ICON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkNative" "GtkRoot")
+                       :TYPE-INITIALIZER "gtk_drag_icon_get_type")
+                      ((CHILD DRAG-ICON-CHILD "child" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkDragIcon"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

@@ -25,25 +25,26 @@
   ;; Check children
   #-windows
   (is (equal '("GtkIMContextBroadway" "GtkIMContextWayland")
-             (gtk-test:list-children "GtkIMContextSimple")))
+             (glib-test:list-children "GtkIMContextSimple")))
   #+windows
   (is (equal '()
-             (gtk-test:list-children "GtkIMContextSimple")))
+             (glib-test:list-children "GtkIMContextSimple")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkIMContextSimple")))
+             (glib-test:list-interfaces "GtkIMContextSimple")))
   ;; Check class properties
   (is (equal '()
-             (gtk-test:list-properties "GtkIMContextSimple")))
+             (glib-test:list-properties "GtkIMContextSimple")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkIMContextSimple")))
+             (glib-test:list-signals "GtkIMContextSimple")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContextSimple"
-                                             GTK-I-M-CONTEXT-SIMPLE
-                       (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkIMContextSimple" GTK:IM-CONTEXT-SIMPLE
+                       (:SUPERCLASS GTK:IM-CONTEXT
+                        :EXPORT T
+                        :INTERFACES NIL)
                        NIL)
-             (gobject:get-g-type-definition "GtkIMContextSimple"))))
+             (gobject:get-gtype-definition "GtkIMContextSimple"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -58,4 +59,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; 2024-7-4
+;;; 2024-9-20

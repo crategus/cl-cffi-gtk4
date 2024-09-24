@@ -21,31 +21,32 @@
           (g:type-parent "GtkAdjustment")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAdjustment")))
+             (glib-test:list-children "GtkAdjustment")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkAdjustment")))
+             (glib-test:list-interfaces "GtkAdjustment")))
   ;; Check properties
   (is (equal '("lower" "page-increment" "page-size" "step-increment" "upper"
                "value")
-             (gtk-test:list-properties "GtkAdjustment")))
+             (glib-test:list-properties "GtkAdjustment")))
   ;; Check signals
   (is (equal '("changed" "value-changed")
-             (gtk-test:list-signals "GtkAdjustment")))
+             (glib-test:list-signals "GtkAdjustment")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAdjustment" GTK-ADJUSTMENT
-                       (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_adjustment_get_type")
-                       ((LOWER GTK-ADJUSTMENT-LOWER "lower" "gdouble" T T)
-                        (PAGE-INCREMENT GTK-ADJUSTMENT-PAGE-INCREMENT
-                         "page-increment" "gdouble" T T)
-                        (PAGE-SIZE GTK-ADJUSTMENT-PAGE-SIZE "page-size"
-                         "gdouble" T T)
-                        (STEP-INCREMENT GTK-ADJUSTMENT-STEP-INCREMENT
-                         "step-increment" "gdouble" T T)
-                        (UPPER GTK-ADJUSTMENT-UPPER "upper" "gdouble" T T)
-                        (VALUE GTK-ADJUSTMENT-VALUE "value" "gdouble" T T)))
-             (gobject:get-g-type-definition "GtkAdjustment"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAdjustment" GTK:ADJUSTMENT
+                      (:SUPERCLASS G:INITIALLY-UNOWNED
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_adjustment_get_type")
+                      ((LOWER ADJUSTMENT-LOWER "lower" "gdouble" T T)
+                       (PAGE-INCREMENT ADJUSTMENT-PAGE-INCREMENT
+                        "page-increment" "gdouble" T T)
+                       (PAGE-SIZE ADJUSTMENT-PAGE-SIZE "page-size" "gdouble" T T)
+                       (STEP-INCREMENT ADJUSTMENT-STEP-INCREMENT
+                        "step-increment" "gdouble" T T)
+                       (UPPER ADJUSTMENT-UPPER "upper" "gdouble" T T)
+                       (VALUE ADJUSTMENT-VALUE "value" "gdouble" T T)))
+             (gobject:get-gtype-definition "GtkAdjustment"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -125,4 +126,4 @@
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; 2024-7-4
+;;; 2024-9-19

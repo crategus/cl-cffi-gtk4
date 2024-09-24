@@ -21,32 +21,31 @@
           (g:type-parent "GtkBoxLayout")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkBoxLayout")))
+             (glib-test:list-children "GtkBoxLayout")))
   ;; Check interfaces
   (is (equal '("GtkOrientable")
-             (gtk-test:list-interfaces "GtkBoxLayout")))
+             (glib-test:list-interfaces "GtkBoxLayout")))
   ;; Check properties
   (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
                "spacing")
-             (gtk-test:list-properties "GtkBoxLayout")))
+             (glib-test:list-properties "GtkBoxLayout")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBoxLayout")))
+             (glib-test:list-signals "GtkBoxLayout")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBoxLayout" GTK-BOX-LAYOUT
-                               (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T
-                                :INTERFACES ("GtkOrientable") :TYPE-INITIALIZER
-                                "gtk_box_layout_get_type")
-                               ((BASELINE-CHILD GTK-BOX-LAYOUT-BASELINE-CHILD
-                                 "baseline-child" "gint" T T)
-                                (BASELINE-POSITION
-                                 GTK-BOX-LAYOUT-BASELINE-POSITION
-                                 "baseline-position" "GtkBaselinePosition" T T)
-                                (HOMOGENEOUS GTK-BOX-LAYOUT-HOMOGENEOUS
-                                 "homogeneous" "gboolean" T T)
-                                (SPACING GTK-BOX-LAYOUT-SPACING "spacing"
-                                 "gint" T T)))
-             (gobject:get-g-type-definition "GtkBoxLayout"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBoxLayout" GTK:BOX-LAYOUT
+                      (:SUPERCLASS GTK:LAYOUT-MANAGER
+                       :EXPORT T
+                       :INTERFACES ("GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_box_layout_get_type")
+                      ((BASELINE-CHILD BOX-LAYOUT-BASELINE-CHILD
+                        "baseline-child" "gint" T T)
+                       (BASELINE-POSITION BOX-LAYOUT-BASELINE-POSITION
+                        "baseline-position" "GtkBaselinePosition" T T)
+                       (HOMOGENEOUS BOX-LAYOUT-HOMOGENEOUS
+                        "homogeneous" "gboolean" T T)
+                       (SPACING BOX-LAYOUT-SPACING "spacing" "gint" T T)))
+             (gobject:get-gtype-definition "GtkBoxLayout"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -64,4 +63,4 @@
 (test gtk-box-layout-new
   (is (typep (gtk:box-layout-new :horizontal) 'gtk:box-layout)))
 
-;;; 2024-4-19
+;;; 2024-9-19

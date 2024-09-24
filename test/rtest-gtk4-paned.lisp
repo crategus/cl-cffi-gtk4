@@ -21,54 +21,55 @@
           (g:type-parent "GtkPaned")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPaned")))
+             (glib-test:list-children "GtkPaned")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (gtk-test:list-interfaces "GtkPaned")))
+             (glib-test:list-interfaces "GtkPaned")))
   ;; Check properties
   (is (equal '("end-child" "max-position" "min-position" "orientation"
                "position" "position-set" "resize-end-child" "resize-start-child"
                "shrink-end-child" "shrink-start-child" "start-child"
                "wide-handle")
-             (gtk-test:list-properties "GtkPaned")))
+             (glib-test:list-properties "GtkPaned")))
   ;; Check signals
   (is (equal '("accept-position" "cancel-position" "cycle-child-focus"
                "cycle-handle-focus" "move-handle" "toggle-handle-focus")
-             (gtk-test:list-signals "GtkPaned")))
+             (glib-test:list-signals "GtkPaned")))
   ;; Check CSS name
   (is (string= "paned"
                (gtk:widget-class-css-name "GtkPaned")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkPaned")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_paned_get_type")
-                       ((END-CHILD GTK-PANED-END-CHILD "end-child" "GtkWidget"
-                         T T)
-                        (MAX-POSITION GTK-PANED-MAX-POSITION "max-position"
-                         "gint" T NIL)
-                        (MIN-POSITION GTK-PANED-MIN-POSITION "min-position"
-                         "gint" T NIL)
-                        (POSITION GTK-PANED-POSITION "position" "gint" T T)
-                        (POSITION-SET GTK-PANED-POSITION-SET "position-set"
-                         "gboolean" T T)
-                        (RESIZE-END-CHILD GTK-PANED-RESIZE-END-CHILD
-                         "resize-end-child" "gboolean" T T)
-                        (RESIZE-START-CHILD GTK-PANED-RESIZE-START-CHILD
-                         "resize-start-child" "gboolean" T T)
-                        (SHRINK-END-CHILD GTK-PANED-SHRINK-END-CHILD
-                         "shrink-end-child" "gboolean" T T)
-                        (SHRINK-START-CHILD GTK-PANED-SHRINK-START-CHILD
-                         "shrink-start-child" "gboolean" T T)
-                        (START-CHILD GTK-PANED-START-CHILD "start-child"
-                         "GtkWidget" T T)
-                        (WIDE-HANDLE GTK-PANED-WIDE-HANDLE "wide-handle"
-                         "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkPaned"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPaned" GTK:PANED
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_paned_get_type")
+                      ((END-CHILD PANED-END-CHILD "end-child" "GtkWidget" T T)
+                       (MAX-POSITION PANED-MAX-POSITION
+                        "max-position" "gint" T NIL)
+                       (MIN-POSITION PANED-MIN-POSITION
+                        "min-position" "gint" T NIL)
+                       (POSITION PANED-POSITION "position" "gint" T T)
+                       (POSITION-SET PANED-POSITION-SET
+                        "position-set" "gboolean" T T)
+                       (RESIZE-END-CHILD PANED-RESIZE-END-CHILD
+                        "resize-end-child" "gboolean" T T)
+                       (RESIZE-START-CHILD PANED-RESIZE-START-CHILD
+                        "resize-start-child" "gboolean" T T)
+                       (SHRINK-END-CHILD PANED-SHRINK-END-CHILD
+                        "shrink-end-child" "gboolean" T T)
+                       (SHRINK-START-CHILD PANED-SHRINK-START-CHILD
+                        "shrink-start-child" "gboolean" T T)
+                       (START-CHILD PANED-START-CHILD
+                        "start-child" "GtkWidget" T T)
+                       (WIDE-HANDLE PANED-WIDE-HANDLE
+                        "wide-handle" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkPaned"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -107,4 +108,4 @@
 (test gtk-paned-new
   (is (typep (gtk:paned-new :vertical) 'gtk:paned)))
 
-;;; 2024-4-22
+;;; 2024-9-19

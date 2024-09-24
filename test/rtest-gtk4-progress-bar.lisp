@@ -21,39 +21,39 @@
           (g:type-parent "GtkProgressBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkProgressBar")))
+             (glib-test:list-children "GtkProgressBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
-             (gtk-test:list-interfaces "GtkProgressBar")))
+             (glib-test:list-interfaces "GtkProgressBar")))
   ;; Check properties
   (is (equal '("ellipsize" "fraction" "inverted" "orientation" "pulse-step"
                "show-text" "text")
-             (gtk-test:list-properties "GtkProgressBar")))
+             (glib-test:list-properties "GtkProgressBar")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkProgressBar")))
+             (glib-test:list-signals "GtkProgressBar")))
   ;; Check CSS information
   (is (string= "progressbar"
                (gtk:widget-class-css-name "GtkProgressBar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkProgressBar" GTK:PROGRESS-BAR
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_progress_bar_get_type")
-                       ((ELLIPSIZE GTK-PROGRESS-BAR-ELLIPSIZE "ellipsize"
-                         "PangoEllipsizeMode" T T)
-                        (FRACTION GTK-PROGRESS-BAR-FRACTION "fraction"
-                         "gdouble" T T)
-                        (INVERTED GTK-PROGRESS-BAR-INVERTED "inverted"
-                         "gboolean" T T)
-                        (PULSE-STEP GTK-PROGRESS-BAR-PULSE-STEP "pulse-step"
-                         "gdouble" T T)
-                        (SHOW-TEXT GTK-PROGRESS-BAR-SHOW-TEXT "show-text"
-                         "gboolean" T T)
-                        (TEXT GTK-PROGRESS-BAR-TEXT "text" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkProgressBar"))))
+                       ((ELLIPSIZE PROGRESS-BAR-ELLIPSIZE
+                         "ellipsize" "PangoEllipsizeMode" T T)
+                        (FRACTION PROGRESS-BAR-FRACTION "fraction" "gdouble" T T)
+                        (INVERTED PROGRESS-BAR-INVERTED "inverted" "gboolean" T T)
+                        (PULSE-STEP PROGRESS-BAR-PULSE-STEP
+                         "pulse-step" "gdouble" T T)
+                        (SHOW-TEXT PROGRESS-BAR-SHOW-TEXT
+                         "show-text" "gboolean" T T)
+                        (TEXT PROGRESS-BAR-TEXT "text" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkProgressBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -75,4 +75,4 @@
 
 ;;;     gtk_progress_bar_pulse
 
-;;; 2024-4-25
+;;; 2024-9-20

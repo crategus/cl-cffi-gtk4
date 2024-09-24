@@ -21,31 +21,33 @@
           (g:type-parent "GtkDrawingArea")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDrawingArea")))
+             (glib-test:list-children "GtkDrawingArea")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkDrawingArea")))
+             (glib-test:list-interfaces "GtkDrawingArea")))
   ;; Check properties
   (is (equal '("content-height" "content-width")
-             (gtk-test:list-properties "GtkDrawingArea")))
+             (glib-test:list-properties "GtkDrawingArea")))
   ;; Check signals
   (is (equal '("resize")
-             (gtk-test:list-signals "GtkDrawingArea")))
+             (glib-test:list-signals "GtkDrawingArea")))
   ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkDrawingArea")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkDrawingArea")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDrawingArea" GTK-DRAWING-AREA
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_drawing_area_get_type")
-                       ((CONTENT-HEIGHT GTK-DRAWING-AREA-CONTENT-HEIGHT
-                         "content-height" "gint" T T)
-                        (CONTENT-WIDTH GTK-DRAWING-AREA-CONTENT-WIDTH
-                         "content-width" "gint" T T)))
-             (gobject:get-g-type-definition "GtkDrawingArea"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDrawingArea" GTK:DRAWING-AREA
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_drawing_area_get_type")
+                      ((CONTENT-HEIGHT DRAWING-AREA-CONTENT-HEIGHT
+                        "content-height" "gint" T T)
+                       (CONTENT-WIDTH DRAWING-AREA-CONTENT-WIDTH
+                        "content-width" "gint" T T)))
+             (gobject:get-gtype-definition "GtkDrawingArea"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

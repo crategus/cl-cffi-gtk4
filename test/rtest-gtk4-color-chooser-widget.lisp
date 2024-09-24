@@ -22,34 +22,34 @@
           (g:type-parent "GtkColorChooserWidget")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkColorChooserWidget")))
+             (glib-test:list-children "GtkColorChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkColorChooser")
-             (gtk-test:list-interfaces "GtkColorChooserWidget")))
+             (glib-test:list-interfaces "GtkColorChooserWidget")))
   ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
-             (gtk-test:list-properties "GtkColorChooserWidget")))
+             (glib-test:list-properties "GtkColorChooserWidget")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkColorChooserWidget")))
+             (glib-test:list-signals "GtkColorChooserWidget")))
   ;; Check CSS name
   (is (string= "colorchooser"
                (gtk:widget-class-css-name "GtkColorChooserWidget")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkColorChooserWidget")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorChooserWidget"
-                               GTK-COLOR-CHOOSER-WIDGET
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkColorChooser" "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_color_chooser_widget_get_type")
-                               ((SHOW-EDITOR
-                                 GTK-COLOR-CHOOSER-WIDGET-SHOW-EDITOR
-                                 "show-editor" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkColorChooserWidget"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorChooserWidget"
+                                      GTK:COLOR-CHOOSER-WIDGET
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_color_chooser_widget_get_type")
+                      ((SHOW-EDITOR COLOR-CHOOSER-WIDGET-SHOW-EDITOR
+                        "show-editor" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkColorChooserWidget"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -66,4 +66,4 @@
   (let ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:color-chooser-widget-new) 'gtk:color-chooser-widget))))
 
-;;; 2024-5-22
+;;; 2024-9-20

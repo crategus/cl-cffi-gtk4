@@ -21,22 +21,24 @@
           (g:type-parent "GtkGestureDrag")))
   ;; Check children
   (is (equal '("GtkGesturePan")
-             (gtk-test:list-children "GtkGestureDrag")))
+             (glib-test:list-children "GtkGestureDrag")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureDrag")))
+             (glib-test:list-interfaces "GtkGestureDrag")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkGestureDrag")))
+             (glib-test:list-properties "GtkGestureDrag")))
   ;; Check signals
   (is (equal '("drag-begin" "drag-end" "drag-update")
-             (gtk-test:list-signals "GtkGestureDrag")))
+             (glib-test:list-signals "GtkGestureDrag")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureDrag" GTK-GESTURE-DRAG
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_gesture_drag_get_type")
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureDrag" GTK:GESTURE-DRAG
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_gesture_drag_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkGestureDrag"))))
+             (gobject:get-gtype-definition "GtkGestureDrag"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 

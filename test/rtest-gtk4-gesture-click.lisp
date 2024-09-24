@@ -21,22 +21,24 @@
           (g:type-parent "GtkGestureClick")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureClick")))
+             (glib-test:list-children "GtkGestureClick")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureClick")))
+             (glib-test:list-interfaces "GtkGestureClick")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkGestureClick")))
+             (glib-test:list-properties "GtkGestureClick")))
   ;; Check signals
   (is (equal '("pressed" "released" "stopped" "unpaired-release")
-             (gtk-test:list-signals "GtkGestureClick")))
+             (glib-test:list-signals "GtkGestureClick")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureClick" GTK-GESTURE-CLICK
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_gesture_click_get_type")
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureClick" GTK:GESTURE-CLICK
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_gesture_click_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkGestureClick"))))
+             (gobject:get-gtype-definition "GtkGestureClick"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -119,4 +121,4 @@
 (test gtk-gesture-click-new
   (is (typep (gtk:gesture-click-new) 'gtk:gesture-click)))
 
-;;; 2024-7-27
+;;; 2024-9-20

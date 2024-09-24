@@ -21,32 +21,33 @@
           (g:type-parent "GtkLinkButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkLinkButton")))
+             (glib-test:list-children "GtkLinkButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkLinkButton")))
+             (glib-test:list-interfaces "GtkLinkButton")))
   ;; Check properties
   (is (equal '("uri" "visited")
-             (gtk-test:list-properties "GtkLinkButton")))
+             (glib-test:list-properties "GtkLinkButton")))
   ;; Check signals
   (is (equal '("activate-link")
-             (gtk-test:list-signals "GtkLinkButton")))
+             (glib-test:list-signals "GtkLinkButton")))
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLinkButton")))
   ;; Check accessible role
   (is (eq :link (gtk:widget-class-accessible-role "GtkLinkButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLinkButton" GTK-LINK-BUTTON
-                       (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLinkButton" GTK:LINK-BUTTON
+                       (:SUPERCLASS GTK:BUTTON
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_link_button_get_type")
-                       ((URI GTK-LINK-BUTTON-URI "uri" "gchararray" T T)
-                        (VISITED GTK-LINK-BUTTON-VISITED "visited" "gboolean" T
-                         T)))
-             (gobject:get-g-type-definition "GtkLinkButton"))))
+                       ((URI LINK-BUTTON-URI "uri" "gchararray" T T)
+                        (VISITED LINK-BUTTON-VISITED "visited" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkLinkButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -84,4 +85,4 @@
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "Label" (gtk:button-label button)))))
 
-;;; 2024-5-4
+;;; 2024-9-20

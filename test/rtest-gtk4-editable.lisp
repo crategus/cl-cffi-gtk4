@@ -20,36 +20,33 @@
           (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (gtk-test:list-interface-prerequisites "GtkEditable")))
+             (glib-test:list-interface-prerequisites "GtkEditable")))
   ;; Check interface properties
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
-             (gtk-test:list-interface-properties "GtkEditable")))
+             (glib-test:list-interface-properties "GtkEditable")))
   ;; Check signals
   (is (equal '("changed" "delete-text" "insert-text")
-             (gtk-test:list-signals "GtkEditable")))
+             (glib-test:list-signals "GtkEditable")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkEditable"
-                                  GTK-EDITABLE
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_editable_get_type")
-                  (CURSOR-POSITION GTK-EDITABLE-CURSOR-POSITION
-                   "cursor-position" "gint" T NIL)
-                  (EDITABLE GTK-EDITABLE-EDITABLE
-                   "editable" "gboolean" T T)
-                  (ENABLE-UNDO GTK-EDITABLE-ENABLE-UNDO
-                   "enable-undo" "gboolean" T T)
-                  (MAX-WIDTH-CHARS GTK-EDITABLE-MAX-WIDTH-CHARS
-                   "max-width-chars" "gint" T T)
-                  (SELECTION-BOUND GTK-EDITABLE-SELECTION-BOUND
-                   "selection-bound" "gint" T NIL)
-                  (TEXT GTK-EDITABLE-TEXT
-                   "text" "gchararray" T T)
-                  (WIDTH-CHARS GTK-EDITABLE-WIDTH-CHARS
-                   "width-chars" "gint" T T)
-                  (XALIGN GTK-EDITABLE-XALIGN
-                   "xalign" "gfloat" T T))
-             (gobject:get-g-type-definition "GtkEditable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkEditable" GTK:EDITABLE
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_editable_get_type")
+                      (CURSOR-POSITION EDITABLE-CURSOR-POSITION
+                       "cursor-position" "gint" T NIL)
+                      (EDITABLE EDITABLE-EDITABLE
+                       "editable" "gboolean" T T)
+                      (ENABLE-UNDO EDITABLE-ENABLE-UNDO
+                       "enable-undo" "gboolean" T T)
+                      (MAX-WIDTH-CHARS EDITABLE-MAX-WIDTH-CHARS
+                       "max-width-chars" "gint" T T)
+                      (SELECTION-BOUND EDITABLE-SELECTION-BOUND
+                       "selection-bound" "gint" T NIL)
+                      (TEXT EDITABLE-TEXT "text" "gchararray" T T)
+                      (WIDTH-CHARS EDITABLE-WIDTH-CHARS
+                       "width-chars" "gint" T T)
+                      (XALIGN EDITABLE-XALIGN "xalign" "gfloat" T T))
+             (gobject:get-gtype-definition "GtkEditable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -233,4 +230,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; 2024-5-17
+;;; 2024-9-20

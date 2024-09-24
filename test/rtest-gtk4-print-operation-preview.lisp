@@ -19,20 +19,20 @@
                                          :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkPrintOperationPreview")))
+             (glib-test:list-interface-prerequisites "GtkPrintOperationPreview")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkPrintOperationPreview")))
+             (glib-test:list-interface-properties "GtkPrintOperationPreview")))
   ;; Check interface signals
   (is (equal '("got-page-size" "ready")
-             (gtk-test:list-signals "GtkPrintOperationPreview")))
+             (glib-test:list-signals "GtkPrintOperationPreview")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkPrintOperationPreview"
-                                  GTK-PRINT-OPERATION-PREVIEW
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER
-                                   "gtk_print_operation_preview_get_type"))
-             (gobject:get-g-type-definition "GtkPrintOperationPreview"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkPrintOperationPreview"
+                                         GTK:PRINT-OPERATION-PREVIEW
+                       (:EXPORT T
+                        :TYPE-INITIALIZER
+                        "gtk_print_operation_preview_get_type"))
+             (gobject:get-gtype-definition "GtkPrintOperationPreview"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -45,4 +45,4 @@
 ;;;     gtk_print_operation_preview_is_selected
 ;;;     gtk_print_operation_preview_render_page
 
-;;; 2024-7-4
+;;; 2024-9-20

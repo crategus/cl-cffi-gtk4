@@ -70,7 +70,7 @@
 ;; TODO: The model is loading. But we do not get items in the model.
 
 (test gtk-directory-list-new
-  (let* ((path (sys-path ""))
+  (let* ((path (glib-sys:sys-path "test/"))
          (file (g:file-new-for-path path))
          (model (gtk:directory-list-new "standard::name" file)))
     (is-false (gtk:directory-list-error model))

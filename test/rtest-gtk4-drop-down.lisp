@@ -20,50 +20,47 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkDropDown")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDropDown")))
+             (glib-test:list-children "GtkDropDown")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkDropDown")))
+             (glib-test:list-interfaces "GtkDropDown")))
   ;; Check class properties
   (is (equal '("enable-search" "expression" "factory" "header-factory"
                "list-factory" "model" "search-match-mode" "selected"
                "selected-item" "show-arrow")
-             (gtk-test:list-properties "GtkDropDown")))
+             (glib-test:list-properties "GtkDropDown")))
   ;; Check signals
   (is (equal '("activate")
-             (gtk-test:list-signals "GtkDropDown")))
+             (glib-test:list-signals "GtkDropDown")))
   ;; Check CSS name
   (is (string= "dropdown"
                (gtk:widget-class-css-name "GtkDropDown")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_drop_down_get_type")
-                               ((ENABLE-SEARCH GTK-DROP-DOWN-ENABLE-SEARCH
-                                 "enable-search" "gboolean" T T)
-                                (EXPRESSION GTK-DROP-DOWN-EXPRESSION
-                                 "expression" "GtkExpression" T T)
-                                (FACTORY GTK-DROP-DOWN-FACTORY "factory"
-                                 "GtkListItemFactory" T T)
-                                (HEADER-FACTORY GTK-DROP-DOWN-HEADER-FACTORY
-                                 "header-factory" "GtkListItemFactory" T T)
-                                (LIST-FACTORY GTK-DROP-DOWN-LIST-FACTORY
-                                 "list-factory" "GtkListItemFactory" T T)
-                                (MODEL GTK-DROP-DOWN-MODEL "model" "GListModel"
-                                 T T)
-                                (SEARCH-MATCH-MODE
-                                 GTK-DROP-DOWN-SEARCH-MATCH-MODE
-                                 "search-match-mode" "GtkStringFilterMatchMode"
-                                 T T)
-                                (SELECTED GTK-DROP-DOWN-SELECTED "selected"
-                                 "guint" T T)
-                                (SELECTED-ITEM GTK-DROP-DOWN-SELECTED-ITEM
-                                 "selected-item" "GObject" T NIL)
-                                (SHOW-ARROW GTK-DROP-DOWN-SHOW-ARROW
-                                 "show-arrow" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkDropDown"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDropDown" GTK:DROP-DOWN
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_drop_down_get_type")
+                      ((ENABLE-SEARCH DROP-DOWN-ENABLE-SEARCH
+                        "enable-search" "gboolean" T T)
+                       (EXPRESSION DROP-DOWN-EXPRESSION
+                        "expression" "GtkExpression" T T)
+                       (FACTORY DROP-DOWN-FACTORY
+                        "factory" "GtkListItemFactory" T T)
+                       (HEADER-FACTORY DROP-DOWN-HEADER-FACTORY
+                        "header-factory" "GtkListItemFactory" T T)
+                       (LIST-FACTORY DROP-DOWN-LIST-FACTORY
+                        "list-factory" "GtkListItemFactory" T T)
+                       (MODEL DROP-DOWN-MODEL "model" "GListModel" T T)
+                       (SEARCH-MATCH-MODE DROP-DOWN-SEARCH-MATCH-MODE
+                        "search-match-mode" "GtkStringFilterMatchMode" T T)
+                       (SELECTED DROP-DOWN-SELECTED "selected" "guint" T T)
+                       (SELECTED-ITEM DROP-DOWN-SELECTED-ITEM
+                        "selected-item" "GObject" T NIL)
+                       (SHOW-ARROW DROP-DOWN-SHOW-ARROW
+                        "show-arrow" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkDropDown"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -115,4 +112,4 @@
   (is (typep (gtk:drop-down-new-from-strings '("string1" "string2" "string3"))
              'gtk:drop-down)))
 
-;;; 2024-1-10
+;;; 2024-9-19

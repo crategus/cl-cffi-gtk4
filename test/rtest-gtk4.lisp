@@ -1,33 +1,9 @@
 (defpackage :gtk-test
   (:use :fiveam :iterate :common-lisp)
-  (:export #:run!)
-  (:import-from :glib-test #:list-children
-                           #:list-interfaces
-                           #:list-properties
-                           #:list-interface-properties
-                           #:list-interface-prerequisites
-                           #:list-signals
-                           #:list-flags-item-name
-                           #:list-flags-item-value
-                           #:list-flags-item-nick
-                           #:list-enum-item-name
-                           #:list-enum-item-value
-                           #:list-enum-item-nick)
-  (:export                 #:list-children
-                           #:list-interfaces
-                           #:list-properties
-                           #:list-interface-properties
-                           #:list-interface-prerequisites
-                           #:list-signals
-                           #:list-style-properties          ; for GTK4
-                           #:list-child-properties          ; for GTK4
-                           #:list-flags-item-name
-                           #:list-flags-item-value
-                           #:list-flags-item-nick
-                           #:list-enum-item-name
-                           #:list-enum-item-value
-                           #:list-enum-item-nick)
+  (:export #:run!
+           #:approx-equal)
   (:import-from :gtk-init *gtk-warn-deprecated*)
+  (:import-from :glib-test #:approx-equal)
   (:import-from :gobject)
   (:import-from :gio)
   (:import-from :gtk)
@@ -37,21 +13,30 @@
 
 (defvar *first-run-gtk-test* t)
 
-;; push the hostname on *features*
-(pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
-
-(setf (glib-sys:get-current-package) "cl-cffi-gtk4")
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (glib-sys:check-and-create-resources "test/rtest-gtk4.xml"
-                                       :package "cl-cffi-gtk4"
-                                       :sourcedir "test/resource/"
-                                       :verbose t))
-
 (def-suite gtk-test)
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
 (def-suite gtk-suite :in gtk-test)
+
+;; push the hostname on *features*
+(pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  ;; Set the current package for the testsuite
+  (setf (glib-sys:get-current-package) "cl-cffi-gtk4")
+  ;; Ensure directory for the output of test results
+  (ensure-directories-exist
+      (asdf:system-relative-pathname :cl-cffi-gtk4 "test/out/"))
+  ;; Set the package and the prefix for this testsuite
+  (setf gobject::*lisp-name-package* nil)
+  (setf gobject::*strip-prefix* "")
+  ;; We set a PRGNAME to avoid side effects when running the tests a second time
+  (setf (g:prgname) "gtk-test")
+  ;; Check and possibly create the resources
+  (glib-sys:check-and-create-resources "test/rtest-gtk4.xml"
+                                       :package "cl-cffi-gtk4"
+                                       :sourcedir "test/resource/"
+                                       :verbose t))
 
 (defvar *some-text*
         (format nil "One of the important things to remember about text in ~
@@ -110,95 +95,6 @@ condimentum, leo purus mollis orci, sed mollis dui metus eget eros. Mauris ~
 quam nibh, laoreet eget arcu in, accumsan lacinia purus. Morbi aliquet nibh id ~
 sem venenatis, vitae ultricies arcu laoreet."))
 
-;; We set a PRGNAME to avoid side effects when running the tests a second time.
-(setf (g:prgname) "gtk-test")
-
-;; Ensure directory for the output of test results
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (ensure-directories-exist
-      (asdf:system-relative-pathname :cl-cffi-gtk4 "test/out/")))
-
-;; Get the pathname for a file in the testsuite
-(defun sys-path (filename &optional (system :cl-cffi-gtk4))
-  (asdf:system-relative-pathname system
-                                 (concatenate 'string "test/" filename)))
-
-;; See https://www.embeddeduse.com/2019/08/26/qt-compare-two-floats/
-(defun approx-equal (x y &optional (eps-factor 1.0d-1))
-  (or (< (abs (- x y)) eps-factor)
-      (< (abs (- x y)) (* eps-factor (max (abs x) (abs y))))))
-
-#+nil
-(defun list-children (gtype)
-  (sort (mapcar #'g:type-name (g:type-children gtype))
-        #'string<))
-
-#+nil
-(defun list-interfaces (gtype)
-  (mapcar #'g:type-name (g:type-interfaces gtype)))
-
-;; A sorted list of the class property names without inherited properties
-#+nil
-(defun list-properties (gtype)
-  (sort (set-difference (mapcar #'g:param-spec-name
-                                (g:object-class-list-properties gtype))
-                        (mapcar #'g:param-spec-name
-                                (g:object-class-list-properties
-                                  (g:type-parent gtype)))
-                        :test #'string=)
-        #'string<))
-
-#+nil
-(defun list-interface-properties (gtype)
-  (mapcar #'g:param-spec-name
-          (g:object-interface-list-properties gtype)))
-
-#+nil
-(defun list-interface-prerequisites (gtype)
-  (mapcar #'g:type-name
-          (g:type-interface-prerequisites gtype)))
-
-;; A sorted list of the signal names of a class
-#+nil
-(defun list-signals (gtype)
-  (sort (mapcar #'g:signal-name
-                (g:signal-list-ids gtype)) #'string<))
-
-;; gtk:style-context-to-string is deprecated since 4.10. Remove this test.
-(defun print-style-context (gtype &optional (flags :recurse))
-  (let ((widget (make-instance (glib:symbol-for-gtype gtype))))
-    (gtk:style-context-to-string (gtk:widget-style-context widget) flags)))
-
-#+nil
-(defun list-flags-item-name (gtype)
-  (mapcar #'gobject:flags-item-name
-          (gobject:get-flags-items gtype)))
-
-#+nil
-(defun list-flags-item-nick (gtype)
-  (mapcar #'gobject:flags-item-nick
-          (gobject:get-flags-items gtype)))
-
-#+nil
-(defun list-flags-item-value (gtype)
-  (mapcar #'gobject:flags-item-value
-          (gobject:get-flags-items gtype)))
-
-#+nil
-(defun list-enum-item-name (gtype)
-  (mapcar #'gobject:enum-item-name
-          (gobject:get-enum-items gtype)))
-
-#+nil
-(defun list-enum-item-nick (gtype)
-  (mapcar #'gobject:enum-item-nick
-          (gobject:get-enum-items gtype)))
-
-#+nil
-(defun list-enum-item-value (gtype)
-  (mapcar #'gobject:enum-item-value
-          (gobject:get-enum-items gtype)))
-
 ;; Create and fill a GTK:LIST-STORE for use as a model
 (defun create-and-fill-gtk-list-store ()
   (let ((liststore (make-instance 'gtk:list-store
@@ -216,4 +112,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
     ;; Return the new list store
     liststore))
 
-;;; 2024-6-29
+;;; 2024-9-21

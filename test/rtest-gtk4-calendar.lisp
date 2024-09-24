@@ -21,39 +21,39 @@
           (g:type-parent "GtkCalendar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCalendar")))
+             (glib-test:list-children "GtkCalendar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkCalendar")))
+             (glib-test:list-interfaces "GtkCalendar")))
   ;; Check properties
   (is (equal '("day" "month" "show-day-names" "show-heading" "show-week-numbers"
                "year")
-             (gtk-test:list-properties "GtkCalendar")))
+             (glib-test:list-properties "GtkCalendar")))
   ;; Check signals
   (is (equal '("day-selected" "next-month" "next-year" "prev-month" "prev-year")
-             (gtk-test:list-signals "GtkCalendar")))
+             (glib-test:list-signals "GtkCalendar")))
   ;; Check CSS name
   (is (string= "calendar"
                (gtk:widget-class-css-name "GtkCalendar")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkCalendar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCalendar" GTK-CALENDAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_calendar_get_type")
-                               ((DAY GTK-CALENDAR-DAY "day" "gint" T T)
-                                (MONTH GTK-CALENDAR-MONTH "month" "gint" T T)
-                                (SHOW-DAY-NAMES GTK-CALENDAR-SHOW-DAY-NAMES
-                                 "show-day-names" "gboolean" T T)
-                                (SHOW-HEADING GTK-CALENDAR-SHOW-HEADING
-                                 "show-heading" "gboolean" T T)
-                                (SHOW-WEEK-NUMBERS
-                                 GTK-CALENDAR-SHOW-WEEK-NUMBERS
-                                 "show-week-numbers" "gboolean" T T)
-                                (YEAR GTK-CALENDAR-YEAR "year" "gint" T T)))
-             (gobject:get-g-type-definition "GtkCalendar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCalendar" GTK:CALENDAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_calendar_get_type")
+                      ((DAY CALENDAR-DAY "day" "gint" T T)
+                       (MONTH CALENDAR-MONTH "month" "gint" T T)
+                       (SHOW-DAY-NAMES CALENDAR-SHOW-DAY-NAMES
+                        "show-day-names" "gboolean" T T)
+                       (SHOW-HEADING CALENDAR-SHOW-HEADING
+                        "show-heading" "gboolean" T T)
+                       (SHOW-WEEK-NUMBERS CALENDAR-SHOW-WEEK-NUMBERS
+                        "show-week-numbers" "gboolean" T T)
+                       (YEAR CALENDAR-YEAR "year" "gint" T T)))
+             (gobject:get-gtype-definition "GtkCalendar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -200,4 +200,4 @@
     (is-false (gtk:calendar-day-is-marked calendar 5))
     (is-false (gtk:calendar-day-is-marked calendar 6))))
 
-;;; 2024-7-5
+;;; 2024-9-20

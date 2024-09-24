@@ -18,19 +18,18 @@
           (g:gtype (cffi:foreign-funcall "gtk_native_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (gtk-test:list-interface-prerequisites "GtkNative")))
+             (glib-test:list-interface-prerequisites "GtkNative")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkNative")))
+             (glib-test:list-interface-properties "GtkNative")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkNative")))
+             (glib-test:list-signals "GtkNative")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkNative"
-                                  GTK-NATIVE
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_native_get_type"))
-             (gobject:get-g-type-definition "GtkNative"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkNative" GTK:NATIVE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_native_get_type"))
+             (gobject:get-gtype-definition "GtkNative"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -89,10 +88,10 @@
 ;; TODO: Does not work in the testsuite. We get a warning from GDK. The surface
 ;; is not created. But GTK:WIDGET-REALIZE and GTK:WIDGET-UNREALIZE is working.
 ;;
-;;  (gtk-test:9391): Gdk-CRITICAL **: gdk_surface_get_frame_clock: assertion
+;;  (glib-test:9391): Gdk-CRITICAL **: gdk_surface_get_frame_clock: assertion
 ;;  'GDK_IS_SURFACE (surface)' failed
 ;;
-;;  (gtk-test:9391): Gtk-CRITICAL **: gtk_native_realize: assertion 'clock !=
+;;  (glib-test:9391): Gtk-CRITICAL **: gtk_native_realize: assertion 'clock !=
 ;;   NULL' failed
 
 #+nil

@@ -21,22 +21,24 @@
           (g:type-parent "GtkPrintContext")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPrintContext")))
+             (glib-test:list-children "GtkPrintContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkPrintContext")))
+             (glib-test:list-interfaces "GtkPrintContext")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkPrintContext")))
+             (glib-test:list-properties "GtkPrintContext")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkPrintContext")))
+             (glib-test:list-signals "GtkPrintContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintContext" GTK-PRINT-CONTEXT
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_print_context_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkPrintContext"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintContext" GTK:PRINT-CONTEXT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_print_context_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkPrintContext"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -52,4 +54,4 @@
 ;;;     gtk_print_context_create_pango_layout
 ;;;     gtk_print_context_get_hard_margins
 
-;;; 2024-2-16
+;;; 2024-9-20

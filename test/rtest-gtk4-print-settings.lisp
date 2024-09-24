@@ -5,7 +5,7 @@
 
 ;; Ensure a file with print settings for use in the following tests
 (test ensure-print-settings
-  (let* ((path (sys-path "out/print-settings.ini"))
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
          (variant (g:variant-parse "a{sv}"
                                    "{'scale': <'100'>,
                                      'number-up': <'1'>,
@@ -26,111 +26,108 @@
 ;;;     GtkPageOrientation
 
 (test gtk-page-orientation
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPageOrientation"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPageOrientation")
           (g:gtype (cffi:foreign-funcall "gtk_page_orientation_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:page-orientation
           (glib:symbol-for-gtype "GtkPageOrientation")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PAGE_ORIENTATION_PORTRAIT" "GTK_PAGE_ORIENTATION_LANDSCAPE"
                "GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT"
                "GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE")
-             (gtk-test:list-enum-item-name "GtkPageOrientation")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkPageOrientation")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkPageOrientation")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkPageOrientation")))
+  ;; Check nick names
   (is (equal '("portrait" "landscape" "reverse-portrait" "reverse-landscape")
-             (gtk-test:list-enum-item-nick "GtkPageOrientation")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPageOrientation" GTK-PAGE-ORIENTATION
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_page_orientation_get_type")
-                                     (:PORTRAIT 0)
-                                     (:LANDSCAPE 1)
-                                     (:REVERSE-PORTRAIT 2)
-                                     (:REVERSE-LANDSCAPE 3))
-             (gobject:get-g-type-definition "GtkPageOrientation"))))
+             (glib-test:list-enum-item-nicks "GtkPageOrientation")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPageOrientation" GTK:PAGE-ORIENTATION
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_page_orientation_get_type")
+                       (:PORTRAIT 0)
+                       (:LANDSCAPE 1)
+                       (:REVERSE-PORTRAIT 2)
+                       (:REVERSE-LANDSCAPE 3))
+             (gobject:get-gtype-definition "GtkPageOrientation"))))
 
 ;;;     GtkPrintDuplex
 
 (test gtk-print-duplex
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPrintDuplex"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintDuplex")
           (g:gtype (cffi:foreign-funcall "gtk_print_duplex_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-duplex
           (glib:symbol-for-gtype "GtkPrintDuplex")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PRINT_DUPLEX_SIMPLEX" "GTK_PRINT_DUPLEX_HORIZONTAL"
                "GTK_PRINT_DUPLEX_VERTICAL")
-             (gtk-test:list-enum-item-name "GtkPrintDuplex")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkPrintDuplex")))
+  ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkPrintDuplex")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkPrintDuplex")))
+  ;; Check nick names
   (is (equal '("simplex" "horizontal" "vertical")
-             (gtk-test:list-enum-item-nick "GtkPrintDuplex")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintDuplex" GTK-PRINT-DUPLEX
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_print_duplex_get_type")
-                                     (:SIMPLEX 0)
-                                     (:HORIZONTAL 1)
-                                     (:VERTICAL 2))
-             (gobject:get-g-type-definition "GtkPrintDuplex"))))
+             (glib-test:list-enum-item-nicks "GtkPrintDuplex")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintDuplex" GTK:PRINT-DUPLEX
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_print_duplex_get_type")
+                       (:SIMPLEX 0)
+                       (:HORIZONTAL 1)
+                       (:VERTICAL 2))
+             (gobject:get-gtype-definition "GtkPrintDuplex"))))
 
 ;;;     GtkPrintQuality
 
 (test gtk-print-quality
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPrintQuality"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintQuality")
           (g:gtype (cffi:foreign-funcall "gtk_print_quality_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-quality
           (glib:symbol-for-gtype "GtkPrintQuality")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PRINT_QUALITY_LOW" "GTK_PRINT_QUALITY_NORMAL"
                "GTK_PRINT_QUALITY_HIGH" "GTK_PRINT_QUALITY_DRAFT")
-             (gtk-test:list-enum-item-name "GtkPrintQuality")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkPrintQuality")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkPrintQuality")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkPrintQuality")))
+  ;; Check nick names
   (is (equal '("low" "normal" "high" "draft")
-             (gtk-test:list-enum-item-nick "GtkPrintQuality")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintQuality" GTK-PRINT-QUALITY
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_print_quality_get_type")
-                                     (:LOW 0)
-                                     (:NORMAL 1)
-                                     (:HIGH 2)
-                                     (:DRAFT 3))
-             (gobject:get-g-type-definition "GtkPrintQuality"))))
+             (glib-test:list-enum-item-nicks "GtkPrintQuality")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintQuality" GTK:PRINT-QUALITY
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_print_quality_get_type")
+                       (:LOW 0)
+                       (:NORMAL 1)
+                       (:HIGH 2)
+                       (:DRAFT 3))
+             (gobject:get-gtype-definition "GtkPrintQuality"))))
 
 ;;;     GtkNumberUpLayout
 
 (test gtk-number-up-layout
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkNumberUpLayout"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNumberUpLayout")
           (g:gtype (cffi:foreign-funcall "gtk_number_up_layout_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:number-up-layout
           (glib:symbol-for-gtype "GtkNumberUpLayout")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM"
                "GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP"
                "GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM"
@@ -139,90 +136,88 @@
                "GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT"
                "GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT"
                "GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT")
-             (gtk-test:list-enum-item-name "GtkNumberUpLayout")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkNumberUpLayout")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (gtk-test:list-enum-item-value "GtkNumberUpLayout")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkNumberUpLayout")))
+  ;; Check nick names
   (is (equal '("lrtb" "lrbt" "rltb" "rlbt" "tblr" "tbrl" "btlr" "btrl")
-             (gtk-test:list-enum-item-nick "GtkNumberUpLayout")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkNumberUpLayout" GTK-NUMBER-UP-LAYOUT
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_number_up_layout_get_type")
-                                     (:LRTB 0)
-                                     (:LRBT 1)
-                                     (:RLTB 2)
-                                     (:RLBT 3)
-                                     (:TBLR 4)
-                                     (:TBRL 5)
-                                     (:BTLR 6)
-                                     (:BTRL 7))
-             (gobject:get-g-type-definition "GtkNumberUpLayout"))))
+             (glib-test:list-enum-item-nicks "GtkNumberUpLayout")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkNumberUpLayout" GTK:NUMBER-UP-LAYOUT
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_number_up_layout_get_type")
+                       (:LRTB 0)
+                       (:LRBT 1)
+                       (:RLTB 2)
+                       (:RLBT 3)
+                       (:TBLR 4)
+                       (:TBRL 5)
+                       (:BTLR 6)
+                       (:BTRL 7))
+             (gobject:get-gtype-definition "GtkNumberUpLayout"))))
 
 ;;;     GtkPrintPages
 
 (test gtk-print-pages
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPrintPages"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintPages")
           (g:gtype (cffi:foreign-funcall "gtk_print_pages_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-pages
           (glib:symbol-for-gtype "GtkPrintPages")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PRINT_PAGES_ALL" "GTK_PRINT_PAGES_CURRENT"
                "GTK_PRINT_PAGES_RANGES" "GTK_PRINT_PAGES_SELECTION")
-             (gtk-test:list-enum-item-name "GtkPrintPages")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkPrintPages")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkPrintPages")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkPrintPages")))
+  ;; Check nick names
   (is (equal '("all" "current" "ranges" "selection")
-             (gtk-test:list-enum-item-nick "GtkPrintPages")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintPages" GTK-PRINT-PAGES
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_print_pages_get_type")
-                                     (:ALL 0)
-                                     (:CURRENT 1)
-                                     (:RANGES 2)
-                                     (:SELECTION 3))
-             (gobject:get-g-type-definition "GtkPrintPages"))))
+             (glib-test:list-enum-item-nicks "GtkPrintPages")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintPages" GTK:PRINT-PAGES
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_print_pages_get_type")
+                       (:ALL 0)
+                       (:CURRENT 1)
+                       (:RANGES 2)
+                       (:SELECTION 3))
+             (gobject:get-gtype-definition "GtkPrintPages"))))
 
 ;;;     GtkPageRange
 
 ;;;     GtkPageSet
 
 (test gtk-page-set
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkPageSet"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPageSet")
           (g:gtype (cffi:foreign-funcall "gtk_page_set_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:page-set
           (glib:symbol-for-gtype "GtkPageSet")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PAGE_SET_ALL" "GTK_PAGE_SET_EVEN" "GTK_PAGE_SET_ODD")
-             (gtk-test:list-enum-item-name "GtkPageSet")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkPageSet")))
+  ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkPageSet")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkPageSet")))
+  ;; Check nick names
   (is (equal '("all" "even" "odd")
-             (gtk-test:list-enum-item-nick "GtkPageSet")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPageSet" GTK-PAGE-SET
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER "gtk_page_set_get_type")
-                                     (:ALL 0)
-                                     (:EVEN 1)
-                                     (:ODD 2))
-             (gobject:get-g-type-definition "GtkPageSet"))))
+             (glib-test:list-enum-item-nicks "GtkPageSet")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPageSet" GTK:PAGE-SET
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_page_set_get_type")
+                       (:ALL 0)
+                       (:EVEN 1)
+                       (:ODD 2))
+             (gobject:get-gtype-definition "GtkPageSet"))))
 
 ;;;     GtkPrintSettings
 
@@ -240,24 +235,24 @@
           (g:type-parent "GtkPrintSettings")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPrintSettings")))
-  ;; Check the interfaces
+             (glib-test:list-children "GtkPrintSettings")))
+  ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkPrintSettings")))
+             (glib-test:list-interfaces "GtkPrintSettings")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkPrintSettings")))
+             (glib-test:list-properties "GtkPrintSettings")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkPrintSettings")))
+             (glib-test:list-signals "GtkPrintSettings")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintSettings"
-                                             GTK-PRINT-SETTINGS
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER
-                                "gtk_print_settings_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkPrintSettings"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintSettings" GTK:PRINT-SETTINGS
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_print_settings_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkPrintSettings"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -280,7 +275,7 @@
 ;;;     gtk_print_settings_unset
 
 (test gtk-print-settings-get/set
-  (let* ((path (sys-path "out/print-settings.ini"))
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path)))
 
   (is-true (gtk:print-settings-has-key settings "scale"))
@@ -302,7 +297,7 @@
 ;;;     gtk_print_settings_foreach
 
 (test gtk-print-settings-foreach
-  (let* ((path (sys-path "out/print-settings.ini"))
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path))
          values)
     (is-false (gtk:print-settings-foreach settings
@@ -324,7 +319,7 @@
 ;;;     gtk_print_settings_set_bool
 
 (test gtk-print-settings-bool
-  (let* ((path (sys-path "out/print-settings.ini"))
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path)))
     (is-false (gtk:print-settings-bool settings "reverse"))
     (is-true (setf (gtk:print-settings-bool settings "reverse") t))
@@ -426,7 +421,7 @@
 ;;;     gtk_print_settings_to_file
 
 (test gtk-print-settings-new-from-file
-  (let ((path (sys-path "out/print-settings.ini"))
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         settings)
     (is (typep (setf settings
                      (gtk:print-settings-new-from-file path))
@@ -437,7 +432,7 @@
 ;;;     gtk_print_settings_to_key_file
 
 (test gtk-print-settings-new-from-key-file
-  (let ((path (sys-path "out/print-settings.ini"))
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         settings)
     (glib:with-g-key-file (keyfile)
       (is-true (glib:key-file-load-from-file keyfile path :none))
@@ -472,17 +467,17 @@
 ;;;     gtk_print_settings_load_file
 
 (test gtk-print-settings-load-file
-  (let ((path (sys-path "out/print-settings.ini"))
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         (settings (gtk:print-settings-new)))
     (is-true (gtk:print-settings-load-file settings path))))
 
 ;;;     gtk_print_settings_load_key_file
 
 (test gtk-print-settings-load-key-file
-  (let ((path (sys-path "out/print-settings.ini"))
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         (settings (gtk:print-settings-new)))
     (glib:with-g-key-file (keyfile)
       (is-true (glib:key-file-load-from-file keyfile path :none))
       (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
 
-;;; 2024-2-18
+;;; 2024-9-20

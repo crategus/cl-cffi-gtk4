@@ -21,30 +21,30 @@
           (g:type-parent "GtkWindowHandle")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkWindowHandle")))
+             (glib-test:list-children "GtkWindowHandle")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkWindowHandle")))
+             (glib-test:list-interfaces "GtkWindowHandle")))
   ;; Check properties
   (is (equal '("child")
-             (gtk-test:list-properties "GtkWindowHandle")))
+             (glib-test:list-properties "GtkWindowHandle")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkWindowHandle")))
+             (glib-test:list-signals "GtkWindowHandle")))
   ;; Check CSS name
   (is (string= "windowhandle"
                (gtk:widget-class-css-name "GtkWindowHandle")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkWindowHandle")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowHandle" GTK-WINDOW-HANDLE
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_window_handle_get_type")
-                               ((CHILD GTK-WINDOW-HANDLE-CHILD "child"
-                                 "GtkWidget" T T)))
-             (gobject:get-g-type-definition "GtkWindowHandle"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWindowHandle" GTK:WINDOW-HANDLE
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_window_handle_get_type")
+                      ((CHILD WINDOW-HANDLE-CHILD "child" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkWindowHandle"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -61,4 +61,4 @@
 (test gtk-window-handle-new
   (is (typep (gtk:window-handle-new) 'gtk:window-handle)))
 
-;;; 2024-7-4
+;;; 2024-9-20

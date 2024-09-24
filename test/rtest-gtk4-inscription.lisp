@@ -10,7 +10,7 @@
 (test gtk-inscription-overflow
   ;; Check type
   (is (g:type-is-enum "GtkInscriptionOverflow"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkInscriptionOverflow")
           (g:gtype (cffi:foreign-funcall "gtk_inscription_overflow_get_type"
                                          :size))))
@@ -22,24 +22,23 @@
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END")
-             (gtk-test:list-enum-item-name "GtkInscriptionOverflow")))
+             (glib-test:list-enum-item-names "GtkInscriptionOverflow")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkInscriptionOverflow")))
+             (glib-test:list-enum-item-values "GtkInscriptionOverflow")))
   ;; Check nick names
   (is (equal '("clip" "ellipsize-start" "ellipsize-middle" "ellipsize-end")
-             (gtk-test:list-enum-item-nick "GtkInscriptionOverflow")))
+             (glib-test:list-enum-item-nicks "GtkInscriptionOverflow")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkInscriptionOverflow"
-                                     GTK-INSCRIPTION-OVERFLOW
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_inscription_overflow_get_type")
-                                     (:CLIP 0)
-                                     (:ELLIPSIZE-START 1)
-                                     (:ELLIPSIZE-MIDDLE 2)
-                                     (:ELLIPSIZE-END 3))
-             (gobject:get-g-type-definition "GtkInscriptionOverflow"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkInscriptionOverflow"
+                                    GTK:INSCRIPTION-OVERFLOW
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_inscription_overflow_get_type")
+                       (:CLIP 0)
+                       (:ELLIPSIZE-START 1)
+                       (:ELLIPSIZE-MIDDLE 2)
+                       (:ELLIPSIZE-END 3))
+             (gobject:get-gtype-definition "GtkInscriptionOverflow"))))
 
 ;;;     GtkInscription
 
@@ -57,52 +56,46 @@
           (g:type-parent "GtkInscription")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkInscription")))
+             (glib-test:list-children "GtkInscription")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleText")
-             (gtk-test:list-interfaces "GtkInscription")))
+             (glib-test:list-interfaces "GtkInscription")))
   ;; Check properties
   (is (equal '("attributes" "markup" "min-chars" "min-lines" "nat-chars"
                "nat-lines" "text" "text-overflow" "wrap-mode" "xalign" "yalign")
-             (gtk-test:list-properties "GtkInscription")))
+             (glib-test:list-properties "GtkInscription")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkInscription")))
+             (glib-test:list-signals "GtkInscription")))
   ;; Check CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkInscription")))
   ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkInscription")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInscription" GTK-INSCRIPTION
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleText"
-                                 "GtkBuildable" "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_inscription_get_type")
-                               ((ATTRIBUTES GTK-INSCRIPTION-ATTRIBUTES
-                                 "attributes" "PangoAttrList" T T)
-                                (MARKUP GTK-INSCRIPTION-MARKUP "markup"
-                                 "gchararray" NIL T)
-                                (MIN-CHARS GTK-INSCRIPTION-MIN-CHARS
-                                 "min-chars" "guint" T T)
-                                (MIN-LINES GTK-INSCRIPTION-MIN-LINES
-                                 "min-lines" "guint" T T)
-                                (NAT-CHARS GTK-INSCRIPTION-NAT-CHARS
-                                 "nat-chars" "guint" T T)
-                                (NAT-LINES GTK-INSCRIPTION-NAT-LINES
-                                 "nat-lines" "guint" T T)
-                                (TEXT GTK-INSCRIPTION-TEXT "text" "gchararray"
-                                 T T)
-                                (TEXT-OVERFLOW GTK-INSCRIPTION-TEXT-OVERFLOW
-                                 "text-overflow" "GtkInscriptionOverflow" T T)
-                                (WRAP-MODE GTK-INSCRIPTION-WRAP-MODE
-                                 "wrap-mode" "PangoWrapMode" T T)
-                                (XALIGN GTK-INSCRIPTION-XALIGN "xalign"
-                                 "gfloat" T T)
-                                (YALIGN GTK-INSCRIPTION-YALIGN "yalign"
-                                 "gfloat" T T)))
-             (gobject:get-g-type-definition "GtkInscription"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkInscription" GTK:INSCRIPTION
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_inscription_get_type")
+                      ((ATTRIBUTES INSCRIPTION-ATTRIBUTES
+                        "attributes" "PangoAttrList" T T)
+                       (MARKUP INSCRIPTION-MARKUP "markup" "gchararray" NIL T)
+                       (MIN-CHARS INSCRIPTION-MIN-CHARS "min-chars" "guint" T T)
+                       (MIN-LINES INSCRIPTION-MIN-LINES "min-lines" "guint" T T)
+                       (NAT-CHARS INSCRIPTION-NAT-CHARS "nat-chars" "guint" T T)
+                       (NAT-LINES INSCRIPTION-NAT-LINES "nat-lines" "guint" T T)
+                       (TEXT INSCRIPTION-TEXT "text" "gchararray" T T)
+                       (TEXT-OVERFLOW INSCRIPTION-TEXT-OVERFLOW
+                        "text-overflow" "GtkInscriptionOverflow" T T)
+                       (WRAP-MODE INSCRIPTION-WRAP-MODE
+                        "wrap-mode" "PangoWrapMode" T T)
+                       (XALIGN INSCRIPTION-XALIGN "xalign" "gfloat" T T)
+                       (YALIGN INSCRIPTION-YALIGN "yalign" "gfloat" T T)))
+             (gobject:get-gtype-definition "GtkInscription"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -129,4 +122,4 @@
   (is (typep (gtk:inscription-new nil) 'gtk:inscription))
   (is (typep (gtk:inscription-new "text") 'gtk:inscription)))
 
-;;; 2024-5-26
+;;; 2024-9-20

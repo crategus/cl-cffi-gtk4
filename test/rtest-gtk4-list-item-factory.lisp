@@ -20,27 +20,27 @@
           (g:type-parent "GtkListItemFactory")))
   ;; Check children
   (is (or (equal '("GtkBuilderListItemFactory" "GtkSignalListItemFactory")
-                 (gtk-test:list-children "GtkListItemFactory"))
+                 (glib-test:list-children "GtkListItemFactory"))
           (equal '("GtkBuilderListItemFactory" "GtkColumnListItemFactory"
                    "GtkSignalListItemFactory")
-                 (gtk-test:list-children "GtkListItemFactory"))))
+                 (glib-test:list-children "GtkListItemFactory"))))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkListItemFactory")))
+             (glib-test:list-interfaces "GtkListItemFactory")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkListItemFactory")))
+             (glib-test:list-properties "GtkListItemFactory")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkListItemFactory")))
+             (glib-test:list-signals "GtkListItemFactory")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListItemFactory"
-                                             GTK-LIST-ITEM-FACTORY
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER
-                                "gtk_list_item_factory_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkListItemFactory"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListItemFactory" GTK:LIST-ITEM-FACTORY
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_list_item_factory_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkListItemFactory"))))
 
 ;;; ----------------------------------------------------------------------------
 
@@ -61,24 +61,25 @@
           (g:type-parent "GtkSignalListItemFactory")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSignalListItemFactory")))
+             (glib-test:list-children "GtkSignalListItemFactory")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkSignalListItemFactory")))
+             (glib-test:list-interfaces "GtkSignalListItemFactory")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkSignalListItemFactory")))
+             (glib-test:list-properties "GtkSignalListItemFactory")))
   ;; Check signals
   (is (equal '("bind" "setup" "teardown" "unbind")
-             (gtk-test:list-signals "GtkSignalListItemFactory")))
+             (glib-test:list-signals "GtkSignalListItemFactory")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSignalListItemFactory"
-                               GTK-SIGNAL-LIST-ITEM-FACTORY
-                               (:SUPERCLASS GTK-LIST-ITEM-FACTORY :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_signal_list_item_factory_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkSignalListItemFactory"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSignalListItemFactory"
+                                      GTK:SIGNAL-LIST-ITEM-FACTORY
+                      (:SUPERCLASS GTK:LIST-ITEM-FACTORY
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_signal_list_item_factory_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkSignalListItemFactory"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -113,30 +114,31 @@
           (g:type-parent "GtkBuilderListItemFactory")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkBuilderListItemFactory")))
+             (glib-test:list-children "GtkBuilderListItemFactory")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkBuilderListItemFactory")))
+             (glib-test:list-interfaces "GtkBuilderListItemFactory")))
   ;; Check properties
   (is (equal '("bytes" "resource" "scope")
-             (gtk-test:list-properties "GtkBuilderListItemFactory")))
+             (glib-test:list-properties "GtkBuilderListItemFactory")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBuilderListItemFactory")))
+             (glib-test:list-signals "GtkBuilderListItemFactory")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBuilderListItemFactory"
-                               GTK-BUILDER-LIST-ITEM-FACTORY
-                               (:SUPERCLASS GTK-LIST-ITEM-FACTORY :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_builder_list_item_factory_get_type")
-                               ((BYTES GTK-BUILDER-LIST-ITEM-FACTORY-BYTES
-                                 "bytes" "GBytes" T NIL)
-                                (RESOURCE
-                                 GTK-BUILDER-LIST-ITEM-FACTORY-RESOURCE
-                                 "resource" "gchararray" T NIL)
-                                (SCOPE GTK-BUILDER-LIST-ITEM-FACTORY-SCOPE
-                                 "scope" "GtkBuilderScope" T NIL)))
-             (gobject:get-g-type-definition "GtkBuilderListItemFactory"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBuilderListItemFactory"
+                                      GTK:BUILDER-LIST-ITEM-FACTORY
+                      (:SUPERCLASS GTK:LIST-ITEM-FACTORY
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER
+                       "gtk_builder_list_item_factory_get_type")
+                      ((BYTES BUILDER-LIST-ITEM-FACTORY-BYTES
+                        "bytes" "GBytes" T NIL)
+                       (RESOURCE BUILDER-LIST-ITEM-FACTORY-RESOURCE
+                        "resource" "gchararray" T NIL)
+                       (SCOPE BUILDER-LIST-ITEM-FACTORY-SCOPE
+                        "scope" "GtkBuilderScope" T NIL)))
+             (gobject:get-gtype-definition "GtkBuilderListItemFactory"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -171,7 +173,7 @@
 ;;;     gtk_builder_list_item_factory_new_from_bytes
 
 ;; FIXME: Example is from the GTK documentation. What is wrong?
-;; (gtk-test:6653): Gtk-WARNING **: 12:36:10.503: Failed to precompile template
+;; (glib-test:6653): Gtk-WARNING **: 12:36:10.503: Failed to precompile template
 ;; for GtkBuilderListItemFactory: Fehler in Zeile 14, Zeichen 23: Dokument muss
 ;; mit einem Element beginnen (e.g. <book>)
 

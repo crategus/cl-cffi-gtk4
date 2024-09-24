@@ -20,22 +20,22 @@
   ;; Check names
   (is (equal '("GTK_CELL_RENDERER_ACCEL_MODE_GTK"
                "GTK_CELL_RENDERER_ACCEL_MODE_OTHER")
-             (gtk-test:list-enum-item-name "GtkCellRendererAccelMode")))
+             (glib-test:list-enum-item-names "GtkCellRendererAccelMode")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkCellRendererAccelMode")))
+             (glib-test:list-enum-item-values "GtkCellRendererAccelMode")))
   ;; Check nick names
   (is (equal '("gtk" "other")
-             (gtk-test:list-enum-item-nick "GtkCellRendererAccelMode")))
+             (glib-test:list-enum-item-nicks "GtkCellRendererAccelMode")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererAccelMode"
-                                     GTK-CELL-RENDERER-ACCEL-MODE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_cell_renderer_accel_mode_get_type")
-                                     (:GTK 0)
-                                     (:OTHER 1))
-             (gobject:get-g-type-definition "GtkCellRendererAccelMode"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkCellRendererAccelMode"
+                                    GTK:CELL-RENDERER-ACCEL-MODE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_cell_renderer_accel_mode_get_type")
+                                    (:GTK 0)
+                                    (:OTHER 1))
+             (gobject:get-gtype-definition "GtkCellRendererAccelMode"))))
 
 ;;;     GtkCellRendererAccel
 
@@ -54,31 +54,32 @@
           (g:type-parent "GtkCellRendererAccel")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererAccel")))
+             (glib-test:list-children "GtkCellRendererAccel")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererAccel")))
+             (glib-test:list-interfaces "GtkCellRendererAccel")))
   ;; Check properties
   (is (equal '("accel-key" "accel-mode" "accel-mods" "keycode")
-             (gtk-test:list-properties "GtkCellRendererAccel")))
+             (glib-test:list-properties "GtkCellRendererAccel")))
   ;; Check signals
   (is (equal '("accel-cleared" "accel-edited")
-             (gtk-test:list-signals "GtkCellRendererAccel")))
+             (glib-test:list-signals "GtkCellRendererAccel")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererAccel"
-                                             GTK-CELL-RENDERER-ACCEL
-                               (:SUPERCLASS GTK-CELL-RENDERER-TEXT :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_accel_get_type")
-                               ((ACCEL-KEY GTK-CELL-RENDERER-ACCEL-ACCEL-KEY
-                                 "accel-key" "guint" T T)
-                                (ACCEL-MODE GTK-CELL-RENDERER-ACCEL-ACCEL-MODE
-                                 "accel-mode" "GtkCellRendererAccelMode" T T)
-                                (ACCEL-MODS GTK-CELL-RENDERER-ACCEL-ACCEL-MODS
-                                 "accel-mods" "GdkModifierType" T T)
-                                (KEYCODE GTK-CELL-RENDERER-ACCEL-KEYCODE
-                                 "keycode" "guint" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererAccel"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererAccel"
+                                      GTK:CELL-RENDERER-ACCEL
+                      (:SUPERCLASS GTK:CELL-RENDERER-TEXT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_accel_get_type")
+                      ((ACCEL-KEY CELL-RENDERER-ACCEL-ACCEL-KEY
+                        "accel-key" "guint" T T)
+                       (ACCEL-MODE CELL-RENDERER-ACCEL-ACCEL-MODE
+                        "accel-mode" "GtkCellRendererAccelMode" T T)
+                       (ACCEL-MODS CELL-RENDERER-ACCEL-ACCEL-MODS
+                        "accel-mods" "GdkModifierType" T T)
+                       (KEYCODE CELL-RENDERER-ACCEL-KEYCODE
+                        "keycode" "guint" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererAccel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -134,4 +135,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-accel-new) 'gtk:cell-renderer-accel))))
 
-;;; 2024-5-18
+;;; 2024-9-20

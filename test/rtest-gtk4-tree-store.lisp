@@ -21,26 +21,27 @@
           (g:type-parent "GtkTreeStore")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTreeStore")))
+             (glib-test:list-children "GtkTreeStore")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeDragSource" "GtkTreeDragDest"
                "GtkTreeSortable" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkTreeStore")))
+             (glib-test:list-interfaces "GtkTreeStore")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkTreeStore")))
+             (glib-test:list-properties "GtkTreeStore")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTreeStore")))
+             (glib-test:list-signals "GtkTreeStore")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeStore" GTK-TREE-STORE
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GtkBuildable" "GtkTreeDragDest"
-                                 "GtkTreeDragSource" "GtkTreeModel"
-                                 "GtkTreeSortable")
-                                :TYPE-INITIALIZER "gtk_tree_store_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkTreeStore"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeStore" GTK:TREE-STORE
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkBuildable" "GtkTreeDragDest" "GtkTreeDragSource"
+                        "GtkTreeModel" "GtkTreeSortable")
+                       :TYPE-INITIALIZER "gtk_tree_store_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkTreeStore"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -74,4 +75,4 @@
 ;;;     gtk_tree_store_move_before
 ;;;     gtk_tree_store_move_after
 
-;;; 2024-5-16
+;;; 2024-9-20

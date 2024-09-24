@@ -19,29 +19,29 @@
           (glib:symbol-for-gtype "GtkSpinButtonUpdatePolicy")))
   ;; Check names
   (is (equal '("GTK_UPDATE_ALWAYS" "GTK_UPDATE_IF_VALID")
-             (gtk-test:list-enum-item-name "GtkSpinButtonUpdatePolicy")))
+             (glib-test:list-enum-item-names "GtkSpinButtonUpdatePolicy")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkSpinButtonUpdatePolicy")))
+             (glib-test:list-enum-item-values "GtkSpinButtonUpdatePolicy")))
   ;; Check nick names
   (is (equal '("always" "if-valid")
-             (gtk-test:list-enum-item-nick "GtkSpinButtonUpdatePolicy")))
+             (glib-test:list-enum-item-nicks "GtkSpinButtonUpdatePolicy")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSpinButtonUpdatePolicy"
-                                     GTK-SPIN-BUTTON-UPDATE-POLICY
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_spin_button_update_policy_get_type")
-                                     (:ALWAYS 0)
-                                     (:IF-VALID 1))
-             (gobject:get-g-type-definition "GtkSpinButtonUpdatePolicy"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSpinButtonUpdatePolicy"
+                                    GTK:SPIN-BUTTON-UPDATE-POLICY
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_spin_button_update_policy_get_type")
+                                    (:ALWAYS 0)
+                                    (:IF-VALID 1))
+             (gobject:get-gtype-definition "GtkSpinButtonUpdatePolicy"))))
 
 ;;;     GtkSpinType
 
 (test gtk-spin-type
   ;; Check type
   (is (g:type-is-enum "GtkSpinType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSpinType")
           (g:gtype (cffi:foreign-funcall "gtk_spin_type_get_type" :size))))
   ;; Check registered name
@@ -51,27 +51,26 @@
   (is (equal '("GTK_SPIN_STEP_FORWARD" "GTK_SPIN_STEP_BACKWARD"
                "GTK_SPIN_PAGE_FORWARD" "GTK_SPIN_PAGE_BACKWARD" "GTK_SPIN_HOME"
                "GTK_SPIN_END" "GTK_SPIN_USER_DEFINED")
-             (gtk-test:list-enum-item-name "GtkSpinType")))
+             (glib-test:list-enum-item-names "GtkSpinType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (gtk-test:list-enum-item-value "GtkSpinType")))
+             (glib-test:list-enum-item-values "GtkSpinType")))
   ;; Check nick names
   (is (equal '("step-forward" "step-backward" "page-forward" "page-backward"
                "home" "end" "user-defined")
-             (gtk-test:list-enum-item-nick "GtkSpinType")))
+             (glib-test:list-enum-item-nicks "GtkSpinType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSpinType" GTK-SPIN-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_spin_type_get_type")
-                                     (:STEP-FORWARD 0)
-                                     (:STEP-BACKWARD 1)
-                                     (:PAGE-FORWARD 2)
-                                     (:PAGE-BACKWARD 3)
-                                     (:HOME 4)
-                                     (:END 5)
-                                     (:USER-DEFINED 6))
-             (gobject:get-g-type-definition "GtkSpinType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSpinType" GTK:SPIN-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_spin_type_get_type")
+                                    (:STEP-FORWARD 0)
+                                    (:STEP-BACKWARD 1)
+                                    (:PAGE-FORWARD 2)
+                                    (:PAGE-BACKWARD 3)
+                                    (:HOME 4)
+                                    (:END 5)
+                                    (:USER-DEFINED 6))
+             (gobject:get-gtype-definition "GtkSpinType"))))
 
 ;;;     GtkSpinButton
 
@@ -89,23 +88,23 @@
           (g:type-parent "GtkSpinButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSpinButton")))
+             (glib-test:list-children "GtkSpinButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange" "GtkEditable"
                "GtkCellEditable")
-             (gtk-test:list-interfaces "GtkSpinButton")))
+             (glib-test:list-interfaces "GtkSpinButton")))
   ;; Check properties
   (is (equal '("activates-default" "adjustment" "climb-rate" "cursor-position"
                "digits" "editable"
                "editing-canceled" "enable-undo" "max-width-chars" "numeric"
                "orientation" "selection-bound" "snap-to-ticks" "text"
                "update-policy" "value" "width-chars" "wrap" "xalign")
-             (gtk-test:list-properties "GtkSpinButton")))
+             (glib-test:list-properties "GtkSpinButton")))
   ;; Check signals
   (is (equal '("activate" "change-value" "input" "output" "value-changed"
                "wrapped")
-             (gtk-test:list-signals "GtkSpinButton")))
+             (glib-test:list-signals "GtkSpinButton")))
   ;; Check CSS name
   (is (string= "spinbutton"
                (gtk:widget-class-css-name "GtkSpinButton")))
@@ -113,34 +112,29 @@
   (is (eq :SPIN-BUTTON
           (gtk:widget-class-accessible-role "GtkSpinButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSpinButton" GTK-SPIN-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleRange"
-                                 "GtkBuildable" "GtkCellEditable"
-                                 "GtkConstraintTarget" "GtkEditable"
-                                 "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_spin_button_get_type")
-                               ((ACTIVATES-DEFAULT
-                                 GTK-SPIN-BUTTON-ACTIVATES-DEFAULT
-                                 "activates-default" "gboolean" T T)
-                                (ADJUSTMENT GTK-SPIN-BUTTON-ADJUSTMENT
-                                 "adjustment" "GtkAdjustment" T T)
-                                (CLIMB-RATE GTK-SPIN-BUTTON-CLIMB-RATE
-                                 "climb-rate" "gdouble" T T)
-                                (DIGITS GTK-SPIN-BUTTON-DIGITS "digits" "guint"
-                                 T T)
-                                (NUMERIC GTK-SPIN-BUTTON-NUMERIC "numeric"
-                                 "gboolean" T T)
-                                (SNAP-TO-TICKS GTK-SPIN-BUTTON-SNAP-TO-TICKS
-                                 "snap-to-ticks" "gboolean" T T)
-                                (UPDATE-POLICY GTK-SPIN-BUTTON-UPDATE-POLICY
-                                 "update-policy" "GtkSpinButtonUpdatePolicy" T
-                                 T)
-                                (VALUE GTK-SPIN-BUTTON-VALUE "value" "gdouble"
-                                 T T)
-                                (WRAP GTK-SPIN-BUTTON-WRAP "wrap" "gboolean" T
-                                 T)))
-             (gobject:get-g-type-definition "GtkSpinButton"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSpinButton" GTK:SPIN-BUTTON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkCellEditable" "GtkConstraintTarget" "GtkEditable"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_spin_button_get_type")
+                      ((ACTIVATES-DEFAULT SPIN-BUTTON-ACTIVATES-DEFAULT
+                        "activates-default" "gboolean" T T)
+                       (ADJUSTMENT SPIN-BUTTON-ADJUSTMENT
+                        "adjustment" "GtkAdjustment" T T)
+                       (CLIMB-RATE SPIN-BUTTON-CLIMB-RATE
+                        "climb-rate" "gdouble" T T)
+                       (DIGITS SPIN-BUTTON-DIGITS "digits" "guint" T T)
+                       (NUMERIC SPIN-BUTTON-NUMERIC "numeric" "gboolean" T T)
+                       (SNAP-TO-TICKS SPIN-BUTTON-SNAP-TO-TICKS
+                        "snap-to-ticks" "gboolean" T T)
+                       (UPDATE-POLICY SPIN-BUTTON-UPDATE-POLICY
+                        "update-policy" "GtkSpinButtonUpdatePolicy" T T)
+                       (VALUE SPIN-BUTTON-VALUE "value" "gdouble" T T)
+                       (WRAP SPIN-BUTTON-WRAP "wrap" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkSpinButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -254,4 +248,4 @@
 ;;;     gtk_spin_button_spin
 ;;;     gtk_spin_button_update
 
-;;; 2024-5-26
+;;; 2024-9-20

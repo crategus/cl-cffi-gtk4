@@ -21,25 +21,26 @@
           (g:type-parent "GtkTextMark")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextMark")))
+             (glib-test:list-children "GtkTextMark")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkTextMark")))
+             (glib-test:list-interfaces "GtkTextMark")))
   ;; Check properties
   (is (equal '("left-gravity" "name")
-             (gtk-test:list-properties "GtkTextMark")))
+             (glib-test:list-properties "GtkTextMark")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTextMark")))
+             (glib-test:list-signals "GtkTextMark")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextMark" GTK-TEXT-MARK
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_text_mark_get_type")
-                               ((LEFT-GRAVITY GTK-TEXT-MARK-LEFT-GRAVITY
-                                 "left-gravity" "gboolean" T NIL)
-                                (NAME GTK-TEXT-MARK-NAME "name" "gchararray" T
-                                 NIL)))
-             (gobject:get-g-type-definition "GtkTextMark"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextMark" GTK:TEXT-MARK
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_text_mark_get_type")
+                      ((LEFT-GRAVITY TEXT-MARK-LEFT-GRAVITY
+                        "left-gravity" "gboolean" T NIL)
+                       (NAME TEXT-MARK-NAME "name" "gchararray" T NIL)))
+             (gobject:get-gtype-definition "GtkTextMark"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -86,4 +87,4 @@
     (is-false (gtk:text-mark-buffer mark))
     (is-true (gtk:text-mark-deleted mark))))
 
-;;; 2024-7-2
+;;; 2024-9-20

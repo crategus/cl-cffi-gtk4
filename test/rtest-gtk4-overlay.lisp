@@ -21,30 +21,30 @@
           (g:type-parent "GtkOverlay")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkOverlay")))
+             (glib-test:list-children "GtkOverlay")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkOverlay")))
+             (glib-test:list-interfaces "GtkOverlay")))
   ;; Check properties
   (is (equal '("child")
-             (gtk-test:list-properties "GtkOverlay")))
+             (glib-test:list-properties "GtkOverlay")))
   ;; Check signals
   (is (equal '("get-child-position")
-             (gtk-test:list-signals "GtkOverlay")))
+             (glib-test:list-signals "GtkOverlay")))
   ;; Check CSS name
   (is (string= "overlay"
                (gtk:widget-class-css-name "GtkOverlay")))
   ;; Check accessible role
   (is (eq :WIDGET (gtk:widget-class-accessible-role "GtkOverlay")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkOverlay" GTK-OVERLAY
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_overlay_get_type")
-                               ((CHILD GTK-OVERLAY-CHILD "child" "GtkWidget" T
-                                 T)))
-             (gobject:get-g-type-definition "GtkOverlay"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkOverlay" GTK:OVERLAY
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_overlay_get_type")
+                      ((CHILD OVERLAY-CHILD "child" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkOverlay"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -73,4 +73,4 @@
 ;;;     gtk_overlay_get_clip_overlay
 ;;;     gtk_overlay_set_clip_overlay
 
-;;; 2024-4-22
+;;; 2024-9-19

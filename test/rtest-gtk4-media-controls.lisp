@@ -20,29 +20,31 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkMediaControls")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkMediaControls")))
+             (glib-test:list-children "GtkMediaControls")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkMediaControls")))
+             (glib-test:list-interfaces "GtkMediaControls")))
   ;; Check class properties
   (is (equal '("media-stream")
-             (gtk-test:list-properties "GtkMediaControls")))
+             (glib-test:list-properties "GtkMediaControls")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkMediaControls")))
+             (glib-test:list-signals "GtkMediaControls")))
   ;; Check CSS name
   (is (string= "controls"
                (gtk:widget-class-css-name "GtkMediaControls")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkMediaControls")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaControls" GTK-MEDIA-CONTROLS
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMediaControls" GTK:MEDIA-CONTROLS
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_media_controls_get_type")
-                       ((MEDIA-STREAM GTK-MEDIA-CONTROLS-MEDIA-STREAM
+                       ((MEDIA-STREAM MEDIA-CONTROLS-MEDIA-STREAM
                          "media-stream" "GtkMediaStream" T T)))
-             (gobject:get-g-type-definition "GtkMediaControls"))))
+             (gobject:get-gtype-definition "GtkMediaControls"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -56,4 +58,4 @@
 
 ;;;     gtk_media_controls_new
 
-;;; 2024-7-4
+;;; 2024-9-20

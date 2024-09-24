@@ -100,26 +100,28 @@
           (g:type-parent "GtkBuilder")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkBuilder")))
+             (glib-test:list-children "GtkBuilder")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkBuilder")))
+             (glib-test:list-interfaces "GtkBuilder")))
   ;; Check class properties
   (is (equal '("current-object" "scope" "translation-domain")
-             (gtk-test:list-properties "GtkBuilder")))
+             (glib-test:list-properties "GtkBuilder")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBuilder")))
+             (glib-test:list-signals "GtkBuilder")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBuilder" GTK-BUILDER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_builder_get_type")
-                       ((CURRENT-OBJECT GTK-BUILDER-CURRENT-OBJECT
-                         "current-object" "GObject" T T)
-                        (SCOPE GTK-BUILDER-SCOPE "scope" "GtkBuilderScope" T T)
-                        (TRANSLATION-DOMAIN GTK-BUILDER-TRANSLATION-DOMAIN
-                         "translation-domain" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkBuilder"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBuilder" GTK:BUILDER
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_builder_get_type")
+                      ((CURRENT-OBJECT BUILDER-CURRENT-OBJECT
+                        "current-object" "GObject" T T)
+                       (SCOPE BUILDER-SCOPE "scope" "GtkBuilderScope" T T)
+                       (TRANSLATION-DOMAIN BUILDER-TRANSLATION-DOMAIN
+                        "translation-domain" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkBuilder"))))
 
 ;;; ---  Properties ------------------------------------------------------------
 
@@ -291,4 +293,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; 2024-5-13
+;;; 2024-9-19

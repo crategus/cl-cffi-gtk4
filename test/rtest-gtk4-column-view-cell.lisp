@@ -22,33 +22,31 @@
           (g:type-parent "GtkColumnViewCell")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkColumnViewCell")))
+             (glib-test:list-children "GtkColumnViewCell")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkColumnViewCell")))
+             (glib-test:list-interfaces "GtkColumnViewCell")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkColumnViewCell")))
+             (glib-test:list-properties "GtkColumnViewCell")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkColumnViewCell")))
+             (glib-test:list-signals "GtkColumnViewCell")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewCell"
-                                             GTK-COLUMN-VIEW-CELL
-                               (:SUPERCLASS GTK-LIST-ITEM :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_column_view_cell_get_type")
-                               ((CHILD GTK-COLUMN-VIEW-CELL-CHILD "child"
-                                 "GtkWidget" T T)
-                                (FOCUSABLE GTK-COLUMN-VIEW-CELL-FOCUSABLE
-                                 "focusable" "gboolean" T T)
-                                (ITEM GTK-COLUMN-VIEW-CELL-ITEM "item"
-                                 "GObject" T NIL)
-                                (POSITION GTK-COLUMN-VIEW-CELL-POSITION
-                                          "position" "guint" T NIL)
-                                (SELECTED GTK-COLUMN-VIEW-CELL-SELECTED
-                                 "selected" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkColumnViewCell"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColumnViewCell" GTK:COLUMN-VIEW-CELL
+                      (:SUPERCLASS GTK:LIST-ITEM
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_column_view_cell_get_type")
+                      ((CHILD COLUMN-VIEW-CELL-CHILD "child" "GtkWidget" T T)
+                       (FOCUSABLE COLUMN-VIEW-CELL-FOCUSABLE
+                        "focusable" "gboolean" T T)
+                       (ITEM COLUMN-VIEW-CELL-ITEM "item" "GObject" T NIL)
+                       (POSITION COLUMN-VIEW-CELL-POSITION
+                        "position" "guint" T NIL)
+                       (SELECTED COLUMN-VIEW-CELL-SELECTED
+                        "selected" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GtkColumnViewCell"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -61,5 +59,5 @@
            (gtk:column-view-cell-position cell)))
     (is-false (gtk:column-view-cell-selected cell))))
 
-;;; 2024-7-4
+;;; 2024-9-19
 

@@ -21,42 +21,42 @@
           (g:type-parent "GtkCenterBox")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCenterBox")))
+             (glib-test:list-children "GtkCenterBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkCenterBox")))
+             (glib-test:list-interfaces "GtkCenterBox")))
   ;; Check properties
   (is (equal '("baseline-position" "center-widget" "end-widget" "orientation"
                "shrink-center-last" "start-widget")
-             (gtk-test:list-properties "GtkCenterBox")))
+             (glib-test:list-properties "GtkCenterBox")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCenterBox")))
+             (glib-test:list-signals "GtkCenterBox")))
   ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkCenterBox")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkCenterBox")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_center_box_get_type")
-                               ((BASELINE-POSITION
-                                 GTK-CENTER-BOX-BASELINE-POSITION
-                                 "baseline-position" "GtkBaselinePosition" T T)
-                                (CENTER-WIDGET GTK-CENTER-BOX-CENTER-WIDGET
-                                 "center-widget" "GtkWidget" T T)
-                                (END-WIDGET GTK-CENTER-BOX-END-WIDGET
-                                 "end-widget" "GtkWidget" T T)
-                                (SHRINK-CENTER-LAST
-                                 GTK-CENTER-BOX-SHRINK-CENTER-LAST
-                                 "shrink-center-last" "gboolean" T T)
-                                (START-WIDGET GTK-CENTER-BOX-START-WIDGET
-                                 "start-widget" "GtkWidget" T T)))
-             (gobject:get-g-type-definition "GtkCenterBox"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCenterBox" GTK:CENTER-BOX
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_center_box_get_type")
+                      ((BASELINE-POSITION CENTER-BOX-BASELINE-POSITION
+                        "baseline-position" "GtkBaselinePosition" T T)
+                       (CENTER-WIDGET CENTER-BOX-CENTER-WIDGET
+                        "center-widget" "GtkWidget" T T)
+                       (END-WIDGET CENTER-BOX-END-WIDGET
+                        "end-widget" "GtkWidget" T T)
+                       (SHRINK-CENTER-LAST CENTER-BOX-SHRINK-CENTER-LAST
+                        "shrink-center-last" "gboolean" T T)
+                       (START-WIDGET CENTER-BOX-START-WIDGET
+                        "start-widget" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkCenterBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

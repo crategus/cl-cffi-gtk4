@@ -21,24 +21,24 @@
           (g:type-parent "GtkTextTagTable")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextTagTable")))
-  ;; Check the interfaces
+             (glib-test:list-children "GtkTextTagTable")))
+  ;; Check interfaces
   (is (equal '("GtkBuildable")
-             (gtk-test:list-interfaces "GtkTextTagTable")))
-  ;; Check the properties
+             (glib-test:list-interfaces "GtkTextTagTable")))
+  ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkTextTagTable")))
-  ;; Check the signals
+             (glib-test:list-properties "GtkTextTagTable")))
+  ;; Check signals
   (is (equal '("tag-added" "tag-changed" "tag-removed")
-             (gtk-test:list-signals "GtkTextTagTable")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextTagTable"
-                                             GTK-TEXT-TAG-TABLE
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GtkBuildable") :TYPE-INITIALIZER
-                                "gtk_text_tag_table_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkTextTagTable"))))
+             (glib-test:list-signals "GtkTextTagTable")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextTagTable" GTK:TEXT-TAG-TABLE
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GtkBuildable")
+                        :TYPE-INITIALIZER "gtk_text_tag_table_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkTextTagTable"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 

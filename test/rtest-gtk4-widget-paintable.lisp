@@ -22,25 +22,25 @@
           (g:type-parent "GtkWidgetPaintable")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkWidgetPaintable")))
+             (glib-test:list-children "GtkWidgetPaintable")))
   ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (gtk-test:list-interfaces "GtkWidgetPaintable")))
+             (glib-test:list-interfaces "GtkWidgetPaintable")))
   ;; Check class properties
   (is (equal '("widget")
-             (gtk-test:list-properties "GtkWidgetPaintable")))
+             (glib-test:list-properties "GtkWidgetPaintable")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkWidgetPaintable")))
+             (glib-test:list-signals "GtkWidgetPaintable")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWidgetPaintable"
-                                             GTK-WIDGET-PAINTABLE
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GdkPaintable") :TYPE-INITIALIZER
-                        "gtk_widget_paintable_get_type")
-                       ((WIDGET GTK-WIDGET-PAINTABLE-WIDGET "widget"
-                         "GtkWidget" T T)))
-             (gobject:get-g-type-definition "GtkWidgetPaintable"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWidgetPaintable" GTK:WIDGET-PAINTABLE
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GdkPaintable")
+                        :TYPE-INITIALIZER "gtk_widget_paintable_get_type")
+                       ((WIDGET WIDGET-PAINTABLE-WIDGET
+                         "widget" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkWidgetPaintable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -60,4 +60,4 @@
   (is (typep (gtk:widget-paintable-new (make-instance 'gtk:button))
              'gdk:paintable)))
 
-;;; 2024-7-4
+;;; 2024-9-20

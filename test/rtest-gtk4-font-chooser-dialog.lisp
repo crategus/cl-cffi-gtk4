@@ -23,33 +23,35 @@
             (g:type-parent "GtkFontChooserDialog")))
     ;; Check children
     (is (equal '()
-               (gtk-test:list-children "GtkFontChooserDialog")))
+               (glib-test:list-children "GtkFontChooserDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot" "GtkFontChooser")
-               (gtk-test:list-interfaces "GtkFontChooserDialog")))
+               (glib-test:list-interfaces "GtkFontChooserDialog")))
     ;; Check properties
     (is (equal '("font" "font-desc" "font-features" "language" "level"
                  "preview-text" "show-preview-entry")
-               (gtk-test:list-properties "GtkFontChooserDialog")))
+               (glib-test:list-properties "GtkFontChooserDialog")))
     ;; Check signals
     (is (equal '()
-               (gtk-test:list-signals "GtkFontChooserDialog")))
+               (glib-test:list-signals "GtkFontChooserDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkFontChooserDialog")))
     ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkFontChooserDialog")))
     ;; Check class definition
-    (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontChooserDialog"
-                                       GTK-FONT-CHOOSER-DIALOG
-                         (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
+    (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontChooserDialog"
+                                        GTK:FONT-CHOOSER-DIALOG
+                         (:SUPERCLASS GTK:DIALOG
+                          :EXPORT T
+                          :INTERFACES
                           ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                            "GtkFontChooser" "GtkNative" "GtkRoot"
                            "GtkShortcutManager")
                           :TYPE-INITIALIZER "gtk_font_chooser_dialog_get_type")
                          NIL)
-               (gobject:get-g-type-definition "GtkFontChooserDialog")))))
+               (gobject:get-gtype-definition "GtkFontChooserDialog")))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -60,4 +62,4 @@
     (is (typep (gtk:font-chooser-dialog-new "title" nil)
                'gtk:font-chooser-dialog))))
 
-;;; 2024-7-3
+;;; 2024-9-20

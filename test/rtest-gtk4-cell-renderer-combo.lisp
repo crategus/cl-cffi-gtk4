@@ -22,30 +22,30 @@
           (g:type-parent "GtkCellRendererCombo")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererCombo")))
+             (glib-test:list-children "GtkCellRendererCombo")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererCombo")))
+             (glib-test:list-interfaces "GtkCellRendererCombo")))
   ;; Check properties
   (is (equal '("has-entry" "model" "text-column")
-             (gtk-test:list-properties "GtkCellRendererCombo")))
+             (glib-test:list-properties "GtkCellRendererCombo")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GtkCellRendererCombo")))
+             (glib-test:list-signals "GtkCellRendererCombo")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererCombo"
-                                             GTK-CELL-RENDERER-COMBO
-                               (:SUPERCLASS GTK-CELL-RENDERER-TEXT :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_combo_get_type")
-                               ((HAS-ENTRY GTK-CELL-RENDERER-COMBO-HAS-ENTRY
-                                 "has-entry" "gboolean" T T)
-                                (MODEL GTK-CELL-RENDERER-COMBO-MODEL "model"
-                                 "GtkTreeModel" T T)
-                                (TEXT-COLUMN
-                                 GTK-CELL-RENDERER-COMBO-TEXT-COLUMN
-                                 "text-column" "gint" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererCombo"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererCombo"
+                                      GTK:CELL-RENDERER-COMBO
+                      (:SUPERCLASS GTK:CELL-RENDERER-TEXT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_combo_get_type")
+                      ((HAS-ENTRY CELL-RENDERER-COMBO-HAS-ENTRY
+                        "has-entry" "gboolean" T T)
+                       (MODEL CELL-RENDERER-COMBO-MODEL
+                        "model" "GtkTreeModel" T T)
+                       (TEXT-COLUMN CELL-RENDERER-COMBO-TEXT-COLUMN
+                        "text-column" "gint" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererCombo"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -83,4 +83,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-combo-new) 'gtk:cell-renderer-combo))))
 
-;;; 2024-5-18
+;;; 2024-9-20

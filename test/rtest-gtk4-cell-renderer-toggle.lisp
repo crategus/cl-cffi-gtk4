@@ -22,33 +22,32 @@
           (g:type-parent "GtkCellRendererToggle")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererToggle")))
+             (glib-test:list-children "GtkCellRendererToggle")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererToggle")))
+             (glib-test:list-interfaces "GtkCellRendererToggle")))
   ;; Check properties
   (is (equal '("activatable" "active" "inconsistent" "radio")
-             (gtk-test:list-properties "GtkCellRendererToggle")))
+             (glib-test:list-properties "GtkCellRendererToggle")))
   ;; Check signals
   (is (equal '("toggled")
-             (gtk-test:list-signals "GtkCellRendererToggle")))
+             (glib-test:list-signals "GtkCellRendererToggle")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererToggle"
-                               GTK-CELL-RENDERER-TOGGLE
-                               (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_toggle_get_type")
-                               ((ACTIVATABLE
-                                 GTK-CELL-RENDERER-TOGGLE-ACTIVATABLE
-                                 "activatable" "gboolean" T T)
-                                (ACTIVE GTK-CELL-RENDERER-TOGGLE-ACTIVE
-                                 "active" "gboolean" T T)
-                                (INCONSISTENT
-                                 GTK-CELL-RENDERER-TOGGLE-INCONSISTENT
-                                 "inconsistent" "gboolean" T T)
-                                (RADIO GTK-CELL-RENDERER-TOGGLE-RADIO "radio"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererToggle"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererToggle"
+                                      GTK:CELL-RENDERER-TOGGLE
+                      (:SUPERCLASS GTK:CELL-RENDERER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_toggle_get_type")
+                      ((ACTIVATABLE CELL-RENDERER-TOGGLE-ACTIVATABLE
+                        "activatable" "gboolean" T T)
+                       (ACTIVE CELL-RENDERER-TOGGLE-ACTIVE
+                        "active" "gboolean" T T)
+                       (INCONSISTENT CELL-RENDERER-TOGGLE-INCONSISTENT
+                        "inconsistent" "gboolean" T T)
+                       (RADIO CELL-RENDERER-TOGGLE-RADIO
+                        "radio" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererToggle"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -85,4 +84,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-toggle-new) 'gtk:cell-renderer-toggle))))
 
-;;; 2024-5-18
+;;; 2024-9-20

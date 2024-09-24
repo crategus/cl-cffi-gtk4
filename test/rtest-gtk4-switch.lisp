@@ -21,29 +21,31 @@
           (g:type-parent "GtkSwitch")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSwitch")))
+             (glib-test:list-children "GtkSwitch")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkSwitch")))
+             (glib-test:list-interfaces "GtkSwitch")))
   ;; Check properties
   (is (equal '("action-name" "action-target" "active" "state")
-             (gtk-test:list-properties "GtkSwitch")))
+             (glib-test:list-properties "GtkSwitch")))
   ;; Check signals
   (is (equal '("activate" "state-set")
-             (gtk-test:list-signals "GtkSwitch")))
+             (glib-test:list-signals "GtkSwitch")))
   ;; Check CSS information
   (is (string= "switch"
                (gtk:widget-class-css-name "GtkSwitch")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSwitch" GTK-SWITCH
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSwitch" GTK:SWITCH
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_switch_get_type")
-                       ((ACTIVE GTK-SWITCH-ACTIVE "active" "gboolean" T T)
-                        (STATE GTK-SWITCH-STATE "state" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkSwitch"))))
+                       ((ACTIVE SWITCH-ACTIVE "active" "gboolean" T T)
+                        (STATE SWITCH-STATE "state" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkSwitch"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -89,4 +91,4 @@
 (test gtk-switch-new
   (is (typep (gtk:switch-new) 'gtk:switch)))
 
-;;; 2024-5-7
+;;; 2024-9-20

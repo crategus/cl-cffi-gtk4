@@ -22,39 +22,40 @@
   ;; Check children
   #-windows
   (is (equal '("GtkPlacesViewRow" "GtkSidebarRow")
-             (gtk-test:list-children "GtkListBoxRow")))
+             (glib-test:list-children "GtkListBoxRow")))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '()
-                 (gtk-test:list-children "GtkListBoxRow"))))
+                 (glib-test:list-children "GtkListBoxRow"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkListBoxRow")))
+             (glib-test:list-interfaces "GtkListBoxRow")))
   ;; Check properties
   (is (equal '("action-name" "action-target" "activatable" "child" "selectable")
-             (gtk-test:list-properties "GtkListBoxRow")))
+             (glib-test:list-properties "GtkListBoxRow")))
   ;; Check signals
   (is (equal '("activate")
-             (gtk-test:list-signals "GtkListBoxRow")))
+             (glib-test:list-signals "GtkListBoxRow")))
   ;; Check CSS name
   (is (string= "row"
                (gtk:widget-class-css-name "GtkListBoxRow")))
   ;; Check accessible role
   (is (eq :list-item (gtk:widget-class-accessible-role "GtkListBoxRow")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListBoxRow" GTK-LIST-BOX-ROW
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkActionable" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_list_box_row_get_type")
-                               ((ACTIVATABLE GTK-LIST-BOX-ROW-ACTIVATABLE
-                                 "activatable" "gboolean" T T)
-                                (CHILD GTK-LIST-BOX-ROW-CHILD "child"
-                                 "GtkWidget" T T)
-                                (SELECTABLE GTK-LIST-BOX-ROW-SELECTABLE
-                                 "selectable" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkListBoxRow"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListBoxRow" GTK:LIST-BOX-ROW
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkActionable" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_list_box_row_get_type")
+                      ((ACTIVATABLE LIST-BOX-ROW-ACTIVATABLE
+                        "activatable" "gboolean" T T)
+                       (CHILD LIST-BOX-ROW-CHILD "child" "GtkWidget" T T)
+                       (SELECTABLE LIST-BOX-ROW-SELECTABLE
+                        "selectable" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkListBoxRow"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -99,41 +100,41 @@
           (g:type-parent "GtkListBox")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkListBox")))
+             (glib-test:list-children "GtkListBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkListBox")))
+             (glib-test:list-interfaces "GtkListBox")))
   ;; Check properties
   (is (equal '("accept-unpaired-release" "activate-on-single-click"
                "selection-mode" "show-separators")
-             (gtk-test:list-properties "GtkListBox")))
+             (glib-test:list-properties "GtkListBox")))
   ;; Check signals
   (is (equal '("activate-cursor-row" "move-cursor" "row-activated"
                "row-selected" "select-all" "selected-rows-changed"
                "toggle-cursor-row" "unselect-all")
-             (gtk-test:list-signals "GtkListBox")))
+             (glib-test:list-signals "GtkListBox")))
   ;; Check CSS name
   (is (string= "list"
                (gtk:widget-class-css-name "GtkListBox")))
   ;; Check accessible role
   (is (eq :list (gtk:widget-class-accessible-role "GtkListBox")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListBox" GTK-LIST-BOX
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_list_box_get_type")
-                               ((ACCEPT-UNPAIRED-RELEASE
-                                 GTK-LIST-BOX-ACCEPT-UNPAIRED-RELEASE
-                                 "accept-unpaired-release" "gboolean" T T)
-                                (ACTIVATE-ON-SINGLE-CLICK
-                                 GTK-LIST-BOX-ACTIVATE-ON-SINGLE-CLICK
-                                 "activate-on-single-click" "gboolean" T T)
-                                (SELECTION-MODE GTK-LIST-BOX-SELECTION-MODE
-                                 "selection-mode" "GtkSelectionMode" T T)
-                                (SHOW-SEPARATORS GTK-LIST-BOX-SHOW-SEPARATORS
-                                 "show-separators" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkListBox"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListBox" GTK:LIST-BOX
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_list_box_get_type")
+                      ((ACCEPT-UNPAIRED-RELEASE LIST-BOX-ACCEPT-UNPAIRED-RELEASE
+                        "accept-unpaired-release" "gboolean" T T)
+                       (ACTIVATE-ON-SINGLE-CLICK
+                        LIST-BOX-ACTIVATE-ON-SINGLE-CLICK
+                        "activate-on-single-click" "gboolean" T T)
+                       (SELECTION-MODE LIST-BOX-SELECTION-MODE
+                        "selection-mode" "GtkSelectionMode" T T)
+                       (SHOW-SEPARATORS LIST-BOX-SHOW-SEPARATORS
+                        "show-separators" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkListBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -199,4 +200,4 @@
 
 ;;;     gtk_list_box_bind_model
 
-;;; 2024-7-3
+;;; 2024-9-19

@@ -111,23 +111,23 @@ dann benutzen Sie es immer noch.")
   ;; Check names
   (is (equal '("GTK_TEXT_SEARCH_VISIBLE_ONLY" "GTK_TEXT_SEARCH_TEXT_ONLY"
                "GTK_TEXT_SEARCH_CASE_INSENSITIVE")
-             (gtk-test:list-flags-item-name "GtkTextSearchFlags")))
+             (glib-test:list-flags-item-names "GtkTextSearchFlags")))
   ;; Check values
   (is (equal '(1 2 4)
-             (gtk-test:list-flags-item-value "GtkTextSearchFlags")))
+             (glib-test:list-flags-item-values "GtkTextSearchFlags")))
   ;; Check nick names
   (is (equal '("visible-only" "text-only" "case-insensitive")
-             (gtk-test:list-flags-item-nick "GtkTextSearchFlags")))
+             (glib-test:list-flags-item-nicks "GtkTextSearchFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkTextSearchFlags"
-                                      GTK-TEXT-SEARCH-FLAGS
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gtk_text_search_flags_get_type")
-                                      (:VISIBLE-ONLY 1)
-                                      (:TEXT-ONLY 2)
-                                      (:CASE-INSENSITIVE 4))
-             (gobject:get-g-type-definition "GtkTextSearchFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkTextSearchFlags"
+                                     GTK:TEXT-SEARCH-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_text_search_flags_get_type")
+                                     (:VISIBLE-ONLY 1)
+                                     (:TEXT-ONLY 2)
+                                     (:CASE-INSENSITIVE 4))
+             (gobject:get-gtype-definition "GtkTextSearchFlags"))))
 
 ;;;   GtkTextIter
 
@@ -768,4 +768,4 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-in-range start end center))
     (is-false (gtk:text-iter-in-range end center start))))
 
-;;; 2024-7-1
+;;; 2024-9-20

@@ -21,33 +21,32 @@
           (g:type-parent "GtkStackSwitcher")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStackSwitcher")))
+             (glib-test:list-children "GtkStackSwitcher")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkStackSwitcher")))
+             (glib-test:list-interfaces "GtkStackSwitcher")))
   ;; Check properties
   (is (equal '("orientation" "stack")
-             (gtk-test:list-properties "GtkStackSwitcher")))
+             (glib-test:list-properties "GtkStackSwitcher")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStackSwitcher")))
+             (glib-test:list-signals "GtkStackSwitcher")))
   ;; Check CSS name
   (is (string= "stackswitcher"
                (gtk:widget-class-css-name "GtkStackSwitcher")))
   ;; Check accessible role
   (is (eq :tab-list (gtk:widget-class-accessible-role "GtkStackSwitcher")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackSwitcher"
-                                             GTK-STACK-SWITCHER
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkOrientable")
-                                :TYPE-INITIALIZER
-                                "gtk_stack_switcher_get_type")
-                               ((STACK GTK-STACK-SWITCHER-STACK "stack"
-                                 "GtkStack" T T)))
-             (gobject:get-g-type-definition "GtkStackSwitcher"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStackSwitcher" GTK:STACK-SWITCHER
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_stack_switcher_get_type")
+                      ((STACK STACK-SWITCHER-STACK "stack" "GtkStack" T T)))
+             (gobject:get-gtype-definition "GtkStackSwitcher"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -68,4 +67,4 @@
 (test gtk-stack-switcher-new
   (is (typep (gtk:stack-switcher-new) 'gtk:stack-switcher)))
 
-;;; 2024-4-15
+;;; 2024-9-19

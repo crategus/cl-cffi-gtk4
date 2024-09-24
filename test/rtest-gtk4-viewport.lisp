@@ -21,34 +21,35 @@
           (g:type-parent "GtkViewport")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkViewport")))
+             (glib-test:list-children "GtkViewport")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable")
-             (gtk-test:list-interfaces "GtkViewport")))
+             (glib-test:list-interfaces "GtkViewport")))
   ;; Check properties
   (is (equal '("child" "hadjustment" "hscroll-policy" "scroll-to-focus"
                "vadjustment" "vscroll-policy")
-             (gtk-test:list-properties "GtkViewport")))
+             (glib-test:list-properties "GtkViewport")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkViewport")))
+             (glib-test:list-signals "GtkViewport")))
   ;; Check CSS name
   (is (string= "viewport"
                (gtk:widget-class-css-name "GtkViewport")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkViewport")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkViewport" GTK-VIEWPORT
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkScrollable")
-                                :TYPE-INITIALIZER "gtk_viewport_get_type")
-                               ((CHILD GTK-VIEWPORT-CHILD "child" "GtkWidget" T
-                                 T)
-                                (SCROLL-TO-FOCUS GTK-VIEWPORT-SCROLL-TO-FOCUS
-                                 "scroll-to-focus" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkViewport"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkViewport" GTK:VIEWPORT
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkScrollable")
+                       :TYPE-INITIALIZER "gtk_viewport_get_type")
+                      ((CHILD VIEWPORT-CHILD "child" "GtkWidget" T T)
+                       (SCROLL-TO-FOCUS VIEWPORT-SCROLL-TO-FOCUS
+                        "scroll-to-focus" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkViewport"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -75,4 +76,4 @@
     (is (typep (setf (gtk:viewport-child viewport) area) 'gtk:drawing-area))
     (is-false (gtk:viewport-scroll-to viewport area (gtk:scroll-info-new)))))
 
-;;; 2024-7-5
+;;; 2024-9-20

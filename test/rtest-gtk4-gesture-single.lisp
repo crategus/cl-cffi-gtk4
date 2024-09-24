@@ -22,26 +22,28 @@
   ;; Check children
   (is (equal '("GtkDragSource" "GtkGestureClick" "GtkGestureDrag"
                "GtkGestureLongPress" "GtkGestureStylus" "GtkGestureSwipe")
-             (gtk-test:list-children "GtkGestureSingle")))
+             (glib-test:list-children "GtkGestureSingle")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureSingle")))
+             (glib-test:list-interfaces "GtkGestureSingle")))
   ;; Check properties
   (is (equal '("button" "exclusive" "touch-only")
-             (gtk-test:list-properties "GtkGestureSingle")))
+             (glib-test:list-properties "GtkGestureSingle")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkGestureSingle")))
+             (glib-test:list-signals "GtkGestureSingle")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSingle" GTK-GESTURE-SINGLE
-                       (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureSingle" GTK:GESTURE-SINGLE
+                       (:SUPERCLASS GTK:GESTURE
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_single_get_type")
-                       ((BUTTON GTK-GESTURE-SINGLE-BUTTON "button" "guint" T T)
-                        (EXCLUSIVE GTK-GESTURE-SINGLE-EXCLUSIVE "exclusive"
-                         "gboolean" T T)
-                        (TOUCH-ONLY GTK-GESTURE-SINGLE-TOUCH-ONLY "touch-only"
-                         "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkGestureSingle"))))
+                       ((BUTTON GESTURE-SINGLE-BUTTON "button" "guint" T T)
+                        (EXCLUSIVE GESTURE-SINGLE-EXCLUSIVE
+                         "exclusive" "gboolean" T T)
+                        (TOUCH-ONLY GESTURE-SINGLE-TOUCH-ONLY
+                         "touch-only" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkGestureSingle"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

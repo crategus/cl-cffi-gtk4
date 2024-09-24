@@ -21,31 +21,33 @@
           (g:type-parent "GtkVolumeButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkVolumeButton")))
+             (glib-test:list-children "GtkVolumeButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (gtk-test:list-interfaces "GtkVolumeButton")))
+             (glib-test:list-interfaces "GtkVolumeButton")))
   ;; Check properties
   (is (equal '("use-symbolic")
-             (gtk-test:list-properties "GtkVolumeButton")))
+             (glib-test:list-properties "GtkVolumeButton")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkVolumeButton")))
+             (glib-test:list-signals "GtkVolumeButton")))
   ;; Check CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkVolumeButton")))
   ;; Chekc accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkVolumeButton")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
-                       (:SUPERCLASS GTK-SCALE-BUTTON :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_volume_button_get_type")
-                       ((USE-SYMBOLIC GTK-VOLUME-BUTTON-USE-SYMBOLIC
-                         "use-symbolic" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkVolumeButton"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkVolumeButton" GTK:VOLUME-BUTTON
+                      (:SUPERCLASS GTK:SCALE-BUTTON
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_volume_button_get_type")
+                      ((USE-SYMBOLIC VOLUME-BUTTON-USE-SYMBOLIC
+                        "use-symbolic" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkVolumeButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

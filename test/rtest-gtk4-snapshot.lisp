@@ -21,22 +21,24 @@
           (g:type-parent "GtkSnapshot")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSnapshot")))
+             (glib-test:list-children "GtkSnapshot")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkSnapshot")))
+             (glib-test:list-interfaces "GtkSnapshot")))
   ;; Check class properties
   (is (equal '()
-             (gtk-test:list-properties "GtkSnapshot")))
+             (glib-test:list-properties "GtkSnapshot")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSnapshot")))
+             (glib-test:list-signals "GtkSnapshot")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSnapshot" GTK-SNAPSHOT
-                       (:SUPERCLASS GDK-SNAPSHOT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSnapshot" GTK:SNAPSHOT
+                       (:SUPERCLASS GDK:SNAPSHOT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_snapshot_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkSnapshot"))))
+             (gobject:get-gtype-definition "GtkSnapshot"))))
 
 ;;; --- Functions --------------------------------------------------------------
 

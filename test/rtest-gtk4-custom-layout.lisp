@@ -21,23 +21,24 @@
           (g:type-parent "GtkCustomLayout")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCustomLayout")))
+             (glib-test:list-children "GtkCustomLayout")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCustomLayout")))
+             (glib-test:list-interfaces "GtkCustomLayout")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkCustomLayout")))
+             (glib-test:list-properties "GtkCustomLayout")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCustomLayout")))
+             (glib-test:list-signals "GtkCustomLayout")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomLayout" GTK-CUSTOM-LAYOUT
-                               (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_custom_layout_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkCustomLayout"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCustomLayout" GTK:CUSTOM-LAYOUT
+                      (:SUPERCLASS GTK:LAYOUT-MANAGER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_custom_layout_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkCustomLayout"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -47,4 +48,4 @@
 
 ;;;     gtk_custom_layout_new
 
-;;; 2024-7-3
+;;; 2024-9-19

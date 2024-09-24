@@ -21,11 +21,11 @@
           (g:type-parent "GtkText")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkText")))
+             (glib-test:list-children "GtkText")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkAccessibleText")
-             (gtk-test:list-interfaces "GtkText")))
+             (glib-test:list-interfaces "GtkText")))
   ;; Check class properties
   (is (equal '("activates-default" "attributes" "buffer" "cursor-position"
                "editable" "enable-emoji-completion" "enable-undo" "extra-menu"
@@ -34,55 +34,54 @@
                "overwrite-mode" "placeholder-text" "propagate-text-width"
                "scroll-offset" "selection-bound" "tabs" "text"
                "truncate-multiline" "visibility" "width-chars" "xalign")
-             (gtk-test:list-properties "GtkText")))
+             (glib-test:list-properties "GtkText")))
   ;; Check signals
   (is (equal '("activate" "backspace" "copy-clipboard" "cut-clipboard"
                "delete-from-cursor" "insert-at-cursor" "insert-emoji"
                "move-cursor" "paste-clipboard" "preedit-changed"
                "toggle-overwrite")
-             (gtk-test:list-signals "GtkText")))
+             (glib-test:list-signals "GtkText")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkText" GTK-TEXT
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkText" GTK:TEXT
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
                          "GtkConstraintTarget" "GtkEditable")
                         :TYPE-INITIALIZER "gtk_text_get_type")
-                       ((ACTIVATES-DEFAULT GTK-TEXT-ACTIVATES-DEFAULT
+                       ((ACTIVATES-DEFAULT TEXT-ACTIVATES-DEFAULT
                          "activates-default" "gboolean" T T)
-                        (ATTRIBUTES GTK-TEXT-ATTRIBUTES "attributes"
-                         "PangoAttrList" T T)
-                        (BUFFER GTK-TEXT-BUFFER "buffer" "GtkEntryBuffer" T T)
-                        (ENABLE-EMOJI-COMPLETION
-                         GTK-TEXT-ENABLE-EMOJI-COMPLETION
+                        (ATTRIBUTES TEXT-ATTRIBUTES
+                         "attributes" "PangoAttrList" T T)
+                        (BUFFER TEXT-BUFFER "buffer" "GtkEntryBuffer" T T)
+                        (ENABLE-EMOJI-COMPLETION TEXT-ENABLE-EMOJI-COMPLETION
                          "enable-emoji-completion" "gboolean" T T)
-                        (EXTRA-MENU GTK-TEXT-EXTRA-MENU "extra-menu"
-                         "GMenuModel" T T)
-                        (IM-MODULE GTK-TEXT-IM-MODULE "im-module" "gchararray"
-                         T T)
-                        (INPUT-HINTS GTK-TEXT-INPUT-HINTS "input-hints"
-                         "GtkInputHints" T T)
-                        (INPUT-PURPOSE GTK-TEXT-INPUT-PURPOSE "input-purpose"
-                         "GtkInputPurpose" T T)
-                        (INVISIBLE-CHAR GTK-TEXT-INVISIBLE-CHAR
+                        (EXTRA-MENU TEXT-EXTRA-MENU
+                         "extra-menu" "GMenuModel" T T)
+                        (IM-MODULE TEXT-IM-MODULE "im-module" "gchararray" T T)
+                        (INPUT-HINTS TEXT-INPUT-HINTS
+                         "input-hints" "GtkInputHints" T T)
+                        (INPUT-PURPOSE TEXT-INPUT-PURPOSE
+                         "input-purpose" "GtkInputPurpose" T T)
+                        (INVISIBLE-CHAR TEXT-INVISIBLE-CHAR
                          "invisible-char" "guint" T T)
-                        (INVISIBLE-CHAR-SET GTK-TEXT-INVISIBLE-CHAR-SET
+                        (INVISIBLE-CHAR-SET TEXT-INVISIBLE-CHAR-SET
                          "invisible-char-set" "gboolean" T T)
-                        (MAX-LENGTH GTK-TEXT-MAX-LENGTH "max-length" "gint" T
-                         T)
-                        (OVERWRITE-MODE GTK-TEXT-OVERWRITE-MODE
+                        (MAX-LENGTH TEXT-MAX-LENGTH "max-length" "gint" T T)
+                        (OVERWRITE-MODE TEXT-OVERWRITE-MODE
                          "overwrite-mode" "gboolean" T T)
-                        (PLACEHOLDER-TEXT GTK-TEXT-PLACEHOLDER-TEXT
+                        (PLACEHOLDER-TEXT TEXT-PLACEHOLDER-TEXT
                          "placeholder-text" "gchararray" T T)
-                        (PROPAGATE-TEXT-WIDTH GTK-TEXT-PROPAGATE-TEXT-WIDTH
+                        (PROPAGATE-TEXT-WIDTH TEXT-PROPAGATE-TEXT-WIDTH
                          "propagate-text-width" "gboolean" T T)
-                        (SCROLL-OFFSET GTK-TEXT-SCROLL-OFFSET "scroll-offset"
-                         "gint" T NIL)
-                        (TABS GTK-TEXT-TABS "tabs" "PangoTabArray" T T)
-                        (TRUNCATE-MULTILINE GTK-TEXT-TRUNCATE-MULTILINE
+                        (SCROLL-OFFSET TEXT-SCROLL-OFFSET
+                         "scroll-offset" "gint" T NIL)
+                        (TABS TEXT-TABS "tabs" "PangoTabArray" T T)
+                        (TRUNCATE-MULTILINE TEXT-TRUNCATE-MULTILINE
                          "truncate-multiline" "gboolean" T T)
-                        (VISIBILITY GTK-TEXT-VISIBILITY "visibility" "gboolean"
-                         T T)))
-             (gobject:get-g-type-definition "GtkText"))))
+                        (VISIBILITY TEXT-VISIBILITY
+                         "visibility" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkText"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

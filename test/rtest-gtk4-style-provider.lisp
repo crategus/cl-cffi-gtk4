@@ -31,20 +31,21 @@
           (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkStyleProvider")))
+             (glib-test:list-interface-prerequisites "GtkStyleProvider")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkStyleProvider")))
+             (glib-test:list-interface-properties "GtkStyleProvider")))
   ;; Check interface signals
   (is (equal '("gtk-private-changed")
-             (gtk-test:list-signals "GtkStyleProvider")))
+             (glib-test:list-signals "GtkStyleProvider")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkStyleProvider" GTK-STYLE-PROVIDER
-                    (:EXPORT T :TYPE-INITIALIZER "gtk_style_provider_get_type"))
-             (gobject:get-g-type-definition "GtkStyleProvider"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkStyleProvider" GTK:STYLE-PROVIDER
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_style_provider_get_type"))
+             (gobject:get-gtype-definition "GtkStyleProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     gtk-private-changed
 
-;;; 2024-4-1
+;;; 2024-9-19

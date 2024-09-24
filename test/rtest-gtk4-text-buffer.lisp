@@ -21,40 +21,40 @@
           (g:type-parent "GtkTextBuffer")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextBuffer")))
+             (glib-test:list-children "GtkTextBuffer")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkTextBuffer")))
+             (glib-test:list-interfaces "GtkTextBuffer")))
   ;; Check properties
   (is (equal '("can-redo" "can-undo" "cursor-position" "enable-undo"
                "has-selection" "tag-table" "text")
-             (gtk-test:list-properties "GtkTextBuffer")))
+             (glib-test:list-properties "GtkTextBuffer")))
   ;; Check signals
   (is (equal '("apply-tag" "begin-user-action" "changed" "delete-range"
                "end-user-action" "insert-child-anchor" "insert-paintable"
                "insert-text" "mark-deleted" "mark-set" "modified-changed"
                "paste-done" "redo" "remove-tag" "undo")
-             (gtk-test:list-signals "GtkTextBuffer")))
+             (glib-test:list-signals "GtkTextBuffer")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextBuffer" GTK-TEXT-BUFFER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_text_buffer_get_type")
-                               ((CAN-REDO GTK-TEXT-BUFFER-CAN-REDO "can-redo"
-                                 "gboolean" T NIL)
-                                (CAN-UNDO GTK-TEXT-BUFFER-CAN-UNDO "can-undo"
-                                 "gboolean" T NIL)
-                                (CURSOR-POSITION
-                                 GTK-TEXT-BUFFER-CURSOR-POSITION
-                                 "cursor-position" "gint" T NIL)
-                                (ENABLE-UNDO GTK-TEXT-BUFFER-ENABLE-UNDO
-                                 "enable-undo" "gboolean" T T)
-                                (HAS-SELECTION GTK-TEXT-BUFFER-HAS-SELECTION
-                                 "has-selection" "gboolean" T NIL)
-                                (TAG-TABLE GTK-TEXT-BUFFER-TAG-TABLE
-                                 "tag-table" "GtkTextTagTable" T NIL)
-                                (TEXT GTK-TEXT-BUFFER-TEXT "text" "gchararray"
-                                 T T)))
-             (gobject:get-g-type-definition "GtkTextBuffer"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextBuffer" GTK:TEXT-BUFFER
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_text_buffer_get_type")
+                      ((CAN-REDO TEXT-BUFFER-CAN-REDO
+                        "can-redo" "gboolean" T NIL)
+                       (CAN-UNDO TEXT-BUFFER-CAN-UNDO
+                        "can-undo" "gboolean" T NIL)
+                       (CURSOR-POSITION TEXT-BUFFER-CURSOR-POSITION
+                        "cursor-position" "gint" T NIL)
+                       (ENABLE-UNDO TEXT-BUFFER-ENABLE-UNDO
+                        "enable-undo" "gboolean" T T)
+                       (HAS-SELECTION TEXT-BUFFER-HAS-SELECTION
+                        "has-selection" "gboolean" T NIL)
+                       (TAG-TABLE TEXT-BUFFER-TAG-TABLE
+                        "tag-table" "GtkTextTagTable" T NIL)
+                       (TEXT TEXT-BUFFER-TEXT "text" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkTextBuffer"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -534,4 +534,4 @@
 ;;;     gtk_text_buffer_begin_irreversible_action
 ;;;     gtk_text_buffer_end_irreversible_action
 
-;;; 2024-7-3
+;;; 2024-9-20

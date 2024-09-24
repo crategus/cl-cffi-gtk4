@@ -20,23 +20,22 @@
   ;; Check names
   (is (equal '("GTK_FILE_CHOOSER_ACTION_OPEN" "GTK_FILE_CHOOSER_ACTION_SAVE"
                "GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER")
-             (gtk-test:list-enum-item-name "GtkFileChooserAction")))
+             (glib-test:list-enum-item-names "GtkFileChooserAction")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkFileChooserAction")))
+             (glib-test:list-enum-item-values "GtkFileChooserAction")))
   ;; Check nick names
   (is (equal '("open" "save" "select-folder")
-             (gtk-test:list-enum-item-nick "GtkFileChooserAction")))
+             (glib-test:list-enum-item-nicks "GtkFileChooserAction")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFileChooserAction"
-                             GTK-FILE-CHOOSER-ACTION
-                             (:EXPORT T
-                              :TYPE-INITIALIZER
-                              "gtk_file_chooser_action_get_type")
-                             (:OPEN 0)
-                             (:SAVE 1)
-                             (:SELECT-FOLDER 2))
-             (gobject:get-g-type-definition "GtkFileChooserAction"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkFileChooserAction"
+                                    GTK:FILE-CHOOSER-ACTION
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_file_chooser_action_get_type")
+                       (:OPEN 0)
+                       (:SAVE 1)
+                       (:SELECT-FOLDER 2))
+             (gobject:get-gtype-definition "GtkFileChooserAction"))))
 
 ;;;     GtkFileChooser
 
@@ -51,33 +50,30 @@
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkFileChooser")))
+             (glib-test:list-interface-prerequisites "GtkFileChooser")))
   ;; Check interface properties
   (is (equal '("action" "create-folders" "filter" "filters" "select-multiple"
                "shortcut-folders")
-             (gtk-test:list-interface-properties "GtkFileChooser")))
+             (glib-test:list-interface-properties "GtkFileChooser")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFileChooser")))
+             (glib-test:list-signals "GtkFileChooser")))
   ;; Get interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkFileChooser" GTK-FILE-CHOOSER
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_file_chooser_get_type")
-                                  (ACTION GTK-FILE-CHOOSER-ACTION
-                                   "action" "GtkFileChooserAction" T T)
-                                  (CREATE-FOLDERS GTK-FILE-CHOOSER-CREATE-FOLDERS
-                                   "create-folders" "gboolean" T T)
-                                  (FILTER GTK-FILE-CHOOSER-FILTER
-                                   "filter" "GtkFileFilter" T T)
-                                  (FILTERS GTK-FILE-CHOOSER-FILTERS
-                                   "filters" "GListModel" T NIL)
-                                  (SELECT-MULTIPLE
-                                   GTK-FILE-CHOOSER-SELECT-MULTIPLE
-                                   "select-multiple" "gboolean" T T)
-                                  (SHORTCUT-FOLDERS
-                                   GTK-FILE-CHOOSER-SHORTCUT-FOLDERS
-                                   "shortcut-folders" "GListModel" T NIL))
-             (gobject:get-g-type-definition "GtkFileChooser"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkFileChooser" GTK:FILE-CHOOSER
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_file_chooser_get_type")
+                       (ACTION FILE-CHOOSER-ACTION
+                        "action" "GtkFileChooserAction" T T)
+                       (CREATE-FOLDERS FILE-CHOOSER-CREATE-FOLDERS
+                        "create-folders" "gboolean" T T)
+                       (FILTER FILE-CHOOSER-FILTER "filter" "GtkFileFilter" T T)
+                       (FILTERS FILE-CHOOSER-FILTERS
+                        "filters" "GListModel" T NIL)
+                       (SELECT-MULTIPLE FILE-CHOOSER-SELECT-MULTIPLE
+                        "select-multiple" "gboolean" T T)
+                       (SHORTCUT-FOLDERS FILE-CHOOSER-SHORTCUT-FOLDERS
+                        "shortcut-folders" "GListModel" T NIL))
+             (gobject:get-gtype-definition "GtkFileChooser"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -111,7 +107,7 @@
 
 (test gtk-file-chooser-file
   (let ((*gtk-warn-deprecated* nil))
-    (let* ((filename (sys-path "rtest-gtk4-file-chooser.lisp"))
+    (let* ((filename (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp"))
            (file (g:file-new-for-path filename))
            (chooser (make-instance 'gtk:file-chooser-widget
                                    :action :open)))
@@ -123,7 +119,7 @@
 
 (test gtk-file-chooser-namestring
   (let ((*gtk-warn-deprecated* nil))
-    (let* ((path (sys-path "rtest-gtk4-file-chooser.lisp"))
+    (let* ((path (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp"))
            (chooser (make-instance 'gtk:file-chooser-widget
                                    :action :open)))
       (is-false (gtk:file-chooser-namestring chooser))
@@ -144,7 +140,7 @@
 
 (test gtk-file-chooser-current-folder
   (let ((*gtk-warn-deprecated* nil))
-    (let ((path (sys-path ""))
+    (let ((path (glib-sys:sys-path "test/"))
           (chooser (make-instance 'gtk:file-chooser-widget)))
       (is-false (gtk:file-chooser-current-folder chooser))
       (is (eq path (setf (gtk:file-chooser-current-folder chooser) path)))
@@ -159,4 +155,4 @@
 ;;;     gtk_file_chooser_set_choice
 ;;;     gtk_file_chooser_get_choice
 
-;;; 2024-4-26
+;;; 2024-9-20

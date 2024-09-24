@@ -21,42 +21,42 @@
           (g:type-parent "GtkRange")))
   ;; Check children
   (is (equal '("GtkScale")
-             (gtk-test:list-children "GtkRange")))
+             (glib-test:list-children "GtkRange")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (gtk-test:list-interfaces "GtkRange")))
+             (glib-test:list-interfaces "GtkRange")))
   ;; Check properties
   (is (equal '("adjustment" "fill-level" "inverted" "orientation"
                "restrict-to-fill-level" "round-digits" "show-fill-level")
-             (gtk-test:list-properties "GtkRange")))
+             (glib-test:list-properties "GtkRange")))
   ;; Check signals
   (is (equal '("adjust-bounds" "change-value" "move-slider" "value-changed")
-             (gtk-test:list-signals "GtkRange")))
+             (glib-test:list-signals "GtkRange")))
   ;; Check CSS name
   (is (string= "range"
                (gtk:widget-class-css-name "GtkRange")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkRange")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_range_get_type")
-                       ((ADJUSTMENT GTK-RANGE-ADJUSTMENT "adjustment"
-                         "GtkAdjustment" T T)
-                        (FILL-LEVEL GTK-RANGE-FILL-LEVEL "fill-level" "gdouble"
-                         T T)
-                        (INVERTED GTK-RANGE-INVERTED "inverted" "gboolean" T T)
-                        (RESTRICT-TO-FILL-LEVEL
-                         GTK-RANGE-RESTRICT-TO-FILL-LEVEL
-                         "restrict-to-fill-level" "gboolean" T T)
-                        (ROUND-DIGITS GTK-RANGE-ROUND-DIGITS "round-digits"
-                         "gint" T T)
-                        (SHOW-FILL-LEVEL GTK-RANGE-SHOW-FILL-LEVEL
-                         "show-fill-level" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkRange"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkRange" GTK:RANGE
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_range_get_type")
+                      ((ADJUSTMENT RANGE-ADJUSTMENT
+                        "adjustment" "GtkAdjustment" T T)
+                       (FILL-LEVEL RANGE-FILL-LEVEL "fill-level" "gdouble" T T)
+                       (INVERTED RANGE-INVERTED "inverted" "gboolean" T T)
+                       (RESTRICT-TO-FILL-LEVEL RANGE-RESTRICT-TO-FILL-LEVEL
+                        "restrict-to-fill-level" "gboolean" T T)
+                       (ROUND-DIGITS RANGE-ROUND-DIGITS
+                        "round-digits" "gint" T T)
+                       (SHOW-FILL-LEVEL RANGE-SHOW-FILL-LEVEL
+                        "show-fill-level" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkRange"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

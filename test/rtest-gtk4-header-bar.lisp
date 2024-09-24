@@ -10,7 +10,7 @@
 (test gtk-header-bar-class
   ;; Check type
   (is (g:type-is-object "GtkHeaderBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:header-bar
           (glib:symbol-for-gtype "GtkHeaderBar")))
   ;; Check type initializer
@@ -21,36 +21,35 @@
           (g:type-parent "GtkHeaderBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkHeaderBar")))
+             (glib-test:list-children "GtkHeaderBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkHeaderBar")))
+             (glib-test:list-interfaces "GtkHeaderBar")))
   ;; Check properties
   (is (equal '("decoration-layout" "show-title-buttons" "title-widget")
-             (gtk-test:list-properties "GtkHeaderBar")))
+             (glib-test:list-properties "GtkHeaderBar")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkHeaderBar")))
+             (glib-test:list-signals "GtkHeaderBar")))
   ;; Check CSS name
   (is (string= "headerbar"
                (gtk:widget-class-css-name "GtkHeaderBar")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkHeaderBar")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkHeaderBar" GTK-HEADER-BAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_header_bar_get_type")
-                               ((DECORATION-LAYOUT
-                                 GTK-HEADER-BAR-DECORATION-LAYOUT
-                                 "decoration-layout" "gchararray" T T)
-                                (SHOW-TITLE-BUTTONS
-                                 GTK-HEADER-BAR-SHOW-TITLE-BUTTONS
-                                 "show-title-buttons" "gboolean" T T)
-                                (TITLE-WIDGET GTK-HEADER-BAR-TITLE-WIDGET
-                                 "title-widget" "GtkWidget" T T)))
-             (gobject:get-g-type-definition "GtkHeaderBar"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkHeaderBar" GTK:HEADER-BAR
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_header_bar_get_type")
+                       ((DECORATION-LAYOUT HEADER-BAR-DECORATION-LAYOUT
+                         "decoration-layout" "gchararray" T T)
+                        (SHOW-TITLE-BUTTONS HEADER-BAR-SHOW-TITLE-BUTTONS
+                         "show-title-buttons" "gboolean" T T)
+                        (TITLE-WIDGET HEADER-BAR-TITLE-WIDGET
+                         "title-widget" "GtkWidget" T T)))
+             (gobject:get-gtype-definition "GtkHeaderBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -71,4 +70,4 @@
 ;;;     gtk_header_bar_pack_end
 ;;;     gtk_header_bar_remove
 
-;;; 2024-4-16
+;;; 2024-9-19

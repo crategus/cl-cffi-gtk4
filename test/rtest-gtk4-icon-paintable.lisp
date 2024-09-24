@@ -19,13 +19,13 @@
                                          :size))))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interfaces "GtkSymbolicPaintable")))
+             (glib-test:list-interfaces "GtkSymbolicPaintable")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSymbolicPaintable"
-                                          GTK-SYMBOLIC-PAINTABLE
-                    (:EXPORT T :TYPE-INITIALIZER
-                     "gtk_symbolic_paintable_get_type"))
-             (gobject:get-g-type-definition "GtkSymbolicPaintable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkSymbolicPaintable"
+                                         GTK:SYMBOLIC-PAINTABLE
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_symbolic_paintable_get_type"))
+             (gobject:get-gtype-definition "GtkSymbolicPaintable"))))
 
 ;;;     GtkIconPaintable
 
@@ -43,28 +43,28 @@
           (g:type-parent "GtkIconPaintable")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkIconPaintable")))
+             (glib-test:list-children "GtkIconPaintable")))
   ;; Check interfaces
   (is (equal '("GdkPaintable" "GtkSymbolicPaintable")
-             (gtk-test:list-interfaces "GtkIconPaintable")))
+             (glib-test:list-interfaces "GtkIconPaintable")))
   ;; Check class properties
   (is (equal '("file" "icon-name" "is-symbolic")
-             (gtk-test:list-properties "GtkIconPaintable")))
+             (glib-test:list-properties "GtkIconPaintable")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkIconPaintable")))
+             (glib-test:list-signals "GtkIconPaintable")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconPaintable"
-                                             GTK-ICON-PAINTABLE
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GdkPaintable" "GtkSymbolicPaintable")
-                        :TYPE-INITIALIZER "gtk_icon_paintable_get_type")
-                       ((FILE GTK-ICON-PAINTABLE-FILE "file" "GFile" T NIL)
-                        (ICON-NAME GTK-ICON-PAINTABLE-ICON-NAME "icon-name"
-                         "gchararray" T NIL)
-                        (IS-SYMBOLIC GTK-ICON-PAINTABLE-IS-SYMBOLIC
-                         "is-symbolic" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkIconPaintable"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkIconPaintable" GTK:ICON-PAINTABLE
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GdkPaintable" "GtkSymbolicPaintable")
+                       :TYPE-INITIALIZER "gtk_icon_paintable_get_type")
+                      ((FILE ICON-PAINTABLE-FILE "file" "GFile" T NIL)
+                       (ICON-NAME ICON-PAINTABLE-ICON-NAME
+                        "icon-name" "gchararray" T NIL)
+                       (IS-SYMBOLIC ICON-PAINTABLE-IS-SYMBOLIC
+                        "is-symbolic" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GtkIconPaintable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

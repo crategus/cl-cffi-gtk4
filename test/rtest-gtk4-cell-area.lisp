@@ -21,29 +21,30 @@
           (g:type-parent "GtkCellArea")))
   ;; Check children
   (is (equal '("GtkCellAreaBox")
-             (gtk-test:list-children "GtkCellArea")))
+             (glib-test:list-children "GtkCellArea")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkCellArea")))
+             (glib-test:list-interfaces "GtkCellArea")))
   ;; Check class properties
   (is (equal '("edit-widget" "edited-cell" "focus-cell")
-             (gtk-test:list-properties "GtkCellArea")))
+             (glib-test:list-properties "GtkCellArea")))
   ;; Check signals
   (is (equal '("add-editable" "apply-attributes" "focus-changed"
                "remove-editable")
-             (gtk-test:list-signals "GtkCellArea")))
+             (glib-test:list-signals "GtkCellArea")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
-                       (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
-                        ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
-                        "gtk_cell_area_get_type")
-                       ((EDIT-WIDGET GTK-CELL-AREA-EDIT-WIDGET "edit-widget"
-                         "GtkCellEditable" T NIL)
-                        (EDITED-CELL GTK-CELL-AREA-EDITED-CELL "edited-cell"
-                         "GtkCellRenderer" T NIL)
-                        (FOCUS-CELL GTK-CELL-AREA-FOCUS-CELL "focus-cell"
-                         "GtkCellRenderer" T T)))
-             (gobject:get-g-type-definition "GtkCellArea"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellArea" GTK:CELL-AREA
+                       (:SUPERCLASS G:INITIALLY-UNOWNED
+                        :EXPORT T
+                        :INTERFACES ("GtkBuildable" "GtkCellLayout")
+                        :TYPE-INITIALIZER "gtk_cell_area_get_type")
+                       ((EDIT-WIDGET CELL-AREA-EDIT-WIDGET
+                         "edit-widget" "GtkCellEditable" T NIL)
+                        (EDITED-CELL CELL-AREA-EDITED-CELL
+                         "edited-cell" "GtkCellRenderer" T NIL)
+                        (FOCUS-CELL CELL-AREA-FOCUS-CELL
+                         "focus-cell" "GtkCellRenderer" T T)))
+             (gobject:get-gtype-definition "GtkCellArea"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -158,12 +159,12 @@
     (gtk:cell-area-box-pack-start area (gtk:cell-renderer-spinner-new))
     (gtk:cell-area-box-pack-start area (gtk:cell-renderer-text-new))
     (gtk:cell-area-box-pack-start area (gtk:cell-renderer-toggle-new))
-    ;; Collect the types of the renderers
+    ;; Collect types of the renderers
     (gtk:cell-area-foreach area
                            (lambda (renderer)
                              (push (type-of renderer) message)
                              nil))
-    ;; Check the types of the renderers
+    ;; Check types of the renderers
     (is (equal '(GTK:CELL-RENDERER-PIXBUF GTK:CELL-RENDERER-PROGRESS
                  GTK:CELL-RENDERER-SPINNER GTK:CELL-RENDERER-TEXT
                  GTK:CELL-RENDERER-TOGGLE)
@@ -296,4 +297,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; 2024-7-7
+;;; 2024-9-20

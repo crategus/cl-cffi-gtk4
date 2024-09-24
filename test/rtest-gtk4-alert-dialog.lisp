@@ -21,34 +21,32 @@
           (g:type-parent "GtkAlertDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAlertDialog")))
+             (glib-test:list-children "GtkAlertDialog")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkAlertDialog")))
+             (glib-test:list-interfaces "GtkAlertDialog")))
   ;; Check properties
   (is (equal '("buttons" "cancel-button" "default-button" "detail" "message"
                "modal")
-             (gtk-test:list-properties "GtkAlertDialog")))
+             (glib-test:list-properties "GtkAlertDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAlertDialog")))
+             (glib-test:list-signals "GtkAlertDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAlertDialog" GTK-ALERT-DIALOG
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_alert_dialog_get_type")
-                               ((BUTTONS GTK-ALERT-DIALOG-BUTTONS "buttons"
-                                 "GStrv" T T)
-                                (CANCEL-BUTTON GTK-ALERT-DIALOG-CANCEL-BUTTON
-                                 "cancel-button" "gint" T T)
-                                (DEFAULT-BUTTON GTK-ALERT-DIALOG-DEFAULT-BUTTON
-                                 "default-button" "gint" T T)
-                                (DETAIL GTK-ALERT-DIALOG-DETAIL "detail"
-                                 "gchararray" T T)
-                                (MESSAGE GTK-ALERT-DIALOG-MESSAGE "message"
-                                 "gchararray" T T)
-                                (MODAL GTK-ALERT-DIALOG-MODAL "modal"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkAlertDialog"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAlertDialog" GTK:ALERT-DIALOG
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_alert_dialog_get_type")
+                      ((BUTTONS ALERT-DIALOG-BUTTONS "buttons" "GStrv" T T)
+                       (CANCEL-BUTTON ALERT-DIALOG-CANCEL-BUTTON
+                        "cancel-button" "gint" T T)
+                       (DEFAULT-BUTTON ALERT-DIALOG-DEFAULT-BUTTON
+                        "default-button" "gint" T T)
+                       (DETAIL ALERT-DIALOG-DETAIL "detail" "gchararray" T T)
+                       (MESSAGE ALERT-DIALOG-MESSAGE "message" "gchararray" T T)
+                       (MODAL ALERT-DIALOG-MODAL "modal" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkAlertDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -90,4 +88,4 @@
 ;;;     gtk_alert_dialog_choose_finish
 ;;;     gtk_alert_dialog_show
 
-;;; 2024-4-11
+;;; 2024-9-19

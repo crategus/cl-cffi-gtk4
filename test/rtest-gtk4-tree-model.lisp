@@ -43,21 +43,21 @@
                                          :size))))
   ;; Check names
   (is (equal '("GTK_TREE_MODEL_ITERS_PERSIST" "GTK_TREE_MODEL_LIST_ONLY")
-             (gtk-test:list-flags-item-name "GtkTreeModelFlags")))
+             (glib-test:list-flags-item-names "GtkTreeModelFlags")))
   ;; Check values
   (is (equal '(1 2)
-             (gtk-test:list-flags-item-value "GtkTreeModelFlags")))
+             (glib-test:list-flags-item-values "GtkTreeModelFlags")))
   ;; Check nick names
   (is (equal '("iters-persist" "list-only")
-             (gtk-test:list-flags-item-nick "GtkTreeModelFlags")))
+             (glib-test:list-flags-item-nicks "GtkTreeModelFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkTreeModelFlags" GTK-TREE-MODEL-FLAGS
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gtk_tree_model_flags_get_type")
-                                      (:ITERS-PERSIST 1)
-                                      (:LIST-ONLY 2))
-             (gobject:get-g-type-definition "GtkTreeModelFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkTreeModelFlags" GTK:TREE-MODEL-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_tree_model_flags_get_type")
+                                     (:ITERS-PERSIST 1)
+                                     (:LIST-ONLY 2))
+             (gobject:get-gtype-definition "GtkTreeModelFlags"))))
 
 ;;;     GtkTreeIter
 
@@ -99,19 +99,19 @@
           (g:gtype (cffi:foreign-funcall "gtk_tree_model_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkTreeModel")))
+             (glib-test:list-interface-prerequisites "GtkTreeModel")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkTreeModel")))
+             (glib-test:list-interface-properties "GtkTreeModel")))
   ;; Check interface signals
   (is (equal '("row-changed" "row-deleted" "row-has-child-toggled"
                "row-inserted" "rows-reordered")
-             (gtk-test:list-signals "GtkTreeModel")))
+             (glib-test:list-signals "GtkTreeModel")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeModel" GTK-TREE-MODEL
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_tree_model_get_type"))
-             (gobject:get-g-type-definition "GtkTreeModel"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkTreeModel" GTK:TREE-MODEL
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_tree_model_get_type"))
+             (gobject:get-gtype-definition "GtkTreeModel"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -411,4 +411,4 @@
 ;;;     gtk_tree_model_rows_reordered
 ;;;     gtk_tree_model_rows_reordered_with_length
 
-;;; 2024-5-1
+;;; 2024-9-20

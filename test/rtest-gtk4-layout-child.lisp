@@ -22,25 +22,27 @@
   ;; Check children
   (is (equal '("GtkConstraintLayoutChild" "GtkFixedLayoutChild"
                "GtkGridLayoutChild" "GtkOverlayLayoutChild")
-             (gtk-test:list-children "GtkLayoutChild")))
+             (glib-test:list-children "GtkLayoutChild")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkLayoutChild")))
+             (glib-test:list-interfaces "GtkLayoutChild")))
   ;; Check properties
   (is (equal '("child-widget" "layout-manager")
-             (gtk-test:list-properties "GtkLayoutChild")))
+             (glib-test:list-properties "GtkLayoutChild")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkLayoutChild")))
+             (glib-test:list-signals "GtkLayoutChild")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLayoutChild" GTK-LAYOUT-CHILD
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_layout_child_get_type")
-                               ((CHILD-WIDGET GTK-LAYOUT-CHILD-CHILD-WIDGET
-                                 "child-widget" "GtkWidget" T NIL)
-                                (LAYOUT-MANAGER GTK-LAYOUT-CHILD-LAYOUT-MANAGER
-                                 "layout-manager" "GtkLayoutManager" T NIL)))
-             (gobject:get-g-type-definition "GtkLayoutChild"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLayoutChild" GTK:LAYOUT-CHILD
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_layout_child_get_type")
+                      ((CHILD-WIDGET LAYOUT-CHILD-CHILD-WIDGET
+                        "child-widget" "GtkWidget" T NIL)
+                       (LAYOUT-MANAGER LAYOUT-CHILD-LAYOUT-MANAGER
+                        "layout-manager" "GtkLayoutManager" T NIL)))
+             (gobject:get-gtype-definition "GtkLayoutChild"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -59,4 +61,4 @@
     (is (eq button (gtk:layout-child-child-widget childmanager)))
     (is (eq manager (gtk:layout-child-layout-manager childmanager)))))
 
-;;; 2024-4-19
+;;; 2024-9-19

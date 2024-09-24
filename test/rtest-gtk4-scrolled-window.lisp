@@ -19,24 +19,23 @@
   ;; Check names
   (is (equal '("GTK_POLICY_ALWAYS" "GTK_POLICY_AUTOMATIC" "GTK_POLICY_NEVER"
                "GTK_POLICY_EXTERNAL")
-             (gtk-test:list-enum-item-name "GtkPolicyType")))
+             (glib-test:list-enum-item-names "GtkPolicyType")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkPolicyType")))
+             (glib-test:list-enum-item-values "GtkPolicyType")))
   ;; Check nick names
   (is (equal '("always" "automatic" "never" "external")
-             (gtk-test:list-enum-item-nick "GtkPolicyType")))
+             (glib-test:list-enum-item-nicks "GtkPolicyType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPolicyType"
-                                     GTK-POLICY-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_policy_type_get_type")
-                                     (:ALWAYS 0)
-                                     (:AUTOMATIC 1)
-                                     (:NEVER 2)
-                                     (:EXTERNAL 3))
-             (gobject:get-g-type-definition "GtkPolicyType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPolicyType" GTK:POLICY-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_policy_type_get_type")
+                                    (:ALWAYS 0)
+                                    (:AUTOMATIC 1)
+                                    (:NEVER 2)
+                                    (:EXTERNAL 3))
+             (gobject:get-gtype-definition "GtkPolicyType"))))
 
 ;;;     GtkCornerType
 
@@ -52,24 +51,23 @@
   ;; Check names
   (is (equal '("GTK_CORNER_TOP_LEFT" "GTK_CORNER_BOTTOM_LEFT"
                "GTK_CORNER_TOP_RIGHT" "GTK_CORNER_BOTTOM_RIGHT")
-             (gtk-test:list-enum-item-name "GtkCornerType")))
+             (glib-test:list-enum-item-names "GtkCornerType")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkCornerType")))
+             (glib-test:list-enum-item-values "GtkCornerType")))
   ;; Check nick names
   (is (equal '("top-left" "bottom-left" "top-right" "bottom-right")
-             (gtk-test:list-enum-item-nick "GtkCornerType")))
+             (glib-test:list-enum-item-nicks "GtkCornerType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCornerType"
-                                     GTK-CORNER-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_corner_type_get_type")
-                                     (:TOP-LEFT 0)
-                                     (:BOTTOM-LEFT 1)
-                                     (:TOP-RIGHT 2)
-                                     (:BOTTOM-RIGHT 3))
-             (gobject:get-g-type-definition "GtkCornerType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkCornerType" GTK:CORNER-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_corner_type_get_type")
+                                    (:TOP-LEFT 0)
+                                    (:BOTTOM-LEFT 1)
+                                    (:TOP-RIGHT 2)
+                                    (:BOTTOM-RIGHT 3))
+             (gobject:get-gtype-definition "GtkCornerType"))))
 
 ;;;     GtkScrolledWindow
 
@@ -88,75 +86,76 @@
           (g:type-parent "GtkScrolledWindow")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkScrolledWindow")))
+             (glib-test:list-children "GtkScrolledWindow")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkScrolledWindow")))
+             (glib-test:list-interfaces "GtkScrolledWindow")))
   ;; Check properties
   (is (equal '("child" "hadjustment" "has-frame" "hscrollbar-policy"
                "kinetic-scrolling" "max-content-height" "max-content-width"
                "min-content-height" "min-content-width" "overlay-scrolling"
                "propagate-natural-height" "propagate-natural-width"
                "vadjustment" "vscrollbar-policy" "window-placement")
-             (gtk-test:list-properties "GtkScrolledWindow")))
+             (glib-test:list-properties "GtkScrolledWindow")))
   ;; Check signals
   (is (equal '("edge-overshot" "edge-reached" "move-focus-out" "scroll-child")
-             (gtk-test:list-signals "GtkScrolledWindow")))
+             (glib-test:list-signals "GtkScrolledWindow")))
   ;; Check CSS name
   (is (string= "scrolledwindow"
                (gtk:widget-class-css-name "GtkScrolledWindow")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkScrolledWindow")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrolledWindow"
-                                             GTK-SCROLLED-WINDOW
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_scrolled_window_get_type")
-                               ((CHILD GTK-SCROLLED-WINDOW-CHILD "child"
-                                 "GtkWidget" T T)
-                                (HADJUSTMENT GTK-SCROLLED-WINDOW-HADJUSTMENT
-                                 "hadjustment" "GtkAdjustment" T T)
-                                (HAS-FRAME GTK-SCROLLED-WINDOW-HAS-FRAME
-                                 "has-frame" "gboolean" T T)
-                                (HSCROLLBAR-POLICY
-                                 GTK-SCROLLED-WINDOW-HSCROLLBAR-POLICY
-                                 "hscrollbar-policy" "GtkPolicyType" T T)
-                                (KINETIC-SCROLLING
-                                 GTK-SCROLLED-WINDOW-KINETIC-SCROLLING
-                                 "kinetic-scrolling" "gboolean" T T)
-                                (MAX-CONTENT-HEIGHT
-                                 GTK-SCROLLED-WINDOW-MAX-CONTENT-HEIGHT
-                                 "max-content-height" "gint" T T)
-                                (MAX-CONTENT-WIDTH
-                                 GTK-SCROLLED-WINDOW-MAX-CONTENT-WIDTH
-                                 "max-content-width" "gint" T T)
-                                (MIN-CONTENT-HEIGHT
-                                 GTK-SCROLLED-WINDOW-MIN-CONTENT-HEIGHT
-                                 "min-content-height" "gint" T T)
-                                (MIN-CONTENT-WIDTH
-                                 GTK-SCROLLED-WINDOW-MIN-CONTENT-WIDTH
-                                 "min-content-width" "gint" T T)
-                                (OVERLAY-SCROLLING
-                                 GTK-SCROLLED-WINDOW-OVERLAY-SCROLLING
-                                 "overlay-scrolling" "gboolean" T T)
-                                (PROPAGATE-NATURAL-HEIGHT
-                                 GTK-SCROLLED-WINDOW-PROPAGATE-NATURAL-HEIGHT
-                                 "propagate-natural-height" "gboolean" T T)
-                                (PROPAGATE-NATURAL-WIDTH
-                                 GTK-SCROLLED-WINDOW-PROPAGATE-NATURAL-WIDTH
-                                 "propagate-natural-width" "gboolean" T T)
-                                (VADJUSTMENT GTK-SCROLLED-WINDOW-VADJUSTMENT
-                                 "vadjustment" "GtkAdjustment" T T)
-                                (VSCROLLBAR-POLICY
-                                 GTK-SCROLLED-WINDOW-VSCROLLBAR-POLICY
-                                 "vscrollbar-policy" "GtkPolicyType" T T)
-                                (WINDOW-PLACEMENT
-                                 GTK-SCROLLED-WINDOW-WINDOW-PLACEMENT
-                                 "window-placement" "GtkCornerType" T T)))
-             (gobject:get-g-type-definition "GtkScrolledWindow"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScrolledWindow" GTK:SCROLLED-WINDOW
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_scrolled_window_get_type")
+                       ((CHILD SCROLLED-WINDOW-CHILD "child" "GtkWidget" T T)
+                        (HADJUSTMENT
+                         SCROLLED-WINDOW-HADJUSTMENT
+                         "hadjustment" "GtkAdjustment" T T)
+                        (HAS-FRAME
+                         SCROLLED-WINDOW-HAS-FRAME
+                         "has-frame" "gboolean" T T)
+                        (HSCROLLBAR-POLICY
+                         SCROLLED-WINDOW-HSCROLLBAR-POLICY
+                         "hscrollbar-policy" "GtkPolicyType" T T)
+                        (KINETIC-SCROLLING
+                         SCROLLED-WINDOW-KINETIC-SCROLLING
+                         "kinetic-scrolling" "gboolean" T T)
+                        (MAX-CONTENT-HEIGHT
+                         SCROLLED-WINDOW-MAX-CONTENT-HEIGHT
+                         "max-content-height" "gint" T T)
+                        (MAX-CONTENT-WIDTH
+                         SCROLLED-WINDOW-MAX-CONTENT-WIDTH
+                         "max-content-width" "gint" T T)
+                        (MIN-CONTENT-HEIGHT
+                         SCROLLED-WINDOW-MIN-CONTENT-HEIGHT
+                         "min-content-height" "gint" T T)
+                        (MIN-CONTENT-WIDTH
+                         SCROLLED-WINDOW-MIN-CONTENT-WIDTH
+                         "min-content-width" "gint" T T)
+                        (OVERLAY-SCROLLING
+                         SCROLLED-WINDOW-OVERLAY-SCROLLING
+                         "overlay-scrolling" "gboolean" T T)
+                        (PROPAGATE-NATURAL-HEIGHT
+                         SCROLLED-WINDOW-PROPAGATE-NATURAL-HEIGHT
+                         "propagate-natural-height" "gboolean" T T)
+                        (PROPAGATE-NATURAL-WIDTH
+                         SCROLLED-WINDOW-PROPAGATE-NATURAL-WIDTH
+                         "propagate-natural-width" "gboolean" T T)
+                        (VADJUSTMENT
+                         SCROLLED-WINDOW-VADJUSTMENT
+                         "vadjustment" "GtkAdjustment" T T)
+                        (VSCROLLBAR-POLICY
+                         SCROLLED-WINDOW-VSCROLLBAR-POLICY
+                         "vscrollbar-policy" "GtkPolicyType" T T)
+                        (WINDOW-PLACEMENT
+                         SCROLLED-WINDOW-WINDOW-PLACEMENT
+                         "window-placement" "GtkCornerType" T T)))
+             (gobject:get-gtype-definition "GtkScrolledWindow"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -298,4 +297,4 @@
     (is-false (gtk:scrolled-window-unset-placement scrolled))
     (is (eq :top-left (gtk:scrolled-window-placement scrolled)))))
 
-;;; 2024-7-27
+;;; 2024-9-20

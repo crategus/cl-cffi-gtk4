@@ -20,37 +20,36 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkVideo")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkVideo")))
+             (glib-test:list-children "GtkVideo")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkVideo")))
+             (glib-test:list-interfaces "GtkVideo")))
   ;; Check class properties
   (is (equal '("autoplay" "file" "graphics-offload" "loop" "media-stream")
-             (gtk-test:list-properties "GtkVideo")))
+             (glib-test:list-properties "GtkVideo")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkVideo")))
+             (glib-test:list-signals "GtkVideo")))
   ;; Check CSS name
   (is (string= "video"
                (gtk:widget-class-css-name "GtkVideo")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkVideo")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVideo" GTK-VIDEO
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_video_get_type")
-                               ((AUTOPLAY GTK-VIDEO-AUTOPLAY "autoplay"
-                                 "gboolean" T T)
-                                (FILE GTK-VIDEO-FILE "file" "GFile" T T)
-                                (GRAPHICS-OFFLOAD GTK-VIDEO-GRAPHICS-OFFLOAD
-                                 "graphics-offload" "GtkGraphicsOffloadEnabled"
-                                 T T)
-                                (LOOP GTK-VIDEO-LOOP "loop" "gboolean" T T)
-                                (MEDIA-STREAM GTK-VIDEO-MEDIA-STREAM
-                                 "media-stream" "GtkMediaStream" T T)))
-             (gobject:get-g-type-definition "GtkVideo"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkVideo" GTK:VIDEO
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_video_get_type")
+                      ((AUTOPLAY VIDEO-AUTOPLAY "autoplay" "gboolean" T T)
+                       (FILE VIDEO-FILE "file" "GFile" T T)
+                       (GRAPHICS-OFFLOAD VIDEO-GRAPHICS-OFFLOAD
+                        "graphics-offload" "GtkGraphicsOffloadEnabled" T T)
+                       (LOOP VIDEO-LOOP "loop" "gboolean" T T)
+                       (MEDIA-STREAM VIDEO-MEDIA-STREAM
+                        "media-stream" "GtkMediaStream" T T)))
+             (gobject:get-gtype-definition "GtkVideo"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -72,7 +71,7 @@
 ;;;     gtk_video_new_for_file
 
 (test gtk-video-new-for-file
-  (let* ((file (g:file-new-for-path (sys-path "gtk-logo.webm")))
+  (let* ((file (g:file-new-for-path (glib-sys:sys-path "test/gtk-logo.webm")))
          (video (gtk:video-new-for-file file)))
     (is (typep video 'gtk:video))
     (is (string= "gtk-logo.webm" (g:file-basename (gtk:video-file video))))))
@@ -80,7 +79,7 @@
 ;;;     gtk_video_new_for_filename
 
 (test gtk-video-new-for-filename
-  (let* ((filename (sys-path "gtk-logo.webm"))
+  (let* ((filename (glib-sys:sys-path "test/gtk-logo.webm"))
          (video (gtk:video-new-for-filename filename)))
     (is (typep video 'gtk:video))
     (is (string= "gtk-logo.webm" (g:file-basename (gtk:video-file video))))))
@@ -88,7 +87,7 @@
 ;;;     gtk_video_new_for_media_stream
 
 (test gtk-video-new-for-media-stream
-  (let* ((filename (sys-path "gtk-logo.webm"))
+  (let* ((filename (glib-sys:sys-path "test/gtk-logo.webm"))
          (stream (gtk:media-file-new-for-filename filename))
          (video (gtk:video-new-for-media-stream stream)))
       (is (typep video 'gtk:video))
@@ -98,7 +97,8 @@
 ;;;     gtk_video_new_for_resource
 
 (test gtk-video-new-for-resource
-  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (glib-sys:sys-path
+                                    "test/resource/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/gtk-logo.webm")
            (video (gtk:video-new-for-resource path)))
       (is (typep video 'gtk:video))
@@ -107,4 +107,4 @@
 ;;;     gtk_video_set_filename
 ;;;     gtk_video_set_resource
 
-;;; 2024-5-26
+;;; 2024-9-19

@@ -21,29 +21,30 @@
           (g:type-parent "GtkEmojiChooser")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEmojiChooser")))
+             (glib-test:list-children "GtkEmojiChooser")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (gtk-test:list-interfaces "GtkEmojiChooser")))
+             (glib-test:list-interfaces "GtkEmojiChooser")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkEmojiChooser")))
+             (glib-test:list-properties "GtkEmojiChooser")))
   ;; Check signals
   (is (equal '("emoji-picked")
-             (gtk-test:list-signals "GtkEmojiChooser")))
+             (glib-test:list-signals "GtkEmojiChooser")))
   ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkEmojiChooser")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEmojiChooser" GTK-EMOJI-CHOOSER
-                               (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkNative"
-                                 "GtkShortcutManager")
-                                :TYPE-INITIALIZER "gtk_emoji_chooser_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkEmojiChooser"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEmojiChooser" GTK:EMOJI-CHOOSER
+                       (:SUPERCLASS GTK:POPOVER
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkNative" "GtkShortcutManager")
+                        :TYPE-INITIALIZER "gtk_emoji_chooser_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkEmojiChooser"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -56,4 +57,4 @@
 (test gtk-emoji-chooser-new
   (is (typep (gtk:emoji-chooser-new) 'gtk:emoji-chooser)))
 
-;;; 2024-7-4
+;;; 2024-9-20

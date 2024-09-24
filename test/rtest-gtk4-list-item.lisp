@@ -21,42 +21,38 @@
           (g:type-parent "GtkListItem")))
   ;; Check children
   (is (equal '("GtkColumnViewCell")
-             (gtk-test:list-children "GtkListItem")))
+             (glib-test:list-children "GtkListItem")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkListItem")))
+             (glib-test:list-interfaces "GtkListItem")))
   ;; Check properties
   (is (equal '("accessible-description" "accessible-label" "activatable"
                "child" "focusable" "item" "position" "selectable" "selected")
-             (gtk-test:list-properties "GtkListItem")))
+             (glib-test:list-properties "GtkListItem")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkListItem")))
+             (glib-test:list-signals "GtkListItem")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListItem" GTK-LIST-ITEM
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_list_item_get_type")
-                               ((ACCESSIBLE-DESCRIPTION
-                                 GTK-LIST-ITEM-ACCESSIBLE-DESCRIPTION
-                                 "accessible-description" "gchararray" T T)
-                                (ACCESSIBLE-LABEL
-                                 GTK-LIST-ITEM-ACCESSIBLE-LABEL
-                                 "accessible-label" "gchararray" T T)
-                                (ACTIVATABLE GTK-LIST-ITEM-ACTIVATABLE
-                                 "activatable" "gboolean" T T)
-                                (CHILD GTK-LIST-ITEM-CHILD "child" "GtkWidget"
-                                 T T)
-                                (FOCUSABLE GTK-LIST-ITEM-FOCUSABLE "focusable"
-                                 "gboolean" T T)
-                                (ITEM GTK-LIST-ITEM-ITEM "item" "GObject" T
-                                 NIL)
-                                (POSITION GTK-LIST-ITEM-POSITION "position"
-                                          "guint" T NIL)
-                                (SELECTABLE GTK-LIST-ITEM-SELECTABLE
-                                 "selectable" "gboolean" T T)
-                                (SELECTED GTK-LIST-ITEM-SELECTED "selected"
-                                 "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkListItem"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListItem" GTK:LIST-ITEM
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_list_item_get_type")
+                      ((ACCESSIBLE-DESCRIPTION LIST-ITEM-ACCESSIBLE-DESCRIPTION
+                        "accessible-description" "gchararray" T T)
+                       (ACCESSIBLE-LABEL LIST-ITEM-ACCESSIBLE-LABEL
+                        "accessible-label" "gchararray" T T)
+                       (ACTIVATABLE LIST-ITEM-ACTIVATABLE
+                        "activatable" "gboolean" T T)
+                       (CHILD LIST-ITEM-CHILD "child" "GtkWidget" T T)
+                       (FOCUSABLE LIST-ITEM-FOCUSABLE "focusable" "gboolean" T T)
+                       (ITEM LIST-ITEM-ITEM "item" "GObject" T NIL)
+                       (POSITION LIST-ITEM-POSITION "position" "guint" T NIL)
+                       (SELECTABLE LIST-ITEM-SELECTABLE
+                        "selectable" "gboolean" T T)
+                       (SELECTED LIST-ITEM-SELECTED
+                        "selected" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GtkListItem"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

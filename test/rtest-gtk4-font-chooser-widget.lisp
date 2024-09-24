@@ -22,35 +22,35 @@
           (g:type-parent "GtkFontChooserWidget")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFontChooserWidget")))
+             (glib-test:list-children "GtkFontChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFontChooser")
-             (gtk-test:list-interfaces "GtkFontChooserWidget")))
+             (glib-test:list-interfaces "GtkFontChooserWidget")))
   ;; Check properties
   (is (equal '("font" "font-desc" "font-features" "language" "level"
                "preview-text" "show-preview-entry" "tweak-action")
-             (gtk-test:list-properties "GtkFontChooserWidget")))
+             (glib-test:list-properties "GtkFontChooserWidget")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFontChooserWidget")))
+             (glib-test:list-signals "GtkFontChooserWidget")))
   ;; Check CSS name
   (is (string= "fontchooser"
                (gtk:widget-class-css-name "GtkFontChooserWidget")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFontChooserWidget")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontChooserWidget"
-                                             GTK-FONT-CHOOSER-WIDGET
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkFontChooser")
-                                :TYPE-INITIALIZER
-                                "gtk_font_chooser_widget_get_type")
-                               ((TWEAK-ACTION
-                                 GTK-FONT-CHOOSER-WIDGET-TWEAK-ACTION
-                                 "tweak-action" "GAction" T NIL)))
-             (gobject:get-g-type-definition "GtkFontChooserWidget"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontChooserWidget"
+                                      GTK:FONT-CHOOSER-WIDGET
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkFontChooser")
+                        :TYPE-INITIALIZER "gtk_font_chooser_widget_get_type")
+                       ((TWEAK-ACTION FONT-CHOOSER-WIDGET-TWEAK-ACTION
+                         "tweak-action" "GAction" T NIL)))
+             (gobject:get-gtype-definition "GtkFontChooserWidget"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -67,4 +67,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:font-chooser-widget-new) 'gtk:font-chooser-widget))))
 
-;;; 2024-5-22
+;;; 2024-9-20

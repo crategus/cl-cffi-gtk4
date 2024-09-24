@@ -18,11 +18,12 @@
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_manager_get_type" :size))))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkShortcutManager")))
+             (glib-test:list-interface-properties "GtkShortcutManager")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkShortcutManager" GTK-SHORTCUT-MANAGER
-                    (:EXPORT T :TYPE-INITIALIZER
-                     "gtk_shortcut_manager_get_type"))
-             (gobject:get-g-type-definition "GtkShortcutManager"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkShortcutManager"
+                                         GTK:SHORTCUT-MANAGER
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_shortcut_manager_get_type"))
+             (gobject:get-gtype-definition "GtkShortcutManager"))))
 
-;;; 2024-7-4
+;;; 2024-9-19

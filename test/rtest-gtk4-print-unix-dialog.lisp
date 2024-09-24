@@ -24,31 +24,30 @@
                "GTK_PRINT_CAPABILITY_GENERATE_PS" "GTK_PRINT_CAPABILITY_PREVIEW"
                "GTK_PRINT_CAPABILITY_NUMBER_UP"
                "GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT")
-             (gtk-test:list-flags-item-name "GtkPrintCapabilities")))
+             (glib-test:list-flags-item-names "GtkPrintCapabilities")))
   ;; Check values
   (is (equal '(1 2 4 8 16 32 64 128 256 512)
-             (gtk-test:list-flags-item-value "GtkPrintCapabilities")))
+             (glib-test:list-flags-item-values "GtkPrintCapabilities")))
   ;; Check nick names
   (is (equal '("page-set" "copies" "collate" "reverse" "scale" "generate-pdf"
                "generate-ps" "preview" "number-up" "number-up-layout")
-             (gtk-test:list-flags-item-nick "GtkPrintCapabilities")))
+             (glib-test:list-flags-item-nicks "GtkPrintCapabilities")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkPrintCapabilities"
-                                      GTK-PRINT-CAPABILITIES
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gtk_print_capabilities_get_type")
-                                      (:PAGE-SET 1)
-                                      (:COPIES 2)
-                                      (:COLLATE 4)
-                                      (:REVERSE 8)
-                                      (:SCALE 16)
-                                      (:GENERATE-PDF 32)
-                                      (:GENERATE-PS 64)
-                                      (:PREVIEW 128)
-                                      (:NUMBER-UP 256)
-                                      (:NUMBER-UP-LAYOUT 512))
-             (gobject:get-g-type-definition "GtkPrintCapabilities"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS
+                       "GtkPrintCapabilities" GTK:PRINT-CAPABILITIES
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_print_capabilities_get_type")
+                       (:PAGE-SET 1)
+                       (:COPIES 2)
+                       (:COLLATE 4)
+                       (:REVERSE 8)
+                       (:SCALE 16)
+                       (:GENERATE-PDF 32)
+                       (:GENERATE-PS 64)
+                       (:PREVIEW 128)
+                       (:NUMBER-UP 256)
+                       (:NUMBER-UP-LAYOUT 512))
+             (gobject:get-gtype-definition "GtkPrintCapabilities"))))
 
 ;;;     GtkPrintUnixDialog
 
@@ -68,52 +67,51 @@
             (g:type-parent "GtkPrintUnixDialog")))
     ;; Check children
     (is (equal '()
-               (gtk-test:list-children "GtkPrintUnixDialog")))
+               (glib-test:list-children "GtkPrintUnixDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (gtk-test:list-interfaces "GtkPrintUnixDialog")))
+               (glib-test:list-interfaces "GtkPrintUnixDialog")))
     ;; Check properties
     (is (equal '("current-page" "embed-page-setup" "has-selection"
                  "manual-capabilities" "page-setup" "print-settings"
                  "selected-printer" "support-selection")
-               (gtk-test:list-properties "GtkPrintUnixDialog")))
+               (glib-test:list-properties "GtkPrintUnixDialog")))
     ;; Check signals
     (is (equal '()
-               (gtk-test:list-signals "GtkPrintUnixDialog")))
+               (glib-test:list-signals "GtkPrintUnixDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkPrintUnixDialog")))
     ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkPrintUnixDialog")))
     ;; Check class definition
-    (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog"
-                                               GTK-PRINT-UNIX-DIALOG
-                         (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
+    (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintUnixDialog"
+                                        GTK:PRINT-UNIX-DIALOG
+                         (:SUPERCLASS GTK:DIALOG
+                          :EXPORT T
+                          :INTERFACES
                           ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                            "GtkNative" "GtkRoot" "GtkShortcutManager")
                           :TYPE-INITIALIZER "gtk_print_unix_dialog_get_type")
-                         ((CURRENT-PAGE GTK-PRINT-UNIX-DIALOG-CURRENT-PAGE
+                         ((CURRENT-PAGE PRINT-UNIX-DIALOG-CURRENT-PAGE
                            "current-page" "gint" T T)
-                          (EMBED-PAGE-SETUP
-                           GTK-PRINT-UNIX-DIALOG-EMBED-PAGE-SETUP
+                          (EMBED-PAGE-SETUP PRINT-UNIX-DIALOG-EMBED-PAGE-SETUP
                            "embed-page-setup" "gboolean" T T)
-                          (HAS-SELECTION GTK-PRINT-UNIX-DIALOG-HAS-SELECTION
+                          (HAS-SELECTION PRINT-UNIX-DIALOG-HAS-SELECTION
                            "has-selection" "gboolean" T T)
                           (MANUAL-CAPABILITIES
-                           GTK-PRINT-UNIX-DIALOG-MANUAL-CAPABILITIES
+                           PRINT-UNIX-DIALOG-MANUAL-CAPABILITIES
                            "manual-capabilities" "GtkPrintCapabilities" T T)
-                          (PAGE-SETUP GTK-PRINT-UNIX-DIALOG-PAGE-SETUP
+                          (PAGE-SETUP PRINT-UNIX-DIALOG-PAGE-SETUP
                            "page-setup" "GtkPageSetup" T T)
-                          (PRINT-SETTINGS GTK-PRINT-UNIX-DIALOG-PRINT-SETTINGS
+                          (PRINT-SETTINGS PRINT-UNIX-DIALOG-PRINT-SETTINGS
                            "print-settings" "GtkPrintSettings" T T)
-                          (SELECTED-PRINTER
-                           GTK-PRINT-UNIX-DIALOG-SELECTED-PRINTER
+                          (SELECTED-PRINTER PRINT-UNIX-DIALOG-SELECTED-PRINTER
                            "selected-printer" "GtkPrinter" T NIL)
-                          (SUPPORT-SELECTION
-                           GTK-PRINT-UNIX-DIALOG-SUPPORT-SELECTION
+                          (SUPPORT-SELECTION PRINT-UNIX-DIALOG-SUPPORT-SELECTION
                            "support-selection" "gboolean" T T)))
-               (gobject:get-g-type-definition "GtkPrintUnixDialog")))))
+               (gobject:get-gtype-definition "GtkPrintUnixDialog")))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -168,4 +166,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; 2024-7-3
+;;; 2024-9-20

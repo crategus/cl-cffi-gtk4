@@ -22,28 +22,30 @@
           (g:type-parent "GtkEventControllerMotion")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEventControllerMotion")))
+             (glib-test:list-children "GtkEventControllerMotion")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEventControllerMotion")))
+             (glib-test:list-interfaces "GtkEventControllerMotion")))
   ;; Check properties
   (is (equal '("contains-pointer" "is-pointer")
-             (gtk-test:list-properties "GtkEventControllerMotion")))
+             (glib-test:list-properties "GtkEventControllerMotion")))
   ;; Check signals
   (is (equal '("enter" "leave" "motion")
-             (gtk-test:list-signals "GtkEventControllerMotion")))
+             (glib-test:list-signals "GtkEventControllerMotion")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerMotion"
-                                     GTK-EVENT-CONTROLLER-MOTION
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEventControllerMotion"
+                                      GTK:EVENT-CONTROLLER-MOTION
+                       (:SUPERCLASS GTK:EVENT-CONTROLLER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER
                         "gtk_event_controller_motion_get_type")
                        ((CONTAINS-POINTER
-                         GTK-EVENT-CONTROLLER-MOTION-CONTAINS-POINTER
+                         EVENT-CONTROLLER-MOTION-CONTAINS-POINTER
                          "contains-pointer" "gboolean" T NIL)
-                        (IS-POINTER GTK-EVENT-CONTROLLER-MOTION-IS-POINTER
+                        (IS-POINTER EVENT-CONTROLLER-MOTION-IS-POINTER
                          "is-pointer" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkEventControllerMotion"))))
+             (gobject:get-gtype-definition "GtkEventControllerMotion"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -115,4 +117,4 @@
 (test gtk-event-controller-motion-new
   (typep (gtk:event-controller-motion-new) 'gtk:event-controller-motion))
 
-;;; 2024-7-27
+;;; 2024-9-20

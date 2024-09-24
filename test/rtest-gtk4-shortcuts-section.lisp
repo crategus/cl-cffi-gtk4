@@ -22,40 +22,39 @@
           (g:type-parent "GtkShortcutsSection")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcutsSection")))
+             (glib-test:list-children "GtkShortcutsSection")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkShortcutsSection")))
+             (glib-test:list-interfaces "GtkShortcutsSection")))
   ;; Check properties
   (is (equal '("max-height" "section-name" "title" "view-name")
-             (gtk-test:list-properties "GtkShortcutsSection")))
+             (glib-test:list-properties "GtkShortcutsSection")))
   ;; Check signals
   (is (equal '("change-current-page")
-             (gtk-test:list-signals "GtkShortcutsSection")))
+             (glib-test:list-signals "GtkShortcutsSection")))
   ;; Check CSS name
   (is (string= "shortcuts-section"
                (gtk:widget-class-css-name "GtkShortcutsSection")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsSection")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsSection"
-                                             GTK-SHORTCUTS-SECTION
-                               (:SUPERCLASS GTK-BOX :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkOrientable")
-                                :TYPE-INITIALIZER
-                                "gtk_shortcuts_section_get_type")
-                               ((MAX-HEIGHT GTK-SHORTCUTS-SECTION-MAX-HEIGHT
-                                 "max-height" "guint" T T)
-                                (SECTION-NAME
-                                 GTK-SHORTCUTS-SECTION-SECTION-NAME
-                                 "section-name" "gchararray" T T)
-                                (TITLE GTK-SHORTCUTS-SECTION-TITLE "title"
-                                 "gchararray" T T)
-                                (VIEW-NAME GTK-SHORTCUTS-SECTION-VIEW-NAME
-                                 "view-name" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkShortcutsSection"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutsSection"
+                                      GTK:SHORTCUTS-SECTION
+                      (:SUPERCLASS GTK:BOX
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_shortcuts_section_get_type")
+                      ((MAX-HEIGHT SHORTCUTS-SECTION-MAX-HEIGHT
+                        "max-height" "guint" T T)
+                       (SECTION-NAME SHORTCUTS-SECTION-SECTION-NAME
+                        "section-name" "gchararray" T T)
+                       (TITLE SHORTCUTS-SECTION-TITLE "title" "gchararray" T T)
+                       (VIEW-NAME SHORTCUTS-SECTION-VIEW-NAME
+                        "view-name" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkShortcutsSection"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -88,4 +87,4 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;; 2024-2-18
+;;; 2024-9-20

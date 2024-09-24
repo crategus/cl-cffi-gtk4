@@ -22,38 +22,40 @@
           (g:type-parent "GtkFileChooserWidget")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFileChooserWidget")))
+             (glib-test:list-children "GtkFileChooserWidget")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFileChooser")
-             (gtk-test:list-interfaces "GtkFileChooserWidget")))
+             (glib-test:list-interfaces "GtkFileChooserWidget")))
   ;; Check properties
   (is (equal '("action" "create-folders" "filter" "filters" "search-mode"
                "select-multiple" "shortcut-folders" "show-time" "subtitle")
-             (gtk-test:list-properties "GtkFileChooserWidget")))
+             (glib-test:list-properties "GtkFileChooserWidget")))
   ;; Check signals
   (is (equal '("desktop-folder" "down-folder" "home-folder" "location-popup"
                "location-popup-on-paste" "location-toggle-popup"
                "places-shortcut" "quick-bookmark" "recent-shortcut"
                "search-shortcut" "show-hidden" "up-folder")
-             (gtk-test:list-signals "GtkFileChooserWidget")))
+             (glib-test:list-signals "GtkFileChooserWidget")))
   ;; Check CSS information
   (is (string= "filechooser"
                (gtk:widget-class-css-name "GtkFileChooserWidget")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget"
-                                     GTK-FILE-CHOOSER-WIDGET
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFileChooserWidget"
+                                      GTK:FILE-CHOOSER-WIDGET
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkFileChooser")
                         :TYPE-INITIALIZER "gtk_file_chooser_widget_get_type")
-                       ((SEARCH-MODE GTK-FILE-CHOOSER-WIDGET-SEARCH-MODE
+                       ((SEARCH-MODE FILE-CHOOSER-WIDGET-SEARCH-MODE
                          "search-mode" "gboolean" T T)
-                        (SHOW-TIME GTK-FILE-CHOOSER-WIDGET-SHOW-TIME
+                        (SHOW-TIME FILE-CHOOSER-WIDGET-SHOW-TIME
                          "show-time" "gboolean" T NIL)
-                        (SUBTITLE GTK-FILE-CHOOSER-WIDGET-SUBTITLE "subtitle"
-                         "gchararray" T NIL)))
-             (gobject:get-g-type-definition "GtkFileChooserWidget"))))
+                        (SUBTITLE FILE-CHOOSER-WIDGET-SUBTITLE
+                         "subtitle" "gchararray" T NIL)))
+             (gobject:get-gtype-definition "GtkFileChooserWidget"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -90,4 +92,4 @@
     (is (typep (gtk:file-chooser-widget-new :select-folder)
                'gtk:file-chooser-widget))))
 
-;;; 2024-4-26
+;;; 2024-9-20

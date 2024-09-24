@@ -22,28 +22,30 @@
   ;; Check children
   #-windows
   (is (equal '("GtkIMContextSimple" "GtkIMMulticontext" "IBusIMContext")
-             (gtk-test:list-children "GtkIMContext")))
+             (glib-test:list-children "GtkIMContext")))
   #+windows
   (is (equal '("GtkIMContextIME" "GtkIMContextSimple" "GtkIMMulticontext")
-             (gtk-test:list-children "GtkIMContext")))
+             (glib-test:list-children "GtkIMContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkIMContext")))
+             (glib-test:list-interfaces "GtkIMContext")))
   ;; Check class properties
   (is (equal '("input-hints" "input-purpose")
-             (gtk-test:list-properties "GtkIMContext")))
+             (glib-test:list-properties "GtkIMContext")))
   ;; Check signals
   (is (equal '("commit" "delete-surrounding" "preedit-changed" "preedit-end"
                "preedit-start" "retrieve-surrounding")
-             (gtk-test:list-signals "GtkIMContext")))
+             (glib-test:list-signals "GtkIMContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContext" GTK-I-M-CONTEXT
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
-                       ((INPUT-HINTS GTK-I-M-CONTEXT-INPUT-HINTS "input-hints"
-                         "GtkInputHints" T T)
-                        (INPUT-PURPOSE GTK-I-M-CONTEXT-INPUT-PURPOSE
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkIMContext" GTK:IM-CONTEXT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL)
+                       ((INPUT-HINTS IM-CONTEXT-INPUT-HINTS
+                         "input-hints" "GtkInputHints" T T)
+                        (INPUT-PURPOSE IM-CONTEXT-INPUT-PURPOSE
                          "input-purpose" "GtkInputPurpose" T T)))
-             (gobject:get-g-type-definition "GtkIMContext"))))
+             (gobject:get-gtype-definition "GtkIMContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -171,4 +173,4 @@
 ;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
 ;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
 
-;;; 2024-7-4
+;;; 2024-9-20

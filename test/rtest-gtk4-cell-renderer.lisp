@@ -22,28 +22,28 @@
                "GTK_CELL_RENDERER_INSENSITIVE" "GTK_CELL_RENDERER_SORTED"
                "GTK_CELL_RENDERER_FOCUSED" "GTK_CELL_RENDERER_EXPANDABLE"
                "GTK_CELL_RENDERER_EXPANDED")
-             (gtk-test:list-flags-item-name "GtkCellRendererState")))
+             (glib-test:list-flags-item-names "GtkCellRendererState")))
   ;; Check values
   (is (equal '(1 2 4 8 16 32 64)
-             (gtk-test:list-flags-item-value "GtkCellRendererState")))
+             (glib-test:list-flags-item-values "GtkCellRendererState")))
   ;; Check nick names
   (is (equal '("selected" "prelit" "insensitive" "sorted" "focused"
                "expandable" "expanded")
-             (gtk-test:list-flags-item-nick "GtkCellRendererState")))
+             (glib-test:list-flags-item-nicks "GtkCellRendererState")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkCellRendererState"
-                              GTK-CELL-RENDERER-STATE
-                              (:EXPORT T
-                               :TYPE-INITIALIZER
-                               "gtk_cell_renderer_state_get_type")
-                              (:SELECTED 1)
-                              (:PRELIT 2)
-                              (:INSENSITIVE 4)
-                              (:SORTED 8)
-                              (:FOCUSED 16)
-                              (:EXPANDABLE 32)
-                              (:EXPANDED 64))
-             (gobject:get-g-type-definition "GtkCellRendererState"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkCellRendererState"
+                                     GTK:CELL-RENDERER-STATE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_cell_renderer_state_get_type")
+                                     (:SELECTED 1)
+                                     (:PRELIT 2)
+                                     (:INSENSITIVE 4)
+                                     (:SORTED 8)
+                                     (:FOCUSED 16)
+                                     (:EXPANDABLE 32)
+                                     (:EXPANDED 64))
+             (gobject:get-gtype-definition "GtkCellRendererState"))))
 
 ;;;     GtkCellRendererMode
 
@@ -61,23 +61,22 @@
   (is (equal '("GTK_CELL_RENDERER_MODE_INERT"
                "GTK_CELL_RENDERER_MODE_ACTIVATABLE"
                "GTK_CELL_RENDERER_MODE_EDITABLE")
-             (gtk-test:list-enum-item-name "GtkCellRendererMode")))
+             (glib-test:list-enum-item-names "GtkCellRendererMode")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkCellRendererMode")))
+             (glib-test:list-enum-item-values "GtkCellRendererMode")))
   ;; Check nick names
   (is (equal '("inert" "activatable" "editable")
-             (gtk-test:list-enum-item-nick "GtkCellRendererMode")))
+             (glib-test:list-enum-item-nicks "GtkCellRendererMode")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererMode"
-                             GTK-CELL-RENDERER-MODE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER
-                              "gtk_cell_renderer_mode_get_type")
-                             (:INERT 0)
-                             (:ACTIVATABLE 1)
-                             (:EDITABLE 2))
-             (gobject:get-g-type-definition "GtkCellRendererMode"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkCellRendererMode" GTK:CELL-RENDERER-MODE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_cell_renderer_mode_get_type")
+                                    (:INERT 0)
+                                    (:ACTIVATABLE 1)
+                                    (:EDITABLE 2))
+             (gobject:get-gtype-definition "GtkCellRendererMode"))))
 
 ;;;     GtkCellRenderer
 
@@ -97,49 +96,49 @@
   (is (equal '("GtkCellRendererPixbuf" "GtkCellRendererProgress"
                "GtkCellRendererSpinner" "GtkCellRendererText"
                "GtkCellRendererToggle")
-             (gtk-test:list-children "GtkCellRenderer")))
+             (glib-test:list-children "GtkCellRenderer")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRenderer")))
+             (glib-test:list-interfaces "GtkCellRenderer")))
   ;; Check class properties
   (is (equal '("cell-background" "cell-background-rgba" "cell-background-set"
                "editing" "height" "is-expanded" "is-expander" "mode" "sensitive"
                "visible" "width" "xalign" "xpad" "yalign" "ypad")
-             (gtk-test:list-properties "GtkCellRenderer")))
+             (glib-test:list-properties "GtkCellRenderer")))
   ;; Check signals
   (is (equal '("editing-canceled" "editing-started")
-             (gtk-test:list-signals "GtkCellRenderer")))
+             (glib-test:list-signals "GtkCellRenderer")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRenderer" GTK-CELL-RENDERER
-                       (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_cell_renderer_get_type")
-                       ((CELL-BACKGROUND GTK-CELL-RENDERER-CELL-BACKGROUND
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRenderer" GTK:CELL-RENDERER
+                       (:SUPERCLASS G:INITIALLY-UNOWNED
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_cell_renderer_get_type")
+                       ((CELL-BACKGROUND CELL-RENDERER-CELL-BACKGROUND
                          "cell-background" "gchararray" NIL T)
-                        (CELL-BACKGROUND-RGBA
-                         GTK-CELL-RENDERER-CELL-BACKGROUND-RGBA
+                        (CELL-BACKGROUND-RGBA CELL-RENDERER-CELL-BACKGROUND-RGBA
                          "cell-background-rgba" "GdkRGBA" T T)
-                        (CELL-BACKGROUND-SET
-                         GTK-CELL-RENDERER-CELL-BACKGROUND-SET
+                        (CELL-BACKGROUND-SET CELL-RENDERER-CELL-BACKGROUND-SET
                          "cell-background-set" "gboolean" T T)
-                        (EDITING GTK-CELL-RENDERER-EDITING "editing" "gboolean"
-                         T NIL)
-                        (HEIGHT GTK-CELL-RENDERER-HEIGHT "height" "gint" T T)
-                        (IS-EXPANDED GTK-CELL-RENDERER-IS-EXPANDED
+                        (EDITING CELL-RENDERER-EDITING
+                         "editing" "gboolean" T NIL)
+                        (HEIGHT CELL-RENDERER-HEIGHT "height" "gint" T T)
+                        (IS-EXPANDED CELL-RENDERER-IS-EXPANDED
                          "is-expanded" "gboolean" T T)
-                        (IS-EXPANDER GTK-CELL-RENDERER-IS-EXPANDER
+                        (IS-EXPANDER CELL-RENDERER-IS-EXPANDER
                          "is-expander" "gboolean" T T)
-                        (MODE GTK-CELL-RENDERER-MODE "mode"
-                         "GtkCellRendererMode" T T)
-                        (SENSITIVE GTK-CELL-RENDERER-SENSITIVE "sensitive"
-                         "gboolean" T T)
-                        (VISIBLE GTK-CELL-RENDERER-VISIBLE "visible" "gboolean"
-                         T T)
-                        (WIDTH GTK-CELL-RENDERER-WIDTH "width" "gint" T T)
-                        (XALIGN GTK-CELL-RENDERER-XALIGN "xalign" "gfloat" T T)
-                        (XPAD GTK-CELL-RENDERER-XPAD "xpad" "guint" T T)
-                        (YALIGN GTK-CELL-RENDERER-YALIGN "yalign" "gfloat" T T)
-                        (YPAD GTK-CELL-RENDERER-YPAD "ypad" "guint" T T)))
-             (gobject:get-g-type-definition "GtkCellRenderer"))))
+                        (MODE CELL-RENDERER-MODE
+                         "mode" "GtkCellRendererMode" T T)
+                        (SENSITIVE CELL-RENDERER-SENSITIVE
+                         "sensitive" "gboolean" T T)
+                        (VISIBLE CELL-RENDERER-VISIBLE
+                         "visible" "gboolean" T T)
+                        (WIDTH CELL-RENDERER-WIDTH "width" "gint" T T)
+                        (XALIGN CELL-RENDERER-XALIGN "xalign" "gfloat" T T)
+                        (XPAD CELL-RENDERER-XPAD "xpad" "guint" T T)
+                        (YALIGN CELL-RENDERER-YALIGN "yalign" "gfloat" T T)
+                        (YPAD CELL-RENDERER-YPAD "ypad" "guint" T T)))
+             (gobject:get-gtype-definition "GtkCellRenderer"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -238,4 +237,4 @@
 ;;;     gtk_cell_renderer_get_preferred_width_for_height
 ;;;     gtk_cell_renderer_get_request_mode
 
-;;; 2024-5-18
+;;; 2024-9-20

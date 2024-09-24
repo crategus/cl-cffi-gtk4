@@ -21,22 +21,24 @@
           (g:type-parent "GtkTooltip")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTooltip")))
+             (glib-test:list-children "GtkTooltip")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkTooltip")))
+             (glib-test:list-interfaces "GtkTooltip")))
   ;; Check class properties
   (is (equal '()
-             (gtk-test:list-properties "GtkTooltip")))
+             (glib-test:list-properties "GtkTooltip")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTooltip")))
+             (glib-test:list-signals "GtkTooltip")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTooltip" GTK-TOOLTIP
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTooltip" GTK:TOOLTIP
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_tooltip_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkTooltip"))))
+             (gobject:get-gtype-definition "GtkTooltip"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -48,4 +50,4 @@
 ;;;     gtk_tooltip_set_custom
 ;;;     gtk_tooltip_set_tip_area
 
-;;; 2024-7-8
+;;; 2024-9-20

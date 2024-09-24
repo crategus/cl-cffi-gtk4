@@ -27,32 +27,31 @@
                "GTK_SHORTCUT_GESTURE"
                "GTK_SHORTCUT_GESTURE_SWIPE_LEFT"
                "GTK_SHORTCUT_GESTURE_SWIPE_RIGHT")
-             (gtk-test:list-enum-item-name "GtkShortcutType")))
+             (glib-test:list-enum-item-names "GtkShortcutType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (gtk-test:list-enum-item-value "GtkShortcutType")))
+             (glib-test:list-enum-item-values "GtkShortcutType")))
   ;; Check nick names
   (is (equal '("accelerator" "gesture-pinch" "gesture-stretch"
                "gesture-rotate-clockwise" "gesture-rotate-counterclockwise"
                "gesture-two-finger-swipe-left" "gesture-two-finger-swipe-right"
                "gesture" "gesture-swipe-left" "gesture-swipe-right")
-             (gtk-test:list-enum-item-nick "GtkShortcutType")))
+             (glib-test:list-enum-item-nicks "GtkShortcutType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkShortcutType" GTK-SHORTCUT-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_shortcut_type_get_type")
-                                     (:ACCELERATOR 0)
-                                     (:GESTURE-PINCH 1)
-                                     (:GESTURE-STRETCH 2)
-                                     (:GESTURE-ROTATE-CLOCKWISE 3)
-                                     (:GESTURE-ROTATE-COUNTERCLOCKWISE 4)
-                                     (:GESTURE-TWO-FINGER-SWIPE-LEFT 5)
-                                     (:GESTURE-TWO-FINGER-SWIPE-RIGHT 6)
-                                     (:GESTURE 7)
-                                     (:GESTURE-SWIPE-LEFT 8)
-                                     (:GESTURE-SWIPE-RIGHT 9))
-             (gobject:get-g-type-definition "GtkShortcutType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkShortcutType" GTK:SHORTCUT-TYPE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_shortcut_type_get_type")
+                       (:ACCELERATOR 0)
+                       (:GESTURE-PINCH 1)
+                       (:GESTURE-STRETCH 2)
+                       (:GESTURE-ROTATE-CLOCKWISE 3)
+                       (:GESTURE-ROTATE-COUNTERCLOCKWISE 4)
+                       (:GESTURE-TWO-FINGER-SWIPE-LEFT 5)
+                       (:GESTURE-TWO-FINGER-SWIPE-RIGHT 6)
+                       (:GESTURE 7)
+                       (:GESTURE-SWIPE-LEFT 8)
+                       (:GESTURE-SWIPE-RIGHT 9))
+             (gobject:get-gtype-definition "GtkShortcutType"))))
 
 ;;;     GtkShortcutsShortcut
 
@@ -71,58 +70,53 @@
           (g:type-parent "GtkShortcutsShortcut")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcutsShortcut")))
+             (glib-test:list-children "GtkShortcutsShortcut")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkShortcutsShortcut")))
+             (glib-test:list-interfaces "GtkShortcutsShortcut")))
   ;; Check properties
   (is (equal '("accel-size-group" "accelerator" "action-name" "direction" "icon"
                "icon-set" "shortcut-type" "subtitle" "subtitle-set" "title"
                "title-size-group")
-             (gtk-test:list-properties "GtkShortcutsShortcut")))
+             (glib-test:list-properties "GtkShortcutsShortcut")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkShortcutsShortcut")))
+             (glib-test:list-signals "GtkShortcutsShortcut")))
   ;; Check CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutsShortcut")))
   ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkShortcutsShortcut")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsShortcut"
-                                             GTK-SHORTCUTS-SHORTCUT
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_shortcuts_shortcut_get_type")
-                               ((ACCEL-SIZE-GROUP
-                                 GTK-SHORTCUTS-SHORTCUT-ACCEL-SIZE-GROUP
-                                 "accel-size-group" "GtkSizeGroup" NIL T)
-                                (ACCELERATOR GTK-SHORTCUTS-SHORTCUT-ACCELERATOR
-                                 "accelerator" "gchararray" T T)
-                                (ACTION-NAME GTK-SHORTCUTS-SHORTCUT-ACTION-NAME
-                                 "action-name" "gchararray" T T)
-                                (DIRECTION GTK-SHORTCUTS-SHORTCUT-DIRECTION
-                                 "direction" "GtkTextDirection" T T)
-                                (ICON GTK-SHORTCUTS-SHORTCUT-ICON "icon"
-                                 "GIcon" T T)
-                                (ICON-SET GTK-SHORTCUTS-SHORTCUT-ICON-SET
-                                 "icon-set" "gboolean" T T)
-                                (SHORTCUT-TYPE
-                                 GTK-SHORTCUTS-SHORTCUT-SHORTCUT-TYPE
-                                 "shortcut-type" "GtkShortcutType" T T)
-                                (SUBTITLE GTK-SHORTCUTS-SHORTCUT-SUBTITLE
-                                 "subtitle" "gchararray" T T)
-                                (SUBTITLE-SET
-                                 GTK-SHORTCUTS-SHORTCUT-SUBTITLE-SET
-                                 "subtitle-set" "gboolean" T T)
-                                (TITLE GTK-SHORTCUTS-SHORTCUT-TITLE "title"
-                                 "gchararray" T T)
-                                (TITLE-SIZE-GROUP
-                                 GTK-SHORTCUTS-SHORTCUT-TITLE-SIZE-GROUP
-                                 "title-size-group" "GtkSizeGroup" NIL T)))
-             (gobject:get-g-type-definition "GtkShortcutsShortcut"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutsShortcut"
+                                      GTK:SHORTCUTS-SHORTCUT
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_shortcuts_shortcut_get_type")
+                      ((ACCEL-SIZE-GROUP SHORTCUTS-SHORTCUT-ACCEL-SIZE-GROUP
+                        "accel-size-group" "GtkSizeGroup" NIL T)
+                       (ACCELERATOR SHORTCUTS-SHORTCUT-ACCELERATOR
+                        "accelerator" "gchararray" T T)
+                       (ACTION-NAME SHORTCUTS-SHORTCUT-ACTION-NAME
+                        "action-name" "gchararray" T T)
+                       (DIRECTION SHORTCUTS-SHORTCUT-DIRECTION
+                        "direction" "GtkTextDirection" T T)
+                       (ICON SHORTCUTS-SHORTCUT-ICON "icon" "GIcon" T T)
+                       (ICON-SET SHORTCUTS-SHORTCUT-ICON-SET
+                        "icon-set" "gboolean" T T)
+                       (SHORTCUT-TYPE SHORTCUTS-SHORTCUT-SHORTCUT-TYPE
+                        "shortcut-type" "GtkShortcutType" T T)
+                       (SUBTITLE SHORTCUTS-SHORTCUT-SUBTITLE
+                        "subtitle" "gchararray" T T)
+                       (SUBTITLE-SET SHORTCUTS-SHORTCUT-SUBTITLE-SET
+                        "subtitle-set" "gboolean" T T)
+                       (TITLE SHORTCUTS-SHORTCUT-TITLE
+                        "title" "gchararray" T T)
+                       (TITLE-SIZE-GROUP SHORTCUTS-SHORTCUT-TITLE-SIZE-GROUP
+                        "title-size-group" "GtkSizeGroup" NIL T)))
+             (gobject:get-gtype-definition "GtkShortcutsShortcut"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -152,4 +146,4 @@
     (is (string= "" (gtk:shortcuts-shortcut-title shortcut)))
     (signals (error) (gtk:shortcuts-shortcut-title-size-group shortcut))))
 
-;;; 2024-2-18
+;;; 2024-9-20

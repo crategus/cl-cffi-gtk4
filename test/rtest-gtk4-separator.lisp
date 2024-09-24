@@ -21,30 +21,32 @@
           (g:type-parent "GtkSeparator")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSeparator")))
+             (glib-test:list-children "GtkSeparator")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkSeparator")))
+             (glib-test:list-interfaces "GtkSeparator")))
   ;; Check properties
   (is (equal '("orientation")
-             (gtk-test:list-properties "GtkSeparator")))
+             (glib-test:list-properties "GtkSeparator")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSeparator")))
+             (glib-test:list-signals "GtkSeparator")))
   ;; Check CSS name
   (is (string= "separator"
                (gtk:widget-class-css-name "GtkSeparator")))
   ;; Check accessible role
   (is (eq :separator (gtk:widget-class-accessible-role "GtkSeparator")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSeparator" GTK-SEPARATOR
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSeparator" GTK:SEPARATOR
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_separator_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkSeparator"))))
+             (gobject:get-gtype-definition "GtkSeparator"))))
 
 ;;; --- Functions --------------------------------------------------------------
 

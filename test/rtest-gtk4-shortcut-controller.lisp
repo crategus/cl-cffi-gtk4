@@ -24,35 +24,35 @@
           (g:type-parent "GtkShortcutController")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcutController")))
+             (glib-test:list-children "GtkShortcutController")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkShortcutController")))
+             (glib-test:list-interfaces "GtkShortcutController")))
   ;; Check properties
   (is (equal '("item-type" "mnemonic-modifiers" "model" "n-items" "scope")
-             (gtk-test:list-properties "GtkShortcutController")))
+             (glib-test:list-properties "GtkShortcutController")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkShortcutController")))
+             (glib-test:list-signals "GtkShortcutController")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutController"
-                                             GTK-SHORTCUT-CONTROLLER
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutController"
+                                      GTK:SHORTCUT-CONTROLLER
+                       (:SUPERCLASS GTK:EVENT-CONTROLLER
                         :EXPORT T
                         :INTERFACES ("GListModel" "GtkBuildable")
                         :TYPE-INITIALIZER "gtk_shortcut_controller_get_type")
-                       ((ITEM-TYPE GTK-SHORTCUT-CONTROLLER-ITEM-TYPE
+                       ((ITEM-TYPE SHORTCUT-CONTROLLER-ITEM-TYPE
                          "item-type" "GType" T NIL)
                         (MNEMONIC-MODIFIERS
-                         GTK-SHORTCUT-CONTROLLER-MNEMONIC-MODIFIERS
+                         SHORTCUT-CONTROLLER-MNEMONIC-MODIFIERS
                          "mnemonic-modifiers" "GdkModifierType" T T)
-                        (MODEL GTK-SHORTCUT-CONTROLLER-MODEL "model"
-                         "GListModel" NIL NIL)
-                        (N-ITEMS GTK-SHORTCUT-CONTROLLER-N-ITEMS "n-items"
-                         "guint" T NIL)
-                        (SCOPE GTK-SHORTCUT-CONTROLLER-SCOPE "scope"
-                         "GtkShortcutScope" T T)))
-             (gobject:get-g-type-definition "GtkShortcutController"))))
+                        (MODEL SHORTCUT-CONTROLLER-MODEL
+                         "model" "GListModel" NIL NIL)
+                        (N-ITEMS SHORTCUT-CONTROLLER-N-ITEMS
+                         "n-items" "guint" T NIL)
+                        (SCOPE SHORTCUT-CONTROLLER-SCOPE
+                         "scope" "GtkShortcutScope" T T)))
+             (gobject:get-gtype-definition "GtkShortcutController"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -78,4 +78,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; 2024-7-4
+;;; 2024-9-20

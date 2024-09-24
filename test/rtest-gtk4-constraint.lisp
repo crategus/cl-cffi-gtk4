@@ -23,19 +23,19 @@
                                          :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkConstraintTarget")))
+             (glib-test:list-interface-prerequisites "GtkConstraintTarget")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkConstraintTarget")))
+             (glib-test:list-interface-properties "GtkConstraintTarget")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkConstraintTarget")))
+             (glib-test:list-signals "GtkConstraintTarget")))
   ;; Get interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkConstraintTarget"
-                                          GTK-CONSTRAINT-TARGET
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_constraint_target_get_type"))
-             (gobject:get-g-type-definition "GtkConstraintTarget"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkConstraintTarget"
+                                         GTK:CONSTRAINT-TARGET
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_constraint_target_get_type"))
+             (gobject:get-gtype-definition "GtkConstraintTarget"))))
 
 ;;;     GtkConstraint
 
@@ -53,42 +53,39 @@
           (g:type-parent "GtkConstraint")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkConstraint")))
+             (glib-test:list-children "GtkConstraint")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkConstraint")))
+             (glib-test:list-interfaces "GtkConstraint")))
   ;; Check properties
   (is (equal '("constant" "multiplier" "relation" "source" "source-attribute"
                "strength" "target" "target-attribute")
-             (gtk-test:list-properties "GtkConstraint")))
+             (glib-test:list-properties "GtkConstraint")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkConstraint")))
+             (glib-test:list-signals "GtkConstraint")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraint" GTK-CONSTRAINT
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_constraint_get_type")
-                               ((CONSTANT GTK-CONSTRAINT-CONSTANT "constant"
-                                 "gdouble" T NIL)
-                                (MULTIPLIER GTK-CONSTRAINT-MULTIPLIER
-                                 "multiplier" "gdouble" T NIL)
-                                (RELATION GTK-CONSTRAINT-RELATION "relation"
-                                 "GtkConstraintRelation" T NIL)
-                                (SOURCE GTK-CONSTRAINT-SOURCE "source"
-                                 "GtkConstraintTarget" T NIL)
-                                (SOURCE-ATTRIBUTE
-                                 GTK-CONSTRAINT-SOURCE-ATTRIBUTE
-                                 "source-attribute" "GtkConstraintAttribute" T
-                                 NIL)
-                                (STRENGTH GTK-CONSTRAINT-STRENGTH "strength"
-                                 "gint" T NIL)
-                                (TARGET GTK-CONSTRAINT-TARGET "target"
-                                 "GtkConstraintTarget" T NIL)
-                                (TARGET-ATTRIBUTE
-                                 GTK-CONSTRAINT-TARGET-ATTRIBUTE
-                                 "target-attribute" "GtkConstraintAttribute" T
-                                 NIL)))
-             (gobject:get-g-type-definition "GtkConstraint"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkConstraint" GTK:CONSTRAINT
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_constraint_get_type")
+                      ((CONSTANT CONSTRAINT-CONSTANT "constant" "gdouble" T NIL)
+                       (MULTIPLIER CONSTRAINT-MULTIPLIER
+                        "multiplier" "gdouble" T NIL)
+                       (RELATION CONSTRAINT-RELATION
+                        "relation" "GtkConstraintRelation" T NIL)
+                       (SOURCE CONSTRAINT-SOURCE
+                        "source" "GtkConstraintTarget" T NIL)
+                       (SOURCE-ATTRIBUTE CONSTRAINT-SOURCE-ATTRIBUTE
+                        "source-attribute" "GtkConstraintAttribute" T NIL)
+                       (STRENGTH CONSTRAINT-STRENGTH
+                        "strength" "gint" T NIL)
+                       (TARGET CONSTRAINT-TARGET
+                        "target" "GtkConstraintTarget" T NIL)
+                       (TARGET-ATTRIBUTE CONSTRAINT-TARGET-ATTRIBUTE
+                        "target-attribute" "GtkConstraintAttribute" T NIL)))
+             (gobject:get-gtype-definition "GtkConstraint"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -111,4 +108,4 @@
 ;;;     gtk_constraint_is_attached
 ;;;     gtk_constraint_is_constant
 
-;;; 2024-4-23
+;;; 2024-9-19

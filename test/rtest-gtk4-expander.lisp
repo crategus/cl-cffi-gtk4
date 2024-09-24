@@ -21,43 +21,41 @@
           (g:type-parent "GtkExpander")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkExpander")))
+             (glib-test:list-children "GtkExpander")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkExpander")))
+             (glib-test:list-interfaces "GtkExpander")))
   ;; Check properties
   (is (equal '("child" "expanded" "label" "label-widget" "resize-toplevel"
                "use-markup" "use-underline")
-             (gtk-test:list-properties "GtkExpander")))
+             (glib-test:list-properties "GtkExpander")))
   ;; Check signals
   (is (equal '("activate")
-             (gtk-test:list-signals "GtkExpander")))
+             (glib-test:list-signals "GtkExpander")))
   ;; Check CSS name
   (is (string= "expander-widget"
                (gtk:widget-class-css-name "GtkExpander")))
   ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkExpander")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkExpander" GTK-EXPANDER
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_expander_get_type")
-                               ((CHILD GTK-EXPANDER-CHILD "child" "GtkWidget" T
-                                 T)
-                                (EXPANDED GTK-EXPANDER-EXPANDED "expanded"
-                                 "gboolean" T T)
-                                (LABEL GTK-EXPANDER-LABEL "label" "gchararray"
-                                 T T)
-                                (LABEL-WIDGET GTK-EXPANDER-LABEL-WIDGET
-                                 "label-widget" "GtkWidget" T T)
-                                (RESIZE-TOPLEVEL GTK-EXPANDER-RESIZE-TOPLEVEL
-                                 "resize-toplevel" "gboolean" T T)
-                                (USE-MARKUP GTK-EXPANDER-USE-MARKUP
-                                 "use-markup" "gboolean" T T)
-                                (USE-UNDERLINE GTK-EXPANDER-USE-UNDERLINE
-                                 "use-underline" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkExpander"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkExpander" GTK:EXPANDER
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_expander_get_type")
+                      ((CHILD EXPANDER-CHILD "child" "GtkWidget" T T)
+                       (EXPANDED EXPANDER-EXPANDED "expanded" "gboolean" T T)
+                       (LABEL EXPANDER-LABEL "label" "gchararray" T T)
+                       (LABEL-WIDGET EXPANDER-LABEL-WIDGET
+                        "label-widget" "GtkWidget" T T)
+                       (RESIZE-TOPLEVEL EXPANDER-RESIZE-TOPLEVEL
+                        "resize-toplevel" "gboolean" T T)
+                       (USE-MARKUP EXPANDER-USE-MARKUP
+                        "use-markup" "gboolean" T T)
+                       (USE-UNDERLINE EXPANDER-USE-UNDERLINE
+                        "use-underline" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkExpander"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -101,4 +99,4 @@
     (is-false (gtk:expander-use-markup expander))
     (is-true (gtk:expander-use-underline expander))))
 
-;;; 2024-4-17
+;;; 2024-9-19

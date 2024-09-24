@@ -21,27 +21,27 @@
           (g:type-parent "GtkShortcut")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcut")))
+             (glib-test:list-children "GtkShortcut")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkShortcut")))
+             (glib-test:list-interfaces "GtkShortcut")))
   ;; Check class properties
   (is (equal '("action" "arguments" "trigger")
-             (gtk-test:list-properties "GtkShortcut")))
+             (glib-test:list-properties "GtkShortcut")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkShortcut")))
+             (glib-test:list-signals "GtkShortcut")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcut" GTK-SHORTCUT
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcut" GTK:SHORTCUT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_get_type")
-                       ((ACTION GTK-SHORTCUT-ACTION "action"
-                         "GtkShortcutAction" T T)
-                        (ARGUMENTS GTK-SHORTCUT-ARGUMENTS "arguments"
-                         "GVariant" T T)
-                        (TRIGGER GTK-SHORTCUT-TRIGGER "trigger"
-                         "GtkShortcutTrigger" T T)))
-             (gobject:get-g-type-definition "GtkShortcut"))))
+                       ((ACTION SHORTCUT-ACTION "action" "GtkShortcutAction" T T)
+                        (ARGUMENTS SHORTCUT-ARGUMENTS "arguments" "GVariant" T T)
+                        (TRIGGER SHORTCUT-TRIGGER
+                         "trigger" "GtkShortcutTrigger" T T)))
+             (gobject:get-gtype-definition "GtkShortcut"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -86,4 +86,4 @@
 
 ;;;     gtk_shortcut_new_with_arguments
 
-;;; 2024-7-4
+;;; 2024-9-20

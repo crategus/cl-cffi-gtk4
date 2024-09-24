@@ -25,24 +25,26 @@
           (g:type-parent "GtkRecentManager")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkRecentManager")))
+             (glib-test:list-children "GtkRecentManager")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkRecentManager")))
+             (glib-test:list-interfaces "GtkRecentManager")))
   ;; Check class properties
   (is (equal '("filename" "size")
-             (gtk-test:list-properties "GtkRecentManager")))
+             (glib-test:list-properties "GtkRecentManager")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GtkRecentManager")))
+             (glib-test:list-signals "GtkRecentManager")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRecentManager" GTK-RECENT-MANAGER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkRecentManager" GTK:RECENT-MANAGER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_recent_manager_get_type")
-                       ((FILENAME GTK-RECENT-MANAGER-FILENAME "filename"
-                         "gchararray" T NIL)
-                        (SIZE GTK-RECENT-MANAGER-SIZE "size" "gint" T NIL)))
-             (gobject:get-g-type-definition "GtkRecentManager"))))
+                       ((FILENAME RECENT-MANAGER-FILENAME
+                         "filename" "gchararray" T NIL)
+                        (SIZE RECENT-MANAGER-SIZE "size" "gint" T NIL)))
+             (gobject:get-gtype-definition "GtkRecentManager"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -73,8 +75,8 @@
 #+nil
 (test gtk-recent-manager-add-item
   (let* ((recent (gtk:recent-manager-default))
-         (filename (namestring (sys-path "rtest-gtk4-recent-manager.lisp")))
-         (uri (concatenate 'string "file://" filename)))
+         (filename (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
+         (uri (concatenate 'string "file://" (namestring filename))))
     (is-true (gtk:recent-manager-add-item recent uri))
     (is-true (gtk:recent-manager-has-item recent uri))
     (is (string= uri
@@ -107,7 +109,8 @@
 #+nil
 (test gtk-recent-info-get
   (let* ((recent (gtk:recent-manager-default))
-         (filename (namestring (sys-path "rtest-gtk4-recent-manager.lisp")))
+         (path (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
+         (filename (namestring path))
          (uri (concatenate 'string "file://" filename))
          (info (gtk:recent-manager-lookup-item recent uri)))
     (is (typep info 'gtk:recent-info))
@@ -138,8 +141,8 @@
 #+nil
 (test gtk-recent-info-application
   (let* ((recent (gtk:recent-manager-default))
-         (filename (namestring (sys-path "rtest-gtk4-recent-manager.lisp")))
-         (uri (concatenate 'string "file://" filename))
+         (filename (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
+         (uri (concatenate 'string "file://" (namestring filename)))
          (info (gtk:recent-manager-lookup-item recent uri))
          (last (gtk:recent-info-last-application info)))
     (is (every #'stringp
@@ -164,4 +167,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2024-7-3
+;;; 2024-9-20

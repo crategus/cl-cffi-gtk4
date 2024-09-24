@@ -21,25 +21,25 @@
           (g:type-parent "GtkCenterLayout")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCenterLayout")))
+             (glib-test:list-children "GtkCenterLayout")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCenterLayout")))
+             (glib-test:list-interfaces "GtkCenterLayout")))
   ;; Check properties
   (is (equal '("shrink-center-last")
-             (gtk-test:list-properties "GtkCenterLayout")))
+             (glib-test:list-properties "GtkCenterLayout")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCenterLayout")))
+             (glib-test:list-signals "GtkCenterLayout")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterLayout" GTK-CENTER-LAYOUT
-                               (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_center_layout_get_type")
-                               ((SHRINK-CENTER-LAST
-                                 GTK-CENTER-LAYOUT-SHRINK-CENTER-LAST
-                                 "shrink-center-last" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkCenterLayout"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCenterLayout" GTK:CENTER-LAYOUT
+                      (:SUPERCLASS GTK:LAYOUT-MANAGER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_center_layout_get_type")
+                      ((SHRINK-CENTER-LAST CENTER-LAYOUT-SHRINK-CENTER-LAST
+                        "shrink-center-last" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkCenterLayout"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -81,4 +81,4 @@
     (is (eq center (gtk:center-layout-center-widget layout)))
     (is (eq end (gtk:center-layout-end-widget layout)))))
 
-;;; 2024-7-27
+;;; 2024-9-19

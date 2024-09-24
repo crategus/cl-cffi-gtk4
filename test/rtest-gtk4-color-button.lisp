@@ -21,33 +21,34 @@
           (g:type-parent "GtkColorButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkColorButton")))
+             (glib-test:list-children "GtkColorButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkColorChooser")
-             (gtk-test:list-interfaces "GtkColorButton")))
+             (glib-test:list-interfaces "GtkColorButton")))
   ;; Check properties
   ;; RGBA and USE-ALPHA are inherited from the GtkColorChooser interface
   (is (equal '("modal" "rgba" "show-editor" "title" "use-alpha")
-             (gtk-test:list-properties "GtkColorButton")))
+             (glib-test:list-properties "GtkColorButton")))
   ;; Check signals
   (is (equal '("activate" "color-set")
-             (gtk-test:list-signals "GtkColorButton")))
+             (glib-test:list-signals "GtkColorButton")))
   ;; Check CSS information
   (is (string= "colorbutton"
                (gtk:widget-class-css-name "GtkColorButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorButton" GTK-COLOR-BUTTON
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorButton" GTK:COLOR-BUTTON
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
                          "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_color_button_get_type")
-                       ((MODAL GTK-COLOR-BUTTON-MODAL "modal" "gboolean" T T)
-                        (SHOW-EDITOR GTK-COLOR-BUTTON-SHOW-EDITOR "show-editor"
-                         "gboolean" T T)
-                        (TITLE GTK-COLOR-BUTTON-TITLE "title" "gchararray" T
-                         T)))
-             (gobject:get-g-type-definition "GtkColorButton"))))
+                       ((MODAL COLOR-BUTTON-MODAL "modal" "gboolean" T T)
+                        (SHOW-EDITOR COLOR-BUTTON-SHOW-EDITOR
+                         "show-editor" "gboolean" T T)
+                        (TITLE COLOR-BUTTON-TITLE "title" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkColorButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -111,4 +112,4 @@
                  (gdk:rgba-to-string (gtk:color-chooser-rgba button))))
     (is-false (gtk:color-chooser-use-alpha button))))
 
-;;; 2024-6-1
+;;; 2024-9-20

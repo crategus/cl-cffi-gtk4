@@ -21,22 +21,24 @@
           (g:type-parent "GtkPageSetup")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPageSetup")))
+             (glib-test:list-children "GtkPageSetup")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkPageSetup")))
+             (glib-test:list-interfaces "GtkPageSetup")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkPageSetup")))
+             (glib-test:list-properties "GtkPageSetup")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkPageSetup")))
+             (glib-test:list-signals "GtkPageSetup")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPageSetup" GTK-PAGE-SETUP
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_page_setup_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkPageSetup"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPageSetup" GTK:PAGE-SETUP
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_page_setup_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkPageSetup"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -48,7 +50,7 @@
 ;;;     gtk_page_setup_new_from_file
 
 (test gtk-page-setup-new-from-file
-  (let ((path (sys-path "resource/page-setup.ini")))
+  (let ((path (glib-sys:sys-path "test/resource/page-setup.ini")))
     (is (typep (gtk:page-setup-new-from-file path) 'gtk:page-setup))
     (is (typep (gtk:page-setup-new-from-file (namestring path))
                'gtk:page-setup))))
@@ -57,7 +59,7 @@
 
 (test gtk-page-setup-new-from-key-file
   (glib:with-g-key-file (keyfile)
-    (let ((path (sys-path "resource/page-setup.ini")))
+    (let ((path (glib-sys:sys-path "test/resource/page-setup.ini")))
       (is-true (g:key-file-load-from-file keyfile path :none))
       (is (typep (gtk:page-setup-new-from-key-file keyfile nil)
                  'gtk:page-setup)))))
@@ -165,7 +167,7 @@
 
 (test gtk-page-setup-load-file
   (let ((setup (gtk:page-setup-new))
-        (path (sys-path "resource/page-setup.ini")))
+        (path (glib-sys:sys-path "test/resource/page-setup.ini")))
     (is-true (gtk:page-setup-load-file setup path))
     (is-true (gtk:page-setup-load-file setup (namestring path)))))
 
@@ -174,7 +176,7 @@
 (test gtk-page-setup-load-key-file
   (glib:with-g-key-file (keyfile)
     (let ((setup (gtk:page-setup-new))
-          (path (sys-path "resource/page-setup.ini")))
+          (path (glib-sys:sys-path "test/resource/page-setup.ini")))
       (is-true (g:key-file-load-from-file keyfile path :none))
       (is-true (gtk:page-setup-load-key-file setup keyfile nil)))))
 
@@ -182,7 +184,7 @@
 
 (test gtk-page-setup-to-file
   (let ((setup (gtk:page-setup-new))
-        (path (sys-path "out/page-setup.txt")))
+        (path (glib-sys:sys-path "test/out/page-setup.txt")))
     (is-true (gtk:page-setup-to-file setup path))
     (is-true (gtk:page-setup-to-file setup (namestring path)))))
 
@@ -191,7 +193,7 @@
 (test gtk-page-setup-to-key-file
   (glib:with-g-key-file (keyfile)
     (let ((setup (gtk:page-setup-new))
-          (path (sys-path "out/page-setup.ini")))
+          (path (glib-sys:sys-path "test/out/page-setup.ini")))
       (is-false (gtk:page-setup-to-key-file setup keyfile nil))
       (is-true (g:key-file-save-to-file keyfile path)))))
 
@@ -205,4 +207,4 @@
     (is (string= "{'PPDName': <'A4'>, 'DisplayName': <'A4'>, 'Width': <210.0>, 'Height': <297.0>, 'MarginTop': <6.3499999999999996>, 'MarginBottom': <14.224>, 'MarginLeft': <6.3499999999999996>, 'MarginRight': <6.3499999999999996>, 'Orientation': <'portrait'>}"
                  (g:variant-print variant)))))
 
-;;; 2024-4-30
+;;; 2024-9-20

@@ -155,24 +155,23 @@
           (g:type-parent "GtkArrayListStore")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkArrayListStore")))
+             (glib-test:list-children "GtkArrayListStore")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel")
-             (gtk-test:list-interfaces "GtkArrayListStore")))
+             (glib-test:list-interfaces "GtkArrayListStore")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkArrayListStore")))
+             (glib-test:list-properties "GtkArrayListStore")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkArrayListStore")))
+             (glib-test:list-signals "GtkArrayListStore")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkArrayListStore"
-                                             GTK-ARRAY-LIST-STORE
-                               (:SUPERCLASS G-OBJECT
-                                :EXPORT T
-                                :INTERFACES ("GtkTreeModel"))
-                               NIL)
-             (gobject:get-g-type-definition "GtkArrayListStore"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkArrayListStore" GTK:ARRAY-LIST-STORE
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GtkTreeModel"))
+                       NIL)
+             (gobject:get-gtype-definition "GtkArrayListStore"))))
 
 (test array-list-store-item
   (let ((*gtk-warn-deprecated* nil))

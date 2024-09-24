@@ -19,22 +19,21 @@
           (glib:symbol-for-gtype "GtkScrollablePolicy")))
   ;; Check names
   (is (equal '("GTK_SCROLL_MINIMUM" "GTK_SCROLL_NATURAL")
-             (gtk-test:list-enum-item-name "GtkScrollablePolicy")))
+             (glib-test:list-enum-item-names "GtkScrollablePolicy")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkScrollablePolicy")))
+             (glib-test:list-enum-item-values "GtkScrollablePolicy")))
   ;; Check nick names
   (is (equal '("minimum" "natural")
-             (gtk-test:list-enum-item-nick "GtkScrollablePolicy")))
+             (glib-test:list-enum-item-nicks "GtkScrollablePolicy")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkScrollablePolicy"
-                             GTK-SCROLLABLE-POLICY
-                             (:EXPORT T
-                              :TYPE-INITIALIZER
-                              "gtk_scrollable_policy_get_type")
-                             (:MINIMUM 0)
-                             (:NATURAL 1))
-             (gobject:get-g-type-definition "GtkScrollablePolicy"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkScrollablePolicy" GTK:SCROLLABLE-POLICY
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_scrollable_policy_get_type")
+                                    (:MINIMUM 0)
+                                    (:NATURAL 1))
+             (gobject:get-gtype-definition "GtkScrollablePolicy"))))
 
 ;;;     GtkScrollable
 
@@ -49,25 +48,26 @@
           (g:gtype (cffi:foreign-funcall "gtk_scrollable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (gtk-test:list-interface-prerequisites "GtkScrollable")))
+             (glib-test:list-interface-prerequisites "GtkScrollable")))
   ;; Check interface properties
   (is (equal '("hadjustment" "hscroll-policy" "vadjustment" "vscroll-policy")
-             (gtk-test:list-interface-properties "GtkScrollable")))
+             (glib-test:list-interface-properties "GtkScrollable")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkScrollable")))
+             (glib-test:list-signals "GtkScrollable")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkScrollable" GTK-SCROLLABLE
-                    (:EXPORT T :TYPE-INITIALIZER "gtk_scrollable_get_type")
-                    (HADJUSTMENT GTK-SCROLLABLE-HADJUSTMENT "hadjustment"
-                     "GtkAdjustment" T T)
-                    (HSCROLL-POLICY GTK-SCROLLABLE-HSCROLL-POLICY
-                     "hscroll-policy" "GtkScrollablePolicy" T T)
-                    (VADJUSTMENT GTK-SCROLLABLE-VADJUSTMENT "vadjustment"
-                     "GtkAdjustment" T T)
-                    (VSCROLL-POLICY GTK-SCROLLABLE-VSCROLL-POLICY
-                     "vscroll-policy" "GtkScrollablePolicy" T T))
-             (gobject:get-g-type-definition "GtkScrollable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkScrollable" GTK:SCROLLABLE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_scrollable_get_type")
+                       (HADJUSTMENT SCROLLABLE-HADJUSTMENT
+                        "hadjustment" "GtkAdjustment" T T)
+                       (HSCROLL-POLICY SCROLLABLE-HSCROLL-POLICY
+                        "hscroll-policy" "GtkScrollablePolicy" T T)
+                       (VADJUSTMENT SCROLLABLE-VADJUSTMENT
+                        "vadjustment" "GtkAdjustment" T T)
+                       (VSCROLL-POLICY SCROLLABLE-VSCROLL-POLICY
+                        "vscroll-policy" "GtkScrollablePolicy" T T))
+             (gobject:get-gtype-definition "GtkScrollable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -89,4 +89,4 @@
     (is-false (setf border
                     (gtk:scrollable-border scrollable)))))
 
-;;; 2024-5-18
+;;; 2024-9-19

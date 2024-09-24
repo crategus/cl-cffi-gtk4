@@ -22,32 +22,33 @@
           (g:type-parent "GtkCellAreaContext")))
   ;; Check children
   (is (equal '("GtkCellAreaBoxContext")
-             (gtk-test:list-children "GtkCellAreaContext")))
+             (glib-test:list-children "GtkCellAreaContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellAreaContext")))
+             (glib-test:list-interfaces "GtkCellAreaContext")))
   ;; Check class properties
   (is (equal '("area" "minimum-height" "minimum-width"
                       "natural-height" "natural-width")
-             (gtk-test:list-properties "GtkCellAreaContext")))
+             (glib-test:list-properties "GtkCellAreaContext")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCellAreaContext")))
+             (glib-test:list-signals "GtkCellAreaContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellAreaContext" GTK-CELL-AREA-CONTEXT
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellAreaContext" GTK:CELL-AREA-CONTEXT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_cell_area_context_get_type")
-                       ((AREA GTK-CELL-AREA-CONTEXT-AREA "area" "GtkCellArea" T
-                         NIL)
-                        (MINIMUM-HEIGHT GTK-CELL-AREA-CONTEXT-MINIMUM-HEIGHT
+                       ((AREA CELL-AREA-CONTEXT-AREA "area" "GtkCellArea" T NIL)
+                        (MINIMUM-HEIGHT CELL-AREA-CONTEXT-MINIMUM-HEIGHT
                          "minimum-height" "gint" T NIL)
-                        (MINIMUM-WIDTH GTK-CELL-AREA-CONTEXT-MINIMUM-WIDTH
+                        (MINIMUM-WIDTH CELL-AREA-CONTEXT-MINIMUM-WIDTH
                          "minimum-width" "gint" T NIL)
-                        (NATURAL-HEIGHT GTK-CELL-AREA-CONTEXT-NATURAL-HEIGHT
+                        (NATURAL-HEIGHT CELL-AREA-CONTEXT-NATURAL-HEIGHT
                          "natural-height" "gint" T NIL)
-                        (NATURAL-WIDTH GTK-CELL-AREA-CONTEXT-NATURAL-WIDTH
+                        (NATURAL-WIDTH CELL-AREA-CONTEXT-NATURAL-WIDTH
                          "natural-width" "gint" T NIL)))
-             (gobject:get-g-type-definition "GtkCellAreaContext"))))
+             (gobject:get-gtype-definition "GtkCellAreaContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -75,4 +76,4 @@
 ;;;     gtk_cell_area_context_push_preferred_width
 ;;;     gtk_cell_area_context_push_preferred_height
 
-;;; 2024-2-21
+;;; 2024-9-20

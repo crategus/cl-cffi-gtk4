@@ -21,10 +21,10 @@
           (g:type-parent "GtkTextTag")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextTag")))
+             (glib-test:list-children "GtkTextTag")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkTextTag")))
+             (glib-test:list-interfaces "GtkTextTag")))
   ;; Check properties
   (is (equal '("accumulative-margin" "allow-breaks" "allow-breaks-set"
                "background" "background-full-height"
@@ -51,212 +51,174 @@
                "underline-rgba-set" "underline-set" "variant" "variant-set"
                "weight" "weight-set" "word" "word-set" "wrap-mode"
                "wrap-mode-set")
-             (gtk-test:list-properties "GtkTextTag")))
+             (glib-test:list-properties "GtkTextTag")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTextTag")))
+             (glib-test:list-signals "GtkTextTag")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextTag" GTK-TEXT-TAG
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_text_tag_get_type")
-                               ((ACCUMULATIVE-MARGIN
-                                 GTK-TEXT-TAG-ACCUMULATIVE-MARGIN
-                                 "accumulative-margin" "gboolean" T T)
-                                (ALLOW-BREAKS GTK-TEXT-TAG-ALLOW-BREAKS
-                                 "allow-breaks" "gboolean" T T)
-                                (ALLOW-BREAKS-SET GTK-TEXT-TAG-ALLOW-BREAKS-SET
-                                 "allow-breaks-set" "gboolean" T T)
-                                (BACKGROUND GTK-TEXT-TAG-BACKGROUND
-                                 "background" "gchararray" NIL T)
-                                (BACKGROUND-FULL-HEIGHT
-                                 GTK-TEXT-TAG-BACKGROUND-FULL-HEIGHT
-                                 "background-full-height" "gboolean" T T)
-                                (BACKGROUND-FULL-HEIGHT-SET
-                                 GTK-TEXT-TAG-BACKGROUND-FULL-HEIGHT-SET
-                                 "background-full-height-set" "gboolean" T T)
-                                (BACKGROUND-RGBA GTK-TEXT-TAG-BACKGROUND-RGBA
-                                 "background-rgba" "GdkRGBA" T T)
-                                (BACKGROUND-SET GTK-TEXT-TAG-BACKGROUND-SET
-                                 "background-set" "gboolean" T T)
-                                (DIRECTION GTK-TEXT-TAG-DIRECTION "direction"
-                                 "GtkTextDirection" T T)
-                                (EDITABLE GTK-TEXT-TAG-EDITABLE "editable"
-                                 "gboolean" T T)
-                                (EDITABLE-SET GTK-TEXT-TAG-EDITABLE-SET
-                                 "editable-set" "gboolean" T T)
-                                (FALLBACK GTK-TEXT-TAG-FALLBACK "fallback"
-                                 "gboolean" T T)
-                                (FALLBACK-SET GTK-TEXT-TAG-FALLBACK-SET
-                                 "fallback-set" "gboolean" T T)
-                                (FAMILY GTK-TEXT-TAG-FAMILY "family"
-                                 "gchararray" T T)
-                                (FAMILY-SET GTK-TEXT-TAG-FAMILY-SET
-                                 "family-set" "gboolean" T T)
-                                (FONT GTK-TEXT-TAG-FONT "font" "gchararray" T
-                                 T)
-                                (FONT-DESC GTK-TEXT-TAG-FONT-DESC "font-desc"
-                                 "PangoFontDescription" T T)
-                                (FONT-FEATURES GTK-TEXT-TAG-FONT-FEATURES
-                                 "font-features" "gchararray" T T)
-                                (FONT-FEATURES-SET
-                                 GTK-TEXT-TAG-FONT-FEATURES-SET
-                                 "font-features-set" "gboolean" T T)
-                                (FOREGROUND GTK-TEXT-TAG-FOREGROUND
-                                 "foreground" "gchararray" NIL T)
-                                (FOREGROUND-RGBA GTK-TEXT-TAG-FOREGROUND-RGBA
-                                 "foreground-rgba" "GdkRGBA" T T)
-                                (FOREGROUND-SET GTK-TEXT-TAG-FOREGROUND-SET
-                                 "foreground-set" "gboolean" T T)
-                                (INDENT GTK-TEXT-TAG-INDENT "indent" "gint" T
-                                 T)
-                                (INDENT-SET GTK-TEXT-TAG-INDENT-SET
-                                 "indent-set" "gboolean" T T)
-                                (INSERT-HYPHENS GTK-TEXT-TAG-INSERT-HYPHENS
-                                 "insert-hyphens" "gboolean" T T)
-                                (INSERT-HYPHENS-SET
-                                 GTK-TEXT-TAG-INSERT-HYPHENS-SET
-                                 "insert-hyphens-set" "gboolean" T T)
-                                (INVISIBLE GTK-TEXT-TAG-INVISIBLE "invisible"
-                                 "gboolean" T T)
-                                (INVISIBLE-SET GTK-TEXT-TAG-INVISIBLE-SET
-                                 "invisible-set" "gboolean" T T)
-                                (JUSTIFICATION GTK-TEXT-TAG-JUSTIFICATION
-                                 "justification" "GtkJustification" T T)
-                                (JUSTIFICATION-SET
-                                 GTK-TEXT-TAG-JUSTIFICATION-SET
-                                 "justification-set" "gboolean" T T)
-                                (LANGUAGE GTK-TEXT-TAG-LANGUAGE "language"
-                                 "gchararray" T T)
-                                (LANGUAGE-SET GTK-TEXT-TAG-LANGUAGE-SET
-                                 "language-set" "gboolean" T T)
-                                (LEFT-MARGIN GTK-TEXT-TAG-LEFT-MARGIN
-                                 "left-margin" "gint" T T)
-                                (LEFT-MARGIN-SET GTK-TEXT-TAG-LEFT-MARGIN-SET
-                                 "left-margin-set" "gboolean" T T)
-                                (LETTER-SPACING GTK-TEXT-TAG-LETTER-SPACING
-                                 "letter-spacing" "gint" T T)
-                                (LETTER-SPACING-SET
-                                 GTK-TEXT-TAG-LETTER-SPACING-SET
-                                 "letter-spacing-set" "gboolean" T T)
-                                (LINE-HEIGHT GTK-TEXT-TAG-LINE-HEIGHT
-                                 "line-height" "gfloat" T T)
-                                (LINE-HEIGHT-SET GTK-TEXT-TAG-LINE-HEIGHT-SET
-                                 "line-height-set" "gboolean" T T)
-                                (NAME GTK-TEXT-TAG-NAME "name" "gchararray" T
-                                 NIL)
-                                (OVERLINE GTK-TEXT-TAG-OVERLINE "overline"
-                                 "PangoOverline" T T)
-                                (OVERLINE-RGBA GTK-TEXT-TAG-OVERLINE-RGBA
-                                 "overline-rgba" "GdkRGBA" T T)
-                                (OVERLINE-RGBA-SET
-                                 GTK-TEXT-TAG-OVERLINE-RGBA-SET
-                                 "overline-rgba-set" "gboolean" T T)
-                                (OVERLINE-SET GTK-TEXT-TAG-OVERLINE-SET
-                                 "overline-set" "gboolean" T T)
-                                (PARAGRAPH-BACKGROUND
-                                 GTK-TEXT-TAG-PARAGRAPH-BACKGROUND
-                                 "paragraph-background" "gchararray" NIL T)
-                                (PARAGRAPH-BACKGROUND-RGBA
-                                 GTK-TEXT-TAG-PARAGRAPH-BACKGROUND-RGBA
-                                 "paragraph-background-rgba" "GdkRGBA" T T)
-                                (PARAGRAPH-BACKGROUND-SET
-                                 GTK-TEXT-TAG-PARAGRAPH-BACKGROUND-SET
-                                 "paragraph-background-set" "gboolean" T T)
-                                (PIXELS-ABOVE-LINES
-                                 GTK-TEXT-TAG-PIXELS-ABOVE-LINES
-                                 "pixels-above-lines" "gint" T T)
-                                (PIXELS-ABOVE-LINES-SET
-                                 GTK-TEXT-TAG-PIXELS-ABOVE-LINES-SET
-                                 "pixels-above-lines-set" "gboolean" T T)
-                                (PIXELS-BELOW-LINES
-                                 GTK-TEXT-TAG-PIXELS-BELOW-LINES
-                                 "pixels-below-lines" "gint" T T)
-                                (PIXELS-BELOW-LINES-SET
-                                 GTK-TEXT-TAG-PIXELS-BELOW-LINES-SET
-                                 "pixels-below-lines-set" "gboolean" T T)
-                                (PIXELS-INSIDE-WRAP
-                                 GTK-TEXT-TAG-PIXELS-INSIDE-WRAP
-                                 "pixels-inside-wrap" "gint" T T)
-                                (PIXELS-INSIDE-WRAP-SET
-                                 GTK-TEXT-TAG-PIXELS-INSIDE-WRAP-SET
-                                 "pixels-inside-wrap-set" "gboolean" T T)
-                                (RIGHT-MARGIN GTK-TEXT-TAG-RIGHT-MARGIN
-                                 "right-margin" "gint" T T)
-                                (RIGHT-MARGIN-SET GTK-TEXT-TAG-RIGHT-MARGIN-SET
-                                 "right-margin-set" "gboolean" T T)
-                                (RISE GTK-TEXT-TAG-RISE "rise" "gint" T T)
-                                (RISE-SET GTK-TEXT-TAG-RISE-SET "rise-set"
-                                 "gboolean" T T)
-                                (SCALE GTK-TEXT-TAG-SCALE "scale" "gdouble" T
-                                 T)
-                                (SCALE-SET GTK-TEXT-TAG-SCALE-SET "scale-set"
-                                 "gboolean" T T)
-                                (SENTENCE GTK-TEXT-TAG-SENTENCE "sentence"
-                                 "gboolean" T T)
-                                (SENTENCE-SET GTK-TEXT-TAG-SENTENCE-SET
-                                 "sentence-set" "gboolean" T T)
-                                (SHOW-SPACES GTK-TEXT-TAG-SHOW-SPACES
-                                 "show-spaces" "PangoShowFlags" T T)
-                                (SHOW-SPACES-SET GTK-TEXT-TAG-SHOW-SPACES-SET
-                                 "show-spaces-set" "gboolean" T T)
-                                (SIZE GTK-TEXT-TAG-SIZE "size" "gint" T T)
-                                (SIZE-POINTS GTK-TEXT-TAG-SIZE-POINTS
-                                 "size-points" "gdouble" T T)
-                                (SIZE-SET GTK-TEXT-TAG-SIZE-SET "size-set"
-                                 "gboolean" T T)
-                                (STRETCH GTK-TEXT-TAG-STRETCH "stretch"
-                                 "PangoStretch" T T)
-                                (STRETCH-SET GTK-TEXT-TAG-STRETCH-SET
-                                 "stretch-set" "gboolean" T T)
-                                (STRIKETHROUGH GTK-TEXT-TAG-STRIKETHROUGH
-                                 "strikethrough" "gboolean" T T)
-                                (STRIKETHROUGH-RGBA
-                                 GTK-TEXT-TAG-STRIKETHROUGH-RGBA
-                                 "strikethrough-rgba" "GdkRGBA" T T)
-                                (STRIKETHROUGH-RGBA-SET
-                                 GTK-TEXT-TAG-STRIKETHROUGH-RGBA-SET
-                                 "strikethrough-rgba-set" "gboolean" T T)
-                                (STRIKETHROUGH-SET
-                                 GTK-TEXT-TAG-STRIKETHROUGH-SET
-                                 "strikethrough-set" "gboolean" T T)
-                                (STYLE GTK-TEXT-TAG-STYLE "style" "PangoStyle"
-                                 T T)
-                                (STYLE-SET GTK-TEXT-TAG-STYLE-SET "style-set"
-                                 "gboolean" T T)
-                                (TABS GTK-TEXT-TAG-TABS "tabs" "PangoTabArray"
-                                 T T)
-                                (TABS-SET GTK-TEXT-TAG-TABS-SET "tabs-set"
-                                 "gboolean" T T)
-                                (TEXT-TRANSFORM GTK-TEXT-TAG-TEXT-TRANSFORM
-                                 "text-transform" "PangoTextTransform" T T)
-                                (TEXT-TRANSFORM-SET
-                                 GTK-TEXT-TAG-TEXT-TRANSFORM-SET
-                                 "text-transform-set" "gboolean" T T)
-                                (UNDERLINE GTK-TEXT-TAG-UNDERLINE "underline"
-                                 "PangoUnderline" T T)
-                                (UNDERLINE-RGBA GTK-TEXT-TAG-UNDERLINE-RGBA
-                                 "underline-rgba" "GdkRGBA" T T)
-                                (UNDERLINE-RGBA-SET
-                                 GTK-TEXT-TAG-UNDERLINE-RGBA-SET
-                                 "underline-rgba-set" "gboolean" T T)
-                                (UNDERLINE-SET GTK-TEXT-TAG-UNDERLINE-SET
-                                 "underline-set" "gboolean" T T)
-                                (VARIANT GTK-TEXT-TAG-VARIANT "variant"
-                                 "PangoVariant" T T)
-                                (VARIANT-SET GTK-TEXT-TAG-VARIANT-SET
-                                 "variant-set" "gboolean" T T)
-                                (WEIGHT GTK-TEXT-TAG-WEIGHT "weight" "gint" T
-                                 T)
-                                (WEIGHT-SET GTK-TEXT-TAG-WEIGHT-SET
-                                 "weight-set" "gboolean" T T)
-                                (WORD GTK-TEXT-TAG-WORD "word" "gboolean" T T)
-                                (WORD-SET GTK-TEXT-TAG-WORD-SET "word-set"
-                                 "gboolean" T T)
-                                (WRAP-MODE GTK-TEXT-TAG-WRAP-MODE "wrap-mode"
-                                 "GtkWrapMode" T T)
-                                (WRAP-MODE-SET GTK-TEXT-TAG-WRAP-MODE-SET
-                                 "wrap-mode-set" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkTextTag"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextTag" GTK:TEXT-TAG
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_text_tag_get_type")
+                      ((ACCUMULATIVE-MARGIN TEXT-TAG-ACCUMULATIVE-MARGIN
+                        "accumulative-margin" "gboolean" T T)
+                       (ALLOW-BREAKS TEXT-TAG-ALLOW-BREAKS
+                        "allow-breaks" "gboolean" T T)
+                       (ALLOW-BREAKS-SET TEXT-TAG-ALLOW-BREAKS-SET
+                        "allow-breaks-set" "gboolean" T T)
+                       (BACKGROUND TEXT-TAG-BACKGROUND
+                        "background" "gchararray" NIL T)
+                       (BACKGROUND-FULL-HEIGHT TEXT-TAG-BACKGROUND-FULL-HEIGHT
+                        "background-full-height" "gboolean" T T)
+                       (BACKGROUND-FULL-HEIGHT-SET
+                        TEXT-TAG-BACKGROUND-FULL-HEIGHT-SET
+                        "background-full-height-set" "gboolean" T T)
+                       (BACKGROUND-RGBA TEXT-TAG-BACKGROUND-RGBA
+                        "background-rgba" "GdkRGBA" T T)
+                       (BACKGROUND-SET TEXT-TAG-BACKGROUND-SET
+                        "background-set" "gboolean" T T)
+                       (DIRECTION TEXT-TAG-DIRECTION "direction"
+                        "GtkTextDirection" T T)
+                       (EDITABLE TEXT-TAG-EDITABLE "editable" "gboolean" T T)
+                       (EDITABLE-SET TEXT-TAG-EDITABLE-SET
+                        "editable-set" "gboolean" T T)
+                       (FALLBACK TEXT-TAG-FALLBACK "fallback" "gboolean" T T)
+                       (FALLBACK-SET TEXT-TAG-FALLBACK-SET
+                        "fallback-set" "gboolean" T T)
+                       (FAMILY TEXT-TAG-FAMILY "family" "gchararray" T T)
+                       (FAMILY-SET TEXT-TAG-FAMILY-SET
+                        "family-set" "gboolean" T T)
+                       (FONT TEXT-TAG-FONT "font" "gchararray" T T)
+                       (FONT-DESC TEXT-TAG-FONT-DESC
+                        "font-desc" "PangoFontDescription" T T)
+                       (FONT-FEATURES TEXT-TAG-FONT-FEATURES
+                        "font-features" "gchararray" T T)
+                       (FONT-FEATURES-SET TEXT-TAG-FONT-FEATURES-SET
+                        "font-features-set" "gboolean" T T)
+                       (FOREGROUND TEXT-TAG-FOREGROUND
+                        "foreground" "gchararray" NIL T)
+                       (FOREGROUND-RGBA TEXT-TAG-FOREGROUND-RGBA
+                        "foreground-rgba" "GdkRGBA" T T)
+                       (FOREGROUND-SET TEXT-TAG-FOREGROUND-SET
+                        "foreground-set" "gboolean" T T)
+                       (INDENT TEXT-TAG-INDENT "indent" "gint" T T)
+                       (INDENT-SET TEXT-TAG-INDENT-SET
+                        "indent-set" "gboolean" T T)
+                       (INSERT-HYPHENS TEXT-TAG-INSERT-HYPHENS
+                        "insert-hyphens" "gboolean" T T)
+                       (INSERT-HYPHENS-SET TEXT-TAG-INSERT-HYPHENS-SET
+                        "insert-hyphens-set" "gboolean" T T)
+                       (INVISIBLE TEXT-TAG-INVISIBLE "invisible" "gboolean" T T)
+                       (INVISIBLE-SET TEXT-TAG-INVISIBLE-SET
+                        "invisible-set" "gboolean" T T)
+                       (JUSTIFICATION TEXT-TAG-JUSTIFICATION
+                        "justification" "GtkJustification" T T)
+                       (JUSTIFICATION-SET TEXT-TAG-JUSTIFICATION-SET
+                        "justification-set" "gboolean" T T)
+                       (LANGUAGE TEXT-TAG-LANGUAGE "language" "gchararray" T T)
+                       (LANGUAGE-SET TEXT-TAG-LANGUAGE-SET
+                        "language-set" "gboolean" T T)
+                       (LEFT-MARGIN TEXT-TAG-LEFT-MARGIN
+                        "left-margin" "gint" T T)
+                       (LEFT-MARGIN-SET TEXT-TAG-LEFT-MARGIN-SET
+                        "left-margin-set" "gboolean" T T)
+                       (LETTER-SPACING TEXT-TAG-LETTER-SPACING
+                        "letter-spacing" "gint" T T)
+                       (LETTER-SPACING-SET TEXT-TAG-LETTER-SPACING-SET
+                        "letter-spacing-set" "gboolean" T T)
+                       (LINE-HEIGHT TEXT-TAG-LINE-HEIGHT
+                        "line-height" "gfloat" T T)
+                       (LINE-HEIGHT-SET TEXT-TAG-LINE-HEIGHT-SET
+                        "line-height-set" "gboolean" T T)
+                       (NAME TEXT-TAG-NAME "name" "gchararray" T NIL)
+                       (OVERLINE TEXT-TAG-OVERLINE
+                        "overline" "PangoOverline" T T)
+                       (OVERLINE-RGBA TEXT-TAG-OVERLINE-RGBA
+                        "overline-rgba" "GdkRGBA" T T)
+                       (OVERLINE-RGBA-SET TEXT-TAG-OVERLINE-RGBA-SET
+                        "overline-rgba-set" "gboolean" T T)
+                       (OVERLINE-SET TEXT-TAG-OVERLINE-SET
+                        "overline-set" "gboolean" T T)
+                       (PARAGRAPH-BACKGROUND TEXT-TAG-PARAGRAPH-BACKGROUND
+                        "paragraph-background" "gchararray" NIL T)
+                       (PARAGRAPH-BACKGROUND-RGBA
+                        TEXT-TAG-PARAGRAPH-BACKGROUND-RGBA
+                        "paragraph-background-rgba" "GdkRGBA" T T)
+                       (PARAGRAPH-BACKGROUND-SET
+                        TEXT-TAG-PARAGRAPH-BACKGROUND-SET
+                        "paragraph-background-set" "gboolean" T T)
+                       (PIXELS-ABOVE-LINES TEXT-TAG-PIXELS-ABOVE-LINES
+                        "pixels-above-lines" "gint" T T)
+                       (PIXELS-ABOVE-LINES-SET TEXT-TAG-PIXELS-ABOVE-LINES-SET
+                        "pixels-above-lines-set" "gboolean" T T)
+                       (PIXELS-BELOW-LINES TEXT-TAG-PIXELS-BELOW-LINES
+                        "pixels-below-lines" "gint" T T)
+                       (PIXELS-BELOW-LINES-SET TEXT-TAG-PIXELS-BELOW-LINES-SET
+                        "pixels-below-lines-set" "gboolean" T T)
+                       (PIXELS-INSIDE-WRAP TEXT-TAG-PIXELS-INSIDE-WRAP
+                        "pixels-inside-wrap" "gint" T T)
+                       (PIXELS-INSIDE-WRAP-SET TEXT-TAG-PIXELS-INSIDE-WRAP-SET
+                        "pixels-inside-wrap-set" "gboolean" T T)
+                       (RIGHT-MARGIN TEXT-TAG-RIGHT-MARGIN
+                        "right-margin" "gint" T T)
+                       (RIGHT-MARGIN-SET TEXT-TAG-RIGHT-MARGIN-SET
+                        "right-margin-set" "gboolean" T T)
+                       (RISE TEXT-TAG-RISE "rise" "gint" T T)
+                       (RISE-SET TEXT-TAG-RISE-SET "rise-set" "gboolean" T T)
+                       (SCALE TEXT-TAG-SCALE "scale" "gdouble" T T)
+                       (SCALE-SET TEXT-TAG-SCALE-SET "scale-set" "gboolean" T T)
+                       (SENTENCE TEXT-TAG-SENTENCE "sentence" "gboolean" T T)
+                       (SENTENCE-SET TEXT-TAG-SENTENCE-SET
+                        "sentence-set" "gboolean" T T)
+                       (SHOW-SPACES TEXT-TAG-SHOW-SPACES
+                        "show-spaces" "PangoShowFlags" T T)
+                       (SHOW-SPACES-SET TEXT-TAG-SHOW-SPACES-SET
+                        "show-spaces-set" "gboolean" T T)
+                       (SIZE TEXT-TAG-SIZE "size" "gint" T T)
+                       (SIZE-POINTS TEXT-TAG-SIZE-POINTS
+                        "size-points" "gdouble" T T)
+                       (SIZE-SET TEXT-TAG-SIZE-SET "size-set" "gboolean" T T)
+                       (STRETCH TEXT-TAG-STRETCH "stretch" "PangoStretch" T T)
+                       (STRETCH-SET TEXT-TAG-STRETCH-SET
+                        "stretch-set" "gboolean" T T)
+                       (STRIKETHROUGH TEXT-TAG-STRIKETHROUGH
+                        "strikethrough" "gboolean" T T)
+                       (STRIKETHROUGH-RGBA TEXT-TAG-STRIKETHROUGH-RGBA
+                        "strikethrough-rgba" "GdkRGBA" T T)
+                       (STRIKETHROUGH-RGBA-SET TEXT-TAG-STRIKETHROUGH-RGBA-SET
+                        "strikethrough-rgba-set" "gboolean" T T)
+                       (STRIKETHROUGH-SET TEXT-TAG-STRIKETHROUGH-SET
+                        "strikethrough-set" "gboolean" T T)
+                       (STYLE TEXT-TAG-STYLE "style" "PangoStyle" T T)
+                       (STYLE-SET TEXT-TAG-STYLE-SET "style-set" "gboolean" T T)
+                       (TABS TEXT-TAG-TABS "tabs" "PangoTabArray" T T)
+                       (TABS-SET TEXT-TAG-TABS-SET "tabs-set" "gboolean" T T)
+                       (TEXT-TRANSFORM TEXT-TAG-TEXT-TRANSFORM
+                        "text-transform" "PangoTextTransform" T T)
+                       (TEXT-TRANSFORM-SET TEXT-TAG-TEXT-TRANSFORM-SET
+                        "text-transform-set" "gboolean" T T)
+                       (UNDERLINE TEXT-TAG-UNDERLINE
+                        "underline" "PangoUnderline" T T)
+                       (UNDERLINE-RGBA TEXT-TAG-UNDERLINE-RGBA
+                        "underline-rgba" "GdkRGBA" T T)
+                       (UNDERLINE-RGBA-SET TEXT-TAG-UNDERLINE-RGBA-SET
+                        "underline-rgba-set" "gboolean" T T)
+                       (UNDERLINE-SET TEXT-TAG-UNDERLINE-SET
+                        "underline-set" "gboolean" T T)
+                       (VARIANT TEXT-TAG-VARIANT "variant" "PangoVariant" T T)
+                       (VARIANT-SET TEXT-TAG-VARIANT-SET
+                        "variant-set" "gboolean" T T)
+                       (WEIGHT TEXT-TAG-WEIGHT "weight" "gint" T T)
+                       (WEIGHT-SET TEXT-TAG-WEIGHT-SET
+                        "weight-set" "gboolean" T T)
+                       (WORD TEXT-TAG-WORD "word" "gboolean" T T)
+                       (WORD-SET TEXT-TAG-WORD-SET "word-set" "gboolean" T T)
+                       (WRAP-MODE TEXT-TAG-WRAP-MODE
+                        "wrap-mode" "GtkWrapMode" T T)
+                       (WRAP-MODE-SET TEXT-TAG-WRAP-MODE-SET
+                        "wrap-mode-set" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkTextTag"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -526,4 +488,4 @@
     (is (= 20 (setf (gtk:text-tag-indent tag) 20)))
     (is (equal '("indent" "indent") message))))
 
-;;; 2024-7-2
+;;; 2024-9-20

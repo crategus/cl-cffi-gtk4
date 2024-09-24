@@ -21,33 +21,32 @@
           (g:type-parent "GtkComboBoxText")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkComboBoxText")))
+             (glib-test:list-children "GtkComboBoxText")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
-             (gtk-test:list-interfaces "GtkComboBoxText")))
+             (glib-test:list-interfaces "GtkComboBoxText")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkComboBoxText")))
+             (glib-test:list-properties "GtkComboBoxText")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkComboBoxText")))
+             (glib-test:list-signals "GtkComboBoxText")))
   ;; Check CSS name
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBoxText")))
   ;; Check accessible role
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBoxText")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBoxText"
-                                             GTK-COMBO-BOX-TEXT
-                               (:SUPERCLASS GTK-COMBO-BOX :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkCellEditable" "GtkCellLayout"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_combo_box_text_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkComboBoxText"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkComboBoxText" GTK:COMBO-BOX-TEXT
+                      (:SUPERCLASS GTK:COMBO-BOX
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
+                        "GtkCellLayout" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_combo_box_text_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkComboBoxText"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -91,4 +90,4 @@
       (is (string= "text" (setf (gtk:editable-text entry) "text")))
       (is (string= "text" (gtk:combo-box-text-active-text combo))))))
 
-;;; 2024-4-26
+;;; 2024-9-19

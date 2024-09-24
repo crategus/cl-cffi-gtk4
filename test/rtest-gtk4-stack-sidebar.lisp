@@ -21,30 +21,30 @@
           (g:type-parent "GtkStackSidebar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStackSidebar")))
+             (glib-test:list-children "GtkStackSidebar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkStackSidebar")))
+             (glib-test:list-interfaces "GtkStackSidebar")))
   ;; Check properties
   (is (equal '("stack")
-             (gtk-test:list-properties "GtkStackSidebar")))
+             (glib-test:list-properties "GtkStackSidebar")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStackSidebar")))
+             (glib-test:list-signals "GtkStackSidebar")))
   ;; Check CSS name
   (is (string= "stacksidebar"
                (gtk:widget-class-css-name "GtkStackSidebar")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStackSidebar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackSidebar" GTK-STACK-SIDEBAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_stack_sidebar_get_type")
-                               ((STACK GTK-STACK-SIDEBAR-STACK "stack"
-                                 "GtkStack" T T)))
-             (gobject:get-g-type-definition "GtkStackSidebar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStackSidebar" GTK:STACK-SIDEBAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_stack_sidebar_get_type")
+                      ((STACK STACK-SIDEBAR-STACK "stack" "GtkStack" T T)))
+             (gobject:get-gtype-definition "GtkStackSidebar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -65,4 +65,4 @@
 (test gtk-stack-sidebar-new
   (is (typep (gtk:stack-sidebar-new) 'gtk:stack-sidebar)))
 
-;;; 2024-7-3
+;;; 2024-9-19

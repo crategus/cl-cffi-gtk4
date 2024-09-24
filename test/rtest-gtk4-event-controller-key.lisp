@@ -22,24 +22,25 @@
           (g:type-parent "GtkEventControllerKey")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEventControllerKey")))
+             (glib-test:list-children "GtkEventControllerKey")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEventControllerKey")))
+             (glib-test:list-interfaces "GtkEventControllerKey")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkEventControllerKey")))
+             (glib-test:list-properties "GtkEventControllerKey")))
   ;; Check signals
   (is (equal '("im-update" "key-pressed" "key-released" "modifiers")
-             (gtk-test:list-signals "GtkEventControllerKey")))
+             (glib-test:list-signals "GtkEventControllerKey")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerKey"
-                                     GTK-EVENT-CONTROLLER-KEY
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
-                        "gtk_event_controller_key_get_type")
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEventControllerKey"
+                                      GTK:EVENT-CONTROLLER-KEY
+                       (:SUPERCLASS GTK:EVENT-CONTROLLER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_event_controller_key_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkEventControllerKey"))))
+             (gobject:get-gtype-definition "GtkEventControllerKey"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -140,4 +141,4 @@
   (let ((controller (gtk:event-controller-key-new)))
     (is (= 0 (gtk:event-controller-key-group controller)))))
 
-;;; 2024-7-27
+;;; 2024-9-20

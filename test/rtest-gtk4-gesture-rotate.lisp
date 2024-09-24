@@ -21,22 +21,24 @@
           (g:type-parent "GtkGestureRotate")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureRotate")))
+             (glib-test:list-children "GtkGestureRotate")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureRotate")))
+             (glib-test:list-interfaces "GtkGestureRotate")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkGestureRotate")))
+             (glib-test:list-properties "GtkGestureRotate")))
   ;; Check signals
   (is (equal '("angle-changed")
-             (gtk-test:list-signals "GtkGestureRotate")))
+             (glib-test:list-signals "GtkGestureRotate")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureRotate" GTK-GESTURE-ROTATE
-                       (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureRotate" GTK:GESTURE-ROTATE
+                       (:SUPERCLASS GTK:GESTURE
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_rotate_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkGestureRotate"))))
+             (gobject:get-gtype-definition "GtkGestureRotate"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -71,4 +73,4 @@
   (let ((gesture (gtk:gesture-rotate-new)))
     (is (= 0.0d0 (gtk:gesture-rotate-angle-delta gesture)))))
 
-;;; 2024-7-27
+;;; 2024-9-20

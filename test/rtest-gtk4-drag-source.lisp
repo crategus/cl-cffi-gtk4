@@ -21,25 +21,27 @@
           (g:type-parent "GtkDragSource")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDragSource")))
+             (glib-test:list-children "GtkDragSource")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkDragSource")))
+             (glib-test:list-interfaces "GtkDragSource")))
   ;; Check properties
   (is (equal '("actions" "content")
-             (gtk-test:list-properties "GtkDragSource")))
+             (glib-test:list-properties "GtkDragSource")))
   ;; Check signals
   (is (equal '("drag-begin" "drag-cancel" "drag-end" "prepare")
-             (gtk-test:list-signals "GtkDragSource")))
+             (glib-test:list-signals "GtkDragSource")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDragSource" GTK-DRAG-SOURCE
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_drag_source_get_type")
-                       ((ACTIONS GTK-DRAG-SOURCE-ACTIONS "actions"
-                         "GdkDragAction" T T)
-                        (CONTENT GTK-DRAG-SOURCE-CONTENT "content"
-                         "GdkContentProvider" T T)))
-             (gobject:get-g-type-definition "GtkDragSource"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDragSource" GTK:DRAG-SOURCE
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_drag_source_get_type")
+                       ((ACTIONS DRAG-SOURCE-ACTIONS
+                         "actions" "GdkDragAction" T T)
+                        (CONTENT DRAG-SOURCE-CONTENT
+                         "content" "GdkContentProvider" T T)))
+             (gobject:get-gtype-definition "GtkDragSource"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -61,4 +63,4 @@
 ;;;     gtk_drag_source_get_drag
 ;;;     gtk_drag_check_threshold
 
-;;; 2024-7-4
+;;; 2024-9-20

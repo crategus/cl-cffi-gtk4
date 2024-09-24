@@ -22,40 +22,40 @@
           (g:type-parent "GtkCellRendererPixbuf")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererPixbuf")))
+             (glib-test:list-children "GtkCellRendererPixbuf")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererPixbuf")))
+             (glib-test:list-interfaces "GtkCellRendererPixbuf")))
   ;; Check properties
   (is (equal '("gicon" "icon-name" "icon-size" "pixbuf" "pixbuf-expander-closed"
                "pixbuf-expander-open" "texture")
-             (gtk-test:list-properties "GtkCellRendererPixbuf")))
+             (glib-test:list-properties "GtkCellRendererPixbuf")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCellRendererPixbuf")))
+             (glib-test:list-signals "GtkCellRendererPixbuf")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererPixbuf"
-                                             GTK-CELL-RENDERER-PIXBUF
-                               (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_pixbuf_get_type")
-                               ((GICON GTK-CELL-RENDERER-PIXBUF-GICON "gicon"
-                                 "GIcon" T T)
-                                (ICON-NAME GTK-CELL-RENDERER-PIXBUF-ICON-NAME
-                                 "icon-name" "gchararray" T T)
-                                (ICON-SIZE GTK-CELL-RENDERER-PIXBUF-ICON-SIZE
-                                 "icon-size" "GtkIconSize" T T)
-                                (PIXBUF GTK-CELL-RENDERER-PIXBUF-PIXBUF
-                                 "pixbuf" "GdkPixbuf" NIL T)
-                                (PIXBUF-EXPANDER-CLOSED
-                                 GTK-CELL-RENDERER-PIXBUF-PIXBUF-EXPANDER-CLOSED
-                                 "pixbuf-expander-closed" "GdkPixbuf" T T)
-                                (PIXBUF-EXPANDER-OPEN
-                                 GTK-CELL-RENDERER-PIXBUF-PIXBUF-EXPANDER-OPEN
-                                 "pixbuf-expander-open" "GdkPixbuf" T T)
-                                (TEXTURE GTK-CELL-RENDERER-PIXBUF-TEXTURE
-                                 "texture" "GdkTexture" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererPixbuf"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererPixbuf"
+                                      GTK:CELL-RENDERER-PIXBUF
+                      (:SUPERCLASS GTK:CELL-RENDERER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_pixbuf_get_type")
+                      ((GICON CELL-RENDERER-PIXBUF-GICON "gicon" "GIcon" T T)
+                       (ICON-NAME CELL-RENDERER-PIXBUF-ICON-NAME
+                        "icon-name" "gchararray" T T)
+                       (ICON-SIZE CELL-RENDERER-PIXBUF-ICON-SIZE
+                        "icon-size" "GtkIconSize" T T)
+                       (PIXBUF CELL-RENDERER-PIXBUF-PIXBUF
+                        "pixbuf" "GdkPixbuf" NIL T)
+                       (PIXBUF-EXPANDER-CLOSED
+                        CELL-RENDERER-PIXBUF-PIXBUF-EXPANDER-CLOSED
+                        "pixbuf-expander-closed" "GdkPixbuf" T T)
+                       (PIXBUF-EXPANDER-OPEN
+                        CELL-RENDERER-PIXBUF-PIXBUF-EXPANDER-OPEN
+                        "pixbuf-expander-open" "GdkPixbuf" T T)
+                       (TEXTURE CELL-RENDERER-PIXBUF-TEXTURE
+                        "texture" "GdkTexture" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererPixbuf"))))
 
 ;;; ---  Properties ------------------------------------------------------------
 
@@ -79,4 +79,4 @@
   (let ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-pixbuf-new) 'gtk:cell-renderer-pixbuf))))
 
-;;; 2024-5-16
+;;; 2024-9-20

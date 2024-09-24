@@ -24,10 +24,10 @@
           (g:type-parent "GtkSettings")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSettings")))
+             (glib-test:list-children "GtkSettings")))
   ;; Check interfaces
   (is (equal '("GtkStyleProvider")
-             (gtk-test:list-interfaces "GtkSettings")))
+             (glib-test:list-interfaces "GtkSettings")))
   ;; Check class properties
   (is (equal '("gtk-alternative-button-order" "gtk-alternative-sort-arrows"
                "gtk-application-prefer-dark-theme" "gtk-cursor-aspect-ratio"
@@ -54,152 +54,153 @@
                "gtk-titlebar-right-click" "gtk-xft-antialias"
                "gtk-xft-dpi" "gtk-xft-hinting" "gtk-xft-hintstyle"
                "gtk-xft-rgba")
-             (gtk-test:list-properties "GtkSettings")))
+             (glib-test:list-properties "GtkSettings")))
   ;; Check signals
   (is (equal '("notify")
-             (gtk-test:list-signals "GObject")))
+             (glib-test:list-signals "GObject")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSettings" GTK-SETTINGS
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GtkStyleProvider") :TYPE-INITIALIZER
-                        "gtk_settings_get_type")
-                       ((GTK-ALTERNATIVE-BUTTON-ORDER
-                         GTK-SETTINGS-GTK-ALTERNATIVE-BUTTON-ORDER
-                         "gtk-alternative-button-order" "gboolean" T T)
-                        (GTK-ALTERNATIVE-SORT-ARROWS
-                         GTK-SETTINGS-GTK-ALTERNATIVE-SORT-ARROWS
-                         "gtk-alternative-sort-arrows" "gboolean" T T)
-                        (GTK-APPLICATION-PREFER-DARK-THEME
-                         GTK-SETTINGS-GTK-APPLICATION-PREFER-DARK-THEME
-                         "gtk-application-prefer-dark-theme" "gboolean" T T)
-                        (GTK-CURSOR-ASPECT-RATIO
-                         GTK-SETTINGS-GTK-CURSOR-ASPECT-RATIO
-                         "gtk-cursor-aspect-ratio" "gdouble" T T)
-                        (GTK-CURSOR-BLINK GTK-SETTINGS-GTK-CURSOR-BLINK
-                         "gtk-cursor-blink" "gboolean" T T)
-                        (GTK-CURSOR-BLINK-TIME
-                         GTK-SETTINGS-GTK-CURSOR-BLINK-TIME
-                         "gtk-cursor-blink-time" "gint" T T)
-                        (GTK-CURSOR-BLINK-TIMEOUT
-                         GTK-SETTINGS-GTK-CURSOR-BLINK-TIMEOUT
-                         "gtk-cursor-blink-timeout" "gint" T T)
-                        (GTK-CURSOR-THEME-NAME
-                         GTK-SETTINGS-GTK-CURSOR-THEME-NAME
-                         "gtk-cursor-theme-name" "gchararray" T T)
-                        (GTK-CURSOR-THEME-SIZE
-                         GTK-SETTINGS-GTK-CURSOR-THEME-SIZE
-                         "gtk-cursor-theme-size" "gint" T T)
-                        (GTK-DECORATION-LAYOUT
-                         GTK-SETTINGS-GTK-DECORATION-LAYOUT
-                         "gtk-decoration-layout" "gchararray" T T)
-                        (GTK-DIALOGS-USE-HEADER
-                         GTK-SETTINGS-GTK-DIALOGS-USE-HEADER
-                         "gtk-dialogs-use-header" "gboolean" T T)
-                        (GTK-DND-DRAG-THRESHOLD
-                         GTK-SETTINGS-GTK-DND-DRAG-THRESHOLD
-                         "gtk-dnd-drag-threshold" "gint" T T)
-                        (GTK-DOUBLE-CLICK-DISTANCE
-                         GTK-SETTINGS-GTK-DOUBLE-CLICK-DISTANCE
-                         "gtk-double-click-distance" "gint" T T)
-                        (GTK-DOUBLE-CLICK-TIME
-                         GTK-SETTINGS-GTK-DOUBLE-CLICK-TIME
-                         "gtk-double-click-time" "gint" T T)
-                        (GTK-ENABLE-ACCELS GTK-SETTINGS-GTK-ENABLE-ACCELS
-                         "gtk-enable-accels" "gboolean" T T)
-                        (GTK-ENABLE-ANIMATIONS
-                         GTK-SETTINGS-GTK-ENABLE-ANIMATIONS
-                         "gtk-enable-animations" "gboolean" T T)
-                        (GTK-ENABLE-EVENT-SOUNDS
-                         GTK-SETTINGS-GTK-ENABLE-EVENT-SOUNDS
-                         "gtk-enable-event-sounds" "gboolean" T T)
-                        (GTK-ENABLE-INPUT-FEEDBACK-SOUNDS
-                         GTK-SETTINGS-GTK-ENABLE-INPUT-FEEDBACK-SOUNDS
-                         "gtk-enable-input-feedback-sounds" "gboolean" T T)
-                        (GTK-ENABLE-PRIMARY-PASTE
-                         GTK-SETTINGS-GTK-ENABLE-PRIMARY-PASTE
-                         "gtk-enable-primary-paste" "gboolean" T T)
-                        (GTK-ENTRY-PASSWORD-HINT-TIMEOUT
-                         GTK-SETTINGS-GTK-ENTRY-PASSWORD-HINT-TIMEOUT
-                         "gtk-entry-password-hint-timeout" "guint" T T)
-                        (GTK-ENTRY-SELECT-ON-FOCUS
-                         GTK-SETTINGS-GTK-ENTRY-SELECT-ON-FOCUS
-                         "gtk-entry-select-on-focus" "gboolean" T T)
-                        (GTK-ERROR-BELL GTK-SETTINGS-GTK-ERROR-BELL
-                         "gtk-error-bell" "gboolean" T T)
-                        (GTK-FONT-NAME GTK-SETTINGS-GTK-FONT-NAME
-                         "gtk-font-name" "gchararray" T T)
-                        (GTK-FONTCONFIG-TIMESTAMP
-                         GTK-SETTINGS-GTK-FONTCONFIG-TIMESTAMP
-                         "gtk-fontconfig-timestamp" "guint" T T)
-                        (GTK-HINT-FONT-METRICS
-                         GTK-SETTINGS-GTK-HINT-FONT-METRICS
-                         "gtk-hint-font-metrics" "gboolean" T T)
-                        (GTK-ICON-THEME-NAME GTK-SETTINGS-GTK-ICON-THEME-NAME
-                         "gtk-icon-theme-name" "gchararray" T T)
-                        (GTK-IM-MODULE GTK-SETTINGS-GTK-IM-MODULE
-                         "gtk-im-module" "gchararray" T T)
-                        (GTK-KEYNAV-USE-CARET GTK-SETTINGS-GTK-KEYNAV-USE-CARET
-                         "gtk-keynav-use-caret" "gboolean" T T)
-                        (GTK-LABEL-SELECT-ON-FOCUS
-                         GTK-SETTINGS-GTK-LABEL-SELECT-ON-FOCUS
-                         "gtk-label-select-on-focus" "gboolean" T T)
-                        (GTK-LONG-PRESS-TIME GTK-SETTINGS-GTK-LONG-PRESS-TIME
-                         "gtk-long-press-time" "guint" T T)
-                        (GTK-OVERLAY-SCROLLING
-                         GTK-SETTINGS-GTK-OVERLAY-SCROLLING
-                         "gtk-overlay-scrolling" "gboolean" T T)
-                        (GTK-PRIMARY-BUTTON-WARPS-SLIDER
-                         GTK-SETTINGS-GTK-PRIMARY-BUTTON-WARPS-SLIDER
-                         "gtk-primary-button-warps-slider" "gboolean" T T)
-                        (GTK-PRINT-BACKENDS GTK-SETTINGS-GTK-PRINT-BACKENDS
-                         "gtk-print-backends" "gchararray" T T)
-                        (GTK-PRINT-PREVIEW-COMMAND
-                         GTK-SETTINGS-GTK-PRINT-PREVIEW-COMMAND
-                         "gtk-print-preview-command" "gchararray" T T)
-                        (GTK-RECENT-FILES-ENABLED
-                         GTK-SETTINGS-GTK-RECENT-FILES-ENABLED
-                         "gtk-recent-files-enabled" "gboolean" T T)
-                        (GTK-RECENT-FILES-MAX-AGE
-                         GTK-SETTINGS-GTK-RECENT-FILES-MAX-AGE
-                         "gtk-recent-files-max-age" "gint" T T)
-                        (GTK-SHELL-SHOWS-APP-MENU
-                         GTK-SETTINGS-GTK-SHELL-SHOWS-APP-MENU
-                         "gtk-shell-shows-app-menu" "gboolean" T T)
-                        (GTK-SHELL-SHOWS-DESKTOP
-                         GTK-SETTINGS-GTK-SHELL-SHOWS-DESKTOP
-                         "gtk-shell-shows-desktop" "gboolean" T T)
-                        (GTK-SHELL-SHOWS-MENUBAR
-                         GTK-SETTINGS-GTK-SHELL-SHOWS-MENUBAR
-                         "gtk-shell-shows-menubar" "gboolean" T T)
-                        (GTK-SHOW-STATUS-SHAPES
-                         GTK-SETTINGS-GTK-SHOW-STATUS-SHAPES
-                         "gtk-show-status-shapes" "gboolean" T T)
-                        (GTK-SOUND-THEME-NAME GTK-SETTINGS-GTK-SOUND-THEME-NAME
-                         "gtk-sound-theme-name" "gchararray" T T)
-                        (GTK-SPLIT-CURSOR GTK-SETTINGS-GTK-SPLIT-CURSOR
-                         "gtk-split-cursor" "gboolean" T T)
-                        (GTK-THEME-NAME GTK-SETTINGS-GTK-THEME-NAME
-                         "gtk-theme-name" "gchararray" T T)
-                        (GTK-TITLEBAR-DOUBLE-CLICK
-                         GTK-SETTINGS-GTK-TITLEBAR-DOUBLE-CLICK
-                         "gtk-titlebar-double-click" "gchararray" T T)
-                        (GTK-TITLEBAR-MIDDLE-CLICK
-                         GTK-SETTINGS-GTK-TITLEBAR-MIDDLE-CLICK
-                         "gtk-titlebar-middle-click" "gchararray" T T)
-                        (GTK-TITLEBAR-RIGHT-CLICK
-                         GTK-SETTINGS-GTK-TITLEBAR-RIGHT-CLICK
-                         "gtk-titlebar-right-click" "gchararray" T T)
-                        (GTK-XFT-ANTIALIAS GTK-SETTINGS-GTK-XFT-ANTIALIAS
-                         "gtk-xft-antialias" "gint" T T)
-                        (GTK-XFT-DPI GTK-SETTINGS-GTK-XFT-DPI "gtk-xft-dpi"
-                         "gint" T T)
-                        (GTK-XFT-HINTING GTK-SETTINGS-GTK-XFT-HINTING
-                         "gtk-xft-hinting" "gint" T T)
-                        (GTK-XFT-HINTSTYLE GTK-SETTINGS-GTK-XFT-HINTSTYLE
-                         "gtk-xft-hintstyle" "gchararray" T T)
-                        (GTK-XFT-RGBA GTK-SETTINGS-GTK-XFT-RGBA "gtk-xft-rgba"
-                         "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkSettings"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSettings" GTK:SETTINGS
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkStyleProvider")
+                       :TYPE-INITIALIZER "gtk_settings_get_type")
+                      ((GTK-ALTERNATIVE-BUTTON-ORDER
+                        SETTINGS-GTK-ALTERNATIVE-BUTTON-ORDER
+                        "gtk-alternative-button-order" "gboolean" T T)
+                       (GTK-ALTERNATIVE-SORT-ARROWS
+                        SETTINGS-GTK-ALTERNATIVE-SORT-ARROWS
+                        "gtk-alternative-sort-arrows" "gboolean" T T)
+                       (GTK-APPLICATION-PREFER-DARK-THEME
+                        SETTINGS-GTK-APPLICATION-PREFER-DARK-THEME
+                        "gtk-application-prefer-dark-theme" "gboolean" T T)
+                       (GTK-CURSOR-ASPECT-RATIO
+                        SETTINGS-GTK-CURSOR-ASPECT-RATIO
+                        "gtk-cursor-aspect-ratio" "gdouble" T T)
+                       (GTK-CURSOR-BLINK SETTINGS-GTK-CURSOR-BLINK
+                        "gtk-cursor-blink" "gboolean" T T)
+                       (GTK-CURSOR-BLINK-TIME
+                        SETTINGS-GTK-CURSOR-BLINK-TIME
+                        "gtk-cursor-blink-time" "gint" T T)
+                       (GTK-CURSOR-BLINK-TIMEOUT
+                        SETTINGS-GTK-CURSOR-BLINK-TIMEOUT
+                        "gtk-cursor-blink-timeout" "gint" T T)
+                       (GTK-CURSOR-THEME-NAME
+                        SETTINGS-GTK-CURSOR-THEME-NAME
+                        "gtk-cursor-theme-name" "gchararray" T T)
+                       (GTK-CURSOR-THEME-SIZE
+                        SETTINGS-GTK-CURSOR-THEME-SIZE
+                        "gtk-cursor-theme-size" "gint" T T)
+                       (GTK-DECORATION-LAYOUT
+                        SETTINGS-GTK-DECORATION-LAYOUT
+                        "gtk-decoration-layout" "gchararray" T T)
+                       (GTK-DIALOGS-USE-HEADER
+                        SETTINGS-GTK-DIALOGS-USE-HEADER
+                        "gtk-dialogs-use-header" "gboolean" T T)
+                       (GTK-DND-DRAG-THRESHOLD
+                        SETTINGS-GTK-DND-DRAG-THRESHOLD
+                        "gtk-dnd-drag-threshold" "gint" T T)
+                       (GTK-DOUBLE-CLICK-DISTANCE
+                        SETTINGS-GTK-DOUBLE-CLICK-DISTANCE
+                        "gtk-double-click-distance" "gint" T T)
+                       (GTK-DOUBLE-CLICK-TIME
+                        SETTINGS-GTK-DOUBLE-CLICK-TIME
+                        "gtk-double-click-time" "gint" T T)
+                       (GTK-ENABLE-ACCELS SETTINGS-GTK-ENABLE-ACCELS
+                        "gtk-enable-accels" "gboolean" T T)
+                       (GTK-ENABLE-ANIMATIONS
+                        SETTINGS-GTK-ENABLE-ANIMATIONS
+                        "gtk-enable-animations" "gboolean" T T)
+                       (GTK-ENABLE-EVENT-SOUNDS
+                        SETTINGS-GTK-ENABLE-EVENT-SOUNDS
+                        "gtk-enable-event-sounds" "gboolean" T T)
+                       (GTK-ENABLE-INPUT-FEEDBACK-SOUNDS
+                        SETTINGS-GTK-ENABLE-INPUT-FEEDBACK-SOUNDS
+                        "gtk-enable-input-feedback-sounds" "gboolean" T T)
+                       (GTK-ENABLE-PRIMARY-PASTE
+                        SETTINGS-GTK-ENABLE-PRIMARY-PASTE
+                        "gtk-enable-primary-paste" "gboolean" T T)
+                       (GTK-ENTRY-PASSWORD-HINT-TIMEOUT
+                        SETTINGS-GTK-ENTRY-PASSWORD-HINT-TIMEOUT
+                        "gtk-entry-password-hint-timeout" "guint" T T)
+                       (GTK-ENTRY-SELECT-ON-FOCUS
+                        SETTINGS-GTK-ENTRY-SELECT-ON-FOCUS
+                        "gtk-entry-select-on-focus" "gboolean" T T)
+                       (GTK-ERROR-BELL SETTINGS-GTK-ERROR-BELL
+                        "gtk-error-bell" "gboolean" T T)
+                       (GTK-FONT-NAME SETTINGS-GTK-FONT-NAME
+                        "gtk-font-name" "gchararray" T T)
+                       (GTK-FONTCONFIG-TIMESTAMP
+                        SETTINGS-GTK-FONTCONFIG-TIMESTAMP
+                        "gtk-fontconfig-timestamp" "guint" T T)
+                       (GTK-HINT-FONT-METRICS
+                        SETTINGS-GTK-HINT-FONT-METRICS
+                        "gtk-hint-font-metrics" "gboolean" T T)
+                       (GTK-ICON-THEME-NAME SETTINGS-GTK-ICON-THEME-NAME
+                        "gtk-icon-theme-name" "gchararray" T T)
+                       (GTK-IM-MODULE SETTINGS-GTK-IM-MODULE
+                        "gtk-im-module" "gchararray" T T)
+                       (GTK-KEYNAV-USE-CARET SETTINGS-GTK-KEYNAV-USE-CARET
+                        "gtk-keynav-use-caret" "gboolean" T T)
+                       (GTK-LABEL-SELECT-ON-FOCUS
+                        SETTINGS-GTK-LABEL-SELECT-ON-FOCUS
+                        "gtk-label-select-on-focus" "gboolean" T T)
+                       (GTK-LONG-PRESS-TIME SETTINGS-GTK-LONG-PRESS-TIME
+                        "gtk-long-press-time" "guint" T T)
+                       (GTK-OVERLAY-SCROLLING
+                        SETTINGS-GTK-OVERLAY-SCROLLING
+                        "gtk-overlay-scrolling" "gboolean" T T)
+                       (GTK-PRIMARY-BUTTON-WARPS-SLIDER
+                        SETTINGS-GTK-PRIMARY-BUTTON-WARPS-SLIDER
+                        "gtk-primary-button-warps-slider" "gboolean" T T)
+                       (GTK-PRINT-BACKENDS SETTINGS-GTK-PRINT-BACKENDS
+                        "gtk-print-backends" "gchararray" T T)
+                       (GTK-PRINT-PREVIEW-COMMAND
+                        SETTINGS-GTK-PRINT-PREVIEW-COMMAND
+                        "gtk-print-preview-command" "gchararray" T T)
+                       (GTK-RECENT-FILES-ENABLED
+                        SETTINGS-GTK-RECENT-FILES-ENABLED
+                        "gtk-recent-files-enabled" "gboolean" T T)
+                       (GTK-RECENT-FILES-MAX-AGE
+                        SETTINGS-GTK-RECENT-FILES-MAX-AGE
+                        "gtk-recent-files-max-age" "gint" T T)
+                       (GTK-SHELL-SHOWS-APP-MENU
+                        SETTINGS-GTK-SHELL-SHOWS-APP-MENU
+                        "gtk-shell-shows-app-menu" "gboolean" T T)
+                       (GTK-SHELL-SHOWS-DESKTOP
+                        SETTINGS-GTK-SHELL-SHOWS-DESKTOP
+                        "gtk-shell-shows-desktop" "gboolean" T T)
+                       (GTK-SHELL-SHOWS-MENUBAR
+                        SETTINGS-GTK-SHELL-SHOWS-MENUBAR
+                        "gtk-shell-shows-menubar" "gboolean" T T)
+                       (GTK-SHOW-STATUS-SHAPES
+                        SETTINGS-GTK-SHOW-STATUS-SHAPES
+                        "gtk-show-status-shapes" "gboolean" T T)
+                       (GTK-SOUND-THEME-NAME SETTINGS-GTK-SOUND-THEME-NAME
+                        "gtk-sound-theme-name" "gchararray" T T)
+                       (GTK-SPLIT-CURSOR SETTINGS-GTK-SPLIT-CURSOR
+                        "gtk-split-cursor" "gboolean" T T)
+                       (GTK-THEME-NAME SETTINGS-GTK-THEME-NAME
+                        "gtk-theme-name" "gchararray" T T)
+                       (GTK-TITLEBAR-DOUBLE-CLICK
+                        SETTINGS-GTK-TITLEBAR-DOUBLE-CLICK
+                        "gtk-titlebar-double-click" "gchararray" T T)
+                       (GTK-TITLEBAR-MIDDLE-CLICK
+                        SETTINGS-GTK-TITLEBAR-MIDDLE-CLICK
+                        "gtk-titlebar-middle-click" "gchararray" T T)
+                       (GTK-TITLEBAR-RIGHT-CLICK
+                        SETTINGS-GTK-TITLEBAR-RIGHT-CLICK
+                        "gtk-titlebar-right-click" "gchararray" T T)
+                       (GTK-XFT-ANTIALIAS SETTINGS-GTK-XFT-ANTIALIAS
+                        "gtk-xft-antialias" "gint" T T)
+                       (GTK-XFT-DPI SETTINGS-GTK-XFT-DPI "gtk-xft-dpi"
+                        "gint" T T)
+                       (GTK-XFT-HINTING SETTINGS-GTK-XFT-HINTING
+                        "gtk-xft-hinting" "gint" T T)
+                       (GTK-XFT-HINTSTYLE SETTINGS-GTK-XFT-HINTSTYLE
+                        "gtk-xft-hintstyle" "gchararray" T T)
+                       (GTK-XFT-RGBA SETTINGS-GTK-XFT-RGBA "gtk-xft-rgba"
+                        "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkSettings"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -308,4 +309,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2024-7-6
+;;; 2024-9-19

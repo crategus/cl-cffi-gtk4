@@ -22,31 +22,33 @@
           (g:type-parent "GtkColorChooserDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkColorChooserDialog")))
+             (glib-test:list-children "GtkColorChooserDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkColorChooser")
-             (gtk-test:list-interfaces "GtkColorChooserDialog")))
+             (glib-test:list-interfaces "GtkColorChooserDialog")))
   ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
-             (gtk-test:list-properties "GtkColorChooserDialog")))
+             (glib-test:list-properties "GtkColorChooserDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkColorChooserDialog")))
+             (glib-test:list-signals "GtkColorChooserDialog")))
   ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkColorChooserDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorChooserDialog"
-                                     GTK-COLOR-CHOOSER-DIALOG
-                       (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorChooserDialog"
+                                      GTK:COLOR-CHOOSER-DIALOG
+                       (:SUPERCLASS GTK:DIALOG
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
                          "GtkConstraintTarget" "GtkNative" "GtkRoot"
                          "GtkShortcutManager")
                         :TYPE-INITIALIZER "gtk_color_chooser_dialog_get_type")
-                       ((SHOW-EDITOR GTK-COLOR-CHOOSER-DIALOG-SHOW-EDITOR
+                       ((SHOW-EDITOR COLOR-CHOOSER-DIALOG-SHOW-EDITOR
                          "show-editor" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkColorChooserDialog"))))
+             (gobject:get-gtype-definition "GtkColorChooserDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -66,4 +68,4 @@
     (is (typep (gtk:color-chooser-dialog-new "title" nil)
                'gtk:color-chooser-dialog))))
 
-;;; 2024-5-22
+;;; 2024-9-20

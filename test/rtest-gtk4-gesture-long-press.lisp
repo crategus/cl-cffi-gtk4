@@ -21,25 +21,26 @@
           (g:type-parent "GtkGestureLongPress")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureLongPress")))
+             (glib-test:list-children "GtkGestureLongPress")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureLongPress")))
+             (glib-test:list-interfaces "GtkGestureLongPress")))
   ;; Check properties
   (is (equal '("delay-factor")
-             (gtk-test:list-properties "GtkGestureLongPress")))
+             (glib-test:list-properties "GtkGestureLongPress")))
   ;; Check signals
   (is (equal '("cancelled" "pressed")
-             (gtk-test:list-signals "GtkGestureLongPress")))
+             (glib-test:list-signals "GtkGestureLongPress")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureLongPress"
-                                             GTK-GESTURE-LONG-PRESS
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
-                        "gtk_gesture_long_press_get_type")
-                       ((DELAY-FACTOR GTK-GESTURE-LONG-PRESS-DELAY-FACTOR
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureLongPress"
+                                      GTK:GESTURE-LONG-PRESS
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_gesture_long_press_get_type")
+                       ((DELAY-FACTOR GESTURE-LONG-PRESS-DELAY-FACTOR
                          "delay-factor" "gdouble" T T)))
-             (gobject:get-g-type-definition "GtkGestureLongPress"))))
+             (gobject:get-gtype-definition "GtkGestureLongPress"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -86,4 +87,4 @@
 (test gtk-gesture-long-press-new
   (is (typep (gtk:gesture-long-press-new) 'gtk:gesture-long-press)))
 
-;;; 2024-7-27
+;;; 2024-9-20

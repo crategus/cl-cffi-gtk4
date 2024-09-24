@@ -21,36 +21,37 @@
           (g:type-parent "GtkFileDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFileDialog")))
+             (glib-test:list-children "GtkFileDialog")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkFileDialog")))
+             (glib-test:list-interfaces "GtkFileDialog")))
   ;; Check properties
   (is (equal '("accept-label" "default-filter" "filters" "initial-file"
                "initial-folder" "initial-name" "modal" "title")
-             (gtk-test:list-properties "GtkFileDialog")))
+             (glib-test:list-properties "GtkFileDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFileDialog")))
+             (glib-test:list-signals "GtkFileDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileDialog" GTK-FILE-DIALOG
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFileDialog" GTK:FILE-DIALOG
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_file_dialog_get_type")
-                       ((ACCEPT-LABEL GTK-FILE-DIALOG-ACCEPT-LABEL
+                       ((ACCEPT-LABEL FILE-DIALOG-ACCEPT-LABEL
                          "accept-label" "gchararray" T T)
-                        (DEFAULT-FILTER GTK-FILE-DIALOG-DEFAULT-FILTER
+                        (DEFAULT-FILTER FILE-DIALOG-DEFAULT-FILTER
                          "default-filter" "GtkFileFilter" T T)
-                        (FILTERS GTK-FILE-DIALOG-FILTERS "filters" "GListModel"
-                         T T)
-                        (INITIAL-FILE GTK-FILE-DIALOG-INITIAL-FILE
+                        (FILTERS FILE-DIALOG-FILTERS "filters" "GListModel" T T)
+                        (INITIAL-FILE FILE-DIALOG-INITIAL-FILE
                          "initial-file" "GFile" T T)
-                        (INITIAL-FOLDER GTK-FILE-DIALOG-INITIAL-FOLDER
+                        (INITIAL-FOLDER FILE-DIALOG-INITIAL-FOLDER
                          "initial-folder" "GFile" T T)
-                        (INITIAL-NAME GTK-FILE-DIALOG-INITIAL-NAME
+                        (INITIAL-NAME FILE-DIALOG-INITIAL-NAME
                          "initial-name" "gchararray" T T)
-                        (MODAL GTK-FILE-DIALOG-MODAL "modal" "gboolean" T T)
-                        (TITLE GTK-FILE-DIALOG-TITLE "title" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkFileDialog"))))
+                        (MODAL FILE-DIALOG-MODAL "modal" "gboolean" T T)
+                        (TITLE FILE-DIALOG-TITLE "title" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkFileDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -77,7 +78,7 @@
 (test gtk-file-dialog-properties.2
   (let ((dialog (make-instance 'gtk:file-dialog))
         (filters (g:list-store-new "GtkFileFilter"))
-        (filename (sys-path "rtest-gtk4-file-dialog.lisp")))
+        (filename (glib-sys:sys-path "test/rtest-gtk4-file-dialog.lisp")))
     ;; Append two file filter to the list store
     (g:list-store-append filters
                          (make-instance 'gtk:file-filter :name "filter1"))
@@ -102,7 +103,8 @@
                  (gtk:file-dialog-initial-name dialog)))
     ;; initial-folder
     (is (typep (setf (gtk:file-dialog-initial-folder dialog)
-                     (g:file-new-for-path (sys-path ""))) 'g:object))
+                     (g:file-new-for-path (glib-sys:sys-path "test/")))
+               'g:object))
     (is (typep (gtk:file-dialog-initial-folder dialog) 'g:object))
     ;; initial-name
     (is (string= "file" (setf (gtk:file-dialog-initial-name dialog) "file")))
@@ -132,4 +134,4 @@
 ;;;     gtk_file_dialog_select_multiple_folders
 ;;;     gtk_file_dialog_select_multiple_folders_finish
 
-;;; 2024-7-3
+;;; 2024-9-20

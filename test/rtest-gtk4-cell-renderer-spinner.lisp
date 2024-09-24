@@ -22,29 +22,29 @@
           (g:type-parent "GtkCellRendererSpinner")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererSpinner")))
+             (glib-test:list-children "GtkCellRendererSpinner")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCellRendererSpinner")))
+             (glib-test:list-interfaces "GtkCellRendererSpinner")))
   ;; Check properties
   (is (equal '("active" "pulse" "size")
-             (gtk-test:list-properties "GtkCellRendererSpinner")))
+             (glib-test:list-properties "GtkCellRendererSpinner")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCellRendererSpinner")))
+             (glib-test:list-signals "GtkCellRendererSpinner")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererSpinner"
-                               GTK-CELL-RENDERER-SPINNER
-                               (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
-                                :INTERFACES NIL :TYPE-INITIALIZER
-                                "gtk_cell_renderer_spinner_get_type")
-                               ((ACTIVE GTK-CELL-RENDERER-SPINNER-ACTIVE
-                                 "active" "gboolean" T T)
-                                (PULSE GTK-CELL-RENDERER-SPINNER-PULSE "pulse"
-                                 "guint" T T)
-                                (SIZE GTK-CELL-RENDERER-SPINNER-SIZE "size"
-                                 "GtkIconSize" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererSpinner"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererSpinner"
+                                      GTK:CELL-RENDERER-SPINNER
+                      (:SUPERCLASS GTK:CELL-RENDERER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_spinner_get_type")
+                      ((ACTIVE CELL-RENDERER-SPINNER-ACTIVE
+                        "active" "gboolean" T T)
+                       (PULSE CELL-RENDERER-SPINNER-PULSE "pulse" "guint" T T)
+                       (SIZE CELL-RENDERER-SPINNER-SIZE
+                        "size" "GtkIconSize" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererSpinner"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -63,4 +63,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-spinner-new) 'gtk:cell-renderer-spinner))))
 
-;;; 2024-5-18
+;;; 2024-9-20

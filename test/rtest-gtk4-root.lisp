@@ -18,19 +18,18 @@
           (g:gtype (cffi:foreign-funcall "gtk_root_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkNative" "GtkWidget")
-             (gtk-test:list-interface-prerequisites "GtkRoot")))
+             (glib-test:list-interface-prerequisites "GtkRoot")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkRoot")))
+             (glib-test:list-interface-properties "GtkRoot")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkRoot")))
+             (glib-test:list-signals "GtkRoot")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkRoot"
-                                  GTK-ROOT
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_root_get_type"))
-             (gobject:get-g-type-definition "GtkRoot"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkRoot" GTK:ROOT
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_root_get_type"))
+             (gobject:get-gtype-definition "GtkRoot"))))
 
 ;;; --- Functions --------------------------------------------------------------
 

@@ -10,10 +10,10 @@
 (test gtk-cell-view-class
   ;; Check type
   (is (g:type-is-object "GtkCellView"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-view
           (glib:symbol-for-gtype "GtkCellView")))
-  ;; Check type initializer
+  ;; Check initializer
   (is (eq (g:gtype "GtkCellView")
           (g:gtype (cffi:foreign-funcall "gtk_cell_view_get_type" :size))))
   ;; Check parent
@@ -21,42 +21,41 @@
           (g:type-parent "GtkCellView")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellView")))
+             (glib-test:list-children "GtkCellView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkOrientable")
-             (gtk-test:list-interfaces "GtkCellView")))
+             (glib-test:list-interfaces "GtkCellView")))
   ;; Check properties
   (is (equal '("cell-area" "cell-area-context" "draw-sensitive" "fit-model"
                "model" "orientation")
-             (gtk-test:list-properties "GtkCellView")))
+             (glib-test:list-properties "GtkCellView")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCellView")))
+             (glib-test:list-signals "GtkCellView")))
   ;; Check CSS name
   (is (string= "cellview"
                (gtk:widget-class-css-name "GtkCellView")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkCellView")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellView" GTK-CELL-VIEW
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable" "GtkCellLayout"
-                                 "GtkConstraintTarget" "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_cell_view_get_type")
-                               ((CELL-AREA GTK-CELL-VIEW-CELL-AREA "cell-area"
-                                 "GtkCellArea" T NIL)
-                                (CELL-AREA-CONTEXT
-                                 GTK-CELL-VIEW-CELL-AREA-CONTEXT
-                                 "cell-area-context" "GtkCellAreaContext" T
-                                 NIL)
-                                (DRAW-SENSITIVE GTK-CELL-VIEW-DRAW-SENSITIVE
-                                 "draw-sensitive" "gboolean" T T)
-                                (FIT-MODEL GTK-CELL-VIEW-FIT-MODEL "fit-model"
-                                 "gboolean" T T)
-                                (MODEL GTK-CELL-VIEW-MODEL "model"
-                                 "GtkTreeModel" T T)))
-             (gobject:get-g-type-definition "GtkCellView"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellView" GTK:CELL-VIEW
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkCellLayout"
+                         "GtkConstraintTarget" "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_cell_view_get_type")
+                       ((CELL-AREA CELL-VIEW-CELL-AREA
+                         "cell-area" "GtkCellArea" T NIL)
+                        (CELL-AREA-CONTEXT CELL-VIEW-CELL-AREA-CONTEXT
+                         "cell-area-context" "GtkCellAreaContext" T NIL)
+                        (DRAW-SENSITIVE CELL-VIEW-DRAW-SENSITIVE
+                         "draw-sensitive" "gboolean" T T)
+                        (FIT-MODEL CELL-VIEW-FIT-MODEL
+                         "fit-model" "gboolean" T T)
+                        (MODEL CELL-VIEW-MODEL "model" "GtkTreeModel" T T)))
+             (gobject:get-gtype-definition "GtkCellView"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -113,4 +112,4 @@
 ;;;     gtk_cell_view_set_displayed_row
 ;;;     gtk_cell_view_get_displayed_row
 
-;;; 2024-5-20
+;;; 2024-9-20

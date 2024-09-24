@@ -21,45 +21,44 @@
           (g:type-parent "GtkMediaStream")))
   ;; Check children
   (is (equal '("GtkMediaFile")
-             (gtk-test:list-children "GtkMediaStream")))
+             (glib-test:list-children "GtkMediaStream")))
   ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (gtk-test:list-interfaces "GtkMediaStream")))
+             (glib-test:list-interfaces "GtkMediaStream")))
   ;; Check class properties
   (is (equal '("duration" "ended" "error" "has-audio" "has-video" "loop" "muted"
                "playing" "prepared" "seekable" "seeking" "timestamp" "volume")
-             (gtk-test:list-properties "GtkMediaStream")))
+             (glib-test:list-properties "GtkMediaStream")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkMediaStream")))
+             (glib-test:list-signals "GtkMediaStream")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaStream" GTK-MEDIA-STREAM
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GdkPaintable") :TYPE-INITIALIZER
-                        "gtk_media_stream_get_type")
-                       ((DURATION GTK-MEDIA-STREAM-DURATION "duration" "gint64"
-                         T NIL)
-                        (ENDED GTK-MEDIA-STREAM-ENDED "ended" "gboolean" T NIL)
-                        (ERROR GTK-MEDIA-STREAM-ERROR "error" "GError" T NIL)
-                        (HAS-AUDIO GTK-MEDIA-STREAM-HAS-AUDIO "has-audio"
-                         "gboolean" T NIL)
-                        (HAS-VIDEO GTK-MEDIA-STREAM-HAS-VIDEO "has-video"
-                         "gboolean" T NIL)
-                        (LOOP GTK-MEDIA-STREAM-LOOP "loop" "gboolean" T T)
-                        (MUTED GTK-MEDIA-STREAM-MUTED "muted" "gboolean" T T)
-                        (PLAYING GTK-MEDIA-STREAM-PLAYING "playing" "gboolean"
-                         T T)
-                        (PREPARED GTK-MEDIA-STREAM-PREPARED "prepared"
-                         "gboolean" T T)
-                        (SEEKABLE GTK-MEDIA-STREAM-SEEKABLE "seekable"
-                         "gboolean" T NIL)
-                        (SEEKING GTK-MEDIA-STREAM-SEEKING "seeking" "gboolean"
-                         T NIL)
-                        (TIMESTAMP GTK-MEDIA-STREAM-TIMESTAMP "timestamp"
-                         "gint64" T NIL)
-                        (VOLUME GTK-MEDIA-STREAM-VOLUME "volume" "gdouble" T
-                         T)))
-             (gobject:get-g-type-definition "GtkMediaStream"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMediaStream" GTK:MEDIA-STREAM
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GdkPaintable")
+                        :TYPE-INITIALIZER "gtk_media_stream_get_type")
+                       ((DURATION MEDIA-STREAM-DURATION
+                         "duration" "gint64" T NIL)
+                        (ENDED MEDIA-STREAM-ENDED "ended" "gboolean" T NIL)
+                        (ERROR MEDIA-STREAM-ERROR "error" "GError" T NIL)
+                        (HAS-AUDIO MEDIA-STREAM-HAS-AUDIO
+                         "has-audio" "gboolean" T NIL)
+                        (HAS-VIDEO MEDIA-STREAM-HAS-VIDEO
+                         "has-video" "gboolean" T NIL)
+                        (LOOP MEDIA-STREAM-LOOP "loop" "gboolean" T T)
+                        (MUTED MEDIA-STREAM-MUTED "muted" "gboolean" T T)
+                        (PLAYING MEDIA-STREAM-PLAYING "playing" "gboolean" T T)
+                        (PREPARED MEDIA-STREAM-PREPARED
+                         "prepared" "gboolean" T T)
+                        (SEEKABLE MEDIA-STREAM-SEEKABLE
+                         "seekable" "gboolean" T NIL)
+                        (SEEKING MEDIA-STREAM-SEEKING
+                         "seeking" "gboolean" T NIL)
+                        (TIMESTAMP MEDIA-STREAM-TIMESTAMP
+                         "timestamp" "gint64" T NIL)
+                        (VOLUME MEDIA-STREAM-VOLUME "volume" "gdouble" T T)))
+             (gobject:get-gtype-definition "GtkMediaStream"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -97,4 +96,4 @@
 ;;;     gtk_media_stream_error
 ;;;     gtk_media_stream_error_valist
 
-;;; 2024-7-4
+;;; 2024-9-20

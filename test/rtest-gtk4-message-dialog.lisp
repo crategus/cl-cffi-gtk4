@@ -20,25 +20,24 @@
   (is (equal '("GTK_BUTTONS_NONE" "GTK_BUTTONS_OK" "GTK_BUTTONS_CLOSE"
                "GTK_BUTTONS_CANCEL" "GTK_BUTTONS_YES_NO"
                "GTK_BUTTONS_OK_CANCEL")
-             (gtk-test:list-enum-item-name "GtkButtonsType")))
+             (glib-test:list-enum-item-names "GtkButtonsType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (gtk-test:list-enum-item-value "GtkButtonsType")))
+             (glib-test:list-enum-item-values "GtkButtonsType")))
   ;; Check nick names
   (is (equal '("none" "ok" "close" "cancel" "yes-no" "ok-cancel")
-             (gtk-test:list-enum-item-nick "GtkButtonsType")))
+             (glib-test:list-enum-item-nicks "GtkButtonsType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkButtonsType"
-                             GTK-BUTTONS-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_buttons_type_get_type")
-                          (:NONE 0)
-                          (:OK 1)
-                          (:CLOSE 2)
-                          (:CANCEL 3)
-                          (:YES-NO 4)
-                          (:OK-CANCEL 5))
-             (gobject:get-g-type-definition "GtkButtonsType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkButtonsType" GTK:BUTTONS-TYPE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_buttons_type_get_type")
+                       (:NONE 0)
+                       (:OK 1)
+                       (:CLOSE 2)
+                       (:CANCEL 3)
+                       (:YES-NO 4)
+                       (:OK-CANCEL 5))
+             (gobject:get-gtype-definition "GtkButtonsType"))))
 
 ;;;     GtkMessageDialog
 
@@ -58,45 +57,46 @@
             (g:type-parent "GtkMessageDialog")))
     ;; Check children
     (is (equal '()
-               (gtk-test:list-children "GtkMessageDialog")))
+               (glib-test:list-children "GtkMessageDialog")))
     ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
-               (gtk-test:list-interfaces "GtkMessageDialog")))
+               (glib-test:list-interfaces "GtkMessageDialog")))
     ;; Check class properties
     (is (equal '("buttons" "message-area" "message-type" "secondary-text"
                  "secondary-use-markup" "text" "use-markup")
-               (gtk-test:list-properties "GtkMessageDialog")))
+               (glib-test:list-properties "GtkMessageDialog")))
     ;; Check signals
     (is (equal '()
-               (gtk-test:list-signals "GtkMessageDialog")))
+               (glib-test:list-signals "GtkMessageDialog")))
     ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkMessageDialog")))
     ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkMessageDialog")))
     ;; Check class definition
-    (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMessageDialog"
-                                               GTK-MESSAGE-DIALOG
-                         (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
+    (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMessageDialog" GTK:MESSAGE-DIALOG
+                         (:SUPERCLASS GTK:DIALOG
+                          :EXPORT T
+                          :INTERFACES
                           ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                            "GtkNative" "GtkRoot" "GtkShortcutManager")
                           :TYPE-INITIALIZER "gtk_message_dialog_get_type")
-                         ((BUTTONS GTK-MESSAGE-DIALOG-BUTTONS "buttons"
-                           "GtkButtonsType" NIL NIL)
-                          (MESSAGE-AREA GTK-MESSAGE-DIALOG-MESSAGE-AREA
+                         ((BUTTONS MESSAGE-DIALOG-BUTTONS
+                           "buttons" "GtkButtonsType" NIL NIL)
+                          (MESSAGE-AREA MESSAGE-DIALOG-MESSAGE-AREA
                            "message-area" "GtkWidget" T NIL)
-                          (MESSAGE-TYPE GTK-MESSAGE-DIALOG-MESSAGE-TYPE
+                          (MESSAGE-TYPE MESSAGE-DIALOG-MESSAGE-TYPE
                            "message-type" "GtkMessageType" T T)
-                          (SECONDARY-TEXT GTK-MESSAGE-DIALOG-SECONDARY-TEXT
+                          (SECONDARY-TEXT MESSAGE-DIALOG-SECONDARY-TEXT
                            "secondary-text" "gchararray" T T)
                           (SECONDARY-USE-MARKUP
-                           GTK-MESSAGE-DIALOG-SECONDARY-USE-MARKUP
+                           MESSAGE-DIALOG-SECONDARY-USE-MARKUP
                            "secondary-use-markup" "gboolean" T T)
-                          (TEXT GTK-MESSAGE-DIALOG-TEXT "text" "gchararray" T T)
-                          (USE-MARKUP GTK-MESSAGE-DIALOG-USE-MARKUP "use-markup"
-                           "gboolean" T T)))
-               (gobject:get-g-type-definition "GtkMessageDialog")))))
+                          (TEXT MESSAGE-DIALOG-TEXT "text" "gchararray" T T)
+                          (USE-MARKUP MESSAGE-DIALOG-USE-MARKUP
+                           "use-markup" "gboolean" T T)))
+               (gobject:get-gtype-definition "GtkMessageDialog")))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -118,4 +118,4 @@
 ;;;     gtk_message_dialog_format_secondary_text
 ;;;     gtk_message_dialog_format_secondary_markup
 
-;;; 2024-5-1
+;;; 2024-9-20

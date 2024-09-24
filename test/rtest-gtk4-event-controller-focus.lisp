@@ -22,28 +22,28 @@
           (g:type-parent "GtkEventControllerFocus")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEventControllerFocus")))
+             (glib-test:list-children "GtkEventControllerFocus")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEventControllerFocus")))
+             (glib-test:list-interfaces "GtkEventControllerFocus")))
   ;; Check properties
   (is (equal '("contains-focus" "is-focus")
-             (gtk-test:list-properties "GtkEventControllerFocus")))
+             (glib-test:list-properties "GtkEventControllerFocus")))
   ;; Check signals
   (is (equal '("enter" "leave")
-             (gtk-test:list-signals "GtkEventControllerFocus")))
+             (glib-test:list-signals "GtkEventControllerFocus")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerFocus"
-                                     GTK-EVENT-CONTROLLER-FOCUS
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
-                        "gtk_event_controller_focus_get_type")
-                       ((CONTAINS-FOCUS
-                         GTK-EVENT-CONTROLLER-FOCUS-CONTAINS-FOCUS
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEventControllerFocus"
+                                      GTK:EVENT-CONTROLLER-FOCUS
+                       (:SUPERCLASS GTK:EVENT-CONTROLLER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_event_controller_focus_get_type")
+                       ((CONTAINS-FOCUS EVENT-CONTROLLER-FOCUS-CONTAINS-FOCUS
                          "contains-focus" "gboolean" T NIL)
-                        (IS-FOCUS GTK-EVENT-CONTROLLER-FOCUS-IS-FOCUS
+                        (IS-FOCUS EVENT-CONTROLLER-FOCUS-IS-FOCUS
                          "is-focus" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkEventControllerFocus"))))
+             (gobject:get-gtype-definition "GtkEventControllerFocus"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

@@ -4,7 +4,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-;; Finally, check the fundamental types known to GTK
+;; Finally, check fundamental types known to GTK
 #-windows
 (test g-type-fundamentals
   (let* ((glib::*warn-unknown-gtype* nil)

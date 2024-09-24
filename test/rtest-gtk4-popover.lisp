@@ -21,45 +21,46 @@
           (g:type-parent "GtkPopover")))
   ;; Check children
   (is (equal '("GtkEmojiChooser" "GtkPopoverMenu" "GtkTreePopover")
-             (gtk-test:list-children "GtkPopover")))
+             (glib-test:list-children "GtkPopover")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (gtk-test:list-interfaces "GtkPopover")))
+             (glib-test:list-interfaces "GtkPopover")))
   ;; Check properties
   (is (equal '("autohide" "cascade-popdown" "child" "default-widget" "has-arrow"
                "mnemonics-visible" "pointing-to" "position")
-             (gtk-test:list-properties "GtkPopover")))
+             (glib-test:list-properties "GtkPopover")))
   ;; Check signals
   (is (equal '("activate-default" "closed")
-             (gtk-test:list-signals "GtkPopover")))
+             (glib-test:list-signals "GtkPopover")))
   ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopover")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkPopover")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopover" GTK-POPOVER
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPopover" GTK:POPOVER
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkShortcutManager")
                         :TYPE-INITIALIZER "gtk_popover_get_type")
-                       ((AUTOHIDE GTK-POPOVER-AUTOHIDE "autohide" "gboolean" T
-                         T)
-                        (CASCADE-POPDOWN GTK-POPOVER-CASCADE-POPDOWN
+                       ((AUTOHIDE POPOVER-AUTOHIDE "autohide" "gboolean" T T)
+                        (CASCADE-POPDOWN POPOVER-CASCADE-POPDOWN
                          "cascade-popdown" "gboolean" T T)
-                        (CHILD GTK-POPOVER-CHILD "child" "GtkWidget" T T)
-                        (DEFAULT-WIDGET GTK-POPOVER-DEFAULT-WIDGET
+                        (CHILD POPOVER-CHILD "child" "GtkWidget" T T)
+                        (DEFAULT-WIDGET POPOVER-DEFAULT-WIDGET
                          "default-widget" "GtkWidget" T T)
-                        (HAS-ARROW GTK-POPOVER-HAS-ARROW "has-arrow" "gboolean"
-                         T T)
-                        (MNEMONICS-VISIBLE GTK-POPOVER-MNEMONICS-VISIBLE
+                        (HAS-ARROW POPOVER-HAS-ARROW
+                         "has-arrow" "gboolean" T T)
+                        (MNEMONICS-VISIBLE POPOVER-MNEMONICS-VISIBLE
                          "mnemonics-visible" "gboolean" T T)
-                        (POINTING-TO GTK-POPOVER-POINTING-TO "pointing-to"
-                         "GdkRectangle" T T)
-                        (POSITION GTK-POPOVER-POSITION "position"
-                                  "GtkPositionType" T T)))
-             (gobject:get-g-type-definition "GtkPopover"))))
+                        (POINTING-TO POPOVER-POINTING-TO
+                         "pointing-to" "GdkRectangle" T T)
+                        (POSITION POPOVER-POSITION
+                         "position" "GtkPositionType" T T)))
+             (gobject:get-gtype-definition "GtkPopover"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -86,4 +87,4 @@
 ;;;     gtk_popover_set_offset
 ;;;     gtk_popover_get_offset
 
-;;; 2024-7-4
+;;; 2024-9-20

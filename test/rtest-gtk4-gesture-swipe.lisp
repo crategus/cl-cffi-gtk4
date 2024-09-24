@@ -21,22 +21,24 @@
           (g:type-parent "GtkGestureSwipe")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGestureSwipe")))
+             (glib-test:list-children "GtkGestureSwipe")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkGestureSwipe")))
+             (glib-test:list-interfaces "GtkGestureSwipe")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkGestureSwipe")))
+             (glib-test:list-properties "GtkGestureSwipe")))
   ;; Check signals
   (is (equal '("swipe")
-             (gtk-test:list-signals "GtkGestureSwipe")))
+             (glib-test:list-signals "GtkGestureSwipe")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSwipe" GTK-GESTURE-SWIPE
-                       (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER "gtk_gesture_swipe_get_type")
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureSwipe" GTK:GESTURE-SWIPE
+                       (:SUPERCLASS GTK:GESTURE-SINGLE
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_gesture_swipe_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkGestureSwipe"))))
+             (gobject:get-gtype-definition "GtkGestureSwipe"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -67,4 +69,4 @@
   (let ((gesture (gtk:gesture-swipe-new)))
     (is-false (gtk:gesture-swipe-velocity gesture))))
 
-;;; 2024-7-27
+;;; 2024-9-20

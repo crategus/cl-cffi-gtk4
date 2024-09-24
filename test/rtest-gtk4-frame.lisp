@@ -21,33 +21,35 @@
           (g:type-parent "GtkFrame")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFrame")))
+             (glib-test:list-children "GtkFrame")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkFrame")))
+             (glib-test:list-interfaces "GtkFrame")))
   ;; Check properties
   (is (equal '("child" "label" "label-widget" "label-xalign")
-             (gtk-test:list-properties "GtkFrame")))
+             (glib-test:list-properties "GtkFrame")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFrame")))
+             (glib-test:list-signals "GtkFrame")))
   ;; Check CSS name
   (is (string= "frame"
                (gtk:widget-class-css-name "GtkFrame")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFrame")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFrame" GTK-FRAME
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFrame" GTK:FRAME
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_frame_get_type")
-                       ((CHILD GTK-FRAME-CHILD "child" "GtkWidget" T T)
-                        (LABEL GTK-FRAME-LABEL "label" "gchararray" T T)
-                        (LABEL-WIDGET GTK-FRAME-LABEL-WIDGET "label-widget"
-                         "GtkWidget" T T)
-                        (LABEL-XALIGN GTK-FRAME-LABEL-XALIGN "label-xalign"
-                         "gfloat" T T)))
-             (gobject:get-g-type-definition "GtkFrame"))))
+                       ((CHILD FRAME-CHILD "child" "GtkWidget" T T)
+                        (LABEL FRAME-LABEL "label" "gchararray" T T)
+                        (LABEL-WIDGET FRAME-LABEL-WIDGET
+                         "label-widget" "GtkWidget" T T)
+                        (LABEL-XALIGN FRAME-LABEL-XALIGN
+                         "label-xalign" "gfloat" T T)))
+             (gobject:get-gtype-definition "GtkFrame"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

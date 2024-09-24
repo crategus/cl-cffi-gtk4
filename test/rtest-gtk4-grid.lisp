@@ -21,38 +21,38 @@
           (g:type-parent "GtkGrid")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkGrid")))
+             (glib-test:list-children "GtkGrid")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkGrid")))
+             (glib-test:list-interfaces "GtkGrid")))
   ;; Check properties
   (is (equal '("baseline-row" "column-homogeneous" "column-spacing"
                "orientation" "row-homogeneous" "row-spacing")
-             (gtk-test:list-properties "GtkGrid")))
+             (glib-test:list-properties "GtkGrid")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkGrid")))
+             (glib-test:list-signals "GtkGrid")))
   ;; Check CSS name
   (is (string= "grid"
                (gtk:widget-class-css-name "GtkGrid")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGrid" GTK-GRID
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_grid_get_type")
-                       ((BASELINE-ROW GTK-GRID-BASELINE-ROW "baseline-row"
-                         "gint" T T)
-                        (COLUMN-HOMOGENEOUS GTK-GRID-COLUMN-HOMOGENEOUS
-                         "column-homogeneous" "gboolean" T T)
-                        (COLUMN-SPACING GTK-GRID-COLUMN-SPACING
-                         "column-spacing" "gint" T T)
-                        (ROW-HOMOGENEOUS GTK-GRID-ROW-HOMOGENEOUS
-                         "row-homogeneous" "gboolean" T T)
-                        (ROW-SPACING GTK-GRID-ROW-SPACING "row-spacing" "gint"
-                         T T)))
-             (gobject:get-g-type-definition "GtkGrid"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGrid" GTK:GRID
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_grid_get_type")
+                      ((BASELINE-ROW GRID-BASELINE-ROW "baseline-row" "gint" T T)
+                       (COLUMN-HOMOGENEOUS GRID-COLUMN-HOMOGENEOUS
+                        "column-homogeneous" "gboolean" T T)
+                       (COLUMN-SPACING GRID-COLUMN-SPACING
+                        "column-spacing" "gint" T T)
+                       (ROW-HOMOGENEOUS GRID-ROW-HOMOGENEOUS
+                        "row-homogeneous" "gboolean" T T)
+                       (ROW-SPACING GRID-ROW-SPACING "row-spacing" "gint" T T)))
+             (gobject:get-gtype-definition "GtkGrid"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

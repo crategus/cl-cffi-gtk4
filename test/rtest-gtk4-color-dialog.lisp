@@ -21,27 +21,27 @@
           (g:type-parent "GtkColorDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkColorDialog")))
+             (glib-test:list-children "GtkColorDialog")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkColorDialog")))
+             (glib-test:list-interfaces "GtkColorDialog")))
   ;; Check properties
   (is (equal '("modal" "title" "with-alpha")
-             (gtk-test:list-properties "GtkColorDialog")))
+             (glib-test:list-properties "GtkColorDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkColorDialog")))
+             (glib-test:list-signals "GtkColorDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorDialog" GTK-COLOR-DIALOG
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_color_dialog_get_type")
-                               ((MODAL GTK-COLOR-DIALOG-MODAL "modal"
-                                 "gboolean" T T)
-                                (TITLE GTK-COLOR-DIALOG-TITLE "title"
-                                 "gchararray" T T)
-                                (WITH-ALPHA GTK-COLOR-DIALOG-WITH-ALPHA
-                                 "with-alpha" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkColorDialog"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorDialog" GTK:COLOR-DIALOG
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_color_dialog_get_type")
+                       ((MODAL COLOR-DIALOG-MODAL "modal" "gboolean" T T)
+                        (TITLE COLOR-DIALOG-TITLE "title" "gchararray" T T)
+                        (WITH-ALPHA COLOR-DIALOG-WITH-ALPHA
+                         "with-alpha" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkColorDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -65,4 +65,4 @@
 ;;;     gtk_color_dialog_choose_rgba
 ;;;     gtk_color_dialog_choose_rgba_finish
 
-;;; 2024-7-4
+;;; 2024-9-20

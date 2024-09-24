@@ -18,19 +18,18 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_text_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkAccessible" "GObject")
-             (gtk-test:list-interface-prerequisites "GtkAccessibleText")))
+             (glib-test:list-interface-prerequisites "GtkAccessibleText")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkAccessibleText")))
+             (glib-test:list-interface-properties "GtkAccessibleText")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAccessibleText")))
+             (glib-test:list-signals "GtkAccessibleText")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessibleText"
-                                          GTK-ACCESSIBLE-TEXT
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_accessible_text_get_type"))
-             (gobject:get-g-type-definition "GtkAccessibleText"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkAccessibleText" GTK:ACCESSIBLE-TEXT
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_accessible_text_get_type"))
+             (gobject:get-gtype-definition "GtkAccessibleText"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -47,4 +46,4 @@
 ;;;     gtk_accessible_text_update_contents
 ;;;     gtk_accessible_text_update_selection_bound
 
-;;; 2024-5-26
+;;; 2024-9-19

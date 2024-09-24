@@ -19,23 +19,22 @@
   ;; Check names
   (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
                "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
-             (gtk-test:list-enum-item-name "GtkSizeGroupMode")))
+             (glib-test:list-enum-item-names "GtkSizeGroupMode")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkSizeGroupMode")))
+             (glib-test:list-enum-item-values "GtkSizeGroupMode")))
   ;; Check nick names
   (is (equal '("none" "horizontal" "vertical" "both")
-             (gtk-test:list-enum-item-nick "GtkSizeGroupMode")))
+             (glib-test:list-enum-item-nicks "GtkSizeGroupMode")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSizeGroupMode"
-                             GTK-SIZE-GROUP-MODE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_size_group_mode_get_type")
-                             (:NONE 0)
-                             (:HORIZONTAL 1)
-                             (:VERTICAL 2)
-                             (:BOTH 3))
-             (gobject:get-g-type-definition "GtkSizeGroupMode"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSizeGroupMode" GTK:SIZE-GROUP-MODE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_size_group_mode_get_type")
+                       (:NONE 0)
+                       (:HORIZONTAL 1)
+                       (:VERTICAL 2)
+                       (:BOTH 3))
+             (gobject:get-gtype-definition "GtkSizeGroupMode"))))
 
 ;;;     GtkSizeGroup
 
@@ -53,24 +52,24 @@
           (g:type-parent "GtkSizeGroup")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSizeGroup")))
+             (glib-test:list-children "GtkSizeGroup")))
   ;; Check interfaces
   (is (equal '("GtkBuildable")
-             (gtk-test:list-interfaces "GtkSizeGroup")))
+             (glib-test:list-interfaces "GtkSizeGroup")))
   ;; Check class properties
   (is (equal '("mode")
-             (gtk-test:list-properties "GtkSizeGroup")))
+             (glib-test:list-properties "GtkSizeGroup")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSizeGroup")))
+             (glib-test:list-signals "GtkSizeGroup")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSizeGroup" GTK-SIZE-GROUP
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GtkBuildable") :TYPE-INITIALIZER
-                        "gtk_size_group_get_type")
-                       ((MODE GTK-SIZE-GROUP-MODE "mode" "GtkSizeGroupMode" T
-                         T)))
-             (gobject:get-g-type-definition "GtkSizeGroup"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSizeGroup" GTK:SIZE-GROUP
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkBuildable")
+                       :TYPE-INITIALIZER "gtk_size_group_get_type")
+                      ((MODE SIZE-GROUP-MODE "mode" "GtkSizeGroupMode" T T)))
+             (gobject:get-gtype-definition "GtkSizeGroup"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -120,4 +119,4 @@
                           (g:type-name (g:type-from-instance x)))
                         (gtk:size-group-widgets group))))))
 
-;;; 2024-7-4
+;;; 2024-9-19

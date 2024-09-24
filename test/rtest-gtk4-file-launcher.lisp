@@ -21,27 +21,28 @@
           (g:type-parent "GtkFileLauncher")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFileLauncher")))
+             (glib-test:list-children "GtkFileLauncher")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkFileLauncher")))
+             (glib-test:list-interfaces "GtkFileLauncher")))
   ;; Check properties
   (is (equal '("always-ask" "file" "writable")
-             (gtk-test:list-properties "GtkFileLauncher")))
+             (glib-test:list-properties "GtkFileLauncher")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFileLauncher")))
+             (glib-test:list-signals "GtkFileLauncher")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileLauncher" GTK-FILE-LAUNCHER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_file_launcher_get_type")
-                               ((ALWAYS-ASK GTK-FILE-LAUNCHER-ALWAYS-ASK
-                                 "always-ask" "gboolean" T T)
-                                (FILE GTK-FILE-LAUNCHER-FILE "file" "GFile" T
-                                 T)
-                                (WRITABLE GTK-FILE-LAUNCHER-WRITABLE "writable"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkFileLauncher"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFileLauncher" GTK:FILE-LAUNCHER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_file_launcher_get_type")
+                       ((ALWAYS-ASK FILE-LAUNCHER-ALWAYS-ASK
+                         "always-ask" "gboolean" T T)
+                        (FILE FILE-LAUNCHER-FILE "file" "GFile" T T)
+                        (WRITABLE FILE-LAUNCHER-WRITABLE
+                         "writable" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkFileLauncher"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -60,4 +61,4 @@
 ;;;     gtk_file_launcher_open_containing_folder
 ;;;     gtk_file_launcher_open_containing_folder_finish
 
-;;; 2024-5-26
+;;; 2024-9-20

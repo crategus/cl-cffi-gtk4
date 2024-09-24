@@ -22,24 +22,26 @@
           (g:type-parent "GtkEventControllerLegacy")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEventControllerLegacy")))
+             (glib-test:list-children "GtkEventControllerLegacy")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEventControllerLegacy")))
+             (glib-test:list-interfaces "GtkEventControllerLegacy")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkEventControllerLegacy")))
+             (glib-test:list-properties "GtkEventControllerLegacy")))
   ;; Check signals
   (is (equal '("event")
-             (gtk-test:list-signals "GtkEventControllerLegacy")))
+             (glib-test:list-signals "GtkEventControllerLegacy")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerLegacy"
-                                     GTK-EVENT-CONTROLLER-LEGACY
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEventControllerLegacy"
+                                      GTK:EVENT-CONTROLLER-LEGACY
+                       (:SUPERCLASS GTK:EVENT-CONTROLLER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER
                         "gtk_event_controller_legacy_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkEventControllerLegacy"))))
+             (gobject:get-gtype-definition "GtkEventControllerLegacy"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -68,4 +70,4 @@
 (test gtk-event-controller-legacy-new
   (is (typep (gtk:event-controller-legacy-new) 'gtk:event-controller-legacy)))
 
-;;; 2024-7-27
+;;; 2024-9-20

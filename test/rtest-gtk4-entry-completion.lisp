@@ -22,46 +22,43 @@
           (g:type-parent "GtkEntryCompletion")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkEntryCompletion")))
+             (glib-test:list-children "GtkEntryCompletion")))
   ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkEntryCompletion")))
+             (glib-test:list-interfaces "GtkEntryCompletion")))
   ;; Check properties
   (is (equal '("cell-area" "inline-completion" "inline-selection"
                "minimum-key-length" "model" "popup-completion" "popup-set-width"
                "popup-single-match" "text-column")
-             (gtk-test:list-properties "GtkEntryCompletion")))
+             (glib-test:list-properties "GtkEntryCompletion")))
   ;; Check signals
   (is (equal '("cursor-on-match" "insert-prefix" "match-selected" "no-matches")
-             (gtk-test:list-signals "GtkEntryCompletion")))
+             (glib-test:list-signals "GtkEntryCompletion")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion"
-                                             GTK-ENTRY-COMPLETION
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
-                        "gtk_entry_completion_get_type")
-                       ((CELL-AREA GTK-ENTRY-COMPLETION-CELL-AREA "cell-area"
-                         "GtkCellArea" T NIL)
-                        (INLINE-COMPLETION
-                         GTK-ENTRY-COMPLETION-INLINE-COMPLETION
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEntryCompletion" GTK:ENTRY-COMPLETION
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GtkBuildable" "GtkCellLayout")
+                        :TYPE-INITIALIZER "gtk_entry_completion_get_type")
+                       ((CELL-AREA ENTRY-COMPLETION-CELL-AREA
+                         "cell-area" "GtkCellArea" T NIL)
+                        (INLINE-COMPLETION ENTRY-COMPLETION-INLINE-COMPLETION
                          "inline-completion" "gboolean" T T)
-                        (INLINE-SELECTION GTK-ENTRY-COMPLETION-INLINE-SELECTION
+                        (INLINE-SELECTION ENTRY-COMPLETION-INLINE-SELECTION
                          "inline-selection" "gboolean" T T)
-                        (MINIMUM-KEY-LENGTH
-                         GTK-ENTRY-COMPLETION-MINIMUM-KEY-LENGTH
+                        (MINIMUM-KEY-LENGTH ENTRY-COMPLETION-MINIMUM-KEY-LENGTH
                          "minimum-key-length" "gint" T T)
-                        (MODEL GTK-ENTRY-COMPLETION-MODEL "model"
-                         "GtkTreeModel" T T)
-                        (POPUP-COMPLETION GTK-ENTRY-COMPLETION-POPUP-COMPLETION
+                        (MODEL ENTRY-COMPLETION-MODEL
+                         "model" "GtkTreeModel" T T)
+                        (POPUP-COMPLETION ENTRY-COMPLETION-POPUP-COMPLETION
                          "popup-completion" "gboolean" T T)
-                        (POPUP-SET-WIDTH GTK-ENTRY-COMPLETION-POPUP-SET-WIDTH
+                        (POPUP-SET-WIDTH ENTRY-COMPLETION-POPUP-SET-WIDTH
                          "popup-set-width" "gboolean" T T)
-                        (POPUP-SINGLE-MATCH
-                         GTK-ENTRY-COMPLETION-POPUP-SINGLE-MATCH
+                        (POPUP-SINGLE-MATCH ENTRY-COMPLETION-POPUP-SINGLE-MATCH
                          "popup-single-match" "gboolean" T T)
-                        (TEXT-COLUMN GTK-ENTRY-COMPLETION-TEXT-COLUMN
+                        (TEXT-COLUMN ENTRY-COMPLETION-TEXT-COLUMN
                          "text-column" "gint" T T)))
-             (gobject:get-g-type-definition "GtkEntryCompletion"))))
+             (gobject:get-gtype-definition "GtkEntryCompletion"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

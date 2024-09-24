@@ -22,33 +22,34 @@
           (g:type-parent "GtkAppChooserDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAppChooserDialog")))
+             (glib-test:list-children "GtkAppChooserDialog")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkAppChooser")
-             (gtk-test:list-interfaces "GtkAppChooserDialog")))
+             (glib-test:list-interfaces "GtkAppChooserDialog")))
   ;; Check properties
   (is (equal '("content-type" "gfile" "heading")
-             (gtk-test:list-properties "GtkAppChooserDialog")))
+             (glib-test:list-properties "GtkAppChooserDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAppChooserDialog")))
+             (glib-test:list-signals "GtkAppChooserDialog")))
   ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAppChooserDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserDialog"
-                                             GTK-APP-CHOOSER-DIALOG
-                       (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAppChooserDialog"
+                                      GTK:APP-CHOOSER-DIALOG
+                       (:SUPERCLASS GTK:DIALOG
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
                          "GtkConstraintTarget" "GtkNative" "GtkRoot"
                          "GtkShortcutManager")
                         :TYPE-INITIALIZER "gtk_app_chooser_dialog_get_type")
-                       ((GFILE GTK-APP-CHOOSER-DIALOG-GFILE "gfile" "GFile" T
-                         NIL)
-                        (HEADING GTK-APP-CHOOSER-DIALOG-HEADING "heading"
-                         "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkAppChooserDialog"))))
+                       ((GFILE APP-CHOOSER-DIALOG-GFILE "gfile" "GFile" T NIL)
+                        (HEADING APP-CHOOSER-DIALOG-HEADING
+                         "heading" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkAppChooserDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -64,4 +65,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; 2024-4-26
+;;; 2024-9-20

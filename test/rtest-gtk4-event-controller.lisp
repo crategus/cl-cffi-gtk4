@@ -20,24 +20,22 @@
   ;; Check names
   (is (equal '("GTK_PHASE_NONE" "GTK_PHASE_CAPTURE" "GTK_PHASE_BUBBLE"
                "GTK_PHASE_TARGET")
-             (gtk-test:list-enum-item-name "GtkPropagationPhase")))
+             (glib-test:list-enum-item-names "GtkPropagationPhase")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkPropagationPhase")))
+             (glib-test:list-enum-item-values "GtkPropagationPhase")))
   ;; Check nick names
   (is (equal '("none" "capture" "bubble" "target")
-             (gtk-test:list-enum-item-nick "GtkPropagationPhase")))
+             (glib-test:list-enum-item-nicks "GtkPropagationPhase")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPropagationPhase"
-                             GTK-PROPAGATION-PHASE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER
-                              "gtk_propagation_phase_get_type")
-                             (:NONE 0)
-                             (:CAPTURE 1)
-                             (:BUBBLE 2)
-                             (:TARGET 3))
-             (gobject:get-g-type-definition "GtkPropagationPhase"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPropagationPhase" GTK:PROPAGATION-PHASE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_propagation_phase_get_type")
+                       (:NONE 0)
+                       (:CAPTURE 1)
+                       (:BUBBLE 2)
+                       (:TARGET 3))
+             (gobject:get-gtype-definition "GtkPropagationPhase"))))
 
 ;;;     GtkPropagationLimit
 
@@ -52,21 +50,20 @@
           (glib:symbol-for-gtype "GtkPropagationLimit")))
   ;; Check names
   (is (equal '("GTK_LIMIT_NONE" "GTK_LIMIT_SAME_NATIVE")
-             (gtk-test:list-enum-item-name "GtkPropagationLimit")))
+             (glib-test:list-enum-item-names "GtkPropagationLimit")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkPropagationLimit")))
+             (glib-test:list-enum-item-values "GtkPropagationLimit")))
   ;; Check nick names
   (is (equal '("none" "same-native")
-             (gtk-test:list-enum-item-nick "GtkPropagationLimit")))
+             (glib-test:list-enum-item-nicks "GtkPropagationLimit")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPropagationLimit"
-                             GTK-PROPAGATION-LIMIT
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_propagation_limit_get_type")
-                             (:NONE 0)
-                             (:SAME-NATIVE 1))
-             (gobject:get-g-type-definition "GtkPropagationLimit"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkPropagationLimit" GTK:PROPAGATION-LIMIT
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_propagation_limit_get_type")
+                       (:NONE 0)
+                       (:SAME-NATIVE 1))
+             (gobject:get-gtype-definition "GtkPropagationLimit"))))
 
 ;;;     GtkEventController
 
@@ -88,32 +85,30 @@
                "GtkEventControllerLegacy" "GtkEventControllerMotion"
                "GtkEventControllerScroll" "GtkGesture" "GtkPadController"
                "GtkShortcutController")
-             (gtk-test:list-children "GtkEventController")))
+             (glib-test:list-children "GtkEventController")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkEventController")))
+             (glib-test:list-interfaces "GtkEventController")))
   ;; Check class properties
   (is (equal '("name" "propagation-limit" "propagation-phase" "widget")
-             (gtk-test:list-properties "GtkEventController")))
+             (glib-test:list-properties "GtkEventController")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkEventController")))
+             (glib-test:list-signals "GtkEventController")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventController"
-                                             GTK-EVENT-CONTROLLER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEventController" GTK:EVENT-CONTROLLER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_event_controller_get_type")
-                       ((NAME GTK-EVENT-CONTROLLER-NAME "name" "gchararray" T
-                         T)
-                        (PROPAGATION-LIMIT
-                         GTK-EVENT-CONTROLLER-PROPAGATION-LIMIT
+                       ((NAME EVENT-CONTROLLER-NAME "name" "gchararray" T T)
+                        (PROPAGATION-LIMIT EVENT-CONTROLLER-PROPAGATION-LIMIT
                          "propagation-limit" "GtkPropagationLimit" T T)
-                        (PROPAGATION-PHASE
-                         GTK-EVENT-CONTROLLER-PROPAGATION-PHASE
+                        (PROPAGATION-PHASE EVENT-CONTROLLER-PROPAGATION-PHASE
                          "propagation-phase" "GtkPropagationPhase" T T)
-                        (WIDGET GTK-EVENT-CONTROLLER-WIDGET "widget"
-                         "GtkWidget" T NIL)))
-             (gobject:get-g-type-definition "GtkEventController"))))
+                        (WIDGET EVENT-CONTROLLER-WIDGET
+                         "widget" "GtkWidget" T NIL)))
+             (gobject:get-gtype-definition "GtkEventController"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -164,4 +159,4 @@
     (is (= gdk:+current-time+
            (gtk:event-controller-current-event-time controller)))))
 
-;;; 2024-7-27
+;;; 2024-9-20

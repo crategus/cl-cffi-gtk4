@@ -21,23 +21,24 @@
           (g:type-parent "GtkUriLauncher")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkUriLauncher")))
+             (glib-test:list-children "GtkUriLauncher")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkUriLauncher")))
+             (glib-test:list-interfaces "GtkUriLauncher")))
   ;; Check properties
   (is (equal '("uri")
-             (gtk-test:list-properties "GtkUriLauncher")))
+             (glib-test:list-properties "GtkUriLauncher")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkUriLauncher")))
+             (glib-test:list-signals "GtkUriLauncher")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkUriLauncher" GTK-URI-LAUNCHER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_uri_launcher_get_type")
-                               ((URI GTK-URI-LAUNCHER-URI "uri" "gchararray" T
-                                 T)))
-             (gobject:get-g-type-definition "GtkUriLauncher"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkUriLauncher" GTK:URI-LAUNCHER
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_uri_launcher_get_type")
+                      ((URI URI-LAUNCHER-URI "uri" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkUriLauncher"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -49,4 +50,4 @@
 ;;;     gtk_uri_launcher_launch
 ;;;     gtk_uri_launcher_launch_finish
 
-;;; 2024-7-4
+;;; 2024-9-20

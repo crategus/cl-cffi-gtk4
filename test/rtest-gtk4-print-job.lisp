@@ -21,32 +21,31 @@
           (g:type-parent "GtkPrintJob")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPrintJob")))
+             (glib-test:list-children "GtkPrintJob")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkPrintJob")))
+             (glib-test:list-interfaces "GtkPrintJob")))
   ;; Check properties
   (is (equal '("page-setup" "printer" "settings" "title" "track-print-status")
-             (gtk-test:list-properties "GtkPrintJob")))
+             (glib-test:list-properties "GtkPrintJob")))
   ;; Check signals
   (is (equal '("status-changed")
-             (gtk-test:list-signals "GtkPrintJob")))
+             (glib-test:list-signals "GtkPrintJob")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintJob" GTK-PRINT-JOB
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_print_job_get_type")
-                               ((PAGE-SETUP GTK-PRINT-JOB-PAGE-SETUP
-                                 "page-setup" "GtkPageSetup" T NIL)
-                                (PRINTER GTK-PRINT-JOB-PRINTER "printer"
-                                 "GtkPrinter" T NIL)
-                                (SETTINGS GTK-PRINT-JOB-SETTINGS "settings"
-                                 "GtkPrintSettings" T NIL)
-                                (TITLE GTK-PRINT-JOB-TITLE "title" "gchararray"
-                                 T NIL)
-                                (TRACK-PRINT-STATUS
-                                 GTK-PRINT-JOB-TRACK-PRINT-STATUS
-                                 "track-print-status" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkPrintJob"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintJob" GTK:PRINT-JOB
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_print_job_get_type")
+                       ((PAGE-SETUP PRINT-JOB-PAGE-SETUP
+                         "page-setup" "GtkPageSetup" T NIL)
+                        (PRINTER PRINT-JOB-PRINTER "printer" "GtkPrinter" T NIL)
+                        (SETTINGS PRINT-JOB-SETTINGS
+                         "settings" "GtkPrintSettings" T NIL)
+                        (TITLE PRINT-JOB-TITLE "title" "gchararray" T NIL)
+                        (TRACK-PRINT-STATUS PRINT-JOB-TRACK-PRINT-STATUS
+                         "track-print-status" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkPrintJob"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -279,4 +278,4 @@
       (is-true (setf (gtk:print-job-reverse job) t))
       (is-true (gtk:print-job-reverse job)))))
 
-;;; 2024-7-7
+;;; 2024-9-20

@@ -22,30 +22,31 @@
   ;; Check children
   #-windows
   (is (equal '("GtkAtSpiContext")
-             (gtk-test:list-children "GtkATContext")))
+             (glib-test:list-children "GtkATContext")))
   #+windows
   (is (equal '("GtkTestATContext")
-             (gtk-test:list-children "GtkATContext")))
+             (glib-test:list-children "GtkATContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkATContext")))
+             (glib-test:list-interfaces "GtkATContext")))
   ;; Check properties
   (is (equal '("accessible" "accessible-role" "display")
-             (gtk-test:list-properties "GtkATContext")))
+             (glib-test:list-properties "GtkATContext")))
   ;; Check signals
   (is (equal '("state-change")
-             (gtk-test:list-signals "GtkATContext")))
+             (glib-test:list-signals "GtkATContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkATContext" GTK-A-T-CONTEXT
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
-                               ((ACCESSIBLE GTK-A-T-CONTEXT-ACCESSIBLE
-                                 "accessible" "GtkAccessible" T NIL)
-                                (ACCESSIBLE-ROLE
-                                 GTK-A-T-CONTEXT-ACCESSIBLE-ROLE
-                                 "accessible-role" "GtkAccessibleRole" T T)
-                                (DISPLAY GTK-A-T-CONTEXT-DISPLAY "display"
-                                 "GdkDisplay" T T)))
-             (gobject:get-g-type-definition "GtkATContext"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkATContext" GTK:AT-CONTEXT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL)
+                       ((ACCESSIBLE AT-CONTEXT-ACCESSIBLE
+                         "accessible" "GtkAccessible" T NIL)
+                        (ACCESSIBLE-ROLE AT-CONTEXT-ACCESSIBLE-ROLE
+                         "accessible-role" "GtkAccessibleRole" T T)
+                        (DISPLAY AT-CONTEXT-DISPLAY
+                         "display" "GdkDisplay" T T)))
+             (gobject:get-gtype-definition "GtkATContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

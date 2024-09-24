@@ -28,41 +28,43 @@
   #-windows
   (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
                "GtkShortcutsGroup" "GtkShortcutsSection")
-             (gtk-test:list-children "GtkBox")))
+             (glib-test:list-children "GtkBox")))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
-                 (gtk-test:list-children "GtkBox"))))
+                 (glib-test:list-children "GtkBox"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (gtk-test:list-interfaces "GtkBox")))
+             (glib-test:list-interfaces "GtkBox")))
   ;; Check properties
   (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
                "spacing")
-             (gtk-test:list-properties "GtkBox")))
+             (glib-test:list-properties "GtkBox")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBox")))
+             (glib-test:list-signals "GtkBox")))
   ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkBox")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkBox")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_box_get_type")
-                               ((BASELINE-CHILD GTK-BOX-BASELINE-CHILD
-                                 "baseline-child" "gint" T T)
-                                (BASELINE-POSITION GTK-BOX-BASELINE-POSITION
-                                 "baseline-position" "GtkBaselinePosition" T T)
-                                (HOMOGENEOUS GTK-BOX-HOMOGENEOUS "homogeneous"
-                                 "gboolean" T T)
-                                (SPACING GTK-BOX-SPACING "spacing" "gint" T T)))
-             (gobject:get-g-type-definition "GtkBox"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBox" GTK:BOX
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_box_get_type")
+                      ((BASELINE-CHILD BOX-BASELINE-CHILD
+                        "baseline-child" "gint" T T)
+                       (BASELINE-POSITION BOX-BASELINE-POSITION
+                        "baseline-position" "GtkBaselinePosition" T T)
+                       (HOMOGENEOUS BOX-HOMOGENEOUS
+                        "homogeneous" "gboolean" T T)
+                       (SPACING BOX-SPACING "spacing" "gint" T T)))
+             (gobject:get-gtype-definition "GtkBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

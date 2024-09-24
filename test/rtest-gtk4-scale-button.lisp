@@ -21,40 +21,38 @@
           (g:type-parent "GtkScaleButton")))
   ;; Check children
   (is (equal '("GtkVolumeButton")
-             (gtk-test:list-children "GtkScaleButton")))
+             (glib-test:list-children "GtkScaleButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (gtk-test:list-interfaces "GtkScaleButton")))
+             (glib-test:list-interfaces "GtkScaleButton")))
   ;; Check properties
   (is (equal '("active" "adjustment" "has-frame" "icons" "orientation" "value")
-             (gtk-test:list-properties "GtkScaleButton")))
+             (glib-test:list-properties "GtkScaleButton")))
   ;; Check signals
   (is (equal '("popdown" "popup" "value-changed")
-             (gtk-test:list-signals "GtkScaleButton")))
+             (glib-test:list-signals "GtkScaleButton")))
   ;; Check CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkScaleButton")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkScaleButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleRange"
-                                 "GtkBuildable" "GtkConstraintTarget"
-                                 "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_scale_button_get_type")
-                               ((ACTIVE GTK-SCALE-BUTTON-ACTIVE "active"
-                                 "gboolean" T NIL)
-                                (ADJUSTMENT GTK-SCALE-BUTTON-ADJUSTMENT
-                                 "adjustment" "GtkAdjustment" T T)
-                                (HAS-FRAME GTK-SCALE-BUTTON-HAS-FRAME
-                                 "has-frame" "gboolean" T T)
-                                (ICONS GTK-SCALE-BUTTON-ICONS "icons" "GStrv" T
-                                 T)
-                                (VALUE GTK-SCALE-BUTTON-VALUE "value" "gdouble"
-                                 T T)))
-             (gobject:get-g-type-definition "GtkScaleButton"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScaleButton" GTK:SCALE-BUTTON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_scale_button_get_type")
+                      ((ACTIVE SCALE-BUTTON-ACTIVE "active" "gboolean" T NIL)
+                       (ADJUSTMENT SCALE-BUTTON-ADJUSTMENT
+                        "adjustment" "GtkAdjustment" T T)
+                       (HAS-FRAME SCALE-BUTTON-HAS-FRAME
+                        "has-frame" "gboolean" T T)
+                       (ICONS SCALE-BUTTON-ICONS "icons" "GStrv" T T)
+                       (VALUE SCALE-BUTTON-VALUE "value" "gdouble" T T)))
+             (gobject:get-gtype-definition "GtkScaleButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

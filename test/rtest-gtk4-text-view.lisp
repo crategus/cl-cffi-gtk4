@@ -23,26 +23,25 @@
   (is (equal '("GTK_TEXT_WINDOW_WIDGET" "GTK_TEXT_WINDOW_TEXT"
                "GTK_TEXT_WINDOW_LEFT" "GTK_TEXT_WINDOW_RIGHT"
                "GTK_TEXT_WINDOW_TOP" "GTK_TEXT_WINDOW_BOTTOM")
-             (gtk-test:list-enum-item-name "GtkTextWindowType")))
+             (glib-test:list-enum-item-names "GtkTextWindowType")))
   ;; Check values
   (is (equal '(1 2 3 4 5 6)
-             (gtk-test:list-enum-item-value "GtkTextWindowType")))
+             (glib-test:list-enum-item-values "GtkTextWindowType")))
   ;; Check nick names
   (is (equal '("widget" "text" "left" "right" "top" "bottom")
-             (gtk-test:list-enum-item-nick "GtkTextWindowType")))
+             (glib-test:list-enum-item-nicks "GtkTextWindowType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextWindowType"
-                                     GTK-TEXT-WINDOW-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_text_window_type_get_type")
-                                     (:WIDGET 1)
-                                     (:TEXT 2)
-                                     (:LEFT 3)
-                                     (:RIGHT 4)
-                                     (:TOP 5)
-                                     (:BOTTOM 6))
-             (gobject:get-g-type-definition "GtkTextWindowType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkTextWindowType" GTK:TEXT-WINDOW-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_text_window_type_get_type")
+                                    (:WIDGET 1)
+                                    (:TEXT 2)
+                                    (:LEFT 3)
+                                    (:RIGHT 4)
+                                    (:TOP 5)
+                                    (:BOTTOM 6))
+             (gobject:get-gtype-definition "GtkTextWindowType"))))
 
 ;;;     GtkTextExtendSelection
 
@@ -59,22 +58,22 @@
   ;; Check names
   (is (equal '("GTK_TEXT_EXTEND_SELECTION_WORD"
                "GTK_TEXT_EXTEND_SELECTION_LINE")
-             (gtk-test:list-enum-item-name "GtkTextExtendSelection")))
+             (glib-test:list-enum-item-names "GtkTextExtendSelection")))
   ;; Check values
   (is (equal '(0 1)
-             (gtk-test:list-enum-item-value "GtkTextExtendSelection")))
+             (glib-test:list-enum-item-values "GtkTextExtendSelection")))
   ;; Check nick names
   (is (equal '("word" "line")
-             (gtk-test:list-enum-item-nick "GtkTextExtendSelection")))
+             (glib-test:list-enum-item-nicks "GtkTextExtendSelection")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextExtendSelection"
-                                     GTK-TEXT-EXTEND-SELECTION
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_text_extend_selection_get_type")
-                                     (:WORD 0)
-                                     (:LINE 1))
-             (gobject:get-g-type-definition "GtkTextExtendSelection"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkTextExtendSelection"
+                                    GTK:TEXT-EXTEND-SELECTION
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_text_extend_selection_get_type")
+                                    (:WORD 0)
+                                    (:LINE 1))
+             (gobject:get-gtype-definition "GtkTextExtendSelection"))))
 
 ;;;     GtkWrapMode                                        gtk.enumerations.lisp
 
@@ -97,24 +96,24 @@
           (g:type-parent "GtkTextChildAnchor")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextChildAnchor")))
+             (glib-test:list-children "GtkTextChildAnchor")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkTextChildAnchor")))
+             (glib-test:list-interfaces "GtkTextChildAnchor")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkTextChildAnchor")))
+             (glib-test:list-properties "GtkTextChildAnchor")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTextChildAnchor")))
+             (glib-test:list-signals "GtkTextChildAnchor")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextChildAnchor"
-                                             GTK-TEXT-CHILD-ANCHOR
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER
-                                "gtk_text_child_anchor_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkTextChildAnchor"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextChildAnchor" GTK:TEXT-CHILD-ANCHOR
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_text_child_anchor_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkTextChildAnchor"))))
 
 ;;;     gtk_text_child_anchor_new
 
@@ -163,11 +162,11 @@
           (g:type-parent "GtkTextView")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTextView")))
+             (glib-test:list-children "GtkTextView")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable" "GtkAccessibleText")
-             (gtk-test:list-interfaces "GtkTextView")))
+             (glib-test:list-interfaces "GtkTextView")))
   ;; Check properties
   (is (equal '("accepts-tab" "bottom-margin" "buffer" "cursor-visible"
                "editable" "extra-menu" "hadjustment" "hscroll-policy"
@@ -176,72 +175,63 @@
                "pixels-above-lines" "pixels-below-lines" "pixels-inside-wrap"
                "right-margin" "tabs" "top-margin" "vadjustment" "vscroll-policy"
                "wrap-mode")
-             (gtk-test:list-properties "GtkTextView")))
+             (glib-test:list-properties "GtkTextView")))
   ;; Check signals
   (is (equal '("backspace" "copy-clipboard" "cut-clipboard" "delete-from-cursor"
                "extend-selection" "insert-at-cursor" "insert-emoji"
                "move-cursor" "move-viewport" "paste-clipboard" "preedit-changed"
                "select-all" "set-anchor" "toggle-cursor-visible"
                "toggle-overwrite")
-             (gtk-test:list-signals "GtkTextView")))
+             (glib-test:list-signals "GtkTextView")))
   ;; Check CSS name
   (is (string= "textview"
                (gtk:widget-class-css-name "GtkTextView")))
   ;; Check accessible role
   (is (eq :TEXT-BOX (gtk:widget-class-accessible-role "GtkTextView")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextView" GTK-TEXT-VIEW
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleText"
-                                 "GtkBuildable" "GtkConstraintTarget"
-                                 "GtkScrollable")
-                                :TYPE-INITIALIZER "gtk_text_view_get_type")
-                               ((ACCEPTS-TAB GTK-TEXT-VIEW-ACCEPTS-TAB
-                                 "accepts-tab" "gboolean" T T)
-                                (BOTTOM-MARGIN GTK-TEXT-VIEW-BOTTOM-MARGIN
-                                 "bottom-margin" "gint" T T)
-                                (BUFFER GTK-TEXT-VIEW-BUFFER "buffer"
-                                 "GtkTextBuffer" T T)
-                                (CURSOR-VISIBLE GTK-TEXT-VIEW-CURSOR-VISIBLE
-                                 "cursor-visible" "gboolean" T T)
-                                (EDITABLE GTK-TEXT-VIEW-EDITABLE "editable"
-                                 "gboolean" T T)
-                                (EXTRA-MENU GTK-TEXT-VIEW-EXTRA-MENU
-                                 "extra-menu" "GMenuModel" T T)
-                                (IM-MODULE GTK-TEXT-VIEW-IM-MODULE "im-module"
-                                 "gchararray" T T)
-                                (INDENT GTK-TEXT-VIEW-INDENT "indent" "gint" T
-                                 T)
-                                (INPUT-HINTS GTK-TEXT-VIEW-INPUT-HINTS
-                                 "input-hints" "GtkInputHints" T T)
-                                (INPUT-PURPOSE GTK-TEXT-VIEW-INPUT-PURPOSE
-                                 "input-purpose" "GtkInputPurpose" T T)
-                                (JUSTIFICATION GTK-TEXT-VIEW-JUSTIFICATION
-                                 "justification" "GtkJustification" T T)
-                                (LEFT-MARGIN GTK-TEXT-VIEW-LEFT-MARGIN
-                                 "left-margin" "gint" T T)
-                                (MONOSPACE GTK-TEXT-VIEW-MONOSPACE "monospace"
-                                 "gboolean" T T)
-                                (OVERWRITE GTK-TEXT-VIEW-OVERWRITE "overwrite"
-                                 "gboolean" T T)
-                                (PIXELS-ABOVE-LINES
-                                 GTK-TEXT-VIEW-PIXELS-ABOVE-LINES
-                                 "pixels-above-lines" "gint" T T)
-                                (PIXELS-BELOW-LINES
-                                 GTK-TEXT-VIEW-PIXELS-BELOW-LINES
-                                 "pixels-below-lines" "gint" T T)
-                                (PIXELS-INSIDE-WRAP
-                                 GTK-TEXT-VIEW-PIXELS-INSIDE-WRAP
-                                 "pixels-inside-wrap" "gint" T T)
-                                (RIGHT-MARGIN GTK-TEXT-VIEW-RIGHT-MARGIN
-                                 "right-margin" "gint" T T)
-                                (TABS GTK-TEXT-VIEW-TABS "tabs" "PangoTabArray"
-                                 T T)
-                                (TOP-MARGIN GTK-TEXT-VIEW-TOP-MARGIN
-                                 "top-margin" "gint" T T)
-                                (WRAP-MODE GTK-TEXT-VIEW-WRAP-MODE "wrap-mode"
-                                 "GtkWrapMode" T T)))
-             (gobject:get-g-type-definition "GtkTextView"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTextView" GTK:TEXT-VIEW
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkScrollable")
+                       :TYPE-INITIALIZER "gtk_text_view_get_type")
+                      ((ACCEPTS-TAB TEXT-VIEW-ACCEPTS-TAB
+                        "accepts-tab" "gboolean" T T)
+                       (BOTTOM-MARGIN TEXT-VIEW-BOTTOM-MARGIN
+                        "bottom-margin" "gint" T T)
+                       (BUFFER TEXT-VIEW-BUFFER "buffer" "GtkTextBuffer" T T)
+                       (CURSOR-VISIBLE TEXT-VIEW-CURSOR-VISIBLE
+                        "cursor-visible" "gboolean" T T)
+                       (EDITABLE TEXT-VIEW-EDITABLE "editable" "gboolean" T T)
+                       (EXTRA-MENU TEXT-VIEW-EXTRA-MENU
+                        "extra-menu" "GMenuModel" T T)
+                       (IM-MODULE TEXT-VIEW-IM-MODULE
+                        "im-module" "gchararray" T T)
+                       (INDENT TEXT-VIEW-INDENT "indent" "gint" T T)
+                       (INPUT-HINTS TEXT-VIEW-INPUT-HINTS
+                        "input-hints" "GtkInputHints" T T)
+                       (INPUT-PURPOSE TEXT-VIEW-INPUT-PURPOSE
+                        "input-purpose" "GtkInputPurpose" T T)
+                       (JUSTIFICATION TEXT-VIEW-JUSTIFICATION
+                        "justification" "GtkJustification" T T)
+                       (LEFT-MARGIN TEXT-VIEW-LEFT-MARGIN
+                        "left-margin" "gint" T T)
+                       (MONOSPACE TEXT-VIEW-MONOSPACE "monospace" "gboolean" T T)
+                       (OVERWRITE TEXT-VIEW-OVERWRITE "overwrite" "gboolean" T T)
+                       (PIXELS-ABOVE-LINES TEXT-VIEW-PIXELS-ABOVE-LINES
+                        "pixels-above-lines" "gint" T T)
+                       (PIXELS-BELOW-LINES TEXT-VIEW-PIXELS-BELOW-LINES
+                        "pixels-below-lines" "gint" T T)
+                       (PIXELS-INSIDE-WRAP TEXT-VIEW-PIXELS-INSIDE-WRAP
+                        "pixels-inside-wrap" "gint" T T)
+                       (RIGHT-MARGIN TEXT-VIEW-RIGHT-MARGIN
+                        "right-margin" "gint" T T)
+                       (TABS TEXT-VIEW-TABS "tabs" "PangoTabArray" T T)
+                       (TOP-MARGIN TEXT-VIEW-TOP-MARGIN "top-margin" "gint" T T)
+                       (WRAP-MODE TEXT-VIEW-WRAP-MODE
+                        "wrap-mode" "GtkWrapMode" T T)))
+             (gobject:get-gtype-definition "GtkTextView"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -336,4 +326,4 @@
 ;;;     gtk_text_view_get_ltr_context                      Since 4.4
 ;;;     gtk_text_view_get_rtl_context                      Since 4.4
 
-;;; 2024-7-4
+;;; 2024-9-20

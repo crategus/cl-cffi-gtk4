@@ -21,33 +21,34 @@
           (g:type-parent "GtkToggleButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkToggleButton")))
+             (glib-test:list-children "GtkToggleButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkToggleButton")))
+             (glib-test:list-interfaces "GtkToggleButton")))
   ;; Check properties
   (is (equal '("active" "group")
-             (gtk-test:list-properties "GtkToggleButton")))
+             (glib-test:list-properties "GtkToggleButton")))
   ;; Check signals
   (is (equal '("toggled")
-             (gtk-test:list-signals "GtkToggleButton")))
+             (glib-test:list-signals "GtkToggleButton")))
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkToggleButton")))
   ;; Check accessible role
   (is (eq :toggle-button (gtk:widget-class-accessible-role "GtkToggleButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkToggleButton" GTK-TOGGLE-BUTTON
-                       (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkToggleButton" GTK:TOGGLE-BUTTON
+                       (:SUPERCLASS GTK:BUTTON
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_toggle_button_get_type")
-                       ((ACTIVE GTK-TOGGLE-BUTTON-ACTIVE "active" "gboolean" T
-                         T)
-                        (GROUP GTK-TOGGLE-BUTTON-GROUP "group"
-                         "GtkToggleButton" NIL T)))
-             (gobject:get-g-type-definition "GtkToggleButton"))))
+                       ((ACTIVE TOGGLE-BUTTON-ACTIVE "active" "gboolean" T T)
+                        (GROUP TOGGLE-BUTTON-GROUP
+                         "group" "GtkToggleButton" NIL T)))
+             (gobject:get-gtype-definition "GtkToggleButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -115,4 +116,4 @@
     (is-false (gtk:toggle-button-toggled button))
     (is (string= "Button TOGGLED" msg))))
 
-;;; 2024-5-4
+;;; 2024-9-20

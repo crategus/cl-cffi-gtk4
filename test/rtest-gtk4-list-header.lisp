@@ -21,30 +21,28 @@
           (g:type-parent "GtkListHeader")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkListHeader")))
+             (glib-test:list-children "GtkListHeader")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkListHeader")))
+             (glib-test:list-interfaces "GtkListHeader")))
   ;; Check properties
   (is (equal '("child" "end" "item" "n-items" "start")
-             (gtk-test:list-properties "GtkListHeader")))
+             (glib-test:list-properties "GtkListHeader")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkListHeader")))
+             (glib-test:list-signals "GtkListHeader")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListHeader" GTK-LIST-HEADER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_list_header_get_type")
-                               ((CHILD GTK-LIST-HEADER-CHILD "child"
-                                 "GtkWidget" T T)
-                                (END GTK-LIST-HEADER-END "end" "guint" T NIL)
-                                (ITEM GTK-LIST-HEADER-ITEM "item" "GObject" T
-                                 NIL)
-                                (N-ITEMS GTK-LIST-HEADER-N-ITEMS "n-items"
-                                 "guint" T NIL)
-                                (START GTK-LIST-HEADER-START "start" "guint" T
-                                 NIL)))
-             (gobject:get-g-type-definition "GtkListHeader"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListHeader" GTK:LIST-HEADER
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_list_header_get_type")
+                      ((CHILD LIST-HEADER-CHILD "child" "GtkWidget" T T)
+                       (END LIST-HEADER-END "end" "guint" T NIL)
+                       (ITEM LIST-HEADER-ITEM "item" "GObject" T NIL)
+                       (N-ITEMS LIST-HEADER-N-ITEMS "n-items" "guint" T NIL)
+                       (START LIST-HEADER-START "start" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkListHeader"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -62,5 +60,5 @@
     (is (= 0 (gtk:list-header-n-items header)))
     (is (= gtk:+invalid-list-position+ (gtk:list-header-start header)))))
 
-;;; 2024-7-4
+;;; 2024-9-19
 

@@ -16,19 +16,19 @@
           (g:gtype (cffi:foreign-funcall "gtk_actionable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkWidget")
-             (gtk-test:list-interface-prerequisites "GtkActionable")))
+             (glib-test:list-interface-prerequisites "GtkActionable")))
   ;; Check interface properties
   (is (equal '("action-name" "action-target")
-             (gtk-test:list-interface-properties "GtkActionable")))
+             (glib-test:list-interface-properties "GtkActionable")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkActionable" GTK-ACTIONABLE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_actionable_get_type")
-                       (ACTION-NAME GTK-ACTIONABLE-ACTION-NAME
-                        "action-name" "gchararray" T T)
-                       (ACTION-TARGET GTK-ACTIONABLE-ACTION-TARGET
-                        "action-target" "GVariant" T T))
-             (gobject:get-g-type-definition "GtkActionable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkActionable" GTK:ACTIONABLE
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_actionable_get_type")
+                      (ACTION-NAME ACTIONABLE-ACTION-NAME
+                       "action-name" "gchararray" T T)
+                      (ACTION-TARGET ACTIONABLE-ACTION-TARGET
+                       "action-target" "GVariant" T T))
+             (gobject:get-gtype-definition "GtkActionable"))))
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
@@ -61,4 +61,4 @@
 
 ;;; See gtk-actionable-properties for an example
 
-;;; 2024-7-4
+;;; 2024-9-19

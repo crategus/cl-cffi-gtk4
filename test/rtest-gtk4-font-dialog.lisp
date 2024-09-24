@@ -21,31 +21,30 @@
           (g:type-parent "GtkFontDialog")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFontDialog")))
+             (glib-test:list-children "GtkFontDialog")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkFontDialog")))
+             (glib-test:list-interfaces "GtkFontDialog")))
   ;; Check properties
   (is (equal '("filter" "font-map" "language" "modal" "title")
-             (gtk-test:list-properties "GtkFontDialog")))
+             (glib-test:list-properties "GtkFontDialog")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFontDialog")))
+             (glib-test:list-signals "GtkFontDialog")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontDialog" GTK-FONT-DIALOG
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_font_dialog_get_type")
-                               ((FILTER GTK-FONT-DIALOG-FILTER "filter"
-                                 "GtkFilter" T T)
-                                (FONT-MAP GTK-FONT-DIALOG-FONT-MAP "font-map"
-                                 "PangoFontMap" T T)
-                                (LANGUAGE GTK-FONT-DIALOG-LANGUAGE "language"
-                                 "PangoLanguage" T T)
-                                (MODAL GTK-FONT-DIALOG-MODAL "modal" "gboolean"
-                                 T T)
-                                (TITLE GTK-FONT-DIALOG-TITLE "title"
-                                 "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkFontDialog"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontDialog" GTK:FONT-DIALOG
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_font_dialog_get_type")
+                       ((FILTER FONT-DIALOG-FILTER "filter" "GtkFilter" T T)
+                        (FONT-MAP FONT-DIALOG-FONT-MAP
+                         "font-map" "PangoFontMap" T T)
+                        (LANGUAGE FONT-DIALOG-LANGUAGE
+                         "language" "PangoLanguage" T T)
+                        (MODAL FONT-DIALOG-MODAL "modal" "gboolean" T T)
+                        (TITLE FONT-DIALOG-TITLE "title" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkFontDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -68,4 +67,4 @@
 ;;;     gtk_font_dialog_choose_font_and_features_finish
 ;;;     gtk_font_dialog_choose_font_finish
 
-;;; 2024-7-3
+;;; 2024-9-20

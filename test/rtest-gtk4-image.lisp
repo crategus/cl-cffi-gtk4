@@ -19,23 +19,22 @@
   ;; Check names
   (is (equal '("GTK_IMAGE_EMPTY" "GTK_IMAGE_ICON_NAME" "GTK_IMAGE_GICON"
                "GTK_IMAGE_PAINTABLE")
-             (gtk-test:list-enum-item-name "GtkImageType")))
+             (glib-test:list-enum-item-names "GtkImageType")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkImageType")))
+             (glib-test:list-enum-item-values "GtkImageType")))
   ;; Check nick names
   (is (equal '("empty" "icon-name" "gicon" "paintable")
-             (gtk-test:list-enum-item-nick "GtkImageType")))
+             (glib-test:list-enum-item-nicks "GtkImageType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkImageType"
-                             GTK-IMAGE-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_image_type_get_type")
-                             (:EMPTY 0)
-                             (:ICON-NAME 1)
-                             (:GICON 2)
-                             (:PAINTABLE 3))
-             (gobject:get-g-type-definition "GtkImageType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkImageType" GTK:IMAGE-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_image_type_get_type")
+                                    (:EMPTY 0)
+                                    (:ICON-NAME 1)
+                                    (:GICON 2)
+                                    (:PAINTABLE 3))
+             (gobject:get-gtype-definition "GtkImageType"))))
 
 ;;;     GtkImage
 
@@ -53,44 +52,41 @@
           (g:type-parent "GtkImage")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkImage")))
+             (glib-test:list-children "GtkImage")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkImage")))
+             (glib-test:list-interfaces "GtkImage")))
   ;; Check class properties
   (is (equal '("file" "gicon" "icon-name" "icon-size" "paintable" "pixel-size"
                "resource" "storage-type" "use-fallback")
-             (gtk-test:list-properties "GtkImage")))
+             (glib-test:list-properties "GtkImage")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkImage")))
+             (glib-test:list-signals "GtkImage")))
   ;; Check CSS name
   (is (string= "image"
                (gtk:widget-class-css-name "GtkImage")))
   ;; Check accessible role
   (is (eq :img (gtk:widget-class-accessible-role "GtkImage")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkImage" GTK-IMAGE
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkImage" GTK:IMAGE
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_image_get_type")
-                       ((FILE GTK-IMAGE-FILE "file" "gchararray" T T)
-                        (GICON GTK-IMAGE-GICON "gicon" "GIcon" T T)
-                        (ICON-NAME GTK-IMAGE-ICON-NAME "icon-name" "gchararray"
-                         T T)
-                        (ICON-SIZE GTK-IMAGE-ICON-SIZE "icon-size"
-                         "GtkIconSize" T T)
-                        (PAINTABLE GTK-IMAGE-PAINTABLE "paintable"
-                         "GdkPaintable" T T)
-                        (PIXEL-SIZE GTK-IMAGE-PIXEL-SIZE "pixel-size" "gint" T
-                         T)
-                        (RESOURCE GTK-IMAGE-RESOURCE "resource" "gchararray" T
-                         T)
-                        (STORAGE-TYPE GTK-IMAGE-STORAGE-TYPE "storage-type"
-                         "GtkImageType" T NIL)
-                        (USE-FALLBACK GTK-IMAGE-USE-FALLBACK "use-fallback"
-                         "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkImage"))))
+                       ((FILE IMAGE-FILE "file" "gchararray" T T)
+                        (GICON IMAGE-GICON "gicon" "GIcon" T T)
+                        (ICON-NAME IMAGE-ICON-NAME "icon-name" "gchararray" T T)
+                        (ICON-SIZE IMAGE-ICON-SIZE "icon-size" "GtkIconSize" T T)
+                        (PAINTABLE IMAGE-PAINTABLE "paintable" "GdkPaintable" T T)
+                        (PIXEL-SIZE IMAGE-PIXEL-SIZE "pixel-size" "gint" T T)
+                        (RESOURCE IMAGE-RESOURCE "resource" "gchararray" T T)
+                        (STORAGE-TYPE IMAGE-STORAGE-TYPE
+                         "storage-type" "GtkImageType" T NIL)
+                        (USE-FALLBACK IMAGE-USE-FALLBACK
+                         "use-fallback" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkImage"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -337,4 +333,4 @@
     (is (eq :gicon (gtk:image-storage-type image)))
     (is-false (gtk:image-use-fallback image))))
 
-;;; 2024-6-30
+;;; 2024-9-20

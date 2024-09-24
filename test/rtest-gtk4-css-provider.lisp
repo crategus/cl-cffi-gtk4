@@ -42,7 +42,8 @@
 ;;;     gtk_css_section_new
 
 (test gtk-css-section-new
-  (let ((filename (namestring (sys-path "resource/css-accordion.css")))
+  (let* ((path (glib-sys:sys-path "test/resource/css-accordion.css"))
+         (filename (namestring path))
         section)
     (cffi:with-foreign-objects ((start '(:struct gtk:css-location))
                                 (end '(:struct gtk:css-location)))
@@ -103,23 +104,24 @@
           (g:type-parent "GtkCssProvider")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCssProvider")))
+             (glib-test:list-children "GtkCssProvider")))
   ;; Check interfaces
   (is (equal '("GtkStyleProvider")
-             (gtk-test:list-interfaces "GtkCssProvider")))
+             (glib-test:list-interfaces "GtkCssProvider")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkCssProvider")))
+             (glib-test:list-properties "GtkCssProvider")))
   ;; Check signals
   (is (equal '("parsing-error")
-             (gtk-test:list-signals "GtkCssProvider")))
+             (glib-test:list-signals "GtkCssProvider")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCssProvider" GTK-CSS-PROVIDER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                        ("GtkStyleProvider") :TYPE-INITIALIZER
-                        "gtk_css_provider_get_type")
-                       NIL)
-             (gobject:get-g-type-definition "GtkCssProvider"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCssProvider" GTK:CSS-PROVIDER
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkStyleProvider")
+                       :TYPE-INITIALIZER "gtk_css_provider_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkCssProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -197,7 +199,7 @@
 
 (test gtk-css-provider-load-from-file
   (let* ((provider (gtk:css-provider-new))
-         (path (sys-path "resource/css-accordion.css"))
+         (path (glib-sys:sys-path "test/resource/css-accordion.css"))
          (file (g:file-new-for-path path)))
     (is-false (gtk:css-provider-load-from-file provider file))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
@@ -205,7 +207,7 @@
 ;;;     gtk_css_provider_load_from_path
 
 (test gtk-css-provider-load-from-path
-  (let ((path (sys-path "resource/css-accordion.css"))
+  (let ((path (glib-sys:sys-path "test/resource/css-accordion.css"))
         (provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-from-path provider path))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
@@ -214,7 +216,8 @@
 
 #-windows
 (test gtk-css-provider-load-from-resource
-  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (glib-sys:sys-path
+                                    "test/resource/rtest-resource.gresource"))
     (let ((provider (gtk:css-provider-new))
           (path "/com/crategus/test/css-accordion.css"))
       (is-false (gtk:css-provider-load-from-resource provider path))
@@ -310,4 +313,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2024-4-22
+;;; 2024-9-19

@@ -23,22 +23,24 @@
   (is (equal '("GtkBinLayout" "GtkBoxLayout" "GtkCenterLayout"
                "GtkConstraintLayout" "GtkCustomLayout" "GtkFixedLayout"
                "GtkGridLayout" "GtkOverlayLayout")
-             (gtk-test:list-children "GtkLayoutManager")))
+             (glib-test:list-children "GtkLayoutManager")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkLayoutManager")))
+             (glib-test:list-interfaces "GtkLayoutManager")))
   ;; Check class properties
   (is (equal '()
-             (gtk-test:list-properties "GtkLayoutManager")))
+             (glib-test:list-properties "GtkLayoutManager")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkLayoutManager")))
+             (glib-test:list-signals "GtkLayoutManager")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLayoutManager" GTK-LAYOUT-MANAGER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_layout_manager_get_type")
-                       NIL)
-             (gobject:get-g-type-definition "GtkLayoutManager"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLayoutManager" GTK:LAYOUT-MANAGER
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_layout_manager_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkLayoutManager"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -120,4 +122,4 @@
 
 ;;;     gtk_layout_manager_layout_changed
 
-;;; 2024-4-12
+;;; 2024-9-19

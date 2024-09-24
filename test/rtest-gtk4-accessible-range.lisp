@@ -19,18 +19,17 @@
                                          :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkAccessible" "GObject")
-             (gtk-test:list-interface-prerequisites "GtkAccessibleRange")))
+             (glib-test:list-interface-prerequisites "GtkAccessibleRange")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkAccessibleRange")))
+             (glib-test:list-interface-properties "GtkAccessibleRange")))
   ;; Check interface signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAccessibleRange")))
+             (glib-test:list-signals "GtkAccessibleRange")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessibleRange"
-                                          GTK-ACCESSIBLE-RANGE
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_accessible_range_get_type"))
-             (gobject:get-g-type-definition "GtkAccessibleRange"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkAccessibleRange" GTK:ACCESSIBLE-RANGE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_accessible_range_get_type"))
+             (gobject:get-gtype-definition "GtkAccessibleRange"))))
 
-;;; 2024-7-4
+;;; 2024-9-19

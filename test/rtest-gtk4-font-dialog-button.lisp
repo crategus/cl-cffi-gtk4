@@ -19,23 +19,23 @@
   ;; Check names
   (is (equal '("GTK_FONT_LEVEL_FAMILY" "GTK_FONT_LEVEL_FACE"
                "GTK_FONT_LEVEL_FONT" "GTK_FONT_LEVEL_FEATURES")
-             (gtk-test:list-enum-item-name "GtkFontLevel")))
+             (glib-test:list-enum-item-names "GtkFontLevel")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkFontLevel")))
+             (glib-test:list-enum-item-values "GtkFontLevel")))
   ;; Check nick names
   (is (equal '("family" "face" "font" "features")
-             (gtk-test:list-enum-item-nick "GtkFontLevel")))
+             (glib-test:list-enum-item-nicks "GtkFontLevel")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFontLevel" GTK-FONT-LEVEL
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_font_level_get_type")
-                                     (:FAMILY 0)
-                                     (:FACE 1)
-                                     (:FONT 2)
-                                     (:FEATURES 3))
-             (gobject:get-g-type-definition "GtkFontLevel"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkFontLevel" GTK:FONT-LEVEL
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_font_level_get_type")
+                                    (:FAMILY 0)
+                                    (:FACE 1)
+                                    (:FONT 2)
+                                    (:FEATURES 3))
+             (gobject:get-gtype-definition "GtkFontLevel"))))
 
 ;;;     GtkFontDialogButton
 
@@ -54,46 +54,45 @@
           (g:type-parent "GtkFontDialogButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFontDialogButton")))
+             (glib-test:list-children "GtkFontDialogButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkFontDialogButton")))
+             (glib-test:list-interfaces "GtkFontDialogButton")))
   ;; Check properties
   (is (equal '("dialog" "font-desc" "font-features" "language" "level"
                "use-font" "use-size")
-             (gtk-test:list-properties "GtkFontDialogButton")))
+             (glib-test:list-properties "GtkFontDialogButton")))
   ;; Check signals
   (is (equal '("activate")
-             (gtk-test:list-signals "GtkFontDialogButton")))
+             (glib-test:list-signals "GtkFontDialogButton")))
   ;; Check CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontDialogButton")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFontDialogButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontDialogButton"
-                                             GTK-FONT-DIALOG-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_font_dialog_button_get_type")
-                               ((DIALOG GTK-FONT-DIALOG-BUTTON-DIALOG "dialog"
-                                 "GtkFontDialog" T T)
-                                (FONT-DESC GTK-FONT-DIALOG-BUTTON-FONT-DESC
-                                 "font-desc" "PangoFontDescription" T T)
-                                (FONT-FEATURES
-                                 GTK-FONT-DIALOG-BUTTON-FONT-FEATURES
-                                 "font-features" "gchararray" T T)
-                                (LANGUAGE GTK-FONT-DIALOG-BUTTON-LANGUAGE
-                                 "language" "PangoLanguage" T T)
-                                (LEVEL GTK-FONT-DIALOG-BUTTON-LEVEL "level"
-                                 "GtkFontLevel" T T)
-                                (USE-FONT GTK-FONT-DIALOG-BUTTON-USE-FONT
-                                 "use-font" "gboolean" T T)
-                                (USE-SIZE GTK-FONT-DIALOG-BUTTON-USE-SIZE
-                                 "use-size" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkFontDialogButton"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontDialogButton"
+                                      GTK:FONT-DIALOG-BUTTON
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_font_dialog_button_get_type")
+                       ((DIALOG FONT-DIALOG-BUTTON-DIALOG
+                         "dialog" "GtkFontDialog" T T)
+                        (FONT-DESC FONT-DIALOG-BUTTON-FONT-DESC
+                         "font-desc" "PangoFontDescription" T T)
+                        (FONT-FEATURES FONT-DIALOG-BUTTON-FONT-FEATURES
+                         "font-features" "gchararray" T T)
+                        (LANGUAGE FONT-DIALOG-BUTTON-LANGUAGE
+                         "language" "PangoLanguage" T T)
+                        (LEVEL FONT-DIALOG-BUTTON-LEVEL
+                         "level" "GtkFontLevel" T T)
+                        (USE-FONT FONT-DIALOG-BUTTON-USE-FONT
+                         "use-font" "gboolean" T T)
+                        (USE-SIZE FONT-DIALOG-BUTTON-USE-SIZE
+                         "use-size" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkFontDialogButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -126,4 +125,4 @@
 
 ;;;     gtk_font_dialog_button_new
 
-;;; 2024-7-4
+;;; 2024-9-20

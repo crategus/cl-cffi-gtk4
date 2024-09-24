@@ -16,24 +16,24 @@
   ;; Check names
   (is (equal '("GTK_APPLICATION_INHIBIT_LOGOUT" "GTK_APPLICATION_INHIBIT_SWITCH"
                "GTK_APPLICATION_INHIBIT_SUSPEND" "GTK_APPLICATION_INHIBIT_IDLE")
-             (gtk-test:list-flags-item-name "GtkApplicationInhibitFlags")))
+             (glib-test:list-flags-item-names "GtkApplicationInhibitFlags")))
   ;; Check values
   (is (equal '(1 2 4 8)
-             (gtk-test:list-flags-item-value "GtkApplicationInhibitFlags")))
+             (glib-test:list-flags-item-values "GtkApplicationInhibitFlags")))
   ;; Check nick names
   (is (equal '("logout" "switch" "suspend" "idle")
-             (gtk-test:list-flags-item-nick "GtkApplicationInhibitFlags")))
+             (glib-test:list-flags-item-nicks "GtkApplicationInhibitFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
-                              GTK-APPLICATION-INHIBIT-FLAGS
-                              (:EXPORT T
-                               :TYPE-INITIALIZER
-                               "gtk_application_inhibit_flags_get_type")
-                              (:LOGOUT 1)
-                              (:SWITCH 2)
-                              (:SUSPEND 4)
-                              (:IDLE 8))
-             (gobject:get-g-type-definition "GtkApplicationInhibitFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkApplicationInhibitFlags"
+                                     GTK:APPLICATION-INHIBIT-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_application_inhibit_flags_get_type")
+                                     (:LOGOUT 1)
+                                     (:SWITCH 2)
+                                     (:SUSPEND 4)
+                                     (:IDLE 8))
+             (gobject:get-gtype-definition "GtkApplicationInhibitFlags"))))
 
 ;;; --- GtkApplication ---------------------------------------------------------
 
@@ -50,33 +50,34 @@
   (is (eq (g:gtype "GApplication") (g:type-parent "GtkApplication")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkApplication")))
+             (glib-test:list-children "GtkApplication")))
   ;; Check interfaces
   (is (equal '("GActionGroup" "GActionMap")
-             (gtk-test:list-interfaces "GtkApplication")))
+             (glib-test:list-interfaces "GtkApplication")))
   ;; Check properties
   (is (equal '("active-window" "menubar" "register-session"
                "screensaver-active")
-             (gtk-test:list-properties "GtkApplication")))
+             (glib-test:list-properties "GtkApplication")))
   (is (equal '("query-end" "window-added" "window-removed")
-             (gtk-test:list-signals "GtkApplication")))
+             (glib-test:list-signals "GtkApplication")))
   ;; Check signals
   (is (equal '("query-end" "window-added" "window-removed")
-             (gtk-test:list-signals "GtkApplication")))
+             (glib-test:list-signals "GtkApplication")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplication" GTK-APPLICATION
-                       (:SUPERCLASS G-APPLICATION :EXPORT T :INTERFACES
-                        ("GActionGroup" "GActionMap") :TYPE-INITIALIZER
-                        "gtk_application_get_type")
-                       ((ACTIVE-WINDOW GTK-APPLICATION-ACTIVE-WINDOW
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkApplication" GTK:APPLICATION
+                       (:SUPERCLASS G:APPLICATION
+                        :EXPORT T
+                        :INTERFACES ("GActionGroup" "GActionMap")
+                        :TYPE-INITIALIZER "gtk_application_get_type")
+                       ((ACTIVE-WINDOW APPLICATION-ACTIVE-WINDOW
                          "active-window" "GtkWindow" T NIL)
-                        (MENUBAR GTK-APPLICATION-MENUBAR "menubar" "GMenuModel"
-                         T T)
-                        (REGISTER-SESSION GTK-APPLICATION-REGISTER-SESSION
+                        (MENUBAR APPLICATION-MENUBAR
+                         "menubar" "GMenuModel" T T)
+                        (REGISTER-SESSION APPLICATION-REGISTER-SESSION
                          "register-session" "gboolean" T T)
-                        (SCREENSAVER-ACTIVE GTK-APPLICATION-SCREENSAVER-ACTIVE
+                        (SCREENSAVER-ACTIVE APPLICATION-SCREENSAVER-ACTIVE
                          "screensaver-active" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkApplication"))))
+             (gobject:get-gtype-definition "GtkApplication"))))
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
@@ -128,7 +129,7 @@
                           (format t "~&Application is in shutdown.~%"))))
     ;; Run the application
     (g:application-run application nil)
-    ;; Check the collected messages from the signal handlers
+    ;; Check collected messages from the signal handlers
     (is (equal '("shutdown" "activate") message))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -195,7 +196,7 @@
                           (format t "~&Application is in shutdown.~%"))))
     ;; Run the application
     (g:application-run application nil)
-    ;; Check the collected messages from the signal handlers
+    ;; Check collected messages from the signal handlers
     (is (equal '("shutdown" "window-removed" "window-added" "activate")
                message))))
 
@@ -260,7 +261,7 @@
                           (is (eq window
                                   (gtk:application-window-by-id app
                                                                 window-id)))
-                          ;; Check the list of windows
+                          ;; Check list of windows
                           (is-true (member window
                                            (gtk:application-windows app)
                                            :test #'equal))
@@ -276,7 +277,7 @@
                           (format t "~&Application is in shutdown.~%"))))
     ;; Run the application
     (g:application-run application nil)
-    ;; Check the collected messages from the signal handlers
+    ;; Check collected messages from the signal handlers
     (is (equal '("shutdown" "window-removed" "window-added" "activate")
                message))))
 
@@ -324,4 +325,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; 2024-4-30
+;;; 2024-9-20

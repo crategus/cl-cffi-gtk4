@@ -21,39 +21,37 @@
           (g:type-parent "GtkFontButton")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFontButton")))
+             (glib-test:list-children "GtkFontButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFontChooser")
-             (gtk-test:list-interfaces "GtkFontButton")))
+             (glib-test:list-interfaces "GtkFontButton")))
   ;; Check properties
   (is (equal '("font" "font-desc" "font-features" "language" "level" "modal"
                "preview-text" "show-preview-entry" "title" "use-font"
                "use-size")
-             (gtk-test:list-properties "GtkFontButton")))
+             (glib-test:list-properties "GtkFontButton")))
   ;; Check signals
   (is (equal '("activate" "font-set")
-             (gtk-test:list-signals "GtkFontButton")))
+             (glib-test:list-signals "GtkFontButton")))
   ;; Check CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontButton")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFontButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontButton" GTK-FONT-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkFontChooser")
-                                :TYPE-INITIALIZER "gtk_font_button_get_type")
-                               ((MODAL GTK-FONT-BUTTON-MODAL "modal" "gboolean"
-                                 T T)
-                                (TITLE GTK-FONT-BUTTON-TITLE "title"
-                                 "gchararray" T T)
-                                (USE-FONT GTK-FONT-BUTTON-USE-FONT "use-font"
-                                 "gboolean" T T)
-                                (USE-SIZE GTK-FONT-BUTTON-USE-SIZE "use-size"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkFontButton"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontButton" GTK:FONT-BUTTON
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkFontChooser")
+                        :TYPE-INITIALIZER "gtk_font_button_get_type")
+                       ((MODAL FONT-BUTTON-MODAL "modal" "gboolean" T T)
+                        (TITLE FONT-BUTTON-TITLE "title" "gchararray" T T)
+                        (USE-FONT FONT-BUTTON-USE-FONT "use-font" "gboolean" T T)
+                        (USE-SIZE FONT-BUTTON-USE-SIZE "use-size" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkFontButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -116,4 +114,4 @@
     (is-false (gtk:font-chooser-preview-text button))
     (is-true (gtk:font-chooser-show-preview-entry button))))
 
-;;; 2024-6-1
+;;; 2024-9-20

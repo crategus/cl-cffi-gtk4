@@ -21,30 +21,30 @@
           (g:type-parent "GtkActionBar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkActionBar")))
+             (glib-test:list-children "GtkActionBar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkActionBar")))
+             (glib-test:list-interfaces "GtkActionBar")))
   ;; Check properties
   (is (equal '("revealed")
-             (gtk-test:list-properties "GtkActionBar")))
+             (glib-test:list-properties "GtkActionBar")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkActionBar")))
+             (glib-test:list-signals "GtkActionBar")))
   ;; Check CSS name
   (is (string= "actionbar"
                (gtk:widget-class-css-name "GtkActionBar")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkActionBar")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkActionBar" GTK-ACTION-BAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_action_bar_get_type")
-                               ((REVEALED GTK-ACTION-BAR-REVEALED "revealed"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkActionBar"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkActionBar" GTK:ACTION-BAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_action_bar_get_type")
+                      ((REVEALED ACTION-BAR-REVEALED "revealed" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkActionBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -65,4 +65,4 @@
 ;;;     gtk_action_bar_get_center_widget
 ;;;     gtk_action_bar_set_center_widget
 
-;;; 2024-4-21
+;;; 2024-9-19

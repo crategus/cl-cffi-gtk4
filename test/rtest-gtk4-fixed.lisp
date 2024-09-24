@@ -21,29 +21,30 @@
           (g:type-parent "GtkFixed")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFixed")))
+             (glib-test:list-children "GtkFixed")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkFixed")))
+             (glib-test:list-interfaces "GtkFixed")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkFixed")))
+             (glib-test:list-properties "GtkFixed")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFixed")))
+             (glib-test:list-signals "GtkFixed")))
   ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkFixed")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFixed")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixed" GTK-FIXED
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_fixed_get_type")
-                       NIL)
-             (gobject:get-g-type-definition "GtkFixed"))))
-
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFixed" GTK:FIXED
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_fixed_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkFixed"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -113,4 +114,4 @@
                      (gtk:fixed-child-transform fixed button)) 'gsk:transform))
     (is (string= "translate(25, 25)" (gsk:transform-to-string transform)))))
 
-;;; 2024-4-19
+;;; 2024-9-19

@@ -21,25 +21,26 @@
           (g:type-parent "GtkMediaFile")))
   ;; Check children
   (is (equal '("GtkGstMediaFile" "GtkNoMediaFile")
-             (gtk-test:list-children "GtkMediaFile")))
+             (glib-test:list-children "GtkMediaFile")))
   ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (gtk-test:list-interfaces "GtkMediaFile")))
+             (glib-test:list-interfaces "GtkMediaFile")))
   ;; Check class properties
   (is (equal '("file" "input-stream")
-             (gtk-test:list-properties "GtkMediaFile")))
+             (glib-test:list-properties "GtkMediaFile")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkMediaFile")))
+             (glib-test:list-signals "GtkMediaFile")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaFile" GTK-MEDIA-FILE
-                       (:SUPERCLASS GTK-MEDIA-STREAM :EXPORT T :INTERFACES
-                        ("GdkPaintable") :TYPE-INITIALIZER
-                        "gtk_media_file_get_type")
-                       ((FILE GTK-MEDIA-FILE-FILE "file" "GFile" T T)
-                        (INPUT-STREAM GTK-MEDIA-FILE-INPUT-STREAM
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMediaFile" GTK:MEDIA-FILE
+                       (:SUPERCLASS GTK:MEDIA-STREAM
+                        :EXPORT T
+                        :INTERFACES ("GdkPaintable")
+                        :TYPE-INITIALIZER "gtk_media_file_get_type")
+                       ((FILE MEDIA-FILE-FILE "file" "GFile" T T)
+                        (INPUT-STREAM MEDIA-FILE-INPUT-STREAM
                          "input-stream" "GInputStream" T T)))
-             (gobject:get-g-type-definition "GtkMediaFile"))))
+             (gobject:get-gtype-definition "GtkMediaFile"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -61,4 +62,4 @@
 ;;;     gtk_media_file_set_input_stream
 ;;;     gtk_media_file_get_input_stream
 
-;;; 2024-7-3
+;;; 2024-9-20

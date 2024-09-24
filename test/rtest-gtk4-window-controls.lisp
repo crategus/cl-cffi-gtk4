@@ -22,37 +22,33 @@
           (g:type-parent "GtkWindowControls")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkWindowControls")))
+             (glib-test:list-children "GtkWindowControls")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkWindowControls")))
+             (glib-test:list-interfaces "GtkWindowControls")))
   ;; Check properties
   (is (equal '("decoration-layout" "empty" "side")
-             (gtk-test:list-properties "GtkWindowControls")))
+             (glib-test:list-properties "GtkWindowControls")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkWindowControls")))
+             (glib-test:list-signals "GtkWindowControls")))
   ;; Check CSS name
   (is (string= "windowcontrols"
                (gtk:widget-class-css-name "GtkWindowControls")))
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkWindowControls")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowControls"
-                                             GTK-WINDOW-CONTROLS
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER
-                                "gtk_window_controls_get_type")
-                               ((DECORATION-LAYOUT
-                                 GTK-WINDOW-CONTROLS-DECORATION-LAYOUT
-                                 "decoration-layout" "gchararray" T T)
-                                (EMPTY GTK-WINDOW-CONTROLS-EMPTY "empty"
-                                 "gboolean" T NIL)
-                                (SIDE GTK-WINDOW-CONTROLS-SIDE "side"
-                                 "GtkPackType" T T)))
-             (gobject:get-g-type-definition "GtkWindowControls"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWindowControls" GTK:WINDOW-CONTROLS
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_window_controls_get_type")
+                       ((DECORATION-LAYOUT WINDOW-CONTROLS-DECORATION-LAYOUT
+                         "decoration-layout" "gchararray" T T)
+                        (EMPTY WINDOW-CONTROLS-EMPTY "empty" "gboolean" T NIL)
+                        (SIDE WINDOW-CONTROLS-SIDE "side" "GtkPackType" T T)))
+             (gobject:get-gtype-definition "GtkWindowControls"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

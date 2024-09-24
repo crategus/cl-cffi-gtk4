@@ -10,7 +10,7 @@
 (test gtk-scale-class
   ;; Check type
   (is (g:type-is-object "GtkScale"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:scale
           (glib:symbol-for-gtype "GtkScale")))
   ;; Check type initializer
@@ -22,41 +22,42 @@
   ;; Check children
   #-windows
   (is (equal '("GtkColorScale")
-             (gtk-test:list-children "GtkScale")))
+             (glib-test:list-children "GtkScale")))
   #+windows
   (if *first-run-gtk-test*
     (is (equal '()
-               (gtk-test:list-children "GtkScale"))))
+               (glib-test:list-children "GtkScale"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
-             (gtk-test:list-interfaces "GtkScale")))
+             (glib-test:list-interfaces "GtkScale")))
   ;; Check properties
   (is (equal '("digits" "draw-value" "has-origin" "value-pos")
-             (gtk-test:list-properties "GtkScale")))
+             (glib-test:list-properties "GtkScale")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkScale")))
+             (glib-test:list-signals "GtkScale")))
   ;; Check CSS name
   (is (string= "scale"
                (gtk:widget-class-css-name "GtkScale")))
   ;; Check accessible role
   (is (eq :slider (gtk:widget-class-accessible-role "GtkScale")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScale" GTK-SCALE
-                               (:SUPERCLASS GTK-RANGE :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkAccessibleRange"
-                                 "GtkBuildable" "GtkConstraintTarget"
-                                 "GtkOrientable")
-                                :TYPE-INITIALIZER "gtk_scale_get_type")
-                               ((DIGITS GTK-SCALE-DIGITS "digits" "gint" T T)
-                                (DRAW-VALUE GTK-SCALE-DRAW-VALUE "draw-value"
-                                 "gboolean" T T)
-                                (HAS-ORIGIN GTK-SCALE-HAS-ORIGIN "has-origin"
-                                 "gboolean" T T)
-                                (VALUE-POS GTK-SCALE-VALUE-POS "value-pos"
-                                 "GtkPositionType" T T)))
-             (gobject:get-g-type-definition "GtkScale"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScale" GTK:SCALE
+                       (:SUPERCLASS GTK:RANGE
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_scale_get_type")
+                       ((DIGITS SCALE-DIGITS "digits" "gint" T T)
+                        (DRAW-VALUE SCALE-DRAW-VALUE
+                         "draw-value" "gboolean" T T)
+                        (HAS-ORIGIN SCALE-HAS-ORIGIN
+                         "has-origin" "gboolean" T T)
+                        (VALUE-POS SCALE-VALUE-POS
+                         "value-pos" "GtkPositionType" T T)))
+             (gobject:get-gtype-definition "GtkScale"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

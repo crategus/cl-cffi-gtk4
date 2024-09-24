@@ -8,31 +8,32 @@
 ;;;     GtkUnit
 
 (test gtk-unit
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkUnit"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkUnit")
           (g:gtype (cffi:foreign-funcall "gtk_unit_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:unit
           (glib:symbol-for-gtype "GtkUnit")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_UNIT_NONE" "GTK_UNIT_POINTS" "GTK_UNIT_INCH" "GTK_UNIT_MM")
-             (gtk-test:list-enum-item-name "GtkUnit")))
-  ;; Check the values
+             (glib-test:list-enum-item-names "GtkUnit")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkUnit")))
-  ;; Check the nick names
+             (glib-test:list-enum-item-values "GtkUnit")))
+  ;; Check nick names
   (is (equal '("none" "points" "inch" "mm")
-             (gtk-test:list-enum-item-nick "GtkUnit")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkUnit" GTK-UNIT
-                (:EXPORT T :TYPE-INITIALIZER "gtk_unit_get_type")
-                (:NONE 0)
-                (:POINTS 1)
-                (:INCH 2)
-                (:MM 3))
-             (gobject:get-g-type-definition "GtkUnit"))))
+             (glib-test:list-enum-item-nicks "GtkUnit")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkUnit" GTK:UNIT
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_unit_get_type")
+                       (:NONE 0)
+                       (:POINTS 1)
+                       (:INCH 2)
+                       (:MM 3))
+             (gobject:get-gtype-definition "GtkUnit"))))
 
 ;;;     GtkPaperSize
 
@@ -42,7 +43,7 @@
   ;; Check type initializer
   (is (eq (g:gtype "GtkPaperSize")
           (g:gtype (cffi:foreign-funcall "gtk_paper_size_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:paper-size
           (glib:symbol-for-gtype "GtkPaperSize"))))
 
@@ -244,11 +245,11 @@ Height=297
 (test gtk-paper-size-gvariant
   (let* ((paper-size (gtk:paper-size-new "iso_a4"))
          (value (gtk:paper-size-to-gvariant paper-size)))
-    ;; Check the value
+    ;; Check value
     (is (string= (g:variant-print value nil)
                  "{'PPDName': <'A4'>, 'DisplayName': <'A4'>, 'Width': <210.0>, 'Height': <297.0>}"))
     ;; Read the value back to a paper size
     (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new-from-gvariant value))))
     (is (string= "iso_a4" (gtk:paper-size-name (gtk:paper-size-new-from-gvariant value))))))
 
-;;; 2024-7-4
+;;; 2024-9-20

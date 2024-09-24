@@ -21,22 +21,24 @@
           (g:type-parent "GtkWindowGroup")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkWindowGroup")))
+             (glib-test:list-children "GtkWindowGroup")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkWindowGroup")))
+             (glib-test:list-interfaces "GtkWindowGroup")))
   ;; Check class properties
   (is (equal '()
-             (gtk-test:list-properties "GtkWindowGroup")))
+             (glib-test:list-properties "GtkWindowGroup")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkWindowGroup")))
+             (glib-test:list-signals "GtkWindowGroup")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowGroup" GTK-WINDOW-GROUP
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWindowGroup" GTK:WINDOW-GROUP
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_window_group_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkWindowGroup"))))
+             (gobject:get-gtype-definition "GtkWindowGroup"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -68,4 +70,4 @@
     (is (equal '(GTK:WINDOW)
                (mapcar #' type-of (gtk:window-group-list-windows group))))))
 
-;;; 2024-4-11
+;;; 2024-9-20

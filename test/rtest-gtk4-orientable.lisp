@@ -21,14 +21,13 @@
              (mapcar #'g:param-spec-name
                      (g:object-interface-list-properties "GtkOrientable"))))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkOrientable"
-                                  GTK-ORIENTABLE
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER "gtk_orientable_get_type")
-                                  (ORIENTATION
-                                   GTK-ORIENTABLE-ORIENTATION
-                                   "orientation" "GtkOrientation" T T))
-             (gobject:get-g-type-definition "GtkOrientable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkOrientable" GTK:ORIENTABLE
+                                         (:EXPORT T
+                                          :TYPE-INITIALIZER
+                                          "gtk_orientable_get_type")
+                                         (ORIENTATION ORIENTABLE-ORIENTATION
+                                          "orientation" "GtkOrientation" T T))
+             (gobject:get-gtype-definition "GtkOrientable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -43,4 +42,4 @@
     (is (eq :vertical
             (gtk:orientable-orientation orientable)))))
 
-;;; 2024-7-4
+;;; 2024-9-19

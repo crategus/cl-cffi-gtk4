@@ -23,37 +23,37 @@
           (g:type-parent "GtkPopoverMenu")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkPopoverMenu")))
+             (glib-test:list-children "GtkPopoverMenu")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")
-             (gtk-test:list-interfaces "GtkPopoverMenu")))
+             (glib-test:list-interfaces "GtkPopoverMenu")))
   ;; Check properties
   (is (equal '("flags" "menu-model" "visible-submenu")
-             (gtk-test:list-properties "GtkPopoverMenu")))
+             (glib-test:list-properties "GtkPopoverMenu")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkPopoverMenu")))
+             (glib-test:list-signals "GtkPopoverMenu")))
   ;; Check CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopoverMenu")))
   ;; Check accessible role
   (is (eq :menu (gtk:widget-class-accessible-role "GtkPopoverMenu")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopoverMenu" GTK-POPOVER-MENU
-                               (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkNative"
-                                 "GtkShortcutManager")
-                                :TYPE-INITIALIZER "gtk_popover_menu_get_type")
-                               ((FLAGS GTK-POPOVER-MENU-FLAGS "flags"
-                                 "GtkPopoverMenuFlags" T T)
-                                (MENU-MODEL GTK-POPOVER-MENU-MENU-MODEL
-                                 "menu-model" "GMenuModel" T T)
-                                (VISIBLE-SUBMENU
-                                 GTK-POPOVER-MENU-VISIBLE-SUBMENU
-                                 "visible-submenu" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkPopoverMenu"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPopoverMenu" GTK:POPOVER-MENU
+                      (:SUPERCLASS GTK:POPOVER
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkNative" "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_popover_menu_get_type")
+                      ((FLAGS POPOVER-MENU-FLAGS
+                        "flags" "GtkPopoverMenuFlags" T T)
+                       (MENU-MODEL POPOVER-MENU-MENU-MODEL
+                        "menu-model" "GMenuModel" T T)
+                       (VISIBLE-SUBMENU POPOVER-MENU-VISIBLE-SUBMENU
+                        "visible-submenu" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkPopoverMenu"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -70,4 +70,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; 2024-7-3
+;;; 2024-9-20

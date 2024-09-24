@@ -18,18 +18,18 @@
           (g:gtype (cffi:foreign-funcall "gtk_tree_sortable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GtkTreeModel" "GObject")
-             (gtk-test:list-interface-prerequisites "GtkTreeSortable")))
+             (glib-test:list-interface-prerequisites "GtkTreeSortable")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkTreeSortable")))
+             (glib-test:list-interface-properties "GtkTreeSortable")))
   ;; Check interface signals
   (is (equal '("sort-column-changed")
-             (gtk-test:list-signals "GtkTreeSortable")))
+             (glib-test:list-signals "GtkTreeSortable")))
   ;; Get interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeSortable" GTK-TREE-SORTABLE
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_tree_sortable_get_type"))
-             (gobject:get-g-type-definition "GtkTreeSortable"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkTreeSortable" GTK:TREE-SORTABLE
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_tree_sortable_get_type"))
+             (gobject:get-gtype-definition "GtkTreeSortable"))))
 
 ;;;     GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID
 
@@ -56,4 +56,4 @@
 ;;;     gtk_tree_sortable_set_default_sort_func
 ;;;     gtk_tree_sortable_has_default_sort_func
 
-;;; 2024-5-9
+;;; 2024-9-20

@@ -20,51 +20,52 @@
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkComboBox")))
   ;; Check children
   (is (equal '("GtkComboBoxText")
-             (gtk-test:list-children "GtkComboBox")))
+             (glib-test:list-children "GtkComboBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
-             (gtk-test:list-interfaces "GtkComboBox")))
+             (glib-test:list-interfaces "GtkComboBox")))
   ;; Check class properties
   (is (equal '("active" "active-id" "button-sensitivity" "child"
                "editing-canceled" "entry-text-column" "has-entry" "has-frame"
                "id-column" "model" "popup-fixed-width" "popup-shown")
-             (gtk-test:list-properties "GtkComboBox")))
+             (glib-test:list-properties "GtkComboBox")))
   ;; Check signals
   (is (equal '("activate" "changed" "format-entry-text" "move-active" "popdown"
                "popup")
-             (gtk-test:list-signals "GtkComboBox")))
+             (glib-test:list-signals "GtkComboBox")))
   ;; Check CSS information
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBox")))
   ;; Check accessible role
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBox")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBox" GTK-COMBO-BOX
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkComboBox" GTK:COMBO-BOX
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
                          "GtkCellLayout" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_combo_box_get_type")
-                       ((ACTIVE GTK-COMBO-BOX-ACTIVE "active" "gint" T T)
-                        (ACTIVE-ID GTK-COMBO-BOX-ACTIVE-ID "active-id"
-                         "gchararray" T T)
-                        (BUTTON-SENSITIVITY GTK-COMBO-BOX-BUTTON-SENSITIVITY
+                       ((ACTIVE COMBO-BOX-ACTIVE "active" "gint" T T)
+                        (ACTIVE-ID COMBO-BOX-ACTIVE-ID
+                         "active-id" "gchararray" T T)
+                        (BUTTON-SENSITIVITY COMBO-BOX-BUTTON-SENSITIVITY
                          "button-sensitivity" "GtkSensitivityType" T T)
-                        (CHILD GTK-COMBO-BOX-CHILD "child" "GtkWidget" T T)
-                        (ENTRY-TEXT-COLUMN GTK-COMBO-BOX-ENTRY-TEXT-COLUMN
+                        (CHILD COMBO-BOX-CHILD "child" "GtkWidget" T T)
+                        (ENTRY-TEXT-COLUMN COMBO-BOX-ENTRY-TEXT-COLUMN
                          "entry-text-column" "gint" T T)
-                        (HAS-ENTRY GTK-COMBO-BOX-HAS-ENTRY "has-entry"
-                         "gboolean" T NIL)
-                        (HAS-FRAME GTK-COMBO-BOX-HAS-FRAME "has-frame"
-                         "gboolean" T T)
-                        (ID-COLUMN GTK-COMBO-BOX-ID-COLUMN "id-column" "gint" T
-                         T)
-                        (MODEL GTK-COMBO-BOX-MODEL "model" "GtkTreeModel" T T)
-                        (POPUP-FIXED-WIDTH GTK-COMBO-BOX-POPUP-FIXED-WIDTH
+                        (HAS-ENTRY COMBO-BOX-HAS-ENTRY
+                         "has-entry" "gboolean" T NIL)
+                        (HAS-FRAME COMBO-BOX-HAS-FRAME
+                         "has-frame" "gboolean" T T)
+                        (ID-COLUMN COMBO-BOX-ID-COLUMN "id-column" "gint" T T)
+                        (MODEL COMBO-BOX-MODEL "model" "GtkTreeModel" T T)
+                        (POPUP-FIXED-WIDTH COMBO-BOX-POPUP-FIXED-WIDTH
                          "popup-fixed-width" "gboolean" T T)
-                        (POPUP-SHOWN GTK-COMBO-BOX-POPUP-SHOWN "popup-shown"
-                         "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GtkComboBox"))))
+                        (POPUP-SHOWN COMBO-BOX-POPUP-SHOWN
+                         "popup-shown" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GtkComboBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

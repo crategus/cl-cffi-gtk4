@@ -22,34 +22,35 @@
           (g:type-parent "GtkShortcutsWindow")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkShortcutsWindow")))
+             (glib-test:list-children "GtkShortcutsWindow")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
-             (gtk-test:list-interfaces "GtkShortcutsWindow")))
+             (glib-test:list-interfaces "GtkShortcutsWindow")))
   ;; Check properties
   (is (equal '("section-name" "view-name")
-             (gtk-test:list-properties "GtkShortcutsWindow")))
+             (glib-test:list-properties "GtkShortcutsWindow")))
   ;; Check signals
   (is (equal '("close" "search")
-             (gtk-test:list-signals "GtkShortcutsWindow")))
+             (glib-test:list-signals "GtkShortcutsWindow")))
   ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkShortcutsWindow")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsWindow")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow"
-                                             GTK-SHORTCUTS-WINDOW
-                       (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutsWindow" GTK:SHORTCUTS-WINDOW
+                       (:SUPERCLASS GTK:WINDOW
+                        :EXPORT T
+                        :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")
                         :TYPE-INITIALIZER "gtk_shortcuts_window_get_type")
-                       ((SECTION-NAME GTK-SHORTCUTS-WINDOW-SECTION-NAME
+                       ((SECTION-NAME SHORTCUTS-WINDOW-SECTION-NAME
                          "section-name" "gchararray" T T)
-                        (VIEW-NAME GTK-SHORTCUTS-WINDOW-VIEW-NAME "view-name"
-                         "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkShortcutsWindow"))))
+                        (VIEW-NAME SHORTCUTS-WINDOW-VIEW-NAME
+                         "view-name" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkShortcutsWindow"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -92,4 +93,4 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;; 2024-7-3
+;;; 2024-9-20

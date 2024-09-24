@@ -22,29 +22,27 @@
           (g:type-parent "GtkTreeModelFilter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkTreeModelFilter")))
+             (glib-test:list-children "GtkTreeModelFilter")))
   ;; Check interfaces
   (is (equal '("GtkTreeModel" "GtkTreeDragSource")
-             (gtk-test:list-interfaces "GtkTreeModelFilter")))
+             (glib-test:list-interfaces "GtkTreeModelFilter")))
   ;; Check properties
   (is (equal '("child-model" "virtual-root")
-             (gtk-test:list-properties "GtkTreeModelFilter")))
+             (glib-test:list-properties "GtkTreeModelFilter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkTreeModelFilter")))
+             (glib-test:list-signals "GtkTreeModelFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeModelFilter"
-                                             GTK-TREE-MODEL-FILTER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GtkTreeDragSource" "GtkTreeModel")
-                                :TYPE-INITIALIZER
-                                "gtk_tree_model_filter_get_type")
-                               ((CHILD-MODEL GTK-TREE-MODEL-FILTER-CHILD-MODEL
-                                 "child-model" "GtkTreeModel" T NIL)
-                                (VIRTUAL-ROOT
-                                 GTK-TREE-MODEL-FILTER-VIRTUAL-ROOT
-                                 "virtual-root" "GtkTreePath" T NIL)))
-             (gobject:get-g-type-definition "GtkTreeModelFilter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeModelFilter" GTK:TREE-MODEL-FILTER
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkTreeDragSource" "GtkTreeModel")
+                       :TYPE-INITIALIZER "gtk_tree_model_filter_get_type")
+                      ((CHILD-MODEL TREE-MODEL-FILTER-CHILD-MODEL
+                        "child-model" "GtkTreeModel" T NIL)
+                       (VIRTUAL-ROOT TREE-MODEL-FILTER-VIRTUAL-ROOT
+                        "virtual-root" "GtkTreePath" T NIL)))
+             (gobject:get-gtype-definition "GtkTreeModelFilter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -103,4 +101,4 @@
 ;;;     gtk_tree_model_filter_refilter
 ;;;     gtk_tree_model_filter_clear_cache
 
-;;; 2024-5-9
+;;; 2024-9-20

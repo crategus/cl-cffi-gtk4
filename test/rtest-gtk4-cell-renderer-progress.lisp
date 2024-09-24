@@ -22,38 +22,34 @@
           (g:type-parent "GtkCellRendererProgress")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCellRendererProgress")))
+             (glib-test:list-children "GtkCellRendererProgress")))
   ;; Check interfaces
   (is (equal '("GtkOrientable")
-             (gtk-test:list-interfaces "GtkCellRendererProgress")))
+             (glib-test:list-interfaces "GtkCellRendererProgress")))
   ;; Check properties
   (is (equal '("inverted" "orientation" "pulse" "text" "text-xalign"
                "text-yalign" "value")
-             (gtk-test:list-properties "GtkCellRendererProgress")))
+             (glib-test:list-properties "GtkCellRendererProgress")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCellRendererProgress")))
+             (glib-test:list-signals "GtkCellRendererProgress")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererProgress"
-                               GTK-CELL-RENDERER-PROGRESS
-                               (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
-                                :INTERFACES ("GtkOrientable") :TYPE-INITIALIZER
-                                "gtk_cell_renderer_progress_get_type")
-                               ((INVERTED GTK-CELL-RENDERER-PROGRESS-INVERTED
-                                 "inverted" "gboolean" T T)
-                                (PULSE GTK-CELL-RENDERER-PROGRESS-PULSE "pulse"
-                                 "gint" T T)
-                                (TEXT GTK-CELL-RENDERER-PROGRESS-TEXT "text"
-                                 "gchararray" T T)
-                                (TEXT-XALIGN
-                                 GTK-CELL-RENDERER-PROGRESS-TEXT-XALIGN
-                                 "text-xalign" "gfloat" T T)
-                                (TEXT-YALIGN
-                                 GTK-CELL-RENDERER-PROGRESS-TEXT-YALIGN
-                                 "text-yalign" "gfloat" T T)
-                                (VALUE GTK-CELL-RENDERER-PROGRESS-VALUE "value"
-                                 "gint" T T)))
-             (gobject:get-g-type-definition "GtkCellRendererProgress"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRendererProgress"
+                                      GTK:CELL-RENDERER-PROGRESS
+                      (:SUPERCLASS GTK:CELL-RENDERER
+                       :EXPORT T
+                       :INTERFACES ("GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_cell_renderer_progress_get_type")
+                      ((INVERTED CELL-RENDERER-PROGRESS-INVERTED
+                        "inverted" "gboolean" T T)
+                       (PULSE CELL-RENDERER-PROGRESS-PULSE "pulse" "gint" T T)
+                       (TEXT CELL-RENDERER-PROGRESS-TEXT "text" "gchararray" T T)
+                       (TEXT-XALIGN CELL-RENDERER-PROGRESS-TEXT-XALIGN
+                        "text-xalign" "gfloat" T T)
+                       (TEXT-YALIGN CELL-RENDERER-PROGRESS-TEXT-YALIGN
+                        "text-yalign" "gfloat" T T)
+                       (VALUE CELL-RENDERER-PROGRESS-VALUE "value" "gint" T T)))
+             (gobject:get-gtype-definition "GtkCellRendererProgress"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -75,4 +71,4 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-progress-new) 'gtk:cell-renderer-progress))))
 
-;;; 2024-5-18
+;;; 2024-9-20

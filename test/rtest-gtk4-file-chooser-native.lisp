@@ -22,27 +22,29 @@
           (g:type-parent "GtkFileChooserNative")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFileChooserNative")))
+             (glib-test:list-children "GtkFileChooserNative")))
   ;; Check interfaces
   (is (equal '("GtkFileChooser")
-             (gtk-test:list-interfaces "GtkFileChooserNative")))
+             (glib-test:list-interfaces "GtkFileChooserNative")))
   ;; Check properties
   (is (equal '("accept-label" "action" "cancel-label" "create-folders" "filter"
                "filters" "select-multiple" "shortcut-folders")
-             (gtk-test:list-properties "GtkFileChooserNative")))
+             (glib-test:list-properties "GtkFileChooserNative")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFileChooserNative")))
+             (glib-test:list-signals "GtkFileChooserNative")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserNative" GTK-FILE-CHOOSER-NATIVE
-                       (:SUPERCLASS GTK-NATIVE-DIALOG :EXPORT T :INTERFACES
-                        ("GtkFileChooser") :TYPE-INITIALIZER
-                        "gtk_file_chooser_native_get_type")
-                       ((ACCEPT-LABEL GTK-FILE-CHOOSER-NATIVE-ACCEPT-LABEL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFileChooserNative"
+                                      GTK:FILE-CHOOSER-NATIVE
+                       (:SUPERCLASS GTK:NATIVE-DIALOG
+                        :EXPORT T
+                        :INTERFACES ("GtkFileChooser")
+                        :TYPE-INITIALIZER "gtk_file_chooser_native_get_type")
+                       ((ACCEPT-LABEL FILE-CHOOSER-NATIVE-ACCEPT-LABEL
                          "accept-label" "gchararray" T T)
-                        (CANCEL-LABEL GTK-FILE-CHOOSER-NATIVE-CANCEL-LABEL
+                        (CANCEL-LABEL FILE-CHOOSER-NATIVE-CANCEL-LABEL
                          "cancel-label" "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkFileChooserNative"))))
+             (gobject:get-gtype-definition "GtkFileChooserNative"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

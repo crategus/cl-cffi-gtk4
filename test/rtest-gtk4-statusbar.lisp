@@ -21,29 +21,30 @@
           (g:type-parent "GtkStatusbar")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStatusbar")))
+             (glib-test:list-children "GtkStatusbar")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkStatusbar")))
+             (glib-test:list-interfaces "GtkStatusbar")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkStatusbar")))
+             (glib-test:list-properties "GtkStatusbar")))
   ;; Check signals
   (is (equal '("text-popped" "text-pushed")
-             (gtk-test:list-signals "GtkStatusbar")))
+             (glib-test:list-signals "GtkStatusbar")))
   ;; Check CSS name
   (is (string= "statusbar"
                (gtk:widget-class-css-name "GtkStatusbar")))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStatusbar")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStatusbar" GTK-STATUSBAR
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_statusbar_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkStatusbar"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStatusbar" GTK:STATUSBAR
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_statusbar_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GtkStatusbar"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -64,4 +65,4 @@
 ;;;     gtk_statusbar_remove
 ;;;     gtk_statusbar_remove_all
 
-;;; 2024-5-18
+;;; 2024-9-20

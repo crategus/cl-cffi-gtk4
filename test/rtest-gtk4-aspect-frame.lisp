@@ -21,38 +21,35 @@
           (g:type-parent "GtkAspectFrame")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkAspectFrame")))
+             (glib-test:list-children "GtkAspectFrame")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (gtk-test:list-interfaces "GtkAspectFrame")))
+             (glib-test:list-interfaces "GtkAspectFrame")))
   ;; Check properties
   (is (equal '("child" "obey-child" "ratio" "xalign" "yalign")
-             (gtk-test:list-properties "GtkAspectFrame")))
+             (glib-test:list-properties "GtkAspectFrame")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkAspectFrame")))
+             (glib-test:list-signals "GtkAspectFrame")))
   ;; Check CSS name
   (is (string= "aspectframe"
                (gtk:widget-class-css-name "GtkAspectFrame")))
   ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkAspectFrame")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAspectFrame" GTK-ASPECT-FRAME
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_aspect_frame_get_type")
-                               ((CHILD GTK-ASPECT-FRAME-CHILD "child"
-                                 "GtkWidget" T T)
-                                (OBEY-CHILD GTK-ASPECT-FRAME-OBEY-CHILD
-                                 "obey-child" "gboolean" T T)
-                                (RATIO GTK-ASPECT-FRAME-RATIO "ratio" "gfloat"
-                                 T T)
-                                (XALIGN GTK-ASPECT-FRAME-XALIGN "xalign"
-                                 "gfloat" T T)
-                                (YALIGN GTK-ASPECT-FRAME-YALIGN "yalign"
-                                 "gfloat" T T)))
-             (gobject:get-g-type-definition "GtkAspectFrame"))))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAspectFrame" GTK:ASPECT-FRAME
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_aspect_frame_get_type")
+                      ((CHILD ASPECT-FRAME-CHILD "child" "GtkWidget" T T)
+                       (OBEY-CHILD ASPECT-FRAME-OBEY-CHILD
+                        "obey-child" "gboolean" T T)
+                       (RATIO ASPECT-FRAME-RATIO "ratio" "gfloat" T T)
+                       (XALIGN ASPECT-FRAME-XALIGN "xalign" "gfloat" T T)
+                       (YALIGN ASPECT-FRAME-YALIGN "yalign" "gfloat" T T)))
+             (gobject:get-gtype-definition "GtkAspectFrame"))))
 
 ;;; --- Properties -------------------------------------------------------------
 

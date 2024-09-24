@@ -21,42 +21,39 @@
           (g:type-parent "GtkButton")))
   ;; Check children
   (is (equal '("GtkLinkButton" "GtkLockButton" "GtkToggleButton")
-             (gtk-test:list-children "GtkButton")))
+             (glib-test:list-children "GtkButton")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
-             (gtk-test:list-interfaces "GtkButton")))
+             (glib-test:list-interfaces "GtkButton")))
   ;; Check class properties
   (is (equal '("action-name" "action-target" "can-shrink" "child" "has-frame"
                "icon-name" "label" "use-underline")
-             (gtk-test:list-properties "GtkButton")))
+             (glib-test:list-properties "GtkButton")))
   ;; Check signals
   (is (equal '("activate" "clicked")
-             (gtk-test:list-signals "GtkButton")))
+             (glib-test:list-signals "GtkButton")))
   ;; Check CSS information
   (is (string="button"
                (gtk:widget-class-css-name "GtkButton")))
   ;; Check accessibility role
   (is (eq :button (gtk:widget-class-accessible-role "GtkButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkButton" GTK-BUTTON
-                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkActionable" "GtkBuildable"
-                                 "GtkConstraintTarget")
-                                :TYPE-INITIALIZER "gtk_button_get_type")
-                               ((CAN-SHRINK GTK-BUTTON-CAN-SHRINK "can-shrink"
-                                 "gboolean" T T)
-                                (CHILD GTK-BUTTON-CHILD "child" "GtkWidget" T
-                                 T)
-                                (HAS-FRAME GTK-BUTTON-HAS-FRAME "has-frame"
-                                 "gboolean" T T)
-                                (ICON-NAME GTK-BUTTON-ICON-NAME "icon-name"
-                                 "gchararray" T T)
-                                (LABEL GTK-BUTTON-LABEL "label" "gchararray" T
-                                 T)
-                                (USE-UNDERLINE GTK-BUTTON-USE-UNDERLINE
-                                 "use-underline" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkButton"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkButton" GTK:BUTTON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkActionable" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_button_get_type")
+                      ((CAN-SHRINK BUTTON-CAN-SHRINK "can-shrink" "gboolean" T T)
+                       (CHILD BUTTON-CHILD "child" "GtkWidget" T T)
+                       (HAS-FRAME BUTTON-HAS-FRAME "has-frame" "gboolean" T T)
+                       (ICON-NAME BUTTON-ICON-NAME "icon-name" "gchararray" T T)
+                       (LABEL BUTTON-LABEL "label" "gchararray" T T)
+                       (USE-UNDERLINE BUTTON-USE-UNDERLINE
+                        "use-underline" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -134,4 +131,4 @@
     (is (string= "_battery" (gtk:button-label button)))
     (is-true (gtk:button-use-underline button))))
 
-;;; 2024-5-4
+;;; 2024-9-20
