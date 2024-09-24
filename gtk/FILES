@@ -10,11 +10,11 @@ GListModel support
   gtk4.bitset.lisp                     GtkBitset                      GTK 4.14
   gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
 
-  gtk4.filter.lisp                     GtkFilter                      GTK 4.12 .
-  gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.12 .
-  gtk4.multi-filter.lisp               GtkMultiFilter                 GTK 4.12 .
-  gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.12 .
-  gtk4.string-filter.lisp              GtkStringFilter                GTK 4.12 .
+  gtk4.filter.lisp                     GtkFilter                      GTK 4.14 .
+  gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.14 .
+  gtk4.multi-filter.lisp               GtkMultiFilter                 GTK 4.14 .
+  gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.14 .
+  gtk4.string-filter.lisp              GtkStringFilter                GTK 4.14 .
   gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.14 .
 
   gtk4.sorter.lisp                     GtkSorter                      GTK 4.12 .
@@ -68,7 +68,7 @@ Application support
 Interface builder
 
   gtk4.buildable.lisp                   GtkBuildable                  GTK 4.12 .
-  gtk4.builder.lisp                     GtkBuilder                    GTK 4.12 +
+  gtk4.builder.lisp                     GtkBuilder                    GTK 4.14&.
 
   GtkBuilderScope - Bindings for GtkBuilder
 
@@ -386,4 +386,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2024-7-9
+2024-9-15

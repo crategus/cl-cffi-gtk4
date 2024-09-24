@@ -496,78 +496,6 @@
     :components
     ((:file "rtest-gtk4")
 
-     ;; GDK General
-     (:file "rtest-gdk4-enumerations")
-     (:file "rtest-gdk4-rectangle")
-     (:file "rtest-gdk4-rgba")
-     (:file "rtest-gdk4-keyval")
-     (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
-
-     ;; Displays, Devices, Monitors, Seats
-     (:file "rtest-gdk4-display-manager")
-     (:file "rtest-gdk4-display")
-     (:file "rtest-gdk4-device-tool")
-     (:file "rtest-gdk4-device")
-     (:file "rtest-gdk4-device-pad")
-     (:file "rtest-gdk4-monitor")
-     (:file "rtest-gdk4-seat")
-
-     ;; Paintables, Textures
-     (:file "rtest-gdk4-paintable")
-     (:file "rtest-gdk4-paintable-subclassing")
-     (:file "rtest-gdk4-texture")
-;    (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk4-10)
-
-     ;; Events
-     (:file "rtest-gdk4-event")
-
-     ;; Surfaces, Toplevels, Popups
-     (:file "rtest-gdk4-surface")
-     (:file "rtest-gdk4-toplevel-layout")
-     (:file "rtest-gdk4-toplevel")
-     (:file "rtest-gdk4-toplevel-size")
-     (:file "rtest-gdk4-popup")
-     (:file "rtest-gdk4-popup-layout")
-
-     ;; Daw contexts
-;    (:file "rtest-gdk4-draw-context")
-;    (:file "rtest-gdk4-gl-context")
-;    (:file "rtest-gdk4-vulkan-context")
-     (:file "rtest-gdk4-cairo-context")
-
-     ;; Clipboard, Drag and Drop
-;    (:file "rtest-gdk4-content-formats")
-;    (:file "rtest-gdk4-content-provider")
-;    (:file "rtest-gdk4-content-serializer")
-;    (:file "rtest-gdk4-content-deserializer")
-     (:file "rtest-gdk4-clipboard")
-     (:file "rtest-gdk4-drag")
-     (:file "rtest-gdk4-drop")
-     (:file "rtest-gdk4-drag-surface")
-
-     ;; Application launching
-     (:file "rtest-gdk4-app-launch-context")
-
-     ;; Miscellaneous
-     (:file "rtest-gdk4-cursor")
-     (:file "rtest-gdk4-frame-timings")
-     (:file "rtest-gdk4-frame-clock")
-
-     ;; Pixbuf, Pango, Cairo, Backends interaction
-;    (:file "rtest-gdk4-pixbuf-interaction")
-;    (:file "rtest-gdk4-pango-interaction")
-;    (:file "rtest-gdk4-cairo-interaction")
-;    (:file "rtest-gdk4-x11-interaction")
-;    (:file "rtest-gdk4-wayland-interaction")
-
-     ;; GSK
-     (:file "rtest-gsk4-renderer")
-     (:file "rtest-gsk4-transform")
-     (:file "rtest-gsk4-render-node")
-     (:file "rtest-gsk4-rounded-rect")
-; TODO: No OpenGL support implemented
-;    (:file "rtest-gsk4-gl-shader")
-
      ;; GListModel support
      (:file "rtest-gtk4-bitset")
      (:file "rtest-gtk4-expression")
@@ -913,6 +841,78 @@
      ;; Application support
      (:file "rtest-gtk4-application")
      (:file "rtest-gtk4-application-window")
+
+     ;; GDK General
+     (:file "rtest-gdk4-enumerations")
+     (:file "rtest-gdk4-rectangle")
+     (:file "rtest-gdk4-rgba")
+     (:file "rtest-gdk4-keyval")
+     (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
+
+     ;; Displays, Devices, Monitors, Seats
+     (:file "rtest-gdk4-display-manager")
+     (:file "rtest-gdk4-display")
+     (:file "rtest-gdk4-device-tool")
+     (:file "rtest-gdk4-device")
+     (:file "rtest-gdk4-device-pad")
+     (:file "rtest-gdk4-monitor")
+     (:file "rtest-gdk4-seat")
+
+     ;; Paintables, Textures
+     (:file "rtest-gdk4-paintable")
+     (:file "rtest-gdk4-paintable-subclassing")
+     (:file "rtest-gdk4-texture")
+;    (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk4-10)
+
+     ;; Events
+     (:file "rtest-gdk4-event")
+
+     ;; Surfaces, Toplevels, Popups
+     (:file "rtest-gdk4-surface")
+     (:file "rtest-gdk4-toplevel-layout")
+     (:file "rtest-gdk4-toplevel")
+     (:file "rtest-gdk4-toplevel-size")
+     (:file "rtest-gdk4-popup")
+     (:file "rtest-gdk4-popup-layout")
+
+     ;; Daw contexts
+;    (:file "rtest-gdk4-draw-context")
+;    (:file "rtest-gdk4-gl-context")
+;    (:file "rtest-gdk4-vulkan-context")
+     (:file "rtest-gdk4-cairo-context")
+
+     ;; Clipboard, Drag and Drop
+;    (:file "rtest-gdk4-content-formats")
+;    (:file "rtest-gdk4-content-provider")
+;    (:file "rtest-gdk4-content-serializer")
+;    (:file "rtest-gdk4-content-deserializer")
+     (:file "rtest-gdk4-clipboard")
+     (:file "rtest-gdk4-drag")
+     (:file "rtest-gdk4-drop")
+     (:file "rtest-gdk4-drag-surface")
+
+     ;; Application launching
+     (:file "rtest-gdk4-app-launch-context")
+
+     ;; Miscellaneous
+     (:file "rtest-gdk4-cursor")
+     (:file "rtest-gdk4-frame-timings")
+     (:file "rtest-gdk4-frame-clock")
+
+     ;; Pixbuf, Pango, Cairo, Backends interaction
+;    (:file "rtest-gdk4-pixbuf-interaction")
+;    (:file "rtest-gdk4-pango-interaction")
+;    (:file "rtest-gdk4-cairo-interaction")
+;    (:file "rtest-gdk4-x11-interaction")
+;    (:file "rtest-gdk4-wayland-interaction")
+
+     ;; GSK
+     (:file "rtest-gsk4-renderer")
+     (:file "rtest-gsk4-transform")
+     (:file "rtest-gsk4-render-node")
+     (:file "rtest-gsk4-rounded-rect")
+; TODO: No OpenGL support implemented
+;    (:file "rtest-gsk4-gl-shader")
 
      (:file "rtest-gtk4-finish")
 ))))
