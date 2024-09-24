@@ -22,24 +22,25 @@
           (g:type-parent "GdkDisplayManager")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GdkDisplayManager")))
+             (glib-test:list-children "GdkDisplayManager")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkDisplayManager")))
+             (glib-test:list-interfaces "GdkDisplayManager")))
   ;; Check properties
   (is (equal '("default-display")
-             (gtk-test:list-properties "GdkDisplayManager")))
+             (glib-test:list-properties "GdkDisplayManager")))
   ;; Check signals
   (is (equal '("display-opened")
-             (gtk-test:list-signals "GdkDisplayManager")))
+             (glib-test:list-signals "GdkDisplayManager")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplayManager"
-                                             GDK-DISPLAY-MANAGER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDisplayManager" GDK:DISPLAY-MANAGER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_display_manager_get_type")
-                       ((DEFAULT-DISPLAY GDK-DISPLAY-MANAGER-DEFAULT-DISPLAY
+                       ((DEFAULT-DISPLAY DISPLAY-MANAGER-DEFAULT-DISPLAY
                          "default-display" "GdkDisplay" T T)))
-             (gobject:get-g-type-definition "GdkDisplayManager"))))
+             (gobject:get-gtype-definition "GdkDisplayManager"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -101,4 +102,4 @@
 
 ;;;     gdk_set_allowed_backends
 
-;;; 2024-7-10
+;;; 2024-9-19

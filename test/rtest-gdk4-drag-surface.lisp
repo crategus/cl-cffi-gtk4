@@ -20,18 +20,18 @@
           (g:gtype (cffi:foreign-funcall "gdk_drag_surface_get_type" :size))))
   ;; Check interface Prerequisites
   (is (equal '("GdkSurface")
-             (gtk-test:list-interface-prerequisites "GdkDragSurface")))
+             (glib-test:list-interface-prerequisites "GdkDragSurface")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GdkDragSurface")))
+             (glib-test:list-interface-properties "GdkDragSurface")))
   ;; Check signals
   (is (equal '("compute-size")
-             (gtk-test:list-signals "GdkDragSurface")))
+             (glib-test:list-signals "GdkDragSurface")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkDragSurface" GDK-DRAG-SURFACE
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gdk_drag_surface_get_type"))
-             (gobject:get-g-type-definition "GdkDragSurface"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkDragSurface" GDK:DRAG-SURFACE
+                            (:EXPORT T
+                             :TYPE-INITIALIZER "gdk_drag_surface_get_type"))
+             (gobject:get-gtype-definition "GdkDragSurface"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -55,4 +55,4 @@
 ;;;     gdk_drag_surface_present
 ;;;     gdk_drag_surface_size_set_size
 
-;;; 2024-7-4
+;;; 2024-9-18

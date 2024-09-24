@@ -21,28 +21,28 @@
                "GDK_DEVICE_TOOL_TYPE_ERASER" "GDK_DEVICE_TOOL_TYPE_BRUSH"
                "GDK_DEVICE_TOOL_TYPE_PENCIL" "GDK_DEVICE_TOOL_TYPE_AIRBRUSH"
                "GDK_DEVICE_TOOL_TYPE_MOUSE" "GDK_DEVICE_TOOL_TYPE_LENS")
-             (gtk-test:list-enum-item-name "GdkDeviceToolType")))
+             (glib-test:list-enum-item-names "GdkDeviceToolType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (gtk-test:list-enum-item-value "GdkDeviceToolType")))
+             (glib-test:list-enum-item-values "GdkDeviceToolType")))
   ;; Check nick names
   (is (equal '("unknown" "pen" "eraser" "brush" "pencil" "airbrush" "mouse"
                "lens")
-             (gtk-test:list-enum-item-nick "GdkDeviceToolType")))
+             (glib-test:list-enum-item-nicks "GdkDeviceToolType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkDeviceToolType"
-                             GDK-DEVICE-TOOL-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_device_tool_type_get_type")
-                             (:UNKNOWN 0)
-                             (:PEN 1)
-                             (:ERASER 2)
-                             (:BRUSH 3)
-                             (:PENCIL 4)
-                             (:AIRBRUSH 5)
-                             (:MOUSE 6)
-                             (:LENS 7))
-             (gobject:get-g-type-definition "GdkDeviceToolType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkDeviceToolType" GDK:DEVICE-TOOL-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_device_tool_type_get_type")
+                                    (:UNKNOWN 0)
+                                    (:PEN 1)
+                                    (:ERASER 2)
+                                    (:BRUSH 3)
+                                    (:PENCIL 4)
+                                    (:AIRBRUSH 5)
+                                    (:MOUSE 6)
+                                    (:LENS 7))
+             (gobject:get-gtype-definition "GdkDeviceToolType"))))
 
 ;;;     GdkDeviceTool
 
@@ -60,28 +60,29 @@
           (g:type-parent "GdkDeviceTool")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GdkDeviceTool")))
+             (glib-test:list-children "GdkDeviceTool")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkDeviceTool")))
+             (glib-test:list-interfaces "GdkDeviceTool")))
   ;; Check properties
   (is (equal '("axes" "hardware-id" "serial" "tool-type")
-             (gtk-test:list-properties "GdkDeviceTool")))
+             (glib-test:list-properties "GdkDeviceTool")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkDeviceTool")))
+             (glib-test:list-signals "GdkDeviceTool")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDeviceTool" GDK-DEVICE-TOOL
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDeviceTool" GDK:DEVICE-TOOL
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_device_tool_get_type")
-                       ((AXES GDK-DEVICE-TOOL-AXES "axes" "GdkAxisFlags" T NIL)
-                        (HARDWARE-ID GDK-DEVICE-TOOL-HARDWARE-ID "hardware-id"
-                         "guint64" T NIL)
-                        (SERIAL GDK-DEVICE-TOOL-SERIAL "serial" "guint64" T
-                         NIL)
-                        (TOOL-TYPE GDK-DEVICE-TOOL-TOOL-TYPE "tool-type"
-                         "GdkDeviceToolType" T NIL)))
-             (gobject:get-g-type-definition "GdkDeviceTool"))))
+                       ((AXES DEVICE-TOOL-AXES "axes" "GdkAxisFlags" T NIL)
+                        (HARDWARE-ID DEVICE-TOOL-HARDWARE-ID
+                         "hardware-id" "guint64" T NIL)
+                        (SERIAL DEVICE-TOOL-SERIAL "serial" "guint64" T NIL)
+                        (TOOL-TYPE DEVICE-TOOL-TOOL-TYPE
+                         "tool-type" "GdkDeviceToolType" T NIL)))
+             (gobject:get-gtype-definition "GdkDeviceTool"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -92,4 +93,4 @@
     (is (= 0 (gdk:device-tool-serial tool)))
     (is (eq :unknown (gdk:device-tool-tool-type tool)))))
 
-;;; 2024-7-11
+;;; 2024-9-19

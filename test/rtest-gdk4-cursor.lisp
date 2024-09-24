@@ -1,7 +1,7 @@
 (in-package :gtk-test)
 
-(def-suite gdk-cairo-context :in gdk-suite)
-(in-suite gdk-cairo-context)
+(def-suite gdk-cursor :in gdk-suite)
+(in-suite gdk-cursor)
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -21,31 +21,28 @@
           (g:type-parent "GdkCursor")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GdkCursor")))
+             (glib-test:list-children "GdkCursor")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkCursor")))
+             (glib-test:list-interfaces "GdkCursor")))
   ;; Check properties
   (is (equal '("fallback" "hotspot-x" "hotspot-y" "name" "texture")
-             (gtk-test:list-properties "GdkCursor")))
+             (glib-test:list-properties "GdkCursor")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkCursor")))
+             (glib-test:list-signals "GdkCursor")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkCursor" GDK-CURSOR
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_cursor_get_type")
-                               ((FALLBACK GDK-CURSOR-FALLBACK "fallback"
-                                 "GdkCursor" T NIL)
-                                (HOTSPOT-X GDK-CURSOR-HOTSPOT-X "hotspot-x"
-                                 "gint" T NIL)
-                                (HOTSPOT-Y GDK-CURSOR-HOTSPOT-Y "hotspot-y"
-                                 "gint" T NIL)
-                                (NAME GDK-CURSOR-NAME "name" "gchararray" T
-                                 NIL)
-                                (TEXTURE GDK-CURSOR-TEXTURE "texture"
-                                 "GdkTexture" T NIL)))
-             (gobject:get-g-type-definition "GdkCursor"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkCursor" GDK:CURSOR
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_cursor_get_type")
+                       ((FALLBACK CURSOR-FALLBACK "fallback" "GdkCursor" T NIL)
+                        (HOTSPOT-X CURSOR-HOTSPOT-X "hotspot-x" "gint" T NIL)
+                        (HOTSPOT-Y CURSOR-HOTSPOT-Y "hotspot-y" "gint" T NIL)
+                        (NAME CURSOR-NAME "name" "gchararray" T NIL)
+                        (TEXTURE CURSOR-TEXTURE "texture" "GdkTexture" T NIL)))
+             (gobject:get-gtype-definition "GdkCursor"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -97,4 +94,4 @@
     (is (typep (gdk:cursor-new-from-name "help" nil) 'gdk:cursor))
     (is (typep (gdk:cursor-new-from-name "help" fallback) 'gdk:cursor))))
 
-;;; 2024-6-30
+;;; 2024-9-19

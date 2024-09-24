@@ -23,34 +23,36 @@
   ;; Returns various children, GdkWaylandDisplay should be present
   #-windows
   (is (member "GdkWaylandDisplay"
-              (gtk-test:list-children "GdkDisplay") :test #'string=))
+              (glib-test:list-children "GdkDisplay") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Display")
-             (gtk-test:list-children "GdkDisplay")))
+             (glib-test:list-children "GdkDisplay")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkDisplay")))
+             (glib-test:list-interfaces "GdkDisplay")))
   ;; Check properties
   (is (equal '("composited" "dmabuf-formats" "input-shapes" "rgba"
                "shadow-width")
-             (gtk-test:list-properties "GdkDisplay")))
+             (glib-test:list-properties "GdkDisplay")))
   ;; Check signals
   (is (equal '("closed" "opened" "seat-added" "seat-removed" "setting-changed")
-             (gtk-test:list-signals "GdkDisplay")))
+             (glib-test:list-signals "GdkDisplay")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_display_get_type")
-                               ((COMPOSITED GDK-DISPLAY-COMPOSITED "composited"
-                                 "gboolean" T NIL)
-                                (DMABUF-FORMATS GDK-DISPLAY-DMABUF-FORMATS
-                                 "dmabuf-formats" "GdkDmabufFormats" T NIL)
-                                (INPUT-SHAPES GDK-DISPLAY-INPUT-SHAPES
-                                 "input-shapes" "gboolean" T NIL)
-                                (RGBA GDK-DISPLAY-RGBA "rgba" "gboolean" T NIL)
-                                (SHADOW-WIDTH GDK-DISPLAY-SHADOW-WIDTH
-                                 "shadow-width" "gboolean" T NIL)))
-             (gobject:get-g-type-definition "GdkDisplay"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDisplay" GDK:DISPLAY
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_display_get_type")
+                       ((COMPOSITED DISPLAY-COMPOSITED
+                         "composited" "gboolean" T NIL)
+                        (DMABUF-FORMATS DISPLAY-DMABUF-FORMATS
+                         "dmabuf-formats" "GdkDmabufFormats" T NIL)
+                        (INPUT-SHAPES DISPLAY-INPUT-SHAPES
+                         "input-shapes" "gboolean" T NIL)
+                        (RGBA DISPLAY-RGBA "rgba" "gboolean" T NIL)
+                        (SHADOW-WIDTH DISPLAY-SHADOW-WIDTH
+                         "shadow-width" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GdkDisplay"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -312,4 +314,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-7-6
+;;; 2024-9-19

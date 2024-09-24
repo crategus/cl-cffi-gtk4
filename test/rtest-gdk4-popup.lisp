@@ -18,21 +18,20 @@
           (g:gtype (cffi:foreign-funcall "gdk_popup_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GdkSurface")
-             (gtk-test:list-interface-prerequisites "GdkPopup")))
+             (glib-test:list-interface-prerequisites "GdkPopup")))
   ;; Check interface properties
   (is (equal '("autohide" "parent")
-             (gtk-test:list-interface-properties "GdkPopup")))
+             (glib-test:list-interface-properties "GdkPopup")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkPopup")))
+             (glib-test:list-signals "GdkPopup")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkPopup" GDK-POPUP
-                            (:EXPORT T :TYPE-INITIALIZER "gdk_popup_get_type")
-                            (AUTOHIDE GDK-POPUP-AUTOHIDE "autohide" "gboolean"
-                             T NIL)
-                            (PARENT GDK-POPUP-PARENT "parent" "GdkSurface" T
-                             NIL))
-             (gobject:get-g-type-definition "GdkPopup"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkPopup" GDK:POPUP
+                            (:EXPORT T
+                             :TYPE-INITIALIZER "gdk_popup_get_type")
+                            (AUTOHIDE POPUP-AUTOHIDE "autohide" "gboolean" T NIL)
+                            (PARENT POPUP-PARENT "parent" "GdkSurface" T NIL))
+             (gobject:get-gtype-definition "GdkPopup"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -47,4 +46,4 @@
 ;;;     gdk_popup_get_position_x
 ;;;     gdk_popup_get_position_y
 
-;;; 2024-7-4
+;;; 2024-9-18

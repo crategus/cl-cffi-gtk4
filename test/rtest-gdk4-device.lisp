@@ -20,27 +20,27 @@
   (is (equal '("GDK_SOURCE_MOUSE" "GDK_SOURCE_PEN" "GDK_SOURCE_KEYBOARD"
                "GDK_SOURCE_TOUCHSCREEN" "GDK_SOURCE_TOUCHPAD"
                "GDK_SOURCE_TRACKPOINT" "GDK_SOURCE_TABLET_PAD")
-             (gtk-test:list-enum-item-name "GdkInputSource")))
+             (glib-test:list-enum-item-names "GdkInputSource")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (gtk-test:list-enum-item-value "GdkInputSource")))
+             (glib-test:list-enum-item-values "GdkInputSource")))
   ;; Check nick names
   (is (equal '("mouse" "pen" "keyboard" "touchscreen" "touchpad" "trackpoint"
                "tablet-pad")
-             (gtk-test:list-enum-item-nick "GdkInputSource")))
+             (glib-test:list-enum-item-nicks "GdkInputSource")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkInputSource"
-                             GDK-INPUT-SOURCE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_input_source_get_type")
-                             (:MOUSE 0)
-                             (:PEN 1)
-                             (:KEYBOARD 2)
-                             (:TOUCHSCREEN 3)
-                             (:TOUCHPAD 4)
-                             (:TRACKPOINT 5)
-                             (:TABLET-PAD 6))
-             (gobject:get-g-type-definition "GdkInputSource"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkInputSource" GDK:INPUT-SOURCE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_input_source_get_type")
+                                    (:MOUSE 0)
+                                    (:PEN 1)
+                                    (:KEYBOARD 2)
+                                    (:TOUCHSCREEN 3)
+                                    (:TOUCHPAD 4)
+                                    (:TRACKPOINT 5)
+                                    (:TABLET-PAD 6))
+             (gobject:get-gtype-definition "GdkInputSource"))))
 
 ;;;     GdkAxisUse
 
@@ -58,33 +58,32 @@
                "GDK_AXIS_DELTA_Y" "GDK_AXIS_PRESSURE" "GDK_AXIS_XTILT"
                "GDK_AXIS_YTILT" "GDK_AXIS_WHEEL" "GDK_AXIS_DISTANCE"
                "GDK_AXIS_ROTATION" "GDK_AXIS_SLIDER" "GDK_AXIS_LAST")
-             (gtk-test:list-enum-item-name "GdkAxisUse")))
+             (glib-test:list-enum-item-names "GdkAxisUse")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12)
-             (gtk-test:list-enum-item-value "GdkAxisUse")))
+             (glib-test:list-enum-item-values "GdkAxisUse")))
   ;; Check nick names
   (is (equal '("ignore" "x" "y" "delta-x" "delta-y" "pressure" "xtilt" "ytilt"
                "wheel" "distance" "rotation" "slider" "last")
-             (gtk-test:list-enum-item-nick "GdkAxisUse")))
+             (glib-test:list-enum-item-nicks "GdkAxisUse")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkAxisUse"
-                             GDK-AXIS-USE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_axis_use_get_type")
-                             (:IGNORE 0)
-                             (:X 1)
-                             (:Y 2)
-                             (:DELTA-X 3)
-                             (:DELTA-Y 4)
-                             (:PRESSURE 5)
-                             (:XTILT 6)
-                             (:YTILT 7)
-                             (:WHEEL 8)
-                             (:DISTANCE 9)
-                             (:ROTATION 10)
-                             (:SLIDER 11)
-                             (:LAST 12))
-             (gobject:get-g-type-definition "GdkAxisUse"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkAxisUse" GDK:AXIS-USE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gdk_axis_use_get_type")
+                                    (:IGNORE 0)
+                                    (:X 1)
+                                    (:Y 2)
+                                    (:DELTA-X 3)
+                                    (:DELTA-Y 4)
+                                    (:PRESSURE 5)
+                                    (:XTILT 6)
+                                    (:YTILT 7)
+                                    (:WHEEL 8)
+                                    (:DISTANCE 9)
+                                    (:ROTATION 10)
+                                    (:SLIDER 11)
+                                    (:LAST 12))
+             (gobject:get-gtype-definition "GdkAxisUse"))))
 
 ;;;     GdkAxisFlags
 
@@ -103,31 +102,31 @@
                "GDK_AXIS_FLAG_XTILT" "GDK_AXIS_FLAG_YTILT" "GDK_AXIS_FLAG_WHEEL"
                "GDK_AXIS_FLAG_DISTANCE" "GDK_AXIS_FLAG_ROTATION"
                "GDK_AXIS_FLAG_SLIDER")
-             (gtk-test:list-flags-item-name "GdkAxisFlags")))
+             (glib-test:list-flags-item-names "GdkAxisFlags")))
   ;; Check values
   (is (equal '(2 4 8 16 32 64 128 256 512 1024 2048)
-             (gtk-test:list-flags-item-value "GdkAxisFlags")))
+             (glib-test:list-flags-item-values "GdkAxisFlags")))
   ;; Check nick names
   (is (equal '("x" "y" "delta-x" "delta-y" "pressure" "xtilt" "ytilt" "wheel"
                "distance" "rotation" "slider")
-             (gtk-test:list-flags-item-nick "GdkAxisFlags")))
+             (glib-test:list-flags-item-nicks "GdkAxisFlags")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkAxisFlags"
-                              GDK-AXIS-FLAGS
-                              (:EXPORT T
-                               :TYPE-INITIALIZER "gdk_axis_flags_get_type")
-                              (:X 2)
-                              (:Y 4)
-                              (:DELTA-X 8)
-                              (:DELTA-Y 16)
-                              (:PRESSURE 32)
-                              (:XTILT 64)
-                              (:YTILT 128)
-                              (:WHEEL 256)
-                              (:DISTANCE 512)
-                              (:ROTATION 1024)
-                              (:SLIDER 2048))
-             (gobject:get-g-type-definition "GdkAxisFlags"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkAxisFlags" GDK:AXIS-FLAGS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_axis_flags_get_type")
+                                     (:X 2)
+                                     (:Y 4)
+                                     (:DELTA-X 8)
+                                     (:DELTA-Y 16)
+                                     (:PRESSURE 32)
+                                     (:XTILT 64)
+                                     (:YTILT 128)
+                                     (:WHEEL 256)
+                                     (:DISTANCE 512)
+                                     (:ROTATION 1024)
+                                     (:SLIDER 2048))
+             (gobject:get-gtype-definition "GdkAxisFlags"))))
 
 ;;;     GdkDevice
 
@@ -146,55 +145,55 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandDevice"
-              (gtk-test:list-children "GdkDevice") :test #'string=))
+              (glib-test:list-children "GdkDevice") :test #'string=))
   #+windows
   (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
-             (gtk-test:list-children "GdkDevice")))
+             (glib-test:list-children "GdkDevice")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkDevice")))
+             (glib-test:list-interfaces "GdkDevice")))
   ;; Check properties
   (is (equal '("caps-lock-state" "direction" "display" "has-bidi-layouts"
                "has-cursor" "modifier-state" "n-axes" "name" "num-lock-state"
                "num-touches" "product-id" "scroll-lock-state" "seat" "source"
                "tool" "vendor-id")
-             (gtk-test:list-properties "GdkDevice")))
+             (glib-test:list-properties "GdkDevice")))
   ;; Check signals
   (is (equal '("changed" "tool-changed")
-             (gtk-test:list-signals "GdkDevice")))
+             (glib-test:list-signals "GdkDevice")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDevice" GDK-DEVICE
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDevice" GDK:DEVICE
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_device_get_type")
-                       ((CAPS-LOCK-STATE GDK-DEVICE-CAPS-LOCK-STATE
+                       ((CAPS-LOCK-STATE DEVICE-CAPS-LOCK-STATE
                          "caps-lock-state" "gboolean" T NIL)
-                        (DIRECTION GDK-DEVICE-DIRECTION "direction"
-                         "PangoDirection" T NIL)
-                        (DISPLAY GDK-DEVICE-DISPLAY "display" "GdkDisplay" T
-                         NIL)
-                        (HAS-BIDI-LAYOUTS GDK-DEVICE-HAS-BIDI-LAYOUTS
+                        (DIRECTION DEVICE-DIRECTION
+                         "direction" "PangoDirection" T NIL)
+                        (DISPLAY DEVICE-DISPLAY "display" "GdkDisplay" T NIL)
+                        (HAS-BIDI-LAYOUTS DEVICE-HAS-BIDI-LAYOUTS
                          "has-bidi-layouts" "gboolean" T NIL)
-                        (HAS-CURSOR GDK-DEVICE-HAS-CURSOR "has-cursor"
-                         "gboolean" T NIL)
-                        (MODIFIER-STATE GDK-DEVICE-MODIFIER-STATE
+                        (HAS-CURSOR DEVICE-HAS-CURSOR
+                         "has-cursor" "gboolean" T NIL)
+                        (MODIFIER-STATE DEVICE-MODIFIER-STATE
                          "modifier-state" "GdkModifierType" T NIL)
-                        (N-AXES GDK-DEVICE-N-AXES "n-axes" "guint" T NIL)
-                        (NAME GDK-DEVICE-NAME "name" "gchararray" T NIL)
-                        (NUM-LOCK-STATE GDK-DEVICE-NUM-LOCK-STATE
+                        (N-AXES DEVICE-N-AXES "n-axes" "guint" T NIL)
+                        (NAME DEVICE-NAME "name" "gchararray" T NIL)
+                        (NUM-LOCK-STATE DEVICE-NUM-LOCK-STATE
                          "num-lock-state" "gboolean" T NIL)
-                        (NUM-TOUCHES GDK-DEVICE-NUM-TOUCHES "num-touches"
-                         "guint" T NIL)
-                        (PRODUCT-ID GDK-DEVICE-PRODUCT-ID "product-id"
-                         "gchararray" T NIL)
-                        (SCROLL-LOCK-STATE GDK-DEVICE-SCROLL-LOCK-STATE
+                        (NUM-TOUCHES DEVICE-NUM-TOUCHES
+                         "num-touches" "guint" T NIL)
+                        (PRODUCT-ID DEVICE-PRODUCT-ID
+                         "product-id" "gchararray" T NIL)
+                        (SCROLL-LOCK-STATE DEVICE-SCROLL-LOCK-STATE
                          "scroll-lock-state" "gboolean" T NIL)
-                        (SEAT GDK-DEVICE-SEAT "seat" "GdkSeat" T T)
-                        (SOURCE GDK-DEVICE-SOURCE "source" "GdkInputSource" T
-                         NIL)
-                        (TOOL GDK-DEVICE-TOOL "tool" "GdkDeviceTool" T NIL)
-                        (VENDOR-ID GDK-DEVICE-VENDOR-ID "vendor-id"
-                         "gchararray" T NIL)))
-             (gobject:get-g-type-definition "GdkDevice"))))
+                        (SEAT DEVICE-SEAT "seat" "GdkSeat" T T)
+                        (SOURCE DEVICE-SOURCE "source" "GdkInputSource" T NIL)
+                        (TOOL DEVICE-TOOL "tool" "GdkDeviceTool" T NIL)
+                        (VENDOR-ID DEVICE-VENDOR-ID
+                         "vendor-id" "gchararray" T NIL)))
+             (gobject:get-gtype-definition "GdkDevice"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -296,4 +295,4 @@
          (device (gdk:seat-keyboard seat)))
     (is (= 0 (gdk:device-timestamp device)))))
 
-;;; 2024-7-6
+;;; 2024-9-18

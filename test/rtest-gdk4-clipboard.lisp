@@ -22,32 +22,32 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandClipboard"
-              (gtk-test:list-children "GdkClipboard") :test #'string=))
+              (glib-test:list-children "GdkClipboard") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Clipboard")
-             (gtk-test:list-children "GdkClipboard")))
+             (glib-test:list-children "GdkClipboard")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkClipboard")))
+             (glib-test:list-interfaces "GdkClipboard")))
   ;; Check properties
   (is (equal '("content" "display" "formats" "local")
-             (gtk-test:list-properties "GdkClipboard")))
+             (glib-test:list-properties "GdkClipboard")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GdkClipboard")))
+             (glib-test:list-signals "GdkClipboard")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkClipboard" GDK-CLIPBOARD
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_clipboard_get_type")
-                               ((CONTENT GDK-CLIPBOARD-CONTENT "content"
-                                 "GdkContentProvider" T NIL)
-                                (DISPLAY GDK-CLIPBOARD-DISPLAY "display"
-                                 "GdkDisplay" T NIL)
-                                (FORMATS GDK-CLIPBOARD-FORMATS "formats"
-                                 "GdkContentFormats" T NIL)
-                                (LOCAL GDK-CLIPBOARD-LOCAL "local" "gboolean" T
-                                 NIL)))
-             (gobject:get-g-type-definition "GdkClipboard"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkClipboard" GDK:CLIPBOARD
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_clipboard_get_type")
+                       ((CONTENT CLIPBOARD-CONTENT
+                         "content" "GdkContentProvider" T NIL)
+                        (DISPLAY CLIPBOARD-DISPLAY "display" "GdkDisplay" T NIL)
+                        (FORMATS CLIPBOARD-FORMATS
+                         "formats" "GdkContentFormats" T NIL)
+                        (LOCAL CLIPBOARD-LOCAL "local" "gboolean" T NIL)))
+             (gobject:get-gtype-definition "GdkClipboard"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -142,4 +142,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; 2024-7-6
+;;; 2024-9-19

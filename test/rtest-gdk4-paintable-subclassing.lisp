@@ -57,16 +57,16 @@
           (g:type-parent "GdkNuclearIcon")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GdkNuclearIcon")))
+             (glib-test:list-children "GdkNuclearIcon")))
   ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (gtk-test:list-interfaces "GdkNuclearIcon")))
+             (glib-test:list-interfaces "GdkNuclearIcon")))
   ;; Check properties
   (is (equal '("rotation")
-             (gtk-test:list-properties "GdkNuclearIcon")))
+             (glib-test:list-properties "GdkNuclearIcon")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkNuclearIcon")))
+             (glib-test:list-signals "GdkNuclearIcon")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkNuclearIcon" GDK-NUCLEAR-ICON
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES

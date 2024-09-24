@@ -22,25 +22,27 @@
   ;; Check children
   #-windows
   (is (equal '("GdkWaylandCairoContext" "GdkX11CairoContext")
-             (gtk-test:list-children "GdkCairoContext")))
+             (glib-test:list-children "GdkCairoContext")))
   #+WINDOWS
   (is (equal '("GdkWin32CairoContext")
-             (gtk-test:list-children "GdkCairoContext")))
+             (glib-test:list-children "GdkCairoContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkCairoContext")))
+             (glib-test:list-interfaces "GdkCairoContext")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GdkCairoContext")))
+             (glib-test:list-properties "GdkCairoContext")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkCairoContext")))
+             (glib-test:list-signals "GdkCairoContext")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkCairoContext" GDK-CAIRO-CONTEXT
-                       (:SUPERCLASS GDK-DRAW-CONTEXT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_cairo_context_get_type")
-                       NIL)
-             (gobject:get-g-type-definition "GdkCairoContext"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkCairoContext" GDK:CAIRO-CONTEXT
+                      (:SUPERCLASS GDK:DRAW-CONTEXT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_cairo_context_get_type")
+                      NIL)
+             (gobject:get-gtype-definition "GdkCairoContext"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -55,4 +57,4 @@
                'gdk:cairo-context))
     ))
 
-;;; 2024-7-4
+;;; 2024-9-19

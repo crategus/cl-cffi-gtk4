@@ -30,11 +30,11 @@
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE" "GSK_TEXTURE_SCALE_NODE"
                "GSK_MASK_NODE" "GSK_FILL_NODE" "GSK_STROKE_NODE"
                "GSK_SUBSURFACE_NODE")
-             (gtk-test:list-enum-item-name "GskRenderNodeType")))
+             (glib-test:list-enum-item-names "GskRenderNodeType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30)
-             (gtk-test:list-enum-item-value "GskRenderNodeType")))
+             (glib-test:list-enum-item-values "GskRenderNodeType")))
   ;; Check nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
                "linear-gradient-node" "repeating-linear-gradient-node"
@@ -46,45 +46,44 @@
                "text-node" "blur-node" "debug-node" "gl-shader-node"
                "texture-scale-node" "mask-node" "fill-node" "stroke-node"
                "subsurface-node")
-             (gtk-test:list-enum-item-nick "GskRenderNodeType")))
+             (glib-test:list-enum-item-nicks "GskRenderNodeType")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GskRenderNodeType"
-                                     GSK-RENDER-NODE-TYPE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gsk_render_node_type_get_type")
-                                     (:NOT-A-RENDER-NODE 0)
-                                     (:CONTAINER-NODE 1)
-                                     (:CAIRO-NODE 2)
-                                     (:COLOR-NODE 3)
-                                     (:LINEAR-GRADIENT-NODE 4)
-                                     (:REPEATING-LINEAR-GRADIENT-NODE 5)
-                                     (:RADIAL-GRADIENT-NODE 6)
-                                     (:REPEATING-RADIAL-GRADIENT-NODE 7)
-                                     (:CONIC-GRADIENT-NODE 8)
-                                     (:BORDER-NODE 9)
-                                     (:TEXTURE-NODE 10)
-                                     (:INSET-SHADOW-NODE 11)
-                                     (:OUTSET-SHADOW-NODE 12)
-                                     (:TRANSFORM-NODE 13)
-                                     (:OPACITY-NODE 14)
-                                     (:COLOR-MATRIX-NODE 15)
-                                     (:REPEAT-NODE 16)
-                                     (:CLIP-NODE 17)
-                                     (:ROUNDED-CLIP-NODE 18)
-                                     (:SHADOW-NODE 19)
-                                     (:BLEND-NODE 20)
-                                     (:CROSS-FADE-NODE 21)
-                                     (:TEXT-NODE 22)
-                                     (:BLUR-NODE 23)
-                                     (:DEBUG-NODE 24)
-                                     (:GL-SHADER-NODE 25)
-                                     (:TEXTURE-SCALE-NODE 26)
-                                     (:MASK-NODE 27)
-                                     (:FILL-NODE 28)
-                                     (:STROKE-NODE 29)
-                                     (:SUBSURFACE-NODE 30))
-             (gobject:get-g-type-definition "GskRenderNodeType"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GskRenderNodeType" GSK:RENDER-NODE-TYPE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gsk_render_node_type_get_type")
+                                    (:NOT-A-RENDER-NODE 0)
+                                    (:CONTAINER-NODE 1)
+                                    (:CAIRO-NODE 2)
+                                    (:COLOR-NODE 3)
+                                    (:LINEAR-GRADIENT-NODE 4)
+                                    (:REPEATING-LINEAR-GRADIENT-NODE 5)
+                                    (:RADIAL-GRADIENT-NODE 6)
+                                    (:REPEATING-RADIAL-GRADIENT-NODE 7)
+                                    (:CONIC-GRADIENT-NODE 8)
+                                    (:BORDER-NODE 9)
+                                    (:TEXTURE-NODE 10)
+                                    (:INSET-SHADOW-NODE 11)
+                                    (:OUTSET-SHADOW-NODE 12)
+                                    (:TRANSFORM-NODE 13)
+                                    (:OPACITY-NODE 14)
+                                    (:COLOR-MATRIX-NODE 15)
+                                    (:REPEAT-NODE 16)
+                                    (:CLIP-NODE 17)
+                                    (:ROUNDED-CLIP-NODE 18)
+                                    (:SHADOW-NODE 19)
+                                    (:BLEND-NODE 20)
+                                    (:CROSS-FADE-NODE 21)
+                                    (:TEXT-NODE 22)
+                                    (:BLUR-NODE 23)
+                                    (:DEBUG-NODE 24)
+                                    (:GL-SHADER-NODE 25)
+                                    (:TEXTURE-SCALE-NODE 26)
+                                    (:MASK-NODE 27)
+                                    (:FILL-NODE 28)
+                                    (:STROKE-NODE 29)
+                                    (:SUBSURFACE-NODE 30))
+             (gobject:get-gtype-definition "GskRenderNodeType"))))
 
 ;;;     GskRenderNode
 
@@ -107,8 +106,8 @@
 
 (defun render-node-draw-to-pdf (node width height &optional (filename nil))
   (let* ((path (if filename
-                  (sys-path filename)
-                  (sys-path "out/render-node.pdf")))
+                  (glib-sys:sys-path filename)
+                  (glib-sys:sys-path "test/out/render-node.pdf")))
          (surface (cairo:pdf-surface-create path width height))
          (context (cairo:create surface)))
     (gsk:render-node-ref node)
@@ -130,7 +129,7 @@
   (graphene:with-rect (rect 20 20 60 60)
     (let* ((color (gdk:rgba-parse "blue"))
            (node (gsk:color-node-new color rect))
-           (path (sys-path "out/render-node.1.pdf"))
+           (path (glib-sys:sys-path "test/out/render-node.1.pdf"))
            (width 100) (height 100)
            (surface (cairo:pdf-surface-create path width height))
            (context (cairo:create surface)))
@@ -152,7 +151,7 @@
   (graphene:with-rect (rect 20 20 60 60)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
-           (filename "out/render-node.2.pdf")
+           (filename "test/out/render-node.2.pdf")
            (width 100) (height 100))
       (render-node-draw-to-pdf node width height filename)
       (gsk:render-node-unref node))))
@@ -178,7 +177,7 @@
   (graphene:with-rect (rect 0 0 10 20)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
-           (filename  (sys-path "out/render-node-to-file.txt")))
+           (filename  (glib-sys:sys-path "test/out/render-node-to-file.txt")))
       (gsk:render-node-write-to-file node filename))))
 
 ;;;     gsk_render_node_get_bounds
@@ -218,7 +217,7 @@
   (graphene:with-rects ((rect1 10 10 80 80)
                                  (rect2 20 20 60 60)
                                  (rect3 30 30 40 40))
-    (let* ((filename  (sys-path "out/render-node-to-file.txt"))
+    (let* ((filename  (glib-sys:sys-path "test/out/render-node-to-file.txt"))
            (color1 (gsk:color-node-new (gdk:rgba-new :red 1 :alpha 1) rect1))
            (color2 (gsk:color-node-new (gdk:rgba-new :green 1 :alpha 1) rect2))
            (color3 (gsk:color-node-new (gdk:rgba-new :blue 1 :alpha 1) rect3))
@@ -276,7 +275,7 @@
 (test gsk-linear-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (sys-path "out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-points ((start 0 0) (end 100 100))
@@ -292,7 +291,7 @@
 (test gsk-repeating-linear-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (sys-path "out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-points ((start 0 0) (end 30 30))
@@ -317,7 +316,7 @@
 (test gsk-radial-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (sys-path "out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-point (center 50 50)
@@ -337,7 +336,7 @@
 (test gsk-repeating-radial-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (sys-path "out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-point (center 50 50)
@@ -361,7 +360,7 @@
 (test gsk-conic-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (sys-path "out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-point (center 50 50)
@@ -425,7 +424,7 @@
   (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
     (graphene:with-rects ((rect 10 10 80 80) bounds)
       (gsk:rounded-rect-init-from-rect outline rect 10)
-      (let* ((filename (sys-path "out/render-node-to-file.txt"))
+      (let* ((filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
              (widths (list 6.0 4.0 2.0 1/2))
              (black (gdk:rgba-parse "black"))
              (red (gdk:rgba-parse "red"))
@@ -554,4 +553,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; 2024-5-25
+;;; 2024-9-18

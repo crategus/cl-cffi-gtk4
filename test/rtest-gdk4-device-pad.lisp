@@ -20,23 +20,22 @@
   ;; Check names
   (is (equal '("GDK_DEVICE_PAD_FEATURE_BUTTON" "GDK_DEVICE_PAD_FEATURE_RING"
                "GDK_DEVICE_PAD_FEATURE_STRIP")
-             (gtk-test:list-enum-item-name "GdkDevicePadFeature")))
+             (glib-test:list-enum-item-names "GdkDevicePadFeature")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GdkDevicePadFeature")))
+             (glib-test:list-enum-item-values "GdkDevicePadFeature")))
   ;; Check nick names
   (is (equal '("button" "ring" "strip")
-             (gtk-test:list-enum-item-nick "GdkDevicePadFeature")))
+             (glib-test:list-enum-item-nicks "GdkDevicePadFeature")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkDevicePadFeature"
-                             GDK-DEVICE-PAD-FEATURE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER
-                              "gdk_device_pad_feature_get_type")
-                             (:BUTTON 0)
-                             (:RING 1)
-                             (:STRIP 2))
-             (gobject:get-g-type-definition "GdkDevicePadFeature"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkDevicePadFeature" GDK:DEVICE-PAD-FEATURE
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_device_pad_feature_get_type")
+                                    (:BUTTON 0)
+                                    (:RING 1)
+                                    (:STRIP 2))
+             (gobject:get-gtype-definition "GdkDevicePadFeature"))))
 
 ;;;     GdkDevicePad
 
@@ -51,17 +50,18 @@
           (g:gtype (cffi:foreign-funcall "gdk_device_pad_get_type" :size))))
   ;; Check interface Prerequisites
   (is (equal '("GdkDevice")
-             (gtk-test:list-interface-prerequisites "GdkDevicePad")))
+             (glib-test:list-interface-prerequisites "GdkDevicePad")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GdkDevicePad")))
+             (glib-test:list-interface-properties "GdkDevicePad")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkDevicePad")))
+             (glib-test:list-signals "GdkDevicePad")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkDevicePad" GDK-DEVICE-PAD
-                    (:EXPORT T :TYPE-INITIALIZER "gdk_device_pad_get_type"))
-             (gobject:get-g-type-definition "GdkDevicePad"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkDevicePad" GDK:DEVICE-PAD
+                    (:EXPORT T
+                     :TYPE-INITIALIZER "gdk_device_pad_get_type"))
+             (gobject:get-gtype-definition "GdkDevicePad"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -70,4 +70,4 @@
 ;;;     gdk_device_pad_get_n_features
 ;;;     gdk_device_pad_get_feature_group
 
-;;; 2024-7-4
+;;; 2024-9-18

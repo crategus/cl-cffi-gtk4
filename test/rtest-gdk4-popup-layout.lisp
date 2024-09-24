@@ -8,41 +8,41 @@
 ;;;     GdkAnchorHints
 
 (test gdk-anchor-hints
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GdkAnchorHints"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:anchor-hints
           (glib:symbol-for-gtype "GdkAnchorHints")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkAnchorHints")
           (g:gtype (cffi:foreign-funcall "gdk_anchor_hints_get_type" :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_ANCHOR_FLIP_X" "GDK_ANCHOR_FLIP_Y" "GDK_ANCHOR_SLIDE_X"
                "GDK_ANCHOR_SLIDE_Y" "GDK_ANCHOR_RESIZE_X" "GDK_ANCHOR_RESIZE_Y"
                "GDK_ANCHOR_FLIP" "GDK_ANCHOR_SLIDE" "GDK_ANCHOR_RESIZE")
-             (gtk-test:list-flags-item-name "GdkAnchorHints")))
-  ;; Check the values
+             (glib-test:list-flags-item-names "GdkAnchorHints")))
+  ;; Check values
   (is (equal '(1 2 4 8 16 32 3 12 48)
-             (gtk-test:list-flags-item-value "GdkAnchorHints")))
-  ;; Check the nick names
+             (glib-test:list-flags-item-values "GdkAnchorHints")))
+  ;; Check nick names
   (is (equal '("flip-x" "flip-y" "slide-x" "slide-y" "resize-x" "resize-y"
                "flip" "slide" "resize")
-             (gtk-test:list-flags-item-nick "GdkAnchorHints")))
-  ;; Check the flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkAnchorHints" GDK-ANCHOR-HINTS
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gdk_anchor_hints_get_type")
-                                      (:FLIP-X 1)
-                                      (:FLIP-Y 2)
-                                      (:SLIDE-X 4)
-                                      (:SLIDE-Y 8)
-                                      (:RESIZE-X 16)
-                                      (:RESIZE-Y 32)
-                                      (:FLIP 3)
-                                      (:SLIDE 12)
-                                      (:RESIZE 48))
-             (gobject:get-g-type-definition "GdkAnchorHints"))))
+             (glib-test:list-flags-item-nicks "GdkAnchorHints")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkAnchorHints" GDK:ANCHOR-HINTS
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_anchor_hints_get_type")
+                                     (:FLIP-X 1)
+                                     (:FLIP-Y 2)
+                                     (:SLIDE-X 4)
+                                     (:SLIDE-Y 8)
+                                     (:RESIZE-X 16)
+                                     (:RESIZE-Y 32)
+                                     (:FLIP 3)
+                                     (:SLIDE 12)
+                                     (:RESIZE 48))
+             (gobject:get-gtype-definition "GdkAnchorHints"))))
 
 ;;;     GdkPopupLayout
 
@@ -139,4 +139,4 @@
     (is (equal '(1 2 3 4)
                (multiple-value-list (gdk:popup-layout-shadow-width layout))))))
 
-;;; 2024-2-17
+;;; 2024-9-18

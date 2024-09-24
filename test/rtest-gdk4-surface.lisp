@@ -22,40 +22,37 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandSurface"
-              (gtk-test:list-children "GdkSurface") :test #'string=))
+              (glib-test:list-children "GdkSurface") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Surface")
-             (gtk-test:list-children "GdkSurface")))
+             (glib-test:list-children "GdkSurface")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkSurface")))
+             (glib-test:list-interfaces "GdkSurface")))
   ;; Check class properties
   (is (equal '("cursor" "display" "frame-clock" "height" "mapped" "scale"
                "scale-factor" "width")
-             (gtk-test:list-properties "GdkSurface")))
+             (glib-test:list-properties "GdkSurface")))
   ;; Check signals
   (is (equal '("enter-monitor" "event" "layout" "leave-monitor" "render")
-             (gtk-test:list-signals "GdkSurface")))
+             (glib-test:list-signals "GdkSurface")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSurface" GDK-SURFACE
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_surface_get_type")
-                               ((CURSOR GDK-SURFACE-CURSOR "cursor" "GdkCursor"
-                                 T T)
-                                (DISPLAY GDK-SURFACE-DISPLAY "display"
-                                 "GdkDisplay" T NIL)
-                                (FRAME-CLOCK GDK-SURFACE-FRAME-CLOCK
-                                 "frame-clock" "GdkFrameClock" T NIL)
-                                (HEIGHT GDK-SURFACE-HEIGHT "height" "gint" T
-                                 NIL)
-                                (MAPPED GDK-SURFACE-MAPPED "mapped" "gboolean"
-                                 T NIL)
-                                (SCALE GDK-SURFACE-SCALE "scale" "gdouble" T
-                                 NIL)
-                                (SCALE-FACTOR GDK-SURFACE-SCALE-FACTOR
-                                 "scale-factor" "gint" T NIL)
-                                (WIDTH GDK-SURFACE-WIDTH "width" "gint" T NIL)))
-             (gobject:get-g-type-definition "GdkSurface"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkSurface" GDK:SURFACE
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_surface_get_type")
+                       ((CURSOR SURFACE-CURSOR "cursor" "GdkCursor" T T)
+                        (DISPLAY SURFACE-DISPLAY "display" "GdkDisplay" T NIL)
+                        (FRAME-CLOCK SURFACE-FRAME-CLOCK
+                         "frame-clock" "GdkFrameClock" T NIL)
+                        (HEIGHT SURFACE-HEIGHT "height" "gint" T NIL)
+                        (MAPPED SURFACE-MAPPED "mapped" "gboolean" T NIL)
+                        (SCALE SURFACE-SCALE "scale" "gdouble" T NIL)
+                        (SCALE-FACTOR SURFACE-SCALE-FACTOR
+                         "scale-factor" "gint" T NIL)
+                        (WIDTH SURFACE-WIDTH "width" "gint" T NIL)))
+             (gobject:get-gtype-definition "GdkSurface"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -198,4 +195,4 @@
 ;;;     gdk_surface_get_device_cursor
 ;;;     gdk_surface_set_device_cursor
 
-;;; 2024-7-12
+;;; 2024-9-19

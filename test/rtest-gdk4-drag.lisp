@@ -20,23 +20,22 @@
   ;; Check names
   (is (equal '("GDK_DRAG_CANCEL_NO_TARGET" "GDK_DRAG_CANCEL_USER_CANCELLED"
                "GDK_DRAG_CANCEL_ERROR")
-             (gtk-test:list-enum-item-name "GdkDragCancelReason")))
+             (glib-test:list-enum-item-names "GdkDragCancelReason")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GdkDragCancelReason")))
+             (glib-test:list-enum-item-values "GdkDragCancelReason")))
   ;; Check nick names
   (is (equal '("no-target" "user-cancelled" "error")
-             (gtk-test:list-enum-item-nick "GdkDragCancelReason")))
+             (glib-test:list-enum-item-nicks "GdkDragCancelReason")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkDragCancelReason"
-                                     GDK-DRAG-CANCEL-REASON
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gdk_drag_cancel_reason_get_type")
-                                     (:NO-TARGET 0)
-                                     (:USER-CANCELLED 1)
-                                     (:ERROR 2))
-             (gobject:get-g-type-definition "GdkDragCancelReason"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkDragCancelReason" GDK:DRAG-CANCEL-REASON
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_drag_cancel_reason_get_type")
+                                    (:NO-TARGET 0)
+                                    (:USER-CANCELLED 1)
+                                    (:ERROR 2))
+             (gobject:get-gtype-definition "GdkDragCancelReason"))))
 
 ;;;     GdkDragAction
 
@@ -52,23 +51,23 @@
   ;; Check names
   (is (equal '("GDK_ACTION_COPY" "GDK_ACTION_MOVE" "GDK_ACTION_LINK"
                "GDK_ACTION_ASK")
-             (gtk-test:list-flags-item-name "GdkDragAction")))
+             (glib-test:list-flags-item-names "GdkDragAction")))
   ;; Check values
   (is (equal '(1 2 4 8)
-             (gtk-test:list-flags-item-value "GdkDragAction")))
+             (glib-test:list-flags-item-values "GdkDragAction")))
   ;; Check nick names
   (is (equal '("copy" "move" "link" "ask")
-             (gtk-test:list-flags-item-nick "GdkDragAction")))
+             (glib-test:list-flags-item-nicks "GdkDragAction")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkDragAction" GDK-DRAG-ACTION
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gdk_drag_action_get_type")
-                                      (:COPY 1)
-                                      (:MOVE 2)
-                                      (:LINK 4)
-                                      (:ASK 8))
-             (gobject:get-g-type-definition "GdkDragAction"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkDragAction" GDK:DRAG-ACTION
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_drag_action_get_type")
+                                     (:COPY 1)
+                                     (:MOVE 2)
+                                     (:LINK 4)
+                                     (:ASK 8))
+             (gobject:get-gtype-definition "GdkDragAction"))))
 
 ;;;     GdkDrag
 
@@ -86,36 +85,32 @@
           (g:type-parent "GdkDrag")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GdkDrag")))
+             (glib-test:list-children "GdkDrag")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkDrag")))
+             (glib-test:list-interfaces "GdkDrag")))
   ;; Check properties
   (is (equal '("actions" "content" "device" "display" "formats"
                "selected-action" "surface")
-             (gtk-test:list-properties "GdkDrag")))
+             (glib-test:list-properties "GdkDrag")))
   ;; Check signals
   (is (equal '("cancel" "dnd-finished" "drop-performed")
-             (gtk-test:list-signals "GdkDrag")))
+             (glib-test:list-signals "GdkDrag")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDrag" GDK-DRAG
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_drag_get_type")
-                               ((ACTIONS GDK-DRAG-ACTIONS "actions"
-                                 "GdkDragAction" T T)
-                                (CONTENT GDK-DRAG-CONTENT "content"
-                                 "GdkContentProvider" T NIL)
-                                (DEVICE GDK-DRAG-DEVICE "device" "GdkDevice" T
-                                 NIL)
-                                (DISPLAY GDK-DRAG-DISPLAY "display"
-                                 "GdkDisplay" T NIL)
-                                (FORMATS GDK-DRAG-FORMATS "formats"
-                                 "GdkContentFormats" T NIL)
-                                (SELECTED-ACTION GDK-DRAG-SELECTED-ACTION
-                                 "selected-action" "GdkDragAction" T T)
-                                (SURFACE GDK-DRAG-SURFACE "surface"
-                                 "GdkSurface" T NIL)))
-             (gobject:get-g-type-definition "GdkDrag"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDrag" GDK:DRAG
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_drag_get_type")
+                       ((ACTIONS DRAG-ACTIONS "actions" "GdkDragAction" T T)
+                        (CONTENT DRAG-CONTENT "content" "GdkContentProvider" T NIL)
+                        (DEVICE DRAG-DEVICE "device" "GdkDevice" T NIL)
+                        (DISPLAY DRAG-DISPLAY "display" "GdkDisplay" T NIL)
+                        (FORMATS DRAG-FORMATS "formats" "GdkContentFormats" T NIL)
+                        (SELECTED-ACTION DRAG-SELECTED-ACTION
+                         "selected-action" "GdkDragAction" T T)
+                        (SURFACE DRAG-SURFACE "surface" "GdkSurface" T NIL)))
+             (gobject:get-gtype-definition "GdkDrag"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -176,4 +171,4 @@
 ;;;     gdk_drag_set_hotspot
 ;;;     gdk_drag_action_is_unique
 
-;;; 2024-1-7
+;;; 2024-9-19

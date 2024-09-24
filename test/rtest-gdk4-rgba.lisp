@@ -10,7 +10,7 @@
 (test gdk-rgba-boxed
   ;; Check type
   (is (g:type-is-boxed "GdkRGBA"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkRGBA")
           (g:gtype (cffi:foreign-funcall "gdk_rgba_get_type" :size))))
   ;; Check registered name

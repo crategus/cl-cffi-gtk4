@@ -26,28 +26,28 @@
                "GDK_FRAME_CLOCK_PHASE_PAINT"
                "GDK_FRAME_CLOCK_PHASE_RESUME_EVENTS"
                "GDK_FRAME_CLOCK_PHASE_AFTER_PAINT")
-             (gtk-test:list-flags-item-name "GdkFrameClockPhase")))
+             (glib-test:list-flags-item-names "GdkFrameClockPhase")))
   ;; Check values
   (is (equal '(0 1 2 4 8 16 32 64)
-             (gtk-test:list-flags-item-value "GdkFrameClockPhase")))
+             (glib-test:list-flags-item-values "GdkFrameClockPhase")))
   ;; Check nick names
   (is (equal '("none" "flush-events" "before-paint" "update" "layout" "paint"
                "resume-events" "after-paint")
-             (gtk-test:list-flags-item-nick "GdkFrameClockPhase")))
+             (glib-test:list-flags-item-nicks "GdkFrameClockPhase")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkFrameClockPhase" GDK-FRAME-CLOCK-PHASE
-                                      (:EXPORT T
-                                       :TYPE-INITIALIZER
-                                       "gdk_frame_clock_phase_get_type")
-                                      (:NONE 0)
-                                      (:FLUSH-EVENTS 1)
-                                      (:BEFORE-PAINT 2)
-                                      (:UPDATE 4)
-                                      (:LAYOUT 8)
-                                      (:PAINT 16)
-                                      (:RESUME-EVENTS 32)
-                                      (:AFTER-PAINT 64))
-             (gobject:get-g-type-definition "GdkFrameClockPhase"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkFrameClockPhase" GDK:FRAME-CLOCK-PHASE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_frame_clock_phase_get_type")
+                                     (:NONE 0)
+                                     (:FLUSH-EVENTS 1)
+                                     (:BEFORE-PAINT 2)
+                                     (:UPDATE 4)
+                                     (:LAYOUT 8)
+                                     (:PAINT 16)
+                                     (:RESUME-EVENTS 32)
+                                     (:AFTER-PAINT 64))
+             (gobject:get-gtype-definition "GdkFrameClockPhase"))))
 
 ;;;     GdkFrameClock
 
@@ -65,23 +65,25 @@
           (g:type-parent "GdkFrameClock")))
   ;; Check children
   (is (equal '("GdkFrameClockIdle")
-             (gtk-test:list-children "GdkFrameClock")))
+             (glib-test:list-children "GdkFrameClock")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkFrameClock")))
+             (glib-test:list-interfaces "GdkFrameClock")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GdkFrameClock")))
+             (glib-test:list-properties "GdkFrameClock")))
   ;; Check signals
   (is (equal '("after-paint" "before-paint" "flush-events" "layout" "paint"
                "resume-events" "update")
-             (gtk-test:list-signals "GdkFrameClock")))
+             (glib-test:list-signals "GdkFrameClock")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkFrameClock" GDK-FRAME-CLOCK
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_frame_clock_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GdkFrameClock"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkFrameClock" GDK:FRAME-CLOCK
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_frame_clock_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GdkFrameClock"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -106,4 +108,4 @@
 ;;;     gdk_frame_clock_get_refresh_info
 ;;;     gdk_frame_clock_get_fps
 
-;;; 2024-7-12
+;;; 2024-9-19

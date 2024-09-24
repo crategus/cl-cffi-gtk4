@@ -22,26 +22,26 @@
                "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR"
                "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB"
                "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR")
-             (gtk-test:list-enum-item-name "GdkSubpixelLayout")))
+             (glib-test:list-enum-item-names "GdkSubpixelLayout")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (gtk-test:list-enum-item-value "GdkSubpixelLayout")))
+             (glib-test:list-enum-item-values "GdkSubpixelLayout")))
   ;; Check nick names
   (is (equal '("unknown" "none" "horizontal-rgb" "horizontal-bgr" "vertical-rgb"
                "vertical-bgr")
-             (gtk-test:list-enum-item-nick "GdkSubpixelLayout")))
+             (glib-test:list-enum-item-nicks "GdkSubpixelLayout")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkSubpixelLayout"
-                             GDK-SUBPIXEL-LAYOUT
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_subpixel_layout_get_type")
-                             (:UNKNOWN 0)
-                             (:NONE 1)
-                             (:HORIZONTAL-RGB 2)
-                             (:HORIZONTAL-BGR 3)
-                             (:VERTICAL-RGB 4)
-                             (:VERTICAL-BGR 5))
-             (gobject:get-g-type-definition "GdkSubpixelLayout"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkSubpixelLayout" GDK:SUBPIXEL-LAYOUT
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_subpixel_layout_get_type")
+                                    (:UNKNOWN 0)
+                                    (:NONE 1)
+                                    (:HORIZONTAL-RGB 2)
+                                    (:HORIZONTAL-BGR 3)
+                                    (:VERTICAL-RGB 4)
+                                    (:VERTICAL-BGR 5))
+             (gobject:get-gtype-definition "GdkSubpixelLayout"))))
 
 ;;;     GdkMonitor
 
@@ -60,52 +60,50 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandMonitor"
-              (gtk-test:list-children "GdkMonitor") :test #'string=))
+              (glib-test:list-children "GdkMonitor") :test #'string=))
   #+windows
   (is (equal '("GdkWin32Monitor")
-             (gtk-test:list-children "GdkMonitor")))
+             (glib-test:list-children "GdkMonitor")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkMonitor")))
+             (glib-test:list-interfaces "GdkMonitor")))
   ;; Check properties
   (is (equal '("connector" "description" "display" "geometry" "height-mm"
                "manufacturer" "model" "refresh-rate" "scale" "scale-factor"
                "subpixel-layout" "valid" "width-mm")
-             (gtk-test:list-properties "GdkMonitor")))
+             (glib-test:list-properties "GdkMonitor")))
   ;; Check signals
   (is (equal '("invalidate")
-             (gtk-test:list-signals "GdkMonitor")))
+             (glib-test:list-signals "GdkMonitor")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkMonitor" GDK-MONITOR
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gdk_monitor_get_type")
-                               ((CONNECTOR GDK-MONITOR-CONNECTOR "connector"
-                                 "gchararray" T NIL)
-                                (DESCRIPTION GDK-MONITOR-DESCRIPTION
-                                 "description" "gchararray" T NIL)
-                                (DISPLAY GDK-MONITOR-DISPLAY "display"
-                                 "GdkDisplay" T NIL)
-                                (GEOMETRY GDK-MONITOR-GEOMETRY "geometry"
-                                 "GdkRectangle" T NIL)
-                                (HEIGHT-MM GDK-MONITOR-HEIGHT-MM "height-mm"
-                                 "gint" T NIL)
-                                (MANUFACTURER GDK-MONITOR-MANUFACTURER
-                                 "manufacturer" "gchararray" T NIL)
-                                (MODEL GDK-MONITOR-MODEL "model" "gchararray" T
-                                 NIL)
-                                (REFRESH-RATE GDK-MONITOR-REFRESH-RATE
-                                 "refresh-rate" "gint" T NIL)
-                                (SCALE GDK-MONITOR-SCALE "scale" "gdouble" T
-                                 NIL)
-                                (SCALE-FACTOR GDK-MONITOR-SCALE-FACTOR
-                                 "scale-factor" "gint" T NIL)
-                                (SUBPIXEL-LAYOUT GDK-MONITOR-SUBPIXEL-LAYOUT
-                                 "subpixel-layout" "GdkSubpixelLayout" T NIL)
-                                (VALID GDK-MONITOR-VALID "valid" "gboolean" T
-                                 NIL)
-                                (WIDTH-MM GDK-MONITOR-WIDTH-MM "width-mm"
-                                 "gint" T NIL)))
-             (gobject:get-g-type-definition "GdkMonitor"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkMonitor" GDK:MONITOR
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_monitor_get_type")
+                       ((CONNECTOR MONITOR-CONNECTOR
+                         "connector" "gchararray" T NIL)
+                        (DESCRIPTION MONITOR-DESCRIPTION
+                         "description" "gchararray" T NIL)
+                        (DISPLAY MONITOR-DISPLAY
+                         "display" "GdkDisplay" T NIL)
+                        (GEOMETRY MONITOR-GEOMETRY
+                         "geometry" "GdkRectangle" T NIL)
+                        (HEIGHT-MM MONITOR-HEIGHT-MM
+                         "height-mm" "gint" T NIL)
+                        (MANUFACTURER MONITOR-MANUFACTURER
+                         "manufacturer" "gchararray" T NIL)
+                        (MODEL MONITOR-MODEL "model" "gchararray" T NIL)
+                        (REFRESH-RATE MONITOR-REFRESH-RATE
+                         "refresh-rate" "gint" T NIL)
+                        (SCALE MONITOR-SCALE "scale" "gdouble" T NIL)
+                        (SCALE-FACTOR MONITOR-SCALE-FACTOR
+                         "scale-factor" "gint" T NIL)
+                        (SUBPIXEL-LAYOUT MONITOR-SUBPIXEL-LAYOUT
+                         "subpixel-layout" "GdkSubpixelLayout" T NIL)
+                        (VALID MONITOR-VALID "valid" "gboolean" T NIL)
+                        (WIDTH-MM MONITOR-WIDTH-MM "width-mm" "gint" T NIL)))
+             (gobject:get-gtype-definition "GdkMonitor"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -198,4 +196,4 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
     (is-true (gdk:monitor-is-valid monitor))))
 
-;;; 2024-7-7
+;;; 2024-9-19

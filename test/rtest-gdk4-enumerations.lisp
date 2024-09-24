@@ -19,30 +19,29 @@
                "GDK_GRAVITY_NORTH_EAST" "GDK_GRAVITY_WEST" "GDK_GRAVITY_CENTER"
                "GDK_GRAVITY_EAST" "GDK_GRAVITY_SOUTH_WEST" "GDK_GRAVITY_SOUTH"
                "GDK_GRAVITY_SOUTH_EAST" "GDK_GRAVITY_STATIC")
-             (gtk-test:list-enum-item-name "GdkGravity")))
+             (glib-test:list-enum-item-names "GdkGravity")))
   ;; Check values
   (is (equal '(1 2 3 4 5 6 7 8 9 10)
-             (gtk-test:list-enum-item-value "GdkGravity")))
+             (glib-test:list-enum-item-values "GdkGravity")))
   ;; Check nick names
   (is (equal '("north-west" "north" "north-east" "west" "center" "east"
                "south-west" "south" "south-east" "static")
-             (gtk-test:list-enum-item-nick "GdkGravity")))
+             (glib-test:list-enum-item-nicks "GdkGravity")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkGravity"
-                             GDK-GRAVITY
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_gravity_get_type")
-                             (:NORTH-WEST 1)
-                             (:NORTH 2)
-                             (:NORTH-EAST 3)
-                             (:WEST 4)
-                             (:CENTER 5)
-                             (:EAST 6)
-                             (:SOUTH-WEST 7)
-                             (:SOUTH 8)
-                             (:SOUTH-EAST 9)
-                             (:STATIC 10))
-             (gobject:get-g-type-definition "GdkGravity"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkGravity" GDK:GRAVITY
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gdk_gravity_get_type")
+                                    (:NORTH-WEST 1)
+                                    (:NORTH 2)
+                                    (:NORTH-EAST 3)
+                                    (:WEST 4)
+                                    (:CENTER 5)
+                                    (:EAST 6)
+                                    (:SOUTH-WEST 7)
+                                    (:SOUTH 8)
+                                    (:SOUTH-EAST 9)
+                                    (:STATIC 10))
+             (gobject:get-gtype-definition "GdkGravity"))))
 
 ;;;     GDK_MODIFIER_MASK
 
@@ -67,34 +66,34 @@
                "GDK_BUTTON2_MASK" "GDK_BUTTON3_MASK" "GDK_BUTTON4_MASK"
                "GDK_BUTTON5_MASK" "GDK_SUPER_MASK" "GDK_HYPER_MASK"
                "GDK_META_MASK")
-             (gtk-test:list-flags-item-name "GdkModifierType")))
+             (glib-test:list-flags-item-names "GdkModifierType")))
   ;; Check values
   (is (equal '(0 1 2 4 8 256 512 1024 2048 4096 67108864 134217728 268435456)
-             (gtk-test:list-flags-item-value "GdkModifierType")))
+             (glib-test:list-flags-item-values "GdkModifierType")))
   ;; Check nick names
   (is (equal '("no-modifier-mask" "shift-mask" "lock-mask" "control-mask"
                "alt-mask" "button1-mask" "button2-mask" "button3-mask"
                "button4-mask" "button5-mask" "super-mask" "hyper-mask"
                "meta-mask")
-             (gtk-test:list-flags-item-nick "GdkModifierType")))
+             (glib-test:list-flags-item-nicks "GdkModifierType")))
   ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkModifierType"
-                              GDK-MODIFIER-TYPE
-                              (:EXPORT T
-                               :TYPE-INITIALIZER "gdk_modifier_type_get_type")
-                              (:no-modifier-mask 0)
-                              (:SHIFT-MASK 1)
-                              (:LOCK-MASK 2)
-                              (:CONTROL-MASK 4)
-                              (:ALT-MASK 8)
-                              (:BUTTON1-MASK 256)
-                              (:BUTTON2-MASK 512)
-                              (:BUTTON3-MASK 1024)
-                              (:BUTTON4-MASK 2048)
-                              (:BUTTON5-MASK 4096)
-                              (:SUPER-MASK 67108864)
-                              (:HYPER-MASK 134217728)
-                              (:META-MASK 268435456))
-             (gobject:get-g-type-definition "GdkModifierType"))))
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkModifierType" GDK:MODIFIER-TYPE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_modifier_type_get_type")
+                                     (:no-modifier-mask 0)
+                                     (:SHIFT-MASK 1)
+                                     (:LOCK-MASK 2)
+                                     (:CONTROL-MASK 4)
+                                     (:ALT-MASK 8)
+                                     (:BUTTON1-MASK 256)
+                                     (:BUTTON2-MASK 512)
+                                     (:BUTTON3-MASK 1024)
+                                     (:BUTTON4-MASK 2048)
+                                     (:BUTTON5-MASK 4096)
+                                     (:SUPER-MASK 67108864)
+                                     (:HYPER-MASK 134217728)
+                                     (:META-MASK 268435456))
+             (gobject:get-gtype-definition "GdkModifierType"))))
 
-;;; 2024-7-3
+;;; 2024-9-18

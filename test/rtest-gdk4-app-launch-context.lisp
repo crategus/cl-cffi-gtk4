@@ -27,28 +27,28 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandAppLaunchContext"
-              (gtk-test:list-children "GdkAppLaunchContext") :test #'string=))
+              (glib-test:list-children "GdkAppLaunchContext") :test #'string=))
   #+windows
   (is (equal '()
-             (gtk-test:list-children "GdkAppLaunchContext")))
+             (glib-test:list-children "GdkAppLaunchContext")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkAppLaunchContext")))
+             (glib-test:list-interfaces "GdkAppLaunchContext")))
   ;; Check class properties
   (is (equal '("display")
-             (gtk-test:list-properties "GdkAppLaunchContext")))
+             (glib-test:list-properties "GdkAppLaunchContext")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GdkAppLaunchContext")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext"
-                                             GDK-APP-LAUNCH-CONTEXT
-                       (:SUPERCLASS G-APP-LAUNCH-CONTEXT :EXPORT T :INTERFACES
-                        NIL :TYPE-INITIALIZER
-                        "gdk_app_launch_context_get_type")
-                       ((DISPLAY GDK-APP-LAUNCH-CONTEXT-DISPLAY "display"
-                         "GdkDisplay" T NIL)))
-             (gobject:get-g-type-definition "GdkAppLaunchContext"))))
+             (glib-test:list-signals "GdkAppLaunchContext")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkAppLaunchContext" GDK:APP-LAUNCH-CONTEXT
+                       (:SUPERCLASS G:APP-LAUNCH-CONTEXT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gdk_app_launch_context_get_type")
+                       ((DISPLAY APP-LAUNCH-CONTEXT-DISPLAY
+                         "display" "GdkDisplay" T NIL)))
+             (gobject:get-gtype-definition "GdkAppLaunchContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -98,4 +98,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; 2024-7-6
+;;; 2024-9-19

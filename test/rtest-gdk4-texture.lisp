@@ -23,7 +23,8 @@
 ;;;     gdk_texture_new_for_pixbuf
 
 (test gdk-texture-new-for-pixbuf
-  (let* ((pixbuf (gdk:pixbuf-new-from-file (sys-path "resource/ducky.png")))
+  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
+         (pixbuf (gdk:pixbuf-new-from-file path))
          (texture (gdk:texture-new-for-pixbuf pixbuf)))
     (is (typep pixbuf 'gdk-pixbuf:pixbuf))
     (is (typep texture 'gdk:texture))

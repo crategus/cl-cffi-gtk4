@@ -13,7 +13,7 @@
   ;; Check registered name
   (is (eq 'gdk:seat-capabilities
           (glib:symbol-for-gtype "GdkSeatCapabilities")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkSeatCapabilities")
           (g:gtype (cffi:foreign-funcall "gdk_seat_capabilities_get_type"
                                          :size))))
@@ -22,29 +22,28 @@
                "GDK_SEAT_CAPABILITY_TOUCH" "GDK_SEAT_CAPABILITY_TABLET_STYLUS"
                "GDK_SEAT_CAPABILITY_KEYBOARD" "GDK_SEAT_CAPABILITY_TABLET_PAD"
                "GDK_SEAT_CAPABILITY_ALL_POINTING" "GDK_SEAT_CAPABILITY_ALL")
-             (gtk-test:list-flags-item-name "GdkSeatCapabilities")))
+             (glib-test:list-flags-item-names "GdkSeatCapabilities")))
   ;; Check values
   (is (equal '(0 1 2 4 8 16 7 15)
-             (gtk-test:list-flags-item-value "GdkSeatCapabilities")))
+             (glib-test:list-flags-item-values "GdkSeatCapabilities")))
   ;; Check nick names
   (is (equal '("none" "pointer" "touch" "tablet-stylus" "keyboard" "tablet-pad"
                "all-pointing" "all")
-             (gtk-test:list-flags-item-nick "GdkSeatCapabilities")))
-  ;; Check the flags definition
-  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkSeatCapabilities"
-                              GDK-SEAT-CAPABILITIES
-                              (:EXPORT T
-                               :TYPE-INITIALIZER
-                               "gdk_seat_capabilities_get_type")
-                              (:NONE 0)
-                              (:POINTER 1)
-                              (:TOUCH 2)
-                              (:TABLET-STYLUS 4)
-                              (:KEYBOARD 8)
-                              (:TABLET-PAD 16)
-                              (:ALL-POINTING 7)
-                              (:ALL 15))
-             (gobject:get-g-type-definition "GdkSeatCapabilities"))))
+             (glib-test:list-flags-item-nicks "GdkSeatCapabilities")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkSeatCapabilities"
+                                     GDK:SEAT-CAPABILITIES
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gdk_seat_capabilities_get_type")
+                       (:NONE 0)
+                       (:POINTER 1)
+                       (:TOUCH 2)
+                       (:TABLET-STYLUS 4)
+                       (:KEYBOARD 8)
+                       (:TABLET-PAD 16)
+                       (:ALL-POINTING 7)
+                       (:ALL 15))
+             (gobject:get-gtype-definition "GdkSeatCapabilities"))))
 
 ;;;     GdkSeat
 
@@ -63,26 +62,27 @@
   ;; Check children
   #-windows
   (is (member "GdkWaylandSeat"
-             (gtk-test:list-children "GdkSeat") :test #'string=))
+             (glib-test:list-children "GdkSeat") :test #'string=))
   #+windows
   (is (equal '("GdkSeatDefault")
-             (gtk-test:list-children "GdkSeat")))
+             (glib-test:list-children "GdkSeat")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GdkSeat")))
+             (glib-test:list-interfaces "GdkSeat")))
   ;; Check properties
   (is (equal '("display")
-             (gtk-test:list-properties "GdkSeat")))
+             (glib-test:list-properties "GdkSeat")))
   ;; Check signals
   (is (equal '("device-added" "device-removed" "tool-added" "tool-removed")
-             (gtk-test:list-signals "GdkSeat")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSeat" GDK-SEAT
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+             (glib-test:list-signals "GdkSeat")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkSeat" GDK:SEAT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_seat_get_type")
-                       ((DISPLAY GDK-SEAT-DISPLAY "display" "GdkDisplay" T
-                         NIL)))
-             (gobject:get-g-type-definition "GdkSeat"))))
+                       ((DISPLAY SEAT-DISPLAY "display" "GdkDisplay" T NIL)))
+             (gobject:get-gtype-definition "GdkSeat"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -145,4 +145,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; 2024-7-6
+;;; 2024-9-19

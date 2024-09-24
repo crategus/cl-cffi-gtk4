@@ -23,27 +23,27 @@
                "GSK_TRANSFORM_CATEGORY_2D_AFFINE"
                "GSK_TRANSFORM_CATEGORY_2D_TRANSLATE"
                "GSK_TRANSFORM_CATEGORY_IDENTITY")
-             (gtk-test:list-enum-item-name "GskTransformCategory")))
+             (glib-test:list-enum-item-names "GskTransformCategory")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (gtk-test:list-enum-item-value "GskTransformCategory")))
+             (glib-test:list-enum-item-values "GskTransformCategory")))
   ;; Check nick names
   (is (equal '("unknown" "any" "3d" "2d" "2d-affine" "2d-translate" "identity")
-             (gtk-test:list-enum-item-nick "GskTransformCategory")))
+             (glib-test:list-enum-item-nicks "GskTransformCategory")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GskTransformCategory"
-                                     GSK-TRANSFORM-CATEGORY
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gsk_transform_category_get_type")
-                                     (:UNKNOWN 0)
-                                     (:ANY 1)
-                                     (:|3D| 2)
-                                     (:|2D| 3)
-                                     (:2D-AFFINE 4)
-                                     (:2D-TRANSLATE 5)
-                                     (:IDENTITY 6))
-             (gobject:get-g-type-definition "GskTransformCategory"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GskTransformCategory"
+                                    GSK:TRANSFORM-CATEGORY
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gsk_transform_category_get_type")
+                                    (:UNKNOWN 0)
+                                    (:ANY 1)
+                                    (:|3D| 2)
+                                    (:|2D| 3)
+                                    (:2D-AFFINE 4)
+                                    (:2D-TRANSLATE 5)
+                                    (:IDENTITY 6))
+             (gobject:get-gtype-definition "GskTransformCategory"))))
 
 ;;;     GskTransform
 
@@ -381,4 +381,4 @@
       (is (= 11 (graphene:point-x out)))
       (is (= 22 (graphene:point-y out))))))
 
-;;; 2024-4-21
+;;; 2024-9-18
