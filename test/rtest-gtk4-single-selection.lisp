@@ -20,48 +20,42 @@
           (glib:symbol-for-gtype "GtkSingleSelection")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkSingleSelection")
-          (g:gtype (cffi:foreign-funcall "gtk_single_selection_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_single_selection_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSingleSelection")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSingleSelection")))
+             (glib-test:list-children "GtkSingleSelection")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
-             (gtk-test:list-interfaces "GtkSingleSelection")))
+             (glib-test:list-interfaces "GtkSingleSelection")))
   ;; Check properties
   (is (equal '("autoselect" "can-unselect" "item-type" "model" "n-items"
                "selected" "selected-item")
-             (gtk-test:list-properties "GtkSingleSelection")))
+             (glib-test:list-properties "GtkSingleSelection")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSingleSelection")))
+             (glib-test:list-signals "GtkSingleSelection")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection"
-                                             GTK-SINGLE-SELECTION
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSectionModel"
-                                 "GtkSelectionModel")
-                                :TYPE-INITIALIZER
-                                "gtk_single_selection_get_type")
-                               ((AUTOSELECT GTK-SINGLE-SELECTION-AUTOSELECT
-                                 "autoselect" "gboolean" T T)
-                                (CAN-UNSELECT GTK-SINGLE-SELECTION-CAN-UNSELECT
-                                 "can-unselect" "gboolean" T T)
-                                (ITEM-TYPE GTK-SINGLE-SELECTION-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (MODEL GTK-SINGLE-SELECTION-MODEL "model"
-                                 "GListModel" T T)
-                                (N-ITEMS GTK-SINGLE-SELECTION-N-ITEMS "n-items"
-                                 "guint" T NIL)
-                                (SELECTED GTK-SINGLE-SELECTION-SELECTED
-                                 "selected" "guint" T T)
-                                (SELECTED-ITEM
-                                 GTK-SINGLE-SELECTION-SELECTED-ITEM
-                                 "selected-item" "GObject" T NIL)))
-             (gobject:get-g-type-definition "GtkSingleSelection"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSingleSelection" GTK:SINGLE-SELECTION
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES
+                        ("GListModel" "GtkSectionModel" "GtkSelectionModel")
+                        :TYPE-INITIALIZER "gtk_single_selection_get_type")
+                       ((AUTOSELECT SINGLE-SELECTION-AUTOSELECT
+                         "autoselect" "gboolean" T T)
+                        (CAN-UNSELECT SINGLE-SELECTION-CAN-UNSELECT
+                         "can-unselect" "gboolean" T T)
+                        (ITEM-TYPE SINGLE-SELECTION-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MODEL SINGLE-SELECTION-MODEL "model" "GListModel" T T)
+                        (N-ITEMS SINGLE-SELECTION-N-ITEMS "n-items" "guint" T NIL)
+                        (SELECTED SINGLE-SELECTION-SELECTED "selected" "guint" T T)
+                        (SELECTED-ITEM SINGLE-SELECTION-SELECTED-ITEM
+                         "selected-item" "GObject" T NIL)))
+             (gobject:get-gtype-definition "GtkSingleSelection"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -95,4 +89,4 @@
   (is (typep (gtk:single-selection-new (g:list-store-new "GObject"))
              'gtk:single-selection)))
 
-;;; 2024-7-4
+;;; 2024-9-19

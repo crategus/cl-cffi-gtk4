@@ -19,21 +19,21 @@
   ;; Check names
   (is (equal '("GTK_FILTER_MATCH_SOME" "GTK_FILTER_MATCH_NONE"
                "GTK_FILTER_MATCH_ALL")
-             (gtk-test:list-enum-item-name "GtkFilterMatch")))
+             (glib-test:list-enum-item-names "GtkFilterMatch")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkFilterMatch")))
+             (glib-test:list-enum-item-values "GtkFilterMatch")))
   ;; Check nick names
   (is (equal '("some" "none" "all")
-             (gtk-test:list-enum-item-nick "GtkFilterMatch")))
+             (glib-test:list-enum-item-nicks "GtkFilterMatch")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFilterMatch" GTK-FILTER-MATCH
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_filter_match_get_type")
-                             (:SOME 0)
-                             (:NONE 1)
-                             (:ALL 2))
-             (gobject:get-g-type-definition "GtkFilterMatch"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkFilterMatch" GTK:FILTER-MATCH
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_filter_match_get_type")
+                       (:SOME 0)
+                       (:NONE 1)
+                       (:ALL 2))
+             (gobject:get-gtype-definition "GtkFilterMatch"))))
 
 ;;;     GtkFilterChange
 
@@ -49,21 +49,21 @@
   ;; Check names
   (is (equal '("GTK_FILTER_CHANGE_DIFFERENT" "GTK_FILTER_CHANGE_LESS_STRICT"
                "GTK_FILTER_CHANGE_MORE_STRICT")
-             (gtk-test:list-enum-item-name "GtkFilterChange")))
+             (glib-test:list-enum-item-names "GtkFilterChange")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkFilterChange")))
+             (glib-test:list-enum-item-values "GtkFilterChange")))
   ;; Check nick names
   (is (equal '("different" "less-strict" "more-strict")
-             (gtk-test:list-enum-item-nick "GtkFilterChange")))
+             (glib-test:list-enum-item-nicks "GtkFilterChange")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFilterChange" GTK-FILTER-CHANGE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_filter_change_get_type")
-                             (:DIFFERENT 0)
-                             (:LESS-STRICT 1)
-                             (:MORE-STRICT 2))
-             (gobject:get-g-type-definition "GtkFilterChange"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkFilterChange" GTK:FILTER-CHANGE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_filter_change_get_type")
+                       (:DIFFERENT 0)
+                       (:LESS-STRICT 1)
+                       (:MORE-STRICT 2))
+             (gobject:get-gtype-definition "GtkFilterChange"))))
 
 ;;;     GtkFilter
 
@@ -82,27 +82,29 @@
   ;; Check children
   (is (equal '("GtkBoolFilter" "GtkCustomFilter" "GtkFileFilter"
                "GtkMultiFilter" "GtkStringFilter")
-             (gtk-test:list-children "GtkFilter")))
+             (glib-test:list-children "GtkFilter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkFilter")))
+             (glib-test:list-interfaces "GtkFilter")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkFilter")))
+             (glib-test:list-properties "GtkFilter")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GtkFilter")))
+             (glib-test:list-signals "GtkFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFilter" GTK-FILTER
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFilter" GTK:FILTER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_filter_get_type")
                        NIL)
-             (gobject:get-g-type-definition "GtkFilter"))))
+             (gobject:get-gtype-definition "GtkFilter"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     changed
-;;;     gtk_filter-changed
+;;;     gtk_filter_changed
 
 (test gtk-string-filter-changed-signal
   (let* ((store (gtk:string-list-new '()))
@@ -136,23 +138,21 @@
                                                   nil "string"))
          (filter (gtk:string-filter-new expression))
          (model (gtk:filter-list-model-new store filter)))
-
-    ;; Check the filter model
+    ;; Check filter model
     (is (eq filter (gtk:filter-list-model-filter model)))
     (is-false (gtk:filter-list-model-incremental model))
     (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
     (is (eq store (gtk:filter-list-model-model model)))
-    (is (= 3328 (gtk:filter-list-model-n-items model)))
+    #-windows
+    (is (= 3399 (gtk:filter-list-model-n-items model)))
+    #+windows
+    (is (= 3330 (gtk:filter-list-model-n-items model)))
     (is (= 0 (gtk:filter-list-model-pending model)))
-
     ;; At this point we have a filter list model with string objects
     (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
     (is (eq :exact (gtk:string-filter-match-mode filter)))
-
     (is (eq :all (gtk:filter-strictness filter)))
-
     (is-true (gtk:string-filter-ignore-case filter))
-
     ;; Match strings in the model
     (is-true (gtk:filter-match filter
                                (gtk:string-object-new "gtk:string-filter")))
@@ -163,4 +163,4 @@
     (is-true (gtk:filter-match filter (make-instance 'gtk:button)))
 ))
 
-;;; 2024-7-4
+;;; 2024-9-19

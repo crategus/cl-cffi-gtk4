@@ -15,37 +15,34 @@
           (glib:symbol-for-gtype "GtkFlattenListModel")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkFlattenListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_flatten_list_model_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_flatten_list_model_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFlattenListModel")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFlattenListModel")))
+             (glib-test:list-children "GtkFlattenListModel")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (gtk-test:list-interfaces "GtkFlattenListModel")))
+             (glib-test:list-interfaces "GtkFlattenListModel")))
   ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (gtk-test:list-properties "GtkFlattenListModel")))
+             (glib-test:list-properties "GtkFlattenListModel")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFlattenListModel")))
+             (glib-test:list-signals "GtkFlattenListModel")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFlattenListModel"
-                                             GTK-FLATTEN-LIST-MODEL
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSectionModel")
-                                :TYPE-INITIALIZER
-                                "gtk_flatten_list_model_get_type")
-                               ((ITEM-TYPE GTK-FLATTEN-LIST-MODEL-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (MODEL GTK-FLATTEN-LIST-MODEL-MODEL "model"
-                                 "GListModel" T T)
-                                (N-ITEMS GTK-FLATTEN-LIST-MODEL-N-ITEMS
-                                 "n-items" "guint" T NIL)))
-             (gobject:get-g-type-definition "GtkFlattenListModel"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFlattenListModel" GTK:FLATTEN-LIST-MODEL
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkSectionModel")
+                        :TYPE-INITIALIZER "gtk_flatten_list_model_get_type")
+                       ((ITEM-TYPE FLATTEN-LIST-MODEL-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MODEL FLATTEN-LIST-MODEL-MODEL "model" "GListModel" T T)
+                        (N-ITEMS FLATTEN-LIST-MODEL-N-ITEMS
+                         "n-items" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkFlattenListModel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -58,4 +55,4 @@
 ;;;     gtk_flatten_list_model_new
 ;;;     gtk_flatten_list_model_get_model_for_item
 
-;;; 2024-7-4
+;;; 2024-9-19

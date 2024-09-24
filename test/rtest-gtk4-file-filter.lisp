@@ -26,29 +26,30 @@
           (g:type-parent "GtkFileFilter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFileFilter")))
+             (glib-test:list-children "GtkFileFilter")))
   ;; Check interfaces
   (is (equal '("GtkBuildable")
-             (gtk-test:list-interfaces "GtkFileFilter")))
+             (glib-test:list-interfaces "GtkFileFilter")))
   ;; Check properties
   (is (equal '("mime-types" "name" "patterns" "suffixes")
-             (gtk-test:list-properties "GtkFileFilter")))
+             (glib-test:list-properties "GtkFileFilter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFileFilter")))
+             (glib-test:list-signals "GtkFileFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileFilter" GTK-FILE-FILTER
-                       (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
-                        ("GtkBuildable") :TYPE-INITIALIZER
-                        "gtk_file_filter_get_type")
-                       ((MIME-TYPES GTK-FILE-FILTER-MIME-TYPES "mime-types"
-                         "GStrv" NIL NIL)
-                        (NAME GTK-FILE-FILTER-NAME "name" "gchararray" T T)
-                        (PATTERNS GTK-FILE-FILTER-PATTERNS "patterns" "GStrv"
-                         NIL NIL)
-                        (SUFFIXES GTK-FILE-FILTER-SUFFIXES "suffixes" "GStrv"
-                         NIL NIL)))
-             (gobject:get-g-type-definition "GtkFileFilter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFileFilter" GTK:FILE-FILTER
+                       (:SUPERCLASS GTK:FILTER
+                        :EXPORT T
+                        :INTERFACES ("GtkBuildable")
+                        :TYPE-INITIALIZER "gtk_file_filter_get_type")
+                       ((MIME-TYPES FILE-FILTER-MIME-TYPES
+                         "mime-types" "GStrv" NIL NIL)
+                        (NAME FILE-FILTER-NAME "name" "gchararray" T T)
+                        (PATTERNS FILE-FILTER-PATTERNS
+                         "patterns" "GStrv" NIL NIL)
+                        (SUFFIXES FILE-FILTER-SUFFIXES
+                         "suffixes" "GStrv" NIL NIL)))
+             (gobject:get-gtype-definition "GtkFileFilter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -138,4 +139,4 @@
     (is (string= "('.mhjl-Dateityp', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; 2024-7-4
+;;; 2024-9-19

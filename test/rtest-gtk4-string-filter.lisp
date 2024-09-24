@@ -21,23 +21,23 @@
   (is (equal '("GTK_STRING_FILTER_MATCH_MODE_EXACT"
                "GTK_STRING_FILTER_MATCH_MODE_SUBSTRING"
                "GTK_STRING_FILTER_MATCH_MODE_PREFIX")
-             (gtk-test:list-enum-item-name "GtkStringFilterMatchMode")))
+             (glib-test:list-enum-item-names "GtkStringFilterMatchMode")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkStringFilterMatchMode")))
+             (glib-test:list-enum-item-values "GtkStringFilterMatchMode")))
   ;; Check nick names
   (is (equal '("exact" "substring" "prefix")
-             (gtk-test:list-enum-item-nick "GtkStringFilterMatchMode")))
+             (glib-test:list-enum-item-nicks "GtkStringFilterMatchMode")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkStringFilterMatchMode"
-                                     GTK-STRING-FILTER-MATCH-MODE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_string_filter_match_mode_get_type")
-                                     (:EXACT 0)
-                                     (:SUBSTRING 1)
-                                     (:PREFIX 2))
-             (gobject:get-g-type-definition "GtkStringFilterMatchMode"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkStringFilterMatchMode"
+                                    GTK:STRING-FILTER-MATCH-MODE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER
+                        "gtk_string_filter_match_mode_get_type")
+                       (:EXACT 0)
+                       (:SUBSTRING 1)
+                       (:PREFIX 2))
+             (gobject:get-gtype-definition "GtkStringFilterMatchMode"))))
 
 ;;;     GtkStringFilter
 
@@ -55,30 +55,31 @@
           (g:type-parent "GtkStringFilter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStringFilter")))
+             (glib-test:list-children "GtkStringFilter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkStringFilter")))
+             (glib-test:list-interfaces "GtkStringFilter")))
   ;; Check properties
   (is (equal '("expression" "ignore-case" "match-mode" "search")
-             (gtk-test:list-properties "GtkStringFilter")))
+             (glib-test:list-properties "GtkStringFilter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStringFilter")))
+             (glib-test:list-signals "GtkStringFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringFilter" GTK-STRING-FILTER
-                               (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_string_filter_get_type")
-                               ((EXPRESSION GTK-STRING-FILTER-EXPRESSION
-                                 "expression" "GtkExpression" T T)
-                                (IGNORE-CASE GTK-STRING-FILTER-IGNORE-CASE
-                                 "ignore-case" "gboolean" T T)
-                                (MATCH-MODE GTK-STRING-FILTER-MATCH-MODE
-                                 "match-mode" "GtkStringFilterMatchMode" T T)
-                                (SEARCH GTK-STRING-FILTER-SEARCH "search"
-                                        "gchararray" T T)))
-             (gobject:get-g-type-definition "GtkStringFilter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStringFilter" GTK:STRING-FILTER
+                       (:SUPERCLASS GTK:FILTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_string_filter_get_type")
+                       ((EXPRESSION STRING-FILTER-EXPRESSION
+                         "expression" "GtkExpression" T T)
+                        (IGNORE-CASE STRING-FILTER-IGNORE-CASE
+                         "ignore-case" "gboolean" T T)
+                        (MATCH-MODE STRING-FILTER-MATCH-MODE
+                         "match-mode" "GtkStringFilterMatchMode" T T)
+                        (SEARCH STRING-FILTER-SEARCH
+                         "search" "gchararray" T T)))
+             (gobject:get-gtype-definition "GtkStringFilter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -110,4 +111,4 @@
     (is (string= "search" (gtk:string-filter-search filter)))
     (is-false (gtk:expression-unref expression))))
 
-;;; 2024-7-4
+;;; 2024-9-19

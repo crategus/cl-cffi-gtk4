@@ -21,26 +21,26 @@
           (g:type-parent "GtkMultiSorter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkMultiSorter")))
+             (glib-test:list-children "GtkMultiSorter")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkBuildable")
-             (gtk-test:list-interfaces "GtkMultiSorter")))
+             (glib-test:list-interfaces "GtkMultiSorter")))
   ;; Check properties
   (is (equal '("item-type" "n-items")
-             (gtk-test:list-properties "GtkMultiSorter")))
+             (glib-test:list-properties "GtkMultiSorter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkMultiSorter")))
+             (glib-test:list-signals "GtkMultiSorter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSorter" GTK-MULTI-SORTER
-                               (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
-                                ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
-                                "gtk_multi_sorter_get_type")
-                               ((ITEM-TYPE GTK-MULTI-SORTER-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (N-ITEMS GTK-MULTI-SORTER-N-ITEMS "n-items"
-                                 "guint" T NIL)))
-             (gobject:get-g-type-definition "GtkMultiSorter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMultiSorter" GTK:MULTI-SORTER
+                       (:SUPERCLASS GTK:SORTER
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkBuildable")
+                        :TYPE-INITIALIZER "gtk_multi_sorter_get_type")
+                       ((ITEM-TYPE MULTI-SORTER-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (N-ITEMS MULTI-SORTER-N-ITEMS "n-items" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkMultiSorter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -53,4 +53,4 @@
 ;;;     gtk_multi_sorter_append
 ;;;     gtk_multi_sorter_remove
 
-;;; 2024-7-3
+;;; 2024-9-19

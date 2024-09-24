@@ -21,26 +21,26 @@
           (g:type-parent "GtkBoolFilter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkBoolFilter")))
+             (glib-test:list-children "GtkBoolFilter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkBoolFilter")))
+             (glib-test:list-interfaces "GtkBoolFilter")))
   ;; Check properties
   (is (equal '("expression" "invert")
-             (gtk-test:list-properties "GtkBoolFilter")))
+             (glib-test:list-properties "GtkBoolFilter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkBoolFilter")))
+             (glib-test:list-signals "GtkBoolFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBoolFilter" GTK-BOOL-FILTER
-                               (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_bool_filter_get_type")
-                               ((EXPRESSION GTK-BOOL-FILTER-EXPRESSION
-                                 "expression" "GtkExpression" T T)
-                                (INVERT GTK-BOOL-FILTER-INVERT "invert"
-                                 "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkBoolFilter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBoolFilter" GTK:BOOL-FILTER
+                       (:SUPERCLASS GTK:FILTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_bool_filter_get_type")
+                       ((EXPRESSION BOOL-FILTER-EXPRESSION
+                         "expression" "GtkExpression" T T)
+                        (INVERT BOOL-FILTER-INVERT "invert" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkBoolFilter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -64,4 +64,4 @@
       (is (cffi:pointer-eq expression (gtk:bool-filter-expression filter)))
       (is-false (gtk:bool-filter-invert filter)))))
 
-;;; 2024-7-4
+;;; 2024-9-19

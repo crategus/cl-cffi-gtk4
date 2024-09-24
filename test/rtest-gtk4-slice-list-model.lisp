@@ -15,41 +15,35 @@
           (glib:symbol-for-gtype "GtkSliceListModel")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkSliceListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_slice_list_model_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_slice_list_model_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSliceListModel")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkSliceListModel")))
+             (glib-test:list-children "GtkSliceListModel")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (gtk-test:list-interfaces "GtkSliceListModel")))
+             (glib-test:list-interfaces "GtkSliceListModel")))
   ;; Check properties
   (is (equal '("item-type" "model" "n-items" "offset" "size")
-             (gtk-test:list-properties "GtkSliceListModel")))
+             (glib-test:list-properties "GtkSliceListModel")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkSliceListModel")))
+             (glib-test:list-signals "GtkSliceListModel")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSliceListModel"
-                                             GTK-SLICE-LIST-MODEL
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSectionModel")
-                                :TYPE-INITIALIZER
-                                "gtk_slice_list_model_get_type")
-                               ((ITEM-TYPE GTK-SLICE-LIST-MODEL-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (MODEL GTK-SLICE-LIST-MODEL-MODEL "model"
-                                 "GListModel" T T)
-                                (N-ITEMS GTK-SLICE-LIST-MODEL-N-ITEMS "n-items"
-                                 "guint" T NIL)
-                                (OFFSET GTK-SLICE-LIST-MODEL-OFFSET "offset"
-                                 "guint" T T)
-                                (SIZE GTK-SLICE-LIST-MODEL-SIZE "size" "guint"
-                                 T T)))
-             (gobject:get-g-type-definition "GtkSliceListModel"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSliceListModel" GTK:SLICE-LIST-MODEL
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkSectionModel")
+                        :TYPE-INITIALIZER "gtk_slice_list_model_get_type")
+                       ((ITEM-TYPE SLICE-LIST-MODEL-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MODEL SLICE-LIST-MODEL-MODEL "model" "GListModel" T T)
+                        (N-ITEMS SLICE-LIST-MODEL-N-ITEMS "n-items" "guint" T NIL)
+                        (OFFSET SLICE-LIST-MODEL-OFFSET "offset" "guint" T T)
+                        (SIZE SLICE-LIST-MODEL-SIZE "size" "guint" T T)))
+             (gobject:get-gtype-definition "GtkSliceListModel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -69,4 +63,4 @@
 ;;;     gtk_slice_list_model_set_size
 ;;;     gtk_slice_list_model_get_size
 
-;;; 2024-7-4
+;;; 2024-9-19

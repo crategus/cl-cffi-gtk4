@@ -21,29 +21,28 @@
           (g:type-parent "GtkNoSelection")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkNoSelection")))
+             (glib-test:list-children "GtkNoSelection")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
-             (gtk-test:list-interfaces "GtkNoSelection")))
+             (glib-test:list-interfaces "GtkNoSelection")))
   ;; Check properties
   (is (equal '("item-type" "model" "n-items")
-             (gtk-test:list-properties "GtkNoSelection")))
+             (glib-test:list-properties "GtkNoSelection")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkNoSelection")))
+             (glib-test:list-signals "GtkNoSelection")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNoSelection" GTK-NO-SELECTION
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSectionModel"
-                                 "GtkSelectionModel")
-                                :TYPE-INITIALIZER "gtk_no_selection_get_type")
-                               ((ITEM-TYPE GTK-NO-SELECTION-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (MODEL GTK-NO-SELECTION-MODEL "model"
-                                 "GListModel" T T)
-                                (N-ITEMS GTK-NO-SELECTION-N-ITEMS "n-items"
-                                 "guint" T NIL)))
-             (gobject:get-g-type-definition "GtkNoSelection"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNoSelection" GTK:NO-SELECTION
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES
+                        ("GListModel" "GtkSectionModel" "GtkSelectionModel")
+                        :TYPE-INITIALIZER "gtk_no_selection_get_type")
+                       ((ITEM-TYPE NO-SELECTION-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MODEL NO-SELECTION-MODEL "model" "GListModel" T T)
+                        (N-ITEMS NO-SELECTION-N-ITEMS "n-items" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkNoSelection"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -66,4 +65,4 @@
   (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
              'gtk:no-selection)))
 
-;;; 2024-7-4
+;;; 2024-9-19

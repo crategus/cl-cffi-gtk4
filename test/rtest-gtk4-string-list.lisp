@@ -21,23 +21,24 @@
           (g:type-parent "GtkStringObject")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStringObject")))
+             (glib-test:list-children "GtkStringObject")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkStringObject")))
+             (glib-test:list-interfaces "GtkStringObject")))
   ;; Check properties
   (is (equal '("string")
-             (gtk-test:list-properties "GtkStringObject")))
+             (glib-test:list-properties "GtkStringObject")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStringObject")))
+             (glib-test:list-signals "GtkStringObject")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringObject" GTK-STRING-OBJECT
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_string_object_get_type")
-                               ((STRING GTK-STRING-OBJECT-STRING "string"
-                                        "gchararray" T NIL)))
-             (gobject:get-g-type-definition "GtkStringObject"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStringObject" GTK:STRING-OBJECT
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_string_object_get_type")
+                       ((STRING STRING-OBJECT-STRING "string" "gchararray" T NIL)))
+             (gobject:get-gtype-definition "GtkStringObject"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -87,28 +88,26 @@
           (g:type-parent "GtkStringList")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStringList")))
+             (glib-test:list-children "GtkStringList")))
   ;; Check interfaces
   (is (equal '("GtkBuildable" "GListModel")
-             (gtk-test:list-interfaces "GtkStringList")))
+             (glib-test:list-interfaces "GtkStringList")))
   ;; Check properties
   (is (equal '("item-type" "n-items" "strings")
-             (gtk-test:list-properties "GtkStringList")))
+             (glib-test:list-properties "GtkStringList")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStringList")))
+             (glib-test:list-signals "GtkStringList")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringList" GTK-STRING-LIST
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
-                                "gtk_string_list_get_type")
-                               ((ITEM-TYPE GTK-STRING-LIST-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (N-ITEMS GTK-STRING-LIST-N-ITEMS "n-items"
-                                 "guint" T NIL)
-                                (STRINGS GTK-STRING-LIST-STRINGS "strings"
-                                 "GStrv" NIL NIL)))
-             (gobject:get-g-type-definition "GtkStringList"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStringList" GTK:STRING-LIST
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkBuildable")
+                        :TYPE-INITIALIZER "gtk_string_list_get_type")
+                       ((ITEM-TYPE STRING-LIST-ITEM-TYPE "item-type" "GType" T NIL)
+                        (N-ITEMS STRING-LIST-N-ITEMS "n-items" "guint" T NIL)
+                        (STRINGS STRING-LIST-STRINGS "strings" "GStrv" NIL NIL)))
+             (gobject:get-gtype-definition "GtkStringList"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -188,4 +187,4 @@
     (is (g:type-is-object (g:list-model-item-type model)))
     (is (< 3000 (g:list-model-n-items model)))))
 
-;;; 2024-5-25
+;;; 2024-9-19

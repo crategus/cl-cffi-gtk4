@@ -48,13 +48,12 @@
 ;;;     gtk_expression_evaluate
 
 (test gtk-expression-evaluate/evaluate-value
-
   (gobject:with-g-values ((gvalue "gchararray" "string") gvalue1)
-    ;; Check the value of gvalue
+    ;; Check value of gvalue
     (is (string= "string" (g:value-get gvalue)))
     ;; Initialize a constant expression
     (let ((expression (gtk:constant-expression-new-for-value gvalue)))
-      ;; Check the gtype and the value of the expression
+      ;; Check gtype and the value of the expression
       (is (eq (g:gtype "gchararray") (gtk:expression-value-type expression)))
       (is (string= "string"
                    (g:value-string (gtk:constant-expression-value expression))))
@@ -80,7 +79,7 @@
   (gobject:with-g-value (gvalue)
     (let ((label (gtk:label-new "text"))
           (expr (gtk:property-expression-new "GtkLabel" nil "label")))
-      ;; Check the gtype
+      ;; Check gtype
       (is (eq (g:gtype "gchararray")
               (gtk:expression-value-type expr)))
       (is-false (gtk:expression-is-static expr))

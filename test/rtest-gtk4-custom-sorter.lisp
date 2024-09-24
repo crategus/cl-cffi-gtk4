@@ -21,23 +21,24 @@
           (g:type-parent "GtkCustomSorter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCustomSorter")))
+             (glib-test:list-children "GtkCustomSorter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCustomSorter")))
+             (glib-test:list-interfaces "GtkCustomSorter")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkCustomSorter")))
+             (glib-test:list-properties "GtkCustomSorter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCustomSorter")))
+             (glib-test:list-signals "GtkCustomSorter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomSorter" GTK-CUSTOM-SORTER
-                               (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_custom_sorter_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkCustomSorter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCustomSorter" GTK:CUSTOM-SORTER
+                       (:SUPERCLASS GTK:SORTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_custom_sorter_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkCustomSorter"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -63,4 +64,4 @@
                                                        ((> item1 item2) +1)
                                                        (t 0)))))))
 
-;;; 2024-7-4
+;;; 2024-9-19

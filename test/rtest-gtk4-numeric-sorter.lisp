@@ -21,26 +21,27 @@
           (g:type-parent "GtkNumericSorter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkNumericSorter")))
+             (glib-test:list-children "GtkNumericSorter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkNumericSorter")))
+             (glib-test:list-interfaces "GtkNumericSorter")))
   ;; Check properties
   (is (equal '("expression" "sort-order")
-             (gtk-test:list-properties "GtkNumericSorter")))
+             (glib-test:list-properties "GtkNumericSorter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkNumericSorter")))
+             (glib-test:list-signals "GtkNumericSorter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNumericSorter" GTK-NUMERIC-SORTER
-                               (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_numeric_sorter_get_type")
-                               ((EXPRESSION GTK-NUMERIC-SORTER-EXPRESSION
-                                 "expression" "GtkExpression" T T)
-                                (SORT-ORDER GTK-NUMERIC-SORTER-SORT-ORDER
-                                 "sort-order" "GtkSortType" T T)))
-             (gobject:get-g-type-definition "GtkNumericSorter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNumericSorter" GTK:NUMERIC-SORTER
+                       (:SUPERCLASS GTK:SORTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_numeric_sorter_get_type")
+                       ((EXPRESSION NUMERIC-SORTER-EXPRESSION
+                         "expression" "GtkExpression" T T)
+                        (SORT-ORDER NUMERIC-SORTER-SORT-ORDER
+                         "sort-order" "GtkSortType" T T)))
+             (gobject:get-gtype-definition "GtkNumericSorter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -51,4 +52,4 @@
 
 ;;;     gtk_numeric_sorter_new
 
-;;; 2024-7-4
+;;; 2024-9-19

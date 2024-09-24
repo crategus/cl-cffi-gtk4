@@ -21,40 +21,36 @@
           (g:type-parent "GtkDirectoryList")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkDirectoryList")))
+             (glib-test:list-children "GtkDirectoryList")))
   ;; Check interfaces
   (is (equal '("GListModel")
-             (gtk-test:list-interfaces "GtkDirectoryList")))
+             (glib-test:list-interfaces "GtkDirectoryList")))
   ;; Check properties
   (is (equal '("attributes" "error" "file" "io-priority" "item-type" "loading"
                "monitored" "n-items")
-             (gtk-test:list-properties "GtkDirectoryList")))
+             (glib-test:list-properties "GtkDirectoryList")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkDirectoryList")))
+             (glib-test:list-signals "GtkDirectoryList")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDirectoryList"
-                                             GTK-DIRECTORY-LIST
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
-                                "gtk_directory_list_get_type")
-                               ((ATTRIBUTES GTK-DIRECTORY-LIST-ATTRIBUTES
-                                 "attributes" "gchararray" T T)
-                                (ERROR GTK-DIRECTORY-LIST-ERROR "error"
-                                       "GError" T NIL)
-                                (FILE GTK-DIRECTORY-LIST-FILE "file" "GFile" T
-                                 T)
-                                (IO-PRIORITY GTK-DIRECTORY-LIST-IO-PRIORITY
-                                 "io-priority" "gint" T T)
-                                (ITEM-TYPE GTK-DIRECTORY-LIST-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (LOADING GTK-DIRECTORY-LIST-LOADING "loading"
-                                 "gboolean" T NIL)
-                                (MONITORED GTK-DIRECTORY-LIST-MONITORED
-                                 "monitored" "gboolean" T T)
-                                (N-ITEMS GTK-DIRECTORY-LIST-N-ITEMS "n-items"
-                                 "guint" T NIL)))
-             (gobject:get-g-type-definition "GtkDirectoryList"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDirectoryList" GTK:DIRECTORY-LIST
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel")
+                        :TYPE-INITIALIZER "gtk_directory_list_get_type")
+                       ((ATTRIBUTES DIRECTORY-LIST-ATTRIBUTES
+                         "attributes" "gchararray" T T)
+                        (ERROR DIRECTORY-LIST-ERROR "error" "GError" T NIL)
+                        (FILE DIRECTORY-LIST-FILE "file" "GFile" T T)
+                        (IO-PRIORITY DIRECTORY-LIST-IO-PRIORITY
+                         "io-priority" "gint" T T)
+                        (ITEM-TYPE DIRECTORY-LIST-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (LOADING DIRECTORY-LIST-LOADING "loading" "gboolean" T NIL)
+                        (MONITORED DIRECTORY-LIST-MONITORED
+                         "monitored" "gboolean" T T)
+                        (N-ITEMS DIRECTORY-LIST-N-ITEMS "n-items" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkDirectoryList"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -77,7 +73,6 @@
   (let* ((path (sys-path ""))
          (file (g:file-new-for-path path))
          (model (gtk:directory-list-new "standard::name" file)))
-
     (is-false (gtk:directory-list-error model))
     (is (string= "standard::name" (gtk:directory-list-attributes model)))
 
@@ -85,9 +80,8 @@
 
     (is (g:type-is-object (gtk:directory-list-item-type model)))
     (is (= 0 (gtk:directory-list-n-items model)))
-
 ))
 
 ;;;     gtk_directory_list_is_loading
 
-;;; 2024-7-4
+;;; 2024-9-19

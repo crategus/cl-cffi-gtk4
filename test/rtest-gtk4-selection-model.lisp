@@ -15,23 +15,21 @@
           (glib:symbol-for-gtype "GtkSelectionModel")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkSelectionModel")
-          (g:gtype (cffi:foreign-funcall "gtk_selection_model_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_selection_model_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GListModel" "GObject")
-             (gtk-test:list-interface-prerequisites "GtkSelectionModel")))
+             (glib-test:list-interface-prerequisites "GtkSelectionModel")))
   ;; Check interface properties
   (is (equal '()
-             (gtk-test:list-interface-properties "GtkSelectionModel")))
+             (glib-test:list-interface-properties "GtkSelectionModel")))
   ;; Check signals
   (is (equal '("selection-changed")
-             (gtk-test:list-signals "GtkSelectionModel")))
+             (glib-test:list-signals "GtkSelectionModel")))
   ;; Check interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSelectionModel"
-                                          GTK-SELECTION-MODEL
-                            (:EXPORT T :TYPE-INITIALIZER
-                             "gtk_selection_model_get_type"))
-             (gobject:get-g-type-definition "GtkSelectionModel"))))
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkSelectionModel" GTK:SELECTION-MODEL
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_selection_model_get_type"))
+             (gobject:get-gtype-definition "GtkSelectionModel"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -64,4 +62,4 @@
 ;;;     gtk_selection_model_set_selection
 ;;;     gtk_selection_model_selection_changed
 
-;;; 2024-7-4
+;;; 2024-9-18

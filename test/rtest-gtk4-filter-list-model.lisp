@@ -15,43 +15,38 @@
           (glib:symbol-for-gtype "GtkFilterListModel")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkFilterListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_filter_list_model_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_filter_list_model_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFilterListModel")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkFilterListModel")))
+             (glib-test:list-children "GtkFilterListModel")))
   ;; Check interfaces
   (is (equal '("GListModel" "GtkSectionModel")
-             (gtk-test:list-interfaces "GtkFilterListModel")))
+             (glib-test:list-interfaces "GtkFilterListModel")))
   ;; Check properties
   (is (equal '("filter" "incremental" "item-type" "model" "n-items" "pending")
-             (gtk-test:list-properties "GtkFilterListModel")))
+             (glib-test:list-properties "GtkFilterListModel")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkFilterListModel")))
+             (glib-test:list-signals "GtkFilterListModel")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFilterListModel"
-                                             GTK-FILTER-LIST-MODEL
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSectionModel")
-                                :TYPE-INITIALIZER
-                                "gtk_filter_list_model_get_type")
-                               ((FILTER GTK-FILTER-LIST-MODEL-FILTER "filter"
-                                 "GtkFilter" T T)
-                                (INCREMENTAL GTK-FILTER-LIST-MODEL-INCREMENTAL
-                                 "incremental" "gboolean" T T)
-                                (ITEM-TYPE GTK-FILTER-LIST-MODEL-ITEM-TYPE
-                                 "item-type" "GType" T NIL)
-                                (MODEL GTK-FILTER-LIST-MODEL-MODEL "model"
-                                 "GListModel" T T)
-                                (N-ITEMS GTK-FILTER-LIST-MODEL-N-ITEMS
-                                 "n-items" "guint" T NIL)
-                                (PENDING GTK-FILTER-LIST-MODEL-PENDING
-                                 "pending" "guint" T NIL)))
-             (gobject:get-g-type-definition "GtkFilterListModel"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFilterListModel" GTK:FILTER-LIST-MODEL
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkSectionModel")
+                        :TYPE-INITIALIZER "gtk_filter_list_model_get_type")
+                       ((FILTER FILTER-LIST-MODEL-FILTER "filter" "GtkFilter" T T)
+                        (INCREMENTAL FILTER-LIST-MODEL-INCREMENTAL
+                         "incremental" "gboolean" T T)
+                        (ITEM-TYPE FILTER-LIST-MODEL-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MODEL FILTER-LIST-MODEL-MODEL "model" "GListModel" T T)
+                        (N-ITEMS FILTER-LIST-MODEL-N-ITEMS "n-items" "guint" T NIL)
+                        (PENDING FILTER-LIST-MODEL-PENDING
+                         "pending" "guint" T NIL)))
+             (gobject:get-gtype-definition "GtkFilterListModel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -116,4 +111,4 @@
                            (collect (gtk:string-object-string object)))
                      #'string<)))))
 
-;;; 2024-4-1
+;;; 2024-9-19

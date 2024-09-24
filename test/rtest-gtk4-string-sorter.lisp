@@ -19,22 +19,21 @@
   ;; Check names
   (is (equal '("GTK_COLLATION_NONE" "GTK_COLLATION_UNICODE"
                "GTK_COLLATION_FILENAME")
-             (gtk-test:list-enum-item-name "GtkCollation")))
+             (glib-test:list-enum-item-names "GtkCollation")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkCollation")))
+             (glib-test:list-enum-item-values "GtkCollation")))
   ;; Check nick names
   (is (equal '("none" "unicode" "filename")
-             (gtk-test:list-enum-item-nick "GtkCollation")))
+             (glib-test:list-enum-item-nicks "GtkCollation")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCollation" GTK-COLLATION
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_collation_get_type")
-                                     (:NONE 0)
-                                     (:UNICODE 1)
-                                     (:FILENAME 2))
-             (gobject:get-g-type-definition "GtkCollation"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkCollation" GTK:COLLATION
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_collation_get_type")
+                       (:NONE 0)
+                       (:UNICODE 1)
+                       (:FILENAME 2))
+             (gobject:get-gtype-definition "GtkCollation"))))
 
 ;;;     GtkStringSorter
 
@@ -52,28 +51,29 @@
           (g:type-parent "GtkStringSorter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkStringSorter")))
+             (glib-test:list-children "GtkStringSorter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkStringSorter")))
+             (glib-test:list-interfaces "GtkStringSorter")))
   ;; Check properties
   (is (equal '("collation" "expression" "ignore-case")
-             (gtk-test:list-properties "GtkStringSorter")))
+             (glib-test:list-properties "GtkStringSorter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkStringSorter")))
+             (glib-test:list-signals "GtkStringSorter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringSorter" GTK-STRING-SORTER
-                               (:SUPERCLASS GTK-SORTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_string_sorter_get_type")
-                               ((COLLATION GTK-STRING-SORTER-COLLATION
-                                 "collation" "GtkCollation" T T)
-                                (EXPRESSION GTK-STRING-SORTER-EXPRESSION
-                                 "expression" "GtkExpression" T T)
-                                (IGNORE-CASE GTK-STRING-SORTER-IGNORE-CASE
-                                 "ignore-case" "gboolean" T T)))
-             (gobject:get-g-type-definition "GtkStringSorter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStringSorter" GTK:STRING-SORTER
+                       (:SUPERCLASS GTK:SORTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_string_sorter_get_type")
+                       ((COLLATION STRING-SORTER-COLLATION
+                         "collation" "GtkCollation" T T)
+                        (EXPRESSION STRING-SORTER-EXPRESSION
+                         "expression" "GtkExpression" T T)
+                        (IGNORE-CASE STRING-SORTER-IGNORE-CASE
+                         "ignore-case" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkStringSorter"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -85,4 +85,4 @@
 
 ;;;     gtk_string_sorter_new
 
-;;; 2024-7-4
+;;; 2024-9-19

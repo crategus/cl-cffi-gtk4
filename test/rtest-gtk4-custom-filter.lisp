@@ -21,27 +21,28 @@
           (g:type-parent "GtkCustomFilter")))
   ;; Check children
   (is (equal '()
-             (gtk-test:list-children "GtkCustomFilter")))
+             (glib-test:list-children "GtkCustomFilter")))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkCustomFilter")))
+             (glib-test:list-interfaces "GtkCustomFilter")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkCustomFilter")))
+             (glib-test:list-properties "GtkCustomFilter")))
   ;; Check signals
   (is (equal '()
-             (gtk-test:list-signals "GtkCustomFilter")))
+             (glib-test:list-signals "GtkCustomFilter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCustomFilter" GTK-CUSTOM-FILTER
-                               (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
-                                NIL :TYPE-INITIALIZER
-                                "gtk_custom_filter_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkCustomFilter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCustomFilter" GTK:CUSTOM-FILTER
+                       (:SUPERCLASS GTK:FILTER
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_custom_filter_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkCustomFilter"))))
 
 ;;; --- Functions  -------------------------------------------------------------
 
 ;;;     gtk_custom_filter_new
 ;;;     gtk_custom_filter_set_filter_func
 
-;;; 2024-7-4
+;;; 2024-9-19

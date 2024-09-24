@@ -19,22 +19,21 @@
   ;; Check names
   (is (equal '("GTK_SORTER_ORDER_PARTIAL" "GTK_SORTER_ORDER_NONE"
                "GTK_SORTER_ORDER_TOTAL")
-             (gtk-test:list-enum-item-name "GtkSorterOrder")))
+             (glib-test:list-enum-item-names "GtkSorterOrder")))
   ;; Check values
   (is (equal '(0 1 2)
-             (gtk-test:list-enum-item-value "GtkSorterOrder")))
+             (glib-test:list-enum-item-values "GtkSorterOrder")))
   ;; Check nick names
   (is (equal '("partial" "none" "total")
-             (gtk-test:list-enum-item-nick "GtkSorterOrder")))
+             (glib-test:list-enum-item-nicks "GtkSorterOrder")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSorterOrder" GTK-SORTER-ORDER
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_sorter_order_get_type")
-                                     (:PARTIAL 0)
-                                     (:NONE 1)
-                                     (:TOTAL 2))
-             (gobject:get-g-type-definition "GtkSorterOrder"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSorterOrder" GTK:SORTER-ORDER
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_sorter_order_get_type")
+                       (:PARTIAL 0)
+                       (:NONE 1)
+                       (:TOTAL 2))
+             (gobject:get-gtype-definition "GtkSorterOrder"))))
 
 ;;;     GtkSorterChange
 
@@ -50,23 +49,22 @@
   ;; Check names
   (is (equal '("GTK_SORTER_CHANGE_DIFFERENT" "GTK_SORTER_CHANGE_INVERTED"
                "GTK_SORTER_CHANGE_LESS_STRICT" "GTK_SORTER_CHANGE_MORE_STRICT")
-             (gtk-test:list-enum-item-name "GtkSorterChange")))
+             (glib-test:list-enum-item-names "GtkSorterChange")))
   ;; Check values
   (is (equal '(0 1 2 3)
-             (gtk-test:list-enum-item-value "GtkSorterChange")))
+             (glib-test:list-enum-item-values "GtkSorterChange")))
   ;; Check nick names
   (is (equal '("different" "inverted" "less-strict" "more-strict")
-             (gtk-test:list-enum-item-nick "GtkSorterChange")))
+             (glib-test:list-enum-item-nicks "GtkSorterChange")))
   ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSorterChange" GTK-SORTER-CHANGE
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_sorter_change_get_type")
-                                     (:DIFFERENT 0)
-                                     (:INVERTED 1)
-                                     (:LESS-STRICT 2)
-                                     (:MORE-STRICT 3))
-             (gobject:get-g-type-definition "GtkSorterChange"))))
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSorterChange" GTK:SORTER-CHANGE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_sorter_change_get_type")
+                       (:DIFFERENT 0)
+                       (:INVERTED 1)
+                       (:LESS-STRICT 2)
+                       (:MORE-STRICT 3))
+             (gobject:get-gtype-definition "GtkSorterChange"))))
 
 ;;;     GtkSorter
 
@@ -86,25 +84,27 @@
   (if *first-run-gtk-test*
       (is (equal '("GtkColumnViewSorter" "GtkCustomSorter" "GtkMultiSorter"
                    "GtkNumericSorter" "GtkStringSorter" "GtkTreeListRowSorter")
-                 (gtk-test:list-children "GtkSorter")))
+                 (glib-test:list-children "GtkSorter")))
       (is (equal '("GtkColumnViewSorter" "GtkCustomSorter" "GtkMultiSorter"
                    "GtkNumericSorter" "GtkStringSorter" "GtkTreeListRowSorter")
-                 (gtk-test:list-children "GtkSorter"))))
+                 (glib-test:list-children "GtkSorter"))))
   ;; Check interfaces
   (is (equal '()
-             (gtk-test:list-interfaces "GtkSorter")))
+             (glib-test:list-interfaces "GtkSorter")))
   ;; Check properties
   (is (equal '()
-             (gtk-test:list-properties "GtkSorter")))
+             (glib-test:list-properties "GtkSorter")))
   ;; Check signals
   (is (equal '("changed")
-             (gtk-test:list-signals "GtkSorter")))
+             (glib-test:list-signals "GtkSorter")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSorter" GTK-SORTER
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                                :TYPE-INITIALIZER "gtk_sorter_get_type")
-                               NIL)
-             (gobject:get-g-type-definition "GtkSorter"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSorter" GTK:SORTER
+                       (:SUPERCLASS G:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_sorter_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GtkSorter"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -123,4 +123,4 @@
   (is (eq :equal (gtk:ordering-from-cmpfunc  0)))
   (is (eq :larger (gtk:ordering-from-cmpfunc  1))))
 
-;;; 2024-7-4
+;;; 2024-9-21
