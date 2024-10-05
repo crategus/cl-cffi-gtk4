@@ -187,7 +187,7 @@
     The @class{gtk:column-view} implementation uses a single CSS node named
     @code{columnview}. It may carry the @code{.column-separators} style class,
     when @slot[gtk:column-view]{show-column-separators} property is set. Header
-    widets appear below a node with name @code{header}. The rows are contained
+    widgets appear below a node with name @code{header}. The rows are contained
     in a @class{gtk:list-view} widget, so there is a @code{listview} node with
     the same structure as for a standalone @class{gtk:list-view} widget. If the
     @slot[gtk:column-view]{show-row-separators} property is set, it will be

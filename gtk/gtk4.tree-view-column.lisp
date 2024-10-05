@@ -1573,7 +1573,7 @@ lambda (column)    :run-last
  "@version{#2024-3-8}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{return}
-    The @class{gtk:tree-view} widet wherein the tree view column has been
+    The @class{gtk:tree-view} widget wherein the tree view column has been
     inserted if any, @code{nil} otherwise.
   @end{return}
   @begin{short}
