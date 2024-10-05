@@ -7,7 +7,7 @@
 
 (in-package :gtk4-example)
 
-(gobject:define-g-object-subclass "Message" message
+(gobject:define-gobject-subclass "Message" message
   (:superclass g:object
    :export t
    :interfaces ())
@@ -57,7 +57,7 @@
       (setf (message-n-reshares msg) (parse-integer (pop entries))))
     msg))
 
-(gobject:define-g-object-subclass "MessageRow" message-row
+(gobject:define-gobject-subclass "MessageRow" message-row
   (:superclass gtk:list-box-row
    :export t
    :interfaces ())
@@ -116,7 +116,7 @@
 (defun message-row-update (row)
   (let ((message (message-row-message row)))
     (gtk:image-set-from-file (message-row-avatar-image row)
-                             (sys-path "resource/apple-red.png"))
+                             (glib-sys:sys-path "resource/apple-red.png"))
     (setf (gtk:label-label (message-row-source-name row))
           (message-name message))
     (setf (gtk:label-label (message-row-source-nick row))
@@ -152,7 +152,7 @@
         (setf (gtk:button-label resent-by-button) resent-by)))))
 
 (defun message-row-new (message)
-  (let* ((path (sys-path "resource/list-box-complex.ui"))
+  (let* ((path (glib-sys:sys-path "resource/list-box-complex.ui"))
          (builder (gtk:builder-new-from-file path ))
          (row (gtk:builder-object builder "messagerow")))
     (setf (message-row-message row) message)
@@ -233,7 +233,7 @@
                           (declare (ignore listbox))
                           (message-row-expand row)))
       (g:application-mark-busy application)
-      (with-open-file (stream (sys-path "resource/list-box-message.txt"))
+      (with-open-file (stream (glib-sys:sys-path "resource/list-box-message.txt"))
         (format t "Loading the messages ... ~%")
         (do ((msg nil) (row nil)
              (line (read-line stream nil)

@@ -28,12 +28,12 @@
                               ("Soft Light"    "soft-light")))
 
 (defun do-css-blendmodes (&optional application)
-  (let* ((path1 (sys-path "resource/css-blendmodes.ui" :gtk4-example))
+  (let* ((path1 (glib-sys:sys-path "resource/css-blendmodes.ui"))
          (builder (gtk:builder-new-from-file path1))
          (listbox (make-instance 'gtk:list-box))
          (window (gtk:builder-object builder "window"))
          (provider (make-instance 'gtk:css-provider))
-         (path2 (sys-path "gtk4-example.gresource" :gtk4-example))
+         (path2 (glib-sys:sys-path "gtk4-example.gresource"))
          (resource (g:resource-load path2)))
     ;; Register the resources
     (g:resources-register resource)
@@ -47,7 +47,7 @@
           (declare (ignore listbox))
           (let* ((mode (second (elt +blend-modes+
                                     (gtk:list-box-row-index row))))
-                 (path (sys-path "resource/css-blendmodes.css" :gtk4-example))
+                 (path (glib-sys:sys-path "resource/css-blendmodes.css"))
                  (str (format nil (read-file path) mode mode mode)))
             (gtk:css-provider-load-from-string provider str))))
     ;; Fill the list box

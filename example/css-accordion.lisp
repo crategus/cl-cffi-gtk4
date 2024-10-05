@@ -20,7 +20,7 @@
                                 :default-height 300
                                 :default-width 600))
          (provider (make-instance 'gtk:css-provider))
-         (path (sys-path "resource/css-accordion.css")))
+         (path (glib-sys:sys-path "resource/css-accordion.css")))
     ;; Load and install the CSS for the accordion
     (gtk:css-provider-load-from-path provider path)
     (gtk:widget-add-css-class frame "accordion")

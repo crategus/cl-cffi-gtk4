@@ -38,7 +38,7 @@
   (gtk:window-present about))
 
 (defun do-builder (&optional application)
-  (let* ((path (sys-path "resource/builder.ui"))
+  (let* ((path (glib-sys:sys-path "resource/builder.ui"))
          (builder (gtk:builder-new-from-file path))
          (window (gtk:builder-object builder "window1"))
          (about (gtk:builder-object builder "aboutdialog1"))

@@ -3,7 +3,7 @@
 ;;;; Another example of an overlay with some decorative and some interactive
 ;;;; controls.
 ;;;;
-;;;; 2024-4-13
+;;;; Last version: 2024-10-2
 
 (in-package :gtk4-example)
 
@@ -38,13 +38,13 @@
            (end (gtk:text-iter-copy start)))
       (gtk:text-iter-move end :by :word)
       (gtk:text-buffer-apply-tag buffer tag start end))
-    (let* ((path (sys-path "resource/decor1.png"))
+    (let* ((path (glib-sys:sys-path "resource/decor1.png"))
            (image (gtk:picture-new-for-filename path)))
       (setf (gtk:widget-can-target image) nil
             (gtk:widget-halign image) :start
             (gtk:widget-valign image) :start)
       (gtk:overlay-add-overlay overlay image))
-    (let* ((path (sys-path "resource/decor2.png"))
+    (let* ((path (glib-sys:sys-path "resource/decor2.png"))
            (image (gtk:picture-new-for-filename path)))
       (setf (gtk:widget-can-target image) nil
             (gtk:widget-halign image) :end
@@ -64,5 +64,4 @@
                                 :tooltip-text "Control margin")))
       (gtk:overlay-add-overlay overlay scale)
       (setf (gtk:adjustment-value adjustment) 100))
-    ;; Present window
     (gtk:window-present window)))

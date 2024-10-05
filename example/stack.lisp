@@ -10,7 +10,8 @@
 (in-package :gtk4-example)
 
 (defun do-stack (&optional (application nil))
-  (let* ((builder (gtk:builder-new-from-file (sys-path "resource/stack.ui")))
+  (let* ((path (glib-sys:sys-path "resource/stack.ui"))
+         (builder (gtk:builder-new-from-file path))
          (window (gtk:builder-object builder "window1")))
     (setf (gtk:window-application window) application)
     (setf (gtk:widget-visible window) t)))

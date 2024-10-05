@@ -10,7 +10,8 @@
 (in-package #:gtk4-example)
 
 (defun do-scrolled-window (&optional (application nil))
-  (let* ((picture (gtk:picture-new-for-filename (sys-path "resource/ducky.png")))
+  (let* ((path (glib-sys:sys-path "resource/ducky.png"))
+         (picture (gtk:picture-new-for-filename path))
          (scrolled (make-instance 'gtk:scrolled-window
                                   :child picture
                                   :hscrollbar-policy :automatic

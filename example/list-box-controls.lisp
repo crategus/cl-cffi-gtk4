@@ -9,7 +9,7 @@
 (in-package :gtk4-example)
 
 (defun do-list-box-controls (&optional application)
-  (let* ((path (sys-path "resource/list-box-controls.ui"))
+  (let* ((path (glib-sys:sys-path "resource/list-box-controls.ui"))
          (builder (gtk:builder-new-from-file path))
          (window (gtk:builder-object builder "window"))
          (listbox (gtk:builder-object builder "listbox1"))

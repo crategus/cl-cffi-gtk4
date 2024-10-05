@@ -132,15 +132,16 @@
                                            :name "error"
                                            :underline :error))
     (setf (gtk:text-buffer-text text)
-          (read-file (sys-path "resource/css-multiplebgs.css")))
+          (read-file (glib-sys:sys-path "resource/css-multiplebgs.css")))
     ;; Add the widgets to the window
     (gtk:overlay-add-overlay overlay button)
     (gtk:overlay-add-overlay overlay paned)
     (gtk:box-append vbox toolbar)
     (gtk:box-append vbox overlay)
     ;; Apply the provider to the window
-    (gtk:css-provider-load-from-path provider
-                                     (sys-path "resource/css-multiplebgs.css"))
+    (gtk:css-provider-load-from-path
+            provider
+            (glib-sys:sys-path "resource/css-multiplebgs.css"))
     (gtk:widget-add-provider window provider)
     ;; Show the window
     (gtk:window-present window)))

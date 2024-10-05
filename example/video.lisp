@@ -27,6 +27,6 @@
                                 :title "Video Player"
                                 :default-width 400
                                 :default-height 300)))
-    (gtk:video-set-filename video (sys-path "resource/gtk-logo.webm"))
+    (gtk:video-set-filename video (glib-sys:sys-path "resource/gtk-logo.webm"))
     ;; Show the window
     (gtk:window-present window)))

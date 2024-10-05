@@ -20,7 +20,7 @@
                                 :default-height 420
                                 :default-width 420))
          (provider (make-instance 'gtk:css-provider))
-         (csspath (sys-path "resource/css-pixbufs.css")))
+         (csspath (glib-sys:sys-path "resource/css-pixbufs.css")))
     ;; Load CSS from file into the provider and apply it
     (gtk:css-provider-load-from-path provider csspath)
     (gtk:widget-add-css-class window "pixbufs")

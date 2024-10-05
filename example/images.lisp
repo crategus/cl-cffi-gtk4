@@ -32,7 +32,7 @@
         (progn
           ;; Create the image stream and the GdkPixbufLoader
           (setf image-stream
-                (open (sys-path "resource/alphatest.png")
+                (open (glib-sys:sys-path "resource/alphatest.png")
                       :element-type '(unsigned-byte 8)))
           (when pixbuf-loader
             (gdk-pixbuf:pixbuf-loader-close pixbuf-loader)
@@ -94,7 +94,7 @@
                                    :label
                                    "<b>Image new from a filename</b>"))
              (image (gtk:image-new-from-file
-                        (sys-path "resource/gtk-logo.png"))))
+                        (glib-sys:sys-path "resource/gtk-logo.png"))))
         (setf (gtk:image-icon-size image) :large)
         (gtk:box-append vbox label)
         (gtk:box-append vbox image))
@@ -122,7 +122,7 @@
                                    :label
                                    "<b>Animation new from a pixbuf</b>"))
              (pixbuf (gdk:pixbuf-new-from-file
-                         (sys-path "resource/spinner.gif")))
+                         (glib-sys:sys-path "resource/spinner.gif")))
              (image (gtk:image-new-from-pixbuf pixbuf)))
         (setf (gtk:image-icon-size image) :large)
         (gtk:box-append vbox label)

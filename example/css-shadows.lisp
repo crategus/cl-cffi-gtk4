@@ -73,7 +73,7 @@
                                            :name "error"
                                            :underline :error))
     (setf (gtk:text-buffer-text text)
-          (read-file (sys-path "resource/css-shadows.css")))
+          (read-file (glib-sys:sys-path "resource/css-shadows.css")))
     ;; Apply the provider to the window
     (gtk:widget-add-provider window provider)
     ;; Show the window

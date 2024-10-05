@@ -6,7 +6,7 @@
 
 (defun create-page-setup-dialog (&optional parent)
   (let* (;(gtk-init:*gtk-warn-deprecated* nil)
-         (path (sys-path "resource/page-setup.ini"))
+         (path (glib-sys:sys-path "resource/page-setup.ini"))
          (pagesetup (gtk:page-setup-new))
          (dialog (gtk:page-setup-unix-dialog-new "Page Setup Dialog" parent)))
     ;; Connect a handler to the "response" signal

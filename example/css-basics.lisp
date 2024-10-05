@@ -50,6 +50,6 @@
                                            :name "error"
                                            :underline :error))
     (setf (gtk:text-buffer-text text)
-          (read-file (sys-path "resource/css-basics.css")))
+          (read-file (glib-sys:sys-path "resource/css-basics.css")))
     ;; Present the window
     (gtk:window-present window)))

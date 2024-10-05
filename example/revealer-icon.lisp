@@ -10,7 +10,7 @@
 (defun do-revealer-icon (&optional (application nil))
   (let* ((count 0)
          (timeout 0)
-         (path (sys-path "resource/revealer-icon.ui"))
+         (path (glib-sys:sys-path "resource/revealer-icon.ui"))
          (builder (gtk:builder-new-from-file path))
          (window (gtk:builder-object builder "window")))
     (g:signal-connect window "close-request"

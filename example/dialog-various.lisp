@@ -63,7 +63,7 @@
 
 (defun create-dialog-from-ui (parent)
   (let ((builder (make-instance 'gtk:builder)))
-    (gtk:builder-add-from-file builder (sys-path "resource/dialog.ui"))
+    (gtk:builder-add-from-file builder (glib-sys:sys-path "resource/dialog.ui"))
     (let ((dialog (gtk:builder-object builder "dialog")))
       (g:signal-connect dialog "response"
                         (lambda (widget response)
