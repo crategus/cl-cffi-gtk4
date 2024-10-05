@@ -153,6 +153,7 @@
            #:do-size-group
            #:do-emblemed-icon
            #:do-event-controller
+           #:do-widget-template
 
            ;; Theming in GTK
            #:do-css-accordion
@@ -224,11 +225,6 @@ condimentum, leo purus mollis orci, sed mollis dui metus eget eros. Mauris ~
 quam nibh, laoreet eget arcu in, accumsan lacinia purus. Morbi aliquet nibh id ~
 sem venenatis, vitae ultricies arcu laoreet."))
 
-;; Get the absolute filename of a file for a ASDF loadable package
-(defun sys-path (filename &optional (package :gtk4-example))
-  (let ((system-path (asdf:system-source-directory package)))
-    (princ-to-string (merge-pathnames filename system-path))))
-
 (defun read-file (filename)
   (with-open-file (instream filename :direction :input :if-does-not-exist nil)
     (when instream
@@ -253,7 +249,7 @@ sem venenatis, vitae ultricies arcu laoreet."))
     ;; Show the window.
     (setf (gtk:widget-visible window) t)))
 
-;; A wrapper to run an example
+;; Wrapper to run an example
 (defun run-example (func &optional (functype :window))
   ;; Load resources for the examples
   (g:with-resource (resource (glib-sys:check-and-create-resources
@@ -286,4 +282,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
       ;; Run the application
       (g:application-run app nil))))
 
-;;; 2024-5-14
+;;; 2024-10-2
