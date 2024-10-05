@@ -384,7 +384,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
  #+liber-documentation
- "@version{2024-4-1}
+ "@version{2024-9-29}
   @begin{return}
     The @class{gdk:display} object, or @code{nil} if there is no default
     display.
@@ -392,10 +392,19 @@ lambda (display setting)    :run-last
   @begin{short}
     Gets the default display.
   @end{short}
-  This is a convenience function for the call
+  This is a convenience function for the call:
   @begin{pre}
 (gdk:display-manager-default-display (gdk:display-manager-get))
   @end{pre}
+  @begin{examples}
+    @begin{pre}
+(gdk:display-default)
+=> #<GDK:DISPLAY {1007501013@}>
+(eq (gdk:display-default)
+    (gdk:display-manager-default-display (gdk:display-manager-get)))
+=> T
+    @end{pre}
+  @end{examples}
   @see-class{gdk:display}
   @see-function{gdk:display-manager-get}
   @see-function{gdk:display-manager-default-display}")
