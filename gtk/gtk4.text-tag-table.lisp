@@ -213,7 +213,7 @@ lambda (table tag)    :run-last
   @end{short}
   @see-class{gtk:text-tag-table}"
   (table (g:object text-tag-table))
-  (name (:string :free-to-foreign t)))
+  (name :string))
 
 (export 'text-tag-table-lookup)
 

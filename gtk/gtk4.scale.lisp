@@ -457,8 +457,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 ;;; gtk_scale_get_layout
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_scale_get_layout" scale-layout)
-    (g:object pango:layout :free-from-foreign nil)
+(cffi:defcfun ("gtk_scale_get_layout" scale-layout) (g:object pango:layout)
  #+liber-documentation
  "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}

@@ -1833,7 +1833,7 @@
 (cffi:defcfun ("gtk_text_iter_forward_search" %text-iter-forward-search)
     :boolean
   (iter (g:boxed text-iter))
-  (str (:string :free-to-foreign t))
+  (str :string)
   (flags text-search-flags)
   (match-start (g:boxed text-iter))
   (match-end (g:boxed text-iter))
@@ -1842,7 +1842,7 @@
 (cffi:defcfun ("gtk_text_iter_backward_search" %text-iter-backward-search)
     :boolean
   (iter (g:boxed text-iter))
-  (str (:string :free-to-foreign t))
+  (str :string)
   (flags text-search-flags)
   (match-start (g:boxed text-iter))
   (match-end (g:boxed text-iter))

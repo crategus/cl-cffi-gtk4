@@ -50,8 +50,6 @@
 ;;; gdk_keyval_name
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Should we return the string with :free-from-foreign nil
-
 (cffi:defcfun ("gdk_keyval_name" keyval-name) :string
  #+liber-documentation
  "@version{2024-7-9}

@@ -688,27 +688,27 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_insert" %text-buffer-insert) :void
   (buffer (g:object text-buffer))
   (iter (g:boxed text-iter))
-  (text (:string :free-to-foreign t))
+  (text :string)
   (len :int))
 
 (cffi:defcfun ("gtk_text_buffer_insert_at_cursor" %text-buffer-insert-at-cursor)
     :void
   (buffer (g:object text-buffer))
-  (text (:string :free-to-foreign t))
+  (text :string)
   (len :int))
 
 (cffi:defcfun ("gtk_text_buffer_insert_interactive"
                %text-buffer-insert-interactive) :boolean
   (buffer (g:object text-buffer))
   (iter (g:boxed text-iter))
-  (text (:string :free-to-foreign t))
+  (text :string)
   (len :int)
   (editable :boolean))
 
 (cffi:defcfun ("gtk_text_buffer_insert_interactive_at_cursor"
                %text-buffer-insert-interactive-at-cursor) :boolean
   (buffer (g:object text-buffer))
-  (text (:string :free-to-foreign t))
+  (text :string)
   (len :int)
   (editable :boolean))
 
@@ -1216,7 +1216,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_create_mark" %text-buffer-create-mark)
     (g:object text-mark)
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t))
+  (name :string)
   (where (g:boxed text-iter))
   (gravity :boolean))
 
@@ -1264,7 +1264,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_move_mark_by_name"
                %text-buffer-move-mark-by-name) :void
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t))
+  (name :string)
   (pos (g:boxed text-iter)))
 
 (cffi:defcfun ("gtk_text_buffer_move_mark" %text-buffer-move-mark) :void
@@ -1330,7 +1330,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_delete_mark_by_name"
                %text-buffer-delete-mark-by-name) :void
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t)))
+  (name :string))
 
 (cffi:defcfun ("gtk_text_buffer_delete_mark" %text-buffer-delete-mark) :void
   (buffer (g:object text-buffer))
@@ -1383,7 +1383,7 @@ lambda (buffer)    :run-last
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-mark}"
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t)))
+  (name :string))
 
 (export 'text-buffer-mark)
 
@@ -1507,7 +1507,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_apply_tag_by_name"
                %text-buffer-apply-tag-by-name) :void
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t))
+  (name :string)
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 
@@ -1553,7 +1553,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_remove_tag_by_name"
                %text-buffer-remove-tag-by-name) :void
   (buffer (g:object text-buffer))
-  (name (:string :free-to-foreign t))
+  (name :string)
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 

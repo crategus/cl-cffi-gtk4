@@ -360,7 +360,7 @@
   @see-class{gtk:cell-renderer-text}"
   (layout (g:object cell-layout))
   (cell (g:object cell-renderer))
-  (attribute (:string :free-to-foreign t))
+  (attribute :string)
   (column :int))
 
 (export 'cell-layout-add-attribute)
