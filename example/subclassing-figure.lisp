@@ -12,7 +12,7 @@
 
 (in-package :gtk)
 
-(gobject:define-g-object-subclass "GtkFigure" figure
+(gobject:define-gobject-subclass "GtkFigure" figure
   (:superclass box
    :export t
    :interfaces ())
@@ -71,7 +71,7 @@
 (in-package :gtk4-example)
 
 (defun do-subclassing-figure (&optional application)
-  (let* ((filename (sys-path "resource/ducky.png"))
+  (let* ((filename (glib-sys:sys-path "resource/ducky.png"))
          (figure (make-instance 'gtk:figure
                                 ;; Initialize slots of GtkFigure
                                 :picture

@@ -12,7 +12,7 @@
 
 (in-package :gdk)
 
-(gobject:define-g-object-subclass "GdkNuclearIcon" nuclear-icon
+(gobject:define-gobject-subclass "GdkNuclearIcon" nuclear-icon
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))

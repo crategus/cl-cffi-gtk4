@@ -28,7 +28,7 @@
   </menu>
 </interface>")
 
-(gobject:define-g-object-subclass "Sunny" sunny
+(gobject:define-gobject-subclass "Sunny" sunny
   (:superclass gtk:application
    :export t
    :interfaces ())

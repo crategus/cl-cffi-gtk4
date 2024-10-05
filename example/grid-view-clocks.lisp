@@ -25,7 +25,7 @@
 ;; Initialize the paintable interface. This way we turn our clocks
 ;; into objects that can be drawn. There are more functions to this
 ;; interface to define desired size, but this is enough.
-(gobject:define-g-object-subclass "GtkClock" clock
+(gobject:define-gobject-subclass "GtkClock" clock
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))

@@ -15,7 +15,7 @@
 
 (in-package :gtk4-example)
 
-(gobject:define-g-object-subclass "SimpleGrid" simple-grid
+(gobject:define-gobject-subclass "SimpleGrid" simple-grid
   (:superclass gtk:widget
    :export t
    :interfaces ())

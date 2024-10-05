@@ -28,7 +28,7 @@
 
 (in-package :gtk-test)
 
-(gobject:define-g-object-subclass "CanvasItem" canvas-item
+(gobject:define-gobject-subclass "CanvasItem" canvas-item
   (:superclass gtk:widget
    :export t
    :interfaces ())

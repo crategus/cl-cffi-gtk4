@@ -10,7 +10,7 @@
 ;;; Subclass of the GObject class and the GdkPaintable interface
 
 #+nil
-(gobject:define-g-object-subclass "GdkNuclearIcon" nuclear-icon
+(gobject:define-gobject-subclass "GdkNuclearIcon" nuclear-icon
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))

@@ -17,7 +17,7 @@
 
 ;(eval-when (:compile-toplevel :load-toplevel :execute)
 
-(gobject:define-g-object-subclass "GtkColor" color
+(gobject:define-gobject-subclass "GtkColor" color
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))
@@ -244,7 +244,7 @@ add_colors (GtkWidget     *widget,
 }
 |#
 
-(gobject:define-g-object-subclass "GtkColorList" color-list
+(gobject:define-gobject-subclass "GtkColorList" color-list
   (:superclass g:object
    :export t
    :interfaces ("GListModel"))

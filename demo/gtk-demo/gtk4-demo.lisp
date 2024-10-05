@@ -25,7 +25,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-subclass "GtkDemo" gtk-demo
+(gobject:define-gobject-subclass "GtkDemo" gtk-demo
   (:superclass g:object
    :export t
    :interfaces ())
@@ -448,6 +448,8 @@
                     (let ((window (make-instance 'gtk:application-window
                                                  :application application
                                                  :title (gtk-demo-title demo)
+                                                 :icon-name
+                                                 "applications-utilities"
                                                  :default-width 600
                                                  :default-height 400)))
                      (setf (gtk:widget-visible window) t)

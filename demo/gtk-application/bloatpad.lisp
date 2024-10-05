@@ -101,7 +101,7 @@
 </interface>")
 
 
-(gobject:define-g-object-subclass "Bloatpad" bloatpad
+(gobject:define-gobject-subclass "Bloatpad" bloatpad
   (:superclass gtk:application
    :export t
    :interfaces ())

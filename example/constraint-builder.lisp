@@ -11,7 +11,7 @@
 
 (in-package :gtk4-example)
 
-(gobject:define-g-object-subclass "ConstraintsGrid" constraints-grid
+(gobject:define-gobject-subclass "ConstraintsGrid" constraints-grid
   (:superclass gtk:widget
    :export t
    :interfaces ())

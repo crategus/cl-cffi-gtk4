@@ -17,7 +17,7 @@
 ;; have elapsed.
 (defconstant +max-progress+ 500)
 
-(gobject:define-g-object-subclass "GdkNuclearAnimation" nuclear-animation
+(gobject:define-gobject-subclass "GdkNuclearAnimation" nuclear-animation
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))

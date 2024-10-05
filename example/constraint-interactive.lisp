@@ -7,7 +7,7 @@
 
 (in-package :gtk4-example)
 
-(gobject:define-g-object-subclass "InteractiveGrid" interactive-grid
+(gobject:define-gobject-subclass "InteractiveGrid" interactive-grid
   (:superclass gtk:widget
    :export t
    :interfaces ())
