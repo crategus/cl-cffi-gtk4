@@ -283,14 +283,19 @@
 (export 'css-section)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk:css-section-new
+;;; gtk_css_section_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_section_new" css-section-new)
+(cffi:defcfun ("gtk_css_section_new" %css-section-new)
     (g:boxed css-section :return)
+  (file g:object)
+  (start (:pointer (:struct css-location)))
+  (end (:pointer (:struct css-location))))
+
+(defun css-section-new (file start end)
  #+liber-documentation
- "@version{2024-4-23}
-  @argument[file]{a namestring with the file this section refers to}
+ "@version{2024-10-12}
+  @argument[file]{a pathname or namestring for the file this section refers to}
   @argument[start]{a @symbol{gtk:css-location} instance with the start location}
   @argument[end]{a @symbol{gtk:css-location} instance with the end location}
   @begin{short}
@@ -299,9 +304,8 @@
   @end{short}
   @see-class{gtk:css-section}
   @see-symbol{gtk:css-location}"
-  (file g:file-as-namestring)
-  (start (:pointer (:struct css-location)))
-  (end (:pointer (:struct css-location))))
+  (let ((file (cffi:convert-to-foreign file 'g:file-as-namestring)))
+    (%css-section-new file start end)))
 
 (export 'css-section-new)
 

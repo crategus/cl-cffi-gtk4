@@ -33,9 +33,29 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GtkBuilder
-;;;     GtkBuilderClosureFlags                             not implemented
+;;;     GtkBuilderClosureFlags
 ;;;     GtkBuilderError                                    not exported
+;;;
+;;;     GtkBuilderScope
+;;;     GtkBuilderClScope
+;;;
+;;; Virtual functions for GtkBuilderScope
+;;;
+;;;     gtk_builder_scope_create_closure
+;;;     gtk_builder_scope_get_type_from_function
+;;;     gtk_builder_scope_get_type_from_name
+;;;
+;;; ----------------------------------------------------------------------------
+;;;
+;;; Types and Values
+;;;
+;;;     GtkBuilder
+;;;
+;;; Properties
+;;;
+;;;     current-object
+;;;     scope
+;;;     translation-domain
 ;;;
 ;;; Accessors
 ;;;
@@ -48,14 +68,10 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     GTK_BUILDER_WARN_INVALID_CHILD_TYPE
-;;;
 ;;;     gtk_builder_new
 ;;;     gtk_builder_new_from_file
 ;;;     gtk_builder_new_from_resource
 ;;;     gtk_builder_new_from_string
-;;;
-;;;     gtk_builder_create_closure                         not implemented
 ;;;
 ;;;     gtk_builder_add_from_file
 ;;;     gtk_builder_add_from_resource
@@ -65,21 +81,16 @@
 ;;;     gtk_builder_add_objects_from_resource
 ;;;     gtk_builder_add_objects_from_string
 ;;;
-;;;     gtk_builder_extend_with_template                   not implemented
+;;;     gtk_builder_extend_with_template                    not implemented
 ;;;
 ;;;     gtk_builder_get_object
 ;;;     gtk_builder_get_objects
 ;;;     gtk_builder_expose_object
+;;;     gtk_builder_create_closure
 ;;;
-;;;     gtk_builder_get_type_from_name                     not exported
-;;;     gtk_builder_value_from_string                      not implemented
-;;;     gtk_builder_value_from_string_type                 not implemented
-;;;
-;;; Properties
-;;;
-;;;     current-object
-;;;     scope
-;;;     translation-domain
+;;;     gtk_builder_get_type_from_name                      not exported
+;;;     gtk_builder_value_from_string                       not implemented
+;;;     gtk_builder_value_from_string_type                  not implemented
 ;;;
 ;;; Hierarchy
 ;;;
@@ -90,24 +101,45 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkBuilderClosureFlags
-;;;
-;;; The list of flags that can be passed to gtk_builder_create_closure().
-;;; New values may be added in the future for new features, so external
-;;; implementations of GtkBuilderScopeInterface should test the flags for
-;;; unknown values and raise a GTK_BUILDER_ERROR_INVALID_ATTRIBUTE error when
-;;; they encounter one.
-;;;
-;;; GTK_BUILDER_CLOSURE_SWAPPED :
-;;;     The closure should be created swapped. See g_cclosure_new_swap() for
-;;;     details.
+;;; GtkBuilderClosureFlags
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-gflags "GtkBuilderClosureFlags" builder-closure-flags
+  (:export t
+   :type-initializer "gtk_builder_closure_flags_get_type")
+  (:swapped #.(ash 1 0)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'builder-closure-flags)
+      "GFlags"
+      (liber:symbol-documentation 'builder-closure-flags)
+ "@version{2024-10-5}
+  @begin{declaration}
+(gobject:define-gflags \"GtkBuilderClosureFlags\" builder-closure-flags
+  (:export t
+   :type-initializer \"gtk_builder_closure_flags_get_type\")
+  (:swapped #.(ash 1 0)))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:swapped]{The closure should be created swapped.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The list of flags that can be passed to the @fun{gtk:builder-create-closure}
+    function.
+  @end{short}
+  New values may be added in the future for new features, so external
+  implementations of the @class{gtk:builder-scope} interface should test the
+  flags for unknown values and raise an error when they encounter one.
+  @see-class{gtk:builder}
+  @see-function{gtk:builder-create-closure}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkBuilderError                                         not exported
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkBuilderError" builder-error
+(gobject:define-genum "GtkBuilderError" builder-error
   (:export nil
    :type-initializer "gtk_builder_error_get_type")
   (:invalid-type-function 0)
@@ -126,87 +158,114 @@
   (:invalid-id 13)
   (:invalid-function 14))
 
-#+liber-documentation
-(setf (liber:alias-for-symbol 'builder-error)
-      "GEnum"
-      (liber:symbol-documentation 'builder-error)
- "@version{#2022-1-10}
-  @begin{short}
-    Error codes that identify various errors that can occur while parsing the
-    @class{gtk:builder} UI definition.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkBuilderError\" builder-error
+;;; ----------------------------------------------------------------------------
+;;; GtkBuilderScope
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-ginterface "GtkBuilderScope" builder-scope
   (:export t
-   :type-initializer \"gtk_builder_error_get_type\")
-  (:invalid-type-function 0)
-  (:unhandled-tag 1)
-  (:missing-attribute 2)
-  (:invalid-attribute 3)
-  (:invalid-tag 4)
-  (:missing-property-value 5)
-  (:invalid-value 6)
-  (:version-mismatch 7)
-  (:duplicate-id 8)
-  (:type-refused 9)
-  (:template-mismatch 10)
-  (:invalid-property 11)
-  (:invalid-signal 12)
-  (:invalid-id 13)
-  (:invalid-function 14))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:invalid-type-function]{A @code{type-func} attribute did not name a
-      function that returns a @class{g:type-t} type ID.}
-    @entry[:unhandled-tag]{The input contained a tag that a @class{gtk:builder}
-      object cannot handle.}
-    @entry[:missing-attribute]{An attribute that is required by a
-      @class{gtk:builder} object was missing.}
-    @entry[:invalid-attribute]{A @class{gtk:builder} object found an attribute
-      that it does not understand.}
-    @entry[:invalid-tag]{A @class{gtk:builder} object found a tag that it does
-      not understand.}
-    @entry[:missing-property-value]{A required property value was missing.}
-    @entry[:invalid-value]{A @class{gtk:builder} object could not parse some
-      attribute value.}
-    @entry[:version-mismatch]{The input file requires a newer version of GTK.}
-    @entry[:duplicate-id]{An object ID occurred twice.}
-    @entry[:type-refused]{A specified object type is of the same type or derived
-      from the type of the composite class being extended with builder XML.}
-    @entry[:template-mismatch]{The wrong type was specified in a composite
-      class’s template XML.}
-    @entry[:invalid-property]{The specified property is unknown for the object
-      class.}
-    @entry[:invalid-signal]{The specified signal is unknown for the object
-      class.}
-    @entry[:invalid-id]{An object ID is unknown.}
-    @entry[:invalid-function]{A function could not be found. This often happens
-      when symbols are set to be kept private. Compiling code with
-      @code{-rdynamic} or using the @code{gmodule-export-2.0 pkgconfig} module
-      can fix this problem.}
-  @end{table}
-  @see-class{gtk:builder}")
+   :type-initializer "gtk_builder_scope_get_type")
+  nil)
+
+#+liber-documentation
+(setf (liber:alias-for-class 'builder-scope)
+      "Interface"
+      (documentation 'builder-scope 'type)
+ "@version{2024-10-6}
+  @begin{short}
+    The @class{gtk:builder-scope} interface is an interface to provide language
+    binding support to the @class{gtk:builder} object.
+  @end{short}
+  The goal of the @class{gtk:builder-scope} interface is to look up programming
+  language specific values for strings that are given in a @class{gtk:builder}
+  UI definition file. The primary intended audience is bindings that want to
+  provide deeper integration of the @class{gtk:builder} object into the
+  language.
+
+  The @class{gtk:builder-scope} instance may be used with multiple
+  @class{gtk:builder} objects, even at once. By default, GTK will use its own
+  implementation of the @class{gtk:builder-scope} instance for the C language.
+
+  If you implement the @class{gtk:builder-scope} instance for a language
+  binding, you may want to (partially) derive from or fall back to a
+  @code{GtkBuilderCScope}, as that class implements support for automatic
+  lookups from C symbols.
+  @begin{notes}
+    The Lisp binding implements the @class{gtk:builder-cl-scope} subclass. For
+    the Lisp binding, this class is the default builder scope for the
+    @class{gtk:builder} object.
+  @end{notes}
+  @see-class{gtk:builder}
+  @see-class{gtk:builder-cl-scope}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GTK_BUILDER_WARN_INVALID_CHILD_TYPE()
-;;;
-;;; #define GTK_BUILDER_WARN_INVALID_CHILD_TYPE(object, type)
-;;;
-;;; This macro should be used to emit a warning about and unexpected type value
-;;; in a GtkBuildable add_child implementation.
-;;;
-;;; object :
-;;;     the GtkBuildable on which the warning ocurred
-;;;
-;;; type :
-;;;     the unexpected type value
+;;; GtkBuilderScope Inferface vtable
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-vtable ("GtkBuilderScope" builder-scope)
+  (:skip parent-instance (:struct g:type-interface))
+  ;; Methods of the GtkBuilderScope interface
+  (:skip get-type-from-name :pointer)
+  (:skip get-type-from-function :pointer)
+  (create-closure ((:pointer (:struct g:closure))
+                   (scope (g:object builder-scope))
+                   (builder (g:object builder))
+                   (funcname :string)
+                   (flags builder-closure-flags)
+                   (object g:object)
+                   (err :pointer))))
+
+;;; ----------------------------------------------------------------------------
+;;; GtkBuilderClScope
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject-subclass "GtkBuilderClScope" builder-cl-scope
+  (:superclass g:object
+   :export t
+   :interfaces ("GtkBuilderScope"))
+  nil)
+
+#+liber-documentation
+(setf (liber:alias-for-class 'builder-cl-scope)
+      "Class"
+      (documentation 'builder-cl-scope 'type)
+ "@version{2024-10-5}
+  @begin{short}
+    The @class{gtk:builder-cl-scope} class is the implementation of the
+    @class{gtk:builder-scope} interface for the Lisp binding.
+  @end{short}
+  This class implements the @code{create_closure()} virtual function, which
+  creates Lisp closures for binding signal handlers to objects in the UI
+  definition. An instance of the @class{gtk:builder-cl-scope} object is the
+  default builder scope for the @class{gtk:builder} object.
+  @see-class{gtk:builder-scope}
+  @see-class{gtk:builder}")
+
+;;; --- gtk:builder-scope-create-closure-impl ----------------------------------
+
+;; TODO: We need the OBJECT we are creating the closure for. For this
+;; implementation the OBJECT is set with the 'object' attribute in the
+;; UI definition. Can we improve the implementation to allow the
+;; mechanism of swapping objects?
+
+(defmethod builder-scope-create-closure-impl ((scope builder-cl-scope)
+                                              builder funcname flags object err)
+  (let ((func (find-symbol (setf funcname (string-upcase funcname)))))
+    (if func
+        (if object
+            (gobject:create-closure object func)
+            (progn
+              (warn "BUILDER-SCOPE-CREATE-CLOSURE: No object given")
+              (cffi:null-pointer)))
+        (progn
+          (warn "BUILDER-SCOPE-CREATE-CLOSURE: Unknown function ~a" funcname)
+          (cffi:null-pointer)))))
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkBuilder
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkBuilder" builder
+(gobject:define-gobject "GtkBuilder" builder
   (:superclass g:object
    :export t
    :interfaces nil
@@ -222,12 +281,17 @@
     "translation-domain" "gchararray" t t)))
 
 ;;; This Lisp extension is not documented
+#+nil
 (defmethod initialize-instance :after ((builder builder)
                                        &key from-file from-string)
   (when from-file
     (builder-add-from-file builder (namestring from-file)))
   (when from-string
     (builder-add-from-string builder from-string)))
+
+;; Initialize default scope with a GTK:BUILDER-CL-SCOPE instance
+(defmethod initialize-instance :after ((obj builder) &key &allow-other-keys)
+  (setf (builder-scope obj) (make-instance 'builder-cl-scope)))
 
 #+liber-documentation
 (setf (documentation 'builder 'type)
@@ -514,10 +578,10 @@
         <child internal-child=\"action_area\">
           <object class=\"GtkBox\">
             <child>
-              <object class=\"GtkButton\" id=\"ok_button\">
+              <object class=\"GtkButton\" id=\"ok-button\">
                 <property name=\"label\" translatable=\"yes\">_Ok</property>
                 <property name=\"use-underline\">True</property>
-                <signal name=\"clicked\" handler=\"ok_button_clicked\"/>
+                <signal name=\"clicked\" handler=\"ok-button-clicked\" object=\"ok-button\"/>
               </object>
             </child>
           </object>
@@ -683,24 +747,22 @@
 ;;; gtk_builder_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_new_from_file" %builder-new-from-file)
-    (g:object builder)
-  (filename :string))
-
 (defun builder-new-from-file (path)
  #+liber-documentation
- "@version{2024-9-15}
-  @argument[path]{a pathname or a namestring for the file}
+ "@version{2024-10-6}
+  @argument[path]{a pathname or namestring for the file}
   @return{The @class{gtk:builder} object containing the described interface.}
   @begin{short}
-    Builds the @class{gtk:builder} UI definition from a user interface
+    Builds the @class{gtk:builder} UI definition from an user interface
     description file.
   @end{short}
   If there is an error opening the file or parsing the description then the
   program will be aborted. You should only ever attempt to parse user interface
   descriptions that are shipped as part of your program.
   @see-class{gtk:builder}"
-  (%builder-new-from-file (namestring path)))
+  (let ((builder (make-instance 'builder)))
+    (builder-add-from-file builder path)
+    builder))
 
 (export 'builder-new-from-file)
 
@@ -708,13 +770,9 @@
 ;;; gtk_builder_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_new_from_resource" %builder-new-from-resource)
-    (g:object builder)
-  (namestring :string))
-
 (defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-10-6}
   @argument[path]{a path or namestring with the @class{g:resource} path}
   @return{The @class{gtk:builder} object containing the described interface.}
   @begin{short}
@@ -724,8 +782,9 @@
   the program will be aborted.
   @see-class{gtk:builder}
   @see-class{g:resource}"
-  (let ((namestring (namestring path)))
-    (%builder-new-from-resource namestring)))
+  (let ((builder (make-instance 'builder)))
+    (builder-add-from-resource builder path)
+    builder))
 
 (export 'builder-new-from-resource)
 
@@ -754,43 +813,6 @@
   (%builder-new-from-string string -1))
 
 (export 'builder-new-from-string)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_builder_create_closure
-;;;
-;;; GClosure*
-;;; gtk_builder_create_closure (GtkBuilder* builder,
-;;;                             const char* function_name,
-;;;                             GtkBuilderClosureFlags flags,
-;;;                             GObject* object,
-;;;                             GError** error)
-;;;
-;;; Creates a closure to invoke the function called function_name.
-;;;
-;;; This is using the create_closure() implementation of builder‘s
-;;; GtkBuilderScope.
-;;;
-;;; If no closure could be created, NULL will be returned and error will be set.
-;;;
-;;; function_name :
-;;;     Name of the function to look up. The data is owned by the caller of the
-;;;     function. The value is a NUL terminated UTF-8 string.
-;;;
-;;; flags :
-;;;     Closure creation flags
-;;;
-;;; object :
-;;;     Object to create the closure with. The argument can be NULL. The data
-;;;     is owned by the caller of the function.
-;;;
-;;; error :
-;;;     The return location for a GError*, or NULL.
-;;;
-;;; Returns :
-;;;     A new closure for invoking function_name. The caller of the method
-;;;     takes ownership of the data, and is responsible for freeing it. The
-;;;     return value can be NULL.
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_builder_add_from_file
@@ -863,7 +885,7 @@
 ;;; gtk_builder_add_from_string
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_add_from_string" %builder-add-from-string) :uint
+(cffi:defcfun ("gtk_builder_add_from_string" %builder-add-from-string) :boolean
   (builder (g:object builder))
   (string :string)
   (length :int)
@@ -871,9 +893,10 @@
 
 (defun builder-add-from-string (builder string)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-10-5}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
+  @return{@em{True} on sucess, @em{false} if an error occured.}
   @begin{short}
     Parses a string containing a @class{gtk:builder} UI definition and merges
     it with the current contents of the builder.
@@ -887,7 +910,7 @@
   @see-class{gtk:builder}
   @see-function{gtk:builder-current-object}
   @see-function{gtk:builder-new-from-string}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%builder-add-from-string builder string -1 err)))
 
 (export 'builder-add-from-string)
@@ -1131,6 +1154,57 @@
   (object g:object))
 
 (export 'builder-expose-object)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_builder_create_closure
+;;;
+;;; GClosure*
+;;; gtk_builder_create_closure (GtkBuilder* builder,
+;;;                             const char* function_name,
+;;;                             GtkBuilderClosureFlags flags,
+;;;                             GObject* object,
+;;;                             GError** error)
+;;;
+;;; Creates a closure to invoke the function called function_name.
+;;;
+;;; This is using the create_closure() implementation of builder‘s
+;;; GtkBuilderScope.
+;;;
+;;; If no closure could be created, NULL will be returned and error will be set.
+;;;
+;;; function_name :
+;;;     Name of the function to look up. The data is owned by the caller of the
+;;;     function. The value is a NUL terminated UTF-8 string.
+;;;
+;;; flags :
+;;;     Closure creation flags
+;;;
+;;; object :
+;;;     Object to create the closure with. The argument can be NULL. The data
+;;;     is owned by the caller of the function.
+;;;
+;;; error :
+;;;     The return location for a GError*, or NULL.
+;;;
+;;; Returns :
+;;;     A new closure for invoking function_name. The caller of the method
+;;;     takes ownership of the data, and is responsible for freeing it. The
+;;;     return value can be NULL.
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_builder_create_closure" %builder-create-closure)
+    (:pointer (:struct g:closure))
+  (builder (g:object builder))
+  (func :string)
+  (flags builder-closure-flags)
+  (object g:object)
+  (err :pointer))
+
+(defun builder-create-closure (builder func flags object)
+  (glib:with-error (err)
+    (%builder-create-closure builder func flags object err)))
+
+(export 'builder-create-closure)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_builder_get_type_from_name                          not exported

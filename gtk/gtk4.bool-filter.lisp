@@ -2,7 +2,7 @@
 ;;; gtk4.bool-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkBoolFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkBoolFilter" bool-filter
+(gobject:define-gobject "GtkBoolFilter" bool-filter
   (:superclass filter
    :export t
    :interfaces ()
@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'bool-filter 'type)
- "@version{2023-9-9}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:bool-filter} object is a simple filter that takes a boolean
     @class{gtk:expression} instance to determine whether to include items.
@@ -104,7 +104,7 @@
 (setf (liber:alias-for-function 'bool-filter-expression)
       "Accessor"
       (documentation 'bool-filter-expression 'function)
- "@version{2023-9-9}
+ "@version{2024-9-28}
   @syntax{(gtk:bool-filter-expression object) => expression}
   @syntax{(setf (gtk:bool-filter-expression object) expression)}
   @argument[object]{a @class{gtk:bool-filter} object}
@@ -132,11 +132,11 @@
 (setf (liber:alias-for-function 'bool-filter-invert)
       "Accessor"
       (documentation 'bool-filter-invert 'function)
- "@version{2023-9-9}
+ "@version{2024-9-28}
   @syntax{(gtk:bool-filter-invert object) => invert}
   @syntax{(setf (gtk:bool-filter-invert object) invert)}
   @argument[object]{a @class{gtk:bool-filter} object}
-  @argument[expression]{@em{true} to invert}
+  @argument[invert]{@em{true} to invert}
   @begin{short}
     Accessor of the @slot[gtk:bool-filter]{invert} slot of the
     @class{gtk:bool-filter} class.
@@ -144,6 +144,11 @@
   The @fun{gtk:bool-filter-invert} function returns whether the filter inverts
   the expression. The @setf{gtk:bool-filter-expression} function sets whether
   the filter should invert the expression.
+  @begin{notes}
+    If no expression is set, this function returns the @code{cffi:null-pointer}
+    value. To unset the expression for the bool filter, use the
+    @code{cffi:null-pointer} value.
+  @end{notes}
   @see-class{gtk:bool-filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -152,8 +157,8 @@
 
 (declaim (inline bool-filter-new))
 
-(defun bool-filter-new (expression)
- "@version{2023-9-9}
+(defun bool-filter-new (&optional expression)
+ "@version{2024-9-28}
   @argument[expression]{a @class{gtk:expression} instance or @code{nil} for
     none}
   @return{The new @class{gtk:bool-filter} object.}
@@ -162,7 +167,7 @@
   @end{short}
   @see-class{gtk:bool-filter}"
   (make-instance 'bool-filter
-                 :expression expression))
+                 :expression (or expression (cffi:null-pointer))))
 
 (export 'bool-filter-new)
 

@@ -45,7 +45,9 @@
 ;;;     gtk_window_group_new
 
 (test gtk-window-group-new
-  (is (typep (gtk:window-group-new) 'gtk:window-group)))
+  (let (group)
+    (is (typep (setf group (gtk:window-group-new)) 'gtk:window-group))
+    (is (= 1 (g:object-ref-count group)))))
 
 ;;;     gtk_window_group_add_window
 ;;;     gtk_window_group_remove_window
@@ -53,21 +55,33 @@
 
 (test gtk-window-group-list-windows
   (let ((group (gtk:window-group-new))
-        (window (gtk:window-new)))
+        (window1 (gtk:window-new))
+        (window2 (gtk:window-new)))
+    (is (= 1 (g:object-ref-count group)))
     ;; The list is empty
     (is (equal '()
                (gtk:window-group-list-windows group)))
     ;; Add a window to the group
-    (is-false (gtk:window-group-add-window group window))
+    (is-false (gtk:window-group-add-window group window1))
+    (is (= 2 (g:object-ref-count group)))
+    (is (= 2 (g:object-ref-count window1)))
     (is (equal '(GTK:WINDOw)
-               (mapcar #' type-of (gtk:window-group-list-windows group))))
+               (mapcar #'type-of (gtk:window-group-list-windows group))))
     ;; Add a second window to the group
-    (is-false (gtk:window-group-add-window group (make-instance 'gtk:window)))
+    (is-false (gtk:window-group-add-window group window2))
+    (is (= 3 (g:object-ref-count group)))
+    (is (= 2 (g:object-ref-count window2)))
     (is (equal '(GTK:WINDOw GTK:WINDOW)
-               (mapcar #' type-of (gtk:window-group-list-windows group))))
-    ;; Remove the window from the group
-    (is-false (gtk:window-group-remove-window group window))
+               (mapcar #'type-of (gtk:window-group-list-windows group))))
+    ;; Remove the windows from the group
+    (is-false (gtk:window-group-remove-window group window1))
     (is (equal '(GTK:WINDOW)
-               (mapcar #' type-of (gtk:window-group-list-windows group))))))
+               (mapcar #'type-of (gtk:window-group-list-windows group))))
+    (is-false (gtk:window-group-remove-window group window2))
+    (is (equal '()
+               (mapcar #'type-of (gtk:window-group-list-windows group))))
+    (is-false (gtk:window-destroy window1))
+    (is-false (gtk:window-destroy window2))
+    (is (= 1 (g:object-ref-count group)))))
 
-;;; 2024-9-20
+;;; 2024-10-9

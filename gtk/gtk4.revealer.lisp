@@ -2,7 +2,7 @@
 ;;; gtk4.revealer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,7 +80,7 @@
 ;;; GtkRevealerTransitionType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkRevealerTransitionType" revealer-transition-type
+(gobject:define-genum "GtkRevealerTransitionType" revealer-transition-type
   (:export t
    :type-initializer "gtk_revealer_transition_type_get_type")
   (:none 0)
@@ -138,7 +138,7 @@
 ;;; GtkRevealer
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkRevealer" revealer
+(gobject:define-gobject "GtkRevealer" revealer
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -258,7 +258,7 @@
 (setf (liber:alias-for-function 'revealer-reveal-child)
       "Accessor"
       (documentation 'revealer-reveal-child 'function)
- "@version{2023-8-8}
+ "@version{2024-10-11}
   @syntax{(gtk:revealer-reveal-child object) => reveal}
   @syntax{(setf (gtk:revealer-reveal-child object) reveal)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -272,8 +272,8 @@
   the revealer to reveal or conceal its child widget.
 
   This function returns @em{true} as soon as the transition to the revealed
-  state is started. To learn whether the child widget is fully revealed, i.e.
-  the transition is completed, use the @fun{gtk:revealer-child-revealed}
+  state is started. To learn whether the child widget is fully revealed, that
+  is; the transition is completed, use the @fun{gtk:revealer-child-revealed}
   function. The transition will be animated with the current transition type of
   the revealer.
   @see-class{gtk:revealer}

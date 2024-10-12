@@ -2,7 +2,7 @@
 ;;; gtk4.filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkFilterMatch
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkFilterMatch" filter-match
+(gobject:define-genum "GtkFilterMatch" filter-match
   (:export t
    :type-initializer "gtk_filter_match_get_type")
   :some
@@ -75,9 +75,9 @@
 (setf (liber:alias-for-symbol 'filter-match)
       "GEnum"
       (liber:symbol-documentation 'filter-match)
- "@version{2023-8-16}
+ "@version{2024-9-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkFilterMatch\" filter-match
+(gobject:define-genum \"GtkFilterMatch\" filter-match
   (:export t
    :type-initializer \"gtk_filter_match_get_type\")
   :some
@@ -91,7 +91,7 @@
       @entry[:none]{The filter does not match any item, the
         @fun{gtk:filter-match} function will always return @em{false}.}
       @entry[:all]{The filter matches all items, the @fun{gtk:filter-match}
-        function will alays return @em{true}.}
+        function will always return @em{true}.}
     @end{table}
   @end{values}
   @begin{short}
@@ -107,7 +107,7 @@
 ;;; GtkFilterChange
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkFilterChange" filter-change
+(gobject:define-genum "GtkFilterChange" filter-change
   (:export t
    :type-initializer "gtk_filter_change_get_type")
   :different
@@ -118,9 +118,9 @@
 (setf (liber:alias-for-symbol 'filter-change)
       "GEnum"
       (liber:symbol-documentation 'filter-change)
- "@version{2023-8-16}
+ "@version{2024-9-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkFilterChange\" filter-change
+(gobject:define-genum \"GtkFilterChange\" filter-change
   (:export t
    :type-initializer \"gtk_filter_change_get_type\")
   :different
@@ -151,7 +151,7 @@
 ;;; GtkFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFilter" filter
+(gobject:define-gobject "GtkFilter" filter
   (:superclass g:object
    :export t
    :interfaces nil
@@ -160,7 +160,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter 'type)
- "@version{2023-11-3}
+ "@version{2024-9-27}
   @begin{short}
     The @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
@@ -207,10 +207,9 @@ lambda (filter change)    :run-last
 
 (defun filter-match (filter item)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-9-27}
   @argument[filter]{a @class{gtk:filter} object}
-  @argument[item]{a @class{g:object} object with or a pointer to the item to
-    check}
+  @argument[item]{a @class{g:object} object for the item to check}
   @return{@em{True} if the filter matches the item and a filter model should
     keep it, @em{false} if not.}
   @begin{short}
@@ -219,7 +218,7 @@ lambda (filter change)    :run-last
   @begin[Note]{dictionary}
     The C library takes a pointer as an @arg{item} argument. In the Lisp
     implementation the function is generalized to take an object. The pointer
-    is retrieved from the object with the @fun{gobject:object-poiner} function.
+    is retrieved from the object with the @fun{gobject:object-pointer} function.
   @end{dictionary}
   @see-class{gtk:filter}"
   (%filter-match filter (if (cffi:pointerp item)
@@ -234,7 +233,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{2023-11-3}
+ "@version{2024-9-27}
   @argument[filter]{a @class{gtk:filter} object}
   @return{The @symbol{gtk:filter-match} value with the strictness of
     @arg{filter}.}
@@ -258,7 +257,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
  #+liber-documentation
- "@version{2023-11-3}
+ "@version{2024-9-27}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[change]{a @symbol{gtk:filter-change} value}
   @begin{short}

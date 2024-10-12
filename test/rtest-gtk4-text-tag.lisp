@@ -468,11 +468,21 @@
       (is (= 0 (gtk:text-tag-priority
                    (gtk:text-tag-table-lookup table "monospace"))))
       (is (= 2 (gtk:text-tag-priority
-                   (gtk:text-tag-table-lookup table "indent")))))))
+                   (gtk:text-tag-table-lookup table "indent")))))
+    ;; Remove tags from text tag table
+    (is-false (gtk:text-tag-table-remove
+                      table
+                      (gtk:text-tag-table-lookup table "direction")))
+    (is-false (gtk:text-tag-table-remove
+                      table
+                      (gtk:text-tag-table-lookup table "monospace")))
+    (is-false (gtk:text-tag-table-remove
+                      table
+                      (gtk:text-tag-table-lookup table "indent")))))
 
 ;;;     gtk_text_tag_changed
 
-(test gtk:text-tag-changed
+(test gtk-text-tag-changed
   (let ((table (gtk:text-tag-table-new))
         (tag (gtk:text-tag-new "indent" :indent 10))
         (message nil))
@@ -486,6 +496,8 @@
     (is-false (gtk:text-tag-changed tag t))
     (is (equal '("indent") message))
     (is (= 20 (setf (gtk:text-tag-indent tag) 20)))
-    (is (equal '("indent" "indent") message))))
+    (is (equal '("indent" "indent") message))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
-;;; 2024-9-20
+;;; 2024-10-9

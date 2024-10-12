@@ -70,22 +70,22 @@
   (is (eq :img (gtk:widget-class-accessible-role "GtkPicture")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPicture" GTK:PICTURE
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                       :TYPE-INITIALIZER "gtk_picture_get_type")
-                      ((ALTERNATIVE-TEXT PICTURE-ALTERNATIVE-TEXT
-                        "alternative-text" "gchararray" T T)
-                       (CAN-SHRINK PICTURE-CAN-SHRINK
-                        "can-shrink" "gboolean" T T)
-                       (CONTENT-FIT PICTURE-CONTENT-FIT
-                        "content-fit" "GtkContentFit" T T)
-                       (FILE PICTURE-FILE "file" "GFile" T T)
-                       (KEEP-ASPECT-RATIO PICTURE-KEEP-ASPECT-RATIO
-                        "keep-aspect-ratio" "gboolean" T T)
-                       (PAINTABLE PICTURE-PAINTABLE
-                        "paintable" "GdkPaintable" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_picture_get_type")
+                       ((ALTERNATIVE-TEXT PICTURE-ALTERNATIVE-TEXT
+                         "alternative-text" "gchararray" T T)
+                        (CAN-SHRINK PICTURE-CAN-SHRINK
+                         "can-shrink" "gboolean" T T)
+                        (CONTENT-FIT PICTURE-CONTENT-FIT
+                         "content-fit" "GtkContentFit" T T)
+                        (FILE PICTURE-FILE "file" "GFile" T T)
+                        (KEEP-ASPECT-RATIO PICTURE-KEEP-ASPECT-RATIO
+                         "keep-aspect-ratio" "gboolean" T T)
+                        (PAINTABLE PICTURE-PAINTABLE
+                         "paintable" "GdkPaintable" T T)))
              (gobject:get-gtype-definition "GtkPicture"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -104,22 +104,37 @@
 ;;;     gtk_picture_new
 
 (test gtk-picture-new
-  (is (typep (gtk:picture-new) 'gtk:picture)))
+  (is (typep (gtk:picture-new) 'gtk:picture))
+  (is (= 1 (g:object-ref-count (gtk:picture-new))))
+  (is (typep (make-instance 'gtk:picture) 'gtk:picture))
+  (is (= 1 (g:object-ref-count (make-instance 'gtk:picture))))
+  (is (typep (g:object-new "GtkPicture") 'gtk:picture))
+  (is (= 1 (g:object-ref-count (g:object-new "GtkPicture")))))
 
 ;;;     gtk_picture_new_for_paintable
 
 (test gtk-picture-new-for-paintable
-  (let ((paintable (gdk:texture-new-from-filename
-                       (glib-sys:sys-path "test/resource/gtk-logo-24.png"))))
-    (is (typep (gtk:picture-new-for-paintable paintable) 'gtk:picture))))
+  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
+         (paintable (gdk:texture-new-from-filename path))
+         (picture nil))
+    (is (typep (setf picture
+                     (gtk:picture-new-for-paintable paintable)) 'gtk:picture))
+    (is (= 1 (g:object-ref-count picture)))
+    (is-false (setf (gtk:picture-paintable picture) nil))
+    (is (= 1 (g:object-ref-count paintable)))))
 
 ;;;     gtk_picture_new_for_pixbuf
 
 (test gtk-picture-new-for-pixbuf
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((pixbuf (gdk:pixbuf-new-from-file
-                      (glib-sys:sys-path "test/resource/gtk-logo-24.png"))))
-      (is (typep (gtk:picture-new-for-pixbuf pixbuf) 'gtk:picture)))))
+  (let* ((*gtk-warn-deprecated* nil)
+         (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
+         (pixbuf (gdk:pixbuf-new-from-file path))
+         (picture nil))
+    (is (typep (setf picture
+                     (gtk:picture-new-for-pixbuf pixbuf)) 'gtk:picture))
+    (is (= 1 (g:object-ref-count picture)))
+    (is-false (setf (gtk:picture-paintable picture) nil))
+    (is (= 1 (g:object-ref-count pixbuf)))))
 
 ;;;     gtk_picture_new_for_file
 

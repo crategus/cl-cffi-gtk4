@@ -111,7 +111,7 @@
     to find on a single page. The @code{.ui} file for this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-gedit.ui]{here}.
 
-    @image[gedit-shortcuts]{}
+    @image[gedit-shortcuts]{Figure: GEdit shortcuts}
 
     An example with multiple views:
     This example shows a shortcuts window that has been configured to show only
@@ -119,7 +119,7 @@
     this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-clocks.ui]{here}.
 
-    @image[clocks-shortcuts]{}
+    @image[clocks-shortcuts]{Figure: Clock shortcuts}
 
     An example with multiple sections:
     This example shows a shortcuts window with two sections,
@@ -127,7 +127,7 @@
     this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-builder.ui]{here}.
 
-    @image[builder-shortcuts]{}
+    @image[builder-shortcuts]{Figure: Builder shortcuts}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"close\" signal}

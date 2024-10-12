@@ -367,7 +367,7 @@
   Several different coordinate systems are exposed in the @class{gtk:tree-view}
   API. These are:
 
-  @image[tree-view-coordinates]{}
+  @image[tree-view-coordinates]{Figure: Tree view coordinates}
 
   Coordinate systems in the @class{gtk:tree-view} API:
   @begin[em]{table}

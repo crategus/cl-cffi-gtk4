@@ -5,7 +5,7 @@
 
 (defvar *verbose-gtk-application* nil)
 
-;;; --- GtkApplicationInhibitFlags ---------------------------------------------
+;;;     GtkApplicationInhibitFlags
 
 (test gtk-application-inhibit-flags
   ;; Check type
@@ -26,16 +26,15 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkApplicationInhibitFlags"
                                      GTK:APPLICATION-INHIBIT-FLAGS
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_application_inhibit_flags_get_type")
-                                     (:LOGOUT 1)
-                                     (:SWITCH 2)
-                                     (:SUSPEND 4)
-                                     (:IDLE 8))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_application_inhibit_flags_get_type")
+                       (:LOGOUT 1)
+                       (:SWITCH 2)
+                       (:SUSPEND 4)
+                       (:IDLE 8))
              (gobject:get-gtype-definition "GtkApplicationInhibitFlags"))))
 
-;;; --- GtkApplication ---------------------------------------------------------
+;;;     GtkApplication
 
 (test gtk-application-class
   ;; Check type
@@ -47,7 +46,8 @@
   (is (eq (g:gtype "GtkApplication")
           (g:gtype (cffi:foreign-funcall "gtk_application_get_type" :size))))
   ;; Check parent
-  (is (eq (g:gtype "GApplication") (g:type-parent "GtkApplication")))
+  (is (eq (g:gtype "GApplication")
+          (g:type-parent "GtkApplication")))
   ;; Check children
   (is (equal '()
              (glib-test:list-children "GtkApplication")))
@@ -58,8 +58,6 @@
   (is (equal '("active-window" "menubar" "register-session"
                "screensaver-active")
              (glib-test:list-properties "GtkApplication")))
-  (is (equal '("query-end" "window-added" "window-removed")
-             (glib-test:list-signals "GtkApplication")))
   ;; Check signals
   (is (equal '("query-end" "window-added" "window-removed")
              (glib-test:list-signals "GtkApplication")))
@@ -79,176 +77,131 @@
                          "screensaver-active" "gboolean" T NIL)))
              (gobject:get-gtype-definition "GtkApplication"))))
 
-;;; --- Properties and Accessors -----------------------------------------------
-
-;; TODO: This test can cause a memory fault. Check this?!
-
-#+nil
-(test gtk-application-properties
-  (let ((message nil)
-        (application (make-instance 'gtk:application
-                                    :application-id "com.crategus.test"
-                                    :flags :default-flags
-                                    :register-session nil)))
-    ;; Connect signal "startup"
-    (g:signal-connect application "startup"
-                      (lambda (app)
-                        (declare (ignore app))
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in startup.~%"))))
-    ;; TODO: Move the code to "startup" signal handler
-    ;; Connect signal "activate"
-    (g:signal-connect application "activate"
-                      (lambda (app)
-                        (g:application-hold app)
-                        (push "activate" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in activate.~%"))
-                        ;; gtk:application-active-window
-                        (is-false (gtk:application-active-window app))
-                        ;; gtk:application-menubar
-                        (is-false (gtk:application-menubar app))
-                        (setf (gtk:application-menubar app)
-                              (make-instance 'g:menu))
-                        (is (typep (gtk:application-menubar app) 'g:menu))
-                        ;; gtk:application-register-session
-                        (is-false (gtk:application-register-session app))
-                        (setf (gtk:application-register-session app) t)
-                        (is-true (gtk:application-register-session app))
-                        ;; gtk-application-screensaver-active
-; GLib-GObject-WARNING **: g_object_notify:
-; object class 'GDBusConnection' has no property named 'screensaver-active'
-;                        (is-false (gtk-application-screensaver-active app))
-                        (g:application-release app)))
-    ;; Connect signal "shutdown"
-    (g:signal-connect application "shutdown"
-                      (lambda (app)
-                        (declare (ignore app))
-                        (push "shutdown" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in shutdown.~%"))))
-    ;; Run the application
-    (g:application-run application nil)
-    ;; Check collected messages from the signal handlers
-    (is (equal '("shutdown" "activate") message))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
-;; TODO: We get an unhandled memory fault, when setting the REGISTER-SESSION
-;; property to T.
+;;;     query-end
 
-;; --------------------------------
-;; GTK-APPLICATION-SIGNALS in GTK-APPLICATION []:
-;;      Unexpected Error: #<SB-SYS:MEMORY-FAULT-ERROR {1004EE5173}>
-;; Unhandled memory fault at #x0..
-;; --------------------------------
+(test gtk-application-query-end-signal
+  (let* ((name "query-end")
+         (gtype (g:gtype "GtkApplication"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-;; TODO: This test can cause a memory fault. Check this?!
+;;;     window-added
 
-#+nil
-(test gtk-application-signals
-  (let ((message nil)
-        (application (make-instance 'gtk:application
-                                    :register-session nil
-                                    :flags :default-flags
-                                    :application-id "com.crategus.test")))
-    ;; Connect signal "query-end", will not be executed
-    (g:signal-connect application "query-end"
-                      (lambda (app)
-                        (declare (ignore app))
-                        (push "query-end" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in query-end.~%"))))
-    ;; Connect signal "window-added"
-    (g:signal-connect application "window-added"
-                      (lambda (app window)
-                        (declare (ignore app window))
-                        (push "window-added" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in window-added.~%"))))
-    ;; Connect signal "window-removed"
-    (g:signal-connect application "window-removed"
-                      (lambda (app window)
-                        (declare (ignore app window))
-                        (push "window-removed" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in window-removed.~%"))))
-    ;; Connect signal "activate"
-    (g:signal-connect application "activate"
-                      (lambda (app)
-                        (g:application-hold app)
-                        (push "activate" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in activate.~%"))
-                        ;; Code for emitting window-added and window-removed
-                        (let ((window (make-instance 'gtk:application-window)))
-                          ;; Add window to the application
-                          (gtk:application-add-window app window)
-                          ;; Remove window from the application
-                          (gtk:application-remove-window app window))
-                        (g:application-release app)))
-    ;; Connect signal "shutdown"
-    (g:signal-connect application "shutdown"
-                      (lambda (app)
-                        (declare (ignore app))
-                        (push "shutdown" message)
-                        (when *verbose-gtk-application*
-                          (format t "~&Application is in shutdown.~%"))))
-    ;; Run the application
-    (g:application-run application nil)
-    ;; Check collected messages from the signal handlers
-    (is (equal '("shutdown" "window-removed" "window-added" "activate")
-               message))))
+(test gtk-application-window-added-signal
+  (let* ((name "window-added")
+         (gtype (g:gtype "GtkApplication"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkWindow")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     window-removed
+
+(test gtk-application-window-removed-signal
+  (let* ((name "window-removed")
+         (gtype (g:gtype "GtkApplication"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkWindow")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;; --- Properties and Accessors -----------------------------------------------
+
+(test gtk-application-properties
+  (let ((application (make-instance 'gtk:application)))
+    (is-false (gtk:application-active-window application))
+    (is-false (gtk:application-menubar application))
+    (is-false (gtk:application-register-session application))
+    (is-false (gtk:application-screensaver-active application))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_application_new
 
 (test gtk-application-new.1
+  ;; Create with constructor function
+  (is (typep (gtk:application-new nil nil) 'gtk:application))
+  (is (= 1 (g:object-ref-count (gtk:application-new nil nil))))
+  ;; Create with MAKE-INSTANCE
+  (is (typep (make-instance 'gtk:application) 'gtk:application))
+  (is (= 1 (g:object-ref-count (make-instance 'gtk:application))))
+  ;; Create with G:OBJECT-NEW
+  (is (typep (g:object-new "GtkApplication") 'gtk:application))
+  (is (= 1 (g:object-ref-count (g:object-new "GtkApplication")))))
+
+(test gtk-application-new.2
   (let ((application (gtk:application-new "com.crategus.test" '(:handles-open))))
+    (is (typep application 'gtk:application))
+    (is (= 1 (g:object-ref-count application)))
     (is-true (g:application-id-is-valid "com.crategus.test"))
     (is (string= "com.crategus.test"
                  (g:application-application-id application)))
     (is (equal '(:handles-open) (g:application-flags application)))))
 
-(test gtk-application-new.2
-  ;; Create application without ID
-  (is-false (g:application-application-id
-                (gtk:application-new nil '(:handles-open)))))
+(test gtk-application-new.3
+  (let ((application (gtk:application-new nil '(:handles-open))))
+    (is (typep application 'gtk:application))
+    (is (= 1 (g:object-ref-count application)))
+    (is-false (g:application-application-id application))
+    (is (equal '(:handles-open) (g:application-flags application)))))
 
 ;;;     gtk_application_add_window
+;;;     gtk_application_remove_window
 ;;;     gtk_application_get_window_by_id
 ;;;     gtk_application_get_windows
-;;;     gtk_application_remove_window
 
-;; TODO: This test can cause a memory fault. Check this?!
-
-#+nil
-(test gtk-application-add-window
+(test gtk-application-add/remove-window
   (let ((message nil)
-        (application (make-instance 'gtk:application
-                                    :application-id "com.crategus.test")))
+        (application (make-instance 'gtk:application)))
     ;; Connect signal "window-added"
     (g:signal-connect application "window-added"
                       (lambda (app window)
                         (declare (ignore app window))
-                        (push "window-added" message)
                         (when *verbose-gtk-application*
-                          (format t "~&Application is in window-added.~%"))))
+                          (format t "~&  Signal WINDOW-ADDED emitted~%"))
+                        (push "window-added" message)))
     ;; Connect signal "window-removed"
     (g:signal-connect application "window-removed"
                       (lambda (app window)
                         (declare (ignore app window))
-                        (push "window-removed" message)
                         (when *verbose-gtk-application*
-                          (format t "~&Application is in window-removed.~%"))))
+                          (format t "~&  Signal WINDOW-REMOVED emitted~%"))
+                        (push "window-removed" message)))
     ;; Connect signal "activate"
     (g:signal-connect application "activate"
                       (lambda (app)
                         (g:application-hold app)
-                        (push "activate" message)
                         (when *verbose-gtk-application*
-                          (format t "~&Application is in activate.~%"))
+                          (format t "~&  Signal ACTIVATE emitted~%"))
+                        (push "activate" message)
                         ;; Code for emitting window-added and window-removed
                         (let ((window-id 0)
                               (window (make-instance 'gtk:application-window)))
@@ -264,7 +217,7 @@
                           ;; Check list of windows
                           (is-true (member window
                                            (gtk:application-windows app)
-                                           :test #'equal))
+                                           :test #'eq))
                           ;; Remove window from the application
                           (gtk:application-remove-window app window))
                         (g:application-release app)))
@@ -272,12 +225,15 @@
     (g:signal-connect application "shutdown"
                       (lambda (app)
                         (declare (ignore app))
-                        (push "shutdown" message)
                         (when *verbose-gtk-application*
-                          (format t "~&Application is in shutdown.~%"))))
+                          (format t "~&  Signal SHUTDOWN emitted~%"))
+                        ;; Destroy all toplevel windows
+                        (dolist (window (gtk:window-list-toplevels))
+                          (gtk:window-destroy window))
+                        (push "shutdown" message)))
     ;; Run the application
     (g:application-run application nil)
-    ;; Check collected messages from the signal handlers
+    ;; Check messages from the signal handlers
     (is (equal '("shutdown" "window-removed" "window-added" "activate")
                message))))
 
@@ -309,7 +265,13 @@
                (gtk:application-actions-for-accel application "<Control>q")))))
 
 ;;;     gtk_application_get_menu_by_id
+
+;; See application-resources.lisp for an example
+
 ;;;     gtk_application_inhibit
+;;;     gtk_application_uninhibit
+
+;; See application-inhibit.lisp for an example
 
 ;;;     gtk_application_list_action_descriptions
 
@@ -325,4 +287,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; 2024-9-20
+;;; 2024-10-7

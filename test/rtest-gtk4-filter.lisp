@@ -7,7 +7,7 @@
 
 ;;;     GtkFilterMatch
 
-(test gtk-filter-match
+(test gtk-filter-match-enumeration
   ;; Check type
   (is (g:type-is-enum "GtkFilterMatch"))
   ;; Check type initializer
@@ -103,10 +103,82 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     changed
+(test gtk-filter-changed-signal
+  (let* ((name "changed")
+         (gtype (g:gtype "GtkFilter"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("GtkFilterChange")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_filter_match
+
+(test gtk-filter-match
+  (let* ((store (create-string-list-for-package))
+         (expression (gtk:property-expression-new "GtkStringObject"
+                                                  nil "string"))
+         (filter (gtk:string-filter-new expression))
+         (model (gtk:filter-list-model-new store filter)))
+    ;; Check filter model
+    (is (eq filter (gtk:filter-list-model-filter model)))
+    (is-false (gtk:filter-list-model-incremental model))
+    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+    (is (eq store (gtk:filter-list-model-model model)))
+    #-windows
+    (is (< 3400 (gtk:filter-list-model-n-items model)))
+    #+windows
+    (is (< 3330 (gtk:filter-list-model-n-items model)))
+    (is (= 0 (gtk:filter-list-model-pending model)))
+    ;; At this point we have a filter list model with string objects
+    (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
+    (is (eq :substring (gtk:string-filter-match-mode filter)))
+    (is (eq :all (gtk:filter-strictness filter)))
+    (is-true (gtk:string-filter-ignore-case filter))
+    ;; Match "string" as a substring in the filter model
+    (is (string= (setf (gtk:string-filter-search filter) "string") "string"))
+    (is (= 42 (gtk:filter-list-model-n-items model)))
+    ;; Check match
+    (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "string")))
+    (is-false (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:string")))
+    (is-false (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:button")))
+    ;; Change match mode
+    (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "string")))
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:string")))
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:string-filter")))
+    (is-false (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:button")))))
+
+;;;     gtk_filter_get_strictness
+
+(test gtk-filter-strictness
+  (is (eq :all (gtk:filter-strictness (gtk:custom-filter-new))))
+  (is (eq :none (gtk:filter-strictness (gtk:any-filter-new))))
+  (is (eq :all (gtk:filter-strictness (gtk:every-filter-new))))
+  (is (eq :none (gtk:filter-strictness (gtk:bool-filter-new))))
+  (is (eq :all (gtk:filter-strictness (gtk:string-filter-new))))
+  (is (eq :none (gtk:filter-strictness (gtk:file-filter-new)))))
+
 ;;;     gtk_filter_changed
 
-(test gtk-string-filter-changed-signal
+(test gtk-filter-changed
   (let* ((store (gtk:string-list-new '()))
          (expression (gtk:property-expression-new "GtkStringObject"
                                                   nil "string"))
@@ -121,46 +193,4 @@
     (is-false (gtk:filter-changed filter :different))
     (is (equal '(:different) msg))))
 
-;;; --- Functions --------------------------------------------------------------
-
-(defun create-string-list-for-package (&optional (package "GTK"))
-  (let ((store (gtk:string-list-new '())))
-    (do-external-symbols (symbol (find-package package))
-      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
-    store))
-
-;;;     gtk_filter_match
-;;;     gtk_filter_get_strictness
-
-(test gtk-filter-match/strictness
-  (let* ((store (create-string-list-for-package))
-         (expression (gtk:property-expression-new "GtkStringObject"
-                                                  nil "string"))
-         (filter (gtk:string-filter-new expression))
-         (model (gtk:filter-list-model-new store filter)))
-    ;; Check filter model
-    (is (eq filter (gtk:filter-list-model-filter model)))
-    (is-false (gtk:filter-list-model-incremental model))
-    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
-    (is (eq store (gtk:filter-list-model-model model)))
-    #-windows
-    (is (= 3399 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (= 3330 (gtk:filter-list-model-n-items model)))
-    (is (= 0 (gtk:filter-list-model-pending model)))
-    ;; At this point we have a filter list model with string objects
-    (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
-    (is (eq :exact (gtk:string-filter-match-mode filter)))
-    (is (eq :all (gtk:filter-strictness filter)))
-    (is-true (gtk:string-filter-ignore-case filter))
-    ;; Match strings in the model
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:string-filter")))
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:button")))
-    ;; This should be false, do a correct test!? But the value of strictness
-    ;; is :all!? Do we habe a problem with the implementation!?
-    (is-true (gtk:filter-match filter (make-instance 'gtk:button)))
-))
-
-;;; 2024-9-19
+;;; 2024-10-1

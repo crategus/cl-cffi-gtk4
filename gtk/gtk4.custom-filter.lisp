@@ -2,11 +2,11 @@
 ;;; gtk4.custom-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -54,7 +54,7 @@
 ;;; GtkCustomFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCustomFilter" custom-filter
+(gobject:define-gobject "GtkCustomFilter" custom-filter
   (:superclass filter
    :export t
    :interfaces nil
@@ -63,7 +63,7 @@
 
 #+liber-documentation
 (setf (documentation 'custom-filter 'type)
- "@version{2023-8-16}
+ "@version{2024-9-27}
   @begin{short}
     The @class{gtk:custom-filter} object is a @class{gtk:filter} object that
     uses a callback to determine whether to include an item or not.
@@ -72,51 +72,20 @@
   @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkCustomFilterFunc
-;;; ----------------------------------------------------------------------------
-
-;; TODO: Improve the documentation. Do we have a GTKTreeListRow?
-
-(cffi:defcallback custom-filter-func :boolean
-    ((item :pointer)
-     (data :pointer))
-  (let ((func (glib:get-stable-pointer-value data))
-        ;; Convert the pointer to a GObject
-        (object (cffi:convert-from-foreign item 'g:object)))
-    (funcall func object)))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'custom-filter-func)
-      "Callback"
-      (liber:symbol-documentation 'custom-filter-func)
- "@version{2024-3-28}
-  @syntax{lambda (item) => result}
-  @argument[object]{a @class{g:object} instance with the item to be matched}
-  @argument[result]{@em{true} to keep the item around}
-  @begin{short}
-    User function that is called to determine if the item should be matched.
-  @end{short}
-  If the filter matches the item, this function must return @em{true}. If the
-  item should be filtered out, @em{false} must be returned.
-  @see-class{gtk:custom-filter}")
-
-(export 'custom-filter-func)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_custom_filter_new ()
+;;; gtk_custom_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_filter_new" %custom-filter-new)
-    (g:object custom-filter)
+    (g:object custom-filter :already-referenced)
   (func :pointer)
   (data :pointer)
   (notify :pointer))
 
-(defun custom-filter-new (func)
+(defun custom-filter-new (&optional func)
  #+liber-documentation
- "@version{2024-3-29}
-  @argument[func]{a @symbol{gtk:custom-filter-func} callback function to filter
-    items}
+ "@version{2024-9-27}
+  @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
+    to filter items, the default value is @code{nil}}
   @return{The new @class{gtk:custom-filter} object.}
   @begin{short}
     Creates a new custom filter using the given @arg{func} callback function to
@@ -139,7 +108,35 @@
 (export 'custom-filter-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_custom_filter_set_filter_func ()
+;;; GtkCustomFilterFunc
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcallback custom-filter-func :boolean
+    ((item :pointer)
+     (data :pointer))
+  (let ((func (glib:get-stable-pointer-value data))
+        (object (cffi:convert-from-foreign item 'g:object)))
+    (funcall func object)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'custom-filter-func)
+      "Callback"
+      (liber:symbol-documentation 'custom-filter-func)
+ "@version{2024-9-27}
+  @syntax{lambda (item) => result}
+  @argument[item]{a @class{g:object} instance with the item to be matched}
+  @argument[result]{@em{true} to keep the item around}
+  @begin{short}
+    User function that is called to determine if the item should be matched.
+  @end{short}
+  If the filter matches the item, this function must return @em{true}. If the
+  item should be filtered out, @em{false} must be returned.
+  @see-class{gtk:custom-filter}")
+
+(export 'custom-filter-func)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_custom_filter_set_filter_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_filter_set_filter_func"
@@ -149,12 +146,12 @@
   (data :pointer)
   (notify :pointer))
 
-(defun custom-filter-set-filter-func (filter func)
+(defun custom-filter-set-filter-func (filter &optional func)
  #+liber-documentation
- "@version{#2023-9-6}
+ "@version{2024-9-27}
   @argument[filter]{a @class{gtk:custom-filter} object}
-  @argument[func]{a @symbol{gtk:custom-filter-func} callback function to filter
-    items}
+  @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
+    to filter items, or the default value @code{nil}} to unset the function
   @begin{short}
     Sets (or unsets) the function used for filtering items.
   @end{short}
@@ -163,11 +160,17 @@
   @fun{gtk:filter-changed} function needs to be called.
   @see-class{gtk:custom-filter}
   @see-symbol{gtk:custom-filter-func}"
-  (%custom-filter-set-filter-func
-          filter
-          (cffi:callback custom-filter-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%custom-filter-set-filter-func
+              filter
+              (cffi:callback custom-filter-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%custom-filter-set-filter-func
+              filter
+              (cffi:null-pointer)
+              (cffi:null-pointer)
+              (cffi:null-pointer))))
 
 (export 'custom-filter-set-filter-func)
 

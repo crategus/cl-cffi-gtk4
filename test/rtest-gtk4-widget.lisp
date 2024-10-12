@@ -583,12 +583,65 @@
                  (gtk:widget-measure (gtk:label-new "label") :vertical -1)))))
 
 ;;;     gtk_widget_snapshot_child
+
 ;;;     gtk_widget_get_next_sibling
 ;;;     gtk_widget_get_prev_sibling
+
+;; TODO: Make a better test example
+
+(test gtk-widget-next/prev-sibling
+  (let* ((path (glib-sys:sys-path "test/resource/stack.ui"))
+         (builder (gtk:builder-new-from-file path))
+         (window1 (gtk:builder-object builder "window1"))
+         (grid1 (gtk:builder-object builder "grid1"))
+         (stack1 (gtk:builder-object builder "stack1")))
+
+    (is-false (gtk:widget-next-sibling window1))
+    (is-false (gtk:widget-prev-sibling window1))
+
+    (is-false (gtk:widget-next-sibling grid1))
+    (is-false (gtk:widget-prev-sibling grid1))
+
+    (is-false (gtk:widget-next-sibling stack1))
+    (is (typep (gtk:widget-prev-sibling stack1) 'gtk:stack-switcher))
+))
+
 ;;;     gtk_widget_get_first_child
 ;;;     gtk_widget_get_last_child
+
+(test gtk-widget-first/last-sibling
+  (let* ((path (glib-sys:sys-path "test/resource/stack.ui"))
+         (builder (gtk:builder-new-from-file path))
+         (window1 (gtk:builder-object builder "window1"))
+         (grid1 (gtk:builder-object builder "grid1"))
+         (stack1 (gtk:builder-object builder "stack1"))
+         (image1 (gtk:builder-object builder "image1"))
+         (spinner1 (gtk:builder-object builder "spinner1")))
+    (is (typep window1 'gtk:window))
+    (is (eq window1  (gtk:widget-root window1)))
+    (is (eq grid1 (gtk:widget-first-child window1)))
+    (is (eq grid1 (gtk:widget-last-child window1)))
+    ;; TODO: The first and last children are not the pages, but the child
+    ;; widgets for the pages.
+    (is (typep stack1 'gtk:stack))
+    (is (eq image1 (gtk:widget-first-child stack1)))
+    (is (eq spinner1 (gtk:widget-last-child stack1)))))
+
 ;;;     gtk_widget_insert_before
 ;;;     gtk_widget_insert_after
+
+;; TODO: Finish this example
+
+(test gtk-widget-insert-before/after
+  (let ((widget (make-instance 'gtk:box)))
+
+    (is-false (gtk:widget-insert-after (gtk:button-new) widget nil))
+    (is-false (gtk:widget-next-sibling widget))
+
+    (is-false (gtk:widget-insert-before (gtk:button-new) widget nil))
+    (is-false (gtk:widget-prev-sibling widget))
+))
+
 ;;;     gtk_widget_should_layout
 
 ;;;     gtk_widget_get_color
@@ -717,6 +770,7 @@
 ;;;     gtk_widget_class_set_template_scope
 ;;;     gtk_widget_observe_children
 ;;;     gtk_widget_observe_controllers
+
 ;;;     gtk_widget_insert_action_group
 ;;;     gtk_widget_activate_action
 ;;;     gtk_widget_activate_action_variant
@@ -729,4 +783,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-9-19
+;;; 2024-9-27

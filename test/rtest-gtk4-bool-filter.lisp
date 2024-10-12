@@ -44,8 +44,23 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     expression
-;;;     invert
+;;;     gtk:bool-filter-expression
+
+(test gtk-bool-filter-expression
+  (let ((filter (make-instance 'gtk:bool-filter))
+        (expr (gtk:constant-expression-new "gboolean" t)))
+    (is (cffi:null-pointer-p (gtk:bool-filter-expression filter)))
+    (is (cffi:pointer-eq expr
+                         (setf (gtk:bool-filter-expression filter) expr)))
+    (is (cffi:pointer-eq expr (gtk:bool-filter-expression filter)))))
+
+;;;     gtk:bool-filter-invert
+
+(test gtk-bool-filter-invert
+  (let ((filter (make-instance 'gtk:bool-filter)))
+    (is-false (gtk:bool-filter-invert filter))
+    (is-true (setf (gtk:bool-filter-invert filter) t))
+    (is-true (gtk:bool-filter-invert filter))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -59,6 +74,7 @@
               (g:value-type (g:value-init gvalue "gboolean"))))
       (is-true (setf (g:value-boolean gvalue) t))
       (is-true (setf expression (gtk:constant-expression-new-for-value gvalue)))
+      ;; Create the bool filter
       (is (typep (setf filter
                        (gtk:bool-filter-new expression)) 'gtk:bool-filter))
       (is (cffi:pointer-eq expression (gtk:bool-filter-expression filter)))

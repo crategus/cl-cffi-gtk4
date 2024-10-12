@@ -77,7 +77,7 @@
 ;;; GtkApplicationWindow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkApplicationWindow" application-window
+(gobject:define-gobject "GtkApplicationWindow" application-window
   (:superclass window
    :export t
    :interfaces ("GActionGroup"
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2024-6-2}
+ "@version{2024-10-7}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -195,7 +195,7 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{2023-9-18}
+ "@version{2024-10-7}
   @syntax{(gtk:application-window-show-menubar object) => show}
   @syntax{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -214,16 +214,20 @@
 ;;; gtk_application_window_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_application_window_new" application-window-new)
-    (g:object widget)
+(defun application-window-new (&optional application)
  #+liber-documentation
- "@version{2023-3-11}
-  @argument[application]{a @class{gtk:application} instance}
+ "@version{2024-10-7}
+  @argument[application]{an optinoal @class{gtk:application} instance}
   @return{The newly created @class{gtk:application-window} widget.}
   @short{Creates a new application window.}
+  New application windows must be added to an application after the
+  @code{GApplication::startup} signal has been emitted. See also the
+  @fun{gtk:application-add-window} documentation.
   @see-class{gtk:application}
-  @see-class{gtk:application-window}"
-  (application (g:object gtk:application)))
+  @see-class{gtk:application-window}
+  @see-function{gtk:application-add-window}"
+  (make-instance 'application-window
+                 :application application))
 
 (export 'application-window-new)
 
@@ -233,7 +237,7 @@
 
 (cffi:defcfun ("gtk_application_window_get_id" application-window-id) :uint
  #+liber-documentation
- "@version{2023-3-11}
+ "@version{2024-10-7}
   @argument[window]{a @class{gtk:application-window} widget}
   @begin{return}
     The unique ID for @arg{window}, or 0 if @arg{window} has not yet been
@@ -265,7 +269,7 @@
 (cffi:defcfun ("gtk_application_window_get_help_overlay"
                application-window-help-overlay) (g:object shortcuts-window)
  #+liber-documentation
- "@version{2024-5-24}
+ "@version{2024-10-7}
   @syntax{(gtk:application-window-help-overlay window) => overlay}
   @syntax{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}

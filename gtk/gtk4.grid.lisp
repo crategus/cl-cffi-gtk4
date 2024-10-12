@@ -94,7 +94,7 @@
 ;;; GtkGrid
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGrid" grid
+(gobject:define-gobject "GtkGrid" grid
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -394,8 +394,8 @@
     Adds a child widget to the grid.
   @end{short}
   The position of the child widget is determined by the @arg{left} and @arg{top}
-  arguments. The number of \"cells\" that the child widget will occupy is
-  determined by the @arg{width} and @arg{height} arguments.
+  arguments. The number of cells that the child widget will occupy is determined
+  by the @arg{width} and @arg{height} arguments.
   @see-class{gtk:grid}
   @see-class{gtk:widget}
   @see-function{grid-attach-next-to}"

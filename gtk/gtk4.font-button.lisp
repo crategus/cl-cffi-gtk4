@@ -114,7 +114,7 @@
   @end{short}
   It is a suitable widget for selecting a font in a preference dialog.
 
-  @image[font-button]{}
+  @image[font-button]{Figure: GtkFontButton}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:font-button} implementation has a single CSS node with name
     @code{button} and @code{.font} style class.

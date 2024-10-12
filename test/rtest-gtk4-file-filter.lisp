@@ -53,8 +53,11 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     gtk:file-filter-name
+
 (test gtk-file-filter-name
   (let ((filter (make-instance 'gtk:file-filter)))
+    (is-false (gtk:file-filter-name filter))
     (is (string= "Filter" (setf (gtk:file-filter-name filter) "Filter")))
     (is (string= "Filter" (gtk:file-filter-name filter)))))
 
@@ -139,4 +142,4 @@
     (is (string= "('.mhjl-Dateityp', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; 2024-9-19
+;;; 2024-9-28

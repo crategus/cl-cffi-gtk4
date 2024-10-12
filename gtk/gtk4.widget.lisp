@@ -36,13 +36,13 @@
 ;;;     GtkWidget
 ;;;
 ;;;     GtkRequisition
-;;;     GtkAllocation                                      not implemented
-;;;     GtkTextDirection                                   gtk.enumerations.lisp
-;;;     GtkPickFlags                                       gtk.enumerations.lisp
-;;;     GtkOverflow                                        gtk.enumerations.lisp
-;;;     GtkSizeRequestMode                                 gtk.emumerations.lisp
-;;;     GtkRequestedSize                                   not implemented
-;;;     GtkAlign                                           gtk.enumerations.lisp
+ ;;     GtkAllocation                                     not implemented
+; ;     GtkTextDirection                                  gtk4.enumerations.lisp
+;;;     GtkPickFlags                                      gtk4.enumerations.lisp
+;;;     GtkOverflow                                       gtk4.enumerations.lisp
+;;;     GtkSizeRequestMode                                gtk4.emumerations.lisp
+;;;     GtkRequestedSize                                  not implemented
+;;;     GtkAlign                                          gtk4.enumerations.lisp
 ;;;
 ;;; Accessors
 ;;;
@@ -357,7 +357,7 @@
 ;;;     The natural size for allocation in a given orientation
 ;;; ----------------------------------------------------------------------------
 
-;; Only used for the GTK-DISTRIBUTE-NATURAL-ALLOCATION function and not
+;; Only used for the gtk_distribute_natural_allocation() function and not
 ;; implemented.
 
 ;;; ----------------------------------------------------------------------------
@@ -734,7 +734,7 @@
   auxilary objects which might be referenced by other widgets declared as
   children of the @code{<template>} tag.
 
-  @b{Example:} A @class{btk-builder} template definition
+  @b{Example:} A @class{gtk:builder} template definition
     @begin{pre}
 <interface>
   <template class=\"FooWidget\" parent=\"GtkBox\">
@@ -1051,7 +1051,7 @@ lambda (widget)    :run-last
   @syntax{(gtk:widget-css-name object) => name}
   @syntax{(setf (gtk:widget-css-classes object) name)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[name]{a string with the name of the widet in the CSS tree}
+  @argument[name]{a string with the name of the widget in the CSS tree}
   @begin{short}
     Accessor of the @slot[gtk:widget]{css-name} slot of the @class{gtk:widget}
     class.
@@ -2917,7 +2917,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_native" widget-native) (g:object native)
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-9-29}
   @argument[widget]{a @class{gtk:widget} widget}
   @return{The @class{gtk:native} widget of @arg{widget}, or @code{nil}.}
   @begin{short}
@@ -4529,7 +4529,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling)
     (g:object widget)
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2024-9-27}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} sibling widget.}
   @begin{short}
@@ -4548,7 +4548,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_prev_sibling" widget-prev-sibling)
     (g:object widget)
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2024-9-27}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} sibling widget.}
   @begin{short}
@@ -4567,7 +4567,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_first_child" widget-first-child)
     (g:object widget)
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2024-9-27}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} object.}
   @begin{short}
@@ -4585,7 +4585,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_last_child" widget-last-child) (g:object widget)
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2024-9-27}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} object.}
   @begin{short}
@@ -4598,68 +4598,70 @@ lambda (widget)    :run-last
 (export 'widget-last-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_insert_before ()
-;;;
-;;; void
-;;; gtk_widget_insert_before (GtkWidget *widget,
-;;;                           GtkWidget *parent,
-;;;                           GtkWidget *next_sibling);
-;;;
-;;; Inserts widget into the child widget list of parent .
-;;;
-;;; It will be placed before next_sibling , or at the end if next_sibling is
-;;; NULL.
-;;;
-;;; After calling this function, gtk_widget_get_next_sibling(widget) will return
-;;; next_sibling .
-;;;
-;;; If parent is already set as the parent widget of widget , this function can
-;;; also be used to reorder widget in the child widget list of parent .
-;;;
-;;; This API is primarily meant for widget implementations; if you are just
-;;; using a widget, you *must* use its own API for adding children.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; parent :
-;;;     the parent GtkWidget to insert widget into
-;;;
-;;; next_sibling :
-;;;     the new next sibling of widget or NULL.
+;;; gtk_widget_insert_before
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_widget_insert_before" widget-insert-before) :void
+ #+liber-documentation
+ "@version{2024-9-27}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[parent]{a @class{gtk:widget} widget for the parent widget to insert
+    @arg{widget} into}
+  @argument[next]{a @class{gtk:widget} widget for the next sibling of
+    @arg{widget} or @code{nil}}
+  @begin{short}
+    Inserts @arg{widget} into the child widget list of @arg{parent}.
+  @end{short}
+  It will be placed before @arg{next}, or at the end if @arg{next} is
+  @code{nil}.
+
+  After calling this function, the @fun{gtk:widget-next-sibling} function will
+  return @arg{next}. If @arg{parent} is already set as the parent widget of
+  @arg{widget}, this function can also be used to reorder @arg{widget} in the
+  child widget list of @arg{parent}.
+
+  This API is primarily meant for widget implementations. If you are just
+  using a widget, you must use its own API for adding children.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-next-sibling}"
+  (widget (g:object widget))
+  (parent (g:object widget))
+  (next (g:object widget)))
+
+(export 'widget-insert-before)
+
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_insert_after ()
-;;;
-;;; void
-;;; gtk_widget_insert_after (GtkWidget *widget,
-;;;                          GtkWidget *parent,
-;;;                          GtkWidget *previous_sibling);
-;;;
-;;; Inserts widget into the child widget list of parent .
-;;;
-;;; It will be placed after previous_sibling , or at the beginning if
-;;; previous_sibling is NULL.
-;;;
-;;; After calling this function, gtk_widget_get_prev_sibling(widget) will return
-;;; previous_sibling .
-;;;
-;;; If parent is already set as the parent widget of widget , this function can
-;;; also be used to reorder widget in the child widget list of parent .
-;;;
-;;; This API is primarily meant for widget implementations; if you are just
-;;; using a widget, you *must* use its own API for adding children.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; parent :
-;;;     the parent GtkWidget to insert widget into
-;;;
-;;; previous_sibling :
-;;;     the new previous sibling of widget or NULL.
+;;; gtk_widget_insert_after
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_insert_after" widget-insert-after) :void
+ #+liber-documentation
+ "@version{2024-9-27}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[parent]{a @class{gtk:widget} widget for the parent widget to insert
+    @arg{widget} into}
+  @argument[prev]{a @class{gtk:widget} widget for the previous sibling of
+    @arg{widget} or @code{nil}}
+  @begin{short}
+    Inserts @arg{widget} into the child widget list of @arg{parent}.
+  @end{short}
+  It will be placed after @arg{prev}, or at the beginning if @arg{prev} is
+  @code{nil}.
+
+  After calling this function, the @fun{gtk:widget-prev-sibling} function will
+  return @arg{prev}. If @arg{parent} is already set as the parent widget of
+  @arg{widget}, this function can also be used to reorder @arg{widget} in the
+  child widget list of @arg{parent}.
+
+  This API is primarily meant for widget implementations. If you are just
+  using a widget, you must use its own API for adding children.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-prev-sibling}"
+  (widget (g:object widget))
+  (parent (g:object widget))
+  (prev (g:object widget)))
+
+(export 'widget-insert-after)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_should_layout ()

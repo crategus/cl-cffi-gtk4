@@ -92,58 +92,65 @@
   (let ((*gtk-warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:dialog)))
       ;; The default value is not -1.
-      (is (= 0 (gtk:dialog-use-header-bar dialog))))))
+      (is (= 0 (gtk:dialog-use-header-bar dialog)))
+      (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     close
 
 (test gtk-dialog-close-signal
-  (let ((query (g:signal-query (g:signal-lookup "close" "GtkDialog"))))
+  (let* ((name "close")
+         (gtype (g:gtype "GtkDialog"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "close" (g:signal-query-signal-name query)))
-    (is (string= "GtkDialog" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     response
 
 (test gtk-dialog-response-signal
-  (let ((query (g:signal-query (g:signal-lookup "response" "GtkDialog"))))
+  (let* ((name "response")
+         (gtype (g:gtype "GtkDialog"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "response" (g:signal-query-signal-name query)))
-    (is (string= "GtkDialog" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq (g:gtype "GtkDialog") (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("gint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_dialog_new
 
 (test gtk-dialog-new
-  (let ((*gtk-warn-deprecated* nil))
-    (is (typep (gtk:dialog-new) 'gtk:dialog))))
+  (let ((*gtk-warn-deprecated* nil)
+        (dialog nil))
+    (is (typep (setf dialog (gtk:dialog-new)) 'gtk:dialog))
+    (is-false (gtk:window-destroy dialog))))
 
 ;;;     gtk_dialog_new_with_buttons
 
 (test gtk-dialog-new-with-buttons
-  (let ((*gtk-warn-deprecated* nil))
-    (let* ((parent (gtk:window-new))
-           (dialog (gtk:dialog-new-with-buttons "My dialog"
-                                                parent
-                                                '(:modal :destroy-with-parent)
-                                                "_OK"
-                                                :accept
-                                                "_Cancel"
-                                                :reject)))
-      (is (typep dialog 'gtk:dialog))
-      (is (string= "My dialog" (gtk:window-title dialog))))))
+  (let* ((*gtk-warn-deprecated* nil)
+         (parent (gtk:window-new))
+         (dialog (gtk:dialog-new-with-buttons "My dialog"
+                                              parent
+                                              '(:modal :destroy-with-parent)
+                                              "_OK"
+                                              :accept
+                                              "_Cancel"
+                                              :reject)))
+    (is (typep dialog 'gtk:dialog))
+    (is (string= "My dialog" (gtk:window-title dialog)))
+    (is-false (gtk:window-destroy dialog))
+    (is-false (gtk:window-destroy parent))))
 
 ;;;     gtk_dialog_response
 ;;;     gtk_dialog_add_button
@@ -156,4 +163,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; 2024-9-20
+;;; 2024-10-10

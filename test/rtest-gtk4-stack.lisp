@@ -146,7 +146,9 @@
     (is-false (gtk:stack-page-needs-attention page))
     (is (string= "Label" (gtk:stack-page-title page)))
     (is-false (gtk:stack-page-use-underline page))
-    (is-true (gtk:stack-page-visible page))))
+    (is-true (gtk:stack-page-visible page))
+    ;; Remove page from stack
+    (is-false (gtk:stack-remove stack label))))
 
 ;;; ----------------------------------------------------------------------------
 

@@ -43,12 +43,12 @@
   (is (eq :grid-cell (gtk:widget-class-accessible-role "GtkFlowBoxChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFlowBoxChild" GTK:FLOW-BOX-CHILD
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                       :TYPE-INITIALIZER "gtk_flow_box_child_get_type")
-                      ((CHILD FLOW-BOX-CHILD-CHILD "child" "GtkWidget" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_flow_box_child_get_type")
+                       ((CHILD FLOW-BOX-CHILD-CHILD "child" "GtkWidget" T T)))
              (gobject:get-gtype-definition "GtkFlowBoxChild"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -57,7 +57,10 @@
   (let* ((button (gtk:button-new))
          (child (make-instance 'gtk:flow-box-child
                                :child button)))
-    (is (eq button (gtk:flow-box-child-child child)))))
+    (is (eq button (gtk:flow-box-child-child child)))
+    (is-false (setf (gtk:flow-box-child-child child) nil))
+    (is (= 1 (g:object-ref-count child)))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -74,7 +77,7 @@
     (is (equal '(:ACTION :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -92,14 +95,37 @@
   (let ((flowbox (gtk:flow-box-new))
         (child1 (gtk:flow-box-child-new))
         (child2 (gtk:flow-box-child-new)))
+
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+
     (is-false (gtk:flow-box-insert flowbox child1 -1))
     (is (= 0 (gtk:flow-box-child-index child1)))
+
+    (is (= 2 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+
     (is-false (gtk:flow-box-insert flowbox child2 -1))
-    (is (= 1 (gtk:flow-box-child-index child2)))))
+    (is (= 1 (gtk:flow-box-child-index child2)))
+
+    (is (= 2 (g:object-ref-count child1)))
+    (is (= 2 (g:object-ref-count child2)))
+
+    (is-false (gtk:flow-box-remove flowbox child1))
+
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 2 (g:object-ref-count child2)))
+
+    (is-false (gtk:flow-box-remove flowbox child2))
+
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+
+    (is (= 1 (g:object-ref-count flowbox)))))
 
 ;;;     gtk_flow_box_child_is_selected
 
-(test gtk-flow-box-child-index
+(test gtk-flow-box-child-is-selected
   (let ((flowbox (gtk:flow-box-new))
         (child1 (gtk:flow-box-child-new))
         (child2 (gtk:flow-box-child-new)))
@@ -114,7 +140,10 @@
     (is-true (gtk:flow-box-child-is-selected child1))
     ;; Select child2
     (is-false (gtk:flow-box-select-child flowbox child2))
-    (is-true (gtk:flow-box-child-is-selected child2))))
+    (is-true (gtk:flow-box-child-is-selected child2))
+    ;; Remove children from flowbox
+    (is-false (gtk:flow-box-remove flowbox child1))
+    (is-false (gtk:flow-box-remove flowbox child2))))
 
 ;;;     gtk_flow_box_child_changed
 
@@ -159,29 +188,29 @@
   (is (eq :GRID (gtk:widget-class-accessible-role "GtkFlowBox")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFlowBox" GTK:FLOW-BOX
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                        "GtkOrientable")
-                       :TYPE-INITIALIZER "gtk_flow_box_get_type")
-                      ((ACCEPT-UNPAIRED-RELEASE FLOW-BOX-ACCEPT-UNPAIRED-RELEASE
-                        "accept-unpaired-release" "gboolean" T T)
-                       (ACTIVATE-ON-SINGLE-CLICK
-                        FLOW-BOX-ACTIVATE-ON-SINGLE-CLICK
-                        "activate-on-single-click" "gboolean" T T)
-                       (COLUMN-SPACING FLOW-BOX-COLUMN-SPACING
-                        "column-spacing" "guint" T T)
-                       (HOMOGENEOUS FLOW-BOX-HOMOGENEOUS
-                        "homogeneous" "gboolean" T T)
-                       (MAX-CHILDREN-PER-LINE FLOW-BOX-MAX-CHILDREN-PER-LINE
-                        "max-children-per-line" "guint" T T)
-                       (MIN-CHILDREN-PER-LINE FLOW-BOX-MIN-CHILDREN-PER-LINE
-                        "min-children-per-line" "guint" T T)
-                       (ROW-SPACING FLOW-BOX-ROW-SPACING
-                        "row-spacing" "guint" T T)
-                       (SELECTION-MODE FLOW-BOX-SELECTION-MODE
-                        "selection-mode" "GtkSelectionMode" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_flow_box_get_type")
+                       ((ACCEPT-UNPAIRED-RELEASE FLOW-BOX-ACCEPT-UNPAIRED-RELEASE
+                         "accept-unpaired-release" "gboolean" T T)
+                        (ACTIVATE-ON-SINGLE-CLICK
+                         FLOW-BOX-ACTIVATE-ON-SINGLE-CLICK
+                         "activate-on-single-click" "gboolean" T T)
+                        (COLUMN-SPACING FLOW-BOX-COLUMN-SPACING
+                         "column-spacing" "guint" T T)
+                        (HOMOGENEOUS FLOW-BOX-HOMOGENEOUS
+                         "homogeneous" "gboolean" T T)
+                        (MAX-CHILDREN-PER-LINE FLOW-BOX-MAX-CHILDREN-PER-LINE
+                         "max-children-per-line" "guint" T T)
+                        (MIN-CHILDREN-PER-LINE FLOW-BOX-MIN-CHILDREN-PER-LINE
+                         "min-children-per-line" "guint" T T)
+                        (ROW-SPACING FLOW-BOX-ROW-SPACING
+                         "row-spacing" "guint" T T)
+                        (SELECTION-MODE FLOW-BOX-SELECTION-MODE
+                         "selection-mode" "GtkSelectionMode" T T)))
              (gobject:get-gtype-definition "GtkFlowBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -233,7 +262,11 @@
     (is-false (gtk:flow-box-insert flowbox child3 -1))
     (is (eq child3 (gtk:flow-box-child-at-index flowbox 2)))
     (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
-    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))
+
+    (is-false (gtk:flow-box-remove flowbox child1))
+    (is-false (gtk:flow-box-remove flowbox child2))
+    (is-false (gtk:flow-box-remove flowbox child3))))
 
 ;;;     gtk_flow_box_append                                Since 4.6
 ;;;     gtk_flow_box_prepend                               Since 4.6
@@ -254,7 +287,11 @@
     (is-false (gtk:flow-box-append flowbox child3))
     (is (eq child3 (gtk:flow-box-child-at-index flowbox 2)))
     (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
-    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))
+
+    (is-false (gtk:flow-box-remove flowbox child1))
+    (is-false (gtk:flow-box-remove flowbox child2))
+    (is-false (gtk:flow-box-remove flowbox child3))))
 
 ;;;     gtk_flow_box_remove
 ;;;     gtk_flow_box_remove_all                            Since 4.12
@@ -307,4 +344,4 @@
 
 ;;;     gtk_flow_box_bind_model
 
-;;; 2024-9-19
+;;; 2024-10-9

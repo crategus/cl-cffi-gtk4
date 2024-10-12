@@ -114,12 +114,17 @@
 ;;;     gtk_icon_theme_new
 
 (test gtk-icon-theme-new
-  (is (typep (gtk:icon-theme-new) 'gtk:icon-theme)))
+  (let ((theme nil))
+    (is (typep (setf theme (gtk:icon-theme-new)) 'gtk:icon-theme))
+    (is (= 1 (g:object-ref-count theme)))))
 
 ;;;     gtk_icon_theme_get_for_display
 
 (test gtk-icon-theme-for-display
-  (is (typep (gtk:icon-theme-for-display (gdk:display-default)) 'gtk:icon-theme)))
+  (let ((theme nil))
+    (is (typep (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
+               'gtk:icon-theme))
+    (is (<= 2 (g:object-ref-count theme)))))
 
 ;;;     gtk_icon_theme_add_search_path
 ;;;     gtk_icon_theme_add_resource_path
@@ -145,9 +150,10 @@
                                                 1
                                                 :ltr
                                                 :none)))
-    (is (typep paintable 'gtk:icon-paintable))))
+    (is (typep paintable 'gtk:icon-paintable))
+    (is (= 2 (g:object-ref-count paintable)))))
 
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; 2024-7-4
+;;; 2024-10-9

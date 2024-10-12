@@ -57,7 +57,7 @@
 
 (test gtk-tree-model-sort-new-with-model
   (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (model (create-and-fill-gtk-list-store))
+         (model (create-list-store-for-package))
          (sortmodel nil))
     (is (typep (gtk:tree-model-sort-new-with-model nil) 'gtk:tree-model-sort))
     (is (typep (setf sortmodel
@@ -73,4 +73,4 @@
 ;;;     gtk_tree_model_sort_clear_cache
 ;;;     gtk_tree_model_sort_iter_is_valid
 
-;;; 2024-9-20
+;;; 2024-9-27

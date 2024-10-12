@@ -3,6 +3,29 @@
 (def-suite gtk-builder :in gtk-suite)
 (in-suite gtk-builder)
 
+(defparameter +interface+
+"<interface>
+  <object class='GtkDialog' id='dialog1'>
+    <child internal-child='content_area'>
+      <object class='GtkBox'>
+        <child internal-child='action_area'>
+          <object class='GtkBox'>
+            <child>
+              <object class='GtkButton' id='ok-button'>
+                <property name='label' translatable='yes'>_Ok</property>
+                <property name='use-underline'>True</property>
+                <signal name='clicked'
+                        handler='ok-button-clicked'
+                        object='ok-button'/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>")
+
 (defvar *menus*
   "<interface>
     <menu id='app-menu'>
@@ -84,6 +107,128 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkBuilderClosureFlags
+
+(test gtk-builder-closure-flags
+  ;; Check type
+  (is (g:type-is-flags "GtkBuilderClosureFlags"))
+  ;; Check registered name
+  (is (eq 'gtk:builder-closure-flags
+          (glib:symbol-for-gtype "GtkBuilderClosureFlags")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkBuilderClosureFlags")
+          (g:gtype (cffi:foreign-funcall "gtk_builder_closure_flags_get_type"
+                                         :size))))
+  ;; Check names
+  (is (equal '("GTK_BUILDER_CLOSURE_SWAPPED")
+             (glib-test:list-flags-item-names "GtkBuilderClosureFlags")))
+  ;; Check values
+  (is (equal '(1)
+             (glib-test:list-flags-item-values "GtkBuilderClosureFlags")))
+  ;; Check nick names
+  (is (equal '("swapped")
+             (glib-test:list-flags-item-nicks "GtkBuilderClosureFlags")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkBuilderClosureFlags"
+                                     GTK:BUILDER-CLOSURE-FLAGS
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_builder_closure_flags_get_type")
+                       (:SWAPPED 1))
+             (gobject:get-gtype-definition "GtkBuilderClosureFlags"))))
+
+;;;     GtkBuilderScope
+
+(test gtk-builder-scope-interface
+  ;; Check type
+  (is (g:type-is-interface "GtkBuilderScope"))
+  ;; Check registered name
+  (is (eq 'gtk:builder-scope
+          (glib:symbol-for-gtype "GtkBuilderScope")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkBuilderScope")
+          (g:gtype (cffi:foreign-funcall "gtk_builder_scope_get_type" :size))))
+  ;; Check interface prerequisites
+  (is (equal '("GObject")
+             (glib-test:list-interface-prerequisites "GtkBuilderScope")))
+  ;; Check interface properties
+  (is (equal '()
+             (glib-test:list-interface-properties "GtkBuilderScope")))
+  ;; Check interface signals
+  (is (equal '()
+             (glib-test:list-signals "GtkBuilderScope")))
+  ;; Get interface definition
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkBuilderScope" GTK:BUILDER-SCOPE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_builder_scope_get_type"))
+             (gobject:get-gtype-definition "GtkBuilderScope"))))
+
+;;;     GtkClBuilderScope
+
+(test gtk-builder-cl-scope-class
+  ;; Check type
+  (is (g:type-is-object "GtkBuilderClScope"))
+  ;; Check registered name
+  (is (eq 'gtk:builder-cl-scope
+          (glib:symbol-for-gtype "GtkBuilderClScope")))
+  ;; Check type initializer
+  #+nil
+  (is (eq (g:gtype "GObject")
+          (g:gtype (cffi:foreign-funcall "g_object_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkBuilderClScope")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GtkBuilderClScope")))
+  ;; Check interfaces
+  (is (equal '("GtkBuilderScope")
+             (glib-test:list-interfaces "GtkBuilderClScope")))
+  ;; Check properties
+  (is (equal '()
+             (glib-test:list-properties "GtkBuilderClScope")))
+  ;; Check signals
+  (is (equal '()
+             (glib-test:list-signals "GtkBuilderClScope")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBuilderClScope" GTK:BUILDER-CL-SCOPE
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GtkBuilderScope"))
+                       NIL)
+             (gobject:get-gtype-definition "GtkBuilderClScope"))))
+
+;;; ----------------------------------------------------------------------------
+
+(defvar *gtk-builder-scope-msg* nil)
+(defvar *verbose-gtk-builder-scope* nil)
+
+(defun ok-button-clicked (button)
+  (when *verbose-gtk-builder-scope*
+    (format t " in OK-BUTTON-CLICKED for ~a~%" button))
+  (setf *gtk-builder-scope-msg* "OK-BUTTON-CLICKED"))
+
+(test gtk-builder-cl-scope-test
+  (let ((builder (gtk:builder-new))
+        (scope (make-instance 'gtk:builder-cl-scope))
+        (object nil))
+    ;; Set BUILDER-CL-SCOPE on BUILDER
+    (is (eq scope (setf (gtk:builder-scope builder) scope)))
+    (is (eq scope (gtk:builder-scope builder)))
+    ;; Load interface into BUILDER
+    (is-true (gtk:builder-add-from-string builder +interface+))
+    ;; GET the BUTTON widget
+    (is (typep (setf object
+                     (gtk:builder-object builder "ok-button")) 'gtk:button))
+    ;; Is the handler installed on OBJECT?
+    (is (member 'ok-button-clicked
+                (coerce (g:object-signal-handlers object) 'list) :test #'eq))
+    ;; Emit signal and check invocation
+    (setf *gtk-builder-scope-msg* nil)
+    (is-false (g:signal-emit object "clicked"))
+    (is (string= "OK-BUTTON-CLICKED" *gtk-builder-scope-msg*))))
+
+
+
 ;;;     GtkBuilder
 
 (test gtk-builder-class
@@ -146,28 +291,55 @@
 ;;;     gtk_builder_new
 
 (test gtk-builder-new
-  ;; gtk:builder-new is implemented with make-instance
+  ;; Create with constructor function
   (is (typep (gtk:builder-new) 'gtk:builder))
-  ;; Check Lisp extension for initializing builder
-  (let ((builder (make-instance 'gtk:builder :from-string *stack-ui*)))
-    (is (typep (gtk:builder-object builder "stack") 'gtk:stack)))
-  (let* ((path (glib-sys:sys-path "test/resource/application.ui"))
-         (builder (make-instance 'gtk:builder
-                                :from-file path)))
-    (is (typep (gtk:builder-object builder "menubar") 'g:menu))))
+  (is (typep (gtk:builder-scope (gtk:builder-new)) 'gtk:builder-cl-scope))
+  (is (= 1 (g:object-ref-count (gtk:builder-new))))
+  ;; Create with MAKE-INSTANCE
+  (is (typep (make-instance 'gtk:builder) 'gtk:builder))
+  (is (typep (gtk:builder-scope (make-instance 'gtk:builder))
+             'gtk:builder-cl-scope))
+  (is (= 1 (g:object-ref-count (make-instance 'gtk:builder))))
+  ;; Create with G:OBJECT-NEW
+  (is (typep (g:object-new "GtkBuilder") 'gtk:builder))
+  (is (typep (gtk:builder-scope (g:object-new "GtkBuilder"))
+             'gtk:builder-cl-scope))
+  (is (= 1 (g:object-ref-count (g:object-new "GtkBuilder")))))
 
 ;;;     gtk_builder_new_from_file
 
-(test gtk-builder-new-from-file
-  (let ((path (glib-sys:sys-path "test/resource/application.ui")))
-    (is (typep (gtk:builder-new-from-file path) 'gtk:builder))))
+(test gtk-builder-new-from-file.1
+  (let* ((path (glib-sys:sys-path "test/resource/application.ui"))
+         (builder (gtk:builder-new-from-file path)))
+    (is (typep builder 'gtk:builder))
+    (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
+    (is (= 1 (g:object-ref-count builder)))))
+
+(test gtk-builder-new-from-file.2
+  (let* (;; Resource file with a signal definition
+         (path (glib-sys:sys-path "test/resource/dialog.ui"))
+         (builder (gtk:builder-new-from-file path)))
+    (is (typep builder 'gtk:builder))
+    (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
+    (is (= 1 (g:object-ref-count builder)))))
 
 ;;;     gtk_builder_new_from_resource
 
-(test gtk-builder-new-from-resource
+(test gtk-builder-new-from-resource.1
   (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
-    (is (typep (gtk:builder-new-from-resource "/com/crategus/test/stack.ui")
-               'gtk:builder))))
+    (let* ((path "/com/crategus/test/stack.ui")
+           (builder (gtk:builder-new-from-resource path)))
+      (is (typep builder 'gtk:builder))
+      (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
+      (is (= 1 (g:object-ref-count builder))))))
+
+(test gtk-builder-new-from-resource.2
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
+    (let* ((path "/com/crategus/test/dialog.ui")
+           (builder (gtk:builder-new-from-resource path)))
+      (is (typep builder 'gtk:builder))
+      (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
+      (is (= 1 (g:object-ref-count builder))))))
 
 ;;;     gtk_builder_new_from_string
 
@@ -204,19 +376,19 @@
         (builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder path "window1"))
     (is (typep (gtk:builder-object builder "window1") 'gtk:window))
-    (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
-                 GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
-                 GTK:SPINNER)
+    (is (equal '(GTK:STACK-PAGE GTK:SPINNER GTK:CHECK-BUTTON GTK:STACK-SWITCHER
+                 GTK:GRID GTK:IMAGE GTK:WINDOW GTK:STACK-PAGE GTK:STACK
+                 GTK:STACK-PAGE)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 (test gtk-builder-add-objects-from-file.2
   (let ((path (glib-sys:sys-path "test/resource/stack.ui"))
         (builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-objects-from-file builder path "window1" "stack"))
+    (is-true (gtk:builder-add-objects-from-file builder path "window1" "stack1"))
     (is (typep (gtk:builder-object builder "window1") 'gtk:window))
-    (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
-                 GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
-                 GTK:SPINNER)
+    (is (equal '(GTK:STACK-PAGE GTK:SPINNER GTK:CHECK-BUTTON GTK:STACK-SWITCHER
+                 GTK:GRID GTK:IMAGE GTK:WINDOW GTK:STACK-PAGE GTK:STACK
+                 GTK:STACK-PAGE)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 ;;;     gtk_builder_add_objects_from_resource

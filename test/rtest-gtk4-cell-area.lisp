@@ -69,55 +69,58 @@
 ;;;     add-editable
 
 (test gtk-cell-area-add-editable-signal
-  (let ((query (g:signal-query (g:signal-lookup "add-editable" "GtkCellArea"))))
-    (is (string= "add-editable" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellArea" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "add-editable")
+         (gtype (g:gtype "GtkCellArea"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GtkCellRenderer" "GtkCellEditable" "GdkRectangle" "gchararray")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     apply-attributes
 
 (test gtk-cell-area-signal-apply-attributes-signal
-  (let ((query (g:signal-query (g:signal-lookup "apply-attributes"
-                                                "GtkCellArea"))))
-    (is (string= "apply-attributes" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellArea" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "apply-attributes")
+         (gtype (g:gtype "GtkCellArea"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GtkTreeModel" "GtkTreeIter" "gboolean" "gboolean")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     focus-changed
 
 (test gtk-cell-area-signal-apply-attributes-signal
-  (let ((query (g:signal-query (g:signal-lookup "focus-changed" "GtkCellArea"))))
+  (let* ((name "focus-changed")
+         (gtype (g:gtype "GtkCellArea"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "focus-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellArea" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GtkCellRenderer" "gchararray")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     remove-editable
 
 (test gtk-cell-area-signal-apply-attributes-signal
-  (let ((query (g:signal-query (g:signal-lookup "remove-editable" "GtkCellArea"))))
+  (let* ((name "remove-editable")
+         (gtype (g:gtype "GtkCellArea"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "remove-editable" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellArea" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GtkCellRenderer" "GtkCellEditable")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -152,13 +155,18 @@
 (test gtk-cell-area-foreach
   (let* ((gtk-init:*gtk-warn-deprecated* nil)
          (area (gtk:cell-area-box-new))
+         (renderer1 (gtk:cell-renderer-pixbuf-new))
+         (renderer2 (gtk:cell-renderer-progress-new))
+         (renderer3 (gtk:cell-renderer-spinner-new))
+         (renderer4 (gtk:cell-renderer-text-new))
+         (renderer5 (gtk:cell-renderer-toggle-new))
          (message nil))
     ;; Add five cell renderer to the area box
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-pixbuf-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-progress-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-spinner-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-text-new))
-    (gtk:cell-area-box-pack-start area (gtk:cell-renderer-toggle-new))
+    (gtk:cell-area-box-pack-start area renderer1)
+    (gtk:cell-area-box-pack-start area renderer2)
+    (gtk:cell-area-box-pack-start area renderer3)
+    (gtk:cell-area-box-pack-start area renderer4)
+    (gtk:cell-area-box-pack-start area renderer5)
     ;; Collect types of the renderers
     (gtk:cell-area-foreach area
                            (lambda (renderer)
@@ -168,7 +176,13 @@
     (is (equal '(GTK:CELL-RENDERER-PIXBUF GTK:CELL-RENDERER-PROGRESS
                  GTK:CELL-RENDERER-SPINNER GTK:CELL-RENDERER-TEXT
                  GTK:CELL-RENDERER-TOGGLE)
-               (reverse message)))))
+               (reverse message)))
+    ;; Remove cell renderers form cell area box
+    (is-false (gtk:cell-area-remove area renderer1))
+    (is-false (gtk:cell-area-remove area renderer2))
+    (is-false (gtk:cell-area-remove area renderer3))
+    (is-false (gtk:cell-area-remove area renderer4))
+    (is-false (gtk:cell-area-remove area renderer5))))
 
 ;;;     GtkCellAllocCallback
 ;;;     gtk_cell_area_foreach_alloc
@@ -182,8 +196,14 @@
 
 (test gtk-cell-area-create-context
   (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (gtk:cell-area-box-new)))
-    (is (typep (gtk:cell-area-create-context area) 'gtk:cell-area-context))))
+         (area (gtk:cell-area-box-new))
+         (context nil))
+    (is (= 1 (g:object-ref-count area)))
+    (is (typep (setf context
+                     (gtk:cell-area-create-context area))
+               'gtk:cell-area-context))
+    (is (= 1 (g:object-ref-count context)))
+    (is (= 2 (g:object-ref-count area)))))
 
 ;;;     gtk_cell_area_copy_context
 

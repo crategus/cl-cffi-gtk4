@@ -18,6 +18,23 @@
 (def-suite gdk-suite :in gtk-test)
 (def-suite gtk-suite :in gtk-test)
 
+(defun run-repeat (tests &key (count 1) (on-error nil) (linecount 50))
+  (let ((fiveam:*on-error* on-error)
+        (count (if (> count 0) (1- count) 0)))
+    (format t "~&Run tests ~a times:~%" (1+ count))
+    (format t "~6d " linecount)
+    (let ((*test-dribble* nil))
+      (dotimes (i count)
+        (if (= 0 (mod (1+ i) linecount))
+            (progn
+              (format t ".~%")
+              (format t "~6d " (+ 1 i linecount)))
+            (format t "."))
+        (fiveam:run tests)))
+    (format t ".~%")
+    ;; Explain the last run
+    (fiveam:explain! (fiveam:run tests))))
+
 ;; push the hostname on *features*
 (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
 
@@ -95,21 +112,47 @@ condimentum, leo purus mollis orci, sed mollis dui metus eget eros. Mauris ~
 quam nibh, laoreet eget arcu in, accumsan lacinia purus. Morbi aliquet nibh id ~
 sem venenatis, vitae ultricies arcu laoreet."))
 
+;;; ----------------------------------------------------------------------------
+
+;; Destroy toplevel windows
+(defun window-destroy-toplevels ()
+  (dolist (window (gtk:window-list-toplevels))
+    (gtk:window-destroy window))
+  (gtk:window-list-toplevels))
+
+(export 'window-destroy-toplevels)
+
+;; Create and fill a GTK:STRING-LIST for use as a model
+(defun create-string-list-for-package (&optional (package "GTK"))
+  (let ((store (gtk:string-list-new '())))
+    (do-external-symbols (symbol (find-package package))
+      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+    store))
+
+;; Create and fill a GIO:LIST-STORE for use as a model
+(defun create-g-list-store-for-package (&optional (package "GTK"))
+  (let ((store (gtk:list-store-new "GtkStringObject")))
+    (do-external-symbols (symbol (find-package package))
+      (let* ((str (string-downcase (format nil "~a" symbol)))
+             (item (gtk:string-object-new str)))
+      (g:list-store-append store item)))
+    store))
+
 ;; Create and fill a GTK:LIST-STORE for use as a model
-(defun create-and-fill-gtk-list-store ()
-  (let ((liststore (make-instance 'gtk:list-store
+(defun create-list-store-for-package (&optional (package "GTK"))
+  (let ((store (make-instance 'gtk:list-store
                                   :column-types
                                   '("gint" "gchararray" "gboolean")))
         (counter 0))
-    ;; Fill in external symbols of GTK package
-    (do-external-symbols (symbol (find-package "GTK"))
+    ;; Fill in external symbols of the given package
+    (do-external-symbols (symbol (find-package package))
       ;; Add a new row to the model
-      (gtk:list-store-set liststore
-                          (gtk:list-store-append liststore)
+      (gtk:list-store-set store
+                          (gtk:list-store-append store)
                           (incf counter)
                           (symbol-name symbol)
                           nil))
     ;; Return the new list store
-    liststore))
+    store))
 
-;;; 2024-9-21
+;;; 2024-10-2

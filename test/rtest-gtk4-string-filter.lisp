@@ -7,7 +7,7 @@
 
 ;;;     GtkStringFilterMatchMode
 
-(test gtk-string-filter-match-mode
+(test gtk-string-filter-match-mode-enumeration
   ;; Check type
   (is (g:type-is-enum "GtkStringFilterMatchMode"))
   ;; Check type initializer
@@ -83,18 +83,41 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     expression
-;;;     ignore-case
-;;;     match-mode
-;;;     search
+;;;     gtk:string-filter-expression
 
-(test gtk-string-filter-properties
+(test gtk-string-filter-expression
+  (let ((filter (make-instance 'gtk:string-filter))
+        (expression (gtk:constant-expression-new "gchararray" "string")))
+    (is (cffi:null-pointer-p (gtk:string-filter-expression filter)))
+    (is (cffi:pointer-eq expression
+                         (setf (gtk:string-filter-expression filter)
+                               expression)))
+    (is (cffi:pointer-eq expression
+                         (gtk:string-filter-expression filter)))))
+
+;;;     gtk:string-filter-ignore-case
+
+(test gtk-string-filter-ignore-case
   (let ((filter (make-instance 'gtk:string-filter)))
-    (is (cffi:pointer-eq (cffi:null-pointer)
-                         (gtk:string-filter-expression filter)))
     (is-true (gtk:string-filter-ignore-case filter))
+    (is-false (setf (gtk:string-filter-ignore-case filter) nil))
+    (is-false (gtk:string-filter-ignore-case filter))))
+
+;;;     gtk:string-filter-match-mode
+
+(test gtk-string-filter-match-mode
+  (let ((filter (make-instance 'gtk:string-filter)))
     (is (eq :substring (gtk:string-filter-match-mode filter)))
-    (is-false (gtk:string-filter-search filter))))
+    (is (eq :prefix (setf (gtk:string-filter-match-mode filter) :prefix)))
+    (is (eq :prefix (gtk:string-filter-match-mode filter)))))
+
+;;;     gtk:string-filter-search
+
+(test gtk-string-filter-search
+  (let ((filter (make-instance 'gtk:string-filter)))
+    (is-false (gtk:string-filter-search filter))
+    (is (string= "search" (setf (gtk:string-filter-search filter) "search")))
+    (is (string= "search" (gtk:string-filter-search filter)))))
 
 ;;; --- Functions --------------------------------------------------------------
 

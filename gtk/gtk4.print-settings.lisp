@@ -48,7 +48,11 @@
 ;;;     GtkPrintSettingsFunc
 ;;;
 ;;;     gtk_print_settings_new
+;;;     gtk_print_settings_new_from_file
+;;;     gtk_print_settings_new_from_key_file
+;;;     gtk_print_settings_new_from_gvariant
 ;;;     gtk_print_settings_copy
+;;;
 ;;;     gtk_print_settings_has_key
 ;;;     gtk_print_settings_get
 ;;;     gtk_print_settings_set
@@ -115,9 +119,6 @@
 ;;;     gtk_print_settings_set_finishings
 ;;;     gtk_print_settings_get_output_bin
 ;;;     gtk_print_settings_set_output_bin
-;;;     gtk_print_settings_new_from_file
-;;;     gtk_print_settings_new_from_key_file
-;;;     gtk_print_settings_new_from_gvariant
 ;;;     gtk_print_settings_load_file
 ;;;     gtk_print_settings_load_key_file
 ;;;     gtk_print_settings_to_file
@@ -461,11 +462,118 @@
 (export 'print-settings-new)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_print_settings_new_from_file
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_print_settings_new_from_file" %print-settings-new-from-file)
+    (g:object print-settings :already-referenced)
+  (filename :string)
+  (err :pointer))
+
+(defun print-settings-new-from-file (path)
+ #+liber-documentation
+ "@version{2024-2-18}
+  @argument[path]{a pathname or namestring with the file to read the settings
+    from}
+  @return{The restored @class{gtk:print-settings} object.}
+  @begin{short}
+    Reads the print settings from @arg{path}.
+  @end{short}
+  Returns a new @class{gtk:print-settings} object with the restored settings,
+  or @code{nil} if an error occurred.
+  @see-class{gtk:print-settings}
+  @see-function{gtk:print-settings-to-file}
+  @see-function{gtk:print-settings-load-file}"
+  (glib:with-ignore-g-error (err)
+    (%print-settings-new-from-file (namestring path) err)))
+
+(export 'print-settings-new-from-file)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_print_settings_new_from_key_file
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_print_settings_new_from_key_file"
+               %print-settings-new-from-key-file)
+    (g:object print-settings :already-referenced)
+  (keyfile (:pointer (:struct g:variant)))
+  (group :string)
+  (error :pointer))
+
+(defun print-settings-new-from-key-file (keyfile group)
+ #+liber-documentation
+ "@version{2024-2-18}
+  @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings
+    from}
+  @argument[group]{a string with the name of the group to use, or @code{nil} to
+    use the default \"Print Settings\"}
+  @return{The restored @class{gtk:print-settings} object.}
+  @begin{short}
+    Reads the print settings from the group @arg{group} in the key file.
+  @end{short}
+  Returns a new @class{gtk:print-settings} object with the restored settings,
+  or @code{nil} if an error occurred.
+  @see-class{gtk:print-settings}
+  @see-type{g:key-file}
+  @see-function{gtk:print-settings-to-file}
+  @see-function{gtk:print-settings-load-file}"
+  (glib:with-g-error (err)
+    (%print-settings-new-from-key-file keyfile
+                                       (or group (cffi:null-pointer))
+                                       err)))
+
+(export 'print-settings-new-from-key-file)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_print_settings_new_from_gvariant
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_print_settings_new_from_gvariant"
+               print-settings-new-from-gvariant)
+     (g:object print-settings :already-referenced)
+ #+liber-documentation
+ "@version{2024-2-18}
+  @argument[variant]{an @code{a{sv@}} @type{g:variant} instance}
+  @return{The restored @class{gtk:print-settings} object.}
+  @begin{short}
+    Deserialize print settings from a @code{a{sv@}} variant in the format
+    produced by the @fun{gtk:print-settings-to-gvariant} function.
+  @end{short}
+  @begin[Example]{dictionary}
+    @begin{pre}
+(let* ((variant (g:variant-parse \"a{sv@}\"
+                                 \"{'scale': <'100'>,
+                                   'number-up': <'1'>,
+                                   'n-copies': <'1'>,
+                                   'page-ranges': <'0-11'>,
+                                   'page-set': <'all'>,
+                                   'printer': <'In Datei drucken'>,
+                                   'print-pages': <'ranges'>,
+                                   'reverse': <'false'>,
+                                   'collate': <'false'>,
+                                   'output-file-format': <'pdf'>@}\"))
+       (settings (gtk:print-settings-new-from-gvariant variant)))
+  (g:variant-print (gtk:print-settings-to-gvariant settings) nil))
+=> \"{'scale': <'100'>, 'number-up': <'1'>, 'n-copies': <'1'>,
+      'page-ranges': <'0-11'>, 'page-set': <'all'>,
+      'printer': <'In Datei drucken'>, 'print-pages': <'ranges'>,
+      'reverse': <'false'>, 'collate': <'false'>,
+      'output-file-format': <'pdf'>@}\"
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:print-settings}
+  @see-type{g:variant}
+  @see-function{gtk:print-settings-to-gvariant}"
+  (variant (:pointer (:struct g:variant))))
+
+(export 'print-settings-new-from-gvariant)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_print_settings_copy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_settings_copy" print-settings-copy)
-    (g:object print-settings)
+    (g:object print-settings :already-referenced)
  #+liber-documentation
  "@version{2024-2-17}
   @argument[other]{a @class{gtk:print-settings} object}
@@ -1669,111 +1777,6 @@
   (settings (g:object print-settings)))
 
 (export 'print-settings-output-bin)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_print_settings_new_from_file
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_print_settings_new_from_file" %print-settings-new-from-file)
-    (g:object print-settings)
-  (filename :string)
-  (err :pointer))
-
-(defun print-settings-new-from-file (path)
- #+liber-documentation
- "@version{2024-2-18}
-  @argument[path]{a pathname or namestring with the file to read the settings
-    from}
-  @return{The restored @class{gtk:print-settings} object.}
-  @begin{short}
-    Reads the print settings from @arg{path}.
-  @end{short}
-  Returns a new @class{gtk:print-settings} object with the restored settings,
-  or @code{nil} if an error occurred.
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-to-file}
-  @see-function{gtk:print-settings-load-file}"
-  (glib:with-ignore-g-error (err)
-    (%print-settings-new-from-file (namestring path) err)))
-
-(export 'print-settings-new-from-file)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_print_settings_new_from_key_file
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_print_settings_new_from_key_file"
-               %print-settings-new-from-key-file) (g:object print-settings)
-  (keyfile (:pointer (:struct g:variant)))
-  (group :string)
-  (error :pointer))
-
-(defun print-settings-new-from-key-file (keyfile group)
- #+liber-documentation
- "@version{2024-2-18}
-  @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings
-    from}
-  @argument[group]{a string with the name of the group to use, or @code{nil} to
-    use the default \"Print Settings\"}
-  @return{The restored @class{gtk:print-settings} object.}
-  @begin{short}
-    Reads the print settings from the group @arg{group} in the key file.
-  @end{short}
-  Returns a new @class{gtk:print-settings} object with the restored settings,
-  or @code{nil} if an error occurred.
-  @see-class{gtk:print-settings}
-  @see-type{g:key-file}
-  @see-function{gtk:print-settings-to-file}
-  @see-function{gtk:print-settings-load-file}"
-  (glib:with-g-error (err)
-    (%print-settings-new-from-key-file keyfile
-                                       (or group (cffi:null-pointer))
-                                       err)))
-
-(export 'print-settings-new-from-key-file)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_print_settings_new_from_gvariant
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_print_settings_new_from_gvariant"
-               print-settings-new-from-gvariant) (g:object print-settings)
- #+liber-documentation
- "@version{2024-2-18}
-  @argument[variant]{an @code{a{sv@}} @type{g:variant} instance}
-  @return{The restored @class{gtk:print-settings} object.}
-  @begin{short}
-    Deserialize print settings from a @code{a{sv@}} variant in the format
-    produced by the @fun{gtk:print-settings-to-gvariant} function.
-  @end{short}
-  @begin[Example]{dictionary}
-    @begin{pre}
-(let* ((variant (g:variant-parse \"a{sv@}\"
-                                 \"{'scale': <'100'>,
-                                   'number-up': <'1'>,
-                                   'n-copies': <'1'>,
-                                   'page-ranges': <'0-11'>,
-                                   'page-set': <'all'>,
-                                   'printer': <'In Datei drucken'>,
-                                   'print-pages': <'ranges'>,
-                                   'reverse': <'false'>,
-                                   'collate': <'false'>,
-                                   'output-file-format': <'pdf'>@}\"))
-       (settings (gtk:print-settings-new-from-gvariant variant)))
-  (g:variant-print (gtk:print-settings-to-gvariant settings) nil))
-=> \"{'scale': <'100'>, 'number-up': <'1'>, 'n-copies': <'1'>,
-      'page-ranges': <'0-11'>, 'page-set': <'all'>,
-      'printer': <'In Datei drucken'>, 'print-pages': <'ranges'>,
-      'reverse': <'false'>, 'collate': <'false'>,
-      'output-file-format': <'pdf'>@}\"
-    @end{pre}
-  @end{dictionary}
-  @see-class{gtk:print-settings}
-  @see-type{g:variant}
-  @see-function{gtk:print-settings-to-gvariant}"
-  (variant (:pointer (:struct g:variant))))
-
-(export 'print-settings-new-from-gvariant)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_print_settings_load_file

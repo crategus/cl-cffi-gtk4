@@ -55,7 +55,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("GtkTextTag")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -73,7 +73,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("GtkTextTag" "gboolean")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -91,14 +91,12 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("GtkTextTag")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
-
-;;;     GtkTextTagTableForeach
 
 ;;;     gtk_text_tag_table_new
 
@@ -140,6 +138,12 @@
                                           (lambda (tag)
                                             (declare (ignore tag))
                                             (incf count))))
-    (is (= count (gtk:text-tag-table-size table)))))
+    (is (= count (gtk:text-tag-table-size table)))
+    ;; Remove all tags from the text tag table
+    (dotimes (i 1000)
+      (gtk:text-tag-table-remove
+              table
+              (gtk:text-tag-table-lookup table (format nil "tag~a" i))))
+    (is (= 0 (gtk:text-tag-table-size table)))))
 
-;;; 2024-7-6
+;;; 2024-10-9

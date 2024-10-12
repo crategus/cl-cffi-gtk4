@@ -90,7 +90,10 @@
     (is-true (gtk:paned-shrink-end-child paned))
     (is-true (gtk:paned-shrink-start-child paned))
     (is (eq start (gtk:paned-start-child paned)))
-    (is-false (gtk:paned-wide-handle paned))))
+    (is-false (gtk:paned-wide-handle paned))
+
+    (is-false (setf (gtk:paned-end-child paned) nil))
+    (is-false (setf (gtk:paned-start-child paned) nil))))
 
 ;;; --- Signals ----------------------------------------------------------------
 

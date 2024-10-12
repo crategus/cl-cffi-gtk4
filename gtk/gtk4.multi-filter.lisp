@@ -2,7 +2,7 @@
 ;;; gtk4.multi-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GtkMultiFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMultiFilter" multi-filter
+(gobject:define-gobject "GtkMultiFilter" multi-filter
   (:superclass filter
    :export t
    :interfaces ("GListModel"
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'multi-filter 'type)
- "@version{#2023-8-16}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:multi-filter} class is the base type that implements support
     for handling multiple filters.
@@ -119,10 +119,10 @@
 (setf (liber:alias-for-function 'multi-filter-item-type)
       "Accessor"
       (documentation 'multi-filter-item-type 'function)
- "@version{#2023-8-16}
+ "@version{2024-9-28}
   @syntax{(gtk:multi-filter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-filter} object}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
     Accessor of the @slot[gtk:multi-filter]{item-type} slot of the
     @class{gtk:multi-filter} class.
@@ -141,7 +141,7 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-filter) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
   The number of items. Since 4.8 @br{}
   Default value: 0")
 
@@ -149,7 +149,7 @@
 (setf (liber:alias-for-function 'multi-filter-n-items)
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
- "@version{#2023-8-16}
+ "@version{2024-9-28}
   @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -165,18 +165,26 @@
 ;;; gtk_multi_filter_append
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_multi_filter_append" multi-filter-append) :void
+;; TODO: gtk_multi_filter_append takes the ownerhship of the FILTER argument.
+;; We pass a reference of FILTER to the function. This avoids crashing the
+;; testsuite. But it seems that sbcl does not free the used memory completly.
+;; Is the memory management now completly correct?
+
+(cffi:defcfun ("gtk_multi_filter_append" %multi-filter-append) :void
+  (object (g:object multi-filter))
+  (filter (g:object filter)))
+
+(defun multi-filter-append (object filter)
  #+liber-documentation
- "@version{#2023-8-16}
+ "@version{2024-10-1}
   @argument[object]{a @class{gtk:multi-filter} object}
-  @argument[filter]{a new @class{gtk:filter} object to use}
+  @argument[filter]{a @class{gtk:filter} object to use}
   @begin{short}
     Adds a filter to @arg{object} to use for matching.
   @end{short}
   @see-class{gtk:multi-filter}
   @see-class{gtk:filter}"
-  (object (g:object multi-filter))
-  (filter (g:object filter)))
+  (%multi-filter-append object (g:object-ref filter)))
 
 (export 'multi-filter-append)
 
@@ -186,19 +194,18 @@
 
 (cffi:defcfun ("gtk_multi_filter_remove" multi-filter-remove) :void
  #+liber-documentation
- "@version{#2023-8-16}
+ "@version{2024-9-28}
   @argument[object]{a @class{gtk:multi-filter} object}
-  @argument[position]{an unsigned integer with the position of the filter to
-    remove}
+  @argument[pos]{an unsigned integer with the position of the filter to remove}
   @begin{short}
-    Removes the filter at the given position from the list of filters used by
+    Removes the filter at the given @arg{pos} from the list of filters used by
     @arg{object}.
   @end{short}
-  If the @arg{position} parameter is larger than the number of filters, nothing
+  If the @arg{pos} parameter is larger than the number of filters, nothing
   happens and the function returns.
   @see-class{gtk:multi-filter}"
   (object (g:object multi-filter))
-  (position :uint))
+  (pos :uint))
 
 (export 'multi-filter-remove)
 
@@ -206,7 +213,7 @@
 ;;; GtkAnyFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAnyFilter" any-filter
+(gobject:define-gobject "GtkAnyFilter" any-filter
   (:superclass multi-filter
    :export t
    :interfaces ("GListModel"
@@ -216,13 +223,13 @@
 
 #+liber-documentation
 (setf (documentation 'any-filter 'type)
- "@version{2023-8-16}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:any-filter} class is a subclass of the
-    @class{gtk:multi-filter} class that matches an item when at least one of its
-    filters matches.
+    @class{gtk:multi-filter} class that matches an item when at least one of
+    its filters matches.
   @end{short}
-  @see-constructor{gtk:multi-filter-new}
+  @see-constructor{gtk:any-filter-new}
   @see-class{gtk:multi-filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -232,14 +239,14 @@
 (declaim (inline any-filter-new))
 
 (defun any-filter-new ()
- "@version{2023-8-16}
+ "@version{2024-9-28}
   @return{The new @class{gtk:any-filter} object.}
   @begin{short}
     Creates a new empty \"any\" filter.
   @end{short}
   Use the @fun{gtk:multi-filter-append} function to add filters to it. This
-  filter matches an item if any of the filters added to it matches the item. In
-  particular, this means that if no filter has been added to it, the filter
+  filter matches an item if any of the filters added to it matches the item.
+  In particular, this means that if no filter has been added to it, the filter
   matches no item.
   @see-class{gtk:any-filter}
   @see-function{gtk:multi-filter-append}"
@@ -251,7 +258,7 @@
 ;;; GtkEveryFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEveryFilter" every-filter
+(gobject:define-gobject "GtkEveryFilter" every-filter
   (:superclass multi-filter
    :export t
    :interfaces ("GListModel"
@@ -261,7 +268,7 @@
 
 #+liber-documentation
 (setf (documentation 'every-filter 'type)
- "@version{2023-8-16}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:every-filter} class is a subclass of the
     @class{gtk:multi-filter} class that matches an item when each of its
@@ -275,16 +282,16 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun every-filter-new ()
- "@version{2023-8-16}
+ "@version{2024-9-28}
   @return{The new @class{gtk:every-filter} object.}
   @begin{short}
     Creates a new empty \"every\" filter.
   @end{short}
   Use the @fun{gtk:multi-filter-append} function to add filters to it. This
-  filter matches an item if each of the filters added to it matches the item. In
-  particular, this means that if no filter has been added to it, the filter
+  filter matches an item if each of the filters added to it matches the item.
+  In particular, this means that if no filter has been added to it, the filter
   matches every item.
-  @see-class{gtk:any-filter}
+  @see-class{gtk:every-filter}
   @see-function{gtk:multi-filter-append}"
   (make-instance 'every-filter))
 

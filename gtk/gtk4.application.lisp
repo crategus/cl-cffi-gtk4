@@ -88,7 +88,7 @@
 ;;; GtkApplicationInhibitFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkApplicationInhibitFlags" application-inhibit-flags
+(gobject:define-gflags "GtkApplicationInhibitFlags" application-inhibit-flags
   (:export t
    :type-initializer "gtk_application_inhibit_flags_get_type")
   (:logout  #.(ash 1 0))
@@ -100,9 +100,9 @@
 (setf (liber:alias-for-symbol 'application-inhibit-flags)
       "GFlags"
       (liber:symbol-documentation 'application-inhibit-flags)
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @begin{declaration}
-(gobject:define-g-flags \"GtkApplicationInhibitFlags\" application-inhibit-flags
+(gobject:define-gflags \"GtkApplicationInhibitFlags\" application-inhibit-flags
   (:export t
    :type-initializer \"gtk_application_inhibit_flags_get_type\")
   (:logout  #.(ash 1 0))
@@ -132,7 +132,7 @@
 ;;; GtkApplication
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkApplication" application
+(gobject:define-gobject "GtkApplication" application
   (:superclass gio:application
    :export t
    :interfaces ("GActionGroup"
@@ -153,7 +153,7 @@
 
 #+liber-documentation
 (setf (documentation 'application 'type)
- "@version{2024-5-24}
+ "@version{2024-10-7}
   @begin{short}
     The @class{gtk:application} class is a high-level API for writing
     applications.
@@ -189,12 +189,12 @@
   information.
 
   If there is a resource located at @file{\"gtk/help-overlay.ui\"} which
-  defines a @class{gtk:shortcuts-window} widget with ID \"help_overlay\" then
-  the @class{gtk:application} instance associates an instance of this shortcuts
-  window with each @class{gtk:application-window} widget and sets up keyboard
-  accelerators, @kbd{Control-F1} and @kbd{Control-?}, to open it. To create a
-  menu item that displays the shortcuts window, associate the item with the
-  \"win.show-help-overlay\" action.
+  defines a @class{gtk:shortcuts-window} widget with ID @code{\"help_overlay\"}
+  then the @class{gtk:application} instance associates an instance of this
+  shortcuts window with each @class{gtk:application-window} widget and sets up
+  keyboard accelerators, @kbd{Control-F1} and @kbd{Control-?}, to open it. To
+  create a menu item that displays the shortcuts window, associate the item
+  with the @code{\"win.show-help-overlay\"} action.
 
   The @class{gtk:application} instance optionally registers with a session
   manager of the users session, if you set the
@@ -208,7 +208,7 @@
   but it can be expected to inform the user about the negative consequences of
   ending the session while inhibitors are present.
   @begin{examples}
-    A simple application.
+    A simple application:
     @begin{pre}
 (defun application-simple (&rest argv)
   (let (;; Create an application
@@ -231,8 +231,8 @@
   ;; Run the application
   (g:application-run app argv)))
     @end{pre}
-    A resource definition with the menus, a shortcuts window and an icon to
-    automatic loading:
+    A resource definition with menus, a shortcuts window and an icon for
+    automatically loading resources:
     @begin{pre}
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <gresources>
@@ -353,7 +353,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-active-window)
       "Accessor"
       (documentation 'application-active-window 'function)
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @syntax{(gtk:application-active-window object) => window}
   @argument[object]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
@@ -380,7 +380,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-menubar)
       "Accessor"
       (documentation 'application-menubar 'function)
- "@version{2024-5-24}
+ "@version{2024-10-7}
   @syntax{(gtk:application-menubar object) => menubar}
   @syntax{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
@@ -425,7 +425,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-register-session)
       "Accessor"
       (documentation 'application-register-session 'function)
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @syntax{(gtk:application-register-session object) => setting}
   @syntax{(setf (gtk:application-register-session object) setting)}
   @argument[object]{a @class{gtk:application} instance}
@@ -456,7 +456,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-screensaver-active)
       "Accessor"
       (documentation 'application-screensaver-active 'function)
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @syntax{(gtk:application-screensaver-active object) => active}
   @argument[object]{a @class{gtk:application} instance}
   @argument[active]{a boolean whether the screensaver is active}
@@ -479,7 +479,7 @@ lambda (application window)    :run-first
 (declaim (inline application-new))
 
 (defun application-new (id flags)
- "@version{2024-8-16}
+ "@version{2024-10-7}
   @argument[id]{a string with the application ID, or @code{nil} for no
     application ID}
   @argument[flags]{a @symbol{g:application-flags} value with the application
@@ -517,7 +517,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_add_window" application-add-window) :void
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
@@ -525,10 +525,13 @@ lambda (application window)    :run-first
   @end{short}
   This call can only happen after the application has started. Typically, you
   should add new application windows in response to the emission of the
-  \"GApplication::activate\" signal. This call is equivalent to setting the
-  @slot[gtk:window]{application} property of the given @arg{window} to the
-  given @arg{application}.
-
+  @code{\"GApplication::activate\"} signal. This call is equivalent to setting
+  the @slot[gtk:window]{application} property of the given @arg{window} to the
+  given @arg{application}, that is:
+  @begin{pre}
+(gtk:application-add-window application window)
+== (setf (gtk:window-application window) application)
+  @end{pre}
   Normally, the connection between the application and the window will remain
   until the window is destroyed, but you can explicitly remove it with the
   @fun{gtk:application-remove-window} function. GTK will keep the application
@@ -548,7 +551,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_remove_window" application-remove-window) :void
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
@@ -556,8 +559,11 @@ lambda (application window)    :run-first
   @end{short}
   If the @arg{window} argument belongs to the given @arg{application} then this
   call is equivalent to setting the @slot[gtk:window]{application} property of
-  @arg{window} to @code{nil}.
-
+  @arg{window} to @code{nil}, that is:
+  @begin{pre}
+(gtk:application-remove-window application window)
+== (setf (gtk:window-application window) nil)
+  @end{pre}
   The application may stop running as a result of a call to this function, if
   the @arg{window} argument was the last window of the application.
   @see-class{gtk:application}
@@ -576,7 +582,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_windows" application-windows)
     (g:list-t (g:object window) :free-from-foreign nil)
  #+liber-documentation
- "@version{2024-6-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @return{The list of @class{gtk:window} widgets.}
   @begin{short}
@@ -586,9 +592,8 @@ lambda (application window)    :run-first
   element is the currently focused window. This is useful for choosing a parent
   for a transient window.
   @begin{examples}
-    In this example, the function iterates over the list of the windows and
-    destroys the windows. After the last window is destroyed, the application
-    quits.
+    In this example, the function iterates over the list of windows and destroys
+    the windows. After the last window is destroyed, the application quits.
     @begin{pre}
 (defun action-quit (application action parameter)
   (declare (ignore action parameter))
@@ -610,7 +615,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_window_by_id" application-window-by-id)
     (g:object window)
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[id]{an unsigned integer identifier number}
   @return{The @class{gtk:application-window} widget with ID @arg{id}, or
@@ -640,7 +645,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_inhibit" application-inhibit) :uint
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget, or @code{nil}}
   @argument[flags]{a @symbol{gtk:application-inhibit-flags} value with the
@@ -648,7 +653,7 @@ lambda (application window)    :run-first
   @argument[reason]{a short, human readable string that explains why these
     operations are inhibited}
   @begin{return}
-    A non-zero unsigned integer cookie that is used to uniquely identify this
+    The non-zero unsigned integer cookie that is used to uniquely identify this
     request. It should be used as an argument to the
     @fun{gtk:application-uninhibit} function in order to remove the request. If
     the platform does not support inhibiting or the request failed for some
@@ -693,7 +698,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_uninhibit" application-uninhibit) :void
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[cookie]{an unsigned integer cookie that was returned by the
     @fun{gtk:application-inhibit} function}
@@ -716,7 +721,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_menu_by_id" application-menu-by-id)
     (g:object g:menu)
  #+liber-documentation
- "@version{2023-8-7}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[id]{a string with the ID of the menu to look up}
   @return{Gets the @class{g:menu} object with the given @arg{id} argument from
@@ -738,7 +743,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_list_action_descriptions"
                application-list-action-descriptions) g:strv-t
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @return{The list of strings with the detailed action names.}
   @begin{short}
@@ -767,7 +772,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_accels_for_action"
                application-accels-for-action) g:strv-t
  #+liber-documentation
- "@version{2024-8-16}
+ "@version{2024-10-7}
   @syntax{(gtk:application-accels-for-action application name) => accels}
   @syntax{(setf (gtk:application-accels-for-action application name) accels)}
   @argument[application]{a @class{gtk:application} instance}
@@ -803,7 +808,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_get_actions_for_accel"
                application-actions-for-accel) g:strv-t
- "@version{2023-8-2}
+ "@version{2024-10-7}
   @argument[application]{a @class{gtk:application} instance}
   @argument[accel]{a string with an accelerator that can be parsed by the
     @fun{gtk:accelerator-parse} function}

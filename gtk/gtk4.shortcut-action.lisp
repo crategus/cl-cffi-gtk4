@@ -379,9 +379,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_action_parse_string" shortcut-action-parse-string)
-    (g:object shortcut-action)
+    (g:object shortcut-action :already-referenced)
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-10-9}
   @argument[str]{a string to parse}
   @return{The new @class{gtk:shortcut-action} object, or @code{nil} on error.}
   @begin{short}

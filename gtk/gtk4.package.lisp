@@ -144,8 +144,8 @@
     @end{subsection}
     @begin[GtkCustomFilter]{subsection}
       @about-class{custom-filter}
-      @about-symbol{custom-filter-func}
       @about-function{custom-filter-new}
+      @about-symbol{custom-filter-func}
       @about-function{custom-filter-set-filter-func }
     @end{subsection}
     @begin[GtkMultiFilter]{subsection}
@@ -653,7 +653,6 @@ GtkCellRenderer         GtkWidget
       @end{pre}
     @end{subsection}
     @begin[GtkListItem]{subsection}
-      Object used to represent items of a list model.
       @about-class{list-item}
       @about-generic{list-item-activatable}
       @about-generic{list-item-child}
@@ -663,16 +662,13 @@ GtkCellRenderer         GtkWidget
       @about-generic{list-item-selected}
     @end{subsection}
     @begin[GtkListItemFactory]{subsection}
-      Mapping list items to widgets.
       @about-class{list-item-factory}
     @end{subsection}
     @begin[GtkSignalListItemFactory]{subsection}
-      A list item factory providing signals.
       @about-class{signal-list-item-factory}
       @about-function{signal-list-item-factory-new}
     @end{subsection}
     @begin[GtkBuilderListItemFactory]{subsection}
-      A list item factory using ui files.
       @about-class{builder-list-item-factory}
       @about-generic{builder-list-item-factory-bytes}
       @about-generic{builder-list-item-factory-resource}
@@ -770,7 +766,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{column-view-row-selected}
     @end{subsection}
     @begin[GtkDropDown]{subsection}
-      Choose an item from a list.
       @about-class{drop-down}
       @about-generic{drop-down-enable-search}
       @about-generic{drop-down-expression}
@@ -788,7 +783,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Tree support]{section}
     @begin[GtkTreeListModel]{subsection}
-      A list model that can create child models on demand.
       @about-class{tree-list-row}
       @about-generic{tree-list-row-children}
       @about-generic{tree-list-row-depth}
@@ -811,13 +805,11 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-list-model-child-row}
     @end{subsection}
     @begin[GtkTreeListRowSorter]{subsection}
-      Sort trees by levels.
       @about-class{tree-list-row-sorter}
       @about-generic{tree-list-row-sorter-sorter}
       @about-function{tree-list-row-sorter-new}
     @end{subsection}
     @begin[GtkTreeExpander]{subsection}
-      An indenting expander button for use in a tree list.
       @about-class{tree-expander}
       @about-generic{tree-expander-child}
       @about-generic{tree-expander-hide-expander}
@@ -862,6 +854,9 @@ GtkCellRenderer         GtkWidget
       @about-function{buildable-buildable-id}
     @end{subsection}
     @begin[GtkBuilder]{subsection}
+      @about-symbol{builder-closure-flags}
+      @about-class{builder-scope}
+      @about-class{builder-cl-scope}
       @about-class{builder}
       @about-generic{builder-current-object}
       @about-generic{builder-scope}
@@ -870,7 +865,6 @@ GtkCellRenderer         GtkWidget
       @about-function{builder-new-from-file}
       @about-function{builder-new-from-resource}
       @about-function{builder-new-from-string}
-      @about-function{builder-create-closure}
       @about-function{builder-add-from-file}
       @about-function{builder-add-from-resource}
       @about-function{builder-add-from-string}
@@ -881,6 +875,7 @@ GtkCellRenderer         GtkWidget
       @about-function{builder-object}
       @about-function{builder-objects}
       @about-function{builder-expose-object}
+      @about-function{builder-create-closure}
       @about-function{builder-type-from-name}
       @about-function{builder-value-from-string}
       @about-function{builder-value-from-string-type}
@@ -888,13 +883,11 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Windows]{section}
     @begin[GtkRoot]{subsection}
-      Interface for root widgets.
       @about-class{root}
       @about-function{root-display}
       @about-function{root-focus}
     @end{subsection}
     @begin[GtkNative]{subsection}
-      Interface for widgets having surfaces.
       @about-class{native}
       @about-function{native-for-surface}
       @about-function{native-surface}
@@ -1087,13 +1080,13 @@ GtkCellRenderer         GtkWidget
       @about-function{list-box-select-all}
       @about-function{list-box-unselect-all}
       @about-function{list-box-selected-row}
-      @about-symbol{list-box-foreach-func}
-      @about-function{list-box-selected-foreach}
       @about-function{list-box-selected-rows}
       @about-function{list-box-adjustment}
       @about-function{list-box-set-placeholder}
       @about-function{list-box-row-at-index}
       @about-function{list-box-row-at-y}
+      @about-symbol{list-box-foreach-func}
+      @about-function{list-box-selected-foreach}
       @about-symbol{list-box-filter-func}
       @about-function{list-box-set-filter-func}
       @about-function{list-box-invalidate-filter}
@@ -1180,7 +1173,6 @@ GtkCellRenderer         GtkWidget
       @about-function{stack-set-visible-child-full}
     @end{subsection}
     @begin[GtkStackSwitcher]{subsection}
-      A controller for GtkStack.
       @about-class{stack-switcher}
       @about-generic{stack-switcher-stack}
       @about-function{stack-switcher-new}
@@ -1191,7 +1183,6 @@ GtkCellRenderer         GtkWidget
       @about-function{stack-sidebar-new}
     @end{subsection}
     @begin[GtkActionBar]{subsection}
-      A full width bar for presenting contextual actions.
       @about-class{action-bar}
       @about-generic{action-bar-revealed}
       @about-function{action-bar-new}
@@ -1201,7 +1192,6 @@ GtkCellRenderer         GtkWidget
       @about-function{action-bar-center-widget}
     @end{subsection}
     @begin[GtkHeaderBar]{subsection}
-      A box with a centered child.
       @about-class{header-bar}
       @about-generic{header-bar-decoration-layout}
       @about-generic{header-bar-show-title-buttons}
@@ -1221,7 +1211,6 @@ GtkCellRenderer         GtkWidget
       @about-function{overlay-clip-overlay}
     @end{subsection}
     @begin[GtkPaned]{subsection}
-      A widget with two adjustable panes.
       @about-class{paned}
       @about-generic{paned-end-child}
       @about-generic{paned-max-position}
@@ -1253,46 +1242,33 @@ GtkCellRenderer         GtkWidget
       @about-generic{notebook-enable-popup}
       @about-generic{notebook-group-name}
       @about-generic{notebook-page}
+      @about-function{notebook-pages}
       @about-generic{notebook-scrollable}
       @about-generic{notebook-show-border}
       @about-generic{notebook-show-tabs}
       @about-generic{notebook-tab-pos}
-      @about-function{notebook-child-detachable}
-      @about-function{notebook-child-menu-label}
-      @about-function{notebook-child-position}
-      @about-function{notebook-child-reorderable}
-      @about-function{notebook-child-tab-expand}
-      @about-function{notebook-child-tab-fill}
-      @about-function{notebook-child-tab-label}
       @about-function{notebook-new}
-      @about-function{notebook-add-page}
-      @about-function{notebook-append-page}
-      @about-function{notebook-append-page-menu}
-      @about-function{notebook-prepend-page}
-      @about-function{notebook-prepend-page-menu}
-      @about-function{notebook-insert-page}
-      @about-function{notebook-insert-page-menu}
-      @about-function{notebook-remove-page}
-      @about-function{notebook-detach-tab}
+      @about-function{notebook-n-pages}
+      @about-function{notebook-nth-page}
       @about-function{notebook-page-num}
+      @about-function{notebook-current-page}
       @about-function{notebook-next-page}
       @about-function{notebook-prev-page}
+      @about-function{notebook-add-page}
+      @about-function{notebook-remove-page}
+      @about-function{notebook-detach-tab}
       @about-function{notebook-reorder-child}
       @about-function{notebook-popup-enable}
       @about-function{notebook-popup-disable}
-      @about-function{notebook-current-page}
-      @about-function{notebook-menu-label}
-      @about-function{notebook-nth-page}
-      @about-function{notebook-n-pages}
-      @about-function{notebook-tab-label}
-      @about-function{notebook-menu-label-text}
-      @about-function{notebook-tab-label-text}
-      @about-function{notebook-tab-reorderable}
       @about-function{notebook-tab-detachable}
+      @about-function{notebook-tab-reorderable}
+      @about-function{notebook-menu-label}
+      @about-function{notebook-menu-label-text}
+      @about-function{notebook-tab-label}
+      @about-function{notebook-tab-label-text}
       @about-function{notebook-action-widget}
     @end{subsection}
     @begin[GtkExpander]{subsection}
-      A container which can hide its child.
       @about-class{expander}
       @about-generic{expander-child}
       @about-generic{expander-expanded}
@@ -1305,7 +1281,6 @@ GtkCellRenderer         GtkWidget
       @about-function{expander-new-with-mnemonic}
     @end{subsection}
     @begin[GtkAspectFrame]{subsection}
-      A frame that constrains its child to a particular aspect ratio.
       @about-class{aspect-frame}
       @about-generic{aspect-frame-child}
       @about-generic{aspect-frame-obey-child}
@@ -1315,7 +1290,6 @@ GtkCellRenderer         GtkWidget
       @about-function{aspect-frame-new}
     @end{subsection}
     @begin[GtkFixed]{subsection}
-      A container which allows you to position widgets at fixed coordinates.
       @about-class{fixed}
       @about-function{fixed-new}
       @about-function{fixed-put}
@@ -1327,7 +1301,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Layout Managers]{section}
     @begin[GtkLayoutManager]{subsection}
-      Base class for layout manager.
       @about-class{layout-manager}
       @about-function{layout-manager-measure}
       @about-function{layout-manager-allocate}
@@ -1337,18 +1310,15 @@ GtkCellRenderer         GtkWidget
       @about-function{layout-manager-layout-changed}
     @end{subsection}
     @begin[GtkLayoutChild]{subsection}
-      An object containing layout properties.
       @about-class{layout-child}
       @about-generic{layout-child-child-widget}
       @about-generic{layout-child-layout-manager}
     @end{subsection}
     @begin[GtkBinLayout]{subsection}
-      A layout manager for bin-like widgets.
       @about-class{bin-layout}
       @about-function{bin-layout-new}
     @end{subsection}
     @begin[GtkBoxLayout]{subsection}
-      Layout manager for placing all children in a single row or column.
       @about-class{box-layout}
       @about-generic{box-layout-child}
       @about-generic{box-layout-baseline-position}
@@ -1357,7 +1327,6 @@ GtkCellRenderer         GtkWidget
       @about-function{box-layout-new}
     @end{subsection}
     @begin[GtkCenterLayout]{subsection}
-      A centering layout.
       @about-class{center-layout}
       @about-generic{center-layout-shrink-center-last}
       @about-function{center-layout-new}
@@ -1368,14 +1337,12 @@ GtkCellRenderer         GtkWidget
       @about-function{center-layout-end-widget}
     @end{subsection}
     @begin[GtkFixedLayout]{subsection}
-      A layout manager that allows positioning at fixed coordinates.
       @about-class{fixed-layout-child}
       @about-generic{fixed-layout-child-transform}
       @about-class{fixed-layout}
       @about-function{fixed-layout-new}
     @end{subsection}
     @begin[GtkGridLayout]{subsection}
-      Layout manager for grid-like widgets.
       @about-class{grid-layout-child}
       @about-generic{grid-layout-child-column}
       @about-generic{grid-layout-child-column-span}
@@ -1391,7 +1358,6 @@ GtkCellRenderer         GtkWidget
       @about-function{grid-layout-row-baseline-position}
     @end{subsection}
     @begin[GtkOverlayLayout]{subsection}
-      Layout manager that places widgets as overlays.
       @about-class{overlay-layout-child}
       @about-generic{overlay-layout-child-clip-overlay}
       @about-generic{overlay-layout-child-measure}
@@ -1399,7 +1365,6 @@ GtkCellRenderer         GtkWidget
       @about-function{overlay-layout-new}
     @end{subsection}
     @begin[GtkCustomLayout]{subsection}
-      A convenience layout manager.
       @about-class{custom-layout}
       @about-symbol{custom-request-mode-func}
       @about-symbol{custom-measure-func}
@@ -1407,7 +1372,6 @@ GtkCellRenderer         GtkWidget
       @about-function{custom-layout-new}
     @end{subsection}
     @begin[GtkConstraintLayout]{subsection}
-      A layout manager using constraints.
       @about-class{constraint-layout-child}
       @about-class{constraint-layout}
       @about-function{constraint-layout-new}
@@ -1422,7 +1386,6 @@ GtkCellRenderer         GtkWidget
       @about-function{constraint-layout-observe-guides}
     @end{subsection}
     @begin[GtkConstraint]{subsection}
-      The description of a constraint.
       @about-class{constraint-target}
       @about-class{constraint}
       @about-generic{constraint-constant}
@@ -1440,7 +1403,6 @@ GtkCellRenderer         GtkWidget
       @about-function{constraint-is-constant}
     @end{subsection}
     @begin[GtkConstraintGuide]{subsection}
-      An invisible constraint target.
       @about-class{constraint-guide}
       @about-generic{constraint-guide-max-height}
       @about-generic{constraint-guide-max-width}
@@ -1620,13 +1582,11 @@ GtkCellRenderer         GtkWidget
       @about-function{video-set-resource}
     @end{subsection}
     @begin[GtkMediaControls]{subsection}
-      A widget showing controls for a media stream.
       @about-class{media-controls}
       @about-generic{media-controls-media-stream}
       @about-function{media-controls-new}
     @end{subsection}
     @begin[GtkMediaStream]{subsection}
-      Display media in GTK.
       @about-class{media-stream}
       @about-generic{media-stream-duration}
       @about-generic{media-stream-ended}
@@ -1660,7 +1620,6 @@ GtkCellRenderer         GtkWidget
       @about-function{media-stream-error-valist}
     @end{subsection}
     @begin[GtkMediaFile]{subsection}
-      Open media files for use in GTK.
       @about-class{media-file}
       @about-generic{media-file-file}
       @about-generic{media-file-input-stream}
@@ -2428,7 +2387,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Combo Box, Popovers]{section}
     @begin[GtkPopover]{subsection}
-      Context dependent bubbles.
       @about-class{popover}
       @about-generic{popover-autohide}
       @about-generic{popover-cascade-popdown}
@@ -2445,7 +2403,6 @@ GtkCellRenderer         GtkWidget
       @about-function{popover-offset}
     @end{subsection}
     @begin[GtkPopoverMenu]{subsection}
-      Popovers to use as menus.
       @about-symbol{popover-menu-flags}
       @about-class{popover-menu}
       @about-generic{popover-menu-flags}
@@ -2457,7 +2414,6 @@ GtkCellRenderer         GtkWidget
       @about-function{popover-menu-remove-child}
     @end{subsection}
     @begin[GtkPopoverMenuBar]{subsection}
-      A menu bar with popovers.
       @about-class{popover-menu-bar}
       @about-generic{popover-menu-bar-menu-model}
       @about-function{popover-menu-bar-new-from-model}
@@ -2551,7 +2507,6 @@ GtkCellRenderer         GtkWidget
       @about-function{font-dialog-button-new}
     @end{subsection}
     @begin[GtkEmojiChooser]{subsection}
-      A popover to choose an Emoji character.
       @about-class{emoji-chooser}
       @about-function{emoji-chooser-new}
     @end{subsection}
@@ -2566,7 +2521,6 @@ GtkCellRenderer         GtkWidget
       @about-function{drawing-area-set-draw-func}
     @end{subsection}
     @begin[GtkGlArea]{subsection}
-      A widget for custom drawing with OpenGL.
       @about-class{gl-area}
       @about-generic{gl-area-auto-render}
       @about-generic{gl-area-context}
@@ -2583,7 +2537,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Ornaments]{section}
     @begin[GtkFrame]{subsection}
-      A widget with a frame and an optional label.
       @about-class{frame}
       @about-generic{frame-child}
       @about-generic{frame-label}
@@ -2593,7 +2546,6 @@ GtkCellRenderer         GtkWidget
       @about-function{frame-label-align}
     @end{subsection}
     @begin[GtkSeparator]{subsection}
-      A separator widget.
       @about-class{separator}
       @about-function{separator-new}
     @end{subsection}
@@ -2663,7 +2615,6 @@ GtkCellRenderer         GtkWidget
       @about-function{accelerator-default-mod-mask}
     @end{subsection}
     @begin[GtkShortcutManager]{subsection}
-      Interface for managing shortcuts.
       @about-class{shortcut-manager}
     @end{subsection}
     @begin[GtkShortcut]{subsection}
@@ -2675,7 +2626,6 @@ GtkCellRenderer         GtkWidget
       @about-function{shortcut-new-with-arguments}
     @end{subsection}
     @begin[GtkShortcutTrigger]{subsection}
-      Triggers to track if shortcuts should be activated.
       @about-class{shortcut-trigger}
       @about-function{shortcut-trigger-trigger}
       @about-function{shortcut-trigger-hash}
@@ -2701,7 +2651,6 @@ GtkCellRenderer         GtkWidget
       @about-function{never-trigger-get}
     @end{subsection}
     @begin[GtkShortcutAction]{subsection}
-      Tracking if shortcuts should be activated.
       @about-symbol{shortcut-action-flags}
       @about-class{shortcut-action}
       @about-function{shortcut-action-to-string}
@@ -3171,13 +3120,11 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Shortcuts Overview]{section}
     @begin[GtkShortcutsWindow]{subsection}
-      Toplevel which shows help for shortcuts.
       @about-class{shortcuts-window}
       @about-generic{shortcuts-window-section-name}
       @about-generic{shortcuts-window-view-name}
     @end{subsection}
     @begin[GtkShortcutsSection]{subsection}
-      Represents an application mode in a GtkShortcutsWindow.
       @about-class{shortcuts-section}
       @about-generic{shortcuts-section-max-height}
       @about-generic{shortcuts-section-section-name}
@@ -3185,7 +3132,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{shortcuts-section-view-name}
     @end{subsection}
     @begin[GtkShortcutsGroup]{subsection}
-      Represents a group of shortcuts in a GtkShortcutsWindow.
       @about-class{shortcuts-group}
       @about-function{shortcuts-group-accel-size-group}
       @about-function{shortcuts-group-height}
@@ -3194,7 +3140,6 @@ GtkCellRenderer         GtkWidget
       @about-function{shortcuts-group-view}
     @end{subsection}
     @begin[GtkShortcutsShortcut]{subsection}
-      Represents a keyboard shortcut in a GtkShortcutsWindow.
       @about-symbol{shortcut-type}
       @about-class{shortcuts-shortcut}
       @about-generic{shortcuts-shortcut-accel-size-group}
@@ -3210,7 +3155,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{shortcuts-shortcut-title-size-group}
     @end{subsection}
     @begin[GtkShortcutLabel]{subsection}
-      Displays a keyboard shortcut.
       @about-class{shortcut-label}
       @about-generic{shortcut-label-accelerator}
       @about-generic{shortcut-label-disabled-text}
@@ -3246,7 +3190,6 @@ GtkCellRenderer         GtkWidget
       @about-function{accessible-state-init-value}
     @end{subsection}
     @begin[GtkATContext]{subsection}
-      An object communicating to Assistive Technologies.
       @about-class{at-context}
       @about-generic{at-context-accessible}
       @about-generic{at-context-accessible-role}
@@ -3256,7 +3199,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Input Methods]{section}
     @begin[GtkIMContext]{subsection}
-      Base class for input method contexts.
       @about-class{im-context}
       @about-generic{im-context-input-hints}
       @about-generic{im-context-input-purpose}
@@ -3273,7 +3215,6 @@ GtkCellRenderer         GtkWidget
       @about-function{im-context-delete-surrounding}
     @end{subsection}
     @begin[GtkIMContextSimple]{subsection}
-      An input method context supporting table-based input methods.
       @about-class{im-context-simple}
       @about-symbol{GTK_MAX_COMPOSE_LEN}
       @about-function{im-context-simple-new}
@@ -3281,7 +3222,6 @@ GtkCellRenderer         GtkWidget
       @about-function{im-context-simple-add-compose-file}
     @end{subsection}
     @begin[GtkIMMulticontext]{subsection}
-      An input method context supporting multiple, loadable input methods.
       @about-class{im-multicontext}
       @about-function{im-multicontext-new}
       @about-function{im-multicontext-context-id}
@@ -3289,7 +3229,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Recently Used Documents]{section}
     @begin[GtkRecentManager]{subsection}
-      Managing recently used files.
       @about-symbol{recent-data}
       @about-symbol{recent-manager-error}
       @about-symbol{GTK_RECENT_MANAGER_ERROR}
@@ -3477,7 +3416,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Data exchange, Clipboards, Drag and Drop]{section}
     @begin[GtkDragSource]{subsection}
-      Event controller to initiate DND operations.
       @about-class{drag-source}
       @about-generic{drag-source-actions}
       @about-generic{drag-source-content}
@@ -3488,7 +3426,6 @@ GtkCellRenderer         GtkWidget
       @about-function{drag-check-threshold}
     @end{subsection}
     @begin[GtkDragIcon]{subsection}
-      A toplevel to use as drag icon.
       @about-class{drag-icon}
       @about-generic{drag-icon-child}
       @about-function{drag-icon-for-drag}
@@ -3496,7 +3433,6 @@ GtkCellRenderer         GtkWidget
       @about-function{drag-icon-create-widget-for-value}
     @end{subsection}
     @begin[GtkDropTarget]{subsection}
-      Event controller to receive DND drops.
       @about-class{drop-target}
       @about-generic{drop-target-actions}
       @about-generic{drop-target-current-drop}
@@ -3509,7 +3445,6 @@ GtkCellRenderer         GtkWidget
       @about-function{drop-target-reject}
     @end{subsection}
     @begin[GtkDropTargetAsync]{subsection}
-      Event controller to receive DND drops.
       @about-class{drop-target-async}
       @about-generic{drop-target-async-actions}
       @about-generic{drop-target-async-formats}
@@ -3517,7 +3452,6 @@ GtkCellRenderer         GtkWidget
       @about-function{drop-target-async-reject-drop}
     @end{subsection}
     @begin[GtkDropControllerMotion]{subsection}
-      Event controller for motion events during a drop.
       @about-class{drop-controller-motion}
       @about-generic{drop-controller-motion-contains-pointer}
       @about-generic{drop-controller-motion-drop}
@@ -3679,7 +3613,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cl-cffi-gtk-build-info}
     @end{subsection}
     @begin[GtkSettings]{subsection}
-      Sharing settings between applications.
       @about-symbol{settings-value}
       @about-symbol{system-setting}
       @about-class{settings}
@@ -3739,7 +3672,6 @@ GtkCellRenderer         GtkWidget
       @about-function{settings-reset-property}
     @end{subsection}
     @begin[Standard Enumerations]{subsection}
-      Enumerations and flags used throughout GTK.
       @about-symbol{align}
       @about-symbol{baseline-position}
       @about-symbol{delete-type}
@@ -3784,7 +3716,6 @@ GtkCellRenderer         GtkWidget
       @about-symbol{accessible-sort}
     @end{subsection}
     @begin[Filesystem utilities]{subsection}
-      Functions for working with GIO
       @about-class{mount-operation}
       @about-generic{mount-operation-display}
       @about-generic{mount-operation-is-showing}
@@ -3797,8 +3728,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Theming in GTK]{section}
     @begin[GtkStyleProvider]{subsection}
-      Interface to provide style information to a @class{gtk:style-context}
-      object.
       @about-variable{+priority-fallback+}
       @about-variable{+priority-theme+}
       @about-variable{+priority-settings+}
@@ -3807,7 +3736,6 @@ GtkCellRenderer         GtkWidget
       @about-class{style-provider}
     @end{subsection}
     @begin[GtkCssProvider]{subsection}
-      CSS-like styling for widgets.
       @about-symbol{css-location}
       @about-function{css-location-bytes}
       @about-function{css-location-chars}
@@ -3834,7 +3762,6 @@ GtkCellRenderer         GtkWidget
       @about-function{css-provider-to-string}
     @end{subsection}
     @begin[GtkIconPaintable]{subsection}
-      Contains information found when looking up an icon in an icon theme.
       @about-class{symbolic-paintable}
       @about-function{symbolic-paintable-snapshot-symbolic}
       @about-class{icon-paintable}
@@ -3844,7 +3771,6 @@ GtkCellRenderer         GtkWidget
       @about-function{icon-paintable-new-for-file}
     @end{subsection}
     @begin[GtkIconTheme]{subsection}
-      Looking up icons by name.
       @about-symbol{icon-lookup-flags}
       @about-symbol{GTK_ICON_THEME_ERROR}
       @about-symbol{GTK_TYPE_ICON_THEME_ERROR}
@@ -4623,7 +4549,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-store-move-after}
     @end{subsection}
     @begin[GtkComboBox]{subsection}
-      A widget used to choose from a list of items.
       @about-class{combo-box}
       @about-generic{combo-box-active}
       @about-generic{combo-box-active-id}
@@ -4648,7 +4573,6 @@ GtkCellRenderer         GtkWidget
       @about-function{combo-box-set-row-separator-func}
     @end{subsection}
     @begin[GtkComboBoxText]{subsection}
-      A simple, text-only combo box.
       @about-class{combo-box-text}
       @about-function{combo-box-text-new}
       @about-function{combo-box-text-new-with-entry}
@@ -4763,7 +4687,6 @@ GtkCellRenderer         GtkWidget
       @about-function{file-chooser-native-new}
     @end{subsection}
     @begin[GtkFontChooser]{subsection}
-      Interface implemented by widgets displaying fonts.
       @about-symbol{font-chooser-level}
       @about-class{font-chooser}
       @about-generic{font-chooser-font}

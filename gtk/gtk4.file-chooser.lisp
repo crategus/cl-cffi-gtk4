@@ -584,26 +584,27 @@
 (export 'file-chooser-file)
 
 ;;; ----------------------------------------------------------------------------
-;;; file-chooser-namestring
+;;; gtk_file_chooser_namestring
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf file-chooser-namestring) (path chooser)
   (glib:with-g-error (err)
-    (cffi:foreign-funcall "gtk_file_chooser_set_file"
-                          (g:object file-chooser) chooser
-                          g:file-as-namestring (namestring path)
-                          :pointer err
-                          :boolean)
-     path))
+    (let ((file (cffi:convert-to-foreign path 'g:file-as-namestring)))
+      (cffi:foreign-funcall "gtk_file_chooser_set_file"
+                            (g:object file-chooser) chooser
+                            g:object file
+                            :pointer err
+                            :boolean)
+       path)))
 
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
     g:file-as-namestring
  #+liber-documentation
- "@version{2024-5-22}
+ "@version{2024-10-12}
   @syntax{(gtk:file-chooser-namestring chooser) => namestring}
   @syntax{(setf (gtk:file-chooser-namestring chooser) namestring)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[namestring]{a namestring for the file}
+  @argument[namestring]{a pathname or a namestring for the file}
   @begin{short}
     The @fun{gtk:file-chooser-namestring} function gets the namestring for the
     currently selected file in the file selector.
@@ -620,7 +621,7 @@
    This function corresponds to the @fun{gtk:file-chooser-file} function, but
    has a Lisp namestring as an argument for the file. The type conversion
    between a @class{g:file} object and a namestring is automatically done with
-   the @type{g:file-as-namestring} type.
+   the @type{g:file-as-namestring} type specifier.
   @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
@@ -667,24 +668,26 @@
 ;;; gtk_file_chooser_set_current_folder
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf file-chooser-current-folder) (namestring chooser)
+(defun (setf file-chooser-current-folder) (path chooser)
   (glib:with-g-error (err)
-    (cffi:foreign-funcall "gtk_file_chooser_set_current_folder"
-                          (g:object file-chooser) chooser
-                          g:file-as-namestring (namestring namestring)
-                          :pointer err
-                          :boolean)
-    namestring))
+    (let ((file (cffi:convert-to-foreign (namestring path)
+                                         'g:file-as-namestring)))
+      (cffi:foreign-funcall "gtk_file_chooser_set_current_folder"
+                            (g:object file-chooser) chooser
+                            g:object file
+                            :pointer err
+                            :boolean)
+      path)))
 
 (cffi:defcfun ("gtk_file_chooser_get_current_folder"
                file-chooser-current-folder) g:file-as-namestring
  #+liber-documentation
- "@version{2024-5-20}
+ "@version{2024-10-12}
   @syntax{(gtk:file-chooser-current-folder chooser) => namestring}
   @syntax{(setf (gtk:file-chooser-current-folder chooser) namestring)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[namestring]{a namestring with the full path of the new current
-    folder}
+  @argument[path]{a pathname or namestring with the full path of the new
+    current folder}
   @begin{short}
     The @fun{gtk:file-chooser-current-folder} function gets the current folder
     of the file chooser as a local filename.

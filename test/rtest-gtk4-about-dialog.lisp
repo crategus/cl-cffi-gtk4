@@ -138,22 +138,22 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 (test gtk-about-dialog-activate-link-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate-link"
-                                                "GtkAboutDialog"))))
+  (let* ((name "activate-link")
+         (gtype (g:gtype "GtkAboutDialog"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "activate-link" (g:signal-query-signal-name query)))
-    (is (string= "GtkAboutDialog"
-                 (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
     (is (equal '("gchararray")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-about-dialog-properties
   (let ((dialog (make-instance 'gtk:about-dialog)))
+    (is (= 2 (g:object-ref-count dialog)))
     (is-false (gtk:about-dialog-artists dialog))
     (is-false (gtk:about-dialog-authors dialog))
     (is-false (gtk:about-dialog-comments dialog))
@@ -169,16 +169,22 @@
     (is-false (gtk:about-dialog-version dialog))
     (is-false (gtk:about-dialog-website dialog))
     (is-false (gtk:about-dialog-website-label dialog))
-    (is-false (gtk:about-dialog-wrap-license dialog))))
+    (is-false (gtk:about-dialog-wrap-license dialog))
+    (is-false (gtk:window-destroy dialog))
+    (is (= 1 (g:object-ref-count dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_about_dialog_new
 
 (test gtk-about-dialog-new
-  (is (typep (gtk:about-dialog-new) 'gtk:about-dialog)))
+  (let (dialog)
+    (is (typep (setf dialog (gtk:about-dialog-new)) 'gtk:about-dialog))
+    (is (= 2 (g:object-ref-count dialog)))
+    (is-false (gtk:window-destroy dialog))
+    (is (= 1 (g:object-ref-count dialog)))))
 
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2024-9-20
+;;; 2024-10-9

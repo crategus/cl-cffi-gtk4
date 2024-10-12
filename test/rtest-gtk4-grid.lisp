@@ -38,20 +38,20 @@
                (gtk:widget-class-css-name "GtkGrid")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGrid" GTK:GRID
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                        "GtkOrientable")
-                       :TYPE-INITIALIZER "gtk_grid_get_type")
-                      ((BASELINE-ROW GRID-BASELINE-ROW "baseline-row" "gint" T T)
-                       (COLUMN-HOMOGENEOUS GRID-COLUMN-HOMOGENEOUS
-                        "column-homogeneous" "gboolean" T T)
-                       (COLUMN-SPACING GRID-COLUMN-SPACING
-                        "column-spacing" "gint" T T)
-                       (ROW-HOMOGENEOUS GRID-ROW-HOMOGENEOUS
-                        "row-homogeneous" "gboolean" T T)
-                       (ROW-SPACING GRID-ROW-SPACING "row-spacing" "gint" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_grid_get_type")
+                       ((BASELINE-ROW GRID-BASELINE-ROW "baseline-row" "gint" T T)
+                        (COLUMN-HOMOGENEOUS GRID-COLUMN-HOMOGENEOUS
+                         "column-homogeneous" "gboolean" T T)
+                        (COLUMN-SPACING GRID-COLUMN-SPACING
+                         "column-spacing" "gint" T T)
+                        (ROW-HOMOGENEOUS GRID-ROW-HOMOGENEOUS
+                         "row-homogeneous" "gboolean" T T)
+                        (ROW-SPACING GRID-ROW-SPACING "row-spacing" "gint" T T)))
              (gobject:get-gtype-definition "GtkGrid"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -112,7 +112,9 @@
                                        3 4))
     (is (equal '(0 4 3 4)
                (multiple-value-list
-                 (gtk:grid-query-child grid button))))))
+                 (gtk:grid-query-child grid button))))
+    (is-false (gtk:grid-remove grid (gtk:grid-child-at grid 0 0)))
+    (is-false (gtk:grid-remove grid button))))
 
 (test gtk-grid-attach-next-to.2
   (let ((grid (gtk:grid-new))
@@ -126,7 +128,9 @@
                                        3 4))
     (is (equal '(3 0 3 4)
                (multiple-value-list
-                 (gtk:grid-query-child grid button))))))
+                 (gtk:grid-query-child grid button))))
+    (is-false (gtk:grid-remove grid (gtk:grid-child-at grid 0 0)))
+    (is-false (gtk:grid-remove grid button))))
 
 ;;;     gtk_grid_insert_row
 ;;;     gtk_grid_insert_column
@@ -172,7 +176,9 @@
                  (gtk:grid-query-child grid button1))))
     (is (equal '(2 2 4 4)
                (multiple-value-list
-                 (gtk:grid-query-child grid button2))))))
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-remove grid button1))
+    (is-false (gtk:grid-remove grid button2))))
 
 ;;;     gtk_grid_insert_next_to
 
@@ -201,7 +207,9 @@
                  (gtk:grid-query-child grid button1))))
     (is (equal '(3 3 4 4)
                (multiple-value-list
-                 (gtk:grid-query-child grid button2))))))
+                 (gtk:grid-query-child grid button2))))
+    (is-false (gtk:grid-remove grid button1))
+    (is-false (gtk:grid-remove grid button2))))
 
 ;;;     gtk_grid_get_row_baseline_position
 ;;;     gtk_grid_set_row_baseline_position
@@ -214,6 +222,8 @@
     (gtk:grid-attach grid button2 2 2 4 4)
     (is (eq :right (gtk:grid-row-baseline-position grid 0)))
     (is (eq :left (setf (gtk:grid-row-baseline-position grid 0) :left)))
-    (is (eq :left (gtk:grid-row-baseline-position grid 0)))))
+    (is (eq :left (gtk:grid-row-baseline-position grid 0)))
+    (is-false (gtk:grid-remove grid button1))
+    (is-false (gtk:grid-remove grid button2))))
 
-;;; 2024-9-14
+;;; 2024-10-8

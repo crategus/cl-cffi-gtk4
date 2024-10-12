@@ -2,7 +2,7 @@
 ;;; gtk4.list-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -160,7 +160,7 @@
 ;;; GtkListBoxRow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListBoxRow" list-box-row
+(gobject:define-gobject "GtkListBoxRow" list-box-row
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -317,7 +317,7 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_changed" list-box-row-changed) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
     Marks the list box row as changed, causing any state that depends on this
@@ -350,7 +350,7 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_is_selected" list-box-row-is-selected) :boolean
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @return{@em{True} if @arg{row} is selected.}
   @begin{short}
@@ -376,7 +376,7 @@ lambda (row)    :action
 (cffi:defcfun ("gtk_list_box_row_get_header" list-box-row-header)
     (g:object widget)
  #+liber-documentation
- "@version{#2024-4-15}
+ "@version{2024-10-11}
   @syntax{(gtk:list-box-row-header row) => header}
   @syntax{(setf (gtk:list-box-row-header row) header)}
   @argument[row]{a @class{gtk:list-box-row} widget}
@@ -423,7 +423,7 @@ lambda (row)    :action
 ;;; GtkListBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListBox" list-box
+(gobject:define-gobject "GtkListBox" list-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -709,7 +709,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_prepend" list-box-prepend) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @begin{short}
@@ -731,7 +731,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_append" list-box-append) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to append}
   @begin{short}
@@ -753,7 +753,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_insert" list-box-insert) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[position]{an integer with the position to insert the child widget
@@ -782,7 +782,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_remove" list-box-remove) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @short{Removes a child widget from the list box.}
@@ -800,7 +800,7 @@ lambda (listbox)    :action
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_box_remove_all" list-box-remove-all) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @short{Removes all child widgets from the list box.}
 
@@ -817,7 +817,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_select_row" list-box-select-row) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @short{Make the list box row the currently selected row.}
@@ -834,7 +834,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_unselect_row" list-box-unselect-row) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
@@ -858,7 +858,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_select_all" list-box-select-all) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Select all children of the list box, if the selection mode allows it.
@@ -879,7 +879,7 @@ lambda (listbox)    :action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_box_unselect_all" list-box-unselect-all) :void
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Unselect all children of the list box, if the selection mode allows it.
@@ -901,7 +901,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_get_selected_row" list-box-selected-row)
     (g:object list-box-row)
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @return{The selected @class{gtk:list-box-row} widget.}
   @begin{short}
@@ -934,7 +934,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-foreach-func)
       "Callback"
       (liber:symbol-documentation 'list-box-foreach-func)
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @syntax{lambda (listbox row)}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
@@ -960,7 +960,7 @@ lambda (listbox)    :action
 
 (defun list-box-selected-foreach (listbox func)
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[func]{a @symbol{gtk:list-box-foreach-func} callback function}
   @begin{short}
@@ -983,7 +983,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_selected_rows" list-box-selected-rows)
     (g:list-t (g:object list-box-row))
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @return{The list containing the @class{gtk:list-box-row} widget for each
     selected row.}
@@ -1009,7 +1009,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
     (g:object adjustment)
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @syntax{(gtk:list-box-adjustment listbox) => adjustment}
   @syntax{(setf (gtk:list-box-adjustment listbox) adjustment)}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1037,7 +1037,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_set_placeholder" list-box-set-placeholder) :void
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[placeholder]{a @class{gtk:widget} object}
   @begin{short}
@@ -1058,7 +1058,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_row_at_index" list-box-row-at-index)
     (g:object list-box-row)
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{2024-10-11}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[index]{an integer with the index of the row}
   @return{The @class{gtk:list-box-row} widget at @arg{index}.}

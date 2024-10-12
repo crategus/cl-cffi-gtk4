@@ -27,8 +27,8 @@
              (glib-test:list-signals "GtkRoot")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkRoot" GTK:ROOT
-                      (:EXPORT T
-                       :TYPE-INITIALIZER "gtk_root_get_type"))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_root_get_type"))
              (gobject:get-gtype-definition "GtkRoot"))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -39,7 +39,8 @@
   (let ((window (make-instance 'gtk:window)))
     (is (typep (gtk:root-display window) 'gdk:display))
     ;; Root display is the default display
-    (is (eq (gdk:display-default) (gtk:root-display window)))))
+    (is (eq (gdk:display-default) (gtk:root-display window)))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_root_get_focus
 ;;;     gtk_root_set_focus
@@ -52,11 +53,16 @@
     (is (eq window (gtk:widget-root button)))
     ;; No focus widget
     (is-false (gtk:root-focus window))
-    ;; Set focus on BUTTON
+    ;; Set BUTTON as focus widget
     (is (eq button (setf (gtk:root-focus window) button)))
     (is (eq button (gtk:root-focus window)))
-    ;; Unset focus
+    ;; Check focus widget
+    (is-true (gtk:widget-is-focus button))
+    ;; Unset focus widget
     (is-false (setf (gtk:root-focus window) nil))
-    (is-false (gtk:root-focus window))))
+    (is-false (gtk:root-focus window))
+    ;; Remove child and destroy window
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))))
 
-;;; 2024-4-10
+;;; 2024-10-8

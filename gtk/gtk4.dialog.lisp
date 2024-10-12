@@ -2,7 +2,7 @@
 ;;; gtk4.dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,7 +92,7 @@
 ;;; GtkDialogFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkDialogFlags" dialog-flags
+(gobject:define-gflags "GtkDialogFlags" dialog-flags
   (:export t
    :type-initializer "gtk_dialog_flags_get_type")
   (:modal               #.(ash 1 0))
@@ -166,7 +166,7 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (setf (glib:symbol-for-gtype "GtkDialog") 'dialog))
 
-(gobject:define-g-object-class "GtkDialog" dialog
+(gobject:define-gobject "GtkDialog" dialog
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"

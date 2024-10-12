@@ -88,8 +88,16 @@
 
 (test gtk-pad-controller-new
   (let ((group (g:simple-action-group-new)))
-  (is (typep group 'g:simple-action-group))
-  (is (typep (gtk:pad-controller-new group nil) 'gtk:pad-controller))))
+    (is (typep group 'g:simple-action-group))
+    ;; Constructor
+    (is (typep (gtk:pad-controller-new group nil) 'gtk:pad-controller))
+    (is (= 1 (g:object-ref-count (gtk:pad-controller-new group nil))))
+    ;; Make instance
+    (is (typep (make-instance 'gtk:pad-controller) 'gtk:pad-controller))
+    (is (= 1 (g:object-ref-count (make-instance 'gtk:pad-controller))))
+    ;; New object
+    (is (typep (g:object-new "GtkPadController") 'gtk:pad-controller))
+    (is (= 1 (g:object-ref-count (g:object-new "GtkPadController"))))))
 
 ;;;     gtk_pad_controller_set_action_entries
 

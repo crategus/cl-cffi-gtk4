@@ -2,7 +2,7 @@
 ;;; gtk4.center-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -81,7 +81,7 @@
 ;;; GtkCenterBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCenterBox" center-box
+(gobject:define-gobject "GtkCenterBox" center-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -111,7 +111,7 @@
 
 #+liber-documentation
 (setf (documentation 'center-box 'type)
- "@version{2024-7-30}
+ "@version{2024-10-1}
   @begin{short}
     The @class{gtk:center-box} widget arranges three children in a horizontal or
     vertical arrangement, keeping the middle child centered as well as possible.
@@ -127,16 +127,16 @@
   @begin[GtkCenterBox as GtkBuildable]{dictionary}
     The @class{gtk:center-box} implementation of the @class{gtk:buildable}
     interface supports placing children in the 3 positions by specifying
-    @code{start}, @code{center} or @code{end} as the @code{type} attribute of a
-    @code{<child>} element.
+    @code{\"start\"}, @code{\"center\"} or @code{\"end\"} as the @code{\"type\"}
+    attribute of a @code{<child>} element.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:center-box} implementation uses a single CSS node with the
-    name @code{box}. The first child of the @class{gtk:center-box} widet will be
-    allocated depending on the text direction, that is, in left-to-right layouts
-    it will be allocated on the left and in right-to-left layouts on the right.
-    In vertical orientation, the nodes of the children are arranged from top to
-    bottom.
+    name @code{box}. The first child of the @class{gtk:center-box} widget will
+    be allocated depending on the text direction, that is, in left-to-right
+    layouts it will be allocated on the left and in right-to-left layouts on the
+    right. In vertical orientation, the nodes of the children are arranged from
+    top to bottom.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:center-box} implementation used the
@@ -170,7 +170,7 @@
 (setf (liber:alias-for-function 'center-box-baseline-position)
       "Accessor"
       (documentation 'center-box-baseline-position 'function)
- "@version{2023-5-2}
+ "@version{2024-10-1}
   @syntax{(gtk:center-box-baseline-position object) => position}
   @syntax{(setf (gtk:center-box-baseline-position object) position)}
   @argument[object]{a @class{gtk:center-box} widget}
@@ -202,7 +202,7 @@
 (setf (liber:alias-for-function 'center-box-center-widget)
       "Accessor"
       (documentation 'center-box-center-widget 'function)
- "@version{2024-4-15}
+ "@version{2024-10-1}
   @syntax{(gtk:center-box-center-widget object) => child}
   @syntax{(setf (gtk:center-box-center-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
@@ -231,7 +231,7 @@
 (setf (liber:alias-for-function 'center-box-end-widget)
       "Accessor"
       (documentation 'center-box-end-widget 'function)
- "@version{2024-4-15}
+ "@version{2024-10-1}
   @syntax{(gtk:center-box-end-widget object) => child}
   @syntax{(setf (gtk:center-box-end-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
@@ -264,7 +264,7 @@
 (setf (liber:alias-for-function 'center-box-shrink-center-last)
       "Accessor"
       (documentation 'center-box-shrink-center-last 'function)
- "@version{2024-4-15}
+ "@version{2024-10-1}
   @syntax{(gtk:center-box-shrink-center-last object) => setting}
   @syntax{(setf (gtk:center-box-shrink-center-last object) setting)}
   @argument[object]{a @class{gtk:center-box} widget}
@@ -300,7 +300,7 @@
 (setf (liber:alias-for-function 'center-box-start-widget)
       "Accessor"
       (documentation 'center-box-start-widget 'function)
- "@version{2024-4-15}
+ "@version{2024-10-1}
   @syntax{(gtk:center-box-start-widget object) => child}
   @syntax{(setf (gtk:center-box-start-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
@@ -321,7 +321,7 @@
 
 (defun center-box-new ()
  #+liber-documentation
- "@version{2022-2-2}
+ "@version{2024-10-1}
   @return{The new @class{gtk:center-box} widget.}
   @short{Creates a new @class{gtk:center-box} widget.}
   @see-class{gtk:center-box}"

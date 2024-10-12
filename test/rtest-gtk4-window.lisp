@@ -127,75 +127,129 @@
     (is-false (gtk:window-suspended window))
     (is-false (gtk:window-title window))
     (is-false (gtk:window-titlebar window))
-    (is-false (gtk:window-transient-for window))))
+    (is-false (gtk:window-transient-for window))
+    (is-false (gtk:window-destroy window))))
+
+;;;     gtk:window-focus-widget
+
+;; TODO: Does not work as expected. Improve the test.
+
+#+nil
+(test gtk-window-focus-widget
+  (let* ((button1 (gtk:button-new))
+         (button2 (make-instance 'gtk:button :focusable t))
+         (window (make-instance 'gtk:window :child button1
+                                            :focus-widget button2)))
+
+    (is (= 2 (g:object-ref-count button1)))
+    (is (= 2 (g:object-ref-count button2)))
+
+    (is-false (gtk:window-focus-widget window))
+
+;    (is (eq button2 (setf (gtk:window-focus-widget window) button2)))
+;    (is (eq button2 (gtk:window-focus-widget window)))
+
+    (is (= 1 (g:object-ref-count button2)))
+
+    ;; Remove BUTTON from the window and destroy WINDOW
+    (is-false (setf (gtk:window-child window) nil))
+;    (is-false (setf (gtk:window-focus-widget window) nil))
+    (is-false (gtk:window-destroy window))
+    (is (= 1 (g:object-ref-count window)))
+    (is (= 1 (g:object-ref-count button1)))
+    (is (= 1 (g:object-ref-count button2)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
-(test gtk-window-signals
-  ;; Query info for "activate-default"
-  (let ((query (g:signal-query (g:signal-lookup "activate-default"
-                                                "GtkWindow"))))
-    (is (string= "activate-default" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
+;;;     activate-default
+
+(test gtk-window-activate-default-signal
+  (let* ((name "activate-default")
+         (gtype (g:gtype "GtkWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST :ACTION)
                (g:signal-query-signal-flags query)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query)))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-  ;; Query info for "activate-focus"
-  (let ((query (g:signal-query (g:signal-lookup "activate-focus" "GtkWindow"))))
+;;;     activate-focus
+
+(test gtk-window-activate-focus-signal
+  (let* ((name "activate-focus")
+         (gtype (g:gtype "GtkWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "activate-focus" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST :ACTION)
                (g:signal-query-signal-flags query)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query)))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-  ;; Query info for "enable-debugging"
-  (let ((query (g:signal-query (g:signal-lookup "enable-debugging"
-                                                "GtkWindow"))))
-    (is (string= "enable-debugging" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST :ACTION)
-               (g:signal-query-signal-flags query)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("gboolean")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query)))
+;;;     close-request
 
-  ;; Query info for "close-request"
-  (let ((query (g:signal-query (g:signal-lookup "close-request" "GtkWindow"))))
+(test gtk-window-close-request-signal
+  (let* ((name "close-request")
+         (gtype (g:gtype "GtkWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "close-request" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (g:signal-query-signal-flags query)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     enable-debugging
+
+(test gtk-window-enable-debugging-signal
+  (let* ((name "enable-debugging")
+         (gtype (g:gtype "GtkWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= "enable-debugging" (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    (is (equal '(:RUN-LAST :ACTION)
+               (g:signal-query-signal-flags query)))
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    (is (equal '("gboolean")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     keys-changed
 
 (test gtk-window-keys-changed-signal
-  ;; Query info for "keys-changed"
-  (let ((query (g:signal-query (g:signal-lookup "keys-changed" "GtkWindow"))))
+  (let* ((name "keys-changed")
+         (gtype (g:gtype "GtkWindow"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
     (is (string= "keys-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-FIRST :DEPRECATED)
                (g:signal-query-signal-flags query)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_window_new
 
 (test gtk-window-new
-  (is (typep (gtk:window-new) 'gtk:window)))
+  (let ((window nil))
+     ;; Create with constructor function
+    (is (typep (setf window (gtk:window-new)) 'gtk:window))
+    (is (= 2 (g:object-ref-count window)))
+    (is-false (gtk:window-destroy window))
+    ;; Create with make instance
+    (is (typep (setf window (make-instance 'gtk:window)) 'gtk:window))
+    (is (= 2 (g:object-ref-count window)))
+    (is-false (gtk:window-destroy window))
+    ;; Create with object new
+    (is (typep (setf window (g:object-new "GtkWindow")) 'gtk:window))
+    (is (= 2 (g:object-ref-count window)))
+    (is-false (gtk:window-destroy window))
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;;     gtk_window_close
 ;;;     gtk_window_destroy
@@ -209,7 +263,7 @@
     ;; Connect signal "activate"
     (g:signal-connect application "activate"
         (lambda (app)
-          (g:application-hold app)
+;          (g:application-hold app)
           (when *verbose-gtk-window*
             (format t "~&Signal handler ACTIVATE~%"))
           (let ((window (gtk:application-window-new app)))
@@ -229,9 +283,9 @@
             (is-true (g:signal-emit window "close-request"))
             (when *verbose-gtk-window*
               (format t "~&Back from signal handler~%"))
+;            (g:application-release app)
             ;; Destroy the window, this shuts down the application
-            (is-false (gtk:window-destroy window)))
-          (g:application-release app)))
+            (is-false (gtk:window-destroy window)))))
     ;; Run the application
     (g:application-run application nil)))
 
@@ -271,6 +325,17 @@
 
 ;;;     gtk_window_fullscreen
 ;;;     gtk_window_fullscreen_on_monitor
+;;;     gtk_window_is_fullscreen
+;;;     gtk_window_unfullscreen
+
+(test gtk-window-fullscreen
+  (let ((window (gtk:window-new)))
+    (is-false (gtk:window-is-fullscreen window))
+    (is-false (gtk:window-fullscreen window))
+    (is-true (gtk:window-is-fullscreen window))
+    (is-false (gtk:window-unfullscreen window))
+    (is-false (gtk:window-is-fullscreen window))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_window_get_default_size
 ;;;     gtk_window_set_default_size
@@ -283,30 +348,86 @@
                (multiple-value-list (setf (gtk:window-default-size window)
                                           '(100 200)))))
     (is (equal '(100 200)
-               (multiple-value-list (gtk:window-default-size window))))))
+               (multiple-value-list (gtk:window-default-size window))))
+    (is-false (gtk:window-destroy window))))
 
-;;;     gtk_window_get_focus
-;;;     gtk_window_set_focus
+;;;     gtk_window_get_focus                                not exported
+;;;     gtk_window_set_focus                                not exported
+
+;; Implemented has the gtk:window-focus-widget accessor
+
 ;;;     gtk_window_get_group
 ;;;     gtk_window_has_group
-;;;     gtk_window_is_active
-;;;     gtk_window_is_fullscreen
-;;;     gtk_window_is_maximized
+
+(test gtk-window-has-group
+  (let ((gtk-init:*gtk-warn-deprecated* nil)
+        (window (make-instance 'gtk:window))
+        (group (gtk:window-group-new)))
+    (is (= 2 (g:object-ref-count window)))
+    ;; Not in a group
+    (is-false (gtk:window-has-group window))
+    ;; But in the default group
+    (is (typep (gtk:window-group window) 'gtk:window-group))
+    (is (member window
+                (gtk:window-group-list-windows (gtk:window-group window))
+                :test #'eq))
+    ;; Add window to a group
+    (is-false (gtk:window-group-add-window group window))
+    (is (= 2 (g:object-ref-count window)))
+    (is-true (gtk:window-has-group window))
+    (is (eq group (gtk:window-group window)))
+    (is (member window (gtk:window-group-list-windows group) :test #'eq))
+    (is-false (gtk:window-group-remove-window group window))
+    (is-false (gtk:window-destroy window))))
+
 ;;;     gtk_window_maximize
-;;;     gtk_window_minimize
-;;;     gtk_window_present
-;;;     gtk_window_present_with_time
-;;;     gtk_window_unfullscreen
 ;;;     gtk_window_unmaximize
+;;;     gtk_window_is_maximized
+
+(test gtk-window-maximize
+  (let ((window (gtk:window-new)))
+    (is-false (gtk:window-is-maximized window))
+    (is-false (gtk:window-maximize window))
+    (is-true (gtk:window-is-maximized window))
+    (is-false (gtk:window-destroy window))))
+
+;;;     gtk_window_minimize
 ;;;     gtk_window_unminimize
+
+(test gtk-window-minimize
+  (let ((window (gtk:window-new)))
+    (is-false (gtk:window-minimize window))
+    (is-false (gtk:window-unminimize window))
+    (is-false (gtk:window-destroy window))))
+
+;;;     gtk_window_present
+
+(test gtk-window-present
+  (let ((window (make-instance 'gtk:window)))
+    (is-false (gtk:window-present window))
+    (is-false (gtk:window-destroy window))))
+
+;;;     gtk_window_present_with_time
+
+(test gtk-window-present-with-time
+  (let ((gtk-init:*gtk-warn-deprecated* nil)
+        (window (make-instance 'gtk:window)))
+    (is-false (gtk:window-present-with-time window gdk:+current-time+))
+    (is-false (gtk:window-destroy window))))
+
 ;;;     gtk_window_get_default_icon_name
 ;;;     gtk_window_set_default_icon_name
 
+(test gtk-window-default-icon-name
+  (is-false (gtk:window-default-icon-name))
+  (is (string= "applications-utilities"
+               (setf (gtk:window-default-icon-name) "applications-utilities")))
+  (is (string= "applications-utilities"
+               (gtk:window-default-icon-name)))
+  (is-false (setf (gtk:window-default-icon-name) nil)))
+
 ;;;     gtk_window_get_toplevels
 
-;; TODO: This test generates warnings for deprecated windows.
-
-#+nil
 (test gtk-window-toplevels
   ; Destroy already existing windows
   (dolist (window (gtk:window-list-toplevels))
@@ -319,15 +440,22 @@
     (is (= 3 (g:list-model-n-items (gtk:window-toplevels))))
     (is (eq window1 (g:list-model-object (gtk:window-toplevels) 0)))
     (is (eq window2 (g:list-model-object (gtk:window-toplevels) 1)))
-    (is (eq window3 (g:list-model-object (gtk:window-toplevels) 2)))))
+    (is (eq window3 (g:list-model-object (gtk:window-toplevels) 2)))
+
+
+    (is-false (gtk:window-destroy window1))
+    (is-false (gtk:window-destroy window2))
+    (is-false (gtk:window-destroy window3))
+
+    (is-false (gtk:window-list-toplevels))
+    ))
 
 ;;;     gtk_window_list_toplevels
 
 ;; TODO: This test generates warnings for deprecated windows.
 
-#+nil
 (test gtk-window-list-toplevels
-  ; Destroy already existing windows
+  ;; Destroy already existing windows
   (dolist (window (gtk:window-list-toplevels))
     (gtk:window-destroy window))
   (is-false (gtk:window-list-toplevels))
@@ -337,10 +465,20 @@
     (is (= 3 (length (gtk:window-list-toplevels))))
     (is (eq window1 (third (gtk:window-list-toplevels))))
     (is (eq window2 (second (gtk:window-list-toplevels))))
-    (is (eq window3 (first (gtk:window-list-toplevels))))))
+    (is (eq window3 (first (gtk:window-list-toplevels))))
+
+    (is-false (gtk:window-destroy window1))
+    (is-false (gtk:window-destroy window2))
+    (is-false (gtk:window-destroy window3))))
 
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
+
 ;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; 2024-9-20
+(test gtk-window-is-suspended
+  (let ((window (gtk:window-new)))
+    (is-false (gtk:window-is-suspended window))
+    (is-false (gtk:window-destroy window))))
+
+;;; 2024-10-8

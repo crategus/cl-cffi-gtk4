@@ -2,7 +2,7 @@
 ;;; gtk4.string-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkStringFilterMatchMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkStringFilterMatchMode" string-filter-match-mode
+(gobject:define-genum "GtkStringFilterMatchMode" string-filter-match-mode
   (:export t
    :type-initializer "gtk_string_filter_match_mode_get_type")
   (:exact 0)
@@ -79,9 +79,9 @@
 (setf (liber:alias-for-symbol 'string-filter-match-mode)
       "GEnum"
       (liber:symbol-documentation 'string-filter-match-mode)
- "@version{2023-8-17}
+ "@version{2024-9-28}
   @begin{declaration}
-(gobject:define-g-enum \"GtkStringFilterMatchMode\" string-filter-match-mode
+(gobject:define-genum \"GtkStringFilterMatchMode\" string-filter-match-mode
   (:export t
    :type-initializer \"gtk_string_filter_match_mode_get_type\")
   (:exact 0)
@@ -105,7 +105,7 @@
 ;;; GtkStringFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStringFilter" string-filter
+(gobject:define-gobject "GtkStringFilter" string-filter
   (:superclass filter
    :export t
    :interfaces ()
@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-filter 'type)
- "@version{2023-9-28}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:string-filter} object determines whether to include items by
     looking at strings and comparing them to a fixed search term.
@@ -156,7 +156,7 @@
 (setf (liber:alias-for-function 'string-filter-expression)
       "Accessor"
       (documentation 'string-filter-expression 'function)
- "@version{2023-9-28}
+ "@version{2024-9-28}
   @syntax{(gtk:string-filter-expression object) => expression}
   @syntax{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -168,7 +168,7 @@
   The @fun{gtk:string-filter-expression} function gets the expression that the
   string filter uses to obtain strings from items. The
   @setf{gtk:string-filter-expression} function sets the expression. The
-  expression must have a \"gchararray\" value type.
+  expression must have a @code{\"gchararray\"} value type.
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}")
 
@@ -177,14 +177,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ignore-case" 'string-filter) t)
  "The @code{ignore-case} property of type @code{:boolean} (Read / Write) @br{}
-  If matching is case sensitive. @br{}
+  Whether matching is case sensitive. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'string-filter-ignore-case)
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
- "@version{2023-9-28}
+ "@version{2024-9-28}
   @syntax{(gtk:string-filter-ignore-case object) => ignore}
   @syntax{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -204,14 +204,14 @@
 (setf (documentation (liber:slot-documentation "match-mode" 'string-filter) t)
  "The @code{match-mode} property of type @symbol{gtk:string-filter-match-mode}
   (Read / Write) @br{}
-  If exact matches are necessary or if substrings are allowed. @br{}
+  Whether exact matches are necessary or if substrings are allowed. @br{}
   Default value: @code{:substring}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{2023-9-28}
+ "@version{2024-9-28}
   @syntax{(gtk:string-filter-match-mode object) => mode}
   @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -238,7 +238,7 @@
 (setf (liber:alias-for-function 'string-filter-search)
       "Accessor"
       (documentation 'string-filter-search 'function)
- "@version{2023-9-28}
+ "@version{2024-9-28}
   @syntax{(gtk:string-filter-search object) => search}
   @syntax{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -257,8 +257,8 @@
 
 (declaim (inline string-filter-new))
 
-(defun string-filter-new (expression)
- "@version{2023-9-28}
+(defun string-filter-new (&optional expression)
+ "@version{2024-9-28}
   @argument[expression]{a @class{gtk:expression} instance with the expression
     to evaluate or @code{nil} for none}
   @return{The new @class{gtk:string-filter} object.}
@@ -270,7 +270,7 @@
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}"
   (make-instance 'string-filter
-                 :expression expression))
+                 :expression (or expression (cffi:null-pointer))))
 
 (export 'string-filter-new)
 

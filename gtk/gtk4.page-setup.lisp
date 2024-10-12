@@ -147,7 +147,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_page_setup_new_from_file" %page-setup-new-from-file)
-    (g:object page-setup)
+    (g:object page-setup :already-referenced)
   (filename :string)
   (err :pointer))
 
@@ -175,7 +175,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_page_setup_new_from_key_file" %page-setup-new-from-key-file)
-    (g:object page-setup)
+    (g:object page-setup :already-referenced)
   (keyfile (:pointer (:struct g:key-file)))
   (group :string)
   (err :pointer))
@@ -207,7 +207,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_page_setup_new_from_gvariant" page-setup-new-from-gvariant)
-    (g:object page-setup)
+    (g:object page-setup :already-referenced)
  #+liber-documentation
  "@version{2024-4-30}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
@@ -227,7 +227,8 @@
 ;;; gtk_page_setup_copy
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_page_setup_copy" page-setup-copy) (g:object page-setup)
+(cffi:defcfun ("gtk_page_setup_copy" page-setup-copy)
+    (g:object page-setup :already-referenced)
  #+liber-documentation
  "@version{2024-4-30}
   @argument[setup]{a @class{gtk:page-setup} object to copy}

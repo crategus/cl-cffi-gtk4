@@ -2,7 +2,7 @@
 ;;; gtk4.box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -86,7 +86,7 @@
 ;;; GtkBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkBox" box
+(gobject:define-gobject "GtkBox" box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -281,10 +281,11 @@
 
 (declaim (inline box-new))
 
-(defun box-new (orientation &optional (spacing 0))
+(defun box-new (&optional (orientation :horizontal) (spacing 0))
  #+liber-documentation
- "@version{2023-11-26}
-  @argument[orientation]{a @symbol{gtk:orientation} value}
+ "@version{2024-10-3}
+  @argument[orientation]{an optional @symbol{gtk:orientation} value,
+    the default is @code{:horizontal}}
   @argument[spacing]{an optional integer with the number of pixels to place by
     default between children}
   @return{The new @class{gtk:box} widget.}

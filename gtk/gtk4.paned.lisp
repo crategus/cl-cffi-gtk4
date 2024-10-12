@@ -621,11 +621,11 @@ lambda (widget)    :action
 
 (declaim (inline paned-new))
 
-(defun paned-new (orientation)
+(defun paned-new (&optional (orientation :horizontal))
  #+liber-documentation
- "@version{2024-4-22}
+ "@version{2024-10-3}
   @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
-    of the paned widget}
+    of the paned widget, or the optional @code{:horizontal} value}
   @return{The new @class{gtk:paned} widget.}
   @short{Creates a new paned widget.}
   @see-class{gtk:paned}

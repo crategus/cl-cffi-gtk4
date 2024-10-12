@@ -53,7 +53,7 @@
 ;;; GtkCustomSorter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCustomSorter" custom-sorter
+(gobject:define-gobject "GtkCustomSorter" custom-sorter
   (:superclass sorter
    :export t
    :interfaces ()
@@ -75,7 +75,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_new" %custom-sorter-new)
-    (g:object custom-sorter)
+    (g:object custom-sorter :already-referenced)
   (func :pointer)
   (data :pointer)
   (notify :pointer))

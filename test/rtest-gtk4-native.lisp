@@ -36,29 +36,27 @@
 ;;;     gtk_native_get_for_surface
 ;;;     gtk_native_get_surface
 
-;; TODO: We get a warning, but the test works
-;; Gsk-Message: Failed to realize renderer of type 'GskGLRenderer' for surface
-;; 'GdkWaylandToplevel': Es wird versucht EGL zu verwenden, aber X11 GLX ist
-;; bereits in Verwendung
-
-#+nil
 (test gtk-native-surface/for-surface
-  (let ((window (make-instance 'gtk:window))
-        (surface nil))
+  (let* ((button (make-instance 'gtk:button))
+         (window (make-instance 'gtk:window
+                                :child button))
+         (surface nil))
     ;; Realize WINDOW to create GDK resources
     (is-false (gtk:widget-realize window))
     ;; Native widget for WINDOW is WINDOW itself
     (is (eq window (gtk:widget-native window)))
+    ;; Native widget for BUTTON is WINDOW
+    (is (eq window (gtk:widget-native button)))
     ;; Get GDK surface
     (is (typep (setf surface (gtk:native-surface window)) 'gdk:surface))
     ;; Get WINDOW from GDK surface
     (is (eq window (gtk:native-for-surface surface)))
-    ;; Unrealize WINDOW
-    (is-false (gtk:widget-unrealize window))))
+    ;; Remove button from window and destroy window
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_native_get_renderer
 
-#+nil
 (test gtk-native-renderer
   (let ((window (make-instance 'gtk:window))
         (renderer nil))
@@ -68,11 +66,11 @@
     (is (typep (setf renderer (gtk:native-renderer window)) 'gsk:renderer))
     ;; RENDERER has surface eq to surface of WINDOW
     (is-true (gsk:renderer-realized renderer))
-    (is (eq (gtk:native-surface window) (gsk:renderer-surface renderer)))))
+    (is (eq (gtk:native-surface window) (gsk:renderer-surface renderer)))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_native_get_surface_transform
 
-#+nil
 (test gtk-native-surface-transform
   (let ((window (make-instance 'gtk:window)))
     (is (equal '(0d0 0d0)
@@ -80,7 +78,7 @@
     (is-false (gtk:widget-realize window))
     (is (equal '(14d0 12d0)
                (multiple-value-list (gtk:native-surface-transform window))))
-    (is-false (gtk:widget-unrealize window))))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_native_realize
 ;;;     gtk_native_unrealize
@@ -97,7 +95,6 @@
 #+nil
 (test gtk-native-realize/unrealize
   (let ((window (make-instance 'gtk:window)))
-    (is-false (gtk:native-realize window))
-))
+    (is-false (gtk:native-realize window))))
 
-;;; 2024-7-3
+;;; 2024-10-8

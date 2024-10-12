@@ -2,7 +2,7 @@
 ;;; gtk4.native.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,7 +56,7 @@
 ;;; GtkNative
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkNative" native
+(gobject:define-ginterface "GtkNative" native
   (:superclass g:object
    :export t
    :type-initializer "gtk_native_get_type")
@@ -66,7 +66,7 @@
 (setf (liber:alias-for-class 'native)
       "Interface"
       (documentation 'native 'type)
- "@version{2024-4-10}
+ "@version{2024-9-29}
   @begin{short}
     The @class{gtk:native} interface is the interface implemented by all widgets
     that can provide a @class{gdk:surface} object for widgets to render on.
@@ -94,7 +94,7 @@
 (cffi:defcfun ("gtk_native_get_for_surface" native-for-surface)
     (g:object native)
  #+liber-documentation
- "@version{2023-8-20}
+ "@version{2024-9-29}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The @class{gtk:native} widget that is associated with @arg{surface}.}
   @begin{short}
@@ -112,7 +112,7 @@
 
 (cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
  #+liber-documentation
- "@version{2023-8-20}
+ "@version{2024-9-29}
   @argument[native]{a @class{gtk:native} widget}
   @return{The @class{gdk:surface} object of @arg{native}.}
   @begin{short}
@@ -131,7 +131,7 @@
 (cffi:defcfun ("gtk_native_get_renderer" native-renderer)
     (g:object gsk:renderer)
  #+liber-documentation
- "@version{2023-8-20}
+ "@version{2024-9-29}
   @argument[native]{a @class{gtk:native} widget}
   @return{The @class{gsk:renderer} object of @arg{native}.}
   @begin{short}
@@ -155,7 +155,7 @@
 
 (defun native-surface-transform (native)
  #+liber-documentation
- "@version{2023-8-20}
+ "@version{2024-9-29}
   @syntax{(gtk:native-surface-transform native) => x, y}
   @argument[native]{a @class{gtk:native} widget}
   @begin{return}
@@ -181,7 +181,7 @@
 
 (cffi:defcfun ("gtk_native_realize" native-realize) :void
  #+liber-documentation
- "@version{#2023-8-20}
+ "@version{#2024-9-29}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Realizes the native widget.
@@ -197,7 +197,7 @@
 
 (cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void
  #+liber-documentation
- "@version{#2023-8-20}
+ "@version{#2024-9-29}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Unrealizes the native widget.

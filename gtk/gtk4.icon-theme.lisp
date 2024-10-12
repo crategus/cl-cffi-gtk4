@@ -542,9 +542,9 @@ lambda (theme)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_theme_lookup_icon" icon-theme-lookup-icon)
-    (g:object icon-paintable)
+    (g:object icon-paintable :already-referenced)
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-10-9}
   @argument[theme]{a @class{gtk:icon-theme} object}
   @argument[name]{a string with the name of an icon}
   @argument[fallbacks]{a list of strings with fallback icons}
@@ -589,9 +589,9 @@ lambda (theme)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_theme_lookup_by_gicon" icon-theme-lookup-by-gicon)
-    (g:object icon-paintable)
+    (g:object icon-paintable :already-referenced)
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2024-10-9}
   @argument[theme]{a @class{gtk:icon-theme} object}
   @argument[icon]{a @class{g:icon} object to look up}
   @argument[size]{an integer with the desired icon size}

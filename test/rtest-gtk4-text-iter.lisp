@@ -121,12 +121,11 @@ dann benutzen Sie es immer noch.")
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkTextSearchFlags"
                                      GTK:TEXT-SEARCH-FLAGS
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_text_search_flags_get_type")
-                                     (:VISIBLE-ONLY 1)
-                                     (:TEXT-ONLY 2)
-                                     (:CASE-INSENSITIVE 4))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_text_search_flags_get_type")
+                       (:VISIBLE-ONLY 1)
+                       (:TEXT-ONLY 2)
+                       (:CASE-INSENSITIVE 4))
              (gobject:get-gtype-definition "GtkTextSearchFlags"))))
 
 ;;;   GtkTextIter
@@ -336,14 +335,19 @@ dann benutzen Sie es immer noch.")
                                 :text
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
-         (end (gtk:text-buffer-iter-at-offset buffer 16)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer)
-                             (make-instance 'gtk:text-tag
-                                            :name "bold"
-                                            :weight 700))
+         (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
+         (tag nil))
+    (gtk:text-tag-table-add table
+                            (setf tag
+                                  (make-instance 'gtk:text-tag
+                                                 :name "bold"
+                                                 :weight 700)))
     (gtk:text-buffer-apply-tag buffer "bold" start end)
     (is (eq 'gtk:text-tag
-            (type-of (first (gtk:text-iter-toggled-tags start t)))))))
+            (type-of (first (gtk:text-iter-toggled-tags start t)))))
+    ;; Remove tag from text tag table and text tag table from buffer
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;   gtk_text_iter_get_child_anchor
 
@@ -367,17 +371,20 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "bold"
                              :weight 700)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "bold" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "bold" start end))
 
     (is-true (gtk:text-iter-starts-tag start tag))
     (is-false (gtk:text-iter-ends-tag start tag))
 
     (is-false (gtk:text-iter-starts-tag end tag))
-    (is-true (gtk:text-iter-ends-tag end tag))))
+    (is-true (gtk:text-iter-ends-tag end tag))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_toggles_tag
 
@@ -387,14 +394,17 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "bold"
                              :weight 700)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "bold" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "bold" start end))
 
     (is-true (gtk:text-iter-toggles-tag start tag))
-    (is-true (gtk:text-iter-toggles-tag end tag))))
+    (is-true (gtk:text-iter-toggles-tag end tag))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_has_tag
 
@@ -404,16 +414,19 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "bold"
                              :weight 700)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "bold" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "bold" start end))
 
     (is-true (gtk:text-iter-has-tag start tag))
     (is-false (gtk:text-iter-has-tag end tag))
     (is-true (gtk:text-iter-move end :count -1))
-    (is-true (gtk:text-iter-has-tag end tag))))
+    (is-true (gtk:text-iter-has-tag end tag))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_get_tags
 
@@ -423,14 +436,16 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "bold"
                              :weight 700)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "bold" start end)
-
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "bold" start end))
     (is (member tag (gtk:text-iter-tags start) :test #'eq))
-    (is-false (gtk:text-iter-tags end))))
+    (is-false (gtk:text-iter-tags end))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_editable
 
@@ -440,17 +455,20 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "editable"
                              :editable nil)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "editable" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "editable" start end))
 
     (is-false (gtk:text-iter-editable start nil))
     (is-false (gtk:text-iter-editable start t))
 
     (is-false (gtk:text-iter-editable end nil))
-    (is-true (gtk:text-iter-editable end t))))
+    (is-true (gtk:text-iter-editable end t))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_can_insert
 
@@ -460,17 +478,20 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "editable"
                              :editable nil)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "editable" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "editable" start end))
 
     (is-false (gtk:text-iter-can-insert start nil))
     (is-true (gtk:text-iter-can-insert start t))
 
     (is-false (gtk:text-iter-can-insert end nil))
-    (is-true (gtk:text-iter-can-insert end t))))
+    (is-true (gtk:text-iter-can-insert end t))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_starts_word
 ;;;     gtk_text_iter_ends_word
@@ -656,11 +677,12 @@ dann benutzen Sie es immer noch.")
                                 "Some sample text for the text buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 12))
          (end (gtk:text-buffer-iter-at-offset buffer 16))
+         (table (gtk:text-buffer-tag-table buffer))
          (tag (make-instance 'gtk:text-tag
                              :name "bold"
                              :weight 700)))
-    (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag)
-    (gtk:text-buffer-apply-tag buffer "bold" start end)
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-buffer-apply-tag buffer "bold" start end))
 
     (is (typep (setf start (gtk:text-buffer-start-iter buffer)) 'gtk:text-iter))
     (is (typep (setf end (gtk:text-buffer-end-iter buffer)) 'gtk:text-iter))
@@ -668,7 +690,9 @@ dann benutzen Sie es immer noch.")
     (is-true (gtk:text-iter-forward-to-tag-toggle start tag))
     (is (= 12 (gtk:text-iter-offset start)))
     (is-true (gtk:text-iter-backward-to-tag-toggle end tag))
-    (is (= 16 (gtk:text-iter-offset end)))))
+    (is (= 16 (gtk:text-iter-offset end)))
+    ;; Remove tag from text tag table
+    (is-false (gtk:text-tag-table-remove table tag))))
 
 ;;;     gtk_text_iter_forward_find_char
 ;;;     gtk_text_iter_backward_find_char
@@ -768,4 +792,4 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-in-range start end center))
     (is-false (gtk:text-iter-in-range end center start))))
 
-;;; 2024-9-20
+;;; 2024-10-10

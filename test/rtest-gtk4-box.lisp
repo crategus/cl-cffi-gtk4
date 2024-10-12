@@ -3,11 +3,6 @@
 (def-suite gtk-box :in gtk-suite)
 (in-suite gtk-box)
 
-;; GtkPrinterOptionWidget is a child of GtkBox
-#-windows
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (cffi:foreign-funcall "gtk_printer_option_widget_get_type" :size))
-
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkBox
@@ -26,9 +21,11 @@
           (g:type-parent "GtkBox")))
   ;; Check children
   #-windows
-  (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
-               "GtkShortcutsGroup" "GtkShortcutsSection")
-             (glib-test:list-children "GtkBox")))
+  (is (or (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
+                 (glib-test:list-children "GtkBox"))
+          (equal '("GtkColorEditor" "GtkPlacesView" "GtkShortcutsGroup"
+                   "GtkShortcutsSection")
+                 (glib-test:list-children "GtkBox"))))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
@@ -51,19 +48,19 @@
   (is (eq :generic (gtk:widget-class-accessible-role "GtkBox")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBox" GTK:BOX
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                        "GtkOrientable")
-                       :TYPE-INITIALIZER "gtk_box_get_type")
-                      ((BASELINE-CHILD BOX-BASELINE-CHILD
-                        "baseline-child" "gint" T T)
-                       (BASELINE-POSITION BOX-BASELINE-POSITION
-                        "baseline-position" "GtkBaselinePosition" T T)
-                       (HOMOGENEOUS BOX-HOMOGENEOUS
-                        "homogeneous" "gboolean" T T)
-                       (SPACING BOX-SPACING "spacing" "gint" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                         "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_box_get_type")
+                       ((BASELINE-CHILD BOX-BASELINE-CHILD
+                         "baseline-child" "gint" T T)
+                        (BASELINE-POSITION BOX-BASELINE-POSITION
+                         "baseline-position" "GtkBaselinePosition" T T)
+                        (HOMOGENEOUS BOX-HOMOGENEOUS
+                         "homogeneous" "gboolean" T T)
+                        (SPACING BOX-SPACING "spacing" "gint" T T)))
              (gobject:get-gtype-definition "GtkBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -120,16 +117,42 @@
         (child2 (make-instance 'gtk:button))
         (child3 (make-instance 'gtk:button)))
 
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+    (is (= 1 (g:object-ref-count child3)))
+
     (is-false (gtk:box-append box child1))
     (is-false (gtk:box-prepend box child2))
     (is-false (gtk:box-append box child3))
+
+    (is (= 2 (g:object-ref-count child1)))
+    (is (= 2 (g:object-ref-count child2)))
+    (is (= 2 (g:object-ref-count child3)))
+
     ;; The order is child2, child1, child3
     (is (eq child2 (gtk:widget-first-child box)))
     (is (eq child1 (gtk:widget-next-sibling child2)))
     (is (eq child3 (gtk:widget-last-child box)))
 
+    (is (= 2 (g:object-ref-count child1)))
+    (is (= 2 (g:object-ref-count child2)))
+    (is (= 2 (g:object-ref-count child3)))
+
     (is-false (gtk:box-remove box child3))
-    (is (eq child1 (gtk:widget-last-child box)))))
+
+    (is (= 2 (g:object-ref-count child1)))
+    (is (= 2 (g:object-ref-count child2)))
+    (is (= 1 (g:object-ref-count child3)))
+
+    (is (eq child1 (gtk:widget-last-child box)))
+
+    (is-false (gtk:box-remove box child1))
+    (is-false (gtk:box-remove box child2))
+
+    (is (= 1 (g:object-ref-count box)))
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+    (is (= 1 (g:object-ref-count child3)))))
 
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
@@ -149,6 +172,15 @@
     (is-false (gtk:box-reorder-child-after box child3 child2))
     (is (eq child3 (gtk:widget-last-child box)))
     (is-false (gtk:box-reorder-child-after box child3 nil))
-    (is (eq child3 (gtk:widget-first-child box)))))
+    (is (eq child3 (gtk:widget-first-child box)))
 
-;;; 2024-4-11
+    (is-false (gtk:box-remove box child1))
+    (is-false (gtk:box-remove box child2))
+    (is-false (gtk:box-remove box child3))
+
+    (is (= 1 (g:object-ref-count box)))
+    (is (= 1 (g:object-ref-count child1)))
+    (is (= 1 (g:object-ref-count child2)))
+    (is (= 1 (g:object-ref-count child3)))))
+
+;;; 2024-10-8

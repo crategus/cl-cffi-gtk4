@@ -76,7 +76,7 @@
 ;;; GtkStringObject
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStringObject" string-object
+(gobject:define-gobject "GtkStringObject" string-object
   (:superclass g:object
    :export t
    :interfaces ()
@@ -87,13 +87,14 @@
 
 #+liber-documentation
 (setf (documentation 'string-object 'type)
- "@version{2023-9-7}
+ "@version{2024-9-28}
   @begin{short}
     The @class{gtk:string-object} class is the type of items in a
     @class{gtk:string-list} object.
   @end{short}
   A @class{gtk:string-object} object is a wrapper around a string. It has a
-  @slot[gtk:string-object]{string} property.
+  @slot[gtk:string-object]{string} property that can be used for property
+  bindings and expressions.
   @see-constructor{gtk:string-object-new}
   @see-slot{gtk:string-object-string}
   @see-class{gtk:string-list}")
@@ -130,10 +131,8 @@
 ;;; gtk_string_object_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline string-object-new))
-
 (cffi:defcfun ("gtk_string_object_new" %string-object-new)
-    (g:object string-object)
+    (g:object string-object :already-referenced)
   (string :string))
 
 (defun string-object-new (&optional string)
@@ -163,7 +162,7 @@
 ;;; GtkStringList
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStringList" string-list
+(gobject:define-gobject "GtkStringList" string-list
   (:superclass g:object
    :export t
    :interfaces ("GListModel"
@@ -287,13 +286,18 @@
 
 ;; no accessor exported
 
-(unexport 'string-list-strings)
+(defun string-list-strings (model)
+  (iter (for pos from 0 below (g:list-model-n-items model))
+        (collect (string-list-string model pos))))
+
+(export 'string-list-strings)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_string_list_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_string_list_new" string-list-new) (g:object string-list)
+(cffi:defcfun ("gtk_string_list_new" string-list-new)
+    (g:object string-list :already-referenced)
  #+liber-documentation
  "@version{2023-9-28}
   @argument[strings]{a list of strings to put in the model}
@@ -317,6 +321,8 @@
 ;;; gtk_string_list_append
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: Is this implementation correct?
+
 (cffi:defcfun ("gtk_string_list_append" string-list-append) :void
  #+liber-documentation
  "@version{2023-9-7}
@@ -332,7 +338,7 @@
 (export 'string-list-append)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_take ()                                not needed
+;;; gtk_string_list_take ()                                not needed?
 ;;;
 ;;; void
 ;;; gtk_string_list_take (GtkStringList *self,

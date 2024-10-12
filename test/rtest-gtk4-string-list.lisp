@@ -46,10 +46,12 @@
 
 (test gtk-string-object-string
   (let ((object (make-instance 'gtk:string-object)))
+    (is (= 1 (g:object-ref-count object)))
     (is-false (gtk:string-object-string object))
     (is (typep (setf object (gtk:string-object-new "abcdef"))
                'gtk:string-object))
-    (is (string= "abcdef" (gtk:string-object-string object)))))
+    (is (string= "abcdef" (gtk:string-object-string object)))
+    (is (= 1 (g:object-ref-count object)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -57,6 +59,7 @@
 
 (test gtk-string-object-new
   (let ((object (gtk:string-object-new "string")))
+    (is (= 1 (g:object-ref-count object)))
     (is (typep object 'gtk:string-object))
     (is (string= "string" (gtk:string-object-string object)))
     (is (typep (setf object
@@ -68,7 +71,8 @@
     (is-false (gtk:string-object-string object))
     (is (typep (setf object
                      (gtk:string-object-new)) 'gtk:string-object))
-    (is-false (gtk:string-object-string object))))
+    (is-false (gtk:string-object-string object))
+    (is (= 1 (g:object-ref-count object)))))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -121,25 +125,40 @@
 ;;;     gtk_string_list_get_string
 
 (test gtk-string-list-new.1
-  (let ((object (gtk:string-list-new '())))
-    (is (eq (g:gtype "GObject") (g:list-model-item-type object)))
-    (is (= 0 (g:list-model-n-items object)))
-    (is (typep object 'gtk:string-list))))
+  (let ((model (gtk:string-list-new '())))
+    (is (= 1 (g:object-ref-count model)))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+    (is (= 0 (g:list-model-n-items model)))
+    (is (typep model 'gtk:string-list))))
 
 (test gtk-string-list-new.2
-  (let ((object (gtk:string-list-new '("Factory" "Home" "Subway"))))
-    (is (typep object 'gtk:string-list))
-    (is (eq (g:gtype "GObject") (g:list-model-item-type object)))
-    (is (= 3 (g:list-model-n-items object)))
-    (is (string= "Factory" (gtk:string-list-string object 0)))
-    (is (string= "Home" (gtk:string-list-string object 1)))
-    (is (string= "Subway" (gtk:string-list-string object 2)))
+  (let ((model (gtk:string-list-new '("Factory" "Home" "Subway"))))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 2 (g:object-ref-count (g:list-model-object model 0))))
+    (is (= 2 (g:object-ref-count (g:list-model-object model 0))))
+
+    (is (typep model 'gtk:string-list))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+    (is (= 3 (g:list-model-n-items model)))
+
+    (is (string= "Factory" (gtk:string-list-string model 0)))
+    (is (string= "Home" (gtk:string-list-string model 1)))
+    (is (string= "Subway" (gtk:string-list-string model 2)))
+
     (is (string= "Factory"
-                 (gtk:string-object-string (g:list-model-object object 0))))
+                 (gtk:string-object-string (g:list-model-object model 0))))
     (is (string= "Home"
-                 (gtk:string-object-string (g:list-model-object object 1))))
+                 (gtk:string-object-string (g:list-model-object model 1))))
     (is (string= "Subway"
-                 (gtk:string-object-string (g:list-model-object object 2))))))
+                 (gtk:string-object-string (g:list-model-object model 2))))))
+
+(test gtk-string-list-new.3
+  ;; Create with make instance
+  (is (typep (make-instance 'gtk:string-list) 'gtk:string-list))
+  (is (= 1 (g:object-ref-count (make-instance 'gtk:string-list))))
+  ;; Create with object new
+  (is (typep (g:object-new "GtkStringList") 'gtk:string-list))
+  (is (= 1 (g:object-ref-count (g:object-new "GtkStringList")))))
 
 ;;;     gtk_string_list_append
 ;;;     gtk_string_list_remove
@@ -187,4 +206,4 @@
     (is (g:type-is-object (g:list-model-item-type model)))
     (is (< 3000 (g:list-model-n-items model)))))
 
-;;; 2024-9-19
+;;; 2024-10-1

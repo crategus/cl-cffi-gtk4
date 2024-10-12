@@ -2,7 +2,7 @@
 ;;; gtk4.orientable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,7 +56,7 @@
 ;;; GtkOrientable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkOrientable" orientable
+(gobject:define-ginterface "GtkOrientable" orientable
   (:export t
    :type-initializer "gtk_orientable_get_type")
   ((orientation
@@ -67,14 +67,18 @@
 (setf (liber:alias-for-class 'orientable)
       "Interface"
       (documentation 'orientable 'type)
- "@version{#2022-1-16}
+ "@version{2024-9-26}
   @begin{short}
-    An interface for flippable widgets.
+    The @class{gtk:orientable} interface is implemented by all widgets that can
+    be oriented horizontally or vertically.
   @end{short}
-  The @class{gtk:orientable} interface is implemented by all widgets that can be
-  oriented horizontally or vertically. A @class{gtk:orientable} widget is more
-  flexible in that it allows the orientation to be changed at runtime, allowing
-  the widget to \"flip\".
+  A @class{gtk:orientable} widget is more flexible in that it allows the
+  orientation to be changed at runtime, allowing the widget to \"flip\".
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:widget} widgets that implement the @class{gtk:orientable}
+    interface will automatically acquire the horizontal or vertical CSS class,
+    depending on the value of the @slot[gtk:orientable]{orientation} property.
+  @end{dictionary}
   @see-slot{gtk:orientable-orientation}
   @see-symbol{gtk:orientation}")
 
@@ -95,7 +99,7 @@
 (setf (liber:alias-for-function 'orientable-orientation)
       "Accessor"
       (documentation 'orientable-orientation 'function)
- "@version{#2022-1-16}
+ "@version{2024-9-26}
   @syntax{(gtk:orientable-orientation object) => orientation}
   @syntax{(setf (gtk:orientable-orientation object) orientation)}
   @argument[object]{a @class{gtk:orientable} widget}

@@ -98,8 +98,8 @@
              (glib-test:list-signals "GtkBuildable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkBuildable" GTK:BUILDABLE
-                      (:EXPORT T
-                       :TYPE-INITIALIZER "gtk_buildable_get_type"))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_buildable_get_type"))
              (gobject:get-gtype-definition "GtkBuildable"))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -107,23 +107,21 @@
 ;;;     gtk_buildable_get_buildable_id
 
 (test gtk-buildable-buildable-id
-  (let* ((builder (gtk:builder-new-from-string *stack-ui*))
-         (window (gtk:builder-object builder "window1"))
-         (stack (gtk:builder-object builder "stack"))
-         (image (gtk:builder-object builder "image"))
-         (checkbutton (gtk:builder-object builder "checkbutton"))
-         (spinner (gtk:builder-object builder "spinner")))
-    (is (string= "window1" (gtk:buildable-buildable-id window)))
-    (is (string= "stack" (gtk:buildable-buildable-id stack)))
-    (is (string= "image" (gtk:buildable-buildable-id image)))
-    (is (string= "checkbutton" (gtk:buildable-buildable-id checkbutton)))
-    (is (string= "spinner" (gtk:buildable-buildable-id spinner)))))
+  (let ((builder (gtk:builder-new-from-string *stack-ui*)))
+    (is (string= "window1"
+                 (gtk:buildable-buildable-id
+                     (gtk:builder-object builder "window1"))))
+    (is (string= "stack"
+                 (gtk:buildable-buildable-id
+                     (gtk:builder-object builder "stack"))))
+    (is (string= "image"
+                 (gtk:buildable-buildable-id
+                     (gtk:builder-object builder "image"))))
+    (is (string= "checkbutton"
+                 (gtk:buildable-buildable-id
+                     (gtk:builder-object builder "checkbutton"))))
+    (is (string= "spinner"
+                 (gtk:buildable-buildable-id
+                     (gtk:builder-object builder "spinner"))))))
 
-;;;     GtkBuildableParser                                 not implemented
-;;;     gtk_buildable_parse_context_get_element            not implemented
-;;;     gtk_buildable_parse_context_get_element_stack      not implemented
-;;;     gtk_buildable_parse_context_get_position           not implemented
-;;;     gtk_buildable_parse_context_pop                    not implemented
-;;;     gtk_buildable_parse_context_push                   not implemented
-
-;;; 2024-9-19
+;;; 2024-10-6

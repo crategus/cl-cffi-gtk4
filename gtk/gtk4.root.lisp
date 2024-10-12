@@ -2,7 +2,7 @@
 ;;; gtk4.root.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -53,7 +53,7 @@
 ;;; GtkRoot
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkRoot" root
+(gobject:define-ginterface "GtkRoot" root
   (:superclass g:object
    :export t
    :type-initializer "gtk_root_get_type")
@@ -63,7 +63,7 @@
 (setf (liber:alias-for-class 'root)
       "Interface"
       (documentation 'root 'type)
- "@version{2023-8-19}
+ "@version{2024-9-29}
   @begin{short}
     The @class{gtk:root} interface is the interface implemented by all widgets
     that can act as a toplevel widget to a hierarchy of widgets.
@@ -76,7 +76,9 @@
   @fun{gtk:root-display} function. The @class{gtk:root} widget also maintains
   the location of keyboard focus inside its widget hierarchy, with the
   @fun{gtk:root-focus} function.
-  @see-class{gtk:window}")
+  @see-class{gtk:window}
+  @see-function{gtk:root-display}
+  @see-function{gtk:root-focus}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_root_get_display
@@ -84,7 +86,7 @@
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
  #+liber-documentation
- "@version{2023-8-19}
+ "@version{2024-9-29}
   @argument[root]{a @class{gtk:root} widget}
   @return{The @class{gdk:display} object of @arg{root}.}
   @begin{short}
@@ -110,7 +112,7 @@
 
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
- "@version{2024-4-10}
+ "@version{2024-9-29}
   @syntax{(gtk:root-focus root) => widget}
   @syntax{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}

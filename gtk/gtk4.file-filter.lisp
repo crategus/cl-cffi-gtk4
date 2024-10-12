@@ -75,7 +75,7 @@
 ;;; GtkFileFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFileFilter" file-filter
+(gobject:define-gobject "GtkFileFilter" file-filter
   (:superclass filter
    :export t
    :interfaces ("GtkBuildable")
@@ -104,14 +104,14 @@
     shown in a @class{gtk:file-chooser} widget.
   @end{short}
   Files can be filtered based on their name with the
-  @fun{gtk:file-filter-add-pattern} function or on their mime type with the
+  @fun{gtk:file-filter-add-pattern} function or on their MIME type with the
   @fun{gtk:file-filter-add-mime-type} function.
 
-  Filtering by mime types handles aliasing and subclassing of mime types. For
-  example, a filter for @file{text/plain} also matches a file with mime type
+  Filtering by MIME types handles aliasing and subclassing of MIME types. For
+  example, a filter for @file{text/plain} also matches a file with MIME type
   @file{application/rtf}, since @file{application/rtf} is a subclass of
   @file{text/plain}. Note that the @class{gtk:file-filter} object allows
-  wildcards for the subtype of a mime type, so you can, for example, filter for
+  wildcards for the subtype of a MIME type, so you can, for example, filter for
   @file{image/*}.
 
   Normally, file filters are used by adding them to a @class{gtk:file-chooser}
@@ -158,9 +158,10 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mime-types" 'file-filter) t)
- "The @code{mime-types} property of type @code{gchararray}
+ "The @code{mime-types} property of type @code{:string}
   (Write / Construct only) @br{}
-  The MIME types that this filter matches. Since 4.10")
+  The MIME types that this filter matches. @em{Note:} This property is not
+  accessible from the Lisp side. Since 4.10")
 
 (unexport 'file-filter-mime-types)
 
@@ -169,7 +170,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'file-filter) t)
  "The @code{name} property of type @code{:string} (Read / Write) @br{}
-  The human-readable name of the filter. This is the string that will be
+  The human-readable name of the filter. This is the name that will be
   displayed in the file selector user interface if there is a selectable list
   of filters. @br{}
   Default value: @code{nil}")
@@ -190,7 +191,7 @@
   @end{short}
   The @fun{gtk:file-filter-name} function gets the human-readable name for the
   file filter. The @setf{gtk:file-filter-name} function sets a human-readable
-  name. This is the string that will be displayed in the file chooser if there
+  name. This is the name that will be displayed in the file chooser if there
   is a selectable list of filters.
   @see-class{gtk:file-filter}")
 
@@ -198,9 +199,10 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "patterns" 'file-filter) t)
- "The @code{patterns} property of type @code{gchararray}
+ "The @code{patterns} property of type @code{:string}
   (Write / Construct only) @br{}
-  The patterns that this filter matches. Since 4.10")
+  The patterns that this filter matches. @em{Note:} This property is not
+  accessible from the Lisp side. Since 4.10")
 
 (unexport 'file-filter-patterns)
 
@@ -208,9 +210,10 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "suffixes" 'file-filter) t)
- "The @code{suffixes} property of type @code{gchararray}
+ "The @code{suffixes} property of type @code{:string}
   (Write / Construct only) @br{}
-  The suffixes that this filter matches. Since 4.10")
+  The suffixes that this filter matches. @em{Note:} This property is not
+  accessible from the Lisp side. Since 4.10")
 
 (unexport 'file-filter-suffixes)
 
@@ -252,7 +255,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_new_from_gvariant"
-               file-filter-new-from-gvariant) (g:object file-filter)
+               file-filter-new-from-gvariant)
+    (g:object file-filter :already-referenced)
  #+liber-documentation
  "@version{2024-8-21}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
@@ -277,7 +281,7 @@
  "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[mime-type]{a string with the name of the MIME type}
-  @short{Adds a rule allowing a given mime type to the file filter.}
+  @short{Adds a rule allowing a given MIME type to the file filter.}
   @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
   (mime-type :string))
@@ -318,7 +322,7 @@
     @class{gdk-pixbuf:pixbuf} object.
   @end{short}
   This is equivalent to calling the @fun{gtk:file-filter-add-mime-type}
-  function for all the supported mime types.
+  function for all the supported MIME types.
   @see-class{gtk:file-filter}
   @see-class{gdk-pixbuf:pixbuf}
   @see-function{gtk:file-filter-add-mime-type}"

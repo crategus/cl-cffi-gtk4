@@ -2,7 +2,7 @@
 ;;; gtk4.picture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -89,11 +89,11 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkContentFit
+;;; GtkContentFit
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-8
-(gobject:define-g-enum "GtkContentFit" content-fit
+(gobject:define-genum "GtkContentFit" content-fit
   (:export t
    :type-initializer "gtk_content_fit_get_type")
   (:fill 0)
@@ -143,7 +143,7 @@
 ;;; GtkPicture
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPicture" picture
+(gobject:define-gobject "GtkPicture" picture
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

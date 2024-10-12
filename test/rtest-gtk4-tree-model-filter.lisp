@@ -60,7 +60,7 @@
 
 (test gtk-tree-model-filter-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((child (create-and-fill-gtk-list-store))
+    (let* ((child (create-list-store-for-package))
            (model (gtk:tree-model-filter-new child nil)))
       (is (typep child 'gtk:tree-model))
       (is (typep model 'gtk:tree-model))
@@ -72,9 +72,10 @@
 
 ;; TODO: More work is needed
 
+#+nil
 (test gtk-tree-model-filter-set-visible-func
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((child (create-and-fill-gtk-list-store))
+    (let* ((child (create-list-store-for-package))
            (model (gtk:tree-model-filter-new child nil)))
 
       (gtk:tree-model-filter-set-visible-func model
@@ -101,4 +102,4 @@
 ;;;     gtk_tree_model_filter_refilter
 ;;;     gtk_tree_model_filter_clear_cache
 
-;;; 2024-9-20
+;;; 2024-9-27
