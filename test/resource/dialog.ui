@@ -1,13 +1,14 @@
 <interface>
-  <object class='GtkDialog' id='dialog1'>
-    <child internal-child='content_area'>
-      <object class='GtkBox' id='vbox1'>
-        <child internal-child='action_area'>
-          <object class='GtkBox' id='hbuttonbox1'>
+  <object class="GtkDialog" id="dialog1">
+    <child internal-child="content_area">
+      <object class="GtkBox">
+        <child internal-child="action_area">
+          <object class="GtkBox">
             <child>
-              <object class='GtkButton' id='ok_button'>
-                <property name='label' translatable='yes'>_Ok</property>
-                <property name='use-underline'>True</property>
+              <object class="GtkButton" id="ok-button">
+                <property name="label">_Ok</property>
+                <property name="use-underline">True</property>
+                <signal name="clicked" handler="ok-button-clicked" object="ok-button"/>
               </object>
             </child>
           </object>

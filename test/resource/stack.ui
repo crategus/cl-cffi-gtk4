@@ -4,10 +4,10 @@
     <property name="title" translatable="yes">Stack</property>
     <property name="resizable">0</property>
     <child>
-      <object class="GtkGrid">
+      <object class="GtkGrid" id="grid1">
         <child>
-          <object class="GtkStackSwitcher">
-            <property name="stack">stack</property>
+          <object class="GtkStackSwitcher" id="switcher1">
+            <property name="stack">stack1</property>
             <property name="halign">center</property>
             <layout>
               <property name="column">0</property>
@@ -16,14 +16,14 @@
           </object>
         </child>
         <child>
-          <object class="GtkStack" id="stack">
+          <object class="GtkStack" id="stack1">
             <property name="transition-type">crossfade</property>
             <child>
-              <object class="GtkStackPage">
+              <object class="GtkStackPage" id="page1">
                 <property name="name">page1</property>
                 <property name="title" translatable="yes">Page 1</property>
                 <property name="child">
-                  <object class="GtkImage">
+                  <object class="GtkImage" id="image1">
                     <property name="margin-top">20</property>
                     <property name="margin-bottom">20</property>
                     <property name="pixel-size">100</property>
@@ -33,11 +33,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkStackPage">
+              <object class="GtkStackPage" id="page2">
                 <property name="name">page2</property>
                 <property name="title" translatable="yes">Page 2</property>
                 <property name="child">
-                  <object class="GtkCheckButton">
+                  <object class="GtkCheckButton" id="button1">
                     <property name="label" translatable="yes">Page 2</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -46,11 +46,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkStackPage">
+              <object class="GtkStackPage" id="page3">
                 <property name="name">page3</property>
                 <property name="icon-name">face-laugh-symbolic</property>
                 <property name="child">
-                  <object class="GtkSpinner">
+                  <object class="GtkSpinner" id="spinner1">
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="spinning">1</property>
