@@ -618,10 +618,10 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_app_launch_context
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_get_app_launch_context"
-               display-app-launch-context) (g:object app-launch-context)
+(cffi:defcfun ("gdk_display_get_app_launch_context" display-app-launch-context)
+    (g:object app-launch-context :already-referenced)
  #+liber-documentation
- "@version{2024-7-11}
+ "@version{2024-10-8}
   @argument[display]{a @class{gdk:display} object}
   @begin{return}
     The new @class{gdk:app-launch-context} object for @arg{display}.
@@ -743,9 +743,7 @@ lambda (display setting)    :run-last
   @see-class{g:list-model}"
   (let ((monitors (%display-monitors display)))
     (iter (for i from 0 below (g:list-model-n-items monitors))
-          (collect (g:list-model-item monitors i) into pointers)
-          (finally (return (mapcar #'gobject::create-gobject-from-pointer
-                                   pointers))))))
+          (collect (g:list-model-object monitors i)))))
 
 (export 'display-monitors)
 

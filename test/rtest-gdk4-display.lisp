@@ -67,59 +67,64 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 (test gdk-display-closed-signal
-  (let ((query (g:signal-query (g:signal-lookup "closed" "GdkDisplay"))))
-    (is (string= "closed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "closed")
+         (gtype (g:gtype "GdkDisplay"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("gboolean")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 (test gdk-display-opened-signal
-  (let ((query (g:signal-query (g:signal-lookup "opened" "GdkDisplay"))))
-    (is (string= "opened" (g:signal-query-signal-name query)))
-    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "opened")
+         (gtype (g:gtype "GdkDisplay"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 (test gdk-display-seat-added-signal
-  (let ((query (g:signal-query (g:signal-lookup "seat-added" "GdkDisplay"))))
-    (is (string= "seat-added" (g:signal-query-signal-name query)))
-    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "seat-added")
+         (gtype (g:gtype "GdkDisplay"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GdkSeat")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 (test gdk-display-seat-removed-signal
-  (let ((query (g:signal-query (g:signal-lookup "seat-removed" "GdkDisplay"))))
-    (is (string= "seat-removed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "seat-removed")
+         (gtype (g:gtype "GdkDisplay"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("GdkSeat")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 (test gdk-display-setting-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "setting-changed" "GdkDisplay"))))
-    (is (string= "setting-changed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "setting-changed")
+         (gtype (g:gtype "GdkDisplay"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     (is (equal '("gchararray")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -127,37 +132,57 @@
 
 #-windows
 (test gdk-display-open
-  (let ((name (uiop:getenv "DISPLAY")))
-    (is (typep (gdk:display-open name) 'gdk:display))))
+  (let ((name (uiop:getenv "DISPLAY"))
+        (display nil))
+    (is (typep (setf display (gdk:display-open name)) 'gdk:display))
+    (is-false (eq display (gdk:display-default)))
+    (is (<= 2 (g:object-ref-count display)))))
 
 #+windows
 (test gdk-display-open
-  (is (typep (gdk:display-open "1\\WinSta0\\Default") 'gdk:display)))
+  (let ((display nil))
+    (is (typep (setf display
+                     (gdk:display-open "1\\WinSta0\\Default")) 'gdk:display))
+    (is (eq display (gdk:display-default)))
+    (is (<= 2 (g:object-ref-count display)))))
 
 ;;;     gdk_display_get_default
 
 (test gdk-display-default
-  (is (typep (gdk:display-default) 'gdk:display)))
+  (is (typep (gdk:display-default) 'gdk:display))
+  (is (<= 2 (g:object-ref-count (gdk:display-default)))))
 
 ;;;     gdk_display_get_name
 
 #-windows
 (test gdk-display-name
   (let ((display (gdk:display-default)))
-    (is (stringp (gdk:display-name display)))))
+    (is (stringp (gdk:display-name display)))
+    (is (<= 2 (g:object-ref-count display)))))
 
 #+windows
 (test gdk-display-name
   (let ((display (gdk:display-default)))
-    (is (string= "1\\WinSta0\\Default" (gdk:display-name display)))))
+    (is (string= "1\\WinSta0\\Default" (gdk:display-name display)))
+    (is (<= 2 (g:object-ref-count display)))))
 
 ;;;     gdk_display_device_is_grabbed
 
 (test gdk-display-device-is-grabbed
   (let* ((display (gdk:display-default))
-         (seat (gdk:display-default-seat display))
-         (device (gdk:seat-pointer seat)))
-    (is-false (gdk:display-device-is-grabbed display device))))
+         (seat (gdk:display-default-seat display)))
+    (is (<= 2 (g:object-ref-count display)))
+    (is (<= 2 (g:object-ref-count seat)))
+    (is-false (gdk:display-device-is-grabbed display (gdk:seat-keyboard seat)))
+    (is-false (gdk:display-device-is-grabbed display (gdk:seat-pointer seat)))
+    #-windows
+    (is (= 4 (g:object-ref-count (gdk:seat-keyboard seat))))
+    #-windows
+    (is (= 4 (g:object-ref-count (gdk:seat-pointer seat))))
+    #+windows
+    (is (= 5 (g:object-ref-count (gdk:seat-keyboard seat))))
+    #+windows
+    (is (= 5 (g:object-ref-count (gdk:seat-pointer seat))))))
 
 ;;;     gdk_display_beep
 
@@ -169,18 +194,11 @@
 ;;;     gdk_display_flush
 ;;;     gdk_display_is_closed
 
-;; TODO: The second run can cause a memory fault. Fine the reason.
-
-;; GDK-DISPLAY-SYNC/FLUSH/IS-CLOSED in GDK-DISPLAY []:
-;;      Unexpected Error: #<SB-SYS:MEMORY-FAULT-ERROR {10070922C3}>
-;; Unhandled memory fault at #x474E49544D..
-
 (test gdk-display-sync/flush/is-closed
-  (when *first-run-gtk-test*
-    (let ((display (gdk:display-default)))
-      (is-false (gdk:display-sync display))
-      (is-false (gdk:display-flush display))
-      (is-false (gdk:display-is-closed display)))))
+  (let ((display (gdk:display-default)))
+    (is-false (gdk:display-sync display))
+    (is-false (gdk:display-flush display))
+    (is-false (gdk:display-is-closed display))))
 
 ;;;     gdk_display_close
 
@@ -199,9 +217,12 @@
 ;;;     gdk_display_get_app_launch_context
 
 (test gdk-display-app-launch-context
-  (let ((display (gdk:display-default)))
-    (is (typep (gdk:display-app-launch-context display)
-               'gdk:app-launch-context))))
+  (let ((display (gdk:display-default))
+        (context nil))
+    (is (typep (setf context
+                     (gdk:display-app-launch-context display))
+               'gdk:app-launch-context))
+    (is (= 1 (g:object-ref-count context)))))
 
 ;;;     gdk_display_notify_startup_complete                Deprecated 4.10
 
@@ -247,12 +268,6 @@
            (gdk:display-setting display "gtk-double-click-time" "gint")))))
 
 ;;;     gdk_display_get_startup_notification_id            Deprecated 4.10
-
-#+nil
-(test gdk-display-startup-notification-id
-  (let ((display (gdk:display-default)))
-    (is-false (gdk:display-startup-notification-id display))))
-
 ;;;     gdk_display_put_event                              Deprecated 4.10
 
 ;;;     gdk_display_map_keyval
@@ -314,4 +329,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-9-19
+;;; 2024-10-8

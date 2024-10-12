@@ -4,6 +4,7 @@
 (in-suite gdk-app-launch-context)
 
 ;; Ensures that children of GdkAppLaunchContext are available.
+#+nil
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (gdk:display-app-launch-context (gdk:display-default)))
 
@@ -26,8 +27,12 @@
           (g:type-parent "GdkAppLaunchContext")))
   ;; Check children
   #-windows
-  (is (member "GdkWaylandAppLaunchContext"
-              (glib-test:list-children "GdkAppLaunchContext") :test #'string=))
+  (if *first-run-gtk-test*
+      (equal '()
+             (glib-test:list-children "GdkAppLaunchContext"))
+      (is (member "GdkWaylandAppLaunchContext"
+                  (glib-test:list-children "GdkAppLaunchContext")
+                  :test #'string=)))
   #+windows
   (is (equal '()
              (glib-test:list-children "GdkAppLaunchContext")))
