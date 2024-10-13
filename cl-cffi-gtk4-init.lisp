@@ -62,12 +62,13 @@
     (cffi:foreign-funcall "gtk_get_minor_version" :int)
     4 0
     4 2
-    4 4
+    4 4   ; Since 10-08-2021
     4 6   ; Since 30-12-2021
     4 8   ; Since 06-09-2022
     4 10  ; Since 04-03-2023
     4 12  ; Since 05-08-2023
     4 14  ; Since 12-03-2024
+    4 16  ; Since 07-09-2024
     )
 
 ;;; --- End of file cl-cffi-gtk4-init.lisp -------------------------------------

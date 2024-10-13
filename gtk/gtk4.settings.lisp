@@ -2,7 +2,7 @@
 ;;; gtk4.settings.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,9 +33,11 @@
 ;;;
 ;;; Types and Values
 ;;;
+;;;     GtkSystemSetting
+;;;     GtkFontRendering
+;;;
 ;;;     GtkSettings
 ;;;     GtkSettingsValue                                    not implemented
-;;;     GtkSystemSetting
 ;;;
 ;;; Functions
 ;;;
@@ -68,6 +70,7 @@
 ;;;     gtk-entry-select-on-focus
 ;;;     gtk-error-bell
 ;;;     gtk-font-name
+;;;     gtk-font-rendering                                  Since 4.16
 ;;;     gtk-fontconfig-timestamp
 ;;;     gtk-hint-font-metrics                               Since 4.6
 ;;;     gtk-icon-theme-name
@@ -110,36 +113,12 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkSettingsValue
-;;;
-;;; struct GtkSettingsValue {
-;;;   /* origin should be something like "filename:linenumber" for rc files,
-;;;    * or e.g. "XProperty" for other sources
-;;;    */
-;;;   char *origin;
-;;;
-;;;   /* valid types are LONG, DOUBLE and STRING corresponding to the token
-;;;    * parsed, or a GSTRING holding an unparsed statement
-;;;    */
-;;;   GValue value;
-;;; };
-;;;
-;;; char *origin :
-;;;     Origin should be something like “filename:linenumber” for rc files, or
-;;;     e.g. “XProperty” for other sources.
-;;;
-;;; GValue value :
-;;;     Valid types are LONG, DOUBLE and STRING corresponding to the token
-;;;     parsed, or a GSTRING holding an unparsed statement
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkSystemSetting
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Consider to remove the implementation.
 
-(gobject:define-g-enum "GtkSystemSetting" system-setting
+(gobject:define-genum "GtkSystemSetting" system-setting
   (:export t
    :type-initializer "gtk_system_setting_get_type")
   :dpi
@@ -152,9 +131,9 @@
 (setf (liber:alias-for-symbol 'system-setting)
       "GEnum"
       (liber:symbol-documentation 'system-setting)
- "@version{2024-3-8}
+ "@version{2024-10-13}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSystemSetting\" system-setting
+(gobject:define-genum \"GtkSystemSetting\" system-setting
   (:export t
    :type-initializer \"gtk_system_setting_get_type\")
   :dpi
@@ -197,10 +176,50 @@
   @see-function{gtk:settings-gtk-fontconfig-timestamp}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GtkFontRendering
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(gobject:define-genum "GtkFontRendering" font-rendering
+  (:export t
+   :type-initializer "gtk_font_rendering_get_type")
+  (:automatic 0)
+  (:manual 1))
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-symbol 'font-rendering)
+      "GEnum"
+      (liber:symbol-documentation 'font-rendering)
+ "@version{2024-10-13}
+  @begin{declaration}
+(gobject:define-genum \"GtkFontRendering\" font-rendering
+  (:export t
+   :type-initializer \"gtk_font_rendering_get_type\")
+  (:automatic 0)
+  (:manual 1))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:automatic]{Set up font rendering automatically, taking factors
+        like screen resolution and scale into account.}
+      @entry[:manual]{Follow low-level font-related settings when configuring
+        font rendering.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Values for the @slot[gtk:settings]{gtk-font-rendering} setting that
+    influence how GTK renders fonts.
+  @end{short}
+
+  Since 4.16
+  @see-class{gtk:settings}
+  @see-function{gtk:settings-gtk-font-rendering}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkSettings
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSettings" settings
+(gobject:define-gobject "GtkSettings" settings
   (:superclass g:object
    :export t
    :interfaces ("GtkStyleProvider")
@@ -274,6 +293,10 @@
    (gtk-font-name
     settings-gtk-font-name
     "gtk-font-name" "gchararray" t t)
+   #+gtk-4-16
+   (gtk-font-rendering
+    settings-gtk-font-rendering
+    "gtk-font-rendering" "GtkFontRendering" t t)
    (gtk-fontconfig-timestamp
     settings-gtk-fontconfig-timestamp
     "gtk-fontconfig-timestamp" "guint" t t)
@@ -413,6 +436,7 @@
   @see-slot{gtk:settings-gtk-entry-select-on-focus}
   @see-slot{gtk:settings-gtk-error-bell}
   @see-slot{gtk:settings-gtk-font-name}
+  @see-slot{gtk:settings-gtk-font-rendering}
   @see-slot{gtk:settings-gtk-fontconfig-timestamp}
   @see-slot{gtk:settings-gtk-icon-theme-name}
   @see-slot{gtk:settings-gtk-im-module}
@@ -590,7 +614,7 @@
   @see-class{gtk:settings}
   @see-function{gtk:settings-gtk-cursor-blink-timeout}")
 
-;;; --- gtk:settings-gtk-cursor-blink-time -----------------------------------------
+;;; --- gtk:settings-gtk-cursor-blink-time -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "gtk-cursor-blink-time"
@@ -1138,6 +1162,49 @@
   @end{short}
   Name of the default font to use.
   @see-class{gtk:settings}")
+
+;;; --- gtk:settings-gtk-font-rendering ----------------------------------------
+
+#+(and gtk-4-16 liber-documentation)
+(setf (documentation (liber:slot-documentation "gtk-font-rendering" 'settings) t)
+ "The @code{gtk-font-rendering} property of type @symbol{gtk:font-rendering}
+  (Read / Write) @br{}
+  How GTK font rendering is set up. When set to @code{:manual}, GTK respects the
+  low-level font-related settings (@slot[gtk:settings]{gtk-hint-font-metrics},
+  @slot[gtk:settings]{gtk-xft-antialias}, @slot[gtk:settings]{gtk-xft-hinting},
+  @slot[gtk:settings]{gtk-xft-hintstyle} and @slot[gtk:settings]{gtk-xft-rgba})
+  as much as practical. When set to @code{:automatic}, GTK will consider factors
+  such as screen resolution and scale in deciding how to render fonts.
+  Since 4.16 @br{}
+  Default value: @code{:automatic}")
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-function 'settings-gtk-font-rendering)
+      "Accessor"
+      (documentation 'settings-gtk-font-rendering 'function)
+ "@version{2024-10-13}
+  @syntax{(gtk:settings-gtk-font-rendering object) => setting}
+  @syntax{(setf (gtk:settings-gtk-font-rendering object) setting)}
+  @argument[object]{a @class{gtk:settings} object}
+  @argument[setting]{a @symbol{gtk:font-rendering} value}
+  @begin{short}
+    Accessor of the @slot[gtk:settings]{gtk-font-rendering} slot of the
+    @class{gtk:settings} class.
+  @end{short}
+  How GTK font rendering is set up.
+
+  When set to @code{:manual}, GTK respects the low-level font-related settings
+  (@slot[gtk:settings]{gtk-hint-font-metrics},
+  @slot[gtk:settings]{gtk-xft-antialias}, @slot[gtk:settings]{gtk-xft-hinting},
+  @slot[gtk:settings]{gtk-xft-hintstyle} and @slot[gtk:settings]{gtk-xft-rgba})
+  as much as practical.
+
+  When set to @code{:automatic}, GTK will consider factors such as screen
+  resolution and scale in deciding how to render fonts.
+
+  Since 4.16
+  @see-class{gtk:settings}
+  @see-symbol{gtk:font-rendering}")
 
 ;;; --- gtk:settings-gtk-fontconfig-timestamp ----------------------------------
 

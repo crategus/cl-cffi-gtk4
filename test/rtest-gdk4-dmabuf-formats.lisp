@@ -55,8 +55,8 @@
   (let* ((display (gdk:display-default))
          (formats (gdk:display-dmabuf-formats display)))
     #-windows
-    (is (= 268 (gdk:dmabuf-formats-n-formats formats)))
+    (is (= 271 (gdk:dmabuf-formats-n-formats formats)))
     #+windows
     (is (= 0 (gdk:dmabuf-formats-n-formats formats)))))
 
-;;; 2024-7-29
+;;; 2024-10-13

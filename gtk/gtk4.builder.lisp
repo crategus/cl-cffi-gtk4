@@ -793,7 +793,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_builder_new_from_string" %builder-new-from-string)
-    (g:object builder)
+    (g:object builder :already-referenced)
   (string :string)
   (length :int))
 

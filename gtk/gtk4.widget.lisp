@@ -2,7 +2,7 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -335,26 +335,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkRequestedSize
-;;;
-;;; struct GtkRequestedSize {
-;;;   gpointer data;
-;;;   int      minimum_size;
-;;;   int      natural_size;
-;;; };
-;;;
-;;; Represents a request of a screen object in a given orientation. These are
-;;; primarily used in container implementations when allocating a natural size
-;;; for children calling. See gtk_distribute_natural_allocation().
-;;;
-;;; gpointer data :
-;;;     A client pointer
-;;;
-;;; int minimum_size :
-;;;     The minimum size needed for allocation in a given orientation
-;;;
-;;; int natural_size :
-;;;     The natural size for allocation in a given orientation
+;;; GtkRequestedSize
 ;;; ----------------------------------------------------------------------------
 
 ;; Only used for the gtk_distribute_natural_allocation() function and not
@@ -364,7 +345,7 @@
 ;;; GtkRequisition
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-cstruct requisition "GtkRequisition"
+(glib:define-gboxed-cstruct requisition "GtkRequisition"
   (:export t
    :type-initializer "gtk_requisition_get_type")
   (width :int :initform 0)
@@ -507,7 +488,7 @@
 ;;; GtkWidget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkWidget" widget
+(gobject:define-gobject "GtkWidget" widget
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkAccessible"
@@ -3238,6 +3219,9 @@ lambda (widget)    :run-last
   @end{short}
   The @setf{gtk:widget-font-options} function sets the font options. When not
   set, the default font options for the GDK screen will be used.
+  @begin[Warning]{dictionary}
+    Deprecated since 4.16. Do not use this function in newly written code.
+  @end{dictionary}
   @see-class{gtk:widget}
   @see-class{gdk:screen}
   @see-symbol{cairo:font-options-t}"

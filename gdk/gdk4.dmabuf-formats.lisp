@@ -2,7 +2,7 @@
 ;;; gdk4.dmabuf-formats.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,7 +47,7 @@
 ;;; GdkDmabufFormats
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque dmabuf-formats "GdkDmabufFormats"
+(glib:define-gboxed-opaque dmabuf-formats "GdkDmabufFormats"
   :export t
   :type-initializer "gdk_dmabuf_formats_get_type"
   :alloc (error "GdkDmabufFormats cannot be created from the Lisp side"))
@@ -58,7 +58,7 @@
       (documentation 'dmabuf-formats 'type)
  "@version{2024-5-26}
   @begin{declaration}
-(glib:define-g-boxed-opaque dmabuf-formats \"GdkDmabufFormats\"
+(glib:define-gboxed-opaque dmabuf-formats \"GdkDmabufFormats\"
   :export t
   :type-initializer \"gdk_dmabuf_formats_get_type\"
   :alloc (error \"GdkDmabufFormats cannot be created from the Lisp side\"))

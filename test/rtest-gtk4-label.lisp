@@ -190,15 +190,17 @@
 ;;;     gtk_label_get_layout
 
 (test gtk-label-layout
-  (let ((label (gtk:label-new "label")))
-    (is (typep (gtk:label-layout label) 'pango:layout))))
+  (let ((label (gtk:label-new "label"))
+        (layout nil))
+    (is (typep (setf layout
+                     (gtk:label-layout label)) 'pango:layout))
+    (is (= 2 (g:object-ref-count layout)))))
 
 ;;;     gtk_label_get_layout_offsets
 
 (test gtk-label-layout-offsets
   (let ((label (gtk:label-new "label")))
-
-    (is (equal '(0 -9)
+    (is (equal '(-16 -9)
                (multiple-value-list (gtk:label-layout-offsets label))))))
 
 ;;;     gtk_label_select_region
@@ -222,4 +224,4 @@
 
 ;;;     gtk_label_get_current_uri
 
-;;; 2024-9-20
+;;; 2024-10-13

@@ -31,14 +31,13 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkFontChooserLevel"
                                      GTK:FONT-CHOOSER-LEVEL
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_font_chooser_level_get_type")
-                                     (:FAMILY 0)
-                                     (:STYLE 1)
-                                     (:SIZE 2)
-                                     (:VARIATIONS 4)
-                                     (:FEATURES 8))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_font_chooser_level_get_type")
+                       (:FAMILY 0)
+                       (:STYLE 1)
+                       (:SIZE 2)
+                       (:VARIATIONS 4)
+                       (:FEATURES 8))
              (gobject:get-gtype-definition "GtkFontChooserLevel"))))
 
 ;;;     GtkFontChooser
@@ -84,20 +83,22 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-font-chooser-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((chooser (make-instance 'gtk:font-chooser-dialog)))
-      (is-false (gtk:font-chooser-font chooser))
-      (is-false (gtk:font-chooser-font-desc chooser))
-      (is (string= "" (gtk:font-chooser-font-features chooser)))
-      (is (string= "de-de" (gtk:font-chooser-language chooser)))
-      (is (equal '(:style :size) (gtk:font-chooser-level chooser)))
-      #-windows
-      (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
-                   (gtk:font-chooser-preview-text chooser)))
-      #+windows
-      (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
-                   (gtk:font-chooser-preview-text chooser)))
-      (is-true (gtk:font-chooser-show-preview-entry chooser)))))
+  (let* ((*gtk-warn-deprecated* nil)
+         (chooser (make-instance 'gtk:font-chooser-dialog)))
+    (is (string= "Sans 10" (gtk:font-chooser-font chooser)))
+    (is (typep (gtk:font-chooser-font-desc chooser) 'pango:font-description))
+    (is (string= "" (gtk:font-chooser-font-features chooser)))
+    (is (string= "de-de" (gtk:font-chooser-language chooser)))
+    (is (equal '(:style :size) (gtk:font-chooser-level chooser)))
+    #-windows
+    (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
+                 (gtk:font-chooser-preview-text chooser)))
+    #+windows
+    (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
+                 (gtk:font-chooser-preview-text chooser)))
+    (is-true (gtk:font-chooser-show-preview-entry chooser))
+    (is-false (gtk:window-destroy chooser))
+    (is (= 1 (g:object-ref-count chooser)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -113,4 +114,4 @@
 ;;;     gtk_font_chooser_set_font_map
 ;;;     gtk_font_chooser_get_font_map
 
-;;; 2024-9-20
+;;; 2024-10-13

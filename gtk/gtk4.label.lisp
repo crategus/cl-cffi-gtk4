@@ -2,7 +2,7 @@
 ;;; gtk4.label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -146,7 +146,7 @@
 ;;; GtkLabel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkLabel" label
+(gobject:define-gobject "GtkLabel" label
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleText"
@@ -1310,16 +1310,16 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2024-4-24}
+ "@version{2024-10-13}
   @argument[label]{a @class{gtk:label} widget}
   @return{The @class{pango:layout} object for this label.}
   @begin{short}
     Gets the Pango layout used to display the label.
   @end{short}
-  The layout is useful to e.g. convert text positions to pixel positions,
-  in combination with the @fun{gtk:label-layout-offsets} function. The label
-  is free to recreate its layout at any time, so it should be considered
-  read-only.
+  The layout is useful to, for example, convert text positions to pixel
+  positions, in combination with the @fun{gtk:label-layout-offsets} function.
+  The label is free to recreate its layout at any time, so it should be
+  considered read-only.
   @see-class{gtk:label}
   @see-class{pango:layout}
   @see-function{gtk:label-layout-offsets}"

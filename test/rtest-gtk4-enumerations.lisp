@@ -1413,8 +1413,7 @@
   (is (g:type-is-enum "GtkAccessibleProperty"))
   ;; Check type initializer
   (is (eq (g:gtype "GtkAccessibleProperty")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_property_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_property_get_type" :size))))
   ;; Check registered name
   (is (eq 'gtk:accessible-property
           (glib:symbol-for-gtype "GtkAccessibleProperty")))
@@ -1437,42 +1436,43 @@
                "GTK_ACCESSIBLE_PROPERTY_VALUE_MAX"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_MIN"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_NOW"
-               "GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT")
+               "GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT"
+               "GTK_ACCESSIBLE_PROPERTY_HELP_TEXT")
              (glib-test:list-enum-item-names "GtkAccessibleProperty")))
   ;; Check values
-  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18)
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19)
              (glib-test:list-enum-item-values "GtkAccessibleProperty")))
   ;; Check nick names
   (is (equal '("autocomplete" "description" "has-popup" "key-shortcuts" "label"
                "level" "modal" "multi-line" "multi-selectable" "orientation"
                "placeholder" "read-only" "required" "role-description" "sort"
-               "value-max" "value-min" "value-now" "value-text")
+               "value-max" "value-min" "value-now" "value-text" "help-text")
              (glib-test:list-enum-item-nicks "GtkAccessibleProperty")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessibleProperty"
                                     GTK:ACCESSIBLE-PROPERTY
-                                    (:EXPORT T
-                                     :TYPE-INITIALIZER
-                                     "gtk_accessible_property_get_type")
-                                    (:AUTOCOMPLETE 0)
-                                    (:DESCRIPTION 1)
-                                    (:HAS-POPUP 2)
-                                    (:KEY-SHORTCUTS 3)
-                                    (:LABEL 4)
-                                    (:LEVEL 5)
-                                    (:MODAL 6)
-                                    (:MULTI-LINE 7)
-                                    (:MULTI-SELECTABLE 8)
-                                    (:ORIENTATION 9)
-                                    (:PLACEHOLDER 10)
-                                    (:READ-ONLY 11)
-                                    (:REQUIRED 12)
-                                    (:ROLE-DESCRIPTION 13)
-                                    (:SORT 14)
-                                    (:VALUE-MAX 15)
-                                    (:VALUE-MIN 16)
-                                    (:VALUE-NOW 17)
-                                    (:VALUE-TEXT 18))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_accessible_property_get_type")
+                       (:AUTOCOMPLETE 0)
+                       (:DESCRIPTION 1)
+                       (:HAS-POPUP 2)
+                       (:KEY-SHORTCUTS 3)
+                       (:LABEL 4)
+                       (:LEVEL 5)
+                       (:MODAL 6)
+                       (:MULTI-LINE 7)
+                       (:MULTI-SELECTABLE 8)
+                       (:ORIENTATION 9)
+                       (:PLACEHOLDER 10)
+                       (:READ-ONLY 11)
+                       (:REQUIRED 12)
+                       (:ROLE-DESCRIPTION 13)
+                       (:SORT 14)
+                       (:VALUE-MAX 15)
+                       (:VALUE-MIN 16)
+                       (:VALUE-NOW 17)
+                       (:VALUE-TEXT 18)
+                       (:HELP-TEXT 19))
              (gobject:get-gtype-definition "GtkAccessibleProperty"))))
 
 ;;;     GtkAccessibleRelation
@@ -1683,4 +1683,4 @@
                                     (:OTHER 3))
              (gobject:get-gtype-definition "GtkAccessibleSort"))))
 
-;;; 2024-9-19
+;;; 2024-10-13

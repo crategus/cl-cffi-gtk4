@@ -138,6 +138,16 @@
 
 ;;;     gtk_picture_new_for_file
 
+(test gtk-picture-new-for-file
+  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
+         (file (g:file-new-for-path path))
+         (picture nil))
+    (is (typep (setf picture
+                     (gtk:picture-new-for-file file)) 'gtk:picture))
+    (is-false (setf (gtk:picture-file picture) nil))
+    (is (= 1 (g:object-ref-count picture)))
+    (is (= 1 (g:object-ref-count file)))))
+
 ;;;     gtk_picture_new_for_filename
 
 (test gtk-picture-new-for-filename
@@ -147,13 +157,40 @@
 ;;;     gtk_picture_new_for_resource
 
 (test gtk-picture-new-for-resource
-  (gio:with-g-resources (resource (glib-sys:sys-path
-                                    "test/resource/rtest-resource.gresource"))
+  (gio:with-resource (resource (glib-sys:sys-path
+                                   "test/resource/rtest-resource.gresource"))
     (let ((path "/com/crategus/test/gtk-logo-24.png"))
     (is (typep (gtk:picture-new-for-resource path) 'gtk:picture)))))
 
 ;;;     gtk_picture_set_pixbuf
+
+(test gtk-picture-set-pixbuf
+  (let* ((*gtk-warn-deprecated* nil)
+         (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
+         (pixbuf (gdk:pixbuf-new-from-file path))
+         (picture (gtk:picture-new)))
+    (is-false (gtk:picture-set-pixbuf picture pixbuf))
+    (is (= 1 (g:object-ref-count picture)))
+    (is (= 2 (g:object-ref-count pixbuf)))
+    (is-false (setf (gtk:picture-paintable picture) nil))
+    (is (= 1 (g:object-ref-count pixbuf)))))
+
 ;;;     gtk_picture_set_filename
+
+(test gtk-picture-set-filename
+  (let ((filename (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
+        (picture (gtk:picture-new)))
+    (is-false (gtk:picture-set-filename picture filename))
+    (is (= 1 (g:object-ref-count picture)))))
+
 ;;;     gtk_picture_set_resource
 
-;;; 2024-9-20
+(test gtk-picture-set-resource
+  (gio:with-resource (resource (glib-sys:sys-path
+                                   "test/resource/rtest-resource.gresource"))
+    (let ((path "/com/crategus/test/gtk-logo-24.png")
+          (picture (gtk:picture-new)))
+      (is-false (gtk:picture-set-resource picture path))
+      (is (= 1 (g:object-ref-count picture))))))
+
+;;; 2024-10-13

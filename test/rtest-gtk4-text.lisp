@@ -104,7 +104,10 @@
     (is (= 0 (gtk:text-scroll-offset text)))
     (is-false (gtk:text-tabs text))
     (is-false (gtk:text-truncate-multiline text))
-    (is-true (gtk:text-visibility text))))
+    (is-true (gtk:text-visibility text))
+    ;; Remove text buffer and check the refcount
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count text)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -302,7 +305,9 @@
 (test gtk-text-new
   (let (text)
     (is (typep (setf text (gtk:text-new)) 'gtk:text))
-    (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))))
+    (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count text)))))
 
 ;;;     gtk_text_new_with_buffer
 
@@ -311,7 +316,10 @@
         text)
     (is (typep (setf text (gtk:text-new-with-buffer buffer)) 'gtk:text))
     (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
-    (is (eq buffer (gtk:text-buffer text)))))
+    (is (eq buffer (gtk:text-buffer text)))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count text)))))
 
 ;;;     gtk_text_unset_invisible_char
 
@@ -338,7 +346,10 @@
     (is (= 6 (gtk:text-text-length text)))
     (is (= (gtk:entry-buffer-length (gtk:text-buffer text))
            (gtk:text-text-length text)))
-    (is (= (gtk:entry-buffer-length buffer) (gtk:text-text-length text)))))
+    (is (= (gtk:entry-buffer-length buffer) (gtk:text-text-length text)))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count text)))))
 
 ;;;     gtk_text_grab_focus_without_selecting
 
@@ -351,16 +362,19 @@
       (is-false (gtk:text-compute-cursor-extents text 2 strong weak))
       ;; Check strong values
       #-windows
-      (is (= 18.0 (graphene:rect-x strong)))
+      (is (= 17.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
       (is (= 17.0 (graphene:rect-height strong)))
       ;; Check weak values
       #-windows
-      (is (= 18.0 (graphene:rect-x weak)))
+      (is (= 17.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
-      (is (= 17.0 (graphene:rect-height weak))))))
+      (is (= 17.0 (graphene:rect-height weak))))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count text)))))
 
 (test gtk-text-compute-cursor-extents.2
   (let* ((buffer (gtk:entry-buffer-new "Ägypten"))
@@ -368,10 +382,13 @@
     (graphene:with-rect (strong)
       (is-false (gtk:text-compute-cursor-extents text 2 strong nil))
       #-windows
-      (is (= 18.0 (graphene:rect-x strong)))
+      (is (= 17.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
-      (is (= 17.0 (graphene:rect-height strong))))))
+      (is (= 17.0 (graphene:rect-height strong))))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count text)))))
 
 (test gtk-text-compute-cursor-extents.3
   (let* ((buffer (gtk:entry-buffer-new "Ägypten"))
@@ -379,9 +396,12 @@
     (graphene:with-rect (weak)
       (is-false (gtk:text-compute-cursor-extents text 2 nil weak))
       #-windows
-      (is (= 18.0 (graphene:rect-x weak)))
+      (is (= 17.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
-      (is (= 17.0 (graphene:rect-height weak))))))
+      (is (= 17.0 (graphene:rect-height weak))))
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count text)))))
 
-;;; 2024-7-3
+;;; 2024-10-13

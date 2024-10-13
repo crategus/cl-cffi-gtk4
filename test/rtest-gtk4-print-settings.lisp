@@ -480,4 +480,4 @@
       (is-true (glib:key-file-load-from-file keyfile path :none))
       (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
 
-;;; 2024-9-20
+;;; 2024-10-13

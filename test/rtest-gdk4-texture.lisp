@@ -92,6 +92,47 @@
                        (:N-FORMATS 33))
              (gobject:get-gtype-definition "GdkMemoryFormat"))))
 
+;;; ----------------------------------------------------------------------------
+
+;;;     GdkColorState
+
+(test gdk-color-state-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GdkColorState"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GdkColorState")
+          (g:gtype (cffi:foreign-funcall "gdk_color_state_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gdk:color-state
+          (glib:symbol-for-gtype "GdkColorState"))))
+
+;;;     gdk_color_state_get_rec2100_linear                  Since 4.16
+
+(test gdk-color-state-rec2100-linear
+  (is (typep (gdk:color-state-rec2100-linear) 'gdk:color-state)))
+
+;;;     gdk_color_state_get_rec2100_pq                      Since 4.16
+
+(test gdk-color-state-rec2100-pq
+  (is (typep (gdk:color-state-rec2100-pq) 'gdk:color-state)))
+
+;;;     gdk_color_state_get_srgb                            Since 4.16
+
+(test gdk-color-state-srgb
+  (is (typep (gdk:color-state-srgb) 'gdk:color-state)))
+
+;;;     gdk_color_state_get_srgb_linear                     Since 4.16
+
+(test gdk-color-state-srgb-linear
+  (is (typep (gdk:color-state-srgb-linear) 'gdk:color-state)))
+
+;;;     gdk_color_state_create_cicp_params                  Since 4.16
+;;;     gdk_color_state_equal                               Since 4.16
+;;;     gdk_color_state_ref                                 Since 4.16
+;;;     gdk_color_state_unref                               Since 4.16
+
+;;; ----------------------------------------------------------------------------
+
 ;;;     GdkTexture
 
 (test gdk-texture-class
@@ -113,7 +154,7 @@
   (is (equal '("GdkPaintable" "GIcon" "GLoadableIcon")
              (glib-test:list-interfaces "GdkTexture")))
   ;; Check properties
-  (is (equal '("height" "width")
+  (is (equal '("color-state" "height" "width")
              (glib-test:list-properties "GdkTexture")))
   ;; Check signals
   (is (equal '()
@@ -124,7 +165,9 @@
                         :EXPORT T
                         :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
                         :TYPE-INITIALIZER "gdk_texture_get_type")
-                       ((HEIGHT TEXTURE-HEIGHT "height" "gint" T NIL)
+                       ((COLOR-STATE TEXTURE-COLOR-STATE "color-state"
+                         "GdkColorState" T NIL)
+                        (HEIGHT TEXTURE-HEIGHT "height" "gint" T NIL)
                         (WIDTH TEXTURE-WIDTH "width" "gint" T NIL)))
              (gobject:get-gtype-definition "GdkTexture"))))
 
@@ -199,6 +242,14 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;; FIXME: Causes a fatal error. It is not possible to create an instance
+;; with the MAKE-INSTANCE method and G:OBJECT-NEW function.
+;;
+;; Gdk:ERROR: gdk_texture_set_property: assertion failed: (self->color_state)
+;; fatal error encountered in SBCL pid 6264 tid 6264:
+;; SIGABRT received.
+
+#+nil
 (test gdk-texture-properties
   (let ((texture (make-instance 'gdk:memory-texture)))
     (is (= 1 (gdk:texture-height texture)))
@@ -214,6 +265,7 @@
          (texture (gdk:texture-new-for-pixbuf pixbuf)))
     (is (typep pixbuf 'gdk-pixbuf:pixbuf))
     (is (typep texture 'gdk:texture))
+    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
     (is (= 489 (gdk:texture-width texture)))
     (is (= 537 (gdk:texture-height texture)))
     (is (= 2 (g:object-ref-count pixbuf)))
@@ -227,6 +279,7 @@
       (let* ((path "/com/crategus/test/ducky.png")
              (texture (gdk:texture-new-from-resource path)))
         (is (typep texture 'gdk:texture))
+        (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
         (is (= 489 (gdk:texture-width texture)))
         (is (= 537 (gdk:texture-height texture)))
         (is (= 1 (g:object-ref-count texture)))))))
@@ -238,6 +291,7 @@
          (file (g:file-new-for-path path))
          (texture (gdk:texture-new-from-file file)))
     (is (typep texture 'gdk:texture))
+    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
     (is (= 489 (gdk:texture-width texture)))
     (is (= 537 (gdk:texture-height texture)))
     (is (= 1 (g:object-ref-count file)))
@@ -249,6 +303,7 @@
   (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
          (texture (gdk:texture-new-from-filename path)))
     (is (typep texture 'gdk:texture))
+    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
     (is (= 489 (gdk:texture-width texture)))
     (is (= 537 (gdk:texture-height texture)))
     (is (= 1 (g:object-ref-count texture)))))
@@ -266,4 +321,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2024-10-11
+;;; 2024-10-13

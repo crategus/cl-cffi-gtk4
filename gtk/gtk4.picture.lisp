@@ -2,7 +2,7 @@
 ;;; gtk4.picture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -105,9 +105,9 @@
 (setf (liber:alias-for-symbol 'content-fit)
       "GEnum"
       (liber:symbol-documentation 'content-fit)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @begin{declaration}
-(gobject:define-g-enum \"GtkContentFit\" content-fit
+(gobject:define-genum \"GtkContentFit\" content-fit
   (:export t
    :type-initializer \"gtk_content_fit_get_type\")
   (:fill 0)
@@ -121,8 +121,8 @@
         its aspect ratio in consideration. The resulting content will appear as
         stretched if its aspect ratio is different from the allocation aspect
         ratio.}
-      @entry[:contain]{Scale the content to fit the allocation, while taking its
-        aspect ratio in consideration. The resulting content will appear as
+      @entry[:contain]{Scale the content to fit the allocation, while taking
+        its aspect ratio in consideration. The resulting content will appear as
         letterboxed if its aspect ratio is different from the allocation aspect
         ratio.}
       @entry[:cover]{Cover the entire allocation, while taking the content
@@ -172,7 +172,7 @@
 
 #+liber-documentation
 (setf (documentation 'picture 'type)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @begin{short}
     The @class{gtk:picture} widget displays a @class{gdk:paintable} object.
   @end{short}
@@ -237,8 +237,8 @@
 
 ;;; --- gtk:picture-alternative-text -------------------------------------------
 
-;; TODO: To unset the text we have to use the NULL-POINTER value. Can we
-;; implement a function with uses this with the NIL value?
+;; TODO: To unset the text we have to use the NULL-POINTER value. For use
+;; of the NIL value we have to implement a new SETF function.
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "alternative-text" 'picture) t)
@@ -251,7 +251,7 @@
 (setf (liber:alias-for-function 'picture-alternative-text)
       "Accessor"
       (documentation 'picture-alternative-text 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-alternative-text object) => text}
   @syntax{(setf (gtk:picture-alternative-text object) text)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -266,8 +266,8 @@
   described textually. The @setf{gtk:picture-alternative-text} function sets an
   alternative textual description. It is equivalent to the \"alt\" attribute for
   images on websites. This text will be made available to accessibility tools.
-  If the picture cannot be described textually, set this property to
-  @code{cffi:null-pointer}.
+  If the picture cannot be described textually, set this property to the
+  @code{cffi:null-pointer} value.
   @see-class{gtk:picture}")
 
 ;;; --- gtk:picture-can-shrink -------------------------------------------------
@@ -282,7 +282,7 @@
 (setf (liber:alias-for-function 'picture-can-shrink)
       "Accessor"
       (documentation 'picture-can-shrink 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-can-shrink object) => setting}
   @syntax{(setf (gtk:picture-can-shrink object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -297,8 +297,8 @@
   to still force a minimum size manually, consider using the
   @fun{gtk:widget-size-request} function. Also of note is that a similar
   function for growing does not exist because the grow behavior can be
-  controlled via the @fun{gtk:widget-halign} and @fun{gtk:widget-valign}
-  functions.
+  controlled via the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign}
+  properties.
   @see-class{gtk:picture}
   @see-function{gtk:widget-size-request}
   @see-function{gtk:widget-halign}
@@ -317,7 +317,7 @@
 (setf (liber:alias-for-function 'picture-content-fit)
       "Accessor"
       (documentation 'picture-content-fit 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-content-fit object) => setting}
   @syntax{(setf (gtk:picture-content-fit object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -339,13 +339,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'picture) t)
  "The @code{file} property of type @class{g:file} (Read / Write) @br{}
-  The file that is displayed or @code{nil} if none.")
+  The file that is displayed or @code{nil} if none. @br{}
+  Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'picture-file)
       "Accessor"
       (documentation 'picture-file 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-file object) => file}
   @syntax{(setf (gtk:picture-file object) file)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -381,7 +382,7 @@
 (setf (liber:alias-for-function 'picture-keep-aspect-ratio)
       "Accessor"
       (documentation 'picture-keep-aspect-ratio 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-keep-aspect-ratio object) => setting}
   @syntax{(setf (gtk:picture-keep-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -409,13 +410,14 @@
 (setf (documentation (liber:slot-documentation "paintable" 'picture) t)
  "The @code{paintable} property of type @class{gdk:paintable} (Read / Write)
   @br{}
-  The paintable to be displayed by the picture.")
+  The paintable to be displayed by the picture. @br{}
+  Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'picture-paintable)
       "Accessor"
       (documentation 'picture-paintable 'function)
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @syntax{(gtk:picture-keep-paintable object) => paintable}
   @syntax{(setf (gtk:picture-paintable object) paintable)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -441,7 +443,7 @@
 
 (defun picture-new ()
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @return{The newly created @class{gtk:picture} widget.}
   @short{Creates a new empty picture.}
   @see-class{gtk:picture}"
@@ -457,7 +459,7 @@
 
 (defun picture-new-for-paintable (paintable)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @argument[paintable]{a @class{gdk:paintable} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -484,7 +486,7 @@
 
 (defun picture-new-for-pixbuf (pixbuf)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget}
   @begin{short}
@@ -517,7 +519,7 @@
 
 (defun picture-new-for-file (file)
  #+liber-documentation
- "@version{#2024-4-25}
+ "@version{2024-10-13}
   @argument[file]{a @class{g:file} object}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -546,7 +548,7 @@
 
 (defun picture-new-for-filename (filename)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @argument[filename]{a string with a filename}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -567,7 +569,7 @@
 (cffi:defcfun ("gtk_picture_new_for_resource" picture-new-for-resource)
      (g:object widget)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-13}
   @argument[path]{a string with the resource path}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -593,7 +595,7 @@
 
 (defun picture-set-pixbuf (picture pixbuf)
  #+liber-documentation
- "@version{#2023-8-31}
+ "@version{2024-10-13}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @begin{short}
@@ -602,8 +604,8 @@
   This is a utility function that calls the @fun{gtk:picture-paintable}
   function.
   @begin[Warning]{dictionary}
-    This function is deprecated since 4.12. Use the
-    @fun{gtk:picture-set-paintable} function instead.
+    This function is deprecated since 4.12. Use the @fun{gtk:picture-paintable}
+    function instead.
   @end{dictionary}
   @see-class{gtk:picture}
   @see-function{gtk:picture-new-for-pixbuf}
@@ -619,19 +621,22 @@
 ;;; gtk_picture_set_filename
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_picture_set_filename" picture-set-filename) :void
+(cffi:defcfun ("gtk_picture_set_filename" %picture-set-filename) :void
+  (picture (g:object picture))
+  (filename :string))
+
+(defun picture-set-filename (picture filename)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{2024-10-13}
   @argument[picture]{a @class{gtk:picture} widget}
-  @argument[filename]{a string with the filename}
+  @argument[filename]{a pathname or namestring with the filename}
   @begin{short}
     Makes the picture load and display the given @arg{filename}.
   @end{short}
   This is a utility function that calls the @fun{gtk:picture-file} function.
   @see-class{gtk:picture}
   @see-function{gtk:picture-file}"
-  (picture (g:object picture))
-  (filename :string))
+  (%picture-set-filename picture (namestring filename)))
 
 (export 'picture-set-filename)
 
@@ -641,7 +646,7 @@
 
 (cffi:defcfun ("gtk_picture_set_resource" picture-set-resource) :void
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{2024-10-13}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[path]{a string with the resource path}
   @begin{short}

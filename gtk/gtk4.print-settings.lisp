@@ -2,7 +2,7 @@
 ;;; gtk4.print-settings.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -137,7 +137,7 @@
 ;;; GtkPageOrientation
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPageOrientation" page-orientation
+(gobject:define-genum "GtkPageOrientation" page-orientation
   (:export t
    :type-initializer "gtk_page_orientation_get_type")
   :portrait
@@ -175,7 +175,7 @@
 ;;; GtkPrintDuplex
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPrintDuplex" print-duplex
+(gobject:define-genum "GtkPrintDuplex" print-duplex
   (:export t
    :type-initializer "gtk_print_duplex_get_type")
   :simplex
@@ -210,7 +210,7 @@
 ;;; GtkPrintQuality
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPrintQuality" print-quality
+(gobject:define-genum "GtkPrintQuality" print-quality
   (:export t
    :type-initializer "gtk_print_quality_get_type")
   :low
@@ -248,7 +248,7 @@
 ;;; GtkNumberUpLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkNumberUpLayout" number-up-layout
+(gobject:define-genum "GtkNumberUpLayout" number-up-layout
   (:export t
    :type-initializer "gtk_number_up_layout_get_type")
   (:left-to-right-top-to-bottom 0)
@@ -301,7 +301,7 @@
 ;;; GtkPrintPages
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPrintPages" print-pages
+(gobject:define-genum "GtkPrintPages" print-pages
   (:export t
    :type-initializer "gtk_print_pages_get_type")
   (:all 0)
@@ -364,7 +364,7 @@
 ;;; GtkPageSet
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPageSet" page-set
+(gobject:define-genum "GtkPageSet" page-set
   (:export t
    :type-initializer "gtk_page_set_get_type")
   (:all 0)
@@ -399,7 +399,7 @@
 ;;; GtkPrintSettings
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPrintSettings" print-settings
+(gobject:define-gobject "GtkPrintSettings" print-settings
   (:superclass g:object
    :export t
    :interfaces nil

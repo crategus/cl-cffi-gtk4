@@ -31,13 +31,12 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkStyleContextPrintFlags"
                                      GTK:STYLE-CONTEXT-PRINT-FLAGS
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_style_context_print_flags_get_type")
-                                     (:NONE 0)
-                                     (:RECURSE 1)
-                                     (:SHOW-STYLE 2)
-                                     (:SHOW-CHANGE 4))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_style_context_print_flags_get_type")
+                       (:NONE 0)
+                       (:RECURSE 1)
+                       (:SHOW-STYLE 2)
+                       (:SHOW-CHANGE 4))
              (gobject:get-gtype-definition "GtkStyleContextPrintFlags"))))
 
 ;;;     GtkBorder
@@ -108,9 +107,12 @@
 ;;;     display
 
 (test gtk-style-context-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((context (gtk:widget-style-context (make-instance 'gtk:box))))
-      (is (typep (gtk:style-context-display context) 'gdk:display)))))
+  (let* ((*gtk-warn-deprecated* nil)
+         (context (gtk:widget-style-context (make-instance 'gtk:box)))
+         (display nil))
+    (is (typep (setf display
+                     (gtk:style-context-display context)) 'gdk:display))
+    (is (eq display (gdk:display-default)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -140,110 +142,19 @@
 ;;;     gtk_style_context_to_string
 
 (test gtk-style-context-to-string
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((context (gtk:widget-style-context (make-instance 'gtk:about-dialog))))
-      (is (string=
-"[window.aboutdialog.background.csd:dir(ltr)]
-  box.vertical:dir(ltr)
+  (let* ((*gtk-warn-deprecated* nil)
+         (dialog (make-instance 'gtk:dialog))
+         (context (gtk:widget-style-context dialog)))
+    (is (string=
+"[window.background.dialog:dir(ltr)]
+  box.dialog-vbox.vertical:dir(ltr)
     box.vertical:dir(ltr)
-      image.icon-dropshadow.large-icons:dir(ltr)
-      label:dir(ltr)
-      stack:dir(ltr)
-        box.vertical:dir(ltr)
-          [label:dir(ltr)]
-          [label:dir(ltr)]
-          [label:dir(ltr)]
-          [label:dir(ltr)]
-          [label:dir(ltr)]
-        box.vertical:dir(ltr)
-          scrolledwindow.frame:dir(ltr)
-            viewport.view:dir(ltr)
-              grid.vertical:dir(ltr)
-            scrollbar.bottom.horizontal:dir(ltr)
-              range.horizontal:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            scrollbar.right.vertical:dir(ltr)
-              range.vertical:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            overshoot.left:dir(ltr)
-            undershoot.left:dir(ltr)
-            overshoot.right:dir(ltr)
-            undershoot.right:dir(ltr)
-            overshoot.top:dir(ltr)
-            undershoot.top:dir(ltr)
-            overshoot.bottom:dir(ltr)
-            undershoot.bottom:dir(ltr)
-            junction:dir(ltr)
-        box.vertical:dir(ltr)
-          scrolledwindow.frame:dir(ltr)
-            textview.view:dir(ltr)
-              text:dir(ltr)
-                [selection:dir(ltr)]
-            scrollbar.bottom.horizontal:dir(ltr)
-              range.horizontal:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            scrollbar.right.vertical:dir(ltr)
-              range.vertical:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            overshoot.left:dir(ltr)
-            undershoot.left:dir(ltr)
-            overshoot.right:dir(ltr)
-            undershoot.right:dir(ltr)
-            overshoot.top:dir(ltr)
-            undershoot.top:dir(ltr)
-            overshoot.bottom:dir(ltr)
-            undershoot.bottom:dir(ltr)
-            junction:dir(ltr)
-        box.vertical:dir(ltr)
-          scrolledwindow.frame:dir(ltr)
-            textview.view:dir(ltr)
-              text:dir(ltr)
-                [selection:dir(ltr)]
-            scrollbar.bottom.horizontal:dir(ltr)
-              range.horizontal:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            scrollbar.right.vertical:dir(ltr)
-              range.vertical:dir(ltr)
-                trough:dir(ltr)
-                  slider:dir(ltr)
-            overshoot.left:dir(ltr)
-            undershoot.left:dir(ltr)
-            overshoot.right:dir(ltr)
-            undershoot.right:dir(ltr)
-            overshoot.top:dir(ltr)
-            undershoot.top:dir(ltr)
-            overshoot.bottom:dir(ltr)
-            undershoot.bottom:dir(ltr)
-            junction:dir(ltr)
-  headerbar.titlebar:dir(ltr)
-    windowhandle:dir(ltr)
-      box:dir(ltr)
-        box.horizontal.start:dir(ltr)
-          [windowcontrols.empty.start:dir(ltr)]
-        [stackswitcher.linked:dir(ltr)]
-          button.text-button.toggle:dir(ltr):checked
-            label:dir(ltr)
-          [button.text-button.toggle:dir(ltr)]
-            label:dir(ltr)
-          [button.text-button.toggle:dir(ltr)]
-            label:dir(ltr)
-          [button.text-button.toggle:dir(ltr)]
-            label:dir(ltr)
-        box.end.horizontal:dir(ltr)
-          windowcontrols.end:dir(ltr)
-            button.minimize:dir(ltr)
-              image:dir(ltr)
-            button.close:dir(ltr)
-              image:dir(ltr)
-  link:dir(ltr):link
-  link:dir(ltr):visited
+    box.dialog-action-box.horizontal:dir(ltr)
+      box.dialog-action-area.horizontal:dir(ltr)
 "
-                   (gtk:style-context-to-string context :recurse))))))
+                 (gtk:style-context-to-string context :recurse)))
+    (is-false (gtk:window-destroy dialog))
+    (is (= 1 (g:object-ref-count dialog)))))
 
 ;;;     gtk_render_activity
 ;;;     gtk_render_arrow
@@ -258,4 +169,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; 2024-9-19
+;;; 2024-10-13

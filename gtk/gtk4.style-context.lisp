@@ -2,7 +2,7 @@
 ;;; gtk4.style-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -103,7 +103,7 @@
 ;;; GtkBorder
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-cstruct border "GtkBorder"
+(glib:define-gboxed-cstruct border "GtkBorder"
   (:export t
    :type-initializer "gtk_border_get_type")
   (left :int16 :initform 0)
@@ -272,7 +272,7 @@
 ;;; GtkStyleContextPrintFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkStyleContextPrintFlags" style-context-print-flags
+(gobject:define-gflags "GtkStyleContextPrintFlags" style-context-print-flags
   (:export t
    :type-initializer "gtk_style_context_print_flags_get_type")
   (:none 0)
@@ -316,7 +316,7 @@
 ;;; GtkStyleContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStyleContext" style-context
+(gobject:define-gobject "GtkStyleContext" style-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -1022,7 +1022,7 @@ GtkEntry.entry { ... @}
 
 (defun style-context-to-string (context flags)
  #+liber-documentation
- "@version{2023-9-17}
+ "@version{2024-10-13}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[flags]{a @symbol{gtk:style-context-print-flags} value that
     determine what to print}
@@ -1037,7 +1037,7 @@ GtkEntry.entry { ... @}
   This function is intended for testing and debugging of the CSS implementation
   in GTK. There are no guarantees about the format of the returned string, it
   may change.
-  @begin[Example]{dictionary}
+  @begin{examples}
     @begin{pre}
 (setq context
       (gtk:widget-style-context (make-instance 'gtk:dialog)))
@@ -1051,7 +1051,7 @@ GtkEntry.entry { ... @}
       box.dialog-action-area.horizontal:dir(ltr)
 \"
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}

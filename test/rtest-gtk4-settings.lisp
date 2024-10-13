@@ -40,7 +40,7 @@
                "gtk-enable-event-sounds" "gtk-enable-input-feedback-sounds"
                "gtk-enable-primary-paste" "gtk-entry-password-hint-timeout"
                "gtk-entry-select-on-focus" "gtk-error-bell" "gtk-font-name"
-               "gtk-fontconfig-timestamp"
+               "gtk-font-rendering" "gtk-fontconfig-timestamp"
                "gtk-hint-font-metrics" "gtk-icon-theme-name" "gtk-im-module"
                "gtk-keynav-use-caret" "gtk-label-select-on-focus"
                "gtk-long-press-time" "gtk-overlay-scrolling"
@@ -129,6 +129,8 @@
                         "gtk-error-bell" "gboolean" T T)
                        (GTK-FONT-NAME SETTINGS-GTK-FONT-NAME
                         "gtk-font-name" "gchararray" T T)
+                       (GTK-FONT-RENDERING SETTINGS-GTK-FONT-RENDERING
+                        "gtk-font-rendering" "GtkFontRendering" T T)
                        (GTK-FONTCONFIG-TIMESTAMP
                         SETTINGS-GTK-FONTCONFIG-TIMESTAMP
                         "gtk-fontconfig-timestamp" "guint" T T)
@@ -231,6 +233,7 @@
     (is-true (gtk:settings-gtk-entry-select-on-focus settings))
     (is-true (gtk:settings-gtk-error-bell settings))
     (is (string= "Ubuntu 11" (gtk:settings-gtk-font-name settings)))
+    (is (eq :automatic (gtk:settings-gtk-font-rendering settings)))
     (is (= 0 (gtk:settings-gtk-fontconfig-timestamp settings)))
     (is (string= "Yaru" (gtk:settings-gtk-icon-theme-name settings)))
     (is (stringp (gtk:settings-gtk-im-module settings)))
@@ -239,7 +242,7 @@
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))
     (is-true (gtk:settings-gtk-overlay-scrolling settings))
     (is-true (gtk:settings-gtk-primary-button-warps-slider settings))
-    (is (string= "cups,file" (gtk:settings-gtk-print-backends settings)))
+    (is (string= "cpdb,file" (gtk:settings-gtk-print-backends settings)))
     (is (string= "evince --unlink-tempfile --preview --print-settings %s %f"
                  (gtk:settings-gtk-print-preview-command settings)))
     ;; FIXME: Signals an error: null-pointer in parse-g-param-spec.
@@ -288,7 +291,7 @@
                  "gtk-enable-event-sounds" "gtk-enable-input-feedback-sounds"
                  "gtk-enable-primary-paste" "gtk-entry-password-hint-timeout"
                  "gtk-entry-select-on-focus" "gtk-error-bell" "gtk-font-name"
-                 "gtk-fontconfig-timestamp"
+                 "gtk-font-rendering" "gtk-fontconfig-timestamp"
                  "gtk-hint-font-metrics" "gtk-icon-theme-name"
                  "gtk-im-module" "gtk-keynav-use-caret"
                  "gtk-label-select-on-focus" "gtk-long-press-time"
@@ -309,4 +312,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2024-9-19
+;;; 2024-10-13

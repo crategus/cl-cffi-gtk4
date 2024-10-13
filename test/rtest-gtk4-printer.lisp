@@ -42,7 +42,7 @@
           (g:type-parent "GtkPrintBackend")))
   ;; Check children
   (if *first-run-gtk-test*
-      (is (equal '("GtkPrintBackendCups" "GtkPrintBackendFile")
+      (is (equal '("GtkPrintBackendCpdb" "GtkPrintBackendFile")
                  (glib-test:list-children "GtkPrintBackend"))))
   ;; Check interfaces
   (is (equal '()
@@ -79,7 +79,7 @@
           (g:type-parent "GtkPrinter")))
   ;; Check children
   (if *first-run-gtk-test*
-      (is (equal '("GtkPrinterCups")
+      (is (equal '("GtkPrinterCpdb")
                  (glib-test:list-children "GtkPrinter"))))
   ;; Check interfaces
   (is (equal '()
@@ -254,4 +254,4 @@
       (is-false (gtk:printer-hard-margins-for-paper-size *default-printer*
                                                          size)))))
 
-;;; 2024-7-6
+;;; 2024-10-13

@@ -22,12 +22,12 @@
 ;;;     gtk_get_minor_version
 
 (test gtk-minor-version
-  (is (<= 6 (gtk:minor-version))))
+  (is (= 16 (gtk:minor-version))))
 
 ;;;     gtk_get_micro_version
 
 (test gtk-micro-version
-  (is (<= 0 (gtk:micro-version))))
+  (is (= 2 (gtk:micro-version))))
 
 ;;;     gtk_get_binary_age                                 not implemented
 ;;;     gtk_get_interface_age                              not implemented
@@ -39,4 +39,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2024-6-10
+;;; 2024-10-13

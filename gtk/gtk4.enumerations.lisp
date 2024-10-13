@@ -2,7 +2,7 @@
 ;;; gtk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -2136,7 +2136,7 @@
 ;;; GtkAccessibleProperty
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleProperty" accessible-property
+(gobject:define-genum "GtkAccessibleProperty" accessible-property
   (:export t
    :type-initializer "gtk_accessible_property_get_type")
   :autocomplete
@@ -2157,15 +2157,17 @@
   :value-max
   :value-min
   :value-now
-  :value-text)
+  :value-text
+  #+gtk-4-16
+  :help-text)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-property)
       "GEnum"
       (liber:symbol-documentation 'accessible-property)
- "@version{2024-4-24}
+ "@version{2024-10-13}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleProperty\" accessible-property
+(gobject:define-genum \"GtkAccessibleProperty\" accessible-property
   (:export t
    :type-initializer \"gtk_accessible_property_get_type\")
   :autocomplete
@@ -2186,7 +2188,8 @@
   :value-max
   :value-min
   :value-now
-  :value-text)
+  :value-text
+  :help-text)
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2206,12 +2209,12 @@
         Value type: string}
       @entry[:level]{Defines the hierarchical level of an element within a
         structure. Value type: integer}
-      @entry[:modal]{Indicates whether an element is modal when displayed. Value
-        type: boolean}
-      @entry[:multi-line]{Indicates whether a text box accepts multiple lines of
-        input or only a single line. Value type: boolean}
-      @entry[:multi-selectable]{Indicates that the user may select more than one
-        item from the current selectable descendants. Value type: boolean}
+      @entry[:modal]{Indicates whether an element is modal when displayed.
+        Value type: boolean}
+      @entry[:multi-line]{Indicates whether a text box accepts multiple lines
+        of input or only a single line. Value type: boolean}
+      @entry[:multi-selectable]{Indicates that the user may select more than
+        one item from the current selectable descendants. Value type: boolean}
       @entry[:orientation]{Indicates whether the orientation of the element is
         horizontal, vertical, or unknown/ambiguous. Value type:
         @class{gtk:orientation} enumeration}
@@ -2237,6 +2240,9 @@
         Value type: double}
       @entry[:value-text]{Defines the human readable text alternative of
         aria-valuenow for a range widget. Value type: string}
+      @entry[:help-text]{Defines a string value that provides a description
+        of non-standard keyboard interactions of the current element. Value
+        type: string. Since 4.16}
     @end{table}
   @end{values}
   @begin{short}
@@ -2244,7 +2250,8 @@
   @end{short}
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-autocomplete}
-  @see-symbol{gtk:accessible-sort}")
+  @see-symbol{gtk:accessible-sort}
+  @see-function{gtk:accessible-property-init-value}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAccessibleRelation

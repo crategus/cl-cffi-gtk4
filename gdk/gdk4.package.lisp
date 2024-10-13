@@ -361,8 +361,16 @@
       @about-function{paintable-new-empty}
     @end{subsection}
     @begin[GdkTexture]{subsection}
-      @about-symbol{memory-default}
       @about-symbol{memory-format}
+      @about-class{color-state}
+      @about-function{color-state-rec2100-linear}
+      @about-function{color-state-rec2100-pq}
+      @about-function{color-state-srgb}
+      @about-function{color-state-srgb-linear}
+      @about-function{color-state-create-cicp-params}
+      @about-function{color-state-equal}
+      @about-function{color-state-ref}
+      @about-function{color-state-unref}
       @about-class{texture}
       @about-generic{texture-height}
       @about-generic{texture-width}

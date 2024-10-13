@@ -23,10 +23,9 @@
   (is (equal '()
              (glib-test:list-children "GtkScrollbar")))
   ;; Check interfaces
-  ;; The GtkAccessibleRange interface is missing on Ubuntu. Why?!
   #-windows
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+               "GtkOrientable" "GtkAccessibleRange")
              (glib-test:list-interfaces "GtkScrollbar")))
   #+windows
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -46,40 +45,48 @@
   ;; Check class definition
   #-windows
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScrollbar" GTK:SCROLLBAR
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                        "GtkOrientable")
-                       :TYPE-INITIALIZER "gtk_scrollbar_get_type")
-                      ((ADJUSTMENT SCROLLBAR-ADJUSTMENT
-                        "adjustment" "GtkAdjustment" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_scrollbar_get_type")
+                       ((ADJUSTMENT SCROLLBAR-ADJUSTMENT
+                         "adjustment" "GtkAdjustment" T T)))
              (gobject:get-gtype-definition "GtkScrollbar")))
   #+windows
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScrollbar" GTK:SCROLLBAR
-                      (:SUPERCLASS GTK:WIDGET
-                       :EXPORT T
-                       :INTERFACES
-                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                        "GtkConstraintTarget" "GtkOrientable")
-                       :TYPE-INITIALIZER "gtk_scrollbar_get_type")
-                      ((ADJUSTMENT SCROLLBAR-ADJUSTMENT
-                        "adjustment" "GtkAdjustment" T T)))
+                       (:SUPERCLASS GTK:WIDGET
+                        :EXPORT T
+                        :INTERFACES
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
+                        :TYPE-INITIALIZER "gtk_scrollbar_get_type")
+                       ((ADJUSTMENT SCROLLBAR-ADJUSTMENT
+                         "adjustment" "GtkAdjustment" T T)))
              (gobject:get-gtype-definition "GtkScrollbar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-scrollbar-properties
   (let ((scrollbar (make-instance 'gtk:scrollbar)))
-    (is (typep (gtk:scrollbar-adjustment scrollbar) 'gtk:adjustment))))
+    (is (typep (gtk:scrollbar-adjustment scrollbar) 'gtk:adjustment))
+    (is-false (setf (gtk:scrollbar-adjustment scrollbar) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_scrollbar_new
 
 (test gtk-scrollbar-new
-  (is (typep (gtk:scrollbar-new :horizontal) 'gtk:scrollbar))
-  (is (typep (gtk:scrollbar-new :vertical (make-instance 'gtk:adjustment))
-             'gtk:scrollbar)))
+  (let (scrollbar)
+    (is (typep (setf scrollbar
+                     (gtk:scrollbar-new :horizontal)) 'gtk:scrollbar))
+    (is-false (setf (gtk:scrollbar-adjustment scrollbar) nil))
 
-;;; 2024-7-3
+    (is (typep (setf scrollbar
+                     (gtk:scrollbar-new :vertical
+                                        (make-instance 'gtk:adjustment)))
+               'gtk:scrollbar))
+    (is-false (setf (gtk:scrollbar-adjustment scrollbar) nil))))
+
+;;; 2024-10-13

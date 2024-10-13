@@ -288,7 +288,12 @@
     ;; Unmap button
     (is-false (gtk:widget-unmap button))
     (is-true (gtk:widget-realized button))
-    (is-false (gtk:widget-mapped button))))
+    (is-false (gtk:widget-mapped button))
+    ;; Remove BUTTON from WINDOW and destroy WINDOW
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;;     gtk_widget_realize
 ;;;     gtk_widget_unrealize
@@ -318,7 +323,12 @@
     ;; Unrealize button
     (is-false (gtk:widget-unrealize button))
     (is-false (gtk:widget-realized button))
-    (is-false (gtk:widget-mapped button))))
+    (is-false (gtk:widget-mapped button))
+    ;; Remove BUTTON from WINDOW and destroy WINDOW
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;;     gtk_widget_queue_draw
 ;;;     gtk_widget_queue_resize
@@ -330,9 +340,14 @@
   (let* ((button (gtk:button-new-with-label "label"))
          (window (make-instance 'gtk:window
                                 :child button)))
-    (declare (ignore window))
     (is-false (gtk:widget-realize button))
-    (is (typep (gtk:widget-frame-clock button) 'gdk:frame-clock))))
+    (is (typep (gtk:widget-frame-clock button) 'gdk:frame-clock))
+
+    ;; Remove BUTTON from WINDOW and destroy WINDOW
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;;     GtkTickCallback
 
@@ -440,7 +455,7 @@
                      (gtk:widget-create-pango-layout button nil)) 'pango:layout))
     (is (string= "" (pango:layout-text layout)))))
 
-(test gtk-widget-create-pango-layout.1
+(test gtk-widget-create-pango-layout.2
   (let ((button (make-instance 'gtk:button))
         layout)
     (is (typep (setf layout
@@ -471,7 +486,9 @@
         (button (gtk:button-new-with-label "label")))
     (is (eq button (setf (gtk:window-child window) button)))
     (is (typep (gtk:widget-settings button) 'gtk:settings))
-    (is (eq (gtk:settings-default) (gtk:widget-settings button)))))
+    (is (eq (gtk:settings-default) (gtk:widget-settings button)))
+    (is-false (setf (gtk:window-child window) nil))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_widget_get_clipboard
 ;;;     gtk_widget_get_primary_clipboard
@@ -484,7 +501,8 @@
 (test gtk-widget-list-mnemonic-labels
   (let ((button (gtk:button-new-with-mnemonic "_New")))
     (is (every (lambda (x) (typep x 'gtk:label))
-               (gtk:widget-list-mnemonic-labels button)))))
+               (gtk:widget-list-mnemonic-labels button)))
+    (is-false (setf (gtk:button-child button) nil))))
 
 ;;;     gtk_widget_add_mnemonic_label
 ;;;     gtk_widget_remove_mnemonic_label
@@ -566,7 +584,7 @@
 
 #-windows
 (test gtk-widget-measure
-  (is (equal '(33 33 -1 -1)
+  (is (equal '(32 32 -1 -1)
              (multiple-value-list
                  (gtk:widget-measure (gtk:label-new "label") :horizontal -1))))
   (is (equal '(17 17 14 14)
@@ -783,4 +801,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-9-27
+;;; 2024-10-13

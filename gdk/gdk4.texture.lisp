@@ -2,7 +2,7 @@
 ;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,12 +33,12 @@
 ;;;
 ;;; Types and Values
 ;;;
+;;;     GdkMemoryFormat
+;;;     GdkColorState                                       Since 4.16
+;;;
 ;;;     GdkTexture
 ;;;     GdkMemoryTexture
 ;;;     GdkGLTexture
-;;;     GdkMemoryFormat                        -> Move to gdk.enumerations.lisp?
-;;;
-;;;     GDK_MEMORY_DEFAULT
 ;;;
 ;;; Accessors
 ;;;
@@ -47,6 +47,16 @@
 ;;;     gdk_texture_get_height
 ;;;
 ;;; Functions
+;;;
+;;;     gdk_color_state_get_rec2100_linear                  Since 4.16
+;;;     gdk_color_state_get_rec2100_pq                      Since 4.16
+;;;     gdk_color_state_get_srgb                            Since 4.16
+;;;     gdk_color_state_get_srgb_linear                     Since 4.16
+;;;
+;;;     gdk_color_state_create_cicp_params                  Since 4.16
+;;;     gdk_color_state_equal                               Since 4.16
+;;;     gdk_color_state_ref                                 Since 4.16
+;;;     gdk_color_state_unref                               Since 4.16
 ;;;
 ;;;     gdk_texture_new_for_pixbuf
 ;;;     gdk_texture_new_from_resource
@@ -87,18 +97,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
-
-;;; ----------------------------------------------------------------------------
-;;; GDK_MEMORY_DEFAULT
-;;;
-;;; #define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
-;;;
-;;; This is the default memory format used by GTK and is the format provided by
-;;; gdk_texture_download(). It is equal to CAIRO_FORMAT_ARGB32.
-;;;
-;;; Be aware that unlike the GdkMemoryFormat values, this format is different
-;;; for different endianness.
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMemoryFormat
@@ -207,6 +205,135 @@
   @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GdkColorState
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(glib:define-gboxed-opaque color-state "GdkColorState"
+  :export t
+  :type-initializer "gdk_color_state_get_type"
+  :alloc (error "GdkColorState cannot be created from the Lisp side"))
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-class 'color-state)
+      "GBoxed"
+      (documentation 'color-state 'type)
+ "@version{2024-10-13}
+  @begin{declaration}
+(glib:define-gboxed-opaque color-state \"GdkColorState\"
+  :export t
+  :type-initializer \"gdk_color_state_get_type\"
+  :alloc (error \"GdkColorState cannot be created from the Lisp side\"))
+  @end{declaration}
+  @begin{short}
+    The @class{gdk:color-state} instance provides the information to interpret
+    colors and pixels in a variety of ways.
+  @end{short}
+  They are also known as color spaces.
+
+  Crucially, GTK knows how to convert colors from one color state to another.
+  The @class{gdk:color-state} instances are immutable and therefore threadsafe.
+
+  Since 4.16
+  @see-class{gdk:texture}")
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_get_rec2100_linear
+;;;
+;;; Returns the color state object representing the linear rec2100 color space.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gdk_color_state_get_rec2100_linear" color-state-rec2100-linear)
+    (g:boxed color-state :return)
+)
+
+#+gtk-4-16
+(export 'color-state-rec2100-linear)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_get_rec2100_pq
+;;;
+;;; Returns the color state object representing the rec2100-pq color space.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gdk_color_state_get_rec2100_pq" color-state-rec2100-pq)
+    (g:boxed color-state :return)
+)
+
+#+gtk-4-16
+(export 'color-state-rec2100-pq)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_get_srgb
+;;;
+;;; Returns the color state object representing the sRGB color space.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gdk_color_state_get_srgb" color-state-srgb)
+    (g:boxed color-state :return)
+)
+
+#+gtk-4-16
+(export 'color-state-srgb)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_get_srgb_linear
+;;;
+;;; Returns the color state object representing the linearized sRGB color space.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gdk_color_state_get_srgb_linear" color-state-srgb-linear)
+    (g:boxed color-state :return)
+)
+
+#+gtk-4-16
+(export 'color-state-srgb-linear)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_create_cicp_params
+;;;
+;;; Create a GdkCicpParams representing the colorstate.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_equal
+;;;
+;;; Compares two GdkColorStates for equality.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_ref
+;;;
+;;; Increase the reference count of self.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_unref
+;;;
+;;; Decrease the reference count of self.
+;;;
+;;; Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;; GdkTexture
 ;;; ----------------------------------------------------------------------------
 
@@ -217,18 +344,22 @@
                 "GIcon"
                 "GLoadableIcon")
    :type-initializer "gdk_texture_get_type")
-  ((height
+  (#+gtk-4-16
+   (color-state
+    texture-color-state
+    "color-state" "GdkColorState" t nil)
+   (height
     texture-height
-    "height" "gint" t t)
+    "height" "gint" t nil)
    (width
     texture-width
-    "width" "gint" t t)))
+    "width" "gint" t nil)))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'texture)
       "Class"
       (documentation 'texture 'type)
- "@version{#2023-4-12}
+ "@version{2024-10-13}
   @begin{short}
     The @sym{gdk:texture} object is the basic element used to refer to pixel
     data.
