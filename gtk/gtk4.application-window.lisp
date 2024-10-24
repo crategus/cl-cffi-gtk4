@@ -2,7 +2,7 @@
 ;;; gtk4.application-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -130,7 +130,7 @@
 
   See the @class{gtk:popover-menu} documentation for information about the XML
   language used by the @class{gtk:builder} object for menu models.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Create an application window with a menubar.
     @begin{pre}
 (defun do-application-window (&optional application)
@@ -163,7 +163,7 @@
     ;; Present the application window
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-slot{gtk:application-window-show-menubar}
   @see-constructor{gtk:application-window-new}
   @see-class{gtk:window}

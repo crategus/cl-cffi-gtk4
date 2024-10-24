@@ -2,7 +2,7 @@
 ;;; gtk4.application.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -176,7 +176,7 @@
   @class{gtk:builder} resource located at @file{\"gtk/menus.ui\"}, relative to
   the resource base path of the application, see the
   @fun{g:application-resource-base-path} function. The menu with the ID
-  \"menubar\" is taken as the menubar of the application. Additional
+  @code{\"menubar\"} is taken as the menubar of the application. Additional
   menus, most interesting submenus, can be named and accessed via the
   @fun{gtk:application-menu-by-id} function which allows for dynamic population
   of a part of the menu structure. It is also possible to provide the menubar
@@ -193,8 +193,8 @@
   then the @class{gtk:application} instance associates an instance of this
   shortcuts window with each @class{gtk:application-window} widget and sets up
   keyboard accelerators, @kbd{Control-F1} and @kbd{Control-?}, to open it. To
-  create a menu item that displays the shortcuts window, associate the item
-  with the @code{\"win.show-help-overlay\"} action.
+  create a menu item that displays the shortcuts window, associate the menu
+  item with the @code{\"win.show-help-overlay\"} action.
 
   The @class{gtk:application} instance optionally registers with a session
   manager of the users session, if you set the
@@ -207,7 +207,7 @@
   or performing a disk backup. The session manager may not honor the inhibitor,
   but it can be expected to inform the user about the negative consequences of
   ending the session while inhibitors are present.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     A simple application:
     @begin{pre}
 (defun application-simple (&rest argv)
@@ -264,9 +264,9 @@
             (g:application-hold application)
             ;; Create an application window
             (let (;; Define action entries for the menu items
-                  (entries (list (list \"about\")))
-                  (accels (list (list \"win-show-help-overlay\" \"F1\")
-                                (list \"win.about\" \"<Control>A\")))
+                  (entries '((\"about\")))
+                  (accels '(\"win-show-help-overlay\" \"F1\"
+                            \"win.about\" \"<Control>A\"))
                   (window (make-instance 'gtk:application-window
                                          :application application
                                          :title \"Application Resources\"
@@ -286,45 +286,46 @@
       ;; Run the application
       (g:application-run app argv))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"query-end\" signal}
       @begin{pre}
 lambda (application)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[application]{The @class{gtk:application} instance which emitted
+          the signal.}
+      @end{table}
       Emitted when the session manager is about to end the session. This signal
       is only emitted if the @slot[gtk:application]{register-session} property
       is @em{true}. Applications can connect to this signal and call the
       @fun{gtk:application-inhibit} function with the @code{:logout} value of
       the @symbol{gtk:application-inhibit-flags} flags to delay the end of the
-      session until the state has been saved.
-      @begin[code]{table}
-        @entry[application]{The @class{gtk:application} instance which emitted
-          the signal.}
-      @end{table}
+      session until the state has been saved. @break{}
     @subheading{The \"window-added\" signal}
       @begin{pre}
 lambda (application window)    :run-first
       @end{pre}
-      Emitted when a @class{gtk:window} widget is added to the application
-      through the @fun{gtk:application-add-window} function.
       @begin[code]{table}
         @entry[application]{The @class{gtk:application} instance which emitted
           the signal.}
         @entry[window]{The newly added @class{gtk:window} widget.}
       @end{table}
+      Emitted when a @class{gtk:window} widget is added to the application
+      through the @fun{gtk:application-add-window} function.
+
     @subheading{The \"window-removed\" signal}
       @begin{pre}
 lambda (application window)    :run-first
       @end{pre}
-      Emitted when a @class{gtk:window} widget is removed from the application.
-      This can happen as a side-effect of the window being destroyed or
-      explicitly through the @fun{gtk:application-remove-window} function.
       @begin[code]{table}
         @entry[application]{The @class{gtk:application} instance which emitted
           the signal.}
         @entry[window]{The @class{gtk:window} widget that is being removed.}
       @end{table}
+      Emitted when a @class{gtk:window} widget is removed from the application.
+      This can happen as a side-effect of the window being destroyed or
+      explicitly through the @fun{gtk:application-remove-window} function.
   @end{dictionary}
   @see-slot{gtk:application-active-window}
   @see-slot{gtk:application-menubar}
@@ -591,7 +592,7 @@ lambda (application window)    :run-first
   The list is sorted by most recently focused windows, such that the first
   element is the currently focused window. This is useful for choosing a parent
   for a transient window.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     In this example, the function iterates over the list of windows and destroys
     the windows. After the last window is destroyed, the application quits.
     @begin{pre}
@@ -601,7 +602,7 @@ lambda (application window)    :run-first
     (dolist (window windows)
       (gtk:window-destroy window))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:application}
   @see-class{gtk:window}"
   (application (g:object application)))
@@ -625,7 +626,7 @@ lambda (application window)    :run-first
   @end{short}
   The ID of an application window can be retrieved with the
   @fun{gtk:application-window-id} function.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     Both @class{gtk:window} and @class{gtk:application-window} widgets can be
     added to an application, but only a @class{gtk:application-window} widget
     has an ID.
