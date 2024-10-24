@@ -2,7 +2,7 @@
 ;;; gtk4.bool-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -144,11 +144,11 @@
   The @fun{gtk:bool-filter-invert} function returns whether the filter inverts
   the expression. The @setf{gtk:bool-filter-expression} function sets whether
   the filter should invert the expression.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     If no expression is set, this function returns the @code{cffi:null-pointer}
     value. To unset the expression for the bool filter, use the
     @code{cffi:null-pointer} value.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:bool-filter}")
 
 ;;; ----------------------------------------------------------------------------

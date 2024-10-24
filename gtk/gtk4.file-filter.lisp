@@ -2,7 +2,7 @@
 ;;; gtk4.file-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -126,7 +126,7 @@
     calling the @fun{gtk:file-filter-add-mime-type} or
     @fun{gtk:file-filter-add-pattern} functions.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     An example of a UI definition fragment specifying @class{gtk:file-filter}
     rules:
     @begin{pre}
@@ -144,7 +144,7 @@
   </suffixes>
 </object>
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-constructor{gtk:file-filter-new}
   @see-constructor{gtk:file-filter-new-from-gvariant}
   @see-slot{gtk:file-filter-name}
@@ -234,14 +234,14 @@
   until you add rules with the @fun{gtk:file-filter-add-mime-type}, the
   @fun{gtk:file-filter-add-pattern}, or @fun{gtk:file-filter-add-pixbuf-formats}
   functions.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     To create a file filter that accepts any file, use:
     @begin{pre}
 (let ((filter (gtk:file-filter-new)))
   (gtk:file-filter-add-pattern filter \"*\")
   ... )
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:file-filter}
   @see-function{gtk:file-filter-add-mime-type}
   @see-function{gtk:file-filter-add-pattern}

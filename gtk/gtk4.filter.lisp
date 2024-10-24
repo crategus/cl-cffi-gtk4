@@ -2,7 +2,7 @@
 ;;; gtk4.filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -160,7 +160,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter 'type)
- "@version{2024-9-27}
+ "@version{2024-10-20}
   @begin{short}
     The @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
@@ -184,16 +184,16 @@
       @begin{pre}
 lambda (filter change)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[filter]{The @class{gtk:filter} object.}
+        @entry[change]{The @symbol{gtk:filter-change} value.}
+      @end{table}
       The signal is emitted whenever the filter changed. Users of the filter
       should then check items again via the @fun{gtk:filter-match} function.
       The @class{gtk:filter-list-model} object handles this signal
       automatically. Depending on the @arg{change} parameter, not all items
       need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
       documentation for details.
-      @begin[code]{table}
-        @entry[filter]{The @class{gtk:filter} object.}
-        @entry[change]{The @symbol{gtk:filter-change} value.}
-      @end{table}
   @end{dictionary}
   @see-class{gtk:filter-list-model}")
 
@@ -209,13 +209,13 @@ lambda (filter change)    :run-last
  #+liber-documentation
  "@version{2024-9-27}
   @argument[filter]{a @class{gtk:filter} object}
-  @argument[item]{a @class{g:object} object for the item to check}
+  @argument[item]{a @class{g:object} instance for the item to check}
   @return{@em{True} if the filter matches the item and a filter model should
     keep it, @em{false} if not.}
   @begin{short}
     Checks if the given @arg{item} is matched by the filter or not.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The C library takes a pointer as an @arg{item} argument. In the Lisp
     implementation the function is generalized to take an object. The pointer
     is retrieved from the object with the @fun{gobject:object-pointer} function.

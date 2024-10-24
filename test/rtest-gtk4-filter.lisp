@@ -80,9 +80,13 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFilter")))
   ;; Check children
-  (is (equal '("GtkBoolFilter" "GtkCustomFilter" "GtkFileFilter"
-               "GtkMultiFilter" "GtkStringFilter")
-             (glib-test:list-children "GtkFilter")))
+  (if *first-run-gtk-test*
+      (is (equal '("GtkBoolFilter" "GtkCustomFilter" "GtkFileFilter"
+                   "GtkMultiFilter" "GtkStringFilter")
+                 (glib-test:list-children "GtkFilter")))
+      (is (equal '("GtkBoolFilter" "GtkCustomFilter" "GtkFileFilter"
+                   "GtkFontFilter" "GtkMultiFilter" "GtkStringFilter")
+                 (glib-test:list-children "GtkFilter"))))
   ;; Check interfaces
   (is (equal '()
              (glib-test:list-interfaces "GtkFilter")))
@@ -164,7 +168,13 @@
     (is-true (gtk:filter-match filter
                                (gtk:string-object-new "gtk:string-filter")))
     (is-false (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:button")))))
+                               (gtk:string-object-new "gtk:button")))
+    ;; Check memory management
+    (is-false (setf (gtk:filter-list-model-model model) nil))
+    (is-false (setf (gtk:filter-list-model-filter model) nil))
+    (is (= 1 (g:object-ref-count store)))
+    (is (= 1 (g:object-ref-count filter)))
+    (is (= 1 (g:object-ref-count model)))))
 
 ;;;     gtk_filter_get_strictness
 
@@ -191,6 +201,12 @@
                         (declare (ignore filter))
                         (push change msg)))
     (is-false (gtk:filter-changed filter :different))
-    (is (equal '(:different) msg))))
+    (is (equal '(:different) msg))
+    ;; Check memory management
+    (is-false (setf (gtk:filter-list-model-model model) nil))
+    (is-false (setf (gtk:filter-list-model-filter model) nil))
+    (is (= 1 (g:object-ref-count store)))
+    (is (= 1 (g:object-ref-count filter)))
+    (is (= 1 (g:object-ref-count model)))))
 
-;;; 2024-10-1
+;;; 2024-10-24
