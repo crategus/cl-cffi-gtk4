@@ -2,7 +2,7 @@
 ;;; gtk4.expression.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -89,7 +89,7 @@
 ;;; GtkExpressionWatch
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque expression-watch "GtkExpressionWatch"
+(glib:define-gboxed-opaque expression-watch "GtkExpressionWatch"
   :export t
   :type-initializer "gtk_expression_watch_get_type"
   :alloc (error "GtkExpressionWatch cannot be created from the Lisp side."))
@@ -100,7 +100,7 @@
       (documentation 'expression-watch 'type)
  "@version{2023-11-6}
   @begin{declaration}
-(glib:define-g-boxed-opaque expression-watch \"GtkExpressionWatch\"
+(glib:define-gboxed-opaque expression-watch \"GtkExpressionWatch\"
   :export t
   :type-initializer \"gtk_expression_watch_get_type\"
   :alloc (error \"GtkExpressionWatch cannot be created from the Lisp side.\"))
@@ -391,7 +391,7 @@ case PROP_EXPRESSION:
 
 (defun expression-evaluate-value (expression object)
  #+liber-documentation
- "@version{#2023-11-16}
+ "@version{2024-10-18}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the evaluation}
   @return{The evaluated value of the expression.}
@@ -767,7 +767,7 @@ case PROP_EXPRESSION:
 (cffi:defcfun ("gtk_object_expression_new" object-expression-new) expression
  #+liber-documentation
  "@version{2023-11-6}
-  @argument[object]{a @class{g:object} object to watch}
+  @argument[object]{a @class{g:object} instance to watch}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression evaluating to the given @arg{object} with a weak
@@ -792,7 +792,7 @@ case PROP_EXPRESSION:
  #+liber-documentation
  "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance for an object}
-  @return{The @class{g:object} object, or @code{nil}.}
+  @return{The @class{g:object} instance, or @code{nil}.}
   @short{Gets the object that the expression evaluates to.}
   @see-class{gtk:expression}"
   (expression expression))
@@ -828,6 +828,26 @@ case PROP_EXPRESSION:
 ;;; Returns :
 ;;;     a new GtkExpression
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: We need a second implementation for GOBJECT:CREATE-CLOSURE to handle
+;; this case.
+
+(cffi:defcfun ("gtk_closure_expression_new" %closure-expression-new)
+    expression
+  (gtype g:type-t)
+  (closure :pointer)
+  (n-params :uint)
+  (params :pointer))
+
+#+nil
+(defun closure-expression-new (gtype func params)
+
+  (cffi:with-foreign-object (expr :pointer n-params)
+    (iter (for i from 0 below (length params))
+          (for param in params)
+          (setf (cffi:mem-aref expr 'expression i) param))
+
+))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cclosure_expression_new ()

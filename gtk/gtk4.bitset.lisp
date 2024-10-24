@@ -2,7 +2,7 @@
 ;;; gtk4.bitset.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -38,8 +38,8 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_bitset_ref
-;;;     gtk_bitset_unref
+;;;     gtk_bitset_ref                                      not needed
+;;;     gtk_bitset_unref                                    not needed
 ;;;     gtk_bitset_new_empty
 ;;;     gtk_bitset_new_range
 ;;;     gtk_bitset_copy
@@ -90,7 +90,7 @@
 
 (cffi:defcfun ("gtk_bitset_new_empty" %bitset-new-empty) :pointer)
 
-(glib:define-g-boxed-opaque bitset "GtkBitset"
+(glib:define-gboxed-opaque bitset "GtkBitset"
   :export t
   :type-initializer "gtk_bitset_get_type"
   :alloc (%bitset-new-empty))
@@ -99,9 +99,9 @@
 (setf (liber:alias-for-class 'bitset)
       "GBoxed"
       (documentation 'bitset 'type)
- "@version{2023-9-11}
+ "@version{2024-10-18}
   @begin{declaration}
-(glib:define-g-boxed-opaque bitset \"GtkBitset\"
+(glib:define-gboxed-opaque bitset \"GtkBitset\"
   :export t
   :type-initializer \"gtk_bitset_get_type\"
   :alloc (%bitset-new-empty))
@@ -131,41 +131,23 @@
   @see-symbol{gtk:bitset-iter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bitset_ref ()
-;;;
-;;; GtkBitset *
-;;; gtk_bitset_ref (GtkBitset *self);
+;;; gtk_bitset_ref ()                                       not needed
 ;;;
 ;;; Acquires a reference on the given GtkBitset.
-;;;
-;;; self :
-;;;     a GtkBitset.
-;;;
-;;; Returns :
-;;;     the GtkBitset with an additional reference.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bitset_unref ()
+;;; gtk_bitset_unref ()                                     not needed
 ;;;
-;;; void
-;;; gtk_bitset_unref (GtkBitset *self);
-;;;
-;;; Releases a reference on the given GtkBitset.
-;;;
-;;; If the reference was the last, the resources associated to the self are
-;;; freed.
-;;;
-;;; self :
-;;;     a GtkBitset.
+;;; Releases a reference on the given GtkBitset. If the reference was the last,
+;;; the resources associated to the self are freed.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bitset_new_empty
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_bitset_new_empty" bitset-new-empty)
-    (g:boxed bitset :return)
+(cffi:defcfun ("gtk_bitset_new_empty" bitset-new-empty) (g:boxed bitset :return)
  #+liber-documentation
  "@version{2023-9-11}
   @return{The new empty @class{gtk:bitset} instance.}
@@ -180,15 +162,14 @@
 
 (cffi:defcfun ("gtk_bitset_new_range" bitset-new-range) (g:boxed bitset :return)
  #+liber-documentation
- "@version{2023-9-11}
+ "@version{2024-10-18}
   @argument[start]{an unsigned integer with the first value to add}
-  @argument[n-items]{an unsigned integer with the number of consecutive values
-    to add}
+  @argument[n]{an unsigned integer with the number of consecutive values to add}
   @return{The new @class{gtk:bitset} instance.}
   @short{Creates a bitset with the given range set.}
   @see-class{gtk:bitset}"
   (start :uint)
-  (n-items :uint))
+  (n :uint))
 
 (export 'bitset-new-range)
 
@@ -430,19 +411,18 @@
 
 (cffi:defcfun ("gtk_bitset_add_range" bitset-add-range) :void
  #+liber-documentation
- "@version{2024-8-14}
+ "@version{2024-10-18}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to add}
-  @argument[nitems]{an unsigned integer with the number of consecutive values
-    to add}
+  @argument[n]{an unsigned integer with the number of consecutive values to add}
   @begin{short}
-    Adds all values from @arg{start} (inclusive) to @arg{start} + @arg{nitems}
+    Adds all values from @arg{start} (inclusive) to @arg{start} + @arg{n}
     (exclusive) in the bitset.
   @end{short}
   @see-class{gtk:bitset}"
   (bitset (g:boxed bitset))
   (start :uint)
-  (nitems :uint))
+  (n :uint))
 
 (export 'bitset-add-range)
 
@@ -452,19 +432,19 @@
 
 (cffi:defcfun ("gtk_bitset_remove_range" bitset-remove-range) :void
  #+liber-documentation
- "@version{2024-8-14}
+ "@version{2024-10-18}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to remove}
-  @argument[nitems]{an unsigned integer with the number of consecutive values
-    to remove}
+  @argument[n]{an unsigned integer with the number of consecutive values to
+    remove}
   @begin{short}
     Removes all values from @arg{start} (inclusive) to @arg{start} +
-    @arg{nitems} (exclusive) in the bitset.
+    @arg{n} (exclusive) in the bitset.
   @end{short}
   @see-class{gtk:bitset}"
   (bitset (g:boxed bitset))
   (start :uint)
-  (nitems :uint))
+  (n :uint))
 
 (export 'bitset-remove-range)
 
@@ -530,7 +510,7 @@
     @arg{stride} and inside that grid, adds a rectangle with the given
     @arg{width} and @arg{height}.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This funtion is equivalent to:
     @begin{pre}
 (dotimes (i height)
@@ -564,7 +544,7 @@
     @arg{stride} and inside that grid, removes a rectangle with the given
     @arg{width} and @arg{height}.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This funtion is equivalent to:
     @begin{pre}
 (dotimes (i height)

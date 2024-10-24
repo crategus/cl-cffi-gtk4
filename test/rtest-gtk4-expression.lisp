@@ -119,10 +119,17 @@
 
       (is-false (gtk:expression-unref expr)))))
 
+;; TODO: Check again the memory management. We finish with a strong reference
+;; to a GtkLabel widget. Can we remove the strong reference?
+
 (test gtk-property-expression-new.3
   (let* ((expr1 (gtk:property-expression-new "GtkButton" nil "child"))
          (expr2 (gtk:property-expression-new "GtkLabel" expr1 "label"))
-         (button (gtk:button-new-with-label "button")))
+         (button (gtk:button-new-with-label "button"))
+         (label nil) (child nil))
+
+    (is (typep (setf child (gtk:button-child button)) 'gtk:label))
+    (is (= 2 (g:object-ref-count child)))
 
     (is (eq (g:gtype "GtkWidget") (gtk:expression-value-type expr1)))
     (is-false (gtk:property-expression-expression expr1))
@@ -140,10 +147,20 @@
 
     (is (eq (g:gtype "GtkLabel")
             (g:type-from-instance
-              (gtk:expression-evaluate-value expr1 button))))
+              (setf label (gtk:expression-evaluate-value expr1 button)))))
     (is (string= "button" (gtk:expression-evaluate-value expr2 button)))
 
-    (is-false (gtk:expression-unref expr2))))
+    (is (eq child label))
+    (is (= 3 (g:object-ref-count child)))
+    (is (= 3 (g:object-ref-count label)))
+
+    ;; Check memory management
+    (is-false (gtk:expression-unref expr2))
+;    (is-false (gtk:expression-unref expr1))
+    (is-false (setf (gtk:button-child button) nil))
+    (is (= 2 (g:object-ref-count child)))
+    (is (= 2 (g:object-ref-count label)))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_property_expression_new_for_pspec
 
@@ -176,15 +193,32 @@
 ;;;     gtk_object_expression_new
 ;;;     gtk_object_expression_get_object
 
+;; TODO: Check again the memory management. We finish with a strong reference
+;; to a GtkLabel widget. Can we remove the strong reference?
+
 (test gtk-object-expression-new/object
   (let* ((label (gtk:label-new "text"))
-         (expr (gtk:object-expression-new label)))
+         (expr (gtk:object-expression-new label))
+         (widget nil))
 
-    (is (eq (g:gtype "GtkLabel") (gtk:expression-value-type expr)))
-    (is-false (gtk:expression-is-static expr))
+    (is (= 1 (g:object-ref-count label)))
 
     (is (eq (g:gtype "GtkLabel")
-            (g:type-from-instance (gtk:expression-evaluate-value expr nil))))))
+            (gtk:expression-value-type expr)))
+    (is-false (gtk:expression-is-static expr))
+
+    (is (= 1 (g:object-ref-count label)))
+
+    (is (eq (g:gtype "GtkLabel")
+            (g:type-from-instance
+                (setf widget
+                      (gtk:expression-evaluate-value expr nil)))))
+
+    (is (eq widget label))
+    (is (= 2 (g:object-ref-count label)))
+    (is (= 2 (g:object-ref-count widget)))
+
+    (is-false (gtk:expression-unref expr))))
 
 ;;;     gtk_closure_expression_new
 ;;;     gtk_cclosure_expression_new
@@ -206,4 +240,4 @@
 ;;;     gtk_value_dup_expression
 ;;;     gtk_param_spec_expression
 
-;;; 2024-7-4
+;;; 2024-10-18

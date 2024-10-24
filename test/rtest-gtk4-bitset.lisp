@@ -279,12 +279,55 @@
     (is (=  75 (gtk:bitset-size bitset)))))
 
 ;;;     gtk_bitset_iter_init_first
+
+(test gtk-bitset-iter-init-first
+  (let ((bitset (gtk:bitset-new-empty))
+        (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
+      ;; Bitset is empty
+      (is-false (gtk:bitset-iter-init-first iter bitset))
+      ;; Some values for the bitset
+      (dolist (value values)
+        (is-true (gtk:bitset-add bitset value)))
+      ;; First value in bitset
+      (is (= 1 (gtk:bitset-iter-init-first iter bitset))))))
+
+;;;     gtk_bitset_iter_init_last
+
+(test gtk-bitset-iter-init-last
+  (let ((bitset (gtk:bitset-new-empty))
+        (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
+      ;; Bitset is empty
+      (is-false (gtk:bitset-iter-init-last iter bitset))
+      ;; Fill in some values
+      (dolist (value values)
+        (is-true (gtk:bitset-add bitset value)))
+      ;; Last value in bitset
+      (is (= 19 (gtk:bitset-iter-init-last iter bitset))))))
+
+;;;     gtk_bitset_iter_init_at
+
+(test gtk-bitset-iter-init-at
+  (let ((bitset (gtk:bitset-new-empty))
+        (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
+      ;; Bitset is empty
+      (is-false (gtk:bitset-iter-init-at iter bitset 0))
+      ;; Fill in some values
+      (dolist (value values)
+        (is-true (gtk:bitset-add bitset value)))
+      ;; Value at
+      (is (= 5 (gtk:bitset-iter-init-at iter bitset 5)))
+      (is (= 9 (gtk:bitset-iter-init-at iter bitset 8)))
+      (is-false (gtk:bitset-iter-init-at iter bitset 21)))))
+
 ;;;     gtk_bitset_iter_next
 ;;;     gtk_bitset_iter_previous
 ;;;     gtk_bitset_iter_get_value
 ;;;     gtk_bitset_iter_is_valid
 
-(test gtk-bitset-init-first
+(test gtk-bitset-next/previous
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
     (dolist (value values)
@@ -303,45 +346,4 @@
       (is-false (gtk:bitset-iter-previous iter))
       (is (= 0 (gtk:bitset-iter-value iter))))))
 
-;;;     gtk_bitset_iter_init_last
-
-(test gtk-bitset-init-last
-  (let ((bitset (gtk:bitset-new-empty))
-        (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
-    (dolist (value values)
-      (is-true (gtk:bitset-add bitset value)))
-    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
-      (is (= 19 (gtk:bitset-iter-init-last iter bitset)))
-      (is-true (gtk:bitset-iter-is-valid iter))
-      (is (= 18 (gtk:bitset-iter-previous iter)))
-      (is (= 18 (gtk:bitset-iter-value iter)))
-      (is (= 17 (gtk:bitset-iter-previous iter)))
-      (is (= 17 (gtk:bitset-iter-value iter)))
-      (is (= 18 (gtk:bitset-iter-next iter)))
-      (is (= 18 (gtk:bitset-iter-value iter)))
-      (is (= 19 (gtk:bitset-iter-next iter)))
-      (is (= 19 (gtk:bitset-iter-value iter)))
-      (is-false (gtk:bitset-iter-next iter))
-      (is (= 0 (gtk:bitset-iter-value iter))))))
-
-;;;     gtk_bitset_iter_init_at
-
-(test gtk-bitset-init-at
-  (let ((bitset (gtk:bitset-new-empty))
-        (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
-    (dolist (value values)
-      (is-true (gtk:bitset-add bitset value)))
-    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
-      (is (= 11 (gtk:bitset-iter-init-at iter bitset 10)))
-      (is-true (gtk:bitset-iter-is-valid iter))
-      (is (= 13 (gtk:bitset-iter-next iter)))
-      (is (= 13 (gtk:bitset-iter-value iter)))
-      (is (= 15 (gtk:bitset-iter-next iter)))
-      (is (= 15 (gtk:bitset-iter-value iter)))
-      (is (= 13 (gtk:bitset-iter-previous iter)))
-      (is (= 13 (gtk:bitset-iter-value iter)))
-      (is (= 11 (gtk:bitset-iter-previous iter)))
-      (is (= 11 (gtk:bitset-iter-value iter)))
-      (is (= 9 (gtk:bitset-iter-previous iter))))))
-
-;;; 2024-7-4
+;;; 2024-10-18
