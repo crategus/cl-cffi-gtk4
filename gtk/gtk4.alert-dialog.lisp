@@ -2,7 +2,7 @@
 ;;; gtk4.alert-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; GtkAlertDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAlertDialog" alert-dialog
+(gobject:define-gobject "GtkAlertDialog" alert-dialog
   (:superclass g:object
    :export t
    :interfaces nil
@@ -114,7 +114,7 @@
 
   If you do not need to wait for a button to be clicked, you can use the
   @fun{gtk:alert-dialog-show} function.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Create an alert dialog with a @class{g:cancellable} object.
     @begin{pre}
 (defun create-alert-dialog (parent)
@@ -141,7 +141,7 @@
           (let ((result (gtk:alert-dialog-choose-finish source result)))
             (format t \"Alert dialog result is ~a~%\" result))))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   Since 4.10
   @see-class{g:async-result}")
 

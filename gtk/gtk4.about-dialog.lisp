@@ -2,7 +2,7 @@
 ;;; gtk4.about-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -124,7 +124,7 @@
 ;;; GtkLicense
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkLicense" license
+(gobject:define-genum "GtkLicense" license
   (:export t
    :type-initializer "gtk_license_get_type")
   (:unknown 0)
@@ -154,7 +154,7 @@
       (liber:symbol-documentation 'license)
  "@version{2024-5-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkLicense\" license
+(gobject:define-genum \"GtkLicense\" license
   (:export t
    :type-initializer \"gtk_license_get_type\")
   (:unknown 0)
@@ -214,7 +214,7 @@
 ;;; GtkAboutDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAboutDialog" about-dialog
+(gobject:define-gobject "GtkAboutDialog" about-dialog
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"
@@ -321,15 +321,15 @@
       @begin{pre}
 lambda (dialog uri)    :run-last
       @end{pre}
-      Emitted when a URL is activated. Applications may connect to it to
-      override the default behaviour, which is to call the @fun{gtk:show-uri}
-      function.
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:about-dialog} widget on which the signal
           was emitted.}
         @entry[uri]{The string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{table}
+      Emitted when a URL is activated. Applications may connect to it to
+      override the default behaviour, which is to call the @fun{gtk:show-uri}
+      function.
   @end{dictionary}
   @see-constructor{gtk:about-dialog-new}
   @see-slot{gtk:about-dialog-artists}
@@ -703,6 +703,8 @@ lambda (dialog uri)    :run-last
   @see-class{gtk:about-dialog}")
 
 ;;; --- gtk:about-dialog-translator-credits ------------------------------------
+
+;; TODO: Implement translation support!?
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "translator-credits"

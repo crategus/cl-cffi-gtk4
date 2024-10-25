@@ -2,7 +2,7 @@
 ;;; gtk4.window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -313,42 +313,36 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
       @begin{pre}
 lambda (window)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      activates the default widget of the window.
       @begin[code]{table}
         @entry[window]{The @class{gtk:window} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      activates the default widget of the window.
     @subheading{The \"activate-focus\" signal}
       @begin{pre}
 lambda (window)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      activates the currently focused widget of the window.
       @begin[code]{table}
         @entry[window]{The @class{gtk:window} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      activates the currently focused widget of the window.
     @subheading{The \"close-request\" signal}
       @begin{pre}
 lambda (window)    :run-last
       @end{pre}
-      The signal is emitted when the user clicks on the close button of the
-      window.
       @begin[code]{table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked
           for the signal.}
       @end{table}
+      The signal is emitted when the user clicks on the close button of the
+      window.
     @subheading{The \"enable-debugging\" signal}
       @begin{pre}
 lambda (window toggle)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user enables
-      or disables interactive debugging. When the @arg{toggle} argument is
-      @em{true}, interactive debugging is toggled on or off, when it is
-      @em{false}, the debugger will be pointed at the widget under the pointer.
-      The default bindings for this signal are the @kbd{Ctrl-Shift-I} and
-      @kbd{Ctrl-Shift-D} keys.
       @begin[code]{table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
@@ -356,17 +350,23 @@ lambda (window toggle)    :action
         @entry[Returns]{The boolean which is @em{true} if the key binding was
           handled.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user enables
+      or disables interactive debugging. When the @arg{toggle} argument is
+      @em{true}, interactive debugging is toggled on or off, when it is
+      @em{false}, the debugger will be pointed at the widget under the pointer.
+      The default bindings for this signal are the @kbd{Ctrl-Shift-I} and
+      @kbd{Ctrl-Shift-D} keys.
     @subheading{The \"keys-changed\" signal}
       @begin{pre}
 lambda (window)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[window]{The @class{gtk:window} widget which received the signal.}
+      @end{table}
       The signal gets emitted when the set of accelerators or mnemonics that
       are associated with the window changes. @br{}
       @em{Warning:} Deprecated since 4.10. Use @class{gtk:shortcut} and
       @class{gtk:event-controller} objects to implement keyboard shortcuts.
-      @begin[code]{table}
-        @entry[window]{The @class{gtk:window} widget which received the signal.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:window-new}
   @see-slot{gtk:window-application}
@@ -1245,7 +1245,7 @@ lambda (window)    :run-first
  "@version{2024-10-2}
   @argument[window]{a @class{gtk:window} widget to destroy}
   @short{Drop the internal reference GTK holds on toplevel windows.}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Signal handler for a Cancel button that gets the toplevel window and
     destroys it to quit the window.
     @begin{pre}
@@ -1254,7 +1254,7 @@ lambda (window)    :run-first
                     (let ((toplevel (gtk:widget-root button)))
                       (gtk:window-destroy toplevel))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:window}
   @see-function{gtk:widget-root}"
   (window (g:object window)))
@@ -1308,7 +1308,7 @@ lambda (window)    :run-first
   @fun{gtk:window-default-size} function. Using the window allocation directly
   will not work in all circumstances and can lead to growing or shrinking
   windows.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
    @begin{pre}
 (let ((window (make-instance 'gtk:window)))
   (setf (gtk:window-default-size window) '(300 200))
@@ -1414,7 +1414,7 @@ lambda (window)    :run-first
     (g:list-t (g:object window))
  #+liber-documentation
  "@version{2024-10-2}
-  @return{The list of toplevel @class{gtk:widget} widgets.}
+  @return{The list of toplevel @class{gtk:widget} objects.}
   @begin{short}
     Returns a list of all existing toplevel windows.
   @end{short}
@@ -1513,7 +1513,7 @@ lambda (window)    :run-first
   when clicking a link for example, rather than once the window is ready to be
   shown.
   @begin[Warning]{dictionary}
-    This function is deprecated since 4.14. Use the @fun{gtk:window-presen}
+    This function is deprecated since 4.14. Use the @fun{gtk:window-present}
     funtion.
   @end{dictionary}
   @see-class{gtk:window}

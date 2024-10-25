@@ -2,7 +2,7 @@
 ;;; gtk4.window-group.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -108,7 +108,7 @@
  #+liber-documentation
  "@version{2024-4-11}
   @argument[group]{a @class{gtk:window-group} object}
-  @argument[window]{the @class{gtk:window} widget to add}
+  @argument[window]{a @class{gtk:window} widget to add}
   @short{Adds a window to a window group.}
   @see-class{gtk:window-group}
   @see-class{gtk:window}"

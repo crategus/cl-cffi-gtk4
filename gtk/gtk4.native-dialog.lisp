@@ -2,7 +2,7 @@
 ;;; gtk4.native-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
 ;;; GtkNativeDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkNativeDialog" native-dialog
+(gobject:define-gobject "GtkNativeDialog" native-dialog
   (:superclass g:object
    :export t
    :interfaces ()
@@ -113,15 +113,15 @@
       @begin{pre}
 lambda (dialog response)    :run-last
       @end{pre}
-      Emitted when the user responds to the dialog. When this is called the
-      dialog has been hidden. If you call the @fun{gtk:native-dialog-hide}
-      function before the user responds to the dialog this signal will not be
-      emitted.
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:native-dialog} object on which the signal
           is emitted.}
         @entry[response]{The integer with the response ID.}
       @end{table}
+      Emitted when the user responds to the dialog. When this is called the
+      dialog has been hidden. If you call the @fun{gtk:native-dialog-hide}
+      function before the user responds to the dialog this signal will not be
+      emitted.
   @end{dictionary}
   @see-slot{gtk:native-dialog-modal}
   @see-slot{gtk:native-dialog-title}
