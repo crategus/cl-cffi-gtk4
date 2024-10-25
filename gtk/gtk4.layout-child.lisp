@@ -2,7 +2,7 @@
 ;;; gtk4.layout-child.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,7 @@
 ;;; GtkLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkLayoutChild" layout-child
+(gobject:define-gobject "GtkLayoutChild" layout-child
   (:superclass g:object
    :export t
    :interfaces ()
@@ -109,7 +109,7 @@
  "@version{2024-4-19}
   @syntax{(gtk:layout-child-child-widget object) => child}
   @argument[object]{a @class{gtk:layout-child} object}
-  @argument[child]{a @class{gtk:widget} widget}
+  @argument[child]{a @class{gtk:widget} object}
   @begin{short}
     Retrieves the @class{gtk:widget} child widget associated to the given
     @arg{object}.

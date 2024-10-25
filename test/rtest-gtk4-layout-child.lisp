@@ -34,14 +34,14 @@
              (glib-test:list-signals "GtkLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLayoutChild" GTK:LAYOUT-CHILD
-                      (:SUPERCLASS GOBJECT:OBJECT
-                       :EXPORT T
-                       :INTERFACES NIL
-                       :TYPE-INITIALIZER "gtk_layout_child_get_type")
-                      ((CHILD-WIDGET LAYOUT-CHILD-CHILD-WIDGET
-                        "child-widget" "GtkWidget" T NIL)
-                       (LAYOUT-MANAGER LAYOUT-CHILD-LAYOUT-MANAGER
-                        "layout-manager" "GtkLayoutManager" T NIL)))
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES NIL
+                        :TYPE-INITIALIZER "gtk_layout_child_get_type")
+                       ((CHILD-WIDGET LAYOUT-CHILD-CHILD-WIDGET
+                         "child-widget" "GtkWidget" T NIL)
+                        (LAYOUT-MANAGER LAYOUT-CHILD-LAYOUT-MANAGER
+                         "layout-manager" "GtkLayoutManager" T NIL)))
              (gobject:get-gtype-definition "GtkLayoutChild"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -59,6 +59,14 @@
                     (gtk:layout-manager-layout-child manager button))
                'gtk:layout-child))
     (is (eq button (gtk:layout-child-child-widget childmanager)))
-    (is (eq manager (gtk:layout-child-layout-manager childmanager)))))
+    (is (eq manager (gtk:layout-child-layout-manager childmanager)))
 
-;;; 2024-9-19
+    (is-false (gtk:fixed-remove fixed button))
+    (is-false (setf (gtk:widget-layout-manager fixed) nil))
+
+    (is (= 1 (g:object-ref-count fixed)))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count childmanager)))
+    (is (= 1 (g:object-ref-count manager)))))
+
+;;; 2024-10-19

@@ -2,7 +2,7 @@
 ;;; gtk4.fixed-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -58,7 +58,7 @@
 ;;; GtkFixedLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFixedLayoutChild" fixed-layout-child
+(gobject:define-gobject "GtkFixedLayoutChild" fixed-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -112,7 +112,7 @@
 ;;; GtkFixedLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFixedLayout" fixed-layout
+(gobject:define-gobject "GtkFixedLayout" fixed-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

@@ -2,7 +2,7 @@
 ;;; gtk4.custom-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,7 +56,7 @@
 ;;; GtkCustomLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCustomLayout" custom-layout
+(gobject:define-gobject "GtkCustomLayout" custom-layout
   (:superclass layout-manager
    :export t
    :interfaces ()
@@ -68,7 +68,7 @@
  "@version{2024-4-23}
   @begin{short}
     The @class{gtk:custom-layout} class is a convenience type meant to be used
-    as a transition mechanism between @class{gtk:widget} widgets implementing a
+    as a transition mechanism between @class{gtk:widget} objects implementing a
     layout policy, and @class{gtk:layout-manager} classes.
   @end{short}
 

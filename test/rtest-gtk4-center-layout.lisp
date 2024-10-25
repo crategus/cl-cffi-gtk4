@@ -79,6 +79,17 @@
     (is (eq :center (gtk:center-layout-baseline-position layout)))
     (is (eq start (gtk:center-layout-start-widget layout)))
     (is (eq center (gtk:center-layout-center-widget layout)))
-    (is (eq end (gtk:center-layout-end-widget layout)))))
+    (is (eq end (gtk:center-layout-end-widget layout)))
+
+    (is-false (setf (gtk:center-box-start-widget box) nil))
+    (is-false (setf (gtk:center-box-center-widget box) nil))
+    (is-false (setf (gtk:center-box-end-widget box) nil))
+    (is-false (setf (gtk:widget-layout-manager box) nil))
+
+    (is (= 1 (g:object-ref-count start)))
+    (is (= 1 (g:object-ref-count center)))
+    (is (= 1 (g:object-ref-count end)))
+    (is (= 1 (g:object-ref-count box)))
+    (is (= 1 (g:object-ref-count layout)))))
 
 ;;; 2024-9-19

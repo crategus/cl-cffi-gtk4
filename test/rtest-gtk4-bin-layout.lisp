@@ -49,6 +49,7 @@
 
 (test gtk-bin-layout-for-button
   (let* ((button (make-instance 'gtk:button)))
-    (is (typep (gtk:widget-layout-manager button) 'gtk:bin-layout))))
+    (is (typep (gtk:widget-layout-manager button) 'gtk:bin-layout))
+    (is-false (setf (gtk:widget-layout-manager button) nil))))
 
-;;; 2024-9-19
+;;; 2024-10-19

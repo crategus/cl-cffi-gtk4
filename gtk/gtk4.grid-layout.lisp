@@ -2,11 +2,11 @@
 ;;; gtk4.grid-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,7 +92,7 @@
 ;;; GtkGridLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGridLayoutChild" grid-layout-child
+(gobject:define-gobject "GtkGridLayoutChild" grid-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -238,7 +238,7 @@
 ;;; GtkGridLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGridLayout" grid-layout
+(gobject:define-gobject "GtkGridLayout" grid-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

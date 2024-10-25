@@ -55,6 +55,7 @@
                (multiple-value-list
                    (gtk:layout-manager-measure layout button :horizontal -1))))
     (is-false (setf (gtk:widget-layout-manager button) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count layout)))))
 
@@ -78,6 +79,7 @@
                    (gtk:layout-manager-measure layout button :vertical -1))))
     (is-false (gtk:box-remove box button))
     (is-false (setf (gtk:widget-layout-manager box) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count box)))
     (is (= 1 (g:object-ref-count layout)))))
@@ -100,6 +102,7 @@
                    (gtk:layout-manager-measure layout box :vertical -1))))
     (is-false (gtk:box-remove box button))
     (is-false (setf (gtk:widget-layout-manager box) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count box)))
     (is (= 1 (g:object-ref-count layout)))))
@@ -111,6 +114,7 @@
          (layout (gtk:widget-layout-manager button)))
     (is (eq :constant-size (gtk:layout-manager-request-mode layout)))
     (is-false (setf (gtk:widget-layout-manager button) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count layout)))))
 
@@ -119,6 +123,7 @@
          (layout (gtk:widget-layout-manager box)))
     (is (eq :constant-size (gtk:layout-manager-request-mode layout)))
     (is-false (setf (gtk:widget-layout-manager box) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count box)))
     (is (= 1 (g:object-ref-count layout)))))
 
@@ -129,6 +134,7 @@
          (layout (gtk:widget-layout-manager button)))
     (is (eq button (gtk:layout-manager-widget layout)))
     (is-false (setf (gtk:widget-layout-manager button) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count layout)))))
 
@@ -143,9 +149,9 @@
     (is (typep (setf child
                      (gtk:layout-manager-layout-child layout button))
                'gtk:layout-child))
-
     (is-false (gtk:grid-remove grid button))
     (is-false (setf (gtk:widget-layout-manager grid) nil))
+    ;; Check refcount
     (is (= 1 (g:object-ref-count grid)))
     (is (= 1 (g:object-ref-count button)))
     (is (= 1 (g:object-ref-count layout)))

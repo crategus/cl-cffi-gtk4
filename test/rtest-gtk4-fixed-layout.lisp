@@ -65,7 +65,15 @@
                      (gtk:fixed-child-transform fixed button))))
     ;; TODO: Should return the transform, but gives an critical error!?
 ;    (is-false (gtk:fixed-layout-child-transform childlayout))
-))
+
+    (is-false (gtk:fixed-remove fixed button))
+    (is-false (setf (gtk:widget-layout-manager button) nil))
+    (is-false (setf (gtk:widget-layout-manager fixed) nil))
+
+    (is (= 1 (g:object-ref-count fixed)))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count layout)))
+    (is (= 1 (g:object-ref-count childlayout)))))
 
 ;;;     GtkFixedLayout
 
