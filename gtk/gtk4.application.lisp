@@ -301,7 +301,7 @@ lambda (application)    :run-first
       is @em{true}. Applications can connect to this signal and call the
       @fun{gtk:application-inhibit} function with the @code{:logout} value of
       the @symbol{gtk:application-inhibit-flags} flags to delay the end of the
-      session until the state has been saved. @break{}
+      session until the state has been saved.
     @subheading{The \"window-added\" signal}
       @begin{pre}
 lambda (application window)    :run-first
@@ -313,7 +313,6 @@ lambda (application window)    :run-first
       @end{table}
       Emitted when a @class{gtk:window} widget is added to the application
       through the @fun{gtk:application-add-window} function.
-
     @subheading{The \"window-removed\" signal}
       @begin{pre}
 lambda (application window)    :run-first
