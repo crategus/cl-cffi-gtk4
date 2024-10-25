@@ -708,7 +708,7 @@ case PROP_EXPRESSION:
   @begin{short}
     Creates an expression that evaluates to the object given by the arguments.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((expr (gtk:constant-expression-new \"gint\" 100)))
   (prog1
