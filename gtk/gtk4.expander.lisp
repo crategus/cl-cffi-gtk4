@@ -2,7 +2,7 @@
 ;;; gtk4.expander.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -91,7 +91,7 @@
 ;;; GtkExpander
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkExpander" expander
+(gobject:define-gobject "GtkExpander" expander
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -192,7 +192,6 @@ expander
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
-      Activates the expander.
       @begin{pre}
 lambda (expander)   :action
       @end{pre}
@@ -200,6 +199,7 @@ lambda (expander)   :action
         @entry[expander]{The @class{gtk:expander} widget which receives the
           signal.}
       @end{table}
+      Activates the expander.
   @end{dictionary}
   @see-constructor{gtk:expander-new}
   @see-constructor{gtk:expander-new-with-mnemonic}

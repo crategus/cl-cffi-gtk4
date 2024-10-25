@@ -2,7 +2,7 @@
 ;;; gtk4.stack-switcher.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkStackSwitcher
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStackSwitcher" stack-switcher
+(gobject:define-gobject "GtkStackSwitcher" stack-switcher
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

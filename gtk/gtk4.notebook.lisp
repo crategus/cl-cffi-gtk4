@@ -2,7 +2,7 @@
 ;;; gtk4.notebook.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -337,7 +337,7 @@
   @syntax{(gtk:notebook-page-menu object) => menu}
   @syntax{(setf (gtk:notebook-page-menu object) menu)}
   @argument[object]{a @class{gtk:notebook-page} object}
-  @argument[menu]{a @class{gtk:widget} widget displayed in the menu entry of
+  @argument[menu]{a @class{gtk:widget} object displayed in the menu entry of
     the child widget}
   @begin{short}
     Accessor of the @slot[gtk:notebook-page]{menu} slot of the
@@ -649,93 +649,89 @@ notebook
       @begin{pre}
 lambda (notebook page)    :action
       @end{pre}
-      Emitted when the current page should be changed. The default bindings for
-      this signal are the @kbd{Ctrl+Alt+PgUp}, @kbd{Ctrl+Alt+PgDn},
-      @kbd{Ctrl+PgUp} and @kbd{Ctrl+PgDn} keys.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[page]{The integer with the page index.}
         @entry[Returns]{Whether the page was changed.}
       @end{table}
+      Emitted when the current page should be changed. The default bindings for
+      this signal are the @kbd{Ctrl+Alt+PgUp}, @kbd{Ctrl+Alt+PgDn},
+      @kbd{Ctrl+PgUp} and @kbd{Ctrl+PgDn} keys.
     @subheading{The \"create-window\" signal}
       @begin{pre}
 lambda (notebook page)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
+        @entry[page]{The @class{gtk:widget} object for the notebook tab of
+          @arg{notebook} that is being detached.}
+        @entry[Returns]{The @class{gtk:notebook} widget that @arg{page} should
+          be added to, or @code{nil}.}
+      @end{table}
       The signal is emitted when a detachable notebook tab is dropped on the
       root window. A handler for this signal can create a window containing a
       notebook where the notebook tab will be attached. It is also responsible
       for moving/resizing the window and adding the necessary properties to the
       notebook, for example, the @slot[gtk:notebook]{group-name} property.
-      @begin[code]{table}
-        @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[page]{The @class{gtk:widget} widget for the notebook tab of
-          @arg{notebook} that is being detached.}
-        @entry[Returns]{The @class{gtk:notebook} widget that @arg{page} should
-          be added to, or @code{nil}.}
-      @end{table}
     @subheading{The \"focus-tab\" signal}
       @begin{pre}
 lambda (notebook tab)    :action
       @end{pre}
-      Emitted when a tab should be focused.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[tab]{The value of the @symbol{gtk:notebook-tab} enumeration.}
         @entry[Returns]{Whether the notebook tab has been focused.}
       @end{table}
+      Emitted when a tab should be focused.
     @subheading{The \"move-focus-out\" signal}
       @begin{pre}
 lambda (notebook direction)    :action
       @end{pre}
-      Emitted when focus was moved out. The default bindings for this signal
-      are the @kbd{Ctrl+Tab}, @kbd{Ctrl+Shift+Tab}, @kbd{Ctrl+←}, @kbd{Ctrl+→},
-      @kbd{Ctrl+↑} and @kbd{Ctrl+↓}.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[direction]{The @symbol{gtk:direction-type} value with the
           direction to move the focus.}
       @end{table}
+      Emitted when focus was moved out. The default bindings for this signal
+      are the @kbd{Ctrl+Tab}, @kbd{Ctrl+Shift+Tab}, @kbd{Ctrl+←}, @kbd{Ctrl+→},
+      @kbd{Ctrl+↑} and @kbd{Ctrl+↓}.
     @subheading{The \"page-added\" signal}
       @begin{pre}
 lambda (notebook child num)    :run-last
       @end{pre}
-      The signal is emitted in the notebook right after a page is added to the
-      notebook.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
         @entry[num]{The unsigned integer with the child page number.}
       @end{table}
+      The signal is emitted in the notebook right after a page is added to the
+      notebook.
     @subheading{The \"page-removed\" signal}
       @begin{pre}
 lambda (notebook child num)   :run-last
       @end{pre}
-      The signal is emitted in the notebook right after a page is removed from
-      the notebook.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
         @entry[num]{The unsigned integer with the child page number.}
       @end{table}
+      The signal is emitted in the notebook right after a page is removed from
+      the notebook.
     @subheading{The \"page-reordered\" signal}
       @begin{pre}
 lambda (notebook child num)    :run-last
       @end{pre}
-      The signal is emitted in the notebook right after a page has been
-      reordered.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
         @entry[num]{The unsigned integer with the child page number.}
       @end{table}
+      The signal is emitted in the notebook right after a page has been
+      reordered.
     @subheading{The \"reorder-tab\" signal}
       @begin{pre}
 lambda (notebook direction move-to-last)   :action
       @end{pre}
-      Emitted when the notebook tab should be reordered. The default bindings
-      for this signal are the @kbd{Alt+Home}, @kbd{Alt+End}, @kbd{Alt+PgUp},
-      @kbd{Alt+PgDn}, @kbd{Alt+←}, @kbd{Alt+→}, @kbd{Alt+↑} and @kbd{Alt+↓}
-      keys.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[direction]{The value of the @symbol{gtk:direction-type}
@@ -743,27 +739,31 @@ lambda (notebook direction move-to-last)   :action
         @entry[move-to-last]{Whether to move to the last position.}
         @entry[Returns]{Whether the notebook tab was moved.}
       @end{table}
+      Emitted when the notebook tab should be reordered. The default bindings
+      for this signal are the @kbd{Alt+Home}, @kbd{Alt+End}, @kbd{Alt+PgUp},
+      @kbd{Alt+PgDn}, @kbd{Alt+←}, @kbd{Alt+→}, @kbd{Alt+↑} and @kbd{Alt+↓}
+      keys.
     @subheading{The \"select-page\" signal}
       @begin{pre}
 lambda (notebook move-focus)    :action
       @end{pre}
-      Emitted when a page should be selected. The default binding for this
-      signal is the @kbd{␣} key.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[move-focus]{Whether to move focus.}
         @entry[Returns]{Whether the page was selected.}
       @end{table}
+      Emitted when a page should be selected. The default binding for this
+      signal is the @kbd{␣} key.
     @subheading{The \"switch-page\" signal}
       @begin{pre}
 lambda (notebook page num)    :run-last
       @end{pre}
-      Emitted when the user or a function changes the current page.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[page]{The @class{gtk:widget} current page.}
         @entry[num]{The unsigned integer with the index of the page.}
       @end{table}
+      Emitted when the user or a function changes the current page.
   @end{dictionary}
   @see-constructor{gtk:notebook-new}
   @see-slot{gtk:notebook-enable-popup}
@@ -1335,12 +1335,12 @@ lambda (notebook page num)    :run-last
     Removes a page from the notebook given the page widget or its index in the
     notebook.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     In the Lisp implementation the argument can be an integer for the index or
     the page widget. The index of the page widget is got with the function
     @fun{gtk:notebook-page-num} and passed to the C function.
-  @end{notes}
-  @begin{examples}
+  @end{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (defvar notebook (make-instance 'gtk:notebook))
 => NOTEBOOK
@@ -1353,7 +1353,7 @@ lambda (notebook page num)    :run-last
 => 0
 (gtk:notebook-remove-page notebook 0)
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:notebook}
   @see-function{gtk:notebook-page-num}"
   (%notebook-remove-page notebook
@@ -1433,7 +1433,7 @@ lambda (notebook page num)    :run-last
   @end{short}
   If the user clicks with the right mouse button on the notebook tab labels, a
   menu with all the pages will be popped up.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function calls the @fun{gtk:notebook-enable-popup} function with the
     @em{true} value.
   @end{dictionary}
@@ -1458,7 +1458,7 @@ lambda (notebook page num)    :run-last
     Disables the popup menu.
   @end{short}
   See the @fun{gtk:notebook-popup-enable} function.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function calls the @fun{gtk:notebook-enable-popup} function with the
     @em{false} value.
   @end{dictionary}
@@ -1521,7 +1521,7 @@ lambda (notebook page num)    :run-last
 
   If you want a notebook to accept drags from other widgets, you will have to
   set your own DnD code to do it.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 static void
 on_drag_data_received (GtkWidget        *widget,
@@ -1543,7 +1543,7 @@ on_drag_data_received (GtkWidget        *widget,
   gtk_notebook_detach_tab (GTK_NOTEBOOK (notebook), *child);
 @}
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:notebook}
   @see-class{gtk:notebook-page}
   @see-class{gtk:widget}
@@ -1687,7 +1687,7 @@ on_drag_data_received (GtkWidget        *widget,
   @syntax{(setf (gtk:notebook-tab-label notebook child) tab)}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[child]{a @class{gtk:widget} child page}
-  @argument[tab]{a @class{gtk:widget} widget for the notebook tab label to use,
+  @argument[tab]{a @class{gtk:widget} object for the notebook tab label to use,
     or @code{nil} for default notebook tab label}
   @begin{short}
     The @fun{gtk:notebook-tab-label} function returns the notebook tab label

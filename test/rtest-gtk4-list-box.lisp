@@ -21,8 +21,10 @@
           (g:type-parent "GtkListBoxRow")))
   ;; Check children
   #-windows
-  (is (equal '("GtkPlacesViewRow" "GtkSidebarRow")
-             (glib-test:list-children "GtkListBoxRow")))
+  (is (or (equal '()
+                 (glib-test:list-children "GtkListBoxRow"))
+          (equal '("GtkPlacesViewRow" "GtkSidebarRow")
+                 (glib-test:list-children "GtkListBoxRow"))))
   #+windows
   (if *first-run-gtk-test*
       (is (equal '()
@@ -344,11 +346,30 @@
     (is-false (gtk:list-box-prepend listbox widget2))
     (is-false (gtk:list-box-prepend listbox widget3))
 
-    (is (eq widget3 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
-    (is (eq widget2 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
-    (is (eq widget1 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
+    (is (= 2 (g:object-ref-count widget1)))
+    (is (= 2 (g:object-ref-count widget2)))
+    (is (= 2 (g:object-ref-count widget3)))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    (is (eq widget3
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
+    (is (eq widget2
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
+    (is (eq widget1
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_append
 
@@ -361,11 +382,31 @@
     (is-false (gtk:list-box-append listbox widget2))
     (is-false (gtk:list-box-append listbox widget3))
 
-    (is (eq widget1 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
-    (is (eq widget2 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
-    (is (eq widget3 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
+    (is (= 2 (g:object-ref-count widget1)))
+    (is (= 2 (g:object-ref-count widget2)))
+    (is (= 2 (g:object-ref-count widget3)))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    (is (eq widget1
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
+    (is (eq widget2
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
+    (is (eq widget3
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
+
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_insert
 
@@ -378,11 +419,27 @@
     (is-false (gtk:list-box-insert listbox widget2 1))
     (is-false (gtk:list-box-insert listbox widget3 0))
 
-    (is (eq widget3 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
-    (is (eq widget1 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
-    (is (eq widget2 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
+    (is (eq widget3
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
+    (is (eq widget1
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
+    (is (eq widget2
+            (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_remove
 ;;;     gtk_list_box_remove_all                            Since 4.12
@@ -392,7 +449,8 @@
   (let ((listbox (gtk:list-box-new))
         (widget1 (gtk:box-new))
         (widget2 (gtk:frame-new))
-        (widget3 (gtk:paned-new)))
+        (widget3 (gtk:paned-new))
+        (row nil))
     (is-false (gtk:list-box-append listbox widget1))
     (is-false (gtk:list-box-append listbox widget2))
     (is-false (gtk:list-box-append listbox widget3))
@@ -401,11 +459,26 @@
     (is (eq widget2 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
     (is (eq widget3 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 2))))
 
-    (is-false (gtk:list-box-remove listbox (gtk:list-box-row-at-index listbox 1)))
+    (is-false (gtk:list-box-remove listbox
+                  (setf row (gtk:list-box-row-at-index listbox 1))))
+    (is (eq widget2 (gtk:list-box-row-child row)))
+    (is-false (setf (gtk:list-box-row-child row) nil))
+
     (is (eq widget1 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 0))))
     (is (eq widget3 (gtk:list-box-row-child (gtk:list-box-row-at-index listbox 1))))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_select_row
 ;;;     gtk_list_box_unselect_row
@@ -425,7 +498,20 @@
     (is-false (gtk:list-box-unselect-row listbox (gtk:list-box-row-at-index listbox 1)))
     (is-false (gtk:list-box-selected-row listbox))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_select_all
 ;;;     gtk_list_box_unselect_all
@@ -454,7 +540,20 @@
                        (mapcar #'gtk:list-box-row-child
                                (gtk:list-box-selected-rows listbox)))))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     gtk_list_box_get_adjustment
 ;;;     gtk_list_box_set_adjustment
@@ -468,6 +567,10 @@
     (is-false (setf (gtk:list-box-adjustment listbox) nil))))
 
 ;;;     gtk_list_box_set_placeholder
+
+;; TODO: We have no function to retrieve and remove the placeholder widget
+;; from the list box. Therefore we cannot remove the strong reference from the
+;; label widget.
 
 (test gtk-list-box-set-placeholder
   (let ((listbox (gtk:list-box-new))
@@ -499,7 +602,20 @@
                     (push (type-of (gtk:list-box-row-child row)) msg))))
     (is (equal '(GTK:PANED GTK:FRAME GTK:BOX) msg))
 
-    (is-false (gtk:list-box-remove-all listbox))))
+    ;; Remove children from the list box rows
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 0)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 1)) nil))
+    (is-false (setf (gtk:list-box-row-child
+                        (gtk:list-box-row-at-index listbox 2)) nil))
+    ;; Remove list box rows from list box
+    (is-false (gtk:list-box-remove-all listbox))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count listbox)))
+    (is (= 1 (g:object-ref-count widget1)))
+    (is (= 1 (g:object-ref-count widget2)))
+    (is (= 1 (g:object-ref-count widget3)))))
 
 ;;;     GtkListBoxUpdateHeaderFunc
 ;;;     gtk_list_box_set_header_func

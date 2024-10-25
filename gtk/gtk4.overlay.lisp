@@ -2,7 +2,7 @@
 ;;; gtk4.overlay.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -135,6 +135,14 @@
       @begin{pre}
 lambda (overlay widget allocation)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[overlay]{The @class{gtk:overlay} widget which emitted the
+          signal.}
+        @entry[widget]{The @class{gtk:widget} overlay widget to position.}
+        @entry[allocation]{Return location of type @class{gdk:rectangle} for
+          the allocation.}
+        @entry[Returns]{@em{True} if @arg{allocation} has been filled.}
+      @end{table}
       The signal is emitted to determine the position and size of any overlay
       widgets. A handler for this signal should fill @arg{allocation} with the
       desired position and size for @arg{widget}, relative to the main child
@@ -144,14 +152,6 @@ lambda (overlay widget allocation)    :run-last
       except that an alignment of @code{:fill} will cause the overlay to be
       full-width/height. If the main child is a @class{gtk:scrolled-window}
       widget, the overlays are placed relative to its contents.
-      @begin[code]{table}
-        @entry[overlay]{The @class{gtk:overlay} widget which emitted the
-          signal.}
-        @entry[widget]{The @class{gtk:widget} overlay widget to position.}
-        @entry[allocation]{Return location of type @class{gdk:rectangle} for
-          the allocation.}
-        @entry[Returns]{@em{True} if @arg{allocation} has been filled.}
-      @end{table}
   @end{dictionary}
   @see-slot{gtk:overlay-child}
   @see-constructor{gtk:overlay-new}")

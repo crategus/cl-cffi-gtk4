@@ -2,7 +2,7 @@
 ;;; gtk4.paned.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -103,9 +103,7 @@
 ;;; GtkPaned
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Implement the GtkAccessibleRange interface
-
-(gobject:define-g-object-class "GtkPaned" paned
+(gobject:define-gobject "GtkPaned" paned
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleRange"
@@ -199,7 +197,7 @@ paned
     arranged from left to right. So @code{:first-child} will always select the
     leftmost child widget, regardless of text direction.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Creating a paned widget with minimum sizes.
     @begin{pre}
 (let ((frame1 (make-instance 'gtk:frame
@@ -215,73 +213,73 @@ paned
                             :height-request 150)))
     ... )
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"accept-position\" signal}
       @begin{pre}
 lambda (widget)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to accept the current
-      position of the handle when moving it using key bindings. The default
-      binding for this signal is the @kbd{Return} or @kbd{Space} key.
       @begin[code]{table}
         @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to accept the current
+      position of the handle when moving it using key bindings. The default
+      binding for this signal is the @kbd{Return} or @kbd{Space} key.
     @subheading{The \"cancel-position\" signal}
       @begin{pre}
 lambda (widget)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
+      @end{table}
       The signal is a keybinding signal which gets emitted to cancel moving the
       position of the handle using key bindings. The position of the handle will
       be reset to the value prior to moving it. The default binding for this
       signal is the @kbd{Escape} key.
-      @begin[code]{table}
-        @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
-      @end{table}
     @subheading{The \"cycle-child-focus\" signal}
       @begin{pre}
 lambda (widget reversed)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to cycle the focus
-      between the children of the paned widget. The default binding is the
-      @kbd{F6} key.
       @begin[code]{table}
         @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
         @entry[reversed]{The boolean whether cycling backward or forward.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to cycle the focus
+      between the children of the paned widget. The default binding is the
+      @kbd{F6} key.
     @subheading{The \"cycle-handle-focus\" signal}
       @begin{pre}
 lambda (widget reversed)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to cycle whether the
-      paned widget should grab focus to allow the user to change position of the
-      handle by using key bindings. The default binding for this signal is the
-      @kbd{F8} key.
       @begin[code]{table}
         @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
         @entry[reversed]{The boolean whether cycling backward or forward.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to cycle whether the
+      paned widget should grab focus to allow the user to change position of the
+      handle by using key bindings. The default binding for this signal is the
+      @kbd{F8} key.
     @subheading{The \"move-handle\" signal}
       @begin{pre}
 lambda (widget scrolltype)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to move the handle
-      when the user is using key bindings to move it.
       @begin[code]{table}
         @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
         @entry[scrolltype]{The value of the @symbol{gtk:scroll-type}
           enumeration.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to move the handle
+      when the user is using key bindings to move it.
     @subheading{The \"toggle-handle-focus\" signal}
       @begin{pre}
 lambda (widget)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to accept the current
-      position of the handle and then move focus to the next widget in the focus
-      chain. The default binding is the @kbd{Tab} key.
       @begin[code]{table}
         @entry[widget]{The @symbol{gtk:paned} widget that received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to accept the current
+      position of the handle and then move focus to the next widget in the focus
+      chain. The default binding is the @kbd{Tab} key.
   @end{dictionary}
   @see-constructor{gtk:paned-new}
   @see-slot{gtk:paned-end-child}

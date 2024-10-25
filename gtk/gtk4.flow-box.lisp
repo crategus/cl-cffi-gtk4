@@ -2,7 +2,7 @@
 ;;; gtk4.flow-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -163,7 +163,7 @@
 ;;; GtkFlowBoxChild
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFlowBoxChild" flow-box-child
+(gobject:define-gobject "GtkFlowBoxChild" flow-box-child
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -190,14 +190,14 @@
       @begin{pre}
 lambda (child)    :action
       @end{pre}
-      The signal is emitted when the user activates a child widget in a
-      @class{gtk:flow-box} widget, either by clicking or double-clicking, or by
-      using the @kbd{Space} or @kbd{Enter} key. While this signal is used as a
-      keybinding signal, it can be used by applications for their own purposes.
       @begin[code]{table}
         @entry[child]{The @class{gtk:flow-box-child} widget on which the signal
           is emitted.}
       @end{table}
+      The signal is emitted when the user activates a child widget in a
+      @class{gtk:flow-box} widget, either by clicking or double-clicking, or by
+      using the @kbd{Space} or @kbd{Enter} key. While this signal is used as a
+      keybinding signal, it can be used by applications for their own purposes.
   @end{dictionary}
   @see-constructor{gtk:flow-box-child-new}
   @see-slot{gtk:flow-box-child-child}
@@ -326,7 +326,7 @@ lambda (child)    :action
 ;;; GtkFlowBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFlowBox" flow-box
+(gobject:define-gobject "GtkFlowBox" flow-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -415,26 +415,35 @@ flowbox
       @begin{pre}
 lambda (flowbox)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      activates the flow box.
       @begin[code]{table}
         @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      activates the flow box.
     @subheading{The \"child-activated\" signal}
       @begin{pre}
 lambda (flowbox child)    :run-last
       @end{pre}
-      The signal is emitted when a child has been activated by the user.
       @begin[code]{table}
         @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
           emitted.}
         @entry[child]{The @class{gtk:flow-box-child} widget that is activated.}
       @end{table}
+      The signal is emitted when a child has been activated by the user.
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
 lambda (flowbox step count)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
+          emitted.}
+        @entry[step]{The granularity to the move, as a value of the
+          @symbol{gtk:movement-step} enumeration.}
+        @entry[count]{The integer with the number of step units to move.}
+        @entry[Returns]{@em{True} to stop other handlers from being invoked for
+          the event. @em{False} to propagate the event further.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. Applications should not connect to it, but
       may emit it with the @fun{g:signal-emit} function if they need to control
@@ -446,59 +455,50 @@ lambda (flowbox step count)    :action
       list them all here. Arrow keys move by individual children.
       @kbd{Home}/@kbd{End} keys move to the ends of the box.
       @kbd{PageUp}/@kbd{PageDown} keys move vertically by pages.
-      @begin[code]{table}
-        @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
-          emitted.}
-        @entry[step]{The granularity to the move, as a value of the
-          @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
-        @entry[Returns]{@em{True} to stop other handlers from being invoked for
-          the event. @em{False} to propagate the event further.}
-      @end{table}
     @subheading{The \"select-all\" signal}
       @begin{pre}
 lambda (flowbox)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to select all
-      children of the box, if the selection mode permits it. The default
-      bindings for this signal is the @kbd{Ctrl-a} key.
       @begin[code]{table}
         @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to select all
+      children of the box, if the selection mode permits it. The default
+      bindings for this signal is the @kbd{Ctrl-a} key.
     @subheading{The \"selected-children-changed\" signal}
       @begin{pre}
 lambda (flowbox)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[box]{The @class{gtk:flow-box} on which the signal is emitted.}
+      @end{table}
       The signal is emitted when the set of selected children changes. Use the
       @fun{gtk:flow-box-selected-foreach} or
       @fun{gtk:flow-box-selected-children} functions to obtain the selected
       children.
-      @begin[code]{table}
-        @entry[box]{The @class{gtk:flow-box} on which the signal is emitted.}
-      @end{table}
     @subheading{The \"toggle-cursor-child\" signal}
       @begin{pre}
 lambda (flowbox)    :action
       @end{pre}
-      The signal is a keybinding signal which toggles the selection of the
-      child that has the focus. The default binding for this signal is the
-      @kbd{Ctrl-Space} key.
       @begin[code]{table}
         @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which toggles the selection of the
+      child that has the focus. The default binding for this signal is the
+      @kbd{Ctrl-Space} key.
     @subheading{The \"unselect-all\" signal}
       @begin{pre}
 lambda (flowbox)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to unselect all
-      children of the box, if the selection mode permits it. The default
-      bindings for this signal is the @kbd{Ctrl-Shift-a} key.
       @begin[code]{table}
         @entry[flowbox]{The @class{gtk:flow-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to unselect all
+      children of the box, if the selection mode permits it. The default
+      bindings for this signal is the @kbd{Ctrl-Shift-a} key.
   @end{dictionary}
   @see-constructor{gtk:flow-box-new}
   @see-slot{gtk:flow-box-accept-unpaired-release}
@@ -1341,7 +1341,7 @@ lambda (flowbox)    :action
       (liber:symbol-documentation 'flow-box-create-widget-func)
  "@version{#2024-4-14}
   @syntax{lambda (object) => result}
-  @argument[object]{a @class{g:object} object with the item from the model for
+  @argument[object]{a @class{g:object} instance with the item from the model for
     which to create a widget for}
   @argument[result]{a @class{gtk:widget} object that represents @arg{object}}
   @begin{short}

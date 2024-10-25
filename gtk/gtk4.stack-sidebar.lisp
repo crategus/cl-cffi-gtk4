@@ -2,7 +2,7 @@
 ;;; gtk4.stack-sidebar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkStackSidebar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStackSidebar" stack-sidebar
+(gobject:define-gobject "GtkStackSidebar" stack-sidebar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

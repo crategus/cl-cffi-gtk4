@@ -2,7 +2,7 @@
 ;;; gtk4.frame.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; struct GtkFrame
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFrame" frame
+(gobject:define-gobject "GtkFrame" frame
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -314,11 +314,11 @@ frame
   value for a newly created frame is 0.0. A value of 0.0 represents left
   alignment, 1.0 represents right alignment. The change of the
   property is ignored if the value is not in the range of [0.0, 1.0].
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function is a variant of the @fun{gtk:frame-label-xalign} function,
     which is the accessor function of the @slot[gtk:frame]{label-xalign}
     property.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:frame}
   @see-function{gtk:frame-label-xalign}"
   (frame-label-xalign frame))

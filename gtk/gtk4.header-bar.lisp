@@ -2,7 +2,7 @@
 ;;; gtk4.header-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; GtkHeaderBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkHeaderBar" header-bar
+(gobject:define-gobject "GtkHeaderBar" header-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -323,9 +323,9 @@ headerbar
     Adds a child widget to the header bar, packed with reference to the start
     of the header bar.
   @end{short}
-  @begin{examples}
-    Code fragment for a header bar with two buttons. The cancel button is
-    placed on the left side and the done button on the right side of the header
+  @begin[Examples]{dictionary}
+    Code fragment for a header bar with two buttons. The Cancel button is
+    placed on the left side and the Done button on the right side of the header
     bar.
     @begin{pre}
 (let (...
@@ -344,7 +344,7 @@ headerbar
   (gtk:header-bar-pack-end header button)
   ... )
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:header-bar}
   @see-class{gtk:widget}
   @see-function{gtk:header-bar-pack-end}"

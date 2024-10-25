@@ -2,7 +2,7 @@
 ;;; gtk4.action-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -73,7 +73,7 @@
 ;;; GtkActionBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkActionBar" action-bar
+(gobject:define-gobject "GtkActionBar" action-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -153,11 +153,11 @@ actionbar
   @end{short}
   Changing the @slot[gtk:action-bar]{revealed} property will make the action bar
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This does not show or hide the action bar in the
     @slot[gtk:widget]{visible} property sense, so revealing has no effect if
     the @slot[gtk:widget]{visible} property is @em{false}.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:action-bar}
   @see-function{gtk:widget-visible}")
 

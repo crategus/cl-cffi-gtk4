@@ -93,9 +93,10 @@
 ;;; --- Properties for GtkNotebookPage -----------------------------------------
 
 (test gtk-notebook-page-properties
-  (let ((page (make-instance 'gtk:notebook-page
-                             :child (make-instance 'gtk:box))))
-    (is (typep (gtk:notebook-page-child page) 'gtk:box))
+  (let* ((box (make-instance 'gtk:box))
+         (page (make-instance 'gtk:notebook-page
+                              :child box)))
+    (is (eq box (gtk:notebook-page-child page)))
     (is-false (gtk:notebook-page-detachable page))
     (is-false (gtk:notebook-page-menu page))
     (is-false (gtk:notebook-page-menu-label page))
@@ -104,7 +105,10 @@
     (is-false (gtk:notebook-page-tab page))
     (is-false (gtk:notebook-page-tab-expand page))
     (is-true (gtk:notebook-page-tab-fill page))
-    (is-false (gtk:notebook-page-tab-label page))))
+    (is-false (gtk:notebook-page-tab-label page))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count page)))
+    (is (= 2 (g:object-ref-count box)))))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -401,10 +405,14 @@
     (is-false (gtk:notebook-remove-page notebook page3))
 
     (is (= 0 (g:list-model-n-items pages)))
-
+    ;; TODO: We have a strong reference to PAGES and PAGE1, PAGE2, PAGE3.
+    ;; Can we remove the strong references?
     (is (= 2 (g:object-ref-count page1)))
+    (is (= 2 (g:object-ref-count page2)))
+    (is (= 2 (g:object-ref-count page3)))
+    (is (= 2 (g:object-ref-count pages)))
+    (is (= 1 (g:object-ref-count notebook)))))
 
-))
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_notebook_new
@@ -436,11 +444,19 @@
     ;; Retrieve widgets from index
     (is (eq page1 (gtk:notebook-nth-page notebook 0)))
     (is (eq page2 (gtk:notebook-nth-page notebook 1)))
-    (is (eq page3 (gtk:notebook-nth-page notebook 2)))))
+    (is (eq page3 (gtk:notebook-nth-page notebook 2)))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))
+    (is-false (gtk:notebook-remove-page notebook page3))
+    (is (= 1 (g:object-ref-count page1)))
+    (is (= 1 (g:object-ref-count page2)))
+    (is (= 1 (g:object-ref-count page3)))
+    (is (= 1 (g:object-ref-count notebook)))))
 
 ;;;     gtk_notebook_page_num
 
-(test gkt-notebook-page-num
+(test gtk-notebook-page-num
   (let ((notebook (gtk:notebook-new))
         (page1 (gtk:frame-new))
         (page2 (gtk:frame-new))
@@ -450,7 +466,14 @@
     (is (= 1 (gtk:notebook-add-page notebook page2 label)))
     ;; Retrieve index from child widget
     (is (= 0 (gtk:notebook-page-num notebook page1)))
-    (is (= 1 (gtk:notebook-page-num notebook page2)))))
+    (is (= 1 (gtk:notebook-page-num notebook page2)))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))
+    (is (= 2 (g:object-ref-count label)))
+    (is (= 1 (g:object-ref-count page1)))
+    (is (= 1 (g:object-ref-count page2)))
+    (is (= 1 (g:object-ref-count notebook)))))
 
 ;;;     gtk_notebook_get_current_page
 ;;;     gtk_notebook_set_current_page
@@ -472,7 +495,11 @@
     (is (= 1 (setf (gtk:notebook-current-page notebook) 1)))
     (is (eq page2
             (gtk:notebook-nth-page notebook
-                                   (gtk:notebook-current-page notebook))))))
+                                   (gtk:notebook-current-page notebook))))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))
+    (is-false (gtk:notebook-remove-page notebook page3))))
 
 ;;;     gtk_notebook_next_page
 ;;;     gtk_notebook_prev_page
@@ -494,7 +521,11 @@
     (is-false (gtk:notebook-prev-page notebook))
     (is (= 1 (gtk:notebook-current-page notebook)))
     (is-false (gtk:notebook-prev-page notebook))
-    (is (= 0 (gtk:notebook-current-page notebook)))))
+    (is (= 0 (gtk:notebook-current-page notebook)))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))
+    (is-false (gtk:notebook-remove-page notebook page3))))
 
 ;;;     gtk_notebook_append_page
 ;;;     gtk_notebook_append_page_menu
@@ -516,7 +547,11 @@
     (is (= 2 (gtk:notebook-add-page notebook page3 label3 :pos :end)))
     (is (typep (gtk:notebook-nth-page notebook 0) 'gtk:box))
     (is (typep (gtk:notebook-nth-page notebook 1) 'gtk:frame))
-    (is (typep (gtk:notebook-nth-page notebook 2) 'gtk:paned))))
+    (is (typep (gtk:notebook-nth-page notebook 2) 'gtk:paned))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))
+    (is-false (gtk:notebook-remove-page notebook page3))))
 
 ;;;     gtk_notebook_remove_page
 
@@ -555,7 +590,7 @@
 
 ;;;     gtk_notebook_reorder_child
 
-(test gkt-notebook-reorder-child
+(test gtk-notebook-reorder-child
   (let ((notebook (gtk:notebook-new))
         (page1 (gtk:frame-new))
         (page2 (gtk:frame-new))
@@ -564,7 +599,10 @@
     (is (= 1 (gtk:notebook-add-page notebook page2 label)))
     (is-false (gtk:notebook-reorder-child notebook page2 0))
     (is (= 1 (gtk:notebook-page-num notebook page1)))
-    (is (= 0 (gtk:notebook-page-num notebook page2)))))
+    (is (= 0 (gtk:notebook-page-num notebook page2)))
+    ;; Check memory management
+    (is-false (gtk:notebook-remove-page notebook page1))
+    (is-false (gtk:notebook-remove-page notebook page2))))
 
 ;;;     gtk_notebook_popup_enable
 ;;;     gtk_notebook_popup_disable
@@ -577,7 +615,8 @@
     (is-true (gtk:notebook-popup-enable notebook))
     (is-true (gtk:notebook-enable-popup notebook))
     (is-false (gtk:notebook-popup-disable notebook))
-    (is-false (gtk:notebook-enable-popup notebook))))
+    (is-false (gtk:notebook-enable-popup notebook))
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_tab_detachable
 ;;;     gtk_notebook_set_tab_detachable
@@ -594,7 +633,9 @@
     (is-false (gtk:notebook-page-detachable (g:list-model-object pages 0)))
     (is-true (setf (gtk:notebook-tab-detachable notebook page) t))
     (is-true (gtk:notebook-tab-detachable notebook page))
-    (is-true (gtk:notebook-page-detachable (g:list-model-object pages 0)))))
+    (is-true (gtk:notebook-page-detachable (g:list-model-object pages 0)))
+
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_tab_reorderable
 ;;;     gtk_notebook_set_tab_reorderable
@@ -611,7 +652,9 @@
     (is-false (gtk:notebook-page-reorderable (g:list-model-object pages 0)))
     (is-true (setf (gtk:notebook-tab-reorderable notebook page) t))
     (is-true (gtk:notebook-tab-reorderable notebook page))
-    (is-true (gtk:notebook-page-reorderable (g:list-model-object pages 0)))))
+    (is-true (gtk:notebook-page-reorderable (g:list-model-object pages 0)))
+
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_menu_label
 ;;;     gtk_notebook_set_menu_label
@@ -625,7 +668,9 @@
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
     (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
     (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))))
+    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))
+
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_menu_label_text
 ;;;     gtk_notebook_set_menu_label_text
@@ -642,7 +687,8 @@
     (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
     (is (string= "menu"
                  (gtk:label-label
-                     (gtk:notebook-page-menu (g:list-model-object pages 0)))))))
+                     (gtk:notebook-page-menu (g:list-model-object pages 0)))))
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 (test gtk-notebook-menu-label-text.2
   (let ((notebook (gtk:notebook-new))
@@ -654,7 +700,8 @@
                  (setf (gtk:notebook-menu-label-text notebook page) "menu")))
     (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
     ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-menu-label (g:list-model-object pages 0)))))
+    (is-false (gtk:notebook-page-menu-label (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_tab_label
 ;;;     gtk_notebook_set_tab_label
@@ -668,7 +715,8 @@
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
     (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
     (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))))
+    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_set_tab_label_text
 ;;;     gtk_notebook_get_tab_label_text
@@ -683,7 +731,8 @@
                  (setf (gtk:notebook-tab-label-text notebook page) "tab")))
     (is (string= "tab" (gtk:notebook-tab-label-text notebook page)))
     ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-tab-label (g:list-model-object pages 0)))))
+    (is-false (gtk:notebook-page-tab-label (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_set_action_widget
 ;;;     gtk_notebook_get_action_widget
@@ -694,8 +743,9 @@
     (is-false (gtk:notebook-action-widget notebook :start))
     (is-false (gtk:notebook-action-widget notebook :end))
 
-     (is (eq widget (setf (gtk:notebook-action-widget notebook :start) widget)))
-     (is (eq widget (gtk:notebook-action-widget notebook :start)))
-))
+    (is (eq widget (setf (gtk:notebook-action-widget notebook :start) widget)))
+    (is (eq widget (gtk:notebook-action-widget notebook :start)))
 
-;;; 2024-10-4
+    (is-false (setf (gtk:notebook-action-widget notebook :start) nil))))
+
+;;; 2024-10-19

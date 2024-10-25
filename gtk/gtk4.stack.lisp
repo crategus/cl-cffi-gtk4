@@ -2,7 +2,7 @@
 ;;; gtk4.stack.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -136,7 +136,7 @@
 ;;; GtkStackTransitionType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkStackTransitionType" stack-transition-type
+(gobject:define-genum "GtkStackTransitionType" stack-transition-type
   (:export t
    :type-initializer "gtk_stack_transition_type_get_type")
   (:none 0)
@@ -169,7 +169,7 @@
       (liber:symbol-documentation 'stack-transition-type)
  "@version{2024-4-14}
   @begin{declaration}
-(gobject:define-g-enum \"GtkStackTransitionType\" stack-transition-type
+(gobject:define-genum \"GtkStackTransitionType\" stack-transition-type
   (:export t
    :type-initializer \"gtk_stack_transition_type_get_type\")
   (:none 0)
@@ -242,7 +242,7 @@
 ;;; GtkStackPage
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStackPage" stack-page
+(gobject:define-gobject "GtkStackPage" stack-page
   (:superclass g:object
    :export t
    :interfaces ("GtkAccessible")
@@ -484,7 +484,7 @@
 ;;; GtkStack
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStack" stack
+(gobject:define-gobject "GtkStack" stack
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

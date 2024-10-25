@@ -2,7 +2,7 @@
 ;;; gtk4.revealer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -100,7 +100,7 @@
       (liber:symbol-documentation 'revealer-transition-type)
  "@version{2024-4-12}
   @begin{declaration}
-(gobject:define-g-enum \"GtkRevealerTransitionType\" revealer-transition-type
+(gobject:define-genum \"GtkRevealerTransitionType\" revealer-transition-type
   (:export t
    :type-initializer \"gtk_revealer_transition_type_get_type\")
   (:none 0)

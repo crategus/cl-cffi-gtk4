@@ -2,7 +2,7 @@
 ;;; gtk4.list-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -194,14 +194,14 @@
       @begin{pre}
 lambda (row)    :action
       @end{pre}
-      This is a keybinding signal, which will cause this row to be activated.
-      If you want to be notified when the user activates a row (by key or not),
-      use the @code{\"row-activated\"} signal on the parent @class{gtk:list-box}
-      widget of the row.
       @begin[code]{table}
         @entry[row]{The @class{gtk:list-box-row} widget on which the signal is
           emitted.}
       @end{table}
+      This is a keybinding signal, which will cause this row to be activated.
+      If you want to be notified when the user activates a row (by key or not),
+      use the @code{\"row-activated\"} signal on the parent @class{gtk:list-box}
+      widget of the row.
   @end{dictionary}
   @see-constructor{gtk:list-box-row-new}
   @see-slot{gtk:list-box-row-activatable}
@@ -504,45 +504,45 @@ lambda (listbox step count)    :action
       @begin{pre}
 lambda (listbox row)    :run-last
       @end{pre}
-      The signal is emitted when a row has been activated by the user.
       @begin[code]{table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[row]{The activated @class{gtk:list-box-row} widget.}
       @end{table}
+      The signal is emitted when a row has been activated by the user.
     @subheading{The \"row-selected\" signal}
       @begin{pre}
 lambda (listbox row)    :run-last
       @end{pre}
-      The signal is emitted when a new row is selected, or when the selection
-      is cleared. When the list box is using the @code{:multiple} selection
-      mode, this signal will not give you the full picture of selection changes,
-      and you should use the @code{\"selected-rows-changed\"} signal instead.
       @begin[code]{table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[row]{The selected @class{gtk:list-box-row} widget.}
       @end{table}
+      The signal is emitted when a new row is selected, or when the selection
+      is cleared. When the list box is using the @code{:multiple} selection
+      mode, this signal will not give you the full picture of selection changes,
+      and you should use the @code{\"selected-rows-changed\"} signal instead.
     @subheading{The \"select-all\" signal}
       @begin{pre}
 lambda (listbox)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to select all
-      children of the list box, if the selection mode permits it. The default
-      bindings for this signal is the @kbd{Ctrl-a} key.
       @begin[code]{table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to select all
+      children of the list box, if the selection mode permits it. The default
+      bindings for this signal is the @kbd{Ctrl-a} key.
     @subheading{The \"selected-rows-changed\" signal}
       @begin{pre}
 lambda (listbox)    :run-first
       @end{pre}
-      The signal is emitted when the set of selected rows changes.
       @begin[code]{table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is emitted when the set of selected rows changes.
     @subheading{The \"toggle-cursor-row\" signal}
       @begin{pre}
 lambda (listbox)    :action
@@ -555,13 +555,13 @@ lambda (listbox)    :action
       @begin{pre}
 lambda (listbox)    :action
       @end{pre}
-        The signal is a keybinding signal which gets emitted to unselect all
-        children of the list box, if the selection mode permits it. The default
-        bindings for this signal is the @kbd{Ctrl-Shift-a} key.
       @begin[code]{table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
+        The signal is a keybinding signal which gets emitted to unselect all
+        children of the list box, if the selection mode permits it. The default
+        bindings for this signal is the @kbd{Ctrl-Shift-a} key.
   @end{dictionary}
   @see-slot{gtk:list-box-accept-unpaired-release}
   @see-slot{gtk:list-box-activate-on-single-click}
@@ -1451,7 +1451,7 @@ lambda (listbox)    :action
       (liber:symbol-documentation 'list-box-create-widget-func)
  "@version{#2024-4-15}
   @syntax{lambda (object) => result}
-  @argument[object]{a @class{g:object} object for the item from the model for
+  @argument[object]{a @class{g:object} instance for the item from the model for
     which to create a widget for}
   @argument[result]{a @class{gtk:widget} object that represents @arg{item}}
   @begin{short}
