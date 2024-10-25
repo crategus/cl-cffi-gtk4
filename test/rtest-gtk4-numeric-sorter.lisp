@@ -45,11 +45,21 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     expression
-;;;     sort-order
+(test gtk-numeric-sorter-properties
+  (let ((sorter (make-instance 'gtk:numeric-sorter)))
+    (is (cffi:null-pointer-p (gtk:numeric-sorter-expression sorter)))
+    (is (eq :ascending (gtk:numeric-sorter-sort-order sorter)))
+    (is (= 1 (g:object-ref-count sorter)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_numeric_sorter_new
 
-;;; 2024-9-19
+(test gtk-numeric-sorter-new
+  (let* ((expression (gtk:constant-expression-new "gint" 100))
+         (sorter (gtk:numeric-sorter-new expression)))
+    (is (cffi:pointer-eq expression (gtk:numeric-sorter-expression sorter)))
+    (is (eq :ascending (gtk:numeric-sorter-sort-order sorter)))
+    (is (= 1 (g:object-ref-count sorter)))))
+
+;;; 2024-10-24

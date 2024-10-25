@@ -2,7 +2,7 @@
 ;;; gtk4.multi-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkMultiSorter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMultiSorter" multi-sorter
+(gobject:define-gobject "GtkMultiSorter" multi-sorter
   (:superclass sorter
    :export t
    :interfaces ("GListModel"
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'multi-sorter-item-type)
       "Accessor"
       (documentation 'multi-sorter-item-type 'function)
- "@version{#2023-9-5}
+ "@version{2024-10-21}
   @syntax{(gtk:multi-sorter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -125,7 +125,7 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
   @see-class{gtk:multi-sorter}
@@ -145,7 +145,7 @@
 (setf (liber:alias-for-function 'multi-sorter-n-items)
       "Accessor"
       (documentation 'multi-sorter-n-items 'function)
- "@version{#2023-9-5}
+ "@version{2024-10-21}
   @syntax{(gtk:multi-sorter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -154,7 +154,7 @@
     Accessor of the @slot[gtk:multi-sorter]{n-items} slot of the
     @class{gtk:multi-sorter} class.
   @end{short}
-  @see-class{g:multi-sorter}
+  @see-class{gtk:multi-sorter}
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
@@ -165,7 +165,7 @@
 
 (defun multi-sorter-new ()
  #+liber-documentation
- "@version{#2023-9-13}
+ "@version{2024-10-21}
   @return{The new @class{gtk:multi-sorter} object.}
   @begin{short}
     Creates a new multi sorter.
@@ -182,9 +182,17 @@
 ;;; gtk_multi_sorter_append
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_multi_sorter_append" multi-sorter-append) :void
+;; TODO: We have to pass in a reference of OTHER to get the correct memory
+;; management. The C documentation says: The instance takes ownership of the
+;; data, and is responsible for freeing it. Check this again!?
+
+(cffi:defcfun ("gtk_multi_sorter_append" %multi-sorter-append) :void
+  (sorter (g:object multi-sorter))
+  (other (g:object sorter)))
+
+(defun multi-sorter-append (sorter other)
  #+liber-documentation
- "@version{#2023-9-13}
+ "@version{2024-10-24}
   @argument[sorter]{a @class{gtk:multi-sorter} object}
   @argument[other]{another @class{gtk:sorter} object to add}
   @begin{short}
@@ -194,8 +202,7 @@
   with the given @arg{other}.
   @see-class{gtk:multi-sorter}
   @see-class{gtk:sorter}"
-  (sorter (g:object multi-sorter))
-  (other (g:object sorter)))
+  (%multi-sorter-append sorter (g:object-ref other)))
 
 (export 'multi-sorter-append)
 
@@ -205,19 +212,18 @@
 
 (cffi:defcfun ("gtk_multi_sorter_remove" multi-sorter-remove) :void
  #+liber-documentation
- "@version{#2023-9-13}
+ "@version{2024-10-21}
   @argument[sorter]{a @class{gtk:multi-sorter} object}
-  @argument[position]{an unsigned integer with the position of the sorter
-   to remove}
+  @argument[pos]{an unsigned integer with the position of the sorter to remove}
   @begin{short}
-    Removes the sorter at the given position from the list of sorter used by
+    Removes the sorter at the given @arg{pos} from the list of sorter used by
     @arg{sorter}.
   @end{short}
-  If the @arg{position} parameter is larger than the number of sorters, nothing
+  If the @arg{pos} parameter is larger than the number of sorters, nothing
   happens.
   @see-class{gtk:multi-sorter}"
   (object (g:object multi-sorter))
-  (position :uint))
+  (pos :uint))
 
 (export 'multi-sorter-remove)
 

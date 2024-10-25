@@ -77,12 +77,30 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     collation                                          Since 4.10
-;;;     expression
-;;;     ignore-case
+(test gtk-string-sorter-properties
+  (let ((sorter (make-instance 'gtk:string-sorter)))
+    (is (eq :unicode (gtk:string-sorter-collation sorter)))
+    (is (cffi:null-pointer-p (gtk:string-sorter-expression sorter)))
+    (is-true (gtk:string-sorter-ignore-case sorter))
+    (is (= 1 (g:object-ref-count sorter)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_string_sorter_new
 
-;;; 2024-9-19
+(test gtk-string-sorter-new.1
+  (let* ((expr (gtk:constant-expression-new "gchararray" "test"))
+         (sorter (gtk:string-sorter-new expr)))
+    (is (typep sorter 'gtk:string-sorter))
+    (is (eq :unicode (gtk:string-sorter-collation sorter)))
+    (is (cffi:pointer-eq expr (gtk:string-sorter-expression sorter)))
+    (is-true (gtk:string-sorter-ignore-case sorter))
+    (is (= 1 (g:object-ref-count sorter)))))
+
+(test gtk-string-sorter-new.2
+  (let (sorter)
+    (is (typep (setf sorter
+                     (gtk:string-sorter-new nil)) 'gtk:string-sorter))
+    (is (= 1 (g:object-ref-count sorter)))))
+
+;;; 2024-10-24

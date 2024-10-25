@@ -108,13 +108,54 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     changed
+(test gtk-sorter-changed-signal
+  (let* ((name "changed")
+         (gtype (g:gtype "GtkSorter"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkSorterChange")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_sorter_compare
 ;;;     gtk_sorter_get_order
+
+(test gtk-sorter-compare
+  (let ((sorter (gtk:custom-sorter-new
+                    (lambda (obj1 obj2)
+                      (let ((len1 (length (gtk:string-object-string obj1)))
+                            (len2 (length (gtk:string-object-string obj2))))
+                        (cond ((< len1 len2) -1)
+                              ((> len1 len2)  1)
+                              (t 0))))))
+        (str1 (gtk:string-object-new "abc"))
+        (str2 (gtk:string-object-new "abcd")))
+    (is (eq :partial (gtk:sorter-order sorter)))
+    (is (eq :smaller (gtk:sorter-compare sorter str1 str2)))
+    (is (eq :larger (gtk:sorter-compare sorter str2 str1)))
+    (is (eq :equal (gtk:sorter-compare sorter str1 str1)))
+    (is (eq :equal (gtk:sorter-compare sorter str2 str2)))))
+
 ;;;     gtk_sorter_changed
+
+(test gtk-sorter-changed
+  (let ((sorter (gtk:custom-sorter-new))
+        (msg nil))
+    (g:signal-connect sorter "changed"
+                      (lambda (sorter changed)
+                        (declare (ignore sorter))
+                        (push changed msg)))
+    (is-false (gtk:sorter-changed sorter :different))
+    (is (equal '(:different) msg))))
 
 ;;;     gtk_ordering_from_cmpfunc
 
@@ -123,4 +164,4 @@
   (is (eq :equal (gtk:ordering-from-cmpfunc  0)))
   (is (eq :larger (gtk:ordering-from-cmpfunc  1))))
 
-;;; 2024-9-21
+;;; 2024-10-18

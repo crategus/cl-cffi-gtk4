@@ -2,7 +2,7 @@
 ;;; gtk4.numeric-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkNumericSorter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkNumericSorter" numeric-sorter
+(gobject:define-gobject "GtkNumericSorter" numeric-sorter
   (:superclass sorter
    :export t
    :interfaces ()
@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'numeric-sorter 'type)
- "@version{2023-9-5}
+ "@version{2024-10-24}
   @begin{short}
     The @class{gtk:numeric-sorter} object is a @class{gtk:sorter} implementation
     that compares numbers.
@@ -107,7 +107,7 @@
 (setf (liber:alias-for-function 'numeric-sorter-expression)
       "Accessor"
       (documentation 'numeric-sorter-expression 'function)
- "@version{#2023-9-5}
+ "@version{2024-10-24}
   @syntax{(gtk:numeric-sorter-expression object) => expression}
   @syntax{(setf (gtk:numeric-sorter-expression object) expression)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
@@ -118,12 +118,11 @@
   @end{short}
   The @fun{gtk:numeric-sorter-expression} function gets the expression that is
   evaluated to obtain numbers from items. The
-  @setf{gtk:numeric-sorter-expression} function sets the expression that is
-  evaluated to obtain numbers from items.
+  @setf{gtk:numeric-sorter-expression} function sets the expression.
 
   Unless an expression is set on @arg{object}, the sorter will always compare
   items as invalid. The expression must have a return type that can be compared
-  numerically, such as @code{:int} or @code{:double}.
+  numerically.
   @see-class{gtk:numeric-sorter}
   @see-class{gtk:expression}")
 
@@ -140,7 +139,7 @@
 (setf (liber:alias-for-function 'numeric-sorter-sort-order)
       "Accessor"
       (documentation 'numeric-sorter-sort-order 'function)
- "@version{#2023-9-5}
+ "@version{2024-10-24}
   @syntax{(gtk:numeric-sorter-sort-order object) => order}
   @syntax{(setf (gtk:numeric-sorter-sort-order object) order)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
@@ -151,7 +150,7 @@
   @end{short}
   The @fun{gtk:numeric-sorter-sort-order} function gets whether this sorter will
   sort smaller numbers first. The @setf{gtk:numeric-sorter-sort-order} function
-  sets whether to sort smaller numbers before larger ones.
+  sets the property.
   @see-class{gtk:numeric-sorter}
   @see-symbol{gtk:sort-type}")
 
@@ -159,11 +158,9 @@
 ;;; gtk_numeric_sorter_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline numeric-sorter-new))
-
 (defun numeric-sorter-new (expression)
  #+liber-documentation
- "@version{#2023-9-13}
+ "@version{2024-10-24}
   @argument[expression]{a @class{gtk:expression} instance to evalute}
   @return{The new @class{gtk:numeric-sorter} object.}
   @begin{short}
@@ -174,7 +171,7 @@
   @see-class{gtk:numeric-sorter}
   @see-class{gtk:expression}"
   (make-instance 'numeric-sorter
-                 :expression expression))
+                 :expression (or expression (cffi:null-pointer))))
 
 (export 'numeric-sorter-new)
 

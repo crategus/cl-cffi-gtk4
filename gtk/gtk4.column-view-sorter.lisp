@@ -2,7 +2,7 @@
 ;;; gtk4.column-view-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,7 +59,7 @@
 ;;; GtkColumnViewSorter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColumnViewSorter" column-view-sorter
+(gobject:define-gobject "GtkColumnViewSorter" column-view-sorter
   (:superclass sorter
    :export t
    :interfaces ()
@@ -73,7 +73,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-sorter 'type)
- "@version{2024-7-30}
+ "@version{2024-10-24}
   @begin{short}
     The @class{gtk:column-view-sorter} class is a sorter implementation that is
     geared towards the needs of the @class{gtk:column-view} widget.
@@ -97,7 +97,7 @@
   changes, use the @code{\"changed\"} signal.
 
   Since 4.10
-  @begin{examples}
+  @begin[Examples]{dictionary}
     To restore a saved sort configuration on a @class{gtk:column-view} widget,
     use code like:
     @begin{pre}
@@ -108,7 +108,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
     gtk_column_view_sort_by_column (view, column, order);
   @}
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-slot{gtk:column-view-sorter-primary-sort-column}
   @see-slot{gtk:column-view-sorter-primary-sort-order}
   @see-class{gtk:column-view}")
@@ -125,13 +125,14 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
  "The @code{primary-sort-column} property of type @class{gtk:column-view-column}
   (Read) @br{}
   The primary sort column is the one that displays the triangle in a column
-  view header.")
+  view header. @br{}
+  Default value: 0")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-column)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-column 'function)
- "@version{2023-10-13}
+ "@version{2024-10-24}
   @syntax{(gtk:column-view-sorter-primary-sort-column object) => column}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @class{gtk:column-view-column} object with the primary
@@ -155,13 +156,14 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
  "The @code{primary-sort-order} property of type @symbol{gtk:sort-type} (Read)
   @br{}
   The primary sort order determines whether the triangle displayed in the column
-  view header of the primary sort column points upwards or downwards.")
+  view header of the primary sort column points upwards or downwards. @br{}
+  Default value: @code{:ascending}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-order)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-order 'function)
- "@version{2023-10-13}
+ "@version{2024-10-24}
   @syntax{(gtk:column-view-sorter-primary-sort-order object) => order}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @symbol{gtk:sort-type} value with the primary sort order}
@@ -185,7 +187,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
 (cffi:defcfun ("gtk_column_view_sorter_get_n_sort_columns"
                column-view-sorter-n-sort-columns) :uint
  #+liber-documentation
- "@version{#2023-10-13}
+ "@version{2024-10-24}
   @argument[sorter]{a @class{gtk:column-view-sorter} object}
   @return{The unsigned integer with the number of sort columns.}
   @begin{short}
@@ -206,18 +208,18 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
 ;;; gtk_column_view_sorter_get_nth_sort_column
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_column_view_sorter_nth_sort_column"
+(cffi:defcfun ("gtk_column_view_sorter_get_nth_sort_column"
                %column-view-sorter-nth-sort-column)
     (g:object column-view-column)
   (sorter (g:object column-view-sorter))
-  (position :uint)
-  (order sort-type))
+  (pos :uint)
+  (order :pointer))
 
-(defun column-view-sorter-nth-sort-column (sorter position)
+(defun column-view-sorter-nth-sort-column (sorter pos)
  #+liber-documentation
- "@version{#2023-10-13}
+ "@version{2024-10-24}
   @argument[sorter]{a @class{gtk:column-view-sorter} object}
-  @argument[position]{an unsigned integer with the position of the sort column
+  @argument[pos]{an unsigned integer with the position of the sort column
     to retrieve, 0 for the primary sort column}
   @begin{return}
     @arg{column} -- a @class{gtk:column-view-column} object @br{}
@@ -233,7 +235,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
   @see-class{gtk:column-view-column}
   @see-symbol{gtk:sort-type}"
   (cffi:with-foreign-object (order 'sort-type)
-    (let ((column (%column-view-sorter-nth-sort-column sorter position order)))
+    (let ((column (%column-view-sorter-nth-sort-column sorter pos order)))
       (values column
               (cffi:mem-ref order 'sort-type)))))
 

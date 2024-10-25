@@ -2,7 +2,7 @@
 ;;; gtk4.custom-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -88,9 +88,9 @@
   @return{The new @class{gtk:custom-sorter} object.}
   @begin{short}
     Creates a new custom sorter that works by calling the @arg{func} callback
-    function to compare items.
+    function to compare objects.
   @end{short}
-  If @arg{func} is @code{nil}, all items are considered equal.
+  If @arg{func} is @code{nil}, all objects are considered equal.
   @see-class{gtk:custom-sorter}"
   (if func
       (%custom-sorter-new (cffi:callback g:compare-data-func)
