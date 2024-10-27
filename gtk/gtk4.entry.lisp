@@ -2,7 +2,7 @@
 ;;; gtk4.entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,8 +47,8 @@
 ;;;     gtk_entry_get_attributes
 ;;;     gtk_entry_get_buffer
 ;;;     gtk_entry_set_buffer
-;;;     gtk_entry_set_completion
-;;;     gtk_entry_get_completion
+;;;     gtk_entry_set_completion                            Deprecated 4.10
+;;;     gtk_entry_get_completion                            Deprecated 4.10
 ;;;     gtk_entry_set_extra_menu
 ;;;     gtk_entry_get_extra_menu
 ;;;     gtk_entry_set_has_frame
@@ -110,7 +110,7 @@
 ;;;     activates-default
 ;;;     attributes
 ;;;     buffer
-;;;     completion
+;;;     completion                                          Deprecated 4.10
 ;;;     enable-emoji-completion
 ;;;     extra-menu
 ;;;     has-frame
@@ -175,7 +175,7 @@
 ;;; GtkEntryIconPosition
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkEntryIconPosition" entry-icon-position
+(gobject:define-genum "GtkEntryIconPosition" entry-icon-position
   (:export t
    :type-initializer "gtk_entry_icon_position_get_type")
   (:primary 0)
@@ -187,7 +187,7 @@
       (liber:symbol-documentation 'entry-icon-position)
  "@version{2023-9-16}
   @begin{declaration}
-(gobject:define-g-enum \"GtkEntryIconPosition\" entry-icon-position
+(gobject:define-genum \"GtkEntryIconPosition\" entry-icon-position
   (:export t
    :type-initializer \"gtk_entry_icon_position_get_type\")
   (:primary 0)
@@ -210,7 +210,7 @@
 ;;; GtkEntry
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEntry" entry
+(gobject:define-gobject "GtkEntry" entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -433,38 +433,38 @@ entry[.flat][.warning][.error]
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[entry]{The @class{gtk:entry} widget on which the signal is
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user activates the text
       entry. Applications should not connect to it, but may emit it with the
       @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:entry} widget on which the signal is
-          emitted.}
-      @end{table}
     @subheading{The \"icon-press\" signal}
       @begin{pre}
 lambda (entry pos)    :run-last
       @end{pre}
-      The signal is emitted when an activatable icon is clicked.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:entry} widget on which the signal is
           emitted.}
         @entry[pos]{The position of the clicked icon as a
           @symbol{gtk:entry-icon-position} value.}
       @end{table}
+      The signal is emitted when an activatable icon is clicked.
     @subheading{The \"icon-release\" signal}
       @begin{pre}
 lambda (entry pos)    :run-last
       @end{pre}
-      The signal is emitted on the button release from a mouse click over an
-      activatable icon.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:entry} widget on which the signal is
           emitted.}
         @entry[pos]{The position of the clicked icon as a
           @symbol{gtk:entry-icon-position} value.}
       @end{table}
+      The signal is emitted on the button release from a mouse click over an
+      activatable icon.
   @end{dictionary}
   @see-constructor{gtk:entry-new}
   @see-constructor{gtk:entry-new-with-buffer}

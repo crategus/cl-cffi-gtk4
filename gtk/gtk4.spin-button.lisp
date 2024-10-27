@@ -2,7 +2,7 @@
 ;;; gtk4.spin-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -116,7 +116,7 @@
 ;;; GtkSpinButtonUpdatePolicy
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSpinButtonUpdatePolicy" spin-button-update-policy
+(gobject:define-genum "GtkSpinButtonUpdatePolicy" spin-button-update-policy
   (:export t
    :type-initializer "gtk_spin_button_update_policy_get_type")
   (:always 0)
@@ -128,7 +128,7 @@
       (liber:symbol-documentation 'spin-button-update-policy)
  "@version{2023-9-30}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSpinButtonUpdatePolicy\" spin-button-update-policy
+(gobject:define-genum \"GtkSpinButtonUpdatePolicy\" spin-button-update-policy
   (:export t
    :type-initializer \"gtk_spin_button_update_policy_get_type\")
   (:always 0)
@@ -155,7 +155,7 @@
 ;;; GtkSpinType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSpinType" spin-type
+(gobject:define-genum "GtkSpinType" spin-type
   (:export t
    :type-initializer "gtk_spin_type_get_type")
   (:step-forward 0)
@@ -172,7 +172,7 @@
       (liber:symbol-documentation 'spin-type)
  "@version{2023-9-30}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSpinType\" spin-type
+(gobject:define-genum \"GtkSpinType\" spin-type
   (:export t
    :type-initializer \"gtk_spin_type_get_type\")
   (:step-forward 0)
@@ -205,7 +205,7 @@
 ;;; GtkSpinButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSpinButton" spin-button
+(gobject:define-gobject "GtkSpinButton" spin-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -293,7 +293,7 @@ spinbutton.vertical
     reflected in the @code{.vertical} or @code{.horizontal} style class on the
     main node.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Code fragment for creating a spin button. The value from the spin button is
     retrieved with the @fun{gtk:spin-button-value} function in a signal handler
     as a floating point number. Use the @fun{gtk:spin-button-value-as-int}
@@ -318,7 +318,7 @@ spinbutton.vertical
                       (let ((value (gtk:spin-button-value widget)))))
                         ... ))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:spin-button} implementation uses the @code{:spin-button} role
     of the @symbol{gtk:accessible-role} enumeration.
@@ -328,26 +328,21 @@ spinbutton.vertical
       @begin{pre}
 lambda (button scroll)    :action
       @end{pre}
-      Keybinding signal which gets emitted when the user initiates a value
-      change. Applications should not connect to it, but may emit it with the
-      @fun{g:signal-emit} function if they need to control the cursor
-      programmatically. The default bindings for this signal are
-      @kbd{Up}/@kbd{Down} and @kbd{PageUp} and @kbd{PageDown}.
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
         @entry[scroll]{The value of the @symbol{gtk:scroll-type} enumeration to
           specify the speed and amount of change.}
       @end{table}
+      Keybinding signal which gets emitted when the user initiates a value
+      change. Applications should not connect to it, but may emit it with the
+      @fun{g:signal-emit} function if they need to control the cursor
+      programmatically. The default bindings for this signal are
+      @kbd{Up}/@kbd{Down} and @kbd{PageUp} and @kbd{PageDown}.
     @subheading{The \"input\" signal}
       @begin{pre}
 lambda (button value)    :run-last
       @end{pre}
-      Can be used to influence the conversion of the users input into a double
-      float value. The signal handler is expected to use the
-      @fun{gtk:editable-text} function to retrieve the text of the text entry
-      and set @arg{value} to the new value. The default conversion uses the
-      @code{g_strtod()} function.
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
@@ -356,10 +351,20 @@ lambda (button value)    :run-last
         @entry[Returns]{@em{True} for a successful conversion, @em{false} if
           the input was not handled, and -1 if the conversion failed.}
       @end{table}
+      Can be used to influence the conversion of the users input into a double
+      float value. The signal handler is expected to use the
+      @fun{gtk:editable-text} function to retrieve the text of the text entry
+      and set @arg{value} to the new value. The default conversion uses the
+      @code{g_strtod()} function.
     @subheading{The \"output\" signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[button]{The @class{gtk:spin-button} widget which received the
+          signal.}
+        @entry[Returns]{@em{True} if the value has been displayed.}
+      @end{table}
       Can be used to change the formatting of the value that is displayed in
       the spin buttons entry.
       @begin{pre}
@@ -402,31 +407,26 @@ lambda (button)    :run-last
               (format nil \"~@@?\" (format nil \"~~,~d@@f\" digits) value)))))
   ... )
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:spin-button} widget which received the
-          signal.}
-        @entry[Returns]{@em{True} if the value has been displayed.}
-      @end{table}
     @subheading{The \"value-changed\" signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
-      Is emitted when the value represented by @arg{button} changes. Also see
-      the \"output\" signal.
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
       @end{table}
+      Is emitted when the value represented by @arg{button} changes. Also see
+      the @code{\"output\"} signal.
     @subheading{The \"wrapped\" signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
-      Is emitted right after the spin button wraps from its maximum to minimum
-      value or vice versa.
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget which received the
           signal.}
       @end{table}
+      Is emitted right after the spin button wraps from its maximum to minimum
+      value or vice versa.
   @end{dictionary}
   @see-constructor{gtk:spin-button-new}
   @see-constructor{gtk:spin-button-new-with-range}
@@ -758,11 +758,11 @@ lambda (button)    :run-last
   The way in which the precision is derived works best if @arg{step} is a power
   of ten. If the resulting precision is not suitable for your needs, use the
   @fun{gtk:spin-button-digits} function to correct it.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     In the Lisp implementation the @arg{min}, @arg{max}, and @arg{step}
     arguments are coerced to a double float number.
-  @end{notes}
-  @begin{examples}
+  @end{dictionary}
+  @begin[Examples]{dictionary}
     In this example the arguments of the function are given as integer numbers.
     @begin{pre}
 (defvar spinbutton (gtk:spin-button-new-with-range 5 15 5)) => SPINBUTTON
@@ -776,7 +776,7 @@ lambda (button)    :run-last
 (gtk:adjustment-upper adjustment) => 15.0d0
 (gtk:adjustment-value adjustment) =>5.0d0
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-function{gtk:spin-button}
   @see-function{gtk:spin-button-digits}"
   (%spin-button-new-with-range (coerce min 'double-float)
@@ -821,12 +821,12 @@ lambda (button)    :run-last
 
   This affects how quickly the value changes when the arrows of the spin button
   are activated.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The values for the page and step increments are stored in the
     @slot[gtk:adjustment]{page-increment} and
     @slot[gtk:adjustment]{step-increment} properties of the adjustment
     associated with the spin button.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:spin-button}
   @see-function{gtk:adjustment-page-increment}
   @see-function{gtk:adjustment-step-increment}"

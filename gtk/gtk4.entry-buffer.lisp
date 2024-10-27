@@ -2,7 +2,7 @@
 ;;; gtk4.entry-buffer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
 ;;; GtkEntryBuffer
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEntryBuffer" entry-buffer
+(gobject:define-gobject "GtkEntryBuffer" entry-buffer
   (:superclass g:object
    :export t
    :interfaces nil
@@ -110,18 +110,17 @@
       @begin{pre}
 lambda (buffer position nchars)    :run-first
       @end{pre}
-      The signal is emitted after text is deleted from the entry buffer.
       @begin[code]{table}
         @entry[buffer]{The @class{gtk:entry-buffer} object.}
         @entry[position]{The integer with the position the text was deleted at.}
         @entry[nchars]{The integer with the number of characters that were
           deleted.}
       @end{table}
+      The signal is emitted after text is deleted from the entry buffer.
     @subheading{The \"inserted-text\" signal}
       @begin{pre}
 lambda (buffer position chars nchars)    :run-first
       @end{pre}
-      The signal is emitted after text is inserted into the entry buffer.
       @begin[code]{table}
         @entry[buffer]{The @class{gtk:entry-buffer} object.}
         @entry[position]{The integer with the position the text was inserted
@@ -130,6 +129,7 @@ lambda (buffer position chars nchars)    :run-first
         @entry[nchars]{The integer with the number of characters that were
           inserted.}
       @end{table}
+      The signal is emitted after text is inserted into the entry buffer.
   @end{dictionary}
   @see-constructor{gtk:entry-buffer-new}
   @see-slot{gtk:entry-buffer-length}

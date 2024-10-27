@@ -2,7 +2,7 @@
 ;;; gtk4.search-entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -90,7 +90,7 @@
 ;;; GtkSearchEntry
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSearchEntry" search-entry
+(gobject:define-gobject "GtkSearchEntry" search-entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -165,58 +165,58 @@ entry.search
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is forwarded from the @code{\"activated\"} signal, which is a
-      keybinding signal for all forms of the @kbd{Enter} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is forwarded from the @code{\"activated\"} signal, which is a
+      keybinding signal for all forms of the @kbd{Enter} key.
     @subheading{The \"next-match\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
+          emitted.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a move to the next match for the current search string.
       Applications should connect to it, to implement moving between matches.
       The default bindings for this signal is the @kbd{Ctrl-g} key.
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
-          emitted.}
-      @end{table}
     @subheading{The \"previous-match\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      initiates a move to the previous match for the current search string.
-      Applications should connect to it, to implement moving between matches.
-      The default bindings for this signal is the @kbd{Ctrl-Shift-g} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
         @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      initiates a move to the previous match for the current search string.
+      Applications should connect to it, to implement moving between matches.
+      The default bindings for this signal is the @kbd{Ctrl-Shift-g} key.
     @subheading{The \"search-changed\" signal}
       @begin{pre}
 lambda (entry)    :run-last
       @end{pre}
-      The signal is emitted with a short delay of 150 milliseconds after the
-      last change to the text entry.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is emitted with a short delay of 150 milliseconds after the
+      last change to the text entry.
     @subheading{The \"stop-search\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user stops
-      a search via keyboard input. Applications should connect to it, to
-      implement hiding the search entry in this case. The default bindings for
-      this signal is the @kbd{Escape} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user stops
+      a search via keyboard input. Applications should connect to it, to
+      implement hiding the search entry in this case. The default bindings for
+      this signal is the @kbd{Escape} key.
   @end{dictionary}
   @see-constructor{gtk:search-entry-new}
   @see-slot{gtk:search-entry-activates-default}

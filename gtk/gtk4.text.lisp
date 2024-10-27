@@ -273,83 +273,90 @@ text[.read-only]
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is emitted when the user hits the @kbd{Enter} key. The default
-      bindings for this signal are all forms of the @kbd{Enter} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is emitted when the user hits the @kbd{Enter} key. The default
+      bindings for this signal are all forms of the @kbd{Enter} key.
     @subheading{The \"backspace\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user asks
-      for it. The default bindings for this signal are the @kbd{Backspace} and
-      @kbd{Shift-Backspace} keys.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user asks
+      for it. The default bindings for this signal are the @kbd{Backspace} and
+      @kbd{Shift-Backspace} keys.
     @subheading{The \"copy-clipboard\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to copy the selection
-      to the clipboard. The default bindings for this signal are the
-      @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to copy the selection
+      to the clipboard. The default bindings for this signal are the
+      @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
     @subheading{The \"cut-clipboard\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to cut the selection
-      to the clipboard. The default bindings for this signal are the
-      @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to cut the selection
+      to the clipboard. The default bindings for this signal are the
+      @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
     @subheading{The \"delete-from-cursor\" signal}
       @begin{pre}
 lambda (entry type count)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      initiates a text deletion. If the type is @code{:chars}, GTK deletes the
-      selection if there is one, otherwise it deletes the requested number of
-      characters. The default bindings for this signal are the @kbd{Delete} key
-      for deleting a character and the @kbd{Ctrl-Delete} key for deleting a
-      word.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[type]{The granularity of the deletion, as a value of the
           @symbol{gtk:delete-type} enumeration.}
         @entry[count]{The integer with the number of type units to delete.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      initiates a text deletion. If the type is @code{:chars}, GTK deletes the
+      selection if there is one, otherwise it deletes the requested number of
+      characters. The default bindings for this signal are the @kbd{Delete} key
+      for deleting a character and the @kbd{Ctrl-Delete} key for deleting a
+      word.
     @subheading{The \"insert-at-cursor\" signal}
       @begin{pre}
 lambda (entry string)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      initiates the insertion of a fixed string at the cursor. This signal has
-      no default bindings.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[string]{The string to insert.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      initiates the insertion of a fixed string at the cursor. This signal has
+      no default bindings.
     @subheading{The \"insert-emoji\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to present the Emoji
-      chooser for the text entry. The default bindings for this signal are the
-      @kbd{Ctrl-.} and @kbd{Ctrl-;} keys.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to present the Emoji
+      chooser for the text entry. The default bindings for this signal are the
+      @kbd{Ctrl-.} and @kbd{Ctrl-;} keys.
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
 lambda (entry step count extend)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
+        @entry[step]{The granularity of the move, as a value of the
+        @symbol{gtk:movement-step} enumeration.}
+        @entry[count]{The integer with the number of step units to move.}
+        @entry[extend]{@em{True} if the move should extend the selection.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. If the cursor is not visible in the text
       entry, this signal causes the viewport to be moved instead. Applications
@@ -361,44 +368,37 @@ lambda (entry step count extend)    :action
       list them all here. Arrow keys move by individual characters/lines.
       @kbd{Ctrl}-arrow key combinations move by words/paragraphs.
       @kbd{Home}/@kbd{End} keys move to the ends of the text entry.
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-        @entry[step]{The granularity of the move, as a value of the
-        @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
-        @entry[extend]{@em{True} if the move should extend the selection.}
-      @end{table}
     @subheading{The \"paste-clipboard\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to paste the contents
-      of the clipboard into the text view. The default bindings for this signal
-      are the @kbd{Ctrl-v} and @kbd{Shift-Insert} keys.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to paste the contents
+      of the clipboard into the text view. The default bindings for this signal
+      are the @kbd{Ctrl-v} and @kbd{Shift-Insert} keys.
     @subheading{The \"preedit-changed\" signal}
       @begin{pre}
 lambda (entry preedit)    :action
       @end{pre}
-      If an input method is used, the typed text will not immediately be
-      committed to the entry buffer. So if you are interested in the text,
-      connect to this signal.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[preedit]{The current preedit string.}
       @end{table}
+      If an input method is used, the typed text will not immediately be
+      committed to the entry buffer. So if you are interested in the text,
+      connect to this signal.
     @subheading{The \"toggle-overwrite\" signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to toggle the
-      overwrite mode of the text entry. The default bindings for this signal is
-      the @kbd{Insert} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to toggle the
+      overwrite mode of the text entry. The default bindings for this signal is
+      the @kbd{Insert} key.
   @end{dictionary}
   @begin[Action Details]{dictionary}
     @subheading{The \"menu.popup\" action}
@@ -498,7 +498,7 @@ lambda (entry)    :action
   The list of Pango attributes to apply to the text of the text entry. This is
   mainly useful to change the size or weight of the text. The @code{start-index}
   and @code{end-index} fields of the @class{pango:attribute} structure must
-  refer to the text of the @class{gtk:entry-buffer} object, i.e. without the
+  refer to the text of the @class{gtk:entry-buffer} object, that is without the
   preedit string.")
 
 #+liber-documentation
@@ -1122,7 +1122,7 @@ lambda (entry)    :action
   inserted. The rectangle positions are in widget coordinates.
 
   Since 4.4
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Use the @fun{graphene:with-rect} or @fun{graphene:with-rects} macro to
     create the rectangles passed to the function.
     @begin{pre}
@@ -1130,7 +1130,7 @@ lambda (entry)    :action
   (gtk:text-compute-cursor-extents text pos strong weak)
   ... )
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:text}
   @see-symbol{graphene:rect-t}
   @see-macro{graphene:with-rect}

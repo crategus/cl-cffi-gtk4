@@ -21,8 +21,10 @@
           (g:type-parent "GtkScale")))
   ;; Check children
   #-windows
-  (is (equal '("GtkColorScale")
-             (glib-test:list-children "GtkScale")))
+  (is (or (equal '()
+                 (glib-test:list-children "GtkScale"))
+          (equal '("GtkColorScale")
+                 (glib-test:list-children "GtkScale"))))
   #+windows
   (if *first-run-gtk-test*
     (is (equal '()
@@ -75,13 +77,29 @@
 ;;;     gtk_scale_new
 
 (test gtk-scale-new
-  (is (typep (gtk:scale-new :vertical (make-instance 'gtk:adjustment))
-             'gtk:scale)))
+  (let (scale adjustment)
+    (is (typep (setf scale
+                     (gtk:scale-new :vertical
+                                    (make-instance 'gtk:adjustment)))
+               'gtk:scale))
+    ;; Check memory management
+    (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
+    (is-false (setf (gtk:range-adjustment scale) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count scale)))))
 
 ;;;     gtk_scale_new_with_range
 
 (test gtk-scale-new-with-range
-  (is (typep (gtk:scale-new-with-range :vertical 5.0 10.0 1.0) 'gtk:scale)))
+  (let (scale adjustment)
+    (is (typep (setf scale
+                     (gtk:scale-new-with-range :vertical 5.0 10.0 1.0))
+               'gtk:scale))
+    ;; Check memory management
+    (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
+    (is-false (setf (gtk:range-adjustment scale) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count scale)))))
 
 ;;;     gtk_scale_set_format_value_func
 ;;;     gtk_scale_get_layout
@@ -89,4 +107,4 @@
 ;;;     gtk_scale_add_mark
 ;;;     gtk_scale_clear_marks
 
-;;; 2024-4-11
+;;; 2024-10-25

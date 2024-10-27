@@ -7,7 +7,7 @@
 
 ;;;     GtkSpinButtonUpdatePolicy
 
-(test gtk-spint-button-update-policy
+(test gtk-spin-button-update-policy
   ;; Check type
   (is (g:type-is-enum "GtkSpinButtonUpdatePolicy"))
   ;; Check type initializer
@@ -148,7 +148,10 @@
     (is-false (gtk:spin-button-snap-to-ticks spinbutton))
     (is (eq :always (gtk:spin-button-update-policy spinbutton)))
     (is (= 0.0d0 (gtk:spin-button-value spinbutton)))
-    (is-false (gtk:spin-button-wrap spinbutton))))
+    (is-false (gtk:spin-button-wrap spinbutton))
+    ;; Check memory management
+    (is-false (setf (gtk:spin-button-adjustment spinbutton) nil))
+    (is (= 1 (g:object-ref-count spinbutton)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -229,10 +232,18 @@
 ;;;     gtk_spin_button_new
 
 (test gtk-spin-button-new
-  (is (typep (gtk:spin-button-new (make-instance 'gtk:adjustment) 2 10)
+  (let (button adjustment)
+    (is (typep (setf button
+                     (gtk:spin-button-new (make-instance 'gtk:adjustment) 2 10))
              'gtk:spin-button))
-  (is (typep (gtk:spin-button-new nil 2 10) 'gtk:spin-button))
-  (is (typep (gtk:spin-button-new nil 1.0d0 10) 'gtk:spin-button)))
+    (is (typep (gtk:spin-button-new nil 2 10) 'gtk:spin-button))
+    (is (typep (gtk:spin-button-new nil 1.0d0 10) 'gtk:spin-button))
+    ;; Check memory management
+    (is (typep (setf adjustment
+                     (gtk:spin-button-adjustment button)) 'gtk:adjustment))
+    (is-false (setf (gtk:spin-button-adjustment button) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_spin_button_new_with_range
 
@@ -248,4 +259,4 @@
 ;;;     gtk_spin_button_spin
 ;;;     gtk_spin_button_update
 
-;;; 2024-9-20
+;;; 2024-10-25

@@ -220,7 +220,10 @@
     (is-false (gtk:entry-tabs entry))
     (is (= 0 (gtk:entry-text-length entry)))
     (is-false (gtk:entry-truncate-multiline entry))
-    (is-true (gtk:entry-visibility entry))))
+    (is-true (gtk:entry-visibility entry))
+    ;; Check memory management
+    (is-false (setf (gtk:entry-buffer entry) nil))
+    (is (= 1 (g:object-ref-count entry)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -288,7 +291,11 @@
   (let ((buffer (gtk:entry-buffer-new "some text"))
         entry)
     (is (typep (setf entry (gtk:entry-new-with-buffer buffer)) 'gtk:entry))
-    (is (eq buffer (gtk:entry-buffer entry)))))
+    (is (eq buffer (gtk:entry-buffer entry)))
+    ;; Check memory management
+    (is-false (setf (gtk:entry-buffer entry) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count entry)))))
 
 ;;;     gtk_entry_unset_invisible_char
 

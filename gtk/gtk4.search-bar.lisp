@@ -2,7 +2,7 @@
 ;;; gtk4.search-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,7 +78,7 @@
 ;;; GtkSearchBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSearchBar" search-bar
+(gobject:define-gobject "GtkSearchBar" search-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -120,7 +120,7 @@
 
   You will also need to tell the search bar about which entry you are using as
   your search entry using the @fun{gtk:search-bar-connect-entry} function.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     The following example shows you how to create a more complex search entry.
     @begin{pre}
 (defun do-search-bar (&optional application)
@@ -143,7 +143,7 @@
     (gtk:box-append box button)
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 searchbar

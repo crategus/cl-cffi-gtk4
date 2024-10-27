@@ -2,7 +2,7 @@
 ;;; gtk4.editable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -69,7 +69,7 @@
 ;;;
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
-;;;     gtk_editable_delegate_get_accessible_platform_state
+;;;     gtk_editable_delegate_get_accessible_platform_state Since 4.60
 ;;;
 ;;; Properties
 ;;;
@@ -136,7 +136,7 @@
 ;;; GtkEditable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkEditable" editable
+(gobject:define-ginterface "GtkEditable" editable
   (:export t
    :type-initializer "gtk_editable_get_type")
   ((cursor-position
@@ -177,7 +177,7 @@
   It contains functions for generically manipulating an editable widget, a large
   number of action signals used for key bindings, and several signals that an
   application can connect to to modify the behavior of an editable widget.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     As an example of the latter usage, by connecting the following handler to
     the @code{\"insert-text\"} signal, an application can convert all entry
     into an editable widget into uppercase.
@@ -193,26 +193,32 @@
             (g:signal-stop-emission editable \"insert-text\")
             (g:signal-handler-unblock editable handlerid))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"changed\" signal}
       @begin{pre}
 lambda (editable)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[editable]{The @class{gtk:editable} widget which received the
+          signal.}
+      @end{table}
       The signal is emitted at the end of a single user visible operation on the
       contents of the editable widget. For example, a paste operation that
       replaces the contents of the selection will cause only one signal
       emission, even though it is implemented by first deleting the selection,
       then inserting the new content, and may cause multiple
       @code{\"notify::text\"} signals to be emitted.
-      @begin[code]{table}
-        @entry[editable]{The @class{gtk:editable} widget which received the
-          signal.}
-      @end{table}
     @subheading{The \"delete-text\" signal}
       @begin{pre}
 lambda (editable start end)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[editable]{The @class{gtk:editable} widget which received the
+          signal.}
+        @entry[start]{The integer with the start position.}
+        @entry[end]{The integer with the end position.}
+      @end{table}
       The signal is emitted when text is deleted from the editable widget by the
       user. The default handler for this signal will normally be responsible for
       deleting the text, so by connecting to this signal and then stopping the
@@ -220,21 +226,10 @@ lambda (editable start end)    :run-last
       modify the range of deleted text, or prevent it from being deleted
       entirely. The @arg{start} and @arg{end} parameters are interpreted as for
       the @fun{gtk:editable-delete-text} function.
-      @begin[code]{table}
-        @entry[editable]{The @class{gtk:editable} widget which received the
-          signal.}
-        @entry[start]{The integer with the start position.}
-        @entry[end]{The integer with the end position.}
-      @end{table}
     @subheading{The \"insert-text\" signal}
       @begin{pre}
 lambda (editable text length position)    :run-last
       @end{pre}
-      The signal is emitted when text is inserted into the editable widget by
-      the user. The default handler for this signal will normally be responsible
-      for inserting the text, so by connecting to this signal and then stopping
-      the signal with the @fun{g:signal-stop-emission} function, it is possible
-      to modify the inserted text, or prevent it from being inserted entirely.
       @begin[code]{table}
         @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
@@ -247,6 +242,11 @@ lambda (editable text length position)    :run-last
           after the newly inserted text. You get the Lisp value of
           @arg{position} with the call @code{(cffi:mem-ref position :intptr)}.}
       @end{table}
+      The signal is emitted when text is inserted into the editable widget by
+      the user. The default handler for this signal will normally be responsible
+      for inserting the text, so by connecting to this signal and then stopping
+      the signal with the @fun{g:signal-stop-emission} function, it is possible
+      to modify the inserted text, or prevent it from being inserted entirely.
   @end{dictionary}
   @see-class{gtk:entry}
   @see-class{gtk:spin-button}")
@@ -707,11 +707,11 @@ lambda (editable text length position)    :run-last
 
   This controls the horizontal positioning of the contents when the displayed
   text is shorter than the width of the editable widget.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function is equivalent to the @fun{gtk:editable-xalign} function. The
     Lisp implementation calls the corresponding @fun{gtk:editable-xalign}
     functions.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:editable}
   @see-function{gtk:editable-xalign}"
   (editable-xalign editable))

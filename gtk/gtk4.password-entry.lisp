@@ -2,7 +2,7 @@
 ;;; gtk4.password-entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -82,7 +82,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
-(gobject:define-g-object-class "GtkPasswordEntryBuffer" password-entry-buffer
+(gobject:define-gobject "GtkPasswordEntryBuffer" password-entry-buffer
   (:superclass entry-buffer
    :export t
    :interfaces ()
@@ -130,7 +130,7 @@
 ;;; GtkPasswordEntry
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPasswordEntry" password-entry
+(gobject:define-gobject "GtkPasswordEntry" password-entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -192,15 +192,15 @@ entry.password
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[entry]{The @class{gtk:password-entry} widget on which the signal
+          is emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user activates the
       password entry. Applications should not connect to it, but may emit it
       with the @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:password-entry} widget on which the signal
-          is emitted.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:password-entry-new}
   @see-slot{gtk:password-entry-activates-default}
