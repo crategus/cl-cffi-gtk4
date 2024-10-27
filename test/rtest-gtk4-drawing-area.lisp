@@ -51,9 +51,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     content-height
-;;;     content-width
-
 (test gtk-drawing-area-properties
   (let ((area (make-instance 'gtk:drawing-area)))
     (is (= 0 (gtk:drawing-area-content-height area)))

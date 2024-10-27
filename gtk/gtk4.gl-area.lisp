@@ -2,7 +2,7 @@
 ;;; gtk4.gl-area.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,15 +37,18 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_gl_area_set_auto_render
+;;;     gtk_gl_area_get_allowed_apis                        Since 4.12
+;;;     gtk_gl_area_set_allowed_apis                        Since 4.12
+;;;     gtk_gl_area_get_api                                 Since 4.12
 ;;;     gtk_gl_area_get_auto_render
+;;;     gtk_gl_area_set_auto_render
 ;;;     gtk_gl_area_get_context
-;;;     gtk_gl_area_set_has_depth_buffer
 ;;;     gtk_gl_area_get_has_depth_buffer
-;;;     gtk_gl_area_set_has_stencil_buffer
+;;;     gtk_gl_area_set_has_depth_buffer
 ;;;     gtk_gl_area_get_has_stencil_buffer
-;;;     gtk_gl_area_set_use_es
-;;;     gtk_gl_area_get_use_es
+;;;     gtk_gl_area_set_has_stencil_buffer
+;;;     gtk_gl_area_get_use_es                              Deprecated 4.12
+;;;     gtk_gl_area_set_use_es                              Deprecated 4.12
 ;;;
 ;;; Functions
 ;;;
@@ -60,11 +63,13 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     allowed-apis                                        Since 4.12
+;;;     api                                                 Since 4.12
 ;;;     auto-render
 ;;;     context
 ;;;     has-depth-buffer
 ;;;     has-stencil-buffer
-;;;     use-es
+;;;     use-es                                              Deprecated 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -89,10 +94,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGLArea
+;;; GtkGLArea
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGLArea" gl-area
+(gobject:define-gobject "GtkGLArea" gl-area
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -125,7 +130,7 @@
 
 #+liber-documentation
 (setf (documentation 'gl-area 'type)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @begin{short}
     The @class{gtk:gl-area} widget is a widget that allows drawing with OpenGL.
   @end{short}
@@ -137,9 +142,9 @@
   will do GL rendering onto. It also ensures that this framebuffer is the
   default GL rendering target when rendering.
 
-  In order to draw, you have to connect to the \"render\" signal, or subclass
-  the @class{gtk:gl-area} widget and override the @code{render()} virtual
-  function.
+  In order to draw, you have to connect to the @code{\"render\"} signal, or
+  subclass the @class{gtk:gl-area} widget and override the @code{render()}
+  virtual function.
 
   The @class{gtk:gl-area} widget ensures that the @class{gdk:gl-context} object
   is associated with the drawing area of the widget, and it is kept updated when
@@ -147,7 +152,7 @@
 
   @subheading{Drawing with GtkGLArea}
   The simplest way to draw using OpenGL commands in a @class{gtk:gl-area} widget
-  is to create a widget instance and connect to the \"render\" signal.
+  is to create a widget instance and connect to the @code{\"render\"} signal.
 
   The @code{render()} function will be called when the @class{gtk:gl-area}
   widget is ready for you to draw its content:
@@ -182,11 +187,12 @@ void setup_glarea (void)
   g_signal_connect (gl_area, \"render\", G_CALLBACK (render), NULL);
 @}
   @end{pre}
-  If you need to initialize OpenGL state, e.g. buffer objects or shaders, you
-  should use the \"realize\" signal; you can use the \"unrealize\" signal to
-  clean up. Since the @class{gdk:gl-context} object creation and initialization
-  may fail, you will need to check for errors, using the @fun{gtk:gl-area-error}
-  function. An example of how to safely initialize the GL state is:
+  If you need to initialize OpenGL state, for example buffer objects or shaders,
+  you should use the @code{\"realize\"} signal. You can use the
+  @code{\"unrealize\"} signal to clean up. Since the @class{gdk:gl-context}
+  object creation and initialization may fail, you will need to check for
+  errors, using the @fun{gtk:gl-area-error} function. An example of how to
+  safely initialize the GL state is:
   @begin{pre}
 static void
 on_realize (GtkGLarea *area)
@@ -223,52 +229,52 @@ on_realize (GtkGLarea *area)
 @}
   @end{pre}
   If you need to change the options for creating the @class{gdk:gl-context}
-  object you should use the \"create-context\" signal.
+  object you should use the @code{\"create-context\"} signal.
   @begin[Signal Details]{dictionary}
     @subheading{The \"create-context\" signal}
       @begin{pre}
 lambda (area)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
+        @entry[Returns]{The newly created @class{gdk:gl-context} object. The
+          @class{gtk:gl-area} widget will take ownership of the returned value.}
+      @end{table}
       The signal is emitted when the widget is being realized, and allows you to
       override how the GL context is created. This is useful when you want to
       reuse an existing GL context, or if you want to try creating different
       kinds of GL options. If context creation fails then the signal handler can
       use the @fun{gtk:gl-area-error} function to register a more detailed error
       of how the construction failed.
-      @begin[code]{table}
-        @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
-        @entry[Returns]{The newly created @class{gdk:gl-context} object. The
-          @class{gtk:gl-area} widget will take ownership of the returned value.}
-      @end{table}
     @subheading{The \"render\" signal}
       @begin{pre}
 lambda (area context)    :run-last
       @end{pre}
-      The signal is emitted every time the contents of the @class{gtk:gl-area}
-      widget should be redrawn. The context is bound to the area prior to
-      emitting this function, and the buffers are painted to the window once the
-      emission terminates.
       @begin[code]{table}
         @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
         @entry[context]{The @class{gdk:gl-context} object used by @arg{area}.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked for
           the event. @em{False} to propagate the event further.}
       @end{table}
+      The signal is emitted every time the contents of the @class{gtk:gl-area}
+      widget should be redrawn. The context is bound to the area prior to
+      emitting this function, and the buffers are painted to the window once the
+      emission terminates.
     @subheading{The \"resize\" signal}
       @begin{pre}
 lambda (area width height)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
+        @entry[width]{The integer with the width of the viewport.}
+        @entry[height]{The integer with the height of the viewport.}
+      @end{table}
       The signal is emitted once when the widget is realized, and then each time
       the widget is changed while realized. This is useful in order to keep GL
       state up to date with the widget size, like for instance camera properties
       which may depend on the width/height ratio. The GL context for the area is
       guaranteed to be current when this signal is emitted. The default handler
       sets up the GL viewport.
-      @begin[code]{table}
-        @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
-        @entry[width]{The integer with the width of the viewport.}
-        @entry[height]{The integer with the height of the viewport.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:gl-area-new}
   @see-slot{gtk:gl-area-allowed-apis}
@@ -283,53 +289,73 @@ lambda (area width height)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; Gtk.GLArea:allowed-apis
-;;;
-;;; The allowed APIs.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+;;; --- gtk:gl-area-allowed-apis -----------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_set_allowed_apis
-;;;
-;;; Sets the allowed APIs to create a context with.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "allowed-apis" 'gl-area) t)
+ "The @code{allowed-apis} property of type @class{gdk:gl-api} (Read / Write)
+  @br{}
+  The allowed APIs. Since 4.12 @br{}
+  Default value: @code{'(:gl :gles)}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_get_allowed_apis
-;;;
-;;; Gets the allowed APIs.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'gl-area-allowed-apis)
+      "Accessor"
+      (documentation 'gl-area-allowed-apis 'function)
+ "@version{2024-10-26}
+  @syntax{(gtk:gl-area-allowed-apis object) => apis}
+  @syntax{(setf (gtk:gl-area-allowed-apis object) apis)}
+  @argument[object]{a @class{gtk:gl-area} widget}
+  @argument[apis]{a @symbol{gdk:gl-api} value}
+  @begin{short}
+    Accessor of the @slot[gtk:gl-area]{allowed-apis} slot of the
+    @class{gtk:gl-area} class.
+  @end{short}
+  The @fun{gtk:gl-area-allowed-apis} function gets the allowed APIs. The
+  @setf{gtk:gl-area-allowed-apis} function sets the allowed APIs to create a
+  context with. You should check the @slot[gtk:gl-area]{api} property before
+  drawing with either API. By default, all APIs are allowed.
 
-;;; ----------------------------------------------------------------------------
-;;; Gtk.GLArea:api
-;;;
-;;; The API currently in use.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+  Since 4.12
+  @see-class{gtk:gl-area}
+  @see-symbol{gdk:gl-api}
+  @see-function{gtk:gl-area-api}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_get_api
-;;;
-;;; Gets the API that is currently in use.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+;;; --- gtk:gl-area-api --------------------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "api" 'gl-area) t)
+ "The @code{api} property of type @class{gdk:gl-api} (Read) @br{}
+  The API currently in use. Since 4.12 @br{}
+  Default value: @code{'()}")
+
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'gl-area-api)
+      "Accessor"
+      (documentation 'gl-area-api 'function)
+ "@version{2024-10-26}
+  @syntax{(gtk:gl-area-api object) => api}
+  @argument[object]{a @class{gtk:gl-area} widget}
+  @argument[api]{a @symbol{gdk:gl-api} value}
+  @begin{short}
+    Accessor of the @slot[gtk:gl-area]{api} slot of the @class{gtk:gl-area}
+    class.
+  @end{short}
+  The @fun{gtk:gl-area-api} function gets the API is currently in use. If the
+  GL area has not been realized yet, @code{'()} is returned.
+
+  Since 4.12
+  @see-class{gtk:gl-area}
+  @see-symbol{gdk:gl-api}
+  @see-function{gtk:gl-area-api}")
 
 ;;; --- gtk:gl-area-auto-render ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "auto-render" 'gl-area) t)
  "The @code{auto-render} property of type @code{:boolean} (Read / Write) @br{}
-  If set to @em{true} the \"render\" signal will be emitted every time the
-  widget draws. This is the default and is useful if drawing the widget is
+  If set to @em{true} the @code{\"render\"} signal will be emitted every time
+  the widget draws. This is the default and is useful if drawing the widget is
   faster. If set to @em{false} the data from previous rendering is kept around
   and will be used for drawing the widget the next time, unless the window is
   resized. In order to force a rendering the @fun{gtk:gl-area-queue-render}
@@ -341,7 +367,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-auto-render)
       "Accessor"
       (documentation 'gl-area-auto-render 'function)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @syntax{(gtk:gl-area-auto-render object) => setting}
   @syntax{(setf (gtk:gl-area-auto-render object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
@@ -350,15 +376,15 @@ lambda (area width height)    :run-last
     Accessor of the @slot[gtk:gl-area]{auto-render} slot of the
     @class{gtk:gl-area} class.
   @end{short}
-  The @fum{gtk:gl-area-auto-render} function returns whether the area is in
+  The @fun{gtk:gl-area-auto-render} function returns whether the area is in
   auto render mode or not. The @setf{gtk:gl-area-auto-render} function sets the
   property.
 
-  If @arg{setting} is @em{true} the \"render\" signal will be emitted every time
-  the widget draws. This is the default and is useful if drawing the widget is
-  faster. If @arg{setting} is @em{false} the data from previous rendering is
-  kept around and will be used for drawing the widget the next time, unless the
-  window is resized. In order to force a rendering the
+  If @arg{setting} is @em{true} the @code{\"render\"} signal will be emitted
+  every time the widget draws. This is the default and is useful if drawing the
+  widget is faster. If @arg{setting} is @em{false} the data from previous
+  rendering is kept around and will be used for drawing the widget the next
+  time, unless the window is resized. In order to force a rendering the
   @fun{gtk:gl-area-queue-render} function must be called. This mode is useful
   when the scene changes seldom, but takes a long time to redraw.
   @see-class{gtk:gl-area}
@@ -378,7 +404,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-context)
       "Accessor"
       (documentation 'gl-area-context 'function)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @syntax{(gtk:gl-area-context object) => context}
   @syntax{(setf (gtk:gl-area-context object) context)}
   @argument[object]{a @class{gtk:gl-area} widget}
@@ -406,7 +432,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-has-depth-buffer)
       "Accessor"
       (documentation 'gl-area-has-depth-buffer 'function)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @syntax{(gtk:gl-area-has-depth-buffer object) => setting}
   @syntax{(setf (gtk:gl-area-has-depth-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
@@ -438,7 +464,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-has-stencil-buffer)
       "Accessor"
       (documentation 'gl-area-has-stencil-buffer 'function)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @syntax{(gtk:gl-area-has-stencil-buffer object) => setting}
   @syntax{(setf (gtk:gl-area-has-stencil-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
@@ -469,7 +495,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-use-es)
       "Accessor"
       (documentation 'gl-area-use-es 'function)
- "@version{#2022-8-21}
+ "@version{2024-10-26}
   @syntax{(gtk:gl-area-use-es object) => setting}
   @syntax{(setf (gtk:gl-area-use-es object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
@@ -498,7 +524,7 @@ lambda (area width height)    :run-last
 
 (defun gl-area-new ()
  #+liber-documentation
- "@version{#2022-8-21}
+ "@version{#2024-10-26}
   @return{The new @class{gtk:gl-area} widget.}
   @short{Creates a new @class{gtk:gl-area} widget.}
   @see-class{gtk:gl-area}"
@@ -531,7 +557,7 @@ lambda (area width height)    :run-last
 
 (cffi:defcfun ("gtk_gl_area_queue_render" gl-area-queue-render) :void
  #+liber-documentation
- "@version{#2023-10-21}
+ "@version{#2024-10-26}
   @argument[area]{a @class{gtk:gl-area} object}
   @begin{short}
     Marks the currently rendered data (if any) as invalid, and queues a redraw
@@ -553,7 +579,7 @@ lambda (area width height)    :run-last
 
 (cffi:defcfun ("gtk_gl_area_attach_buffers" gl-area-attach-buffers) :void
  #+liber-documentation
- "@version{#2023-10-21}
+ "@version{#2024-10-26}
   @argument[area]{a @class{gtk:gl-area} object}
   @begin{short}
     Ensures that the area framebuffer object is made the current draw and read
@@ -635,7 +661,7 @@ lambda (area width height)    :run-last
 
 (defun gl-area-required-version (area)
  #+liber-documentation
- "@version{#2023-10-21}
+ "@version{#2024-10-26}
   @syntax{(gtk:gl-area-required-version area) => major, minor}
   @syntax{(setf (gtk:gl-area-required-version area) '(major minor))}
   @argument[area]{a @class{gtk:gl-area} object}

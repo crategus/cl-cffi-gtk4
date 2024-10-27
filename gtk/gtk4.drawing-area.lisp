@@ -2,7 +2,7 @@
 ;;; gtk4.drawing-area.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,7 +80,7 @@
 ;;; GtkDrawingArea
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDrawingArea" drawing-area
+(gobject:define-gobject "GtkDrawingArea" drawing-area
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'drawing-area 'type)
- "@version{2023-11-27}
+ "@version{2024-10-26}
   @begin{short}
     The @class{gtk:drawing-area} widget is a widget that allows drawing with
     Cairo.
@@ -108,13 +108,13 @@
   After creating a drawing area, the application may want to connect to:
   @begin{itemize}
     @begin{item}
-      The \"GtkWidget::realize\" signal to take any necessary actions when the
-      widget is instantiated on a particular display. Create GDK resources in
-      response to this signal.
+      The @code{\"GtkWidget::realize\"} signal to take any necessary actions
+      when the widget is instantiated on a particular display. Create GDK
+      resources in response to this signal.
     @end{item}
     @begin{item}
-      The \"GtkDrawingArea::resize\" signal to take any necessary actions when
-      the widget changes size.
+      The @code{\"GtkDrawingArea::resize\"} signal to take any necessary actions
+      when the widget changes size.
     @end{item}
     @begin{item}
       Call the @fun{gtk:drawing-area-set-draw-func} function to handle redrawing
@@ -139,7 +139,7 @@
 
   If you need more complex control over your widget, you should consider
   creating your own GtkWidget subclass.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     The following example demonstrates using a drawing area to display a
     circle in the normal widget foreground color.
     @begin{pre}
@@ -173,16 +173,16 @@
       @begin{pre}
 lambda (area width height)    :run-last
       @end{pre}
-      The signal is emitted once when the widget is realized, and then each
-      time the widget is changed while realized. This is useful in order to
-      keep state up to date with the widget size, like for instance a backing
-      surface.
       @begin[code]{table}
         @entry[area]{The @class{gtk:drawing-area} widget that emitted the
           signal.}
         @entry[width]{An integer with the width of the viewport.}
         @entry[height]{An integer with the height of the viewport.}
       @end{table}
+      The signal is emitted once when the widget is realized, and then each
+      time the widget is changed while realized. This is useful in order to
+      keep state up to date with the widget size, like for instance a backing
+      surface.
   @end{dictionary}
   @see-slot{gtk:drawing-area-content-height}
   @see-slot{gtk:drawing-area-content-width}
@@ -206,7 +206,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'drawing-area-content-height)
       "Accessor"
       (documentation 'drawing-area-content-height 'function)
- "@version{#2023-9-18}
+ "@version{2024-10-26}
   @syntax{(gtk:drawing-area-content-height object) => height}
   @syntax{(setf (gtk:drawing-area-content-height object) height)}
   @argument[object]{a @class{gtk:drawing-area} widget}
@@ -243,7 +243,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'drawing-area-content-width)
       "Accessor"
       (documentation 'drawing-area-content-width 'function)
- "@version{#2023-9-18}
+ "@version{2024-10-26}
   @syntax{(gtk:drawing-area-content-width object) => width}
   @syntax{(setf (gtk:drawing-area-content-width object) width)}
   @argument[object]{a @class{gtk:drawing-area} widget}
@@ -274,7 +274,7 @@ lambda (area width height)    :run-last
 
 (defun drawing-area-new ()
  #+liber-documentation
- "@version{#2023-9-18}
+ "@version{2024-10-26}
   @return{The new @class{gtk:drawing-area} widget.}
   @short{Creates a new drawing area.}
   @see-class{gtk:drawing-area}"
@@ -299,7 +299,7 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-symbol 'drawing-area-draw-func)
       "Callback"
       (liber:symbol-documentation 'drawing-area-draw-func)
- "@version{2024-5-4}
+ "@version{2024-10-26}
   @syntax{lambda (area cr width height)}
   @argument[area]{a @class{gtk:drawing-area} widget}
   @argument[cr]{a @symbol{cairo:context-t} instance to draw to}
@@ -331,7 +331,7 @@ lambda (area width height)    :run-last
 
 (defun drawing-area-set-draw-func (area func)
  #+liber-documentation
- "@version{2023-9-18}
+ "@version{2024-10-26}
   @argument[area]{a @class{gtk:drawing-area} widget}
   @argument[func]{a @symbol{gtk:drawing-area-draw-func} callback function}
   @begin{short}
