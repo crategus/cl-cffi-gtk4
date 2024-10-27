@@ -145,7 +145,8 @@
     (is-false (gtk:menu-button-menu-model button))
     (is-false (gtk:menu-button-popover button))
     (is-false (gtk:menu-button-primary button))
-    (is-false (gtk:menu-button-use-underline button))))
+    (is-false (gtk:menu-button-use-underline button))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_menu_button_popup
 ;;;     gtk_menu_button_popdown
@@ -165,4 +166,4 @@
     (is (string= "Create popup function" msg))
     (is-false (gtk:menu-button-popdown button))))
 
-;;; 2024-9-20
+;;; 2024-10-20

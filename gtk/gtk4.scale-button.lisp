@@ -2,7 +2,7 @@
 ;;; gtk4.scale-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -90,7 +90,7 @@
 ;;; GtkScaleButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkScaleButton" scale-button
+(gobject:define-gobject "GtkScaleButton" scale-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleRange"
@@ -136,33 +136,33 @@
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to popdown the scale
-      widget. The default binding for this signal is the @kbd{Escape} key.
       @begin[code]{table}
         @entry[button]{The @class{gtk:scale-button} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to popdown the scale
+      widget. The default binding for this signal is the @kbd{Escape} key.
     @subheading{The \"popup\" signal}
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to popup the scale
-      widget. The default bindings for this signal are the @kbd{Space},
-      @kbd{Enter} and @kbd{Return} keys.
       @begin[code]{table}
         @entry[button]{The @class{gtk:scale-button} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to popup the scale
+      widget. The default bindings for this signal are the @kbd{Space},
+      @kbd{Enter} and @kbd{Return} keys.
     @subheading{The \"value-changed\" signal}
       @begin{pre}
 lambda (button value)    :run-last
       @end{pre}
-      The signal is emitted when the value field has changed.
       @begin[code]{table}
         @entry[button]{The @class{gtk:scale-button} widget which received the
           signal.}
         @entry[value]{The double float with the new value.}
       @end{table}
+      The signal is emitted when the value field has changed.
   @end{dictionary}
   @see-constructor{gtk:scale-button-new}
   @see-slot{gtk:scale-button-active}
@@ -391,7 +391,7 @@ lambda (button value)    :run-last
  #+liber-documentation
  "@version{2024-5-7}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} widget for the plus button of the scale
+  @return{The @class{gtk:widget} object for the plus button of the scale
     button.}
   @short{Retrieves the plus button of the scale button.}
   @see-class{gtk:scale-button}
@@ -410,7 +410,7 @@ lambda (button value)    :run-last
  #+liber-documentation
  "@version{2024-5-7}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} widget for the minus button of the scale
+  @return{The @class{gtk:widget} object for the minus button of the scale
     button.}
   @short{Retrieves the minus button of the scale button.}
   @see-class{gtk:scale-button}

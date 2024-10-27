@@ -2,7 +2,7 @@
 ;;; gtk4.menu-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,16 +72,17 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     active
-;;;     always-show-arrow
-;;;     child
+;;;     active                                              Since 4.10
+;;;     always-show-arrow                                   Since 4.4
+;;;     can-shrink                                          Since 4.12
+;;;     child                                               Since 4.6
 ;;;     direction
 ;;;     has-frame
 ;;;     icon-name
 ;;;     label
 ;;;     menu-model
 ;;;     popover
-;;;     primary
+;;;     primary                                             Since 4.4
 ;;;     use-underline
 ;;;
 ;;; Signals
@@ -108,7 +109,7 @@
 ;;; GtkArrowType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkArrowType" arrow-type
+(gobject:define-genum "GtkArrowType" arrow-type
   (:export t
    :type-initializer "gtk_arrow_type_get_type")
   (:up 0)
@@ -123,7 +124,7 @@
       (liber:symbol-documentation 'arrow-type)
  "@version{2024-4-20}
   @begin{declaration}
-(gobject:define-g-enum \"GtkArrowType\" arrow-type
+(gobject:define-genum \"GtkArrowType\" arrow-type
   (:export t
    :type-initializer \"gtk_arrow_type_get_type\")
   (:up 0)
@@ -151,7 +152,7 @@
 ;;; GtkMenuButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMenuButton" menu-button
+(gobject:define-gobject "GtkMenuButton" menu-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -264,11 +265,11 @@
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal on the @class{gtk:menu-button} widget is an action signal and
-      emitting it causes the button to pop up its menu. Since 4.4
       @begin[code]{table}
         @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
+      The signal on the @class{gtk:menu-button} widget is an action signal and
+      emitting it causes the button to pop up its menu. Since 4.4
   @end{dictionary}
   @see-constructor{gtk:menu-button-new}
   @see-slot{gtk:menu-button-active}
@@ -295,7 +296,7 @@ lambda (button)    :action
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "active" 'menu-button) t)
  "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
-  Whether the menu button is active. @br{}
+  Whether the menu button is active. Since 4.10 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-10 liber-documentation)
@@ -325,7 +326,7 @@ lambda (button)    :action
  "The @code{always-show-arrow} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether to show a dropdown arrow even when using an icon or a custom child.
-  @br{}
+  Since 4.4 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-4 liber-documentation)
@@ -355,7 +356,7 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "can-shrink" 'menu-button) t)
  "The @code{can-shrink} property of type @code{:boolean} (Read / Write) @br{}
   Whether the size of the menu button can be made smaller than the natural size
-  of its contents. @br{}
+  of its contents. Since 4.12 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-12 liber-documentation)
@@ -387,7 +388,7 @@ lambda (button)    :action
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "child" 'menu-button) t)
  "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
-  The child widget.")
+  The child widget. Since 4.6")
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-function 'menu-button-child)
@@ -615,7 +616,7 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "primary" 'menu-button) t)
  "The @code{primary} property of type @code{:boolean} (Read / Write) @br{}
   Whether the menu button acts as a primary menu. Primary menus can be opened
-  using the @kbd{F10} key. @br{}
+  using the @kbd{F10} key. Since 4.4 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-4 liber-documentation)

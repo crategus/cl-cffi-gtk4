@@ -2,7 +2,7 @@
 ;;; gtk4.button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -95,7 +95,7 @@
 ;;; GtkButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkButton" button
+(gobject:define-gobject "GtkButton" button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -134,7 +134,7 @@
   @image[button]{Figure: GtkButton}
 
   The @class{gtk:button} widget can hold any valid child widget. That is, it can
-  hold almost any other standard @class{gtk:widget} widget. The most commonly
+  hold almost any other standard @class{gtk:widget} object. The most commonly
   used child is the @class{gtk:label} widget.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:button} implementation has a single CSS node with name
@@ -161,20 +161,20 @@
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      This signal is an action signal and emitting it causes the button to
-      animate press then release. Applications should never connect to this
-      signal, but use the @code{\"clicked\"} signal.
       @begin[code]{table}
         @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
+      This signal is an action signal and emitting it causes the button to
+      animate press then release. Applications should never connect to this
+      signal, but use the @code{\"clicked\"} signal.
     @subheading{The \"clicked\" signal}
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      Emitted when the button has been activated (pressed and released).
       @begin[code]{table}
         @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
+      Emitted when the button has been activated (pressed and released).
   @end{dictionary}
   @see-constructor{gtk:button-new}
   @see-constructor{gtk:button-new-with-label}
@@ -256,7 +256,7 @@ lambda (button)    :action
   likely, you will either set the accessibility label or description for the
   button explicitly, or you will set a labelled-by or described-by relations
   from the child widget to the button.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Get the text of the label from the button:
     @begin{pre}
 (defvar button (gtk:button-new-with-label \"Save\"))
@@ -275,7 +275,7 @@ lambda (button)    :action
 (setf (gtk:button-child button) box)
 => #<GTK:BOX {1003471C73@}>
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:button}
   @see-class{gtk:widget}")
 

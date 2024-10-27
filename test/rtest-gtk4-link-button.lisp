@@ -51,7 +51,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test gkt-link-button-properties
+(test gtk-link-button-properties
   (let ((button (make-instance 'gtk:link-button)))
     (is-false (gtk:link-button-uri button))
     (is-false (gtk:link-button-visited button))))

@@ -2,7 +2,7 @@
 ;;; gtk4.switch.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; GtkSwitch
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSwitch" switch
+(gobject:define-gobject "GtkSwitch" switch
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -126,16 +126,21 @@
       @begin{pre}
 lambda (widget)    :action
       @end{pre}
-      The signal on the switch is an action signal and emitting it causes the
-      switch to animate. Applications should never connect to this signal, but
-      use the @code{\"notify::active\"} signal.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:switch} widget which received the signal.}
       @end{table}
+      The signal on the switch is an action signal and emitting it causes the
+      switch to animate. Applications should never connect to this signal, but
+      use the @code{\"notify::active\"} signal.
     @subheading{The \"state-set\" signal}
       @begin{pre}
 lambda (widget state)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
+        @entry[state]{The boolean with the state of the switch.}
+        @entry[Returns]{@em{True} to stop the signal emission.}
+      @end{table}
       The signal on the switch is emitted to change the underlying state. It is
       emitted when the user changes the switch position. The default handler
       keeps the state in sync with the @slot[gtk:switch]{active} property.
@@ -149,11 +154,6 @@ lambda (widget state)    :run-last
       Visually, the underlying state is represented by the trough color of the
       switch, while the @slot[gtk:switch]{active} property is represented by
       the position of the switch.
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
-        @entry[state]{The boolean with the state of the switch.}
-        @entry[Returns]{@em{True} to stop the signal emission.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:switch-new}
   @see-slot{gtk:switch-active}

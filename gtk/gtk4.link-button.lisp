@@ -2,7 +2,7 @@
 ;;; gtk4.link-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 ;;; GtkLinkButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkLinkButton" link-button
+(gobject:define-gobject "GtkLinkButton" link-button
   (:superclass button
     :export t
     :interfaces ("GtkAccessible"
@@ -133,16 +133,16 @@
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[button]{The @class{gtk:link-button} widget that emitted the
+          signal.}
+      @end{table}
       The signal is emitted each time the link button has been clicked. The
       default handler will call the @fun{gtk:file-launcher-launch} function
       with the URI stored inside the @slot[gtk:link-button]{uri} property.
       To override the default behavior, you can connect to the
       @code{\"activate-link\"} signal and stop the propagation of the signal by
       returning @em{true} from your handler.
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:link-button} widget that emitted the
-          signal.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:link-button-new}
   @see-constructor{gtk:link-button-new-with-label}

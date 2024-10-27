@@ -99,7 +99,8 @@
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is-false (gtk:button-label button))
-    (is-false (gtk:button-use-underline button))))
+    (is-false (gtk:button-use-underline button))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_button_new_from_icon_name
 
@@ -109,7 +110,9 @@
     (is-true  (gtk:button-has-frame button))
     (is (string= "battery" (gtk:button-icon-name button)))
     (is-false (gtk:button-label button))
-    (is-false (gtk:button-use-underline button))))
+    (is-false (gtk:button-use-underline button))
+    (is-false (setf (gtk:button-child button) nil))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_button_new_with_label
 
@@ -119,7 +122,9 @@
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "battery" (gtk:button-label button)))
-    (is-false (gtk:button-use-underline button))))
+    (is-false (gtk:button-use-underline button))
+    (is-false (setf (gtk:button-child button) nil))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_button_new_with_mnemonic
 
@@ -129,6 +134,8 @@
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "_battery" (gtk:button-label button)))
-    (is-true (gtk:button-use-underline button))))
+    (is-true (gtk:button-use-underline button))
+    (is-false (setf (gtk:button-child button) nil))
+    (is (= 1 (g:object-ref-count button)))))
 
-;;; 2024-9-20
+;;; 2024-10-20

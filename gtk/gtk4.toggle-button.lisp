@@ -2,7 +2,7 @@
 ;;; gtk4.toggle-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,7 +46,7 @@
 ;;;     gtk_toggle_button_new
 ;;;     gtk_toggle_button_new_with_label
 ;;;     gtk_toggle_button_new_with_mnemonic
-;;;     gtk_toggle_button_toggled
+;;;     gtk_toggle_button_toggled                           Deprecated 4.10
 ;;;
 ;;; Properties
 ;;;
@@ -79,7 +79,7 @@
 ;;; GtkTogleButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkToggleButton" toggle-button
+(gobject:define-gobject "GtkToggleButton" toggle-button
   (:superclass button
    :export t
    :interfaces ("GtkAccessible"
@@ -119,7 +119,7 @@
   Only one of the buttons can be toggled at a time, and toggling another one
   will switch the currently toggled one off. To add a toggle button to a group,
   use the @fun{gtk:toggle-button-group} function.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     In this example three toggle buttons are grouped together via the
     @class{gtk:actionable} API, by using the same action with parameter type
     and @code{\"s\"} state type for all buttons in the group, and giving each
@@ -186,7 +186,7 @@
     ;; Present window
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:toggle-button} implementation has a single CSS node with name
     @code{button}. To differentiate it from a plain button, it gets the
@@ -197,12 +197,12 @@
       @begin{pre}
 lambda (toggle)    :run-first
       @end{pre}
-      Should be connected if you wish to perform an action whenever the state
-      of the toggle button is changed.
       @begin[code]{table}
         @entry[toggle]{The @class{gtk:toggle-button} widget which received the
           signal.}
       @end{table}
+      Should be connected if you wish to perform an action whenever the state
+      of the toggle button is changed.
   @end{dictionary}
   @see-constructor{gtk:toggle-button-new}
   @see-constructor{gtk:toggle-button-new-with-label}

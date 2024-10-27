@@ -119,16 +119,27 @@
     (is (= 10.0d0 (gtk:adjustment-upper adjustment)))
     (is (= 2.0d0 (gtk:adjustment-step-increment adjustment)))
     (is (= 20.0d0 (gtk:adjustment-page-increment adjustment)))
-    (is (= 0.0d0 (gtk:adjustment-page-size adjustment)))))
+    (is (= 0.0d0 (gtk:adjustment-page-size adjustment)))
+    ;; Check memory management
+    (is-false (setf (gtk:scale-button-adjustment button) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_scale_button_get_popup
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
 (test gtk-scale-button-get
-  (let ((button (gtk:scale-button-new 1 10 0.5 nil)))
-    (is (typep (gtk:scale-button-popup button) 'gtk:popover))
-    (is (typep (gtk:scale-button-plus-button button) 'gtk:button))
-    (is (typep (gtk:scale-button-minus-button button) 'gtk:button))))
+  (let ((button (gtk:scale-button-new 1 10 0.5 nil))
+        button1 button2 popup)
+    (is (typep (setf popup (gtk:scale-button-popup button)) 'gtk:popover))
+    (is (typep (setf button1 (gtk:scale-button-plus-button button)) 'gtk:button))
+    (is (typep (setf button2 (gtk:scale-button-minus-button button)) 'gtk:button))
+    ;; Check memory management
+    (is-false (setf (gtk:scale-button-adjustment button) nil))
+    (is (= 3 (g:object-ref-count popup)))
+    (is (= 3 (g:object-ref-count button1)))
+    (is (= 3 (g:object-ref-count button2)))
+    (is (= 1 (g:object-ref-count button)))))
 
-;;; 2024-5-26
+;;; 2024-10-20

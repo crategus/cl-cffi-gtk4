@@ -2,7 +2,7 @@
 ;;; gtk4.check-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -90,7 +90,7 @@
 ;;; GtkCheckButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCheckButton" check-button
+(gobject:define-gobject "GtkCheckButton" check-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -147,7 +147,7 @@
   different indicator, and are commonly referred to as radio buttons. To add a
   @class{gtk:check-button} widget to a group, use the
   @fun{gtk:check-button-group} function.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     This example shows check and radio buttons.
     @begin{pre}
 (defun do-check-button (&optional application)
@@ -194,7 +194,7 @@
     ;; Present window
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 checkbutton[.text-button]
@@ -216,24 +216,24 @@ checkbutton[.text-button]
       @begin{pre}
 lambda (checkbutton)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[checkbutton]{The @class{gtk:check-button} widget which received
+          the signal.}
+      @end{table}
       Emitted when the check button is activated. The signal is an action signal
       and emitting it causes the button to animate press then release.
       Applications should never connect to this signal, but use the
       @code{\"toggled\"} signal. Since 4.2
-      @begin[code]{table}
-        @entry[checkbutton]{The @class{gtk:check-button} widget which received
-          the signal.}
-      @end{table}
     @subheading{The \"toggled\" signal}
       @begin{pre}
 lambda (checkbutton)    :run-first
       @end{pre}
-      Emitted when the @slot[gtk:check-button]{active} property of the check
-      button changes.
       @begin[code]{table}
         @entry[checkbutton]{The @class{gtk:check-button} widget which received
           the signal.}
       @end{table}
+      Emitted when the @slot[gtk:check-button]{active} property of the check
+      button changes.
   @end{dictionary}
   @see-constructor{gtk:check-button-new}
   @see-constructor{gtk:check-button-new-with-label}
