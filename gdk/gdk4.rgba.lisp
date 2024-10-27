@@ -2,7 +2,7 @@
 ;;; gdk4.rgba.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -58,7 +58,7 @@
 ;;; GdkRGBA
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-cstruct rgba "GdkRGBA"
+(glib:define-gboxed-cstruct rgba "GdkRGBA"
   (:export t
    :type-initializer "gdk_rgba_get_type")
   (red :float :initform 0.0)
@@ -72,7 +72,7 @@
       (documentation 'rgba 'type)
  "@version{2024-6-30}
   @begin{declaration}
-(glib:define-g-boxed-cstruct rgba \"GdkRGBA\"
+(glib:define-gboxed-cstruct rgba \"GdkRGBA\"
   (:export t
    :type-initializer \"gdk_rgba_get_type\")
   (red :float :initform 0.0)
@@ -205,9 +205,9 @@
   @begin{short}
     Creates a @struct{gdk:rgba} color.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The numbers are coerced to float values.
-  @end{notes}
+  @end{dictionary}
   @see-struct{gdk:rgba}
   @see-function{gdk:rgba-copy}"
   (make-rgba :red (coerce red 'single-float)
@@ -309,7 +309,7 @@
   and @code{b} are either integers in the range 0 to 255 or precentage values
   in the range 0% to 100%, and @code{a} is a floating point value in the range
   0.0 to 1.0.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:rgba-parse \"LightGreen\")
 => #S(GDK-RGBA :RED 0.5647059
@@ -323,7 +323,7 @@
                :ALPHA 1.0)
 (gdk:rgba-parse \"unknown\") => NIL
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-struct{gdk:rgba}
   @see-function{gdk:rgba-to-string}"
   (let ((rgba (make-rgba)))
@@ -391,14 +391,14 @@
   Note that this string representation may loose some precision, since @code{r},
   @code{g} and @code{b} are represented as 8-bit integers. If this is a concern,
   you should use a different representation.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:rgba-to-string (gdk:rgba-new :red 1.0))
 => \"rgba(255,0,0,0)\"
 (gdk:rgba-parse *)
 => #S(GDK-RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 0.0)
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-struct{gdk:rgba}
   @see-function{gdk:rgba-parse}"
   (color (g:boxed rgba)))

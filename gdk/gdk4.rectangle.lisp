@@ -2,7 +2,7 @@
 ;;; gdk4.rectangle.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -51,7 +51,7 @@
 
 ;; TODO: cairo:rectangle-t is no longer exported from Cairo
 
-(glib:define-g-boxed-cstruct rectangle "GdkRectangle"
+(glib:define-gboxed-cstruct rectangle "GdkRectangle"
   (:export t
    :type-initializer "gdk_rectangle_get_type")
   (x :int :initform 0)
@@ -65,7 +65,7 @@
       (documentation 'rectangle 'type)
  "@version{2024-7-9}
   @begin{declaration}
-(glib:define-g-boxed-cstruct rectangle \"GdkRectangle\"
+(glib:define-gboxed-cstruct rectangle \"GdkRectangle\"
   (:export t
    :type-initializer \"gdk_rectangle_get_type\")
   (x :int :initform 0)

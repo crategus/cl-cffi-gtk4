@@ -2,7 +2,7 @@
 ;;; gdk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,7 +40,7 @@
 ;;; GdkGravity
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkGravity" gravity
+(gobject:define-genum "GdkGravity" gravity
   (:export t
    :type-initializer "gdk_gravity_get_type")
   (:north-west 1)
@@ -60,7 +60,7 @@
       (liber:symbol-documentation 'gravity)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkGravity\" gravity
+(gobject:define-genum \"GdkGravity\" gravity
   (:export t
    :type-initializer \"gdk_gravity_get_type\")
   (:north-west 1)
@@ -140,7 +140,7 @@
 ;;; GdkModifierType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkModifierType" modifier-type
+(gobject:define-gflags "GdkModifierType" modifier-type
   (:export t
    :type-initializer "gdk_modifier_type_get_type")
   #-gtk-4-14
@@ -166,7 +166,7 @@
       (liber:symbol-documentation 'modifier-type)
  "@version{2024-5-25}
   @begin{declaration}
-(gobject:define-g-flags \"GdkModifierType\" modifier-type
+(gobject:define-gflags \"GdkModifierType\" modifier-type
   (:export t
    :type-initializer \"gdk_modifier_type_get_type\")
   #-gtk-4-14
