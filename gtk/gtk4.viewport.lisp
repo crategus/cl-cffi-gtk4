@@ -2,7 +2,7 @@
 ;;; gtk4.viewport.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -73,7 +73,7 @@
 ;;; GtkViewport
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkViewport" viewport
+(gobject:define-gobject "GtkViewport" viewport
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -203,7 +203,7 @@
  #+liber-documentation
  "@version{2024-7-5}
   @argument[viewport]{a @class{gtk:viewport} widget}
-  @argument[descendant]{a descendant @class{gtk:widget} widget of the viewport}
+  @argument[descendant]{a descendant @class{gtk:widget} object of the viewport}
   @argument[scroll]{a @class{gtk:scroll-info} instance}
   @begin{short}
     Scrolls a descendant of the viewport into view.

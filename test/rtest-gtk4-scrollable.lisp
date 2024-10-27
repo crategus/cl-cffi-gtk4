@@ -72,11 +72,20 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-scrollable-properties
-  (let ((scrollable (make-instance 'gtk:viewport)))
-    (is (typep (gtk:scrollable-hadjustment scrollable) 'gtk:adjustment))
+  (let ((scrollable (make-instance 'gtk:viewport))
+        adjustment1 adjustment2)
+    (is (typep (setf adjustment1
+                     (gtk:scrollable-hadjustment scrollable)) 'gtk:adjustment))
     (is (eq :minimum (gtk:scrollable-hscroll-policy scrollable)))
-    (is (typep (gtk:scrollable-vadjustment scrollable) 'gtk:adjustment))
-    (is (eq :minimum (gtk:scrollable-vscroll-policy scrollable)))))
+    (is (typep (setf adjustment2
+                     (gtk:scrollable-vadjustment scrollable)) 'gtk:adjustment))
+    (is (eq :minimum (gtk:scrollable-vscroll-policy scrollable)))
+    ;; Check memory management
+    (is-false (setf (gtk:scrollable-hadjustment scrollable) nil))
+    (is-false (setf (gtk:scrollable-vadjustment scrollable) nil))
+    (is (= 1 (g:object-ref-count adjustment1)))
+    (is (= 1 (g:object-ref-count adjustment2)))
+    (is (= 1 (g:object-ref-count scrollable)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -89,4 +98,4 @@
     (is-false (setf border
                     (gtk:scrollable-border scrollable)))))
 
-;;; 2024-9-19
+;;; 2024-10-27

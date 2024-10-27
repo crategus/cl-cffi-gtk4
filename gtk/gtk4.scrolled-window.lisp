@@ -2,7 +2,7 @@
 ;;; gtk4.scrolled-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -120,7 +120,7 @@
 ;;; GtkPolicyType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPolicyType" policy-type
+(gobject:define-genum "GtkPolicyType" policy-type
   (:export t
    :type-initializer "gtk_policy_type_get_type")
   (:always 0)
@@ -134,7 +134,7 @@
       (liber:symbol-documentation 'policy-type)
  "@version{2024-7-5}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPolicyType\" policy-type
+(gobject:define-genum \"GtkPolicyType\" policy-type
   (:export t
    :type-initializer \"gtk_policy_type_get_type\")
   (:always 0)
@@ -165,7 +165,7 @@
 ;;; GtkCornerType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkCornerType" corner-type
+(gobject:define-genum "GtkCornerType" corner-type
   (:export t
    :type-initializer "gtk_corner_type_get_type")
   (:top-left 0)
@@ -179,7 +179,7 @@
       (liber:symbol-documentation 'corner-type)
  "@version{2024-7-5}
   @begin{declaration}
-(gobject:define-g-enum \"GtkCornerType\" corner-type
+(gobject:define-genum \"GtkCornerType\" corner-type
   (:export t
    :type-initializer \"gtk_corner_type_get_type\")
   (:top-left 0)
@@ -210,7 +210,7 @@
 ;;; GtkScrolledWindow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkScrolledWindow" scrolled-window
+(gobject:define-gobject "GtkScrolledWindow" scrolled-window
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -354,6 +354,12 @@
       @begin{pre}
 lambda (window pos)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[window]{The @class{gtk:scrolled-window} widget which received the
+          signal.}
+        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
+          enumeration that was hit.}
+      @end{table}
       The signal is emitted whenever user initiated scrolling makes the
       scrolled window firmly surpass, for example, with some edge resistance,
       the lower or upper limits defined by the adjustment in that orientation.
@@ -361,51 +367,41 @@ lambda (window pos)    :run-last
       @code{\"edge-reached\"} signal. Note: The @arg{pos} argument is LTR/RTL
       aware, so callers should be aware too if intending to provide behavior on
       horizontal edges.
-      @begin[code]{table}
-        @entry[window]{The @class{gtk:scrolled-window} widget which received the
-          signal.}
-        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
-          enumeration that was hit.}
-      @end{table}
     @subheading{The \"edge-reached\" signal}
       @begin{pre}
 lambda (window pos)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[window]{The @class{gtk:scrolled-window} widget which received
+          the signal.}
+        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
+          enumeration that was hit.}
+      @end{table}
       The signal is emitted whenever user-initiated scrolling makes the
       scrolled window exactly reach the lower or upper limits defined by the
       adjustment in that orientation. A similar behavior with edge resistance
       is provided by the @code{\"edge-overshot\"} signal. Note: The @arg{pos}
       argument is LTR/RTL aware, so callers should be aware too if intending to
       provide behavior on horizontal edges.
-      @begin[code]{table}
-        @entry[window]{The @class{gtk:scrolled-window} widget which received
-          the signal.}
-        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
-          enumeration that was hit.}
-      @end{table}
     @subheading{The \"move-focus-out\" signal}
       @begin{pre}
 lambda (window direction)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when focus is moved
-      away from the scrolled window by a keybinding. The @code{\"move-focus\"}
-      signal is emitted with the @arg{direction} value on this scrolled windows
-      toplevel parent in the container hierarchy. The default bindings for this
-      signal are the @kbd{Tab+Ctrl} and @kbd{Tab+Ctrl+Shift} keys.
       @begin[code]{table}
         @entry[window]{The @class{gtk:scrolled-window} widget which received
           the signal.}
         @entry[direction]{Either the @code{:tab-forward} or @code{:tab-backward}
           value of the @symbol{gtk:direction-type} enumeration.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when focus is moved
+      away from the scrolled window by a keybinding. The @code{\"move-focus\"}
+      signal is emitted with the @arg{direction} value on this scrolled windows
+      toplevel parent in the container hierarchy. The default bindings for this
+      signal are the @kbd{Tab+Ctrl} and @kbd{Tab+Ctrl+Shift} keys.
       @subheading{The \"scroll-child\" signal}
         @begin{pre}
 lambda (window scroll horizontal)    :action
         @end{pre}
-        The signal is a keybinding signal which gets emitted when a keybinding
-        that scrolls is pressed. The horizontal or vertical adjustment is
-        updated which triggers a signal that the scrolled windows child may
-        listen to and scroll itself.
         @begin[code]{table}
           @entry[window]{The @class{gtk:scrolled-window} widget which received
             the signal.}
@@ -415,6 +411,10 @@ lambda (window scroll horizontal)    :action
             child horizontally or not.}
           @entry[Returns]{The boolean whether the scroll happened.}
         @end{table}
+        The signal is a keybinding signal which gets emitted when a keybinding
+        that scrolls is pressed. The horizontal or vertical adjustment is
+        updated which triggers a signal that the scrolled windows child may
+        listen to and scroll itself.
   @end{dictionary}
   @see-constructor{gtk:scrolled-window-new}
   @see-slot{gtk:scrolled-window-child}
@@ -1052,11 +1052,11 @@ lambda (window scroll horizontal)    :action
   @code{:bottom-left}, and @code{:bottom-right}.
 
   See also the @fun{gtk:scrolled-window-unset-placement} function.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     In contrast to the @fun{gtk:scrolled-window-window-placement} function the
     @fun{gtk:scrolled-window-placement} function updates the scrolled window
     after setting the new value for the window placement.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-unset-placement}
   @see-function{gtk:scrolled-window-window-placement}"

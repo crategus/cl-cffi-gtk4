@@ -63,10 +63,23 @@
 ;;;     gtk_viewport_new
 
 (test gtk-viewport-new
-  (is (typep (gtk:viewport-new) 'gtk:viewport))
-  (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)) 'gtk:viewport))
-  (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)
-                               (make-instance 'gtk:adjustment)) 'gtk:viewport)))
+  (let (viewport)
+    (is (typep (setf viewport (gtk:viewport-new)) 'gtk:viewport))
+    (is-false (setf (gtk:scrollable-hadjustment viewport) nil))
+    (is-false (setf (gtk:scrollable-vadjustment viewport) nil))
+    (is (typep (setf viewport
+                     (gtk:viewport-new (make-instance 'gtk:adjustment)))
+               'gtk:viewport))
+    (is-false (setf (gtk:scrollable-hadjustment viewport) nil))
+    (is-false (setf (gtk:scrollable-vadjustment viewport) nil))
+    (is (typep (setf viewport
+                     (gtk:viewport-new (make-instance 'gtk:adjustment)
+                                       (make-instance 'gtk:adjustment)))
+               'gtk:viewport))
+    (is-false (setf (gtk:scrollable-hadjustment viewport) nil))
+    (is-false (setf (gtk:scrollable-vadjustment viewport) nil))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count viewport)))))
 
 ;;;     gtk_viewport_scroll_to                              Since 4.12
 
@@ -76,4 +89,4 @@
     (is (typep (setf (gtk:viewport-child viewport) area) 'gtk:drawing-area))
     (is-false (gtk:viewport-scroll-to viewport area (gtk:scroll-info-new)))))
 
-;;; 2024-9-20
+;;; 2024-10-27

@@ -175,7 +175,11 @@
     (is-false (gtk:scrolled-window-propagate-natural-width window))
     (is (typep (gtk:scrolled-window-vadjustment window) 'gtk:adjustment))
     (is (eq :automatic (gtk:scrolled-window-vscrollbar-policy window)))
-    (is (eq :top-left (gtk:scrolled-window-window-placement window)))))
+    (is (eq :top-left (gtk:scrolled-window-window-placement window)))
+    ;; Check memory management
+    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -256,12 +260,25 @@
 ;;;     gtk_scrolled_window_new
 
 (test gtk-scrolled-window-new
-  (is (typep (gtk:scrolled-window-new) 'gtk:scrolled-window))
-  (is (typep (gtk:scrolled-window-new (make-instance 'gtk:adjustment))
-             'gtk:scrolled-window))
-  (is (typep (gtk:scrolled-window-new (make-instance 'gtk:adjustment)
-                                      (make-instance 'gtk:adjustment))
-             'gtk:scrolled-window)))
+  (let (window)
+    (is (typep (setf window (gtk:scrolled-window-new)) 'gtk:scrolled-window))
+    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
+
+    (is (typep (setf window
+                     (gtk:scrolled-window-new (make-instance 'gtk:adjustment)))
+               'gtk:scrolled-window))
+    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
+
+    (is (typep (setf window
+                     (gtk:scrolled-window-new (make-instance 'gtk:adjustment)
+                                              (make-instance 'gtk:adjustment)))
+               'gtk:scrolled-window))
+    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count window)))))
 
 ;;;     gtk_scrolled_window_get_hscrollbar
 ;;;     gtk_scrolled_window_get_vscrollbar
@@ -297,4 +314,4 @@
     (is-false (gtk:scrolled-window-unset-placement scrolled))
     (is (eq :top-left (gtk:scrolled-window-placement scrolled)))))
 
-;;; 2024-9-20
+;;; 2024-10-27
