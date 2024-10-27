@@ -2,7 +2,7 @@
 ;;; gtk4.popover-menu-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,7 +70,7 @@
 ;;; GtkPopoverMenuBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPopoverMenuBar" popover-menu-bar
+(gobject:define-gobject "GtkPopoverMenuBar" popover-menu-bar
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu-bar 'type)
- "@version{#2023-3-12}
+ "@version{2024-10-26}
   @begin{short}
     The @class{gtk:popover-menu-bar} widget presents a horizontal bar of items
     that pop up popover menus when clicked.
@@ -134,7 +134,7 @@ menubar
 (setf (liber:alias-for-function 'popover-menu-bar-menu-model)
       "Accessor"
       (documentation 'popover-menu-bar-menu-model 'function)
- "@version{#2023-3-12}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-menu-bar-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-bar-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
@@ -155,7 +155,7 @@ menubar
 
 (defun popover-menu-bar-new-from-model (model)
  #+liber-documentation
- "@version{#2023-3-12}
+ "@version{#2024-10-26}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
   @return{The new @class{gtk:popover-menu-bar} widget.}
   @begin{short}
@@ -178,7 +178,7 @@ menubar
 (cffi:defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child)
     :boolean
  #+liber-documentation
- "@version{#2023-3-12}
+ "@version{#2024-10-26}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
   @argument[child]{a @class{gtk:widget} object to add}
   @argument[id]{a string with the ID to insert @arg{child} at}
@@ -204,7 +204,7 @@ menubar
 (cffi:defcfun ("gtk_popover_menu_bar_remove_child"
                popover-menu-bar-remove-child) :boolean
  #+liber-documentation
- "@version{#2023-3-12}
+ "@version{#2024-10-26}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
   @argument[child]{a @class{gtk:widget} object to remove}
   @return{@em{True} if the widget was removed.}

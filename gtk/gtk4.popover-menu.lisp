@@ -2,7 +2,7 @@
 ;;; gtk4.popover-menu.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -79,19 +79,22 @@
 ;;; GtkPopoverMenuFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkPopoverMenuFlags" popover-menu-flags
+(gobject:define-gflags "GtkPopoverMenuFlags" popover-menu-flags
   (:export t
    :type-initializer "gtk_popover_menu_flags_get_type")
+  #-gtk-4-14
   (:none 0)
+  #+gtk-4-14
+  (:sliding 0)
   (:nested #.(ash 1 0)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'popover-menu-flags)
       "GFlags"
       (liber:symbol-documentation 'popover-menu-flags)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @begin{declaration}
-(gobject:define-g-flags \"GtkPopoverMenuFlags\" popover-menu-flags
+(gobject:define-gflags \"GtkPopoverMenuFlags\" popover-menu-flags
   (:export t
    :type-initializer \"gtk_popover_menu_flags_get_type\")
   (:none 0)
@@ -99,21 +102,24 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:none]{No flags set.}
+      @entry[:sliding]{Submenus are presented as sliding submenus that replace
+        the main menu. Since 4.14}
       @entry[:nested]{Create submenus as nested popovers. Without this flag,
         submenus are created as sliding pages that replace the main menu.}
     @end{table}
   @end{values}
   @begin{short}
-    Flags that affect how popover menus are created from a menu model.
+    Flags that affect how popover menus built from a @class{g:menu-model}
+    object are created and displayed.
   @end{short}
-  @see-class{gtk:popover-menu}")
+  @see-class{gtk:popover-menu}
+  @see-class{g:menu-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPopoverMenu
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPopoverMenu" popover-menu
+(gobject:define-gobject "GtkPopoverMenu" popover-menu
   (:superclass popover
     :export t
     :interfaces ("GtkAccessible"
@@ -135,7 +141,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu 'type)
- "@version{2024-5-26}
+ "@version{2024-10-26}
   @begin{short}
     The @class{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
     class that treats its children like menus and allows switching between them.
@@ -340,19 +346,18 @@
 
 (defun popover-menu-new-from-model (model)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
   @return{The new @class{gtk:popover-menu} widget.}
   @begin{short}
     Creates a popover menu and populates it according to the menu model.
   @end{short}
   The created buttons are connected to actions found in the
-  @class{gtk:application-window} widget to which the popover belongs -
-  typically by means of being attached to a widget that is contained within
-  the @class{gtk:application-window} widget hierarchy.
-
-  Actions can also be added using the @fun{gtk:widget-insert-action-group}
-  function on the menus attach widget or on any of its parent widgets.
+  @class{gtk:application-window} widget to which the popover belongs - typically
+  by means of being attached to a widget that is contained within the widget
+  hierarchy of the application window. Actions can also be added using the
+  @fun{gtk:widget-insert-action-group} function on the menus attach widget or
+  on any of its parent widgets.
 
   This function creates menus with sliding submenus. See the
   @fun{gtk:popover-menu-new-from-model-full} function for a way to control this.
@@ -373,9 +378,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_new_from_model_full"
-               popover-menu-new-from-model-full) (g:object popover-menu)
+               popover-menu-new-from-model-full)
+    (g:object popover-menu :already-referenced)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
   @argument[flags]{a @symbol{gtk:popover-menu-flags} value, that affect hwo the
     menu is created}
@@ -385,18 +391,13 @@
   @end{short}
   The created buttons are connected to actions found in the action groups that
   are accessible from the parent widget. This includes the
-  @class{gtk:application-window} widget to which the popover menu belongs.
-  Actions can also be added using the @fun{gtk:widget-insert-action-group}
-  function on the parent widget or on any of its parent widgets.
-
-  The only flag that is supported currently is the @code{:nested} value, which
-  makes GTK create traditional, nested submenus instead of the default sliding
-  submenus.
+  @class{gtk:application-window} widget to which the popover belongs. Actions
+  can also be added using the @fun{gtk:widget-insert-action-group} function on
+  the parent widget or on any of its parent widgets.
   @see-class{gtk:popover-menu}
   @see-class{g:menu-model}
   @see-class{gtk:application-window}
   @see-symbol{gtk:popover-menu-flags}
-  @see-function{gtk:popover-menu-new-from-model}
   @see-function{gtk:widget-insert-action-group}"
   (model (g:object g:menu-model))
   (flags popover-menu-flags))
@@ -409,7 +410,7 @@
 
 (cffi:defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[popover]{a @class{gtk:popover-menu} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[id]{a string with the ID to insert the child widget at}
@@ -435,7 +436,7 @@
 (cffi:defcfun ("gtk_popover_menu_remove_child" popover-menu-remove-child)
     :boolean
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[popover]{a @class{gtk:popover-menu} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @return{@em{True} if the child widget was removed.}

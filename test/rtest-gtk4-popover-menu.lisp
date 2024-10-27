@@ -7,6 +7,34 @@
 
 ;;;     GtkPopoverMenuFlags
 
+(test gtk-popover-menu-flags
+  ;; Check type
+  (is (g:type-is-flags "GtkPopoverMenuFlags"))
+  ;; Check registered name
+  (is (eq 'gtk:popover-menu-flags
+          (glib:symbol-for-gtype "GtkPopoverMenuFlags")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkPopoverMenuFlags")
+          (g:gtype (cffi:foreign-funcall "gtk_popover_menu_flags_get_type"
+                                         :size))))
+  ;; Check names
+  (is (equal '("GTK_POPOVER_MENU_SLIDING" "GTK_POPOVER_MENU_NESTED")
+             (glib-test:list-flags-item-names "GtkPopoverMenuFlags")))
+  ;; Check values
+  (is (equal '(0 1)
+             (glib-test:list-flags-item-values "GtkPopoverMenuFlags")))
+  ;; Check nick names
+  (is (equal '("sliding" "nested")
+             (glib-test:list-flags-item-nicks "GtkPopoverMenuFlags")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkPopoverMenuFlags"
+                                     GTK:POPOVER-MENU-FLAGS
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_popover_menu_flags_get_type")
+                       (:SLIDING 0)
+                       (:NESTED 1))
+             (gobject:get-gtype-definition "GtkPopoverMenuFlags"))))
+
 ;;;     GtkPopoverMenu
 
 (test gtk-popover-menu-class
@@ -70,4 +98,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; 2024-9-20
+;;; 2024-10-26

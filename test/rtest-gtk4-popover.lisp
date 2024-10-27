@@ -64,14 +64,19 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     autohide
-;;;     cascade-popdown
-;;;     child
-;;;     default-widget
-;;;     has-arrow
-;;;     mnemonics-visible
-;;;     pointing-to
-;;;     position
+(test gtk-popover-properties
+  (let ((popover (make-instance 'gtk:popover)))
+    (is-true (gtk:popover-autohide popover))
+    (is-false (gtk:popover-cascade-popdown popover))
+    (is-false (gtk:popover-child popover))
+    (is-false (gtk:popover-default-widget popover))
+    (is-true (gtk:popover-has-arrow popover))
+    (is-false (gtk:popover-mnemonics-visible popover))
+    (is (gdk:rectangle-equal (gdk:rectangle-new :x 0 :y 0 :width 0 :height 0)
+                             (gtk:popover-pointing-to popover)))
+    (is (eq :bottom (gtk:popover-position popover)))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count popover)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -81,6 +86,10 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_popover_new
+
+(test gtk-popover-new
+  (is (typep (gtk:popover-new) 'gtk:popover)))
+
 ;;;     gtk_popover_popup
 ;;;     gtk_popover_popdown
 ;;;     gtk_popover_present

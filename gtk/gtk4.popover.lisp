@@ -2,7 +2,7 @@
 ;;; gtk4.popover.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -102,7 +102,7 @@
 ;;; GtkPopover
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPopover" popover
+(gobject:define-gobject "GtkPopover" popover
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -138,7 +138,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover 'type)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @begin{short}
     The @class{gtk:popover} widget is a bubble-like context window, primarily
     meant to provide context-dependent information or options.
@@ -156,7 +156,7 @@
   ensure input events get redirected to it while it is shown, and also so the
   popover is dismissed in the expected situations, clicks outside the popover,
   or the @kbd{Escape} key being pressed. If no such modal behavior is desired
-  on a popover, the @fun{gtk:popover-modal} function may be called on it to
+  on a popover, the @fun{gtk:popover-autohide} function may be called on it to
   tweak its behavior.
 
   @subheading{GtkPopover as menu replacement}
@@ -164,7 +164,7 @@
   do this is to use the @class{gtk:popover-menu} subclass which supports being
   populated from a @class{g:menu-model} object with the
   @fun{gtk:popover-menu-new-from-model} function.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 <section>
   <attribute name=\"display-hint\">horizontal-buttons</attribute>
@@ -189,7 +189,7 @@
   @begin[CSS nodes]{dictionary}
     The contents child node always gets the @code{.background} style class and
     the popover itself gets the @code{.menu} style class if the popover is
-    menu-like, i.e. a @class{gtk:popover-menu} widget.
+    menu-like, that is a @class{gtk:popover-menu} widget.
 
     Particular uses of the @class{gtk:popover} widget, such as touch selection
     popups or magnifiers in @class{gtk:entry} or @class{gtk:text-view} widgets
@@ -215,22 +215,22 @@
       @begin{pre}
 lambda (popover)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      activates the default widget of the popover.
       @begin[code]{table}
         @entry[popover]{The @class{gtk:popover} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      activates the default widget of the popover.
     @subheading{The \"closed\" signal}
       @begin{pre}
 lambda (popover)    :run-last
       @end{pre}
-      The signal is emitted when the popover is dismissed either through API or
-      user interaction.
       @begin[code]{table}
         @entry[popover]{The @class{gtk:popover} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when the popover is dismissed either through API or
+      user interaction.
   @end{dictionary}
   @see-constructor{gtk:popover-new}
   @see-slot{gtk:popover-autohide}
@@ -259,7 +259,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-autohide)
       "Accessor"
       (documentation 'popover-autohide 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-autohide object) => setting}
   @syntax{(setf (gtk:popover-autohide object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -292,7 +292,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-cascade-popdown)
       "Accessor"
       (documentation 'popover-cascade-popdown 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-cascade-popdown object) => setting}
   @syntax{(setf (gtk:popover-cascade-popdown object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -319,7 +319,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-child)
       "Accessor"
       (documentation 'popover-child 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-child object) => child}
   @syntax{(setf (gtk:popover-child object) child)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -345,7 +345,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-default-widget)
       "Accessor"
       (documentation 'popover-default-widget 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-default-widget object) => widget}
   @syntax{(setf (gtk:popover-default-widget object) widget)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -376,7 +376,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-has-arrow)
       "Accessor"
       (documentation 'popover-has-arrow 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-has-arrow object) => setting}
   @syntax{(setf (gtk:popover-has-arrow object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -404,7 +404,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-mnemonics-visible)
       "Accessor"
       (documentation 'popover-mnemonics-visible 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-mnemonics-visible object) => setting}
   @syntax{(setf (gtk:popover-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -429,7 +429,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-pointing-to)
       "Accessor"
       (documentation 'popover-pointing-to 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-pointing-to object) => rect}
   @syntax{(setf (gtk:popover-pointing-to object) rect)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -457,7 +457,7 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-position)
       "Accessor"
       (documentation 'popover-position 'function)
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @syntax{(gtk:popover-pointing-to object) => position}
   @syntax{(setf (gtk:popover-pointing-to object) position)}
   @argument[object]{a @class{gtk:popover} widget}
@@ -485,7 +485,7 @@ lambda (popover)    :run-last
 
 (defun popover-new ()
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{2024-10-26}
   @return{The new @class{gtk:popover} widget.}
   @short{Creates a new popover.}
   @see-class{gtk:popover}
@@ -500,16 +500,12 @@ lambda (popover)    :run-last
 
 (cffi:defcfun ("gtk_popover_popup" popover-popup) :void
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[popover]{a @class{gtk:popover} widget}
   @begin{short}
     Pops the popover up.
   @end{short}
-  This is different than a @fun{gtk:widget-show} call in that it shows the
-  popover with a transition. If you want to show the popover without a
-  transition, use the @fun{gtk:widget-show} function.
-  @see-class{gtk:popover}
-  @see-function{gtk:widget-show}"
+  @see-class{gtk:popover}"
   (popover (g:object popover)))
 
 (export 'popover-popup)
@@ -520,16 +516,15 @@ lambda (popover)    :run-last
 
 (cffi:defcfun ("gtk_popover_popdown" popover-popdown) :void
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[popover]{a @class{gtk:popover} widget}
   @begin{short}
     Pops the popover down.
   @end{short}
-  This is different than a @fun{gtk:widget-hide} call in that it shows the
-  popover with a transition. If you want to hide the popover without a
-  transition, use the @fun{gtk:widget-hide} function.
+  This may have the side-effect of closing a parent popover as well. See
+  the @slot[gtk:popover]{cascade-popdown} property.
   @see-class{gtk:popover}
-  @see-function{gtk:widget-hide}"
+  @see-function{gtk:popover-cascade-popdown}"
   (popover (g:object popover)))
 
 (export 'popover-popdown)
@@ -540,12 +535,18 @@ lambda (popover)    :run-last
 
 (cffi:defcfun ("gtk_popover_present" popover-present) :void
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @argument[popover]{a @class{gtk:popover} widget}
   @begin{short}
-    Presents the popover to the user.
+    Allocate a size for the @class{gtk:popover} widget.
   @end{short}
-  @see-class{gtk:popover}"
+  This function needs to be called in size-allocate by widgets who have a
+  @class{gtk:popover} widget as child. When using a layout manager, this is
+  happening automatically.
+
+  To make a popover appear on screen, use the @fun{gtk:popover-popup} function.
+  @see-class{gtk:popover}
+  @see-function{gtk:popover-popup}"
   (popover (g:object popover)))
 
 (export 'popover-present)
@@ -554,6 +555,9 @@ lambda (popover)    :run-last
 ;;; gtk_popover_get_offset
 ;;; gtk_popover_set_offset
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Is it possible to write a setf-expander macro which allows to
+;; assign multiple values?!
 
 (defun (setf popover-offset) (value popover)
   (destructuring-bind (xoffset yoffset) value
@@ -571,21 +575,21 @@ lambda (popover)    :run-last
 
 (defun popover-offset (popover)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2024-10-26}
   @syntax{(gtk:popover-offset popover) => xoffset, yoffset}
   @syntax{(setf (gtk:popover-offset popover) '(xoffset yoffset))}
   @argument[popover]{a @class{gtk:popover} widget}
   @argument[xoffset]{an integer with the xoffset}
   @argument[yoffset]{an integer with the yoffset}
   @begin{short}
-    Accessor of the offset values for the popover.
+    The @fun{gtk:popover-offset} function gets the offset to use when
+    calculating the position of the popover.
   @end{short}
-  The @fun{gtk:popover-offset} function gets the offset to use when calculating
-  the position of the popover. The @setf{gtk:popover-offset} function sets the
-  offset. These values are used when preparing the @class{gtk:popup-layout}
-  object for positioning the popover.
+  The @setf{gtk:popover-offset} function sets the offset. These values are used
+  when preparing the @class{gdk:popup-layout} object for positioning the
+  popover.
   @see-class{gtk:popover}
-  @see-class{gtk:popover-layout}"
+  @see-class{gdk:popup-layout}"
   (cffi:with-foreign-objects ((xoffset :int) (yoffset :int))
     (%popover-get-offset popover xoffset yoffset)
     (values (cffi:mem-ref xoffset :int)
