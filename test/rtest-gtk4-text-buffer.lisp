@@ -5,6 +5,41 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkTextBufferNotifyFlags
+
+(test gtk-text-buffer-notify-flags
+  ;; Check type
+  (is (g:type-is-flags "GtkTextBufferNotifyFlags"))
+  ;; Check registered name
+  (is (eq 'gtk:text-buffer-notify-flags
+          (glib:symbol-for-gtype "GtkTextBufferNotifyFlags")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkTextBufferNotifyFlags")
+          (g:gtype (cffi:foreign-funcall "gtk_text_buffer_notify_flags_get_type"
+                                         :size))))
+  ;; Check names
+  (is (equal '("GTK_TEXT_BUFFER_NOTIFY_BEFORE_INSERT"
+               "GTK_TEXT_BUFFER_NOTIFY_AFTER_INSERT"
+               "GTK_TEXT_BUFFER_NOTIFY_BEFORE_DELETE"
+               "GTK_TEXT_BUFFER_NOTIFY_AFTER_DELETE")
+             (glib-test:list-flags-item-names "GtkTextBufferNotifyFlags")))
+  ;; Check values
+  (is (equal '(1 2 4 8)
+             (glib-test:list-flags-item-values "GtkTextBufferNotifyFlags")))
+  ;; Check nick names
+  (is (equal '("before-insert" "after-insert" "before-delete" "after-delete")
+             (glib-test:list-flags-item-nicks "GtkTextBufferNotifyFlags")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkTextBufferNotifyFlags"
+                                     GTK:TEXT-BUFFER-NOTIFY-FLAGS
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_text_buffer_notify_flags_get_type")
+                       (:BEFORE-INSERT 1)
+                       (:AFTER-INSERT 2)
+                       (:BEFORE-DELETE 4)
+                       (:AFTER-DELETE 8))
+             (gobject:get-gtype-definition "GtkTextBufferNotifyFlags"))))
+
 ;;;     GtkTextBuffer
 
 (test gtk-text-buffer-class
@@ -168,9 +203,10 @@
 ;;;     gtk_text_buffer_delete_interactive
 
 (test gtk-text-buffer-delete
-  (let ((buffer (gtk:text-buffer-new (gtk:text-tag-table-new)))
-        (tag (gtk:text-tag-new "editable" :editable nil)))
-    (is-true (gtk:text-tag-table-add (gtk:text-buffer-tag-table buffer) tag))
+  (let* ((buffer (gtk:text-buffer-new (gtk:text-tag-table-new)))
+         (tag (gtk:text-tag-new "editable" :editable nil))
+         (table (gtk:text-buffer-tag-table buffer)))
+    (is-true (gtk:text-tag-table-add table tag))
     (is-true (setf (gtk:text-buffer-text buffer) "First second third"))
     ;; Make the text not editable
     (is-false (gtk:text-buffer-apply-tag buffer
@@ -204,7 +240,12 @@
                                       (gtk:text-buffer-iter-at-offset buffer 6)
                                       (gtk:text-buffer-iter-at-offset buffer 12)
                                       :interactive t :editable t))
-    (is (string= "First second third" (gtk:text-buffer-text buffer)))))
+    (is (string= "First second third" (gtk:text-buffer-text buffer)))
+    ;; Check memory management
+    (is-false (gtk:text-tag-table-remove table tag))
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_backspace
 
@@ -245,7 +286,11 @@
                  (gtk:text-buffer-get-slice buffer
                                             (gtk:text-buffer-start-iter buffer)
                                             (gtk:text-buffer-end-iter buffer)
-                                            nil)))))
+                                            nil)))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 1 (g:object-ref-count paintable)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_create_child_anchor
 ;;;     gtk_text_buffer_get_iter_at_child_anchor
@@ -260,7 +305,11 @@
     (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
 
     (is (eq #\t (gtk:text-iter-char iter)))
-    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))))
+    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 1 (g:object-ref-count anchor)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_insert_child_anchor
 
@@ -278,7 +327,11 @@
     (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
 
     (is (eq #\t (gtk:text-iter-char iter)))
-    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))))
+    (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 1 (g:object-ref-count anchor)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_create_mark
 ;;;     gtk_text_buffer_move_mark
@@ -304,7 +357,11 @@
     (is-true (gtk:text-iter-move iter))
     (is-false (gtk:text-buffer-move-mark buffer mark iter))
     (is (eq #\x (gtk:text-iter-char iter)))
-    (is (eq #\x (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer "Mark"))))))
+    (is (eq #\x (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer "Mark"))))
+    ;; Check memory management
+    (is-false (gtk:text-buffer-delete-mark buffer mark))
+    (is (= 1 (g:object-ref-count mark)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_add_mark
 ;;;     gtk_text_buffer_delete_mark
@@ -346,7 +403,12 @@
 
     (is-false (gtk:text-buffer-place-cursor buffer iter))
     (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer insert))))
-    (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer selection))))))
+    (is (eq #\t (gtk:text-iter-char (gtk:text-buffer-iter-at-mark buffer selection))))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 3 (g:object-ref-count insert)))
+    (is (= 3 (g:object-ref-count selection)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_select_range
 
@@ -355,9 +417,18 @@
                                 :text "Some text for the buffer."))
          (start (gtk:text-buffer-iter-at-offset buffer 5))
          (end (gtk:text-buffer-iter-at-offset buffer 10)))
+
+    (is (= 1 (g:object-ref-count buffer)))
+
     (is-false (gtk:text-buffer-select-range buffer start end))
+    ;; The last call adds a reference to BUFFER
+    (is (= 2 (g:object-ref-count buffer)))
+
     (is-true (gtk:text-buffer-delete-selection buffer))
-    (is (string= "Some for the buffer." (gtk:text-buffer-text buffer)))))
+    (is (string= "Some for the buffer." (gtk:text-buffer-text buffer)))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 2 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_apply_tag
 ;;;     gtk_text_buffer_apply_tag_by_name
@@ -385,7 +456,11 @@
     (is-false (gtk:text-buffer-remove-tag buffer "tag1" start end))
     (is-false (member tag1 (gtk:text-iter-tags start) :test #'eq))
     (is-false (gtk:text-buffer-remove-tag buffer tag2 start end))
-    (is-false (member tag2 (gtk:text-iter-tags start) :test #'eq))))
+    (is-false (member tag2 (gtk:text-iter-tags start) :test #'eq))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count tag1))) ; TODO: Can we reduce the references?
+    (is (= 3 (g:object-ref-count tag2)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_buffer_remove_all_tags
 
@@ -534,4 +609,8 @@
 ;;;     gtk_text_buffer_begin_irreversible_action
 ;;;     gtk_text_buffer_end_irreversible_action
 
-;;; 2024-9-20
+;;;     GtkTextBufferCommitNotify                           Since 4.16
+;;;     gtk_text_buffer_add_commit_notify                   Since 4.16
+;;;     gtk_text_buffer_remove_commit_notify                Since 4.16
+
+;;; 2024-10-26

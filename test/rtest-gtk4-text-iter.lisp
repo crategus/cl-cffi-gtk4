@@ -309,13 +309,19 @@ dann benutzen Sie es immer noch.")
                                 :text
                                 "Some sample text for the text buffer."))
          (iter (gtk:text-buffer-iter-at-offset buffer 12))
-         (paintable (gdk:texture-new-for-pixbuf (make-instance 'gdk:pixbuf))))
+         (pixbuf (make-instance 'gdk:pixbuf))
+         (paintable (gdk:texture-new-for-pixbuf pixbuf)))
     ;; Insert a paintable
     (gtk:text-buffer-insert-paintable buffer iter paintable)
     (let ((iter (gtk:text-buffer-iter-at-offset buffer 12)))
       (is (typep (gtk:text-iter-paintable iter) 'gdk:texture))
       (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter)))
-      (is (eq #\Nul (gtk:text-iter-char (gtk:text-buffer-end-iter buffer)))))))
+      (is (eq #\Nul (gtk:text-iter-char (gtk:text-buffer-end-iter buffer)))))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 2 (g:object-ref-count pixbuf)))
+    (is (= 1 (g:object-ref-count paintable)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;   gtk_text_iter_get_marks
 
@@ -323,10 +329,15 @@ dann benutzen Sie es immer noch.")
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
+         (mark (gtk:text-mark-new nil))
          (iter (gtk:text-buffer-iter-at-offset buffer 12)))
-    (gtk:text-buffer-add-mark buffer (gtk:text-mark-new nil t) iter)
+    (gtk:text-buffer-add-mark buffer mark iter)
     (is (eq 'gtk:text-mark
-            (type-of (first (gtk:text-iter-marks iter)))))))
+            (type-of (first (gtk:text-iter-marks iter)))))
+    ;; Check memory management
+    (is-false (gtk:text-buffer-delete-mark buffer mark))
+    (is (= 1 (g:object-ref-count mark)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;   gtk_text_iter_get_toggled_tags
 
@@ -347,7 +358,10 @@ dann benutzen Sie es immer noch.")
     (is (eq 'gtk:text-tag
             (type-of (first (gtk:text-iter-toggled-tags start t)))))
     ;; Remove tag from text tag table and text tag table from buffer
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))     ; TODO: Why 3 references?
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;   gtk_text_iter_get_child_anchor
 
@@ -355,12 +369,18 @@ dann benutzen Sie es immer noch.")
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
-         (iter (gtk:text-buffer-iter-at-offset buffer 12)))
-    (is (typep (gtk:text-buffer-create-child-anchor buffer iter)
+         (iter (gtk:text-buffer-iter-at-offset buffer 12))
+         (anchor nil))
+    (is (typep (setf anchor
+                     (gtk:text-buffer-create-child-anchor buffer iter))
                'gtk:text-child-anchor))
     ;; Move iter one char backwards
     (is-true (gtk:text-iter-move iter :count -1))
-    (is (typep (gtk:text-iter-child-anchor iter) 'gtk:text-child-anchor))))
+    (is (typep (gtk:text-iter-child-anchor iter) 'gtk:text-child-anchor))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
+    (is (= 1 (g:object-ref-count anchor)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_starts_tag
 ;;;     gtk_text_iter_ends_tag
@@ -384,7 +404,11 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-starts-tag end tag))
     (is-true (gtk:text-iter-ends-tag end tag))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))  ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_toggles_tag
 
@@ -404,7 +428,11 @@ dann benutzen Sie es immer noch.")
     (is-true (gtk:text-iter-toggles-tag start tag))
     (is-true (gtk:text-iter-toggles-tag end tag))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_has_tag
 
@@ -426,7 +454,11 @@ dann benutzen Sie es immer noch.")
     (is-true (gtk:text-iter-move end :count -1))
     (is-true (gtk:text-iter-has-tag end tag))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_get_tags
 
@@ -445,7 +477,11 @@ dann benutzen Sie es immer noch.")
     (is (member tag (gtk:text-iter-tags start) :test #'eq))
     (is-false (gtk:text-iter-tags end))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_editable
 
@@ -468,7 +504,11 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-editable end nil))
     (is-true (gtk:text-iter-editable end t))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_can_insert
 
@@ -491,7 +531,11 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-can-insert end nil))
     (is-true (gtk:text-iter-can-insert end t))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_starts_word
 ;;;     gtk_text_iter_ends_word
@@ -538,7 +582,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;     gtk_text_iter_is_cursor_position
 
-(test gtk-text-iter-is-cursor-postion
+(test gtk-text-iter-is-cursor-position
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -692,7 +736,11 @@ dann benutzen Sie es immer noch.")
     (is-true (gtk:text-iter-backward-to-tag-toggle end tag))
     (is (= 16 (gtk:text-iter-offset end)))
     ;; Remove tag from text tag table
-    (is-false (gtk:text-tag-table-remove table tag))))
+    (is-false (gtk:text-tag-table-remove table tag))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count table)))   ; TODO: Why 3 references?!
+    (is (= 1 (g:object-ref-count tag)))
+    (is (= 1 (g:object-ref-count buffer)))))
 
 ;;;     gtk_text_iter_forward_find_char
 ;;;     gtk_text_iter_backward_find_char
@@ -792,4 +840,4 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-in-range start end center))
     (is-false (gtk:text-iter-in-range end center start))))
 
-;;; 2024-10-10
+;;; 2024-10-26

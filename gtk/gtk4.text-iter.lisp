@@ -2,7 +2,7 @@
 ;;; gtk4.text-iter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -146,7 +146,7 @@
 ;;; GtkTextSearchFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkTextSearchFlags" text-search-flags
+(gobject:define-gflags "GtkTextSearchFlags" text-search-flags
   (:export t
    :type-initializer "gtk_text_search_flags_get_type")
   (:visible-only 1)
@@ -159,7 +159,7 @@
       (liber:symbol-documentation 'text-search-flags)
  "@version{2024-7-1}
   @begin{declaration}
-(gobject:define-g-flags \"GtkTextSearchFlags\" text-search-flags
+(gobject:define-gflags \"GtkTextSearchFlags\" text-search-flags
   (:export t
    :type-initializer \"gtk_text_search_flags_get_type\")
   (:visible-only 1)
@@ -212,7 +212,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque text-iter "GtkTextIter"
+(glib:define-gboxed-opaque text-iter "GtkTextIter"
   :type-initializer "gtk_text_iter_get_type"
   :alloc (%text-iter-alloc))
 
@@ -222,7 +222,7 @@
       (documentation 'text-iter 'type)
  "@version{2024-7-1}
   @begin{declaration}
-(glib:define-g-boxed-opaque text-iter \"GtkTextIter\"
+(glib:define-gboxed-opaque text-iter \"GtkTextIter\"
   :export t
   :type-initializer \"gtk_text_iter_get_type\"
   :alloc (%text-iter-alloc))
@@ -436,11 +436,11 @@
   iterator moves to the start of the next line. See the
   @fun{gtk:text-iter-line-index} function if you have a byte index rather than
   a character offset.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function combines the @code{*_line_offset()} and
     @code{*_visible_line_offset()} functions into one, using the @arg{visible}
     keyword argument.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-iter-line-index}"
@@ -501,11 +501,11 @@
   require a variable number of bytes to represent. The given byte index must be
   at the start of a character, it cannot be in the middle of a UTF-8 encoded
   character.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function combines the @code{*_line_index()} and
     @code{*_visible_line_index()} functions into one, using the @arg{visible}
     keyword argument.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-iter-line-offset}"
@@ -1210,8 +1210,8 @@
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is the end iterator.}
   @begin{short}
-    Returns @em{true} if the iterator is the end iterator, i.e. one past the
-    last dereferenceable iterator in the text buffer.
+    Returns @em{true} if the iterator is the end iterator, that is, one past
+    the last dereferenceable iterator in the text buffer.
   @end{short}
   The @fun{gtk:text-iter-is-end} function is the most efficient way to check
   whether an iterator is the end iterator.
@@ -1801,11 +1801,11 @@
   the iterator is set to @arg{limit} if @arg{limit} is non-@code{nil}, otherwise
   to the end iterator. The @arg{limit} keyword argument has the @code{nil}
   default value.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function combines the @code{gtk_text_iter_forward_find_char()} and
     @code{gtk_text_iter_backward_find_char()} functions into one single
     function using the @arg{direction} keyword argument.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-symbol{gtk:text-char-predicate}"
@@ -1882,10 +1882,10 @@
 
   The @arg{start} value will never be set to an iterator located before
   @arg{iter}, even if there is a possible @arg{end} after or at @arg{iter}.
-  @begin{notes}
+  @begin[Notes]{dictionary}
   This function combines the @code{gtk_text_iter_forward_search()} and
   @code{gtk_text_iter_backward_search()} functions into one function.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-symbol{gtk:text-search-flags}"

@@ -2,7 +2,7 @@
 ;;; gtk4.text-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -216,7 +216,7 @@
 ;;; GtkTextWindowType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTextWindowType" text-window-type
+(gobject:define-genum "GtkTextWindowType" text-window-type
   (:export t
    :type-initializer "gtk_text_window_type_get_type")
   (:widget 1)
@@ -232,7 +232,7 @@
       (liber:symbol-documentation 'text-window-type)
  "@version{2024-7-4}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTextWindowType\" text-window-type
+(gobject:define-genum \"GtkTextWindowType\" text-window-type
   (:export t
    :type-initializer \"gtk_text_window_type_get_type\")
   (:widget 1)
@@ -261,7 +261,7 @@
 ;;; GtkTextExtendSelection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTextExtendSelection" text-extend-selection
+(gobject:define-genum "GtkTextExtendSelection" text-extend-selection
   (:export t
    :type-initializer "gtk_text_extend_selection_get_type")
   (:word 0)
@@ -273,7 +273,7 @@
       (liber:symbol-documentation 'text-extend-selection)
  "@version{2024-7-4}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTextExtendSelection\" text-extend-selection
+(gobject:define-genum \"GtkTextExtendSelection\" text-extend-selection
   (:export t
    :type-initializer \"gtk_text_extend_selection_get_type\")
   (:word 0)
@@ -297,7 +297,7 @@
 ;;; GtkTextChildAnchor
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTextChildAnchor" text-child-anchor
+(gobject:define-gobject "GtkTextChildAnchor" text-child-anchor
   (:superclass g:object
     :export t
     :interfaces nil
@@ -320,22 +320,21 @@
 ;;; gtk_text_child_anchor_new
 ;;; ----------------------------------------------------------------------------
 
-;; Note: It is wrong to use the MAKE-INSTANCE function to create and return
-;; a GTK:TEXT-CHILD-ANCHOR object. The replacement character will not be
+;; Note: It is wrong to use MAKE-INSTANCE to create and return a
+;; GTK:TEXT-CHILD-ANCHOR object. The replacement character will not be
 ;; initialized correctly and the code crashes that uses this child anchor.
 
 (cffi:defcfun ("gtk_text_child_anchor_new" text-child-anchor-new)
-    (g:object text-child-anchor)
+    (g:object text-child-anchor :already-referenced)
  #+liber-documentation
- "@version{2024-7-4}
+ "@version{2024-10-26}
   @return{The new @class{gtk:text-child-anchor} object.}
   @begin{short}
     Creates a new @class{gtk:text-child-anchor} object.
   @end{short}
   Usually you would then insert it into a text buffer with the
-  @fun{gtk:text-buffer-insert-child-anchor} function. To perform the creation
-  and insertion in one step, use the convenience
-  @fun{gtk:text-buffer-create-child-anchor} function.
+  @fun{gtk:text-buffer-insert-child-anchor} function. To create and insert in
+  one step, use the @fun{gtk:text-buffer-create-child-anchor} function.
   @see-class{gtk:text-child-anchor}
   @see-function{gtk:text-buffer-insert-child-anchor}
   @see-function{gtk:text-buffer-create-child-anchor}")
@@ -349,9 +348,9 @@
 #+gtk-4-6
 (cffi:defcfun ("gtk_text_child_anchor_new_with_replacement"
                text-child-anchor-new-with-replacement)
-    (g:object text-child-anchor)
+    (g:object text-child-anchor :already-referenced)
  #+liber-documentation
- "@version{2024-7-4}
+ "@version{2024-10-26}
   @argument[character]{a string with a replacement character}
   @return{The new @class{gtk:text-child-anchor} object.}
   @begin{short}
@@ -424,7 +423,7 @@
 ;;; GtkTextView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTextView" text-view
+(gobject:define-gobject "GtkTextView" text-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleText"
@@ -540,46 +539,39 @@ textview.view
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user asks
-      for it. The default bindings for this signal are the @kbd{Backspace} and
-      @kbd{Shift-Backspace} keys.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user asks
+      for it. The default bindings for this signal are the @kbd{Backspace} and
+      @kbd{Shift-Backspace} keys.
     @subheading{The \"copy-clipboard\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to copy the
-      selection to the clipboard. The default bindings for this signal are the
-      @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to copy the
+      selection to the clipboard. The default bindings for this signal are the
+      @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
     @subheading{The \"cut-clipboard\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to cut the selection
-      to the clipboard. The default bindings for this signal are the
-      @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to cut the selection
+      to the clipboard. The default bindings for this signal are the
+      @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
     @subheading{The \"delete-from-cursor\" signal}
       @begin{pre}
 lambda (view granularity count)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      initiates a text deletion. If the granularity is @code{:chars}, GTK
-      deletes the selection if there is one, otherwise it deletes the requested
-      number of characters. The default bindings for this signal are the
-      @kbd{Delete} key for deleting a character, the @kbd{Ctrl-Delete} key for
-      deleting a word and the @kbd{Ctrl-Backspace} key for deleting a word
-      backwords.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
@@ -587,12 +579,17 @@ lambda (view granularity count)    :action
           @symbol{gtk:delete-type} enumeration.}
         @entry[count]{The integer with the number of type units to delete.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      initiates a text deletion. If the granularity is @code{:chars}, GTK
+      deletes the selection if there is one, otherwise it deletes the requested
+      number of characters. The default bindings for this signal are the
+      @kbd{Delete} key for deleting a character, the @kbd{Ctrl-Delete} key for
+      deleting a word and the @kbd{Ctrl-Backspace} key for deleting a word
+      backwords.
     @subheading{The \"extend-selection\" signal}
       @begin{pre}
 lambda (view granularity location start end)    :run-last
       @end{pre}
-      The signal is emitted when the selection needs to be extended at the
-      @arg{location} iterator.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
@@ -607,33 +604,43 @@ lambda (view granularity location start end)    :run-last
         @entry[Returns]{@em{True} to stop other handlers from being invoked for
           the event, @em{false} to propagate the event further.}
       @end{table}
+      The signal is emitted when the selection needs to be extended at the
+      @arg{location} iterator.
     @subheading{The \"insert-at-cursor\" signal}
       @begin{pre}
 lambda (view text)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user
-      initiates the insertion of text at the cursor. The signal has no default
-      bindings.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
         @entry[text]{The string with the text to insert.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user
+      initiates the insertion of text at the cursor. The signal has no default
+      bindings.
     @subheading{The \"insert-emoji\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      This signal is a keybinding signal which gets emitted to present the Emoji
-      chooser for the text view. The default bindings for this signal are
-      @code{Ctrl-.} and @code{Ctrl-;}.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      This signal is a keybinding signal which gets emitted to present the Emoji
+      chooser for the text view. The default bindings for this signal are
+      @code{Ctrl-.} and @code{Ctrl-;}.
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
 lambda (view step count extend)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:text-view} widget which received the
+          signal.}
+        @entry[step]{The granularity of the move, as a value of the
+          @symbol{gtk:movement-step} enumeration.}
+        @entry[count]{The integer with the number of step units to move.}
+        @entry[extend]{@em{True} if the move should extend the selection.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. If the cursor is not visible in the text
       view, this signal causes the viewport to be moved instead. Applications
@@ -647,22 +654,10 @@ lambda (view step count extend)    :action
       @kbd{Home}/@kbd{End} keys move to the ends of the text buffer. The
       @kbd{PageUp}/@kbd{PageDown} keys move vertically by pages. The
       @kbd{Ctrl-PageUp}/@kbd{PageDown} keys move horizontally by pages.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:text-view} widget which received the
-          signal.}
-        @entry[step]{The granularity of the move, as a value of the
-          @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
-        @entry[extend]{@em{True} if the move should extend the selection.}
-      @end{table}
     @subheading{The \"move-viewport\" signal}
       @begin{pre}
 lambda (view step count)    :action
       @end{pre}
-      The signal is a keybinding signal which can be bound to key combinations
-      to allow the user to move the viewport, that is, to change what part of
-      the text view is visible in a scrolled window. There are no default
-      bindings for this signal.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
@@ -670,76 +665,80 @@ lambda (view step count)    :action
           @symbol{gtk:movement-step} enumeration.}
         @entry[count]{The integer with the number of step units to move.}
       @end{table}
+      The signal is a keybinding signal which can be bound to key combinations
+      to allow the user to move the viewport, that is, to change what part of
+      the text view is visible in a scrolled window. There are no default
+      bindings for this signal.
     @subheading{The \"paste-clipboard\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to paste the
-      contents of the clipboard into the text view. The default bindings for
-      this signal are the @kbd{Ctrl-v} and @code{Shift-Insert} keys.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to paste the
+      contents of the clipboard into the text view. The default bindings for
+      this signal are the @kbd{Ctrl-v} and @code{Shift-Insert} keys.
     @subheading{The \"preedit-changed\" signal}
       @begin{pre}
 lambda (view preedit)    :action
       @end{pre}
-      If an input method is used, the typed text will not immediately be
-      committed to the text buffer. So if you are interested in the text,
-      connect to this signal. The signal is only emitted if the text at the
-      given position is actually editable.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} object which received the
           signal.}
         @entry[preedit]{The string with the current preedit text.}
       @end{table}
+      If an input method is used, the typed text will not immediately be
+      committed to the text buffer. So if you are interested in the text,
+      connect to this signal. The signal is only emitted if the text at the
+      given position is actually editable.
     @subheading{The \"select-all\" signal}
       @begin{pre}
 lambda (view select)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to select or unselect
-      the complete contents of the text view. The default bindings for the
-      signal are the @kbd{Ctrl-a} and @kbd{Ctrl-/} keys for selecting and the
-      @kbd{Shift-Ctrl-a} and @kbd{Ctrl-\} keys for unselecting.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
         @entry[select]{@em{True} to select, @em{false} to unselect.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to select or unselect
+      the complete contents of the text view. The default bindings for the
+      signal are the @kbd{Ctrl-a} and @kbd{Ctrl-/} keys for selecting and the
+      @kbd{Shift-Ctrl-a} and @kbd{Ctrl-\} keys for unselecting.
     @subheading{The \"set-anchor\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:text-view} widget which received the
+          signal.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates setting the \"anchor\" mark. The \"anchor\" mark gets placed at
       the same position as the \"insert\" mark. The signal has no default
       bindings.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:text-view} widget which received the
-          signal.}
-      @end{table}
     @subheading{The \"toggle-cursor-visible\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      This  signal is a keybinding signal which gets emitted to toggle the
-      visibility of the cursor. The default binding for this signal is @kbd{F7}.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      This  signal is a keybinding signal which gets emitted to toggle the
+      visibility of the cursor. The default binding for this signal is @kbd{F7}.
     @subheading{The \"toggle-overwrite\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to toggle the
-      overwrite mode of the text view. The default bindings for this signal is
-      the @kbd{Insert} key.
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} widget which received the
           signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to toggle the
+      overwrite mode of the text view. The default bindings for this signal is
+      the @kbd{Insert} key.
   @end{dictionary}
   @see-constructor{gtk:text-view-new}
   @see-constructor{gtk:text-view-new-with-buffer}
@@ -1491,10 +1490,10 @@ lambda (view)    :action
   arguments, the text scrolls the minimal distance to get the mark onscreen,
   possibly not scrolling at all. The effective screen for purposes of this
   function is reduced by a margin of size @arg{margin}.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The double float arguments take any number. The numbers are coerced to
     double float values.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-view}
   @see-class{gtk:text-mark}"
   (%text-view-scroll-to-mark view
@@ -1548,10 +1547,10 @@ lambda (view)    :action
   computations. To avoid oddness, consider using the
   @fun{gtk:text-view-scroll-to-mark} function which saves a point to be scrolled
   to after line validation.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The double float arguments take any number. The numbers are coerced to
     double float values.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-scroll-to-mark}"
@@ -2033,13 +2032,13 @@ lambda (view)    :action
   paragraphs will be the same. Display lines are divided differently for each
   view, since they depend on the width of the text view. Paragraphs are the
   same in all text views, since they depend on the contents of the text buffer.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function combines the @code{gtk_text_view_forward_display_line ()},
     @code{gtk_text_view_forward_display_line_end()},
     @code{gtk_text_view_backward_display_line()}, and
     @code{gtk_text_view_backward_display_line_start()} functions into one
     Lisp function.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}"
   (assert (typep direction '(member :forward :backward)))
@@ -2120,7 +2119,7 @@ lambda (view)    :action
  #+liber-documentation
  "@version{2024-7-4}
   @argument[view]{a @class{gtk:text-view} widget}
-  @argument[child]{a @class{gtk:widget} widget}
+  @argument[child]{a @class{gtk:widget} object}
   @argument[anchor]{a @class{gtk:text-child-anchor} object in the text buffer
     for @arg{view}}
   @begin{short}
@@ -2143,7 +2142,7 @@ lambda (view)    :action
  #+liber-documentation
  "@version{#2024-7-4}
   @argument[view]{a @class{gtk:text-view} object}
-  @argument[child]{a @class{gtk:widget} widget to remove}
+  @argument[child]{a @class{gtk:widget} object to remove}
   @short{Removes a child widget from the text view.}
   @see-class{gtk:text-view}
   @see-class{gtk:widget}"
@@ -2172,7 +2171,7 @@ lambda (view)    :action
   @syntax{(setf (gtk:text-view-gutter view win) widget)}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[wtype]{a @symbol{gtk:text-window-type} value}
-  @argument[widget]{a @class{gtk:widget} widget or @code{nil}}
+  @argument[widget]{a @class{gtk:widget} object or @code{nil}}
   @begin{short}
     The @fun{gtk:text-view-gutter} function gets @arg{widget} that has
     previously been set.

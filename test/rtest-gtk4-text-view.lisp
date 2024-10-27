@@ -257,7 +257,10 @@
     (is (= 0 (gtk:text-view-right-margin view)))
     (is-false (gtk:text-view-tabs view))
     (is (= 0 (gtk:text-view-top-margin view)))
-    (is (eq :none (gtk:text-view-wrap-mode view)))))
+    (is (eq :none (gtk:text-view-wrap-mode view)))
+    ;; Check memory management
+    (is-false (setf (gtk:text-view-buffer view) nil))
+    (is (= 1 (g:object-ref-count view)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -291,7 +294,11 @@
         (view nil))
     (is (typep (setf view
                      (gtk:text-view-new-with-buffer buffer)) 'gtk:text-view))
-    (is (eq buffer (gtk:text-view-buffer view)))))
+    (is (eq buffer (gtk:text-view-buffer view)))
+    ;; Check memory management
+    (is-false (setf (gtk:text-view-buffer view) nil))
+    (is (= 1 (g:object-ref-count buffer)))
+    (is (= 1 (g:object-ref-count view)))))
 
 ;;;     gtk_text_view_scroll_to_mark
 ;;;     gtk_text_view_scroll_to_iter
@@ -326,4 +333,4 @@
 ;;;     gtk_text_view_get_ltr_context                      Since 4.4
 ;;;     gtk_text_view_get_rtl_context                      Since 4.4
 
-;;; 2024-9-20
+;;; 2024-10-26

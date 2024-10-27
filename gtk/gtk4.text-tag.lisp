@@ -2,7 +2,7 @@
 ;;; gtk4.text-tag.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -145,7 +145,7 @@
 ;;; GtkTextTag
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTextTag" text-tag
+(gobject:define-gobject "GtkTextTag" text-tag
   (:superclass g:object
    :export t
    :interfaces nil
@@ -645,7 +645,7 @@
     Accessor of the @slot[gtk:text-tag]{background} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The @slot[gtk:text-tag]{background} property is not readable, but writable.
     @begin{pre}
 (defvar tag (gtk:text-tag-new nil)) => TAG
@@ -653,7 +653,7 @@
 (gtk:text-tag-background-rgba tag)
 => #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
     @end{pre}
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background-rgba}
   @see-function{gtk:text-tag-background-set}")
@@ -1074,7 +1074,7 @@
     Accessor of the @slot[gtk:text-tag]{foreground} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The @slot[gtk:text-tag]{foreground} property is not readable, but writable.
     @begin{pre}
 (defvar tag (gtk:text-tag-new nil)) => TAG
@@ -1082,7 +1082,7 @@
 (gtk:text-tag-foreground-rgba tag)
 => #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
     @end{pre}
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-foreground-rgba}
   @see-function{gtk:text-tag-foreground-set}")
@@ -2968,13 +2968,13 @@
   @begin{short}
     Creates a new tag.
   @end{short}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Create a tag with name \"font-italic\":
     @begin{pre}
 (gtk:text-tag-new \"font-italic\" :font \"fixed\" :style :italic)
 => #<gtk:text-tag {1006C86E63@}>
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:text-tag}"
   (if name
       (apply #'make-instance 'text-tag :name name args)
@@ -2996,7 +2996,7 @@
 
 (cffi:defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
  #+liber-documentation
- "@version{2024-7-2}
+ "@version{2024-10-26}
   @syntax{(gtk:text-tag-priority tag) => priority}
   @syntax{(setf (gtk:text-tag-priority tag) priority)}
   @argument[tag]{a @class{gtk:text-tag} object}
@@ -3008,8 +3008,8 @@
 
   Valid priorities start at 0 and go to one less than the value of the result
   of the @fun{gtk:text-tag-table-size} function. Each tag in a
-  @class{gtk:tag-table} object has a unique priority. Setting the priority of
-  one tag shifts the priorities of all the other tags in the tag table to
+  @class{gtk:text-tag-table} object has a unique priority. Setting the priority
+  of one tag shifts the priorities of all the other tags in the tag table to
   maintain a unique priority for each tag. Higher priority tags \"win\" if two
   tags both set the same text attribute. When adding a tag to a tag table, it
   will be assigned the highest priority in the tag table by default. So normally
