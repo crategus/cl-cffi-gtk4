@@ -2,7 +2,7 @@
 ;;; gtk4.paper-size.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -147,7 +147,7 @@
 ;;; GtkUnit
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkUnit" unit
+(gobject:define-genum "GtkUnit" unit
   (:export t
    :type-initializer "gtk_unit_get_type")
   (:none 0)
@@ -162,7 +162,7 @@
       (liber:symbol-documentation 'unit)
  "@version{2023-1-31}
   @begin{declaration}
-(gobject:define-g-enum \"GtkUnit\" unit
+(gobject:define-genum \"GtkUnit\" unit
   (:export t
    :type-initializer \"gtk_unit_get_type\")
   (:none 0)
@@ -185,7 +185,7 @@
 ;;; GtkPaperSize
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque paper-size "GtkPaperSize"
+(glib:define-gboxed-opaque paper-size "GtkPaperSize"
   :type-initializer "gtk_paper_size_get_type"
   :alloc (cffi:foreign-funcall "gtk_paper_size_new"
                                :pointer (cffi:null-pointer)
@@ -691,7 +691,7 @@
     Returns the name of the default paper size, which depends on the current
     locale.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:paper-size-default) => \"iso_a4\"
     @end{pre}
@@ -790,7 +790,7 @@
   @begin{short}
     Serialize a paper size to a @code{a{sv@}} variant instance.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:paper-size-to-gvariant (gtk:paper-size-new))
 => #.(SB-SYS:INT-SAP #X00F02070)

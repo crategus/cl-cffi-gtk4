@@ -151,7 +151,7 @@
       (liber:symbol-documentation 'page-orientation)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPageOrienation\" page-orientation
+(gobject:define-genum \"GtkPageOrienation\" page-orientation
   (:export t
    :type-initializer \"gtk_page_orientation_get_type\")
   :portrait
@@ -188,7 +188,7 @@
       (liber:symbol-documentation 'print-duplex)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPrintDuplex\" print-duplex
+(gobject:define-genum \"GtkPrintDuplex\" print-duplex
   (:export t
    :type-initializer \"gtk_print_duplex_get_type\")
   :simplex
@@ -224,7 +224,7 @@
       (liber:symbol-documentation 'print-quality)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPrintQuality\" print-quality
+(gobject:define-genum \"GtkPrintQuality\" print-quality
   (:export t
    :type-initializer \"gtk_print_quality_get_type\")
   :low
@@ -266,7 +266,7 @@
       (liber:symbol-documentation 'number-up-layout)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkNubmerUpLayout\" number-up-layout
+(gobject:define-genum \"GtkNubmerUpLayout\" number-up-layout
   (:export t
    :type-initializer \"gtk_number_up_layout_get_type\")
   (:left-to-right-top-to-bottom 0)
@@ -315,7 +315,7 @@
       (liber:symbol-documentation 'print-pages)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPrintPages\" print-pages
+(gobject:define-genum \"GtkPrintPages\" print-pages
   (:export t
    :type-initializer \"gtk_print_pages_get_type\")
   (:all 0)
@@ -377,7 +377,7 @@
       (liber:symbol-documentation 'page-set)
  "@version{2024-2-17}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPageSet\" page-set
+(gobject:define-genum \"GtkPageSet\" page-set
   (:export t
    :type-initializer \"gtk_page_set_get_type\")
   (:all 0)
@@ -539,7 +539,7 @@
     Deserialize print settings from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:print-settings-to-gvariant} function.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let* ((variant (g:variant-parse \"a{sv@}\"
                                  \"{'scale': <'100'>,
@@ -847,7 +847,7 @@
   @end{short}
   The @setf{gtk:print-settings-length} function associates a length in units of
   @arg{unit} with @arg{key}.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
  (setq settings (make-instance 'gtk:print-settings))
 => #<gtk:print-settings {1004A34623@}>
@@ -1013,7 +1013,7 @@
   The @setf{gtk:print-settings-paper-size} function sets the value of the
   @code{\"paper-format\"}, @code{\"paper-width\"}, and @code{\"paper-height\"}
   settings.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
  (setq settings (make-instance 'gtk:print-settings))
 => #<gtk:print-settings {1001A0F643@}>
@@ -1565,7 +1565,7 @@
   @end{short}
   The @setf{gtk:print-settings-page-ranges} function sets the value of the
   @code{\"page-ranges\"} setting.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
  (setq settings (gtk:print-settings-new))
 => #<gtk:print-settings {1001929323@}>

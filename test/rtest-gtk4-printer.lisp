@@ -6,9 +6,11 @@
 ;;;     GtkPrinterFunc
 ;;;     gtk_enumerate_printers
 
+#+nil
 (defvar *default-printer* nil)
 
 ;; Get a default printer for more tests
+#+nil
 (test gtk-enumerate-printers
   (when *first-run-gtk-test*
     (let (printers)
@@ -125,8 +127,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-printer-properties
-  (when *default-printer*
-    (let ((printer *default-printer*))
+  (let ((printer (get-default-printer)))
+    (when printer
       (is-true (gtk:printer-accepting-jobs printer))
       (is-true (gtk:printer-accepts-pdf printer))
       (is-true (gtk:printer-accepts-ps printer))
@@ -164,47 +166,54 @@
 ;;;     gtk_printer_new
 
 (test gtk-printer-new
-  (when *default-printer*
-    (let ((backend (gtk:printer-backend *default-printer*)))
-      (is (typep (gtk:printer-new "printer" backend t) 'gtk:printer))
-      (is (typep (gtk:printer-new "printer" backend nil) 'gtk:printer)))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (let ((backend (gtk:printer-backend printer)))
+        (is (typep (gtk:printer-new "printer" backend t) 'gtk:printer))
+        (is (typep (gtk:printer-new "printer" backend nil) 'gtk:printer))))))
 
 ;;;     gtk_printer_get_description
 
 (test gtk-printer-description
-  (when *default-printer*
-    (is-false (gtk:printer-description *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-description printer)))))
 
 ;;;     gtk_printer_is_active
 
 (test gtk-printer-is-active
-  (when *default-printer*
-    (is-true (gtk:printer-is-active *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-true (gtk:printer-is-active printer)))))
 
 ;;;     gtk_printer_is_paused
 
 (test gtk-printer-is-paused
-  (when *default-printer*
-    (is-false (gtk:printer-is-paused *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-is-paused printer)))))
 
 ;;;     gtk_printer_is_accepting_jobs
 
 (test gtk-printer-is-accepting-jobs
-  (when *default-printer*
-    (is-true (gtk:printer-is-accepting-jobs *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-true (gtk:printer-is-accepting-jobs printer)))))
 
 ;;;     gtk_printer_is_default
 
 (test gtk-printer-is-default
-  (when *default-printer*
-    (is-false (gtk:printer-is-default *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-is-default printer)))))
 
 ;;;     gtk_printer_list_papers
 
 (test gtk-printer-list-papers
-  (when *default-printer*
-    (is (every (lambda (x) (typep x 'gtk:page-setup))
-               (gtk:printer-list-papers *default-printer*)))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is (every (lambda (x) (typep x 'gtk:page-setup))
+                 (gtk:printer-list-papers printer))))))
 
 ;;;     gtk_printer_compare
 
@@ -212,46 +221,50 @@
 ;;;     gtk_printer_request_details
 
 (test gtk-printer-has/request-details
-  (when *default-printer*
-    (let (has-details msg)
+  (let ((printer (get-default-printer)))
+    (when printer
+      (let (has-details msg)
 
-      (g:signal-connect *default-printer* "details-acquired"
-              (lambda (printer success)
-                (setf msg (format nil "~a ~a"
-                                  (gtk:printer-name printer)
-                                  success))))
+        (g:signal-connect printer "details-acquired"
+                (lambda (printer success)
+                  (setf msg (format nil "~a ~a"
+                                    (gtk:printer-name printer)
+                                    success))))
 
-      (is-true (setf has-details
-                     (gtk:printer-has-details *default-printer*)))
-      (when has-details
-        (is-false (gtk:printer-request-details *default-printer*))
-        ;; TODO: The signal handler is not called. Why?!
-        (is-false msg)))))
+        (is-true (setf has-details
+                       (gtk:printer-has-details printer)))
+        (when has-details
+          (is-false (gtk:printer-request-details printer))
+          ;; TODO: The signal handler is not called. Why?!
+          (is-false msg))))))
 
 ;;;     gtk_printer_get_capabilities
 
 (test gtk-printer-capabilities
-  (when *default-printer*
-    (is-false (gtk:printer-capabilities *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-capabilities printer)))))
 
 ;;;     gtk_printer_get_default_page_size
 
 (test gtk-printer-default-page-size
-  (when *default-printer*
-    (is-false (gtk:printer-default-page-size *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-default-page-size printer)))))
 
 ;;;     gtk_printer_get_hard_margins
 
 (test gtk-printer-hard-margins
-  (when *default-printer*
-    (is-false (gtk:printer-hard-margins *default-printer*))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (is-false (gtk:printer-hard-margins printer)))))
 
 ;;;     gtk_printer_get_hard_margins_for_paper_size
 
 (test gtk-printer-hard-margins-for-paper-size
-  (when *default-printer*
-    (let ((size (gtk:paper-size-new (gtk:paper-size-default))))
-      (is-false (gtk:printer-hard-margins-for-paper-size *default-printer*
-                                                         size)))))
+  (let ((printer (get-default-printer)))
+    (when printer
+      (let ((size (gtk:paper-size-new (gtk:paper-size-default))))
+        (is-false (gtk:printer-hard-margins-for-paper-size printer size))))))
 
-;;; 2024-10-13
+;;; 2024-10-27

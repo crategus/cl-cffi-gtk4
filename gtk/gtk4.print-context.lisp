@@ -2,7 +2,7 @@
 ;;; gtk4.print-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,7 @@
 ;;; GtkPrintContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPrintContext" print-context
+(gobject:define-gobject "GtkPrintContext" print-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -82,7 +82,7 @@
   The @class{gtk:print-context} object gets passed to the
   @code{\"begin-print\"}, @code{\"end-print\"}, @code{\"request-page-setup\"}
   and @code{\"draw-page\"} signal handlers on the print operation.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Using the @class{gtk:print-context} object in a @code{draw-page} callback
     function.
     @begin{pre}
@@ -122,7 +122,7 @@
   @see-class{gtk:print-operation}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_cairo_context ()
+;;; gtk_print_context_get_cairo_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_cairo_context"
@@ -143,7 +143,7 @@
 (export 'print-context-cairo-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_set_cairo_context ()
+;;; gtk_print_context_set_cairo_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_set_cairo_context"
@@ -179,7 +179,7 @@
 (export 'print-context-set-cairo-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_page_setup ()
+;;; gtk_print_context_get_page_setup
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_page_setup" print-context-page-setup)
@@ -200,7 +200,7 @@
 (export 'print-context-page-setup)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_width ()
+;;; gtk_print_context_get_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_width" print-context-width) :double
@@ -218,7 +218,7 @@
 (export 'print-context-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_height ()
+;;; gtk_print_context_get_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_height" print-context-height) :double
@@ -236,7 +236,7 @@
 (export 'print-context-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_dpi_x ()
+;;; gtk_print_context_get_dpi_x
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_dpi_x" print-context-dpi-x) :double
@@ -254,7 +254,7 @@
 (export 'print-context-dpi-x)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_dpi_y ()
+;;; gtk_print_context_get_dpi_y
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_dpi_y" print-context-dpi-y) :double
@@ -272,7 +272,7 @@
 (export 'print-context-dpi-y)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_pango_fontmap ()
+;;; gtk_print_context_get_pango_fontmap
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_pango_fontmap"
@@ -291,7 +291,7 @@
 (export 'print-context-pango-fontmap)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_create_pango_context ()
+;;; gtk_print_context_create_pango_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_create_pango_context"
@@ -311,7 +311,7 @@
 (export 'print-context-create-pango-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_create_pango_layout ()
+;;; gtk_print_context_create_pango_layout
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_create_pango_layout"
@@ -330,7 +330,7 @@
 (export 'print-context-create-pango-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_context_get_hard_margins ()
+;;; gtk_print_context_get_hard_margins
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_context_get_hard_margins"

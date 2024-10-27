@@ -2,7 +2,7 @@
 ;;; gtk4.page-setup.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,7 +78,7 @@
 ;;; GtkPageSetup
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPageSetup" page-setup
+(gobject:define-gobject "GtkPageSetup" page-setup
   (:superclass g:object
    :export t
    :interfaces nil
@@ -98,16 +98,16 @@
   affect the actual layout of the page, and thus need to be set long before
   user prints.
 
-  The margins specified in this object are the \"print margins\", i.e. the
+  The margins specified in this object are the \"print margins\". These are the
   parts of the page that the printer cannot print on. These are different from
-  the layout margins that a word processor uses. They are typically used to
+  the layout margins used by a word processor. They are typically used to
   determine the minimal size for the layout margins.
 
   To obtain a @class{gtk:page-setup} object use the function
   @fun{gtk:page-setup-new} to get the defaults, or use the function
   @fun{gtk:print-run-page-setup-dialog} to show the page setup dialog and
   receive the resulting page setup.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     A page setup dialog.
     @begin{pre}
 (defun do-page-setup (settings page-setup)
@@ -117,7 +117,7 @@
   ;; Return the new page setup from the dialog
   (gtk:print-run-page-setup-dialog window page-setup settings))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-constructor{gtk:page-setup-new}
   @see-constructor{gtk:page-setup-new-from-file}
   @see-constructor{gtk:page-setup-new-from-gvariant}
@@ -265,14 +265,14 @@
   @end{short}
   The @setf{gtk:page-setup-orientation} function sets the page orientation.
   Possible values are @code{:portrait} and @code{:landscape}.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Get the default page orientation.
     @begin{pre}
 (let ((setup (gtk:page-setup-new)))
   (gtk:page-setup-orientation setup))
 => :PORTRAIT
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gtk:page-setup}
   @see-symbol{gtk:page-orientation}"
   (setup (g:object page-setup)))

@@ -192,25 +192,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     allow-async
-;;;     current-page
-;;;     custom-tab-label
-;;;     default-page-setup
-;;;     embed-page-setup
-;;;     export-filename
-;;;     has-selection
-;;;     job-name
-;;;     n-pages
-;;;     n-pages-to-print
-;;;     print-settings
-;;;     show-progress
-;;;     status
-;;;     status-string
-;;;     support-selection
-;;;     track-print-status
-;;;     unit
-;;;     use-full-page
-
 (test gtk-print-operation-properties
   (let ((operation (make-instance 'gtk:print-operation)))
     (is-false (gtk:print-operation-allow-async operation))
@@ -271,4 +252,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; 2024-9-21
+;;; 2024-10-27

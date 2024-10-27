@@ -2,7 +2,7 @@
 ;;; gtk4.print-job.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -98,7 +98,7 @@
 ;;; GtkPrintJob
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPrintJob" print-job
+(gobject:define-gobject "GtkPrintJob" print-job
   (:superclass g:object
     :export t
     :interfaces nil
@@ -138,12 +138,12 @@
       @begin{pre}
 lambda (job)    :run-last
       @end{pre}
-      Gets emitted when the status of a job changes. The signal handler can use
-      the @fun{gtk:print-job-status} function to obtain the new status.
       @begin[code]{table}
         @entry[job]{The @class{gtk:print-job} object on which the signal was
         emitted.}
       @end{table}
+      Gets emitted when the status of a job changes. The signal handler can use
+      the @fun{gtk:print-job-status} function to obtain the new status.
   @end{dictionary}
   @see-constructor{gtk:print-job-new}
   @see-slot{gtk:print-job-page-setup}

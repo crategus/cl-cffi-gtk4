@@ -173,14 +173,14 @@
       @begin{pre}
 lambda (printer success)    :run-last
       @end{pre}
-      Gets emitted in response to a request for detailed information about a
-      printer from the print backend. The success parameter indicates if the
-      information was actually obtained.
       @begin[code]{table}
         @entry[printer]{The @class{gtk:printer} object on which the signal is
           emitted.}
         @entry[success]{@em{True} if the details were successfully acquired.}
       @end{table}
+      Gets emitted in response to a request for detailed information about a
+      printer from the print backend. The success parameter indicates if the
+      information was actually obtained.
   @end{dictionary}
   @see-constructor{gtk:printer-new}
   @see-slot{gtk:printer-accepting-jobs}
@@ -720,11 +720,11 @@ lambda (printer success)    :run-last
     Retrieve the hard margins of the printer, that is the margins that define
     the area at the borders of the paper that the printer cannot print to.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This will not succeed unless the details of the printer are available,
     see the @fun{gtk:printer-has-details} and @fun{gtk:printer-request-details}
     functions.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:printer}
   @see-function{gtk:printer-has-details}
   @see-function{gtk:printer-request-details}"
@@ -769,7 +769,7 @@ lambda (printer success)    :run-last
   @end{short}
   The hard margins define the area at the borders of the paper that the printer
   cannot print to.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This will not succeed unless the details of the printer are available, see
     the @fun{gtk:printer-has-details} and @fun{gtk:printer-request-details}
     function.
