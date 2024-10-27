@@ -54,18 +54,26 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-frame-properties.1
-  (let ((frame (make-instance 'gtk:frame
-                              :child (make-instance 'gtk:button))))
+  (let* ((button (make-instance 'gtk:button))
+         (frame (make-instance 'gtk:frame
+                               :child button)))
     (is (typep (gtk:frame-child frame) 'gtk:button))
     (is-false (gtk:frame-label frame))
     (is-false (gtk:frame-label-widget frame))
-    (is (= 0.0 (gtk:frame-label-xalign frame)))))
+    (is (= 0.0 (gtk:frame-label-xalign frame)))
+    ;; Check memory management
+    (is-false (setf (gtk:frame-child frame) nil))
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count frame)))))
 
 (test gtk-frame-properties.2
   (let ((frame (gtk:frame-new "label")))
     (is (string= "label" (gtk:frame-label frame)))
     (is (typep (gtk:frame-label-widget frame) 'gtk:label))
-    (is (string= "label" (gtk:label-label (gtk:frame-label-widget frame))))))
+    (is (string= "label" (gtk:label-label (gtk:frame-label-widget frame))))
+    ;; Check memory management
+    (is-false (setf (gtk:frame-label-widget frame) nil))
+    (is (= 1 (g:object-ref-count frame)))))
 
 (test gtk-frame-properties.3
   (let ((frame (gtk:frame-new "label")))
@@ -120,4 +128,4 @@
     (is (= 0.3d0 (setf (gtk:frame-label-align frame) 0.3d0)))
     (is (= 0.3 (gtk:frame-label-align frame)))))
 
-;;; 2024-4-19
+;;; 2024-10-27

@@ -52,4 +52,11 @@
 
 ;;;     gtk_separator_new
 
-;;; 2024-7-4
+(test gtk-separator-new
+  (let (separator)
+    (is (typep (setf separator
+                     (gtk:separator-new :vertical)) 'gtk:separator))
+    (is (eq :vertical (gtk:orientable-orientation separator)))
+    (is (= 1 (g:object-ref-count separator)))))
+
+;;; 2024-10-27

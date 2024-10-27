@@ -2,7 +2,7 @@
 ;;; gtk4.separator.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -60,7 +60,7 @@
 ;;; GtkSeparator
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSeparator" separator
+(gobject:define-gobject "GtkSeparator" separator
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -72,7 +72,7 @@
 
 #+liber-documentation
 (setf (documentation 'separator 'type)
- "@version{#2022-9-9}
+ "@version{2024-10-27}
   @begin{short}
     The @class{gtk:separator} widget is a horizontal or vertical separator
     widget.
@@ -80,7 +80,7 @@
 
   @image[separator]{Figure: GtkSeparator}
 
-  A @class{gtk:separator} widget can be used to group the widgets within a
+  The @class{gtk:separator} widget can be used to group the widgets within a
   window. It displays a line with a shadow to make it appear sunken into the
   interface.
   @begin[CSS nodes]{dictionary}
@@ -102,7 +102,7 @@
 
 (defun separator-new (orientation)
  #+liber-documentation
- "@version{#2022-9-9}
+ "@version{2024-10-27}
   @argument[orientation]{a value of the  @symbol{gtk:orientation} enumeration}
   @return{The new @class{gtk:separator} widget.}
   @begin{short}
