@@ -2,7 +2,7 @@
 ;;; gtk4.calendar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -91,7 +91,7 @@
 ;;; GtkCalendar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCalendar" calendar
+(gobject:define-gobject "GtkCalendar" calendar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -169,47 +169,47 @@ calendar.view
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      The signal is emitted when the user selects a day.
       @begin[code]{table}
         @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when the user selects a day.
     @subheading{The \"next-month\" signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      The signal is emitted when the user switched to the next month.
       @begin[code]{table}
         @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when the user switched to the next month.
     @subheading{The \"next-year\" signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      The signal is emitted when user switched to the next year.
       @begin[code]{table}
         @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when user switched to the next year.
     @subheading{The \"prev-month\" signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      The signal is emitted when the user switched to the previous month.
       @begin[code]{table}
         @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when the user switched to the previous month.
     @subheading{The \"prev-year\" signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      The signal is emitted when user switched to the previous year.
       @begin[code]{table}
         @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when user switched to the previous year.
   @end{dictionary}
   @see-constructor{gtk:calendar-new}
   @see-slot{gtk:calendar-day}

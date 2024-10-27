@@ -132,7 +132,10 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_new_from_resource
 
@@ -150,7 +153,10 @@
         (is (string= "/com/crategus/test/gtk-logo-24.png"
                      (gtk:image-resource image)))
         (is (eq :paintable (gtk:image-storage-type image)))
-        (is-false (gtk:image-use-fallback image))))))
+        (is-false (gtk:image-use-fallback image))
+
+        (is-false (setf (gtk:image-paintable image) nil))
+        (is (= 1 (g:object-ref-count image)))))))
 
 ;;;     gtk_image_new_from_pixbuf
 
@@ -159,6 +165,10 @@
          (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
          (pixbuf (gdk:pixbuf-new-from-file path))
          (image (gtk:image-new-from-pixbuf pixbuf)))
+
+    (is (= 2 (g:object-ref-count pixbuf)))
+    (is (= 1 (g:object-ref-count image)))
+
     (is (typep pixbuf 'gdk:pixbuf))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
@@ -168,7 +178,11 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 2 (g:object-ref-count pixbuf)))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_new_from_paintable
 
@@ -186,7 +200,11 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 1 (g:object-ref-count paintable)))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_new_from_icon_name
 
@@ -215,7 +233,11 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :gicon (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+    ;; Check memory management
+    (is-false (setf (gtk:image-gicon image) nil))
+    (is (= 1 (g:object-ref-count gicon)))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_clear
 
@@ -242,7 +264,10 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_set_from_resource
 
@@ -262,7 +287,10 @@
       (is (string= "/com/crategus/test/gtk-logo-24.png"
                    (gtk:image-resource image)))
       (is (eq :paintable (gtk:image-storage-type image)))
-      (is-false (gtk:image-use-fallback image)))))
+      (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 1 (g:object-ref-count image))))))
 
 ;;;     gtk_image_set_from_pixbuf
 
@@ -281,7 +309,11 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 2 (g:object-ref-count pixbuf)))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_set_from_paintable
 
@@ -300,7 +332,11 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+
+    (is-false (setf (gtk:image-paintable image) nil))
+    (is (= 1 (g:object-ref-count paintable)))
+    (is (= 1 (g:object-ref-count image)))))
 
 ;;;     gtk_image_set_from_icon_name
 
@@ -331,6 +367,10 @@
     (is (= -1 (gtk:image-pixel-size image)))
     (is-false (gtk:image-resource image))
     (is (eq :gicon (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+    (is-false (gtk:image-use-fallback image))
+    ;; Check memory management
+    (is-false (setf (gtk:image-gicon image) nil))
+    (is (= 1 (g:object-ref-count gicon)))
+    (is (= 1 (g:object-ref-count image)))))
 
-;;; 2024-9-20
+;;; 2024-10-24

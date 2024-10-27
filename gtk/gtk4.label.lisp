@@ -285,11 +285,11 @@
   instance on a label. The @fun{gtk:label-attributes} function may be a simpler
   way to set attributes in some cases. Be careful though, a
   @class{pango:attr-list} instance tends to cause internationalization problems,
-  unless you are applying attributes to the entire string, i.e. unless you set
-  the range of each attribute to @code{[0, G_MAXINT]}). The reason is that
+  unless you are applying attributes to the entire string, that is, unless you
+  set the range of each attribute to @code{[0, G_MAXINT]}). The reason is that
   specifying the @code{start_index} and @code{end_index} for a
-  @class{pango:attribute} structure requires knowledge of the exact string being
-  displayed, so translations will cause problems.
+  @class{pango:attribute} structure requires knowledge of the exact string
+  being displayed, so translations will cause problems.
 
   @subheading{Selectable labels}
   Labels can be made selectable with the @fun{gtk:label-selectable} function.
@@ -408,42 +408,49 @@ label
       @begin{pre}
 lambda (label)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[label]{The @class{gtk:label} widget on which the signal was
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user activates a link in
       the label. Applications may also emit the signal with the
       @fun{g:signal-emit} function if they need to control activation of URIs
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
-      @begin[code]{table}
-        @entry[label]{The @class{gtk:label} widget on which the signal was
-          emitted.}
-      @end{table}
     @subheading{The \"activate-link\" signal}
       @begin{pre}
 lambda (label uri)    :run-last
       @end{pre}
-      The signal which gets emitted to activate a URI. Applications may connect
-      to it to override the default behaviour, which is to call the
-      @fun{gtk:show-uri} function.
       @begin[code]{table}
         @entry[label]{The @class{gtk:label} widget on which the signal was
           emitted.}
         @entry[uri]{The string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{table}
+      The signal which gets emitted to activate a URI. Applications may connect
+      to it to override the default behaviour, which is to call the
+      @fun{gtk:show-uri} function.
     @subheading{The \"copy-clipboard\" signal}
       @begin{pre}
 lambda (label)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted to copy the selection
-      to the clipboard. The default binding for this signal is the @kbd{Ctrl-c}
-      key.
       @begin[code]{table}
         @entry[label]{The @class{gtk:label} widget which received the signal.}
       @end{table}
+      The signal is a keybinding signal which gets emitted to copy the selection
+      to the clipboard. The default binding for this signal is the @kbd{Ctrl-c}
+      key.
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
 lambda (label step count extend)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[label]{The @class{gtk:label} widget which received the signal.}
+        @entry[step]{The granularity of the move, as a value of the
+          @symbol{gtk:movement-step} enumeration.}
+        @entry[count]{The integer with the number of step units to move.}
+        @entry[extend]{@em{True} if the move should extend the selection.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. If the cursor is not visible in the label,
       this signal causes the viewport to be moved instead. Applications should
@@ -458,13 +465,6 @@ lambda (label step count extend)    :action
         @item{@kbd{Ctrl}-arrow key combinations move by words/paragraphs.}
         @item{@kbd{Home}/@kbd{End} keys move to the ends of the buffer.}
       @end{itemize}
-      @begin[code]{table}
-        @entry[label]{The @class{gtk:label} widget which received the signal.}
-        @entry[step]{The granularity of the move, as a value of the
-          @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
-        @entry[extend]{@em{True} if the move should extend the selection.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:label-new}
   @see-constructor{gtk:label-new-with-mnemonic}
@@ -524,7 +524,7 @@ lambda (label step count extend)    :action
   @begin{pre}
 (pango:layout-attributes (gtk:label-layout label))
   @end{pre}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The attributes set with this function will be applied and merged with any
     other attributes previously effected by way of the
     @slot[gtk:label]{use-underline} or @slot[gtk:label]{use-markup} properties.
@@ -762,7 +762,7 @@ lambda (label step count extend)    :action
   @fun{gtk:label-mnemonic-keyval} function returns the keyval used for the
   mnemonic accelerator. If there is no mnemonic set up it returns
   @code{#xffffff}.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (setq label (gtk:label-new-with-mnemonic \"_Print\"))
 => #<gtk:label {1001A051E3@}>
@@ -796,16 +796,16 @@ lambda (label step count extend)    :action
   mnemonic of the label, or @code{nil} if none has been set and the default
   algorithm will be used.
 
-  If the label has been set so that it has an mnemonic key, using i.e.
-  the @fun{gtk:label-set-markup-with-mnemonic},
+  If the label has been set so that it has an mnemonic key, using the
+  @fun{gtk:label-set-markup-with-mnemonic},
   @fun{gtk:label-set-text-with-mnemonic}, @fun{gtk:label-new-with-mnemonic}
   functions or the @slot[gtk:label]{use-underline} property, the label can be
   associated with a widget that is the target of the mnemonic.
 
   When the label is inside a widget, like a @class{gtk:button} widget or a
   @class{gtk:notebook} tab, it is automatically associated with the correct
-  widget, but sometimes, i.e. when the target is a @class{gtk:entry} widget
-  next to the label, you need to set it explicitly using this function.
+  widget, but sometimes, for example, when the target is a @class{gtk:entry}
+  widget next to the label, you need to set it explicitly using this function.
 
   The target widget will be accelerated by emitting the
   @code{\"mnemonic-activate\"} signal on it. The default handler for this signal
@@ -1353,7 +1353,7 @@ lambda (label step count extend)    :action
   label is clicked. Remember when using the @class{pango:layout} functions you
   need to convert to and from pixels using the @fun{pango:pixels} function or
   the @var{pango:+scale+} constant.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:label-layout-offsets (make-instance 'gtk:label))
 => 0

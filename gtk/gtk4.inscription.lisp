@@ -2,7 +2,7 @@
 ;;; gtk4.inscripton.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GtkInscriptionOverflow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkInscriptionOverflow" inscription-overflow
+(gobject:define-genum "GtkInscriptionOverflow" inscription-overflow
   (:export t
    :type-initializer "gtk_inscription_overflow_get_type")
   (:clip 0)
@@ -85,7 +85,7 @@
       (liber:symbol-documentation 'inscription-overflow)
  "@version{2024-4-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkInscriptionOverflow\" inscription-overflow
+(gobject:define-genum \"GtkInscriptionOverflow\" inscription-overflow
   (:export t
    :type-initializer \"gtk_inscription_overflow_get_type\")
   (:clip 0)
@@ -113,7 +113,7 @@
 ;;; GtkInscription
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkInscription" inscription
+(gobject:define-gobject "GtkInscription" inscription
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleText"

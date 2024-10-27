@@ -2,7 +2,7 @@
 ;;; gtk4.level-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -118,7 +118,7 @@
 ;;; GtkLevelBarMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkLevelBarMode" level-bar-mode
+(gobject:define-genum "GtkLevelBarMode" level-bar-mode
   (:export t
    :type-initializer "gtk_level_bar_mode_get_type")
   (:continuous 0)
@@ -130,7 +130,7 @@
       (liber:symbol-documentation 'level-bar-mode)
  "@version{2024-4-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkLevelBarMode\" level-bar-mode
+(gobject:define-genum \"GtkLevelBarMode\" level-bar-mode
   (:export t
    :type-initializer \"gtk_level_bar_mode_get_type\")
   (:continuous 0)
@@ -153,7 +153,7 @@
 ;;; GtkLevelBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkLevelBar" level-bar
+(gobject:define-gobject "GtkLevelBar" level-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -203,7 +203,7 @@
   The default interval of values is between zero and one, but it is possible to
   modify the interval using the @fun{gtk:level-bar-min-value} and
   @fun{gtk:level-bar-max-value} functions. The value will be always drawn in
-  proportion to the admissible interval, i.e. a value of 15 with a specified
+  proportion to the admissible interval, that is, a value of 15 with a specified
   interval between 10 and 20 is equivalent to a value of 0.5 with an interval
   between 0 and 1. When the @code{:discrete} level bar mode is used, the bar
   level is rendered as a finite number of separated blocks instead of a single
@@ -241,7 +241,7 @@ levelbar[.discrete]
     In horizontal orientation, the nodes are always arranged from left to right,
     regardless of text direction.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Adding a custom offset on the bar.
     @begin{pre}
 (defun create-level-bar (orientation)
@@ -272,16 +272,16 @@ levelbar[.discrete]
       @begin{pre}
 lambda (levelbar name)    :detailed
       @end{pre}
-      Emitted when an offset specified on the bar changes value as an effect to
-      the @fun{gtk:level-bar-add-offset-value} function being called. The signal
-      supports detailed connections. You can connect to the
-      @code{\"changed::x\"} detailed signal in order to only receive callbacks
-      when the value of @code{\"x\"} offset changes.
       @begin[code]{table}
         @entry[levelbar]{The @class{gtk:level-bar} widget which received the
           signal.}
         @entry[name]{The string with the name of the offset that changed value.}
       @end{table}
+      Emitted when an offset specified on the bar changes value as an effect to
+      the @fun{gtk:level-bar-add-offset-value} function being called. The signal
+      supports detailed connections. You can connect to the
+      @code{\"changed::x\"} detailed signal in order to only receive callbacks
+      when the value of @code{\"x\"} offset changes.
   @end{dictionary}
   @see-constructor{gtk:level-bar-new}
   @see-constructor{gtk:level-bar-new-for-interval}

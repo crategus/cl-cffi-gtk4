@@ -2,7 +2,7 @@
 ;;; gtk4.image.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -96,7 +96,7 @@
 ;;; GtkImageType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkImageType" image-type
+(gobject:define-genum "GtkImageType" image-type
   (:export t
    :type-initializer "gtk_image_type_get_type")
   (:empty 0)
@@ -110,7 +110,7 @@
       (liber:symbol-documentation 'image-type)
  "@version{2024-4-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkImageType\" image-type
+(gobject:define-genum \"GtkImageType\" image-type
   (:export t
    :type-initializer \"gtk_image_type_get_type\")
   (:empty 0)
@@ -144,7 +144,7 @@
 ;;; GtkImage
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkImage" image
+(gobject:define-gobject "GtkImage" image
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -340,7 +340,7 @@
     class.
   @end{short}
   The symbolic size to display icons at.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     In C the @slot[gtk:image]{icon-size} property is implemented as an integer
     type. Therefore the @fun{gtk:image-icon-size} accessor returns an integer
     value and not a keyword value of the @symbol{gtk:icon-size} enumeration.
