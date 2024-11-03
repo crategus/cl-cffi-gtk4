@@ -728,15 +728,15 @@ lambda (button)    :action
 (setf (liber:alias-for-symbol 'menu-button-create-popup-func)
       "Callback"
       (liber:symbol-documentation 'menu-button-create-popup-func)
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @syntax{lambda (button)}
   @argument[button]{a @class{gtk:menu-button} widget}
   @begin{short}
     User-provided callback function to create a popup for @arg{button} on
     demand.
   @end{short}
-  This function is called when the popup of @arg{button} is shown, but none has
-  been provided via the @fun{gtk:menu-button-popover} or
+  This function is called when the popup of the menu button is shown, but none
+  has been provided by the @fun{gtk:menu-button-popover} or
   @fun{gtk:menu-button-menu-model} functions.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-popover}
@@ -757,11 +757,11 @@ lambda (button)    :action
 
 (defun menu-button-set-create-popup-func (button func)
  #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @argument[button]{a @class{gtk:menu-button} widget}
   @argument[func]{a @symbol{gtk:menu-button-create-popup-func} callback
     function to call when a popup is about to be shown, but none has been
-    provided via other means, or @code{nil} to reset to default behavior}
+    provided by other means, or @code{nil} to reset to default behavior}
   @begin{short}
     Sets @arg{func} to be called when a popup is about to be shown.
   @end{short}

@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'button 'type)
- "@version{2024-5-4}
+ "@version{2024-10-31}
   @begin{short}
     The @class{gtk:button} widget is generally used to trigger a callback
     function that is called when the button is pressed.
@@ -141,7 +141,7 @@
     @code{button}. The node will get the @code{.image-button} or
     @code{.text-button} style classes, if the content is just an image or label,
     respectively. It may also receive the @code{.flat} style class. When
-    activating a button via the keyboard, the button will temporarily gain
+    activating a button from the keyboard, it will temporarily acquires
     the @code{.keyboard-activating} style class.
 
     Other style classes that are commonly used with the @class{gtk:button}
@@ -423,12 +423,11 @@ lambda (button)    :action
 
 (defun button-new-with-label (label)
  #+liber-documentation
- "@version{2023-9-2}
-  @argument[label]{a string with the text you want the @class{gtk:label} child
-    widget to hold}
+ "@version{2024-10-31}
+  @argument[label]{a string with the text for the button}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
-    Creates a button with a label containing the given text in @arg{label}.
+    Creates a button with a label containing the given text.
   @end{short}
   @see-class{gtk:button}
   @see-class{gtk:label}"

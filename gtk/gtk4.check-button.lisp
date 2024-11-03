@@ -386,7 +386,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-label)
       "Accessor"
       (documentation 'check-button-label 'function)
- "@version{2024-5-14}
+ "@version{2024-11-3}
   @syntax{(gtk:check-button-label object) => label}
   @syntax{(setf (gtk:check-button-label object) label)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -396,7 +396,7 @@ lambda (checkbutton)    :run-first
     @class{gtk:check-button} class.
   @end{short}
   The @fun{gtk:check-button-label} function returns the label of the check
-  button or @code{nil} if the @slot[gtk:check-button]{child} porperty is set.
+  button or @code{nil} if the @slot[gtk:check-button]{child} property is set.
   The @setf{gtk:check-button-label} function sets the text. If the
   @slot[gtk:check-button]{use-underline} property is @em{true}, an underscore
   in @arg{label} is interpreted as mnemonic indicator, see the
@@ -445,8 +445,8 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new ()
  #+liber-documentation
- "@version{2024-5-4}
-  @return{The @class{gtk:check-button} widget.}
+ "@version{2024-11-3}
+  @return{The new @class{gtk:check-button} widget.}
   @short{Creates a new check button.}
   @see-class{gtk:check-button}
   @see-function{gtk:check-button-new-with-label}
@@ -463,9 +463,9 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new-with-label (label)
  #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @argument[label]{a string with the text for the check button}
-  @return{The @class{gtk:check-button} widget.}
+  @return{The new @class{gtk:check-button} widget.}
   @begin{short}
     Creates a new check button with a @class{gtk:label} widget to the right
     of it.
@@ -487,12 +487,13 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new-with-mnemonic (label)
 #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
-  @return{The @class{gtk:check-button} widget.}
+  @return{The new @class{gtk:check-button} widget.}
   @begin{short}
-    Creates a new check button widget containing a label.
+    Creates a new check button widget with a @class{gtk:label} widget to the
+    right of it.
   @end{short}
   The label will be created using the @fun{gtk:label-new-with-mnemonic}
   function, so underscores in label indicate the mnemonic for the check button.

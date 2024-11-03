@@ -311,7 +311,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-value)
       "Accessor"
       (documentation 'scale-button-value 'function)
- "@version{2024-5-14}
+ "@version{2024-11-3}
   @syntax{(gtk:scale-button-value object) => value}
   @syntax{(setf (gtk:scale-button-value object) value)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -323,8 +323,8 @@ lambda (button value)    :run-last
   The @fun{gtk:scale-button-value} function gets the current value of the scale
   button. The @setf{gtk:scale-button-value} function sets the current value.
 
-  If the value is outside the minimum or maximum range values, it will be
-  clamped to fit inside them. The scale button emits the
+  If the value is outside the minimum or maximum values of the scale button
+  adjustment, it will be clamped to fit inside them. The scale button emits the
   @code{\"value-changed\"} signal if the value changes.
   @see-class{gtk:scale-button}")
 
@@ -372,9 +372,9 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_popup" scale-button-popup)
     (g:object widget)
  #+liber-documentation
- "@version{2024-5-7}
+ "@version{2024-11-3}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} popup of the scale button.}
+  @return{The @class{gtk:widget} widget for the popup of the scale button.}
   @short{Retrieves the popup of the scale button.}
   @see-class{gtk:scale-button}
   @see-class{gtk:widget}"
@@ -389,9 +389,9 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_plus_button" scale-button-plus-button)
     (g:object widget)
  #+liber-documentation
- "@version{2024-5-7}
+ "@version{2024-11-3}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} object for the plus button of the scale
+  @return{The @class{gtk:widget} widget for the plus button of the scale
     button.}
   @short{Retrieves the plus button of the scale button.}
   @see-class{gtk:scale-button}
@@ -408,9 +408,9 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_minus_button" scale-button-minus-button)
     (g:object widget)
  #+liber-documentation
- "@version{2024-5-7}
+ "@version{2024-11-3}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} object for the minus button of the scale
+  @return{The @class{gtk:widget} widget for the minus button of the scale
     button.}
   @short{Retrieves the minus button of the scale button.}
   @see-class{gtk:scale-button}

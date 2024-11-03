@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'toggle-button 'type)
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @begin{short}
     The @class{gtk:toggle-button} widget is a @class{gtk:button} widget which
     will remain \"pressed-in\" when clicked.
@@ -120,7 +120,7 @@
   will switch the currently toggled one off. To add a toggle button to a group,
   use the @fun{gtk:toggle-button-group} function.
   @begin[Examples]{dictionary}
-    In this example three toggle buttons are grouped together via the
+    In this example three toggle buttons are grouped together using the
     @class{gtk:actionable} API, by using the same action with parameter type
     and @code{\"s\"} state type for all buttons in the group, and giving each
     button its own target value.
@@ -283,13 +283,13 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-new ()
  #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-11-3}
   @return{The new @class{gtk:toggle-button} widget.}
   @begin{short}
     Creates a new toggle button.
   @end{short}
-  A widget should be packed into the button, as in the @fun{gtk:button-new}
-  function.
+  A widget should be packed into the toggle button, as in the
+  @fun{gtk:button-new} function.
   @see-class{gtk:toggle-button}
   @see-function{gtk:toggle-button-new-with-label}
   @see-function{gtk:toggle-button-new-with-mnemonic}
