@@ -113,9 +113,76 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     activate-current-link
+
+(test gtk-label-activate-current-link-signal
+  (let* ((name "activate-current-link")
+         (gtype (g:gtype "GtkLabel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     activate-link
+
+(test gtk-label-activate-link-signal
+  (let* ((name "activate-link")
+         (gtype (g:gtype "GtkLabel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     copy-clipboard
+
+(test gtk-label-copy-clipboard-signal
+  (let* ((name "copy-clipboard")
+         (gtype (g:gtype "GtkLabel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     move-cursor
+
+(test gtk-label-move-cursor-signal
+  (let* ((name "move-cursor")
+         (gtype (g:gtype "GtkLabel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkMovementStep" "gint" "gboolean")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -194,7 +261,10 @@
         (layout nil))
     (is (typep (setf layout
                      (gtk:label-layout label)) 'pango:layout))
-    (is (= 2 (g:object-ref-count layout)))))
+    ;; Check memory management
+    (is (string= "" (setf (gtk:label-label label) ""))) ; Clears layout
+    (is (= 1 (g:object-ref-count layout)))
+    (is (= 1 (g:object-ref-count label)))))
 
 ;;;     gtk_label_get_layout_offsets
 
@@ -206,22 +276,26 @@
 ;;;     gtk_label_select_region
 ;;;     gtk_label_get_selection_bounds
 
-;; TODO: This test can cause a memory fault. Why?
-
-;; GTK-LABEL-SELECT-REGION in GTK-LABEL []:
-;;      Unexpected Error: #<SB-SYS:MEMORY-FAULT-ERROR {10025972C3}>
-;; Unhandled memory fault at #xC..
-
-#+nil
 (test gtk-label-select-region
   (let ((label (gtk:label-new "a long label")))
     (is-true (setf (gtk:label-selectable label) t))
     (is (= 12 (length (gtk:label-text label))))
     (is-false (gtk:label-select-region label 3 7))
-;    (is (equal '(3 7)
-;               (multiple-value-list (gtk:label-selection-bounds label))))
-))
+    (is (equal '(3 7)
+               (multiple-value-list (gtk:label-selection-bounds label))))))
 
 ;;;     gtk_label_get_current_uri
 
-;;; 2024-10-13
+;; TODO: How to select the link?
+
+(test gtk-label-current-uri
+  (let ((label (make-instance 'gtk:label
+                              :use-markup t
+                              :selectable t
+                              :label
+                              (format nil "Go to <a href=\"http://gtk.org/\">~
+                                           GTK Website</a> ..."))))
+    (is-false (gtk:label-select-region label 8 17))
+    (is-false (gtk:label-current-uri label))))
+
+;;; 2024-10-28

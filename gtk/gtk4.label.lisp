@@ -264,7 +264,7 @@
    ... )
   @end{pre}
   @subheading{Markup (styled text)}
-  To make it easy to format text in a label, changing colors, fonts, etc.,
+  To make it easy to format text in a label, changing colors, fonts, and so on,
   label text can be provided in a simple markup format. Here is how to create
   a label with a small font:
   @begin{pre}
@@ -333,7 +333,7 @@
   displayed as a tooltip on the link. An example looks like this:
   @begin{pre}
 (gtk:label-set-markup label
-                      \"Go to the <a>GTK website</a> for more...\")
+                      \"Go to <a href=\"http://gtk.org/\">GTK Website</a> ...\")
   @end{pre}
   It is possible to implement custom handling for links and their tooltips
   with the @code{\"activate-link\"} signal and the @fun{gtk:label-current-uri}
@@ -384,24 +384,39 @@ label
     The @class{gtk:label} implementation uses the @code{:label} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @begin[Shortcuts and Gestures]{dictionary}
+    The @class{gtk:label} implementation supports the following keyboard
+    shortcuts, when the cursor is visible.
+    @begin{itemize}
+      @item{@kbd{Shift+F10} or @kbd{Menu} opens the context menu.}
+      @item{@kbd{Ctrl+A} or @kbd{Ctrl+/} selects all.}
+      @item{@kbd{Ctrl+Shift+A} or @kbd{Ctrl+\} unselects all.}
+    @end{itemize}
+    Additionally, the following signals have default keybindings.
+    @begin{itemize}
+      @item{@code{GtkLabel::activate-current-link}}
+      @item{@code{GtkLabel::copy-clipboard}}
+      @item{@code{GtkLabel::move-cursor}}
+    @end{itemize}
+  @end{dictionary}
   @begin[Action Details]{dictionary}
-    @subheading{The \"link.copy\" action}
-      Copies the link to the clipboard, when activated on a link inside the
-      label.
-    @subheading{The \"link.open\" action}
-      Opens the link, when activated on a link inside the label.
-    @subheading{The \"selection.select-all\" action}
-      Selects all of the text, if the label allows selection.
-    @subheading{The \"selection.delete\" action}
-      Does not do anything, since text in labels can not be deleted.
-    @subheading{The \"clipboard.paste\" action}
-      Doe not do anything, since text in labels can not be edited.
-    @subheading{The \"clipboard.copy\" action}
-      Copies the text to the clipboard.
-    @subheading{The \"clipboard.cut\" action}
-      Does not do anything, since text in labels can not be deleted.
-    @subheading{The \"menu.popup\" action}
-      Opens the context menu.
+    The @class{gtk:label} implementation defines a set of built-in actions.
+    @begin[code]{table}
+      @entry[clipboard.copy]{Copies the text to the clipboard.}
+      @entry[clipboard.cut]{Does not do anything, since text in labels cannot
+        be deleted.}
+      @entry[clipboard.paste]{Does not do anything, since text in labels
+        cannot be edited.}
+      @entry[link.open]{Opens the link, when activated on a link inside the
+        label.}
+      @entry[link.copy]{Copies the link to the clipboard, when activated on a
+        link inside the label.}
+      @entry[menu.popup]{Opens the context menu.}
+      @entry[selection.delete]{Does not do anything, since text in labels
+        cannot be deleted.}
+      @entry[selection.select-all]{Selects all of the text, if the label allows
+        selection.}
+    @end{table}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate-current-link\" signal}
@@ -487,7 +502,8 @@ lambda (label step count extend)    :action
   @see-slot{gtk:label-wrap}
   @see-slot{gtk:label-wrap-mode}
   @see-slot{gtk:label-xalign}
-  @see-slot{gtk:label-yalign}")
+  @see-slot{gtk:label-yalign}
+  @see-class{gtk:inscription}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -890,7 +906,7 @@ lambda (label step count extend)    :action
   of the label does not depend on the actual text, it is always set to the
   @code{(ascent + descent)} value of the font. This can be an advantage in
   situations where resizing the label because of text changes would be
-  distracting, e.g. in a statusbar. @br{}
+  distracting, for example in a statusbar. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -1091,18 +1107,18 @@ lambda (label step count extend)    :action
   allocation of the label. Compare this to the @slot[gtk:widget]{halign}
   property, which determines how the size allocation is positioned in the space
   available for the label. @br{}
-  Allowed values: [0,1] @br{}
+  Allowed values: [0.0, 1.0] @br{}
   Default value: 0.5")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'label-xalign)
       "Accessor"
       (documentation 'label-xalign 'function)
- "@version{2024-4-24}
+ "@version{2024-10-28}
   @syntax{(gtk:label-xalign object) => xalign}
   @syntax{(setf (gtk:label-xalign object) xalign)}
   @argument[object]{a @class{gtk:label} widget}
-  @argument[xalign]{a float with the horzizontal alignment, between 0 and 1}
+  @argument[xalign]{a float with the horizontal alignment, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:label]{xalign} slot of the @class{gtk:label}
     class.
@@ -1118,23 +1134,22 @@ lambda (label step count extend)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "yalign" 'label) t)
  "The @code{yalign} property of type @code{:float} (Read / Write) @br{}
-  Determines the vertical aligment of the label text inside the size
-  allocation of the label. Compare this to @slot[gtk:widget]{valign}
-  property, which determines how the size allocation is positioned in the space
-  available for the label.
-  @br{}
-  Allowed values: [0,1] @br{}
+  Determines the vertical aligment of the label text inside the size allocation
+  of the label. Compare this to @slot[gtk:widget]{valign} property, which
+  determines how the size allocation is positioned in the space available for
+  the label. @br{}
+  Allowed values: [0.0, 1.0] @br{}
   Default value: 0.5")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'label-yalign)
       "Accessor"
       (documentation 'label-yalign 'function)
- "@version{2024-4-24}
+ "@version{2024-10-28}
   @syntax{(gtk:label-yalign object) => yalign}
   @syntax{(setf (gtk:label-yalign object) yalign)}
   @argument[object]{a @class{gtk:label} widget}
-  @argument[yalign]{a float with the vertical alignment, between 0 and 1}
+  @argument[yalign]{a float with the vertical alignment, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:label]{yalign} slot of the @class{gtk:label}
     class.
@@ -1149,15 +1164,15 @@ lambda (label step count extend)    :action
 ;;; gtk_label_new
 ;;; ----------------------------------------------------------------------------
 
-(defun label-new (text)
+(defun label-new (&optional text)
  #+liber-documentation
- "@version{2024-4-24}
-  @argument[text]{a string with the text of the label}
+ "@version{2024-10-28}
+  @argument[text]{an optional string with the text of the label, or @code{nil}}
   @return{The new @class{gtk:label} widget.}
   @begin{short}
     Creates a new label with the given text inside it.
   @end{short}
-  You can pass @code{nil} to get an empty label widget.
+  You can pass @code{nil}, the default value, to get an empty label.
   @see-class{gtk:label}"
   (make-instance 'label
                  :label (or text (cffi:null-pointer))))
@@ -1170,12 +1185,12 @@ lambda (label step count extend)    :action
 
 (defun label-new-with-mnemonic (text)
  #+liber-documentation
- "@version{2024-4-24}
+ "@version{2024-10-28}
   @argument[text]{a string with the text of the label, with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:label} widget.}
   @begin{short}
-    Creates a new @class{gtk:label} widget, containing the given.
+    Creates a new @class{gtk:label} widget, containing the given text.
   @end{short}
 
   If characters in @arg{text} are preceded by an underscore, they are
@@ -1310,13 +1325,13 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2024-10-28}
   @argument[label]{a @class{gtk:label} widget}
   @return{The @class{pango:layout} object for this label.}
   @begin{short}
     Gets the Pango layout used to display the label.
   @end{short}
-  The layout is useful to, for example, convert text positions to pixel
+  The layout is useful, for example, to convert text positions to pixel
   positions, in combination with the @fun{gtk:label-layout-offsets} function.
   The label is free to recreate its layout at any time, so it should be
   considered read-only.
@@ -1338,7 +1353,7 @@ lambda (label step count extend)    :action
 
 (defun label-layout-offsets (label)
  #+liber-documentation
- "@version{2024-4-24}
+ "@version{2024-10-28}
   @argument[label]{a @class{gtk:label} widget}
   @begin{return}
     @arg{x} -- an integer with the x offset @br{}
@@ -1349,16 +1364,16 @@ lambda (label step count extend)    :action
     object representing the text in the label.
   @end{short}
   This is useful to convert mouse events into coordinates inside the
-  @class{pango:layout} object, e.g. to take some action if some part of the
-  label is clicked. Remember when using the @class{pango:layout} functions you
-  need to convert to and from pixels using the @fun{pango:pixels} function or
-  the @var{pango:+scale+} constant.
+  @class{pango:layout} object, for example, to take some action if some part of
+  the label is clicked. Remember when using the @class{pango:layout} functions
+  you need to convert to and from pixels using the @fun{pango:pixels} function
+  or the @var{pango:+scale+} constant.
   @begin[Examples]{dictionary}
     @begin{pre}
-(gtk:label-layout-offsets (make-instance 'gtk:label))
+(gtk:label-layout-offsets (gtk:label-new))
 => 0
 => -9
-(gtk:label-layout-offsets (make-instance 'gtk:label :label \"text\"))
+(gtk:label-layout-offsets (gtk:label-new \"text\"))
 => -14
 => -9
     @end{pre}
@@ -1434,7 +1449,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_current_uri" label-current-uri) :string
  #+liber-documentation
- "@version{#2024-4-24}
+ "@version{2024-10-28}
   @argument[label]{a @class{gtk:label} widget}
   @return{The string with the currently active URI.}
   @begin{short}

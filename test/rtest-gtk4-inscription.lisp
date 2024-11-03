@@ -119,7 +119,8 @@
 ;;;     gtk_inscription_new
 
 (test gtk-inscription-new
+  (is (typep (gtk:inscription-new) 'gtk:inscription))
   (is (typep (gtk:inscription-new nil) 'gtk:inscription))
   (is (typep (gtk:inscription-new "text") 'gtk:inscription)))
 
-;;; 2024-9-20
+;;; 2024-10-28

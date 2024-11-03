@@ -206,9 +206,9 @@
   paintables are never made smaller than their ideal size - but be careful if
   you do not know the size of the paintable in use, like when displaying
   user-loaded images. This can easily cause the picture to grow larger than the
-  screen. And the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign}
-  properties can be used to make sure the paintable does not fill all available
-  space but is instead displayed at its original size.
+  screen. The @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties
+  can be used to make sure the paintable does not fill all available space but
+  is instead displayed at its original size.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:picture} implementation has a single CSS node with the name
     @code{picture}.
@@ -266,8 +266,6 @@
   described textually. The @setf{gtk:picture-alternative-text} function sets an
   alternative textual description. It is equivalent to the \"alt\" attribute for
   images on websites. This text will be made available to accessibility tools.
-  If the picture cannot be described textually, set this property to the
-  @code{cffi:null-pointer} value.
   @see-class{gtk:picture}")
 
 ;;; --- gtk:picture-can-shrink -------------------------------------------------
@@ -275,14 +273,15 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "can-shrink" 'picture) t)
  "The @code{can-shrink} property of type @code{:boolean} (Read / Write) @br{}
-  Whether the picture can be made smaller than the self it contains. @br{}
+  Whether the picture can be made smaller than the natural size of its contents.
+  @br{}
   Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'picture-can-shrink)
       "Accessor"
       (documentation 'picture-can-shrink 'function)
- "@version{2024-10-13}
+ "@version{2024-10-30}
   @syntax{(gtk:picture-can-shrink object) => setting}
   @syntax{(setf (gtk:picture-can-shrink object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -374,7 +373,7 @@
  "The @code{keep-aspect-ratio} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the picture will render its contents trying to preserve the aspect
-  ratio of the contents. Deprecated 4.8, use the
+  ratio of the contents. Deprecated since 4.8, use the
   @slot[gtk:picture]{content-fit} property instead. @br{}
   Default value: @em{true}")
 
@@ -549,7 +548,7 @@
 (defun picture-new-for-filename (filename)
  #+liber-documentation
  "@version{2024-10-13}
-  @argument[filename]{a string with a filename}
+  @argument[filename]{a pathname or namestring for the file}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
     Creates a new picture displaying the file @arg{filename}.

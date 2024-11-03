@@ -116,7 +116,7 @@
 
 #+liber-documentation
 (setf (documentation 'progress-bar 'type)
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @begin{short}
     The @class{gtk:progress-bar} widget is typically used to display the
     progress of a long running operation.
@@ -127,12 +127,13 @@
 
   @image[progress-bar]{Figure: GtkProgressBar}
 
-  When an application can determine how much work needs to take place, e.g.
-  read a fixed number of bytes from a file, and can monitor its progress, it
-  can use the progress bar in percentage mode and the user sees a growing bar
-  indicating the percentage of the work that has been completed. In this mode,
-  the application is required to call the @fun{gtk:progress-bar-fraction}
-  function periodically to update the progress bar.
+  When an application can determine how much work needs to take place, for
+  example, read a fixed number of bytes from a file, and can monitor its
+  progress, it can use the progress bar in percentage mode and the user sees a
+  growing bar indicating the percentage of the work that has been completed. In
+  this mode, the application is required to call the
+  @fun{gtk:progress-bar-fraction} function periodically to update the progress
+  bar.
 
   When an application has no accurate way of knowing the amount of work to do,
   it can use the progress bar in activity mode, which shows activity by a block
@@ -142,8 +143,8 @@
 
   There is quite a bit of flexibility provided to control the appearance of
   the progress bar. Functions are provided to control the orientation of the
-  bar, optional text can be displayed along with the bar, and the step size
-  used in activity mode can be set.
+  progress bar, optional text can be displayed along with the progress bar, and
+  the step size used in activity mode can be set.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 progressbar[.osd]
@@ -158,7 +159,7 @@ progressbar[.osd]
     the @code{.pulse} style class when in activity mode. It gets the
     @code{.left}, @code{.right}, @code{.top} or @code{.bottom} style classes
     added when the progress 'touches' the corresponding end of the progress bar.
-    The @code{.osd} style class on the progressbar node is for use in overlays
+    The @code{.osd} style class on the progress bar node is for use in overlays
     like the one Epiphany has for page loading progress.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
@@ -171,7 +172,8 @@ progressbar[.osd]
   @see-slot{gtk:progress-bar-inverted}
   @see-slot{gtk:progress-bar-pulse-step}
   @see-slot{gtk:progress-bar-show-text}
-  @see-slot{gtk:progress-bar-text}")
+  @see-slot{gtk:progress-bar-text}
+  @see-class{gtk:spinner}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -225,7 +227,7 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-fraction)
       "Accessor"
       (documentation 'progress-bar-fraction 'function)
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @syntax{(gtk:progress-bar-fraction object) => fraction}
   @syntax{(setf (gtk:progress-bar-fraction object) fraction)}
   @argument[object]{a @class{gtk:progress-bar} widget}
@@ -238,8 +240,8 @@ progressbar[.osd]
   The @fun{gtk:progress-bar-fraction} function returns the current fraction
   from 0.0 to 1.0 of the task that is been completed. The
   @setf{gtk:progress-bar-fraction} function causes the progress bar to
-  \"fill in\" the given fraction of the bar. The fraction should be between 0.0
-  and 1.0, inclusive.
+  \"fill in\" the given fraction of the progress bar. The fraction should be
+  between 0.0 and 1.0, inclusive.
   @see-class{gtk:progress-bar}")
 
 ;;; --- gtk:progress-bar-inverted ----------------------------------------------
@@ -280,11 +282,11 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-pulse-step)
       "Accessor"
       (documentation 'progress-bar-pulse-step 'function)
- "@version{2024-4-25}
-  @syntax{(gtk:progress-bar-pulse-step object) => fraction}
-  @syntax{(setf (gtk:progress-bar-pulse-step object) fraction)}
+ "@version{2024-10-31}
+  @syntax{(gtk:progress-bar-pulse-step object) => step}
+  @syntax{(setf (gtk:progress-bar-pulse-step object) step)}
   @argument[object]{a @class{gtk:progress-bar} widget}
-  @argument[fraction]{a double float with the fraction between 0.0 and 1.0}
+  @argument[step]{a double float with the fraction between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:progress-bar]{pulse-step} slot of the
     @class{gtk:progress-bar} class.
@@ -301,11 +303,11 @@ progressbar[.osd]
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-text" 'progress-bar) t)
  "The @code{show-text} property of type @code{:boolean} (Read / Write) @br{}
-  Sets whether the progress bar will show text superimposed over the bar. The
-  shown text is either the value of the @slot[gtk:progress-bar]{text} property
-  or, if that is @code{nil}, the @slot[gtk:progress-bar]{fraction} value, as a
-  percentage. To make a progress bar that is styled and sized suitably for
-  containing text, even if the actual text is blank, set the
+  Sets whether the progress bar will show text superimposed over the progress
+  bar. The shown text is either the value of the @slot[gtk:progress-bar]{text}
+  property or, if that is @code{nil}, the @slot[gtk:progress-bar]{fraction}
+  value, as a percentage. To make a progress bar that is styled and sized
+  suitably for containing text, even if the actual text is blank, set the
   @slot[gtk:progress-bar]{show-text} property to @em{true} and the
   @slot[gtk:progres-bar]{text} property to the empty string, not @code{nil}.
   @br{}
@@ -315,7 +317,7 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-show-text)
       "Accessor"
       (documentation 'progress-bar-show-text 'function)
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @syntax{(gtk:progress-bar-show-text object) => setting}
   @syntax{(setf (gtk:progress-bar-show-text object) setting)}
   @argument[object]{a @class{gtk:progress-bar} widget}
@@ -327,9 +329,9 @@ progressbar[.osd]
   The @fun{gtk:progress-bar-show-text} function gets the value of the
   @slot[gtk:progress-bar]{show-text} property. The
   @setf{gtk:progress-bar-show-text} function sets whether the progress bar will
-  show text superimposed over the bar. The shown text is either the value of the
-  @slot[gtk:progress-bar]{text} property or, if that is @code{nil}, the
-  @slot[gtk:progress-bar]{fraction} value, as a percentage.
+  show text superimposed over the progress bar. The shown text is either the
+  value of the @slot[gtk:progress-bar]{text} property or, if that is @code{nil},
+  the @slot[gtk:progress-bar]{fraction} value, as a percentage.
 
   To make a progress bar that is styled and sized suitably for containing text,
   even if the actual text is blank, set the @slot[gtk:progress-bar]{show-text}
@@ -355,7 +357,7 @@ progressbar[.osd]
   @syntax{(gtk:progress-bar-text object) => text}
   @syntax{(setf (gtk:progress-bar-text object) text)}
   @argument[object]{a @class{gtk:progress-bar} widget}
-  @argument[text]{a UTF-8 string, or @code{nil}}
+  @argument[text]{a UTF-8 string}
   @begin{short}
     Accessor of the @slot[gtk:progress-bar]{text} slot of the
     @class{gtk:progress-bar} class.
@@ -389,8 +391,8 @@ progressbar[.osd]
 
 (defun progress-bar-new ()
  #+liber-documentation
- "@version{2024-4-25}
-  @return{The @class{gtk:progress-bar} widget.}
+ "@version{2024-10-31}
+  @return{The new @class{gtk:progress-bar} widget.}
   @short{Creates a new progress bar.}
   @see-class{gtk:progress-bar}"
   (make-instance 'progress-bar))

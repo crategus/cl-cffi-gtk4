@@ -181,7 +181,7 @@
 
 #+liber-documentation
 (setf (documentation 'image 'type)
- "@version{2024-4-25}
+ "@version{2024-10-29}
   @begin{short}
     The @class{gtk:image} widget displays an image.
   @end{short}
@@ -324,13 +324,14 @@
 (setf (documentation (liber:slot-documentation "icon-size" 'image) t)
  "The @code{icon-size} property of type @symbol{gtk:icon-size} (Read / Write)
   @br{}
-  The symbolic size to display icons at.")
+  The symbolic size to display icons at. @br{}
+  Default value: @code{:inherit}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'image-icon-size)
       "Accessor"
       (documentation 'image-icon-size 'function)
- "@version{2024-4-25}
+ "@version{2024-10-29}
   @syntax{(gtk:image-icon-size object) => size}
   @syntax{(setf (gtk:image-icon-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
@@ -340,11 +341,6 @@
     class.
   @end{short}
   The symbolic size to display icons at.
-  @begin[Notes]{dictionary}
-    In C the @slot[gtk:image]{icon-size} property is implemented as an integer
-    type. Therefore the @fun{gtk:image-icon-size} accessor returns an integer
-    value and not a keyword value of the @symbol{gtk:icon-size} enumeration.
-  @end{dictionary}
   @see-class{gtk:image}
   @see-symbol{gtk:icon-size}")
 
@@ -393,7 +389,7 @@
 (setf (liber:alias-for-function 'image-pixel-size)
       "Accessor"
       (documentation 'image-pixel-size 'function)
- "@version{2024-4-25}
+ "@version{2024-10-29}
   @syntax{(gtk:image-pixel-size object) => size}
   @syntax{(setf (gtk:image-pixel-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
@@ -402,7 +398,7 @@
     Accessor of the @slot[gtk:image]{pixel-size} slot of the @class{gtk:image}
     class.
   @end{short}
-  The @fun{gtk:image-pixel-size} function sets the pixel size used for named
+  The @fun{gtk:image-pixel-size} function gets the pixel size used for named
   icons. The @setf{gtk:image-pixel-size} function sets the pixel size. If the
   pixel size is set to a value not equal to -1, it is used instead of the
   @slot[gtk:image]{icon-size} property.
@@ -516,15 +512,15 @@
 
 (defun image-new-from-file (path)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2024-10-29}
   @argument[path]{a pathname or namestring with the name of the file}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
     Creates a new image displaying the file @arg{path}.
   @end{short}
-  If the file is not found or cannot be loaded, the resulting @class{gtk:image}
-  widget will display a \"broken image\" icon. This function never returns
-  @code{nil}, it always returns a valid @class{gtk:image} widget.
+  This function always returns a valid @class{gtk:image} widget. If the file is
+  not found or cannot be loaded, the resulting @class{gtk:image} widget will
+  display a \"broken image\" icon.
 
   If you need to detect failures to load the file, use the
   @fun{gdk:texture-new-from-file} function to load the file yourself, then
@@ -547,18 +543,15 @@
 (cffi:defcfun ("gtk_image_new_from_resource" image-new-from-resource)
     (g:object image)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-29}
   @argument[resource]{a string with a resource path}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
     Creates an image displaying the resource file in @arg{resource}.
   @end{short}
-
-  If the file is not found or can not be loaded, the resulting @class{gtk:image}
-  widget will display a \"broken image\" icon. This function always returns a
-  valid @class{gtk:image} widget.
-
-  If the file contains an animation, the image will contain an animation.
+  This function always returns a valid @class{gtk:image} widget. If the file is
+  not found or can not be loaded, the resulting @class{gtk:image} widget will
+  display a \"broken image\" icon.
 
   If you need to detect failures to load the file, use the
   @fun{gdk-pixbuf:pixbuf-new-from-resource} function to load the file yourself,
@@ -698,20 +691,20 @@
 
 (cffi:defcfun ("gtk_image_set_from_file" %image-set-from-file) :void
   (image (g:object image))
-  (filename :string))
+  (file :string))
 
-(defun image-set-from-file (image path)
+(defun image-set-from-file (image file)
  #+liber-documentation
- "@version{2024-6-30}
+ "@version{2024-10-29}
   @argument[image]{a @class{gtk:image} widget}
-  @argument[path]{a pathname or namestring for the file to load}
+  @argument[file]{a pathname or namestring for the file to load}
   @begin{short}
-    Sets the image to display @arg{filename}.
+    Sets the image to display @arg{file}.
   @end{short}
   See the @fun{gtk:image-new-from-file} function for details.
   @see-class{gtk:image}
   @see-function{gtk:image-new-from-file}"
-  (%image-set-from-file image (namestring path)))
+  (%image-set-from-file image (namestring file)))
 
 (export 'image-set-from-file)
 
@@ -747,7 +740,7 @@
 
 (defun image-set-from-pixbuf (image pixbuf)
  #+liber-documentation
- "@version{2024-6-30}
+ "@version{2024-10-29}
   @argument[image]{a @class{gtk:image} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
@@ -759,7 +752,7 @@
   @end{dictionary}
   @see-class{gtk:image}
   @see-class{gdk-pixbuf:pixbuf}
-  @see-function{gdk:image-set-from-paintable}"
+  @see-function{gtk:image-set-from-paintable}"
   #+(and gtk-4-12 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:IMAGE-SET-FROM-PIXBUF is deprecated since 4.12"))

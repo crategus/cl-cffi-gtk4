@@ -128,7 +128,7 @@
 (setf (liber:alias-for-symbol 'level-bar-mode)
       "GEnum"
       (liber:symbol-documentation 'level-bar-mode)
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @begin{declaration}
 (gobject:define-genum \"GtkLevelBarMode\" level-bar-mode
   (:export t
@@ -145,8 +145,6 @@
   @begin{short}
     Describes how the @class{gtk:level-bar} widget contents should be rendered.
   @end{short}
-  Note that this enumeration could be extended with additional modes in the
-  future.
   @see-class{gtk:level-bar}")
 
 ;;; ----------------------------------------------------------------------------
@@ -179,10 +177,10 @@
 
 #+liber-documentation
 (setf (documentation 'level-bar 'type)
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @begin{short}
-    The @class{gtk:level-bar} widget is a bar widget that can be used as a
-    level indicator.
+    The @class{gtk:level-bar} widget is a level bar widget that can be used as
+    a level indicator.
   @end{short}
   Typical use cases are displaying the strength of a password, or showing the
   charge level of a battery.
@@ -191,8 +189,8 @@
 
   Use the @fun{gtk:level-bar-value} function to set the current value, and the
   @fun{gtk:level-bar-add-offset-value} function to set the value offsets at
-  which the bar will be considered in a different state. GTK will add a few
-  offsets by default on the level bar: @code{\"low\"}, @code{\"high\"} and
+  which the level bar will be considered in a different state. GTK will add a
+  few offsets by default on the level bar: @code{\"low\"}, @code{\"high\"} and
   @code{\"full\"}, with values 0.25, 0.75 and 1.0 respectively.
 
   Note that it is your responsibility to update preexisting offsets when
@@ -205,13 +203,13 @@
   @fun{gtk:level-bar-max-value} functions. The value will be always drawn in
   proportion to the admissible interval, that is, a value of 15 with a specified
   interval between 10 and 20 is equivalent to a value of 0.5 with an interval
-  between 0 and 1. When the @code{:discrete} level bar mode is used, the bar
-  level is rendered as a finite number of separated blocks instead of a single
+  between 0 and 1. When the @code{:discrete} level bar mode is used, the level
+  bar is rendered as a finite number of separated blocks instead of a single
   one. The number of blocks that will be rendered is equal to the number of
   units specified by the admissible interval.
 
-  For instance, to build a bar rendered with five blocks, it is sufficient to
-  set the minimum value to 0 and the maximum value to 5 after changing the
+  For instance, to build a lever bar rendered with five blocks, it is sufficient
+  to set the minimum value to 0 and the maximum value to 5 after changing the
   indicator mode to discrete.
   @begin[GtkLevelBar as GtkBuildable]{dictionary}
     The @class{gtk:level-bar} implementation of the @class{gtk:buildable}
@@ -277,9 +275,9 @@ lambda (levelbar name)    :detailed
           signal.}
         @entry[name]{The string with the name of the offset that changed value.}
       @end{table}
-      Emitted when an offset specified on the bar changes value as an effect to
-      the @fun{gtk:level-bar-add-offset-value} function being called. The signal
-      supports detailed connections. You can connect to the
+      Emitted when an offset specified on the level bar changes value as an
+      effect to the @fun{gtk:level-bar-add-offset-value} function being called.
+      The signal supports detailed connections. You can connect to the
       @code{\"changed::x\"} detailed signal in order to only receive callbacks
       when the value of @code{\"x\"} offset changes.
   @end{dictionary}
@@ -329,7 +327,7 @@ lambda (levelbar name)    :detailed
 (setf (documentation (liber:slot-documentation "max-value" 'level-bar) t)
  "The @code{max-value} property of type @code{:double} (Read / Write) @br{}
   The property determines the maximum value of the interval that can be
-  displayed by the bar. @br{}
+  displayed by the level bar. @br{}
   Allowed values: >= 0.0d0 @br{}
   Default value: 1.0d0")
 
@@ -358,7 +356,7 @@ lambda (levelbar name)    :detailed
 (setf (documentation (liber:slot-documentation "min-value" 'level-bar) t)
  "The @code{min-value} property of type @code{:double} (Read / Write) @br{}
   The property determines the minimum value of the interval that can be
-  displayed by the bar. @br{}
+  displayed by the level bar. @br{}
   Allowed values: >= 0.0d0 @br{}
   Default value: 0.0d0")
 
@@ -455,8 +453,8 @@ lambda (levelbar name)    :detailed
 
 (defun level-bar-new ()
  #+liber-documentation
- "@version{2024-4-25}
-  @return{The @class{gtk:level-bar} widget.}
+ "@version{2024-10-31}
+  @return{The new @class{gtk:level-bar} widget.}
   @short{Creates a new level bar.}
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-new-for-interval}"
@@ -472,10 +470,10 @@ lambda (levelbar name)    :detailed
 
 (defun level-bar-new-for-interval (min max)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-10-31}
   @argument[min]{a double float with a positive value}
   @argument[max]{a double float with a positive value}
-  @return{The @class{gtk:level-bar} widget.}
+  @return{The new @class{gtk:level-bar} widget.}
   @begin{short}
     Utility constructor that creates a new level bar for the specified interval.
   @end{short}
@@ -530,7 +528,7 @@ lambda (levelbar name)    :detailed
  #+liber-documentation
  "@version{#2023-8-24}
   @argument[levelbar]{a @class{gtk:level-bar} widget}
-  @argument[name]{a string with the name of an offset in the bar}
+  @argument[name]{a string with the name of an offset in the level bar}
   @begin{short}
     Removes an offset marker previously added with the
     @fun{gtk:level-bar-add-offset-value} function.

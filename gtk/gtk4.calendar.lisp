@@ -118,7 +118,7 @@
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
- "@version{2024-7-5}
+ "@version{2024-10-31}
   @begin{short}
     The @class{gtk:calendar} widget displays a Gregorian calendar, one month at
     a time.
@@ -128,15 +128,13 @@
   @image[calendar]{Figure: GtkCalendar}
 
   The date that is currently displayed can be altered with the
-  @fun{gtk:calendar-select-day} function.
+  @fun{gtk:calendar-select-day} function. The selected date can be retrieved
+  from a @class{gtk:calendar} widget using the @fun{gtk:calendar-date} function.
 
   To place a visual marker on a particular day, use the
   @fun{gtk:calendar-mark-day} function and to remove the marker, the
   @fun{gtk:calendar-unmark-day} function. Alternative, all marks can be cleared
   with the @fun{gtk:calendar-clear-marks} function.
-
-  The selected date can be retrieved from a @class{gtk:calendar} widget using
-  the @fun{gtk:calendar-date} function.
 
   Users should be aware that, although the Gregorian calendar is the legal
   calendar in most countries, it was adopted progressively between 1582 and
@@ -386,8 +384,8 @@ lambda (calendar)    :run-first
 
 (defun calendar-new ()
  #+liber-documentation
- "@version{2024-7-5}
-  @return{The newly @class{gtk:calendar} widget.}
+ "@version{2024-10-31}
+  @return{The new @class{gtk:calendar} widget.}
   @begin{short}
     Creates a new calendar, with the current date being selected.
   @end{short}

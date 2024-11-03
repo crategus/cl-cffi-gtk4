@@ -157,7 +157,7 @@
 
 #+liber-documentation
 (setf (documentation 'inscription 'type)
- "@version{2024-4-25}
+ "@version{2024-10-28}
   @begin{short}
     The @class{gtk:inscription} widget is a widget to show text in a predefined
     area.
@@ -467,17 +467,18 @@
   The horizontal alignment of the text inside the allocated size. Compare this
   to the @slot[gtk:widget]{halign} property, which determines how the
   size allocation of the inscription is positioned in the available space. @br{}
+  Allowed values: [0.0, 1.0] @br{}
   Default value: 0.0")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'inscription-xalign)
       "Accessor"
       (documentation 'inscription-xalign 'function)
- "@version{2024-4-25}
+ "@version{2024-10-28}
   @syntax{(gtk:inscription-xalign object) => xalign}
   @syntax{(setf (gtk:inscription-xalign object) xalign)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[xalign]{a single float with the xalign value, between 0 and 1}
+  @argument[xalign]{a single float with the xalign value, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{xalign} slot of the
     @class{gtk:inscription} class.
@@ -494,17 +495,18 @@
   The vertical alignment of the text inside the allocated size. Compare this
   to the @slot[gtk:widget]{valign} property, which determines how the
   size allocation of the inscription is positioned in the available space. @br{}
+  Allowed values: [0.0, 1.0] @br{}
   Default value: 0.5")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'inscription-yalign)
       "Accessor"
       (documentation 'inscription-yalign 'function)
- "@version{2024-4-25}
+ "@version{2024-10-28}
   @syntax{(gtk:inscription-yalign object) => yalign}
   @syntax{(setf (gtk:inscription-yalign object) yalign)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[yalign]{a single float with the yalign value, between 0 and 1}
+  @argument[yalign]{a single float with the yalign value, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{yalign} slot of the
     @class{gtk:inscription} class.
@@ -519,14 +521,15 @@
 
 (declaim (inline inscription-new))
 
-(defun inscription-new (text)
+(defun inscription-new (&optional text)
  #+liber-documentation
- "@version{2024-4-25}
-  @argument[text]{a string with the text to display}
+ "@version{2024-10-28}
+  @argument[text]{an optional string with the text to display, or @code{nil}}
   @return{The new @class{gtk:inscription} widget.}
   @begin{short}
     Creates a new @class{gtk:inscription} widget with the given text.
   @end{short}
+  You can pass @code{nil}, the default value, to an empty inscription.
 
   Since 4.8
   @see-class{gtk:inscription}"
