@@ -2,7 +2,7 @@
 ;;; gtk4.fixed.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,7 +65,7 @@
 ;;; GtkFixed
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFixed" fixed
+(gobject:define-gobject "GtkFixed" fixed
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -104,9 +104,9 @@
   @end{itemize}
   In addition, the fixed widget cannot properly be mirrored in right-to-left
   languages such as Hebrew and Arabic. That is, normally GTK will order
-  containers appropriately for the text direction, e.g. to put labels to the
-  right of the thing they label when using an RTL language, but it cannot do
-  that with the @class{gtk:fixed} widget. So if you need to reorder widgets
+  containers appropriately for the text direction, for example, to put labels
+  to the right of the thing they label when using an RTL language, but it cannot
+  do that with the @class{gtk:fixed} widget. So if you need to reorder widgets
   depending on the text direction, you would need to manually detect it and
   adjust child positions accordingly.
 
