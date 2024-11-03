@@ -87,7 +87,7 @@
 ;;; GtkAppChooserButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAppChooserButton" app-chooser-button
+(gobject:define-gobject "GtkAppChooserButton" app-chooser-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -157,34 +157,34 @@
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
-      Emitted to when the button is activated. The signal is an action signal
-      and emitting it causes the button to pop up its dialog.
       @begin[code]{table}
         @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
       @end{table}
+      Emitted to when the button is activated. The signal is an action signal
+      and emitting it causes the button to pop up its dialog.
     @subheading{The \"changed\" signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
-      Emitted when the active application on the @class{gtk:app-chooser-button}
-      widget changes.
       @begin[code]{table}
         @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
       @end{table}
+      Emitted when the active application on the @class{gtk:app-chooser-button}
+      widget changes.
     @subheading{The \"custom-item-activated\" signal}
       @begin{pre}
 lambda (button item)    :has-details
       @end{pre}
-      Emitted when a custom item, previously added with the
-      @fun{gtk:app-chooser-button-append-custom-item} function, is activated
-      from the dropdown menu.
       @begin[code]{table}
         @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
         @entry[item]{The string with the name of the activated item.}
       @end{table}
+      Emitted when a custom item, previously added with the
+      @fun{gtk:app-chooser-button-append-custom-item} function, is activated
+      from the dropdown menu.
   @end{dictionary}
   @see-constructor{gtk:app-chooser-button-new}
   @see-slot{gtk:app-chooser-button-heading}

@@ -69,7 +69,7 @@
 ;;; GtkColorChooserDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColorChooserDialog" color-chooser-dialog
+(gobject:define-gobject "GtkColorChooserDialog" color-chooser-dialog
   (:superclass dialog
    :export t
    :interfaces ("GtkAccessible"
@@ -104,7 +104,7 @@
   To create a @class{gtk:color-chooser-dialog} widget, use the
   @fun{gtk:color-chooser-dialog-new} function. To get or change the initially
   selected color, use the @fun{gtk:color-chooser-rgba} function.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Clicking on the drawing area opens a color chooser dialog to select a
     background color for the drawing area. The default palettes are replaced
     for this color chooser dialog.
@@ -188,7 +188,7 @@
       ;; Show the window
       (gtk:window-present window))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser-dialog} implementation is deprecated since
     4.10. Use the @class{gtk:color-dialog} object instead.

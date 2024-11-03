@@ -89,7 +89,7 @@
 ;;; GtkInfoBar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkInfoBar" info-bar
+(gobject:define-gobject "GtkInfoBar" info-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -135,7 +135,7 @@
   can by classified as error message, warning, informational message, etc, by
   using the @fun{gtk:info-bar-message-type} function. GTK may use the message
   type to determine how the message is displayed.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Simple info bar usage.
     @begin{pre}
 (defun create-info-bar (msg type)
@@ -152,7 +152,7 @@
                         (gtk:widget-hide widget)))
     infobar))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[GtkInfoBar as GtkBuildable]{dictionary}
     The @class{gtk:info-bar} implementation of the @class{gtk:buildable}
     interface exposes the content area and action area as internal children
@@ -184,25 +184,25 @@
       @begin{pre}
 lambda (infobar)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user uses a
-      keybinding to dismiss the info bar. The default binding for this signal
-      is the @kbd{Escape} key. @br{}
       @begin[code]{table}
         @entry[infobar]{The @class{gtk:info-bar} widget on which the signal is
           emitted.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user uses a
+      keybinding to dismiss the info bar. The default binding for this signal
+      is the @kbd{Escape} key.
     @subheading{The \"response\" signal}
       @begin{pre}
 lambda (infobar response)    :run-last
       @end{pre}
-      Emitted when an action widget is clicked or the application programmer
-      calls the @fun{gtk:dialog-response} function. The @arg{response} argument
-      depends on which action widget was clicked. @br{}
       @begin[code]{table}
         @entry[infobar]{The @class{gtk:info-bar} widget on which the signal is
           emitted.}
         @entry[response]{The integer with the response ID.}
       @end{table}
+      Emitted when an action widget is clicked or the application programmer
+      calls the @fun{gtk:dialog-response} function. The @arg{response} argument
+      depends on which action widget was clicked.
   @end{dictionary}
   @see-constructor{gtk:info-bar-new}
   @see-constructor{gtk:info-bar-new-with-buttons}

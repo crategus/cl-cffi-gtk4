@@ -130,7 +130,7 @@
 ;;; GtkTreeModelFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkTreeModelFlags" tree-model-flags
+(gobject:define-gflags "GtkTreeModelFlags" tree-model-flags
   (:export t
    :type-initializer "gtk_tree_model_flags_get_type")
   (:iters-persist 1)
@@ -142,7 +142,7 @@
       (liber:symbol-documentation 'tree-model-flags)
  "@version{2024-5-1}
   @begin{declaration}
-(gobject:define-g-flags \"GtkTreeModelFlags\" tree-model-flags
+(gobject:define-gflags \"GtkTreeModelFlags\" tree-model-flags
   (:export t
    :type-initializer \"gtk_tree_model_flags_get_type\")
   (:iters-persist 1)
@@ -182,7 +182,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-cstruct tree-iter "GtkTreeIter"
+(glib:define-gboxed-cstruct tree-iter "GtkTreeIter"
   (:export nil
    :type-initializer "gtk_tree_iter_get_type")
   (stamp :int :initform 0)
@@ -196,7 +196,7 @@
       (documentation 'tree-iter 'type)
  "@version{2024-5-3}
   @begin{declaration}
-(glib:define-g-boxed-cstruct tree-iter \"GtkTreeIter\"
+(glib:define-gboxed-cstruct tree-iter \"GtkTreeIter\"
   (:export t
    :type-initializer \"gtk_tree_iter_get_type\")
   (stamp :int :initform 0)
@@ -262,7 +262,7 @@
 ;;; GtkTreePath
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque tree-path "GtkTreePath"
+(glib:define-gboxed-opaque tree-path "GtkTreePath"
   :export t
   :type-initializer "gtk_tree_path_get_type"
   :alloc (%tree-path-new))
@@ -273,7 +273,7 @@
       (documentation 'tree-path 'type)
  "@version{2024-5-1}
   @begin{declaration}
-(glib:define-g-boxed-opaque tree-path \"GtkTreePath\"
+(glib:define-gboxed-opaque tree-path \"GtkTreePath\"
   :export t
   :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
@@ -768,7 +768,7 @@
 ;;; GtkTreeRowReference
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque tree-row-reference "GtkTreeRowReference"
+(glib:define-gboxed-opaque tree-row-reference "GtkTreeRowReference"
   :export t
   :type-initializer "gtk_tree_row_reference_get_type"
   :alloc (error "GtkTreeRowReference cannot be created from the Lisp side."))
@@ -779,7 +779,7 @@
       (documentation 'tree-row-reference 'type)
  "@version{2024-5-1}
   @begin{declaration}
-(glib:define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
+(glib:define-gboxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
   :export t
   :type-initializer \"gtk_tree_row_reference_get_type\"
   :alloc (error \"GtkTreeRowReference cannot be created from the Lisp side.\"))
@@ -1031,7 +1031,7 @@
 ;;; GtkTreeModel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkTreeModel" tree-model
+(gobject:define-ginterface "GtkTreeModel" tree-model
   (:export t
    :type-initializer "gtk_tree_model_get_type")
   nil)
@@ -1054,14 +1054,15 @@
   data structure. The programmer just has to implement this interface on their
   own data type for it to be viewable by a @class{gtk:tree-view} widget.
 
-  The model is represented as a hierarchical tree of strongly-typed, columned
+  The model is represented as a hierarchical tree of strongly typed, columned
   data. In other words, the model can be seen as a tree where every node has
   different values depending on which column is being queried. The type of
-  data found in a column is determined by using the GType system (i.e.
-  @code{\"gint\"}, @code{\"GtkButton\"}, @code{\"gpointer\"}, etc). The types
-  are homogeneous per column across all nodes. It is important to note that this
-  interface only provides a way of examining a model and observing changes. The
-  implementation of each individual model decides how and if changes are made.
+  data found in a column is determined by using the GType system, that is
+  @code{\"gint\"}, @code{\"GtkButton\"}, @code{\"gpointer\"}, and so on. The
+  types are homogeneous per column across all nodes. It is important to note
+  that this interface only provides a way of examining a model and observing
+  changes. The implementation of each individual model decides how and if
+  changes are made.
 
   In order to make life simpler for programmers who do not need to write their
   own specialized model, two generic models are provided - the
@@ -1120,7 +1121,7 @@
   first example shows three ways of getting the iterator at the location
   @code{'3:2:5'}. While the first method shown is easier, the second is much
   more common, as you often get paths from callbacks.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Acquiring a @class{gtk:tree-iter} iterator.
     @begin{pre}
 ;; Three ways of getting the iter pointing to the location
@@ -1151,7 +1152,7 @@
                                        col-yearborn
                                        (1+ value))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -1161,7 +1162,6 @@
       @begin{pre}
 lambda (model path iter)    :run-last
       @end{pre}
-      The signal is emitted when a row in the model has changed.
       @begin[code]{table}
         @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
@@ -1170,26 +1170,25 @@ lambda (model path iter)    :run-last
         @entry[iter]{The valid @class{gtk:tree-iter} iterator pointing to the
           changed row.}
       @end{table}
+      The signal is emitted when a row in the model has changed.
     @subheading{The \"row-deleted\" signal}
       @begin{pre}
 lambda (model path)    :run-first
       @end{pre}
-      The signal is emitted when a row has been deleted. Note that no iterator
-      is passed to the signal handler, since the row is already deleted. This
-      should be called by models after a row has been removed. The location
-      pointed to by path should be the location that the row previously was at.
-      It may not be a valid location anymore.
       @begin[code]{table}
         @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
         @entry[path]{The @class{gtk:tree-path} instance identifying the row.}
       @end{table}
+      The signal is emitted when a row has been deleted. Note that no iterator
+      is passed to the signal handler, since the row is already deleted. This
+      should be called by models after a row has been removed. The location
+      pointed to by path should be the location that the row previously was at.
+      It may not be a valid location anymore.
     @subheading{The \"row-has-child-toggled\" signal}
       @begin{pre}
 lambda (model path iter)    :run-last
       @end{pre}
-      The signal is emitted when a row has gotten the first child row or lost
-      its last child row.
       @begin[code]{table}
         @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
@@ -1197,14 +1196,12 @@ lambda (model path iter)    :run-last
         @entry[iter]{The valid @class{gtk:tree-iter} iterator pointing to the
           row.}
       @end{table}
+      The signal is emitted when a row has gotten the first child row or lost
+      its last child row.
     @subheading{The \"row-inserted\" signal}
       @begin{pre}
 lambda (model path iter)    :run-first
       @end{pre}
-      The signal is emitted when a new row has been inserted in the model. Note
-      that the row may still be empty at this point, since it is a common
-      pattern to first insert an empty row, and then fill it with the desired
-      values.
       @begin[code]{table}
         @entry[model]{The @class{gtk:tree-model} object on which the signal is
           emitted.}
@@ -1213,14 +1210,14 @@ lambda (model path iter)    :run-first
         @entry[iter]{The valid @class{gtk:tree-iter} iterator pointing to the
           new row.}
       @end{table}
+      The signal is emitted when a new row has been inserted in the model. Note
+      that the row may still be empty at this point, since it is a common
+      pattern to first insert an empty row, and then fill it with the desired
+      values.
     @subheading{The \"rows-reordered\" signal}
       @begin{pre}
 lambda (model path iter new-order)    :run-first
       @end{pre}
-      The signal is emitted when the children of a node in the
-      @class{gtk:tree-model} object have been reordered. Note that the signal
-      is not emitted when rows are reordered by DND, since this is implemented
-      by removing and then reinserting the row.
       @begin[code]{table}
         @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
@@ -1229,9 +1226,13 @@ lambda (model path iter new-order)    :run-first
         @entry[iter]{The valid @class{gtk:tree-iter} iterator pointing to the
          node whose children have been reordered.}
         @entry[new-order]{The array of integers mapping the current position of
-          each child to its old position before the re-ordering, i.e.
+          each child to its old position before the re-ordering, that is
           @code{@arg{new-order}[newpos] = oldpos}.}
       @end{table}
+      The signal is emitted when the children of a node in the
+      @class{gtk:tree-model} object have been reordered. Note that the signal
+      is not emitted when rows are reordered by drag and drop, since this is
+      implemented by removing and then reinserting the row.
   @end{dictionary}
   @see-class{gtk:tree-view}
   @see-class{gtk:list-store}
@@ -2093,7 +2094,8 @@ lambda (model path iter new-order)    :run-first
 ;;;
 ;;; new_order :
 ;;;     an array of integers mapping the current position of each child to its
-;;;     old position before the re-ordering, i.e. new_order [newpos] = oldpos.
+;;;     old position before the re-ordering, that is
+;;;     new_order [newpos] = oldpos.
 ;;;
 ;;; length :
 ;;;     length of new_order array

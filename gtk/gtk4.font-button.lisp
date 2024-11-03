@@ -84,7 +84,7 @@
 ;;; GtkFontButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFontButton" font-button
+(gobject:define-gobject "GtkFontButton" font-button
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -128,26 +128,26 @@
       @begin{pre}
 lambda (fontbutton)    :run-first
       @end{pre}
-      Emitted to when the font button is activated. The signal on the
-      @class{gtk:font-button} widget is an action signal and emitting it causes
-      the button to present its dialog. Since 4.4
       @begin[code]{table}
         @entry[fontbutton]{The @class{gtk:font-button} widget which received
           the signal.}
       @end{table}
+      Emitted to when the font button is activated. The signal on the
+      @class{gtk:font-button} widget is an action signal and emitting it causes
+      the button to present its dialog. Since 4.4
     @subheading{The \"font-set\" signal}
       @begin{pre}
 lambda (fontbutton)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[fontbutton]{The @class{gtk:font-button} widget which received
+          the signal.}
+      @end{table}
       The signal is emitted when the user selects a font. When handling this
       signal, use the @fun{gtk:font-chooser-font} function to find out which
       font was just selected. Note that this signal is only emitted when the
       user changes the font. If you need to react to programmatic font changes
       as well, use the @code{\"notify::font-name\"} signal.
-      @begin[code]{table}
-        @entry[fontbutton]{The @class{gtk:font-button} widget which received
-          the signal.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:font-button-new}
   @see-constructor{gtk:font-button-new-with-font}

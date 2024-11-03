@@ -61,10 +61,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererCombo
+;;; GtkCellRendererCombo
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererCombo" cell-renderer-combo
+(gobject:define-gobject "GtkCellRendererCombo" cell-renderer-combo
   (:superclass cell-renderer-text
     :export t
     :interfaces nil
@@ -95,7 +95,8 @@
   The combo cell renderer takes care of adding a text cell renderer to the
   combo box and sets it to display the column specified by its
   @slot[gtk:cell-renderer-combo]{text-column} property. Further properties of
-  the combo box can be set in a handler for the \"editing-started\" signal.
+  the combo box can be set in a handler for the @code{\"editing-started\"}
+  signal.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-combo} object is deprecated since 4.10. List
     views use widgets to display their contents. You should use the
@@ -106,6 +107,14 @@
       @begin{pre}
 lambda (combo path iter)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[combo]{The @class{gtk:cell-renderer-combo} object on which the
+          signal is emitted.}
+        @entry[path]{The string of the path identifying the edited cell, relative
+          to the tree view model.}
+        @entry[iter]{The @class{gtk:tree-iter} instance selected in the combo
+           box, relative to the combo box model.}
+       @end{table}
       The signal is emitted each time after the user selected an item in the
       combo box, either by using the mouse or the arrow keys. Contrary to the
       @class{gtk:combo-box} widget, the @code{\"changed\"} signal is not emitted
@@ -117,14 +126,6 @@ lambda (combo path iter)    :run-last
       immediately cease the editing operating. This means that you most probably
       want to refrain from changing the model until the combo cell renderer
       emits the edited or @code{\"editing-canceled\"} signal.
-      @begin[code]{table}
-        @entry[combo]{The @class{gtk:cell-renderer-combo} object on which the
-          signal is emitted.}
-        @entry[path]{The string of the path identifying the edited cell, relative
-          to the tree view model.}
-        @entry[iter]{The @class{gtk:tree-iter} instance selected in the combo
-           box, relative to the combo box model.}
-       @end{table}
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-combo-new}
   @see-slot{gtk:cell-renderer-combo-has-entry}

@@ -67,7 +67,7 @@
 ;;; GtkCellRendererAccelMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkCellRendererAccelMode" cell-renderer-accel-mode
+(gobject:define-genum "GtkCellRendererAccelMode" cell-renderer-accel-mode
   (:export t
    :type-initializer "gtk_cell_renderer_accel_mode_get_type")
   (:gtk 0)
@@ -79,7 +79,7 @@
       (liber:symbol-documentation 'cell-renderer-accel-mode)
  "@version{2024-2-21}
   @begin{declaration}
-(gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
+(gobject:define-genum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_accel_mode_get_type\")
   (:gtk 0)
@@ -103,7 +103,7 @@
 ;;; GtkCellRendererAccel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererAccel" cell-renderer-accel
+(gobject:define-gobject "GtkCellRendererAccel" cell-renderer-accel
   (:superclass cell-renderer-text
    :export t
    :interfaces nil
@@ -140,18 +140,17 @@
       @begin{pre}
 lambda (accel path)    :run-last
       @end{pre}
-      Gets emitted when the user has removed the accelerator.
       @begin[code]{table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
         @entry[path]{The string with the path identifying the row of the edited
           cell.}
       @end{table}
+      Gets emitted when the user has removed the accelerator.
     @subheading{The \"accel-edited\" signal}
       @begin{pre}
 lambda (accel path key mods keycode)    :run-last
       @end{pre}
-      Gets emitted when the user has selected a new accelerator.
       @begin[code]{table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
@@ -163,6 +162,7 @@ lambda (accel path key mods keycode)    :run-last
         @entry[keycode]{The unsigned integer with the keycode of the new
           accelerator.}
       @end{table}
+      Gets emitted when the user has selected a new accelerator.
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-accel-new}
   @see-slot{gtk:cell-renderer-accel-accel-key}

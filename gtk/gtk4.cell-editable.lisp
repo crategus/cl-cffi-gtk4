@@ -62,7 +62,7 @@
 ;;; GtkCellEditable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkCellEditable" cell-editable
+(gobject:define-ginterface "GtkCellEditable" cell-editable
   (:export t
    :type-initializer "gtk_cell_editable_get_type")
   ((editing-canceled
@@ -90,6 +90,10 @@
       @begin{pre}
 lambda (editable)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[editable]{The @class{gtk:cell-editable} object on which the
+          signal was emitted.}
+      @end{table}
       The signal is a sign for the cell renderer to update its value from the
       @arg{editable} argument. Implementations of the @class{gtk:cell-editable}
       class are responsible for emitting the signal when they are done editing,
@@ -97,14 +101,14 @@ lambda (editable)    :run-last
       presses the @kbd{Enter} key. The @fun{gtk:cell-editable-editing-done}
       function is a convenience method for emitting the @code{\"editing-done\"}
       signal.
-      @begin[code]{table}
-        @entry[editable]{The @class{gtk:cell-editable} object on which the
-          signal was emitted.}
-      @end{table}
     @subheading{The \"remove-widget\" signal}
       @begin{pre}
 lambda (editable)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[editable]{The @class{gtk:cell-editable} object on which the
+          signal was emitted.}
+      @end{table}
       The signal is meant to indicate that the cell is finished editing, and
       the widget may now be destroyed. Implementations of the
       @class{gtk:cell-editable} class are responsible for emitting the signal
@@ -113,10 +117,6 @@ lambda (editable)    :run-last
       update the value of the cell before the widget is removed. The
       @fun{gtk:cell-editable-remove-widget} function is a convenience method
       for emitting the @code{\"remove-widget\"} signal.
-      @begin[code]{table}
-        @entry[editable]{The @class{gtk:cell-editable} object on which the
-          signal was emitted.}
-      @end{table}
   @end{dictionary}
   @see-slot{gtk:cell-editable-editing-canceled}
   @see-class{gtk:cell-renderer}

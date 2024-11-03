@@ -73,7 +73,7 @@
 ;;; GtkCellRendererToggle
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererToggle" cell-renderer-toggle
+(gobject:define-gobject "GtkCellRendererToggle" cell-renderer-toggle
   (:superclass cell-renderer
     :export t
     :interfaces nil
@@ -111,13 +111,13 @@
       @begin{pre}
 lambda (renderer path)    :run-last
       @end{pre}
-      The signal is emitted when the cell is toggled.
       @begin[code]{table}
         @entry[renderer]{The @class{gtk:cell-renderer-toggle} object which
           received the signal.}
         @entry[path]{String representation of the @class{gtk:tree-path} instance
           describing the event location.}
       @end{table}
+      The signal is emitted when the cell is toggled.
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-toggle-new}
   @see-slot{gtk:cell-renderer-toggle-activatable}

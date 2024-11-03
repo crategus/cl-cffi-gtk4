@@ -69,7 +69,7 @@
 ;;; GtkColorChooserWidget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColorChooserWidget" color-chooser-widget
+(gobject:define-gobject "GtkColorChooserWidget" color-chooser-widget
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -109,7 +109,7 @@
     The @class{gtk:color-chooser-widget} class has a single CSS node with name
     @code{colorchooser}.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     This example shows a color chooser widget in a window. The selected color
     is print on the console.
     @begin{pre}
@@ -131,7 +131,7 @@
           (format t \"Selected color is ~a~%\" (gdk:rgba-to-string color))))
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser-widget} implementation is deprecated
     since 4.10.

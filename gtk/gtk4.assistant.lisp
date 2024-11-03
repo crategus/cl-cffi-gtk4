@@ -116,7 +116,7 @@
 ;;; GtkAssistantPageType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAssistantPageType" assistant-page-type
+(gobject:define-genum "GtkAssistantPageType" assistant-page-type
   (:export t
    :type-initializer "gtk_assistant_page_type_get_type")
   (:content  0)
@@ -132,7 +132,7 @@
       (liber:symbol-documentation 'assistant-page-type)
  "@version{2023-9-15}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAssistantPageType\" assistant-page-type
+(gobject:define-genum \"GtkAssistantPageType\" assistant-page-type
   (:export t
    :type-initializer \"gtk_assistant_page_type_get_type\")
   (:content  0)
@@ -183,7 +183,7 @@
 ;; functions are replaced with corresponding functions for the GTkAssistant
 ;; class.
 
-(gobject:define-g-object-class "GtkAssistantPage" assistant-page
+(gobject:define-gobject "GtkAssistantPage" assistant-page
   (:superclass g:object
    :export nil
    :interfaces ()
@@ -213,14 +213,14 @@
     The @class{gtk:assistant-page} object is an auxiliary object used by
     the @class{gtk:assistant} class.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The accessor functions for the @slot[gtk:assistant-page]{complete},
     @slot[gtk:assistant-page]{page-type}, and @slot[gtk:assistant-page]{title}
     properties are not exported for use. The values of the properties are
     accessed with the @fun{gtk:assistant-page-complete},
     @fun{gtk:assistant-page-type}, and @fun{gtk:assistant-page-title} functions,
     which are defined for the @class{gtk:assistant} widget.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:assistant-page} implementation is deprecated since 4.10.
     This widget will be removed in GTK 5.
@@ -299,7 +299,7 @@
 ;;; GtkAssistant
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAssistant" assistant
+(gobject:define-gobject "GtkAssistant" assistant
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"
@@ -368,6 +368,10 @@
       @begin{pre}
 lambda (assistant)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[assistant]{The @class{gtk:assistant} widget which received the
+          signal.}
+    @end{table}
       The signal is emitted when the Apply button is clicked. The default
       behavior of the assistant is to switch to the page after the current page,
       unless the current page is the last one. A handler for the
@@ -376,51 +380,47 @@ lambda (assistant)    :run-last
       consider putting a @code{:progress} page after the @code{:confirm} page
       and handle this operation within the @code{\"prepare\"} signal of the
       progress page.
-      @begin[code]{table}
-        @entry[assistant]{The @class{gtk:assistant} widget which received the
-          signal.}
-    @end{table}
     @subheading{The \"cancel\" signal}
       @begin{pre}
 lambda (assistant)    :run-last
       @end{pre}
-      The signal is emitted when the Cancel button is clicked.
       @begin[code]{table}
         @entry[assistant]{The @class{gtk:assistant} widget which received the
           signal.}
       @end{table}
+      The signal is emitted when the Cancel button is clicked.
     @subheading{The \"close\" signal}
       @begin{pre}
 lambda (assistant)    :run-last
       @end{pre}
-      The signal is emitted either when the Close button of a summary page is
-      clicked, or when the Apply button in the last page in the flow is clicked,
-      which is the @code{:confirm} page.
       @begin[code]{table}
         @entry[assistant]{The @class{gtk:assistant} widget which received the
           signal.}
       @end{table}
+      The signal is emitted either when the Close button of a summary page is
+      clicked, or when the Apply button in the last page in the flow is clicked,
+      which is the @code{:confirm} page.
     @subheading{The \"escape\" signal}
       @begin{pre}
 lambda (assistant)    :action
       @end{pre}
-      The action signal for the @kbd{Escape} binding.
       @begin[code]{table}
         @entry[assistant]{The @class{gtk:assistant} widget which received the
           signal.}
       @end{table}
+      The action signal for the @kbd{Escape} binding.
     @subheading{The \"prepare\" signal}
       @begin{pre}
 lambda (assistant page)    :run-last
       @end{pre}
-      The signal is emitted when a new page is set as the assistants current
-      page, before making the new page visible. A handler for this signal can
-      do any preparations which are necessary before showing the page.
       @begin[code]{table}
         @entry[assistant]{The @class{gtk:assistant} widget which received the
           signal.}
-      @entry[page]{The @class{gtk:widget} widget for the current page.}
+      @entry[page]{The @class{gtk:widget} object for the current page.}
       @end{table}
+      The signal is emitted when a new page is set as the assistants current
+      page, before making the new page visible. A handler for this signal can
+      do any preparations which are necessary before showing the page.
   @end{dictionary}
   @see-constructor{gtk:assistant-new}
   @see-slot{gtk:assistant-pages}
@@ -979,11 +979,11 @@ lambda (assistant page)    :run-last
   @begin{short}
     Forces the assistant to recompute the buttons state.
   @end{short}
-  GTK automatically takes care of this in most situations, e.g. when the user
-  goes to a different page, or when the visibility or completeness of a page
-  changes. One situation where it can be necessary to call this function is
-  when changing a value on the current page affects the future page flow of the
-  assistant.
+  GTK automatically takes care of this in most situations, for example, when
+  the user goes to a different page, or when the visibility or completeness of
+  a page changes. One situation where it can be necessary to call this function
+  is when changing a value on the current page affects the future page flow of
+  the assistant.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.

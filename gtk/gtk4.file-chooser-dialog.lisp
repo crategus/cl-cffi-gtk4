@@ -69,7 +69,7 @@
 ;;; GtkFileChooserDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFileChooserDialog" file-chooser-dialog
+(gobject:define-gobject "GtkFileChooserDialog" file-chooser-dialog
   (:superclass dialog
    :export t
    :interfaces ("GtkAccessible"
@@ -170,7 +170,7 @@
     To summarize, make sure you use a predefined response code when you use
     the @class{gtk:file-chooser-dialog} widget to ensure proper operation.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Typical usage: In the simplest of cases, you can the following code to use
     the @class{gtk:file-chooser-dialog} widget to select a file for opening:
     @begin{pre}
@@ -204,7 +204,7 @@
       ))
     (gtk:window-destroy dialog)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:file-chooser-dialog} implementation has a single CSS node
     with the name @code{window} and @code{.filechooser} style class.

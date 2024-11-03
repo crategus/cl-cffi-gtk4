@@ -207,7 +207,7 @@
 ;;; GtkTreeViewDropPosition
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTreeViewDropPosition" tree-view-drop-position
+(gobject:define-genum "GtkTreeViewDropPosition" tree-view-drop-position
   (:export t
    :type-initializer "gtk_tree_view_drop_position_get_type")
   (:before 0)
@@ -221,7 +221,7 @@
       (liber:symbol-documentation 'tree-view-drop-position)
  "@version{2024-4-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTreeViewDropPosition\" tree-view-drop-position
+(gobject:define-genum \"GtkTreeViewDropPosition\" tree-view-drop-position
   (:export t
    :type-initializer \"gtk_tree_view_drop_position_get_type\")
   (:before 0)
@@ -247,7 +247,7 @@
 ;;; GtkTreeViewGridLines
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTreeViewGridLines" tree-view-grid-lines
+(gobject:define-genum "GtkTreeViewGridLines" tree-view-grid-lines
   (:export t
    :type-initializer "gtk_tree_view_grid_lines_get_type")
   (:none 0)
@@ -261,7 +261,7 @@
       (liber:symbol-documentation 'tree-view-grid-lines)
  "@version{2024-4-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
+(gobject:define-genum \"GtkTreeViewGridLines\" tree-view-grid-lines
   (:export t
    :type-initializer \"gtk_tree_view_grid_lines_get_type\")
   (:none 0)
@@ -286,7 +286,7 @@
 ;;; GtkTreeView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeView" tree-view
+(gobject:define-gobject "GtkTreeView" tree-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -441,20 +441,20 @@ treeview.view
       @begin{pre}
 lambda (view)    :run-last
       @end{pre}
-      The number of columns of the tree view has changed.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
       @end{table}
+      The number of columns of the tree view has changed.
     @subheading{The \"cursor-changed\" signal}
       @begin{pre}
 lambda (view)    :run-last
       @end{pre}
-      The position of the cursor (focused cell) has changed.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
       @end{table}
+      The position of the cursor (focused cell) has changed.
     @subheading{The \"expand-collapse-cursor-row\" signal}
       @begin{pre}
 lambda (view arg1 arg2 arg3)    :action
@@ -470,12 +470,6 @@ lambda (view arg1 arg2 arg3)    :action
       @begin{pre}
 lambda (view step direction)    :action
       @end{pre}
-      Keybinding signal which gets emitted when the user presses one of the
-      cursor keys. Applications should not connect to it, but may emit it with
-      the @fun{g:signal-emit} function if they need to control the cursor
-      programmatically. In contrast to the @fun{gtk:tree-view-get-cursor} and
-      @fun{gtk:tree-view-set-cursor-on-cell} functions when moving horizontally
-      @code{\"move-cursor\"} does not reset the current selection.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
@@ -491,16 +485,16 @@ lambda (view step direction)    :action
         @entry[Returns]{@em{True} if @arg{step} is supported, @em{false}
           otherwise.}
       @end{table}
+      Keybinding signal which gets emitted when the user presses one of the
+      cursor keys. Applications should not connect to it, but may emit it with
+      the @fun{g:signal-emit} function if they need to control the cursor
+      programmatically. In contrast to the @fun{gtk:tree-view-get-cursor} and
+      @fun{gtk:tree-view-set-cursor-on-cell} functions when moving horizontally
+      @code{\"move-cursor\"} does not reset the current selection.
     @subheading{The \"row-activated\" signal}
       @begin{pre}
 lambda (view path column)    :action
       @end{pre}
-      The signal is emitted when the @fun{gtk:tree-view-row-activated} function
-      is called or the user double clicks a tree view row. It is also emitted
-      when a non-editable row is selected and one of the @kbd{Space},
-      @kbd{Shift+Space}, @kbd{Return} or @kbd{Enter} keys is pressed. For
-      selection handling refer to the tree widget conceptual overview as well
-      as the @class{gtk:tree-selection} API documentation.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
@@ -508,28 +502,34 @@ lambda (view path column)    :action
         @entry[column]{The @class{gtk:tree-view-column} object in which the
           activation occurred.}
       @end{table}
+      The signal is emitted when the @fun{gtk:tree-view-row-activated} function
+      is called or the user double clicks a tree view row. It is also emitted
+      when a non-editable row is selected and one of the @kbd{Space},
+      @kbd{Shift+Space}, @kbd{Return} or @kbd{Enter} keys is pressed. For
+      selection handling refer to the tree widget conceptual overview as well
+      as the @class{gtk:tree-selection} API documentation.
     @subheading{The \"row-collapsed\" signal}
       @begin{pre}
 lambda (view iter path)    :run-last
       @end{pre}
-      The given row has been collapsed (child nodes are hidden).
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
         @entry[iter]{The @class{gtk:tree-iter} iterator of the collapsed row.}
         @entry[path]{The @class{gtk:tree-path} instance that points to the row.}
       @end{table}
+      The given row has been collapsed (child nodes are hidden).
     @subheading{The \"row-expanded\" signal}
       @begin{pre}
 lambda (view iter path)    :run-last
       @end{pre}
-      The given row has been expanded (child nodes are shown).
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
         @entry[iter]{The @class{gtk:tree-iter} iterator of the expanded row.}
         @entry[path]{The @class{gtk:tree-path} instance that points to the row.}
       @end{table}
+      The given row has been expanded (child nodes are shown).
     @subheading{The \"select-all\" signal}
       @begin{pre}
 lambda (view)    :action
@@ -567,8 +567,6 @@ lambda (view)    :action
       @begin{pre}
 lambda (view iter path)    :run-last
       @end{pre}
-      The given row is about to be collapsed (hide its children nodes). Use
-      this signal if you need to control the collapsibility of individual rows.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
@@ -577,12 +575,12 @@ lambda (view iter path)    :run-last
         @entry[path]{The @class{gtk:tree-path} instance that points to the row.}
         @entry[Returns]{@em{False} to allow collapsing, @em{true} to reject.}
       @end{table}
+      The given row is about to be collapsed (hide its children nodes). Use
+      this signal if you need to control the collapsibility of individual rows.
     @subheading{The \"test-expand-row\" signal}
       @begin{pre}
 lambda (view iter path)    :run-last
       @end{pre}
-      The given row is about to be expanded (show its children nodes). Use this
-      signal if you need to control the expandability of individual rows.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
@@ -590,6 +588,8 @@ lambda (view iter path)    :run-last
         @entry[path]{The @class{gtk:tree-path} instance that points to the row.}
         @entry[Returns]{@em{False} to allow expansion, @em{true} to reject.}
       @end{table}
+      The given row is about to be expanded (show its children nodes). Use this
+      signal if you need to control the expandability of individual rows.
     @subheading{The \"toggle-cursor-row\" signal}
       @begin{pre}
 lambda (view)    :action
@@ -2264,7 +2264,7 @@ lambda (view)    :action
   bin window coordinates. Widget relative coordinates must be converted using
   the @fun{gtk:tree-view-convert-widget-to-bin-window-coords} function.
 
-  For converting widget coordinates, e.g. the ones you get from the
+  For converting widget coordinates, for example, the ones you get from the
   @code{\"query-tooltip\"} signal, please see the
   @fun{gtk:tree-view-convert-widget-to-bin-window-coords} function.
 

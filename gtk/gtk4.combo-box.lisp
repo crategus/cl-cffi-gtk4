@@ -113,10 +113,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkComboBox
+;;; GtkComboBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkComboBox" combo-box
+(gobject:define-gobject "GtkComboBox" combo-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -238,28 +238,36 @@
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      Emitted to when the combo box is activated. The signal is an action signal
-      and emitting it causes the combo box to pop up its dropdown. Since 4.6
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
       @end{table}
+      Emitted to when the combo box is activated. The signal is an action signal
+      and emitting it causes the combo box to pop up its dropdown. Since 4.6
     @subheading{The \"changed\" signal}
       @begin{pre}
 lambda (combo)    :run-last
       @end{pre}
-      The signal is emitted when the active item is changed. The can be due to
-      the user selecting a different item from the list, or due to a call to
-      the @fun{gtk:combo-box-active-iter} function. It will also be emitted
-      while typing into the text entry of a combo box with an entry.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
       @end{table}
+      The signal is emitted when the active item is changed. The can be due to
+      the user selecting a different item from the list, or due to a call to
+      the @fun{gtk:combo-box-active-iter} function. It will also be emitted
+      while typing into the text entry of a combo box with an entry.
     @subheading{The \"format-entry-text\" signal}
       @begin{pre}
 lambda (combo pathstr)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[combo]{The @class{gtk:combo-box} widget that received the
+          signal.}
+        @entry[pathstr]{The string representing the @class{gtk:tree-path}
+          instance from the combo box's current model to format text for.}
+        @entry[Returns]{The string representing the value at @argp{pathstr} for
+          the current @class{gtk:combo-box} model.}
+      @end{table}
       A signal which allows you to change how the text displayed in a entry of
       the combo box is displayed. Connect a signal handler which returns an
       allocated string representing @arg{path}. That string will then be used
@@ -276,45 +284,37 @@ lambda (combo pathstr)    :run-last
          (value (gtk:tree-model-value model iter col-value)))
     (format nil \"~a\" value)))
       @end{pre}
-      @begin[code]{table}
-        @entry[combo]{The @class{gtk:combo-box} widget that received the
-          signal.}
-        @entry[pathstr]{The string representing the @class{gtk:tree-path}
-          instance from the combo box's current model to format text for.}
-        @entry[Returns]{The string representing the value at @argp{pathstr} for
-          the current @class{gtk:combo-box} model.}
-      @end{table}
     @subheading{The \"move-active\" signal}
       @begin{pre}
 lambda (combo scroll)    :action
       @end{pre}
-      A keybinding signal which gets emitted to move the active selection.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
         @entry[scroll]{The value of the @symbol{gtk:scroll-type} enumeration.}
       @end{table}
+      A keybinding signal which gets emitted to move the active selection.
     @subheading{The \"popdown\" signal}
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      A keybinding signal which gets emitted to popdown the combo box list. The
-      default bindings for this signal are the @kbd{Alt+Up} and @kbd{Escape}
-      keys.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
       @end{table}
+      A keybinding signal which gets emitted to popdown the combo box list. The
+      default bindings for this signal are the @kbd{Alt+Up} and @kbd{Escape}
+      keys.
     @subheading{The \"popup\" signal}
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      A keybinding signal which gets emitted to popup the combo box list. The
-      default binding for this signal is the @kbd{Alt+Down} key.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
       @end{table}
+      A keybinding signal which gets emitted to popup the combo box list. The
+      default binding for this signal is the @kbd{Alt+Down} key.
   @end{dictionary}
   @see-constructor{gtk:combo-box-new}
   @see-constructor{gtk:combo-box-new-with-entry}

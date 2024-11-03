@@ -123,7 +123,7 @@
 ;;; GtkCellArea
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellArea" cell-area
+(gobject:define-gobject "GtkCellArea" cell-area
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkCellLayout"
@@ -352,11 +352,11 @@ while (valid)
   widget and then passing them to the the @fun{gtk:cell-area-event} function
   API as they come in. Usually the @class{gtk:cell-area} object is only
   interested in button events, however some customized derived areas can be
-  implemented who are interested in handling other events. Handling an event can
-  trigger the \"focus-changed\" signal to fire. As well as \"add-editable\" in
-  the case that an editable cell was clicked and needs to start editing. You can
-  call the @fun{gtk:cell-area-stop-editing} function at any time to cancel any
-  cell editing that is currently in progress.
+  implemented who are interested in handling other events. Handling an event
+  can trigger the @code{\"focus-changed\"} signal to fire. As well as the
+  @code{\"add-editable\"} signal in the case that an editable cell was clicked
+  and needs to start editing. You can call the @fun{gtk:cell-area-stop-editing}
+  function at any time to cancel any cell editing that is currently in progress.
 
   The @class{gtk:cell-area} object drives keyboard focus from cell to cell in a
   way similar to @class{gtk:widget} object. For layouting widgets that support
@@ -467,9 +467,6 @@ foo_focus (GtkWidget       *widget,
       @begin{pre}
 lambda (area renderer editable cell-area path)    :run-first
       @end{pre}
-      Indicates that editing has started on @arg{renderer} and that
-      @arg{editable} should be added to the owning cell-layouting widget at
-      @arg{cell-area}.
       @begin[code]{table}
         @entry[area]{The @class{gtk:cell-area} object where editing started.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that started the
@@ -481,12 +478,13 @@ lambda (area renderer editable cell-area path)    :run-first
         @entry[path]{The @class{gtk:tree-path} string this edit was initiated
           for.}
       @end{table}
+      Indicates that editing has started on @arg{renderer} and that
+      @arg{editable} should be added to the owning cell-layouting widget at
+      @arg{cell-area}.
     @subheading{The \"apply-attributes\" signal}
       @begin{pre}
 lambda (area model iter is-expander is-expanded)    :run-first
       @end{pre}
-      The signal is emitted whenever applying attributes to the cell area from
-      the model.
       @begin[code]{table}
         @entry[area]{The @class{gtk:cell-area} object to apply the attributes
           to.}
@@ -498,32 +496,34 @@ lambda (area model iter is-expander is-expanded)    :run-first
         @entry[is-expanded]{Whether the view is currently showing the children
           of this row.}
       @end{table}
+      The signal is emitted whenever applying attributes to the cell area from
+      the model.
     @subheading{The \"focus-changed\" signal}
       @begin{pre}
 lambda (area renderer path)    :run-first
       @end{pre}
-      Indicates that focus changed on the cell area. The signal is emitted
-      either as a result of focus handling or event handling. It is possible
-      that the signal is emitted even if the currently focused renderer did not
-      change, this is because focus may change to the same renderer in the same
-      cell area for a different row of data.
       @begin[code]{table}
         @entry[area]{The @class{gtk:cell-area} object where focus changed.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that has focus.}
         @entry[path]{The current @class{gtk:tree-path} string set for area.}
       @end{table}
+      Indicates that focus changed on the cell area. The signal is emitted
+      either as a result of focus handling or event handling. It is possible
+      that the signal is emitted even if the currently focused renderer did not
+      change, this is because focus may change to the same renderer in the same
+      cell area for a different row of data.
     @subheading{The \"remove-editable\" signal}
       @begin{pre}
 lambda (area renderer editable)    :run-first
       @end{pre}
-      Indicates that editing finished on @arg{renderer} and that @arg{editable}
-      should be removed from the owning cell-layouting widget.
       @begin[code]{table}
         @entry[area]{The @class{gtk:cell-area} object where editing finished.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that finished
           editeding.}
         @entry[editable]{The @class{gtk:cell-editable} widget to remove.}
       @end{table}
+      Indicates that editing finished on @arg{renderer} and that @arg{editable}
+      should be removed from the owning cell-layouting widget.
   @end{dictionary}
   @see-slot{gtk:cell-area-edit-widget}
   @see-slot{gtk:cell-area-edited-cell}
@@ -1565,10 +1565,10 @@ lambda (area renderer editable)    :run-first
   @argument[gtype]{a @class{g:type-t} type ID}
   @return{The list of @symbol{g:param-spec} instances.}
   @short{Returns the cell properties of a cell area class.}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     In the Lisp binding we pass the type of a cell area class and not
     a pointer to the cell area class as argument to the function.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
     views use widgets for displaying their contents.

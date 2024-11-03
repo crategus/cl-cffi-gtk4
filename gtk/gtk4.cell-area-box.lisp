@@ -70,7 +70,7 @@
 ;;; GtkCellAreaBox
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellAreaBox" cell-area-box
+(gobject:define-gobject "GtkCellAreaBox" cell-area-box
   (:superclass cell-area
    :export t
    :interfaces ("GtkCellLayout"

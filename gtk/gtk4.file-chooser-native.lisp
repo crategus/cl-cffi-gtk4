@@ -69,7 +69,7 @@
 ;;; GtkFileChooserNative
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFileChooserNative" file-chooser-native
+(gobject:define-gobject "GtkFileChooserNative" file-chooser-native
   (:superclass native-dialog
    :export t
    :interfaces ("GtkFileChooser")
@@ -103,7 +103,7 @@
 
   While the API of the @class{gtk:file-chooser-native} object closely mirrors
   the @class{gtk:file-chooser-dialog} widget, the main difference is that there
-  is no access to any @class{gtk:window} or @class{gtk:widget} widget for the
+  is no access to any @class{gtk:window} or @class{gtk:widget} object for the
   dialog. This is required, as there may not be one in the case of a platform
   native dialog.
 
@@ -150,7 +150,7 @@
       @item{Shortcut folders.}
     @end{itemize}
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     In the simplest of cases, you can use the following code to use the
     @class{gtk:file-chooser-dialog} widget to select a file for opening:
     @begin{pre}
@@ -178,7 +178,7 @@
     @end{pre}
     For more information on how to best set up a file dialog, see the
     @class{gtk:file-chooser-dialog} widget.
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
     Use the @class{gtk:file-dialog} implementation instead.

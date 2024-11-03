@@ -102,7 +102,7 @@
 ;;; GtkEntryCompletion
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEntryCompletion" entry-completion
+(gobject:define-gobject "GtkEntryCompletion" entry-completion
   (:superclass g:object
    :export t
    :interfaces("GtkBuildable"
@@ -192,11 +192,6 @@
       @begin{pre}
 lambda (widget model iter)    :run-last
       @end{pre}
-      Gets emitted when a match from the cursor is on a match of the list. The
-      default behaviour is to replace the contents of the text entry with the
-      contents of the text column in the row pointed to by @arg{iter}. Note
-      that @arg{model} is the model that was passed to the
-      @fun{gtk:entry-completion-model} function.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
@@ -205,16 +200,15 @@ lambda (widget model iter)    :run-last
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
       @end{table}
+      Gets emitted when a match from the cursor is on a match of the list. The
+      default behaviour is to replace the contents of the text entry with the
+      contents of the text column in the row pointed to by @arg{iter}. Note
+      that @arg{model} is the model that was passed to the
+      @fun{gtk:entry-completion-model} function.
     @subheading{The \"insert-prefix\" signal}
       @begin{pre}
 lambda (widget prefix)    :run-last
       @end{pre}
-      Gets emitted when the inline autocompletion is triggered. The default
-      behaviour is to make the text entry display the whole prefix and select
-      the newly inserted part. Applications may connect to this signal in order
-      to insert only a smaller part of the prefix into the text entry, for
-      example, the text entry used in the @class{gtk:file-chooser} widget
-      inserts only the part of the prefix up to the next '/'.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
@@ -222,14 +216,16 @@ lambda (widget prefix)    :run-last
           completions.}
         @entry[Returns]{@em{True} if the signal has been handled.}
       @end{table}
+      Gets emitted when the inline autocompletion is triggered. The default
+      behaviour is to make the text entry display the whole prefix and select
+      the newly inserted part. Applications may connect to this signal in order
+      to insert only a smaller part of the prefix into the text entry, for
+      example, the text entry used in the @class{gtk:file-chooser} widget
+      inserts only the part of the prefix up to the next '/'.
     @subheading{The \"match-selected\" signal}
       @begin{pre}
 lambda (widget model iter)    :run-last
       @end{pre}
-      Gets emitted when a match from the list is selected. The default behaviour
-      is to replace the contents of the text entry with the contents of the text
-      column in the row pointed to by @arg{iter}. Note that @arg{model} is the
-      model that was passed to the @fun{gtk:entry-completion-model} function.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
@@ -238,15 +234,19 @@ lambda (widget model iter)    :run-last
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
       @end{table}
+      Gets emitted when a match from the list is selected. The default behaviour
+      is to replace the contents of the text entry with the contents of the text
+      column in the row pointed to by @arg{iter}. Note that @arg{model} is the
+      model that was passed to the @fun{gtk:entry-completion-model} function.
     @subheading{The \"no-matches\" signal}
       @begin{pre}
 lambda (widget)    :run-last
       @end{pre}
-      Gets emitted when the entry completion is out of suggestions.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
       @end{table}
+      Gets emitted when the entry completion is out of suggestions.
   @end{dictionary}
   @see-constructor{gtk:entry-completion-new}
   @see-constructor{gtk:entry-completion-new-with-area}
@@ -656,7 +656,7 @@ lambda (widget)    :run-last
  #+liber-documentation
  "@version{#2024-5-2}
   @argument[completion]{a @class{gtk:entry-completion} object}
-  @return{The @class{gtk:widget} widget the entry completion has been attached
+  @return{The @class{gtk:widget} object the entry completion has been attached
     to.}
   @short{Gets the widget the entry completion has been attached to.}
   @begin[Warning]{dictionary}

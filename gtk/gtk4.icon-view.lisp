@@ -162,7 +162,7 @@
 ;;; GtkIconViewDropPosition
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkIconViewDropPosition" icon-view-drop-position
+(gobject:define-genum "GtkIconViewDropPosition" icon-view-drop-position
   (:export t
    :type-initializer "gtk_icon_view_drop_position_get_type")
   (:no-drop 0)
@@ -178,7 +178,7 @@
       (liber:symbol-documentation 'icon-view-drop-position)
  "@version{2024-5-1}
   @begin{declaration}
-(gobject:define-g-enum \"GtkIconViewDropPosition\" icon-view-drop-position
+(gobject:define-genum \"GtkIconViewDropPosition\" icon-view-drop-position
   (:export t
    :type-initializer \"gtk_icon_view_drop_position_get_type\")
   (:no-drop 0)
@@ -205,7 +205,7 @@
 ;;; GtkIconView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkIconView" icon-view
+(gobject:define-gobject "GtkIconView" icon-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -305,32 +305,41 @@
       @begin{pre}
 lambda (view)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user activates the
       currently focused item. Applications should not connect to it, but may
       emit it with the @fun{g:signal-emit} function if they need to control
       activation programmatically. The default bindings for this signal are the
       @kbd{Space}, @kbd{Return} and @kbd{Enter} keys.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
-          emitted.}
-      @end{table}
     @subheading{The \"item-activated\" signal}
       @begin{pre}
 lambda (view path)    :run-last
       @end{pre}
-      The signal is emitted when the @fun{gtk:icon-view-item-activated} function
-      is called or the user double clicks an item. It is also emitted when a
-      non-editable item is selected and one of the @kbd{Space}, @kbd{Return} or
-      @kbd{Enter} keys is pressed.
       @begin[code]{table}
         @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
         @entry[path]{The @class{gtk:tree-path} instance for the activated item.}
       @end{table}
+      The signal is emitted when the @fun{gtk:icon-view-item-activated} function
+      is called or the user double clicks an item. It is also emitted when a
+      non-editable item is selected and one of the @kbd{Space}, @kbd{Return} or
+      @kbd{Enter} keys is pressed.
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
 lambda (view step count extent modify)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:icon-view} widget which received the
+          signal.}
+        @entry[step]{The granularity of the move, as a value of the
+          @symbol{gtk:movement-step} enumeration.}
+        @entry[count]{The integer with the number of step units to move.}
+        @entry[extend]{The boolean whether to extend the selection.}
+        @entry[modify]{The boolean whether to modify the selection.}
+      @end{table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. Applications should not connect to it, but
       may emit it with the @fun{g:signal-emit} function if they need to control
@@ -342,77 +351,68 @@ lambda (view step count extent modify)    :action
       @end{itemize}
       All of these will extend the selection when combined with the @kbd{Shift}
       modifier.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:icon-view} widget which received the
-          signal.}
-        @entry[step]{The granularity of the move, as a value of the
-          @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
-        @entry[extend]{The boolean whether to extend the selection.}
-        @entry[modify]{The boolean whether to modify the selection.}
-      @end{table}
     @subheading{The \"select-all\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user selects all items.
       Applications should not connect to it, but may emit it with the
       @fun{g:signal-emit} function if they need to control selection
       programmatically. The default binding for this signal is the @kbd{Ctrl-a}
       key.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
-          emitted.}
-      @end{table}
     @subheading{The \"select-cursor-item\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
-      A keybinding signal which gets emitted when the user selects the item that
-      is currently focused. Applications should not connect to it, but may emit
-      it with the @fun{g:signal-emit} function if they need to control selection
-      programmatically. There is no default binding for this signal.
       @begin[code]{table}
         @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
+      A keybinding signal which gets emitted when the user selects the item that
+      is currently focused. Applications should not connect to it, but may emit
+      it with the @fun{g:signal-emit} function if they need to control selection
+      programmatically. There is no default binding for this signal.
     @subheading{The \"selection-changed\" signal}
       @begin{pre}
 lambda (view)    :run-first
-      @end{pre}
-     The signal is emitted when the selection changes, that is the set of
-     selected items.
+     @end{pre}
      @begin[code]{table}
        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
          emitted.}
      @end{table}
+     The signal is emitted when the selection changes, that is the set of
+     selected items.
     @subheading{The \"toggle-cursor-item\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user toggles whether the
       currently focused item is selected or not. The exact effect of this depend
       on the selection mode. Applications should not connect to it, but may emit
       it with the @fun{g:signal-emit} function if they need to control selection
       programmatically. The default binding for this signal is the
       @kbd{Ctrl-Space} key.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
-          emitted.}
-      @end{table}
     @subheading{The \"unselect-all\" signal}
       @begin{pre}
 lambda (view)    :action
       @end{pre}
+      @begin[code]{table}
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
+          emitted.}
+      @end{table}
       A keybinding signal which gets emitted when the user unselects all items.
       Applications should not connect to it, but may emit it with the
       @fun{g:signal-emit} function if they need to control selection
       programmatically. The default binding for this signal is the
       @kbd{Ctrl-Shift-a} key.
-      @begin[code]{table}
-        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
-          emitted.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:icon-view-new}
   @see-constructor{gtk:icon-view-new-with-area}

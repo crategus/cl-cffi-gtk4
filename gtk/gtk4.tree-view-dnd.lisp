@@ -64,7 +64,7 @@
 ;;; GtkTreeDragSource
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkTreeDragSource" tree-drag-source
+(gobject:define-ginterface "GtkTreeDragSource" tree-drag-source
   (:export t
    :type-initializer "gtk_tree_drag_source_get_type")
   nil)
@@ -202,7 +202,7 @@
 ;;; GtkTreeDragDest
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkTreeDragDest" tree-drag-dest
+(gobject:define-ginterface "GtkTreeDragDest" tree-drag-dest
   (:export t
    :type-initializer "gtk_tree_drag_dest_get_type")
   nil)
@@ -296,7 +296,7 @@
     Determines whether a drop is possible before the given @arg{dest}, at the
     same depth as @arg{dest}.
   @end{short}
-  I.e., can we drop the data in @arg{data} at that location. The @arg{dest}
+  That is, can we drop the data in @arg{data} at that location. The @arg{dest}
   argument does not have to exist. The return value will almost certainly be
   @em{false} if the parent of @arg{dest} does not exist, though.
   @begin[Warning]{dictionary}

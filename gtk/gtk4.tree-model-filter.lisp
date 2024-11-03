@@ -74,7 +74,7 @@
 ;;; GtkTreeModelFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeModelFilter" tree-model-filter
+(gobject:define-gobject "GtkTreeModelFilter" tree-model-filter
   (:superclass g:object
    :export t
    :interfaces ("GtkTreeModel"
@@ -479,10 +479,10 @@
   @begin{short}
     Returns the child model of the filter model.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function duplicates the @fun{gtk:tree-model-filter-child-model}
     function.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
     Use the @class{gtk:filter-list-model} implementation instead.

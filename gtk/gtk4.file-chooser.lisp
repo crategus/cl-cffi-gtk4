@@ -89,7 +89,7 @@
 ;;; GtkFileChooserAction
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkFileChooserAction" file-chooser-action
+(gobject:define-genum "GtkFileChooserAction" file-chooser-action
   (:export t
    :type-initializer "gtk_file_chooser_action_get_type")
   (:open 0)
@@ -102,7 +102,7 @@
       (liber:symbol-documentation 'file-chooser-action)
  "@version{2024-4-26}
   @begin{declaration}
-(gobject:define-g-enum \"GtkFileChooserAction\" gtk:file-chooser-action
+(gobject:define-genum \"GtkFileChooserAction\" gtk:file-chooser-action
   (:export t
    :type-initializer \"gtk_file_chooser_action_get_type\")
   (:open 0)
@@ -129,7 +129,7 @@
 ;;; GtkFileChooser
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkFileChooser" file-chooser
+(gobject:define-ginterface "GtkFileChooser" file-chooser
   (:export t
    :type-initializer "gtk_file_chooser_get_type")
   ((action
@@ -195,7 +195,7 @@
     When the user is finished selecting files in a @class{gtk:file-chooser}
     widget, the program can get the selected filenames as @class{g:file}
     objects.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Sample usage with a @class{gtk:file-chooser-dialog} widget.
     @begin{pre}
 (defun create-file-chooser-dialog (parent)
@@ -226,7 +226,7 @@
     ;; Present the dialog
     (gtk:window-present dialog)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -553,7 +553,7 @@
 
   Note that the file must exist, or nothing will be done except for the
   directory change.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     If you are implementing a save dialog, you should use this function if you
     already have a file name to which the user may save. For example, when the
     user opens an existing file and then does \"File/Save As...\" on it. If you
@@ -571,7 +571,7 @@
         ;; the user edited an existing document
         (setf (gtk:file-chooser-file chooser) existing-file)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.

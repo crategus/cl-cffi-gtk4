@@ -110,7 +110,7 @@
 ;;; GtkCellRendererText
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererText" cell-renderer-text
+(gobject:define-gobject "GtkCellRendererText" cell-renderer-text
   (:superclass cell-renderer
    :export t
    :interfaces nil
@@ -271,15 +271,15 @@
       @begin{pre}
 lambda (renderer path text)    :run-last
       @end{pre}
-      The signal is emitted after @arg{renderer} has been edited. It is the
-      responsibility of the application to update the model and store @arg{text}
-      at the position indicated by @arg{path}.
       @begin[code]{table}
         @entry[renderer]{The @class{gtk:cell-renderer-text} object which
           received the signal.}
         @entry[path]{The string with the path identifying the edited cell.}
         @entry[text]{The string with the new text.}
       @end{table}
+      The signal is emitted after @arg{renderer} has been edited. It is the
+      responsibility of the application to update the model and store @arg{text}
+      at the position indicated by @arg{path}.
   @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.

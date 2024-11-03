@@ -64,7 +64,7 @@
 ;;; GtkFontChooserWidget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFontChooserWidget" font-chooser-widget
+(gobject:define-gobject "GtkFontChooserWidget" font-chooser-widget
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

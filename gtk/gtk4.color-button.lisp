@@ -79,7 +79,7 @@
 ;;; GtkColorButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColorButton" color-button
+(gobject:define-gobject "GtkColorButton" color-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -123,10 +123,10 @@ colorbutton
     @code{colorbutton} which contains a button node. To differentiate it from
     a plain @class{gtk:button} widget, it gets the @code{.color} style class.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     The example shows a color button. The button is initialized with the color
-    \"Blue\". The handler for the \"color-set\" signal prints the selected
-    color on the console.
+    \"Blue\". The handler for the @code{\"color-set\"} signal prints the
+    selected color on the console.
     @begin{pre}
 (defun do-color-button (&optional application)
   (let* ((button (make-instance 'gtk:color-button
@@ -148,7 +148,7 @@ colorbutton
             (format t \"Selected color is ~a~%\" (gdk:rgba-to-string rgba)))))
     (gtk:window-present window)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.
@@ -158,26 +158,26 @@ colorbutton
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
-      The signal on the @class{gtk:color-button} widget is an action signal and
-      emitting it causes the button to pop up its color chooser dialog.
-      Since 4.4
       @begin[code]{table}
         @entry[button]{The @class{gtk:color-button} widget which received the
           signal.}
       @end{table}
+      The signal on the @class{gtk:color-button} widget is an action signal and
+      emitting it causes the button to pop up its color chooser dialog.
+      Since 4.4
     @subheading{The \"color-set\" signal}
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[button]{The @class{gtk:color-button} widget which received the
+          signal.}
+      @end{table}
       The signal is emitted when the user selects a color. When handling this
       signal, use the @fun{gtk:color-chooser-rgba} function to find out which
       color was just selected. Note that this signal is only emitted when the
       user changes the color. If you need to react to programmatic color
       changes as well, use the @code{\"notify::color\"} signal.
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:color-button} widget which received the
-          signal.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:color-button-new}
   @see-constructor{gtk:color-button-new-with-rgba}

@@ -111,7 +111,7 @@
 ;;; GtkCellRendererState
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkCellRendererState" cell-renderer-state
+(gobject:define-gflags "GtkCellRendererState" cell-renderer-state
   (:export t
    :type-initializer "gtk_cell_renderer_state_get_type")
   (:selected    #.(ash 1 0))
@@ -128,7 +128,7 @@
       (liber:symbol-documentation 'cell-renderer-state)
  "@version{2024-5-15}
   @begin{declaration}
-(gobject:define-g-flags \"GtkCellRendererState\" cell-renderer-state
+(gobject:define-gflags \"GtkCellRendererState\" cell-renderer-state
   (:export t
    :type-initializer \"gtk_cell_renderer_state_get_type\")
   (:selected    #.(ash 1 0))
@@ -158,7 +158,7 @@
 ;;; GtkCellRendererMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkCellRendererMode" cell-renderer-mode
+(gobject:define-genum "GtkCellRendererMode" cell-renderer-mode
   (:export t
    :type-initializer "gtk_cell_renderer_mode_get_type")
   (:inert 0)
@@ -171,7 +171,7 @@
       (liber:symbol-documentation 'cell-renderer-mode)
  "@version{2024-5-15}
   @begin{declaration}
-(gobject:define-g-enum \"GtkCellRendererMode\" cell-renderer-mode
+(gobject:define-genum \"GtkCellRendererMode\" cell-renderer-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_mode_get_type\")
   (:inert 0)
@@ -181,9 +181,8 @@
   @begin{values}
     @begin[code]{table}
       @entry[:inert]{The cell is just for display and cannot be interacted with.
-        Note that this does not mean that e.g. the row being drawn cannot be
-        selected - just that a particular element of it cannot be individually
-        modified.}
+        Note that this does not mean that the row being drawn cannot be selected
+        - just that a particular element of it cannot be individually modified.}
       @entry[:activatable]{The cell can be clicked.}
       @entry[:editable]{The cell can be edited or otherwise modified.}
     @end{table}
@@ -195,7 +194,7 @@
 ;;; GtkCellRenderer
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRenderer" cell-renderer
+(gobject:define-gobject "GtkCellRenderer" cell-renderer
   (:superclass g:initially-unowned
    :export t
    :interfaces nil
@@ -301,18 +300,24 @@
       @begin{pre}
 lambda (renderer)    :run-first
       @end{pre}
-      The signal gets emitted when the user cancels the process of editing a
-      cell. For example, an editable cell renderer could be written to cancel
-      editing when the user presses the @kbd{Escape} key. See also the
-      @fun{gtk:cell-renderer-stop-editing} function.
       @begin[code]{table}
         @entry[renderer]{The @class{gtk:cell-renderer} object which received
           the signal.}
       @end{table}
+      The signal gets emitted when the user cancels the process of editing a
+      cell. For example, an editable cell renderer could be written to cancel
+      editing when the user presses the @kbd{Escape} key. See also the
+      @fun{gtk:cell-renderer-stop-editing} function.
     @subheading{The \"editing-started\" signal}
       @begin{pre}
 lambda (renderer editable path)    :run-first
       @end{pre}
+      @begin[code]{table}
+        @entry[renderer]{The @class{gtk:cell-renderer} object which received
+          the signal.}
+        @entry[editable]{The @class{gtk:cell-editable} widget.}
+        @entry[path]{The string with the path identifying the edited cell.}
+      @end{table}
       The signal gets emitted when a cell starts to be edited. The intended
       use of this signal is to do special setup on editable, for example, adding
       a @class{gtk:entry-completion} object or setting up additional columns in
@@ -320,12 +325,6 @@ lambda (renderer editable path)    :run-first
       renderers will continue to use the same kind of widget for editing in
       future releases, therefore you should check the type of the @arg{editable}
       argument before doing any specific setup.
-      @begin[code]{table}
-        @entry[renderer]{The @class{gtk:cell-renderer} object which received
-          the signal.}
-        @entry[editable]{The @class{gtk:cell-editable} widget.}
-        @entry[path]{The string with the path identifying the edited cell.}
-      @end{table}
   @end{dictionary}
   @see-slot{gtk:cell-renderer-cell-background}
   @see-slot{gtk:cell-renderer-cell-background-rgba}
@@ -845,7 +844,7 @@ lambda (renderer editable path)    :run-first
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[snapshot]{a @class{gtk:snapshot} object to draw to}
-  @argument[widget]{a @class{gtk:widget} widget owning window}
+  @argument[widget]{a @class{gtk:widget} object owning window}
   @argument[background]{a @class{gdk:rectangle} instance with the entire cell
     area, including tree expanders and maybe padding on the sides}
   @argument[area]{a @class{gdk:rectangle} instance with the area normally
@@ -1203,7 +1202,7 @@ lambda (renderer editable path)    :run-first
  #+liber-documentation
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[widget]{a @class{gtk:widget} widget this cell renderer will be
+  @argument[widget]{a @class{gtk:widget} object this cell renderer will be
     rendering to}
   @begin{return}
     @arg{minimum} -- an integer with the minimum height @br{}
@@ -1241,7 +1240,7 @@ lambda (renderer editable path)    :run-first
  #+liber-documentation
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[widget]{a @class{gtk:widget} widget this cell renderer will be
+  @argument[widget]{a @class{gtk:widget} object this cell renderer will be
     rendering to}
   @argument[width]{an integer with the size which is available for allocation}
   @begin{return}
@@ -1284,7 +1283,7 @@ lambda (renderer editable path)    :run-first
  #+liber-documentation
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[widget]{a @class{gtk:widget} widget this cell renderer will be
+  @argument[widget]{a @class{gtk:widget} object this cell renderer will be
     rendering to}
   @begin{return}
     @arg{minimum} -- a @class{gtk:requisition} instance with the minimum
@@ -1326,7 +1325,7 @@ lambda (renderer editable path)    :run-first
  #+liber-documentation
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[widget]{a @class{gtk:widget} widget this cell renderer will be
+  @argument[widget]{a @class{gtk:widget} object this cell renderer will be
     rendering to}
   @begin{return}
     @arg{minimum} -- an integer with the minimum size @br{}
@@ -1365,7 +1364,7 @@ lambda (renderer editable path)    :run-first
  #+liber-documentation
  "@version{#2024-5-15}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[widget]{a @class{gtk:widget} widget this cell renderer will be
+  @argument[widget]{a @class{gtk:widget} object this cell renderer will be
     rendering to}
   @argument[height]{an integer with the size which is available for allocation}
   @begin{return}

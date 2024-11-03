@@ -71,7 +71,7 @@
 ;;; GtkCellAreaContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellAreaContext" cell-area-context
+(gobject:define-gobject "GtkCellAreaContext" cell-area-context
   (:superclass g:object
    :export t
    :interfaces nil

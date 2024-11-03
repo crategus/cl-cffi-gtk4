@@ -84,7 +84,7 @@
 ;;; GtkTreeSelection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeSelection" tree-selection
+(gobject:define-gobject "GtkTreeSelection" tree-selection
   (:superclass g:object
     :export t
     :interfaces ()
@@ -134,14 +134,14 @@
       @begin{pre}
 lambda (selection)    :run-first
       @end{pre}
-      Emitted whenever the selection has (possibly) changed. Please note that
-      this signal is mostly a hint. It may only be emitted once when a range of
-      rows are selected, and it may occasionally be emitted when nothing has
-      happened.
       @begin[code]{table}
         @entry[selection]{The @class{gtk:tree-selection} object which received
         the signal.}
       @end{table}
+      Emitted whenever the selection has (possibly) changed. Please note that
+      this signal is mostly a hint. It may only be emitted once when a range of
+      rows are selected, and it may occasionally be emitted when nothing has
+      happened.
   @end{dictionary}
   @see-slot{gtk:tree-selection-mode}
   @see-class{gtk:tree-view}
@@ -320,13 +320,13 @@ lambda (selection)    :run-first
     @symbol{gtk:selection-mode} enumeration.
   @end{short}
   This function will not work if you use the selection mode @code{:multiple}.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     As a convenience the C implementation also gets the current model of the
     tree view wiget associated with the selection. Use the
     @fun{gtk:tree-selection-tree-view} and @fun{gtk:tree-view-model} functions
     instead to get the model.
-  @end{notes}
-  @begin{examples}
+  @end{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let* ((model (gtk:tree-view-model view))
        (selection (gtk:tree-view-selection view))
@@ -339,7 +339,7 @@ lambda (selection)    :run-first
       ...
   ... )
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-selection} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -446,12 +446,12 @@ lambda (selection)    :run-first
   function, you may want to convert the returned list into a list of
   @class{gtk:tree-row-reference} objects. To do this, you can use the
   @fun{gtk:tree-row-reference-new} function.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     As a convenience the C implementation also gets the current model of the
     tree view wiget associated with the selection. Use the
     @fun{gtk:tree-selection-tree-view} and @fun{gtk:tree-view-model} functions
     instead to get the model.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-selection} implementation is deprecated since 4.10.
     Please do not use it in newly written code.

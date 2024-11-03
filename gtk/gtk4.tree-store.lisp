@@ -81,7 +81,7 @@
 ;;; GtkTreeStore
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeStore" tree-store
+(gobject:define-gobject "GtkTreeStore" tree-store
   (:superclass g:object
    :export t
    :interfaces ("GtkBuildable"
@@ -164,7 +164,7 @@
   @end{short}
   Note that only types derived from standard GType fundamental types are
   supported.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     The following example creates a new @class{gtk:tree-store} object with
     three columns, of type @code{\"gint\"}, @code{\"gchararray\"}, and
     @code{\"GdkPixbuf\"} respectively.
@@ -295,7 +295,7 @@
     Sets the values of one or more cells in the row referenced by @arg{iter}.
   @end{short}
   The variable argument list should contain the values to be set.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((model (gtk:tree-store-new \"gchararray\" \"gchararray\" \"guint\")))
   ;; First Book
@@ -315,7 +315,7 @@
   ... ))
     @end{pre}
   @end{dictionary}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The Lisp implementation does not support pairs of a column index and a
     value, but a list of values. Therefore, it is not possible to set individual
     columns. See the @fun{gtk:tree-store-set-value} function for setting the
@@ -776,9 +776,9 @@
     Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:tree-store} object.
   @end{short}
-  @begin{notes}
+  @begin[Notes]{dictionary}
     This function is slow. Only use it for debugging and/or testing purposes.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-store} implementation is deprecated since 4.10.
     Use the @class{gtk:tree-list-model} object instead.

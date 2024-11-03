@@ -75,7 +75,7 @@
 ;;; GtkLockButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkLockButton" lock-button
+(gobject:define-gobject "GtkLockButton" lock-button
   (:superclass button
    :export t
    :interfaces ("GtkAccessible"

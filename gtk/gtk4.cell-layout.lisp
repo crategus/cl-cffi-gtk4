@@ -62,7 +62,7 @@
 ;;; GtkCellLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkCellLayout" cell-layout
+(gobject:define-ginterface "GtkCellLayout" cell-layout
   (:export t
    :type-initializer "gtk_cell_layout_get_type")
   nil)

@@ -66,10 +66,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkStatusbar
+;;; GtkStatusbar
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkStatusbar" statusbar
+(gobject:define-gobject "GtkStatusbar" statusbar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -133,8 +133,6 @@
       @begin{pre}
 lambda (statusbar context text)    :run-last
       @end{pre}
-      Is emitted whenever a new message is popped off the stack of the status
-      bar.
       @begin[code]{table}
         @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
@@ -142,12 +140,12 @@ lambda (statusbar context text)    :run-last
           relevant message/statusbar.}
         @entry[text]{The string with the message that was just popped.}
       @end{table}
+      Is emitted whenever a new message is popped off the stack of the status
+      bar.
     @subheading{The \"text-pushed\" signal}
       @begin{pre}
 lambda (statusbar context text)    :run-last
       @end{pre}
-      Is emitted whenever a new message gets pushed onto the stack of the status
-      bar.
       @begin[code]{table}
         @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
@@ -155,6 +153,8 @@ lambda (statusbar context text)    :run-last
           relevant message/statusbar.}
         @entry[text]{The string with the message that was pushed.}
       @end{table}
+      Is emitted whenever a new message gets pushed onto the stack of the status
+      bar.
   @end{dictionary}
   @see-constructor{gtk:statusbar-new}")
 

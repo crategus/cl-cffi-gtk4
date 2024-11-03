@@ -143,7 +143,7 @@
 ;;; GtkTreeViewColumnSizing
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTreeViewColumnSizing" tree-view-column-sizing
+(gobject:define-genum "GtkTreeViewColumnSizing" tree-view-column-sizing
   (:export t
    :type-initializer "gtk_tree_view_column_sizing_get_type")
   (:grow-only 0)
@@ -156,7 +156,7 @@
       (liber:symbol-documentation 'tree-view-column-sizing)
  "@version{2024-4-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
+(gobject:define-genum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
   (:export t
    :type-initializer \"gtk_tree_view_column_sizing_get_type\")
   (:grow-only 0)
@@ -184,7 +184,7 @@
 ;;; GtkTreeViewColumn
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeViewColumn" tree-view-column
+(gobject:define-gobject "GtkTreeViewColumn" tree-view-column
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkBuildable"
@@ -276,11 +276,11 @@
       @begin{pre}
 lambda (column)    :run-last
       @end{pre}
-    Emitted when the header of the column has been clicked.
-    @begin[code]{table}
-      @entry[column]{The @class{gtk:tree-view-column} object which
-        emitted the signal.}
-    @end{table}
+      @begin[code]{table}
+        @entry[column]{The @class{gtk:tree-view-column} object which
+          emitted the signal.}
+      @end{table}
+      Emitted when the header of the column has been clicked.
   @end{dictionary}
   @see-constructor{gtk:tree-view-column-new}
   @see-constructor{gtk:tree-view-column-new-with-area}
@@ -1028,7 +1028,7 @@ lambda (column)    :run-last
   @fun{gtk:tree-view-column-pack-start}, and
   @fun{gtk:tree-view-column-set-attributes} functions on the newly created
   @class{gtk:tree-view-column} object.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
   @begin{pre}
 (let* ((renderer (gtk:cell-renderer-text-new))
        (column (gtk:tree-view-column-new-with-attributes \"Example\"
@@ -1308,7 +1308,7 @@ lambda (column)    :run-last
   @argument[renderer]{a @class{gtk:cell-renderer} object to clear the attribute
     mapping on}
   @begin{short}
-    Clears all existing attributes previously set e.g. with the
+    Clears all existing attributes previously set, for example, with the
     @fun{gtk:tree-view-column-set-attributes} function.
   @end{short}
   @begin[Warning]{dictionary}
@@ -1352,7 +1352,7 @@ lambda (column)    :run-last
  #+liber-documentation
  "@version{#2024-3-8}
   @argument[column]{a @class{gtk:tree-view-column} object}
-  @return{The @class{gtk:widget} widget with the button for the tree view
+  @return{The @class{gtk:widget} object with the button for the tree view
     column header.}
   @begin{short}
     Returns the button used in the tree view column header.

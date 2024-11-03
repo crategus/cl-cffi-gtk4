@@ -2,7 +2,7 @@
 ;;; gtk4.dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -105,7 +105,7 @@
       (liber:symbol-documentation 'dialog-flags)
  "@version{2024-5-1}
   @begin{declaration}
-(gobject:define-g-flags \"GtkDialogFlags\" dialog-flags
+(gobject:define-gflags \"GtkDialogFlags\" dialog-flags
   (:export t
    :type-initializer \"gtk_dialog_flags_get_type\")
   (:modal               #.(ash 1 0))
@@ -132,13 +132,13 @@
 
 ;; FIXME: We have a subtle bug. The INITIALIZE-INSTANCE :after and
 ;; INITIAlIZE-GOBJECT-CLASS-G-TYPE methods are not called for GtkDialog, when
-;; loading the library. If we rename DIALOG to e.g. MYDIALOG the methods
-;; are called. - 2023-8-22 -
+;; loading the library. If we rename DIALOG to MYDIALOG the methods are called.
+;; - 2023-8-22 -
 
 ;; If we call the definition at the Lisp prompt after loading the library
 ;; the definition of the class is executed correctly:
 ;;
-;;* (gobject:define-g-object-class "GtkDialog" dialog
+;;* (gobject:define-gobject "GtkDialog" dialog
 ;;  (:superclass window
 ;;   :export t
 ;;   :interfaces ("GtkAccessible"
@@ -306,27 +306,27 @@
       @begin{pre}
 lambda (dialog)    :action
       @end{pre}
-      A keybinding signal which gets emitted when the user uses a keybinding to
-      close the dialog. The default binding for this signal is the @kbd{Escape}
-      key.
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:dialog} widget on which the signal is
           emitted.}
       @end{table}
+      A keybinding signal which gets emitted when the user uses a keybinding to
+      close the dialog. The default binding for this signal is the @kbd{Escape}
+      key.
     @subheading{The \"response\" signal}
       @begin{pre}
 lambda (dialog response)    :run-last
       @end{pre}
-      Emitted when an action widget is clicked. The signal is also emitted when
-      the @fun{gtk:dialog-response} function is called. On a delete event, the
-      response ID is the @code{:delete-event} value of the
-      @symbol{gtk:response-type} enumeration. Otherwise, it depends on which
-      action widget was clicked.
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:dialog} widget on which the signal is
           emitted.}
         @entry[response]{The integer with the response ID.}
       @end{table}
+      Emitted when an action widget is clicked. The signal is also emitted when
+      the @fun{gtk:dialog-response} function is called. On a delete event, the
+      response ID is the @code{:delete-event} value of the
+      @symbol{gtk:response-type} enumeration. Otherwise, it depends on which
+      action widget was clicked.
   @end{dictionary}
   @see-constructor{gtk:dialog-new}
   @see-constructor{gtk:dialog-new-with-buttons}
@@ -560,10 +560,10 @@ lambda (dialog response)    :run-last
     repeatedly.
   @end{short}
   Each button must have both text and response ID.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The Lisp implementation does not call the C function, but the
     @fun{gtk:dialog-add-button} function is called in a loop to add the buttons.
-  @end{notes}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
     @class{gtk:window} widget instead.
@@ -586,7 +586,7 @@ lambda (dialog response)    :run-last
  #+liber-documentation
  "@version{#2023-8-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
-  @argument[child]{an activatable @class{gtk:widget} widget}
+  @argument[child]{an activatable @class{gtk:widget} object}
   @argument[response]{response ID for @arg{child}, which is a positive
     integer or a value of the @symbol{gtk:response-type} enumeration}
   @begin{short}
@@ -681,7 +681,7 @@ lambda (dialog response)    :run-last
  #+liber-documentation
  "@version{#2023-8-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
-  @argument[widget]{a @class{gtk:widget} widget in the action area of
+  @argument[widget]{a @class{gtk:widget} object in the action area of
     @arg{dialog}}
   @return{The response ID of @arg{widget}, which is a positive integer or a
     value of the @symbol{gtk:response-type} enumeration, the value is

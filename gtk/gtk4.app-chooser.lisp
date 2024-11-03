@@ -60,7 +60,7 @@
 ;;; GtkAppChooser
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkAppChooser" app-chooser
+(gobject:define-ginterface "GtkAppChooser" app-chooser
   (:export t
    :type-initializer "gtk_app_chooser_get_type")
   ((content-type

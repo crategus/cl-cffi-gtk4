@@ -2,7 +2,7 @@
 ;;; gtk4.style-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -116,25 +116,27 @@
       "GBoxed"
       (documentation 'border 'type)
  "@version{2023-8-30}
-  @begin{short}
-    A structure that specifies a border around a rectangular area that can be
-    of different width on each side.
-  @end{short}
-  @begin{pre}
-(glib:define-g-boxed-cstruct border \"GtkBorder\"
+  @begin{declaration}
+(glib:define-gboxed-cstruct border \"GtkBorder\"
   (:export t
    :type-initializer \"gtk_border_get_type\")
   (left :int16 :initform 0)
   (right :int16 :initform 0)
   (top :int16 :initform 0)
   (bottom :int16 :initform 0))
-  @end{pre}
-  @begin[code]{table}
-    @entry[left]{The width of the left border.}
-    @entry[right]{The width of the right border.}
-    @entry[top]{The width of the top border.}
-    @entry[bottom]{The width of the bottom border.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[left]{The width of the left border.}
+      @entry[right]{The width of the right border.}
+      @entry[top]{The width of the top border.}
+      @entry[bottom]{The width of the bottom border.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    A structure that specifies a border around a rectangular area that can be
+    of different width on each side.
+  @end{short}
   @see-slot{gtk:border-left}
   @see-slot{gtk:border-right}
   @see-slot{gtk:border-top}
@@ -286,7 +288,7 @@
       (liber:symbol-documentation 'style-context-print-flags)
  "@version{2023-8-30}
   @begin{declaration}
-(gobject:define-g-flags \"GtkStyleContextPrintFlags\" style-context-print-flags
+(gobject:define-gflags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
    :type-initializer \"gtk_style_context_print_flags_get_type\")
   (:none 0)
@@ -455,7 +457,7 @@
   the widget to which @arg{context} belongs. If you want to affect the style of
   all widgets, use the @fun{gtk:style-context-add-provider-for-display}
   function.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     If both priorities are the same, a style provider object added through this
     function takes precedence over another added through the
     @fun{gtk:style-context-add-provider-for-display} function.
@@ -499,7 +501,7 @@
   @end{short}
   GTK uses this to make styling information from the @class{gtk:settings}
   object available.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Change the color and the font in a text view: Create a provider, load CSS
     into the provider, add the style class and the provider to the parent
     window.
@@ -514,12 +516,12 @@
                                               provider)
   ... )
     @end{pre}
-  @end{examples}
-  @begin{notes}
+  @end{dictionary}
+  @begin[Notes]{dictionary}
     If both priorities are the same, a style provider object added through the
     @fun{gtk:style-context-add-provider} function takes precedence over another
     added through this function.
-  @end{notes}
+  @end{dictionary}
   @see-class{gdk:display}
   @see-class{gtk:style-provider}
   @see-class{gtk:settings}
@@ -880,7 +882,7 @@
     Adds a style class to the style context, so later uses of the style context
     will make use of this new class for styling.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     In the CSS file format, a GtkEntry defining an \"entry\" class, would be
     matched by:
     @begin{pre}
@@ -1037,7 +1039,7 @@ GtkEntry.entry { ... @}
   This function is intended for testing and debugging of the CSS implementation
   in GTK. There are no guarantees about the format of the returned string, it
   may change.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (setq context
       (gtk:widget-style-context (make-instance 'gtk:dialog)))
@@ -1051,7 +1053,7 @@ GtkEntry.entry { ... @}
       box.dialog-action-area.horizontal:dir(ltr)
 \"
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}

@@ -72,7 +72,7 @@
 ;;; GtkTreeModelSort
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeModelSort" tree-model-sort
+(gobject:define-gobject "GtkTreeModelSort" tree-model-sort
   (:superclass g:object
    :export t
    :interfaces ("GtkTreeModel"
@@ -96,7 +96,7 @@
   to provide a way to sort a different model without modifying it. Note that
   the sort function used by the @class{gtk:tree-model-sort} object is not
   guaranteed to be stable.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     The use of this is best demonstrated through an example. In the following
     sample code we create two @class{gtk:tree-view} widgets each with a view of
     the same data. As the model is wrapped here by a @class{gtk:tree-model-sort}
@@ -138,7 +138,7 @@
     ;; Change the value of the row in the child model
     (gtk:list-store-set-value model iter col1 new-value)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.
@@ -408,7 +408,7 @@
     Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:tree-model-sort} object.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function is slow. Only use it for debugging and/or testing purposes.
   @end{dictionary}
   @begin[Warning]{dictionary}

@@ -89,7 +89,7 @@
 ;;; GtkAppChooserWidget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkAppChooserWidget" app-chooser-widget
+(gobject:define-gobject "GtkAppChooserWidget" app-chooser-widget
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -157,25 +157,25 @@
       @begin{pre}
 lambda (widget application)    :run-first
       @end{pre}
-      Emitted when an application item is activated from the list of the widget.
-      This usually happens when the user double clicks an item, or an item is
-      selected and the user presses one of the @kbd{Space}, @kbd{Shift+Space},
-      @kbd{Return} or @kbd{Enter} keys.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:app-chooser-widget} widget which received
           the signal.}
         @entry[application]{The activated @class{g:app-info} object.}
       @end{table}
+      Emitted when an application item is activated from the list of the widget.
+      This usually happens when the user double clicks an item, or an item is
+      selected and the user presses one of the @kbd{Space}, @kbd{Shift+Space},
+      @kbd{Return} or @kbd{Enter} keys.
     @subheading{The \"application-selected\" signal}
       @begin{pre}
 lambda (widget application)    :run-first
       @end{pre}
-      Emitted when an application item is selected from the widget's list.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:app-chooser-widget} widget which received
           the signal.}
         @entry[application]{The selected @class{g:app-info} object.}
       @end{table}
+      Emitted when an application item is selected from the widget's list.
   @end{dictionary}
   @see-constructor{gtk:app-chooser-widget-new}
   @see-slot{gtk:app-chooser-widget-default-text}

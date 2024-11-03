@@ -59,7 +59,7 @@
 ;;; GtkCellRendererSpinner
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererSpinner" cell-renderer-spinner
+(gobject:define-gobject "GtkCellRendererSpinner" cell-renderer-spinner
   (:superclass cell-renderer
    :export t
    :interfaces nil

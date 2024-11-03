@@ -70,7 +70,7 @@
 ;;; GtkColorChooser
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkColorChooser" color-chooser
+(gobject:define-ginterface "GtkColorChooser" color-chooser
   (:export t
    :type-initializer "gtk_color_chooser_get_type")
   ((rgba
@@ -110,15 +110,15 @@
       @begin{pre}
 lambda (chooser color)    :run-first
       @end{pre}
-      Emitted when a color is activated from the color chooser. This usually
-      happens when the user clicks a color swatch, or a color is selected and
-      the user presses one of the @kbd{Space}, @kbd{Shift+Space}, @kbd{Return}
-      or @kbd{Enter} keys.
       @begin[code]{table}
         @entry[chooser]{The @class{gtk:color-chooser} widget which received
           the signal.}
         @entry[color]{The @struct{gdk:rgba} color.}
       @end{table}
+      Emitted when a color is activated from the color chooser. This usually
+      happens when the user clicks a color swatch, or a color is selected and
+      the user presses one of the @kbd{Space}, @kbd{Shift+Space}, @kbd{Return}
+      or @kbd{Enter} keys.
   @end{dictionary}
   @see-slot{gtk:color-chooser-rgba}
   @see-slot{gtk:color-chooser-use-alpha}

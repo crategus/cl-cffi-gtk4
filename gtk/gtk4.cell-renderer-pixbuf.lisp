@@ -63,7 +63,7 @@
 ;;; GtkCellRendererPixbuf
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCellRendererPixbuf" cell-renderer-pixbuf
+(gobject:define-gobject "GtkCellRendererPixbuf" cell-renderer-pixbuf
   (:superclass cell-renderer
     :export t
     :interfaces nil

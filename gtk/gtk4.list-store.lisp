@@ -76,10 +76,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkListStore
+;;; GtkListStore
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListStore" list-store
+(gobject:define-gobject "GtkListStore" list-store
   (:superclass g:object
    :export t
    :interfaces ("GtkBuildable"
@@ -132,20 +132,20 @@
     @fun{gtk:list-store-insert-with-values} method is atomic, in the sense that
     the row is being appended to the store and the values filled in in a single
     operation with regard to the @class{gtk:tree-model} interface signaling. In
-    contrast, using e.g. the @fun{gtk:list-store-append} function and then the
-    @fun{gtk:list-store-set} function will first create a row, which triggers
-    the @code{\"row-inserted\"} signal on the @class{gtk:list-store} object.
-    The row, however, is still empty, and any signal handler connecting to the
-    @code{\"row-inserted\"} signal on this particular store should be prepared
-    for the situation that the row might be empty. This is especially important
-    if you are wrapping the @class{gtk:list-store} object inside a
+    contrast, using, for example, the @fun{gtk:list-store-append} function and
+    then the @fun{gtk:list-store-set} function will first create a row, which
+    triggers the @code{\"row-inserted\"} signal on the @class{gtk:list-store}
+    object. The row, however, is still empty, and any signal handler connecting
+    to the @code{\"row-inserted\"} signal on this particular store should be
+    prepared for the situation that the row might be empty. This is especially
+    important if you are wrapping the @class{gtk:list-store} object inside a
     @class{gtk:tree-model-filter} object and are using a
     @symbol{gtk:tree-model-filter-visible-func} callback function. Using any of
     the non-atomic operations to append rows to the @class{gtk:list-store}
     object will cause the @symbol{gtk:tree-model-filter-visible-func} callback
     function to be visited with an empty row first. The function must be
     prepared for that.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Creating a simple list store.
     @begin{pre}
 (defun create-and-fill-model ()
@@ -228,7 +228,7 @@
   @see-symbol{gtk:tree-model-flags}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_new ()
+;;; gtk_list_store_new
 ;;; ----------------------------------------------------------------------------
 
 (defmethod initialize-instance :after
@@ -255,7 +255,7 @@
   @end{short}
   Note that only types derived from standard @class{g:type-t} fundamental type
   IDs are supported.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     The following example creates a new @class{gtk:list-store} object with
     three columnes, of type @code{\"gint\"}, @code{\"gchararray\"} and
     @code{\"GdkPixbuf\"}.
@@ -281,11 +281,11 @@
 (export 'list-store-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_newv ()                                  not needed
+;;; gtk_list_store_newv                                     not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_set_column_types ()                      not exported
+;;; gtk_list_store_set_column_types                         not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_set_column_types" %list-store-set-column-types)
@@ -306,7 +306,7 @@
   @end{short}
   It will not function after a row has been added, or a method on a
   @class{gtk:tree-model} object is called.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Create a list store and set the column types:
     @begin{pre}
 (let ((store (gtk:list-store-new)))
@@ -335,11 +335,11 @@
       (%list-store-set-column-types store n types-ar))))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_set_valist ()                            not used
+;;; gtk_list_store_set_valist                               not used
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_set ()
+;;; gtk_list_store_set
 ;;; ----------------------------------------------------------------------------
 
 ;; The Lisp implementation does not support pairs of an index and a value.
@@ -356,7 +356,7 @@
     Sets the values of one or more cells in the row referenced by @arg{iter}.
   @end{short}
   The variable argument list should contain the values to be set.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((model (gtk:list-store-new \"gchararray\" \"gchararray\" \"guint\")))
   ;; Append a row and fill in some data
@@ -366,7 +366,7 @@
    ... )
     @end{pre}
   @end{dictionary}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The Lisp implementation does not support pairs of a column index and a
     value, but a list of values. Therefore, it is not possible to set the values
     of individual columns. See the @fun{gtk:list-store-set-value} function for
@@ -398,7 +398,7 @@
 (export 'list-store-set)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_set_valuesv ()                           not exported
+;;; gtk_list_store_set_valuesv                              not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; Only for internal use. Not exported.
@@ -411,7 +411,7 @@
   (n-values :int))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_set_value ()
+;;; gtk_list_store_set_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_set_value" %list-store-set-value) :void
@@ -451,7 +451,7 @@
 (export 'list-store-set-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_remove ()
+;;; gtk_list_store_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_remove" list-store-remove) :boolean
@@ -478,7 +478,7 @@
 (export 'list-store-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_insert ()
+;;; gtk_list_store_insert
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_insert" %list-store-insert) :void
@@ -515,7 +515,7 @@
 (export 'list-store-insert)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_insert_before ()
+;;; gtk_list_store_insert_before
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_insert_before" %list-store-insert-before) :void
@@ -551,7 +551,7 @@
 (export 'list-store-insert-before)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_insert_after ()
+;;; gtk_list_store_insert_after
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_insert_after" %list-store-insert-after) :void
@@ -588,7 +588,7 @@
 (export 'list-store-insert-after)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_insert_with_valuesv ()                   not exported
+;;; gtk_list_store_insert_with_valuesv                      not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; Only for internal use. Not exported.
@@ -603,7 +603,7 @@
   (n-values :int))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_insert_with_values ()
+;;; gtk_list_store_insert_with_values
 ;;; ----------------------------------------------------------------------------
 
 (defun list-store-insert-with-values (model pos &rest values)
@@ -668,7 +668,7 @@
 (export 'list-store-insert-with-values)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_prepend ()
+;;; gtk_list_store_prepend
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_prepend" %list-store-prepend) :void
@@ -701,7 +701,7 @@
 (export 'list-store-prepend)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_append ()
+;;; gtk_list_store_append
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_append" %list-store-append) :void
@@ -734,7 +734,7 @@
 (export 'list-store-append)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_clear ()
+;;; gtk_list_store_clear
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_clear" list-store-clear) :void
@@ -752,7 +752,7 @@
 (export 'list-store-clear)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_iter_is_valid ()
+;;; gtk_list_store_iter_is_valid
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_iter_is_valid" list-store-iter-is-valid) :boolean
@@ -781,7 +781,7 @@
 (export 'list-store-iter-is-valid)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_reorder ()
+;;; gtk_list_store_reorder
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_reorder" %list-store-reorder) :void
@@ -813,7 +813,7 @@
 (export 'list-store-reorder)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_swap ()
+;;; gtk_list_store_swap
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_swap" list-store-swap) :void
@@ -839,7 +839,7 @@
 (export 'list-store-swap)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_move_before ()
+;;; gtk_list_store_move_before
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_move_before" list-store-move-before) :void
@@ -867,7 +867,7 @@
 (export 'list-store-move-before)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_store_move_after ()
+;;; gtk_list_store_move_after
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_store_move_after" list-store-move-after) :void
