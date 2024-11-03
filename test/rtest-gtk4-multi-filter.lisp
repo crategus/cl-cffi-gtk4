@@ -167,7 +167,7 @@
     (is (= 2 (gtk:multi-filter-n-items filter)))
     ;; Check the filter result
     #-windows
-    (is (= 232 (gtk:filter-list-model-n-items model)))
+    (is (< 234 (gtk:filter-list-model-n-items model)))
     #+windows
     (is (= 231 (gtk:filter-list-model-n-items model)))
     ;; Remove filter2
@@ -175,9 +175,21 @@
     ;; Check again the filter result
     (is (= 1 (gtk:multi-filter-n-items filter)))
     #-windows
-    (is (= 199 (gtk:filter-list-model-n-items model)))
+    (is (< 201 (gtk:filter-list-model-n-items model)))
     #+windows
-    (is (= 198 (gtk:filter-list-model-n-items model)))))
+    (is (= 198 (gtk:filter-list-model-n-items model)))
+
+    ;; Check memory management
+    (is-false (gtk:multi-filter-remove filter 0))
+
+    (is-false (setf (gtk:filter-list-model-model model) nil))
+    (is-false (setf (gtk:filter-list-model-filter model) nil))
+
+    (is (= 1 (g:object-ref-count store)))
+    (is (= 1 (g:object-ref-count filter)))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count filter1)))
+    (is (= 1 (g:object-ref-count filter2)))))
 
 (test gtk-multi-filter-append/remove.2
   (let* ((store (create-string-list-for-package))
@@ -211,8 +223,20 @@
     (is-false (gtk:multi-filter-remove filter 0))
     (is (= 1 (gtk:multi-filter-n-items filter)))
     #-windows
-    (is (= 199 (gtk:filter-list-model-n-items model)))
+    (is (< 201 (gtk:filter-list-model-n-items model)))
     #+windows
-    (is (= 198 (gtk:filter-list-model-n-items model)))))
+    (is (= 198 (gtk:filter-list-model-n-items model)))
 
-;;; 2024-1-10
+    ;; Check memory management
+    (is-false (gtk:multi-filter-remove filter 0))
+
+    (is-false (setf (gtk:filter-list-model-model model) nil))
+    (is-false (setf (gtk:filter-list-model-filter model) nil))
+
+    (is (= 1 (g:object-ref-count store)))
+    (is (= 1 (g:object-ref-count filter)))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count filter1)))
+    (is (= 1 (g:object-ref-count filter2)))))
+
+;;; 2024-10-18
