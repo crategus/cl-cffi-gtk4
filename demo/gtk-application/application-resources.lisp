@@ -3,7 +3,7 @@
 ;;;; This application automatically loads a menubar, an icon, and a shortcuts
 ;;;; window from resources.
 ;;;;
-;;;; Last version: 2024-5-27
+;;;; Last version: 2024-10-24
 
 (in-package :gtk4-application)
 
@@ -41,9 +41,9 @@
             (g:application-hold application)
             ;; Create an application window
             (let (;; Define action entries for the menu items
-                  (entries (list (list "about")))
-                  (accels (list "win-show-help-overlay" "F1"
-                                "win.about" "<Control>A"))
+                  (entries '(("about")))
+                  (accels '("win-show-help-overlay" "F1"
+                            "win.about" "<Control>A"))
                   (window (make-instance 'gtk:application-window
                                          :application application
                                          :title "Application Resources"
