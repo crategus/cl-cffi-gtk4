@@ -220,8 +220,8 @@ lambda (dialog response)    :run-last
   sets the parent.
 
   Dialog windows should be set transient for the main application window they
-  were spawned from. This allows window managers to e.g. keep the dialog on
-  top of the main window, or center the dialog over the main window.
+  were spawned from. This allows window managers, for example, to keep the
+  dialog on top of the main window, or center the dialog over the main window.
 
   Passing @code{nil} for parent unsets the current transient window.
   @see-class{gtk:native-dialog}
