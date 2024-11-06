@@ -2,7 +2,7 @@
 ;;; gtk4.builder.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -34,7 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkBuilderClosureFlags
-;;;     GtkBuilderError                                    not exported
+;;;     GtkBuilderError                                     not exported
 ;;;
 ;;;     GtkBuilderScope
 ;;;     GtkBuilderClScope
@@ -86,7 +86,7 @@
 ;;;     gtk_builder_get_object
 ;;;     gtk_builder_get_objects
 ;;;     gtk_builder_expose_object
-;;;     gtk_builder_create_closure
+;;;     gtk_builder_create_closure                          not exported
 ;;;
 ;;;     gtk_builder_get_type_from_name                      not exported
 ;;;     gtk_builder_value_from_string                       not implemented
@@ -190,11 +190,11 @@
   binding, you may want to (partially) derive from or fall back to a
   @code{GtkBuilderCScope}, as that class implements support for automatic
   lookups from C symbols.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The Lisp binding implements the @class{gtk:builder-cl-scope} subclass. For
-    the Lisp binding, this class is the default builder scope for the
+    the Lisp binding, this subclass is the default builder scope for the
     @class{gtk:builder} object.
-  @end{notes}
+  @end{dictionary}
   @see-class{gtk:builder}
   @see-class{gtk:builder-cl-scope}")
 
@@ -229,15 +229,15 @@
 (setf (liber:alias-for-class 'builder-cl-scope)
       "Class"
       (documentation 'builder-cl-scope 'type)
- "@version{2024-10-5}
+ "@version{2024-11-3}
   @begin{short}
     The @class{gtk:builder-cl-scope} class is the implementation of the
     @class{gtk:builder-scope} interface for the Lisp binding.
   @end{short}
-  This class implements the @code{create_closure()} virtual function, which
-  creates Lisp closures for binding signal handlers to objects in the UI
-  definition. An instance of the @class{gtk:builder-cl-scope} object is the
-  default builder scope for the @class{gtk:builder} object.
+  This class implements the @code{GtkBuilderScope::create_closure()} virtual
+  function, which creates Lisp closures for binding signal handlers to objects
+  in the UI definition. An instance of the @class{gtk:builder-cl-scope} object
+  is the default builder scope for the @class{gtk:builder} object.
   @see-class{gtk:builder-scope}
   @see-class{gtk:builder}")
 
@@ -289,13 +289,18 @@
   (when from-string
     (builder-add-from-string builder from-string)))
 
-;; Initialize default scope with a GTK:BUILDER-CL-SCOPE instance
-(defmethod initialize-instance :after ((obj builder) &key &allow-other-keys)
-  (setf (builder-scope obj) (make-instance 'builder-cl-scope)))
+  ;; Initialize default scope with a global GTK:BUILDER-CL-SCOPE instance
+(let ((builder-cl-scope-instance nil))
+  (defmethod initialize-instance :after ((obj builder) &key &allow-other-keys)
+    (if builder-cl-scope-instance
+        (setf (builder-scope obj) builder-cl-scope-instance)
+        (setf (builder-scope obj)
+              (setf builder-cl-scope-instance
+                    (make-instance 'builder-cl-scope))))))
 
 #+liber-documentation
 (setf (documentation 'builder 'type)
- "@version{2024-9-15}
+ "@version{2024-11-4}
   @begin{short}
     The @class{gtk:builder} object reads XML descriptions of a user interface
     and instantiates the described objects.
@@ -347,6 +352,7 @@
   ...
 </interface>
   @end{pre}
+
   @subheading{Requirements}
   The target toolkit version(s) are described by @code{<requires>} elements, the
   @code{\"lib\"} attribute specifies the widget library in question, currently
@@ -360,6 +366,7 @@
   <requires lib=\"gtk\" version=\"4.0\" />
 </interface>
   @end{pre}
+
   @subheading{Objects}
   Objects are defined as children of the @code{<interface>} element. Objects
   are described by @code{<object>} elements, which can contain @code{<property>}
@@ -371,13 +378,12 @@
 
   Typically, the specific kind of object represented by an @code{<object>}
   element is specified by the @code{\"class\"} attribute. If the type has not
-  been loaded yet, GTK tries to find the @code{get_type()} function from the
-  class name by applying heuristics. This works in most cases, but if necessary,
-  it is possible to specify the name of the @code{get_type()} function
-  explicitly with the @code{\"type-func\"} attribute. If your UI definition is
-  referencing internal types, you should make sure to call the
-  @fun{g:type-ensure} function for each object type before parsing the UI
-  definition.
+  been loaded yet, GTK tries to find the type initializer from the class name
+  by applying heuristics. This works in most cases, but if necessary, it is
+  possible to specify the name of the type initializer explicitly with the
+  @code{\"type-func\"} attribute. If your UI definition is referencing internal
+  types, you should make sure to call the @fun{g:type-ensure} function for each
+  object type before parsing the UI definition.
 
   Objects may be given a name with the @code{\"id\"} attribute, which allows
   the application to retrieve them from the builder with the
@@ -432,14 +438,16 @@
     @item{@symbol{g:variant} values, can be specified in the format understood
       by the @fun{g:variant-parse} function}
     @item{pixbufs, can be specified as an object ID, a resource path or a
-      filename of an image file to load relative to the Builder file or the CWD
-      if the @fun{gtk:builder-add-from-string} function was used}
+      filename of an image file to load relative to the builder file or the
+      current working directory if the @fun{gtk:builder-add-from-string}
+      function was used}
     @item{@class{g:file} objects like pixbufs, can be specified as an object ID,
-      a URI or a filename of a file to load relative to the Builder file or the
-      CWD if the @fun{gtk:builder-add-from-string} function was used}
+      a URI or a filename of a file to load relative to the builder file or the
+      current working directory if the @fun{gtk:builder-add-from-string}
+      function was used}
   @end{itemize}
   Objects can be referred to by their name and by default refer to objects
-  declared in the local XML fragment and objects exposed via the
+  declared in the local XML fragment and objects exposed with the
   @fun{gtk:builder-expose-object} function. In general, the @class{gtk:builder}
   object allows forward references to objects declared in the local XML. An
   object does not have to be constructed before it can be referred to. The
@@ -449,8 +457,8 @@
   @subheading{Child objects}
   Many widgets have properties for child widgets, such as the
   @slot[gtk:expander]{child} property of the @class{gtk:expander} widget. In
-  this case, the preferred way to specify the child widget in a UI file is to
-  simply set the property:
+  this case, the preferred way to specify the child widget in a UI definition
+  file is to simply set the property:
   @begin{pre}
 <object class=\"GtkExpander\">
   <property name=\"child\">
@@ -538,8 +546,8 @@
   constructed.
 
   @subheading{Specialized children}
-  A number of widgets have different places where a child can be added, for
-  example, tabs vs. page content in notebooks. This can be reflected in a UI
+  Some widgets have different places where a child can be added, for example,
+  tabs versus page content in notebooks. This can be reflected in a UI
   definition by specifying the @code{\"type\"} attribute on a @code{<child>}.
   The possible values for the @code{\"type\"} attribute are described in the
   sections describing the widget-specific portions of UI definitions.
@@ -591,7 +599,7 @@
   </object>
 </interface>
   @end{pre}
-  @subeading{Using GtkBuildable for extending UI definitions}
+  @subheading{Using GtkBuildable for extending UI definitions}
   Objects can implement the @class{gtk:buildable} interface to add custom
   elements and attributes to the XML. Typically, any extension will be
   documented in each type that implements the interface.
@@ -609,7 +617,8 @@
   @see-slot{gtk:builder-current-object}
   @see-slot{gtk:builder-scope}
   @see-slot{gtk:builder-translation-domain}
-  @see-class{gtk:buildable}")
+  @see-class{gtk:buildable}
+  @see-class{gtk:builder-cl-scope}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -638,9 +647,9 @@
   @end{short}
   The @fun{gtk:builder-current-object} function gets the current object for the
   builder. The @setf{gtk:builder-current-object} function sets the current
-  object. The current object can be thought of as the @code{this} object that
-  the builder is working for and will often be used as the default object when
-  an object is optional.
+  object. The current object can be thought of the object that the builder is
+  working for and will often be used as the default object when an object is
+  optional.
 
   The @fun{gtk:widget-init-template} function for example will set the current
   object to the widget the template is inited for. For functions like the
@@ -657,31 +666,29 @@
 (setf (documentation (liber:slot-documentation "scope" 'builder) t)
  "The @code{scope} property of type @code{GtkBuilderScope}
   (Read / Write / Construct) @br{}
-  The scope the builder is operating in. Note: @code{GtkBuilderScope} support
-  is currently not implemented in the Lisp binding.")
+  The scope the builder is operating in. If the @slot[gtk:builder]{scope}
+  property is @code{nil}, a @class{gtk:builder-cl-scope} instance will be set
+  as the default value.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'builder-scope)
       "Accessor"
       (documentation 'builder-scope 'function)
- "@version{2024-9-15}
+ "@version{2024-11-4}
   @syntax{(gtk:builder-scope object) => scope}
   @syntax{(setf (gtk:builder-scope object) scope)}
   @argument[object]{a @class{gtk:builder} object}
-  @argument[scope]{a @code{GtkBuilderScope} object}
+  @argument[scope]{a @class{gtk:builder-cl-scope} object}
   @begin{short}
     Accessor of the @slot[gtk:builder]{scope} slot of the @class{gtk:builder}
     class.
   @end{short}
   The @fun{gtk:builder-scope} function gets the scope in use. The
   @setf{gtk:builder-scope} function sets the scope the builder should operate
-  in. If the @arg{scope} argument is @code{nil}, a new @code{GtkBuilderCScope}
-  object will be created.
-  @begin[Note]{dictionary}
-    @code{GtkBuilderScope} support is currently not implemented in the Lisp
-    binding.
-  @end{dictionary}
-  @see-class{gtk:builder}")
+  in. If the @arg{scope} argument is @code{nil}, a
+  @class{gtk:builder-cl-scope} instance will be set as the default value.
+  @see-class{gtk:builder}
+  @see-class{gtk:builder-cl-scope}")
 
 ;;; --- gtk:builder-translation-domain -----------------------------------------
 
@@ -699,7 +706,7 @@
 (setf (liber:alias-for-function 'builder-translation-domain)
       "Accessor"
       (documentation 'builder-translation-domain 'function)
- "@version{2024-9-15}
+ "@version{2024-11-4}
   @syntax{(gtk:builder-translation-domain object) => domain}
   @syntax{(setf (gtk:builder-translation-domain object) domain)}
   @argument[object]{a @class{gtk:builder} object}
@@ -709,7 +716,7 @@
     @class{gtk:builder} class.
   @end{short}
   The @fun{gtk:builder-translation-domain} function gets the translation domain
-  of @arg{object}. The @setf{gtk:builder-translation-domain} function sets the
+  of the builder. The @setf{gtk:builder-translation-domain} function sets the
   translation domain.
 
   The translation domain used when translating property values that have been
@@ -772,9 +779,10 @@
 
 (defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{2024-10-6}
-  @argument[path]{a path or namestring with the @class{g:resource} path}
-  @return{The @class{gtk:builder} object containing the described interface.}
+ "@version{2024-11-4}
+  @argument[path]{a string with the path of the resource file to parse}
+  @return{The new @class{gtk:builder} object containing the described
+    interface.}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a resource path.
   @end{short}
@@ -799,10 +807,10 @@
 
 (defun builder-new-from-string (string)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-4}
   @argument[string]{a string with the user interface description}
-  @return{The @class{gtk:builder} object containing the interface described by
-    @arg{string}.}
+  @return{The new @class{gtk:builder} object containing the interface described
+    by @arg{string}.}
   @begin{short}
     Builds the user interface described by @arg{string} in the
     @class{gtk:builder} UI definition format.
@@ -959,7 +967,7 @@
     the requested objects and merges them with the current contents of builder.
   @end{short}
   Upon errors 0 will be returned.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     If you are adding an object that depends on an object that is not its
     child, for instance a @class{gtk:tree-view} widget that depends on its
     @class{gtk:tree-model} implementation, you have to explicitely list all of
@@ -997,7 +1005,7 @@
     building only the requested objects and merges them with the current
     contents of builder.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     If you are adding an object that depends on an object that is not its
     child, for instance a @class{gtk:tree-view} widget that depends on its
     @class{gtk:tree-model} implementation, you have to explicitely list all of
@@ -1035,7 +1043,7 @@
     Parses a string containing a @class{gtk:builder} UI definition building only
     the requested objects and merges them with the current contents of builder.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     If you are adding an object that depends on an object that is not its child,
     for instance a @class{gtk:tree-view} widget that depends on its
     @class{gtk:tree-model} implementation, you have to explicitely list all of
@@ -1156,7 +1164,7 @@
 (export 'builder-expose-object)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_builder_create_closure
+;;; gtk_builder_create_closure                              not exported
 ;;;
 ;;; GClosure*
 ;;; gtk_builder_create_closure (GtkBuilder* builder,
@@ -1204,13 +1212,9 @@
   (glib:with-error (err)
     (%builder-create-closure builder func flags object err)))
 
-(export 'builder-create-closure)
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_builder_get_type_from_name                          not exported
 ;;; ----------------------------------------------------------------------------
-
-;; The default implementation returns (gtype name) e.g. (gtype "GtkDialog").
 
 (cffi:defcfun ("gtk_builder_get_type_from_name" builder-type-from-name) g:type-t
  #+liber-documentation

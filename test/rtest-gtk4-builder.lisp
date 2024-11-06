@@ -1,7 +1,10 @@
 (in-package :gtk-test)
 
-(def-suite gtk-builder :in gtk-suite)
+(def-suite gtk-builder :in gtk-interface-builder)
 (in-suite gtk-builder)
+
+;; TODO: For a toplevel window it is the responsibility to destroy the window.
+;; Check the examples for this.
 
 (defparameter +interface+
 "<interface>
@@ -79,32 +82,6 @@
     </menu>
    </interface>")
 
-;; Example from the GtkBuilder API documentation:
-;; TODO: This example does not work. The definition of a signal handler
-;; needs the implementation of support for reading callback functions.
-
-#+nil
-(defvar *dialog1*
-"<interface>
-  <object class='GtkDialog' id='dialog1'>
-    <child internal-child='content_area'>
-      <object class='GtkBox' id='vbox1'>
-        <child internal-child='action_area'>
-          <object class='GtkBox' id='hbuttonbox1'>
-            <child>
-              <object class='GtkButton' id='ok_button'>
-                <property name='label' translatable='yes'>_Ok</property>
-                <property name='use-underline'>True</property>
-                <signal name='clicked' handler='ok_button_clicked'/>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
-</interface>")
-
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkBuilderClosureFlags
@@ -170,7 +147,7 @@
   ;; Check registered name
   (is (eq 'gtk:builder-cl-scope
           (glib:symbol-for-gtype "GtkBuilderClScope")))
-  ;; Check type initializer
+  ;; No type initializer for subclassed object
   #+nil
   (is (eq (g:gtype "GObject")
           (g:gtype (cffi:foreign-funcall "g_object_get_type" :size))))
@@ -208,15 +185,18 @@
   (setf *gtk-builder-scope-msg* "OK-BUTTON-CLICKED"))
 
 (test gtk-builder-cl-scope-test
-  (let ((builder (gtk:builder-new))
+  (let ((*gtk-warn-deprecated* nil)
+        (builder (gtk:builder-new))
         (scope (make-instance 'gtk:builder-cl-scope))
-        (object nil))
+        object dialog)
     ;; Set BUILDER-CL-SCOPE on BUILDER
     (is (eq scope (setf (gtk:builder-scope builder) scope)))
     (is (eq scope (gtk:builder-scope builder)))
     ;; Load interface into BUILDER
     (is-true (gtk:builder-add-from-string builder +interface+))
-    ;; GET the BUTTON widget
+    ;; GET the BUTTON widget and the DIALOG window
+    (is (typep (setf dialog
+                     (gtk:builder-object builder "dialog1")) 'gtk:dialog))
     (is (typep (setf object
                      (gtk:builder-object builder "ok-button")) 'gtk:button))
     ;; Is the handler installed on OBJECT?
@@ -225,9 +205,15 @@
     ;; Emit signal and check invocation
     (setf *gtk-builder-scope-msg* nil)
     (is-false (g:signal-emit object "clicked"))
-    (is (string= "OK-BUTTON-CLICKED" *gtk-builder-scope-msg*))))
-
-
+    (is (string= "OK-BUTTON-CLICKED" *gtk-builder-scope-msg*))
+    ;; Check memory management
+    (is-false (gtk:window-destroy dialog)) ; Destroy reference to DIALOG window
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 2 (g:object-ref-count dialog)))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (= 1 (g:object-ref-count scope)))
+    (is (= 3 (g:object-ref-count object)))  ; Why 3 references?
+))
 
 ;;;     GtkBuilder
 
@@ -270,88 +256,123 @@
 
 ;;; ---  Properties ------------------------------------------------------------
 
-(test gtk-builder-properties.1
-  (let ((builder (make-instance 'gtk:builder)))
+(test gtk-builder-properties
+  (let ((builder (make-instance 'gtk:builder))
+        scope)
     (is-false (gtk:builder-current-object builder))
-    (is (typep (gtk:builder-scope builder) 'g:object))
-    (is (typep (setf (gtk:builder-scope builder)
-                     (gtk:builder-scope builder)) 'g:object))
+    (is (typep (setf scope
+                     (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
     (is-false (gtk:builder-translation-domain builder))
     (is (string= "domain"
-                 (setf (gtk:builder-translation-domain builder) "domain")))))
-
-(test gtk-builder-properties.2
-  (let ((builder (make-instance 'gtk:builder :from-string *stack-ui*)))
-    (is-false (gtk:builder-current-object builder))
-    (is (typep (gtk:builder-scope builder) 'g:object))
-    (is-false (gtk:builder-translation-domain builder))))
+                 (setf (gtk:builder-translation-domain builder) "domain")))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (<= 1 (g:object-ref-count scope)))
+    (is (= 1 (g:object-ref-count builder)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_builder_new
 
 (test gtk-builder-new
-  ;; Create with constructor function
-  (is (typep (gtk:builder-new) 'gtk:builder))
-  (is (typep (gtk:builder-scope (gtk:builder-new)) 'gtk:builder-cl-scope))
-  (is (= 1 (g:object-ref-count (gtk:builder-new))))
-  ;; Create with MAKE-INSTANCE
-  (is (typep (make-instance 'gtk:builder) 'gtk:builder))
-  (is (typep (gtk:builder-scope (make-instance 'gtk:builder))
-             'gtk:builder-cl-scope))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:builder))))
-  ;; Create with G:OBJECT-NEW
-  (is (typep (g:object-new "GtkBuilder") 'gtk:builder))
-  (is (typep (gtk:builder-scope (g:object-new "GtkBuilder"))
-             'gtk:builder-cl-scope))
-  (is (= 1 (g:object-ref-count (g:object-new "GtkBuilder")))))
+  (let (builder scope)
+    ;; Create with constructor function
+    (is (typep (setf builder (gtk:builder-new)) 'gtk:builder))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))
+
+    ;; Create with MAKE-INSTANCE
+    (is (typep (setf builder (make-instance 'gtk:builder)) 'gtk:builder))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))
+
+    ;; Create with G:OBJECT-NEW
+    (is (typep (setf builder (g:object-new "GtkBuilder")) 'gtk:builder))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))))
 
 ;;;     gtk_builder_new_from_file
 
 (test gtk-builder-new-from-file.1
   (let* ((path (glib-sys:sys-path "test/resource/application.ui"))
-         (builder (gtk:builder-new-from-file path)))
+         (builder (gtk:builder-new-from-file path))
+         scope)
     (is (typep builder 'gtk:builder))
-    (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
-    (is (= 1 (g:object-ref-count builder)))))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))))
 
+;; TODO: After execution we hold a strong reference for the button on which
+;; a signal handler was installed. Is this the correct implementation?
 (test gtk-builder-new-from-file.2
   (let* (;; Resource file with a signal definition
          (path (glib-sys:sys-path "test/resource/dialog.ui"))
-         (builder (gtk:builder-new-from-file path)))
+         (builder (gtk:builder-new-from-file path))
+         scope)
     (is (typep builder 'gtk:builder))
-    (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
-    (is (= 1 (g:object-ref-count builder)))))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))))
 
 ;;;     gtk_builder_new_from_resource
 
 (test gtk-builder-new-from-resource.1
   (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (let* ((path "/com/crategus/test/stack.ui")
-           (builder (gtk:builder-new-from-resource path)))
+           (builder (gtk:builder-new-from-resource path))
+           scope)
       (is (typep builder 'gtk:builder))
-      (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
-      (is (= 1 (g:object-ref-count builder))))))
+      (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+      ;; Check memory management
+      (is-false (setf (gtk:builder-scope builder) nil))
+      (is (= 1 (g:object-ref-count builder)))
+      (is (<= 1 (g:object-ref-count scope))))))
 
 (test gtk-builder-new-from-resource.2
   (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (let* ((path "/com/crategus/test/dialog.ui")
-           (builder (gtk:builder-new-from-resource path)))
+           (builder (gtk:builder-new-from-resource path))
+           scope)
       (is (typep builder 'gtk:builder))
-      (is (typep (gtk:builder-scope builder) 'gtk:builder-cl-scope))
-      (is (= 1 (g:object-ref-count builder))))))
+      (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+      ;; Check memory management
+      (is-false (setf (gtk:builder-scope builder) nil))
+      (is (= 1 (g:object-ref-count builder)))
+      (is (<= 1 (g:object-ref-count scope))))))
 
 ;;;     gtk_builder_new_from_string
 
 (test gtk-builder-new-from-string
-  (is (typep (gtk:builder-new-from-string *menus*) 'gtk:builder)))
+  (let (builder scope)
+    (is (typep (setf builder (gtk:builder-new-from-string *menus*)) 'gtk:builder))
+    (is (typep (setf scope (gtk:builder-scope builder)) 'gtk:builder-cl-scope))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (<= 1 (g:object-ref-count scope)))))
 
 ;;;     gtk_builder_add_from_file
 
 (test gtk-builder-add-from-file
   (let ((path (glib-sys:sys-path "test/resource/application.ui"))
         (builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-from-file builder path))))
+    (is-true (gtk:builder-add-from-file builder path))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))))
 
 ;;;     gtk_builder_add_from_resource
 
@@ -359,15 +380,19 @@
   (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
-                                              "/com/crategus/test/stack.ui")))))
+                                              "/com/crategus/test/stack.ui"))
+      ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder))))))
 
 ;;;     gtk_builder_add_from_string
 
 (test gtk-builder-add-from-string
   (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-from-string builder *menus*))))
-
-;;;     gtk_builder_create_closure
+    (is-true (gtk:builder-add-from-string builder *menus*))
+    ;; Check memory management
+    (is-false (setf (gtk:builder-scope builder) nil))
+    (is (= 1 (g:object-ref-count builder)))))
 
 ;;;     gtk_builder_add_objects_from_file
 
@@ -461,8 +486,10 @@
     (is-false (gtk:builder-expose-object builder "image1" image))
     (is (eq image (gtk:builder-object builder "image1")))))
 
+;;;     gtk_builder_create_closure
+
 ;;;     gtk_builder_get_type_from_name
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; 2024-9-19
+;;; 2024-11-3

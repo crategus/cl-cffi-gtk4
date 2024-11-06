@@ -106,22 +106,36 @@
 
 ;;;     gtk_buildable_get_buildable_id
 
+;; TODO: Is the memory management correct?
+
 (test gtk-buildable-buildable-id
-  (let ((builder (gtk:builder-new-from-string *stack-ui*)))
-    (is (string= "window1"
-                 (gtk:buildable-buildable-id
-                     (gtk:builder-object builder "window1"))))
-    (is (string= "stack"
-                 (gtk:buildable-buildable-id
-                     (gtk:builder-object builder "stack"))))
+  (let* ((builder (gtk:builder-new-from-string *stack-ui*))
+         (window1 (gtk:builder-object builder "window1"))
+         (stack (gtk:builder-object builder "stack"))
+         image button spinner)
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count builder)))
+    (is (= 3 (g:object-ref-count window1)))
+    (is (= 4 (g:object-ref-count stack)))
+    ;; Get ID from object
+    (is (string= "window1" (gtk:buildable-buildable-id window1)))
+    (is (string= "stack" (gtk:buildable-buildable-id stack)))
     (is (string= "image"
                  (gtk:buildable-buildable-id
-                     (gtk:builder-object builder "image"))))
+                     (setf image (gtk:builder-object builder "image")))))
     (is (string= "checkbutton"
                  (gtk:buildable-buildable-id
-                     (gtk:builder-object builder "checkbutton"))))
+                     (setf button (gtk:builder-object builder "checkbutton")))))
     (is (string= "spinner"
                  (gtk:buildable-buildable-id
-                     (gtk:builder-object builder "spinner"))))))
+                     (setf spinner (gtk:builder-object builder "spinner")))))
+    ;; Check memory management
+    (is-false (gtk:window-destroy window1))
+    (is (= 1 (g:object-ref-count builder)))
+    (is (= 2 (g:object-ref-count window1)))
+    (is (= 4 (g:object-ref-count stack)))   ; TODO: Why 4 references?
+    (is (= 4 (g:object-ref-count image)))
+    (is (= 4 (g:object-ref-count button)))
+    (is (= 4 (g:object-ref-count spinner)))))
 
-;;; 2024-10-6
+;;; 2024-11-3
