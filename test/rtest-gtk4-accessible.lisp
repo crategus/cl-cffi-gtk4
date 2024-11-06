@@ -7,7 +7,7 @@
 
 ;;;     GtkAccessiblePlatformState
 
-(test gtk-accessible-platfom-state
+(test gtk-accessible-platform-state
   ;; Check type
   (is (g:type-is-enum "GtkAccessiblePlatformState"))
   ;; Check type initializer
@@ -38,6 +38,18 @@
                        (:FOCUSED 1)
                        (:ACTIVE 2))
              (gobject:get-gtype-definition "GtkAccessiblePlatformState"))))
+
+;;;     GtkAccessibleList                                   Since 4.14
+
+(test gtk-accessible-list-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkAccessibleList"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkAccessibleList")
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_list_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:accessible-list
+          (glib:symbol-for-gtype "GtkAccessibleList"))))
 
 ;;;     GtkAccessible
 
@@ -86,7 +98,8 @@
                                             (g:type-children "GtkWidget"))))))
        ;; Remove GTK:LIST-BASE. It is an abstract widget class.
        (setf children (remove 'gtk:list-base children))
-       (is (equal '(:APPLICATION :BUTTON :CHECKBOX :COMBO-BOX :GENERIC :GRID
+       (setf children (remove 'gtk:window children))
+       (is (equal '(:BUTTON :CHECKBOX :COMBO-BOX :GENERIC :GRID
                     :GRID-CELL :GROUP :IMG :LABEL :LIST :LIST-ITEM
                     :MENU-BAR :METER :NONE :PROGRESS-BAR :SCROLLBAR
                     :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON :SWITCH
@@ -99,14 +112,59 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+;;;     gtk_accessible_list_new_from_array                  not implemented
+
+;;;     gtk_accessible_list_new_from_list                   Since 4.14
+;;;     gtk_accessible_list_get_objects                     Since 4.14
+
+(test gtk-accessible-list-new-from-list
+  (let* ((button (gtk:button-new))
+         (label (gtk:label-new))
+         (box (gtk:box-new))
+         (widgets (list button label box))
+         (accessibles (gtk:accessible-list-new-from-list widgets)))
+    (is (every (lambda (x) (typep x 'gtk:widget))
+               (gtk:accessible-list-objects accessibles)))))
+
 ;;;     gtk_accessible_get_accessible_parent               Since 4.10
 ;;;     gtk_accessible_set_accessible_parent               Since 4.10
+
+(test gtk-accessible-accessible-parent
+  (let ((button (gtk:button-new))
+        (toggle (gtk:toggle-button-new)))
+
+    (is-false (gtk:accessible-accessible-parent button))
+    (is-false (gtk:accessible-accessible-parent toggle))
+
+    (is (eq button
+            (setf (gtk:accessible-accessible-parent toggle) button)))
+    (is (eq button (gtk:accessible-accessible-parent toggle)))
+
+    (is (= 2 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count toggle)))))
+
+
 ;;;     gtk_accessible_get_at_context                      Since 4.10
+
+(test gtk-accessible-at-context
+  (let ((button (gtk:button-new))
+        context)
+    (is (typep (setf context
+                     (gtk:accessible-at-context button)) 'gtk:at-context))
+    ;; Check memory management
+    (is (= 3 (g:object-ref-count context))) ; Why 3 refrences?
+    (is (= 1 (g:object-ref-count button)))))
+
 ;;;     gtk_accessible_get_bounds                          Since 4.10
+
+(test gtk-accessible-bounds
+  (let ((button (gtk:button-new-with-label "text")))
+    (is-false (gtk:accessible-bounds button))))
+
 ;;;     gtk_accessible_get_first_accessible_child          Since 4.10
 ;;;     gtk_accessible_get_next_accessible_sibling         Since 4.10
 ;;;     gtk_accessible_get_platform_state                  Since 4.10
-;;;
+
 ;;;     gtk_accessible_reset_property
 ;;;     gtk_accessible_reset_relation
 ;;;     gtk_accessible_reset_state
@@ -114,14 +172,13 @@
 ;;;     gtk_accessible_update_next_accessible_sibling      Since 4.10
 ;;;
 ;;;     gtk_accessible_update_property
-;;;     gtk_accessible_update_property_value
 ;;;     gtk_accessible_update_relation
-;;;     gtk_accessible_update_relation_value
 ;;;     gtk_accessible_update_state
-;;;     gtk_accessible_update_state_value
-;;;
+
 ;;;     gtk_accessible_property_init_value
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; 2024-9-19
+;;;     gtk_accessible_announce                             Since 4.14
+
+;;; 2024-11-5

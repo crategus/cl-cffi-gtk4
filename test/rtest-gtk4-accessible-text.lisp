@@ -5,6 +5,9 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkAccessibleTextContentChange
+;;;     GtkAccessibleTextGranularity
+
 ;;;     GtkAccessibleText
 
 (test gtk-accessible-text-interface
@@ -46,4 +49,4 @@
 ;;;     gtk_accessible_text_update_contents
 ;;;     gtk_accessible_text_update_selection_bound
 
-;;; 2024-9-19
+;;; 2024-11-5

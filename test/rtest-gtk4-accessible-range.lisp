@@ -32,4 +32,16 @@
                         :TYPE-INITIALIZER "gtk_accessible_range_get_type"))
              (gobject:get-gtype-definition "GtkAccessibleRange"))))
 
-;;; 2024-9-19
+;;;     gtk_accessible_range_set_current_value
+
+;; TODO: Windows does not support this function
+
+#-windows
+(test gtk-accessible-range-set-current-value
+  (let ((range (make-instance 'gtk:range)))
+    (is (= 0 (gtk:range-value range)))
+    (is-false (gtk:accessible-range-set-current-value range 100))
+    (is (= 0 (gtk:range-value range)))
+    (is (= 1 (g:object-ref-count range)))))
+
+;;; 2024-11-5

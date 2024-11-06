@@ -2,11 +2,11 @@
 ;;; gtk4.accessible-range.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -31,6 +31,10 @@
 ;;;
 ;;;     GtkAccessibleRange
 ;;;
+;;; Functions
+;;;
+;;;     gtk_accessible_range_set_current_value
+;;;
 ;;; Prerequiste
 ;;;
 ;;;     GtkAccessible
@@ -38,7 +42,7 @@
 
 (in-package :gtk)
 
-(gobject:define-g-interface "GtkAccessibleRange" accessible-range
+(gobject:define-ginterface "GtkAccessibleRange" accessible-range
   (:superclass accessible
    :export t
    :type-initializer "gtk_accessible_range_get_type")
@@ -48,32 +52,58 @@
 (setf (liber:alias-for-class 'accessible-range)
       "Interface"
       (documentation 'accessible-range 'type)
- "@version{2023-8-24}
+ "@version{2024-11-5}
   @begin{short}
-    The @class{gtk:accessible-range} interface describes ranged controls, e.g.
-    controls which have a single value within an allowed range and that can
-    optionally be changed by the user.
+    The @class{gtk:accessible-range} interface describes ranged controls, for
+    example, controls which have a single value within an allowed range and
+    that can optionally be changed by the user.
   @end{short}
   The interface is expected to be implemented by controls using the following
-  roles:
+  roles of the @symbol{gtk:accessible-role} enumeration:
   @begin{itemize}
-    @item{GTK_ACCESSIBLE_ROLE_METER}
-    @item{GTK_ACCESSIBLE_ROLE_PROGRESS_BAR}
-    @item{GTK_ACCESSIBLE_ROLE_SCROLLBAR}
-    @item{GTK_ACCESSIBLE_ROLE_SLIDER}
-    @item{GTK_ACCESSIBLE_ROLE_SPIN_BUTTON}
+    @item{:meter}
+    @item{:progress-bar}
+    @item{:scrollbar}
+    @item{:slider}
+    @item{:spin-button}
   @end{itemize}
   If that is not the case, a warning will be issued at run time.
 
   In addition to this interface, its implementors are expected to provide the
-  correct values for the following properties:
+  correct values for the following properties of the
+  @symbol{gtk:accessible-property} enumeration:
   @begin{itemize}
-    @item{GTK_ACCESSIBLE_PROPERTY_VALUE_MAX}
-    @item{GTK_ACCESSIBLE_PROPERTY_VALUE_MIN}
-    @item{GTK_ACCESSIBLE_PROPERTY_VALUE_NOW}
-    @item{GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT}
+    @item{:value-max}
+    @item{:value-min}
+    @item{:value-now}
+    @item{:value-text}
   @end{itemize}
   Since 4.10
-  @see-class{gtk:accessible}")
+  @see-class{gtk:accessible}
+  @see-symbol{gtk:accessible-role}
+  @see-symbol{gtk:accessible-property}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_range_set_current_value                  Since 4.10
+;;; ----------------------------------------------------------------------------
+
+(defun accessible-range-set-current-value (accessible value)
+ #+liber-documentation
+ "@version{#2024-11-5}
+  @argument[accessible]{a @class{gtk:accessible-range} object}
+  @argument[value]{a number coerced to a double float for the value}
+  @begin{short}
+    Sets the current value of the accessible range.
+  @end{short}
+  This operation should behave similarly as if the user performed the action.
+
+  Since 4.10
+  @see-class{gtk:accessible-range}"
+  (cffi:foreign-funcall "gtk_accessible_range_set_current_value"
+                        (g:object accessible-range) accessible
+                        :double (coerce value 'double-float)
+                        :boolean))
+
+(export 'accessible-range-set-current-value)
 
 ;;; --- End of file gtk4.accessible-range.lisp ---------------------------------
