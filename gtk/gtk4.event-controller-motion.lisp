@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-motion.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,8 +68,7 @@
 ;;; GtkEventControllerMotion
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerMotion"
-                               event-controller-motion
+(gobject:define-gobject "GtkEventControllerMotion" event-controller-motion
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -98,33 +97,33 @@
       @begin{pre}
 lambda (controller x y)    :run-first
       @end{pre}
-      Signals that the pointer has entered the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
         @entry[x]{The double float with the x coordinate.}
         @entry[y]{The double float with the y coordinate.}
       @end{table}
+      Signals that the pointer has entered the widget.
     @subheading{The \"leave\" signal}
       @begin{pre}
 lambda (controller)    :run-first
       @end{pre}
-      Signals that the pointer has left the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
       @end{table}
+      Signals that the pointer has left the widget.
     @subheading{The \"motion\" signal}
       @begin{pre}
 lambda (controller x y)    :run-first
       @end{pre}
-      Emitted when the pointer moves inside the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
         @entry[x]{The double float with the x coordinate.}
         @entry[y]{The double float with the y coordinate.}
       @end{table}
+      Emitted when the pointer moves inside the widget.
   @end{dictionary}
   @see-constructor{gtk:event-controller-motion-new}
   @see-class{gtk:event-controller}")
@@ -169,8 +168,8 @@ lambda (controller x y)    :run-first
  "The @code{is-pointer} property of type @code{:boolean} (Read) @br{}
   @em{True} if the pointer is contained in the controllers widget, as opposed
   to in a descendent widget. When handling crossing events, this property is
-  updated before the \"enter\" signal, but after the \"leave\" signal is
-  emitted. @br{}
+  updated before the @code{\"enter\"} signal, but after the @code{\"leave\"}
+  signal is emitted. @br{}
   Default value: @em{false}")
 
 #+liber-documentation

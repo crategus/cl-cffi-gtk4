@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-scroll.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,8 +70,8 @@
 ;;; GtkEventControllerScrollFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkEventControllerScrollFlags"
-                        event-controller-scroll-flags
+(gobject:define-gflags "GtkEventControllerScrollFlags"
+                       event-controller-scroll-flags
   (:export t
    :type-initializer "gtk_event_controller_scroll_flags_get_type")
   (:none 0)
@@ -87,7 +87,7 @@
       (liber:symbol-documentation 'event-controller-scroll-flags)
  "@version{2024-7-26}
   @begin{declaration}
-(gobject:define-g-flags \"GtkEventControllerScrollFlags\" event-controller-scroll-flags
+(gobject:define-gflags \"GtkEventControllerScrollFlags\" event-controller-scroll-flags
   (:export t
    :type-initializer \"gtk_event_controller_scroll_flags_get_type\")
   (:none 0)
@@ -117,8 +117,7 @@
 ;;; GtkEventControllerScroll
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerScroll"
-                               event-controller-scroll
+(gobject:define-gobject "GtkEventControllerScroll" event-controller-scroll
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -164,48 +163,48 @@
       @begin{pre}
 lambda (controller xvel yvel)    :run-first
       @end{pre}
-      Emitted after scroll is finished if the @code{:kinetic} flag is set. The
-      @arg{xvel} and @arg{yvel} parameters express the initial velocity that
-      was imprinted by the scroll events. The  parameters are expressed in
-      pixels/ms.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
         @entry[xvel]{The double float with the x velocity}
         @entry[yvel]{The double float with the y velocity}
       @end{table}
+      Emitted after scroll is finished if the @code{:kinetic} flag is set. The
+      @arg{xvel} and @arg{yvel} parameters express the initial velocity that
+      was imprinted by the scroll events. The  parameters are expressed in
+      pixels/ms.
     @subheading{The \"scroll\" signal}
       @begin{pre}
 lambda (controller dx dy)    :run-first
       @end{pre}
-      Signals that the widget should scroll by the amount specified by the
-      @arg{dx} and @arg{dy} parameters.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
         @entry[dx]{The double float with the x delta}
         @entry[dy]{The double float with the y delta}
       @end{table}
+      Signals that the widget should scroll by the amount specified by the
+      @arg{dx} and @arg{dy} parameters.
     @subheading{The \"scroll-begin\" signal}
       @begin{pre}
 lambda (controller)    :run-first
       @end{pre}
-      Signals that a new scrolling operation has begun. It will only be emitted
-      on devices capable of it.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
       @end{table}
+      Signals that a new scrolling operation has begun. It will only be emitted
+      on devices capable of it.
     @subheading{The \"scroll-end\" signal}
       @begin{pre}
 lambda (controller)    :run-first
       @end{pre}
-      Signals that a new scrolling operation has finished. It will only be
-      emitted on devices capable of it.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
       @end{table}
+      Signals that a new scrolling operation has finished. It will only be
+      emitted on devices capable of it.
   @end{dictionary}
   @see-slot{gtk:event-controller-scroll-flags}
   @see-constructor{gtk:event-controller-scroll-new}

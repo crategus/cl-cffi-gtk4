@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
+(gobject:define-genum "GtkShortcutScope" shortcut-scope
   (:export t
    :type-initializer "gtk_shortcut_scope_get_type")
   :local
@@ -90,7 +90,7 @@
       (liber:symbol-documentation 'shortcut-scope)
  "@version{2023-7-23}
   @begin{declaration}
-(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
+(gobject:define-genum \"GtkShortcutScope\" shortcut-scope
   (:export t
    :type-initializer \"gtk_shortcut_scope_get_type\")
   :local
@@ -117,7 +117,7 @@
 ;;; GtkShortcutController
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutController" shortcut-controller
+(gobject:define-gobject "GtkShortcutController" shortcut-controller
   (:superclass event-controller
    :export t
    :interfaces ("GtkBuildable"

@@ -131,14 +131,23 @@
         (context (gtk:im-context-simple-new)))
     (is (eq context (setf (gtk:event-controller-key-im-context controller)
                           context)))
-    (is (eq context (gtk:event-controller-key-im-context controller)))))
+    (is (eq context (gtk:event-controller-key-im-context controller)))
+    ;; Check memory management
+    (is-false (setf (gtk:event-controller-key-im-context controller) nil))
+    (is (= 1 (g:object-ref-count context)))
+    (is (= 1 (g:object-ref-count controller)))))
 
 ;;;     gtk_event_controller_key_forward
 
 ;;;     gtk_event_controller_key_get_group
 
+;; TODO: Causes a critical warning
+;;     Gtk-CRITICAL : gtk_event_controller_key_get_group
+;;                  : assertion 'controller->current_event != NULL' failed
+
+#+nil
 (test gtk-event-controller-key-group
   (let ((controller (gtk:event-controller-key-new)))
     (is (= 0 (gtk:event-controller-key-group controller)))))
 
-;;; 2024-9-20
+;;; 2024-10-31

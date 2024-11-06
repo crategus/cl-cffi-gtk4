@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-focus.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 ;;; GtkEventControllerFocus
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerFocus" event-controller-focus
+(gobject:define-gobject "GtkEventControllerFocus" event-controller-focus
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -97,20 +97,24 @@
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[controller]{The @class{gtk:event-controller-focus} object which
+          received the signal.}
+      @end{table}
       The signal is emitted whenever the focus enters into the widget or one of
       its descendents. Note that this means you may not get an @code{\"enter\"}
       signal even though the widget becomes the focus location, in certain
       cases, such as when the focus moves from a descendent of the widget to the
       widget itself. If you are interested in these cases, you can monitor the
       @slot[gtk:event-controller-focus]{is-focus} property for changes.
-      @begin[code]{table}
-        @entry[controller]{The @class{gtk:event-controller-focus} object which
-          received the signal.}
-      @end{table}
     @subheading{The \"leave\" signal}
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[controller]{The @class{gtk:event-controller-focus} object which
+          received the signal.}
+      @end{table}
       The signal is emitted whenever the focus leaves the widget hierarchy that
       is rooted at the widget that the controller is attached to. Note that this
       means you may not get a @code{\"leave\"} signal even though the focus
@@ -118,10 +122,6 @@ lambda (controller)    :run-last
       from the widget to a descendent. If you are interested in these cases, you
       can monitor the @slot[gtk:event-controller-focus]{is-focus} property for
       changes.
-      @begin[code]{table}
-        @entry[controller]{The @class{gtk:event-controller-focus} object which
-          received the signal.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:event-controller-focus-new}
   @see-slot{gtk:event-controller-focus-contains-focus}

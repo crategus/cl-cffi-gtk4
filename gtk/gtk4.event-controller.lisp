@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -85,7 +85,7 @@
 ;;; GtkPropagationPhase
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPropagationPhase" propagation-phase
+(gobject:define-genum "GtkPropagationPhase" propagation-phase
   (:export t
    :type-initializer "gtk_propagation_phase_get_type")
   (:none 0)
@@ -99,7 +99,7 @@
       (liber:symbol-documentation 'propagation-phase)
  "@version{2024-7-26}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
+(gobject:define-genum \"GtkPropagationPhase\" propagation-phase
   (:export t
    :type-initializer \"gtk_propagation_phase_get_type\")
   (:none 0)
@@ -132,7 +132,7 @@
 ;;; GtkPropagationLimit
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPropagationLimit" propagation-limit
+(gobject:define-genum "GtkPropagationLimit" propagation-limit
   (:export t
    :type-initializer "gtk_propagation_limit_get_type")
   (:none 0)
@@ -144,7 +144,7 @@
       (liber:symbol-documentation 'propagation-limit)
  "@version{2024-7-26}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
+(gobject:define-genum \"GtkPropagationLimit\" propagation-limit
   (:export t
    :type-initializer \"gtk_propagation_limit_get_type\")
   (:none 0)
@@ -169,7 +169,7 @@
 ;;; GtkEventController
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventController" event-controller
+(gobject:define-gobject "GtkEventController" event-controller
   (:superclass g:object
    :export t
    :interfaces nil
@@ -323,7 +323,7 @@
  "@version{2024-7-26}
   @syntax{(gtk:event-controller-widget object) => widget}
   @argument[object]{a @class{gtk:event-controller} object}
-  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Accessor of the @slot[gtk:event-controller]{widget} slot of the
     @class{gtk:event-controller} class.

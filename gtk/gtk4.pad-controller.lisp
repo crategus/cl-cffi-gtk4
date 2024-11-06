@@ -2,7 +2,7 @@
 ;;; gtk4.pad-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,7 @@
 ;;; GtkPadActionType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPadActionType" pad-action-type
+(gobject:define-genum "GtkPadActionType" pad-action-type
   (:export t
    :type-initializer "gtk_pad_action_type_get_type")
   :button
@@ -74,7 +74,7 @@
       (liber:symbol-documentation 'pad-action-type)
  "@version{2024-4-5}
     @begin{declaration}
-(gobject:define-g-enum \"GtkPadActionType\" pad-action-type
+(gobject:define-genum \"GtkPadActionType\" pad-action-type
   (:export t
    :type-initializer \"gtk_pad_action_type_get_type\")
   :button
@@ -103,7 +103,7 @@
 ;;; GtkPadController
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkPadController" pad-controller
+(gobject:define-gobject "GtkPadController" pad-controller
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -143,7 +143,7 @@
   function, it contains an action name that will be looked up in the given
   @class{g:action-group} object and activated whenever the specified input
   element and mode are triggered.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     A simple example of @class{gtk:pad-controller} usage, assigning button 1 in
     all modes and pad devices to an @code{\"invert-selection\"} action:
     @begin{pre}
@@ -165,7 +165,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
     @code{\"d\"} variant type bearing the value of the given axis, it is
     required that those are made stateful and accepting this
     @class{g:variant-type} type.
-  @end{examples}
+  @end{dictionary}
   @see-constructor{gtk:pad-controller-new}
   @see-slot{gtk:pad-controller-action-group}
   @see-slot{gtk:pad-controller-pad}

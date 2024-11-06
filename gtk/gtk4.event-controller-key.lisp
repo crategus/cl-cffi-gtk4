@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-key.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,7 +63,7 @@
 ;;; GtkEventControllerKey
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerKey" event-controller-key
+(gobject:define-gobject "GtkEventControllerKey" event-controller-key
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -82,19 +82,18 @@
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
-      The signal is emitted whenever the input method context filters away a
-      keypress and prevents the controller receiving it. See the
-      @fun{gtk:event-controller-key-im-context} and
-      @fun{gtk:im-context-filter-keypress} functions.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
       @end{table}
+      The signal is emitted whenever the input method context filters away a
+      keypress and prevents the controller receiving it. See the
+      @fun{gtk:event-controller-key-im-context} and
+      @fun{gtk:im-context-filter-keypress} functions.
     @subheading{The \"key-pressed\" signal}
       @begin{pre}
 lambda (controller keyval keycode state)    :run-last
       @end{pre}
-      The signal is emitted whenever a key is pressed.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
@@ -106,11 +105,11 @@ lambda (controller keyval keycode state)    :run-last
         @entry[Returns]{@em{True} if the key press was handled, @em{false}
           otherwise.}
       @end{table}
+      The signal is emitted whenever a key is pressed.
     @subheading{The \"key-released\" signal}
       @begin{pre}
 lambda (controller keyval keycode state)    :run-last
       @end{pre}
-      The signal is emitted whenever a key is released.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
@@ -120,12 +119,11 @@ lambda (controller keyval keycode state)    :run-last
         @entry[state]{The @symbol{gdk:modifier-type} bitmask representing the
           state of modifier keys and pointer buttons.}
       @end{table}
+      The signal is emitted whenever a key is released.
     @subheading{The \"modifiers\" signal}
       @begin{pre}
 lambda (controller state)    :run-last
       @end{pre}
-      This signal is emitted whenever the state of modifier keys and pointer
-      buttons change.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object on
           which received the signal.}
@@ -133,6 +131,8 @@ lambda (controller state)    :run-last
           state of modifier keys and pointer buttons.}
         @entry[Returns]{The boolean whether to ignore modifiers.}
       @end{table}
+      This signal is emitted whenever the state of modifier keys and pointer
+      buttons change.
   @end{dictionary}
   @see-constructor{gtk:event-controller-key-new}
   @see-class{gtk:event-controller}")

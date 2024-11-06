@@ -80,7 +80,10 @@
          (controller (gtk:pad-controller-new group nil)))
     (is (typep (gtk:pad-controller-action-group controller)
                'g:simple-action-group))
-    (is-false (gtk:pad-controller-pad controller))))
+    (is-false (gtk:pad-controller-pad controller))
+    ;; Check memory management
+    (is (= 2 (g:object-ref-count group)))
+    (is (= 1 (g:object-ref-count controller)))))
 
 ;;; --- Functions --------------------------------------------------------------
 

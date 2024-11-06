@@ -2,11 +2,11 @@
 ;;; gtk4.drop-controller-motion.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,7 +67,7 @@
 ;;; GtkDropControllerMotion
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDropControllerMotion" drop-controller-motion
+(gobject:define-gobject "GtkDropControllerMotion" drop-controller-motion
   (:superclass event-controller
    :export t
    :interfaces ()
@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop-controller-motion 'type)
- "@version{#2023-9-29}
+ "@version{2024-11-2}
   @begin{short}
     The @class{gtk:drop-controller-motion} object is an event controller meant
     for tracking the pointer hovering over a widget during a drag and drop
@@ -98,30 +98,34 @@
       @begin{pre}
 lambda (controller x y)    :run-last
       @end{pre}
-      Signals that the pointer has entered the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:drop-controller-motion} object.}
-        @entry[x]{A double float with the x coordinate of the pointer location.}
-        @entry[y]{A double float with the y coordinate of the pointer location.}
+        @entry[x]{The double float with the x coordinate of the pointer
+          location.}
+        @entry[y]{The double float with the y coordinate of the pointer
+          location.}
       @end{table}
+      Signals that the pointer has entered the widget.
     @subheading{The \"leave\" signal}
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
-      Signals that the pointer has left the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:drop-controller-motion} object.}
       @end{table}
+      Signals that the pointer has left the widget.
     @subheading{The \"motion\" signal}
       @begin{pre}
 lambda (controller x y)    :run-first
       @end{pre}
-      Emitted when the pointer moves inside the widget.
       @begin[code]{table}
         @entry[controller]{The @class{gtk:drop-controller-motion} object.}
-        @entry[x]{A double float with the x coordinate of the pointer location.}
-        @entry[y]{A double float with the y coordinate of the pointer location.}
+        @entry[x]{The double float with the x coordinate of the pointer
+          location.}
+        @entry[y]{The double float with the y coordinate of the pointer
+          location.}
       @end{table}
+      Emitted when the pointer moves inside the widget.
   @end{dictionary}
   @see-constructor{gtk:drop-controller-motion-new}
   @see-slot{gtk:drop-controller-motion-contains-pointer}
@@ -143,7 +147,7 @@ lambda (controller x y)    :run-first
   Whether the pointer of a Drag-and-Drop operation is in the controller’s widget
   or a descendant. See also the @slot[gtk:drop-controller-motion]{is-pointer}
   property. When handling crossing events, this property is updated before the
-  \"enter\" signal, but after the \"leave\" signal is emitted.")
+  @code{\"enter\"} signal, but after the @code{\"leave\"} signal is emitted.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-controller-motion-contains-pointer)
@@ -172,8 +176,8 @@ lambda (controller x y)    :run-first
   descendant. If no drop operation is going on, this property returns
   @code{nil}. The event controller should not modify the drop, but it might want
   to query its properties. When handling crossing events, this property is
-  updated before the \"enter\" signal, but after the \"leave\" signal is
-  emitted.")
+  updated before the @code{\"enter\"} signal, but after the @code{\"leave\"}
+  signal is emitted.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-controller-motion-drop)
@@ -202,8 +206,8 @@ lambda (controller x y)    :run-first
   Whether the pointer is in the controllers widget itself, as opposed to in a
   descendent widget. See also the
   @slot[gtk:drop-controller-motion]{contains-pointer} property. When handling
-  crossing events, this property is updated before the\"enter\" signal, but
-  after the \"leave\" signal is emitted.")
+  crossing events, this property is updated before the @code{\"enter\"} signal,
+  but after the @code{\"leave\"} signal is emitted.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-controller-motion-is-pointer)

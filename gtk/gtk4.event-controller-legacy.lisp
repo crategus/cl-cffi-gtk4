@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-legacy.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,7 +56,7 @@
 ;;; GtkEventControllerLegacy
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerLegacy" event-controller-legacy
+(gobject:define-gobject "GtkEventControllerLegacy" event-controller-legacy
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -77,8 +77,7 @@
       @begin{pre}
 lambda (controller event)    :run-last
       @end{pre}
-      The signal is emitted for each GDK event delivered to @arg{controller}.
-      @begin{table}
+      @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-legacy} object which
           received the signal.}
         @entry[event]{The @class{gdk:event} instance which triggered the
@@ -87,6 +86,7 @@ lambda (controller event)    :run-last
           the event and the emission of this signal. @em{False} to propagate
           the event further.}
       @end{table}
+      The signal is emitted for each GDK event delivered to @arg{controller}.
   @end{dictionary}
   @see-constructor{gtk:event-controller-legacy-new}
   @see-class{gtk:event-controller}")
