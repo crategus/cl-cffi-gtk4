@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-rotate.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,10 +55,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGestureRotate
+;;; GtkGestureRotate
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGestureRotate" gesture-rotate
+(gobject:define-gobject "GtkGestureRotate" gesture-rotate
   (:superclass gesture
    :export t
    :interfaces nil
@@ -79,7 +79,6 @@
       @begin{pre}
 lambda (gesture angle delta)    :run-first
       @end{pre}
-      The signal is emitted when the angle between both tracked points changes.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-rotate} object which received the
           signal.}
@@ -87,13 +86,14 @@ lambda (gesture angle delta)    :run-first
         @entry[delta]{The double float with the difference with the starting
           angle, in radians.}
       @end{table}
+      The signal is emitted when the angle between both tracked points changes.
   @end{dictionary}
   @see-constructor{gtk:gesture-rotate-new}
   @see-class{gtk:gesture}
   @see-class{gtk:gesture-zoom}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_rotate_new ()
+;;; gtk_gesture_rotate_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-rotate-new))
@@ -111,7 +111,7 @@ lambda (gesture angle delta)    :run-first
 (export 'gesture-rotate-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_rotate_get_angle_delta ()
+;;; gtk_gesture_rotate_get_angle_delta
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_rotate_get_angle_delta" gesture-rotate-angle-delta)

@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-pan.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -69,7 +69,7 @@
 ;;; GtkPanDirection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPanDirection" pan-direction
+(gobject:define-genum "GtkPanDirection" pan-direction
   (:export t
    :type-initializer "gtk_pan_direction_get_type")
   :left
@@ -83,7 +83,7 @@
       (liber:symbol-documentation 'pan-direction)
  "@version{2024-2-19}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPanDirection\" pan-direction
+(gobject:define-genum \"GtkPanDirection\" pan-direction
   (:export t
    :type-initializer \"gtk_pan_direction_get_type\")
   :left
@@ -108,7 +108,7 @@
 ;;; GtkGesturePan
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGesturePan" gesture-pan
+(gobject:define-gobject "GtkGesturePan" gesture-pan
   (:superclass gesture-drag
    :export t
    :interfaces nil
@@ -139,8 +139,6 @@
     @begin{pre}
 lambda (gesture direction offset)    :run-last
     @end{pre}
-    The signal is emitted once a panning gesture along the expected axis is
-    detected.
     @begin[code]{table}
       @entry[gesture]{The @class{gtk:gesture-pan} object which received the
         signal.}
@@ -149,6 +147,8 @@ lambda (gesture direction offset)    :run-last
       @entry[offset]{The double float with the offset along the gesture
         orientation.}
     @end{table}
+    The signal is emitted once a panning gesture along the expected axis is
+    detected.
   @end{dictionary}
   @see-constructor{gtk:gesture-pan-new}
   @see-slot{gtk:gesture-pan-orientation}

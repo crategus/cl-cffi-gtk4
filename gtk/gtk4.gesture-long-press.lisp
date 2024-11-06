@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-long-press.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkGestureLongPress
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGestureLongPress" gesture-long-press
+(gobject:define-gobject "GtkGestureLongPress" gesture-long-press
   (:superclass gesture-single
    :export t
    :interfaces nil
@@ -97,18 +97,16 @@
       @begin{pre}
 lambda (gesture)    :run-last
       @end{pre}
-      The signal is emitted whenever a press moved too far, or was released
-      before the @code{\"pressed\"} signal happened.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
       @end{table}
+      The signal is emitted whenever a press moved too far, or was released
+      before the @code{\"pressed\"} signal happened.
     @subheading{The \"pressed\" signal}
       @begin{pre}
 lambda (gesture x y)    :run-last
       @end{pre}
-      The signal is emitted whenever a press goes unmoved/unreleased longer
-      than what the GTK defaults tell.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
@@ -117,6 +115,8 @@ lambda (gesture x y)    :run-last
         @entry[y]{The double float with the y coordinate where the press
           happened, relative to the widget allocation.}
       @end{table}
+      The signal is emitted whenever a press goes unmoved/unreleased longer
+      than what the GTK defaults tell.
   @end{dictionary}
   @see-slot{gtk:gesture-long-press-delay-factor}
   @see-constructor{gtk:gesture-long-press-new}

@@ -2,7 +2,7 @@
 ;;; gtk4.gesture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,7 +84,7 @@
 ;;; GtkEventSequenceState
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkEventSequenceState" event-sequence-state
+(gobject:define-genum "GtkEventSequenceState" event-sequence-state
   (:export t
    :type-initializer "gtk_event_sequence_state_get_type")
   (:none 0)
@@ -97,7 +97,7 @@
       (liber:symbol-documentation 'event-sequence-state)
  "@version{2024-7-27}
   @begin{declaration}
-(gobject:define-g-enum \"GtkEventSequenceState\" event-sequence-state
+(gobject:define-genum \"GtkEventSequenceState\" event-sequence-state
   (:export t
    :type-initializer \"gtk_event_sequence_state_get_type\")
   (:none 0)
@@ -122,7 +122,7 @@
 ;;; GtkGesture
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGesture" gesture
+(gobject:define-gobject "GtkGesture" gesture
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -224,21 +224,27 @@
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      The signal is emitted when the gesture is recognized. This means the
-      number of touch sequences matches @code{n-points} Note: These conditions
-      may also happen when an extra touch, for example, a third touch on a
-      2-touches gesture, is lifted, in that situation sequence will not pertain
-      to the current set of active touches, so do not rely on this being true.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} event that made the
           gesture to be recognized.}
       @end{table}
+      The signal is emitted when the gesture is recognized. This means the
+      number of touch sequences matches @code{n-points} Note: These conditions
+      may also happen when an extra touch, for example, a third touch on a
+      2-touches gesture, is lifted, in that situation sequence will not pertain
+      to the current set of active touches, so do not rely on this being true.
     @subheading{The \"cancel\" signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[gesture]{The @class{gtk:gesture} object which received the
+          signal.}
+        @entry[sequence]{The @class{gdk:event-sequence} instance that was
+          cancelled.}
+      @end{table}
       The signal is emitted whenever a sequence is cancelled. This usually
       happens on active touches when the @fun{gtk:event-controller-reset}
       function is called on @arg{gesture}, manually, due to grabs ..., or the
@@ -246,16 +252,16 @@ lambda (gesture sequence)    :run-last
       the @fun{gtk:gesture-set-sequence-state}) function. The @arg{gesture}
       argument must forget everything about @arg{sequence} as a reaction to the
       signal.
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
-          signal.}
-        @entry[sequence]{The @class{gdk:event-sequence} instance that was
-          cancelled.}
-      @end{table}
     @subheading{The \"end\" signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[gesture]{The @class{gtk:gesture} object which received the
+          signal.}
+        @entry[sequence]{The @class{gdk:event-sequence} instance that made
+          gesture recognition to finish.}
+      @end{table}
       The signal is emitted when gesture either stopped recognizing the event
       sequences as something to be handled, or the number of touch sequences
       became higher or lower than the @slot[gtk:gesture]{n-points} value. Note:
@@ -264,19 +270,10 @@ lambda (gesture sequence)    :run-last
       just pressed touch sequence that exceeds the @slot[gtk:gesture]{n-points}
       value. This situation may be detected by checking through the
       @fun{gtk:gesture-handles-sequence} function.
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
-          signal.}
-        @entry[sequence]{The @class{gdk:event-sequence} instance that made
-          gesture recognition to finish.}
-      @end{table}
     @subheading{The \"sequence-state-changed\" signal}
       @begin{pre}
 lambda (gesture sequence state)    :run-last
       @end{pre}
-      The signal is emitted whenever a sequence state changes. See the
-      @fun{gtk:gesture-sequence-state} function to know more about the
-      expectable sequence lifetimes.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
@@ -284,19 +281,22 @@ lambda (gesture sequence state)    :run-last
           cancelled.}
         @entry[state]{The new @symbol{gtk:event-sequence-state} value.}
       @end{table}
+      The signal is emitted whenever a sequence state changes. See the
+      @fun{gtk:gesture-sequence-state} function to know more about the
+      expectable sequence lifetimes.
     @subheading{The \"update\" signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      The signal is emitted whenever an event is handled while the gesture is
-      recognized. The @arg{sequence} argument is guaranteed to pertain to the
-      set of active touches.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} instance that was
           updated.}
       @end{table}
+      The signal is emitted whenever an event is handled while the gesture is
+      recognized. The @arg{sequence} argument is guaranteed to pertain to the
+      set of active touches.
   @end{dictionary}
   @see-slot{gtk:gesture-n-points}
   @see-class{gtk:event-controller}
@@ -696,7 +696,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
   Groups also perform an  \"implicit grabbing\" of sequences, if a
   @class{gdk:event-sequence} instance is set to @code{:claimed} on one group,
-  every other gesture group attached to the same @class{gtk:widget} widget will
+  every other gesture group attached to the same @class{gtk:widget} object will
   switch the state for that sequence to @code{:denied}.
   @see-class{gtk:gesture}
   @see-class{gdk:event-sequence}

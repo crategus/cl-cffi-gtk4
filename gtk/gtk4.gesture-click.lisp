@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-click.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,7 @@
 ;;; GtkGestureClick
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGestureClick" gesture-click
+(gobject:define-gobject "GtkGestureClick" gesture-click
   (:superclass gesture-single
    :export t
    :interfaces ()
@@ -84,7 +84,6 @@
       @begin{pre}
 lambda (gesture n x y)    :run-last
       @end{pre}
-      The signal is emitted whenever a button or touch press happens.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
@@ -95,14 +94,11 @@ lambda (gesture n x y)    :run-last
         @entry[y]{The double float with the y coordinate, in widget allocation
           coordinates.}
       @end{table}
+      The signal is emitted whenever a button or touch press happens.
     @subheading{The \"released\" signal}
       @begin{pre}
 lambda (gesture n x y)    :run-last
       @end{pre}
-      The signal is emitted when a button or touch is released. The @arg{n}
-      argument will report the number of press that is paired to this event,
-      note that the @code{\"stopped\"} signal may have been emitted between the
-      press and its release, @arg{n} will only start over at the next press.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
@@ -113,24 +109,24 @@ lambda (gesture n x y)    :run-last
         @entry[y]{The double float with the y coordinate, in widget allocation
           coordinates.}
       @end{table}
+      The signal is emitted when a button or touch is released. The @arg{n}
+      argument will report the number of press that is paired to this event,
+      note that the @code{\"stopped\"} signal may have been emitted between the
+      press and its release, @arg{n} will only start over at the next press.
     @subheading{The \"stopped\" signal}
       @begin{pre}
 lambda (gesture)    :run-last
       @end{pre}
-      The signal is emitted whenever any time/distance threshold has been
-      exceeded.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
       @end{table}
+      The signal is emitted whenever any time/distance threshold has been
+      exceeded.
     @subheading{The \"unpaired-release\" signal}
       @begin{pre}
 lambda (gesture x y button sequence)    :run-last
       @end{pre}
-      The signal is emitted whenever the gesture receives a release event that
-      had no previous corresponding press. Due to implicit grabs, this can only
-      happen on situations where input is grabbed elsewhere mid-press or the
-      pressed widget voluntarily relinquishes its implicit grab.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
@@ -140,6 +136,10 @@ lambda (gesture x y button sequence)    :run-last
         @entry[sequence]{The @class{gdk:event-sequence} instance being
           released.}
       @end{table}
+      The signal is emitted whenever the gesture receives a release event that
+      had no previous corresponding press. Due to implicit grabs, this can only
+      happen on situations where input is grabbed elsewhere mid-press or the
+      pressed widget voluntarily relinquishes its implicit grab.
   @end{dictionary}
   @see-constructor{gtk:gesture-click-new}
   @see-class{gtk:gesture}")

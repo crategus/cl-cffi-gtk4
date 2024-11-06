@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-drag.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,7 +63,7 @@
 ;;; GtkGestureDrag
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGestureDrag" gesture-drag
+(gobject:define-gobject "GtkGestureDrag" gesture-drag
   (:superclass gesture-single
    :export t
    :interfaces nil
@@ -86,7 +86,6 @@
       @begin{pre}
 lambda (gesture xstart ystart)    :run-last
       @end{pre}
-      The signal is emitted whenever dragging starts.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-drag} object which received the
           signal.}
@@ -95,11 +94,11 @@ lambda (gesture xstart ystart)    :run-last
         @entry[ystart]{The double float with the y coordinate, relative to the
           widget allocation.}
       @end{table}
+      The signal is emitted whenever dragging starts.
     @subheading{The \"drag-end\" signal}
       @begin{pre}
 lambda (gesture xoffset yoffset)    :run-last
       @end{pre}
-      The signal is emitted whenever the dragging is finished.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-drag} object which received the
           signal.}
@@ -108,11 +107,11 @@ lambda (gesture xoffset yoffset)    :run-last
         @entry[yoffset]{The double float with the y offset, relative to the
           start point.}
       @end{table}
+      The signal is emitted whenever the dragging is finished.
     @subheading{The \"drag-update\" signal}
       @begin{pre}
 lambda (gesture xoffset yoffset)    :run-last
       @end{pre}
-      The signal is emitted whenever the dragging point moves.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-drag} object which received the
           signal.}
@@ -121,6 +120,7 @@ lambda (gesture xoffset yoffset)    :run-last
         @entry[yoffset]{The double float with the y offset, relative to the
           start point.}
       @end{table}
+      The signal is emitted whenever the dragging point moves.
   @end{dictionary}
   @see-class{gtk:gesture}")
 

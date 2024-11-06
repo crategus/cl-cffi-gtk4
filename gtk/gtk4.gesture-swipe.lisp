@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-swipe.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,7 +59,7 @@
 ;;; GtkGestureSwipe
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGestureSwipe" gesture-swipe
+(gobject:define-gobject "GtkGestureSwipe" gesture-swipe
   (:superclass gesture-single
    :export t
    :interfaces nil
@@ -86,8 +86,6 @@
       @begin{pre}
 lambda (gesture xvel yvel)    :run-last
       @end{pre}
-      The signal is emitted when the recognized gesture is finished, velocity
-      and direction are a product of previously recorded events.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-swipe} object which received the
           signal.}
@@ -96,6 +94,8 @@ lambda (gesture xvel yvel)    :run-last
         @entry[yvel]{The double float with the velocity in the y axis,
           in pixels/sec.}
     @end{table}
+      The signal is emitted when the recognized gesture is finished, velocity
+      and direction are a product of previously recorded events.
   @end{dictionary}
   @see-constructor{gtk:gesture-swipe-new}
   @see-class{gtk:gesture}")
