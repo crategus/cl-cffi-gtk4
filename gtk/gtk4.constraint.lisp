@@ -2,7 +2,7 @@
 ;;; gtk4.constraint.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,7 +84,7 @@
 ;;; GtkConstraintTarget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkConstraintTarget" constraint-target
+(gobject:define-ginterface "GtkConstraintTarget" constraint-target
   (:export t
    :type-initializer "gtk_constraint_target_get_type")
   nil)
@@ -108,7 +108,7 @@
 ;;; GtkConstraint
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkConstraint" constraint
+(gobject:define-gobject "GtkConstraint" constraint
   (:superclass g:object
    :export t
    :interfaces ()
