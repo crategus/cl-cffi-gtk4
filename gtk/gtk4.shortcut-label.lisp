@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GtkShortcutLabel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutLabel" shortcut-label
+(gobject:define-gobject "GtkShortcutLabel" shortcut-label
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -87,9 +87,9 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-label 'type)
- "@version{2023-8-28}
+ "@version{2024-10-27}
   @begin{short}
-    A @class{gtk:shortcut-label} widget is a widget that represents a single
+    The @class{gtk:shortcut-label} widget is a widget that represents a single
     keyboard shortcut or gesture in the user interface.
   @end{short}
   @see-slot{gtk:shortcut-label-accelerator}
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'shortcut-label-accelerator)
       "Accessor"
       (documentation 'shortcut-label-accelerator 'function)
- "@version{#2022-7-24}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcut-label-accelerator object) => accelerator}
   @syntax{(setf (gtk:shortcut-label-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
@@ -142,7 +142,7 @@
 (setf (liber:alias-for-function 'shortcut-label-disabled-text)
       "Accessor"
       (documentation 'shortcut-label-disabled-text 'function)
- "@version{#2022-7-24}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcut-label- object) => disabled-text}
   @syntax{(setf (gtk:shortcut-label-accelerator object) disabled-text)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
@@ -163,7 +163,7 @@
 
 (defun shortcut-label-new (accelerator)
  #+liber-documentation
- "@version{#2022-7-24}
+ "@version{2024-10-27}
   @argument[accelerator]{a string with the initial accelerator}
   @return{The newly @class{gtk:shortcut-label} widget.}
   @begin{short}

@@ -2,11 +2,11 @@
 ;;; gtk4.shortcut-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -35,6 +35,11 @@
 ;;;
 ;;;     GtkShortcutManager
 ;;;
+;;; Functions
+;;;
+;;;     gtk_shortcut_manager_add_controller
+;;;     gtk_shortcut_manager_remove_controller
+;;;
 ;;; Hierarchy
 ;;;
 ;;;     GInterface
@@ -48,7 +53,7 @@
 ;;; GtkShortcutManager
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkShortcutManager" shortcut-manager
+(gobject:define-ginterface "GtkShortcutManager" shortcut-manager
   (:export t
    :type-initializer "gtk_shortcut_manager_get_type")
   nil)
@@ -57,7 +62,7 @@
 (setf (liber:alias-for-class 'shortcut-manager)
       "Interface"
       (documentation 'shortcut-manager 'type)
- "@version{#2022-2-1}
+ "@version{2024-11-1}
   @begin{short}
     The @class{gtk:shortcut-manager} interface is used to implement shortcut
     scopes.
@@ -66,16 +71,57 @@
   since the event controllers that are used to implement managed and global
   scopes are limited to the same native.
 
-  Every widget that implements the @class{gtk:shortcut-manager} interface will 
+  Every widget that implements the @class{gtk:shortcut-manager} interface will
   be used with the @code{:managed} value of the @symbol{gtk:shortcut-scope}
   enumeration.
 
-  Examples for widgets implementing the @class{gtk:shortcut-manager} interface 
+  Examples for widgets implementing the @class{gtk:shortcut-manager} interface
   are the @class{gtk:window} and @class{gtk:popover} widgets.
   @see-class{gtk:shortcut-scopes}
   @see-class{gtk:native}
   @see-class{gtk:window}
   @see-class{gtk:popover}
   @see-symbol{gtk:shortcut-scope}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_shortcut_manager_add_controller
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_shortcut_manager_add_controller"
+               shortcut-manager-add-controller) :void
+ #+liber-documentation
+ "@version{#2024-11-1}
+  @argument[manager]{a @class{gtk:shortcut-manager} object}
+  @argument[controller]{a @class{gtk:shortcut-controller} object}
+  @begin{short}
+    Adds a @class{gtk:shortcut-controller} object to be managed.
+  @end{short}
+  @see-class{gtk:shortcut-manager}
+  @see-class{gtk:shortcut-controller}"
+  (manager (g:object shortcut-manager))
+  (controller (g:object shortcut-controller)))
+
+(export 'shortcut-manager-add-controller)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_shortcut_manager_remove_controller
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_shortcut_manager_remove_controller"
+               shortcut-manager-remove-controller) :void
+ #+liber-documentation
+ "@version{#2024-11-1}
+  @argument[manager]{a @class{gtk:shortcut-manager} object}
+  @argument[controller]{a @class{gtk:shortcut-controller} object}
+  @begin{short}
+    Remove a @class{gtk:shortcut-controller} object that had previously been
+    added.
+  @end{short}
+  @see-class{gtk:shortcut-manager}
+  @see-class{gtk:shortcut-controller}"
+  (manager (g:object shortcut-manager))
+  (controller (g:object shortcut-controller)))
+
+(export 'shortcut-manager-remove-controller)
 
 ;;; --- End of file gtk4.shortcut-manager.lisp ---------------------------------

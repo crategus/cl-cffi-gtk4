@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -34,6 +34,10 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkShortcutsWindow
+;;;
+;;; Functions
+;;;
+;;;     gtk_shortcuts_window_add_section                    Since 4.14
 ;;;
 ;;; Properties
 ;;;
@@ -69,7 +73,7 @@
 ;;; GtkShortcutsWindow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutsWindow" shortcuts-window
+(gobject:define-gobject "GtkShortcutsWindow" shortcuts-window
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"
@@ -90,7 +94,7 @@
 (setf (documentation 'shortcuts-window 'type)
  "@version{2024-2-18}
   @begin{short}
-    A @class{gtk:shortcuts-window} widget shows brief information about the
+    The @class{gtk:shortcuts-window} widget shows brief information about the
     keyboard shortcuts and gestures of an application.
   @end{short}
   The shortcuts can be grouped, and you can have multiple sections in this
@@ -104,7 +108,7 @@
   or more @class{gtk:shortcuts-section} objects, which contain
   @class{gtk:shortcuts-group} objects that in turn contain objects of the
   @class{gtk:shortcuts-shortcut} class.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     A simple example:
     This example has as single section. As you can see, the shortcut groups are
     arranged in columns, and spread across several pages if there are too many
@@ -134,22 +138,22 @@
       @begin{pre}
 lambda (shortcutswindow)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user uses a
-      keybinding to close the window. The default binding for this signal is the
-      @kbd{Escape} key.
       @begin[code]{table}
         @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user uses a
+      keybinding to close the window. The default binding for this signal is the
+      @kbd{Escape} key.
     @subheading{The \"search\" signal}
       @begin{pre}
 lambda (shortcutswindow)    :action
       @end{pre}
-      The signal is a keybinding signal which gets emitted when the user uses a
-      keybinding to start a search. The default binding for this signal is the
-      @kbd{Control-F} key.
       @begin[code]{table}
         @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
       @end{table}
+      The signal is a keybinding signal which gets emitted when the user uses a
+      keybinding to start a search. The default binding for this signal is the
+      @kbd{Control-F} key.
   @end{dictionary}
   @see-slot{gtk:shortcuts-window-section-name}
   @see-slot{gtk:shortcuts-window-view-name}
@@ -169,7 +173,7 @@ lambda (shortcutswindow)    :action
  "The @code{section-name} property of type @code{:string} (Read / Write) @br{}
   The name of the section to show. This should be the section name of one of the
   @class{gtk:shortcuts-section} objects that are in this shortcuts window. @br{}
-  Default value: \"internal-search\"")
+  Default value: @code{\"internal-search\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-window-section-name)
@@ -219,5 +223,33 @@ lambda (shortcutswindow)    :action
   Set this to @code{nil} to show all groups.
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-group}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_shortcuts_window_add_section
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gtk_shortcuts_window_add_section" shortcuts-window-add-section)
+    :void
+ #+liber-documentation
+ "@version{#2024-10-27}
+  @argument[window]{a @class{gtk:shortcuts-window} widget}
+  @argument[section]{a @class{gtk:shortcuts-section} widget to add}
+  @begin{short}
+    Adds a section to the shortcuts window.
+  @end{short}
+  This is the programmatic equivalent to using a @class{gtk:builder} UI
+  definition and a @code{<child>} tag to add the child. Using the
+  @fun{gtk:window-child} function is not appropriate as the shortcuts window
+  manages its children internally.
+
+  Since 4.14
+  @see-class{gtk:shortcuts-window}
+  @see-class{gtk:shortcuts-section}"
+  (window (g:object shortcuts-window))
+  (section (g:object shortcuts-section)))
+
+#+gtk-4-14
+(export 'shortcuts-window-add-section)
 
 ;;; --- End of file gtk4.shortcuts-window.lisp ---------------------------------

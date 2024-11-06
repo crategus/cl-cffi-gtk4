@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-trigger.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -41,26 +41,26 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_shortcut_trigger_trigger
-;;;     gtk_shortcut_trigger_hash                          not implemented
-;;;     gtk_shortcut_trigger_equal                         not implemented
-;;;     gtk_shortcut_trigger_compare                       not implemented
-;;;     gtk_shortcut_trigger_to_string
-;;;     gtk_shortcut_trigger_print
-;;;     gtk_shortcut_trigger_to_label
-;;;     gtk_shortcut_trigger_print_label
 ;;;     gtk_shortcut_trigger_parse_string
+;;;     gtk_shortcut_trigger_trigger
+;;;     gtk_shortcut_trigger_hash                           not implemented
+;;;     gtk_shortcut_trigger_equal                          not implemented
+;;;     gtk_shortcut_trigger_compare                        not implemented
+;;;     gtk_shortcut_trigger_to_string
+;;;     gtk_shortcut_trigger_print                          not needed
+;;;     gtk_shortcut_trigger_to_label
+;;;     gtk_shortcut_trigger_print_label                    not needed
 ;;;
 ;;;     gtk_keyval_trigger_new
-;;;     gtk_keyval_trigger_get_modifiers                   Accessor
-;;;     gtk_keyval_trigger_get_keyval                      Accessor
+;;;     gtk_keyval_trigger_get_modifiers                    Accessor
+;;;     gtk_keyval_trigger_get_keyval                       Accessor
 ;;;
 ;;;     gtk_mnemonic_trigger_new
 ;;;     gtk_mnemonic_trigger_get_keyval
 ;;;
 ;;;     gtk_alternative_trigger_new
-;;;     gtk_alternative_trigger_get_first
-;;;     gtk_alternative_trigger_get_second
+;;;     gtk_alternative_trigger_get_first                   Accessor
+;;;     gtk_alternative_trigger_get_second                  Accessor
 ;;;
 ;;;     gtk_never_trigger_get
 ;;;
@@ -79,7 +79,7 @@
 ;;; GtkShortcutTrigger
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutTrigger" shortcut-trigger
+(gobject:define-gobject "GtkShortcutTrigger" shortcut-trigger
   (:superclass g:object
    :export t
    :interfaces nil
@@ -88,250 +88,63 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-trigger 'type)
- "@version{#2024-7-26}
+ "@version{2024-11-1}
   @begin{short}
-    A trigger for a key shortcut.
+    The @class{gtk:shortcut-trigger} object is the object used to track if a
+    @class{gtk:shortcut} object should be activated.
   @end{short}
-  The @class{gtk:shortcut-trigger} object is the object used to track if a
-  @class{gtk:shortcut} object should be activated. For this purpose, the
-  @fun{gtk:shortcut-trigger-trigger} function can be called on a
-  @class{gdk:event} instance.
+  For this purpose, the @fun{gtk:shortcut-trigger-trigger} function can be
+  called on a @class{gdk:event} instance.
 
-  The @class{gtk:shortcut-trigger} implementation contain functions that allow
+  The @class{gtk:shortcut-trigger} implementation contains functions that allow
   easy presentation to end users as well as being printed for debugging.
 
   All @class{gtk:shortcut-trigger} objects are immutable, you can only specify
   their properties during construction. If you want to change a trigger, you
   have to replace it with a new one.
+  @see-constructor{gtk:shortcut-trigger-parse-string}
   @see-class{gtk:shortcut-action}
+  @see-class{gdk:event}
   @see-function{gtk:shortcut-trigger-trigger}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkKeyvalTrigger
+;;; gtk_shortcut_trigger_parse_string
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkKeyvalTrigger" keyval-trigger
-  (:superclass shortcut-trigger
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_keyval_trigger_get_type")
-  ((keyval
-    keyval-trigger-keyval
-    "keyval" "guint" t nil)
-   (modifiers
-    keyval-trigger-modifiers
-    "modifiers" "GdkModifierType" t nil)))
-
-#+liber-documentation
-(setf (documentation 'keyval-trigger 'type)
- "@version{#2022-8-26}
+(cffi:defcfun ("gtk_shortcut_trigger_parse_string"
+               shortcut-trigger-parse-string)
+    (g:object shortcut-trigger :already-referenced)
+ #+liber-documentation
+ "@version{2024-11-1}
+  @argument[str]{a string to parse}
+  @return{The new @class{gtk:shortcut-trigger} object, or @code{nil} on error.}
   @begin{short}
-    A @class{gtk:shortcut-trigger} object that triggers when a specific keyval
-    and (optionally) modifiers are pressed.
+    Tries to parse the given string into a trigger.
   @end{short}
-  @see-slot{gtk:keyval-trigger-keyval}
-  @see-slot{gtk:keyval-trigger-modifiers}
-  @see-constructor{gtk:keyval-trigger-new}
-  @see-class{gtk:shortcut-trigger}")
-
-;;; --- gtk:keyval-trigger-keyval ----------------------------------------------
-
-#+liber-documentation
-(setf (documentation (liber:slot-documentation "keyval" 'keyval-trigger) t)
- "The @code{keyval} property of type @code{:uint}
- (Read / Write / Construct only) @br{}
-  The key value for the trigger.")
-
-#+liber-documentation
-(setf (liber:alias-for-function 'keyval-trigger-keyval)
-      "Accessor"
-      (documentation 'keyval-trigger-keyval 'function)
- "@version{#2022-8-26}
-  @syntax{(gtk:keyval-trigger-keyval object) => keyval)}
-  @argument[object]{a @class{gtk:keyval-trigger} object}
-  @argument[keyval]{an unsigned integer with the keyval}
-  @begin{short}
-    Accessor of the @slot[gtk:keyval-trigger]{keyval} slot of the
-    @class{gtk:keyval-trigger} class.
-  @end{short}
-  The @fun{gtk:keyval-trigger-keyval} function returns the keyval that must be
-  pressed to succed triggering @arg{object}.
-  @see-class{gtk:keyval-trigger}")
-
-;;; --- gtk:keyval-trigger-modifiers -------------------------------------------
-
-#+liber-documentation
-(setf (documentation (liber:slot-documentation "modifiers"
-                                               'keyval-trigger) t)
- "The @code{modifiers} property of type @symbol{gdk:modifier-type}
- (Read / Write / Construct only) @br{}
-  The key modifiers for the trigger.")
-
-#+liber-documentation
-(setf (liber:alias-for-function 'keyval-trigger-modifiers)
-      "Accessor"
-      (documentation 'keyval-trigger-modifiers 'function)
- "@version{#2022-8-26}
-  @syntax{(gtk:keyval-trigger-modifiers object) => modifiers)}
-  @argument[object]{a @class{gtk:keyval-trigger} object}
-  @argument[modifiers]{a @symbol{gdk:modifiers-type} value}
-  @begin{short}
-    Accessor of the @slot[gtk:keyval-trigger]{modifiers} slot of the
-    @class{gtk:keyval-trigger} class.
-  @end{short}
-  The @fun{gtk:keyval-trigger-modifiers} function returns the modifiers that
-  must be present to succed triggering @arg{object}.
-  @see-class{gtk:keyval-trigger}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkMnemonicTrigger
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-object-class "GtkMnemonicTrigger" mnemonic-trigger
-  (:superclass shortcut-trigger
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_mnemonic_trigger_get_type")
-  ((keyval
-    mnemonic-trigger-keyval
-    "keyval" "guint" t nil)))
-
-#+liber-documentation
-(setf (documentation 'mnemonic-trigger 'type)
- "@version{#2022-8-26}
-  @begin{short}
-    A @class{gtk:shortcut-trigger} object that triggers when a specific
-    mnemonic is pressed.
-  @end{short}
-  @see-slot{gtk:mnemonic-trigger-keyval}
-  @see-constructor{gtk:mnemonic-trigger-new}
-  @see-class{gtk:shortcut-trigger}")
-
-;;; --- gtk:mnemonic-trigger-keyval --------------------------------------------
-
-#+liber-documentation
-(setf (documentation (liber:slot-documentation "keyval"
-                                               'mnemonic-trigger) t)
- "The @code{keyval} property of type @code{:uint}
- (Read / Write / Construct only) @br{}
-  The key value for the trigger.")
-
-#+liber-documentation
-(setf (liber:alias-for-function 'mnemonic-trigger-keyval)
-      "Accessor"
-      (documentation 'mnemonic-trigger-keyval 'function)
- "@version{#2022-8-26}
-  @syntax{(gtk:mnemonic-trigger-keyval object) => keyval)}
-  @argument[object]{a @class{gtk:mnemonic-trigger} object}
-  @argument[keyval]{an unsigned integer with the keyval}
-  @begin{short}
-    Accessor of the @slot[gtk:mnemonic-trigger]{keyval} slot of the
-    @class{gtk:mnemonic-trigger} class.
-  @end{short}
-  The @fun{gtk:mnemonic-trigger-keyval} function returns the keyval that must
-  be pressed to succed triggering @arg{object}.
-  @see-class{gtk:mnemonic-trigger}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkAlternativeTrigger
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-object-class "GtkAlternativeTrigger" alternative-trigger
-  (:superclass shortcut-trigger
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_alternative_trigger_get_type")
-  ((first
-    alternative-trigger-first
-    "first" "GtkShortcutTrigger" t nil)
-   (second
-    alternative-trigger-second
-    "second" "GtkShortcutTrigger" t nil)))
-
-#+liber-documentation
-(setf (documentation 'alternative-trigger 'type)
- "@version{#2022-8-26}
-  @begin{short}
-    A @class{gtk:shortcut-trigger} object that triggers when either of two
-    @class{gtk:shortcut-trigger} objects trigger.
-  @end{short}
-  @see-slot{gtk:alternative-trigger-first}
-  @see-slot{gtk:alternative-trigger-second}
-  @see-constructor{gtk:alternative-trigger-new}
-  @see-class{gtk:shortcut-trigger}")
-
-;;; --- gtk:alternative-trigger-first ------------------------------------------
-
-#+liber-documentation
-(setf (documentation (liber:slot-documentation "first"
-                                               'alternative-trigger) t)
- "The @code{first} property of type @class{gtk:shortcut-trigger}
- (Read / Write / Construct only) @br{}
-  The first trigger to check.")
-
-#+liber-documentation
-(setf (liber:alias-for-function 'alternative-trigger-first)
-      "Accessor"
-      (documentation 'alternative-trigger-first 'function)
- "@version{#2022-8-26}
-  @syntax{(gtk:alternative-trigger-first object) => shortcut)}
-  @argument[object]{a @class{gtk:mnemonic-trigger} object}
-  @argument[shortcut]{a first @class{gtk:shortcut-trigger} object}
-  @begin{short}
-    Accessor of the @slot[gtk:alternative-trigger]{first} slot of the
-    @class{gtk:alternative-trigger} class.
-  @end{short}
-  The @fun{gtk:alternative-trigger-first} function gets the first of the two
-  alternative triggers that may trigger @arg{shortcut}. The
-  @fun{gtk:alternative-trigger-second} function will return the other one.
+  On success, the parsed trigger is returned. When parsing failed, @code{nil}
+  is returned. The accepted strings are:
+  @begin{itemize}
+    @item{@code{never}: for a @class{gtk:never-trigger} object}
+    @item{a string parsed by the @fun{gtk:accelerator-parse} function, for a
+      @class{gtk:keyval-trigger} object, for example @code{<Control>C}}
+    @item{underscore, followed by a single character, for a
+      @class{gtk:mnemonic-trigger} object, for example @code{_l}}
+    @item{two valid trigger strings, separated by a @code{|} character, for a
+      @class{gtk:alternative-trigger} object, for example
+      @code{<Control>q|&lt;Control>w}}
+  @end{itemize}
+  Note that you will have to escape the @code{<} and @code{&gt}; characters when
+  specifying triggers in XML files, such as GtkBuilder UI files. Use @code{&lt;}
+  instead of @code{<} and @code{&gt;} instead of @code{&gt;}.
+  @see-class{gtk:shortcut-trigger}
+  @see-class{gtk:never-trigger}
+  @see-class{gtk:keyval-trigger}
+  @see-class{gtk:mnemonic-trigger}
   @see-class{gtk:alternative-trigger}
-  @see-function{gtk:alternative-trigger-second}")
+  @see-function{gtk:accelerator-parse}"
+  (str :string))
 
-;;; --- gtk:alternative-trigger-second -----------------------------------------
-
-#+liber-documentation
-(setf (documentation (liber:slot-documentation "second"
-                                               'alternative-trigger) t)
- "The @code{second} property of type @class{gtk:shortcut-trigger}
- (Read / Write / Construct only) @br{}
-  The second trigger to check.")
-
-#+liber-documentation
-(setf (liber:alias-for-function 'alternative-trigger-second)
-      "Accessor"
-      (documentation 'alternative-trigger-second 'function)
- "@version{#2022-8-26}
-  @syntax{(gtk:alternative-trigger-second object) => shortcut)}
-  @argument[object]{a @class{gtk:mnemonic-trigger} object}
-  @argument[shortcut]{a second @class{gtk:shortcut-trigger} object}
-  @begin{short}
-    Accessor of the @slot[gtk:alternative-trigger]{second} slot of the
-    @class{gtk:alternative-trigger} class.
-  @end{short}
-  The @fun{gtk:alternative-trigger-second} function gets the second of the two
-  alternative triggers that may trigger @arg{shortcut}. The
-  @fun{gtk:alternative-trigger-first} function will return the other one.
-  @see-class{gtk:alternative-trigger}
-  @see-function{gtk:alternative-trigger-first}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkNeverTrigger
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-object-class "GtkNeverTrigger" never-trigger
-  (:superclass shortcut-trigger
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_never_trigger_get_type")
-  nil)
-
-#+liber-documentation
-(setf (documentation 'never-trigger 'type)
- "@version{#2022-8-26}
-  @begin{short}
-    A @class{gtk:shortcut-trigger} object that never triggers.
-  @end{short}
-  @see-class{gtk:shortcut-trigger}")
+(export 'shortcut-trigger-parse-string)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_trigger_trigger
@@ -340,7 +153,7 @@
 (cffi:defcfun ("gtk_shortcut_trigger_trigger" shortcut-trigger-trigger)
     gdk:key-match
  #+liber-documentation
- "@version{#2024-7-26}
+ "@version{#2024-11-1}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[event]{a @class{gdk:event} instance}
   @argument[enable]{a boolean whether mnemonics should trigger}
@@ -351,7 +164,9 @@
   @end{short}
   Usually the value of @arg{enable} is determined by checking that the passed
   in event is a key event and has the right modifiers set.
-  @see-class{gtk:shortcut-trigger}"
+  @see-class{gtk:shortcut-trigger}
+  @see-class{gdk:event}
+  @see-symbol{gdk:key-match}"
   (shortcut (g:object shortcut-trigger))
   (event gdk:event)
   (enable :boolean))
@@ -432,7 +247,7 @@
 (cffi:defcfun ("gtk_shortcut_trigger_to_string" shortcut-trigger-to-string)
     :string
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-11-1}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @return{The human-readable string.}
   @begin{short}
@@ -444,26 +259,8 @@
 (export 'shortcut-trigger-to-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_print ()
-;;;
-;;; void
-;;; gtk_shortcut_trigger_print (GtkShortcutTrigger *self,
-;;;                             GString *string);
-;;;
-;;; Prints the given trigger into a string for the developer. This is meant for
-;;; debugging and logging.
-;;;
-;;; The form of the representation may change at any time and is not guaranteed
-;;; to stay identical.
-;;;
-;;; self :
-;;;     a GtkShortcutTrigger
-;;;
-;;; string :
-;;;     a GString to print into
+;;; gtk_shortcut_trigger_print                              not needed
 ;;; ----------------------------------------------------------------------------
-
-;; not needed, see the SHORTCUT-TRIGGER-TO-STRING function
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_trigger_to_label
@@ -472,7 +269,7 @@
 (cffi:defcfun ("gtk_shortcut_trigger_to_label" shortcut-trigger-to-label)
     :string
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-11-1}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[display]{a @class{gdk:display} object}
   @return{The string with the textual representation for the given trigger.}
@@ -494,74 +291,86 @@
 (export 'shortcut-trigger-to-label)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_print_label ()
-;;;
-;;; gboolean
-;;; gtk_shortcut_trigger_print_label (GtkShortcutTrigger *self,
-;;;                                   GdkDisplay *display,
-;;;                                   GString *string);
-;;;
-;;; Prints the given trigger into a string. This function is returning a
-;;; translated string for presentation to end users for example in menu items
-;;; or in help texts.
-;;;
-;;; The display in use may influence the resulting string in various forms, such
-;;; as resolving hardware keycodes or by causing display-specific modifier
-;;; names.
-;;;
-;;; The form of the representation may change at any time and is not guaranteed
-;;; to stay identical.
-;;;
-;;; self :
-;;;     a GtkShortcutTrigger
-;;;
-;;; display :
-;;;     GdkDisplay to print for
-;;;
-;;; string :
-;;;     a GString to print into
-;;;
-;;; Returns :
-;;;     TRUE if something was printed or FALSE if the trigger did not have a
-;;;     textual representation suitable for end users.
+;;; gtk_shortcut_trigger_print_label                        not needed
 ;;; ----------------------------------------------------------------------------
 
-;; not needed, see the SHORTCUT-TRIGGER-PRINT-LABEL function
-
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_parse_string
+;;; GtkKeyvalTrigger
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_shortcut_trigger_parse_string"
-               shortcut-trigger-parse-string) (g:object shortcut-trigger)
- #+liber-documentation
- "@version{#2022-8-26}
-  @argument[str]{a string to parse}
-  @return{The new @class{gtk:shortcut-trigger} object, or @code{nil} on error.}
+(gobject:define-gobject "GtkKeyvalTrigger" keyval-trigger
+  (:superclass shortcut-trigger
+   :export t
+   :interfaces nil
+   :type-initializer "gtk_keyval_trigger_get_type")
+  ((keyval
+    keyval-trigger-keyval
+    "keyval" "guint" t nil)
+   (modifiers
+    keyval-trigger-modifiers
+    "modifiers" "GdkModifierType" t nil)))
+
+#+liber-documentation
+(setf (documentation 'keyval-trigger 'type)
+ "@version{2024-11-1}
   @begin{short}
-    Tries to parse the given string into a trigger.
+    A @class{gtk:shortcut-trigger} object that triggers when a specific keyval
+    and (optionally) modifiers are pressed.
   @end{short}
-  On success, the parsed trigger is returned. When parsing failed, @code{nil}
-  is returned. The accepted strings are:
-  @begin{itemize}
-    @item{@code{never}: for GtkNeverTrigger}
-    @item{a string parsed by the @fun{gtk:accelerator-parse} function, for a
-      @class{gtk:keyval-trigger} object, e.g. @code{<Control>C}}
-    @item{underscore, followed by a single character, for a
-      @class{gtk:mnemonic-trigger} object, e.g. @code{_l}}
-    @item{two valid trigger strings, separated by a @code{|} character, for a
-      @class{gtk:alternative-trigger} object, e. g.
-      @code{<Control>q|&lt;Control>w}}
-  @end{itemize}
-  Note that you will have to escape the @code{<} and @code{&gt}; characters when
-  specifying triggers in XML files, such as GtkBuilder UI files. Use @code{&lt;}
-  instead of @code{<} and @code{&gt;} instead of @code{&gt;}.
+  @see-slot{gtk:keyval-trigger-keyval}
+  @see-slot{gtk:keyval-trigger-modifiers}
+  @see-constructor{gtk:keyval-trigger-new}
+  @see-class{gtk:shortcut-trigger}")
 
-  @see-class{gtk:shortcut-trigger}
-  @see-function{gtk:accelerator-parse}"
-  (str :string))
+;;; --- gtk:keyval-trigger-keyval ----------------------------------------------
 
-(export 'shortcut-trigger-parse-string)
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "keyval" 'keyval-trigger) t)
+ "The @code{keyval} property of type @code{:uint}
+ (Read / Write / Construct only) @br{}
+  The key value for the trigger.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'keyval-trigger-keyval)
+      "Accessor"
+      (documentation 'keyval-trigger-keyval 'function)
+ "@version{2024-11-1}
+  @syntax{(gtk:keyval-trigger-keyval object) => keyval}
+  @argument[object]{a @class{gtk:keyval-trigger} object}
+  @argument[keyval]{an unsigned integer with the keyval}
+  @begin{short}
+    Accessor of the @slot[gtk:keyval-trigger]{keyval} slot of the
+    @class{gtk:keyval-trigger} class.
+  @end{short}
+  The @fun{gtk:keyval-trigger-keyval} function returns the keyval that must be
+  pressed to succed triggering @arg{object}.
+  @see-class{gtk:keyval-trigger}")
+
+;;; --- gtk:keyval-trigger-modifiers -------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "modifiers"
+                                               'keyval-trigger) t)
+ "The @code{modifiers} property of type @symbol{gdk:modifier-type}
+ (Read / Write / Construct only) @br{}
+  The key modifiers for the trigger.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'keyval-trigger-modifiers)
+      "Accessor"
+      (documentation 'keyval-trigger-modifiers 'function)
+ "@version{2024-11-1}
+  @syntax{(gtk:keyval-trigger-modifiers object) => modifiers}
+  @argument[object]{a @class{gtk:keyval-trigger} object}
+  @argument[modifiers]{a @symbol{gdk:modifier-type} value}
+  @begin{short}
+    Accessor of the @slot[gtk:keyval-trigger]{modifiers} slot of the
+    @class{gtk:keyval-trigger} class.
+  @end{short}
+  The @fun{gtk:keyval-trigger-modifiers} function returns the modifiers that
+  must be present to succed triggering @arg{object}.
+  @see-class{gtk:keyval-trigger}
+  @see-symbol{gdk:modifier-type}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_keyval_trigger_new
@@ -571,7 +380,7 @@
 
 (defun keyval-trigger-new (keyval modifiers)
  #+liber-documentation
- "@version{2024-5-10}
+ "@version{2024-11-1}
   @argument[keyval]{a char or an unsigned integer with the keyval to trigger
     for}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value that need to be
@@ -581,12 +390,62 @@
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
     the key with the given @arg{keyval} and @arg{modifiers} is pressed.
   @end{short}
-  @see-class{keyval-trigger}"
+  @see-class{gtk:keyval-trigger}
+  @see-symbol{gdk:modifier-type}"
   (make-instance 'keyval-trigger
                  :keyval (if (integerp keyval) keyval (char-code keyval))
                  :modifiers modifiers))
 
 (export 'keyval-trigger-new)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkMnemonicTrigger
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject "GtkMnemonicTrigger" mnemonic-trigger
+  (:superclass shortcut-trigger
+   :export t
+   :interfaces nil
+   :type-initializer "gtk_mnemonic_trigger_get_type")
+  ((keyval
+    mnemonic-trigger-keyval
+    "keyval" "guint" t nil)))
+
+#+liber-documentation
+(setf (documentation 'mnemonic-trigger 'type)
+ "@version{2024-11-1}
+  @begin{short}
+    A @class{gtk:shortcut-trigger} object that triggers when a specific
+    mnemonic is pressed.
+  @end{short}
+  @see-slot{gtk:mnemonic-trigger-keyval}
+  @see-constructor{gtk:mnemonic-trigger-new}
+  @see-class{gtk:shortcut-trigger}")
+
+;;; --- gtk:mnemonic-trigger-keyval --------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "keyval"
+                                               'mnemonic-trigger) t)
+ "The @code{keyval} property of type @code{:uint}
+ (Read / Write / Construct only) @br{}
+  The key value for the trigger.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'mnemonic-trigger-keyval)
+      "Accessor"
+      (documentation 'mnemonic-trigger-keyval 'function)
+ "@version{2024-11-1}
+  @syntax{(gtk:mnemonic-trigger-keyval object) => keyval}
+  @argument[object]{a @class{gtk:mnemonic-trigger} object}
+  @argument[keyval]{an unsigned integer with the keyval}
+  @begin{short}
+    Accessor of the @slot[gtk:mnemonic-trigger]{keyval} slot of the
+    @class{gtk:mnemonic-trigger} class.
+  @end{short}
+  The @fun{gtk:mnemonic-trigger-keyval} function returns the keyval that must
+  be pressed to succed triggering @arg{object}.
+  @see-class{gtk:mnemonic-trigger}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_mnemonic_trigger_new
@@ -596,8 +455,9 @@
 
 (defun mnemonic-trigger-new (keyval)
  #+liber-documentation
- "@version{#2022-8-26}
-  @argument[keyval]{an unsigned integer with the keyval to trigger for}
+ "@version{2024-11-1}
+  @argument[keyval]{a char or an unsigned integer with the keyval to trigger
+    for}
   @return{The new @class{gtk:mnemonic-trigger} object.}
   @begin{short}
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
@@ -605,11 +465,94 @@
   @end{short}
   Mnemonics are activated by calling code when a key event with the right
   modifiers is detected.
-  @see-class{gtk:mnemonic-trigger}"
+  @see-class{gtk:mnemonic-trigger}
+  @see-class{gtk:shortcut-trigger}"
   (make-instance 'mnemonic-trigger
-                 :keyval keyval))
+                 :keyval (if (integerp keyval) keyval (char-code keyval))))
 
 (export 'mnemonic-trigger-new)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkAlternativeTrigger
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject "GtkAlternativeTrigger" alternative-trigger
+  (:superclass shortcut-trigger
+   :export t
+   :interfaces nil
+   :type-initializer "gtk_alternative_trigger_get_type")
+  ((first
+    alternative-trigger-first
+    "first" "GtkShortcutTrigger" t nil)
+   (second
+    alternative-trigger-second
+    "second" "GtkShortcutTrigger" t nil)))
+
+#+liber-documentation
+(setf (documentation 'alternative-trigger 'type)
+ "@version{2024-11-1}
+  @begin{short}
+    A @class{gtk:shortcut-trigger} object that triggers when either of two
+    @class{gtk:shortcut-trigger} objects trigger.
+  @end{short}
+  @see-slot{gtk:alternative-trigger-first}
+  @see-slot{gtk:alternative-trigger-second}
+  @see-constructor{gtk:alternative-trigger-new}
+  @see-class{gtk:shortcut-trigger}")
+
+;;; --- gtk:alternative-trigger-first ------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "first"
+                                               'alternative-trigger) t)
+ "The @code{first} property of type @class{gtk:shortcut-trigger}
+ (Read / Write / Construct only) @br{}
+  The first trigger to check.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'alternative-trigger-first)
+      "Accessor"
+      (documentation 'alternative-trigger-first 'function)
+ "@version{2024-11-1}
+  @syntax{(gtk:alternative-trigger-first object) => shortcut)}
+  @argument[object]{a @class{gtk:mnemonic-trigger} object}
+  @argument[shortcut]{a first @class{gtk:shortcut-trigger} object}
+  @begin{short}
+    Accessor of the @slot[gtk:alternative-trigger]{first} slot of the
+    @class{gtk:alternative-trigger} class.
+  @end{short}
+  The @fun{gtk:alternative-trigger-first} function gets the first of the two
+  alternative triggers that may trigger @arg{shortcut}. The
+  @fun{gtk:alternative-trigger-second} function will return the other one.
+  @see-class{gtk:alternative-trigger}
+  @see-function{gtk:alternative-trigger-second}")
+
+;;; --- gtk:alternative-trigger-second -----------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "second"
+                                               'alternative-trigger) t)
+ "The @code{second} property of type @class{gtk:shortcut-trigger}
+ (Read / Write / Construct only) @br{}
+  The second trigger to check.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'alternative-trigger-second)
+      "Accessor"
+      (documentation 'alternative-trigger-second 'function)
+ "@version{2024-11-1}
+  @syntax{(gtk:alternative-trigger-second object) => shortcut)}
+  @argument[object]{a @class{gtk:mnemonic-trigger} object}
+  @argument[shortcut]{a second @class{gtk:shortcut-trigger} object}
+  @begin{short}
+    Accessor of the @slot[gtk:alternative-trigger]{second} slot of the
+    @class{gtk:alternative-trigger} class.
+  @end{short}
+  The @fun{gtk:alternative-trigger-second} function gets the second of the two
+  alternative triggers that may trigger @arg{shortcut}. The
+  @fun{gtk:alternative-trigger-first} function will return the other one.
+  @see-class{gtk:alternative-trigger}
+  @see-function{gtk:alternative-trigger-first}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_alternative_trigger_new
@@ -619,7 +562,7 @@
 
 (defun alternative-trigger-new (first second)
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-11-1}
   @argument[first]{a @class{gtk:shortcut-trigger} object}
   @argument[second]{a @class{gtk:shortcut-trigger} object}
   @return{The new @class{gtk:shortcut-trigger} object.}
@@ -637,13 +580,32 @@
 (export 'alternative-trigger-new)
 
 ;;; ----------------------------------------------------------------------------
+;;; GtkNeverTrigger
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject "GtkNeverTrigger" never-trigger
+  (:superclass shortcut-trigger
+   :export t
+   :interfaces nil
+   :type-initializer "gtk_never_trigger_get_type")
+  nil)
+
+#+liber-documentation
+(setf (documentation 'never-trigger 'type)
+ "@version{2024-11-1}
+  @begin{short}
+    A @class{gtk:shortcut-trigger} object that never triggers.
+  @end{short}
+  @see-class{gtk:shortcut-trigger}")
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_never_trigger_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_never_trigger_get" never-trigger-get)
     (g:object shortcut-trigger)
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-11-1}
   @return{The @class{gtk:never-trigger} object.}
   @begin{short}
     Gets the never trigger.

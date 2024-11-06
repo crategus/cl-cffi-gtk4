@@ -190,27 +190,66 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+;;;     gtk_shortcut_trigger_parse_string
+;;;     gtk_shortcut_trigger_to_string
+
+(test gtk-shortcut-trigger-parse-string
+  (let ((trigger (gtk:shortcut-trigger-parse-string "<Control>c")))
+    (is (string= "<Control>c" (gtk:shortcut-trigger-to-string trigger)))
+    (is (= 1 (g:object-ref-count trigger)))))
+
 ;;;     gtk_shortcut_trigger_trigger
+
 ;;;     gtk_shortcut_trigger_hash
 ;;;     gtk_shortcut_trigger_equal
 ;;;     gtk_shortcut_trigger_compare
-;;;     gtk_shortcut_trigger_to_string
-;;;     gtk_shortcut_trigger_print
+
 ;;;     gtk_shortcut_trigger_to_label
-;;;     gtk_shortcut_trigger_print_label
-;;;     gtk_shortcut_trigger_parse_string
+
+(test gtk-shortcut-trigger-to-label
+  (let ((display (gdk:display-default))
+        (trigger (gtk:shortcut-trigger-parse-string "<Control>c")))
+    (is (string= "Ctrl+C" (gtk:shortcut-trigger-to-label trigger display)))
+    (is (< 1 (g:object-ref-count display)))
+    (is (= 1 (g:object-ref-count trigger)))))
 
 ;;;     gtk_keyval_trigger_new
 ;;;     gtk_keyval_trigger_get_modifiers
 ;;;     gtk_keyval_trigger_get_keyval
 
+(test gtk-keyval-trigger-new
+  (let ((trigger (gtk:keyval-trigger-new #\c :control-mask)))
+    (is (string= "<Control>c" (gtk:shortcut-trigger-to-string trigger)))
+    (is (= 99 (gtk:keyval-trigger-keyval trigger)))
+    (is (equal '(:control-mask) (gtk:keyval-trigger-modifiers trigger)))
+    (is (= 1 (g:object-ref-count trigger)))))
+
 ;;;     gtk_mnemonic_trigger_new
 ;;;     gtk_mnemonic_trigger_get_keyval
+
+(test gtk-mnemonic-trigger-new
+  (let ((trigger (gtk:mnemonic-trigger-new #\L)))
+    (is (= 108 (gtk:mnemonic-trigger-keyval trigger)))
+    (is (string= "<Mnemonic>l" (gtk:shortcut-trigger-to-string trigger)))
+    (is (= 1 (g:object-ref-count trigger)))))
 
 ;;;     gtk_alternative_trigger_new
 ;;;     gtk_alternative_trigger_get_first
 ;;;     gtk_alternative_trigger_get_second
 
+(test gtk-alternative-trigger-new
+  (let* ((first (gtk:shortcut-trigger-parse-string "<alt>F1"))
+         (second (gtk:shortcut-trigger-parse-string "<shift>a"))
+         (trigger (gtk:alternative-trigger-new first second)))
+    (is (eq first (gtk:alternative-trigger-first trigger)))
+    (is (eq second (gtk:alternative-trigger-second trigger)))
+    (is (= 2 (g:object-ref-count first)))
+    (is (= 2 (g:object-ref-count second)))
+    (is (= 1 (g:object-ref-count trigger)))))
+
 ;;;     gtk_never_trigger_get
 
-;;; 2024-9-20
+(test gtk-never-trigger-get
+  (is (typep (gtk:never-trigger-get) 'gtk:never-trigger)))
+
+;;; 2024-11-1

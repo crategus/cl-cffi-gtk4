@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-shortcut.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,7 +70,7 @@
 ;;; GtkShortcutType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkShortcutType" shortcut-type
+(gobject:define-genum "GtkShortcutType" shortcut-type
   (:export t
    :type-initializer "gtk_shortcut_type_get_type")
   :accelerator
@@ -90,7 +90,7 @@
       (liber:symbol-documentation 'shortcut-type)
  "@version{2024-2-18}
   @begin{declaration}
-(gobject:define-g-enum \"GtkShortcutType\" gtk:shortcut-type
+(gobject:define-genum \"GtkShortcutType\" gtk:shortcut-type
   (:export t
    :type-initializer \"gtk_shortcut_type_get_type\")
   :accelerator
@@ -137,10 +137,10 @@
   @see-function{gtk:shortcuts-shortcut-icon}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkShortcutsShortcut
+;;; GtkShortcutsShortcut
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutsShortcut" shortcuts-shortcut
+(gobject:define-gobject "GtkShortcutsShortcut" shortcuts-shortcut
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

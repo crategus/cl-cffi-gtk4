@@ -120,18 +120,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     accel-size-group
-;;;     accelerator
-;;;     action-name
-;;;     direction
-;;;     icon
-;;;     icon-set
-;;;     shortcut-type
-;;;     subtitle
-;;;     subtitle-set
-;;;     title
-;;;     title-size-group
-
 (test gtk-shortcuts-shortcut
  (let ((shortcut (make-instance 'gtk:shortcuts-shortcut)))
     (signals (error) (gtk:shortcuts-shortcut-accel-size-group shortcut))
@@ -146,4 +134,4 @@
     (is (string= "" (gtk:shortcuts-shortcut-title shortcut)))
     (signals (error) (gtk:shortcuts-shortcut-title-size-group shortcut))))
 
-;;; 2024-9-20
+;;; 2024-10-27

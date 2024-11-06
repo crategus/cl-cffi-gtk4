@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 ;;; GtkShortcut
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcut" shortcut
+(gobject:define-gobject "GtkShortcut" shortcut
   (:superclass g:object
    :export t
    :interfaces nil
@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut 'type)
- "@version{2023-7-23}
+ "@version{2024-11-1}
   @begin{short}
     The @class{gtk:shortcut} object is the low level object used for managing
     keyboard shortcuts.
@@ -127,7 +127,7 @@
 (setf (liber:alias-for-function 'shortcut-action)
       "Accessor"
       (documentation 'shortcut-action 'function)
- "@version{2023-7-23}
+ "@version{2024-11-1}
   @syntax{(gtk:shortcut-action object) => action)}
   @syntax{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -154,7 +154,7 @@
 (setf (liber:alias-for-function 'shortcut-arguments)
       "Accessor"
       (documentation 'shortcut-arguments 'function)
- "@version{2023-7-23}
+ "@version{2024-11-1}
   @syntax{(gtk:shortcut-arguments object) => args)}
   @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -182,7 +182,7 @@
 (setf (liber:alias-for-function 'shortcut-trigger)
       "Accessor"
       (documentation 'shortcut-trigger 'function)
- "@version{2023-7-23}
+ "@version{2024-11-1}
   @syntax{(gtk:shortcut-trigger object) => trigger)}
   @syntax{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -205,7 +205,7 @@
 
 (defun shortcut-new (trigger action)
  #+liber-documentation
- "@version{2024-5-13}
+ "@version{2024-11-1}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object that will trigger
     the shortcut}
   @argument[action]{a @class{gtk:shortcut-action} object that will be

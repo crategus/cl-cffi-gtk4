@@ -51,11 +51,16 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     accelerator
-;;;     disabled-text
+(test gtk-shortcut-label-properties
+  (let ((label (make-instance 'gtk:shortcut-label)))
+    (is-false (gtk:shortcut-label-accelerator label))
+    (is-false (gtk:shortcut-label-disabled-text label))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_shortcut_label_new
 
-;;; 2024-9-20
+(test gtk-shortcut-label-new
+  (is (typep (gtk:shortcut-label-new "<Control>a") 'gtk:shortcut-label)))
+
+;;; 2024-10-27

@@ -26,4 +26,9 @@
                        :TYPE-INITIALIZER "gtk_shortcut_manager_get_type"))
              (gobject:get-gtype-definition "GtkShortcutManager"))))
 
-;;; 2024-9-19
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_shortcut_manager_add_controller
+;;;     gtk_shortcut_manager_remove_controller
+
+;;; 2024-11-1

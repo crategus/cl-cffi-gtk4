@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-group.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,6 +35,10 @@
 ;;;
 ;;;     GtkShortcutsGroup
 ;;;
+;;; Functions
+;;;
+;;;     gtk_shortcuts_group_add_shortcut                    Since 4.14
+;;;
 ;;; Properties
 ;;;
 ;;;     accel-size-group
@@ -65,7 +69,7 @@
 ;;; GtkShortcutsGroup
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutsGroup" shortcuts-group
+(gobject:define-gobject "GtkShortcutsGroup" shortcuts-group
   (:superclass box
    :export t
    :interfaces ("GtkAccessible"
@@ -91,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-group 'type)
- "@version{2023-8-28}
+ "@version{2024-10-27}
   @begin{short}
     The @class{gtk:shortcuts-group} widget represents a group of related
     keyboard shortcuts or gestures.
@@ -123,7 +127,7 @@
 (setf (liber:alias-for-function 'shortcuts-group-accel-size-group)
       "Accessor"
       (documentation 'shortcuts-group-accel-size-group 'function)
- "@version{#2021-5-4}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcuts-group-accel-size-group object) => size-group}
   @syntax{(setf (gtk:shortcuts-group-accel-size-group object) size-group)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
@@ -150,7 +154,7 @@
 (setf (liber:alias-for-function 'shortcuts-group-height)
       "Accessor"
       (documentation 'shortcuts-group-height 'function)
- "@version{#2021-5-4}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcuts-group-height object) => height}
   @syntax{(setf (gtk:shortcuts-group-height object) height)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
@@ -177,7 +181,7 @@
 (setf (liber:alias-for-function 'shortcuts-group-title)
       "Accessor"
       (documentation 'shortcuts-group-title 'function)
- "@version{#2021-5-4}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcuts-group-title object) => title}
   @syntax{(setf (gtk:shortcuts-group-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
@@ -203,7 +207,7 @@
 (setf (liber:alias-for-function 'shortcuts-group-title-size-group)
       "Accessor"
       (documentation 'shortcuts-group-title-size-group 'function)
- "@version{#2021-5-4}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcuts-group-title-size-group object) => size-group}
   @syntax{(setf (gtk:shortcuts-group-title-size-group object) size-group)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
@@ -233,7 +237,7 @@
 (setf (liber:alias-for-function 'shortcuts-group-view)
       "Accessor"
       (documentation 'shortcuts-group-view 'function)
- "@version{#2021-5-4}
+ "@version{2024-10-27}
   @syntax{(gtk:shortcuts-group-view object) => view}
   @syntax{(setf (gtk:shortcuts-group-view object) view)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
@@ -248,5 +252,33 @@
   visible.
   @see-class{gtk:shortcuts-group}
   @see-function{gtk:shortcuts-window-view-name}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_shortcuts_group_add_shortcut                        Since 4.14
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gtk_shortcuts_group_add_shortcut" shortcuts-group-add-shortcut)
+    :void
+ #+liber-documentation
+ "@version{#2024-10-27}
+  @argument[group]{a @class{gtk:shortcuts-group} widget}
+  @argument[shortcut]{a @class{gtk:shortcuts-shortcut} widget}
+  @begin{short}
+    Adds a shortcut to the shortcuts group.
+  @end{short}
+  This is the programmatic equivalent to using a @class{gtk:builder} UI
+  definition and a @code{<child>} tag to add the child. Adding children with
+  other API is not appropriate as the @class{gtk:shortcuts-group} widget manages
+  its children internally.
+
+  Since 4.14
+  @see-class{gtk:shortcuts-group}
+  @see-class{gtk:shortctus-shortcut}"
+  (group (g:object shortcuts-group))
+  (shortcut (g:object shortcuts-shortcut)))
+
+#+gtk-4-14
+(export 'shortcuts-group-add-shortcut)
 
 ;;; --- End of file gtk4.shortcuts-group.lisp ----------------------------------

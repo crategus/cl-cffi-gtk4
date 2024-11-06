@@ -57,10 +57,16 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     accel-size-group
-;;;     height
-;;;     title
-;;;     title-size-group
-;;;     view
+(test gtk-shortcuts-group-properties
+  (let ((group (make-instance 'gtk:shortcuts-group)))
+    (signals (error) (gtk:shortcuts-group-accel-size-group group))
+    (is (= 1 (gtk:shortcuts-group-height group)))
+    (is (string= "" (gtk:shortcuts-group-title group)))
+    (signals (error) (gtk:shortcuts-group-title-size-group group))
+    (is-false (gtk:shortcuts-group-view group))))
 
-;;; 2024-9-20
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_shortcuts_group_add_shortcut                    Since 4.14
+
+;;; 2024-10-27

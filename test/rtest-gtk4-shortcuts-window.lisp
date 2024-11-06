@@ -54,14 +54,14 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     section-name
-;;;     view-name
-
 (test gtk-shortcuts-window-properties
   (let ((shortcuts (make-instance 'gtk:shortcuts-window)))
     (is (string= "internal-search"
                  (gtk:shortcuts-window-section-name shortcuts)))
-    (is-false (gtk:shortcuts-window-view-name shortcuts))))
+    (is-false (gtk:shortcuts-window-view-name shortcuts))
+    ;; Check memory management
+    (is-false (gtk:window-destroy shortcuts))
+    (is (= 1 (g:object-ref-count shortcuts)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -93,4 +93,8 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;; 2024-9-20
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_shortcuts_window_add_section
+
+;;; 2024-10-27
