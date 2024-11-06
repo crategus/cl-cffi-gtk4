@@ -2,7 +2,7 @@
 ;;; gtk4.section-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -50,7 +50,7 @@
 ;;; GtkSectionModel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkSectionModel" section-model
+(gobject:define-ginterface "GtkSectionModel" section-model
   (:export t
    :type-initializer "gtk_section_model_get_type")
   nil)

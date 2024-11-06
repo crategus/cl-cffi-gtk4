@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-column-view-sorter :in gtk-suite)
+(def-suite gtk-column-view-sorter :in gtk-list-model-support)
 (in-suite gtk-column-view-sorter)
 
 ;;; --- Types and Values -------------------------------------------------------

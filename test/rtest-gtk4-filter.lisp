@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-filter :in gtk-suite)
+(def-suite gtk-filter :in gtk-list-model-support)
 (in-suite gtk-filter)
 
 ;;; --- Types and Values -------------------------------------------------------

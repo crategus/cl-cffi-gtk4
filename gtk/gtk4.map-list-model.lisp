@@ -2,7 +2,7 @@
 ;;; gtk4.map-list-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkMapListModel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMapListModel" map-list-model
+(gobject:define-gobject "GtkMapListModel" map-list-model
   (:superclass g:object
    :export t
    :interfaces ("GListModel"
@@ -97,7 +97,7 @@
     model and maps the items in that model to different items according to a
     @symbol{gtk:map-list-model-map-func} callback function.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Create a list of @class{gtk:event-controller} objects.
     @begin{pre}
 static gpointer
@@ -180,7 +180,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
   @see-class{gtk:map-list-model}
@@ -287,7 +287,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[model]{a @class{g:list-model} object to map or @code{nil} for none}
-  @argument[func]{a @symbol{gkt:map-list-model-map-func} callback function
+  @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
     to map items or @code{nil}}
   @return{The new @class{gtk:map-list-model} object.}
   @begin{short}
@@ -317,7 +317,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[model]{a @class{gtk:map-list-model} object}
-  @argument[func]{a @symbol{gkt:map-list-model-map-func} callback function
+  @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
     to map items or @code{nil}}
   @begin{short}
     Sets the function used to map items.

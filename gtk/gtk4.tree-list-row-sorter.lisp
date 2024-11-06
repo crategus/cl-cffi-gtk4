@@ -2,7 +2,7 @@
 ;;; gtk4.tree-list-row-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,7 @@
 ;;; GtkTreeListRowSorter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeListRowSorter" tree-list-row-sorter
+(gobject:define-gobject "GtkTreeListRowSorter" tree-list-row-sorter
   (:superclass sorter
    :export t
    :interfaces nil
@@ -78,7 +78,7 @@
     will apply a given sorter to the levels in a tree, while respecting the tree
     structure.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
   Here is an example for setting up a column view with a tree model and a
   @class{gtk:tree-list-sorter} object:
   @begin{pre}

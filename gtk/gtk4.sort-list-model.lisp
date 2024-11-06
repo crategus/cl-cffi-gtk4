@@ -2,7 +2,7 @@
 ;;; gtk4.sort-list-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -76,7 +76,7 @@
 ;;; GtkSortListModel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSortListModel" sort-list-model
+(gobject:define-gobject "GtkSortListModel" sort-list-model
   (:superclass g:object
    :export t
    :interfaces ("GListModel"
@@ -222,7 +222,7 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
   @see-class{gtk:sort-list-model}

@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-section.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -34,6 +34,8 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkShortcutsSection
+;;;
+;;;     gtk_shortcuts_section_add_group                     Since 4.14
 ;;;
 ;;; Properties
 ;;;
@@ -69,7 +71,7 @@
 ;;; GtkShortcutsSection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkShortcutsSection" shortcuts-section
+(gobject:define-gobject "GtkShortcutsSection" shortcuts-section
   (:superclass box
    :export t
    :interfaces ("GtkAccessible"
@@ -246,5 +248,33 @@ lambda (section arg)    :action
   the @slot[gtk:shortcuts-section]{view-name} property for this purpose.
   @see-class{gtk:shortcuts-section}
   @see-function{gtk:shortcuts-group-view}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_shortcuts_section_add_group                         Since 4.14
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gtk_shortcuts_section_add_group" shortcuts-section-add-group)
+    :void
+ #+liber-documentation
+ "@version{#2024-10-27}
+  @argument[section]{a @class{gtk:shortcuts-section} widget}
+  @argument[group]{a @class{gtk:shortcuts-group} widget to add}
+  @begin{short}
+    Adds a group to the shortcuts section.
+  @end{short}
+  This is the programmatic equivalent to using a @class{gtk:builder} UI
+  definition and a @code{<child>} tag to add the child. Adding children with the
+  @class{gtk:box} API is not appropriate, as the @class{gtk:shortcuts-section}
+  widget manages its children internally.
+
+  Since 4.14
+  @see-class{gtk:shortcuts-section}
+  @see-class{gtk:shortcuts-group}"
+  (section (g:object shortcuts-section))
+  (group (g:object shortcuts-group)))
+
+#+gtk-4-14
+(export 'shortcuts-section-add-group)
 
 ;;; --- End of file gtk4.shortcuts-section.lisp --------------------------------

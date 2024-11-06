@@ -2,7 +2,7 @@
 ;;; gtk4.selection-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -69,7 +69,7 @@
 ;;; GtkSelectionModel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkSelectionModel" selection-model
+(gobject:define-ginterface "GtkSelectionModel" selection-model
   (:superclass g:list-model
    :export t
    :type-initializer "gtk_selection_model_get_type")
@@ -125,11 +125,6 @@
       @begin{pre}
 lambda (model position n-items)    :run-last
       @end{pre}
-      Emitted when the selection state of some of the items in model changes.
-      Note that this signal does not specify the new selection state of the
-      items, they need to be queried manually. It is also not necessary for a
-      model to change the selection state of any of the items in the selection
-      model, though it would be rather useless to emit such a signal.
       @begin[code]{table}
         @entry[model]{The @class{gtk:selection-model} object.}
         @entry[position]{The unsigned integer with the first item that may have
@@ -137,6 +132,11 @@ lambda (model position n-items)    :run-last
         @entry[n-items]{The unsigned integer with the number of items with
           changes.}
       @end{table}
+      Emitted when the selection state of some of the items in model changes.
+      Note that this signal does not specify the new selection state of the
+      items, they need to be queried manually. It is also not necessary for a
+      model to change the selection state of any of the items in the selection
+      model, though it would be rather useless to emit such a signal.
   @end{dictionary}
   @see-class{g:list-model}
   @see-class{gtk:single-selection}")

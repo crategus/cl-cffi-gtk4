@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-expression :in gtk-suite)
+(def-suite gtk-expression :in gtk-list-model-support)
 (in-suite gtk-expression)
 
 ;;; --- Types and Values -------------------------------------------------------

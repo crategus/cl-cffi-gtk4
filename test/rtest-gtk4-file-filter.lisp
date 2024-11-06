@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-filter :in gtk-suite)
+(def-suite gtk-file-filter :in gtk-list-model-support)
 (in-suite gtk-file-filter)
 
 (cffi:foreign-funcall "gtk_bool_filter_get_type" :size)

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-numeric-sorter :in gtk-suite)
+(def-suite gtk-numeric-sorter :in gtk-list-model-support)
 (in-suite gtk-numeric-sorter)
 
 ;;; --- Types and Values -------------------------------------------------------

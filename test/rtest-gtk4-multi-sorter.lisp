@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-multi-sorter :in gtk-suite)
+(def-suite gtk-multi-sorter :in gtk-list-model-support)
 (in-suite gtk-multi-sorter)
 
 ;;; --- Types and Values -------------------------------------------------------

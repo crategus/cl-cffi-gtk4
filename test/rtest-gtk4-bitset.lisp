@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-bitset :in gtk-suite)
+(def-suite gtk-bitset :in gtk-list-model-support)
 (in-suite gtk-bitset)
 
 ;;; --- Types and Values -------------------------------------------------------
