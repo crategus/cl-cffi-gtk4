@@ -77,6 +77,7 @@
 ;;;     GtkAccessibleInvalidState
 ;;;     GtkAccessibleAutocomplete
 ;;;     GtkAccessibleSort
+;;;     GtkAccessibleAnnouncementPriority
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -85,7 +86,7 @@
 ;;; GtkAlign
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAlign" align
+(gobject:define-genum "GtkAlign" align
   (:export t
    :type-initializer "gtk_align_get_type")
   (:fill 0)
@@ -105,7 +106,7 @@
       (liber:symbol-documentation 'align)
  "@version{2024-4-19}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAlign\" align
+(gobject:define-genum \"GtkAlign\" align
   (:export t
    :type-initializer \"gtk_align_get_type\")
   (:fill 0)
@@ -160,7 +161,7 @@
 ;;; GtkBaselinePosition
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkBaselinePosition" baseline-position
+(gobject:define-genum "GtkBaselinePosition" baseline-position
   (:export t
    :type-initializer "gtk_baseline_position_get_type")
   (:top 0)
@@ -173,7 +174,7 @@
       (liber:symbol-documentation 'baseline-position)
  "@version{2024-4-7}
   @begin{declaration}
-(gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
+(gobject:define-genum \"GtkBaselinePosition\" baseline-position
   (:export t
    :type-initializer \"gtk_baseline_position_get_type\")
   (:top 0)
@@ -202,7 +203,7 @@
 ;;; GtkDeleteType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkDeleteType" delete-type
+(gobject:define-genum "GtkDeleteType" delete-type
   (:export t
    :type-initializer "gtk_delete_type_get_type")
   (:chars 0)
@@ -220,7 +221,7 @@
       (liber:symbol-documentation 'delete-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkDeleteType\" delete-type
+(gobject:define-genum \"GtkDeleteType\" delete-type
   (:export t
    :type-initializer \"gtk_delete_type_get_type\")
   (:chars 0)
@@ -260,7 +261,7 @@
 ;;; GtkDirectionType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkDirectionType" direction-type
+(gobject:define-genum "GtkDirectionType" direction-type
   (:export t
    :type-initializer "gtk_direction_type_get_type")
   (:tab-forward 0)
@@ -276,7 +277,7 @@
       (liber:symbol-documentation 'direction-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkDirectionType\" direction-type
+(gobject:define-genum \"GtkDirectionType\" direction-type
   (:export t
    :type-initializer \"gtk_direction_type_get_type\")
   (:tab-forward 0)
@@ -302,7 +303,7 @@
 ;;; GtkIconSize
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkIconSize" icon-size
+(gobject:define-genum "GtkIconSize" icon-size
   (:export t
    :type-initializer "gtk_icon_size_get_type")
   (:inherit 0)
@@ -315,7 +316,7 @@
       (liber:symbol-documentation 'icon-size)
  "@version{2023-9-20}
   @begin{declaration}
-(gobject:define-g-enum \"GtkIconSize\" icon-size
+(gobject:define-genum \"GtkIconSize\" icon-size
   (:export t
    :type-initializer \"gtk_icon_size_get_type\")
   (:inherit 0)
@@ -345,7 +346,7 @@
 ;;; GtkResponseType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkResponseType" response-type
+(gobject:define-genum "GtkResponseType" response-type
   (:export t
    :allow-undeclared-values t
    :type-initializer "gtk_response_type_get_type")
@@ -367,7 +368,7 @@
       (liber:symbol-documentation 'response-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkResponseType\" response-type
+(gobject:define-genum \"GtkResponseType\" response-type
   (:export t
    :type-initializer \"gtk_response_type_get_type\")
   (:none -1)
@@ -407,7 +408,27 @@
   @see-class{gtk:dialog}
   @see-function{gtk:dialog-add-button}")
 
+;;; ----------------------------------------------------------------------------
+
+;; TODO: Consider implementing a generalised version of this function.
+
 (defun response-type-keyword (response)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @argument[response]{an integer with the response value of the
+    @symbol{gtk:response-type} enumeration}
+  @return{The keyword for the given @arg{response} value.}
+  @begin{short}
+    The @fun{gtk:response-type-keyword} function is an utility function which
+    returns the corresponding keyword for an integer value of the
+    @symbol{gtk:response-type} enumeration.
+  @end{short}
+  @begin[Notes]{dictionary}
+    This is a helper function in the Lisp binding which uses the
+    @code{cffi:foreign-enum-keyword} function to get the keyword for the integer
+    value of the enumeration.
+  @end{dictionary}
+  @see-symbol{gtk:response-type}"
   (assert (typep response '(or integer keyword)))
   (if (and (integerp response)
            (member response
@@ -423,7 +444,7 @@
 ;;; GtkSensitivityType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSensitivityType" sensitivity-type
+(gobject:define-genum "GtkSensitivityType" sensitivity-type
   (:export t
    :type-initializer "gtk_sensitivity_type_get_type")
   (:auto 0)
@@ -436,7 +457,7 @@
       (liber:symbol-documentation 'sensitivity-type)
  "@version{2024-4-7}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSensitivityType\" sensitivity-type
+(gobject:define-genum \"GtkSensitivityType\" sensitivity-type
   (:export t
    :type-initializer \"gtk_sensitivity_type_get_type\")
   (:auto 0)
@@ -461,7 +482,7 @@
 ;;; GtkTextDirection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkTextDirection" text-direction
+(gobject:define-genum "GtkTextDirection" text-direction
   (:export t
    :type-initializer "gtk_text_direction_get_type")
   (:none 0)
@@ -474,7 +495,7 @@
       (liber:symbol-documentation 'text-direction)
  "@version{2024-3-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkTextDirection\" text-direction
+(gobject:define-genum \"GtkTextDirection\" text-direction
   (:export t
    :type-initializer \"gtk_text_direction_get_type\")
   (:none 0)
@@ -498,7 +519,7 @@
 ;;; GtkJustification
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkJustification" justification
+(gobject:define-genum "GtkJustification" justification
   (:export t
    :type-initializer "gtk_justification_get_type")
   (:left 0)
@@ -512,7 +533,7 @@
       (liber:symbol-documentation 'justification)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkJustification\" justification
+(gobject:define-genum \"GtkJustification\" justification
   (:export t
    :type-initializer \"gtk_justification_get_type\")
   (:left 0)
@@ -539,7 +560,7 @@
 ;;; GtkMessageType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkMessageType" message-type
+(gobject:define-genum "GtkMessageType" message-type
   (:export t
    :type-initializer "gtk_message_type_get_type")
   (:info 0)
@@ -554,7 +575,7 @@
       (liber:symbol-documentation 'message-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkMessageType\" message-type
+(gobject:define-genum \"GtkMessageType\" message-type
   (:export t
    :type-initializer \"gtk_message_type_get_type\")
   (:info 0)
@@ -581,7 +602,7 @@
 ;;; GtkMovementStep
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkMovementStep" movement-step
+(gobject:define-genum "GtkMovementStep" movement-step
   (:export t
    :type-initializer "gtk_movement_step_get_type")
   (:logical-positions 0)
@@ -601,7 +622,7 @@
       (liber:symbol-documentation 'movement-step)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkMovementStep\" movement-step
+(gobject:define-genum \"GtkMovementStep\" movement-step
   (:export t
    :type-initializer \"gtk_movement_step_get_type\")
   (:logical-positions 0)
@@ -642,7 +663,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(gobject:define-g-enum "GtkNaturalWrapMode" natural-wrap-mode
+(gobject:define-genum "GtkNaturalWrapMode" natural-wrap-mode
   (:export t
    :type-initializer "gtk_natural_wrap_mode_get_type")
   (:inherit 0)
@@ -655,7 +676,7 @@
       (liber:symbol-documentation 'natural-wrap-mode)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkNaturalWrapMode\" natural-wrap-mode
+(gobject:define-genum \"GtkNaturalWrapMode\" natural-wrap-mode
   (:export t
    :type-initializer \"gtk_natural_wrap_mode_get_type\")
   (:inherit 0)
@@ -690,7 +711,7 @@
 ;; This enumeration is not in use in the cl-cffi-gtk4 implementation.
 ;; We do not export the implementation.
 
-(gobject:define-g-enum "GtkScrollStep" scroll-step
+(gobject:define-genum "GtkScrollStep" scroll-step
   (:export nil
    :type-initializer "gtk_scroll_step_get_type")
   (:steps 0)
@@ -706,7 +727,7 @@
       (liber:symbol-documentation 'scroll-step)
  "@version{2024-3-7}
   @begin{declaration}
-(gobject:define-g-enum \"GtkScrollStep\" scroll-step
+(gobject:define-genum \"GtkScrollStep\" scroll-step
   (:export t
    :type-initializer \"gtk_scroll_step_get_type\")
   (:steps 0)
@@ -722,7 +743,7 @@
 ;;; GtkOrientation
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkOrientation" orientation
+(gobject:define-genum "GtkOrientation" orientation
   (:export t
    :type-initializer "gtk_orientation_get_type")
   (:horizontal 0)
@@ -734,7 +755,7 @@
       (liber:symbol-documentation 'orientation)
  "@version{2024-4-1}
   @begin{declaration}
-(gobject:define-g-enum \"GtkOrientation\" orientation
+(gobject:define-genum \"GtkOrientation\" orientation
   (:export t
    :type-initializer \"gtk_orientation_get_type\")
   (:horizontal 0)
@@ -760,7 +781,7 @@
 ;;; GtkOverflow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkOverflow" overflow
+(gobject:define-genum "GtkOverflow" overflow
   (:export t
    :type-initializer "gtk_overflow_get_type")
   (:visible 0)
@@ -772,7 +793,7 @@
       (liber:symbol-documentation 'overflow)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkOverflow\" overflow
+(gobject:define-genum \"GtkOverflow\" overflow
   (:export t
    :type-initializer \"gtk_overflow_get_type\")
   (:visible 0)
@@ -798,7 +819,7 @@
 ;;; GtkPackType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPackType" pack-type
+(gobject:define-genum "GtkPackType" pack-type
   (:export t
    :type-initializer "gtk_pack_type_get_type")
   (:start 0)
@@ -810,7 +831,7 @@
       (liber:symbol-documentation 'pack-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPackType\" pack-type
+(gobject:define-genum \"GtkPackType\" pack-type
   (:export t
    :type-initializer \"gtk_pack_type_get_type\")
   (:start 0)
@@ -832,7 +853,7 @@
 ;;; GtkPositionType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkPositionType" position-type
+(gobject:define-genum "GtkPositionType" position-type
   (:export t
    :type-initializer "gtk_position_type_get_type")
   (:left 0)
@@ -846,7 +867,7 @@
       (liber:symbol-documentation 'position-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkPositionType\" position-type
+(gobject:define-genum \"GtkPositionType\" position-type
   (:export t
    :type-initializer \"gtk_position_type_get_type\")
   (:left 0)
@@ -874,7 +895,7 @@
 ;;; GtkScrollType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkScrollType" scroll-type
+(gobject:define-genum "GtkScrollType" scroll-type
   (:export t
    :type-initializer "gtk_scroll_type_get_type")
   (:none 0)
@@ -900,7 +921,7 @@
       (liber:symbol-documentation 'scroll-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkScrollType\" scroll-type
+(gobject:define-genum \"GtkScrollType\" scroll-type
   (:export t
    :type-initializer \"gtk_scroll_type_get_type\")
   (:none 0)
@@ -933,7 +954,7 @@
 ;;; GtkSelectionMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSelectionMode" selection-mode
+(gobject:define-genum "GtkSelectionMode" selection-mode
   (:export t
    :type-initializer "gtk_selection_mode_get_type")
   (:none 0)
@@ -947,7 +968,7 @@
       (liber:symbol-documentation 'selection-mode)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSelectionMode\" gtk:selection-mode
+(gobject:define-genum \"GtkSelectionMode\" gtk:selection-mode
   (:export t
    :type-initializer \"gtk_selection_mode_get_type\")
   (:none 0)
@@ -980,7 +1001,7 @@
 ;;; GtkWrapMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkWrapMode" wrap-mode
+(gobject:define-genum "GtkWrapMode" wrap-mode
   (:export t
    :type-initializer "gtk_wrap_mode_get_type")
   (:none 0)
@@ -994,7 +1015,7 @@
       (liber:symbol-documentation 'wrap-mode)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkWrapMode\" wrap-mode
+(gobject:define-genum \"GtkWrapMode\" wrap-mode
   (:export t
    :type-initializer \"gtk_wrap_mode_get_type\")
   (:none 0)
@@ -1022,7 +1043,7 @@
 ;;; GtkSortType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSortType" sort-type
+(gobject:define-genum "GtkSortType" sort-type
   (:export t
    :type-initializer "gtk_sort_type_get_type")
   (:ascending 0)
@@ -1034,7 +1055,7 @@
       (liber:symbol-documentation 'sort-type)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSortType\" sort-type
+(gobject:define-genum \"GtkSortType\" sort-type
   (:export t
    :type-initializer \"gtk_sort_type_get_type\")
   (:ascending 0)
@@ -1053,7 +1074,7 @@
 ;;; GtkOrdering
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkOrdering" ordering
+(gobject:define-genum "GtkOrdering" ordering
   (:export t
    :type-initializer "gtk_ordering_get_type")
   (:smaller -1)
@@ -1064,9 +1085,9 @@
 (setf (liber:alias-for-symbol 'ordering)
       "GEnum"
       (liber:symbol-documentation 'ordering)
- "@version{2024-4-24}
+ "@version{2024-10-18}
   @begin{declaration}
-(gobject:define-g-enum \"GtkOrdering\" ordering
+(gobject:define-genum \"GtkOrdering\" ordering
   (:export t
    :type-initializer \"gtk_ordering_get_type\")
   (:smaller -1)
@@ -1094,7 +1115,7 @@
 ;;; GtkSizeGroupMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSizeGroupMode" size-group-mode
+(gobject:define-genum "GtkSizeGroupMode" size-group-mode
   (:export t
    :type-initializer "gtk_size_group_mode_get_type")
   (:none 0)
@@ -1108,7 +1129,7 @@
       (liber:symbol-documentation 'size-group-mode)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSizeGroupMode\" size-group-mode
+(gobject:define-genum \"GtkSizeGroupMode\" size-group-mode
   (:export t
    :type-initializer \"gtk_size_group_mode_get_type\")
   (:none 0)
@@ -1135,7 +1156,7 @@
 ;;; GtkSizeRequestMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkSizeRequestMode" size-request-mode
+(gobject:define-genum "GtkSizeRequestMode" size-request-mode
   (:export t
    :type-initializer "gtk_size_request_mode_get_type")
   (:height-for-width 0)
@@ -1148,7 +1169,7 @@
       (liber:symbol-documentation 'size-request-mode)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSizeRequestMode\" size-request-mode
+(gobject:define-genum \"GtkSizeRequestMode\" size-request-mode
   (:export t
    :type-initializer \"gtk_size_request_mode_get_type\")
   (:height-for-width 0)
@@ -1174,7 +1195,7 @@
 ;;; GtkStateFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkStateFlags" state-flags
+(gobject:define-gflags "GtkStateFlags" state-flags
   (:export t
    :type-initializer "gtk_state_flags_get_type")
   (:normal 0)
@@ -1200,7 +1221,7 @@
       (liber:symbol-documentation 'state-flags)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-flags \"GtkStateFlags\" state-flags
+(gobject:define-gflags \"GtkStateFlags\" state-flags
   (:export t
    :type-initializer \"gtk_state_flags_get_type\")
   (:normal 0)
@@ -1253,7 +1274,7 @@
 ;;; GtkBorderStyle
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkBorderStyle" border-style
+(gobject:define-genum "GtkBorderStyle" border-style
   (:export t
    :type-initializer "gtk_border_style_get_type")
   :none
@@ -1273,7 +1294,7 @@
       (liber:symbol-documentation 'border-style)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkBorderStyle\" border-style
+(gobject:define-genum \"GtkBorderStyle\" border-style
   (:export t
    :type-initializer \"gtk_border_style_get_type\")
   :none
@@ -1310,7 +1331,7 @@
 ;;; GtkInputPurpose
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkInputPurpose" input-purpose
+(gobject:define-genum "GtkInputPurpose" input-purpose
   (:export t
    :type-initializer "gtk_input_purpose_get_type")
   (:free-form 0)
@@ -1331,7 +1352,7 @@
       (liber:symbol-documentation 'input-purpose)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkInputPurpose\" input-purpose
+(gobject:define-genum \"GtkInputPurpose\" input-purpose
   (:export t
    :type-initializer \"gtk_input_purpose_get_type\")
   (:free-form 0)
@@ -1386,7 +1407,7 @@
 ;;; GtkInputHints
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkInputHints" input-hints
+(gobject:define-gflags "GtkInputHints" input-hints
   (:export t
    :type-initializer "gtk_input_hints_get_type")
   (:none 0)
@@ -1409,7 +1430,7 @@
       (liber:symbol-documentation 'input-hints)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-flags \"GtkInputHints\" input-hints
+(gobject:define-gflags \"GtkInputHints\" input-hints
   (:export t
    :type-initializer \"gtk_input_hints_get_type\")
   (:none 0)
@@ -1438,8 +1459,8 @@
         word.}
       @entry[:uppercase-sentences]{Suggest to capitalize the first word of each
         sentence.}
-      @entry[:inhibit-osk]{Suggest to not show an onscreen keyboard, e.g. for a
-        calculator that already has all the keys.}
+      @entry[:inhibit-osk]{Suggest to not show an onscreen keyboard, for
+        example, for a calculator that already has all the keys.}
       @entry[:vertical-writing]{The text is vertical.}
       @entry[:emoji]{Suggest offering Emoji support.}
       @entry[:no-emoji]{Suggest not offering Emoji support.}
@@ -1466,7 +1487,7 @@
 ;;; GtkPickFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkPickFlags" pick-flags
+(gobject:define-gflags "GtkPickFlags" pick-flags
   (:export t
    :type-initializer "gtk_pick_flags_get_type")
   (:default 0)
@@ -1479,7 +1500,7 @@
       (liber:symbol-documentation 'pick-flags)
  "@version{2024-3-8}
   @begin{declaration}
-(gobject:define-g-flags \"GtkPickFlags\" pick-flags
+(gobject:define-gflags \"GtkPickFlags\" pick-flags
   (:export t
    :type-initializer \"gtk_pick_flags_get_type\")
   (:default 0)
@@ -1505,7 +1526,7 @@
 ;;; GtkConstraintRelation
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkConstraintRelation" constraint-relation
+(gobject:define-genum "GtkConstraintRelation" constraint-relation
   (:export t
    :type-initializer "gtk_constraint_relation_get_type")
   (:le -1)
@@ -1518,7 +1539,7 @@
       (liber:symbol-documentation 'constraint-relation)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkConstraintRelation\" constraint-relation
+(gobject:define-genum \"GtkConstraintRelation\" constraint-relation
   (:export t
    :type-initializer \"gtk_constraint_relation_get_type\")
   (:le -1)
@@ -1540,7 +1561,7 @@
 ;;; GtkConstraintStrength
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkConstraintStrength" constraint-strength
+(gobject:define-genum "GtkConstraintStrength" constraint-strength
   (:export t
    :type-initializer "gtk_constraint_strength_get_type")
   (:required 1001001000)
@@ -1554,7 +1575,7 @@
       (liber:symbol-documentation 'constraint-strength)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkConstraintStrength\" constraint-strength
+(gobject:define-genum \"GtkConstraintStrength\" constraint-strength
   (:export t
    :type-initializer \"gtk_constraint_strength_get_type\")
   (:required 1001001000)
@@ -1581,7 +1602,7 @@
 ;;; GtkConstraintAttribute
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkConstraintAttribute" constraint-attribute
+(gobject:define-genum "GtkConstraintAttribute" constraint-attribute
   (:export t
    :type-initializer "gtk_constraint_attribute_get_type")
   :none
@@ -1603,7 +1624,7 @@
       (liber:symbol-documentation 'constraint-attribute)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkConstraintAttribute\" constraint-attribute
+(gobject:define-genum \"GtkConstraintAttribute\" constraint-attribute
   (:export t
    :type-initializer \"gtk_constraint_attribute_get_type\")
   :none
@@ -1649,7 +1670,7 @@
 ;;; GtkConstraintVflParserError
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkConstraintVflParserError" constraint-vfl-parser-error
+(gobject:define-genum "GtkConstraintVflParserError" constraint-vfl-parser-error
   (:export t
    :type-initializer "gtk_constraint_vfl_parser_error_get_type")
   :invalid-symbol
@@ -1665,7 +1686,7 @@
       (liber:symbol-documentation 'constraint-vfl-parser-error)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
+(gobject:define-genum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
   (:export t
    :type-initializer \"gtk_constraint_vfl_parser_error\")
   :invalid-symbol
@@ -1696,7 +1717,7 @@
 ;; TODO: Consider to remove the implementation.
 
 #+gtk-4-6
-(gobject:define-g-enum "GtkSymbolicColor" symbolic-color
+(gobject:define-genum "GtkSymbolicColor" symbolic-color
   (:export t
    :type-initializer "gtk_symbolic_color_get_type")
   (:foreground 0)
@@ -1710,7 +1731,7 @@
       (liber:symbol-documentation 'symbolic-color)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkSymbolicColor\" symbolic-color
+(gobject:define-genum \"GtkSymbolicColor\" symbolic-color
   (:export t
    :type-initializer \"gtk_symbolic_color_get_type\")
   (:foreground 0)
@@ -1737,7 +1758,7 @@
 ;;; GtkAccessibleRole
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleRole" accessible-role
+(gobject:define-genum "GtkAccessibleRole" accessible-role
   (:export t
    :type-initializer "gtk_accessible_role_get_type")
   :alert
@@ -1839,7 +1860,7 @@
       (liber:symbol-documentation 'accessible-role)
  "@version{2024-5-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleRole\" accessible-role
+(gobject:define-genum \"GtkAccessibleRole\" accessible-role
   (:export t
    :type-initializer \"gtk_accessible_role_get_type\")
   :alert
@@ -2062,7 +2083,7 @@
 ;;; GtkAccessibleState
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleState" accessible-state
+(gobject:define-genum "GtkAccessibleState" accessible-state
   (:export t
    :type-initializer "gtk_accessible_state_get_type")
    :busy
@@ -2082,7 +2103,7 @@
       (liber:symbol-documentation 'accessible-state)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleState\" gtk:accessible-state
+(gobject:define-genum \"GtkAccessibleState\" gtk:accessible-state
   (:export t
    :type-initializer \"gtk_accessible_state_get_type\")
    :busy
@@ -2103,14 +2124,14 @@
         @class{gtk:check-button} widget.
         Value type: @symbol{gtk:accessible-tristate} enumeration}
       @entry[:disabled]{A \"disabled\" state. Corresponds to the
-        @slot[gtk:widget]{sensitive} property on the @class{gtk:widget} widget.
+        @slot[gtk:widget]{sensitive} property on the @class{gtk:widget} object.
         It indicates a UI element that is perceivable, but not editable or
         operable. Value type: boolean}
       @entry[:expanded]{An \"expanded\" state. Corresponds to the
         @slot[gtk:expander]{expanded} property on the @class{gtk:expander}
         widget. Value type: boolean or undefined}
       @entry[:hidden]{A \"hidden\" state. Corresponds to the
-        @slot[gtk:widget]{visible} property on the @class{gtk:widget} widget.
+        @slot[gtk:widget]{visible} property on the @class{gtk:widget} object.
         You can use this state explicitly on UI elements that should not be
         exposed to an assistive technology. See also the @code{:disabled} value.
         Value type: boolean}
@@ -2257,7 +2278,7 @@
 ;;; GtkAccessibleRelation
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleRelation" accessible-relation
+(gobject:define-genum "GtkAccessibleRelation" accessible-relation
   (:export t
    :type-initializer "gtk_accessible_relation_get_type")
   :active-descendant
@@ -2285,7 +2306,7 @@
       (liber:symbol-documentation 'accessible-relation)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleRelation\" accessible-relation
+(gobject:define-genum \"GtkAccessibleRelation\" accessible-relation
   (:export t
    :type-initializer \"gtk_accessible_relation_get_type\")
   :active-descendant
@@ -2364,7 +2385,7 @@
 ;;; GtkAccessibleTristate
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleTristate" accessible-tristate
+(gobject:define-genum "GtkAccessibleTristate" accessible-tristate
   (:export t
    :type-initializer "gtk_accessible_tristate_get_type")
   :false
@@ -2377,7 +2398,7 @@
       (liber:symbol-documentation 'accessible-tristate)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleTristate\" accessible-tristate
+(gobject:define-genum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
    :type-initializer \"gtk_accessible_tristate_get_type\")
   :false
@@ -2403,7 +2424,7 @@
 ;;; GtkAccessibleInvalidState
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleInvalidState" accessible-invalid-state
+(gobject:define-genum "GtkAccessibleInvalidState" accessible-invalid-state
   (:export t
    :type-initializer "gtk_accessible_invalid_state_get_type")
   :false
@@ -2417,7 +2438,7 @@
       (liber:symbol-documentation 'accessible-invalid-state)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleInvalidState\" accessible-invalid-state
+(gobject:define-genum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
    :type-initializer \"gtk_accessible_invalid_state_get_type\")
   :false
@@ -2445,7 +2466,7 @@
 ;;; GtkAccessibleAutocomplete
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleAutocomplete" accessible-autocomplete
+(gobject:define-genum "GtkAccessibleAutocomplete" accessible-autocomplete
   (:export t
    :type-initializer "gtk_accessible_autocomplete_get_type")
   :none
@@ -2459,7 +2480,7 @@
       (liber:symbol-documentation 'accessible-autocomplete)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleAutocomplete\" accessible-autocomplete
+(gobject:define-genum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
    :type-initializer \"gtk_accessible_autocomplete_get_type\")
   :none
@@ -2493,7 +2514,7 @@
 ;;; GtkAccessibleSort
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkAccessibleSort" accessible-sort
+(gobject:define-genum "GtkAccessibleSort" accessible-sort
   (:export t
    :type-initializer "gtk_accessible_sort_get_type")
   :none
@@ -2507,7 +2528,7 @@
       (liber:symbol-documentation 'accessible-sort)
  "@version{2024-4-24}
   @begin{declaration}
-(gobject:define-g-enum \"GtkAccessibleSort\" accessible-sort
+(gobject:define-genum \"GtkAccessibleSort\" accessible-sort
   (:export t
    :type-initializer \"gtk_accessible_sort_get_type\")
   :none
@@ -2529,5 +2550,55 @@
   @end{short}
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-property}")
+
+;;; ----------------------------------------------------------------------------
+;;; GtkAccessibleAnnouncementPriority                       Since 4.14
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(gobject:define-genum "GtkAccessibleAnnouncementPriority"
+                      accessible-announcement-priority
+  (:export t
+   :type-initializer "gtk_accessible_announcement_priority_get_type")
+  :low
+  :medium
+  :high)
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-symbol 'accessible-announcement-priority)
+      "GEnum"
+      (liber:symbol-documentation 'accessible-announcement-priority)
+ "@version{2024-11-3}
+  @begin{declaration}
+(gobject:define-genum \"GtkAccessibleAnnouncementPriority\"
+                      accessible-announcement-priority
+  (:export t
+   :type-initializer \"gtk_accessible_announcement_priority_get_type\")
+  :low
+  :medium
+  :high)
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:low]{The announcement is low priority, and might be read only on
+        the request of the user.}
+      @entry[:medium]{The announcement is of medium priority, and is usually
+        spoken at the next opportunity, such as at the end of speaking the
+        current sentence or when the user pauses typing.}
+      @entry[:hight]{The announcement is of high priority, and is usually
+        spoken immediately. Because an interruption might disorient users or
+        cause them to not complete their current task, authors should not use
+        high priority announcements unless the interruption is imperative. An
+        example would be a notification about a critical battery power level.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The priority of an accessibility announcement.
+  @end{short}
+  Since 4.14
+  @see-class{gtk:accessible}")
+
+#+gtk-4-14
+(export 'accessible-announcement-priority)
 
 ;;; --- End of file gtk4.enumerations.lisp -------------------------------------

@@ -1578,7 +1578,7 @@
 
 ;;;     GtkAccessibleInvalidState
 
-(test gtk-acessible-invalid-state
+(test gtk-accessible-invalid-state
   ;; Check type
   (is (g:type-is-enum "GtkAccessibleInvalidState"))
   ;; Check type initializer
@@ -1614,7 +1614,7 @@
 
 ;;;     GtkAccessibleAutocomplete
 
-(test gtk-acessible-autocomplete
+(test gtk-accessible-autocomplete
   ;; Check type
   (is (g:type-is-enum "GtkAccessibleAutocomplete"))
   ;; Check type initializer
@@ -1650,7 +1650,7 @@
 
 ;;;     GtkAccessibleSort
 
-(test gtk-acessible-sort
+(test gtk-accessible-sort
   ;; Check type
   (is (g:type-is-enum "GtkAccessibleSort"))
   ;; Check type initializer
@@ -1683,4 +1683,38 @@
                                     (:OTHER 3))
              (gobject:get-gtype-definition "GtkAccessibleSort"))))
 
-;;; 2024-10-13
+;;;     GtkAccessibleAnnouncementPriority
+
+(test gtk-accessible-announcement-priority
+  ;; Check type
+  (is (g:type-is-enum "GtkAccessibleAnnouncementPriority"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkAccessibleAnnouncementPriority")
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_announcement_priority_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:accessible-announcement-priority
+          (glib:symbol-for-gtype "GtkAccessibleAnnouncementPriority")))
+  ;; Check names
+  (is (equal '("GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_LOW"
+               "GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM"
+               "GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH")
+             (glib-test:list-enum-item-names "GtkAccessibleAnnouncementPriority")))
+  ;; Check values
+  (is (equal '(0 1 2)
+             (glib-test:list-enum-item-values "GtkAccessibleAnnouncementPriority")))
+  ;; Check nick names
+  (is (equal '("low" "medium" "high")
+             (glib-test:list-enum-item-nicks "GtkAccessibleAnnouncementPriority")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessibleAnnouncementPriority"
+                                    GTK:ACCESSIBLE-ANNOUNCEMENT-PRIORITY
+                       (:EXPORT T
+                        :TYPE-INITIALIZER
+                        "gtk_accessible_announcement_priority_get_type")
+                       (:LOW 0)
+                       (:MEDIUM 1)
+                       (:HIGH 2))
+             (gobject:get-gtype-definition "GtkAccessibleAnnouncementPriority"))))
+
+;;; 2024-11-3
