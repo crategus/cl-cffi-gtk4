@@ -2,7 +2,7 @@
 ;;; gdk4.surface.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -53,7 +53,7 @@
 ;;;     gdk_surface_hide
 ;;;     gdk_surface_translate_coordinates
 ;;;     gdk_surface_beep
-;;;     gdk_surface_set_opaque_region
+;;;     gdk_surface_set_opaque_region                      Deprecated 4.16
 ;;;     gdk_surface_create_gl_context
 ;;;     gdk_surface_create_vulkan_context                  Deprecated 4.14
 ;;;     gdk_surface_create_cairo_context
@@ -96,7 +96,7 @@
 ;;; GdkSurface
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkSurface" surface
+(gobject:define-gobject "GdkSurface" surface
   (:superclass g:object
    :export t
    :interfaces nil
@@ -145,54 +145,54 @@
       @begin{pre}
 lambda (surface monitor)    :run-first
       @end{pre}
-      Emitted when @arg{surface} starts being present on the monitor.
       @begin[code]{table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[monitor]{The @class{gdk:monitor} object.}
       @end{table}
+      Emitted when @arg{surface} starts being present on the monitor.
     @subheading{The \"event\" signal}
       @begin{pre}
 lambda (surface event)    :run-last
       @end{pre}
-      Emitted when GDK receives an input event for @arg{surface}.
       @begin[code]{table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[event]{The @class{gdk:event} instance to an input event.}
        @entry[Returns]{@em{True} to indicate that the event has been handled.}
       @end{table}
+      Emitted when GDK receives an input event for @arg{surface}.
     @subheading{The \"layout\" signal}
       @begin{pre}
 lambda (surface width height)    :run-first
       @end{pre}
-      Emitted when the size of @arg{surface} is changed, or when relayout
-      should be performed. The surface size is reported in \"application
-      pixels\", not \"device pixels\". See the @fun{gdk:surface-scale-factor}
-      function.
       @begin[code]{table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[width]{The integer with the current width.}
        @entry[height]{The integer with the current height.}
       @end{table}
+      Emitted when the size of @arg{surface} is changed, or when relayout
+      should be performed. The surface size is reported in \"application
+      pixels\", not \"device pixels\". See the @fun{gdk:surface-scale-factor}
+      function.
     @subheading{The \"leave-monitor\" signal}
       @begin{pre}
 lambda (surface monitor)    :run-first
       @end{pre}
-      Emitted when @arg{surface} stops being present on the monitor.
       @begin[code]{table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[monitor]{The @class{gdk:monitor} object.}
       @end{table}
+      Emitted when @arg{surface} stops being present on the monitor.
     @subheading{The \"render\" signal}
       @begin{pre}
 lambda (surface region)    :run-last
       @end{pre}
-      Emitted when part of the surface needs to be redrawn.
       @begin[code]{table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[region]{The @symbol{cairo:region-t} instance that needs to be
          redrawn.}
        @entry[Returns]{@em{True} to indicate that the signal has been handled.}
       @end{table}
+      Emitted when part of the surface needs to be redrawn.
   @end{dictionary}
   @see-constructor{gdk:surface-new-toplevel}
   @see-constructor{gdk:surface-new-popup}
@@ -617,7 +617,7 @@ lambda (surface region)    :run-last
 (export 'surface-beep)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_set_opaque_region
+;;; gdk_surface_set_opaque_region                           Deprecated 4.16
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_surface_set_opaque_region" %surface-set-opaque-region) :void
@@ -626,7 +626,7 @@ lambda (surface region)    :run-last
 
 (defun surface-set-opaque-region (surface region)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2024-11-7}
   @argument[surface]{a toplevel or non-native @class{gdk:surface} object}
   @argument[region]{a @symbol{cairo:region-t} instance, or @code{nil}}
   @begin{short}
@@ -641,8 +641,15 @@ lambda (surface region)    :run-last
   opaque, as we know where the opaque regions are. If your surface background
   is not opaque, please update this property in your
   @code{GtkWidgetClass.css_changed()} handler.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.16. GDK can figure out the opaque parts
+    of a window itself by inspecting the contents that are drawn.
+  @end{dictionary}
   @see-class{gdk:surface}
   @see-symbol{cairo:region-t}"
+  #+(and gtk-4-16 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:SURFACE-SET-OPAQUE-REGION is deprecated since 4.16."))
   (%surface-set-opaque-region surface
                               (or region (cffi:null-pointer))))
 

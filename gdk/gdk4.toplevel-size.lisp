@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel-size.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
 (export 'toplevel-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_size_get_bounds ()
+;;; gdk_toplevel_size_get_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_size_bounds" %toplevel-size-bounds) :void
@@ -108,7 +108,7 @@
 (export 'toplevel-size-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_size_set_size ()
+;;; gdk_toplevel_size_set_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
@@ -132,7 +132,7 @@
 (export 'toplevel-size-set-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_size_set_min_size ()
+;;; gdk_toplevel_size_set_min_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size)
@@ -162,7 +162,7 @@
 (export 'toplevel-size-set-min-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_size_set_shadow_width ()
+;;; gdk_toplevel_size_set_shadow_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_size_set_shadow_width"

@@ -2,7 +2,7 @@
 ;;; gdk4.device-pad.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,7 +55,7 @@
 ;;; GdkDevicePadFeature
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkDevicePadFeature" device-pad-feature
+(gobject:define-genum "GdkDevicePadFeature" device-pad-feature
   (:export t
    :type-initializer "gdk_device_pad_feature_get_type")
   :button
@@ -68,7 +68,7 @@
       (liber:symbol-documentation 'device-pad-feature)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkDevicePadFeature\" device-pad-feature
+(gobject:define-genum \"GdkDevicePadFeature\" device-pad-feature
   (:export t
    :type-initializer \"gdk_device_pad_feature_get_type\")
   :button
@@ -91,7 +91,7 @@
 ;;; GdkDevicePad
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GdkDevicePad" device-pad
+(gobject:define-ginterface "GdkDevicePad" device-pad
   (:superclass device
    :export t
    :type-initializer "gdk_device_pad_get_type")

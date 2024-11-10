@@ -2,7 +2,7 @@
 ;;; gdk4.paintable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GdkPaintableFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkPaintableFlags" paintable-flags
+(gobject:define-gflags "GdkPaintableFlags" paintable-flags
   (:export t
    :type-initializer "gdk_paintable_flags_get_type")
   (:static-size #.(ash 1 0))
@@ -83,7 +83,7 @@
       (liber:symbol-documentation 'paintable-flags)
  "@version{2024-5-5}
   @begin{declaration}
-(gobject:define-g-flags \"GdkPaintableFlags\" paintable-flags
+(gobject:define-gflags \"GdkPaintableFlags\" paintable-flags
   (:export t
    :type-initializer \"gdk_paintable_flags_get_type\")
   (:static-size #.(ash 1 0))
@@ -107,7 +107,7 @@
 ;;; GdkSnapshot
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkSnapshot" snapshot
+(gobject:define-gobject "GdkSnapshot" snapshot
   (:superclass g:object
    :export t
    :interfaces nil
@@ -128,7 +128,7 @@
 ;;; GdkPaintable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GdkPaintable" paintable
+(gobject:define-ginterface "GdkPaintable" paintable
   (:export t
    :type-initializer "gdk_paintable_get_type")
   nil)
@@ -220,7 +220,7 @@
     the paintable is not dynamic as the default implementation returns no flags
     and that will make the implementation likely quite slow.
   @end{dictionary}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     This is a complete example for the implementation of a subclass which
     implements the @class{gdk:paintable} interface.
     @begin{pre}
@@ -269,31 +269,31 @@
 (defmethod paintable-get-flags-impl ((paintable nuclear-icon))
   (list :static-contents :static-size))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"invalidate-contents\" signal}
       @begin{pre}
 lambda (paintable)    :run-last
       @end{pre}
-      Emitted when the contents of the paintable change. Examples for such an
-      event would be videos changing to the next frame or the icon theme for an
-      icon changing.
       @begin[code]{table}
         @entry[paintable]{The @class{gdk:paintable} object.}
       @end{table}
+      Emitted when the contents of the paintable change. Examples for such an
+      event would be videos changing to the next frame or the icon theme for an
+      icon changing.
     @subheading{The \"invalidate-size\" signal}
       @begin{pre}
 lambda (paintable)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[paintable]{The @class{gdk:paintable} object.}
+      @end{table}
       Emitted when the intrinsic size of the paintable changes. This means the
       values reported by at least one of the
       @fun{gdk:paintable-intrinsic-width}, @fun{gdk:paintable-intrinsic-height}
       or @fun{gdk:paintable-intrinsic-aspect-ratio} function has changed.
       Examples for such an event would be a paintable displaying the contents
       of a toplevel surface being resized.
-      @begin[code]{table}
-        @entry[paintable]{The @class{gdk:paintable} object.}
-      @end{table}
   @end{dictionary}
   @see-class{gdk:texture}
   @see-class{gtk:image}

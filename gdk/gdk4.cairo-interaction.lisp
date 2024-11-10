@@ -2,7 +2,7 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -38,7 +38,7 @@
 ;;;     gdk_cairo_rectangle
 ;;;     gdk_cairo_region
 ;;;     gdk_cairo_region_create_from_surface
-;;;     gdk_cairo_draw_from_gl                             Since 4.6 deprecated
+;;;     gdk_cairo_draw_from_gl                              Deprecated 4.6
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
@@ -56,7 +56,7 @@
     Sets the specified @arg{rgba} color as the source color of the Cairo
     context.
   @end{short}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     This code fragment from the GTK Demo sets a draw function for a
     @class{gtk:drawing-area} widget. The color is parsed to a @struct{gdk:rgba}
     color and then set as the source color for the @fun{cairo:paint} operation
@@ -70,7 +70,7 @@
               (gdk:cairo-set-source-rgba cr rgba)
               (cairo:paint cr)))))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-symbol{cairo:context-t}
   @see-class{gdk:rgba}"
   (cr (:pointer (:struct cairo:context-t)))

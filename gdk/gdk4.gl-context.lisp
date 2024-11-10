@@ -2,7 +2,7 @@
 ;;; gdk4.gl-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -106,7 +106,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(gobject:define-g-flags "GdkGLAPI" gl-api
+(gobject:define-gflags "GdkGLAPI" gl-api
   (:export t
    :type-initializer "gdk_gl_api_get_type")
   (:none 0)
@@ -119,23 +119,25 @@
       "GFlags"
       (liber:symbol-documentation 'gl-api)
  "@version{#2023-8-3}
-  @begin{short}
-    The list of the different APIs that a @class{gdk:gl-context} object can
-    potentially support.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-flags \"GdkGLAPI\" gl-api
+  @begin{declaration}
+(gobject:define-gflags \"GdkGLAPI\" gl-api
   (:export t
    :type-initializer \"gdk_gl_api_get_type\")
   (:none 0)
   (:gl #.(ash 1 0))
   (:gles #.(ash 1 1)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No API.}
-    @entry[:gl]{The OpenGL API.}
-    @entry[:gles]{The OpenGL ES API.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{No API.}
+      @entry[:gl]{The OpenGL API.}
+      @entry[:gles]{The OpenGL ES API.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The list of the different APIs that a @class{gdk:gl-context} object can
+    potentially support.
+  @end{short}
   Since 4.6
   @see-class{gdk:gl-context}")
 
@@ -143,7 +145,7 @@
 ;;; GdkGLContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkGLContext" gl-context
+(gobject:define-gobject "GdkGLContext" gl-context
   (:superclass draw-context
    :export t
    :interfaces nil

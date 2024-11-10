@@ -2,7 +2,7 @@
 ;;; gdk4.drop.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,7 +70,7 @@
 ;;; GdkDrop
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDrop" drop
+(gobject:define-gobject "GdkDrop" drop
   (:superclass g:object
    :export t
    :interfaces nil

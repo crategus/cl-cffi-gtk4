@@ -2,7 +2,7 @@
 ;;; gdk4.event.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -48,7 +48,7 @@
 ;;;     GdkTouchpadGesturePhase
 ;;;     GdkScrollDirection
 ;;;     GdkCrossingMode
-;;;     GDKScrollUnit                                      Since 4.8
+;;;     GdkScrollUnit                                      Since 4.8
 ;;;     GdkNotifyType
 ;;;
 ;;;     GdkEventSequence
@@ -93,6 +93,7 @@
 ;;;     gdk_scroll_event_get_direction
 ;;;     gdk_scroll_event_get_deltas
 ;;;     gdk_scroll_event_is_stop
+;;;     gdk_scroll_event_get_unit                           Since 4.8
 ;;;
 ;;;     gdk_key_event_get_keyval
 ;;;     gdk_key_event_get_keycode
@@ -203,7 +204,7 @@
     Use this value as the return value for stopping the propagation of an event
     handler.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     This event handler for the @code{\"close-request\"} signal of a window
     stops the propagation of the event and the window is not closed.
     @begin{pre}
@@ -250,7 +251,7 @@
 ;;; GdkEventType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkEventType" event-type
+(gobject:define-genum "GdkEventType" event-type
   (:export t
    :type-initializer "gdk_event_type_get_type")
   (:nothing -1)
@@ -292,7 +293,7 @@
       (liber:symbol-documentation 'event-type)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkEventType\" event-type
+(gobject:define-genum \"GdkEventType\" event-type
   (:export t
    :type-initializer \"gdk_event_type_get_type\")
   (:nothing -1)
@@ -410,7 +411,7 @@
 ;;; GdkKeyMatch
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkKeyMatch" key-match
+(gobject:define-genum "GdkKeyMatch" key-match
   (:export t
    :type-initializer "gdk_key_match_get_type")
   (:none 0)
@@ -423,7 +424,7 @@
       (liber:symbol-documentation 'key-match)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkKeyMatch\" key-match
+(gobject:define-genum \"GdkKeyMatch\" key-match
   (:export t
    :type-initializer \"gdk_key_match_get_type\")
   (:none 0)
@@ -450,7 +451,7 @@
 ;;; GdkTouchpadGesturePhase
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkTouchpadGesturePhase" touchpad-gesture-phase
+(gobject:define-genum "GdkTouchpadGesturePhase" touchpad-gesture-phase
   (:export t
    :type-initializer "gdk_touchpad_gesture_phase_get_type")
   (:begin 0)
@@ -464,7 +465,7 @@
       (liber:symbol-documentation 'touchpad-gesture-phase)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
+(gobject:define-genum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
   (:export t
    :type-initializer \"gdk_touchpad_gesture_phase_get_type\")
   (:begin 0)
@@ -504,7 +505,7 @@
 ;;; GdkScrollDirection
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkScrollDirection" scroll-direction
+(gobject:define-genum "GdkScrollDirection" scroll-direction
   (:export t
    :type-initializer "gdk_scroll_direction_get_type")
   (:up 0)
@@ -519,7 +520,7 @@
       (liber:symbol-documentation 'scroll-direction)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkScrollDirection\" scroll-direction
+(gobject:define-genum \"GdkScrollDirection\" scroll-direction
   (:export t
    :type-initializer \"gdk_scroll_direction_get_type\")
   (:up 0)
@@ -547,7 +548,7 @@
 ;;; GdkCrossingMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkCrossingMode" crossing-mode
+(gobject:define-genum "GdkCrossingMode" crossing-mode
   (:export t
    :type-initializer "gdk_crossing_mode_get_type")
   :normal
@@ -566,7 +567,7 @@
       (liber:symbol-documentation 'crossing-mode)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkCrosssingMode\" crossing-mode
+(gobject:define-genum \"GdkCrosssingMode\" crossing-mode
   (:export t
    :type-initializer \"gdk_crossing_mode_get_type\")
   :normal
@@ -605,7 +606,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-8
-(gobject:define-g-enum "GdkScrollUnit" scroll-unit
+(gobject:define-genum "GdkScrollUnit" scroll-unit
   (:export t
    :type-initializer "gdk_scroll_unit_get_type")
   :wheel
@@ -617,7 +618,7 @@
       (liber:symbol-documentation 'scroll-unit)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkScrollUnit\" scroll-unit
+(gobject:define-genum \"GdkScrollUnit\" scroll-unit
   (:export t
    :type-initializer \"gdk_scroll_unit_get_type\")
   :wheel
@@ -655,7 +656,7 @@
 ;;; GdkNotifyType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkNotifyType" notify-type
+(gobject:define-genum "GdkNotifyType" notify-type
   (:export t
    :type-initializer "gdk_notify_type_get_type")
   (:ancestor 0)
@@ -671,7 +672,7 @@
       (liber:symbol-documentation 'notify-type)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum notify-type
+(gobject:define-genum notify-type
   (:export t
    :type-initializer \"gdk_notify_type_get_type\")
   (:ancestor 0)
@@ -706,7 +707,7 @@
 ;;; GdkEventSequence
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque event-sequence "GdkEventSequence"
+(glib:define-gboxed-opaque event-sequence "GdkEventSequence"
   :export t
   :type-initializer "gdk_event_sequence_get_type"
   :alloc (error "GdkEventSequence cannot be created from the Lisp side"))
@@ -1106,11 +1107,11 @@
     representing the tool that caused the event.
   @end{short}
   Otherwise, @code{nil} will be returned.
-  @begin{notes}
+  @begin[Notes]{dictionary}
     The @class{gdk:device-tool} objects will be constant during the application
     lifetime, if settings must be stored persistently across runs, see the
     @fun{gdk:device-tool-serial} function.
-  @end{notes}
+  @end{dictionary}
   @see-class{gdk:event}
   @see-symbol{gdk:device-tool}
   @see-function{gdk:device-tool-serial}"
@@ -1442,6 +1443,17 @@
   (event event))
 
 (export 'scroll-event-is-stop)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_scroll_event_get_unit
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-8
+(cffi:defcfun ("gdk_scroll_event_get_unit" scroll-event-unit) scroll-unit
+  (event event))
+
+#+gtk-4-8
+(export 'scroll-event-unit)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_keyval

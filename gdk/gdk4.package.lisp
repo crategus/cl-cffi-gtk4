@@ -89,10 +89,18 @@
                              #:pixbuf-copy-area
                              #:pixbuf-fill
                              ;; Symbols from gdk-pixbuf.animation.lisp
+                             #:pixbuf-animation-iter
+                             #:pixbuf-animation-iter-advance
+                             #:pixbuf-animation-iter-delay-time
+                             #:pixbuf-animation-iter-on-currently-loading-frame
+                             #:pixbuf-animation-iter-pixbuf
                              #:pixbuf-animation
                              #:pixbuf-animation-loop
                              #:pixbuf-animation-new-from-file
                              #:pixbuf-animation-new-from-resource
+                             #:pixbuf-animation-width
+                             #:pixbuf-animation-height
+                             #:pixbuf-animation-is-static-image
                              #:pixbuf-animation-static-image)
   ;; Export the symbols for GDK-PIXBUF
   (:export                   ;; Symbols from gdk-pixbuf.structure.lisp
@@ -149,10 +157,18 @@
                              #:pixbuf-copy-area
                              #:pixbuf-fill
                              ;; Symbols from gdk-pixbuf.animation.lisp
+                             #:pixbuf-animation-iter
+                             #:pixbuf-animation-iter-advance
+                             #:pixbuf-animation-iter-delay-time
+                             #:pixbuf-animation-iter-on-currently-loading-frame
+                             #:pixbuf-animation-iter-pixbuf
                              #:pixbuf-animation
                              #:pixbuf-animation-loop
                              #:pixbuf-animation-new-from-file
                              #:pixbuf-animation-new-from-resource
+                             #:pixbuf-animation-width
+                             #:pixbuf-animation-height
+                             #:pixbuf-animation-is-static-image
                              #:pixbuf-animation-static-image))
 
 (in-package :gdk)
@@ -220,6 +236,26 @@
       @about-function{dmabuf-formats-equal}
       @about-function{dmabuf-formats-format}
       @about-function{dmabuf-formats-n-formats}
+    @end{subsection}
+    @begin[GdkColorState]{subsection}
+      @about-class{color-state}
+      @about-function{color-state-oklab}
+      @about-function{color-state-oklch}
+      @about-function{color-state-rec2100-linear}
+      @about-function{color-state-rec2100-pq}
+      @about-function{color-state-srgb}
+      @about-function{color-state-srgb-linear}
+      @about-function{color-state-create-cicp-params}
+      @about-function{color-state-equal}
+    @end{subsection}
+    @begin[GdkCicpParams]{subsection}
+      @about-class{cicp-params}
+      @about-generic{cicp-params-color-primaries}
+      @about-generic{cicp-params-matrix-coefficients}
+      @about-generic{cicp-params-range}
+      @about-generic{cicp-params-transfer-function}
+      @about-function{cicp-params-params-new}
+      @about-function{cicp-params-build-color-state}
     @end{subsection}
   @end{section}
   @begin[Displays, Devices, Monitors, and Seats]{section}
@@ -362,15 +398,6 @@
     @end{subsection}
     @begin[GdkTexture]{subsection}
       @about-symbol{memory-format}
-      @about-class{color-state}
-      @about-function{color-state-rec2100-linear}
-      @about-function{color-state-rec2100-pq}
-      @about-function{color-state-srgb}
-      @about-function{color-state-srgb-linear}
-      @about-function{color-state-create-cicp-params}
-      @about-function{color-state-equal}
-      @about-function{color-state-ref}
-      @about-function{color-state-unref}
       @about-class{texture}
       @about-generic{texture-height}
       @about-generic{texture-width}
@@ -780,6 +807,7 @@
       @about-function{scroll-event-direction}
       @about-function{scroll-event-deltas}
       @about-function{scroll-event-is-stop}
+      @about-function{scroll-event-unit}
       @about-function{key-event-keyval}
       @about-function{key-event-keycode}
       @about-function{key-event-consumed-modifiers}
@@ -817,6 +845,8 @@
       @about-generic{cursor-texture}
       @about-function{cursor-new-from-texture}
       @about-function{cursor-new-from-name}
+      @about-function{cursor-new-from-callback}
+      @about-symbol{cursor-get-texture-callback}
     @end{subsection}
     @begin[GdkFrameTimings]{subsection}
       @about-class{frame-timings}
@@ -894,12 +924,6 @@
       @about-function{cairo-region}
       @about-function{cairo-region-create-from-surface}
       @about-function{cairo-draw-from-gl}
-    @end{subsection}
-    @begin[X Window System Interaction]{subsection}
-      X backend-specific functions.
-    @end{subsection}
-    @begin[Wayland Interaction]{subsection}
-      Wayland backend-specific functions.
     @end{subsection}
   @end{section}")
 

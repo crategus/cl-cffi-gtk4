@@ -2,7 +2,7 @@
 ;;; gdk4.monitor.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,7 +84,7 @@
 ;;; GdkSubpixelLayout
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkSubpixelLayout" subpixel-layout
+(gobject:define-genum "GdkSubpixelLayout" subpixel-layout
   (:export t
    :type-initializer "gdk_subpixel_layout_get_type")
   (:unknown 0)
@@ -100,7 +100,7 @@
       (liber:symbol-documentation 'subpixel-layout)
  "@version{2024-5-26}
   @begin{declaration}
-(gobject:define-g-enum \"GdkSubpixelLayout\" subpixel-layout
+(gobject:define-genum \"GdkSubpixelLayout\" subpixel-layout
   (:export t
    :type-initializer \"gdk_subpixel_layout_get_type\")
   (:unknown 0)
@@ -130,7 +130,7 @@
 ;;; GdkMonitor
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkMonitor" monitor
+(gobject:define-gobject "GdkMonitor" monitor
   (:superclass g:object
    :export t
    :interfaces nil
@@ -195,12 +195,12 @@
       @begin{pre}
 lambda (monitor)    :run-first
       @end{pre}
-      The signal gets emitted when the output represented by @arg{monitor} gets
-      disconnected.
       @begin[code]{table}
         @entry[monitor]{The @class{gdk:monitor} object on which this signal was
           emitted.}
       @end{table}
+      The signal gets emitted when the output represented by @arg{monitor} gets
+      disconnected.
   @end{dictionary}
   @see-slot{gdk:monitor-connector}
   @see-slot{gdk:monitor-description}

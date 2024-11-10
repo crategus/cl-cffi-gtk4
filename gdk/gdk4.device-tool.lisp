@@ -2,7 +2,7 @@
 ;;; gdk4.device-tool.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -58,7 +58,7 @@
 ;;; GdkDeviceToolType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkDeviceToolType" device-tool-type
+(gobject:define-genum "GdkDeviceToolType" device-tool-type
   (:export t
    :type-initializer "gdk_device_tool_type_get_type")
   :unknown
@@ -76,7 +76,7 @@
       (liber:symbol-documentation 'device-tool-type)
  "@version{2024-7-11}
   @begin{declaration}
-(gobject:define-g-enum \"GdkDeviceToolType\" device-tool-type
+(gobject:define-genum \"GdkDeviceToolType\" device-tool-type
   (:export t
    :type-initializer \"gdk_device_tool_type_get_type\")
   :unknown
@@ -111,7 +111,7 @@
 ;;; GdkDeviceTool
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDeviceTool" device-tool
+(gobject:define-gobject "GdkDeviceTool" device-tool
   (:superclass g:object
    :export t
    :interfaces nil

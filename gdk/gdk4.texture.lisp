@@ -34,7 +34,6 @@
 ;;; Types and Values
 ;;;
 ;;;     GdkMemoryFormat
-;;;     GdkColorState                                       Since 4.16
 ;;;
 ;;;     GdkTexture
 ;;;     GdkMemoryTexture
@@ -47,16 +46,6 @@
 ;;;     gdk_texture_get_height
 ;;;
 ;;; Functions
-;;;
-;;;     gdk_color_state_get_rec2100_linear                  Since 4.16
-;;;     gdk_color_state_get_rec2100_pq                      Since 4.16
-;;;     gdk_color_state_get_srgb                            Since 4.16
-;;;     gdk_color_state_get_srgb_linear                     Since 4.16
-;;;
-;;;     gdk_color_state_create_cicp_params                  Since 4.16
-;;;     gdk_color_state_equal                               Since 4.16
-;;;     gdk_color_state_ref                                 Since 4.16
-;;;     gdk_color_state_unref                               Since 4.16
 ;;;
 ;;;     gdk_texture_new_for_pixbuf
 ;;;     gdk_texture_new_from_resource
@@ -98,6 +87,27 @@
 
 (in-package :gdk)
 
+#|
+/**
+ * GDK_MEMORY_DEFAULT:
+ *
+ * The default memory format used by GTK.
+ *
+ * This is the format provided by [method@Gdk.Texture.download].
+ * It is equal to %CAIRO_FORMAT_ARGB32.
+ *
+ * Be aware that unlike the `GdkMemoryFormat` values, this format
+ * is different for different endianness.
+ */
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+#define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
+#elif G_BYTE_ORDER == G_BIG_ENDIAN
+#define GDK_MEMORY_DEFAULT GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
+#else
+#error "Unknown byte order for GDK_MEMORY_DEFAULT"
+#endif
+|#
+
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMemoryFormat
 ;;; ----------------------------------------------------------------------------
@@ -130,21 +140,8 @@
       "GEnum"
       (liber:symbol-documentation 'memory-format)
  "@version{#2023-4-12}
-  @begin{short}
-    The @sym{gdk:memory-format} enumeration describes a format that bytes can
-    have in memory.
-  @end{short}
-  It describes formats by listing the contents of the memory passed to it. So
-  @code{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed by a byte each of
-  red, green and blue. It is not endian-dependent, so the @code{:argb32} value
-  of the @symbol{cairo:format-t} enumeration is represented by different
-  @symol{gdk:memory-format} values on architectures with different endiannesses.
-
-  Its naming is modelled after VkFormat. See
-  https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat
-  for details.
-  @begin{pre}
-(gobject:define-g-enum \"GdkMemoryFormat\" memory-format
+  @begin{declaration}
+(gobject:define-genum \"GdkMemoryFormat\" memory-format
   (:export t
    :type-initializer \"gdk_memory_format_get_type\")
   :B8G8R8A8-PREMULTIPLIED
@@ -166,172 +163,58 @@
   :R32G32B32A32-FLOAT-PREMULTIPLIED
   :R32G32B32A32-FLOAT
   :N-FORMATS)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes; for blue, green, red, alpha. The
-      color values are premultiplied with the alpha value.}
-    @entry[:A8R8G8B8-PREMULTIPLIED]{4 bytes; for alpha, red, green, blue. The
-      color values are premultiplied with the alpha value.}
-    @entry[:R8G8B8A8-PREMULTIPLIED]{4 bytes; for red, green, blue, alpha The
-      color values are premultiplied with the alpha value.}
-    @entry[:B8G8R8A8]{4 bytes; for blue, green, red, alpha.}
-    @entry[:A8R8G8B8]{4 bytes; for alpha, red, green, blue.}
-    @entry[:R8G8B8A8]{4 bytes; for red, green, blue, alpha.}
-    @entry[:A8B8G8R8]{4 bytes; for alpha, blue, green, red.}
-    @entry[:R8G8B8]{3 bytes; for red, green, blue. The data is opaque.}
-    @entry[:B8G8R8]{3 bytes; for blue, green, red. The data is opaque.}
-    @entry[:R16G16B16]{3 guint16 values; for red, green, blue. Since 4.6}
-    @entry[:R16G16B16A16-PREMULTIPLIED]{4 guint16 values; for red, green, blue,
-      alpha. The color values are premultiplied with the alpha value.
-      Since 4.6}
-    @entry[:R16G16B16A16]{4 guint16 values; for red, green, blue, alpha.
-      Since 4.6}
-    @entry[:R16G16B16-FLOAT]{3 half-float values; for red, green, blue. The
-      data is opaque. Since 4.6}
-    @entry[:R16G16B16A16-FLOAT-PREMULTIPLIED]{4 half-float values; for red,
-      green, blue and alpha. The color values are premultiplied with the alpha
-      value. Since 4.6}
-    @entry[:R16G16B16A16-FLOAT]{4 half-float values; for red, green, blue and
-      alpha. Since 4.6}
-    @entry[:R32G32B32-FLOAT]{No description available.}
-    @entry[:R32G32B32A32-FLOAT-PREMULTIPLIED]{4 float values; for red, green,
-      blue and alpha. The color values are premultiplied with the alpha value.
-      Since 4.6}
-    @entry[:R32G32B32A32-FLOAT]{4 float values; for red, green, blue and alpha.
-      Since 4.6}
-    @entry[:N-FORMATS]{The number of formats. This value will change as more
-      formats get added, so do not rely on its concrete integer.}
-  @end{table}
-  @see-class{gdk:texture}")
-
-;;; ----------------------------------------------------------------------------
-;;; GdkColorState
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(glib:define-gboxed-opaque color-state "GdkColorState"
-  :export t
-  :type-initializer "gdk_color_state_get_type"
-  :alloc (error "GdkColorState cannot be created from the Lisp side"))
-
-#+(and gtk-4-16 liber-documentation)
-(setf (liber:alias-for-class 'color-state)
-      "GBoxed"
-      (documentation 'color-state 'type)
- "@version{2024-10-13}
-  @begin{declaration}
-(glib:define-gboxed-opaque color-state \"GdkColorState\"
-  :export t
-  :type-initializer \"gdk_color_state_get_type\"
-  :alloc (error \"GdkColorState cannot be created from the Lisp side\"))
   @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes; for blue, green, red, alpha. The
+        color values are premultiplied with the alpha value.}
+      @entry[:A8R8G8B8-PREMULTIPLIED]{4 bytes; for alpha, red, green, blue. The
+        color values are premultiplied with the alpha value.}
+      @entry[:R8G8B8A8-PREMULTIPLIED]{4 bytes; for red, green, blue, alpha The
+        color values are premultiplied with the alpha value.}
+      @entry[:B8G8R8A8]{4 bytes; for blue, green, red, alpha.}
+      @entry[:A8R8G8B8]{4 bytes; for alpha, red, green, blue.}
+      @entry[:R8G8B8A8]{4 bytes; for red, green, blue, alpha.}
+      @entry[:A8B8G8R8]{4 bytes; for alpha, blue, green, red.}
+      @entry[:R8G8B8]{3 bytes; for red, green, blue. The data is opaque.}
+      @entry[:B8G8R8]{3 bytes; for blue, green, red. The data is opaque.}
+      @entry[:R16G16B16]{3 guint16 values; for red, green, blue. Since 4.6}
+      @entry[:R16G16B16A16-PREMULTIPLIED]{4 guint16 values; for red, green,
+        blue, alpha. The color values are premultiplied with the alpha value.
+        Since 4.6}
+      @entry[:R16G16B16A16]{4 guint16 values; for red, green, blue, alpha.
+        Since 4.6}
+      @entry[:R16G16B16-FLOAT]{3 half-float values; for red, green, blue. The
+        data is opaque. Since 4.6}
+      @entry[:R16G16B16A16-FLOAT-PREMULTIPLIED]{4 half-float values; for red,
+        green, blue and alpha. The color values are premultiplied with the
+        alpha value. Since 4.6}
+      @entry[:R16G16B16A16-FLOAT]{4 half-float values; for red, green, blue and
+        alpha. Since 4.6}
+      @entry[:R32G32B32-FLOAT]{No description available.}
+      @entry[:R32G32B32A32-FLOAT-PREMULTIPLIED]{4 float values; for red, green,
+        blue and alpha. The color values are premultiplied with the alpha value.
+        Since 4.6}
+      @entry[:R32G32B32A32-FLOAT]{4 float values; for red, green, blue and
+        alpha. Since 4.6}
+      @entry[:N-FORMATS]{The number of formats. This value will change as more
+        formats get added, so do not rely on its concrete integer.}
+    @end{table}
+  @end{values}
   @begin{short}
-    The @class{gdk:color-state} instance provides the information to interpret
-    colors and pixels in a variety of ways.
+    The @sym{gdk:memory-format} enumeration describes a format that bytes can
+    have in memory.
   @end{short}
-  They are also known as color spaces.
+  It describes formats by listing the contents of the memory passed to it. So
+  @code{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed by a byte each of
+  red, green and blue. It is not endian-dependent, so the @code{:argb32} value
+  of the @symbol{cairo:format-t} enumeration is represented by different
+  @symol{gdk:memory-format} values on architectures with different endiannesses.
 
-  Crucially, GTK knows how to convert colors from one color state to another.
-  The @class{gdk:color-state} instances are immutable and therefore threadsafe.
-
-  Since 4.16
+  Its naming is modelled after VkFormat. See
+  https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat
+  for details.
   @see-class{gdk:texture}")
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_get_rec2100_linear
-;;;
-;;; Returns the color state object representing the linear rec2100 color space.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(cffi:defcfun ("gdk_color_state_get_rec2100_linear" color-state-rec2100-linear)
-    (g:boxed color-state :return)
-)
-
-#+gtk-4-16
-(export 'color-state-rec2100-linear)
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_get_rec2100_pq
-;;;
-;;; Returns the color state object representing the rec2100-pq color space.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(cffi:defcfun ("gdk_color_state_get_rec2100_pq" color-state-rec2100-pq)
-    (g:boxed color-state :return)
-)
-
-#+gtk-4-16
-(export 'color-state-rec2100-pq)
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_get_srgb
-;;;
-;;; Returns the color state object representing the sRGB color space.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(cffi:defcfun ("gdk_color_state_get_srgb" color-state-srgb)
-    (g:boxed color-state :return)
-)
-
-#+gtk-4-16
-(export 'color-state-srgb)
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_get_srgb_linear
-;;;
-;;; Returns the color state object representing the linearized sRGB color space.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(cffi:defcfun ("gdk_color_state_get_srgb_linear" color-state-srgb-linear)
-    (g:boxed color-state :return)
-)
-
-#+gtk-4-16
-(export 'color-state-srgb-linear)
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_create_cicp_params
-;;;
-;;; Create a GdkCicpParams representing the colorstate.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_equal
-;;;
-;;; Compares two GdkColorStates for equality.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_ref
-;;;
-;;; Increase the reference count of self.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_color_state_unref
-;;;
-;;; Decrease the reference count of self.
-;;;
-;;; Since 4.16
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTexture
@@ -604,7 +487,7 @@
   The data format of the downloaded data is equivalent to the @code{:argb32}
   value of the @symbol{cairo:format-t} enumeration, so every downloaded pixel
   requires 4 bytes of memory.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
   Downloading a texture into a Cairo image surface:
   @begin{pre}
 (let ((surface (cairo:image-surface-reate :argb32

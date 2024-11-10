@@ -2,7 +2,7 @@
 ;;; gdk4.cursor.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,6 +47,9 @@
 ;;;
 ;;;     gdk_cursor_new_from_texture
 ;;;     gdk_cursor_new_from_name
+;;;     gdk_cursor_new_from_callback                        Since 4.16
+;;;
+;;;     GdkCursorGetTextureCallback                         Since 4.16
 ;;;
 ;;; Properties
 ;;;
@@ -68,7 +71,7 @@
 ;;; GdkCursor
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkCursor" cursor
+(gobject:define-gobject "GdkCursor" cursor
   (:superclass g:object
    :export t
    :interfaces nil
@@ -390,5 +393,13 @@
   (%cursor-new-from-name name fallback))
 
 (export 'cursor-new-from-name)
+
+;;; ----------------------------------------------------------------------------
+;;;     gdk_cursor_new_from_callback                        Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;;     GdkCursorGetTextureCallback                         Since 4.16
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gdk4.cursor.lisp -------------------------------------------

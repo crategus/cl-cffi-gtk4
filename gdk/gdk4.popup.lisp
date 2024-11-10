@@ -2,7 +2,7 @@
 ;;; gdk4.popup.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,7 +65,7 @@
 ;;; GdkPopup
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GdkPopup" popup
+(gobject:define-ginterface "GdkPopup" popup
   (:superclass surface
    :export t
    :type-initializer "gdk_popup_get_type")
@@ -94,7 +94,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popup-autohide ---------------------------------------------------------
+;;; --- gdk:popup-autohide -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "autohide" 'popup) t)
@@ -121,7 +121,7 @@
   @see-class{gdk:popup}
   @see-class{gdk:surface}")
 
-;;; --- popup-parent -----------------------------------------------------------
+;;; --- gdk:popup-parent -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "parent" 'popup) t)
@@ -147,7 +147,7 @@
   @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_popup_present ()
+;;; gdk_popup_present
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_present" popup-present) :boolean
@@ -189,7 +189,7 @@
 (export 'popup-present)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_popup_get_surface_anchor ()
+;;; gdk_popup_get_surface_anchor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_get_surface_anchor" popup-surface-anchor) gravity
@@ -210,7 +210,7 @@
 (export 'popup-surface-anchor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_popup_get_rect_anchor ()
+;;; gdk_popup_get_rect_anchor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_get_rect_anchor" popup-rect-anchor) gravity
@@ -230,7 +230,7 @@
 (export 'popup-rect-anchor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_popup_get_position_x ()
+;;; gdk_popup_get_position_x
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_get_position_x" popup-position-x) :int
@@ -245,7 +245,7 @@
 (export 'popup-position-x)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_popup_get_position_y ()
+;;; gdk_popup_get_position_y
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_get_position_y" popup-position-y) :int

@@ -2,7 +2,7 @@
 ;;; gdk4.app-launch-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,7 +63,7 @@
 ;;; GdkAppLaunchContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkAppLaunchContext" app-launch-context
+(gobject:define-gobject "GdkAppLaunchContext" app-launch-context
   (:superclass g:app-launch-context
    :export t
    :interfaces nil
@@ -82,7 +82,7 @@
   @end{short}
   It provides startup notification and allows to launch applications on a
   specific screen or workspace.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Launching an application.
     @begin{pre}
 (let* ((display (gdk:display-default))
@@ -125,7 +125,7 @@
   @see-class{gdk:display}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_app_launch_context_set_desktop ()
+;;; gdk_app_launch_context_set_desktop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_app_launch_context_set_desktop"
@@ -149,7 +149,7 @@
 (export 'app-launch-context-set-desktop)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_app_launch_context_set_timestamp ()
+;;; gdk_app_launch_context_set_timestamp
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_app_launch_context_set_timestamp"
@@ -173,7 +173,7 @@
 (export 'app-launch-context-set-timestamp)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_app_launch_context_set_icon ()
+;;; gdk_app_launch_context_set_icon
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_app_launch_context_set_icon"
@@ -197,7 +197,7 @@
 (export 'app-launch-context-set-icon)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_app_launch_context_set_icon_name ()
+;;; gdk_app_launch_context_set_icon_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_app_launch_context_set_icon_name"

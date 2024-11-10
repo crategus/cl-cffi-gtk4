@@ -2,7 +2,7 @@
 ;;; gdk4.frame-clock.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GdkFrameClockPhase
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkFrameClockPhase" frame-clock-phase
+(gobject:define-gflags "GdkFrameClockPhase" frame-clock-phase
   (:export t
    :type-initializer "gdk_frame_clock_phase_get_type")
   (:none 0)
@@ -89,7 +89,7 @@
       (liber:symbol-documentation 'frame-clock-phase)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-flags \"GdkFrameClockPhase\" frame-clock-phase
+(gobject:define-gflags \"GdkFrameClockPhase\" frame-clock-phase
   (:export t
    :type-initializer \"gdk_frame_clock_phase_get_type\")
   (:none 0)
@@ -130,7 +130,7 @@
 ;;; GdkFrameClock
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkFrameClock" frame-clock
+(gobject:define-gobject "GdkFrameClock" frame-clock
   (:superclass g:object
    :export t
    :interfaces nil
@@ -179,73 +179,73 @@
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
-      The signal ends processing of the frame. Applications should generally
-      not handle this signal.
       @begin[code]{table}
         @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
       @end{table}
+      The signal ends processing of the frame. Applications should generally
+      not handle this signal.
     @subheading{The \"before-paint\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
-      The signal begins processing of the frame. Applications should generally
-      not handle this signal.
       @begin[code]{table}
         @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
       @end{table}
+      The signal begins processing of the frame. Applications should generally
+      not handle this signal.
     @subheading{The \"flush-events\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
-      The signal is used to flush pending motion events that are being batched
-      up and compressed together. Applications should not handle this signal.
       @begin[code]{table}
         @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
       @end{table}
+      The signal is used to flush pending motion events that are being batched
+      up and compressed together. Applications should not handle this signal.
     @subheading{The \"layout\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
+      @end{table}
       The signal is emitted as the second step of toolkit and application
       processing of the frame. Any work to update sizes and positions of
       application elements should be performed. GTK normally handles this
       internally.
-      @begin[code]{table}
-        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
-      @end{table}
     @subheading{The \"paint\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
+      @end{table}
       The signal is emitted as the third step of toolkit and application
       processing of the frame. The frame is repainted. GDK normally handles
       this internally and emits @code{GdkSurface::render} signals, which are
       turned into GTK @code{GtkWidget::snapshot} signals.
-      @begin[code]{table}
-        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
-      @end{table}
     @subheading{The \"resume-events\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
-      The signal is emitted after processing of the frame is finished, and is
-      handled internally by GTK to resume normal event processing. Applications
-      should not handle this signal.
       @begin[code]{table}
         @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
       @end{table}
+      The signal is emitted after processing of the frame is finished, and is
+      handled internally by GTK to resume normal event processing. Applications
+      should not handle this signal.
     @subheading{The \"update\" signal}
       @begin{pre}
 lambda (clock)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
+      @end{table}
       The signal is emitted as the first step of toolkit and application
       processing of the frame. Animations should be updated using the
       @fun{gdk:frame-clock-frame-time} function. Applications can connect
       directly to this signal, or use the @fun{gtk:widget-add-tick-callback}
       function as a more convenient interface.
-      @begin[code]{table}
-        @entry[clock]{The @class{gdk:frame-clock} object emitting the signal.}
-      @end{table}
   @end{dictionary}
   @see-class{gdk:frame-timings}")
 

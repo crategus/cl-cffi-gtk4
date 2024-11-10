@@ -2,7 +2,7 @@
 ;;; gdk4.content-formats.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -124,7 +124,7 @@
 ;;; GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque content-formats "GdkContentFormats"
+(glib:define-gboxed-opaque content-formats "GdkContentFormats"
   :export t
   :type-initializer "gdk_content_formats_get_type"
   :alloc
@@ -196,7 +196,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_new ()
+;;; gdk_content_formats_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_new" %content-formats-new)
@@ -224,7 +224,7 @@
 (export 'content-formats-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_new_for_gtype ()
+;;; gdk_content_formats_new_for_gtype
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_new_for_gtype"
@@ -243,61 +243,19 @@
 (export 'content-formats-new-for-gtype)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_ref ()
-;;;
-;;; GdkContentFormats *
-;;; gdk_content_formats_ref (GdkContentFormats *formats);
-;;;
-;;; Increases the reference count of a GdkContentFormats by one.
-;;;
-;;; formats :
-;;;     a GdkContentFormats
-;;;
-;;; Returns :
-;;;     the passed in GdkContentFormats.
+;;; gdk_content_formats_ref                                 not needed
 ;;; ----------------------------------------------------------------------------
 
-;; not needed
-
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_unref ()
-;;;
-;;; void
-;;; gdk_content_formats_unref (GdkContentFormats *formats);
-;;;
-;;; Decreases the reference count of a GdkContentFormats by one. If the
-;;; resulting reference count is zero, frees the formats.
-;;;
-;;; formats :
-;;;     a GdkContentFormats
+;;; gdk_content_formats_unref                               not needed
 ;;; ----------------------------------------------------------------------------
 
-;; not needed
-
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_print ()
-;;;
-;;; void
-;;; gdk_content_formats_print (GdkContentFormats *formats,
-;;;                            GString *string);
-;;;
-;;; Prints the given formats into a string for human consumption. This is meant
-;;; for debugging and logging.
-;;;
-;;; The form of the representation may change at any time and is not guaranteed
-;;; to stay identical.
-;;;
-;;; formats :
-;;;     a GdkContentFormats
-;;;
-;;; string :
-;;;     a GString to print into
+;;; gdk_content_formats_print                               not needed
 ;;; ----------------------------------------------------------------------------
 
-;; not implemented, see gdk:content-formats-to-string
-
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_to_string ()
+;;; gdk_content_formats_to_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_to_string" content-formats-to-string)
@@ -315,7 +273,7 @@
 (export 'content-formats-to-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_get_gtypes ()
+;;; gdk_content_formats_get_gtypes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_get_gtypes" %content-formats-gtypes)
@@ -345,7 +303,7 @@
 (export 'content-formats-gtypes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_get_mime_types ()
+;;; gdk_content_formats_get_mime_types
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
@@ -369,7 +327,7 @@
 (export 'content-formats-mime-types)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_union ()
+;;; gdk_content_formats_union
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union" content-formats-union)
@@ -390,7 +348,7 @@
 (export 'content-formats-union)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_match ()
+;;; gdk_content_formats_match
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_match" content-formats-match) :boolean
@@ -409,7 +367,7 @@
 (export 'content-formats-match)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_match_gtype ()
+;;; gdk_content_formats_match_gtype
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype)
@@ -432,7 +390,7 @@
 (export 'content-formats-match-gtype)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_match_mime_type ()
+;;; gdk_content_formats_match_mime_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_match_mime_type"
@@ -456,7 +414,7 @@
 (export 'content-formats-match-mime-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_contain_gtype ()
+;;; gdk_content_formats_contain_gtype
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
@@ -475,7 +433,7 @@
 (export 'content-formats-contain-gtype)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_contain_mime_type ()
+;;; gdk_content_formats_contain_mime_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_contain_mime_type"
@@ -493,7 +451,7 @@
 (export 'content-formats-contain-mime-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_union_serialize_gtypes ()
+;;; gdk_content_formats_union_serialize_gtypes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
@@ -513,7 +471,7 @@
 (export 'content-formats-union-serialize-gtypes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_union_deserialize_gtypes ()
+;;; gdk_content_formats_union_deserialize_gtypes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union_deserialize_gtypes"
@@ -534,7 +492,7 @@
 (export 'content-formats-union-deserialize-gtypes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_union_serialize_mime_types ()
+;;; gdk_content_formats_union_serialize_mime_types
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union_serialize_mime_types"
@@ -555,7 +513,7 @@
 (export 'content-formats-union-serialize-mime-types)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_union_deserialize_mime_types ()
+;;; gdk_content_formats_union_deserialize_mime_types
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union_deserialize_mime_types"

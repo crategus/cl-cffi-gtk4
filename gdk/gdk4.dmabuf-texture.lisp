@@ -2,7 +2,7 @@
 ;;; gdk4.dmabuf-texture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,7 +92,7 @@
 ;;; GdkDmabufTexture
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDmabufTexture" dmabuf-texture
+(gobject:define-gobject "GdkDmabufTexture" dmabuf-texture
   (:superclass texture
    :export t
    :interfaces ("GdkPaintable"
@@ -122,7 +122,7 @@
 ;;; GdkDmabufTextureBuilder
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDmabufTextureBuilder" dmabuf-texture-builder
+(gobject:define-gobject "GdkDmabufTextureBuilder" dmabuf-texture-builder
   (:superclass g:object
    :export t
    :interfaces ()

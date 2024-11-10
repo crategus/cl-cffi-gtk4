@@ -2,7 +2,7 @@
 ;;; gdk4.display.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,7 +99,7 @@
 ;;; GdkDisplay
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDisplay" display
+(gobject:define-gobject "GdkDisplay" display
   (:superclass g:object
    :export t
    :interfaces nil
@@ -148,45 +148,44 @@
       @begin{pre}
 lambda (display is-error)    :run-last
       @end{pre}
-      Emitted when the connection to the windowing system for @arg{display} is
-      closed.
       @begin[code]{table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
        @entry[is-error]{The boolean that is @em{true} if @arg{display} was
          closed due to an error.}
       @end{table}
+      Emitted when the connection to the windowing system for @arg{display} is
+      closed.
     @subheading{The \"opened\" signal}
       @begin{pre}
 lambda (display)   :run-last
       @end{pre}
-      Emitted when the connection to the windowing system for @arg{display} is
-      opened.
       @begin[code]{table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
       @end{table}
+      Emitted when the connection to the windowing system for @arg{display} is
+      opened.
     @subheading{The \"seat-added\" signal}
       @begin{pre}
 lambda (display seat)    :run-last
       @end{pre}
-      Emitted whenever a new seat is made known to the windowing system.
       @begin[code]{table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
         @entry[seat]{The @class{gdk:seat} object that was just added.}
       @end{table}
+      Emitted whenever a new seat is made known to the windowing system.
     @subheading{The \"seat-removed\" signal}
       @begin{pre}
 lambda (display seat)    :run-last
       @end{pre}
-      Emitted whenever a seat is removed by the windowing system.
       @begin[code]{table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
         @entry[seat]{The @class{gdk:seat} object that was just removed.}
       @end{table}
-  @end{dictionary}
+      Emitted whenever a seat is removed by the windowing system.
   @subheading{The \"setting-changed\" signal}
     @begin{pre}
 lambda (display setting)    :run-last
@@ -196,6 +195,7 @@ lambda (display setting)    :run-last
         emitted.}
       @entry[setting]{The string with the name of the setting that changed.}
     @end{table}
+  @end{dictionary}
   @see-slot{gdk:display-composited}
   @see-slot{gdk:display-dmabuf-formats}
   @see-slot{gdk:display-input-shapes}
@@ -247,13 +247,13 @@ lambda (display setting)    :run-last
 (setf (documentation (liber:slot-documentation "dmabuf-formats" 'display) t)
  "The @code{dmabuf-formats} property of type @class{gdk:dmabuf-formats} (Read)
   @br{}
-  The dma-buf formats that are supported on the display. Since 4.14")
+  The DmaBuf formats that are supported on the display. Since 4.14")
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'display-dmabuf-formats)
       "Accessor"
       (documentation 'display-dmabuf-formats 'function)
- "@version{2024-7-11}
+ "@version{2024-11-5}
   @syntax{(gdk:display-dmabuf-formats object) => formats}
   @argument[object]{a @class{gdk:display} object}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
@@ -264,8 +264,9 @@ lambda (display setting)    :run-last
   will then initialize them if they are not yet.
 
   The formats returned by this function can be used for negotiating buffer
-  formats with producers such as v4l, pipewire or GStreamer. To learn more
-  about dma-bufs, see the @class{gdk:dmabuf-texture-builder} documentation.
+  formats with producers such as @code{v4l}, @code{pipewire} or
+  @code{GStreamer}. To learn more about dma-buf formats, see the
+  @class{gdk:dmabuf-texture-builder} documentation.
 
   Since 4.14
   @see-class{gdk:display}
@@ -396,7 +397,7 @@ lambda (display setting)    :run-last
   @begin{pre}
 (gdk:display-manager-default-display (gdk:display-manager-get))
   @end{pre}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:display-default)
 => #<GDK:DISPLAY {1007501013@}>
@@ -404,7 +405,7 @@ lambda (display setting)    :run-last
     (gdk:display-manager-default-display (gdk:display-manager-get)))
 => T
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gdk:display}
   @see-function{gdk:display-manager-get}
   @see-function{gdk:display-manager-default-display}")
@@ -518,7 +519,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_close" display-close) :void
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{#2024-11-5}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
     Closes the connection to the windowing system for the given display.
@@ -828,7 +829,7 @@ lambda (display setting)    :run-last
   @begin{short}
     Retrieves a desktop-wide setting such as double-click time for the display.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((display (gdk:display-default)))
   (gdk:display-setting display \"gtk-double-click-time\" \"gint\"))
@@ -911,7 +912,7 @@ lambda (display setting)    :run-last
   On US keyboards, the shift key changes the keyboard level, and there are no
   groups. A group switch key might convert a keyboard between Hebrew to English
   modes, for example.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:display-map-keyval (gdk:display-default) (char-code #\a))
 => ((65 0 0) (65 0 3) (65 0 15) (65 0 2))
@@ -1094,13 +1095,12 @@ lambda (display setting)    :run-last
 #+gtk-4-6
 (defun display-create-gl-context (display)
  #+liber-documentation
- "@version{#2024-1-7}
+ "@version{#2024-11-5}
   @argument[display]{a @class{gdk:display} object}
   @return{The newly created @class{gdk:gl-context} object.}
   @begin{short}
     Creates a new @class{gdk:gl-context} object for the display.
   @end{short}
-
   The context is disconnected from any particular surface and cannot be used to
   draw to any surface. It can only be used to draw to non-surface framebuffers
   like textures.

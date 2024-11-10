@@ -2,7 +2,7 @@
 ;;; gdk4.clipboard.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,7 +84,7 @@
 ;;; GdkClipboard
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkClipboard" clipboard
+(gobject:define-gobject "GdkClipboard" clipboard
   (:superclass g:object
    :export t
    :interfaces nil
@@ -128,11 +128,11 @@
       @begin{pre}
 lambda (clipboard)    :run-last
       @end{pre}
-      The signal is emitted when the clipboard changes ownership.
       @begin[code]{table}
        @entry[clipboard]{The @class{gdk:clipboard} object on which the signal
          was emitted.}
       @end{table}
+      The signal is emitted when the clipboard changes ownership.
   @end{dictionary}
   @see-slot{gdk:clipboard-content}
   @see-slot{gdk:clipboard-display}
@@ -169,7 +169,7 @@ lambda (clipboard)    :run-last
   @class{gdk:content-provider} object currently set on @arg{clipboard}. If the
   clipboard is empty or its contents are not owned by the current process,
   @code{nil} will be returned.
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The @slot[gdk:clipboard]{content} property is not writeable. Use the
     @fun{gdk:clipboard-set-content} function to set the content provider.
   @end{dictionary}
@@ -669,7 +669,7 @@ lambda (clipboard)    :run-last
   @begin{short}
     Sets the clipboard to contain the given @arg{value}.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function intializes a @symbol{g:value} instance  of the given
     @arg{gtype}, stores @arg{value} in the @symbol{g:value} instance and calls
     the @fun{gdk:clipboard-set-value} function.
@@ -712,7 +712,7 @@ lambda (clipboard)    :run-last
   @argument[clipoboard]{a @class{gdk:clipboard} object}
   @argument[gvalue]{a @symbol{g:value} instance}
   @short{Sets the clipboard to contain the given @arg{gvalue}.}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     This function is called from the @fun{gdk:clipboard-set} function to store
     the @symbol{g:value} instance into the clipboard.
   @end{dictionary}

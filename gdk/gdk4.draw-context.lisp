@@ -2,7 +2,7 @@
 ;;; gdk4.draw-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -42,10 +42,10 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_draw_context_begin_frame
-;;;     gdk_draw_context_end_frame
-;;;     gdk_draw_context_is_in_frame
-;;;     gdk_draw_context_get_frame_region
+;;;     gdk_draw_context_begin_frame                        Deprecated 4.16
+;;;     gdk_draw_context_end_frame                          Deprecated 4.16
+;;;     gdk_draw_context_is_in_frame                        Deprecated 4.16
+;;;     gdk_draw_context_get_frame_region                   Deprecated 4.16
 ;;;
 ;;; Properties
 ;;;
@@ -66,7 +66,7 @@
 ;;; GdkDrawContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDrawContext" draw-context
+(gobject:define-gobject "GdkDrawContext" draw-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -150,12 +150,16 @@
   @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_begin_frame ()
+;;; gdk_draw_context_begin_frame                            Deprecated 4.16
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_draw_context_begin_frame" draw-context-begin-frame) :void
+(cffi:defcfun ("gdk_draw_context_begin_frame" %draw-context-begin-frame) :void
+  (context (g:object draw-context))
+  (region (:pointer (:struct cairo:region-t))))
+
+(defun draw-context-begin-frame (context region)
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2024-11-7}
   @argument[context]{a @class{gdk:draw-context} object used to draw the frame}
   @argument[region]{a @symbol{cairo:region-t} instance with the minimum region
     that should be drawn}
@@ -163,7 +167,6 @@
     Indicates that you are beginning the process of redrawing @arg{region} on
     the surface of @arg{context}.
   @end{short}
-
   Calling this function begins a drawing operation using the context on the
   surface that the context was created from. The actual requirements and
   guarantees for the drawing operation vary for different implementations of
@@ -184,6 +187,11 @@
   @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
   functions via the use of @class{gsk:renderer} objects, so application code
   does not need to call these functions explicitly.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.16. Drawing directly to the surface is
+    no longer recommended. Use the @class{gsk:render-node} and
+    @class{gsk:renderer} API.
+  @end{dictionary}
   @see-class{gdk:draw-context}
   @see-symbol{cairo:region-t}
   @see-class{gdk:cairo-context}
@@ -191,18 +199,23 @@
   @see-class{gsk:renderer}
   @see-function{gdk:draw-context-frame-region}
   @see-function{gdk:draw-context-end-frame}"
-  (context (g:object draw-context))
-  (region (:pointer (:struct cairo:region-t))))
+  #+(and gtk-4-16 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CONTEXT-BEGIN-FRAME is deprecated since 4.16"))
+  (%draw-context-begin-frame context region))
 
 (export 'draw-context-begin-frame)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_end_frame ()
+;;; gdk_draw_context_end_frame                              Deprecated 4.16
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_draw_context_end_frame" draw-context-end-frame) :void
+(cffi:defcfun ("gdk_draw_context_end_frame" %draw-context-end-frame) :void
+  (context (g:object draw-context)))
+
+(defun draw-context-end-frame (context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2024-11-7}
   @argument[context]{a @class{gdk:draw-context} object}
   @begin{short}
     Ends a drawing operation started with the @fun{gdk:draw-context-begin-frame}
@@ -213,19 +226,31 @@
   When using a @class{gdk:gl-context} object, this function may call the
   @code{glFlush()} function implicitly before returning. It is not recommended
   to call the @code{glFlush()} function explicitly before calling this function.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.16. Drawing directly to the surface is
+    no longer recommended. Use the @class{gsk:render-node} and
+    @class{gsk:renderer} API.
+  @end{dictionary}
   @see-class{gdk:draw-context}
   @see-function{gdk:draw-context-begin-frame}"
-  (context (g:object draw-context)))
+  #+(and gtk-4-16 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CONTEXT-END-FRAME is deprecated since 4.16"))
+  (%draw-context-end-frame context))
 
 (export 'draw-context-end-frame)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_is_in_frame ()
+;;; gdk_draw_context_is_in_frame                            Deprecated 4.16
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_draw_context_is_in_frame" draw-context-is-in-frame) :boolean
+(cffi:defcfun ("gdk_draw_context_is_in_frame" %draw-context-is-in-frame)
+    :boolean
+  (context (g:object draw-context)))
+
+(defun draw-context-is-in-frame (context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2024-11-7}
   @argument[context]{a @class{gdk:draw-context} object}
   @return{@em{True} if the draw context is between the
   @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
@@ -237,21 +262,29 @@
   @end{short}
   In this situation, drawing commands may be effecting the contents of a
   surface of the context.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.16. Drawing directly to the surface is
+    no longer recommended. Use the @class{gsk:render-node} and
+    @class{gsk:renderer} API.
+  @end{dictionary}
   @see-class{gdk:draw-context}
   @see-function{gdk:draw-context-begin-frame}
   @see-function{gdk:draw-context-end-frame}"
-  (context (g:object draw-context)))
+  #+(and gtk-4-16 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CONTEXT-IS-IN-FRAME is deprecated since 4.16"))
+  (%draw-context-is-in-frame context))
 
 (export 'draw-context-is-in-frame)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_get_frame_region ()
+;;; gdk_draw_context_get_frame_region                       Deprecated 4.16
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_draw_context_get_frame_region" draw-context-frame-region)
+(cffi:defcfun ("gdk_draw_context_get_frame_region" %draw-context-frame-region)
     (:pointer (:struct cairo:region-t))
  #+liber-documentation
- "@version{2023-8-3}
+ "@version{2023-11-7}
   @argument[context]{a @class{gdk:draw-context} object}
   @return{The @symbol{cairo:region-t} instance or @code{null-pointer} if not
     drawing a frame.}
@@ -266,9 +299,20 @@
   If @arg{context} is not in between calls to the
   @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
   functions, @code{null-pointer} will be returned.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.16. Drawing directly to the surface is
+    no longer recommended. Use the @class{gsk:render-node} and
+    @class{gsk:renderer} API.
+  @end{dictionary}
   @see-class{gdk:draw-context}
   @see-symbol{cairo:region-t}"
   (context (g:object draw-context)))
+
+(defun draw-context-frame-region (context)
+  #+(and gtk-4-16 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CONTEXT-FRAME-REGION is deprecated since 4.16"))
+  (%draw-context-frame-region context))
 
 (export 'draw-context-frame-region)
 

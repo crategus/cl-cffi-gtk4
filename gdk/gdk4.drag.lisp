@@ -2,7 +2,7 @@
 ;;; gdk4.drag.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,7 +87,7 @@
 ;;; GdkDragCancelReason
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkDragCancelReason" drag-cancel-reason
+(gobject:define-genum "GdkDragCancelReason" drag-cancel-reason
   (:export t
    :type-initializer "gdk_drag_cancel_reason_get_type")
   :no-target
@@ -101,7 +101,7 @@
  "@version{2024-5-2}
   @begin{declaration}
     @begin{pre}
-(gobject:define-g-enum \"GdkDragCancelReason\" drag-cancel-reason
+(gobject:define-genum \"GdkDragCancelReason\" drag-cancel-reason
   (:export t
    :type-initializer \"gdk_drag_cancel_reason_get_type\")
   :no-target
@@ -126,7 +126,7 @@
 ;;; GdkDragAction
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkDragAction" drag-action
+(gobject:define-gflags "GdkDragAction" drag-action
   (:export t
    :type-initializer "gdk_drag_action_get_type")
   (:none 0)
@@ -142,7 +142,7 @@
  "@version{2024-7-12}
   @begin{declaration}
     @begin{pre}
-(gobject:define-g-flags \"GdkDragAction\" drag-action
+(gobject:define-gflags \"GdkDragAction\" drag-action
   (:export t
    :type-initializer \"gdk_drag_action_get_type\")
   (:none 0)
@@ -184,7 +184,7 @@
 ;;; GdkDrag
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDrag" drag
+(gobject:define-gobject "GdkDrag" drag
   (:superclass g:object
    :export t
    :interfaces nil
@@ -231,32 +231,32 @@
       @begin{pre}
 lambda (drag reason)    :run-last
       @end{pre}
-      The drag operation was cancelled.
       @begin[code]{table}
         @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
         @entry[reason]{The @symbol{gdk:drag-cancel-reason} value with the
           reason the drag was cancelled.}
       @end{table}
+      The drag operation was cancelled.
     @subheading{The \"dnd-finished\" signal}
       @begin{pre}
 lambda (drag)    :run-last
       @end{pre}
-      The drag operation was finished, the destination finished reading all
-      data. The drag object can now free all miscellaneous data.
       @begin[code]{table}
         @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
       @end{table}
+      The drag operation was finished, the destination finished reading all
+      data. The drag object can now free all miscellaneous data.
     @subheading{The \"drop-performed\" signal}
       @begin{pre}
 lambda (drag)    :run-last
       @end{pre}
-      The drag operation was performed on an accepting client.
       @begin[code]{table}
         @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
       @end{table}
+      The drag operation was performed on an accepting client.
   @end{dictionary}
   @see-slot{gdk:drag-actions}
   @see-slot{gdk:drag-content}

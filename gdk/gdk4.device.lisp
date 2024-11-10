@@ -2,7 +2,7 @@
 ;;; gdk4.device.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -97,7 +97,7 @@
 ;;; GdkInputSource
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkInputSource" input-source
+(gobject:define-genum "GdkInputSource" input-source
   (:export t
    :type-initializer "gdk_input_source_get_type")
   :mouse
@@ -114,7 +114,7 @@
       (liber:symbol-documentation 'input-source)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkInputSource\" input-source
+(gobject:define-genum \"GdkInputSource\" input-source
   (:export t
    :type-initializer \"gdk_input_source_get_type\")
   :mouse
@@ -150,7 +150,7 @@
 ;;; GdkAxisUse
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkAxisUse" axis-use
+(gobject:define-genum "GdkAxisUse" axis-use
   (:export t
    :type-initializer "gdk_axis_use_get_type")
   :ignore
@@ -173,7 +173,7 @@
       (liber:symbol-documentation 'axis-use)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkAxisUse\" gdk-axis-use
+(gobject:define-genum \"GdkAxisUse\" gdk-axis-use
   (:export t
    :type-initializer \"gdk_axis_use_get_type\")
   :ignore
@@ -220,7 +220,7 @@
 ;;; GdkAxisFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkAxisFlags" axis-flags
+(gobject:define-gflags "GdkAxisFlags" axis-flags
   (:export t
    :type-initializer "gdk_axis_flags_get_type")
   (:x        #.(ash 1 1))
@@ -241,7 +241,7 @@
       (liber:symbol-documentation 'axis-flags)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-flags \"GdkAxisFlags\" axis-flags
+(gobject:define-gflags \"GdkAxisFlags\" axis-flags
   (:export t
    :type-initializer \"gdk_axis_flags_get_type\")
   (:x        #.(ash 1 1))
@@ -280,7 +280,7 @@
 ;;; GdkDevice
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDevice" device
+(gobject:define-gobject "GdkDevice" device
   (:superclass g:object
    :export t
    :interfaces nil
@@ -348,25 +348,25 @@
       @begin{pre}
 lambda (device)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[device]{The @class{gdk:device} object that changed.}
+      @end{table}
       The signal is emitted either when the @class{gdk:device} object has
       changed the number of either axes or keys. For example In X this will
       normally happen when the physical device routing events through the
       logical device changes, for example, user switches from the USB mouse to
       a tablet, in that case the logical device will change to reflect the axes
       and keys on the new physical device.
-      @begin[code]{table}
-        @entry[device]{The @class{gdk:device} object that changed.}
-      @end{table}
     @subheading{The \"tool-changed\" signal}
       @begin{pre}
 lambda (device tool)    :run-last
       @end{pre}
-      The signal is emitted on pen/eraser devices whenever tools enter or leave
-      proximity.
       @begin[code]{table}
         @entry[device]{The @class{gdk:device} object that changed.}
         @entry[tool]{The new @class{gdk:device-tool} current device tool.}
       @end{table}
+      The signal is emitted on pen/eraser devices whenever tools enter or leave
+      proximity.
   @end{dictionary}
   @see-slot{gdk:device-caps-lock-state}
   @see-slot{gdk:device-direction}

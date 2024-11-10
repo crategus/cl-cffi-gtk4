@@ -2,7 +2,7 @@
 ;;; gdk4.popup-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; enum GdkAnchorHints
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkAnchorHints" anchor-hints
+(gobject:define-gflags "GdkAnchorHints" anchor-hints
   (:export t
    :type-initializer "gdk_anchor_hints_get_type")
   (:flip-x #.(ash 1 0))
@@ -86,6 +86,33 @@
       "GFlags"
       (liber:symbol-documentation 'anchor-hints)
  "@version{2024-2-17}
+  @begin{declaration}
+(gobject:define-gflags \"GdkAnchorHints\" anchor-hints
+  (:export t
+   :type-initializer \"gdk_anchor_hints_get_type\")
+  (:flip-x #.(ash 1 0))
+  (:flip-y #.(ash 1 1))
+  (:slide-x #.(ash 1 2))
+  (:slide-y #.(ash 1 3))
+  (:resize-x #.(ash 1 4))
+  (:resize-y #.(ash 1 5))
+  (:flip #.(+ (ash 1 0) (ash 1 1)))
+  (:slide #.(+ (ash 1 2) (ash 1 3)))
+  (:resize #.(+ (ash 1 4) (ash 1 5))))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:flip-x]{Allow flipping anchors horizontally.}
+      @entry[:flip-y]{Allow flipping anchors vertically.}
+      @entry[:slide-x]{Allow sliding surface horizontally.}
+      @entry[:slide-y]{Allow sliding surface vertically.}
+      @entry[:resize-x]{Allow resizing surface horizontally.}
+      @entry[:resize-y]{Allow resizing surface vertically.}
+      @entry[:flip]{Allow flipping anchors on both axes.}
+      @entry[:slide]{Allow sliding surface on both axes.}
+      @entry[:resize]{Allow resizing surface on both axes.}
+    @end{table}
+  @end{values}
   @begin{short}
     Positioning hints for aligning a surface relative to a rectangle.
   @end{short}
@@ -102,38 +129,13 @@
 
   In general, when multiple flags are set, flipping should take precedence over
   sliding, which should take precedence over resizing.
-  @begin{pre}
-(gobject:define-g-flags \"GdkAnchorHints\" anchor-hints
-  (:export t
-   :type-initializer \"gdk_anchor_hints_get_type\")
-  (:flip-x #.(ash 1 0))
-  (:flip-y #.(ash 1 1))
-  (:slide-x #.(ash 1 2))
-  (:slide-y #.(ash 1 3))
-  (:resize-x #.(ash 1 4))
-  (:resize-y #.(ash 1 5))
-  (:flip #.(+ (ash 1 0) (ash 1 1)))
-  (:slide #.(+ (ash 1 2) (ash 1 3)))
-  (:resize #.(+ (ash 1 4) (ash 1 5))))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:flip-x]{Allow flipping anchors horizontally.}
-    @entry[:flip-y]{Allow flipping anchors vertically.}
-    @entry[:slide-x]{Allow sliding surface horizontally.}
-    @entry[:slide-y]{Allow sliding surface vertically.}
-    @entry[:resize-x]{Allow resizing surface horizontally.}
-    @entry[:resize-y]{Allow resizing surface vertically.}
-    @entry[:flip]{Allow flipping anchors on both axes.}
-    @entry[:slide]{Allow sliding surface on both axes.}
-    @entry[:resize]{Allow resizing surface on both axes.}
-  @end{table}
   @see-class{gdk:popup-layout}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkPopupLayout
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque popup-layout "GdkPopupLayout"
+(glib:define-gboxed-opaque popup-layout "GdkPopupLayout"
   :type-initializer "gdk_popup_layout_get_type"
   :alloc (%popup-layout-new))
 

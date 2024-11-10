@@ -2,7 +2,7 @@
 ;;; gdk4.content-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,7 +65,7 @@
 ;;; GdkContentProvider
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkContentProvider" content-provider
+(gobject:define-gobject "GdkContentProvider" content-provider
   (:superclass g:object
    :export t
    :interfaces nil
@@ -96,10 +96,10 @@
       @begin{pre}
 lambda (provider)    :run-last
       @end{pre}
-      Emitted whenever the content provided by the provider has changed.
       @begin[code]{table}
         @entry[provider]{The @class{gdk:content-provider} object.}
       @end{table}
+      Emitted whenever the content provided by the provider has changed.
   @end{dictionary}
   @see-class{gdk:content-serializer}
   @see-class{gdk:content-deserializer}")
@@ -108,7 +108,7 @@ lambda (provider)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- content-provider-formats -----------------------------------------------
+;;; --- gdk:content-provider-formats -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'content-provider) t)
@@ -131,7 +131,7 @@ lambda (provider)    :run-last
   @see-class{gdk:content-provider}
   @see-class{gdk:content-formats}")
 
-;;; --- content-provider-storable-formats --------------------------------------
+;;; --- gdk:content-provider-storable-formats ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "storable-formats"
@@ -161,7 +161,7 @@ lambda (provider)    :run-last
   @see-function{gdk:content-provider-formats}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_provider_new_for_value ()
+;;; gdk_content_provider_new_for_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_provider_new_for_value"

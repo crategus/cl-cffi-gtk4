@@ -2,7 +2,7 @@
 ;;; gdk4.display-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 ;;; GdkDisplayManager
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkDisplayManager" display-manager
+(gobject:define-gobject "GdkDisplayManager" display-manager
   (:superclass g:object
    :export t
    :interfaces nil
@@ -97,12 +97,12 @@
       @begin{pre}
 lambda (manager display)    :run-last
       @end{pre}
-      The signal is emitted when a display is opened.
       @begin[code]{table}
         @entry[manager]{The @class{gdk:display-manager} object on which the
           signal is emitted.}
         @entry[display]{The opened @class{gdk:display} object.}
       @end{table}
+      The signal is emitted when a display is opened.
   @end{dictionary}
   @see-slot{gdk:display-manager-default-display}
   @see-class{gdk:display}
@@ -138,12 +138,12 @@ lambda (manager display)    :run-last
   @class{gdk:display} object, or @code{nil} if there is no default display. The
   @setf{gdk:display-manager-default-display} function sets @arg{display}
   as the default display.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:display-manager-default-display (gdk:display-manager-get))
 => #<GDK:DISPLAY {1001F9A233@}>
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gdk:display}
   @see-class{gdk:display-manager}")
 
@@ -162,12 +162,12 @@ lambda (manager display)    :run-last
   When called for the first time, this function consults the @code{GDK_BACKEND}
   environment variable to find out which of the supported GDK backends to use
   in case GDK has been compiled with multiple backends.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:display-manager-get)
 => #<GDK:DISPLAY-MANAGER {1001CFF103@}>
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gdk:display-manager}")
 
 (export 'display-manager-get)

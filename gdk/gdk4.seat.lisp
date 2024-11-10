@@ -2,7 +2,7 @@
 ;;; gdk4.seat.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 ;;; GdkSeatCapabilities
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkSeatCapabilities" seat-capabilities
+(gobject:define-gflags "GdkSeatCapabilities" seat-capabilities
   (:export t
    :type-initializer "gdk_seat_capabilities_get_type")
   (:none 0)
@@ -89,7 +89,7 @@
       (liber:symbol-documentation 'seat-capabilities)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-flags \"GdkSeatCapabilities\" seat-capabilities
+(gobject:define-gflags \"GdkSeatCapabilities\" seat-capabilities
   (:export t
    :type-initializer \"gdk_seat_capabilities_get_type\")
   (:none 0)
@@ -122,7 +122,7 @@
 ;;; GdkSeat
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkSeat" seat
+(gobject:define-gobject "GdkSeat" seat
   (:superclass g:object
    :export t
    :interfaces nil
@@ -143,46 +143,46 @@
       @begin{pre}
 lambda (seat device)    :run-last
       @end{pre}
-      The signal is emitted when a new input device is related to this seat.
       @begin[code]{table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[device]{The newly added @class{gdk:device} object.}
       @end{table}
+      The signal is emitted when a new input device is related to this seat.
     @subheading{The \"device-removed\" signal}
       @begin{pre}
 lambda (seat device)    :run-last
       @end{pre}
-      The signal is emitted when an input device is removed, for example,
-      unplugged.
       @begin[code]{table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[device]{The just removed @class{gdk:device} object.}
       @end{table}
+      The signal is emitted when an input device is removed, for example,
+      unplugged.
     @subheading{The \"tool-added\" signal}
       @begin{pre}
 lambda (seat tool)    :run-last
       @end{pre}
-      The signal is emitted whenever a new tool is made known to the seat.
-      The tool may later be assigned to a device, that is on proximity with
-      a tablet. The device will emit the @code{\"tool-changed\"} signal
-      accordingly. A same tool may be used by several devices.
       @begin[code]{table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[tool]{The new @class{gdk:device-tool} object known to the seat.}
       @end{table}
+      The signal is emitted whenever a new tool is made known to the seat.
+      The tool may later be assigned to a device, that is on proximity with
+      a tablet. The device will emit the @code{\"tool-changed\"} signal
+      accordingly. A same tool may be used by several devices.
     @subheading{The \"tool-removed\" signal}
       @begin{pre}
 lambda (seat tool)    :run-last
       @end{pre}
-      The signal is emitted whenever a tool is no longer known to this seat.
       @begin[code]{table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[tool]{The just removed @class{gdk:device-tool} object.}
       @end{table}
+      The signal is emitted whenever a tool is no longer known to this seat.
   @end{dictionary}
   @see-slot{gdk:seat-display}
   @see-class{gdk:display}

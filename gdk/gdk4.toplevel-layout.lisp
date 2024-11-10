@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,7 +62,7 @@
 ;;; GdkToplevelLayout
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque toplevel-layout "GdkToplevelLayout"
+(glib:define-gboxed-opaque toplevel-layout "GdkToplevelLayout"
   :type-initializer "gdk_toplevel_layout_get_type"
   :alloc (%toplevel-layout-new))
 
@@ -72,7 +72,7 @@
       (documentation 'toplevel-layout 'type)
  "@version{2024-1-9}
   @begin{declaration}
-(glib:define-g-boxed-opaque toplevel-layout \"GdkToplevelLayout\"
+(glib:define-gboxed-opaque toplevel-layout \"GdkToplevelLayout\"
   :type-initializer \"gdk_toplevel_layout_get_type\"
   :alloc (%toplevel-layout-new))
   @end{declaration}
@@ -113,11 +113,11 @@
 (export 'toplevel-layout-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_ref ()                              not needed
+;;; gdk_toplevel_layout_ref                                 not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_layout_unref ()                            not needed
+;;; gdk_toplevel_layout_unref                               not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------

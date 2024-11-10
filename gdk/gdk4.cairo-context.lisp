@@ -2,7 +2,7 @@
 ;;; gdk4.cairo-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,7 +46,7 @@
 ;;; GdkCairoContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GdkCairoContext" cairo-context
+(gobject:define-gobject "GdkCairoContext" cairo-context
   (:superclass draw-context
    :export t
    :interfaces nil
@@ -68,7 +68,7 @@
   @see-function{gdk:surface-create-cairo-context}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_context_cairo_create ()
+;;; gdk_cairo_context_cairo_create
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)

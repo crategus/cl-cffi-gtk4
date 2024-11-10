@@ -2,11 +2,11 @@
 ;;; gdk4.drag-surface.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -102,12 +102,7 @@
 ;;; GdkDragSurface
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: GdkDragSurface inherit from GdkSurface. We have changed the
-;; implementation of define-g-interface to allow other prerequistes as
-;; g:object. But when we define gdk:surface as prerequiste for gdk:drag-surface
-;; the test gdk-cairo-context-cairo-create fails. Why?
-
-(gobject:define-g-interface "GdkDragSurface" drag-surface
+(gobject:define-ginterface "GdkDragSurface" drag-surface
   (:superclass g:object
    :export t
    :type-initializer "gdk_drag_surface_get_type")
@@ -117,16 +112,21 @@
 (setf (liber:alias-for-class 'drag-surface)
       "Interface"
       (documentation 'drag-surface 'type)
- "@version{2023-11-4}
+ "@version{2024-11-7}
   @begin{short}
     The @class{gdk:drag-surface} interface is an interface for surfaces used
     during DND.
   @end{short}
-  @begin[Signals]{dictionary}
+  @begin[Signal Details]{dictionary}
     @subheading{The \"compute-size\" signal}
       @begin{pre}
 lambda (surface size)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[surface]{The @class{gdk:drag-surface} object.}
+        @entry[size]{The @symbol{gdk:drag-surface-size} instance with the size
+          of the drag surface.}
+      @end{table}
       Emitted when the size for the surface needs to be computed, when it is
       present. This signal will normally be emitted during the native surface
       layout cycle when the surface size needs to be recomputed. It is the
@@ -135,18 +135,14 @@ lambda (surface size)    :run-last
       @symbol{gdk:drag-surface-size} instance that is passed to the signal
       handler, using the @fun{gdk:drag-surface-size-set-size} function. Failing
       to set a size so will result in an arbitrary size being used as a result.
-      @begin[code]{table}
-        @entry[surface]{The @class{gdk:drag-surface} object.}
-        @entry[size]{The @symbol{gdk:drag-surface-size} instance with the size
-          of the drag surface.}
-      @end{table}
+      Since 4.12
   @end{dictionary}
   @see-class{gdk:surface}
   @see-class{gdk:drag}
   @see-class{gdk:drop}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_surface_present ()
+;;; gdk_drag_surface_present
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_surface_present" drag-surface-present) :boolean

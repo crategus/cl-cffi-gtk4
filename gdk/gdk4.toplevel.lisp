@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -90,7 +90,7 @@
 ;;; GdkToplevelState
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GdkToplevelState" toplevel-state
+(gobject:define-gflags "GdkToplevelState" toplevel-state
   (:export t
    :type-initializer "gdk_toplevel_state_get_type")
   (:minimized #.(ash 1 0))
@@ -116,7 +116,7 @@
       (liber:symbol-documentation 'toplevel-state)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-flags \"GdkToplevelState\" toplevel-state
+(gobject:define-gflags \"GdkToplevelState\" toplevel-state
   (:export t
    :type-initializer \"gdk_toplevel_state_get_type\")
   (:minimized #.(ash 1 0))
@@ -170,7 +170,7 @@
 ;;; GdkFullscreenMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkFullscreenMode" fullscreen-mode
+(gobject:define-genum "GdkFullscreenMode" fullscreen-mode
   (:export t
    :type-initializer "gdk_fullscreen_mode_get_type")
   (:on-current-monitor 0)
@@ -182,7 +182,7 @@
       (liber:symbol-documentation 'fullscreen-mode)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkFullscreenMode\" fullscreen-mode
+(gobject:define-genum \"GdkFullscreenMode\" fullscreen-mode
   (:export t
    :type-initializer \"gdk_fullscreen_mode_get_type\")
   (:on-current-monitor 0)
@@ -204,7 +204,7 @@
 ;;; GdkSurfaceEdge
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkSurfaceEdge" surface-edge
+(gobject:define-genum "GdkSurfaceEdge" surface-edge
   (:export t
    :type-initializer "gdk_surface_edge_get_type")
   (:north-west 0)
@@ -222,7 +222,7 @@
       (liber:symbol-documentation 'surface-edge)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkSurfaceEdge\" surface-edge
+(gobject:define-genum \"GdkSurfaceEdge\" surface-edge
   (:export t
    :type-initializer \"gdk_surface_edge_get_type\")
   (:north-west 0)
@@ -256,7 +256,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
-(gobject:define-g-enum "GdkTitlebarGesture" titlebar-gesture
+(gobject:define-genum "GdkTitlebarGesture" titlebar-gesture
   (:export t
    :type-initializer "gdk_titlebar_gesture_get_type")
   (:double-click 0)
@@ -269,7 +269,7 @@
       (liber:symbol-documentation 'titlebar-gesture)
  "@version{2024-7-12}
   @begin{declaration}
-(gobject:define-g-enum \"GdkTitlebarGesture\" titlebar-gesture
+(gobject:define-genum \"GdkTitlebarGesture\" titlebar-gesture
   (:export t
    :type-initializer \"gdk_titlebar_gesture_get_type\")
   (:double-click 0)
@@ -296,7 +296,7 @@
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GdkToplevel" toplevel
+(gobject:define-ginterface "GdkToplevel" toplevel
   (:superclass g:object
    :export t
    :type-initializer "gdk_toplevel_get_type")
@@ -347,6 +347,10 @@
       @begin{pre}
 lambda (toplevel size)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[toplevel]{The @class{gdk:toplevel} object.}
+        @entry[size]{The @symbol{gdk:toplevel-size} instance.}
+      @end{table}
       Compute the desired size of the toplevel, given the information passed
       via the @symbol{gdk:toplevel-size} instance. It will normally be emitted
       during or after the @fun{gdk:toplevel-present} function, depending on the
@@ -355,10 +359,6 @@ lambda (toplevel size)    :run-last
       changing the configuration. It is the responsibility of the toplevel user
       to handle this signal. Failing to do so will result in an arbitrary size
       being used as a result.
-      @begin[code]{table}
-        @entry[toplevel]{The @class{gdk:toplevel} object.}
-        @entry[size]{The @symbol{gdk:toplevel-size} instance.}
-      @end{table}
   @end{dictionary}
   @see-slot{gdk:toplevel-decorated}
   @see-slot{gdk:toplevel-deletable}
