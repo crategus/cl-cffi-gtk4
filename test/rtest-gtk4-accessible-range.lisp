@@ -34,14 +34,17 @@
 
 ;;;     gtk_accessible_range_set_current_value
 
-;; TODO: Windows does not support this function
+;; FIXME: This function is not exported from the C library. The C function
+;; does nothing and returns TRUE. Consider to implement the virtual function
+;; for the interface from the Lisp side.
 
-#-windows
+#+nil
 (test gtk-accessible-range-set-current-value
   (let ((range (make-instance 'gtk:range)))
     (is (= 0 (gtk:range-value range)))
+    #+nil
     (is-false (gtk:accessible-range-set-current-value range 100))
     (is (= 0 (gtk:range-value range)))
     (is (= 1 (g:object-ref-count range)))))
 
-;;; 2024-11-5
+;;; 2024-11-10

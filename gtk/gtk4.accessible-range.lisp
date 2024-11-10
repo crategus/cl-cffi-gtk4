@@ -42,6 +42,10 @@
 
 (in-package :gtk)
 
+;;; ----------------------------------------------------------------------------
+;;; GtkAccessibleRange
+;;; ----------------------------------------------------------------------------
+
 (gobject:define-ginterface "GtkAccessibleRange" accessible-range
   (:superclass accessible
    :export t
@@ -87,6 +91,11 @@
 ;;; gtk_accessible_range_set_current_value                  Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: This function is not exported from the C library. The C function
+;; does nothing and returns TRUE. Consider to implement the virtual function
+;; for the interface from the Lisp side.
+
+#+nil
 (defun accessible-range-set-current-value (accessible value)
  #+liber-documentation
  "@version{#2024-11-5}
@@ -99,11 +108,12 @@
 
   Since 4.10
   @see-class{gtk:accessible-range}"
-  (cffi:foreign-funcall "gtk_accessible_range_set_current_value"
+  (cffi:foreign-funcall "gtk_accessible_range_default_set_current_value"
                         (g:object accessible-range) accessible
                         :double (coerce value 'double-float)
                         :boolean))
 
+#+nil
 (export 'accessible-range-set-current-value)
 
 ;;; --- End of file gtk4.accessible-range.lisp ---------------------------------
