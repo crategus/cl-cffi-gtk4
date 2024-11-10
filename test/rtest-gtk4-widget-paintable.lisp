@@ -50,14 +50,28 @@
          (paintable (gtk:widget-paintable-new widget)))
     (is (typep (gtk:widget-paintable-widget paintable) 'gtk:label))
     (is (typep (setf (gtk:widget-paintable-widget paintable) button) 'gtk:button))
-    (is (typep (gtk:widget-paintable-widget paintable) 'gtk:button))))
+    (is (typep (gtk:widget-paintable-widget paintable) 'gtk:button))
+
+    ;; FIXME: We have to remove the widget from the paintable to avoid
+    ;; an error with the memory management
+    (is-false (setf (gtk:widget-paintable-widget paintable) nil))
+
+    (is (= 1 (g:object-ref-count button)))
+    (is (= 1 (g:object-ref-count widget)))
+    (is (= 1 (g:object-ref-count paintable)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_widget_paintable_new
 
 (test gtk-widget-paintable-new
-  (is (typep (gtk:widget-paintable-new (make-instance 'gtk:button))
-             'gdk:paintable)))
+  (let (paintable)
+    (is (typep (setf paintable
+                     (gtk:widget-paintable-new (make-instance 'gtk:button)))
+               'gtk:widget-paintable))
+    ;; FIXME: We have to remove the widget from the paintable to avoid
+    ;; an error with the memory management
+    (is-false (setf (gtk:widget-paintable-widget paintable) nil))
+    (is (= 1 (g:object-ref-count paintable)))))
 
-;;; 2024-9-20
+;;; 2024-11-2

@@ -2,7 +2,7 @@
 ;;; gtk4.widget-paintable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkWidgetPaintable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkWidgetPaintable" widget-paintable
+(gobject:define-gobject "GtkWidgetPaintable" widget-paintable
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable")
@@ -78,7 +78,7 @@
   @begin{short}
     The @class{gtk:widget-paintable} object is an implementation of the
     the @class{gdk:paintable} interface that allows displaying the contents of
-    a @class{gtk:widget} widget.
+    a @class{gtk:widget} object.
   @end{short}
 
   The @class{gtk:widget-paintable} object will also take care of the widget not
@@ -122,7 +122,7 @@
   @syntax{(gtk:widget-paintable-widget object) => widget}
   @syntax{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
-  @argument[widget]{a @class{gtk:widget} widget to observe or @code{nil}}
+  @argument[widget]{a @class{gtk:widget} object to observe or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:widget-paintable]{widget} slot of the
     @class{gtk:widget-paintable} object.
@@ -137,10 +137,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_paintable_new" widget-paintable-new)
-    (g:object gdk:paintable)
+    (g:object widget-paintable :already-referenced)
  #+liber-documentation
- "@version{2023-8-31}
-  @argument[widget]{a @class{gtk:widget} widget or @code{nil}}
+ "@version{2024-11-2}
+  @argument[widget]{a @class{gtk:widget} object or @code{nil}}
   @return{The new @class{gtk:widget-paintable} object.}
   @short{Creates a new paintable widget observing the given @arg{widget}.}
   @see-class{gtk:widget-paintable}

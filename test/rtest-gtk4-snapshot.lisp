@@ -45,59 +45,65 @@
 ;;;     gtk_snapshot_new
 
 (test gtk-snapshot-new
-  (is (typep (gtk:snapshot-new) 'gtk:snapshot)))
+  (let (snapshot)
+    (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
+    (is (= 1 (g:object-ref-count snapshot)))))
 
-;;;     gtk_snapshot_append_border
-;;;     gtk_snapshot_append_cairo
-;;;     gtk_snapshot_append_color
-;;;     gtk_snapshot_append_conic_gradient
-;;;     gtk_snapshot_append_fill                           Since 4.14 unstable
-;;;     gtk_snapshot_append_inset_shadow
-;;;     gtk_snapshot_append_layout
-;;;     gtk_snapshot_append_linear_gradient
-;;;     gtk_snapshot_append_node
-;;;     gtk_snapshot_append_outset_shadow
-;;;     gtk_snapshot_append_radial_gradient
-;;;     gtk_snapshot_append_repeating_linear_gradient
-;;;     gtk_snapshot_append_repeating_radial_gradient
-;;;     gtk_snapshot_append_scaled_texture                 Since 4.10
-;;;     gtk_snapshot_append_stroke                         Since 4.14 unstable
-;;;     gtk_snapshot_append_texture
-;;;     gtk_snapshot_free_to_node
-;;;     gtk_snapshot_free_to_paintable
-;;;     gtk_snapshot_gl_shader_pop_texture
-;;;     gtk_snapshot_perspective
-;;;     gtk_snapshot_pop
-;;;     gtk_snapshot_push_blend
-;;;     gtk_snapshot_push_blur
-;;;     gtk_snapshot_push_clip
-;;;     gtk_snapshot_push_color_matrix
-;;;     gtk_snapshot_push_cross_fade
-;;;     gtk_snapshot_push_debug
-;;;     gtk_snapshot_push_fill                             Since 4.14 unstable
-;;;     gtk_snapshot_push_gl_shader
-;;;     gtk_snapshot_push_mask                             Since 4.10
-;;;     gtk_snapshot_push_opacity
-;;;     gtk_snapshot_push_repeat
-;;;     gtk_snapshot_push_rounded_clip
-;;;     gtk_snapshot_push_shadow
-;;;     gtk_snapshot_push_stroke                           Since 4.14 unstable
-;;;     gtk_snapshot_render_background                     Deprecated 4.10
-;;;     gtk_snapshot_render_focus                          Deprecated 4.10
-;;;     gtk_snapshot_render_frame                          Deprecated 4.10
-;;;     gtk_snapshot_render_insertion_cursor               Deprecated 4.10
-;;;     gtk_snapshot_render_layout                         Deprecated 4.10
-;;;     gtk_snapshot_restore
-;;;     gtk_snapshot_rotate
-;;;     gtk_snapshot_rotate_3d
-;;;     gtk_snapshot_save
-;;;     gtk_snapshot_scale
-;;;     gtk_snapshot_scale_3d
 ;;;     gtk_snapshot_to_node
 ;;;     gtk_snapshot_to_paintable
+;;;     gtk_snapshot_free_to_node
+;;;     gtk_snapshot_free_to_paintable
+;;;
+;;;     gtk_snapshot_push_opacity
+;;;     gtk_snapshot_push_color_matrix
+;;;     gtk_snapshot_push_repeat
+;;;     gtk_snapshot_push_clip
+;;;     gtk_snapshot_push_rounded_clip
+;;;     gtk_snapshot_push_cross_fade
+;;;     gtk_snapshot_push_blend
+;;;     gtk_snapshot_push_blur
+;;;     gtk_snapshot_push_shadow
+;;;     gtk_snapshot_push_debug
+;;;     gtk_snapshot_push_gl_shader                        Deprecated 4.16
+;;;     gtk_snapshot_push_mask                             Since 4.10
+;;;     gtk_snapshot_push_fill                             Since 4.14
+;;;     gtk_snapshot_push_stroke                           Since 4.14
+;;;     gtk_snapshot_pop
+;;;     gtk_snapshot_gl_shader_pop_texture                 Deprecated 4.16
+;;;
+;;;     gtk_snapshot_save
+;;;     gtk_snapshot_restore
 ;;;     gtk_snapshot_transform
 ;;;     gtk_snapshot_transform_matrix
 ;;;     gtk_snapshot_translate
 ;;;     gtk_snapshot_translate_3d
+;;;     gtk_snapshot_rotate
+;;;     gtk_snapshot_rotate_3d
+;;;     gtk_snapshot_scale
+;;;     gtk_snapshot_scale_3d
+;;;     gtk_snapshot_perspective
+;;;
+;;;     gtk_snapshot_append_node
+;;;     gtk_snapshot_append_cairo
+;;;     gtk_snapshot_append_texture
+;;;     gtk_snapshot_append_color
+;;;     gtk_snapshot_append_layout
+;;;     gtk_snapshot_append_linear_gradient
+;;;     gtk_snapshot_append_repeating_linear_gradient
+;;;     gtk_snapshot_append_conic_gradient
+;;;     gtk_snapshot_append_border
+;;;     gtk_snapshot_append_inset_shadow
+;;;     gtk_snapshot_append_outset_shadow
+;;;     gtk_snapshot_append_radial_gradient
+;;;     gtk_snapshot_append_repeating_radial_gradient
+;;;     gtk_snapshot_append_scaled_texture                 Since 4.10
+;;;     gtk_snapshot_append_fill                           Since 4.14
+;;;     gtk_snapshot_append_stroke                         Since 4.14
+;;;
+;;;     gtk_snapshot_render_insertion_cursor               Deprecated 4.10
+;;;     gtk_snapshot_render_background                     Deprecated 4.10
+;;;     gtk_snapshot_render_frame                          Deprecated 4.10
+;;;     gtk_snapshot_render_focus                          Deprecated 4.10
+;;;     gtk_snapshot_render_layout                         Deprecated 4.10
 
-;;; 2024-7-4
+;;; 2024-11-2

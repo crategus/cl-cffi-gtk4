@@ -2,7 +2,7 @@
 ;;; gtk4.adjustment.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,7 +80,7 @@
 
 (in-package :gtk)
 
-(gobject:define-g-object-class "GtkAdjustment" adjustment
+(gobject:define-gobject "GtkAdjustment" adjustment
   (:superclass g:initially-unowned
    :export t
    :interfaces nil
@@ -124,21 +124,21 @@
       @begin{pre}
 lambda (adjustment)    :no-recurse
       @end{pre}
-      Emitted when one or more of the adjustment properties have been changed,
-      other than the @code{value} property.
       @begin[code]{table}
         @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
       @end{table}
+      Emitted when one or more of the adjustment properties have been changed,
+      other than the @code{value} property.
     @subheading{The \"value-changed\" signal}
       @begin{pre}
 lambda (adjustment)    :no-recurse
       @end{pre}
-      Emitted when the @code{value} property of the adjustment has been changed.
       @begin[code]{table}
         @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
       @end{table}
+      Emitted when the @code{value} property of the adjustment has been changed.
   @end{dictionary}
   @see-constructor{gtk:adjustment-new}
   @see-slot{gtk:adjustment-lower}
