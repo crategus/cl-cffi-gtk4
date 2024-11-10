@@ -256,7 +256,8 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_widget_in_destruction
-;;;     gtk_widget_unparent
+
+
 ;;;     gtk_widget_show
 ;;;     gtk_widget_hide
 
@@ -353,8 +354,47 @@
 
 ;;;     gtk_widget_add_tick_callback
 ;;;     gtk_widget_remove_tick_callback
+
 ;;;     gtk_widget_size_allocate
+
+;; TODO: Allocation of baseline does not work in this example
+
+(test gtk-widget-size-allocate
+  (let ((box (gtk:center-box-new))
+        (allocation (gdk:rectangle-new :width 200 :height 100)))
+    ;; No size allocated
+    (is (= 0 (gtk:widget-width box)))
+    (is (= 0 (gtk:widget-height box)))
+    (is (= -1 (gtk:widget-baseline box)))
+    ;; Allocate size
+    (is-false (gtk:widget-size-allocate box allocation 10))
+    ;; Check allocated size
+    (is (= 200 (gtk:widget-width box)))
+    (is (= 100 (gtk:widget-height box)))
+    (is (=  -1 (gtk:widget-baseline box)))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count box)))))
+
 ;;;     gtk_widget_allocate
+
+;; TODO: Allocation of baseline does not work in this example
+
+(test gtk-widget-allocate
+  (let ((label (gtk:label-new "text"))
+        (transform (gsk:transform-parse "translate(20,10)")))
+    ;; No size allocated
+    (is (= 0 (gtk:widget-width label)))
+    (is (= 0 (gtk:widget-height label)))
+    (is (= -1 (gtk:widget-baseline label)))
+    ;; Allocate size
+    (is-false (gtk:widget-allocate label 200 100 10 transform))
+    ;; Check allocated size
+    (is (= 200 (gtk:widget-width label)))
+    (is (= 100 (gtk:widget-height label)))
+    (is (= -1 (gtk:widget-baseline label)))
+    ;; Check memory management
+    (is (= 1 (g:object-ref-count label)))))
+
 ;;;     gtk_widget_class_add_shortcut
 ;;;     gtk_widget_class_add_binding
 ;;;     gtk_widget_class_add_binding_signal
@@ -384,6 +424,23 @@
     (is-false (gtk:widget-is-focus button))))
 
 ;;;     gtk_widget_grab_focus
+
+;;;     gtk_widget_set_parent
+;;;     gtk_widget_unparent
+
+(test gtk-widget-set-parent/unparent
+  (let (frame label)
+    (is (typep (setf frame (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf label (gtk:label-new)) 'gtk:label))
+
+    (is-false (gtk:widget-set-parent label frame))
+    (is (eq frame (gtk:widget-parent label)))
+    (is-false (gtk:widget-unparent label))
+    (is-false (gtk:frame-child frame) nil)
+
+    (is (= 1 (g:object-ref-count frame)))
+    (is (= 1 (g:object-ref-count label)))))
+
 ;;;     gtk_widget_get_native
 
 ;;;     gtk_widget_get_ancestor
@@ -398,8 +455,22 @@
     (is-false (gtk:widget-is-ancestor box button))))
 
 ;;;     gtk_widget_translate_coordinates
+
 ;;;     gtk_widget_add_controller
 ;;;     gtk_widget_remove_controller
+
+(test gtk-widget-add/remove-controller
+  (let ((button (gtk:button-new))
+        (controller (gtk:event-controller-key-new)))
+
+    (is-false (gtk:widget-add-controller button controller))
+    (is (eq button (gtk:event-controller-widget controller)))
+    (is-false (gtk:widget-remove-controller button controller))
+    (is-false (gtk:event-controller-widget controller))
+
+    (is (= 1 (g:object-ref-count controller)))
+    (is (= 1 (g:object-ref-count button)))))
+
 ;;;     gtk_widget_get_direction
 ;;;     gtk_widget_set_direction
 ;;;     gtk_widget_get_default_direction
@@ -550,15 +621,37 @@
     (is (string= "in keynav-failed" msg))))
 
 ;;;     gtk_widget_trigger_tooltip_query
+
 ;;;     gtk_widget_get_allocated_width
 ;;;     gtk_widget_get_allocated_height
 ;;;     gtk_widget_get_allocation
 ;;;     gtk_widget_get_allocated_baseline
+
 ;;;     gtk_widget_get_width
 ;;;     gtk_widget_get_height
 ;;;     gtk_widget_get_size
+;;;     gtk_widget_get_baseline
 
 ;;;     gtk_widget_compute_bounds
+
+(test gtk-widget-compute-bounds
+  (let ((label (gtk:label-new "text"))
+        (rect (gdk:rectangle-new :x 20 :y 10 :width 200 :height 100)))
+    (graphene:with-rect (bounds)
+      (is (cffi:pointerp (gtk:widget-compute-bounds label label bounds)))
+      (is (= 0 (graphene:rect-x bounds)))
+      (is (= 0 (graphene:rect-y bounds)))
+      (is (= 0 (graphene:rect-width bounds)))
+      (is (= 0 (graphene:rect-height bounds)))
+
+      (is-false (gtk:widget-size-allocate label rect -1))
+      (is (cffi:pointerp (gtk:widget-compute-bounds label label bounds)))
+
+      (is (=   0.0 (graphene:rect-x bounds)))
+      (is (=   0.0 (graphene:rect-y bounds)))
+      (is (= 200.0 (graphene:rect-width bounds)))
+      (is (= 100.0 (graphene:rect-height bounds))))))
+
 ;;;     gtk_widget_compute_transform
 ;;;     gtk_widget_compute_point
 
@@ -568,9 +661,23 @@
 ;;;     gtk_widget_set_focus_child
 ;;;     gtk_widget_is_sensitive
 ;;;     gtk_widget_is_visible
+
 ;;;     gtk_widget_get_state_flags
 ;;;     gtk_widget_set_state_flags
 ;;;     gtk_widget_unset_state_flags
+
+(test gtk-widget-state/unset-flags
+  (let ((button (gtk:button-new)))
+    (is (equal '(:dir-ltr) (gtk:widget-state-flags button)))
+    (is (equal '(:link :visited)
+               (setf (gtk:widget-state-flags button) '(:link :visited))))
+    (is (equal '(:dir-ltr :link :visited)
+                (gtk:widget-state-flags button)))
+    (is (equal '(:active :checked)
+               (setf (gtk:widget-state-flags button t) '(:active :checked))))
+    (is (equal '(:active :dir-ltr :checked) (gtk:widget-state-flags button)))
+    (is-false (gtk:widget-unset-state-flags button '(:active)))
+    (is (equal '(:DIR-LTR :CHECKED) (gtk:widget-state-flags button)))))
 
 ;;;     gtk_widget_has_visible_focus
 
@@ -749,6 +856,11 @@
     (is-false (gtk:widget-remove-provider widget cssid))))
 
 ;;;     gtk_widget_get_request_mode
+
+(test gtk-widget-request-mode
+  (let ((button (gtk:button-new)))
+    (is (eq :constant-size (gtk:widget-request-mode button)))))
+
 ;;;     gtk_widget_get_preferred_size
 ;;;     gtk_distribute_natural_allocation
 
@@ -801,4 +913,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-10-13
+;;; 2024-11-2

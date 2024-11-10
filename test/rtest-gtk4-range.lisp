@@ -74,7 +74,10 @@
     (is-false (gtk:range-inverted range))
     (is-true (gtk:range-restrict-to-fill-level range))
     (is (= -1 (gtk:range-round-digits range)))
-    (is-false (gtk:range-show-fill-level range))))
+    (is-false (gtk:range-show-fill-level range))
+
+    (is-false (setf (gtk:range-adjustment range) nil))
+    (is (= 1 (g:object-ref-count range)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -105,7 +108,10 @@
     (is (= 20.0 (gtk:range-value range)))
     ;; Clamp lower value
     (is (=  5.0 (setf (gtk:range-value range) 5.0)))
-    (is (= 10.0 (gtk:range-value range)))))
+    (is (= 10.0 (gtk:range-value range)))
+
+    (is-false (setf (gtk:range-adjustment range) nil))
+    (is (= 1 (g:object-ref-count range)))))
 
 ;;;     gtk_range_set_increments
 ;;;     gtk_range_set_range
@@ -116,4 +122,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; 2024-7-4
+;;; 2024-11-2

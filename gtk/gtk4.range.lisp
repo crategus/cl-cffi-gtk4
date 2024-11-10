@@ -2,7 +2,7 @@
 ;;; gtk4.range.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -102,7 +102,7 @@
 ;;; GtkRange
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkRange" range
+(gobject:define-gobject "GtkRange" range
   (:superclass widget
    :export t
    :interfaces (#+gtk-4-10
@@ -136,7 +136,7 @@
  "@version{2023-8-24}
   @begin{short}
     The @class{gtk:range} class is the common base class for widgets which
-    visualize an adjustment, e.g. the @class{gtk:scale} widget.
+    visualize an adjustment, for example the @class{gtk:scale} widget.
   @end{short}
 
   Apart from signals for monitoring the parameters of the adjustment, the
@@ -149,16 +149,24 @@
       @begin{pre}
 lambda (range value)    :run-last
       @end{pre}
-      Emitted before clamping a value, to give the application a chance to
-      adjust the bounds.
       @begin[code]{table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
         @entry[value]{A double float with the value before we clamp.}
       @end{table}
+      Emitted before clamping a value, to give the application a chance to
+      adjust the bounds.
     @subheading{The \"change-value\" signal}
       @begin{pre}
 lambda (range scroll value)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[range]{The @class{gtk:range} widget that received the signal.}
+        @entry[scroll]{The @symbol{gtk:scroll-type} value of scroll action that
+          was performed.}
+        @entry[value]{The double float value resulting from the scroll action.}
+        @entry[Returns]{@em{True} to prevent other handlers from being invoked
+          for the signal, @em{false} to propagate the signal further.}
+      @end{table}
       The signal is emitted when a scroll action is performed on a range. It
       allows an application to determine the type of scroll event that occurred
       and the resultant new value. The application can handle the event itself
@@ -170,31 +178,23 @@ lambda (range scroll value)    :run-last
       clamps the value based on \"round-digits\". It is not possible to use
       delayed update policies in an overridden @code{\"change-value\"} signal
       handler.
-      @begin[code]{table}
-        @entry[range]{The @class{gtk:range} widget that received the signal.}
-        @entry[scroll]{The @symbol{gtk:scroll-type} value of scroll action that
-          was performed.}
-        @entry[value]{The double float value resulting from the scroll action.}
-        @entry[Returns]{@em{True} to prevent other handlers from being invoked
-          for the signal, @em{false} to propagate the signal further.}
-      @end{table}
     @subheading{The \"move-slider\" signal}
       @begin{pre}
 lambda (range step)    :action
       @end{pre}
-      Virtual function that moves the slider. Used for key bindings.
       @begin[code]{table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
         @entry[step]{The @symbol{gtk:scroll-type} value how to move the slider.}
       @end{table}
+      Virtual function that moves the slider. Used for key bindings.
     @subheading{The \"value-changed\" signal}
       @begin{pre}
 lambda (range)    :run-last
       @end{pre}
-      Emitted when the range value changes.
       @begin[code]{table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
       @end{table}
+      Emitted when the range value changes.
   @end{dictionary}
   @see-slot{gtk:range-adjustment}
   @see-slot{gtk:range-fill-level}
@@ -248,7 +248,7 @@ lambda (range)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fill-level" 'range) t)
  "The @code{fill-level} property of type @code{:double} (Read / Write) @br{}
-  The fill level, e.g. prebuffering of a network stream. @br{}
+  The fill level, for example, prebuffering of a network stream. @br{}
   Default value: 1.79769e+308")
 
 #+liber-documentation
