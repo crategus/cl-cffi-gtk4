@@ -2,7 +2,7 @@
 ;;; gtk4.drop-target.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -82,7 +82,7 @@
 ;;; GtkDropTarget
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDropTarget" drop-target
+(gobject:define-gobject "GtkDropTarget" drop-target
   (:superclass event-controller
    :export t
    :interfaces ()
@@ -117,18 +117,18 @@
   The most basic way to use a @class{gtk:drop-target} object to receive drops on
   a widget is to create it via the @fun{gtk:drop-target-new} function passing
   in the @code{GType} of the data you want to receive and connect to the
-  \"current-drop\" signal to receive the data.
+  @code{\"current-drop\"} signal to receive the data.
 
   The @class{gtk:drop-target} object supports more options, such as:
   @begin{itemize}
-    @item{rejecting potential drops via the \"accept\" signal and the
+    @item{rejecting potential drops via the @code{\"accept\"} signal and the
       @fun{gtk:drop-target-reject} function to let other drop targets handle
       the drop}
-    @item{tracking an ongoing drag operation before the drop via the \"enter\",
-      \"motion\" and \"leave\" signals}
-    @item{configuring how to receive data by setting the “preload” property and
-      listening for its availability via the @slot[gdk:drop-target]{value}
-      property}
+    @item{tracking an ongoing drag operation before the drop via the
+      @code{\"enter\"}, @code{\"motion\"} and @code{\"leave\"} signals}
+    @item{configuring how to receive data by setting the
+      @slot[gtk:drop-target]{preload} property and listening for its
+      availability via the @slot[gdk:drop-target]{value} property}
   @end{itemize}
   However, the @class{gtk:drop-target} object is ultimately modeled in a
   synchronous way and only supports data transferred via @code{GType}. If you
@@ -143,12 +143,17 @@
       @begin{pre}
 lambda (target drop)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[drop]{The @class{gdk:drop} object.}
+        @entry[Returns]{@em{True} if @arg{drop} is accepted.}
+      @end{table}
       The signal is emitted on the drop site when a drop operation is about to
       begin. If the drop is not accepted, @em{false} will be returned and the
       drop target will ignore the drop. If @em{true} is returned, the drop is
       accepted for now but may be rejected later via a call to the
       @fun{gtk:drop-target-reject} function or ultimately by returning
-      @em{false} from the \"drop\" signal.
+      @em{false} from the @code{\"drop\"} signal.
 
       The default handler for this signal decides whether to accept the drop
       based on the formats provided by @arg{drop}.
@@ -156,17 +161,22 @@ lambda (target drop)    :run-last
       If the decision whether the drop will be accepted or rejected needs
       inspecting the data, this function should return @em{true}, the
       @slot[gtk:drop-target]{preload} property should be set and the value
-      should be inspected via the \"notify::value\" signal and then call the
-      @fun{gtk:drop-target-reject} function.
-      @begin[code]{table}
-        @entry[target]{The @class{gtk:drag-target} object.}
-        @entry[drop]{The @class{gdk:drop} object.}
-        @entry[Returns]{@em{True} if @arg{drop} is accepted.}
-      @end{table}
+      should be inspected via the @code{\"notify::value\"} signal and then call
+      the @fun{gtk:drop-target-reject} function.
     @subheading{The \"drop\" signal}
       @begin{pre}
 lambda (target value x y)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[value]{The @symbol{g:value} instance being dropped.}
+        @entry[x]{The double float with the x coordinate of the current pointer
+          position.}
+        @entry[y]{The double float with the x coordinate of the current pointer
+          position.}
+        @entry[Returns]{Whether the drop was accepted at the given pointer
+          position.}
+      @end{table}
       The signal is emitted on the drop site when the user drops the data onto
       the widget. The signal handler must determine whether the pointer position
       is in a drop zone or not. If it is not in a drop zone, it returns
@@ -174,22 +184,10 @@ lambda (target value x y)    :run-last
       returns @em{true}. In this case, this handler will accept the drop. The
       handler is responsible for reading the given @arg{value} and performing
       the drop operation.
-      @begin[code]{table}
-        @entry[target]{The @class{gtk:drag-target} object.}
-        @entry[value]{The @symbol{g:value} instance being dropped.}
-        @entry[x]{A double float with the x coordinate of the current pointer
-          position.}
-        @entry[y]{A double float with the x coordinate of the current pointer
-          position.}
-        @entry[Returns]{Whether the drop was accepted at the given pointer
-          position.}
-      @end{table}
     @subheading{The \"enter\" signal}
       @begin{pre}
 lambda (target x y)    :run-last
       @end{pre}
-      The signal is emitted on the drop site when the pointer enters the widget.
-      It can be used to set up custom highlighting.
       @begin[code]{table}
         @entry[target]{The @class{gtk:drag-target} object.}
         @entry[x]{A double float with the x coordinate of the current pointer
@@ -200,30 +198,33 @@ lambda (target x y)    :run-last
           action for this drag operation or 0 if dropping is not supported at
           the current @code{x,y} location.}
       @end{table}
+      The signal is emitted on the drop site when the pointer enters the widget.
+      It can be used to set up custom highlighting.
     @subheading{The \"leave\" signal}
       @begin{pre}
 lambda (target)    :run-last
       @end{pre}
-      The signal is emitted on the drop site when the pointer leaves the widget.
-      Its main purpose is to undo things done in \"enter\" signal handler.
       @begin[code]{table}
         @entry[target]{The @class{gtk:drag-target} object.}
       @end{table}
-      @subheading{The \"motion\" signal}
+      The signal is emitted on the drop site when the pointer leaves the widget.
+      Its main purpose is to undo things done in the @code{\"enter\"} signal
+      handler.
+    @subheading{The \"motion\" signal}
       @begin{pre}
 lambda (target x y)    :run-last
       @end{pre}
-      The signal is emitted while the pointer is moving over the drop target.
       @begin[code]{table}
         @entry[target]{The @class{gtk:drag-target} object.}
-        @entry[x]{A double float with the x coordinate of the current pointer
+        @entry[x]{The double float with the x coordinate of the current pointer
           position.}
-        @entry[y]{A double float with the x coordinate of the current pointer
+        @entry[y]{The double float with the x coordinate of the current pointer
           position.}
-        @entry[Returns]{A @symbol{gdk:drag-action} value with the preferred
+        @entry[Returns]{The @symbol{gdk:drag-action} value with the preferred
           action for this drag operation or 0 if dropping is not supported at
           the current @code{x,y} location.}
       @end{table}
+      The signal is emitted while the pointer is moving over the drop target.
   @end{dictionary}
   @see-constructor{gtk:drop-target-new}
   @see-slot{gtk:drop-target-actions}
@@ -387,9 +388,9 @@ lambda (target x y)    :run-last
  "The @code{value} property of type @symbol{g:value} (Read) @br{}
   The value for this drop operation or @code{nil} if the data has not been
   loaded yet or no drop operation is going on. Data may be available before the
-  \"current-drop\" signal gets emitted - for example when the
-  @slot[gtk:drop-target]{preload} property is set. You can use the \"notify\"
-  signal to be notified of available data.")
+  @code{\"current-drop\"} signal gets emitted - for example when the
+  @slot[gtk:drop-target]{preload} property is set. You can use the
+  @code{\"notify\"} signal to be notified of available data.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-target-value)
@@ -412,9 +413,10 @@ lambda (target x y)    :run-last
 ;;; gtk_drop_target_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
+(cffi:defcfun ("gtk_drop_target_new" drop-target-new)
+    (g:object drop-target :already-referenced)
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{2024-11-2}
   @argument[gtype]{a @class{g:type-t} type ID with the supported type}
   @argument[actions]{a @symbol{gdk:drag-action} value with the supported
     actions}
@@ -460,7 +462,7 @@ lambda (target x y)    :run-last
 
 (defun drop-target-gtypes (target)
  #+liber-documentation
- "@version{2023-9-18}
+ "@version{2024-11-2}
   @syntax{(gtk:drop-target-gtypes target) => gtypes}
   @syntax{(setf (gtk:drop-target-gtypes target) gtypes)}
   @argument[target]{a @class{gtk:drop-target} object}
@@ -475,10 +477,8 @@ lambda (target x y)    :run-last
   @see-class{g:type-t}"
   (cffi:with-foreign-object (n-gtypes :size)
     (let ((ptr (%drop-target-get-gtypes target n-gtypes)))
-      (prog1
-        (iter (for count from 0 below (cffi:mem-ref n-gtypes :size))
-              (collect (cffi:mem-aref ptr 'g:type-t count)))
-        (glib:free ptr)))))
+      (iter (for count from 0 below (cffi:mem-ref n-gtypes :size))
+            (collect (cffi:mem-aref ptr 'g:type-t count))))))
 
 (export 'drop-target-gtypes)
 
@@ -493,8 +493,8 @@ lambda (target x y)    :run-last
   @begin{short}
     Rejects the ongoing drop operation.
   @end{short}
-  If no drop operation is ongoing - when the \"drop-current\" signal returns
-  @code{nil} - this function does nothing.
+  If no drop operation is ongoing - when the @code{\"drop-current\"} signal
+  returns @code{nil} - this function does nothing.
 
   This function should be used when delaying the decision on whether to accept
   a drag or not until after reading the data.

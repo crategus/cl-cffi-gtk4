@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-drag-source :in gtk-suite)
+(def-suite gtk-drag-source :in gtk-drag-and-drop)
 (in-suite gtk-drag-source)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -48,6 +48,12 @@
 ;;;     actions
 ;;;     content
 
+(test gtk-drag-source-properties
+  (let ((source (make-instance 'gtk:drag-source)))
+    (is (equal '(:copy) (gtk:drag-source-actions source)))
+    (is-false (gtk:drag-source-content source))
+    (is (= 1 (g:object-ref-count source)))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     drag-begin
@@ -58,9 +64,15 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drag_source_new
+
+(test gtk-drag-source-new
+  (let (source)
+    (is (typep (setf source (gtk:drag-source-new)) 'gtk:drag-source))
+    (is (= 1 (g:object-ref-count source)))))
+
 ;;;     gtk_drag_source_set_icon
 ;;;     gtk_drag_source_drag_cancel
 ;;;     gtk_drag_source_get_drag
 ;;;     gtk_drag_check_threshold
 
-;;; 2024-9-20
+;;; 2024-11-2

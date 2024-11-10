@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-drop-target :in gtk-suite)
+(def-suite gtk-drop-target :in gtk-drag-and-drop)
 (in-suite gtk-drop-target)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -69,13 +69,20 @@
 
 ;;;     gtk_drop_target_new
 
+(test gtk-drop-target-new
+  (let (target)
+    (is (typep (setf target
+                     (gtk:drop-target-new "GtkBox" :none)) 'gtk:drop-target))
+    (is (= 1 (g:object-ref-count target)))))
+
 ;;;     gtk_drop_target_set_gtypes
 ;;;     gtk_drop_target_get_gtypes
 
 (test gtk-drop-target-gtypes.1
   (let ((target (gtk:drop-target-new "GtkBox" :none)))
     (is (equal '("GtkBox")
-               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))))
+               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))
+    (is (= 1 (g:object-ref-count target)))))
 
 (test gtk-drop-target-gtypes.2
   (let ((target (gtk:drop-target-new nil :none)))
@@ -84,8 +91,9 @@
                        (setf (gtk:drop-target-gtypes target)
                              '("GtkButton" "GtkLabel")))))
     (is (equal '("GtkButton" "GtkLabel")
-               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))))
+               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))
+    (is (= 1 (g:object-ref-count target)))))
 
 ;;;     gtk_drop_target_reject
 
-;;; 2024-9-20
+;;; 2024-11-2

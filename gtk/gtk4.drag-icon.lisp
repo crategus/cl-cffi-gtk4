@@ -2,7 +2,7 @@
 ;;; gtk4.drag-icon.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
 ;;; GtkDragIcon
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDragIcon" drag-icon
+(gobject:define-gobject "GtkDragIcon" drag-icon
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -142,7 +142,7 @@
  #+liber-documentation
  "@version{#2023-7-31}
   @argument[drag]{a @class{gdk:drag} object}
-  @return{The @class{gtk:widget} widget with the drag icon.}
+  @return{The @class{gtk:widget} object with the drag icon.}
   @begin{short}
     Gets the drag icon in use with @arg{drag}.
   @end{short}
@@ -190,7 +190,7 @@
  #+liber-documentation
  "@version{#2023-7-31}
   @argument[gvalue]{a @symbol{g:value} instance}
-  @return{The new @class{gtk:widget} widget for displaying @arg{gvalue} as a
+  @return{The new @class{gtk:widget} object for displaying @arg{gvalue} as a
     drag icon.}
   @begin{short}
     Creates a widget that can be used as a drag icon for the given @arg{gvalue}.

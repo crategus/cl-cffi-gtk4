@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-drag-icon :in gtk-suite)
+(def-suite gtk-drag-icon :in gtk-drag-and-drop)
 (in-suite gtk-drag-icon)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-drop-down :in gtk-suite)
+(def-suite gtk-drop-down :in gtk-list-widgets)
 (in-suite gtk-drop-down)
 
 ;;; --- Types and Values -------------------------------------------------------

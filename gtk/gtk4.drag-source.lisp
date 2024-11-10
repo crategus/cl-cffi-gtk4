@@ -2,7 +2,7 @@
 ;;; gtk4.drag-source.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,7 +78,7 @@
 ;;; GtkDragSource
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDragSource" drag-source
+(gobject:define-gobject "GtkDragSource" drag-source
   (:superclass gesture-single
    :export t
    :interfaces ()
@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-source 'type)
- "@version{2023-7-23}
+ "@version{2024-11-2}
   @begin{short}
     The @class{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
@@ -106,12 +106,12 @@
 
   Setting up the content provider and icon ahead of time only makes sense when
   the data does not change. More commonly, you will want to set them up just in
-  time. To do so, the @class{gtk:drag-source} object has \"prepare\" and
-  \"drag-begin\" signals. The \"prepare\" signal is emitted before a drag is
-  started, and can be used to set the content provider and actions that the
-  drag should be started with. The \"drag-begin\" signal is emitted after the
-  @class{gdk:drag} object has been created, and can be used to set up the drag
-  icon.
+  time. To do so, the @class{gtk:drag-source} object has @code{\"prepare\"} and
+  @code{\"drag-begin\"} signals. The @code{\"prepare\"} signal is emitted before
+  a drag is started, and can be used to set the content provider and actions
+  that the drag should be started with. The @code{\"drag-begin\"} signal is
+  emitted after the @class{gdk:drag} object has been created, and can be used
+  to set up the drag icon.
 
   During the DND operation, the @class{gtk:drag-source} object emits signals
   that can be used to obtain updates about the status of the operation, but it
@@ -124,61 +124,61 @@
       @begin{pre}
 lambda (source drag)    :run-last
       @end{pre}
-      The signal is emitted on the drag source when a drag is started. It can
-      be used to e.g. set a custom drag icon with the
-      @fun{gtk:drag-source-set-icon} function.
       @begin[code]{table}
-        @entry[source]{A @class{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk:drag} object.}
+        @entry[source]{The @class{gtk:drag-source} object.}
+        @entry[drag]{The @class{gdk:drag} object.}
       @end{table}
+      The signal is emitted on the drag source when a drag is started. It can
+      be used to, for example, set a custom drag icon with the
+      @fun{gtk:drag-source-set-icon} function.
     @subheading{The \"drag-cancel\" signal}
       @begin{pre}
 lambda (source drag reason)    :run-last
       @end{pre}
-      The signal is emitted on the drag source when a drag has failed. The
-      signal handler may handle a failed drag operation based on the type of
-      error. It should return @em{true} if the failure has been handled and the
-      default \"drag operation failed\" animation should not be shown.
       @begin[code]{table}
-        @entry[source]{A @class{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk:drag} object.}
-        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the
+        @entry[source]{The @class{gtk:drag-source} object.}
+        @entry[drag]{The @class{gdk:drag} object.}
+        @entry[reason]{The @symbol{gdk:drag-cancel-reason} value with the
           information on why the drag failed.}
         @entry[Returns]{@em{True} if the failed drag operation has been already
           handled.}
       @end{table}
+      The signal is emitted on the drag source when a drag has failed. The
+      signal handler may handle a failed drag operation based on the type of
+      error. It should return @em{true} if the failure has been handled and the
+      default \"drag operation failed\" animation should not be shown.
     @subheading{The \"drag-end\" signal}
       @begin{pre}
 lambda (source drag delete)    :run-last
       @end{pre}
-      The signal is emitted on the drag source when a drag is finished. A
-      typical reason to connect to this signal is to undo things done in the
-      \"prepare\" or \"drag-begin\" handler.
       @begin[code]{table}
-        @entry[source]{A @class{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk:drag} object.}
+        @entry[source]{The @class{gtk:drag-source} object.}
+        @entry[drag]{The @class{gdk:drag} object.}
         @entry[delete]{@em{True} if the drag was performing @code{:move}, and
         the data should be deleted.}
         @entry[Returns]{@em{True} if the failed drag operation has been already
           handled.}
       @end{table}
+      The signal is emitted on the drag source when a drag is finished. A
+      typical reason to connect to this signal is to undo things done in the
+      @code{\"prepare\"} or @code{\"drag-begin\"} handler.
     @subheading{The \"prepare\" signal}
       @begin{pre}
 lambda (source x y)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[source]{The @class{gtk:drag-source} object.}
+        @entry[x]{The double float with the x coordinate of the drag starting
+          point.}
+        @entry[y]{The double float with the y coordinate of the drag starting
+          point.}
+        @entry[Returns]{The @class{gdk:content-provider} object, or @code{nil}.}
+      @end{table}
       The signal is emitted when a drag is about to be initiated. It returns
       the @class{gdk:content-provider} object to use for the drag that is about
       to start. The default handler for this signal returns the value of the
-      \"content\" property, so if you set up that property ahead of time, you
-      do not need to connect to this signal.
-      @begin[code]{table}
-        @entry[source]{A @class{gtk:drag-source} object.}
-        @entry[x]{A double float with the x coordinate of the drag starting
-          point.}
-        @entry[y]{A double float with the y coordinate of the drag starting
-          point.}
-        @entry[Returns]{A @class{gdk:content-provider} object, or @code{nil}.}
-      @end{table}
+      @slot[gtk:drag-source]{content} property, so if you set up that property
+      ahead of time, you do not need to connect to this signal.
   @end{dictionary}
   @see-slot{gtk:drag-source-actions}
   @see-slot{gtk:drag-source-content}
@@ -195,15 +195,15 @@ lambda (source x y)    :run-last
  "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write)
   @br{}
   The actions that are supported by drag operations from the source. Note that
-  you must handle the \"drag-end\" signal if the actions include @code{:move}.
-  @br{}
+  you must handle the @code{\"drag-end\"} signal if the actions include
+  @code{:move}. @br{}
   Default value: @code{:copy}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drag-source-actions)
       "Accessor"
       (documentation 'drag-source-actions 'function)
- "@version{#2023-7-23}
+ "@version{2024-11-2}
   @syntax{(gtk:drag-source-actions object) => actions}
   @syntax{(setf (gtk:drag-source-actions object) actions)}
   @argument[object]{a @class{gtk:drag-source} object}
@@ -217,11 +217,12 @@ lambda (source x y)    :run-last
   @setf{gtk:drag-source-actions} function sets the actions.
 
   During a DND operation, the actions are offered to potential drop targets.
-  If @arg{actions} include @code{:move}, you need to listen to the \"drag-end\"
-  signal and handle the @arg{delete} argument being @em{true}.
+  If @arg{actions} include @code{:move}, you need to listen to the
+  @code{\"drag-end\"} signal and handle the @arg{delete} argument being
+  @em{true}.
 
   This function can be called before a drag is started, or in a handler for
-  the \"prepare\" signal.
+  the @code{\"prepare\"} signal.
   @see-class{gtk:drag-source}
   @see-symbol{gdk:drag-action}")
 
@@ -238,7 +239,7 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-content)
       "Accessor"
       (documentation 'drag-source-content 'function)
- "@version{#2023-7-23}
+ "@version{2024-11-2}
   @syntax{(gtk:drag-source-content object) => content}
   @syntax{(setf (gtk:drag-source-content object) content)}
   @argument[object]{a @class{gtk:drag-source} object}
@@ -254,8 +255,8 @@ lambda (source x y)    :run-last
   a DND operation, it will be obtained from the content provider.
 
   This function can be called before a drag is started, or in a handler for the
-  \"prepare\" signal. You may consider setting the content provider back to
-  @code{nil} in a \"drag-end\" signal handler.
+  @code{\"prepare\"} signal. You may consider setting the content provider back
+  to @code{nil} in a @code{\"drag-end\"} signal handler.
   @see-class{gtk:drag-source}
   @see-class{gdk:content-provider}")
 
@@ -267,8 +268,8 @@ lambda (source x y)    :run-last
 
 (defun drag-source-new ()
  #+liber-documentation
- "@version{#2023-7-31}
-  @return{The new @class{gkd:drag-source} object}
+ "@version{2024-11-2}
+  @return{The new @class{gtk:drag-source} object}
   @short{Creates a new drag source.}
   @see-class{gtk:drag-source}"
   (make-instance 'drag-source))
@@ -294,8 +295,8 @@ lambda (source x y)    :run-last
   with the hotspot of the cursor. If @arg{paintable} is @code{nil}, a default
   icon is used.
 
-  This function can be called before a drag is started, or in a \"prepare\" or
-  \"drag-begin\" signal handler.
+  This function can be called before a drag is started, or in a
+  @code{\"prepare\"} or @code{\"drag-begin\"} signal handler.
   @see-class{gtk:drag-source}
   @see-class{gdk:paintable}"
   (source (g:object drag-source))
