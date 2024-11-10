@@ -742,11 +742,11 @@
   window icon) and menu (a menu button for the fallback app menu). For example,
   \"menu:minimize,maximize,close\" specifies a menu on the left, and Minimize,
    Maximize and Close buttons on the right. Note that buttons will only be shown
-  when they are meaningful. E.g. a menu button only appears when the desktop
-  shell does not show the application menu, and a Close button only appears on
-  a window that can be closed. Also note that the setting can be overridden
-  with the @slot[gtk:header-bar]{decoration-layout} property of the header bar.
-  @br{}
+  when they are meaningful. For example, a menu button only appears when the
+  desktop shell does not show the application menu, and a Close button only
+  appears on a window that can be closed. Also note that the setting can be
+  overridden with the @slot[gtk:header-bar]{decoration-layout} property of the
+  header bar. @br{}
   Default value: \"menu:minimize,maximize,close\"")
 
 #+liber-documentation
@@ -774,9 +774,9 @@
   For example, \"menu:minimize,maximize,close\" specifies a menu on the left,
   and Minimize, Maximize and Close buttons on the right.
 
-  Note that buttons will only be shown when they are meaningful. E.g. a menu
-  button only appears when the desktop shell does not show the app menu, and a
-  Close button only appears on a window that can be closed.
+  Note that buttons will only be shown when they are meaningful. For example, a
+  menu button only appears when the desktop shell does not show the app menu,
+  and a Close button only appears on a window that can be closed.
 
   Also note that the setting can be overridden with the
   @slot[gtk:header-bar]{decoration-layout} property of the header bar.
