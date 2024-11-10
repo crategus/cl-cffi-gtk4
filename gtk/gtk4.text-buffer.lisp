@@ -680,6 +680,17 @@ lambda (buffer)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun text-buffer-load-file (buffer path)
+ #+liber-documentation
+ "@version{2024-11-9}
+  @argument[buffer]{a @class{gtk:text-buffer} object}
+  @argument[path]{a pathname or namestring for the file to load}
+  @begin{short}
+    Loads a file into the given text buffer.
+  @end{short}
+  @begin[Notes]{dictionary}
+    This is a simple Lisp extension that does not exist in the C library.
+  @end{dictionary}
+  @see-class{gtk:text-buffer}"
   (let ((filename (namestring path)))
     (with-open-file (stream filename)
       (setf (text-buffer-text buffer) "")
