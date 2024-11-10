@@ -17,8 +17,7 @@
   (is (g:type-is-enum "GtkNotebookTab"))
   ;; Check type initializer
   (is (eq (g:gtype "GtkNotebookTab")
-          (g:gtype (cffi:foreign-funcall "gtk_notebook_tab_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_notebook_tab_get_type" :size))))
   ;; Check registered name
   (is (eq 'gtk:notebook-tab
           (glib:symbol-for-gtype "GtkNotebookTab")))
@@ -38,6 +37,45 @@
                        (:FIRST 0)
                        (:LAST 1))
              (gobject:get-gtype-definition "GtkNotebookTab"))))
+
+;;;     GtkNotebookPages
+
+;; TODO: GtkNotebookPages is not exported from the C library. In a first run
+;; of the tests for GtkNotebookPages does not work.
+
+#+nil
+(test gtk-notebook-pages-class
+  ;; Check type
+  (is (g:type-is-object "GtkNotebookPages"))
+  ;; Check registered name
+  (is (eq 'gtk:notebook-pages
+          (glib:symbol-for-gtype "GtkNotebookPages")))
+  ;; Check type initializer
+  #+nil
+  (is (eq (g:gtype "GtkNotebookPages")
+          (g:gtype (cffi:foreign-funcall "gtk_notebook_pages_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkNotebookPages")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GtkNotebookPages")))
+  ;; Check interfaces
+  (is (equal '("GListModel" "GtkSelectionModel")
+             (glib-test:list-interfaces "GtkNotebookPages")))
+  ;; Check properties
+  (is (equal '()
+             (glib-test:list-properties "GtkNotebookPages")))
+  ;; Check signals
+  (is (equal '()
+             (glib-test:list-signals "GtkNotebookPages")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNotebookPages" GTK:NOTEBOOK-PAGES
+                       (:SUPERCLASS GOBJECT:OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkSelectionModel"))
+                       NIL)
+             (gobject:get-gtype-definition "GtkNotebookPages"))))
 
 ;;;     GtkNotebookPage
 
@@ -748,4 +786,4 @@
 
     (is-false (setf (gtk:notebook-action-widget notebook :start) nil))))
 
-;;; 2024-10-19
+;;; 2024-11-10

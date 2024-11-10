@@ -236,8 +236,8 @@ headerbar
   Whether to show title buttons like Close, Minimize, Maximize. Which buttons
   are actually shown and where is determined by the
   @slot[gtk:header-bar]{decoration-layout} property, and by the state of the
-  window, e.g. a Close button will not be shown if the window cannot be closed.
-  @br{}
+  window, for example, a Close button will not be shown if the window cannot be
+  closed. @br{}
   Default value: @em{true}")
 
 #+liber-documentation

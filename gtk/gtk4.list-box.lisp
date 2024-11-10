@@ -457,9 +457,9 @@ lambda (row)    :action
   @image[list-box]{Figure: GtkListBox}
 
   Using the @class{gtk:list-box} widget is often an alternative to the
-  @class{gtk:tree-view} widget, especially when the list contents has a more
+  @class{gtk:tree-view} widget, especially when the list content has a more
   complicated layout than what is allowed by a @class{gtk:cell-renderer}
-  object, or when the contents is interactive, i.e. has a button in it.
+  object, or when the content is interactive, that is, has a button in it.
 
   Although a @class{gtk:list-box} widget must have only @class{gtk:list-box-row}
   children you can add any kind of widget to it via the
@@ -1250,9 +1250,9 @@ lambda (listbox)    :action
   function. If no header is needed, set the header to @code{nil}.
 
   Note that you may get many calls of the @arg{func} callback function to this
-  for a particular row when e.g. changing things that do not affect the header.
-  In this case it is important for performance to not blindly replace an
-  existing header with an identical one.
+  for a particular row when, for example, changing things that do not affect
+  the header. In this case it is important for performance to not blindly
+  replace an existing header with an identical one.
 
   The @arg{func} callback function will be called for each row after the call,
   and it will continue to be called each time a row changes via the

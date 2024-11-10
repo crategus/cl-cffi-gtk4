@@ -35,6 +35,7 @@
 ;;;
 ;;;     GtkNotebookTab
 ;;;     GtkNotebookPage
+;;;     GtkNotebookPages
 ;;;
 ;;; Accessors
 ;;;
@@ -200,14 +201,27 @@
 ;;; GtkNotebookPages
 ;;; ----------------------------------------------------------------------------
 
-;; This object is not exported from the C library.
+;; This object is not exported from the C library, but we need for the
+;; Lisp binding.
 
 (gobject:define-gobject "GtkNotebookPages" notebook-pages
   (:superclass g:object
-   :export nil
+   :export t
    :interfaces ("GtkSelectionModel" "GListModel")
    :type-initializer nil) ; gtk_notebook_pages_get_type is not accessible
   nil)
+
+#+liber-documentation
+(setf (documentation 'notebook-pages 'type)
+ "@version{2024-11-10}
+  @begin{short}
+    The @class{gtk:notebook-pages} class holds a @class{g:list-model} object
+    for the pages of a notebook.
+  @end{short}
+  The @fun{gtk:notebook-pages} function returns the list model for the pages.
+  This object is not exported from the C library.
+  @see-class{gtk:notebook-page}
+  @see-function{gtk:notebook-pages}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkNotebookPage

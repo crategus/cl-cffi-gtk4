@@ -590,8 +590,8 @@ lambda (widget)    :action
 (setf (documentation (liber:slot-documentation "wide-handle" 'paned) t)
  "The @code{wide-handle} property of type @code{:boolean} (Read / Write) @br{}
   Setting this property to @em{true} indicates that the paned widget needs to
-  provide stronger visual separation, e.g. because it separates between two
-  notebooks, whose tab rows would otherwise merge visually. @br{}
+  provide stronger visual separation, for example, because it separates between
+  two notebooks, whose tab rows would otherwise merge visually. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
