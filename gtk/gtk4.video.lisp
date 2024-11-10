@@ -2,7 +2,7 @@
 ;;; gtk4.video.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,54 +83,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkGraphicsOffloadEnabled
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-14
-(gobject:define-g-enum "GtkGraphicsOffloadEnabled" graphics-offload-enabled
-  (:export t
-   :type-initializer "gtk_graphics_offload_enabled_get_type")
-  (:enabled 0)
-  (:disabled 1))
-
-#+(and gtk-4-14 liber-documentation)
-(setf (liber:alias-for-symbol 'graphics-offload-enabled)
-      "GEnum"
-      (liber:symbol-documentation 'graphics-offload-enabled)
- "@version{2024-5-26}
-  @begin{declaration}
-(gobject:define-g-enum \"GtkGraphicsOffloadEnabled\" graphics-offload-enabled
-  (:export t
-   :type-initializer \"gtk_graphics_offload_enabled_get_type\")
-  (:enabled 0)
-  (:disabled 1))
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[:enabled]{Graphics offloading is enabled.}
-      @entry[:disabled]{Graphics offloading is disabled.}
-    @end{table}
-  @end{values}
-  @begin{short}
-    Represents the state of graphics offloading.
-  @end{short}
-
-  Since 4.14
-  @see-class{gtk:video}")
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkVideo
-;;;
-;;; GtkVideo is a widget to show a GtkMediaStream.
-;;;
-;;; It is commonly combined with GtkMediaControls to give the user a way to
-;;; control the playback.
-;;;
-;;; See Also
-;;;      GtkMediaControls
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkVideo" video
+(gobject:define-gobject "GtkVideo" video
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -156,7 +112,7 @@
 
 #+liber-documentation
 (setf (documentation 'video 'type)
- "@version{#2023-4-21}
+ "@version{2024-10-31}
   @begin{short}
     The @class{gtk:video} widget is a widget to show a @class{gtk:media-stream}
     object with media controls.
@@ -164,16 +120,17 @@
 
   @image[video]{Figure: GtkVideo}
 
-  The controls are available separately as @class{gtk:media-controls} widgets.
-  If you just want to display a video without controls, you can treat it like
-  any other paintable and for example put it into a @class{gtk:picture} widget.
+  The controls are available separately as the @class{gtk:media-controls}
+  widget. If you just want to display a video without controls, you can treat it
+  like any other paintable and, for example, put it into a @class{gtk:picture}
+  widget.
 
   The @class{gtk:video} widget aims to cover use cases such as previews,
-  embedded animations, etc. It supports autoplay, looping, and simple media
-  controls. It does not have support for video overlays, multichannel audio,
-  device selection, or input. If you are writing a full-fledged video player,
-  you may want to use the @class{gdk:paintable} API and a media framework such
-  as @code{Gstreamer} directly.
+  embedded animations, and so on. It supports autoplay, looping, and simple
+  media controls. It does not have support for video overlays, multichannel
+  audio, device selection, or input. If you are writing a full-fledged video
+  player, you may want to use the @class{gdk:paintable} API and a media
+  framework such as @code{GStreamer} directly.
   @see-constructor{gtk:video-new}
   @see-constructor{gtk:video-new-for-file}
   @see-constructor{gtk:video-new-for-filename}
@@ -202,7 +159,7 @@
 (setf (liber:alias-for-function 'video-autoplay)
       "Accessor"
       (documentation 'video-autoplay 'function)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @syntax{(gtk:video-autoplay object) => autoplay}
   @syntax{(setf (gtk:video-autoplay object) autoplay)}
   @argument[object]{a @class{gtk:video} widget}
@@ -223,13 +180,13 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'video) t)
  "The @code{file} property of type @class{g:file} (Read / Write) @br{}
-  The file played by the video if the video is playing a file.")
+  The file played back by the video if the video is playing a file.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'video-file)
       "Accessor"
       (documentation 'video-file 'function)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @syntax{(gtk:video-file object) => file}
   @syntax{(setf (gtk:video-file object) file)}
   @argument[object]{a @class{gtk:video} widget}
@@ -237,9 +194,9 @@
   @begin{short}
     Accessor of the @slot[gtk:video]{file} slot of the @class{gtk:video} class.
   @end{short}
-  The @fun{gtk:video-file} function gets the file played by @arg{object} or
-  @code{nil} if not playing back a file. The @setf{gtk:video-file} function
-  makes @arg{object} play the given @arg{file}.
+  The @fun{gtk:video-file} function gets the file played back by @arg{object}
+  or @code{nil} if not playing back a file. The @setf{gtk:video-file} function
+  makes @arg{object} playback the given @arg{file}.
   @see-class{gtk:video}
   @see-class{g:file}")
 
@@ -256,7 +213,7 @@
 (setf (liber:alias-for-function 'video-graphics-offload)
       "Accessor"
       (documentation 'video-graphics-offload 'function)
- "@version{#2024-5-26}
+ "@version{2024-10-31}
   @syntax{(gtk:video-graphics-offload object) => setting}
   @syntax{(setf (gtk:video-graphics-offload object) setting)}
   @argument[object]{a @class{gtk:video} widget}
@@ -286,7 +243,7 @@
 (setf (liber:alias-for-function 'video-loop)
       "Accessor"
       (documentation 'video-loop 'function)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @syntax{(gtk:video-loop object) => loop}
   @syntax{(setf (gtk:video-loop object) loop)}
   @argument[object]{a @class{gtk:video} widget}
@@ -305,13 +262,13 @@
 (setf (documentation (liber:slot-documentation "media-stream" 'video) t)
  "The @code{media-stream} property of type @class{gtk:media-stream}
   (Read / Write) @br{}
-  The media stream played.")
+  The media stream played back.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'video-media-stream)
       "Accessor"
       (documentation 'video-media-stream 'function)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @syntax{(gtk:video-media-stream object) => stream}
   @syntax{(setf (gtk:video-media-stream object) stream)}
   @argument[object]{a @class{gtk:video} widget}
@@ -322,10 +279,10 @@
     class.
   @end{short}
   The @fun{gtk:video-media-stream} function gets the media stream managed by
-  @arg{object} or @code{nil} if none. The @setf{gtk:video-media-steam} function
-  sets the media stream to be played back. @arg{object} will take full control
-  of managing the media stream. If you want to manage a media stream yourself,
-  consider using a @class{gtk:image} widget for display.
+  @arg{object} or @code{nil} if none. The @setf{gtk:video-media-stream} function
+  sets the media stream to be played back. The @arg{object} argument will take
+  full control of managing the media stream. If you want to manage a media
+  stream yourself, consider using a @class{gtk:picture} widget for display.
 
   If you want to display a file, consider using the @fun{gtk:video-file}
   function instead.
@@ -341,7 +298,7 @@
 
 (defun video-new ()
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @return{The new @class{gtk:video} widget.}
   @short{Creates a new empty @class{gtk:video} widget.}
   @see-class{gtk:video}"
@@ -357,10 +314,11 @@
 
 (defun video-new-for-media-stream (stream)
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @argument[stream]{a @class{gtk:media-stream} object}
   @return{The new @class{gtk:video} widget.}
-  @short{Creates a new @class{gtk:video} widget to play the given media stream.}
+  @short{Creates a new @class{gtk:video} widget to playback the given media
+    stream.}
   @see-class{gtk:video}
   @see-class{gtk:media-stream}"
   (make-instance 'video
@@ -376,10 +334,10 @@
 
 (defun video-new-for-file (file)
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @argument[file]{a @class{g:file} object}
   @return{The new @class{gtk:video} widget.}
-  @short{Creates a new @class{gtk:video} widget to play the given @arg{file}.}
+  @short{Creates a new @class{gtk:video} widget to playback the given file.}
   @see-class{gtk:video}
   @see-class{g:file}"
   (make-instance 'video
@@ -397,10 +355,10 @@
 
 (defun video-new-for-filename (path)
  #+liber-documentation
- "@version{#2023-4-29}
-  @argument[path]{a pathname or namestring with the file to play back}
+ "@version{2024-10-31}
+  @argument[path]{a pathname or namestring with the file to playback}
   @return{The new @class{gtk:video} widget.}
-  @short{Creates a new @class{gtk:video} widget to play the given @arg{path}.}
+  @short{Creates a new @class{gtk:video} widget to playback the given file.}
   This is a utility function that calls the @fun{gtk:video-new-for-file}
   function.
   @see-class{gtk:video}
@@ -413,21 +371,18 @@
 ;;; gtk_video_new_for_resource
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_video_new_for_resource" %video-new-for-resource)
+(cffi:defcfun ("gtk_video_new_for_resource" video-new-for-resource)
     (g:object video)
-  (path :string))
-
-(defun video-new-for-resource (path)
  #+liber-documentation
- "@version{#2023-4-29}
-  @argument[path]{a pathname or namestring with the resource path to play back}
+ "@version{2024-10-31}
+  @argument[path]{a string with the resource path to playback}
   @return{The new @class{gtk:video} widget.}
-  @short{Creates a new @class{gtk:video} widget to play the given @arg{path}.}
+  @short{Creates a new @class{gtk:video} widget to playback the given resource.}
   This is a utility function that calls the @fun{gtk:video-new-for-file}
   function.
   @see-class{gtk:video}
   @see-function{gtk:video-new-for-file}"
-  (%video-new-for-resource (namestring path)))
+  (path :string))
 
 (export 'video-new-for-resource)
 
@@ -441,11 +396,11 @@
 
 (defun video-set-filename (video path)
  #+liber-documentation
- "@version{#2023-5-6}
+ "@version{2024-10-31}
   @argument[video]{a @class{gtk:video} widget}
-  @argument[path]{a pathname or namestring with the file to play}
+  @argument[path]{a pathname or namestring with the file to playback}
   @begin{short}
-    Makes @arg{object} play the given @arg{path}.
+    Makes @arg{object} playback the given file.
   @end{short}
   This is a utility function that calls the @fun{gtk:video-file} function.
   @see-class{gtk:video}
@@ -458,22 +413,19 @@
 ;;; gtk_video_set_resource
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_video_set_resource" %video-set-resource) :void
-  (video (g:object video))
-  (path :string))
-
-(defun video-set-resource (video path)
+(cffi:defcfun ("gtk_video_set_resource" video-set-resource) :void
  #+liber-documentation
- "@version{#2023-5-6}
+ "@version{2024-10-31}
   @argument[video]{a @class{gtk:video} widget}
-  @argument[path]{a pathname or namestring with the resource to play}
+  @argument[path]{a string with the resource to playback}
   @begin{short}
-    Makes @arg{object} play the resource at the given @arg{path}.
+    Makes @arg{object} playback the given resource.
   @end{short}
   This is a utility function that calls the @fun{gtk:video-file} function.
   @see-class{gtk:video}
   @see-function{gtk:video-file}"
-  (%video-set-resource video (namestring path)))
+  (video (g:object video))
+  (path :string))
 
 (export 'video-set-resource)
 

@@ -58,4 +58,8 @@
 
 ;;;     gtk_media_controls_new
 
-;;; 2024-9-20
+(test gtk-media-controls-new
+  (let ((stream (gtk:media-file-new)))
+    (is (typep (gtk:media-controls-new stream) 'gtk:media-controls))))
+
+;;; 2024-10-31

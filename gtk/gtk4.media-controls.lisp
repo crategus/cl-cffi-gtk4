@@ -2,7 +2,7 @@
 ;;; gtk4.media-controls.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,7 @@
 ;;; GtkMediaControls
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMediaControls" media-controls
+(gobject:define-gobject "GtkMediaControls" media-controls
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'media-controls 'type)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @begin{short}
     The @class{gtk:media-controls} widget is a widget to show controls for a
     @class{gtk:media-stream} object and giving users a way to use it.
@@ -109,7 +109,7 @@
 (setf (liber:alias-for-function 'media-controls-media-stream)
       "Accessor"
       (documentation 'media-controls-media-stream 'function)
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @syntax{(gtk:media-controls-media-stream object) => stream}
   @syntax{(setf (gtk:media-controls-media-stream object) stream)}
   @argument[object]{a @class{gtk:media-controls} widget}
@@ -132,7 +132,7 @@
 
 (defun media-controls-new (stream)
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{2024-10-31}
   @argument[stream]{a @class{gtk:media-stream} object}
   @return{The new @class{gtk:media-controls} widget.}
   @short{Creates the new media controls managing the media stream passed to it.}

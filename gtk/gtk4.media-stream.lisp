@@ -2,7 +2,7 @@
 ;;; gtk4.media-stream.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -109,7 +109,7 @@
 ;;; GtkMediaStream
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMediaStream" media-stream
+(gobject:define-gobject "GtkMediaStream" media-stream
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable")
@@ -272,8 +272,8 @@
 
   The @class{gtk:media-stream} object itself does not provide a way to unset an
   error, but implementations may provide options. For example, a
-  @class{gtk:media-file} object will unset errors when a new source is set with
-  i.e. the @fun{gtk:media-file-set-file} function.
+  @class{gtk:media-file} object will unset errors when a new source is set,
+  for example, with the @fun{gtk:media-file-set-file} function.
   @see-class{gtk:media-stream}
   @see-class{gtk:media-file}")
 
@@ -348,7 +348,8 @@
   @end{short}
   The @fun{gtk:media-stream-loop} function returns whether the stream is set to
   loop. The @setf{gtk:media-stream-loop} function sets whether the stream should
-  loop, i.e. restart playback from the beginning instead of stopping at the end.
+  loop, that is, restart playback from the beginning instead of stopping at the
+  end.
 
   Not all streams may support looping, in particular non-seekable streams.
   Those streams will ignore the loop setting and just end.
