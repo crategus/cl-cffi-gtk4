@@ -176,9 +176,9 @@
         rendered.}
       @entry[:sending-data]{The print job is being sent off to the printer.}
       @entry[:pending]{The print job has been sent to the printer, but is not
-        printed for some reason, e.g. the printer may be stopped.}
+        printed for some reason, for example, the printer may be stopped.}
       @entry[:pending-issue]{Some problem has occurred during printing,
-        e.g. a paper jam.}
+        for example a paper jam.}
       @entry[:printing]{The printer is processing the print job.}
       @entry[:finished]{The printing has been completed successfully.}
       @entry[:finished-aborted]{The printing has been aborted.}
@@ -386,8 +386,8 @@
   The typical way to use the high-level printing API is to create a
   @class{gtk:print-operation} object with the @fun{gtk:print-operation-new}
   function when the user selects to print. Then you set some properties on it,
-  e.g. the page size, any @class{gtk:print-settings} settings from previous
-  print operations, the number of pages, the current page, etc.
+  for example the page size, any @class{gtk:print-settings} settings from
+  previous print operations, the number of pages, the current page, and so on.
 
   Then you start the print operation by calling the
   @fun{gtk:print-operation-run} function. It will then show a dialog, let the
@@ -902,9 +902,9 @@ lambda (operation widget setup settings)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "job-name" 'print-operation) t)
  "The @code{job-name} property of type @code{:string} (Read / Write) @br{}
-  A string used to identify the job, e.g. in monitoring applications like
-  eggcups. If you do not set a job name, GTK picks a default one by numbering
-  successive print jobs. @br{}
+  A string used to identify the job, for example, in monitoring applications
+  like @code{eggcups}. If you do not set a job name, GTK picks a default one by
+  numbering successive print jobs. @br{}
   Default value: \"\" ")
 
 #+liber-documentation
@@ -923,8 +923,8 @@ lambda (operation widget setup settings)    :run-last
   The @set{gtk:print-operation-job-name} function sets the name of the print
   job.
 
-  The name is used to identify the job, e.g. in monitoring applications like
-  eggcups.
+  The name is used to identify the job, for example, in monitoring applications
+  like @code{eggcups}.
 
   If you do not set a job name, GTK picks a default one by numbering
   successive print jobs.
@@ -1106,7 +1106,7 @@ lambda (operation widget setup settings)    :run-last
                                                'print-operation) t)
  "The @code{status-string} property of type @code{:string} (Read) @br{}
   A string representation of the status of the print operation. The string is
-  translated and suitable for displaying the print status e.g. in a
+  translated and suitable for displaying the print status, for example in a
   @class{gtk:statusbar} widget. See the @code{status} property for a status
   value that is suitable for programmatic use. @br{}
   Default value: \"\"")
@@ -1127,8 +1127,8 @@ lambda (operation widget setup settings)    :run-last
   The @fun{gtk:print-operation-status-string} function returns a string
   representation of the status of the print operation.
 
-  The string is translated and suitable for displaying the print status e.g.
-  in a @class{gtk:statusbar} widget.
+  The string is translated and suitable for displaying the print status, for
+  example in a @class{gtk:statusbar} widget.
 
   Use the @fun{gtk:print-operation-status} function to obtain a status value
   that is suitable for programmatic use.
@@ -1408,8 +1408,8 @@ lambda (operation widget setup settings)    :run-last
   @begin{short}
     Signalize that drawing of the particular page is complete.
   @end{short}
-  The function is called after completion of page drawing, e.g. drawing in
-  another thread. If the @fun{gtk:print-operation-set-defer-drawing} function
+  The function is called after completion of page drawing, for example drawing
+  in another thread. If the @fun{gtk:print-operation-set-defer-drawing} function
   was called before, then this function has to be called by the application.
   In another case it is called by the library itself.
   @see-class{gtk:print-operation}

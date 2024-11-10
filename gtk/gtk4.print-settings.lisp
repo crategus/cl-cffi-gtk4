@@ -357,7 +357,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;; Not implemented.
-;; We handle page ranges as a list of lists, e.g. '((1) (15 20) 25).
+;; We handle page ranges as a list of lists, for example, '((1) (15 20) 25).
 ;; The string representation of this is "pages-ranges=1, 15-20, 25"
 
 ;;; ----------------------------------------------------------------------------
