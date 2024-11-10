@@ -3,19 +3,19 @@
 (def-suite gtk-main-loop :in gtk-suite)
 (in-suite gtk-main-loop)
 
-;;; --- Types and Values -------------------------------------------------------
-
-;;;     GTK_PRIORITY_RESIZE                                not implemented
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_init
+
 ;;;     gtk_init_check
+
+(test gtk-init-check
+  (is-true (gtk:init-check)))
 
 ;;;     gtk_is_initialized
 
 (test gtk-is-initialized
-  (is (gtk:is-initialized)))
+  (is-true (gtk:is-initialized)))
 
 ;;;     gtk_disable_setlocale
 
@@ -29,4 +29,4 @@
 (test gtk-locale-direction
   (is (eq :ltr (gtk:locale-direction))))
 
-;;; 2024-7-4
+;;; 2024-11-5

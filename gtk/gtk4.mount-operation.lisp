@@ -2,11 +2,11 @@
 ;;; gtk4.mount-operation.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,10 +87,28 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkMountOperation
+;;; GtkMountOperation
 ;;;
 ;;; This should not be accessed directly. Use the accessor functions below.
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement GMountOperation
+
+#+nil
+(gobject:define-gobject "GtkMountOperation" mount-operation
+  (:superclass g:mount-operation
+   :export t
+   :interfaces ()
+   :type-initializer "gtk_mount_operation_get_type")
+  ((display
+    mount-operation-display
+    "display" "GdkDisplay" t t)
+   (is-showing
+    mount-operation-is-showing
+    "is-showing" "gboolean" t nil)
+   (parent
+    mount-operation-parent
+    "parent" "GtkWindow" t t)))
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property Details

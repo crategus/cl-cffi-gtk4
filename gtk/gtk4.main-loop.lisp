@@ -2,7 +2,7 @@
 ;;; gtk4.main-loop.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -29,14 +29,6 @@
 ;;;
 ;;; Library initialization and main loop
 ;;;
-;;;     Initialization, exit, mainloop and miscellaneous routines
-;;;
-;;; Types and Values
-;;;
-;;;     GtkDebugFlags                                      not implemented
-;;;
-;;;     GTK_PRIORITY_RESIZE                                not implemented
-;;;
 ;;; Functions
 ;;;
 ;;;     gtk_init
@@ -46,91 +38,9 @@
 ;;;     gtk_disable_setlocale
 ;;;     gtk_get_default_language
 ;;;     gtk_get_locale_direction
-;;;
-;;;     gtk_get_debug_flags                                not implemented
-;;;     gtk_set_debug_flags                                not implemented
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_PRIORITY_RESIZE
-;;;
-;;; #define GTK_PRIORITY_RESIZE (G_PRIORITY_HIGH_IDLE + 10)
-;;;
-;;; Use this priority for functionality related to size allocation.
-;;;
-;;; It is used internally by GTK to compute the sizes of widgets. This priority
-;;; is higher than GDK_PRIORITY_REDRAW to avoid resizing a widget which was
-;;; just redrawn.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GtkDebugFlags
-;;;
-;;; Flags to use with gtk_set_debug_flags().
-;;;
-;;; Settings these flags causes GTK to print out different types of debugging
-;;; information. Some of these flags are only available when GTK has been
-;;; configured with -Ddebug=true.
-;;;
-;;; GTK_DEBUG_TEXT
-;;;     Information about GtkTextView.
-;;;
-;;; GTK_DEBUG_TREE
-;;;     Information about GtkTreeView.
-;;;
-;;; GTK_DEBUG_KEYBINDINGS
-;;;    Information about keyboard shortcuts.
-;;;
-;;; GTK_DEBUG_MODULES
-;;;     Information about modules and extensions.
-;;;
-;;; GTK_DEBUG_GEOMETRY
-;;;     Information about size allocation.
-;;;
-;;; GTK_DEBUG_ICONTHEME
-;;;     Information about icon themes.
-;;;
-;;; GTK_DEBUG_PRINTING
-;;;     Information about printing.
-;;;
-;;; GTK_DEBUG_BUILDER
-;;;     Trace GtkBuilder operation.
-;;;
-;;; GTK_DEBUG_SIZE_REQUEST
-;;;     Information about size requests.
-;;;
-;;; GTK_DEBUG_NO_CSS_CACHE
-;;;     Disable the style property cache.
-;;;
-;;; GTK_DEBUG_INTERACTIVE
-;;;     Open the GTK inspector.
-;;;
-;;; GTK_DEBUG_TOUCHSCREEN
-;;;     Pretend the pointer is a touchscreen.
-;;;
-;;; GTK_DEBUG_ACTIONS
-;;;     Information about actions and menu models.
-;;;
-;;; GTK_DEBUG_LAYOUT
-;;;     Information from layout managers.
-;;;
-;;; GTK_DEBUG_SNAPSHOT
-;;;     Include debug render nodes in the generated snapshots.
-;;;
-;;; GTK_DEBUG_CONSTRAINTS
-;;;     Information from the constraints solver.
-;;;
-;;; GTK_DEBUG_BUILDER_OBJECTS
-;;;     Log unused GtkBuilder objects.
-;;;
-;;; GTK_DEBUG_A11Y
-;;;     Information about accessibility state changes.
-;;;
-;;; GTK_DEBUG_ICONFALLBACK
-;;;     Information about icon fallback. Since: 4.2
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_init
@@ -138,7 +48,7 @@
 
 (cffi:defcfun ("gtk_init" init) :void
  #+liber-documentation
- "@version{#2022-1-4}
+ "@version{2024-11-5}
   @begin{short}
     Call this function before using any other GTK functions in your GUI
     applications.
@@ -147,7 +57,7 @@
 
   If you are using the @class{gtk:application} class, you do not have to call
   the @fun{gtk:init} or @fun{gtk:init-check} functions. The
-  \"GApplication::startup\" handler does it for you.
+  @code{\"GApplication::startup\"} handler does it for you.
 
   This function will terminate your program if it was unable to initialize the
   windowing system for some reason. If you want your program to fall back to a
@@ -157,7 +67,7 @@
   @code{SIGPIPE} signals, since these are almost never wanted in graphical
   applications. If you do need to handle @code{SIGPIPE} for some reason, reset
   the handler after the @fun{gtk:init} call, but notice that other libraries,
-  e.g. libdbus or gvfs, might do similar things.
+  for example, @code{libdbus} or @code{gvfs}, might do similar things.
   @see-class{gtk:application}
   @see-function{gtk:init-check}")
 
@@ -169,14 +79,12 @@
 
 (cffi:defcfun ("gtk_init_check" init-check) :boolean
  #+liber-documentation
- "@version{#2022-1-4}
-  @begin{return}
-    @em{True} if the windowing system has been successfully initialized,
-    @em{false} otherwise.
-  @end{return}
+ "@version{2024-11-5}
+  @return{@em{True} if the windowing system has been successfully initialized,
+    @em{false} otherwise.}
   @begin{short}
     This function does the same work as the @fun{gtk:init} function with only a
-    single change:
+    single change.
   @end{short}
   It does not terminate the program if the windowing system cannot be
   initialized. Instead it returns @em{false} on failure.
@@ -193,7 +101,7 @@
 
 (cffi:defcfun ("gtk_is_initialized" is-initialized) :boolean
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-11-5}
   @return{The boolean with the initialization status.}
   @begin{short}
     Use this function to check if GTK has been initialized with the
@@ -210,7 +118,7 @@
 
 (cffi:defcfun ("gtk_disable_setlocale" disable-setlocale) :void
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2024-11-5}
   @begin{short}
     Prevents the @fun{gtk:init} and @fun{gtk:init-check} functions from
     automatically calling @code{setlocale(LC_ALL, \"\")}.
@@ -231,7 +139,7 @@
 
 (defun default-language ()
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-11-5}
   @return{The default language as a @class{pango:language} instance.}
   @begin{short}
     Returns the Pango language instance for the default language currently in
@@ -243,7 +151,7 @@
 
   This function is equivalent to the @fun{pango:language-default} function. See
   that function for details.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (setq lang (gtk:default-language))
 => #<PANGO-LANGUAGE {C7B3C51@}>
@@ -263,7 +171,7 @@
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-11-5}
   @return{The @symbol{gtk:text-direction} value of the current locale.}
   @begin{short}
     Gets the direction of the current locale.
@@ -280,7 +188,7 @@
 
   This function is only needed rare cases when the locale is changed after GTK
   has already been initialized.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     You can use the @fun{gtk:locale-direction} function to update the default
     text direction as follows:
     @begin{pre}
@@ -293,32 +201,5 @@
   @see-function{gtk:widget-default-direction}")
 
 (export 'locale-direction)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_get_debug_flags ()
-;;;
-;;; GtkDebugFlags
-;;; gtk_get_debug_flags (void);
-;;;
-;;; Returns the GTK debug flags that are currently active.
-;;;
-;;; This function is intended for GTK modules that want to adjust their debug
-;;; output based on GTK debug flags.
-;;;
-;;; Returns :
-;;;     the GTK debug flags.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_set_debug_flags ()
-;;;
-;;; void
-;;; gtk_set_debug_flags (GtkDebugFlags flags);
-;;;
-;;; Sets the GTK debug flags.
-;;;
-;;; flags :
-;;;     the debug flags to set
-;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.main.loop.lisp ----------------------------------------
