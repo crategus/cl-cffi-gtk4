@@ -13,8 +13,8 @@ List of files for the GDK 4 Library
   gdk4.rgba.lisp                   GdkRGBA                            GDK 4.16 .
   gdk4.keyval.lisp                 Key Values                         GDK 4.16 .
   gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.16 .
-  gdk4.color-state.lisp            GdkColorState                      GDK 4.16 +
-  gdk4.cicp-params.lisp            GdkCicpParams                      GDK 4.16 +
+  gdk4.color-state.lisp            GdkColorState                      GDK 4.16 .
+  gdk4.cicp-params.lisp            GdkCicpParams                      GDK 4.16 .
 
  Displays, Devices, Monitors, Seats
 
@@ -77,4 +77,4 @@ List of files for the GDK 4 Library
   gdk4.pango-interaction.lisp      Pango interaction                  GDK 4.16 .
   gdk4.cairo-interaction.lisp      Cairo interaction                  GDK 4.16 .
 
-2024-11-7
+2024-11-10

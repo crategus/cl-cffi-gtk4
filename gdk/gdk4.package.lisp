@@ -249,12 +249,13 @@
       @about-function{color-state-equal}
     @end{subsection}
     @begin[GdkCicpParams]{subsection}
+      @about-symbol{cicp-range}
       @about-class{cicp-params}
       @about-generic{cicp-params-color-primaries}
       @about-generic{cicp-params-matrix-coefficients}
       @about-generic{cicp-params-range}
       @about-generic{cicp-params-transfer-function}
-      @about-function{cicp-params-params-new}
+      @about-function{cicp-params-new}
       @about-function{cicp-params-build-color-state}
     @end{subsection}
   @end{section}
