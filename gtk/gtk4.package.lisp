@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -60,7 +60,7 @@
   written, including C++, Objective-C, Guile/Scheme, Perl, Python, TOM, Ada95,
   Free Pascal, and Eiffel.
   @begin[GListModel support]{section}
-    @begin[GtkBitSet]{subsection}
+    @begin[GtkBitset]{subsection}
       @about-class{bitset}
       @about-function{bitset-ref}
       @about-function{bitset-unref}
@@ -361,9 +361,8 @@
       @about-generic{string-object-string}
       @about-function{string-object-new}
       @about-class{string-list}
-      @about-generic{string-list-item-type}
+      @about-function{string-list-item-type}
       @about-generic{string-list-n-items}
-      @about-generic{string-list-strings}
       @about-function{string-list-new}
       @about-function{string-list-append}
       @about-function{string-list-take}
@@ -566,8 +565,8 @@
       @image[rich-list]{Figure: Rich list}
 
       This rich list style is low density, spacious and uses an outline focus
-      ring. It is suitable for lists of controls, e.g. in preference dialogs or
-      settings panels. Use the @code{.rich-list} style class.
+      ring. It is suitable for lists of controls, for example, in preference
+      dialogs or settings panels. Use the @code{.rich-list} style class.
 
       @image[navigation-sidebar]{Figure: Navigation sidebar}
 
@@ -1238,6 +1237,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{notebook-page-tab-expand}
       @about-generic{notebook-page-tab-fill}
       @about-generic{notebook-page-tab-label}
+      @about-class{notebook-pages}
       @about-class{notebook}
       @about-generic{notebook-enable-popup}
       @about-generic{notebook-group-name}
@@ -1371,20 +1371,6 @@ GtkCellRenderer         GtkWidget
       @about-symbol{custom-allocate-func}
       @about-function{custom-layout-new}
     @end{subsection}
-    @begin[GtkConstraintLayout]{subsection}
-      @about-class{constraint-layout-child}
-      @about-class{constraint-layout}
-      @about-function{constraint-layout-new}
-      @about-function{constraint-layout-add-constraint}
-      @about-function{constraint-layout-remove-constraint}
-      @about-function{constraint-layout-remove-all-constraints}
-      @about-function{constraint-layout-add-guide}
-      @about-function{constraint-layout-remove-guide}
-      @about-function{constraint-layout-add-constraints-from-description}
-      @about-function{constraint-layout-add-constraints-from-descriptionv}
-      @about-function{constraint-layout-observe-constraints}
-      @about-function{constraint-layout-observe-guides}
-    @end{subsection}
     @begin[GtkConstraint]{subsection}
       @about-class{constraint-target}
       @about-class{constraint}
@@ -1416,6 +1402,20 @@ GtkCellRenderer         GtkWidget
       @about-function{constraint-guide-min-size}
       @about-function{constraint-guide-nat-size}
       @about-function{constraint-guide-max-size}
+    @end{subsection}
+    @begin[GtkConstraintLayout]{subsection}
+      @about-class{constraint-layout-child}
+      @about-class{constraint-layout}
+      @about-function{constraint-layout-new}
+      @about-function{constraint-layout-add-constraint}
+      @about-function{constraint-layout-remove-constraint}
+      @about-function{constraint-layout-remove-all-constraints}
+      @about-function{constraint-layout-add-guide}
+      @about-function{constraint-layout-remove-guide}
+      @about-function{constraint-layout-add-constraints-from-description}
+      @about-function{constraint-layout-add-constraints-from-descriptionv}
+      @about-function{constraint-layout-observe-constraints}
+      @about-function{constraint-layout-observe-guides}
     @end{subsection}
   @end{section}
   @begin[Display Widgets]{section}
@@ -1565,8 +1565,15 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
   @end{section}
   @begin[Media Support]{section}
-    @begin[GtkVideo]{subsection}
+    @begin[GtkGraphicsOffload]{subsection}
       @about-symbol{graphics-offload-enabled}
+      @about-class{graphics-offload}
+      @about-generic{graphics-offload-black-background}
+      @about-generic{graphics-offload-child}
+      @about-generic{graphics-offload-enabled}
+      @about-function{graphics-offload-new}
+    @end{subsection}
+    @begin[GtkVideo]{subsection}
       @about-class{video}
       @about-generic{video-autoplay}
       @about-generic{video-file}
@@ -2243,6 +2250,7 @@ GtkCellRenderer         GtkWidget
       @about-function{text-mark-buffer}
     @end{subsection}
     @begin[GtkTextBuffer]{subsection}
+      @about-symbol{text-buffer-notify-flags}
       @about-class{text-buffer}
       @about-generic{text-buffer-can-redo}
       @about-generic{text-buffer-can-undo}
@@ -2314,6 +2322,9 @@ GtkCellRenderer         GtkWidget
       @about-function{text-buffer-redo}
       @about-function{text-buffer-begin-irreversible-action}
       @about-function{text-buffer-end-irreversible-action}
+      @about-symbol{text-buffer-commit-notify}
+      @about-function{text-buffer-add-commit-notify}
+      @about-function{text-buffer-remove-commit-notify}
     @end{subsection}
     @begin[GtkChildAnchor]{subsection}
       @about-class{text-child-anchor}
@@ -2385,7 +2396,7 @@ GtkCellRenderer         GtkWidget
       @about-function{text-view-rtl-context}
     @end{subsection}
   @end{section}
-  @begin[Combo Box, Popovers]{section}
+  @begin[Popovers]{section}
     @begin[GtkPopover]{subsection}
       @about-class{popover}
       @about-generic{popover-autohide}
@@ -2522,6 +2533,8 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkGlArea]{subsection}
       @about-class{gl-area}
+      @about-generic{gl-area-allowed-apis}
+      @about-generic{gl-area-api}
       @about-generic{gl-area-auto-render}
       @about-generic{gl-area-context}
       @about-generic{gl-area-has-depth-buffer}
@@ -2616,6 +2629,8 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkShortcutManager]{subsection}
       @about-class{shortcut-manager}
+      @about-function{shortcut-manager-add-controller}
+      @about-function{shortcut-manager-remove-controller}
     @end{subsection}
     @begin[GtkShortcut]{subsection}
       @about-class{shortcut}
@@ -2627,15 +2642,13 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkShortcutTrigger]{subsection}
       @about-class{shortcut-trigger}
+      @about-function{shortcut-trigger-parse-string}
       @about-function{shortcut-trigger-trigger}
       @about-function{shortcut-trigger-hash}
       @about-function{shortcut-trigger-equal}
       @about-function{shortcut-trigger-compare}
       @about-function{shortcut-trigger-to-string}
-      @about-function{shortcut-trigger-print}
       @about-function{shortcut-trigger-to-label}
-      @about-function{shortcut-trigger-print-label}
-      @about-function{shortcut-trigger-parse-string}
       @about-class{keyval-trigger}
       @about-generic{keyval-trigger-keyval}
       @about-generic{keyval-trigger-modifiers}
@@ -2653,9 +2666,8 @@ GtkCellRenderer         GtkWidget
     @begin[GtkShortcutAction]{subsection}
       @about-symbol{shortcut-action-flags}
       @about-class{shortcut-action}
-      @about-function{shortcut-action-to-string}
-      @about-function{shortcut-action-print}
       @about-function{shortcut-action-parse-string}
+      @about-function{shortcut-action-to-string}
       @about-function{shortcut-action-activate}
       @about-class{nothing-action}
       @about-function{nothing-action-get}
@@ -2798,6 +2810,7 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-width}
       @about-function{widget-height}
       @about-function{widget-size}
+      @about-function{widget-baseline}
       @about-function{widget-compute-bounds}
       @about-function{widget-compute-transform}
       @about-function{widget-compute-point}
@@ -3117,12 +3130,33 @@ GtkCellRenderer         GtkWidget
       @about-function{page-setup-unix-dialog-page-setup}
       @about-function{page-setup-unix-dialog-print-settings}
     @end{subsection}
+    @begin[GtkPrintSetup]{subsection}
+      @about-class{print-setup}
+      @about-function{print-setup-page-setup}
+      @about-function{print-setup-print-settings}
+    @end{subsection}
+    @begin[GtkPrintDialog]{subsection}
+      @about-class{print-dialog}
+      @about-generic{print-dialog-accept-label}
+      @about-generic{print-dialog-modal}
+      @about-generic{print-dialog-page-setup}
+      @about-generic{print-dialog-print-settings}
+      @about-generic{print-dialog-title}
+      @about-function{print-dialog-new}
+      @about-function{print-dialog-print}
+      @about-function{print-dialog-print-file}
+      @about-function{print-dialog-print-file-finish}
+      @about-function{print-dialog-print-finish}
+      @about-function{print-dialog-setup}
+      @about-function{print-dialog-setup-finish}
+    @end{subsection}
   @end{section}
   @begin[Shortcuts Overview]{section}
     @begin[GtkShortcutsWindow]{subsection}
       @about-class{shortcuts-window}
       @about-generic{shortcuts-window-section-name}
       @about-generic{shortcuts-window-view-name}
+      @about-function{shortcuts-window-add-section}
     @end{subsection}
     @begin[GtkShortcutsSection]{subsection}
       @about-class{shortcuts-section}
@@ -3130,14 +3164,16 @@ GtkCellRenderer         GtkWidget
       @about-generic{shortcuts-section-section-name}
       @about-generic{shortcuts-section-title}
       @about-generic{shortcuts-section-view-name}
+      @about-function{shortcuts-section-add-group}
     @end{subsection}
     @begin[GtkShortcutsGroup]{subsection}
       @about-class{shortcuts-group}
-      @about-function{shortcuts-group-accel-size-group}
-      @about-function{shortcuts-group-height}
-      @about-function{shortcuts-group-title}
-      @about-function{shortcuts-group-title-size-group}
-      @about-function{shortcuts-group-view}
+      @about-generic{shortcuts-group-accel-size-group}
+      @about-generic{shortcuts-group-height}
+      @about-generic{shortcuts-group-title}
+      @about-generic{shortcuts-group-title-size-group}
+      @about-generic{shortcuts-group-view}
+      @about-function{shortcuts-group-add-shortcut}
     @end{subsection}
     @begin[GtkShortcutsShortcut]{subsection}
       @about-symbol{shortcut-type}
@@ -3162,6 +3198,32 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
   @end{section}
   @begin[Accessibility]{section}
+    @begin[GtkAccessibleRange]{subsection}
+      @about-class{accessible-range}
+      @about-function{accessible-range-set-current-value}
+    @end{subsection}
+    @begin[GtkAccessibleText]{subsection}
+      @about-symbol{accessible-text-range}
+      @about-symbol{accessible-text-content-change}
+      @about-symbol{accessible-text-granularity}
+      @about-class{accessible-text}
+      @about-function{accessible-text-attributes}
+      @about-function{accessible-text-caret-position}
+      @about-function{accessible-text-contents}
+      @about-function{accessible-text-contents-at}
+      @about-function{accessible-text-default-attributes}
+      @about-function{accessible-text-extents}
+      @about-function{accessible-text-offset}
+      @about-function{accessible-text-selection}
+      @about-function{accessible-text-update-caret-position}
+      @about-function{accessible-text-update-contents}
+      @about-function{accessible-text-update-selection-bound}
+    @end{subsection}
+    @begin[GtkAccessibleList]{subsection}
+      @about-class{accessible-list}
+      @about-function{accessible-list-new-from-list}
+      @about-function{accessible-list-objects}
+    @end{subsection}
     @begin[GtkAccessible]{subsection}
       @about-symbol{accessible-role}
       @about-symbol{accessible-state}
@@ -3172,22 +3234,25 @@ GtkCellRenderer         GtkWidget
       @about-symbol{accessible-autocomplete}
       @about-symbol{accessible-sort}
       @about-symbol{accessible-platform-state}
-      @about-class{accessible-range}
-      @about-class{accessible-text}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
-      @about-function{accessible-reset-property}
-      @about-function{accessible-reset-relation}
-      @about-function{accessible-reset-state}
-      @about-function{accessible-update-property}
-      @about-function{accessible-update-property-value}
-      @about-function{accessible-update-relation}
-      @about-function{accessible-update-relation-value}
-      @about-function{accessible-update-state}
-      @about-function{accessible-update-state-value}
       @about-function{accessible-property-init-value}
       @about-function{accessible-relation-init-value}
       @about-function{accessible-state-init-value}
+      @about-function{accessible-accessible-parent}
+      @about-function{accessible-at-context}
+      @about-function{accessible-bounds}
+      @about-function{accessible-first-accessible-child}
+      @about-function{accessible-next-accessible-sibling}
+      @about-function{accessible-platform-state}
+      @about-function{accessible-reset-property}
+      @about-function{accessible-reset-relation}
+      @about-function{accessible-reset-state}
+      @about-function{accessible-update-next-accessible-sibling}
+      @about-function{accessible-update-property}
+      @about-function{accessible-update-relation}
+      @about-function{accessible-update-state}
+      @about-function{accessible-announce}
     @end{subsection}
     @begin[GtkATContext]{subsection}
       @about-class{at-context}
@@ -3567,11 +3632,11 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[GTK Core Reference]{section}
     @begin[Library initialization and main loop]{subsection}
-      Before using GTK, you need to initialize it using the @fun{init}
+      Before using GTK, you need to initialize it using the @fun{gtk:init}
       function. This connects to the windowing system, sets up the locale and
-      performs other initialization tasks. The @fun{init} function exits
+      performs other initialization tasks. The @fun{gtk:init} function exits
       the application if errors occur. To avoid this, you can use the
-      @fun{init-check} function, which allows you to recover from a failed
+      @fun{gtk:init-check} function, which allows you to recover from a failed
       GTK initialization. For instance, you might start up your application in
       text mode instead.
 
@@ -3582,19 +3647,21 @@ GtkCellRenderer         GtkWidget
       event to one or more widgets.
 
       When widgets receive an event, they frequently emit one or more
-      \"signals\". Signals notify your program that “something interesting
-      happened” by invoking functions you have connected to the signal with the
-      @fun{g-signal-connect} function. Functions connected to a signal are
+      \"signals\". Signals notify your program that something interesting
+      happened by invoking functions you have connected to the signal with the
+      @fun{g:signal-connect} function. Functions connected to a signal are
       often called \"callbacks\".
 
       When your callbacks are invoked, you would typically take some action -
       for example, when an Open button is clicked you might display a
-      @class{file-chooser-dialog} widget. After a callback finishes, GTK
+      @class{gtk:file-chooser-dialog} widget. After a callback finishes, GTK
       will return to the main loop and await more user input.
 
-      It is important to note that if you use the @class{application} class,
+      It is important to note that if you use the @class{gtk:application} class,
       the application class will take care of initializing GTK for you, as well
       as spinning the main loop.
+    @end{subsection}
+    @begin[Functions for library initialization]{subsection}
       @about-function{init}
       @about-function{init-check}
       @about-function{is-initialized}
@@ -3606,6 +3673,8 @@ GtkCellRenderer         GtkWidget
       GTK provides version information, primarily useful in configure checks
       for builds that have a configure script. Applications will not typically
       use the features described here.
+    @end{subsection}
+    @begin[Functions for version information]{subsection}
       @about-function{major-version}
       @about-function{minor-version}
       @about-function{micro-version}
@@ -3615,6 +3684,7 @@ GtkCellRenderer         GtkWidget
     @begin[GtkSettings]{subsection}
       @about-symbol{settings-value}
       @about-symbol{system-setting}
+      @about-symbol{font-rendering}
       @about-class{settings}
       @about-generic{settings-gtk-alternative-button-order}
       @about-generic{settings-gtk-alternative-sort-arrows}
@@ -3678,6 +3748,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{direction-type}
       @about-symbol{icon-size}
       @about-symbol{response-type}
+      @about-function{response-type-keyword}
       @about-symbol{sensitivity-type}
       @about-symbol{text-direction}
       @about-symbol{justification}
@@ -3714,6 +3785,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{accessible-invalid-state}
       @about-symbol{accessible-autocomplete}
       @about-symbol{accessible-sort}
+      @about-symbol{accessible-announcement-priority}
     @end{subsection}
     @begin[Filesystem utilities]{subsection}
       @about-class{mount-operation}
@@ -3744,8 +3816,9 @@ GtkCellRenderer         GtkWidget
       @about-function{css-location-line-chars}
       @about-class{css-section}
       @about-function{css-section-new}
-      @about-function{css-section-print}
+      @about-function{css-section-new-with-bytes}
       @about-function{css-section-to-string}
+      @about-function{css-section-bytes}
       @about-function{css-section-file}
       @about-function{css-section-parent}
       @about-function{css-section-start-location}
@@ -3989,12 +4062,12 @@ GtkCellRenderer         GtkWidget
       @about-class{tree-selection}
       @about-generic{tree-selection-mode}
       @about-symbol{tree-selection-func}
-      @about-symbol{tree-selection-foreach-func}
       @about-function{tree-selection-set-select-function}
       @about-function{tree-selection-get-select-function}
       @about-function{tree-selection-user-data}
       @about-function{tree-selection-tree-view}
       @about-function{tree-selection-selected}
+      @about-symbol{tree-selection-foreach-func}
       @about-function{tree-selection-selected-foreach}
       @about-function{tree-selection-selected-rows}
       @about-function{tree-selection-count-selected-rows}
