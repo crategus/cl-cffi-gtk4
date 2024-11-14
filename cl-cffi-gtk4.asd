@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.8.0"
+  :version "0.9.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
@@ -486,7 +486,7 @@
 
 (defsystem :cl-cffi-gtk4/test
   :name "cl-cffi-gtk4/test"
-  :version "0.8.0"
+  :version "0.9.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :depends-on (:cl-cffi-gtk4 :cl-cffi-glib/test :fiveam :iterate)
@@ -518,7 +518,7 @@
      (:file "rtest-gtk4-numeric-sorter")
      (:file "rtest-gtk4-column-view-sorter"       :if-feature :gtk-4-10)
 
-;    (:file "gtk4.section-model"                  :if-feature :gtk-4-12)
+;    (:file "rtest-gtk4-section-model"            :if-feature :gtk-4-12)
      (:file "rtest-gtk4-selection-model")
      (:file "rtest-gtk4-no-selection")
      (:file "rtest-gtk4-single-selection")
