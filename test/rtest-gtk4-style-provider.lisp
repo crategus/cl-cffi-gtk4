@@ -40,12 +40,26 @@
              (glib-test:list-signals "GtkStyleProvider")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkStyleProvider" GTK:STYLE-PROVIDER
-                      (:EXPORT T
-                       :TYPE-INITIALIZER "gtk_style_provider_get_type"))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_style_provider_get_type"))
              (gobject:get-gtype-definition "GtkStyleProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     gtk-private-changed
+(test gtk-style-provide-gtk-private-changed-signal
+  (let* ((name "gtk-private-changed")
+         (gtype (g:gtype "GtkStyleProvider"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-;;; 2024-9-19
+;;; 2024-11-2

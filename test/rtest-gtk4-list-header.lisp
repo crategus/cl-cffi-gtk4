@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-list-header :in gtk-suite)
+(def-suite gtk-list-header :in gtk-list-widgets)
 (in-suite gtk-list-header)
 
 ;;; --- Types and Values -------------------------------------------------------

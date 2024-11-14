@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-scroll-info :in gtk-suite)
+(def-suite gtk-scroll-info :in gtk-list-widgets)
 (in-suite gtk-scroll-info)
 
 ;;; --- Types and Values -------------------------------------------------------

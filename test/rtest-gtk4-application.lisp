@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-application :in gtk-suite)
+(def-suite gtk-application :in gtk-application-support)
 (in-suite gtk-application)
 
 (defvar *verbose-gtk-application* nil)

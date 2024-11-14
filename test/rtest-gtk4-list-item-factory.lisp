@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-list-item-factory :in gtk-suite)
+(def-suite gtk-list-item-factory :in gtk-list-widgets)
 (in-suite gtk-list-item-factory)
 
 ;;;     GtkListItemFactory

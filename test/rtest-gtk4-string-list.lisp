@@ -115,6 +115,11 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+(test gtk-string-list-properties
+  (let ((model (make-instance 'gtk:string-list)))
+    (is (eq (g:gtype "GObject") (gtk:string-list-item-type model)))
+    (is (= 0 (gtk:string-list-n-items model)))))
+
 ;;;     strings                                            Since 4.10
 
 ;; not readable and not writable, there is no accessor exported
@@ -206,4 +211,4 @@
     (is (g:type-is-object (g:list-model-item-type model)))
     (is (< 3000 (g:list-model-n-items model)))))
 
-;;; 2024-10-1
+;;; 2024-10-29

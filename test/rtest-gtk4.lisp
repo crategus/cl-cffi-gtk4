@@ -17,6 +17,12 @@
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
 (def-suite gtk-suite :in gtk-test)
+(def-suite gtk-list-model-support :in gtk-suite)
+(def-suite gtk-list-widgets :in gtk-suite)
+(def-suite gtk-tree-support :in gtk-suite)
+(def-suite gtk-application-support :in gtk-suite)
+(def-suite gtk-interface-builder :in gtk-suite)
+(def-suite gtk-drag-and-drop :in gtk-suite)
 
 (defun run-repeat (tests &key (count 1) (on-error nil) (linecount 50))
   (let ((fiveam:*on-error* on-error)
@@ -155,4 +161,21 @@ sem venenatis, vitae ultricies arcu laoreet."))
     ;; Return the new list store
     store))
 
-;;; 2024-10-2
+;;; ----------------------------------------------------------------------------
+
+(defvar *default-printer* nil)
+
+;; Get a default printer for more tests
+;; TODO: Does not work generally, improve the function!
+(defun get-default-printer ()
+  #-windows
+  (unless *default-printer*
+    (gtk:enumerate-printers (lambda (printer)
+                              (let ((name (gtk:printer-name printer)))
+                                (when (string= name "In Datei drucken")
+                                  (setf *default-printer* printer))
+                                nil))
+                            t))
+  *default-printer*)
+
+;;; 2024-10-28

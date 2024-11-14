@@ -89,6 +89,9 @@
 
 ;;;     gtk_recent_manager_get_items
 
+;; TODO: Causes a memory overflow after several 1000 runs. Check the memory
+;; management more carefully.
+
 (test gtk-recent-manager-items
   (is (every (lambda (x) (typep x 'gtk:recent-info))
              (gtk:recent-manager-items (gtk:recent-manager-default)))))

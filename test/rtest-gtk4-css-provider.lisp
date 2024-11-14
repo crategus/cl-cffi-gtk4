@@ -73,10 +73,13 @@
       (is (string= "css-accordion.css:1:1-6:1"
                    (gtk:css-section-to-string section))))))
 
+;;;     gtk_css_section_new_with_bytes                      Since 4.16
+
 ;;;     gtk_css_section_ref                                not implemented
 ;;;     gtk_css_section_unref                              not implemented
 ;;;     gtk_css_section_print                              not implemented
 ;;;     gtk_css_section_to_string
+;;;     gtk_css_section_get_bytes                           Since 4.16
 ;;;     gtk_css_section_get_file
 ;;;     gtk_css_section_get_parent
 ;;;     gtk_css_section_get_start_location

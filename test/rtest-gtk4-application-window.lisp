@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-application-window :in gtk-suite)
+(def-suite gtk-application-window :in gtk-application-support)
 (in-suite gtk-application-window)
 
 ;;; --- GtkApplicationWindow ---------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-column-view-row :in gtk-suite)
+(def-suite gtk-column-view-row :in gtk-list-widgets)
 (in-suite gtk-column-view-row)
 
 ;;; --- Types and Values -------------------------------------------------------
