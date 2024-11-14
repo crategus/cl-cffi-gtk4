@@ -2,7 +2,7 @@
 ;;; gsk4.transform.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
 ;;; GskTransformCategory
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GskTransformCategory" transform-category
+(gobject:define-genum "GskTransformCategory" transform-category
   (:export t
    :type-initializer "gsk_transform_category_get_type")
    :unknown
@@ -89,8 +89,7 @@
       (liber:symbol-documentation 'transform-category)
  "@version{2024-4-21}
   @begin{declaration}
-    @begin{pre}
-(gobject:define-g-enum \"GskTransformCategory\" transform-category
+(gobject:define-genum \"GskTransformCategory\" transform-category
   (:export t
    :type-initializer \"gsk_transform_category_get_type\")
    :unknown
@@ -100,7 +99,6 @@
    :2d-affine
    :2d-translate
    :identity)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -131,7 +129,7 @@
   their categories. Otherwise, matrix operations done via multiplication will
   not worsen categories. So for the matrix multiplication @code{C = A * B} the
   result has the category @code{category(C) = (MIN (category(A), category(B))}.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     With the helper function
     @begin{pre}
 (defun category-value (category)
@@ -142,7 +140,7 @@
     @begin{pre}
 (>= (category-value category) (category-value :2d))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gsk:transform}")
 
 ;;; ----------------------------------------------------------------------------
@@ -155,7 +153,7 @@
 ;; gsk_transform_new is not documented but present in the GSK library
 (cffi:defcfun ("gsk_transform_new" %transform-new) :pointer)
 
-(glib:define-g-boxed-opaque transform "GskTransform"
+(glib:define-gboxed-opaque transform "GskTransform"
   :export t
   :type-initializer "gsk_transform_get_type"
   :alloc (%transform-new))
@@ -166,12 +164,10 @@
       (documentation 'transform 'type)
  "@version{2024-4-21}
   @begin{declaration}
-    @begin{pre}
-(glib:define-g-boxed-opaque transform ¸\"GskTransform\"
+(glib:define-gboxed-opaque transform ¸\"GskTransform\"
   :export t
   :type-initializer \"gsk_transform_get_type\"
   :alloc (%transform-new))
-    @end{pre}
   @end{declaration}
   @begin{short}
     The @class{gsk:transform} structure is a structure to describe transform
@@ -258,7 +254,7 @@
   Strings printed via the @fun{gsk:transform-to-string} function can be read in
   again successfully using this function. If the @arg{str} argument does not
   describe a valid transform matrix, @em{false} is returned.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gsk:transform-parse \"translate(1,2)\")
 => #<GSK:TRANSFORM {100A325D83@}>
@@ -270,7 +266,7 @@
 => (3.0 0.0 0.0 3.0 1.0 2.0)
 (gsk:transform-parse \"xxxx\") => NIL
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gsk:transform}
   @see-function{gsk:transform-to-string}"
     (cffi:with-foreign-object (transform :pointer)
@@ -293,7 +289,7 @@
     Converts a tansform matrix into a string that is suitable for printing and
     can later be parsed with the @fun{gsk:transform-parse} function.
   @end{short}
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gsk:transform-to-string (gsk:transform-new)) => \"none\"
 (graphene:with-point (p 1/2 2)
@@ -303,7 +299,7 @@
 (gsk:transform-to-string (gsk:transform-parse \"translate(1,2)\"))
 => \"translate(1, 2)\"
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gsk:transform}
   @see-function{gsk:transform-parse}"
   (transform (g:boxed transform)))
@@ -412,7 +408,7 @@
   sure, use the @fun{gsk:transform-category} function to check.
 
   Since 4.6
-  @begin{examples}
+  @begin[Examples]{dictionary}
     Recreate an equivalent transform matrix from the factors returned by this
     function.
     @begin{pre}
@@ -426,7 +422,7 @@
           xscale yscale)
       xskew yskew))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-class{gsk:transform}
   @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xskew :float)  (yskew :float)

@@ -2,11 +2,11 @@
 ;;; gsk.rounded-rect.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -55,10 +55,10 @@
 ;; TODO: Implement a gsk:with-rounded-rect macro
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskCorner
+;;; GskCorner
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GskCorner" corner
+(gobject:define-genum "GskCorner" corner
   (:export t
    :type-initializer "gsk_corner_get_type")
   (:top-left 0)
@@ -71,30 +71,32 @@
       "GEnum"
       (liber:symbol-documentation 'corner)
  "@version{2023-10-27}
-  @begin{short}
-    The corner indices used by the @symbol{gsk:rounded-rect} instance.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GskCorner\" corner
+  @begin{declaration}
+(gobject:define-genum \"GskCorner\" corner
   (:export t
    :type-initializer \"gsk_corner_get_type\")
   (:top-left 0)
   (:top-right 1)
   (:bottom-right 2)
   (:bottom-left 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:top-left]{The top left corner.}
-    @entry[:top-right]{The top right corner.}
-    @entry[:bottom-right]{The bottom right corner.}
-    @entry[:bottom-left]{The bottom left corner.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:top-left]{The top left corner.}
+      @entry[:top-right]{The top right corner.}
+      @entry[:bottom-right]{The bottom right corner.}
+      @entry[:bottom-left]{The bottom left corner.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The corner indices used by the @symbol{gsk:rounded-rect} instance.
+  @end{short}
   @see-symbol{gsk:rounded-rect}")
 
 (export 'corner)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GskRoundedRect
+;;; GskRoundedRect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcstruct rounded-rect
@@ -169,7 +171,7 @@
 (export 'rounded-rect-corner)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_init ()
+;;; gsk_rounded_rect_init
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init" rounded-rect-init)
@@ -205,7 +207,7 @@
 (export 'rounded-rect-init)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_init_copy ()
+;;; gsk_rounded_rect_init_copy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init_copy" rounded-rect-init-copy)
@@ -227,7 +229,7 @@
 (export 'rounded-rect-init-copy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_init_from_rect ()
+;;; gsk_rounded_rect_init_from_rect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init_from_rect" %rounded-rect-init-from-rect)
@@ -255,7 +257,7 @@
 (export 'rounded-rect-init-from-rect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_normalize ()
+;;; gsk_rounded_rect_normalize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_normalize" rounded-rect-normalize)
@@ -276,7 +278,7 @@
 (export 'rounded-rect-normalize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_offset ()
+;;; gsk_rounded_rect_offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_offset" %rounded-rect-offset)
@@ -302,7 +304,7 @@
 (export 'rounded-rect-offset)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_shrink ()
+;;; gsk_rounded_rect_shrink
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_shrink" %rounded-rect-shrink)
@@ -345,7 +347,7 @@
 (export 'rounded-rect-shrink)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_is_rectilinear ()
+;;; gsk_rounded_rect_is_rectilinear
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_is_rectilinear" rounded-rect-is-rectilinear)
@@ -366,7 +368,7 @@
 (export 'rounded-rect-is-rectilinear)
 
 ;;; ----------------------------------------------------------------------------
-;;;gsk_rounded_rect_contains_point ()
+;;;gsk_rounded_rect_contains_point
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_contains_point" rounded-rect-contains-point)
@@ -388,7 +390,7 @@
 (export 'rounded-rect-contains-point)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_contains_rect ()
+;;; gsk_rounded_rect_contains_rect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_contains_rect" rounded-rect-contains-rect)
@@ -413,7 +415,7 @@
 (export 'rounded-rect-contains-rect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_rect_intersects_rect ()
+;;; gsk_rounded_rect_intersects_rect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_intersects_rect" rounded-rect-intersects-rect)

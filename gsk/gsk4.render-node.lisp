@@ -2,7 +2,7 @@
 ;;; gsk.render-node.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,6 +70,8 @@
 ;;;     GskGLShaderNode                                    not implemented
 ;;;     GskTextureScaleNode                                Since 4.10
 ;;;     GskMaskNode                                        Since 4.10
+;;;     GskFillNode                                        Since 4.14
+;;;     GskStrokeNode                                      Since 4.14
 ;;;
 ;;; Functions
 ;;;
@@ -83,6 +85,11 @@
 ;;;     gsk_render_node_deserialize
 ;;;     gsk_render_node_write_to_file
 ;;;     gsk_render_node_get_bounds
+;;;
+;;;     gsk_value_dup_render_node                           Since 4.6
+;;;     gsk_value_get_render_node                           Since 4.6
+;;;     gsk_value_set_render_node                           Since 4.6
+;;;     gsk_value_take_render_node                          Since 4.6
 ;;;
 ;;;     gsk_container_node_new
 ;;;     gsk_container_node_get_n_children
@@ -216,7 +223,7 @@
 ;;; GskRenderNodeType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GskRenderNodeType" render-node-type
+(gobject:define-genum "GskRenderNodeType" render-node-type
   (:export t
    :type-initializer "gsk_render_node_type_get_type")
   :not-a-render-node
@@ -262,7 +269,7 @@
       (liber:symbol-documentation 'render-node-type)
  "@version{2024-5-25}
   @begin{declaration}
-(gobject:define-g-enum \"GskRenderNodeType\" render-node-type
+(gobject:define-genum \"GskRenderNodeType\" render-node-type
   (:export t
    :type-initializer \"gsk_render_node_type_get_type\")
   :not-a-render-node
@@ -397,7 +404,7 @@
 ;;; GskScalingFilter
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GskScalingFilter" scaling-filter
+(gobject:define-genum "GskScalingFilter" scaling-filter
   (:export t
    :type-initializer "gsk_scaling_filter_get_type")
   (:linear 0)
@@ -409,25 +416,27 @@
       "GEnum"
       (liber:symbol-documentation 'scaling-filter)
  "@version{2023-9-22}
-  @begin{short}
-    The filters used when scaling texture data.
-  @end{short}
-  The actual implementation of each filter is deferred to the rendering
-  pipeline.
-  @begin{pre}
-(gobject:define-g-enum \"GskScalingFilter\" scaling-filter
+  @begin{declaration}
+(gobject:define-genum \"GskScalingFilter\" scaling-filter
   (:export t
    :type-initializer \"gsk_scaling_filter_get_type\")
   (:linear 0)
   (:nearest 1)
   (:trilinear 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:linear]{Linear interpolation filter.}
-    @entry[:nearest]{Nearest neighbor interpolation filter.}
-    @entry[:trilinear]{Linear interpolation along each axis, plus mipmap
-      generation, with linear interpolation along the mipmap levels.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:linear]{Linear interpolation filter.}
+      @entry[:nearest]{Nearest neighbor interpolation filter.}
+      @entry[:trilinear]{Linear interpolation along each axis, plus mipmap
+        generation, with linear interpolation along the mipmap levels.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The filters used when scaling texture data.
+  @end{short}
+  The actual implementation of each filter is deferred to the rendering
+  pipeline.
   @see-class{gsk:render-node}")
 
 ;;; ----------------------------------------------------------------------------
@@ -486,7 +495,7 @@
 ;;; GskBlendMode
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GskBlendMode" blend-mode
+(gobject:define-genum "GskBlendMode" blend-mode
   (:export t
    :type-initializer "gsk_blend_mode_get_type")
   (:default 0)
@@ -511,14 +520,8 @@
       "GEnum"
       (liber:symbol-documentation 'blend-mode)
  "@version{2023-10-26}
-  @begin{short}
-    The blend modes available for render nodes.
-  @end{short}
-  The implementation of each blend mode is deferred to the rendering pipeline.
-  See @url[https://www.w3.org/TR/compositing-1/]{Composting and Blending} for
-  more information on blending and blend modes.
-  @begin{pre}
-(gobject:define-g-enum \"GskBlendMode\" blend-mode
+  @begin{declaration}
+(gobject:define-genum \"GskBlendMode\" blend-mode
   (:export t
    :type-initializer \"gsk_blend_mode_get_type\")
   (:default 0)
@@ -537,38 +540,47 @@
   (:hue 13)
   (:saturation 14)
   (:luminosity 15))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:default]{The default blend mode, which specifies no blending.}
-    @entry[:multiply]{The source color is multiplied by the destination and
-      replaces the destination.}
-    @entry[:screen]{Multiplies the complements of the destination and source
-      color values, then complements the result.}
-    @entry[:overlay]{Multiplies or screens the colors, depending on the
-      destination color value. This is the inverse of hard-list.}
-    @entry[:darken]{Selects the darker of the destination and source colors.}
-    @entry[:ligthen]{Selects the lighter of the destination and source colors.}
-    @entry[:color-dodge]{Brightens the destination color to reflect the source
-      color.}
-    @entry{:color-burn]{Darkens the destination color to reflect the source
-      color.}
-    @entry[:hard-ligth]{Multiplies or screens the colors, depending on the
-      source color value.}
-    @entry[:soft-ligth]{Darkens or lightens the colors, depending on the source
-      color value.}
-    @entry[:difference]{Subtracts the darker of the two constituent colors from
-      the lighter color.}
-    @entry[:exclusion]{Produces an effect similar to that of the difference mode
-      but lower in contrast.}
-    @entry[:color]{Creates a color with the hue and saturation of the source
-      color and the luminosity of the destination color.}
-    @entry[:hue]{Creates a color with the hue of the source color and the
-      saturation and luminosity of the destination color.}
-    @entry[:saturation]{Creates a color with the saturation of the source color
-      and the hue and luminosity of the destination color.}
-    @entry[:luminosity]{Creates a color with the luminosity of the source color
-      and the hue and saturation of the destination color.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:default]{The default blend mode, which specifies no blending.}
+      @entry[:multiply]{The source color is multiplied by the destination and
+        replaces the destination.}
+      @entry[:screen]{Multiplies the complements of the destination and source
+        color values, then complements the result.}
+      @entry[:overlay]{Multiplies or screens the colors, depending on the
+        destination color value. This is the inverse of hard-list.}
+      @entry[:darken]{Selects the darker of the destination and source colors.}
+      @entry[:ligthen]{Selects the lighter of the destination and source
+        colors.}
+      @entry[:color-dodge]{Brightens the destination color to reflect the
+        source color.}
+      @entry{:color-burn]{Darkens the destination color to reflect the source
+        color.}
+      @entry[:hard-ligth]{Multiplies or screens the colors, depending on the
+        source color value.}
+      @entry[:soft-ligth]{Darkens or lightens the colors, depending on the
+        source color value.}
+      @entry[:difference]{Subtracts the darker of the two constituent colors
+        from the lighter color.}
+      @entry[:exclusion]{Produces an effect similar to that of the difference
+        mode but lower in contrast.}
+      @entry[:color]{Creates a color with the hue and saturation of the source
+        color and the luminosity of the destination color.}
+      @entry[:hue]{Creates a color with the hue of the source color and the
+        saturation and luminosity of the destination color.}
+      @entry[:saturation]{Creates a color with the saturation of the source
+        color and the hue and luminosity of the destination color.}
+      @entry[:luminosity]{Creates a color with the luminosity of the source
+        color and the hue and saturation of the destination color.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The blend modes available for render nodes.
+  @end{short}
+  The implementation of each blend mode is deferred to the rendering pipeline.
+  See @url[https://www.w3.org/TR/compositing-1/]{Composting and Blending} for
+  more information on blending and blend modes.
   @see-class{gsk:render-node}")
 
 ;;; ----------------------------------------------------------------------------
@@ -576,7 +588,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
-(gobject:define-g-enum "GskMaskMode" mask-mode
+(gobject:define-genum "GskMaskMode" mask-mode
   (:export t
    :type-initializer "gsk_mask_mode_get_type")
   (:alpha 0)
@@ -589,26 +601,28 @@
       "GEnum"
       (liber:symbol-documentation 'mask-mode)
  "@version{2023-10-26}
-  @begin{short}
-    The mask modes available for mask nodes.
-  @end{short}
-
-  @begin{pre}
-(gobject:define-g-enum \"GskMaskMode\" mask-mode
+  @begin{declaration}
+(gobject:define-genum \"GskMaskMode\" mask-mode
   (:export t
    :type-initializer \"gsk_mask_mode_get_type\")
   (:alpha 0)
   (:inverted-alpha 1)
   (:luminance 2)
   (:inverted-luminace 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:alpha]{Use the alpha channel of the mask.}
-    @entry[inverted-alpha]{Use the inverted alpha channel of the mask.}
-    @entry[:luminance]{Use the luminance of the mask, multiplied by mask alpha.}
-    @entry[:inverted-luminance]{Use the inverted luminance of the mask,
-      multiplied by mask alpha.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:alpha]{Use the alpha channel of the mask.}
+      @entry[inverted-alpha]{Use the inverted alpha channel of the mask.}
+      @entry[:luminance]{Use the luminance of the mask, multiplied by mask
+        alpha.}
+      @entry[:inverted-luminance]{Use the inverted luminance of the mask,
+        multiplied by mask alpha.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The mask modes available for mask nodes.
+  @end{short}
   Since 4.10
   @see-class{gsk:render-node}")
 
@@ -823,7 +837,7 @@
     This function is mostly intended for use inside a debugger to quickly dump
     a render node to a file for later inspection.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Example output for a @class{gsk:color-node} instance.
     @begin{pre}
 color {
@@ -861,6 +875,33 @@ color {
   bounds)
 
 (export 'render-node-bounds)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_value_dup_render_node                               Since 4.6
+;;;
+;;; Retrieves the `GskRenderNode` stored inside the given `value`, and acquires
+;;; a reference to it.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_value_get_render_node function                      Since 4.6
+;;;
+;;; Retrieves the `GskRenderNode` stored inside the given `value`.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_value_set_render_node                               Since 4.6
+;;;
+;;; Stores the given `GskRenderNode` inside `value`. The [struct@GObject.Value]
+;;; will acquire a reference to the `node`.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_value_take_render_node function                     Since 4.6
+;;;
+;;; Stores the given `GskRenderNode` inside `value`. This function transfers
+;;; the ownership of the `node` to the `GValue`.
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskContainerNode
@@ -3645,6 +3686,110 @@ color {
 ;;; Retrieves the source GskRenderNode child of the node.
 ;;;
 ;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskFillNode                                             Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_fill_node_new
+;;;
+;;; Creates a GskRenderNode that will fill the child in the area given by path
+;;; and fill_rule.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_fill_node_get_child
+;;;
+;;; Gets the child node that is getting drawn by the given node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_fill_node_get_fill_rule
+;;;
+;;; Retrieves the fill rule used to determine how the path is filled.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_fill_node_get_path
+;;;
+;;; Retrieves the path used to describe the area filled with the contents of
+;;; the node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskStrokeNode                                           Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_stroke_node_new
+;;;
+;;; Creates a GskRenderNode that will fill the outline generated by stroking
+;;; the given path using the attributes defined in stroke.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_stroke_node_get_child
+;;;
+;;; Gets the child node that is getting drawn by the given node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_stroke_node_get_path
+;;;
+;;; Retrieves the path that will be stroked with the contents of the node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_stroke_node_get_stroke
+;;;
+;;; Retrieves the stroke attributes used in this node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskSubsurfaceNode
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_subsurface_node_new
+;;;
+;;; Creates a GskRenderNode that will possibly divert the child node to a
+;;; subsurface.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_subsurface_node_get_subsurface
+;;;
+;;; Gets the subsurface that was set on this node.
+;;;
+;;; Since 4.14
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_subsurface_node_get_child
+;;;
+;;; Gets the child node that is getting drawn by the given node.
+;;;
+;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gsk4.render-node.lis ---------------------------------------
