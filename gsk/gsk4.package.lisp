@@ -2,11 +2,11 @@
 ;;; gsk.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -51,23 +51,119 @@
   the GNU Lesser General Public License (LGPL). This is the API documentation
   of a Lisp binding to GSK.
   @begin[GskRenderer]{section}
-    Renders a scene.
     @about-class{renderer}
     @about-generic{renderer-realized}
     @about-generic{renderer-surface}
     @about-function{renderer-new-for-surface}
-    @about-function{gl-renderer-new}
-    @about-function{cairo-renderer-new}
-    @about-function{renderer-new}
-    @about-function{broadway-renderer-new}
     @about-function{renderer-realize}
     @about-function{renderer-unrealize}
     @about-function{renderer-is-realized}
     @about-function{renderer-render}
     @about-function{renderer-render-texture}
+    @about-class{cairo-renderer}
+    @about-function{cairo-renderer-new}
+    @about-class{gl-renderer}
+    @about-function{gl-renderer-new}
+    @about-class{ngl-renderer}
+    @about-function{ngl-renderer-new}
+  @end{section}
+  @begin[GskPathMeasure]{section}
+    @about-class{path-measure}
+    @about-function{path-measure-new}
+    @about-function{path-measure-new-with-tolerance}
+    @about-function{path-measure-length}
+    @about-function{path-measure-path}
+    @about-function{path-measure-point}
+    @about-function{path-measure-tolerance}
+    @about-function{path-measure-ref}
+    @about-function{path-measure-unref}
+  @end{section}
+  @begin[GtkPathPoint]{section}
+    @about-symbol{path-direction}
+    @about-class{path-point}
+    @about-function{path-point-curvature}
+    @about-function{path-point-distance}
+    @about-function{path-point-position}
+    @about-function{path-point-rotation}
+    @about-function{path-point-tangent}
+    @about-function{path-point-compare}
+    @about-function{path-point-copy}
+    @about-function{path-point-equal}
+    @about-function{path-point-free}
+  @end{section}
+  @begin[GskStroke]{section}
+    @about-symbol{line-cap}
+    @about-symbol{line-join}
+    @about-class{stroke}
+    @about-function{stroke-new}
+    @about-function{stroke-copy}
+    @about-function{stroke-free}
+    @about-function{stroke-equal}
+    @about-function{stroke-dash}
+    @about-function{stroke-dash-offset}
+    @about-function{stroke-line-cap}
+    @about-function{stroke-line-join}
+    @about-function{stroke-line-width}
+    @about-function{stroke-miter-limit}
+    @about-function{stroke-to-cairo}
+  @end{section}
+  @begin[GskPath]{section}
+    @about-symbol{path-foreach-flags}
+    @about-symbol{path-operation}
+    @about-symbol{fill-rule}
+    @about-class{path}
+    @about-function{path-parse}
+    @about-symbol{path-foreach-func}
+    @about-function{path-foreach}
+    @about-function{path-bounds}
+    @about-function{path-closest-point}
+    @about-function{path-start-point}
+    @about-function{path-end-point}
+    @about-function{path-stroke-bounds}
+    @about-function{path-in-fill}
+    @about-function{path-is-closed}
+    @about-function{path-is-empty}
+    @about-function{path-print}
+    @about-function{path-ref}
+    @about-function{path-unref}
+    @about-function{path-to-cairo}
+    @about-function{path-to-string}
+  @end{section}
+  @begin[GskPathBuilder]{section}
+    @about-class{path-builder}
+    @about-function{path-builder-new}
+    @about-function{path-builder-to-path}
+    @about-function{path-builder-free-to-path}
+    @about-function{path-builder-current-point}
+    @about-function{path-builder-close}
+    @about-function{path-builder-add-rect}
+    @about-function{path-builder-add-circle}
+    @about-function{path-builder-add-layout}
+    @about-function{path-builder-add-path}
+    @about-function{path-builder-add-reverse-path}
+    @about-function{path-builder-add-rounded-rect}
+    @about-function{path-builder-add-segment}
+    @about-function{path-builder-add-cairo-path}
+    @about-function{path-builder-move-to}
+    @about-function{path-builder-rel-move-to}
+    @about-function{path-builder-line-to}
+    @about-function{path-builder-rel-line-to}
+    @about-function{path-builder-arc-to}
+    @about-function{path-builder-rel-arc-to}
+    @about-function{path-builder-conic-to}
+    @about-function{path-builder-rel-conic-to}
+    @about-function{path-builder-cubic-to}
+    @about-function{path-builder-rel-cubic-to}
+    @about-function{path-builder-quad-to}
+    @about-function{path-builder-rel-quad-to}
+    @about-function{path-builder-html-arc-to}
+    @about-function{path-builder-rel-html-arc-to}
+    @about-function{path-builder-svg-arc-to}
+    @about-function{path-builder-rel-svg-arc-to}
+    @about-function{path-builder-ref}
+    @about-function{path-builder-unref}
   @end{section}
   @begin[GskRenderNode]{section}
-    Simple scene graph element.
     @about-symbol{render-node-type}
     @about-symbol{serialization-error}
     @about-symbol{parse-location}
@@ -210,7 +306,6 @@
     @about-function{gl-shader-node-shader}
   @end{section}
   @begin[GskRoundedRect]{section}
-    A rounded rectangle.
     @about-symbol{corner}
     @about-symbol{rounded-rect}
     @about-function{rounded-rect-bounds}
@@ -227,7 +322,6 @@
     @about-function{rounded-rect-intersects-rect}
   @end{section}
   @begin[GskTransform]{section}
-    A description for transform operations.
     @about-symbol{transform-category}
     @about-class{transform}
     @about-function{transform-new}
@@ -258,7 +352,6 @@
     @about-function{transform-transform-point}
   @end{section}
   @begin[GskGLShader]{section}
-    Fragment shaders for GSK.
     @about-symbol{gl-uniform-type}
     @about-symbol{shader-args-builder}
     @about-class{gl-shader}

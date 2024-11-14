@@ -1,10 +1,14 @@
 I. API Reference
 
-  gsk4.renderer.lisp         Renders a scene                          GSK 4.12 +
-  gsk4.render-node.lisp      Simple scene graph element               GSK 4.12 +
-  gsk4.rounded-rect.lisp     Rounded rectangle                        GSK 4.12
-  gsk4.transform.lisp        Description for transform operations     GSK 4.12 .
+  gsk4.renderer.lisp         Renders a scene                          GSK 4.16 +
+  gsk4.render-node.lisp      Simple scene graph element               GSK 4.16 +
+  gsk4.path.lisp             GskPath                                  GSK 4.16 .
+  gsk4.path-builder.lisp     GskPathBuilder                           GSK 4.16 .
+  gsk4.rounded-rect.lisp     Rounded rectangle                        GSK 4.16 .
+  gsk4.transform.lisp        Description for transform operations     GSK 4.16 .
 
-  gsk4.gl-shader.lisp        Fragment shaders for GSK                 GSK 4.12 +
+  Deprecated since 4.16
 
-2024-4-21
+  not implemened             Fragment shaders for GSK
+
+2024-11-14
