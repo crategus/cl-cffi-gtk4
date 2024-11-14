@@ -1,6 +1,22 @@
 ;;;; Various Label
 ;;;;
-;;;; 2024-4-4
+;;;; The <tt>gtk:label</tt> widget displays a small amount of text. As the name
+;;;; implies, most labels are used to label another widget such as a
+;;;; <tt>gtk:button</tt> widget.
+;;;;
+;;;; Labels may contain mnemonics and can be made selectable. Selectable labels
+;;;; allow the user to copy the label contents to the clipboard.  To make it
+;;;; easy to format text in a label, changing colors, fonts, and so on, label
+;;;; text can be provided in a simple markup format.
+;;;;
+;;;; A label can contain any number of paragraphs, but will have performance
+;;;; problems if it contains more than a small number. Paragraphs are separated
+;;;; by newlines or other paragraph separators understood by Pango.
+;;;;
+;;;; GTK supports markup for clickable hyperlinks in addition to regular Pango
+;;;; markup.
+;;;;
+;;;; Last version: 2024-10-29
 
 (in-package :gtk4-example)
 

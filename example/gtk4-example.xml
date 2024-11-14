@@ -59,4 +59,7 @@
     <file>zoom_in_cursor.png</file>
     <file>zoom_out_cursor.png</file>
   </gresource>
+  <gresource prefix="/template">
+    <file>windows.ui</file>
+  </gresource>
 </gresources>

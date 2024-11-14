@@ -7,9 +7,90 @@
 ;;;; This demo code shows some of the more obscure cases, in the simple case a
 ;;;; call to the <tt>gtk:image-new-from-file</tt> is all you need.
 ;;;;
-;;;; 2024-4-4
+;;;; Last version: 2024-10-31
 
 (in-package :gtk4-example)
+
+;; TODO: Improve this implementation
+(defvar *animation* nil)
+
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject-subclass "PixbufPaintable" pixbuf-paintable
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkPaintable"))
+  ((resource
+    pixbuf-paintable-resource
+    "resource" "gchararray" t t)
+   (animation
+    pixbuf-paintable-animation
+    "animation" "GdkPixbufAnimation" t t)
+   (iter
+    pixbuf-paintable-iter
+    "iter" "GdkPixbufAnimationIter" t t)
+   (timeout
+    pixbuf-paintable-timeout
+    "timeout" "guint64" t t)))
+
+;; Here, we implement the functionality required by the GdkPaintable interface
+(defmethod gdk:paintable-snapshot-impl ((paintable pixbuf-paintable)
+                                    snapshot width height)
+  (let ((iter (pixbuf-paintable-iter paintable)))
+    (gdk:pixbuf-animation-iter-advance iter 0)
+    (let* ((pixbuf (gdk:pixbuf-animation-iter-pixbuf iter))
+           (texture (gdk:texture-new-for-pixbuf pixbuf)))
+      (gdk:paintable-snapshot texture snapshot width height))))
+
+(defmethod gdk:paintable-get-flags-impl ((paintable pixbuf-paintable))
+  (list :static-size))
+
+(defmethod gdk:paintable-get-intrinsic-width-impl
+    ((paintable pixbuf-paintable))
+  (let ((pixbuf (pixbuf-paintable-animation paintable)))
+    (gdk:pixbuf-animation-width pixbuf)))
+
+(defmethod gdk:paintable-get-intrinsic-height-impl
+    ((paintable pixbuf-paintable))
+  (let ((pixbuf (pixbuf-paintable-animation paintable)))
+    (gdk:pixbuf-animation-height pixbuf)))
+
+(defun delay-cb (paintable)
+  (let* ((iter (pixbuf-paintable-iter paintable))
+         (delay (gdk:pixbuf-animation-iter-delay-time iter))
+         (timeout (pixbuf-paintable-timeout paintable)))
+    (when timeout
+      (g:source-remove timeout))
+    (setf (pixbuf-paintable-timeout paintable)
+          (g:timeout-add delay (lambda () (delay-cb paintable))))
+    (gdk:paintable-invalidate-contents paintable)
+    g:+source-remove+))
+
+(defun pixbuf-paintable-new (resource)
+  (let ((paintable (make-instance 'pixbuf-paintable))
+        (pixbuf (gdk:pixbuf-animation-new-from-resource resource)))
+
+    (setf *animation* paintable)
+
+    (format t "   PIXBUF loaded from resource : ~a x ~a~%"
+              (gdk:pixbuf-animation-width pixbuf)
+              (gdk:pixbuf-animation-height pixbuf))
+
+    (setf (pixbuf-paintable-resource paintable) resource)
+    (setf (pixbuf-paintable-animation paintable) pixbuf)
+    (setf (pixbuf-paintable-iter paintable)
+          (gdk:pixbuf-animation-iter pixbuf 0))
+
+    (let* ((iter (pixbuf-paintable-iter paintable))
+           (delay (gdk:pixbuf-animation-iter-delay-time iter)))
+
+      (setf (pixbuf-paintable-timeout paintable)
+            (g:timeout-add delay (lambda () (delay-cb paintable))))
+      (gdk:paintable-invalidate-contents paintable))
+
+      paintable))
+
+;;; ----------------------------------------------------------------------------
 
 (let ((pixbuf-loader nil)
       (image-stream nil))
@@ -43,7 +124,8 @@
              (lambda (loader)
                (let ((pixbuf (gdk-pixbuf:pixbuf-loader-pixbuf loader)))
                  (gdk-pixbuf:pixbuf-fill pixbuf #xaaaaaaff)
-                 (gtk:picture-set-pixbuf picture pixbuf))))
+                 (let ((texture (gdk:texture-new-for-pixbuf pixbuf)))
+                   (setf (gtk:picture-paintable picture) texture)))))
 
           (g:signal-connect pixbuf-loader "area-updated"
              (lambda (loader x y width height)
@@ -53,9 +135,10 @@
                ;; the pixbuf again. Queuing a redraw used to be sufficient, but
                ;; nowadays GtkImage uses GtkIconHelper which caches the pixbuf
                ;; state and will just redraw from the cache.
-               (let ((pixbuf (gdk-pixbuf:pixbuf-loader-pixbuf loader)))
-                 (gtk:picture-set-pixbuf picture nil)
-                 (gtk:picture-set-pixbuf picture pixbuf))))))
+               (let* ((pixbuf (gdk-pixbuf:pixbuf-loader-pixbuf loader))
+                      (texture (gdk:texture-new-for-pixbuf pixbuf)))
+                 (setf (gtk:picture-paintable picture) nil)
+                 (setf (gtk:picture-paintable picture) texture))))))
     ;; Continue the GSource
     g:+source-continue+)
 
@@ -63,6 +146,7 @@
     (let* ((timeout nil)
            (vbox (make-instance 'gtk:box
                                 :orientation :vertical
+                                :valign :start
                                 :spacing 6))
            (window (make-instance 'gtk:window
                                   :child vbox
@@ -70,9 +154,14 @@
                                   :title "Various Image Widgets"
                                   :default-width 320)))
 
-      (g:signal-connect window "destroy"
+      (g:signal-connect window "close-request"
                         (lambda (widget)
                           (declare (ignore widget))
+                          ;; Destroy source for the animation
+                          ;; TODO: Improve the implementation
+                          (let ((id (pixbuf-paintable-timeout *animation*)))
+                            (when id
+                              (g:source-remove id)))
                           ;; Destroy the timeout source
                           (when timeout
                             (g:source-remove timeout)
@@ -113,20 +202,20 @@
         (gtk:box-append vbox label)
         (gtk:box-append vbox image))
 
-      ;; Animation new from a pixbuf
-      ;; TODO: Does not work. We do not get the animation.
+      ;; Animation from a pixbuf
+      ;; TODO: Remove the extra space above and below the paintable
       (let* ((label (make-instance 'gtk:label
                                    :margin-top 9
                                    :margin-bottom 6
                                    :use-markup t
                                    :label
-                                   "<b>Animation new from a pixbuf</b>"))
-             (pixbuf (gdk:pixbuf-new-from-file
-                         (glib-sys:sys-path "resource/spinner.gif")))
-             (image (gtk:image-new-from-pixbuf pixbuf)))
-        (setf (gtk:image-icon-size image) :large)
+                                   "<b>Animation from a pixbuf</b>"))
+             (paintable (pixbuf-paintable-new "/images/floppybuddy.gif"))
+             (picture (gtk:picture-new-for-paintable paintable)))
+        (setf (gtk:widget-halign picture) :center)
+        (setf (gtk:widget-valign picture) :center)
         (gtk:box-append vbox label)
-        (gtk:box-append vbox image))
+        (gtk:box-append vbox picture))
 
       ;; Progressive loading
       (let* ((label (make-instance 'gtk:label
@@ -138,22 +227,21 @@
                                            "<b>Progressive image loading</b>~
                                            ~%Click Image to repeat loading")))
              ;; Create an empty image for now. The progressive loader will
-             ;; create the pixbuf and fill it in.
+             ;; create the pixbuf and fill it in
              (picture (gtk:picture-new))
              (frame (make-instance 'gtk:frame
                                    :child picture
                                    :width-request 340
                                    :height-request 220))
              (gesture (make-instance 'gtk:gesture-click
-                                     :propagation-phase :target))
-        )
+                                     :propagation-phase :target)))
         ;; An event controller for the frame
         (gtk:widget-add-controller picture gesture)
         (g:signal-connect gesture "pressed"
             (lambda (gesture n-press x y)
               (declare (ignore n-press))
               (format t "Button pressed event at (~a, ~a)~%" x y)
-              (gtk:picture-set-pixbuf picture nil)
+              (setf (gtk:picture-paintable picture) nil)
               (setf timeout
                     (g:timeout-add 25
                                    (lambda () (progressive-timeout picture))))
@@ -166,33 +254,7 @@
         ;; slow data source by inserting pauses in the reading process.
         (setf timeout
               (g:timeout-add 25 (lambda () (progressive-timeout picture))))
-
-
-#|
-    // Assign a click listener
-    let gesture = gtk::GestureClick::new();
-    gesture.connect_released(|gesture, _, _, _| {
-        gesture.set_state(gtk::EventSequenceState::Claimed);
-        println!("Box pressed!");
-    });
-    gtk_box.add_controller(&gesture);
-|#
-
-#|
-        ;; Restart loading the image from the file
-        (g:signal-connect event-box "button-press-event"
-           (lambda (widget event)
-             (declare (ignore widget))
-             (format t "Event Box clicked at (~,2f, ~,2f)~%"
-                       (gdk-event-button-x event)
-                       (gdk-event-button-y event))
-             (gtk:image-clear image)
-             (setf timeout
-                   (g:timeout-add 100
-                                  (lambda () (progressive-timeout image))))))
-|#
-
         (gtk:box-append vbox label)
         (gtk:box-append vbox frame))
-
+      ;; Present the window
       (gtk:window-present window))))

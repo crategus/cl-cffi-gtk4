@@ -48,9 +48,6 @@
 (unexport 'glib:with-g-error :glib)
 (unexport 'glib:with-ignore-g-error :glib)
 
-(unexport 'glib:define-g-boxed-cstruct :glib)
-(unexport 'glib:define-g-boxed-opaque :glib)
-(unexport 'glib:define-g-boxed-variant-cstruct :glib)
 (unexport 'glib:with-foreign-boxed-array :glib)
 
 (unexport 'glib:gtype :glib)
@@ -61,14 +58,7 @@
 
 (unexport 'gobject:create-fn-ref :gobject)
 (unexport 'gobject:define-cb-methods :gobject)
-(unexport 'gobject:define-g-enum :gobject)
-(unexport 'gobject:define-g-flags :gobject)
-(unexport 'gobject:define-g-interface :gobject)
-(unexport 'gobject:define-g-object-class :gobject)
 (unexport 'gobject:define-vtable :gobject)
-(unexport 'gobject:get-g-type-definition :gobject)
-(unexport 'gobject:get-g-enum-definition :gobject)
-(unexport 'gobject:get-g-flags-definition :gobject)
 (unexport 'gobject:get-enum-items :gobject)
 (unexport 'gobject:enum-item-name :gobject)
 (unexport 'gobject:enum-item-nick :gobject)
@@ -141,10 +131,18 @@
 (unexport 'gdk:pixbuf-copy-area :gdk)
 (unexport 'gdk:pixbuf-fill :gdk)
 ;; Symbols from gdk-pixbuf.animation.lisp
+(unexport 'gdk:pixbuf-animation-iter :gdk)
+(unexport 'gdk:pixbuf-animation-iter-pixbuf :gdk)
+(unexport 'gdk:pixbuf-animation-iter-delay-time :gdk)
+(unexport 'gdk:pixbuf-animation-iter-advance :gdk)
+(unexport 'gdk:pixbuf-animation-iter-on-currently-loading-frame :gdk)
 (unexport 'gdk:pixbuf-animation :gdk)
 (unexport 'gdk:pixbuf-animation-loop :gdk)
 (unexport 'gdk:pixbuf-animation-new-from-file :gdk)
 (unexport 'gdk:pixbuf-animation-new-from-resource :gdk)
+(unexport 'gdk:pixbuf-animation-width :gdk)
+(unexport 'gdk:pixbuf-animation-height :gdk)
+(unexport 'gdk:pixbuf-animation-is-static-image :gdk)
 (unexport 'gdk:pixbuf-animation-static-image :gdk)
 
 ;;; ---------------------------------------------------------------------------
@@ -153,7 +151,6 @@
   (let* ((base (asdf:component-pathname (asdf:find-system :cl-cffi-gtk4)))
          (output-directory (merge-pathnames "../books/cl-cffi-gtk4/" base)))
     (format t "Generate HTML to ~a~%" output-directory)
-    (ensure-directories-exist output-directory)
     (liber:generate-html-documentation
       '(:gtk :gdk :gsk
         :gdk-pixbuf
@@ -179,7 +176,6 @@
          (output-directory
              (merge-pathnames "../books/cl-cffi-gtk4/single-page/" base)))
     (format t "Generate Single PAGE HTML to ~a~%" output-directory)
-    (ensure-directories-exist output-directory)
     (liber:generate-html-documentation
       '(:gtk :gdk :gsk
         :gdk-pixbuf

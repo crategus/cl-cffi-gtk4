@@ -278,12 +278,20 @@
        ":window"
        "DO-OVERLAY-INTERACTIVE"
        "gtk4-example"
-       "overlay-interactive.lisp")
+       "overlay-interactive.lisp"
+       :keywords
+       "GtkOverlay"
+       "gtk:overlay"
+       "gtk:overlay-add-overlay")
       ("Decorative overlay"
        ":window"
        "DO-OVERLAY-DECORATIVE"
        "gtk4-example"
-       "overlay-decorative.lisp")
+       "overlay-decorative.lisp"
+       :keywords
+       "GtkOverlay"
+       "gtk:overlay"
+       "gtk:overlay-add-overlay")
       ("Notebook"
        ":window"
        "DO-NOTEBOOK"
@@ -372,12 +380,22 @@
        ":window"
        "DO-LABEL-VARIOUS"
        "gtk4-example"
-       "label-various.lisp")
-      ("Images"
+       "label-various.lisp"
+       :keywords
+       "GtkLabel" "gtk:label")
+      ("Images and Pictures"
        ":window"
        "DO-IMAGES"
        "gtk4-example"
-       "images.lisp")
+       "images.lisp"
+       :keywords
+       "GtkImage" "gtk:image"
+       "GtkPicture" "gtk:picture"
+       "GdkPaintable" "gdk:paintable"
+       "GdkTexture" "gdk:texture"
+       "GdkPixbufLoader" "gdk:pixbuf-loader"
+       "GdkPixbufAnimation" "gdk:pixbuf-animation"
+       "GdkPixbufAnimationIter" "gdk:pixbuf-animation-iter")
       ("Spinner"
        ":window"
        "DO-SPINNER"
@@ -428,7 +446,7 @@
        "gtk4-example"
        "grid-view-clocks.lisp"
        :keywords
-       "define-g-object-subclass"
+       "define-gobject-subclass"
        "gdk:paintable"
        "gdk:paintable-snapshot"
        "gtk:grid-view"
@@ -450,7 +468,9 @@
        ":window"
        "DO-VIDEO"
        "gtk4-example"
-       "video.lisp"))
+       "video.lisp"
+       :keywords
+       "GtkVideo" "gtk:video"))
 
      "Button and Toggle Widgets"
      (("Various Buttons"

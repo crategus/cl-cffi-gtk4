@@ -1,10 +1,10 @@
 ;;;; Interactive Overlay
 ;;;;
-;;;; Shows widgets in static positions over a main widget. The overlayed widgets
-;;;; can be interactive controls such as the entry in this example, or just
-;;;; decorative, like the big orange label.
+;;;; Shows overlay widgets in static positions over a main widget. The overlayed
+;;;; widgets can be interactive controls such as the entry in this example, or
+;;;; just decorative, like the big orange label.
 ;;;;
-;;;; 2024-4-14
+;;;; Last version: 2024-10-2
 
 (in-package :gtk4-example)
 
@@ -24,6 +24,7 @@
                               :orientation :vertical
                               :halign :center
                               :valign :center)))
+    ;; Fill grid with buttons
     (dotimes (j 5)
       (dotimes (i 5)
         (let ((button (make-instance 'gtk:button
@@ -41,7 +42,7 @@
                                 :use-markup t
                                 :can-target nil
                                 :valign :start
-                                :margin-top 24
+                                :margin-top 36
                                 :label
                                 "<span foreground='orange'
                                        weight='ultrabold'

@@ -148,6 +148,7 @@
                (:file "size-group")
                (:file "emblemed-icon")
                (:file "event-controller")
+               (:file "widget-template")
 
                ;; Theming in GTK
                (:file "css-accordion")
