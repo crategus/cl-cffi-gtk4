@@ -40,6 +40,8 @@
      (:file "gdk4.rgba")
      (:file "gdk4.keyval")
      (:file "gdk4.dmabuf-formats"                 :if-feature :gtk-4-14)
+     (:file "gdk4.color-state"                    :if-feature :gtk-4-16)
+     (:file "gdk4.cicp-params"                    :if-feature :gtk-4-16)
 
      ;; Display, Seat, Device, Monitor
      (:file "gdk4.display-manager")
@@ -95,18 +97,17 @@
      (:file "gdk4.pixbuf-interaction")
      (:file "gdk4.pango-interaction")
      (:file "gdk4.cairo-interaction")
-     (:file "gdk4.x11-interaction")
-     (:file "gdk4.wayland-interaction")
     ))
    (:module gsk
     :serial t
     :components
     ((:file "gsk4.package")
-     (:file "gsk4.renderer")
-     (:file "gsk4.transform")
      (:file "gsk4.rounded-rect")
+     (:file "gsk4.transform")
+     (:file "gsk4.path"                           :if-feature :gtk-4-14)
+     (:file "gsk4.path-builder"                   :if-feature :gtk-4-14)
+     (:file "gsk4.renderer")
      (:file "gsk4.render-node")
-     (:file "gsk4.gl-shader")
     ))
    (:module gtk
     :serial t
@@ -251,6 +252,7 @@
      (:file "gtk4.calendar")
 
      ;; Media Support
+     (:file "gtk4.graphics-offload"               :if-feature :gtk-4-14)
      (:file "gtk4.video")
      (:file "gtk4.media-controls")
      (:file "gtk4.media-stream")
@@ -389,6 +391,8 @@
      (:file "gtk4.print-unix-dialog"              :if-feature (:not :windows))
      (:file "gtk4.printer"                        :if-feature (:not :windows))
      (:file "gtk4.print-job"                      :if-feature (:not :windows))
+     (:file "gtk4.print-setup"                    :if-feature :gtk-4-14)
+     (:file "gtk4.print-dialog"                   :if-feature :gtk-4-14)
 
      ;; Shortcuts Widgets
      (:file "gtk4.shortcuts-window")
@@ -546,6 +550,11 @@
      (:file "rtest-gtk4-column-view-row"          :if-feature :gtk-4-12)
      (:file "rtest-gtk4-drop-down")
 
+     ;; Tree support
+     (:file "rtest-gtk4-tree-list-model")
+     (:file "rtest-gtk4-tree-list-row-sorter")
+     (:file "rtest-gtk4-tree-expander")
+
      ;; GTK Core
      (:file "rtest-gtk4-version")
      (:file "rtest-gtk4-enumerations")
@@ -630,6 +639,7 @@
      (:file "rtest-gtk4-calendar")
 
      ;; Media Support
+     (:file "rtest-gtk4-graphics-offload"         :if-feature :gtk-4-14)
      (:file "rtest-gtk4-video"                    :if-feature (:not :windows))
      (:file "rtest-gtk4-media-controls"           :if-feature (:not :windows))
      (:file "rtest-gtk4-media-stream"             :if-feature (:not :windows))
@@ -705,7 +715,7 @@
      (:file "rtest-gtk4-combo-box-text")
      (:file "rtest-gtk4-popover")
      (:file "rtest-gtk4-popover-menu")
-;    (:file "gtk4.popover-menu-bar")
+     (:file "rtest-gtk4-popover-menu-bar")
 
      ;; Selector Widgets and Dialogs
      (:file "rtest-gtk4-color-chooser")
@@ -737,7 +747,7 @@
 
      ;; Widgets for custom drawing
      (:file "rtest-gtk4-drawing-area")
-;    (:file "gtk4.gl-area")
+     (:file "rtest-gtk4-gl-area")
 
      ;; Ornaments
      (:file "rtest-gtk4-frame")
@@ -769,6 +779,8 @@
      (:file "rtest-gtk4-print-unix-dialog"        :if-feature (:not :windows))
      (:file "rtest-gtk4-printer"                  :if-feature (:not :windows))
      (:file "rtest-gtk4-print-job"                :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-setup"              :if-feature :gtk-4-14)
+     (:file "rtest-gtk4-print-dialog"             :if-feature :gtk-4-14)
 
      ;; Shortcuts Widgets
      (:file "rtest-gtk4-shortcuts-window")
@@ -826,8 +838,8 @@
      (:file "rtest-gtk4-drag-source")
      (:file "rtest-gtk4-drag-icon")
      (:file "rtest-gtk4-drop-target")
-;    (:file "gtk4.drop-target-async")
-;    (:file "gtk4.drop-controller-motion")
+     (:file "rtest-gtk4-drop-target-async")
+     (:file "rtest-gtk4-drop-controller-motion")
 
      ;; Miscellaneous
      (:file "rtest-gtk4-adjustment")
@@ -848,6 +860,8 @@
      (:file "rtest-gdk4-rgba")
      (:file "rtest-gdk4-keyval")
      (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
+     (:file "rtest-gdk4-color-state"              :if-feature :gtk-4-16)
+     (:file "rtest-gdk4-cicp-params"              :if-feature :gtk-4-16)
 
      ;; Displays, Devices, Monitors, Seats
      (:file "rtest-gdk4-display-manager")
@@ -903,16 +917,14 @@
 ;    (:file "rtest-gdk4-pixbuf-interaction")
 ;    (:file "rtest-gdk4-pango-interaction")
 ;    (:file "rtest-gdk4-cairo-interaction")
-;    (:file "rtest-gdk4-x11-interaction")
-;    (:file "rtest-gdk4-wayland-interaction")
 
      ;; GSK
      (:file "rtest-gsk4-renderer")
      (:file "rtest-gsk4-transform")
+     (:file "rtest-gsk4-path"                     :if-feature :gtk-4-14)
+     (:file "rtest-gsk4-path-builder"             :if-feature :gtk-4-14)
      (:file "rtest-gsk4-render-node")
      (:file "rtest-gsk4-rounded-rect")
-; TODO: No OpenGL support implemented
-;    (:file "rtest-gsk4-gl-shader")
 
      (:file "rtest-gtk4-finish")
 ))))
