@@ -1,9 +1,9 @@
 *.tmp
 *.gresource
 *.ini
+*.c
 TODO
 test/rtest-templates.lisp
 test/out/*
 test/report/*
 make-coverage.lisp
-
