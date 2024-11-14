@@ -37,7 +37,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-;; The code to load texures in a thread
+;; Code to load texures in a thread
 
 (defun load-texture-thread (task source path)
   (let ((texture (gdk:texture-new-from-resource path)))
@@ -126,7 +126,11 @@
   (format t "in ACTIVATE-ABOUT: ~a, ~a~%" action parameter))
 
 (defun activate-shortcuts-window (action parameter)
-  (format t "in ACTIVATE-SHORTCUTS-WINDOW: ~a, ~a~%" action parameter))
+  (format t "in ACTIVATE-SHORTCUTS-WINDOW: ~a, ~a~%" action parameter)
+  (let* ((window *window*)
+         (button (g:object-data window "open_menubutton")))
+    (gtk:menu-button-popdown button)
+    (gtk:widget-activate-action window "win.show-help-overlay")))
 
 (defun activate-quit (action parameter)
   (format t "in ACTIVATE-QUIT: ~a, ~a~%" action parameter))
@@ -222,8 +226,52 @@
     (let ((infobar (g:object-data *window* "infobar")))
       (setf (gtk:widget-visible infobar) t))))
 
+(defun add-background (flowbox file texture)
+  (let ((child (gtk:picture-new-for-paintable texture)))
+    (setf (gtk:widget-size-request child) '(110 70))
+    (gtk:flow-box-insert flowbox child -1)
+))
+
+;; TODO: Implement a :default constant for GDK_MEMORY_DEFAUlT
+
+#|
+/**
+ * GDK_MEMORY_DEFAULT:
+ *
+ * The default memory format used by GTK.
+ *
+ * This is the format provided by [method@Gdk.Texture.download].
+ * It is equal to %CAIRO_FORMAT_ARGB32.
+ *
+ * Be aware that unlike the `GdkMemoryFormat` values, this format
+ * is different for different endianness.
+ */
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+#define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
+#elif G_BYTE_ORDER == G_BIG_ENDIAN
+#define GDK_MEMORY_DEFAULT GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
+#else
+#error "Unknown byte order for GDK_MEMORY_DEFAULT"
+#endif
+|#
+
 (defun populate-flowbox (flowbox)
-  (format t " POPLATE-FLOWBOX not impememented : ~a~%" flowbox))
+  (unless (g:object-data flowbox "populated")
+    (format t " POPLATE-FLOWBOX with pictures~%")
+    (setf (g:object-data flowbox "populated") t)
+    (let* ((size (* 4 110 80))
+           (data (cffi:foreign-alloc :uchar :count size :initial-element #xff))
+           (bytes (g:bytes-new data size))
+           (texture (gdk:memory-texture-new 110 70 :B8G8R8A8-PREMULTIPLIED bytes (* 4 110)))
+           (child (gtk:picture-new-for-paintable texture)))
+      (gtk:widget-add-css-class child "frame")
+      (gtk:flow-box-insert flowbox child -1))
+    (let ((resources '("sunset.jpg" "portland-rose.jpg" "beach.jpg" "nyc.jpg")))
+      (dolist (resource resources)
+        (let* ((file (concatenate 'string "/org/gtk/WidgetFactory4/" resource))
+               (pixbuf (gdk:pixbuf-new-from-resource-at-scale file 110 110 t))
+               (texture (gdk:texture-new-for-pixbuf pixbuf)))
+          (add-background flowbox file texture))))))
 
 (defun activate-background (action parameter)
   (when (on-page 2)
@@ -328,13 +376,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun activate (application)
-
   ;; Load and apply CSS
   (let ((path "/org/gtk/WidgetFactory4/widget-factory.css")
         (provider (gtk:css-provider-new)))
     (gtk:css-provider-load-from-resource provider path)
-    (gtk:style-context-add-provider-for-display (gdk:display-default)
-                                                provider))
+    (gtk:style-context-add-provider-for-display (gdk:display-default) provider))
 
   (let* ((entries (list (list "dark" nil nil "false" #'change-dark-state)
                         (list "theme" nil "s" "'current'" #'change-theme-state)
@@ -364,13 +410,18 @@
                         (list "app.copy" (list "<Control>c"))
                         (list "app.paste" (list "<Control>v"))
                         (list "win.delete" (list "Delete"))))
+         ;; Create a new GtkBuilder
          (path "/org/gtk/WidgetFactory4/widget-factory.ui")
          (builder (gtk:builder-new)))
+    ;; Load the GtkBuilder UI definition
+    (unless (gtk:builder-add-from-resource builder path)
+      (error "Cannot load the UI definition resource file."))
 
-    (when (not (gtk:builder-add-from-resource builder path))
-      (error "Cannot load the resource file."))
+    ;; FIXME: The shortcuts window is not shown. What is the problem?!
+    (gtk:builder-add-from-resource builder
+                                   "/org/gtk/WidgetFactory4/gtk/help-overlay.ui")
 
-    ;; Load pictures in the tabs of a notebook
+    ;; Load pictures in the tabs of the notebook on page 1
     (load-texture-in-thread (gtk:builder-object builder "notebook_sunset")
                             "/org/gtk/WidgetFactory4/sunset.jpg")
     (load-texture-in-thread (gtk:builder-object builder "notebook_nyc")
@@ -380,7 +431,6 @@
 
     (let* ((controller (make-instance 'gtk:shortcut-controller
                                       :propagation-phase :bubble))
-
            (window (gtk:builder-object builder "window"))
            (statusbar (gtk:builder-object builder "statusbar"))
            (toolbar (gtk:builder-object builder "toolbar"))
@@ -390,14 +440,23 @@
 
       ;; Prepare the application window
       (setf *window* window)
+      (setf (gtk:window-icon-name window) "org.gtk.WidgetFactory4")
       (setf (gtk:window-application window) application)
       (gtk:widget-add-controller window controller)
       ;; Add the action entries
       (g:action-map-add-action-entries window entries)
-      ;; Set the accels for actions
+      ;; Set ACCELS1 for actions
       (iter (for (name accels) in accels1)
             (setf (gtk:application-accels-for-action application name)
                   accels))
+      ;; Set ACCELS2
+      (iter (for (name accels) in accels2)
+            (multiple-value-bind (key mods)
+                (gtk:accelerator-parse (first accels))
+              (let* ((trigger (gtk:keyval-trigger-new key mods))
+                     (action (gtk:named-action-new name))
+                     (shortcut (gtk:shortcut-new trigger action)))
+                (gtk:shortcut-controller-add-shortcut controller shortcut))))
 
       ;; Prepare the statusbar on page 2 for the text view
       (gtk:statusbar-push statusbar 0 "All systems are operating normally.")
@@ -530,13 +589,12 @@
       (setf (g:object-data window "selection_flowbox") flowbox)
 
 
-      ;; Add the action entries
-      (g:action-map-add-action-entries window entries)
-      ;; Set the accels for actions
-      (iter (for (name accels) in accels1)
-            (format t "   name : ~a    accels : ~a~%" name accels)
-            (setf (gtk:application-accels-for-action application name)
-                  accels))
+      ;;  --- PAGE 3 -----------------------------------------------------------
+
+      (setf (g:object-data window "open_menubutton")
+            (gtk:builder-object builder "open_menubutton"))
+
+      ;; -----------------------------------------------------------------------
 
       ;; Show the application window
       (gtk:window-present window))))
