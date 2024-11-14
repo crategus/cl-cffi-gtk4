@@ -1450,6 +1450,19 @@
 
 #+gtk-4-8
 (cffi:defcfun ("gdk_scroll_event_get_unit" scroll-event-unit) scroll-unit
+ #+liber-documentation
+ "@version{#2024-11-10}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{The @symbol{gdk:scroll-unit} value.}
+  @begin{short}
+    Extracts the scroll delta unit of a scroll event.
+  @end{short}
+  The unit will always be @code{:wheel} if the scroll direction is not
+  @code{:smooth}.
+
+  Since 4.8
+  @see-class{gdk:event}
+  @see-symbol{gdk:scroll-unit}"
   (event event))
 
 #+gtk-4-8

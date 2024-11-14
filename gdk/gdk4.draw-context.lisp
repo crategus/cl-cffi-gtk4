@@ -283,6 +283,9 @@
 
 (cffi:defcfun ("gdk_draw_context_get_frame_region" %draw-context-frame-region)
     (:pointer (:struct cairo:region-t))
+  (context (g:object draw-context)))
+
+(defun draw-context-frame-region (context)
  #+liber-documentation
  "@version{2023-11-7}
   @argument[context]{a @class{gdk:draw-context} object}
@@ -306,9 +309,6 @@
   @end{dictionary}
   @see-class{gdk:draw-context}
   @see-symbol{cairo:region-t}"
-  (context (g:object draw-context)))
-
-(defun draw-context-frame-region (context)
   #+(and gtk-4-16 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GDK:CONTEXT-FRAME-REGION is deprecated since 4.16"))

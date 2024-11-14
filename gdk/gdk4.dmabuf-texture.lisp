@@ -524,15 +524,18 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_new
-;;;
-;;; Creates a new texture builder.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline dmabuf-texture-builder-new))
 
 (defun dmabuf-texture-builder-new ()
+ #+liber-documentation
+ "@version{#2024-1-10}
+  @return{The new @class{gdk:dmabuf-texture-builder} object.}
+  @short{Create a new texture builder.}
+
+  Since 4.14
+  @see-class{gdk:dmabuf-texture-builder}"
   (make-instance 'dmabuf-texture-builder))
 
 (export 'dmabuf-texture-builder-new)

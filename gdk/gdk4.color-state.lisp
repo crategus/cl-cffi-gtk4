@@ -95,7 +95,20 @@
 
 (cffi:defcfun ("gdk_color_state_get_rec2100_linear" color-state-rec2100-linear)
     (g:boxed color-state :return)
-)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @return{The @class{gdk:color-state} instance for linearized rec2100.}
+  @begin{short}
+    Returns the color state object representing the linear rec2100 color space.
+  @end{short}
+  This color state uses the primaries defined by BT.2020-2 and BT.2100-0 and a
+  linear transfer function. It is equivalent to the Cicp tuple 9/8/0/1. See
+  for example the
+  @url[https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-linear]{CSS HDR Module}
+  for details about this colorstate.
+
+  Since 4.16
+  @see-class{gdk:color-state}")
 
 (export 'color-state-rec2100-linear)
 
@@ -105,7 +118,21 @@
 
 (cffi:defcfun ("gdk_color_state_get_rec2100_pq" color-state-rec2100-pq)
     (g:boxed color-state :return)
-)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @return{The @class{gdk:color-state} instance for rec2100-pq.}
+  @begin{short}
+    Returns the color state object representing the rec2100-pq color space.
+  @end{short}
+  This color state uses the primaries defined by BT.2020-2 and BT.2100-0 and the
+  transfer function defined by SMPTE ST 2084 and BT.2100-2. It is equivalent to
+  the Cicp tuple 9/16/0/1. See for example the
+  @url[https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-pq]{CSS HDR Module}
+  for details about
+  this colorstate.
+
+  Since 4.16
+  @see-class{gdk:color-state}")
 
 (export 'color-state-rec2100-pq)
 
@@ -115,7 +142,20 @@
 
 (cffi:defcfun ("gdk_color_state_get_srgb" color-state-srgb)
     (g:boxed color-state :return)
-)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @return{The @class{gdk:color-state} instance for sRGB.}
+  @begin{short}
+    Returns the color state object representing the sRGB color space.
+  @end{short}
+  This color state uses the primaries defined by BT.709-6 and the transfer
+  function defined by IEC 61966-2-1. It is equivalent to the Cicp tuple
+  1/13/0/1. See for example the
+  @url[https://www.w3.org/TR/css-color-4/#predefined-sRGB]{CSS HDR Module}
+  for details about this colorstate.
+
+  Since 4.16
+  @see-class{gdk:color-state}")
 
 (export 'color-state-srgb)
 
@@ -125,7 +165,19 @@
 
 (cffi:defcfun ("gdk_color_state_get_srgb_linear" color-state-srgb-linear)
     (g:boxed color-state :return)
-)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @return{The @class{gdk:color-state} instance for linearized sRGB.}
+  @begin{short}
+    Returns the color state object representing the linearized sRGB color space.
+  @end{short}
+  This color state uses the primaries defined by BT.709-6 and a linear transfer
+  function. It is equivalent to the Cicp tuple 1/8/0/1. See for example the
+  @url[https://www.w3.org/TR/css-color-4/#predefined-sRGB-linear]{CSS HDR Module}
+  for details about this colorstate.
+
+  Since 4.16
+  @see-class{gdk:color-state}")
 
 (export 'color-state-srgb-linear)
 
@@ -136,6 +188,20 @@
 (cffi:defcfun ("gdk_color_state_create_cicp_params"
                color-state-create-cicp-params)
     (g:object cicp-params :already-referenced)
+ #+liber-documentation
+ "@version{2024-11-10}
+  @argument[color]{a @class{gdk:color-state} instance}
+  @return{The new @class{gdk:cicp-params} object.}
+  @begin{short}
+    Create a @class{gdk:cicp-params} object representing the colorstate.
+  @end{short}
+  It is not guaranteed that every @class{gdk:color-state} instance can be
+  represented with Cicp parameters. If that is the case, this function returns
+  @code{nil}.
+
+  Since 4.16
+  @see-class{gdk:color-state}
+  @see-class{gdk:cicp-params}"
   (color (g:boxed color-state)))
 
 (export 'color-state-create-cicp-params)
@@ -145,6 +211,19 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_color_state_equal" color-state-equal) :boolean
+ #+liber-documentation
+ "@version{2024-11-10}
+  @argument[color1]{a @class{gdk:color-state} instance}
+  @argument[color2]{another @class{gdk:color-state} instance}
+  @begin{short}
+    Compares two color states for equality.
+  @end{short}
+  Note that this function is not guaranteed to be perfect and two objects
+  describing the same color state may compare not equal. However, different
+  color states will never compare equal.
+
+  Since 4.16
+  @see-class{gdk:color-state}"
   (color1 (g:boxed color-state))
   (color2 (g:boxed color-state)))
 

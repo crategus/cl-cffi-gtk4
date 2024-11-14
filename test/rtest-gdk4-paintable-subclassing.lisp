@@ -68,12 +68,13 @@
   (is (equal '()
              (glib-test:list-signals "GdkNuclearIcon")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkNuclearIcon" GDK-NUCLEAR-ICON
-                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GdkPaintable"))
-                               ((ROTATION GDK-NUCLEAR-ICON-ROTATION "rotation"
-                                 "gdouble" T T)))
-             (gobject:get-g-type-definition "GdkNuclearIcon"))))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkNuclearIcon" GDK-NUCLEAR-ICON
+                       (:SUPERCLASS G-OBJECT
+                        :EXPORT T
+                        :INTERFACES ("GdkPaintable"))
+                       ((ROTATION GDK-NUCLEAR-ICON-ROTATION
+                         "rotation" "gdouble" T T)))
+             (gobject:get-gtype-definition "GdkNuclearIcon"))))
 
 ;; Some tests which demonstrate the functionality of the new Lisp subclass
 
