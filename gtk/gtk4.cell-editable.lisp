@@ -2,7 +2,7 @@
 ;;; gtk4.cell-editable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -73,7 +73,7 @@
 (setf (liber:alias-for-class 'cell-editable)
       "Interface"
       (documentation 'cell-editable 'type)
- "@version{#2022-7-25}
+ "@version{2024-11-5}
   @begin{short}
     The @class{gtk:cell-editable} interface must be implemented for widgets to
     be usable when editing the contents of a @class{gtk:tree-view} cell widget.
@@ -139,7 +139,7 @@ lambda (editable)    :run-last
 (setf (liber:alias-for-function 'cell-editable-editing-canceled)
       "Accessor"
       (documentation 'cell-editable-editing-canceled 'function)
- "@version{#2022-7-25}
+ "@version{#2024-11-5}
   @syntax{(gtk:cell-editable-editing-canceled object) => canceled}
   @syntax{(setf (gtk:cell-editable-editing-canceled object) canceled)}
   @argument[object]{a @class{gtk:cell-editable} object}
@@ -153,7 +153,7 @@ lambda (editable)    :run-last
     The @class{gtk:cell-editable} implementation is deprecated since 4.10,
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:editable}")
+  @see-class{gtk:cell-editable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_editable_start_editing
@@ -162,7 +162,7 @@ lambda (editable)    :run-last
 (cffi:defcfun ("gtk_cell_editable_start_editing" cell-editable-start-editing)
     :void
  #+liber-documentation
- "@version{#2024-7-26}
+ "@version{#2024-11-5}
   @argument[editable]{a @class{gtk:cell-editable} object}
   @argument[event]{a @class{gdk:event} instance that began the editing process,
     or @code{nil} if editing was initiated programmatically}
@@ -201,7 +201,7 @@ lambda (editable)    :run-last
 (cffi:defcfun ("gtk_cell_editable_editing_done" cell-editable-editing-done)
     :void
  #+liber-documentation
- "@version{#2022-7-25}
+ "@version{#2024-11-5}
   @argument[editable]{a @class{gtk:cell-editable} object}
   @begin{short}
     Emits the @code{\"editing-done\"} signal.
@@ -222,7 +222,7 @@ lambda (editable)    :run-last
 (cffi:defcfun ("gtk_cell_editable_remove_widget" cell-editable-remove-widget)
     :void
  #+liber-documentation
- "@version{#2022-7-25}
+ "@version{#2024-11-5}
   @argument[editable]{a @class{gtk:cell-editable} object}
   @begin{short}
     Emits the @code{\"remove-widget\"} signal.

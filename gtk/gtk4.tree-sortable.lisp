@@ -2,7 +2,7 @@
 ;;; gtk4.tree-sortable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -111,7 +111,7 @@
 ;;; GtkTreeSortable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkTreeSortable" tree-sortable
+(gobject:define-ginterface "GtkTreeSortable" tree-sortable
   (:export t
    :type-initializer "gtk_tree_sortable_get_type")
   nil)
@@ -137,13 +137,13 @@
       @begin{pre}
  lambda (sortable)    : Run Last
       @end{pre}
-      The signal is emitted when the sort column or sort order of @arg{sortable}
-      is changed. The signal is emitted before the contents of @arg{sortable}
-      are resorted.
       @begin[code]{table}
         @entry[sortable]{The @class{gtk:tree-sortable} object on which the
         signal is emitted.}
       @end{table}
+      The signal is emitted when the sort column or sort order of @arg{sortable}
+      is changed. The signal is emitted before the contents of @arg{sortable}
+      are resorted.
   @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-store}

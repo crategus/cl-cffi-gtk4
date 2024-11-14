@@ -2,7 +2,7 @@
 ;;; gtk4.message-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 ;;; GtkButtonsType
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkButtonsType" buttons-type
+(gobject:define-genum "GtkButtonsType" buttons-type
   (:export t
    :type-initializer "gtk_buttons_type_get_type")
   (:none 0)
@@ -99,7 +99,7 @@
       (liber:symbol-documentation 'buttons-type)
  "@version{2024-5-1}
   @begin{declaration}
-(gobject:define-g-enum \"GtkButtonsType\" buttons-type
+(gobject:define-genum \"GtkButtonsType\" buttons-type
   (:export t
    :type-initializer \"gtk_buttons_type_get_type\")
   (:none 0)
@@ -135,7 +135,7 @@
 ;;; GtkMessageDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkMessageDialog" message-dialog
+(gobject:define-gobject "GtkMessageDialog" message-dialog
   (:superclass dialog
    :export t
    :interfaces ("GtkAccessible"

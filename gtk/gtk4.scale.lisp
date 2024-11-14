@@ -225,7 +225,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   @syntax{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[digits]{an integer with the number of decimal places to display,
-    e.g. use 1 to display 1.0, 2 to display 1.00, etc}
+    for example, use 1 to display 1.0, 2 to display 1.00, and so on}
   @begin{short}
     Accessor of the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
     class.

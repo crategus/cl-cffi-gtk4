@@ -472,8 +472,8 @@ lambda (popover)    :run-last
   position. If the popover is currently visible, it will be immediately updated.
 
   This preference will be respected where possible, although on lack of space,
-  e.g. if close to the window edges, the @class{gtk:popover} widget may choose
-  to appear on the opposite side.
+  for example, if close to the window edges, the @class{gtk:popover} widget may
+  choose to appear on the opposite side.
   @see-class{gtk:popover}
   @see-symbol{gtk:position-type}")
 

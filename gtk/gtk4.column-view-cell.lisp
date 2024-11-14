@@ -2,7 +2,7 @@
 ;;; gtk4.column-view-cell.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,7 +62,7 @@
 ;;; GtkColumnViewCell
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColumnViewCell" column-view-cell
+(gobject:define-gobject "GtkColumnViewCell" column-view-cell
   (:superclass list-item
    :export t
    :interfaces nil
@@ -197,7 +197,7 @@
  "@version{2023-11-27}
   @syntax{(gtk:column-view-cell-item object) => item}
   @argument[object]{a @class{gtk:column-view-cell} object}
-  @argument[item]{a @class{g:object} object with the item displayed}
+  @argument[item]{a @class{g:object} instance with the item displayed}
   @begin{short}
     Accessor of the @slot[gtk:column-view-cell]{item} slot of the
     @class{gtk:column-view-cell} class.

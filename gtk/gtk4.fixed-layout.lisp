@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -149,10 +149,10 @@
   @end{itemize}
   In addition, the @class{gtk:fixed-layout} object does not pay attention to
   text direction and thus may produce unwanted results if your app is run under
-  right-to-left languages such as Hebrew or Arabic. That is: normally GTK will
-  order containers appropriately depending on the text direction, e.g. to put
-  labels to the right of the thing they label when using an RTL language. The
-  @class{gtk:fixed-layout} object will not be able to do that for you.
+  right-to-left languages such as Hebrew or Arabic. That is, normally GTK will
+  order containers appropriately depending on the text direction, for example,
+  to put labels to the right of the thing they label when using an RTL language.
+  The @class{gtk:fixed-layout} object will not be able to do that for you.
 
   Finally, fixed positioning makes it kind of annoying to add/remove GUI
   elements, since you have to reposition all the other elements. This is a

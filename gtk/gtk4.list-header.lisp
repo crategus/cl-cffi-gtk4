@@ -2,7 +2,7 @@
 ;;; gtk4.list-header.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -60,7 +60,7 @@
 ;;; GtkListHeader
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListHeader" list-header
+(gobject:define-gobject "GtkListHeader" list-header
   (:superclass g:object
    :export t
    :interfaces ()
@@ -177,7 +177,7 @@
  "@version{2023-11-27}
   @syntax{(gtk:list-header-item object) => item}
   @argument[object]{a @class{gtk:list-header} object}
-  @argument[item]{a @class{g:object} object with the item displayed}
+  @argument[item]{a @class{g:object} instance with the item displayed}
   @begin{short}
     Accessor of the @slot[gtk:list-header]{item} slot of the
     @class{gtk:list-header} class.

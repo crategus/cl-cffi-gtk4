@@ -2,7 +2,7 @@
 ;;; gtk4.column-view-row.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -70,7 +70,7 @@
 ;;; GtkColumnViewRow
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColumnViewRow" column-view-row
+(gobject:define-gobject "GtkColumnViewRow" column-view-row
   (:superclass g:object
    :export t
    :interfaces nil
@@ -152,8 +152,8 @@
   @end{short}
   The @fun{gtk:column-view-row-accessible-description} function gets the
   accessible description. The @setf{gtk:column-view-row-accessible-description}
-  function sets the accessible description for the row, which may be used by
-  e.g. screen readers.
+  function sets the accessible description for the row, which may be used,
+  for example by screen readers.
 
   Since 4.12
   @see-class{gtk:column-view-row}")
@@ -183,7 +183,8 @@
   @end{short}
   The @fun{gtk:column-view-row-accessible-label} function gets the accessible
   label. The @setf{gtk:column-view-row-accessible-label} function sets the
-  accessible label for the row, which may be used by e.g. screen readers.
+  accessible label for the row, which may be used, for example by screen
+  readers.
 
   Since 4.12
   @see-class{gtk:column-view-row}")
@@ -274,7 +275,7 @@
  "@version{2023-11-27}
   @syntax{(gtk:column-view-row-item object) => item}
   @argument[object]{a @class{gtk:column-view-row} object}
-  @argument[item]{a @class{g:object} object with the item for the row}
+  @argument[item]{a @class{g:object} instance with the item for the row}
   @begin{short}
     Accessor of the @slot[gtk:column-view-row]{item} slot of
     the @class{gtk:column-view-row} class.
