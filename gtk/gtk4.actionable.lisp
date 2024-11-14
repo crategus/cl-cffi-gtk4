@@ -2,7 +2,7 @@
 ;;; gtk4.actionable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkActionable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-interface "GtkActionable" actionable
+(gobject:define-ginterface "GtkActionable" actionable
   (:export t
    :type-initializer "gtk_actionable_get_type")
   ((action-name
@@ -136,7 +136,7 @@
   containing @class{gtk:application-window} widget or its associated
   @class{gtk:application} instance, respectively. This is the same form used
   for actions in the @class{g:menu} object associated with the window.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((button (make-instance 'gtk:button)))
   (setf (gtk:actionable-action-name button) \"win.save\")
@@ -191,7 +191,7 @@
   to change to that value. Since the state of the action is now equal to the
   target value of the button, the button will now be rendered as active and the
   other buttons, with different targets, rendered inactive.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (let ((button (make-instance 'gtk:button)))
   (setf (gtk:actionable-action-target button) (g:variant-new-int16 128))
@@ -199,7 +199,7 @@
 => 128
     @end{pre}
   @end{dictionary}
-  @begin[Note]{dictionary}
+  @begin[Notes]{dictionary}
     The C implementation knows in addition the
     @code{gtk_actionable_get_action_target_value ()} and
     @code{gtk_actionable_set_action_target_value ()} functions. In the Lisp
@@ -259,7 +259,7 @@
   The @arg{name} argument is a string of the form \"action::target\" where
   \"action\" is the action name and \"target\" is the string to use as the
   target.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (setq button (make-instance 'gtk:button))
 => #<GTK-BUTTON {1004A8C973@}>

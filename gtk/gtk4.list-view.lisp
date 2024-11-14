@@ -2,7 +2,7 @@
 ;;; gtk4.list-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -106,7 +106,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
-(gobject:define-g-enum "GtkListTabBehavior" list-tab-behavior
+(gobject:define-genum "GtkListTabBehavior" list-tab-behavior
   (:export t
    :type-initializer "gtk_list_tab_behavior_get_type")
   (:all 0)
@@ -119,7 +119,7 @@
       (liber:symbol-documentation 'list-tab-behavior)
  "@version{2023-11-25}
   @begin{declaration}
-(gobject:define-g-enum \"GtkListTabBehavior\" list-tab-behavior
+(gobject:define-genum \"GtkListTabBehavior\" list-tab-behavior
   (:export t
    :type-initializer \"gtk_list_tab_behavior_get_type\")
   (:all 0)
@@ -153,7 +153,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
-(gobject:define-g-flags "GtkListScrollFlags" list-scroll-flags
+(gobject:define-gflags "GtkListScrollFlags" list-scroll-flags
   (:export t
    :type-initializer "gtk_list_scroll_flags_get_type")
   (:none 0)
@@ -166,7 +166,7 @@
       (liber:symbol-documentation 'list-scroll-flags)
  "@version{2023-11-25}
   @begin{declaration}
-(gobject:define-g-flags \"GtkListScrollFlags\" list-scroll-flags
+(gobject:define-gflags \"GtkListScrollFlags\" list-scroll-flags
   (:export t
    :type-initializer \"gtk_list_scroll_flags_get_type\")
   (:none 0)
@@ -191,7 +191,7 @@
 ;;; GtkListBase
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListBase" list-base
+(gobject:define-gobject "GtkListBase" list-base
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -249,7 +249,7 @@
 ;;; GtkListView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkListView" list-view
+(gobject:define-gobject "GtkListView" list-view
   (:superclass list-base
    :export t
    :interfaces nil
@@ -300,7 +300,7 @@
 
   To learn more about the list widget framework, see the List Widget Overview
   section.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     This is a complete example of how to use the @class{gtk:list-view} widget.
     The example is included in the GTK 4 demo, which comes with the GTK library.
     @begin{pre}
@@ -394,16 +394,16 @@ listview[.separators][.rich-list][.navigation-sidebar][.data-table]
       @begin{pre}
 lambda (listview position)    :run-last
       @end{pre}
-      The signal is emitted when a row has been activated by the user, usually
-      via activating the @code{GtkListView|list.activate-item action}. This
-      allows for a convenient way to handle activation in a listview. See the
-      @fun{gtk:list-item-activatable} function for details on how to use this
-      signal.
       @begin[code]{table}
         @entry[listview]{The @class{gtk:list-view} widget.}
         @entry[position]{An unsigned integer with the position of the item to
         activate.}
       @end{table}
+      The signal is emitted when a row has been activated by the user, usually
+      via activating the @code{GtkListView|list.activate-item action}. This
+      allows for a convenient way to handle activation in a listview. See the
+      @fun{gtk:list-item-activatable} function for details on how to use this
+      signal.
   @end{dictionary}
   @see-constructor{gtk:list-view-new}
   @see-slot{gtk:list-view-enable-rubberband}

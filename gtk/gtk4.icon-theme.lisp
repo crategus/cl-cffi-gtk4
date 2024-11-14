@@ -2,7 +2,7 @@
 ;;; gtk4.icon-theme.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -89,7 +89,7 @@
 ;;; GtkIconLookupFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkIconLookupFlags" icon-lookup-flags
+(gobject:define-gflags "GtkIconLookupFlags" icon-lookup-flags
   (:export t
    :type-initializer "gtk_icon_lookup_flags_get_type")
   (:none 0)
@@ -103,7 +103,7 @@
       (liber:symbol-documentation 'icon-lookup-flags)
  "@version{2023-10-3}
   @begin{declaration}
-(gobject:define-g-flags \"GtkIconLookupFlags\" icon-lookup-flags
+(gobject:define-gflags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
    :type-initializer \"gtk_icon_lookup_flags_get_type\")
   (:none 0)
@@ -161,10 +161,10 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkIconTheme
+;;; GtkIconTheme
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkIconTheme" icon-theme
+(gobject:define-gobject "GtkIconTheme" icon-theme
   (:superclass g:object
    :export t
    :interfaces nil
@@ -206,7 +206,7 @@
   much more efficient to use the standard icon theme of the @class{gtk:widget}
   widget so that the icon information is shared with other people looking up
   icons.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     In the case where the default screen is being used, looking up an icon can
     be as simple as:
     @begin{pre}
@@ -225,11 +225,11 @@
       @begin{pre}
 lambda (theme)    :run-last
       @end{pre}
-      Emitted when the current icon theme is switched or GTK detects that a
-      change has occurred in the contents of the current icon theme.
       @begin[code]{table}
         @entry[theme]{The @class{gtk:icon-theme} object.}
       @end{table}
+      Emitted when the current icon theme is switched or GTK detects that a
+      change has occurred in the contents of the current icon theme.
   @end{dictionary}
   @see-slot{gtk:icon-theme-display}
   @see-slot{gtk:icon-theme-icon-names}

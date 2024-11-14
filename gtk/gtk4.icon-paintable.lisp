@@ -2,7 +2,7 @@
 ;;; gtk4.icon-paintable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(gobject:define-g-interface "GtkSymbolicPaintable" symbolic-paintable
+(gobject:define-ginterface "GtkSymbolicPaintable" symbolic-paintable
   (:export t
    :type-initializer "gtk_symbolic_paintable_get_type")
   nil)
@@ -100,10 +100,29 @@
   @see-class{gtk:icon-paintable}")
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_symbolic_paintable_snapshot_symbolic
+;;;
+;;; void
+;;; gtk_symbolic_paintable_snapshot_symbolic (GtkSymbolicPaintable* paintable,
+;;;                                           GdkSnapshot* snapshot,
+;;;                                           double width,
+;;;                                           double height,
+;;;                                           const GdkRGBA* colors,
+;;;                                           gsize n_colors)
+;;;
+;;; Snapshots the paintable with the given colors.
+;;;
+;;; If less than 4 colors are provided, GTK will pad the array with default
+;;; colors.
+;;;
+;;; Available since: 4.6
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkIconPaintable
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkIconPaintable" icon-paintable
+(gobject:define-gobject "GtkIconPaintable" icon-paintable
   (:superclass g:object
    :export t
    :interfaces #-gtk-4-6
@@ -258,24 +277,5 @@
   (scale :int))
 
 (export 'icon-paintable-new-for-file)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_symbolic_paintable_snapshot_symbolic
-;;;
-;;; void
-;;; gtk_symbolic_paintable_snapshot_symbolic (GtkSymbolicPaintable* paintable,
-;;;                                           GdkSnapshot* snapshot,
-;;;                                           double width,
-;;;                                           double height,
-;;;                                           const GdkRGBA* colors,
-;;;                                           gsize n_colors)
-;;;
-;;; Snapshots the paintable with the given colors.
-;;;
-;;; If less than 4 colors are provided, GTK will pad the array with default
-;;; colors.
-;;;
-;;; Available since: 4.6
-;;; ----------------------------------------------------------------------------
 
 ;;; --- Enf of file gtk4.icon-paintable.lisp -----------------------------------

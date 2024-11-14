@@ -2,7 +2,7 @@
 ;;; gtk4.emoji-chooser.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,10 +67,10 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEmojiChooser
+;;; GtkEmojiChooser
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEmojiChooser" emoji-chooser
+(gobject:define-gobject "GtkEmojiChooser" emoji-chooser
   (:superclass popover
    :export t
    :interfaces ("GtkAccessible"
@@ -92,8 +92,8 @@
 
   @image[emoji-chooser]{Figure: GtkEmojiChooser}
 
-  The @class{gtk:emoji-chooser} widget emits the \"emoji-picked\" signal when
-  an Emoji is selected.
+  The @class{gtk:emoji-chooser} widget emits the @code{\"emoji-picked\"} signal
+  when an Emoji is selected.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 popover
@@ -124,12 +124,12 @@ popover
       @begin{pre}
 lambda (chooser text)    :run-last
       @end{pre}
-      The signal is emitted when the user selects an Emoji.
       @begin[code]{table}
         @entry[chooser]{The @class{gtk:emoji-chooser} widget.}
         @entry[text]{The string with the Unicode sequence for the picked Emoji,
           in UTF-8.}
       @end{table}
+      The signal is emitted when the user selects an Emoji.
   @end{dictionary}
   @see-class{gtk:popover}")
 

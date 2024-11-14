@@ -2,7 +2,7 @@
 ;;; gtk4.font-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,7 +77,7 @@
 ;;; GtkFontDialog
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFontDialog" font-dialog
+(gobject:define-gobject "GtkFontDialog" font-dialog
   (:superclass g:object
    :export t
    :interfaces nil
@@ -316,8 +316,8 @@
    when the operation is complete}
   @begin{short}
     This function initiates a font selection operation by presenting a dialog to
-    the user for selecting a font face, i.e. a font family and style, but not a
-    specific font size.
+    the user for selecting a font face, that is a font family and style, but not
+    a specific font size.
   @end{short}
   The callback will be called when the dialog is dismissed. It should call the
   @fun{gtk:font-dialog-choose-face-finish} function to obtain the result.

@@ -2,11 +2,11 @@
 ;;; gtk4.keyboard-accelerators.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,8 +90,8 @@
   The parser is fairly liberal and allows lower or upper case, and also
   abbreviations such as @kbd{<Ctl>} and @kbd{<Ctrl>}. Key names are parsed
   using the @fun{gdk:keyval-from-name} function. For character keys the name is
-  not the symbol, but the lowercase name, e.g. one would use @kbd{<Ctrl>minus}
-  instead of @kbd{<Ctrl>-}.
+  not the symbol, but the lowercase name, for example, one would use
+  @kbd{<Ctrl>minus} instead of @kbd{<Ctrl>-}.
 
   If the parse fails, the @arg{key} argument will be set to 0.
   @begin[Examples]{dictionary}
@@ -140,7 +140,7 @@
   @end{short}
   If you need to display accelerators in the user interface, see the
   @fun{gtk:accelerator-label} function.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:accelerator-name 65470 '(:shift-mask :alt-mask))
 => \"<Shift><Alt>F1\"
@@ -169,7 +169,7 @@
     Converts an accelerator keyval and modifier mask into a string which can be
     used to represent the accelerator to the user.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:accelerator-label 65470 '(:shift-mask :mod1-mask))
 => \"Shift+Alt+F1\"

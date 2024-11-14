@@ -2,7 +2,7 @@
 ;;; gtk4.im-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,11 +46,12 @@
 ;;;     gtk_im_context_set_client_widget
 ;;;     gtk_im_context_set_cursor_location
 ;;;     gtk_im_context_set_use_preedit
-;;;     gtk_im_context_set_surrounding                     Deprecated 4.2
-;;;     gtk_im_context_get_surrounding                     Deprecated 4.2
+;;;     gtk_im_context_set_surrounding                      Deprecated 4.2
+;;;     gtk_im_context_get_surrounding                      Deprecated 4.2
 ;;;     gtk_im_context_delete_surrounding
-;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
-;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
+;;;     gtk_im_context_get_surrounding_with_selection       Since 4.2
+;;;     gtk_im_context_set_surrounding_with_selection       Since 4.2
+;;;     gtk_im_context_activate_osk                         Since 4.14
 ;;;
 ;;; Properties
 ;;;
@@ -80,7 +81,7 @@
 ;;; GtkIMContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkIMContext" im-context
+(gobject:define-gobject "GtkIMContext" im-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -106,8 +107,8 @@
   outputting the composed result. This is called preediting, and an input
   method may provide feedback about this process by displaying the intermediate
   composition states as preedit text. To do so, the @class{gtk:im-context}
-  object will emit the \"preedit-start\", \"preedit-changed\" and
-  \"preedit-end\" signals.
+  object will emit the @code{\"preedit-start\"}, @code{\"preedit-changed\"} and
+  @code{\"preedit-end\"} signals.
 
   For instance, the built-in GTK @class{gtk:im-context-simple} input method
   implements the input of arbitrary Unicode code points by holding down the
@@ -132,21 +133,19 @@ Ctrl+Shift+u 2 0 A C
       @begin{pre}
 lambda (context str)    :run-last
       @end{pre}
-      The signal is emitted when a complete input sequence has been entered by
-      the user. This can be a single character immediately after a key press or
-      the final result of preediting.
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
         @entry[str]{The string with the completed character(s) entered by the
           user.}
       @end{table}
+      The signal is emitted when a complete input sequence has been entered by
+      the user. This can be a single character immediately after a key press or
+      the final result of preediting.
     @subheading{The \"delete-surrounding\" signal}
       @begin{pre}
 lambda (context offset n-chars)    :run-last
       @end{pre}
-      The signal is emitted when the input method needs to delete all or part
-      of the context surrounding the cursor.
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
@@ -157,50 +156,52 @@ lambda (context offset n-chars)    :run-last
           deleted.}
         @entry[Returns]{@em{True} if the signal was handled.}
       @end{table}
+      The signal is emitted when the input method needs to delete all or part
+      of the context surrounding the cursor.
     @subheading{The \"preedit-changed\" signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
+      @end{table}
       The signal is emitted whenever the preedit sequence currently being
       entered has changed. It is also emitted at the end of a preedit sequence,
       in which case the @fun{gtk:im-context-preedit-string} function returns
       the empty string.
-      @begin[code]{table}
-        @entry[context]{The @class{gtk:im-context} object on which the signal
-          is emitted.}
-      @end{table}
     @subheading{The \"preedit-end\" signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      The signal is emitted when a preediting sequence has been completed or
-      canceled.
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
       @end{table}
+      The signal is emitted when a preediting sequence has been completed or
+      canceled.
     @subheading{The \"preedit-start\" signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      The signal is emitted when a new preediting sequence starts.
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
       @end{table}
+      The signal is emitted when a new preediting sequence starts.
     @subheading{The \"retrieve-surrounding\" signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      The signal is emitted when the input method requires the context
-      surrounding the cursor. The callback should set the input method
-      surrounding context by calling the @fun{gtk:im-context-surrounding}
-      function.
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
         @entry[Returns]{@em{True} if the signal was handled.}
       @end{table}
+      The signal is emitted when the input method requires the context
+      surrounding the cursor. The callback should set the input method
+      surrounding context by calling the @fun{gtk:im-context-surrounding}
+      function.
   @end{dictionary}
   @see-slot{gtk:im-context-input-hints}
   @see-slot{gtk:im-context-input-purpose}
@@ -594,6 +595,14 @@ lambda (context)    :run-last
 ;;; if called at other times.
 ;;;
 ;;; Since 4.2
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_im_context_activate_osk
+;;;
+;;; Requests the platform to show an on-screen keyboard for user input.
+;;;
+;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.im-context.lisp ---------------------------------------

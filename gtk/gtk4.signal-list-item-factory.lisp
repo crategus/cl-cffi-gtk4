@@ -2,7 +2,7 @@
 ;;; gtk4.signal-list-item-factory.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,8 +59,7 @@
 ;;; GtkSignalListItemFactory
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkSignalListItemFactory"
-                               signal-list-item-factory
+(gobject:define-gobject "GtkSignalListItemFactory" signal-list-item-factory
   (:superclass list-item-factory
    :export t
    :interfaces nil
@@ -95,9 +94,9 @@
       reusing list items, potentially costly setup can be avoided. However, it
       means code needs to make sure to properly clean up the list item in step
       3 so that no information from the previous use leaks into the next use.}
-    @item{The \"teardown\" signal is emitted to allow undoing the effects of
-      the \"setup\" signal. After this signal was emitted on a list item, the
-      list item will be destroyed and not be used again.}
+    @item{The @code{\"teardown\"} signal is emitted to allow undoing the effects
+      of the @code{\"setup\"} signal. After this signal was emitted on a list
+      item, the list item will be destroyed and not be used again.}
   @end{enumerate}
   Note that during the signal emissions, changing properties on the list items
   passed will not trigger notify signals as the list item’s notifications are
@@ -112,51 +111,51 @@
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      The signal is emitted when a new item has been set on the list item and
-      should be bound for use. After this signal was emitted, the list item
-      might be shown in a @class{gtk:list-view} widget or other list widget.
-      The @code{\"unbind\"} signal is the opposite of this signal and can be
-      used to undo everything done in this signal.
       @begin[code]{table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to bind.}
       @end{table}
+      The signal is emitted when a new item has been set on the list item and
+      should be bound for use. After this signal was emitted, the list item
+      might be shown in a @class{gtk:list-view} widget or other list widget.
+      The @code{\"unbind\"} signal is the opposite of this signal and can be
+      used to undo everything done in this signal. @break{}
     @subheading{The \"setup\" signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      The signal is emitted when a new list item has been created and needs to
-      be setup for use. It is the first signal emitted for every list item.
-      The @code{\"teardown\"} signal is the opposite of this signal and can be
-      used to undo everything done in this signal.
       @begin[code]{table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to set up.}
       @end{table}
+      The signal is emitted when a new list item has been created and needs to
+      be setup for use. It is the first signal emitted for every list item.
+      The @code{\"teardown\"} signal is the opposite of this signal and can be
+      used to undo everything done in this signal. @break{}
     @subheading{The \"teardown\" signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      The @code{\"teardown\"} signal is emitted when a list item is about to be
-      destroyed. It is the last signal ever emitted for this list item.
-      This signal is the opposite of the @code{\"setup\"} signal and should be
-      used to undo everything done in that signal.
       @begin[code]{table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to teardown.}
       @end{table}
+      The @code{\"teardown\"} signal is emitted when a list item is about to be
+      destroyed. It is the last signal ever emitted for this list item.
+      This signal is the opposite of the @code{\"setup\"} signal and should be
+      used to undo everything done in that signal. @break{}
     @subheading{The \"unbind\" signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      The signal is emitted when a list item has been removed from use in a list
-      widget and its new item is about to be unset. This signal is the opposite
-      of the @code{\"bind\"} signal and should be used to undo everything done
-      in that signal.
       @begin[code]{table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to unbind.}
       @end{table}
+      The signal is emitted when a list item has been removed from use in a list
+      widget and its new item is about to be unset. This signal is the opposite
+      of the @code{\"bind\"} signal and should be used to undo everything done
+      in that signal.
   @end{dictionary}
   @see-class{gtk:list-item-factory}")
 

@@ -2,7 +2,7 @@
 ;;; gtk4.orientable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
   A @class{gtk:orientable} widget is more flexible in that it allows the
   orientation to be changed at runtime, allowing the widget to \"flip\".
   @begin[CSS nodes]{dictionary}
-    The @class{gtk:widget} widgets that implement the @class{gtk:orientable}
+    The @class{gtk:widget} objects that implement the @class{gtk:orientable}
     interface will automatically acquire the horizontal or vertical CSS class,
     depending on the value of the @slot[gtk:orientable]{orientation} property.
   @end{dictionary}

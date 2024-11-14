@@ -2,7 +2,7 @@
 ;;; gtk4.recent-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,7 +99,7 @@
 ;;; GtkRecentInfo
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque recent-info "GtkRecentInfo"
+(glib:define-gboxed-opaque recent-info "GtkRecentInfo"
   :export t
   :type-initializer "gtk_recent_info_get_type"
   :alloc (error "GtkRecentInfo cannot be created from the Lisp side."))
@@ -109,17 +109,17 @@
       "GBoxed"
       (documentation 'recent-info 'type)
  "@version{2023-1-29}
+  @begin{declaration}
+(glib:define-gboxed-opaque gtk:recent-info \"GtkRecentInfo\"
+  :type-initializer \"gtk_recent_info_get_type\"
+  :alloc (error \"GtkRecentInfo cannot be created from the Lisp side.\"))
+  @end{declaration}
   @begin{short}
     The @class{gtk:recent-info} structure constains all the meta-data
     associated with an entry in the recently used files list.
   @end{short}
   The @class{gtk:recent-info} structure is an opaque data structure whose
   members can only be accessed using the provided API.
-  @begin{pre}
-(glib:define-g-boxed-opaque gtk:recent-info \"GtkRecentInfo\"
-  :type-initializer \"gtk_recent_info_get_type\"
-  :alloc (error \"GtkRecentInfo cannot be created from the Lisp side.\"))
-  @end{pre}
   @see-class{gtk:recent-manager}")
 
 ;;; ----------------------------------------------------------------------------
@@ -209,7 +209,7 @@
 ;;; GtkRecentManager
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkRecentManager" recent-manager
+(gobject:define-gobject "GtkRecentManager" recent-manager
   (:superclass g:object
    :export t
    :interfaces nil
@@ -269,13 +269,13 @@
       @begin{pre}
 lambda (manager)    :run-first
       @end{pre}
-      Emitted when the current recently used resources manager changes its
-      contents, either by calling the @fun{gtk:recent-manager-add-item} function
-      or by another application.
       @begin[code]{table}
         @entry[manager]{The @class{gtk:recent-manager} object which received
           the signal.}
       @end{table}
+      Emitted when the current recently used resources manager changes its
+      contents, either by calling the @fun{gtk:recent-manager-add-item} function
+      or by another application.
   @end{dictionary}
   @see-constructor{gtk:recent-manager-new}
   @see-constructor{gtk:recent-manager-default}
@@ -565,12 +565,12 @@ lambda (manager)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_recent_manager_get_items" recent-manager-items)
-    (g:list-t (g:boxed recent-info :return))
+    (g:list-t (g:boxed recent-info :return) :free-from-foreign t)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2024-11-2}
   @argument[manager]{a @class{gtk:recent-manager} object}
   @begin{return}
-    A list of newly allocated @class{gtk:recent-info} instances.
+    The list of newly allocated @class{gtk:recent-info} instances.
   @end{return}
   @begin{short}
     Gets the list of recently used resources.

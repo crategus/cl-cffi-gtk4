@@ -2,7 +2,7 @@
 ;;; gtk4.string-list.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -170,7 +170,7 @@
    :type-initializer "gtk_string_list_get_type")
   (#+gtk-4-14
    (item-type
-    string-list-item-type
+    %string-list-item-type
     "item-type" "GType" t nil)
    #+gtk-4-14
    (n-items
@@ -208,7 +208,7 @@
 </object>
     @end{pre}
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Create a list of strings with the external symbols of the GTK library:
     @begin{pre}
 (create-list-of-gtk-symbols ()
@@ -225,6 +225,8 @@
   @see-class{gtk:string-object}
   @see-class{g:list-model}")
 
+(unexport 'string-list-strings)
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
@@ -234,13 +236,20 @@
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'string-list) t)
  "The @code{item-type} property of type @class{g:type-t} (read) @br{}
-  The type of items contained in the string list. Since 4.14 ")
+  The type of items contained in the string list. Since 4.14")
+
+#+gtk-4-14
+(declaim (inline string-list-item-type))
+
+#+gtk-4-14
+(defun string-list-item-type (object)
+  (g:list-model-item-type object))
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'string-list-item-type)
       "Accessor"
       (documentation 'string-list-item-type 'function)
- "@version{2024-5-26}
+ "@version{2024-11-10}
   @syntax{(gtk:string-list-item-type object) => type}
   @syntax{(setf (gtk:string-list-item-type object) type)}
   @argument[object]{a @class{gtk:string-list} object}
@@ -252,22 +261,25 @@
   @see-class{gtk:string-list}
   @see-class{g:type-t}")
 
+(export 'string-list-item-type)
+
 ;;; --- gtk:string-list-n-items ------------------------------------------------
 
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'string-list) t)
  "The @code{n-items} property of type @code{:uint} (read) @br{}
-  The number of items contained in the string list. Since 4.14 ")
+  The number of items contained in the string list. Since 4.14 @br{}
+  Default value: 0")
 
 #+(and gtk-4-14 liber-documentation)
-(setf (liber:alias-for-function 'string-list-item-type)
+(setf (liber:alias-for-function 'string-list-n-items)
       "Accessor"
-      (documentation 'string-list-item-type 'function)
- "@version{2024-5-26}
-  @syntax{(gtk:string-list-item-type object) => nitems}
-  @syntax{(setf (gtk:string-list-item-type object) nitems)}
+      (documentation 'string-list-n-items 'function)
+ "@version{2024-10-29}
+  @syntax{(gtk:string-list-n-items object) => n-items}
+  @syntax{(setf (gtk:string-list-n-items object) n-items)}
   @argument[object]{a @class{gtk:string-list} object}
-  @argument[nitems]{an unsigned integer}
+  @argument[n-items]{an unsigned integer}
   @begin{short}
     Accessor of the @slot[gtk:string-list]{n-items} slot of the
     @class{gtk:string-list} class.
@@ -276,6 +288,8 @@
 
 ;;; --- gtk:string-list-strings ------------------------------------------------
 
+;; Note: The property is not readable and not writable, no accessor is exported
+
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "strings" 'string-list) t)
  "The @code{strings} property of type @code{:string} (Construct only) @br{}
@@ -283,14 +297,6 @@
   @em{Note:} This property is not readable and not writable. You cannot
   initialize it in a @code{make-instance} method. Therefore, no accessor is
   exported.")
-
-;; no accessor exported
-
-(defun string-list-strings (model)
-  (iter (for pos from 0 below (g:list-model-n-items model))
-        (collect (string-list-string model pos))))
-
-(export 'string-list-strings)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_string_list_new
@@ -305,7 +311,7 @@
   @begin{short}
     Creates a new string list with the given @arg{strings}.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gtk:string-list-new '(\"Factory\" \"Home\" \"Subway\"))
 => #<GTK:STRING-LIST {1003E7BC63@}>

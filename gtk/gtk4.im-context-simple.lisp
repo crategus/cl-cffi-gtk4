@@ -2,7 +2,7 @@
 ;;; gtk4.im-context-simple.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -64,7 +64,7 @@
 ;;; GtkIMContextSimple
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkIMContextSimple" im-context-simple
+(gobject:define-gobject "GtkIMContextSimple" im-context-simple
   (:superclass im-context
    :export t
    :interfaces nil
@@ -100,7 +100,8 @@
   The @class{gtk:im-context-simple} class also supports numeric entry of
   Unicode characters by typing the @kbd{Ctrl-Shift-u} key, followed by a
   hexadecimal Unicode codepoint. For example, @kbd{Ctrl-Shift-u 1 2 3 Enter}
-  yields @code{U+0123 LATIN SMALL LETTER G WITH CEDILLA}, i.e. ģ.
+  yields @code{U+0123 LATIN SMALL LETTER G WITH CEDILLA}, that is the ģ
+  character.
 
   @subheading{Dead keys}
   The @class{gtk:im-context-simple} class supports dead keys. For example,
@@ -108,8 +109,8 @@
   @begin{pre}
 dead_acute a
   @end{pre}
-  yields @code{U+00E! LATIN SMALL LETTER_A WITH ACUTE}, i.e. á. Note that this
-  depends on the keyboard layout including dead keys.
+  yields @code{U+00E! LATIN SMALL LETTER_A WITH ACUTE}, that is the á
+  character. Note that this depends on the keyboard layout including dead keys.
   @see-constructor{gtk:im-context-simple-new}
   @see-class{gtk:im-context}")
 

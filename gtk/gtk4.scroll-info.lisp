@@ -2,7 +2,7 @@
 ;;; gtk4.scroll-info.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -50,7 +50,7 @@
 
 (cffi:defcfun ("gtk_scroll_info_new" %scroll-info-new) :pointer)
 
-(glib:define-g-boxed-opaque scroll-info "GtkScrollInfo"
+(glib:define-gboxed-opaque scroll-info "GtkScrollInfo"
   :export t
   :type-initializer "gtk_scroll_info_get_type"
   :alloc (%scroll-info-new))

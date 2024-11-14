@@ -2,7 +2,7 @@
 ;;; gtk4.font-dialog-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,7 +65,7 @@
 ;;;
 ;;; Signals
 ;;;
-;;;     activate                                           Since 4.14 unstable
+;;;     activate                                           Since 4.14
 ;;;
 ;;; Hierachy
 ;;;
@@ -87,7 +87,7 @@
 ;;; GtkFontLevel
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkFontLevel" font-level
+(gobject:define-genum "GtkFontLevel" font-level
   (:export t
    :type-initializer "gtk_font_level_get_type")
   (:family 0)
@@ -101,7 +101,7 @@
       (liber:symbol-documentation 'font-level)
  "@version{2024-7-30}
   @begin{declaration}
-(gobject:define-g-enum \"GtkFontLevel\" font-level
+(gobject:define-genum \"GtkFontLevel\" font-level
   (:export t
    :type-initializer \"gtk_font_level_get_type\")
   (:family 0)
@@ -134,7 +134,7 @@
 ;;; GtkFontDialogButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFontDialogButton" font-dialog-button
+(gobject:define-gobject "GtkFontDialogButton" font-dialog-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -175,6 +175,8 @@
   @image[font-button]{Figure: GtkFontButton}
 
   It is the suitable widget for selecting a font in a preference dialog.
+
+  Since 4.10
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 fontbutton
@@ -185,8 +187,19 @@ fontbutton
     @code{fontbutton} which contains a button node with the @code{.font} style
     class.
   @end{dictionary}
-
-  Since 4.10
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (fontbutton)    :run-first
+      @end{pre}
+      @begin[code]{table}
+        @entry[fontbutton]{The @class{gtk:font-dialog-button} widget which
+          received the signal.}
+      @end{table}
+      Emitted when the font dialog button is activated. The signal is an action
+      signal and emitting it causes the button to pop up its dialog. The signal
+      can be directly emitted on objects from user code. Since 4.14
+  @end{dictionary}
   @see-constructor{gtk:font-dialog-button-new}
   @see-slot{gtk:font-dialog-button-dialog}
   @see-slot{gtk:font-dialog-button-font-desc}

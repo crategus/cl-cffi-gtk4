@@ -2,7 +2,7 @@
 ;;; gtk4.color-dialog-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 ;;; GtkColorDialogButton
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColorDialogButton" color-dialog-button
+(gobject:define-gobject "GtkColorDialogButton" color-dialog-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -113,7 +113,7 @@ lambda (button)    :action
       @end{pre}
       Emitted when the color dialog button is activated. The signal is an action
       signal and emitting it causes the button to pop up its dialog. The signal
-      can be directly emitted on objects from user code. Since 4.12
+      can be directly emitted on objects from user code. Since 4.14
   @end{dictionary}
   @see-class{gtk:color-dialog}")
 
@@ -159,8 +159,8 @@ lambda (button)    :action
  "The @code{rgba} property of type @class{gdk:rgba} (Read / Write) @br{}
   The selected color. This property can be set to give the button its initial
   color, and it will be updated to reflect the users choice in the color chooser
-  dialog. Listen to the \"notify::rgba\" signal to get informed about changes to
-  the buttons color. @br{}
+  dialog. Listen to the @code{\"notify::rgba\"} signal to get informed about
+  changes to the buttons color. @br{}
   Default value: @code{#s(gdk:rgba :red 0.0 :green 0.0 :blue 0.0 :alpha 0.0)}")
 
 #+liber-documentation
@@ -180,7 +180,8 @@ lambda (button)    :action
   button. The @setf{gtk:color-dialog-button-rgba} function sets the color.
 
   This function is what should be used to obtain the color that was chosen by
-  the user. To get informed about changes, listen to \"notify::color\" signal.
+  the user. To get informed about changes, listen to the
+  @code{\"notify::color\"} signal.
 
   Since 4.10
   @see-class{gtk:color-dialog-button}

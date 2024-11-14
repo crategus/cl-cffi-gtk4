@@ -2,7 +2,7 @@
 ;;; gtk4.column-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -105,7 +105,7 @@
 ;;; GtkColumnView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkColumnView" column-view
+(gobject:define-gobject "GtkColumnView" column-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -210,16 +210,16 @@
       @begin{pre}
 lambda (columnview position)    :run-last
       @end{pre}
-      The signal is emitted when a row has been activated by the user, usually
-      via activating the @code{GtkListBase|list.activate-item} action. This
-      allows for a convenient way to handle activation in a columnview. See
-      the @fun{gtk:list-item-activatable} function for details on how to use
-      this signal.
       @begin[code]{table}
         @entry[columnview]{The @class{gtk:column-view} widget.}
         @entry[position]{An unsigned integer with the position of the item to
           activate.}
       @end{table}
+      The signal is emitted when a row has been activated by the user, usually
+      via activating the @code{GtkListBase|list.activate-item} action. This
+      allows for a convenient way to handle activation in a columnview. See
+      the @fun{gtk:list-item-activatable} function for details on how to use
+      this signal.
   @end{dictionary}
   @see-constructor{gtk:column-view-new}
   @see-slot{gtk:column-view-columns}
@@ -481,7 +481,7 @@ lambda (columnview position)    :run-last
   set on the sort model underneath the model that is displayed by the view. See
   the @fun{gtk:column-view-column-sorter} function for setting up per-column
   sorting.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     Here is an example:
     @begin{pre}
 gtk_column_view_column_set_sorter (column, sorter);

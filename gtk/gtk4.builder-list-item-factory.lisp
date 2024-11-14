@@ -2,7 +2,7 @@
 ;;; gtk4.builder-list-item-factory.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,8 +63,7 @@
 ;;; GtkBuilderListItemFactory
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkBuilderListItemFactory"
-                               builder-list-item-factory
+(gobject:define-gobject "GtkBuilderListItemFactory" builder-list-item-factory
   (:superclass list-item-factory
    :export t
    :interfaces nil
@@ -91,7 +90,7 @@
   The templates must be extending the @class{gtk:list-item} object, and
   typically use the @class{gtk:expression} instances to obtain data from the
   items in the model.
-  @begin[Example]{dictionary}
+  @begin[Examples]{dictionary}
     @begin{pre}
 <interface>
   <template class=\"GtkListItem\">

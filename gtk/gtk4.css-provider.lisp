@@ -2,7 +2,7 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -39,10 +39,12 @@
 ;;; Functions
 ;;;
 ;;;     gtk_css_section_new
+;;;     gtk_css_section_new_with_bytes                      Since 4.16
 ;;;     gtk_css_section_ref                                 not needed
 ;;;     gtk_css_section_unref                               not needed
 ;;;     gtk_css_section_print                               not needed
 ;;;     gtk_css_section_to_string
+;;;     gtk_css_section_get_bytes                           Since 4.16
 ;;;     gtk_css_section_get_file
 ;;;     gtk_css_section_get_parent
 ;;;     gtk_css_section_get_start_location
@@ -236,7 +238,7 @@
 ;;; GtkCssSection
 ;;; ----------------------------------------------------------------------------
 
-(glib:define-g-boxed-opaque css-section "GtkCssSection"
+(glib:define-gboxed-opaque css-section "GtkCssSection"
   :export t
   :type-initializer "gtk_css_section_get_type"
   :alloc (error "GtkCssSection cannot be created from the Lisp side"))
@@ -247,7 +249,7 @@
       (documentation 'css-section 'type)
  "@version{2024-4-23}
   @begin{declaration}
-(glib:define-g-boxed-opaque css-section \"GtkCssSection\"
+(glib:define-gboxed-opaque css-section \"GtkCssSection\"
   :export t
   :type-initializer \"gtk_css_section_get_type\"
   :alloc (error \"GtkCssSection cannot be created from the Lisp side\"))
@@ -257,7 +259,7 @@
   @end{short}
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
-  @begin{examples}
+  @begin[Examples]{dictionary}
     @begin{pre}
 (g:signal-connect provider \"parsing-error\"
         (lambda (provider section err)
@@ -275,8 +277,9 @@
             (gtk:text-buffer-apply-tag text \"error\" start end)
             gdk:+event-stop+)))
     @end{pre}
-  @end{examples}
+  @end{dictionary}
   @see-constructor{gtk:css-section-new}
+  @see-constructor{gtk:css-section-new-with-bytes}
   @see-class{gtk:css-provider}
   @see-function{gtk:css-section-parent}")
 
@@ -286,6 +289,8 @@
 ;;; gtk_css_section_new
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Allow a GFile, a pathname or a namestring
+
 (cffi:defcfun ("gtk_css_section_new" %css-section-new)
     (g:boxed css-section :return)
   (file g:object)
@@ -294,10 +299,11 @@
 
 (defun css-section-new (file start end)
  #+liber-documentation
- "@version{2024-10-12}
+ "@version{2024-11-5}
   @argument[file]{a pathname or namestring for the file this section refers to}
   @argument[start]{a @symbol{gtk:css-location} instance with the start location}
   @argument[end]{a @symbol{gtk:css-location} instance with the end location}
+  @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
     the given file from the @arg{start} location to the @arg{end} location.
@@ -310,51 +316,51 @@
 (export 'css-section-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_ref ()
-;;;
-;;; GtkCssSection *
-;;; gtk_css_section_ref (GtkCssSection *section);
-;;;
-;;; Increments the reference count on section .
-;;;
-;;; section :
-;;;     a GtkCssSection
-;;;
-;;; Returns :
-;;;     section itself.
+;;; gtk_css_section_new_with_bytes                          Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;; TODO: Allow a GFile, a pathname or a namestring
+
+#+gtk-4-16
+(cffi:defcfun ("gtk_css_section_new_with_bytes" css-section-new-with-bytes)
+    (g:boxed css-section :return)
+ #+liber-documentation
+ "@version{#2024-11-5}
+  @argument[file]{a @class{g:file} object for the file this section refers to}
+  @argument[bytes]{a @class{g:bytes} instance with the bytes this section
+    refers to}
+  @argument[start]{a @symbol{gtk:css-location} instance with the start location}
+  @argument[end]{a @symbol{gtk:css-location} instance with the end location}
+  @return{The new @class{gtk:css-section} instance.}
+  @begin{short}
+    Creates a new @class{gtk:css-section} instance referring to the section in
+    the given @arg{file} or the given @arg{bytes} from the @arg{start} location
+    to the @arg{end} location.
+  @end{short}
+
+  Since 4.16
+  @see-class{gtk:css-section}
+  @see-class{g:bytes}
+  @see-class{g:file}"
+  (file g:object)
+  (bytes (g:boxed g:bytes))
+  (start (:pointer (:struct css-location)))
+  (end (:pointer (:struct css-location))))
+
+#+gtk-4-16
+(export 'css-section-new-with-bytes)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_ref                                     not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_unref ()
-;;;
-;;; void
-;;; gtk_css_section_unref (GtkCssSection *section);
-;;;
-;;; Decrements the reference count on section , freeing the structure if the
-;;; reference count reaches 0.
-;;;
-;;; section :
-;;;     a GtkCssSection
+;;; gtk_css_section_unref                                   not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_print ()
-;;;
-;;; void
-;;; gtk_css_section_print (const GtkCssSection *section,
-;;;                        GString *string);
-;;;
-;;; Prints the section into string in a human-readable form. This is a form like
-;;; gtk.css:32:1-23 to denote line 32, characters 1 to 23 in the file gtk.css.
-;;;
-;;; section :
-;;;     a section
-;;;
-;;; string :
-;;;     a GString to print to
+;;; gtk_css_section_print                                   not needed
 ;;; ----------------------------------------------------------------------------
-
-;; not needed, see gtk_css_section_to_string
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_section_to_string
@@ -376,16 +382,38 @@
 (export 'css-section-to-string)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_get_bytes                               Since 4.16
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
+ #+liber-documentation
+ "@version{#2024-11-5}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The @class{g:bytes} instance with the bytes from which @arg{section}
+    was parsed.}
+  @begin{short}
+    Gets the bytes that the section was parsed from.
+  @end{short}
+
+  Since 4.16
+  @see-class{gtk:css-section}
+  @see-class{g:bytes}"
+  (section (g:boxed css-section)))
+
+#+gtk-4-16
+(export 'css-section-bytes)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_css_section_get_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_get_file" css-section-file)
-    g:file-as-namestring
+(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) g:object
  #+liber-documentation
  "@version{#2024-4-23}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The namestring with the file that @arg{section} was parsed from or
-  @code{nil} if @arg{section} was parsed from other data.}
+  @return{The @class{g:file} object with the file that @arg{section} was parsed
+    from or @code{nil} if @arg{section} was parsed from other data.}
   @begin{short}
     Gets the file that the section was parsed from.
   @end{short}
@@ -461,7 +489,7 @@
 ;;; GtkCssProvider
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkCssProvider" css-provider
+(gobject:define-gobject "GtkCssProvider" css-provider
   (:superclass g:object
    :export t
    :interfaces ("GtkStyleProvider")
@@ -472,7 +500,7 @@
 
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2022-11-25}
+ "@version{2024-11-5}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -508,6 +536,13 @@
       @begin{pre}
 lambda (provider section error)    :run-last
       @end{pre}
+      @begin[code]{table}
+        @entry[provider]{The @class{gtk:css-provider} object that had a parsing
+          error.}
+        @entry[section]{The @class{gtk:css-section} instance the error happened
+          in.}
+        @entry[error]{The parsing error of type @code{GError}.}
+      @end{table}
       Signals that a parsing error occured. The @arg{section} argument describes
       the actual location of the error as accurately as possible. Parsing errors
       are never fatal, so the parsing will resume after the error. Errors may
@@ -518,13 +553,6 @@ lambda (provider section error)    :run-last
       Note that this signal may be emitted at any time as the CSS provider may
       opt to defer parsing parts or all of the input to a later time than when
       a loading function was called.
-      @begin[code]{table}
-        @entry[provider]{The @class{gtk:css-provider} object that had a parsing
-          error.}
-        @entry[section]{The @class{gtk:css-section} instance the error happened
-          in.}
-        @entry[error]{The parsing error of type @code{GError}.}
-      @end{table}
   @end{dictionary}
   @see-constructor{gtk:css-provider-new}
   @see-class{gtk:style-context}

@@ -2,7 +2,7 @@
 ;;; gtk4.style-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,43 +59,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
-
-;;; ----------------------------------------------------------------------------
-;;; GtkStyleProvider
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-interface "GtkStyleProvider" style-provider
-  (:export t
-   :type-initializer "gtk_style_provider_get_type")
-  nil)
-
-#+liber-documentation
-(setf (liber:alias-for-class 'style-provider)
-      "Interface"
-      (documentation 'style-provider 'type)
- "@version{2024-4-20}
-  @begin{short}
-    The @class{gtk:style-provider} interface is an interface used to provide
-    style information to a @class{gtk:style-context} object.
-  @end{short}
-  See the @fun{gtk:style-context-add-provider-for-display} function for adding
-  style providers to a style context and the @fun{gtk:widget-add-provider}
-  function to add a style provider to the display of a widget.
-  @begin[Signal Details]{dictionary}
-    @subheading{The \"gtk-private-changed\" signal}
-      @begin{pre}
-lambda (provider)    :run-last
-      @end{pre}
-      No description available.
-      @begin[code]{table}
-        @entry[provider]{The @class{gtk:style-provider} object which received
-          the signal.}
-      @end{table}
-  @end{dictionary}
-  @see-class{gtk:style-context}
-  @see-class{gtk:css-provider}
-  @see-function{gtk:style-context-add-provider-for-display}
-  @see-function{gtk:widget-add-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_FALLBACK
@@ -204,5 +167,45 @@ lambda (provider)    :run-last
   @see-class{gtk:style-provider}")
 
 (export '+priority-user+)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkStyleProvider
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-ginterface "GtkStyleProvider" style-provider
+  (:export t
+   :type-initializer "gtk_style_provider_get_type")
+  nil)
+
+#+liber-documentation
+(setf (liber:alias-for-class 'style-provider)
+      "Interface"
+      (documentation 'style-provider 'type)
+ "@version{2024-11-2}
+  @begin{short}
+    The @class{gtk:style-provider} interface is an interface used to provide
+    style information to a @class{gtk:style-context} object.
+  @end{short}
+  See the @fun{gtk:style-context-add-provider-for-display} function for adding
+  style providers to a style context and the @fun{gtk:widget-add-provider}
+  function to add a style provider to the display of a widget.
+
+  GTK uses the @class{gtk:style-provider} implementation for CSS in the
+  @class{gtk:css-provider} implementation.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"gtk-private-changed\" signal}
+      @begin{pre}
+lambda (provider)    :run-last
+      @end{pre}
+      @begin[code]{table}
+        @entry[provider]{The @class{gtk:style-provider} object which received
+          the signal.}
+      @end{table}
+      No description available.
+  @end{dictionary}
+  @see-class{gtk:style-context}
+  @see-class{gtk:css-provider}
+  @see-function{gtk:style-context-add-provider-for-display}
+  @see-function{gtk:widget-add-provider}")
 
 ;;; --- End of file gtk4.style-provider.lisp -----------------------------------

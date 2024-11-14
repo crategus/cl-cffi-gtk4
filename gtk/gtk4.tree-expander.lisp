@@ -2,7 +2,7 @@
 ;;; gtk4.tree-expander.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -88,7 +88,7 @@
 ;;; GtkTreeExpander
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkTreeExpander" tree-expander
+(gobject:define-gobject "GtkTreeExpander" tree-expander
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -134,7 +134,7 @@
   managing expanded state.
 
   It is important to mention that you want to set the
-  @slot[gkt:list-item]{focusable} property to @em{false} when using this widget,
+  @slot[gtk:list-item]{focusable} property to @em{false} when using this widget,
   as you want the keyboard focus to be in the treexpander, and not inside the
   list to make use of the keybindings.
 
@@ -194,7 +194,7 @@
   @syntax{(gtk:tree-expander-child object) => child}
   @syntax{(setf (gtk:tree-expander-child object) child)}
   @argument[object]{a @class{gtk:tree-expander} object}
-  @argument[child]{a @class{gtk:widget} widget}
+  @argument[child]{a @class{gtk:widget} object}
   @begin{short}
     Accessor of the @slot[gtk:tree-expander]{child} slot of the
     @class{gtk:tree-expander} class.
@@ -213,10 +213,10 @@
  "The @code{hide-expander} property of type @code{:boolean} (Read / Write) @br{}
   Whether the expander icon should be hidden in a @class{gtk:tree-list-row}
   object. Note that this property simply hides the icon. The actions and
-  keybinding (i.e. collapse and expand) are not affected by this property. A
-  common use for this property would be to bind to the number of children in a
-  @class{gtk:tree-list-row} object’s model in order to hide the expander when a
-  row has no children. Since 4.10 @br{}
+  keybinding, that is, collapse and expand, are not affected by this property.
+  A common use for this property would be to bind to the number of children in
+  the model of a @class{gtk:tree-list-row} object, to hide the expander when
+  a row has no children. Since 4.10 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-10 liber-documentation)
@@ -321,7 +321,7 @@
  "@version{#2023-9-26}
   @syntax{(gtk:tree-expander-item object) => item}
   @argument[object]{a @class{gtk:tree-expander} object}
-  @argument[item]{a @class{g:object} object with the item of the row}
+  @argument[item]{a @class{g:object} instance with the item of the row}
   @begin{short}
     Accessor of the @slot[gtk:tree-expander]{item} slot of the
     @class{gtk:tree-expander} class.

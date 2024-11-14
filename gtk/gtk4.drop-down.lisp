@@ -2,7 +2,7 @@
 ;;; gtk4.drop-down.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,7 +99,7 @@
 ;;; GtkDropDown
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkDropDown" drop-down
+(gobject:define-gobject "GtkDropDown" drop-down
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -237,7 +237,7 @@ lambda (dropdown)    :action
  "The @code{expression} property of type @class{gtk:expression} (Read / Write)
   @br{}
   An expression to evaluate to obtain strings to match against the search term
-  See the @slot[gkt:drop-down]{enable-search} property. If the
+  See the @slot[gtk:drop-down]{enable-search} property. If the
   @slot[gtk:drop-down]{factory} property is not set, the expression is also
   used to bind strings to labels produced by a default factory.")
 

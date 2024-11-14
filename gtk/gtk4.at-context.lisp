@@ -2,7 +2,7 @@
 ;;; gtk4.at-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -66,7 +66,7 @@
 ;;; GtkATContext
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkATContext" at-context
+(gobject:define-gobject "GtkATContext" at-context
   (:superclass g:object
    :export t
    :interfaces ()
@@ -96,11 +96,11 @@
       @begin{pre}
 lambda (context)    :run-first
       @end{pre}
-      Emitted when the attributes of the accessible for the
-      @class{gtk:at-context} instance change.
       @begin[code]{table}
         @entry[context]{The @class{gtk:at-context} object.}
       @end{table}
+      Emitted when the attributes of the accessible for the
+      @class{gtk:at-context} instance change.
   @end{dictionary}
   @see-constructor{gtk:at-context-create}
   @see-class{gtk:accessible}")

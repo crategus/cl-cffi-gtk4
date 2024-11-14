@@ -2,7 +2,7 @@
 ;;; gtk4.grid-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -97,7 +97,7 @@
 ;;; GtkGridView
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkGridView" grid-view
+(gobject:define-gobject "GtkGridView" grid-view
   (:superclass list-base
    :export t
    :interfaces ("GtkAccessible"
@@ -170,16 +170,16 @@ gridview
       @begin{pre}
 lambda (gridview position)    :run-last
       @end{pre}
-      The signal is emitted when a cell has been activated by the user, usually
-      via activating the @code{GtkGridView|list.activate-item} action. This
-      allows for a convenient way to handle activation in a gridview. See the
-      @code{GtkListItem:activatable} action for details on how to use this
-      signal.
       @begin[code]{table}
         @entry[gridview]{The @class{gtk:grid-view} widget.}
         @entry[position]{An unsigned integer with the position of the item to
           activate.}
       @end{table}
+      The signal is emitted when a cell has been activated by the user, usually
+      via activating the @code{GtkGridView|list.activate-item} action. This
+      allows for a convenient way to handle activation in a gridview. See the
+      @code{GtkListItem:activatable} action for details on how to use this
+      signal.
   @end{dictionary}
   @see-constructor{gtk:grid-view-new}
   @see-slot{gtk:grid-view-enable-rubberband}

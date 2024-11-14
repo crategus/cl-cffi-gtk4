@@ -2,7 +2,7 @@
 ;;; gtk4.file-launcher.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 ;;; GtkFileLauncher
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkFileLauncher" file-launcher
+(gobject:define-gobject "GtkFileLauncher" file-launcher
   (:superclass g:object
    :export t
    :interfaces ()
@@ -316,8 +316,8 @@
   @begin{short}
     Launch a file manager to show the file in its parent directory.
   @end{short}
-  This is only supported native files. It will fail if @arg{file} is e.g. a
-  @file{http://} URI.
+  This is only supported native files. It will fail if @arg{file} is, for
+  example, a @file{http://} URI.
 
   The callback function will be called when the operation is completed. It
   should call the @fun{gtk:file-launcher-open-containing-folder-finish} function
