@@ -182,6 +182,9 @@
     @about-function{render-node-deserialize}
     @about-function{render-node-write-to-file}
     @about-function{render-node-bounds}
+    @about-function{value-dup-render-node}
+    @about-function{value-render-node}
+    @about-function{value-take-render-node}
     @about-class{container-node}
     @about-function{container-node-new}
     @about-function{container-node-n-children}
@@ -304,6 +307,29 @@
     @about-function{gl-shader-node-child}
     @about-function{gl-shader-node-args}
     @about-function{gl-shader-node-shader}
+    @about-class{texture-scale-node}
+    @about-function{texture-scale-node-new}
+    @about-function{texture-scale-node-filter}
+    @about-function{texture-scale-node-texture}
+    @about-class{mask-node}
+    @about-function{mask-node-new}
+    @about-function{mask-node-mask}
+    @about-function{mask-node-mask-mode}
+    @about-function{mask-node-source}
+    @about-class{fill-node}
+    @about-function{fill-node-new}
+    @about-function{fill-node-child}
+    @about-function{fill-node-fill-rule}
+    @about-function{fill-node-path}
+    @about-class{stroke-node}
+    @about-function{stroke-node-new}
+    @about-function{stroke-node-child}
+    @about-function{stroke-node-path}
+    @about-function{stroke-node-stroke}
+    @about-class{subsurface-node}
+    @about-function{subsurface-node-new}
+    @about-function{subsurface-node-subsurface}
+    @about-function{subsurface-node-child}
   @end{section}
   @begin[GskRoundedRect]{section}
     @about-symbol{corner}

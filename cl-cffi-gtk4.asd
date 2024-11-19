@@ -518,7 +518,7 @@
      (:file "rtest-gtk4-numeric-sorter")
      (:file "rtest-gtk4-column-view-sorter"       :if-feature :gtk-4-10)
 
-;    (:file "rtest-gtk4-section-model"            :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-section-model"            :if-feature :gtk-4-12)
      (:file "rtest-gtk4-selection-model")
      (:file "rtest-gtk4-no-selection")
      (:file "rtest-gtk4-single-selection")

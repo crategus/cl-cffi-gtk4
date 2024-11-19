@@ -25,7 +25,7 @@ GListModel support
   gtk4.numeric-sorter.lisp             GtkNumericSorter               GTK 4.16
   gtk4.column-view-sorter.lisp         GtkColumnViewSorter            GTK 4.16
 
-  gtk4.section-model.lisp              GtkSectionModel                GTK 4.16 +
+  gtk4.section-model.lisp              GtkSectionModel                GTK 4.16 .
   gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.16 +
   gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.16 +
   gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.16 +
@@ -148,9 +148,9 @@ Buttons and Toggles
 
 Numeric and Text Data Entry
 
-  gtk4.editable.lisp                   GtkEditable                    GTK 4.16 +
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16 .
-  gtk4.text.lisp                       GtkText                        GTK 4.16 .
+  gtk4.editable.lisp                   GtkEditable                    GTK 4.16 &
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
+  gtk4.text.lisp                       GtkText                        GTK 4.16
   gtk4.entry.lisp                      GtkEntry                       GTK 4.16 .
   gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16 .
   gtk4.scale.lisp                      GtkScale                       GTK 4.16 .
