@@ -377,34 +377,37 @@
 ;;; gtk_grid_attach
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_grid_attach" grid-attach) :void
- #+liber-documentation
- "@version{2024-9-14}
-  @argument[grid]{a @class{gtk:grid} widget}
-  @argument[child]{a @class{gtk:widget} child widget to add}
-  @argument[left]{an integer with the column number to attach the left side of
-    @arg{child} to}
-  @argument[top]{an integer with the row number to attach the top side of
-    @arg{child} to}
-  @argument[width]{an integer with the number of columns that @arg{child} will
-    span}
-  @argument[height]{an integer with the number of rows that @arg{child} will
-    span}
-  @begin{short}
-    Adds a child widget to the grid.
-  @end{short}
-  The position of the child widget is determined by the @arg{left} and @arg{top}
-  arguments. The number of cells that the child widget will occupy is determined
-  by the @arg{width} and @arg{height} arguments.
-  @see-class{gtk:grid}
-  @see-class{gtk:widget}
-  @see-function{grid-attach-next-to}"
+(cffi:defcfun ("gtk_grid_attach" %grid-attach) :void
   (grid (g:object grid))
   (child (g:object widget))
   (left :int)
   (top :int)
   (width :int)
   (height :int))
+
+(defun grid-attach (grid child left top &optional (width 1) (height 1))
+ #+liber-documentation
+ "@version{2024-11-16}
+  @argument[grid]{a @class{gtk:grid} widget}
+  @argument[child]{a @class{gtk:widget} child widget to add}
+  @argument[left]{an integer with the column number to attach the left side of
+    @arg{child} to}
+  @argument[top]{an integer with the row number to attach the top side of
+    @arg{child} to}
+  @argument[width]{an optional integer with the number of columns that
+    @arg{child} will span, the default is 1}
+  @argument[height]{an optional integer with the number of rows that
+    @arg{child} will span, the default is 1}
+  @begin{short}
+    Adds a child widget to the grid.
+  @end{short}
+  The position of the child widget is determined by the @arg{left} and @arg{top}
+  arguments. The number of cells that the child widget will occupy is determined
+  by the optional @arg{width} and @arg{height} arguments.
+  @see-class{gtk:grid}
+  @see-class{gtk:widget}
+  @see-function{grid-attach-next-to}"
+  (%grid-attach grid child left top width height))
 
 (export 'grid-attach)
 
