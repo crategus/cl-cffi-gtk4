@@ -49,41 +49,155 @@
              (glib-test:list-enum-item-nicks "GskRenderNodeType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GskRenderNodeType" GSK:RENDER-NODE-TYPE
-                                    (:EXPORT T
-                                     :TYPE-INITIALIZER
-                                     "gsk_render_node_type_get_type")
-                                    (:NOT-A-RENDER-NODE 0)
-                                    (:CONTAINER-NODE 1)
-                                    (:CAIRO-NODE 2)
-                                    (:COLOR-NODE 3)
-                                    (:LINEAR-GRADIENT-NODE 4)
-                                    (:REPEATING-LINEAR-GRADIENT-NODE 5)
-                                    (:RADIAL-GRADIENT-NODE 6)
-                                    (:REPEATING-RADIAL-GRADIENT-NODE 7)
-                                    (:CONIC-GRADIENT-NODE 8)
-                                    (:BORDER-NODE 9)
-                                    (:TEXTURE-NODE 10)
-                                    (:INSET-SHADOW-NODE 11)
-                                    (:OUTSET-SHADOW-NODE 12)
-                                    (:TRANSFORM-NODE 13)
-                                    (:OPACITY-NODE 14)
-                                    (:COLOR-MATRIX-NODE 15)
-                                    (:REPEAT-NODE 16)
-                                    (:CLIP-NODE 17)
-                                    (:ROUNDED-CLIP-NODE 18)
-                                    (:SHADOW-NODE 19)
-                                    (:BLEND-NODE 20)
-                                    (:CROSS-FADE-NODE 21)
-                                    (:TEXT-NODE 22)
-                                    (:BLUR-NODE 23)
-                                    (:DEBUG-NODE 24)
-                                    (:GL-SHADER-NODE 25)
-                                    (:TEXTURE-SCALE-NODE 26)
-                                    (:MASK-NODE 27)
-                                    (:FILL-NODE 28)
-                                    (:STROKE-NODE 29)
-                                    (:SUBSURFACE-NODE 30))
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gsk_render_node_type_get_type")
+                       (:NOT-A-RENDER-NODE 0)
+                       (:CONTAINER-NODE 1)
+                       (:CAIRO-NODE 2)
+                       (:COLOR-NODE 3)
+                       (:LINEAR-GRADIENT-NODE 4)
+                       (:REPEATING-LINEAR-GRADIENT-NODE 5)
+                       (:RADIAL-GRADIENT-NODE 6)
+                       (:REPEATING-RADIAL-GRADIENT-NODE 7)
+                       (:CONIC-GRADIENT-NODE 8)
+                       (:BORDER-NODE 9)
+                       (:TEXTURE-NODE 10)
+                       (:INSET-SHADOW-NODE 11)
+                       (:OUTSET-SHADOW-NODE 12)
+                       (:TRANSFORM-NODE 13)
+                       (:OPACITY-NODE 14)
+                       (:COLOR-MATRIX-NODE 15)
+                       (:REPEAT-NODE 16)
+                       (:CLIP-NODE 17)
+                       (:ROUNDED-CLIP-NODE 18)
+                       (:SHADOW-NODE 19)
+                       (:BLEND-NODE 20)
+                       (:CROSS-FADE-NODE 21)
+                       (:TEXT-NODE 22)
+                       (:BLUR-NODE 23)
+                       (:DEBUG-NODE 24)
+                       (:GL-SHADER-NODE 25)
+                       (:TEXTURE-SCALE-NODE 26)
+                       (:MASK-NODE 27)
+                       (:FILL-NODE 28)
+                       (:STROKE-NODE 29)
+                       (:SUBSURFACE-NODE 30))
              (gobject:get-gtype-definition "GskRenderNodeType"))))
+
+;;;     GskScalingFilter
+
+(test gsk-scaling-filter
+  ;; Check type
+  (is (g:type-is-enum "GskScalingFilter"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GskScalingFilter")
+          (g:gtype (cffi:foreign-funcall "gsk_scaling_filter_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gsk:scaling-filter
+          (glib:symbol-for-gtype "GskScalingFilter")))
+  ;; Check names
+  (is (equal '("GSK_SCALING_FILTER_LINEAR" "GSK_SCALING_FILTER_NEAREST"
+               "GSK_SCALING_FILTER_TRILINEAR")
+             (glib-test:list-enum-item-names "GskScalingFilter")))
+  ;; Check values
+  (is (equal '(0 1 2)
+             (glib-test:list-enum-item-values "GskScalingFilter")))
+  ;; Check nick names
+  (is (equal '("linear" "nearest" "trilinear")
+             (glib-test:list-enum-item-nicks "GskScalingFilter")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GskScalingFilter" GSK:SCALING-FILTER
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gsk_scaling_filter_get_type")
+                       (:LINEAR 0)
+                       (:NEAREST 1)
+                       (:TRILINEAR 2))
+             (gobject:get-gtype-definition "GskScalingFilter"))))
+
+;;;     GskColorStop
+;;;     GskShadow
+
+;;;     GskBlendMode
+
+(test gsk-blend-mode
+  ;; Check type
+  (is (g:type-is-enum "GskBlendMode"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GskBlendMode")
+          (g:gtype (cffi:foreign-funcall "gsk_blend_mode_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gsk:blend-mode
+          (glib:symbol-for-gtype "GskBlendMode")))
+  ;; Check names
+  (is (equal '("GSK_BLEND_MODE_DEFAULT" "GSK_BLEND_MODE_MULTIPLY"
+               "GSK_BLEND_MODE_SCREEN" "GSK_BLEND_MODE_OVERLAY"
+               "GSK_BLEND_MODE_DARKEN" "GSK_BLEND_MODE_LIGHTEN"
+               "GSK_BLEND_MODE_COLOR_DODGE" "GSK_BLEND_MODE_COLOR_BURN"
+               "GSK_BLEND_MODE_HARD_LIGHT" "GSK_BLEND_MODE_SOFT_LIGHT"
+               "GSK_BLEND_MODE_DIFFERENCE" "GSK_BLEND_MODE_EXCLUSION"
+               "GSK_BLEND_MODE_COLOR" "GSK_BLEND_MODE_HUE"
+               "GSK_BLEND_MODE_SATURATION" "GSK_BLEND_MODE_LUMINOSITY")
+             (glib-test:list-enum-item-names "GskBlendMode")))
+  ;; Check values
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)
+             (glib-test:list-enum-item-values "GskBlendMode")))
+  ;; Check nick names
+  (is (equal '("default" "multiply" "screen" "overlay" "darken" "lighten"
+               "color-dodge" "color-burn" "hard-light" "soft-light" "difference"
+               "exclusion" "color" "hue" "saturation" "luminosity")
+             (glib-test:list-enum-item-nicks "GskBlendMode")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GskBlendMode" GSK:BLEND-MODE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gsk_blend_mode_get_type")
+                       (:DEFAULT 0)
+                       (:MULTIPLY 1)
+                       (:SCREEN 2)
+                       (:OVERLAY 3)
+                       (:DARKEN 4)
+                       (:LIGHTEN 5)
+                       (:COLOR-DODGE 6)
+                       (:COLOR-BURN 7)
+                       (:HARD-LIGHT 8)
+                       (:SOFT-LIGHT 9)
+                       (:DIFFERENCE 10)
+                       (:EXCLUSION 11)
+                       (:COLOR 12)
+                       (:HUE 13)
+                       (:SATURATION 14)
+                       (:LUMINOSITY 15))
+             (gobject:get-gtype-definition "GskBlendMode"))))
+
+;;;     GskMaskMode                                         Since 4.10
+
+(test gsk-mask-mode
+  ;; Check type
+  (is (g:type-is-enum "GskMaskMode"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GskMaskMode")
+          (g:gtype (cffi:foreign-funcall "gsk_mask_mode_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gsk:mask-mode
+          (glib:symbol-for-gtype "GskMaskMode")))
+  ;; Check names
+  (is (equal '("GSK_MASK_MODE_ALPHA" "GSK_MASK_MODE_INVERTED_ALPHA"
+               "GSK_MASK_MODE_LUMINANCE" "GSK_MASK_MODE_INVERTED_LUMINANCE")
+             (glib-test:list-enum-item-names "GskMaskMode")))
+  ;; Check values
+  (is (equal '(0 1 2 3)
+             (glib-test:list-enum-item-values "GskMaskMode")))
+  ;; Check nick names
+  (is (equal '("alpha" "inverted-alpha" "luminance" "inverted-luminance")
+             (glib-test:list-enum-item-nicks "GskMaskMode")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GskMaskMode" GSK:MASK-MODE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gsk_mask_mode_get_type")
+                       (:ALPHA 0)
+                       (:INVERTED-ALPHA 1)
+                       (:LUMINANCE 2)
+                       (:INVERTED-LUMINANCE 3))
+             (gobject:get-gtype-definition "GskMaskMode"))))
 
 ;;;     GskRenderNode
 
@@ -190,7 +304,7 @@
       (is (graphene:rect-equal rect1
                                (gsk:render-node-bounds node rect2))))))
 
-;;;     GskContainerNode
+;;; --- GskContainerNode -------------------------------------------------------
 
 ;;;     gsk_container_node_new
 ;;;     gsk_container_node_get_n_children
@@ -215,20 +329,67 @@
 
 (test gsk-container-node-draw
   (graphene:with-rects ((rect1 10 10 80 80)
-                                 (rect2 20 20 60 60)
-                                 (rect3 30 30 40 40))
+                        (rect2 20 20 60 60)
+                        (rect3 30 30 40 40))
     (let* ((filename  (glib-sys:sys-path "test/out/render-node-to-file.txt"))
+           (pdffile (glib-sys:sys-path "test/out/draw-container-node.pdf"))
            (color1 (gsk:color-node-new (gdk:rgba-new :red 1 :alpha 1) rect1))
            (color2 (gsk:color-node-new (gdk:rgba-new :green 1 :alpha 1) rect2))
            (color3 (gsk:color-node-new (gdk:rgba-new :blue 1 :alpha 1) rect3))
            (node (gsk:container-node-new (list color1 color2 color3))))
-      (is-false (render-node-draw-to-pdf node 100 100))
+      (is-false (render-node-draw-to-pdf node 100 100 pdffile))
       (is-true (gsk:render-node-write-to-file node filename))
       (is-false (gsk:render-node-unref node)))))
 
-;;;     GskCairoNode
+;;; --- GskCairoNode -----------------------------------------------------------
 
-;;;     GskColorNode
+;;;     gsk_cairo_node_new
+;;;     gsk_cairo_node_get_draw_context
+;;;     gsk_cairo_node_get_surface
+
+(test gsk-cairo-node-new
+  (let (node context)
+    (graphene:with-rect (bounds 0 0 200 100)
+      (is (eq :cairo-node
+              (gsk:render-node-node-type (setf node
+                                               (gsk:cairo-node-new bounds)))))
+      (is (cffi:pointerp (setf context (gsk:cairo-node-draw-context node))))
+      (is (cffi:pointer-eq (cairo:target context)
+                           (gsk:cairo-node-surface node)))
+      (is-false (cairo:destroy context))
+      (is-false (gsk:render-node-unref node)))))
+
+(test gsk-cairo-node-draw
+  (let ((filename (glib-sys:sys-path "test/out/draw-cairo-node.pdf"))
+        (width 100) (height 100)
+        node context)
+    (graphene:with-rect (bounds 0 0 width height)
+      ;; Create GskCairoNode
+      (is (eq :cairo-node
+              (gsk:render-node-node-type (setf node
+                                               (gsk:cairo-node-new bounds)))))
+      ;; Get Cairo context
+      (setf context (gsk:cairo-node-draw-context node))
+      ;; Draw into Cairo context
+      (cairo:save context)
+      ;; Clear surface
+      (cairo:set-source-rgb context 1.0 1.0 1.0)
+      (cairo:paint context)
+      ;; Example is in 1.0 x 1.0 coordinate space
+      (cairo:scale context width height)
+      ;; Drawing code goes here
+      (setf (cairo:line-width context) 0.1)
+      (cairo:set-source-rgb context 1.0 0.0 0.0)
+      (cairo:rectangle context 0.25 0.25 0.5 0.5)
+      (cairo:stroke context)
+      (cairo:restore context)
+      ;; Draw GskCairoNode into PDF file
+      (is-false (render-node-draw-to-pdf node 100 100 filename))
+
+      (is-false (cairo:destroy context))
+      (is-false (gsk:render-node-unref node)))))
+
+;;; --- GskColorNode -----------------------------------------------------------
 
 ;;;     gsk_color_node_new
 ;;;     gsk_color_node_get_color
@@ -243,7 +404,7 @@
     (is (gdk:rgba-equal (gdk:rgba-new :red 1 :alpha 1)
                         (gsk:color-node-color node))))))
 
-;;;     GskLinearGradientNode
+;;; --- GskLinearGradientNode --------------------------------------------------
 
 ;;;     gsk_linear_gradient_node_new
 ;;;     gsk_linear_gradient_node_get_start
@@ -489,7 +650,6 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-
 ;;;     gsk_inset_shadow_node_new
 ;;;     gsk_inset_shadow_node_get_outline
 ;;;     gsk_inset_shadow_node_get_color
@@ -553,4 +713,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; 2024-9-18
+;;; 2024-11-15
