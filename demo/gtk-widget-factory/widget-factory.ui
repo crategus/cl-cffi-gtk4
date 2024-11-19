@@ -455,7 +455,10 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                         <property name="page-increment">50</property>
                       </object>
                     </property>
+<!-- FIXME: Does not work as expected.
+            Check implementation of gtk:builder-cl-scope
                     <signal name="value-changed" object="scale-transition-speed" handler="transition-speed-changed"/>
+-->
                   </object>
                 </child>
               </object>
@@ -526,9 +529,6 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                 <property name="placeholder-text" translatable="1">Click icon to change mode</property>
                                 <property name="secondary-icon-name">view-refresh-symbolic</property>
                                 <property name="secondary-icon-tooltip-text">Change mode</property>
-                                <!-- Signal handler already connected
-                                <signal name="icon-release" object="entry1" handler="on-entry-icon-release"/>
-                                -->
                               </object>
                             </child>
                             <child>
@@ -640,25 +640,31 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkGrid" id="grid1">
+                              <object class="GtkGrid" id="page1-grid1">
                                 <property name="row-homogeneous">1</property>
                                 <property name="column-spacing">18</property>
                                 <property name="row-spacing">6</property>
+<!-- FIXME: Do we have a bug in GtkBuilder? The grid is not filled as defined.
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton1">
-                                    <property name="label" translatable="1">checkbutton</property>
+                                    <property name="label">checkbutton</property>
                                     <property name="active">1</property>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">0</property>
+                                    </layout>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton2">
-                                    <property name="label" translatable="1">checkbutton</property>
+                                    <property name="label">checkbutton</property>
                                     <layout>
                                       <property name="column">0</property>
                                       <property name="row">1</property>
                                     </layout>
                                   </object>
                                 </child>
+
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton3">
                                     <property name="label" translatable="1">checkbutton</property>
@@ -712,7 +718,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton">
+                                  <object class="GtkCheckButton" id="radiobutton2">
                                     <property name="label" translatable="1">radiobutton</property>
                                     <property name="group">radiobutton1</property>
                                     <layout>
@@ -771,6 +777,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                     <property name="spinning">1</property>
                                     <layout>
                                       <property name="column">2</property>
+                                      <property name="row">0</property>
                                     </layout>
                                   </object>
                                 </child>
@@ -801,6 +808,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                     </layout>
                                   </object>
                                 </child>
+-->
                               </object>
                             </child>
                           </object>
@@ -1054,7 +1062,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                   <object class="GtkVideo">
                                     <property name="autoplay">1</property>
                                     <property name="loop">1</property>
-                                    <property name="file">resource:///org/gtk/WidgetFactory4/gtk-logo.webm</property>
+                                    <property name="file">resource:///com/crategus/gtk4-widget-factory/gtk-logo.webm</property>
                                   </object>
                                 </child>
                               </object>
@@ -1078,7 +1086,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                         <property name="orientation">1</property>
                                         <property name="spacing">10</property>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-large-title">
                                             <property name="label">Large Title</property>
                                             <style>
                                               <class name="large-title"/>
@@ -1086,7 +1094,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-title1">
                                             <property name="label">Title 1</property>
                                             <style>
                                               <class name="title-1"/>
@@ -1094,7 +1102,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-title2">
                                             <property name="label">Title 2</property>
                                             <style>
                                               <class name="title-2"/>
@@ -1102,7 +1110,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-title3">
                                             <property name="label">Title 3</property>
                                             <style>
                                               <class name="title-3"/>
@@ -1110,7 +1118,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-title4">
                                             <property name="label">Title 4</property>
                                             <style>
                                               <class name="title-4"/>
@@ -1118,7 +1126,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-heading">
                                             <property name="label">Heading</property>
                                             <style>
                                               <class name="heading"/>
@@ -1126,7 +1134,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-body">
                                             <property name="label">Body</property>
                                             <style>
                                               <class name="body"/>
@@ -1134,7 +1142,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-caption-heading">
                                             <property name="label">Caption Heading</property>
                                             <style>
                                               <class name="caption-heading"/>
@@ -1142,7 +1150,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="label-caption">
                                             <property name="label">Caption</property>
                                             <style>
                                               <class name="caption"/>
@@ -1268,15 +1276,15 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                   <object class="GtkPicture" id="notebook_sunset">
                                     <property name="content-fit">cover</property>
                                     <child>
-                                      <object class="GtkDragSource" id="dragsource1">
-                                        <signal name="prepare" object="dragsource1" handler="on-picture-drag-prepare"/>
+                                      <object class="GtkDragSource" id="notebook-sunset-drag">
+                                        <signal name="prepare" object="notebook-sunset-drag" handler="on-picture-drag-prepare" swapped="no"/>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkDropTarget" id="droptarget1">
+                                      <object class="GtkDropTarget" id="notebook-sunset-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
-                                        <signal name="drop" object="droptarget1" handler="on-picture-drop"/>
+                                        <signal name="drop" object="notebook-sunset-drop" handler="on-picture-drop" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
@@ -1293,15 +1301,15 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                 <property name="child">
                                   <object class="GtkPicture" id="notebook_nyc">
                                     <child>
-                                      <object class="GtkDragSource" id="dragsource2">
-                                        <signal name="prepare" object="dragsource2" handler="on-picture-drag-prepare"/>
+                                      <object class="GtkDragSource" id="notebook-nyc-drag">
+                                        <signal name="prepare" object="notebook-nyc-drag" handler="on-picture-drag-prepare" swapped="no"/>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkDropTarget" id="droptarget2">
+                                      <object class="GtkDropTarget" id="notebook-nyc-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
-                                        <signal name="drop" object="droptarget2" handler="on-picture-drop"/>
+                                        <signal name="drop" object="notebook-nyc-drop" handler="on-picture-drop" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
@@ -1318,15 +1326,15 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                 <property name="child">
                                   <object class="GtkPicture" id="notebook_beach">
                                     <child>
-                                      <object class="GtkDragSource" id="dragsource3">
-                                        <signal name="prepare" object="dragsource3" handler="on-picture-drag-prepare"/>
+                                      <object class="GtkDragSource" id="notebook-beach-drag">
+                                        <signal name="prepare" object="notebook-beach-drag" handler="on-picture-drag-prepare" swapped="no"/>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkDropTarget" id="droptarget3">
+                                      <object class="GtkDropTarget" id="notebook-beach-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
-                                        <signal name="drop" object="droptarget3" handler="on-picture-drop"/>
+                                        <signal name="drop" object="notebook-beach-drop" handler="on-picture-drop" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
@@ -1593,16 +1601,16 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           <property name="label" translatable="1">Microphone gain</property>
                                         </accessibility>
                                         <property name="has-tooltip">1</property>
-                                        <property name="icons">
-                                          microphone-sensitivity-muted-symbolic
-                                          microphone-sensitivity-high-symbolic
-                                          microphone-sensitivity-low-symbolic
-                                          microphone-sensitivity-medium-symbolic
-                                        </property>
+                                        <property name="icons">microphone-sensitivity-muted-symbolic
+microphone-sensitivity-high-symbolic
+microphone-sensitivity-low-symbolic
+microphone-sensitivity-medium-symbolic</property>
                                         <property name="valign">3</property>
                                         <property name="value">.5</property>
                                         <property name="halign">3</property>
-                                        <signal name="value-changed" object="mic-button" handler="on-scale-button-value-changed"/>
+<!--
+                                        <signal name="value-changed" object="mic-button" handler="on-scale-button-value-changed" swapped="no"/>
+-->
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">1</property>
@@ -2092,27 +2100,27 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                           <object class="GtkButton" id="decrease_button">
                                             <property name="icon-name">zoom-out-symbolic</property>
                                             <property name="tooltip-text">Normal icons</property>
-                                            <!-- Swapped signal not supported in the Lisp binding
-                                            <signal name="clicked" handler="decrease_icon_size" object="iconview1" swapped="yes"/>
-                                            -->
+<!-- no swapped signal handler implemented
+                                            <signal name="clicked" handler="decrease-icon-size" object="iconview1" swapped="yes"/>
+-->
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="increase_button">
                                             <property name="icon-name">zoom-in-symbolic</property>
                                             <property name="tooltip-text">Large icons</property>
-                                            <!-- Swapped signal not supported in the Lisp binding
-                                            <signal name="clicked" handler="increase_icon_size" object="iconview1" swapped="yes"/>
-                                            -->
+<!-- no swapped signal handler implemented
+                                            <signal name="clicked" handler="increase-icon-size" object="iconview1" swapped="yes"/>
+-->
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="reset_button">
                                             <property name="icon-name">zoom-original-symbolic</property>
                                             <property name="tooltip-text">Inherited icon size</property>
-                                            <!-- Swapped signal not supported in the Lisp binding
-                                            <signal name="clicked" handler="reset_icon_size" object="iconview1" swapped="yes"/>
-                                            -->
+<!-- no swapped signal handler implemented
+                                            <signal name="clicked" handler="reset-icon-size" object="iconview1" swapped="yes"/>
+-->
                                           </object>
                                         </child>
                                       </object>
@@ -2749,11 +2757,11 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                                   </object>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton" id="button-tab-close">
+                                                  <object class="GtkButton">
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>
-                                                    <signal name="clicked" handler="tab-close-cb" object="closable_page_1"/>
+                                                    <signal name="clicked" object="closable_page_1" handler="tab-close-cb"/>
                                                     <style>
                                                       <class name="small-button"/>
                                                     </style>
@@ -2785,7 +2793,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>
-                                                    <signal name="clicked" handler="tab-close-cb" object="closable_page_2"/>
+                                                    <signal name="clicked" object="closable_page_2" handler="tab-close-cb"/>
                                                     <style>
                                                       <class name="small-button"/>
                                                     </style>
@@ -2820,7 +2828,7 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                 </child>
                                 <child>
                                   <object class="GtkGestureClick">
-                                    <signal name="pressed" handler="osd-frame-pressed" object="osd_frame"/>
+                                    <signal name="pressed" object="osd_frame" handler="osd-frame-pressed" swapped="no"/>
                                   </object>
                                 </child>
                               </object>
@@ -3055,9 +3063,9 @@ bad things might happen.</property>
             <child>
               <object class="GtkEntry" id="details_entry">
                 <property name="valign">4</property>
-                <!-- Swapped signal not supported in the Lisp binding
-                <signal name="notify::text" handler="validate_more_details" object="more_details_entry" swapped="yes"/>
-                -->
+<!-- swapped signal handler not implemented
+                <signal name="notify::text" handler="validate-more-details" object="more_details_entry" swapped="yes"/>
+-->
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
@@ -3084,7 +3092,7 @@ bad things might happen.</property>
             <child>
               <object class="GtkEntry" id="more_details_entry">
                 <property name="valign">4</property>
-                <signal name="notify::text" handler="validate-more-details" object="details_entry"/>
+                <signal name="notify::text" object="details_entry" handler="validate-more-details" swapped="no"/>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">1</property>

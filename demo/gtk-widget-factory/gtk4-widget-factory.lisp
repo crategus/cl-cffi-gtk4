@@ -24,22 +24,71 @@
 
 (defpackage :gtk4-widget-factory
   (:use :iterate :common-lisp)
-  (:export :gtk4-widget-factory))
+  (:export #:gtk4-widget-factory))
 
 (in-package :gtk4-widget-factory)
 
-(defvar *window* nil)
-(defvar *page-stack* nil)
+;;; ----------------------------------------------------------------------------
 
-(defvar *currentpage* 0)
-(defun on-page (i)
-  (= i *currentpage*))
+;; Track current active page
+
+(let ((currentpage 0))
+
+  (defun get-on-page ()
+    currentpage)
+
+  (defun (setf get-on-page) (value)
+    (setf currentpage value))
+
+  (defun is-on-page (i)
+    (= i currentpage)))
+
+;;; ----------------------------------------------------------------------------
+
+;; Subclass WidgetFactory from GtkApplication
+;; The purpose of this class is to store references to widgets
+
+(gobject:define-gobject-subclass "WidgetFactory" widget-factory
+  (:superclass gtk:application
+   :export t
+   :interfaces nil)
+  ((window
+    widget-factory-window
+    "window" "GtkWindow" t t)
+   (stack
+    widget-factory-stack
+    "stack" "GtkWidget" t t)
+   (searchbar
+    widget-factory-searchbar
+    "searchbar" "GtkWidget" t t)
+   (infobar
+    widget-factory-infobar
+    "infobar" "GtkWidget" t t)
+   (selection-dialog
+    widget-factory-selection-dialog
+    "selection-dialog" "GtkWindow" t t)
+   (selection-flowbox
+    widget-factory-selection-flowbox
+    "selection-flowbox" "GtkWidget" t t)
+   (open-menubutton
+    widget-factory-open-menubutton
+    "open-menubutton" "GtkWidget" t t)
+   (record-button
+    widget-factory-record-button
+    "record-button" "GtkWidget" t t)
+   (lockbutton
+    widget-factory-lockbutton
+    "lockbutton" "GtkWidget" t t)))
+
+;; Global variable to hold the running WidgetFactory application
+(defvar factory nil)
 
 ;;; ----------------------------------------------------------------------------
 
 ;; Code to load texures in a thread
 
 (defun load-texture-thread (task source path)
+  (declare (ignore source))
   (let ((texture (gdk:texture-new-from-resource path)))
     (g:task-return-pointer task (g:object-pointer texture))))
 
@@ -57,101 +106,142 @@
 
 ;;; ----------------------------------------------------------------------------
 
-;; The code to pulse a progress bar and an entry on page 1
+;; Control the pulse mode of "progressbar3" and "entry1"
 
-(let ((pulse-time 250))
+(let ((pulse-time 250)
+      (pulse-entry-mode 0)
+      (pulse-entry-fraction 0))
 
-  ;; TODO: We need a cffi callback. Can we improve the implementation?!
-  (cffi:defcallback remove-pulse :void ((data :pointer))
-    (let ((id (glib:get-stable-pointer-value data)))
-      (g:source-remove id)))
-
+  ;; Function called by the timeout handler
   (defun pulse-it (widget)
-    ;; Select the type of widget and pulse it
-    (cond ((eq (g:gtype "GtkEntry") (g:type-from-instance widget))
-           (gtk:entry-progress-pulse widget))
-          ((eq (g:gtype "GtkProgressBar") (g:type-from-instance widget))
-           (gtk:progress-bar-pulse widget))
-          (t
-           (error "PULSE-IT: unknown type of widget")))
-    ;; Create and set a new timeout source for the widget for the next pulse
-    (g:object-set-data-full widget
-                            "pulse-id"
-                            (g:timeout-add pulse-time
-                                           (lambda ()
-                                             (pulse-it widget)))
-                            (cffi:callback remove-pulse))
-    ;; Remove this timeout source
-    g:+source-remove+)
+    (let (pulse-id)
+      ;; Pulse the widget which is an entry or a progress bar
+      (if (eq 'gtk:entry (type-of widget))
+          (gtk:entry-progress-pulse widget)
+          (gtk:progress-bar-pulse widget))
+      ;; Set a timeout handler and store a destroy notify handler on the
+      ;; property list
+      (setf pulse-id (g:timeout-add pulse-time
+                                    (lambda () (pulse-it widget))))
+      (g:object-set-data-full widget
+                              "pulse-id"
+                              (lambda ()
+                                (g:source-remove pulse-id)))
+    ;; Remove the source
+    glib:+source-remove+))
 
-  (defun update-pulse-time (adjustment widget)
-    (let* ((value (gtk:adjustment-value adjustment))
-           (id (g:object-data widget "pulse-id"))
-           (mode (g:object-data widget "pulse-mode")))
-      ;; Global to the pulse time functions
+  (defun pulse-update (adjustment widget)
+    (let ((value (gtk:adjustment-value adjustment))
+          (pulse-id (g:object-data widget "pulse-id")))
+      (setf pulse-entry-fraction (/ value 100))
       (setf pulse-time (truncate (+ 50 (* 4 value))))
+      (if (= 100 value)
+          (setf (g:object-data widget "pulse-id") nil)
+          (when (and (null pulse-id)
+                     (or (eq 'gtk:progress-bar (type-of widget))
+                         (and (eq 'gtk:entry (type-of widget))
+                              (= 3 (mod pulse-entry-mode 3)))))
+            (setf pulse-id
+                  (g:timeout-add pulse-time
+                                 (lambda () (pulse-it widget))))
+            (g:object-set-data-full widget
+                                    "pulse-id"
+                                    (lambda ()
+                                      (g:source-remove pulse-id)))))))
 
-      (cond ((= value 100)
-             (setf (g:object-data widget "pulse-id") nil))
-            ((< value 100)
-             (when (and (not id)
-                        (or (eq (g:gtype "GtkProgressBar")
-                                (g:type-from-instance widget))
-                            (= 2 (mod mode 3))))
-               (g:object-set-data-full widget
-                                       "pulse-id"
-                                       (g:timeout-add pulse-time
-                                                      (lambda ()
-                                                        (pulse-it widget)))
-                                       (cffi:callback remove-pulse))))))))
-
-;;; ----------------------------------------------------------------------------
-
-(defclass my-text-view (gtk:text-view)
-  ((tv :accessor my-text-view-tv)
-   (texture :accessor my-text-view-texture)
-   (adjustment :accessor my-text-view-adjustment))
-  (:gname . "MyTextView")
-  (:metaclass gobject:gobject-class))
-
-(gobject::register-object-type-implementation "MyTextView"    ; name
-                                              my-text-view    ; class
-                                              "GtkTextView"   ; parent
-                                              nil             ; interfaces
-                                              nil)            ; properties
+  (defun on-entry-icon-release (entry pos)
+    (when (eq :secondary pos)
+      (setf pulse-entry-mode (1+ pulse-entry-mode))
+      (cond ((= 0 (mod pulse-entry-mode 3))
+             (setf (g:object-data entry "pulse-id") nil)
+             (setf (gtk:entry-progress-fraction entry) 0.0d0))
+            ((= 1 (mod pulse-entry-mode 3))
+             (setf (gtk:entry-progress-fraction entry) pulse-entry-fraction))
+            (t
+             (when (< (- pulse-time 50) 400)
+               (setf (gtk:entry-progress-pulse-step entry) 0.1d0)
+               (pulse-it entry)))))))
 
 ;;; ----------------------------------------------------------------------------
 
+(gobject:define-gobject-subclass "MyTextView" my-text-view
+  (:superclass gtk:text-view
+   :export t
+   :interfaces ())
+  nil)
+
+;;; ----------------------------------------------------------------------------
+
+;; Action app.about and accel F1
 (defun activate-about (action parameter)
-  (format t "in ACTIVATE-ABOUT: ~a, ~a~%" action parameter))
+  (declare (ignore action parameter))
+  (let ((parent (widget-factory-window factory))
+        (buildinfo (make-string-output-stream)))
+    ;; Output version informations in string
+    (gtk:cl-cffi-gtk-build-info buildinfo)
+    ;; Close the popup menu button on page3
+    (gtk:menu-button-popdown (g:object-data parent "open_menubutton"))
+    ;; Create and show about dialog
+    (gtk:show-about-dialog parent
+                           :modal t
+                           :program-name "Gtk Widget Factory"
+                           :version "0.0.0"
+                           :copyright "© 2024 Dieter Kaiser"
+                           :licence-type :mit-x11
+                           :website "http://github.com/crategus/cl-cffi-gtk4"
+                           :comments
+                           "Program to demonstrate GTK themes and widgets"
+                           :authors '("Dieter Kaiser")
+                           :logo-icon-name "org.gtk.WidgetFacory4.svg"
+                           :title "About GTK Widget Factory"
+                           :system-information
+                           (get-output-stream-string buildinfo))))
 
+;; Action app.shortcuts and accel <control>?
 (defun activate-shortcuts-window (action parameter)
   (format t "in ACTIVATE-SHORTCUTS-WINDOW: ~a, ~a~%" action parameter)
-  (let* ((window *window*)
+  (let* ((window (widget-factory-window factory))
          (button (g:object-data window "open_menubutton")))
     (gtk:menu-button-popdown button)
     (gtk:widget-activate-action window "win.show-help-overlay")))
 
+;; Action app.quit and accel <control>q
 (defun activate-quit (action parameter)
-  (format t "in ACTIVATE-QUIT: ~a, ~a~%" action parameter))
+  (declare (ignore action parameter))
+  (dolist (window (gtk:application-windows factory))
+    (gtk:window-destroy window)))
 
-
+;; Action app.inspector
 (defun activate-inspector (action parameter)
   (format t "in ACTIVATE-INSPECTOR: ~a, ~a~%" action parameter)
   (gtk:window-set-interactive-debugging t))
 
+;; FIXME: Does not work on Windows, check for Linux
+(defun activate-open-file (action parameter)
+  (declare (ignore action parameter))
+  (format t "in ACTIVATE-OPEN-FILE~%")
+  (let ((dialog (gtk:file-dialog-new))
+        (parent (widget-factory-window factory)))
+    (format t "call GTK:FILE-DIALOG-OPEN~%")
+    (gtk:file-dialog-open dialog parent nil
+            (lambda (source result)
+              (format t "in GAsync callback~%")
+              (let ((file (gtk:file-dialog-open-finish source result)))
+                (when file
+                  (format t "File selected : ~a~%"
+                            (g:file-basename file))))))))
 
+;; Action app.size
+(defun select-action (action parameter)
+  (format t "in SELECT-ACTION: ~a, ~a~%" action parameter))
+
+;; General action
 (defun activate-action (action parameter)
   (format t "in ACTIVATE-ACTION: ~a, ~a~%" action parameter))
 
-(defun activate-open-file (action parameter)
-  (format t "in ACTIVATE-OPEN-FILE: ~a, ~a~%" action parameter))
-
+;; General toggle action
 (defun toggle-action (action parameter)
   (format t "in TOGGLE-ACTION: ~a, ~a~%" action parameter))
-
-(defun select-action (action parameter)
-  (format t "in SELECT-ACTION: ~a, ~a~%" action parameter))
 
 ;;; ----------------------------------------------------------------------------
 
@@ -185,48 +275,48 @@
       (setf (gtk:settings-gtk-theme-name settings) theme))))
 
 (defun change-fullscreen (action state)
-  (setf (g:simple-action-state action) state)
-  (if (g:variant-boolean state)
-      (gtk:window-fullscreen *window*)
-      (gtk:window-unfullscreen *window*)))
-
-(defun change-transition-state (action state)
-  (let (transition)
+  (let ((window (widget-factory-window factory)))
     (setf (g:simple-action-state action) state)
     (if (g:variant-boolean state)
-        (setf transition :crossfade)
-        (setf transition :none))
-    (setf (gtk:stack-transition-type *page-stack*) transition)))
+        (gtk:window-fullscreen window)
+        (gtk:window-unfullscreen window))))
+
+(defun change-transition-state (action state)
+  (let ((stack (widget-factory-stack factory)))
+    (setf (g:simple-action-state action) state)
+    (setf (gtk:stack-transition-type stack)
+          (if (g:variant-boolean state) :slide-left :none))))
 
 (defun get-busy (action parameter)
   (declare (ignore action parameter))
-  (let ((application (gtk:window-application *window*))
-        (cursor (gdk:cursor-new-from-name "wait" nil)))
+  (let* ((application factory)
+         (window (widget-factory-window application))
+         (cursor (gdk:cursor-new-from-name "wait" nil)))
     (g:application-mark-busy application)
-    (setf (gdk:surface-cursor (gtk:native-surface *window*)) cursor)
-    (g:timeout-add 5000
+    (setf (gdk:surface-cursor (gtk:native-surface window)) cursor)
+    (g:timeout-add 2500
                    (lambda ()
-                     (let ((application (gtk:window-application *window*))
-                           (native (gtk:native-surface *window*)))
-                       (setf (gtk:widget-sensitive *window*) t)
+                     (let ((native (gtk:native-surface window)))
+                       (setf (gtk:widget-sensitive window) t)
                        (setf (gdk:surface-cursor native) nil)
                        (g:application-unmark-busy application)
                        g:+source-remove+)))
-    (setf (gtk:widget-sensitive *window*) nil)))
+    (setf (gtk:widget-sensitive window) nil)))
 
 (defun activate-search (action parameter)
   (declare (ignore action parameter))
-  (when (on-page 2)
-    (let ((searchbar (g:object-data *window* "searchbar")))
+  (when (is-on-page 2)
+    (let ((searchbar (widget-factory-searchbar factory)))
       (setf (gtk:search-bar-search-mode-enabled searchbar) t))))
 
 (defun activate-delete (action parameter)
   (declare (ignore action parameter))
-  (when (on-page 2)
-    (let ((infobar (g:object-data *window* "infobar")))
+  (when (is-on-page 2)
+    (let ((infobar (widget-factory-infobar factory)))
       (setf (gtk:widget-visible infobar) t))))
 
 (defun add-background (flowbox file texture)
+  (declare (ignore file))
   (let ((child (gtk:picture-new-for-paintable texture)))
     (setf (gtk:widget-size-request child) '(110 70))
     (gtk:flow-box-insert flowbox child -1)
@@ -262,7 +352,10 @@
     (let* ((size (* 4 110 80))
            (data (cffi:foreign-alloc :uchar :count size :initial-element #xff))
            (bytes (g:bytes-new data size))
-           (texture (gdk:memory-texture-new 110 70 :B8G8R8A8-PREMULTIPLIED bytes (* 4 110)))
+           (texture (gdk:memory-texture-new 110 70
+                                            :B8G8R8A8-PREMULTIPLIED
+                                            bytes
+                                            (* 4 110)))
            (child (gtk:picture-new-for-paintable texture)))
       (gtk:widget-add-css-class child "frame")
       (gtk:flow-box-insert flowbox child -1))
@@ -274,21 +367,34 @@
           (add-background flowbox file texture))))))
 
 (defun activate-background (action parameter)
-  (when (on-page 2)
-    (let ((dialog (g:object-data *window* "selection_dialog"))
-          (flowbox (g:object-data *window* "selection_flowbox")))
-      (setf (gtk:widget-visible dialog) t)
+  (declare (ignore action parameter))
+  (when (is-on-page 2)
+    (let ((dialog (widget-factory-selection-dialog factory))
+          (flowbox (widget-factory-selection-flowbox factory)))
       (populate-flowbox flowbox)
-)))
+      (setf (gtk:widget-visible dialog) t))))
 
-(defun activate-open ()
-)
+;; Action <control>o
+(defun activate-open (action parameter)
+  (declare (ignore action parameter))
+  (when (is-on-page 3)
+    (let ((button (widget-factory-open-menubutton factory)))
+      (g:signal-emit button "activate"))))
 
-(defun activate-record ()
-)
+;; Action <control>r
+(defun activate-record (action parameter)
+  (declare (ignore action parameter))
+  (when (is-on-page 3)
+    (let ((button (widget-factory-record-button factory)))
+      (g:signal-emit button "clicked"))))
 
-(defun activate-lock ()
-)
+;; Action <control>l
+(defun activate-lock (action parameter)
+  (declare (ignore action parameter))
+  (when (is-on-page 3)
+    (let ((button (widget-factory-lockbutton factory)))
+      (g:signal-emit button "clicked"))))
+
 
 (defun activate-print ()
 )
@@ -315,11 +421,11 @@
       (when help
         (setf (g:object-property help "view-name") name))
       (cond ((string= "page1" name)
-             (setf *currentpage* 1))
+             (setf (get-on-page) 1))
             ((string= "page2" name)
-             (setf *currentpage* 2))
+             (setf (get-on-page) 2))
             ((string= "page3" name)
-             (setf *currentpage* 3)
+             (setf (get-on-page) 3)
              (let ((page (gtk:stack-visible-child stack)))
                (set-needs-attention page nil)))))))
 
@@ -328,18 +434,18 @@
 ;; Signal handlers for objects from the UI definition
 
 (defun transition-speed-changed (range)
-  (let ((value (round (gtk:range-value range))))
-    (setf (gtk:stack-transition-duration *page-stack*) value)))
-
-(defun on-entry-icon-release (entry pos)
-  (format t "  in ON-ENTRY-ICON-RELEASE : ~a ~a~%" entry pos))
+  (let ((stack (widget-factory-stack factory))
+        (value (round (gtk:range-value range))))
+    (format t "in TRANSITION-SPEED-CHANGED with ~a~%" value)
+    (setf (gtk:stack-transition-duration stack) value)))
 
 (defun on-picture-drag-prepare (source x y)
-  (format t "  in ON-PICTURE-DRAG-PREPATE : ~a ~a ~a~%" source x y))
+  (format t "  in ON-PICTURE-DRAG-PREPARE : ~a ~a ~a~%" source x y))
 
 (defun on-picture-drop (target value x y)
   (format t "  in ON-PICTURE-DROP : ~a ~a ~a ~a~%" target value x y))
 
+;; Signal handler "value-changed" for mic-button on page 2
 (defun on-scale-button-value-changed (range)
   (format t "  in ON-SCALE-BUTTON-VALUE-CHANGED : ~a~%" range))
 
@@ -375,71 +481,182 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(defun activate (application)
-  ;; Load and apply CSS
-  (let ((path "/org/gtk/WidgetFactory4/widget-factory.css")
-        (provider (gtk:css-provider-new)))
-    (gtk:css-provider-load-from-resource provider path)
-    (gtk:style-context-add-provider-for-display (gdk:display-default) provider))
+;; FIXME: The style classes defined in the UI defintion file are not applied.
+;; This is a workaround to set the style classes on the widgets.
 
-  (let* ((entries (list (list "dark" nil nil "false" #'change-dark-state)
-                        (list "theme" nil "s" "'current'" #'change-theme-state)
-                        (list "transition" nil nil "true"
-                                                   #'change-transition-state)
-                        (list "search" #'activate-search nil nil nil)
-                        (list "delete" #'activate-delete nil nil nil)
-                        (list "busy" #'get-busy nil nil nil)
-                        (list "fullscreen" nil nil "false" #'change-fullscreen)
-                        (list "background" #'activate-background nil nil nil)
-                        (list "open" #'activate-open nil nil nil)
-                        (list "record" #'activate-record nil nil nil)
-                        (list "lock" #'activate-lock nil nil nil)
-                        (list "print" #'activate-print nil nil nil)))
-         (accels1 (list (list "app.about" "F1")
-                        (list "app.shortcuts" "<Control>question")
-                        (list "app.quit" "<Control>q")
-                        (list "app.open-in" "<Control>n")
-                        (list "win.dark" "<Control>d")
-                        (list "win.search" "<Control>s")
-                        (list "win.background" "<Control>b")
-                        (list "win.open" "<Control>o")
-                        (list "win.record" "<Control>r")
-                        (list "win.lock" "<Control>l")
-                        (list "win.fullscreen" "F11")))
-         (accels2 (list (list "app.cut" (list "<Control>x"))
-                        (list "app.copy" (list "<Control>c"))
-                        (list "app.paste" (list "<Control>v"))
-                        (list "win.delete" (list "Delete"))))
+(defun set-styles-on-page1 (builder)
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-large-title")
+                            "large-title")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-title1")
+                            "title-1")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-title2")
+                            "title-2")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-title3")
+                            "title-3")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-title4")
+                            "title-4")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-heading")
+                            "heading")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-body")
+                            "body")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-caption-heading")
+                            "caption-heading")
+  (gtk:widget-add-css-class (gtk:builder-object builder "label-caption")
+                            "caption"))
+
+;;; ----------------------------------------------------------------------------
+
+;; FIXME: The grid on page1 is not filled correctly from the UI definition.
+;; The initialization of the row number is not correct. Is there a bug in
+;; GtkBuilder? This function fills the grid by hand.
+
+(defun fill-grid-on-page1 (grid)
+  ;; Six checkbuttons in the first column
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton"
+                                       :active t) 0 0)
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton") 0 1)
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton"
+                                       :inconsistent t) 0 2)
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton"
+                                       :active t
+                                       :sensitive nil) 0 3)
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton"
+                                       :sensitive nil) 0 4)
+  (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                       :label "checkbutton"
+                                       :inconsistent t
+                                       :sensitive nil) 0 5)
+  ;; Six radiobuttons in the second column
+  (let (group)
+    (gtk:grid-attach grid (setf group
+                                (make-instance 'gtk:check-button
+                                               :label "radiobutton"
+                                               :active t)) 1 0)
+    (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                         :label "radiobutton"
+                                         :group group
+                                         :active nil) 1 1)
+    (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                         :label "radiobutton"
+                                         :group group
+                                         :active nil
+                                         :inconsistent t) 1 2)
+    (gtk:grid-attach grid (setf group
+                                (make-instance 'gtk:check-button
+                                               :label "radiobutton"
+                                               :active t
+                                               :sensitive nil)) 1 3)
+    (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                         :label "radiobutton"
+                                         :group group
+                                         :active nil
+                                         :sensitive nil) 1 4)
+    (gtk:grid-attach grid (make-instance 'gtk:check-button
+                                         :label "radiobutton"
+                                         :group group
+                                         :active nil
+                                         :inconsistent t
+                                         :sensitive nil) 1 5))
+  ;; Four spinner widgets
+  (gtk:grid-attach grid (make-instance 'gtk:spinner
+                                       :spinning t) 2 0)
+  (gtk:grid-attach grid (make-instance 'gtk:spinner
+                                       :spinning nil) 2 1)
+  (gtk:grid-attach grid (make-instance 'gtk:spinner
+                                       :spinning t
+                                       :sensitive nil) 2 3)
+  (gtk:grid-attach grid (make-instance 'gtk:spinner
+                                       :spinning nil
+                                       :sensitive nil) 2 4))
+
+;;; ----------------------------------------------------------------------------
+
+(defun activate (application)
+  (let* ((entries `(("dark" nil nil "false" ,#'change-dark-state)
+                    ("theme" nil "s" "'current'" ,#'change-theme-state)
+                    ("transition" nil nil "true" ,#'change-transition-state)
+                    ("search" ,#'activate-search nil nil nil)
+                    ("delete" ,#'activate-delete nil nil nil)
+                    ("busy" ,#'get-busy nil nil nil)
+                    ("fullscreen" nil nil "false" ,#'change-fullscreen)
+                    ("background" ,#'activate-background nil nil nil)
+                    ("open" ,#'activate-open nil nil nil)
+                    ("record" ,#'activate-record nil nil nil)
+                    ("lock" ,#'activate-lock nil nil nil)
+                    ("print" ,#'activate-print nil nil nil)))
+         (accels1 `(("app.about" "F1")
+                    ("app.shortcuts" "<Control>question")
+                    ("app.quit" "<Control>q")
+                    ("app.open-in" "<Control>n")
+                    ("win.dark" "<Control>d")
+                    ("win.search" "<Control>f")
+                    ("win.background" "<Control>b")
+                    ("win.open" "<Control>o")
+                    ("win.record" "<Control>r")
+                    ("win.lock" "<Control>l")
+                    ("win.fullscreen" "F11")))
+         (accels2 `(("app.cut" ("<Control>x"))
+                    ("app.copy" ("<Control>c"))
+                    ("app.paste" ("<Control>v"))
+                    ("win.delete" ("Delete"))))
+         ;; Create a new GtkProvider
+         (cssfile "/com/crategus/gtk4-widget-factory/widget-factory.css")
+         (provider (gtk:css-provider-new))
          ;; Create a new GtkBuilder
-         (path "/org/gtk/WidgetFactory4/widget-factory.ui")
+         (uifile "/com/crategus/gtk4-widget-factory/widget-factory.ui")
          (builder (gtk:builder-new)))
-    ;; Load the GtkBuilder UI definition
-    (unless (gtk:builder-add-from-resource builder path)
+
+    ;; Load and apply CSS from resource
+    (gtk:css-provider-load-from-resource provider cssfile)
+    (gtk:style-context-add-provider-for-display (gdk:display-default) provider)
+
+    ;; Load the GtkBuilder UI definition from resource
+    (unless (gtk:builder-add-from-resource builder uifile)
       (error "Cannot load the UI definition resource file."))
 
     ;; FIXME: The shortcuts window is not shown. What is the problem?!
-    (gtk:builder-add-from-resource builder
-                                   "/org/gtk/WidgetFactory4/gtk/help-overlay.ui")
+    (let ((resource "/com/crategus/gtk4-widget-factory/gtk/help-overlay.ui"))
+      (gtk:builder-add-from-resource builder resource))
 
     ;; Load pictures in the tabs of the notebook on page 1
     (load-texture-in-thread (gtk:builder-object builder "notebook_sunset")
-                            "/org/gtk/WidgetFactory4/sunset.jpg")
+                            "/com/crategus/gtk4-widget-factory/sunset.jpg")
     (load-texture-in-thread (gtk:builder-object builder "notebook_nyc")
-                            "/org/gtk/WidgetFactory4/nyc.jpg")
+                            "/com/crategus/gtk4-widget-factory/nyc.jpg")
     (load-texture-in-thread (gtk:builder-object builder "notebook_beach")
-                            "/org/gtk/WidgetFactory4/beach.jpg")
+                            "/com/crategus/gtk4-widget-factory/beach.jpg")
 
     (let* ((controller (make-instance 'gtk:shortcut-controller
                                       :propagation-phase :bubble))
            (window (gtk:builder-object builder "window"))
-           (statusbar (gtk:builder-object builder "statusbar"))
-           (toolbar (gtk:builder-object builder "toolbar"))
            (stack (gtk:builder-object builder "toplevel_stack"))
+           (searchbar (gtk:builder-object builder "searchbar"))
            (infobar (gtk:builder-object builder "infobar"))
-           (flowbox (gtk:builder-object builder "selection_flowbox")))
+           (dialog (gtk:builder-object builder "selection_dialog"))
+           (flowbox (gtk:builder-object builder "selection_flowbox"))
+           (open-menubutton (gtk:builder-object builder "open_menubutton"))
+           (record-button (gtk:builder-object builder "record_button"))
+           (lockbutton (gtk:builder-object builder "lockbutton"))
+           (statusbar (gtk:builder-object builder "statusbar"))
+           (toolbar (gtk:builder-object builder "toolbar")))
+
+      ;; Store widgets from UI definition as application properties
+      (setf (widget-factory-window factory) window)
+      (setf (widget-factory-stack factory) stack)
+      (setf (widget-factory-searchbar factory) searchbar)
+      (setf (widget-factory-infobar factory) infobar)
+      (setf (widget-factory-selection-dialog factory) dialog)
+      (setf (widget-factory-selection-flowbox factory) flowbox)
+      (setf (widget-factory-open-menubutton factory) open-menubutton)
+      (setf (widget-factory-record-button factory) record-button)
+      (setf (widget-factory-lockbutton factory) lockbutton)
 
       ;; Prepare the application window
-      (setf *window* window)
       (setf (gtk:window-icon-name window) "org.gtk.WidgetFactory4")
       (setf (gtk:window-application window) application)
       (gtk:widget-add-controller window controller)
@@ -458,53 +675,76 @@
                      (shortcut (gtk:shortcut-new trigger action)))
                 (gtk:shortcut-controller-add-shortcut controller shortcut))))
 
+      ;; Gear menu
+
+      (g:signal-connect stack "notify::visible-child-name" #'page-changed-cb)
+
+      ;; FIXME: UI definition does not work. Check gtk:builder-cl-scope
+      ;; implementation. Connect signal handler for change of the transition
+      ;; speed by hand.
+      (g:signal-connect (gtk:builder-object builder "scale-transition-speed")
+                        "value-changed"
+                        #'transition-speed-changed)
+
+      ;; --- On Page 1 ---------------------------------------------------------
+
+      ;; FIXME: This is a workaround for setting style classes. The style
+      ;; classes defined in the UI definition file are not applied.
+      (set-styles-on-page1 builder)
+
+      ;; FIXME: This is a workaround to fill the grid on page1
+      (fill-grid-on-page1 (gtk:builder-object builder "page1-grid1"))
+
+      ;; Connect adjustment for entry and progress bar widgets
+      (let ((adjustment (gtk:builder-object builder "adjustment1"))
+            (progressbar (gtk:builder-object builder "progressbar3"))
+            (entry (gtk:builder-object builder "entry1")))
+        (g:signal-connect adjustment "value-changed"
+                          (lambda (adj)
+                            (pulse-update adj progressbar)))
+        (pulse-update adjustment progressbar)
+        (g:signal-connect adjustment "value-changed"
+                          (lambda (adj)
+                            (pulse-update adj entry)))
+        (pulse-update adjustment entry)
+        (g:signal-connect entry "icon-release" #'on-entry-icon-release))
+
+       ;; Set GtkScaleFormatFunc callback functions
+       (gtk:scale-set-format-value-func (gtk:builder-object builder "scale3")
+               (lambda (scale value)
+                 (declare (ignore scale))
+                 (format nil "~,1f" value)))
+       (gtk:scale-set-format-value-func (gtk:builder-object builder "scale4")
+               (lambda (scale value)
+                 (declare (ignore scale value))
+                 " "))
+
+      ;; --- On Page 2 ---------------------------------------------------------
+
       ;; Prepare the statusbar on page 2 for the text view
       (gtk:statusbar-push statusbar 0 "All systems are operating normally.")
       (g:action-map-add-action window
                                (g:property-action-new "statusbar"
                                                       statusbar
                                                       "visible"))
-      ;; Prepare the toolbar
+      ;; Prepare the toolbar on page 2 for the text view
       (g:action-map-add-action window
                                (g:property-action-new "toolbar"
                                                       toolbar
                                                       "visible"))
 
-      ;; Connect adjustment for entry and progress bar widgets
-      (let ((adj (gtk:builder-object builder "adjustment1"))
-            (progressbar (gtk:builder-object builder "progressbar3"))
-            (entry (gtk:builder-object builder "entry1")))
-#|
-        (g:signal-connect adj "value-changed"
-                          (lambda (adjustment)
-                            (update-pulse-time adjustment progressbar)))
-        ;; Set initial pulse mode for the entry
-        (setf (g:object-data entry "pulse-mode") 0)
-        (g:signal-connect adj "value-changed"
-                          (lambda (adjustment)
-                            (update-pulse-time adjustment entry)))
-        (g:signal-connect entry "icon-release"
-            (lambda (entry pos)
-              (when (eq :secondary pos)
-                (let ((mode (g:object-data entry "pulse-mode")))
-                  ;; Increase the pulse mode of the entry
-                  (setf (g:object-data entry "pulse-mode") (+ 1 mode))
-                  (cond ((= 0 (mod mode 3))
-                         (setf (g:object-data entry "pulse-id") nil)
-                         (setf (gtk:entry-progress-fraction entry) 0))
-                        ((= 1 (mod mode 3))
-                         (setf (gtk:entry-progress-fraction entry) 0.25))
-                        ((= 2 (mod mode 3))
-                         (setf (gtk:entry-progress-pulse-step entry) 0.1)
-                         (pulse-it entry)))))))
-|#
-                         )
+
+      ;; Signal handler for infobar on page 2
+      (g:signal-connect infobar "response"
+                        (lambda (infobar response)
+                          (when (= -7 response)
+                            (setf (gtk:widget-visible infobar) nil))))
+
         ;; Show info on page 2
         (let ((adj (gtk:builder-object builder "adjustment2"))
               (page2reset (gtk:builder-object builder "page2reset"))
               (page2dismiss (gtk:builder-object builder "page2dismiss"))
               (page2note (gtk:builder-object builder "page2note")))
-#|
           (g:signal-connect page2reset "clicked"
               (lambda (button)
                 (setf (gtk:adjustment-value adj) 50.0)
@@ -522,79 +762,35 @@
                    (setf (gtk:label-label page2note)
                          (format nil "~a is a multiple of 3" value)))
                  (setf (gtk:revealer-reveal-child ancestor)
-                       (= 0 (mod value 3))))))
-|#
-                       )
+                       (= 0 (mod value 3)))))))
+
+      ;; Set signal handler for "mic-button" on page 2
+      (let ((button (gtk:builder-object builder "mic-button")))
+        (g:signal-connect  button "value-changed"
+                (lambda (button value)
+                  (declare (ignore value))  ; Should we use value?
+                  (let ((adj (gtk:scale-button-adjustment button))
+                        (val (gtk:scale-button-value button))
+                        str)
+                    (cond ((<= val (gtk:adjustment-lower adj))
+                           (setf str "Muted"))
+                          ((>= val (gtk:adjustment-upper adj))
+                           (setf str "Full volume"))
+                          (t
+                           (let ((percent (+ (/ (* 100 val)
+                                                (- (gtk:adjustment-upper adj)
+                                                   (gtk:adjustment-lower adj)))
+                                             0.5)))
+                             (setf percent (truncate percent))
+                             (setf str (format nil "~2d %" percent)))))
+                    (setf (gtk:widget-tooltip-text button) str)))))
 
 
-;; "mic-button"
-;;  gtk_builder_cscope_add_callback (scope, on_scale_button_value_changed);
-;;  gtk_builder_cscope_add_callback (scope, on_record_button_toggled);
-;;  gtk_builder_cscope_add_callback (scope, on_page_combo_changed);
-;;  gtk_builder_cscope_add_callback (scope, on_range_from_changed);
-;;  gtk_builder_cscope_add_callback (scope, on_range_to_changed);
-;;  gtk_builder_cscope_add_callback (scope, on_picture_drag_prepare);
-;;  gtk_builder_cscope_add_callback (scope, on_picture_drop);
-;;  gtk_builder_cscope_add_callback (scope, tab_close_cb);
-;;  gtk_builder_cscope_add_callback (scope, increase_icon_size);
-;;  gtk_builder_cscope_add_callback (scope, decrease_icon_size);
-;;  gtk_builder_cscope_add_callback (scope, osd_frame_pressed);
-;;  gtk_builder_cscope_add_callback (scope, age_entry_changed);
-;;  gtk_builder_cscope_add_callback (scope, validate_more_details);
-;;  gtk_builder_cscope_add_callback (scope, mode_switch_state_set);
-;;  gtk_builder_cscope_add_callback (scope, level_scale_value_changed);
-;;  gtk_builder_cscope_add_callback (scope, transition_speed_changed);
-;;  gtk_builder_cscope_add_callback (scope, reset_icon_size);
-
-
-
-
-      (setf *page-stack* stack)
-      (g:signal-connect stack "notify::visible-child-name" #'page-changed-cb)
-
-      ;; Store the search bar on the property list of the application window
-      (setf (g:object-data window "searchbar")
-            (gtk:builder-object builder "searchbar"))
-
-      ;; Store the info bar on the property list of the application window
-      (setf (g:object-data window "infobar") infobar)
-      (g:signal-connect infobar "response"
-                        (lambda (infobar response)
-                          (when (= -7 response)
-                            (setf (gtk:widget-visible infobar) nil))))
-
-      ;; Store the selection dialog on the property list of the application
-      ;; window
-      (setf (g:object-data window "selection_dialog")
-            (gtk:builder-object builder "selection_dialog"))
-
-#|
-  dialog = (GtkWidget *)gtk_builder_get_object (builder, "selection_dialog");
-  g_object_set_data (G_OBJECT (window), "selection_dialog", dialog);
-
-  widget = (GtkWidget *)gtk_builder_get_object (builder, "text3");
-  g_signal_connect (dialog, "response", G_CALLBACK (close_selection_dialog), widget);
-
-  widget2 = (GtkWidget *)gtk_builder_get_object (builder, "opacity");
-  my_text_view_set_adjustment ((MyTextView *)widget, gtk_range_get_adjustment (GTK_RANGE (widget2)));
-  widget = (GtkWidget *)gtk_builder_get_object (builder, "selection_dialog_button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (show_dialog), dialog);
-
-  widget2 = (GtkWidget *)gtk_builder_get_object (builder, "selection_flowbox");
-  g_object_set_data (G_OBJECT (window), "selection_flowbox", widget2);
-  g_signal_connect_swapped (widget, "clicked", G_CALLBACK (populate_flowbox), widget2);
-|#
-
-      ;; Store the flowbox on the property list
-      (setf (g:object-data window "selection_flowbox") flowbox)
-
-
-      ;;  --- PAGE 3 -----------------------------------------------------------
+      ;; --- On Page 3 ---------------------------------------------------------
 
       (setf (g:object-data window "open_menubutton")
             (gtk:builder-object builder "open_menubutton"))
 
-      ;; -----------------------------------------------------------------------
 
       ;; Show the application window
       (gtk:window-present window))))
@@ -632,11 +828,12 @@
 
     (let ((argv (cons (g:application-name)
                       (or argv (uiop:command-line-arguments))))
-          (app (make-instance 'gtk:application
-                              :application-id
-                              "com.crategus.gtk4-widget-factory"
-                              :register-session t
-                              :resource-base-path (cffi:null-pointer)))
+          (app (setf factory
+                     (make-instance 'widget-factory
+                                    :application-id
+                                    "com.crategus.gtk4-widget-factory"
+                                    :register-session t
+                                    :resource-base-path (cffi:null-pointer))))
 
           (entries (list (list "about" #'activate-about)
                          (list "shortcuts" #'activate-shortcuts-window)
