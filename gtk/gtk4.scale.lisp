@@ -388,7 +388,10 @@ scale[.fine-tune][.marks-before][.marks-after]
 ;;; GtkScaleFormatValueFunc
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcallback scale-format-value-func :void
+;; TODO: Check the memory management of the string more carefully.
+;; This implementation does not crash.
+
+(cffi:defcallback scale-format-value-func (:string :free-from-foreign nil)
     ((scale (g:object scale))
      (value :double)
      (data :pointer))
@@ -399,15 +402,14 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-symbol 'scale-format-value-func)
       "Callback"
       (liber:symbol-documentation 'scale-format-value-func)
- "@version{#2024-5-3}
+ "@version{2024-11-16}
   @syntax{lambda (scale value) => result}
   @argument[scale]{a @class{gtk:scale} widget}
   @argument[value]{a double float with the numeric value to format}
   @argument[result]{a string describing a textual representation of the given
     numerical value}
   @begin{short}
-    A callback function which allows you to change how the scale value is
-    displayed.
+    A callback function that formats the value of a scale.
   @end{short}
   The callback function is set with the @fun{gtk:scale-set-format-value-func}
   function.
@@ -429,7 +431,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-set-format-value-func (scale func)
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{24-11-16}
   @argument[scale]{a @class{gtk:scale} widget}
   @argument[func]{a @symbol{gtk:scale-format-value-func} callback function that
     formats the value}
@@ -445,11 +447,15 @@ scale[.fine-tune][.marks-before][.marks-after]
   @see-class{gtk:scale}
   @see-symbol{gtk:scale-format-value-func}
   @see-function{gtk:scale-digits}"
-  (%scale-set-format-value-func
-          scale
-          (cffi:callback scale-format-value-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%scale-set-format-value-func scale
+                                    (cffi:callback scale-format-value-func)
+                                    (glib:allocate-stable-pointer func)
+                                    (cffi:null-pointer))
+      (%scale-set-format-value-func scale
+                                    (cffi:null-pointer)
+                                    (cffi:null-pointer)
+                                    (cffi:null-pointer))))
 
 (export 'scale-set-format-value-func)
 
