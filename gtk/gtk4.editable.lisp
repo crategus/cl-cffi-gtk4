@@ -33,7 +33,7 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GtkEditableProperties
+;;;     GtkEditableProperties                               not implemented
 ;;;     GtkEditable
 ;;;
 ;;; Accessors
@@ -203,8 +203,8 @@ lambda (editable)    :run-last
         @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
       @end{table}
-      The signal is emitted at the end of a single user visible operation on the
-      contents of the editable widget. For example, a paste operation that
+      The signal is emitted at the end of a single user visible operation on
+      the contents of the editable widget. For example, a paste operation that
       replaces the contents of the selection will cause only one signal
       emission, even though it is implemented by first deleting the selection,
       then inserting the new content, and may cause multiple
@@ -219,11 +219,11 @@ lambda (editable start end)    :run-last
         @entry[start]{The integer with the start position.}
         @entry[end]{The integer with the end position.}
       @end{table}
-      The signal is emitted when text is deleted from the editable widget by the
-      user. The default handler for this signal will normally be responsible for
-      deleting the text, so by connecting to this signal and then stopping the
-      signal with the @fun{g:signal-stop-emission} function, it is possible to
-      modify the range of deleted text, or prevent it from being deleted
+      The signal is emitted when text is deleted from the editable widget by
+      the user. The default handler for this signal will normally be responsible
+      for deleting the text, so by connecting to this signal and then stopping
+      the signal with the @fun{g:signal-stop-emission} function, it is possible
+      to modify the range of deleted text, or prevent it from being deleted
       entirely. The @arg{start} and @arg{end} parameters are interpreted as for
       the @fun{gtk:editable-delete-text} function.
     @subheading{The \"insert-text\" signal}
@@ -234,8 +234,8 @@ lambda (editable text length position)    :run-last
         @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
         @entry[text]{The string with the new text to insert.}
-        @entry[length]{The integer with the length of the new text, in bytes, or
-          -1 if @arg{text} is null-terminated.}
+        @entry[length]{The integer with the length of the new text, in bytes,
+          or -1 if @arg{text} is null-terminated.}
         @entry[position]{The pointer to an integer with the position, in
           characters, at which to insert the new text. This is an in-out
           parameter. After the signal emission is finished, it should point
@@ -319,7 +319,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-enable-undo)
       "Accessor"
       (documentation 'editable-enable-undo 'function)
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @syntax{(gtk:editable-enable-undo object) => setting}
   @syntax{(setf (gtk:editable-enable-undo object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -338,6 +338,7 @@ lambda (editable text length position)    :run-last
   @slot[gtk:text]{visibility} property of the @class{gtk:text} widget is set
   to @em{false}.
   @see-class{gtk:editable}
+  @see-class{gtk:text}
   @see-function{gtk:text-visibility}")
 
 ;;; --- gtk:editable-max-width-chars -------------------------------------------
@@ -490,21 +491,19 @@ lambda (editable text length position)    :run-last
 
 (defun editable-chars (editable &key (start 0) (end -1))
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @argument[editable]{a @class{gtk:editable} object}
-  @argument[start]{an integer with the start position of text, the default
-    value is 0}
-  @argument[end]{an integer with the end position of text, the default value
-    is -1}
-  @return{The string with the contents of the editable widget.}
+  @argument[start]{an integer with the start position, the default value is 0}
+  @argument[end]{an integer with the end position, the default value is -1}
+  @return{The string with a sequence of characters from the editable widget.}
   @begin{short}
     Retrieves a sequence of characters.
   @end{short}
   The characters that are retrieved are those characters at positions from
   the @arg{start} position up to, but not including the @arg{end} position. If
   the @arg{end} position is negative, then the characters retrieved are those
-  characters from the @arg{start} position to the end position of the text.
-  Note that positions are specified in characters, not bytes.
+  characters from the @arg{start} position to the @arg{end} position of the
+  text. Note that positions are specified in characters, not bytes.
   @see-class{gtk:editable}"
   (%editable-chars editable start end))
 
@@ -612,9 +611,10 @@ lambda (editable text length position)    :run-last
 
 (defun editable-select-region (editable &key (start 0) (end -1))
  #+liber-documentation
- "@version{2023-10-24}
+ "@version{2024-11-15}
   @argument[editable]{a @class{gtk:editable} widget}
-  @argument[start]{an integer with the start position of the region}
+  @argument[start]{an integer with the start position of the region, the
+    default value is 0}
   @argument[end]{an integer with the end position of the region, the default
     value is -1}
   @begin{short}
@@ -661,11 +661,11 @@ lambda (editable text length position)    :run-last
 
 (cffi:defcfun ("gtk_editable_get_position" editable-position) :int
  #+liber-documentation
- "@version{2023-10-24}
+ "@version{2024-11-15}
   @syntax{(gtk:editable-position editable) => position}
   @syntax{(setf (gtk:editable-position editable) position)}
   @argument[editable]{a @class{gtk:editable} widget}
-  @argument[position]{an integer with the position of the cursor}
+  @argument[position]{an integer with the position of the cursor, in chars}
   @begin{short}
     The @fun{gtk:editable-position} function retrieves the current position of
     the cursor relative to the start of the content of the editable widget.
@@ -677,7 +677,7 @@ lambda (editable text length position)    :run-last
   in the contents of the editable widget. The value must be less than or equal
   to the number of characters in the editable widget. A value of -1 indicates
   that the position should be set after the last character of the editable.
-  Note that position is in characters, not in bytes.
+  Note that @arg{position} is in characters, not in bytes.
   @see-class{gtk:editable}"
   (editable (g:object editable)))
 
@@ -693,20 +693,19 @@ lambda (editable text length position)    :run-last
 
 (defun editable-alignment (editable)
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @syntax{(gtk:editable-alignment editable) => align}
   @syntax{(setf (gtk:editable-alignment editable) align)}
   @argument[editable]{a @class{gtk:editable} widget}
-  @argument[align]{a single float with the horizontal alignment, from 0.0 (left)
-    to 1.0 (right), reversed for RTL layouts}
+  @argument[align]{a number coerced to a single float with the horizontal
+    alignment, from 0.0 (left) to 1.0 (right), reversed for RTL layouts}
   @begin{short}
     The @fun{gtk:editable-alignment} function gets the value of the horizontal
     alignment of the editable widget.
   @end{short}
-  The @setf{gtk:editable-alignment} function sets the alignment.
-
-  This controls the horizontal positioning of the contents when the displayed
-  text is shorter than the width of the editable widget.
+  The @setf{gtk:editable-alignment} function sets the alignment. This controls
+  the horizontal positioning of the contents when the displayed text is shorter
+  than the width of the editable widget.
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{gtk:editable-xalign} function. The
     Lisp implementation calls the corresponding @fun{gtk:editable-xalign}

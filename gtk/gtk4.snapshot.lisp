@@ -1072,11 +1072,10 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_append_scaled_texture"
                snapshot-append-scaled-texture) :void
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{#2024-11-15}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[texture]{a @class{gdk:texture} instance with the texture to render}
-  @argument[filter]{a @class{gsk:scaling-filter} instance with the filter to
-    use}
+  @argument[texture]{a @class{gdk:texture} object with the texture to render}
+  @argument[filter]{a @symbol{gsk:scaling-filter} value with the filter to use}
   @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
     new node}
   @begin{short}
@@ -1084,12 +1083,12 @@ pixel = transpose(matrix) * pixel + offset
     appends it to the current render node of @arg{snapshot}.
   @end{short}
   In contrast to the @fun{gtk:snapshot-append-texture} function, this function
-  provides control about how the filter that is used when scaling.
+  provides control over the filter that is used for scaling.
 
   Since 4.10
   @see-class{gtk:snapshot}
   @see-class{gdk:texture}
-  @see-class{gsk:scaling-filter}
+  @see-symbol{gsk:scaling-filter}
   @see-symbol{graphene:rect-t}
   @see-function{gtk:snapshot-append-texture}"
   (snapshot (g:object snapshot))

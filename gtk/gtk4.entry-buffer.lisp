@@ -92,19 +92,19 @@
 
 #+liber-documentation
 (setf (documentation 'entry-buffer 'type)
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @begin{short}
     The @class{gtk:entry-buffer} object contains the actual text displayed in a
     @class{gtk:entry} widget.
   @end{short}
   A single @class{gtk:entry-buffer} object can be shared by multiple
   @class{gtk:entry} widgets which will then share the same text content, but
-  not the cursor position, visibility attributes, icon etc.
+  not the cursor position, visibility attributes, icon, and so on.
 
   The @class{gtk:entry-buffer} class may be derived from. Such a derived class
   might allow text to be stored in an alternate location, such as non-pageable
   memory, useful in the case of important passwords. Or a derived class could
-  integrate with an application's undo/redo concept.
+  integrate with an undo/redo concept of the application.
   @begin[Signal Details]{dictionary}
     @subheading{The \"deleted-text\" signal}
       @begin{pre}
@@ -255,9 +255,9 @@ lambda (buffer position chars nchars)    :run-first
 
 (cffi:defcfun ("gtk_entry_buffer_get_bytes" entry-buffer-bytes) :size
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
-  @return{The byte length of @arg{buffer}.}
+  @return{The unsigned integer with the byte length of @arg{buffer}.}
   @begin{short}
     Retrieves the length in bytes of the entry buffer.
   @end{short}
@@ -281,7 +281,7 @@ lambda (buffer position chars nchars)    :run-first
 
 (defun entry-buffer-insert-text (buffer position text)
  #+liber-documentation
- "@version{2023-1-30}
+ "@version{2024-11-15}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @argument[position]{an integer with the position at which to insert text}
   @argument[text]{a string with the text to insert into the entry buffer}
@@ -290,7 +290,7 @@ lambda (buffer position chars nchars)    :run-first
     Inserts text into the contents of the entry buffer, at the given position.
   @end{short}
   If the @arg{position} argument or the length of the text are out of bounds,
-  or the maximum buffer text length is exceeded, then they are coerced to sane
+  or the maximum text buffer length is exceeded, then they are coerced to sane
   values. Note that the position is in characters, not in bytes.
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-delete-text}"
@@ -304,7 +304,7 @@ lambda (buffer position chars nchars)    :run-first
 
 (cffi:defcfun ("gtk_entry_buffer_delete_text" entry-buffer-delete-text) :uint
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @argument[position]{an unsigned integer with the position at which to delete
     text}
@@ -314,8 +314,8 @@ lambda (buffer position chars nchars)    :run-first
     Deletes a sequence of characters from the entry buffer.
   @end{short}
   @arg{nchars} characters are deleted starting at @arg{position}. If the
-  @arg{nchars} argument is negative, then all characters until the end of the
-  text are deleted.
+  @arg{nchars} argument is negative, then all characters up to the end of the
+  entry buffer are deleted.
 
   If the @arg{position} or @arg{nchars} arguments are out of bounds, then they
   are coerced to sane values. Note that the positions are specified in

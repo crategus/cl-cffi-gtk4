@@ -213,7 +213,7 @@
 
 #+liber-documentation
 (setf (documentation 'text 'type)
- "@version{2024-5-17}
+ "@version{2024-11-15}
   @begin{short}
     The @class{gtk:text} widget is a single line text entry.
   @end{short}
@@ -223,7 +223,7 @@
 
   When using a text entry for passwords and other sensitive information, it can
   be put into \"password mode\" using the @fun{gtk:text-visibility} function.
-  In this mode, entered text is displayed using a \"invisible\" character. By
+  In this mode, entered text is displayed using an \"invisible\" character. By
   default, GTK picks the best invisible character that is available in the
   current font, but it can be changed with the @fun{gtk:text-invisible-char}
   function.
@@ -263,7 +263,7 @@ text[.read-only]
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:text} implementation uses the @code{:none} role of the
-    @symbol{gtk:accessible-role}, which causes it to be skipped for
+    @symbol{gtk:accessible-role} enumeration, which causes it to be skipped for
     accessibility. This is because the @class{gtk:text} implementation is
     expected to be used as a delegate for a @class{gtk:editable} implementation
     that will be represented to accessibility.
@@ -376,7 +376,7 @@ lambda (entry)    :action
         @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
       The signal is a keybinding signal which gets emitted to paste the contents
-      of the clipboard into the text view. The default bindings for this signal
+      of the clipboard into the text entry. The default bindings for this signal
       are the @kbd{Ctrl-v} and @kbd{Shift-Insert} keys.
     @subheading{The \"preedit-changed\" signal}
       @begin{pre}
@@ -401,35 +401,20 @@ lambda (entry)    :action
       the @kbd{Insert} key.
   @end{dictionary}
   @begin[Action Details]{dictionary}
-    @subheading{The \"menu.popup\" action}
-      Opens the context menu.
-
-    @subheading{The \"text.redo\" action}
-      Redoes the last change to the contents.
-
-    @subheading{The \"text.undo\" action}
-      Undoes the last change to the contents.
-
-    @subheading{The \"misc.toggle-visibility\" action}
-      Toggles the “visibility” property.
-
-    @subheading{The \"misc.insert-emoji\" action}
-      Opens the Emoji chooser.
-
-    @subheading{The \"selection.select-all\" action}
-      Selects all of the widgets content.
-
-    @subheading{The \"selection.delete\" action}
-      Deletes the current selection.
-
-    @subheading{The \"clipboard.paste\" action}
-      Inserts the contents of the clipboard into the widget.
-
-    @subheading{The \"clipboard.copy\" action}
-      Copies the contents to the clipboard.
-
-    @subheading{The \"clipboard.cut\" action}
-      Copies the contents to the clipboard and deletes it from the widget.
+    @begin[code]{table}
+      @entry[menu.popup}{Opens the context menu.}
+      @entry[text.redo]{Redoes the last change to the contents.}
+      @entry[text.undo]{Undoes the last change to the contents.}
+      @entry[misc.toggle-visibility]{Toggles the “visibility” property.}
+      @entry[misc.insert-emoji]{Opens the Emoji chooser.}
+      @entry[selection.select-all]{Selects all of the widgets content.}
+      @entry[selection.delete]{Deletes the current selection.}
+      @entry[clipboard.paste]{Inserts the contents of the clipboard into the
+        widget.}
+      @entry[clipboard.copy]{Copies the contents to the clipboard.}
+      @entry[clipboard.cut]{Copies the contents to the clipboard and deletes it
+        from the widget.}
+    @end{table}
   @end{dictionary}
   @see-constructor{gtk:text-new}
   @see-constructor{gtk:text-new-with-buffer}
@@ -759,7 +744,7 @@ lambda (entry)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-length" 'text) t)
  "The @code{max-length} property of type @code{:int} (Read / Write) @br{}
-  Maximum number of characters for the text entry. Zero if no maximum. @br{}
+  The maximum number of characters for the text entry. Zero if no maximum. @br{}
   Allowed values: [0, 65535] @br{}
   Default value: 0")
 
@@ -1075,16 +1060,16 @@ lambda (entry)    :action
 (cffi:defcfun ("gtk_text_grab_focus_without_selecting"
                text-grab-focus-without-selecting) :boolean
  #+liber-documentation
- "@version{#2024-5-17}
+ "@version{#2024-11-15}
   @argument[entry]{a @class{gtk:text} widget}
   @return{@em{True} if focus is inside @arg{entry}.}
   @begin{short}
     Causes the text widget to have keyboard focus.
   @end{short}
-  It behaves likes the @fun{gtk:widget-grab-focus} function, except that it
-  does not select the contents of @arg{entry}. You only want to call this on
-  some special entries which the user usually does not want to replace all text
-  in, such as search-as-you-type entries.
+  It behaves like the @fun{gtk:widget-grab-focus} function, except that it does
+  not select the contents of text entry. You only want to call this on some
+  special entries which the user usually does not want to replace all text in,
+  such as search-as-you-type entries.
   @see-class{gtk:text}
   @see-function{gtk:widget-grab-focus}"
   (entry (g:object text)))

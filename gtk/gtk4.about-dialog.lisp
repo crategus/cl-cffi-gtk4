@@ -275,7 +275,7 @@
 
 #+liber-documentation
 (setf (documentation 'about-dialog 'type)
- "@version{2024-4-11}
+ "@version{2024-11-16}
   @begin{short}
     The @class{gtk:about-dialog} widget offers a simple way to display
     information about a program like its logo, name, copyright, website and
@@ -513,11 +513,12 @@ lambda (dialog uri)    :run-last
  "The @code{license} property of type @code{:string} (Read / Write) @br{}
   The license of the program. The string is displayed in a text view in a
   secondary dialog, therefore it is fine to use a long multi-paragraph text.
-  Note that the text is only wrapped in the text view if the @code{wrap-license}
-  property is set to @em{true}. Otherwise the text itself must contain the
-  intended linebreaks. When setting this property to a non-@code{nil} value,
-  the @code{license-type} property is set to the @code{:custom} value of the
-  @symbol{gtk:license} enumeration as a side effect. @br{}
+  Note that the text is only wrapped in the text view if the
+  @slot[gtk:about-dialog]{wrap-license} property is set to @em{true}. Otherwise
+  the text itself must contain the intended linebreaks. When setting this
+  property to a non-@code{nil} value, the @slot[gtk:about-dialog]{license-type}
+  property is set to the @code{:custom} value of the @symbol{gtk:license}
+  enumeration as a side effect. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -535,8 +536,8 @@ lambda (dialog uri)    :run-last
   @end{short}
   The @fun{gtk:about-dialog-license} function returns the license information.
   The @setf{gtk:about-dialog-license} function sets the license information to
-  be displayed in the secondary license dialog. If the @arg{license} argument is
-  @code{nil}, the license page is hidden.
+  be displayed in the secondary license dialog. If the @arg{license} argument
+  is @code{nil}, the license page is hidden.
 
   The text may contain links in this format @code{\"<http://www.some.place/>\"}
   and email references in the form @code{\"<mail-to@@some.body>\"}, and these
@@ -553,10 +554,12 @@ lambda (dialog uri)    :run-last
   enumeration. The about dialog will automatically fill out a standard
   disclaimer and link the user to the appropriate online resource for the
   license text. If the @code{:unknown} value is used, the link used will be the
-  same specified in the @code{website} property. If the @code{:custom} value is
-  used, the current contents of the @code{license} property are used. For any
-  other @symbol{gtk:license} value, the contents of the @code{license} property
-  are also set by this property as a side effect. @br{}
+  same specified in the @slot[gtk:about-dialog]{website} property. If the
+  @code{:custom} value is used, the current contents of the
+  @slot[gtk:about-dialog]{license} property are used. For any other
+  @symbol{gtk:license} value, the contents of the
+  @slot[gtk:about-dialog]{license} property are also set by this property as a
+  side effect. @br{}
   Default value: @code{:unkown}")
 
 #+liber-documentation
@@ -586,7 +589,7 @@ lambda (dialog uri)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "logo" 'about-dialog) t)
  "The @code{logo} property of type @class{gdk:paintable} (Read / Write) @br{}
-  A logo for the about box. If this is not set, the default window icon set
+  The logo for the about box. If this is not set, the default window icon set
   with the @fun{gtk:window-default-icon-name} function will be used.")
 
 #+liber-documentation
@@ -616,8 +619,8 @@ lambda (dialog uri)    :run-last
 (setf (documentation (liber:slot-documentation "logo-icon-name"
                                                'about-dialog) t)
  "The @code{logo-icon-name} property of type @code{:string} (Read / Write) @br{}
-  A named icon to use as the logo for the about box. This property overrides
-  the @code{logo} property. @br{}
+  The named icon to use as the logo for the about box. This property overrides
+  the @slot[gtk:about-dialog]{logo} property. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
