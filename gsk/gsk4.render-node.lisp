@@ -40,7 +40,7 @@
 ;;;     GskColorStop
 ;;;     GskShadow
 ;;;     GskBlendMode
-;;;     GskMaskMode                                        Since 4.10
+;;;     GskMaskMode                                         Since 4.10
 ;;;
 ;;;     GskRenderNode
 ;;;     GskContainerNode
@@ -67,11 +67,12 @@
 ;;;     GskTextNode
 ;;;     GskBlurNode
 ;;;     GskDebugNode
-;;;     GskGLShaderNode                                    Deprecated 4.16
-;;;     GskTextureScaleNode                                Since 4.10
-;;;     GskMaskNode                                        Since 4.10
-;;;     GskFillNode                                        Since 4.14
-;;;     GskStrokeNode                                      Since 4.14
+;;;     GskGLShaderNode                                     Deprecated 4.16
+;;;     GskTextureScaleNode                                 Since 4.10
+;;;     GskMaskNode                                         Since 4.10
+;;;     GskFillNode                                         Since 4.14
+;;;     GskStrokeNode                                       Since 4.14
+;;;     GskSubsurfaceNode                                   Since 4.14
 ;;;
 ;;; Functions
 ;;;
@@ -183,38 +184,33 @@
 ;;;     gsk_debug_node_new
 ;;;     gsk_debug_node_get_child
 ;;;     gsk_debug_node_get_message
-;;;     gsk_gl_shader_node_new                             Deprecated 4.16
-;;;     gsk_gl_shader_node_get_n_children                  Deprecated 4.16
-;;;     gsk_gl_shader_node_get_child                       Deprecated 4.16
-;;;     gsk_gl_shader_node_get_args                        Deprecated 4.16
-;;;     gsk_gl_shader_node_get_shader                      Deprecated 4.16
-;;;     gsk_texture_scale_node_new
-;;;     gsk_texture_scale_node_get_filter
-;;;     gsk_texture_scale_node_get_texture
-;;;     gsk_mask_node_new
-;;;     gsk_mask_node_get_mask
-;;;     gsk_mask_node_get_mask_mode
-;;;     gsk_mask_node_get_source
+;;;     gsk_gl_shader_node_new                              Deprecated 4.16
+;;;     gsk_gl_shader_node_get_n_children                   Deprecated 4.16
+;;;     gsk_gl_shader_node_get_child                        Deprecated 4.16
+;;;     gsk_gl_shader_node_get_args                         Deprecated 4.16
+;;;     gsk_gl_shader_node_get_shader                       Deprecated 4.16
+;;;     gsk_texture_scale_node_new                          Since 4.10
+;;;     gsk_texture_scale_node_get_filter                   Since 4.10
+;;;     gsk_texture_scale_node_get_texture                  Since 4.10
+;;;     gsk_mask_node_new                                   Since 4.10
+;;;     gsk_mask_node_get_mask                              Since 4.10
+;;;     gsk_mask_node_get_mask_mode                         Since 4.10
+;;;     gsk_mask_node_get_source                            Since 4.10
+;;;     gsk_fill_node_new                                   Since 4.14
+;;;     gsk_fill_node_get_child                             Since 4.14
+;;;     gsk_fill_node_get_fill_rule                         Since 4.14
+;;;     gsk_fill_node_get_path                              Since 4.14
+;;;     gsk_stroke_node_new                                 Since 4.14
+;;;     gsk_stroke_node_get_child                           Since 4.14
+;;;     gsk_stroke_node_get_path                            Since 4.14
+;;;     gsk_stroke_node_get_stroke                          Since 4.14
+;;;     gsk_subsurface_node_new                             Since 4.14
+;;;     gsk_subsurface_node_subsurface                      Since 4.14
+;;;     gsk_subsurface_node_child                           Since 4.14
 ;;;
 ;;; Object Hierarchy
 ;;;
 ;;;     GskRenderNode
-;;;
-;;; Description
-;;;
-;;; GskRenderNode is the basic block in a scene graph to be rendered using
-;;; GskRenderer.
-;;;
-;;; Each node has a parent, except the top-level node; each node may have
-;;; children nodes.
-;;;
-;;; Each node has an associated drawing surface, which has the size of the
-;;; rectangle set using gsk_render_node_set_bounds().
-;;;
-;;; Render nodes are meant to be transient; once they have been associated to a
-;;; GskRenderer it's safe to release any reference you have on them. All
-;;; GskRenderNodes are immutable, you can only specify their properties during
-;;; construction.
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gsk)
@@ -3430,7 +3426,7 @@ color {
   @end{short}
   Adding this node has no visual effect.
   @see-class{gsk:debug-node}
-  @see-class{gsk:rendernode}"
+  @see-class{gsk:render-node}"
   (child render-node)
   (message :string))
 
@@ -3496,55 +3492,141 @@ color {
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; GskTextureScaleNode
-;;;
-;;; final class Gsk.TextureScaleNode : GObject.TypeInstance
-;;; {
-;;;   /* No available fields */
-;;; }
-;;;
-;;; A render node for a GdkTexture.
-;;;
-;;; Since 4.10
+;;; GskTextureScaleNode                                     Since 4.10
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gsk_texture_scale_node_new
-;;;
-;;; Creates a node that scales the texture to the size given by the bounds
-;;; using the filter and then places it at the bounds’ position.
-;;;
-;;; Since 4.10
-;;; ----------------------------------------------------------------------------
+#+gtk-4-10
+(cffi:define-foreign-type texture-scale-node (render-node)
+  ()
+  (:simple-parser texture-scale-node))
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-class 'texture-scale-node)
+      "GskRenderNode"
+      (documentation 'texture-scale-node 'type)
+ "@version{#2024-11-15}
+  @begin{short}
+    A render node for a @class{gdk:texture} object.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:render-node}
+  @see-class{gdk:texture}")
+
+#+gtk-4-10
+(export 'texture-scale-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_texture_scale_node_get_filter
-;;;
-;;; Retrieves the GskScalingFilter used when creating this GskRenderNode.
-;;;
-;;; Since 4.10
+;;; gsk_texture_scale_node_new                              Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-10
+(cffi:defcfun ("gsk_texture_scale_new" texture-scale-new) render-node
+ #+liber-documentation
+ "@version{#2024-11-16}
+  @argument[texture]{a @class{gdk:texture} object to scale}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the size of the
+    texture to scale to}
+  @argument[filter]{a @symbol{gsk:scaling-filter} value how to scale the
+    texture}
+  @return{The new @class{gsk:texture-scale-node} instance.}
+  @begin{short}
+    Creates a node that scales the texture to the size given by the bounds
+    using the filter and then places it at the bounds’ position.
+  @end{short}
+  Note that further scaling and other transformations which are applied to the
+  node will apply linear filtering to the resulting texture, as usual.
+
+  This node is intended for tight control over scaling applied to a texture,
+  such as in image editors and requires the application to be aware of the
+  whole render tree as further transforms may be applied that conflict with the
+  desired effect of this node.
+
+  Since 4.10
+  @see-class{gsk:texture-scale-node}
+  @see-class{gsk:render-node}
+  @see-class{gdk:texture}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{gsk:scaling-filter}"
+  (texture (g:object gdk:texture))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (filter scaling-filter))
+
+#+gtk-4-10
+(export 'texture-scale-new)
+
 ;;; ----------------------------------------------------------------------------
-;;; gsk_texture_scale_node_get_texture
-;;;
-;;; Retrieves the GdkTexture used when creating this GskRenderNode.
-;;;
-;;; Since 4.10
+;;; gsk_texture_scale_node_get_filter                       Since 4.10
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(cffi:defcfun ("gsk_texture_scale_node_get_filter" texture-scale-node-filter)
+    scaling-filter
+ #+liber-documentation
+ "@version{#2024-11-16}
+  @argument[node]{a @class{gsk:texture-scale-node} instance}
+  @return{The @symbol{gsk:scaling-filter} value.}
+  @begin{short}
+    Retrieves the @symbol{gsk:scaling-filter} value used when creating the
+    render node.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:texture-scale-node}
+  @see-class{gsk:render-node}
+  @see-symbol{gsk:scaling-filter}"
+  (node render-node))
+
+#+gtk-4-10
+(export 'texture-scale-node-filter)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_texture_scale_node_get_texture                      Since 4.10
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(cffi:defcfun ("gsk_texture_scale_node_get_texture" texture-scale-node-texture)
+    render-node
+ #+liber-documentation
+ "@version{#2024-11-16}
+  @argument[node]{a @class{gsk:texture-scale-node} instance}
+  @return{The @class{gdk:texture} object.}
+  @begin{short}
+    Retrieves the texture used when creating the render node.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:texture-scale-node}
+  @see-class{gsk:render-node}
+  @see-symbol{gsk:scaling-filter}"
+  (node render-node))
+
+#+gtk-4-10
+(export 'texture-scale-node-texture)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskMaskNode
-;;;
-;;; final class Gsk.MaskNode : GObject.TypeInstance
-;;; {
-;;;   /* No available fields */
-;;; }
-;;;
-;;; A render node masking one child node with another.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(cffi:define-foreign-type mask-node (render-node)
+  ()
+  (:simple-parser mask-node))
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-class 'mask-node)
+      "GskRenderNode"
+      (documentation 'mask-node 'type)
+ "@version{#2024-11-15}
+  @begin{short}
+    A render node masking one child node with another.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:render-node}")
+
+#+gtk-4-10
+(export 'mask-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_new
@@ -3554,6 +3636,15 @@ color {
 ;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-10
+(cffi:defcfun ("gsk_mask_node_new" mask-node-new) render-node
+  (source render-node)
+  (mask render-node)
+  (mode mask-mode))
+
+#+gtk-4-10
+(export 'mask-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_mask
 ;;;
@@ -3561,6 +3652,13 @@ color {
 ;;;
 ;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(cffi:defcfun ("gsk_mask_node_get_mask" mask-node-mask) render-node
+  (node render-node))
+
+#+gtk-4-10
+(export 'mask-node-mask)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_mask_mode
@@ -3570,6 +3668,13 @@ color {
 ;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-10
+(cffi:defcfun ("gsk_mask_node_get_mask_mode" mask-node-mask-mode) mask-mode
+  (node render-node))
+
+#+gtk-4-10
+(export 'mask-node-mask-mode)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_source
 ;;;
@@ -3578,9 +3683,39 @@ color {
 ;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-10
+(cffi:defcfun ("gsk_mask_node_get_source" mask-node-source) render-node
+  (node render-node))
+
+#+gtk-4-10
+(export 'mask-node-source)
+
 ;;; ----------------------------------------------------------------------------
 ;;; GskFillNode                                             Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:define-foreign-type fill-node (render-node)
+  ()
+  (:simple-parser fill-node))
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-class 'fill-node)
+      "GskRenderNode"
+      (documentation 'fill-node 'type)
+ "@version{#2024-11-15}
+  @begin{short}
+    A render node filling the area given by a @class{gsk:path} instance and
+    a @symbol{gsk:fill-rule} value with the child node.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:render-node}
+  @see-class{gsk:path}
+  @see-symbol{gsk:fill-rule}")
+
+#+gtk-4-14
+(export 'fill-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_new
@@ -3591,6 +3726,15 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_fill_node_new" fill-node-new) render-node
+  (child render-node)
+  (path (g:boxed path))
+  (rule fill-rule))
+
+#+gtk-4-14
+(export 'fill-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_child
 ;;;
@@ -3599,6 +3743,13 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_fill_node_get_child" fill-node-child) render-node
+  (node render-node))
+
+#+gtk-4-14
+(export 'fill-node-child)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_fill_rule
 ;;;
@@ -3606,6 +3757,13 @@ color {
 ;;;
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gsk_fill_node_get_fill_rule" fill-node-fill-rule) fill-rule
+  (node render-node))
+
+#+gtk-4-14
+(export 'fill-node-fill-rule)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_path
@@ -3616,9 +3774,39 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_fill_node_get_path" fill-node-path) (g:boxed path)
+  (node render-node))
+
+#+gtk-4-14
+(export 'fill-node-path)
+
 ;;; ----------------------------------------------------------------------------
 ;;; GskStrokeNode                                           Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:define-foreign-type stroke-node (render-node)
+  ()
+  (:simple-parser stroke-node))
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-class 'stroke-node)
+      "GskRenderNode"
+      (documentation 'stroke-node 'type)
+ "@version{#2024-11-15}
+  @begin{short}
+    A render node that will fill the area determined by stroking the the given
+    @class{gsk:path} instance using the @class{gsk:stroke} attributes.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:render-node}
+  @see-class{gsk:path}
+  @see-class{gsk:stroke}")
+
+#+gtk-4-14
+(export 'stroke-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_new
@@ -3629,6 +3817,15 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_stroke_node_new" stroke-node-new) render-node
+  (child render-node)
+  (path (g:boxed path))
+  (stroke (g:boxed stroke)))
+
+#+gtk-4-14
+(export 'stroke-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_child
 ;;;
@@ -3636,6 +3833,13 @@ color {
 ;;;
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gsk_stroke_node_get_child" stroke-node-child) render-node
+  (node render-node))
+
+#+gtk-4-14
+(export 'stroke-node-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_path
@@ -3645,6 +3849,13 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_stroke_node_get_path" stroke-node-path) (g:boxed path)
+  (node render-node))
+
+#+gtk-4-14
+(export 'stroke-node-path)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_stroke
 ;;;
@@ -3653,9 +3864,37 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_stroke_node_get_stroke" stroke-node-stroke) (g:boxed stroke)
+  (node render-node))
+
+#+gtk-4-14
+(export 'stroke-node-stroke)
+
 ;;; ----------------------------------------------------------------------------
-;;; GskSubsurfaceNode
+;;; GskSubsurfaceNode                                       Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:define-foreign-type subsurface-node (render-node)
+  ()
+  (:simple-parser subsurface-node))
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-class 'subsurface-node)
+      "GskRenderNode"
+      (documentation 'subsurface-node 'type)
+ "@version{#2024-11-15}
+  @begin{short}
+    A render node that potentially diverts a part of the scene graph to a
+    subsurface.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:render-node}")
+
+#+gtk-4-14
+(export 'subsurface-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_new
@@ -3666,6 +3905,14 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_subsurface_node_new" subsurface-node-new) render-node
+  (child render-node)
+  (subsurface :pointer))
+
+#+gtk-4-14
+(export 'subsurface-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_get_subsurface
 ;;;
@@ -3674,6 +3921,14 @@ color {
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-14
+(cffi:defcfun ("gsk_subsurface_node_get_subsurface" subsurface-node-subsurface)
+    :pointer
+  (node render-node))
+
+#+gtk-4-14
+(export 'subsurface-node-subsurface)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_get_child
 ;;;
@@ -3681,5 +3936,13 @@ color {
 ;;;
 ;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gsk_subsurface_node_get_child" subsurface-node-child)
+    render-node
+  (node render-node))
+
+#+gtk-4-14
+(export 'subsurface-node-child)
 
 ;;; --- End of file gsk4.render-node.lis ---------------------------------------
