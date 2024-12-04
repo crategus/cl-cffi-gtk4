@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-section-model :in gtk-suite)
+(def-suite gtk-section-model :in gtk-list-model-support)
 (in-suite gtk-section-model)
 
 ;;; --- Types and Valus --------------------------------------------------------
@@ -17,16 +17,18 @@
   (is (eq (g:gtype "GtkSectionModel")
           (g:gtype (cffi:foreign-funcall "gtk_section_model_get_type" :size))))
   ;; Check interface prerequisites
-  (is (equal '()
+  (is (equal '("GListModel" "GObject")
              (glib-test:list-interface-prerequisites "GtkSectionModel")))
   ;; Check interface properties
   (is (equal '()
              (glib-test:list-interface-properties "GtkSectionModel")))
   ;; Check interface signals
-  (is (equal '()
+  (is (equal '("sections-changed")
              (glib-test:list-signals "GtkSectionModel")))
   ;; Get interface definition
-  (is (equal '()
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkSectionModel" GTK:SECTION-MODEL
+                       (:EXPORT T
+                        :TYPE-INITIALIZER "gtk_section_model_get_type"))
              (gobject:get-gtype-definition "GtkSectionModel"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -41,17 +43,44 @@
     (is (string= name (g:signal-query-signal-name query)))
     (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
-    (is (equal '(:ACTION :DETAILED :NO-HOOKS :NO-RECURSE :RUN-LAST)
+    (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
     (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
-    (is (equal '("GParam")
+    (is (equal '("guint" "guint")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_section_model_get_section
+
+(test gtk-section-model-section
+  (let* ((model (create-string-list-for-package))
+         (selection (gtk:single-selection-new model)))
+    (is (equal (list 0 gtk:+invalid-list-position+)
+               (multiple-value-list (gtk:section-model-section selection 100))))
+    ;; Check memory management
+    (is-false (setf (gtk:single-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
 ;;;     gtk_section_model_sections_changed
 
-;;; 2024-11-14
+(test gtk-section-model-sections-changed
+  (let* ((model (create-string-list-for-package))
+         (selection (gtk:single-selection-new model)))
+    ;; Connect signal handler
+    (g:signal-connect selection "sections-changed"
+            (lambda (model pos n-items)
+              (is (typep model 'gtk:section-model))
+              (is (= 100 pos))
+              (is (= 10 n-items))))
+    ;; Emit signal
+    (is-false (g:signal-emit selection "sections-changed" 100 10))
+    ;; Check memory management
+    (is-false (setf (gtk:single-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
+;;; 2024-11-29

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-selection-model :in gtk-suite)
+(def-suite gtk-selection-model :in gtk-list-model-support)
 (in-suite gtk-selection-model)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -51,15 +51,102 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_selection_model_is_selected
-;;;     gtk_selection_model_get_selection
-;;;     gtk_selection_model_get_selection_in_range
 ;;;     gtk_selection_model_select_item
 ;;;     gtk_selection_model_unselect_item
+
+(test gtk-selection-model-is-selected
+  (let* ((model (create-string-list-for-package "GSK"))
+         (selection (gtk:multi-selection-new model)))
+    (is (eq (g:gtype "GObject") (gtk:multi-selection-item-type selection)))
+    (is (<= 280 (gtk:multi-selection-n-items selection)))
+    (is-true (gtk:selection-model-select-item selection 50 t))
+    (is-true (gtk:selection-model-is-selected selection 50))
+    (is-true (gtk:selection-model-select-item selection 60 nil))
+    (is-true (gtk:selection-model-is-selected selection 50))
+    (is-true (gtk:selection-model-is-selected selection 60))
+    (is-true (gtk:selection-model-unselect-item selection 50))
+    (is-false (gtk:selection-model-is-selected selection 50))
+    (is-true (gtk:selection-model-is-selected selection 60))
+    ;; Check memory management
+    (is-false (setf (gtk:multi-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
 ;;;     gtk_selection_model_select_range
 ;;;     gtk_selection_model_unselect_range
+;;;     gtk_selection_model_get_selection
+;;;     gtk_selection_model_set_selection
+
+(test gtk-selection-model-select-range
+  (let* ((model (create-string-list-for-package "GSK"))
+         (selection (gtk:multi-selection-new model))
+         (bitset nil))
+
+    (is-true (gtk:selection-model-select-range selection 50 10 t))
+
+    (is (typep (setf bitset (gtk:selection-model-selection selection))
+               'gtk:bitset))
+    (is (= 10 (gtk:bitset-size bitset)))
+    (is (= 50 (gtk:bitset-minimum bitset)))
+    (is (= 59 (gtk:bitset-maximum bitset)))
+
+    (is-true (gtk:selection-model-unselect-range selection 50 5))
+
+    (is (typep (setf bitset (gtk:selection-model-selection selection))
+               'gtk:bitset))
+    (is (= 5 (gtk:bitset-size bitset)))
+    (is (= 55 (gtk:bitset-minimum bitset)))
+    (is (= 59 (gtk:bitset-maximum bitset)))
+    ;; Check memory management
+    (is-false (setf (gtk:multi-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
 ;;;     gtk_selection_model_select_all
 ;;;     gtk_selection_model_unselect_all
-;;;     gtk_selection_model_set_selection
+;;;     gtk_selection_model_get_selection_in_range
+
+;; TODO: GTK:SELECTION-MODEL-SELECTION-IN-RANGE does not work as expected.
+
+(test gtk-selection-model-select-all
+  (let* ((model (create-string-list-for-package "GSK"))
+         (selection (gtk:multi-selection-new model))
+         (bitset nil))
+
+    (is-true (gtk:selection-model-select-all selection))
+    (is (typep (setf bitset
+                     (gtk:selection-model-selection-in-range selection 50 10))
+               'gtk:bitset))
+    (is (= 280 (gtk:bitset-size bitset)))
+    (is (= 0 (gtk:bitset-minimum bitset)))
+    (is (= 279 (gtk:bitset-maximum bitset)))
+
+    (is-true (gtk:selection-model-unselect-all selection))
+    (is (typep (setf bitset
+                     (gtk:selection-model-selection-in-range selection 50 10))
+               'gtk:bitset))
+    (is (= 0 (gtk:bitset-size bitset)))
+    (is (= gtk:+invalid-list-position+ (gtk:bitset-minimum bitset)))
+    (is (= 0 (gtk:bitset-maximum bitset)))
+    ;; Check memory management
+    (is-false (setf (gtk:multi-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
 ;;;     gtk_selection_model_selection_changed
 
-;;; 2024-9-18
+(test gtk-selection-model-selection-changed
+  (let* ((model (create-string-list-for-package "GSK"))
+         (selection (gtk:multi-selection-new model)))
+    (g:signal-connect selection "selection-changed"
+        (lambda (model pos n-items)
+          (is (eq selection model))
+          (is (= 50 pos))
+          (is (= 10 n-items))))
+    (is-false (gtk:selection-model-selection-changed selection 50 10))
+    ;; Check memory management
+    (is-false (setf (gtk:multi-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
+;;; 2024-12-2

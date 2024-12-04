@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-no-selection :in gtk-suite)
+(def-suite gtk-no-selection :in gtk-list-model-support)
 (in-suite gtk-no-selection)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -61,8 +61,18 @@
 ;;;     gtk_no_selection_new
 
 (test gtk-no-selection-new
-  (is (typep (gtk:no-selection-new nil) 'gtk:no-selection))
-  (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
-             'gtk:no-selection)))
+  (let ((model (g:list-store-new "GtkWidget"))
+        (selection nil))
+    (is (typep (setf selection
+                     (gtk:no-selection-new)) 'gtk:no-selection))
+    (is (typep (setf selection
+                     (gtk:no-selection-new nil)) 'gtk:no-selection))
+    (is (typep (setf selection
+                     (gtk:no-selection-new model))
+               'gtk:no-selection))
+    ;; Check memory management
+    (is-false (setf (gtk:no-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
 
-;;; 2024-9-19
+;;; 2024-11-29

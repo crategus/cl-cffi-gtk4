@@ -58,7 +58,7 @@
 ;;;     gtk_page_setup_new_from_key_file
 
 (test gtk-page-setup-new-from-key-file
-  (glib:with-g-key-file (keyfile)
+  (glib:with-key-file (keyfile)
     (let ((path (glib-sys:sys-path "test/resource/page-setup.ini")))
       (is-true (g:key-file-load-from-file keyfile path :none))
       (is (typep (gtk:page-setup-new-from-key-file keyfile nil)
@@ -174,7 +174,7 @@
 ;;;     gtk_page_setup_load_key_file
 
 (test gtk-page-setup-load-key-file
-  (glib:with-g-key-file (keyfile)
+  (glib:with-key-file (keyfile)
     (let ((setup (gtk:page-setup-new))
           (path (glib-sys:sys-path "test/resource/page-setup.ini")))
       (is-true (g:key-file-load-from-file keyfile path :none))
@@ -191,7 +191,7 @@
 ;;;     gtk_page_setup_to_key_file
 
 (test gtk-page-setup-to-key-file
-  (glib:with-g-key-file (keyfile)
+  (glib:with-key-file (keyfile)
     (let ((setup (gtk:page-setup-new))
           (path (glib-sys:sys-path "test/out/page-setup.ini")))
       (is-false (gtk:page-setup-to-key-file setup keyfile nil))
@@ -207,4 +207,4 @@
     (is (string= "{'PPDName': <'A4'>, 'DisplayName': <'A4'>, 'Width': <210.0>, 'Height': <297.0>, 'MarginTop': <6.3499999999999996>, 'MarginBottom': <14.224>, 'MarginLeft': <6.3499999999999996>, 'MarginRight': <6.3499999999999996>, 'Orientation': <'portrait'>}"
                  (g:variant-print variant)))))
 
-;;; 2024-9-20
+;;; 2024-11-25

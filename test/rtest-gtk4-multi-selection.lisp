@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-multi-selection :in gtk-suite)
+(def-suite gtk-multi-selection :in gtk-list-model-support)
 (in-suite gtk-multi-selection)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -51,8 +51,25 @@
 ;;;     model
 ;;;     n-items                                            Since 4.8
 
+(test gtk-multi-selection-properties
+  (let ((selection (make-instance 'gtk:multi-selection)))
+    (is (eq (g:gtype "GObject") (gtk:multi-selection-item-type selection)))
+    (is-false (gtk:multi-selection-model selection))
+    (is (= 0 (gtk:multi-selection-n-items selection)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_multi_selection_new
 
-;;; 2024-9-19
+(test gtk-multi-selection-new
+  (let* ((model (create-string-list-for-package "GSK"))
+         (selection nil))
+    (is (typep (gtk:multi-selection-new) 'gtk:multi-selection))
+    (is (typep (setf selection
+                     (gtk:multi-selection-new model)) 'gtk:multi-selection))
+    ;; Check memory management
+    (is-false (setf (gtk:multi-selection-model selection) nil))
+    (is (= 1 (g:object-ref-count model)))
+    (is (= 1 (g:object-ref-count selection)))))
+
+;;; 2024-12-2

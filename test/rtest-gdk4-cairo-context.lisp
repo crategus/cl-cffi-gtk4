@@ -51,10 +51,7 @@
 (test gdk-cairo-context-cairo-create
   (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
          (context nil))
-    ;; FIXME: This test fails, when we define GdkSurface as prerequiste for
-    ;; GdkDragSurface. Why?
     (is (typep (setf context (gdk:surface-create-cairo-context surface))
-               'gdk:cairo-context))
-    ))
+               'gdk:cairo-context))))
 
 ;;; 2024-9-19

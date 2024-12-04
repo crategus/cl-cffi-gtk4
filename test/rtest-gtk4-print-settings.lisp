@@ -434,7 +434,7 @@
 (test gtk-print-settings-new-from-key-file
   (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         settings)
-    (glib:with-g-key-file (keyfile)
+    (glib:with-key-file (keyfile)
       (is-true (glib:key-file-load-from-file keyfile path :none))
       (is (typep (setf settings
                        (gtk:print-settings-new-from-key-file keyfile nil))
@@ -476,8 +476,8 @@
 (test gtk-print-settings-load-key-file
   (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
         (settings (gtk:print-settings-new)))
-    (glib:with-g-key-file (keyfile)
+    (glib:with-key-file (keyfile)
       (is-true (glib:key-file-load-from-file keyfile path :none))
       (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
 
-;;; 2024-10-13
+;;; 2024-11-25

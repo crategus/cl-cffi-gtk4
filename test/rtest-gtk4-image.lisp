@@ -141,7 +141,7 @@
 
 (test gtk-image-new-from-resource
   (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource")))
-    (gio:with-g-resources (resource path)
+    (gio:with-resource (resource path)
       (let ((image (gtk:image-new-from-resource
                        "/com/crategus/test/gtk-logo-24.png")))
         (is-false (gtk:image-file image))
@@ -270,7 +270,7 @@
 (test gtk-image-set-from-resource
   (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource"))
         (image (gtk:image-new)))
-    (gio:with-g-resources (resource path)
+    (gio:with-resource (resource path)
       (is-false (gtk:image-set-from-resource
                         image
                         "/com/crategus/test/gtk-logo-24.png"))
@@ -369,4 +369,4 @@
     (is (= 1 (g:object-ref-count gicon)))
     (is (= 1 (g:object-ref-count image)))))
 
-;;; 2024-10-29
+;;; 2024-11-26

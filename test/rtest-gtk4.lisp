@@ -135,15 +135,6 @@ sem venenatis, vitae ultricies arcu laoreet."))
       (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
     store))
 
-;; Create and fill a GIO:LIST-STORE for use as a model
-(defun create-g-list-store-for-package (&optional (package "GTK"))
-  (let ((store (gtk:list-store-new "GtkStringObject")))
-    (do-external-symbols (symbol (find-package package))
-      (let* ((str (string-downcase (format nil "~a" symbol)))
-             (item (gtk:string-object-new str)))
-      (g:list-store-append store item)))
-    store))
-
 ;; Create and fill a GTK:LIST-STORE for use as a model
 (defun create-list-store-for-package (&optional (package "GTK"))
   (let ((store (make-instance 'gtk:list-store

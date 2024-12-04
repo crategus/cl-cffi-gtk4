@@ -219,8 +219,8 @@
 
 #-windows
 (test gtk-css-provider-load-from-resource
-  (gio:with-g-resources (resource (glib-sys:sys-path
-                                    "test/resource/rtest-resource.gresource"))
+  (gio:with-resource (resource (glib-sys:sys-path
+                                   "test/resource/rtest-resource.gresource"))
     (let ((provider (gtk:css-provider-new))
           (path "/com/crategus/test/css-accordion.css"))
       (is-false (gtk:css-provider-load-from-resource provider path))
@@ -316,4 +316,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2024-9-19
+;;; 2024-11-26
