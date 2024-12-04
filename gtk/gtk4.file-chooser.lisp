@@ -518,7 +518,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf file-chooser-file) (file chooser)
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (cffi:foreign-funcall "gtk_file_chooser_set_file"
                           (g:object file-chooser) chooser
                           g:object file
@@ -528,7 +528,7 @@
 
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-file) g:object
  #+liber-documentation
- "@version{2024-4-26}
+ "@version{2024-11-21}
   @syntax{(gtk:file-chooser-file chooser) => file}
   @syntax{(setf (gtk:file-chooser-file chooser) file)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -588,8 +588,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf file-chooser-namestring) (path chooser)
-  (glib:with-g-error (err)
-    (let ((file (cffi:convert-to-foreign path 'g:file-as-namestring)))
+  (glib:with-error (err)
+    (let ((file (cffi:convert-to-foreign (namestring path) 'g:file-as-namestring)))
       (cffi:foreign-funcall "gtk_file_chooser_set_file"
                             (g:object file-chooser) chooser
                             g:object file
@@ -600,11 +600,11 @@
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
     g:file-as-namestring
  #+liber-documentation
- "@version{2024-10-12}
-  @syntax{(gtk:file-chooser-namestring chooser) => namestring}
-  @syntax{(setf (gtk:file-chooser-namestring chooser) namestring)}
+ "@version{2024-11-21}
+  @syntax{(gtk:file-chooser-namestring chooser) => path}
+  @syntax{(setf (gtk:file-chooser-namestring chooser) path)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[namestring]{a pathname or a namestring for the file}
+  @argument[path]{a pathname or a namestring for the file}
   @begin{short}
     The @fun{gtk:file-chooser-namestring} function gets the namestring for the
     currently selected file in the file selector.
@@ -669,7 +669,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf file-chooser-current-folder) (path chooser)
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (let ((file (cffi:convert-to-foreign (namestring path)
                                          'g:file-as-namestring)))
       (cffi:foreign-funcall "gtk_file_chooser_set_current_folder"
@@ -682,9 +682,9 @@
 (cffi:defcfun ("gtk_file_chooser_get_current_folder"
                file-chooser-current-folder) g:file-as-namestring
  #+liber-documentation
- "@version{2024-10-12}
-  @syntax{(gtk:file-chooser-current-folder chooser) => namestring}
-  @syntax{(setf (gtk:file-chooser-current-folder chooser) namestring)}
+ "@version{2024-11-21}
+  @syntax{(gtk:file-chooser-current-folder chooser) => path}
+  @syntax{(setf (gtk:file-chooser-current-folder chooser) path)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[path]{a pathname or namestring with the full path of the new
     current folder}
@@ -779,7 +779,7 @@
 
 (defun file-chooser-add-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2024-11-21}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[folder]{a namestring with a filename of the folder to add}
   @begin{return}
@@ -798,7 +798,7 @@
   @see-class{gtk:file-chooser}
   @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-remove-shortcut-folder}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%file-chooser-add-shortcut-folder chooser folder err)))
 
 (export 'file-chooser-add-shortcut-folder)
@@ -815,7 +815,7 @@
 
 (defun file-chooser-remove-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2024-11-21}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[folder]{a namestring with the filename of the folder to remove}
   @begin{return}
@@ -832,7 +832,7 @@
   @see-class{gtk:file-chooser}
   @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-add-shortcut-folder}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%file-chooser-remove-shortcut-folder chooser folder err)))
 
 (export 'file-chooser-remove-shortcut-folder)

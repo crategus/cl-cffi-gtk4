@@ -219,7 +219,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2024-5-7}
+ "@version{2024-11-29}
   @begin{short}
     The @class{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -444,7 +444,7 @@ lambda (label uri)    :run-last
       @end{table}
       The signal which gets emitted to activate a URI. Applications may connect
       to it to override the default behaviour, which is to call the
-      @fun{gtk:show-uri} function.
+      @fun{gtk:file-launcher-launch} function.
     @subheading{The \"copy-clipboard\" signal}
       @begin{pre}
 lambda (label)    :action

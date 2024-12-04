@@ -275,7 +275,7 @@
 
 #+liber-documentation
 (setf (documentation 'about-dialog 'type)
- "@version{2024-11-16}
+ "@version{2024-11-29}
   @begin{short}
     The @class{gtk:about-dialog} widget offers a simple way to display
     information about a program like its logo, name, copyright, website and
@@ -289,9 +289,9 @@
   @image[about-dialog]{Figure: GtkAboutDialog}
 
   The about dialog often contain links and email addresses. The about dialog
-  displays these as clickable links. By default, it calls the @fun{gtk:show-uri}
-  function when a user clicks one. The behaviour can be overridden with the
-  @code{\"activate-link\"} signal.
+  displays these as clickable links. By default, it calls the
+  @fun{gtk:file-launcher-launch} function when a user clicks one. The behaviour
+  can be overridden with the @code{\"activate-link\"} signal.
 
   To specify a person with an email address, use a string like
   @code{\"Edgar Allan Poe <edgar@@poe.com>\"}. To specify a website with a
@@ -328,8 +328,8 @@ lambda (dialog uri)    :run-last
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{table}
       Emitted when a URL is activated. Applications may connect to it to
-      override the default behaviour, which is to call the @fun{gtk:show-uri}
-      function.
+      override the default behaviour, which is to call the
+      @fun{gtk:file-launcher-launch} function.
   @end{dictionary}
   @see-constructor{gtk:about-dialog-new}
   @see-slot{gtk:about-dialog-artists}

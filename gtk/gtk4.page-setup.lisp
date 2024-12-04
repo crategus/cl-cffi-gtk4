@@ -153,7 +153,7 @@
 
 (defun page-setup-new-from-file (path)
  #+liber-documentation
- "@version{2024-4-30}
+ "@version{2024-11-21}
   @argument[path]{a pathname or namestring with the file to read the page setup
     from}
   @return{The restored @class{gtk:page-setup} object.}
@@ -165,7 +165,7 @@
   function.
   @see-class{gtk:page-setup}
   @see-function{gtk:page-setup-to-file}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%page-setup-new-from-file (namestring path) err)))
 
 (export 'page-setup-new-from-file)
@@ -182,7 +182,7 @@
 
 (defun page-setup-new-from-key-file (keyfile group)
  #+liber-documentation
- "@version{2024-4-30}
+ "@version{2024-11-21}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the page setup
     from}
   @argument[group]{a string with the name of the group in the key file to
@@ -195,7 +195,7 @@
   @code{nil} if an error occurred.
   @see-class{gtk:page-setup}
   @see-type{g:key-file}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%page-setup-new-from-key-file keyfile
                                    (or group (cffi:null-pointer))
                                    err)))
@@ -574,13 +574,13 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_page_setup_load_file" %page-setup-load-file) :boolean
-  (page-setup (g:object page-setup))
+  (setup (g:object page-setup))
   (filename :string)
   (err :pointer))
 
 (defun page-setup-load-file (setup path)
  #+liber-documentation
- "@version{2024-4-30}
+ "@version{2024-11-21}
   @argument[setup]{a @class{gtk:page-setup} object}
   @argument[path]{a pathname or namestring with the file to read the page setup
     from}
@@ -591,7 +591,7 @@
   See also the @fun{gtk:page-setup-to-file} function.
   @see-class{gtk:page-setup}
   @see-function{gtk:page-setup-to-file}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%page-setup-load-file setup (namestring path) err)))
 
 (export 'page-setup-load-file)
@@ -609,7 +609,7 @@
 
 (defun page-setup-load-key-file (setup keyfile group)
  #+liber-documentation
- "@version{2024-4-30}
+ "@version{2024-11-21}
   @argument[setup]{a @class{gtk:page-setup} object}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the page setup
     from}
@@ -621,7 +621,7 @@
   @end{short}
   @see-class{gtk:page-setup}
   @see-type{g:key-file}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%page-setup-load-key-file setup
                                keyfile
                                (or group (cffi:null-pointer))
@@ -640,7 +640,7 @@
 
 (defun page-setup-to-file (setup path)
  #+liber-documentation
- "@version{2024-4-30}
+ "@version{2024-11-21}
   @argument[setup]{a @class{gtk:page-setup} object}
   @argument[path]{a pathname or namestring with the file to save to}
   @return{@em{True} on success.}
@@ -648,7 +648,7 @@
     The function saves the information from the page setup to a file.
   @end{short}
   @see-class{gtk:page-setup}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%page-setup-to-file setup (namestring path) err)))
 
 (export 'page-setup-to-file)

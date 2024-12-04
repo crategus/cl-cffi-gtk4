@@ -416,7 +416,7 @@
 
 (defun alert-dialog-choose-finish (dialog result)
  #+liber-documentation
- "@version{2023-9-20}
+ "@version{2024-11-21}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[result]{a @class{g:async-result} object with the result}
   @return{The integer with the index of the button that was clicked, -1 if the
@@ -432,7 +432,7 @@
   @see-class{g:async-result}
   @see-function{gtk:alert-dialog-choose}
   @see-function{gtk:alert-dialog-cancel-button}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%alert-dialog-choose-finish dialog result err)))
 
 (export 'alert-dialog-choose-finish)

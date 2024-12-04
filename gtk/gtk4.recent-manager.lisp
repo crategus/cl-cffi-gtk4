@@ -488,11 +488,11 @@ lambda (manager)    :run-first
 
 (defun recent-manager-lookup-item (manager uri)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2024-11-21}
   @argument[manager]{a @class{gtk:recent-manager} object}
   @argument[uri]{a string with the URI}
   @begin{return}
-    A @class{gtk:recent-info} instance containing information about the
+    The @class{gtk:recent-info} instance containing information about the
     resource pointed by @arg{uri}, or @code{nil} if the URI was not registered
     in the recently used resources list.
   @end{return}
@@ -503,7 +503,7 @@ lambda (manager)    :run-first
   @end{short}
   @see-class{gtk:recent-manager}
   @see-class{gtk:recent-info}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%recent-manager-lookup-item manager uri err)))
 
 (export 'recent-manager-lookup-item)
@@ -542,7 +542,7 @@ lambda (manager)    :run-first
 
 (defun recent-manager-move-item (manager uri newuri)
  #+liber-documentation
- "@version{#2023-1-29}
+ "@version{#2024-11-21}
   @argument[manager]{a @class{gtk:recent-manager} object}
   @argument[uri]{a string with the URI of a recently used resource}
   @argument[newuri]{a string with the new URI of the recently used resource, or
@@ -555,7 +555,7 @@ lambda (manager)    :run-first
   Please note that this function will not affect the resource pointed by the
   URIs, but only the URI used in the recently used resources list.
   @see-class{gtk:recent-manager}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%recent-manager-move-item manager uri newuri err)))
 
 (export 'recent-manager-move-item)
@@ -592,17 +592,17 @@ lambda (manager)    :run-first
 
 (defun recent-manager-purge-items (manager)
  #+liber-documentation
- "@version{#2023-1-29}
+ "@version{#2024-11-21}
   @argument[manager]{a @class{gtk:recent-manager} object}
   @begin{return}
-    An integer with the number of items that have been removed from the
+    The integer with the number of items that have been removed from the
     recently used resources list.
   @end{return}
   @begin{short}
     Purges every item from the recently used resources list.
   @end{short}
   @see-class{gtk:recent-manager}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%recent-manager-purge-items manager err)))
 
 (export 'recent-manager-purge-items)
@@ -898,7 +898,7 @@ lambda (manager)    :run-first
 
 (defun recent-info-create-app-info (info name)
  #+liber-documentation
- "@version{#2023-1-29}
+ "@version{#2024-11-21}
   @argument[info]{a @class{gtk:recent-info} instance}
   @argument[name]{a string with the name of the application that should be
     mapped to a @class{g:app-info} object, if @code{nil} is used then the
@@ -912,7 +912,7 @@ lambda (manager)    :run-first
   @end{short}
   @see-class{gtk:recent-info}
   @see-class{g:app-info}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%recent-info-create-app-info info name err)))
 
 (export 'recent-info-create-app-info)

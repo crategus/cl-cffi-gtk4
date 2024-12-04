@@ -55,6 +55,7 @@
 ;;; Functions
 ;;;
 ;;;     gtk_grid_view_new
+;;;     gtk_grid_view_scroll_to                            Since 4.12
 ;;;
 ;;; Properties
 ;;;
@@ -131,7 +132,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid-view 'type)
- "@version{#2023-9-8}
+ "@version{2024-11-28}
   @begin{short}
     The @class{gtk:grid-view} widget is a widget to present a view into a large
     dynamic grid of items.
@@ -145,7 +146,7 @@
   selected items, it is possible to turn on rubberband selection, using the
   @slot[gtk:grid-view]{enable-rubberband} property.
 
-  To learn more about the list widget framework, see the overview.
+  To learn more about the list widget framework, see the list widget overview.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 gridview
@@ -158,7 +159,9 @@ gridview
     @end{pre}
     The @class{gtk:grid-view} implementation uses a single CSS node with name
     @code{gridview}. Each child uses a single CSS node with name @code{child}.
-    For rubberband selection, a subnode with name @code{rubberband} is used.
+    If the @slot[gtk:list-item]{activatable} property is set, the corresponding
+    row will have the @code{.activatable} style class. For rubberband selection,
+    a subnode with name @code{rubberband} is used.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:grid-view} implementation uses the @code{:grid} role, and
@@ -175,10 +178,9 @@ lambda (gridview position)    :run-last
         @entry[position]{An unsigned integer with the position of the item to
           activate.}
       @end{table}
-      The signal is emitted when a cell has been activated by the user, usually
-      via activating the @code{GtkGridView|list.activate-item} action. This
-      allows for a convenient way to handle activation in a gridview. See the
-      @code{GtkListItem:activatable} action for details on how to use this
+      The signal is emitted when a cell has been activated by the user. This
+      allows for a convenient way to handle activation in a grid view. See the
+      @slot[gtk:list-item]{activatable} property for details on how to use this
       signal.
   @end{dictionary}
   @see-constructor{gtk:grid-view-new}
@@ -211,7 +213,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-enable-rubberband)
       "Accessor"
       (documentation 'grid-view-enable-rubberband 'function)
- "@version{#2023-9-9}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:grid-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -238,7 +240,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-factory)
       "Accessor"
       (documentation 'grid-view-factory 'function)
- "@version{#2023-9-6}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-factory object) => factory}
   @syntax{(setf (gtk:grid-view-factory object) factory)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -268,7 +270,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-max-columns)
       "Accessor"
       (documentation 'grid-view-max-columns 'function)
- "@version{#2023-9-6}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-max-colums object) => max}
   @syntax{(setf (gtk:grid-view-max-columns object) max)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -298,7 +300,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-min-columns)
       "Accessor"
       (documentation 'grid-view-min-columns 'function)
- "@version{#2023-9-6}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-max-colums object) => min}
   @syntax{(setf (gtk:grid-view-min-columns object) min)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -327,7 +329,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-model)
       "Accessor"
       (documentation 'grid-view-model 'function)
- "@version{#2023-9-6}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-model object) => model}
   @syntax{(setf (gtk:grid-view-model object) model)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -356,7 +358,7 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-single-click-activate)
       "Accessor"
       (documentation 'grid-view-single-click-activate 'function)
- "@version{#2023-9-9}
+ "@version{2024-11-28}
   @syntax{(gtk:grid-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:grid-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
@@ -367,7 +369,7 @@ lambda (gridview position)    :run-last
   @end{short}
   The @fun{gtk:grid-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @setf{gtk:grid-view-single-click-activate)} function sets whether rows should
+  @setf{gtk:grid-view-single-click-activate} function sets whether rows should
   be activated on single click and selected on hover.
   @see-class{gtk:grid-view}")
 
@@ -380,18 +382,38 @@ lambda (gridview position)    :run-last
   Behavior of the @kbd{Tab} key. @br{}
   Default value: @code{:all}")
 
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'grid-view-tab-behavior)
+      "Accessor"
+      (documentation 'grid-view-tab-behavior 'function)
+ "@version{2024-11-28}
+  @syntax{(gtk:grid-view-tab-behavior object) => setting}
+  @syntax{(setf (gtk:grid-view-tab-behavior object) setting)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[setting]{a @symbol{gtk:list-tab-behavior} value}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{tab-behavior} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-tab-behavior} function gets the behavior of the
+  @key{Tab} and @code{Shift+Tab} keys. The @setf{gtk:grid-view-tab-behavior}
+  function sets the tab behavior.
+  @see-class{gtk:grid-view}
+  @see-symbol{gtk:list-tab-behavior}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_grid_view_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline grid-view-new))
 
-(defun grid-view-new (model factory)
+(defun grid-view-new (&optional model factory)
  #+liber-documentation
- "@version{#2023-9-21}
-  @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
-  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
-    with or @code{nil}}
+ "@version{2024-11-28}
+  @argument[model]{an optional @class{gtk:selection-model} object to use, or
+    the @code{nil} default value}
+  @argument[factory]{an optional @class{gtk:list-item-factory} object to
+    populate items with or the default @code{nil} value}
   @return{The new @class{gtk:grid-view} widget using the given @arg{model} and
     @arg{factory}.}
   @begin{short}
@@ -414,13 +436,13 @@ lambda (gridview position)    :run-last
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_view_scroll_to" grid-view-scroll-to) :void
  #+liber-documentation
- "@version{#2023-11-16}
+ "@version{#2024-11-28}
   @argument[gridview]{a @class{gtk:grid-view} widget}
   @argument[pos]{an unsigned integer with the position of the item}
   @argument[flags]{a @symbol{gtk:list-scroll-flags} value with the actions to
     perform}
-  @argument[scroll]{a @class{gtk:scroll-info} with the details of how to perform
-    the scroll operation of @code{nil} to scroll into the grid view}
+  @argument[scroll]{a @class{gtk:scroll-info} instance with the details of how
+    to perform the scroll operation or @code{nil} to scroll into the grid view}
   @begin{short}
     Scrolls to the item at the given position and performs the actions specified
     in @arg{flags}.

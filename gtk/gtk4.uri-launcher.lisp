@@ -191,7 +191,7 @@
 
 (defun uri-launcher-launch-finish (launcher result)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2024-11-21}
   @argument[launcher]{a @class{gtk:uri-launcher} object}
   @argument[result]{a @class{g:async-result} object with the result}
   @return{@em{True} if an application was launched, or @em{false} on error}
@@ -204,7 +204,7 @@
   @see-class{gtk:uri-launcher}
   @see-class{g:async-result}
   @see-function{gtk:uri-launcher-launch}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%uri-launcher-launch-finish launcher result err)))
 
 (export 'uri-launcher-launch-finish)

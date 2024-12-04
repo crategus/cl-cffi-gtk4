@@ -269,7 +269,7 @@
 
 (defun color-dialog-choose-rgba-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-28}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:color-dialog} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{The @class{gdk:rgba} instance with the selected color, or @code{nil}.}
@@ -283,7 +283,7 @@
   @see-class{g:async-result}
   @see-class{gdk:rgba}
   @see-function{gtk:color-dialog-choose-rgba}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%color-dialog-choose-rgba-finish dialog result err)))
 
 (export 'color-dialog-choose-rgba-finish)

@@ -238,7 +238,7 @@ lambda (chooser color)    :run-first
   @see-class{gtk:color-chooser}
   @see-symbol{gtk:orientation}"
   (if colors
-      (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
+      (glib:with-gboxed-array (n-colors colors-ptr gdk:rgba colors)
         (%color-chooser-add-palette chooser
                                     orientation
                                     colors-per-line

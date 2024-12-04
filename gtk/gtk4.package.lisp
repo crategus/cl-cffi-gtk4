@@ -274,7 +274,7 @@
       @about-class{multi-selection}
       @about-function{multi-selection-item-type}
       @about-generic{multi-selection-model}
-      @about-geneirc{multi-selection-n-items}
+      @about-generic{multi-selection-n-items}
       @about-function{multi-selection-new}
     @end{subsection}
     @begin[GtkFilterListModel]{subsection}
@@ -713,6 +713,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{grid-view-min-columns}
       @about-generic{grid-view-model}
       @about-generic{grid-view-single-click-activate}
+      @about-generic{grid-view-tab-behavior}
       @about-function{grid-view-new}
       @about-function{grid-view-scroll-to}
     @end{subsection}
@@ -720,12 +721,15 @@ GtkCellRenderer         GtkWidget
       @about-class{column-view}
       @about-generic{column-view-columns}
       @about-generic{column-view-enable-rubberband}
+      @about-generic{column-view-header-factory}
       @about-generic{column-view-model}
       @about-generic{column-view-reorderable}
+      @about-generic{column-view-row-factory}
       @about-generic{column-view-show-column-separators}
       @about-generic{column-view-show-row-separators}
       @about-generic{column-view-single-click-activate}
       @about-generic{column-view-sorter}
+      @about-generic{column-view-tab-behavior}
       @about-function{column-view-new}
       @about-function{column-view-append-column}
       @about-function{column-view-insert-column}
@@ -739,6 +743,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{column-view-column-factory}
       @about-generic{column-view-column-fixed-width}
       @about-generic{column-view-column-header-menu}
+      @about-generic{column-view-column-id}
       @about-generic{column-view-column-resizable}
       @about-generic{column-view-column-sorter}
       @about-generic{column-view-column-title}

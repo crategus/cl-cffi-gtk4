@@ -704,33 +704,32 @@
 ;;; gtk_paper_size_new_from_key_file
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Consider to change the error handling: use with-ignore-g-error?
+;; TODO: Consider to change the error handling: use glib:with-ignore-error?
 
 (cffi:defcfun ("gtk_paper_size_new_from_key_file" %paper-size-new-from-key-file)
     (g:boxed paper-size :return)
   (keyfile (:pointer (:struct g:key-file)))
-  (groupname :string)
+  (group :string)
   (err :pointer))
 
-(defun paper-size-new-from-key-file (keyfile groupname)
+(defun paper-size-new-from-key-file (keyfile group)
  #+liber-documentation
- "@version{2023-1-31}
-  @argument[keyfile]{the @type{g:key-file} instance to retrieve the paper size
+ "@version{2024-11-21}
+  @argument[keyfile]{a @type{g:key-file} instance to retrieve the paper size
     from}
-  @argument[groupname]{a string with the name of the group in the key file to
-    read, or @code{nil} to read the first group}
+  @argument[group]{a string with the name of the group in the key file to read,
+    or @code{nil} to read the first group}
   @begin{return}
-    A new @class{gtk:paper-size} instance with the restored paper size, or
+    The new @class{gtk:paper-size} instance with the restored paper size, or
     @code{nil} if an error occurred.
   @end{return}
   @begin{short}
-    Reads a paper size from the group @arg{groupname} in the key file
-    @arg{keyfile}.
+    Reads a paper size from the group @arg{group} in the key file @arg{keyfile}.
   @end{short}
   @see-class{gtk:paper-size}
   @see-type{g:key-file}"
-  (glib:with-g-error (err)
-    (%paper-size-new-from-key-file keyfile groupname err)))
+  (glib:with-error (err)
+    (%paper-size-new-from-key-file keyfile group err)))
 
 (export 'paper-size-new-from-key-file)
 

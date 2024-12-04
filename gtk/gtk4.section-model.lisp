@@ -60,7 +60,7 @@
 (setf (liber:alias-for-class 'section-model)
       "Interface"
       (documentation 'section-model 'type)
- "@version{2024-11-14}
+ "@version{2024-11-29}
   @begin{short}
     The @class{gtk:section-model} interface is an interface that adds support
     for sections to list models.
@@ -83,13 +83,13 @@
   @begin[Signals]{dictionary}
     @subheading{The \"sections-changed\" signal}
       @begin{pre}
-lambda (model position n-items)    :run-last
+lambda (model pos n-items)    :run-last
       @end{pre}
       @begin[code]{table}
         @entry[model]{The @class{gtk:section-model} object that emitted the
           signal.}
-        @entry[position]{The unsigned integer with the first item that may
-          have changed.}
+        @entry[pos]{The unsigned integer with the first item that may have
+          changed.}
         @entry[n-items]{The unsigned integer with the number of items with
           changes.}
       @end{table}
@@ -111,20 +111,19 @@ lambda (model position n-items)    :run-last
 
 (cffi:defcfun ("gtk_section_model_get_section" %section-model-section) :void
   (model (g:object section-model))
-  (position :uint)
+  (pos :uint)
   (start (:pointer :uint))
   (end (:pointer :uint)))
 
-(defun section-model-section (model position)
+(defun section-model-section (model pos)
  #+liber-documentation
- "@version{#2024-11-14}
-  @syntax{(gtk:section-model-section model) => start, end}
+ "@version{2024-11-29}
+  @syntax{(gtk:section-model-section model pos) => start, end}
   @argument[model]{a @class{gtk:section-model} object}
-  @argument[position]{an unsigned integer with the position of the item
-    to query}
+  @argument[pos]{an unsigned integer with the position of the item to query}
   @argument[start]{an unsigned integer with the position of the first item
     in the section}
-  @argument[end]{an unsigned integer with the postition of the first item not
+  @argument[end]{an unsigned integer with the position of the first item not
     part of the section anymore}
   @begin{short}
     Query the section that covers the given position.
@@ -137,7 +136,7 @@ lambda (model position n-items)    :run-last
   Since 4.12
   @see-class{gtk:section-model}"
   (cffi:with-foreign-objects ((start :uint) (end :uint))
-    (%section-model-section model position start end)
+    (%section-model-section model pos start end)
     (values (cffi:mem-ref start :uint)
             (cffi:mem-ref end :uint))))
 
@@ -150,9 +149,9 @@ lambda (model position n-items)    :run-last
 (cffi:defcfun ("gtk_section_model_sections_changed"
                section-model-sections-changed) :void
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{2024-11-29}
   @argument[model]{a @class{gtk:section-model} object}
-  @argument[position]{an unsigned integer with the first item hat may have
+  @argument[pos]{an unsigned integer with the first item hat may have
     changed}
   @argument[n-items]{an unsigned integer with the number of items with changes}
   @begin{short}
@@ -162,7 +161,7 @@ lambda (model position n-items)    :run-last
   Since 4.12
   @see-class{gtk:section-model}"
   (model (g:object section-model))
-  (position :uint)
+  (pos :uint)
   (n-items :uint))
 
 (export 'section-model-sections-changed)

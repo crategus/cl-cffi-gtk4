@@ -1315,11 +1315,11 @@ lambda (operation widget setup settings)    :run-last
 
 (defun print-operation-run (operation action parent)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-11-21}
   @argument[operation]{a @class{gtk:print-operation} object}
-  @argument[action]{the action of type @symbol{gtk:print-operation-action} to
-    start}
-  @argument[parent]{transient parent of the dialog}
+  @argument[action]{a @symbol{gtk:print-operation-action} value for the action
+    to start}
+  @argument[parent]{a transient parent of the dialog}
   @begin{return}
     The result of the print operation. A return value of @code{:apply}
     indicates that the printing was completed successfully. In this case, it
@@ -1372,7 +1372,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-symbol{gtk:print-operation-action}
   @see-function{gtk:print-operation-allow-async}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%print-operation-run operation action parent err)))
 
 (export 'print-operation-run)

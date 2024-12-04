@@ -35,7 +35,8 @@
 ;;;
 ;;;     GtkExpression
 ;;;     GtkExpressionWatch
-;;;     GtkParamSpecExpression
+;;;
+;;;     GtkParamSpecExpression                              not implemented
 ;;;
 ;;; Functions
 ;;;
@@ -69,18 +70,12 @@
 ;;;     gtk_closure_expression_new
 ;;;     gtk_cclosure_expression_new
 ;;;
-;;;     GTK_VALUE_HOLDS_EXPRESSION()
-;;;
 ;;;     gtk_value_set_expression
-;;;     gtk_value_take_expression
 ;;;     gtk_value_get_expression
-;;;     gtk_value_dup_expression
+;;;     gtk_value_take_expression                           not implemented
+;;;     gtk_value_dup_expression                            not implemented
 ;;;
-;;;     gtk_param_spec_expression
-;;;
-;;; Object Hierarchy
-;;;
-;;;     GtkExpression
+;;;     gtk_param_spec_expression                           not implemented
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -386,8 +381,9 @@ case PROP_EXPRESSION:
 
 (export 'expression-evaluate)
 
-;; TODO: A Lisp extension which returns the value of the g:value instance.
-;; Document the function.
+;;; ----------------------------------------------------------------------------
+;;; gtk:expression-evaluate-value
+;;; ----------------------------------------------------------------------------
 
 (defun expression-evaluate-value (expression object)
  #+liber-documentation
@@ -402,8 +398,7 @@ case PROP_EXPRESSION:
   the usage of a @symbol{g:value} instance to get the value of the expression.
   @see-class{gtk:expression}
   @see-function{gtk:expression-evaluate}"
-  (cffi:with-foreign-object (gvalue '(:struct g:value))
-    (g:value-init gvalue)
+  (gobject:with-value (gvalue)
     (if object
         (progn
           (assert (g:type-is-object (g:type-from-instance object)))
@@ -419,37 +414,44 @@ case PROP_EXPRESSION:
 ;;; gtk_expression_bind
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_expression_bind" expression-bind) (g:boxed expression-watch)
+(cffi:defcfun ("gtk_expression_bind" %expression-bind)
+    (g:boxed expression-watch)
+  (expression expression)
+  (target g:object)
+  (property :string)
+  (source g:object))
+
+(defun expression-bind (expression target property source)
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2024-11-29}
   @argument[expression]{a @class{gtk:expression} instance}
-  @argument[target]{a pointer to the target object to bind to}
+  @argument[target]{a @class{g:object} instance for the target to bind to}
   @argument[property]{a string with name of the property on @arg{target} to
     bind to}
-  @argument[this]{a pointer to the argument for the evaluation of
-    @arg{expression}}
+  @argument[source]{a @class{g:object} instance for the argument for the
+    evaluation of @arg{expression}}
   @return{The @class{gtk:expression-watch} instance.}
   @begin{short}
     Bind @arg{target}'s property named @arg{property} to @arg{expression}.
   @end{short}
-  The value that @arg{expression} evaluates to is set via the
-  @fun{g:object-set} function on @arg{target}. This is repeated whenever
-  @arg{expression} changes to ensure that the object's property stays
-  synchronized with @arg{expression}.
+  The value that @arg{expression} evaluates to is set on @arg{target}.
+  This is repeated whenever @arg{expression} changes to ensure that the object's
+  property stays synchronized with @arg{expression}.
 
   If expression's evaluation fails, @arg{target}'s property is not updated. You
   can ensure that this does not happen by using a fallback expression.
 
   Note that this function takes ownership of @arg{expression}. If you want to
-  keep it around, you should use the @fun{gtk:expression-ref} function it
+  keep it around, you should use the @fun{gtk:expression-ref} function
   beforehand.
   @see-class{gtk:expression}
   @see-class{gtk:expression-watch}
-  @see-function{g:object-set}"
-  (expression expression)
-  (target g:object)
-  (property :string)
-  (this g:object))
+  @see-class{g:object}
+  @see-function{gtk:expression-ref}"
+  (%expression-bind (expression-ref expression)
+                    target
+                    property
+                    source))
 
 (export 'expression-bind)
 
@@ -466,7 +468,7 @@ case PROP_EXPRESSION:
 (setf (liber:alias-for-symbol 'expression-notify)
       "Callback"
       (liber:symbol-documentation 'expression-notify)
- "@version{#2024-5-4}
+ "@version{2024-11-29}
   @syntax{lambda ()}
   @begin{short}
     Callback called by the @fun{gtk:expression-watch} function when the
@@ -481,23 +483,24 @@ case PROP_EXPRESSION:
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_watch" %expression-watch)
-    (g:boxed expression-watch)
+    (g:boxed expression-watch :return)
   (expression expression)
-  (this :pointer)
+  (object g:object)
+  (notify :pointer)
   (data :pointer)
-  (notify :pointer))
+  (destroy :pointer))
 
-(defun expression-watch (expression this func)
+(defun expression-watch (expression object func)
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{2024-11-29}
   @argument[expression]{a @class{gtk:expression} intstance}
-  @argument[this]{a pointer to the argument to watch}
-  @argument[func]{a @symbol{expression-notify} callback function to invoke when
-    the expression changes}
-  @return{The newly installed watch. Note that the only reference held to the
-    watch will be released when the watch is unwatched which can happen
-    automatically, and not just via the @fun{gtk:expression-watch-unwatch}
-    function.}
+  @argument[object]{a @class{g:object} instance for the argument to watch}
+  @argument[func]{a @symbol{gtk:expression-notify} callback function to invoke
+    when the expression changes}
+  @return{The newly installed @class{gtk:expression-watch} instance. Note that
+    the only reference held to the watch will be released when the watch is
+    unwatched which can happen automatically, and not just via the
+    @fun{gtk:expression-watch-unwatch} function.}
   @begin{short}
     Installs a watch for the given expression that calls the notify function
     whenever the evaluation of @arg{expression} may have changed.
@@ -508,70 +511,77 @@ case PROP_EXPRESSION:
   @see-class{gtk:expression-watch}
   @see-symbol{gtk:expression-notify}
   @see-function{gtk:expression-watch-unwatch}"
-  (%expression-watch expression
-                     this
+  (%expression-watch (expression-ref expression)
+                     object
                      (cffi:callback expression-notify)
-                     (glib:allocate-stable-pointer func)))
+                     (glib:allocate-stable-pointer func)
+                     (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'expression-watch)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_watch_ref ()
-;;;
-;;; GtkExpressionWatch *
-;;; gtk_expression_watch_ref (GtkExpressionWatch *watch);
+;;; gtk_expression_watch_ref ()                             not implemented
 ;;;
 ;;; Acquires a reference on the given GtkExpressionWatch.
-;;;
-;;; watch :
-;;;     a GtkExpressionWatch.
-;;;
-;;; Returns
-;;;     the GtkExpression with an additional reference.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_watch_unref ()
-;;;
-;;; void
-;;; gtk_expression_watch_unref (GtkExpressionWatch *watch);
+;;; gtk_expression_watch_unref ()                           not implemented
 ;;;
 ;;; Releases a reference on the given GtkExpressionWatch.
-;;;
-;;; If the reference was the last, the resources associated to self are freed.
-;;;
-;;; watch :
-;;;     a GtkExpressionWatch.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_expression_watch_evaluate
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: This implementation is wrong.
-
 (cffi:defcfun ("gtk_expression_watch_evaluate" %expression-watch-evaluate)
     :boolean
   (watch (g:boxed expression-watch))
   (value (:pointer (:struct g:value))))
 
-(defun expression-watch-evaluate (watch)
+(defun expression-watch-evaluate (watch gvalue)
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{24-12-2}
   @argument[watch]{a @class{gtk:expression-watch} instance}
-  @return{The @symbol{g:value} instance with the result.}
+  @argument[gvale]{an initialized @symbol{g:value} instance}
+  @begin{short}
+    Evaluates the watched expression and on success returns the result in
+    @arg{gvalue}.
+  @end{short}
+  This is equivalent to calling the @fun{gtk:expression-evaluate} function with
+  the expression and the object originally used to create @arg{watch}.
+
+  See the @fun{gtk:expression-watch-evaluate-value} function which returns
+  the value and does not need a @symbol{g:value} instance.
+  @see-class{gtk:expression-watch}
+  @see-symbol{g:value}
+  @see-function{gtk:expression-watch-evaluate}"
+  (%expression-watch-evaluate watch gvalue))
+
+(defun expression-watch-evaluate-value (watch)
+ #+liber-documentation
+ "@version{24-12-2}
+  @argument[watch]{a @class{gtk:expression-watch} instance}
+  @return{The value with the result.}
   @begin{short}
     Evaluates the watched expression and on success returns the result.
   @end{short}
   This is equivalent to calling the @fun{gtk:expression-evaluate} function with
-  the expression and this pointer originally used to create @arg{watch}.
+  the expression and the object originally used to create @arg{watch}.
+
+  This function is a variant of the @fun{gtk:expression-watch-evaluate} function
+  that avoids the usage of a @symbol{g:value} instance to get the value of the
+  expression.
   @see-class{gtk:expression-watch}
-  @see-symbol{g:value}"
-  (cffi:with-foreign-object (value '(:struct g:value))
-    (when (%expression-watch-evaluate watch value)
-      (cffi:mem-ref value '(:struct g:value)))))
+  @see-symbol{g:value}
+  @see-function{gtk:expression-watch-evaluate}"
+  (gobject:with-value (gvalue)
+    (when (%expression-watch-evaluate watch gvalue)
+      (gobject:value-get gvalue))))
 
 (export 'expression-watch-evaluate)
+(export 'expression-watch-evaluate-value)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_expression_watch_unwatch
@@ -579,7 +589,7 @@ case PROP_EXPRESSION:
 
 (cffi:defcfun ("gtk_expression_watch_unwatch" expression-watch-unwatch) :void
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2024-11-29}
   @argument[watch]{a @class{gtk:expression-watch} instance to release}
   @begin{short}
     Stops watching an expression that was established via the
@@ -718,7 +728,7 @@ case PROP_EXPRESSION:
     @end{pre}
   @end{dictionary}
   @see-class{gtk:expression}"
-  (gobject:with-g-value (gvalue gtype value)
+  (gobject:with-value (gvalue gtype value)
     (constant-expression-new-for-value gvalue)))
 
 (export 'constant-expression-new)
@@ -841,12 +851,10 @@ case PROP_EXPRESSION:
 
 #+nil
 (defun closure-expression-new (gtype func params)
-
   (cffi:with-foreign-object (expr :pointer n-params)
     (iter (for i from 0 below (length params))
           (for param in params)
           (setf (cffi:mem-aref expr 'expression i) param))
-
 ))
 
 ;;; ----------------------------------------------------------------------------
@@ -888,18 +896,6 @@ case PROP_EXPRESSION:
 ;;;
 ;;; Returns :
 ;;;     a new GtkExpression
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_VALUE_HOLDS_EXPRESSION()
-;;;
-;;; #define GTK_VALUE_HOLDS_EXPRESSION(value) (G_VALUE_HOLDS ((value),
-;;;                                            GTK_TYPE_EXPRESSION))
-;;;
-;;; Evaluates to TRUE if value was initialized with GTK_TYPE_EXPRESSION.
-;;;
-;;; value :
-;;;     a GValue
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -978,30 +974,7 @@ case PROP_EXPRESSION:
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_param_spec_expression ()
 ;;;
-;;; GParamSpec *
-;;; gtk_param_spec_expression (const char *name,
-;;;                            const char *nick,
-;;;                            const char *blurb,
-;;;                            GParamFlags flags);
-;;;
 ;;; Creates a new GParamSpec instance for a property holding a GtkExpression.
-;;;
-;;; See g_param_spec_internal() for details on the property strings.
-;;;
-;;; name :
-;;;     canonical name of the property
-;;;
-;;; nick :
-;;;     a user-readable name for the property
-;;;
-;;; blurb :
-;;;     a user-readable description of the property
-;;;
-;;; flags :
-;;;     flags for the property
-;;;
-;;; Returns :
-;;;     a newly created property specification.
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.expression.lisp ---------------------------------------

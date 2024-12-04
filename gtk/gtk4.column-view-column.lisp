@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-column 'type)
- "@version{#2023-9-9}
+ "@version{2024-11-28}
   @begin{short}
     The @class{gtk:column-view-column} widget represents the columns being
     added to the @class{gtk:column-view} widget.
@@ -165,9 +165,9 @@
 (setf (liber:alias-for-function 'column-view-column-column-view)
       "Accessor"
       (documentation 'column-view-column-column-view 'function)
- "@version{#2023-9-9}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-column-view object) => columnview}
-  @argument[object]{a @class{gtk:column-view} object}
+  @argument[object]{a @class{gtk:column-view-column} object}
   @argument[columnview]{a @class{gtk:column-view} widget displaying
     @arg{object}}
   @begin{short}
@@ -177,6 +177,7 @@
   The @fun{gtk:column-view-column-column-view} function gets the column view
   that is currently displaying this column. If @arg{object} has not been added
   to a column view yet, @code{nil} is returned.
+  @see-class{gtk:column-view-column}
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-column-expand ------------------------------------------
@@ -191,7 +192,7 @@
 (setf (liber:alias-for-function 'column-view-column-expand)
       "Accessor"
       (documentation 'column-view-column-expand 'function)
- "@version{#2023-9-6}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-expand object) => expand}
   @syntax{(setf (gtk:column-view-column-expand object) expand)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -204,7 +205,7 @@
   should expand. The @setf{gtk:column-view-column-expand} function sets the
   column to take available extra space. The extra space is shared equally
   amongst all columns that have the expand set to @em{true}.
-  @see-class{gtk:column-view}")
+  @see-class{gtk:column-view-column}")
 
 ;;; --- gtk:column-view-column-factory -----------------------------------------
 
@@ -218,7 +219,7 @@
 (setf (liber:alias-for-function 'column-view-column-factory)
       "Accessor"
       (documentation 'column-view-column-factory 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-factory object) => factory}
   @syntax{(setf (gtk:column-view-column-factory object) factory)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -249,7 +250,7 @@
 (setf (liber:alias-for-function 'column-view-column-fixed-width)
       "Accessor"
       (documentation 'column-view-column-fixed-width 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-fixed-width object) => width}
   @syntax{(setf (gtk:column-view-column-fixed-width object) width)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -281,7 +282,7 @@
 (setf (liber:alias-for-function 'column-view-column-header-menu)
       "Accessor"
       (documentation 'column-view-column-header-menu 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-header-menu object) => menu}
   @syntax{(setf (gtk:column-view-column-header-menu object) menu)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -311,7 +312,7 @@
 (setf (liber:alias-for-function 'column-view-column-id)
       "Accessor"
       (documentation 'column-view-column-id 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-id object) => id}
   @syntax{(setf (gtk:column-view-column-id object) id)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -341,7 +342,7 @@
 (setf (liber:alias-for-function 'column-view-column-resizable)
       "Accessor"
       (documentation 'column-view-column-resizable 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-resizable object) => resizable}
   @syntax{(setf (gtk:column-view-column-resizable object) resizable)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -366,7 +367,7 @@
 (setf (liber:alias-for-function 'column-view-column-sorter)
       "Accessor"
       (documentation 'column-view-column-sorter 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-sorter object) => sorter}
   @syntax{(setf (gtk:column-view-column-sorter object) sorter)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -378,13 +379,14 @@
   The @fun{gtk:column-view-column-sorter} function returns the sorter that is
   associated with the column. The @setf{gtk:column-view-column-sorter} function
   associates a sorter with the column. If sorter is @code{nil}, the column will
-  not let users change the sorting by clicking on its header. This sorter can be
-  made active by clicking on the column header, or by calling the
+  not let users change the sorting by clicking on its header. This sorter can
+  be made active by clicking on the column header, or by calling the
   @fun{gtk:column-view-sort-by-column} function.
 
   See the @fun{gtk:column-view-sorter} function for the necessary steps for
   setting up customizable sorting for the column view.
   @see-class{gtk:column-view-column}
+  @see-class{gtk:sorter}
   @see-function{gtk:column-view-sort-by-column}
   @see-function{gtk:column-view-sorter}")
 
@@ -400,7 +402,7 @@
 (setf (liber:alias-for-function 'column-view-column-title)
       "Accessor"
       (documentation 'column-view-column-title 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-title object) => title}
   @syntax{(setf (gtk:column-view-column-title object) title)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -428,7 +430,7 @@
 (setf (liber:alias-for-function 'column-view-column-visible)
       "Accessor"
       (documentation 'column-view-column-visible 'function)
- "@version{#2023-9-10}
+ "@version{2024-11-28}
   @syntax{(gtk:column-view-column-visible object) => visible}
   @syntax{(setf (gtk:column-view-column-visible object) visible)}
   @argument[object]{a @class{gtk:column-view-column} object}
@@ -448,12 +450,13 @@
 
 (declaim (inline column-view-column-new))
 
-(defun column-view-column-new (title factory)
+(defun column-view-column-new (&optional title factory)
  #+liber-documentation
- "@version{#2023-9-21}
-  @argument[title]{a string with the title to use for this column}
-  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
-    with}
+ "@version{2024-11-28}
+  @argument[title]{an optional string with the title to use for this column,
+    or the default @code{nil} value}
+  @argument[factory]{an optional @class{gtk:list-item-factory} object to
+    populate items with, or the default @code{nil} value}
   @return{The new @class{gtk:column-view-column} object using the given
     @arg{factory}.}
   @begin{short}
@@ -466,7 +469,7 @@
   @see-class{gtk:list-item-factory}
   @see-function{gtk:column-view-append-column}"
   (make-instance 'column-view-column
-                 :title title
+                 :title (or title (cffi:null-pointer))
                  :factory factory))
 
 (export 'column-view-column-new)

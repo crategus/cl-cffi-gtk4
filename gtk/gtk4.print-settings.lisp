@@ -472,7 +472,7 @@
 
 (defun print-settings-new-from-file (path)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2024-11-21}
   @argument[path]{a pathname or namestring with the file to read the settings
     from}
   @return{The restored @class{gtk:print-settings} object.}
@@ -484,7 +484,7 @@
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-load-file}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%print-settings-new-from-file (namestring path) err)))
 
 (export 'print-settings-new-from-file)
@@ -502,7 +502,7 @@
 
 (defun print-settings-new-from-key-file (keyfile group)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2024-11-21}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings
     from}
   @argument[group]{a string with the name of the group to use, or @code{nil} to
@@ -517,7 +517,7 @@
   @see-type{g:key-file}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-load-file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%print-settings-new-from-key-file keyfile
                                        (or group (cffi:null-pointer))
                                        err)))
@@ -1790,7 +1790,7 @@
 
 (defun print-settings-load-file (settings path)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2024-11-21}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[path]{a pathname or namestring with the filename to read the
     settings from}
@@ -1801,7 +1801,7 @@
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-new-from-file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%print-settings-load-file settings (namestring path) err)))
 
 (export 'print-settings-load-file)
@@ -1819,7 +1819,7 @@
 
 (defun print-settings-load-key-file (settings keyfile group)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2024-11-21}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings from}
   @argument[group]{a string with the name of the group to use, or @code{nil} to
@@ -1832,7 +1832,7 @@
   @see-type{g:key-file}
   @see-function{gtk:print-settings-to-key-file}
   @see-function{gtk:print-settings-new-from-key-file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%print-settings-load-key-file settings
                                    keyfile
                                    (or group (cffi:null-pointer))
@@ -1851,7 +1851,7 @@
 
 (defun print-settings-to-file (settings path)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2024-11-21}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[path]{a pathname or namestring with the file to save to}
   @return{@em{True} on success.}
@@ -1861,7 +1861,7 @@
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-load-file}
   @see-function{gtk:print-settings-new-from-file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%print-settings-to-file settings (namestring path) err)))
 
 (export 'print-settings-to-file)

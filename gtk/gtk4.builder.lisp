@@ -833,7 +833,7 @@
 
 (defun builder-add-from-file (builder path)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-21}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a pathname or namestring with the name of the file to parse}
   @begin{short}
@@ -850,7 +850,7 @@
   @see-class{gtk:builder}
   @see-function{gtk:builder-current-object}
   @see-function{gtk:builder-new-from-file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%builder-add-from-file builder (namestring path) err)))
 
 (export 'builder-add-from-file)
@@ -866,7 +866,7 @@
 
 (defun builder-add-from-resource (builder path)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-21}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a string with the path of the resouce file to parse}
   @begin{short}
@@ -884,7 +884,7 @@
   @see-class{g:resource}
   @see-function{gtk:builder-current-object}
   @see-function{gtk:builder-new-from-resource}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%builder-add-from-resource builder path err)))
 
 (export 'builder-add-from-resource)
@@ -957,7 +957,7 @@
 
 (defun builder-add-objects-from-file (builder path &rest args)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-21}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a pathname or namestring with the name of the file to parse}
   @argument[args]{strings with the object IDs to build}
@@ -977,7 +977,7 @@
   @see-function{gtk:builder-add-objects-from-string}
   @see-function{gtk:builder-add-objects-from-resource}"
   (with-foreign-string-array (strptr args)
-    (glib:with-g-error (err)
+    (glib:with-error (err)
       (%builder-add-objects-from-file builder (namestring path) strptr err))))
 
 (export 'builder-add-objects-from-file)
@@ -995,7 +995,7 @@
 
 (defun builder-add-objects-from-resource (builder path &rest args)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-21}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a string with the path of the resource file to parse}
   @argument[args]{strings with the object IDs to build}
@@ -1015,7 +1015,7 @@
   @see-function{gtk:builder-add-objects-from-file}
   @see-function{gtk:builder-add-objects-from-string}"
   (with-foreign-string-array (strptr args)
-    (glib:with-g-error (err)
+    (glib:with-error (err)
       (%builder-add-objects-from-resource builder path strptr err))))
 
 (export 'builder-add-objects-from-resource)
@@ -1027,14 +1027,14 @@
 (cffi:defcfun ("gtk_builder_add_objects_from_string"
                %builder-add-objects-from-string) :uint
   (builder (g:object builder))
-  (string :string)
-  (length :int)
+  (str :string)
+  (len :int)
   (strptr :pointer)
   (err :pointer))
 
 (defun builder-add-objects-from-string (builder string &rest args)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-11-21}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
   @argument[args]{strings with the object IDs to build}
@@ -1053,7 +1053,7 @@
   @see-function{gtk:builder-add-objects-from-file}
   @see-function{gtk:builder-add-objects-from-resource}"
   (with-foreign-string-array (strptr args)
-    (glib:with-g-error (err)
+    (glib:with-error (err)
       (%builder-add-objects-from-string builder string -1 strptr err))))
 
 (export 'builder-add-objects-from-string)

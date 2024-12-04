@@ -347,7 +347,7 @@
 
 (defun font-dialog-choose-face-finish (dialog result)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{short}
@@ -358,7 +358,7 @@
   Since 4.10
   @see-class{gtk:font-dialog}
   @see-function{gtk:font-dialog-choose-face}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%font-dialog-choose-face-finish dialog result err)))
 
 (export 'font-dialog-choose-face-finish)
@@ -416,7 +416,7 @@
 
 (defun font-dialog-choose-family-finish (dialog result)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{short}
@@ -430,7 +430,7 @@
   Since 4.10
   @see-class{gtk:font-dialog}
   @see-function{gtk:font-dialog-choose-family}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%font-dialog-choose-family-finish dialog result err)))
 
 (export 'font-dialog-choose-family-finish)
@@ -492,7 +492,7 @@
 
 (defun font-dialog-choose-font-finish (dialog result)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{pango:font-description} object with the selected font.}
@@ -504,7 +504,7 @@
   Since 4.10
   @see-class{gtk:font-dialog}
   @see-function{gtk:font-dialog-choose-family}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%font-dialog-choose-font-finish dialog result err)))
 
 (export 'font-dialog-choose-font-finish)
@@ -572,7 +572,7 @@
 
 (defun font-dialog-choose-font-and-features-finish (dialog result)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{return}
@@ -591,7 +591,7 @@
   (let ((desc (pango:font-description-new))
         (features nil)
         (language (pango:language-default)))
-    (glib:with-ignore-g-error (err)
+    (glib:with-ignore-error (err)
       (when (%font-dialog-choose-font-and-features-finish dialog
                                                           result
                                                           desc

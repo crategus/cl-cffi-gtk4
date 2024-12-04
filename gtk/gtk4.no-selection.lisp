@@ -197,13 +197,14 @@
 
 (declaim (inline no-selection-new))
 
-(defun no-selection-new (model)
+(defun no-selection-new (&optional model)
  #+liber-documentation
- "@version{2023-9-6}
-  @argument[model]{a @class{g:list-model} object to manage, or @code{nil}}
+ "@version{2024-11-27}
+  @argument[model]{an optional @class{g:list-model} object to manage, or
+    the default @code{nil} value}
   @return{The new @class{gtk:no-selection} object.}
   @begin{short}
-    Creates a new selection to handle @arg{model}.
+    Creates a new selection to handle the given @arg{model}.
   @end{short}
   @see-class{gtk:no-selection}"
   (make-instance 'no-selection

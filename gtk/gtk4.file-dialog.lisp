@@ -483,7 +483,7 @@
 
 (defun file-dialog-open-finish (dialog result)
  #+liber-documentation
- "@version{2023-7-27}
+ "@version{2024-11-21}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{g:file} object with the file that was selected, otherwise
@@ -498,7 +498,7 @@
   @see-class{g:file}
   @see-class{g:async-result}
   @see-function{gtk:file-dialog-open}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-dialog-open-finish dialog result err)))
 
 (export 'file-dialog-open-finish)
@@ -560,7 +560,7 @@
 
 (defun file-dialog-open-multiple-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{g:list-model} object with the @class{g:file} objects that
@@ -576,7 +576,7 @@
   @see-class{g:list-model}
   @see-class{g:async-result}
   @see-function{gtk:file-dialog-open-multiple}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-dialog-open-multiple-finish dialog result err)))
 
 (export 'file-dialog-open-multiple-finish)
@@ -635,7 +635,7 @@
 
 (defun file-dialog-save-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{g:file} object with the file that was selected, otherwise
@@ -650,7 +650,7 @@
   @see-class{g:file}
   @see-class{g:async-result}
   @see-function{gtk:file-dialog-save}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-dialog-save-finish dialog result err)))
 
 (export 'file-dialog-save-finish)
@@ -712,7 +712,7 @@
 
 (defun file-dialog-select-folder-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{g:file} object with the file that was selected, otherwise
@@ -727,7 +727,7 @@
   @see-class{g:file}
   @see-class{g:async-result}
   @see-function{gtk:file-dialog-select-folder}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-dialog-select-folder-finish dialog result err)))
 
 (export 'file-dialog-select-folder-finish)
@@ -792,7 +792,7 @@
 
 (defun file-dialog-select-multiple-folders-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2024-11-21}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{g:file} object with the file that was selected, otherwise
@@ -808,7 +808,7 @@
   @see-class{g:list-model}
   @see-class{g:async-result}
   @see-function{gtk:file-dialog-select-multiple-folders}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-dialog-select-multiple-folders-finish dialog result err)))
 
 (export 'file-dialog-select-multiple-folders-finish)

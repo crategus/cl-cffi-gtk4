@@ -275,7 +275,7 @@
 
 (defun file-launcher-launch-finish (launcher result)
  #+liber-documentation
- "@version{#2023-10-12}
+ "@version{#2024-11-21}
   @argument[launcher]{a @class{gtk:file-launcher} object}
   @argument[result]{a @class{g:async-result} object}
   @return{@em{True} if an application was launched, or @em{false} on error.}
@@ -288,7 +288,7 @@
   @see-class{gtk:file-launcher}
   @see-class{g:async-result}
   @see-function{gtk:file-launcher-launch}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-launcher-launch-finish launcher result err)))
 
 (export 'file-launcher-launch-finish)
@@ -351,7 +351,7 @@
 
 (defun file-launcher-open-containing-folder-finish (launcher result)
  #+liber-documentation
- "@version{#2023-10-12}
+ "@version{#2024-11-21}
   @argument[launcher]{a @class{gtk:file-launcher} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{short}
@@ -363,7 +363,7 @@
   @see-class{gtk:file-launcher}
   @see-class{g:async-result}
   @see-function{gtk:file-launcher-open-containing-folder}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%file-launcher-open-containing-folder-finish launcher result err)))
 
 (export 'file-launcher-open-containing-folder-finish)
