@@ -26,9 +26,9 @@ GListModel support
   gtk4.column-view-sorter.lisp         GtkColumnViewSorter            GTK 4.16
 
   gtk4.section-model.lisp              GtkSectionModel                GTK 4.16 .
-  gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.16 +
-  gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.16 +
-  gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.16 +
+  gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.16 .
+  gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.16 .
+  gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.16 .
   gtk4.multi-selection.lisp            GtkMultiSelection              GTK 4.16 +
 
   gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.16 +
@@ -50,7 +50,7 @@ List-based Widgets
   gtk4.builder-list-item-factory.lisp  GtkBuilderListItemFactory      GTK 4.16 +
   gtk4.scroll-info.lisp                GtkScrollInfo                  GTK 4.16 +
   gtk4.list-view.lisp                  GtkListView                    GTK 4.16 +
-  gtk4.grid-view.lisp                  GtkGridView                    GTK 4.16 +
+  gtk4.grid-view.lisp                  GtkGridView                    GTK 4.16 .
   gtk4.column-view.lisp                GtkColumnView                  GTK 4.16 +
   gtk4.column-view-column.lisp         GtkColumnViewColumn            GTK 4.16 +
   gtk4.drop-down.lisp                  GtkDropDown                    GTK 4.16 +
@@ -151,7 +151,7 @@ Numeric and Text Data Entry
   gtk4.editable.lisp                   GtkEditable                    GTK 4.16 &
   gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
   gtk4.text.lisp                       GtkText                        GTK 4.16
-  gtk4.entry.lisp                      GtkEntry                       GTK 4.16 .
+  gtk4.entry.lisp                      GtkEntry                       GTK 4.16
   gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16 .
   gtk4.scale.lisp                      GtkScale                       GTK 4.16 .
   gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.16 .

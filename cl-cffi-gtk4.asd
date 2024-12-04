@@ -72,7 +72,6 @@
      ;; Draw Contexts
      (:file "gdk4.draw-context")
      (:file "gdk4.gl-context")
-     (:file "gdk4.vulkan-context")
      (:file "gdk4.cairo-context")
 
      ;; Clipboard, Drag and Drop
@@ -118,7 +117,6 @@
      (:file "gtk4.version")
      (:file "gtk4.enumerations")
      (:file "gtk4.main-loop")
-     (:file "gtk4.mount-operation")
 
      ;; Theming in GTK
      (:file "gtk4.style-provider")
@@ -538,14 +536,14 @@
      ;; List-based widgets
      (:file "rtest-gtk4-list-item")
      (:file "rtest-gtk4-list-item-factory")
-;    gtk4.signal-list-item-factory.lisp
-;    gtk4.builder-list-item-factory.lisp
+     (:file "rtest-gtk4-signal-list-item-factory")
+     (:file "rtest-gtk4-builder-list-item-factory")
      (:file "rtest-gtk4-scroll-info"              :if-feature :gtk-4-12)
      (:file "rtest-gtk4-list-header"              :if-feature :gtk-4-12)
      (:file "rtest-gtk4-list-view")
-;    gtk4.grid-view.lisp
-;    gtk4.column-view.lisp
-;    gtk4.column-view-column.lisp
+     (:file "rtest-gtk4-grid-view")
+     (:file "rtest-gtk4-column-view")
+     (:file "rtest-gtk4-column-view-column")
      (:file "rtest-gtk4-column-view-cell"         :if-feature :gtk-4-12)
      (:file "rtest-gtk4-column-view-row"          :if-feature :gtk-4-12)
      (:file "rtest-gtk4-drop-down")
@@ -559,7 +557,6 @@
      (:file "rtest-gtk4-version")
      (:file "rtest-gtk4-enumerations")
      (:file "rtest-gtk4-main-loop")
-;     (:file "gtk4.mount-operation")
 
      ;; Theming in GTK
      (:file "rtest-gtk4-style-provider")
@@ -876,7 +873,8 @@
      (:file "rtest-gdk4-paintable")
      (:file "rtest-gdk4-paintable-subclassing")
      (:file "rtest-gdk4-texture")
-;    (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk4-10)
+     (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk-4-10)
+     (:file "rtest-gdk4-dmabuf-texture"          :if-feature :gtk-4-14)
 
      ;; Events
      (:file "rtest-gdk4-event")
@@ -889,17 +887,16 @@
      (:file "rtest-gdk4-popup")
      (:file "rtest-gdk4-popup-layout")
 
-     ;; Daw contexts
-;    (:file "rtest-gdk4-draw-context")
-;    (:file "rtest-gdk4-gl-context")
-;    (:file "rtest-gdk4-vulkan-context")
+     ;; Draw contexts
+     (:file "rtest-gdk4-draw-context")
+     (:file "rtest-gdk4-gl-context")
      (:file "rtest-gdk4-cairo-context")
 
      ;; Clipboard, Drag and Drop
-;    (:file "rtest-gdk4-content-formats")
-;    (:file "rtest-gdk4-content-provider")
-;    (:file "rtest-gdk4-content-serializer")
-;    (:file "rtest-gdk4-content-deserializer")
+     (:file "rtest-gdk4-content-formats")
+     (:file "rtest-gdk4-content-provider")
+     (:file "rtest-gdk4-content-serializer")
+     (:file "rtest-gdk4-content-deserializer")
      (:file "rtest-gdk4-clipboard")
      (:file "rtest-gdk4-drag")
      (:file "rtest-gdk4-drop")
@@ -914,9 +911,9 @@
      (:file "rtest-gdk4-frame-clock")
 
      ;; Pixbuf, Pango, Cairo, Backends interaction
-;    (:file "rtest-gdk4-pixbuf-interaction")
-;    (:file "rtest-gdk4-pango-interaction")
-;    (:file "rtest-gdk4-cairo-interaction")
+     (:file "rtest-gdk4-pixbuf-interaction")
+     (:file "rtest-gdk4-pango-interaction")
+     (:file "rtest-gdk4-cairo-interaction")
 
      ;; GSK
      (:file "rtest-gsk4-renderer")

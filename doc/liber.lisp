@@ -44,13 +44,23 @@
 (unexport 'glib:get-stable-pointer-value :glib)
 (unexport 'glib:free-stable-pointer :glib)
 (unexport 'glib:with-stable-pointer :glib)
-(unexport 'glib:with-catching-to-g-error :glib)
-(unexport 'glib:with-g-error :glib)
-(unexport 'glib:with-ignore-g-error :glib)
 
-(unexport 'glib:with-foreign-boxed-array :glib)
+(unexport 'glib:with-error :glib)
+(unexport 'glib:with-ignore-error :glib)
+(unexport 'glib:with-catching-to-error :glib)
+
+(unexport 'glib:with-gboxed-array :glib)
+
+(unexport 'glib:define-gboxed-opaque :glib)
+(unexport 'glib:define-gboxed-cstruct :glib)
+(unexport 'glib:define-gboxed-variant-cstruct :glib)
 
 (unexport 'glib:gtype :glib)
+(unexport 'glib:get-boxed-info :glib)
+(unexport 'glib:symbol-for-gtype :glib)
+(unexport 'glib:type-initializer-call :glib)
+(unexport 'glib:boxed :glib)
+(unexport 'glib:*warn-unknown-gtype* :glib)
 
 (unexport 'gobject:*debug-gc* :gobject)
 (unexport 'gobject:*debug-subclass* :gobject)
@@ -73,6 +83,17 @@
 (unexport 'gobject:set-g-value :gobject)
 (unexport 'gobject::g-initially-unowned :gobject)
 (unexport 'gobject:lisp-closure :gobject)
+
+(unexport 'gobject:create-closure :gobject)
+(unexport 'gobject:get-genum-definition :gobject)
+(unexport 'gobject:get-gflags-definition :gobject)
+(unexport 'gobject:get-gtype-definition :gobject)
+(unexport 'gobject:get-lisp-name-exception :gobject)
+(unexport 'gobject:define-genum :gobject)
+(unexport 'gobject:define-gflags :gobject)
+(unexport 'gobject:define-ginterface :gobject)
+(unexport 'gobject:define-gobject :gobject)
+(unexport 'gobject:register-object-type-implementation :gobject)
 
 ;; Unexport the symbols from gdk-pixbuf for the documentation to avoid
 ;; duplication of the symbols, these symbols are documented in its own package.
