@@ -838,7 +838,7 @@ lambda (display setting)    :run-last
   @end{dictionary}
   @see-class{gdk:display}
   @see-symbol{g:type-t}"
-  (gobject:with-g-value (gvalue gtype)
+  (gobject:with-value (gvalue gtype)
     (when (%display-setting display name gvalue)
       (g:value-get gvalue))))
 
@@ -1055,9 +1055,9 @@ lambda (display setting)    :run-last
 #+gtk-4-4
 (defun display-prepare-gl (display)
  #+liber-documentation
- "@version{#2023-7-25}
+ "@version{#2024-11-21}
   @argument[display]{a @class{gdk:display} object}
-  @return{@em{True} if the display supports OpenGL}
+  @return{@em{True} if the display supports OpenGL.}
   @begin{short}
     Checks that OpenGL is available for @arg{display} and ensures that it is
     properly initialized.
@@ -1076,7 +1076,7 @@ lambda (display setting)    :run-last
   Since 4.4
   @see-class{gdk:display}
   @see-class{gdk:gl-context}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%display-prepare-gl display err)))
 
 #+gtk-4-4
@@ -1095,27 +1095,26 @@ lambda (display setting)    :run-last
 #+gtk-4-6
 (defun display-create-gl-context (display)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2024-11-21}
   @argument[display]{a @class{gdk:display} object}
   @return{The newly created @class{gdk:gl-context} object.}
   @begin{short}
-    Creates a new @class{gdk:gl-context} object for the display.
+    Creates a new OpenGL context for the display.
   @end{short}
   The context is disconnected from any particular surface and cannot be used to
   draw to any surface. It can only be used to draw to non-surface framebuffers
   like textures.
 
-  If the creation of the @class{gdk:gl-context} object failed, an error will be
-  set. Before using the returned @class{gdk:gl-context} object, you will need
-  to call the @fun{gdk:gl-context-make-current} or @fun{gdk:gl-context-realize}
-  functions.
+  If the creation of the OpenGL context failed, an error will be set. Before
+  using the returned OpenGL context, you will need to call the
+  @fun{gdk:gl-context-make-current} or @fun{gdk:gl-context-realize} functions.
 
   Since 4.6
   @see-class{gdk:display}
   @see-class{gdk:gl-context}
   @see-function{gdk:gl-context-make-current}
   @see-function{gdk:gl-context-realize}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%display-create-gl-context display err)))
 
 #+gtk-4-6

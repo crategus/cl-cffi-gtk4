@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -48,8 +48,10 @@
 ;;;     gdk_content_deserializer_get_user_data
 ;;;     gdk_content_deserializer_set_task_data
 ;;;     gdk_content_deserializer_get_task_data
+;;;
 ;;;     gdk_content_deserializer_return_success
 ;;;     gdk_content_deserializer_return_error
+;;;
 ;;;     gdk_content_register_deserializer
 ;;;     gdk_content_deserialize_async
 ;;;     gdk_content_deserialize_finish
@@ -68,16 +70,33 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentDeserializer
-;;;
-;;; Should not be accessed directly.
-;;;
-;;; A GdkContentDeserializer is used to deserialize content received via
-;;; inter-application data transfers.
-;;;
-;;; See Also
-;;;
-;;;     GdkContentSerializer
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject "GdkContentDeserializer" content-deserializer
+  (:superclass g:object
+   :export t
+   :interfaces ("GAsyncResult")
+   :type-initializer "gdk_content_deserializer_get_type")
+  nil)
+
+#+liber-documentation
+(setf (documentation 'content-deserializer 'type)
+ "@version{2024-12-2}
+  @begin{short}
+    The @class{gdk:content-deserializer} object is used to deserialize content
+    received via inter-application data transfers.
+  @end{short}
+  The @class{gdk:content-deserializer} object transforms serialized content that
+  is identified by a mime type into an object identified by a @class{g:type-t}
+  type ID.
+
+  GTK provides serializers and deserializers for common data types such as text,
+  colors, images or file lists. To register your own deserialization functions,
+  use the @fun{gdk:content-register-deserializer} function.
+
+  Also see the @class{gdk:content-serializer} object.
+  @see-class{gdk:content-serializer}
+  @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentDeserializeFunc

@@ -80,19 +80,20 @@
 
 #+liber-documentation
 (setf (documentation 'draw-context 'type)
- "@version{2023-8-3}
+ "@version{2024-11-29}
   @begin{short}
     The @class{gdk:draw-context} object is the base object used by contexts
-    implementing different rendering methods, such as @class{gdk:gl-context} or
-    @class{gdk:vulkan-context} contexts.
+    implementing different rendering methods, such as the @class{gdk:gl-context}
+    context.
   @end{short}
   It provides shared functionality between those contexts. You will always
   interact with one of those subclasses.
 
   A @class{gdk:draw-context} object is always associated with a single toplevel
   surface.
+  @see-slot{gdk:draw-context-display}
+  @see-slot{gdk:draw-context-surface}
   @see-class{gdk:gl-context}
-  @see-class{gdk:vulkan-context}
   @see-class{gdk:cairo-context}")
 
 ;;; ----------------------------------------------------------------------------
@@ -111,7 +112,7 @@
 (setf (liber:alias-for-function 'draw-context-display)
       "Accessor"
       (documentation 'draw-context-display 'function)
- "@version{2023-8-3}
+ "@version{2024-11-29}
   @syntax{(gdk:draw-context-display object) => display}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[display]{a @class{gdk:display} object or @code{nil}}
@@ -136,7 +137,7 @@
 (setf (liber:alias-for-function 'draw-context-surface)
       "Accessor"
       (documentation 'draw-context-surface 'function)
- "@version{2023-8-3}
+ "@version{2024-11-29}
   @syntax{(gdk:draw-context-surface object) => surface}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[surface]{a @class{gdk:surface} object or @code{nil}}

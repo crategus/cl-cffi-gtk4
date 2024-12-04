@@ -42,7 +42,7 @@
 ;;;     gdk_gl_context_get_allowed_apis                    Since 4.6
 ;;;     gdk_gl_context_set_allowed_apis                    Since 4.6
 ;;;     gdk_gl_context_get_api                             Since 4.6
-;;;     gdk_gl_context_get_shared_context                  Since 4.4 deprecated
+;;;     gdk_gl_context_get_shared_context                  Deprecated 4.4
 ;;;
 ;;; Functions
 ;;;
@@ -69,7 +69,7 @@
 ;;;
 ;;;     allowed-apis                                       Since 4.6
 ;;;     api                                                Since 4.6
-;;;     shared-context                                     Since 4.4 deprecated
+;;;     shared-context                                     Deprecated 4.4
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -318,7 +318,7 @@
   @see-class{gdk:gl-context}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_get_display ()
+;;; gdk_gl_context_get_display
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_get_display" gl-context-display)
@@ -337,7 +337,7 @@
 (export 'gl-context-display)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_get_surface ()
+;;; gdk_gl_context_get_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_get_surface" gl-context-surface)
@@ -356,7 +356,7 @@
 (export 'gl-context-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_get_version ()
+;;; gdk_gl_context_get_version
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_get_version" %gl-context-version) :void
@@ -385,8 +385,8 @@
 (export 'gl-context-version)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_set_required_version ()
-;;; gdk_gl_context_get_required_version ()
+;;; gdk_gl_context_set_required_version
+;;; gdk_gl_context_get_required_version
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-context-required-version) (value context)
@@ -433,8 +433,8 @@
 (export 'gl-context-version)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_set_debug_enabled ()
-;;; gdk_gl_context_get_debug_enabled ()
+;;; gdk_gl_context_set_debug_enabled
+;;; gdk_gl_context_get_debug_enabled
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-context-debug-enabled) (enabled context)
@@ -468,8 +468,8 @@
 (export 'gl-context-debug-enabled)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_set_forward_compatible ()
-;;; gdk_gl_context_get_forward_compatible ()
+;;; gdk_gl_context_set_forward_compatible
+;;; gdk_gl_context_get_forward_compatible
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-context-forward-compatible) (setting context)
@@ -507,8 +507,8 @@
 (export 'gl-context-forward-compatible)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_set_use_es ()
-;;; gdk_gl_context_get_use_es ()
+;;; gdk_gl_context_set_use_es
+;;; gdk_gl_context_get_use_es
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: The return value is of type boolean, but an integer when setting.
@@ -548,7 +548,7 @@
 (export 'gl-context-use-es)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_is_legacy ()
+;;; gdk_gl_context_is_legacy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_is_legacy" gl-context-is-legacy) :boolean
@@ -580,7 +580,7 @@
 (export 'gl-context-is-legacy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_realize ()
+;;; gdk_gl_context_realize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_realize" %gl-context-realize) :boolean
@@ -589,21 +589,21 @@
 
 (defun gl-context-realize (context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2024-11-21}
   @argument[context]{a @class{gdk:gl-context} object}
-  @return{@em{True} if the GL context is realized.}
+  @return{@em{True} if the OpenGL context is realized.}
   @begin{short}
-    Realizes the given GL context.
+    Realizes the given OpenGL context.
   @end{short}
-  It is safe to call this function on a realized GL context.
+  It is safe to call this function on a realized OpenGL context.
   @see-class{gdk:gl-context}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%gl-context-realize context err)))
 
 (export 'gl-context-realize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_make_current ()
+;;; gdk_gl_context_make_current
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_make_current" gl-context-make-current) :void
@@ -619,7 +619,7 @@
 (export 'gl-context-make-current)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_get_current ()
+;;; gdk_gl_context_get_current
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_get_current" gl-context-current)
@@ -635,7 +635,7 @@
 (export 'gl-context-current)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_gl_context_clear_current ()
+;;; gdk_gl_context_clear_current
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_context_clear_current" gl-context-clear-current) :void

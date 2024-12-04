@@ -122,6 +122,11 @@
 ;;; GdkDmabufTextureBuilder
 ;;; ----------------------------------------------------------------------------
 
+(glib:define-gboxed-opaque texture-downloader "GdkTextureDownloader"
+  :export t
+  :type-initializer "gdk_texture_downloader_get_type"
+  :alloc (error "GdkTextureDownloader cannot be created from the Lisp side."))
+
 (gobject:define-gobject "GdkDmabufTextureBuilder" dmabuf-texture-builder
   (:superclass g:object
    :export t
@@ -145,6 +150,8 @@
    (premultiplied
     dmabuf-texture-builder-premultiplied
     "premultiplied" "gboolean" t t)
+   ;; FIXME: CairoRegion is a boxed type. We need a type initializer, but
+   ;; there is no type initializer exported from the C library
    (update-region
     dmabuf-texture-builder-update-region
     "update-region" "CairoRegion" t t)

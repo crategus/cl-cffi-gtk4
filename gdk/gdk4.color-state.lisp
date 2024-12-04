@@ -62,7 +62,7 @@
 (setf (liber:alias-for-class 'color-state)
       "GBoxed"
       (documentation 'color-state 'type)
- "@version{2024-11-6}
+ "@version{2024-11-28}
   @begin{declaration}
 (glib:define-gboxed-opaque color-state \"GdkColorState\"
   :export t
@@ -70,7 +70,7 @@
   :alloc (error \"GdkColorState cannot be created from the Lisp side\"))
   @end{declaration}
   @begin{short}
-    The @class{gdk:color-state} instance provides the information to interpret
+    The @class{gdk:color-state} structure provides the information to interpret
     colors and pixels in a variety of ways.
   @end{short}
   They are also known as color spaces.

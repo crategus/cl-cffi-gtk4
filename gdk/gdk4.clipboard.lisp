@@ -325,7 +325,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-store-finish (clipboard result)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2024-11-21}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{@em{True} if storing was successful.}
@@ -336,7 +336,7 @@ lambda (clipboard)    :run-last
   @see-class{gdk:clipboard}
   @see-class{g:async-result}
   @see-function{gdk:clipboard-store-async}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%clipboard-store-finish clipboard result err)))
 
 (export 'clipboard-store-finish)
@@ -467,7 +467,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-value-finish (clipboard result)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2024-11-21}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{The @symbol{g:value} instance which holds the value of the content of
@@ -479,7 +479,7 @@ lambda (clipboard)    :run-last
   @see-class{gdk:clipboard}
   @see-class{g:async-result}
   @see-function{gdk:clipboard-read-value-async}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%clipboard-read-value-finish clipboard result err)))
 
 (export 'clipboard-read-value-finish)
@@ -539,11 +539,11 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-texture-finish (clipboard result)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2024-11-21}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{The @class{gdk:texture} object which holds the value of the content of
-    @arg{clipboard}.}
+  @return{The @class{gdk:texture} object which holds the value of the content
+    of @arg{clipboard}.}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
     @fun{gdk:clipboard-read-texture-async} function.
@@ -551,7 +551,7 @@ lambda (clipboard)    :run-last
   @see-class{gdk:clipboard}
   @see-class{g:async-result}
   @see-function{gdk:clipboard-read-texture-async}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%clipboard-read-texture-finish clipboard result err)))
 
 (export 'clipboard-read-texture-finish)
@@ -608,7 +608,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-text-finish (clipboard result)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2024-11-21}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{The string which holds the value of the content of @arg{clipboard}.}
@@ -619,7 +619,7 @@ lambda (clipboard)    :run-last
   @see-class{gdk:clipboard}
   @see-class{g:async-result}
   @see-function{gdk:clipboard-read-text-async}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%clipboard-read-text-finish clipboard result err)))
 
 (export 'clipboard-read-text-finish)

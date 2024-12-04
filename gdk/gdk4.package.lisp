@@ -420,12 +420,12 @@
       @about-function{gl-texture-release}
     @end{subsection}
     @begin[GdkTextureDownloader]{subsection}
-      @about-symbol{texture-downloader}
+      @about-class{texture-downloader}
       @about-function{texture-downloader-new}
       @about-function{texture-downloader-copy}
       @about-function{texture-downloader-download-bytes}
       @about-function{texture-downloader-download-into}
-      @about-function{texture-downloader-free}
+      @about-function{texture-downloader-color-state}
       @about-function{texture-downloader-format}
       @about-function{texture-downloader-texture}
     @end{subsection}
@@ -580,20 +580,6 @@
       @about-function{gl-context-current}
       @about-function{gl-context-clear-current}
       @about-function{gl-context-is-shared}
-    @end{subsection}
-    @begin[GdkVulkanContext]{subsection}
-      @about-symbol{vulkan-error}
-      @about-class{vulkan-context}
-      @about-function{vulkan-context-device}
-      @about-function{vulkan-context-draw-index}
-      @about-function{vulkan-context-draw-semaphore}
-      @about-function{vulkan-context-image}
-      @about-function{vulkan-context-image-format}
-      @about-function{vulkan-context-instance}
-      @about-function{vulkan-context-n-images}
-      @about-function{vulkan-context-physical-device}
-      @about-function{vulkan-context-queue}
-      @about-function{vulkan-context-queue-family-index}
     @end{subsection}
     @begin[GdkCairoContext]{subsection}
       @about-class{cairo-context}

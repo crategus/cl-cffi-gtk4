@@ -379,9 +379,9 @@
 
 (defun texture-new-from-file (file)
  #+liber-documentation
- "@version{#2023-4-12}
+ "@version{#2024-11-21}
   @argument[file]{a @class{g:file} object to load}
-  @return{A newly created @class{gdk:texture} object, or @code{nil} if an
+  @return{The newly created @class{gdk:texture} object, or @code{nil} if an
     error occurred.}
   @begin{short}
     Creates a new texture by loading an image from a file.
@@ -390,7 +390,7 @@
   JPEG, though more formats might be available.
   @see-class{gdk:texture}
   @see-class{g:file}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%texture-new-from-file file err)))
 
 (export 'texture-new-from-file)
@@ -408,7 +408,7 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2024-11-21}
   @argument[path]{a pathname or namestring with the file to load, the value is
     a file system path, using the OS encoding}
   @return{The newly created @class{gdk:texture} object.}
@@ -424,7 +424,7 @@
 
   Since 4.6
   @see-class{gdk:texture}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%texture-new-from-filename (namestring path) err)))
 
 #+gtk-4-6
@@ -443,7 +443,7 @@
 #+gtk-4-6
 (defun texture-new-from-bytes (bytes)
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2024-11-21}
   @argument[bytes]{a @class{g:bytes} instance containing data to load}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -461,7 +461,7 @@
   @see-class{g:bytes}
   @see-class{g:task}
   @see-function{g:task-run-in-thread}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%texture-new-from-bytes bytes err)))
 
 #+gtk-4-6

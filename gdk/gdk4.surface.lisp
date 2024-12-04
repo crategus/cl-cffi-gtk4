@@ -666,23 +666,22 @@ lambda (surface region)    :run-last
 
 (defun surface-create-gl-context (surface)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2024-11-21}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The newly created @class{gdk:gl-context} object.}
   @begin{short}
-    Creates a new @class{gdk:gl-context} object matching the framebuffer format
-    to the visual of the surface.
+    Creates a new OpenGL context matching the framebuffer format to the visual
+    of the surface.
   @end{short}
   The context is disconnected from any particular surface.
 
-  Before using the returned @class{gdk:gl-context} object, you will need to call
-  the @fun{gdk:gl-context-make-current} or @fun{gdk:gl-context-realize}
-  function.
+  Before using the returned OpenGL context, you will need to call the
+  @fun{gdk:gl-context-make-current} or @fun{gdk:gl-context-realize} function.
   @see-class{gdk:surface}
   @see-class{gdk:gl-context}
   @see-function{gdk:gl-context-make-current}
   @see-function{gdk:gl-context-realize}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%surface-create-gl-context surface err)))
 
 (export 'surface-create-gl-context)

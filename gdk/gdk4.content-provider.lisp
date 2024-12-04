@@ -122,7 +122,7 @@ lambda (provider)    :run-last
  "@version{#2023-8-4}
   @syntax{(gdk:content-provider-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
-  @argument[formats]{a @class{gdk:conten-formats} instance with the formats of
+  @argument[formats]{a @class{gdk:content-formats} instance with the formats of
     the content provider}
   @begin{short}
     Gets the formats that the content provider can provide its current contents
@@ -148,7 +148,7 @@ lambda (provider)    :run-last
  "@version{#2023-8-4}
   @syntax{(gdk:content-provider-storable-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
-  @argument[formats]{a @class{gdk:conten-formats} instance with the storable
+  @argument[formats]{a @class{gdk:content-formats} instance with the storable
     formats of the content provider}
   @begin{short}
     Gets the formats that the content provider suggests other applications to

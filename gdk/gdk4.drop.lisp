@@ -458,7 +458,7 @@
 
 (defun drop-read-value-finish (drop result)
  #+liber-documentation
- "@version{#2023-8-7}
+ "@version{#2024-11-21}
   @argument[drop]{a @class{gdk:drop} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @symbol{g:value} value containing the result.}
@@ -470,7 +470,7 @@
   @see-class{g:async-result}
   @see-symbol{g:value}
   @see-function{gdk:drop-read-value-async}"
-  (glib:with-ignore-g-error (err)
+  (glib:with-ignore-error (err)
     (%drop-read-value-finish drop result err)))
 
 (export 'drop-read-value-finish)

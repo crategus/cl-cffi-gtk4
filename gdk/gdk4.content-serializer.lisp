@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -68,16 +68,33 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentSerializer
-;;;
-;;; Should not be accessed directly.
-;;;
-;;; A GdkContentSerializer is used to serialize content for inter-application
-;;; data transfers.
-;;;
-;;; See Also
-;;;
-;;;     GdkContentDeserializer, GdkContentProvider
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-gobject "GdkContentSerializer" content-serializer
+  (:superclass g:object
+   :export t
+   :interfaces ("GAsyncResult")
+   :type-initializer "gdk_content_serializer_get_type")
+  nil)
+
+#+liber-documentation
+(setf (documentation 'content-serializer 'type)
+ "@version{2024-12-2}
+  @begin{short}
+    The @class{gdk:content-serializer} object is used to serialize content for
+    inter-application data transfers.
+  @end{short}
+  The @class{gdk:content-serializer} object transforms an object that is
+  identified by a @class{g:type-t} type ID into a serialized form, that is a
+  byte stream, that is identified by a mime type.
+
+  GTK provides serializers and deserializers for common data types such as text,
+  colors, images or file lists. To register your own serialization functions,
+  use the @fun{gdk:content-register-serializer} function.
+
+  Also see the @class{gdk:content-deserializer} object.
+  @see-class{gdk:content-deserializer}
+  @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentSerializeFunc ()
