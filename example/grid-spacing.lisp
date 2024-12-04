@@ -1,6 +1,16 @@
 ;;;; Grid Spacing
 ;;;;
-;;;; 2024-4-4
+;;;; The <tt>gtk:grid</tt> widget is a container which arranges its child
+;;;; widgets in rows and columns, with arbitrary positions and horizontal or
+;;;; vertical spans. Children are added using the <tt>gtk:grid-attach</tt>
+;;;; function. They can span multiple rows or columns. It is also possible to
+;;;; add a child widget next to an existing child widget, using the
+;;;; <tt>gtk:grid-attach-next-to</tt> function. To remove a child widget from
+;;;; the grid, use the <tt>gtk:grid-remove</tt> function. The behaviour of the
+;;;; <tt>gtk:grid</tt> widget when several children occupy the same grid cell
+;;;; is undefined.
+;;;;
+;;;; 2024-12-3
 
 (in-package :gtk4-example)
 
@@ -46,7 +56,7 @@
                (setf (gtk:grid-column-spacing grid) 6)
                (setf (gtk:button-label widget) "More Col Spacing")))))
     ;; Pack and show the widgets
-    (gtk:grid-attach grid button1 0 0 1 1)
-    (gtk:grid-attach grid button2 1 0 1 1)
+    (gtk:grid-attach grid button1 0 0)
+    (gtk:grid-attach grid button2 1 0)
     (gtk:grid-attach grid button3 0 1 2 1)
     (gtk:window-present window)))

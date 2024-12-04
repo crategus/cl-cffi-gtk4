@@ -131,8 +131,7 @@
                                 :type :toplevel
                                 :title "Various Dialogs"
                                 :child vbox
-                                :default-width 270
-                                :border-width 12))
+                                :default-width 270))
          (check (make-instance 'gtk:check-button
                                :margin-bottom 12
                                :label "Show Dialog with Header Bar")))

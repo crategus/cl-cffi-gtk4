@@ -41,7 +41,6 @@
             (let ((image (gtk:image-new-from-icon-name "help-about")))
               (setf (gtk:image-pixel-size image) 256)
               (gtk:stack-add-titled stack image name name))
-;              (setf (gtk:stack-child-title stack image) name))
             (let ((label (make-instance 'gtk:label
                                         :label name)))
               (gtk:stack-add-titled stack label name name))))

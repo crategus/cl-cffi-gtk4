@@ -5,7 +5,7 @@
 ;;;; The <tt>GtkStackSwitcher</tt> widget adds buttons to control which child
 ;;;; is visible.
 ;;;;
-;;;; 2024-4-14
+;;;; 2024-12-4
 
 (in-package :gtk4-example)
 
@@ -14,4 +14,4 @@
          (builder (gtk:builder-new-from-file path))
          (window (gtk:builder-object builder "window1")))
     (setf (gtk:window-application window) application)
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

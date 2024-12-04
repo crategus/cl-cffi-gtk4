@@ -1,6 +1,11 @@
 ;;;; Entry
 ;;;;
-;;;; 2024-4-6
+;;;; The <tt>gtk:entry</tt> widget is a single line text entry. A fairly large
+;;;; set of key bindings are supported by default. If the entered text is longer
+;;;; than the allocation of the widget, the widget will scroll so that the
+;;;; cursor position is visible.
+;;;;
+;;;; 2024-11-26
 
 (in-package :gtk4-example)
 

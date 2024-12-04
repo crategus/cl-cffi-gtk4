@@ -11,7 +11,7 @@
 ;;;; You can also use the GTK Inspector, available from the menu on the top
 ;;;; right, to poke at the running demos, and see how they are put together.
 ;;;;
-;;;; Last version: 2024-5-12
+;;;; Last version: 2024-11-24
 
 (in-package :gtk4-demo)
 
@@ -21,6 +21,7 @@
 (defvar *currentfile* nil)
 (defvar *notebook* nil)
 (defvar *selection* nil)
+(defvar *selected* nil)
 (defvar *searchneedle* nil)
 
 ;;; ----------------------------------------------------------------------------
@@ -144,6 +145,10 @@
 (defun load-file (filename)
   (let ((sourcebuffer (gtk:text-buffer-new))
         (infobuffer (gtk:text-buffer-new)))
+    ;; Add tag to mark search results in the source buffer
+    (gtk:text-buffer-create-tag sourcebuffer
+                                "found"
+                                :background "Cornsilk")
     (gtk:text-buffer-create-tag infobuffer "title"
                                 :size (* 12 pango:+scale+)
                                 :weight 700
@@ -163,9 +168,7 @@
                  (gtk:text-buffer-insert-with-tags infobuffer
                                                    iter
                                                    (string-left-trim "; " line)
-                                                   "title")
-;                 (gtk:text-buffer-insert infobuffer iter (format nil "~%"))
-                 )
+                                                   "title"))
                 (t
                  (setf line (string-left-trim "; " line))
                  (gtk:text-buffer-insert-markup infobuffer
@@ -181,6 +184,10 @@
           ((null line))
         (gtk:text-buffer-insert sourcebuffer :cursor line)
         (gtk:text-buffer-insert sourcebuffer :cursor (format nil "~%")))
+
+      (when *searchneedle*
+        (tag-searchneedle sourcebuffer *searchneedle*))
+
       (setf (gtk:text-view-buffer *sourceview*) sourcebuffer)
       (setf (gtk:text-view-buffer *infoview*) infobuffer))))
 
@@ -227,11 +234,14 @@
 (defun selection-cb (window selection)
   (let* ((row (gtk:single-selection-selected-item selection))
          (demo (if row (gtk:tree-list-row-item row))))
-    (when (and demo (gtk-demo-filename demo))
-      (load-file (glib-sys:sys-path (gtk-demo-filename demo)
-                                    (gtk-demo-package demo)))
-      (add-data-tabs demo)
-      (setf (gtk:window-title window) (gtk-demo-title demo)))))
+    (when row
+      ;; This is a hack. Improve the implementation
+      (setf *selected* (gtk:tree-list-row-position row))
+      (when (and demo (gtk-demo-filename demo))
+        (load-file (glib-sys:sys-path (gtk-demo-filename demo)
+                                      (gtk-demo-package demo)))
+        (add-data-tabs demo)
+        (setf (gtk:window-title window) (gtk-demo-title demo))))))
 
 ;;; ----------------------------------------------------------------------------
 
@@ -319,6 +329,7 @@
   (declare (ignore action parameter))
   (gtk:window-set-interactive-debugging t))
 
+;; FIXME: Check for a valid row. It might be NIL
 (defun activate-run (application action parameter)
   (declare (ignore action parameter))
   (let* ((row (gtk:single-selection-selected-item *selection*))
@@ -337,6 +348,30 @@
 
 ;; Functions for searching examples
 
+(defun tag-searchneedle (buffer searchneedle)
+  (let* ((table (gtk:text-buffer-tag-table buffer))
+         (tag (gtk:text-tag-table-lookup table "found")))
+    (when tag
+      (gtk:text-buffer-remove-tag buffer
+                                  tag
+                                  (gtk:text-buffer-start-iter buffer)
+                                  (gtk:text-buffer-end-iter buffer))
+      (dolist (search searchneedle)
+        (iter (with start1 = (gtk:text-buffer-start-iter buffer))
+              (while start1)
+
+              ;; Remove traling "::" from search string
+              (when (and (> (length search) 2) (search "::" search :end2 2))
+                (setf search (string-left-trim ":" search)))
+
+              (multiple-value-bind (start end)
+                  (gtk:text-iter-search start1 search :flags :case-insensitive)
+                (when (and start end)
+                  (gtk:text-buffer-apply-tag buffer tag start end))
+                (setf start1
+                      (when start
+                        (gtk:text-iter-copy end)))))))))
+
 (defun clear-search (searchbar filter)
   (unless (gtk:search-bar-search-mode-enabled searchbar)
     (let ((entry (gtk:search-bar-child searchbar)))
@@ -347,14 +382,23 @@
 (defun demo-search-changed-cb (entry filter)
   (let ((text (gtk:editable-text entry)))
     (if (= 0 (length text))
-        (setf *searchneedle* nil)
+        (progn
+          (setf (gtk:single-selection-selected *selection*)
+                gtk:+invalid-list-position+)
+          (setf *searchneedle* nil))
         (setf *searchneedle*
               (mapcar #'string-upcase
                       (split-sequence:split-sequence #\space text))))
+    (tag-searchneedle (gtk:text-view-buffer *sourceview*) *searchneedle*)
     (gtk:filter-changed filter :different)))
 
 (defun demo-filter-by-name (row)
-  (let* ((parent (gtk:tree-list-row-parent row)))
+  (let ((parent (gtk:tree-list-row-parent row))
+        (pos (gtk:tree-list-row-position row)))
+    ;; TODO: The use of globals is a hack. Improve the implementation
+    ;; The current selection is always T
+    (when (and *selection* *selected* (= pos *selected*))
+      (return-from demo-filter-by-name t))
     ;; Does the parent row match
     (when parent
       (let* ((demo (gtk:tree-list-row-item parent))
@@ -390,7 +434,10 @@
                                              #'get-child-model))
          (filter (gtk:custom-filter-new #'demo-filter-by-name))
          (filtermodel (gtk:filter-list-model-new treemodel filter))
-         (selection (gtk:single-selection-new filtermodel))
+         (selection (make-instance 'gtk:single-selection
+                                   :model filtermodel
+                                   :autoselect nil
+                                   :can-unselect t))
          (searchentry (gtk:builder-object builder "search-entry")))
     (gtk:application-add-window application window)
     (g:signal-connect window "close-request"

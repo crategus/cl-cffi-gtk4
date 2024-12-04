@@ -1,6 +1,15 @@
 ;;;; Paned Window
 ;;;;
-;;;; 2024-4-4
+;;;; The <tt>gtk:paned</tt> widget has two panes, arranged either horizontally
+;;;; or vertically. The division between the two panes is adjustable by the
+;;;; user by dragging a handle.
+;;;;
+;;;; Child widgets are added to the panes of the paned widget with the
+;;;; <tt>gtk:paned-start-child</tt> and <tt>gtk:paned-end-child</tt> functions.
+;;;; The division between the two children is set by default from the size
+;;;; requests of the children, but it can be adjusted by the user.
+;;;;
+;;;; 2024-12-4
 
 (in-package :gtk4-example)
 

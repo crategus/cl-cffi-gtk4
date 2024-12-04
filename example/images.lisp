@@ -213,13 +213,13 @@
              (paintable (pixbuf-paintable-new "/images/floppybuddy.gif"))
              (picture (gtk:picture-new-for-paintable paintable)))
         (setf (gtk:widget-halign picture) :center)
-        (setf (gtk:widget-valign picture) :center)
+        (setf (gtk:widget-valign picture) :start)
         (gtk:box-append vbox label)
         (gtk:box-append vbox picture))
 
       ;; Progressive loading
       (let* ((label (make-instance 'gtk:label
-                                   :margin-top 18
+                                   :margin-top 9
                                    :justify :center
                                    :use-markup t
                                    :label

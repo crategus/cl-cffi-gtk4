@@ -1,5 +1,22 @@
 ;;;; Box Append
 ;;;;
+;;;; The <tt>gtk:box</tt> widget arranges child widgets into a single row or
+;;;; column. Whether it is a row or column depends on the value of its
+;;;; <tt>orientation</tt> property. Within the other dimension, all children are
+;;;; allocated the same size. Of course, the <tt>halign</tt> and <tt>valign</tt>
+;;;; properties can be used on the children to influence their allocation.
+;;;;
+;;;; Use repeated calls to the <tt>gtk:box-append</tt> function to pack widgets
+;;;; into a box from start to end. Use the <tt>gtk:box-remove</tt> function to
+;;;; remove widgets from the box. The <tt>gtk:box-insert-child-after</tt>
+;;;; function can be used to add a child widget at a particular position.
+;;;;
+;;;; Use the <tt>gtk:box-homogeneous</tt> function to specify whether or not all
+;;;; children of the box are forced to get the same amount of space and the
+;;;; <tt>gtk:box-spacing</tt> function to determine how much space will be
+;;;; minimally placed between all children in the box. Note that spacing is
+;;;; added between the children.
+;;;;
 ;;;; 2024-4-4
 
 (in-package :gtk4-example)
@@ -50,5 +67,5 @@
                                      :label
                                      "<b>Homogeneous box with more spacing</b>"
                                      :xalign 0))
-      (gtk:box-append vbox (make-box t 12))
+      (gtk:box-append vbox (make-box t 24))
       (gtk:window-present window))))

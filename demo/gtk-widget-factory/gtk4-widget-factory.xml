@@ -6,10 +6,10 @@
   <gresource prefix="/com/crategus/gtk4-widget-factory">
     <file>widget-factory.css</file>
   </gresource>
-  <gresource prefix="/com/crategus/gtk4-widget-factory/gtk">
+  <gresource prefix="/com/crategus/gtk4-widget-factory/gtk/">
     <file>help-overlay.ui</file>
   </gresource>
-  <gresource prefix="/com/crategus/gtk4-widget-factory">
+  <gresource prefix="/com/crategus/gtk4-widget-factory/">
     <file>gtk-logo.webm</file>
     <file>sunset.jpg</file>
     <file>portland-rose.jpg</file>

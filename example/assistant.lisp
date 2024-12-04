@@ -4,6 +4,11 @@
 ;;;; an operation into several simpler sequential steps, and to guide the user
 ;;;; through these steps.
 ;;;;
+;;;; Warning:
+;;;;
+;;;; The <tt>gtk:assistant</tt> implementation is deprecated since 4.10. This
+;;;; widget will be removed from GTk 5.
+;;;;
 ;;;; 2024-4-19
 
 (in-package :gtk4-example)
@@ -29,7 +34,7 @@
             (if (> (length (gtk:editable-text widget)) 0)
                 (setf (gtk:assistant-page-complete assistant page) t)
                 (setf (gtk:assistant-page-complete assistant page) nil)))))
-   ;; Pack the widgets
+    ;; Pack the widgets
     (gtk:box-append box label)
     (gtk:box-append box entry)
     ;; Append the first page to the assistant

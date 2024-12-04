@@ -76,6 +76,7 @@
                                 ;; Button cannot be selected with the pointer.
                                 ;; This makes the flow box child selectable.
                                 :can-target nil
+                                :has-frame nil
                                 :name color))
          (area (make-instance 'gtk:drawing-area
                               :width-request 24

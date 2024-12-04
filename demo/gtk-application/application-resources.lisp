@@ -3,9 +3,19 @@
 ;;;; This application automatically loads a menubar, an icon, and a shortcuts
 ;;;; window from resources.
 ;;;;
-;;;; Last version: 2024-10-24
+;;;; Last version: 2024-12-3
 
 (in-package :gtk4-application)
+
+(defun activate-about (window)
+  (gtk:show-about-dialog window
+                         :program-name "Application with automatic Resources"
+                         :logo-icon-name "gtk-logo"
+                         :authors '("Dieter Kaiser")
+                         :comments
+                         (format nil "This example automatically loads a ~
+                                      menubar, an icon, and a shortcuts window ~
+                                      from resources.")))
 
 (defun application-resources (&rest argv)
   ;; Register the resources
@@ -40,17 +50,19 @@
           (lambda (application)
             (g:application-hold application)
             ;; Create an application window
-            (let (;; Define action entries for the menu items
-                  (entries '(("about")))
-                  (accels '("win-show-help-overlay" "F1"
-                            "win.about" "<Control>A"))
-                  (window (make-instance 'gtk:application-window
-                                         :application application
-                                         :title "Application Resources"
-                                         :show-menubar t
-                                         :icon-name "gtk-logo"
-                                         :default-width 480
-                                         :default-height 300)))
+            (let* ((window (make-instance 'gtk:application-window
+                                          :application application
+                                          :title "Application Resources"
+                                          :show-menubar t
+                                          :icon-name "gtk-logo"
+                                          :default-width 480
+                                          :default-height 300))
+                   (entries `(("about"
+                               ,(lambda (action param)
+                                  (declare (ignore action param))
+                                  (activate-about window)))))
+                   (accels '("win.show-help-overlay" "F1"
+                             "win.about" "<Control>A")))
               ;; Get the automatically loaded shortcuts window
               (format t "Shortcuts window : ~a~%"
                         (gtk:application-window-help-overlay window))

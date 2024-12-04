@@ -10,7 +10,7 @@
 ;;;; This example uses a <tt>gtk:size-group</tt> object for grouping the
 ;;;; buttons together so they all request the same amount of space.
 ;;;;
-;;;; 2024-5-4
+;;;; 2024-11-22
 
 (in-package :gtk4-example)
 
@@ -53,21 +53,21 @@
     ;; These are the standard functions to create a button
     (gtk:grid-attach grid
                      (setf button (gtk:button-new-with-label "Label"))
-                     0 0 1 1)
+                     0 0)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
     (gtk:size-group-add-widget group button)
     (gtk:grid-attach grid
                      (setf button (gtk:button-new-with-mnemonic "_Mnemonic"))
-                     0 1 1 1)
+                     0 1)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
     (gtk:size-group-add-widget group button)
     (gtk:grid-attach grid
                      (setf button (gtk:button-new-from-icon-name "edit-paste"))
-                     0 2 1 1)
+                     0 2)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
@@ -79,7 +79,7 @@
     (gtk:box-append box (make-instance 'gtk:image :icon-name "edit-clear"))
     (gtk:box-append box (make-instance 'gtk:label :label "Edit Clear"))
     (setf button (make-instance 'gtk:button :child box))
-    (gtk:grid-attach grid button 1 0 1 1)
+    (gtk:grid-attach grid button 1 0)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
@@ -91,7 +91,7 @@
     (gtk:box-append box (make-instance 'gtk:image :icon-name "edit-copy"))
     (gtk:box-append box (make-instance 'gtk:label :label "Edit Copy"))
     (setf button (make-instance 'gtk:button :child box))
-    (gtk:grid-attach grid button 1 1 1 1)
+    (gtk:grid-attach grid button 1 1)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
@@ -103,7 +103,7 @@
     (gtk:box-append box (make-instance 'gtk:image :icon-name "edit-cut"))
     (gtk:box-append box (make-instance 'gtk:label :label "Edit Cut"))
     (setf button (make-instance 'gtk:button :child box))
-    (gtk:grid-attach grid button 1 2 1 1)
+    (gtk:grid-attach grid button 1 2)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))

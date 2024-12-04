@@ -644,7 +644,6 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                 <property name="row-homogeneous">1</property>
                                 <property name="column-spacing">18</property>
                                 <property name="row-spacing">6</property>
-<!-- FIXME: Do we have a bug in GtkBuilder? The grid is not filled as defined.
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton1">
                                     <property name="label">checkbutton</property>
@@ -808,7 +807,6 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                     </layout>
                                   </object>
                                 </child>
--->
                               </object>
                             </child>
                           </object>
@@ -1277,14 +1275,18 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                     <property name="content-fit">cover</property>
                                     <child>
                                       <object class="GtkDragSource" id="notebook-sunset-drag">
+<!--
                                         <signal name="prepare" object="notebook-sunset-drag" handler="on-picture-drag-prepare" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkDropTarget" id="notebook-sunset-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
+<!--
                                         <signal name="drop" object="notebook-sunset-drop" handler="on-picture-drop" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                   </object>
@@ -1302,14 +1304,18 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                   <object class="GtkPicture" id="notebook_nyc">
                                     <child>
                                       <object class="GtkDragSource" id="notebook-nyc-drag">
+<!--
                                         <signal name="prepare" object="notebook-nyc-drag" handler="on-picture-drag-prepare" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkDropTarget" id="notebook-nyc-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
+<!--
                                         <signal name="drop" object="notebook-nyc-drop" handler="on-picture-drop" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                   </object>
@@ -1327,14 +1333,18 @@ Suspendisse feugiat quam quis dolor accumsan cursus.</property>
                                   <object class="GtkPicture" id="notebook_beach">
                                     <child>
                                       <object class="GtkDragSource" id="notebook-beach-drag">
+<!--
                                         <signal name="prepare" object="notebook-beach-drag" handler="on-picture-drag-prepare" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkDropTarget" id="notebook-beach-drop">
                                         <property name="actions">copy</property>
                                         <property name="formats">GdkTexture</property>
+<!--
                                         <signal name="drop" object="notebook-beach-drop" handler="on-picture-drop" swapped="no"/>
+-->
                                       </object>
                                     </child>
                                   </object>
@@ -2286,7 +2296,9 @@ microphone-sensitivity-medium-symbolic</property>
                                   <object class="GtkToggleButton" id="record_button">
                                     <property name="halign">3</property>
                                     <property name="valign">center</property>
+<!--
                                     <signal name="toggled" object="record_button" handler="on-record-button-toggled"/>
+-->
                                     <style>
                                       <class name="text-button"/>
                                       <class name="image-button"/>
@@ -2539,7 +2551,9 @@ microphone-sensitivity-medium-symbolic</property>
                                             <child>
                                               <object class="GtkComboBoxText" id="page_combo">
                                                 <property name="active">0</property>
+<!--
                                                 <signal name="changed" object="page_combo" handler="on-page-combo-changed"/>
+-->
                                                 <items>
                                                   <item>Range</item>
                                                   <item>All</item>
@@ -2552,13 +2566,17 @@ microphone-sensitivity-medium-symbolic</property>
                                             <child>
                                               <object class="GtkSpinButton" id="range_from_spin">
                                                 <property name="adjustment">pg_adjustment</property>
+<!--
                                                 <signal name="value-changed" object="range_from_spin" handler="on-range-from-changed"/>
+-->
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkSpinButton" id="range_to_spin">
                                                 <property name="adjustment">pg_adjustment2</property>
+<!--
                                                 <signal name="value-changed" object="range_to_spin" handler="on-range-to-changed"/>
+-->
                                               </object>
                                             </child>
                                             <child>
@@ -2761,7 +2779,9 @@ microphone-sensitivity-medium-symbolic</property>
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>
+<!--
                                                     <signal name="clicked" object="closable_page_1" handler="tab-close-cb"/>
+-->
                                                     <style>
                                                       <class name="small-button"/>
                                                     </style>
@@ -2793,7 +2813,9 @@ microphone-sensitivity-medium-symbolic</property>
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>
+<!--
                                                     <signal name="clicked" object="closable_page_2" handler="tab-close-cb"/>
+-->
                                                     <style>
                                                       <class name="small-button"/>
                                                     </style>
@@ -2828,7 +2850,9 @@ microphone-sensitivity-medium-symbolic</property>
                                 </child>
                                 <child>
                                   <object class="GtkGestureClick">
+<!--
                                     <signal name="pressed" object="osd_frame" handler="osd-frame-pressed" swapped="no"/>
+-->
                                   </object>
                                 </child>
                               </object>
@@ -2855,7 +2879,9 @@ microphone-sensitivity-medium-symbolic</property>
                                 <property name="hexpand">1</property>
                                 <property name="show-emoji-icon">1</property>
                                 <property name="placeholder-text" translatable="1">Age…</property>
+<!--
                                 <signal name="notify::text" object="age-entry" handler="age-entry-changed"/>
+-->
                               </object>
                             </child>
                             <style>
@@ -3092,7 +3118,9 @@ bad things might happen.</property>
             <child>
               <object class="GtkEntry" id="more_details_entry">
                 <property name="valign">4</property>
+<!--
                 <signal name="notify::text" object="details_entry" handler="validate-more-details" swapped="no"/>
+-->
                 <layout>
                   <property name="column">1</property>
                   <property name="row">1</property>
@@ -3120,7 +3148,9 @@ bad things might happen.</property>
               <object class="GtkScale" id="level_scale">
                 <property name="valign">4</property>
                 <property name="adjustment">adjustment1</property>
+<!--
                 <signal name="value-changed" object="level_scale" handler="level-scale-value-changed"/>
+-->
                 <layout>
                   <property name="column">1</property>
                   <property name="row">2</property>
@@ -3148,7 +3178,9 @@ bad things might happen.</property>
               <object class="GtkSwitch" id="mode_switch">
                 <property name="halign">1</property>
                 <property name="valign">4</property>
+<!--
                 <signal name="state-set" object="mode_switch" handler="mode-switch-state-set"/>
+-->
                 <layout>
                   <property name="column">1</property>
                   <property name="row">3</property>

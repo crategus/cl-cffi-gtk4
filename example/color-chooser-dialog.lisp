@@ -4,7 +4,7 @@
 ;;;; background color for the drawing area. The default palette is replaced
 ;;;; for this color chooser dialog.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-11-23
 
 (in-package :gtk4-example)
 
@@ -43,8 +43,7 @@
       (gtk:drawing-area-set-draw-func area
           (lambda (widget cr width height)
             (declare (ignore widget width height))
-            (let (;(cr (pointer cr))
-                  (red (gdk:rgba-red bg-color))
+            (let ((red (gdk:rgba-red bg-color))
                   (green (gdk:rgba-green bg-color))
                   (blue (gdk:rgba-blue bg-color)))
                   ;; Paint the current color on the drawing area
@@ -83,6 +82,6 @@
                       (setf bg-color (gtk:color-chooser-rgba dialog))
                       (gtk:widget-queue-draw area))
                     (gtk:window-destroy dialog)))
-              (gtk:widget-show dialog))))
+              (gtk:window-present dialog))))
       ;; Show the window
       (gtk:window-present window))))

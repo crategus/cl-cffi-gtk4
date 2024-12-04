@@ -98,9 +98,10 @@
          (toolbar (create-radio-toolbar area))
          (button (make-instance 'gtk:button
                                 :name "bricks-button"
-                                :margin 12
-                                :halign :center
-                                :valign :center
+                                :margin-top 24
+                                :margin-end 24
+                                :halign :end
+                                :valign :start
                                 :width-request 270
                                 :height-request 96))
          (provider (make-instance 'gtk:css-provider)))

@@ -1,6 +1,6 @@
 ;;;; Color Button
 ;;;;
-;;;; The example shows a color button. The button is initialized with the color
+;;;; This example shows a color button. The button is initialized with the color
 ;;;; "Blue". The handler for the <tt>"color-set"</tt> signal prints the selected
 ;;;; color on the console.
 ;;;;

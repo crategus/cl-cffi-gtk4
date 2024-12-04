@@ -1,5 +1,10 @@
 ;;;; Application Window with Menubar
 ;;;;
+;;;; The <tt>gtk:application-window</tt> class is a <tt>gtk:window</tt> subclass
+;;;; that offers some extra functionality for better integration with
+;;;; <tt>gtk:application</tt> features. Notably, it can handle an application
+;;;; menubar.
+;;;;
 ;;;; Last version: 2024-5-24
 
 (in-package :gtk4-example)

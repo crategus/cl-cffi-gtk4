@@ -1,5 +1,9 @@
 ;;;; Aspect Frame
 ;;;;
+;;;; The <tt>gtk:aspect-frame</tt> widget preserves the aspect ratio of its
+;;;; child. The frame can respect the aspect ratio of the child widget, or use
+;;;; its own aspect ratio.
+;;;;
 ;;;; In this example, we place a drawing area in an aspect frame. Enlarge and
 ;;;; shrink the window to see how the ratio of the drawing area is preserved.
 ;;;;

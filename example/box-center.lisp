@@ -13,7 +13,7 @@
 
 (defun do-box-center (&optional application)
   (let* ((css-button
-          ".centerbox button         { padding: 3px; }
+          ".centerbox button         { padding: 0px; }
            .centerbox button > label { color: black;
                                        background-color: yellow; }
           .centerbox button:first-child > label {
@@ -58,5 +58,5 @@
     (gtk:css-provider-load-from-string provider css-button)
     (gtk:widget-add-css-class box "centerbox")
     (gtk:widget-add-provider box provider)
-    ;; Show the window.
+    ;; Show the window
     (gtk:window-present window)))

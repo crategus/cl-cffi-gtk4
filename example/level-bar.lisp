@@ -66,7 +66,7 @@
                                :orientation :horizontal
                                :digits 1
                                :value-pos :top
-                               :draw-value t
+                               :draw-value nil
                                :adjustment adj))
          (levelbar1 (create-level-bar :horizontal :continuous))
          (levelbar2 (create-level-bar :horizontal :discrete)))

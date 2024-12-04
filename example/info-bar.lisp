@@ -65,7 +65,6 @@
                                 :child vbox
                                 :application application
                                 :default-width 250))
-
          (infobar (make-instance 'gtk:info-bar
                                   :no-show-all t))
          (message (make-instance 'gtk:label

@@ -94,7 +94,7 @@
     (setf (gtk:stack-visible-child-name stack) "page1")
 
     ;; Read the menus from a string
-;    (gtk:builder-add-from-string builder menus)
+    (gtk:builder-add-from-string builder menus)
 
     ;; Set the menubar
 ;    (setf (gtk:application-menubar application)

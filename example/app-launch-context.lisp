@@ -1,6 +1,11 @@
 ;;;; GdkAppLaunchContext
 ;;;;
-;;;; 2024-4-6
+;;;; The <tt>gdk:app-launch-context</tt> object is an implementation of the
+;;;; <tt>g:app-launch-context</tt> object that handles launching an application
+;;;; in a graphical context. It provides startup notification and allows to
+;;;; launch applications on a specific screen or workspace.
+;;;;
+;;;; 2024-11-22
 
 (in-package :gtk4-example)
 
@@ -40,7 +45,7 @@
                                                        context)
                 (gtk:window-destroy window)
                 (format t "Launching failed.~%")))))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))
 
 
 (defun do-app-launch-context-async (&optional application)

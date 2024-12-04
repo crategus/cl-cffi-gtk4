@@ -2,7 +2,7 @@
 ;;;;
 ;;;; <tt>GtkEntryBuffer</tt> provides the text content in a <tt>GtkEntry</tt>.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-11-26
 
 (in-package :gtk4-example)
 
@@ -52,4 +52,4 @@
                                             buffer object. Typ in some text in ~
                                             one of the entries to see the ~
                                             effect.")))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

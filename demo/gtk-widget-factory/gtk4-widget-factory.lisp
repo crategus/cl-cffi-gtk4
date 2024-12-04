@@ -78,7 +78,16 @@
     "record-button" "GtkWidget" t t)
    (lockbutton
     widget-factory-lockbutton
-    "lockbutton" "GtkWidget" t t)))
+    "lockbutton" "GtkWidget" t t)
+   (range-from-spin
+    widget-factory-range-from-spin
+    "range-from-spin" "GtkWidget" t t)
+   (range-to-spin
+    widget-factory-range-to-spin
+    "range-to-spin" "GtkWidget" t t)
+   (print-button
+    widget-factory-print-button
+    "print-button" "GtkWidget" t t)))
 
 ;; Global variable to hold the running WidgetFactory application
 (defvar factory nil)
@@ -176,11 +185,12 @@
 (defun activate-about (action parameter)
   (declare (ignore action parameter))
   (let ((parent (widget-factory-window factory))
+        (menubutton (widget-factory-open-menubutton factory))
         (buildinfo (make-string-output-stream)))
     ;; Output version informations in string
     (gtk:cl-cffi-gtk-build-info buildinfo)
     ;; Close the popup menu button on page3
-    (gtk:menu-button-popdown (g:object-data parent "open_menubutton"))
+    (gtk:menu-button-popdown menubutton)
     ;; Create and show about dialog
     (gtk:show-about-dialog parent
                            :modal t
@@ -201,7 +211,7 @@
 (defun activate-shortcuts-window (action parameter)
   (format t "in ACTIVATE-SHORTCUTS-WINDOW: ~a, ~a~%" action parameter)
   (let* ((window (widget-factory-window factory))
-         (button (g:object-data window "open_menubutton")))
+         (button (widget-factory-open-menubutton factory)))
     (gtk:menu-button-popdown button)
     (gtk:widget-activate-action window "win.show-help-overlay")))
 
@@ -361,7 +371,8 @@
       (gtk:flow-box-insert flowbox child -1))
     (let ((resources '("sunset.jpg" "portland-rose.jpg" "beach.jpg" "nyc.jpg")))
       (dolist (resource resources)
-        (let* ((file (concatenate 'string "/org/gtk/WidgetFactory4/" resource))
+        (let* ((prefix "/com/crategus/gtk4-widget-factory/")
+               (file (concatenate 'string prefix resource))
                (pixbuf (gdk:pixbuf-new-from-resource-at-scale file 110 110 t))
                (texture (gdk:texture-new-for-pixbuf pixbuf)))
           (add-background flowbox file texture))))))
@@ -374,30 +385,67 @@
       (populate-flowbox flowbox)
       (setf (gtk:widget-visible dialog) t))))
 
-;; Action <control>o
+;; Action win.open and accel <control>o
 (defun activate-open (action parameter)
   (declare (ignore action parameter))
   (when (is-on-page 3)
     (let ((button (widget-factory-open-menubutton factory)))
       (g:signal-emit button "activate"))))
 
-;; Action <control>r
+;; Action win.record and accel <control>r
 (defun activate-record (action parameter)
   (declare (ignore action parameter))
   (when (is-on-page 3)
     (let ((button (widget-factory-record-button factory)))
       (g:signal-emit button "clicked"))))
 
-;; Action <control>l
+;; Action win.lock and accel <control>l
 (defun activate-lock (action parameter)
   (declare (ignore action parameter))
   (when (is-on-page 3)
     (let ((button (widget-factory-lockbutton factory)))
       (g:signal-emit button "clicked"))))
 
+;; Action win.print
+(defun activate-print (action parameter)
+  (declare (ignore action parameter))
+  (let ((window (widget-factory-window factory))
+        (operation (make-instance 'gtk:print-operation
+                                  :allow-async t
+                                  :embed-page-setup t)))
 
-(defun activate-print ()
-)
+    (g:signal-connect operation "begin-print"
+            (lambda (operation context)
+              (declare (ignore context))
+              (setf (gtk:print-operation-n-pages operation) 1)))
+
+    (g:signal-connect operation "draw-page"
+            (lambda (operation context page)
+              (declare (ignore operation page))
+              (let* ((cr (gtk:print-context-cairo-context context))
+                     (width (gtk:print-context-width context))
+                     (snapshot (gtk:snapshot-new))
+                     (paintable (gtk:widget-paintable-new window))
+                     (aspect (gdk:paintable-intrinsic-aspect-ratio paintable))
+                     (node nil))
+                (gdk:paintable-snapshot paintable snapshot width (/ width aspect))
+                (setf node (gtk:snapshot-to-node snapshot))
+                (gsk:render-node-draw node cr)
+                (gsk:render-node-unref node))))
+
+    (g:signal-connect operation "done"
+            (lambda (operation result)
+              (declare (ignore operation))
+              (cond ((eq :error result)
+                     (format t "Printing failed~%"))
+                    ((eq :cancel result)
+                     (format t "Printing was canceled~%"))
+                    (t
+                     (format t "Printing done~%")))))
+
+    (unless (eq :in-progress
+                (gtk:print-operation-run operation :print-dialog window))
+      (g:signal-emit operation "done"))))
 
 ;;; ----------------------------------------------------------------------------
 
@@ -656,6 +704,13 @@
       (setf (widget-factory-record-button factory) record-button)
       (setf (widget-factory-lockbutton factory) lockbutton)
 
+      (setf (widget-factory-range-from-spin factory)
+            (gtk:builder-object builder "range_from_spin"))
+      (setf (widget-factory-range-to-spin factory)
+            (gtk:builder-object builder "range_to_spin"))
+      (setf (widget-factory-print-button factory)
+            (gtk:builder-object builder "print_button"))
+
       ;; Prepare the application window
       (setf (gtk:window-icon-name window) "org.gtk.WidgetFactory4")
       (setf (gtk:window-application window) application)
@@ -677,8 +732,6 @@
 
       ;; Gear menu
 
-      (g:signal-connect stack "notify::visible-child-name" #'page-changed-cb)
-
       ;; FIXME: UI definition does not work. Check gtk:builder-cl-scope
       ;; implementation. Connect signal handler for change of the transition
       ;; speed by hand.
@@ -686,13 +739,19 @@
                         "value-changed"
                         #'transition-speed-changed)
 
+      ;; --- Various dialogs ---------------------------------------------------
+
+
+
       ;; --- On Page 1 ---------------------------------------------------------
 
       ;; FIXME: This is a workaround for setting style classes. The style
       ;; classes defined in the UI definition file are not applied.
+      #+nil
       (set-styles-on-page1 builder)
 
       ;; FIXME: This is a workaround to fill the grid on page1
+      #+nil
       (fill-grid-on-page1 (gtk:builder-object builder "page1-grid1"))
 
       ;; Connect adjustment for entry and progress bar widgets
@@ -718,6 +777,31 @@
                (lambda (scale value)
                  (declare (ignore scale value))
                  " "))
+
+      ;; Drag and drop GtkNotebook notebook1
+      ;; FIXME: Does not work as expected. What is wrong?
+      #+nil
+      (gobject:with-value (value "GObject")
+
+        (let ((source (gtk:builder-object builder "notebook-sunset-drag")))
+          (g:signal-connect source "prepare"
+                  (lambda (source x y)
+                    (declare (ignore x y))
+                    (format t "in PREPARE for drag source~%")
+                    (let ((picture (gtk:event-controller-widget source)))
+                      (setf (g:value-object value) picture)
+                      (gdk:content-provider-new-for-value value)))))
+
+        (let ((target (gtk:builder-object builder "notebook-sunset-drop")))
+          (g:signal-connect target "drop"
+                  (lambda (dest value x y)
+                    (declare (ignore x y))
+                    (format t "in DROP for drop target~%")
+                    (let ((picture (gtk:event-controller-widget dest))
+                          (paintable (g:value-object value)))
+                      (setf (gtk:picture-paintable picture) paintable)
+                      t)))))
+
 
       ;; --- On Page 2 ---------------------------------------------------------
 
@@ -785,11 +869,105 @@
                              (setf str (format nil "~2d %" percent)))))
                     (setf (gtk:widget-tooltip-text button) str)))))
 
+      ;; Inform Button on page 2
+      (let ((dialog (gtk:builder-object builder "info_dialog"))
+            (button (gtk:builder-object builder "info_dialog_button")))
+        (g:signal-connect button "clicked"
+                (lambda (button)
+                  (declare (ignore button))
+                  (setf (gtk:widget-visible dialog) t)))
+        (g:signal-connect dialog "response"
+                (lambda (dialog response)
+                  (declare (ignore response))
+                  (setf (gtk:widget-visible dialog) nil))))
+
+      ;; Act Button on page 2
+      (let ((dialog (gtk:builder-object builder "action_dialog"))
+            (button (gtk:builder-object builder "action_dialog_button")))
+        (g:signal-connect button "clicked"
+                (lambda (button)
+                  (declare (ignore button))
+                  (setf (gtk:widget-visible dialog) t)))
+        (g:signal-connect dialog "response"
+                (lambda (dialog response)
+                  (declare (ignore response))
+                  (setf (gtk:widget-visible dialog) nil))))
+      (let ((button (gtk:builder-object builder "act_action_dialog"))+
+            (stack (gtk:builder-object builder "toplevel_stack")))
+        (g:signal-connect button "clicked"
+            (lambda (button)
+              (declare (ignore button))
+              (g:timeout-add 1000
+                             (lambda ()
+                               (let ((page (gtk:stack-child-by-name stack
+                                                                    "page3")))
+                                 (set-needs-attention page t)
+                                 g:+source-remove+)))))
+        (g:signal-connect stack "notify::visible-child-name" #'page-changed-cb))
+#|
+  widget = (GtkWidget *)gtk_builder_get_object (builder, "act_action_dialog");
+  stack = (GtkWidget *)gtk_builder_get_object (builder, "toplevel_stack");
+  g_signal_connect (widget, "clicked", G_CALLBACK (action_dialog_button_clicked), stack);
+  g_signal_connect (stack, "notify::visible-child-name", G_CALLBACK (page_changed_cb), NULL);
+  page_changed_cb (stack, NULL, NULL);
+|#
 
       ;; --- On Page 3 ---------------------------------------------------------
 
-      (setf (g:object-data window "open_menubutton")
-            (gtk:builder-object builder "open_menubutton"))
+      ;; Set signal handler for "record_button" on page 3
+      (let ((button (gtk:builder-object builder "record_button")))
+        (g:signal-connect button "toggled"
+                (lambda (button)
+                    (if (gtk:toggle-button-active button)
+                        (gtk:widget-remove-css-class button "destructive-action")
+                        (gtk:widget-add-css-class button "destructive-action")))))
+
+      ;; Set signal handler for GtkComboBox "page_combo" on page 3
+      (let ((combo (gtk:builder-object builder "page_combo")))
+        (g:signal-connect combo "changed"
+                (lambda (combo)
+                  (let ((from (widget-factory-range-from-spin factory))
+                        (to (widget-factory-range-to-spin factory))
+                        (print (widget-factory-print-button factory))
+                        (active (gtk:combo-box-active combo)))
+                    (cond ((= 0 active)
+                           (setf (gtk:widget-sensitive from) t)
+                           (setf (gtk:widget-sensitive to) t)
+                           (setf (gtk:widget-sensitive print) t))
+                          ((= 1 active)
+                           (setf (gtk:spin-button-value from) 1)
+                           (setf (gtk:spin-button-value to) 99)
+                           (setf (gtk:widget-sensitive from) nil)
+                           (setf (gtk:widget-sensitive to) nil)
+                           (setf (gtk:widget-sensitive print) t))
+                          ((= 2 active)
+                           (setf (gtk:spin-button-value from) 7)
+                           (setf (gtk:spin-button-value to) 7)
+                           (setf (gtk:widget-sensitive from) nil)
+                           (setf (gtk:widget-sensitive to) nil)
+                           (setf (gtk:widget-sensitive print) t))
+                          ((= 4 active)
+                           (setf (gtk:widget-sensitive from) nil)
+                           (setf (gtk:widget-sensitive to) nil)
+                           (setf (gtk:widget-sensitive print) nil)))))))
+      ;; Set signal handler for GtkSpinButton "range_from_spin" on page3
+      (let ((spinbutton (widget-factory-range-from-spin factory)))
+        (g:signal-connect spinbutton "changed"
+                (lambda (button-from)
+                  (let* ((button-to (widget-factory-range-to-spin factory))
+                         (val1 (gtk:spin-button-value-as-int button-from))
+                         (val2 (gtk:spin-button-value-as-int button-to)))
+                    (when (> val1 val2)
+                      (setf (gtk:spin-button-value button-to) val1))))))
+      ;; Set signal handler for GtkSpinButton "range_to_spin" on page3
+      (let ((spinbutton (widget-factory-range-to-spin factory)))
+        (g:signal-connect spinbutton "changed"
+                (lambda (button-to)
+                  (let* ((button-from (widget-factory-range-from-spin factory))
+                         (val1 (gtk:spin-button-value-as-int button-from))
+                         (val2 (gtk:spin-button-value-as-int button-to)))
+                    (when (> val1 val2)
+                      (setf (gtk:spin-button-value button-from) val2))))))
 
 
       ;; Show the application window

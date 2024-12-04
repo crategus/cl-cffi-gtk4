@@ -87,21 +87,15 @@
     ;; Connect signal "startup" to the application
     (g:signal-connect app "startup"
         (lambda (application)
-          (let ((actions (list (list "about"
-                                     #'(lambda (action parameter)
-                                         (sunny-action-about application
-                                                             action
-                                                             parameter)))
-                               (list "quit"
-                                     #'(lambda (action parameter)
-                                         (sunny-action-quit application
-                                                            action
-                                                            parameter)))
-                               (list "new"
-                                     #'(lambda (action parameter)
-                                         (sunny-action-new application
-                                                           action
-                                                           parameter)))))
+          (let ((actions `(("about"
+                            ,(lambda (action param)
+                               (sunny-action-about application action param)))
+                           ("quit"
+                            ,(lambda (action param)
+                               (sunny-action-quit application action param)))
+                           ("new"
+                            ,(lambda (action param)
+                               (sunny-action-new application action param)))))
                 (builder (make-instance 'gtk:builder)))
           ;; Set the application name
           (unless (g:application-name)
@@ -120,7 +114,7 @@
           (setf (gtk:application-accels-for-action application "app.new")
                 "<Control>n")
           ;; TODO: The accelerator from the UI definition does not work.
-          ;; but with the following definition it does
+          ;; but with the following definitions it does
           (setf (gtk:application-accels-for-action application "app.quit")
                 "<Control>q")
           (setf (gtk:application-accels-for-action application "app.about")

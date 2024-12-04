@@ -1,6 +1,6 @@
 ;;;; Application with Menubar
 ;;;;
-;;;; Last version: 2024-5-24
+;;;; Last version: 2024-12-3
 
 (in-package :gtk4-application)
 
@@ -58,32 +58,21 @@
                                            :margin-top 6
                                            :margin-bottom 6))
                  ;; Define action entries for the menu items
-                 (entries (list
-                            (list "toolbar" nil nil "true"
-                                  (lambda (action parameter)
-                                    (change-state statusbar action parameter)))
-                            (list "statusbar" nil nil "false"
-                                  (lambda (action parameter)
-                                    (change-state statusbar action parameter)))
-                            (list "fullscreen" nil nil "false"
-                                  (lambda (action parameter)
-                                    (change-state statusbar action parameter)))
-                            (list "sources"
-                                  nil
-                                  "s"
-                                  "'vala'"
-                                  (lambda (action parameter)
-                                    (change-radio-state statusbar
-                                                        action
-                                                        parameter)))
-                            (list "markup"
-                                  nil
-                                  "s"
-                                  "'html'"
-                                  (lambda (action parameter)
-                                    (change-radio-state statusbar
-                                                        action
-                                                        parameter)))))
+                 (entries `(("toolbar" nil nil "true"
+                             ,(lambda (action param)
+                                (change-state statusbar action param)))
+                            ("statusbar" nil nil "false"
+                             ,(lambda (action param)
+                                (change-state statusbar action param)))
+                            ("fullscreen" nil nil "false"
+                             ,(lambda (action param)
+                                (change-state statusbar action param)))
+                            ("sources" nil "s" "'vala'"
+                             ,(lambda (action param)
+                                (change-radio-state statusbar action param)))
+                            ("markup" nil "s" "'html'"
+                              ,(lambda (action param)
+                                 (change-radio-state statusbar action param)))))
                  (vbox (make-instance 'gtk:box
                                       :orientation :vertical))
                  (window (make-instance 'gtk:application-window
