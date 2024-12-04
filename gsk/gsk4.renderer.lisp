@@ -193,7 +193,7 @@
 
 (defun renderer-realize (renderer surface)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2024-11-21}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
@@ -201,7 +201,7 @@
   @end{short}
   @see-class{gsk:renderer}
   @see-class{gdk:surface}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%renderer-realize renderer surface err)))
 
 (export 'renderer-realize)

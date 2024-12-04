@@ -826,9 +826,9 @@
 
 (defun render-node-write-to-file (node filename)
  #+liber-documentation
- "@version{2023-10-26}
+ "@version{2024-11-21}
   @argument[node]{a @class{gsk:render-node} instance}
-  @argument[filename]{a namestring or path with the file to save it to}
+  @argument[filename]{a pathname or namestring with the file to save it to}
   @begin{short}
     This function is mostly intended for use inside a debugger to quickly dump
     a render node to a file for later inspection.
@@ -843,7 +843,7 @@ color {
     @end{pre}
   @end{dictionary}
   @see-class{gsk:render-node}"
-  (glib:with-g-error (err)
+  (glib:with-error (err)
     (%render-node-write-to-file node (namestring filename) err)))
 
 (export 'render-node-write-to-file)
@@ -1868,7 +1868,7 @@ color {
           (for width in widths)
           (setf (cffi:mem-aref widths-ptr :float i)
                 (coerce width 'single-float)))
-    (glib:with-g-boxed-array (n-colors colors-ptr gdk:rgba colors)
+    (glib:with-gboxed-array (n-colors colors-ptr gdk:rgba colors)
       (%border-node-new outline widths-ptr colors-ptr))))
 
 (export 'border-node-new)
@@ -3623,6 +3623,7 @@ color {
   @end{short}
 
   Since 4.10
+  @see-constructor{gsk:mask-node-new}
   @see-class{gsk:render-node}")
 
 #+gtk-4-10
@@ -3630,14 +3631,27 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_new
-;;;
-;;; Creates a GskRenderNode that will mask a given node by another.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_new" mask-node-new) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[source]{a @class{gsk:render-node} instance with the source node
+    to be drawn}
+  @argument[mask]{a @class{gsk:render-node} instance with the node to be used
+    as mask}
+  @argument[mode]{a @symbol{gsk:mask-mode} value with the mask mode to use}
+  @begin{short}
+    Creates a @class{gsk:render-node} instance that will mask a given node by
+    another.
+  @end{short}
+  The @arg{mode} value determines how the mask values are derived from the
+  colors of the mask. Applying the mask consists of multiplying the mask value
+  with the alpha of the source.
+
+  Since 4.10
+  @see-class{gsk:mask-node}"
   (source render-node)
   (mask render-node)
   (mode mask-mode))
@@ -3647,14 +3661,21 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_mask
-;;;
-;;; Retrieves the mask GskRenderNode child of the node.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_mask" mask-node-mask) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:render-node} instance with the mask child node}
+  @begin{short}
+    Retrieves the @class{gsk:render-node} instance with the mask child of the
+    node.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:mask-node}"
   (node render-node))
 
 #+gtk-4-10
@@ -3662,14 +3683,20 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_mask_mode
-;;;
-;;; Retrieves the mask mode used by node.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_mask_mode" mask-node-mask-mode) mask-mode
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @symbol{gsk:mask-mode} value with the mask mode.}
+  @begin{short}
+    Retrieves the mask mode used by @arg{node}.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:mask-node}"
   (node render-node))
 
 #+gtk-4-10
@@ -3677,14 +3704,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_mask_node_get_source
-;;;
-;;; Retrieves the source GskRenderNode child of the node.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_source" mask-node-source) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:render-node} instance with the source child of the
+    node.}
+  @begin{short}
+    Retrieves the @class{gsk:render-node} instance with the source child of the
+    node.
+  @end{short}
+
+  Since 4.10
+  @see-class{gsk:mask-node}"
   (node render-node))
 
 #+gtk-4-10
@@ -3710,6 +3745,7 @@ color {
   @end{short}
 
   Since 4.14
+  @see-constructor{gsk:fill-node-new}
   @see-class{gsk:render-node}
   @see-class{gsk:path}
   @see-symbol{gsk:fill-rule}")
@@ -3719,15 +3755,27 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_new
-;;;
-;;; Creates a GskRenderNode that will fill the child in the area given by path
-;;; and fill_rule.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_new" fill-node-new) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[child]{a @class{gsk:render-node} instance with the node to fill the
+    area with}
+  @argument[path]{a @class{gsk:path} instance with the path describing the area
+    to fill}
+  @argument[rule]{a @symbol{gsk:fill-rule} value with the fill rule to use}
+  @begin{short}
+    Creates a @class{gsk:render-node} instance that will fill the child in the
+    area given by @arg{path} and @arg{rule}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:fill-node}
+  @see-class{gsk:render-node}
+  @see-class{gsk:path}
+  @see-symbol{gsk:fill-rule}"
   (child render-node)
   (path (g:boxed path))
   (rule fill-rule))
@@ -3737,14 +3785,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_child
-;;;
-;;; Gets the child node that is getting drawn by the given node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_child" fill-node-child) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:render-node} instance with child that is
+    getting drawn}
+  @begin{short}
+    Gets the child node that is getting drawn by the given @arg{node}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:fill-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 #+gtk-4-14
@@ -3752,14 +3808,21 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_fill_rule
-;;;
-;;; Retrieves the fill rule used to determine how the path is filled.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_fill_rule" fill-node-fill-rule) fill-rule
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @symbol{gsk:fill-rule} value.}
+  @begin{short}
+    Retrieves the fill rule used to determine how the path is filled.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:fill-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 #+gtk-4-14
@@ -3767,15 +3830,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_fill_node_get_path
-;;;
-;;; Retrieves the path used to describe the area filled with the contents of
-;;; the node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_path" fill-node-path) (g:boxed path)
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:path} instance.}
+  @begin{short}
+    Retrieves the path used to describe the area filled with the contents of
+    the node.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:fill-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 #+gtk-4-14
@@ -3801,6 +3871,7 @@ color {
   @end{short}
 
   Since 4.14
+  @see-constructor{gsk:stroke-node-new}
   @see-class{gsk:render-node}
   @see-class{gsk:path}
   @see-class{gsk:stroke}")
@@ -3810,15 +3881,30 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_new
-;;;
-;;; Creates a GskRenderNode that will fill the outline generated by stroking
-;;; the given path using the attributes defined in stroke.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_new" stroke-node-new) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[child]{a @class{gsk:render-node} instance with the node to stroke
+    the area with}
+  @argument[path]{a @class{gsk:path} instance with the path describing the area
+    to stroke}
+  @argument[stroke]{a @symbol{gsk:stroke} value with the stroke attributes
+    to use}
+  @begin{short}
+    Creates a @class{gsk:render-node} instance that will fill the outline
+    generated by stroking the given @arg{path} using the attributes defined in
+    @arg{stroke}.
+  @end{short}
+  The area is filled with child.
+
+  Since 4.14
+  @see-class{gsk:stroke-node}
+  @see-class{gsk:render-node}
+  @see-class{gsk:path}
+  @see-symbol{gsk:stroke}"
   (child render-node)
   (path (g:boxed path))
   (stroke (g:boxed stroke)))
@@ -3828,14 +3914,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_child
-;;;
-;;; Gets the child node that is getting drawn by the given node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_child" stroke-node-child) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:render-node} instance with the child that is getting
+    drawn.}
+  @begin{short}
+    Gets the child node that is getting drawn by the given @arg{node}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:stroke-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 #+gtk-4-14
@@ -3843,14 +3937,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_path
-;;;
-;;; Retrieves the path that will be stroked with the contents of the node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_path" stroke-node-path) (g:boxed path)
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:path} instance.}
+  @begin{short}
+    Retrieves the path that will be stroked with the contents of @arg{node}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:stroke-node}
+  @see-class{gsk:render-node}
+  @see-class{gsk:path}"
   (node render-node))
 
 #+gtk-4-14
@@ -3858,14 +3960,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_stroke_node_get_stroke
-;;;
-;;; Retrieves the stroke attributes used in this node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_stroke" stroke-node-stroke) (g:boxed stroke)
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:stroke} value.}
+  @begin{short}
+    Retrieves the stroke attributes used in @arg{node}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:stroke-node}
+  @see-class{gsk:render-node}
+  @see-symbol{gsk:stroke}"
   (node render-node))
 
 #+gtk-4-14
@@ -3891,6 +4001,7 @@ color {
   @end{short}
 
   Since 4.14
+  @see-constructor{gsk:subsurface-node-new}
   @see-class{gsk:render-node}")
 
 #+gtk-4-14
@@ -3898,15 +4009,28 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_new
-;;;
-;;; Creates a GskRenderNode that will possibly divert the child node to a
-;;; subsurface.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_subsurface_node_new" subsurface-node-new) render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[child]{a @class{gsk:render-node} instance}
+  @argument[subsurface]{a pointer with the subsurface to use}
+  @return{The new @class{gsk:render-node} instance.}
+  @begin{short}
+    Creates a @class{gsk:render-node} instance that will possibly divert the
+    child node to a subsurface.
+  @end{short}
+  @begin[Notes]{dictionary}
+    Since subsurfaces are currently private, these nodes cannot currently be
+    created outside of GTK. See the @class{gtk:graphics-offload} documentation.
+  @end{dictionary}
+  This constructor is not directly available to language bindings.
+
+  Since 4.14
+  @see-class{gsk:subsurface-node}
+  @see-class{gsk:render-node}"
   (child render-node)
   (subsurface :pointer))
 
@@ -3915,15 +4039,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_get_subsurface
-;;;
-;;; Gets the subsurface that was set on this node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_subsurface_node_get_subsurface" subsurface-node-subsurface)
     :pointer
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The pointer with the subsurface.}
+  @begin{short}
+    Gets the subsurface that was set on this node.
+  @end{short}
+ This function is not directly available to language bindings.
+
+  Since 4.14
+  @see-class{gsk:subsurface-node}"
   (node render-node))
 
 #+gtk-4-14
@@ -3931,15 +4062,22 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_subsurface_node_get_child
-;;;
-;;; Gets the child node that is getting drawn by the given node.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gsk_subsurface_node_get_child" subsurface-node-child)
     render-node
+ #+liber-documentation
+ "@version{#2024-12-2}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @return{The @class{gsk:render-node} instance with the child.}
+  @begin{short}
+    Gets the child node that is getting drawn by the given @arg{node}.
+  @end{short}
+
+  Since 4.14
+  @see-class{gsk:subsurface-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 #+gtk-4-14
