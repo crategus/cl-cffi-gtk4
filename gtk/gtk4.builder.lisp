@@ -207,12 +207,12 @@
   ;; Methods of the GtkBuilderScope interface
   (:skip get-type-from-name :pointer)
   (:skip get-type-from-function :pointer)
-  (create-closure ((:pointer (:struct g:closure))
+  (create-closure (:pointer    ;   for (:struct g:closure))
                    (scope (g:object builder-scope))
                    (builder (g:object builder))
                    (funcname :string)
                    (flags builder-closure-flags)
-                   (object g:object)
+                   (object :pointer)
                    (err :pointer))))
 
 ;;; ----------------------------------------------------------------------------
@@ -253,7 +253,7 @@
   (let ((func (find-symbol (setf funcname (string-upcase funcname)))))
     (if func
         (if object
-            (gobject:create-closure object func)
+            (gobject:create-closure-for-instance object func)
             (progn
               (warn "BUILDER-SCOPE-CREATE-CLOSURE: No object given")
               (cffi:null-pointer)))
@@ -1200,8 +1200,7 @@
 ;;;     return value can be NULL.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_create_closure" %builder-create-closure)
-    (:pointer (:struct g:closure))
+(cffi:defcfun ("gtk_builder_create_closure" %builder-create-closure) :pointer
   (builder (g:object builder))
   (func :string)
   (flags builder-closure-flags)
