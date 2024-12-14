@@ -152,7 +152,7 @@
     (is (typep (setf context
                      (gtk:accessible-at-context button)) 'gtk:at-context))
     ;; Check memory management
-    (is (= 3 (g:object-ref-count context))) ; Why 3 refrences?
+    (is (= 2 (g:object-ref-count context)))
     (is (= 1 (g:object-ref-count button)))))
 
 ;;;     gtk_accessible_get_bounds                          Since 4.10
@@ -181,4 +181,4 @@
 
 ;;;     gtk_accessible_announce                             Since 4.14
 
-;;; 2024-11-5
+;;; 2024-12-14
