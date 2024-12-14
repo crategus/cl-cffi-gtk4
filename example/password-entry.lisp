@@ -5,16 +5,17 @@
 ;;;; <tt>CapsLock</tt> is on, and it can optionally provide a way to see the
 ;;;; text.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-12-5
 
 (in-package :gtk4-example)
 
 (flet ((update-button (button entry1 entry2)
          (let ((text1 (gtk:editable-text entry1))
                (text2 (gtk:editable-text entry2)))
-           (when (and (> (length text1) 0)
-                      (string= text1 text2))
-             (setf (gtk:widget-sensitive button) t)))))
+           (if (and (> (length text1) 0)
+                       (string= text1 text2))
+               (setf (gtk:widget-sensitive button) t)
+               (setf (gtk:widget-sensitive button) nil)))))
 
   (defun do-password-entry (&optional application)
     (let* ((box (make-instance 'gtk:box
@@ -48,6 +49,7 @@
                                   :show-peek-icon t
                                   :placeholder-text "Confirm"
                                   :activates-default t)))
+      (gtk:widget-add-css-class button "suggested-action")
       (g:signal-connect entry1 "notify::text"
                         (lambda (object pspec)
                           (declare (ignore object pspec))
@@ -56,7 +58,6 @@
                         (lambda (object pspec)
                           (declare (ignore object pspec))
                           (update-button button entry1 entry2)))
-      (gtk:widget-add-css-class button "suggested-action")
       (g:signal-connect button "clicked"
                         (lambda (button)
                           (let ((parent (gtk:widget-root button)))
