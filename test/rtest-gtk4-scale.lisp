@@ -72,8 +72,6 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     GtkScaleFormatValueFunc
-
 ;;;     gtk_scale_new
 
 (test gtk-scale-new
@@ -101,10 +99,41 @@
     (is (= 1 (g:object-ref-count adjustment)))
     (is (= 1 (g:object-ref-count scale)))))
 
+;;;     GtkScaleFormatValueFunc
 ;;;     gtk_scale_set_format_value_func
+
 ;;;     gtk_scale_get_layout
+
+(test gtk-scale-layout
+  (let ((scale (gtk:scale-new-with-range :horizontal 0 10 1))
+        (adjustment nil)
+        (layout nil))
+    (is-true (setf (gtk:scale-draw-value scale) t))
+    (is (typep (setf layout
+                     (gtk:scale-layout scale)) 'pango:layout))
+    ;; Check memory management
+    (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
+    (is-false (setf (gtk:range-adjustment scale) nil))
+    (is-false (setf (gtk:scale-draw-value scale) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count layout)))
+    (is (= 1 (g:object-ref-count scale)))))
+
 ;;;     gtk_scale_get_layout_offsets
+
+(test gtk-scale-layout-offsets
+  (let ((scale (gtk:scale-new-with-range :horizontal 0 10 1))
+        (adjustment nil))
+    (is-true (setf (gtk:scale-draw-value scale) t))
+    (is (equal '(0 0)
+               (multiple-value-list (gtk:scale-layout-offsets scale))))
+    ;; Check memory management
+    (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
+    (is-false (setf (gtk:range-adjustment scale) nil))
+    (is (= 1 (g:object-ref-count adjustment)))
+    (is (= 1 (g:object-ref-count scale)))))
+
 ;;;     gtk_scale_add_mark
 ;;;     gtk_scale_clear_marks
 
-;;; 2024-10-25
+;;; 2024-12-5

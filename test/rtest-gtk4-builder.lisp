@@ -3,9 +3,6 @@
 (def-suite gtk-builder :in gtk-interface-builder)
 (in-suite gtk-builder)
 
-;; TODO: For a toplevel window it is the responsibility to destroy the window.
-;; Check the examples for this.
-
 (defparameter +interface+
 "<interface>
   <object class='GtkDialog' id='dialog1'>
@@ -108,9 +105,9 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkBuilderClosureFlags"
                                      GTK:BUILDER-CLOSURE-FLAGS
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_builder_closure_flags_get_type")
-                       (:SWAPPED 1))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_builder_closure_flags_get_type")
+                      (:SWAPPED 1))
              (gobject:get-gtype-definition "GtkBuilderClosureFlags"))))
 
 ;;;     GtkBuilderScope
@@ -135,8 +132,8 @@
              (glib-test:list-signals "GtkBuilderScope")))
   ;; Get interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkBuilderScope" GTK:BUILDER-SCOPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_builder_scope_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_builder_scope_get_type"))
              (gobject:get-gtype-definition "GtkBuilderScope"))))
 
 ;;;     GtkClBuilderScope
@@ -168,10 +165,10 @@
              (glib-test:list-signals "GtkBuilderClScope")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkBuilderClScope" GTK:BUILDER-CL-SCOPE
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GtkBuilderScope"))
-                       NIL)
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkBuilderScope"))
+                      NIL)
              (gobject:get-gtype-definition "GtkBuilderClScope"))))
 
 ;;; ----------------------------------------------------------------------------
@@ -181,38 +178,37 @@
 
 (defun ok-button-clicked (button)
   (when *verbose-gtk-builder-scope*
-    (format t " in OK-BUTTON-CLICKED for ~a~%" button))
+    (format t "~& in OK-BUTTON-CLICKED for ~a~%" button))
   (setf *gtk-builder-scope-msg* "OK-BUTTON-CLICKED"))
 
 (test gtk-builder-cl-scope-test
   (let ((*gtk-warn-deprecated* nil)
         (builder (gtk:builder-new))
         (scope (make-instance 'gtk:builder-cl-scope))
-        object dialog)
+        button)
     ;; Set BUILDER-CL-SCOPE on BUILDER
     (is (eq scope (setf (gtk:builder-scope builder) scope)))
     (is (eq scope (gtk:builder-scope builder)))
     ;; Load interface into BUILDER
     (is-true (gtk:builder-add-from-string builder +interface+))
-    ;; GET the BUTTON widget and the DIALOG window
-    (is (typep (setf dialog
-                     (gtk:builder-object builder "dialog1")) 'gtk:dialog))
-    (is (typep (setf object
+    ;; GET the BUTTON widget
+    (is (typep (setf button
                      (gtk:builder-object builder "ok-button")) 'gtk:button))
-    ;; Is the handler installed on OBJECT?
+    ;; Is the handler installed for object?
     (is (member 'ok-button-clicked
-                (coerce (g:object-signal-handlers object) 'list) :test #'eq))
+                (coerce (gobject::get-handlers-for-instance
+                            (g:object-pointer button))
+                        'list)
+                :test #'eq))
     ;; Emit signal and check invocation
     (setf *gtk-builder-scope-msg* nil)
-    (is-false (g:signal-emit object "clicked"))
+    (is-false (g:signal-emit button "clicked"))
     (is (string= "OK-BUTTON-CLICKED" *gtk-builder-scope-msg*))
     ;; Check memory management
-    (is-false (gtk:window-destroy dialog)) ; Destroy reference to DIALOG window
     (is-false (setf (gtk:builder-scope builder) nil))
-    (is (= 2 (g:object-ref-count dialog)))
     (is (= 1 (g:object-ref-count builder)))
     (is (= 1 (g:object-ref-count scope)))
-    (is (= 3 (g:object-ref-count object)))  ; Why 3 references?
+    (is (= 3 (g:object-ref-count button)))  ; Why 3 references?
 ))
 
 ;;;     GtkBuilder
@@ -492,4 +488,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; 2024-11-3
+;;; 2024-12-7

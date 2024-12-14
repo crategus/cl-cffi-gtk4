@@ -159,7 +159,7 @@
     (is-false (gtk:menu-button-set-create-popup-func button
                       (lambda (button)
                         (is (eq (g:gtype "GtkMenuButton")
-                                (g:object-type button)))
+                                (g:type-from-instance button)))
                         (setf msg "Create popup function")
                         gdk:+event-stop+)))
     (is-false (gtk:menu-button-popup button))

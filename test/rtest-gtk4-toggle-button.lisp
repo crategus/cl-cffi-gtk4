@@ -109,7 +109,7 @@
     (g:signal-connect button "toggled"
                       (lambda (toggle)
                         (is (eq (g:gtype "GtkToggleButton")
-                                (g:object-type toggle)))
+                                (g:type-from-instance toggle)))
                         (setf msg "Button TOGGLED")
                         gdk:+event-stop+))
     (is-false (gtk:toggle-button-active button))

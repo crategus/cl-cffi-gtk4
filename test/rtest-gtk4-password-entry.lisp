@@ -110,9 +110,14 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+;;;     gtk_password_entry_buffer_new
+
+(test gtk-password-entry-buffer-new
+  (is (typep (gtk:password-entry-buffer-new) 'gtk:password-entry-buffer)))
+
 ;;;     gtk_password_entry_new
 
 (test gtk-password-entry-new
   (is (typep (gtk:password-entry-new) 'gtk:password-entry)))
 
-;;; 2024-9-20
+;;; 2024-12-5

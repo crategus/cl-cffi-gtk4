@@ -106,7 +106,8 @@
 
 (test gtk-button-new-from-icon-name
   (let ((button (gtk:button-new-from-icon-name "battery")))
-    (is (eq (g:gtype "GtkImage") (g:object-type (gtk:button-child button))))
+    (is (eq (g:gtype "GtkImage")
+            (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is (string= "battery" (gtk:button-icon-name button)))
     (is-false (gtk:button-label button))
@@ -118,7 +119,8 @@
 
 (test gtk-button-new-with-label
   (let ((button (gtk:button-new-with-label "battery")))
-    (is (eq (g:gtype "GtkLabel") (g:object-type (gtk:button-child button))))
+    (is (eq (g:gtype "GtkLabel")
+            (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "battery" (gtk:button-label button)))
@@ -130,7 +132,8 @@
 
 (test gtk-button-new-with-mnemonic
   (let ((button (gtk:button-new-with-mnemonic "_battery")))
-    (is (eq (g:gtype "GtkLabel") (g:object-type (gtk:button-child button))))
+    (is (eq (g:gtype "GtkLabel")
+            (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "_battery" (gtk:button-label button)))

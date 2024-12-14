@@ -75,7 +75,7 @@
                     :reader store-getters)
    (column-types :initform (make-array 0 :adjustable t :fill-pointer t)
                  :reader store-types))
-  (:metaclass gobject:gobject-class)
+  (:metaclass gobject::gobject-class)
   (:gname . "GtkArrayListStore"))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
