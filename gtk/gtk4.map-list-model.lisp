@@ -35,14 +35,17 @@
 ;;;
 ;;;     GtkMapListModel
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_map_list_model_set_model
+;;;     gtk_map_list_model_get_model
+;;;
 ;;; Functions
 ;;;
 ;;;     GtkMapListModelMapFunc
 ;;;
 ;;;     gtk_map_list_model_new
 ;;;     gtk_map_list_model_set_map_func
-;;;     gtk_map_list_model_set_model
-;;;     gtk_map_list_model_get_model
 ;;;     gtk_map_list_model_has_map
 ;;;
 ;;; Properties
@@ -91,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'map-list-model 'type)
- "@version{#2023-9-3}
+ "@version{2024-12-9}
   @begin{short}
     The @class{gtk:map-list-model} object is a list model that takes a list
     model and maps the items in that model to different items according to a
@@ -122,6 +125,11 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
     The @class{gtk:map-list-model} object will attempt to discard the mapped
     objects as soon as they are no longer needed and recreate them if necessary.
   @end{dictionary}
+  @see-constructor{gtk:map-list-model-new}
+  @see-slot{gtk:map-list-model-has-map}
+  @see-slot{gtk:map-list-model-item-type}
+  @see-slot{gtk:map-list-model-model}
+  @see-slot{gtk:map-list-model-n-items}
   @see-class{g:list-model}")
 
 ;;; ----------------------------------------------------------------------------
@@ -247,8 +255,8 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 ;;; GtkMapListModelMapFunc
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcallback map-list-model-map-func :pointer
-    ((item :pointer)
+(cffi:defcallback map-list-model-map-func g:object
+    ((item g:object)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
     (funcall func item)))

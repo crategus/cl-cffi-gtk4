@@ -151,7 +151,7 @@ lambda (range value)    :run-last
       @end{pre}
       @begin[code]{table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
-        @entry[value]{A double float with the value before we clamp.}
+        @entry[value]{The double float with the value before we clamp.}
       @end{table}
       Emitted before clamping a value, to give the application a chance to
       adjust the bounds.

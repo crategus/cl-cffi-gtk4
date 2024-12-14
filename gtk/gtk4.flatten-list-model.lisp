@@ -87,14 +87,14 @@
 
 #+liber-documentation
 (setf (documentation 'flatten-list-model 'type)
- "@version{#2023-9-3}
+ "@version{2024-12-9}
   @begin{short}
     The @class{gtk:flatten-list-model} object is a list model that takes a list
     model containing list models and flattens it into a single model.
   @end{short}
   Another term for this is concatenation. The @class{gtk:flatten-list-model}
   object takes a list of lists and concatenates them into a single list.
-  @see-construtor{gtk:flatten-list-model-new}
+  @see-constructor{gtk:flatten-list-model-new}
   @see-slot{gtk:flatten-list-model-item-type}
   @see-slot{gtk:flatten-list-model-model}
   @see-slot{gtk:flatten-list-model-n-items}
@@ -123,7 +123,7 @@
 (setf (liber:alias-for-function 'flatten-list-model-item-type)
       "Accessor"
       (documentation 'flatten-list-model-item-type 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-9}
   @syntax{(gtk:flatten-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -152,7 +152,7 @@
 (setf (liber:alias-for-function 'flatten-list-model-model)
       "Accessor"
       (documentation 'flatten-list-model-model 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-9}
   @syntax{(gtk:flatten-list-model-model object) => model}
   @syntax{(setf (gtk:flatten-list-model-model object) model)}
   @argument[object]{a @class{gtk:flatten-list-model} object}
@@ -179,7 +179,7 @@
 (setf (liber:alias-for-function 'flatten-list-model-n-items)
       "Accessor"
       (documentation 'flatten-list-model-n-items 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-9}
   @syntax{(gtk:flatten-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -188,7 +188,7 @@
     Accessor of the @slot[gtk:flatten-list-model]{n-items} slot of the
     @class{gtk:flatten-list-model} class.
   @end{short}
-  @see-class{g:flatten-list-model}
+  @see-class{gtk:flatten-list-model}
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
@@ -199,7 +199,7 @@
 
 (defun flatten-list-model-new (model)
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2024-12-9}
   @argument[model]{a @class{g:list-model} object to be flattened}
   @return{The new @class{gtk:flatten-list-model} object.}
   @begin{short}
@@ -220,7 +220,7 @@
 (cffi:defcfun ("gtk_flatten_list_model_get_model_for_item"
                flatten-list-model-model-for-item) (g:object g:list-model)
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2024-12-9}
   @argument[model]{a @class{gtk:flatten-list-model} object}
   @argument[position]{an unsigned integer with a position}
   @return{The @class{g:list-model} object containing the item at

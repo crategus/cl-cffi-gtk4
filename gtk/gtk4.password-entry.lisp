@@ -91,15 +91,16 @@
 
 #+(and gtk-4-4 liber-documentation)
 (setf (documentation 'password-entry-buffer 'type)
- "@version{2024-5-23}
+ "@version{2024-12-5}
   @begin{short}
     The @class{gtk:entry-buffer} object that locks the underlying memory to
     prevent it from being swapped to disk.
   @end{short}
-  The @class{gtk:password-entry} widget uses a the
+  The @class{gtk:password-entry} widget uses the
   @class{gtk:password-entry-buffer} object.
 
   Since 4.4
+  @see-constructor{gtk:password-entry-buffer-new}
   @see-class{gtk:password-entry}
   @see-class{gtk:entry-buffer}")
 
@@ -113,7 +114,7 @@
 #+gtk-4-4
 (defun password-entry-buffer-new ()
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-12-5}
   @return{The newly created @class{gtk:password-entry-buffer} object.}
   @begin{short}
     Creates a new @class{gtk:entry-buffer} object using secure memory
@@ -153,7 +154,7 @@
 
 #+liber-documentation
 (setf (documentation 'password-entry 'type)
- "@version{2023-9-30}
+ "@version{2024-12-5}
   @begin{short}
     The @class{gtk:password-entry} class is a text entry that has been tailored
     for entering secrets.
@@ -179,7 +180,7 @@ entry.password
     @end{pre}
     The @class{gtk:password-entry} implementation has a single CSS node with
     name @code{entry} that carries a @code{.passwordstyle} style class. The
-    text CSS node below it has a child with name @code{image} and
+    @code{text} CSS node below it has a child with name @code{image} and
     @code{.caps-lock-indicator} style class for the @kbd{Caps Lock} icon, and
     possibly other children.
   @end{dictionary}
@@ -228,7 +229,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-activates-default)
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
- "@version{2024-5-22}
+ "@version{2024-12-5}
   @syntax{(gtk:password-entry-activates-default object) => setting}
   @syntax{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -260,7 +261,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-extra-menu)
       "Accessor"
       (documentation 'password-entry-extra-menu 'function)
- "@version{2023-9-30}
+ "@version{2024-12-5}
   @syntax{(gtk:password-entry-extra-menu object) => menu}
   @syntax{(setf (gtk:password-entry-extra-menu object) menu)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -290,7 +291,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-placeholder-text)
       "Accessor"
       (documentation 'password-entry-placeholder-text 'function)
- "@version{2023-9-30}
+ "@version{2024-12-5}
   @syntax{(gtk:password-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:password-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -326,7 +327,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-show-peek-icon)
       "Accessor"
       (documentation 'password-entry-show-peek-icon 'function)
- "@version{2023-9-30}
+ "@version{2024-12-5}
   @syntax{(gtk:password-entry-show-peek-icon object) => setting}
   @syntax{(setf (gtk:password-entry-show-peek-icon object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -350,7 +351,7 @@ lambda (entry)    :action
 
 (defun password-entry-new ()
  #+liber-documentation
- "@version{2023-9-30}
+ "@version{2024-12-5}
   @return{The new @class{gtk:password-entry} widget.}
   @short{Creates a password entry.}
   @see-class{gtk:password-entry}"
