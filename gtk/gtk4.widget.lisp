@@ -5512,48 +5512,67 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_observe_children ()
-;;;
-;;; GListModel *
-;;; gtk_widget_observe_children (GtkWidget *widget);
-;;;
-;;; Returns a GListModel to track the children of widget .
-;;;
-;;; Calling this function will enable extra internal bookkeeping to track
-;;; children and emit signals on the returned listmodel. It may slow down
-;;; operations a lot.
-;;;
-;;; Applications should try hard to avoid calling this function because of the
-;;; slowdowns.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; Returns :
-;;;     a GListModel tracking widget 's children.
+;;; gtk_widget_observe_children
 ;;; ----------------------------------------------------------------------------
 
+;; We need the implementation of this undocumented GType to get the
+;; correct return value from this function and the
+;; gtk:widget-observe-controllers function
+(gobject:define-gobject "GtkListListModel" list-list-model
+  (:superclass g:object
+   :export t
+   :interfaces ("GListModel"))
+  ((item-type
+    %list-list-model-item-type
+    "item-type" "GType" t nil)
+   (n-items
+    list-list-model-n-items
+    "n-items" "guint" t nil)))
+
+(cffi:defcfun ("gtk_widget_observe_children" widget-observe-children)
+    (g:object gio:list-model :already-referenced)
+ "@version{#2024-12-9}
+  @argument[widget]{a @class{gtk:widget} object}
+  @return{The @class{g:list-model} object tracking the children of @arg{widet}.}
+  @begin{short}
+    Returns a @class{g:list-model} object to track the children of @arg{widget}.
+  @end{short}
+
+  Calling this function will enable extra internal bookkeeping to track children
+  and emit signals on the returned list model. It may slow down operations a
+  lot. Applications should try hard to avoid calling this function because of
+  the slowdowns.
+  @see-class{gtk:widget}
+  @see-class{g:list-model}"
+  (widget (g:object widget)))
+
+(export 'widget-observe-children)
+
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_observe_controllers ()
-;;;
-;;; GListModel *
-;;; gtk_widget_observe_controllers (GtkWidget *widget);
-;;;
-;;; Returns a GListModel to track the GtkEventControllers of widget .
-;;;
-;;; Calling this function will enable extra internal bookkeeping to track
-;;; controllers and emit signals on the returned listmodel. It may slow down
-;;; operations a lot.
-;;;
-;;; Applications should try hard to avoid calling this function because of the
-;;; slowdowns.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; Returns :
-;;;     a GListModel tracking widget 's controllers.
+;;; gtk_widget_observe_controllers
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_observe_controllers" widget-observe-controllers)
+    (g:object gio:list-model :already-referenced)
+ "@version{#2024-12-9}
+  @argument[widget]{a @class{gtk:widget} object}
+  @return{The @class{g:list-model} object tracking the controllers of
+    @arg{widet}.}
+  @begin{short}
+    Returns a @class{g:list-model} object to track the
+    @class{gtk:event-controller} objects of @arg{widget}.
+  @end{short}
+
+  Calling this function will enable extra internal bookkeeping to track
+  controllers and emit signals on the returned list model. It may slow down
+  operations a lot. Applications should try hard to avoid calling this function
+  because of the slowdowns.
+  @see-class{gtk:widget}
+  @see-class{g:list-model}
+  @see-class{gtk:event-controller}"
+  (widget (g:object widget)))
+
+(export 'widget-observe-controllers)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_insert_action_group
