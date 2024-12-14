@@ -573,7 +573,7 @@ lambda (printer success)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_list_papers" printer-list-papers)
-    (g:list-t (g:object page-setup :already-referenced))
+    (g:list-t (g:object page-setup :return))
  #+liber-documentation
  "@version{2024-7-6}
   @argument[printer]{a @class{gtk:printer} object}

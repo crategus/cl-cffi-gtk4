@@ -849,12 +849,30 @@ case PROP_EXPRESSION:
   (n-params :uint)
   (params :pointer))
 
+(cffi:defcfun ("gtk_cclosure_expression_new" %cclosure-expression-new)
+    expression
+  (gtype g:type-t)
+  (marshal :pointer)
+  (n-params :uint)
+  (params :pointer)
+  (func :pointer)
+  (data :pointer)
+  (destroy :pointer))
+
 #+nil
 (defun closure-expression-new (gtype func params)
   (cffi:with-foreign-object (expr :pointer n-params)
     (iter (for i from 0 below (length params))
           (for param in params)
           (setf (cffi:mem-aref expr 'expression i) param))
+    (%cclosure-expression-new
+            gtype
+            (cffi:null-pointer)
+            (length params)
+            ptr
+            (cffi:callback ???? ) ; Can we implemented this generally?
+            (glib:allocate-stable-pointer func)
+            (cffi:callback glib:stable-pointer-destroy-notify))
 ))
 
 ;;; ----------------------------------------------------------------------------

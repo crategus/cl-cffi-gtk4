@@ -76,7 +76,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_filter_new" %custom-filter-new)
-    (g:object custom-filter :already-referenced)
+    (g:object custom-filter :return)
   (func :pointer)
   (data :pointer)
   (notify :pointer))

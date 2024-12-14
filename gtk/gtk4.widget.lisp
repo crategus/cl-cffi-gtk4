@@ -3146,7 +3146,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_create_pango_context" widget-create-pango-context)
-    (g:object pango:context :already-referenced)
+    (g:object pango:context :return)
  #+liber-documentation
  "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3275,7 +3275,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_create_pango_layout" %widget-create-pango-layout)
-    (g:object pango:layout :already-referenced)
+    (g:object pango:layout :return)
   (widget (g:object widget))
   (text :string))
 
@@ -5530,7 +5530,7 @@ lambda (widget)    :run-last
     "n-items" "guint" t nil)))
 
 (cffi:defcfun ("gtk_widget_observe_children" widget-observe-children)
-    (g:object gio:list-model :already-referenced)
+    (g:object gio:list-model :return)
  "@version{#2024-12-9}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{g:list-model} object tracking the children of @arg{widet}.}
@@ -5553,7 +5553,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_observe_controllers" widget-observe-controllers)
-    (g:object gio:list-model :already-referenced)
+    (g:object gio:list-model :return)
  "@version{#2024-12-9}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{g:list-model} object tracking the controllers of

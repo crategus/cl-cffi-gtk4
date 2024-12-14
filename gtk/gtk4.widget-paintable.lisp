@@ -137,7 +137,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_paintable_new" widget-paintable-new)
-    (g:object widget-paintable :already-referenced)
+    (g:object widget-paintable :return)
  #+liber-documentation
  "@version{2024-11-2}
   @argument[widget]{a @class{gtk:widget} object or @code{nil}}

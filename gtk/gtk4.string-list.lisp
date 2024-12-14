@@ -132,7 +132,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_object_new" %string-object-new)
-    (g:object string-object :already-referenced)
+    (g:object string-object :return)
   (string :string))
 
 (defun string-object-new (&optional string)
@@ -303,7 +303,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_new" string-list-new)
-    (g:object string-list :already-referenced)
+    (g:object string-list :return)
  #+liber-documentation
  "@version{2023-9-28}
   @argument[strings]{a list of strings to put in the model}

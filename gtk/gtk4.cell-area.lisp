@@ -1028,7 +1028,7 @@ lambda (area renderer editable)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_create_context" cell-area-create-context)
-    (g:object cell-area-context :already-referenced)
+    (g:object cell-area-context :return)
  #+liber-documentation
  "@version{2024-10-9}
   @argument[area]{a @class{gtk:cell-area} object}
@@ -1057,7 +1057,7 @@ lambda (area renderer editable)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_copy_context" cell-area-copy-context)
-    (g:object cell-area-context :already-referenced)
+    (g:object cell-area-context :return)
  #+liber-documentation
  "@version{2024-7-7}
   @argument[area]{a @class{gtk:cell-area} object}

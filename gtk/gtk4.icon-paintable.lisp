@@ -257,7 +257,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_paintable_new_for_file" icon-paintable-new-for-file)
-    (g:object icon-paintable :already-referenced)
+    (g:object icon-paintable :return)
  #+liber-documentation
  "@version{2024-10-9}
   @argument[file]{a @class{g-file} object}

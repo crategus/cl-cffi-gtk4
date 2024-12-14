@@ -284,7 +284,7 @@ lambda (target drop x y)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_async_new" drop-target-async-new)
-    (g:object drop-target-async :already-referenced)
+    (g:object drop-target-async :return)
  #+liber-documentation
  "@version{#2023-9-29}
   @argument[formats]{a @class{gdk:content-formats} instance with the supported

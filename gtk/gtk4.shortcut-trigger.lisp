@@ -113,7 +113,7 @@
 
 (cffi:defcfun ("gtk_shortcut_trigger_parse_string"
                shortcut-trigger-parse-string)
-    (g:object shortcut-trigger :already-referenced)
+    (g:object shortcut-trigger :return)
  #+liber-documentation
  "@version{2024-11-1}
   @argument[str]{a string to parse}

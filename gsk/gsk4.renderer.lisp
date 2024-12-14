@@ -162,7 +162,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
-    (g:object renderer :already-referenced)
+    (g:object renderer :return)
  #+liber-documentation
  "@version{2024-11-7}
   @argument[surface]{a @class{gdk:surface} object}
@@ -340,7 +340,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new)
-    (g:object renderer :already-referenced)
+    (g:object renderer :return)
  #+liber-documentation
  "@version{2024-11-7}
   @return{The new Cairo @class{gsk:renderer} instance.}
@@ -387,7 +387,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new)
-    (g:object renderer :already-referenced)
+    (g:object renderer :return)
  #+liber-documentation
  "@version{2024-11-7}
   @return{The new OpenGL @class{gsk:renderer} instance.}
@@ -431,7 +431,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_ngl_renderer_new" ngl-renderer-new)
-    (g:object renderer :already-referenced)
+    (g:object renderer :return)
  #+liber-documentation
  "@version{2024-11-7}
   @return{The new experimental OpenGL @class{gsk:renderer} instance.}

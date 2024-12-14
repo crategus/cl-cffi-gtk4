@@ -466,7 +466,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_settings_new_from_file" %print-settings-new-from-file)
-    (g:object print-settings :already-referenced)
+    (g:object print-settings :return)
   (filename :string)
   (err :pointer))
 
@@ -495,7 +495,7 @@
 
 (cffi:defcfun ("gtk_print_settings_new_from_key_file"
                %print-settings-new-from-key-file)
-    (g:object print-settings :already-referenced)
+    (g:object print-settings :return)
   (keyfile (:pointer (:struct g:variant)))
   (group :string)
   (error :pointer))
@@ -530,7 +530,7 @@
 
 (cffi:defcfun ("gtk_print_settings_new_from_gvariant"
                print-settings-new-from-gvariant)
-     (g:object print-settings :already-referenced)
+     (g:object print-settings :return)
  #+liber-documentation
  "@version{2024-2-18}
   @argument[variant]{an @code{a{sv@}} @type{g:variant} instance}
@@ -573,7 +573,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_settings_copy" print-settings-copy)
-    (g:object print-settings :already-referenced)
+    (g:object print-settings :return)
  #+liber-documentation
  "@version{2024-2-17}
   @argument[other]{a @class{gtk:print-settings} object}

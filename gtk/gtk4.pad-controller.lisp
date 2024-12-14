@@ -230,7 +230,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_pad_controller_new" pad-controller-new)
-    (g:object pad-controller :already-referenced)
+    (g:object pad-controller :return)
  #+liber-documentation
  "@version{2024-4-5}
   @argument[group]{a @class{g:action-group} object to trigger actions from}

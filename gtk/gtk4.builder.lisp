@@ -801,7 +801,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_builder_new_from_string" %builder-new-from-string)
-    (g:object builder :already-referenced)
+    (g:object builder :return)
   (string :string)
   (length :int))
 

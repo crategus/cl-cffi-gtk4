@@ -379,7 +379,7 @@
 
 (cffi:defcfun ("gtk_popover_menu_new_from_model_full"
                popover-menu-new-from-model-full)
-    (g:object popover-menu :already-referenced)
+    (g:object popover-menu :return)
  #+liber-documentation
  "@version{#2024-10-26}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}

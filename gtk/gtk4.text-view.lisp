@@ -325,7 +325,7 @@
 ;; initialized correctly and the code crashes that uses this child anchor.
 
 (cffi:defcfun ("gtk_text_child_anchor_new" text-child-anchor-new)
-    (g:object text-child-anchor :already-referenced)
+    (g:object text-child-anchor :return)
  #+liber-documentation
  "@version{2024-10-26}
   @return{The new @class{gtk:text-child-anchor} object.}
@@ -348,7 +348,7 @@
 #+gtk-4-6
 (cffi:defcfun ("gtk_text_child_anchor_new_with_replacement"
                text-child-anchor-new-with-replacement)
-    (g:object text-child-anchor :already-referenced)
+    (g:object text-child-anchor :return)
  #+liber-documentation
  "@version{2024-10-26}
   @argument[character]{a string with a replacement character}

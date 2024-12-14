@@ -256,7 +256,7 @@
 
 (cffi:defcfun ("gtk_file_filter_new_from_gvariant"
                file-filter-new-from-gvariant)
-    (g:object file-filter :already-referenced)
+    (g:object file-filter :return)
  #+liber-documentation
  "@version{2024-8-21}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}

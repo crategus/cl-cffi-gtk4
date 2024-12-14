@@ -542,7 +542,7 @@ lambda (theme)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_theme_lookup_icon" icon-theme-lookup-icon)
-    (g:object icon-paintable :already-referenced)
+    (g:object icon-paintable :return)
  #+liber-documentation
  "@version{2024-10-9}
   @argument[theme]{a @class{gtk:icon-theme} object}
@@ -589,7 +589,7 @@ lambda (theme)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_theme_lookup_by_gicon" icon-theme-lookup-by-gicon)
-    (g:object icon-paintable :already-referenced)
+    (g:object icon-paintable :return)
  #+liber-documentation
  "@version{#2024-10-9}
   @argument[theme]{a @class{gtk:icon-theme} object}

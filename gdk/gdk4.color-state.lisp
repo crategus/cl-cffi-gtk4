@@ -186,8 +186,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_color_state_create_cicp_params"
-               color-state-create-cicp-params)
-    (g:object cicp-params :already-referenced)
+               color-state-create-cicp-params) (g:object cicp-params :return)
  #+liber-documentation
  "@version{2024-11-10}
   @argument[color]{a @class{gdk:color-state} instance}

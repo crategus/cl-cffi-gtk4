@@ -75,7 +75,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_new" %custom-sorter-new)
-    (g:object custom-sorter :already-referenced)
+    (g:object custom-sorter :return)
   (func :pointer)
   (data :pointer)
   (notify :pointer))

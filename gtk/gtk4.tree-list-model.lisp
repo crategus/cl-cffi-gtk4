@@ -293,7 +293,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_row_get_child_row" tree-list-row-child-row)
-    (g:object tree-list-row :already-referenced)
+    (g:object tree-list-row :return)
  #+liber-documentation
  "@version{#2024-10-29}
   @argument[listrow]{a @class{gtk:tree-list-row} object}
@@ -314,7 +314,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_row_get_parent" tree-list-row-parent)
-    (g:object tree-list-row :already-referenced)
+    (g:object tree-list-row :return)
  #+liber-documentation
  "@version{2024-10-29}
   @argument[listrow]{a @class{gtk:tree-list-row} object}
@@ -608,7 +608,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_model_new" %tree-list-model-new)
-    (g:object tree-list-model :already-referenced)
+    (g:object tree-list-model :return)
   (root (g:object g:list-model))
   (passthrough :boolean)
   (autoexpand :boolean)

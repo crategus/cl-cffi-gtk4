@@ -328,7 +328,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
  #+liber-documentation
  "@version{#2023-4-12}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
@@ -347,7 +347,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
  #+liber-documentation
  "@version{#2023-4-12}
   @argument[path]{a string with the path of the resource file}
@@ -373,7 +373,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_texture_new_from_file" %texture-new-from-file)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
   (file g:object)
   (err :pointer))
 
@@ -401,7 +401,7 @@
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_new_from_filename" %texture-new-from-filename)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
   (path :string)
   (err :pointer))
 
@@ -436,7 +436,7 @@
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_new_from_bytes" %texture-new-from-bytes)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
   (bytes (g:boxed g:bytes))
   (err :pointer))
 
@@ -677,7 +677,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_memory_texture_new" memory-texture-new)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
  #+liber-documentation
  "@version{#2023-8-1}
   @argument[width]{an integer with the width of the texture}
@@ -734,7 +734,7 @@
 ;; not implemented.
 
 (cffi:defcfun ("gdk_gl_texture_new" %gl-texture-new)
-    (g:object texture :already-referenced)
+    (g:object texture :return)
   (context (g:object gl-context))
   (id :uint)
   (width :int)

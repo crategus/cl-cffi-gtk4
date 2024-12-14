@@ -414,7 +414,7 @@ lambda (target x y)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new)
-    (g:object drop-target :already-referenced)
+    (g:object drop-target :return)
  #+liber-documentation
  "@version{2024-11-2}
   @argument[gtype]{a @class{g:type-t} type ID with the supported type}

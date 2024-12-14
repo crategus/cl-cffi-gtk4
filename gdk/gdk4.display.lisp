@@ -620,7 +620,7 @@ lambda (display setting)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_app_launch_context" display-app-launch-context)
-    (g:object app-launch-context :already-referenced)
+    (g:object app-launch-context :return)
  #+liber-documentation
  "@version{2024-10-8}
   @argument[display]{a @class{gdk:display} object}

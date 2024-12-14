@@ -179,7 +179,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new" media-file-new)
-    (g:object media-stream :already-referenced)
+    (g:object media-stream :return)
  #+liber-documentation
  "@version{2024-10-31}
   @return{The new @class{gtk:media-file} object.}
@@ -193,7 +193,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new_for_file" media-file-new-for-file)
-    (g:object media-stream :already-referenced)
+    (g:object media-stream :return)
  #+liber-documentation
  "@version{2024-10-31}
   @argument[file]{a @class{g:file} object with the file to play}
@@ -210,7 +210,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new_for_filename" %media-file-new-for-filename)
-    (g:object media-stream :already-referenced)
+    (g:object media-stream :return)
   (filename :string))
 
 (defun media-file-new-for-filename (path)
@@ -240,7 +240,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new_for_resource" media-file-new-for-resource)
-    (g:object media-stream :already-referenced)
+    (g:object media-stream :return)
  #+liber-documentation
  "@version{2024-10-31}
   @argument[path]{a string with the resource path to open}
