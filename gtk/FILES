@@ -32,7 +32,7 @@ GListModel support
   gtk4.multi-selection.lisp            GtkMultiSelection              GTK 4.16 +
 
   gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.16 +
-  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.16 +
+  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.16 .
   gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.16 +
   gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.16 +
   gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.16 +
@@ -152,8 +152,8 @@ Numeric and Text Data Entry
   gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
   gtk4.text.lisp                       GtkText                        GTK 4.16
   gtk4.entry.lisp                      GtkEntry                       GTK 4.16
-  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16 .
-  gtk4.scale.lisp                      GtkScale                       GTK 4.16 .
+  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16
+  gtk4.scale.lisp                      GtkScale                       GTK 4.16
   gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.16 .
   gtk4.search-entry.lisp               GtkSearchEntry                 GTK 4.16 .
   gtk4.search-bar.lisp                 GtkSearchBar                   GTK 4.16 .
