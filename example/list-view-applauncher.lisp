@@ -14,7 +14,7 @@
 ;; function above, but this is a simple demo, so we'll use the simple way.
 (defun activate-cb (listview position)
   (let* ((model (gtk:list-view-model listview))
-         (appinfo (g:list-model-object model position))
+         (appinfo (g:list-model-item model position))
          (display (gtk:widget-display listview))
          (context (gdk:display-app-launch-context display)))
     (unless (g:app-info-launch appinfo nil context)

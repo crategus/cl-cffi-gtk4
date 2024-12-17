@@ -744,7 +744,7 @@ lambda (display setting)    :run-last
   @see-class{g:list-model}"
   (let ((monitors (%display-monitors display)))
     (iter (for i from 0 below (g:list-model-n-items monitors))
-          (collect (g:list-model-object monitors i)))))
+          (collect (g:list-model-item monitors i)))))
 
 (export 'display-monitors)
 

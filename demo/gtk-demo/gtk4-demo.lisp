@@ -118,7 +118,7 @@
 
 (defun dump-list-store (model &optional (prefix ""))
   (dotimes (i (g:list-store-n-items model))
-    (let ((object (g:list-model-object model i)))
+    (let ((object (g:list-model-item model i)))
       (if (gtk-demo-name object)
           (format t "~a~a~%" prefix (string-upcase (gtk-demo-name object)))
           (format t "~%~a~a~%" prefix (gtk-demo-title object)))
@@ -339,7 +339,7 @@
 
 (defun activate-cb (listview position application)
   (let* ((model (gtk:list-view-model listview))
-         (row (g:list-model-object model position))
+         (row (g:list-model-item model position))
          (demo (gtk:tree-list-row-item row)))
     (when (gtk-demo-name demo)
       (gtk-demo-run demo application))))
