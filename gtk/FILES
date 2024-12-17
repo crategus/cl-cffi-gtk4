@@ -29,18 +29,18 @@ GListModel support
   gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.16 .
   gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.16 .
   gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.16 .
-  gtk4.multi-selection.lisp            GtkMultiSelection              GTK 4.16 +
+  gtk4.multi-selection.lisp            GtkMultiSelection              GTK 4.16 .
 
-  gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.16 +
+  gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.16 .
   gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.16 .
-  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.16 +
-  gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.16 +
-  gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.16 +
-  gtk4.selection-filter-model.lisp     GtkSelectionFilterModel        GTK 4.16 +
+  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.16 .
+  gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.16 .
+  gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.16 .
+  gtk4.selection-filter-model.lisp     GtkSelectionFilterModel        GTK 4.16 .
 
-  gtk4.bookmark-list.lisp              GtkBookmarkList                GTK 4.16 +
-  gtk4.directory-list.lisp             GtkDirectoryList               GTK 4.16 +
-  gtk4.string-list.lisp                GtkStringList                  GTK 4.16 +
+  gtk4.bookmark-list.lisp              GtkBookmarkList                GTK 4.16 .
+  gtk4.directory-list.lisp             GtkDirectoryList               GTK 4.16 .
+  gtk4.string-list.lisp                GtkStringList                  GTK 4.16 .
 
 List-based Widgets
 
