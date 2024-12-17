@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-single-selection :in gtk-suite)
+(def-suite gtk-single-selection :in gtk-list-model-support)
 (in-suite gtk-single-selection)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -68,7 +68,8 @@
 ;;;     selected-item
 
 (test gtk-single-selection-properties
-  (let ((selection (gtk:single-selection-new (g:list-store-new "GObject"))))
+  (glib-test:with-check-memory (selection)
+    (setf selection (gtk:single-selection-new (g:list-store-new "GObject")))
     (is-true (gtk:single-selection-autoselect selection))
     (is-false (gtk:single-selection-can-unselect selection))
     (is (eq (g:gtype "GObject")
@@ -77,16 +78,24 @@
     (is (= 0 (gtk:single-selection-n-items selection)))
     (is (= gtk:+invalid-list-position+
            (gtk:single-selection-selected selection)))
-    (is-false (gtk:single-selection-selected-item selection))))
+    (is-false (gtk:single-selection-selected-item selection))
+    ;; Remove references
+    (is-false (setf (gtk:single-selection-model selection) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_single_selection_new
 
 (test gtk-single-selection-new
-  (is (typep (gtk:single-selection-new) 'gtk:single-selection))
-  (is (typep (gtk:single-selection-new nil) 'gtk:single-selection))
-  (is (typep (gtk:single-selection-new (g:list-store-new "GObject"))
-             'gtk:single-selection)))
+  (glib-test:with-check-memory ((selection store))
+    (is (typep (setf selection (gtk:single-selection-new)) 'gtk:single-selection))
+    (is (typep (setf selection (gtk:single-selection-new nil))
+               'gtk:single-selection))
+    (is (typep (setf selection
+                     (gtk:single-selection-new (setf store
+                                                     (g:list-store-new "GObject"))))
+               'gtk:single-selection))
+    ;; Remove references
+    (is-false (setf (gtk:single-selection-model selection) nil))))
 
-;;; 2024-9-19
+;;; 2024-12-17

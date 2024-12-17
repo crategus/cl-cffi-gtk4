@@ -47,17 +47,19 @@
 ;;;     gtk:bool-filter-expression
 
 (test gtk-bool-filter-expression
-  (let ((filter (make-instance 'gtk:bool-filter))
-        (expr (gtk:constant-expression-new "gboolean" t)))
-    (is (cffi:null-pointer-p (gtk:bool-filter-expression filter)))
-    (is (cffi:pointer-eq expr
-                         (setf (gtk:bool-filter-expression filter) expr)))
-    (is (cffi:pointer-eq expr (gtk:bool-filter-expression filter)))))
+  (glib-test:with-check-memory (filter)
+    (let ((expr (gtk:constant-expression-new "gboolean" t)))
+      (setf filter (make-instance 'gtk:bool-filter))
+      (is (cffi:null-pointer-p (gtk:bool-filter-expression filter)))
+      (is (cffi:pointer-eq expr
+                           (setf (gtk:bool-filter-expression filter) expr)))
+      (is (cffi:pointer-eq expr (gtk:bool-filter-expression filter))))))
 
 ;;;     gtk:bool-filter-invert
 
 (test gtk-bool-filter-invert
-  (let ((filter (make-instance 'gtk:bool-filter)))
+  (glib-test:with-check-memory (filter)
+    (setf filter (make-instance 'gtk:bool-filter))
     (is-false (gtk:bool-filter-invert filter))
     (is-true (setf (gtk:bool-filter-invert filter) t))
     (is-true (gtk:bool-filter-invert filter))))
@@ -67,17 +69,17 @@
 ;;;     gtk_bool_filter_new
 
 (test gtk-bool-filter-new
-  (let ((filter nil)
-        (expression nil))
-    (cffi:with-foreign-object (gvalue '(:struct g:value))
-      (is (eq (g:gtype "gboolean")
-              (g:value-type (g:value-init gvalue "gboolean"))))
-      (is-true (setf (g:value-boolean gvalue) t))
-      (is-true (setf expression (gtk:constant-expression-new-for-value gvalue)))
-      ;; Create the bool filter
-      (is (typep (setf filter
-                       (gtk:bool-filter-new expression)) 'gtk:bool-filter))
-      (is (cffi:pointer-eq expression (gtk:bool-filter-expression filter)))
-      (is-false (gtk:bool-filter-invert filter)))))
+  (glib-test:with-check-memory (filter)
+    (let ((expression nil))
+      (cffi:with-foreign-object (gvalue '(:struct g:value))
+        (is (eq (g:gtype "gboolean")
+                (g:value-type (g:value-init gvalue "gboolean"))))
+        (is-true (setf (g:value-boolean gvalue) t))
+        (is-true (setf expression (gtk:constant-expression-new-for-value gvalue)))
+        ;; Create the bool filter
+        (is (typep (setf filter
+                         (gtk:bool-filter-new expression)) 'gtk:bool-filter))
+        (is (cffi:pointer-eq expression (gtk:bool-filter-expression filter)))
+        (is-false (gtk:bool-filter-invert filter))))))
 
-;;; 2024-9-19
+;;; 2024-12-16

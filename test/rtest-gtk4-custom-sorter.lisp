@@ -45,18 +45,20 @@
 ;;;     gtk_custom_sorter_new
 
 (test gtk-custom-sorter-new
-  (is (typep (gtk:custom-sorter-new) 'gtk:custom-sorter))
-  (is (typep (gtk:custom-sorter-new nil) 'gtk:custom-sorter))
-  (is (typep (gtk:custom-sorter-new (lambda (item1 item2)
-                                      (cond ((< item1 item2) -1)
-                                            ((> item1 item2) +1)
-                                            (t 0))))
-             'gtk:custom-sorter)))
+  (glib-test:with-check-memory (nil)
+    (is (typep (gtk:custom-sorter-new) 'gtk:custom-sorter))
+    (is (typep (gtk:custom-sorter-new nil) 'gtk:custom-sorter))
+    (is (typep (gtk:custom-sorter-new (lambda (item1 item2)
+                                        (cond ((< item1 item2) -1)
+                                              ((> item1 item2) +1)
+                                              (t 0))))
+               'gtk:custom-sorter))))
 
 ;;;     gtk_custom_sorter_set_sort_func
 
 (test gtk-custom-sorter-set-sort-func
-  (let ((sorter (gtk:custom-sorter-new)))
+  (glib-test:with-check-memory (sorter)
+    (is (typep (setf sorter (gtk:custom-sorter-new)) 'gtk:custom-sorter))
     (is-false (gtk:custom-sorter-set-sort-func sorter nil))
     (is-false (gtk:custom-sorter-set-sort-func sorter
                                                (lambda (item1 item2)
@@ -64,4 +66,4 @@
                                                        ((> item1 item2) +1)
                                                        (t 0)))))))
 
-;;; 2024-9-19
+;;; 2024-12-16

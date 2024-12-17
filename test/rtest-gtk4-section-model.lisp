@@ -56,20 +56,20 @@
 ;;;     gtk_section_model_get_section
 
 (test gtk-section-model-section
-  (let* ((model (create-string-list-for-package))
-         (selection (gtk:single-selection-new model)))
+  (glib-test:with-check-memory ((model selection))
+    (setf model (create-string-list-for-package))
+    (setf selection (gtk:single-selection-new model))
     (is (equal (list 0 gtk:+invalid-list-position+)
                (multiple-value-list (gtk:section-model-section selection 100))))
-    ;; Check memory management
-    (is-false (setf (gtk:single-selection-model selection) nil))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count selection)))))
+    ;; Remove references
+    (is-false (setf (gtk:single-selection-model selection) nil))))
 
 ;;;     gtk_section_model_sections_changed
 
 (test gtk-section-model-sections-changed
-  (let* ((model (create-string-list-for-package))
-         (selection (gtk:single-selection-new model)))
+  (glib-test:with-check-memory ((model selection))
+    (setf model (create-string-list-for-package))
+    (setf selection (gtk:single-selection-new model))
     ;; Connect signal handler
     (g:signal-connect selection "sections-changed"
             (lambda (model pos n-items)
@@ -78,9 +78,7 @@
               (is (= 10 n-items))))
     ;; Emit signal
     (is-false (g:signal-emit selection "sections-changed" 100 10))
-    ;; Check memory management
-    (is-false (setf (gtk:single-selection-model selection) nil))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count selection)))))
+    ;; Remove references
+    (is-false (setf (gtk:single-selection-model selection) nil))))
 
-;;; 2024-11-29
+;;; 2024-12-17

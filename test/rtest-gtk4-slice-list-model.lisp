@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-slice-list-model :in gtk-suite)
+(def-suite gtk-slice-list-model :in gtk-list-model-support)
 (in-suite gtk-slice-list-model)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -53,14 +53,27 @@
 ;;;     offset
 ;;;     size
 
+(test gtk-slice-list-model-properties
+  (glib-test:with-check-memory (model)
+    (setf model (make-instance 'gtk:slice-list-model))
+    (is (eq (g:gtype "GObject") (gtk:slice-list-model-item-type model)))
+    (is-false (gtk:slice-list-model-model model))
+    (is (= 0 (gtk:slice-list-model-n-items model)))
+    (is (= 0 (gtk:slice-list-model-offset model)))
+    (is (= 10 (gtk:slice-list-model-size model)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_slice_list_model_new
-;;;     gtk_slice_list_model_set_model
-;;;     gtk_slice_list_model_get_model
-;;;     gtk_slice_list_model_set_offset
-;;;     gtk_slice_list_model_get_offset
-;;;     gtk_slice_list_model_set_size
-;;;     gtk_slice_list_model_get_size
 
-;;; 2024-9-19
+(test gtk-slice-list-model-new
+  (glib-test:with-check-memory ((store model))
+    (setf store (create-string-list-for-package))
+    (is (typep (setf model
+                     (gtk:slice-list-model-new store 100 50))
+               'gtk:slice-list-model))
+    (is (= 50 (gtk:slice-list-model-n-items model)))
+    ;; Remove references
+    (is-false (setf (gtk:slice-list-model-model model) nil))))
+
+;;; 2024-12-17

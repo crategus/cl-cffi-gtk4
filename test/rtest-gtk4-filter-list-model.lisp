@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-filter-list-model :in gtk-suite)
+(def-suite gtk-filter-list-model :in gtk-list-model-support)
 (in-suite gtk-filter-list-model)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -51,7 +51,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-filter-list-model-properties
-  (let ((model (make-instance 'gtk:filter-list-model)))
+  (glib-test:with-check-memory (model)
+    (setf model (make-instance 'gtk:filter-list-model))
     (is-false (gtk:filter-list-model-filter model))
     (is-false (gtk:filter-list-model-incremental model))
     ;; The default is "GObject"!?
@@ -65,8 +66,9 @@
 ;;;     gtk_filter_list_model_new
 
 (test gtk-filter-list-model-new.1
-  (let* ((store (g:list-store-new "GtkWidget"))
-         (model (gtk:filter-list-model-new store nil)))
+  (glib-test:with-check-memory ((store model))
+    (setf store (g:list-store-new "GtkWidget"))
+    (setf model (gtk:filter-list-model-new store nil))
     ;; The list store
     (is (eq (g:gtype "GtkWidget") (g:list-store-item-type store)))
     (is (= 0 (g:list-store-n-items store)))
@@ -77,38 +79,47 @@
     (is (= 0 (g:list-model-n-items model)))
     ;; The filter list model
     (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
-    (is (= 0 (gtk:filter-list-model-n-items model)))))
+    (is (= 0 (gtk:filter-list-model-n-items model)))
+    ;; Remove references
+    (is-false (setf (gtk:filter-list-model-model model) nil))))
 
 (test gtk-filter-list-model-new.2
-  (let* ((store (gtk:string-list-new '()))
-         (expression (gtk:property-expression-new "GtkStringObject"
-                                                  nil "string"))
-         (filter (gtk:string-filter-new expression))
-         (model (gtk:filter-list-model-new store filter)))
-    ;; Fill the string list with strings
-    (do-external-symbols (symbol (find-package "GTK"))
-      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+  (glib-test:with-check-memory ((store filter model))
+    (let ((expression (gtk:property-expression-new "GtkStringObject"
+                                                   nil "string")))
+      (setf store (gtk:string-list-new '()))
+      (setf filter (gtk:string-filter-new expression))
+      (setf model (gtk:filter-list-model-new store filter))
+      ;; Fill the string list with strings
+      (do-external-symbols (symbol (find-package "GTK"))
+        (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
 
-    (is (eq (g:gtype "GObject") (g:list-model-item-type store)))
-    (is (< 3000 (g:list-model-n-items store)))
+      (is (eq (g:gtype "GObject") (g:list-model-item-type store)))
+      (is (< 3000 (g:list-model-n-items store)))
 
-    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
-    (is (< 3000 (g:list-model-n-items model)))
+      (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+      (is (< 3000 (g:list-model-n-items model)))
 
-    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
-    (is (< 3000 (gtk:filter-list-model-n-items model)))
+      (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+      (is (< 3000 (gtk:filter-list-model-n-items model)))
 
-    (setf (gtk:string-filter-search filter) "string-filter")
+      (setf (gtk:string-filter-search filter) "string-filter")
 
-    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
-    (is (= 6 (gtk:filter-list-model-n-items model)))
-    (is (equal '("string-filter" "string-filter-expression"
-                 "string-filter-ignore-case" "string-filter-match-mode"
-                 "string-filter-new" "string-filter-search")
-               (sort (iter (with n = (gtk:filter-list-model-n-items model))
-                           (for i from 0 below n)
-                           (for object = (g:list-model-object model i))
-                           (collect (gtk:string-object-string object)))
-                     #'string<)))))
+      (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+      (is (= 6 (gtk:filter-list-model-n-items model)))
+      (is (equal '("string-filter" "string-filter-expression"
+                   "string-filter-ignore-case" "string-filter-match-mode"
+                   "string-filter-new" "string-filter-search")
+                 (sort (iter (with n = (gtk:filter-list-model-n-items model))
+                             (for i from 0 below n)
+                             (for object = (g:list-model-item model i))
+                             (collect (gtk:string-object-string object)))
+                       #'string<)))
+      (setf (gtk:string-filter-search filter) "unknown")
+      (is (= 0 (gtk:filter-list-model-n-items model)))
+      ;; Remove references
+      (is-false (gtk:string-list-splice store 0 (g:list-model-n-items store) nil))
+      (is-false (setf (gtk:filter-list-model-filter model) nil))
+      (is-false (setf (gtk:filter-list-model-model model) nil)))))
 
-;;; 2024-9-19
+;;; 2024-12-17

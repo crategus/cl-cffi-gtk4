@@ -56,7 +56,8 @@
 ;;;     gtk:file-filter-name
 
 (test gtk-file-filter-name
-  (let ((filter (make-instance 'gtk:file-filter)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (make-instance 'gtk:file-filter)) 'gtk:file-filter))
     (is-false (gtk:file-filter-name filter))
     (is (string= "Filter" (setf (gtk:file-filter-name filter) "Filter")))
     (is (string= "Filter" (gtk:file-filter-name filter)))))
@@ -66,51 +67,59 @@
 ;;;     gtk_file_filter_new
 
 (test gtk-file-filter-new
-  (is (eq 'gtk:file-filter
-          (type-of (gtk:file-filter-new)))))
+  (glib-test:with-check-memory (nil)
+    (is (eq 'gtk:file-filter
+            (type-of (gtk:file-filter-new))))))
 
 ;;;     gtk_file_filter_add_mime_type
 
 (test gtk-file-filter-add-mime-type
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-add-mime-type filter "text/plain"))))
 
 ;;;     gtk_file_filter_add_pattern
 
 (test gtk-file-filter-add-pattern
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-add-pattern filter "*.txt"))))
 
 ;;;     gtk_file_filter_add_pixbuf_formats
 
 (test gtk-file-filter-add-pixbuf-formats
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-add-pixbuf-formats filter))))
 
 ;;;     gtk_file_filter_add_suffix                         Since 4.4
 
 (test gtk-file-filter-add-suffix
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-add-suffix filter "txt"))))
 
 ;;;     gtk_file_filter_get_attributes
 
 (test gtk-file-filter-attributes.1
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-attributes filter))
     (is-false (gtk:file-filter-add-mime-type filter "text/plain"))
     (is (equal '("standard::content-type")
                (gtk:file-filter-attributes filter)))))
 
 (test gtk-file-filter-attributes.2
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-attributes filter))
     (is-false (gtk:file-filter-add-pattern filter "*"))
     (is (equal '("standard::display-name")
                (gtk:file-filter-attributes filter)))))
 
 (test gtk-file-filter-attributes.3
-  (let ((filter (gtk:file-filter-new)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
     (is-false (gtk:file-filter-attributes filter))
     (is-false (gtk:file-filter-add-pixbuf-formats filter))
     (is (equal '("standard::content-type")
@@ -120,26 +129,26 @@
 ;;;     gtk_file_filter_to_gvariant
 
 (test gtk-file-filter-to-gvariant
-  (let ((filter (gtk:file-filter-new))
-        (variant nil))
-    (is-false (gtk:file-filter-add-mime-type filter "text/plain"))
-    (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
-    #-windows
-    (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
-                 (g:variant-print variant)))
-    #+windows
-    (is (string= "('.mhjl-Dateityp', [(1, '.mhjl')])"
-                 (g:variant-print variant)))
+  (glib-test:with-check-memory (filter)
+    (let ((variant nil))
+      (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
+      (is-false (gtk:file-filter-add-mime-type filter "text/plain"))
+      (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
+      #-windows
+      (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
+                   (g:variant-print variant)))
+      #+windows
+      (is (string= "('.mhjl-Dateityp', [(1, '.mhjl')])"
+                   (g:variant-print variant)))
+      (is (eq 'gtk:file-filter
+              (type-of (setf filter
+                             (gtk:file-filter-new-from-gvariant variant)))))
+      (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
+      #-windows
+      (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
+                   (g:variant-print variant)))
+      #+windows
+      (is (string= "('.mhjl-Dateityp', [(1, '*')])"
+                   (g:variant-print variant))))))
 
-    (is (eq 'gtk:file-filter
-            (type-of (setf filter
-                           (gtk:file-filter-new-from-gvariant variant)))))
-    (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
-    #-windows
-    (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
-                 (g:variant-print variant)))
-    #+windows
-    (is (string= "('.mhjl-Dateityp', [(1, '*')])"
-                 (g:variant-print variant)))))
-
-;;; 2024-9-28
+;;; 2024-12-16

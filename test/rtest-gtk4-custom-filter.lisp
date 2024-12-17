@@ -48,9 +48,12 @@
 ;;;     gtk_custom_filter_new
 
 (test gtk-custom-filter-new
-  (let* ((store (create-string-list-for-package))
-         (filter (gtk:custom-filter-new #'custom-filter-func))
-         (model (gtk:filter-list-model-new store filter)))
+  (glib-test:with-check-memory ((store filter model))
+
+    (setf store (create-string-list-for-package))
+    (setf filter (gtk:custom-filter-new #'custom-filter-func))
+    (setf model (gtk:filter-list-model-new store filter))
+
     (is (typep filter 'gtk:custom-filter))
     (is (= 2 (g:object-ref-count filter)))
     ;; Create with constructor function
@@ -72,20 +75,19 @@
     (is (= 0 (gtk:string-list-n-items store)))
     ;; Remove string list and filter from filter model
     (is-false (setf (gtk:filter-list-model-filter model) nil))
-    (is-false (setf (gtk:filter-list-model-model model) nil))
-
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))))
+    (is-false (setf (gtk:filter-list-model-model model) nil))))
 
 ;;;     gtk_custom_filter_set_filter_func
 
 (test gtk-custom-filter-set-filter-func
-  (let* ((store (create-string-list-for-package))
-         (filter (gtk:custom-filter-new))
-         (model (gtk:filter-list-model-new store filter)))
+  (glib-test:with-check-memory ((store filter model))
+
+    (setf store (create-string-list-for-package))
+    (setf filter (gtk:custom-filter-new))
+    (setf model (gtk:filter-list-model-new store filter))
+
     ;; Check refcount for first object in list store
-    (is (= 2 (g:object-ref-count (g:list-model-object store 0))))
+    (is (= 2 (g:object-ref-count (g:list-model-item store 0))))
     ;; No filter function set
     #-windows
     (is (< 3400 (gtk:filter-list-model-n-items model)))
@@ -107,7 +109,7 @@
     #+windows
     (is (< 3330 (gtk:filter-list-model-n-items model)))
     ;; Check refcount for first object in list store
-    (is (= 2 (g:object-ref-count (g:list-model-object store 0))))
+    (is (= 2 (g:object-ref-count (g:list-model-item store 0))))
     ;; Clear the string list
     (is-false (gtk:string-list-splice store
                                       0
@@ -116,10 +118,6 @@
     (is (= 0 (gtk:string-list-n-items store)))
     ;; Remove string list and filter from filter model
     (is-false (setf (gtk:filter-list-model-filter model) nil))
-    (is-false (setf (gtk:filter-list-model-model model) nil))
+    (is-false (setf (gtk:filter-list-model-model model) nil))))
 
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))))
-
-;;; 2024-10-8
+;;; 2024-12-16

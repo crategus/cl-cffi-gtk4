@@ -47,10 +47,10 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-column-view-sorter-properties
-  (let ((sorter (make-instance 'gtk:column-view-sorter)))
+  (glib-test:with-check-memory (sorter)
+    (setf sorter (make-instance 'gtk:column-view-sorter))
     (is-false (gtk:column-view-sorter-primary-sort-column sorter))
-    (is (eq :ascending (gtk:column-view-sorter-primary-sort-order sorter)))
-    (is (= 1 (g:object-ref-count sorter)))))
+    (is (eq :ascending (gtk:column-view-sorter-primary-sort-order sorter)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -58,9 +58,9 @@
 ;;;     gtk_column_view_sorter_get_nth_sort_column
 
 (test gtk-column-view-sorter-n-sort-columns
-  (let ((sorter (make-instance 'gtk:column-view-sorter)))
+  (glib-test:with-check-memory (sorter)
+    (setf sorter (make-instance 'gtk:column-view-sorter))
     (is (= 0 (gtk:column-view-sorter-n-sort-columns sorter)))
-    (is-false (gtk:column-view-sorter-nth-sort-column sorter 0))
-    (is (= 1 (g:object-ref-count sorter)))))
+    (is-false (gtk:column-view-sorter-nth-sort-column sorter 0))))
 
-;;; 2024-10-24
+;;; 2024-12-16

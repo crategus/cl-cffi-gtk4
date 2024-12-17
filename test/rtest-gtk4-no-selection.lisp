@@ -51,7 +51,8 @@
 ;;;     n-items                                            Since 4.8
 
 (test gtk-no-selection-properties
-  (let ((selection (make-instance 'gtk:no-selection)))
+  (glib-test:with-check-memory (selection)
+    (setf selection (make-instance 'gtk:no-selection))
     (is (eq (g:gtype "GObject") (gtk:no-selection-item-type selection)))
     (is-false (gtk:no-selection-model selection))
     (is (= 0 (gtk:no-selection-n-items selection)))))
@@ -61,8 +62,8 @@
 ;;;     gtk_no_selection_new
 
 (test gtk-no-selection-new
-  (let ((model (g:list-store-new "GtkWidget"))
-        (selection nil))
+  (glib-test:with-check-memory ((model selection))
+    (setf model (g:list-store-new "GtkWidget"))
     (is (typep (setf selection
                      (gtk:no-selection-new)) 'gtk:no-selection))
     (is (typep (setf selection
@@ -70,9 +71,7 @@
     (is (typep (setf selection
                      (gtk:no-selection-new model))
                'gtk:no-selection))
-    ;; Check memory management
-    (is-false (setf (gtk:no-selection-model selection) nil))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count selection)))))
+    ;; Remove references
+    (is-false (setf (gtk:no-selection-model selection) nil))))
 
-;;; 2024-11-29
+;;; 2024-12-17

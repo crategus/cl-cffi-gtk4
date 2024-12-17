@@ -427,16 +427,16 @@
     (is (eq (g:gtype "GtkNotebookPage") (g:list-model-item-type pages)))
     (is (= 3 (g:list-model-n-items pages)))
     ;; Retrieve notebook page from list model
-    (is (typep (g:list-model-object pages 0) 'gtk:notebook-page))
-    (is (= 2 (g:object-ref-count (g:list-model-object pages 0))))
-    (is (typep (gtk:notebook-page-child (g:list-model-object pages 0)) 'gtk:box))
-    (is (eq page1 (gtk:notebook-page-child (g:list-model-object pages 0))))
+    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+    (is (= 2 (g:object-ref-count (g:list-model-item pages 0))))
+    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
+    (is (eq page1 (gtk:notebook-page-child (g:list-model-item pages 0))))
     (is (= 4 (g:object-ref-count
-                 (gtk:notebook-page-child (g:list-model-object pages 0)))))
+                 (gtk:notebook-page-child (g:list-model-item pages 0)))))
     (is (= 4 (g:object-ref-count page1)))
     ;; Retrieve more notebook pages
-    (is (typep (g:list-model-object pages 1) 'gtk:notebook-page))
-    (is (typep (g:list-model-object pages 2) 'gtk:notebook-page))
+    (is (typep (g:list-model-item pages 1) 'gtk:notebook-page))
+    (is (typep (g:list-model-item pages 2) 'gtk:notebook-page))
 
     (is-false (gtk:notebook-remove-page notebook page1))
     (is-false (gtk:notebook-remove-page notebook page2))
@@ -665,13 +665,13 @@
         (pages nil))
     (is (= 0 (gtk:notebook-add-page notebook page nil)))
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (typep (g:list-model-object pages 0) 'gtk:notebook-page))
-    (is (typep (gtk:notebook-page-child (g:list-model-object pages 0)) 'gtk:box))
+    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
     (is-false (gtk:notebook-tab-detachable notebook page))
-    (is-false (gtk:notebook-page-detachable (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-page-detachable (g:list-model-item pages 0)))
     (is-true (setf (gtk:notebook-tab-detachable notebook page) t))
     (is-true (gtk:notebook-tab-detachable notebook page))
-    (is-true (gtk:notebook-page-detachable (g:list-model-object pages 0)))
+    (is-true (gtk:notebook-page-detachable (g:list-model-item pages 0)))
 
     (is-false (gtk:notebook-remove-page notebook page))))
 
@@ -684,13 +684,13 @@
         (pages nil))
     (is (= 0 (gtk:notebook-add-page notebook page nil)))
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (typep (g:list-model-object pages 0) 'gtk:notebook-page))
-    (is (typep (gtk:notebook-page-child (g:list-model-object pages 0)) 'gtk:box))
+    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
     (is-false (gtk:notebook-tab-reorderable notebook page))
-    (is-false (gtk:notebook-page-reorderable (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
     (is-true (setf (gtk:notebook-tab-reorderable notebook page) t))
     (is-true (gtk:notebook-tab-reorderable notebook page))
-    (is-true (gtk:notebook-page-reorderable (g:list-model-object pages 0)))
+    (is-true (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
 
     (is-false (gtk:notebook-remove-page notebook page))))
 
@@ -706,7 +706,7 @@
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
     (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
     (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))
+    (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
 
     (is-false (gtk:notebook-remove-page notebook page))))
 
@@ -725,7 +725,7 @@
     (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
     (is (string= "menu"
                  (gtk:label-label
-                     (gtk:notebook-page-menu (g:list-model-object pages 0)))))
+                     (gtk:notebook-page-menu (g:list-model-item pages 0)))))
     (is-false (gtk:notebook-remove-page notebook page))))
 
 (test gtk-notebook-menu-label-text.2
@@ -738,7 +738,7 @@
                  (setf (gtk:notebook-menu-label-text notebook page) "menu")))
     (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
     ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-menu-label (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-page-menu-label (g:list-model-item pages 0)))
     (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_get_tab_label
@@ -753,7 +753,7 @@
     (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
     (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
     (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-object pages 0))))
+    (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
     (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_set_tab_label_text
@@ -769,7 +769,7 @@
                  (setf (gtk:notebook-tab-label-text notebook page) "tab")))
     (is (string= "tab" (gtk:notebook-tab-label-text notebook page)))
     ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-tab-label (g:list-model-object pages 0)))
+    (is-false (gtk:notebook-page-tab-label (g:list-model-item pages 0)))
     (is-false (gtk:notebook-remove-page notebook page))))
 
 ;;;     gtk_notebook_set_action_widget

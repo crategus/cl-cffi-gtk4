@@ -438,10 +438,9 @@
         (window3 (make-instance 'gtk:about-dialog)))
     (is (typep (gtk:window-toplevels) 'g:list-store))
     (is (= 3 (g:list-model-n-items (gtk:window-toplevels))))
-    (is (eq window1 (g:list-model-object (gtk:window-toplevels) 0)))
-    (is (eq window2 (g:list-model-object (gtk:window-toplevels) 1)))
-    (is (eq window3 (g:list-model-object (gtk:window-toplevels) 2)))
-
+    (is (eq window1 (g:list-model-item (gtk:window-toplevels) 0)))
+    (is (eq window2 (g:list-model-item (gtk:window-toplevels) 1)))
+    (is (eq window3 (g:list-model-item (gtk:window-toplevels) 2)))
 
     (is-false (gtk:window-destroy window1))
     (is-false (gtk:window-destroy window2))

@@ -52,52 +52,104 @@
 ;;;     model
 ;;;     n-items                                            Since 4.8
 
+(test gtk-map-list-model-properties
+  (glib-test:with-check-memory (model)
+    (setf model (make-instance 'gtk:map-list-model))
+    (is-false (gtk:map-list-model-has-map model))
+    (is (eq (g:gtype "GObject") (gtk:map-list-model-item-type model)))
+    (is-false (gtk:map-list-model-model model))
+    (is (= 0 (gtk:map-list-model-n-items model)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     GtkMapListModelMapFunc
-
 ;;;     gtk_map_list_model_new
+;;;     gtk_map_list_model_has_map
 
-#|
-         (widgets (gtk:widget-observe-children widget))
-         (controllers (gtk:map-list-model-new widgets
-                              (lambda (item)
-                                (gtk:widget-observe-controllers item))))
-         (model (gtk:flatten-list-model-new controllers)))
-|#
-
-;; TODO: Finish this example. There is a problem with the return type
-;; of the callback function.
+;; FIXME: Does not work! Crashes after about 100 runs.
 
 #+nil
 (test gtk-map-list-model-new
-  (let ((box (make-instance 'gtk:box))
-        (button nil)
-        (widgets nil)
-        (controllers nil)
-        (model nil))
+  (glib-test:with-check-memory ((box
+                                (button1 2)
+                                (button2 2)
+                                controller1 controller2
+                                controllers widgets model) :strong 2)
 
-    (gtk:box-append box (setf button (make-instance 'gtk:button)))
-    (gtk:widget-add-controller button
-                               (gtk:event-controller-key-new))
-    (gtk:box-append box (setf button (make-instance 'gtk:button)))
-    (gtk:widget-add-controller button
-                               (gtk:event-controller-key-new))
 
-    (is (g:is-object (setf widgets (gtk:widget-observe-children box))))
-    (is (g:is-object (setf controllers
-                           (gtk:map-list-model-new widgets
-                               (lambda (item)
-                                 (format t "~&in MAP function for ~a~%" item)
-                                 ;; FIXME: What is the correct implementation?
-                                 (g:object-pointer
-                                     (gtk:widget-observe-controllers item)))))))
-    (is (g:is-object (setf model
-                           (gtk:flatten-list-model-new controllers))))
-    (is (= 8 (gtk:flatten-list-model-n-items model)))
-))
+      (setf box (make-instance 'gtk:box))
+
+      (gtk:box-append box (setf button1 (make-instance 'gtk:button)))
+      (gtk:widget-add-controller button1
+                                 (setf controller1
+                                       (gtk:event-controller-key-new)))
+      (gtk:box-append box (setf button2 (make-instance 'gtk:button)))
+      (gtk:widget-add-controller button2
+                                 (setf controller2
+                                       (gtk:event-controller-key-new)))
+
+      (is (g:is-object (setf widgets (gtk:widget-observe-children box))))
+
+      (is (g:is-object (setf controllers
+                             (gtk:map-list-model-new widgets
+                                 (lambda (item)
+                                   (format t "~&  item : ~a~%" item)
+                                   (gtk:widget-observe-controllers item))))))
+
+      (is (g:is-object (setf model
+                             (gtk:flatten-list-model-new controllers))))
+
+      (is (gtk:map-list-model-has-map controllers))
+      (is (= 8 (gtk:flatten-list-model-n-items model)))
+      ;; Remove references
+      (is-false (setf (gtk:flatten-list-model-model model) nil))
+
+      (is-false (gtk:widget-remove-controller button1 controller1))
+      (is-false (gtk:widget-remove-controller button2 controller2))
+      (is-false (gtk:box-remove box button1))
+      (is-false (gtk:box-remove box button2))))
 
 ;;;     gtk_map_list_model_set_map_func
-;;;     gtk_map_list_model_has_map
 
-;;; 2024-12-9
+;; FIXME: Does not work!
+
+#+nil
+(test gtk-map-list-model-set-map-func
+  (glib-test:with-check-memory ((box
+                                 (button1 2)
+                                 (button2 2)
+                                 controller1 controller2 model) :strong 3)
+    (let (widgets controllers)
+
+      (setf box (make-instance 'gtk:box))
+
+      (gtk:box-append box (setf button1 (make-instance 'gtk:button)))
+      (gtk:widget-add-controller button1
+                                 (setf controller1
+                                       (gtk:event-controller-key-new)))
+      (gtk:box-append box (setf button2 (make-instance 'gtk:button)))
+      (gtk:widget-add-controller button2
+                                 (setf controller2
+                                       (gtk:event-controller-key-new)))
+
+      (is (g:is-object (setf widgets (gtk:widget-observe-children box))))
+
+      (is (g:is-object (setf controllers
+                             (gtk:map-list-model-new widgets nil))))
+
+      (is-false (gtk:map-list-model-set-map-func controllers
+                        (lambda (item)
+                          (gtk:widget-observe-controllers item))))
+
+      (is (g:is-object (setf model
+                             (gtk:flatten-list-model-new controllers))))
+
+      (is (gtk:map-list-model-has-map controllers))
+      (is (= 8 (gtk:flatten-list-model-n-items model)))
+      ;; Remove references
+      (is-false (setf (gtk:flatten-list-model-model model) nil))
+      (is-false (gtk:widget-remove-controller button1 controller1))
+      (is-false (gtk:widget-remove-controller button2 controller2))
+      (is-false (gtk:box-remove box button1))
+      (is-false (gtk:box-remove box button2)))))
+
+;;; 2024-12-17

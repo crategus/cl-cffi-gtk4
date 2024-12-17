@@ -78,29 +78,28 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-string-sorter-properties
-  (let ((sorter (make-instance 'gtk:string-sorter)))
+  (glib-test:with-check-memory (sorter)
+    (setf sorter (make-instance 'gtk:string-sorter))
     (is (eq :unicode (gtk:string-sorter-collation sorter)))
     (is (cffi:null-pointer-p (gtk:string-sorter-expression sorter)))
-    (is-true (gtk:string-sorter-ignore-case sorter))
-    (is (= 1 (g:object-ref-count sorter)))))
+    (is-true (gtk:string-sorter-ignore-case sorter))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_string_sorter_new
 
 (test gtk-string-sorter-new.1
-  (let* ((expr (gtk:constant-expression-new "gchararray" "test"))
-         (sorter (gtk:string-sorter-new expr)))
-    (is (typep sorter 'gtk:string-sorter))
-    (is (eq :unicode (gtk:string-sorter-collation sorter)))
-    (is (cffi:pointer-eq expr (gtk:string-sorter-expression sorter)))
-    (is-true (gtk:string-sorter-ignore-case sorter))
-    (is (= 1 (g:object-ref-count sorter)))))
+  (glib-test:with-check-memory (sorter)
+    (let ((expr (gtk:constant-expression-new "gchararray" "test")))
+      (setf sorter (gtk:string-sorter-new expr))
+      (is (typep sorter 'gtk:string-sorter))
+      (is (eq :unicode (gtk:string-sorter-collation sorter)))
+      (is (cffi:pointer-eq expr (gtk:string-sorter-expression sorter)))
+      (is-true (gtk:string-sorter-ignore-case sorter)))))
 
 (test gtk-string-sorter-new.2
-  (let (sorter)
+  (glib-test:with-check-memory (sorter)
     (is (typep (setf sorter
-                     (gtk:string-sorter-new nil)) 'gtk:string-sorter))
-    (is (= 1 (g:object-ref-count sorter)))))
+                     (gtk:string-sorter-new nil)) 'gtk:string-sorter))))
 
-;;; 2024-10-24
+;;; 2024-12-16

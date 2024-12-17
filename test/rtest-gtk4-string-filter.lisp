@@ -86,19 +86,23 @@
 ;;;     gtk:string-filter-expression
 
 (test gtk-string-filter-expression
-  (let ((filter (make-instance 'gtk:string-filter))
-        (expression (gtk:constant-expression-new "gchararray" "string")))
-    (is (cffi:null-pointer-p (gtk:string-filter-expression filter)))
-    (is (cffi:pointer-eq expression
-                         (setf (gtk:string-filter-expression filter)
-                               expression)))
-    (is (cffi:pointer-eq expression
-                         (gtk:string-filter-expression filter)))))
+  (glib-test:with-check-memory (filter)
+    (let ((expression (gtk:constant-expression-new "gchararray" "string")))
+      (is (typep (setf filter (make-instance 'gtk:string-filter))
+                 'gtk:string-filter))
+      (is (cffi:null-pointer-p (gtk:string-filter-expression filter)))
+      (is (cffi:pointer-eq expression
+                           (setf (gtk:string-filter-expression filter)
+                                 expression)))
+      (is (cffi:pointer-eq expression
+                           (gtk:string-filter-expression filter))))))
 
 ;;;     gtk:string-filter-ignore-case
 
 (test gtk-string-filter-ignore-case
-  (let ((filter (make-instance 'gtk:string-filter)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (make-instance 'gtk:string-filter))
+               'gtk:string-filter))
     (is-true (gtk:string-filter-ignore-case filter))
     (is-false (setf (gtk:string-filter-ignore-case filter) nil))
     (is-false (gtk:string-filter-ignore-case filter))))
@@ -106,7 +110,9 @@
 ;;;     gtk:string-filter-match-mode
 
 (test gtk-string-filter-match-mode
-  (let ((filter (make-instance 'gtk:string-filter)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (make-instance 'gtk:string-filter))
+               'gtk:string-filter))
     (is (eq :substring (gtk:string-filter-match-mode filter)))
     (is (eq :prefix (setf (gtk:string-filter-match-mode filter) :prefix)))
     (is (eq :prefix (gtk:string-filter-match-mode filter)))))
@@ -114,7 +120,9 @@
 ;;;     gtk:string-filter-search
 
 (test gtk-string-filter-search
-  (let ((filter (make-instance 'gtk:string-filter)))
+  (glib-test:with-check-memory (filter)
+    (is (typep (setf filter (make-instance 'gtk:string-filter))
+               'gtk:string-filter))
     (is-false (gtk:string-filter-search filter))
     (is (string= "search" (setf (gtk:string-filter-search filter) "search")))
     (is (string= "search" (gtk:string-filter-search filter)))))
@@ -124,14 +132,16 @@
 ;;;     gtk_string_filter_new
 
 (test gtk-string-filter-new
-  (let* ((expression (gtk:property-expression-new "GtkStringObject"
-                                                  nil "string"))
-         (filter (gtk:string-filter-new expression)))
+  (glib-test:with-check-memory (filter)
+    (let ((expression (gtk:property-expression-new "GtkStringObject"
+                                                    nil "string")))
+    (is (typep (setf filter (gtk:string-filter-new expression))
+               'gtk:string-filter))
     (is (cffi:pointerp (gtk:string-filter-expression filter)))
     (is-true (gtk:string-filter-ignore-case filter))
     (is (eq :substring (gtk:string-filter-match-mode filter)))
     (is (string= "search" (setf (gtk:string-filter-search filter) "search")))
     (is (string= "search" (gtk:string-filter-search filter)))
-    (is-false (gtk:expression-unref expression))))
+    (is-false (gtk:expression-unref expression)))))
 
-;;; 2024-9-19
+;;; 2024-12-16

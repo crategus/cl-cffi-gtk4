@@ -48,99 +48,86 @@
 ;;;     n-items                                            Since 4.8
 
 (test gtk-multi-sorter-properties
-  (let ((sorter (make-instance 'gtk:multi-sorter)))
+  (glib-test:with-check-memory (sorter)
+    (is (typep (setf sorter (make-instance 'gtk:multi-sorter)) 'gtk:multi-sorter))
     (is (eq (g:gtype "GtkSorter") (gtk:multi-sorter-item-type sorter)))
-    (is (= 0 (gtk:multi-sorter-n-items sorter)))
-    (is (= 1 (g:object-ref-count sorter)))))
+    (is (= 0 (gtk:multi-sorter-n-items sorter)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_multi_sorter_new
 
 (test gtk-multi-sorter-new
-  (let ((sorter (make-instance 'gtk:multi-sorter)))
+  (glib-test:with-check-memory (sorter)
+    (is (typep (setf sorter (make-instance 'gtk:multi-sorter)) 'gtk:multi-sorter))
     (is (eq (g:gtype "GtkSorter") (gtk:multi-sorter-item-type sorter)))
-    (is (= 0 (gtk:multi-sorter-n-items sorter)))
-    (is (= 1 (g:object-ref-count sorter)))))
+    (is (= 0 (gtk:multi-sorter-n-items sorter)))))
 
 ;;;     gtk_multi_sorter_append
 ;;;     gtk_multi_sorter_remove
 
 (test gtk-multi-sorter-append/remove
-  (let* ((sorter (gtk:multi-sorter-new))
-         (store (gtk:string-list-new '("ccc" "cc" "c"
+  (glib-test:with-check-memory ((sorter store model sorter1 sorter2))
+    (setf sorter (gtk:multi-sorter-new))
+    (setf store (gtk:string-list-new '("ccc" "cc" "c"
                                        "bbb" "bb" "b"
                                        "aaa" "aa" "a")))
-         (model (gtk:sort-list-model-new store sorter))
-         (sorter1 (gtk:custom-sorter-new
+    (setf model (gtk:sort-list-model-new store sorter))
+    (setf sorter1 (gtk:custom-sorter-new
                       (lambda (obj1 obj2)
                         (let ((str1 (gtk:string-object-string obj1))
                               (str2 (gtk:string-object-string obj2)))
                           (cond ((< (length str1) (length str2)) -1)
                                 ((> (length str1) (length str2)) +1)
                                 (t 0))))))
-         (sorter2 (gtk:custom-sorter-new
+    (setf sorter2 (gtk:custom-sorter-new
                       (lambda (obj1 obj2)
                         (let ((str1 (gtk:string-object-string obj1))
                               (str2 (gtk:string-object-string obj2)))
                           (cond ((string< str1 str2) -1)
                                 ((string> str1 str2) +1)
-                                (t 0)))))))
-
+                                (t 0))))))
     (is (= 1 (g:object-ref-count sorter1)))
     (is (= 1 (g:object-ref-count sorter2)))
-
     (is (string= "ccc"
-                 (gtk:string-object-string (g:list-model-object model 0))))
+                 (gtk:string-object-string (g:list-model-item model 0))))
     (is (string= "cc"
-                 (gtk:string-object-string (g:list-model-object model 1))))
+                 (gtk:string-object-string (g:list-model-item model 1))))
     (is (string= "c"
-                 (gtk:string-object-string (g:list-model-object model 2))))
+                 (gtk:string-object-string (g:list-model-item model 2))))
 
     (is-false (gtk:multi-sorter-append sorter sorter1))
     (is (= 3 (g:object-ref-count sorter1)))
-
     (is (string= "c"
-                 (gtk:string-object-string (g:list-model-object model 0))))
+                 (gtk:string-object-string (g:list-model-item model 0))))
     (is (string= "b"
-                 (gtk:string-object-string (g:list-model-object model 1))))
+                 (gtk:string-object-string (g:list-model-item model 1))))
     (is (string= "a"
-                 (gtk:string-object-string (g:list-model-object model 2))))
-
+                 (gtk:string-object-string (g:list-model-item model 2))))
     (is-false (gtk:multi-sorter-append sorter sorter2))
     (is (= 3 (g:object-ref-count sorter2)))
-
     (is (string= "a"
-                 (gtk:string-object-string (g:list-model-object model 0))))
+                 (gtk:string-object-string (g:list-model-item model 0))))
     (is (string= "b"
-                 (gtk:string-object-string (g:list-model-object model 1))))
+                 (gtk:string-object-string (g:list-model-item model 1))))
     (is (string= "c"
-                 (gtk:string-object-string (g:list-model-object model 2))))
-
+                 (gtk:string-object-string (g:list-model-item model 2))))
     (is-false (gtk:multi-sorter-remove sorter 0))
     (is (= 1 (g:object-ref-count sorter1)))
     (is (= 3 (g:object-ref-count sorter2)))
-
     (is (string= "a"
-                 (gtk:string-object-string (g:list-model-object model 0))))
+                 (gtk:string-object-string (g:list-model-item model 0))))
     (is (string= "aa"
-                 (gtk:string-object-string (g:list-model-object model 1))))
+                 (gtk:string-object-string (g:list-model-item model 1))))
     (is (string= "aaa"
-                 (gtk:string-object-string (g:list-model-object model 2))))
-
-    ;; Check memory management
+                 (gtk:string-object-string (g:list-model-item model 2))))
+    ;; Free references
     (is-false (gtk:multi-sorter-remove sorter 0))
     (is-false (gtk:string-list-splice store
                                       0
                                       (gtk:string-list-n-items store)
                                       '()))
     (is-false (setf (gtk:sort-list-model-sorter model) nil))
-    (is-false (setf (gtk:sort-list-model-model model) nil))
+    (is-false (setf (gtk:sort-list-model-model model) nil))))
 
-    (is (= 1 (g:object-ref-count sorter)))
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count sorter1)))
-    (is (= 1 (g:object-ref-count sorter2)))))
-
-;;; 2024-10-24
+;;; 2024-12-16

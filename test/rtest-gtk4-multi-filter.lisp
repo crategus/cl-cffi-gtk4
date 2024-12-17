@@ -117,126 +117,114 @@
 ;;;     gtk_any_filter_new
 
 (test gtk-any-filter-new
-  (is (typep (gtk:any-filter-new) 'gtk:any-filter))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:any-filter))))
-  (is (= 1 (g:object-ref-count (gtk:any-filter-new)))))
+  (glib-test:with-check-memory (nil)
+    (is (typep (gtk:any-filter-new) 'gtk:any-filter))
+    (is (= 1 (g:object-ref-count (make-instance 'gtk:any-filter))))
+    (is (= 1 (g:object-ref-count (gtk:any-filter-new))))))
 
 ;;;     gtk_every_filter_new
 
 (test gtk-every-filter-new
-  (is (typep (gtk:every-filter-new) 'gtk:every-filter))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:every-filter))))
-  (is (= 1 (g:object-ref-count (gtk:every-filter-new)))))
+  (glib-test:with-check-memory (nil)
+    (is (typep (gtk:every-filter-new) 'gtk:every-filter))
+    (is (= 1 (g:object-ref-count (make-instance 'gtk:every-filter))))
+    (is (= 1 (g:object-ref-count (gtk:every-filter-new))))))
 
 ;;;     gtk_multi_filter_append
 ;;;     gtk_multi_filter_remove
 
 (test gtk-multi-filter-append/remove.1
-  (let* ((store (create-string-list-for-package))
-         (filter (gtk:any-filter-new))
-         (model (gtk:filter-list-model-new store filter))
-         (expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
-         (expr2 (gtk:property-expression-new "GtkStringObject" nil "string"))
-         (filter1 (gtk:string-filter-new (gtk:expression-ref expr1)))
-         (filter2 (gtk:string-filter-new (gtk:expression-ref expr2))))
-
-    (is (= 2 (g:object-ref-count store)))
-    (is (= 2 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count filter1)))
-    (is (= 1 (g:object-ref-count filter2)))
-
-    ;; Properties of the any filter
-    (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type filter)))
-    (is (= 0 (gtk:multi-filter-n-items filter)))
-    ;; No filter function set
-    (is (= 0 (gtk:filter-list-model-n-items model)))
-    ;; Configure and append filter1
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter1) :substring)))
-    (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
-    (is-false (gtk:multi-filter-append filter filter1))
-    (is (= 2 (g:object-ref-count filter)))
-    (is (= 2 (g:object-ref-count filter1)))
-    ;; Check the filter result
-    (is (= 1 (gtk:multi-filter-n-items filter)))
-    (is (= 41 (gtk:filter-list-model-n-items model)))
-    ;; Configure and append filter2
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
-    (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
-    (is-false (gtk:multi-filter-append filter filter2))
-    (is (= 2 (gtk:multi-filter-n-items filter)))
-    ;; Check the filter result
-    #-windows
-    (is (< 234 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (= 231 (gtk:filter-list-model-n-items model)))
-    ;; Remove filter2
-    (is-false (gtk:multi-filter-remove filter 0))
-    ;; Check again the filter result
-    (is (= 1 (gtk:multi-filter-n-items filter)))
-    #-windows
-    (is (< 201 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (= 198 (gtk:filter-list-model-n-items model)))
-
-    ;; Check memory management
-    (is-false (gtk:multi-filter-remove filter 0))
-
-    (is-false (setf (gtk:filter-list-model-model model) nil))
-    (is-false (setf (gtk:filter-list-model-filter model) nil))
-
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count filter1)))
-    (is (= 1 (g:object-ref-count filter2)))))
+  (glib-test:with-check-memory ((store filter model filter1 filter2))
+    (let ((expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
+          (expr2 (gtk:property-expression-new "GtkStringObject" nil "string")))
+      ;; Create objects
+      (setf store (create-string-list-for-package))
+      (setf filter (gtk:any-filter-new))
+      (setf model (gtk:filter-list-model-new store filter))
+      (setf filter1 (gtk:string-filter-new (gtk:expression-ref expr1)))
+      (setf filter2 (gtk:string-filter-new (gtk:expression-ref expr2)))
+      ;; Check references
+      (is (= 2 (g:object-ref-count store)))
+      (is (= 2 (g:object-ref-count filter)))
+      (is (= 1 (g:object-ref-count model)))
+      (is (= 1 (g:object-ref-count filter1)))
+      (is (= 1 (g:object-ref-count filter2)))
+      ;; Properties of the any filter
+      (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type filter)))
+      (is (= 0 (gtk:multi-filter-n-items filter)))
+      ;; No filter function set
+      (is (= 0 (gtk:filter-list-model-n-items model)))
+      ;; Configure and append filter1
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter1) :substring)))
+      (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
+      (is-false (gtk:multi-filter-append filter filter1))
+      (is (= 2 (g:object-ref-count filter)))
+      (is (= 2 (g:object-ref-count filter1)))
+      ;; Check the filter result
+      (is (= 1 (gtk:multi-filter-n-items filter)))
+      (is (= 41 (gtk:filter-list-model-n-items model)))
+      ;; Configure and append filter2
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
+      (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
+      (is-false (gtk:multi-filter-append filter filter2))
+      (is (= 2 (gtk:multi-filter-n-items filter)))
+      ;; Check the filter result
+      #-windows
+      (is (< 234 (gtk:filter-list-model-n-items model)))
+      #+windows
+      (is (= 231 (gtk:filter-list-model-n-items model)))
+      ;; Remove filter2
+      (is-false (gtk:multi-filter-remove filter 0))
+      ;; Check again the filter result
+      (is (= 1 (gtk:multi-filter-n-items filter)))
+      #-windows
+      (is (< 201 (gtk:filter-list-model-n-items model)))
+      #+windows
+      (is (= 198 (gtk:filter-list-model-n-items model)))
+      ;; Free references
+      (is-false (gtk:multi-filter-remove filter 0))
+      (is-false (setf (gtk:filter-list-model-model model) nil))
+      (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
 (test gtk-multi-filter-append/remove.2
-  (let* ((store (create-string-list-for-package))
-         (filter (gtk:every-filter-new))
-         (model (gtk:filter-list-model-new store filter))
-         (expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
-         (expr2 (gtk:property-expression-new "GtkStringObject" nil "string"))
-         (filter1 (gtk:string-filter-new expr1))
-         (filter2 (gtk:string-filter-new expr2)))
-    ;; Properties of filter
-    (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type filter)))
-    (is (= 0 (gtk:multi-filter-n-items filter)))
-    ;; No filter function set
-    #-windows
-    (is (< 3400 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (< 3330 (gtk:filter-list-model-n-items model)))
-    ;; Append filter1
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter1) :substring)))
-    (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
-    (is-false (gtk:multi-filter-append filter filter1))
-    (is (= 1 (gtk:multi-filter-n-items filter)))
-    (is (= 41 (gtk:filter-list-model-n-items model)))
-    ;; Append filter2
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
-    (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
-    (is-false (gtk:multi-filter-append filter filter2))
-    (is (= 2 (gtk:multi-filter-n-items filter)))
-    (is (= 8 (gtk:filter-list-model-n-items model)))
-    ;; Remove filter2
-    (is-false (gtk:multi-filter-remove filter 0))
-    (is (= 1 (gtk:multi-filter-n-items filter)))
-    #-windows
-    (is (< 201 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (= 198 (gtk:filter-list-model-n-items model)))
+  (glib-test:with-check-memory ((store filter model filter1 filter2))
+    (let ((expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
+          (expr2 (gtk:property-expression-new "GtkStringObject" nil "string")))
+      (setf store (create-string-list-for-package))
+      (setf filter (gtk:every-filter-new))
+      (setf model (gtk:filter-list-model-new store filter))
+      (setf filter1 (gtk:string-filter-new expr1))
+      (setf filter2 (gtk:string-filter-new expr2))
+      ;; Properties of filter
+      (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type filter)))
+      (is (= 0 (gtk:multi-filter-n-items filter)))
+      ;; No filter function set
+      #-windows
+      (is (< 3400 (gtk:filter-list-model-n-items model)))
+      #+windows
+      (is (< 3330 (gtk:filter-list-model-n-items model)))
+      ;; Append filter1
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter1) :substring)))
+      (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
+      (is-false (gtk:multi-filter-append filter filter1))
+      (is (= 1 (gtk:multi-filter-n-items filter)))
+      (is (= 41 (gtk:filter-list-model-n-items model)))
+      ;; Append filter2
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
+      (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
+      (is-false (gtk:multi-filter-append filter filter2))
+      (is (= 2 (gtk:multi-filter-n-items filter)))
+      (is (= 8 (gtk:filter-list-model-n-items model)))
+      ;; Remove filter2
+      (is-false (gtk:multi-filter-remove filter 0))
+      (is (= 1 (gtk:multi-filter-n-items filter)))
+      #-windows
+      (is (< 201 (gtk:filter-list-model-n-items model)))
+      #+windows
+      (is (= 198 (gtk:filter-list-model-n-items model)))
+      ;; Free references
+      (is-false (gtk:multi-filter-remove filter 0))
+      (is-false (setf (gtk:filter-list-model-model model) nil))
+      (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-    ;; Check memory management
-    (is-false (gtk:multi-filter-remove filter 0))
-
-    (is-false (setf (gtk:filter-list-model-model model) nil))
-    (is-false (setf (gtk:filter-list-model-filter model) nil))
-
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count filter1)))
-    (is (= 1 (g:object-ref-count filter2)))))
-
-;;; 2024-10-18
+;;; 2024-12-16

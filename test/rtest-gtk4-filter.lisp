@@ -128,85 +128,86 @@
 ;;;     gtk_filter_match
 
 (test gtk-filter-match
-  (let* ((store (create-string-list-for-package))
-         (expression (gtk:property-expression-new "GtkStringObject"
-                                                  nil "string"))
-         (filter (gtk:string-filter-new expression))
-         (model (gtk:filter-list-model-new store filter)))
-    ;; Check filter model
-    (is (eq filter (gtk:filter-list-model-filter model)))
-    (is-false (gtk:filter-list-model-incremental model))
-    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
-    (is (eq store (gtk:filter-list-model-model model)))
-    #-windows
-    (is (< 3400 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (< 3330 (gtk:filter-list-model-n-items model)))
-    (is (= 0 (gtk:filter-list-model-pending model)))
-    ;; At this point we have a filter list model with string objects
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
-    (is (eq :substring (gtk:string-filter-match-mode filter)))
-    (is (eq :all (gtk:filter-strictness filter)))
-    (is-true (gtk:string-filter-ignore-case filter))
-    ;; Match "string" as a substring in the filter model
-    (is (string= (setf (gtk:string-filter-search filter) "string") "string"))
-    (is (= 41 (gtk:filter-list-model-n-items model)))
-    ;; Check match
-    (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "string")))
-    (is-false (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:string")))
-    (is-false (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:button")))
-    ;; Change match mode
-    (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "string")))
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:string")))
-    (is-true (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:string-filter")))
-    (is-false (gtk:filter-match filter
-                               (gtk:string-object-new "gtk:button")))
-    ;; Check memory management
-    (is-false (setf (gtk:filter-list-model-model model) nil))
-    (is-false (setf (gtk:filter-list-model-filter model) nil))
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))))
+  (glib-test:with-check-memory ((store filter model))
+    (let ((expression (gtk:property-expression-new "GtkStringObject"
+                                                   nil "string")))
+
+      (setf store (create-string-list-for-package))
+      (setf filter (gtk:string-filter-new expression))
+      (setf model (gtk:filter-list-model-new store filter))
+
+      ;; Check filter model
+      (is (eq filter (gtk:filter-list-model-filter model)))
+      (is-false (gtk:filter-list-model-incremental model))
+      (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+      (is (eq store (gtk:filter-list-model-model model)))
+      #-windows
+      (is (< 3400 (gtk:filter-list-model-n-items model)))
+      #+windows
+      (is (< 3330 (gtk:filter-list-model-n-items model)))
+      (is (= 0 (gtk:filter-list-model-pending model)))
+      ;; At this point we have a filter list model with string objects
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
+      (is (eq :substring (gtk:string-filter-match-mode filter)))
+      (is (eq :all (gtk:filter-strictness filter)))
+      (is-true (gtk:string-filter-ignore-case filter))
+      ;; Match "string" as a substring in the filter model
+      (is (string= (setf (gtk:string-filter-search filter) "string") "string"))
+      (is (= 41 (gtk:filter-list-model-n-items model)))
+      ;; Check match
+      (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
+      (is-true (gtk:filter-match filter
+                                 (gtk:string-object-new "string")))
+      (is-false (gtk:filter-match filter
+                                 (gtk:string-object-new "gtk:string")))
+      (is-false (gtk:filter-match filter
+                                 (gtk:string-object-new "gtk:button")))
+      ;; Change match mode
+      (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
+      (is-true (gtk:filter-match filter
+                                 (gtk:string-object-new "string")))
+      (is-true (gtk:filter-match filter
+                                 (gtk:string-object-new "gtk:string")))
+      (is-true (gtk:filter-match filter
+                                 (gtk:string-object-new "gtk:string-filter")))
+      (is-false (gtk:filter-match filter
+                                 (gtk:string-object-new "gtk:button")))
+      ;; Free references
+      (is-false (setf (gtk:filter-list-model-model model) nil))
+      (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
 ;;;     gtk_filter_get_strictness
 
 (test gtk-filter-strictness
-  (is (eq :all (gtk:filter-strictness (gtk:custom-filter-new))))
-  (is (eq :none (gtk:filter-strictness (gtk:any-filter-new))))
-  (is (eq :all (gtk:filter-strictness (gtk:every-filter-new))))
-  (is (eq :none (gtk:filter-strictness (gtk:bool-filter-new))))
-  (is (eq :all (gtk:filter-strictness (gtk:string-filter-new))))
-  (is (eq :none (gtk:filter-strictness (gtk:file-filter-new)))))
+  (glib-test:with-check-memory (nil)
+    (is (eq :all (gtk:filter-strictness (gtk:custom-filter-new))))
+    (is (eq :none (gtk:filter-strictness (gtk:any-filter-new))))
+    (is (eq :all (gtk:filter-strictness (gtk:every-filter-new))))
+    (is (eq :none (gtk:filter-strictness (gtk:bool-filter-new))))
+    (is (eq :all (gtk:filter-strictness (gtk:string-filter-new))))
+    (is (eq :none (gtk:filter-strictness (gtk:file-filter-new))))))
 
 ;;;     gtk_filter_changed
 
 (test gtk-filter-changed
-  (let* ((store (gtk:string-list-new '()))
-         (expression (gtk:property-expression-new "GtkStringObject"
-                                                  nil "string"))
-         (filter (gtk:string-filter-new expression))
-         (model (gtk:filter-list-model-new store filter))
-         (msg nil))
-    (is (typep model 'gtk:filter-list-model))
-    (g:signal-connect filter "changed"
-                      (lambda (filter change)
-                        (declare (ignore filter))
-                        (push change msg)))
-    (is-false (gtk:filter-changed filter :different))
-    (is (equal '(:different) msg))
-    ;; Check memory management
-    (is-false (setf (gtk:filter-list-model-model model) nil))
-    (is-false (setf (gtk:filter-list-model-filter model) nil))
-    (is (= 1 (g:object-ref-count store)))
-    (is (= 1 (g:object-ref-count filter)))
-    (is (= 1 (g:object-ref-count model)))))
+  (glib-test:with-check-memory ((store filter model))
+    (let ((expression (gtk:property-expression-new "GtkStringObject"
+                                                    nil "string"))
+          (msg nil))
 
-;;; 2024-10-24
+      (setf store (gtk:string-list-new '()))
+      (setf filter (gtk:string-filter-new expression))
+      (setf model (gtk:filter-list-model-new store filter))
+
+      (is (typep model 'gtk:filter-list-model))
+      (g:signal-connect filter "changed"
+                        (lambda (filter change)
+                          (declare (ignore filter))
+                          (push change msg)))
+      (is-false (gtk:filter-changed filter :different))
+      (is (equal '(:different) msg))
+      ;; Free references
+      (is-false (setf (gtk:filter-list-model-model model) nil))
+      (is-false (setf (gtk:filter-list-model-filter model) nil)))))
+
+;;; 2024-12-16

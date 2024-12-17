@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-string-list :in gtk-suite)
+(def-suite gtk-string-list :in gtk-list-model-support)
 (in-suite gtk-string-list)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -139,8 +139,8 @@
 (test gtk-string-list-new.2
   (let ((model (gtk:string-list-new '("Factory" "Home" "Subway"))))
     (is (= 1 (g:object-ref-count model)))
-    (is (= 2 (g:object-ref-count (g:list-model-object model 0))))
-    (is (= 2 (g:object-ref-count (g:list-model-object model 0))))
+    (is (= 2 (g:object-ref-count (g:list-model-item model 0))))
+    (is (= 2 (g:object-ref-count (g:list-model-item model 0))))
 
     (is (typep model 'gtk:string-list))
     (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
@@ -151,11 +151,11 @@
     (is (string= "Subway" (gtk:string-list-string model 2)))
 
     (is (string= "Factory"
-                 (gtk:string-object-string (g:list-model-object model 0))))
+                 (gtk:string-object-string (g:list-model-item model 0))))
     (is (string= "Home"
-                 (gtk:string-object-string (g:list-model-object model 1))))
+                 (gtk:string-object-string (g:list-model-item model 1))))
     (is (string= "Subway"
-                 (gtk:string-object-string (g:list-model-object model 2))))))
+                 (gtk:string-object-string (g:list-model-item model 2))))))
 
 (test gtk-string-list-new.3
   ;; Create with make instance

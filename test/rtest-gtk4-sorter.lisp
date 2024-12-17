@@ -130,32 +130,36 @@
 ;;;     gtk_sorter_get_order
 
 (test gtk-sorter-compare
-  (let ((sorter (gtk:custom-sorter-new
-                    (lambda (obj1 obj2)
-                      (let ((len1 (length (gtk:string-object-string obj1)))
-                            (len2 (length (gtk:string-object-string obj2))))
-                        (cond ((< len1 len2) -1)
-                              ((> len1 len2)  1)
-                              (t 0))))))
-        (str1 (gtk:string-object-new "abc"))
-        (str2 (gtk:string-object-new "abcd")))
-    (is (eq :partial (gtk:sorter-order sorter)))
-    (is (eq :smaller (gtk:sorter-compare sorter str1 str2)))
-    (is (eq :larger (gtk:sorter-compare sorter str2 str1)))
-    (is (eq :equal (gtk:sorter-compare sorter str1 str1)))
-    (is (eq :equal (gtk:sorter-compare sorter str2 str2)))))
+  (glib-test:with-check-memory (sorter)
+    (let ((str1 (gtk:string-object-new "abc"))
+          (str2 (gtk:string-object-new "abcd")))
+
+      (setf sorter (gtk:custom-sorter-new
+                      (lambda (obj1 obj2)
+                        (let ((len1 (length (gtk:string-object-string obj1)))
+                              (len2 (length (gtk:string-object-string obj2))))
+                          (cond ((< len1 len2) -1)
+                                ((> len1 len2)  1)
+                                (t 0))))))
+
+      (is (eq :partial (gtk:sorter-order sorter)))
+      (is (eq :smaller (gtk:sorter-compare sorter str1 str2)))
+      (is (eq :larger (gtk:sorter-compare sorter str2 str1)))
+      (is (eq :equal (gtk:sorter-compare sorter str1 str1)))
+      (is (eq :equal (gtk:sorter-compare sorter str2 str2))))))
 
 ;;;     gtk_sorter_changed
 
 (test gtk-sorter-changed
-  (let ((sorter (gtk:custom-sorter-new))
-        (msg nil))
-    (g:signal-connect sorter "changed"
-                      (lambda (sorter changed)
-                        (declare (ignore sorter))
-                        (push changed msg)))
-    (is-false (gtk:sorter-changed sorter :different))
-    (is (equal '(:different) msg))))
+  (glib-test:with-check-memory (sorter)
+    (let ((msg nil))
+      (is (typep (setf sorter (gtk:custom-sorter-new)) 'gtk:custom-sorter))
+      (g:signal-connect sorter "changed"
+                        (lambda (sorter changed)
+                          (declare (ignore sorter))
+                          (push changed msg)))
+      (is-false (gtk:sorter-changed sorter :different))
+      (is (equal '(:different) msg)))))
 
 ;;;     gtk_ordering_from_cmpfunc
 
@@ -164,4 +168,4 @@
   (is (eq :equal (gtk:ordering-from-cmpfunc  0)))
   (is (eq :larger (gtk:ordering-from-cmpfunc  1))))
 
-;;; 2024-10-18
+;;; 2024-12-16
