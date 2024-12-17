@@ -101,9 +101,7 @@
       (%custom-filter-new (cffi:callback custom-filter-func)
                           (glib:allocate-stable-pointer func)
                           (cffi:callback glib:stable-pointer-destroy-notify))
-      (%custom-filter-new (cffi:null-pointer)
-                          (cffi:null-pointer)
-                          (cffi:null-pointer))))
+      (make-instance 'custom-filter)))
 
 (export 'custom-filter-new)
 

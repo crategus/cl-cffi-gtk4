@@ -35,19 +35,21 @@
 ;;;
 ;;;     GtkSortListModel
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_sort_list_model_new
-;;;
-;;;     gtk_sort_list_model_set_sorter
 ;;;     gtk_sort_list_model_get_sorter
-;;;     gtk_sort_list_model_set_model
+;;;     gtk_sort_list_model_set_sorter
 ;;;     gtk_sort_list_model_get_model
-;;;     gtk_sort_list_model_set_incremental
+;;;     gtk_sort_list_model_set_model
 ;;;     gtk_sort_list_model_get_incremental
+;;;     gtk_sort_list_model_set_incremental
 ;;;     gtk_sort_list_model_get_pending
 ;;;     gtk_sort_list_model_get_section_sorter             Since 4.12
 ;;;     gtk_sort_list_model_set_section_sorter             Since 4.12
+;;;
+;;; Functions
+;;;
+;;;     gtk_sort_list_model_new
 ;;;
 ;;; Properties
 ;;;
@@ -109,7 +111,7 @@
 
 #+liber-documentation
 (setf (documentation 'sort-list-model 'type)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @begin{short}
     The @class{gtk:sort-list-model} object is a @class{g:list-model} object that
     sorts the elements of an underlying model according to a @class{gtk:sorter}
@@ -165,7 +167,7 @@
 (setf (liber:alias-for-function 'sort-list-model-incremental)
       "Accessor"
       (documentation 'sort-list-model-incremental 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-incremental object) => incremental}
   @syntax{(setf (gtk:sort-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:sort-list-model} object}
@@ -175,8 +177,8 @@
     @class{gtk:sort-list-model} class.
   @end{short}
   The @fun{gtk:sort-list-model-incremental} function returns whether incremental
-  sorting was enabled. The @setf{gtk:slice-list-model-model} function sets the
-  sort model to do an incremental sort.
+  sorting was enabled. The @setf{gtk:sort-list-model-incremental} function sets
+  the sort model to do an incremental sort.
 
   When incremental sorting is enabled, the sort list model will not do a
   complete sort immediately, but will instead queue an idle handler that
@@ -199,7 +201,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'sort-list-model) t)
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
-  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
+  The type of items. Since 4.8")
 
 #+gtk-4-8
 (declaim (inline sort-list-model-item-type))
@@ -212,7 +214,7 @@
 (setf (liber:alias-for-function 'sort-list-model-item-type)
       "Accessor"
       (documentation 'sort-list-model-item-type 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -241,7 +243,7 @@
 (setf (liber:alias-for-function 'sort-list-model-model)
       "Accessor"
       (documentation 'sort-list-model-model 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-model object) => model}
   @syntax{(setf (gtk:sort-list-model-model object) model)}
   @argument[object]{a @class{gtk:sort-list-model} object}
@@ -262,15 +264,14 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'sort-list-model) t)
  "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
-  @br{}
+  The number of items. @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'sort-list-model-n-items)
       "Accessor"
       (documentation 'sort-list-model-n-items 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -294,7 +295,7 @@
 (setf (liber:alias-for-function 'sort-list-model-pending)
       "Accessor"
       (documentation 'sort-list-model-pending 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[pending]{an unsigned integer with the estimate of unsorted items
@@ -312,12 +313,14 @@
 
   If you want to estimate the progress, you can use code like this:
   @begin{pre}
-pending = gtk_sort_list_model_get_pending (self);
-model = gtk_sort_list_model_get_model (self);
-progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
+(let* ((pending (gtk:sort-list-model-pending model))
+       (store (gtk:sort-list-model-model model))
+       (progress (- 1.0 (/ pending
+                           (max 1 (g:list-model-n-items store))))))
+  ... )
   @end{pre}
-  If no sort operation is ongoing - in particular when the
-  @slot[gtk:sort-list-model]{incremental} property is @em{false} - this function
+  If no sort operation is ongoing, in particular when the
+  @slot[gtk:sort-list-model]{incremental} property is @em{false}, this function
   returns 0.
   @see-class{g:sort-list-model}")
 
@@ -334,7 +337,7 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
 (setf (liber:alias-for-function 'sort-list-model-section-sorter)
       "Accessor"
       (documentation 'sort-list-model-section-sorter 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-section-sorter object) => sorter}
   @syntax{(setf (gtk:sort-list-model-section-sorter object) sorter)}
   @argument[object]{a @class{gtk:sort-list-model} object}
@@ -360,7 +363,7 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
 (setf (liber:alias-for-function 'sort-list-model-sorter)
       "Accessor"
       (documentation 'sort-list-model-sorter 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:sort-list-model-sorter object) => sorter}
   @syntax{(setf (gtk:sort-list-model-sorter object) sorter)}
   @argument[object]{a @class{gtk:sort-list-model} object}
@@ -383,7 +386,7 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
 
 (defun sort-list-model-new (model sorter)
  #+liber-documentation
- "@version{#2023-9-21}
+ "@version{2024-12-15}
   @argument[model]{a @class{g:list-model} object, or @code{nil}}
   @argument[sorter]{a @class{gtk:sorter} object to sort @arg{model} with,
     or @code{nil}}
@@ -391,7 +394,9 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
   @begin{short}
     Creates a new sort list model that uses the sorter to sort @arg{model}.
   @end{short}
-  @see-class{gtk:sort-list-model}"
+  @see-class{gtk:sort-list-model}
+  @see-class{gtk:sorter}
+  @see-class{g:list-model}"
   (make-instance 'sort-list-model
                  :model model
                  :sorter sorter))

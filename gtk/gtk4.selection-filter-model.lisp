@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'selection-filter-model 'type)
- "@version{2023-9-6}
+ "@version{2024-12-15}
   @begin{short}
     The @class{gtk:selection-filter-model} class is a list model that presents
     the selected items in a @class{gtk:selection-model} as its own list model.
@@ -116,7 +116,7 @@
 (setf (liber:alias-for-function 'selection-filter-model-item-type)
       "Accessor"
       (documentation 'selection-filter-model-item-type 'function)
- "@version{#2023-9-6}
+ "@version{2024-12-15}
   @syntax{(gtk:selection-filter-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -146,7 +146,7 @@
 (setf (liber:alias-for-function 'selection-filter-model-model)
       "Accessor"
       (documentation 'selection-filter-model-model 'function)
- "@version{#2023-9-6}
+ "@version{2024-12-15}
   @syntax{(gtk:selection-filter-model-model object) => model}
   @syntax{(setf (gtk:selection-filter-model-model object) model)}
   @argument[object]{a @class{gtk:selection-filter-model} object}
@@ -179,7 +179,7 @@
 (setf (liber:alias-for-function 'selection-filter-model-n-items)
       "Accessor"
       (documentation 'selection-filter-model-n-items 'function)
- "@version{#2023-9-6}
+ "@version{2024-12-15}
   @syntax{(gtk:selection-filter-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -188,7 +188,7 @@
     Accessor of the @slot[gtk:selection-filter-model]{n-items} slot of the
     @class{gtk:selection-filter-model} class.
   @end{short}
-  @see-class{g:selection-filter-model}
+  @see-class{gtk:selection-filter-model}
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
@@ -199,7 +199,7 @@
 
 (defun selection-filter-model-new (model)
  #+liber-documentation
- "@version{#2023-9-6}
+ "@version{2024-12-15}
   @argument[model]{a @class{gtk:selection-model} object to filter, or
     @code{nil}}
   @return{The new @class{gtk:selection-filter-model} object.}

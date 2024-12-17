@@ -113,34 +113,32 @@
 
 #+liber-documentation
 (setf (documentation 'directory-list 'type)
- "@version{2023-9-7}
+ "@version{2024-12-15}
   @begin{short}
     The @class{gtk:directory-list} class is a list model that wraps the
-    requested information from the @fun{g:file-enumerate-children-async}
+    requested information from the @code{g_file_enumerate_children_async()}
     function.
   @end{short}
   It presents a @class{g:list-model} object and fills it asynchronously with
   the @class{g:file-info} objects returned from that function. Enumeration will
-  start automatically when a the @slot[gtk:directory-list]{file} property is
-  set.
+  start automatically when the @slot[gtk:directory-list]{file} property is set.
 
   While the @class{gtk:directory-list} object is being filled, the
   @slot[gtk:directory-list]{loading} property will be set to @em{true}. You can
   listen to that property if you want to show information like a
-  @class{gtk:spinner} widget or a \"Loading...\" text.
+  @class{gtk:spinner} widget or a @code{\"Loading...\"} text.
 
-  If loading fails at any point, the @slot[directory-list]{error} property will
-  be set to give more indication about the failure.
+  If loading fails at any point, the @slot[gtk:directory-list]{error} property
+  will be set to give more indication about the failure.
 
   The @class{g:file-info} objects returned from a @class{gtk:directory-list}
-  object have the \"standard::file\" attribute set to the @class{g:file} object
-  they refer to. This way you can get at the file that is referred to in the
-  same way you would via the @fun{g:file-enumerator-child} function. This means
-  you do not need access to the @class{gtk:directory-list} object but can access
-  the @class{g:file} object directly from the @class{g:file-info} object when
-  operating with a @class{gtk:list-view} widget or similar.
-  @see-class{g:list-model}
-  @see-function{g:file-enumerate-children}")
+  object have the @code{\"standard::file\"} attribute set to the @class{g:file}
+  object they refer to. This way you can get the file that is referred to in the
+  same way you would via the @code{g_file_enumerator_child()} function. This
+  means you do not need access to the @class{gtk:directory-list} object but can
+  access the @class{g:file} object directly from the @class{g:file-info} object
+  when operating with a @class{gtk:list-view} widget or similar.
+  @see-class{g:list-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -158,21 +156,21 @@
 (setf (liber:alias-for-function 'directory-list-attributes)
       "Accessor"
       (documentation 'directory-list-attributes 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-attributes object) => attributes}
   @syntax{(setf (gtk:directory-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[attributes]{a string with the attributes}
   @begin{short}
-    Accessor of the @slot[gtk:directory]{attributes} slot of the
+    Accessor of the @slot[gtk:directory-list]{attributes} slot of the
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-attributes} function gets the attributes queried
   on the children. The @setf{gtk:directory-list-attributes} function sets the
   attributes to be enumerated and starts the enumeration.
 
-  If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
-  of @class{g:file-info} objects will still be created.
+  If the @arg{attributes} argument is @code{nil}, no attributes will be queried,
+  but a list of @class{g:file-info} objects will still be created.
   @see-class{gtk:directory-list}
   @see-class{g:file-info}")
 
@@ -180,17 +178,17 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "error" 'directory-list) t)
- "The @code{error} property of type @class{g:error} (Read) @br{}
-  Error encountered while loading files.")
+ "The @code{error} property of type @class{glib:error} (Read) @br{}
+  The error encountered while loading files.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'directory-list-error)
       "Accessor"
       (documentation 'directory-list-error 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-error object) => error}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[error]{a @class{g:error} instance with the loading error or
+  @argument[error]{a @class{glib:error} instance with the loading error or
   @code{nil} if loading finished successfully}
   @begin{short}
     Accessor of the @slot[gtk:directory-list]{error} slot of the
@@ -204,20 +202,20 @@
   no files were loaded, and all successfully queried files will remain in the
   list.
   @see-class{gtk:directory-list}
-  @see-class{g:error}")
+  @see-class{glib:error}")
 
 ;;; --- gtk:directory-list-file ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'directory-list) t)
  "The @code{file} property of type @class{g:file} (Read / Write) @br{}
-  File to query.")
+  The file to query.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'directory-list-file)
       "Accessor"
       (documentation 'directory-list-file 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-file object) => file}
   @syntax{(setf (gtk:directory-list-file object) file)}
   @argument[object]{a @class{gtk:directory-list} object}
@@ -228,8 +226,8 @@
   @end{short}
   The @fun{gtk:directory-list-file} function gets the file whose children are
   currently enumerated. The @setf{gtk:directory-list-file} function sets the
-  file to be enumerated and starts the enumeration. If @arg{file} is
-  @code{nil}, the result will be an empty list.
+  file to be enumerated and starts the enumeration. If the @arg{file} argument
+  is @code{nil}, the result will be an empty list.
   @see-class{gtk:directory-list}
   @see-class{g:file}")
 
@@ -238,21 +236,21 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "io-priority" 'directory-list) t)
  "The @code{io-priority} property of type @code{:int} (Read / Write) @br{}
-  Priority used when loading. @br{}
+  The priority used when loading. @br{}
   Allowed values: >= -2147483647 @br{}
-  Default value: 0")
+  Default value: @var{g:+priority-default+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'directory-list-io-priority)
       "Accessor"
       (documentation 'directory-list-io-priority 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-io-priority object) => priority}
   @syntax{(setf (gtk:directory-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[priority]{an integer with the IO priority to use}
   @begin{short}
-    Accessor of the @slot[gtk:directory]{io-priority} slot of the
+    Accessor of the @slot[gtk:directory-list]{io-priority} slot of the
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-io-priority} function gets the IO priority. The
@@ -266,7 +264,8 @@
   something like the @var{g:+priority-default-idle+} value may increase
   responsiveness.
   @see-class{gtk:directory-list}
-  @see-variable{g:+priority-default}")
+  @see-variable{g:+priority-default+}
+  @see-variable{g:+priority-default-idle+}")
 
 ;;; --- gtk:directory-list-item-type -------------------------------------------
 
@@ -286,7 +285,7 @@
 (setf (liber:alias-for-function 'directory-list-item-type)
       "Accessor"
       (documentation 'directory-list-item-type 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -316,12 +315,12 @@
 (setf (liber:alias-for-function 'directory-list-loading)
       "Accessor"
       (documentation 'directory-list-loading 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-loading object) => loading}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
-    Accessor of the @slot[gtk:directory]{loading} slot of the
+    Accessor of the @slot[gtk:directory-list]{loading} slot of the
     @class{gtk:directory-list} class.
   @end{short}
   @see-class{gtk:directory-list}")
@@ -338,13 +337,13 @@
 (setf (liber:alias-for-function 'directory-list-monitored)
       "Accessor"
       (documentation 'directory-list-monitored 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-monitored object) => monitored}
   @syntax{(setf (gtk:directory-list-monitored object) monitored)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[monitored]{@em{true} to monitor the directory for changes}
   @begin{short}
-    Accessor of the @slot[gtk:directory]{monitored} slot of the
+    Accessor of the @slot[gtk:directory-list]{monitored} slot of the
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-monitored} function returns whether the directory
@@ -371,7 +370,7 @@
 (setf (liber:alias-for-function 'directory-list-n-items)
       "Accessor"
       (documentation 'directory-list-n-items 'function)
- "@version{#2023-9-7}
+ "@version{2024-12-15}
   @syntax{(gtk:directory-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -391,7 +390,7 @@
 
 (defun directory-list-new (attributes file)
  #+liber-documentation
- "@version{#2023-9-21}
+ "@version{2024-12-15}
   @argument[attributes]{a string with the attributes to query with}
   @argument[file]{a @class{g:file} object to query}
   @return{The @class{gtk:directory-list} object.}
@@ -413,15 +412,15 @@
 (cffi:defcfun ("gtk_directory_list_is_loading" directory-list-is-loading)
     :boolean
  #+liber-documentation
- "@version{#2023-9-21}
-  @argument[directorylist]{a @class{gtk:directory-list} object}
-  @return{@em{True} if @arg{directorylist} is loading.}
+ "@version{2024-12-15}
+  @argument[model]{a @class{gtk:directory-list} object}
+  @return{@em{True} if @arg{model} is loading.}
   @begin{short}
     Returns @em{true} if the children enumeration is currently in progress.
   @end{short}
-  Files will be added to @arg{directorylist} from time to time while loading is
-  going on. The order in which are added is undefined and may change in between
-  runs.
+  Files will be added to @arg{model} from time to time while loading is going
+  on. The order in which the files are added is undefined and may change in
+  between runs.
   @see-class{gtk:directory-list}"
   (model (g:object directory-list)))
 

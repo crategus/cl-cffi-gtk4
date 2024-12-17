@@ -183,7 +183,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-list 'type)
- "@version{2024-5-25}
+ "@version{2024-12-15}
   @begin{short}
     The @class{gtk:string-list} class is a list model that wraps an array of
     strings.
@@ -195,9 +195,9 @@
     The @class{gtk:string-list} implementation of the @class{gtk:buildable}
     interface supports adding items directly using the @code{<items>} element
     and specifying @code{<item>} elements for each item. Each @code{<item>}
-    element supports the regular translation attributes \"translatable\",
-    \"context\" and \"comments\". Here is a UI definition fragment specifying a
-    @class{gtk:string-list} object:
+    element supports the regular translation attributes @code{\"translatable\"},
+    @code{\"context\"} and @code{\"comments\"}. Here is a UI definition fragment
+    specifying a @class{gtk:string-list} object:
     @begin{pre}
 <object class=\"GtkStringList\">
   <items>
@@ -444,9 +444,9 @@
   @end{short}
   If the string list does not contain @arg{position} items, @code{nil} is
   returned. This function returns the string. To get the object wrapping it,
-  use the @fun{g:list-model-object} function.
+  use the @fun{g:list-model-item} function.
   @see-class{gtk:string-list}
-  @see-function{g:list-model-object}"
+  @see-function{g:list-model-item}"
   (model (g:object string-list))
   (position :uint))
 

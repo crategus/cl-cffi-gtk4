@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'map-list-model 'type)
- "@version{2024-12-9}
+ "@version{2024-12-15}
   @begin{short}
     The @class{gtk:map-list-model} object is a list model that takes a list
     model and maps the items in that model to different items according to a
@@ -103,24 +103,13 @@
   @begin[Examples]{dictionary}
     Create a list of @class{gtk:event-controller} objects.
     @begin{pre}
-static gpointer
-map_to_controllers (gpointer widget,
-                    gpointer data)
- {
-  gpointer result = gtk_widget_observe_controllers (widget);
-  g_object_unref (widget);
-  return result;
- @}
-
-widgets = gtk_widget_observe_children (widget);
-
-controllers = gtk_map_list_model_new (G_TYPE_LIST_MODEL,
-                                      widgets,
-                                      map_to_controllers,
-                                      NULL, NULL);
-
-model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
-                                    controllers);
+(let* (...
+       (widgets (gtk:widget-observe-children widget))
+       (controllers (gtk:map-list-model-new widgets
+                           (lambda (item)
+                             (gtk:widget-observe-controllers item))))
+       (model (gtk:flatten-list-model-new controllers)))
+  ... )
     @end{pre}
     The @class{gtk:map-list-model} object will attempt to discard the mapped
     objects as soon as they are no longer needed and recreate them if necessary.
@@ -148,7 +137,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (setf (liber:alias-for-function 'map-list-model-has-map)
       "Accessor"
       (documentation 'map-list-model-has-map 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:map-list-model-has-map object) => setting}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[setting]{a boolean whether a map function is set for this model}
@@ -165,7 +154,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'map-list-model) t)
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
-  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
+  The type of items. Since 4.8")
 
 #+gtk-4-8
 (declaim (inline map-list-model-item-type))
@@ -178,7 +167,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (setf (liber:alias-for-function 'map-list-model-item-type)
       "Accessor"
       (documentation 'map-list-model-item-type 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:map-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -208,9 +197,8 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (setf (liber:alias-for-function 'map-list-model-model)
       "Accessor"
       (documentation 'map-list-model-model 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:map-list-model-model object) => model}
-  @syntax{(setf (gtk:map-list-model-model object) model)}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets mapped}
   @begin{short}
@@ -218,28 +206,27 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
     @class{gtk:map-list-model} class.
   @end{short}
   The @fun{gtk:map-list-model-model} function gets the model that is currently
-  being mapped or @code{nil} if none. The @setf{gtk:map-list-model-model}
-  function sets the model to be mapped.
+  being mapped or @code{nil} if none.
 
   GTK makes no effort to ensure that the model conforms to the item type
   expected by the map function. It assumes that the caller knows what they are
   doing and have set up an appropriate map function.
-  @see-class{gtk:map-list-model}")
+  @see-class{gtk:map-list-model}
+  @see-class{g:list-model}")
 
 ;;; --- gtk:map-list-model-n-items ---------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'map-list-model) t)
  "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
-  @br{}
+  The number of items. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'map-list-model-n-items)
       "Accessor"
       (documentation 'map-list-model-n-items 'function)
- "@version{#2023-9-3}
+ "@version{2024-12-15}
   @syntax{(gtk:map-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -265,11 +252,11 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (setf (liber:alias-for-symbol 'map-list-model-map-func)
       "Callback"
       (liber:symbol-documentation 'map-list-model-map-func)
- "@version{#2024-5-3}
+ "@version{2024-12-17}
   @syntax{lambda (item) => result}
-  @argument[item]{a pointer to the item to map}
-  @argument[result]{a pointer to the item to map to, this function may not
-    return @code{cffi:null-pointer}}
+  @argument[item]{a @class{g:object} instance with the item to map}
+  @argument[result]{a @class{g:object} instance with the item to map to, this
+    function may not return @code{nil}}
   @begin{short}
     User function that is called to map an item of the original model to an item
     expected by the map model.
@@ -285,7 +272,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_map_list_model_new" %map-list-model-new)
-    (g:object map-list-model)
+    (g:object map-list-model :return)
   (model (g:object g:list-model))
   (func :pointer)
   (data :pointer)
@@ -293,7 +280,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 
 (defun map-list-model-new (model func)
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2024-12-15}
   @argument[model]{a @class{g:list-model} object to map or @code{nil} for none}
   @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
     to map items or @code{nil}}
@@ -303,10 +290,13 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   @end{short}
   @see-class{gtk:map-list-model}
   @see-symbol{gtk:map-list-model-map-func}"
-  (%map-list-model-new model
-                       (cffi:callback map-list-model-map-func)
-                       (glib:allocate-stable-pointer func)
-                       (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%map-list-model-new model
+                           (cffi:callback map-list-model-map-func)
+                           (glib:allocate-stable-pointer func)
+                           (cffi:callback glib:stable-pointer-destroy-notify))
+      (make-instance 'map-list-model
+                     :model model)))
 
 (export 'map-list-model-new)
 
@@ -323,7 +313,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 
 (defun map-list-model-set-map-func (model func)
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2024-12-15}
   @argument[model]{a @class{gtk:map-list-model} object}
   @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
     to map items or @code{nil}}
@@ -342,11 +332,17 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   function returns items of the appropriate type.
   @see-class{gtk:map-list-model}
   @see-symbol{gtk:map-list-model-map-func}"
-  (%map-list-model-set-map-func
-          model
-          (cffi:callback map-list-model-map-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%map-list-model-set-map-func
+              model
+              (cffi:callback map-list-model-map-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%map-list-model-set-map-func
+              model
+              (cffi:null-pointer)
+              (cffi:null-pointer)
+              (cffi:null-pointer))))
 
 (export 'map-list-model-set-map-func)
 
