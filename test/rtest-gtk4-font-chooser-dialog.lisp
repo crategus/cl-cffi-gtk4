@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-font-chooser-dialog :in gtk-suite)
+(def-suite gtk-font-chooser-dialog :in gtk-deprecated)
 (in-suite gtk-font-chooser-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -43,14 +43,14 @@
     ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontChooserDialog"
                                         GTK:FONT-CHOOSER-DIALOG
-                         (:SUPERCLASS GTK:DIALOG
-                          :EXPORT T
-                          :INTERFACES
-                          ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                           "GtkFontChooser" "GtkNative" "GtkRoot"
-                           "GtkShortcutManager")
-                          :TYPE-INITIALIZER "gtk_font_chooser_dialog_get_type")
-                         NIL)
+                        (:SUPERCLASS GTK:DIALOG
+                         :EXPORT T
+                         :INTERFACES
+                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                          "GtkFontChooser" "GtkNative" "GtkRoot"
+                          "GtkShortcutManager")
+                         :TYPE-INITIALIZER "gtk_font_chooser_dialog_get_type")
+                        NIL)
                (gobject:get-gtype-definition "GtkFontChooserDialog")))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -59,7 +59,10 @@
 
 (test gtk-font-chooser-dialog-new
   (let ((*gtk-warn-deprecated* nil))
-    (is (typep (gtk:font-chooser-dialog-new "title" nil)
-               'gtk:font-chooser-dialog))))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog
+                       (gtk:font-chooser-dialog-new "title" nil))
+                 'gtk:font-chooser-dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
-;;; 2024-9-20
+;;; 2024-12-24

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-inscription :in gtk-suite)
+(def-suite gtk-inscription :in gtk-display-widgets)
 (in-suite gtk-inscription)
 
 ;;; --- Types and Values -------------------------------------------------------

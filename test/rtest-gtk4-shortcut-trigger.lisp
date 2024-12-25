@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-shortcut-trigger :in gtk-suite)
+(def-suite gtk-shortcut-trigger :in gtk-keyboard-shortcuts)
 (in-suite gtk-shortcut-trigger)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -206,12 +206,16 @@
 
 ;;;     gtk_shortcut_trigger_to_label
 
+;; TODO: Improve memory check for global default display
+
 (test gtk-shortcut-trigger-to-label
-  (let ((display (gdk:display-default))
-        (trigger (gtk:shortcut-trigger-parse-string "<Control>c")))
-    (is (string= "Ctrl+C" (gtk:shortcut-trigger-to-label trigger display)))
-    (is (< 1 (g:object-ref-count display)))
-    (is (= 1 (g:object-ref-count trigger)))))
+  (glib-test:with-check-memory (trigger :strong 1)
+    (let ((display (gdk:display-default)))
+      (setf trigger (gtk:shortcut-trigger-parse-string "<Control>c"))
+      #-windows
+      (is (string= "Ctrl+C" (gtk:shortcut-trigger-to-label trigger display)))
+      #+windows
+      (is (string= "Strg+C" (gtk:shortcut-trigger-to-label trigger display))))))
 
 ;;;     gtk_keyval_trigger_new
 ;;;     gtk_keyval_trigger_get_modifiers
@@ -252,4 +256,4 @@
 (test gtk-never-trigger-get
   (is (typep (gtk:never-trigger-get) 'gtk:never-trigger)))
 
-;;; 2024-11-1
+;;; 2024-12-18

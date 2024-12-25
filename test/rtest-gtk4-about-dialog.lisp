@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-about-dialog :in gtk-suite)
+(def-suite gtk-about-dialog :in gtk-windows)
 (in-suite gtk-about-dialog)
 
 ;;; ---Types and Values --------------------------------------------------------
@@ -152,8 +152,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-about-dialog-properties
-  (let ((dialog (make-instance 'gtk:about-dialog)))
-    (is (= 2 (g:object-ref-count dialog)))
+  (glib-test:with-check-memory (dialog)
+    (is (typep (setf dialog
+                     (make-instance 'gtk:about-dialog)) 'gtk:about-dialog))
     (is-false (gtk:about-dialog-artists dialog))
     (is-false (gtk:about-dialog-authors dialog))
     (is-false (gtk:about-dialog-comments dialog))
@@ -170,21 +171,19 @@
     (is-false (gtk:about-dialog-website dialog))
     (is-false (gtk:about-dialog-website-label dialog))
     (is-false (gtk:about-dialog-wrap-license dialog))
-    (is-false (gtk:window-destroy dialog))
-    (is (= 1 (g:object-ref-count dialog)))))
+    (is-false (gtk:window-destroy dialog))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_about_dialog_new
 
 (test gtk-about-dialog-new
-  (let (dialog)
+  (glib-test:with-check-memory (dialog)
     (is (typep (setf dialog (gtk:about-dialog-new)) 'gtk:about-dialog))
     (is (= 2 (g:object-ref-count dialog)))
-    (is-false (gtk:window-destroy dialog))
-    (is (= 1 (g:object-ref-count dialog)))))
+    (is-false (gtk:window-destroy dialog))))
 
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2024-10-9
+;;; 2024-12-23

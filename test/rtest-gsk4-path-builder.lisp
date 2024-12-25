@@ -57,13 +57,17 @@
 ;;;     gsk_path_builder_add_layout
 
 (test gsk-path-builder-add-layout
-  (let ((builder (gsk:path-builder-new))
-        (layout (gtk:label-layout (gtk:label-new "-"))))
-    (is-false (gsk:path-builder-add-layout builder layout))
-    (is (string= (format nil
-                         "M 0.40625 10.125 L 0.40625 9.046875 L 3.828125 ~
-                         9.046875 L 3.828125 10.125 Z")
-                 (gsk:path-to-string (gsk:path-builder-to-path builder))))))
+  (glib-test:with-check-memory (label layout)
+    (let ((builder (gsk:path-builder-new)))
+      (setf layout (gtk:label-layout (setf label (gtk:label-new "-"))))
+      (is (= 2 (g:object-ref-count layout)))
+      (is-false (gsk:path-builder-add-layout builder layout))
+      (is (string= (format nil
+                           "M 0.40625 10.125 L 0.40625 9.046875 L 3.828125 ~
+                           9.046875 L 3.828125 10.125 Z")
+                   (gsk:path-to-string (gsk:path-builder-to-path builder))))
+      ;; Remove references
+      (is (string= "" (setf (gtk:label-label label) ""))))))
 
 ;;;     gsk_path_builder_add_path
 

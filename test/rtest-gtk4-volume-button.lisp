@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-volume-button :in gtk-suite)
+(def-suite gtk-volume-button :in gtk-deprecated)
 (in-suite gtk-volume-button)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -52,7 +52,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-volume-button-properties
-  (let ((button (make-instance 'gtk:volume-button)))
+  (glib-test:with-check-memory (button)
+    (setf button (make-instance 'gtk:volume-button))
     (is-true (setf (gtk:volume-button-use-symbolic button) t))
     (is-true (gtk:volume-button-use-symbolic button))
     (is-false (setf (gtk:volume-button-use-symbolic button) nil))
@@ -63,11 +64,13 @@
 ;;;     gtk_volume_button_new
 
 (test gtk-volume-button-new
-  (let ((button (gtk:volume-button-new)))
-    (is (typep button 'gtk:volume-button))
-    (is (=  0.0d0 (gtk:adjustment-lower (gtk:scale-button-adjustment button))))
-    (is (=  1.0d0 (gtk:adjustment-upper (gtk:scale-button-adjustment button))))
-    (is (= 0.02d0 (gtk:adjustment-step-increment
-                      (gtk:scale-button-adjustment button))))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (button :strong 1)
+      (setf button (gtk:volume-button-new))
+      (is (typep button 'gtk:volume-button))
+      (is (=  0.0d0 (gtk:adjustment-lower (gtk:scale-button-adjustment button))))
+      (is (=  1.0d0 (gtk:adjustment-upper (gtk:scale-button-adjustment button))))
+      (is (= 0.02d0 (gtk:adjustment-step-increment
+                        (gtk:scale-button-adjustment button)))))))
 
-;;; 2024-5-2
+;;; 2024-12-24

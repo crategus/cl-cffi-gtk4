@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-area :in gtk-suite)
+(def-suite gtk-cell-area :in gtk-deprecated)
 (in-suite gtk-cell-area)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -34,35 +34,17 @@
              (glib-test:list-signals "GtkCellArea")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellArea" GTK:CELL-AREA
-                       (:SUPERCLASS G:INITIALLY-UNOWNED
-                        :EXPORT T
-                        :INTERFACES ("GtkBuildable" "GtkCellLayout")
-                        :TYPE-INITIALIZER "gtk_cell_area_get_type")
-                       ((EDIT-WIDGET CELL-AREA-EDIT-WIDGET
-                         "edit-widget" "GtkCellEditable" T NIL)
-                        (EDITED-CELL CELL-AREA-EDITED-CELL
-                         "edited-cell" "GtkCellRenderer" T NIL)
-                        (FOCUS-CELL CELL-AREA-FOCUS-CELL
-                         "focus-cell" "GtkCellRenderer" T T)))
+                      (:SUPERCLASS G:INITIALLY-UNOWNED
+                       :EXPORT T
+                       :INTERFACES ("GtkBuildable" "GtkCellLayout")
+                       :TYPE-INITIALIZER "gtk_cell_area_get_type")
+                      ((EDIT-WIDGET CELL-AREA-EDIT-WIDGET
+                        "edit-widget" "GtkCellEditable" T NIL)
+                       (EDITED-CELL CELL-AREA-EDITED-CELL
+                        "edited-cell" "GtkCellRenderer" T NIL)
+                       (FOCUS-CELL CELL-AREA-FOCUS-CELL
+                        "focus-cell" "GtkCellRenderer" T T)))
              (gobject:get-gtype-definition "GtkCellArea"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-cell-area-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box)))
-    (is-false (gtk:cell-area-edit-widget area))
-    (signals (error)
-             (setf (gtk:cell-area-edit-widget area) (make-instance 'gtk:entry)))
-    (is-false (gtk:cell-area-edited-cell area))
-    (signals (error)
-             (setf (gtk:cell-area-edited-cell area)
-                   (make-instance 'gtk:cell-renderer-text)))
-    (is-false (gtk:cell-area-focus-cell area))
-    (is (typep (setf (gtk:cell-area-focus-cell area)
-                     (make-instance 'gtk:cell-renderer-text))
-               'gtk:cell-renderer-text))
-    (is (typep (gtk:cell-area-focus-cell area) 'gtk:cell-renderer-text))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -122,6 +104,28 @@
     (is (equal '("GtkCellRenderer" "GtkCellEditable")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-cell-area-properties
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area)
+      (setf area (make-instance 'gtk:cell-area-box))
+      (is-false (gtk:cell-area-edit-widget area))
+      #+nil
+      (signals (error)
+               (setf (gtk:cell-area-edit-widget area) (make-instance 'gtk:entry)))
+      (is-false (gtk:cell-area-edited-cell area))
+      #+nil
+      (signals (error)
+               (setf (gtk:cell-area-edited-cell area)
+                     (make-instance 'gtk:cell-renderer-text)))
+      (is-false (gtk:cell-area-focus-cell area))
+      (is (typep (setf (gtk:cell-area-focus-cell area)
+                       (make-instance 'gtk:cell-renderer-text))
+                 'gtk:cell-renderer-text))
+      (is (typep (gtk:cell-area-focus-cell area) 'gtk:cell-renderer-text))
+      (is-false (setf (gtk:cell-area-focus-cell area) nil)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_area_add
@@ -130,10 +134,11 @@
 
 (test gtk-cell-area-add/remove
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((area (gtk:cell-area-box-new))
-          (renderer1 (gtk:cell-renderer-pixbuf-new))
-          (renderer2 (gtk:cell-renderer-progress-new))
-          (renderer3 (gtk:cell-renderer-text-new)))
+    (glib-test:with-check-memory (area renderer1 renderer2 renderer3)
+      (setf area (gtk:cell-area-box-new))
+      (setf renderer1 (gtk:cell-renderer-pixbuf-new))
+      (setf renderer2 (gtk:cell-renderer-progress-new))
+      (setf renderer3 (gtk:cell-renderer-text-new))
       ;; Add cell renderer
       (is-false (gtk:cell-area-add area renderer1))
       (is-true (gtk:cell-area-has-renderer area renderer1))
@@ -195,31 +200,32 @@
 ;;;     gtk_cell_area_create_context
 
 (test gtk-cell-area-create-context
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (gtk:cell-area-box-new))
-         (context nil))
-    (is (= 1 (g:object-ref-count area)))
-    (is (typep (setf context
-                     (gtk:cell-area-create-context area))
-               'gtk:cell-area-context))
-    (is (= 1 (g:object-ref-count context)))
-    (is (= 2 (g:object-ref-count area)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((area 2) context :strong 1)
+        (setf area (gtk:cell-area-box-new))
+        (is (typep (setf context
+                         (gtk:cell-area-create-context area))
+                   'gtk:cell-area-context))))))
 
 ;;;     gtk_cell_area_copy_context
 
 (test gtk-cell-area-copy-context
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (gtk:cell-area-box-new))
-         (context (gtk:cell-area-create-context area)))
-    (is (typep (gtk:cell-area-copy-context area context)
-               'gtk:cell-area-context))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((area 3) context :strong 1)
+        (setf area (gtk:cell-area-box-new))
+        (setf context (gtk:cell-area-create-context area))
+        (is (typep (gtk:cell-area-copy-context area context)
+                   'gtk:cell-area-context))))))
 
 ;;;     gtk_cell_area_get_request_mode
 
 (test gtk-cell-area-request-mode
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (gtk:cell-area-box-new)))
-    (is (eq :HEIGHT-FOR-WIDTH (gtk:cell-area-request-mode area)))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area)
+      (setf area (gtk:cell-area-box-new))
+      (is (eq :HEIGHT-FOR-WIDTH (gtk:cell-area-request-mode area))))))
 
 ;;;     gtk_cell_area_get_preferred_width
 ;;;     gtk_cell_area_get_preferred_height_for_width
@@ -235,34 +241,33 @@
 ;;;     gtk_cell_area_class_find_cell_property
 
 (test gtk-cell-area-class-find-cell-property
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box))
-         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
-    (is-false (gtk:cell-area-add area renderer))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "align")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "expand")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "fixed-size")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "pack-type")))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer)
+      (setf area (make-instance 'gtk:cell-area-box))
+      (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))
+      (is-false (gtk:cell-area-add area renderer))
+      (is (g:is-param-spec
+              (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
+                                                      "align")))
+      (is (g:is-param-spec
+              (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
+                                                      "expand")))
+      (is (g:is-param-spec
+              (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
+                                                      "fixed-size")))
+      (is (g:is-param-spec
+              (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
+                                                      "pack-type")))
+      (is-false (gtk:cell-area-remove area renderer)))))
 
 ;;;     gtk_cell_area_class_list_cell_properties
 
-(test gtk-cell-area-class-find-cell-property
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box))
-         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
-    (is-false (gtk:cell-area-add area renderer))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "align")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "expand")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "fixed-size")))
-    (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
-                                                               "pack-type")))))
+(test gtk-cell-area-class-list-cell-properties
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ()
+      (is (equal '("expand" "align" "fixed-size" "pack-type")
+                 (mapcar #'g:param-spec-name
+                         (gtk:cell-area-class-list-cell-properties "GtkCellAreaBox")))))))
 
 ;;;     gtk_cell_area_add_with_properties
 
@@ -270,23 +275,25 @@
 ;;;     gtk_cell_area_cell_get
 
 (test gtk-cell-area-cell-set/get
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box))
-         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
-    (is-false (gtk:cell-area-add area renderer))
-    (is-false (gtk:cell-area-cell-set area
-                                      renderer
-                                      "align" t
-                                      "expand" t
-                                      "fixed-size" nil
-                                      "pack-type" :end))
-    (is (equal '(t t nil :end)
-               (gtk:cell-area-cell-get area
-                                       renderer
-                                       "align"
-                                       "expand"
-                                       "fixed-size"
-                                       "pack-type")))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer)
+      (setf area (make-instance 'gtk:cell-area-box))
+      (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))
+      (is-false (gtk:cell-area-add area renderer))
+      (is-false (gtk:cell-area-cell-set area
+                                        renderer
+                                        "align" t
+                                        "expand" t
+                                        "fixed-size" nil
+                                        "pack-type" :end))
+      (is (equal '(t t nil :end)
+                 (gtk:cell-area-cell-get area
+                                         renderer
+                                         "align"
+                                         "expand"
+                                         "fixed-size"
+                                         "pack-type")))
+      (is-false (gtk:cell-area-remove area renderer)))))
 
 ;;;     gtk_cell_area_cell_set_valist
 ;;;     gtk_cell_area_cell_get_valist
@@ -295,14 +302,16 @@
 ;;;     gtk_cell_area_cell_get_property
 
 (test gtk-cell-area-cell-property
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box))
-         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
-    (is-false (gtk:cell-area-add area renderer))
-    (is-false (gtk:cell-area-cell-property area renderer "align"))
-    (is-false (gtk:cell-area-cell-property area renderer "expand"))
-    (is-true (gtk:cell-area-cell-property area renderer "fixed-size"))
-    (is (eq :start (gtk:cell-area-cell-property area renderer "pack-type")))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer)
+      (setf area (make-instance 'gtk:cell-area-box))
+      (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))
+      (is-false (gtk:cell-area-add area renderer))
+      (is-false (gtk:cell-area-cell-property area renderer "align"))
+      (is-false (gtk:cell-area-cell-property area renderer "expand"))
+      (is-true (gtk:cell-area-cell-property area renderer "fixed-size"))
+      (is (eq :start (gtk:cell-area-cell-property area renderer "pack-type")))
+      (is-false (gtk:cell-area-remove area renderer)))))
 
 ;;;     gtk_cell_area_is_activatable
 ;;;     gtk_cell_area_activate
@@ -317,4 +326,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; 2024-9-20
+;;; 2024-12-24

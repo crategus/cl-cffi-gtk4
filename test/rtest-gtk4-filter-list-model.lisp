@@ -66,7 +66,7 @@
 ;;;     gtk_filter_list_model_new
 
 (test gtk-filter-list-model-new.1
-  (glib-test:with-check-memory ((store model))
+  (glib-test:with-check-memory (store model)
     (setf store (g:list-store-new "GtkWidget"))
     (setf model (gtk:filter-list-model-new store nil))
     ;; The list store
@@ -84,7 +84,7 @@
     (is-false (setf (gtk:filter-list-model-model model) nil))))
 
 (test gtk-filter-list-model-new.2
-  (glib-test:with-check-memory ((store filter model))
+  (glib-test:with-check-memory (store filter model)
     (let ((expression (gtk:property-expression-new "GtkStringObject"
                                                    nil "string")))
       (setf store (gtk:string-list-new '()))

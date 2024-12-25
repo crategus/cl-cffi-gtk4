@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-renderer-accel :in gtk-suite)
+(def-suite gtk-cell-renderer-accel :in gtk-deprecated)
 (in-suite gtk-cell-renderer-accel)
 
 ;;; --- Types and Values -------------------------------------------------------

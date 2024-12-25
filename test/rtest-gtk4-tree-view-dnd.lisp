@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-view-dnd :in gtk-suite)
+(def-suite gtk-tree-view-dnd :in gtk-deprecated)
 (in-suite gtk-tree-view-dnd)
 
 ;;; --- Types and Values -------------------------------------------------------

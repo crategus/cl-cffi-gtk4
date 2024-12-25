@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-model-sort :in gtk-suite)
+(def-suite gtk-tree-model-sort :in gtk-deprecated)
 (in-suite gtk-tree-model-sort)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -47,23 +47,24 @@
 ;;;     model
 
 (test gtk-tree-model-sort-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (model (make-instance 'gtk:tree-model-sort)))
-    (is-false (gtk:tree-model-sort-model model))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (model)
+      (setf model (make-instance 'gtk:tree-model-sort))
+      (is-false (gtk:tree-model-sort-model model)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_tree_model_sort_new_with_model
 
 (test gtk-tree-model-sort-new-with-model
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (model (create-list-store-for-package))
-         (sortmodel nil))
-    (is (typep (gtk:tree-model-sort-new-with-model nil) 'gtk:tree-model-sort))
-    (is (typep (setf sortmodel
-                     (gtk:tree-model-sort-new-with-model model))
-               'gtk:tree-model-sort))
-    (is (eq model (gtk:tree-model-sort-model sortmodel)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((model 2) sortmodel :strong 1)
+        (setf model (create-list-store-for-package))
+        (is (typep (setf sortmodel
+                         (gtk:tree-model-sort-new-with-model model))
+                   'gtk:tree-model-sort))
+        (is (eq model (gtk:tree-model-sort-model sortmodel)))))))
 
 ;;;     gtk_tree_model_sort_convert_child_path_to_path
 ;;;     gtk_tree_model_sort_convert_child_iter_to_iter
@@ -73,4 +74,4 @@
 ;;;     gtk_tree_model_sort_clear_cache
 ;;;     gtk_tree_model_sort_iter_is_valid
 
-;;; 2024-9-27
+;;; 2024-12-24

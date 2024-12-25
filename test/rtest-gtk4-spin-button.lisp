@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-spin-button :in gtk-suite)
+(def-suite gtk-spin-button :in gtk-data-entry)
 (in-suite gtk-spin-button)
 
 ;;; --- Types and Values -------------------------------------------------------

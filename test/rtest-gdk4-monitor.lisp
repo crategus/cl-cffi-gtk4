@@ -105,74 +105,6 @@
                         (WIDTH-MM MONITOR-WIDTH-MM "width-mm" "gint" T NIL)))
              (gobject:get-gtype-definition "GdkMonitor"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gdk-monitor-properties.1
-  (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
-    (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-    #-windows
-    (is (stringp (gdk:monitor-connector monitor)))
-    #+windows
-    (is-false (gdk:monitor-connector monitor))
-    #+crategus
-    (is (or (string= "Iiyama North America 27\""
-                     (gdk:monitor-description monitor))
-            (string= "Eingebaute Anzeige"
-                     (gdk:monitor-description monitor))))
-    #+windows
-    (is-false (gdk:monitor-description monitor))
-    (is (typep (gdk:monitor-display monitor) 'gdk:display))
-    (is (typep (gdk:monitor-geometry monitor) 'gdk:rectangle))
-    (is (integerp (gdk:monitor-height-mm monitor)))
-    (is (stringp (gdk:monitor-manufacturer monitor)))
-    (is (stringp (gdk:monitor-model monitor)))
-    (is (integerp (gdk:monitor-refresh-rate monitor)))
-    (is (integerp (gdk:monitor-scale-factor monitor)))
-    ;; TODO:Implement general test for a enum value
-    (is (eq :unknown (gdk:monitor-subpixel-layout monitor)))
-    (is-true (gdk:monitor-valid monitor))
-    (is (integerp (gdk:monitor-width-mm monitor)))))
-
-#+nil
-(test gdk-monitor-properties.2
-  (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
-    (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-    (is (string= "DP-1" (gdk:monitor-connector monitor)))
-    (is (string= "Iiyama North America 24\""
-                 (gdk:monitor-description monitor)))
-    (is (typep (gdk:monitor-display monitor) 'gdk:display))
-    (is (gdk:rectangle-equal (gdk:rectangle-new :width 1920 :height 1080)
-                             (gdk:monitor-geometry monitor)))
-    (is (= 300 (gdk:monitor-height-mm monitor)))
-    (is (string= "IVM" (gdk:monitor-manufacturer monitor)))
-    (is (string= "PL2483H" (gdk:monitor-model monitor)))
-    (is (= 60000 (gdk:monitor-refresh-rate monitor)))
-    (is (= 1 (gdk:monitor-scale-factor monitor)))
-    (is (eq :unknown (gdk:monitor-subpixel-layout monitor)))
-    (is-true (gdk:monitor-valid monitor))
-    (is (= 530 (gdk:monitor-width-mm monitor)))))
-
-#+nil
-(test gdk-monitor-properties.3
-  (let ((monitor (second (gdk:display-monitors (gdk:display-default)))))
-    (when monitor
-      (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-
-      (is (string= "eDP-1" (gdk:monitor-connector monitor)))
-      (is (string= "Eingebaute Anzeige" (gdk:monitor-description monitor)))
-      (is (typep (gdk:monitor-display monitor) 'gdk:display))
-      (is (gdk:rectangle-equal (gdk:rectangle-new :x 1920 :y 94
-                                                  :width 1920 :height 1080)
-                               (gdk:monitor-geometry monitor)))
-      (is (= 170 (gdk:monitor-height-mm monitor)))
-      (is (string= "LGD" (gdk:monitor-manufacturer monitor)))
-      (is (string= "0x046d" (gdk:monitor-model monitor)))
-      (is (= 60020 (gdk:monitor-refresh-rate monitor)))
-      (is (= 1 (gdk:monitor-scale-factor monitor)))
-      (is (eq :unknown (gdk:monitor-subpixel-layout monitor)))
-      (is-true (gdk:monitor-valid monitor))
-      (is (= 310 (gdk:monitor-width-mm monitor))))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     invalidate
@@ -188,12 +120,42 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gdk-monitor-properties
+  (glib-test:with-check-memory (:strong 4)
+    (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
+      (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
+      #-windows
+      (is (stringp (gdk:monitor-connector monitor)))
+      #+windows
+      (is-false (gdk:monitor-connector monitor))
+      #+crategus
+      (is (or (string= "Iiyama North America 27\""
+                       (gdk:monitor-description monitor))
+              (string= "Eingebaute Anzeige"
+                       (gdk:monitor-description monitor))))
+      #+windows
+      (is-false (gdk:monitor-description monitor))
+      (is (typep (gdk:monitor-display monitor) 'gdk:display))
+      (is (typep (gdk:monitor-geometry monitor) 'gdk:rectangle))
+      (is (integerp (gdk:monitor-height-mm monitor)))
+      (is (stringp (gdk:monitor-manufacturer monitor)))
+      (is (stringp (gdk:monitor-model monitor)))
+      (is (integerp (gdk:monitor-refresh-rate monitor)))
+      (is (integerp (gdk:monitor-scale-factor monitor)))
+      ;; TODO:Implement general test for a enum value
+      (is (eq :unknown (gdk:monitor-subpixel-layout monitor)))
+      (is-true (gdk:monitor-valid monitor))
+      (is (integerp (gdk:monitor-width-mm monitor))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_monitor_is_valid
 
 (test gdk-monitor-is-valid
-  (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
-    (is-true (gdk:monitor-is-valid monitor))))
+  (glib-test:with-check-memory (:strong 4)
+    (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
+      (is-true (gdk:monitor-is-valid monitor)))))
 
-;;; 2024-9-19
+;;; 2024-12-20

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-font-chooser-widget :in gtk-suite)
+(def-suite gtk-font-chooser-widget :in gtk-deprecated)
 (in-suite gtk-font-chooser-widget)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -42,29 +42,32 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontChooserWidget"
                                       GTK:FONT-CHOOSER-WIDGET
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkFontChooser")
-                        :TYPE-INITIALIZER "gtk_font_chooser_widget_get_type")
-                       ((TWEAK-ACTION FONT-CHOOSER-WIDGET-TWEAK-ACTION
-                         "tweak-action" "GAction" T NIL)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkFontChooser")
+                       :TYPE-INITIALIZER "gtk_font_chooser_widget_get_type")
+                      ((TWEAK-ACTION FONT-CHOOSER-WIDGET-TWEAK-ACTION
+                        "tweak-action" "GAction" T NIL)))
              (gobject:get-gtype-definition "GtkFontChooserWidget"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-font-chooser-widget-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (widget (make-instance 'gtk:font-chooser-widget)))
-    (is (typep (gtk:font-chooser-widget-tweak-action widget) 'g:action))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (widget :strong 1)
+        (setf widget (make-instance 'gtk:font-chooser-widget))
+        (is (typep (gtk:font-chooser-widget-tweak-action widget) 'g:action))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_font_chooser_widget_new
 
 (test gtk-font-chooser-widget-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:font-chooser-widget-new) 'gtk:font-chooser-widget))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:font-chooser-widget-new) 'gtk:font-chooser-widget)))))
 
-;;; 2024-9-20
+;;; 2024-12-24

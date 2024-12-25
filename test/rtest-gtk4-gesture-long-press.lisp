@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-gesture-long-press :in gtk-suite)
+(def-suite gtk-gesture-long-press :in gtk-event-handling)
 (in-suite gtk-gesture-long-press)
 
 ;;; --- Types and Values -------------------------------------------------------

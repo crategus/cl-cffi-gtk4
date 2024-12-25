@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-selection :in gtk-suite)
+(def-suite gtk-tree-selection :in gtk-deprecated)
 (in-suite gtk-tree-selection)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -45,7 +45,8 @@
 
 (test gtk-tree-selection-properties
   (let ((*gtk-warn-deprecated* nil))
-    (let ((selection (make-instance 'gtk:tree-selection)))
+    (glib-test:with-check-memory (selection)
+      (setf selection (make-instance 'gtk:tree-selection))
       (is (eq :single (gtk:tree-selection-mode selection))))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -64,10 +65,12 @@
 ;;;     gtk_tree_selection_get_tree_view
 
 (test gtk-tree-selection-tree-view
-  (let ((*gtk-warn-deprecated* nil))
-    (let* ((view (gtk:tree-view-new))
-           (selection (gtk:tree-view-selection view)))
-      (is (eq view (gtk:tree-selection-tree-view selection))))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (view (selection 2) :strong 1)
+        (setf view (gtk:tree-view-new))
+        (setf selection (gtk:tree-view-selection view))
+        (is (eq view (gtk:tree-selection-tree-view selection)))))))
 
 ;;;     gtk_tree_selection_get_selected
 ;;;     gtk_tree_selection_selected_foreach
@@ -84,4 +87,4 @@
 ;;;     gtk_tree_selection_select_range
 ;;;     gtk_tree_selection_unselect_range
 
-;;; 2024-9-20
+;;; 2024-12-24

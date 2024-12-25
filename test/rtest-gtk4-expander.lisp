@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-expander :in gtk-suite)
+(def-suite gtk-expander :in gtk-layout-widgets)
 (in-suite gtk-expander)
 
 ;;; --- Types and Values -------------------------------------------------------

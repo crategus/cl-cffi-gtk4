@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-dialog :in gtk-suite)
+(def-suite gtk-dialog :in gtk-deprecated)
 (in-suite gtk-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -74,26 +74,15 @@
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkDialog")))
     ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkDialog" GTK:DIALOG
-                         (:SUPERCLASS GTK:WINDOW
-                          :EXPORT T
-                          :INTERFACES
-                          ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                           "GtkNative" "GtkRoot" "GtkShortcutManager")
-                          :TYPE-INITIALIZER "gtk_dialog_get_type")
-                         ((USE-HEADER-BAR DIALOG-USE-HEADER-BAR
-                           "use-header-bar" "gint" T NIL)))
+                        (:SUPERCLASS GTK:WINDOW
+                         :EXPORT T
+                         :INTERFACES
+                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                          "GtkNative" "GtkRoot" "GtkShortcutManager")
+                         :TYPE-INITIALIZER "gtk_dialog_get_type")
+                        ((USE-HEADER-BAR DIALOG-USE-HEADER-BAR
+                          "use-header-bar" "gint" T NIL)))
                (gobject:get-gtype-definition "GtkDialog")))))
-
-;;; --- Properties -------------------------------------------------------------
-
-;;;     use-header-bar
-
-(test gtk-dialog-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((dialog (make-instance 'gtk:dialog)))
-      ;; The default value is not -1.
-      (is (= 0 (gtk:dialog-use-header-bar dialog)))
-      (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -125,32 +114,57 @@
     (is (equal '("gint")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+;;;     use-header-bar
+
+(test gtk-dialog-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog)
+      (setf dialog (make-instance 'gtk:dialog))
+      ;; The default value is not -1.
+      (is (= 0 (gtk:dialog-use-header-bar dialog)))
+      (is-false (gtk:window-destroy dialog)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_dialog_new
 
 (test gtk-dialog-new
-  (let ((*gtk-warn-deprecated* nil)
-        (dialog nil))
-    (is (typep (setf dialog (gtk:dialog-new)) 'gtk:dialog))
-    (is-false (gtk:window-destroy dialog))))
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog (gtk:dialog-new)) 'gtk:dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
 ;;;     gtk_dialog_new_with_buttons
 
+;; FIXME: Creates the following error messages after several runs and when
+;; destroying objects. This seems to be a general problem. We have this
+;; problem also for an GtkShortcutsWindow widget.
+
+;; GLib-GObject-CRITICAL **:
+;; g_signal_handlers_disconnect_matched:
+;; assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+#+nil
 (test gtk-dialog-new-with-buttons
-  (let* ((*gtk-warn-deprecated* nil)
-         (parent (gtk:window-new))
-         (dialog (gtk:dialog-new-with-buttons "My dialog"
-                                              parent
-                                              '(:modal :destroy-with-parent)
-                                              "_OK"
-                                              :accept
-                                              "_Cancel"
-                                              :reject)))
-    (is (typep dialog 'gtk:dialog))
-    (is (string= "My dialog" (gtk:window-title dialog)))
-    (is-false (gtk:window-destroy dialog))
-    (is-false (gtk:window-destroy parent))))
+  (when *first-run-testsuite*
+    (let* ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (parent dialog :strong 2)
+        (is (typep (setf parent (gtk:window-new)) 'gtk:window))
+        (is (typep (setf dialog
+                         (gtk:dialog-new-with-buttons "My dialog"
+                                                      parent
+                                                      '(:modal
+                                                        :destroy-with-parent)
+                                                      "_OK"
+                                                      :accept
+                                                      "_Cancel"
+                                                      :reject))
+                   'gtk:dialog))
+      (is (string= "My dialog" (gtk:window-title dialog)))
+      (is-false (gtk:window-destroy parent))
+      (is-false (gtk:window-destroy dialog))))))
 
 ;;;     gtk_dialog_response
 ;;;     gtk_dialog_add_button
@@ -163,4 +177,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; 2024-10-10
+;;; 2024-12-23

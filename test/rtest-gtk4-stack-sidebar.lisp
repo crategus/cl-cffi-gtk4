@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-stack-sidebar :in gtk-suite)
+(def-suite gtk-stack-sidebar :in gtk-layout-widgets)
 (in-suite gtk-stack-sidebar)
 
 ;;; --- Types and Values -------------------------------------------------------

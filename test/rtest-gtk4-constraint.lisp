@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-constraint :in gtk-suite)
+(def-suite gtk-constraint :in gtk-layout-managers)
 (in-suite gtk-constraint)
 
 ;;; --- Types and Values -------------------------------------------------------

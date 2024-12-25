@@ -110,7 +110,8 @@
 ;;;     width
 
 (test gdk-dmabuf-texture-builder-properties
-  (let ((builder (make-instance 'gdk:dmabuf-texture-builder)))
+  (glib-test:with-check-memory (builder :strong 1)
+    (setf builder (make-instance 'gdk:dmabuf-texture-builder))
     (is (eq (gdk:display-default)
             (gdk:dmabuf-texture-builder-display builder)))
     (is (= 0 (gdk:dmabuf-texture-builder-fourcc builder)))
@@ -137,4 +138,4 @@
 ;;;     gdk_dmabuf_texture_builder_get_stride
 ;;;     gdk_dmabuf_texture_builder_set_stride
 
-;;; 2024-11-29
+;;; 2024-12-20

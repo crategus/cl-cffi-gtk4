@@ -63,7 +63,7 @@
 ;;;     gtk_flatten_list_model_get_model_for_item
 
 (test gtk-flatten-list-model-new
-  (glib-test:with-check-memory ((minutes-model hours-model model flatten))
+  (glib-test:with-check-memory (minutes-model hours-model model flatten)
     (let ((minutes '( "1 minute"   "2 minutes"  "5 minutes" "10 minutes"
                       "15 minutes" "20 minutes" "25 minutes" "30 minutes"
                       "35 minutes" "40 minutes" "45 minutes" "50 minutes"

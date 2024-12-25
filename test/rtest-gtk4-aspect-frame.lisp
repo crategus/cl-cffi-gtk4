@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-aspect-frame :in gtk-suite)
+(def-suite gtk-aspect-frame :in gtk-layout-widgets)
 (in-suite gtk-aspect-frame)
 
 ;;; --- Types and Values -------------------------------------------------------

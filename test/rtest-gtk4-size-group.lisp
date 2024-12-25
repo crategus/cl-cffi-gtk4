@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-size-group :in gtk-suite)
+(def-suite gtk-size-group :in gtk-miscellaneous)
 (in-suite gtk-size-group)
 
 ;;; --- Types and Values -------------------------------------------------------

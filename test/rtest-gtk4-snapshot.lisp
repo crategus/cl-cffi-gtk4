@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-snapshot :in gtk-suite)
+(def-suite gtk-snapshot :in gtk-miscellaneous)
 (in-suite gtk-snapshot)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-fixed :in gtk-suite)
+(def-suite gtk-fixed :in gtk-layout-widgets)
 (in-suite gtk-fixed)
 
 ;;; --- Types and Values -------------------------------------------------------

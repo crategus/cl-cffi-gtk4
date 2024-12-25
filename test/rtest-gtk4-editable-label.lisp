@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-editable-label :in gtk-suite)
+(def-suite gtk-editable-label :in gtk-data-entry)
 (in-suite gtk-editable-label)
 
 ;;; --- Types and Values -------------------------------------------------------

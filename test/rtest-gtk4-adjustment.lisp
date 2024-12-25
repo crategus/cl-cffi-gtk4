@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-adjustment :in gtk-suite)
+(def-suite gtk-adjustment :in gtk-miscellaneous)
 (in-suite gtk-adjustment)
 
 ;;; --- Types and Values -------------------------------------------------------

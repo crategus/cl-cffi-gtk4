@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-page-setup :in gtk-suite)
+(def-suite gtk-page-setup :in gtk-printing)
 (in-suite gtk-page-setup)
 
 ;;; --- Types and Values -------------------------------------------------------

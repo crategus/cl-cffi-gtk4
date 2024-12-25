@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-icon-view :in gtk-suite)
+(def-suite gtk-icon-view :in gtk-deprecated)
 (in-suite gtk-icon-view)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -125,25 +125,27 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-icon-view-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (view (make-instance 'gtk:icon-view)))
-    (is-false (gtk:icon-view-activate-on-single-click view))
-    (is (typep (gtk:icon-view-cell-area view) 'gtk:cell-area-box))
-    (is (= 6 (gtk:icon-view-column-spacing view)))
-    (is (= -1 (gtk:icon-view-columns view)))
-    (is (eq :vertical (gtk:icon-view-item-orientation view)))
-    (is (= 6 (gtk:icon-view-item-padding view)))
-    (is (= -1 (gtk:icon-view-item-width view)))
-    (is (= 6 (gtk:icon-view-margin view)))
-    (is (= -1 (gtk:icon-view-markup-column view)))
-    (is-false (gtk:icon-view-model view))
-    (is (= -1 (gtk:icon-view-pixbuf-column view)))
-    (is-false (gtk:icon-view-reorderable view))
-    (is (= 6 (gtk:icon-view-row-spacing view)))
-    (is (eq :single (gtk:icon-view-selection-mode view)))
-    (is (= 0 (gtk:icon-view-spacing view)))
-    (is (= -1 (gtk:icon-view-text-column view)))
-    (is (= -1 (gtk:icon-view-tooltip-column view)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (view :strong 1)
+        (setf view (make-instance 'gtk:icon-view))
+        (is-false (gtk:icon-view-activate-on-single-click view))
+        (is (typep (gtk:icon-view-cell-area view) 'gtk:cell-area-box))
+        (is (= 6 (gtk:icon-view-column-spacing view)))
+        (is (= -1 (gtk:icon-view-columns view)))
+        (is (eq :vertical (gtk:icon-view-item-orientation view)))
+        (is (= 6 (gtk:icon-view-item-padding view)))
+        (is (= -1 (gtk:icon-view-item-width view)))
+        (is (= 6 (gtk:icon-view-margin view)))
+        (is (= -1 (gtk:icon-view-markup-column view)))
+        (is-false (gtk:icon-view-model view))
+        (is (= -1 (gtk:icon-view-pixbuf-column view)))
+        (is-false (gtk:icon-view-reorderable view))
+        (is (= 6 (gtk:icon-view-row-spacing view)))
+        (is (eq :single (gtk:icon-view-selection-mode view)))
+        (is (= 0 (gtk:icon-view-spacing view)))
+        (is (= -1 (gtk:icon-view-text-column view)))
+        (is (= -1 (gtk:icon-view-tooltip-column view)))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 

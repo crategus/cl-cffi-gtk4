@@ -63,7 +63,7 @@
 ;;;     gtk_multi_selection_new
 
 (test gtk-multi-selection-new
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (create-string-list-for-package "GSK"))
     (is (typep (gtk:multi-selection-new) 'gtk:multi-selection))
     (is (typep (setf selection

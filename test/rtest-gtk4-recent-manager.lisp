@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-recent-manager :in gtk-suite)
+(def-suite gtk-recent-manager :in gtk-recent-manager)
 (in-suite gtk-recent-manager)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -37,21 +37,24 @@
              (glib-test:list-signals "GtkRecentManager")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkRecentManager" GTK:RECENT-MANAGER
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_recent_manager_get_type")
-                       ((FILENAME RECENT-MANAGER-FILENAME
-                         "filename" "gchararray" T NIL)
-                        (SIZE RECENT-MANAGER-SIZE "size" "gint" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_recent_manager_get_type")
+                      ((FILENAME RECENT-MANAGER-FILENAME
+                        "filename" "gchararray" T NIL)
+                       (SIZE RECENT-MANAGER-SIZE "size" "gint" T NIL)))
              (gobject:get-gtype-definition "GtkRecentManager"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-recent-manager-properties
-  (let ((manager (gtk:recent-manager-default)))
-    (is (stringp (gtk:recent-manager-filename manager)))
-    (is (integerp (gtk:recent-manager-size manager)))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((manager 2) :strong 1)
+      (is (typep (setf manager
+                       (gtk:recent-manager-default)) 'gtk:recent-manager))
+      (is (stringp (gtk:recent-manager-filename manager)))
+      (is (integerp (gtk:recent-manager-size manager))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -64,7 +67,9 @@
 ;;;     gtk_recent_manager_get_default
 
 (test gtk-recent-manager-default
-  (is (typep (gtk:recent-manager-default) 'gtk:recent-manager)))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (:strong 1)
+      (is (typep (gtk:recent-manager-default) 'gtk:recent-manager)))))
 
 ;;;     gtk_recent_manager_add_item
 ;;;     gtk_recent_manager_has_item
@@ -93,8 +98,10 @@
 ;; management more carefully.
 
 (test gtk-recent-manager-items
-  (is (every (lambda (x) (typep x 'gtk:recent-info))
-             (gtk:recent-manager-items (gtk:recent-manager-default)))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (:strong 1)
+      (is (every (lambda (x) (typep x 'gtk:recent-info))
+                 (gtk:recent-manager-items (gtk:recent-manager-default)))))))
 
 ;;;     gtk_recent_manager_purge_items
 
@@ -170,4 +177,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2024-9-20
+;;; 2024-12-23

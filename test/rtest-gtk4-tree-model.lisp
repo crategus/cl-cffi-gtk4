@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-model :in gtk-suite)
+(def-suite gtk-tree-model :in gtk-deprecated)
 (in-suite gtk-tree-model)
 
 (defun create-and-fill-list-store ()
@@ -279,15 +279,19 @@
 ;;;     gtk_tree_row_reference_valid
 
 (test gtk-tree-row-reference-new
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((model (create-and-fill-list-store))
-          (path (gtk:tree-path-new-from-string "2"))
-          (row nil))
-      (is (typep (setf row (gtk:tree-row-reference-new model path))
-                 'gtk:tree-row-reference))
-      (is (gtk:tree-row-reference-valid row))
-      (is (typep (gtk:tree-row-reference-model row) 'gtk:tree-model))
-      (is (typep (gtk:tree-row-reference-path row) 'gtk:tree-path)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((model 3) :strong 1)
+        (let ((path (gtk:tree-path-new-from-string "2"))
+              row)
+          (setf model (create-and-fill-list-store))
+          (is (= 1 (g:object-ref-count model)))
+          (is (typep (setf row
+                           (gtk:tree-row-reference-new model path))
+                     'gtk:tree-row-reference))
+          (is (gtk:tree-row-reference-valid row))
+          (is (typep (gtk:tree-row-reference-model row) 'gtk:tree-model))
+          (is (typep (gtk:tree-row-reference-path row) 'gtk:tree-path)))))))
 
 ;;;     gtk_tree_row_reference_new_proxy
 ;;;     gtk_tree_row_reference_free
@@ -411,4 +415,4 @@
 ;;;     gtk_tree_model_rows_reordered
 ;;;     gtk_tree_model_rows_reordered_with_length
 
-;;; 2024-9-20
+;;; 2024-12-24

@@ -55,7 +55,7 @@
 ;;;     gtk_selection_model_unselect_item
 
 (test gtk-selection-model-is-selected
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (create-string-list-for-package "GSK"))
     (setf selection (gtk:multi-selection-new model))
     (is (eq (g:gtype "GObject") (gtk:multi-selection-item-type selection)))
@@ -77,7 +77,7 @@
 ;;;     gtk_selection_model_set_selection
 
 (test gtk-selection-model-select-range
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (let (bitset)
       (setf model (create-string-list-for-package "GSK"))
       (setf selection (gtk:multi-selection-new model))
@@ -103,7 +103,7 @@
 ;; TODO: GTK:SELECTION-MODEL-SELECTION-IN-RANGE does not work as expected.
 
 (test gtk-selection-model-select-all
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (let (bitset)
       (setf model (create-string-list-for-package "GSK"))
       (setf selection (gtk:multi-selection-new model))
@@ -128,7 +128,7 @@
 ;;;     gtk_selection_model_selection_changed
 
 (test gtk-selection-model-selection-changed
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (create-string-list-for-package "GSK"))
     (setf selection (gtk:multi-selection-new model))
     (g:signal-connect selection "selection-changed"

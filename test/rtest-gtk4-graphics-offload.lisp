@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-graphics-offload :in gtk-suite)
+(def-suite gtk-graphics-offload :in gtk-media-support)
 (in-suite gtk-graphics-offload)
 
 ;;; --- Types and values -------------------------------------------------------

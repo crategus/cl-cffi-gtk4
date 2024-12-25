@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-separator :in gtk-suite)
+(def-suite gtk-separator :in gtk-ornaments)
 (in-suite gtk-separator)
 
 ;;; --- Types and Values -------------------------------------------------------

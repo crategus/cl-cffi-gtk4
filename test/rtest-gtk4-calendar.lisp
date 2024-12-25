@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-calendar :in gtk-suite)
+(def-suite gtk-calendar :in gtk-display-widgets)
 (in-suite gtk-calendar)
 
 ;;; --- Types and Values -------------------------------------------------------

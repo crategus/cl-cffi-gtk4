@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-media-controls :in gtk-suite)
+(def-suite gtk-media-controls :in gtk-media-support)
 (in-suite gtk-media-controls)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-range :in gtk-suite)
+(def-suite gtk-range :in gtk-abstract-widgets)
 (in-suite gtk-range)
 
 ;;; --- Types and Values -------------------------------------------------------

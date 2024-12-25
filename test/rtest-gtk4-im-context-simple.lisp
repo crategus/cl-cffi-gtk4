@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-im-context-simple :in gtk-suite)
+(def-suite gtk-im-context-simple :in gtk-input-methods)
 (in-suite gtk-im-context-simple)
 
 ;;; --- Types and Values -------------------------------------------------------

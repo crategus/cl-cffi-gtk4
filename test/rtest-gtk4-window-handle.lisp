@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-window-handle :in gtk-suite)
+(def-suite gtk-window-handle :in gtk-miscellaneous)
 (in-suite gtk-window-handle)
 
 ;;; --- Types and Values -------------------------------------------------------

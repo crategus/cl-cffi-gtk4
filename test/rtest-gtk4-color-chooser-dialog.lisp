@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-color-chooser-dialog :in gtk-suite)
+(def-suite gtk-color-chooser-dialog :in gtk-deprecated)
 (in-suite gtk-color-chooser-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -39,15 +39,15 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorChooserDialog"
                                       GTK:COLOR-CHOOSER-DIALOG
-                       (:SUPERCLASS GTK:DIALOG
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
-                         "GtkConstraintTarget" "GtkNative" "GtkRoot"
-                         "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_color_chooser_dialog_get_type")
-                       ((SHOW-EDITOR COLOR-CHOOSER-DIALOG-SHOW-EDITOR
-                         "show-editor" "gboolean" T T)))
+                      (:SUPERCLASS GTK:DIALOG
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
+                        "GtkConstraintTarget" "GtkNative" "GtkRoot"
+                        "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_color_chooser_dialog_get_type")
+                      ((SHOW-EDITOR COLOR-CHOOSER-DIALOG-SHOW-EDITOR
+                        "show-editor" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkColorChooserDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -55,9 +55,13 @@
 ;;;     show-editor
 
 (test gtk-color-chooser-dialog-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (dialog (make-instance 'gtk:color-chooser-dialog)))
-    (is-false (gtk:color-chooser-dialog-show-editor dialog))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog
+                       (make-instance 'gtk:color-chooser-dialog))
+                 'gtk:color-chooser-dialog))
+      (is-false (gtk:color-chooser-dialog-show-editor dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -65,7 +69,10 @@
 
 (test gtk-color-chooser-dialog-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:color-chooser-dialog-new "title" nil)
-               'gtk:color-chooser-dialog))))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog
+                       (gtk:color-chooser-dialog-new "title" nil))
+                 'gtk:color-chooser-dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
-;;; 2024-9-20
+;;; 2024-12-24

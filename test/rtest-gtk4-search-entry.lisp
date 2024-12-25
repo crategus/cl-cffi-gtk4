@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-search-entry :in gtk-suite)
+(def-suite gtk-search-entry :in gtk-data-entry)
 (in-suite gtk-search-entry)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-accessible-range :in gtk-suite)
+(def-suite gtk-accessible-range :in gtk-accessibility)
 (in-suite gtk-accessible-range)
 
 ;;; --- Types and Values -------------------------------------------------------

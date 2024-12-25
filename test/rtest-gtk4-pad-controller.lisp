@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-pad-controller :in gtk-suite)
+(def-suite gtk-pad-controller :in gtk-event-handling)
 (in-suite gtk-pad-controller)
 
 ;;; --- Types and Values -------------------------------------------------------

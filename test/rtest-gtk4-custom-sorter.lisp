@@ -45,7 +45,7 @@
 ;;;     gtk_custom_sorter_new
 
 (test gtk-custom-sorter-new
-  (glib-test:with-check-memory (nil)
+  (glib-test:with-check-memory ()
     (is (typep (gtk:custom-sorter-new) 'gtk:custom-sorter))
     (is (typep (gtk:custom-sorter-new nil) 'gtk:custom-sorter))
     (is (typep (gtk:custom-sorter-new (lambda (item1 item2)

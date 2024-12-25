@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-print-dialog :in gtk-suite)
+(def-suite gtk-print-dialog :in gtk-printing)
 (in-suite gtk-print-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------

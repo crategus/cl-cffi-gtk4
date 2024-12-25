@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-root :in gtk-suite)
+(def-suite gtk-root :in gtk-windows)
 (in-suite gtk-root)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -36,7 +36,8 @@
 ;;;     gtk_root_get_display
 
 (test gtk-root-display
-  (let ((window (make-instance 'gtk:window)))
+  (glib-test:with-check-memory (window :strong 1)
+    (is (typep (setf window (make-instance 'gtk:window)) 'gtk:window))
     (is (typep (gtk:root-display window) 'gdk:display))
     ;; Root display is the default display
     (is (eq (gdk:display-default) (gtk:root-display window)))
@@ -46,9 +47,10 @@
 ;;;     gtk_root_set_focus
 
 (test gtk-root-focus
-  (let* ((button (make-instance 'gtk:button))
-         (window (make-instance 'gtk:window
-                                :child button)))
+  (glib-test:with-check-memory (button window)
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf window
+                     (make-instance 'gtk:window :child button)) 'gtk:window))
     ;; WINDOW is root widget for BUTTON
     (is (eq window (gtk:widget-root button)))
     ;; No focus widget
@@ -65,4 +67,4 @@
     (is-false (setf (gtk:window-child window) nil))
     (is-false (gtk:window-destroy window))))
 
-;;; 2024-10-8
+;;; 2024-12-23

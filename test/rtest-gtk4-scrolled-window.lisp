@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-scrolled-window :in gtk-suite)
+(def-suite gtk-scrolled-window :in gtk-scrolling)
 (in-suite gtk-scrolled-window)
 
 ;;; --- Types and Values -------------------------------------------------------

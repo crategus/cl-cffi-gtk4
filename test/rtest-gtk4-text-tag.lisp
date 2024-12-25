@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text-tag :in gtk-suite)
+(def-suite gtk-text-tag :in gtk-multiline-editor)
 (in-suite gtk-text-tag)
 
 ;;; --- Types and Values -------------------------------------------------------

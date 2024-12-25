@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-message-dialog :in gtk-suite)
+(def-suite gtk-message-dialog :in gtk-deprecated)
 (in-suite gtk-message-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -76,39 +76,42 @@
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkMessageDialog")))
     ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMessageDialog" GTK:MESSAGE-DIALOG
-                         (:SUPERCLASS GTK:DIALOG
-                          :EXPORT T
-                          :INTERFACES
-                          ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                           "GtkNative" "GtkRoot" "GtkShortcutManager")
-                          :TYPE-INITIALIZER "gtk_message_dialog_get_type")
-                         ((BUTTONS MESSAGE-DIALOG-BUTTONS
-                           "buttons" "GtkButtonsType" NIL NIL)
-                          (MESSAGE-AREA MESSAGE-DIALOG-MESSAGE-AREA
-                           "message-area" "GtkWidget" T NIL)
-                          (MESSAGE-TYPE MESSAGE-DIALOG-MESSAGE-TYPE
-                           "message-type" "GtkMessageType" T T)
-                          (SECONDARY-TEXT MESSAGE-DIALOG-SECONDARY-TEXT
-                           "secondary-text" "gchararray" T T)
-                          (SECONDARY-USE-MARKUP
-                           MESSAGE-DIALOG-SECONDARY-USE-MARKUP
-                           "secondary-use-markup" "gboolean" T T)
-                          (TEXT MESSAGE-DIALOG-TEXT "text" "gchararray" T T)
-                          (USE-MARKUP MESSAGE-DIALOG-USE-MARKUP
-                           "use-markup" "gboolean" T T)))
+                        (:SUPERCLASS GTK:DIALOG
+                         :EXPORT T
+                         :INTERFACES
+                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                          "GtkNative" "GtkRoot" "GtkShortcutManager")
+                         :TYPE-INITIALIZER "gtk_message_dialog_get_type")
+                        ((BUTTONS MESSAGE-DIALOG-BUTTONS
+                          "buttons" "GtkButtonsType" NIL NIL)
+                         (MESSAGE-AREA MESSAGE-DIALOG-MESSAGE-AREA
+                          "message-area" "GtkWidget" T NIL)
+                         (MESSAGE-TYPE MESSAGE-DIALOG-MESSAGE-TYPE
+                          "message-type" "GtkMessageType" T T)
+                         (SECONDARY-TEXT MESSAGE-DIALOG-SECONDARY-TEXT
+                          "secondary-text" "gchararray" T T)
+                         (SECONDARY-USE-MARKUP
+                          MESSAGE-DIALOG-SECONDARY-USE-MARKUP
+                          "secondary-use-markup" "gboolean" T T)
+                         (TEXT MESSAGE-DIALOG-TEXT "text" "gchararray" T T)
+                         (USE-MARKUP MESSAGE-DIALOG-USE-MARKUP
+                          "use-markup" "gboolean" T T)))
                (gobject:get-gtype-definition "GtkMessageDialog")))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-message-dialog-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((dialog (make-instance 'gtk:message-dialog)))
-      (is (typep  (gtk:message-dialog-message-area dialog) 'gtk:box))
-      (is (eq :info (gtk:message-dialog-message-type dialog)))
-      (is-false (gtk:message-dialog-secondary-text dialog))
-      (is-false (gtk:message-dialog-secondary-use-markup dialog))
-      (is (string= "" (gtk:message-dialog-text dialog)))
-      (is-false (gtk:message-dialog-use-markup dialog)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (dialog :strong 1)
+        (setf dialog (make-instance 'gtk:message-dialog))
+        (is (typep  (gtk:message-dialog-message-area dialog) 'gtk:box))
+        (is (eq :info (gtk:message-dialog-message-type dialog)))
+        (is-false (gtk:message-dialog-secondary-text dialog))
+        (is-false (gtk:message-dialog-secondary-use-markup dialog))
+        (is (string= "" (gtk:message-dialog-text dialog)))
+        (is-false (gtk:message-dialog-use-markup dialog))
+        (is-false (gtk:window-destroy dialog))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -118,4 +121,4 @@
 ;;;     gtk_message_dialog_format_secondary_text
 ;;;     gtk_message_dialog_format_secondary_markup
 
-;;; 2024-9-20
+;;; 2024-12-24

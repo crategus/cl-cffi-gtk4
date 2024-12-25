@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-toggle-button :in gtk-suite)
+(def-suite gtk-toggle-button :in gtk-buttons-and-toggles)
 (in-suite gtk-toggle-button)
 
 ;;; --- Types and Values -------------------------------------------------------

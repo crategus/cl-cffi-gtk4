@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-sortable :in gtk-suite)
+(def-suite gtk-tree-sortable :in gtk-deprecated)
 (in-suite gtk-tree-sortable)
 
 ;;; --- Types and Values -------------------------------------------------------

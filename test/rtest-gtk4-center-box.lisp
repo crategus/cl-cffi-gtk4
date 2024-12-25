@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-center-box :in gtk-suite)
+(def-suite gtk-center-box :in gtk-layout-widgets)
 (in-suite gtk-center-box)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -61,7 +61,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-center-box-properties.1
-  (let ((box (gtk:center-box-new)))
+  (glib-test:with-check-memory (box)
+    (setf box (gtk:center-box-new))
     (is (eq :center (gtk:center-box-baseline-position box)))
     (is-false (gtk:center-box-center-widget box))
     (is-false (gtk:center-box-end-widget box))
@@ -70,10 +71,11 @@
     (is-false (gtk:center-box-start-widget box))))
 
 (test gtk-center-box-properties.2
-  (let ((box (gtk:center-box-new))
-        (center (gtk:button-new))
-        (start (gtk:button-new))
-        (end (gtk:button-new)))
+  (glib-test:with-check-memory (box center start end)
+    (setf box (gtk:center-box-new))
+    (setf center (gtk:button-new))
+    (setf start (gtk:button-new))
+    (setf end (gtk:button-new))
     (is (eq :top (setf (gtk:center-box-baseline-position box) :top)))
     (is (eq :top (gtk:center-box-baseline-position box)))
     (is (typep (setf (gtk:center-box-center-widget box) center) 'gtk:button))
@@ -92,8 +94,9 @@
 ;;;     gtk_center_box_new
 
 (test gtk-center-box-new
-  (is (typep (gtk:center-box-new) 'gtk:center-box))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:center-box))))
-  (is (= 1 (g:object-ref-count (gtk:center-box-new)))))
+  (glib-test:with-check-memory ()
+    (is (typep (gtk:center-box-new) 'gtk:center-box))
+    (is (= 1 (g:object-ref-count (make-instance 'gtk:center-box))))
+    (is (= 1 (g:object-ref-count (gtk:center-box-new))))))
 
-;;; 2024-10-8
+;;; 2024-12-23

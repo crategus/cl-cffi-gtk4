@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-link-button :in gtk-suite)
+(def-suite gtk-link-button :in gtk-buttons-and-toggles)
 (in-suite gtk-link-button)
 
 ;;; --- Types and Values -------------------------------------------------------

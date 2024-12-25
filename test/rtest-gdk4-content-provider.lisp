@@ -20,10 +20,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkContentProvider")))
   ;; Check children
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '()
                  (glib-test:list-children "GdkContentProvider")))
-      (is (equal '("GdkContentProviderValue")
+      (is (equal '("GdkContentProviderValue" "GtkLabelContent" "GtkLinkContent"
+                   "GtkTextBufferContent" "GtkTextContent")
                  (glib-test:list-children "GdkContentProvider"))))
   ;; Check interfaces
   (is (equal '()
@@ -36,14 +37,14 @@
              (glib-test:list-signals "GdkContentProvider")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkContentProvider" GDK:CONTENT-PROVIDER
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_content_provider_get_type")
-                       ((FORMATS CONTENT-PROVIDER-FORMATS "formats"
-                         "GdkContentFormats" T NIL)
-                        (STORABLE-FORMATS CONTENT-PROVIDER-STORABLE-FORMATS
-                         "storable-formats" "GdkContentFormats" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_content_provider_get_type")
+                      ((FORMATS CONTENT-PROVIDER-FORMATS "formats"
+                        "GdkContentFormats" T NIL)
+                       (STORABLE-FORMATS CONTENT-PROVIDER-STORABLE-FORMATS
+                        "storable-formats" "GdkContentFormats" T NIL)))
              (gobject:get-gtype-definition "GdkContentProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -68,4 +69,4 @@
 ;;;     gdk_content_provider_write_mime_type_finish
 ;;;     gdk_content_provider_get_value
 
-;;; 2024-11-29
+;;; 2024-12-23

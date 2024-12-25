@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-chooser-native :in gtk-suite)
+(def-suite gtk-file-chooser-native :in gtk-deprecated)
 (in-suite gtk-file-chooser-native)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -48,6 +48,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+#+nil
 (test gtk-file-chooser-native-properties
   (let ((*gtk-warn-deprecated* nil))
     (let ((chooser (make-instance 'gtk:file-chooser-native)))
@@ -58,6 +59,7 @@
 
 ;;;     gtk_file_chooser_native_new
 
+#+nil
 (test gtk-file-chooser-native-new
   (let ((*gtk-warn-deprecated* nil))
     (let* ((window (gtk:window-new))

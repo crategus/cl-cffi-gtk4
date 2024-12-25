@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-list-box :in gtk-suite)
+(def-suite gtk-list-box :in gtk-layout-widgets)
 (in-suite gtk-list-box)
 
 ;;; --- Types and Values -------------------------------------------------------

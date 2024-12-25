@@ -92,10 +92,13 @@
 ;;; ----------------------------------------------------------------------------
 
 (test gtk-test-finished
-  (cond (*first-run-gtk-test*
+  (cond ((or *first-run-gtk-test* *first-run-testsuite*)
          (setf *first-run-gtk-test* nil)
-         (format t "~%First run of the gtk-test suite finished.~%"))
+         (setf *first-run-testsuite* nil)
+         (when *test-dribble*
+           (format t "~%First run of the gtk-test suite finished.~%")))
         (t
-         (format t "~%Second or more run of the gtk-test suite finished.~%"))))
+         (when *test-dribble*
+           (format t "~%Second or more run of the gtk-test suite finished.~%")))))
 
-;;; 2024-7-1
+;;; 2024-12-23

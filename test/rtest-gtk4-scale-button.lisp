@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-scale-button :in gtk-suite)
+(def-suite gtk-scale-button :in gtk-buttons-and-toggles)
 (in-suite gtk-scale-button)
 
 ;;; --- Types and Values -------------------------------------------------------

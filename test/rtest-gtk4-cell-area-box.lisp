@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-area-box :in gtk-suite)
+(def-suite gtk-cell-area-box :in gtk-deprecated)
 (in-suite gtk-cell-area-box)
 
 ;;; ---  Types and Values ------------------------------------------------------

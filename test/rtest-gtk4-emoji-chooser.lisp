@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-emoji-chooser :in gtk-suite)
+(def-suite gtk-emoji-chooser :in gtk-selector-widgets)
 (in-suite gtk-emoji-chooser)
 
 ;;; --- Types and Values -------------------------------------------------------

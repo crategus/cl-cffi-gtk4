@@ -1,16 +1,7 @@
 (in-package :gtk-test)
 
-(def-suite gtk-version :in gtk-suite)
+(def-suite gtk-version :in gtk-core)
 (in-suite gtk-version)
-
-;;; --- Types and Values -------------------------------------------------------
-
-;;;     GTK_MAJOR_VERSION                                  not implemented
-;;;     GTK_MINOR_VERSION                                  not implemented
-;;;     GTK_MICRO_VERSION                                  not implemented
-;;;     GTK_BINARY_AGE                                     not implemented
-;;;     GTK_INTERFACE_AGE                                  not implemented
-;;;     GTK_CHECK_VERSION                                  not implemented
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -26,8 +17,13 @@
 
 ;;;     gtk_get_micro_version
 
+#-windows
 (test gtk-micro-version
   (is (= 2 (gtk:micro-version))))
+
+#+windows
+(test gtk-micro-version
+  (is (= 3 (gtk:micro-version))))
 
 ;;;     gtk_get_binary_age                                 not implemented
 ;;;     gtk_get_interface_age                              not implemented
@@ -39,4 +35,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2024-10-13
+;;; 2024-12-18

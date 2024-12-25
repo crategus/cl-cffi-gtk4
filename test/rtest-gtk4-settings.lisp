@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-settings :in gtk-suite)
+(def-suite gtk-settings :in gtk-core)
 (in-suite gtk-settings)
 
 ;;; --- Types and Values ------------------------------------------------------

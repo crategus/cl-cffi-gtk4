@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-font-button :in gtk-suite)
+(def-suite gtk-font-button :in gtk-deprecated)
 (in-suite gtk-font-button)
 
 ;;; --- Types and Values -------------------------------------------------------

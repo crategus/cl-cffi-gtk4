@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-gesture :in gtk-suite)
+(def-suite gtk-gesture :in gtk-event-handling)
 (in-suite gtk-gesture)
 
 ;;; --- Types and Values -------------------------------------------------------

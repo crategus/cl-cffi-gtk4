@@ -67,7 +67,7 @@
 ;;;     gtk_slice_list_model_new
 
 (test gtk-slice-list-model-new
-  (glib-test:with-check-memory ((store model))
+  (glib-test:with-check-memory (store model)
     (setf store (create-string-list-for-package))
     (is (typep (setf model
                      (gtk:slice-list-model-new store 100 50))

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-editable :in gtk-suite)
+(def-suite gtk-editable :in gtk-data-entry)
 (in-suite gtk-editable)
 
 ;;; --- Types and Values -------------------------------------------------------

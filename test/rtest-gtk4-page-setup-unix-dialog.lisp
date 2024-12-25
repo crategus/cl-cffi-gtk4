@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-page-setup-unix-dialog :in gtk-suite)
+(def-suite gtk-page-setup-unix-dialog :in gtk-printing)
 (in-suite gtk-page-setup-unix-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------

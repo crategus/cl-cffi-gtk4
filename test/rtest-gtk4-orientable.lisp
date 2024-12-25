@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-orientable :in gtk-suite)
+(def-suite gtk-orientable :in gtk-interfaces)
 (in-suite gtk-orientable)
 
 ;;; --- Types and Values -------------------------------------------------------

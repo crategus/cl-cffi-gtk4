@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-style-context :in gtk-suite)
+(def-suite gtk-style-context :in gtk-deprecated)
 (in-suite gtk-style-context)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -31,12 +31,13 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkStyleContextPrintFlags"
                                      GTK:STYLE-CONTEXT-PRINT-FLAGS
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_style_context_print_flags_get_type")
-                       (:NONE 0)
-                       (:RECURSE 1)
-                       (:SHOW-STYLE 2)
-                       (:SHOW-CHANGE 4))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER
+                       "gtk_style_context_print_flags_get_type")
+                      (:NONE 0)
+                      (:RECURSE 1)
+                      (:SHOW-STYLE 2)
+                      (:SHOW-CHANGE 4))
              (gobject:get-gtype-definition "GtkStyleContextPrintFlags"))))
 
 ;;;     GtkBorder
@@ -107,12 +108,17 @@
 ;;;     display
 
 (test gtk-style-context-properties
-  (let* ((*gtk-warn-deprecated* nil)
-         (context (gtk:widget-style-context (make-instance 'gtk:box)))
-         (display nil))
-    (is (typep (setf display
-                     (gtk:style-context-display context)) 'gdk:display))
-    (is (eq display (gdk:display-default)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((context 2) dialog :strong 2)
+        (let (display)
+          (setf context
+                (gtk:widget-style-context (setf dialog
+                                                (make-instance 'gtk:dialog))))
+          (is (typep (setf display
+                           (gtk:style-context-display context)) 'gdk:display))
+          (is (eq display (gdk:display-default)))
+          (is-false (gtk:window-destroy dialog)))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -142,19 +148,21 @@
 ;;;     gtk_style_context_to_string
 
 (test gtk-style-context-to-string
-  (let* ((*gtk-warn-deprecated* nil)
-         (dialog (make-instance 'gtk:dialog))
-         (context (gtk:widget-style-context dialog)))
-    (is (string=
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (dialog (context 2) :strong 1)
+        (setf context
+              (gtk:widget-style-context (setf dialog
+                                              (make-instance 'gtk:dialog))))
+        (is (string=
 "[window.background.dialog:dir(ltr)]
   box.dialog-vbox.vertical:dir(ltr)
     box.vertical:dir(ltr)
     box.dialog-action-box.horizontal:dir(ltr)
       box.dialog-action-area.horizontal:dir(ltr)
 "
-                 (gtk:style-context-to-string context :recurse)))
-    (is-false (gtk:window-destroy dialog))
-    (is (= 1 (g:object-ref-count dialog)))))
+                     (gtk:style-context-to-string context :recurse)))
+        (is-false (gtk:window-destroy dialog))))))
 
 ;;;     gtk_render_activity
 ;;;     gtk_render_arrow
@@ -169,4 +177,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; 2024-10-13
+;;; 2024-12-23

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-model-filter :in gtk-suite)
+(def-suite gtk-tree-model-filter :in gtk-deprecated)
 (in-suite gtk-tree-model-filter)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -48,7 +48,8 @@
 
 (test gtk-tree-model-filter-properties
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((model (make-instance 'gtk:tree-model-filter)))
+    (glib-test:with-check-memory (model)
+      (setf model (make-instance 'gtk:tree-model-filter))
       (is-false (gtk:tree-model-filter-child-model model))
       (is-false (gtk:tree-model-filter-virtual-root model)))))
 
@@ -59,13 +60,17 @@
 ;;;     gtk_tree_model_filter_new
 
 (test gtk-tree-model-filter-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((child (create-list-store-for-package))
-           (model (gtk:tree-model-filter-new child nil)))
-      (is (typep child 'gtk:tree-model))
-      (is (typep model 'gtk:tree-model))
-      (is (eq child (gtk:tree-model-filter-child-model model)))
-      (is-false (gtk:tree-model-filter-virtual-root model)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((child 2) model :strong 1)
+        (is (typep (setf child
+                         (create-list-store-for-package)) 'gtk:tree-model))
+        (is (= 1 (g:object-ref-count child)))
+        (is (typep (setf model
+                         (gtk:tree-model-filter-new child nil)) 'gtk:tree-model))
+        (is (= 1 (g:object-ref-count model)))
+        (is (eq child (gtk:tree-model-filter-child-model model)))
+        (is-false (gtk:tree-model-filter-virtual-root model))))))
 
 ;;;     GtkTreeModelFilterVisibleFunc
 ;;;     gtk_tree_model_filter_set_visible_func
@@ -102,4 +107,4 @@
 ;;;     gtk_tree_model_filter_refilter
 ;;;     gtk_tree_model_filter_clear_cache
 
-;;; 2024-9-27
+;;; 2024-12-24

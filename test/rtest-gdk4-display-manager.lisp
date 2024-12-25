@@ -42,14 +42,6 @@
                          "default-display" "GdkDisplay" T T)))
              (gobject:get-gtype-definition "GdkDisplayManager"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-;;;     default-display
-
-(test gdk-default-display-properties
-  (let ((manager (gdk:display-manager-get)))
-    (is (typep (gdk:display-manager-default-display manager) 'gdk:display))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     display-opened
@@ -70,19 +62,32 @@
     (is (equal '("GdkDisplay")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+;;;     default-display
+
+(test gdk-display-manager-properties
+  (glib-test:with-check-memory (:strong 2)
+    (let ((manager (gdk:display-manager-get)))
+      (is (typep (gdk:display-manager-default-display manager) 'gdk:display)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_display_manager_get
 
 (test gdk-display-manager-get
-  (is (typep (gdk:display-manager-get) 'gdk:display-manager))
-  (is (eq (gdk:display-default)
-      (gdk:display-manager-default-display (gdk:display-manager-get)))))
+  (glib-test:with-check-memory ((manager 2) :strong 2)
+    (is (typep (setf manager (gdk:display-manager-get)) 'gdk:display-manager))
+    (is (= 2 (g:object-ref-count manager)))
+    (is (eq (gdk:display-default)
+        (gdk:display-manager-default-display (gdk:display-manager-get))))))
 
 ;;;     gdk_display_manager_list_displays
 
 (test gdk-display-manager-list-displays
-  (let ((manager (gdk:display-manager-get)))
+  (glib-test:with-check-memory ((manager 2) :strong 2)
+    (setf manager (gdk:display-manager-get))
+    (is (= 2 (g:object-ref-count manager)))
     (is (every (lambda (x) (typep x 'gdk:display))
                (gdk:display-manager-list-displays manager)))))
 
@@ -90,16 +95,20 @@
 
 #-windows
 (test gdk-display-manager-open-display
-  (let ((name (uiop:getenv "DISPLAY"))
-        (manager (gdk:display-manager-get)))
-    (is (typep (gdk:display-manager-open-display manager name) 'gdk:display))))
+  (glib-test:with-check-memory ((manager 2) :strong 2)
+  (let ((name (uiop:getenv "DISPLAY")))
+    (setf manager (gdk:display-manager-get))
+    (is (= 2 (g:object-ref-count manager)))
+    (is (typep (gdk:display-manager-open-display manager name) 'gdk:display)))))
 
 #+windows
 (test gdk-display-manager-open-display
-  (let ((manager (gdk:display-manager-get)))
+  (glib-test:with-check-memory ((manager 2) :strong 2)
+    (setf manager (gdk:display-manager-get))
+    (is (= 2 (g:object-ref-count manager)))
     (is (typep (gdk:display-manager-open-display manager "1\\WinSta0\\Default")
                'gdk:display))))
 
 ;;;     gdk_set_allowed_backends
 
-;;; 2024-9-19
+;;; 2024-12-20

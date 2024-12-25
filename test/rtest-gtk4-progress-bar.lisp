@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-progress-bar :in gtk-suite)
+(def-suite gtk-progress-bar :in gtk-display-widgets)
 (in-suite gtk-progress-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

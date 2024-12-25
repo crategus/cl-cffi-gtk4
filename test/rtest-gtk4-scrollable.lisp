@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-scrollable :in gtk-suite)
+(def-suite gtk-scrollable :in gtk-scrolling)
 (in-suite gtk-scrollable)
 
 ;;; --- Types and Values -------------------------------------------------------

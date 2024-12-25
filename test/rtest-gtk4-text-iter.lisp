@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text-iter :in gtk-suite)
+(def-suite gtk-text-iter :in gtk-multiline-editor)
 (in-suite gtk-text-iter)
 
 (defparameter gtk-text-iter

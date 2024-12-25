@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-scale :in gtk-suite)
+(def-suite gtk-scale :in gtk-data-entry)
 (in-suite gtk-scale)
 
 ;;; --- Types and Values -------------------------------------------------------

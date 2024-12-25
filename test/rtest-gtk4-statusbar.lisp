@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-statusbar :in gtk-suite)
+(def-suite gtk-statusbar :in gtk-deprecated)
 (in-suite gtk-statusbar)
 
 ;;; --- Types and Values -------------------------------------------------------

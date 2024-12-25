@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-window-group :in gtk-suite)
+(def-suite gtk-window-group :in gtk-windows)
 (in-suite gtk-window-group)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -45,18 +45,18 @@
 ;;;     gtk_window_group_new
 
 (test gtk-window-group-new
-  (let (group)
-    (is (typep (setf group (gtk:window-group-new)) 'gtk:window-group))
-    (is (= 1 (g:object-ref-count group)))))
+  (glib-test:with-check-memory (group)
+    (is (typep (setf group (gtk:window-group-new)) 'gtk:window-group))))
 
 ;;;     gtk_window_group_add_window
 ;;;     gtk_window_group_remove_window
 ;;;     gtk_window_group_list_windows
 
 (test gtk-window-group-list-windows
-  (let ((group (gtk:window-group-new))
-        (window1 (gtk:window-new))
-        (window2 (gtk:window-new)))
+  (glib-test:with-check-memory (group window1 window2)
+    (setf group (gtk:window-group-new))
+    (setf window1 (gtk:window-new))
+    (setf window2 (gtk:window-new))
     (is (= 1 (g:object-ref-count group)))
     ;; The list is empty
     (is (equal '()
@@ -81,7 +81,6 @@
     (is (equal '()
                (mapcar #'type-of (gtk:window-group-list-windows group))))
     (is-false (gtk:window-destroy window1))
-    (is-false (gtk:window-destroy window2))
-    (is (= 1 (g:object-ref-count group)))))
+    (is-false (gtk:window-destroy window2))))
 
-;;; 2024-10-9
+;;; 2024-12-23

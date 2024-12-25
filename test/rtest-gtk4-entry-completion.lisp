@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-entry-completion :in gtk-suite)
+(def-suite gtk-entry-completion :in gtk-deprecated)
 (in-suite gtk-entry-completion)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -36,44 +36,29 @@
              (glib-test:list-signals "GtkEntryCompletion")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkEntryCompletion" GTK:ENTRY-COMPLETION
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GtkBuildable" "GtkCellLayout")
-                        :TYPE-INITIALIZER "gtk_entry_completion_get_type")
-                       ((CELL-AREA ENTRY-COMPLETION-CELL-AREA
-                         "cell-area" "GtkCellArea" T NIL)
-                        (INLINE-COMPLETION ENTRY-COMPLETION-INLINE-COMPLETION
-                         "inline-completion" "gboolean" T T)
-                        (INLINE-SELECTION ENTRY-COMPLETION-INLINE-SELECTION
-                         "inline-selection" "gboolean" T T)
-                        (MINIMUM-KEY-LENGTH ENTRY-COMPLETION-MINIMUM-KEY-LENGTH
-                         "minimum-key-length" "gint" T T)
-                        (MODEL ENTRY-COMPLETION-MODEL
-                         "model" "GtkTreeModel" T T)
-                        (POPUP-COMPLETION ENTRY-COMPLETION-POPUP-COMPLETION
-                         "popup-completion" "gboolean" T T)
-                        (POPUP-SET-WIDTH ENTRY-COMPLETION-POPUP-SET-WIDTH
-                         "popup-set-width" "gboolean" T T)
-                        (POPUP-SINGLE-MATCH ENTRY-COMPLETION-POPUP-SINGLE-MATCH
-                         "popup-single-match" "gboolean" T T)
-                        (TEXT-COLUMN ENTRY-COMPLETION-TEXT-COLUMN
-                         "text-column" "gint" T T)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GtkBuildable" "GtkCellLayout")
+                       :TYPE-INITIALIZER "gtk_entry_completion_get_type")
+                      ((CELL-AREA ENTRY-COMPLETION-CELL-AREA
+                        "cell-area" "GtkCellArea" T NIL)
+                       (INLINE-COMPLETION ENTRY-COMPLETION-INLINE-COMPLETION
+                        "inline-completion" "gboolean" T T)
+                       (INLINE-SELECTION ENTRY-COMPLETION-INLINE-SELECTION
+                        "inline-selection" "gboolean" T T)
+                       (MINIMUM-KEY-LENGTH ENTRY-COMPLETION-MINIMUM-KEY-LENGTH
+                        "minimum-key-length" "gint" T T)
+                       (MODEL ENTRY-COMPLETION-MODEL
+                        "model" "GtkTreeModel" T T)
+                       (POPUP-COMPLETION ENTRY-COMPLETION-POPUP-COMPLETION
+                        "popup-completion" "gboolean" T T)
+                       (POPUP-SET-WIDTH ENTRY-COMPLETION-POPUP-SET-WIDTH
+                        "popup-set-width" "gboolean" T T)
+                       (POPUP-SINGLE-MATCH ENTRY-COMPLETION-POPUP-SINGLE-MATCH
+                        "popup-single-match" "gboolean" T T)
+                       (TEXT-COLUMN ENTRY-COMPLETION-TEXT-COLUMN
+                        "text-column" "gint" T T)))
              (gobject:get-gtype-definition "GtkEntryCompletion"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-entry-completion-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((entry (make-instance 'gtk:entry-completion)))
-      (is (typep (gtk:entry-completion-cell-area entry) 'gtk:cell-area-box))
-      (is-false (gtk:entry-completion-inline-completion entry))
-      (is-false (gtk:entry-completion-inline-selection entry))
-      (is (= 1 (gtk:entry-completion-minimum-key-length entry)))
-      (is-false (gtk:entry-completion-model entry))
-      (is-true (gtk:entry-completion-popup-completion entry))
-      (is-true (gtk:entry-completion-popup-set-width entry))
-      (is-true (gtk:entry-completion-popup-single-match entry))
-      (is (= -1 (gtk:entry-completion-text-column entry))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -81,6 +66,23 @@
 ;;;     insert-prefix
 ;;;     match-selected
 ;;;     no-matches
+
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-entry-completion-properties
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (entry :strong 1)
+        (setf entry (make-instance 'gtk:entry-completion))
+        (is (typep (gtk:entry-completion-cell-area entry) 'gtk:cell-area-box))
+        (is-false (gtk:entry-completion-inline-completion entry))
+        (is-false (gtk:entry-completion-inline-selection entry))
+        (is (= 1 (gtk:entry-completion-minimum-key-length entry)))
+        (is-false (gtk:entry-completion-model entry))
+        (is-true (gtk:entry-completion-popup-completion entry))
+        (is-true (gtk:entry-completion-popup-set-width entry))
+        (is-true (gtk:entry-completion-popup-single-match entry))
+        (is (= -1 (gtk:entry-completion-text-column entry)))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -91,14 +93,15 @@
 ;;;     gtk_entry_completion_new_with_area
 
 (test gtk-entry-completion-new-with-area
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((area (gtk:cell-area-box-new))
-          entry)
-    (is (typep (setf entry
-                     (gtk:entry-completion-new-with-area area))
-               'gtk:entry-completion))
-    (is (eq area
-            (gtk:entry-completion-cell-area entry))))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((area 4) entry :strong 1)
+        (setf area (gtk:cell-area-box-new))
+        (is (typep (setf entry
+                         (gtk:entry-completion-new-with-area area))
+                   'gtk:entry-completion))
+      (is (eq area
+              (gtk:entry-completion-cell-area entry)))))))
 
 ;;;     gtk_entry_completion_get_entry
 ;;;     gtk_entry_completion_set_match_func

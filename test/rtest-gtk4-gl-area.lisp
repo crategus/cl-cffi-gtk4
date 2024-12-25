@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-gl-area :in gtk-suite)
+(def-suite gtk-gl-area :in gtk-custom-drawing)
 (in-suite gtk-gl-area)
 
 ;;; --- Types and Values -------------------------------------------------------

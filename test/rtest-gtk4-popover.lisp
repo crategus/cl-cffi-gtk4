@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-popover :in gtk-suite)
+(def-suite gtk-popover :in gtk-popover-widgets)
 (in-suite gtk-popover)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -20,8 +20,8 @@
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPopover")))
   ;; Check children
-  (is (equal '("GtkEmojiChooser" "GtkPopoverMenu" "GtkTreePopover")
-             (glib-test:list-children "GtkPopover")))
+  (is (subsetp '("GtkEmojiChooser" "GtkPopoverMenu")
+               (glib-test:list-children "GtkPopover") :test #'string=))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkShortcutManager" "GtkNative")

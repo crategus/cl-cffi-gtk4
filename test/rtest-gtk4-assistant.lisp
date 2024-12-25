@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-assistant :in gtk-suite)
+(def-suite gtk-assistant :in gtk-deprecated)
 (in-suite gtk-assistant)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -69,23 +69,24 @@
              (glib-test:list-signals "GtkAssistantPage")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAssistantPage" GTK:ASSISTANT-PAGE
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_assistant_page_get_type")
-                       ((CHILD ASSISTANT-PAGE-CHILD "child" "GtkWidget" T NIL)
-                        (COMPLETE ASSISTANT-PAGE-COMPLETE
-                         "complete" "gboolean" T T)
-                        (PAGE-TYPE ASSISTANT-PAGE-PAGE-TYPE
-                         "page-type" "GtkAssistantPageType" T T)
-                        (TITLE ASSISTANT-PAGE-TITLE "title" "gchararray" T T)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_assistant_page_get_type")
+                      ((CHILD ASSISTANT-PAGE-CHILD "child" "GtkWidget" T NIL)
+                       (COMPLETE ASSISTANT-PAGE-COMPLETE
+                        "complete" "gboolean" T T)
+                       (PAGE-TYPE ASSISTANT-PAGE-PAGE-TYPE
+                        "page-type" "GtkAssistantPageType" T T)
+                       (TITLE ASSISTANT-PAGE-TITLE "title" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkAssistantPage"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-assistant-page-properties
   (let ((*gtk-warn-deprecated* nil))
-    (let ((page (make-instance 'gtk:assistant-page)))
+    (glib-test:with-check-memory (page)
+      (setf page (make-instance 'gtk:assistant-page))
       (is-false (gtk:assistant-page-child page)))))
 
 ;;;     GtkAssistant
@@ -134,15 +135,6 @@
                           "use-header-bar" "gint" T NIL)))
                (gobject:get-gtype-definition "GtkAssistant")))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-assistant-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((assistant (make-instance 'gtk:assistant)))
-      (is (typep (gtk:assistant-pages assistant) 'g:object))
-      #-windows
-      (is (= 1 (gtk:assistant-use-header-bar assistant))))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     apply
@@ -151,13 +143,27 @@
 ;;;     escape
 ;;;     prepare
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-assistant-properties
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (assistant :strong 1)
+        (setf assistant (make-instance 'gtk:assistant))
+        (is (typep (gtk:assistant-pages assistant) 'g:object))
+        #-windows
+        (is (= 1 (gtk:assistant-use-header-bar assistant)))
+        (is-false (gtk:window-destroy assistant))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_assistant_new
 
 (test gtk-assistant-new
   (let ((*gtk-warn-deprecated* nil))
-    (is (typep (gtk:assistant-new) 'gtk:assistant))))
+    (glib-test:with-check-memory (assistant)
+      (is (typep (setf assistant (gtk:assistant-new)) 'gtk:assistant))
+      (is-false (gtk:window-destroy assistant)))))
 
 ;;;     gtk_assistant_get_page
 ;;;     gtk_assistant_get_current_page
@@ -179,4 +185,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; 2024-9-20
+;;; 2024-12-24

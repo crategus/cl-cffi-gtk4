@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text-view :in gtk-suite)
+(def-suite gtk-text-view :in gtk-multiline-editor)
 (in-suite gtk-text-view)
 
 ;;; --- Types and Values -------------------------------------------------------

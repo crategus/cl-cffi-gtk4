@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-main-loop :in gtk-suite)
+(def-suite gtk-main-loop :in gtk-core)
 (in-suite gtk-main-loop)
 
 ;;; --- Functions --------------------------------------------------------------

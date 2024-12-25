@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-at-context :in gtk-suite)
+(def-suite gtk-at-context :in gtk-accessibility)
 (in-suite gtk-at-context)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tooltip :in gtk-suite)
+(def-suite gtk-tooltip :in gtk-miscellaneous)
 (in-suite gtk-tooltip)
 
 ;;; --- Types and Values -------------------------------------------------------

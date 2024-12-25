@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-grid-layout :in gtk-suite)
+(def-suite gtk-grid-layout :in gtk-layout-managers)
 (in-suite gtk-grid-layout)
 
 ;;; --- Types and Values -------------------------------------------------------

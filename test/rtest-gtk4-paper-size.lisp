@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-paper-size :in gtk-suite)
+(def-suite gtk-paper-size :in gtk-printing)
 (in-suite gtk-paper-size)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-color-chooser-widget :in gtk-suite)
+(def-suite gtk-color-chooser-widget :in gtk-deprecated)
 (in-suite gtk-color-chooser-widget)
 
 ;;; --- Types and Values -------------------------------------------------------

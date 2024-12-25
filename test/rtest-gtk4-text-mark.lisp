@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text-mark :in gtk-suite)
+(def-suite gtk-text-mark :in gtk-multiline-editor)
 (in-suite gtk-text-mark)
 
 ;;; --- Types and Values -------------------------------------------------------

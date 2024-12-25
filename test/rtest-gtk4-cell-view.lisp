@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-view :in gtk-suite)
+(def-suite gtk-cell-view :in gtk-deprecated)
 (in-suite gtk-cell-view)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -40,33 +40,35 @@
   (is (eq :widget (gtk:widget-class-accessible-role "GtkCellView")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellView" GTK:CELL-VIEW
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkCellLayout"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_cell_view_get_type")
-                       ((CELL-AREA CELL-VIEW-CELL-AREA
-                         "cell-area" "GtkCellArea" T NIL)
-                        (CELL-AREA-CONTEXT CELL-VIEW-CELL-AREA-CONTEXT
-                         "cell-area-context" "GtkCellAreaContext" T NIL)
-                        (DRAW-SENSITIVE CELL-VIEW-DRAW-SENSITIVE
-                         "draw-sensitive" "gboolean" T T)
-                        (FIT-MODEL CELL-VIEW-FIT-MODEL
-                         "fit-model" "gboolean" T T)
-                        (MODEL CELL-VIEW-MODEL "model" "GtkTreeModel" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkCellLayout"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_cell_view_get_type")
+                      ((CELL-AREA CELL-VIEW-CELL-AREA
+                        "cell-area" "GtkCellArea" T NIL)
+                       (CELL-AREA-CONTEXT CELL-VIEW-CELL-AREA-CONTEXT
+                        "cell-area-context" "GtkCellAreaContext" T NIL)
+                       (DRAW-SENSITIVE CELL-VIEW-DRAW-SENSITIVE
+                        "draw-sensitive" "gboolean" T T)
+                       (FIT-MODEL CELL-VIEW-FIT-MODEL
+                        "fit-model" "gboolean" T T)
+                       (MODEL CELL-VIEW-MODEL "model" "GtkTreeModel" T T)))
              (gobject:get-gtype-definition "GtkCellView"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-view-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (view (make-instance 'gtk:cell-view)))
-    (is (typep (gtk:cell-view-cell-area view) 'gtk:cell-area-box))
-    (is (typep (gtk:cell-view-cell-area-context view) 'gtk:cell-area-context))
-    (is-false (gtk:cell-view-draw-sensitive view))
-    (is-false (gtk:cell-view-fit-model view))
-    (is-false (gtk:cell-view-model view))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (view :strong 2)
+        (setf view (make-instance 'gtk:cell-view))
+        (is (typep (gtk:cell-view-cell-area view) 'gtk:cell-area-box))
+        (is (typep (gtk:cell-view-cell-area-context view) 'gtk:cell-area-context))
+        (is-false (gtk:cell-view-draw-sensitive view))
+        (is-false (gtk:cell-view-fit-model view))
+        (is-false (gtk:cell-view-model view))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -74,42 +76,50 @@
 
 (test gtk-cell-view-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:cell-view-new) 'gtk:cell-view))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:cell-view-new) 'gtk:cell-view)))))
 
 ;;;     gtk_cell_view_new_with_context
 
 (test gtk-cell-view-new-with-context
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (area (make-instance 'gtk:cell-area-box))
-         (context (make-instance 'gtk:cell-area-context))
-         view)
-    (is (typep (setf view
-                     (gtk:cell-view-new-with-context area context))
-               'gtk:cell-view))
-    (is (eq area (gtk:cell-view-cell-area view)))
-    (is (eq context (gtk:cell-view-cell-area-context view)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((area 2) (context 2) view :strong 2)
+        (setf area (make-instance 'gtk:cell-area-box))
+        (setf context (make-instance 'gtk:cell-area-context))
+        (is (typep (setf view
+                         (gtk:cell-view-new-with-context area context))
+                   'gtk:cell-view))
+        (is (eq area (gtk:cell-view-cell-area view)))
+        (is (eq context (gtk:cell-view-cell-area-context view)))))))
 
 ;;;     gtk_cell_view_new_with_text
 
 (test gtk-cell-view-new-with-text
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:cell-view-new-with-text "text") 'gtk:cell-view))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:cell-view-new-with-text "text") 'gtk:cell-view)))))
 
 ;;;     gtk_cell_view_new_with_markup
 
 (test gtk-cell-view-new-with-markup
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:cell-view-new-with-text "<b>text</b>") 'gtk:cell-view))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:cell-view-new-with-text "<b>text</b>") 'gtk:cell-view)))))
 
 ;;;     gtk_cell_view_new_with_texture
 
-(test gtk-cell-view-new-with-textture
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (path (glib-sys:sys-path "test/resource/ducky.png"))
-         (texture (gdk:texture-new-from-filename path)))
-    (is (typep (gtk:cell-view-new-with-texture texture) 'gtk:cell-view))))
+(test gtk-cell-view-new-with-texture
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((texture 2) view :strong 1)
+        (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+          (setf texture (gdk:texture-new-from-filename path))
+          (is (typep (setf view
+                           (gtk:cell-view-new-with-texture texture))
+                     'gtk:cell-view)))))))
 
 ;;;     gtk_cell_view_set_displayed_row
 ;;;     gtk_cell_view_get_displayed_row
 
-;;; 2024-9-20
+;;; 2024-12-24

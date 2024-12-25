@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-shortcut-controller :in gtk-suite)
+(def-suite gtk-shortcut-controller :in gtk-event-handling)
 (in-suite gtk-shortcut-controller)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -58,8 +58,8 @@
 
 (test gtk-shortcut-controller-properties
   (let ((controller (make-instance 'gtk:shortcut-controller)))
-    ;; TODO: Returns a pointer? Why? Check this with a list model.
-    (is (cffi:pointerp (gtk:shortcut-controller-item-type controller)))
+    (is (eq (g:gtype "GObject")
+            (gtk:shortcut-controller-item-type controller)))
     (is (equal '(:ALT-MASK)
                (gtk:shortcut-controller-mnemonic-modifiers controller)))
     ;; model is not readable
@@ -78,4 +78,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; 2024-9-20
+;;; 2024-12-22

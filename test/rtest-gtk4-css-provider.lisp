@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-css-provider :in gtk-suite)
+(def-suite gtk-css-provider :in gtk-theming)
 (in-suite gtk-css-provider)
 
 ;;; --- Types and Values -------------------------------------------------------

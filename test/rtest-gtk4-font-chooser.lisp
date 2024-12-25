@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-font-chooser :in gtk-suite)
+(def-suite gtk-font-chooser :in gtk-deprecated)
 (in-suite gtk-font-chooser)
 
 ;;; --- Types and Values -------------------------------------------------------

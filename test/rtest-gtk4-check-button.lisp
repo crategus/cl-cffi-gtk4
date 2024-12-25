@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-check-button :in gtk-suite)
+(def-suite gtk-check-button :in gtk-buttons-and-toggles)
 (in-suite gtk-check-button)
 
 ;;; --- Types and Values -------------------------------------------------------

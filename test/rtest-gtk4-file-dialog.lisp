@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-dialog :in gtk-suite)
+(def-suite gtk-file-dialog :in gtk-selector-widgets)
 (in-suite gtk-file-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------

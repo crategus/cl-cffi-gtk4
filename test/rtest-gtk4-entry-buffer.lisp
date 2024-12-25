@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-entry-buffer :in gtk-suite)
+(def-suite gtk-entry-buffer :in gtk-data-entry)
 (in-suite gtk-entry-buffer)
 
 ;; Ensure the initialization of GtkPasswordEntryBuffer

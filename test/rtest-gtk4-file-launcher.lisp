@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-launcher :in gtk-suite)
+(def-suite gtk-file-launcher :in gtk-selector-widgets)
 (in-suite gtk-file-launcher)
 
 ;;; --- Types and Values -------------------------------------------------------

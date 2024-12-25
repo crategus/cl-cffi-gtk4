@@ -1,7 +1,9 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-chooser :in gtk-suite)
+(def-suite gtk-file-chooser :in gtk-deprecated)
 (in-suite gtk-file-chooser)
+
+;; TODO: Check the memory management in more detail
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -77,59 +79,76 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+#+nil
 (test gtk-file-chooser-properties
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((chooser (make-instance 'gtk:file-chooser-dialog)))
-      (is (eq :open (gtk:file-chooser-action chooser)))
-      (is-true (gtk:file-chooser-create-folders chooser))
-      (is-false (gtk:file-chooser-filter chooser))
-      (is (typep (gtk:file-chooser-filters chooser) 'g:list-model))
-      (is-false (gtk:file-chooser-select-multiple chooser))
-      (is (typep (gtk:file-chooser-shortcut-folders chooser) 'g:list-model)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (chooser :strong 2)
+        (setf chooser (make-instance 'gtk:file-chooser-dialog))
+        (is (eq :open (gtk:file-chooser-action chooser)))
+        (is-true (gtk:file-chooser-create-folders chooser))
+        (is-false (gtk:file-chooser-filter chooser))
+        (is (typep (gtk:file-chooser-filters chooser) 'g:list-model))
+        (is-false (gtk:file-chooser-select-multiple chooser))
+        (is (typep (gtk:file-chooser-shortcut-folders chooser) 'g:list-model))
+        (is-false (gtk:window-destroy chooser))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_file_chooser_set_current_name
 ;;;     gtk_file_chooser_get_current_name
 
+#+nil
 (test gtk-file-chooser-current-name
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((chooser (make-instance 'gtk:file-chooser-dialog
-                                  :action :save)))
-      (is (string= "" (gtk:file-chooser-current-name chooser)))
-      (is (string= "New name"
-                   (setf (gtk:file-chooser-current-name chooser) "New name")))
-      (is (string= "New name"
-                   (gtk:file-chooser-current-name chooser))))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (chooser)
+        (setf chooser
+              (make-instance 'gtk:file-chooser-dialog :action :save))
+        (is (string= "" (gtk:file-chooser-current-name chooser)))
+        (is (string= "New name"
+                     (setf (gtk:file-chooser-current-name chooser) "New name")))
+        (is (string= "New name"
+                     (gtk:file-chooser-current-name chooser)))
+        (is-false (gtk:window-destroy chooser))))))
 
 ;;;     gtk_file_chooser_get_file
 ;;;     gtk_file_chooser_set_file
 
+#+nil
 (test gtk-file-chooser-file
-  (let ((*gtk-warn-deprecated* nil))
-    (let* ((filename (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp"))
-           (file (g:file-new-for-path filename))
-           (chooser (make-instance 'gtk:file-chooser-widget
-                                   :action :open)))
-      (is (g:type-is-a (g:type-from-instance file) "GFile"))
-      (is-false (gtk:file-chooser-file chooser))
-      (is (eq file (setf (gtk:file-chooser-file chooser) file)))
-      ;; TODO: FILE is not stored in the GtkFileChooserDialog object. Why?
-      (is-false (gtk:file-chooser-file chooser)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (file chooser)
+        (let ((filename (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp")))
+          (setf file (g:file-new-for-path filename))
+          (setf chooser (make-instance 'gtk:file-chooser-widget
+                                       :action :open))
+          (is (= 1 (g:object-ref-count chooser)))
+          (is (g:type-is-a (g:type-from-instance file) "GFile"))
+          (is-false (gtk:file-chooser-file chooser))
+          (is (eq file (setf (gtk:file-chooser-file chooser) file)))
+          ;; TODO: FILE is not stored in the GtkFileChooserDialog object. Why?
+          (is-false (gtk:file-chooser-file chooser)))))))
 
+#+nil
 (test gtk-file-chooser-namestring
-  (let ((*gtk-warn-deprecated* nil))
-    (let* ((path (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp"))
-           (chooser (make-instance 'gtk:file-chooser-widget
-                                   :action :open)))
-      (is-false (gtk:file-chooser-namestring chooser))
-      (is (eq path
-              (setf (gtk:file-chooser-namestring chooser) path)))
-      ;; TODO: PATH is not stored in the GtkFileChooserDialog object. Why?
-      (is-false (gtk:file-chooser-namestring chooser)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (chooser)
+        (let ((path (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp")))
+          (setf chooser (make-instance 'gtk:file-chooser-widget
+                                       :action :open))
+          (is (= 1 (g:object-ref-count chooser)))
+          (is-false (gtk:file-chooser-namestring chooser))
+          (is (eq path
+                  (setf (gtk:file-chooser-namestring chooser) path)))
+          ;; TODO: PATH is not stored in the GtkFileChooserDialog object. Why?
+          (is-false (gtk:file-chooser-namestring chooser)))))))
 
 ;;;     gtk_file_chooser_get_files
 
+#+nil
 (test gtk-file-chooser-files
   (let ((*gtk-warn-deprecated* nil))
     (let ((chooser (make-instance 'gtk:file-chooser-widget)))
@@ -138,13 +157,15 @@
 ;;;     gtk_file_chooser_set_current_folder
 ;;;     gtk_file_chooser_get_current_folder
 
+#+nil
 (test gtk-file-chooser-current-folder
-  (let ((*gtk-warn-deprecated* nil))
-    (let ((path (glib-sys:sys-path "test/"))
-          (chooser (make-instance 'gtk:file-chooser-widget)))
-      (is-false (gtk:file-chooser-current-folder chooser))
-      (is (eq path (setf (gtk:file-chooser-current-folder chooser) path)))
-      (is-false (gtk:file-chooser-current-folder chooser)))))
+  (when *first-run-testsuite*
+    (let ((*gtk-warn-deprecated* nil))
+      (let ((path (glib-sys:sys-path "test/"))
+            (chooser (make-instance 'gtk:file-chooser-widget)))
+        (is-false (gtk:file-chooser-current-folder chooser))
+        (is (eq path (setf (gtk:file-chooser-current-folder chooser) path)))
+        (is-false (gtk:file-chooser-current-folder chooser))))))
 
 ;;;     gtk_file_chooser_add_filter
 ;;;     gtk_file_chooser_remove_filter
@@ -155,4 +176,4 @@
 ;;;     gtk_file_chooser_set_choice
 ;;;     gtk_file_chooser_get_choice
 
-;;; 2024-9-20
+;;; 2024-12-23

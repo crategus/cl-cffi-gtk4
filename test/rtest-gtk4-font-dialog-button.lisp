@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-font-dialog-button :in gtk-suite)
+(def-suite gtk-font-dialog-button :in gtk-selector-widgets)
 (in-suite gtk-font-dialog-button)
 
 ;;; --- Types and Values -------------------------------------------------------

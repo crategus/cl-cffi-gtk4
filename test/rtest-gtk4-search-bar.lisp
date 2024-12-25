@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-search-bar :in gtk-suite)
+(def-suite gtk-search-bar :in gtk-data-entry)
 (in-suite gtk-search-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

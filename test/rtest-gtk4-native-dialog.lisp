@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-native-dialog :in gtk-suite)
+(def-suite gtk-native-dialog :in gtk-windows)
 (in-suite gtk-native-dialog)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -69,4 +69,4 @@
 ;;;     gtk_native_dialog_hide
 ;;;     gtk_native_dialog_destroy
 
-;;; 2024-9-20
+;;; 2024-12-23

@@ -48,7 +48,7 @@
 ;;;     gtk_custom_filter_new
 
 (test gtk-custom-filter-new
-  (glib-test:with-check-memory ((store filter model))
+  (glib-test:with-check-memory (store filter model)
 
     (setf store (create-string-list-for-package))
     (setf filter (gtk:custom-filter-new #'custom-filter-func))
@@ -80,7 +80,7 @@
 ;;;     gtk_custom_filter_set_filter_func
 
 (test gtk-custom-filter-set-filter-func
-  (glib-test:with-check-memory ((store filter model))
+  (glib-test:with-check-memory (store filter model)
 
     (setf store (create-string-list-for-package))
     (setf filter (gtk:custom-filter-new))

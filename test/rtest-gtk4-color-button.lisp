@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-color-button :in gtk-suite)
+(def-suite gtk-color-button :in gtk-deprecated)
 (in-suite gtk-color-button)
 
 ;;; --- Types and Values -------------------------------------------------------

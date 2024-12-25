@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-info-bar :in gtk-suite)
+(def-suite gtk-info-bar :in gtk-deprecated)
 (in-suite gtk-info-bar)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -50,19 +50,20 @@
                         "show-close-button" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkInfoBar"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-info-bar-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (infobar (make-instance 'gtk:info-bar)))
-    (is (eq :info (gtk:info-bar-message-type infobar)))
-    (is-true (gtk:info-bar-revealed infobar))
-    (is-false (gtk:info-bar-show-close-button infobar))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     close
 ;;;     response
+
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-info-bar-properties
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (infobar)
+      (setf infobar (make-instance 'gtk:info-bar))
+      (is (eq :info (gtk:info-bar-message-type infobar)))
+      (is-true (gtk:info-bar-revealed infobar))
+      (is-false (gtk:info-bar-show-close-button infobar)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -70,17 +71,21 @@
 
 (test gtk-info-bar-new
   (let* ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:info-bar-new) 'gtk:info-bar))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:info-bar-new) 'gtk:info-bar)))))
 
 ;;;     gtk_info_bar_new_with_buttons
 
 (test gtk-info-bar-new-with-buttons
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:info-bar-new-with-buttons "_OK" :accept
-                                              "_Cancel" :reject
-                                              "_New" 100
-                                              "_Old" 200)
-               'gtk:info-bar))))
+  (when *first-run-testsuite*
+    (let* ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (infobar :strong 4)
+        (is (typep (setf infobar
+                         (gtk:info-bar-new-with-buttons "_OK" :accept
+                                                        "_Cancel" :reject
+                                                        "_New" 100
+                                                        "_Old" 200))
+                   'gtk:info-bar))))))
 
 ;;;     gtk_info_bar_add_action_widget
 ;;;     gtk_info_bar_remove_action_widget

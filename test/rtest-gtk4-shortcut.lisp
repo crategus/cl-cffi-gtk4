@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-shortcut :in gtk-suite)
+(def-suite gtk-shortcut :in gtk-keyboard-shortcuts)
 (in-suite gtk-shortcut)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -136,7 +136,9 @@
 ;;; --- Properties and Accessors -----------------------------------------------
 
 (test gtk-application-properties
-  (let ((application (make-instance 'gtk:application)))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (make-instance 'gtk:application)) 'gtk:application))
     (is-false (gtk:application-active-window application))
     (is-false (gtk:application-menubar application))
     (is-false (gtk:application-register-session application))

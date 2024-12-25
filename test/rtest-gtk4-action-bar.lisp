@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-action-bar :in gtk-suite)
+(def-suite gtk-action-bar :in gtk-layout-widgets)
 (in-suite gtk-action-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

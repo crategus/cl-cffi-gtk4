@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-box :in gtk-suite)
+(def-suite gtk-box :in gtk-layout-widgets)
 (in-suite gtk-box)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -66,7 +66,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-box-properties
-  (let ((box (make-instance 'gtk:box :orientation :vertical :spacing 12)))
+  (glib-test:with-check-memory (box)
+    (setf box (make-instance 'gtk:box :orientation :vertical :spacing 12))
     (is (eq :vertical (gtk:orientable-orientation box)))
     (is (= -1 (gtk:box-baseline-child box)))
     (is (eq :center (gtk:box-baseline-position box)))
@@ -79,29 +80,33 @@
 
 (test gtk-box-new
   ;; Create a box
-  (let ((box (gtk:box-new :vertical 12)))
+  (glib-test:with-check-memory (box)
+    (setf box (gtk:box-new :vertical 12))
     (is (eq :vertical (gtk:orientable-orientation box)))
     (is (eq :center (gtk:box-baseline-position box)))
     (is-false (gtk:box-homogeneous box))
     (is (= 12 (gtk:box-spacing box))))
   ;; Create a box with the default value for spacing
-  (let ((box (gtk:box-new :horizontal)))
+  (glib-test:with-check-memory (box)
+    (setf box (gtk:box-new :horizontal))
     (is (eq :horizontal (gtk:orientable-orientation box)))
     (is (eq :center (gtk:box-baseline-position box)))
     (is-false (gtk:box-homogeneous box))
     (is (= 0 (gtk:box-spacing box))))
   ;; Use make-instance with default values
-  (let ((box (make-instance 'gtk:box)))
+  (glib-test:with-check-memory (box)
+    (setf box (make-instance 'gtk:box))
     (is (eq :horizontal (gtk:orientable-orientation box)))
     (is (eq :center (gtk:box-baseline-position box)))
     (is-false (gtk:box-homogeneous box))
     (is (= 0 (gtk:box-spacing box))))
   ;; Use make-instance and set some properties
-  (let ((box (make-instance 'gtk:box
-                            :orientation :vertical
-                            :baseline-position :top
-                            :homogeneous t
-                            :spacing 12)))
+  (glib-test:with-check-memory (box)
+    (setf box (make-instance 'gtk:box
+                             :orientation :vertical
+                             :baseline-position :top
+                             :homogeneous t
+                             :spacing 12))
     (is (eq :vertical (gtk:orientable-orientation box)))
     (is (eq :top (gtk:box-baseline-position box)))
     (is-true (gtk:box-homogeneous box))
@@ -112,10 +117,11 @@
 ;;;     gtk_box_remove
 
 (test gtk-box-append/prepend/remove
-  (let ((box (make-instance 'gtk:box))
-        (child1 (make-instance 'gtk:button))
-        (child2 (make-instance 'gtk:button))
-        (child3 (make-instance 'gtk:button)))
+  (glib-test:with-check-memory (box child1 child2 child3)
+    (setf box (make-instance 'gtk:box))
+    (setf child1 (make-instance 'gtk:button))
+    (setf child2 (make-instance 'gtk:button))
+    (setf child3 (make-instance 'gtk:button))
 
     (is (= 1 (g:object-ref-count child1)))
     (is (= 1 (g:object-ref-count child2)))
@@ -147,21 +153,17 @@
     (is (eq child1 (gtk:widget-last-child box)))
 
     (is-false (gtk:box-remove box child1))
-    (is-false (gtk:box-remove box child2))
-
-    (is (= 1 (g:object-ref-count box)))
-    (is (= 1 (g:object-ref-count child1)))
-    (is (= 1 (g:object-ref-count child2)))
-    (is (= 1 (g:object-ref-count child3)))))
+    (is-false (gtk:box-remove box child2))))
 
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
 (test gtk-box-insert/reorder-child-after
-  (let ((box (make-instance 'gtk:box))
-        (child1 (make-instance 'gtk:button))
-        (child2 (make-instance 'gtk:button))
-        (child3 (make-instance 'gtk:button)))
+  (glib-test:with-check-memory (box child1 child2 child3)
+    (setf box (make-instance 'gtk:box))
+    (setf child1 (make-instance 'gtk:button))
+    (setf child2 (make-instance 'gtk:button))
+    (setf child3 (make-instance 'gtk:button))
     (is-false (gtk:box-append box child1))
     (is-false (gtk:box-append box child2))
 
@@ -176,11 +178,6 @@
 
     (is-false (gtk:box-remove box child1))
     (is-false (gtk:box-remove box child2))
-    (is-false (gtk:box-remove box child3))
+    (is-false (gtk:box-remove box child3))))
 
-    (is (= 1 (g:object-ref-count box)))
-    (is (= 1 (g:object-ref-count child1)))
-    (is (= 1 (g:object-ref-count child2)))
-    (is (= 1 (g:object-ref-count child3)))))
-
-;;; 2024-10-8
+;;; 2024-12-23

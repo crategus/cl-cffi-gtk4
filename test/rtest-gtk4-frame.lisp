@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-frame :in gtk-suite)
+(def-suite gtk-frame :in gtk-ornaments)
 (in-suite gtk-frame)
 
 ;;; --- Types and Values -------------------------------------------------------

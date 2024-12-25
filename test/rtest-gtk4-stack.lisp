@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-stack :in gtk-suite)
+(def-suite gtk-stack :in gtk-layout-widgets)
 (in-suite gtk-stack)
 
 ;;; --- Types and Values -------------------------------------------------------

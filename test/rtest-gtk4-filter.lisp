@@ -128,7 +128,7 @@
 ;;;     gtk_filter_match
 
 (test gtk-filter-match
-  (glib-test:with-check-memory ((store filter model))
+  (glib-test:with-check-memory (store filter model)
     (let ((expression (gtk:property-expression-new "GtkStringObject"
                                                    nil "string")))
 
@@ -179,7 +179,7 @@
 ;;;     gtk_filter_get_strictness
 
 (test gtk-filter-strictness
-  (glib-test:with-check-memory (nil)
+  (glib-test:with-check-memory ()
     (is (eq :all (gtk:filter-strictness (gtk:custom-filter-new))))
     (is (eq :none (gtk:filter-strictness (gtk:any-filter-new))))
     (is (eq :all (gtk:filter-strictness (gtk:every-filter-new))))
@@ -190,7 +190,7 @@
 ;;;     gtk_filter_changed
 
 (test gtk-filter-changed
-  (glib-test:with-check-memory ((store filter model))
+  (glib-test:with-check-memory (store filter model)
     (let ((expression (gtk:property-expression-new "GtkStringObject"
                                                     nil "string"))
           (msg nil))

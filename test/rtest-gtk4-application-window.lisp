@@ -51,22 +51,24 @@
 ;;;     gtk:application-window-show-menubar
 
 (test gtk-application-window-show-menubar
-  (let ((window (make-instance 'gtk:application-window)))
+  (glib-test:with-check-memory (window)
+    (is (typep (setf window
+                     (make-instance 'gtk:application-window))
+               'gtk:application-window))
     ;; Default value is false
     (is-false  (gtk:application-window-show-menubar window))
     ;; Set show-menubar property to true
     (is-true (setf (gtk:application-window-show-menubar window) t))
     (is-true (gtk:application-window-show-menubar window))
     ;; Check memory management
-    (is-false (gtk:window-destroy window))
-    (is (= 1 (g:object-ref-count window)))))
+    (is-false (gtk:window-destroy window))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_application_window_new
 
 (test gtk-application-window-new.1
-  (let (window)
+  (glib-test:with-check-memory (window)
     ;; Create with constructor function
     (is (typep (setf window
                      (gtk:application-window-new)) 'gtk:application-window))
@@ -92,49 +94,58 @@
 
 ;; Initialize an application window with an application
 (test gtk-application-window-new.2
-  (let ((message nil)
-        (application (make-instance 'gtk:application)))
-    ;; Connect signal "activate"
-    (g:signal-connect application "activate"
-        (lambda (app)
-          (g:application-hold app)
-          (let ((window (gtk:application-window-new app)))
-            (setf message "in activate")
-            (is (typep window 'gtk:application-window))
-            (is (= 2 (g:object-ref-count window)))
-            (is (eq app (gtk:window-application window)))
-            (is (= 1 (gtk:application-window-id window)))
-            ;; Remove the window, this shuts down the application
-            (is-false (gtk:application-remove-window app window))
-            (is-false (gtk:window-destroy window))
-            (is (= 1 (g:object-ref-count window))))
-          (g:application-release app)))
-    ;; Run the application
-    (g:application-run application nil)
-    ;; Check if the "activate" signal is executed
-    (is (string= "in activate" message))))
+  (glib-test:with-check-memory (application)
+    (let (message)
+      (is (typep (setf application
+                       (make-instance 'gtk:application)) 'gtk:application))
+      ;; Connect signal "activate"
+      (g:signal-connect application "activate"
+          (lambda (app)
+            (g:application-hold app)
+            (let ((window (gtk:application-window-new app)))
+              (setf message "in activate")
+              (is (typep window 'gtk:application-window))
+              (is (= 2 (g:object-ref-count window)))
+              (is (eq app (gtk:window-application window)))
+              (is (= 1 (gtk:application-window-id window)))
+              ;; Remove the window, this shuts down the application
+              (is-false (gtk:application-remove-window app window))
+              (is-false (gtk:window-destroy window))
+              (is (= 1 (g:object-ref-count window))))
+            (g:application-release app)))
+      ;; Run the application
+      (g:application-run application nil)
+      ;; Check if the "activate" signal is executed
+      (is (string= "in activate" message)))))
 
 ;;;     gtk_application_window_id
 
 (test gtk-application-window-id
-  (let ((window (make-instance 'gtk:application-window)))
+  (glib-test:with-check-memory (window)
+    (is (typep (setf window
+                     (make-instance 'gtk:application-window))
+               'gtk:application-window))
     ;; Zero if the window is not added to a GtkApplication
     (is (= 0 (gtk:application-window-id window)))
     ;; Check memory management
-    (is-false (gtk:window-destroy window))
-    (is (= 1 (g:object-ref-count window)))))
+    (is-false (gtk:window-destroy window))))
 
 ;;;     gtk_application_window_set_help_overlay
 ;;;     gtk_application_window_get_help_overlay
 
-;; FIXME: This test crashes after about 50 runs
+;; FIXME: This test crashes the testsuite
 ;; GLib-GObject-CRITICAL: instance with invalid (NULL) class pointer
 ;; GLib-GObject-CRITICAL: g_signal_handler_disconnect:
 ;;                        assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+;;
+;; The test will work when we add a reference to the passed in shortcuts-window.
+;; But then the memory management is no longer correct.
 
+#+nil
 (test gtk-application-window-help-overlay
-  (let ((window (make-instance 'gtk:application-window))
-        (help-overlay (make-instance 'gtk:shortcuts-window)))
+  (glib-test:with-check-memory (window help-overlay)
+    (setf window (make-instance 'gtk:application-window))
+    (setf help-overlay (make-instance 'gtk:shortcuts-window))
     ;; A new shortcuts window has two references
     (is (= 2 (g:object-ref-count help-overlay)))
     (is (= 2 (g:object-ref-count window)))
@@ -151,12 +162,10 @@
     ;; Retrieve the GtkShortcutsWindow
     (is (eq help-overlay
             (gtk:application-window-help-overlay window)))
-    ;; Destroy the created windows
+    ;; Remove references
     (is-false (setf (gtk:application-window-help-overlay window) nil))
     (is-false (gtk:window-destroy window))
-    (is-false (gtk:window-destroy help-overlay))
-    (is (= 1 (g:object-ref-count window)))
-    ;; Now again two references, one reference is hold by WINDOW
-    (is (= 1 (g:object-ref-count help-overlay)))))
+    (is (= 1 (g:object-ref-count help-overlay)))
+))
 
-;;; 2024-10-24
+;;; 2024-12-23

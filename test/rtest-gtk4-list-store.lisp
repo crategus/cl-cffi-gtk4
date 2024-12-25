@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-list-store :in gtk-suite)
+(def-suite gtk-list-store :in gtk-deprecated)
 (in-suite gtk-list-store)
 
 ;;; --- Types and Values -------------------------------------------------------

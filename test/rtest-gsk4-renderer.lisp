@@ -153,44 +153,43 @@
 ;;;     surface
 
 (test gsk-renderer-properties
-  (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
-         (renderer (gsk:renderer-new-for-surface surface)))
+  (glib-test:with-check-memory (surface renderer :strong 1)
+    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+    (setf renderer (gsk:renderer-new-for-surface surface))
     (is-true (gsk:renderer-realized renderer))
     (is (typep (gsk:renderer-surface renderer) 'gdk:surface))
-    ;; Check of memory management
+    ;; Remove references
     (is-false (gsk:renderer-unrealize renderer))
     (is-false (gsk:renderer-is-realized renderer))
-    (is (= 2 (g:object-ref-count surface)))
-    (is (= 1 (g:object-ref-count renderer)))))
+    (is-false (gdk:surface-destroy surface))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gsk_renderer_new_for_surface
 
 (test gsk-renderer-new-for-surface
-  (let ((surface (gdk:surface-new-toplevel (gdk:display-default)))
-        renderer)
+  (glib-test:with-check-memory (surface renderer :strong 1)
+    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
     (is (typep (setf renderer
                      (gsk:renderer-new-for-surface surface)) 'gsk:renderer))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gsk:renderer-unrealize renderer))
     (is-false (gsk:renderer-is-realized renderer))
-    (is (= 2 (g:object-ref-count surface)))
-    (is (= 1 (g:object-ref-count renderer)))))
+    (is-false (gdk:surface-destroy surface))))
 
 ;;;     gsk_renderer_realize
 ;;;     gsk_renderer_unrealize
 ;;;     gsk_renderer_is_realized
 
 (test gsk-renderer-is-realized
-  (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
-         (renderer (gsk:renderer-new-for-surface surface)))
+  (glib-test:with-check-memory (surface renderer :strong 1)
+    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+    (setf renderer (gsk:renderer-new-for-surface surface))
     (is-true (gsk:renderer-is-realized renderer))
+    ;; Remove references
     (is-false (gsk:renderer-unrealize renderer))
     (is-false (gsk:renderer-is-realized renderer))
-    ;; Check memory management
-    (is (= 2 (g:object-ref-count surface)))
-    (is (= 1 (g:object-ref-count renderer)))))
+    (is-false (gdk:surface-destroy surface))))
 
 ;;;     gsk_renderer_render
 ;;;     gsk_renderer_render_texture
@@ -198,14 +197,13 @@
 ;;;     gsk_cairo_renderer_new
 
 (test gsk-cairo-renderer-new
-  (let (renderer)
+  (glib-test:with-check-memory (renderer)
     (is (typep (setf renderer
                      (gsk:cairo-renderer-new)) 'gsk:cairo-renderer))
     ;; Check memory management
-    (is-false (gsk:renderer-is-realized renderer))
-    (is (= 1 (g:object-ref-count renderer)))))
+    (is-false (gsk:renderer-is-realized renderer))))
 
 ;;;     gsk_gl_renderer_new
 ;;;     gsk_ngl_renderer_new
 
-;;; 2024-11-10
+;;; 2024-12-19

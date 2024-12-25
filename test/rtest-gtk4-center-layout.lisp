@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-center-layout :in gtk-suite)
+(def-suite gtk-center-layout :in gtk-layout-managers)
 (in-suite gtk-center-layout)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-overlay-layout :in gtk-suite)
+(def-suite gtk-overlay-layout :in gtk-layout-managers)
 (in-suite gtk-overlay-layout)
 
 ;;; --- Types and Values -------------------------------------------------------

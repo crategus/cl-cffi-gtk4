@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-revealer :in gtk-suite)
+(def-suite gtk-revealer :in gtk-layout-widgets)
 (in-suite gtk-revealer)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-popover-menu-bar :in gtk-suite)
+(def-suite gtk-popover-menu-bar :in gtk-popover-widgets)
 (in-suite gtk-popover-menu-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

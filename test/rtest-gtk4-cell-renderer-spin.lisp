@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-renderer-spin :in gtk-suite)
+(def-suite gtk-cell-renderer-spin :in gtk-deprecated)
 (in-suite gtk-cell-renderer-spin)
 
 ;;; --- Types and Values -------------------------------------------------------

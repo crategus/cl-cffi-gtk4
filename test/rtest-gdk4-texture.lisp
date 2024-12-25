@@ -259,54 +259,55 @@
 
 ;;;     gdk_texture_new_for_pixbuf
 
+;; TODO: Can we release the reference of the pixbuf from the texture
+
 (test gdk-texture-new-for-pixbuf
-  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
-         (pixbuf (gdk:pixbuf-new-from-file path))
-         (texture (gdk:texture-new-for-pixbuf pixbuf)))
-    (is (typep pixbuf 'gdk-pixbuf:pixbuf))
-    (is (typep texture 'gdk:texture))
-    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
-    (is (= 489 (gdk:texture-width texture)))
-    (is (= 537 (gdk:texture-height texture)))
-    (is (= 2 (g:object-ref-count pixbuf)))
-    (is (= 1 (g:object-ref-count texture)))))
+  (when *first-run-gtk-test*
+    (glib-test:with-check-memory ((pixbuf 2) texture :strong 1)
+      (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+        (setf pixbuf (gdk:pixbuf-new-from-file path))
+        (setf texture (gdk:texture-new-for-pixbuf pixbuf))
+        (is (typep pixbuf 'gdk-pixbuf:pixbuf))
+        (is (typep texture 'gdk:texture))
+        (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+        (is (= 489 (gdk:texture-width texture)))
+        (is (= 537 (gdk:texture-height texture)))))))
 
 ;;;     gdk_texture_new_from_resource
 
 (test gdk-texture-new-from-resource
-  (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource")))
-    (gio:with-resource (resource path)
-      (let* ((path "/com/crategus/test/ducky.png")
-             (texture (gdk:texture-new-from-resource path)))
-        (is (typep texture 'gdk:texture))
-        (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
-        (is (= 489 (gdk:texture-width texture)))
-        (is (= 537 (gdk:texture-height texture)))
-        (is (= 1 (g:object-ref-count texture)))))))
+  (glib-test:with-check-memory (texture)
+    (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource")))
+      (gio:with-resource (resource path)
+        (let* ((path "/com/crategus/test/ducky.png"))
+          (setf texture (gdk:texture-new-from-resource path))
+          (is (typep texture 'gdk:texture))
+          (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+          (is (= 489 (gdk:texture-width texture)))
+          (is (= 537 (gdk:texture-height texture))))))))
 
 ;;;     gdk_texture_new_from_file
 
 (test gdk-texture-new-from-file
-  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
-         (file (g:file-new-for-path path))
-         (texture (gdk:texture-new-from-file file)))
-    (is (typep texture 'gdk:texture))
-    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
-    (is (= 489 (gdk:texture-width texture)))
-    (is (= 537 (gdk:texture-height texture)))
-    (is (= 1 (g:object-ref-count file)))
-    (is (= 1 (g:object-ref-count texture)))))
+  (glib-test:with-check-memory (file texture)
+    (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+      (setf file (g:file-new-for-path path))
+      (setf texture (gdk:texture-new-from-file file))
+      (is (typep texture 'gdk:texture))
+      (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+      (is (= 489 (gdk:texture-width texture)))
+      (is (= 537 (gdk:texture-height texture))))))
 
 ;;;     gdk_texture_new_from_filename                      Since 4.6
 
 (test gdk-texture-new-from-filename
-  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
-         (texture (gdk:texture-new-from-filename path)))
-    (is (typep texture 'gdk:texture))
-    (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
-    (is (= 489 (gdk:texture-width texture)))
-    (is (= 537 (gdk:texture-height texture)))
-    (is (= 1 (g:object-ref-count texture)))))
+  (glib-test:with-check-memory (texture)
+    (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+      (setf texture (gdk:texture-new-from-filename path))
+      (is (typep texture 'gdk:texture))
+      (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+      (is (= 489 (gdk:texture-width texture)))
+      (is (= 537 (gdk:texture-height texture))))))
 
 ;;;     gdk_texture_new_from_bytes                         Since 4.6
 
@@ -321,4 +322,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2024-10-13
+;;; 2024-12-20

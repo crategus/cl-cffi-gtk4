@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-window-controls :in gtk-suite)
+(def-suite gtk-window-controls :in gtk-miscellaneous)
 (in-suite gtk-window-controls)
 
 ;;; --- Types and Values -------------------------------------------------------

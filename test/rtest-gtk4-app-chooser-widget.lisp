@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-app-chooser-widget :in gtk-suite)
+(def-suite gtk-app-chooser-widget :in gtk-deprecated)
 (in-suite gtk-app-chooser-widget)
 
 ;;; --- Types and Values -------------------------------------------------------

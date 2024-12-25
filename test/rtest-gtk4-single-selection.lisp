@@ -87,7 +87,7 @@
 ;;;     gtk_single_selection_new
 
 (test gtk-single-selection-new
-  (glib-test:with-check-memory ((selection store))
+  (glib-test:with-check-memory (selection store)
     (is (typep (setf selection (gtk:single-selection-new)) 'gtk:single-selection))
     (is (typep (setf selection (gtk:single-selection-new nil))
                'gtk:single-selection))

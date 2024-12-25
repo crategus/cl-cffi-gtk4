@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-icon-theme :in gtk-suite)
+(def-suite gtk-icon-theme :in gtk-theming)
 (in-suite gtk-icon-theme)
 
 ;;; --- Types and Values -------------------------------------------------------

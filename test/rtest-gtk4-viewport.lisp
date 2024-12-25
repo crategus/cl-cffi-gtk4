@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-viewport :in gtk-suite)
+(def-suite gtk-viewport :in gtk-scrolling)
 (in-suite gtk-viewport)
 
 ;;; --- Types and Values -------------------------------------------------------

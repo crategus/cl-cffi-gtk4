@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-flow-box :in gtk-suite)
+(def-suite gtk-flow-box :in gtk-layout-widgets)
 (in-suite gtk-flow-box)
 
 ;;; --- Types and Values -------------------------------------------------------

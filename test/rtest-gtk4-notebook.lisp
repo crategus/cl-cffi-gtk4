@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-notebook :in gtk-suite)
+(def-suite gtk-notebook :in gtk-layout-widgets)
 (in-suite gtk-notebook)
 
 ;; Ensure initialization of the GtkNotebookPage type.

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-color-dialog-button :in gtk-suite)
+(def-suite gtk-color-dialog-button :in gtk-selector-widgets)
 (in-suite gtk-color-dialog-button)
 
 ;;; --- Types and Values -------------------------------------------------------

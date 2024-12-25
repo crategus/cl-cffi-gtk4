@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-gesture-swipe :in gtk-suite)
+(def-suite gtk-gesture-swipe :in gtk-event-handling)
 (in-suite gtk-gesture-swipe)
 
 ;;; --- Types and Values -------------------------------------------------------

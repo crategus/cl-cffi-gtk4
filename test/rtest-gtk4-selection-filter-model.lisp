@@ -65,7 +65,7 @@
 ;;;     gtk_selection_filter_model_new
 
 (test gtk-selection-filter-model-new
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (gtk:single-selection-new))
     (is (typep (setf selection
                      (gtk:selection-filter-model-new model))

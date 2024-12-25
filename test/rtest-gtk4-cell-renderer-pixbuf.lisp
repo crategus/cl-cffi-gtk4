@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-renderer-pixbuf :in gtk-suite)
+(def-suite gtk-cell-renderer-pixbuf :in gtk-deprecated)
 (in-suite gtk-cell-renderer-pixbuf)
 
 ;;; --- Types and Values -------------------------------------------------------

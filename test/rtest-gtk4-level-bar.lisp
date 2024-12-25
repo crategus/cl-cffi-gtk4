@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-level-bar :in gtk-suite)
+(def-suite gtk-level-bar :in gtk-display-widgets)
 (in-suite gtk-level-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

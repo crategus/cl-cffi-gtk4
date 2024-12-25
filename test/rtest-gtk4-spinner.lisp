@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-spinner :in gtk-suite)
+(def-suite gtk-spinner :in gtk-display-widgets)
 (in-suite gtk-spinner)
 
 ;;; --- Types and Values -------------------------------------------------------

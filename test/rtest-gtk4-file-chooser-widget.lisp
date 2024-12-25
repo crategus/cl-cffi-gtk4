@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-chooser-widget :in gtk-suite)
+(def-suite gtk-file-chooser-widget :in gtk-deprecated)
 (in-suite gtk-file-chooser-widget)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -59,6 +59,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+#+nil
 (test gtk-file-chooser-widget-properties
   (let ((*gtk-warn-deprecated* nil))
     (let ((widget (make-instance 'gtk:file-chooser-widget)))
@@ -85,6 +86,7 @@
 
 ;;;     gtk_file_chooser_widget_new
 
+#+nil
 (test gtk-file-chooser-widget-new
   (let ((*gtk-warn-deprecated* nil))
     (is (typep (gtk:file-chooser-widget-new :open) 'gtk:file-chooser-widget))

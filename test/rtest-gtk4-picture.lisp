@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-picture :in gtk-suite)
+(def-suite gtk-picture :in gtk-display-widgets)
 (in-suite gtk-picture)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-alert-dialog :in gtk-suite)
+(def-suite gtk-alert-dialog :in gtk-windows)
 (in-suite gtk-alert-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -51,7 +51,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-alert-dialog-properties.1
-  (let ((dialog (make-instance 'gtk:alert-dialog)))
+  (glib-test:with-check-memory (dialog)
+    (setf dialog (make-instance 'gtk:alert-dialog))
     (is-false (gtk:alert-dialog-buttons dialog))
     (is (eq -1 (gtk:alert-dialog-cancel-button dialog)))
     (is (eq -1 (gtk:alert-dialog-default-button dialog)))
@@ -59,7 +60,8 @@
     (is-false (gtk:alert-dialog-message dialog))))
 
 (test gtk-alert-dialog-properties.2
-  (let ((dialog (make-instance 'gtk:alert-dialog)))
+  (glib-test:with-check-memory (dialog)
+    (setf dialog (make-instance 'gtk:alert-dialog))
     (is (equal '("close" "ok")
                (setf (gtk:alert-dialog-buttons dialog) '("close" "ok"))))
     (is (equal '("close" "ok")
@@ -80,12 +82,13 @@
 ;;;     gtk_alert_dialog_new
 
 (test gtk-alert-dialog-new
-  (is (typep (gtk:alert-dialog-new nil) 'gtk:alert-dialog))
-  (is (typep (gtk:alert-dialog-new "msg") 'gtk:alert-dialog))
-  (is (typep (gtk:alert-dialog-new "msg ~a~%" 199) 'gtk:alert-dialog)))
+  (glib-test:with-check-memory ()
+    (is (typep (gtk:alert-dialog-new nil) 'gtk:alert-dialog))
+    (is (typep (gtk:alert-dialog-new "msg") 'gtk:alert-dialog))
+    (is (typep (gtk:alert-dialog-new "msg ~a~%" 199) 'gtk:alert-dialog))))
 
 ;;;     gtk_alert_dialog_choose
 ;;;     gtk_alert_dialog_choose_finish
 ;;;     gtk_alert_dialog_show
 
-;;; 2024-9-19
+;;; 2024-12-23

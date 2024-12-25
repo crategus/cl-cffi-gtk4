@@ -112,12 +112,19 @@
                        NIL)
              (gobject:get-gtype-definition "GtkEveryFilter"))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-multi-filter-properties
+  (let ((model (make-instance 'gtk:any-filter)))
+    (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type model)))
+    (is (= 0 (gtk:multi-filter-n-items model)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_any_filter_new
 
 (test gtk-any-filter-new
-  (glib-test:with-check-memory (nil)
+  (glib-test:with-check-memory ()
     (is (typep (gtk:any-filter-new) 'gtk:any-filter))
     (is (= 1 (g:object-ref-count (make-instance 'gtk:any-filter))))
     (is (= 1 (g:object-ref-count (gtk:any-filter-new))))))
@@ -125,7 +132,7 @@
 ;;;     gtk_every_filter_new
 
 (test gtk-every-filter-new
-  (glib-test:with-check-memory (nil)
+  (glib-test:with-check-memory ()
     (is (typep (gtk:every-filter-new) 'gtk:every-filter))
     (is (= 1 (g:object-ref-count (make-instance 'gtk:every-filter))))
     (is (= 1 (g:object-ref-count (gtk:every-filter-new))))))
@@ -134,7 +141,7 @@
 ;;;     gtk_multi_filter_remove
 
 (test gtk-multi-filter-append/remove.1
-  (glib-test:with-check-memory ((store filter model filter1 filter2))
+  (glib-test:with-check-memory (store filter model filter1 filter2)
     (let ((expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
           (expr2 (gtk:property-expression-new "GtkStringObject" nil "string")))
       ;; Create objects
@@ -187,7 +194,7 @@
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
 (test gtk-multi-filter-append/remove.2
-  (glib-test:with-check-memory ((store filter model filter1 filter2))
+  (glib-test:with-check-memory (store filter model filter1 filter2)
     (let ((expr1 (gtk:property-expression-new "GtkStringObject" nil "string"))
           (expr2 (gtk:property-expression-new "GtkStringObject" nil "string")))
       (setf store (create-string-list-for-package))

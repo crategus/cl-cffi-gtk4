@@ -76,7 +76,7 @@
 ;;;     gtk_sort_list_model_new
 
 (test gtk-sort-list-model-new
-  (glib-test:with-check-memory ((store sorter model))
+  (glib-test:with-check-memory (store sorter model)
     (setf store (create-string-list-for-package))
     (setf sorter (gtk:custom-sorter-new
                         (lambda (item1 item2)

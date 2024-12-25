@@ -195,57 +195,6 @@
                          "vendor-id" "gchararray" T NIL)))
              (gobject:get-gtype-definition "GdkDevice"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gdk-device-properties.1
-  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
-         (device (gdk:seat-pointer seat)))
-    (is-false (gdk:device-caps-lock-state device))
-    (is (eq :neutral (gdk:device-direction device)))
-    (is (eq (gdk:display-default) (gdk:device-display device)))
-    (is-false (gdk:device-has-bidi-layouts device))
-    (is-true (gdk:device-has-cursor device))
-    (is-false (gdk:device-modifier-state device))
-    #-windows
-    (is (= 2 (gdk:device-n-axes device)))
-    #+windows
-    (is (= 2 (gdk:device-n-axes device)))
-    #-windows
-    (is (string= "Core Pointer" (gdk:device-name device)))
-    #+windows
-    (is (string= "Virtual Core Pointer" (gdk:device-name device)))
-    (is-false (gdk:device-num-lock-state device))
-    (is (= 0 (gdk:device-num-touches device)))
-    (is-false (gdk:device-product-id device))
-    (is-false (gdk:device-scroll-lock-state device))
-    (is (eq seat (gdk:device-seat device)))
-    (is (eq :mouse (gdk:device-source device)))
-    (is-false (gdk:device-tool device))
-    (is-false (gdk:device-vendor-id device))))
-
-(test gdk-device-properties.2
-  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
-         (device (gdk:seat-keyboard seat)))
-    (is-false (gdk:device-caps-lock-state device))
-    (is (eq :ltr (gdk:device-direction device)))
-    (is (eq (gdk:display-default) (gdk:device-display device)))
-    (is-false (gdk:device-has-bidi-layouts device))
-    (is-false (gdk:device-has-cursor device))
-    (is-false (gdk:device-modifier-state device))
-    (is (= 0 (gdk:device-n-axes device)))
-    #-windows
-    (is (string= "Core Keyboard" (gdk:device-name device)))
-    #+windows
-    (is (string= "Virtual Core Keyboard" (gdk:device-name device)))
-    (is (typep (gdk:device-num-lock-state device) 'boolean))
-    (is (= 0 (gdk:device-num-touches device)))
-    (is-false (gdk:device-product-id device))
-    (is-false (gdk:device-scroll-lock-state device))
-    (is (eq seat (gdk:device-seat device)))
-    (is (eq :keyboard (gdk:device-source device)))
-    (is-false (gdk:device-tool device))
-    (is-false (gdk:device-vendor-id device))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     changed
@@ -274,25 +223,81 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gdk-device-properties.1
+  (glib-test:with-check-memory (:strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-pointer seat)))
+      (is-false (gdk:device-caps-lock-state device))
+      (is (eq :neutral (gdk:device-direction device)))
+      (is (eq (gdk:display-default) (gdk:device-display device)))
+      (is-false (gdk:device-has-bidi-layouts device))
+      (is-true (gdk:device-has-cursor device))
+      (is-false (gdk:device-modifier-state device))
+      #-windows
+      (is (= 2 (gdk:device-n-axes device)))
+      #+windows
+      (is (= 2 (gdk:device-n-axes device)))
+      #-windows
+      (is (string= "Core Pointer" (gdk:device-name device)))
+      #+windows
+      (is (string= "Virtual Core Pointer" (gdk:device-name device)))
+      (is-false (gdk:device-num-lock-state device))
+      (is (= 0 (gdk:device-num-touches device)))
+      (is-false (gdk:device-product-id device))
+      (is-false (gdk:device-scroll-lock-state device))
+      (is (eq seat (gdk:device-seat device)))
+      (is (eq :mouse (gdk:device-source device)))
+      (is-false (gdk:device-tool device))
+      (is-false (gdk:device-vendor-id device)))))
+
+(test gdk-device-properties.2
+  (glib-test:with-check-memory (:strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-keyboard seat)))
+      (is-false (gdk:device-caps-lock-state device))
+      (is (eq :ltr (gdk:device-direction device)))
+      (is (eq (gdk:display-default) (gdk:device-display device)))
+      (is-false (gdk:device-has-bidi-layouts device))
+      (is-false (gdk:device-has-cursor device))
+      (is-false (gdk:device-modifier-state device))
+      (is (= 0 (gdk:device-n-axes device)))
+      #-windows
+      (is (string= "Core Keyboard" (gdk:device-name device)))
+      #+windows
+      (is (string= "Virtual Core Keyboard" (gdk:device-name device)))
+      (is (typep (gdk:device-num-lock-state device) 'boolean))
+      (is (= 0 (gdk:device-num-touches device)))
+      (is-false (gdk:device-product-id device))
+      (is-false (gdk:device-scroll-lock-state device))
+      (is (eq seat (gdk:device-seat device)))
+      (is (eq :keyboard (gdk:device-source device)))
+      (is-false (gdk:device-tool device))
+      (is-false (gdk:device-vendor-id device)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_device_get_surface_at_position
 
 (test gdk-device-surface-at-position
-  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
-         (device (gdk:seat-pointer seat)))
-    (is-false (gdk:device-surface-at-position device))))
+  (glib-test:with-check-memory (:strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-pointer seat)))
+      (is-false (gdk:device-surface-at-position device)))))
 
 ;;;     gdk_device_get_timestamp                           Since 4.2
 
 (test gdk-device-timestamp.1
-  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
-         (device (gdk:seat-pointer seat)))
-    (is (= 0 (gdk:device-timestamp device)))))
+  (glib-test:with-check-memory (:strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-pointer seat)))
+      (is (= 0 (gdk:device-timestamp device))))))
 
 (test gdk-device-timestamp.2
-  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
-         (device (gdk:seat-keyboard seat)))
-    (is (= 0 (gdk:device-timestamp device)))))
+  (glib-test:with-check-memory (:strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-keyboard seat)))
+      (is (= 0 (gdk:device-timestamp device))))))
 
-;;; 2024-9-18
+;;; 2024-12-20

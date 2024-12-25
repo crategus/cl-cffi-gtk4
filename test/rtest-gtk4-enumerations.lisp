@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-enumerations :in gtk-suite)
+(def-suite gtk-enumerations :in gtk-core)
 (in-suite gtk-enumerations)
 
 ;;; --- Types and Values -------------------------------------------------------

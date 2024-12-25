@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-im-multicontext :in gtk-suite)
+(def-suite gtk-im-multicontext :in gtk-input-methods)
 (in-suite gtk-im-multicontext)
 
 ;;; --- Types and Values -------------------------------------------------------

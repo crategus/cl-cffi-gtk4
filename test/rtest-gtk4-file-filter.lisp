@@ -67,7 +67,7 @@
 ;;;     gtk_file_filter_new
 
 (test gtk-file-filter-new
-  (glib-test:with-check-memory (nil)
+  (glib-test:with-check-memory ()
     (is (eq 'gtk:file-filter
             (type-of (gtk:file-filter-new))))))
 

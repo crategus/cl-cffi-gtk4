@@ -56,7 +56,7 @@
 ;;;     gtk_section_model_get_section
 
 (test gtk-section-model-section
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (create-string-list-for-package))
     (setf selection (gtk:single-selection-new model))
     (is (equal (list 0 gtk:+invalid-list-position+)
@@ -67,7 +67,7 @@
 ;;;     gtk_section_model_sections_changed
 
 (test gtk-section-model-sections-changed
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (create-string-list-for-package))
     (setf selection (gtk:single-selection-new model))
     ;; Connect signal handler

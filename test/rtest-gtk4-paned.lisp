@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-paned :in gtk-suite)
+(def-suite gtk-paned :in gtk-layout-widgets)
 (in-suite gtk-paned)
 
 ;;; --- Types and Values -------------------------------------------------------

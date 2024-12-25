@@ -89,8 +89,9 @@
 ;;;     display
 
 (test gdk-seat-properties
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is (typep (gdk:seat-display seat) 'gdk:display))))
+  (glib-test:with-check-memory (:strong 2)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is (typep (gdk:seat-display seat) 'gdk:display)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -104,45 +105,50 @@
 ;;;     gdk_seat_get_capabilities
 
 (test gdk-seat-capabilities
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is (equal '(:POINTER :KEYBOARD)
-               (gdk:seat-capabilities seat)))))
+  (glib-test:with-check-memory (:strong 2)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is (equal '(:POINTER :KEYBOARD)
+                 (gdk:seat-capabilities seat))))))
 
 ;;;     gdk_seat_get_pointer
 
 (test gdk-seat-pointer
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is (typep (gdk:seat-pointer seat) 'gdk:device))
-    #-windows
-    (is (string= "Core Pointer"
-                 (gdk:device-name (gdk:seat-pointer seat))))
-    #+windows
-    (is (string= "Virtual Core Pointer"
-                 (gdk:device-name (gdk:seat-pointer seat))))))
+  (glib-test:with-check-memory (:strong 3)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is (typep (gdk:seat-pointer seat) 'gdk:device))
+      #-windows
+      (is (string= "Core Pointer"
+                   (gdk:device-name (gdk:seat-pointer seat))))
+      #+windows
+      (is (string= "Virtual Core Pointer"
+                   (gdk:device-name (gdk:seat-pointer seat)))))))
 
 ;;;     gdk_seat_get_keyboard
 
 (test gdk-seat-keyboard
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is (typep (gdk:seat-keyboard seat) 'gdk:device))
-    #-windows
-    (is (string= "Core Keyboard"
-                 (gdk:device-name (gdk:seat-keyboard seat))))
-    #+windows
-    (is (string= "Virtual Core Keyboard"
-                 (gdk:device-name (gdk:seat-keyboard seat))))))
+  (glib-test:with-check-memory (:strong 3)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is (typep (gdk:seat-keyboard seat) 'gdk:device))
+      #-windows
+      (is (string= "Core Keyboard"
+                   (gdk:device-name (gdk:seat-keyboard seat))))
+      #+windows
+      (is (string= "Virtual Core Keyboard"
+                   (gdk:device-name (gdk:seat-keyboard seat)))))))
 
 ;;;     gdk_seat_get_devices
 
 (test gdk-seat-devices
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is (every (lambda (x) (typep x 'gdk:device))
-               (gdk:seat-devices seat :all)))))
+  (glib-test:with-check-memory (:strong 4)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is (every (lambda (x) (typep x 'gdk:device))
+                 (gdk:seat-devices seat :all))))))
 
 ;;;     gdk_seat_get_tools
 
 (test gdk-seat-tools
-  (let ((seat (gdk:display-default-seat (gdk:display-default))))
-    (is-false (gdk:seat-tools seat))))
+  (glib-test:with-check-memory (:strong 2)
+    (let ((seat (gdk:display-default-seat (gdk:display-default))))
+      (is-false (gdk:seat-tools seat)))))
 
-;;; 2024-9-19
+;;; 2024-12-20

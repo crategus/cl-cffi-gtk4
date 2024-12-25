@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-combo-box-text :in gtk-suite)
+(def-suite gtk-combo-box-text :in gtk-deprecated)
 (in-suite gtk-combo-box-text)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -54,19 +54,24 @@
 
 (test gtk-combo-box-text-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:combo-box-text-new) 'gtk:combo-box-text))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:combo-box-text-new) 'gtk:combo-box-text)))))
 
 ;;;     gtk_combo_box_text_new_with_entry
 
 (test gtk-combo-box-text-new-with-entry.1
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:combo-box-text-new-with-entry) 'gtk:combo-box-text))))
+    (glib-test:with-check-memory ()
+      (is (typep (gtk:combo-box-text-new-with-entry) 'gtk:combo-box-text)))))
 
 (test gtk-combo-box-text-new-with-entry.2
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((combo (gtk:combo-box-text-new-with-entry)))
-      (is (typep combo 'gtk:combo-box-text))
-      (is (typep (gtk:combo-box-child combo) 'gtk:entry)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (combo :strong 1)
+        (is (typep (setf combo
+                         (gtk:combo-box-text-new-with-entry))
+                   'gtk:combo-box-text))
+        (is (typep (gtk:combo-box-child combo) 'gtk:entry))))))
 
 ;;;     gtk_combo_box_text_append
 ;;;     gtk_combo_box_text_prepend
@@ -82,12 +87,12 @@
 ;;;     gtk_combo_box_text_get_active_text
 
 (test gtk-combo-box-text-active-text
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((combo (gtk:combo-box-text-new-with-entry))
-           (entry (gtk:combo-box-child combo)))
-      (is (typep combo 'gtk:combo-box-text))
-      (is (typep entry 'gtk:entry))
-      (is (string= "text" (setf (gtk:editable-text entry) "text")))
-      (is (string= "text" (gtk:combo-box-text-active-text combo))))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (combo (entry 2) :strong 1)
+        (setf combo (gtk:combo-box-text-new-with-entry))
+        (setf entry (gtk:combo-box-child combo))
+        (is (string= "text" (setf (gtk:editable-text entry) "text")))
+        (is (string= "text" (gtk:combo-box-text-active-text combo)))))))
 
-;;; 2024-9-19
+;;; 2024-12-24

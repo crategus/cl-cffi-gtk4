@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-editable :in gtk-suite)
+(def-suite gtk-cell-editable :in gtk-deprecated)
 (in-suite gtk-cell-editable)
 
 ;;; --- Types and Values -------------------------------------------------------

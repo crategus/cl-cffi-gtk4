@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-event-controller-motion :in gtk-suite)
+(def-suite gtk-event-controller-motion :in gtk-event-handling)
 (in-suite gtk-event-controller-motion)
 
 ;;; --- Types and Values -------------------------------------------------------

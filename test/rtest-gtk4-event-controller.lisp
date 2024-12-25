@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-event-controller :in gtk-suite)
+(def-suite gtk-event-controller :in gtk-event-handling)
 (in-suite gtk-event-controller)
 
 ;;; --- Types and Values -------------------------------------------------------

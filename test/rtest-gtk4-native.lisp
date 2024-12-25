@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-native :in gtk-suite)
+(def-suite gtk-native :in gtk-windows)
 (in-suite gtk-native)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -37,10 +37,9 @@
 ;;;     gtk_native_get_surface
 
 (test gtk-native-surface/for-surface
-  (let* ((button (make-instance 'gtk:button))
-         (window (make-instance 'gtk:window
-                                :child button))
-         (surface nil))
+  (glib-test:with-check-memory (button window surface)
+    (setf button (make-instance 'gtk:button))
+    (setf window (make-instance 'gtk:window :child button))
     ;; Realize WINDOW to create GDK resources
     (is-false (gtk:widget-realize window))
     ;; Native widget for WINDOW is WINDOW itself
@@ -58,8 +57,8 @@
 ;;;     gtk_native_get_renderer
 
 (test gtk-native-renderer
-  (let ((window (make-instance 'gtk:window))
-        (renderer nil))
+  (glib-test:with-check-memory (window renderer)
+    (setf window (make-instance 'gtk:window))
     ;; Realize WINDOW to create GDK resources
     (is-false (gtk:widget-realize window))
     ;; Get GSK renderer
@@ -72,7 +71,8 @@
 ;;;     gtk_native_get_surface_transform
 
 (test gtk-native-surface-transform
-  (let ((window (make-instance 'gtk:window)))
+  (glib-test:with-check-memory (window)
+    (setf window (make-instance 'gtk:window))
     (is (equal '(0d0 0d0)
                (multiple-value-list (gtk:native-surface-transform window))))
     (is-false (gtk:widget-realize window))
@@ -97,4 +97,4 @@
   (let ((window (make-instance 'gtk:window)))
     (is-false (gtk:native-realize window))))
 
-;;; 2024-10-8
+;;; 2024-12-23

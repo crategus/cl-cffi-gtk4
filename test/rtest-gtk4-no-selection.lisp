@@ -62,7 +62,7 @@
 ;;;     gtk_no_selection_new
 
 (test gtk-no-selection-new
-  (glib-test:with-check-memory ((model selection))
+  (glib-test:with-check-memory (model selection)
     (setf model (g:list-store-new "GtkWidget"))
     (is (typep (setf selection
                      (gtk:no-selection-new)) 'gtk:no-selection))

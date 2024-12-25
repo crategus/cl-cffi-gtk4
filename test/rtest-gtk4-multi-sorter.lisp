@@ -49,7 +49,8 @@
 
 (test gtk-multi-sorter-properties
   (glib-test:with-check-memory (sorter)
-    (is (typep (setf sorter (make-instance 'gtk:multi-sorter)) 'gtk:multi-sorter))
+    (is (typep (setf sorter
+                     (make-instance 'gtk:multi-sorter)) 'gtk:multi-sorter))
     (is (eq (g:gtype "GtkSorter") (gtk:multi-sorter-item-type sorter)))
     (is (= 0 (gtk:multi-sorter-n-items sorter)))))
 
@@ -67,7 +68,7 @@
 ;;;     gtk_multi_sorter_remove
 
 (test gtk-multi-sorter-append/remove
-  (glib-test:with-check-memory ((sorter store model sorter1 sorter2))
+  (glib-test:with-check-memory (sorter store model sorter1 sorter2)
     (setf sorter (gtk:multi-sorter-new))
     (setf store (gtk:string-list-new '("ccc" "cc" "c"
                                        "bbb" "bb" "b"

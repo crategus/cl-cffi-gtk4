@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-grid :in gtk-suite)
+(def-suite gtk-grid :in gtk-layout-widgets)
 (in-suite gtk-grid)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -57,7 +57,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-grid-properties
-  (let ((grid (make-instance 'gtk:grid)))
+  (glib-test:with-check-memory (grid)
+    (setf grid (make-instance 'gtk:grid))
     (is (= 0 (gtk:grid-baseline-row grid)))
     (is-false (gtk:grid-column-homogeneous grid))
     (is (= 0 (gtk:grid-column-spacing grid)))
@@ -69,7 +70,8 @@
 ;;;     gtk_grid_new
 
 (test gtk-grid-new
-  (is (typep (gtk:grid-new) 'gtk:grid)))
+  (glib-test:with-check-memory ()
+    (is (typep (gtk:grid-new) 'gtk:grid))))
 
 ;;;     gtk_grid_attach
 ;;;     gtk_grid_remove
@@ -77,7 +79,8 @@
 ;;;     gtk_grid_query_child
 
 (test gtk-grid-attach
-  (let ((grid (gtk:grid-new)))
+  (glib-test:with-check-memory (grid)
+    (setf grid (gtk:grid-new))
     (is-false (gtk:grid-attach grid
                                (gtk:button-new-with-label "button1") 0 0 1 1))
 
@@ -96,7 +99,6 @@
                                (gtk:grid-child-at grid 0 0)))
     (is-false (gtk:grid-remove grid
                                (gtk:grid-child-at grid 2 2)))))
-
 
 ;;;     gtk_grid_attach_next_to
 

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-stack-switcher :in gtk-suite)
+(def-suite gtk-stack-switcher :in gtk-layout-widgets)
 (in-suite gtk-stack-switcher)
 
 ;;; --- Types and Values -------------------------------------------------------

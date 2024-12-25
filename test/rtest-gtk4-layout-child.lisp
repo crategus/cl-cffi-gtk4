@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-layout-child :in gtk-suite)
+(def-suite gtk-layout-child :in gtk-layout-managers)
 (in-suite gtk-layout-child)
 
 ;;; --- Types and Values -------------------------------------------------------

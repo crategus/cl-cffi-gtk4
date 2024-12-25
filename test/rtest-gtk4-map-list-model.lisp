@@ -69,11 +69,11 @@
 
 #+nil
 (test gtk-map-list-model-new
-  (glib-test:with-check-memory ((box
+  (glib-test:with-check-memory (box
                                 (button1 2)
                                 (button2 2)
                                 controller1 controller2
-                                controllers widgets model) :strong 2)
+                                controllers widgets model :strong 2)
 
 
       (setf box (make-instance 'gtk:box))
@@ -114,10 +114,10 @@
 
 #+nil
 (test gtk-map-list-model-set-map-func
-  (glib-test:with-check-memory ((box
-                                 (button1 2)
-                                 (button2 2)
-                                 controller1 controller2 model) :strong 3)
+  (glib-test:with-check-memory (box
+                                (button1 2)
+                                (button2 2)
+                                controller1 controller2 model :strong 3)
     (let (widgets controllers)
 
       (setf box (make-instance 'gtk:box))

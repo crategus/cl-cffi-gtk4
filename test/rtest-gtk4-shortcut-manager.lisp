@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-shortcut-manager :in gtk-suite)
+(def-suite gtk-shortcut-manager :in gtk-keyboard-shortcuts)
 (in-suite gtk-shortcut-manager)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-label :in gtk-suite)
+(def-suite gtk-label :in gtk-display-widgets)
 (in-suite gtk-label)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -269,8 +269,13 @@
 ;;;     gtk_label_get_layout_offsets
 
 (test gtk-label-layout-offsets
-  (let ((label (gtk:label-new "label")))
+  (glib-test:with-check-memory (label)
+    (setf label (gtk:label-new "label"))
+    #-windows
     (is (equal '(-16 -9)
+               (multiple-value-list (gtk:label-layout-offsets label))))
+    #+windows
+    (is (equal '(-13 -9)
                (multiple-value-list (gtk:label-layout-offsets label))))))
 
 ;;;     gtk_label_select_region
@@ -298,4 +303,4 @@
     (is-false (gtk:label-select-region label 8 17))
     (is-false (gtk:label-current-uri label))))
 
-;;; 2024-10-28
+;;; 2024-12-18

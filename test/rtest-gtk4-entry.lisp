@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-entry :in gtk-suite)
+(def-suite gtk-entry :in gtk-data-entry)
 (in-suite gtk-entry)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -52,11 +52,12 @@
           (g:type-parent "GtkEntry")))
   ;; Check children
   #-windows
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '()
                  (glib-test:list-children "GtkEntry")))
       (is (equal '("GtkFileChooserEntry")
                  (glib-test:list-children "GtkEntry"))))
+
   #+windows
   (is (equal '()
              (glib-test:list-children "GtkEntry")))

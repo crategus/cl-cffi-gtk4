@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text-buffer :in gtk-suite)
+(def-suite gtk-text-buffer :in gtk-multiline-editor)
 (in-suite gtk-text-buffer)
 
 ;;; --- Types and Values -------------------------------------------------------

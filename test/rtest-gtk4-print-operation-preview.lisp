@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-print-operation-preview :in gtk-suite)
+(def-suite gtk-print-operation-preview :in gtk-printing)
 (in-suite gtk-print-operation-preview)
 
 ;;; --- Types and Values -------------------------------------------------------

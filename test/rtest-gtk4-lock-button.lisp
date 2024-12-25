@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-lock-button :in gtk-suite)
+(def-suite gtk-lock-button :in gtk-deprecated)
 (in-suite gtk-lock-button)
 
 ;;; --- Types and Values -------------------------------------------------------

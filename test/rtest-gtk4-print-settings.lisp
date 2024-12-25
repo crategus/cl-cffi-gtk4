@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-print-settings :in gtk-suite)
+(def-suite gtk-print-settings :in gtk-printing)
 (in-suite gtk-print-settings)
 
 ;; Ensure a file with print settings for use in the following tests

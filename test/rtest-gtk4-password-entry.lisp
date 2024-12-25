@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-password-entry :in gtk-suite)
+(def-suite gtk-password-entry :in gtk-data-entry)
 (in-suite gtk-password-entry)
 
 ;;; --- Types and Values -------------------------------------------------------

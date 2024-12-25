@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-uri-launcher :in gtk-suite)
+(def-suite gtk-uri-launcher :in gtk-selector-widgets)
 (in-suite gtk-uri-launcher)
 
 ;;; --- Types and Values -------------------------------------------------------

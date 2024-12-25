@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-widget-paintable :in gtk-suite)
+(def-suite gtk-widget-paintable :in gtk-miscellaneous)
 (in-suite gtk-widget-paintable)
 
 ;;; --- Types and Values -------------------------------------------------------

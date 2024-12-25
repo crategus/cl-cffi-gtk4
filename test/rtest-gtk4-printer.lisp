@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-printer :in gtk-suite)
+(def-suite gtk-printer :in gtk-printing)
 (in-suite gtk-printer)
 
 ;;;     GtkPrinterFunc

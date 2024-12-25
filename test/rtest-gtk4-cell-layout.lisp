@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-layout :in gtk-suite)
+(def-suite gtk-cell-layout :in gtk-deprecated)
 (in-suite gtk-cell-layout)
 
 ;;; --- Types and Values -------------------------------------------------------

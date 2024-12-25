@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-combo-box :in gtk-suite)
+(def-suite gtk-combo-box :in gtk-deprecated)
 (in-suite gtk-combo-box)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -41,48 +41,50 @@
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBox")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkComboBox" GTK:COMBO-BOX
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
-                         "GtkCellLayout" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_combo_box_get_type")
-                       ((ACTIVE COMBO-BOX-ACTIVE "active" "gint" T T)
-                        (ACTIVE-ID COMBO-BOX-ACTIVE-ID
-                         "active-id" "gchararray" T T)
-                        (BUTTON-SENSITIVITY COMBO-BOX-BUTTON-SENSITIVITY
-                         "button-sensitivity" "GtkSensitivityType" T T)
-                        (CHILD COMBO-BOX-CHILD "child" "GtkWidget" T T)
-                        (ENTRY-TEXT-COLUMN COMBO-BOX-ENTRY-TEXT-COLUMN
-                         "entry-text-column" "gint" T T)
-                        (HAS-ENTRY COMBO-BOX-HAS-ENTRY
-                         "has-entry" "gboolean" T NIL)
-                        (HAS-FRAME COMBO-BOX-HAS-FRAME
-                         "has-frame" "gboolean" T T)
-                        (ID-COLUMN COMBO-BOX-ID-COLUMN "id-column" "gint" T T)
-                        (MODEL COMBO-BOX-MODEL "model" "GtkTreeModel" T T)
-                        (POPUP-FIXED-WIDTH COMBO-BOX-POPUP-FIXED-WIDTH
-                         "popup-fixed-width" "gboolean" T T)
-                        (POPUP-SHOWN COMBO-BOX-POPUP-SHOWN
-                         "popup-shown" "gboolean" T NIL)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
+                        "GtkCellLayout" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_combo_box_get_type")
+                      ((ACTIVE COMBO-BOX-ACTIVE "active" "gint" T T)
+                       (ACTIVE-ID COMBO-BOX-ACTIVE-ID
+                        "active-id" "gchararray" T T)
+                       (BUTTON-SENSITIVITY COMBO-BOX-BUTTON-SENSITIVITY
+                        "button-sensitivity" "GtkSensitivityType" T T)
+                       (CHILD COMBO-BOX-CHILD "child" "GtkWidget" T T)
+                       (ENTRY-TEXT-COLUMN COMBO-BOX-ENTRY-TEXT-COLUMN
+                        "entry-text-column" "gint" T T)
+                       (HAS-ENTRY COMBO-BOX-HAS-ENTRY
+                        "has-entry" "gboolean" T NIL)
+                       (HAS-FRAME COMBO-BOX-HAS-FRAME
+                        "has-frame" "gboolean" T T)
+                       (ID-COLUMN COMBO-BOX-ID-COLUMN "id-column" "gint" T T)
+                       (MODEL COMBO-BOX-MODEL "model" "GtkTreeModel" T T)
+                       (POPUP-FIXED-WIDTH COMBO-BOX-POPUP-FIXED-WIDTH
+                        "popup-fixed-width" "gboolean" T T)
+                       (POPUP-SHOWN COMBO-BOX-POPUP-SHOWN
+                        "popup-shown" "gboolean" T NIL)))
              (gobject:get-gtype-definition "GtkComboBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-combo-box-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((combo (gtk:combo-box-new)))
-      (is (= -1 (gtk:combo-box-active combo)))
-      (is-false (gtk:combo-box-active-id combo))
-      (is (eq :auto (gtk:combo-box-button-sensitivity combo)))
-      (is (typep (gtk:combo-box-child combo) 'gtk:cell-view))
-      (is (= -1 (gtk:combo-box-entry-text-column combo)))
-      (is-false (gtk:combo-box-has-entry combo))
-      (is-true (gtk:combo-box-has-frame combo))
-      (is (= -1 (gtk:combo-box-id-column combo)))
-      (is-false (gtk:combo-box-model combo))
-      (is-true (gtk:combo-box-popup-fixed-width combo))
-      (is-false (gtk:combo-box-popup-shown combo)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (combo :strong 1)
+        (is (typep (setf combo (gtk:combo-box-new)) 'gtk:combo-box))
+        (is (= -1 (gtk:combo-box-active combo)))
+        (is-false (gtk:combo-box-active-id combo))
+        (is (eq :auto (gtk:combo-box-button-sensitivity combo)))
+        (is (typep (gtk:combo-box-child combo) 'gtk:cell-view))
+        (is (= -1 (gtk:combo-box-entry-text-column combo)))
+        (is-false (gtk:combo-box-has-entry combo))
+        (is-true (gtk:combo-box-has-frame combo))
+        (is (= -1 (gtk:combo-box-id-column combo)))
+        (is-false (gtk:combo-box-model combo))
+        (is-true (gtk:combo-box-popup-fixed-width combo))
+        (is-false (gtk:combo-box-popup-shown combo))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -99,28 +101,45 @@
 
 (test gtk-combo-box-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:combo-box-new) 'gtk:combo-box))))
+    (glib-test:with-check-memory (combo)
+      (is (typep (setf combo (gtk:combo-box-new)) 'gtk:combo-box)))))
 
 ;;;     gtk_combo_box_new_with_entry
 
 (test gtk-combo-box-new-with-entry
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:combo-box-new-with-entry) 'gtk:combo-box))))
+    (glib-test:with-check-memory (combo)
+      (is (typep (setf combo
+                       (gtk:combo-box-new-with-entry)) 'gtk:combo-box)))))
 
 ;;;     gtk_combo_box_new_with_model
 
 (test gtk-combo-box-new-with-model
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((model (gtk:list-store-new "gchararray")))
-      (is (typep (gtk:combo-box-new-with-model model) 'gtk:combo-box)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (combo (model 2) :strong 1)
+        (is (typep (setf model
+                         (gtk:list-store-new "gchararray")) 'gtk:list-store))
+        (is (= 1 (g:object-ref-count model)))
+        (is (typep (setf combo
+                         (gtk:combo-box-new-with-model model)) 'gtk:combo-box))
+        (is (= 4 (g:object-ref-count model))) ; Why 4 references?
+        (is-false (setf (gtk:combo-box-model combo) nil))))))
 
 ;;;     gtk_combo_box_new_with_model_and_entry
 
 (test gtk-combo-box-new-with-model-and-entry
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((model (gtk:list-store-new "gchararray")))
-      (is (typep (gtk:combo-box-new-with-model-and-entry model)
-                 'gtk:combo-box)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (combo (model 2) :strong 1)
+        (is (typep (setf model
+                         (gtk:list-store-new "gchararray")) 'gtk:list-store))
+        (is (= 1 (g:object-ref-count model)))
+        (is (typep (setf combo
+                         (gtk:combo-box-new-with-model-and-entry model))
+                   'gtk:combo-box))
+        (is (= 3 (g:object-ref-count model))) ; This time 3 references?
+        (is-false (setf (gtk:combo-box-model combo) nil))))))
 
 ;;;     gtk_combo_box_get_active_iter
 ;;;     gtk_combo_box_set_active_iter
@@ -130,4 +149,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; 2024-4-26
+;;; 2024-12-24

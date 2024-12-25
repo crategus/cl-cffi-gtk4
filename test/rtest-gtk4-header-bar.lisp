@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-header-bar :in gtk-suite)
+(def-suite gtk-header-bar :in gtk-layout-widgets)
 (in-suite gtk-header-bar)
 
 ;;; --- Types and Values -------------------------------------------------------

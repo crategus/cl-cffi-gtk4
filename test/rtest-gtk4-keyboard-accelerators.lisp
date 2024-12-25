@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-keyboard-accelerators :in gtk-suite)
+(def-suite gtk-keyboard-accelerators :in gtk-keyboard-shortcuts)
 (in-suite gtk-keyboard-accelerators)
 
 ;;; --- Functions --------------------------------------------------------------

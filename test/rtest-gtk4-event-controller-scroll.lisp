@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-event-controller-scroll :in gtk-suite)
+(def-suite gtk-event-controller-scroll :in gtk-event-handling)
 (in-suite gtk-event-controller-scroll)
 
 ;;; --- Types and Values -------------------------------------------------------

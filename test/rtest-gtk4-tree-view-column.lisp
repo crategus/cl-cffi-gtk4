@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-tree-view-column :in gtk-suite)
+(def-suite gtk-tree-view-column :in gtk-deprecated)
 (in-suite gtk-tree-view-column)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -109,34 +109,36 @@
                         "x-offset" "gint" T NIL)))
              (gobject:get-gtype-definition "GtkTreeViewColumn"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-tree-view-column-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((column (make-instance 'gtk:tree-view-column)))
-      (is (= 0.0 (gtk:tree-view-column-alignment column)))
-      (is (typep (gtk:tree-view-column-cell-area column) 'gtk:cell-area-box))
-      (is-false (gtk:tree-view-column-clickable column))
-      (is-false (gtk:tree-view-column-expand column))
-      (is (= -1 (gtk:tree-view-column-fixed-width column)))
-      (is (= -1 (gtk:tree-view-column-max-width column)))
-      (is (= -1 (gtk:tree-view-column-min-width column)))
-      (is-false (gtk:tree-view-column-reorderable column))
-      (is-false (gtk:tree-view-column-resizable column))
-      (is (eq :grow-only (gtk:tree-view-column-sizing column)))
-      (is (= -1 (gtk:tree-view-column-sort-column-id column)))
-      (is-false (gtk:tree-view-column-sort-indicator column))
-      (is (eq :ascending (gtk:tree-view-column-sort-order column)))
-      (is (= 0 (gtk:tree-view-column-spacing column)))
-      (is (string= "" (gtk:tree-view-column-title column)))
-      (is-true (gtk:tree-view-column-visible column))
-      (is-false (gtk:tree-view-column-widget column))
-      (is (= 0 (gtk:tree-view-column-width column)))
-      (is (= 0 (gtk:tree-view-column-x-offset column))))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     clicked
+
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-tree-view-column-properties
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory (column :strong 1)
+        (setf column (make-instance 'gtk:tree-view-column))
+        (is (= 0.0 (gtk:tree-view-column-alignment column)))
+        (is (typep (gtk:tree-view-column-cell-area column) 'gtk:cell-area-box))
+        (is-false (gtk:tree-view-column-clickable column))
+        (is-false (gtk:tree-view-column-expand column))
+        (is (= -1 (gtk:tree-view-column-fixed-width column)))
+        (is (= -1 (gtk:tree-view-column-max-width column)))
+        (is (= -1 (gtk:tree-view-column-min-width column)))
+        (is-false (gtk:tree-view-column-reorderable column))
+        (is-false (gtk:tree-view-column-resizable column))
+        (is (eq :grow-only (gtk:tree-view-column-sizing column)))
+        (is (= -1 (gtk:tree-view-column-sort-column-id column)))
+        (is-false (gtk:tree-view-column-sort-indicator column))
+        (is (eq :ascending (gtk:tree-view-column-sort-order column)))
+        (is (= 0 (gtk:tree-view-column-spacing column)))
+        (is (string= "" (gtk:tree-view-column-title column)))
+        (is-true (gtk:tree-view-column-visible column))
+        (is-false (gtk:tree-view-column-widget column))
+        (is (= 0 (gtk:tree-view-column-width column)))
+        (is (= 0 (gtk:tree-view-column-x-offset column)))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -144,26 +146,31 @@
 
 (test gtk-tree-view-column-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:tree-view-column-new) 'gtk:tree-view-column))))
+    (glib-test:with-check-memory ()
+    (is (typep (gtk:tree-view-column-new) 'gtk:tree-view-column)))))
 
 ;;;     gtk_tree_view_column_new_with_area
 
 (test gtk-tree-view-column-new-with-area
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((box (gtk:cell-area-box-new)))
-      (is (typep (gtk:tree-view-column-new-with-area box)
-                 'gtk:tree-view-column)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((box 3) :strong 1)
+        (setf box (gtk:cell-area-box-new))
+        (is (typep (gtk:tree-view-column-new-with-area box)
+                   'gtk:tree-view-column))))))
 
 ;;;     gtk_tree_view_column_new_with_attributes
 
 (test gtk-tree-view-column-new-with-attributes
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((renderer (gtk:cell-renderer-text-new)))
-      (is (typep (gtk:tree-view-column-new-with-attributes "Example"
-                                                           renderer
-                                                           "text" 0
-                                                           "foreground" 1)
-                 'gtk:tree-view-column)))))
+  (when *first-run-testsuite*
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (glib-test:with-check-memory ((renderer 2) :strong 1)
+        (setf renderer (gtk:cell-renderer-text-new))
+        (is (typep (gtk:tree-view-column-new-with-attributes "Example"
+                                                             renderer
+                                                             "text" 0
+                                                             "foreground" 1)
+                   'gtk:tree-view-column))))))
 
 ;;;     gtk_tree_view_column_pack_start
 ;;;     gtk_tree_view_column_pack_end
@@ -212,4 +219,4 @@
 ;;;     gtk_tree_view_column_queue_resize
 ;;;     gtk_tree_view_column_get_tree_view
 
-;;; 2024-9-20
+;;; 2024-12-24

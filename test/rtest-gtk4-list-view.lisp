@@ -134,8 +134,11 @@
       (is (equal '("GtkColumnListView")
                  (glib-test:list-children "GtkListView"))))
   #+windows
-  (is (equal '()
-             (glib-test:list-children "GtkListView")))
+  (if *first-run-gtk-test*
+      (is (equal '()
+                 (glib-test:list-children "GtkListView")))
+      (is (equal '("GtkColumnListView")
+                 (glib-test:list-children "GtkListView"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkScrollable")

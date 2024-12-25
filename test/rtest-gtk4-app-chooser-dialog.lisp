@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-app-chooser-dialog :in gtk-suite)
+(def-suite gtk-app-chooser-dialog :in gtk-deprecated)
 (in-suite gtk-app-chooser-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -39,25 +39,29 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAppChooserDialog"
                                       GTK:APP-CHOOSER-DIALOG
-                       (:SUPERCLASS GTK:DIALOG
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkNative" "GtkRoot"
-                         "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_app_chooser_dialog_get_type")
-                       ((GFILE APP-CHOOSER-DIALOG-GFILE "gfile" "GFile" T NIL)
-                        (HEADING APP-CHOOSER-DIALOG-HEADING
-                         "heading" "gchararray" T T)))
+                      (:SUPERCLASS GTK:DIALOG
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkNative" "GtkRoot"
+                        "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_app_chooser_dialog_get_type")
+                      ((GFILE APP-CHOOSER-DIALOG-GFILE "gfile" "GFile" T NIL)
+                       (HEADING APP-CHOOSER-DIALOG-HEADING
+                        "heading" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkAppChooserDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-dialog-properties
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let ((dialog (make-instance 'gtk:app-chooser-dialog)))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog
+                       (make-instance 'gtk:app-chooser-dialog))
+                 'gtk:app-chooser-dialog))
       (is-false (gtk:app-chooser-dialog-gfile dialog))
-      (is-false (gtk:app-chooser-dialog-heading dialog)))))
+      (is-false (gtk:app-chooser-dialog-heading dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -65,4 +69,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; 2024-9-20
+;;; 2024-12-24

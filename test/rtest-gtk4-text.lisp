@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-text :in gtk-suite)
+(def-suite gtk-text :in gtk-data-entry)
 (in-suite gtk-text)
 
 ;;; --- Types and Values -------------------------------------------------------

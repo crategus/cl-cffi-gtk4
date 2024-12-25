@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-renderer-text :in gtk-suite)
+(def-suite gtk-cell-renderer-text :in gtk-deprecated)
 (in-suite gtk-cell-renderer-text)
 
 ;;; --- Types and Values -------------------------------------------------------

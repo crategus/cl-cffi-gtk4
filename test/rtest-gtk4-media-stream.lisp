@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-media-stream :in gtk-suite)
+(def-suite gtk-media-stream :in gtk-media-support)
 (in-suite gtk-media-stream)
 
 ;;; --- Types and Values -------------------------------------------------------

@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-file-chooser-dialog :in gtk-suite)
+(def-suite gtk-file-chooser-dialog :in gtk-deprecated)
 (in-suite gtk-file-chooser-dialog)
 
 ;;; --- Types and Values -------------------------------------------------------

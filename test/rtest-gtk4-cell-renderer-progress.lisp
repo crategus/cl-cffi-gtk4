@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-cell-renderer-progress :in gtk-suite)
+(def-suite gtk-cell-renderer-progress :in gtk-deprecated)
 (in-suite gtk-cell-renderer-progress)
 
 ;;; --- Types and Values -------------------------------------------------------

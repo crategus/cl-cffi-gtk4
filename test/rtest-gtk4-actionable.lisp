@@ -1,6 +1,6 @@
 (in-package :gtk-test)
 
-(def-suite gtk-actionable :in gtk-suite)
+(def-suite gtk-actionable :in gtk-interfaces)
 (in-suite gtk-actionable)
 
 ;;; --- GtkActionable ----------------------------------------------------------
