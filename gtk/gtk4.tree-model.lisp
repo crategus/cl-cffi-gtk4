@@ -1458,11 +1458,11 @@ lambda (model path iter new-order)    :run-first
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (cffi:with-foreign-object (value '(:struct g:value))
-    (gobject:value-init value)
+    (g:value-init value)
     (%tree-model-value model iter column value)
     (prog1
-      (gobject:parse-g-value value)
-      (gobject:value-unset value))))
+      (g:value-get value)
+      (g:value-unset value))))
 
 (export 'tree-model-value)
 
