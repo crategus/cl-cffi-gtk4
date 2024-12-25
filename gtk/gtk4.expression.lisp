@@ -124,13 +124,12 @@
 (defmethod cffi:translate-from-foreign (native (type expression))
   native)
 
-(defmethod gobject:parse-g-value-for-type
-    (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) kind)
-  (declare (ignore kind))
+(defmethod gobject:get-gvalue-for-type
+           (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))))
   (value-expression gvalue))
 
-(defmethod gobject:set-g-value-for-type
-    (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) value)
+(defmethod gobject:set-gvalue-for-type
+           (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) value)
   (setf (value-expression gvalue) value))
 
 #+liber-documentation

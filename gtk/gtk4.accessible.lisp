@@ -687,10 +687,9 @@
               (setf (cffi:mem-aref prop-ar 'accessible-property i) property)
               (g:value-init gvalue)
               (accessible-property-init-value property gvalue)
-              (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                                   value
-                                   (gobject:value-type gvalue)
-                                   :zero-gvalue t)))
+              (gobject:set-gvalue (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                  value
+                                  (gobject:value-type gvalue))))
       (%accessible-update-property-value accessible n prop-ar value-ar)
       (iter (for i from 0 below n)
             (gobject:value-unset (cffi:mem-aptr value-ar
@@ -737,10 +736,9 @@
               (setf (cffi:mem-aref relation-ar 'accessible-relation i) relation)
               (g:value-init gvalue)
               (accessible-relation-init-value relation gvalue)
-              (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                                   value
-                                   (gobject:value-type gvalue)
-                                   :zero-gvalue t)))
+              (gobject:set-gvalue (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                  value
+                                  (gobject:value-type gvalue))))
       (%accessible-update-relation-value accessible n relation-ar value-ar)
       (iter (for i from 0 below n)
             (gobject:value-unset (cffi:mem-aptr value-ar
@@ -787,10 +785,9 @@
               (setf (cffi:mem-aref state-ar 'accessible-state i) state)
               (g:value-init gvalue)
               (accessible-state-init-value state gvalue)
-              (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                                   value
-                                   (gobject:value-type gvalue)
-                                   :zero-gvalue t)))
+              (gobject:set-gvalue (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                  value
+                                  (gobject:value-type gvalue))))
       (%accessible-update-state-value accessible n state-ar value-ar)
       (iter (for i from 0 below n)
             (gobject:value-unset (cffi:mem-aptr value-ar
