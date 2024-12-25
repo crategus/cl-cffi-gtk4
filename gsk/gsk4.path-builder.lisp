@@ -94,7 +94,7 @@
   @end{declaration}
   @begin{short}
     The @class{gsk:path-builder} structure is an auxiliary structure for
-    constructing @class{gsk:path} instancs.
+    constructing @class{gsk:path} instances.
   @end{short}
 
   A path is constructed like this:

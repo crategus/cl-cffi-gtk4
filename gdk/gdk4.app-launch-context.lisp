@@ -110,16 +110,15 @@
 (setf (liber:alias-for-function 'app-launch-context-display)
       "Accessor"
       (documentation 'app-launch-context-display 'function)
- "@version{2023-4-7}
+ "@version{2024-12-20}
   @syntax{(gdk:app-launch-context-display object) => display}
-  @syntax{(setf (gdk:app-launch-context-display object) display)}
   @argument[object]{a @class{gdk:app-launch-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @code{display} slot of the @class{gdk:app-launch-context}
-    class.
+    Accessor of the @slot[gdk:app-launch-context]{display} slot of the
+    @class{gdk:app-launch-context} class.
   @end{short}
-  The @setf{gdk:app-launch-context-display} function gets the display that the
+  The @fun{gdk:app-launch-context-display} function gets the display that the
   launch context is for.
   @see-class{gdk:app-launch-context}
   @see-class{gdk:display}")

@@ -463,7 +463,7 @@ lambda (surface region)    :run-last
 (cffi:defcfun ("gdk_surface_new_toplevel" surface-new-toplevel)
     (g:object surface)
  #+liber-documentation
- "@version{2024-1-8}
+ "@version{2024-12-19}
   @argument[display]{a @class{gdk:display} object to create the surface on}
   @return{The new @class{gdk:surface} object.}
   @short{Creates a new toplevel surface.}
@@ -477,9 +477,10 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_new_popup
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_surface_new_popup" surface-new-popup) (g:object surface)
+(cffi:defcfun ("gdk_surface_new_popup" surface-new-popup)
+    (g:object surface)
  #+liber-documentation
- "@version{2024-1-8}
+ "@version{2024-12-19}
   @argument[parent]{a @class{gdk:surface} object with the parent surface to
     attach the surface to}
   @argument[autohide]{a boolean whether to hide the surface on outside clicks}
@@ -487,8 +488,8 @@ lambda (surface region)    :run-last
   @begin{short}
     Creates a new popup surface.
   @end{short}
-  The surface will be attached to parent and can be positioned relative to it
-  using the @fun{gdk:popup-present} function.
+  The surface will be attached to @arg{parent} and can be positioned relative
+  to it using the @fun{gdk:popup-present} function.
   @see-class{gdk:surface}
   @see-function{gdk:popup-present}"
   (parent (g:object surface))

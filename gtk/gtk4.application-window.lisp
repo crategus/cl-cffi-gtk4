@@ -259,6 +259,10 @@
 ;;; gtk_application_window_set_help_overlay
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: We have a problem with the memory management. When destroying the
+;; objects related to the GtkShortcutsWindow an error occured which crashes
+;; the testsuite.
+
 (defun (setf application-window-help-overlay) (overlay window)
   (cffi:foreign-funcall "gtk_application_window_set_help_overlay"
                         (g:object application-window) window
@@ -281,6 +285,8 @@
   window. The @setf{gtk:applicaton-window-help-overlay} function associates a
   shortcuts window with the application window, and sets up an action with the
   name @code{\"win.show-help-overlay\"} to present it.
+
+  The window takes responsibility for destroying the help overlay.
   @see-class{gtk:application-window}
   @see-class{gtk:shortcuts-window}"
   (window (g:object application-window)))
