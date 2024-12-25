@@ -245,9 +245,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_filter_new" tree-model-filter-new)
-    (g:object tree-model)
+    (g:object tree-model :return)
  #+liber-documentation
- "@version{2024-4-29}
+ "@version{2024-12-24}
   @argument[child]{a @class{gtk:tree-model} object}
   @argument[root]{a @class{gtk:tree-path} instance or @code{nil}}
   @return{The new @class{gtk:tree-model} object.}
