@@ -79,7 +79,7 @@
    :type-initializer "gtk_multi_filter_get_type")
   (#+gtk-4-8
    (item-type
-    %multi-filter-item-type   ; only internal not used
+    multi-filter-item-type
     "item-type" "GType" t nil)
    #+gtk-4-8
    (n-items
@@ -108,18 +108,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline multi-filter-item-type))
-
-#+gtk-4-8
-(defun multi-filter-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'multi-filter-item-type)
       "Accessor"
       (documentation 'multi-filter-item-type 'function)
- "@version{2024-9-28}
+ "@version{2024-12-22}
   @syntax{(gtk:multi-filter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -129,6 +122,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
@@ -149,7 +144,7 @@
 (setf (liber:alias-for-function 'multi-filter-n-items)
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
- "@version{2024-9-28}
+ "@version{2024-12-22}
   @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -158,6 +153,8 @@
     Accessor of the @slot[gtk:multi-filter]{n-items} slot of the
     @class{gtk:multi-filter} class.
   @end{short}
+
+  Since 4.8
   @see-class{gtk:multi-filter}
   @see-function{g:list-model-n-items}")
 

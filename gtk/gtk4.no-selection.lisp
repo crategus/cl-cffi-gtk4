@@ -75,7 +75,7 @@
    :type-initializer "gtk_no_selection_get_type")
   (#+gtk-4-8
    (item-type
-    %no-selection-item-type
+    no-selection-item-type
     "item-type" "GType" t nil)
    (model
     no-selection-model
@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'no-selection 'type)
- "@version{2023-9-6}
+ "@version{2024-12-22}
   @begin{short}
     The @class{gtk:no-selection} class is an implementation of the
     @class{gtk:selection-model} interface that does not allow selecting
@@ -111,18 +111,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline no-selection-item-type))
-
-#+gtk-4-8
-(defun no-selection-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'no-selection-item-type)
       "Accessor"
       (documentation 'no-selection-item-type 'function)
- "@version{2023-9-6}
+ "@version{2024-12-22}
   @syntax{(gtk:no-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -132,6 +125,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
@@ -179,7 +174,7 @@
 (setf (liber:alias-for-function 'no-selection-n-items)
       "Accessor"
       (documentation 'no-selection-n-items 'function)
- "@version{2023-9-6}
+ "@version{2024-12-22}
   @syntax{(gtk:no-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -188,6 +183,8 @@
     Accessor of the @slot[gtk:no-selection]{n-items} slot of the
     @class{gtk:no-selection} class.
   @end{short}
+
+  Since 4.8
   @see-class{gtk:no-selection}
   @see-function{g:list-model-n-items}")
 

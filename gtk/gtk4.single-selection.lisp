@@ -118,7 +118,7 @@
     "can-unselect" "gboolean" t t)
    #+gtk-4-8
    (item-type
-    %single-selection-item-type
+    single-selection-item-type
     "item-type" "GType" t nil)
    (model
     single-selection-model
@@ -136,7 +136,7 @@
 
 #+liber-documentation
 (setf (documentation 'single-selection 'type)
- "@version{2023-11-26}
+ "@version{2024-12-22}
   @begin{short}
     The @class{gtk:single-selection} class is an implementation of the
     @class{gtk:selection-model} interface that allows selecting a single
@@ -222,18 +222,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline single-selection-item-type))
-
-#+gtk-4-8
-(defun single-selection-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'single-selection-item-type)
       "Accessor"
       (documentation 'single-selection-item-type 'function)
- "@version{2023-9-6}
+ "@version{2024-11-22}
   @syntax{(gtk:single-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -243,6 +236,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}

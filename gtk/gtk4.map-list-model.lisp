@@ -82,7 +82,7 @@
     "has-map" "gboolean" t nil)
    #+gtk-4-8
    (item-type
-    %map-list-model-item-type
+    map-list-model-item-type
     "item-type" "Gtype" t nil)
    (model
     map-list-model-model
@@ -156,18 +156,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline map-list-model-item-type))
-
-#+gtk-4-8
-(defun map-list-model-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'map-list-model-item-type)
       "Accessor"
       (documentation 'map-list-model-item-type 'function)
- "@version{2024-12-15}
+ "@version{2024-12-22}
   @syntax{(gtk:map-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -177,6 +170,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}

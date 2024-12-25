@@ -386,7 +386,7 @@
     "autoexpand" "gboolean" t t)
    #+gtk-4-8
    (item-type
-    %tree-list-model-item-type
+    tree-list-model-item-type
     "item-type" "GType" t nil)
    (model
     tree-list-model-model
@@ -455,18 +455,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline tree-list-model-item-type))
-
-#+gtk-4-8
-(defun tree-list-model-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'tree-list-model-item-type)
       "Accessor"
       (documentation 'tree-list-model-item-type 'function)
- "@version{2024-10-17}
+ "@version{2024-12-22}
   @syntax{(gtk:tree-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:tree-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -476,6 +469,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}

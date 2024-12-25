@@ -170,7 +170,7 @@
    :type-initializer "gtk_string_list_get_type")
   (#+gtk-4-14
    (item-type
-    %string-list-item-type
+    string-list-item-type
     "item-type" "GType" t nil)
    #+gtk-4-14
    (n-items
@@ -238,13 +238,6 @@
  "The @code{item-type} property of type @class{g:type-t} (read) @br{}
   The type of items contained in the string list. Since 4.14")
 
-#+gtk-4-14
-(declaim (inline string-list-item-type))
-
-#+gtk-4-14
-(defun string-list-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'string-list-item-type)
       "Accessor"
@@ -258,6 +251,8 @@
     Accessor of the @slot[gtk:string-list]{item-type} slot of the
     @class{gtk:string-list} class.
   @end{short}
+
+  Since 4.14
   @see-class{gtk:string-list}
   @see-class{g:type-t}")
 

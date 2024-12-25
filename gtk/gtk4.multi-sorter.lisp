@@ -72,7 +72,7 @@
    :type-initializer "gtk_multi_sorter_get_type")
   (#+gtk-4-8
    (item-type
-    %multi-sorter-item-type
+    multi-sorter-item-type
     "item-type" "GType" t nil)
    #+gtk-4-8
    (n-items
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'multi-sorter 'type)
- "@version{2023-9-12}
+ "@version{2024-12-22}
   @begin{short}
     The @class{gtk:multi-sorter} object combines multiple sorters by trying
     them in turn.
@@ -104,18 +104,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline multi-sorter-item-type))
-
-#+gtk-4-8
-(defun multi-sorter-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'multi-sorter-item-type)
       "Accessor"
       (documentation 'multi-sorter-item-type 'function)
- "@version{2024-10-21}
+ "@version{2024-12-22}
   @syntax{(gtk:multi-sorter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -125,6 +118,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
@@ -145,7 +140,7 @@
 (setf (liber:alias-for-function 'multi-sorter-n-items)
       "Accessor"
       (documentation 'multi-sorter-n-items 'function)
- "@version{2024-10-21}
+ "@version{2024-12-22}
   @syntax{(gtk:multi-sorter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -154,6 +149,8 @@
     Accessor of the @slot[gtk:multi-sorter]{n-items} slot of the
     @class{gtk:multi-sorter} class.
   @end{short}
+
+  Since 4.8
   @see-class{gtk:multi-sorter}
   @see-function{g:list-model-n-items}")
 

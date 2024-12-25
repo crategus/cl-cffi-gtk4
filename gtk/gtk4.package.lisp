@@ -150,7 +150,7 @@
     @end{subsection}
     @begin[GtkMultiFilter]{subsection}
       @about-class{multi-filter}
-      @about-function{multi-filter-item-type}
+      @about-generic{multi-filter-item-type}
       @about-generic{multi-filter-n-items}
       @about-function{multi-filter-append}
       @about-function{multi-filter-remove}
@@ -205,7 +205,7 @@
     @end{subsection}
     @begin[GtkMultiSorter]{subsection}
       @about-class{multi-sorter}
-      @about-function{multi-sorter-item-type}
+      @about-generic{multi-sorter-item-type}
       @about-generic{multi-sorter-n-items}
       @about-function{multi-sorter-new}
       @about-function{multi-sorter-append}
@@ -253,7 +253,7 @@
     @end{subsection}
     @begin[GtkNoSelection]{subsection}
       @about-class{no-selection}
-      @about-function{no-selection-item-type}
+      @about-generic{no-selection-item-type}
       @about-generic{no-selection-model}
       @about-generic{no-selection-n-items}
       @about-function{no-selection-new}
@@ -263,7 +263,7 @@
       @about-class{single-selection}
       @about-generic{single-selection-autoselect}
       @about-generic{single-selection-can-unselect}
-      @about-function{single-selection-item-type}
+      @about-generic{single-selection-item-type}
       @about-generic{single-selection-model}
       @about-generic{single-selection-n-items}
       @about-generic{single-selection-selected}
@@ -272,7 +272,7 @@
     @end{subsection}
     @begin[GtkMultiSelection]{subsection}
       @about-class{multi-selection}
-      @about-function{multi-selection-item-type}
+      @about-generic{multi-selection-item-type}
       @about-generic{multi-selection-model}
       @about-generic{multi-selection-n-items}
       @about-function{multi-selection-new}
@@ -281,7 +281,7 @@
       @about-class{filter-list-model}
       @about-generic{filter-list-model-filter}
       @about-generic{filter-list-model-incremental}
-      @about-function{filter-list-model-item-type}
+      @about-generic{filter-list-model-item-type}
       @about-generic{filter-list-model-model}
       @about-generic{filter-list-model-n-items}
       @about-generic{filter-list-model-pending}
@@ -289,7 +289,7 @@
     @end{subsection}
     @begin[GtkFlattenListModel]{subsection}
       @about-class{flatten-list-model}
-      @about-function{flatten-list-model-item-type}
+      @about-generic{flatten-list-model-item-type}
       @about-generic{flatten-list-model-model}
       @about-generic{flatten-list-model-n-items}
       @about-function{flatten-list-model-new}
@@ -298,7 +298,7 @@
     @begin[GtkMapListModel]{subsection}
       @about-class{map-list-model}
       @about-generic{map-list-model-has-map}
-      @about-function{map-list-model-item-type}
+      @about-generic{map-list-model-item-type}
       @about-generic{map-list-model-model}
       @about-generic{map-list-model-n-items}
       @about-function{map-list-model-new}
@@ -307,7 +307,7 @@
     @end{subsection}
     @begin[GtkSliceListModel]{subsection}
       @about-class{slice-list-model}
-      @about-function{slice-list-model-item-type}
+      @about-generic{slice-list-model-item-type}
       @about-generic{slice-list-model-model}
       @about-generic{slice-list-model-n-items}
       @about-generic{slice-list-model-offset}
@@ -317,7 +317,7 @@
     @begin[GtkSortListModel]{subsection}
       @about-class{sort-list-model}
       @about-generic{sort-list-model-incremental}
-      @about-function{sort-list-model-item-type}
+      @about-generic{sort-list-model-item-type}
       @about-generic{sort-list-model-model}
       @about-generic{sort-list-model-n-items}
       @about-generic{sort-list-model-pending}
@@ -327,7 +327,7 @@
     @end{subsection}
     @begin[GtkSelectionFilterModel]{subsection}
       @about-class{selection-filter-model}
-      @about-function{selection-filter-model-item-type}
+      @about-generic{selection-filter-model-item-type}
       @about-generic{selection-filter-model-model}
       @about-generic{selection-filter-model-n-items}
       @about-function{selection-filter-model-new}
@@ -337,7 +337,7 @@
       @about-generic{bookmark-list-attributes}
       @about-generic{bookmark-list-filename}
       @about-generic{bookmark-list-io-priority}
-      @about-function{bookmark-list-item-type}
+      @about-generic{bookmark-list-item-type}
       @about-generic{bookmark-list-loading}
       @about-generic{bookmark-list-n-items}
       @about-function{bookmark-list-new}
@@ -349,7 +349,7 @@
       @about-generic{directory-list-error}
       @about-generic{directory-list-file}
       @about-generic{directory-list-io-priority}
-      @about-function{directory-list-item-type}
+      @about-generic{directory-list-item-type}
       @about-generic{directory-list-loading}
       @about-generic{directory-list-monitored}
       @about-generic{directory-list-n-items}
@@ -361,7 +361,7 @@
       @about-generic{string-object-string}
       @about-function{string-object-new}
       @about-class{string-list}
-      @about-function{string-list-item-type}
+      @about-generic{string-list-item-type}
       @about-generic{string-list-n-items}
       @about-function{string-list-new}
       @about-function{string-list-append}
@@ -799,7 +799,7 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-list-row-is-expandable}
       @about-class{tree-list-model}
       @about-generic{tree-list-model-autoexpand}
-      @about-function{tree-list-model-item-type}
+      @about-generic{tree-list-model-item-type}
       @about-generic{tree-list-model-model}
       @about-generic{tree-list-model-n-items}
       @about-generic{tree-list-model-passthrough}

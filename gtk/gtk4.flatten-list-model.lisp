@@ -75,7 +75,7 @@
    :type-initializer "gtk_flatten_list_model_get_type")
   (#+gtk-4-8
    (item-type
-    %flatten-list-model-item-type
+    flatten-list-model-item-type
     "item-type" "GType" t nil)
    (model
     flatten-list-model-model
@@ -112,18 +112,11 @@
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
-#+gtk-4-8
-(declaim (inline flatten-list-model-item-type))
-
-#+gtk-4-8
-(defun flatten-list-model-item-type (object)
-  (g:list-model-item-type object))
-
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'flatten-list-model-item-type)
       "Accessor"
       (documentation 'flatten-list-model-item-type 'function)
- "@version{2024-12-9}
+ "@version{2024-12-22}
   @syntax{(gtk:flatten-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -133,6 +126,8 @@
   @end{short}
   The type of items contained in the list model. Items must be subclasses of
   the @class{g:object} class.
+
+  Since 4.8
   @begin[Notes]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
