@@ -307,7 +307,6 @@ GTK Core Reference
   gtk4.version.lisp                    Version Information            GTK 4.16 .
   gtk4.settings.lisp                   GtkSettings                    Gtk 4.16 .
   gtk4.enumerations.lisp               Standard Enumerations          GTK 4.16 +
-  gtk4.mount-operation.lisp            Filesystem utilities           GTK 4.16 +
 
 Theming in GTK
 
