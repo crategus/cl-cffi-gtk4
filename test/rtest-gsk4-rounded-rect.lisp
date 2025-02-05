@@ -41,7 +41,7 @@
 (test gsk-rounded-rect-structure
   (cffi:with-foreign-object (rect '(:struct gsk:rounded-rect))
     (let (bounds corner)
-      ;; The structure holds 12 float values of size 4 Bytes
+      ;; The structure holds 12 single floats of size 4 Bytes
       (is (= 48 (cffi:foreign-type-size '(:struct gsk:rounded-rect))))
       ;; Get the pointer to the BOUNDS slot
       (is (cffi:pointerp (setf bounds

@@ -1031,7 +1031,7 @@
   @syntax{(gsk:stroke-dash stroke) => dash}
   @syntax{(setf (gsk:stroke-dash stroke) dash)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[dash]{a list of numbers coerced to float values with the dashes}
+  @argument[dash]{a list of numbers coerced to floats with the dashes}
   @begin{short}
     The @fun{gsk:stroke-dash} function gets the list of dashes in use or
     @code{nil} if dashing is disabled.
@@ -1276,12 +1276,12 @@
 
   A high-level summary of the syntax:
   @begin[code]{table}
-    @entry[M x y]{Move to @code{(x, y)}}
-    @entry[L x y]{Add a line from the current point to @code{(x, y)}}
+    @entry[M x y]{Move to @code{(x,y)}}
+    @entry[L x y]{Add a line from the current point to @code{(x,y)}}
     @entry[Q x1 y1 x2 y2]{Add a quadratic Bézier from the current point to
-      @code{(x2, y2)}, with control point @code{(x1, y1)}}
+      @code{(x2,y2)}, with control point @code{(x1,y1)}}
     @entry[C x1 y1 x2 y2 x3 y3]{Add a cubic Bézier from the current point to
-      @code{(x3, y3)}, with control points @code{(x1, y1)} and @code{(x2, y2)}}
+      @code{(x3,y3)}, with control points @code{(x1,y1)} and @code{(x2,y2)}}
     @entry[Z]{Close the contour by drawing a line back to the start point}
     @entry[H x]{Add a horizontal line from the current point to the given x
       value}
@@ -1291,10 +1291,10 @@
     @entry[S x2 y2 x3 y3]{Add a cubic Bézier, using the reflection of the
       previous segments’ second control point as first control point}
     @entry[A rx ry r l s x y]{Add an elliptical arc from the current point to
-      @code{(x, y)} with radii @code{rx} and @code{ry}. See the SVG
+      @code{(x,y)} with radii @code{rx} and @code{ry}. See the SVG
       documentation for how the other parameters influence the arc.}
     @entry[O x1 y1 x2 y2 w]{Add a rational quadratic Bézier from the current
-      point to @code{(x2, y2)} with control point @code{(x1, y1)} and weight
+      point to @code{(x2,y2)} with control point @code{(x1,y1)} and weight
       @code{w}.}
   @end{table}
   All the commands have lowercase variants that interpret coordinates relative

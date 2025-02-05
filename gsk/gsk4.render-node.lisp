@@ -1850,9 +1850,9 @@ color {
  "@version{2023-11-19}
   @argument[outline]{a @symbol{gsk:rounded-rect} instance describing the
     outline of the border}
-  @argument[widths]{a list with 4 float values with the stroke width of the
+  @argument[widths]{a list with 4 single floats for the stroke width of the
     border on the top, right, bottom, and left side respectively}
-  @argument[colors]{a list with 4 @class{gdk:rgba} instance with the color
+  @argument[colors]{a list with 4 @class{gdk:rgba} instances for the color
     used on the top, right, bottom, and left side}
   @return{The @class{gsk:border-node} instance.}
   @begin{short}
@@ -1904,7 +1904,7 @@ color {
  #+liber-documentation
  "@version{2023-11-19}
   @argument[node]{a @class{gsk:border-node} instance for a border}
-  @return{The list with 4 float values for the top, right, bottom, and
+  @return{The list with 4 single floats for the top, right, bottom, and
     left stroke width of the border, respectively.}
   @begin{short}
     Retrieves the stroke widths of the border.

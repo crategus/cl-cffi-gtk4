@@ -350,8 +350,8 @@
  #+liber-documentation
  "@version{2024-3-21}
   @argument[transform]{a @class{gtk:transform} instance}
-  @return{The @code{(xx xy yx yy dx dy)} list with the single float values of
-    the 2D transformation matrix.}
+  @return{The @code{(xx xy yx yy dx dy)} list with the single floats of the
+    2D transformation matrix.}
   @begin{short}
     Converts a @class{gsk:transform} instace to a 2D transformation matrix.
   @end{short}
@@ -400,7 +400,7 @@
  "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @return{The @code{(xskew yskew xscale yscale angle dx dy)} list with
-    single float values for the 2D transformation factors}
+    single floats for the 2D transformation factors.}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D transformation factors.
   @end{short}
@@ -453,8 +453,8 @@
  #+liber-documentation
  "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @code{(xscale yscale dx dy)} list of single float values with the
-    2D affine transformation factors}
+  @return{The @code{(xscale yscale dx dy)} list of single floats with the
+    2D affine transformation factors.}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D affine transformation
     factors.
@@ -484,7 +484,7 @@
  #+liber-documentation
  "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @code{(dx dy)} list with single float values for a translation
+  @return{The @code{(dx dy)} list with single floats for a translation
     operation.}
   @begin{short}
     Converts a @class{gsk:transform} instance to a translation operation.
