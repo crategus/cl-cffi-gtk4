@@ -268,7 +268,7 @@
 ;;;     gdk_display_get_monitors
 
 (test gdk-display-monitors
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 4)
     (let ((display (gdk:display-default)))
       (is (every (lambda (x) (typep x 'gdk:monitor))
                  (gdk:display-monitors display))))))

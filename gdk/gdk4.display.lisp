@@ -622,7 +622,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_app_launch_context" display-app-launch-context)
     (g:object app-launch-context :return)
  #+liber-documentation
- "@version{2024-10-8}
+ "@version{2025-1-1}
   @argument[display]{a @class{gdk:display} object}
   @begin{return}
     The new @class{gdk:app-launch-context} object for @arg{display}.
@@ -702,7 +702,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_list_seats" display-list-seats)
     (g:list-t (g:object seat))
  #+liber-documentation
- "@version{2023-1-7}
+ "@version{2025-1-11}
   @argument[display]{a @class{gdk:display} object}
   @return{The list of @class{gdk:seat} objects known to @arg{display}.}
   @begin{short}
@@ -996,11 +996,11 @@ lambda (display setting)    :run-last
 
 (defun display-translate-key (display keycode state group)
  #+liber-documentation
- "@version{2023-7-25}
+ "@version{2025-1-11}
   @argument[display]{a @class{gdk:display} object}
-  @argument[keycode]{an unsigned integer with the keycoce}
+  @argument[keycode]{an unsigned integer for the keycode}
   @argument[state]{a @symbol{gdk:modifier-type} state}
-  @argument[group]{an integer with the active keyboard group}
+  @argument[group]{an integer for the active keyboard group}
   @begin{return}
     @arg{keyval} - an unsigned integer with the keyval @br{}
     @arg{effective} - an integer with the effective group @br{}

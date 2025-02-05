@@ -288,10 +288,10 @@
 
 (defun draw-context-frame-region (context)
  #+liber-documentation
- "@version{2023-11-7}
+ "@version{2024-12-29}
   @argument[context]{a @class{gdk:draw-context} object}
-  @return{The @symbol{cairo:region-t} instance or @code{null-pointer} if not
-    drawing a frame.}
+  @return{The @symbol{cairo:region-t} instance or @code{cffi:null-pointer} if
+    not drawing a frame.}
   @begin{short}
     Retrieves the region that is currently in the process of being repainted.
   @end{short}
@@ -302,7 +302,7 @@
 
   If @arg{context} is not in between calls to the
   @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
-  functions, @code{null-pointer} will be returned.
+  functions, @code{cffi:null-pointer} will be returned.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.16. Drawing directly to the surface is
     no longer recommended. Use the @class{gsk:render-node} and

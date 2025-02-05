@@ -349,9 +349,9 @@ lambda (clock)    :run-last
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{return}
-    Inside frame processing, the unsigned integer value of the frame counter
-    for the current frame. Outside of frame processing, the frame counter for
-    the last frame.
+    Inside frame processing, the unsigned integer of the frame counter for the
+    current frame. Outside of frame processing, the frame counter for the last
+    frame.
   @end{return}
   @begin{short}
     A frame clock maintains a 64-bit counter that increments for each frame

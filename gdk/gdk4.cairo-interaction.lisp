@@ -101,8 +101,7 @@
     Sets the given @arg{pixbuf} as the source pattern for @arg{cr}.
   @end{short}
   The pattern has a @code{:none} extend mode of the @symbol{cairo:extend-t}
-  enumeration and is aligned so that the origin of the pixbuf is (@arg{x},
-  @arg{y}).
+  enumeration and is aligned so that the origin of the pixbuf is @code{(x,y)}.
   @see-symbol{cairo:context-t}
   @see-symbol{cairo:extend-t}
   @see-class{gdk-pixbuf:pixbuf}"
@@ -196,26 +195,26 @@
 
 (defun cairo-draw-from-gl (cr surface source type scale x y width height)
  #+liber-documentation
- "@version{#2024-7-16}
+ "@version{#2025-1-25}
   @argument[cr]{a @symbol{cairo:context-t} instance}
-  @argument[surface]{a @class{gdk:surface} object we are rendering for,
+  @argument[surface]{a @class{gdk:surface} object that is being rendered for,
     not necessarily into}
-  @argument[source]{an integer with the GL ID of the source buffer}
-  @argument[type]{an integer with the type of the source}
-  @argument[scale]{an integer with the scale factor that the source buffer is
+  @argument[source]{an integer for the GL ID of the source buffer}
+  @argument[type]{an integer for the type of the source}
+  @argument[scale]{an integer for the scale factor that the source buffer is
     allocated for}
-  @argument[x]{an integer with the source x position in source to start copying
+  @argument[x]{an integer for the source x position in source to start copying
     from in GL coordinates}
-  @argument[y]{an integer with the source y position in source to start copying
+  @argument[y]{an integer for the source y position in source to start copying
     from in GL coordinates}
-  @argument[width]{an integer with the width of the region to draw}
-  @argument[height]{an integer with the height of the region to draw}
+  @argument[width]{an integer for the width of the region to draw}
+  @argument[height]{an integer for the height of the region to draw}
   @begin{short}
     This is the main way to draw GL content in GTK.
   @end{short}
-  It takes a render buffer ID (@arg{type} == @code{GL_RENDERBUFFER}) or a
-  texture ID (@arg{type} == @code{GL_TEXTURE}) and draws it onto @arg{cr} with
-  an @code{OVER} operation, respecting the current clip. The top left corner of
+  It takes a render buffer ID @code{(type == GL_RENDERBUFFER)} or a texture ID
+  @code{(type == GL_TEXTURE)} and draws it onto @arg{cr} with an
+  @code{OVER} operation, respecting the current clip. The top left corner of
   the rectangle specified by @arg{x}, @arg{y}, @arg{width} and @arg{height}
   will be drawn at the current (0,0) position of the Cairo context.
 
