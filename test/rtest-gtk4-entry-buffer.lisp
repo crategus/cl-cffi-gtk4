@@ -47,17 +47,6 @@
                        (TEXT ENTRY-BUFFER-TEXT "text" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkEntryBuffer"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-entry-buffer-properties
-  (let ((buffer (make-instance 'gtk:entry-buffer)))
-    (is (= 0 (gtk:entry-buffer-length buffer)))
-    (signals (error) (setf (gtk:entry-buffer-length buffer) 10))
-    (is (=  0 (gtk:entry-buffer-max-length buffer)))
-    (is (= 10 (setf (gtk:entry-buffer-max-length buffer) 10)))
-    (is (string= "" (gtk:entry-buffer-text buffer)))
-    (is (string= "text" (setf (gtk:entry-buffer-text buffer) "text")))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     deleted-text
@@ -94,29 +83,47 @@
     (is (equal '("guint" "gchararray" "guint")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-entry-buffer-properties
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer (make-instance 'gtk:entry-buffer))
+               'gtk:entry-buffer))
+    (is (= 0 (gtk:entry-buffer-length buffer)))
+    (signals (error) (setf (gtk:entry-buffer-length buffer) 10))
+    (is (=  0 (gtk:entry-buffer-max-length buffer)))
+    (is (= 10 (setf (gtk:entry-buffer-max-length buffer) 10)))
+    (is (string= "" (gtk:entry-buffer-text buffer)))
+    (is (string= "text" (setf (gtk:entry-buffer-text buffer) "text")))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_entry_buffer_new
 
 (test gtk-entry-buffer-new
-  (is (typep (gtk:entry-buffer-new) 'gtk:entry-buffer))
-  (is (string= "" (gtk:entry-buffer-text (gtk:entry-buffer-new))))
-  (is (string= "This is text."
-               (gtk:entry-buffer-text (gtk:entry-buffer-new "This is text.")))))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer
+                     (gtk:entry-buffer-new)) 'gtk:entry-buffer))
+    (is (string= "" (gtk:entry-buffer-text (gtk:entry-buffer-new))))
+    (is (string= "This is text."
+                 (gtk:entry-buffer-text (gtk:entry-buffer-new "This is text."))))))
 
 ;;;     gtk_entry_buffer_get_bytes
 
 (test gtk-entry-buffer-bytes
-  (is (= 13 (gtk:entry-buffer-length (gtk:entry-buffer-new "This is text."))))
-  (is (= 13 (gtk:entry-buffer-bytes (gtk:entry-buffer-new "This is text."))))
-  (is (= 7 (gtk:entry-buffer-length (gtk:entry-buffer-new "Ägypten"))))
-  (is (= 8 (gtk:entry-buffer-bytes (gtk:entry-buffer-new "Ägypten")))))
+  (glib-test:with-check-memory ()
+    (is (= 13 (gtk:entry-buffer-length (gtk:entry-buffer-new "This is text."))))
+    (is (= 13 (gtk:entry-buffer-bytes (gtk:entry-buffer-new "This is text."))))
+    (is (= 7 (gtk:entry-buffer-length (gtk:entry-buffer-new "Ägypten"))))
+    (is (= 8 (gtk:entry-buffer-bytes (gtk:entry-buffer-new "Ägypten"))))))
 
 ;;;     gtk_entry_buffer_insert_text
 ;;;     gtk_entry_buffer_delete_text
 
 (test gtk-entry-buffer-insert/delete-text
-  (let ((buffer (make-instance 'gtk:entry-buffer)))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer (make-instance 'gtk:entry-buffer))
+               'gtk:entry-buffer))
     (is (string= "" (gtk:entry-buffer-text buffer)))
     ;; Insert text
     (is (= 7 (gtk:entry-buffer-insert-text buffer 0 "Ägypten")))
@@ -134,7 +141,9 @@
 ;;;   gtk_entry_buffer_emit_deleted_text
 
 (test gtk-entry-buffer-emit-deleted-text
-  (let ((buffer (gtk:entry-buffer-new "first second third")))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer (gtk:entry-buffer-new "first second third"))
+               'gtk:entry-buffer))
     (g:signal-connect buffer "deleted-text"
         (lambda (object position n-chars)
           (is (eq buffer object))
@@ -148,7 +157,9 @@
 ;;;   gtk_entry_buffer_emit_inserted_text
 
 (test gtk-entry-buffer-emit-inserted-text
-  (let ((buffer (gtk:entry-buffer-new "first second third")))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer
+                     (gtk:entry-buffer-new "first second third")) 'gtk:entry-buffer))
     (g:signal-connect buffer "inserted-text"
         (lambda (object position text n-chars)
           (is (eq buffer object))
@@ -158,4 +169,4 @@
           nil))
     (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
 
-;;; 2024-9-19
+;;; 2025-1-5

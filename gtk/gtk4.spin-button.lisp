@@ -346,16 +346,15 @@ lambda (button value)    :run-last
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
-        @entry[value]{The pointer to a double float with the return location for
-          the new value.}
+        @entry[value]{The pointer to a double float with the return location
+          for the new value.}
         @entry[Returns]{@em{True} for a successful conversion, @em{false} if
           the input was not handled, and -1 if the conversion failed.}
       @end{table}
       Can be used to influence the conversion of the users input into a double
-      float value. The signal handler is expected to use the
-      @fun{gtk:editable-text} function to retrieve the text of the text entry
-      and set @arg{value} to the new value. The default conversion uses the
-      @code{g_strtod()} function.
+      float. The signal handler is expected to use the @fun{gtk:editable-text}
+      function to retrieve the text of the text entry and set @arg{value} to
+      the new value. The default conversion uses the @code{g_strtod()} function.
     @subheading{The \"output\" signal}
       @begin{pre}
 lambda (button)    :run-last

@@ -3539,11 +3539,11 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_display" widget-display) (g:object gdk:display)
  #+liber-documentation
- "@version{2023-9-18}
+ "@version{2025-1-4}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{The @class{gdk:display} object for the toplevel for this widget.}
+  @return{The @class{gdk:display} object for the toplevel of this widget.}
   @begin{short}
-    Get the display for the toplevel window associated with the widget.
+    Gets the display for the toplevel window associated with the widget.
   @end{short}
   This function can only be called after the widget has been added to a widget
   hierarchy with a @class{gtk:window} widget at the top. In general, you should
@@ -4197,11 +4197,11 @@ lambda (widget)    :run-last
     relative to the origin of the widget}
   @argument[y]{a number coerced to a double float with the y coordinate to test,
     relative to the origin of the widget}
-  @return{@em{True} if @arg{widget} contains @code{(x, y)}.}
+  @return{@em{True} if @arg{widget} contains @code{(x,y)}.}
   @begin{short}
-    Tests if the point at @code{(x, y)} is contained in the widget.
+    Tests if the point at @code{(x,y)} is contained in the widget.
   @end{short}
-  The coordinates for @code{(x, y)} must be in widget coordinates, so
+  The coordinates for @code{(x,y)} must be in widget coordinates, so
   @code{(0, 0)} is assumed to be the top left of the content area of the widget.
   @see-class{gtk:widget}"
   (%widget-contains widget
@@ -4233,7 +4233,7 @@ lambda (widget)    :run-last
     @code{nil} if none.}
   @begin{short}
     Finds the descendant of @arg{widget}, including @arg{widget} itself,
-    closest to the screen at the point @code{(x, y)}.
+    closest to the screen at the point @code{(x,y)}.
   @end{short}
   The point must be given in widget coordinates, so @code{(0, 0)} is assumed to
   be the top left of the content area of the widget.
@@ -5584,7 +5584,7 @@ lambda (widget)    :run-last
  "@version{2024-5-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[prefix]{a string with the prefix for actions in @arg{group}}
-  @argument[group]{a @class{g:action-group} object}
+  @argument[group]{a @class{g:action-group} instance}
   @begin{short}
     Inserts an action group into @arg{widget}.
   @end{short}

@@ -210,14 +210,14 @@
     (g:object page-setup :return)
  #+liber-documentation
  "@version{2024-4-30}
-  @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
+  @argument[variant]{a @symbol{g:variant} parameter of @code{a{sv@}} type}
   @return{The new @class{gtk:page-setup} object.}
   @begin{short}
     Deserialize a page setup from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:page-setup-to-gvariant} function.
   @end{short}
   @see-class{gtk:page-setup}
-  @see-type{g:variant}
+  @see-symbol{g:variant}
   @see-function{gtk:page-setup-to-gvariant}"
   (variant (:pointer (:struct g:variant))))
 
@@ -689,12 +689,12 @@
  #+liber-documentation
  "@version{2024-4-30}
   @argument[setup]{a @class{gtk:page-setup} object}
-  @return{The new @type{g:variant} instance of @code{a{sv@}} type.}
+  @return{The new @symbol{g:variant} parameter of @code{a{sv@}} type.}
   @begin{short}
     Serialize the page setup to a @code{a{sv@}} variant.
   @end{short}
   @see-class{gtk:page-setup}
-  @see-type{g:variant}"
+  @see-symbol{g:variant}"
   (setup (g:object page-setup)))
 
 (export 'page-setup-to-gvariant)

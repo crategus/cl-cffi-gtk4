@@ -27,12 +27,12 @@
              (glib-test:list-enum-item-nicks "GtkUnit")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkUnit" GTK:UNIT
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_unit_get_type")
-                       (:NONE 0)
-                       (:POINTS 1)
-                       (:INCH 2)
-                       (:MM 3))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_unit_get_type")
+                      (:NONE 0)
+                      (:POINTS 1)
+                      (:INCH 2)
+                      (:MM 3))
              (gobject:get-gtype-definition "GtkUnit"))))
 
 ;;;     GtkPaperSize
@@ -252,4 +252,4 @@ Height=297
     (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new-from-gvariant value))))
     (is (string= "iso_a4" (gtk:paper-size-name (gtk:paper-size-new-from-gvariant value))))))
 
-;;; 2024-9-20
+;;; 2025-1-6

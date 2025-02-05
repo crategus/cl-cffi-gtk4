@@ -149,7 +149,7 @@ Buttons and Toggles
 Numeric and Text Data Entry
 
   gtk4.editable.lisp                   GtkEditable                    GTK 4.16 &
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16 .
   gtk4.text.lisp                       GtkText                        GTK 4.16
   gtk4.entry.lisp                      GtkEntry                       GTK 4.16
   gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16
@@ -388,4 +388,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2024-11-9
+2025-1-5

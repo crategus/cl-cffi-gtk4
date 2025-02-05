@@ -1563,7 +1563,7 @@ GtkEntry.entry { ... @}
   @argument[y1]{a number, coerced to a double float, with the y coordinate for
     the end of the line}
   @begin{short}
-    Renders a line from (@arg{x0}, @arg{y0}) to (@arg{x1}, @arg{y1}).
+    Renders a line from @code{(x0,y0)} to @code{(x1,y1)}.
   @end{short}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly

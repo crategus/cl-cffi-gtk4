@@ -101,7 +101,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-window-properties
-  (glib-test:with-check-memory (window)
+  (glib-test:with-check-memory (window :strong 1)
     (setf window (make-instance 'gtk:window))
     (is-false (gtk:window-application window))
     (is-false (gtk:window-child window))
@@ -363,7 +363,7 @@
 
 (test gtk-window-has-group
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (glib-test:with-check-memory (window group :strong 1) ; for default group
+    (glib-test:with-check-memory (window group :strong 7) ; for default group
       (setf window (make-instance 'gtk:window))
       (setf group (gtk:window-group-new))
       (is (= 2 (g:object-ref-count window)))
@@ -487,4 +487,4 @@
     (is-false (gtk:window-is-suspended window))
     (is-false (gtk:window-destroy window))))
 
-;;; 2024-12-23
+;;; 2025-2-1

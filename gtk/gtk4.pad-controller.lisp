@@ -141,7 +141,7 @@
   Each of the actions that a given button/strip/ring performs for a given mode
   is defined by the arguments of the @fun{gtk:pad-controller-set-action}
   function, it contains an action name that will be looked up in the given
-  @class{g:action-group} object and activated whenever the specified input
+  @class{g:action-group} instance and activated whenever the specified input
   element and mode are triggered.
   @begin[Examples]{dictionary}
     A simple example of @class{gtk:pad-controller} usage, assigning button 1 in
@@ -193,7 +193,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
   @syntax{(gtk:pad-controller-action-group object) => group}
   @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
-  @argument[group]{a @class{g:action-group} object}
+  @argument[group]{a @class{g:action-group} instance}
   @begin{short}
     Accessor of the @slot[gtk:pad-controller]{action-group} slot of the
     @class{gtk:pad-controller} class.
@@ -233,7 +233,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
     (g:object pad-controller :return)
  #+liber-documentation
  "@version{2024-4-5}
-  @argument[group]{a @class{g:action-group} object to trigger actions from}
+  @argument[group]{a @class{g:action-group} instance to trigger actions from}
   @argument[pad]{a @class{gdk:device} object of @code{:tablet-pad} type, or
     @code{nil} to handle all pads}
   @return{The newly created @class{gtk:pad-controller} object.}
@@ -306,7 +306,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
   @argument[label]{a string with the Human readable description of the action,
     the string should be deemed user visible}
   @argument[name]{a string with the action name that will be activated in the
-    @class{g:action-group} object}
+    @class{g:action-group} instance}
   @begin{short}
     Adds an individual action to @arg{controller}.
   @end{short}

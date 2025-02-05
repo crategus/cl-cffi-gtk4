@@ -1492,7 +1492,7 @@ lambda (view)    :action
   function is reduced by a margin of size @arg{margin}.
   @begin[Notes]{dictionary}
     The double float arguments take any number. The numbers are coerced to
-    double float values.
+    double floats.
   @end{dictionary}
   @see-class{gtk:text-view}
   @see-class{gtk:text-mark}"
@@ -1549,7 +1549,7 @@ lambda (view)    :action
   to after line validation.
   @begin[Notes]{dictionary}
     The double float arguments take any number. The numbers are coerced to
-    double float values.
+    double floats.
   @end{dictionary}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}

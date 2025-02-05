@@ -533,7 +533,7 @@
      (g:object print-settings :return)
  #+liber-documentation
  "@version{2024-2-18}
-  @argument[variant]{an @code{a{sv@}} @type{g:variant} instance}
+  @argument[variant]{a @code{a{sv@}} @symbol{g:variant} parameter}
   @return{The restored @class{gtk:print-settings} object.}
   @begin{short}
     Deserialize print settings from a @code{a{sv@}} variant in the format
@@ -562,7 +562,7 @@
     @end{pre}
   @end{dictionary}
   @see-class{gtk:print-settings}
-  @see-type{g:variant}
+  @see-symbol{g:variant}
   @see-function{gtk:print-settings-to-gvariant}"
   (variant (:pointer (:struct g:variant))))
 
@@ -772,14 +772,14 @@
   @syntax{(gtk:print-settings-double settings key) => value}
   @syntax{(setf (gtk:print-settings-double settings key) value)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[value]{a double float value}
+  @argument[key]{a string for a key}
+  @argument[value]{a double float}
   @begin{short}
-    The @fun{gtk:print-settings-double} function gets the double float value of
+    The @fun{gtk:print-settings-double} function gets the double float for
     @arg{key}, or 0.
   @end{short}
   The function @setf{gtk:print-settings-double} function sets @arg{key} to a
-  double float value.
+  double float.
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-double-with-default}"
   (settings (g:object print-settings))
@@ -886,10 +886,10 @@
   @argument[key]{a string with a key}
   @argument[value]{an integer with the value}
   @begin{short}
-    The @fun{gtk:print-settings-int} function returns the integer value of
-    @arg{key}, or 0.
+    The @fun{gtk:print-settings-int} function returns the integer for @arg{key},
+    or 0.
   @end{short}
-  The @setf{gtk:print-settings-int} function sets @arg{key} to an integer value.
+  The @setf{gtk:print-settings-int} function sets @arg{key} to an integer.
   @see-class{gtk:print-settings}
   @see-class{gtk:print-settings-int-with-default}"
   (settings (g:object print-settings))
@@ -908,9 +908,9 @@
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[key]{a string with a key}
   @argument[default]{an integer with the default value}
-  @return{The integer value of @arg{key}.}
+  @return{The integer for @arg{key}.}
   @begin{short}
-    Returns the value of @arg{key}, interpreted as an integer, or the default
+    Returns the value for @arg{key}, interpreted as an integer, or the default
     value.
   @end{short}
   @see-class{gtk:print-settings}
@@ -1904,12 +1904,12 @@
  #+liber-documentation
  "@version{2024-2-18}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @return{The new @type{g:variant} instance of @code{a{sv@}} type.}
+  @return{The new @symbol{g:variant} parameter of @code{a{sv@}} type.}
   @begin{short}
     Serialize print settings to a @code{a{sv@}} variant.
   @end{short}
   @see-class{gtk:print-settings}
-  @see-type{g:variant}
+  @see-symbol{g:variant}
   @see-function{gtk:print-settings-new-from-gvariant}"
   (settings (g:object print-settings)))
 

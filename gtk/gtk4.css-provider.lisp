@@ -291,18 +291,13 @@
 
 ;; TODO: Allow a GFile, a pathname or a namestring
 
-(cffi:defcfun ("gtk_css_section_new" %css-section-new)
+(cffi:defcfun ("gtk_css_section_new" css-section-new)
     (g:boxed css-section :return)
-  (file g:object)
-  (start (:pointer (:struct css-location)))
-  (end (:pointer (:struct css-location))))
-
-(defun css-section-new (file start end)
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2025-1-12}
   @argument[file]{a pathname or namestring for the file this section refers to}
-  @argument[start]{a @symbol{gtk:css-location} instance with the start location}
-  @argument[end]{a @symbol{gtk:css-location} instance with the end location}
+  @argument[start]{a @symbol{gtk:css-location} instance for the start location}
+  @argument[end]{a @symbol{gtk:css-location} instance for the end location}
   @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
@@ -310,8 +305,9 @@
   @end{short}
   @see-class{gtk:css-section}
   @see-symbol{gtk:css-location}"
-  (let ((file (cffi:convert-to-foreign file 'g:file-as-namestring)))
-    (%css-section-new file start end)))
+  (file g:file-as-namestring)
+  (start (:pointer (:struct css-location)))
+  (end (:pointer (:struct css-location))))
 
 (export 'css-section-new)
 
@@ -500,7 +496,7 @@
 
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2024-11-5}
+ "@version{2025-1-11}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -567,7 +563,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-new ()
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2025-1-11}
   @return{The new @class{gtk:css-provider} object.}
   @short{Returns a newly created CSS provider object.}
   @see-class{gtk:css-provider}"
@@ -581,7 +577,7 @@ lambda (provider section error)    :run-last
 
 (cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
- "@version{2023-4-15}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
   @return{The string representing the CSS provider.}
   @begin{short}
@@ -609,10 +605,10 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-named (provider name &optional variant)
  #+liber-documentation
- "@version{2024-8-16}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[name]{a string with the theme name}
-  @argument[variant]{an optional string with a variant to load, for example,
+  @argument[name]{a string for the theme name}
+  @argument[variant]{an optional string for a variant to load, for example,
     a \"dark\" variant}
   @begin{short}
     Loads a theme from the usual theme paths.
@@ -639,9 +635,9 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
- "@version{2023-10-4}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[data]{a string with the CSS data}
+  @argument[data]{a string for the CSS data}
   @begin{short}
     Loads data into the CSS provider, making it clear any previously loaded
     information.
@@ -668,7 +664,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file)
     :void
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[file]{a @class{g:file} object pointing to a file to load}
   @begin{short}
@@ -695,9 +691,9 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-path (provider path)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[path]{a pathname or namestring with the path of a file to load, in
+  @argument[path]{a pathname or namestring for the path of a file to load, in
     the GLib filename encoding}
   @begin{short}
     Loads the data contained in @arg{path} into the CSS provider, making it
@@ -717,9 +713,9 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_resource"
                css-provider-load-from-resource) :void
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[path]{a string with the resource path}
+  @argument[path]{a string for the resource path}
   @begin{short}
     Loads the data contained in the resource at @arg{path} into the CSS
     provider, clearing any previously loaded information.
@@ -741,7 +737,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_bytes" css-provider-load-from-bytes)
     :void
  #+liber-documentation
- "@version{2023-12-16}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a @class{g:bytes} instance containing the CSS data to load}
   @begin{short}
@@ -765,9 +761,9 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_string"
                css-provider-load-from-string) :void
  #+liber-documentation
- "@version{2023-12-16}
+ "@version{2025-1-11}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[str]{a string with the CSS data to load}
+  @argument[str]{a string for the CSS data to load}
   @begin{short}
     Loads data into the CSS provider.
   @end{short}

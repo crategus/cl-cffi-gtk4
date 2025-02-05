@@ -237,7 +237,7 @@
 
 ;;; --- gtk:picture-alternative-text -------------------------------------------
 
-;; TODO: To unset the text we have to use the NULL-POINTER value. For use
+;; TODO: To unset the text we have to use the CFFI:NULL-POINTER value. For use
 ;; of the NIL value we have to implement a new SETF function.
 
 #+liber-documentation

@@ -1173,7 +1173,7 @@ lambda (view)    :action
   @begin{return}
     @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
     @arg{cell} -- a @class{gtk:cell-renderer} object responsible for the
-    cell at (x, y), or @code{nil} if no item exists at the specified position
+    cell at (x,y), or @code{nil} if no item exists at the specified position
   @end{return}
   @begin{short}
     Gets the path and cell for the icon at the given position.
@@ -1549,21 +1549,21 @@ lambda (view)    :action
                                  &key (row-align 0.5 row-align-p)
                                       (col-align 0.5 col-align-p))
  #+liber-documentation
- "@version{#2023-1-28}
+ "@version{#2025-1-11}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[path]{a @class{gtk:tree-path} instance of the item to move to}
-  @argument[row-align]{a float with the vertical alignment of the item
-    specified by path}
-  @argument[col-align]{a float with the horizontal alignment of the item
-    specified by path}
+  @argument[path]{a @class{gtk:tree-path} instance for the item to move to}
+  @argument[row-align]{a number coerced to a single float for the vertical
+    alignment of the item specified by path}
+  @argument[col-align]{a number coerced to a single float for the horizontal
+    alignment of the item specified by path}
   @begin{short}
     Moves the alignments of @arg{view} to the position specified by @arg{path}.
   @end{short}
   The @arg{row-align} argument determines where the row is placed, and the
   @arg{col-align} argument determines where the column is placed. Both are
-  expected to be between 0.0 and 1.0. 0.0 means left/top alignment, 1.0 means
-  right/bottom alignment, 0.5 means center. The keyword arguments have the
-  default value 0.5.
+  expected to be between 0.0 and 1.0. The 0.0 value means left/top alignment,
+  the 1.0 value means right/bottom alignment, the 0.5 value means center. The
+  keyword arguments have the default 0.5 value.
 
   If both @arg{row-align} and @arg{col-align} arguments are @code{nil}, then
   the alignment arguments are ignored, and the tree does the minimum amount of
@@ -1583,8 +1583,8 @@ lambda (view)    :action
   (%icon-view-scroll-to-path view
                              path
                              (or row-align-p col-align-p)
-                             row-align
-                             col-align))
+                             (coerce row-align 'single-float)
+                             (coerce col-align 'single-float)))
 
 (export 'icon-view-scroll-to-path)
 
@@ -1600,12 +1600,12 @@ lambda (view)    :action
 
 (defun icon-view-visible-range (view)
  #+liber-documentation
- "@version{#2023-1-28}
+ "@version{#2025-1-11}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
-    @code{start} -- a @class{gtk:tree-path} instance with the start of region,
-      or @code{nil} @br{}
-    @code{end} -- a @class{gtk:tree-path} instance with the end of region,
+    @code{start} -- a @class{gtk:tree-path} instance with the start of the
+      region, or @code{nil} @br{}
+    @code{end} -- a @class{gtk:tree-path} instance with the end of the region,
       or  @code{nil}
   @end{return}
   @begin{short}

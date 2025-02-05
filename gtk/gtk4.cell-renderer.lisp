@@ -1072,15 +1072,15 @@ lambda (renderer editable path)    :run-first
   @syntax{(gtk:cell-renderer-alignment cell) => xalign, yalign}
   @syntax{(setf (gtk:cell-renderer-alignment cell) (list xalign yalign))}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[xalign]{a float with the x alignment of the cell renderer}
-  @argument[yalign]{a float with the y alignment of the cell renderer}
+  @argument[xalign]{a single float for the x alignment of the cell renderer}
+  @argument[yalign]{a single float for the y alignment of the cell renderer}
   @begin{short}
     The @fun{gtk:cell-renderer-alignment} function returns the appropriate
     @arg{xalign} and @arg{yalign} values of the cell renderer.
   @end{short}
   The @setf{gtk:cell-renderer-alignment} function sets the alignment of the
   cell renderer within its available space.The @arg{xalign} and @arg{yalign}
-  values are coerced to float values before assignment.
+  values are coerced to single floats before assignment.
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((xalign :float) (yalign :float))
     (%cell-renderer-alignment cell xalign yalign)

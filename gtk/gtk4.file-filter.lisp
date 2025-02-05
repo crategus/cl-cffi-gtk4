@@ -259,14 +259,14 @@
     (g:object file-filter :return)
  #+liber-documentation
  "@version{2024-8-21}
-  @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
+  @argument[variant]{a @symbol{g:variant} parameter of @code{a{sv@}} type}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Deserialize a file filter from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:file-filter-to-gvariant} function.
   @end{short}
   @see-class{gtk:file-filter}
-  @see-type{g:variant}
+  @see-symbol{g:variant}
   @see-function{gtk:file-filter-to-gvariant}"
   (variant (:pointer (:struct g:variant))))
 
@@ -387,10 +387,10 @@
  #+liber-documentation
  "@version{2024-8-21}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @return{The new @type{g:variant} instance.}
+  @return{The new @symbol{g:variant} parameter.}
   @short{Serialize a file filter to a @code{a{sv@}} variant.}
   @see-class{gtk:file-filter}
-  @see-type{g:variant}"
+  @see-symbol{g:variant}"
   (filter (g:object file-filter)))
 
 (export 'file-filter-to-gvariant)

@@ -146,9 +146,9 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "arguments" 'shortcut) t)
- "The @code{arguments} property of type @type{g:variant} (Read / Write) @br{}
+ "The @code{arguments} property of type @symbol{g:variant} (Read / Write) @br{}
   Arguments passed to activation. @br{}
-  Default value: @code{null-pointer}")
+  Default value: @code{cffi:null-pointer}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-arguments)
@@ -158,7 +158,7 @@
   @syntax{(gtk:shortcut-arguments object) => args)}
   @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
-  @argument[args]{a @type{g:variant} value to pass when activating the
+  @argument[args]{a @symbol{g:variant} parameter to pass when activating the
     shortcut}
   @begin{short}
     Accessor of the @slot[gtk:shortcut]{arguments} slot of the
@@ -168,7 +168,7 @@
   when activating the shortcut. The @setf{gtk:shortcut-arguments} function sets
   the arguments.
   @see-class{gtk:shortcut}
-  @see-type{g:variant}")
+  @see-symbol{g:variant}")
 
 ;;; --- gtk:shortcut-trigger ---------------------------------------------------
 

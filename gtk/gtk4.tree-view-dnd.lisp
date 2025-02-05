@@ -319,7 +319,7 @@
 (cffi:defcfun ("gtk_tree_create_row_drag_content" tree-create-row-drag-content)
     (g:object gdk:content-provider)
  #+liber-documentation
- "@version{#2025-5-1}
+ "@version{#2024-5-1}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[path]{a @class{gtk:tree-path} instance with a row in @arg{model}}
   @return{The new @class{gdk:content-provider} object.}

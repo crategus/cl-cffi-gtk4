@@ -2181,7 +2181,7 @@ lambda (view)    :action
     @arg{ycell} -- an integer with the y coordinate relative to the cell
   @end{return}
   @begin{short}
-    Finds the path at the point @code{(x, y)}, relative to bin window
+    Finds the path at the point @code{(x,y)}, relative to bin window
     coordinates.
   @end{short}
   That is, @arg{x} and @arg{y} are relative to an events coordinates. Widget
@@ -2253,8 +2253,8 @@ lambda (view)    :action
       or @code{nil}
   @end{return}
   @begin{short}
-    Determine whether the point @code{(x, y)} in the tree view is blank,
-    that is no cell content nor an expander arrow is drawn at the location.
+    Determine whether the point @code{(x,y)} in the tree view is blank, that
+    is no cell content nor an expander arrow is drawn at the location.
   @end{short}
   If so, the location can be considered as the background. You might wish to
   take special action on clicks on the background, such as clearing a current

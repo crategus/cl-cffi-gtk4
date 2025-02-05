@@ -79,16 +79,16 @@
   (let ((frame (gtk:frame-new "label")))
     ;; The default value is 0.0
     (is (= 0.0 (gtk:frame-label-xalign frame)))
-    ;; Set float value
+    ;; Set float
     (is (= 1.0 (setf (gtk:frame-label-xalign frame) 1.0)))
     (is (= 1.0 (gtk:frame-label-xalign frame)))
-    ;; Set integer value
+    ;; Set integer
     (is (= 1.0 (setf (gtk:frame-label-xalign frame) 1)))
     (is (= 1.0 (gtk:frame-label-xalign frame)))
-    ;; Set rational value
+    ;; Set rational
     (is (= 0.5 (setf (gtk:frame-label-xalign frame) 1/2)))
     (is (= 0.5 (gtk:frame-label-xalign frame)))
-    ;; Set double float value
+    ;; Set double float
     (is (= 0.3d0 (setf (gtk:frame-label-xalign frame) 0.3d0)))
     (is (= 0.3 (gtk:frame-label-xalign frame)))))
 

@@ -984,10 +984,12 @@ pixel = transpose(matrix) * pixel + offset
   @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
     the border}
   @argument[color]{a @class{gdk:rgba} instance with the color of the method}
-  @argument[dx]{a float with the horizontal offset of shadow}
-  @argument[dy]{a float with the vertical offset of shadow}
-  @argument[spread]{a float value how far the shadow spreads towards the inside}
-  @argument[radius]{a float value how much blur to apply to the shadow}
+  @argument[dx]{a single float for the horizontal offset of shadow}
+  @argument[dy]{a single float for the vertical offset of shadow}
+  @argument[spread]{a single float representing how far the shadow spreads
+    towards the inside}
+  @argument[radius]{a single float representing how much blur to apply to the
+    shadow}
   @begin{short}
     Appends an inset shadow into the box given by @arg{outline}.
   @end{short}
@@ -1026,16 +1028,17 @@ pixel = transpose(matrix) * pixel + offset
  #+liber-documentation
  "@version{#2024-11-10}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
+  @argument[outline]{a @symbol{gsk:rounded-rect} instance for the outline of
     the region surrounded by the shadow}
-  @argument[color]{a @class{gdk:rgba} instance with the color of the shadow}
-  @argument[dx]{a number coerced to a float with the horizontal offset of
+  @argument[color]{a @class{gdk:rgba} instance for the color of the shadow}
+  @argument[dx]{a number coerced to a single float for the horizontal offset of
     shadow}
-  @argument[dy]{a number coerced to a float with the vertical offset of shadow}
-  @argument[spread]{a number coerced to a float representing how far the shadow
-    spreads towards the outside}
-  @argument[radius]{a number coerced to a float value how much blur to apply to
-    the shadow}
+  @argument[dy]{a number coerced to a single float for the vertical offset of
+    shadow}
+  @argument[spread]{a number coerced to a single float representing how far the
+    shadow spreads towards the outside}
+  @argument[radius]{a number coerced to a single float representing how much
+    blur to apply to the shadow}
   @begin{short}
     Appends an outset shadow node around the box given by @arg{outline}.
   @end{short}

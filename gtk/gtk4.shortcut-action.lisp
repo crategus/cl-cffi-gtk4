@@ -224,7 +224,7 @@
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
   @argument[flags]{a @symbol{gtk:shortcut-action-flags} value}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[args]{an array of @type{g:variant} values to pass}
+  @argument[args]{an array of @symbol{g:variant} parameters to pass}
   @return{@em{True} if the action was activaed successfully.}
   @begin{short}
     Activates the action on the widget with the given @arg{args}.
@@ -237,7 +237,7 @@
   activation otherwise had no effect, @em{false} will be returned.
   @see-class{gtk:shortcut-action}
   @see-class{gtk:widget}
-  @see-type{g:variant}
+  @see-symbol{g:variant}
   @see-symbol{gtk:shortcut-action-flags}"
   (action (g:object shortcut-action))
   (flags shortcut-action-flags)
@@ -320,7 +320,8 @@
  "@version{2024-11-1}
   @syntax{lambda (widget args)}
   @argument[widget]{a @class{gtk:widget} object passed to the activation}
-  @argument[args]{an array of @type{g:variant} values passed to the activation}
+  @argument[args]{an array of @symbol{g:variant} parameters passed to the
+    activation}
   @begin{short}
     Prototype for shortcuts based on user callbacks.
   @end{short}

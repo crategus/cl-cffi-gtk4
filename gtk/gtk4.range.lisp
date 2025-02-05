@@ -163,7 +163,7 @@ lambda (range scroll value)    :run-last
         @entry[range]{The @class{gtk:range} widget that received the signal.}
         @entry[scroll]{The @symbol{gtk:scroll-type} value of scroll action that
           was performed.}
-        @entry[value]{The double float value resulting from the scroll action.}
+        @entry[value]{The double float resulting from the scroll action.}
         @entry[Returns]{@em{True} to prevent other handlers from being invoked
           for the signal, @em{false} to propagate the signal further.}
       @end{table}
@@ -479,7 +479,7 @@ lambda (range)    :run-last
     between @arg{min} and @arg{max}.
   @end{short}
   If the range has a non-zero page size, it is clamped between @arg{min} and
-  @code{(@arg{max} - @code{page-size})}.
+  @code{(max - page-size)}.
   @see-class{gtk:range}"
   (setf (adjustment-lower (range-adjustment range)) min
         (adjustment-upper (range-adjustment range)) max))

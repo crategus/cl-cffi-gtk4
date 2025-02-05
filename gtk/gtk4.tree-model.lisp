@@ -46,14 +46,14 @@
 ;;;     gtk_tree_path_new
 ;;;     gtk_tree_path_new_first
 ;;;     gtk_tree_path_new_from_indices
-;;;     gtk_tree_path_new_from_indicesv
+;;;     gtk_tree_path_new_from_indicesv                     not needed
 ;;;     gtk_tree_path_new_from_string
 ;;;     gtk_tree_path_append_index
 ;;;     gtk_tree_path_prepend_index
 ;;;     gtk_tree_path_get_depth
 ;;;     gtk_tree_path_get_indices
-;;;     gtk_tree_path_get_indices_with_depth
-;;;     gtk_tree_path_free
+;;;     gtk_tree_path_get_indices_with_depth                not needed
+;;;     gtk_tree_path_free                                  not needed
 ;;;     gtk_tree_path_copy
 ;;;     gtk_tree_path_compare
 ;;;     gtk_tree_path_next
@@ -65,15 +65,15 @@
 ;;;     gtk_tree_path_to_string
 ;;;
 ;;;     gtk_tree_row_reference_new
-;;;     gtk_tree_row_reference_new_proxy
+;;;     gtk_tree_row_reference_new_proxy                    not implemented
 ;;;     gtk_tree_row_reference_get_model
 ;;;     gtk_tree_row_reference_get_path
 ;;;     gtk_tree_row_reference_valid
-;;;     gtk_tree_row_reference_free
+;;;     gtk_tree_row_reference_free                         not needed
 ;;;     gtk_tree_row_reference_copy
-;;;     gtk_tree_row_reference_inserted
-;;;     gtk_tree_row_reference_deleted
-;;;     gtk_tree_row_reference_reordered
+;;;     gtk_tree_row_reference_inserted                     not implemented
+;;;     gtk_tree_row_reference_deleted                      not implemented
+;;;     gtk_tree_row_reference_reordered                    not implemented
 ;;;
 ;;;     gtk_tree_iter_copy
 ;;;     gtk_tree_iter_free
@@ -271,14 +271,16 @@
 (setf (liber:alias-for-class 'tree-path)
       "GBoxed"
       (documentation 'tree-path 'type)
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @begin{declaration}
 (glib:define-gboxed-opaque tree-path \"GtkTreePath\"
   :export t
   :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
   @end{declaration}
-  @short{No description available.}
+  @begin{short}
+    An opaque structure representing a path to a row in a model.
+  @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -301,7 +303,7 @@
 
 (cffi:defcfun ("gtk_tree_path_new" tree-path-new) (g:boxed tree-path :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @return{The newly created @class{gtk:tree-path} instance.}
   @short{Creates a new tree path.}
   @begin[Warning]{dictionary}
@@ -319,7 +321,7 @@
 (cffi:defcfun ("gtk_tree_path_new_first" tree-path-new-first)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @return{The new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path.}
   The string representation of this tree path is \"0\".
@@ -337,7 +339,7 @@
 
 (defun tree-path-new-from-indices (&rest indices)
  #+liber-documentation
- "@version{2024-5-3}
+ "@version{2025-1-11}
   @argument[indices]{integers for the indices}
   @return{The newly created @class{gtk:tree-path} instance.}
   @begin{short}
@@ -354,22 +356,9 @@
 (export 'tree-path-new-from-indices)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_new_from_indicesv ()
-;;;
-;;; GtkTreePath *
-;;; gtk_tree_path_new_from_indicesv (gint *indices,
-;;;                                  gsize length);
+;;; gtk_tree_path_new_from_indicesv                         not needed
 ;;;
 ;;; Creates a new path with the given indices array of length .
-;;;
-;;; indices :
-;;;     array of indices.
-;;;
-;;; length :
-;;;     length of indices array
-;;;
-;;; Returns :
-;;;     A newly created GtkTreePath
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -379,7 +368,7 @@
 (cffi:defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[pathstr]{a string representation of a path}
   @return{The newly created @class{gtk:tree-path} instance, or @code{nil}.}
   @begin{short}
@@ -408,7 +397,7 @@
 
 (cffi:defcfun ("gtk_tree_path_copy" tree-path-copy) (g:boxed tree-path :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path as a copy of @arg{path}.}
@@ -433,9 +422,9 @@
 
 (defun tree-path-append-index (path index)
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
-  @argument[index]{an integer with the index}
+  @argument[index]{an integer for the index}
   @return{The @class{gtk:tree-path} instance.}
   @short{Appends a new index to the tree path.}
   As a result, the depth of @arg{path} is increased.
@@ -462,9 +451,9 @@
 
 (defun tree-path-prepend-index (path index)
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
-  @argument[index]{an integer with the index}
+  @argument[index]{an integer for the index}
   @return{The @class{gtk:tree-path} instance.}
   @short{Prepends a new index to the tree path.}
   As a result, the depth of @arg{path} is increased.
@@ -485,7 +474,7 @@
 
 (cffi:defcfun ("gtk_tree_path_get_depth" tree-path-depth) :int
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The integer with the depth of @arg{path}.}
   @short{Returns the current depth of the tree path.}
@@ -507,7 +496,7 @@
 
 (defun tree-path-indices (path)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The list of integers with the current indices, or @code{nil}.}
   @short{Returns the current indices of the tree path.}
@@ -527,39 +516,14 @@
 (export 'tree-path-indices)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_get_indices_with_depth ()
-;;;
-;;; gint *
-;;; gtk_tree_path_get_indices_with_depth (GtkTreePath *path, gint *depth)
+;;; gtk_tree_path_get_indices_with_depth                    not needed
 ;;;
 ;;; Returns the current indices of path.
-;;;
-;;; This is an array of integers, each representing a node in a tree. It also
-;;; returns the number of elements in the array. The array should not be freed.
-;;;
-;;; path :
-;;;     a GtkTreePath
-;;;
-;;; depth :
-;;;     return location for number of elements returned in the integer array,
-;;;     or NULL
-;;;
-;;; Returns :
-;;;     The current indices, or NULL
 ;;; ----------------------------------------------------------------------------
 
-;; not needed
-
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_free                                     not exported
+;;; gtk_tree_path_free                                      not needed
 ;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_tree_path_free" tree-path-free) :void
- #+liber-documentation
- "@version{#2013-5-12}
-  @argument[path]{a @class{gtk:tree-path} object}
-  @short{Frees path. If path is NULL, it simply returns.}"
-  (path (g:boxed tree-path)))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_path_compare
@@ -567,7 +531,7 @@
 
 (cffi:defcfun ("gtk_tree_path_compare" tree-path-compare ) :int
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path1]{a @class{gtk:tree-path} instance}
   @argument[path2]{a @class{gtk:tree-path} instance to compare with}
   @return{The integer with the relative positions of @arg{path1} and
@@ -595,7 +559,7 @@
 
 (defun tree-path-next (path)
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The new @class{gtk:tree-path} instance.}
   @short{Moves @arg{path} to point to the next node at the current depth.}
@@ -620,7 +584,7 @@
 
 (defun tree-path-prev (path)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The @class{gtk:tree-path} instance to point to the previous node,
     if it exists, otherwise @code{nil}.}
@@ -649,7 +613,7 @@
 
 (defun tree-path-up (path)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The @class{gtk:tree-path} instance to point to the parent node, if it
     has a parent, otherwise @code{nil}.}
@@ -677,7 +641,7 @@
 
 (defun tree-path-down (path)
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @begin{short}
     Moves @arg{path} to point to the first child of the current tree path.
@@ -700,7 +664,7 @@
 
 (cffi:defcfun ("gtk_tree_path_is_ancestor" tree-path-is-ancestor) :boolean
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[descendant]{another @class{gtk:tree-path} instance}
   @return{@em{True} if @arg{descendant} is contained inside @arg{path}.}
@@ -724,7 +688,7 @@
 
 (cffi:defcfun ("gtk_tree_path_is_descendant" tree-path-is-descendant) :boolean
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[ancestor]{another @class{gtk:tree-path} instance}
   @return{@em{True} if @arg{ancestor} contains @arg{path} somewhere below it.}
@@ -748,7 +712,7 @@
 
 (cffi:defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The string with the representation of the tree path.}
   @short{Generates a string representation of the tree path.}
@@ -777,7 +741,7 @@
 (setf (liber:alias-for-class 'tree-row-reference)
       "GBoxed"
       (documentation 'tree-row-reference 'type)
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @begin{declaration}
 (glib:define-gboxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
   :export t
@@ -798,7 +762,8 @@
   @end{dictionary}
   @see-constructor{gtk:tree-row-reference-new}
   @see-constructor{gtk:tree-row-reference-copy}
-  @see-class{gtk:tree-path}")
+  @see-class{gtk:tree-path}
+  @see-function{gtk:tree-row-reference-new}")
 
 (export 'tree-row-reference)
 
@@ -809,7 +774,7 @@
 (cffi:defcfun ("gtk_tree_row_reference_new" tree-row-reference-new)
     (g:boxed tree-row-reference :return)
  #+liber-documentation
- "@version{2025-5-1}
+ "@version{2025-1-11}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[path]{a valid @class{gtk:tree-path} instance to monitor}
   @return{The newly allocated @class{gtk:tree-row-reference} instance, or
@@ -832,46 +797,9 @@
 (export 'tree-row-reference-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_row_reference_new_proxy ()
-;;;
-;;; GtkTreeRowReference *
-;;; gtk_tree_row_reference_new_proxy (GObject *proxy,
-;;;                                   GtkTreeModel *model,
-;;;                                   GtkTreePath *path);
+;;; gtk_tree_row_reference_new_proxy
 ;;;
 ;;; You do not need to use this function.
-;;;
-;;; Creates a row reference based on path.
-;;;
-;;; This reference will keep pointing to the node pointed to by path, so long as
-;;; it exists. If path isn't a valid path in model, then NULL is returned.
-;;; However, unlike references created with gtk_tree_row_reference_new(), it
-;;; does not listen to the model for changes. The creator of the row reference
-;;; must do this explicitly using gtk_tree_row_reference_inserted(),
-;;; gtk_tree_row_reference_deleted(), gtk_tree_row_reference_reordered().
-;;;
-;;; These functions must be called exactly once per proxy when the corresponding
-;;; signal on the model is emitted. This single call updates all row references
-;;; for that proxy. Since built-in GTK objects like GtkTreeView already use
-;;; this mechanism internally, using them as the proxy object will produce
-;;; unpredictable results. Further more, passing the same object as model and
-;;; proxy does not work for reasons of internal implementation.
-;;;
-;;; This type of row reference is primarily meant by structures that need to
-;;; carefully monitor exactly when a row reference updates itself, and is not
-;;; generally needed by most applications.
-;;;
-;;; proxy :
-;;;     a proxy GObject
-;;;
-;;; model :
-;;;     a GtkTreeModel
-;;;
-;;; path :
-;;;     a valid GtkTreePath to monitor
-;;;
-;;; Returns :
-;;;     a newly allocated GtkTreeRowReference, or NULL
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -881,7 +809,7 @@
 (cffi:defcfun ("gtk_tree_row_reference_copy" tree-row-reference-copy)
     (g:boxed tree-row-reference :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{The @class{gtk:tree-row-reference} instance.}
   @short{Copies a tree row reference.}
@@ -901,7 +829,7 @@
 (cffi:defcfun ("gtk_tree_row_reference_get_model" tree-row-reference-model)
     (g:object tree-model)
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{The @class{gtk:tree-model} object.}
   @short{Returns the model that the row reference is monitoring.}
@@ -922,7 +850,7 @@
 (cffi:defcfun ("gtk_tree_row_reference_get_path" tree-row-reference-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{2024-5-1}
+ "@version{2025-1-11}
   @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{The current @class{gtk:tree-path} instance, or @code{nil}.}
   @begin{short}
@@ -945,7 +873,7 @@
 
 (cffi:defcfun ("gtk_tree_row_reference_valid" tree-row-reference-valid) :boolean
  #+liber-documentation
- "@version{2023-1-27}
+ "@version{2025-1-11}
   @argument[reference]{a @class{gtk:tree-row-reference}, or @code{nil}}
   @return{@em{True} if @arg{reference} points to a valid path.}
   @begin{short}
@@ -962,69 +890,30 @@
 (export 'tree-row-reference-valid)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_row_reference_free ()
-;;;
-;;; void gtk_tree_row_reference_free (GtkTreeRowReference *reference);
+;;; gtk_tree_row_reference_free                             not needed
 ;;;
 ;;; Free's reference. reference may be NULL
-;;;
-;;; reference :
-;;;     a GtkTreeRowReference, or NULL
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_row_reference_inserted ()
-;;;
-;;; void gtk_tree_row_reference_inserted (GObject *proxy, GtkTreePath *path);
+;;; gtk_tree_row_reference_inserted
 ;;;
 ;;; Lets a set of row reference created by gtk_tree_row_reference_new_proxy()
 ;;; know that the model emitted the "row-inserted" signal.
-;;;
-;;; proxy :
-;;;     a GObject
-;;;
-;;; path :
-;;;     the row position that was inserted
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_row_reference_deleted ()
-;;;
-;;; void gtk_tree_row_reference_deleted (GObject *proxy, GtkTreePath *path);
+;;; gtk_tree_row_reference_deleted
 ;;;
 ;;; Lets a set of row reference created by gtk_tree_row_reference_new_proxy()
 ;;; know that the model emitted the "row-deleted" signal.
-;;;
-;;; proxy :
-;;;     a GObject
-;;;
-;;; path :
-;;;     the path position that was deleted
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_row_reference_reordered ()
-;;;
-;;; void
-;;; gtk_tree_row_reference_reordered (GObject *proxy,
-;;;                                   GtkTreePath *path,
-;;;                                   GtkTreeIter *iter,
-;;;                                   gint *new_order);
+;;; gtk_tree_row_reference_reordered
 ;;;
 ;;; Lets a set of row reference created by gtk_tree_row_reference_new_proxy()
 ;;; know that the model emitted the "rows-reordered" signal.
-;;;
-;;; proxy :
-;;;     a GObject
-;;;
-;;; path :
-;;;     the parent path of the reordered signal
-;;;
-;;; iter :
-;;;     the iter pointing to the parent of the reordered
-;;;
-;;; new_order :
-;;;     the new order of rows
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------

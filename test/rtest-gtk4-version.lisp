@@ -19,7 +19,7 @@
 
 #-windows
 (test gtk-micro-version
-  (is (= 2 (gtk:micro-version))))
+  (is (= 3 (gtk:micro-version))))
 
 #+windows
 (test gtk-micro-version
@@ -35,4 +35,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2024-12-18
+;;; 2025-2-1

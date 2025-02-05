@@ -290,7 +290,7 @@
     Gets the number of values that were added to the bitset.
   @end{short}
   For example, if the bitset is empty, 0 is returned. Note that this function
-  returns an unsigned 64-bit integer value, because when all values are set, the
+  returns an unsigned 64-bit integer, because when all values are set, the
   return value is @code{#xffffffff} + 1. Unless you are sure this cannot happen,
   it cannot with the @class{g:list-model} object, be sure to use a 64-bit
   integer type.
@@ -316,8 +316,8 @@
     Gets the number of values that are part of the bitset from @arg{first} to
     @arg{last} (inclusive).
   @end{short}
-  Note that this function returns an unsigned 64-bit integer value, because when
-  all values are set, the return value is @code{#xffffffff} + 1. Unless you are
+  Note that this function returns an unsigned 64-bit integer, because when all
+  values are set, the return value is @code{#xffffffff} + 1. Unless you are
   sure this cannot happen, it cannot with the @class{g:list-model} object, be
   sure to use a 64-bit integer type.
   @see-class{gtk:bitset}

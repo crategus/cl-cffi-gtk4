@@ -499,8 +499,8 @@ lambda (levelbar name)    :detailed
  #+liber-documentation
  "@version{#2023-8-24}
   @argument[levelbar]{a @class{gtk:level-bar} widget}
-  @argument[name]{a string with the name of the new offset}
-  @argument[value]{a double float value for the new offset}
+  @argument[name]{a string for the name of the new offset}
+  @argument[value]{a double float for the new offset}
   @begin{short}
     Adds a new offset marker on the level bar at the position specified by
     @arg{value}.
@@ -554,8 +554,8 @@ lambda (levelbar name)    :detailed
  #+liber-documentation
  "@version{#2023-8-24}
   @argument[levelbar]{a @class{gtk:level-bar} widget}
-  @argument[name]{a string with the name of an offset in the level bar}
-  @return{The double float value which specified the offset marker.}
+  @argument[name]{a string for the name of an offset in the level bar}
+  @return{The double float which specified the offset marker.}
   @begin{short}
     Fetches the value specified for the offset marker @arg{name} in the level
     bar, returning @code{nil} in case an offset named @arg{name} was not found.

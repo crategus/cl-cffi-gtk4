@@ -420,7 +420,7 @@
   @return{The keyword for the given @arg{response} value.}
   @begin{short}
     The @fun{gtk:response-type-keyword} function is an utility function which
-    returns the corresponding keyword for an integer value of the
+    returns the corresponding keyword for an integer of the
     @symbol{gtk:response-type} enumeration.
   @end{short}
   @begin[Notes]{dictionary}
@@ -1106,8 +1106,8 @@
   @end{short}
   These values can be used with the @symbol{g:compare-data-func} callback
   function. However, the @symbol{g:compare-data-func} function is allowed to
-  return any integer values. For converting such a value to a
-  @symbol{gtk:ordering} value, use the @fun{gtk:ordering-from-cmpfunc} function.
+  return any integers. For converting such a value to a @symbol{gtk:ordering}
+  value, use the @fun{gtk:ordering-from-cmpfunc} function.
   @see-function{g:compare-data-func}
   @see-function{gtk:ordering-from-cmpfunc}")
 

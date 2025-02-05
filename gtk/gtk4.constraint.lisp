@@ -332,7 +332,7 @@ target.target_attr = source.source_attr × multiplier + constant
   (Read / Write / Construct only) @br{}
   The strength of the constraint. The strength can be expressed either using
   one of the symbolic values of the @symbol{gtk:constraint-strength}
-  enumeration, or any positive integer value. @br{}
+  enumeration, or any positive integer. @br{}
   Allowed values: [0, 1001001000] @br{}
   Default value: 1001001000")
 
