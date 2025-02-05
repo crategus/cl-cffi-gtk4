@@ -1,4 +1,4 @@
-;;;; Application Notification - 2023-6-10
+;;;; Application Notification - 2024-12-28
 
 ;; FIXME: This examples does not seem to work as expected. Try to work out an
 ;; example that demonstrates the usage of the g:notification class.
@@ -15,7 +15,8 @@
     (g:signal-connect app "startup"
         (lambda (application)
           ;; Add action "clear-all" to the application
-          (let ((action (g:simple-action-new "clear-all" nil)))
+          (let ((action (g:simple-action-new "app.clear-all" nil)))
+            (format t "~&in STARTUP for application~%")
             (g:signal-connect action "activate"
                 (lambda (action parameter)
                   (declare (ignore action parameter))
@@ -25,18 +26,30 @@
     (g:signal-connect app "activate"
         (lambda (application)
           ;; Create an application window
-          (let ((window (make-instance 'gtk:application-window
+          (let* ((button (gtk:button-new-with-label "Send message"))
+                 (window (make-instance 'gtk:application-window
                                        :application application
                                        :title "Application Notification"
+                                       :child button
                                        :default-width 480
-                                       :default-height 300))
-                (msg (g:notification-new "Three lines of text")))
-            ;; Add more information to the notification
-            (g:notification-set-body msg "Keep up the good work.")
-            (g:notification-add-button msg "Start over " "app.clear-all")
-            ;; Send the notification to the application
-            (g:application-send-notification application "three-lines" msg)
+                                       :default-height 300)))
+            (format t "~&in ACTIVATE for application~%")
+            (g:signal-connect button "clicked"
+                    (lambda (button)
+                      (declare (ignore button))
+                      (let ((msg (g:notification-new "Three lines of text")))
+                        (format t "~&Send notification~%")
+                        ;; Add more information to the notification
+                        (g:notification-set-body msg "Keep up the good work.")
+                        (g:notification-add-button msg "Start over "
+                                                       "app.clear-all")
+                        (g:notification-set-default-action msg "app.clear-all")
+                        (g:application-send-notification application
+                                                       "three-lines"
+                                                       msg))))
             ;; Show the application window
-            (gtk:widget-show window))))
+            (gtk:window-present window))))
+    (when (not (g:application-register app))
+      (format t "~&Registration of the application failed.~%"))
     ;; Run the application
     (g:application-run app argv)))

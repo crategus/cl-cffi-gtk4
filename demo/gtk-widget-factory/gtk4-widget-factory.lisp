@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4-widget-factory.lisp
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),

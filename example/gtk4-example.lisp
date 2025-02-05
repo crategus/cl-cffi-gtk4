@@ -62,6 +62,7 @@
 
            ;; List-based widgets
            #:do-list-view-applauncher
+           #:do-list-view-recentinfo
            #:do-grid-view-clocks
            #:do-grid-view-colors
            #:do-drop-down

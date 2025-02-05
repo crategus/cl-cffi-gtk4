@@ -58,7 +58,7 @@
                      (gtk:text-view-iter-at-location view xbuffer ybuffer)))
       (follow-if-link view iter)))))
 
-;; Looks at all tags covering the position (x, y) in the text view, and if one
+;; Looks at all tags covering the position (x,y) in the text view, and if one
 ;; of them is a link, change the cursor to the "hands" cursor typically used by
 ;; web browsers.
 (let ((hovering-over-link nil))

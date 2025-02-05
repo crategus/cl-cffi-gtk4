@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4-print-editor.lisp
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -22,15 +22,13 @@
 ;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Improve this example: Store the print settings. Do more error handling.
-
 (defpackage :gtk4-print-editor
   (:use :iterate :common-lisp)
   (:export :gtk4-print-editor))
 
 (in-package :gtk4-print-editor)
 
-(defparameter *ui-info*
+(defparameter *menu*
 "<interface>
   <menu id='menubar'>
     <submenu>
@@ -89,7 +87,7 @@
 ;; Improve this code. Make an application class which contains the globals
 
 (defvar *filename* nil)
-(defvar *file-changed* nil)
+(defvar *buffer-changed* nil)
 (defvar *buffer* nil)
 (defvar *window* nil)
 (defvar *statusbar* nil)
@@ -118,9 +116,8 @@
          (col (gtk:text-iter-line-offset iter))
          (msg (format nil "Row ~a, Col ~a~a"
                           row col
-                          (if *file-changed* " - Modfied" ""))))
-    (gtk:statusbar-pop statusbar 0)
-    (gtk:statusbar-push statusbar 0 msg)))
+                          (if *buffer-changed* " - Modfied" ""))))
+    (setf (gtk:label-label (gtk:center-box-start-widget statusbar)) msg)))
 
 (defun clear-buffer (buffer)
   (multiple-value-bind (start end)
@@ -136,7 +133,7 @@
       (gtk:text-buffer-insert buffer :cursor line)
       ;; We add an extra newline at the end of the file. Improve this!?
       (gtk:text-buffer-insert buffer :cursor (format nil "~%"))))
-  (setf *file-changed* nil)
+  (setf *buffer-changed* nil)
   (update-title *window*)
   (update-statusbar *statusbar*))
 
@@ -145,7 +142,7 @@
                                    :if-exists :supersede
                                    :if-does-not-exist :create)
     (write-sequence (gtk:text-buffer-text buffer) stream))
-    (setf *file-changed* nil)
+    (setf *buffer-changed* nil)
     (update-statusbar *statusbar*))
 
 (defstruct print-data
@@ -187,6 +184,7 @@
 (defun draw-page (operation context page-nr data)
   (declare (ignore operation))
   (format t "in DRAW-PAGE for page ~a~%" page-nr)
+  (format t " pagebreaks : ~a~%" (print-data-pagebreaks data))
   (let* ((start (if (= 0 page-nr)
                     0
                     (elt (print-data-pagebreaks data) (1- page-nr))))
@@ -195,11 +193,15 @@
                   pagebreak
                   (pango:layout-line-count (print-data-layout data))))
          (cr (gtk:print-context-cairo-context context)))
+
+    (format t " start : ~a~%" start)
+    (format t "   end : ~a~%" end)
+    (format t " break : ~a~%" pagebreak)
+
     (cairo:set-source-rgb cr 0 0 0)
     (let ((iter (pango:layout-iter (print-data-layout data)))
           (startpos 0))
       (iter (for i from 0)
-            (while (and (< i end) (pango:layout-iter-next-line iter)))
             (when (>= i start)
               (let ((line (pango:layout-iter-line iter))
                     (baseline (pango:layout-iter-baseline iter)))
@@ -211,7 +213,8 @@
                       (setf startpos (/ y 1024)))
                       (cairo:move-to cr (/ x 1024)
                                         (- (/ baseline 1024) startpos))
-                      (pango:cairo-show-layout-line cr line)))))))))
+                      (pango:cairo-show-layout-line cr line)))))
+            (while (and (< i end) (pango:layout-iter-next-line iter)))))))
 
 (defun create-custom-widget (operation data)
   (format t "in CREAGE-CUSTOM-WIDGET~%")
@@ -238,7 +241,6 @@
   (format t "in CUSTOM-WIDGET-APPLY~%")
   (setf (print-data-font data)
         (gtk:font-chooser-font (print-data-fontbutton data))))
-
 
 (defun print-done (operation result data)
   (declare (ignore operation result data))
@@ -299,24 +301,14 @@
 
 (defun activate-save-as (action parameter)
   (declare (ignore action parameter))
-  (format t "in ACTIVATE-SAVE-AS~%")
-  (let ((dialog (gtk:file-chooser-dialog-new "Select file"
-                                             *window*
-                                             :save
-                                             "_Cancel" :cancel
-                                             "_Save" :ok)))
-    (gtk:dialog-set-default-response dialog :ok)
-    (setf (gtk:window-modal dialog) t)
-    (g:signal-connect dialog "response"
-                      (lambda (dialog response)
-                        (format t "in RESPONSE ~a~%" response)
-                        (when (= -5 response) ; for :ok
-                          (setf *filename*
-                                (gtk:file-chooser-namestring dialog))
-                          (format t "save to filename : ~a~%" *filename*)
-                          (save-file-buffer *buffer* *filename*))
-                        (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+  (let ((dialog (gtk:file-dialog-new)))
+    (gtk:file-dialog-save dialog *window* nil
+            (lambda (source result)
+              (let ((file (gtk:file-dialog-save-finish source result)))
+                (setf *filename* (g:file-path file))
+                (setf *buffer-changed* nil)
+                (update-title *window*)
+                (save-file-buffer *buffer* *filename*))))))
 
 (defun activate-save (action parameter)
   (if *filename*
@@ -325,30 +317,18 @@
 
 (defun activate-open (action parameter)
   (declare (ignore action parameter))
-  (format t "in ACTIVATE-OPEN~%")
-  (let ((dialog (gtk:file-chooser-dialog-new "Select file"
-                                             *window*
-                                             :open
-                                             "_Cancel" :cancel
-                                             "_Open" :ok)))
-    (gtk:dialog-set-default-response dialog :ok)
-    (setf (gtk:window-modal dialog) t)
-    (g:signal-connect dialog "response"
-                      (lambda (dialog response)
-                        (format t "in RESPONSE ~a~%" response)
-                        (when (= -5 response) ; for :ok
-                          (setf *filename*
-                                (gtk:file-chooser-namestring dialog))
-                          (format t "new filename : ~a~%" *filename*)
-                          (load-file-buffer *buffer* *filename*))
-                        (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+  (let ((dialog (gtk:file-dialog-new)))
+    (gtk:file-dialog-open dialog *window* nil
+            (lambda (source result)
+              (let ((file (gtk:file-dialog-open-finish source result)))
+                (setf *filename* (g:file-path file))
+                (load-file-buffer *buffer* *filename*))))))
 
 (defun activate-new (action parameter)
   (declare (ignore action parameter))
   (setf (gtk:text-buffer-text *buffer*) "")
   (setf *filename* nil)
-  (setf *file-changed* nil)
+  (setf *buffer-changed* nil)
   (update-statusbar *statusbar*)
   (update-title *window*))
 
@@ -376,20 +356,18 @@
       (gtk:window-destroy window))))
 
 (defun print-editor-startup (application)
-  (format t "in STARTUP~%")
   (let ((accels (list "app.new" "<Control>n"
                       "app.quit" "<Control>q"
                       "app.save" "<Control>s"
                       "app.about" "<Control>a"))
         (builder (gtk:builder-new)))
-    (gtk:builder-add-from-string builder *ui-info*)
+    (gtk:builder-add-from-string builder *menu*)
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))
     (iter (for (name accel) on accels by #'cddr)
           (setf (gtk:application-accels-for-action application name) accel))))
 
 (defun print-editor-activate (application)
-  (format t "in ACTIVATE~%")
   (let* ((box (make-instance 'gtk:box
                              :orientation :vertical))
          (window (make-instance 'gtk:application-window
@@ -406,17 +384,21 @@
                                   :vscroll-policy :automatic
                                   :has-frame t
                                   :vexpand t))
-         (statusbar (make-instance 'gtk:statusbar)))
+         (statusbar (make-instance 'gtk:center-box
+                                   :orientation :horizontal)))
+    ;; Add a label to the statusbar
+    (setf (gtk:center-box-start-widget statusbar) (make-instance 'gtk:label))
     ;; Store window in a global variable
     (setf *window* window)
-    ;; Store statusbar in a global varialbe
+    ;; Store statusbar in a global variable
     (setf *statusbar* statusbar)
     ;; The text buffer is a global variable. Can we improve this?
     (setf *buffer* (gtk:text-view-buffer textview))
+    (setf *buffer-changed* nil)
     (g:signal-connect *buffer* "changed"
                       (lambda (buffer)
                         (declare (ignore buffer))
-                        (setf *file-changed* t)
+                        (setf *buffer-changed* t)
                         (update-statusbar statusbar)))
     (g:signal-connect *buffer* "mark-set"
                       (lambda (buffer location mark)
@@ -424,19 +406,20 @@
                         (update-statusbar statusbar)))
     (gtk:box-append box scrolled)
     (gtk:box-append box statusbar)
-    (gtk:widget-grab-focus textview)
-    (setf *file-changed* nil)
     (update-title window)
     (update-statusbar statusbar)
+    (gtk:widget-grab-focus textview)
     (gtk:window-present window)))
 
-(defun print-editor-open (application files n-files hint)
-  (declare (ignore files hint))
-  (format t "in OPEN~%")
-  (when (> n-files 1)
-    (format t "Can only open a single file.~%"))
-  (print-editor-activate application)
-  (load-file-buffer *buffer* (sys-path "gtk4-print-editor.lisp")))
+(defun print-editor-open (application files nfiles hint)
+  (declare (ignore hint))
+  (when (> nfiles 0)
+    (let* ((file (cffi:mem-aref files '(g:object g:file) 0))
+           (filename (g:file-basename file)))
+      (print-editor-activate application)
+      (when (probe-file filename)
+        (setf *filename* filename)
+        (load-file-buffer *buffer* filename)))))
 
 (defun gtk4-print-editor (&rest argv)
   (let* ((app (make-instance 'gtk:application
@@ -454,7 +437,7 @@
                         (list "preview" #'activate-preview)
                         (list "print" #'activate-print)))
          (argv (cons "gtk4-print-editor"
-                     (if argv argv (uiop:command-line-arguments))))
+                     (or argv (uiop:command-line-arguments))))
          (path-settings (sys-path "print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path-settings))
          (path-pagesetup (sys-path "page-setup.ini"))

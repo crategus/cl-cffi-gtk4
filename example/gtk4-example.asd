@@ -62,6 +62,7 @@
 
                ;; List-based widgets
                (:file "list-view-applauncher")
+               (:file "list-view-recentinfo")
                (:file "grid-view-clocks")
                (:file "grid-view-colors")
                (:file "drop-down")

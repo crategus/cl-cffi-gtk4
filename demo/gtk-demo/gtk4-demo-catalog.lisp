@@ -1984,7 +1984,7 @@
         ":drawfunc"
         "draw-dash"
         "cairo-example"
-        "draw-path.lisp")
+        "draw-dash.lisp")
        ("Preserve Fill"
         ":drawfunc"
         "draw-fill-preserve"
@@ -2163,9 +2163,11 @@
        "gdk:display-app-launch-context"
        "gtk:widget-display"
        "g:app-info-launch-default-for-uri"
+       "g:app-info-name"
        "g:type-from-instance"
-       "::launch-failed"
-       "::launch-started"
+       "g:variant-print"
+       "g:variant-type-string"
+       "gdk:+current-time+"
        "::launched")
       ("GdkAppLaunchContext Asyn"
        ":window"

@@ -53,8 +53,8 @@
     (g:signal-connect app "command-line"
         (lambda (application cmdline)
           (declare (ignore application))
-          (let ((args (g:application-command-line-get-arguments cmdline))
-                (data (g:application-command-line-get-platform-data cmdline))
+          (let ((args (g:application-command-line-arguments cmdline))
+                (data (g:application-command-line-platform-data cmdline))
                 (cwd (g:application-command-line-cwd cmdline))
                 (environ (g:application-command-line-environ cmdline)))
             (format t "in signal handler COMMAND-LINE~%")
