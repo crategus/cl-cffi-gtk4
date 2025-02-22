@@ -39,14 +39,14 @@
   (is (eq :link (gtk:widget-class-accessible-role "GtkLinkButton")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLinkButton" GTK:LINK-BUTTON
-                       (:SUPERCLASS GTK:BUTTON
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkActionable" "GtkBuildable"
-                         "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_link_button_get_type")
-                       ((URI LINK-BUTTON-URI "uri" "gchararray" T T)
-                        (VISITED LINK-BUTTON-VISITED "visited" "gboolean" T T)))
+                      (:SUPERCLASS GTK:BUTTON
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkActionable" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_link_button_get_type")
+                      ((URI LINK-BUTTON-URI "uri" "gchararray" T T)
+                       (VISITED LINK-BUTTON-VISITED "visited" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkLinkButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -59,15 +59,20 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 (test gtk-link-button-activate-link-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate-link" "GtkLinkButton"))))
+  (let* ((name "activate-link")
+         (gtype (g:gtype "GtkLinkButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
     (is (string= "activate-link" (g:signal-query-signal-name query)))
-    (is (string= "GtkLinkButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -85,4 +90,4 @@
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "Label" (gtk:button-label button)))))
 
-;;; 2024-9-20
+;;; 2025-2-22

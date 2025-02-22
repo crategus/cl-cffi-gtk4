@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.link-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'link-button 'type)
- "@version{2024-5-4}
+ "@version{2025-2-22}
   @begin{short}
     The @class{gtk:link-button} widget is a @class{gtk:button} widget with a
     hyperlink, similar to the one used by web browsers, which triggers an
@@ -110,7 +110,7 @@
   @fun{gtk:link-button-new-with-label} function. If using the former, the URI
   you pass to the constructor is used as a label for the widget.
 
-  @image[link-button]{Figure: GtkLinkButton}
+  @image[gtk-link-button]{Figure: GtkLinkButton}
 
   The URI bound to a @class{gtk:link-button} widget can be set specifically or
   retrieved using the @fun{gtk:link-button-uri} function.
@@ -166,11 +166,11 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-uri)
       "Accessor"
       (documentation 'link-button-uri 'function)
- "@version{2024-5-4}
+ "@version{2025-2-22}
   @syntax{(gtk:link-button-uri object) => uri}
   @syntax{(setf (gtk:link-button-uri object) uri)}
   @argument[object]{a @class{gtk:link-button} widget}
-  @argument[uri]{a string with a valid URI}
+  @argument[uri]{a string for a valid URI}
   @begin{short}
     Accessor of the @slot[gtk:link-button]{uri} slot of the
     @class{gtk:link-button} class.
@@ -194,11 +194,11 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-visited)
       "Accessor"
       (documentation 'link-button-visited 'function)
- "@version{2023-3-18}
+ "@version{2025-2-22}
   @syntax{(gtk:link-button-visited object) => visited}
   @syntax{(setf (gtk:link-button-visited object) visited)}
   @argument[object]{a @class{gtk:link-button} widget}
-  @argument[visited]{a boolean with the \"visited\" state}
+  @argument[visited]{a boolean for the \"visited\" state}
   @begin{short}
     Accessor of the @slot[gtk:link-button]{visited} slot of the
     @class{gtk:link-button} class.
@@ -219,8 +219,8 @@ lambda (button)    :run-last
 
 (defun link-button-new (uri)
  #+liber-documentation
- "@version{2023-3-18}
-  @argument[uri]{a string with a valid URI}
+ "@version{2025-2-22}
+  @argument[uri]{a string for a valid URI}
   @return{The new @class{gtk:link-button} widget.}
   @short{Creates a new link button with the URI as its text.}
   @see-class{gtk:link-button}
@@ -239,9 +239,9 @@ lambda (button)    :run-last
 
 (defun link-button-new-with-label (uri label)
  #+liber-documentation
- "@version{2023-3-18}
-  @argument[uri]{a string with a valid URI}
-  @argument[label]{a string with the text of the button}
+ "@version{2025-2-22}
+  @argument[uri]{a string for a valid URI}
+  @argument[label]{a string for the text of the button}
   @return{The new @class{gtk:link-button} widget.}
   @short{Creates a new link button containing a label.}
   @see-class{gtk:link-button}
