@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.switch.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,12 +94,12 @@
 
 #+liber-documentation
 (setf (documentation 'switch 'type)
- "@version{2024-5-7}
+ "@version{2025-2-22}
   @begin{short}
     The @class{gtk:switch} widget is a widget that has two states: on or off.
   @end{short}
 
-  @image[switch]{Figure: GtkSwitch}
+  @image[gtk-switch]{Figure: GtkSwitch}
 
   The user can control which state should be active by clicking the switch,
   or by dragging the handle.
@@ -176,7 +176,7 @@ lambda (widget state)    :run-last
 (setf (liber:alias-for-function 'switch-active)
       "Accessor"
       (documentation 'switch-active 'function)
- "@version{2024-5-7}
+ "@version{2025-2-22}
   @syntax{(gtk:switch-active object) => active)}
   @syntax{(setf (gtk:switch-active object) active)}
   @argument[object]{a @class{gtk:switch} widget}
@@ -204,7 +204,7 @@ lambda (widget state)    :run-last
 (setf (liber:alias-for-function 'switch-state)
       "Accessor"
       (documentation 'switch-state 'function)
- "@version{2024-5-7}
+ "@version{2025-2-22}
   @syntax{(gtk:switch-state object) => state)}
   @syntax{(setf (gtk:switch-state object) state)}
   @argument[object]{a @class{gtk:switch} widget}
@@ -230,7 +230,7 @@ lambda (widget state)    :run-last
 
 (defun switch-new ()
  #+liber-documentation
- "@version{2023-3-26}
+ "@version{2025-2-22}
   @return{The newly created @class{gtk:switch} widget.}
   @short{Creates a new switch.}
   @see-class{gtk:switch}"
