@@ -52,16 +52,17 @@
 ;;;     deleted-text
 
 (test gtk-entry-buffer-deleted-text-signal
-  (let* ((name "deleted-text") (gtype "GtkEntryBuffer")
+  (let* ((name "deleted-text")
+         (gtype (g:gtype "GtkEntryBuffer"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("guint" "guint")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -69,16 +70,17 @@
 ;;;     inserted-text
 
 (test gtk-entry-buffer-inserted-text-signal
-  (let* ((name "inserted-text") (gtype "GtkEntryBuffer")
+  (let* ((name "inserted-text")
+         (gtype (g:gtype "GtkEntryBuffer"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("guint" "gchararray" "guint")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -105,8 +107,8 @@
     (is (typep (setf buffer
                      (gtk:entry-buffer-new)) 'gtk:entry-buffer))
     (is (string= "" (gtk:entry-buffer-text (gtk:entry-buffer-new))))
-    (is (string= "This is text."
-                 (gtk:entry-buffer-text (gtk:entry-buffer-new "This is text."))))))
+    (is (string= "The text."
+                 (gtk:entry-buffer-text (gtk:entry-buffer-new "The text."))))))
 
 ;;;     gtk_entry_buffer_get_bytes
 
@@ -159,7 +161,8 @@
 (test gtk-entry-buffer-emit-inserted-text
   (glib-test:with-check-memory (buffer)
     (is (typep (setf buffer
-                     (gtk:entry-buffer-new "first second third")) 'gtk:entry-buffer))
+                     (gtk:entry-buffer-new "first second third"))
+               'gtk:entry-buffer))
     (g:signal-connect buffer "inserted-text"
         (lambda (object position text n-chars)
           (is (eq buffer object))

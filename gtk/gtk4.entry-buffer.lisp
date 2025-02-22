@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.entry-buffer.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -153,10 +153,10 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-length)
       "Accessor"
       (documentation 'entry-buffer-length 'function)
- "@version{2025-1-5}
+ "@version{2025-2-13}
   @syntax{(gtk:entry-buffer-length object) => length}
   @argument[object]{a @class{gtk:entry-buffer} object}
-  @argument[length]{an unsigned integer with the length of the text}
+  @argument[length]{an unsigned integer for the length of the text}
   @begin{short}
     Accessor of the @slot[gtk:entry-buffer]{length} slot of the
     @class{gtk:entry-buffer} class.
@@ -180,22 +180,22 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-max-length)
       "Accessor"
       (documentation 'entry-buffer-max-length 'function)
- "@version{2025-1-5}
+ "@version{2025-2-13}
   @syntax{(gtk:entry-buffer-max-length object) => length}
   @syntax{(setf (gtk:entry-buffer-max-length object) length)}
   @argument[object]{a @class{gtk:entry-buffer} object}
-  @argument[length]{an integer with the maximum length of the entry buffer,
+  @argument[length]{an integer for the maximum length of the entry buffer,
     or 0 for no maximum, the value passed in will be clamped to the range
     [0, 65536]}
   @begin{short}
     Accessor of the @slot[gtk:entry-buffer]{max-length} slot of the
     @class{gtk:entry-buffer} class.
   @end{short}
-  The @fun{gtk:entry-buffer-max-length} function returns the maximum allowed
-  number of characters in the entry buffer, or 0 if there is no maximum. The
+  The @fun{gtk:entry-buffer-max-length} function returns the maximum number of
+  characters allowed in the entry buffer, or 0 if there is no maximum. The
   @setf{gtk:entry-buffer-max-length} function sets the maximum allowed length
-  of the contents of the entry buffer. If the current contents are longer than
-  the given length, then they will be truncated to fit.
+  of the contents of the entry buffer. If the current content is longer than
+  the given length, it will be truncated to fit.
   @see-class{gtk:entry-buffer}")
 
 ;;; --- gtk:entry-buffer-text --------------------------------------------------
@@ -210,11 +210,11 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-text)
       "Accessor"
       (documentation 'entry-buffer-text 'function)
- "@version{2025-1-5}
+ "@version{2025-2-13}
   @syntax{(gtk:entry-buffer-text object) => text}
   @syntax{(setf (gtk:entry-buffer-text object) text)}
   @argument[object]{a @class{gtk:entry-buffer} object}
-  @argument[text]{a string with the contents of the entry buffer}
+  @argument[text]{a string for the contents of the entry buffer}
   @begin{short}
     Accessor of the @slot[gtk:entry-buffer]{text} slot of the
     @class{gtk:entry-buffer} class.
@@ -303,11 +303,11 @@ lambda (buffer pos chars nchars)    :run-first
 
 (cffi:defcfun ("gtk_entry_buffer_delete_text" entry-buffer-delete-text) :uint
  #+liber-documentation
- "@version{2025-1-5}
+ "@version{2025-2-13}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @argument[pos]{an unsigned integer for the position at which to delete text}
   @argument[nchars]{an integer for the number of characters to delete}
-  @return{The unsigned integer for the number of characters deleted.}
+  @return{The unsigned integer with the number of characters deleted.}
   @begin{short}
     Deletes a sequence of characters from the entry buffer.
   @end{short}
