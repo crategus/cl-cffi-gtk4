@@ -38,26 +38,26 @@
   (is (eq :group (gtk:widget-class-accessible-role "GtkHeaderBar")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkHeaderBar" GTK:HEADER-BAR
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_header_bar_get_type")
-                       ((DECORATION-LAYOUT HEADER-BAR-DECORATION-LAYOUT
-                         "decoration-layout" "gchararray" T T)
-                        (SHOW-TITLE-BUTTONS HEADER-BAR-SHOW-TITLE-BUTTONS
-                         "show-title-buttons" "gboolean" T T)
-                        (TITLE-WIDGET HEADER-BAR-TITLE-WIDGET
-                         "title-widget" "GtkWidget" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_header_bar_get_type")
+                      ((DECORATION-LAYOUT HEADER-BAR-DECORATION-LAYOUT
+                        "decoration-layout" "gchararray" T T)
+                       (SHOW-TITLE-BUTTONS HEADER-BAR-SHOW-TITLE-BUTTONS
+                        "show-title-buttons" "gboolean" T T)
+                       (TITLE-WIDGET HEADER-BAR-TITLE-WIDGET
+                        "title-widget" "GtkWidget" T T)))
              (gobject:get-gtype-definition "GtkHeaderBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-header-bar-properties
-  (let ((headerbar (make-instance 'gtk:header-bar)))
-    (is-false (gtk:header-bar-decoration-layout headerbar))
-    (is-true (gtk:header-bar-show-title-buttons headerbar))
-    (is-false (gtk:header-bar-title-widget headerbar))))
+  (let ((header (make-instance 'gtk:header-bar)))
+    (is-false (gtk:header-bar-decoration-layout header))
+    (is-true (gtk:header-bar-show-title-buttons header))
+    (is-false (gtk:header-bar-title-widget header))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -70,4 +70,17 @@
 ;;;     gtk_header_bar_pack_end
 ;;;     gtk_header_bar_remove
 
-;;; 2024-9-19
+(test gtk-header-bar-pack
+  (glib-test:with-check-memory (header button1 button2)
+    ;; Create header bar and buttons
+    (is (typep (setf header (gtk:header-bar-new)) 'gtk:header-bar))
+    (is (typep (setf button1 (gtk:button-new)) 'gtk:button))
+    (is (typep (setf button2 (gtk:button-new)) 'gtk:button))
+    ;; Pack buttons
+    (is-false (gtk:header-bar-pack-end header button2))
+    (is-false (gtk:header-bar-pack-start header button1))
+    ;; Remove buttons
+    (is-false (gtk:header-bar-remove header button1))
+    (is-false (gtk:header-bar-remove header button2))))
+
+;;; 2025-2-22
