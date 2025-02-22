@@ -6,7 +6,7 @@
 ;;;; regardless of variable-width content at the left or right. It is commonly
 ;;;; used with the <tt>gtk:window-titlebar</tt> function.
 ;;;;
-;;;; 2024-4-14
+;;;; 2025-2-16
 
 (in-package :gtk4-example)
 
@@ -18,8 +18,8 @@
                                 :title "No title"
                                 :application application
                                 :titlebar header
-                                :default-width 600
-                                :default-height 400)))
+                                :default-width 300
+                                :default-height 180)))
     ;; Button at the right side of the header bar
     (gtk:header-bar-pack-end header
                              (make-instance 'gtk:button
@@ -38,8 +38,5 @@
                                      :icon-name "go-next"
                                      :tooltip-text "Forward"))
       (gtk:header-bar-pack-start header box))
-    ;; Switch at the left side of the header bar
-    (gtk:header-bar-pack-start header
-                               (make-instance 'gtk:switch))
     ;; Present window
     (gtk:window-present window)))
