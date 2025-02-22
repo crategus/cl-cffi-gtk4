@@ -33,11 +33,11 @@
              (glib-test:list-signals "GtkGestureClick")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureClick" GTK:GESTURE-CLICK
-                       (:SUPERCLASS GTK:GESTURE-SINGLE
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_gesture_click_get_type")
-                       NIL)
+                      (:SUPERCLASS GTK:GESTURE-SINGLE
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_gesture_click_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GtkGestureClick"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -55,7 +55,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("gint" "gdouble" "gdouble")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -73,7 +73,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("gint" "gdouble" "gdouble")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -91,7 +91,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -109,7 +109,7 @@
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("gdouble" "gdouble" "guint" "GdkEventSequence")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -121,4 +121,4 @@
 (test gtk-gesture-click-new
   (is (typep (gtk:gesture-click-new) 'gtk:gesture-click)))
 
-;;; 2024-9-20
+;;; 2025-2-22

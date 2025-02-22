@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-click.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,9 +70,9 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-click 'type)
- "@version{2024-7-27}
+ "@version{2025-2-22}
   @begin{short}
-    The @class{gtk:gesture-click} object is a @class{gtk:gesture} implementation
+    The @class{gtk:gesture-click} class is a @class{gtk:gesture} implementation
     for clicks.
   @end{short}
   It is able to recognize multiple clicks on a nearby zone, which can be
@@ -87,8 +87,8 @@ lambda (gesture n x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
-        @entry[n]{The integer with how many touch/button press happened with
-          this one.}
+        @entry[n]{The integer of how many touch/button press happened with this
+          one.}
         @entry[x]{The double float with the x coordinate, in widget allocation
           coordinates.}
         @entry[y]{The double float with the y coordinate, in widget allocation
@@ -152,7 +152,7 @@ lambda (gesture x y button sequence)    :run-last
 
 (defun gesture-click-new ()
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2025-2-22}
   @return{The newly created @class{gtk:gesture-click} object.}
   @begin{short}
     Returns a newly created gesture that recognizes single and multiple presses.
