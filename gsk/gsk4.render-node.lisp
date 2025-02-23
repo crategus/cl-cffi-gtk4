@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gsk.render-node.lisp
 ;;;
-;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GSK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -821,14 +821,15 @@
 (cffi:defcfun ("gsk_render_node_write_to_file" %render-node-write-to-file)
     :boolean
   (node render-node)
-  (filename :string)
+  (path :string)
   (err :pointer))
 
-(defun render-node-write-to-file (node filename)
+(defun render-node-write-to-file (node path)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-2-8}
   @argument[node]{a @class{gsk:render-node} instance}
-  @argument[filename]{a pathname or namestring with the file to save it to}
+  @argument[path]{a pathname or namestring for the file to save it to}
+  @return{@em{True} if saving was successful.}
   @begin{short}
     This function is mostly intended for use inside a debugger to quickly dump
     a render node to a file for later inspection.
@@ -844,7 +845,7 @@ color {
   @end{dictionary}
   @see-class{gsk:render-node}"
   (glib:with-error (err)
-    (%render-node-write-to-file node (namestring filename) err)))
+    (%render-node-write-to-file node (namestring path) err)))
 
 (export 'render-node-write-to-file)
 
@@ -2861,8 +2862,8 @@ color {
 
 (defun shadow-node-new (child shadows)
  #+liber-documentation
- "@version{#2023-11-29}
-  @argument[child]{a @class{gsk:render-node} instance with the node to draw}
+ "@version{2025-2-12}
+  @argument[child]{a @class{gsk:render-node} instance for the node to draw}
   @argument[shadows]{a list of the form @code{'((color1 dx1 dy1 radius1)
     (color2 dx2 dy2 radius2) ...)} with the shadows to apply}
   @return{The new @class{gsk:shadow-node} instance.}
@@ -2877,12 +2878,8 @@ color {
     (cffi:with-foreign-object (shadows-ptr '(:struct %shadow) n-shadows)
       (iter (for i from 0 below n-shadows)
             (for (color dx dy radius) in shadows)
-            (for ptr = (cffi:mem-aptr shadows-ptr
-                                      '(:struct %shadow) i))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                ptr
-                'gdk:rgba)
+            (for ptr = (cffi:mem-aptr shadows-ptr '(:struct %shadow) i))
+            (glib::copy-boxed-slots-to-foreign color ptr 'gdk:rgba)
             (cffi:incf-pointer ptr cstruct-size)
             (setf (cffi:mem-ref ptr :float) (coerce dx 'single-float))
             (cffi:incf-pointer ptr (cffi:foreign-type-size :float))
