@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.event.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -223,29 +223,64 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_BUTTON_PRIMARY
-;;;
-;;; #define GDK_BUTTON_PRIMARY      (1)
-;;;
-;;; The primary button. This is typically the left mouse button, or the right
-;;; button in a left-handed setup.
 ;;; ----------------------------------------------------------------------------
+
+(defconstant +button-primary+ 1
+ #+liber-documentation
+ "@version{2025-2-11}
+  @variable-value{1}
+  @begin{short}
+    The primary button.
+  @end{short}
+  This is typically the left mouse button, or the right button in a
+  left-handed setup.
+  @see-variable{gdk:+button-secondary+}
+  @see-variable{gdk:+button-middle+}")
+
+#+liber-documentation
+(setf (liber:alias-for-variable '+button-primary+) "Constant")
+
+(export '+button-primary+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_BUTTON_MIDDLE
-;;;
-;;; #define GDK_BUTTON_MIDDLE       (2)
-;;;
-;;; The middle button.
 ;;; ----------------------------------------------------------------------------
+
+(defconstant +button-middle+ 2
+ #+liber-documentation
+ "@version{2025-2-11}
+  @variable-value{2}
+  @begin{short}
+    The middle button.
+  @end{short}
+  @see-variable{gdk:+button-primary+}
+  @see-variable{gdk:+button-secondary+}")
+
+#+liber-documentation
+(setf (liber:alias-for-variable '+button-middle+) "Constant")
+
+(export '+button-middle+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_BUTTON_SECONDARY
-;;;
-;;; #define GDK_BUTTON_SECONDARY    (3)
-;;;
-;;; The secondary button. This is typically the right mouse button, or the left
-;;; button in a left-handed setup.
 ;;; ----------------------------------------------------------------------------
+
+(defconstant +button-secondary+ 3
+ #+liber-documentation
+ "@version{2025-2-11}
+  @variable-value{3}
+  @begin{short}
+    The secondary button.
+  @end{short}
+  This is typically the right mouse button, or the left button in a
+  left-handed setup.
+  @see-variable{gdk:+button-primary+}
+  @see-variable{gdk:+button-middle+}")
+
+#+liber-documentation
+(setf (liber:alias-for-variable '+button-secondary+) "Constant")
+
+(export '+button-secondary+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkEventType

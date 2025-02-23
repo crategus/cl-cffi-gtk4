@@ -24,6 +24,11 @@
 ;;;     GDK_BUTTON_MIDDLE
 ;;;     GDK_BUTTON_SECONDARY
 
+(test gdk-button-values
+  (is (= 1 gdk:+button-primary+))
+  (is (= 2 gdk:+button-middle+))
+  (is (= 3 gdk:+button-secondary+)))
+
 ;;;     GdkEventType
 
 (test gdk-event-type
