@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.texture.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -408,8 +408,8 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2024-11-21}
-  @argument[path]{a pathname or namestring with the file to load, the value is
+ "@version{2025-2-8}
+  @argument[path]{a pathname or namestring for the file to load, the value is
     a file system path, using the OS encoding}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -423,7 +423,9 @@
   blocking the main thread while loading a big image.
 
   Since 4.6
-  @see-class{gdk:texture}"
+  @see-class{gdk:texture}
+  @see-class{g:task}
+  @see-function{g:task-run-in-thread}"
   (glib:with-error (err)
     (%texture-new-from-filename (namestring path) err)))
 
