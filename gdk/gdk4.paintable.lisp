@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.paintable.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 -2024 Dieter Kaiser
+;;; Copyright (C) 2022 -2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -547,13 +547,21 @@ lambda (paintable)    :run-last
 ;;; gdk_paintable_snapshot
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_paintable_snapshot" paintable-snapshot) :void
+(cffi:defcfun ("gdk_paintable_snapshot" %paintable-snapshot) :void
+  (paintable (g:object paintable))
+  (snapshot (g:object snapshot))
+  (width :double)
+  (height :double))
+
+(defun paintable-snapshot (paintable snapshot width height)
  #+liber-documentation
- "@version{#2024-5-5}
+ "@version{2025-2-16}
   @argument[paintable]{a @class{gdk:paintable} object}
   @argument[snapshot]{a @class{gdk:snapshot} object}
-  @argument[width]{a double float with the width to snapshot in}
-  @argument[height]{a double float with the height to snapshot in}
+  @argument[width]{a number coerced to a double float for the width to
+    snapshot in}
+  @argument[height]{a number coerced to a double float for the height to
+    snapshot in}
   @return{The @class{gdk:snapshot} object to snapshot to.}
   @begin{short}
     Snapshots the given @arg{paintable} with the given @arg{width} and
@@ -563,10 +571,9 @@ lambda (paintable)    :run-last
   do nothing.
   @see-class{gdk:paintable}
   @see-class{gdk:snapshot}"
-  (paintable (g:object paintable))
-  (snapshot (g:object snapshot))
-  (width :double)
-  (height :double))
+  (let ((width (coerce width 'double-float))
+        (height (coerce height 'double-float)))
+    (%paintable-snapshot paintable snapshot width height)))
 
 (export 'paintable-snapshot)
 
