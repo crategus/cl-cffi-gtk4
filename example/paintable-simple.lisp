@@ -48,8 +48,8 @@
       (cairo:destroy cr))))
 
 ;; Here, we implement the functionality required by the GdkPaintable interface
-(defmethod paintable-snapshot-impl ((paintable nuclear-icon)
-                                    snapshot width height)
+(defmethod paintable-snapshot-impl
+           ((paintable nuclear-icon) snapshot width height)
   (nuclear-snapshot snapshot
                     (rgba-new :red 0 :green 0 :blue 0 :alpha 1)
                     (rgba-new :red 0.9 :green 0.75 :blue 0.15 :alpha 1)

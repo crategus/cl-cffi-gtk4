@@ -148,6 +148,7 @@
 
            ;; Data exchange, Clipboards, Drag and Drop
            #:do-clipboard
+           #:do-drag-and-drop
 
            ;; Miscellaneous
            #:do-cursors

@@ -143,6 +143,7 @@
 
                ;; Data exchange, Clipboards, Drag and Drop
                (:file "clipboard")
+               (:file "drag-and-drop")
 
                ;; Miscellaneous
                (:file "cursors")

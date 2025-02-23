@@ -113,7 +113,7 @@
           (gtk:snapshot-pop snapshot)
           (gtk:snapshot-restore snapshot)
           ;; And the same as above for the minute hand. Just make this one
-          ;;; longer so people can tell the hands apart.
+          ;; longer so people can tell the hands apart.
           (gtk:snapshot-save snapshot)
           (gtk:snapshot-rotate snapshot (* 6 minute))
           (graphene:rect-init rect -2 -43 4 45)
