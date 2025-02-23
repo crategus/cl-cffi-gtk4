@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.actionable.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -44,7 +44,7 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_actionable_set_action_target
+;;;     gtk_actionable_set_action_target                    not implemented
 ;;;     gtk_actionable_set_detailed_action_name
 ;;;
 ;;; Properties
@@ -78,7 +78,7 @@
 (setf (liber:alias-for-class 'actionable)
       "Interface"
       (documentation 'actionable 'type)
- "@version{2023-8-4}
+ "@version{2025-2-23}
   @begin{short}
     The @class{gtk:actionable} interface provides a convenient way of
     associating widgets with actions on a @class{gtk:application-window} widget
@@ -88,12 +88,12 @@
   @code{action-target}. There are also some convenience APIs for setting
   these properties.
 
-  The action will be looked up in action groups that are found among the widgets
-  ancestors. Most commonly, these will be the actions with the \"win.\" or
-  \"app.\" prefix that are associated with the @class{gtk:application-window}
-  widget or the @class{gtk:application} instance, but other action groups that
-  are added with the @fun{gtk:widget-insert-action-group} function will be
-  consulted as well.
+  The action will be looked up in action groups that are found among the
+  widgets ancestors. Most commonly, these will be the actions with the
+  @code{\"win.\"} or @code{\"app.\"} prefix that are associated with the
+  @class{gtk:application-window} widget or the @class{gtk:application} instance,
+  but other action groups that are added with the
+  @fun{gtk:widget-insert-action-group} function will be consulted as well.
   @see-slot{gtk:actionable-action-name}
   @see-slot{gtk:actionable-action-target}
   @see-class{gtk:application}
@@ -108,18 +108,18 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-name" 'actionable) t)
  "The @code{action-name} property of type @code{:string} (Read / Write) @br{}
-  The name of the associated action, like \"app.quit\". @br{}
+  The name of the associated action, like @code{\"app.quit\"}. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'actionable-action-name)
       "Accessor"
       (documentation 'actionable-action-name 'function)
- "@version{2023-8-4}
+ "@version{2025-2-23}
   @syntax{(gtk:actionable-action-name object) => name}
   @syntax{(setf (gtk:actionable-action-name object) name)}
   @argument[object]{a @class{gtk:actionable} widget}
-  @argument[name]{a string with the action name, or @code{nil}}
+  @argument[name]{a string for the action name, or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:actionable]{action-name} slot of the
     @class{gtk:actionable} inferface.
@@ -132,8 +132,8 @@
   Usually this function is used when the widget is located, or will be located,
   within the hierarchy of a @class{gtk:application-window} widget.
 
-  Names are of the form \"win.save\" or \"app.quit\" for actions on the
-  containing @class{gtk:application-window} widget or its associated
+  Names are of the form @code{\"win.save\"} or @code{\"app.quit\"} for actions
+  on the containing @class{gtk:application-window} widget or its associated
   @class{gtk:application} instance, respectively. This is the same form used
   for actions in the @class{g:menu} object associated with the window.
   @begin[Examples]{dictionary}
@@ -163,7 +163,7 @@
 (setf (liber:alias-for-function 'actionable-action-target)
       "Accessor"
       (documentation 'actionable-action-target 'function)
- "@version{2024-12-29}
+ "@version{2025-2-23}
   @syntax{(gtk:actionable-action-target object) => value}
   @syntax{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
@@ -200,9 +200,9 @@
     @end{pre}
   @end{dictionary}
   @begin[Notes]{dictionary}
-    The C implementation knows in addition the
-    @code{gtk_actionable_get_action_target_value ()} and
-    @code{gtk_actionable_set_action_target_value ()} functions. In the Lisp
+    The C implementation has the additional
+    @code{gtk_actionable_get_action_target_value()} and
+    @code{gtk_actionable_set_action_target_value()} functions. In the Lisp
     implementation these functions are replaced by the
     @fun{gtk:actionable-action-target} function.
   @end{dictionary}
@@ -211,32 +211,13 @@
   @see-class{g:action}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_actionable_set_action_target ()
-;;;
-;;; void
-;;; gtk_actionable_set_action_target (GtkActionable *actionable,
-;;;                                   const char *format_string,
-;;;                                   ...);
+;;; gtk_actionable_set_action_target
 ;;;
 ;;; Sets the target of an actionable widget.
 ;;;
 ;;; This is a convenience function that calls g_variant_new() for format_string
 ;;; and uses the result to call gtk_actionable_set_action_target_value().
-;;;
-;;; If you are setting a string-valued target and want to set the action name at
-;;; the same time, you can use gtk_actionable_set_detailed_action_name().
-;;;
-;;; actionable :
-;;;     a GtkActionable widget
-;;;
-;;; format_string :
-;;;     a GVariant format string
-;;;
-;;; ... :
-;;;     arguments appropriate for format_string
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Consider to implement g:variant-new to allow this implementation.
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_actionable_set_detailed_action_name
@@ -245,9 +226,9 @@
 (cffi:defcfun ("gtk_actionable_set_detailed_action_name"
                actionable-set-detailed-action-name) :void
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2025-2-23}
   @argument[actionable]{a @class{gtk:actionable} widget}
-  @argument[name]{a string with the detailed action name}
+  @argument[name]{a string for the detailed action name}
   @begin{short}
     Sets the action name and associated string target value of an actionable
     widget.
@@ -256,9 +237,9 @@
   @fun{gtk:actionable-action-target} functions in the common case that the
   target is string-valued.
 
-  The @arg{name} argument is a string of the form \"action::target\" where
-  \"action\" is the action name and \"target\" is the string to use as the
-  target.
+  The @arg{name} argument is a string of the form @code{\"action::target\"}
+  where @code{\"action\"} is the action name and @code{\"target\"} is the
+  string to use as the target.
   @begin[Examples]{dictionary}
     @begin{pre}
 (setq button (make-instance 'gtk:button))

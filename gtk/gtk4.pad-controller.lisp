@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.pad-controller.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -35,7 +35,7 @@
 ;;;
 ;;;     GtkPadController
 ;;;     GtkPadActionType
-;;;     GtkPadActionEntry                                  not needed
+;;;     GtkPadActionEntry                                   not needed
 ;;;
 ;;; Functions
 ;;;
@@ -72,7 +72,7 @@
 (setf (liber:alias-for-symbol 'pad-action-type)
       "GEnum"
       (liber:symbol-documentation 'pad-action-type)
- "@version{2024-4-5}
+ "@version{2025-2-23}
     @begin{declaration}
 (gobject:define-genum \"GtkPadActionType\" pad-action-type
   (:export t
@@ -115,9 +115,11 @@
     pad-controller-pad
     "pad" "GdkDevice" t t)))
 
+;; TODO: Make a Lisp example
+
 #+liber-documentation
 (setf (documentation 'pad-controller 'type)
- "@version{2024-4-5}
+ "@version{2025-2-23}
   @begin{short}
     The @class{gtk:pad-controller} object is an event controller for the pads
     found in drawing tablets.
@@ -189,7 +191,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-action-group)
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
- "@version{2023-3-11}
+ "@version{2025-2-23}
   @syntax{(gtk:pad-controller-action-group object) => group}
   @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
@@ -213,7 +215,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-pad)
       "Accessor"
       (documentation 'pad-controller-pad 'function)
- "@version{2023-3-11}
+ "@version{2025-2-23}
   @syntax{(gtk:pad-controller-pad object) => pad}
   @syntax{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
@@ -229,21 +231,26 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 ;;; gtk_pad_controller_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_pad_controller_new" pad-controller-new)
+(cffi:defcfun ("gtk_pad_controller_new" %pad-controller-new)
     (g:object pad-controller :return)
+  (group (g:object g:action-group))
+  (pad (g:object gdk:device)))
+
+(defun pad-controller-new (group &optional pad)
  #+liber-documentation
- "@version{2024-4-5}
+ "@version{2025-2-23}
   @argument[group]{a @class{g:action-group} instance to trigger actions from}
-  @argument[pad]{a @class{gdk:device} object of @code{:tablet-pad} type, or
-    @code{nil} to handle all pads}
+  @argument[pad]{a @class{gdk:device} object of @code{:tablet-pad} type of the
+    @symbol{gdk:input-source} enumeration, or the @code{nil} default value to
+    handle all pads}
   @return{The newly created @class{gtk:pad-controller} object.}
   @begin{short}
     Creates a new @class{gtk:pad-controller} object that will associate events
     from @arg{pad} to actions.
   @end{short}
-  A @code{NULL} pad may be provided so the controller manages all pad devices
+  A @code{NIL} pad may be provided so the controller manages all pad devices
   generically, it is discouraged to mix @class{gtk:pad-controller} objects with
-  @code{NULL} and non-@code{NULL} @arg{pad} argument on the same toplevel
+  @code{NIL} and non-@code{NIL} @arg{pad} arguments on the same toplevel
   window, as execution order is not guaranteed.
 
   The @class{gtk:pad-controller} object is created with no mapped actions. In
@@ -260,8 +267,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
   @see-class{gtk:window}
   @see-function{gtk:pad-controller-set-action-entries}
   @see-function{gtk:pad-controller-set-action}"
-  (group (g:object g:action-group))
-  (pad (g:object gdk:device)))
+  (%pad-controller-new group pad))
 
 (export 'pad-controller-new)
 
@@ -271,9 +277,10 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 
 (defun pad-controller-set-action-entries (controller entries)
  #+liber-documentation
- "@version{2024-4-5}
+ "@version{2025-2-23}
   @argument[controller]{a @class{gtk:pad-controller} object}
-  @argument[entries]{a list of the action entries to set on @arg{controller}}
+  @argument[entries]{a @code{'((type1 index1 mode1 label1 name1) ...)} list
+    with the action entries to set on @arg{controller}}
   @begin{short}
     This is a convenience function to add a group of action entries on the
     pad controller.
@@ -295,17 +302,17 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 
 (cffi:defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void
  #+liber-documentation
- "@version{2024-4-5}
+ "@version{2025-2-23}
   @argument[controller]{a @class{gtk:pad-controller} object}
-  @argument[type]{a @symbol{gtk:pad-action-type} value with the pad feature
+  @argument[type]{a @symbol{gtk:pad-action-type} value for the pad feature
     that will trigger the action}
-  @argument[index]{an integer with the 0-indexed button/ring/strip number that
+  @argument[index]{an integer for the 0-indexed button/ring/strip number that
     will trigger the action}
-  @argument[mode]{an integer with the mode that will trigger the action, or -1
+  @argument[mode]{an integer for the mode that will trigger the action, or -1
     for all modes}
-  @argument[label]{a string with the Human readable description of the action,
+  @argument[label]{a string for the Human readable description of the action,
     the string should be deemed user visible}
-  @argument[name]{a string with the action name that will be activated in the
+  @argument[name]{a string for the action name that will be activated in the
     @class{g:action-group} instance}
   @begin{short}
     Adds an individual action to @arg{controller}.

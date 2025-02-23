@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.enumerations.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -1110,47 +1110,6 @@
   value, use the @fun{gtk:ordering-from-cmpfunc} function.
   @see-function{g:compare-data-func}
   @see-function{gtk:ordering-from-cmpfunc}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkSizeGroupMode
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-genum "GtkSizeGroupMode" size-group-mode
-  (:export t
-   :type-initializer "gtk_size_group_mode_get_type")
-  (:none 0)
-  (:horizontal 1)
-  (:vertical 2)
-  (:both 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'size-group-mode)
-      "GEnum"
-      (liber:symbol-documentation 'size-group-mode)
- "@version{2024-4-24}
-  @begin{declaration}
-(gobject:define-genum \"GtkSizeGroupMode\" size-group-mode
-  (:export t
-   :type-initializer \"gtk_size_group_mode_get_type\")
-  (:none 0)
-  (:horizontal 1)
-  (:vertical 2)
-  (:both 3))
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[:none]{Group has no effect.}
-      @entry[:horizontal]{Group affects horizontal requisition.}
-      @entry[:vertical]{Group affects vertical requisition.}
-      @entry[:both]{Group affects both horizontal and vertical requisition.}
-    @end{table}
-  @end{values}
-  @begin{short}
-    The mode of the size group determines the directions in which the
-    @class{gtk:size-group} widget affects the requested sizes of its component
-    widgets.
-  @end{short}
-  @see-class{gtk:size-group}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkSizeRequestMode

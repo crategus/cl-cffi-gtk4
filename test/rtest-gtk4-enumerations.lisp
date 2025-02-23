@@ -712,38 +712,6 @@
                                     (:LARGER 1))
              (gobject:get-gtype-definition "GtkOrdering"))))
 
-;;;     GtkSizeGroupMode
-
-(test gtk-size-group-mode
-  ;; Check type
-  (is (g:type-is-enum "GtkSizeGroupMode"))
-  ;; Check type initializer
-  (is (eq (g:gtype "GtkSizeGroupMode")
-          (g:gtype (cffi:foreign-funcall "gtk_size_group_mode_get_type" :size))))
-  ;; Check registered name
-  (is (eq 'gtk:size-group-mode
-          (glib:symbol-for-gtype "GtkSizeGroupMode")))
-  ;; Check names
-  (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
-               "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
-             (glib-test:list-enum-item-names "GtkSizeGroupMode")))
-  ;; Check values
-  (is (equal '(0 1 2 3)
-             (glib-test:list-enum-item-values "GtkSizeGroupMode")))
-  ;; Check nick names
-  (is (equal '("none" "horizontal" "vertical" "both")
-             (glib-test:list-enum-item-nicks "GtkSizeGroupMode")))
-  ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-GENUM "GtkSizeGroupMode" GTK:SIZE-GROUP-MODE
-                                    (:EXPORT T
-                                     :TYPE-INITIALIZER
-                                     "gtk_size_group_mode_get_type")
-                                    (:NONE 0)
-                                    (:HORIZONTAL 1)
-                                    (:VERTICAL 2)
-                                    (:BOTH 3))
-             (gobject:get-gtype-definition "GtkSizeGroupMode"))))
-
 ;;;     GtkSizeRequestMode
 
 (test gtk-size-request-mode

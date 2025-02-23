@@ -64,70 +64,82 @@
              (glib-test:list-signals "GtkPadController")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPadController" GTK:PAD-CONTROLLER
-                       (:SUPERCLASS GTK:EVENT-CONTROLLER
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_pad_controller_get_type")
-                       ((ACTION-GROUP PAD-CONTROLLER-ACTION-GROUP
-                         "action-group" "GActionGroup" T NIL)
-                        (PAD PAD-CONTROLLER-PAD "pad" "GdkDevice" T NIL)))
+                      (:SUPERCLASS GTK:EVENT-CONTROLLER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_pad_controller_get_type")
+                      ((ACTION-GROUP PAD-CONTROLLER-ACTION-GROUP
+                        "action-group" "GActionGroup" T NIL)
+                       (PAD PAD-CONTROLLER-PAD "pad" "GdkDevice" T NIL)))
              (gobject:get-gtype-definition "GtkPadController"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-pad-controller-properties
-  (let* ((group (g:simple-action-group-new))
-         (controller (gtk:pad-controller-new group nil)))
-    (is (typep (gtk:pad-controller-action-group controller)
-               'g:simple-action-group))
-    (is-false (gtk:pad-controller-pad controller))
-    ;; Check memory management
-    (is (= 2 (g:object-ref-count group)))
-    (is (= 1 (g:object-ref-count controller)))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((group 2) controller :strong 1)
+      ;; Create group and controller
+      (setf group (g:simple-action-group-new))
+      (setf controller (gtk:pad-controller-new group nil))
+      ;; Retrieve properties
+      (is (eq group (gtk:pad-controller-action-group controller)))
+      (is-false (gtk:pad-controller-pad controller)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_pad_controller_new
 
 (test gtk-pad-controller-new
-  (let ((group (g:simple-action-group-new)))
-    (is (typep group 'g:simple-action-group))
-    ;; Constructor
-    (is (typep (gtk:pad-controller-new group nil) 'gtk:pad-controller))
-    (is (= 1 (g:object-ref-count (gtk:pad-controller-new group nil))))
-    ;; Make instance
-    (is (typep (make-instance 'gtk:pad-controller) 'gtk:pad-controller))
-    (is (= 1 (g:object-ref-count (make-instance 'gtk:pad-controller))))
-    ;; New object
-    (is (typep (g:object-new "GtkPadController") 'gtk:pad-controller))
-    (is (= 1 (g:object-ref-count (g:object-new "GtkPadController"))))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((group 3) controller :strong 1)
+      ;; Create group
+      (setf group (g:simple-action-group-new))
+      ;; Constructor
+      (is (typep (setf controller
+                       (gtk:pad-controller-new group)) 'gtk:pad-controller))
+      (is (typep (setf controller
+                       (gtk:pad-controller-new group nil)) 'gtk:pad-controller))
+      ;; Make instance
+      (is (typep (setf controller
+                       (make-instance 'gtk:pad-controller)) 'gtk:pad-controller))
+      ;; New object
+      (is (typep (setf controller
+                       (g:object-new "GtkPadController")) 'gtk:pad-controller)))))
 
 ;;;     gtk_pad_controller_set_action_entries
 
 (test gtk-pad-controller-set-action-entries
-  (let* ((group (make-instance 'g:simple-action-group))
-         (controller (gtk:pad-controller-new group nil))
-         (entries '((:button 1 -1 "Action 1" "action1")
-                    (:ring 1 -1 "Action 2" "action2")
-                    (:strip 1 -1 "Action 3" "action3"))))
-    (is-false (gtk:pad-controller-set-action-entries controller entries))
-    ;; TODO: Does not return a GAction object. Why?
-    (is-false (g:action-map-lookup-action group "action1"))
-    (is-false (g:action-map-lookup-action group "action2"))
-    (is-false (g:action-map-lookup-action group "action3"))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((group 2) controller :strong 1)
+      (let ((entries '((:button 0 -1 "Action 1" "action1")
+                       (:ring 0 -1 "Action 2" "action2")
+                       (:strip 0 -1 "Action 3" "action3"))))
+        ;; Create group and controller
+        (setf group (make-instance 'g:simple-action-group))
+        (setf controller (gtk:pad-controller-new group))
+        ;; Add entries to controller
+        (is-false (gtk:pad-controller-set-action-entries controller entries))
+        ;; FIME: Does not return a GAction object. Why?
+        (is-false (g:action-map-lookup-action group "action1"))
+        (is-false (g:action-map-lookup-action group "action2"))
+        (is-false (g:action-map-lookup-action group "action3"))))))
 
 ;;;     gtk_pad_controller_set_action
 
 (test gtk-pad-controller-set-action
-  (let* ((group (make-instance 'g:simple-action-group))
-         (controller (gtk:pad-controller-new group nil)))
-    (is-false (gtk:pad-controller-set-action controller
-                                             :button
-                                             1
-                                             -1
-                                             "Action"
-                                             "action"))
-    ;; TODO: Does not return a GAction object. Why?
-    (is-false (g:action-map-lookup-action group "action"))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((group 2) controller :strong 1)
+      ;; Create group and controller
+      (setf group (make-instance 'g:simple-action-group))
+      (setf controller (gtk:pad-controller-new group))
+      ;; Add action entry
+      (is-false (gtk:pad-controller-set-action controller
+                                               :button
+                                               0
+                                               -1
+                                               "Action"
+                                               "pad.action"))
+      ;; FIXME: Does not return a GAction object. Why?
+      (is-false (g:action-map-lookup-action group "pad.action")))))
 
-;;; 2024-9-20
+;;; 2025-2-23

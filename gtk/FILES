@@ -149,7 +149,7 @@ Buttons and Toggles
 Numeric and Text Data Entry
 
   gtk4.editable.lisp                   GtkEditable                    GTK 4.16 &
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16 .
   gtk4.text.lisp                       GtkText                        GTK 4.16 .
   gtk4.entry.lisp                      GtkEntry                       GTK 4.16 .
   gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16 .
@@ -242,7 +242,7 @@ Miscellaneous
 
   gtk4.adjustment.lisp                 GtkAdjustment                  GTK 4.16 .
   gtk4.size-group.lisp                 GtkSizeGroup                   GTK 4.16 .
-  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.16
+  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.16 .
   gtk4.tooltip.lisp                    GtkTooltip                     GTK 4.16 .
   gtk4.widget-paintable.lisp           GtkWidgetPaintable             GTK 4.16 .
   gtk4.window-controls.lisp            GtkWindowControls              GTK 4.16 .
@@ -250,7 +250,7 @@ Miscellaneous
 
 Interfaces
 
-  gtk4.actionable.lisp                 GtkActionable                  GTK 4.16 +
+  gtk4.actionable.lisp                 GtkActionable                  GTK 4.16 .
   gtk4.orientable.lisp                 GtkOrientable                  GTK 4.16 .
 
 Abstract Base Classes
@@ -388,4 +388,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2025-2-13
+2025-2-23
