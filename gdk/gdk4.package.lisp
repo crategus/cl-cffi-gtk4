@@ -747,7 +747,7 @@
       @about-variable{+priority-redraw+}
       @about-variable{+event-propagate+}
       @about-variable{+event-stop+}
-      @about-variable{+buton-primary+}
+      @about-variable{+button-primary+}
       @about-variable{+button-middle+}
       @about-variable{+button-secondary+}
       @about-symbol{event-type}

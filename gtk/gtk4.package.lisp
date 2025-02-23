@@ -2829,6 +2829,7 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-has-visible-focus}
       @about-function{widget-is-drawable}
       @about-function{widget-measure}
+      @about-function{widget-snapshot}
       @about-function{widget-snapshot-child}
       @about-function{widget-next-sibling}
       @about-function{widget-prev-sibling}
@@ -3587,25 +3588,20 @@ GtkCellRenderer         GtkWidget
       @about-function{snapshot-perspective}
       @about-function{snapshot-append-node}
       @about-function{snapshot-append-cairo}
-      @about-function{snapshot-append-texture}
       @about-function{snapshot-append-color}
       @about-function{snapshot-append-layout}
+      @about-function{snapshot-append-border}
       @about-function{snapshot-append-linear-gradient}
       @about-function{snapshot-append-repeating-linear-gradient}
-      @about-function{snapshot-append-conic-gradient}
-      @about-function{snapshot-append-border}
-      @about-function{snapshot-append-inset-shadow}
-      @about-function{snapshot-append-outset-shadow}
       @about-function{snapshot-append-radial-gradient}
       @about-function{snapshot-append-repeating-radial-gradient}
+      @about-function{snapshot-append-conic-gradient}
+      @about-function{snapshot-append-inset-shadow}
+      @about-function{snapshot-append-outset-shadow}
+      @about-function{snapshot-append-texture}
       @about-function{snapshot-append-scaled-texture}
       @about-function{snapshot-append-fill}
       @about-function{snapshot-append-stroke}
-      @about-function{snapshot-render-insertion-cursor}
-      @about-function{snapshot-render-background}
-      @about-function{snapshot-render-frame}
-      @about-function{snapshot-render-focus}
-      @about-function{snapshot-render-layout}
     @end{subsection}
     @begin[GtkTooltip]{subsection}
       @about-class{tooltip}
