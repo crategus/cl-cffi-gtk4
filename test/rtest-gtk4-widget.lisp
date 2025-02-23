@@ -674,7 +674,24 @@
              (multiple-value-list
                  (gtk:widget-measure (gtk:label-new "label") :vertical -1)))))
 
+;;;     gtk_widget_snapshot
 ;;;     gtk_widget_snapshot_child
+
+;; TODO: Improve the test, the test does not return a render node
+
+#+nil
+(test gtk-widget-snapshot
+  (when *first-run-gtk-test*
+    (glib-test:with-check-memory (window button snapshot :strong 1)
+      (setf button (gtk:button-new-with-label "label"))
+      (setf window (make-instance 'gtk:window :child button))
+      (setf snapshot (gtk:snapshot-new))
+      (is-false (gtk:widget-realize button))
+      (is-false (gtk:widget-snapshot window snapshot))
+      (is-false (gtk:snapshot-to-node snapshot))
+      ;; Remove references
+      (is-false (setf (gtk:window-child window) nil))
+      (is-false (gtk:window-destroy window)))))
 
 ;;;     gtk_widget_get_next_sibling
 ;;;     gtk_widget_get_prev_sibling
