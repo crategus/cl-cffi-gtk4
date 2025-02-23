@@ -55,9 +55,7 @@
 (unexport 'glib:define-gboxed-cstruct :glib)
 (unexport 'glib:define-gboxed-variant-cstruct :glib)
 
-(unexport 'glib:gtype :glib)
 (unexport 'glib:get-boxed-info :glib)
-(unexport 'glib:symbol-for-gtype :glib)
 (unexport 'glib:type-initializer-call :glib)
 (unexport 'glib:boxed :glib)
 (unexport 'glib:*warn-unknown-gtype* :glib)
