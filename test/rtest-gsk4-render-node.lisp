@@ -635,8 +635,7 @@
 
       (is (gdk:rgba-equal blue (first (gsk:shadow-node-shadow node 0))))
       (is (gdk:rgba-equal green (first (gsk:shadow-node-shadow node 1))))
-      (is (gdk:rgba-equal black (first (gsk:shadow-node-shadow node 2))))
-)))
+      (is (gdk:rgba-equal black (first (gsk:shadow-node-shadow node 2)))))))
 
 ;;;     GskBlendNode
 ;;;     GskCrossFadeNode
