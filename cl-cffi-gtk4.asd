@@ -601,7 +601,7 @@
 
      ;; Abstract Base Classes
      (:file "rtest-gtk4-widget")
-;    (:file "rtest-gtk4-widget-subclassing")
+     (:file "rtest-gtk4-widget-subclassing")
      (:file "rtest-gtk4-range")
 
      ;; Layout Containers
