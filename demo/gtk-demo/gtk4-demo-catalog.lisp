@@ -1328,7 +1328,14 @@
        ":window"
        "DO-LINK-BUTTON"
        "gtk4-example"
-       "link-button.lisp")
+       "link-button.lisp"
+       :keywords
+       "GtkLinkButton"
+       "gtk:link-button"
+       "gtk:link-button-new"
+       "gtk:link-button-new-with-label"
+       "gtk:link-button-visited"
+       ":visited")
       ("Scale Button"
        ":window"
        "DO-SCALE-BUTTON"
@@ -1338,7 +1345,13 @@
        ":window"
        "DO-SWITCH"
        "gtk4-example"
-       "switch.lisp"))
+       "switch.lisp"
+       :keywords
+       "GtkSwitch"
+       "gtk:switch"
+       "gtk:switch-active"
+       ":active"
+       "notify::active"))
 
      "Numeric/Text Data Entry"
      (("Entry"
@@ -1936,11 +1949,13 @@
        "pango-draw-text-centered"
        "pango-example"
        "text-centered.lisp")
+
       ("Draw text metrics"
        ":drawfunc"
        "pango-draw-text-metrics"
        "pango-example"
        "text-metrics.lisp")
+
       ("Draw text soulmate"
        ":drawfunc"
        "pango-draw-text-soulmate"
@@ -1950,7 +1965,13 @@
        ":drawfunc"
        "pango-draw-cairo-rendering"
        "pango-example"
-       "cairo-rendering.lisp"))
+       "cairo-rendering.lisp")
+      ("Draw Pango Layout"
+       ":drawfunc"
+       "draw-pango-layout"
+       "pango-example"
+       "draw-pango-layout.lisp")
+       )
 
      ;; Cairo demos
      "Cairo"

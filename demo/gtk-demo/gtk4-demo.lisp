@@ -344,6 +344,59 @@
     (when (gtk-demo-name demo)
       (gtk-demo-run demo application))))
 
+(defun screenshot (widget)
+  (let* ((paintable (gtk:widget-paintable-new widget))
+         (snapshot (gtk:snapshot-new))
+         (width (gtk:widget-width widget))
+         (height (gtk:widget-height widget))
+         (spread 3)
+         (path (glib-sys:sys-path "out/snapshot.png" "gtk4-demo"))
+         (color (gdk:rgba-parse "gray"))
+         node)
+
+    (format t "in SCREENSHOT for ~a~%" widget)
+    (format t "    paintable : ~a~%" paintable)
+    (format t "         path : ~a~%" path)
+    (format t "        width : ~a~%" width)
+    (format t "       heigth : ~a~%" height)
+
+    (graphene:with-point (point 12 12)
+      (gtk:snapshot-translate snapshot point))
+
+    (graphene:with-rect (bounds 0 0 width height)
+      (graphene:with-size (size 6 6)
+        (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
+
+          (gtk:snapshot-append-color snapshot (gdk:rgba-parse "white") bounds)
+
+          (gsk:rounded-rect-init outline bounds size size size size)
+          (gtk:snapshot-append-outset-shadow snapshot outline color 6 3 spread 9))))
+
+    (gdk:paintable-snapshot paintable snapshot width height)
+
+    (setf node (gtk:snapshot-to-node snapshot))
+
+    (cairo:with-context-for-image-surface (context :argb32
+                                                   (+ width 24) (+ height 24))
+      (gsk:render-node-draw node context)
+;      (cairo:set-source-rgb context 1.0 1.0 1.0)
+;      (cairo:rectangle context 12 12 (+ width 12) (+ height 12))
+;      (cairo:fill context)
+
+      (unless (cairo:surface-write-to-png (cairo:target context) path)
+        (format t "Erro: Image not saved~%"))
+      (gsk:render-node-unref node))))
+
+(defun activate-screenshot (application action parameter)
+  (declare (ignore action parameter))
+  (screenshot (gtk:application-active-window application)))
+
+(defun activate-screenshot-child (application action parameter)
+  (declare (ignore action parameter))
+    (let* ((window (gtk:application-active-window application))
+           (widget (gtk:window-child window)))
+      (screenshot widget)))
+
 ;;; ----------------------------------------------------------------------------
 
 ;; Functions for searching examples
@@ -558,7 +611,13 @@
                                 (lambda (action parameter)
                                   (declare (ignore action parameter))
                                   (activate-quit app)))
-                          (list "inspector" #'activate-inspector)))
+                          (list "inspector" #'activate-inspector)
+                          (list "screenshot"
+                                (lambda (action param)
+                                  (activate-screenshot app action param)))
+                          (list "screenshot-child"
+                                (lambda (action param)
+                                  (activate-screenshot-child app action param)))))
            ;; Define options
            (options (list (list "version"                     ; long name
                                 #\v                           ; short name
@@ -591,6 +650,8 @@
       (setf (gtk:application-accels-for-action app "app.about") "F1")
       (setf (gtk:application-accels-for-action app "app.quit") "<Control>q")
       (setf (gtk:application-accels-for-action app "app.inspector") "<Control>d")
+      (setf (gtk:application-accels-for-action app "app.screenshot") "<Control>p")
+      (setf (gtk:application-accels-for-action app "app.screenshot-child") "<Control>o")
       ;; Add comand line options
       (g:application-add-main-option-entries app options)
       ;; Connect signal handlers for the application
