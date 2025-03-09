@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.version.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -31,15 +31,6 @@
 ;;;
 ;;;     Variables and functions to check the GTK version
 ;;;
-;;; Types and Values
-;;;
-;;;     GTK_MAJOR_VERSION                                  not implemented
-;;;     GTK_MINOR_VERSION                                  not implemented
-;;;     GTK_MICRO_VERSION                                  not implemented
-;;;     GTK_BINARY_AGE                                     not implemented
-;;;     GTK_INTERFACE_AGE                                  not implemented
-;;;     GTK_CHECK_VERSION                                  not implemented
-
 ;;; Functions
 ;;;
 ;;;     gtk_get_major_version
@@ -53,36 +44,12 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; GTK_MAJOR_VERSION                                      not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_MINOR_VERSION                                      not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_MICRO_VERSION                                      not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_BINARY_AGE                                         not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_INTERFACE_AGE                                      not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_CHECK_VERSION()                                    not implemented
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_get_major_version
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_get_major_version" major-version) :uint
  #+liber-documentation
- "@version{2023-3-24}
+ "@version{2025-2-28}
   @return{The unsigned integer with the major version number of the GTK
     library.}
   @begin{short}
@@ -100,7 +67,7 @@
 
 (cffi:defcfun ("gtk_get_minor_version" minor-version) :uint
  #+liber-documentation
- "@version{2023-3-24}
+ "@version{2025-2-28}
   @return{The unsigned integer with the minor version number of the GTK
     library.}
   @begin{short}
@@ -118,7 +85,7 @@
 
 (cffi:defcfun ("gtk_get_micro_version" micro-version) :uint
  #+liber-documentation
- "@version{2023-3-24}
+ "@version{2025-2-28}
   @return{The unsigned integer with the micro version number of the GTK
     library.}
   @begin{short}
@@ -131,11 +98,11 @@
 (export 'micro-version)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_binary_age -> binary-age                       not implemented
+;;; gtk_get_binary_age                                      not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_interface_age -> interface-age                 not implemented
+;;; gtk_get_interface_age                                   not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -144,10 +111,10 @@
 
 (cffi:defcfun ("gtk_check_version" check-version) :string
  #+liber-documentation
- "@version{2023-3-24}
-  @argument[major]{an unsigned integer with the required major version}
-  @argument[minor]{an unsigned integer with the required minor version}
-  @argument[micro]{an unsigned integer with the required micro version}
+ "@version{2025-2-28}
+  @argument[major]{an unsigned integer for the required major version}
+  @argument[minor]{an unsigned integer for the required minor version}
+  @argument[micro]{an unsigned integer for the required micro version}
   @begin{return}
     The @code{nil} value if the GTK library is compatible with the given
     version, or a string describing the version mismatch.
@@ -172,7 +139,7 @@
 
 (defun cl-cffi-gtk-build-info (&optional (out *standard-output*))
  #+liber-documentation
- "@version{2023-3-24}
+ "@version{2025-2-28}
   @argument[out]{an optional stream, the default is @code{*standard-output*}}
   @begin{short}
     Provides informations about the installation and the versions of the
@@ -182,19 +149,19 @@
     @begin{pre}
 (gtk:cl-cffi-gtk-build-info)
 =>
-cl-cffi-gtk version: 0.2.0
-cl-cffi-gtk build date: 20:25 3/24/2023
-GTK version: 4.6.6
-GLIB version: 2.72.4
-GDK-Pixbuf version: 2.42.8
-Pango version: 1.50.6
-Cairo version: 1.16.0
+cl-cffi-gtk version: 0.9.0
+cl-cffi-gtk build date: 15:1 2/28/2025
+GTK version: 4.16.3
+GLIB version: 2.82.1
+GDK-Pixbuf version: 2.42.12
+Pango version: 1.54.0
+Cairo version: 1.18.2
 Machine type: X86-64
-Machine version: Intel(R) Core(TM) i5-5200U CPU @@ 2.20GHz
-Software type: Linux
-Software version: 5.19.0-35-generic
+Machine version: NIL
+Software type: Win32
+Software version: 6.2.9200
 Lisp implementation type: SBCL
-Lisp implementation version: 2.1.11.debian
+Lisp implementation version: 2.0.0
 NIL
     @end{pre}
   @end{dictionary}

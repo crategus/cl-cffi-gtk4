@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.message-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@
 (setf (liber:alias-for-symbol 'buttons-type)
       "GEnum"
       (liber:symbol-documentation 'buttons-type)
- "@version{2024-5-1}
+ "@version{2025-2-26}
   @begin{declaration}
 (gobject:define-genum \"GtkButtonsType\" buttons-type
   (:export t
@@ -174,7 +174,7 @@
 
 #+liber-documentation
 (setf (documentation 'message-dialog 'type)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @begin{short}
     The @class{gtk:message-dialog} widget presents a dialog with some message
     text.
@@ -280,7 +280,7 @@
 (setf (liber:alias-for-function 'message-dialog-message-area)
       "Accessor"
       (documentation 'message-dialog-message-area 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-message-area object) => area}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[area]{a @class{gtk:box} widget with @code{:vertical} orientation}
@@ -320,7 +320,7 @@
 (setf (liber:alias-for-function 'message-dialog-message-type)
       "Accessor"
       (documentation 'message-dialog-message-type 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-message-type object) => type}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[type]{a value of the @symbol{gtk:message-type} enumeration}
@@ -350,11 +350,11 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-text)
       "Accessor"
       (documentation 'message-dialog-secondary-text 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-secondary-text object) => text}
   @syntax{(setf (gtk:message-dialog-secondary-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
-  @argument[text]{a string with the secondary text for the message dialog}
+  @argument[text]{a string for the secondary text of the message dialog}
   @begin{short}
     Accessor of the @slot[gtk:message-dialog]{secondary-text} slot of the
     @class{gtk:message-dialog} class.
@@ -383,7 +383,7 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-use-markup)
       "Accessor"
       (documentation 'message-dialog-secondary-use-markup 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-secondary-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-secondary-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -414,11 +414,11 @@
 (setf (liber:alias-for-function 'message-dialog-text)
       "Accessor"
       (documentation 'message-dialog-text 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-text object) => text}
   @syntax{(setf (gtk:message-dialog-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
-  @argument[text]{a string with the primary text for the message dialog}
+  @argument[text]{a string for the primary text of the message dialog}
   @begin{short}
     Accessor of the @slot[gtk:message-dialog]{text} slot of the
     @class{gtk:message-dialog} class.
@@ -446,7 +446,7 @@
 (setf (liber:alias-for-function 'message-dialog-use-markup)
       "Accessor"
       (documentation 'message-dialog-use-markup 'function)
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @syntax{(gtk:message-dialog-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -469,7 +469,7 @@
 
 (defun message-dialog-new (parent flags type buttons message &rest args)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @argument[parent]{a transient @class{gtk:window} parent, or @code{nil} for
     none}
   @argument[flags]{a @symbol{gtk:dialog-flags} value for the flags to use}
@@ -521,7 +521,7 @@
 (defun message-dialog-new-with-markup (parent flags type buttons message
                                            &rest args)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @argument[parent]{a transient @class{gtk:window} parent, or @code{nil} for
     none}
   @argument[flags]{a @symbol{gtk:dialog-flags} value for the flags to use}
@@ -598,7 +598,7 @@
 
 (defun message-dialog-set-markup (dialog text)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[text]{a markup string, see Pango markup format}
   @begin{short}
@@ -624,7 +624,7 @@
 
 (defun message-dialog-format-secondary-text (dialog message &rest args)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[message]{a Lisp format string, or @code{nil}}
   @argument[args]{arguments for @arg{message}}
@@ -654,7 +654,7 @@
 
 (defun message-dialog-format-secondary-markup (dialog message &rest args)
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-2-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[message]{a Lisp format string with markup, see Pango markup format,
     or @code{nil}}

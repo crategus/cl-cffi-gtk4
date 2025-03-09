@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.paper-size.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -153,6 +153,7 @@
   @see-constructor{gtk:paper-size-new-from-ipp}
   @see-constructor{gtk:paper-size-new-from-key-file}
   @see-constructor{gtk:paper-size-new-from-ppd}
+  @see-constructor{gtk:paper-size-copy}
   @see-class{gtk:page-setup}")
 
 (export 'paper-size)
@@ -302,7 +303,7 @@
  #+liber-documentation
  "@version{2025-1-6}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{The @class{gtk:paper-size} instance with the copy of @arg{size}.}
+  @return{The new @class{gtk:paper-size} instance with the copy of @arg{size}.}
   @begin{short}
     Copies an existing @class{gtk:paper-size} instance.
   @end{short}

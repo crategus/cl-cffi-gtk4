@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.icon-view.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -176,7 +176,7 @@
 (setf (liber:alias-for-symbol 'icon-view-drop-position)
       "GEnum"
       (liber:symbol-documentation 'icon-view-drop-position)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @begin{declaration}
 (gobject:define-genum \"GtkIconViewDropPosition\" icon-view-drop-position
   (:export t
@@ -273,7 +273,7 @@
 
 #+liber-documentation
 (setf (documentation 'icon-view 'type)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @begin{short}
     The @class{gtk:icon-view} widget provides an alternative view on a
     @class{gtk:tree-model} object.
@@ -456,7 +456,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-activate-on-single-click)
       "Accessor"
       (documentation 'icon-view-activate-on-single-click 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:icon-view-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -481,7 +481,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "cell-area" 'icon-view) t)
  "The @code{cell-area} property of type @class{gtk:cell-area}
   (Read / Write / Construct) @br{}
-  The cell area used to layout cell renderers for this view. If no area is
+  The cell area used to layout cell renderers for this icon view. If no area is
   specified when creating the icon view a @class{gtk:cell-area-box} object will
   be used.")
 
@@ -489,7 +489,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-cell-area)
       "Accessor"
       (documentation 'icon-view-cell-area 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-cell-area object) => area}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[area]{a @class{gtk:cell-area} object used to layout cell renderers}
@@ -525,11 +525,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-column-spacing)
       "Accessor"
       (documentation 'icon-view-column-spacing 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-column-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[spacing]{an integer with the column spacing}
+  @argument[spacing]{an integer for the column spacing}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{column-spacing} slot of the
     @class{gtk:icon-view} class.
@@ -557,11 +557,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-columns)
       "Accessor"
       (documentation 'icon-view-columns 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-columns object) => columns}
   @syntax{(setf (gtk:icon-view-columns object) columns)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[columns]{an integer with the number of columns}
+  @argument[columns]{an integer for the number of columns}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{columns} slot of the
     @class{gtk:icon-view} class.
@@ -589,11 +589,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-orientation)
       "Accessor"
       (documentation 'icon-view-item-orientation 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-item-orientation object) => orientation}
   @syntax{(setf (gtk:icon-view-item-orientation object) orientation)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[orientation]{a @symbol{gtk:orientation} value with the relative
+  @argument[orientation]{a @symbol{gtk:orientation} value for the relative
     position of texts and icons}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{item-orientation} slot of the
@@ -613,7 +613,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "item-padding" 'icon-view) t)
  "The @code{item-padding} property of type @code{:int} (Read / Write) @br{}
-  Specifies the padding around each of the icon view's item. @br{}
+  Specifies the padding around each item of the icon view. @br{}
   Allowed values: >= 0 @br{}
   Default value: 6")
 
@@ -621,11 +621,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-padding)
       "Accessor"
       (documentation 'icon-view-item-padding 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-item-padding object) => padding}
   @syntax{(setf (gtk:icon-view-item-padding object) padding)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[padding]{an integer with the item padding}
+  @argument[padding]{an integer for the item padding}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{item-padding} slot of the
     @class{gtk:icon-view} class.
@@ -652,11 +652,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-width)
       "Accessor"
       (documentation 'icon-view-item-width 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-item-width object) => width}
   @syntax{(setf (gtk:icon-view-item-width object) width)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[width]{an integer with the width for each item}
+  @argument[width]{an integer for the width for each item}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{item-width} slot of the
     @class{gtk:icon-view} class.
@@ -683,11 +683,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-margin)
       "Accessor"
       (documentation 'icon-view-margin 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-margin object) => margin}
   @syntax{(setf (gtk:icon-view-margin object) margin)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[margin]{an integer with the margin}
+  @argument[margin]{an integer for the margin}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{margin} slot of the
     @class{gtk:icon-view} class.
@@ -718,11 +718,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-markup-column)
       "Accessor"
       (documentation 'icon-view-markup-column 'function)
- "@version{2024-7-8}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-markup-column object) => column}
   @syntax{(setf (gtk:icon-view-markup-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[column]{an integer with a column in the currently used model, or -1
+  @argument[column]{an integer for a column in the currently used model, or -1
     to display no text}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{markup-column} slot of
@@ -754,7 +754,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-model)
       "Accessor"
       (documentation 'icon-view-model 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-model object) => model}
   @syntax{(setf (gtk:icon-view-model object) model)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -792,11 +792,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-pixbuf-column)
       "Accessor"
       (documentation 'icon-view-pixbuf-column 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-pixbuf-column object) => column}
   @syntax{(setf (gtk:icon-view-pixbuf-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[column]{an integer with a column in the currently used model, or
+  @argument[column]{an integer for a column in the currently used model, or
     -1 to disable}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{pixbuf-column} slot of the
@@ -820,14 +820,15 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "reorderable" 'icon-view) t)
  "The @code{reorderable} property of type @code{:boolean} (Read / Write) @br{}
-  The reorderable property specifies if the items can be reordered by DND. @br{}
+  The reorderable property specifies if the items can be reordered by drag
+  and drop. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'icon-view-reorderable)
       "Accessor"
       (documentation 'icon-view-reorderable 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-reorderable object) => reorderable}
   @syntax{(setf (gtk:icon-view-reorderable object) reorderable)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -877,11 +878,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-row-spacing)
       "Accessor"
       (documentation 'icon-view-row-spacing 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-row-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[spacing]{an integer with the row spacing}
+  @argument[spacing]{an integer for the row spacing}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{row-spacing} slot of the
     @class{gtk:icon-view} class.
@@ -909,7 +910,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-selection-mode)
       "Accessor"
       (documentation 'icon-view-selection-mode 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-selection-mode object) => mode}
   @syntax{(setf (gtk:icon-view-selection-mode object) mode)}
   @argument[object]{a @class{gtk:icon-view} widget}
@@ -943,11 +944,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-spacing)
       "Accessor"
       (documentation 'icon-view-spacing 'function)
- "@version{2024-7-8}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[spacing]{an integer with the spacing}
+  @argument[spacing]{an integer for the spacing}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{spacing} slot of the
     @class{gtk:icon-view} class.
@@ -977,11 +978,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-text-column)
       "Accessor"
       (documentation 'icon-view-text-column 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-text-column object) => column}
   @syntax{(setf (gtk:icon-view-text-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[column]{an integer with a column in the currently used model, or
+  @argument[column]{an integer for a column in the currently used model, or
     -1 to display no text}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{text-column} slot of the
@@ -1010,12 +1011,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-tooltip-column)
       "Accessor"
       (documentation 'icon-view-tooltip-column 'function)
- "@version{2024-5-1}
+ "@version{2025-3-3}
   @syntax{(gtk:icon-view-tooltip-column object) => column}
   @syntax{(setf (gtk:icon-view-tooltip-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
-  @argument[column]{an integer, which is a valid column number for
-    @arg{icon-view}'s model}
+  @argument[column]{an integer, which is a valid column number}
   @begin{short}
     Accessor of the @slot[gtk:icon-view]{tooltip-column} slot of the
     @class{gtk:icon-view} class.
@@ -1052,7 +1052,7 @@ lambda (view)    :action
 
 (defun icon-view-new ()
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @return{The newly created @class{gtk:icon-view} widget.}
   @begin{short}
     Creates a new icon view.
@@ -1076,7 +1076,7 @@ lambda (view)    :action
 
 (defun icon-view-new-with-area (area)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[area]{a @class{gtk:cell-area} object to use to layout cells}
   @return{The newly created @class{gtk:icon-view} widget.}
   @begin{short}
@@ -1104,7 +1104,7 @@ lambda (view)    :action
 
 (defun icon-view-new-with-model (model)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[model]{a @class{gtk:tree-model} object}
   @return{The newly created @class{gtk:icon-view} widget.}
   @begin{short}
@@ -1130,10 +1130,10 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_get_path_at_pos" icon-view-path-at-pos)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[x]{an integer with the x position to be identified}
-  @argument[y]{an integer with the y position to be identified}
+  @argument[x]{an integer for the x position to be identified}
+  @argument[y]{an integer for the y position to be identified}
   @begin{return}
     The @class{gtk:tree-path} instance corresponding to the icon or @code{nil}
     if no icon exists at that position.
@@ -1166,10 +1166,10 @@ lambda (view)    :action
 
 (defun icon-view-item-at-pos (view x y)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[x]{an integer with the x position to be identified}
-  @argument[y]{an integer with the y position to be identified}
+  @argument[x]{an integer for the x position to be identified}
+  @argument[y]{an integer for the y position to be identified}
   @begin{return}
     @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
     @arg{cell} -- a @class{gtk:cell-renderer} object responsible for the
@@ -1196,7 +1196,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_set_cursor" icon-view-set-cursor) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[cell]{one of the @class{gtk:cell-renderer} objects of
@@ -1240,7 +1240,7 @@ lambda (view)    :action
 
 (defun icon-view-get-cursor (view)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
     @arg{path} -- a current @class{gtk:tree-path} cursor path, or @code{nil}
@@ -1285,7 +1285,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'icon-view-foreach-func)
       "Callback"
       (liber:symbol-documentation 'icon-view-foreach-func)
- "@version{#2024-5-3}
+ "@version{#2025-3-3}
   @syntax{lambda (view path)}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of a selected row}
@@ -1312,7 +1312,7 @@ lambda (view)    :action
 
 (defun icon-view-selected-foreach (view func)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[func]{a @symbol{gtk:icon-view-foreach-func} callback function to
     call for each selected icon}
@@ -1345,12 +1345,13 @@ lambda (view)    :action
 
 (defun icon-view-cell-rect (view path cell)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[cell]{a @class{gtk:cell-renderer} object or @code{nil}}
-  @return{The @class{gdk:rectangle} instance with the cell rectangle or
-    @code{nil}.}
+  @begin{return}
+    The @class{gdk:rectangle} instance with the cell rectangle or @code{nil}.
+  @end{return}
   @begin{short}
     Returns the bounding rectangle in widget coordinates for the cell specified
     by @arg{path} and @arg{cell}.
@@ -1377,7 +1378,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_select_path" icon-view-select-path) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to be selected}
   @short{Selects the row at @arg{path}.}
@@ -1398,7 +1399,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_unselect_path" icon-view-unselect-path) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to be unselected}
   @short{Unselects the row at @arg{path}.}
@@ -1420,7 +1421,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_path_is_selected" icon-view-path-is-selected)
     :boolean
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to check selection on}
   @return{@em{True} if @arg{path} is selected.}
@@ -1447,10 +1448,11 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_get_selected_items" icon-view-selected-items)
     (g:list-t (g:boxed tree-path :return))
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @return{The list containing a @class{gtk:tree-path} instance for each selected
-    row.}
+  @begin{return}
+    The list containing a @class{gtk:tree-path} instance for each selected row.
+  @end{return}
   @begin{short}
     Creates a list of paths of all selected items.
   @end{short}
@@ -1476,7 +1478,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_select_all" icon-view-select-all) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{short}
     Selects all the icons.
@@ -1499,7 +1501,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_unselect_all" icon-view-unselect-all) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @short{Unselects all the icons.}
   @begin[Warning]{dictionary}
@@ -1517,7 +1519,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_item_activated" icon-view-item-activated) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to be activated}
   @begin{short}
@@ -1549,7 +1551,7 @@ lambda (view)    :action
                                  &key (row-align 0.5 row-align-p)
                                       (col-align 0.5 col-align-p))
  #+liber-documentation
- "@version{#2025-1-11}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance for the item to move to}
   @argument[row-align]{a number coerced to a single float for the vertical
@@ -1600,7 +1602,7 @@ lambda (view)    :action
 
 (defun icon-view-visible-range (view)
  #+liber-documentation
- "@version{#2025-1-11}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
     @code{start} -- a @class{gtk:tree-path} instance with the start of the
@@ -1633,7 +1635,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_set_tooltip_item" icon-view-set-tooltip-item)
     :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -1663,7 +1665,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_set_tooltip_cell" icon-view-set-tooltip-cell)
     :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -1704,10 +1706,10 @@ lambda (view)    :action
 
 (defun icon-view-tooltip-context (view x y tip)
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[x]{an integer with the x coordinate, relative to widget coordinates}
-  @argument[y]{an integer with the y coordinate, relative to widget coordinates}
+  @argument[x]{an integer for the x coordinate, relative to widget coordinates}
+  @argument[y]{an integer for the y coordinate, relative to widget coordinates}
   @argument[tip]{a boolean whether this is a keyboard tooltip or not}
   @begin{return}
     @arg{xx} -- an integer with @arg{x} converted to be relative to the bin
@@ -1767,7 +1769,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_get_item_row" icon-view-item-row) :int
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of the item}
   @return{The integer with the row in which the item is displayed.}
@@ -1792,7 +1794,7 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_icon_view_get_item_column" icon-view-item-column) :int
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of the item}
   @return{The integer with the column in which the item is displayed.}
@@ -1818,13 +1820,13 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_enable_model_drag_source"
                icon-view-enable-model-drag-source) :void
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[mask]{a @symbol{gdk:modifier-type} value with the allowed buttons
+  @argument[mask]{a @symbol{gdk:modifier-type} value for the allowed buttons
     to start drag}
-  @argument[formats]{a @class{gdk:content-formats} instance with the formats
+  @argument[formats]{a @class{gdk:content-formats} instance for the formats
     that the drag will support}
-  @argument[actions]{a @symbol{gdk:drag-action} value with the possible actions
+  @argument[actions]{a @symbol{gdk:drag-action} value for the possible actions
     for a drag from this widget}
   @begin{short}
     Turns the icon view into a drag source for automatic DND.
@@ -1853,14 +1855,14 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_enable_model_drag_dest"
                icon-view-enable-model-drag-dest) :void
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[formats]{a @class{gdk:content-formats} instance with the formats
+  @argument[formats]{a @class{gdk:content-formats} instance for the formats
     that the drag will support}
-  @argument[actions]{a @symbol{gdk:drag-action} value with the possible actions
+  @argument[actions]{a @symbol{gdk:drag-action} value for the possible actions
     for a drag to this widget}
   @begin{short}
-    Turns the icon view into a drop destination for automatic DND.
+    Turns the icon view into a drop destination for automatic drag and drop.
   @end{short}
   Calling this method sets the @slot[gtk:icon-view]{reorderable} property to
   the @em{false} value.
@@ -1883,7 +1885,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_unset_model_drag_source"
                icon-view-unset-model-drag-source) :void
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:icon-view-enable-model-drag-source}
@@ -1908,7 +1910,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_unset_model_drag_dest"
                icon-view-unset-model-drag-dest) :void
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:icon-view-enable-model-drag-dest}
@@ -1933,7 +1935,7 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_set_drag_dest_item" icon-view-set-drag-dest-item)
     :void
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of the item to highlight,
     or @code{nil}}
@@ -1967,7 +1969,7 @@ lambda (view)    :action
 
 (defun icon-view-get-drag-dest-item (view)
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
     @arg{path} -- a @class{gtk:tree-path} instance for the highlighted item,
@@ -2007,11 +2009,11 @@ lambda (view)    :action
 
 (defun icon-view-dest-item-at-pos (view xdrag ydrag)
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
-  @argument[xdrag]{an integer with the position to determine the destination
+  @argument[xdrag]{an integer for the position to determine the destination
     item for}
-  @argument[ydrag]{an integer with the position to determine the destination
+  @argument[ydrag]{an integer for the position to determine the destination
     item for}
   @begin{return}
     @arg{path} -- a @class{gtk:tree-path} instance for the item @br{}
@@ -2041,11 +2043,12 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_icon_view_create_drag_icon" icon-view-create-drag-icon)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
- "@version{#2024-7-9}
+ "@version{#2025-3-3}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance}
-  @return{The newly allocated @symbol{cairo:surface-t} surface for the drag
-    icon.}
+  @begin{return}
+    The newly allocated @symbol{cairo:surface-t} surface for the drag icon.
+  @end{return}
   @begin{short}
     Creates a @symbol{cairo:surface-t} representation of the item at @arg{path}.
   @end{short}

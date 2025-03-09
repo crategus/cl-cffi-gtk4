@@ -1550,11 +1550,11 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_append_stroke" snapshot-append-stroke) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-3-1}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path to stroke}
   @argument[stroke]{a @class{gsk:stroke} instance for the stroke attributes}
-  @argument[color]{a @class{gdk:rgba} instance for the color to fille the path
+  @argument[color]{a @class{gdk:rgba} instance for the color to fill the path
     with}
   @begin{short}
     A convenience method to stroke a path with a color.

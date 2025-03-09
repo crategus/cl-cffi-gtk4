@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.builder.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -779,10 +779,11 @@
 
 (defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{2024-11-4}
-  @argument[path]{a string with the path of the resource file to parse}
-  @return{The new @class{gtk:builder} object containing the described
-    interface.}
+ "@version{2025-3-1}
+  @argument[path]{a string for the path of the resource file to parse}
+  @begin{return}
+    The new @class{gtk:builder} object containing the described interface.
+  @end{return}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a resource path.
   @end{short}
@@ -1103,11 +1104,13 @@
 
 (cffi:defcfun ("gtk_builder_get_object" builder-object) g:object
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2025-1-3}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[name]{a string with the name of the object to get}
-  @return{The @class{g:object} instance named @arg{name} or @code{nil} if it
-    could not be found in the object tree.}
+  @argument[name]{a string for the name of the object to get}
+  @begin{return}
+    The @class{g:object} instance named @arg{name} or @code{nil} if it
+    could not be found in the object tree.
+  @end{return}
   @begin{short}
     Gets the object named @arg{name} from the @class{gtk:builder} UI definition.
   @end{short}

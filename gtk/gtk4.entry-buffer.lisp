@@ -303,7 +303,7 @@ lambda (buffer pos chars nchars)    :run-first
 
 (cffi:defcfun ("gtk_entry_buffer_delete_text" entry-buffer-delete-text) :uint
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-2-24}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @argument[pos]{an unsigned integer for the position at which to delete text}
   @argument[nchars]{an integer for the number of characters to delete}
@@ -321,7 +321,7 @@ lambda (buffer pos chars nchars)    :run-first
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-insert-text}"
   (buffer (g:object entry-buffer))
-  (position :uint)
+  (pos :uint)
   (nchars :int))
 
 (export 'entry-buffer-delete-text)

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.css-provider.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -105,7 +105,7 @@
 (setf (liber:alias-for-symbol 'css-location)
       "CStruct"
       (liber:symbol-documentation 'css-location)
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @begin{declaration}
 (cffi:defcstruct css-location
   (bytes :size)
@@ -136,7 +136,8 @@
   line break is encountered. CSS defines the C character sequences
   @code{\"\\r\\n\"}, @code{\"\\r\"}, @code{\"\\n\"} and @code{\"\\f\"} as
   newlines. If your document uses different rules for line breaking, you might
-  want run into problems here.
+  want run into problems here. See the @class{gtk:css-section} documentation
+  of an example.
   @see-slot{gtk:css-location-bytes}
   @see-slot{gtk:css-location-chars}
   @see-slot{gtk:css-location-lines}
@@ -157,10 +158,10 @@
 
 (defun css-location-bytes (location)
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @syntax{(gtk:css-location-bytes location) => bytes}
   @argument[location]{a @symbol{gtk:css-location} instance}
-  @argument[bytes]{a @code{:size} value}
+  @argument[bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the beginning.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'bytes))
@@ -174,10 +175,10 @@
 
 (defun css-location-chars (location)
  #+liber-documentation
- "@version{2024-4-23}
-  @syntax{(gtk:css-location-bytes location) => chars}
+ "@version{2025-2-25}
+  @syntax{(gtk:css-location-chars location) => chars}
   @argument[location]{a @symbol{gtk:css-location} instance}
-  @argument[bytes]{a @code{:size} value}
+  @argument[bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the beginning.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'chars))
@@ -191,10 +192,10 @@
 
 (defun css-location-lines (location)
  #+liber-documentation
- "@version{2024-4-23}
-  @syntax{(gtk:css-location-bytes location) => lines}
+ "@version{2025-2-25}
+  @syntax{(gtk:css-location-lines location) => lines}
   @argument[location]{a @symbol{gtk:css-location} instance}
-  @argument[lines]{a @code{:size} value}
+  @argument[lines]{a number of the foreign type @code{:size}}
   @short{Returns the number of full lines that have been parsed.}
   If you want to display this as a line number, you need to add 1 to this.
   @see-symbol{gtk:css-location}"
@@ -208,10 +209,10 @@
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
- "@version{2024-4-23}
-  @syntax{(gtk:css-location-bytes location) => line-bytes}
+ "@version{2025-2-25}
+  @syntax{(gtk:css-location-line-bytes location) => line-bytes}
   @argument[location]{a @symbol{gtk:css-location} instance}
-  @argument[line-bytes]{a @code{:size} value}
+  @argument[line-bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the last line break.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'line-bytes))
@@ -224,10 +225,10 @@
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
- "@version{2024-4-23}
-  @syntax{(gtk:css-location-bytes location) => lines}
+ "@version{2025-2-25}
+  @syntax{(gtk:css-location-line-chars location) => line-chars}
   @argument[location]{a @symbol{gtk:css-location} instance}
-  @argument[lines]{a @code{:size} value}
+  @argument[line-chars]{a number of the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the last line break.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'line-chars))
@@ -247,7 +248,7 @@
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @begin{declaration}
 (glib:define-gboxed-opaque css-section \"GtkCssSection\"
   :export t
@@ -260,6 +261,9 @@
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
   @begin[Examples]{dictionary}
+    Access the @symbol{gtk:css-location} and @symbol{gtk:css-section} structures
+    in a @code{\"parsing-error\"} signal handler to mark an error in the
+    parsed CSS file, which is loaded into text buffer.
     @begin{pre}
 (g:signal-connect provider \"parsing-error\"
         (lambda (provider section err)
@@ -289,23 +293,22 @@
 ;;; gtk_css_section_new
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Allow a GFile, a pathname or a namestring
-
 (cffi:defcfun ("gtk_css_section_new" css-section-new)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{2025-1-12}
-  @argument[file]{a pathname or namestring for the file this section refers to}
+ "@version{2025-2-25}
+  @argument[path]{a pathname or namestring for the file this section refers to}
   @argument[start]{a @symbol{gtk:css-location} instance for the start location}
   @argument[end]{a @symbol{gtk:css-location} instance for the end location}
   @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
-    the given file from the @arg{start} location to the @arg{end} location.
+    the given @arg{path} from the @arg{start} location to the @arg{end}
+    location.
   @end{short}
   @see-class{gtk:css-section}
   @see-symbol{gtk:css-location}"
-  (file g:file-as-namestring)
+  (path g:file-as-namestring)
   (start (:pointer (:struct css-location)))
   (end (:pointer (:struct css-location))))
 
@@ -321,16 +324,16 @@
 (cffi:defcfun ("gtk_css_section_new_with_bytes" css-section-new-with-bytes)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{#2024-11-5}
-  @argument[file]{a @class{g:file} object for the file this section refers to}
-  @argument[bytes]{a @class{g:bytes} instance with the bytes this section
+ "@version{#2025-2-25}
+  @argument[path]{a pathname or namestring for the file this section refers to}
+  @argument[bytes]{a @class{g:bytes} instance for the bytes this section
     refers to}
-  @argument[start]{a @symbol{gtk:css-location} instance with the start location}
-  @argument[end]{a @symbol{gtk:css-location} instance with the end location}
+  @argument[start]{a @symbol{gtk:css-location} instance for the start location}
+  @argument[end]{a @symbol{gtk:css-location} instance for the end location}
   @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
-    the given @arg{file} or the given @arg{bytes} from the @arg{start} location
+    the given @arg{path} or the given @arg{bytes} from the @arg{start} location
     to the @arg{end} location.
   @end{short}
 
@@ -338,7 +341,7 @@
   @see-class{gtk:css-section}
   @see-class{g:bytes}
   @see-class{g:file}"
-  (file g:object)
+  (path g:file-as-namestring)
   (bytes (g:boxed g:bytes))
   (start (:pointer (:struct css-location)))
   (end (:pointer (:struct css-location))))
@@ -364,7 +367,7 @@
 
 (cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The string with the human-readable text form.}
   @begin{short}
@@ -384,7 +387,7 @@
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The @class{g:bytes} instance with the bytes from which @arg{section}
     was parsed.}
@@ -404,19 +407,19 @@
 ;;; gtk_css_section_get_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) g:object
+(cffi:defcfun ("gtk_css_provider_get_file" css-section-file)
+    g:file-as-namestring
  #+liber-documentation
- "@version{#2024-4-23}
+ "@version{#2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{g:file} object with the file that @arg{section} was parsed
-    from or @code{nil} if @arg{section} was parsed from other data.}
+  @return{The namestring for the file that @arg{section} was parsed from or
+    @code{nil} if @arg{section} was parsed from other data.}
   @begin{short}
     Gets the file that the section was parsed from.
   @end{short}
   If no such file exists, for example because the CSS was loaded via the
   @fun{gtk:css-provider-load-from-string} function, then @code{nil} is returned.
   @see-class{gtk:css-section}
-  @see-class{g:file}
   @see-function{gtk:css-provider-load-from-string}"
   (section (g:boxed css-section)))
 
@@ -429,7 +432,7 @@
 (cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
     (g:boxed css-section)
  #+liber-documentation
- "@version{#2024-4-23}
+ "@version{#2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The @class{gtk:css-section} parent section, or @code{nil} if none.}
   @begin{short}
@@ -448,7 +451,7 @@
 (cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The @symbol{gtk:css-location} instance with the start location of the
     section.}
@@ -468,7 +471,7 @@
 (cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2025-2-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The @symbol{gtk:css-location} instance with the end location of the
     section.}
@@ -577,19 +580,19 @@ lambda (provider section error)    :run-last
 
 (cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-2-25}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
   @return{The string representing the CSS provider.}
   @begin{short}
     Convertes the CSS provider into a string representation in CSS format.
   @end{short}
-  Using the @fun{gtk:css-provider-load-from-data} function with the return
+  Using the @fun{gtk:css-provider-load-from-string} function with the return
   value from this function on a new CSS provider created with the
   @fun{gtk:css-provider-new} function will basically create a duplicate of this
   provider.
   @see-class{gtk:css-provider}
   @see-function{gtk:css-provider-new}
-  @see-function{gtk:css-provider-load-from-data}"
+  @see-function{gtk:css-provider-load-from-string}"
   (provider (g:object css-provider)))
 
 (export 'css-provider-to-string)
