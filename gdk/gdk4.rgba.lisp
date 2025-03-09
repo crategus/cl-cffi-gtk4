@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.rgba.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,7 +123,7 @@
   @syntax{(gdk:rgba-red instance) => red}
   @syntax{(setf (gdk:rgba-red instance) red)}
   @argument[instance]{a @struct{gdk:rgba} color}
-  @argument[red]{a number coerced to a single float with the intensity of the
+  @argument[red]{a number coerced to a single float for the intensity of the
     red channel from 0.0 to 1.0}
   @begin{short}
     Accessor of the @code{red} slot of the @struct{gdk:rgba} color.
@@ -214,8 +214,10 @@
  #+liber-documentation
  "@version{2025-1-11}
   @argument[rgba]{a @struct{gdk:rgba} color}
-  @return{The newly allocated @struct{gdk:rgba} color, with the same contents
-    as @arg{rgba}.}
+  @begin{return}
+    The newly allocated @struct{gdk:rgba} color, with the same contents
+    as @arg{rgba}.
+  @end{return}
   @short{Makes a copy of a @struct{gdk:rgba} color.}
   @see-struct{gdk:rgba}
   @see-function{gdk:rgba-new}"
@@ -276,8 +278,10 @@
  #+liber-documentation
  "@version{2025-1-11}
   @argument[str]{a string specifying the color}
-  @return{The newly created @struct{gdk:rgba} color with the filled in values,
-    or @code{nil}.}
+  @begin{return}
+    The newly created @struct{gdk:rgba} color with the filled in values,
+    or @code{nil}.
+  @end{return}
   @begin{short}
     Parses a textual representation of a color, and returns a RGBA instance
     filling in the @code{red}, @code{green}, @code{blue} and @code{alpha}

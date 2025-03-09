@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.frame-clock.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,7 +87,7 @@
 (setf (liber:alias-for-symbol 'frame-clock-phase)
       "GFlags"
       (liber:symbol-documentation 'frame-clock-phase)
- "@version{2024-7-12}
+ "@version{2025-3-1}
   @begin{declaration}
 (gobject:define-gflags \"GdkFrameClockPhase\" frame-clock-phase
   (:export t
@@ -103,7 +103,7 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:none]{no phase}
+      @entry[:none]{No phase.}
       @entry[:flush-events]{Corresponds to @code{\"flush-events\"} signals.
         Should not be handled by applications.}
       @entry[:before-paint]{Corresponds to @code{\"before-paint\"} signals.
@@ -139,7 +139,7 @@
 
 #+liber-documentation
 (setf (documentation 'frame-clock 'type)
- "@version{2024-7-12}
+ "@version{2025-3-1}
   @begin{short}
     The @class{gdk:frame-clock} object tells the application when to update and
     repaint a surface.
@@ -172,8 +172,8 @@
   function that are called at a \"similar\" time get the same value. This means
   that if different animations are timed by looking at the difference in time
   between an initial value from the @fun{gdk:frame-clock-frame-time} function
-  and the value inside the @code{\"update\"} signal of the clock, they will stay
-  exactly synchronized.
+  and the value inside the @code{\"update\"} signal of the clock, they will
+  stay exactly synchronized.
   @begin[Signal Details]{dictionary}
     @subheading{The \"after-paint\" signal}
       @begin{pre}
@@ -255,7 +255,7 @@ lambda (clock)    :run-last
 
 (cffi:defcfun ("gdk_frame_clock_get_frame_time" frame-clock-frame-time) :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @return{The integer with a timestamp in microseconds.}
   @begin{short}
@@ -276,9 +276,9 @@ lambda (clock)    :run-last
 
 (cffi:defcfun ("gdk_frame_clock_request_phase" frame-clock-request-phase) :void
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
-  @argument[phase]{a @symbol{gdk:frame-clock-phase} value with the phase that
+  @argument[phase]{a @symbol{gdk:frame-clock-phase} value for the phase that
     is requested}
   @begin{short}
     Asks the frame clock to run a particular phase.
@@ -305,7 +305,7 @@ lambda (clock)    :run-last
 (cffi:defcfun ("gdk_frame_clock_begin_updating" frame-clock-begin-updating)
     :void
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{short}
     Starts updates for an animation.
@@ -327,7 +327,7 @@ lambda (clock)    :run-last
 
 (cffi:defcfun ("gdk_frame_clock_end_updating" frame-clock-end-updating) :void
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{short}
     Stops updates for an animation.
@@ -346,7 +346,7 @@ lambda (clock)    :run-last
 (cffi:defcfun ("gdk_frame_clock_get_frame_counter" frame-clock-frame-counter)
     :int64
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{return}
     Inside frame processing, the unsigned integer of the frame counter for the
@@ -369,11 +369,11 @@ lambda (clock)    :run-last
 (cffi:defcfun ("gdk_frame_clock_get_history_start" frame-clock-history-start)
     :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{return}
-    The unsigned integer frame counter value for the oldest frame that is
-    available in the internal frame history of the frame clock.
+    The unsigned integer for the frame counter value of the oldest frame that
+    is available in the internal frame history of the frame clock.
   @end{return}
   @begin{short}
     The frame clock internally keeps a history of @class{gdk:frame-timings}
@@ -398,10 +398,10 @@ lambda (clock)    :run-last
 (cffi:defcfun ("gdk_frame_clock_get_timings" frame-clock-timings)
     (g:boxed frame-timings)
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
-  @argument[counter]{an unsigned integer frame counter value identifying the
-    frame to be received}
+  @argument[counter]{an unsigned integer for the frame counter value identifying
+    the frame to be received}
   @begin{return}
     The @class{gdk:frame-timings} instance for the specified frame, or
     @code{nil} if it is not available. See the
@@ -429,7 +429,7 @@ lambda (clock)    :run-last
 (cffi:defcfun ("gdk_frame_clock_get_current_timings"
                frame-clock-current-timings) (g:boxed frame-timings)
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{return}
     The @class{gdk:frame-timings} instance for the frame currently being
@@ -458,9 +458,10 @@ lambda (clock)    :run-last
 
 (defun frame-clock-refresh-info (clock time)
  #+liber-documentation
- "@version{#2023-3-10}
+ "@version{#2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
-  @argument[time]{an integer base time for determining a presentaton time}
+  @argument[time]{an integer for the base time for determining a presentaton
+    time}
   @begin{return}
     @arg{refresh-interval} -- an integer with the determined refresh interval,
       or @code{nil}, a default refresh interval of 1/60th of a second will be
@@ -494,7 +495,7 @@ lambda (clock)    :run-last
 
 (cffi:defcfun ("gdk_frame_clock_get_fps" frame-clock-fps) :double
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{2025-3-1}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @return{The double float with the current fps.}
   @begin{short}

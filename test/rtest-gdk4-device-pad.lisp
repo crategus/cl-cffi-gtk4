@@ -59,8 +59,8 @@
              (glib-test:list-signals "GdkDevicePad")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkDevicePad" GDK:DEVICE-PAD
-                    (:EXPORT T
-                     :TYPE-INITIALIZER "gdk_device_pad_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gdk_device_pad_get_type"))
              (gobject:get-gtype-definition "GdkDevicePad"))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -70,4 +70,4 @@
 ;;;     gdk_device_pad_get_n_features
 ;;;     gdk_device_pad_get_feature_group
 
-;;; 2024-9-18
+;;; 2025-2-28

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.frame-timings.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -37,8 +37,8 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_frame_timings_ref
-;;;     gdk_frame_timings_unref
+;;;     gdk_frame_timings_ref                               not needed
+;;;     gdk_frame_timings_unref                             not needed
 ;;;     gdk_frame_timings_get_frame_counter
 ;;;     gdk_frame_timings_get_complete
 ;;;     gdk_frame_timings_get_frame_time
@@ -62,7 +62,7 @@
 (setf (liber:alias-for-class 'frame-timings)
       "GBoxed"
       (documentation 'frame-timings 'type)
- "@version{2024-7-12}
+ "@version{2025-3-1}
   @begin{declaration}
 (glib:define-gboxed-opaque frame-timings \"GdkFrameTimings\"
   :export t
@@ -84,11 +84,11 @@
   @see-function{gdk:frame-clock-current-timings}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_frame_timings_ref ()                                not needed
+;;; gdk_frame_timings_ref                                   not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_frame_timings_unref ()                              not needed
+;;; gdk_frame_timings_unref                                 not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -98,7 +98,7 @@
 (cffi:defcfun ("gdk_frame_timings_get_frame_counter"
                frame-timings-frame-counter) :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @return{The integer with the frame counter value for this frame.}
   @begin{short}
@@ -115,7 +115,7 @@
 
 (cffi:defcfun ("gdk_frame_timings_get_complete" frame-timings-complete) :boolean
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @begin{return}
     @em{True} if all information that will be available for the frame has been
@@ -144,7 +144,7 @@
 (cffi:defcfun ("gdk_frame_timings_get_frame_time" frame-timings-frame-time)
     :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @return{The integer with the frame time for the frame.}
   @begin{short}
@@ -165,7 +165,7 @@
 (cffi:defcfun ("gdk_frame_timings_get_presentation_time"
                frame-timings-presentation-time) :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @begin{return}
     The integer with the time the frame was displayed to the user, or 0 if no
@@ -189,7 +189,7 @@
 (cffi:defcfun ("gdk_frame_timings_get_refresh_interval"
                frame-timings-refresh-interval) :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @begin{return}
     The integer with the refresh interval of the display, in microseconds, or 0
@@ -214,7 +214,7 @@
 (cffi:defcfun ("gdk_frame_timings_get_predicted_presentation_time"
                frame-timings-predicted-presentation-time) :int64
  #+liber-documentation
- "@version{#2024-7-12}
+ "@version{#2025-3-1}
   @argument[timings]{a @class{gdk:frame-timings} instance}
   @begin{return}
     The integer with the predicted time at which the frame will be presented,

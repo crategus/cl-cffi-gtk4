@@ -330,9 +330,9 @@
 (cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
     (g:object texture :return)
  #+liber-documentation
- "@version{#2023-4-12}
+ "@version{2025-3-2}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
-  @return{A newly created @class{gdk:texture} object.}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture object representing @arg{pixbuf}.
   @end{short}

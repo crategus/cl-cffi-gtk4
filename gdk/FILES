@@ -10,7 +10,7 @@ List of files for the GDK 4 Library
 
   gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...   GDK 4.16 .
   gdk4.rectangle.lisp              GdkRectangle                       GDK 4.16 .
-  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.16 .
+  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.16
   gdk4.keyval.lisp                 Key Values                         GDK 4.16 .
   gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.16 .
   gdk4.color-state.lisp            GdkColorState                      GDK 4.16 .
@@ -22,7 +22,7 @@ List of files for the GDK 4 Library
   gdk4.display.lisp                GdkDisplay                         GDK 4.16 .
   gdk4.device-tool.lisp            GdkDeviceTool                      GDK 4.16 .
   gdk4.device.lisp                 GdkDevice                          GDK 4.16 .
-  gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.16 .
+  gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.16
   gdk4.monitor.lisp                GdkMonitor                         GDK 4.16 .
   gdk4.seat.lisp                   GdkSeat                            GDK 4.16 .
 

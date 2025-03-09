@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.device-pad.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -66,7 +66,7 @@
 (setf (liber:alias-for-symbol 'device-pad-feature)
       "GEnum"
       (liber:symbol-documentation 'device-pad-feature)
- "@version{2024-7-12}
+ "@version{2025-2-28}
   @begin{declaration}
 (gobject:define-genum \"GdkDevicePadFeature\" device-pad-feature
   (:export t
@@ -101,10 +101,10 @@
 (setf (liber:alias-for-class 'device-pad)
       "Interface"
       (documentation 'device-pad 'type)
- "@version{2023-7-30}
+ "@version{2025-2-28}
   @begin{short}
     The @class{gdk:device-pad} interface is an interface implemented by devices
-    of @code{:tablet-pad} type.
+    of @code{:tablet-pad} type of the @symbol{gdk:input-source} enumeration.
   @end{short}
   It allows querying the features provided by the pad device
 
@@ -120,8 +120,11 @@
   (current) for each given group, different groups may have different current
   modes. The number of available modes in a group can be found out through the
   @fun{gdk:device-pad-group-n-modes} function, and the current mode for a
-  given group will be notified through events of @code{GDK_PAD_GROUP_MODE} type.
-  @see-class{gdk:device}")
+  given group will be notified through events of @code{:pad-group-mode} type of
+  the @symbol{gdk:event-type} enumeration.
+  @see-class{gdk:device}
+  @see-symbol{gdk:input-source}
+  @see-symbol{gdk:event-type}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_device_pad_get_n_groups
@@ -129,9 +132,11 @@
 
 (cffi:defcfun ("gdk_device_pad_get_n_groups" device-pad-n-groups) :int
  #+liber-documentation
- "@version{#2023-3-11}
+ "@version{#2025-2-28}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @return{The integer with the number of button/ring/strip groups in the pad.}
+  @begin{return}
+    The integer with the number of button/ring/strip groups in the pad device.
+  @end{return}
   @begin{short}
     Returns the number of groups this pad device has.
   @end{short}
@@ -148,9 +153,9 @@
 
 (cffi:defcfun ("gdk_device_pad_get_group_n_modes" device-pad-group-n-modes) :int
  #+liber-documentation
- "@version{#2023-3-11}
+ "@version{#2025-2-28}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @argument[index]{an integer with the group to get the number of available
+  @argument[index]{an integer for the group to get the number of available
     modes from}
   @return{The integer with the number of modes available in the group,}
   @begin{short}
@@ -168,12 +173,13 @@
 
 (cffi:defcfun ("gdk_device_pad_get_n_features" device-pad-n-features) :int
  #+liber-documentation
- "@version{#2023-3-11}
+ "@version{#2025-2-28}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @argument[feature]{a @symbol{gdk:device-pad-feature} value with the pad
+  @argument[feature]{a @symbol{gdk:device-pad-feature} value for the pad
     feature}
-  @return{The integer with the amount of elements of type feature that this pad
-    has.}
+  @begin{return}
+    The integer with the amount of elements of type feature that this pad has.
+  @end{return}
   @begin{short}
     Returns the number of features a tablet pad has.
   @end{short}
@@ -190,11 +196,11 @@
 
 (cffi:defcfun ("gdk_device_pad_get_feature_group" device-pad-feature-group) :int
  #+liber-documentation
- "@version{#2023-3-11}
+ "@version{#2025-2-28}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @argument[feature]{a @symbol{gdk:device-pad-feature} value with the pad
+  @argument[feature]{a @symbol{gdk:device-pad-feature} value for the pad
     feature to get the group from}
-  @argument[index]{an integer with the index of the feature to get the
+  @argument[index]{an integer for the index of the feature to get the
     group from}
   @return{The integer with the group number of the queried pad feature.}
   @begin{short}

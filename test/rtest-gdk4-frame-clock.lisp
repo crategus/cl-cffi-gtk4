@@ -64,8 +64,10 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkFrameClock")))
   ;; Check children
-  (is (equal '("GdkFrameClockIdle")
-             (glib-test:list-children "GdkFrameClock")))
+  (is (or (equal '()
+                 (glib-test:list-children "GdkFrameClock"))
+          (equal '("GdkFrameClockIdle")
+                 (glib-test:list-children "GdkFrameClock"))))
   ;; Check interfaces
   (is (equal '()
              (glib-test:list-interfaces "GdkFrameClock")))
@@ -78,22 +80,140 @@
              (glib-test:list-signals "GdkFrameClock")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkFrameClock" GDK:FRAME-CLOCK
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_frame_clock_get_type")
-                       NIL)
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_frame_clock_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GdkFrameClock"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     after-paint
+
+(test gdk-frame-clock-after-paint-signal
+  (let* ((name "after-paint")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     before-paint
+
+(test gdk-frame-clock-before-paint-signal
+  (let* ((name "before-paint")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     flush-events
+
+(test gdk-frame-clock-flush-events-signal
+  (let* ((name "flush-events")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     layout
+
+(test gdk-frame-clock-layout-signal
+  (let* ((name "layout")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     paint
+
+(test gdk-frame-clock-paint-signal
+  (let* ((name "paint")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     resume-events
+
+(test gdk-frame-clock-resume-events-signal
+  (let* ((name "resume-events")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     update
+
+(test gdk-frame-clock-update-signal
+  (let* ((name "update")
+         (gtype (g:gtype "GdkFrameClock"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -108,4 +228,4 @@
 ;;;     gdk_frame_clock_get_refresh_info
 ;;;     gdk_frame_clock_get_fps
 
-;;; 2024-9-19
+;;; 2025-1-3

@@ -137,7 +137,7 @@
 (setf (liber:alias-for-class 'paintable)
       "Interface"
       (documentation 'paintable 'type)
- "@version{2024-5-5}
+ "@version{2025-3-2}
   @begin{short}
     The @class{gdk:paintable} interface is a simple interface used by GDK and
     GTK to represent objects that can be painted anywhere at any size without
@@ -207,7 +207,7 @@
       @entry[gdk:paintable-get-flags-impl]{Method called from the
         @fun{gdk:paintable-flags} function.}
       @entry[gdk:paintable-get-intrinsic-width-impl]{Method called from the
-        @fun{gdk:paintable-intrinsic-with} function.}
+        @fun{gdk:paintable-intrinsic-width} function.}
       @entry[gdk:paintable-get-intrinsic-height-impl]{Method called from the
         @fun{gdk:paintable-intrinsic-height} function.}
       @entry[gdk:paintable-get-intrinsic-aspect-ratio-impl]{Method called from
@@ -745,7 +745,7 @@ lambda (paintable)    :run-last
 (cffi:defcfun ("gdk_paintable_invalidate_contents"
                paintable-invalidate-contents) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2025-3-2}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
     Called by implementations of a @class{gdk:paintable} subclass to invalidate
@@ -756,8 +756,8 @@ lambda (paintable)    :run-last
   output.
 
   This function will emit the @code{\"invalidate-contents\"} signal. If a
-  paintable reports the @code{:static-contents} flag, it must not call this
-  function.
+  paintable reports the @code{:static-contents} value of the
+  @symbol{gdk:paintable-flags} flags, it must not call this function.
   @see-class{gdk:paintable}
   @see-class{gdk:snapshot}
   @see-symbol{gdk:paintable-flags}"

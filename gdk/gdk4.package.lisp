@@ -2,11 +2,11 @@
 ;;; gdk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,18 +90,24 @@
                              #:pixbuf-fill
                              ;; Symbols from gdk-pixbuf.animation.lisp
                              #:pixbuf-animation-iter
+                             #:pixbuf-animation-iter-pixbuf
                              #:pixbuf-animation-iter-advance
                              #:pixbuf-animation-iter-delay-time
                              #:pixbuf-animation-iter-on-currently-loading-frame
-                             #:pixbuf-animation-iter-pixbuf
+
                              #:pixbuf-animation
-                             #:pixbuf-animation-loop
                              #:pixbuf-animation-new-from-file
                              #:pixbuf-animation-new-from-resource
                              #:pixbuf-animation-width
                              #:pixbuf-animation-height
+                             #:pixbuf-animation-iter
                              #:pixbuf-animation-is-static-image
-                             #:pixbuf-animation-static-image)
+                             #:pixbuf-animation-static-image
+
+                             #:pixbuf-simple-anim
+                             #:pixbuf-simple-anim-loop
+                             #:pixbuf-simple-anim-new
+                             #:pixbuf-simple-anim-add-frame)
   ;; Export the symbols for GDK-PIXBUF
   (:export                   ;; Symbols from gdk-pixbuf.structure.lisp
                              #:colorspace
@@ -158,18 +164,22 @@
                              #:pixbuf-fill
                              ;; Symbols from gdk-pixbuf.animation.lisp
                              #:pixbuf-animation-iter
+                             #:pixbuf-animation-iter-pixbuf
                              #:pixbuf-animation-iter-advance
                              #:pixbuf-animation-iter-delay-time
                              #:pixbuf-animation-iter-on-currently-loading-frame
-                             #:pixbuf-animation-iter-pixbuf
                              #:pixbuf-animation
-                             #:pixbuf-animation-loop
                              #:pixbuf-animation-new-from-file
                              #:pixbuf-animation-new-from-resource
                              #:pixbuf-animation-width
                              #:pixbuf-animation-height
+                             #:pixbuf-animation-iter
                              #:pixbuf-animation-is-static-image
-                             #:pixbuf-animation-static-image))
+                             #:pixbuf-animation-static-image
+                             #:pixbuf-simple-anim
+                             #:pixbuf-simple-anim-loop
+                             #:pixbuf-simple-anim-new
+                             #:pixbuf-simple-anim-add-frame))
 
 (in-package :gdk)
 
@@ -740,7 +750,7 @@
       @about-function{app-launch-context-set-icon-name}
     @end{subsection}
   @end{section}
-  @begin[Miscellaneous]{section}
+  @begin[GDK Miscellaneous]{section}
     @begin[Events]{subsection}
       @about-variable{+current-time+}
       @about-variable{+priority-events+}
