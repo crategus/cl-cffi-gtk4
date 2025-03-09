@@ -2370,7 +2370,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-symbol 'tick-callback)
       "Callback"
       (liber:symbol-documentation 'tick-callback)
- "@version{#2025-2-13}
+ "@version{2025-3-1}
   @syntax{lambda (widget clock) => result}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[clock]{a @class{gdk:frame-clock} object for the widget, same as
@@ -2400,7 +2400,7 @@ lambda (widget)    :run-last
 
 (defun widget-add-tick-callback (widget func)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{2025-3-1}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[func]{a @symbol{gtk:tick-callback} callback function to call for
     updating animations}
@@ -2453,7 +2453,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_remove_tick_callback" widget-remove-tick-callback)
     :void
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{2025-3-1}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[id]{an unsigned integer for the ID returned by the
     @fun{gtk:widget-add-tick-callback} function}
