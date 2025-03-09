@@ -104,26 +104,47 @@
 ;;;     gtk_recent_manager_add_item
 ;;;     gtk_recent_manager_has_item
 ;;;     gtk_recent_manager_lookup_item
-;;;     gtk_recent_manager_remove_item
 
 (test gtk-recent-manager-add-item
-  (let* ((recent (gtk:recent-manager-default))
-         (filename (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
-         (uri (concatenate 'string "file://" (namestring filename))))
-    (is-true (gtk:recent-manager-add-item recent uri))
-    (is-true (gtk:recent-manager-has-item recent uri))
-    (is (string= uri
-                 (gtk:recent-info-uri
-                     (gtk:recent-manager-lookup-item recent uri))))
-    (is-true (gtk:recent-manager-remove-item recent uri))
-    (is-false (gtk:recent-manager-has-item recent uri))
-    (is-true (gtk:recent-manager-add-item recent uri))
-))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (:strong 1)
+      (let* ((recent (gtk:recent-manager-default))
+             (filename (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
+             (uri (concatenate 'string "file://" (namestring filename))))
+        (is-true (gtk:recent-manager-add-item recent uri))
+        (is-true (gtk:recent-manager-has-item recent uri))
+        (is (string= uri
+                     (gtk:recent-info-uri
+                         (gtk:recent-manager-lookup-item recent uri))))))))
 
-;;;     gtk_recent_manager_add_full
+;;;     gtk_recent_manager_remove_item
 
+(test gtk-recent-manager-remove-item
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (:strong 1)
+      (let* ((recent (gtk:recent-manager-default))
+             (info (first (last (gtk:recent-manager-items recent))))
+             (uri (gtk:recent-info-uri info)))
+        (is-true (gtk:recent-manager-has-item recent uri))
+        (is-true (gtk:recent-manager-remove-item recent uri))
+        (is-false (gtk:recent-manager-has-item recent uri))))))
+
+;;;     gtk_recent_manager_add_full                         not implemented
 
 ;;;     gtk_recent_manager_move_item
+
+(test gtk-recent-manager-move-item
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (:strong 1)
+      (let* ((recent (gtk:recent-manager-default))
+             (info (first (last (gtk:recent-manager-items recent))))
+             (uri (gtk:recent-info-uri info))
+             (filename1 (glib-sys:sys-path "new-uri.lisp"))
+             (uri1 (concatenate 'string "file://" (namestring filename1))))
+        (is-true (gtk:recent-manager-move-item recent uri uri1))
+        (is-true (gtk:recent-manager-has-item recent uri1))
+        (is-true (gtk:recent-manager-move-item recent uri1 nil)
+        (is-false (gtk:recent-manager-has-item recent uri1)))))))
 
 ;;;     gtk_recent_manager_get_items
 

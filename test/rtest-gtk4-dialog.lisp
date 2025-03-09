@@ -28,11 +28,12 @@
              (glib-test:list-flags-item-nicks "GtkDialogFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkDialogFlags" GTK:DIALOG-FLAGS
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_dialog_flags_get_type")
-                       (:MODAL 1)
-                       (:DESTROY-WITH-PARENT 2)
-                       (:USE-HEADER-BAR 4))
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_dialog_flags_get_type")
+                                     (:MODAL 1)
+                                     (:DESTROY-WITH-PARENT 2)
+                                     (:USE-HEADER-BAR 4))
              (gobject:get-gtype-definition "GtkDialogFlags"))))
 
 ;;;     GtkDialog
@@ -177,4 +178,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; 2024-12-23
+;;; 2025-2-26
