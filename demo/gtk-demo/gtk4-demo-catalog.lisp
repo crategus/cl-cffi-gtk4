@@ -2201,5 +2201,18 @@
        "gdk:display-app-launch-context"
        "gtk:widget-display"
        "g:app-info-launch-default-for-uri-async"
-       "g:app-info-launch-default-for-uri-finish"))
+       "g:app-info-launch-default-for-uri-finish")
+      ("Frame Clock"
+       ":window"
+       "DO-FRAME-CLOCK"
+       "gtk4-example"
+       "frame-clock.lisp"
+       "resource/frame-clock.ui"
+       :keywords
+       "GdKFrameClock"
+       "gdk:frame-clock"
+       "gdk:frame-clock-frame-time"
+       "gtk:widget-frame-clock"
+       "gtk:widget-add-tick-callback"
+       "gtk:widget-remove-tick-callback"))
 ))

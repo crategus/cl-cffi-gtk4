@@ -7,11 +7,11 @@
 ;;;; This demo code shows some of the more obscure cases, in the simple case a
 ;;;; call to the <tt>gtk:image-new-from-file</tt> is all you need.
 ;;;;
-;;;; Last version: 2024-10-31
+;;;; 2025-3-2
 
 (in-package :gtk4-example)
 
-;; TODO: Improve this implementation
+;; TODO: Improve this implementation, do not use a global
 (defvar *animation* nil)
 
 ;;; ----------------------------------------------------------------------------
@@ -34,8 +34,8 @@
     "timeout" "guint64" t t)))
 
 ;; Here, we implement the functionality required by the GdkPaintable interface
-(defmethod gdk:paintable-snapshot-impl ((paintable pixbuf-paintable)
-                                    snapshot width height)
+(defmethod gdk:paintable-snapshot-impl
+           ((paintable pixbuf-paintable) snapshot width height)
   (let ((iter (pixbuf-paintable-iter paintable)))
     (gdk:pixbuf-animation-iter-advance iter 0)
     (let* ((pixbuf (gdk:pixbuf-animation-iter-pixbuf iter))
@@ -46,12 +46,12 @@
   (list :static-size))
 
 (defmethod gdk:paintable-get-intrinsic-width-impl
-    ((paintable pixbuf-paintable))
+           ((paintable pixbuf-paintable))
   (let ((pixbuf (pixbuf-paintable-animation paintable)))
     (gdk:pixbuf-animation-width pixbuf)))
 
 (defmethod gdk:paintable-get-intrinsic-height-impl
-    ((paintable pixbuf-paintable))
+           ((paintable pixbuf-paintable))
   (let ((pixbuf (pixbuf-paintable-animation paintable)))
     (gdk:pixbuf-animation-height pixbuf)))
 
@@ -92,6 +92,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Improve the implementation to avoid this globals
 (let ((pixbuf-loader nil)
       (image-stream nil))
 
@@ -152,7 +153,8 @@
                                   :child vbox
                                   :application application
                                   :title "Various Image Widgets"
-                                  :default-width 320)))
+                                  :default-width 400
+                                  :default-height 700)))
 
       (g:signal-connect window "close-request"
                         (lambda (widget)
@@ -175,13 +177,13 @@
                             (close image-stream)
                             (setf image-stream nil))))
 
-      ;; Image new from a filename
+      ;; Image from a filename
       (let* ((label (make-instance 'gtk:label
                                    :margin-top 9
                                    :margin-bottom 6
                                    :use-markup t
                                    :label
-                                   "<b>Image new from a filename</b>"))
+                                   "<b>Image from a file</b>"))
              (image (gtk:image-new-from-file
                         (glib-sys:sys-path "resource/gtk-logo.png"))))
         (setf (gtk:image-icon-size image) :large)
@@ -203,7 +205,6 @@
         (gtk:box-append vbox image))
 
       ;; Animation from a pixbuf
-      ;; TODO: Remove the extra space above and below the paintable
       (let* ((label (make-instance 'gtk:label
                                    :margin-top 9
                                    :margin-bottom 6
@@ -213,9 +214,23 @@
              (paintable (pixbuf-paintable-new "/images/floppybuddy.gif"))
              (picture (gtk:picture-new-for-paintable paintable)))
         (setf (gtk:widget-halign picture) :center)
-        (setf (gtk:widget-valign picture) :start)
+        (setf (gtk:widget-valign picture) :center)
         (gtk:box-append vbox label)
         (gtk:box-append vbox picture))
+
+      ;; Image new from a symbolic icon
+      (let* ((label (make-instance 'gtk:label
+                                   :margin-top 9
+                                   :margin-bottom 6
+                                   :use-markup t
+                                   :label
+                                   "<b>Symbolic themed icon</b>"))
+             (gicon (g:themed-icon-new-with-default-fallbacks
+                        "battery-caution-charging-symbolic"))
+             (image (gtk:image-new-from-gicon gicon)))
+        (setf (gtk:image-icon-size image) :large)
+        (gtk:box-append vbox label)
+        (gtk:box-append vbox image))
 
       ;; Progressive loading
       (let* ((label (make-instance 'gtk:label

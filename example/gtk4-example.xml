@@ -61,5 +61,9 @@
   </gresource>
   <gresource prefix="/template">
     <file>windows.ui</file>
+    <file>gears-menu.ui</file>
+  </gresource>
+  <gresource prefix="/frames">
+    <file>frame-clock.ui</file>
   </gresource>
 </gresources>

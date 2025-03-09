@@ -171,6 +171,7 @@
            ;;; Gdk examples
            #:do-app-launch-context
            #:do-app-launch-context-async
+           #:do-frame-clock
 
            #:do-paintable-simple
            #:do-paintable-animation

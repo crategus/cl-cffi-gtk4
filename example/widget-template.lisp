@@ -5,7 +5,8 @@
 (in-package :gtk4-example)
 
 (defvar template
-"<interface>
+"<?xml version='1.0' encoding='UTF-8'?>
+<interface>
   <template class='MyAppWindow' parent='GtkApplicationWindow'>
     <property name='title' translatable='yes'>Example Application</property>
     <property name='default-width'>600</property>
@@ -19,13 +20,38 @@
       </object>
     </child>
   </template>
-</interface>")
+</interface>
+")
 
 (gobject:define-gobject-subclass "MyAppWindow" my-app-window
   (:superclass gtk:application-window
    :export t
-   :interfaces ())
-  ((:cl
+   :interfaces nil)
+  ((stack
+    my-app-window-stack
+    "stack" "GtkWidget" t t)
+   (gears
+    my-app-window-gears
+    "gears" "GtkWidget" t t)
+   (search
+    my-app-window-search
+    "search" "GtkWidget" t t)
+   (searchbar
+    my-app-window-searchbar
+    "searchbar" "GtkWidget" t t)
+   (sidebar
+    my-app-window-sidebar
+    "sidebar" "GtkWidget" t t)
+   (words
+    my-app-window-words
+    "words" "GtkWidget" t t)
+   (lines
+    my-app-window-lines
+    "lines" "GtkWidget" t t)
+   (lines-label
+    my-app-window-lines-label
+    "lines-label" "GtkWidget" t t)
+   (:cl
     template-p :initform nil
                :accessor my-app-window-template-p
                :allocation :class)))
@@ -40,15 +66,19 @@
     (setf (my-app-window-template-p obj) t)
 
     ;; Load template from resource for application window
-    ;; FIXME: This function does not work
-;    (gtk:widget-class-set-template-from-resource "MyAppWindow"
-;                                                 "/template/windows.ui")
-
     (gtk:widget-class-set-template-from-resource "MyAppWindow"
-                                                   "/template/windows.ui")
+                                                 "/template/windows.ui")
+
+;; This function does not work. What is wrong?
+;;  Gtk-WARNING : Failed to precompile template for class MyAppWindow:
+;; Fehler in Zeile 17, Zeichen 2: Dokument muss mit einem Element beginnen
+;; (e.g. <book>)
+;   (gtk:widget-class-set-template "MyAppWindow" template)
+
+    (gtk:widget-class-bind-template-child "MyAppWindow" "header")
     (gtk:widget-class-bind-template-child "MyAppWindow" "content_box")
     (gtk:widget-class-bind-template-child "MyAppWindow" "stack")
-    (gtk:widget-class-bind-template-child "MyAppWindow" "page")
+    (gtk:widget-class-bind-template-child "MyAppWindow" "gears")
 
     )
 
@@ -56,7 +86,16 @@
   (format t "Initialize template~%")
   (gtk:widget-init-template obj)
 
-)
+  (setf (my-app-window-gears obj)
+        (gtk:widget-template-child obj "MyAppWindow" "gears"))
+
+
+  (let* ((builder (gtk:builder-new-from-resource "/template/gears-menu.ui"))
+         (menu (gtk:builder-object builder "menu")))
+
+    (setf (gtk:menu-button-menu-model (my-app-window-gears obj)) menu)
+
+  ))
 
 (defun do-widget-template (&optional application)
   (let* ((menus
@@ -80,24 +119,22 @@
                                 :application application
                                 :title "Application Window"
                                 :show-menubar t))
-         (stack (gtk:widget-template-child window "MyAppWindow" "stack"))
          (box (gtk:widget-template-child window "MyAppWindow" "content_box"))
-         (page (gtk:widget-template-child window "MyAppWindow" "page"))
-)
+         (header (gtk:widget-template-child window "MyAppWindow" "header"))
+         (stack (gtk:widget-template-child window "MyAppWindow" "stack"))
+         (gears (gtk:widget-template-child window "MyAppWindow" "gears"))
+        )
 
-    (format t "  stack : ~a~%" stack)
     (format t "    box : ~a~%" box)
-    (format t "   page : ~a~%" page)
-    (format t "  pages : ~a~%" (gtk:stack-pages stack))
-    (format t "visible : ~a~%" (gtk:stack-visible-child-name stack))
+    (format t " header : ~a~%" header)
+    (format t "  stack : ~a~%" stack)
 
-    (setf (gtk:stack-visible-child-name stack) "page1")
 
     ;; Read the menus from a string
     (gtk:builder-add-from-string builder menus)
 
     ;; Set the menubar
-;    (setf (gtk:application-menubar application)
-;          (gtk:builder-object builder "menubar"))
+    (setf (gtk:application-menubar application)
+          (gtk:builder-object builder "menubar"))
     ;; Present the application window
     (gtk:window-present window)))

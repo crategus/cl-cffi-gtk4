@@ -165,6 +165,7 @@
 
                ;; GDK examples
                (:file "app-launch-context")
+               (:file "frame-clock")
 
                ;; Paintable, Texture
                (:file "paintable-simple")

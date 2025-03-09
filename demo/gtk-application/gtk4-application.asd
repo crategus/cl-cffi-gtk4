@@ -16,6 +16,7 @@
                (:file "application-register")
                (:file "sunny")
                (:file "bloatpad")
+               (:file "myapplication")
               ))
 
-;;; 2024-5-27
+;;; 2025-3-7
