@@ -2553,21 +2553,6 @@ GtkCellRenderer         GtkWidget
       @about-function{gl-area-required-version}
     @end{subsection}
   @end{section}
-  @begin[Ornaments]{section}
-    @begin[GtkFrame]{subsection}
-      @about-class{frame}
-      @about-generic{frame-child}
-      @about-generic{frame-label}
-      @about-generic{frame-label-widget}
-      @about-generic{frame-label-xalign}
-      @about-function{frame-new}
-      @about-function{frame-label-align}
-    @end{subsection}
-    @begin[GtkSeparator]{subsection}
-      @about-class{separator}
-      @about-function{separator-new}
-    @end{subsection}
-  @end{section}
   @begin[Scrolling]{section}
     @begin[GtkScrollable]{subsection}
       @about-symbol{scrollable-policy}
@@ -3299,23 +3284,7 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
   @end{section}
   @begin[Recently Used Documents]{section}
-    @begin[GtkRecentManager]{subsection}
-      @about-symbol{recent-data}
-      @about-symbol{recent-manager-error}
-      @about-symbol{GTK_RECENT_MANAGER_ERROR}
-      @about-class{recent-manager}
-      @about-generic{recent-manager-filename}
-      @about-generic{recent-manager-size}
-      @about-function{recent-manager-new}
-      @about-function{recent-manager-default}
-      @about-function{recent-manager-add-item}
-      @about-function{recent-manager-add-full}
-      @about-function{recent-manager-remove-item}
-      @about-function{recent-manager-lookup-item}
-      @about-function{recent-manager-has-item}
-      @about-function{recent-manager-move-item}
-      @about-function{recent-manager-items}
-      @about-function{recent-manager-purge-items}
+    @begin[GtkRecentInfo]{subsection}
       @about-class{recent-info}
       @about-function{recent-info-ref}
       @about-function{recent-info-unref}
@@ -3341,6 +3310,22 @@ GtkCellRenderer         GtkWidget
       @about-function{recent-info-is-local}
       @about-function{recent-info-exists}
       @about-function{recent-info-match}
+    @end{subsection}
+    @begin[GtkRecentManager]{subsection}
+      @about-symbol{recent-data}
+      @about-class{recent-manager}
+      @about-generic{recent-manager-filename}
+      @about-generic{recent-manager-size}
+      @about-function{recent-manager-new}
+      @about-function{recent-manager-default}
+      @about-function{recent-manager-add-item}
+      @about-function{recent-manager-add-full}
+      @about-function{recent-manager-remove-item}
+      @about-function{recent-manager-lookup-item}
+      @about-function{recent-manager-has-item}
+      @about-function{recent-manager-move-item}
+      @about-function{recent-manager-items}
+      @about-function{recent-manager-purge-items}
     @end{subsection}
   @end{section}
   @begin[Gestures and event handling]{section}
@@ -3552,6 +3537,19 @@ GtkCellRenderer         GtkWidget
       @about-function{size-group-add-widget}
       @about-function{size-group-remove-widget}
       @about-function{size-group-widgets}
+    @end{subsection}
+    @begin[GtkFrame]{subsection}
+      @about-class{frame}
+      @about-generic{frame-child}
+      @about-generic{frame-label}
+      @about-generic{frame-label-widget}
+      @about-generic{frame-label-xalign}
+      @about-function{frame-new}
+      @about-function{frame-label-align}
+    @end{subsection}
+    @begin[GtkSeparator]{subsection}
+      @about-class{separator}
+      @about-function{separator-new}
     @end{subsection}
     @begin[GtkSnapshot]{subsection}
       @about-class{snapshot}
@@ -3808,13 +3806,15 @@ GtkCellRenderer         GtkWidget
       @about-variable{+priority-user+}
       @about-class{style-provider}
     @end{subsection}
-    @begin[GtkCssProvider]{subsection}
+    @begin[GtkCssLocation]{subsection}
       @about-symbol{css-location}
       @about-function{css-location-bytes}
       @about-function{css-location-chars}
       @about-function{css-location-lines}
       @about-function{css-location-line-bytes}
       @about-function{css-location-line-chars}
+    @end{subsection}
+    @begin[GtkCssSection]{subsection}
       @about-class{css-section}
       @about-function{css-section-new}
       @about-function{css-section-new-with-bytes}
@@ -3824,6 +3824,8 @@ GtkCellRenderer         GtkWidget
       @about-function{css-section-parent}
       @about-function{css-section-start-location}
       @about-function{css-section-end-location}
+    @end{subsection}
+    @begin[GtkCssProvider]{subsection}
       @about-class{css-provider}
       @about-function{css-provider-new}
       @about-function{css-provider-load-named}
@@ -3996,8 +3998,7 @@ GtkCellRenderer         GtkWidget
       @about-function{entry-completion-completion-prefix}
       @about-function{entry-completion-insert-prefix}
     @end{subsection}
-    @begin[GtkTreeModel]{subsection}
-      @about-symbol{tree-model-flags}
+    @begin[GtkTreePath]{subsection}
       @about-struct{tree-iter}
       @about-function{tree-iter-copy}
       @about-function{tree-iter-free}
@@ -4019,6 +4020,8 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-path-is-ancestor}
       @about-function{tree-path-is-descendant}
       @about-function{tree-path-to-string}
+    @end{subsection}
+    @begin[GtkTreeRowReference]{subsection}
       @about-class{tree-row-reference}
       @about-function{tree-row-reference-new}
       @about-function{tree-row-reference-copy}
@@ -4029,6 +4032,9 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-row-reference-inserted}
       @about-function{tree-row-reference-deleted}
       @about-function{tree-row-reference-reordered}
+    @end{subsection}
+    @begin[GtkTreeModel]{subsection}
+      @about-symbol{tree-model-flags}
       @about-class{tree-model}
       @about-function{tree-model-flags}
       @about-function{tree-model-n-columns}

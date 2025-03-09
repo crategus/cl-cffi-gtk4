@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4.asd
 ;;;
-;;; Copyright (C) 2021 - 2024 Dieter Kaiser
+;;; Copyright (C) 2021 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -360,8 +360,8 @@
      (:file "gtk4.gl-area")
 
      ;; Ornaments
-     (:file "gtk4.frame")
-     (:file "gtk4.separator")
+;     (:file "gtk4.frame")
+;     (:file "gtk4.separator")
 
      ;; Scrolling
      (:file "gtk4.scrollbar")
@@ -454,6 +454,8 @@
      ;; Miscellaneous
      (:file "gtk4.adjustment")
      (:file "gtk4.size-group")
+     (:file "gtk4.frame")
+     (:file "gtk4.separator")
      (:file "gtk4.snapshot")
      (:file "gtk4.tooltip")
      (:file "gtk4.widget-paintable")
@@ -747,8 +749,8 @@
      (:file "rtest-gtk4-gl-area")
 
      ;; Ornaments
-     (:file "rtest-gtk4-frame")
-     (:file "rtest-gtk4-separator")
+;     (:file "rtest-gtk4-frame")
+;     (:file "rtest-gtk4-separator")
 
      ;; Scrolling
      (:file "rtest-gtk4-scrollbar")
@@ -841,6 +843,8 @@
      ;; Miscellaneous
      (:file "rtest-gtk4-adjustment")
      (:file "rtest-gtk4-size-group")
+     (:file "rtest-gtk4-frame")
+     (:file "rtest-gtk4-separator")
      (:file "rtest-gtk4-snapshot")
      (:file "rtest-gtk4-tooltip")
      (:file "rtest-gtk4-widget-paintable")

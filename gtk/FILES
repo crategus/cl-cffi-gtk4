@@ -149,7 +149,7 @@ Buttons and Toggles
 Numeric and Text Data Entry
 
   gtk4.editable.lisp                   GtkEditable                    GTK 4.16 &
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16 .
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.16
   gtk4.text.lisp                       GtkText                        GTK 4.16 .
   gtk4.entry.lisp                      GtkEntry                       GTK 4.16 .
   gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.16 .
@@ -208,7 +208,7 @@ Printing
   gtk4.print-operation.lisp            GtkPrintOperation              GTK 4.16 .
   gtk4.print-context.lisp              GtkPrintContext                GTK 4.16 .
   gtk4.print-settings.lisp             GtkPrintSettings               GTK 4.16 .
-  gtk4.paper-size.lisp                 GtkPaperSize                   GTK 4.16 .
+  gtk4.paper-size.lisp                 GtkPaperSize                   GTK 4.16
   gtk4.page-setup.lisp                 GtkPageSetup                   GTK 4.16 .
   gtk4.printer.lisp                    GtkPrinter                     GTK 4.16 .
   gtk4.print-job.lisp                  GtkPrintJob                    GTK 4.16 .
@@ -260,7 +260,7 @@ Abstract Base Classes
 
 Recently Used Documents
 
-  gtk4.recent-manager.lisp             GtkRecentManager               GTK 4.16 .
+  gtk4.recent-manager.lisp             GtkRecentManager               GTK 4.16
 
 Gestures and event handling
 
@@ -304,14 +304,14 @@ Data exchange, clipboards and Drag-and-Drop
 GTK Core Reference
 
   gtk4.main-loop.lisp                  Initialization                 GTK 4.16 .
-  gtk4.version.lisp                    Version Information            GTK 4.16 .
+  gtk4.version.lisp                    Version Information            GTK 4.16
   gtk4.settings.lisp                   GtkSettings                    Gtk 4.16 .
   gtk4.enumerations.lisp               Standard Enumerations          GTK 4.16 +
 
 Theming in GTK
 
   gtk4.style-provider.lisp             GtkStyleProvider               GTK 4.16 .
-  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.16 +
+  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.16
   gtk4.icon-paintable.lisp             GtkIconPaintable               GTK 4.16 +
   gtk4.icon-theme.lisp                 GtkIconTheme                   GTK 4.16 .
 
@@ -319,9 +319,9 @@ Deprecated
 
   Deprecated since GTK 4.10
 
-  gtk4.dialog.lisp                      GtkDialog                     GTK 4.12 .
-  gtk4.message-dialog.lisp              GtkMessageDialog              GTK 4.12 .
-  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.12 .
+  gtk4.dialog.lisp                      GtkDialog                     GTK 4.12
+  gtk4.message-dialog.lisp              GtkMessageDialog              GTK 4.12
+  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.12
 
   gtk4.info-bar.lisp                    GtkInfoBar                    GTK 4.12 .
   gtk4.statusbar.lisp                   GtkStatusbar                  GTK 4.12 .
@@ -331,7 +331,7 @@ Deprecated
 
   gtk4.entry-completion.lisp            GtkEntryCompletion            GTK 4.12 .
 
-  gtk4.tree-model.lisp                  GtkTreeModel                  GTK 4.12 .
+  gtk4.tree-model.lisp                  GtkTreeModel                  GTK 4.12
   gtk4.tree-selection.lisp              GtkTreeSelection              GTK 4.12 .
   gtk4.tree-view-column.lisp            GtkTreeViewColumn             GTK 4.12 .
   gtk4.tree-view.lisp                   GtkTreeView                   GTK 4.12 .
@@ -339,7 +339,7 @@ Deprecated
 
   gtk4.cell-layout.lisp                 GtkCellLayout                 GTK 4.12 .
   gtk4.cell-view.lisp                   GtkCellView                   GTK 4.12 .
-  gtk4.icon-view.lisp                   GtkIconView                   GTK 4.12 .
+  gtk4.icon-view.lisp                   GtkIconView                   GTK 4.12
 
   gtk4.tree-sortable.lisp               GtkTreeSortable               GTK 4.12 .
   gtk4.tree-model-sort.lisp             GtkTreeModelSort              GTK 4.12 .
@@ -388,4 +388,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2025-2-23
+2025-2-28

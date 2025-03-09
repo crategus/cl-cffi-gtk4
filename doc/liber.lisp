@@ -155,13 +155,16 @@
 (unexport 'gdk:pixbuf-animation-iter-advance :gdk)
 (unexport 'gdk:pixbuf-animation-iter-on-currently-loading-frame :gdk)
 (unexport 'gdk:pixbuf-animation :gdk)
-(unexport 'gdk:pixbuf-animation-loop :gdk)
 (unexport 'gdk:pixbuf-animation-new-from-file :gdk)
 (unexport 'gdk:pixbuf-animation-new-from-resource :gdk)
 (unexport 'gdk:pixbuf-animation-width :gdk)
 (unexport 'gdk:pixbuf-animation-height :gdk)
 (unexport 'gdk:pixbuf-animation-is-static-image :gdk)
 (unexport 'gdk:pixbuf-animation-static-image :gdk)
+(unexport 'gdk:pixbuf-simple-anim :gdk)
+(unexport 'gdk:pixbuf-simple-anim-loop :gdk)
+(unexport 'gdk:pixbuf-simple-anim-new :gdk)
+(unexport 'gdk:pixbuf-simple-anim-add-frame :gdk)
 
 ;;; ---------------------------------------------------------------------------
 
