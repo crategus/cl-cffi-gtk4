@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gsk.path-builder.lisp
 ;;;
-;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GSK 4 Reference Manual
+;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -247,9 +247,9 @@ construct_path (void)
 
 (cffi:defcfun ("gsk_path_builder_add_rect" path-builder-add-rect) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-1-3}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[rect]{a @symbol{graphene:rect-t} instance with the rectangle
+  @argument[rect]{a @symbol{graphene:rect-t} instance for the rectangle
     to create a path for}
   @begin{short}
     Adds @arg{rect} as a new contour to the path built by the path builder.
