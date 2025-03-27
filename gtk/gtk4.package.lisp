@@ -40,9 +40,9 @@
 (in-package :gtk)
 
 #+sbcl
-(when (and (find-package "SB-EXT")
-           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
-  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+(when (and (find-package "SB-INT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-INT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-INT"))
            :traps nil))
 
 (defvar *cl-cffi-gtk-build-time* (multiple-value-list (get-decoded-time)))
