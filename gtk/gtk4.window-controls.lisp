@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.window-controls.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -42,6 +42,8 @@
 ;;;     gtk_window_controls_get_decoration_layout
 ;;;     gtk_window_controls_set_decoration_layout
 ;;;     gtk_window_controls_get_empty
+;;;     gtk_window_controls_get_use_native_controls
+;;;     gtk_window_controls_set_use_native_controls
 ;;;
 ;;; Functions
 ;;;
@@ -52,6 +54,7 @@
 ;;;     decoration-layout
 ;;;     empty
 ;;;     side
+;;;     use-native-controls
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -88,14 +91,18 @@
     "empty" "gboolean" t nil)
    (side
     window-controls-side
-    "side" "GtkPackType" t t)))
+    "side" "GtkPackType" t t))
+   #+gtk-4-18
+   (use-native-controls
+    window-controls-use-native-controls
+    "use-native-controls" "gboolean" t t))
 
 #+liber-documentation
 (setf (documentation 'window-controls 'type)
- "@version{2023-8-9}
+ "@version{2025-3-29}
   @begin{short}
     The @class{gtk:window-controls} widget shows window frame controls, such as
-    minimize, maximize and close buttons, and the window icon.
+    Minimize, Maximize and Close buttons, and the window icon.
   @end{short}
 
   @image[window-controls]{Figure: GtkWindowControls}
@@ -142,13 +149,14 @@ windowcontrols
   @see-slot{gtk:window-controls-decoration-layout}
   @see-slot{gtk:window-controls-empty}
   @see-slot{gtk:window-controls-side}
+  @see-slot{gtk:window-controls-use-native-controls}
   @see-class{gtk:header-bar}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gtk:window-contols-decoration-layout -----------------------------------
+;;; --- gtk:window-controls-decoration-layout ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decoration-layout"
@@ -163,11 +171,11 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-decoration-layout)
       "Accessor"
       (documentation 'window-controls-decoration-layout 'function)
- "@version{2023-8-9}
+ "@version{2025-3-29}
   @syntax{(gtk:window-controls-decoration-layout object) => layout}
   @syntax{(setf (gtk:window-controls-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:window-controls} widget}
-  @argument[layout]{a string with the decoration layout, or @code{nil} to unset
+  @argument[layout]{a string for the decoration layout, or @code{nil} to unset
     the decoration layout}
   @begin{short}
     Accessor of the @slot[gtk:window-controls]{decoration-layout} slot of the
@@ -183,15 +191,16 @@ windowcontrols
   Recognized button names are minimize, maximize, close and icon (the window
   icon).
 
-  For example, \"icon:minimize,maximize,close\" specifies a icon on the left,
-  and minimize, maximize and close buttons on the right.
+  For example, @code{\"icon:minimize,maximize,close\"} specifies a icon on the
+  left, and Minimize, Maximize and Close buttons on the right.
 
-  If the @slot[gtk:window-controls]{side} property is @code{:start},
-  @arg{object} will display the part before the colon, otherwise after that.
+  If the @slot[gtk:window-controls]{side} property is the @code{:start} value
+  from the @symbol{gtk:pack-type} enumeration, @arg{object} will display the
+  part before the colon, otherwise after that.
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
 
-;;; --- gtk:window-contols-empty -----------------------------------------------
+;;; --- gtk:window-controls-empty ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "empty" 'window-controls) t)
@@ -203,9 +212,8 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-empty)
       "Accessor"
       (documentation 'window-controls-empty 'function)
- "@version{2023-8-9}
+ "@version{2025-3-29}
   @syntax{(gtk:window-controls-empty object) => empty}
-  @syntax{(setf (gtk:window-controls-empty object) empty)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[empty]{@em{true} if the widget has window buttons, otherwise
     @em{false}}
@@ -217,7 +225,7 @@ windowcontrols
   window buttons.
   @see-class{gtk:window-controls}")
 
-;;; --- gtk:window-contols-side ------------------------------------------------
+;;; --- gtk:window-controls-side -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "side" 'window-controls) t)
@@ -229,7 +237,7 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-side)
       "Accessor"
       (documentation 'window-controls-side 'function)
- "@version{2023-8-9}
+ "@version{2025-3-29}
   @syntax{(gtk:window-controls-side object) => side}
   @syntax{(setf (gtk:window-controls-side object) side)}
   @argument[object]{a @class{gtk:window-controls} widget}
@@ -244,6 +252,44 @@ windowcontrols
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
 
+;;; --- gtk:window-controls-side -----------------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "use-native-controls"
+                                               'window-controls) t)
+ "The @code{use-native-controls} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Whether to show platform native Close/Minimize/Maximize buttons. For macOS,
+  the @slot[gtk:header-bar]{decoration-layout} property controls the use of
+  native window controls. On other platforms, this option has no effect. See
+  also
+  @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
+  @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'window-controls-use-native-controls)
+      "Accessor"
+      (documentation 'window-controls-use-native-controls 'function)
+ "@version{2025-3-29}
+  @syntax{(gtk:window-controls-use-native-controls object) => setting}
+  @syntax{(setf (gtk:window-controls-use-native-controls object) setting)}
+  @argument[object]{a @class{gtk:window-controls} widget}
+  @argument[setting]{@em{true} to show native controls}
+  @begin{short}
+    Accessor of the @slot[gtk:window-controls]{use-native-controls} slot of the
+    @class{gtk:window-controls} class.
+  @end{short}
+  The @fun{gtk:window-controls-use-native-controls} function returns whether
+  platform native window controls are shown. The
+  @setf{gtk:window-controls-use-native-controls} function sets whether platform
+  native window controls are used. This option shows the \"stoplight\" buttons
+  on macOS. For Linux, this option has no effect. See also
+  @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
+
+  Since 4.18
+  @see-class{gtk:window-controls}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_window_controls_new
 ;;; ----------------------------------------------------------------------------
@@ -252,7 +298,7 @@ windowcontrols
 
 (defun window-controls-new (side)
  #+liber-documentation
- "@version{2023-8-9}
+ "@version{2025-3-29}
   @argument[side]{a @symbol{gtk:pack-type} value}
   @return{The new @class{gtk:window-controls} widget.}
   @short{Creates a new @class{gtk:window-controls} widget.}
