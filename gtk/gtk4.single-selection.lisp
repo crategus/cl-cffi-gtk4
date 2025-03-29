@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.single-selection.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 
 (defconstant +invalid-list-position+ 4294967295
  #+liber-documentation
- "@version{2023-8-13}
+ "@version{2025-3-17}
   @variable-value{4294967295}
   @begin{short}
     The value used to refer to a guaranteed invalid position in a
@@ -168,7 +168,7 @@
 (setf (liber:alias-for-function 'single-selection-autoselect)
       "Accessor"
       (documentation 'single-selection-autoselect 'function)
- "@version{2023-11-26}
+ "@version{2025-3-17}
   @syntax{(gtk:single-selection-autoselect object) => autoselect}
   @syntax{(setf (gtk:single-selection-autoselect object) autoselect)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -199,7 +199,7 @@
 (setf (liber:alias-for-function 'single-selection-can-unselect)
       "Accessor"
       (documentation 'single-selection-can-unselect 'function)
- "@version{2023-11-26}
+ "@version{2025-3-17}
   @syntax{(gtk:single-selection-can-unselect object) => setting}
   @syntax{(setf (gtk:single-selection-can-unselect object) setting)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -257,7 +257,7 @@
 (setf (liber:alias-for-function 'single-selection-model)
       "Accessor"
       (documentation 'single-selection-model 'function)
- "@version{2023-9-6}
+ "@version{2025-3-17}
   @syntax{(gtk:single-selection-model object) => model}
   @syntax{(setf (gtk:single-selection-model object) model)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -285,10 +285,10 @@
 (setf (liber:alias-for-function 'single-selection-n-items)
       "Accessor"
       (documentation 'single-selection-n-items 'function)
- "@version{2023-9-6}
+ "@version{2025-3-17}
   @syntax{(gtk:single-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:single-selection} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:single-selection]{n-items} slot of the
@@ -302,18 +302,18 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected" 'single-selection) t)
  "The @code{selected} property of type @code{:uint} (Read / Write) @br{}
-  Position of the selected item. @br{}
+  The position of the selected item. @br{}
   Default value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'single-selection-selected)
       "Accessor"
       (documentation 'single-selection-selected 'function)
- "@version{2023-11-26}
-  @syntax{(gtk:single-selection-selected object) => position}
-  @syntax{(setf (gtk:single-selection-selected object) position)}
+ "@version{2025-3-17}
+  @syntax{(gtk:single-selection-selected object) => pos}
+  @syntax{(setf (gtk:single-selection-selected object) pos)}
   @argument[object]{a @class{gtk:single-selection} object}
-  @argument[position]{an unsigned integer with the item to select or the
+  @argument[pos]{an unsigned integer for the item to select or the
     @var{gtk:+invalid-list-position+} value}
   @begin{short}
     Accessor of the @slot[gtk:single-selection]{selected} slot of the
@@ -322,9 +322,9 @@
   The @fun{gtk:single-selection-selected} function gets the position of the
   selected item. If no item is selected, the @var{gtk:+invalid-list-position+}
   value is returned. The @setf{gtk:single-selection-selected} function selects
-  the item at the given @arg{position}.
+  the item at the given @arg{pos}.
 
-  If the list does not have an item at @arg{position} or the
+  If the list does not have an item at @arg{pos} or the
   @var{gtk:+invalid-list-position+} value is given, the behavior depends on
   the value of the @slot[gtk:single-selection]{autoselect} property. If it is
   set, no change will occur and the old item will stay selected. If it is unset,
@@ -344,10 +344,10 @@
 (setf (liber:alias-for-function 'single-selection-selected-item)
       "Accessor"
       (documentation 'single-selection-selected-item 'function)
- "@version{2023-9-6}
+ "@version{2025-3-17}
   @syntax{(gtk:single-selection-selected object) => item}
   @argument[object]{a @class{gtk:single-selection} object}
-  @argument[item]{a @code{:pointer} to the selected item}
+  @argument[item]{a @class{g:object} instance for the selected item}
   @begin{short}
     Accessor of the @slot[gtk:single-selection]{selected-item} slot of the
     @class{gtk:single-selection} class.
@@ -364,7 +364,7 @@
 
 (defun single-selection-new (&optional model)
  #+liber-documentation
- "@version{2023-11-26}
+ "@version{2025-3-17}
   @argument[model]{an optional @class{g:list-model} object to manage, the
     default is @code{nil}}
   @return{The new @class{gtk:single-selection} object.}
