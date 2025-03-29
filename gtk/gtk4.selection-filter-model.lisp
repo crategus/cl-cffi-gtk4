@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.selection-filter-model.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -174,10 +174,10 @@
 (setf (liber:alias-for-function 'selection-filter-model-n-items)
       "Accessor"
       (documentation 'selection-filter-model-n-items 'function)
- "@version{2024-12-15}
+ "@version{2025-3-18}
   @syntax{(gtk:selection-filter-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:selection-filter-model} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:selection-filter-model]{n-items} slot of the

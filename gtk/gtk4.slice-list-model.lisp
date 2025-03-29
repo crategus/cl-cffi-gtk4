@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.slice-list-model.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -190,10 +190,10 @@
 (setf (liber:alias-for-function 'slice-list-model-n-items)
       "Accessor"
       (documentation 'slice-list-model-n-items 'function)
- "@version{2024-12-15}
+ "@version{2025-3-18}
   @syntax{(gtk:slice-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:slice-list-model} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:slice-list-model]{n-items} slot of the
@@ -214,11 +214,11 @@
 (setf (liber:alias-for-function 'slice-list-model-offset)
       "Accessor"
       (documentation 'slice-list-model-offset 'function)
- "@version{2024-12-15}
+ "@version{2025-3-18}
   @syntax{(gtk:slice-list-model-offset object) => offset}
   @syntax{(setf (gtk:slice-list-model-offset object) offset)}
   @argument[object]{a @class{gtk:slice-list-model} object}
-  @argument[offset]{an integer with the offset}
+  @argument[offset]{an integer for the offset}
   @begin{short}
     Accessor of the @slot[gtk:slice-list-model]{offset} slot of the
     @class{gtk:slice-list-model} class.
@@ -241,11 +241,11 @@
 (setf (liber:alias-for-function 'slice-list-model-size)
       "Accessor"
       (documentation 'slice-list-model-size 'function)
- "@version{2024-12-15}
+ "@version{2025-3-18}
   @syntax{(gtk:slice-list-model-size object) => size}
   @syntax{(setf (gtk:slice-list-model-size object) size)}
   @argument[object]{a @class{gtk:slice-list-model} object}
-  @argument[size]{an unsigned integer with the size}
+  @argument[size]{an unsigned integer for the size}
   @begin{short}
     Accessor of the @slot[gtk:slice-list-model]{size} slot of the
     @class{gtk:slice-list-model} class.
@@ -264,10 +264,10 @@
 
 (defun slice-list-model-new (model offset size)
  #+liber-documentation
- "@version{2024-12-15}
+ "@version{2025-3-18}
   @argument[model]{a @class{g:list-model} object to use, or @code{nil}}
-  @argument[offset]{an unsigned integer with the offset of the slize}
-  @argument[size]{an unsigned integer with the maximum size of the slize}
+  @argument[offset]{an unsigned integer for the offset of the slize}
+  @argument[size]{an unsigned integer for the maximum size of the slize}
   @return{The new @class{gtk:slice-list-model} object.}
   @begin{short}
     Creates a new slice model that presents the slice from @arg{offset} to
