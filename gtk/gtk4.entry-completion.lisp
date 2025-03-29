@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.entry-completion.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -382,7 +382,7 @@ lambda (widget)    :run-last
                                                'entry-completion) t)
  "The @code{minimum-key-length} property of type @code{:int} (Read / Write)
   @br{}
-  Minimum length of the search key in order to look up matches. @br{}
+  The minimum length of the search key in order to look up matches. @br{}
   Allowed values: >= 0 @br{}
   Default value: 1")
 
@@ -390,11 +390,11 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{2024-7-30}
+ "@version{2025-3-19}
   @syntax{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
-  @argument[length]{an integer with the minimum length of the key in order to
+  @argument[length]{an integer for the minimum length of the key in order to
     start completing}
   @begin{short}
     Accessor of the @slot[gtk:entry-completion]{minimum-key-length} slot of the
@@ -569,11 +569,11 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-text-column)
       "Accessor"
       (documentation 'entry-completion-text-column 'function)
- "@version{2024-5-2}
+ "@version{2025-3-19}
   @syntax{(gtk:entry-completion-text-column) => column}
   @syntax{(setf (gtk:entry-completion-text-column object) column)}
   @argument[object]{a @class{gtk:entry-completion} object}
-  @argument[column]{an integer with the column in the model of the completion
+  @argument[column]{an integer for the column in the model of the completion
     to get strings from}
   @begin{short}
     Accessor of the @slot[gtk:entry-completion]{text-column} slot of the
@@ -654,10 +654,11 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_get_entry" entry-completion-entry)
     (g:object widget)
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-3-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
-  @return{The @class{gtk:widget} object the entry completion has been attached
-    to.}
+  @begin{return}
+    The @class{gtk:widget} object the entry completion has been attached to.
+  @end{return}
   @short{Gets the widget the entry completion has been attached to.}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -760,9 +761,9 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_compute_prefix"
                entry-completion-compute-prefix) :string
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-3-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
-  @argument[key]{a string with the text to complete for}
+  @argument[key]{a string for the text to complete for}
   @begin{return}
     The string with the common prefix all rows starting with @arg{key} or
     @code{nil} if no row matches @arg{key}.
@@ -791,7 +792,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_entry_completion_complete" entry-completion-complete) :void
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2025-3-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @begin{short}
     Requests a completion operation, or in other words a refiltering of the
@@ -838,7 +839,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_insert_prefix"
                entry-completion-insert-prefix) :void
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2025-3-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @begin{short}
     Requests a prefix insertion.

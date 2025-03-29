@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.lock-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2021 - 2024 Dieter Kaiser
+;;; Copyright (C) 2021 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -109,7 +109,7 @@
 
 #+liber-documentation
 (setf (documentation 'lock-button 'type)
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @begin{short}
     The @class{gtk:lock-button} widget is a widget that can be used in control
     panels or preference dialogs to allow users to obtain and revoke
@@ -153,7 +153,7 @@
 (setf (liber:alias-for-function 'lock-button-permission)
       "Accessor"
       (documentation 'lock-button-permission 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-permission object) => permission}
   @syntax{(setf (gtk:lock-button-permission object) permission)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -180,13 +180,13 @@
  "The @code{text-lock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The text to display when prompting the user to lock. @br{}
-  Default value: \"Lock\"")
+  Default value: @code{\"Lock\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-text-lock)
       "Accessor"
       (documentation 'lock-button-text-lock 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-text-lock object) => text}
   @syntax{(setf (gtk:lock-button-text-lock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -210,13 +210,13 @@
  "The @code{text-unlock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The text to display when prompting the user to unlock. @br{}
-  Default value: \"Unlock\"")
+  Default value: @code{\"Unlock\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-text-unlock)
       "Accessor"
       (documentation 'lock-button-text-unlock 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-text-unlock object) => text}
   @syntax{(setf (gtk:lock-button-text-unlock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -240,13 +240,14 @@
  "The @code{tooltip-lock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The tooltip to display when prompting the user to lock. @br{}
-  Default value: \"Dialog is unlocked.\\n Click to prevent further changes\"")
+  Default value:
+  @code{\"Dialog is unlocked.\\n Click to prevent further changes\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-lock)
       "Accessor"
       (documentation 'lock-button-tooltip-lock 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-tooltip-lock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-lock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -272,14 +273,14 @@
   (Read / Write / Construct) @br{}
   The tooltip to display when prompting the user cannot obtain authorization.
   @br{}
-  Default value: \"System policy prevents changes.
-                 \\nContact your system administrator\"")
+  Default value: @code{\"System policy prevents changes.
+                 \\nContact your system administrator\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-not-authorized)
       "Accessor"
       (documentation 'lock-button-tooltip-not-authorized 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-tooltip-not-authorized object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-not-authorized object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -303,13 +304,13 @@
  "The @code{tooltip-unlock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The tooltip to display when prompting the user to unlock. @br{}
-  Default value: \"Dialog is locked.\\nClick to make changes\"")
+  Default value: @code{\"Dialog is locked.\\nClick to make changes\"}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-unlock)
       "Accessor"
       (documentation 'lock-button-tooltip-unlock 'function)
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @syntax{(gtk:lock-button-tooltip-unlock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-unlock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -332,7 +333,7 @@
 
 (defun lock-button-new (permission)
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @argument[permission]{a @class{g:permission} object}
   @return{The new @class{gtk:lock-button} widget.}
   @short{Creates a new lock button which reflects the permission.}

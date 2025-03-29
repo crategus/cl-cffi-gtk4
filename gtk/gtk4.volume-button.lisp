@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.volume-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'volume-button 'type)
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @begin{short}
     The @class{gtk:volume-button} class is a subclass of the
     @class{gtk:scale-button} class that has been tailored for use as a volume
@@ -116,7 +116,7 @@
 (setf (liber:alias-for-function 'volume-button-use-symbolic)
       "Accessor"
       (documentation 'volume-button-use-symbolic 'function)
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @syntax{(gtk:volume-button-use-symbolic object) => setting}
   @syntax{(setf (gtk:volume-button-use-symbolic object) setting)}
   @argument[object]{a @class{gtk:volume-button} widget}
@@ -143,7 +143,7 @@
 
 (defun volume-button-new ()
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @return{The new @class{gtk:volume-button} widget.}
   @begin{short}
     Creates a volume button, with a range between 0.0 and 1.0, with

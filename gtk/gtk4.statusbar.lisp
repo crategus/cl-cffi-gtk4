@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.statusbar.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'statusbar 'type)
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @begin{short}
     The @class{gtk:statusbar} widget is usually placed along the bottom of the
     main @class{gtk:window} widget of the application.
@@ -111,12 +111,9 @@
   purposes, but allows multiple message producers to maintain sub-stacks of
   the messages they produced (via context IDs).
 
-  Statusbars are created using the @fun{gtk:statusbar-new} function.
-
-  Messages are added to the stack of the statusbar with the
-  @fun{gtk:statusbar-push} function.
-
-  The message at the top of the stack can be removed using the
+  Statusbars are created using the @fun{gtk:statusbar-new} function. Messages
+  are added to the stack of the statusbar with the @fun{gtk:statusbar-push}
+  function. The message at the top of the stack can be removed using the
   @fun{gtk:statusbar-pop} function. A message can be removed from anywhere in
   the stack if its message ID was recorded at the time it was added. This is
   done using the @fun{gtk:statusbar-remove} function.
@@ -166,7 +163,7 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-new ()
  #+liber-documentation
- "@version{2024-5-2}
+ "@version{2025-3-13}
   @return{The new @class{gtk:statusbar} widget.}
   @short{Creates a new statusbar ready for messages.}
   @begin[Warning]{dictionary}
@@ -188,11 +185,11 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-context-id (statusbar context)
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-3-13}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @argument[context]{a string with the textual description of what context the
+  @argument[context]{a string for the textual description of what context the
     new message is being used in}
-  @return{The integer context ID.}
+  @return{The integer with the context ID.}
   @begin{short}
     Returns a new context identifier, given a description of the actual context.
   @end{short}
@@ -219,13 +216,15 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-push (statusbar context text)
  #+liber-documentation
- "@version{2023-4-3}
+ "@version{2025-3-13}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @argument[context]{an unsigned integer with the context ID of the message, as
+  @argument[context]{an unsigned integer for the context ID of the message, as
     returned by the @fun{gtk:statusbar-context-id} function}
-  @argument[text]{a string with the message to add to @arg{statusbar}}
-  @return{The unsigned integer with a message ID that can be used with the
-    @fun{gtk:statusbar-remove} function.}
+  @argument[text]{a string for the message to add to @arg{statusbar}}
+  @begin{return}
+    The unsigned integer with a message ID that can be used with the
+    @fun{gtk:statusbar-remove} function.
+  @end{return}
   @begin{short}
     Pushes a new message onto the stack of the statusbar.
   @end{short}
@@ -250,9 +249,9 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-pop (statusbar context)
  #+liber-documentation
- "@version{2023-4-3}
+ "@version{2025-3-13}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @argument[context]{an unsigned integer with a context identifier}
+  @argument[context]{an unsigned integer for a context identifier}
   @begin{short}
     Removes the first message in the stack of the statusbar with the given
     context ID.
@@ -280,10 +279,10 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-remove (statusbar context message)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-3-13}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @argument[context]{an unsigned integer with a context identifier}
-  @argument[message]{an unsigned integer with a message identifier, as returned
+  @argument[context]{an unsigned integer for a context identifier}
+  @argument[message]{an unsigned integer for a message identifier, as returned
     by the @fun{gtk:statusbar-push} function}
   @begin{short}
     Forces the removal of a message from the stack of the statusbar.
@@ -311,9 +310,9 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-remove-all (statusbar context)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-3-13}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @argument[context]{an integer with a context identifier}
+  @argument[context]{an integer for a context identifier}
   @begin{short}
     Forces the removal of all messages from the stack of the statusbar with the
     exact @arg{context} identifier.
