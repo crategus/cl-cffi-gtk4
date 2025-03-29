@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.filter.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -207,11 +207,13 @@ lambda (filter change)    :run-last
 
 (defun filter-match (filter item)
  #+liber-documentation
- "@version{2024-9-27}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[item]{a @class{g:object} instance for the item to check}
-  @return{@em{True} if the filter matches the item and a filter model should
-    keep it, @em{false} if not.}
+  @begin{return}
+    @em{True} if the filter matches the item and a filter model should keep it,
+    @em{false} if not.
+  @end{return}
   @begin{short}
     Checks if the given @arg{item} is matched by the filter or not.
   @end{short}
@@ -233,10 +235,11 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{2024-9-27}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:filter} object}
-  @return{The @symbol{gtk:filter-match} value with the strictness of
-    @arg{filter}.}
+  @begin{return}
+    The @symbol{gtk:filter-match} value with the strictness of @arg{filter}.
+  @end{return}
   @begin{short}
     Gets the known strictness of the filter.
   @end{short}

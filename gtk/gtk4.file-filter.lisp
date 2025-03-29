@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-filter.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -98,7 +98,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-filter 'type)
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @begin{short}
     The @class{gtk:file-filter} object can be used to restrict the files being
     shown in a @class{gtk:file-chooser} widget.
@@ -179,11 +179,11 @@
 (setf (liber:alias-for-function 'file-filter-name)
       "Accessor"
       (documentation 'file-filter-name 'function)
- "@version{2023-8-22}
+ "@version{2025-3-13}
   @syntax{(gtk:file-filter-name object) => name}
   @syntax{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
-  @argument[name]{a string with the human-readable name for the filter, or
+  @argument[name]{a string for the human-readable name for the filter, or
     @code{nil} to remove any existing name}
   @begin{short}
     Accessor of the @slot[gtk:file-filter]{name} slot of the
@@ -225,7 +225,7 @@
 
 (defun file-filter-new ()
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Creates a new file filter with no rules added to it.
@@ -258,7 +258,7 @@
                file-filter-new-from-gvariant)
     (g:object file-filter :return)
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @argument[variant]{a @symbol{g:variant} parameter of @code{a{sv@}} type}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
@@ -278,9 +278,9 @@
 
 (cffi:defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @argument[mime-type]{a string with the name of the MIME type}
+  @argument[mime-type]{a string for the name of the MIME type}
   @short{Adds a rule allowing a given MIME type to the file filter.}
   @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
@@ -294,9 +294,9 @@
 
 (cffi:defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @argument[pattern]{a string with a shell style glob}
+  @argument[pattern]{a string for a shell style glob}
   @begin{short}
     Adds a rule allowing a shell style glob to a file filter.
   @end{short}
@@ -315,7 +315,7 @@
 (cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
                file-filter-add-pixbuf-formats) :void
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
     Adds a rule allowing image files in the formats supported by the
@@ -337,9 +337,9 @@
 #+gtk-4-4
 (cffi:defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @argument[suffix]{a string with the filename suffix to match}
+  @argument[suffix]{a string for the filename suffix to match}
   @begin{short}
     Adds a suffix match rule to a filter.
   @end{short}
@@ -361,7 +361,7 @@
 (cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The list of strings with the attributes.}
   @begin{short}
@@ -385,7 +385,7 @@
 (cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
- "@version{2024-8-21}
+ "@version{2025-3-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The new @symbol{g:variant} parameter.}
   @short{Serialize a file filter to a @code{a{sv@}} variant.}

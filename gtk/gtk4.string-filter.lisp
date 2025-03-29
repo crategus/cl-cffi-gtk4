@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.string-filter.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-filter 'type)
- "@version{2024-9-28}
+ "@version{2025-3-13}
   @begin{short}
     The @class{gtk:string-filter} object determines whether to include items by
     looking at strings and comparing them to a fixed search term.
@@ -150,7 +150,7 @@
 (setf (documentation (liber:slot-documentation "expression" 'string-filter) t)
  "The @code{expression} property of type @class{gtk:expression} (Read / Write)
   @br{}
-  The expression to evaluate on item to get a string to compare with.")
+  The expression to evaluate on the item to get a string to compare with.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'string-filter-expression)
@@ -258,8 +258,8 @@
 (declaim (inline string-filter-new))
 
 (defun string-filter-new (&optional expression)
- "@version{2024-9-28}
-  @argument[expression]{a @class{gtk:expression} instance with the expression
+ "@version{2025-3-13}
+  @argument[expression]{a @class{gtk:expression} instance for the expression
     to evaluate or @code{nil} for none}
   @return{The new @class{gtk:string-filter} object.}
   @begin{short}
