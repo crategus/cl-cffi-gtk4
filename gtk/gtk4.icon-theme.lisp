@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.icon-theme.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -101,7 +101,7 @@
 (setf (liber:alias-for-symbol 'icon-lookup-flags)
       "GFlags"
       (liber:symbol-documentation 'icon-lookup-flags)
- "@version{2023-10-3}
+ "@version{2025-3-29}
   @begin{declaration}
 (gobject:define-gflags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
@@ -113,7 +113,7 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:none]{No flags set.}
+      @entry[:none]{Perform a regular lookup. Since 4.18}
       @entry[:force-regular]{Try to always load regular icons, even when
         symbolic icon names are given.}
       @entry[:force-symbolic]{Try to always load symbolic icons, even when
@@ -187,7 +187,7 @@
 
 #+liber-documentation
 (setf (documentation 'icon-theme 'type)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @begin{short}
     The @class{gtk:icon-theme} class provides a facility for looking up icons
     by name and size.
@@ -253,7 +253,7 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-display)
       "Accessor"
       (documentation 'icon-theme-display 'function)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @syntax{(gtk:icon-theme-display object) => display}
   @syntax{(setf (gtk:icon-theme-display object) display)}
   @argument[object]{a @class{gtk:icon-theme} object}
@@ -279,10 +279,10 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-icon-names)
       "Accessor"
       (documentation 'icon-theme-icon-names 'function)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @syntax{(gtk:icon-theme-icon-names object) => names}
   @argument[object]{a @class{gtk:icon-theme} object}
-  @argument[names]{a list of strings with the icon names}
+  @argument[names]{a list of strings for the icon names}
   @begin{short}
     Accessor of the @slot[gtk:icon-theme]{icon-names} slot of the
     @class{gtk:icon-theme} class.
@@ -297,7 +297,7 @@ lambda (theme)    :run-last
 (setf (documentation (liber:slot-documentation "resource-path" 'icon-theme) t)
  "The @code{resource-path} property of type @type{glib:strv-t} (Read / Write)
   @br{}
-  Resource paths that will be looked at when looking for icons, similar to
+  The resource paths that will be looked at when looking for icons, similar to
   search paths. The resources are considered as part of the hicolor icon theme
   and must be located in subdirectories that are defined in the hicolor icon
   theme, such as @file{@@path/16x16/actions/run.png}. Icons that are directly
@@ -308,11 +308,11 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-resource-path)
       "Accessor"
       (documentation 'icon-theme-resource-path 'function)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @syntax{(gtk:icon-theme-resource-path object) => path}
   @syntax{(setf (gtk:icon-theme-resource-path object) path}
   @argument[object]{a @class{gtk:icon-theme} object}
-  @argument[path]{a list of strings with the resource paths}
+  @argument[path]{a list of strings for the resource paths}
   @begin{short}
     Accessor of the @slot[gtk:icon-theme]{resource-path} slot of the
     @class{gtk:icon-theme} class.
@@ -346,17 +346,17 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-search-path)
       "Accessor"
       (documentation 'icon-theme-search-path 'function)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @syntax{(gtk:icon-theme-search-path object) => path}
   @syntax{(setf (gtk:icon-theme-search-path object) path}
   @argument[object]{a @class{gtk:icon-theme} object}
-  @argument[path]{a list of strings with the search paths}
+  @argument[path]{a list of strings for the search paths}
   @begin{short}
     Accessor of the @slot[gtk:icon-theme]{search-path} slot of the
     @class{gtk:icon-theme} class.
   @end{short}
   The @fun{gtk:icon-theme-search-path} function gets the current search path.
-  The @setf{gtk:icon-theme-resource-path} function sets the search path for the
+  The @setf{gtk:icon-theme-search-path} function sets the search path for the
   icon theme object. When looking for an icon theme, GTK will search for a
   subdirectory of one or more of the directories in path with the same name as
   the icon theme containing an @file{index.theme} file. Themes from multiple of
@@ -386,22 +386,22 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-theme-name)
       "Accessor"
       (documentation 'icon-theme-theme-name 'function)
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @syntax{(gtk:icon-theme-theme-name object) => name}
   @syntax{(setf (gtk:icon-theme-theme-name object) name}
   @argument[object]{a @class{gtk:icon-theme} object}
-  @argument[name]{a string with the current icon theme name}
+  @argument[name]{a string for the current icon theme name}
   @begin{short}
     Accessor of the @slot[gtk:icon-theme]{theme-name} slot of the
     @class{gtk:icon-theme} class.
   @end{short}
   The @fun{gtk:icon-theme-theme-name} function gets the current icon theme name.
-  The @setf{gtk:icon-theme-resource-path} function sets the name of the icon
-  theme that the @class{gtk:icon-theme} object uses overriding system
-  configuration. This function cannot be called on the icon theme objects
-  returned from the @fun{gtk:icon-theme-for-display} function.
+  The @setf{gtk:icon-theme-theme-name} function sets the name of the icon theme
+  that the @class{gtk:icon-theme} object uses overriding system configuration.
+  This function cannot be called on the icon theme objects returned from the
+  @fun{gtk:icon-theme-for-display} function.
   @see-class{gtk:icon-theme}
-  @see-function{gtk:icon-theme-for-default}")
+  @see-function{gtk:icon-theme-for-display}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_theme_new
@@ -409,7 +409,7 @@ lambda (theme)    :run-last
 
 (defun icon-theme-new ()
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @return{The newly created @class{gtk:icon-theme} object.}
   @begin{short}
     Creates a new icon theme object.
@@ -430,11 +430,13 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_get_for_display" icon-theme-for-display)
     (g:object icon-theme)
  #+liber-documentation
- "@version{2024-5-24}
+ "@version{2025-3-29}
   @argument[display]{a @class{gdk:display} object}
-  @return{The unique @class{gtk:icon-theme} object associated with the given
+  @begin{return}
+    The unique @class{gtk:icon-theme} object associated with the given
     @arg{display}. This icon theme is associated with the display and can be
-    used as long as the display is open.}
+    used as long as the display is open.
+  @end{return}
   @begin{short}
     Gets the icon theme object associated with @arg{display}.
   @end{short}
@@ -458,9 +460,9 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path)
     :void
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[path]{a string with the directory name to append to the icon path}
+  @argument[path]{a string for the directory name to append to the icon path}
   @begin{short}
     Appends a directory to the search path.
   @end{short}
@@ -478,9 +480,9 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_add_resource_path"
                icon-theme-add-resource-path) :void
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[path]{a string with a resource path}
+  @argument[path]{a string for a resource path}
   @begin{short}
     Adds a resource path that will be looked at when looking for icons, similar
     to search paths.
@@ -501,9 +503,9 @@ lambda (theme)    :run-last
 
 (cffi:defcfun ("gtk_icon_theme_has_icon" icon-theme-has-icon) :boolean
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[name]{a string with the name of an icon}
+  @argument[name]{a string for the name of an icon}
   @return{@em{True} if the icon theme includes an icon for @arg{name}.}
   @begin{short}
     Checks whether an icon theme includes an icon for a particular name.
@@ -520,7 +522,7 @@ lambda (theme)    :run-last
 
 (cffi:defcfun ("gtk_icon_theme_has_gicon" icon-theme-has-gicon) :boolean
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
   @argument[gicon]{a @class{g:icon} object}
   @return{@em{True} if the icon theme includes an icon for @arg{gicon}.}
@@ -544,12 +546,12 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_lookup_icon" icon-theme-lookup-icon)
     (g:object icon-paintable :return)
  #+liber-documentation
- "@version{2024-10-9}
+ "@version{2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[name]{a string with the name of an icon}
-  @argument[fallbacks]{a list of strings with fallback icons}
-  @argument[size]{an integer with the desired icon size}
-  @argument[scale]{an integer with the window scale this will be displayed on}
+  @argument[name]{a string for the name of an icon}
+  @argument[fallbacks]{a list of strings for fallback icons}
+  @argument[size]{an integer for the desired icon size}
+  @argument[scale]{an integer for the window scale this will be displayed on}
   @argument[direction]{a value of the @symbol{gtk:text-direction} enumeration}
   @argument[flags]{a value of the @symbol{gtk:icon-lookup-flags} flags}
   @return{The @class{gtk:icon-paintable} object containing the icon.}
@@ -573,7 +575,8 @@ lambda (theme)    :run-last
   @see-class{gtk:icon-paintable}
   @see-class{gdk:paintable}
   @see-symbol{gtk:text-direction}
-  @see-symbol{gtk:icon-lookup-flags}"
+  @see-symbol{gtk:icon-lookup-flags}
+  @see-function{gtk:icon-theme-has-icon}"
   (theme (g:object icon-theme))
   (name :string)
   (fallbacks glib:strv-t)
@@ -591,11 +594,11 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_lookup_by_gicon" icon-theme-lookup-by-gicon)
     (g:object icon-paintable :return)
  #+liber-documentation
- "@version{#2024-10-9}
+ "@version{#2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
   @argument[icon]{a @class{g:icon} object to look up}
-  @argument[size]{an integer with the desired icon size}
-  @argument[scale]{an integer with the desired scale}
+  @argument[size]{an integer for the desired icon size}
+  @argument[scale]{an integer for the desired scale}
   @argument[direction]{a value of the @symbol{gtk:text-direction} enumeration}
   @argument[flags]{a value of the @symbol{gtk:icon-lookup-flags} flags}
   @return{The @class{gtk:icon-paintable} object containing the icon.}
@@ -617,7 +620,7 @@ lambda (theme)    :run-last
   (direction text-direction)
   (flags icon-lookup-flags))
 
-(export 'icon-theme-lookup-icon)
+(export 'icon-theme-lookup-by-gicon)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_theme_get_icon_sizes
@@ -631,11 +634,12 @@ lambda (theme)    :run-last
 
 (defun icon-theme-icon-sizes (theme name)
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2025-3-29}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[name]{a string with the name of an icon}
-  @return{The Lisp array of integer with the sizes at which the icon is
-    available.}
+  @argument[name]{a string for the name of an icon}
+  @begin{return}
+    The Lisp array of integer with the sizes at which the icon is available.
+  @end{return}
   @begin{short}
     Returns an array of integers describing the sizes at which the icon is
     available without scaling.
