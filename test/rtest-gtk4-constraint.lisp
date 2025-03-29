@@ -90,7 +90,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-constraint-properties
-  (let ((constraint (make-instance 'gtk:constraint)))
+  (glib-test:with-check-memory (constraint)
+    (setf constraint (make-instance 'gtk:constraint))
     (is (= 0.0d0 (gtk:constraint-constant constraint)))
     (is (= 1.0d0 (gtk:constraint-multiplier constraint)))
     (is (eq :eq (gtk:constraint-relation constraint)))
@@ -103,9 +104,64 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_constraint_new
+
+(test gtk-constraint-new
+  (glib-test:with-check-memory (constraint button1 button2)
+    (setf button1 (make-instance 'gtk:button))
+    (setf button2 (make-instance 'gtk:button))
+    (is (typep (setf constraint
+                     (gtk:constraint-new button1
+                                         :width
+                                         :eq
+                                         button2
+                                         :width
+                                         1.0
+                                         0.0
+                                         :required)) 'gtk:constraint))
+    (is (= 0.0d0 (gtk:constraint-constant constraint)))
+    (is (= 1.0d0 (gtk:constraint-multiplier constraint)))
+    (is (eq :eq (gtk:constraint-relation constraint)))
+    (is (eq button2 (gtk:constraint-source constraint)))
+    (is (eq :width (gtk:constraint-source-attribute constraint)))
+    (is (= 1001001000 (gtk:constraint-strength constraint)))
+    (is (eq button1 (gtk:constraint-target constraint)))
+    (is (eq :width (gtk:constraint-target-attribute constraint)))))
+
 ;;;     gtk_constraint_new_constant
+
+(test gtk-constraint-new-constant
+  (glib-test:with-check-memory (constraint button)
+    (setf button (make-instance 'gtk:button))
+    (is (typep (setf constraint
+                     (gtk:constraint-new-constant button
+                                                  :width
+                                                  :le
+                                                  200
+                                                  :required)) 'gtk:constraint))
+    (is (= 200.0d0 (gtk:constraint-constant constraint)))
+    (is (= 1.0d0 (gtk:constraint-multiplier constraint)))
+    (is (eq :le (gtk:constraint-relation constraint)))
+    (is-false (gtk:constraint-source constraint))
+    (is (eq :none (gtk:constraint-source-attribute constraint)))
+    (is (= 1001001000 (gtk:constraint-strength constraint)))
+    (is (eq button (gtk:constraint-target constraint)))
+    (is (eq :width (gtk:constraint-target-attribute constraint)))))
+
 ;;;     gtk_constraint_is_required
 ;;;     gtk_constraint_is_attached
 ;;;     gtk_constraint_is_constant
 
-;;; 2024-9-19
+(test gtk-constraint-is
+  (glib-test:with-check-memory (constraint button)
+    (setf button (make-instance 'gtk:button))
+    (is (typep (setf constraint
+                     (gtk:constraint-new-constant button
+                                                  :width
+                                                  :le
+                                                  200
+                                                  :required)) 'gtk:constraint))
+    (is-true (gtk:constraint-is-required constraint))
+    (is-false (gtk:constraint-is-attached constraint))
+    (is-true (gtk:constraint-is-constant constraint))))
+
+;;; 2025-3-25
