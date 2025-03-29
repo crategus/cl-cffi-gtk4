@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.sorter.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -213,13 +213,15 @@ lambda (sorter change)    :run-last
 
 (cffi:defcfun ("gtk_sorter_compare" sorter-compare) ordering
  #+liber-documentation
- "@version{2024-10-18}
+ "@version{2025-3-14}
   @argument[sorter]{a @class{gtk:sorter} object}
   @argument[obj1]{a @class{g:object} instance for the first item to compare}
   @argument[obj2]{a @class{g:object} instance for the second item to compare}
-  @return{The @symbol{gtk:ordering} value with the @code{:equal} value if
+  @begin{return}
+    The @symbol{gtk:ordering} value with the @code{:equal} value if
     @arg{obj1} = @arg{obj2}, the @code{:smaller} value if @arg{obj1} <
-    @arg{obj2}, the @code{:larger} value if @arg{obj1} > @arg{obj2}.}
+    @arg{obj2}, the @code{:larger} value if @arg{obj1} > @arg{obj2}.
+  @end{return}
   @begin{short}
     Compares two given objects according to the sort order implemented by the
     sorter.
@@ -301,8 +303,8 @@ lambda (sorter change)    :run-last
 #+gtk-4-2
 (defun ordering-from-cmpfunc (result)
  #+liber-documentation
- "@version{2023-9-13}
-  @argument[result]{an integer with the result of a comparison function}
+ "@version{2025-3-14}
+  @argument[result]{an integer for the result of a comparison function}
   @return{The @symbol{gtk:ordering} value.}
   @begin{short}
     Converts the result of a @symbol{g:compare-data-func} function to a
