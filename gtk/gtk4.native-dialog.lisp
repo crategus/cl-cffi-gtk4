@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.native-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'native-dialog 'type)
- "@version{2024-4-11}
+ "@version{2025-3-24}
   @begin{short}
     Native dialogs are platform dialogs that do not use the @class{gtk:dialog}
     or @class{gtk:window} classes.
@@ -108,6 +108,10 @@
   an API that allows you to do this. It allows you to set various common
   properties on the dialog, as well as show and hide it and get a
   @code{\"response\"} signal when the user finished with the dialog.
+
+  Note that unlike the @class{gtk:dialog} widget, @class{gtk:native-dialog}
+  objects are not toplevel widgets, and GTK does not keep them alive. It is
+  your responsibility to keep a reference until you are done with the object.
   @begin[Signal Details]{dictionary}
     @subheading{The \"response\" signal}
       @begin{pre}
@@ -146,10 +150,10 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-modal)
       "Accessor"
       (documentation 'native-dialog-modal 'function)
- "@version{#2023-4-16}
+ "@version{2025-3-24}
   @syntax{(gtk:native-dialog-modal object) => modal}
   @syntax{(setf (gtk:native-dialog-modal object) modal)}
-  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[object]{a @class{gtk:native-dialog} object}
   @argument[modal]{@em{true} if the dialog is modal}
   @begin{short}
     Accessor of the @slot[gtk:native-dialog]{modal} slot of the
@@ -179,11 +183,11 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-title)
       "Accessor"
       (documentation 'native-dialog-title 'function)
- "@version{#2023-4-16}
+ "@version{2025-3-24}
   @syntax{(gtk:native-dialog-title object) => title}
   @syntax{(setf (gtk:native-dialog-title object) title)}
-  @argument[object]{a @class{gtk:native-dialog} widget}
-  @argument[title]{a string with the title of the dialog, or @code{nil} if
+  @argument[object]{a @class{gtk:native-dialog} object}
+  @argument[title]{a string for the title of the dialog, or @code{nil} if
     none has been set explicitly}
   @begin{short}
     Accessor of the @slot[gtk:native-dialog]{title} slot of the
@@ -206,10 +210,10 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-transient-for)
       "Accessor"
       (documentation 'native-dialog-transient-for 'function)
- "@version{#2023-4-16}
+ "@version{2025-3-24}
   @syntax{(gtk:native-dialog-transient-for object) => parent}
   @syntax{(setf (gtk:native-dialog-transient-for object) parent)}
-  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[object]{a @class{gtk:native-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @begin{short}
     Accessor of the @slot[gtk:native-dialog]{transient-for} slot of the
@@ -239,10 +243,10 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-visible)
       "Accessor"
       (documentation 'native-dialog-visible 'function)
- "@version{#2023-4-16}
+ "@version{2025-3-24}
   @syntax{(gtk:native-dialog-visible object) => visible}
   @syntax{(setf (gtk:native-dialog-visible object) visible)}
-  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[object]{a @class{gtk:native-dialog} object}
   @argument[visible]{@em{true} if the dialog is visible}
   @begin{short}
     Accessor of the @slot[gtk:native-dialog]{visible} slot of the
@@ -257,8 +261,8 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_native_dialog_show" native-dialog-show) :void
  #+liber-documentation
- "@version{2023-8-30}
-  @argument[dialog]{a @class{gtk:native-dialog} widget}
+ "@version{2025-3-24}
+  @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Shows the dialog on the display, allowing the user to interact with it.
   @end{short}
@@ -276,8 +280,8 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
  #+liber-documentation
- "@version{#2023-4-16}
-  @argument[dialog]{a @class{gtk:native-dialog} widget}
+ "@version{#2025-3-24}
+  @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Hides the dialog if it is visilbe, aborting any interaction.
   @end{short}
@@ -295,10 +299,10 @@ lambda (dialog response)    :run-last
 ;;; gtk_native_dialog_destroy
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_native_dialog_destroy" native-dialog-destroy) :void
+(cffi:defcfun ("gtk_native_dialog_destroy" native-dialog-destroy) :void
  #+liber-documentation
- "@version{#2023-4-16}
-  @argument[dialog]{a @class{gtk:native-dialog} widget}
+ "@version{2025-3-24}
+  @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Destroys a dialog.
   @end{short}
@@ -308,7 +312,7 @@ lambda (dialog response)    :run-last
 
   Note that this does not release any reference to the object, as opposed to
   destroying a @class{gtk:window} widget, because there is no reference from
-  the windowing system to the @class{gtk:native-dialog} widget.
+  the windowing system to the @class{gtk:native-dialog} object.
   @see-class{gtk:native-dialog}
   @see-class{gtk:window}"
   (dialog (g:object native-dialog)))
