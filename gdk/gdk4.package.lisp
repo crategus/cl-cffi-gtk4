@@ -1,9 +1,9 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.package.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -408,8 +408,10 @@
       @about-function{paintable-new-empty}
     @end{subsection}
     @begin[GdkTexture]{subsection}
+      @about-variable{+memory-default+}
       @about-symbol{memory-format}
       @about-class{texture}
+      @about-generic{texture-color-state}
       @about-generic{texture-height}
       @about-generic{texture-width}
       @about-function{texture-new-for-pixbuf}

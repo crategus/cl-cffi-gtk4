@@ -2,8 +2,8 @@
 ;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -62,8 +62,8 @@
 ;;;
 ;;;     gdk_memory_texture_new
 ;;;
-;;;     gdk_gl_texture_new
-;;;     gdk_gl_texture_release
+;;;     gdk_gl_texture_new                                  not implemented
+;;;     gdk_gl_texture_release                              not implemented
 ;;;
 ;;; Properties
 ;;;
@@ -87,26 +87,30 @@
 
 (in-package :gdk)
 
-#|
-/**
- * GDK_MEMORY_DEFAULT:
- *
- * The default memory format used by GTK.
- *
- * This is the format provided by [method@Gdk.Texture.download].
- * It is equal to %CAIRO_FORMAT_ARGB32.
- *
- * Be aware that unlike the `GdkMemoryFormat` values, this format
- * is different for different endianness.
- */
-#if G_BYTE_ORDER == G_LITTLE_ENDIAN
-#define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
-#elif G_BYTE_ORDER == G_BIG_ENDIAN
-#define GDK_MEMORY_DEFAULT GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
-#else
-#error "Unknown byte order for GDK_MEMORY_DEFAULT"
-#endif
-|#
+(defconstant +memory-default+
+  #+little-endian
+  :B8G8R8A8-PREMULTIPLIED
+  #+big-endian
+  :A8R8G8B8-PREMULTIPLIED)
+
+#+liber-documentation
+(setf (liber:alias-for-variable '+memory-default+)
+      "Constant"
+      (documentation '+memory-default+ 'variable)
+ "@version{2025-3-11}
+  @begin{short}
+    The default @symbol{gdk:memory-format} value for the memory format used by
+    GTK.
+  @end{short}
+  This is the format provided by the @fun{gdk:texture-download} function. It is
+  equal to the @code{:argb32} value of the @symbol{cairo:format-t} enumeration.
+
+  Be aware that this format is different for different endianness.
+  @see-symbol{gdk:memory-format}
+  @see-symbol{cairo:format-t}
+  @see-function{gdk:texture-download}")
+
+(export '+memory-default+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMemoryFormat
@@ -124,22 +128,61 @@
   :A8B8G8R8
   :R8G8B8
   :B8G8R8
+  #+gtk-4-6
   :R16G16B16
+  #+gtk-4-6
   :R16G16B16A16-PREMULTIPLIED
+  #+gtk-4-6
   :R16G16B16A16
+  #+gtk-4-6
   :R16G16B16-FLOAT
+  #+gtk-4-6
   :R16G16B16A16-FLOAT-PREMULTIPLIED
+  #+gtk-4-6
   :R16G16B16A16-FLOAT
+  #+gtk-4-6
   :R32G32B32-FLOAT
+  #+gtk-4-6
   :R32G32B32A32-FLOAT-PREMULTIPLIED
-  :R32G32B32A32_FLOAT
+  #+gtk-4-6
+  :R32G32B32A32-FLOAT
+  #+gtk-4-12
+  :8A8-PREMULTIPLIED
+  #+gtk-4-12
+  :G8A8
+  #+gtk-4-12
+  :G8
+  #+gtk-4-12
+  :G16A16-PREMULTIPLIED
+  #+gtk-4-12
+  :G16A16
+  #+gtk-4-12
+  :G16
+  #+gtk-4-12
+  :A8
+  #+gtk-4-12
+  :A16
+  #+gtk-4-12
+  :A16-FLOAT
+  #+gtk-4-12
+  :A32-FLOAT
+  #+gtk-4-14
+  :A8B8G8R8-PREMULTIPLIED
+  #+gtk-4-14
+  :B8G8R8X8
+  #+gtk-4-14
+  :X8R8G8B8
+  #+gtk-4-14
+  :R8G8B8X8
+  #+gtk-4-14
+  :X8B8G8R8
   :N-FORMATS)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'memory-format)
       "GEnum"
       (liber:symbol-documentation 'memory-format)
- "@version{#2023-4-12}
+ "@version{2025-3-11}
   @begin{declaration}
 (gobject:define-genum \"GdkMemoryFormat\" memory-format
   (:export t
@@ -162,59 +205,95 @@
   :R32G32B32-FLOAT
   :R32G32B32A32-FLOAT-PREMULTIPLIED
   :R32G32B32A32-FLOAT
+  :8A8-PREMULTIPLIED
+  :G8A8
+  :G8
+  :G16A16-PREMULTIPLIED
+  :G16A16
+  :G16
+  :A8
+  :A16
+  :A16-FLOAT
+  :A32-FLOAT
+  :A8B8G8R8-PREMULTIPLIED
+  :B8G8R8X8
+  :X8R8G8B8
+  :R8G8B8X8
+  :X8B8G8R8
   :N-FORMATS)
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes; for blue, green, red, alpha. The
+      @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes for blue, green, red, alpha. The
+        color values are premultiplied with the alpha value. This is the default
+        memory format for little endianness.}
+      @entry[:A8R8G8B8-PREMULTIPLIED]{4 bytes for alpha, red, green, blue. The
+        color values are premultiplied with the alpha value. This is the default
+        memory format for big endianness.}
+      @entry[:R8G8B8A8-PREMULTIPLIED]{4 bytes for red, green, blue, alpha The
         color values are premultiplied with the alpha value.}
-      @entry[:A8R8G8B8-PREMULTIPLIED]{4 bytes; for alpha, red, green, blue. The
-        color values are premultiplied with the alpha value.}
-      @entry[:R8G8B8A8-PREMULTIPLIED]{4 bytes; for red, green, blue, alpha The
-        color values are premultiplied with the alpha value.}
-      @entry[:B8G8R8A8]{4 bytes; for blue, green, red, alpha.}
-      @entry[:A8R8G8B8]{4 bytes; for alpha, red, green, blue.}
-      @entry[:R8G8B8A8]{4 bytes; for red, green, blue, alpha.}
-      @entry[:A8B8G8R8]{4 bytes; for alpha, blue, green, red.}
-      @entry[:R8G8B8]{3 bytes; for red, green, blue. The data is opaque.}
-      @entry[:B8G8R8]{3 bytes; for blue, green, red. The data is opaque.}
-      @entry[:R16G16B16]{3 guint16 values; for red, green, blue. Since 4.6}
-      @entry[:R16G16B16A16-PREMULTIPLIED]{4 guint16 values; for red, green,
+      @entry[:B8G8R8A8]{4 bytes for blue, green, red, alpha.}
+      @entry[:A8R8G8B8]{4 bytes for alpha, red, green, blue.}
+      @entry[:R8G8B8A8]{4 bytes for red, green, blue, alpha.}
+      @entry[:A8B8G8R8]{4 bytes for alpha, blue, green, red.}
+      @entry[:R8G8B8]{3 bytes for red, green, blue. The data is opaque.}
+      @entry[:B8G8R8]{3 bytes for blue, green, red. The data is opaque.}
+      @entry[:R16G16B16]{3 guint16 values for red, green, blue. Since 4.6}
+      @entry[:R16G16B16A16-PREMULTIPLIED]{4 guint16 values for red, green,
         blue, alpha. The color values are premultiplied with the alpha value.
         Since 4.6}
-      @entry[:R16G16B16A16]{4 guint16 values; for red, green, blue, alpha.
+      @entry[:R16G16B16A16]{4 guint16 values for red, green, blue, alpha.
         Since 4.6}
-      @entry[:R16G16B16-FLOAT]{3 half-float values; for red, green, blue. The
+      @entry[:R16G16B16-FLOAT]{3 half-float values for red, green, blue. The
         data is opaque. Since 4.6}
-      @entry[:R16G16B16A16-FLOAT-PREMULTIPLIED]{4 half-float values; for red,
+      @entry[:R16G16B16A16-FLOAT-PREMULTIPLIED]{4 half-float values for red,
         green, blue and alpha. The color values are premultiplied with the
         alpha value. Since 4.6}
-      @entry[:R16G16B16A16-FLOAT]{4 half-float values; for red, green, blue and
+      @entry[:R16G16B16A16-FLOAT]{4 half-float values for red, green, blue and
         alpha. Since 4.6}
-      @entry[:R32G32B32-FLOAT]{No description available.}
-      @entry[:R32G32B32A32-FLOAT-PREMULTIPLIED]{4 float values; for red, green,
+      @entry[:R32G32B32-FLOAT]{3 float values for red, green, blue.}
+      @entry[:R32G32B32A32-FLOAT-PREMULTIPLIED]{4 float values for red, green,
         blue and alpha. The color values are premultiplied with the alpha value.
         Since 4.6}
-      @entry[:R32G32B32A32-FLOAT]{4 float values; for red, green, blue and
+      @entry[:R32G32B32A32-FLOAT]{4 float values for red, green, blue and
         alpha. Since 4.6}
+      @entry[:8A8-PREMULTIPLIED]{2 bytes for grayscale, alpha. The color values
+        are premultiplied with the alpha value. Since 4.12}
+      @entry[:G8A8]{2 bytes for grayscale, alpha. Since 4.12}
+      @entry[:G8]{One byte for grayscale. The data is opaque. Since 4.12}
+      @entry[:G16A16-PREMULTIPLIED]{2 guint16 values for grayscale, alpha.
+        The color values are premultiplied with the alpha value. Since 4.12}
+      @entry[:G16A16]{2 guint16 values for grayscale, alpha. Since 4.12}
+      @entry[:G16]{One guint16 value for grayscale. The data is opaque.
+        Since 4.12}
+      @entry[:A8]{One byte for alpha. Since 4.12}
+      @entry[:A16]{One guint16 value for alpha. Since 4.12}
+      @entry[:A16-FLOAT]{One half-float value for alpha. Since 4.12}
+      @entry[:A32-FLOAT]{One float value for alpha. Since 4.12}
+      @entry[:A8B8G8R8-PREMULTIPLIED]{4 bytes for alpha, blue, green, red.
+        The color values are premultiplied with the alpha value. Since 4.14}
+      @entry[:B8G8R8X8]{4 bytes for blue, green, red, unused. Since 4.14}
+      @entry[:X8R8G8B8]{4 bytes for unused, red, green, blue. Since 4.14}
+      @entry[:R8G8B8X8]{4 bytes for red, green, blue, unused. Since 4.14}
+      @entry[:X8B8G8R8]{4 bytes for unused, blue, green, red. Since 4.14}
       @entry[:N-FORMATS]{The number of formats. This value will change as more
         formats get added, so do not rely on its concrete integer.}
     @end{table}
   @end{values}
   @begin{short}
-    The @sym{gdk:memory-format} enumeration describes a format that bytes can
-    have in memory.
+    The @symbol{gdk:memory-format} enumeration describes a format that bytes
+    can have in memory.
   @end{short}
   It describes formats by listing the contents of the memory passed to it. So
   @code{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed by a byte each of
   red, green and blue. It is not endian-dependent, so the @code{:argb32} value
   of the @symbol{cairo:format-t} enumeration is represented by different
-  @symol{gdk:memory-format} values on architectures with different endiannesses.
+  memory format values on architectures with different endiannesses.
 
-  Its naming is modelled after VkFormat. See
-  https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat
-  for details.
-  @see-class{gdk:texture}")
+  Its naming is modelled after
+  @url[https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#VkFormat]{VkFormat}.
+  @see-class{gdk:texture}
+  @see-symbol{cairo:format-t}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTexture
@@ -242,34 +321,63 @@
 (setf (liber:alias-for-class 'texture)
       "Class"
       (documentation 'texture 'type)
- "@version{2024-10-13}
+ "@version{2025-3-11}
   @begin{short}
-    The @sym{gdk:texture} object is the basic element used to refer to pixel
+    The @class{gdk:texture} object is the basic element used to refer to pixel
     data.
   @end{short}
-  It is primarily mean for pixel data that will not change over multiple frames,
-  and will be used for a long time.
+  It is primarily meant for pixel data that will not change over multiple
+  frames, and will be used for a long time.
 
-  There are various ways to create @sym{gdk:texture} objects from a
-  @class{gdk-pixbuf:pixbuf} object, or a Cairo surface, or other pixel data.
+  There are various ways to create @class{gdk:texture} objects from a
+  @class{gdk-pixbuf:pixbuf} object, or from bytes stored in memory, a file, or
+  a @class{g:resource} instance.
 
-  The ownership of the pixel data is transferred to the @sym{gdk:texture}
-  instance; you can only make a copy of it, via the @fun{gdk:texture-download}
+  The ownership of the pixel data is transferred to the @class{gdk:texture}
+  instance. You can only make a copy of it, with the @fun{gdk:texture-download}
   function.
 
-  The @sym{gdk:texture} object is an immutable object: That means you cannot
-  change anything about it other than increasing the reference count via the
+  The @class{gdk:texture} object is an immutable object: That means you cannot
+  change anything about it other than increasing the reference count with the
   @fun{g:object-ref} function.
   @see-constructor{gdk:texture-new-for-pixbuf}
   @see-constructor{gdk:texture-new-from-bytes}
   @see-constructor{gdk:texture-new-from-file}
   @see-constructor{gdk:texture-new-from-filename}
   @see-constructor{gdk:texture-new-from-resource}
-  @see-class{gdk-pixbuf:pixbuf}")
+  @see-class{gdk-pixbuf:pixbuf}
+  @see-class{gdk:color-state}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gdk:texture-color-state ------------------------------------------------
+
+#+(and gtk-4-16 liber-documentation)
+(setf (documentation (liber:slot-documentation "color-state" 'texture) t)
+ "The @code{color-state} property of type @class{gdk:color-state}
+  (Read / Write / Construct only) @br{}
+  The color state of the texture. Since 4.16")
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-function 'texture-color-state)
+      "Accessor"
+      (documentation 'texture-color-state 'function)
+ "@version{2025-3-11}
+  @syntax{(gdk:texture-color-state object) => state}
+  @argument[object]{a @class{gdk:texture} object}
+  @argument[state]{a @class{gdk:color-state} instance}
+  @begin{short}
+    Accessor of the @slot[gdk:texture]{color-state} slot of the
+    @class{gdk:texture} class.
+  @end{short}
+  The @fun{gdk:texture-color-state} function returns the color state associated
+  with the texture.
+
+  Since 4.16
+  @see-class{gdk:texture}
+  @see-class{gdk:color-state}")
 
 ;;; --- gdk:texture-height -----------------------------------------------------
 
@@ -285,7 +393,7 @@
 (setf (liber:alias-for-function 'texture-height)
       "Accessor"
       (documentation 'texture-height 'function)
- "@version{#2023-4-12}
+ "@version{2025-3-11}
   @syntax{(gdk:texture-height object) => height}
   @argument[object]{a @class{gdk:texture} object}
   @argument[height]{an integer with the height of the texture}
@@ -293,7 +401,7 @@
     Accessor of the @slot[gdk:texture]{height} slot of the @class{gdk:texture}
     class.
   @end{short}
-  The @sym{gdk:texture-height} function returns the height of the texture , in
+  The @fun{gdk:texture-height} function returns the height of the texture , in
   pixels.
   @see-class{gdk:texture}")
 
@@ -311,7 +419,7 @@
 (setf (liber:alias-for-function 'texture-width)
       "Accessor"
       (documentation 'texture-width 'function)
- "@version{#2023-4-12}
+ "@version{2025-3-11}
   @syntax{(gdk:texture-width object) => width}
   @argument[object]{a @class{gdk:texture} object}
   @argument[width]{an integer with the width of the texture}
@@ -319,7 +427,7 @@
     Accessor of the @slot[gdk:texture]{width} slot of the @class{gdk:texture}
     class.
   @end{short}
-  The @sym{gdk:texture-width} function returns the width of the texture , in
+  The @fun{gdk:texture-width} function returns the width of the texture , in
   pixels.
   @see-class{gdk:texture}")
 
@@ -330,7 +438,7 @@
 (cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
     (g:object texture :return)
  #+liber-documentation
- "@version{2025-3-2}
+ "@version{2025-3-11}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -349,9 +457,9 @@
 (cffi:defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
     (g:object texture :return)
  #+liber-documentation
- "@version{#2023-4-12}
-  @argument[path]{a string with the path of the resource file}
-  @return{A newly created @class{gdk:texture} object.}
+ "@version{2025-3-11}
+  @argument[path]{a string for the path of the resource file}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture by loading an image from a resource.
   @end{short}
@@ -379,10 +487,12 @@
 
 (defun texture-new-from-file (file)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2025-3-11}
   @argument[file]{a @class{g:file} object to load}
-  @return{The newly created @class{gdk:texture} object, or @code{nil} if an
-    error occurred.}
+  @begin{return}
+    The newly created @class{gdk:texture} object, or @code{nil} if an error
+    occurred.
+  @end{return}
   @begin{short}
     Creates a new texture by loading an image from a file.
   @end{short}
@@ -408,9 +518,8 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2025-2-8}
-  @argument[path]{a pathname or namestring for the file to load, the value is
-    a file system path, using the OS encoding}
+ "@version{2025-3-11}
+  @argument[path]{a pathname or namestring for the file to load}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture by loading an image from a file.
@@ -433,7 +542,7 @@
 (export 'texture-new-from-filename)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_new_from_bytes                             Since 4.6
+;;; gdk_texture_new_from_bytes                              Since 4.6
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
@@ -445,7 +554,7 @@
 #+gtk-4-6
 (defun texture-new-from-bytes (bytes)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2025-3-11}
   @argument[bytes]{a @class{g:bytes} instance containing data to load}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -475,11 +584,11 @@
 
 (cffi:defcfun ("gdk_texture_download" texture-download) :void
  #+liber-documentation
- "@version{#2023-4-12}
+ "@version{2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
   @argument[data]{a pointer to enough memory to be filled with the downloaded
     data of @arg{texture}}
-  @argument[stride]{rowstride in bytes}
+  @argument[stride]{an unsigned integer for the rowstride in bytes}
   @begin{short}
     Downloads the texture into local memory.
   @end{short}
@@ -492,9 +601,9 @@
   @begin[Examples]{dictionary}
   Downloading a texture into a Cairo image surface:
   @begin{pre}
-(let ((surface (cairo:image-surface-reate :argb32
-                                          (gdk:texture-width texture)
-                                          (gdk:texture-height texture))))
+(let ((surface (cairo:image-surface-create :argb32
+                                           (gdk:texture-width texture)
+                                           (gdk:texture-height texture))))
   (gdk:texture-download texture
                         (cairo:image-surface-data surface)
                         (cairo:image-surface-stride surface))
@@ -516,9 +625,9 @@
 
 (cffi:defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
  #+liber-documentation
- "@version{#2023-5-25}
+ "@version{#2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
-  @argument[filename]{a string with the filename to store to}
+  @argument[filename]{a string for the filename to store to}
   @return{@em{True} if saving succed, @em{false} on failure.}
   @begin{short}
     Store the given texture to the filename as a PNG file.
@@ -534,16 +643,16 @@
 (export 'texture-save-to-png)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_save_to_png_bytes                          Since 4.6
+;;; gdk_texture_save_to_png_bytes                           Since 4.6
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
-    (g:boxed g:bytes)
+    (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{#2023-5-25}
+ "@version{2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
-  @return{A newly allocated @class{g:bytes} instance containing PNG data.}
+  @return{The newly allocated @class{g:bytes} instance containing PNG data.}
   @begin{short}
     Store the given texture in memory as a PNG file.
   @end{short}
@@ -566,15 +675,15 @@
 (export 'texture-save-to-png-bytes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_save_to_tiff                               Since 4.6
+;;; gdk_texture_save_to_tiff                                Since 4.6
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
  #+liber-documentation
- "@version{#2023-5-25}
+ "@version{#2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
-  @argument[filename]{a string with the filename to store to}
+  @argument[filename]{a string for the filename to store to}
   @return{@em{True} if saving succeeded, @em{false} on failure.}
   @begin{short}
     Store the given texture to the filename as a TIFF file.
@@ -590,16 +699,16 @@
 (export 'texture-save-to-tiff)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_save_to_tiff_bytes                         Since 4.6
+;;; gdk_texture_save_to_tiff_bytes                          Since 4.6
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
-    (g:boxed g:bytes)
+    (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{#2023-5-25}
+ "@version{2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
-  @return{A newly allocated @class{g:bytes} instance containing TIFF data.}
+  @return{The newly allocated @class{g:bytes} instance containing TIFF data.}
   @begin{short}
     Store the given texture in memory as a TIFF file.
   @end{short}
@@ -616,23 +725,26 @@
   Since 4.6
   @see-class{gdk:texture}
   @see-class{g:bytes}
-  @see-function{gdk:texture-new-from-bytes}"
+  @see-function{gdk:texture-new-from-bytes}
+  @see-function{gdk:texture-save-to-png-bytes}"
   (texture (g:object texture)))
 
 #+gtk-4-6
 (export 'texture-save-to-tiff-bytes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_get_format                                 Since 4.10
+;;; gdk_texture_get_format                                  Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gdk_texture_get_format" texture-format) memory-format
  #+liber-documentation
- "@version{#2023-5-25}
+ "@version{2025-3-11}
   @argument[texture]{a @class{gdk:texture} object}
-  @return{A @symbol{gdk:memory-format} value with the preferred format for the
-    data of the texture.}
+  @begin{return}
+    The @symbol{gdk:memory-format} value with the preferred format for the
+    data of the texture.
+  @end{return}
   @begin{short}
     Gets the memory format most closely associated with the data of the texture.
   @end{short}
@@ -668,9 +780,10 @@
 (setf (liber:alias-for-class 'memory-texture)
       "Class"
       (documentation 'memory-texture 'type)
- "@version{#2023-8-1}
+ "@version{2025-3-11}
   @begin{short}
-    A @class{gdk:texture} implementation representing image data in memory.
+    The @class{gdk:memory-texture} class is a @class{gdk:texture} implementation
+    representing image data in memory.
   @end{short}
   @see-class{gdk:texture}")
 
@@ -681,14 +794,14 @@
 (cffi:defcfun ("gdk_memory_texture_new" memory-texture-new)
     (g:object texture :return)
  #+liber-documentation
- "@version{#2023-8-1}
-  @argument[width]{an integer with the width of the texture}
-  @argument[height]{an integer with the height of the texture}
-  @argument[format]{a @symbol{gdk:memory-format} value with the format of the
+ "@version{2025-3-11}
+  @argument[width]{an integer for the width of the texture}
+  @argument[height]{an integer for the height of the texture}
+  @argument[format]{a @symbol{gdk:memory-format} value for the format of the
     data}
   @argument[bytes]{a @class{g:bytes} instance containing the pixel data}
-  @argument[stride]{an integer with the rowstride of the data}
-  @return{A newly created @class{gdk:texture} object.}
+  @argument[stride]{an integer for the rowstride of the data}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture for a blob of image data.
   @end{short}
@@ -709,6 +822,7 @@
 ;;; GdkGLTexture
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (gobject:define-gobject "GdkGLTexture" gl-texture
   (:superclass texture
    :export t
@@ -718,7 +832,7 @@
    :type-initializer "gdk_gl_texture_get_type")
   nil)
 
-#+liber-documentation
+#+nil
 (setf (liber:alias-for-class 'gl-texture)
       "Class"
       (documentation 'gl-texture 'type)
@@ -732,9 +846,9 @@
 ;;; gdk_gl_texture_new
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: The implementation is not complete. The arguments destroy and data are
-;; not implemented.
+;; TODO: Consider to remove the code
 
+#+nil
 (cffi:defcfun ("gdk_gl_texture_new" %gl-texture-new)
     (g:object texture :return)
   (context (g:object gl-context))
@@ -744,6 +858,7 @@
   (destroy :pointer)
   (data :pointer))
 
+#+nil
 (defun gl-texture-new (context id width height)
  #+liber-documentation
  "@version{#2023-8-1}
@@ -773,12 +888,14 @@
                    (cffi:null-pointer)
                    (cffi:null-pointer)))
 
+#+nil
 (export 'gl-texture-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_texture_release
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcfun ("gdk_gl_texture_release" gl-texture-release) :void
  #+liber-documentation
  "@version{#2023-8-1}
@@ -792,6 +909,7 @@
   @see-class{gdk:gl-texture}"
   (texture (g:object texture)))
 
+#+nil
 (export 'gl-texture-release)
 
 ;;; --- End of file gdk4.texture.lisp ------------------------------------------

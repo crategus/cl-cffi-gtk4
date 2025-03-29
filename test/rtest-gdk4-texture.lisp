@@ -5,6 +5,11 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GDK_MEMORY_DEFAULT
+
+(test gdk-memory-default
+  (is (eq :B8G8R8A8-PREMULTIPLIED gdk:+memory-default+)))
+
 ;;;     GdkMemoryFormat
 
 (test gdk-memory-format
@@ -128,8 +133,6 @@
 
 ;;;     gdk_color_state_create_cicp_params                  Since 4.16
 ;;;     gdk_color_state_equal                               Since 4.16
-;;;     gdk_color_state_ref                                 Since 4.16
-;;;     gdk_color_state_unref                               Since 4.16
 
 ;;; ----------------------------------------------------------------------------
 
@@ -148,7 +151,7 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkTexture")))
   ;; Check children
-  (is (equal '("GdkDmabufTexture" "GdkGLTexture" "GdkMemoryTexture")
+  (is (equal '("GdkDmabufTexture" "GdkMemoryTexture")
              (glib-test:list-children "GdkTexture")))
   ;; Check interfaces
   (is (equal '("GdkPaintable" "GIcon" "GLoadableIcon")
@@ -161,14 +164,14 @@
              (glib-test:list-signals "GdkTexture")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkTexture" GDK:TEXTURE
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
-                        :TYPE-INITIALIZER "gdk_texture_get_type")
-                       ((COLOR-STATE TEXTURE-COLOR-STATE "color-state"
-                         "GdkColorState" T NIL)
-                        (HEIGHT TEXTURE-HEIGHT "height" "gint" T NIL)
-                        (WIDTH TEXTURE-WIDTH "width" "gint" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
+                       :TYPE-INITIALIZER "gdk_texture_get_type")
+                      ((COLOR-STATE TEXTURE-COLOR-STATE "color-state"
+                        "GdkColorState" T NIL)
+                       (HEIGHT TEXTURE-HEIGHT "height" "gint" T NIL)
+                       (WIDTH TEXTURE-WIDTH "width" "gint" T NIL)))
              (gobject:get-gtype-definition "GdkTexture"))))
 
 ;;;     GdkMemoryTexture
@@ -199,15 +202,16 @@
              (glib-test:list-signals "GdkMemoryTexture")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkMemoryTexture" GDK:MEMORY-TEXTURE
-                       (:SUPERCLASS GDK:TEXTURE
-                        :EXPORT T
-                        :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
-                        :TYPE-INITIALIZER "gdk_memory_texture_get_type")
-                       NIL)
+                      (:SUPERCLASS GDK:TEXTURE
+                       :EXPORT T
+                       :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
+                       :TYPE-INITIALIZER "gdk_memory_texture_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GdkMemoryTexture"))))
 
 ;;;     GdkGLTexture
 
+#+nil
 (test gdk-gl-texture-class
   ;; Check type
   (is (g:type-is-object "GdkGLTexture"))
@@ -234,26 +238,17 @@
              (glib-test:list-signals "GdkGLTexture")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkGLTexture" GDK:GL-TEXTURE
-                       (:SUPERCLASS GDK:TEXTURE
-                        :EXPORT T
-                        :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable"))
-                       NIL)
+                      (:SUPERCLASS GDK:TEXTURE
+                       :EXPORT T
+                       :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable"))
+                      NIL)
              (gobject:get-gtype-definition "GdkGLTexture"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
-;; FIXME: Causes a fatal error. It is not possible to create an instance
-;; with the MAKE-INSTANCE method and G:OBJECT-NEW function.
-;;
-;; Gdk:ERROR: gdk_texture_set_property: assertion failed: (self->color_state)
-;; fatal error encountered in SBCL pid 6264 tid 6264:
-;; SIGABRT received.
-
-#+nil
-(test gdk-texture-properties
-  (let ((texture (make-instance 'gdk:memory-texture)))
-    (is (= 1 (gdk:texture-height texture)))
-    (is (= 1 (gdk:texture-width texture)))))
+;;;     color-state                                         Since 4.16
+;;;     height
+;;;     width
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -268,7 +263,13 @@
         (setf pixbuf (gdk:pixbuf-new-from-file path))
         (setf texture (gdk:texture-new-for-pixbuf pixbuf))
         (is (typep pixbuf 'gdk-pixbuf:pixbuf))
+
+        (is (=  489 (gdk:pixbuf-width pixbuf)))
+        (is (=  537 (gdk:pixbuf-height pixbuf)))
+        (is (= 1956 (gdk:pixbuf-rowstride pixbuf)))
+
         (is (typep texture 'gdk:texture))
+        (is (eq :R8G8B8A8 (gdk:texture-format texture)))
         (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
         (is (= 489 (gdk:texture-width texture)))
         (is (= 537 (gdk:texture-height texture)))))))
@@ -277,11 +278,12 @@
 
 (test gdk-texture-new-from-resource
   (glib-test:with-check-memory (texture)
-    (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource")))
+    (let ((path (glib-sys:sys-path "test/rtest-resource.gresource")))
       (gio:with-resource (resource path)
         (let* ((path "/com/crategus/test/ducky.png"))
           (setf texture (gdk:texture-new-from-resource path))
           (is (typep texture 'gdk:texture))
+          (is (eq :R8G8B8A8 (gdk:texture-format texture)))
           (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
           (is (= 489 (gdk:texture-width texture)))
           (is (= 537 (gdk:texture-height texture))))))))
@@ -294,6 +296,7 @@
       (setf file (g:file-new-for-path path))
       (setf texture (gdk:texture-new-from-file file))
       (is (typep texture 'gdk:texture))
+      (is (eq :R8G8B8A8 (gdk:texture-format texture)))
       (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
       (is (= 489 (gdk:texture-width texture)))
       (is (= 537 (gdk:texture-height texture))))))
@@ -305,21 +308,67 @@
     (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
       (setf texture (gdk:texture-new-from-filename path))
       (is (typep texture 'gdk:texture))
+      (is (eq :R8G8B8A8 (gdk:texture-format texture)))
       (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
       (is (= 489 (gdk:texture-width texture)))
       (is (= 537 (gdk:texture-height texture))))))
 
+;;;     gdk_texture_save_to_png_bytes                      Since 4.6
 ;;;     gdk_texture_new_from_bytes                         Since 4.6
 
-;;;     gdk_texture_download
-;;;     gdk_texture_save_to_png
-;;;     gdk_texture_save_to_png_bytes                      Since 4.6
-;;;     gdk_texture_save_to_tiff                           Since 4.6
+(test gdk-texture-save-to-png-bytes
+  (glib-test:with-check-memory (texture)
+    (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+      (setf texture (gdk:texture-new-from-filename path))
+      (let ((bytes (gdk:texture-save-to-png-bytes texture)))
+        (is (typep (setf texture
+                         (gdk:texture-new-from-bytes bytes)) 'gdk:texture))
+        (is (eq :R8G8B8A8 (gdk:texture-format texture)))
+        (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+        (is (= 489 (gdk:texture-width texture)))
+        (is (= 537 (gdk:texture-height texture)))))))
+
 ;;;     gdk_texture_save_to_tiff_bytes                     Since 4.6
-;;;     gdk_texture_get_format                             Since 4.10
+;;;     gdk_texture_new_from_bytes                         Since 4.6
+
+(test gdk-texture-save-to-tiff-bytes
+  (glib-test:with-check-memory (texture)
+    (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+      (setf texture (gdk:texture-new-from-filename path))
+      (let ((bytes (gdk:texture-save-to-tiff-bytes texture)))
+
+        (is (typep (setf texture
+                         (gdk:texture-new-from-bytes bytes)) 'gdk:texture))
+        (is (eq :R8G8B8A8 (gdk:texture-format texture)))
+        (is (typep (gdk:texture-color-state texture) 'gdk:color-state))
+        (is (= 489 (gdk:texture-width texture)))
+        (is (= 537 (gdk:texture-height texture)))))))
+
+;;;     gdk_texture_download
+
+(test gdk-texture-download
+  (glib-test:with-check-memory (texture)
+    (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
+           (size (* 4 489 537))
+           (rowstride (* 4 489))
+           (data (cffi:foreign-alloc :uchar :count size :initial-element #xff))
+           (bytes (g:bytes-new data size)))
+      (setf texture (gdk:texture-new-from-filename path))
+      ;; Retrieve the texture from the BYTES instance
+      (setf texture (gdk:memory-texture-new 489 537
+                                            gdk:+memory-default+
+                                            bytes
+                                            rowstride))
+        (is (eq :B8G8R8A8-PREMULTIPLIED (gdk:texture-format texture)))
+        (is (= 489 (gdk:texture-width texture)))
+        (is (= 537 (gdk:texture-height texture))))))
+
+;;;     gdk_texture_save_to_png
+;;;     gdk_texture_save_to_tiff                           Since 4.6
 
 ;;;     gdk_memory_texture_new
+
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2024-12-20
+;;; 2025-3-11
