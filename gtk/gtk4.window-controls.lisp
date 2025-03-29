@@ -252,7 +252,7 @@ windowcontrols
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
 
-;;; --- gtk:window-controls-side -----------------------------------------------
+;;; --- gtk:window-controls-use-native-controls --------------------------------
 
 #+(and gtk-4-18 liber-documentation)
 (setf (documentation (liber:slot-documentation "use-native-controls"
@@ -264,7 +264,7 @@ windowcontrols
   native window controls. On other platforms, this option has no effect. See
   also
   @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
-  @br{}
+  Since 4.18 @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-18 liber-documentation)
