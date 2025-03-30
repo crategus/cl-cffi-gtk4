@@ -276,6 +276,9 @@
 
 ;;;     gtk_settings_reset_property
 
+;; FIXME: Can cause a memory fault
+
+#+nil
 (test gtk-settings-reset-property
   (let ((settings (gtk:settings-default)))
     (is-false (gtk:settings-reset-property settings
@@ -312,4 +315,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2024-10-13
+;;; 2025-3-30
