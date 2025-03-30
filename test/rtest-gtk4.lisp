@@ -86,7 +86,7 @@
   ;; We set a PRGNAME to avoid side effects when running the tests a second time
   (setf (g:prgname) "gtk-test")
   ;; Check and possibly create the resources
-  (glib-sys:check-and-create-resources "test/rtest-gtk4.xml"
+  (glib-sys:check-and-create-resources "test/rtest-resource.xml"
                                        :package "cl-cffi-gtk4"
                                        :sourcedir "test/resource/"
                                        :verbose t))
@@ -158,14 +158,32 @@ sem venenatis, vitae ultricies arcu laoreet."))
 
 (export 'window-destroy-toplevels)
 
-;; Create and fill a GTK:STRING-LIST for use as a model
+;; Create and fill a GTK:STRING-LIST for use as a model (used for GTK 4)
 (defun create-string-list-for-package (&optional (package "GTK"))
   (let ((store (gtk:string-list-new '())))
     (do-external-symbols (symbol (find-package package))
       (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
     store))
 
-;; Create and fill a GTK:LIST-STORE for use as a model
+;; Create a GtkListView with a GtkStingList as model
+(defun create-list-view-for-testsuite (&optional (package "GTK"))
+  (let* ((factory (gtk:signal-list-item-factory-new))
+         (model (create-string-list-for-package package))
+         (listview (gtk:list-view-new (gtk:single-selection-new model) factory)))
+
+    (g:signal-connect factory "setup"
+        (lambda (factory item)
+          (declare (ignore factory))
+          (setf (gtk:list-item-child item) (gtk:label-new ""))))
+
+    (g:signal-connect factory "bind"
+        (lambda (factory item)
+          (declare (ignore factory))
+          (setf (gtk:label-label (gtk:list-item-child item))
+                (gtk:string-object-string (gtk:list-item-item item)))))
+    listview))
+
+;; Create and fill a GTK:LIST-STORE for use as a model (used for GTK 3)
 (defun create-list-store-for-package (&optional (package "GTK"))
   (let ((store (make-instance 'gtk:list-store
                                   :column-types

@@ -10,5 +10,6 @@
     <file>application.ui</file>
     <file>css-accordion.css</file>
     <file>gtk-logo.webm</file>
+    <file>gtk-builder-list-item-factory.ui</file>
   </gresource>
 </gresources>
