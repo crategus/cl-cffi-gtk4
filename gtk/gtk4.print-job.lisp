@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-job.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -121,7 +121,7 @@
 
 #+liber-documentation
 (setf (documentation 'print-job 'type)
- "@version{2024-7-7}
+ "@version{2025-3-30}
   @begin{short}
     The @class{gtk:print-job} object represents a job that is sent to a printer.
   @end{short}
@@ -130,9 +130,15 @@
 
   Use the @fun{gtk:print-job-surface} function to obtain the Cairo surface onto
   which the pages must be drawn. Use the @fun{gtk:print-job-send} function to
-  send the finished job to the printer. If you do not use Cairo the
+  send the finished job to the printer. If you are not using Cairo, the
   @class{gtk:print-job} object also supports printing of manually generated
-  PostScript, via the @fun{gtk:print-job-set-source-file} function.
+  PostScript. This can be done using the @fun{gtk:print-job-set-source-file}
+  function.
+  @begin[Notes]{dictionary}
+    It is an error to use the @symbol{make-instance} method to create a
+    @class{gtk:print-job} object from the Lisp side.  You must use the
+    @fun{gtk:print-job-new} function.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"status-changed\" signal}
       @begin{pre}
@@ -297,12 +303,10 @@ lambda (job)    :run-last
 ;;; gtk_print_job_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline print-job-new))
-
-(defun print-job-new (title printer settings page-setup)
+(cffi:defcfun ("gtk_print_job_new" print-job-new) (g:object print-job :return)
  #+liber-documentation
- "@version{2024-7-7}
-  @argument[title]{a string with the job title}
+ "@version{2025-3-30}
+  @argument[title]{a string for the job title}
   @argument[printer]{a @class{gtk:printer} object}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -312,11 +316,10 @@ lambda (job)    :run-last
   @see-class{gtk:printer}
   @see-class{gtk:print-settings}
   @see-class{gtk:page-setup}"
-  (make-instance 'print-job
-                 :title title
-                 :printer printer
-                 :settings settings
-                 :page-setup page-setup))
+  (title :string)
+  (printer (g:object printer))
+  (settings (g:object print-settings))
+  (setup (g:object page-setup)))
 
 (export 'print-job-new)
 

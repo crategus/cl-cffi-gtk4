@@ -47,26 +47,6 @@
                          "track-print-status" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkPrintJob"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-print-job-properties
-  (let ((printer (get-default-printer)))
-    (when printer
-      (let* ((settings (gtk:print-settings-new))
-             (setup (gtk:page-setup-new))
-             (job (gtk:print-job-new "printjob" printer settings setup)))
-        (is (eq setup (gtk:print-job-page-setup job)))
-        (is (eq printer (gtk:print-job-printer job)))
-        ;; Creates a new print settings object
-        (is (typep (gtk:print-job-settings job) 'gtk:print-settings))
-        (is (string= "printjob" (gtk:print-job-title job)))
-        (is-false (gtk:print-job-track-print-status job))
-        ;; Check memory management
-        (is (= 1 (g:object-ref-count settings)))
-        (is (= 2 (g:object-ref-count setup)))
-        (is (= 2 (g:object-ref-count printer)))
-        (is (= 1 (g:object-ref-count job)))))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     status-changed
@@ -87,6 +67,22 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-print-job-properties
+  (let ((printer (get-default-printer)))
+    (when printer
+      (glib-test:with-check-memory (settings (setup 2) job :strong 3)
+        (setf settings (gtk:print-settings-new))
+        (setf setup (gtk:page-setup-new))
+        (setf job (gtk:print-job-new "printjob" printer settings setup))
+        (is (eq setup (gtk:print-job-page-setup job)))
+        (is (eq printer (gtk:print-job-printer job)))
+        ;; Creates a new print settings object
+        (is (typep (gtk:print-job-settings job) 'gtk:print-settings))
+        (is (string= "printjob" (gtk:print-job-title job)))
+        (is-false (gtk:print-job-track-print-status job))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_print_job_new
@@ -94,9 +90,11 @@
 (test gtk-print-job-new
   (let ((printer (get-default-printer)))
     (when printer
-      (let ((settings (gtk:print-settings-new))
-            (setup (gtk:page-setup-new)))
-        (is (typep (gtk:print-job-new "printjob" printer settings setup)
+      (glib-test:with-check-memory (settings (setup 2) job :strong 2)
+        (setf settings (gtk:print-settings-new))
+        (setf setup (gtk:page-setup-new))
+        (is (typep (setf job
+                         (gtk:print-job-new "printjob" printer settings setup))
                    'gtk:print-job))))))
 
 ;;;     gtk_print_job_get_status
@@ -104,9 +102,10 @@
 (test gtk-print-job-status
   (let ((printer (get-default-printer)))
     (when printer
-      (let* ((settings (gtk:print-settings-new))
-             (setup (gtk:page-setup-new))
-             (job (gtk:print-job-new "printjob" printer settings setup)))
+      (glib-test:with-check-memory (settings (setup 2) job :strong 1)
+        (setf settings (gtk:print-settings-new))
+        (setf setup (gtk:page-setup-new))
+        (setf job (gtk:print-job-new "printjob" printer settings setup))
         (is (eq :initial (gtk:print-job-status job)))))))
 
 ;;;     gtk_print_job_set_source_file
@@ -114,11 +113,12 @@
 (test gtk-print-job-set-source-file
   (let ((printer (get-default-printer)))
     (when printer
-      (let* ((path (glib-sys:sys-path "test/resource/application-simple.pdf"))
-             (settings (gtk:print-settings-new))
-             (setup (gtk:page-setup-new))
-             (job (gtk:print-job-new "printjob" printer settings setup)))
-        (is-true (gtk:print-job-set-source-file job path))))))
+      (let ((path (glib-sys:sys-path "test/resource/application-simple.pdf")))
+        (glib-test:with-check-memory (settings (setup 2) job :strong 1)
+          (setf settings (gtk:print-settings-new))
+          (setf setup (gtk:page-setup-new))
+          (setf job (gtk:print-job-new "printjob" printer settings setup))
+          (is-true (gtk:print-job-set-source-file job path)))))))
 
 ;;;     gtk_print_job_set_source_fd
 
@@ -283,4 +283,4 @@
         (is-true (setf (gtk:print-job-reverse job) t))
         (is-true (gtk:print-job-reverse job))))))
 
-;;; 2024-10-27
+;;; 2025-3-30
