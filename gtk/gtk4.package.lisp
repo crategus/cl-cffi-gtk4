@@ -2,8 +2,8 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -112,9 +112,8 @@
       @about-symbol{expression-notify}
       @about-function{expression-watch}
       @about-class{expression-watch}
-      @about-function{expression-watch-ref}
-      @about-function{expression-watch-unref}
       @about-function{expression-watch-evaluate}
+      @about-function{expression-watch-evaluate-value}
       @about-function{expression-watch-unwatch}
       @about-function{property-expression-new}
       @about-function{property-expression-new-for-pspec}
@@ -225,18 +224,6 @@
       @about-generic{numeric-sorter-sort-order}
       @about-function{numeric-sorter-new}
     @end{subsection}
-    @begin[GtkColumnViewSorter]{subsection}
-      @about-class{column-view-sorter}
-      @about-generic{column-view-sorter-primary-sort-column}
-      @about-generic{column-view-sorter-primary-sort-order}
-      @about-function{column-view-sorter-n-sort-columns}
-      @about-function{column-view-sorter-nth-sort-column}
-    @end{subsection}
-    @begin[GtkSectionModel]{subsection}
-      @about-class{section-model}
-      @about-function{section-model-section}
-      @about-function{section-model-sections-changed}
-    @end{subsection}
     @begin[GtkSelectionModel]{subsection}
       @about-class{selection-model}
       @about-function{selection-model-is-selected}
@@ -276,6 +263,11 @@
       @about-generic{multi-selection-model}
       @about-generic{multi-selection-n-items}
       @about-function{multi-selection-new}
+    @end{subsection}
+    @begin[GtkSectionModel]{subsection}
+      @about-class{section-model}
+      @about-function{section-model-section}
+      @about-function{section-model-sections-changed}
     @end{subsection}
     @begin[GtkFilterListModel]{subsection}
       @about-class{filter-list-model}
@@ -369,6 +361,7 @@
       @about-function{string-list-remove}
       @about-function{string-list-splice}
       @about-function{string-list-string}
+      @about-function{string-list-find}
     @end{subsection}
   @end{section}
   @begin[List-based Widgets]{section}
@@ -653,8 +646,11 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkListItem]{subsection}
       @about-class{list-item}
+      @about-generic{list-item-accessible-description}
+      @about-generic{list-item-accessible-label}
       @about-generic{list-item-activatable}
       @about-generic{list-item-child}
+      @about-generic{list-item-focusable}
       @about-generic{list-item-item}
       @about-generic{list-item-position}
       @about-generic{list-item-selectable}
@@ -768,6 +764,13 @@ GtkCellRenderer         GtkWidget
       @about-generic{column-view-row-position}
       @about-generic{column-view-row-selectable}
       @about-generic{column-view-row-selected}
+    @end{subsection}
+    @begin[GtkColumnViewSorter]{subsection}
+      @about-class{column-view-sorter}
+      @about-generic{column-view-sorter-primary-sort-column}
+      @about-generic{column-view-sorter-primary-sort-order}
+      @about-function{column-view-sorter-n-sort-columns}
+      @about-function{column-view-sorter-nth-sort-column}
     @end{subsection}
     @begin[GtkDropDown]{subsection}
       @about-class{drop-down}
@@ -3622,6 +3625,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{window-controls-decoration-layout}
       @about-generic{window-controls-empty}
       @about-generic{window-controls-side}
+      @about-generic{window-controls-use-native-controls}
       @about-function{window-controls-new}
     @end{subsection}
     @begin[GtkWindowHandle]{subsection}

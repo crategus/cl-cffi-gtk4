@@ -90,7 +90,6 @@
 (unexport 'gobject:define-gflags :gobject)
 (unexport 'gobject:define-ginterface :gobject)
 (unexport 'gobject:define-gobject :gobject)
-(unexport 'gobject:register-object-type-implementation :gobject)
 
 ;; Unexport the symbols from gdk-pixbuf for the documentation to avoid
 ;; duplication of the symbols, these symbols are documented in its own package.
