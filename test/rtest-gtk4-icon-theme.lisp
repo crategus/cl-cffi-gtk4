@@ -135,7 +135,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-icon-theme-properties
-  (glib-test:with-check-memory ((theme 4) :strong 2)
+  (glib-test:with-check-memory ((theme 2) :strong 2)
     (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
     (is (typep (gtk:icon-theme-display theme) 'gdk:display))
     (is (every #'stringp (gtk:icon-theme-icon-names theme)))
@@ -154,7 +154,7 @@
 ;;;     gtk_icon_theme_get_for_display
 
 (test gtk-icon-theme-for-display
-  (glib-test:with-check-memory ((theme 4))
+  (glib-test:with-check-memory ((theme 2))
     (is (typep (setf theme
                      (gtk:icon-theme-for-display (gdk:display-default)))
                'gtk:icon-theme))))
@@ -166,7 +166,7 @@
 
 #-windows
 (test gtk-icon-theme-has-icon
-  (glib-test:with-check-memory ((theme 4))
+  (glib-test:with-check-memory ((theme 2))
     (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
     (is-true (gtk:icon-theme-has-icon theme "gtk-ok"))
     (is-false (gtk:icon-theme-has-icon theme "unkown"))))
@@ -178,7 +178,7 @@
 ;; TODO: PAINTABLE holds two references. Why?
 
 (test gtk-icon-theme-lookup-icon
-  (glib-test:with-check-memory ((theme 4) (paintable 2) :strong 1)
+  (glib-test:with-check-memory ((theme 2) (paintable 2) :strong 1)
     (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
     (setf paintable
           (gtk:icon-theme-lookup-icon theme
