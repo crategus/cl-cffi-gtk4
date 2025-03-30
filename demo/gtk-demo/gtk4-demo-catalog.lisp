@@ -1225,7 +1225,6 @@
        "gtk:list-view"
        "gtk:list-view-new"
        "gtk:list-view-model"
-       "gtk:list-model-object"
        "gtk:list-item-child"
        "gtk:list-item-item"
        "gtk:single-selection-new"
@@ -1237,6 +1236,7 @@
        "gtk:widget-next-sibling"
        "gtk:image-set-from-gicon"
        "gdk:display-app-launch-context"
+       "g:list-model-item"
        "g:list-store-new"
        "g:list-store-append"
        "g:app-info-all"
@@ -1929,11 +1929,18 @@
        "DO-PAINTABLE-ANIMATION"
        "gtk4-example"
        "paintable-animation.lisp")
-      ("Emblemed Icons"
+      ("Emblemed Icon"
        ":window"
        "DO-PAINTABLE-EMBLEM"
        "gtk4-example"
-       "paintable-emblem.lisp"))
+       "paintable-emblem.lisp"
+       :keywords
+       "GdkPaintable"
+       "gdk:paintable"
+       "gdk:paintable-snapshot"
+       "gtk:icon-theme-for-display"
+       "gtk:icon-theme-lookup-icon"
+       "gtk:image-new-from-paintable"))
 
      "Subclassing"
      (("GtkFigure subclass"
