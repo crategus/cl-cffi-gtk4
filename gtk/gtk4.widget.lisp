@@ -5350,6 +5350,19 @@ lambda (widget)    :run-last
 ;;;     The GtkBuilderScope to use when loading the class template.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_widget_class_set_template_scope"
+               %widget-class-set-template-scope) :void
+  (class :pointer)
+  (scope (g:object builder-scope)))
+
+(defun widget-class-set-template-scope (gtype scope)
+  (let ((class (gobject:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-set-template-scope class scope)
+      (gobject:type-class-unref class))))
+
+(export 'widget-class-set-template-scope)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_bind_template_child()
 ;;;
@@ -5578,6 +5591,20 @@ lambda (widget)    :run-last
 ;;; callback_symbol :
 ;;;     The callback symbol.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_class_bind_template_callback_full"
+               %widget-class-bind-template-callback-full) :void
+  (class :pointer)
+  (name :string)
+  (symbol :string))
+
+(defun widget-class-bind-template-callback (gtype name symbol)
+  (let ((class (gobject:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-bind-template-callback-full class name symbol)
+      (gobject:type-class-unref class))))
+
+(export 'widget-class-bind-template-callback)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_observe_children
