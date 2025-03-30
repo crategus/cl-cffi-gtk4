@@ -163,6 +163,7 @@
      (:file "gtk4.column-view-sorter"             :if-feature :gtk-4-10)
 
      (:file "gtk4.section-model"                  :if-feature :gtk-4-12)
+
      (:file "gtk4.selection-model")
      (:file "gtk4.no-selection")
      (:file "gtk4.single-selection")
@@ -665,7 +666,6 @@
 
      ;; Tree, List and Icon Grid Widgets
      (:file "rtest-gtk4-tree-model")
-     (:file "rtest-gtk4-tree-model-subclassing")
      (:file "rtest-gtk4-tree-selection")
      (:file "rtest-gtk4-tree-view-column")
      (:file "rtest-gtk4-tree-view")
@@ -747,10 +747,6 @@
      ;; Widgets for custom drawing
      (:file "rtest-gtk4-drawing-area")
      (:file "rtest-gtk4-gl-area")
-
-     ;; Ornaments
-;     (:file "rtest-gtk4-frame")
-;     (:file "rtest-gtk4-separator")
 
      ;; Scrolling
      (:file "rtest-gtk4-scrollbar")
