@@ -100,50 +100,33 @@
              (glib-test:list-signals "GtkPrinter")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrinter" GTK:PRINTER
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_printer_get_type")
-                       ((ACCEPTING-JOBS PRINTER-ACCEPTING-JOBS
-                         "accepting-jobs" "gboolean" T NIL)
-                        (ACCEPTS-PDF PRINTER-ACCEPTS-PDF
-                         "accepts-pdf" "gboolean" T NIL)
-                        (ACCEPTS-PS PRINTER-ACCEPTS-PS
-                         "accepts-ps" "gboolean" T NIL)
-                        (BACKEND PRINTER-BACKEND
-                         "backend" "GtkPrintBackend" T NIL)
-                        (ICON-NAME PRINTER-ICON-NAME
-                         "icon-name" "gchararray" T NIL)
-                        (IS-VIRTUAL PRINTER-IS-VIRTUAL
-                         "is-virtual" "gboolean" T NIL)
-                        (JOB-COUNT PRINTER-JOB-COUNT
-                         "job-count" "gint" T NIL)
-                        (LOCATION PRINTER-LOCATION
-                         "location" "gchararray" T NIL)
-                        (NAME PRINTER-NAME
-                         "name" "gchararray" T NIL)
-                        (PAUSED PRINTER-PAUSED
-                         "paused" "gboolean" T NIL)
-                        (STATE-MESSAGE PRINTER-STATE-MESSAGE
-                         "state-message" "gchararray" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_printer_get_type")
+                      ((ACCEPTING-JOBS PRINTER-ACCEPTING-JOBS
+                        "accepting-jobs" "gboolean" T NIL)
+                       (ACCEPTS-PDF PRINTER-ACCEPTS-PDF
+                        "accepts-pdf" "gboolean" T NIL)
+                       (ACCEPTS-PS PRINTER-ACCEPTS-PS
+                        "accepts-ps" "gboolean" T NIL)
+                       (BACKEND PRINTER-BACKEND
+                        "backend" "GtkPrintBackend" T NIL)
+                       (ICON-NAME PRINTER-ICON-NAME
+                        "icon-name" "gchararray" T NIL)
+                       (IS-VIRTUAL PRINTER-IS-VIRTUAL
+                        "is-virtual" "gboolean" T NIL)
+                       (JOB-COUNT PRINTER-JOB-COUNT
+                        "job-count" "gint" T NIL)
+                       (LOCATION PRINTER-LOCATION
+                        "location" "gchararray" T NIL)
+                       (NAME PRINTER-NAME
+                        "name" "gchararray" T NIL)
+                       (PAUSED PRINTER-PAUSED
+                        "paused" "gboolean" T NIL)
+                       (STATE-MESSAGE PRINTER-STATE-MESSAGE
+                        "state-message" "gchararray" T NIL)))
              (gobject:get-gtype-definition "GtkPrinter"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-printer-properties
-  (let ((printer (get-default-printer)))
-    (when printer
-      (is-true (gtk:printer-accepting-jobs printer))
-      (is-true (gtk:printer-accepts-pdf printer))
-      (is-true (gtk:printer-accepts-ps printer))
-      (is (typep (gtk:printer-backend printer) 'gtk:print-backend))
-      (is (string= "document-save" (gtk:printer-icon-name printer)))
-      (is-true (gtk:printer-is-virtual printer))
-      (is (= 0 (gtk:printer-job-count printer)))
-      (is (string= "" (gtk:printer-location printer)))
-      (is (string= "In Datei drucken" (gtk:printer-name printer)))
-      (is-false (gtk:printer-paused printer))
-      (is (string= "" (gtk:printer-state-message printer))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -165,57 +148,76 @@
     (is (equal '("gboolean")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+;; Adds a strong reference for GtkBackend object
+
+(test gtk-printer-properties
+  (glib-test:with-check-memory (printer (backend 2) :strong 1)
+    (when (setf printer (get-default-printer))
+      (is-true (gtk:printer-accepting-jobs printer))
+      (is-true (gtk:printer-accepts-pdf printer))
+      (is-true (gtk:printer-accepts-ps printer))
+      (is (typep (setf backend
+                       (gtk:printer-backend printer)) 'gtk:print-backend))
+      (is (string= "document-save" (gtk:printer-icon-name printer)))
+      (is-true (gtk:printer-is-virtual printer))
+      (is (= 0 (gtk:printer-job-count printer)))
+      (is (string= "" (gtk:printer-location printer)))
+      (is (string= "In Datei drucken" (gtk:printer-name printer)))
+      (is-false (gtk:printer-paused printer))
+      (is (string= "" (gtk:printer-state-message printer))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_printer_new
 
 (test gtk-printer-new
-  (let ((printer (get-default-printer)))
-    (when printer
-      (let ((backend (gtk:printer-backend printer)))
-        (is (typep (gtk:printer-new "printer" backend t) 'gtk:printer))
-        (is (typep (gtk:printer-new "printer" backend nil) 'gtk:printer))))))
+  (glib-test:with-check-memory (printer (backend 3) :strong 1)
+    (when (setf printer (get-default-printer))
+      (setf backend (gtk:printer-backend printer))
+      (is (typep (gtk:printer-new "printer" backend t) 'gtk:printer)))))
 
 ;;;     gtk_printer_get_description
 
 (test gtk-printer-description
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-description printer)))))
 
 ;;;     gtk_printer_is_active
 
 (test gtk-printer-is-active
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-true (gtk:printer-is-active printer)))))
 
 ;;;     gtk_printer_is_paused
 
 (test gtk-printer-is-paused
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-is-paused printer)))))
 
 ;;;     gtk_printer_is_accepting_jobs
 
 (test gtk-printer-is-accepting-jobs
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-true (gtk:printer-is-accepting-jobs printer)))))
 
 ;;;     gtk_printer_is_default
 
 (test gtk-printer-is-default
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-is-default printer)))))
 
 ;;;     gtk_printer_list_papers
 
 (test gtk-printer-list-papers
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is (every (lambda (x) (typep x 'gtk:page-setup))
                  (gtk:printer-list-papers printer))))))
 
@@ -225,8 +227,8 @@
 ;;;     gtk_printer_request_details
 
 (test gtk-printer-has/request-details
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (let (has-details msg)
 
         (g:signal-connect printer "details-acquired"
@@ -245,30 +247,30 @@
 ;;;     gtk_printer_get_capabilities
 
 (test gtk-printer-capabilities
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-capabilities printer)))))
 
 ;;;     gtk_printer_get_default_page_size
 
 (test gtk-printer-default-page-size
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-default-page-size printer)))))
 
 ;;;     gtk_printer_get_hard_margins
 
 (test gtk-printer-hard-margins
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (is-false (gtk:printer-hard-margins printer)))))
 
 ;;;     gtk_printer_get_hard_margins_for_paper_size
 
 (test gtk-printer-hard-margins-for-paper-size
-  (let ((printer (get-default-printer)))
-    (when printer
+  (glib-test:with-check-memory (printer)
+    (when (setf printer (get-default-printer))
       (let ((size (gtk:paper-size-new (gtk:paper-size-default))))
         (is-false (gtk:printer-hard-margins-for-paper-size printer size))))))
 
-;;; 2024-10-31
+;;; 2025-3-30

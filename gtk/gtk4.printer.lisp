@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.printer.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -468,22 +468,19 @@ lambda (printer success)    :run-last
 ;;; gtk_printer_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline printer-new))
-
-(defun printer-new (name backend virtual)
+(cffi:defcfun ("gtk_printer_new" printer-new) (g:object printer :return)
  #+liber-documentation
- "@version{2024-7-6}
-  @argument[name]{a string with the name of the printer}
+ "@version{2025-3-30}
+  @argument[name]{a string for the name of the printer}
   @argument[backend]{a @class{gtk:print-backend} object}
   @argument[virtual]{a boolean whether the printer is virtual}
   @return{The new @class{gtk:printer} object.}
   @short{Creates a new printer.}
   @see-class{gtk:printer}
   @see-class{gtk:print-backend}"
-  (make-instance 'printer
-                 :name name
-                 :backend backend
-                 :is-virtual virtual))
+  (name :string)
+  (backend (g:object print-backend))
+  (virtual :boolean))
 
 (export 'printer-new)
 
