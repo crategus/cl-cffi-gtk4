@@ -180,13 +180,24 @@
 
 ;;; --- Properties (GtkListView) -----------------------------------------------
 
-(test gtk-list-view-properties
+(test gtk-list-view-properties.1
   (let ((listview (make-instance 'gtk:list-view)))
     (is (eq :vertical (gtk:list-base-orientation listview)))
     (is-false (gtk:list-view-enable-rubberband listview))
     (is-false (gtk:list-view-factory listview))
     (is-false (gtk:list-view-header-factory listview))
     (is-false (gtk:list-view-model listview))
+    (is-false (gtk:list-view-show-separators listview))
+    (is-false (gtk:list-view-single-click-activate listview))
+    (is (eq :all (gtk:list-view-tab-behavior listview)))))
+
+(test gtk-list-view-properties.2
+  (let ((listview (create-list-view-for-testsuite)))
+    (is (eq :vertical (gtk:list-base-orientation listview)))
+    (is-false (gtk:list-view-enable-rubberband listview))
+    (is (typep (gtk:list-view-factory listview) 'gtk:signal-list-item-factory))
+    (is-false (gtk:list-view-header-factory listview))
+    (is (typep (gtk:list-view-model listview) 'gtk:single-selection))
     (is-false (gtk:list-view-show-separators listview))
     (is-false (gtk:list-view-single-click-activate listview))
     (is (eq :all (gtk:list-view-tab-behavior listview)))))
@@ -219,5 +230,18 @@
              'gtk:list-view)))
 
 ;;;     gtk_list_view_scroll_to                            Since 4.12
+
+(test gtk-list-view-scroll-to
+  (let ((listview (create-list-view-for-testsuite)))
+
+    (g:signal-connect listview "activate"
+        (lambda (listview pos)
+          (format t "~&in ACTIVATE signal handler~%")
+          (format t "   listview : ~a~%" listview)
+          (format t "        pos : ~a~%" pos)))
+
+    (gtk:list-view-scroll-to listview 1 :select nil)
+
+))
 
 ;;; 2024-9-19
