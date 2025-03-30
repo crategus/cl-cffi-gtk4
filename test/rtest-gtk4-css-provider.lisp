@@ -258,7 +258,7 @@
 (test gtk-css-provider-load-from-resource
   (glib-test:with-check-memory (provider)
     (gio:with-resource (resource (glib-sys:sys-path
-                                     "test/resource/rtest-resource.gresource"))
+                                     "test/rtest-resource.gresource"))
       (let ((path "/com/crategus/test/css-accordion.css"))
         (setf provider (gtk:css-provider-new))
         (is-false (gtk:css-provider-load-from-resource provider path))

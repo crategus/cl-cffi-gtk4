@@ -140,7 +140,7 @@
 ;;;     gtk_image_new_from_resource
 
 (test gtk-image-new-from-resource
-  (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource")))
+  (let ((path (glib-sys:sys-path "test/rtest-resource.gresource")))
     (gio:with-resource (resource path)
       (let ((image (gtk:image-new-from-resource
                        "/com/crategus/test/gtk-logo-24.png")))
@@ -268,7 +268,7 @@
 ;;;     gtk_image_set_from_resource
 
 (test gtk-image-set-from-resource
-  (let ((path (glib-sys:sys-path "test/resource/rtest-resource.gresource"))
+  (let ((path (glib-sys:sys-path "test/rtest-resource.gresource"))
         (image (gtk:image-new)))
     (gio:with-resource (resource path)
       (is-false (gtk:image-set-from-resource

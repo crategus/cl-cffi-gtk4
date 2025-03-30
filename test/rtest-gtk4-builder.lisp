@@ -326,7 +326,7 @@
 ;;;     gtk_builder_new_from_resource
 
 (test gtk-builder-new-from-resource.1
-  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/stack.ui")
            (builder (gtk:builder-new-from-resource path))
            scope)
@@ -338,7 +338,7 @@
       (is (<= 1 (g:object-ref-count scope))))))
 
 (test gtk-builder-new-from-resource.2
-  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/dialog.ui")
            (builder (gtk:builder-new-from-resource path))
            scope)
@@ -373,7 +373,7 @@
 ;;;     gtk_builder_add_from_resource
 
 (test gtk-builder-add-from-resource
-  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
                                               "/com/crategus/test/stack.ui"))
@@ -415,16 +415,16 @@
 ;;;     gtk_builder_add_objects_from_resource
 
 (test gtk-builder-add-objects-from-resource
-  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-objects-from-resource
                        builder
                        "/com/crategus/test/stack.ui"
                        "window1"))
       (is (typep (gtk:builder-object builder "window1") 'gtk:window))
-      (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
-                   GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
-                   GTK:SPINNER)
+      (is (equal '(GTK:STACK-PAGE GTK:SPINNER GTK:CHECK-BUTTON
+                   GTK:STACK-SWITCHER GTK:GRID GTK:IMAGE GTK:WINDOW
+                   GTK:STACK-PAGE GTK:STACK GTK:STACK-PAGE)
                  (mapcar 'type-of (gtk:builder-objects builder)))))))
 
 ;;;     gtk_builder_add_objects_from_string
