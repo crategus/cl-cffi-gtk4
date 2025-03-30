@@ -33,15 +33,15 @@
              (glib-test:list-signals "GtkColumnViewSorter")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColumnViewSorter" GTK:COLUMN-VIEW-SORTER
-                       (:SUPERCLASS GTK:SORTER
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_column_view_sorter_get_type")
-                       ((PRIMARY-SORT-COLUMN
-                         COLUMN-VIEW-SORTER-PRIMARY-SORT-COLUMN
-                         "primary-sort-column" "GtkColumnViewColumn" T NIL)
-                        (PRIMARY-SORT-ORDER COLUMN-VIEW-SORTER-PRIMARY-SORT-ORDER
-                         "primary-sort-order" "GtkSortType" T NIL)))
+                      (:SUPERCLASS GTK:SORTER
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_column_view_sorter_get_type")
+                      ((PRIMARY-SORT-COLUMN
+                        COLUMN-VIEW-SORTER-PRIMARY-SORT-COLUMN
+                        "primary-sort-column" "GtkColumnViewColumn" T NIL)
+                       (PRIMARY-SORT-ORDER COLUMN-VIEW-SORTER-PRIMARY-SORT-ORDER
+                        "primary-sort-order" "GtkSortType" T NIL)))
              (gobject:get-gtype-definition "GtkColumnViewSorter"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -63,4 +63,4 @@
     (is (= 0 (gtk:column-view-sorter-n-sort-columns sorter)))
     (is-false (gtk:column-view-sorter-nth-sort-column sorter 0))))
 
-;;; 2024-12-16
+;;; 2025-3-30
