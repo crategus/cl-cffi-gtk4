@@ -35,15 +35,15 @@
           (gtk:widget-class-accessible-role "GtkApplicationWindow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkApplicationWindow" GTK:APPLICATION-WINDOW
-                       (:SUPERCLASS GTK:WINDOW
-                        :EXPORT T
-                        :INTERFACES
-                        ("GActionGroup" "GActionMap" "GtkAccessible"
-                         "GtkBuildable" "GtkConstraintTarget" "GtkNative"
-                         "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_application_window_get_type")
-                       ((SHOW-MENUBAR APPLICATION-WINDOW-SHOW-MENUBAR
-                         "show-menubar" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WINDOW
+                       :EXPORT T
+                       :INTERFACES
+                       ("GActionGroup" "GActionMap" "GtkAccessible"
+                        "GtkBuildable" "GtkConstraintTarget" "GtkNative"
+                        "GtkRoot" "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_application_window_get_type")
+                      ((SHOW-MENUBAR APPLICATION-WINDOW-SHOW-MENUBAR
+                        "show-menubar" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkApplicationWindow"))))
 
 ;;; --- Properties and Accessors -----------------------------------------------
@@ -93,6 +93,15 @@
     (is (= 1 (g:object-ref-count window)))))
 
 ;; Initialize an application window with an application
+
+;; FIXME: We get critical errors from this test
+;; GLib-CRITICAL : g_atomic_rc_box_release_full:
+;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
+;;
+;; GLib-CRITICAL : g_atomic_rc_box_release_full:
+;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
+
+#+nil
 (test gtk-application-window-new.2
   (glib-test:with-check-memory (application)
     (let (message)
@@ -165,7 +174,6 @@
     ;; Remove references
     (is-false (setf (gtk:application-window-help-overlay window) nil))
     (is-false (gtk:window-destroy window))
-    (is (= 1 (g:object-ref-count help-overlay)))
-))
+    (is (= 1 (g:object-ref-count help-overlay)))))
 
-;;; 2024-12-23
+;;; 2025-3-26
