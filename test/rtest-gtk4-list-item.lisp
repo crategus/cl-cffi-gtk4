@@ -56,13 +56,27 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     accessible-description                              Since 4.12
+;;;     accessible-label                                    Since 4.12
+;;;     activatable
+;;;     child
+;;;     focusable                                           Since 4.12
+;;;     item
+;;;     position
+;;;     selectable
+;;;     selected
+
 (test gtk-list-item-properties
-  (let ((item (make-instance 'gtk:list-item)))
+  (glib-test:with-check-memory (item)
+    (setf item (make-instance 'gtk:list-item))
+    (is-false (gtk:list-item-accessible-description item))
+    (is-false (gtk:list-item-accessible-label item))
     (is-true (gtk:list-item-activatable item))
     (is-false (gtk:list-item-child item))
+    (is-true (gtk:list-item-focusable item))
     (is-false (gtk:list-item-item item))
     (is (= 4294967295 (gtk:list-item-position item)))
     (is-true (gtk:list-item-selectable item))
     (is-false (gtk:list-item-selected item))))
 
-;;; 2024-7-4
+;;; 2025-3-15

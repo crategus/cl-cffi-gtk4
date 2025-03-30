@@ -45,9 +45,76 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     bind
+
+(test gtk-signal-list-item-factory-bind-signal
+  (let* ((name "bind")
+         (gtype (g:gtype "GtkSignalListItemFactory"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GObject")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     setup
+
+(test gtk-signal-list-item-factory-setup-signal
+  (let* ((name "setup")
+         (gtype (g:gtype "GtkSignalListItemFactory"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GObject")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     teardown
+
+(test gtk-signal-list-item-factory-teardown-signal
+  (let* ((name "teardown")
+         (gtype (g:gtype "GtkSignalListItemFactory"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GObject")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     unbind
+
+(test gtk-signal-list-item-factory-unbind-signal
+  (let* ((name "unbind")
+         (gtype (g:gtype "GtkSignalListItemFactory"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GObject")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 

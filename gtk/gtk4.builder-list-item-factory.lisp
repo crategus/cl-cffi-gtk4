@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.builder-list-item-factory.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,7 +80,7 @@
 
 #+liber-documentation
 (setf (documentation 'builder-list-item-factory 'type)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @begin{short}
     The @class{gtk:builder-list-item-factory} object is a
     @class{gtk:list-item-factory} object that creates widgets by instantiating
@@ -113,7 +113,8 @@
   @see-slot{gtk:builder-list-item-factory-bytes}
   @see-slot{gtk:builder-list-item-factory-resource}
   @see-slot{gtk:builder-list-item-factory-scope}
-  @see-class{gtk:list-item-factory}")
+  @see-class{gtk:list-item-factory}
+  @see-class{gtk:builder-scope}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -132,11 +133,11 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-bytes)
       "Accessor"
       (documentation 'builder-list-item-factory-bytes 'function)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @syntax{(gtk:builder-list-item-factory-bytes object) => bytes}
   @syntax{(setf (gtk:builder-list-item-factory-bytes object) bytes)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
-  @argument[bytes]{a @class{g:bytes} instance with the @class{gtk:builder} data}
+  @argument[bytes]{a @class{g:bytes} instance for the @class{gtk:builder} data}
   @begin{short}
     Accessor of the @slot[gtk:builder-list-item-factory]{bytes} slot of the
     @class{gtk:builder-list-item-factory} class.
@@ -161,11 +162,11 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-resource)
       "Accessor"
       (documentation 'builder-list-item-factory-resource 'function)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @syntax{(gtk:builder-list-item-factory-resource object) => resource}
   @syntax{(setf (gtk:builder-list-item-factory-resource object) resource)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
-  @argument[resource]{a string with the path to the resource or @code{nil}
+  @argument[resource]{a string for the path to the resource or @code{nil}
     if none}
   @begin{short}
     Accessor of the @slot[gtk:builder-list-item-factory]{resource} slot of the
@@ -182,13 +183,13 @@
                                                'builder-list-item-factory) t)
  "The @code{scope} property of type @class{gtk:builder-scope} (Read / Write /
   Construct Only) @br{}
-  The scope to use when instantiating list items.")
+  The builder scope to use when instantiating list items.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'builder-list-item-factory-scope)
       "Accessor"
       (documentation 'builder-list-item-factory-scope 'function)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @syntax{(gtk:builder-list-item-factory-scope object) => scope}
   @syntax{(setf (gtk:builder-list-item-factory-scope object) scope)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
@@ -208,9 +209,9 @@
 
 (defun builder-list-item-factory-new-from-bytes (scope bytes)
  #+liber-documentation
- "@version{#2023-9-21}
+ "@version{2025-3-16}
   @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
-  @argument[bytes]{a @class{g:bytes} instance  containing the UI file to
+  @argument[bytes]{a @class{g:bytes} instance containing the UI file to
     instantiate}
   @return{The new @class{gtk:builder-list-item-factory} object.}
   @begin{short}
@@ -230,13 +231,11 @@
 ;;; gtk_builder_list_item_factory_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: GtkBuilderScope is not implemented
-
 (defun builder-list-item-factory-new-from-resource (scope path)
  #+liber-documentation
- "@version{#2024-8-16}
+ "@version{2025-3-16}
   @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
-  @argument[path]{a string with a valid path to a resource that contains the
+  @argument[path]{a string for a valid path to a resource that contains the
     data}
   @return{The new @class{gtk:builder-list-item-factory} object.}
   @begin{short}

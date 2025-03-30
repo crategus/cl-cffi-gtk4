@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.signal-list-item-factory.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -68,7 +68,7 @@
 
 #+liber-documentation
 (setf (documentation 'signal-list-item-factory 'type)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @begin{short}
     The @class{gtk:signal-list-item-factory} object is a
     @class{gtk:list-item-factory} object that emits signals to to manage
@@ -166,7 +166,7 @@ lambda (factory item)    :run-first
 (declaim (inline signal-list-item-factory-new))
 
 (defun signal-list-item-factory-new ()
- "@version{2023-11-26}
+ "@version{2025-3-16}
   @return{The new @class{gtk:signal-list-item-factory} object.}
   @begin{short}
     Creates a new @class{gtk:signal-list-item-factory} object.

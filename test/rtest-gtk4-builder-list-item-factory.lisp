@@ -54,7 +54,7 @@
 ;;;     resource
 ;;;     scope
 
-(test gtk-builder-list-item-factory
+(test gtk-builder-list-item-factory-properties
   (let ((factory (make-instance 'gtk:builder-list-item-factory)))
     (is-false (gtk:builder-list-item-factory-bytes factory))
     (is-false (gtk:builder-list-item-factory-resource factory))
@@ -63,36 +63,42 @@
 ;;; --- Functions --------------------------------------------------------------
 
 (defvar *ui-definition*
-        "<interface>
-           <template class='GtkListItem'>
-             <property name='child'>
-               <object class='GtkLabel'>
-                 <property name='xalign'>0</property>
-                 <binding name='label'>
-                   <lookup name='name' type='SettingsKey'>
-                     <lookup name='item'>GtkListItem</lookup>
-                   </lookup>
-                 </binding>
-               </object>
-             </property>
-           </template>
-         </interface>")
+"<interface>
+   <template class='GtkListItem'>
+     <property name='child'>
+       <object class='GtkLabel'>
+         <property name='xalign'>0</property>
+         <binding name='label'>
+         <lookup name='name' type='SettingsKey'>
+           <lookup name='item'>GtkListItem</lookup>
+         </lookup>
+       </binding>
+     </object>
+   </property>
+ </template>
+</interface>
+")
 
 ;;;     gtk_builder_list_item_factory_new_from_bytes
 
-;; FIXME: Example is from the GTK documentation. What is wrong?
-;; (glib-test:6653): Gtk-WARNING **: 12:36:10.503: Failed to precompile template
-;; for GtkBuilderListItemFactory: Fehler in Zeile 14, Zeichen 23: Dokument muss
-;; mit einem Element beginnen (e.g. <book>)
-
-#+nil
 (test gtk-builder-list-item-factory-new-from-bytes
   (multiple-value-bind (data len)
       (cffi:foreign-string-alloc *ui-definition*)
-    (let ((bytes (g:bytes-new data len)))
+    (let (;; The length of the data is (1- len)
+          (bytes (g:bytes-new data (1- len))))
       (is (typep (gtk:builder-list-item-factory-new-from-bytes nil bytes)
                  'gtk:builder-list-item-factory)))))
 
 ;;;     gtk_builder_list_item_factory_new_from_resource
 
-;;; 2024-11-27
+(test gtk-builder-list-item-factory-new-from-resource
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
+    (let ((path "/com/crategus/test/gtk-builder-list-item-factory.ui")
+          (scope (make-instance 'gtk:builder-cl-scope))
+          factory)
+      (is (typep (setf factory
+                       (gtk:builder-list-item-factory-new-from-resource scope path))
+                 'gtk:builder-list-item-factory))
+)))
+
+;;; 2025-3-16

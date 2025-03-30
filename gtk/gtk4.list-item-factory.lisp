@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.list-item-factory.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -58,10 +58,10 @@
 
 #+liber-documentation
 (setf (documentation 'list-item-factory 'type)
- "@version{2023-8-13}
+ "@version{2025-3-16}
   @begin{short}
-    A @class{gtk:list-item-factory} object creates widgets for the items taken
-    from a @class{g:list-model} object.
+    The @class{gtk:list-item-factory} object creates widgets for the items
+    taken from a @class{g:list-model} object.
   @end{short}
   It is one of the core concepts of handling list widgets such as the
   @class{gtk:list-view} or @class{gtk:grid-view} widgets.
@@ -98,7 +98,7 @@
   signals with your own code and retain full control over how the widgets are
   setup and managed.
 
-  A @class{gtk:list-item-factory} object is supposed to be final - that means
+  The @class{gtk:list-item-factory} object is supposed to be final - that means
   its behavior should not change and the first widget created from it should
   behave the same way as the last widget created from it. If you intend to do
   changes to the behavior, it is recommended that you create a new
