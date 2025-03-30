@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-view.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -352,7 +352,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-view 'type)
- "@version{2024-3-9}
+ "@version{2025-3-30}
   @begin{short}
     Widget that displays any object that implements the @class{gtk:tree-model}
     interface.
@@ -457,14 +457,14 @@ lambda (view)    :run-last
       The position of the cursor (focused cell) has changed.
     @subheading{The \"expand-collapse-cursor-row\" signal}
       @begin{pre}
-lambda (view arg1 arg2 arg3)    :action
+lambda (view arg1 arg2)    :run-last
       @end{pre}
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
-        @entry[arg1]{undocumented boolean}
-        @entry[arg2]{undocumented boolean}
-        @entry[arg3]{undocumented boolean}
+        @entry[arg1]{a boolean without description}
+        @entry[arg2]{a boolean without description}
+        @entry[Returns]{a boolean without description}
       @end{table}
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
@@ -553,7 +553,8 @@ lambda (view arg)    :action
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
-        @entry[arg]{undocumented boolean}
+        @entry[arg]{a boolean without description}
+        @entry[Returns]{a boolean without description}
       @end{table}
     @subheading{The \"start-interactive-search\" signal}
       @begin{pre}
@@ -2346,14 +2347,15 @@ lambda (view)    :action
 
 (defun tree-view-background-area (view path column)
  #+liber-documentation
- "@version{#2024-5-16}
+ "@version{#2025-3-30}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance for the row, or @code{nil}
     to get only horizontal coordinates}
   @argument[column]{a @class{gtk:tree-view-column} object for the column, or
     @code{nil} to get only vertical coordiantes}
-  @return{The @class{gdk:rectangle} instance with the cell background
-    rectangle.}
+  @begin{return}
+    The @class{gdk:rectangle} instance with the cell background rectangle.
+  @end{return}
   @begin{short}
     Returns the bounding rectangle in the bin window coordinates for the cell
     at the row specified by @arg{path} and the column specified by @arg{column}.
@@ -2916,11 +2918,12 @@ lambda (view)    :action
                tree-view-create-row-drag-icon)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-3-30}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance}
-  @return{The newly allocated @symbol{cairo:surface-t} instance of the drag
-    icon.}
+  @begin{return}
+    The newly allocated @symbol{cairo:surface-t} instance of the drag icon.
+  @end{return}
   @begin{short}
     Creates a @symbol{cairo:surface-t} instance for the representation of the
     row at path.
