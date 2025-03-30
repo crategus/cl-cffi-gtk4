@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.window.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -337,7 +337,7 @@ lambda (window)    :run-last
         @entry[Returns]{@em{True} to stop other handlers from being invoked
           for the signal.}
       @end{table}
-      The signal is emitted when the user clicks on the close button of the
+      The signal is emitted when the user clicks on the Close button of the
       window.
     @subheading{The \"enable-debugging\" signal}
       @begin{pre}
@@ -852,7 +852,7 @@ lambda (window)    :run-first
     @class{gtk:window} class.
   @end{short}
   The @fun{gtk:window-hide-on-close} function returns whether the window will
-  be hidden and not destroyed when the close button is clicked. The
+  be hidden and not destroyed when the Close button is clicked. The
   @fun{gtk:window-hide-on-close} function sets the property.
   @see-class{gtk:window}")
 
@@ -1769,12 +1769,14 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_group" window-group)
     (g:object window-group)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-3-30}
   @argument[window]{a @class{gtk:window} widget, or @code{nil}}
-  @return{The @class{gtk:window-group} object for the @arg{window} argument or
-    the default window group.}
+  @begin{return}
+    The @class{gtk:window-group} object for the @arg{window} argument or the
+    default window group.
+  @end{return}
   @begin{short}
-    Returns the window group for the window
+    Returns the window group for the window.
   @end{short}
   If the window has no window group, then the default window group is returned.
   @see-class{gtk:window}
