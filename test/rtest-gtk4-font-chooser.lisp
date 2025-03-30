@@ -85,8 +85,14 @@
 (test gtk-font-chooser-properties
   (let* ((*gtk-warn-deprecated* nil)
          (chooser (make-instance 'gtk:font-chooser-dialog)))
+    #-gtk-4-18
     (is (string= "Sans 10" (gtk:font-chooser-font chooser)))
+    #+gtk-4-18
+    (is-false (gtk:font-chooser-font chooser))
+    #-gtk-4-18
     (is (typep (gtk:font-chooser-font-desc chooser) 'pango:font-description))
+    #+gtk-4-18
+    (is-false (gtk:font-chooser-font-desc chooser))
     (is (string= "" (gtk:font-chooser-font-features chooser)))
     (is (string= "de-de" (gtk:font-chooser-language chooser)))
     (is (equal '(:style :size) (gtk:font-chooser-level chooser)))

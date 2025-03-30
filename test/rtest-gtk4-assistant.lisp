@@ -121,7 +121,10 @@
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkAssistant")))
     ;; Check accessible role
+    #-gtk-4-18
     (is (eq :application (gtk:widget-class-accessible-role "GtkAssistant")))
+    #+gtk-4-18
+    (is (eq :window (gtk:widget-class-accessible-role "GtkAssistant")))
     ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAssistant" GTK:ASSISTANT
                         (:SUPERCLASS GTK:WINDOW

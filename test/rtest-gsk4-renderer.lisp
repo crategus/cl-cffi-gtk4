@@ -3,6 +3,11 @@
 (def-suite gsk-renderer :in gsk-suite)
 (in-suite gsk-renderer)
 
+;; TODO: The class GskGpuRenderer is used, but not documented and not
+;; implemented for Lisp.
+;;
+;; Check the implementation of the classes and documentation again.
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GskRenderer
@@ -20,7 +25,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GskRenderer")))
   ;; Check children
+  #-gtk-4-18
   (is (equal '("GskCairoRenderer" "GskGLRenderer" "GskGpuRenderer")
+             (glib-test:list-children "GskRenderer")))
+  #+gtk-4-18
+  (is (equal '("GskCairoRenderer" "GskGpuRenderer" "GskNglRenderer")
              (glib-test:list-children "GskRenderer")))
   ;; Check interfaces
   (is (equal '()
@@ -90,7 +99,11 @@
   (is (eq (g:gtype "GskGLRenderer")
           (g:gtype (cffi:foreign-funcall "gsk_gl_renderer_get_type" :size))))
   ;; Check parent
+  #-gtk-4-18
   (is (eq (g:gtype "GskRenderer")
+          (g:type-parent "GskGLRenderer")))
+  #+gtk-4-18
+  (is (eq (g:gtype "GskGpuRenderer")
           (g:type-parent "GskGLRenderer")))
   ;; Check children
   (is (equal '()
@@ -105,8 +118,16 @@
   (is (equal '()
              (glib-test:list-signals "GskGLRenderer")))
   ;; Check class definition
+  #-gtk-4-18
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GskGLRenderer" GSK:GL-RENDERER
                        (:SUPERCLASS GSK:RENDERER
+                        :EXPORT T
+                        :INTERFACES ("GdkDmabufDownloader"))
+                       NIL)
+             (gobject:get-gtype-definition "GskGLRenderer")))
+  #+gtk-4-18
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GskGLRenderer" GSK:GL-RENDERER
+                       (:SUPERCLASS GSK-GPU-RENDERER
                         :EXPORT T
                         :INTERFACES ("GdkDmabufDownloader"))
                        NIL)
@@ -114,6 +135,7 @@
 
 ;;;     GskNGLRenderer
 
+#-gtk-4-18
 (test gsk-ngl-renderer-class
   ;; Check type
   (is (g:type-is-object "GskNglRenderer"))
@@ -143,6 +165,40 @@
                        (:SUPERCLASS GSK-GPU-RENDERER
                         :EXPORT T
                         :INTERFACES ("GdkDmabufDownloader")
+                        :TYPE-INITIALIZER "gsk_ngl_renderer_get_type")
+                       NIL)
+             (gobject:get-gtype-definition "GskNglRenderer"))))
+
+#+gtk-4-18
+(test gsk-ngl-renderer-class
+  ;; Check type
+  (is (g:type-is-object "GskNglRenderer"))
+  ;; Check registered name
+  (is (eq 'gsk:ngl-renderer
+          (glib:symbol-for-gtype "GskNglRenderer")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GskNglRenderer")
+          (g:gtype (cffi:foreign-funcall "gsk_ngl_renderer_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GskRenderer")
+          (g:type-parent "GskNglRenderer")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GskNglRenderer")))
+  ;; Check interfaces
+  (is (equal '()
+             (glib-test:list-interfaces "GskNglRenderer")))
+  ;; Check properties
+  (is (equal '()
+             (glib-test:list-properties "GskNglRenderer")))
+  ;; Check signals
+  (is (equal '()
+             (glib-test:list-signals "GskNglRenderer")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GskNglRenderer" GSK:NGL-RENDERER
+                       (:SUPERCLASS GSK:RENDERER
+                        :EXPORT T
+                        :INTERFACES NIL
                         :TYPE-INITIALIZER "gsk_ngl_renderer_get_type")
                        NIL)
              (gobject:get-gtype-definition "GskNglRenderer"))))
@@ -206,4 +262,4 @@
 ;;;     gsk_gl_renderer_new
 ;;;     gsk_ngl_renderer_new
 
-;;; 2024-12-19
+;;; 2025-3-28
