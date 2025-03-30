@@ -15,8 +15,6 @@
 
 (in-package :gtk)
 
-;(eval-when (:compile-toplevel :load-toplevel :execute)
-
 (gobject:define-gobject-subclass "GtkColor" color
   (:superclass g:object
    :export t
@@ -36,18 +34,18 @@
    (value
     color-value
     "value" "gint" t t)))
-;)
 
 (defmethod initialize-instance :after ((obj color) &key)
-  (let* ((rgba (color-rgba obj))
-         (red (gdk:rgba-red rgba))
-         (green (gdk:rgba-green rgba))
-         (blue (gdk:rgba-blue rgba)))
-    (multiple-value-bind (hue saturation value)
-        (gtk:rgb-to-hsv red green blue)
-      (setf (color-hue obj) (round (* 360 hue)))
-      (setf (color-saturation obj) (round (* 100 saturation)))
-      (setf (color-value obj) (round (* 100 value))))))
+  (let ((rgba (color-rgba obj)))
+    (when rgba
+      (let ((red (gdk:rgba-red rgba))
+            (green (gdk:rgba-green rgba))
+            (blue (gdk:rgba-blue rgba)))
+        (multiple-value-bind (hue saturation value)
+            (gtk:rgb-to-hsv red green blue)
+          (setf (color-hue obj) (round (* 360 hue)))
+          (setf (color-saturation obj) (round (* 100 saturation)))
+          (setf (color-value obj) (round (* 100 value))))))))
 
 (defmethod (setf color-rgba) :before (value (obj color))
   (let* ((red (gdk:rgba-red value))
@@ -59,27 +57,33 @@
       (setf (color-saturation obj) (round (* 100 saturation)))
       (setf (color-value obj) (round (* 100 value))))))
 
-(defmethod paintable-snapshot-impl ((paintable color) snapshot width height)
+(defmethod gdk:paintable-snapshot-impl ((paintable color) snapshot width height)
   (graphene:with-rect (bounds 0 0 width height)
     (gtk:snapshot-append-color snapshot (color-rgba paintable) bounds)))
 
-(defmethod paintable-get-flags-impl ((paintable color))
+(defmethod gdk:paintable-get-flags-impl ((paintable color))
   (list :static-contents :static-size))
 
-(defmethod paintable-get-intrinsic-width ((paintable color))
+(defmethod gdk:paintable-get-intrinsic-width-impl ((paintable color))
   32)
 
-(defmethod paintable-get-intrinsic-height ((paintable color))
+(defmethod gdk:paintable-get-intrinsic-height-impl ((paintable color))
   32)
 
 (defun color-new (name red green blue)
   (make-instance 'color
                  :name name
-                 :rgba (make-instance 'gdk:rgba
-                                      :red red
-                                      :green green
-                                      :blue blue
-                                      :alpha 1.0)))
+                 :rgba (gdk:rgba-new :red red
+                                     :green green
+                                     :blue blue
+                                     :alpha 1.0)))
+
+(trace color-new)
+(trace color-rgba)
+(trace paintable-snapshot-impl)
+(trace paintable-get-flags-impl)
+(trace paintable-get-intrinsic-width-impl)
+(trace paintable-get-intrinsic-height-impl)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'color)
@@ -88,7 +92,6 @@
   (export 'color-rgba))
 
 #|
-
 static void
 gtk_color_list_init (GtkColorList *self)
 {
@@ -129,33 +132,22 @@ gtk_color_list_init (GtkColorList *self)
 }
 |#
 
-#|
-static char *
-get_rgb_markup (gpointer this,
-                GtkColor *color)
-{
-  if (!color)
-    return NULL;
 
-  return g_strdup_printf ("<b>R:</b> %d <b>G:</b> %d <b>B:</b> %d",
-                          (int)(color->color.red * 255),
-                          (int)(color->color.green * 255),
-                          (int)(color->color.blue * 255));
-}
+(defun get-rgb-markup (color)
+  (when color
+    (let ((rgba (color-rgba color)))
+      (format nil "<b>R:</b> ~d <b>G:</b> ~d <b>B:</b> ~d"
+                  (round (* 255 (gdk:rgba-red rgba)))
+                  (round (* 255 (gdk:rgba-red rgba)))
+                  (round (* 255 (gdk:rgba-red rgba)))))))
 
-static char *
-get_hsv_markup (gpointer this,
-                GtkColor *color)
-{
-  if (!color)
-    return NULL;
+(defun get-hsv-markup (color)
+  (when color
+    (format nil "<b>H:</b> ~d <b>S:</b> ~d <b>V:</b> ~d"
+                (color-hue color)
+                (color-saturation color)
+                (color-value color))))
 
-  return g_strdup_printf ("<b>H:</b> %d <b>S:</b> %d <b>V:</b> %d",
-                          color->h,
-                          color->s,
-                          color->v);
-}
-|#
 
 #|
 static void
@@ -316,7 +308,13 @@ add_colors (GtkWidget     *widget,
                                                  :green (/ green 255.0)
                                                  :blue (/ blue 255.0))))
         (format t "   new color is ~a~%" (aref (color-list-colors model) pos))))
-      (aref (color-list-colors model) pos))))
+      (g:object-ref (aref (color-list-colors model) pos)))))
+
+(trace color-list-size)
+(trace gio:list-model-get-item-type-impl)
+(trace gio:list-model-get-n-items-impl)
+(trace gio:list-model-get-item-impl)
+(trace position-to-color)
 
 #|
 GtkWidget *
@@ -440,6 +438,8 @@ do_listview_colors (GtkWidget *do_widget)
   (make-instance 'color-list
                  :size size))
 
+(trace color-list-new)
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'color-list-new))
 
@@ -469,6 +469,8 @@ update_progress_cb (GtkSortListModel *model,
   (format t "in UPDATE-PROGRESS-CB : ~a, ~a, ~a~%" model pspec progress)
 )
 
+(trace update-progress-cb)
+
 #|
 static void
 setup_selection_listitem_cb (GtkListItemFactory *factory,
@@ -490,6 +492,8 @@ setup_selection_listitem_cb (GtkListItemFactory *factory,
 
 (defun setup-selection-listitem-cb (factory listitem)
   (format t "in SETUP-SELECTION-LISTITEM-CB: ~a, ~a~%" factory listitem))
+
+(trace setup-selection-listitem-cb)
 
 #|
 GtkWidget *
@@ -561,8 +565,13 @@ setup_simple_listitem_cb (GtkListItemFactory *factory,
                                   :enable-rubberband t
                                   :hscroll-policy :natural
                                   :vscroll-policy :natural)))
+    (format t "~&in CREATE-COLOR-GRID~%")
     (g:signal-connect factory "setup" #'setup-simple-listitem-cb)
     gridview))
+
+(trace setup-simple-listitem-cb)
+(trace setup-listitem-cb)
+(trace create-color-grid)
 
 #|
 static void
@@ -582,6 +591,8 @@ update_selection_count (GListModel *model,
 (defun update-selection-count (model position removed added)
   (declare (ignore model position removed added))
   (format t "in UPDATE-SELECTION-COUNT~%"))
+
+(trace update-selection-count)
 
 #|
 static void
@@ -617,6 +628,8 @@ update_selection_average (GListModel *model,
   (declare (ignore model position removed added))
   (format t "in UPDATE-SELECTION-AVERAGE~%"))
 
+(trace update-selection-average)
+
 #|
 static void
 refill (GtkWidget    *button,
@@ -630,10 +643,10 @@ refill (GtkWidget    *button,
 (defun refill (button colors)
   (format t "in REFILL ~a, ~a~%" button colors))
 
+(trace refill)
 
 (defun do-grid-view-colors (&optional application)
-  (let* (
-         (sort-model (make-instance 'gtk:sort-list-model
+  (let* ((sort-model (make-instance 'gtk:sort-list-model
                                     ;; FIXME: a size of 0 causes an error
                                     :model (gtk:color-list-new 1)
                                     :sorter nil
@@ -691,6 +704,8 @@ refill (GtkWidget    *button,
          (label nil) (scrolled nil)
         )
 
+    (format t "~&in DO-GRID-VIEW-COLORS ~%")
+
     ;; Add CSS for application specific style information
     (let ((provider (gtk:css-provider-new)))
       (gtk:css-provider-load-from-string provider
@@ -743,7 +758,6 @@ refill (GtkWidget    *button,
     (g:signal-connect selection-filter "items-changed"
                       #'update-selection-average)
 
-
     (gtk:header-bar-pack-start header selection-info-toggle)
     (g:object-bind-property selection-info-toggle
                             "active"
@@ -758,7 +772,6 @@ refill (GtkWidget    *button,
                                   (gtk:sort-list-model-model sort-model))))
       (gtk:header-bar-pack-start header button))
 
-
     (let* ((label (gtk:label-new "0 /"))
            (attrs (pango:attr-list-new))
            (str (format nil "~,,'.:d" 4096))
@@ -770,6 +783,7 @@ refill (GtkWidget    *button,
 
       (pango:attr-list-insert attrs
                               (pango:attr-font-features-new "tnum"))
+
 ;     FIXME: Causes a memory fault. What is the problem?
 ;     (setf (gtk:label-attributes label) attrs)
       (setf (gtk:label-width-chars label) (+ len 2))
@@ -821,15 +835,22 @@ limit_changed_cb (GtkDropDown  *dropdown,
     gtk_color_list_set_size (colors, new_limit);
 }
 |#
+
       (g:signal-connect dropdown "notify::selected"
           (lambda (dropdown pspec)
             (declare (ignore pspec))
+            (format t "in NOTIFY::SELECTED for ~a~%" dropdown)
             (let* ((colors (gtk:sort-list-model-model sort-model))
-                   (oldlimit (g:object-data colors "limit"))
+                   (oldlimit (or (g:object-data colors "limit") 0))
                    (newlimit (ash 1
                                   (* 3
                                      (+ 1
                                         (gtk:drop-down-selected dropdown))))))
+
+              (format t "   colors : ~a~%" colors)
+              (format t " oldlimit : ~a~%" oldlimit)
+              (format t " newlimit : ~a~%" newlimit)
+
               (setf (g:object-data colors "limit") newlimit)
               (when (= oldlimit (gtk:color-list-size colors))
                 (setf (gtk:color-list-size colors) newlimit)))))
@@ -863,9 +884,6 @@ limit_changed_cb2 (GtkDropDown  *dropdown,
               (setf (gtk:label-width-chars label)
                     (+ 2 (length (format nil "~,,'.:d" limit)))))))
 
-
-
-
       (g:signal-connect factory "setup"
           (lambda (factory item)
             (declare (ignore factory))
@@ -874,6 +892,7 @@ limit_changed_cb2 (GtkDropDown  *dropdown,
                                         :xalign 1.0)))
               (pango:attr-list-insert attrs
                                       (pango:attr-font-features-new "tnum"))
+
 ; FIXME: Causes a memory fault
 ;              (setf (gtk:label-attributes label) attrs)
               (setf (gtk:list-item-child item) label))))
@@ -885,10 +904,12 @@ limit_changed_cb2 (GtkDropDown  *dropdown,
                   (limit (ash 1 (* 3 (+ 1 (gtk:list-item-position item))))))
               (setf (gtk:label-label label) (format nil "~,,'.:d" limit)))))
 
+      (format t "   factory : ~a~%" factory)
+      (format t "  dropdown : ~a~%" dropdown)
+
       (setf (gtk:drop-down-factory dropdown) factory)
       (setf (gtk:drop-down-selected dropdown) 3)
       (gtk:header-bar-pack-start header dropdown)
-    )
 
 
 #|
@@ -920,8 +941,9 @@ limit_changed_cb2 (GtkDropDown  *dropdown,
 |#
 
     (let ((factories (g:list-store-new "GtkListItemFactory"))
-          factory dropdown box expression)
-      (setf factory (gtk:signal-list-item-factory-new))
+          (factory (gtk:signal-list-item-factory-new))
+          dropdown box expression)
+
       (setf (g:object-data factory "title") "Colors")
       (g:list-store-append factories factory)
       (g:signal-connect factory "setup" #'setup-simple-listitem-cb)
@@ -944,7 +966,10 @@ limit_changed_cb2 (GtkDropDown  *dropdown,
       (g:object-bind-property dropdown "selected-item"
                               gridview "factory"
                               :sync-create)
-    )
+      )
 
     (gtk:window-present window)
-))
+)))
+
+(trace do-grid-view-colors)
+
