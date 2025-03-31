@@ -2,8 +2,8 @@
 ;;; gtk4.header-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2016 - 2025 Dieter Kaiser
@@ -92,7 +92,11 @@
     "show-title-buttons" "gboolean" t t)
    (title-widget
     header-bar-title-widget
-    "title-widget" "GtkWidget" t t)))
+    "title-widget" "GtkWidget" t t)
+   #+gtk-4-18
+   (use-native-controls
+    header-bar-use-native-controls
+    "use-native-controls" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'header-bar 'type)
@@ -292,6 +296,44 @@ headerbar
   label to be visible again.
   @see-class{gtk:header-bar}
   @see-class{gtk:widget}")
+
+;;; --- gtk:header-bar-use-native-controls -------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "use-native-controls"
+                                               'header-bar) t)
+ "The @code{use-native-controls} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Whether to show platform native Close/Minimize/Maximize buttons. For macOS,
+  the @slot[gtk:header-bar]{decoration-layout} property controls the use of
+  native window controls. On other platforms, this option has no effect. See
+  also
+  @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
+  Since 4.18 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'header-bar-use-native-controls)
+      "Accessor"
+      (documentation 'header-bar-use-native-controls 'function)
+ "@version{2025-3-31}
+  @syntax{(gtk:header-bar-use-native-controls object) => setting}
+  @syntax{(setf (gtk:header-bar-use-native-controls object) setting)}
+  @argument[object]{a @class{gtk:header-bar} widget}
+  @argument[setting]{@em{true} to show native controls}
+  @begin{short}
+    Accessor of the @slot[gtk:header-bar]{use-native-controls} slot of the
+    @class{gtk:header-bar} class.
+  @end{short}
+  The @fun{gtk:header-bar-use-native-controls} function returns whether this
+  header bar shows platform native window controls. The
+  @setf{gtk:header-bar-use-native-controls} function sets this header bar shows
+  native window controls. This option shows the \"stoplight\" buttons on macOS.
+  for Linux, this option has no effect. See also
+  @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
+
+  Since 4.18
+  @see-class{gtk:header-bar}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_header_bar_new

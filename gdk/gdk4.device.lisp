@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.device.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,11 +63,13 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     active-layout-index
 ;;;     caps-lock-state
 ;;;     direction
 ;;;     display
 ;;;     has-bidi-layouts
 ;;;     has-cursor
+;;;     layout-names
 ;;;     modifier-state
 ;;;     n-axes
 ;;;     name
@@ -285,7 +287,11 @@
    :export t
    :interfaces nil
    :type-initializer "gdk_device_get_type")
-  ((caps-lock-state
+  (#+gtk-4-18
+   (active-layout-index
+    device-active-layout-index
+    "active-layout-index" "gint" t nil)
+   (caps-lock-state
     device-caps-lock-state
     "caps-lock-state" "gboolean" t nil)
    (direction
@@ -300,6 +306,10 @@
    (has-cursor
     device-has-cursor
     "has-cursor" "gboolean" t t)
+   #+gtk-4-18
+   (layout-names
+    device-layout-names
+    "layout-names" "GStrv" t nil)
    (modifier-state
     device-modifier-state
     "modifier-state" "GdkModifierType" t nil)
@@ -368,11 +378,13 @@ lambda (device tool)    :run-last
       The signal is emitted on pen/eraser devices whenever tools enter or leave
       proximity.
   @end{dictionary}
+  @see-slot{gdk:device-active-layout-index}
   @see-slot{gdk:device-caps-lock-state}
   @see-slot{gdk:device-direction}
   @see-slot{gdk:device-display}
   @see-slot{gdk:device-has-bidi-layouts}
   @see-slot{gdk:device-has-cursor}
+  @see-slot{gdk:device-layout-names}
   @see-slot{gdk:device-modifier-state}
   @see-slot{gdk:device-n-axes}
   @see-slot{gdk:device-name}
@@ -389,6 +401,36 @@ lambda (device tool)    :run-last
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gdk:device-active-layout-index -----------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "active-layout-index" 'device) t)
+ "The @code{active-layout-index} property of type @code{:int} (Read) @br{}
+  The index of the keyboard active layout of a device. Will be -1 if there is
+  no valid active layout. This is only relevant for keyboard devices.
+  Since 4.18 @br{}
+  Default value: 0")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'device-active-layout-index)
+      "Accessor"
+      (documentation 'device-active-layout-index 'function)
+ "@version{2025-3-31}
+  @syntax{(gdk:device-active-layout-index object) => index}
+  @argument[object]{a @class{gdk:device} object}
+  @argument[index]{an integer for the layout index of the active layout, or -1.}
+  @begin{short}
+    Accessor of the @slot[gdk:device]{active-layout-index} slot of the
+    @class{gdk:device} class.
+  @end{short}
+  The @fun{gdk:device-active-layout-index} function retrieves the index of the
+  active layout of the keyboard. If there is no valid active layout for the
+  device, this function will return -1. This is only relevant for keyboard
+  devices.
+
+  Since 4.18
+  @see-class{gdk:device}")
 
 ;;; --- gdk:device-caps-lock-state ---------------------------------------------
 
@@ -515,6 +557,32 @@ lambda (device tool)    :run-last
   The @fun{gdk:device-has-cursor} function determines whether the pointer
   follows device motion. This is not meaningful for keyboard devices, which
   do not have a pointer.
+  @see-class{gdk:device}")
+
+;;; --- gdk:device-layout-names ------------------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "layout-names" 'device) t)
+ "The @code{layout-names} property of type @type{g:strv-t} (Read) @br{}
+  The names of the keyboard layouts of a device. This is only relevant for
+  keyboard devices. Since 4.18")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'device-layout-names)
+      "Accessor"
+      (documentation 'device-layout-names 'function)
+ "@version{2025-3-31}
+  @syntax{(gdk:device-layout-names object) => names}
+  @argument[object]{a @class{gdk:device} object}
+  @argument[names]{a list of strings of layouts}
+  @begin{short}
+    Accessor of the @slot[gdk:device]{layout-names} slot of the
+    @class{gdk:device} class.
+  @end{short}
+  The @fun{gdk:device-layout-names} function retrieves the names of the layouts
+  of the keyboard. This is only relevant for keyboard devices.
+
+  Since 4.18
   @see-class{gdk:device}")
 
 ;;; --- gdk:device-modifier-state ----------------------------------------------

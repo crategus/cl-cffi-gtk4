@@ -91,11 +91,11 @@
     "empty" "gboolean" t nil)
    (side
     window-controls-side
-    "side" "GtkPackType" t t))
+    "side" "GtkPackType" t t)
    #+gtk-4-18
    (use-native-controls
     window-controls-use-native-controls
-    "use-native-controls" "gboolean" t t))
+    "use-native-controls" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'window-controls 'type)

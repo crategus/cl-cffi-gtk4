@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.list-box.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -441,7 +441,11 @@ lambda (row)    :action
     "selection-mode" "GtkSelectionMode" t t)
    (show-separators
     list-box-show-separators
-    "show-separators" "gboolean" t t)))
+    "show-separators" "gboolean" t t)
+   #+gtk-4-18
+   (tab-behavior
+    list-box-tab-behavior
+    "tab-behavior" "GtkListTabBehavior" t t)))
 
 #+liber-documentation
 (setf (documentation 'list-box 'type)
@@ -567,6 +571,7 @@ lambda (listbox)    :action
   @see-slot{gtk:list-box-activate-on-single-click}
   @see-slot{gtk:list-box-selection-mode}
   @see-slot{gtk:list-box-show-separators}
+  @see-slot{gtk:list-box-tab-behavior}
   @see-constructor{gtk:list-box-new}
   @see-class{gtk:list-box-row}
   @see-class{gtk:tree-view}")
@@ -686,6 +691,39 @@ lambda (listbox)    :action
   should show separators between rows. The @setf{gtk:list-box-show-separators}
   function sets whether the list box should show separators.
   @see-class{gtk:list-box}")
+
+;;; --- gtk:list-box-tab-behavior ----------------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "tab-behavior" 'list-box) t)
+ "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
+ (Read / Write) @br{}
+ The behavior of the @key{Tab} key. Since 4.18 @br{}
+  Default value: @code{:all}")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'list-box-tab-behavior)
+      "Accessor"
+      (documentation 'list-box-tab-behavior 'function)
+ "@version{2025-3-31}
+  @syntax{(gtk:list-box-tab-behavior object) => behavior}
+  @syntax{(setf (gtk:list-box-tab-behavior object) behavior)}
+
+  @argument[object]{a @class{gtk:list-box} widget}
+  @argument[behavior]{a @symbol{gtk:list-tab-behavior} value}
+
+  @begin{short}
+    Accessor of the @slot[gtk:list-box]{tab-behavior} slot of the
+    @class{gtk:list-box} class.
+  @end{short}
+
+  The @fun{gtk:list-box-tab-behavior} function returns the behavior of the
+  @key{Tab} and @key{Shift+Tab} keys. The @setf{gtk:list-box-tab-behavior}
+  function sets the behavior.
+
+  Since 4.18
+  @see-class{gtk:list-box}
+  @see-symbol{gtk:list-tab-behavior}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_box_new

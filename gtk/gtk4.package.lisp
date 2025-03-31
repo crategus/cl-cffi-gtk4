@@ -1076,6 +1076,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{list-box-activate-on-single-click}
       @about-generic{list-box-selection-mode}
       @about-generic{list-box-show-separators}
+      @about-generic{list-box-tab-behavior}
       @about-function{list-box-new}
       @about-function{list-box-prepend}
       @about-function{list-box-append}
@@ -1203,6 +1204,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{header-bar-decoration-layout}
       @about-generic{header-bar-show-title-buttons}
       @about-generic{header-bar-title-widget}
+      @about-generic{header-bar-use-native-controls}
       @about-function{header-bar-new}
       @about-function{header-bar-pack-start}
       @about-function{header-bar-pack-end}

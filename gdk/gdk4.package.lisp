@@ -327,11 +327,13 @@
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
       @about-class{device}
+      @ablut-generic{device-active-layout-index}
       @about-generic{device-caps-lock-state}
       @about-generic{device-direction}
       @about-generic{device-display}
       @about-generic{device-has-bidi-layouts}
       @about-generic{device-has-cursor}
+      @about-generic{device-layout-names}
       @about-generic{device-modifier-state}
       @about-generic{device-n-axes}
       @about-generic{device-name}
