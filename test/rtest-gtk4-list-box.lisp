@@ -123,6 +123,7 @@
 
 ;;;     GtkListBox
 
+#-gtk-4-18
 (test gtk-list-box-class
   ;; Check type
   (is (g:type-is-object "GtkListBox"))
@@ -171,6 +172,60 @@
                          "selection-mode" "GtkSelectionMode" T T)
                         (SHOW-SEPARATORS LIST-BOX-SHOW-SEPARATORS
                          "show-separators" "gboolean" T T)))
+             (gobject:get-gtype-definition "GtkListBox"))))
+
+#+gtk-4-18
+(test gtk-list-box-class
+  ;; Check type
+  (is (g:type-is-object "GtkListBox"))
+  ;; Check registered name
+  (is (eq 'gtk:list-box
+          (glib:symbol-for-gtype "GtkListBox")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkListBox")
+          (g:gtype (cffi:foreign-funcall "gtk_list_box_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GtkWidget")
+          (g:type-parent "GtkListBox")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GtkListBox")))
+  ;; Check interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+             (glib-test:list-interfaces "GtkListBox")))
+  ;; Check properties
+  (is (equal '("accept-unpaired-release" "activate-on-single-click"
+               "selection-mode" "show-separators" "tab-behavior")
+             (glib-test:list-properties "GtkListBox")))
+  ;; Check signals
+  (is (equal '("activate-cursor-row" "move-cursor" "row-activated"
+               "row-selected" "select-all" "selected-rows-changed"
+               "toggle-cursor-row" "unselect-all")
+             (glib-test:list-signals "GtkListBox")))
+  ;; Check CSS name
+  (is (string= "list"
+               (gtk:widget-class-css-name "GtkListBox")))
+  ;; Check accessible role
+  (is (eq :list (gtk:widget-class-accessible-role "GtkListBox")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListBox" GTK:LIST-BOX
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_list_box_get_type")
+                      ((ACCEPT-UNPAIRED-RELEASE
+                        LIST-BOX-ACCEPT-UNPAIRED-RELEASE
+                        "accept-unpaired-release" "gboolean" T T)
+                       (ACTIVATE-ON-SINGLE-CLICK
+                        LIST-BOX-ACTIVATE-ON-SINGLE-CLICK
+                        "activate-on-single-click" "gboolean" T T)
+                       (SELECTION-MODE LIST-BOX-SELECTION-MODE
+                        "selection-mode" "GtkSelectionMode" T T)
+                       (SHOW-SEPARATORS LIST-BOX-SHOW-SEPARATORS
+                        "show-separators" "gboolean" T T)
+                       (TAB-BEHAVIOR LIST-BOX-TAB-BEHAVIOR "tab-behavior"
+                        "GtkListTabBehavior" T T)))
              (gobject:get-gtype-definition "GtkListBox"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -635,4 +690,4 @@
 ;;;     GtkListBoxCreateWidgetFunc
 ;;;     gtk_list_box_bind_model
 
-;;; 2024-10-11
+;;; 2025-3-31

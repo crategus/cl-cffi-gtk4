@@ -47,7 +47,11 @@
   (is (eq (g:gtype "GdkDrawContext")
           (g:type-parent "GdkGLContext")))
   ;; Check children
+  #-windows
   (is (equal '("GdkWaylandGLContext" "GdkX11GLContext")
+             (glib-test:list-children "GdkGLContext")))
+  #+windows
+  (is (equal '("GdkWin32GLContext")
              (glib-test:list-children "GdkGLContext")))
   ;; Check interfaces
   (is (equal '()
@@ -97,4 +101,4 @@
 
 ;;;     gdk_gl_context_is_shared                           Since 4.4
 
-;;; 2024-11-29
+;;; 2025-3-31

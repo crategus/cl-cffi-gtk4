@@ -31,7 +31,11 @@
   (is (string= "window"
                (gtk:widget-class-css-name "GtkApplicationWindow")))
   ;; Check accessible role
+  #-gtk-4-18
   (is (eq :application
+          (gtk:widget-class-accessible-role "GtkApplicationWindow")))
+  #+gtk-4-18
+  (is (eq :window
           (gtk:widget-class-accessible-role "GtkApplicationWindow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkApplicationWindow" GTK:APPLICATION-WINDOW
@@ -176,4 +180,4 @@
     (is-false (gtk:window-destroy window))
     (is (= 1 (g:object-ref-count help-overlay)))))
 
-;;; 2025-3-26
+;;; 2025-3-31

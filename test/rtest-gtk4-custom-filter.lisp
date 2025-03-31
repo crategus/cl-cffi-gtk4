@@ -60,7 +60,10 @@
     (is (typep (gtk:custom-filter-new #'custom-filter-func) 'gtk:custom-filter))
     (is (= 1 (g:object-ref-count (gtk:custom-filter-new #'custom-filter-func))))
     ;; Items in the filter model
+    #-windows
     (is (= 41 (gtk:filter-list-model-n-items model)))
+    #+windows
+    (is (= 42 (gtk:filter-list-model-n-items model)))
     ;; Create with make instance
     (is (typep (make-instance 'gtk:custom-filter) 'gtk:custom-filter))
     (is (= 1 (g:object-ref-count (make-instance 'gtk:custom-filter))))
@@ -95,7 +98,10 @@
     (is (< 3330 (gtk:filter-list-model-n-items model)))
     ;; Set filter function
     (is-false (gtk:custom-filter-set-filter-func filter #'custom-filter-func))
+    #-windows
     (is (= 41 (gtk:filter-list-model-n-items model)))
+    #+windows
+    (is (= 42 (gtk:filter-list-model-n-items model)))
     ;; Set a new filter function
     (is-false (gtk:custom-filter-set-filter-func filter
                   (lambda (item)

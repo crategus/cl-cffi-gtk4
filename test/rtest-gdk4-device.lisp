@@ -130,6 +130,7 @@
 
 ;;;     GdkDevice
 
+#-gtk-4-18
 (test gdk-device-class
   ;; Check type
   (is (g:type-is-object "GdkDevice"))
@@ -153,10 +154,17 @@
   (is (equal '()
              (glib-test:list-interfaces "GdkDevice")))
   ;; Check properties
+  #-gtk-4-18
   (is (equal '("caps-lock-state" "direction" "display" "has-bidi-layouts"
                "has-cursor" "modifier-state" "n-axes" "name" "num-lock-state"
                "num-touches" "product-id" "scroll-lock-state" "seat" "source"
                "tool" "vendor-id")
+             (glib-test:list-properties "GdkDevice")))
+  #+gtk-4-18
+  (is (equal '("active-layout-index" "caps-lock-state" "direction" "display"
+               "has-bidi-layouts" "has-cursor" "layout-names" "modifier-state"
+               "n-axes" "name" "num-lock-state" "num-touches" "product-id"
+               "scroll-lock-state" "seat" "source" "tool" "vendor-id")
              (glib-test:list-properties "GdkDevice")))
   ;; Check signals
   (is (equal '("changed" "tool-changed")
@@ -193,6 +201,74 @@
                         (TOOL DEVICE-TOOL "tool" "GdkDeviceTool" T NIL)
                         (VENDOR-ID DEVICE-VENDOR-ID
                          "vendor-id" "gchararray" T NIL)))
+             (gobject:get-gtype-definition "GdkDevice"))))
+
+#+gtk-4-18
+(test gdk-device-class
+  ;; Check type
+  (is (g:type-is-object "GdkDevice"))
+  ;; Check registered name
+  (is (eq 'gdk:device
+          (glib:symbol-for-gtype "GdkDevice")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GdkDevice")
+          (g:gtype (cffi:foreign-funcall "gdk_device_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GdkDevice")))
+  ;; Check children
+  #-windows
+  (is (member "GdkWaylandDevice"
+              (glib-test:list-children "GdkDevice") :test #'string=))
+  #+windows
+  (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
+             (glib-test:list-children "GdkDevice")))
+  ;; Check interfaces
+  (is (equal '()
+             (glib-test:list-interfaces "GdkDevice")))
+  ;; Check properties
+  (is (equal '("active-layout-index" "caps-lock-state" "direction" "display"
+               "has-bidi-layouts" "has-cursor" "layout-names" "modifier-state"
+               "n-axes" "name" "num-lock-state" "num-touches" "product-id"
+               "scroll-lock-state" "seat" "source" "tool" "vendor-id")
+             (glib-test:list-properties "GdkDevice")))
+  ;; Check signals
+  (is (equal '("changed" "tool-changed")
+             (glib-test:list-signals "GdkDevice")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDevice" GDK:DEVICE
+                      (:SUPERCLASS GOBJECT:OBJECT :EXPORT T :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_device_get_type")
+                      ((ACTIVE-LAYOUT-INDEX DEVICE-ACTIVE-LAYOUT-INDEX
+                        "active-layout-index" "gint" T NIL)
+                       (CAPS-LOCK-STATE DEVICE-CAPS-LOCK-STATE
+                        "caps-lock-state" "gboolean" T NIL)
+                       (DIRECTION DEVICE-DIRECTION "direction"
+                        "PangoDirection" T NIL)
+                       (DISPLAY DEVICE-DISPLAY "display" "GdkDisplay" T NIL)
+                       (HAS-BIDI-LAYOUTS DEVICE-HAS-BIDI-LAYOUTS
+                        "has-bidi-layouts" "gboolean" T NIL)
+                       (HAS-CURSOR DEVICE-HAS-CURSOR "has-cursor" "gboolean"
+                        T NIL)
+                       (LAYOUT-NAMES DEVICE-LAYOUT-NAMES "layout-names"
+                        "GStrv" T NIL)
+                       (MODIFIER-STATE DEVICE-MODIFIER-STATE "modifier-state"
+                        "GdkModifierType" T NIL)
+                       (N-AXES DEVICE-N-AXES "n-axes" "guint" T NIL)
+                       (NAME DEVICE-NAME "name" "gchararray" T NIL)
+                       (NUM-LOCK-STATE DEVICE-NUM-LOCK-STATE "num-lock-state"
+                        "gboolean" T NIL)
+                       (NUM-TOUCHES DEVICE-NUM-TOUCHES "num-touches" "guint"
+                        T NIL)
+                       (PRODUCT-ID DEVICE-PRODUCT-ID "product-id"
+                        "gchararray" T NIL)
+                       (SCROLL-LOCK-STATE DEVICE-SCROLL-LOCK-STATE
+                        "scroll-lock-state" "gboolean" T NIL)
+                       (SEAT DEVICE-SEAT "seat" "GdkSeat" T T)
+                       (SOURCE DEVICE-SOURCE "source" "GdkInputSource" T NIL)
+                       (TOOL DEVICE-TOOL "tool" "GdkDeviceTool" T NIL)
+                       (VENDOR-ID DEVICE-VENDOR-ID "vendor-id" "gchararray" T
+                        NIL)))
              (gobject:get-gtype-definition "GdkDevice"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -300,4 +376,4 @@
            (device (gdk:seat-keyboard seat)))
       (is (= 0 (gdk:device-timestamp device))))))
 
-;;; 2024-12-20
+;;; 2025-3-31

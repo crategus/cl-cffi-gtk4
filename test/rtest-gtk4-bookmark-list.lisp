@@ -68,6 +68,7 @@
          (bookmark (make-instance 'gtk:bookmark-list)))
     (is-false (gtk:bookmark-list-attributes bookmark))
     ;; Default location
+    #-windows
     (is (string= filename
                  (gtk:bookmark-list-filename bookmark)))
     ;; Default io priority

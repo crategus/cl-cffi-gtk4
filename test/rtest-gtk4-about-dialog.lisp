@@ -95,7 +95,10 @@
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAboutDialog")))
   ;; Check accessible role
+  #-gtk-4-18
   (is (eq :application (gtk:widget-class-accessible-role "GtkAboutDialog")))
+  #+gtk+4-18
+  (is (eq :window (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAboutDialog" GTK:ABOUT-DIALOG
                        (:SUPERCLASS GTK:WINDOW
@@ -186,4 +189,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2024-12-23
+;;; 2025-3-31

@@ -46,7 +46,10 @@
   (is (string= "window"
                (gtk:widget-class-css-name "GtkWindow")))
   ;; Check accessible role
+  #-gtk-4-18
   (is (eq :application (gtk:widget-class-accessible-role "GtkWindow")))
+  #+gtk-4-18
+  (is (eq :window (gtk:widget-class-accessible-role "GtkWindow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWindow" GTK:WINDOW
                       (:SUPERCLASS GTK:WIDGET
@@ -487,4 +490,4 @@
     (is-false (gtk:window-is-suspended window))
     (is-false (gtk:window-destroy window))))
 
-;;; 2025-2-1
+;;; 2025-3-31
