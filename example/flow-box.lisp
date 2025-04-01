@@ -7,7 +7,7 @@
 ;;;; example the <tt>GtkFlowBox</tt> widget contains a <tt>GtkBox</tt> widget
 ;;;; which contains a drawing area and a label.
 ;;;;
-;;;; 2024-4-14
+;;;; 2025-4-1
 
 (in-package :gtk4-example)
 
@@ -68,7 +68,7 @@
     "WhiteSmoke"        "Yellow"            "YellowGreen"
 ))
 
-(defun color-swatch-new (color)
+(defun flow-box-color-swatch-new (color)
   (let* ((vbox (make-instance 'gtk:box
                               :orientation :vertical))
          (button (make-instance 'gtk:button
@@ -143,7 +143,7 @@
     (let ((count 0))
       (dolist (color *colors*)
         (let ((child (make-instance 'gtk:flow-box-child
-                                    :child (color-swatch-new color))))
+                                    :child (flow-box-color-swatch-new color))))
           (incf count)
           (gtk:flow-box-append flowbox child)
           (when (= count 1)

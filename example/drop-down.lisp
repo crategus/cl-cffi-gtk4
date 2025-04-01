@@ -261,6 +261,7 @@ drop_down_new_from_strings (const char *const *titles,
                              :orientation :vertical
                              :spacing 10))
         )
+    (declare (ignore titles icons descriptions))
     (gtk:box-append hbox box)
     (let ((label (make-instance 'gtk:label
                                 :label "DropDowns")))
@@ -276,6 +277,7 @@ drop_down_new_from_strings (const char *const *titles,
              (hours (gtk:string-list-new hours))
              (store (g:list-store-new "GListModel"))
              (model (gtk:flatten-list-model-new store)))
+        (declare (ignore model))
         (g:list-store-append store minutes)
         (g:list-store-append store hours)
       )

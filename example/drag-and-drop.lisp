@@ -124,6 +124,7 @@
     (gtk:widget-add-controller (canvas-item-label item) dest)
     (g:signal-connect dest "drop"
         (lambda (dest value x y)
+          (declare (ignore x y))
           (let* ((label (gtk:event-controller-widget dest))
                  (item (gtk:widget-get-parent (gtk:widget-get-parent label))))
             (cond ((eq (g:gtype "gchararray") (g:value-type value))

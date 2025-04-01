@@ -128,7 +128,7 @@
     (format t "    box : ~a~%" box)
     (format t " header : ~a~%" header)
     (format t "  stack : ~a~%" stack)
-
+    (format t "  gears : ~a~%" gears)
 
     ;; Read the menus from a string
     (gtk:builder-add-from-string builder menus)

@@ -3,7 +3,7 @@
 ;;;; This demo uses the GtkListView widget as a fancy application launcher.
 ;;;; It is also a very small introduction to listviews.
 ;;;;
-;;;; 2025-2-2
+;;;; 2025-4-1
 
 (in-package :gtk4-example)
 
@@ -21,8 +21,8 @@
 ;; listitem. Of course, it is possible to use far more complex interactions by
 ;; turning off activation and adding buttons or other widgets in the setup
 ;; function above, but this is a simple demo, so we'll use the simple way.
-(defun activate-cb (listview position)
-  (format t "in ACTiVATE-CB~%")
+(defun activate-recentinfo-cb (listview position)
+  (format t "in ACTiVATE-RECENTINFO-CB~%")
   (let* ((model (gtk:list-view-model listview))
          (recentinfo (recent-object-item (g:list-model-item model position)))
          appname)
@@ -116,7 +116,7 @@
           (gtk:list-view-new (gtk:single-selection-new model) factory))
     ;; We connect the activate signal here. It's the function we defined
     ;; above for launching the selected application.
-    (g:signal-connect listview "activate" #'activate-cb)
+    (g:signal-connect listview "activate" #'activate-recentinfo-cb)
     ;; Set the child widget of the scrolled window
     (setf (gtk:scrolled-window-child scrolled) listview)
     ;; Set the window visible

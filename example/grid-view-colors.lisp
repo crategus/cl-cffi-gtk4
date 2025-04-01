@@ -80,10 +80,6 @@
 
 (trace color-new)
 (trace color-rgba)
-(trace paintable-snapshot-impl)
-(trace paintable-get-flags-impl)
-(trace paintable-get-intrinsic-width-impl)
-(trace paintable-get-intrinsic-height-impl)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'color)
