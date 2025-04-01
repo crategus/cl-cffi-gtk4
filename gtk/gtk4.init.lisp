@@ -28,9 +28,9 @@
 ;; DIVISION-BY-ZERO signalled". This code disables floating point errors for
 ;; SBCL. Check which part of the library can produce floating point errors.
 
-(when (and (find-package "SB-EXT")
-           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
-  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+(when (and (find-package "SB-INT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-INT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-INT"))
            :traps nil))
 
 (defun finalize-subclasses (class)
