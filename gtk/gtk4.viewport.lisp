@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.viewport.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -45,7 +45,7 @@
 ;;; Functions
 ;;;
 ;;;     gtk_viewport_new
-;;;     gtk_viewport_scroll_to                             Since 4.12
+;;;     gtk_viewport_scroll_to                              Since 4.12
 ;;;
 ;;; Properties
 ;;;
@@ -199,12 +199,20 @@
 ;;; gtk_viewport_scroll_to                                  Since 4.12
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_viewport_scroll_to" viewport-scroll-to) :void
+#+gtk-4-12
+(cffi:defcfun ("gtk_viewport_scroll_to" %viewport-scroll-to) :void
+  (viewport (g:object viewport))
+  (descendant (g:object widget))
+  (scroll (g:boxed scroll-info)))
+
+#+gtk-4-12
+(defun viewport-scroll-to (viewport descendant &optional scroll)
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-4-7}
   @argument[viewport]{a @class{gtk:viewport} widget}
   @argument[descendant]{a descendant @class{gtk:widget} object of the viewport}
-  @argument[scroll]{a @class{gtk:scroll-info} instance}
+  @argument[scroll]{an optional @class{gtk:scroll-info} instance, or the default
+  @code{nil} value to scroll into view}
   @begin{short}
     Scrolls a descendant of the viewport into view.
   @end{short}
@@ -215,10 +223,9 @@
   @see-class{gtk:viewport}
   @see-class{gtk:widget}
   @see-class{gtk:scroll-info}"
-  (viewport (g:object viewport))
-  (descendant (g:object widget))
-  (scroll (g:boxed scroll-info)))
+  (%viewport-scroll-to viewport descendant scroll))
 
+#+gtk-4-12
 (export 'viewport-scroll-to)
 
 ;;; --- End of file gtk4.viewport.lisp -----------------------------------------
