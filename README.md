@@ -44,6 +44,7 @@ The `cl-cffi-gtk4` library depends on the following Lisp libraries:
 *  `cl-cffi-gdk-pixbuf`
 *  `cl-cffi-pango`
 *  `cl-cffi-cairo`
+*  `cl-cffi-graphene`
 
 These libraries are available from [github](https://github.com/crategus).
 The `cl-cffi-gtk4` API documentation is available at
@@ -89,7 +90,7 @@ performed with
 ```
 or loaded with
 ```
-  (asdf:load-system :cl-cffi-gtk3/test)
+(asdf:load-system :cl-cffi-gtk3/test)
 ```
 Unfortunately, many of the tests depend on the hardware or local environment
 you are using and will therefore fail. This may be fixed in the future.
