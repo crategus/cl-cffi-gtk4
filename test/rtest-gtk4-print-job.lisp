@@ -33,18 +33,18 @@
              (glib-test:list-signals "GtkPrintJob")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintJob" GTK:PRINT-JOB
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_print_job_get_type")
-                       ((PAGE-SETUP PRINT-JOB-PAGE-SETUP
-                         "page-setup" "GtkPageSetup" T NIL)
-                        (PRINTER PRINT-JOB-PRINTER "printer" "GtkPrinter" T NIL)
-                        (SETTINGS PRINT-JOB-SETTINGS
-                         "settings" "GtkPrintSettings" T NIL)
-                        (TITLE PRINT-JOB-TITLE "title" "gchararray" T NIL)
-                        (TRACK-PRINT-STATUS PRINT-JOB-TRACK-PRINT-STATUS
-                         "track-print-status" "gboolean" T T)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_print_job_get_type")
+                      ((PAGE-SETUP PRINT-JOB-PAGE-SETUP
+                        "page-setup" "GtkPageSetup" T NIL)
+                       (PRINTER PRINT-JOB-PRINTER "printer" "GtkPrinter" T NIL)
+                       (SETTINGS PRINT-JOB-SETTINGS
+                        "settings" "GtkPrintSettings" T NIL)
+                       (TITLE PRINT-JOB-TITLE "title" "gchararray" T NIL)
+                       (TRACK-PRINT-STATUS PRINT-JOB-TRACK-PRINT-STATUS
+                        "track-print-status" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkPrintJob"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -283,4 +283,4 @@
         (is-true (setf (gtk:print-job-reverse job) t))
         (is-true (gtk:print-job-reverse job))))))
 
-;;; 2025-3-30
+;;; 2025-4-12

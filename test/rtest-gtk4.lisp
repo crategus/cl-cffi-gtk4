@@ -165,7 +165,7 @@ sem venenatis, vitae ultricies arcu laoreet."))
       (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
     store))
 
-;; Create a GtkListView with a GtkStingList as model
+;; Create a GtkListView with a GtkStringList as model
 (defun create-list-view-for-testsuite (&optional (package "GTK"))
   (let* ((factory (gtk:signal-list-item-factory-new))
          (model (create-string-list-for-package package))
@@ -202,19 +202,20 @@ sem venenatis, vitae ultricies arcu laoreet."))
 
 ;;; ----------------------------------------------------------------------------
 
-(defvar *default-printer* nil)
+;; Get a default printer for printer tests
+(let (default-printer)
+  (defun get-default-printer ()
+    #-windows
+    (unless default-printer
+      (gtk:enumerate-printers (lambda (printer)
+                                (if printer
+                                    (setf default-printer printer)
+                                    nil))
+                              t)
+      (if default-printer
+          (format t "~&Default printer for testsuite is \"~a\"~%"
+                    (gtk:printer-name default-printer))
+          (format t "~&No printer for testsuite available~%")))
+    default-printer))
 
-;; Get a default printer for more tests
-;; TODO: Does not work generally, improve the function!
-(defun get-default-printer ()
-  #-windows
-  (unless *default-printer*
-    (gtk:enumerate-printers (lambda (printer)
-                              (let ((name (gtk:printer-name printer)))
-                                (when (string= name "In Datei drucken")
-                                  (setf *default-printer* printer))
-                                nil))
-                            t))
-  *default-printer*)
-
-;;; 2024-10-28
+;;; 2025-4-12
