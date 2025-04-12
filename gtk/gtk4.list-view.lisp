@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.list-view.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -42,8 +42,8 @@
 ;;;
 ;;;     gtk_list_view_get_factory
 ;;;     gtk_list_view_set_factory
-;;;     gtk_list_view_get_header_factory                   Since 4.12
-;;;     gtk_list-view_set_header_factory                   Since 4.12
+;;;     gtk_list_view_get_header_factory                    Since 4.12
+;;;     gtk_list-view_set_header_factory                    Since 4.12
 ;;;     gtk_list_view_get_model
 ;;;     gtk_list_view_set_model
 ;;;     gtk_list_view_get_show_separators
@@ -52,13 +52,13 @@
 ;;;     gtk_list_view_set_single_click_activate
 ;;;     gtk_list_view_get_enable_rubberband
 ;;;     gtk_list_view_set_enable_rubberband
-;;;     gtk_list_view_get_tab_behavior                     Since 4.12
-;;;     gtk_list_view_set_tab_behavior                     Since 4.12
+;;;     gtk_list_view_get_tab_behavior                      Since 4.12
+;;;     gtk_list_view_set_tab_behavior                      Since 4.12
 ;;;
 ;;; Functions
 ;;;
 ;;;     gtk_list_view_new
-;;;     gtk_list_view_scroll_to                            Since 4.12
+;;;     gtk_list_view_scroll_to                             Since 4.12
 ;;;
 ;;; Properties (GtkListBase)
 ;;;
@@ -68,11 +68,11 @@
 ;;;
 ;;;     enable-rubberband
 ;;;     factory
-;;;     header-factory                                     Since 4.12
+;;;     header-factory                                      Since 4.12
 ;;;     model
 ;;;     show-separators
 ;;;     single-click-activate
-;;;     tab-behavior                                       Since 4.12
+;;;     tab-behavior                                        Since 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -117,7 +117,7 @@
 (setf (liber:alias-for-symbol 'list-tab-behavior)
       "GEnum"
       (liber:symbol-documentation 'list-tab-behavior)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @begin{declaration}
 (gobject:define-genum \"GtkListTabBehavior\" list-tab-behavior
   (:export t
@@ -164,7 +164,7 @@
 (setf (liber:alias-for-symbol 'list-scroll-flags)
       "GFlags"
       (liber:symbol-documentation 'list-scroll-flags)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @begin{declaration}
 (gobject:define-gflags \"GtkListScrollFlags\" list-scroll-flags
   (:export t
@@ -206,9 +206,9 @@
 
 #+liber-documentation
 (setf (documentation 'list-base 'type)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @begin{short}
-    The @class{gtk:list-base} class is the abstract base class for the GTK list
+    The @class{gtk:list-base} class is the abstract base class for GTK list
     widgets.
   @end{short}
   @see-slot{gtk:list-base-orientation}
@@ -232,7 +232,7 @@
 (setf (liber:alias-for-function 'list-base-orientation)
       "Accessor"
       (documentation 'list-base-orientation 'function)
- "@version{2023-11-25}
+ "@version{2025-4-11}
   @syntax{(gtk:list-base-orientation object) => orientation}
   @syntax{(setf (gtk:list-base-orientation object) orientation)}
   @argument[object]{a @class{gtk:list-base} widget}
@@ -241,8 +241,9 @@
     Accessor of the @slot[gtk:list-base]{orientation} slot of the
     @class{gtk:list-base} class.
   @end{short}
+  The @fun{gtk:list-base-orientation} function gets the orientation of the list
+  widget. The @setf{gtk:list-base-orientation} functions sets the orientation.
   @see-class{gtk:list-base}
-  @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}")
 
 ;;; ----------------------------------------------------------------------------
@@ -280,7 +281,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-view 'type)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @begin{short}
     The @class{gtk:list-view} widget is a widget to present a view into a large
     dynamic list of items.
@@ -302,7 +303,8 @@
   section.
   @begin[Examples]{dictionary}
     This is a complete example of how to use the @class{gtk:list-view} widget.
-    The example is included in the GTK 4 demo, which comes with the GTK library.
+    The example is included in the GTK 4 demo, which comes with the
+    @code{cl-cffi-gtk4} library.
     @begin{pre}
 (defun activate-cb (listview position)
   (let* ((model (gtk:list-view-model listview))
@@ -364,6 +366,13 @@
     (gtk:window-present window)))
     @end{pre}
   @end{dictionary}
+  @begin[Actions]{dictionary}
+    The @class{gtk:list-view} implementation defines a set of built-in actions:
+    @begin[code]{table}
+      @entry[list.activate-item]{Activates the item at given position by
+        emitting the @code{GtkListView::activate} signal.}
+    @end{table}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 listview[.separators][.rich-list][.navigation-sidebar][.data-table]
@@ -378,11 +387,9 @@ listview[.separators][.rich-list][.navigation-sidebar][.data-table]
     @code{listview}. It may carry the @code{.separators} style class, when the
     @slot[gtk:list-view]{show-separators} property is set. Each child widget
     uses a single CSS node named row. For rubberband selection, a node with
-    name rubberband is used.
-
-    The main @code{listview} node may also carry style classes to select the
-    style of list presentation: @code{.rich-list}, @code{.navigation-sidebar}
-    or @code{.data-table}.
+    name rubberband is used. The main @code{listview} node may also carry
+    @code{.rich-list}, @code{.navigation-sidebar} or @code{.data-table} style
+    classes to select the style of list presentation.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:list-view} implementation uses the @code{:list} role, and
@@ -396,12 +403,12 @@ lambda (listview position)    :run-last
       @end{pre}
       @begin[code]{table}
         @entry[listview]{The @class{gtk:list-view} widget.}
-        @entry[position]{An unsigned integer with the position of the item to
+        @entry[position]{The unsigned integer with the position of the item to
         activate.}
       @end{table}
       The signal is emitted when a row has been activated by the user, usually
-      via activating the @code{GtkListView|list.activate-item action}. This
-      allows for a convenient way to handle activation in a listview. See the
+      via activating the @code{GtkListView::list.activate-item} action. This
+      allows for a convenient way to handle activation in a list view. See the
       @fun{gtk:list-item-activatable} function for details on how to use this
       signal.
   @end{dictionary}
@@ -428,14 +435,14 @@ lambda (listview position)    :run-last
                                                'list-view) t)
  "The @code{enable-rubberband} property of type @code{:boolean} (Read / Write)
   @br{}
-  Allow rubberband selection. @br{}
+  Whether to allow rubberband selection. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-view-enable-rubberband)
       "Accessor"
       (documentation 'list-view-enable-rubberband 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:list-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -446,8 +453,7 @@ lambda (listview position)    :run-last
   @end{short}
   The @fun{gtk:list-view-enable-rubberband} function returns whether rows can
   be selected by dragging with the mouse. The
-  @setf{gtk:list-view-enable-rubberband} function sets whether selections can be
-  changed by dragging with the mouse.
+  @setf{gtk:list-view-enable-rubberband} function sets the property.
   @see-class{gtk:list-view}")
 
 ;;; --- gtk:list-view-factory --------------------------------------------------
@@ -456,13 +462,13 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "factory" 'list-view) t)
  "The @code{factory} property of type @class{gtk:list-item-factory}
   (Read / Write) @br{}
-  Factory for populating list items.")
+  The factory for populating list items.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-view-factory)
       "Accessor"
       (documentation 'list-view-factory 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-factory object) => factory}
   @syntax{(setf (gtk:list-view-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -484,13 +490,13 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "header-factory" 'list-view) t)
  "The @code{header-factory} property of type @class{gtk:list-item-factory}
   (Read / Write) @br{}
-  Factory for creating header widgets. Since 4.12")
+  The factory for creating header widgets. Since 4.12")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'list-view-header-factory)
       "Accessor"
       (documentation 'list-view-header-factory 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-header-factory object) => factory}
   @syntax{(setf (gtk:list-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -499,11 +505,10 @@ lambda (listview position)    :run-last
     Accessor of the @slot[gtk:list-view]{header-factory} slot of the
     @class{gtk:list-view} class.
   @end{short}
-  The @fun{gtk:list-view-header-factory} function gets the factory that is
-  currently used to populate section headers. The
-  @setf{gtk:list-view-header-factory} function sets the factory to use for
-  populating the @class{gtk:list-header} objects used in section headers. If
-  this factory is set to @code{nil}, the list will not show section headers.
+  The @fun{gtk:list-view-header-factory} function gets the factory to use for
+  populating the @class{gtk:list-header} objects used in section headers. The
+  @setf{gtk:list-view-header-factory} function sets the factory. If this factory
+  is set to @code{nil}, the list will not show section headers.
 
   Since 4.12
   @see-class{gtk:list-view}
@@ -516,13 +521,13 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "model" 'list-view) t)
  "The @code{model} property of type @class{gtk:selection-model} (Read / Write)
   @br{}
-  Model for the items displayed.")
+  The model for the items displayed.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-view-model)
       "Accessor"
       (documentation 'list-view-model 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-model object) => model}
   @syntax{(setf (gtk:list-view-model object) model)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -543,14 +548,14 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "show-separators" 'list-view) t)
  "The @code{show-separators} property of type @code{:boolean} (Read / Write)
   @br{}
-  Show separators between rows. @br{}
+  Whether to show separators between rows. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-view-show-separators)
       "Accessor"
       (documentation 'list-view-show-separators 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-show-separators object) => setting}
   @syntax{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -561,7 +566,7 @@ lambda (listview position)    :run-last
   @end{short}
   The @fun{gtk:list-view-show-separators} function returns whether the list box
   should show separators between rows. The @setf{gtk:list-view-show-separators}
-  function sets whether the list box should show separators between rows.
+  function sets the property.
   @see-class{gtk:list-view}")
 
 ;;; --- gtk:list-view-single-click-activate ------------------------------------
@@ -571,14 +576,14 @@ lambda (listview position)    :run-last
                                                'list-view) t)
  "The @code{single-click-activate} property of type @code{:boolean}
   (Read / Write) @br{}
-  Activate rows on single click and select them on hover. @br{}
+  Whether to activate rows on single click and select them on hover. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-view-single-click-activate)
       "Accessor"
       (documentation 'list-view-single-click-activate 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:list-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -589,8 +594,7 @@ lambda (listview position)    :run-last
   @end{short}
   The @fun{gtk:list-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @setf{gtk:list-view-single-click-activate} function sets whether rows should
-  be activated on single click and selected on hover.
+  @setf{gtk:list-view-single-click-activate} function sets the property.
   @see-class{gtk:list-view}")
 
 ;;; --- gtk:list-view-tab-behavior ---------------------------------------------
@@ -599,14 +603,14 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "tab-behavior" 'list-view) t)
  "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
   (Read / Write) @br{}
-  Behavior of the @kbd{Tab} key. Since 4.12 @br{}
+  The behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys. Since 4.12 @br{}
   Default value: @code{:all}")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'list-view-tab-behavior)
       "Accessor"
       (documentation 'list-view-tab-behavior 'function)
- "@version{2023-11-25}
+ "@version{2025-4-8}
   @syntax{(gtk:list-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:list-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -616,8 +620,8 @@ lambda (listview position)    :run-last
     @class{gtk:list-view} class.
   @end{short}
   The @fun{gtk:list-view-tab-behavior} function gets the behavior set for the
-  @kbd{Tab} key. The @setf{gtk:list-view-tab-behavior} function sets the
-  behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys.
+  @kbd{Tab} and @kbd{Shift+Tab} keys. The @setf{gtk:list-view-tab-behavior}
+  function sets the behavior.
 
   Since 4.12
   @see-class{gtk:list-view}
@@ -629,12 +633,13 @@ lambda (listview position)    :run-last
 
 (declaim (inline list-view-new))
 
-(defun list-view-new (model factory)
+(defun list-view-new (&optional model factory)
  #+liber-documentation
- "@version{2023-11-25}
-  @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
-  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
-    with or @code{nil}}
+ "@version{2025-4-11}
+  @argument[model]{an optional @class{gtk:selection-model} object to use, or
+    the default @code{nil} value}
+  @argument[factory]{an optional @class{gtk:list-item-factory} object to
+    populate items with or the default @code{nil} value}
   @return{The new @class{gtk:list-view} widget using the given @arg{model} and
     @arg{factory}.}
   @begin{short}
@@ -654,21 +659,27 @@ lambda (listview position)    :run-last
 ;;; gtk_list_view_scroll_to
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: We need an example to check this function.
+#+gtk-4-12
+(cffi:defcfun ("gtk_list_view_scroll_to" %list-view-scroll-to) :void
+  (listview (g:object list-view))
+  (pos :uint)
+  (flags list-scroll-flags)
+  (scroll (g:boxed scroll-info)))
 
 #+gtk-4-12
-(cffi:defcfun ("gtk_list_view_scroll_to" list-view-scroll-to) :void
+(defun list-view-scroll-to (listview pos flags &optional scroll)
  #+liber-documentation
- "@version{#2023-11-5}
+ "@version{#2025-4-8}
   @argument[listview]{a @class{gtk:list-view} widget}
-  @argument[pos]{an unsigned integer with the position of the item}
-  @argument[flags]{a @symbol{gtk:list-scroll-flags} value with the actions
+  @argument[pos]{an unsigned integer for the position of the item}
+  @argument[flags]{a @symbol{gtk:list-scroll-flags} value for the actions
     to perform}
-  @argument[scroll]{a @class{gtk:scroll-info} instance with the details of how
-    to perform the scroll operation or @code{nil} to scroll into the list view.}
+  @argument[scroll]{an optional @class{gtk:scroll-info} instance for the details
+    of how to perform the scroll operation or the default @code{nil} value to
+    scroll into view}
   @begin{short}
     Scrolls to the item at the given position and performs the actions
-    specified in flags.
+    specified in @arg{flags}.
   @end{short}
   This function works no matter if the list view is shown or focused. If it
   is not, then the changes will take effect once that happens.
@@ -677,10 +688,7 @@ lambda (listview position)    :run-last
   @see-class{gtk:list-view}
   @see-class{gtk:scroll-info}
   @see-symbol{gtk:list-scroll-flags}"
-  (listview (g:object list-view))
-  (pos :uint)
-  (flags list-scroll-flags)
-  (scroll (g:boxed scroll-info)))
+  (%list-view-scroll-to listview pos flags scroll))
 
 #+gtk-4-12
 (export 'list-view-scroll-to)

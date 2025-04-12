@@ -341,12 +341,12 @@
 (setf (liber:alias-for-function 'list-item-position)
       "Accessor"
       (documentation 'list-item-position 'function)
- "@version{2025-3-15}
+ "@version{2025-4-11}
   @syntax{(gtk:list-item-position object) => position}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[position]{an unsigned integer for the position of the item.}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{item} slot of the
+    Accessor of the @slot[gtk:list-item]{position} slot of the
     @class{gtk:list-item} class.
   @end{short}
   Gets the position in the model that @arg{object} currently displays. If
@@ -367,11 +367,11 @@
 (setf (liber:alias-for-function 'list-item-selectable)
       "Accessor"
       (documentation 'list-item-selectable 'function)
- "@version{2025-3-15}
+ "@version{2025-4-11}
   @syntax{(gtk:list-item-selectable object) => selectable}
   @syntax{(setf (gtk:list-item-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-item} object}
-  @argument[selectable]{a boolean whether the item should b selectable}
+  @argument[selectable]{a boolean whether the item should be selectable}
   @begin{short}
     Accessor of the @slot[gtk:list-item]{selectable} slot of the
     @class{gtk:list-item} class.

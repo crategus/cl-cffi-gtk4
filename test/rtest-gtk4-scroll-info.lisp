@@ -31,13 +31,13 @@
 
 (test gtk-scroll-info-enable-horizontal/vertical
   (let ((scrollinfo (gtk:scroll-info-new)))
-    ;;gtk:scroll-info-enable-horizontal
+    ;; gtk:scroll-info-enable-horizontal
     (is-true (gtk:scroll-info-enable-horizontal scrollinfo))
     (is-false (setf (gtk:scroll-info-enable-horizontal scrollinfo) nil))
     (is-false (gtk:scroll-info-enable-horizontal scrollinfo))
-    ;;gtk:scroll-info-enable-vertical
+    ;; gtk:scroll-info-enable-vertical
     (is-true (gtk:scroll-info-enable-vertical scrollinfo))
     (is-false (setf (gtk:scroll-info-enable-vertical scrollinfo) nil))
     (is-false (gtk:scroll-info-enable-vertical scrollinfo))))
 
-;;; 2024-7-4
+;;; 2025-4-7

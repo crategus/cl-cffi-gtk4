@@ -68,20 +68,17 @@
 
   The @class{gtk:list-item-factory} object is tasked with creating widgets for
   items taken from the model when the views need them and updating them as the
-  items displayed by the view change.
-
-  A view is usually only able to display anything after both a factory and a
-  model have been set on the view. So it is important that you do not skip this
-  step when setting up your first view.
+  items displayed by the view change. A view is usually only able to display
+  anything after both a factory and a model have been set on the view. So it is
+  important that you do not skip this step when setting up your first view.
 
   Because views do not display the whole list at once but only a few items,
   they only need to maintain a few widgets at a time. They will instruct the
   @class{gtk:list-item-factory} object to create these widgets and bind them to
   the items that are currently displayed. As the list model changes or the user
   scrolls to the list, the items will change and the view will instruct the
-  factory to bind the widgets to those new items.
-
-  The actual widgets used for displaying those widgets is provided by you.
+  factory to bind the widgets to those new items. The actual widgets used for
+  displaying those widgets is provided by you.
 
   When the factory needs widgets created, it will create a @class{gtk:list-item}
   and hand it to your code to set up a widget for. This list item will provide

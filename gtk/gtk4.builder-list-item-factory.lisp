@@ -80,7 +80,7 @@
 
 #+liber-documentation
 (setf (documentation 'builder-list-item-factory 'type)
- "@version{2025-3-16}
+ "@version{2025-4-11}
   @begin{short}
     The @class{gtk:builder-list-item-factory} object is a
     @class{gtk:list-item-factory} object that creates widgets by instantiating
@@ -88,8 +88,8 @@
   @end{short}
 
   The templates must be extending the @class{gtk:list-item} object, and
-  typically use the @class{gtk:expression} instances to obtain data from the
-  items in the model.
+  typically use @class{gtk:expression} instances to obtain data from the items
+  in the model.
   @begin[Examples]{dictionary}
     @begin{pre}
 <interface>
@@ -133,9 +133,8 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-bytes)
       "Accessor"
       (documentation 'builder-list-item-factory-bytes 'function)
- "@version{2025-3-16}
+ "@version{2025-4-11}
   @syntax{(gtk:builder-list-item-factory-bytes object) => bytes}
-  @syntax{(setf (gtk:builder-list-item-factory-bytes object) bytes)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[bytes]{a @class{g:bytes} instance for the @class{gtk:builder} data}
   @begin{short}
@@ -162,9 +161,8 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-resource)
       "Accessor"
       (documentation 'builder-list-item-factory-resource 'function)
- "@version{2025-3-16}
+ "@version{2025-4-11}
   @syntax{(gtk:builder-list-item-factory-resource object) => resource}
-  @syntax{(setf (gtk:builder-list-item-factory-resource object) resource)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a string for the path to the resource or @code{nil}
     if none}
@@ -189,9 +187,8 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-scope)
       "Accessor"
       (documentation 'builder-list-item-factory-scope 'function)
- "@version{2025-3-16}
+ "@version{2025-4-11}
   @syntax{(gtk:builder-list-item-factory-scope object) => scope}
-  @syntax{(setf (gtk:builder-list-item-factory-scope object) scope)}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a @class{gtk:builder-scope} object used when
     constructing list items}

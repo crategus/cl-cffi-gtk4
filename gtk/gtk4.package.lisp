@@ -368,19 +368,16 @@
     @begin[List Widget Overview]{subsection}
       GTK provides powerful widgets to display and edit lists of data. This
       document gives an overview over the concepts and how they work together
-      to allow developers to implement lists.
-
-      Lists are intended to be used whenever developers want to display many
-      objects in roughly the same way.
+      to allow developers to implement lists. Lists are intended to be used
+      whenever developers want to display many objects in roughly the same way.
 
       Lists are perfectly fine to be used for very short list of only 2 or 3
       elements, but generally scale to millions of items. Of course, the larger
       the list grows, the more care needs to be taken to choose the right data
-      structures to keep things running well.
-
-      Lists are meant to be used with changing data, both with the items itself
-      changing as well as the list adding and removing items. Of course, they
-      work just as well with static data.
+      structures to keep things running well. Lists are meant to be used with
+      changing data, both with the items itself changing as well as the list
+      adding and removing items. Of course, they work just as well with static
+      data.
 
       @subheading{Terminology}
       These terms are used throughout the documentation when talking about lists
@@ -411,12 +408,10 @@
       multiple different models at once.
 
       The elements in a model are called items. All items are @class{g:object}
-      instances.
-
-      Every item in a model has a position which is the unsigned integer that
-      describes where in the model the item is located. The first item in a
-      model is at position 0. The position of an item can change as other items
-      are added or removed from the model.
+      instances. Every item in a model has a position which is the unsigned
+      integer that describes where in the model the item is located. The first
+      item in a model is at position 0. The position of an item can change as
+      other items are added or removed from the model.
 
       It is important to be aware of the difference between items and positions
       because the mapping from position to item is not permanent, so developers
@@ -428,14 +423,14 @@
       @class{gtk:list-item-factory} implementation that takes care of mapping
       the items of the model to widgets that can be shown in the view.
 
-      The way factories do this is by creating a listitem for each item that is
+      The way factories do this is by creating a list item for each item that is
       currently in use. List items are always @class{gtk:list-item} instances.
       They are only ever created by GTK and provide information about what item
       they are meant to display.
 
       Different factory implementations use various different methods to allow
-      developers to add the right widgets to listitems and to link those widgets
-      with the item managed by the listitem. Finding a suitable factory
+      developers to add the right widgets to list items and to link those
+      widgets with the item managed by the list item. Finding a suitable factory
       implementation for the data displayed, the programming language and
       development environment is an important task that can simplify setting up
       the view tremendously.
@@ -449,18 +444,18 @@
       provided for this purposes, such as the @class{gtk:no-selection} or
       @class{gtk:single-selection} models.
 
-      The behavior of selection models - ie which items they allow selecting and
-      what effect this has on other items - is completely up to the selection
-      model. As such, single-selections, multi-selections or sharing selection
-      state between different selection models and/or views is possible. The
-      selection state of an item is exposed in the listitem via the
-      @slot[gtk:list-item]{selected} property.
+      The behavior of selection models - that is, which items they allow
+      selecting and what effect this has on other items - is completely up to
+      the selection model. As such, single-selections, multi-selections or
+      sharing selection state between different selection models and/or views
+      is possible. The selection state of an item is exposed in the list item
+      via the @slot[gtk:list-item]{selected} property.
 
-      Views and listitems also support activation. Activation means that double
+      Views and list items also support activation. Activation means that double
       clicking or pressing enter while inside a focused row will cause the view
       to emit a signal such as the @code{GtkListView::activate} signal. This
       provides an easy way to set up lists, but can also be turned off on
-      listitems if undesired.
+      list items if undesired.
 
       Both selections and activation are supported among other things via
       widget actions. This allows developers to add widgets to their lists that
@@ -472,14 +467,14 @@
       While it is not a problem for short lists to instantiate widgets for every
       item in the model, once lists grow to thousands or millions of elements,
       this gets less feasible. Because of this, the views only create a limited
-      amount of listitems and recycle them by binding them to new items. In
-      general, views try to keep listitems available only for the items that
+      amount of list items and recycle them by binding them to new items. In
+      general, views try to keep list items available only for the items that
       can actually be seen on screen.
 
       While this behavior allows views to scale effortlessly to huge lists, it
       has a few implications for what can be done with views. For example, it is
-      not possible to query a view for a listitem used for a certain position -
-      there might not be one and even if there is, that listitem might soon be
+      not possible to query a view for a list item used for a certain position -
+      there might not be one and even if there is, that list item might soon be
       recycled for a new position.
 
       It is also important that developers save state they care about in the
@@ -494,7 +489,7 @@
       Of course, if you are only using models with few items, this is not
       important and you can treat views like any other widget. But if you use
       large lists and your performance suffers, you should be aware of this.
-      Views also allow tuning the number of listitems they create such as with
+      Views also allow tuning the number of list items they create such as with
       the @fun{gtk:grid-view-max-columns} function, and developers running into
       performance problems should definitely study the tradeoffs of those and
       experiment with them.
@@ -519,18 +514,14 @@
       would otherwise use @code{char*[@]} and works best if the dataset is not
       very dynamic.
 
-      The @class{gtk:directory-list} object is a list model that wraps
-      @code{g_file_enumerate_children_async()}. It presents a
+      The @class{gtk:directory-list} object is a list model that wraps the
+      @code{g_file_enumerate_children_async()} function. It presents a
       @class{g:list-model} object and fills it asynchronously with the
       @code{GFiles} returned from that function.
 
       If these models do not fit your use case or scalability requirements, you
       should make a custom @class{g:list-model} implementation. It is a small
       interface and not very hard to implement.
-
-      For asymptotic performance comparisons between tree- and array-based
-      implementations, see this
-      @url[https://en.wikipedia.org/wiki/Dynamic_array#Performance]{article}.
 
       @subheading{Displaying trees}
       While the @class{gtk:tree-view} widget provided built-in support for
@@ -542,18 +533,16 @@
       However, GTK provides functionality to make lists look and behave like
       trees for use cases that require trees. This is achieved by using the
       @class{gtk:tree-list-model} model to flatten a tree into a list. The
-      @class{gtk:tree-expander} widget can then be used inside a listitem to
+      @class{gtk:tree-expander} widget can then be used inside a list item to
       allow users to expand and collapse rows and provide a similar experience
-      to the @class{gtk:tree-view} widget.
-
-      Developers should refer to those objects’ API reference for more
-      discussion on the topic.
+      to the @class{gtk:tree-view} widget. Developers should refer to those
+      objects’ API reference for more discussion on the topic.
 
       @subheading{List styles}
       One of the advantages of the new list widgets over GtkTreeView and cell
       renderers is that they are styleable using GTK CSS. This provides a lot of
       flexibility. The themes that ship with GTK provide a few predefined list
-      styles that can be used in many situations:
+      styles that can be used in many situations.
 
       @image[rich-list]{Figure: Rich list}
 
@@ -570,7 +559,7 @@
       @image[data-table]{Figure: Data table}
 
       The data table style of list is a high density table, similar in style to
-      a traditional treeview. Individual cells can be selectable and editable.
+      a traditional tree view. Individual cells can be selectable and editable.
       Use the @code{.data-table} style class.
 
       @subheading{Sections}
@@ -589,7 +578,6 @@
 
       This new approach tries to provide roughly the same functionality as the
       old approach but often uses a very different way to achieve these goals.
-
       The main difference and one of the primary reasons for this new
       development is that items can be displayed using regular widgets and the
       separate cell renderer machinery is no longer necessary. This allows all
@@ -610,7 +598,7 @@
       refer to the contents of a row in the model directly by keeping the item,
       while the @class{gtk:tree-row-reference} implementation was a very slow
       mechanism to achieve the same. And because the items are real objects,
-      developers can make them emit change signals causing listitems and their
+      developers can make them emit change signals causing list items and their
       children to update, which was not possible with the @class{gtk:tree-model}
       implementation.
 

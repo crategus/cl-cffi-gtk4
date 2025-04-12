@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.scroll-info.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -34,8 +34,8 @@
 ;;; Functions
 ;;;
 ;;;     gtk_scroll_info_new
-;;;     gtk_scroll_info_ref
-;;;     gtk_scroll_info_unref
+;;;     gtk_scroll_info_ref                                 not needed
+;;;     gtk_scroll_info_unref                               not needed
 ;;;     gtk_scroll_info_get_enable_horizontal
 ;;;     gtk_scroll_info_set_enable_horizontal
 ;;;     gtk_scroll_info_get_enable_vertical
@@ -59,13 +59,20 @@
 (setf (liber:alias-for-class 'scroll-info)
       "GBoxed"
       (documentation 'scroll-info 'type)
- "@version{2023-11-16}
+ "@version{2025-4-7}
+  @begin{declaration}
+(glib:define-gboxed-opaque scroll-info \"GtkScrollInfo\"
+  :export t
+  :type-initializer \"gtk_scroll_info_get_type\"
+  :alloc (%scroll-info-new))
+  @end{declaration}
   @begin{short}
     The @class{gtk:scroll-info} structure can be used to provide more accurate
     data on how a scroll operation should be performed.
   @end{short}
-  Scrolling functions usually allow passing a @code{nil} scroll info which will
-  cause the default values to be used and just scroll the element into view.
+  Scrolling functions usually allow passing a @code{nil} value for the scroll
+  info which will cause the default values to be used and just scroll the item
+  into view.
 
   Since 4.12
   @see-constructor{gtk:scroll-info-new}
@@ -78,10 +85,10 @@
 
 (defun scroll-info-new ()
  #+liber-documentation
- "@version{2023-11-16}
+ "@version{2025-4-7}
   @return{The new @class{gtk:scroll-info} instance.}
   @begin{short}
-    Creates a new scroll info for scrolling an element into view.
+    Creates a new scroll info for scrolling an item into view.
   @end{short}
 
   Since 4.12
@@ -93,24 +100,12 @@
 (export 'scroll-info-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scroll_info_ref
-;;;
-;;; Increases the reference count of a GtkScrollInfo by one.
-;;;
-;;; Since 4.12
+;;; gtk_scroll_info_ref                                     not needed
 ;;; ----------------------------------------------------------------------------
 
-;; not needed
-
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scroll_info_unref
-;;;
-;;; Decreases the reference count of a GtkScrollInfo by one.
-;;;
-;;; Since 4.12
+;;; gtk_scroll_info_unref                                   not needed
 ;;; ----------------------------------------------------------------------------
-
-;; not needed
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scroll_info_get_enable_horizontal
@@ -127,7 +122,7 @@
 (cffi:defcfun ("gtk_scroll_info_get_enable_horizontal"
                scroll-info-enable-horizontal) :boolean
  #+liber-documentation
- "@version{2023-11-16}
+ "@version{2025-4-7}
   @syntax{(gtk:scroll-info-enable-horizontal scrollinfo) => enable}
   @syntax{(setf (gtk:scroll-info-enable-horizontal scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}
@@ -159,7 +154,7 @@
 (cffi:defcfun ("gtk_scroll_info_get_enable_vertical"
                scroll-info-enable-vertical) :boolean
  #+liber-documentation
- "@version{2023-11-16}
+ "@version{2025-4-7}
   @syntax{(gtk:scroll-info-enable-vertical scrollinfo) => enable}
   @syntax{(setf (gtk:scroll-info-enable-vertical scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}

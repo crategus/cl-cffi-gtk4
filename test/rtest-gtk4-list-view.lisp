@@ -127,13 +127,6 @@
   (is (eq (g:gtype "GtkListBase")
           (g:type-parent "GtkListView")))
   ;; Check children
-  #-windows
-  (if *first-run-gtk-test*
-      (is (equal '()
-                 (glib-test:list-children "GtkListView")))
-      (is (equal '("GtkColumnListView")
-                 (glib-test:list-children "GtkListView"))))
-  #+windows
   (if *first-run-gtk-test*
       (is (equal '()
                  (glib-test:list-children "GtkListView")))
@@ -178,6 +171,19 @@
                         "tab-behavior" "GtkListTabBehavior" T T)))
              (gobject:get-gtype-definition "GtkListView"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+(test gtk-list-view-signals
+  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkListView"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkListView" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("guint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Properties (GtkListView) -----------------------------------------------
 
 (test gtk-list-view-properties.1
@@ -202,19 +208,6 @@
     (is-false (gtk:list-view-single-click-activate listview))
     (is (eq :all (gtk:list-view-tab-behavior listview)))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-(test gtk-list-view-signals
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkListView"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkListView" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("guint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_list_view_new
@@ -229,19 +222,16 @@
                                 (gtk:signal-list-item-factory-new))
              'gtk:list-view)))
 
-;;;     gtk_list_view_scroll_to                            Since 4.12
+;;;     gtk_list_view_scroll_to                             Since 4.12
 
 (test gtk-list-view-scroll-to
   (let ((listview (create-list-view-for-testsuite)))
-
     (g:signal-connect listview "activate"
         (lambda (listview pos)
           (format t "~&in ACTIVATE signal handler~%")
           (format t "   listview : ~a~%" listview)
           (format t "        pos : ~a~%" pos)))
-
     (gtk:list-view-scroll-to listview 1 :select nil)
-
 ))
 
-;;; 2024-9-19
+;;; 2025-4-8

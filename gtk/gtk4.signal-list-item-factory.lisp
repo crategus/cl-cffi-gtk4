@@ -68,11 +68,11 @@
 
 #+liber-documentation
 (setf (documentation 'signal-list-item-factory 'type)
- "@version{2025-3-16}
+ "@version{2025-4-11}
   @begin{short}
     The @class{gtk:signal-list-item-factory} object is a
-    @class{gtk:list-item-factory} object that emits signals to to manage
-    list items.
+    @class{gtk:list-item-factory} object that emits signals to manage list
+    items.
   @end{short}
 
   Signals are emitted for every list item in the same order:

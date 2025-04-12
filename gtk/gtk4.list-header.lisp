@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.list-header.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,15 +83,16 @@
 
 #+liber-documentation
 (setf (documentation 'list-header 'type)
- "@version{2023-11-27}
+ "@version{2025-4-7}
   @begin{short}
     The @class{gtk:list-header} object is used by list widgets to represent the
     headers they display.
   @end{short}
 
   The @class{gtk:list-header} objects are managed just like
-  @class{gtk:list-item} objects via their factory, but provide a different set
-  of properties suitable for managing the header instead of individual items.
+  @class{gtk:list-item} objects through their factory, but provide a different
+  set of properties suitable for managing the header instead of individual
+  items.
 
   Since 4.12
   @see-slot{gtk:list-header-child}
@@ -110,13 +111,13 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'list-header) t)
  "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
-  Widget used for display.")
+  The widget used for display.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-header-child)
       "Accessor"
       (documentation 'list-header-child 'function)
- "@version{2023-11-27}
+ "@version{2025-4-11}
   @syntax{(gtk:list-header-child object) => child}
   @syntax{(setf (gtk:list-header-child object) child)}
   @argument[object]{a @class{gtk:list-header} object}
@@ -127,7 +128,7 @@
   @end{short}
   The @fun{gtk:list-header-child} function gets the child widget previously set
   or @code{nil} if none was set. The @setf{gtk:list-header-child} function sets
-  the child widget to be used for this listitem.
+  the child widget to be used for this list item.
 
   This function is typically called by applications when setting up a header so
   that the widget can be reused when binding it multiple times.
@@ -147,10 +148,10 @@
 (setf (liber:alias-for-function 'list-header-end)
       "Accessor"
       (documentation 'list-header-end 'function)
- "@version{2023-11-27}
+ "@version{2025-4-7}
   @syntax{(gtk:list-header-end object) => end}
   @argument[object]{a @class{gtk:list-header} object}
-  @argument[end]{an unsigned integer with the end position of the section}
+  @argument[end]{an unsigned integer for the end position of the section}
   @begin{short}
     Accessor of the @slot[gtk:list-header]{end} slot of the
     @class{gtk:list-header} class.
@@ -174,10 +175,10 @@
 (setf (liber:alias-for-function 'list-header-item)
       "Accessor"
       (documentation 'list-header-item 'function)
- "@version{2023-11-27}
+ "@version{2025-4-7}
   @syntax{(gtk:list-header-item object) => item}
   @argument[object]{a @class{gtk:list-header} object}
-  @argument[item]{a @class{g:object} instance with the item displayed}
+  @argument[item]{a @class{g:object} instance for the item displayed}
   @begin{short}
     Accessor of the @slot[gtk:list-header]{item} slot of the
     @class{gtk:list-header} class.
@@ -197,16 +198,16 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "n-items" 'list-header) t)
  "The @code{n-items} property of type @code{guint} (Read) @br{}
-  Number of items in the section.")
+  The number of items in the section.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-header-n-items)
       "Accessor"
       (documentation 'list-header-n-items 'function)
- "@version{2023-11-27}
+ "@version{2025-4-7}
   @syntax{(gtk:list-header-n-items object) => n-items}
   @argument[object]{a @class{gtk:list-header} object}
-  @argument[n-items]{an unsigned integer with the number of items in the
+  @argument[n-items]{an unsigned integer for the number of items in the
     section}
   @begin{short}
     Accessor of the @slot[gtk:list-header]{n-items} slot of the
@@ -231,10 +232,10 @@
 (setf (liber:alias-for-function 'list-header-start)
       "Accessor"
       (documentation 'list-header-start 'function)
- "@version{2023-11-27}
+ "@version{2025-4-7}
   @syntax{(gtk:list-header-start object) => start}
   @argument[object]{a @class{gtk:list-header} object}
-  @argument[start]{an unsigned integer with the start position of the section}
+  @argument[start]{an unsigned integer for the start position of the section}
   @begin{short}
     Accessor of the @slot[gtk:list-header]{start} slot of the
     @class{gtk:list-header} class.

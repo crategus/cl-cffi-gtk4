@@ -44,13 +44,14 @@ GListModel support
 
 List-based Widgets
 
-  gtk4.list-item.lisp                  GtkListItem                    GTK 4.18 .
-  gtk4.list-item-factory.lisp          GtkListItemFactory             GTK 4.18 .
-  gtk4.signal-list-item-factory.lisp   GtkSignalListItemFactory       GTK 4.18 .
-  gtk4.builder-list-item-factory.lisp  GtkBuilderListItemFactory      GTK 4.18 .
-  gtk4.scroll-info.lisp                GtkScrollInfo                  GTK 4.16 +
-  gtk4.list-view.lisp                  GtkListView                    GTK 4.16 +
-  gtk4.grid-view.lisp                  GtkGridView                    GTK 4.16 .
+  gtk4.list-item.lisp                  GtkListItem                    GTK 4.18
+  gtk4.list-item-factory.lisp          GtkListItemFactory             GTK 4.18
+  gtk4.signal-list-item-factory.lisp   GtkSignalListItemFactory       GTK 4.18
+  gtk4.builder-list-item-factory.lisp  GtkBuilderListItemFactory      GTK 4.18
+  gtk4.scroll-info.lisp                GtkScrollInfo                  GTK 4.18
+  gtk4.list-header.lisp                GtkListHeader                  GTK 4.18
+  gtk4.list-view.lisp                  GtkListView                    GTK 4.18
+  gtk4.grid-view.lisp                  GtkGridView                    GTK 4.18
   gtk4.column-view.lisp                GtkColumnView                  GTK 4.16 +
   gtk4.column-view-column.lisp         GtkColumnViewColumn            GTK 4.16 +
   gtk4.column-view-sorter.lisp         GtkColumnViewSorter            GTK 4.16 .
@@ -201,7 +202,7 @@ Scrolling
   gtk4.scrollable.lisp                 GtkScrollable                  GTk 4.16 .
   gtk4.scrollbar.lisp                  GtkScrollbar                   GTK 4.16 .
   gtk4.scrolled-window.lisp            GtkScrolledWindow              GTK 4.16 .
-  gtk4.viewport.lisp                   GtkViewport                    GTK 4.16 .
+  gtk4.viewport.lisp                   GtkViewport                    GTK 4.18 .
 
 Printing
 
@@ -389,4 +390,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2025-2-28
+2025-4-7
