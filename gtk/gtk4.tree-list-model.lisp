@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-list-model.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -89,9 +89,9 @@
 ;;; Properties
 ;;;
 ;;;     autoexpand
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;     passthrough
 ;;;
 ;;; Hierarchy
@@ -201,10 +201,10 @@
 (setf (liber:alias-for-function 'tree-list-row-depth)
       "Accessor"
       (documentation 'tree-list-row-depth 'function)
- "@version{2024-10-17}
+ "@version{2025-4-16}
   @syntax{(gtk:tree-list-row-depth object) => depth}
   @argument[object]{a @class{gtk:tree-list-row} object}
-  @argument[depth]{an unsigned integer with the depth of the row}
+  @argument[depth]{an unsigned integer for the depth of the row}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-row]{depth} slot of the
     @class{gtk:tree-list-row} class.
@@ -275,10 +275,10 @@
 (setf (liber:alias-for-function 'tree-list-row-item)
       "Accessor"
       (documentation 'tree-list-row-item 'function)
- "@version{2024-10-29}
+ "@version{2025-4-16}
   @syntax{(gtk:tree-list-row-item object) => item}
   @argument[object]{a @class{gtk:tree-list-row} object}
-  @argument[item]{a @class{g:object} instance with the item held in this
+  @argument[item]{a @class{g:object} instance for the item held in this
     list row}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-row]{item} slot of the
@@ -295,9 +295,9 @@
 (cffi:defcfun ("gtk_tree_list_row_get_child_row" tree-list-row-child-row)
     (g:object tree-list-row :return)
  #+liber-documentation
- "@version{#2024-10-29}
+ "@version{#2025-4-16}
   @argument[listrow]{a @class{gtk:tree-list-row} object}
-  @argument[pos]{an unsigned integer with the position of the child to get}
+  @argument[pos]{an unsigned integer for the position of the child to get}
   @return{The @class{gtk:tree-list-row} object with the child in @arg{pos}.}
   @begin{short}
     If @arg{listrow} is not expanded or @arg{pos} is greater than the number of
@@ -401,7 +401,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-list-model 'type)
- "@version{2024-10-17}
+ "@version{2025-4-16}
   @begin{short}
     The @class{gtk:tree-list-model} object is a list model that can create
     child models on demand.
@@ -422,7 +422,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "autoexpand" 'tree-list-model) t)
  "The @code{autoexpand} property of type @code{:boolean} (Read / Write) @br{}
-  If all rows should be expanded by default. @br{}
+  Whether all rows should be expanded by default. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -515,10 +515,10 @@
 (setf (liber:alias-for-function 'tree-list-model-n-items)
       "Accessor"
       (documentation 'tree-list-model-n-items 'function)
- "@version{2024-10-17}
+ "@version{2025-4-16}
   @syntax{(gtk:tree-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:tree-list-model} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-model]{n-items} slot of the
@@ -645,9 +645,9 @@
 (cffi:defcfun ("gtk_tree_list_model_get_row" tree-list-model-row)
     (g:object tree-list-row)
  #+liber-documentation
- "@version{#2023-9-24}
+ "@version{#2025-4-16}
   @argument[model]{a @class{gtk:tree-list-model} object}
-  @argument[position]{an unsigned integer with the position of the row to fetch}
+  @argument[position]{an unsigned integer for the position of the row to fetch}
   @return{The @class{gtk:tree-list-row} object with the row item.}
   @begin{short}
     Gets the row object for the given row.
@@ -678,9 +678,9 @@
 (cffi:defcfun ("gtk_tree_list_model_get_child_row" tree-list-model-child-row)
     (g:object tree-list-row)
  #+liber-documentation
- "@version{#2023-9-24}
+ "@version{#2025-4-16}
   @argument[model]{a @class{gtk:tree-list-model} object}
-  @argument[position]{an unsigned integer with the position of the child to get}
+  @argument[position]{an unsigned integer for the position of the child to get}
   @return{The @class{gtk:tree-list-row} object with the child in
     @arg{position}.}
   @begin{short}

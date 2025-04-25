@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-list-row-sorter.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-list-row-sorter 'type)
- "@version{#2023-9-10}
+ "@version{2025-4-16}
   @begin{short}
     The @class{gtk:tree-list-row-sorter} object is a special-purpose sorter that
     will apply a given sorter to the levels in a tree, while respecting the tree
@@ -80,7 +80,7 @@
   @end{short}
   @begin[Examples]{dictionary}
   Here is an example for setting up a column view with a tree model and a
-  @class{gtk:tree-list-sorter} object:
+  @class{gtk:tree-list-row-sorter} object:
   @begin{pre}
 column_sorter = gtk_column_view_get_sorter (view);
 sorter = gtk_tree_list_row_sorter_new (g_object_ref (column_sorter));
@@ -109,7 +109,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 (setf (liber:alias-for-function 'tree-list-row-sorter-sorter)
       "Accessor"
       (documentation 'tree-list-row-sorter-sorter 'function)
- "@version{#2023-9-10}
+ "@version{2025-4-16}
   @syntax{(gtk:tree-list-row-sorter-sorter object) => sorter}
   @syntax{(setf (gtk:tree-list-row-sorter-sorter object) sorter)}
   @argument[object]{a @class{gtk:tree-list-row-sorter} object}
@@ -133,7 +133,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 
 (defun tree-list-row-sorter-new (sorter)
  #+liber-documentation
- "@version{#2023-9-26}
+ "@version{2025-4-16}
   @argument[sorter]{a @class{gtk:sorter} object}
   @return{The new @class{gtk:tree-list-row-sorter} object.}
   @begin{short}

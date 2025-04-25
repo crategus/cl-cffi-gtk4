@@ -33,18 +33,18 @@
              (glib-test:list-signals "GtkTreeListRow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeListRow" GTK:TREE-LIST-ROW
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_tree_list_row_get_type")
-                       ((CHILDREN TREE-LIST-ROW-CHILDREN "children"
-                         "GListModel" T NIL)
-                        (DEPTH TREE-LIST-ROW-DEPTH "depth" "guint" T NIL)
-                        (EXPANDABLE TREE-LIST-ROW-EXPANDABLE "expandable"
-                         "gboolean" T NIL)
-                        (EXPANDED TREE-LIST-ROW-EXPANDED "expanded" "gboolean"
-                         T T)
-                        (ITEM TREE-LIST-ROW-ITEM "item" "GObject" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_tree_list_row_get_type")
+                      ((CHILDREN TREE-LIST-ROW-CHILDREN "children"
+                        "GListModel" T NIL)
+                       (DEPTH TREE-LIST-ROW-DEPTH "depth" "guint" T NIL)
+                       (EXPANDABLE TREE-LIST-ROW-EXPANDABLE "expandable"
+                        "gboolean" T NIL)
+                       (EXPANDED TREE-LIST-ROW-EXPANDED "expanded" "gboolean"
+                        T T)
+                       (ITEM TREE-LIST-ROW-ITEM "item" "GObject" T NIL)))
              (gobject:get-gtype-definition "GtkTreeListRow"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -99,20 +99,20 @@
              (glib-test:list-signals "GtkTreeListModel")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkTreeListModel" GTK:TREE-LIST-MODEL
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GListModel")
-                        :TYPE-INITIALIZER "gtk_tree_list_model_get_type")
-                       ((AUTOEXPAND TREE-LIST-MODEL-AUTOEXPAND "autoexpand"
-                         "gboolean" T T)
-                        (ITEM-TYPE TREE-LIST-MODEL-ITEM-TYPE "item-type"
-                         "GType" T NIL)
-                        (MODEL TREE-LIST-MODEL-MODEL "model" "GListModel" T
-                         NIL)
-                        (N-ITEMS TREE-LIST-MODEL-N-ITEMS "n-items" "guint" T
-                         NIL)
-                        (PASSTHROUGH TREE-LIST-MODEL-PASSTHROUGH "passthrough"
-                         "gboolean" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GListModel")
+                       :TYPE-INITIALIZER "gtk_tree_list_model_get_type")
+                      ((AUTOEXPAND TREE-LIST-MODEL-AUTOEXPAND "autoexpand"
+                        "gboolean" T T)
+                       (ITEM-TYPE TREE-LIST-MODEL-ITEM-TYPE "item-type"
+                        "GType" T NIL)
+                       (MODEL TREE-LIST-MODEL-MODEL "model" "GListModel" T
+                        NIL)
+                       (N-ITEMS TREE-LIST-MODEL-N-ITEMS "n-items" "guint" T
+                        NIL)
+                       (PASSTHROUGH TREE-LIST-MODEL-PASSTHROUGH "passthrough"
+                        "gboolean" T NIL)))
              (gobject:get-gtype-definition "GtkTreeListModel"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -133,4 +133,4 @@
 ;;;     gtk_tree_list_model_get_row
 ;;;     gtk_tree_list_model_get_child_row
 
-;;; 2024-10-17
+;;; 2025-4-16
