@@ -285,7 +285,7 @@
 (setf (liber:alias-for-function 'single-selection-n-items)
       "Accessor"
       (documentation 'single-selection-n-items 'function)
- "@version{2025-3-17}
+ "@version{2025-4-18}
   @syntax{(gtk:single-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -294,7 +294,7 @@
     Accessor of the @slot[gtk:single-selection]{n-items} slot of the
     @class{gtk:single-selection} class.
   @end{short}
-  @see-class{g:single-selection}
+  @see-class{gtk:single-selection}
   @see-function{g:list-model-n-items}")
 
 ;;; --- gtk:single-selection-selected ------------------------------------------
