@@ -51,7 +51,10 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-column-view-cell-properties
-  (let ((cell (make-instance 'gtk:column-view-cell)))
+  (glib-test:with-check-memory (cell)
+    (is (typep (setf cell
+                     (make-instance 'gtk:column-view-cell))
+               'gtk:column-view-cell))
     (is-false (gtk:column-view-cell-child cell))
     (is-false (gtk:column-view-cell-focusable cell))
     (is-false (gtk:column-view-cell-item cell))
@@ -59,5 +62,4 @@
            (gtk:column-view-cell-position cell)))
     (is-false (gtk:column-view-cell-selected cell))))
 
-;;; 2024-9-19
-
+;;; 2025-4-13

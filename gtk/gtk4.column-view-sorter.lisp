@@ -103,12 +103,12 @@
     To restore a saved sort configuration on a @class{gtk:column-view} widget,
     use code like:
     @begin{pre}
-sorter = gtk_column_view_get_sorter (view);
-for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
-  {
-    column = gtk_column_view_sorter_get_nth_sort_column (sorter, i, &order);
-    gtk_column_view_sort_by_column (view, column, order);
-  @}
+(let ((sorter (gtk:column-view-sorter view)))
+  (dotimes (pos (gtk:column-view-sorter-n-sort-columns sorter))
+    (multiple-value-bind (column order)
+        (gtk:column-view-sorter-nth-sort-column sorter pos)
+      (gtk:column-view-sort-by-column view column order)
+      ... )))
     @end{pre}
   @end{dictionary}
   @see-slot{gtk:column-view-sorter-primary-sort-column}

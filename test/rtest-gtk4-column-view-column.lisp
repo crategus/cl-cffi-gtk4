@@ -35,35 +35,38 @@
              (glib-test:list-signals "GtkColumnViewColumn")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColumnViewColumn" GTK:COLUMN-VIEW-COLUMN
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_column_view_column_get_type")
-                       ((COLUMN-VIEW COLUMN-VIEW-COLUMN-COLUMN-VIEW
-                         "column-view" "GtkColumnView" T NIL)
-                        (EXPAND COLUMN-VIEW-COLUMN-EXPAND
-                         "expand" "gboolean" T T)
-                        (FACTORY COLUMN-VIEW-COLUMN-FACTORY
-                         "factory" "GtkListItemFactory" T T)
-                        (FIXED-WIDTH COLUMN-VIEW-COLUMN-FIXED-WIDTH
-                         "fixed-width" "gint" T T)
-                        (HEADER-MENU COLUMN-VIEW-COLUMN-HEADER-MENU
-                         "header-menu" "GMenuModel" T T)
-                        (ID COLUMN-VIEW-COLUMN-ID "id" "gchararray" T T)
-                        (RESIZABLE COLUMN-VIEW-COLUMN-RESIZABLE
-                         "resizable" "gboolean" T T)
-                        (SORTER COLUMN-VIEW-COLUMN-SORTER
-                         "sorter" "GtkSorter" T T)
-                        (TITLE COLUMN-VIEW-COLUMN-TITLE
-                         "title" "gchararray" T T)
-                        (VISIBLE COLUMN-VIEW-COLUMN-VISIBLE
-                         "visible" "gboolean" T T)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_column_view_column_get_type")
+                      ((COLUMN-VIEW COLUMN-VIEW-COLUMN-COLUMN-VIEW
+                        "column-view" "GtkColumnView" T NIL)
+                       (EXPAND COLUMN-VIEW-COLUMN-EXPAND
+                        "expand" "gboolean" T T)
+                       (FACTORY COLUMN-VIEW-COLUMN-FACTORY
+                        "factory" "GtkListItemFactory" T T)
+                       (FIXED-WIDTH COLUMN-VIEW-COLUMN-FIXED-WIDTH
+                        "fixed-width" "gint" T T)
+                       (HEADER-MENU COLUMN-VIEW-COLUMN-HEADER-MENU
+                        "header-menu" "GMenuModel" T T)
+                       (ID COLUMN-VIEW-COLUMN-ID "id" "gchararray" T T)
+                       (RESIZABLE COLUMN-VIEW-COLUMN-RESIZABLE
+                        "resizable" "gboolean" T T)
+                       (SORTER COLUMN-VIEW-COLUMN-SORTER
+                        "sorter" "GtkSorter" T T)
+                       (TITLE COLUMN-VIEW-COLUMN-TITLE
+                        "title" "gchararray" T T)
+                       (VISIBLE COLUMN-VIEW-COLUMN-VISIBLE
+                        "visible" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkColumnViewColumn"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-column-view-column-properties
-  (let ((column (make-instance 'gtk:column-view-column)))
+  (glib-test:with-check-memory (column)
+    (is (typep (setf column
+                     (make-instance 'gtk:column-view-column))
+               'gtk:column-view-column))
     (is-false (gtk:column-view-column-column-view column))
     (is-false (gtk:column-view-column-expand column))
     (is-false (gtk:column-view-column-factory column))
@@ -80,8 +83,8 @@
 ;;;     gtk_column_view_column_new
 
 (test gtk-column-view-column-new
-  (let ((column nil)
-        (factory (gtk:signal-list-item-factory-new)))
+  (glib-test:with-check-memory (column factory)
+    (setf factory (gtk:signal-list-item-factory-new))
     (is (typep (setf column (gtk:column-view-column-new))
                'gtk:column-view-column))
     (is (typep (setf column (gtk:column-view-column-new "title"))
@@ -93,9 +96,7 @@
     (is (string= "title"
                  (gtk:column-view-column-title column)))
     (is (eq factory (gtk:column-view-column-factory column)))
-    ;; Check memory management
-    (is-false (setf (gtk:column-view-column-factory column) nil))
-    (is (= 1 (g:object-ref-count factory)))
-    (is (= 1 (g:object-ref-count column)))))
+    ;; Remove references
+    (is-false (setf (gtk:column-view-column-factory column) nil))))
 
-;;; 2024-11-28
+;;; 2025-4-13

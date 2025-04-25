@@ -44,35 +44,35 @@
           (gtk:widget-class-accessible-role "GtkColumnView")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColumnView" GTK:COLUMN-VIEW
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkScrollable")
-                        :TYPE-INITIALIZER "gtk_column_view_get_type")
-                       ((COLUMNS COLUMN-VIEW-COLUMNS "columns" "GListModel" T
-                         NIL)
-                        (ENABLE-RUBBERBAND COLUMN-VIEW-ENABLE-RUBBERBAND
-                         "enable-rubberband" "gboolean" T T)
-                        (HEADER-FACTORY COLUMN-VIEW-HEADER-FACTORY
-                         "header-factory" "GtkListItemFactory" T T)
-                        (MODEL COLUMN-VIEW-MODEL "model" "GtkSelectionModel" T
-                         T)
-                        (REORDERABLE COLUMN-VIEW-REORDERABLE "reorderable"
-                         "gboolean" T T)
-                        (ROW-FACTORY COLUMN-VIEW-ROW-FACTORY "row-factory"
-                         "GtkListItemFactory" T T)
-                        (SHOW-COLUMN-SEPARATORS
-                         COLUMN-VIEW-SHOW-COLUMN-SEPARATORS
-                         "show-column-separators" "gboolean" T T)
-                        (SHOW-ROW-SEPARATORS COLUMN-VIEW-SHOW-ROW-SEPARATORS
-                         "show-row-separators" "gboolean" T T)
-                        (SINGLE-CLICK-ACTIVATE
-                         COLUMN-VIEW-SINGLE-CLICK-ACTIVATE
-                         "single-click-activate" "gboolean" T T)
-                        (SORTER COLUMN-VIEW-SORTER "sorter" "GtkSorter" T NIL)
-                        (TAB-BEHAVIOR COLUMN-VIEW-TAB-BEHAVIOR "tab-behavior"
-                         "GtkListTabBehavior" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkScrollable")
+                       :TYPE-INITIALIZER "gtk_column_view_get_type")
+                      ((COLUMNS COLUMN-VIEW-COLUMNS "columns" "GListModel" T
+                        NIL)
+                       (ENABLE-RUBBERBAND COLUMN-VIEW-ENABLE-RUBBERBAND
+                        "enable-rubberband" "gboolean" T T)
+                       (HEADER-FACTORY COLUMN-VIEW-HEADER-FACTORY
+                        "header-factory" "GtkListItemFactory" T T)
+                       (MODEL COLUMN-VIEW-MODEL "model" "GtkSelectionModel" T
+                        T)
+                       (REORDERABLE COLUMN-VIEW-REORDERABLE "reorderable"
+                        "gboolean" T T)
+                       (ROW-FACTORY COLUMN-VIEW-ROW-FACTORY "row-factory"
+                        "GtkListItemFactory" T T)
+                       (SHOW-COLUMN-SEPARATORS
+                        COLUMN-VIEW-SHOW-COLUMN-SEPARATORS
+                        "show-column-separators" "gboolean" T T)
+                       (SHOW-ROW-SEPARATORS COLUMN-VIEW-SHOW-ROW-SEPARATORS
+                        "show-row-separators" "gboolean" T T)
+                       (SINGLE-CLICK-ACTIVATE
+                        COLUMN-VIEW-SINGLE-CLICK-ACTIVATE
+                        "single-click-activate" "gboolean" T T)
+                       (SORTER COLUMN-VIEW-SORTER "sorter" "GtkSorter" T NIL)
+                       (TAB-BEHAVIOR COLUMN-VIEW-TAB-BEHAVIOR "tab-behavior"
+                        "GtkListTabBehavior" T T)))
              (gobject:get-gtype-definition "GtkColumnView"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -99,18 +99,19 @@
 
 ;;;     columns
 ;;;     enable-rubberband
-;;;     header-factory                                     Since 4.12
+;;;     header-factory                                      Since 4.12
 ;;;     model
 ;;;     reorderable
-;;;     row-factory                                        Since 4.12
+;;;     row-factory                                         Since 4.12
 ;;;     show-column-separators
 ;;;     show-row-separators
 ;;;     single-click-activate
 ;;;     sorter
-;;;     tab-behavior                                       Since 4.12
+;;;     tab-behavior                                        Since 4.12
 
 (test gtk-column-view-properties
-  (let ((view (make-instance 'gtk:column-view)))
+  (glib-test:with-check-memory (view :strong 2)
+    (is (typep (setf view (make-instance 'gtk:column-view)) 'gtk:column-view))
     (is (typep (gtk:column-view-columns view) 'g:list-store))
     (is-false (gtk:column-view-enable-rubberband view))
     (is-false (gtk:column-view-header-factory view))
@@ -128,19 +129,33 @@
 ;;;     gtk_column_view_new
 
 (test gtk-column-view-new
-  (let ((view nil)
-        (model (gtk:no-selection-new)))
+  (glib-test:with-check-memory (view model)
+    (setf model (gtk:no-selection-new))
     (is (typep (setf view (gtk:column-view-new)) 'gtk:column-view))
     (is (typep (setf view (gtk:column-view-new model)) 'gtk:column-view))
-    ;; Check memory management
-    (is-false (setf (gtk:column-view-model view) nil))
-    (is (= 1 (g:object-ref-count model)))
-    (is (= 1 (g:object-ref-count view)))))
+    ;; Remove reference to model
+    (is-false (setf (gtk:column-view-model view) nil))))
 
 ;;;     gtk_column_view_append_column
 ;;;     gtk_column_view_insert_column
 ;;;     gtk_column_view_remove_column
 
+(test gtk-column-view-append/insert/remove-column
+  (glib-test:with-check-memory (view column1 column2 :strong 1)
+    (is (typep (setf view (gtk:column-view-new)) 'gtk:column-view))
+    (is (typep (setf column1
+                     (gtk:column-view-column-new)) 'gtk:column-view-column))
+    (is (typep (setf column2
+                     (gtk:column-view-column-new)) 'gtk:column-view-column))
+    (is-false (gtk:column-view-append-column view column1))
+    (is-false (gtk:column-view-insert-column view 0 column2))
+    (is (eq column2
+            (g:list-model-item (gtk:column-view-columns view) 0)))
+    (is (eq column1
+            (g:list-model-item (gtk:column-view-columns view) 1)))
+    (is-false (gtk:column-view-remove-column view column1))
+    (is-false (gtk:column-view-remove-column view column2))))
+
 ;;;     gtk_column_view_sort_by_column
 
-;;; 2024-11-28
+;;; 2025-4-13

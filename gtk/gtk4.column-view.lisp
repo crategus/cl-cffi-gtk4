@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.column-view.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -40,14 +40,14 @@
 ;;;     gtk_column_view_get_columns
 ;;;     gtk_column_view_get_enable_rubberband
 ;;;     gtk_column_view_set_enable_rubberband
-;;;     gtk_column_view_get_header_factory                 Since 4.12
-;;;     gtk_column_view_set_header_factory                 Since 4.12
+;;;     gtk_column_view_get_header_factory                  Since 4.12
+;;;     gtk_column_view_set_header_factory                  Since 4.12
 ;;;     gtk_column_view_get_model
 ;;;     gtk_column_view_set_model
 ;;;     gtk_column_view_get_reorderable
 ;;;     gtk_column_view_set_reorderable
-;;;     gtk_column_view_get_row_factory                    Since 4.12
-;;;     gtk_column_view_set_row_factory                    Since 4.12
+;;;     gtk_column_view_get_row_factory                     Since 4.12
+;;;     gtk_column_view_set_row_factory                     Since 4.12
 ;;;     gtk_column_view_get_show_column_separators
 ;;;     gtk_column_view_set_show_column_separators
 ;;;     gtk_column_view_get_show_row_separators
@@ -55,8 +55,8 @@
 ;;;     gtk_column_view_set_single_click_activate
 ;;;     gtk_column_view_get_single_click_activate
 ;;;     gtk_column_view_get_sorter
-;;;     gtk_column_view_get_tab_behavior                   Since 4.12
-;;;     gtk_column_view_set_tab_behavior                   since 4.12
+;;;     gtk_column_view_get_tab_behavior                    Since 4.12
+;;;     gtk_column_view_set_tab_behavior                    Since 4.12
 ;;;
 ;;; Functions
 ;;;
@@ -70,15 +70,15 @@
 ;;;
 ;;;     columns
 ;;;     enable-rubberband
-;;;     header-factory                                     Since 4.12
+;;;     header-factory                                      Since 4.12
 ;;;     model
 ;;;     reorderable
-;;;     row-factory                                        Since 4.12
+;;;     row-factory                                         Since 4.12
 ;;;     show-column-separators
 ;;;     show-row-separators
 ;;;     single-click-activate
 ;;;     sorter
-;;;     tab-behavior                                       Since 4.12
+;;;     tab-behavior                                        Since 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -152,7 +152,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view 'type)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @begin{short}
     The @class{gtk:column-view} widget is a widget to present a view into a
     large dynamic list of items using multiple columns with headers.
@@ -193,11 +193,9 @@
     @slot[gtk:column-view]{show-row-separators} property is set, it will be
     passed on to the list view, causing its CSS node to carry the
     @code{.separators} style class. For rubberband selection, a node with name
-    @code{rubberband} is used.
-
-    The main @code{columnview} node may also carry style classes to select the
-    style of list presentation: @code{.rich-list}, @code{.navigation-sidebar}
-    or @code{.data-table}.
+    @code{rubberband} is used. The main @code{columnview} node may also carry
+    @code{.rich-list}, @code{.navigation-sidebar} or @code{.data-table} style
+    classes to select the  style of list presentation.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:column-view} implementation uses the @code{:tree-grid} role
@@ -212,7 +210,7 @@ lambda (columnview position)    :run-last
       @end{pre}
       @begin[code]{table}
         @entry[columnview]{The @class{gtk:column-view} widget.}
-        @entry[position]{An unsigned integer with the position of the item to
+        @entry[position]{The unsigned integer with the position of the item to
           activate.}
       @end{table}
       The signal is emitted when a row has been activated by the user. This
@@ -250,10 +248,10 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-columns)
       "Accessor"
       (documentation 'column-view-columns 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-columns object) => columns}
   @argument[object]{a @class{gtk:column-view} object}
-  @argument[columns]{a @class{g:list-model} object with the list managing the
+  @argument[columns]{a @class{g:list-model} object for the list managing the
     columns}
   @begin{short}
     Accessor of the @slot[gtk:column-view]{columns} slot of the
@@ -272,14 +270,14 @@ lambda (columnview position)    :run-last
                                                'column-view) t)
  "The @code{enable-rubberband} property of type @code{:boolean} (Read / Write)
   @br{}
-  Allow rubberband selection. @br{}
+  Whether to allow rubberband selection. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-enable-rubberband)
       "Accessor"
       (documentation 'column-view-enable-rubberband 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:column-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -290,8 +288,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-enable-rubberband} function returns whether rows can
   be selected by dragging with the mouse. The
-  @setf{gtk:column-view-enable-rubberband} function sets whether selections can
-  be changed by dragging with the mouse.
+  @setf{gtk:column-view-enable-rubberband} function sets the property.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-header-factory -----------------------------------------
@@ -300,13 +297,13 @@ lambda (columnview position)    :run-last
 (setf (documentation (liber:slot-documentation "header-factory" 'column-view) t)
  "The @code{header-factory} property of type @class{gtk:list-item-factory}
   (Read / Write) @br{}
-  Factory for creating header widgets. Since 4.12")
+  The factory for creating header widgets. Since 4.12")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'column-view-header-factory)
       "Accessor"
       (documentation 'column-view-header-factory 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-header-factory object) => factory}
   @syntax{(setf (gtk:column-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -315,12 +312,10 @@ lambda (columnview position)    :run-last
     Accessor of the @slot[gtk:column-view]{header-factory} slot of the
     @class{gtk:column-view} class.
   @end{short}
-  The @fun{gtk:column-view-header-factory} function gets the factory that is
-  currently used to populate section headers. The
-  @setf{gtk:column-view-header-factory} function sets the
-  @class{gtk:list-item-factory} object to use for populating the
-  @class{gtk:list-header} objects used in section headers. If this factory is
-  set to @code{nil}, the list will not show section headers.
+  The @fun{gtk:column-view-header-factory} function gets the factory to use for
+  populating the @class{gtk:list-header} objects used in section headers. The
+  @setf{gtk:column-view-header-factory} function sets the factory. If this
+  factory is set to @code{nil}, the list will not show section headers.
 
   Since 4.12
   @see-class{gtk:column-view}
@@ -333,13 +328,13 @@ lambda (columnview position)    :run-last
 (setf (documentation (liber:slot-documentation "model" 'column-view) t)
  "The @code{model} property of type @class{gtk:selection-model} (Read / Write)
   @br{}
-  Model for the items displayed.")
+  The model for the items displayed.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-model)
       "Accessor"
       (documentation 'column-view-model 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-model object) => model}
   @syntax{(setf (gtk:column-view-model object) model)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -367,7 +362,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-reorderable)
       "Accessor"
       (documentation 'column-view-reorderable 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-reorderable object) => reorderable}
   @syntax{(setf (gtk:column-view-reorderable object) reorderable)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -377,8 +372,8 @@ lambda (columnview position)    :run-last
     @class{gtk:column-view} class.
   @end{short}
   The @fun{gtk:column-view-reorderable} function returns whether columns are
-  reorderable. The @setf{gtk:column-view-reorderable} function sets whether
-  columns should be reorderable by dragging.
+  reorderable. The @setf{gtk:column-view-reorderable} function sets the
+  property.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-row-factory --------------------------------------------
@@ -393,7 +388,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-row-factory)
       "Accessor"
       (documentation 'column-view-row-factory 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-row-factory object) => factory}
   @syntax{(setf (gtk:column-view-row-factory object) factory)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -404,8 +399,8 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-row-factory} function gets the factory that is
   used for configuring rows. The @setf{gtk:column-view-row-factory} function
-  sets the factory used for configuring rows. The factory must be for
-  configuring @class{gtk:column-view-row} objects.
+  sets the factory. The factory must be for configuring
+  @class{gtk:column-view-row} objects.
 
   If this factory is not set - which is the default - then the defaults will be
   used. This factory is not used to set the widgets displayed in the individual
@@ -425,14 +420,14 @@ lambda (columnview position)    :run-last
                                                'column-view) t)
  "The @code{show-column-separators} property of type @code{:boolean}
   (Read / Write) @br{}
-  Show separators between columns. @br{}
+  Whether to show separators between columns. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-show-column-separators)
       "Accessor"
       (documentation 'column-view-show-column-separators 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-show-column-separators object) => setting}
   @syntax{(setf (gtk:column-view-show-column-separators object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -443,8 +438,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-show-column-separators} function returns whether the
   list should show separators between columns. The
-  @setf{gtk:column-view-show-column-separators} function sets whether the list
-  should show separators between columns.
+  @setf{gtk:column-view-show-column-separators} function sets the property.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-show-row-separators ------------------------------------
@@ -454,14 +448,14 @@ lambda (columnview position)    :run-last
                                                'column-view) t)
  "The @code{show-row-separators} property of type @code{:boolean} (Read / Write)
   @br{}
-  Show separators between rows. @br{}
+  Whether to show separators between rows. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-show-row-separators)
       "Accessor"
       (documentation 'column-view-show-row-separators 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-show-row-separators object) => setting}
   @syntax{(setf (gtk:column-view-show-row-separators object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -472,8 +466,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-show-row-separators} function returns whether the
   list should show separators between rows. The
-  @setf{gtk:column-view-show-row-separators} function sets whether the list
-  should show separators between rows.
+  @setf{gtk:column-view-show-row-separators} function sets the property.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-single-click-activate ----------------------------------
@@ -483,14 +476,14 @@ lambda (columnview position)    :run-last
                                                'column-view) t)
  "The @code{single-click-activate} property of type @code{:boolean}
   (Read / Write) @br{}
-  Activate rows on single click and select them on hover. @br{}
+  Whether to activate rows on single click and select them on hover. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-single-click-activate)
       "Accessor"
       (documentation 'column-view-single-click-activate 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:column-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -501,24 +494,21 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @setf{gtk:column-view-single-click-activate} function sets whether rows should
-  be activated on single click and selected on hover.
+  @setf{gtk:column-view-single-click-activate} function sets the property.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-sorter -------------------------------------------------
 
-;; TODO: Make a Lisp example
-
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sorter" 'column-view) t)
  "The @code{sorter} property of type @class{gtk:sorter} (Read) @br{}
-  Sorter with the sorting choices of the user.")
+  The sorter with the sorting choices of the user.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-sorter)
       "Accessor"
       (documentation 'column-view-sorter 'function)
- "@version{2024-11-28}
+ "@version{2025-4-25}
   @syntax{(gtk:column-view-sorter object) => sorter}
   @argument[object]{a @class{gtk:column-view} object}
   @argument[sorter]{a @class{gtk:sorter} object}
@@ -533,14 +523,17 @@ lambda (columnview position)    :run-last
   the @fun{gtk:column-view-column-sorter} function for setting up per-column
   sorting.
   @begin[Examples]{dictionary}
-    Here is an example:
+    Set the special sorter on the sort model underneath the model that is
+    displayed by the view:
     @begin{pre}
-gtk_column_view_column_set_sorter (column, sorter);
-gtk_column_view_append_column (view, column);
-sorter = g_object_ref (gtk_column_view_get_sorter (view)));
-model = gtk_sort_list_model_new (store, sorter);
-selection = gtk_no_selection_new (model);
-gtk_column_view_set_model (view, selection);
+(let* (;; Get the special sorter from the column view
+       (sorter (gtk:column-view-sorter view))
+       ;; Create a new selection model from a new sort list model
+       (model (gtk:sort-list-model-new store sorter))
+       (selection (gtk:no-selection-new model)))
+  ;; Set the selection as model for the column view
+  (setf (gtk:column-view-model view) selection)
+  ... )
     @end{pre}
   @end{dictionary}
   @see-class{gtk:column-view}
@@ -553,14 +546,14 @@ gtk_column_view_set_model (view, selection);
 (setf (documentation (liber:slot-documentation "tab-behavior" 'column-view) t)
  "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
   (Read / Write) @br{}
-  Behavior of the @kbd{Tab} key. @br{}
+  The behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys. @br{}
   Default value: @code{:all}")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'column-view-tab-behavior)
       "Accessor"
       (documentation 'column-view-tab-behavior 'function)
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @syntax{(gtk:column-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:column-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -570,7 +563,7 @@ gtk_column_view_set_model (view, selection);
     @class{gtk:column-view} class.
   @end{short}
   The @fun{gtk:column-view-tab-behavior} function gets the behavior of the
-  @key{Tab} and @code{Shift+Tab} keys. The @setf{gtk:column-view-tab-behavior}
+  @kbd{Tab} and @kbd{Shift+Tab} keys. The @setf{gtk:column-view-tab-behavior}
   function sets the tab behavior.
   @see-class{gtk:column-view}
   @see-symbol{gtk:list-tab-behavior}")
@@ -583,7 +576,7 @@ gtk_column_view_set_model (view, selection);
 
 (defun column-view-new (&optional model)
  #+liber-documentation
- "@version{2024-11-28}
+ "@version{2025-4-13}
   @argument[model]{a @class{gtk:selection-model} object to use, or the default
     @code{nil} value}
   @return{The new @class{gtk:column-view} widget.}
@@ -606,10 +599,10 @@ gtk_column_view_set_model (view, selection);
 
 (cffi:defcfun ("gtk_column_view_append_column" column-view-append-column) :void
  #+liber-documentation
- "@version{#2024-11-28}
+ "@version{2025-4-25}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object that has not been
-    added to column view yet}
+    added to @arg{columnview} yet}
   @begin{short}
     Appends the column to the end of the columns in @arg{columnview}.
   @end{short}
@@ -626,21 +619,20 @@ gtk_column_view_set_model (view, selection);
 
 (cffi:defcfun ("gtk_column_view_insert_column" column-view-insert-column) :void
  #+liber-documentation
- "@version{#2024-11-28}
+ "@version{2025-4-13}
   @argument[columnview]{a @class{gtk:column-view} widget}
-  @argument[position]{an unsigned integer with the position to insert
+  @argument[pos]{an unsigned integer for the position to insert
     @arg{column} at}
   @argument[column]{a @class{gtk:column-view-column} object to insert}
   @begin{short}
-    Inserts a column at the given @arg{position} in the columns of
-    @arg{columview}.
+    Inserts a column at the given @arg{pos} in the columns of @arg{columview}.
   @end{short}
   If @arg{column} is already a column of @arg{columnview}, it will be
   repositioned.
   @see-class{gtk:column-view}
   @see-class{gtk:column-view-column}"
   (columnview (g:object column-view))
-  (position :uint)
+  (pos :uint)
   (column (g:object column-view-column)))
 
 (export 'column-view-insert-column)
@@ -651,7 +643,7 @@ gtk_column_view_set_model (view, selection);
 
 (cffi:defcfun ("gtk_column_view_remove_column" column-view-remove-column) :void
  #+liber-documentation
- "@version{#2024-11-28}
+ "@version{2025-4-13}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object to remove}
   @begin{short}
@@ -671,11 +663,11 @@ gtk_column_view_set_model (view, selection);
 (cffi:defcfun ("gtk_column_view_sort_by_column" column-view-sort-by-column)
     :void
  #+liber-documentation
- "@version{#2024-11-28}
+ "@version{#2025-4-13}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object to sort by,
     or @code{nil}}
-  @argument[direction]{a @symbol{gtk:sort-type} value with the direction to sort
+  @argument[direction]{a @symbol{gtk:sort-type} value for the direction to sort
     in}
   @begin{short}
     Sets the sorting of the column view.

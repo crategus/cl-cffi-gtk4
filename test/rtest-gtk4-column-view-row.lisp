@@ -69,7 +69,9 @@
 ;;;     selected
 
 (test gtk-column-view-row-properties
-  (let ((row (make-instance 'gtk:column-view-row)))
+  (glib-test:with-check-memory (row)
+    (is (typep (setf row
+                     (make-instance 'gtk:column-view-row)) 'gtk:column-view-row))
     (is-false (gtk:column-view-row-accessible-description row))
     (is-false (gtk:column-view-row-accessible-label row))
     (is-true (gtk:column-view-row-activatable row))
@@ -79,4 +81,4 @@
     (is-true (gtk:column-view-row-selectable row))
     (is-false (gtk:column-view-row-selected row))))
 
-;;; 2024-9-19
+;;; 2025-4-13
