@@ -973,6 +973,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{alert-dialog-default-button}
       @about-generic{alert-dialog-detail}
       @about-generic{alert-dialog-message}
+      @about-generic{alert-dialog-modal}
       @about-function{alert-dialog-new}
       @about-function{alert-dialog-choose}
       @about-function{alert-dialog-choose-finish}

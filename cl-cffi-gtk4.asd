@@ -160,7 +160,6 @@
      (:file "gtk4.multi-sorter")
      (:file "gtk4.string-sorter")
      (:file "gtk4.numeric-sorter")
-     (:file "gtk4.column-view-sorter"             :if-feature :gtk-4-10)
 
      (:file "gtk4.section-model"                  :if-feature :gtk-4-12)
 
@@ -208,10 +207,13 @@
      (:file "gtk4.list-header"                    :if-feature :gtk-4-12)
      (:file "gtk4.list-view")
      (:file "gtk4.grid-view")
+
      (:file "gtk4.column-view")
      (:file "gtk4.column-view-column")
      (:file "gtk4.column-view-cell"               :if-feature :gtk-4-12)
      (:file "gtk4.column-view-row"                :if-feature :gtk-4-12)
+     (:file "gtk4.column-view-sorter"             :if-feature :gtk-4-10)
+
      (:file "gtk4.drop-down")
 
      ;; Tree support
