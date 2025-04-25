@@ -2,7 +2,7 @@
 ;;;;
 ;;;; This example is included in the API documentation for GtkApplication.
 ;;;;
-;;;; Last version: 2024-5-23
+;;;; Last version: 2025-4-21
 
 (in-package :gtk4-application)
 
@@ -14,7 +14,6 @@
     ;; Connect signal "activate" to the application
     (g:signal-connect app "activate"
         (lambda (application)
-          (g:application-hold application)
           ;; Create an application window
           (let ((window (make-instance 'gtk:application-window
                                        :application application
@@ -22,7 +21,6 @@
                                        :default-width 480
                                        :default-height 300)))
             ;; Present the application window
-            (gtk:window-present window)
-            (g:application-release application))))
+            (gtk:window-present window))))
   ;; Run the application
   (g:application-run app argv)))

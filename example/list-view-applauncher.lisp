@@ -3,7 +3,7 @@
 ;;;; This demo uses the GtkListView widget as a fancy application launcher.
 ;;;; It is also a small introduction to list views.
 ;;;;
-;;;; 2025-4-11
+;;;; 2025-4-25
 
 (in-package :gtk4-example)
 
@@ -20,7 +20,7 @@
       (g:list-store-append store app))
   store))
 
-(defun do-list-view-applauncher (&optional (application nil))
+(defun do-list-view-applauncher (&optional application)
   (let* (;; The GtkListitemFactory is what is used to create GtkListItems
          ;; to display the data from the model. So it is absolutely necessary
          ;; to create one. We will use a GtkSignalListItemFactory because it is
@@ -53,9 +53,9 @@
     (g:signal-connect factory "setup"
         (lambda (factory item)
           (declare (ignore factory))
-          (let* ((box (gtk:box-new :horizontal 12))
-                 (image (make-instance 'gtk:image
-                                       :icon-size :large)))
+          (let ((box (gtk:box-new :horizontal 12))
+                (image (make-instance 'gtk:image
+                                      :icon-size :large)))
             (gtk:box-append box image)
             (gtk:box-append box (gtk:label-new ""))
             (setf (gtk:list-item-child item) box))))
@@ -81,9 +81,9 @@
     ;; interactions by turning off activation and adding buttons or other
     ;; widgets in the setup function above.
     (g:signal-connect listview "activate"
-        (lambda (listview position)
+        (lambda (listview pos)
           (let* ((model (gtk:list-view-model listview))
-                 (appinfo (g:list-model-item model position))
+                 (appinfo (g:list-model-item model pos))
                  (display (gtk:widget-display listview))
                  (context (gdk:display-app-launch-context display)))
             (unless (g:app-info-launch appinfo nil context)
