@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-view-dnd.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -118,9 +118,9 @@
 (cffi:defcfun ("gtk_tree_drag_source_drag_data_delete"
                tree-drag-source-drag-data-delete) :boolean
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[source]{a @class{gtk:tree-drag-source} object}
-  @argument[path]{a @class{gtk:tree-path} instance with the row that was being
+  @argument[path]{a @class{gtk:tree-path} instance for the row that was being
     dragged}
   @return{@em{True} if the row was successfully deleted.}
   @begin{short}
@@ -148,9 +148,9 @@
 (cffi:defcfun ("gtk_tree_drag_source_drag_data_get"
                tree-drag-source-drag-data-get) (g:object gdk:content-provider)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[source]{a @class{gtk:tree-drag-source} object}
-  @argument[path]{a @class{gtk:tree-path} insance with the row that was dragged}
+  @argument[path]{a @class{gtk:tree-path} instance for the row that was dragged}
   @return{The @class{gdk:content-provider} instance for the given @arg{path} or
     @code{nil} if none exists.}
   @begin{short}
@@ -177,9 +177,9 @@
 (cffi:defcfun ("gtk_tree_drag_source_row_draggable"
                tree-drag-source-row-draggable) :boolean
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[source]{a @class{gtk:tree-drag-source} object}
-  @argument[path]{a @class{gtk:tree-path} instance with the row on which user
+  @argument[path]{a @class{gtk:tree-path} instance for the row on which user
     is initiating a drag}
   @return{@em{True} if the row can be dragged.}
   @begin{short}
@@ -253,11 +253,11 @@
 (cffi:defcfun ("gtk_tree_drag_dest_drag_data_received"
                tree-drag-dest-drag-data-received) :boolean
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
-  @argument[path]{a @class{gtk:tree-path} instance with the row to drop in
+  @argument[path]{a @class{gtk:tree-path} instance for the row to drop in
     front of}
-  @argument[value]{a @symbol{g:value} instance with the data to drop}
+  @argument[value]{a @symbol{g:value} instance for the data to drop}
   @return{The boolean whether a new row was created before position @arg{dest}.}
   @begin{short}
     Asks the @class{gtk:tree-drag-dest} object to insert a row before the path
@@ -287,10 +287,10 @@
 (cffi:defcfun ("gtk_tree_drag_dest_row_drop_possible"
                tree-drag-dest-row-drop-possible) :boolean
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
-  @argument[path]{a @class{gtk:tree-path} instance with the destination row}
-  @argument[value]{a @symbol{g:value} instance with the data being dropped}
+  @argument[path]{a @class{gtk:tree-path} instance for the destination row}
+  @argument[value]{a @symbol{g:value} instance for the data being dropped}
   @return{@em{True} if a drop is possible before @arg{dest}.}
   @begin{short}
     Determines whether a drop is possible before the given @arg{dest}, at the
@@ -319,9 +319,9 @@
 (cffi:defcfun ("gtk_tree_create_row_drag_content" tree-create-row-drag-content)
     (g:object gdk:content-provider)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-4-15}
   @argument[model]{a @class{gtk:tree-model} object}
-  @argument[path]{a @class{gtk:tree-path} instance with a row in @arg{model}}
+  @argument[path]{a @class{gtk:tree-path} instance for a row in @arg{model}}
   @return{The new @class{gdk:content-provider} object.}
   @begin{short}
     Creates a content provider for dragging @arg{path} from @arg{model}.

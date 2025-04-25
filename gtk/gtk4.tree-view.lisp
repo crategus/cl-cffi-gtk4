@@ -779,11 +779,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-expander-column)
       "Accessor"
       (documentation 'tree-view-expander-column 'function)
- "@version{2024-3-9}
+ "@version{2025-4-15}
   @syntax{(gtk:tree-view-expander-column object) => column}
   @syntax{(setf (gtk:tree-view-expander-column object) column)}
   @argument[object]{a @class{gtk:tree-view} widget}
-  @argument[column]{a @class{gtk:tree-view-column} object with the column to
+  @argument[column]{a @class{gtk:tree-view-column} object for the column to
     draw the expander arrow at, or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:tree-view]{expander-column} slot of the
@@ -992,11 +992,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-level-indentation)
       "Accessor"
       (documentation 'tree-view-level-indentation 'function)
- "@version{2024-3-9}
+ "@version{2025-4-15}
   @syntax{(gtk:tree-view-level-indentation object) => indentation}
   @syntax{(setf (gtk:tree-view-level-indentation object) indentation)}
   @argument[object]{a @class{gtk:tree-view} widget}
-  @argument[indentation]{an integer with the amount, in pixels, of extra
+  @argument[indentation]{an integer for the amount, in pixels, of extra
     indentation}
   @begin{short}
     Accessor of the @slot[gtk:tree-view]{level-indentation} slot of the
@@ -1142,11 +1142,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-search-column)
       "Accessor"
       (documentation 'tree-view-search-column 'function)
- "@version{2024-3-10}
+ "@version{2025-4-15}
   @syntax{(gtk:tree-view-search-column object) => column}
   @syntax{(setf (gtk:tree-view-search-column object) column)}
   @argument[object]{a @class{gtk:tree-view} widget}
-  @argument[column]{an integer with the column of the model to search in, or
+  @argument[column]{an integer for the column of the model to search in, or
     -1 to disable searching}
   @begin{short}
     Accessor of the @slot[gtk:tree-view]{search-column} slot of the
@@ -1409,10 +1409,10 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_tree_view_insert_column" tree-view-insert-column) :int
  #+liber-documentation
- "@version{2024-3-10}
+ "@version{2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[column]{a @class{gtk:tree-view-column} object to be inserted}
-  @argument[pos]{an integer with the position to insert @arg{column} in}
+  @argument[pos]{an integer for the position to insert @arg{column} in}
   @return{The integer with the number of columns in @arg{view} after insertion.}
   @begin{short}
     This inserts the column into the tree view at the given position.
@@ -1444,10 +1444,10 @@ lambda (view)    :action
                                                 title
                                                 renderer &rest attributes)
  #+liber-documentation
- "@version{2024-3-10}
+ "@version{2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[pos]{an integer with the position to insert the new column in}
-  @argument[title]{a string with the title to set the header to}
+  @argument[pos]{an integer for the position to insert the new column in}
+  @argument[title]{a string for the title to set the header to}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[attributes]{pairs of attributes}
   @return{The integer with the number of columns in @arg{view} after insertion.}
@@ -1485,10 +1485,10 @@ lambda (view)    :action
 
 (defun tree-view-insert-column-with-data-func (view pos title renderer func)
  #+liber-documentation
- "@version{2024-3-10}
+ "@version{2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[pos]{an integer with the position to insert the new column in}
-  @argument[title]{an string with the title to set the header to}
+  @argument[pos]{an integer for the position to insert the new column in}
+  @argument[title]{an string for the title to set the header to}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[func]{a @symbol{gtk:tree-cell-data-func} callback function to set
     attributes of cell renderer}
@@ -1552,9 +1552,9 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_tree_view_get_column" tree-view-column)
     (g:object tree-view-column)
  #+liber-documentation
- "@version{2024-3-9}
+ "@version{2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[pos]{an integer with the position of the column, counting from 0}
+  @argument[pos]{an integer for the position of the column, counting from 0}
   @begin{return}
     The @class{gtk:tree-view-column} object, or @code{nil} if the position is
     outside the range of columns.
@@ -1723,11 +1723,11 @@ lambda (view)    :action
 
 (cffi:defcfun ("gtk_tree_view_scroll_to_point" tree-view-scroll-to-point) :void
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[tx]{an integer with the x coordinate of new top-left pixel
+  @argument[tx]{an integer for the x coordinate of new top-left pixel
     of visible area, or -1}
-  @argument[ty]{an integer with the y coordinate of new top-left pixel
+  @argument[ty]{an integer for the y coordinate of new top-left pixel
     of visible area, or -1}
   @begin{short}
     Scrolls the tree view such that the top-left corner of the visible area is
@@ -1768,16 +1768,16 @@ lambda (view)    :action
                                       (row-align 0.5 row-align-supplied-p)
                                       (col-align 0.5 col-align-supplied-p))
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of the row to move to, or
     @code{nil}}
   @argument[column]{a @class{gtk:tree-view-column} object to move horizontally
     to, or @code{nil}}
-  @argument[row-align]{an optional float with the vertical alignment of the row
-    specified by path, the default is 0.5}
-  @argument[col-align]{an optional float with the horizontal alignment of the
-    column specified by column, the default is 0.5}
+  @argument[row-align]{an optional single float for the vertical alignment of
+    the row specified by path, the default is 0.5}
+  @argument[col-align]{an optional single float for the horizontal alignment of
+    the column specified by column, the default is 0.5}
   @begin{short}
     Moves the alignments of the tree view to the position specified by
     @arg{column} and @arg{path}.
@@ -1904,14 +1904,13 @@ lambda (view)    :action
 
 (defun tree-view-get-cursor (view)
  #+liber-documentation
- "@version{2024-3-10}
+ "@version{2025-4-15}
+  @syntax{(gtk:tree-view-get-coursor view) => path, focus}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance with the cursor path,
-      or @code{nil} @br{}
-    @arg{focus} -- a @class{gtk:tree-view-column} object with the focus column,
-      or @code{nil}
-  @end{return}
+  @argument[path]{a @class{gtk:tree-path} instance for the cursor path,
+    or @code{nil}}
+  @argument[focus]{a @class{gtk:tree-view-column} object for the focus column,
+    or @code{nil}}
   @begin{short}
     Returns @arg{path} and @arg{focus} with the current path and focus column.
   @end{short}
@@ -2169,18 +2168,17 @@ lambda (view)    :action
 
 (defun tree-view-path-at-pos (view x y)
  #+liber-documentation
- "@version{#2024-5-16}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-path-at-pos view x y) => path, column, xcell, ycell}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the x position to be identified (relative to
+  @argument[x]{an integer for the x position to be identified (relative to
     the bin window)}
-  @argument[y]{an integer with the y position to be identified (relative to
+  @argument[y]{an integer for the y position to be identified (relative to
     the bin window)}
-  @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @arg{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
-    @arg{xcell} -- an integer with the x coordinate relative to the cell @br{}
-    @arg{ycell} -- an integer with the y coordinate relative to the cell
-  @end{return}
+  @argument[path]{a @class{gtk:tree-path} instance, or @code{nil}}
+  @argument[column]{a @class{gtk:tree-view-column} object, or @code{nil}}
+  @argument[xcell]{an integer for the x coordinate relative to the cell}
+  @argument[ycell]{an integer for the y coordinate relative to the cell}
   @begin{short}
     Finds the path at the point @code{(x,y)}, relative to bin window
     coordinates.
@@ -2239,20 +2237,19 @@ lambda (view)    :action
 
 (defun tree-view-is-blank-at-pos (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-is-blank-at-pos view x y) => path, column, xcell, ycell}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[x]{an integer with the x position to be identified (relative to
     the bin window)}
   @argument[y]{an integer with the y position to be identified (relative to
     the bin window)}
-  @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @arg{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
-    @arg{xcell} -- an integer with the x coordinate relative to the cell,
-      or @code{nil} @br{}
-    @arg{ycell} -- an integer where the y coordinate relative to the cell,
-      or @code{nil}
-  @end{return}
+  @argument[path]{a @class{gtk:tree-path} instance, or @code{nil}}
+  @argument[column]{a @class{gtk:tree-view-column} object, or @code{nil}}
+  @argument[xcell]{an integer for the x coordinate relative to the cell,
+    or @code{nil}}
+  @argument[ycell]{an integer for the y coordinate relative to the cell,
+    or @code{nil}}
   @begin{short}
     Determine whether the point @code{(x,y)} in the tree view is blank, that
     is no cell content nor an expander arrow is drawn at the location.
@@ -2423,14 +2420,13 @@ lambda (view)    :action
 
 (defun tree-view-visible-range (view)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-visible-range view) => start, end}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @begin{return}
-    @code{start} -- a @class{gtk:tree-path} instance with the start of region,
-      or @code{nil} @br{}
-    @code{end} -- a @class{gtk:tree-path} instance with the end of region,
-      or @code{nil}
-  @end{return}
+  @argument[start]{a @class{gtk:tree-path} instance for the start of region,
+    or @code{nil}}
+  @argument[end]{a @class{gtk:tree-path} instance for the end of region,
+    or @code{nil}}
   @begin{short}
     Returns @arg{start} and @arg{end} to be the first and last visible path.
   @end{short}
@@ -2462,14 +2458,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-bin-window-to-tree-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-convert-bin-window-to-tree-coords view x y) => tx, ty}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the x coordinate relative to bin window}
-  @argument[y]{an integer with the y coordinate relative to bin window}
-  @begin{return}
-    @arg{tx} -- an integer with the tree x coordinate @br{}
-    @arg{ty} -- an integer with the tree y coordinate
-  @end{return}
+  @argument[x]{an integer for the x coordinate relative to bin window}
+  @argument[y]{an integer for the y coordinate relative to bin window}
+  @argument[tx]{an integer for the tree x coordinate}
+  @argument[ty]{an integer for the tree y coordinate}
   @begin{short}
     Converts bin window coordinates to coordinates for the tree view (the full
     scrollable area of the tree view).
@@ -2500,14 +2495,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-bin-window-to-widget-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{gtk:tree-view-convert-bin-window-to-widget-coords view x y) => wx, wy}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the bin window x coordinate}
-  @argument[y]{an integer with the bin window y coordinate}
-  @begin{return}
-    @arg{wx} -- an integer with the widget x coordinate @br{}
-    @arg{wy} -- an integer with the widget y coordinate
-  @end{return}
+  @argument[x]{an integer for the bin window x coordinate}
+  @argument[y]{an integer for the bin window y coordinate}
+  @argument[wx]{an integer for the widget x coordinate}
+  @argument[wy]{an integer for the widget y coordinate}
   @begin{short}
     Converts bin window coordinates to widget relative coordinates.
   @end{short}
@@ -2537,14 +2531,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-tree-to-bin-window-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-convert-tree-to-bin-window-coords view x y) => bx, by}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the tree x coordinate}
-  @argument[y]{an integer with the tree y coordinate}
-  @begin{return}
-    @arg{bx} -- an integer with the x coordinate relative to bin window @br{}
-    @arg{by} -- an integer with the y coordinate relative to bin window
-  @end{return}
+  @argument[x]{an integer for the tree x coordinate}
+  @argument[y]{an integer for the tree y coordinate}
+  @argument[bx]{an integer for the x coordinate relative to bin window}
+  @argument[by]{an integer for the y coordinate relative to bin window}
   @begin{short}
     Converts tree view coordinates, coordinates in full scrollable area of the
     tree view, to bin window coordinates.
@@ -2575,14 +2568,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-tree-to-widget-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-convert-tree-to-widget-coords view x y) => wx, wy}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the x coordinate relative to the tree view}
-  @argument[y]{an integer with the y coordinate relative to the tree view}
-  @begin{return}
-    @arg{wx} -- an integer with the widget x coordinate @br{}
-    @arg{wy} -- an integer with the widget y coordinate
-  @end{return}
+  @argument[x]{an integer for the x coordinate relative to the tree view}
+  @argument[y]{an integer for the y coordinate relative to the tree view}
+  @argument[wx]{an integer for the widget x coordinate}
+  @argument[wy]{an integer for the widget y coordinate}
   @begin{short}
     Converts tree view coordinates, coordinates in full scrollable area of the
     tree, to widget coordinates.
@@ -2613,14 +2605,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-widget-to-bin-window-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-convert-widget-to-bin-window-coords view x y) => bx, by}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the x coordinate relative to the widget}
-  @argument[y]{an integer with the y coordinate relative to the widget}
-  @begin{return}
-    @arg{bx} -- an integer with the bin window x coordinate @br{}
-    @arg{by} -- an integer with the bin window y coordinate
-  @end{return}
+  @argument[x]{an integer for the x coordinate relative to the widget}
+  @argument[y]{an integer for the y coordinate relative to the widget}
+  @argument[bx]{an integer for the bin window x coordinate}
+  @argument[by]{an integer for the bin window y coordinate}
   @begin{short}
     Converts widget coordinates to coordinates for the bin window.
   @end{short}
@@ -2650,14 +2641,13 @@ lambda (view)    :action
 
 (defun tree-view-convert-widget-to-tree-coords (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-convert-widget-to-tree-coords view x y) => tx, ty}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the x coordinate relative to the widget}
-  @argument[y]{an integer with the y coordinate relative to the widget}
-  @begin{return}
-    @arg{tx} -- an integer with the tree view x coordinate @br{}
-    @arg{ty} -- an integer with the tree view y coordinate
-  @end{return}
+  @argument[x]{an integer for the x coordinate relative to the widget}
+  @argument[y]{an integer for the y coordinate relative to the widget}
+  @argument[tx]{an integer for the tree view x coordinate}
+  @argument[ty]{an integer for the tree view y coordinate}
   @begin{short}
     Converts widget coordinates to coordinates for the tree view, the full
     scrollable area of the tree view.
@@ -2683,7 +2673,7 @@ lambda (view)    :action
  #+liber-documentation
  "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[formats]{a @class{gdk:content-formats} instance with the target
+  @argument[formats]{a @class{gdk:content-formats} instance for the target
     formats that the drag will support}
   @argument[actions]{a @symbol{gdk:drag-action} bitmask of possible actions
     for a drag from this widget}
@@ -2717,7 +2707,7 @@ lambda (view)    :action
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[mask]{a @symbol{gdk:modifier-type} mask of allowed buttons to start
     drag}
-  @argument[formts]{a @class{gdk:conent-formats} instance with the targt formats
+  @argument[formats]{a @class{gdk:conent-formats} instance for the targt formats
     that the drag will support}
   @argument[actions]{a @symbol{gdk:drag-action} bitmask of possible actions
     for a drag from this widget}
@@ -2837,14 +2827,12 @@ lambda (view)    :action
 
 (defun tree-view-get-drag-dest-row (view)
  #+liber-documentation
- "@version{#2024-5-28}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-get-drag-dest-row view) => path, pos}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance of the highlighted row,
-      or @code{nil} @br{}
-    @arg{pos}  -- a @symbol{gtk:tree-view-drop-position} position, or
-      @code{nil}
-  @end{return}
+  @argument[path]{a @class{gtk:tree-path} instance of the highlighted row,
+    or @code{nil}}
+  @argument[pos]{a @symbol{gtk:tree-view-drop-position} position, or @code{nil}}
   @begin{short}
     Gets information about the row that is highlighted for feedback.
   @end{short}
@@ -2877,18 +2865,16 @@ lambda (view)    :action
 
 (defun tree-view-get-dest-row-at-pos (view x y)
  #+liber-documentation
- "@version{#2024-5-28}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-get-dest-row-at-pos view x y) => path, pos}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[x]{an integer with the position to determine the destination row
+  @argument[x]{an integer for the position to determine the destination row
     for}
-  @argument[y]{an integer with the position to determine the destination row
+  @argument[y]{an integer for the position to determine the destination row
     for}
-  @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance of the highlighted row,
-      or @code{nil} @br{}
-    @arg{pos}  -- a @symbol{gtk:tree-view-drop-position} position,
-      or @code{nil}
-  @end{return}
+  @argument[path]{a @class{gtk:tree-path} instance of the highlighted row,
+    or @code{nil}}
+  @argument[pos]{a @symbol{gtk:tree-view-drop-position} position, or @code{nil}}
   @begin{short}
     Determines the destination row for a given position.
   @end{short}
@@ -2957,10 +2943,10 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-search-equal-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-search-equal-func)
- "@version{#2024-5-4}
+ "@version{#2025-4-15}
   @syntax{lambda (model column key iter data) => result}
   @argument[model]{a @class{gtk:tree-model} object being searched}
-  @argument[column]{an integer with the search column set by the
+  @argument[column]{an integer for the search column set by the
     @fun{gtk:tree-view-search-column} function}
   @argument[key]{a key string to compare with}
   @argument[iter]{a @class{gtk:tree-iter} iterator pointing the row of
@@ -3283,18 +3269,15 @@ lambda (view)    :action
 
 (defun tree-view-tooltip-context (view)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2025-4-15}
+  @syntax{(gtk:tree-view-tooltip-context view) => x, y, tip, model, path, iter}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @begin{return}
-    @arg{x} -- an integer with the x coordinate (relative to widget
-      coordinates) @br{}
-    @arg{y} -- an integer with the y coordinate (relative to widget
-      coordinates) @br{}
-    @arg{tip} -- a boolean whether this is a keyboard tooltip or not @br{}
-    @arg{model} -- a @class{gtk:tree-model} object or @code{nil} @br{}
-    @arg{path}  -- a @class{gtk:tree-path} instance or @code{nil} @br{}
-    @arg{iter}  -- a @class{gtk:tree-iter} iterator or @code{nil}
-  @end{return}
+  @argument[x]{an integer for the x coordinate (relative to widget coordinates)}
+  @argument[y]{an integer for the y coordinate (relative to widget coordinates)}
+  @argument[tip]{a boolean whether this is a keyboard tooltip or not}
+  @argument[model]{a @class{gtk:tree-model} object or @code{nil}}
+  @argument[path]{a @class{gtk:tree-path} instance or @code{nil}}
+  @argument[iter]{a @class{gtk:tree-iter} iterator or @code{nil}}
   @begin{short}
     This function is supposed to be used in a @code{\"query-tooltip\"} signal
     handler for @class{gtk:tree-view} widgets.

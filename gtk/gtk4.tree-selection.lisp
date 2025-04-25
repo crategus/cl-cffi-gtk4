@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-selection.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -200,10 +200,10 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-symbol 'tree-selection-func)
       "Callback"
       (liber:symbol-documentation 'tree-selection-func)
- "@version{#2024-11-5}
+ "@version{#2025-4-15}
   @syntax{lambda (selection model path selected) => result}
   @argument[selection]{a @class{gtk:tree-selection} object}
-  @argument[mode]{a @class{gtk:tree-model} object being viewed}
+  @argument[model]{a @class{gtk:tree-model} object being viewed}
   @argument[path]{a @class{gtk:tree-path} instance of the row in question}
   @argument[selected]{@em{true}, if the path is currently selected}
   @argument[result]{@em{true}, if the selection state of the row can be toggled}
@@ -430,10 +430,11 @@ lambda (selection)    :run-first
 
 (defun tree-selection-selected-rows (selection)
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2025-4-15}
   @argument[selection]{a @class{gtk:tree-selection} object}
-  @return{The list containing a @class{gtk:tree-path} instance for each selected
-    row.}
+  @begin{return}
+    The list containing a @class{gtk:tree-path} instance for each selected row.
+  @end{return}
   @begin{short}
     Creates a list of path of all selected rows.
   @end{short}
