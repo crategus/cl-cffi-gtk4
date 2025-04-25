@@ -281,7 +281,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-view 'type)
- "@version{2025-4-8}
+ "@version{2025-4-25}
   @begin{short}
     The @class{gtk:list-view} widget is a widget to present a view into a large
     dynamic list of items.
@@ -306,18 +306,6 @@
     The example is included in the GTK 4 demo, which comes with the
     @code{cl-cffi-gtk4} library.
     @begin{pre}
-(defun activate-cb (listview position)
-  (let* ((model (gtk:list-view-model listview))
-         (appinfo (g:list-model-item model position))
-         (display (gtk:widget-display listview))
-         (context (gdk:display-app-launch-context display)))
-    (unless (g:app-info-launch appinfo nil context)
-      (let* ((message (format nil \"Could not launch ~a\"
-                                  (g:app-info-display-name appinfo)))
-             (dialog (make-instance 'gtk:alert-dialog
-                                    :message message)))
-          (gtk:alert-dialog-show dialog (gtk:widget-root listview))))))
-
 (defun create-application-list ()
   (let ((store (g:list-store-new \"GAppInfo\"))
         (apps (g:app-info-all)))
@@ -325,28 +313,23 @@
       (g:list-store-append store app))
   store))
 
-(defun do-list-view-applauncher (&optional (application nil))
+(defun do-list-view-applauncher (&optional application)
   (let* ((factory (gtk:signal-list-item-factory-new))
          (model (create-application-list))
-         (listview nil)
-         (scrolled (make-instance 'gtk:scrolled-window
-                                  :margin-start 12
-                                  :margin-top 12))
+         (listview (gtk:list-view-new (gtk:single-selection-new model) factory))
+         (scrolled (gtk:scrolled-window-new))
          (window (make-instance 'gtk:window
                                 :title \"Application launcher\"
                                 :application application
                                 :child scrolled
-                                :default-width 640
-                                :default-height 320
-                                :margin-start 24
-                                :margin-top 6
-                                :margin-bottom 6)))
+                                :default-width 600
+                                :default-height 380)))
     (g:signal-connect factory \"setup\"
         (lambda (factory item)
           (declare (ignore factory))
-          (let* ((box (gtk:box-new :horizontal 12))
-                 (image (make-instance 'gtk:image
-                                       :icon-size :large)))
+          (let ((box (gtk:box-new :horizontal 12))
+                (image (make-instance 'gtk:image
+                                      :icon-size :large)))
             (gtk:box-append box image)
             (gtk:box-append box (gtk:label-new \"\"))
             (setf (gtk:list-item-child item) box))))
@@ -359,9 +342,18 @@
             (gtk:image-set-from-gicon image (g:app-info-icon appinfo))
             (setf (gtk:label-label label)
                   (g:app-info-display-name appinfo)))))
-    (setf listview
-          (gtk:list-view-new (gtk:single-selection-new model) factory))
-    (g:signal-connect listview \"activate\" #'activate-cb)
+    (g:signal-connect listview \"activate\"
+        (lambda (listview pos)
+          (let* ((model (gtk:list-view-model listview))
+                 (appinfo (g:list-model-item model pos))
+                 (display (gtk:widget-display listview))
+                 (context (gdk:display-app-launch-context display)))
+            (unless (g:app-info-launch appinfo nil context)
+              (let* ((message (format nil \"Could not launch ~a\"
+                                          (g:app-info-display-name appinfo)))
+                     (dialog (make-instance 'gtk:alert-dialog
+                                            :message message)))
+                (gtk:alert-dialog-show dialog (gtk:widget-root listview)))))))
     (setf (gtk:scrolled-window-child scrolled) listview)
     (gtk:window-present window)))
     @end{pre}
