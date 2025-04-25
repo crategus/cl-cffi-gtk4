@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.stack-switcher.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -82,7 +82,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack-switcher 'type)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @begin{short}
     The @class{gtk:stack-switcher} widget acts as a controller for a
     @class{gtk:stack} widget.
@@ -130,7 +130,7 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-switcher-stack object) => stack}
   @syntax{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
@@ -152,7 +152,7 @@
 
 (defun stack-switcher-new ()
  #+liber-documentation
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @return{The new @class{gtk:stack-switcher} widget.}
   @short{Creates a new stack switcher.}
   @see-class{gtk:stack-switcher}"

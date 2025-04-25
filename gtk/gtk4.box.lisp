@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.box.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -37,8 +37,8 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_box_get_baseline_child
-;;;     gtk_box_set_baseline_child
+;;;     gtk_box_get_baseline_child                          Since 4.12
+;;;     gtk_box_set_baseline_child                          Since 4.12
 ;;;     gtk_box_get_baseline_position
 ;;;     gtk_box_set_baseline_position
 ;;;     gtk_box_get_homogeneous
@@ -58,7 +58,7 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     baseline-child                                     Since 4.12
+;;;     baseline-child                                      Since 4.12
 ;;;     baseline-position
 ;;;     homogeneous
 ;;;     spacing
@@ -110,7 +110,7 @@
 
 #+liber-documentation
 (setf (documentation 'box 'type)
- "@version{2023-8-25}
+ "@version{2025-4-23}
   @begin{short}
     The @class{gtk:box} widget arranges child widgets into a single row or
     column.
@@ -165,26 +165,26 @@
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "baseline-child" 'box) t)
  "The @code{baseline-child} property of type @code{:int} (Read / Write) @br{}
-  The child widget that determines the baseline, in vertical orientation.
-  Since 4.12 @br{}
+  The position of the child widget that determines the baseline. This is only
+  relevant of the box is in vertical orientation. Since 4.12 @br{}
   Default value: -1")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'box-baseline-child)
       "Accessor"
       (documentation 'box-baseline-child 'function)
- "@version{2024-4-22}
+ "@version{2025-4-23}
   @syntax{(gtk:box-baseline-child object) => child}
   @syntax{(setf (gtk:box-baseline-child object) child)}
   @argument[object]{a @class{gtk:box} widget}
-  @argument[child]{an integer with the baseline child widget}
+  @argument[child]{an integer for the baseline child position, or -1}
   @begin{short}
     Accessor of the @slot[gtk:box]{baseline-child} slot of the @class{gtk:box}
     class.
   @end{short}
-  The @fun{gtk:box-baseline-child} function gets the baseline child widget. The
-  @setf{gtk:box-baseline-position} function sets the baseline child widget.
-  This affects only vertical boxes.
+  The @fun{gtk:box-baseline-child} function gets the baseline child widget of a
+  box. The @setf{gtk:box-baseline-position} function sets the baseline child
+  widget. This affects only vertical boxes.
 
   Since 4.12
   @see-class{gtk:box}")
@@ -202,7 +202,7 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{2024-4-22}
+ "@version{2025-4-23}
   @syntax{(gtk:box-baseline-position object) => position}
   @syntax{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
@@ -233,7 +233,7 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{2024-4-22}
+ "@version{2025-4-23}
   @syntax{(gtk:box-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
@@ -261,11 +261,11 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{2024-4-22}
+ "@version{2025-4-23}
   @syntax{(gtk:box-spacing object) => spacing}
   @syntax{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
-  @argument[spacing]{an integer with the number of pixels to put between
+  @argument[spacing]{an integer for the number of pixels to put between
     children}
   @begin{short}
     Accessor of the @slot[gtk:box]{spacing} slot of the @class{gtk:box} class.
@@ -283,10 +283,10 @@
 
 (defun box-new (&optional (orientation :horizontal) (spacing 0))
  #+liber-documentation
- "@version{2024-10-3}
+ "@version{2025-4-23}
   @argument[orientation]{an optional @symbol{gtk:orientation} value,
     the default is @code{:horizontal}}
-  @argument[spacing]{an optional integer with the number of pixels to place by
+  @argument[spacing]{an optional integer for the number of pixels to place by
     default between children}
   @return{The new @class{gtk:box} widget.}
   @begin{short}
@@ -309,7 +309,7 @@
 
 (cffi:defcfun ("gtk_box_append" box-append) :void
  #+liber-documentation
- "@version{2023-8-25}
+ "@version{2025-4-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the last child widget to the box.}
@@ -326,7 +326,7 @@
 
 (cffi:defcfun ("gtk_box_prepend" box-prepend) :void
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-4-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the first child widget to the box.}
@@ -343,7 +343,7 @@
 
 (cffi:defcfun ("gtk_box_remove" box-remove) :void
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-4-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -367,7 +367,7 @@
 
 (cffi:defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-4-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget after which to insert
@@ -392,7 +392,7 @@
 
 (cffi:defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-4-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget to move}
   @argument[sibling]{a @class{gtk:widget} sibling widget to move @arg{child}

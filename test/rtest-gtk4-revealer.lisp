@@ -39,18 +39,19 @@
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkRevealerTransitionType"
                                     GTK:REVEALER-TRANSITION-TYPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_revealer_transition_type_get_type")
-                       (:NONE 0)
-                       (:CROSSFADE 1)
-                       (:SLIDE-RIGHT 2)
-                       (:SLIDE-LEFT 3)
-                       (:SLIDE-UP 4)
-                       (:SLIDE-DOWN 5)
-                       (:SWING-RIGHT 6)
-                       (:SWING-LEFT 7)
-                       (:SWING-UP 8)
-                       (:SWING-DOWN 9))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_revealer_transition_type_get_type")
+                                    (:NONE 0)
+                                    (:CROSSFADE 1)
+                                    (:SLIDE-RIGHT 2)
+                                    (:SLIDE-LEFT 3)
+                                    (:SLIDE-UP 4)
+                                    (:SLIDE-DOWN 5)
+                                    (:SWING-RIGHT 6)
+                                    (:SWING-LEFT 7)
+                                    (:SWING-UP 8)
+                                    (:SWING-DOWN 9))
              (gobject:get-gtype-definition "GtkRevealerTransitionType"))))
 
 ;;;     GtkRevealer
@@ -87,26 +88,27 @@
   (is (eq :group (gtk:widget-class-accessible-role "GtkRevealer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkRevealer" GTK:REVEALER
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_revealer_get_type")
-                       ((CHILD REVEALER-CHILD "child" "GtkWidget" T T)
-                        (CHILD-REVEALED REVEALER-CHILD-REVEALED
-                         "child-revealed" "gboolean" T NIL)
-                        (REVEAL-CHILD REVEALER-REVEAL-CHILD
-                         "reveal-child" "gboolean" T T)
-                        (TRANSITION-DURATION REVEALER-TRANSITION-DURATION
-                         "transition-duration" "guint" T T)
-                        (TRANSITION-TYPE REVEALER-TRANSITION-TYPE
-                         "transition-type" "GtkRevealerTransitionType" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_revealer_get_type")
+                      ((CHILD REVEALER-CHILD "child" "GtkWidget" T T)
+                       (CHILD-REVEALED REVEALER-CHILD-REVEALED
+                        "child-revealed" "gboolean" T NIL)
+                       (REVEAL-CHILD REVEALER-REVEAL-CHILD
+                        "reveal-child" "gboolean" T T)
+                       (TRANSITION-DURATION REVEALER-TRANSITION-DURATION
+                        "transition-duration" "guint" T T)
+                       (TRANSITION-TYPE REVEALER-TRANSITION-TYPE
+                        "transition-type" "GtkRevealerTransitionType" T T)))
              (gobject:get-gtype-definition "GtkRevealer"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-revealer-properties
-  (let ((revealer (make-instance 'gtk:revealer)))
+  (glib-test:with-check-memory (revealer)
+    (setf revealer (make-instance 'gtk:revealer))
     (is-false (gtk:revealer-child revealer))
     (is-false (gtk:revealer-child-revealed revealer))
     (is-false (gtk:revealer-reveal-child revealer))
@@ -118,6 +120,7 @@
 ;;;     gtk_revealer_new
 
 (test gtk-revealer-new
-  (is (typep (gtk:revealer-new) 'gtk:revealer)))
+  (glib-test:with-check-memory (revealer)
+    (is (typep (setf revealer (gtk:revealer-new)) 'gtk:revealer))))
 
-;;; 2024-10-11
+;;; 2025-4-23

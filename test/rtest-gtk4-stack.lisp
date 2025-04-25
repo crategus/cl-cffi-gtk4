@@ -132,13 +132,13 @@
 ;;; --- Properties (GtkStackPage) ----------------------------------------------
 
 (test gtk-stack-page-properties
-  (let ((stack (gtk:stack-new))
-        (label (gtk:label-new "Stack Page Label"))
-        (page nil))
-    ;; Add a page to the stack
-    (is-false (gtk:stack-add-titled stack label "label" "Label"))
-    ;; Get the stack page
-    (is (typep (setf page (gtk:stack-page stack label)) 'gtk:stack-page))
+  (glib-test:with-check-memory (stack label page)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))
+    (is (typep (setf label (gtk:label-new "Stack Page Label")) 'gtk:label))
+    ;; Add page to the stack
+    (is (typep (setf page
+                     (gtk:stack-add-titled stack label "label" "Label"))
+               'gtk:stack-page))
     ;; Check properties
     (is (eq label (gtk:stack-page-child page)))
     (is-false (gtk:stack-page-icon-name page))
@@ -214,7 +214,8 @@
 ;;; --- Properties (GtkStack) --------------------------------------------------
 
 (test gtk-stack-properties
-  (let ((stack (make-instance 'gtk:stack)))
+  (glib-test:with-check-memory (stack)
+    (is (typep (setf stack (make-instance 'gtk:stack)) 'gtk:stack))
     (is-true (gtk:stack-hhomogeneous stack))
     (is-false (gtk:stack-interpolate-size stack))
     ;; Should return a GtkSelectionModel, we check for g:object type
@@ -231,14 +232,75 @@
 ;;;     gtk_stack_new
 
 (test gtk-stack-new
-  (is (typep (gtk:stack-new) 'gtk:stack)))
+  (glib-test:with-check-memory (stack)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))))
 
 ;;;     gtk_stack_add_child
-;;;     gtk_stack_add_named
-;;;     gtk_stack_add_titled
 ;;;     gtk_stack_remove
-;;;     gtk_stack_get_child_by_name
 ;;;     gtk_stack_get_page
+
+(test gtk-stack-add-child
+  (glib-test:with-check-memory (stack child page)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))
+    (is (typep (setf child (gtk:label-new "Label")) 'gtk:label))
+    ;; Add child to stack
+    (is (typep (setf page (gtk:stack-add-child stack child)) 'gtk:stack-page))
+    (is (eq page (gtk:stack-page stack child)))
+    ;; Remove references
+    (is-false (gtk:stack-remove stack child))))
+
+;;;     gtk_stack_add_named
+;;;     gtk_stack_get_child_by_name
+
+(test gtk-stack-add-named
+  (glib-test:with-check-memory (stack child page)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))
+    (is (typep (setf child (gtk:label-new "Label")) 'gtk:label))
+    ;; Add child to stack
+    (is (typep (setf page
+                     (gtk:stack-add-named stack child "PAGE")) 'gtk:stack-page))
+    (is (eq page (gtk:stack-page stack child)))
+    (is (eq child (gtk:stack-child-by-name stack "PAGE")))
+    ;; Remove references
+    (is-false (gtk:stack-remove stack child))))
+
+;;;     gtk_stack_add_titled
+
+(test gtk-stack-add-titled
+  (glib-test:with-check-memory (stack child page)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))
+    (is (typep (setf child (gtk:label-new "Label")) 'gtk:label))
+    ;; Add child to stack
+    (is (typep (setf page
+                     (gtk:stack-add-titled stack child "PAGE" "TITLE"))
+               'gtk:stack-page))
+    (is (eq page (gtk:stack-page stack child)))
+    (is (eq child (gtk:stack-child-by-name stack "PAGE")))
+    ;; Remove references
+    (is-false (gtk:stack-remove stack child))))
+
 ;;;     gtk_stack_set_visible_child_full
 
-;;; 2024-9-19
+(test gtk-stack-set-visible-child-full
+  (glib-test:with-check-memory (stack child1 child2 page1 page2)
+    (is (typep (setf stack (gtk:stack-new)) 'gtk:stack))
+    (is (typep (setf child1 (gtk:label-new "Label1")) 'gtk:label))
+    (is (typep (setf child2 (gtk:label-new "Label2")) 'gtk:label))
+    ;; Add children to stack
+    (is (typep (setf page1
+                     (gtk:stack-add-named stack child1 "PAGE1")) 'gtk:stack-page))
+    (is (typep (setf page2
+                     (gtk:stack-add-named stack child2 "PAGE2")) 'gtk:stack-page))
+    ;; Set visible child
+    (is-false (gtk:stack-set-visible-child-full stack "PAGE1" :crossfade))
+    (is (eq child1 (gtk:stack-visible-child stack)))
+    (is (string= "PAGE1" (gtk:stack-visible-child-name stack)))
+    ;; Set visible child
+    (is-false (gtk:stack-set-visible-child-full stack "PAGE2" :crossfade))
+    (is (eq child2 (gtk:stack-visible-child stack)))
+    (is (string= "PAGE2" (gtk:stack-visible-child-name stack)))
+    ;; Remove references
+    (is-false (gtk:stack-remove stack child1))
+    (is-false (gtk:stack-remove stack child2))))
+
+;;; 2025-4-23

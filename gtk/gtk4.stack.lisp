@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.stack.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -167,7 +167,7 @@
 (setf (liber:alias-for-symbol 'stack-transition-type)
       "GEnum"
       (liber:symbol-documentation 'stack-transition-type)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @begin{declaration}
 (gobject:define-genum \"GtkStackTransitionType\" stack-transition-type
   (:export t
@@ -271,7 +271,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack-page 'type)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @begin{short}
     The @class{gtk:stack-page} class is an auxiliary class used by the
     @class{gtk:stack} class.
@@ -283,7 +283,8 @@
   @see-slot{gtk:stack-page-title}
   @see-slot{gtk:stack-page-use-underline}
   @see-slot{gtk:stack-page-visible}
-  @see-class{gtk:stack}")
+  @see-class{gtk:stack}
+  @see-class{gtk:stack-switcher}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -301,7 +302,7 @@
 (setf (liber:alias-for-function 'stack-page-child)
       "Accessor"
       (documentation 'stack-page-child 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-child object) => child}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[child]{a @class{gtk:widget} child widget}
@@ -325,11 +326,11 @@
 (setf (liber:alias-for-function 'stack-page-icon-name)
       "Accessor"
       (documentation 'stack-page-icon-name 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-icon-name object) => name}
   @syntax{(setf (gtk:stack-page-icon-name object) name)}
   @argument[object]{a @class{gtk:stack-page} object}
-  @argument[name]{a string with the icon name of the child page}
+  @argument[name]{a string for the icon name of the child page}
   @begin{short}
     Accessor of the @slot[gtk:stack-page]{icon-name} slot of the
     @class{gtk:stack-page} class.
@@ -350,11 +351,11 @@
 (setf (liber:alias-for-function 'stack-page-name)
       "Accessor"
       (documentation 'stack-page-name 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-name object) => name}
   @syntax{(setf (gtk:stack-page-name object) name)}
   @argument[object]{a @class{gtk:stack-page} object}
-  @argument[name]{a string with the name of the child page}
+  @argument[name]{a string for the name of the child page}
   @begin{short}
     Accessor of the @slot[gtk:stack-page]{name} slot of the
     @class{gtk:stack-page} class.
@@ -379,7 +380,7 @@
 (setf (liber:alias-for-function 'stack-page-needs-attention)
       "Accessor"
       (documentation 'stack-page-needs-attention 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-needs-attention object) => setting}
   @syntax{(setf (gtk:stack-page-needs-attention object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
@@ -411,11 +412,11 @@
 (setf (liber:alias-for-function 'stack-page-title)
       "Accessor"
       (documentation 'stack-page-title 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-title object) => title}
   @syntax{(setf (gtk:stack-page-title object) title)}
   @argument[object]{a @class{gtk:stack-page} object}
-  @argument[title]{a string with the title of the child page}
+  @argument[title]{a string for the title of the child page}
   @begin{short}
     Accessor of the @slot[gtk:stack-page]{title} slot of the
     @class{gtk:stack-page} class.
@@ -437,7 +438,7 @@
 (setf (liber:alias-for-function 'stack-page-use-underline)
       "Accessor"
       (documentation 'stack-page-use-underline 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-use-underline object) => setting}
   @syntax{(setf (gtk:stack-page-use-underline object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
@@ -464,7 +465,7 @@
 (setf (liber:alias-for-function 'stack-page-visible)
       "Accessor"
       (documentation 'stack-page-visible 'function)
- "@version{2024-4-14}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-page-visible object) => setting}
   @syntax{(setf (gtk:stack-page-visible object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
@@ -521,7 +522,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack 'type)
- "@version{2023-8-8}
+ "@version{2025-4-23}
   @begin{short}
     The @class{gtk:stack} widget is a container which only shows one of its
     children at a time.
@@ -599,7 +600,7 @@
 (setf (liber:alias-for-function 'stack-hhomogeneous)
       "Accessor"
       (documentation 'stack-hhomogeneous 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-hhomogeneous object) => homogeneous}
   @syntax{(setf (gtk:stack-hhomogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -610,7 +611,7 @@
   @end{short}
   The @fun{gtk:stack-hhomogeneous} function gets whether the stack is
   horizontally homogeneous. The @setf{gtk:stack-hhomogeneous} function sets the
-  stack to be horizontally homogeneous or not.
+  property.
 
   If the stack is homogeneous, the stack will request the same width for all its
   children. If it is not, the stack may change width when a different child
@@ -632,7 +633,7 @@
 (setf (liber:alias-for-function 'stack-interpolate-size)
       "Accessor"
       (documentation 'stack-interpolate-size 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-interpolate-size object) => interpolate}
   @syntax{(setf (gtk:stack-interpolate-size object) interpolate)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -643,8 +644,7 @@
   @end{short}
   The @fun{gtk:stack-interpolate-size} function returns whether the stack is
   set up to interpolate between the sizes of children on page switch. The
-  @setf{gtk:stack-interpolate-size} function sets whether or not stack will
-  interpolate its size when changing the visible child.
+  @setf{gtk:stack-interpolate-size} function sets the property.
 
   If the @slot[gtk:stack]{interpolate-size} property is set to @em{true}, the
   stack will interpolate its size between the current one and the one it will
@@ -657,19 +657,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pages" 'stack) t)
  "The @code{pages} property of type @class{gtk:selection-model} (Read) @br{}
-  A selection model with the pages of the stack. Returns a @class{g:list-model}
-  object that contains the pages of the stack, and can be used to keep an
-  up-to-date view. The model also implements the @class{gtk:selection-model}
-  object and can be used to track and modify the visible page.")
+  The selection model with the pages of the stack. Returns a
+  @class{g:list-model} object that contains the pages of the stack, and can be
+  used to keep an up-to-date view. The model also implements the
+  @class{gtk:selection-model} object and can be used to track and modify the
+  visible page.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'stack-pages)
       "Accessor"
       (documentation 'stack-pages 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-pages object) => pages}
   @argument[object]{a @class{gtk:stack} widget}
-  @argument[pages]{a @class{gtk:selection-model} object with the stacks pages}
+  @argument[pages]{a @class{gtk:selection-model} object for the stacks pages}
   @begin{short}
     Accessor of the @slot[gtk:stack]{pages} slot of the @class{gtk:stack} class.
   @end{short}
@@ -694,11 +695,11 @@
 (setf (liber:alias-for-function 'stack-transition-duration)
       "Accessor"
       (documentation 'stack-transition-duration 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-transition-duration object) => duration}
   @syntax{(setf (gtk:stack-transition-duration object) duration)}
   @argument[object]{a @class{gtk:stack} widget}
-  @argument[duration]{an unsigned integer with the duration, in milliseconds}
+  @argument[duration]{an unsigned integer for the duration, in milliseconds}
   @begin{short}
     Accessor of the @slot[gtk:stack]{transition-duration} slot of the
     @class{gtk:stack} class.
@@ -720,7 +721,7 @@
 (setf (liber:alias-for-function 'stack-transition-running)
       "Accessor"
       (documentation 'stack-transition-running 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-transition-running object) => running}
   @argument[object]{a @class{gtk:stack} widget}
   @begin{short}
@@ -744,7 +745,7 @@
 (setf (liber:alias-for-function 'stack-transition-type)
       "Accessor"
       (documentation 'stack-transition-type 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-transition-type object) => setting}
   @syntax{(setf (gtk:stack-transition-type object) setting)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -756,9 +757,8 @@
   @end{short}
   The @fun{gtk:stack-transition-type} function gets the type of animation that
   will be used for transitions between pages in the stack. The
-  @setf{gtk:stack-transition-type} function sets the type of animation that will
-  be used for transitions between pages in the stack. Available types include
-  various kinds of fades and slides.
+  @setf{gtk:stack-transition-type} function sets the type of animation.
+  Available types include various kinds of fades and slides.
 
   The transition type can be changed without problems at runtime, so it is
   possible to change the animation based on the page that is about to become
@@ -778,7 +778,7 @@
 (setf (liber:alias-for-function 'stack-vhomogeneous)
       "Accessor"
       (documentation 'stack-vhomogeneous 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-vhomogeneous object) => homogeneous}
   @syntax{(setf (gtk:stack-vhomogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -809,7 +809,7 @@
 (setf (liber:alias-for-function 'stack-visible-child)
       "Accessor"
       (documentation 'stack-visible-child 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-visible-child object) => child}
   @syntax{(setf (gtk:stack-visible-child object) child)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -847,11 +847,11 @@
 (setf (liber:alias-for-function 'stack-visible-child-name)
       "Accessor"
       (documentation 'stack-visible-child-name 'function)
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @syntax{(gtk:stack-visible-child-name object) => name}
   @syntax{(setf (gtk:stack-visible-child-name object) name)}
   @argument[object]{a @class{gtk:stack} widget}
-  @argument[name]{a string with the name of the visible child of the stack}
+  @argument[name]{a string for the name of the visible child of the stack}
   @begin{short}
     Accessor of the @slot[gtk:stack]{visible-child-name} slot of the
     @class{gtk:stack} class.
@@ -879,7 +879,7 @@
 
 (defun stack-new ()
  #+liber-documentation
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @return{The new @class{gtk:stack} widget.}
   @short{Creates a new stack.}
   @see-class{gtk:stack}"
@@ -888,15 +888,33 @@
 (export 'stack-new)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_stack_add_child
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_stack_add_child" stack-add-child) (g:object stack-page)
+ #+liber-documentation
+ "@version{2025-4-23}
+  @argument[stack]{a @class{gtk:stack} widget}
+  @argument[child]{a @class{gtk:widget} child widget to add}
+  @return{The @class{gtk:stack-page} object for @arg{child}.}
+  @short{Adds a child widget to the stack.}
+  @see-class{gtk:stack}"
+  (stack (g:object stack))
+  (child (g:object widget)))
+
+(export 'stack-add-child)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_stack_add_named
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_stack_add_named" stack-add-named) :void
+(cffi:defcfun ("gtk_stack_add_named" stack-add-named) (g:object stack-page)
  #+liber-documentation
- "@version{#2023-8-8}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
-  @argument[child]{a @class{gtk:widget} child page to add}
-  @argument[name]{a string with the name for the child page}
+  @argument[child]{a @class{gtk:widget} child widget to add}
+  @argument[name]{a string for the name of the child page}
+  @return{The @class{gtk:stack-page} object for @arg{child}.}
   @begin{short}
     Adds a child page to the stack.
   @end{short}
@@ -913,13 +931,14 @@
 ;;; gtk_stack_add_titled
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_stack_add_titled" stack-add-titled) :void
+(cffi:defcfun ("gtk_stack_add_titled" stack-add-titled) (g:object stack-page)
  #+liber-documentation
- "@version{2023-8-8}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
-  @argument[name]{a string with the name for the child page}
-  @argument[title]{a string with a human readable title for the child page}
+  @argument[name]{a string for the name of the child page}
+  @argument[title]{a string for a human readable title for the child page}
+  @return{The @class{gtk:stack-page} object for @arg{child}.}
   @begin{short}
     Adds a child page to the stack.
   @end{short}
@@ -942,7 +961,7 @@
 
 (cffi:defcfun ("gtk_stack_remove" stack-remove) :void
  #+liber-documentation
- "@version{#2023-8-8}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @short{Removes a child widget from the stack.}
@@ -960,9 +979,9 @@
 (cffi:defcfun ("gtk_stack_get_child_by_name" stack-child-by-name)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-8-8}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
-  @argument[name]{a string with the name for the child page to find}
+  @argument[name]{a string for the name of the child page to find}
   @return{The requested @class{gtk:widget} child page of the stack.}
   @begin{short}
     Finds the child page of the stack with the name given as the argument.
@@ -981,7 +1000,7 @@
 
 (cffi:defcfun ("gtk_stack_get_page" stack-page) (g:object stack-page)
  #+liber-documentation
- "@version{2024-4-15}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @return{The @class{gtk:stack-page} object for the child widget}
@@ -1001,13 +1020,13 @@
 (cffi:defcfun ("gtk_stack_set_visible_child_full" stack-set-visible-child-full)
     :void
  #+liber-documentation
- "@version{#2023-8-8}
+ "@version{2025-4-23}
   @argument[stack]{a @class{gtk:stack} widget}
-  @argument[name]{a string with the name of the child page to make visible}
+  @argument[name]{a string for the name of the child page to make visible}
   @argument[transition]{a value of the @symbol{gtk:stack-transition-type}
     enumeration to use}
   @begin{short}
-    Makes the child page with the given name visible.
+    Makes the child page with the given @arg{name} visible.
   @end{short}
   Note that the child page has to be visible itself, see the
   @fun{gtk:widget-visible} function, in order to become the visible child page

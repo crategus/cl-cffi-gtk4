@@ -39,24 +39,29 @@
   (is (eq :tab-list (gtk:widget-class-accessible-role "GtkStackSwitcher")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStackSwitcher" GTK:STACK-SWITCHER
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_stack_switcher_get_type")
-                       ((STACK STACK-SWITCHER-STACK "stack" "GtkStack" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_stack_switcher_get_type")
+                      ((STACK STACK-SWITCHER-STACK "stack" "GtkStack" T T)))
              (gobject:get-gtype-definition "GtkStackSwitcher"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-stack-switcher-stack.1
-  (let ((switcher (make-instance 'gtk:stack-switcher)))
+  (glib-test:with-check-memory (switcher)
+    (is (typep (setf switcher
+                     (make-instance 'gtk:stack-switcher)) 'gtk:stack-switcher))
     (is-false (gtk:stack-switcher-stack switcher))))
 
 (test gtk-stack-switch-stack.2
-  (let ((switcher (make-instance 'gtk:stack-switcher))
-        (stack (make-instance 'gtk:stack)))
+  (glib-test:with-check-memory (switcher stack)
+    (is (typep (setf switcher
+                     (make-instance 'gtk:stack-switcher)) 'gtk:stack-switcher))
+    (is (typep (setf stack
+                     (make-instance 'gtk:stack)) 'gtk:stack))
     (is (eq stack (setf (gtk:stack-switcher-stack switcher) stack)))
     (is (eq stack (gtk:stack-switcher-stack switcher)))
     (is-false (setf (gtk:stack-switcher-stack switcher) nil))))
@@ -66,6 +71,8 @@
 ;;;     gtk_stack_switcher_new
 
 (test gtk-stack-switcher-new
-  (is (typep (gtk:stack-switcher-new) 'gtk:stack-switcher)))
+  (glib-test:with-check-memory (switcher)
+    (is (typep (setf switcher
+                     (gtk:stack-switcher-new)) 'gtk:stack-switcher))))
 
-;;; 2024-10-9
+;;; 2025-4-23

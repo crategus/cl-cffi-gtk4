@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.alert-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -64,6 +64,7 @@
 ;;;     default-button
 ;;;     detail
 ;;;     message
+;;;     modal
 ;;;
 ;;; Hierarchy
 ;;;
@@ -103,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'alert-dialog 'type)
- "@version{2024-4-11}
+ "@version{2025-4-17}
   @begin{short}
     The @class{gtk:alert-dialog} object collects the arguments that are needed
     to present a message to the user.
@@ -114,24 +115,26 @@
 
   If you do not need to wait for a button to be clicked, you can use the
   @fun{gtk:alert-dialog-show} function.
+
+  Since 4.10
   @begin[Examples]{dictionary}
     Create an alert dialog with a @class{g:cancellable} object.
     @begin{pre}
 (defun create-alert-dialog (parent)
   (let ((dialog (make-instance 'gtk:alert-dialog
-                               :message \"Alert Alert Alert\"
+                               :message \"Alert\"
                                :detail \"The detail of the alert dialog.\"
                                :buttons '(\"Cancel\" \"OK\")
                                :cancel-button 0
                                :default-button 1
                                :modal t))
         (cancellable (g:cancellable-new)))
-    ;; Cancel the alert dialog after waiting 10 seconds for user response
+    ;; Cancel alert dialog after waiting 10 seconds for user response
     (g:timeout-add-seconds 10
                            (lambda ()
                              (g:cancellable-cancel cancellable)
                              glib:+source-remove+))
-    ;; Show the alert dialog
+    ;; Show alert dialog
     (gtk:alert-dialog-choose dialog
         parent
         cancellable
@@ -142,7 +145,6 @@
             (format t \"Alert dialog result is ~a~%\" result))))))
     @end{pre}
   @end{dictionary}
-  Since 4.10
   @see-class{g:async-result}")
 
 ;;; ----------------------------------------------------------------------------
@@ -154,7 +156,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buttons" 'alert-dialog) t)
  "The @code{buttons} property of type @type{g:strv-t} (Read / Write) @br{}
-  Labels for buttons to show in the alert dialog. The labels should be
+  The labels for buttons to show in the alert dialog. The labels should be
   translated and may contain a \"_\" to indicate the mnemonic character. If
   this property is not set, then a Close button is automatically created.")
 
@@ -162,11 +164,11 @@
 (setf (liber:alias-for-function 'alert-dialog-buttons)
       "Accessor"
       (documentation 'alert-dialog-buttons 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-buttons object) => buttons}
   @syntax{(setf (gtk:alert-dialog-buttons object) buttons)}
   @argument[object]{a @class{gtk:alert-dialog} object}
-  @argument[buttons]{a list of strings with the button labels}
+  @argument[buttons]{a list of strings for the button labels}
   @begin{short}
     Accessor of the @slot[gtk:alert-dialog]{buttons} slot of the
     @class{gtk:alert-dialog} class.
@@ -196,11 +198,11 @@
 (setf (liber:alias-for-function 'alert-dialog-cancel-button)
       "Accessor"
       (documentation 'alert-dialog-cancel-button 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-cancel-button object) => button}
   @syntax{(setf (gtk:alert-dialog-cancel-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
-  @argument[button]{an integer with the new Cancel button}
+  @argument[button]{an integer for the new Cancel button}
   @begin{short}
     Accessor of the @slot[gtk:alert-dialog]{cancel-button} slot of the
     @class{gtk:alert-dialog} class.
@@ -233,11 +235,11 @@
 (setf (liber:alias-for-function 'alert-dialog-default-button)
       "Accessor"
       (documentation 'alert-dialog-default-button 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-default-button object) => button}
   @syntax{(setf (gtk:alert-dialog-default-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
-  @argument[button]{an integer with the new Default button}
+  @argument[button]{an integer for the new Default button}
   @begin{short}
     Accessor of the @slot[gtk:alert-dialog]{default-button} slot of the
     @class{gtk:alert-dialog} class.
@@ -262,11 +264,11 @@
 (setf (liber:alias-for-function 'alert-dialog-detail)
       "Accessor"
       (documentation 'alert-dialog-detail 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-detail object) => detail}
   @syntax{(setf (gtk:alert-dialog-detail object) detail)}
   @argument[object]{a @class{gtk:alert-dialog} object}
-  @argument[detail]{a string with the detail text}
+  @argument[detail]{a string for the detail text}
   @begin{short}
     Accessor of the @slot[gtk:alert-dialog]{detail} slot of the
     @class{gtk:alert-dialog} class.
@@ -290,11 +292,11 @@
 (setf (liber:alias-for-function 'alert-dialog-message)
       "Accessor"
       (documentation 'alert-dialog-message 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-message object) => message}
   @syntax{(setf (gtk:alert-dialog-message object) message)}
   @argument[object]{a @class{gtk:alert-dialog} object}
-  @argument[message]{a string with the message}
+  @argument[message]{a string for the message}
   @begin{short}
     Accessor of the @slot[gtk:alert-dialog]{message} slot of the
     @class{gtk:alert-dialog} class.
@@ -318,7 +320,7 @@
 (setf (liber:alias-for-function 'alert-dialog-modal)
       "Accessor"
       (documentation 'alert-dialog-modal 'function)
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @syntax{(gtk:alert-dialog-modal object) => modal}
   @syntax{(setf (gtk:alert-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -329,8 +331,7 @@
   @end{short}
   The @fun{gtk:alert-dialog-modal} function returns whether the alert dialog
   blocks interaction with the parent window while it is presented. The
-  @setf{gtk:alert-dialog-modal} function sets whether the alert dialog blocks
-  interaction with the parent window.
+  @setf{gtk:alert-dialog-modal} function sets the property.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -341,7 +342,7 @@
 
 (defun alert-dialog-new (msg &rest args)
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-4-17}
   @argument[msg]{a format string for the message}
   @argument[args]{arguments for @arg{msg}}
   @return{The new @class{gtk:alert-dialog} object.}
@@ -372,7 +373,7 @@
 
 (defun alert-dialog-choose (dialog parent cancellable func)
  #+liber-documentation
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
@@ -384,8 +385,8 @@
   The callback will be called when the alert dialog is dismissed. It should call
   the @fun{gtk:alert-dialog-choose-finish} function to obtain the result.
 
-  It is ok to pass @code{nil} for the callback if the alert dialog does not have
-  more than one button. A simpler API for this case is the
+  It is fine to pass @code{nil} for the callback if the alert dialog does not
+  have more than one button. A simpler API for this case is the
   @fun{gtk:alert-dialog-show} function.
 
   Since 4.10
@@ -416,12 +417,14 @@
 
 (defun alert-dialog-choose-finish (dialog result)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-4-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
-  @argument[result]{a @class{g:async-result} object with the result}
-  @return{The integer with the index of the button that was clicked, -1 if the
-    alert dialog was cancelled and the @slot[gtk:alert-dialog]{cancel-button}
-    property is not set.}
+  @argument[result]{a @class{g:async-result} object for the result}
+  @begin{return}
+    The integer with the index of the button that was clicked, -1 if the alert
+    dialog was cancelled and the @slot[gtk:alert-dialog]{cancel-button} property
+    is not set.
+  @end{return}
   @begin{short}
     Finishes the the @fun{gtk:alert-dialog-choose} function call and returns the
     index of the button that was clicked.
@@ -443,7 +446,7 @@
 
 (cffi:defcfun ("gtk_alert_dialog_show" alert-dialog-show) :void
  #+liber-documentation
- "@version{2023-9-20}
+ "@version{2025-4-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @begin{short}

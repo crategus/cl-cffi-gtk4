@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.buildable.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -73,7 +73,7 @@
 (setf (liber:alias-for-class 'buildable)
       "Interface"
       (documentation 'buildable 'type)
- "@version{2023-8-7}
+ "@version{2025-4-17}
   @begin{short}
     The @class{gtk:buildable} interface allows objects to extend and customize
     their deserialization from @class{gtk:builder} UI descriptions.
@@ -96,7 +96,7 @@
 
 (cffi:defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
  #+liber-documentation
- "@version{2024-10-6}
+ "@version{2025-4-17}
   @argument[buildable]{a @class{gtk:buildable} object}
   @return{The string with the ID of the buildable object.}
   @begin{short}

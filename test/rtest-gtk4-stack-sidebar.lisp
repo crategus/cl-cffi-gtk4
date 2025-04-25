@@ -38,23 +38,27 @@
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStackSidebar")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkStackSidebar" GTK:STACK-SIDEBAR
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_stack_sidebar_get_type")
-                       ((STACK STACK-SIDEBAR-STACK "stack" "GtkStack" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_stack_sidebar_get_type")
+                      ((STACK STACK-SIDEBAR-STACK "stack" "GtkStack" T T)))
              (gobject:get-gtype-definition "GtkStackSidebar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-stack-sidebar-stack.1
-  (let ((sidebar (make-instance 'gtk:stack-sidebar)))
+  (glib-test:with-check-memory (sidebar)
+    (is (typep (setf sidebar
+                     (make-instance 'gtk:stack-sidebar)) 'gtk:stack-sidebar))
     (is-false (gtk:stack-sidebar-stack sidebar))))
 
 (test gtk-stack-sidebar-stack.2
-  (let ((sidebar (make-instance 'gtk:stack-sidebar))
-        (stack (make-instance 'gtk:stack)))
+  (glib-test:with-check-memory (sidebar stack)
+    (is (typep (setf sidebar
+                     (make-instance 'gtk:stack-sidebar)) 'gtk:stack-sidebar))
+    (is (typep (setf stack (make-instance 'gtk:stack)) 'gtk:stack))
     (is (eq stack (setf (gtk:stack-sidebar-stack sidebar) stack)))
     (is (eq stack (gtk:stack-sidebar-stack sidebar)))
     (is-false (setf (gtk:stack-sidebar-stack sidebar) nil))))
@@ -64,6 +68,7 @@
 ;;;     gtk_stack_sidebar_new
 
 (test gtk-stack-sidebar-new
-  (is (typep (gtk:stack-sidebar-new) 'gtk:stack-sidebar)))
+  (glib-test:with-check-memory (sidebar)
+    (is (typep (setf sidebar (gtk:stack-sidebar-new)) 'gtk:stack-sidebar))))
 
-;;; 2024-10-9
+;;; 2025-4-23

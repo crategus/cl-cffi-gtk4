@@ -49,7 +49,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-action-bar-revealed
-  (let ((actionbar (make-instance 'gtk:action-bar)))
+  (glib-test:with-check-memory (actionbar)
+    (is (typep (setf actionbar (make-instance 'gtk:action-bar)) 'gtk:action-bar))
     (is-true (gtk:action-bar-revealed actionbar))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -57,12 +58,32 @@
 ;;;     gtk_action_bar_new
 
 (test gtk-action-bar-new
-  (is (typep (gtk:action-bar-new) 'gtk:action-bar)))
+  (glib-test:with-check-memory (actionbar)
+    (is (typep (setf actionbar (gtk:action-bar-new)) 'gtk:action-bar))))
 
 ;;;     gtk_action_bar_pack_start
 ;;;     gtk_action_bar_pack_end
 ;;;     gtk_action_bar_remove
+
+(test gtk-action-bar-pack-start/end
+  (glib-test:with-check-memory (actionbar label button)
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
+    (is (typep (setf button (gtk:button-new)) 'gtk:button))
+    (is (typep (setf actionbar (gtk:action-bar-new)) 'gtk:action-bar))
+    (is-false (gtk:action-bar-pack-end actionbar label))
+    (is-false (gtk:action-bar-pack-start actionbar button))
+    (is-false (gtk:action-bar-remove actionbar label))
+    (is-false (gtk:action-bar-remove actionbar button))))
+
 ;;;     gtk_action_bar_get_center_widget
 ;;;     gtk_action_bar_set_center_widget
 
-;;; 2024-9-19
+(test gtk-action-bar-center-widget
+  (glib-test:with-check-memory (actionbar widget)
+    (is (typep (setf actionbar (gtk:action-bar-new)) 'gtk:action-bar))
+    (is (typep (setf widget (gtk:button-new)) 'gtk:button))
+    (is (eq widget (setf (gtk:action-bar-center-widget actionbar) widget)))
+    (is (eq widget (gtk:action-bar-center-widget actionbar)))
+    (is-false (setf (gtk:action-bar-center-widget actionbar) nil))))
+
+;;; 2025-4-24
