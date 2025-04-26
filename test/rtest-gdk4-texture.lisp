@@ -257,7 +257,7 @@
 ;; TODO: Can we release the reference of the pixbuf from the texture
 
 (test gdk-texture-new-for-pixbuf
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) texture :strong 1)
       (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
         (setf pixbuf (gdk:pixbuf-new-from-file path))
@@ -371,4 +371,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2025-3-11
+;;; 2025-4-26

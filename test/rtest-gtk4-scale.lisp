@@ -26,7 +26,7 @@
           (equal '("GtkColorScale")
                  (glib-test:list-children "GtkScale"))))
   #+windows
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
     (is (equal '()
                (glib-test:list-children "GtkScale"))))
   ;; Check interfaces
@@ -136,4 +136,4 @@
 ;;;     gtk_scale_add_mark
 ;;;     gtk_scale_clear_marks
 
-;;; 2024-12-5
+;;; 2025-4-26

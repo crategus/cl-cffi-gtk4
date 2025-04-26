@@ -127,7 +127,7 @@
   (is (eq (g:gtype "GtkListBase")
           (g:type-parent "GtkListView")))
   ;; Check children
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '()
                  (glib-test:list-children "GtkListView")))
       (is (equal '("GtkColumnListView")
@@ -234,4 +234,4 @@
     (gtk:list-view-scroll-to listview 1 :select nil)
 ))
 
-;;; 2025-4-8
+;;; 2025-4-26

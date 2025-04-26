@@ -73,32 +73,32 @@
                  "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
                  (glib-test:list-children "GtkWidget") :test #'string=))
   #+windows
-  (if *first-run-gtk-test*
-      (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
-                   "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
-                   "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
-                   "GtkColorButton" "GtkColorChooserWidget"
-                   "GtkColorDialogButton" "GtkColumnView" "GtkComboBox"
-                   "GtkDragIcon" "GtkDrawingArea" "GtkDropDown"
-                   "GtkEditableLabel" "GtkEntry" "GtkExpander"
-                   "GtkFileChooserWidget" "GtkFixed" "GtkFlowBox"
-                   "GtkFlowBoxChild" "GtkFontButton" "GtkFontChooserWidget"
-                   "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
-                   "GtkGraphicsOffload" "GtkGrid" "GtkHeaderBar" "GtkIconView"
-                   "GtkImage" "GtkInfoBar" "GtkInscription" "GtkLabel"
-                   "GtkLevelBar" "GtkListBase" "GtkListBox" "GtkListBoxRow"
-                   "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
-                   "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned"
-                   "GtkPasswordEntry" "GtkPicture" "GtkPopover"
-                   "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar"
-                   "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
-                   "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry"
-                   "GtkSeparator" "GtkShortcutLabel" "GtkShortcutsShortcut"
-                   "GtkSpinButton" "GtkSpinner" "GtkStack" "GtkStackSidebar"
-                   "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
-                   "GtkTextHandle" "GtkTextView" "GtkTooltipWindow"
-                   "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
-                   "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
+  (when *first-run-testsuite*
+    (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
+                 "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
+                 "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
+                 "GtkColorButton" "GtkColorChooserWidget"
+                 "GtkColorDialogButton" "GtkColumnView" "GtkComboBox"
+                 "GtkDragIcon" "GtkDrawingArea" "GtkDropDown"
+                 "GtkEditableLabel" "GtkEntry" "GtkExpander"
+                 "GtkFileChooserWidget" "GtkFixed" "GtkFlowBox"
+                 "GtkFlowBoxChild" "GtkFontButton" "GtkFontChooserWidget"
+                 "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
+                 "GtkGraphicsOffload" "GtkGrid" "GtkHeaderBar" "GtkIconView"
+                 "GtkImage" "GtkInfoBar" "GtkInscription" "GtkLabel"
+                 "GtkLevelBar" "GtkListBase" "GtkListBox" "GtkListBoxRow"
+                 "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
+                 "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned"
+                 "GtkPasswordEntry" "GtkPicture" "GtkPopover"
+                 "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar"
+                 "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
+                 "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry"
+                 "GtkSeparator" "GtkShortcutLabel" "GtkShortcutsShortcut"
+                 "GtkSpinButton" "GtkSpinner" "GtkStack" "GtkStackSidebar"
+                 "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
+                 "GtkTextHandle" "GtkTextView" "GtkTooltipWindow"
+                 "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
+                 "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
                  (glib-test:list-children "GtkWidget"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -681,7 +681,7 @@
 
 #+nil
 (test gtk-widget-snapshot
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory (window button snapshot :strong 1)
       (setf button (gtk:button-new-with-label "label"))
       (setf window (make-instance 'gtk:window :child button))
@@ -897,4 +897,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-12-18
+;;; 2025-4-26

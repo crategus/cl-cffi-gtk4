@@ -80,7 +80,7 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFilter")))
   ;; Check children
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '("GtkBoolFilter" "GtkCustomFilter" "GtkFileFilter"
                    "GtkMultiFilter" "GtkStringFilter")
                  (glib-test:list-children "GtkFilter")))
@@ -213,4 +213,4 @@
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2024-12-16
+;;; 2025-4-26

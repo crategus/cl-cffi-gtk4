@@ -78,8 +78,8 @@
     (is-false (gdk:clipboard-content clipboard))
     (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
     (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
-    (if *first-run-gtk-test*
-        (is-true (gdk:clipboard-local clipboard)))))
+    (when *first-run-testsuite*
+      (is-true (gdk:clipboard-local clipboard)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -142,4 +142,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; 2024-9-19
+;;; 2025-4-26

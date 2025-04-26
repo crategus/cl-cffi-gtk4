@@ -21,9 +21,9 @@
           (g:type-parent "GtkFlowBoxChild")))
   ;; Check children
   #-windows
-  (if *first-run-gtk-test*
-      (is (equal '()
-                 (glib-test:list-children "GtkFlowBoxChild"))))
+  (when *first-run-testsuite*
+    (is (equal '()
+               (glib-test:list-children "GtkFlowBoxChild"))))
   #+windows
   (is (equal '()
              (glib-test:list-children "GtkFlowBoxChild")))
@@ -344,4 +344,4 @@
 
 ;;;     gtk_flow_box_bind_model
 
-;;; 2024-10-9
+;;; 2025-4-26

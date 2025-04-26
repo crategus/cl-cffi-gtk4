@@ -135,7 +135,7 @@
 
 #-windows
 (test gdk-display-open
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 2)
       (let ((name (uiop:getenv "DISPLAY"))
             display)
@@ -144,7 +144,7 @@
 
 #+nil ;; No longer works for Windows?
 (test gdk-display-open
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 1)
       (let (display)
         (is (typep (setf display
@@ -201,7 +201,7 @@
 ;;;     gdk_display_beep
 
 (test gdk-display-beep
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 1)
       (let ((display (gdk:display-default)))
         (is-false (gdk:display-beep display))))))
@@ -365,4 +365,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2025-3-27
+;;; 2025-4-26

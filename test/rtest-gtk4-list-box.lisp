@@ -26,9 +26,9 @@
           (equal '("GtkPlacesViewRow" "GtkSidebarRow")
                  (glib-test:list-children "GtkListBoxRow"))))
   #+windows
-  (if *first-run-gtk-test*
-      (is (equal '()
-                 (glib-test:list-children "GtkListBoxRow"))))
+  (when *first-run-testsuite*
+    (is (equal '()
+               (glib-test:list-children "GtkListBoxRow"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
@@ -690,4 +690,4 @@
 ;;;     GtkListBoxCreateWidgetFunc
 ;;;     gtk_list_box_bind_model
 
-;;; 2025-3-31
+;;; 2025-4-26

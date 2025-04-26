@@ -81,7 +81,7 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSorter")))
   ;; Check children
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '("GtkColumnViewSorter" "GtkCustomSorter" "GtkMultiSorter"
                    "GtkNumericSorter" "GtkStringSorter" "GtkTreeListRowSorter")
                  (glib-test:list-children "GtkSorter")))
@@ -168,4 +168,4 @@
   (is (eq :equal (gtk:ordering-from-cmpfunc  0)))
   (is (eq :larger (gtk:ordering-from-cmpfunc  1))))
 
-;;; 2024-12-16
+;;; 2025-4-26

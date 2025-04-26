@@ -22,7 +22,7 @@
           (g:type-parent "GdkAppLaunchContext")))
   ;; Check children
   #-windows
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (equal '()
              (glib-test:list-children "GdkAppLaunchContext"))
       (is (member "GdkWaylandAppLaunchContext"
@@ -106,4 +106,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; 2025-1-1
+;;; 2025-4-26

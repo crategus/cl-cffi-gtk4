@@ -27,7 +27,7 @@
                    "GtkShortcutsSection")
                  (glib-test:list-children "GtkBox"))))
   #+windows
-  (if *first-run-gtk-test*
+  (if *first-run-testsuite*
       (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
                  (glib-test:list-children "GtkBox"))))
   ;; Check interfaces
@@ -180,4 +180,4 @@
     (is-false (gtk:box-remove box child2))
     (is-false (gtk:box-remove box child3))))
 
-;;; 2024-12-23
+;;; 2025-4-26

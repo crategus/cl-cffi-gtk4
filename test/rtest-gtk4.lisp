@@ -13,8 +13,6 @@
 
 (in-package :gtk-test)
 
-(defvar *first-run-gtk-test* t)
-
 (def-suite gtk-test)
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
@@ -218,4 +216,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
           (format t "~&No printer for testsuite available~%")))
     default-printer))
 
-;;; 2025-4-12
+;;; 2025-4-26

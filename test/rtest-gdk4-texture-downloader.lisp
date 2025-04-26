@@ -23,7 +23,7 @@
 ;;;     gdk_texture_downloader_new
 
 (test gdk-texture-downloader-new
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) (texture 2) :strong 2)
       (let ((path (glib-sys:sys-path "test/resource/ducky.png"))
              downloader)
@@ -42,7 +42,7 @@
 ;;;     gdk_texture_downloader_set_color_state
 
 (test gdk-texture-downloader-color-state
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) (texture 2) :strong 2)
       (let ((path (glib-sys:sys-path "test/resource/ducky.png"))
             downloader)
@@ -71,7 +71,7 @@
 ;;;     gdk_texture_downloader_set_format
 
 (test gdk-texture-downloader-format
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) (texture 2) :strong 2)
       (let ((path (glib-sys:sys-path "test/resource/ducky.png"))
             downloader)
@@ -88,7 +88,7 @@
 ;;;     gdk_texture_downloader_set_texture
 
 (test gdk-texture-downloader-texture
-  (when *first-run-gtk-test*
+  (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) (texture 2) :strong 2)
       (let ((path (glib-sys:sys-path "test/resource/ducky.png"))
             downloader)
@@ -101,4 +101,4 @@
         (is (eq texture (setf (gdk:texture-downloader-texture downloader) texture)))
         (is (eq texture (gdk:texture-downloader-texture downloader)))))))
 
-;;; 2024-12-20
+;;; 2025-4-26
