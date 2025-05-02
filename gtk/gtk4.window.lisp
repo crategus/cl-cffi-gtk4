@@ -118,7 +118,7 @@
 ;;;     focus-visible
 ;;;     focus-widget
 ;;;     fullscreened
-;;;     handle-menubar-accel                               Since 4.2
+;;;     handle-menubar-accel                                Since 4.2
 ;;;     hide-on-close
 ;;;     icon-name
 ;;;     is-active
@@ -127,9 +127,9 @@
 ;;;     modal
 ;;;     resizable
 ;;;     startup-id
-;;;     suspended                                          Since 4.12
+;;;     suspended                                           Since 4.12
 ;;;     title
-;;;     titlebar                                           Since 4.6
+;;;     titlebar                                            Since 4.6
 ;;;     transient-for
 ;;;
 ;;; Signals
@@ -138,7 +138,7 @@
 ;;;     activate-focus
 ;;;     close-request
 ;;;     enable-debugging
-;;;     keys-changed                                       Deprecated 4.10
+;;;     keys-changed                                        Deprecated 4.10
 ;;;
 ;;; Hierarchy
 ;;;
@@ -519,11 +519,11 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-height)
       "Accessor"
       (documentation 'window-default-height 'function)
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-default-height object) => height}
   @syntax{(setf (gtk:window-default-height object) height)}
   @argument[object]{a @class{gtk:window} widget}
-  @argument[height]{an integer with the default height}
+  @argument[height]{an integer for the default height}
   @begin{short}
     Accessor of the @slot[gtk:window]{default-height} slot of the
     @class{gtk:window} class.
@@ -576,11 +576,11 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-width)
       "Accessor"
       (documentation 'window-default-width 'function)
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-default-width object) => width}
   @syntax{(setf (gtk:window-default-width object) width)}
   @argument[object]{a @class{gtk:window} widget}
-  @argument[width]{an integer with the default width}
+  @argument[width]{an integer for the default width}
   @begin{short}
     Accessor of the @slot[gtk:window]{default-width} slot of the
     @class{gtk:window} class.
@@ -869,11 +869,11 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-icon-name)
       "Accessor"
       (documentation 'window-icon-name 'function)
- "@version{2024-10-2}
+ "@version{2025-1-5}
   @syntax{(gtk:window-icon-name object) => name}
   @syntax{(setf (gtk:window-icon-name object) name)}
   @argument[object]{a @class{gtk:window} widget}
-  @argument[name]{a string with the name of the themed icon}
+  @argument[name]{a string for the name of the themed icon}
   @begin{short}
     Accessor of the @slot[gtk:window]{icon-name} slot of the @class{gtk:window}
     class.
@@ -1048,10 +1048,10 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-startup-id)
       "Accessor"
       (documentation 'window-startup-id 'function)
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(setf (gtk:window-startup-id object) id)}
   @argument[object]{a @class{gtk:window} widget}
-  @argument[id]{a string with the startup ID}
+  @argument[id]{a string for the startup ID}
   @begin{short}
     Accessor of the @slot[gtk:window]{startup-id} slot of the @class{gtk:window}
     class.
@@ -1114,11 +1114,11 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-title)
       "Accessor"
       (documentation 'window-title 'function)
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-title object) => title}
   @syntax{(setf (gtk:window-title object) title)}
   @argument[object]{a @class{gtk:window} widget}
-  @argument[title]{a string with the title of the window}
+  @argument[title]{a string for the title of the window}
   @begin{short}
     Accessor of the @slot[gtk:window]{title} slot of the @class{gtk:window}
     class.
@@ -1273,18 +1273,18 @@ lambda (window)    :run-first
 
 (defun window-default-size (window)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-default-size window) => width, height}
   @syntax{(setf (gtk:window-default-size window) (list width height))}
   @argument[window]{a @class{gtk:window} widget}
-  @argument[width]{an integer with the default width of the window}
-  @argument[height]{an integer with the default height of the window}
+  @argument[width]{an integer for the default width of the window}
+  @argument[height]{an integer for the default height of the window}
   @begin{short}
-    Accessor of the default size of a @class{gtk:window} widget.
+    The @fun{gtk:window-default-size} function gets the default size of the
+    window.
   @end{short}
-  The @fun{gtk:window-default-size} function gets the default size of the
-  window. The @setf{gtk:window-default-size} function sets the default size. A
-  value of -1 for the width or height indicates that a default size has not been
+  The @setf{gtk:window-default-size} function sets the default size. A value of
+  -1 for the width or height indicates that a default size has not been
   explicitly set for that dimension, so the \"natural\" size of the window will
   be used. If the \"natural\" size of the window, its size request, is larger
   than the default, the default will be ignored.
@@ -1441,19 +1441,18 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_get_focus" window-focus) (g:object widget)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-focus window) => focus}
   @syntax{(setf (gtk:window-focus window) focus)}
   @argument[window]{a @class{gtk:window} widget}
   @argument[focus]{a @class{gtk:widget} object to be the focus widget, or
     @code{nil} to unset any focus widget for the toplevel window}
   @begin{short}
-    Accessor of the focus widget of the window.
+    The @fun{gtk:window-focus} function retrieves the current focused widget
+    within the window.
   @end{short}
-  The @fun{gtk:window-focus} function retrieves the current focused widget
-  within the window. If the @arg{focus} argument is not the current focus
-  widget, and is focusable, the @setf{gtk:window-focus} function sets the focus
-  widget.
+  If the @arg{focus} argument is not the current focus widget, and is focusable,
+  the @setf{gtk:window-focus} function sets the focus widget.
 
   If the @arg{focus} argument is @code{nil}, unsets the focus widget for the
   window. To set the focus to a particular widget in the toplevel, it is usually
@@ -1499,9 +1498,9 @@ lambda (window)    :run-first
 
 (defun window-present-with-time (window timestamp)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @argument[window]{a @class{gtk:window} widget}
-  @argument[timestamp]{an unsigned integer with the timestamp of the user
+  @argument[timestamp]{an unsigned integer for the timestamp of the user
     interaction, typically a button or key press event, which triggered this
     call}
   @begin{short}
@@ -1746,17 +1745,17 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_default_icon_name" window-default-icon-name)
     :string
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-default-icon-name) => name}
   @syntax{(setf (gtk:window-default-icon-name) name)}
-  @argument[name]{a string with the name of the themed icon}
+  @argument[name]{a string for the name of the themed icon}
   @begin{short}
-    Accessor of the default icon name of the window.
+    The @fun{gtk:window-default-icon-name} function returns the fallback icon
+    name for windows.
   @end{short}
-  The @fun{gtk:window-default-icon-name} function returns the fallback icon
-  name for windows. The @setf{gtk:window-default-icon-name} function sets an
-  icon to be used as fallback for windows that have not had the
-  @fun{gtk:window-icon-name} function called on them.
+  The @setf{gtk:window-default-icon-name} function sets an icon to be used as
+  fallback for windows that have not had the @fun{gtk:window-icon-name} function
+  called on them.
   @see-class{gtk:window}
   @see-function{gtk:window-icon-name}")
 
@@ -1844,16 +1843,16 @@ lambda (window)    :run-first
 #-gtk-4-6
 (cffi:defcfun ("gtk_window_get_titlebar" window-titlebar) (g:object widget)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-01}
   @syntax{(gtk:window-titlebar window) => widget}
   @syntax{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
   @argument[widget]{a @class{gtk:widget} object to use as titlebar}
   @begin{short}
-    Accessor of the custom titlebar widget of the window.
+    The @fun{gtk:window-titlebar} function returns the custom titlebar for the
+    window.
   @end{short}
-  The @fun{gtk:window-titlebar} function returns the custom titlebar for the
-  window. The @setf{gtk:window-titlebar} function sets a custom titlebar.
+  The @setf{gtk:window-titlebar} function sets a custom titlebar.
 
   A typical widget used here is the @class{gtk:header-bar} widget, as it
   provides various features expected of a titlebar while allowing the addition

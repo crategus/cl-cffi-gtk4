@@ -44,50 +44,51 @@
   (is (eq :label (gtk:widget-class-accessible-role "GtkLabel")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLabel" GTK:LABEL
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
-                         "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_label_get_type")
-                       ((ATTRIBUTES LABEL-ATTRIBUTES
-                         "attributes" "PangoAttrList" T T)
-                        (ELLIPSIZE LABEL-ELLIPSIZE
-                         "ellipsize" "PangoEllipsizeMode" T T)
-                        (EXTRA-MENU LABEL-EXTRA-MENU
-                         "extra-menu" "GMenuModel" T T)
-                        (JUSTIFY LABEL-JUSTIFY "justify" "GtkJustification" T T)
-                        (LABEL LABEL-LABEL "label" "gchararray" T T)
-                        (LINES LABEL-LINES "lines" "gint" T T)
-                        (MAX-WIDTH-CHARS LABEL-MAX-WIDTH-CHARS
-                         "max-width-chars" "gint" T T)
-                        (MNEMONIC-KEYVAL LABEL-MNEMONIC-KEYVAL
-                         "mnemonic-keyval" "guint" T NIL)
-                        (MNEMONIC-WIDGET LABEL-MNEMONIC-WIDGET
-                         "mnemonic-widget" "GtkWidget" T T)
-                        (NATURAL-WRAP-MODE LABEL-NATURAL-WRAP-MODE
-                         "natural-wrap-mode" "GtkNaturalWrapMode" T T)
-                        (SELECTABLE LABEL-SELECTABLE "selectable"
-                         "gboolean" T T)
-                        (SINGLE-LINE-MODE LABEL-SINGLE-LINE-MODE
-                         "single-line-mode" "gboolean" T T)
-                        (TABS LABEL-TABS "tabs" "PangoTabArray" T T)
-                        (USE-MARKUP LABEL-USE-MARKUP "use-markup"
-                         "gboolean" T T)
-                        (USE-UNDERLINE LABEL-USE-UNDERLINE
-                         "use-underline" "gboolean" T T)
-                        (WIDTH-CHARS LABEL-WIDTH-CHARS "width-chars" "gint" T T)
-                        (WRAP LABEL-WRAP "wrap" "gboolean" T T)
-                        (WRAP-MODE LABEL-WRAP-MODE
-                         "wrap-mode" "PangoWrapMode" T T)
-                        (XALIGN LABEL-XALIGN "xalign" "gfloat" T T)
-                        (YALIGN LABEL-YALIGN "yalign" "gfloat" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_label_get_type")
+                      ((ATTRIBUTES LABEL-ATTRIBUTES
+                        "attributes" "PangoAttrList" T T)
+                       (ELLIPSIZE LABEL-ELLIPSIZE
+                        "ellipsize" "PangoEllipsizeMode" T T)
+                       (EXTRA-MENU LABEL-EXTRA-MENU
+                        "extra-menu" "GMenuModel" T T)
+                       (JUSTIFY LABEL-JUSTIFY "justify" "GtkJustification" T T)
+                       (LABEL LABEL-LABEL "label" "gchararray" T T)
+                       (LINES LABEL-LINES "lines" "gint" T T)
+                       (MAX-WIDTH-CHARS LABEL-MAX-WIDTH-CHARS
+                        "max-width-chars" "gint" T T)
+                       (MNEMONIC-KEYVAL LABEL-MNEMONIC-KEYVAL
+                        "mnemonic-keyval" "guint" T NIL)
+                       (MNEMONIC-WIDGET LABEL-MNEMONIC-WIDGET
+                        "mnemonic-widget" "GtkWidget" T T)
+                       (NATURAL-WRAP-MODE LABEL-NATURAL-WRAP-MODE
+                        "natural-wrap-mode" "GtkNaturalWrapMode" T T)
+                       (SELECTABLE LABEL-SELECTABLE "selectable"
+                        "gboolean" T T)
+                       (SINGLE-LINE-MODE LABEL-SINGLE-LINE-MODE
+                        "single-line-mode" "gboolean" T T)
+                       (TABS LABEL-TABS "tabs" "PangoTabArray" T T)
+                       (USE-MARKUP LABEL-USE-MARKUP "use-markup"
+                        "gboolean" T T)
+                       (USE-UNDERLINE LABEL-USE-UNDERLINE
+                        "use-underline" "gboolean" T T)
+                       (WIDTH-CHARS LABEL-WIDTH-CHARS "width-chars" "gint" T T)
+                       (WRAP LABEL-WRAP "wrap" "gboolean" T T)
+                       (WRAP-MODE LABEL-WRAP-MODE
+                        "wrap-mode" "PangoWrapMode" T T)
+                       (XALIGN LABEL-XALIGN "xalign" "gfloat" T T)
+                       (YALIGN LABEL-YALIGN "yalign" "gfloat" T T)))
              (gobject:get-gtype-definition "GtkLabel"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-label-properties
-  (let ((label (make-instance 'gtk:label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (make-instance 'gtk:label)) 'gtk:label))
     (is-false (gtk:label-attributes label))
     (is (eq :none (gtk:label-ellipsize label)))
     (is-false (gtk:label-extra-menu label))
@@ -189,20 +190,24 @@
 ;;;     gtk_label_new
 
 (test gtk-label-new.1
-  (is (typep (gtk:label-new "label") 'gtk:label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))))
 
 (test gtk-label-new.2
-  (let ((label (gtk:label-new "label")))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
     (is (string= "label" (gtk:label-label label)))
     (is (string= "label" (gtk:label-text label)))))
 
 ;;;     gtk_label_new_with_mnemonic
 
 (test gtk-label-new-with-mnemonic.1
-  (is (typep (gtk:label-new-with-mnemonic "_label") 'gtk:label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new-with-mnemonic "_label")) 'gtk:label))))
 
 (test gtk-label-new-with-mnemonic.2
-  (let ((label (gtk:label-new-with-mnemonic "_label")))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new-with-mnemonic "_label")) 'gtk:label))
     (is (string= "_label" (gtk:label-label label)))
     (is (string= "label" (gtk:label-text label)))
     (is-true (gtk:label-use-underline label))))
@@ -211,11 +216,10 @@
 ;;;     gtk_label_set_text
 
 (test gtk-label-text
-  (let ((label (gtk:label-new-with-mnemonic "_label")))
-
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new-with-mnemonic "_label")) 'gtk:label))
     (is (string= "_label" (gtk:label-label label)))
     (is (string= "label" (gtk:label-text label)))
-
     (is (string= "New" (setf (gtk:label-text label) "New")))
     (is (string= "New" (gtk:label-label label)))
     (is (string= "New" (gtk:label-text label)))))
@@ -223,54 +227,56 @@
 ;;;     gtk_label_set_markup
 
 (test gtk-label-set-markup
-  (let ((label (make-instance 'gtk:label)))
-    (is-false (gtk:label-set-markup label
-                                    "<small>Small text</small>"))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (make-instance 'gtk:label)) 'gtk:label))
+    (is-false (gtk:label-set-markup label "<small>Small text</small>"))
     (is-true (gtk:label-use-markup label))
     (is-false (gtk:label-use-underline label))
-    (is (string= "<small>Small text</small>"
-                 (gtk:label-label label)))
+    (is (string= "<small>Small text</small>" (gtk:label-label label)))
     (is (string= "Small text" (gtk:label-text label)))))
 
 ;;;     gtk_label_set_text_with_mnemonic
 
 (test gtk-label-set-text-with-mnemonic
-  (let ((label (make-instance 'gtk:label)))
-
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (make-instance 'gtk:label)) 'gtk:label))
     (is-false (gtk:label-set-text-with-mnemonic label "_label"))
-
     (is (string= "_label" (gtk:label-label label)))
     (is (string= "label" (gtk:label-text label)))))
 
 ;;;     gtk_label_set_markup_with_mnemonic
 
 (test gtk-label-set-markup-with-mnemonic
-  (let ((label (make-instance 'gtk:label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (make-instance 'gtk:label)) 'gtk:label))
     (is-false (gtk:label-set-markup-with-mnemonic label
                                                   "<small>_Small text</small>"))
     (is-true (gtk:label-use-markup label))
     (is-true (gtk:label-use-underline label))
-    (is (string= "<small>_Small text</small>"
-                 (gtk:label-label label)))
+    (is (string= "<small>_Small text</small>" (gtk:label-label label)))
     (is (string= "Small text" (gtk:label-text label)))))
 
 ;;;     gtk_label_get_layout
 
 (test gtk-label-layout
-  (let ((label (gtk:label-new "label"))
-        (layout nil))
-    (is (typep (setf layout
-                     (gtk:label-layout label)) 'pango:layout))
-    ;; Check memory management
-    (is (string= "" (setf (gtk:label-label label) ""))) ; Clears layout
-    (is (= 1 (g:object-ref-count layout)))
-    (is (= 1 (g:object-ref-count label)))))
+  (glib-test:with-check-memory (label layout)
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
+    (is (typep (setf layout (gtk:label-layout label)) 'pango:layout))
+    ;; Remove references
+    (is (string= "" (setf (gtk:label-label label) ""))))) ; Clears layout
 
 ;;;     gtk_label_get_layout_offsets
 
-(test gtk-label-layout-offsets
+(test gtk-label-layout-offsets.1
   (glib-test:with-check-memory (label)
-    (setf label (gtk:label-new "label"))
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
+    (is (every #'integerp
+               (multiple-value-list (gtk:label-layout-offsets label))))))
+
+#+crategus
+(test gtk-label-layout-offsets.2
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
     #-windows
     (is (equal '(-16 -9)
                (multiple-value-list (gtk:label-layout-offsets label))))
@@ -282,7 +288,8 @@
 ;;;     gtk_label_get_selection_bounds
 
 (test gtk-label-select-region
-  (let ((label (gtk:label-new "a long label")))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label (gtk:label-new "a long label")) 'gtk:label))
     (is-true (setf (gtk:label-selectable label) t))
     (is (= 12 (length (gtk:label-text label))))
     (is-false (gtk:label-select-region label 3 7))
@@ -294,13 +301,17 @@
 ;; TODO: How to select the link?
 
 (test gtk-label-current-uri
-  (let ((label (make-instance 'gtk:label
-                              :use-markup t
-                              :selectable t
-                              :label
-                              (format nil "Go to <a href=\"http://gtk.org/\">~
-                                           GTK Website</a> ..."))))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label
+                     (make-instance 'gtk:label
+                                    :use-markup t
+                                    :selectable t
+                                    :label
+                                    (format nil
+                                            "Go to <a href=\"http://gtk.org/\">~
+                                             GTK Website</a> ...")))
+               'gtk:label))
     (is-false (gtk:label-select-region label 8 17))
     (is-false (gtk:label-current-uri label))))
 
-;;; 2024-12-18
+;;; 2025-4-27

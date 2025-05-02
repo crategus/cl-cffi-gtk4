@@ -125,9 +125,9 @@ Layout Managers
 
 Display Widgets
 
-  gtk4.label.lisp                       GtkLabel                      GTK 4.16 .
+  gtk4.label.lisp                       GtkLabel                      GTK 4.18 .
   gtk4.inscription.lisp                 GtkInscription                GTK 4.16 .
-  gtk4.image.lisp                       GtkImage                      GTK 4.16 .
+  gtk4.image.lisp                       GtkImage                      GTK 4.18 .
   gtk4.picture.lisp                     GtkPicture                    GTK 4.16 .
   gtk4.spinner.lisp                     GtkSpinner                    GTK 4.16 .
   gtk4.progress-bar.lisp                GtkProgressBar                GTK 4.16 .
@@ -205,7 +205,7 @@ Scrolling
 
   gtk4.scrollable.lisp                 GtkScrollable                  GTk 4.16 .
   gtk4.scrollbar.lisp                  GtkScrollbar                   GTK 4.16 .
-  gtk4.scrolled-window.lisp            GtkScrolledWindow              GTK 4.16 .
+  gtk4.scrolled-window.lisp            GtkScrolledWindow              GTK 4.18 .
   gtk4.viewport.lisp                   GtkViewport                    GTK 4.18 .
 
 Printing

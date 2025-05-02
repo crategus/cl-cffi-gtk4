@@ -107,79 +107,55 @@
   (is (eq :generic (gtk:widget-class-accessible-role "GtkScrolledWindow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScrolledWindow" GTK:SCROLLED-WINDOW
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_scrolled_window_get_type")
-                       ((CHILD SCROLLED-WINDOW-CHILD "child" "GtkWidget" T T)
-                        (HADJUSTMENT
-                         SCROLLED-WINDOW-HADJUSTMENT
-                         "hadjustment" "GtkAdjustment" T T)
-                        (HAS-FRAME
-                         SCROLLED-WINDOW-HAS-FRAME
-                         "has-frame" "gboolean" T T)
-                        (HSCROLLBAR-POLICY
-                         SCROLLED-WINDOW-HSCROLLBAR-POLICY
-                         "hscrollbar-policy" "GtkPolicyType" T T)
-                        (KINETIC-SCROLLING
-                         SCROLLED-WINDOW-KINETIC-SCROLLING
-                         "kinetic-scrolling" "gboolean" T T)
-                        (MAX-CONTENT-HEIGHT
-                         SCROLLED-WINDOW-MAX-CONTENT-HEIGHT
-                         "max-content-height" "gint" T T)
-                        (MAX-CONTENT-WIDTH
-                         SCROLLED-WINDOW-MAX-CONTENT-WIDTH
-                         "max-content-width" "gint" T T)
-                        (MIN-CONTENT-HEIGHT
-                         SCROLLED-WINDOW-MIN-CONTENT-HEIGHT
-                         "min-content-height" "gint" T T)
-                        (MIN-CONTENT-WIDTH
-                         SCROLLED-WINDOW-MIN-CONTENT-WIDTH
-                         "min-content-width" "gint" T T)
-                        (OVERLAY-SCROLLING
-                         SCROLLED-WINDOW-OVERLAY-SCROLLING
-                         "overlay-scrolling" "gboolean" T T)
-                        (PROPAGATE-NATURAL-HEIGHT
-                         SCROLLED-WINDOW-PROPAGATE-NATURAL-HEIGHT
-                         "propagate-natural-height" "gboolean" T T)
-                        (PROPAGATE-NATURAL-WIDTH
-                         SCROLLED-WINDOW-PROPAGATE-NATURAL-WIDTH
-                         "propagate-natural-width" "gboolean" T T)
-                        (VADJUSTMENT
-                         SCROLLED-WINDOW-VADJUSTMENT
-                         "vadjustment" "GtkAdjustment" T T)
-                        (VSCROLLBAR-POLICY
-                         SCROLLED-WINDOW-VSCROLLBAR-POLICY
-                         "vscrollbar-policy" "GtkPolicyType" T T)
-                        (WINDOW-PLACEMENT
-                         SCROLLED-WINDOW-WINDOW-PLACEMENT
-                         "window-placement" "GtkCornerType" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_scrolled_window_get_type")
+                      ((CHILD SCROLLED-WINDOW-CHILD "child" "GtkWidget" T T)
+                       (HADJUSTMENT
+                        SCROLLED-WINDOW-HADJUSTMENT
+                        "hadjustment" "GtkAdjustment" T T)
+                       (HAS-FRAME
+                        SCROLLED-WINDOW-HAS-FRAME
+                        "has-frame" "gboolean" T T)
+                       (HSCROLLBAR-POLICY
+                        SCROLLED-WINDOW-HSCROLLBAR-POLICY
+                        "hscrollbar-policy" "GtkPolicyType" T T)
+                       (KINETIC-SCROLLING
+                        SCROLLED-WINDOW-KINETIC-SCROLLING
+                        "kinetic-scrolling" "gboolean" T T)
+                       (MAX-CONTENT-HEIGHT
+                        SCROLLED-WINDOW-MAX-CONTENT-HEIGHT
+                        "max-content-height" "gint" T T)
+                       (MAX-CONTENT-WIDTH
+                        SCROLLED-WINDOW-MAX-CONTENT-WIDTH
+                        "max-content-width" "gint" T T)
+                       (MIN-CONTENT-HEIGHT
+                        SCROLLED-WINDOW-MIN-CONTENT-HEIGHT
+                        "min-content-height" "gint" T T)
+                       (MIN-CONTENT-WIDTH
+                        SCROLLED-WINDOW-MIN-CONTENT-WIDTH
+                        "min-content-width" "gint" T T)
+                       (OVERLAY-SCROLLING
+                        SCROLLED-WINDOW-OVERLAY-SCROLLING
+                        "overlay-scrolling" "gboolean" T T)
+                       (PROPAGATE-NATURAL-HEIGHT
+                        SCROLLED-WINDOW-PROPAGATE-NATURAL-HEIGHT
+                        "propagate-natural-height" "gboolean" T T)
+                       (PROPAGATE-NATURAL-WIDTH
+                        SCROLLED-WINDOW-PROPAGATE-NATURAL-WIDTH
+                        "propagate-natural-width" "gboolean" T T)
+                       (VADJUSTMENT
+                        SCROLLED-WINDOW-VADJUSTMENT
+                        "vadjustment" "GtkAdjustment" T T)
+                       (VSCROLLBAR-POLICY
+                        SCROLLED-WINDOW-VSCROLLBAR-POLICY
+                        "vscrollbar-policy" "GtkPolicyType" T T)
+                       (WINDOW-PLACEMENT
+                        SCROLLED-WINDOW-WINDOW-PLACEMENT
+                        "window-placement" "GtkCornerType" T T)))
              (gobject:get-gtype-definition "GtkScrolledWindow"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-scrolled-window-properties
-  (let ((window (make-instance 'gtk:scrolled-window)))
-    (is-false (gtk:scrolled-window-child window))
-    (is (typep (gtk:scrolled-window-hadjustment window) 'gtk:adjustment))
-    (is-false (gtk:scrolled-window-has-frame window))
-    (is (eq :automatic (gtk:scrolled-window-hscrollbar-policy window)))
-    (is-true (gtk:scrolled-window-kinetic-scrolling window))
-    (is (= -1 (gtk:scrolled-window-max-content-height window)))
-    (is (= -1 (gtk:scrolled-window-max-content-width window)))
-    (is (= -1 (gtk:scrolled-window-min-content-height window)))
-    (is (= -1 (gtk:scrolled-window-min-content-width window)))
-    (is-true (gtk:scrolled-window-overlay-scrolling window))
-    (is-false (gtk:scrolled-window-propagate-natural-height window))
-    (is-false (gtk:scrolled-window-propagate-natural-width window))
-    (is (typep (gtk:scrolled-window-vadjustment window) 'gtk:adjustment))
-    (is (eq :automatic (gtk:scrolled-window-vscrollbar-policy window)))
-    (is (eq :top-left (gtk:scrolled-window-window-placement window)))
-    ;; Check memory management
-    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
-    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
-    (is (= 1 (g:object-ref-count window)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -255,12 +231,37 @@
     (is (equal '("GtkScrollType" "gboolean")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-scrolled-window-properties
+  (glib-test:with-check-memory (window)
+    (is (typep (setf window
+                     (make-instance 'gtk:scrolled-window)) 'gtk:scrolled-window))
+    (is-false (gtk:scrolled-window-child window))
+    (is (typep (gtk:scrolled-window-hadjustment window) 'gtk:adjustment))
+    (is-false (gtk:scrolled-window-has-frame window))
+    (is (eq :automatic (gtk:scrolled-window-hscrollbar-policy window)))
+    (is-true (gtk:scrolled-window-kinetic-scrolling window))
+    (is (= -1 (gtk:scrolled-window-max-content-height window)))
+    (is (= -1 (gtk:scrolled-window-max-content-width window)))
+    (is (= -1 (gtk:scrolled-window-min-content-height window)))
+    (is (= -1 (gtk:scrolled-window-min-content-width window)))
+    (is-true (gtk:scrolled-window-overlay-scrolling window))
+    (is-false (gtk:scrolled-window-propagate-natural-height window))
+    (is-false (gtk:scrolled-window-propagate-natural-width window))
+    (is (typep (gtk:scrolled-window-vadjustment window) 'gtk:adjustment))
+    (is (eq :automatic (gtk:scrolled-window-vscrollbar-policy window)))
+    (is (eq :top-left (gtk:scrolled-window-window-placement window)))
+    ;; Remove references
+    (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_scrolled_window_new
 
 (test gtk-scrolled-window-new
-  (let (window)
+  (glib-test:with-check-memory (window)
     (is (typep (setf window (gtk:scrolled-window-new)) 'gtk:scrolled-window))
     (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
     (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
@@ -276,17 +277,17 @@
                                               (make-instance 'gtk:adjustment)))
                'gtk:scrolled-window))
     (is-false (setf (gtk:scrolled-window-hadjustment window) nil))
-    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))
-    ;; Check memory management
-    (is (= 1 (g:object-ref-count window)))))
+    (is-false (setf (gtk:scrolled-window-vadjustment window) nil))))
 
 ;;;     gtk_scrolled_window_get_hscrollbar
 ;;;     gtk_scrolled_window_get_vscrollbar
 
 (test gtk-scrolled-window-scrollbar
-  (let ((scrolled (gtk:scrolled-window-new)))
-    (is (typep (gtk:scrolled-window-hscrollbar scrolled) 'gtk:scrollbar))
-    (is (typep (gtk:scrolled-window-vscrollbar scrolled) 'gtk:scrollbar))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (scrolled :strong 2)
+      (is (typep (setf scrolled (gtk:scrolled-window-new)) 'gtk:scrolled-window))
+      (is (typep (gtk:scrolled-window-hscrollbar scrolled) 'gtk:scrollbar))
+      (is (typep (gtk:scrolled-window-vscrollbar scrolled) 'gtk:scrollbar)))))
 
 ;;;     gtk_scrolled_window_get_policy
 ;;;     gtk_scrolled_window_set_policy

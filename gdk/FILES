@@ -19,7 +19,7 @@ List of files for the GDK 4 Library
  Displays, Devices, Monitors, Seats
 
   gdk4.display-manager.lisp        GdkDisplayManager                  GDK 4.16 .
-  gdk4.display.lisp                GdkDisplay                         GDK 4.16 .
+  gdk4.display.lisp                GdkDisplay                         GDK 4.18 .
   gdk4.device-tool.lisp            GdkDeviceTool                      GDK 4.16 .
   gdk4.device.lisp                 GdkDevice                          GDK 4.16 .
   gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.16

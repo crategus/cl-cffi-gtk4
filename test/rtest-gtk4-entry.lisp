@@ -51,14 +51,6 @@
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkEntry")))
   ;; Check children
-  #-windows
-  (if *first-run-testsuite*
-      (is (equal '()
-                 (glib-test:list-children "GtkEntry")))
-      (is (equal '("GtkFileChooserEntry")
-                 (glib-test:list-children "GtkEntry"))))
-
-  #+windows
   (is (equal '()
              (glib-test:list-children "GtkEntry")))
   ;; Check interfaces
@@ -347,4 +339,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2024-9-19
+;;; 2025-4-27

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.display.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -124,7 +124,7 @@
 
 #+liber-documentation
 (setf (documentation 'display 'type)
- "@version{2024-5-25}
+ "@version{2025-05-01}
   @begin{short}
     The @class{gdk:display} object is the GDK representation of a workstation.
   @end{short}
@@ -222,7 +222,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-composited)
       "Accessor"
       (documentation 'display-composited 'function)
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @syntax{(gdk:display-composited object) => composited}
   @argument[object]{a @class{gdk:display} object}
   @argument[composited]{@em{true} if the display properly composites the alpha
@@ -253,7 +253,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-dmabuf-formats)
       "Accessor"
       (documentation 'display-dmabuf-formats 'function)
- "@version{2024-11-5}
+ "@version{2025-05-01}
   @syntax{(gdk:display-dmabuf-formats object) => formats}
   @argument[object]{a @class{gdk:display} object}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
@@ -284,7 +284,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-input-shapes)
       "Accessor"
       (documentation 'display-input-shapes 'function)
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @syntax{(gdk:display-input-shapes object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports input shapes}
@@ -311,7 +311,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-rgba)
       "Accessor"
       (documentation 'display-rgba 'function)
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @syntax{(gdk:display-rgba object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports an alpha channel}
@@ -343,7 +343,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-shadow-width)
       "Accessor"
       (documentation 'display-shadow-width 'function)
- "@version{2024-5-26}
+ "@version{2025-05-01}
   @syntax{(gdk:display-shadow-width object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if surfaces can draw shadows or @em{false} if
@@ -364,8 +364,8 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_open" display-open) (g:object display)
  #+liber-documentation
- "@version{2024-7-11}
-  @argument[name]{a string with the name of the display to open}
+ "@version{2025-05-01}
+  @argument[name]{a string for the name of the display to open}
   @begin{return}
     The @class{gdk:display} object, or @code{nil} if the display could not be
     opened.
@@ -385,7 +385,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
  #+liber-documentation
- "@version{2024-9-29}
+ "@version{2025-05-01}
   @begin{return}
     The @class{gdk:display} object, or @code{nil} if there is no default
     display.
@@ -418,7 +418,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_get_name" display-name) :string
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The string representing the display name.}
   @short{Gets the name of the display.}
@@ -434,11 +434,12 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_device_is_grabbed" display-device-is-grabbed)
     :boolean
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @argument[device]{a @class{gdk:device} object}
-  @return{The boolean that is @em{true} if there is a grab in effect for
-    @arg{device}.}
+  @begin{return}
+    The boolean that is @em{true} if there is a grab in effect for @arg{device}.
+  @end{return}
   @begin{short}
     Returns @em{true} if there is an ongoing grab on the device for the
     display.
@@ -456,7 +457,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_beep" display-beep) :void
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @short{Emits a short beep on the display.}
   @see-class{gdk:display}"
@@ -470,7 +471,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_sync" display-sync) :void
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
     Flushes any requests queued for the windowing system and waits until all
@@ -495,7 +496,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_flush" display-flush) :void
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
     Flushes any requests queued for the windowing system.
@@ -519,7 +520,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_close" display-close) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
     Closes the connection to the windowing system for the given display.
@@ -536,7 +537,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_is_closed" display-is-closed) :boolean
  #+liber-documentation
- "@version{2024-7-11}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{@em{True} if @arg{display} is closed.}
   @short{Finds out if the display has been closed.}
@@ -551,7 +552,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_is_rgba" display-is-rgba) :boolean
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{@em{True} if the display supports an alpha channel.}
   @begin{short}
@@ -576,7 +577,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_is_composited" display-is-composited) :boolean
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{Whether surfaces with RGBA visuals supports an alpha channel.}
   @begin{short}
@@ -600,7 +601,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_supports_input_shapes"
                display-supports-input-shapes) :boolean
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{@em{True} if surfaces with modified input shape are supported.}
   @begin{short}
@@ -622,7 +623,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_app_launch_context" display-app-launch-context)
     (g:object app-launch-context :return)
  #+liber-documentation
- "@version{2025-1-1}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @begin{return}
     The new @class{gdk:app-launch-context} object for @arg{display}.
@@ -638,7 +639,7 @@ lambda (display setting)    :run-last
 (export 'display-app-launch-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_notify_startup_complete                    Deprecated 4.10
+;;; gdk_display_notify_startup_complete                     Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_notify_startup_complete"
@@ -648,9 +649,9 @@ lambda (display setting)    :run-last
 
 (defun display-notify-startup-complete (display startup)
  #+liber-documentation
- "@version{#2024-1-7}
+ "@version{#2025-05-01}
   @argument[display]{a @class{gdk:display} object}
-  @argument[startup]{a string with a startup notification identifier, for which
+  @argument[startup]{a string for a startup notification identifier, for which
     notification process should be completed}
   @begin{short}
     Indicates to the GUI environment that the application has finished loading,
@@ -681,7 +682,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_default_seat"
                display-default-seat) (g:object seat)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The default @class{gdk:seat} object.}
   @begin{short}
@@ -702,7 +703,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_list_seats" display-list-seats)
     (g:list-t (g:object seat))
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The list of @class{gdk:seat} objects known to @arg{display}.}
   @begin{short}
@@ -726,9 +727,9 @@ lambda (display setting)    :run-last
 
 (defun display-monitors (display)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
-  @return{The Lisp list of @class{gdk:monitor} objects.}
+  @return{The list of @class{gdk:monitor} objects.}
   @begin{short}
     Gets the list of monitors associated with the display.
   @end{short}
@@ -755,11 +756,12 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
     (g:object monitor)
  #+liber-documentation
- "@version{#2024-1-7}
+ "@version{#2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @argument[surface]{a @class{gdk:surface} object}
-  @return{The @class{gdk:monitor} object with the largest overlap with
-    @arg{surface}.}
+  @begin{return}
+    The @class{gdk:monitor} object with the largest overlap with @arg{surface}.
+  @end{return}
   @begin{short}
     Gets the monitor in which the largest area of the surface resides.
   @end{short}
@@ -779,7 +781,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_clipboard" display-clipboard)
     (g:object clipboard)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The @class{gdk:clipboard} object.}
   @short{Gets the clipboard used for copy/paste operations.}
@@ -796,7 +798,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_primary_clipboard" display-primary-clipboard)
     (g:object clipboard)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The @class{gdk:clipboard} object.}
   @begin{short}
@@ -821,10 +823,10 @@ lambda (display setting)    :run-last
 
 (defun display-setting (display name gtype)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
-  @argument[name]{a string with the name of the setting}
-  @argument[gtype]{a @class{g:type-t} type ID with the type of the setting}
+  @argument[name]{a string for the name of the setting}
+  @argument[gtype]{a @class{g:type-t} type ID for the type of the setting}
   @return{The value of the setting or @code{nil} if the setting does not exist.}
   @begin{short}
     Retrieves a desktop-wide setting such as double-click time for the display.
@@ -845,7 +847,7 @@ lambda (display setting)    :run-last
 (export 'display-setting)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_startup_notification_id                Deprecated 4.10
+;;; gdk_display_get_startup_notification_id                 Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_startup_notification_id"
@@ -854,7 +856,7 @@ lambda (display setting)    :run-last
 
 (defun display-startup-notification-id (display)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The string with the startup notification ID for @arg{display}.}
   @begin{short}
@@ -874,7 +876,7 @@ lambda (display setting)    :run-last
 (export 'display-startup-notification-id)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_put_event                                  Deprecated 4.10
+;;; gdk_display_put_event                                   Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;; not implemented
@@ -896,11 +898,13 @@ lambda (display setting)    :run-last
 
 (defun display-map-keyval (display keyval)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
-  @argument[keyval]{an unsigned integer with the keyval}
-  @return{The list of integer with the grouped keycode/group/level combinations,
-    or @code{nil}.}
+  @argument[keyval]{an unsigned integer for the keyval}
+  @begin{return}
+    The list of integer with the grouped keycode/group/level combinations,
+    or @code{nil}.
+  @end{return}
   @begin{short}
     Obtains a list of keycode/group/level combinations that will generate
     @arg{keyval}.
@@ -946,11 +950,13 @@ lambda (display setting)    :run-last
 
 (defun display-map-keycode (display keycode)
  #+liber-documentation
- "@version{2024-1-7}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
-  @argument[keycode]{an unsigned integer with a keycode}
-  @return{The list of keyvals with the corresponding key of the form
-    (keyval keycode group level).}
+  @argument[keycode]{an unsigned integer for a keycode}
+  @begin{return}
+    The list of keyvals with the corresponding key of the form
+    (keyval keycode group level).
+  @end{return}
   @begin{short}
     Returns the keyvals bound to @arg{keycode}.
   @end{short}
@@ -996,7 +1002,7 @@ lambda (display setting)    :run-last
 
 (defun display-translate-key (display keycode state group)
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @argument[keycode]{an unsigned integer for the keycode}
   @argument[state]{a @symbol{gdk:modifier-type} state}
@@ -1055,7 +1061,7 @@ lambda (display setting)    :run-last
 #+gtk-4-4
 (defun display-prepare-gl (display)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{@em{True} if the display supports OpenGL.}
   @begin{short}
@@ -1095,7 +1101,7 @@ lambda (display setting)    :run-last
 #+gtk-4-6
 (defun display-create-gl-context (display)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-05-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The newly created @class{gdk:gl-context} object.}
   @begin{short}

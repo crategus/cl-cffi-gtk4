@@ -70,28 +70,29 @@
   (is (eq :img (gtk:widget-class-accessible-role "GtkImage")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkImage" GTK:IMAGE
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_image_get_type")
-                       ((FILE IMAGE-FILE "file" "gchararray" T T)
-                        (GICON IMAGE-GICON "gicon" "GIcon" T T)
-                        (ICON-NAME IMAGE-ICON-NAME "icon-name" "gchararray" T T)
-                        (ICON-SIZE IMAGE-ICON-SIZE "icon-size" "GtkIconSize" T T)
-                        (PAINTABLE IMAGE-PAINTABLE "paintable" "GdkPaintable" T T)
-                        (PIXEL-SIZE IMAGE-PIXEL-SIZE "pixel-size" "gint" T T)
-                        (RESOURCE IMAGE-RESOURCE "resource" "gchararray" T T)
-                        (STORAGE-TYPE IMAGE-STORAGE-TYPE
-                         "storage-type" "GtkImageType" T NIL)
-                        (USE-FALLBACK IMAGE-USE-FALLBACK
-                         "use-fallback" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_image_get_type")
+                      ((FILE IMAGE-FILE "file" "gchararray" T T)
+                       (GICON IMAGE-GICON "gicon" "GIcon" T T)
+                       (ICON-NAME IMAGE-ICON-NAME "icon-name" "gchararray" T T)
+                       (ICON-SIZE IMAGE-ICON-SIZE "icon-size" "GtkIconSize" T T)
+                       (PAINTABLE IMAGE-PAINTABLE "paintable" "GdkPaintable" T T)
+                       (PIXEL-SIZE IMAGE-PIXEL-SIZE "pixel-size" "gint" T T)
+                       (RESOURCE IMAGE-RESOURCE "resource" "gchararray" T T)
+                       (STORAGE-TYPE IMAGE-STORAGE-TYPE
+                        "storage-type" "GtkImageType" T NIL)
+                       (USE-FALLBACK IMAGE-USE-FALLBACK
+                        "use-fallback" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkImage"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-image-properties
-  (let ((image (make-instance 'gtk:image)))
+  (glib-test:with-check-memory (image)
+    (is (typep (setf image (make-instance 'gtk:image)) 'gtk:image))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
     (is-false (gtk:image-icon-name image))
@@ -107,7 +108,8 @@
 ;;;     gtk_image_new
 
 (test gtk-image-new
-  (let ((image (gtk:image-new)))
+  (glib-test:with-check-memory (image)
+    (is (typep (setf image (gtk:image-new)) 'gtk:image))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
     (is-false (gtk:image-icon-name image))
@@ -121,29 +123,30 @@
 ;;;     gtk_image_new_from_file
 
 (test gtk-image-new-from-file
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (image (gtk:image-new-from-file path)))
-    (is (string= "gtk-logo-24"
-                 (pathname-name (gtk:image-file image))))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-paintable image) nil))
-    (is (= 1 (g:object-ref-count image)))))
+  (glib-test:with-check-memory (image)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf image (gtk:image-new-from-file path)) 'gtk:image))
+      (is (string= "gtk-logo-24"
+                   (pathname-name (gtk:image-file image))))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image))
+      ;; Remove references
+      (is-false (setf (gtk:image-paintable image) nil)))))
 
 ;;;     gtk_image_new_from_resource
 
 (test gtk-image-new-from-resource
-  (let ((path (glib-sys:sys-path "test/rtest-resource.gresource")))
-    (gio:with-resource (resource path)
-      (let ((image (gtk:image-new-from-resource
-                       "/com/crategus/test/gtk-logo-24.png")))
+  (glib-test:with-check-memory (image)
+    (let ((path (glib-sys:sys-path "test/rtest-resource.gresource")))
+      (gio:with-resource (resource path)
+        (is (typep (setf image (gtk:image-new-from-resource
+                         "/com/crategus/test/gtk-logo-24.png")) 'gtk:image))
         (is-false (gtk:image-file image))
         (is-false (gtk:image-gicon image))
         (is-false (gtk:image-icon-name image))
@@ -154,40 +157,39 @@
                      (gtk:image-resource image)))
         (is (eq :paintable (gtk:image-storage-type image)))
         (is-false (gtk:image-use-fallback image))
-        ;; Check memory management
-        (is-false (setf (gtk:image-paintable image) nil))
-        (is (= 1 (g:object-ref-count image)))))))
+        ;; Remove references
+        (is-false (setf (gtk:image-paintable image) nil))))))
 
 ;;;     gtk_image_new_from_pixbuf
 
 (test gtk-image-new-from-pixbuf
-  (let* ((*gtk-warn-deprecated* nil)
-         (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (pixbuf (gdk:pixbuf-new-from-file path))
-         (image (gtk:image-new-from-pixbuf pixbuf)))
-    (is (typep pixbuf 'gdk:pixbuf))
-    (is-false (gtk:image-file image))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (gtk:image-clear image))
-    (is (= 2 (g:object-ref-count pixbuf)))
-    (is (= 1 (g:object-ref-count image)))))
+  (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
+    (let* ((*gtk-warn-deprecated* nil)
+           (path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf pixbuf (gdk:pixbuf-new-from-file path)) 'gdk:pixbuf))
+      (is (typep (setf image (gtk:image-new-from-pixbuf pixbuf)) 'gtk:image))
+      (is (typep pixbuf 'gdk:pixbuf))
+      (is-false (gtk:image-file image))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image))
+      ;; Remove references
+      (is-false (gtk:image-clear image)))))
 
 ;;;     gtk_image_new_from_paintable
 
 (test gtk-image-new-from-paintable
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (paintable (gdk:texture-new-from-filename path))
-         (image (gtk:image-new-from-paintable paintable)))
-    (is (typep paintable 'gdk:texture))
-    (is (typep paintable 'gdk:paintable))
+  (glib-test:with-check-memory (paintable image)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf paintable
+                       (gdk:texture-new-from-filename path)) 'gdk:paintable))
+      (is (typep (setf image
+                       (gtk:image-new-from-paintable paintable)) 'gtk:image))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
     (is-false (gtk:image-icon-name image))
@@ -197,15 +199,15 @@
     (is-false (gtk:image-resource image))
     (is (eq :paintable (gtk:image-storage-type image)))
     (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-paintable image) nil))
-    (is (= 1 (g:object-ref-count paintable)))
-    (is (= 1 (g:object-ref-count image)))))
+    ;; Remove references
+    (is-false (setf (gtk:image-paintable image) nil)))))
 
 ;;;     gtk_image_new_from_icon_name
 
 (test gtk-image-new-from-icon-name
-  (let ((image (gtk:image-new-from-icon-name "window-close")))
+  (glib-test:with-check-memory (image)
+    (is (typep (setf image
+                     (gtk:image-new-from-icon-name "window-close")) 'gtk:image))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
     (is (string= "window-close" (gtk:image-icon-name image)))
@@ -219,8 +221,9 @@
 ;;;     gtk_image_new_from_gicon
 
 (test gtk-image-new-from-gicon
-  (let* ((gicon (g:icon-new-for-string "window-close"))
-         (image (gtk:image-new-from-gicon gicon)))
+  (glib-test:with-check-memory (gicon image)
+    (is (typep (setf gicon (g:icon-new-for-string "window-close")) 'g:icon))
+    (is (typep (setf image (gtk:image-new-from-gicon gicon)) 'gtk:image))
     (is-false (gtk:image-file image))
     (is (typep (gtk:image-gicon image) 'g:themed-icon))
     (is-false (gtk:image-icon-name image))
@@ -230,114 +233,110 @@
     (is-false (gtk:image-resource image))
     (is (eq :gicon (gtk:image-storage-type image)))
     (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-gicon image) nil))
-    (is (= 1 (g:object-ref-count gicon)))
-    (is (= 1 (g:object-ref-count image)))))
+    ;; Remove references
+    (is-false (setf (gtk:image-gicon image) nil))))
 
 ;;;     gtk_image_clear
 
 (test gtk-image-clear
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (image (gtk:image-new-from-file path)))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    ;; Clear the image
-    (is-false (gtk:image-clear image))
-    (is (eq :empty (gtk:image-storage-type image)))))
+  (glib-test:with-check-memory (image)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf image (gtk:image-new-from-file path)) 'gtk:image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      ;; Clear the image
+      (is-false (gtk:image-clear image))
+      (is (eq :empty (gtk:image-storage-type image))))))
 
 ;;;     gtk_image_set_from_file
 
 (test gtk-image-set-from-file
-  (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-        (image (gtk:image-new)))
-    (is-false (gtk:image-set-from-file image path))
-    (is (string= "gtk-logo-24"
-                 (pathname-name (gtk:image-file image))))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-paintable image) nil))
-    (is (= 1 (g:object-ref-count image)))))
+  (glib-test:with-check-memory (image)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf image (gtk:image-new)) 'gtk:image))
+      (is-false (gtk:image-set-from-file image path))
+      (is (string= "gtk-logo-24"
+                   (pathname-name (gtk:image-file image))))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image))
+      ;; Remove references
+      (is-false (setf (gtk:image-paintable image) nil)))))
 
 ;;;     gtk_image_set_from_resource
 
 (test gtk-image-set-from-resource
-  (let ((path (glib-sys:sys-path "test/rtest-resource.gresource"))
-        (image (gtk:image-new)))
-    (gio:with-resource (resource path)
-      (is-false (gtk:image-set-from-resource
-                        image
-                        "/com/crategus/test/gtk-logo-24.png"))
+  (glib-test:with-check-memory (image)
+    (let ((path (glib-sys:sys-path "test/rtest-resource.gresource")))
+      (is (typep (setf image (gtk:image-new)) 'gtk:image))
+      (gio:with-resource (resource path)
+        (is-false (gtk:image-set-from-resource
+                          image
+                          "/com/crategus/test/gtk-logo-24.png"))
+        (is-false (gtk:image-file image))
+        (is-false (gtk:image-gicon image))
+        (is-false (gtk:image-icon-name image))
+        (is (eq :inherit (gtk:image-icon-size image)))
+        (is (typep (gtk:image-paintable image) 'gdk:texture))
+        (is (= -1 (gtk:image-pixel-size image)))
+        (is (string= "/com/crategus/test/gtk-logo-24.png"
+                     (gtk:image-resource image)))
+        (is (eq :paintable (gtk:image-storage-type image)))
+        (is-false (gtk:image-use-fallback image))
+        ;; Remove references
+        (is-false (setf (gtk:image-paintable image) nil))))))
+
+;;;     gtk_image_set_from_pixbuf
+
+(test gtk-image-set-from-pixbuf
+  (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
+    (let ((*gtk-warn-deprecated* nil)
+          (path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf pixbuf (gdk:pixbuf-new-from-file path)) 'gdk:pixbuf))
+      (is (typep (setf image (gtk:image-new)) 'gtk:image))
+      (is-false (gtk:image-set-from-pixbuf image pixbuf))
       (is-false (gtk:image-file image))
       (is-false (gtk:image-gicon image))
       (is-false (gtk:image-icon-name image))
       (is (eq :inherit (gtk:image-icon-size image)))
       (is (typep (gtk:image-paintable image) 'gdk:texture))
       (is (= -1 (gtk:image-pixel-size image)))
-      (is (string= "/com/crategus/test/gtk-logo-24.png"
-                   (gtk:image-resource image)))
+      (is-false (gtk:image-resource image))
       (is (eq :paintable (gtk:image-storage-type image)))
       (is-false (gtk:image-use-fallback image))
-      ;; Check memory management
-      (is-false (setf (gtk:image-paintable image) nil))
-      (is (= 1 (g:object-ref-count image))))))
-
-;;;     gtk_image_set_from_pixbuf
-
-(test gtk-image-set-from-pixbuf
-  (let* ((*gtk-warn-deprecated* nil)
-         (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (pixbuf (gdk:pixbuf-new-from-file path))
-         (image (gtk:image-new)))
-    (is-false (gtk:image-set-from-pixbuf image pixbuf))
-    (is (typep pixbuf 'gdk:pixbuf))
-    (is-false (gtk:image-file image))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-paintable image) nil))
-    (is (= 2 (g:object-ref-count pixbuf)))
-    (is (= 1 (g:object-ref-count image)))))
+      ;; Remove references
+      (is-false (setf (gtk:image-paintable image) nil)))))
 
 ;;;     gtk_image_set_from_paintable
 
 (test gtk-image-set-from-paintable
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (paintable (gdk:texture-new-from-filename path))
-         (image (gtk:image-new)))
-    (is-false (gtk:image-set-from-paintable image paintable))
-    (is (typep paintable 'gdk:texture))
-    (is (typep paintable 'gdk:paintable))
-    (is-false (gtk:image-file image))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-paintable image) nil))
-    (is (= 1 (g:object-ref-count paintable)))
-    (is (= 1 (g:object-ref-count image)))))
+  (glib-test:with-check-memory (paintable image)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (is (typep (setf paintable
+                       (gdk:texture-new-from-filename path)) 'gdk:paintable))
+      (is (typep (setf image (gtk:image-new)) 'gtk:image))
+      (is-false (gtk:image-set-from-paintable image paintable))
+      (is-false (gtk:image-file image))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image))
+      ;; Remove references
+      (is-false (setf (gtk:image-paintable image) nil)))))
 
 ;;;     gtk_image_set_from_icon_name
 
 (test gtk-image-set-from-icon-name
-  (let ((image (gtk:image-new)))
+  (glib-test:with-check-memory (image)
+    (is (typep (setf image (gtk:image-new)) 'gtk:image))
     (is-false (gtk:image-set-from-icon-name image "window-close"))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
@@ -352,8 +351,9 @@
 ;;;     gtk_image_set_from_gicon
 
 (test gtk-image-set-from-gicon
-  (let ((gicon (g:icon-new-for-string "window-close"))
-        (image (gtk:image-new)))
+  (glib-test:with-check-memory (gicon image)
+    (is (typep (setf gicon (g:icon-new-for-string "window-close")) 'g:icon))
+    (is (typep (setf image (gtk:image-new)) 'gtk:image))
     (is-false (gtk:image-set-from-gicon image gicon))
     (is-false (gtk:image-file image))
     (is (typep (gtk:image-gicon image) 'g:themed-icon))
@@ -364,9 +364,7 @@
     (is-false (gtk:image-resource image))
     (is (eq :gicon (gtk:image-storage-type image)))
     (is-false (gtk:image-use-fallback image))
-    ;; Check memory management
-    (is-false (setf (gtk:image-gicon image) nil))
-    (is (= 1 (g:object-ref-count gicon)))
-    (is (= 1 (g:object-ref-count image)))))
+    ;; Remove references
+    (is-false (setf (gtk:image-gicon image) nil))))
 
-;;; 2024-11-26
+;;; 2025-4-26
