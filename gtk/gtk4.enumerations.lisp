@@ -753,7 +753,7 @@
 (setf (liber:alias-for-symbol 'orientation)
       "GEnum"
       (liber:symbol-documentation 'orientation)
- "@version{2024-4-1}
+ "@version{2025-05-04}
   @begin{declaration}
 (gobject:define-genum \"GtkOrientation\" orientation
   (:export t

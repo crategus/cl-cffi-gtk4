@@ -259,7 +259,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2024-10-2}
+ "@version{2025-05-04}
   @begin{short}
     The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -393,7 +393,8 @@ lambda (window)    :run-first
   @see-slot{gtk:window-suspended}
   @see-slot{gtk:window-title}
   @see-slot{gtk:window-titlebar}
-  @see-slot{gtk:window-transient-for}")
+  @see-slot{gtk:window-transient-for}
+  @see-class{gtk:application-window}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -1474,13 +1475,13 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_present" window-present) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2025-05-04}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Presents a window to the user.
   @end{short}
   This may mean raising the window in the stacking order, unminimizing it,
-  moving it to the current desktop and/or giving it the keyboard focus, possibly
+  moving it to the current desktop or giving it the keyboard focus, possibly
   dependent on the platform of the user, window manager and preferences. If the
   window is hidden, this function also makes it visible.
   @see-class{gtk:window}"

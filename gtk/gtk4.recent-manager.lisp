@@ -2,8 +2,8 @@
 ;;; gtk4.recent-manager.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -291,11 +291,11 @@ lambda (manager)    :run-first
 (setf (liber:alias-for-function 'recent-manager-filename)
       "Accessor"
       (documentation 'recent-manager-filename 'function)
- "@version{2025-1-6}
+ "@version{2025-05-03}
   @syntax{(gtk:recent-manager-filename object) => filename}
   @syntax{(setf (gtk:recent-manager-filename object) filename)}
   @argument[object]{a @class{gtk:recent-manager} object}
-  @argument[filename]{a string with the full path to the file}
+  @argument[filename]{a string for the full path to the file}
   @begin{short}
     Accessor of the @slot[gtk:recent-manager]{filename} slot of the
     @class{gtk:recent-manager} class.
@@ -317,11 +317,11 @@ lambda (manager)    :run-first
 (setf (liber:alias-for-function 'recent-manager-size)
       "Accessor"
       (documentation 'recent-manager-size 'function)
- "@version{2025-1-6}
+ "@version{2025-05-03}
   @syntax{(gtk:recent-manager-size object) => size}
   @syntax{(setf (gtk:recent-manager-size object) size)}
   @argument[object]{a @class{gtk:recent-manager} object}
-  @argument[size]{an integer with the size of the resources list}
+  @argument[size]{an integer for the size of the resources list}
   @begin{short}
     Accessor of the @slot[gtk:recent-manager]{size} slot of the
     @class{gtk:recent-manager} class.
@@ -818,11 +818,13 @@ lambda (manager)    :run-first
 (cffi:defcfun ("gtk_recent_info_has_application" recent-info-has-application)
     :boolean
  #+liber-documentation
- "@version{2025-2-24}
+ "@version{2025-05-03}
   @argument[info]{a @class{gtk:recent-info} instance}
   @argument[name]{a string containing an application name}
-  @return{@em{True} if an application with name @arg{name} was found,
-    @em{false} otherwise.}
+  @begin{return}
+    @em{True} if an application with name @arg{name} was found, @em{false}
+    otherwise.
+  @end{return}
   @begin{short}
     Checks whether an application registered this resource using @arg{name}.
   @end{short}
@@ -891,9 +893,9 @@ lambda (manager)    :run-first
 
 (cffi:defcfun ("gtk_recent_info_has_group" recent-info-has-group) :boolean
  #+liber-documentation
- "@version{#2025-2-24}
+ "@version{#2025-05-03}
   @argument[info]{a @class{gtk:recent-info} instance}
-  @argument[group]{a string with the name of a group}
+  @argument[group]{a string for the name of a group}
   @return{@em{True} if the group was found.}
   @begin{short}
     Checks whether @arg{group} appears inside the groups registered for the

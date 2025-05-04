@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.inscripton.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 (setf (liber:alias-for-symbol 'inscription-overflow)
       "GEnum"
       (liber:symbol-documentation 'inscription-overflow)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @begin{declaration}
 (gobject:define-genum \"GtkInscriptionOverflow\" inscription-overflow
   (:export t
@@ -157,7 +157,7 @@
 
 #+liber-documentation
 (setf (documentation 'inscription 'type)
- "@version{2024-10-28}
+ "@version{2025-05-04}
   @begin{short}
     The @class{gtk:inscription} widget is a widget to show text in a predefined
     area.
@@ -205,7 +205,7 @@
 (setf (liber:alias-for-function 'inscription-attributes)
       "Accessor"
       (documentation 'inscription-attributes 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-attributes object) => attrs}
   @syntax{(setf (gtk:inscription-attributes object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -240,10 +240,10 @@
 (setf (liber:alias-for-function 'inscription-markup)
       "Accessor"
       (documentation 'inscription-markup 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(setf (gtk:inscription-markup object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[markup]{a string with the markup to display}
+  @argument[markup]{a string for the markup to display}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{markup} slot of the
     @class{gtk:inscription} class.
@@ -272,11 +272,11 @@
 (setf (liber:alias-for-function 'inscription-min-chars)
       "Accessor"
       (documentation 'inscription-min-chars 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-min-chars object) => chars}
   @syntax{(setf (gtk:inscription-min-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[chars]{an integer with the minimum number of characters that should
+  @argument[chars]{an integer for the minimum number of characters that should
     fit, approximately}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{min-chars} slot of the
@@ -304,11 +304,11 @@
 (setf (liber:alias-for-function 'inscription-min-lines)
       "Accessor"
       (documentation 'inscription-min-lines 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-min-lines object) => lines}
   @syntax{(setf (gtk:inscription-min-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[lines]{an integer with the minimum number of lines that should fit,
+  @argument[lines]{an integer for the minimum number of lines that should fit,
     approximately}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{min-lines} slot of the
@@ -335,11 +335,11 @@
 (setf (liber:alias-for-function 'inscription-nat-chars)
       "Accessor"
       (documentation 'inscription-nat-chars 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-nat-chars object) => chars}
   @syntax{(setf (gtk:inscription-nat-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[chars]{an integer with the number of characters that should ideally
+  @argument[chars]{an integer for the number of characters that should ideally
     fit}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{nat-chars} slot of the
@@ -366,11 +366,11 @@
 (setf (liber:alias-for-function 'inscription-nat-lines)
       "Accessor"
       (documentation 'inscription-nat-lines 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-nat-lines object) => lines}
   @syntax{(setf (gtk:inscription-nat-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[lines]{an integer with the number of lines that should ideally fit}
+  @argument[lines]{an integer for the number of lines that should ideally fit}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{nat-lines} slot of the
     @class{gtk:inscription} class.
@@ -391,11 +391,11 @@
 (setf (liber:alias-for-function 'inscription-text)
       "Accessor"
       (documentation 'inscription-text 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-text object) => text}
   @syntax{(setf (gtk:inscription-text object) text)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[lines]{a string with the text to display}
+  @argument[lines]{a string for the text to display}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{text} slot of the
     @class{gtk:inscription} class.
@@ -417,7 +417,7 @@
 (setf (liber:alias-for-function 'inscription-text-overflow)
       "Accessor"
       (documentation 'inscription-text-overflow 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-text-overflow object) => setting}
   @syntax{(setf (gtk:inscription-text-overflow object) setting)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -445,7 +445,7 @@
 (setf (liber:alias-for-function 'inscription-wrap-mode)
       "Accessor"
       (documentation 'inscription-wrap-mode 'function)
- "@version{2024-4-25}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-wrap-mode object) => mode}
   @syntax{(setf (gtk:inscription-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -474,11 +474,11 @@
 (setf (liber:alias-for-function 'inscription-xalign)
       "Accessor"
       (documentation 'inscription-xalign 'function)
- "@version{2024-10-28}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-xalign object) => xalign}
   @syntax{(setf (gtk:inscription-xalign object) xalign)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[xalign]{a single float with the xalign value, between 0.0 and 1.0}
+  @argument[xalign]{a single float for the xalign value, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{xalign} slot of the
     @class{gtk:inscription} class.
@@ -502,11 +502,11 @@
 (setf (liber:alias-for-function 'inscription-yalign)
       "Accessor"
       (documentation 'inscription-yalign 'function)
- "@version{2024-10-28}
+ "@version{2025-05-04}
   @syntax{(gtk:inscription-yalign object) => yalign}
   @syntax{(setf (gtk:inscription-yalign object) yalign)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[yalign]{a single float with the yalign value, between 0.0 and 1.0}
+  @argument[yalign]{a single float for the yalign value, between 0.0 and 1.0}
   @begin{short}
     Accessor of the @slot[gtk:inscription]{yalign} slot of the
     @class{gtk:inscription} class.
@@ -523,8 +523,8 @@
 
 (defun inscription-new (&optional text)
  #+liber-documentation
- "@version{2024-10-28}
-  @argument[text]{an optional string with the text to display, or @code{nil}}
+ "@version{2025-05-04}
+  @argument[text]{an optional string for the text to display, or @code{nil}}
   @return{The new @class{gtk:inscription} widget.}
   @begin{short}
     Creates a new @class{gtk:inscription} widget with the given text.

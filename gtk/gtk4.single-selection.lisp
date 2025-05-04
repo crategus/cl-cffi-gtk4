@@ -136,7 +136,7 @@
 
 #+liber-documentation
 (setf (documentation 'single-selection 'type)
- "@version{2024-12-22}
+ "@version{2025-05-04}
   @begin{short}
     The @class{gtk:single-selection} class is an implementation of the
     @class{gtk:selection-model} interface that allows selecting a single

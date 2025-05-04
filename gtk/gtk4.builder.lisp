@@ -2,8 +2,8 @@
 ;;; gtk4.builder.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -300,7 +300,7 @@
 
 #+liber-documentation
 (setf (documentation 'builder 'type)
- "@version{2024-11-4}
+ "@version{2025-05-04}
   @begin{short}
     The @class{gtk:builder} object reads XML descriptions of a user interface
     and instantiates the described objects.
@@ -808,10 +808,12 @@
 
 (defun builder-new-from-string (string)
  #+liber-documentation
- "@version{2024-11-4}
-  @argument[string]{a string with the user interface description}
-  @return{The new @class{gtk:builder} object containing the interface described
-    by @arg{string}.}
+ "@version{2025-05-03}
+  @argument[string]{a string for the user interface description}
+  @begin{return}
+    The new @class{gtk:builder} object containing the interface described by
+    @arg{string}.
+  @end{return}
   @begin{short}
     Builds the user interface described by @arg{string} in the
     @class{gtk:builder} UI definition format.
@@ -834,9 +836,9 @@
 
 (defun builder-add-from-file (builder path)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a pathname or namestring with the name of the file to parse}
+  @argument[path]{a pathname or namestring for the name of the file to parse}
   @begin{short}
     Parses a file containing a @class{gtk:builder} UI definition and merges it
     with the current contents of the builder.
@@ -867,9 +869,9 @@
 
 (defun builder-add-from-resource (builder path)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a string with the path of the resouce file to parse}
+  @argument[path]{a string for the path of the resouce file to parse}
   @begin{short}
     Parses a resource file containing a @class{gtk:builder} UI definition and
     merges it with the current contents of the builder.
@@ -958,10 +960,10 @@
 
 (defun builder-add-objects-from-file (builder path &rest args)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a pathname or namestring with the name of the file to parse}
-  @argument[args]{strings with the object IDs to build}
+  @argument[path]{a pathname or namestring for the name of the file to parse}
+  @argument[args]{strings for the object IDs to build}
   @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a file containing a @class{gtk:builder} UI definition building only
@@ -996,10 +998,10 @@
 
 (defun builder-add-objects-from-resource (builder path &rest args)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a string with the path of the resource file to parse}
-  @argument[args]{strings with the object IDs to build}
+  @argument[path]{a string for the path of the resource file to parse}
+  @argument[args]{strings for the object IDs to build}
   @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a resource file containing a @class{gtk:builder} UI definition
@@ -1035,10 +1037,10 @@
 
 (defun builder-add-objects-from-string (builder string &rest args)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
-  @argument[args]{strings with the object IDs to build}
+  @argument[args]{strings for the object IDs to build}
   @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a string containing a @class{gtk:builder} UI definition building only
@@ -1150,9 +1152,9 @@
 
 (cffi:defcfun ("gtk_builder_expose_object" builder-expose-object) :void
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[name]{a string with the name of the object exposed to the builder}
+  @argument[name]{a string for the name of the object exposed to the builder}
   @argument[object]{a @class{g:object} instance to expose}
   @begin{short}
     Adds an object to the builder object pool so it can be referenced just like
@@ -1220,9 +1222,9 @@
 
 (cffi:defcfun ("gtk_builder_get_type_from_name" builder-type-from-name) g:type-t
  #+liber-documentation
- "@version{#2022-1-10}
+ "@version{#2025-05-03}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[name]{a string with the type name to lookup}
+  @argument[name]{a string for the type name to lookup}
   @return{The @class{g:type-t} type ID found for @arg{name}.}
   @begin{short}
     Looks up a type by name, using the virtual function that the

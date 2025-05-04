@@ -75,7 +75,7 @@ Application support
 Interface builder
 
   gtk4.buildable.lisp                   GtkBuildable                  GTK 4.18 .
-  gtk4.builder.lisp                     GtkBuilder                    GTK 4.16 +
+  gtk4.builder.lisp                     GtkBuilder                    GTK 4.18 +
 
 Windows
 
@@ -126,7 +126,7 @@ Layout Managers
 Display Widgets
 
   gtk4.label.lisp                       GtkLabel                      GTK 4.18 .
-  gtk4.inscription.lisp                 GtkInscription                GTK 4.16 .
+  gtk4.inscription.lisp                 GtkInscription                GTK 4.18 .
   gtk4.image.lisp                       GtkImage                      GTK 4.18 .
   gtk4.picture.lisp                     GtkPicture                    GTK 4.16 .
   gtk4.spinner.lisp                     GtkSpinner                    GTK 4.16 .
@@ -266,7 +266,7 @@ Abstract Base Classes
 
 Recently Used Documents
 
-  gtk4.recent-manager.lisp             GtkRecentManager               GTK 4.16
+  gtk4.recent-manager.lisp             GtkRecentManager               GTK 4.18 .
 
 Gestures and event handling
 
@@ -312,7 +312,7 @@ GTK Core Reference
   gtk4.main-loop.lisp                  Initialization                 GTK 4.16 .
   gtk4.version.lisp                    Version Information            GTK 4.16
   gtk4.settings.lisp                   GtkSettings                    Gtk 4.16 .
-  gtk4.enumerations.lisp               Standard Enumerations          GTK 4.16 +
+  gtk4.enumerations.lisp               Standard Enumerations          GTK 4.18 +
 
 Theming in GTK
 
@@ -394,4 +394,4 @@ Deprecated
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2025-4-25
+2025-05-04

@@ -100,7 +100,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-inscription-properties
-  (let ((widget (make-instance 'gtk:inscription)))
+  (glib-test:with-check-memory (widget)
+    (is (typep (setf widget (make-instance 'gtk:inscription)) 'gtk:inscription))
     (is-false (gtk:inscription-attributes widget))
     ;; markup is not readable
     (signals (error) (gtk:inscription-markup widget))
@@ -119,8 +120,9 @@
 ;;;     gtk_inscription_new
 
 (test gtk-inscription-new
-  (is (typep (gtk:inscription-new) 'gtk:inscription))
-  (is (typep (gtk:inscription-new nil) 'gtk:inscription))
-  (is (typep (gtk:inscription-new "text") 'gtk:inscription)))
+  (glib-test:with-check-memory (inscription)
+    (is (typep (setf inscription (gtk:inscription-new)) 'gtk:inscription))
+    (is (typep (setf inscription (gtk:inscription-new nil)) 'gtk:inscription))
+    (is (typep (setf inscription (gtk:inscription-new "text")) 'gtk:inscription)))
 
-;;; 2024-10-28
+;;; 2025-05-04
