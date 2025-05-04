@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkWindow" id="dialog">
+    <property name="title">Unicode Character Properties</property>
+    <property name="modal">true</property>
+    <property name="hide-on-close">true</property>
+    <property name="default-height">590</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="hscrollbar-policy">never</property>
+        <property name="min-content-height">200</property>
+        <property name="hexpand">0</property>
+        <property name="vexpand">1</property>
+        <child>
+          <object class="GtkViewport">
+            <property name="scroll-to-focus">1</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="margin-start">60</property>
+                <property name="margin-end">60</property>
+                <property name="margin-top">30</property>
+                <property name="margin-bottom">30</property>
+                <child>
+                  <object class="GtkListBox" id="listbox1">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="rich-list"/>
+                      <class name="boxed-list"/>
+                    </style>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="codepoint_label">
+                                <property name="label">Codepoint</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="codepoint">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="char_label">
+                                <property name="label">Character</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="char">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="category_label">
+                                <property name="label">General Category</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="category">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="bidi_class_label">
+                                <property name="label">Bidi Class</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="bidi_class">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="combining_class_label">
+                                <property name="label">Combining Class</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="combining_class">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="script_label">
+                                <property name="label">Script</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="script">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="grapheme_break_label">
+                                <property name="label">Grapheme Break</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="grapheme_break">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="word_break_label">
+                                <property name="label">Word Break</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="word_break">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="sentence_break_label">
+                                <property name="label">Sentence Break</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="sentence_break">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="line_break_label">
+                                <property name="label">Line Break</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="line_break">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="codepoint_label"/>
+      <widget name="char_label"/>
+      <widget name="category_label"/>
+      <widget name="bidi_class_label"/>
+      <widget name="combining_class_label"/>
+      <widget name="script_label"/>
+      <widget name="grapheme_break_label"/>
+      <widget name="word_break_label"/>
+      <widget name="sentence_break_label"/>
+      <widget name="line_break_label"/>
+    </widgets>
+  </object>
+</interface>

@@ -62,7 +62,9 @@
 
                ;; List-based widgets
                (:file "list-view-applauncher")
-               (:file "list-view-recentinfo")
+               (:file "list-view-recent-manager")
+               (:file "column-view-content-types")
+               (:file "column-view-ucd")
                (:file "grid-view-clocks")
                (:file "grid-view-colors")
                (:file "drop-down")

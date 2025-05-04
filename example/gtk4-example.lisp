@@ -62,7 +62,9 @@
 
            ;; List-based widgets
            #:do-list-view-applauncher
-           #:do-list-view-recentinfo
+           #:do-list-view-recent-manager
+           #:do-column-view-content-types
+           #:do-column-view-ucd
            #:do-grid-view-clocks
            #:do-grid-view-colors
            #:do-drop-down
@@ -258,7 +260,8 @@ sem venenatis, vitae ultricies arcu laoreet."))
   (g:with-resource (resource (glib-sys:check-and-create-resources
                                      "gtk4-example.xml"
                                      :package "gtk4-example"
-                                     :sourcedir "resource/"))
+                                     :sourcedir "resource/"
+                                     :verbose t))
     (let (;; Create an application
           (app (make-instance 'gtk:application
                               :application-id "com.crategus.run-example"

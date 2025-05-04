@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkWindow" id="dialog">
+    <property name="title">Recent Infos</property>
+    <property name="modal">true</property>
+    <property name="hide-on-close">true</property>
+    <property name="default-height">560</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="hscrollbar-policy">never</property>
+        <property name="min-content-height">200</property>
+        <property name="hexpand">0</property>
+        <property name="vexpand">1</property>
+        <child>
+          <object class="GtkViewport">
+            <property name="scroll-to-focus">1</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="margin-start">60</property>
+                <property name="margin-end">60</property>
+                <property name="margin-top">30</property>
+                <property name="margin-bottom">30</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Recent Info</property>
+                    <property name="xalign">0</property>
+                    <property name="margin-bottom">10</property>
+                    <style>
+                      <class name="title-3"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="listbox1">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="rich-list"/>
+                      <class name="boxed-list"/>
+                    </style>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="display_name_label">
+                                <property name="label">Display name</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="display_name">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="uri_label">
+                                <property name="label">URI</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="uri">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="description_label">
+                                <property name="label">Description</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="description">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="mime_type_label">
+                                <property name="label">Mime Type</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="mime_type">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="added_label">
+                                <property name="label">Added</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="added">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="modified_label">
+                                <property name="label">Modified</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="modified">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="visited_label">
+                                <property name="label">Visited</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="visited">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <child>
+                              <object class="GtkLabel" id="applications_label">
+                                <property name="label">Applications</property>
+                                <property name="xalign">0</property>
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="hexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="applications">
+                                <property name="label"></property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="display_name_label"/>
+      <widget name="uri_label"/>
+      <widget name="description_label"/>
+      <widget name="mime_type_label"/>
+      <widget name="added_label"/>
+      <widget name="modified_label"/>
+      <widget name="visited_label"/>
+      <widget name="applications_label"/>
+    </widgets>
+  </object>
+</interface>

@@ -66,4 +66,7 @@
   <gresource prefix="/frames">
     <file>frame-clock.ui</file>
   </gresource>
+  <gresource prefix="/listview-ucd-data">
+    <file>ucdnames.data</file>
+  </gresource>
 </gresources>
