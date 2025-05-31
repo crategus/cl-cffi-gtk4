@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.about-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -152,7 +152,7 @@
 (setf (liber:alias-for-symbol 'license)
       "GEnum"
       (liber:symbol-documentation 'license)
- "@version{2024-5-25}
+ "@version{2025-05-12}
   @begin{declaration}
 (gobject:define-genum \"GtkLicense\" license
   (:export t
@@ -275,7 +275,7 @@
 
 #+liber-documentation
 (setf (documentation 'about-dialog 'type)
- "@version{2024-11-29}
+ "@version{2025-05-12}
   @begin{short}
     The @class{gtk:about-dialog} widget offers a simple way to display
     information about a program like its logo, name, copyright, website and
@@ -368,11 +368,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-artists)
       "Accessor"
       (documentation 'about-dialog-artists 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-artists object) => artists}
   @syntax{(setf (gtk:about-dialog-artists object) artists)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[artists]{a list of strings with the people who contributed artwork
+  @argument[artists]{a list of strings for the people who contributed artwork
     to the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{artists} slot of the
@@ -395,11 +395,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-authors)
       "Accessor"
       (documentation 'about-dialog-authors 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-authors object) => authors}
   @syntax{(setf (gtk:about-dialog-authors object) authors)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[authors]{a list of string with the authors of the program}
+  @argument[authors]{a list of string for the authors of the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{authors} slot of the
     @class{gtk:about-dialog} class.
@@ -435,11 +435,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-comments)
       "Accessor"
       (documentation 'about-dialog-comments 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-comments object) => comments}
   @syntax{(setf (gtk:about-dialog-comments object) comments)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[comments]{a string with comments about the program}
+  @argument[comments]{a string for comments about the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{comments} slot of the
     @class{gtk:about-dialog} class.
@@ -463,11 +463,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-copyright)
       "Accessor"
       (documentation 'about-dialog-copyright 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-copyright object) => copyright}
   @syntax{(setf (gtk:about-dialog-copyright object) copyright)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[copyright]{a string with copyright information}
+  @argument[copyright]{a string for copyright information}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{copyright} slot of the
     @class{gtk:about-dialog} class.
@@ -491,11 +491,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-documenters)
       "Accessor"
       (documentation 'about-dialog-documenters 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-documenters object) => documenters}
   @syntax{(setf (gtk:about-dialog-documenters object) documenters)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[documenters]{a string with the people documenting the program}
+  @argument[documenters]{a string for the people documenting the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{documenters} slot of the
     @class{gtk:about-dialog} class.
@@ -525,11 +525,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-license)
       "Accessor"
       (documentation 'about-dialog-license 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-license object) => license}
   @syntax{(setf (gtk:about-dialog-license object) license)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[license]{a string with the license of the program}
+  @argument[license]{a string for the license of the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{license} slot of the
     @class{gtk:about-dialog} class.
@@ -566,7 +566,7 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-license-type)
       "Accessor"
       (documentation 'about-dialog-license-type 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-license-type object) => license-type}
   @syntax{(setf (gtk:about-dialog-license-type object) license-type)}
   @argument[object]{a @class{gtk:about-dialog} widget}
@@ -596,7 +596,7 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-logo)
       "Accessor"
       (documentation 'about-dialog-logo 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-logo object) => logo}
   @syntax{(setf (gtk:about-dialog-logo object) logo)}
   @argument[object]{a @class{gtk:about-dialog} widget}
@@ -627,11 +627,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-logo-icon-name)
       "Accessor"
       (documentation 'about-dialog-logo-icon-name 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-logo-icon-name object) => name}
   @syntax{(setf (gtk:about-dialog-logo-icon-name object) name)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[name]{a string with a namend icon to use as the logo}
+  @argument[name]{a string for a namend icon to use as the logo}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{logo-icon-name} slot of the
     @class{gtk:about-dialog} class.
@@ -655,11 +655,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-program-name)
       "Accessor"
       (documentation 'about-dialog-program-name 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-program-name object) => name}
   @syntax{(setf (gtk:about-dialog-program-name object) name)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[name]{a string with the name of the program}
+  @argument[name]{a string for the name of the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{program-name} slot of the
     @class{gtk:about-dialog} class.
@@ -691,11 +691,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-system-information)
       "Accessor"
       (documentation 'about-dialog-system-information 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-system-information object) => information}
   @syntax{(setf (gtk:about-dialog-system-information object) information)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[information]{a string with the system information}
+  @argument[information]{a string for the system information}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{system-information} slot of the
     @class{gtk:about-dialog} class.
@@ -723,11 +723,11 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-translator-credits)
       "Accessor"
       (documentation 'about-dialog-translator-credits 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-translator-credits object) => credits}
   @syntax{(setf (gtk:about-dialog-translator-credits object) credits)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[credits]{a string with the credits to the translators}
+  @argument[credits]{a string for the credits to the translators}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{translator-credits} slot of the
     @class{gtk:about-dialog} class.
@@ -761,11 +761,11 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (setf (liber:alias-for-function 'about-dialog-version)
       "Accessor"
       (documentation 'about-dialog-version 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-version object) => version}
   @syntax{(setf (gtk:about-dialog-version object) version)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[version]{a string with the version of the program}
+  @argument[version]{a string for the version of the program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{version} slot of the
     @class{gtk:about-dialog} class.
@@ -788,11 +788,11 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (setf (liber:alias-for-function 'about-dialog-website)
       "Accessor"
       (documentation 'about-dialog-website 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-website object) => website}
   @syntax{(setf (gtk:about-dialog-website object) website)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[website]{a string with URL for the link to the website of the
+  @argument[website]{a string for the URL of the link to the website of the
     program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{website} slot of the
@@ -815,11 +815,11 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (setf (liber:alias-for-function 'about-dialog-website-label)
       "Accessor"
       (documentation 'about-dialog-website-label 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-website-label object) => label}
   @syntax{(setf (gtk:about-dialog-website-label object) label)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[label]{a string with the label for the link to the website of the
+  @argument[label]{a string for the label of the link to the website of the
     program}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{website-label} slot of the
@@ -841,7 +841,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (setf (liber:alias-for-function 'about-dialog-wrap-license)
       "Accessor"
       (documentation 'about-dialog-wrap-license 'function)
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @syntax{(gtk:about-dialog-wrap-license object) => setting}
   @syntax{(setf (gtk:about-dialog-wrap-license object) setting)}
   @argument[object]{a @class{gtk:about-dialog} widget}
@@ -863,7 +863,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 
 (defun about-dialog-new ()
  #+liber-documentation
- "@version{2024-4-11}
+ "@version{2025-05-12}
   @return{The newly created @class{gtk:about-dialog} widget.}
   @short{Creates a new about dialog.}
   @see-class{gtk:about-dialog}"
@@ -878,10 +878,10 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (cffi:defcfun ("gtk_about_dialog_add_credit_section"
                about-dialog-add-credit-section) :void
  #+liber-documentation
- "@version{#2024-4-11}
+ "@version{#2025-05-12}
   @argument[about]{a @class{gtk:about-dialog} widget}
-  @argument[section]{a string with the name of the section}
-  @argument[people]{a list of strings of the people who belong to that section}
+  @argument[section]{a string for the name of the section}
+  @argument[people]{a list of strings for the people who belong to that section}
   @short{Creates a new section in the credits page.}
   @see-class{gtk:about-dialog}"
   (about (g:object about-dialog))
@@ -897,7 +897,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (let ((aboutdialog nil))
   (defun show-about-dialog (parent &rest args)
    #+liber-documentation
-   "@version{2024-8-16}
+   "@version{2025-05-12}
     @argument[parent]{a @class{gtk:window} transient parent, or @code{nil}
       for none}
     @argument[args]{pairs of property name and property value}

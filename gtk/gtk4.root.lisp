@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.root.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,7 +63,7 @@
 (setf (liber:alias-for-class 'root)
       "Interface"
       (documentation 'root 'type)
- "@version{2024-9-29}
+ "@version{2025-05-15}
   @begin{short}
     The @class{gtk:root} interface is the interface implemented by all widgets
     that can act as a toplevel widget to a hierarchy of widgets.
@@ -86,7 +86,7 @@
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
  #+liber-documentation
- "@version{2024-9-29}
+ "@version{2025-05-15}
   @argument[root]{a @class{gtk:root} widget}
   @return{The @class{gdk:display} object of @arg{root}.}
   @begin{short}
@@ -112,7 +112,7 @@
 
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
- "@version{2024-9-29}
+ "@version{2025-05-15}
   @syntax{(gtk:root-focus root) => widget}
   @syntax{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}
