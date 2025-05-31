@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.application-window.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -44,8 +44,8 @@
 ;;;
 ;;;     gtk_application_window_new
 ;;;     gtk_application_window_get_id
-;;;     gtk_application_window_get_help_overlay
-;;;     gtk_application_window_set_help_overlay
+;;;     gtk_application_window_get_help_overlay             Deprecated 4.18
+;;;     gtk_application_window_set_help_overlay             Deprecated 4.18
 ;;;
 ;;; Properties
 ;;;
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2024-10-7}
+ "@version{2025-05-12}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -195,7 +195,7 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{2024-10-7}
+ "@version{2025-05-12}
   @syntax{(gtk:application-window-show-menubar object) => show}
   @syntax{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -216,7 +216,7 @@
 
 (defun application-window-new (&optional application)
  #+liber-documentation
- "@version{2024-10-7}
+ "@version{2025-05-12}
   @argument[application]{an optinoal @class{gtk:application} instance}
   @return{The newly created @class{gtk:application-window} widget.}
   @short{Creates a new application window.}
@@ -237,7 +237,7 @@
 
 (cffi:defcfun ("gtk_application_window_get_id" application-window-id) :uint
  #+liber-documentation
- "@version{2024-10-7}
+ "@version{2025-05-12}
   @argument[window]{a @class{gtk:application-window} widget}
   @begin{return}
     The unique ID for @arg{window}, or 0 if @arg{window} has not yet been
@@ -255,7 +255,7 @@
 (export 'application-window-id)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_application_window_get_help_overlay
+;;; gtk_application_window_get_help_overlay                 Deprecated 4.18
 ;;; gtk_application_window_set_help_overlay
 ;;; ----------------------------------------------------------------------------
 
@@ -264,6 +264,9 @@
 ;; the testsuite.
 
 (defun (setf application-window-help-overlay) (overlay window)
+  #+(and gtk-4-18 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APPLICATION-WINDOW-HELP-OVERLAY is deprecated since 4.18."))
   (cffi:foreign-funcall "gtk_application_window_set_help_overlay"
                         (g:object application-window) window
                         (g:object shortcuts-window) overlay
@@ -271,9 +274,12 @@
   overlay)
 
 (cffi:defcfun ("gtk_application_window_get_help_overlay"
-               application-window-help-overlay) (g:object shortcuts-window)
+               %application-window-help-overlay) (g:object shortcuts-window)
+  (window (g:object application-window)))
+
+(defun application-window-help-overlay (window)
  #+liber-documentation
- "@version{2024-10-7}
+ "@version{2025-05-12}
   @syntax{(gtk:application-window-help-overlay window) => overlay}
   @syntax{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -282,14 +288,21 @@
     Accessor of the shortcuts window associated with the application window.
   @end{short}
   The @fun{gtk:application-window-help-overlay} function gets the shortcuts
-  window. The @setf{gtk:applicaton-window-help-overlay} function associates a
+  window. The @setf{gtk:application-window-help-overlay} function associates a
   shortcuts window with the application window, and sets up an action with the
   name @code{\"win.show-help-overlay\"} to present it.
 
   The window takes responsibility for destroying the help overlay.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.18. The @class{gtk:shortcuts-window}
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:application-window}
   @see-class{gtk:shortcuts-window}"
-  (window (g:object application-window)))
+  #+(and gtk-4-18 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APPLICATION-WINDOW-HELP-OVERLAY is deprecated since 4.18."))
+  (%application-window-help-overlay window))
 
 (export 'application-window-help-overlay)
 
