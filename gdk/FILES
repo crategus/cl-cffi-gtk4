@@ -10,7 +10,7 @@ List of files for the GDK 4 Library
 
   gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...   GDK 4.16 .
   gdk4.rectangle.lisp              GdkRectangle                       GDK 4.16 .
-  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.16
+  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.18 .
   gdk4.keyval.lisp                 Key Values                         GDK 4.16 .
   gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.16 .
   gdk4.color-state.lisp            GdkColorState                      GDK 4.16 .
@@ -28,7 +28,7 @@ List of files for the GDK 4 Library
 
  Paintables, Textures
 
-  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.16 .
+  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.18 .
   gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ...  GDK 4.18 .
   gdk4.texture-downloader.lisp     GdkTextureDownloader               GDK 4.16 +
   gdk4.dmabuf-texture.lisp         GdkDmabufTexture, ...              GDK 4.16 +

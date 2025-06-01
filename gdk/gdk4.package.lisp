@@ -392,6 +392,7 @@
       @about-symbol{paintable-flags}
       @about-class{snapshot}
       @about-class{paintable}
+      @about-symbol{paintable-vtable}
       @about-generic{paintable-snapshot-impl}
       @about-generic{paintable-get-current-image-impl}
       @about-generic{paintable-get-flags-impl}

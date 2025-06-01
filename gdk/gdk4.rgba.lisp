@@ -2,8 +2,8 @@
 ;;; gdk4.rgba.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2012 - 2025 Dieter Kaiser
@@ -180,13 +180,13 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun rgba-new (&key (red 0.0) (green 0.0) (blue 0.0) (alpha 0.0))
- "@version{2025-1-11}
-  @argument[red]{a number for the intensity of the red channel from 0.0 to 1.0
-    inclusive}
-  @argument[green]{a number for the intensity of the green channel from 0.0 to
-    1.0 inclusive}
-  @argument[blue]{a number for the intensity of the blue channel from 0.0 to 1.0
-    inclusive}
+ "@version{2025-05-09}
+  @argument[red]{a number for the intensity of the red channel from
+    0.0 to 1.0 inclusive}
+  @argument[green]{a number for the intensity of the green channel from
+    0.0 to 1.0 inclusive}
+  @argument[blue]{a number for the intensity of the blue channel from
+    0.0 to 1.0 inclusive}
   @argument[alpha]{a number for the opacity of the color from 0.0 for
     completely translucent to 1.0 for opaque}
   @return{The newly created @struct{gdk:rgba} color.}
