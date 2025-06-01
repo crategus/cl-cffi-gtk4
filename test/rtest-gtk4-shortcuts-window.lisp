@@ -40,28 +40,17 @@
   (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsWindow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkShortcutsWindow" GTK:SHORTCUTS-WINDOW
-                       (:SUPERCLASS GTK:WINDOW
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkNative" "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_shortcuts_window_get_type")
-                       ((SECTION-NAME SHORTCUTS-WINDOW-SECTION-NAME
-                         "section-name" "gchararray" T T)
-                        (VIEW-NAME SHORTCUTS-WINDOW-VIEW-NAME
-                         "view-name" "gchararray" T T)))
+                      (:SUPERCLASS GTK:WINDOW
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkNative" "GtkRoot" "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_shortcuts_window_get_type")
+                      ((SECTION-NAME SHORTCUTS-WINDOW-SECTION-NAME
+                        "section-name" "gchararray" T T)
+                       (VIEW-NAME SHORTCUTS-WINDOW-VIEW-NAME
+                        "view-name" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkShortcutsWindow"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-shortcuts-window-properties
-  (let ((shortcuts (make-instance 'gtk:shortcuts-window)))
-    (is (string= "internal-search"
-                 (gtk:shortcuts-window-section-name shortcuts)))
-    (is-false (gtk:shortcuts-window-view-name shortcuts))
-    ;; Check memory management
-    (is-false (gtk:window-destroy shortcuts))
-    (is (= 1 (g:object-ref-count shortcuts)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -93,8 +82,21 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-shortcuts-window-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (window)
+      (is (typep (setf window (make-instance 'gtk:shortcuts-window))
+                 'gtk:shortcuts-window))
+      (is (string= "internal-search"
+                   (gtk:shortcuts-window-section-name window)))
+      (is-false (gtk:shortcuts-window-view-name window))
+      ;; Destroy shortcuts window
+      (is-false (gtk:window-destroy window)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_shortcuts_window_add_section
 
-;;; 2024-10-27
+;;; 2025-05-15

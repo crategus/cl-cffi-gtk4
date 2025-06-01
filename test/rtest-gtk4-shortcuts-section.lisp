@@ -56,20 +56,6 @@
                         "view-name" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkShortcutsSection"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-;;;     max-height
-;;;     section-name
-;;;     title
-;;;     view-name
-
-(test gtk-shortcuts-section-properties
-  (let ((section (make-instance 'gtk:shortcuts-section)))
-    (is (= 15 (gtk:shortcuts-section-max-height section)))
-    (is-false (gtk:shortcuts-section-section-name section))
-    (is-false (gtk:shortcuts-section-title section))
-    (is-false (gtk:shortcuts-section-view-name section))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     change-current-page
@@ -87,4 +73,21 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;; 2024-9-20
+;;; --- Properties -------------------------------------------------------------
+
+;;;     max-height
+;;;     section-name
+;;;     title
+;;;     view-name
+
+(test gtk-shortcuts-section-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (section)
+    (is (typep (setf section (make-instance 'gtk:shortcuts-section))
+               'gtk:shortcuts-section))
+    (is (= 15 (gtk:shortcuts-section-max-height section)))
+    (is-false (gtk:shortcuts-section-section-name section))
+    (is-false (gtk:shortcuts-section-title section))
+    (is-false (gtk:shortcuts-section-view-name section)))))
+
+;;; 2025-05-15

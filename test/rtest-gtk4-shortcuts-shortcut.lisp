@@ -39,18 +39,19 @@
              (glib-test:list-enum-item-nicks "GtkShortcutType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkShortcutType" GTK:SHORTCUT-TYPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_shortcut_type_get_type")
-                       (:ACCELERATOR 0)
-                       (:GESTURE-PINCH 1)
-                       (:GESTURE-STRETCH 2)
-                       (:GESTURE-ROTATE-CLOCKWISE 3)
-                       (:GESTURE-ROTATE-COUNTERCLOCKWISE 4)
-                       (:GESTURE-TWO-FINGER-SWIPE-LEFT 5)
-                       (:GESTURE-TWO-FINGER-SWIPE-RIGHT 6)
-                       (:GESTURE 7)
-                       (:GESTURE-SWIPE-LEFT 8)
-                       (:GESTURE-SWIPE-RIGHT 9))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_shortcut_type_get_type")
+                                    (:ACCELERATOR 0)
+                                    (:GESTURE-PINCH 1)
+                                    (:GESTURE-STRETCH 2)
+                                    (:GESTURE-ROTATE-CLOCKWISE 3)
+                                    (:GESTURE-ROTATE-COUNTERCLOCKWISE 4)
+                                    (:GESTURE-TWO-FINGER-SWIPE-LEFT 5)
+                                    (:GESTURE-TWO-FINGER-SWIPE-RIGHT 6)
+                                    (:GESTURE 7)
+                                    (:GESTURE-SWIPE-LEFT 8)
+                                    (:GESTURE-SWIPE-RIGHT 9))
              (gobject:get-gtype-definition "GtkShortcutType"))))
 
 ;;;     GtkShortcutsShortcut
@@ -121,17 +122,20 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcuts-shortcut
- (let ((shortcut (make-instance 'gtk:shortcuts-shortcut)))
-    (signals (error) (gtk:shortcuts-shortcut-accel-size-group shortcut))
-    (is-false (gtk:shortcuts-shortcut-accelerator shortcut))
-    (is-false (gtk:shortcuts-shortcut-action-name shortcut))
-    (is (eq :none (gtk:shortcuts-shortcut-direction shortcut)))
-    (is-false (gtk:shortcuts-shortcut-icon shortcut))
-    (is-false (gtk:shortcuts-shortcut-icon-set shortcut))
-    (is (eq :accelerator (gtk:shortcuts-shortcut-shortcut-type shortcut)))
-    (is (string= "" (gtk:shortcuts-shortcut-subtitle shortcut)))
-    (is-false (gtk:shortcuts-shortcut-subtitle-set shortcut))
-    (is (string= "" (gtk:shortcuts-shortcut-title shortcut)))
-    (signals (error) (gtk:shortcuts-shortcut-title-size-group shortcut))))
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (shortcut)
+      (is (typep (setf shortcut (make-instance 'gtk:shortcuts-shortcut))
+                 'gtk:shortcuts-shortcut))
+      (signals (error) (gtk:shortcuts-shortcut-accel-size-group shortcut))
+      (is-false (gtk:shortcuts-shortcut-accelerator shortcut))
+      (is-false (gtk:shortcuts-shortcut-action-name shortcut))
+      (is (eq :none (gtk:shortcuts-shortcut-direction shortcut)))
+      (is-false (gtk:shortcuts-shortcut-icon shortcut))
+      (is-false (gtk:shortcuts-shortcut-icon-set shortcut))
+      (is (eq :accelerator (gtk:shortcuts-shortcut-shortcut-type shortcut)))
+      (is (string= "" (gtk:shortcuts-shortcut-subtitle shortcut)))
+      (is-false (gtk:shortcuts-shortcut-subtitle-set shortcut))
+      (is (string= "" (gtk:shortcuts-shortcut-title shortcut)))
+      (signals (error) (gtk:shortcuts-shortcut-title-size-group shortcut)))))
 
-;;; 2024-10-27
+;;; 2025-05-15

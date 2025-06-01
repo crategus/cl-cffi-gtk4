@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcuts-window.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,9 +90,14 @@
     shortcuts-window-view-name
     "view-name" "gchararray" t t)))
 
+#+(and gtk-4-18 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj shortcuts-window) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:SHORTCUTS-WINDOW is deprecated since 4.18")))
+
 #+liber-documentation
 (setf (documentation 'shortcuts-window 'type)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @begin{short}
     The @class{gtk:shortcuts-window} widget shows brief information about the
     keyboard shortcuts and gestures of an application.
@@ -132,6 +137,10 @@
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-builder.ui]{here}.
 
     @image[builder-shortcuts]{Figure: Builder shortcuts}
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:shortcuts-window} implementation is deprecated since 4.18.
+    This widget will be removed in GTK 5.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"close\" signal}
@@ -179,17 +188,21 @@ lambda (shortcutswindow)    :action
 (setf (liber:alias-for-function 'shortcuts-window-section-name)
       "Accessor"
       (documentation 'shortcuts-window-section-name 'function)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-window-section-name object) => name}
   @syntax{(setf (gtk:shortcuts-window-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
-  @argument[name]{a string with a name of the section to show}
+  @argument[name]{a string for a name of the section to show}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-window]{section-name} slot of the
     @class{gtk:shortcuts-window} class.
   @end{short}
   The name of the section to show. This should be the section name of one of the
   @class{gtk:shortcuts-section} objects that are in this shortcuts window.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-window-section-name} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-section}")
 
@@ -208,11 +221,11 @@ lambda (shortcutswindow)    :action
 (setf (liber:alias-for-function 'shortcuts-window-view-name)
       "Accessor"
       (documentation 'shortcuts-window-view-name 'function)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-window-view-name object) => name}
   @syntax{(setf (gtk:shortcuts-window-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
-  @argument[name]{a string with the view name by which to filter the contents}
+  @argument[name]{a string for the view name by which to filter the contents}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-window]{view-name} slot of the
     @class{gtk:shortcuts-window} class.
@@ -221,6 +234,10 @@ lambda (shortcutswindow)    :action
   @slot[gtk:shortcuts-group]{view} property of some of the
   @class{gtk:shortcuts-group} objects that are inside this shortcuts window.
   Set this to @code{nil} to show all groups.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-window-view-name} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-group}")
 
@@ -232,7 +249,7 @@ lambda (shortcutswindow)    :action
 (cffi:defcfun ("gtk_shortcuts_window_add_section" shortcuts-window-add-section)
     :void
  #+liber-documentation
- "@version{#2024-10-27}
+ "@version{#2025-05-14}
   @argument[window]{a @class{gtk:shortcuts-window} widget}
   @argument[section]{a @class{gtk:shortcuts-section} widget to add}
   @begin{short}
@@ -244,6 +261,10 @@ lambda (shortcutswindow)    :action
   manages its children internally.
 
   Since 4.14
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-window-add-section} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-section}"
   (window (g:object shortcuts-window))

@@ -52,15 +52,21 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcut-label-properties
-  (let ((label (make-instance 'gtk:shortcut-label)))
-    (is-false (gtk:shortcut-label-accelerator label))
-    (is-false (gtk:shortcut-label-disabled-text label))))
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (label)
+      (is (typep (setf label (make-instance 'gtk:shortcut-label))
+                 'gtk:shortcut-label))
+      (is-false (gtk:shortcut-label-accelerator label))
+      (is-false (gtk:shortcut-label-disabled-text label)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_shortcut_label_new
 
 (test gtk-shortcut-label-new
-  (is (typep (gtk:shortcut-label-new "<Control>a") 'gtk:shortcut-label)))
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (label)
+      (is (typep (setf label (gtk:shortcut-label-new "<Control>a"))
+                 'gtk:shortcut-label)))))
 
-;;; 2024-10-27
+;;; 2025-05-15

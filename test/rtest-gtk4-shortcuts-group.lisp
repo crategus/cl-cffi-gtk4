@@ -58,15 +58,18 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcuts-group-properties
-  (let ((group (make-instance 'gtk:shortcuts-group)))
-    (signals (error) (gtk:shortcuts-group-accel-size-group group))
-    (is (= 1 (gtk:shortcuts-group-height group)))
-    (is (string= "" (gtk:shortcuts-group-title group)))
-    (signals (error) (gtk:shortcuts-group-title-size-group group))
-    (is-false (gtk:shortcuts-group-view group))))
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (group)
+      (is (typep (setf group (make-instance 'gtk:shortcuts-group))
+                 'gtk:shortcuts-group))
+      (signals (error) (gtk:shortcuts-group-accel-size-group group))
+      (is (= 1 (gtk:shortcuts-group-height group)))
+      (is (string= "" (gtk:shortcuts-group-title group)))
+      (signals (error) (gtk:shortcuts-group-title-size-group group))
+      (is-false (gtk:shortcuts-group-view group)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_shortcuts_group_add_shortcut                    Since 4.14
 
-;;; 2024-10-27
+;;; 2025-05-15

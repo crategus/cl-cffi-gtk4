@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcuts-section.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,11 +92,16 @@
     shortcuts-section-view-name
     "view-name" "gchararray" t t)))
 
+#+(and gtk-4-18 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj shortcuts-section) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:SHORTCUTS-SECTION is deprecated since 4.18")))
+
 #+liber-documentation
 (setf (documentation 'shortcuts-section 'type)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @begin{short}
-    A @class{gtk:shortcuts-section} widget collects all the keyboard shortcuts
+    The @class{gtk:shortcuts-section} widget collects all the keyboard shortcuts
     and gestures for a major application mode.
   @end{short}
   If your application needs multiple sections, you should give each section a
@@ -108,15 +113,23 @@
 
   This widget is only meant to be used with @class{gtk:shortcuts-window}
   widgets.
+  @begin[Warning]{dictionary}
+    The @class{gtk:shortcuts-section} implementation is deprecated since 4.18.
+    This widget will be removed in GTK 5.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"change-current-page\" signal}
       @begin{pre}
-lambda (section arg)    :action
+lambda (section offset data)    :action
       @end{pre}
       @begin[code]{table}
         @entry[section]{The @class{gtk:shortcuts-section} widget.}
-        @entry[arg]{An integer, no description available.}
+        @entry[offset]{The integer for the offset.}
+        @entry[data]{The foreign pointer to user data.}
+        @entry[Return]{The boolean whether the page was changed.}
       @end{table}
+      Emitted when the current page changes. The default bindings for this
+      signal are @kbd{Ctrl+PgUp}, @kbd{PgUp}, @kbd{Ctrl+PgDn}, @kbd{PgDn}.
   @end{dictionary}
   @see-slot{gtk:shortcuts-section-max-height}
   @see-slot{gtk:shortcuts-section-section-name}
@@ -142,12 +155,12 @@ lambda (section arg)    :action
 (setf (liber:alias-for-function 'shortcuts-section-max-height)
       "Accessor"
       (documentation 'shortcuts-section-max-height 'function)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-section-max-height object) => height}
   @syntax{(setf (gtk:shortcuts-section-max-height object) height)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
-  @argument[height]{an unsigned with the maximum number of lines to allow per
-    column}
+  @argument[height]{an unsigned integer for the maximum number of lines to
+    allow per column}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-section]{max-height} slot of the
     @class{gtk:shortcuts-section} class.
@@ -155,6 +168,10 @@ lambda (section arg)    :action
   The maximum number of lines to allow per column. This property can be used to
   influence how the groups in this section are distributed across pages and
   columns. The default value of 15 should work in for most cases.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-section-max-height} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-section}")
 
 ;;; --- gtk:shortcuts-section-section-name -------------------------------------
@@ -163,7 +180,7 @@ lambda (section arg)    :action
 (setf (documentation (liber:slot-documentation "section-name"
                       'shortcuts-section) t)
  "The @code{section-name} property of type @code{:string} (Read / Write) @br{}
-  A unique name to identify this section among the sections added to the
+  The unique name to identify this section among the sections added to the
   @class{gtk:shortcuts-window} widget. Setting the
   @slot[gtk:shortcuts-section]{section-name} property to this string will make
   this section shown in the @class{gtk:shortcuts-window} widget. @br{}
@@ -173,11 +190,11 @@ lambda (section arg)    :action
 (setf (liber:alias-for-function 'shortcuts-section-section-name)
       "Accessor"
       (documentation 'shortcuts-section-section-name 'function)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-section-section-name object) => name}
   @syntax{(setf (gtk:shortcuts-section-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
-  @argument[name]{a string with a unique name to identify this section}
+  @argument[name]{a string for a unique name to identify this section}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-section]{section-name} slot of the
     @class{gtk:shortcuts-section} class.
@@ -186,6 +203,10 @@ lambda (section arg)    :action
   @class{gtk:shortcuts-window} widget. Setting the
   @slot[gtk:shortcuts-section]{section-name} property to this string will make
   this section shown in the @class{gtk:shortcuts-window} widget.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-section-section-name} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-window}")
 
@@ -203,7 +224,7 @@ lambda (section arg)    :action
 (setf (liber:alias-for-function 'shortcuts-section-title)
       "Accessor"
       (documentation 'shortcuts-section-title 'function)
- "@version{2024-2-18}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-section-title object) => title}
   @syntax{(setf (gtk:shortcuts-section-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
@@ -215,6 +236,10 @@ lambda (section arg)    :action
   The string to show in the section selector of the @class{gtk:shortcuts-window}
   widget for this section. If there is only one section, you do not need to set
   a title, since the section selector will not be shown in this case.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-section-title} function is deprecated since 4.18.
+    This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-window}")
 
@@ -224,7 +249,7 @@ lambda (section arg)    :action
 (setf (documentation (liber:slot-documentation "view-name"
                                                'shortcuts-section) t)
  "The @code{view-name} property of type @code{:string} (Read / Write) @br{}
-  A view name to filter the groups in this section by. See the
+  The view name to filter the groups in this section by. See the
   @slot[gtk:shortcuts-group]{view} property. Applications are expected to use
   the @slot[gtk:shortcuts-section]{view-name} property for this purpose. @br{}
   Default value: @code{nil}")
@@ -233,11 +258,11 @@ lambda (section arg)    :action
 (setf (liber:alias-for-function 'shortcuts-section-view-name)
       "Accessor"
       (documentation 'shortcuts-section-view-name 'function)
- "@version{2024-5-22}
+ "@version{2025-05-14}
   @syntax{(gtk:shortcuts-section-view-name object) => name}
   @syntax{(setf (gtk:shortcuts-section-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
-  @argument[name]{a string with a view name to filter the groups in this
+  @argument[name]{a string for a view name to filter the groups in this
     section by}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-section]{view-name} slot of the
@@ -246,6 +271,10 @@ lambda (section arg)    :action
   A view name to filter the groups in this section by. See the
   @slot[gtk:shortcuts-group]{view} property. Applications are expected to use
   the @slot[gtk:shortcuts-section]{view-name} property for this purpose.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-section-view-name} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-function{gtk:shortcuts-group-view}")
 
@@ -257,7 +286,7 @@ lambda (section arg)    :action
 (cffi:defcfun ("gtk_shortcuts_section_add_group" shortcuts-section-add-group)
     :void
  #+liber-documentation
- "@version{#2024-10-27}
+ "@version{#2025-05-14}
   @argument[section]{a @class{gtk:shortcuts-section} widget}
   @argument[group]{a @class{gtk:shortcuts-group} widget to add}
   @begin{short}
@@ -269,6 +298,10 @@ lambda (section arg)    :action
   widget manages its children internally.
 
   Since 4.14
+  @begin[Warning]{dictionary}
+    The @fun{gtk:shortcuts-section-add-group} function is deprecated since
+    4.18. This widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-group}"
   (section (g:object shortcuts-section))
