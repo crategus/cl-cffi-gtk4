@@ -28,13 +28,87 @@
              (glib-test:list-enum-item-nicks "GskCorner")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GskCorner" GSK:CORNER
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gsk_corner_get_type")
-                       (:TOP-LEFT 0)
-                       (:TOP-RIGHT 1)
-                       (:BOTTOM-RIGHT 2)
-                       (:BOTTOM-LEFT 3))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gsk_corner_get_type")
+                                    (:TOP-LEFT 0)
+                                    (:TOP-RIGHT 1)
+                                    (:BOTTOM-RIGHT 2)
+                                    (:BOTTOM-LEFT 3))
              (gobject:get-gtype-definition "GskCorner"))))
+
+;;;     gsk:with-rounded-rect
+
+(test gsk-with-rounded-rect.1
+  (graphene:with-objects ((bounds graphene:rect-t 0 10 20 30)
+                          (ltop graphene:size-t 0.1 0.1)
+                          (rtop graphene:size-t 0.2 0.2)
+                          (lbottom graphene:size-t 0.3 0.3)
+                          (rbottom graphene:size-t 0.4 0.4))
+    (gsk:with-rounded-rect (rect bounds ltop rtop lbottom rbottom)
+      ;; Get the values of the bounds rectangle
+      (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
+      (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
+      (is (= 20.0 (graphene:rect-width (gsk:rounded-rect-bounds rect))))
+      (is (= 30.0 (graphene:rect-height (gsk:rounded-rect-bounds rect))))
+      ;; Get the values of the first corner
+      (is (= 0.1 (graphene:size-width (gsk:rounded-rect-corner rect 0))))
+      (is (= 0.1 (graphene:size-height (gsk:rounded-rect-corner rect 0))))
+      ;; Get the values of the second corner
+      (is (= 0.2 (graphene:size-width (gsk:rounded-rect-corner rect 1))))
+      (is (= 0.2 (graphene:size-height (gsk:rounded-rect-corner rect 1))))
+      ;; Get the values of the third corner
+      (is (= 0.3 (graphene:size-width (gsk:rounded-rect-corner rect 2))))
+      (is (= 0.3 (graphene:size-height (gsk:rounded-rect-corner rect 2))))
+      ;; Get the values of the fourth corner
+      (is (= 0.4 (graphene:size-width (gsk:rounded-rect-corner rect 3))))
+      (is (= 0.4 (graphene:size-height (gsk:rounded-rect-corner rect 3)))))))
+
+(test gsk-with-rounded-rect.2
+  (graphene:with-objects ((bounds graphene:rect-t 0 10 20 30)
+                          (ltop graphene:size-t 0.1 0.1)
+                          (rtop graphene:size-t 0.2 0.2)
+                          (lbottom graphene:size-t 0.3 0.3)
+                          (rbottom graphene:size-t 0.4 0.4))
+    (gsk:with-rounded-rects ((src bounds ltop rtop lbottom rbottom)
+                             (rect src))
+      ;; Get the values of the bounds rectangle
+      (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
+      (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
+      (is (= 20.0 (graphene:rect-width (gsk:rounded-rect-bounds rect))))
+      (is (= 30.0 (graphene:rect-height (gsk:rounded-rect-bounds rect))))
+      ;; Get the values of the first corner
+      (is (= 0.1 (graphene:size-width (gsk:rounded-rect-corner rect 0))))
+      (is (= 0.1 (graphene:size-height (gsk:rounded-rect-corner rect 0))))
+      ;; Get the values of the second corner
+      (is (= 0.2 (graphene:size-width (gsk:rounded-rect-corner rect 1))))
+      (is (= 0.2 (graphene:size-height (gsk:rounded-rect-corner rect 1))))
+      ;; Get the values of the third corner
+      (is (= 0.3 (graphene:size-width (gsk:rounded-rect-corner rect 2))))
+      (is (= 0.3 (graphene:size-height (gsk:rounded-rect-corner rect 2))))
+      ;; Get the values of the fourth corner
+      (is (= 0.4 (graphene:size-width (gsk:rounded-rect-corner rect 3))))
+      (is (= 0.4 (graphene:size-height (gsk:rounded-rect-corner rect 3)))))))
+
+(test gsk-with-rounded-rect.3
+  (graphene:with-object (bounds graphene:rect-t 0 10 20 30)
+    (gsk:with-rounded-rect (rect bounds 2)
+      ;; Get the values of the bounds rectangle
+      (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
+      (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
+      (is (= 20.0 (graphene:rect-width (gsk:rounded-rect-bounds rect))))
+      (is (= 30.0 (graphene:rect-height (gsk:rounded-rect-bounds rect))))
+      ;; Get the values of the first corner
+      (is (= 2.0 (graphene:size-width (gsk:rounded-rect-corner rect 0))))
+      (is (= 2.0 (graphene:size-height (gsk:rounded-rect-corner rect 0))))
+      ;; Get the values of the second corner
+      (is (= 2.0 (graphene:size-width (gsk:rounded-rect-corner rect 1))))
+      (is (= 2.0 (graphene:size-height (gsk:rounded-rect-corner rect 1))))
+      ;; Get the values of the third corner
+      (is (= 2.0 (graphene:size-width (gsk:rounded-rect-corner rect 2))))
+      (is (= 2.0 (graphene:size-height (gsk:rounded-rect-corner rect 2))))
+      ;; Get the values of the fourth corner
+      (is (= 2.0 (graphene:size-width (gsk:rounded-rect-corner rect 3))))
+      (is (= 2.0 (graphene:size-height (gsk:rounded-rect-corner rect 3)))))))
 
 ;;;     GskRoundedRect
 
@@ -237,4 +311,4 @@
 ;;;     gsk_rounded_rect_contains_rect
 ;;;     gsk_rounded_rect_intersects_rect
 
-;;; 2024-9-18
+;;; 2025-05-09

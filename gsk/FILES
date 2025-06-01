@@ -4,7 +4,7 @@ I. API Reference
   gsk4.render-node.lisp      Simple scene graph element               GSK 4.16 +
   gsk4.path.lisp             GskPath                                  GSK 4.16 .
   gsk4.path-builder.lisp     GskPathBuilder                           GSK 4.16 .
-  gsk4.rounded-rect.lisp     Rounded rectangle                        GSK 4.16 .
+  gsk4.rounded-rect.lisp     Rounded rectangle                        GSK 4.18 .
   gsk4.transform.lisp        Description for transform operations     GSK 4.16 .
 
   Deprecated since 4.16
