@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.calendar.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -118,7 +118,7 @@
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
- "@version{2024-10-31}
+ "@version{2025-05-31}
   @begin{short}
     The @class{gtk:calendar} widget displays a Gregorian calendar, one month at
     a time.
@@ -139,6 +139,12 @@
   Users should be aware that, although the Gregorian calendar is the legal
   calendar in most countries, it was adopted progressively between 1582 and
   1929. Display before these dates is likely to be historically incorrect.
+  @begin[Shortcuts and Gestures]{dictionary}
+    @begin{itemize}
+      @item{Scrolling up or down will switch to the previous or next month.}
+      @item{Date strings can be dropped for setting the current day.}
+    @end{itemize}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 calendar.view
@@ -235,11 +241,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calender-day object) => day}
   @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[day]{an integer with the selected day}
+  @argument[day]{an integer for the selected day}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{day} slot of the @class{gtk:calendar}
     class.
@@ -264,11 +270,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calendar-month object) => month}
   @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[month]{an integer with the selected month}
+  @argument[month]{an integer for the selected month}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{month} slot of the @class{gtk:calendar}
     class.
@@ -289,7 +295,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-day-names)
       "Accessor"
       (documentation 'calendar-show-day-names 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calendar-show-day-names object) => setting}
   @syntax{(setf (gtk:calendar-show-day-names object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -313,7 +319,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-heading)
       "Accessor"
       (documentation 'calendar-show-heading 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calendar-show-heading object) => setting}
   @syntax{(setf (gtk:calendar-show-heading object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -338,7 +344,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-week-numbers)
       "Accessor"
       (documentation 'calendar-show-week-numbers 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calendar-show-week-numbers object) => setting}
   @syntax{(setf (gtk:calendar-show-week-numbers object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -363,11 +369,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @syntax{(gtk:calendar-year object) => year}
   @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[year]{an integer with the selected year}
+  @argument[year]{an integer for the selected year}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{year} slot of the @class{gtk:calendar}
     class.
@@ -384,7 +390,7 @@ lambda (calendar)    :run-first
 
 (defun calendar-new ()
  #+liber-documentation
- "@version{2024-10-31}
+ "@version{2025-05-31}
   @return{The new @class{gtk:calendar} widget.}
   @begin{short}
     Creates a new calendar, with the current date being selected.
@@ -405,11 +411,11 @@ lambda (calendar)    :run-first
 
 (defun calendar-select-day (calendar year month day)
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @argument[calendar]{a @class{gtk:calendar} widget}
-  @argument[year]{an integer with the year}
-  @argument[month]{an integer with the month}
-  @argument[day]{an integer with the day between 1 and 31}
+  @argument[year]{an integer for the year}
+  @argument[month]{an integer for the month}
+  @argument[day]{an integer for the day between 1 and 31}
   @begin{short}
     Will switch to the year and month of the date and select its day.
   @end{short}
@@ -427,9 +433,9 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_mark_day" calendar-mark-day) :void
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @argument[calendar]{a @class{gtk:calendar} widget}
-  @argument[day]{an unsigned integer with the day to mark between 1 and 31}
+  @argument[day]{an unsigned integer for the day to mark between 1 and 31}
   @begin{short}
     Places a visual marker on a particular day.
   @end{short}
@@ -448,9 +454,9 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_unmark_day" calendar-unmark-day) :void
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @argument[calendar]{a @class{gtk:calendar} widget}
-  @argument[day]{an unsigned integer with the day to unmark between 1 and 31}
+  @argument[day]{an unsigned integer for the day to unmark between 1 and 31}
   @begin{short}
     Removes the visual marker from a particular day.
   @end{short}
@@ -469,9 +475,9 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_get_day_is_marked" calendar-day-is-marked) :boolean
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @argument[calendar]{a @class{gtk:calendar} widget}
-  @argument[day]{an unsigned integer with the day between 1 and 31}
+  @argument[day]{an unsigned integer for the day between 1 and 31}
   @return{The boolean whether the day is marked.}
   @begin{short}
     Returns if the day of the calendar is already marked.
@@ -490,7 +496,7 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_clear_marks" calendar-clear-marks) :void
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @begin{short}
     Remove all visual markers.
@@ -511,14 +517,12 @@ lambda (calendar)    :run-first
 
 (defun calendar-date (calendar)
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2025-05-31}
+  @syntax{(gtk:calendar-data calendar) => year, month, day}
   @argument[calendar]{a @class{gtk:calendar} widget}
-  @begin{return}
-    @arg{year} -- an integer with the year as a decimal number, for example
-      2024 @br{}
-    @arg{month} -- an integer with the month number, between 0 and 11 @br{}
-    @arg{day} -- an integer with the day number, between 1 and 31
-  @end{return}
+  @argument[year]{an integer for the year as a decimal number}
+  @argument[month]{an integer for the month number, between 0 and 11}
+  @argument[day]{an integer for the day number, between 1 and 31}
   @begin{short}
     Obtains the selected date from the calendar.
   @end{short}

@@ -462,8 +462,8 @@ this->item->name
 
 (defun expression-watch (expression object func)
  #+liber-documentation
- "@version{2025-3-14}
-  @argument[expression]{a @class{gtk:expression} intstance}
+ "@version{2025-05-09}
+  @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the argument to watch}
   @argument[func]{a @symbol{gtk:expression-notify} callback function to invoke
     when the expression changes}
@@ -581,11 +581,11 @@ this->item->name
 
 (defun property-expression-new (gtype expression property)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-05-09}
   @argument[gtype]{a @class{g:type-t} type ID to expect for the @arg{this} type}
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
-  @argument[property]{a string with the name of the property}
+  @argument[property]{a string for the name of the property}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that looks up a property via the given expression or
@@ -898,10 +898,10 @@ this->item->name
 
 (cffi:defcfun ("gtk_value_get_expression" value-expression) expression
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-05-09}
   @syntax{(gtk:value-expression value) => expression}
   @syntax{(setf (gtk:value-expression value) expression)}
-  @argument[value]{a @symbol{g:value} instance initialized with the
+  @argument[value]{a @symbol{g:value} instance initialized for the
     @class{gtk:expression} type}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}

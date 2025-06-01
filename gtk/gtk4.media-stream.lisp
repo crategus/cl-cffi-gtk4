@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.media-stream.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -156,7 +156,7 @@
 
 #+liber-documentation
 (setf (documentation 'media-stream 'type)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @begin{short}
     The @class{gtk:media-stream} object is the integration point for media
     playback inside GTK.
@@ -166,12 +166,7 @@
 
   Apart from application-facing API for stream playback, the
   @class{gtk:media-stream} object has a number of APIs that are only useful for
-  implementations and should not be used in applications:
-  @fun{gtk:media-stream-prepared}, @fun{gtk:media-stream-unprepared},
-  @fun{gtk.media-stream-update}, @fun{gtk:media-stream-ended},
-  @fun{gtk:media-stream-seek-success}, @fun{gtk:media-stream-seek-failed},
-  @fun{gtk:media-stream-gerror}, @fun{gtk:media-stream-error},
-  @fun{gtk:media-stream-error-valist} functions.
+  implementations and should not be used in applications.
   @see-slot{gtk:media-stream-duration}
   @see-slot{gtk:media-stream-ended}
   @see-slot{gtk:media-stream-error}
@@ -205,10 +200,10 @@
 (setf (liber:alias-for-function 'media-stream-duration)
       "Accessor"
       (documentation 'media-stream-duration 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-duration object) => duration}
   @argument[object]{a @class{gtk:media-stream} object}
-  @argument[duration]{an integer with the duration of the stream}
+  @argument[duration]{an integer for the duration of the stream}
   @begin{short}
     Accessor of the @slot[gtk:media-stream]{duration} slot of the
     @class{gtk:media-stream} class.
@@ -229,7 +224,7 @@
 (setf (liber:alias-for-function 'media-stream-ended)
       "Accessor"
       (documentation 'media-stream-ended 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-ended object) => ended}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[ended]{a boolean whether the playback is finished}
@@ -253,18 +248,18 @@
 (setf (liber:alias-for-function 'media-stream-error)
       "Accessor"
       (documentation 'media-stream-error 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-error object) => error}
   @argument[object]{a @class{gtk:media-stream} object}
-  @argument[error]{@code{nil} if not in an error state or the @code{GError}
-    of the stream}
+  @argument[error]{@code{nil} if not in an error state or the @class{g:error}
+    instance of the stream}
   @begin{short}
     Accessor of the @slot[gtk:media-stream]{error} slot of the
     @class{gtk:media-stream} class.
   @end{short}
   If the stream is in an error state, the @fun{gtk:media-stream-error} function
-  returns the @code{GError} explaining that state. Any type of error can be
-  reported here depending on the implementation of the media stream.
+  returns the @class{g:error} instance explaining that state. Any type of error
+  can be reported here depending on the implementation of the media stream.
 
   A media stream in an error cannot be operated on, calls like the
   @fun{gtk:media-stream-play} or @fun{gtk:media-stream-seek} functions will not
@@ -273,9 +268,13 @@
   The @class{gtk:media-stream} object itself does not provide a way to unset an
   error, but implementations may provide options. For example, a
   @class{gtk:media-file} object will unset errors when a new source is set,
-  for example, with the @fun{gtk:media-file-set-file} function.
+  for example, with the @setf{gtk:media-file-file} function.
   @see-class{gtk:media-stream}
-  @see-class{gtk:media-file}")
+  @see-class{g:error}
+  @see-class{gtk:media-file}
+  @see-function{gtk:media-stream-error}
+  @see-function{gtk:media-stream-play}
+  @see-function{gtk:media-stream-seek}")
 
 ;;; --- gtk:media-stream-has-audio ---------------------------------------------
 
@@ -289,7 +288,7 @@
 (setf (liber:alias-for-function 'media-stream-has-audio)
       "Accessor"
       (documentation 'media-stream-has-audio 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-has-audio object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has audio}
@@ -313,7 +312,7 @@
 (setf (liber:alias-for-function 'media-stream-has-video)
       "Accessor"
       (documentation 'media-stream-has-video 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-has-video object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has video}
@@ -337,7 +336,7 @@
 (setf (liber:alias-for-function 'media-stream-loop)
       "Accessor"
       (documentation 'media-stream-loop 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-loop object) => setting}
   @syntax{(setf (gtk:media-stream-loop object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
@@ -367,7 +366,7 @@
 (setf (liber:alias-for-function 'media-stream-muted)
       "Accessor"
       (documentation 'media-stream-muted 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-muted object) => setting}
   @syntax{(setf (gtk:media-stream-muted object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
@@ -398,7 +397,7 @@
 (setf (liber:alias-for-function 'media-stream-playing)
       "Accessor"
       (documentation 'media-stream-playing 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-playing object) => setting}
   @syntax{(setf (gtk:media-stream-playing object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
@@ -425,7 +424,7 @@
 (setf (liber:alias-for-function 'media-stream-prepared)
       "Accessor"
       (documentation 'media-stream-prepared 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-prepared object) => setting}
   @syntax{(setf (gtk:media-stream-prepared object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
@@ -449,7 +448,7 @@
 (setf (liber:alias-for-function 'media-stream-seekable)
       "Accessor"
       (documentation 'media-stream-seekable 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-seekable object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether the stream is known to support seeking}
@@ -471,7 +470,7 @@
 (setf (liber:alias-for-function 'media-stream-seeking)
       "Accessor"
       (documentation 'media-stream-seeking 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-seeking object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether a seek is in progress}
@@ -494,10 +493,10 @@
 (setf (liber:alias-for-function 'media-stream-timestamp)
       "Accessor"
       (documentation 'media-stream-timestamp 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-timestamp object) => timestamp}
   @argument[object]{a @class{gtk:media-stream} object}
-  @argument[timestamp]{an integer with the timestamp in microseconds}
+  @argument[timestamp]{an integer for the timestamp in microseconds}
   @begin{short}
     Accessor of the @slot[gtk:media-stream]{timestamp} slot of the
     @class{gtk:media-stream} class.
@@ -511,7 +510,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "volume" 'media-stream) t)
  "The @code{volume} property of type @code{:double} (Read / Write) @br{}
-  Volume of the audio stream. @br{}
+  The volume of the audio stream. @br{}
   Allowed values: [0,1] @br{}
   Default value: 1")
 
@@ -519,12 +518,12 @@
 (setf (liber:alias-for-function 'media-stream-volume)
       "Accessor"
       (documentation 'media-stream-volume 'function)
- "@version{#2023-5-2}
+ "@version{2025-05-30}
   @syntax{(gtk:media-stream-volume object) => volume}
   @syntax{(setf (gtk:media-stream-playing object) volume)}
   @argument[object]{a @class{gtk:media-stream} object}
-  @argument[volume]{a double float with the volume of the stream from 0.0 to
-    1.0}
+  @argument[volume]{a number coerced to a double float for the volume of the
+    stream from 0.0 to 1.0}
   @begin{short}
     Accessor of the @slot[gtk:media-stream]{volume} slot of the
     @class{gtk:media-stream} class.
@@ -547,7 +546,7 @@
 
 (cffi:defcfun ("gtk_media_stream_is_prepared" media-stream-is-prepared) :boolean
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @return{@em{True} if the stream is prepared.}
   @begin{short}
@@ -565,7 +564,7 @@
 
 (cffi:defcfun ("gtk_media_stream_play" media-stream-play) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @begin{short}
     Starts playing the stream.
@@ -582,7 +581,7 @@
 
 (cffi:defcfun ("gtk_media_stream_pause" media-stream-pause) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @begin{short}
     Pauses playback of the stream.
@@ -599,7 +598,7 @@
 
 (cffi:defcfun ("gtk_media_stream_is_seekable" media-stream-is-seekable) :boolean
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @return{@em{True} if the stream may support seeking.}
   @begin{short}
@@ -624,7 +623,7 @@
 
 (cffi:defcfun ("gtk_media_stream_is_seeking" media-stream-is-seeking) :boolean
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @return{@em{True} if a seek is ongoing.}
   @begin{short}
@@ -641,9 +640,9 @@
 
 (cffi:defcfun ("gtk_media_stream_seek" media-stream-seek) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
-  @argument[timestamp]{an integer with the timestamp to seek to}
+  @argument[timestamp]{an integer for the timestamp to seek to}
   @begin{short}
     Start a seek operation on @arg{stream} to @arg{timestamp}.
   @end{short}
@@ -667,7 +666,7 @@
 
 (cffi:defcfun ("gtk_media_stream_realize" media-stream-realize) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
@@ -703,7 +702,7 @@
 
 (cffi:defcfun ("gtk_media_stream_unrealize" media-stream-unrealize) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object previously realized}
   @argument[surface]{a @class{gdk:surface} object the stream was realized with}
   @begin{short}
@@ -720,60 +719,12 @@
 (export 'media-stream-unrealize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_prepared ()
-;;;
-;;; void
-;;; gtk_media_stream_prepared (GtkMediaStream *self,
-;;;                            gboolean has_audio,
-;;;                            gboolean has_video,
-;;;                            gboolean seekable,
-;;;                            gint64 duration);
-;;;
-;;; Called by GtkMediaStream implementations to advertise the stream being
-;;; ready to play and providing details about the stream.
-;;;
-;;; Note that the arguments are hints. If the stream implementation cannot
-;;; determine the correct values, it is better to err on the side of caution
-;;; and return TRUE. User interfaces will use those values to determine what
-;;; controls to show.
-;;;
-;;; This function may not be called again until the stream has been reset via
-;;; gtk_media_stream_unprepared().
-;;;
-;;; self :
-;;;     a GtkMediaStream
-;;;
-;;; has_audio :
-;;;     TRUE if the stream should advertise audio support
-;;;
-;;; has_video :
-;;;     TRUE if the stream should advertise video support
-;;;
-;;; seekable :
-;;;     TRUE if the stream should advertise seekability
-;;;
-;;; duration :
-;;;     The duration of the stream or 0 if unknown
+;;; gtk_media_stream_prepared ()                            Deprecated 4.4
 ;;; ----------------------------------------------------------------------------
 
-;; deprecated since 4.4 and not implemented
-
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_unprepared ()
-;;;
-;;; void
-;;; gtk_media_stream_unprepared (GtkMediaStream *self);
-;;;
-;;; Resets a given media stream implementation. gtk_media_stream_prepared() can
-;;; now be called again.
-;;;
-;;; This function will also reset any error state the stream was in.
-;;;
-;;; self :
-;;;     a GtkMediaStream
+;;; gtk_media_stream_unprepared ()                          Deprecated 4.4
 ;;; ----------------------------------------------------------------------------
-
-;; deprecated since 4.4 and not implemented
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_media_stream_update
@@ -781,9 +732,9 @@
 
 (cffi:defcfun ("gtk_media_stream_update" media-stream-update) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
-  @argument[timestamp]{an integer with the new timestamp}
+  @argument[timestamp]{an integer for the new timestamp}
   @begin{short}
     Media stream implementations should regularly call this function to update
     the timestamp reported by the stream.
@@ -797,19 +748,8 @@
 (export 'media-stream-update)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_ended ()
-;;;
-;;; void
-;;; gtk_media_stream_ended (GtkMediaStream *self);
-;;;
-;;; Pauses the media stream and marks it as ended. This is a hint only, calls
-;;; to GtkMediaStream.play() may still happen.
-;;;
-;;; self :
-;;;     a GtkMediaStream
+;;; gtk_media_stream_ended ()                               Deprecated 4.4
 ;;; ----------------------------------------------------------------------------
-
-;; deprecated since 4.4 and not implemented
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_media_stream_seek_success
@@ -817,7 +757,7 @@
 
 (cffi:defcfun ("gtk_media_stream_seek_success" media-stream-seek-success) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @begin{short}
     Ends a seek operation started via the @fun{gtk:media-stream-seek} function
@@ -842,7 +782,7 @@
 
 (cffi:defcfun ("gtk_media_stream_seek_failed" media-stream-seek-failed) :void
  #+liber-documentation
- "@version{#2023-5-3}
+ "@version{#2025-05-30}
   @argument[stream]{a @class{gtk:media-stream} object}
   @begin{short}
     Ends a seek operation started via the @fun{gtk:media-stream-seek} function
@@ -885,8 +825,6 @@
 ;;;     the GError to set.
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Consider to implement this function.
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_media_stream_error ()
 ;;;
@@ -918,8 +856,6 @@
 ;;;     parameters for message format
 ;;; ----------------------------------------------------------------------------
 
-;; not implemented
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_media_stream_error_valist ()
 ;;;
@@ -950,8 +886,6 @@
 ;;; args :
 ;;;     va_list of parameters for the message format
 ;;; ----------------------------------------------------------------------------
-
-;; not implemented
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_media_stream_stream_ended

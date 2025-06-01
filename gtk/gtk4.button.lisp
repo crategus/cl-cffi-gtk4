@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'button 'type)
- "@version{2024-10-31}
+ "@version{2025-05-30}
   @begin{short}
     The @class{gtk:button} widget is generally used to trigger a callback
     function that is called when the button is pressed.
@@ -208,7 +208,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-can-shrink)
       "Accessor"
       (documentation 'button-can-shrink 'function)
- "@version{2023-9-2}
+ "@version{2025-05-30}
   @syntax{(gtk:button-can-shrink object) => setting}
   @syntax{(setf (gtk:button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -239,7 +239,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2024-5-4}
+ "@version{2025-05-30}
   @syntax{(gtk:button-child object) => child}
   @syntax{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
@@ -291,7 +291,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-has-frame)
       "Accessor"
       (documentation 'button-has-frame 'function)
- "@version{2024-5-4}
+ "@version{2025-05-30}
   @syntax{(gtk:button-has-frame object) => setting}
   @syntax{(setf (gtk:button-has-frame object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -317,11 +317,11 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-icon-name)
       "Accessor"
       (documentation 'button-icon-name 'function)
- "@version{2024-5-14}
+ "@version{2025-05-30}
   @syntax{(gtk:button-icon-name object) => name}
   @syntax{(setf (gtk:button-icon-name object) name)}
   @argument[object]{a @class{gtk:button} widget}
-  @argument[name]{a string with an icon name, or @code{nil}}
+  @argument[name]{a string for an icon name, or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:button]{icon-name} slot of the @class{gtk:button}
     class.
@@ -349,11 +349,11 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-label)
       "Accessor"
       (documentation 'button-label 'function)
- "@version{2023-9-2}
+ "@version{2025-05-30}
   @syntax{(gtk:button-label object) => label}
   @syntax{(setf (gtk:button-label object) label)}
   @argument[object]{a @class{gtk:button} widget}
-  @argument[label]{a string with the text of the label}
+  @argument[label]{a string for the text of the label}
   @begin{short}
     Accessor of the @slot[gtk:button]{label} slot of the @class{gtk:button}
     class.
@@ -379,7 +379,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-use-underline)
       "Accessor"
       (documentation 'button-use-underline 'function)
- "@version{2023-12-16}
+ "@version{2025-05-30}
   @syntax{(gtk:button-use-underline object) => setting}
   @syntax{(setf (gtk:button-use-underline object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -403,7 +403,7 @@ lambda (button)    :action
 
 (defun button-new ()
  #+liber-documentation
- "@version{2023-9-2}
+ "@version{2025-05-30}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
     Creates a new button.
@@ -423,8 +423,8 @@ lambda (button)    :action
 
 (defun button-new-with-label (label)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[label]{a string with the text for the button}
+ "@version{2025-05-30}
+  @argument[label]{a string for the text for the button}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
     Creates a button with a label containing the given text.
@@ -444,8 +444,8 @@ lambda (button)    :action
 
 (defun button-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2023-9-2}
-  @argument[label]{a string with the text of the button, with an underscore in
+ "@version{2025-05-30}
+  @argument[label]{a string for the text of the button, with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:button} widget.}
   @begin{short}
@@ -471,8 +471,8 @@ lambda (button)    :action
 
 (defun button-new-from-icon-name (name)
  #+liber-documentation
- "@version{2023-9-2}
-  @argument[name]{a string with the icon name}
+ "@version{2025-05-30}
+  @argument[name]{a string for the icon name}
   @return{The new @class{gtk:button} widget displaying the themed icon.}
   @begin{short}
     Creates a new button containing an icon from the current icon theme.

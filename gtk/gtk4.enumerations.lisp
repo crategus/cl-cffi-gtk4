@@ -104,7 +104,7 @@
 (setf (liber:alias-for-symbol 'align)
       "GEnum"
       (liber:symbol-documentation 'align)
- "@version{2024-4-19}
+ "@version{2025-05-10}
   @begin{declaration}
 (gobject:define-genum \"GtkAlign\" align
   (:export t
@@ -172,7 +172,7 @@
 (setf (liber:alias-for-symbol 'baseline-position)
       "GEnum"
       (liber:symbol-documentation 'baseline-position)
- "@version{2024-4-7}
+ "@version{2025-05-10}
   @begin{declaration}
 (gobject:define-genum \"GtkBaselinePosition\" baseline-position
   (:export t
@@ -2257,13 +2257,25 @@
   :row-index
   :row-index-text
   :row-span
-  :set-size)
+  :set-size
+  #+gtk-4-18
+  :label-for
+  #+gtk-4-18
+  :description-for
+  #+gtk-4-18
+  :controlled-by
+  #+gtk-4-18
+  :details-for
+  #+gtk-4-18
+  :error-message-for
+  #+gtk-4-18
+  :flow-error)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-relation)
       "GEnum"
       (liber:symbol-documentation 'accessible-relation)
- "@version{2024-4-24}
+ "@version{2025-05-13}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRelation\" accessible-relation
   (:export t
@@ -2285,13 +2297,19 @@
   :row-index
   :row-index-text
   :row-span
-  :set-size)
+  :set-size
+  :label-for
+  :description-for
+  :controlled-by
+  :details-for
+  :error-message-for
+  :flow-error)
   @end{declaration}
   @begin{values}
     @begin[code]{table}
       @entry[:active-descendant]{Identifies the currently active element when
-        focus is on a composite widget, combobox, textbox, group, or application.
-        Value type: reference}
+        focus is on a composite widget, combobox, textbox, group, or
+        application. Value type: reference}
       @entry[:col-count]{Defines the total number of columns in a table, grid,
         or treegrid. Value type: integer}
       @entry[:col-index]{Defines a column index of the element or position with
@@ -2328,10 +2346,34 @@
         Value type: integer}
       @entry[:row-index-text]{Defines a human readable text alternative of
         aria-rowindex. Value type: string}
-      @entry[:row-span]{Defines the number of rows spanned by a cell or gridcell
-        within a table, grid, or treegrid. Value type: integer}
+      @entry[:row-span]{Defines the number of rows spanned by a cell or
+        gridcell within a table, grid, or treegrid. Value type: integer}
       @entry[:set-size]{Defines the number of items in the current set of
         listitems or treeitems. Value type: integer}
+      @entry[:label-for]{Identifies the element (or elements) that are labeled
+        by the current element. This relation is managed by GTK and should not
+        be set from application code. Value type: reference. Since 4.18}
+      @entry[:description-for]{Identifies the element (or elements) that are
+        described by the current element. This relation is managed by GTK and
+        should not be set from application code. Value type: reference.
+        Since 4.18}
+      @entry[:controlled-by]{Identifies the element (or elements) that the
+        current element is controlled by. This relation is managed by GTK and
+        should not be set from application code. Value type: reference.
+        Since 4.18}
+      @entry[:details-for]{Identifies the element (or elements) for which the
+        current element provides additional information. This relation is
+        managed by GTK and should not be set from application code. Value type:
+        reference. Since 4.18}
+      @entry[:error-message-for]{Identifies the element (or elements) for which
+        the current element provides an error message. This relation is managed
+        by GTK and should not be set from application code. Value type:
+        reference. Since 4.18}
+      @entry[:flow-from]{Identifies the previous element (or elements) in an
+        alternate reading order of content which, at the user’s discretion,
+        allows assistive technology to override the general default of reading
+        in document source order. This relation is managed by GTK and should
+        not be set from application code. Value type: reference. Since 4.18}
     @end{table}
   @end{values}
   @begin{short}

@@ -2,11 +2,11 @@
 ;;; gtk4.expander.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -122,7 +122,7 @@
 
 #+liber-documentation
 (setf (documentation 'expander 'type)
- "@version{2024-4-17}
+ "@version{2025-05-28}
   @begin{short}
     The @class{gtk:expander} widget allows the user to hide or show its child
     by clicking on an expander triangle.
@@ -226,11 +226,11 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-child)
       "Accessor"
       (documentation 'expander-child 'function)
- "@version{2023-8-23}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-child object) => child}
   @syntax{(setf (gtk:expander-child object) child)}
   @argument[object]{a @class{gtk:expander} widget}
-  @argument[child]{a @class{gtk:widget} child widget of the expander}
+  @argument[child]{a @class{gtk:widget} child widget for the expander}
   @begin{short}
     Accessor of the @slot[gtk:expander]{child} slot of the @class{gtk:expander}
     class.
@@ -251,7 +251,7 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-expanded)
       "Accessor"
       (documentation 'expander-expanded 'function)
- "@version{2023-8-23}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-expanded object) => expanded}
   @syntax{(setf (gtk:expander-expanded object) expanded)}
   @argument[object]{a @class{gtk:expander} widget}
@@ -271,31 +271,28 @@ lambda (expander)   :action
 (setf (documentation (liber:slot-documentation "label" 'expander) t)
  "The @code{label} property of type @code{:string} (Read / Write / Construct)
   @br{}
-  Text of the label of the expander. @br{}
+  The text for the label of the expander. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'expander-label)
       "Accessor"
       (documentation 'expander-label 'function)
- "@version{2023-8-23}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-label object) => label}
   @syntax{(setf (gtk:expander-label object) label)}
   @argument[object]{a @class{gtk:expander} widget}
-  @argument[label]{a string with the text of the label of the expander}
+  @argument[label]{a string for the text of the label of the expander}
   @begin{short}
     Accessor of the @slot[gtk:expander]{label} slot of the @class{gtk:expander}
     class.
   @end{short}
   The @fun{gtk:expander-label} function fetches the text from a label widget
   including any embedded underlines indicating mnemonics and Pango markup, as
-  set by the @setf{gtk:expander-label} function.
-
-  If the label text has not been set the return value will be @code{nil}. This
-  will be the case if you create an empty button with the @fun{gtk:button-new}
-  function to use as a container.
+  set by the @setf{gtk:expander-label} function. If the label text has not been
+  set the return value will be @code{nil}.
   @see-class{gtk:expander}
-  @see-function{gtk:button-new}")
+  @see-function{gtk:expander-label-widget}")
 
 ;;; --- gtk:expander-label-widget ----------------------------------------------
 
@@ -303,13 +300,13 @@ lambda (expander)   :action
 (setf (documentation (liber:slot-documentation "label-widget" 'expander) t)
  "The @code{label-widget} property of type @class{gtk:widget} (Read / Write)
   @br{}
-  A widget to display in place of the usual expander label.")
+  The widget to display in place of the usual expander label.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'expander-label-widget)
       "Accessor"
       (documentation 'expander-label-widget 'function)
- "@version{2024-4-17}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-label-widget object) => widget}
   @syntax{(setf (gtk:expander-label-widget object) widget)}
   @argument[object]{a @class{gtk:expander} widget}
@@ -319,12 +316,13 @@ lambda (expander)   :action
     @class{gtk:expander} class.
   @end{short}
   The @fun{gtk:expander-label-widget} function retrieves the label widget for
-  the frame. The @setf{gtk:expander-label-widget} function sets the label
-  widget for the expander.
+  the expander. The @setf{gtk:expander-label-widget} function sets the label
+  widget.
 
   This is the widget that will appear embedded alongside the expander arrow.
   @see-class{gtk:expander}
-  @see-class{gtk:widget}")
+  @see-class{gtk:widget}
+  @see-function{gtk:expander-label}")
 
 ;;; --- gtk:expander-resize-toplevel -------------------------------------------
 
@@ -340,7 +338,7 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-resize-toplevel)
       "Accessor"
       (documentation 'expander-resize-toplevel 'function)
- "@version{2024-4-17}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-resize-toplevel object) => resize}
   @syntax{(setf (gtk:expander-resize-toplevel object) resize)}
   @argument[object]{a @class{gtk:expander} widget}
@@ -368,7 +366,7 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-use-markup)
       "Accessor"
       (documentation 'expander-use-markup 'function)
- "@version{2023-8-23}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-use-markup object) => use-markup}
   @syntax{(setf (gtk:expander-use-markup object) use-markup)}
   @argument[object]{a @class{gtk:expander} widget}
@@ -382,8 +380,7 @@ lambda (expander)   :action
   label is interpreted as marked up with the Pango text markup language. The
   @setf{gtk:expander-use-markup} function sets whether the text of the label
   contains markup.
-  @see-class{gtk:expander}
-  @see-function{gtk:label-set-markup}")
+  @see-class{gtk:expander}")
 
 ;;; --- gtk:expander-use-underline ---------------------------------------------
 
@@ -399,7 +396,7 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-use-underline)
       "Accessor"
       (documentation 'expander-use-underline 'function)
- "@version{2023-8-23}
+ "@version{2025-05-28}
   @syntax{(gtk:expander-use-underline object) => use-underline}
   @syntax{(setf (gtk:expander-use-underline object) use-underline)}
   @argument[object]{a @class{gtk:expander} widget}
@@ -420,18 +417,17 @@ lambda (expander)   :action
 ;;; gtk_expander_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline expander-new))
-
-(defun expander-new (label)
+(defun expander-new (&optional label)
  #+liber-documentation
- "@version{2024-4-17}
-  @argument[label]{a string with the text of the label}
+ "@version{2025-05-28}
+  @argument[label]{an optional string for the text of the label, or the default
+    @code{nil} value}
   @return{The new @class{gtk:expander} widget.}
   @short{Creates a new expander using @arg{label} as the text of the label.}
   @see-class{gtk:expander}
   @see-function{gtk:expander-new-with-mnemonic}"
   (make-instance 'expander
-                 :label label))
+                 :label (or label (cffi:null-pointer))))
 
 (export 'expander-new)
 
@@ -439,12 +435,10 @@ lambda (expander)   :action
 ;;; gtk_expander_new_with_mnemonic
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline expander-new-with-mnemonic))
-
 (defun expander-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2024-4-17}
-  @argument[label]{a string with the text of the label with an underscore in
+ "@version{2025-05-28}
+  @argument[label]{a string for the text of the label with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:expander} widget.}
   @begin{short}

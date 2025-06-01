@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.picture.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -172,7 +172,7 @@
 
 #+liber-documentation
 (setf (documentation 'picture 'type)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @begin{short}
     The @class{gtk:picture} widget displays a @class{gdk:paintable} object.
   @end{short}
@@ -251,11 +251,11 @@
 (setf (liber:alias-for-function 'picture-alternative-text)
       "Accessor"
       (documentation 'picture-alternative-text 'function)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-alternative-text object) => text}
   @syntax{(setf (gtk:picture-alternative-text object) text)}
   @argument[object]{a @class{gtk:picture} widget}
-  @argument[text]{a string with the alternative textual description for the
+  @argument[text]{a string for the alternative textual description for the
     picture}
   @begin{short}
     Accessor of the @slot[gtk:picture]{alternative-text} slot of the
@@ -281,7 +281,7 @@
 (setf (liber:alias-for-function 'picture-can-shrink)
       "Accessor"
       (documentation 'picture-can-shrink 'function)
- "@version{2024-10-30}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-can-shrink object) => setting}
   @syntax{(setf (gtk:picture-can-shrink object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -316,7 +316,7 @@
 (setf (liber:alias-for-function 'picture-content-fit)
       "Accessor"
       (documentation 'picture-content-fit 'function)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-content-fit object) => setting}
   @syntax{(setf (gtk:picture-content-fit object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -345,7 +345,7 @@
 (setf (liber:alias-for-function 'picture-file)
       "Accessor"
       (documentation 'picture-file 'function)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-file object) => file}
   @syntax{(setf (gtk:picture-file object) file)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -381,7 +381,7 @@
 (setf (liber:alias-for-function 'picture-keep-aspect-ratio)
       "Accessor"
       (documentation 'picture-keep-aspect-ratio 'function)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-keep-aspect-ratio object) => setting}
   @syntax{(setf (gtk:picture-keep-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -416,7 +416,7 @@
 (setf (liber:alias-for-function 'picture-paintable)
       "Accessor"
       (documentation 'picture-paintable 'function)
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @syntax{(gtk:picture-keep-paintable object) => paintable}
   @syntax{(setf (gtk:picture-paintable object) paintable)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -442,7 +442,7 @@
 
 (defun picture-new ()
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @return{The newly created @class{gtk:picture} widget.}
   @short{Creates a new empty picture.}
   @see-class{gtk:picture}"
@@ -458,7 +458,7 @@
 
 (defun picture-new-for-paintable (paintable)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[paintable]{a @class{gdk:paintable} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -485,7 +485,7 @@
 
 (defun picture-new-for-pixbuf (pixbuf)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget}
   @begin{short}
@@ -518,7 +518,7 @@
 
 (defun picture-new-for-file (file)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[file]{a @class{g:file} object}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -547,7 +547,7 @@
 
 (defun picture-new-for-filename (filename)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[filename]{a pathname or namestring for the file}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -568,8 +568,8 @@
 (cffi:defcfun ("gtk_picture_new_for_resource" picture-new-for-resource)
      (g:object widget)
  #+liber-documentation
- "@version{2024-10-13}
-  @argument[path]{a string with the resource path}
+ "@version{2025-05-09}
+  @argument[path]{a string for the resource path}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
     Creates a new picture displaying the resource at @arg{path}.
@@ -594,7 +594,7 @@
 
 (defun picture-set-pixbuf (picture pixbuf)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @begin{short}
@@ -626,9 +626,9 @@
 
 (defun picture-set-filename (picture filename)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[picture]{a @class{gtk:picture} widget}
-  @argument[filename]{a pathname or namestring with the filename}
+  @argument[filename]{a pathname or namestring for the filename}
   @begin{short}
     Makes the picture load and display the given @arg{filename}.
   @end{short}
@@ -645,9 +645,9 @@
 
 (cffi:defcfun ("gtk_picture_set_resource" picture-set-resource) :void
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-05-09}
   @argument[picture]{a @class{gtk:picture} widget}
-  @argument[path]{a string with the resource path}
+  @argument[path]{a string for the resource path}
   @begin{short}
     Makes the picture load and display the resource at the given resource path.
   @end{short}

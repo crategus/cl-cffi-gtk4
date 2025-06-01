@@ -2,8 +2,8 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2013 - 2025 Dieter Kaiser
@@ -387,10 +387,12 @@
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
  #+liber-documentation
- "@version{#2025-2-25}
+ "@version{#2025-05-10}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{g:bytes} instance with the bytes from which @arg{section}
-    was parsed.}
+  @begin{return}
+    The @class{g:bytes} instance with the bytes from which @arg{section} was
+    parsed.
+  @end{return}
   @begin{short}
     Gets the bytes that the section was parsed from.
   @end{short}
@@ -410,10 +412,12 @@
 (cffi:defcfun ("gtk_css_provider_get_file" css-section-file)
     g:file-as-namestring
  #+liber-documentation
- "@version{#2025-2-25}
+ "@version{#2025-05-10}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The namestring for the file that @arg{section} was parsed from or
-    @code{nil} if @arg{section} was parsed from other data.}
+  @begin{return}
+    The namestring for the file that @arg{section} was parsed from or
+    @code{nil} if @arg{section} was parsed from other data.
+  @end{return}
   @begin{short}
     Gets the file that the section was parsed from.
   @end{short}
@@ -451,10 +455,12 @@
 (cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-05-10}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @symbol{gtk:css-location} instance with the start location of the
-    section.}
+  @begin{return}
+    The @symbol{gtk:css-location} instance with the start location of the
+    section.
+  @end{return}
   @begin{short}
     Returns the location in the CSS document where this section starts.
   @end{short}
@@ -471,10 +477,11 @@
 (cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-05-10}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @symbol{gtk:css-location} instance with the end location of the
-    section.}
+  @begin{return}
+    The @symbol{gtk:css-location} instance with the end location of the section.
+  @end{return}
   @begin{short}
     Returns the location in the CSS document where this section ends.
   @end{short}

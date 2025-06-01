@@ -2,8 +2,8 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -71,6 +71,8 @@
 ;;;     gtk_widget_set_hexpand_set
 ;;;     gtk_widget_set_layout_manager
 ;;;     gtk_widget_get_layout_manager
+;;;     gtk_widget_set_limit_events                         Since 4.18
+;;;     gtk_widget_get_limit_events                         Since 4.18
 ;;;     gtk_widget_get_margin_bottom
 ;;;     gtk_widget_set_margin_bottom
 ;;;     gtk_widget_get_margin_end
@@ -145,6 +147,7 @@
 ;;;     gtk_widget_activate
 ;;;     gtk_widget_is_focus
 ;;;     gtk_widget_grab_focus
+;;;     gtk_widget_get_parent
 ;;;     gtk_widget_set_parent
 ;;;     gtk_widget_unparent
 ;;;     gtk_widget_get_native
@@ -287,6 +290,7 @@
 ;;;     hexpand
 ;;;     hexpand-set
 ;;;     layout-manager
+;;;     limit-events                                        Since 4.18
 ;;;     margin-bottom
 ;;;     margin-end
 ;;;     margin-start
@@ -539,6 +543,10 @@
    (layout-manager
     widget-layout-manager
     "layout-manager" "GtkLayoutManager" t t)
+   #+gtk-4-18
+   (limit-events
+    widget-limit-events
+    "limit-events" "gboolean" t t)
    (margin-bottom
     widget-margin-bottom
     "margin-bottom" "gint" t t)
@@ -907,6 +915,7 @@ lambda (widget)    :run-last
   @see-slot{gtk:widget-hexpand}
   @see-slot{gtk:widget-hexpand-set}
   @see-slot{gtk:widget-layout-manager}
+  @see-slot{gtk:widget-limit-events}
   @see-slot{gtk:widget-margin-bottom}
   @see-slot{gtk:widget-margin-end}
   @see-slot{gtk:widget-margin-start}
@@ -1407,6 +1416,43 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:widget}
   @see-class{gtk:layout-manager}")
+
+;;; --- gtk:widget-limit-events ------------------------------------------------
+
+#+(and gtk-4-18 liber-documentation)
+(setf (documentation (liber:slot-documentation "limit-events" 'widget) t)
+ "The @code{limit-events} property of type @code{:boolean} (Read / Write) @br{}
+  Makes this widget act like a modal dialog, with respect to event delivery.
+  Global event controllers will not handle events with targets inside the
+  widget, unless they are set up to ignore propagation limits. See
+  the @fun{gtk:event-controller-propagation-limit} function. Since 4.18 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-18 liber-documentation)
+(setf (liber:alias-for-function 'widget-limit-events)
+      "Accessor"
+      (documentation 'widget-limit-events 'function)
+ "@version{2025-05-13}
+  @syntax{(gtk:widget-limit-events object) => setting}
+  @syntax{(setf (gtk:widget-limit-events object) setting)}
+  @argument[object]{a @class{gtk:widget} object}
+  @argument[manager]{a boolean whether to limit events}
+  @begin{short}
+    Accessor of the @slot[gtk:widget]{limit-events} slot of the
+    @class{gtk:widget} class.
+  @end{short}
+  The @fun{gtk:widget-limit-events} function gets whether the widget acts like
+  a modal dialog, with respect to event delivery. The
+  @setf{gtk:widget-limit-events} function sets the property.
+
+  Makes this widget act like a modal dialog, with respect to event delivery.
+  Global event controllers will not handle events with targets inside the
+  widget, unless they are set up to ignore propagation limits. See
+  the @fun{gtk:event-controller-propagation-limit} function.
+
+  Since 4.18
+  @see-class{gtk:widget}
+  @see-function{gtk:event-contoller-propagation-limit}")
 
 ;;; --- gtk:widget-margin-bottom -----------------------------------------------
 
@@ -2861,11 +2907,27 @@ lambda (widget)    :run-last
 (export 'widget-grab-focus)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_widget_get_parent
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_get_parent" widget-get-parent) (g:object widget)
+ #+liber-documentation
+ "@version{2025-05-13}
+  @argument[widget]{a @class{gtk:widget} object}
+  @return{The parent @class{gtk:widget} object for @arg{widget}.}
+  @short{Returns the parent widget of the widget.}
+  @see-class{gtk:widget}"
+  (widget (g:object widget)))
+
+(export 'widget-get-parent)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_set_parent
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Rework the implementation of the gtk_widget_get_parent and
-;; gtk_widget_set_parent functions
+;; gtk_widget_set_parent functions. Do we need the gtk:widget-get-parent
+;; function?!
 
 (cffi:defcfun ("gtk_widget_set_parent" widget-set-parent) :void
  #+liber-documentation
@@ -2891,11 +2953,6 @@ lambda (widget)    :run-last
   (parent (g:object widget)))
 
 (export 'widget-set-parent)
-
-(cffi:defcfun ("gtk_widget_get_parent" widget-get-parent) (g:object widget)
-  (widget (g:object widget)))
-
-(export 'widget-get-parent)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_unparent

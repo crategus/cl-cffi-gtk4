@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.scrollbar.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'scrollbar 'type)
- "@version{2024-6-1}
+ "@version{2025-05-06}
   @begin{short}
     The @class{gtk:scrollbar} widget is a horizontal or vertical scrollbar,
     depending on the value of the @slot[gtk:orientable]{orientation} property.
@@ -149,7 +149,7 @@ scrollbar
 (setf (liber:alias-for-function 'scrollbar-adjustment)
       "Accessor"
       (documentation 'scrollbar-adjustment 'function)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @syntax{(gtk:scrollbar-adjustment object) => adjustment}
   @syntax{(setf (gtk:scrollbar-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrollbar} widget}
@@ -172,7 +172,7 @@ scrollbar
 
 (defun scrollbar-new (orientation &optional (adjustment nil))
  #+liber-documentation
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
     of the scrollbar}
   @argument[adjustment]{an optional @class{gtk:adjustment} object to use,

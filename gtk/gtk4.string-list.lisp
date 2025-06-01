@@ -405,12 +405,12 @@
 
 (cffi:defcfun ("gtk_string_list_get_string" string-list-string) :string
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-05-05}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[pos]{an unsigned integer for the position to get the string for}
-  @return{The string at the given @arg{position}.}
+  @return{The string at the given @arg{pos}.}
   @begin{short}
-    Gets the string that is at position in the string list.
+    Gets the string that is at @arg{pos} in the string list.
   @end{short}
   If the string list does not contain @arg{pos} items, @code{nil} is returned.
   This function returns the string. To get the object wrapping it, use the

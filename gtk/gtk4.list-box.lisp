@@ -705,18 +705,15 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-tab-behavior)
       "Accessor"
       (documentation 'list-box-tab-behavior 'function)
- "@version{2025-3-31}
+ "@version{2025-05-13}
   @syntax{(gtk:list-box-tab-behavior object) => behavior}
   @syntax{(setf (gtk:list-box-tab-behavior object) behavior)}
-
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[behavior]{a @symbol{gtk:list-tab-behavior} value}
-
   @begin{short}
     Accessor of the @slot[gtk:list-box]{tab-behavior} slot of the
     @class{gtk:list-box} class.
   @end{short}
-
   The @fun{gtk:list-box-tab-behavior} function returns the behavior of the
   @key{Tab} and @key{Shift+Tab} keys. The @setf{gtk:list-box-tab-behavior}
   function sets the behavior.

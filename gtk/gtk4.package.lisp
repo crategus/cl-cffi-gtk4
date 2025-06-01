@@ -2755,6 +2755,7 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-activate}
       @about-function{widget-is-focus}
       @about-function{widget-grab-focus}
+      @about-function{widget-get-parent}
       @about-function{widget-set-parent}
       @about-function{widget-unparent}
       @about-function{widget-native}
@@ -3136,52 +3137,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-dialog-setup-finish}
     @end{subsection}
   @end{section}
-  @begin[Shortcuts Overview]{section}
-    @begin[GtkShortcutsWindow]{subsection}
-      @about-class{shortcuts-window}
-      @about-generic{shortcuts-window-section-name}
-      @about-generic{shortcuts-window-view-name}
-      @about-function{shortcuts-window-add-section}
-    @end{subsection}
-    @begin[GtkShortcutsSection]{subsection}
-      @about-class{shortcuts-section}
-      @about-generic{shortcuts-section-max-height}
-      @about-generic{shortcuts-section-section-name}
-      @about-generic{shortcuts-section-title}
-      @about-generic{shortcuts-section-view-name}
-      @about-function{shortcuts-section-add-group}
-    @end{subsection}
-    @begin[GtkShortcutsGroup]{subsection}
-      @about-class{shortcuts-group}
-      @about-generic{shortcuts-group-accel-size-group}
-      @about-generic{shortcuts-group-height}
-      @about-generic{shortcuts-group-title}
-      @about-generic{shortcuts-group-title-size-group}
-      @about-generic{shortcuts-group-view}
-      @about-function{shortcuts-group-add-shortcut}
-    @end{subsection}
-    @begin[GtkShortcutsShortcut]{subsection}
-      @about-symbol{shortcut-type}
-      @about-class{shortcuts-shortcut}
-      @about-generic{shortcuts-shortcut-accel-size-group}
-      @about-generic{shortcuts-shortcut-accelerator}
-      @about-generic{shortcuts-shortcut-action-name}
-      @about-generic{shortcuts-shortcut-direction}
-      @about-generic{shortcuts-shortcut-icon}
-      @about-generic{shortcuts-shortcut-icon-set}
-      @about-generic{shortcuts-shortcut-shortcut-type}
-      @about-generic{shortcuts-shortcut-subtitle}
-      @about-generic{shortcuts-shortcut-subtitle-set}
-      @about-generic{shortcuts-shortcut-title}
-      @about-generic{shortcuts-shortcut-title-size-group}
-    @end{subsection}
-    @begin[GtkShortcutLabel]{subsection}
-      @about-class{shortcut-label}
-      @about-generic{shortcut-label-accelerator}
-      @about-generic{shortcut-label-disabled-text}
-      @about-function{shortcut-label-new}
-    @end{subsection}
-  @end{section}
   @begin[Accessibility]{section}
     @begin[GtkAccessibleRange]{subsection}
       @about-class{accessible-range}
@@ -3219,6 +3174,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{accessible-autocomplete}
       @about-symbol{accessible-sort}
       @about-symbol{accessible-platform-state}
+      @about-symbol{accessible-announcement-priority}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
       @about-function{accessible-property-init-value}
@@ -3771,25 +3727,6 @@ GtkCellRenderer         GtkWidget
       @about-symbol{constraint-attribute}
       @about-symbol{constraint-vfl-parser-error}
       @about-symbol{symbolic-color}
-      @about-symbol{accessible-role}
-      @about-symbol{accessible-state}
-      @about-symbol{accessible-property}
-      @about-symbol{accessible-relation}
-      @about-symbol{accessible-tristate}
-      @about-symbol{accessible-invalid-state}
-      @about-symbol{accessible-autocomplete}
-      @about-symbol{accessible-sort}
-      @about-symbol{accessible-announcement-priority}
-    @end{subsection}
-    @begin[Filesystem utilities]{subsection}
-      @about-class{mount-operation}
-      @about-generic{mount-operation-display}
-      @about-generic{mount-operation-is-showing}
-      @about-generic{mount-operation-parent}
-      @about-function{mount-operation-new}
-      @about-function{show-uri-full}
-      @about-function{show-uri-full-finish}
-      @about-function{show-uri}
     @end{subsection}
   @end{section}
   @begin[Theming in GTK]{section}
@@ -4836,6 +4773,51 @@ GtkCellRenderer         GtkWidget
       @about-function{render-layout}
       @about-function{render-line}
       @about-function{render-option}
+    @end{subsection}
+    @begin[Deprecated since GTK 4.18]{subsection}@end{subsection}
+    @begin[GtkShortcutsWindow]{subsection}
+      @about-class{shortcuts-window}
+      @about-generic{shortcuts-window-section-name}
+      @about-generic{shortcuts-window-view-name}
+      @about-function{shortcuts-window-add-section}
+    @end{subsection}
+    @begin[GtkShortcutsSection]{subsection}
+      @about-class{shortcuts-section}
+      @about-generic{shortcuts-section-max-height}
+      @about-generic{shortcuts-section-section-name}
+      @about-generic{shortcuts-section-title}
+      @about-generic{shortcuts-section-view-name}
+      @about-function{shortcuts-section-add-group}
+    @end{subsection}
+    @begin[GtkShortcutsGroup]{subsection}
+      @about-class{shortcuts-group}
+      @about-generic{shortcuts-group-accel-size-group}
+      @about-generic{shortcuts-group-height}
+      @about-generic{shortcuts-group-title}
+      @about-generic{shortcuts-group-title-size-group}
+      @about-generic{shortcuts-group-view}
+      @about-function{shortcuts-group-add-shortcut}
+    @end{subsection}
+    @begin[GtkShortcutsShortcut]{subsection}
+      @about-symbol{shortcut-type}
+      @about-class{shortcuts-shortcut}
+      @about-generic{shortcuts-shortcut-accel-size-group}
+      @about-generic{shortcuts-shortcut-accelerator}
+      @about-generic{shortcuts-shortcut-action-name}
+      @about-generic{shortcuts-shortcut-direction}
+      @about-generic{shortcuts-shortcut-icon}
+      @about-generic{shortcuts-shortcut-icon-set}
+      @about-generic{shortcuts-shortcut-shortcut-type}
+      @about-generic{shortcuts-shortcut-subtitle}
+      @about-generic{shortcuts-shortcut-subtitle-set}
+      @about-generic{shortcuts-shortcut-title}
+      @about-generic{shortcuts-shortcut-title-size-group}
+    @end{subsection}
+    @begin[GtkShortcutLabel]{subsection}
+      @about-class{shortcut-label}
+      @about-generic{shortcut-label-accelerator}
+      @about-generic{shortcut-label-disabled-text}
+      @about-function{shortcut-label-new}
     @end{subsection}
   @end{section}")
 

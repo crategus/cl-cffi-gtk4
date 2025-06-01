@@ -265,7 +265,7 @@ V:[button1(==button2)]
 
 (defun constraint-layout-new ()
  #+liber-documentation
- "@version{2023-4-23}
+ "@version{2024-4-23}
   @return{The newly created @class{gtk:constraint-layout} object.}
   @short{Creates a new @class{gtk:constraint-layout} layout manager.}
   @see-class{gtk:constraint-layout}"

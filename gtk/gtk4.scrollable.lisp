@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.scrollable.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,7 +80,7 @@
 (setf (liber:alias-for-symbol 'scrollable-policy)
       "GEnum"
       (liber:symbol-documentation 'scrollable-policy)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @begin{declaration}
 (gobject:define-genum \"GtkScrollablePolicy\" scrollable-policy
   (:export t
@@ -124,7 +124,7 @@
 (setf (liber:alias-for-class 'scrollable)
       "Interface"
       (documentation 'scrollable 'type)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @begin{short}
     The @class{gtk:scrollable} interface is an interface that is implemented by
     widgets with native scrolling ability.
@@ -183,7 +183,7 @@
 (setf (liber:alias-for-function 'scrollable-hadjustment)
       "Accessor"
       (documentation 'scrollable-hadjustment 'function)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @syntax{(gtk:scrollable-hadjustment object) => hadjustment}
   @syntax{(setf (gtk:scrollable-hadjustment object) hadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -214,7 +214,7 @@
 (setf (liber:alias-for-function 'scrollable-hscroll-policy)
       "Accessor"
       (documentation 'scrollable-hscroll-policy 'function)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @syntax{(gtk:scrollable-hscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-hscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -246,7 +246,7 @@
 (setf (liber:alias-for-function 'scrollable-vadjustment)
       "Accessor"
       (documentation 'scrollable-vadjustment 'function)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @syntax{(gtk:scrollable-vadjustment object) => vadjustment}
   @syntax{(setf (gtk:scrollable-vadjustment object) vadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -277,7 +277,7 @@
 (setf (liber:alias-for-function 'scrollable-vscroll-policy)
       "Accessor"
       (documentation 'scrollable-vscroll-policy 'function)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @syntax{(gtk:scrollable-vscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-vscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -305,7 +305,7 @@
   (border (g:boxed border)))
 
 (defun scrollable-border (scrollable)
- "@version{2023-8-6}
+ "@version{2025-05-06}
   @argument[scrollable]{a @class{gtk:scrollable} widget}
   @return{The @class{gtk:border} instance or @code{nil}.}
   @begin{short}

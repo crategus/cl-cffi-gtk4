@@ -432,8 +432,13 @@ lambda (job)    :run-last
     ((job (g:object print-job))
      (data :pointer)
      (err :pointer))
-  (let ((func (glib:get-stable-pointer-value data)))
-    (funcall func job err)))
+  (glib:with-catching-to-error (err)
+    (let ((func (glib:get-stable-pointer-value data)))
+      (restart-case
+        (progn
+          (funcall func job err)
+          t)
+        (return () "Return NIL" nil)))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'print-job-complete-func)
