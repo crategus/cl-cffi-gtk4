@@ -362,10 +362,6 @@
      (:file "gtk4.drawing-area")
      (:file "gtk4.gl-area")
 
-     ;; Ornaments
-;     (:file "gtk4.frame")
-;     (:file "gtk4.separator")
-
      ;; Scrolling
      (:file "gtk4.scrollbar")
      (:file "gtk4.scrolled-window")
@@ -642,10 +638,10 @@
 
      ;; Media Support
      (:file "rtest-gtk4-graphics-offload"         :if-feature :gtk-4-14)
-     (:file "rtest-gtk4-video"                    :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-controls"           :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-stream"             :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-file"               :if-feature (:not :windows))
+     (:file "rtest-gtk4-video")
+     (:file "rtest-gtk4-media-controls")
+     (:file "rtest-gtk4-media-stream")
+     (:file "rtest-gtk4-media-file")
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")
