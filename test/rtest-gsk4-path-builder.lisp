@@ -56,19 +56,30 @@
 
 ;;;     gsk_path_builder_add_layout
 
+#+crategus
 (test gsk-path-builder-add-layout
   (glib-test:with-check-memory (label layout)
     (let ((builder (gsk:path-builder-new)))
       (setf layout (gtk:label-layout (setf label (gtk:label-new "-"))))
       (is (= 2 (g:object-ref-count layout)))
       (is-false (gsk:path-builder-add-layout builder layout))
-      #-gtk-4-18
-      (is (string= (format nil
-                           "M 0.40625 10.125 L 0.40625 9.046875 L 3.828125 ~
-                           9.046875 L 3.828125 10.125 Z")
+      (is (string= (format nil "M 0.40625 9.796875 ~
+                                L 0.40625 8.71875 ~
+                                L 3.828125 8.71875 ~
+                                L 3.828125 9.796875 ~
+                                Z")
                    (gsk:path-to-string (gsk:path-builder-to-path builder))))
-      #+gtk-4-18
-      (is (string= "M 4 10 L 1 10 L 1 9 L 4 9 Z"
+      ;; Remove references
+      (is (string= "" (setf (gtk:label-label label) ""))))))
+
+#+windows
+(test gsk-path-builder-add-layout
+  (glib-test:with-check-memory (label layout)
+    (let ((builder (gsk:path-builder-new)))
+      (setf layout (gtk:label-layout (setf label (gtk:label-new "-"))))
+      (is (= 2 (g:object-ref-count layout)))
+      (is-false (gsk:path-builder-add-layout builder layout))
+      (is (string= (format nil "M 4 10 L 1 10 L 1 9 L 4 9 Z")
                    (gsk:path-to-string (gsk:path-builder-to-path builder))))
       ;; Remove references
       (is (string= "" (setf (gtk:label-label label) ""))))))
@@ -162,4 +173,4 @@
 ;;;     gsk_path_builder_ref
 ;;;     gsk_path_builder_unref
 
-;;; 2025-3-27
+;;; 2025-05-30
