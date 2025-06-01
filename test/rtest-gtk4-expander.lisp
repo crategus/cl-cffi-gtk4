@@ -57,10 +57,31 @@
                         "use-underline" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkExpander"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate
+
+(test gtk-expander-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkExpander"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-expander-properties
-  (let ((expander (make-instance 'gtk:expander)))
+  (glib-test:with-check-memory (expander)
+    (is (typep (setf expander (make-instance 'gtk:expander)) 'gtk:expander))
     (is-false (gtk:expander-child expander))
     (is-false (gtk:expander-expanded expander))
     (is-false (gtk:expander-label expander))
@@ -69,34 +90,37 @@
     (is-false (gtk:expander-use-markup expander))
     (is-false (gtk:expander-use-underline expander))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_expander_new
 
 (test gtk-expander-new
-  (let ((expander (gtk:expander-new "label")))
+  (glib-test:with-check-memory (expander)
+    (is (typep (setf expander (gtk:expander-new "label")) 'gtk:expander))
     (is-false (gtk:expander-child expander))
     (is-false (gtk:expander-expanded expander))
     (is (string= "label" (gtk:expander-label expander)))
     (is (typep (gtk:expander-label-widget expander) 'gtk:label))
     (is-false (gtk:expander-resize-toplevel expander))
     (is-false (gtk:expander-use-markup expander))
-    (is-false (gtk:expander-use-underline expander))))
+    (is-false (gtk:expander-use-underline expander))
+    ;; Remove references
+    (is-false (setf (gtk:expander-label-widget expander) nil))))
 
 ;;;     gtk_expander_new_with_mnemonic
 
 (test gtk-expander-new-with-mnemonic
-  (let ((expander (gtk:expander-new-with-mnemonic "_label")))
+  (glib-test:with-check-memory (expander)
+    (is (typep (setf expander
+                     (gtk:expander-new-with-mnemonic "_label")) 'gtk:expander))
     (is-false (gtk:expander-child expander))
     (is-false (gtk:expander-expanded expander))
     (is (string= "_label" (gtk:expander-label expander)))
     (is (typep (gtk:expander-label-widget expander) 'gtk:label))
     (is-false (gtk:expander-resize-toplevel expander))
     (is-false (gtk:expander-use-markup expander))
-    (is-true (gtk:expander-use-underline expander))))
+    (is-true (gtk:expander-use-underline expander))
+    ;; Remove references
+    (is-false (setf (gtk:expander-label-widget expander) nil))))
 
-;;; 2024-9-19
+;;; 2025-05-30

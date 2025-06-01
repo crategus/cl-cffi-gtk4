@@ -48,46 +48,6 @@
                       (XALIGN EDITABLE-XALIGN "xalign" "gfloat" T T))
              (gobject:get-gtype-definition "GtkEditable"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-editable-properties.1
-  (let ((editable (make-instance 'gtk:editable-label)))
-    (is (= 0 (gtk:editable-cursor-position editable)))
-    (signals (error) (setf (gtk:editable-cursor-position editable) 1))
-    (is-true (gtk:editable-editable editable))
-    (is-false (setf (gtk:editable-editable editable) nil))
-    (is-true (gtk:editable-enable-undo editable))
-    (is-false (setf (gtk:editable-enable-undo editable) nil))
-    (is (= -1 (gtk:editable-max-width-chars editable)))
-    (is (= 10 (setf (gtk:editable-max-width-chars editable) 10)))
-    (is (= 0 (gtk:editable-selection-bound editable)))
-    (signals (error) (setf (gtk:editable-selection-bound editable) 10))
-    (is (string= "" (gtk:editable-text editable)))
-    (is (string= "text" (setf (gtk:editable-text editable) "text")))
-    (is (= -1 (gtk:editable-width-chars editable)))
-    (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
-    (is (= 0.0 (gtk:editable-xalign editable)))
-    (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
-
-(test gtk-editable-properties.2
-  (let ((editable (make-instance 'gtk:text)))
-    (is (= 0 (gtk:editable-cursor-position editable)))
-    (signals (error) (setf (gtk:editable-cursor-position editable) 1))
-    (is-true (gtk:editable-editable editable))
-    (is-false (setf (gtk:editable-editable editable) nil))
-    (is-true (gtk:editable-enable-undo editable))
-    (is-false (setf (gtk:editable-enable-undo editable) nil))
-    (is (= -1 (gtk:editable-max-width-chars editable)))
-    (is (= 10 (setf (gtk:editable-max-width-chars editable) 10)))
-    (is (= 0 (gtk:editable-selection-bound editable)))
-    (signals (error) (setf (gtk:editable-selection-bound editable) 10))
-    (is (string= "" (gtk:editable-text editable)))
-    (is (string= "text" (setf (gtk:editable-text editable) "text")))
-    (is (= -1 (gtk:editable-width-chars editable)))
-    (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
-    (is (= 0.0 (gtk:editable-xalign editable)))
-    (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     changed
@@ -141,13 +101,58 @@
     (is (equal '("gchararray" "gint" "gpointer")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-editable-properties.1
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:editable-label)) 'gtk:editable-label))
+    (is (= 0 (gtk:editable-cursor-position editable)))
+    (signals (error) (setf (gtk:editable-cursor-position editable) 1))
+    (is-true (gtk:editable-editable editable))
+    (is-false (setf (gtk:editable-editable editable) nil))
+    (is-true (gtk:editable-enable-undo editable))
+    (is-false (setf (gtk:editable-enable-undo editable) nil))
+    (is (= -1 (gtk:editable-max-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-max-width-chars editable) 10)))
+    (is (= 0 (gtk:editable-selection-bound editable)))
+    (signals (error) (setf (gtk:editable-selection-bound editable) 10))
+    (is (string= "" (gtk:editable-text editable)))
+    (is (string= "text" (setf (gtk:editable-text editable) "text")))
+    (is (= -1 (gtk:editable-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
+    (is (= 0.0 (gtk:editable-xalign editable)))
+    (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
+
+(test gtk-editable-properties.2
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable (make-instance 'gtk:text)) 'gtk:text))
+    (is (= 0 (gtk:editable-cursor-position editable)))
+    (signals (error) (setf (gtk:editable-cursor-position editable) 1))
+    (is-true (gtk:editable-editable editable))
+    (is-false (setf (gtk:editable-editable editable) nil))
+    (is-true (gtk:editable-enable-undo editable))
+    (is-false (setf (gtk:editable-enable-undo editable) nil))
+    (is (= -1 (gtk:editable-max-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-max-width-chars editable) 10)))
+    (is (= 0 (gtk:editable-selection-bound editable)))
+    (signals (error) (setf (gtk:editable-selection-bound editable) 10))
+    (is (string= "" (gtk:editable-text editable)))
+    (is (string= "text" (setf (gtk:editable-text editable) "text")))
+    (is (= -1 (gtk:editable-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
+    (is (= 0.0 (gtk:editable-xalign editable)))
+    (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_editable_get_chars
 
 (test gtk-editable-chars
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is some text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is some text.")) 'gtk:text))
     (is (string= "This" (gtk:editable-chars editable :start 0 :end  4)))
     (is (string= "some" (gtk:editable-chars editable :start  8 :end 12)))
     (is (string= "text" (gtk:editable-chars editable :start 13 :end 17 )))
@@ -158,8 +163,10 @@
 ;;;     gtk_editable_insert_text
 
 (test gtk-editable-insert-text
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is text.")) 'gtk:text))
     (is (string= "This is text." (gtk:editable-chars editable)))
     (is (= 13 (gtk:editable-insert-text editable "some " 8)))
     (is (string= "This is some text." (gtk:editable-chars editable)))))
@@ -167,8 +174,10 @@
 ;;;     gtk_editable_delete_text
 
 (test gtk-editable-delete-text
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is some text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is some text.")) 'gtk:text))
     (is (string= "This is some text." (gtk:editable-chars editable)))
     (is-false (gtk:editable-delete-text editable :start 8 :end 13))
     (is (string= "This is text." (gtk:editable-chars editable)))
@@ -182,8 +191,10 @@
 ;;;     gtk_editable_delete_selection
 
 (test gtk-editable-selection-bounds
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is some text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is some text.")) 'gtk:text))
     (is-false (gtk:editable-selection-bounds editable))
     (is-false (gtk:editable-select-region editable :start 8 :end 13))
     (is (equal '(8 13)
@@ -206,8 +217,10 @@
 ;;;     gtk_editable_get_position
 
 (test gtk-editable-position
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is some text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is some text.")) 'gtk:text))
     (is (= 0 (gtk:editable-position editable)))
     (is (= 8 (setf (gtk:editable-position editable) 8)))
     (is (= 8 (gtk:editable-position editable)))
@@ -217,8 +230,10 @@
 ;;;     gtk_editable_get_alignment
 
 (test gtk-editable-alignment
-  (let ((editable (make-instance 'gtk:text
-                                 :text "This is some text.")))
+  (glib-test:with-check-memory (editable)
+    (is (typep (setf editable
+                     (make-instance 'gtk:text
+                                    :text "This is some text.")) 'gtk:text))
     (is (= 0.0 (gtk:editable-alignment editable)))
     (is (= 0.5 (setf (gtk:editable-alignment editable) 0.5)))
     (is (= 0.5 (gtk:editable-alignment editable)))))
@@ -230,4 +245,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; 2024-9-20
+;;; 2025-05-31

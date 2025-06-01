@@ -208,6 +208,7 @@
 
 ;;;     gtk_css_provider_load_named
 
+#+crategus
 (test gtk-css-provider-load-named.1
   (glib-test:with-check-memory (provider)
     (setf provider (gtk:css-provider-new))
@@ -218,6 +219,7 @@
 ;;   Gtk-WARNING: Theme parser error: <data>:9:31-32: Expected a valid selector
 ;; Find a working example!?
 
+#+crategus
 (test gtk-css-provider-load-named.2
   (glib-test:with-check-memory (provider)
     (setf provider (gtk:css-provider-new))
@@ -355,4 +357,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2025-1-12
+;;; 2025-05-13

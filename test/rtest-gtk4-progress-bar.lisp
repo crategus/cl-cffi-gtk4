@@ -38,27 +38,29 @@
                (gtk:widget-class-css-name "GtkProgressBar")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkProgressBar" GTK:PROGRESS-BAR
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_progress_bar_get_type")
-                       ((ELLIPSIZE PROGRESS-BAR-ELLIPSIZE
-                         "ellipsize" "PangoEllipsizeMode" T T)
-                        (FRACTION PROGRESS-BAR-FRACTION "fraction" "gdouble" T T)
-                        (INVERTED PROGRESS-BAR-INVERTED "inverted" "gboolean" T T)
-                        (PULSE-STEP PROGRESS-BAR-PULSE-STEP
-                         "pulse-step" "gdouble" T T)
-                        (SHOW-TEXT PROGRESS-BAR-SHOW-TEXT
-                         "show-text" "gboolean" T T)
-                        (TEXT PROGRESS-BAR-TEXT "text" "gchararray" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_progress_bar_get_type")
+                      ((ELLIPSIZE PROGRESS-BAR-ELLIPSIZE
+                        "ellipsize" "PangoEllipsizeMode" T T)
+                       (FRACTION PROGRESS-BAR-FRACTION "fraction" "gdouble" T T)
+                       (INVERTED PROGRESS-BAR-INVERTED
+                        "inverted" "gboolean" T T)
+                       (PULSE-STEP PROGRESS-BAR-PULSE-STEP
+                        "pulse-step" "gdouble" T T)
+                       (SHOW-TEXT PROGRESS-BAR-SHOW-TEXT
+                        "show-text" "gboolean" T T)
+                       (TEXT PROGRESS-BAR-TEXT "text" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkProgressBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-progress-bar-properties
-  (let ((bar (make-instance 'gtk:progress-bar)))
+  (glib-test:with-check-memory (bar)
+    (is (typep (setf bar (make-instance 'gtk:progress-bar)) 'gtk:progress-bar))
     (is (eq :none (gtk:progress-bar-ellipsize bar)))
     (is (= 0.0d0 (gtk:progress-bar-fraction bar)))
     (is-false (gtk:progress-bar-inverted bar))
@@ -71,8 +73,9 @@
 ;;;     gtk_progress_bar_new
 
 (test gtk-progress-bar-new
-  (is (typep (gtk:progress-bar-new) 'gtk:progress-bar)))
+  (glib-test:with-check-memory (bar)
+    (is (typep (setf bar (gtk:progress-bar-new)) 'gtk:progress-bar))))
 
 ;;;     gtk_progress_bar_pulse
 
-;;; 2024-9-20
+;;; 2025-05-30

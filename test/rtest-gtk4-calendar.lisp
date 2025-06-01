@@ -55,21 +55,6 @@
                        (YEAR CALENDAR-YEAR "year" "gint" T T)))
              (gobject:get-gtype-definition "GtkCalendar"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-calendar-properties
-  (let* ((time (multiple-value-list (get-decoded-time)))
-         (day (fourth time))
-         (month (fifth time))
-         (year (sixth time))
-         (calendar (make-instance 'gtk:calendar)))
-    (is (= day (gtk:calendar-day calendar)))
-    (is (= (1- month) (gtk:calendar-month calendar)))
-    (is-true (gtk:calendar-show-day-names calendar))
-    (is-true (gtk:calendar-show-heading calendar))
-    (is-false (gtk:calendar-show-week-numbers calendar))
-    (is (= year (gtk:calendar-year calendar)))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     day-selected
@@ -162,27 +147,47 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-calendar-properties
+  (glib-test:with-check-memory (calendar)
+    (let* ((time (multiple-value-list (get-decoded-time)))
+           (day (fourth time))
+           (month (fifth time))
+           (year (sixth time)))
+      (is (typep (setf calendar (make-instance 'gtk:calendar)) 'gtk:calendar))
+      (is (= day (gtk:calendar-day calendar)))
+      (is (= (1- month) (gtk:calendar-month calendar)))
+      (is-true (gtk:calendar-show-day-names calendar))
+      (is-true (gtk:calendar-show-heading calendar))
+      (is-false (gtk:calendar-show-week-numbers calendar))
+      (is (= year (gtk:calendar-year calendar))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_calendar_new
 
 (test gtk-calendar-new
-  (is (typep (gtk:calendar-new) 'gtk:calendar)))
+  (glib-test:with-check-memory (calendar)
+    (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))))
 
 ;;;     gtk_calendar_select_day
 ;;;     gtk_calendar_get_date
 
 (test gtk-calendar-select-day
-  (let ((calendar (gtk:calendar-new)))
+  (glib-test:with-check-memory (calendar)
+    (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
     (is-false (gtk:calendar-select-day calendar 2024 7 5))
-    (is (equal '(2024 7 5) (multiple-value-list (gtk:calendar-date calendar))))))
+    (is (equal '(2024 7 5)
+               (multiple-value-list (gtk:calendar-date calendar))))))
 
 ;;;     gtk_calendar_mark_day
 ;;;     gtk_calendar_unmark_day
 ;;;     gtk_calendar_get_day_is_marked
 
 (test gtk-calendar-mark/unmark-day
-  (let ((calendar (gtk:calendar-new)))
+  (glib-test:with-check-memory (calendar)
+    (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
     (is-false (gtk:calendar-mark-day calendar 5))
     (is-true (gtk:calendar-day-is-marked calendar 5))
     (is-false (gtk:calendar-unmark-day calendar 5))
@@ -191,7 +196,8 @@
 ;;;     gtk_calendar_clear_marks
 
 (test gtk-calendar-clear-marks
-  (let ((calendar (gtk:calendar-new)))
+  (glib-test:with-check-memory (calendar)
+    (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
     (is-false (gtk:calendar-mark-day calendar 5))
     (is-false (gtk:calendar-mark-day calendar 6))
     (is-true (gtk:calendar-day-is-marked calendar 5))
@@ -200,4 +206,4 @@
     (is-false (gtk:calendar-day-is-marked calendar 5))
     (is-false (gtk:calendar-day-is-marked calendar 6))))
 
-;;; 2024-9-20
+;;; 2025-05-31

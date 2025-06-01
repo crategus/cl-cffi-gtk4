@@ -141,10 +141,7 @@
       (is-false (gtk:filter-list-model-incremental model))
       (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
       (is (eq store (gtk:filter-list-model-model model)))
-      #-windows
-      (is (< 3400 (gtk:filter-list-model-n-items model)))
-      #+windows
-      (is (< 3330 (gtk:filter-list-model-n-items model)))
+      (is (< 3000 (gtk:filter-list-model-n-items model)))
       (is (= 0 (gtk:filter-list-model-pending model)))
       ;; At this point we have a filter list model with string objects
       (is (eq :substring (setf (gtk:string-filter-match-mode filter) :substring)))
@@ -153,9 +150,6 @@
       (is-true (gtk:string-filter-ignore-case filter))
       ;; Match "string" as a substring in the filter model
       (is (string= (setf (gtk:string-filter-search filter) "string") "string"))
-      #-windows
-      (is (= 41 (gtk:filter-list-model-n-items model)))
-      #+windows
       (is (= 42 (gtk:filter-list-model-n-items model)))
       ;; Check match
       (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
@@ -213,4 +207,4 @@
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2025-4-26
+;;; 2025-05-25

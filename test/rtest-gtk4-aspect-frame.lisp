@@ -54,7 +54,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-aspect-frame-properties
-  (let ((frame (make-instance 'gtk:aspect-frame)))
+  (glib-test:with-check-memory (frame)
+    (is (typep (setf frame
+                     (make-instance 'gtk:aspect-frame)) 'gtk:aspect-frame))
     (is-false (gtk:aspect-frame-child frame))
     (is-true (gtk:aspect-frame-obey-child frame))
     (is (= 1.0 (gtk:aspect-frame-ratio frame)))
@@ -66,12 +68,14 @@
 ;;;     gtk_aspect_frame_new
 
 (test gtk-aspect-frame-new
-  (let ((frame (gtk:aspect-frame-new 0.25 0.50 2.5 nil)))
-    (is (typep frame 'gtk:aspect-frame))
+  (glib-test:with-check-memory (frame)
+    (is (typep (setf frame
+                     (gtk:aspect-frame-new 0.25 0.50 2.5 nil))
+               'gtk:aspect-frame))
     (is-false (gtk:aspect-frame-child frame))
     (is-false (gtk:aspect-frame-obey-child frame))
     (is (= 2.5 (gtk:aspect-frame-ratio frame)))
     (is (= 0.25 (gtk:aspect-frame-xalign frame)))
     (is (= 0.50 (gtk:aspect-frame-yalign frame)))))
 
-;;; 2024-4-21
+;;; 2025-05-30

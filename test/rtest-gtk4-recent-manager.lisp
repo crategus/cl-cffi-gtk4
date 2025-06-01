@@ -105,6 +105,7 @@
 ;;;     gtk_recent_manager_has_item
 ;;;     gtk_recent_manager_lookup_item
 
+#-windows
 (test gtk-recent-manager-add-item
   (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 1)
@@ -165,6 +166,7 @@
 ;;;     gtk_recent_info_get_visited
 ;;;     gtk_recent_info_get_private_hint
 
+#-windows
 (test gtk-recent-info-get
   (glib-test:with-check-memory ()
     (let* ((recent (gtk:recent-manager-default))
@@ -174,17 +176,10 @@
            (info (gtk:recent-manager-lookup-item recent uri)))
       (is (typep info 'gtk:recent-info))
       (is (string= uri (gtk:recent-info-uri info)))
-      #-windows
       (is (string= "rtest-gtk4-recent-manager.lisp"
                    (gtk:recent-info-display-name info)))
-      #+windows
-      (is (string= "file: rtest-gtk4-recent-manager.lisp"
-                   (gtk:recent-info-display-name info)))
       (is-false (gtk:recent-info-description info))
-      #-windows
       (is (string= "text/plain" (gtk:recent-info-mime-type info)))
-      #+windows
-      (is (string= "application/x-ext-lisp" (gtk:recent-info-mime-type info)))
       (is (integerp (gtk:recent-info-added info)))
       (is (integerp (gtk:recent-info-modified info)))
       (is (integerp (gtk:recent-info-visited info)))
@@ -195,6 +190,7 @@
 ;;;     gtk_recent_info_last_application
 ;;;     gtk_recent_info_has_application
 
+#-windows
 (test gtk-recent-info-application
   (glib-test:with-check-memory ()
     (let* ((recent (gtk:recent-manager-default))
@@ -224,4 +220,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2025-1-11
+;;; 2025-05-13

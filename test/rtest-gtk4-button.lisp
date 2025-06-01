@@ -55,16 +55,6 @@
                         "use-underline" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkButton"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-button-properties
-  (let ((button (make-instance 'gtk:button)))
-    (is-false (gtk:button-child button))
-    (is-true  (gtk:button-has-frame button))
-    (is-false (gtk:button-icon-name button))
-    (is-false (gtk:button-label button))
-    (is-false (gtk:button-use-underline button))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 (test gtk-button-activate-signal
@@ -89,56 +79,72 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-button-properties
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
+    (is-false (gtk:button-child button))
+    (is-true  (gtk:button-has-frame button))
+    (is-false (gtk:button-icon-name button))
+    (is-false (gtk:button-label button))
+    (is-false (gtk:button-use-underline button))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_button_new
 
 (test gtk-button-new
-  (let ((button (gtk:button-new)))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (gtk:button-new)) 'gtk:button))
     (is-false (gtk:button-child button))
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is-false (gtk:button-label button))
-    (is-false (gtk:button-use-underline button))
-    (is (= 1 (g:object-ref-count button)))))
+    (is-false (gtk:button-use-underline button))))
 
 ;;;     gtk_button_new_from_icon_name
 
 (test gtk-button-new-from-icon-name
-  (let ((button (gtk:button-new-from-icon-name "battery")))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:button-new-from-icon-name "battery")) 'gtk:button))
     (is (eq (g:gtype "GtkImage")
             (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is (string= "battery" (gtk:button-icon-name button)))
     (is-false (gtk:button-label button))
     (is-false (gtk:button-use-underline button))
-    (is-false (setf (gtk:button-child button) nil))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove references
+    (is-false (setf (gtk:button-child button) nil))))
 
 ;;;     gtk_button_new_with_label
 
 (test gtk-button-new-with-label
-  (let ((button (gtk:button-new-with-label "battery")))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (gtk:button-new-with-label "battery")) 'gtk:button))
     (is (eq (g:gtype "GtkLabel")
             (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "battery" (gtk:button-label button)))
     (is-false (gtk:button-use-underline button))
-    (is-false (setf (gtk:button-child button) nil))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove references
+    (is-false (setf (gtk:button-child button) nil))))
 
 ;;;     gtk_button_new_with_mnemonic
 
 (test gtk-button-new-with-mnemonic
-  (let ((button (gtk:button-new-with-mnemonic "_battery")))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:button-new-with-mnemonic "_battery")) 'gtk:button))
     (is (eq (g:gtype "GtkLabel")
             (g:type-from-instance (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
     (is-false (gtk:button-icon-name button))
     (is (string= "_battery" (gtk:button-label button)))
     (is-true (gtk:button-use-underline button))
-    (is-false (setf (gtk:button-child button) nil))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove references
+    (is-false (setf (gtk:button-child button) nil))))
 
-;;; 2024-10-20
+;;; 2025-05-30

@@ -13,6 +13,13 @@
 
 (in-package :gtk-test)
 
+;; Check the library version we are running against. The testsuite requieres
+;;; the last version.
+(glib-init:require-library-version "GTK"
+                                   4 18
+                                   (gtk:major-version)
+                                   (gtk:minor-version))
+
 (def-suite gtk-test)
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
@@ -50,24 +57,6 @@
 (def-suite gtk-core :in gtk-suite)
 (def-suite gtk-theming :in gtk-suite)
 (def-suite gtk-deprecated :in gtk-suite)
-
-#+nil
-(defun run-repeat (tests &key (count 1) (on-error nil) (linecount 50))
-  (let ((fiveam:*on-error* on-error)
-        (count (if (> count 0) (1- count) 0)))
-    (format t "~&Run tests ~a times:~%" (1+ count))
-    (format t "~6d " linecount)
-    (let ((*test-dribble* nil))
-      (dotimes (i count)
-        (if (= 0 (mod (1+ i) linecount))
-            (progn
-              (format t ".~%")
-              (format t "~6d " (+ 1 i linecount)))
-            (format t "."))
-        (fiveam:run tests)))
-    (format t ".~%")
-    ;; Explain the last run
-    (fiveam:explain! (fiveam:run tests))))
 
 ;; push the hostname on *features*
 (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
@@ -216,4 +205,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
           (format t "~&No printer for testsuite available~%")))
     default-printer))
 
-;;; 2025-4-26
+;;; 2025-05-30

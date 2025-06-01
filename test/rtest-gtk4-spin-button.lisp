@@ -136,23 +136,6 @@
                        (WRAP SPIN-BUTTON-WRAP "wrap" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkSpinButton"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-spin-button-properties
-  (let ((spinbutton (make-instance 'gtk:spin-button)))
-    (is-false (gtk:spin-button-activates-default spinbutton))
-    (is (typep (gtk:spin-button-adjustment spinbutton) 'gtk:adjustment))
-    (is (= 0.0d0 (gtk:spin-button-climb-rate spinbutton)))
-    (is (= 0 (gtk:spin-button-digits spinbutton)))
-    (is-false (gtk:spin-button-numeric spinbutton))
-    (is-false (gtk:spin-button-snap-to-ticks spinbutton))
-    (is (eq :always (gtk:spin-button-update-policy spinbutton)))
-    (is (= 0.0d0 (gtk:spin-button-value spinbutton)))
-    (is-false (gtk:spin-button-wrap spinbutton))
-    ;; Check memory management
-    (is-false (setf (gtk:spin-button-adjustment spinbutton) nil))
-    (is (= 1 (g:object-ref-count spinbutton)))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     change-value
@@ -227,12 +210,30 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-spin-button-properties
+  (glib-test:with-check-memory (spinbutton)
+    (is (typep (setf spinbutton
+                     (make-instance 'gtk:spin-button)) 'gtk:spin-button))
+    (is-false (gtk:spin-button-activates-default spinbutton))
+    (is (typep (gtk:spin-button-adjustment spinbutton) 'gtk:adjustment))
+    (is (= 0.0d0 (gtk:spin-button-climb-rate spinbutton)))
+    (is (= 0 (gtk:spin-button-digits spinbutton)))
+    (is-false (gtk:spin-button-numeric spinbutton))
+    (is-false (gtk:spin-button-snap-to-ticks spinbutton))
+    (is (eq :always (gtk:spin-button-update-policy spinbutton)))
+    (is (= 0.0d0 (gtk:spin-button-value spinbutton)))
+    (is-false (gtk:spin-button-wrap spinbutton))
+    ;; Remove references
+    (is-false (setf (gtk:spin-button-adjustment spinbutton) nil))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_spin_button_new
 
 (test gtk-spin-button-new
-  (let (button adjustment)
+  (glib-test:with-check-memory (button adjustment)
     (is (typep (setf button
                      (gtk:spin-button-new (make-instance 'gtk:adjustment) 2 10))
              'gtk:spin-button))
@@ -241,14 +242,16 @@
     ;; Check memory management
     (is (typep (setf adjustment
                      (gtk:spin-button-adjustment button)) 'gtk:adjustment))
-    (is-false (setf (gtk:spin-button-adjustment button) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove references
+    (is-false (setf (gtk:spin-button-adjustment button) nil))))
 
 ;;;     gtk_spin_button_new_with_range
 
 (test gtk-spin-button-new-with-range
-  (is (typep (gtk:spin-button-new-with-range 5 15 5) 'gtk:spin-button)))
+  (glib-test:with-check-memory (spinbutton)
+    (is (typep (setf spinbutton
+                     (gtk:spin-button-new-with-range 5 15 5))
+               'gtk:spin-button))))
 
 ;;;     gtk_spin_button_set_increments
 ;;;     gtk_spin_button_get_increments
@@ -259,4 +262,4 @@
 ;;;     gtk_spin_button_spin
 ;;;     gtk_spin_button_update
 
-;;; 2024-10-25
+;;; 2025-05-31

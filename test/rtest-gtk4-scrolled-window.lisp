@@ -293,7 +293,8 @@
 ;;;     gtk_scrolled_window_set_policy
 
 (test gtk-scrolled-window-policy
-  (let ((scrolled (gtk:scrolled-window-new)))
+  (glib-test:with-check-memory (scrolled)
+    (is (typep (setf scrolled (gtk:scrolled-window-new)) 'gtk:scrolled-window))
     (is (equal '(:automatic :automatic)
                (multiple-value-list (gtk:scrolled-window-policy scrolled))))
     (is (equal '(:always :never)
@@ -307,7 +308,8 @@
 ;;;     gtk_scrolled_window_unset_placement
 
 (test gtk-scrolled-window-placement
-  (let ((scrolled (gtk:scrolled-window-new)))
+  (glib-test:with-check-memory (scrolled)
+    (is (typep (setf scrolled (gtk:scrolled-window-new)) 'gtk:scrolled-window))
     (is (eq :top-left (gtk:scrolled-window-placement scrolled)))
     (is (eq :bottom-left
             (setf (gtk:scrolled-window-placement scrolled) :bottom-left)))
@@ -315,4 +317,4 @@
     (is-false (gtk:scrolled-window-unset-placement scrolled))
     (is (eq :top-left (gtk:scrolled-window-placement scrolled)))))
 
-;;; 2024-10-27
+;;; 2025-05-06

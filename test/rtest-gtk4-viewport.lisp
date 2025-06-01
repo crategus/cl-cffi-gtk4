@@ -54,7 +54,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-viewport-properties
-  (let ((viewport (make-instance 'gtk:viewport)))
+  (glib-test:with-check-memory (viewport)
+    (is (typep (setf viewport (make-instance 'gtk:viewport)) 'gtk:viewport))
     (is-false (gtk:viewport-child viewport))
     (is-true (gtk:viewport-scroll-to-focus viewport))))
 
@@ -63,7 +64,7 @@
 ;;;     gtk_viewport_new
 
 (test gtk-viewport-new
-  (let (viewport)
+  (glib-test:with-check-memory (viewport)
     (is (typep (setf viewport (gtk:viewport-new)) 'gtk:viewport))
     (is-false (setf (gtk:scrollable-hadjustment viewport) nil))
     (is-false (setf (gtk:scrollable-vadjustment viewport) nil))
@@ -77,16 +78,17 @@
                                        (make-instance 'gtk:adjustment)))
                'gtk:viewport))
     (is-false (setf (gtk:scrollable-hadjustment viewport) nil))
-    (is-false (setf (gtk:scrollable-vadjustment viewport) nil))
-    ;; Check memory management
-    (is (= 1 (g:object-ref-count viewport)))))
+    (is-false (setf (gtk:scrollable-vadjustment viewport) nil))))
 
 ;;;     gtk_viewport_scroll_to                              Since 4.12
 
 (test gtk-view-port-scroll-to
-  (let ((viewport (gtk:viewport-new))
-        (area (gtk:drawing-area-new)))
+  (glib-test:with-check-memory (viewport area)
+    (is (typep (setf viewport (gtk:viewport-new)) 'gtk:viewport))
+    (is (typep (setf area (gtk:drawing-area-new)) 'gtk:drawing-area))
     (is (typep (setf (gtk:viewport-child viewport) area) 'gtk:drawing-area))
-    (is-false (gtk:viewport-scroll-to viewport area (gtk:scroll-info-new)))))
+    (is-false (gtk:viewport-scroll-to viewport area (gtk:scroll-info-new)))
 
-;;; 2024-10-27
+    (is-false (setf (gtk:viewport-child viewport) nil))))
+
+;;; 2025-05-06

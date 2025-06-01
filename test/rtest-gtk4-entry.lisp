@@ -171,53 +171,6 @@
                         "visibility" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkEntry"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-entry-properties
-  (let ((entry (make-instance 'gtk:entry)))
-    (is-false (gtk:entry-activates-default entry))
-    (is-false (gtk:entry-attributes entry))
-    (is (typep (gtk:entry-buffer entry) 'gtk:entry-buffer))
-    (is-false (gtk:entry-completion entry))
-    (is-false (gtk:entry-enable-emoji-completion entry))
-    (is-false (gtk:entry-extra-menu entry))
-    (is-true (gtk:entry-has-frame entry))
-    (is-false (gtk:entry-im-module entry))
-    (is-false (gtk:entry-input-hints entry))
-    (is (eq :free-form (gtk:entry-input-purpose entry)))
-    (is (= 0 (gtk:entry-invisible-char entry)))
-    (is-false (gtk:entry-invisible-char-set entry))
-    (is (= 0 (gtk:entry-max-length entry)))
-    (is-false (gtk:entry-overwrite-mode entry))
-    (is-false (gtk:entry-placeholder-text entry))
-    (is-true (gtk:entry-primary-icon-activatable entry))
-    (is-false (gtk:entry-primary-icon-gicon entry))
-    (is-false (gtk:entry-primary-icon-name entry))
-    (is-false (gtk:entry-primary-icon-paintable entry))
-    (is-true (gtk:entry-primary-icon-sensitive entry))
-    (is (eq :empty (gtk:entry-primary-icon-storage-type entry)))
-    (is-false (gtk:entry-primary-icon-tooltip-markup entry))
-    (is-false (gtk:entry-primary-icon-tooltip-text entry))
-    (is (= 0.0d0 (gtk:entry-progress-fraction entry)))
-    (is (= 0.0d0 (gtk:entry-progress-pulse-step entry)))
-    (is (= 0 (gtk:entry-scroll-offset entry)))
-    (is-true (gtk:entry-secondary-icon-activatable entry))
-    (is-false (gtk:entry-secondary-icon-gicon entry))
-    (is-false (gtk:entry-secondary-icon-name entry))
-    (is-false (gtk:entry-secondary-icon-paintable entry))
-    (is-true (gtk:entry-secondary-icon-sensitive entry))
-    (is (eq :empty (gtk:entry-secondary-icon-storage-type entry)))
-    (is-false (gtk:entry-secondary-icon-tooltip-markup entry))
-    (is-false (gtk:entry-secondary-icon-tooltip-text entry))
-    (is-false (gtk:entry-show-emoji-icon entry))
-    (is-false (gtk:entry-tabs entry))
-    (is (= 0 (gtk:entry-text-length entry)))
-    (is-false (gtk:entry-truncate-multiline entry))
-    (is-true (gtk:entry-visibility entry))
-    ;; Check memory management
-    (is-false (setf (gtk:entry-buffer entry) nil))
-    (is (= 1 (g:object-ref-count entry)))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     activate
@@ -271,29 +224,77 @@
     (is (equal '("GtkEntryIconPosition")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-entry-properties
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry (make-instance 'gtk:entry)) 'gtk:entry))
+    (is-false (gtk:entry-activates-default entry))
+    (is-false (gtk:entry-attributes entry))
+    (is (typep (gtk:entry-buffer entry) 'gtk:entry-buffer))
+    (is-false (gtk:entry-completion entry))
+    (is-false (gtk:entry-enable-emoji-completion entry))
+    (is-false (gtk:entry-extra-menu entry))
+    (is-true (gtk:entry-has-frame entry))
+    (is-false (gtk:entry-im-module entry))
+    (is-false (gtk:entry-input-hints entry))
+    (is (eq :free-form (gtk:entry-input-purpose entry)))
+    (is (= 0 (gtk:entry-invisible-char entry)))
+    (is-false (gtk:entry-invisible-char-set entry))
+    (is (= 0 (gtk:entry-max-length entry)))
+    (is-false (gtk:entry-overwrite-mode entry))
+    (is-false (gtk:entry-placeholder-text entry))
+    (is-true (gtk:entry-primary-icon-activatable entry))
+    (is-false (gtk:entry-primary-icon-gicon entry))
+    (is-false (gtk:entry-primary-icon-name entry))
+    (is-false (gtk:entry-primary-icon-paintable entry))
+    (is-true (gtk:entry-primary-icon-sensitive entry))
+    (is (eq :empty (gtk:entry-primary-icon-storage-type entry)))
+    (is-false (gtk:entry-primary-icon-tooltip-markup entry))
+    (is-false (gtk:entry-primary-icon-tooltip-text entry))
+    (is (= 0.0d0 (gtk:entry-progress-fraction entry)))
+    (is (= 0.0d0 (gtk:entry-progress-pulse-step entry)))
+    (is (= 0 (gtk:entry-scroll-offset entry)))
+    (is-true (gtk:entry-secondary-icon-activatable entry))
+    (is-false (gtk:entry-secondary-icon-gicon entry))
+    (is-false (gtk:entry-secondary-icon-name entry))
+    (is-false (gtk:entry-secondary-icon-paintable entry))
+    (is-true (gtk:entry-secondary-icon-sensitive entry))
+    (is (eq :empty (gtk:entry-secondary-icon-storage-type entry)))
+    (is-false (gtk:entry-secondary-icon-tooltip-markup entry))
+    (is-false (gtk:entry-secondary-icon-tooltip-text entry))
+    (is-false (gtk:entry-show-emoji-icon entry))
+    (is-false (gtk:entry-tabs entry))
+    (is (= 0 (gtk:entry-text-length entry)))
+    (is-false (gtk:entry-truncate-multiline entry))
+    (is-true (gtk:entry-visibility entry))
+    ;; Remove references
+    (is-false (setf (gtk:entry-buffer entry) nil))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_entry_new
 
 (test gtk-entry-new
-  (is (typep (gtk:entry-new) 'gtk:entry)))
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry (gtk:entry-new)) 'gtk:entry) 'gtk:entry)))
 
 ;;;     gtk_entry_new_with_buffer
 
 (test gtk-entry-new-with-buffer
-  (let ((buffer (gtk:entry-buffer-new "some text"))
-        entry)
+  (glib-test:with-check-memory (entry buffer)
+    (is (typep (setf buffer
+                     (gtk:entry-buffer-new "some text")) 'gtk:entry-buffer))
     (is (typep (setf entry (gtk:entry-new-with-buffer buffer)) 'gtk:entry))
     (is (eq buffer (gtk:entry-buffer entry)))
-    ;; Check memory management
-    (is-false (setf (gtk:entry-buffer entry) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count entry)))))
+    ;; Remove references
+    (is-false (setf (gtk:entry-buffer entry) nil))))
 
 ;;;     gtk_entry_unset_invisible_char
 
 (test gtk-entry-unset-invisible-char
-  (let ((entry (gtk:entry-new)))
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry (gtk:entry-new)) 'gtk:entry))
     (is (= 0 (gtk:entry-invisible-char entry)))
     (is-false (gtk:entry-invisible-char-set entry))
     (is (= 43 (setf (gtk:entry-invisible-char entry) (char-code #\+))))
@@ -311,7 +312,8 @@
 ;;;     gtk_entry_get_alignment
 
 (test gtk-entry-alignment
-  (let ((entry (gtk:entry-new)))
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry (gtk:entry-new)) 'gtk:entry))
     (is (= 0.0 (gtk:entry-alignment entry)))
     (is (= 0.5 (setf (gtk:entry-alignment entry) 1/2)))
     (is (= 0.5 (gtk:entry-alignment entry)))))
@@ -339,4 +341,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2025-4-27
+;;; 2025-05-31

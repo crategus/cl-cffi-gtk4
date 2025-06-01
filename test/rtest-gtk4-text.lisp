@@ -43,71 +43,45 @@
              (glib-test:list-signals "GtkText")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkText" GTK:TEXT
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkEditable")
-                        :TYPE-INITIALIZER "gtk_text_get_type")
-                       ((ACTIVATES-DEFAULT TEXT-ACTIVATES-DEFAULT
-                         "activates-default" "gboolean" T T)
-                        (ATTRIBUTES TEXT-ATTRIBUTES
-                         "attributes" "PangoAttrList" T T)
-                        (BUFFER TEXT-BUFFER "buffer" "GtkEntryBuffer" T T)
-                        (ENABLE-EMOJI-COMPLETION TEXT-ENABLE-EMOJI-COMPLETION
-                         "enable-emoji-completion" "gboolean" T T)
-                        (EXTRA-MENU TEXT-EXTRA-MENU
-                         "extra-menu" "GMenuModel" T T)
-                        (IM-MODULE TEXT-IM-MODULE "im-module" "gchararray" T T)
-                        (INPUT-HINTS TEXT-INPUT-HINTS
-                         "input-hints" "GtkInputHints" T T)
-                        (INPUT-PURPOSE TEXT-INPUT-PURPOSE
-                         "input-purpose" "GtkInputPurpose" T T)
-                        (INVISIBLE-CHAR TEXT-INVISIBLE-CHAR
-                         "invisible-char" "guint" T T)
-                        (INVISIBLE-CHAR-SET TEXT-INVISIBLE-CHAR-SET
-                         "invisible-char-set" "gboolean" T T)
-                        (MAX-LENGTH TEXT-MAX-LENGTH "max-length" "gint" T T)
-                        (OVERWRITE-MODE TEXT-OVERWRITE-MODE
-                         "overwrite-mode" "gboolean" T T)
-                        (PLACEHOLDER-TEXT TEXT-PLACEHOLDER-TEXT
-                         "placeholder-text" "gchararray" T T)
-                        (PROPAGATE-TEXT-WIDTH TEXT-PROPAGATE-TEXT-WIDTH
-                         "propagate-text-width" "gboolean" T T)
-                        (SCROLL-OFFSET TEXT-SCROLL-OFFSET
-                         "scroll-offset" "gint" T NIL)
-                        (TABS TEXT-TABS "tabs" "PangoTabArray" T T)
-                        (TRUNCATE-MULTILINE TEXT-TRUNCATE-MULTILINE
-                         "truncate-multiline" "gboolean" T T)
-                        (VISIBILITY TEXT-VISIBILITY
-                         "visibility" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkEditable")
+                       :TYPE-INITIALIZER "gtk_text_get_type")
+                      ((ACTIVATES-DEFAULT TEXT-ACTIVATES-DEFAULT
+                        "activates-default" "gboolean" T T)
+                       (ATTRIBUTES TEXT-ATTRIBUTES
+                        "attributes" "PangoAttrList" T T)
+                       (BUFFER TEXT-BUFFER "buffer" "GtkEntryBuffer" T T)
+                       (ENABLE-EMOJI-COMPLETION TEXT-ENABLE-EMOJI-COMPLETION
+                        "enable-emoji-completion" "gboolean" T T)
+                       (EXTRA-MENU TEXT-EXTRA-MENU
+                        "extra-menu" "GMenuModel" T T)
+                       (IM-MODULE TEXT-IM-MODULE "im-module" "gchararray" T T)
+                       (INPUT-HINTS TEXT-INPUT-HINTS
+                        "input-hints" "GtkInputHints" T T)
+                       (INPUT-PURPOSE TEXT-INPUT-PURPOSE
+                        "input-purpose" "GtkInputPurpose" T T)
+                       (INVISIBLE-CHAR TEXT-INVISIBLE-CHAR
+                        "invisible-char" "guint" T T)
+                       (INVISIBLE-CHAR-SET TEXT-INVISIBLE-CHAR-SET
+                        "invisible-char-set" "gboolean" T T)
+                       (MAX-LENGTH TEXT-MAX-LENGTH "max-length" "gint" T T)
+                       (OVERWRITE-MODE TEXT-OVERWRITE-MODE
+                        "overwrite-mode" "gboolean" T T)
+                       (PLACEHOLDER-TEXT TEXT-PLACEHOLDER-TEXT
+                        "placeholder-text" "gchararray" T T)
+                       (PROPAGATE-TEXT-WIDTH TEXT-PROPAGATE-TEXT-WIDTH
+                        "propagate-text-width" "gboolean" T T)
+                       (SCROLL-OFFSET TEXT-SCROLL-OFFSET
+                        "scroll-offset" "gint" T NIL)
+                       (TABS TEXT-TABS "tabs" "PangoTabArray" T T)
+                       (TRUNCATE-MULTILINE TEXT-TRUNCATE-MULTILINE
+                        "truncate-multiline" "gboolean" T T)
+                       (VISIBILITY TEXT-VISIBILITY
+                        "visibility" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkText"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-text-properties
-  (let ((text (make-instance 'gtk:text)))
-    (is-false (gtk:text-activates-default text))
-    (is-false (gtk:text-attributes text))
-    (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
-    (is-false (gtk:text-enable-emoji-completion text))
-    (is-false (gtk:text-extra-menu text))
-    (is-false (gtk:text-im-module text))
-    (is-false (gtk:text-input-hints text))
-    (is (eq :free-form (gtk:text-input-purpose text)))
-    (is (= 0 (gtk:text-invisible-char text)))
-    (is-false (gtk:text-invisible-char-set text))
-    (is (= 0 (gtk:text-max-length text)))
-    (is-false (gtk:text-overwrite-mode text))
-    (is-false (gtk:text-placeholder-text text))
-    (is-false (gtk:text-propagate-text-width text))
-    (is (= 0 (gtk:text-scroll-offset text)))
-    (is-false (gtk:text-tabs text))
-    (is-false (gtk:text-truncate-multiline text))
-    (is-true (gtk:text-visibility text))
-    ;; Remove text buffer and check the refcount
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count text)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -298,33 +272,59 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-text-properties
+  (glib-test:with-check-memory (text)
+    (is (typep (setf text (make-instance 'gtk:text)) 'gtk:text))
+    (is-false (gtk:text-activates-default text))
+    (is-false (gtk:text-attributes text))
+    (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
+    (is-false (gtk:text-enable-emoji-completion text))
+    (is-false (gtk:text-extra-menu text))
+    (is-false (gtk:text-im-module text))
+    (is-false (gtk:text-input-hints text))
+    (is (eq :free-form (gtk:text-input-purpose text)))
+    (is (= 0 (gtk:text-invisible-char text)))
+    (is-false (gtk:text-invisible-char-set text))
+    (is (= 0 (gtk:text-max-length text)))
+    (is-false (gtk:text-overwrite-mode text))
+    (is-false (gtk:text-placeholder-text text))
+    (is-false (gtk:text-propagate-text-width text))
+    (is (= 0 (gtk:text-scroll-offset text)))
+    (is-false (gtk:text-tabs text))
+    (is-false (gtk:text-truncate-multiline text))
+    (is-true (gtk:text-visibility text))
+    ;; Remove text buffer and check the refcount
+    (is-false (setf (gtk:text-buffer text) nil))
+    (is (= 1 (g:object-ref-count text)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_text_new
 
 (test gtk-text-new
-  (let (text)
+  (glib-test:with-check-memory (text)
     (is (typep (setf text (gtk:text-new)) 'gtk:text))
     (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count text)))))
+    (is-false (setf (gtk:text-buffer text) nil))))
 
 ;;;     gtk_text_new_with_buffer
 
 (test gtk-text-new-with-buffer
-  (let ((buffer (gtk:entry-buffer-new))
-        text)
+  (glib-test:with-check-memory (buffer text)
+    (is (typep (setf buffer (gtk:entry-buffer-new)) 'gtk:entry-buffer))
     (is (typep (setf text (gtk:text-new-with-buffer buffer)) 'gtk:text))
     (is (typep (gtk:text-buffer text) 'gtk:entry-buffer))
     (is (eq buffer (gtk:text-buffer text)))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count text)))))
+    ;; Remove references
+    (is-false (setf (gtk:text-buffer text) nil))))
 
 ;;;     gtk_text_unset_invisible_char
 
 (test gtk-text-unset-invisible-char
-  (let ((text (gtk:text-new)))
+  (glib-test:with-check-memory (text)
+    (is (typep (setf text (gtk:text-new)) 'gtk:text))
     (is (= 0 (gtk:text-invisible-char text)))
     (is-false (gtk:text-invisible-char-set text))
     (is (= 43 (setf (gtk:text-invisible-char text) (char-code #\+))))
@@ -332,7 +332,7 @@
     (is-true (gtk:text-invisible-char-set text))
     (is-false (gtk:text-unset-invisible-char text))
     ;; Default char is #\BULLET and not \*
-    #-windows
+    #+crategus
     (is (= (char-code #\BULLET) (gtk:text-invisible-char text)))
     #+windows
     (is (= (char-code #\BLACK_CIRCLE) (gtk:text-invisible-char text)))
@@ -341,67 +341,108 @@
 ;;;     gtk_text_get_text_length
 
 (test gtk-text-text-length
-  (let* ((buffer (gtk:entry-buffer-new "Ägypen"))
-         (text (gtk:text-new-with-buffer buffer)))
+  (glib-test:with-check-memory (buffer text)
+    (is (typep (setf buffer (gtk:entry-buffer-new "Ägypen")) 'gtk:entry-buffer))
+    (is (typep (setf text (gtk:text-new-with-buffer buffer)) 'gtk:text))
     (is (= 6 (gtk:text-text-length text)))
     (is (= (gtk:entry-buffer-length (gtk:text-buffer text))
            (gtk:text-text-length text)))
     (is (= (gtk:entry-buffer-length buffer) (gtk:text-text-length text)))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count text)))))
+    (is-false (setf (gtk:text-buffer text) nil))))
 
 ;;;     gtk_text_grab_focus_without_selecting
 
 ;;;     gtk_text_compute_cursor_extents
 
+#+crategus
 (test gtk-text-compute-cursor-extents.1
-  (let* ((buffer (gtk:entry-buffer-new "Ägypten"))
-         (text (gtk:text-new-with-buffer buffer)))
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf  text (gtk:text-new-with-buffer buffer))
     (graphene:with-rects (strong weak)
       (is-false (gtk:text-compute-cursor-extents text 2 strong weak))
       ;; Check strong values
-      #-windows
       (is (= 17.0 (graphene:rect-x strong)))
+      (is (= -8.0 (graphene:rect-y strong)))
+      (is (=  0.0 (graphene:rect-width strong)))
+      (is (= 16.0 (graphene:rect-height strong)))
+      ;; Check weak values
+      (is (= 17.0 (graphene:rect-x weak)))
+      (is (= -8.0 (graphene:rect-y weak)))
+      (is (=  0.0 (graphene:rect-width weak)))
+      (is (= 16.0 (graphene:rect-height weak))))
+    (is-false (setf (gtk:text-buffer text) nil))))
+
+#+windows
+(test gtk-text-compute-cursor-extents.1
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf  text (gtk:text-new-with-buffer buffer))
+    (graphene:with-rects (strong weak)
+      (is-false (gtk:text-compute-cursor-extents text 2 strong weak))
+      ;; Check strong values
+      (is (= 15.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
       (is (= 17.0 (graphene:rect-height strong)))
       ;; Check weak values
-      #-windows
-      (is (= 17.0 (graphene:rect-x weak)))
+      (is (= 15.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
       (is (= 17.0 (graphene:rect-height weak))))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count text)))))
+    (is-false (setf (gtk:text-buffer text) nil))))
 
+#+crategus
 (test gtk-text-compute-cursor-extents.2
-  (let* ((buffer (gtk:entry-buffer-new "Ägypten"))
-         (text (gtk:text-new-with-buffer buffer)))
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf text (gtk:text-new-with-buffer buffer))
     (graphene:with-rect (strong)
       (is-false (gtk:text-compute-cursor-extents text 2 strong nil))
-      #-windows
       (is (= 17.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
-      (is (= 17.0 (graphene:rect-height strong))))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count text)))))
+      (is (= 16.0 (graphene:rect-height strong))))
+    (is-false (setf (gtk:text-buffer text) nil))))
 
+#+windows
+(test gtk-text-compute-cursor-extents.2
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf text (gtk:text-new-with-buffer buffer))
+    (graphene:with-rect (strong)
+      (is-false (gtk:text-compute-cursor-extents text 2 strong nil))
+      (is (= 15.0 (graphene:rect-x strong)))
+      (is (= -8.0 (graphene:rect-y strong)))
+      (is (=  0.0 (graphene:rect-width strong)))
+      (is (= 17.0 (graphene:rect-height strong))))
+    (is-false (setf (gtk:text-buffer text) nil))))
+
+#+crategus
 (test gtk-text-compute-cursor-extents.3
-  (let* ((buffer (gtk:entry-buffer-new "Ägypten"))
-         (text (gtk:text-new-with-buffer buffer)))
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf text (gtk:text-new-with-buffer buffer))
     (graphene:with-rect (weak)
       (is-false (gtk:text-compute-cursor-extents text 2 nil weak))
       #-windows
       (is (= 17.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
-      (is (= 17.0 (graphene:rect-height weak))))
-    (is-false (setf (gtk:text-buffer text) nil))
-    (is (= 1 (g:object-ref-count buffer)))
-    (is (= 1 (g:object-ref-count text)))))
+      (is (= 16.0 (graphene:rect-height weak))))
+    (is-false (setf (gtk:text-buffer text) nil))))
 
-;;; 2024-10-13
+#+windows
+(test gtk-text-compute-cursor-extents.3
+  (glib-test:with-check-memory (buffer text)
+    (setf buffer (gtk:entry-buffer-new "Ägypten"))
+    (setf text (gtk:text-new-with-buffer buffer))
+    (graphene:with-rect (weak)
+      (is-false (gtk:text-compute-cursor-extents text 2 nil weak))
+      (is (= 15.0 (graphene:rect-x weak)))
+      (is (= -8.0 (graphene:rect-y weak)))
+      (is (=  0.0 (graphene:rect-width weak)))
+      (is (= 17.0 (graphene:rect-height weak))))
+    (is-false (setf (gtk:text-buffer text) nil))))
+
+;;; 2025-05-30

@@ -57,45 +57,44 @@
              (glib-test:list-signals "GtkScrollable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkScrollable" GTK:SCROLLABLE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_scrollable_get_type")
-                       (HADJUSTMENT SCROLLABLE-HADJUSTMENT
-                        "hadjustment" "GtkAdjustment" T T)
-                       (HSCROLL-POLICY SCROLLABLE-HSCROLL-POLICY
-                        "hscroll-policy" "GtkScrollablePolicy" T T)
-                       (VADJUSTMENT SCROLLABLE-VADJUSTMENT
-                        "vadjustment" "GtkAdjustment" T T)
-                       (VSCROLL-POLICY SCROLLABLE-VSCROLL-POLICY
-                        "vscroll-policy" "GtkScrollablePolicy" T T))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_scrollable_get_type")
+                      (HADJUSTMENT SCROLLABLE-HADJUSTMENT
+                       "hadjustment" "GtkAdjustment" T T)
+                      (HSCROLL-POLICY SCROLLABLE-HSCROLL-POLICY
+                       "hscroll-policy" "GtkScrollablePolicy" T T)
+                      (VADJUSTMENT SCROLLABLE-VADJUSTMENT
+                       "vadjustment" "GtkAdjustment" T T)
+                      (VSCROLL-POLICY SCROLLABLE-VSCROLL-POLICY
+                       "vscroll-policy" "GtkScrollablePolicy" T T))
              (gobject:get-gtype-definition "GtkScrollable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-scrollable-properties
-  (let ((scrollable (make-instance 'gtk:viewport))
-        adjustment1 adjustment2)
+  (glib-test:with-check-memory (scrollable adjustment1 adjustment2)
+    (is (typep (setf scrollable (make-instance 'gtk:viewport)) 'gtk:viewport))
     (is (typep (setf adjustment1
                      (gtk:scrollable-hadjustment scrollable)) 'gtk:adjustment))
     (is (eq :minimum (gtk:scrollable-hscroll-policy scrollable)))
     (is (typep (setf adjustment2
                      (gtk:scrollable-vadjustment scrollable)) 'gtk:adjustment))
     (is (eq :minimum (gtk:scrollable-vscroll-policy scrollable)))
-    ;; Check memory management
+    ;; Remove references
     (is-false (setf (gtk:scrollable-hadjustment scrollable) nil))
-    (is-false (setf (gtk:scrollable-vadjustment scrollable) nil))
-    (is (= 1 (g:object-ref-count adjustment1)))
-    (is (= 1 (g:object-ref-count adjustment2)))
-    (is (= 1 (g:object-ref-count scrollable)))))
+    (is-false (setf (gtk:scrollable-vadjustment scrollable) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_scrollable_get_border
 
 (test gtk-scrollable-border
-  (let ((scrollable (make-instance 'gtk:text-view))
-        (border nil))
+  (glib-test:with-check-memory (scrollable)
+    (let (border)
+      (is (typep (setf scrollable
+                       (make-instance 'gtk:text-view)) 'gtk:text-view))
     ;; TODO: Can we construct a test different from nil
     (is-false (setf border
-                    (gtk:scrollable-border scrollable)))))
+                    (gtk:scrollable-border scrollable))))))
 
-;;; 2024-10-27
+;;; 2025-05-06

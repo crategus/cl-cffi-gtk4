@@ -37,18 +37,19 @@
   (is (eq :widget (gtk:widget-class-accessible-role "GtkSpinner")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSpinner" GTK:SPINNER
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_spinner_get_type")
-                       ((SPINNING SPINNER-SPINNING "spinning" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_spinner_get_type")
+                      ((SPINNING SPINNER-SPINNING "spinning" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkSpinner"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-spinner-properties
-  (let ((spinner (make-instance 'gtk:spinner)))
+  (glib-test:with-check-memory (spinner)
+    (is (typep (setf spinner (make-instance 'gtk:spinner)) 'gtk:spinner))
     (is-false (gtk:spinner-spinning spinner))
     (is-true  (setf (gtk:spinner-spinning spinner) t))
     (is-true (gtk:spinner-spinning spinner))))
@@ -58,17 +59,19 @@
 ;;;     gtk_spinner_new
 
 (test gtk-spinner-new
-  (is (typep (gtk:spinner-new) 'gtk:spinner)))
+  (glib-test:with-check-memory (spinner)
+    (is (typep (setf spinner (gtk:spinner-new)) 'gtk:spinner))))
 
 ;;;     gtk_spinner_start
 ;;;     gtk_spinner_stop
 
 (test gtk-spinner-start/stop
-  (let ((spinner (make-instance 'gtk:spinner)))
+  (glib-test:with-check-memory (spinner)
+    (is (typep (setf spinner (gtk:spinner-new)) 'gtk:spinner))
     (is-false (gtk:spinner-spinning spinner))
     (is-false (gtk:spinner-start spinner))
     (is-true (gtk:spinner-spinning spinner))
     (is-false (gtk:spinner-stop spinner))
     (is-false (gtk:spinner-spinning spinner))))
 
-;;; 2024-9-20
+;;; 2025-05-30

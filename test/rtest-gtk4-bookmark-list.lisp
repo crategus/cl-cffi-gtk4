@@ -48,8 +48,7 @@
                         T NIL)
                        (LOADING BOOKMARK-LIST-LOADING "loading" "gboolean" T
                         NIL)
-                       (N-ITEMS BOOKMARK-LIST-N-ITEMS "n-items" "guint" T
-                        NIL)))
+                       (N-ITEMS BOOKMARK-LIST-N-ITEMS "n-items" "guint" T NIL)))
              (gobject:get-gtype-definition "GtkBookmarkList"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -57,25 +56,28 @@
 ;;;     attributes
 ;;;     filename
 ;;;     io-priority
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     loading
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 
 (test gtk-bookmark-list-properties
-  (let* ((path (cffi:foreign-funcall "g_get_user_data_dir" :string))
-         ;; Default location of the bookmark file
-         (filename (concatenate 'string path "/recently-used.xbel"))
-         (bookmark (make-instance 'gtk:bookmark-list)))
-    (is-false (gtk:bookmark-list-attributes bookmark))
-    ;; Default location
-    #-windows
-    (is (string= filename
-                 (gtk:bookmark-list-filename bookmark)))
-    ;; Default io priority
-    (is (= g:+priority-default+ (gtk:bookmark-list-io-priority bookmark)))
-    (is (eq (g:gtype "GFileInfo") (gtk:bookmark-list-item-type bookmark)))
-    (is-true (gtk:bookmark-list-loading bookmark))
-    (is (= 0 (gtk:bookmark-list-n-items bookmark)))))
+  (glib-test:with-check-memory (bookmark)
+    (let* ((path (cffi:foreign-funcall "g_get_user_data_dir" :string))
+           ;; Default location of the bookmark file
+           #-windows
+           (filename (concatenate 'string path "/recently-used.xbel"))
+           #+windows
+           (filename (concatenate 'string path "\\recently-used.xbel")))
+      (is (typep (setf bookmark
+                       (make-instance 'gtk:bookmark-list)) 'gtk:bookmark-list))
+      (is-false (gtk:bookmark-list-attributes bookmark))
+      ;; Default location
+      (is (string= filename (gtk:bookmark-list-filename bookmark)))
+      ;; Default io priority
+      (is (= g:+priority-default+ (gtk:bookmark-list-io-priority bookmark)))
+      (is (eq (g:gtype "GFileInfo") (gtk:bookmark-list-item-type bookmark)))
+      (is-true (gtk:bookmark-list-loading bookmark))
+      (is (= 0 (gtk:bookmark-list-n-items bookmark))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -83,14 +85,19 @@
 ;;;     gtk_bookmark_list_is_loading
 
 (test gtk-bookmark-list-new
-  (let* ((path (cffi:foreign-funcall "g_get_user_data_dir" :string))
-         (filename (concatenate 'string path "/recently-used.xbel"))
-         (bookmark (gtk:bookmark-list-new filename "*")))
-    (is (string= filename (gtk:bookmark-list-filename bookmark)))
-    (is (string= "*" (gtk:bookmark-list-attributes bookmark)))
-    (is-true (gtk:bookmark-list-is-loading bookmark))
-    (is-true (gtk:bookmark-list-loading bookmark))
-    ;; TODO: Bookmarks are loaded, but we have no items in the list. Why?
-    (is (= 0 (gtk:bookmark-list-n-items bookmark)))))
+  (glib-test:with-check-memory (bookmark)
+    (let* ((path (cffi:foreign-funcall "g_get_user_data_dir" :string))
+           (filename (concatenate 'string path "/recently-used.xbel")))
+      (is (typep (setf bookmark
+                       (gtk:bookmark-list-new filename "*"))
+                 'gtk:bookmark-list))
+      ;; TODO: Why does this test work for Windows and Linus, but not the
+      ;; above test.
+      (is (string= filename (gtk:bookmark-list-filename bookmark)))
+      (is (string= "*" (gtk:bookmark-list-attributes bookmark)))
+      (is-true (gtk:bookmark-list-is-loading bookmark))
+      (is-true (gtk:bookmark-list-loading bookmark))
+      ;; TODO: Bookmarks are loaded, but we have no items in the list. Why?
+      (is (= 0 (gtk:bookmark-list-n-items bookmark))))))
 
-;;; 2024-12-15
+;;; 2025-05-30

@@ -1445,6 +1445,7 @@
 
 ;;;     GtkAccessibleRelation
 
+#-gtk-4-18
 (test gtk-accessible-relation
   ;; Check type
   (is (g:type-is-enum "GtkAccessibleRelation"))
@@ -1508,6 +1509,86 @@
                                     (:ROW-INDEX-TEXT 15)
                                     (:ROW-SPAN 16)
                                     (:SET-SIZE 17))
+             (gobject:get-gtype-definition "GtkAccessibleRelation"))))
+
+#+gtk-4-18
+(test gtk-accessible-relation
+  ;; Check type
+  (is (g:type-is-enum "GtkAccessibleRelation"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkAccessibleRelation")
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_relation_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:accessible-relation
+          (glib:symbol-for-gtype "GtkAccessibleRelation")))
+  ;; Check names
+  (is (equal '("GTK_ACCESSIBLE_RELATION_ACTIVE_DESCENDANT"
+               "GTK_ACCESSIBLE_RELATION_COL_COUNT"
+               "GTK_ACCESSIBLE_RELATION_COL_INDEX"
+               "GTK_ACCESSIBLE_RELATION_COL_INDEX_TEXT"
+               "GTK_ACCESSIBLE_RELATION_COL_SPAN"
+               "GTK_ACCESSIBLE_RELATION_CONTROLS"
+               "GTK_ACCESSIBLE_RELATION_DESCRIBED_BY"
+               "GTK_ACCESSIBLE_RELATION_DETAILS"
+               "GTK_ACCESSIBLE_RELATION_ERROR_MESSAGE"
+               "GTK_ACCESSIBLE_RELATION_FLOW_TO"
+               "GTK_ACCESSIBLE_RELATION_LABELLED_BY"
+               "GTK_ACCESSIBLE_RELATION_OWNS"
+               "GTK_ACCESSIBLE_RELATION_POS_IN_SET"
+               "GTK_ACCESSIBLE_RELATION_ROW_COUNT"
+               "GTK_ACCESSIBLE_RELATION_ROW_INDEX"
+               "GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT"
+               "GTK_ACCESSIBLE_RELATION_ROW_SPAN"
+               "GTK_ACCESSIBLE_RELATION_SET_SIZE"
+               "GTK_ACCESSIBLE_RELATION_LABEL_FOR"
+               "GTK_ACCESSIBLE_RELATION_DESCRIPTION_FOR"
+               "GTK_ACCESSIBLE_RELATION_CONTROLLED_BY"
+               "GTK_ACCESSIBLE_RELATION_DETAILS_FOR"
+               "GTK_ACCESSIBLE_RELATION_ERROR_MESSAGE_FOR"
+               "GTK_ACCESSIBLE_RELATION_FLOW_FROM")
+             (glib-test:list-enum-item-names "GtkAccessibleRelation")))
+  ;; Check values
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23)
+             (glib-test:list-enum-item-values "GtkAccessibleRelation")))
+  ;; Check nick names
+  (is (equal '("active-descendant" "col-count" "col-index" "col-index-text"
+               "col-span" "controls" "described-by" "details" "error-message"
+               "flow-to" "labelled-by" "owns" "pos-in-set" "row-count"
+               "row-index" "row-index-text" "row-span" "set-size" "label-for"
+               "description-for" "controlled-by" "details-for"
+               "error-message-for" "flow-from")
+             (glib-test:list-enum-item-nicks "GtkAccessibleRelation")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessibleRelation"
+                                    GTK:ACCESSIBLE-RELATION
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_accessible_relation_get_type")
+                                    (:ACTIVE-DESCENDANT 0)
+                                    (:COL-COUNT 1)
+                                    (:COL-INDEX 2)
+                                    (:COL-INDEX-TEXT 3)
+                                    (:COL-SPAN 4)
+                                    (:CONTROLS 5)
+                                    (:DESCRIBED-BY 6)
+                                    (:DETAILS 7)
+                                    (:ERROR-MESSAGE 8)
+                                    (:FLOW-TO 9)
+                                    (:LABELLED-BY 10)
+                                    (:OWNS 11)
+                                    (:POS-IN-SET 12)
+                                    (:ROW-COUNT 13)
+                                    (:ROW-INDEX 14)
+                                    (:ROW-INDEX-TEXT 15)
+                                    (:ROW-SPAN 16)
+                                    (:SET-SIZE 17)
+                                    (:LABEL-FOR 18)
+                                    (:DESCRIPTION-FOR 19)
+                                    (:CONTROLLED-BY 20)
+                                    (:DETAILS-FOR 21)
+                                    (:ERROR-MESSAGE-FOR 22)
+                                    (:FLOW-FROM 23))
              (gobject:get-gtype-definition "GtkAccessibleRelation"))))
 
 ;;;     GtkAccessibleTristate
@@ -1685,4 +1766,4 @@
                        (:HIGH 2))
              (gobject:get-gtype-definition "GtkAccessibleAnnouncementPriority"))))
 
-;;; 2024-11-3
+;;; 2025-05-13

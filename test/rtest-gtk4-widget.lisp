@@ -47,8 +47,7 @@
   ;; Check parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkWidget")))
-  ;; Check children
-  #-windows
+  ;; Check children (for a subset)
   (is (subsetp '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
                  "GtkAspectFrame" "GtkBox" "GtkButton" "GtkCalendar"
                  "GtkCellView" "GtkCenterBox" "GtkCheckButton" "GtkColorButton"
@@ -72,38 +71,11 @@
                  "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
                  "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
                  (glib-test:list-children "GtkWidget") :test #'string=))
-  #+windows
-  (when *first-run-testsuite*
-    (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
-                 "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
-                 "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
-                 "GtkColorButton" "GtkColorChooserWidget"
-                 "GtkColorDialogButton" "GtkColumnView" "GtkComboBox"
-                 "GtkDragIcon" "GtkDrawingArea" "GtkDropDown"
-                 "GtkEditableLabel" "GtkEntry" "GtkExpander"
-                 "GtkFileChooserWidget" "GtkFixed" "GtkFlowBox"
-                 "GtkFlowBoxChild" "GtkFontButton" "GtkFontChooserWidget"
-                 "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
-                 "GtkGraphicsOffload" "GtkGrid" "GtkHeaderBar" "GtkIconView"
-                 "GtkImage" "GtkInfoBar" "GtkInscription" "GtkLabel"
-                 "GtkLevelBar" "GtkListBase" "GtkListBox" "GtkListBoxRow"
-                 "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
-                 "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned"
-                 "GtkPasswordEntry" "GtkPicture" "GtkPopover"
-                 "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar"
-                 "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
-                 "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry"
-                 "GtkSeparator" "GtkShortcutLabel" "GtkShortcutsShortcut"
-                 "GtkSpinButton" "GtkSpinner" "GtkStack" "GtkStackSidebar"
-                 "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
-                 "GtkTextHandle" "GtkTextView" "GtkTooltipWindow"
-                 "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
-                 "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
-                 (glib-test:list-children "GtkWidget"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (glib-test:list-interfaces "GtkWidget")))
   ;; Check class properties
+  #-gtk-4-18
   (is (equal '("accessible-role" "can-focus" "can-target" "css-classes"
                "css-name" "cursor" "focus-on-click" "focusable" "halign"
                "has-default" "has-focus" "has-tooltip" "height-request"
@@ -113,6 +85,16 @@
                "sensitive" "tooltip-markup" "tooltip-text" "valign" "vexpand"
                "vexpand-set" "visible" "width-request")
              (glib-test:list-properties "GtkWidget")))
+  #+gtk-4-18
+  (is (equal '("accessible-role" "can-focus" "can-target" "css-classes"
+               "css-name" "cursor" "focus-on-click" "focusable" "halign"
+               "has-default" "has-focus" "has-tooltip" "height-request"
+               "hexpand" "hexpand-set" "layout-manager" "limit-events"
+               "margin-bottom" "margin-end" "margin-start" "margin-top" "name"
+               "opacity" "overflow" "parent" "receives-default" "root"
+               "scale-factor" "sensitive" "tooltip-markup" "tooltip-text"
+               "valign" "vexpand" "vexpand-set" "visible" "width-request")
+             (glib-test:list-properties "GtkWidget")))
   ;; Check signals
   (is (equal '("destroy" "direction-changed" "hide" "keynav-failed" "map"
                "mnemonic-activate" "move-focus" "query-tooltip" "realize" "show"
@@ -121,6 +103,7 @@
   ;; Check CSS information
   ;; No CSS information for a abstract class
   ;; Check class definition
+  #-gtk-4-18
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWidget" GTK:WIDGET
                       (:SUPERCLASS G:INITIALLY-UNOWNED
                        :EXPORT T
@@ -175,6 +158,64 @@
                        (VISIBLE WIDGET-VISIBLE "visible" "gboolean" T T)
                        (WIDTH-REQUEST WIDGET-WIDTH-REQUEST
                         "width-request" "gint" T T)))
+             (gobject:get-gtype-definition "GtkWidget")))
+  #+gtk-4-18
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWidget" GTK:WIDGET
+                      (:SUPERCLASS G:INITIALLY-UNOWNED
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_widget_get_type")
+                      ((CAN-FOCUS WIDGET-CAN-FOCUS "can-focus" "gboolean" T T)
+                       (CAN-TARGET WIDGET-CAN-TARGET "can-target" "gboolean" T T)
+                       (CSS-CLASSES WIDGET-CSS-CLASSES "css-classes" "GStrv" T T)
+                       (CSS-NAME WIDGET-CSS-NAME "css-name" "gchararray" T NIL)
+                       (CURSOR WIDGET-CURSOR "cursor" "GdkCursor" T T)
+                       (FOCUS-ON-CLICK WIDGET-FOCUS-ON-CLICK
+                        "focus-on-click" "gboolean" T T)
+                       (FOCUSABLE WIDGET-FOCUSABLE "focusable" "gboolean" T T)
+                       (HALIGN WIDGET-HALIGN "halign" "GtkAlign" T T)
+                       (HAS-DEFAULT WIDGET-HAS-DEFAULT
+                        "has-default" "gboolean" T NIL)
+                       (HAS-FOCUS WIDGET-HAS-FOCUS "has-focus" "gboolean" T NIL)
+                       (HAS-TOOLTIP WIDGET-HAS-TOOLTIP
+                        "has-tooltip" "gboolean" T T)
+                       (HEIGHT-REQUEST WIDGET-HEIGHT-REQUEST
+                        "height-request" "gint" T T)
+                       (HEXPAND WIDGET-HEXPAND "hexpand" "gboolean" T T)
+                       (HEXPAND-SET WIDGET-HEXPAND-SET
+                        "hexpand-set" "gboolean" T T)
+                       (LAYOUT-MANAGER WIDGET-LAYOUT-MANAGER
+                        "layout-manager" "GtkLayoutManager" T T)
+                       (LIMIT-EVENTS WIDGET-LIMIT-EVENTS
+                        "limit-events" "gboolean" T T)
+                       (MARGIN-BOTTOM WIDGET-MARGIN-BOTTOM
+                        "margin-bottom" "gint" T T)
+                       (MARGIN-END WIDGET-MARGIN-END "margin-end" "gint" T T)
+                       (MARGIN-START WIDGET-MARGIN-START
+                        "margin-start" "gint" T T)
+                       (MARGIN-TOP WIDGET-MARGIN-TOP "margin-top" "gint" T T)
+                       (NAME WIDGET-NAME "name" "gchararray" T T)
+                       (OPACITY WIDGET-OPACITY "opacity" "gdouble" T T)
+                       (OVERFLOW WIDGET-OVERFLOW "overflow" "GtkOverflow" T T)
+                       (PARENT WIDGET-PARENT "parent" "GtkWidget" T NIL)
+                       (RECEIVES-DEFAULT WIDGET-RECEIVES-DEFAULT
+                        "receives-default" "gboolean" T T)
+                       (ROOT WIDGET-ROOT "root" "GtkRoot" T NIL)
+                       (SCALE-FACTOR WIDGET-SCALE-FACTOR
+                        "scale-factor" "gint" T NIL)
+                       (SENSITIVE WIDGET-SENSITIVE "sensitive" "gboolean" T T)
+                       (TOOLTIP-MARKUP WIDGET-TOOLTIP-MARKUP
+                        "tooltip-markup" "gchararray" T T)
+                       (TOOLTIP-TEXT WIDGET-TOOLTIP-TEXT
+                        "tooltip-text" "gchararray" T T)
+                       (VALIGN WIDGET-VALIGN "valign" "GtkAlign" T T)
+                       (VEXPAND WIDGET-VEXPAND "vexpand" "gboolean" T T)
+                       (VEXPAND-SET WIDGET-VEXPAND-SET
+                        "vexpand-set" "gboolean" T T)
+                       (VISIBLE WIDGET-VISIBLE "visible" "gboolean" T T)
+                       (WIDTH-REQUEST WIDGET-WIDTH-REQUEST
+                        "width-request" "gint" T T)))
              (gobject:get-gtype-definition "GtkWidget"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -200,6 +241,8 @@
     (is-false (gtk:widget-hexpand widget))
     (is-false (gtk:widget-hexpand-set widget))
     (is-false (gtk:widget-layout-manager widget))
+    #+gtk-4-18
+    (is-false (gtk:widget-limit-events widget))
     (is (= 0 (gtk:widget-margin-bottom widget)))
     (is (= 0 (gtk:widget-margin-end widget)))
     (is (= 0 (gtk:widget-margin-start widget)))
@@ -223,7 +266,6 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_widget_in_destruction
-
 
 ;;;     gtk_widget_show
 ;;;     gtk_widget_hide
@@ -897,4 +939,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2025-4-26
+;;; 2025-05-13

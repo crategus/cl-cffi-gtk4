@@ -27,8 +27,8 @@
              (glib-test:list-signals "GtkSelectionModel")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkSelectionModel" GTK:SELECTION-MODEL
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_selection_model_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_selection_model_get_type"))
              (gobject:get-gtype-definition "GtkSelectionModel"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -111,9 +111,9 @@
       (is (typep (setf bitset
                        (gtk:selection-model-selection-in-range selection 50 10))
                  'gtk:bitset))
-      (is (= 280 (gtk:bitset-size bitset)))
-      (is (= 0 (gtk:bitset-minimum bitset)))
-      (is (= 279 (gtk:bitset-maximum bitset)))
+      (is (= 282 (gtk:bitset-size bitset)))
+      (is (=   0 (gtk:bitset-minimum bitset)))
+      (is (= 281 (gtk:bitset-maximum bitset)))
 
       (is-true (gtk:selection-model-unselect-all selection))
       (is (typep (setf bitset
@@ -140,4 +140,4 @@
     ;; Remove references
     (is-false (setf (gtk:multi-selection-model selection) nil))))
 
-;;; 2024-12-17
+;;; 2025-05-10

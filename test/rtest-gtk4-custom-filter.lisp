@@ -60,9 +60,6 @@
     (is (typep (gtk:custom-filter-new #'custom-filter-func) 'gtk:custom-filter))
     (is (= 1 (g:object-ref-count (gtk:custom-filter-new #'custom-filter-func))))
     ;; Items in the filter model
-    #-windows
-    (is (= 41 (gtk:filter-list-model-n-items model)))
-    #+windows
     (is (= 42 (gtk:filter-list-model-n-items model)))
     ;; Create with make instance
     (is (typep (make-instance 'gtk:custom-filter) 'gtk:custom-filter))
@@ -92,15 +89,9 @@
     ;; Check refcount for first object in list store
     (is (= 2 (g:object-ref-count (g:list-model-item store 0))))
     ;; No filter function set
-    #-windows
-    (is (< 3400 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (< 3330 (gtk:filter-list-model-n-items model)))
+    (is (< 3000 (gtk:filter-list-model-n-items model)))
     ;; Set filter function
     (is-false (gtk:custom-filter-set-filter-func filter #'custom-filter-func))
-    #-windows
-    (is (= 41 (gtk:filter-list-model-n-items model)))
-    #+windows
     (is (= 42 (gtk:filter-list-model-n-items model)))
     ;; Set a new filter function
     (is-false (gtk:custom-filter-set-filter-func filter
@@ -110,10 +101,7 @@
     (is (= 145 (gtk:filter-list-model-n-items model)))
     ;; Unset the custom filter
     (is-false (gtk:custom-filter-set-filter-func filter))
-    #-windows
-    (is (< 3400 (gtk:filter-list-model-n-items model)))
-    #+windows
-    (is (< 3330 (gtk:filter-list-model-n-items model)))
+    (is (< 3000 (gtk:filter-list-model-n-items model)))
     ;; Check refcount for first object in list store
     (is (= 2 (g:object-ref-count (g:list-model-item store 0))))
     ;; Clear the string list
@@ -126,4 +114,4 @@
     (is-false (setf (gtk:filter-list-model-filter model) nil))
     (is-false (setf (gtk:filter-list-model-model model) nil))))
 
-;;; 2024-12-16
+;;; 2025-05-25

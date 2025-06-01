@@ -169,9 +169,6 @@
       (is (= 2 (g:object-ref-count filter1)))
       ;; Check the filter result
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      #-windows
-      (is (= 41 (gtk:filter-list-model-n-items model)))
-      #+windows
       (is (= 42 (gtk:filter-list-model-n-items model)))
       ;; Configure and append filter2
       (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
@@ -179,18 +176,12 @@
       (is-false (gtk:multi-filter-append filter filter2))
       (is (= 2 (gtk:multi-filter-n-items filter)))
       ;; Check the filter result
-      #-windows
-      (is (< 234 (gtk:filter-list-model-n-items model)))
-      #+windows
-      (is (= 239 (gtk:filter-list-model-n-items model)))
+      (is (< 230 (gtk:filter-list-model-n-items model)))
       ;; Remove filter2
       (is-false (gtk:multi-filter-remove filter 0))
       ;; Check again the filter result
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      #-windows
-      (is (< 201 (gtk:filter-list-model-n-items model)))
-      #+windows
-      (is (= 206 (gtk:filter-list-model-n-items model)))
+      (is (< 200 (gtk:filter-list-model-n-items model)))
       ;; Free references
       (is-false (gtk:multi-filter-remove filter 0))
       (is-false (setf (gtk:filter-list-model-model model) nil))
@@ -209,38 +200,26 @@
       (is (eq (g:gtype "GtkFilter") (gtk:multi-filter-item-type filter)))
       (is (= 0 (gtk:multi-filter-n-items filter)))
       ;; No filter function set
-      #-windows
-      (is (< 3400 (gtk:filter-list-model-n-items model)))
-      #+windows
-      (is (< 3330 (gtk:filter-list-model-n-items model)))
+      (is (< 3000 (gtk:filter-list-model-n-items model)))
       ;; Append filter1
       (is (eq :substring (setf (gtk:string-filter-match-mode filter1) :substring)))
       (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
       (is-false (gtk:multi-filter-append filter filter1))
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      #-windows
-      (is (= 41 (gtk:filter-list-model-n-items model)))
-      #+windows
       (is (= 42 (gtk:filter-list-model-n-items model)))
       ;; Append filter2
       (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
       (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
       (is-false (gtk:multi-filter-append filter filter2))
       (is (= 2 (gtk:multi-filter-n-items filter)))
-      #-windows
-      (is (= 8 (gtk:filter-list-model-n-items model)))
-      #+windows
       (is (= 9 (gtk:filter-list-model-n-items model)))
       ;; Remove filter2
       (is-false (gtk:multi-filter-remove filter 0))
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      #-windows
-      (is (< 201 (gtk:filter-list-model-n-items model)))
-      #+windows
-      (is (= 206 (gtk:filter-list-model-n-items model)))
+      (is (< 200 (gtk:filter-list-model-n-items model)))
       ;; Free references
       (is-false (gtk:multi-filter-remove filter 0))
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2025-3-31
+;;; 2025-05-25

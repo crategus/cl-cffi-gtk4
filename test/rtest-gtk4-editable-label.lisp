@@ -56,7 +56,9 @@
 ;;;     editing
 
 (test gtk-editable-label-properties
-  (let ((label (make-instance 'gtk:editable-label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label
+                     (make-instance 'gtk:editable-label)) 'gtk:editable-label))
     (is-false (gtk:editable-label-editing label))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -64,9 +66,11 @@
 ;;;     gtk_editable_label_new
 
 (test gtk-editable-label-new
-  (is (typep (gtk:editable-label-new "label") 'gtk:editable-label)))
+  (glib-test:with-check-memory (label)
+    (is (typep (setf label
+                     (gtk:editable-label-new "label")) 'gtk:editable-label))))
 
 ;;;     gtk_editable_label_start_editing
 ;;;     gtk_editable_label_stop_editing
 
-;;; 2024-9-20
+;;; 2025-05-31

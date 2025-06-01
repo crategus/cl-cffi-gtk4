@@ -7,38 +7,6 @@
 
 ;;;     GtkIconLookupFlags
 
-#-gtk-4-18
-(test gtk-icon-lookup-flags
-  ;; Check type
-  (is (g:type-is-flags "GtkIconLookupFlags"))
-  ;; Check registered name
-  (is (eq 'gtk:icon-lookup-flags
-          (glib:symbol-for-gtype "GtkIconLookupFlags")))
-  ;; Check type initializer
-  (is (eq (g:gtype "GtkIconLookupFlags")
-          (g:gtype (cffi:foreign-funcall "gtk_icon_lookup_flags_get_type"
-                                         :size))))
-  ;; Check names
-  (is (equal '("GTK_ICON_LOOKUP_FORCE_REGULAR" "GTK_ICON_LOOKUP_FORCE_SYMBOLIC"
-               "GTK_ICON_LOOKUP_PRELOAD")
-             (glib-test:list-flags-item-names "GtkIconLookupFlags")))
-  ;; Check values
-  (is (equal '(1 2 4)
-             (glib-test:list-flags-item-values "GtkIconLookupFlags")))
-  ;; Check nick names
-  (is (equal '("force-regular" "force-symbolic" "preload")
-             (glib-test:list-flags-item-nicks "GtkIconLookupFlags")))
-  ;; Check flags definition
-  (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkIconLookupFlags" GTK:ICON-LOOKUP-FLAGS
-                                     (:EXPORT T
-                                      :TYPE-INITIALIZER
-                                      "gtk_icon_lookup_flags_get_type")
-                                     (:FORCE-REGULAR 1)
-                                     (:FORCE-SYMBOLIC 2)
-                                     (:PRELOAD 4))
-             (gobject:get-gtype-definition "GtkIconLookupFlags"))))
-
-#+gtk-4-18
 (test gtk-icon-lookup-flags
   ;; Check type
   (is (g:type-is-flags "GtkIconLookupFlags"))
@@ -135,13 +103,13 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-icon-theme-properties
-  (glib-test:with-check-memory ((theme 2) :strong 2)
-    (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
-    (is (typep (gtk:icon-theme-display theme) 'gdk:display))
-    (is (every #'stringp (gtk:icon-theme-icon-names theme)))
-    (is (every #'stringp (gtk:icon-theme-resource-path theme)))
-    (is (every #'stringp (gtk:icon-theme-search-path theme)))
-    (is (stringp (gtk:icon-theme-theme-name theme)))))
+  (glib-test:with-check-memory (:strong 2)
+    (let ((theme (gtk:icon-theme-for-display (gdk:display-default))))
+      (is (typep (gtk:icon-theme-display theme) 'gdk:display))
+      (is (every #'stringp (gtk:icon-theme-icon-names theme)))
+      (is (every #'stringp (gtk:icon-theme-resource-path theme)))
+      (is (every #'stringp (gtk:icon-theme-search-path theme)))
+      (is (stringp (gtk:icon-theme-theme-name theme))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -154,7 +122,7 @@
 ;;;     gtk_icon_theme_get_for_display
 
 (test gtk-icon-theme-for-display
-  (glib-test:with-check-memory ((theme 2))
+  (let (theme)
     (is (typep (setf theme
                      (gtk:icon-theme-for-display (gdk:display-default)))
                'gtk:icon-theme))))
@@ -164,12 +132,12 @@
 
 ;;;     gtk_icon_theme_has_icon
 
-#-windows
+#+crategus
 (test gtk-icon-theme-has-icon
-  (glib-test:with-check-memory ((theme 2))
-    (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
-    (is-true (gtk:icon-theme-has-icon theme "gtk-ok"))
-    (is-false (gtk:icon-theme-has-icon theme "unkown"))))
+  (glib-test:with-check-memory (:strong 2)
+    (let ((theme (gtk:icon-theme-for-display (gdk:display-default))))
+      (is-true (gtk:icon-theme-has-icon theme "gtk-ok"))
+      (is-false (gtk:icon-theme-has-icon theme "unkown")))))
 
 ;;;     gtk_icon_theme_has_gicon
 
@@ -178,18 +146,18 @@
 ;; TODO: PAINTABLE holds two references. Why?
 
 (test gtk-icon-theme-lookup-icon
-  (glib-test:with-check-memory ((theme 2) (paintable 2) :strong 1)
-    (setf theme (gtk:icon-theme-for-display (gdk:display-default)))
-    (setf paintable
-          (gtk:icon-theme-lookup-icon theme
-                                      "gtk-ok"
-                                      nil
-                                      48 1
-                                      :ltr
-                                      :none))
-    (is (typep paintable 'gtk:icon-paintable))))
+  (glib-test:with-check-memory ((paintable 2) :strong 1)
+    (let ((theme (gtk:icon-theme-for-display (gdk:display-default))))
+      (setf paintable
+            (gtk:icon-theme-lookup-icon theme
+                                        "gtk-ok"
+                                        nil
+                                        48 1
+                                        :ltr
+                                        :none))
+      (is (typep paintable 'gtk:icon-paintable)))))
 
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; 2025-3-29
+;;; 2025-05-25

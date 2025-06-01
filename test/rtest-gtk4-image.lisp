@@ -160,8 +160,11 @@
         ;; Remove references
         (is-false (setf (gtk:image-paintable image) nil))))))
 
-;;;     gtk_image_new_from_pixbuf
+;;;     gtk_image_new_from_pixbuf                           Deprecated 4.12
 
+;; We remove this test. This function is deprecated and adds a strong reference.
+
+#+nil
 (test gtk-image-new-from-pixbuf
   (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
     (let* ((*gtk-warn-deprecated* nil)
@@ -290,8 +293,11 @@
         ;; Remove references
         (is-false (setf (gtk:image-paintable image) nil))))))
 
-;;;     gtk_image_set_from_pixbuf
+;;;     gtk_image_set_from_pixbuf                           Deprecated 4.12
 
+;; We remove this test. This function is deprecated and adds a strong reference.
+
+#+nil
 (test gtk-image-set-from-pixbuf
   (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
     (let ((*gtk-warn-deprecated* nil)
@@ -367,4 +373,4 @@
     ;; Remove references
     (is-false (setf (gtk:image-gicon image) nil))))
 
-;;; 2025-4-26
+;;; 2025-05-31

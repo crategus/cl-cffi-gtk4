@@ -20,16 +20,8 @@
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkBox")))
   ;; Check children
-  #-windows
-  (is (or (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
-                 (glib-test:list-children "GtkBox"))
-          (equal '("GtkColorEditor" "GtkPlacesView" "GtkShortcutsGroup"
-                   "GtkShortcutsSection")
-                 (glib-test:list-children "GtkBox"))))
-  #+windows
-  (if *first-run-testsuite*
-      (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
-                 (glib-test:list-children "GtkBox"))))
+  (is (subsetp '("GtkShortcutsGroup" "GtkShortcutsSection")
+                 (glib-test:list-children "GtkBox") :test #'string=))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
@@ -180,4 +172,4 @@
     (is-false (gtk:box-remove box child2))
     (is-false (gtk:box-remove box child3))))
 
-;;; 2025-4-26
+;;; 2025-05-25

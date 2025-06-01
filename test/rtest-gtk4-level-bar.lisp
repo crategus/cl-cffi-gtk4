@@ -5,10 +5,6 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GTK_LEVEL_BAR_OFFSET_LOW
-;;;     GTK_LEVEL_BAR_OFFSET_HIGH
-;;;     GTK_LEVEL_BAR_OFFSET_FULL
-
 ;;;     GtkLevelBarMode
 
 (test gtk-level-bar-mode
@@ -85,34 +81,54 @@
                        (VALUE LEVEL-BAR-VALUE "value" "gdouble" T T)))
              (gobject:get-gtype-definition "GtkLevelBar"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     offset-changed
+
+(test gtk-level-bar-offset-changed-signal
+  (let* ((name "offset-changed")
+         (gtype (g:gtype "GtkLevelBar"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:DETAILED :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-level-bar-properties
-  (let ((levelbar (make-instance 'gtk:level-bar)))
+  (glib-test:with-check-memory (levelbar)
+    (is (typep (setf levelbar (make-instance 'gtk:level-bar)) 'gtk:level-bar))
     (is-false (gtk:level-bar-inverted levelbar))
     (is (= 1.0 (gtk:level-bar-max-value levelbar)))
     (is (= 0.0 (gtk:level-bar-min-value levelbar)))
     (is (eq :continuous (gtk:level-bar-mode levelbar)))
     (is (= 0.0 (gtk:level-bar-value levelbar)))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     offset-changed
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_level_bar_new
 
 (test gtk-level-bar-new
-  (is (typep (gtk:level-bar-new) 'gtk:level-bar)))
+  (glib-test:with-check-memory (levelbar)
+    (is (typep (setf levelbar (gtk:level-bar-new)) 'gtk:level-bar))))
 
 ;;;     gtk_level_bar_new_for_interval
 
 (test gtk-level-bar-new-for-interval
-  (is (typep (gtk:level-bar-new-for-interval 1/2 10) 'gtk:level-bar)))
+  (glib-test:with-check-memory (levelbar)
+    (is (typep (setf levelbar
+                     (gtk:level-bar-new-for-interval 1/2 10)) 'gtk:level-bar))))
 
 ;;;     gtk_level_bar_add_offset_value
 ;;;     gtk_level_bar_remove_offset_value
 ;;;     gtk_level_bar_get_offset_value
 
-;;; 2024-9-20
+;;; 2024-05-30

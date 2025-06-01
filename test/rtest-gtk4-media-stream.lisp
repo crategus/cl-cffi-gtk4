@@ -34,30 +34,30 @@
              (glib-test:list-signals "GtkMediaStream")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMediaStream" GTK:MEDIA-STREAM
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GdkPaintable")
-                        :TYPE-INITIALIZER "gtk_media_stream_get_type")
-                       ((DURATION MEDIA-STREAM-DURATION
-                         "duration" "gint64" T NIL)
-                        (ENDED MEDIA-STREAM-ENDED "ended" "gboolean" T NIL)
-                        (ERROR MEDIA-STREAM-ERROR "error" "GError" T NIL)
-                        (HAS-AUDIO MEDIA-STREAM-HAS-AUDIO
-                         "has-audio" "gboolean" T NIL)
-                        (HAS-VIDEO MEDIA-STREAM-HAS-VIDEO
-                         "has-video" "gboolean" T NIL)
-                        (LOOP MEDIA-STREAM-LOOP "loop" "gboolean" T T)
-                        (MUTED MEDIA-STREAM-MUTED "muted" "gboolean" T T)
-                        (PLAYING MEDIA-STREAM-PLAYING "playing" "gboolean" T T)
-                        (PREPARED MEDIA-STREAM-PREPARED
-                         "prepared" "gboolean" T T)
-                        (SEEKABLE MEDIA-STREAM-SEEKABLE
-                         "seekable" "gboolean" T NIL)
-                        (SEEKING MEDIA-STREAM-SEEKING
-                         "seeking" "gboolean" T NIL)
-                        (TIMESTAMP MEDIA-STREAM-TIMESTAMP
-                         "timestamp" "gint64" T NIL)
-                        (VOLUME MEDIA-STREAM-VOLUME "volume" "gdouble" T T)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GdkPaintable")
+                       :TYPE-INITIALIZER "gtk_media_stream_get_type")
+                      ((DURATION MEDIA-STREAM-DURATION
+                        "duration" "gint64" T NIL)
+                       (ENDED MEDIA-STREAM-ENDED "ended" "gboolean" T NIL)
+                       (ERROR MEDIA-STREAM-ERROR "error" "GError" T NIL)
+                       (HAS-AUDIO MEDIA-STREAM-HAS-AUDIO
+                        "has-audio" "gboolean" T NIL)
+                       (HAS-VIDEO MEDIA-STREAM-HAS-VIDEO
+                        "has-video" "gboolean" T NIL)
+                       (LOOP MEDIA-STREAM-LOOP "loop" "gboolean" T T)
+                       (MUTED MEDIA-STREAM-MUTED "muted" "gboolean" T T)
+                       (PLAYING MEDIA-STREAM-PLAYING "playing" "gboolean" T T)
+                       (PREPARED MEDIA-STREAM-PREPARED
+                        "prepared" "gboolean" T T)
+                       (SEEKABLE MEDIA-STREAM-SEEKABLE
+                        "seekable" "gboolean" T NIL)
+                       (SEEKING MEDIA-STREAM-SEEKING
+                        "seeking" "gboolean" T NIL)
+                       (TIMESTAMP MEDIA-STREAM-TIMESTAMP
+                        "timestamp" "gint64" T NIL)
+                       (VOLUME MEDIA-STREAM-VOLUME "volume" "gdouble" T T)))
              (gobject:get-gtype-definition "GtkMediaStream"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -75,6 +75,28 @@
 ;;;     seeking
 ;;;     timestamp
 ;;;     volume
+
+(test gtk-media-stream-properties
+  (glib-test:with-check-memory (video mediastream)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo.webm")))
+      (is (typep (setf video (gtk:video-new-for-filename path)) 'gtk:video))
+      (is (typep (setf mediastream
+                       (gtk:video-media-stream video)) 'gtk:media-stream))
+      (is (= 0 (gtk:media-stream-duration mediastream)))
+      (is-false (gtk:media-stream-ended mediastream))
+      (is-false (gtk:media-stream-error mediastream))
+      (is-false (gtk:media-stream-has-audio mediastream))
+      (is-false (gtk:media-stream-has-video mediastream))
+      (is-false (gtk:media-stream-loop mediastream))
+      (is-false (gtk:media-stream-muted mediastream))
+      (is-false (gtk:media-stream-playing mediastream))
+      (is-false (gtk:media-stream-prepared mediastream))
+      (is-false (gtk:media-stream-seekable mediastream))
+      (is-false (gtk:media-stream-seeking mediastream))
+      (is (= 0 (gtk:media-stream-timestamp mediastream)))
+      (is (= 1.0d0 (gtk:media-stream-volume mediastream)))
+      ;; Remove references
+      (is-false (setf (gtk:video-media-stream video) nil)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
