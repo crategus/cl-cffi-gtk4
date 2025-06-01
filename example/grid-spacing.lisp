@@ -10,11 +10,11 @@
 ;;;; <tt>gtk:grid</tt> widget when several children occupy the same grid cell
 ;;;; is undefined.
 ;;;;
-;;;; 2024-12-3
+;;;; 2025-05-10
 
 (in-package :gtk4-example)
 
-(defun do-grid-spacing (&optional (application nil))
+(defun do-grid-spacing (&optional application)
   (let* ((grid (make-instance 'gtk:grid
                               :margin-top 12
                               :margin-bottom 12

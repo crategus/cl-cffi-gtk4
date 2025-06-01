@@ -13,9 +13,9 @@
 ;;;;
 ;;;; 2023-11-25
 
-(in-package :gtk)
+(in-package :gtk4-example)
 
-(gobject:define-gobject-subclass "GtkColor" color
+(gobject:define-gobject-subclass "Color" color
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))
@@ -81,12 +81,6 @@
 (trace color-new)
 (trace color-rgba)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (export 'color)
-  (export 'color-new)
-  (export 'color-name)
-  (export 'color-rgba))
-
 #|
 static void
 gtk_color_list_init (GtkColorList *self)
@@ -128,14 +122,13 @@ gtk_color_list_init (GtkColorList *self)
 }
 |#
 
-
 (defun get-rgb-markup (color)
   (when color
     (let ((rgba (color-rgba color)))
       (format nil "<b>R:</b> ~d <b>G:</b> ~d <b>B:</b> ~d"
                   (round (* 255 (gdk:rgba-red rgba)))
-                  (round (* 255 (gdk:rgba-red rgba)))
-                  (round (* 255 (gdk:rgba-red rgba)))))))
+                  (round (* 255 (gdk:rgba-green rgba)))
+                  (round (* 255 (gdk:rgba-blue rgba)))))))
 
 (defun get-hsv-markup (color)
   (when color
@@ -143,7 +136,6 @@ gtk_color_list_init (GtkColorList *self)
                 (color-hue color)
                 (color-saturation color)
                 (color-value color))))
-
 
 #|
 static void
@@ -232,7 +224,7 @@ add_colors (GtkWidget     *widget,
 }
 |#
 
-(gobject:define-gobject-subclass "GtkColorList" color-list
+(gobject:define-gobject-subclass "ColorList" color-list
   (:superclass g:object
    :export t
    :interfaces ("GListModel"))
@@ -241,10 +233,6 @@ add_colors (GtkWidget     *widget,
    (size
     color-list-size
     "size" "guint" t t)))
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (export 'color-list)
-  (export 'color-list-size))
 
 (defmethod initialize-instance :after ((obj color-list) &key)
   (format t "in INITIAlIZE-INSTANCE~%")
@@ -264,7 +252,7 @@ add_colors (GtkWidget     *widget,
     (g:object-notify obj "size")))
 
 (defmethod gio:list-model-get-item-type-impl ((model color-list))
-  (g:gtype "GtkColor"))
+  (g:gtype "Color"))
 
 (defmethod gio:list-model-get-n-items-impl ((model color-list))
   (color-list-size model))
@@ -440,8 +428,6 @@ do_listview_colors (GtkWidget *do_widget)
   (export 'color-list-new))
 
 ;;; ----------------------------------------------------------------------------
-
-(in-package :gtk4-example)
 
 #|
 static void
@@ -644,7 +630,7 @@ refill (GtkWidget    *button,
 (defun do-grid-view-colors (&optional application)
   (let* ((sort-model (make-instance 'gtk:sort-list-model
                                     ;; FIXME: a size of 0 causes an error
-                                    :model (gtk:color-list-new 1)
+                                    :model (color-list-new 1)
                                     :sorter nil
                                     :incremental t))
          (selection (make-instance 'gtk:multi-selection
@@ -848,8 +834,8 @@ limit_changed_cb (GtkDropDown  *dropdown,
               (format t " newlimit : ~a~%" newlimit)
 
               (setf (g:object-data colors "limit") newlimit)
-              (when (= oldlimit (gtk:color-list-size colors))
-                (setf (gtk:color-list-size colors) newlimit)))))
+              (when (= oldlimit (color-list-size colors))
+                (setf (color-list-size colors) newlimit)))))
 
 
 #|

@@ -17,11 +17,11 @@
 ;;;; minimally placed between all children in the box. Note that spacing is
 ;;;; added between the children.
 ;;;;
-;;;; 2024-4-4
+;;;; 2025-05-10
 
 (in-package :gtk4-example)
 
-(defun do-box-append (&optional (application nil))
+(defun do-box-append (&optional application)
   (flet ((make-box (homogeneous spacing)
            (let ((box (make-instance 'gtk:box
                                      :orientation :horizontal

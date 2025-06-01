@@ -8,28 +8,30 @@
 ;;;; time.
 ;;;;
 ;;;; Typically, this will be done using GtkBuilder .ui files with the help of
-;;;; the <binding> tag, but this demo shows the code that runs behind that.
+;;;; the 'binding' tag, but this demo shows the code that runs behind that.
 ;;;;
 ;;;; This example uses the local-time libraray for date and time manipulation.
 ;;;;
-;;;; Last version: 2024-5-5
+;;;; Last version: 2025-05-06
 
-(in-package :gtk)
+(in-package :gtk4-example)
 
-;; This is our object. It is just a timezone
-;;
-;; Finally, we define the type. The important part is adding the
-;; paintable interface, so GTK knows that this object can indeed
-;; be drawn.
-;;
-;; Initialize the paintable interface. This way we turn our clocks
-;; into objects that can be drawn. There are more functions to this
-;; interface to define desired size, but this is enough.
-(gobject:define-gobject-subclass "GtkClock" clock
+;; This is the Clock object. It is just a timezone. The Clock object is
+;; derived from GObject and includes the GdkPaintable interface. This allows
+;; us to define a gdk:paintable-snapshot-impl method that draws the clock for
+;; display. The TIME and LOCATION slots are defined as GObject properties and
+;; can be used with all GTK property functionality. The INITIALIZED-P and
+;; TIMEZONE slots are ordinary Lisp slots.
+(gobject:define-gobject-subclass "Clock" clock
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"))
   ((:cl
+    initialized-p
+    :accessor clock-initialized-p
+    :initform nil
+    :allocation :class)
+   (:cl
     timezone
     :accessor clock-timezone
     :initform local-time:+utc-zone+)
@@ -41,8 +43,11 @@
     "location" "gchararray" t t)))
 
 (defmethod initialize-instance :after ((obj clock) &key)
+  (unless (clock-initialized-p obj)
+    (format t "Read timezone repository~%")
+    (setf (clock-initialized-p obj) t)
+    (local-time:reread-timezone-repository))
   (let ((location (clock-location obj)))
-    (local-time:reread-timezone-repository)
     (if (> (length location) 0)
       ;; Set the timezone from the location
       (setf (clock-timezone obj)
@@ -56,18 +61,13 @@
                                           :format '(:hour ":" :min)
                                           :timezone (clock-timezone obj)))))
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (export 'clock)
-  (export 'clock-location)
-  (export 'clock-timezone))
-
 (defmethod gdk:paintable-snapshot-impl ((paintable clock) snapshot width height)
   (let ((black (gdk:rgba-new :red 0 :green 0 :blue 0 :alpha 1)))
     ;; save/restore is necessary so we can undo the transforms we start out with
     (gtk:snapshot-save snapshot)
     ;; First, we move the (0, 0) point to the center of the area so
     ;; we can draw everything relative to it.
-    (graphene:with-point (point (/ width 2.0) (/ height 2))
+    (graphene:with-point (point (/ width 2.0) (/ height 2.0))
       (gtk:snapshot-translate snapshot point))
     ;; Next we scale it, so that we can pretend that the clock is
     ;; 100px in size. That way, we don't need to do any complicated
@@ -81,11 +81,8 @@
 
     ;; First, draw a circle. This is a neat little trick to draw a circle
     ;; without requiring Cairo.
-    ;; TODO:Improve the implementation of GskRoundedRect to avoid foreign
-    ;; objects
-    (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-      (graphene:with-rect (rect -50 -50 100 100)
-        (gsk:rounded-rect-init-from-rect outline rect 50)
+    (graphene:with-rect (rect -50 -50 100 100)
+      (gsk:with-rounded-rect (outline rect 50)
         (gtk:snapshot-append-border snapshot
                                     outline
                                     '(4 4 4 4)
@@ -95,7 +92,7 @@
     ;; points to, we just rotate everything and then draw the hand as if it
     ;; was :00. We don't even need to care about am/pm here because rotations
     ;; just work.
-    (let* ((zone (gtk:clock-timezone paintable))
+    (let* ((zone (clock-timezone paintable))
            ;; Create a timestamp with the actuell time
            (time (local-time:now))
            (hour (local-time:timestamp-hour time :timezone zone))
@@ -103,9 +100,8 @@
            (second (local-time:timestamp-second time :timezone zone)))
       (gtk:snapshot-save snapshot)
       (gtk:snapshot-rotate snapshot (+ (* 30 hour) (* 0.5 minute)))
-      (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-        (graphene:with-rect (rect -2 -23 4 25)
-          (gsk:rounded-rect-init-from-rect outline rect 2.0)
+      (graphene:with-rect (rect -2 -23 4 25)
+        (gsk:with-rounded-rect (outline rect 2.0)
           (gtk:snapshot-push-rounded-clip snapshot outline)
           (gtk:snapshot-append-color snapshot
                                      black
@@ -149,15 +145,14 @@
 (defmethod gdk:paintable-get-intrinsic-height-impl ((paintable clock))
   100)
 
-(let (;; This is the list of all the ticking clocks
+(let (;; This is the list of all the ticking clocks and the ID of the timeout
+      ;; source that is updating all ticking clocks.
       (clocks nil)
-      ;; This is the ID of the timeout source that is updating all
-      ;; ticking clocks.
       (ticking-clock-id 0))
 
   (defun clock-tick ()
+    ;; Update the time of all clocks
     (dolist (clock clocks)
-      ;; Update the time of the clock
       (setf (clock-time clock)
             (local-time:format-timestring nil
                                           (local-time:now)
@@ -174,7 +169,7 @@
   (defun clock-start-ticking (clock)
     (when (= 0 ticking-clock-id)
        (format t "Start ticking clocks~%")
-       ;; if no clock is ticking yet, start
+       ;; If no clock is ticking yet, start
        (setf ticking-clock-id
              (g:timeout-add-seconds 1 #'clock-tick)))
     (setf clocks (cons clock clocks)))
@@ -191,14 +186,8 @@
     (dolist (clock clocks)
       (clock-stop-ticking clock))))
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (export 'clock-start-ticking)
-  (export 'clock-stop-ticking-all))
-
-(in-package :gtk4-example)
-
 (defun create-clocks-model ()
-  (let ((store (g:list-store-new "GtkClock"))
+  (let ((store (g:list-store-new "Clock"))
         ;; A bunch of timezones with GTK hackers
         (timezones '("UTC"
                      "Europe/London"
@@ -209,8 +198,8 @@
                      "Asia/Kolkata"
                      "Asia/Shanghai")))
     (dolist (timezone timezones)
-      (let ((clock (make-instance 'gtk:clock :location timezone)))
-        (gtk:clock-start-ticking clock)
+      (let ((clock (make-instance 'clock :location timezone)))
+        (clock-start-ticking clock)
         (g:list-store-append store clock)))
     store))
 
@@ -226,47 +215,47 @@
                                 :halign :center
                                 :valign :center))
         expression clock-expression)
-    (setf (gtk:list-item-child item) box)
-    ;; First, we create an expression that gets us the clock from the listitem:
+    ;; First, we create an expression that gets us the clock from the list item:
     ;;  1. Create an expression that gets the list item.
     ;;  2. Use that expression's "item" property to get the clock
     (setf expression
           (gtk:constant-expression-new "GtkListItem" item))
     (setf clock-expression
           (gtk:property-expression-new "GtkListItem" expression "item"))
-    ;; Bind the clock's location to a label.
-    ;; This is easy: We just get the "location" property of the clock.
+    ;; Bind the clock's location to a label. This is easy: We just get the
+    ;; "location" property of the clock.
     (setf expression
-          (gtk:property-expression-new "GtkClock"
+          (gtk:property-expression-new "Clock"
                                        (gtk:expression-ref clock-expression)
                                        "location"))
-    ;; Now create the label and bind the expression to it.
+    ;; Now create the label and bind the expression to it
     (gtk:expression-bind expression label-location "label" label-location)
-    (gtk:box-append box label-location)
     ;; Here we bind the item itself to a GdkPicture.
     ;; This is simply done by using the clock expression itself.
     (setf expression (gtk:expression-ref clock-expression))
     ;; Now create the widget and bind the expression to it.
     (gtk:expression-bind expression picture "paintable" picture)
-    (gtk:box-append box picture)
     ;; And finally, everything comes together.
     ;; We create a label for displaying the time as text.
     ;; For that, we need to transform the "GDateTime" of the
     ;; time property into a string so that the label can display it.
     (setf expression
-          (gtk:property-expression-new "GtkClock"
+          (gtk:property-expression-new "Clock"
                                        (gtk:expression-ref clock-expression)
                                        "time"))
     ;; Now create the label and bind the expression to it.
     (gtk:expression-bind expression label-time "label" label-time)
-    (gtk:box-append box label-time)))
+    ;; Pack widgets in the box
+    (gtk:box-append box label-location)
+    (gtk:box-append box picture)
+    (gtk:box-append box label-time)
+    ;; Set the box as the child widget for the list item
+    (setf (gtk:list-item-child item) box)))
 
 (defun do-grid-view-clocks (&optional application)
   (let* ((vbox (make-instance 'gtk:box
                               :orientation :vertical))
-         ;; Create the factory that creates the listitems. Because we used
-         ;; bindings above during setup, we only need to connect to the setup
-         ;; signal. The bindings take care of the bind step.
+         ;; Create the factory that creates the listitems
          (factory (make-instance 'gtk:signal-list-item-factory))
          (model (gtk:no-selection-new (create-clocks-model)))
          (gridview (make-instance 'gtk:grid-view
@@ -288,7 +277,9 @@
     (g:signal-connect window "close-request"
                       (lambda (window)
                         (declare (ignore window))
-                        (gtk:clock-stop-ticking-all)))
+                        (clock-stop-ticking-all)))
+    ;; Because we use bindings in the "setup" handler, we only need to connect
+    ;; to the "setup" signal. The bindings take care of the bind step.
     (g:signal-connect factory "setup"
                       (lambda (factory item)
                         (clocks-setup-listitem-cb factory item)))
