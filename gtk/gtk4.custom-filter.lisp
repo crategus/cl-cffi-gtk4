@@ -63,7 +63,7 @@
 
 #+liber-documentation
 (setf (documentation 'custom-filter 'type)
- "@version{2024-9-27}
+ "@version{2024-09-27}
   @begin{short}
     The @class{gtk:custom-filter} object is a @class{gtk:filter} object that
     uses a callback to determine whether to include an item or not.
@@ -83,7 +83,7 @@
 
 (defun custom-filter-new (&optional func)
  #+liber-documentation
- "@version{2024-9-27}
+ "@version{2024-09-27}
   @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
     to filter items, the default value is @code{nil}}
   @return{The new @class{gtk:custom-filter} object.}
@@ -120,9 +120,9 @@
 (setf (liber:alias-for-symbol 'custom-filter-func)
       "Callback"
       (liber:symbol-documentation 'custom-filter-func)
- "@version{2024-9-27}
+ "@version{2025-06-06}
   @syntax{lambda (item) => result}
-  @argument[item]{a @class{g:object} instance with the item to be matched}
+  @argument[item]{a @class{g:object} instance for the item to be matched}
   @argument[result]{@em{true} to keep the item around}
   @begin{short}
     User function that is called to determine if the item should be matched.
@@ -146,10 +146,10 @@
 
 (defun custom-filter-set-filter-func (filter &optional func)
  #+liber-documentation
- "@version{2024-9-27}
+ "@version{2025-06-06}
   @argument[filter]{a @class{gtk:custom-filter} object}
   @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
-    to filter items, or the default value @code{nil}} to unset the function
+    to filter items, or the default value @code{nil} to unset the function}
   @begin{short}
     Sets (or unsets) the function used for filtering items.
   @end{short}

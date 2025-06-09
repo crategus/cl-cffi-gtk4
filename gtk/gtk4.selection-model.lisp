@@ -79,7 +79,7 @@
 (setf (liber:alias-for-class 'selection-model)
       "Interface"
       (documentation 'selection-model 'type)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @begin{short}
     The @class{gtk:selection-model} interface is an interface that extends the
     @class{g:list-model} interface by adding support for selections.
@@ -148,7 +148,7 @@ lambda (model pos n-items)    :run-last
 (cffi:defcfun ("gtk_selection_model_is_selected" selection-model-is-selected)
     :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the position of the item to query}
   @return{@em{True} if the item is selected.}
@@ -179,7 +179,7 @@ lambda (model pos n-items)    :run-last
 (cffi:defcfun ("gtk_selection_model_get_selection" selection-model-selection)
     (g:boxed bitset :return)
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @syntax{(gtk:selection-model-selection model) => selected}
   @syntax{(setf (gtk:selection-model-selection model mask) selected)}
   @argument[model]{a @class{gtk:selection-model} object}
@@ -237,7 +237,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_get_selection_in_range"
                selection-model-selection-in-range) (g:boxed bitset :return)
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the start of the queried range}
   @argument[n-items]{an unsigned integer for the number of items in the queried
@@ -273,7 +273,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_select_item" selection-model-select-item)
     :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the position to select an item in
     the model}
@@ -300,7 +300,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_unselect_item"
                selection-model-unselect-item) :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the position of the item to unselect}
   @begin{return}
@@ -323,7 +323,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_select_range" selection-model-select-range)
     :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the first item to select}
   @argument[n-items]{an unsigned integer for the number of items to select}
@@ -351,7 +351,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_unselect_range"
                selection-model-unselect-range) :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the first item to unselect}
   @argument[n-items]{an unsigned integer for the number of items to unselect}
@@ -376,7 +376,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_select_all" selection-model-select-all)
     :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @begin{return}
     @em{True} if this action was supported and no fallback should be tried.
@@ -397,7 +397,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_unselect_all" selection-model-unselect-all)
     :boolean
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @begin{return}
     @em{True} if this action was supported and no fallback should be tried.
@@ -418,7 +418,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_selection_changed"
                selection-model-selection-changed) :void
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the first changed item}
   @argument[n-items]{an unsigned integer for the number of changed items}

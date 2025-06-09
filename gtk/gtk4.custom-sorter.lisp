@@ -62,7 +62,7 @@
 
 #+liber-documentation
 (setf (documentation 'custom-sorter 'type)
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @begin{short}
     The @class{gtk:custom-sorter} object is a @class{gtk:sorter} implementation
     that sorts via a @symbol{g:compare-data-func} callback function.
@@ -82,7 +82,7 @@
 
 (defun custom-sorter-new (&optional func)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[func]{a @symbol{g:compare-data-func} callback function to use for
     sorting}
   @return{The new @class{gtk:custom-sorter} object.}
@@ -115,7 +115,7 @@
 
 (defun custom-sorter-set-sort-func (sorter func)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[sorter]{a @class{gtk:custom-sorter} object}
   @argument[func]{a @symbol{g:compare-data-func} callback function}
   @begin{short}

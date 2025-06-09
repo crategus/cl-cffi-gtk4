@@ -91,6 +91,8 @@
       @about-function{bitset-shift-left}
       @about-function{bitset-shift-right}
       @about-function{bitset-splice}
+    @end{subsection}
+    @begin[GtkBitsetIter]{subsection}
       @about-symbol{bitset-iter}
       @about-function{bitset-iter-init-first}
       @about-function{bitset-iter-init-last}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.bookmark-list.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -54,9 +54,9 @@
 ;;;     attributes
 ;;;     filename
 ;;;     io-priority
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     loading
-;;;     n-items                                            Since 4,8
+;;;     n-items                                             Since 4,8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -102,7 +102,7 @@
 
 #+liber-documentation
 (setf (documentation 'bookmark-list 'type)
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @begin{short}
     The @class{gtk:bookmark-list} class is a list model that wraps the
     @code{GBookmarkFile} class.
@@ -138,11 +138,11 @@
 (setf (liber:alias-for-function 'bookmark-list-attributes)
       "Accessor"
       (documentation 'bookmark-list-attributes 'function)
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @syntax{(gtk:bookmark-list-attributes object) => attributes}
   @syntax{(setf (gtk:bookmark-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:bookmark-list} object}
-  @argument[attributes]{a string with the attributes}
+  @argument[attributes]{a string for the attributes}
   @begin{short}
     Accessor of the @slot[gtk:bookmark-list]{attributes} slot of the
     @class{gtk:bookmark-list} class.
@@ -169,10 +169,10 @@
 (setf (liber:alias-for-function 'bookmark-list-filename)
       "Accessor"
       (documentation 'bookmark-list-filename 'function)
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @syntax{(gtk:bookmark-list-filename object) => filename}
   @argument[object]{a @class{gtk:bookmark-list} object}
-  @argument[filename]{a string with the filename of the @file{.xbel} file}
+  @argument[filename]{a string for the filename of the @file{.xbel} file}
   @begin{short}
     Accessor of the @slot[gtk:bookmark-list]{filename} slot of the
     @class{gtk:bookmark-list} class.
@@ -196,18 +196,17 @@
 (setf (documentation (liber:slot-documentation "io-priority" 'bookmark-list) t)
  "The @code{io-priority} property of type @code{:int} (Read / Write) @br{}
   The priority used when loading. @br{}
-  Allowed values: >= -2147483647 @br{}
   Default value: @var{g:+priority-default+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'bookmark-list-io-priority)
       "Accessor"
       (documentation 'bookmark-list-io-priority 'function)
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @syntax{(gtk:bookmark-list-io-priority object) => priority}
   @syntax{(setf (gtk:bookmark-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:bookmark-list} object}
-  @argument[priority]{an integer with the IO priority to use}
+  @argument[priority]{an integer for the IO priority to use}
   @begin{short}
     Accessor of the @slot[gtk:bookmark-list]{io-priority} slot of the
     @class{gtk:bookmark-list} class.
@@ -284,10 +283,10 @@
 (setf (liber:alias-for-function 'bookmark-list-n-items)
       "Accessor"
       (documentation 'bookmark-list-n-items 'function)
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @syntax{(gtk:bookmark-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:bookmark-list} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:bookmark-list]{n-items} slot of the
@@ -304,9 +303,9 @@
 
 (defun bookmark-list-new (filename attributes)
  #+liber-documentation
- "@version{2024-12-15}
-  @argument[filename]{a string with the bookmark file to load, or @code{nil}}
-  @argument[attributes]{a string with the attributes to query}
+ "@version{2025-06-08}
+  @argument[filename]{a string for the bookmark file to load, or @code{nil}}
+  @argument[attributes]{a string for the attributes to query}
   @return{The new @class{gtk:bookmark-list} object.}
   @begin{short}
     Creates a new bookmark list for the given @arg{attributes}.
@@ -315,7 +314,7 @@
   @file{$XDG_USER_DATA/recently-used.xbel} is used.
   @see-class{gtk:bookmark-list}"
   (make-instance 'bookmark-list
-                 :filename filename
+                 :filename (or filename (cffi:null-pointer))
                  :attributes attributes))
 
 (export 'bookmark-list-new)
@@ -326,7 +325,7 @@
 
 (cffi:defcfun ("gtk_bookmark_list_is_loading" bookmark-list-is-loading) :boolean
  #+liber-documentation
- "@version{2024-12-15}
+ "@version{2025-06-08}
   @argument[model]{a @class{gtk:bookmark-list} object}
   @return{@em{True} if @arg{model} is loading.}
   @begin{short}
@@ -337,7 +336,7 @@
   between runs.
   @begin[Notes]{dictionary}
     This function duplicates the @fun{gtk:bookmark-list-loading} accessor
-    funtion.
+    function.
   @end{dictionary}
   @see-class{gtk:bookmark-list}
   @see-function{gtk:bookmark-list-loading}"

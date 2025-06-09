@@ -47,16 +47,16 @@
 ;;;     gtk_file_filter_add_mime_type
 ;;;     gtk_file_filter_add_pattern
 ;;;     gtk_file_filter_add_pixbuf_formats
-;;;     gtk_file_filter_add_suffix                         Since 4.4
+;;;     gtk_file_filter_add_suffix                          Since 4.4
 ;;;     gtk_file_filter_get_attributes
 ;;;     gtk_file_filter_to_gvariant
 ;;;
 ;;; Properties
 ;;;
-;;;     mime-types                                         Since 4.10
+;;;     mime-types                                          Since 4.10
 ;;;     name
-;;;     patterns                                           Since 4.10
-;;;     suffixes                                           Since 4.10
+;;;     patterns                                            Since 4.10
+;;;     suffixes                                            Since 4.10
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -98,14 +98,15 @@
 
 #+liber-documentation
 (setf (documentation 'file-filter 'type)
- "@version{2025-3-13}
+ "@version{2025-06-06}
   @begin{short}
     The @class{gtk:file-filter} object can be used to restrict the files being
-    shown in a @class{gtk:file-chooser} widget.
+    shown in a file chooser.
   @end{short}
   Files can be filtered based on their name with the
-  @fun{gtk:file-filter-add-pattern} function or on their MIME type with the
-  @fun{gtk:file-filter-add-mime-type} function.
+  @fun{gtk:file-filter-add-pattern} and @fun{gtk:file-filter-add-suffix}
+  function or on their MIME type with the @fun{gtk:file-filter-add-mime-type}
+  function.
 
   Filtering by MIME types handles aliasing and subclassing of MIME types. For
   example, a filter for @file{text/plain} also matches a file with MIME type
@@ -114,10 +115,10 @@
   wildcards for the subtype of a MIME type, so you can, for example, filter for
   @file{image/*}.
 
-  Normally, file filters are used by adding them to a @class{gtk:file-chooser}
-  widget, see the @fun{gtk:file-chooser-add-filter} function, but it is also
-  possible to manually use a file filter on any @class{gtk:filter-list-model}
-  object containing @class{g:file-info} objects.
+  Normally, file filters are used by adding them to a file chooser, see the
+  @fun{gtk:file-dialog-filters} function, but it is also possible to manually
+  use a file filter on any @class{gtk:filter-list-model} object containing
+  @class{g:file-info} objects.
   @begin[GtkFileFilter as GtkBuildable]{dictionary}
     The @class{gtk:file-filter} implementation of the @class{gtk:buildable}
     interface supports adding rules using the @code{<mime-types>} and
@@ -179,7 +180,7 @@
 (setf (liber:alias-for-function 'file-filter-name)
       "Accessor"
       (documentation 'file-filter-name 'function)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @syntax{(gtk:file-filter-name object) => name}
   @syntax{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
@@ -225,7 +226,7 @@
 
 (defun file-filter-new ()
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Creates a new file filter with no rules added to it.
@@ -258,7 +259,7 @@
                file-filter-new-from-gvariant)
     (g:object file-filter :return)
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[variant]{a @symbol{g:variant} parameter of @code{a{sv@}} type}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
@@ -278,13 +279,13 @@
 
 (cffi:defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-06-06}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @argument[mime-type]{a string for the name of the MIME type}
+  @argument[mime]{a string for the name of the MIME type}
   @short{Adds a rule allowing a given MIME type to the file filter.}
   @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
-  (mime-type :string))
+  (mime :string))
 
 (export 'file-filter-add-mime-type)
 
@@ -294,7 +295,7 @@
 
 (cffi:defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[pattern]{a string for a shell style glob}
   @begin{short}
@@ -315,11 +316,11 @@
 (cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
                file-filter-add-pixbuf-formats) :void
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
     Adds a rule allowing image files in the formats supported by the
-    @class{gdk-pixbuf:pixbuf} object.
+    @class{gdk-pixbuf:pixbuf} class.
   @end{short}
   This is equivalent to calling the @fun{gtk:file-filter-add-mime-type}
   function for all the supported MIME types.
@@ -337,7 +338,7 @@
 #+gtk-4-4
 (cffi:defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[suffix]{a string for the filename suffix to match}
   @begin{short}
@@ -361,7 +362,7 @@
 (cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-06-06}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The list of strings with the attributes.}
   @begin{short}
@@ -369,11 +370,9 @@
     object passed to this file filter.
   @end{short}
   This function will not typically be used by applications. It is intended
-  principally for use in the implementation of the @class{gtk:file-chooser}
-  widget.
+  intended for use in file chooser implementations.
   @see-class{gtk:file-filter}
-  @see-class{g:file-info}
-  @see-class{gtk:file-chooser}"
+  @see-class{g:file-info}"
   (filter (g:object file-filter)))
 
 (export 'file-filter-attributes)
@@ -385,7 +384,7 @@
 (cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[filter]{a @class{gtk:file-filter} object}
   @return{The new @symbol{g:variant} parameter.}
   @short{Serialize a file filter to a @code{a{sv@}} variant.}

@@ -34,12 +34,12 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkStringSorter
-;;;     GtkCollation                                       Since 4.10
+;;;     GtkCollation                                        Since 4.10
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_string_sorter_get_collation                    Since 4.10
-;;;     gtk_string_sorter_set_collation                    Since 4.10
+;;;     gtk_string_sorter_get_collation                     Since 4.10
+;;;     gtk_string_sorter_set_collation                     Since 4.10
 ;;;     gtk_string_sorter_get_expression
 ;;;     gtk_string_sorter_set_expression
 ;;;     gtk_string_sorter_get_ignore_case
@@ -51,7 +51,7 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     collation                                          Since 4.10
+;;;     collation                                           Since 4.10
 ;;;     expression
 ;;;     ignore-case
 ;;;

@@ -117,7 +117,7 @@ lambda (model pos n-items)    :run-last
 
 (defun section-model-section (model pos)
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:section-model-section model pos) => start, end}
   @argument[model]{a @class{gtk:section-model} object}
   @argument[pos]{an unsigned integer for the position of the item to query}
@@ -149,7 +149,7 @@ lambda (model pos n-items)    :run-last
 (cffi:defcfun ("gtk_section_model_sections_changed"
                section-model-sections-changed) :void
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{a @class{gtk:section-model} object}
   @argument[pos]{an unsigned integer for the first item hat may have
     changed}

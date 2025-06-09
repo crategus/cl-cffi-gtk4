@@ -28,11 +28,12 @@
              (glib-test:list-enum-item-nicks "GtkFilterMatch")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkFilterMatch" GTK:FILTER-MATCH
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_filter_match_get_type")
-                       (:SOME 0)
-                       (:NONE 1)
-                       (:ALL 2))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_filter_match_get_type")
+                                    (:SOME 0)
+                                    (:NONE 1)
+                                    (:ALL 2))
              (gobject:get-gtype-definition "GtkFilterMatch"))))
 
 ;;;     GtkFilterChange
@@ -58,11 +59,12 @@
              (glib-test:list-enum-item-nicks "GtkFilterChange")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkFilterChange" GTK:FILTER-CHANGE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_filter_change_get_type")
-                       (:DIFFERENT 0)
-                       (:LESS-STRICT 1)
-                       (:MORE-STRICT 2))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_filter_change_get_type")
+                                    (:DIFFERENT 0)
+                                    (:LESS-STRICT 1)
+                                    (:MORE-STRICT 2))
              (gobject:get-gtype-definition "GtkFilterChange"))))
 
 ;;;     GtkFilter
@@ -98,11 +100,11 @@
              (glib-test:list-signals "GtkFilter")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFilter" GTK:FILTER
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_filter_get_type")
-                       NIL)
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_filter_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GtkFilter"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -169,7 +171,7 @@
                                  (gtk:string-object-new "gtk:string-filter")))
       (is-false (gtk:filter-match filter
                                  (gtk:string-object-new "gtk:button")))
-      ;; Free references
+      ;; Remove references
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
@@ -207,4 +209,4 @@
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2025-05-25
+;;; 2025-06-06

@@ -43,7 +43,7 @@
 ;;;     gtk_sorter_get_order
 ;;;     gtk_sorter_changed
 ;;;
-;;;     gtk_ordering_from_cmpfunc                          Since 4.2
+;;;     gtk_ordering_from_cmpfunc                           Since 4.2
 ;;;
 ;;; Signals
 ;;;
@@ -213,7 +213,7 @@ lambda (sorter change)    :run-last
 
 (cffi:defcfun ("gtk_sorter_compare" sorter-compare) ordering
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[sorter]{a @class{gtk:sorter} object}
   @argument[obj1]{a @class{g:object} instance for the first item to compare}
   @argument[obj2]{a @class{g:object} instance for the second item to compare}
@@ -303,7 +303,7 @@ lambda (sorter change)    :run-last
 #+gtk-4-2
 (defun ordering-from-cmpfunc (result)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[result]{an integer for the result of a comparison function}
   @return{The @symbol{gtk:ordering} value.}
   @begin{short}

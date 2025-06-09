@@ -47,9 +47,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'flatten-list-model 'type)
- "@version{2024-12-9}
+ "@version{2024-12-09}
   @begin{short}
     The @class{gtk:flatten-list-model} object is a list model that takes a list
     model containing list models and flattens it into a single model.
@@ -147,7 +147,7 @@
 (setf (liber:alias-for-function 'flatten-list-model-model)
       "Accessor"
       (documentation 'flatten-list-model-model 'function)
- "@version{2024-12-9}
+ "@version{2024-12-09}
   @syntax{(gtk:flatten-list-model-model object) => model}
   @syntax{(setf (gtk:flatten-list-model-model object) model)}
   @argument[object]{a @class{gtk:flatten-list-model} object}
@@ -174,7 +174,7 @@
 (setf (liber:alias-for-function 'flatten-list-model-n-items)
       "Accessor"
       (documentation 'flatten-list-model-n-items 'function)
- "@version{2024-12-9}
+ "@version{2024-12-09}
   @syntax{(gtk:flatten-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -194,7 +194,7 @@
 
 (defun flatten-list-model-new (model)
  #+liber-documentation
- "@version{2024-12-9}
+ "@version{2024-12-09}
   @argument[model]{a @class{g:list-model} object to be flattened}
   @return{The new @class{gtk:flatten-list-model} object.}
   @begin{short}
@@ -215,7 +215,7 @@
 (cffi:defcfun ("gtk_flatten_list_model_get_model_for_item"
                flatten-list-model-model-for-item) (g:object g:list-model)
  #+liber-documentation
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @argument[model]{a @class{gtk:flatten-list-model} object}
   @argument[pos]{an unsigned integer for a position}
   @begin{return}

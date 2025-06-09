@@ -53,9 +53,9 @@
 ;;;
 ;;;     filter
 ;;;     incremental
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;     pending
 ;;;
 ;;; Hierarchy
@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter-list-model 'type)
- "@version{2025-3-26}
+ "@version{2025-03-26}
   @begin{short}
     The @class{gtk:filter-list-model} object is a list model that filters the
     elements of the underlying model according to a @class{gtk:filter} object.
@@ -140,7 +140,7 @@
 (setf (liber:alias-for-function 'filter-list-model-filter)
       "Accessor"
       (documentation 'filter-list-model-filter 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-filter object) => filter}
   @syntax{(setf (gtk:filter-list-model-filter object) filter)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -169,7 +169,7 @@
 (setf (liber:alias-for-function 'filter-list-model-incremental)
       "Accessor"
       (documentation 'filter-list-model-incremental 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-incremental object) => incremental}
   @syntax{(setf (gtk:filter-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -209,7 +209,7 @@
 (setf (liber:alias-for-function 'filter-list-model-item-type)
       "Accessor"
       (documentation 'filter-list-model-item-type 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -240,7 +240,7 @@
 (setf (liber:alias-for-function 'filter-list-model-model)
       "Accessor"
       (documentation 'filter-list-model-model 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-model object) => model}
   @syntax{(setf (gtk:filter-list-model-model object) model)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -271,7 +271,7 @@
 (setf (liber:alias-for-function 'filter-list-model-n-items)
       "Accessor"
       (documentation 'filter-list-model-n-items 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -295,7 +295,7 @@
 (setf (liber:alias-for-function 'filter-list-model-pending)
       "Accessor"
       (documentation 'filter-list-model-pending 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:filter-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[pending]{an unsigned integer for the number of items not yet
@@ -329,7 +329,7 @@
 (declaim (inline filter-list-model-new))
 
 (defun filter-list-model-new (model filter)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @argument[model]{a @class{g:list-model} object to sort, or @code{nil}}
   @argument[filter]{a @class{gtk:filter} object or @code{nil} to not filter
     items}

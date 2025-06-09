@@ -47,8 +47,8 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
-;;;     n-items                                            Since 4.8
+;;;     item-type                                           Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'multi-filter 'type)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @begin{short}
     The @class{gtk:multi-filter} class is the base type that implements support
     for handling multiple filters.
@@ -144,7 +144,7 @@
 (setf (liber:alias-for-function 'multi-filter-n-items)
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -173,7 +173,7 @@
 
 (defun multi-filter-append (object filter)
  #+liber-documentation
- "@version{2024-10-1}
+ "@version{2024-10-01}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[filter]{a @class{gtk:filter} object to use}
   @begin{short}
@@ -191,7 +191,7 @@
 
 (cffi:defcfun ("gtk_multi_filter_remove" multi-filter-remove) :void
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[pos]{an unsigned integer for the position of the filter to remove}
   @begin{short}
@@ -220,7 +220,7 @@
 
 #+liber-documentation
 (setf (documentation 'any-filter 'type)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @begin{short}
     The @class{gtk:any-filter} class is a subclass of the
     @class{gtk:multi-filter} class that matches an item when at least one of
@@ -236,7 +236,7 @@
 (declaim (inline any-filter-new))
 
 (defun any-filter-new ()
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @return{The new @class{gtk:any-filter} object.}
   @begin{short}
     Creates a new empty \"any\" filter.
@@ -265,7 +265,7 @@
 
 #+liber-documentation
 (setf (documentation 'every-filter 'type)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @begin{short}
     The @class{gtk:every-filter} class is a subclass of the
     @class{gtk:multi-filter} class that matches an item when each of its
@@ -279,7 +279,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun every-filter-new ()
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @return{The new @class{gtk:every-filter} object.}
   @begin{short}
     Creates a new empty \"every\" filter.

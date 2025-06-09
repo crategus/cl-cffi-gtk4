@@ -46,9 +46,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -146,7 +146,7 @@
 (setf (liber:alias-for-function 'no-selection-model)
       "Accessor"
       (documentation 'no-selection-model 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:no-selection-model object) => model}
   @syntax{(setf (gtk:no-selection-model object) model)}
   @argument[object]{a @class{gtk:no-selection} object}
@@ -174,7 +174,7 @@
 (setf (liber:alias-for-function 'no-selection-n-items)
       "Accessor"
       (documentation 'no-selection-n-items 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:no-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in

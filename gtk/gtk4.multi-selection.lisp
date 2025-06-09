@@ -46,9 +46,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'multi-selection 'type)
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @begin{short}
     The @class{gtk:multi-selection} class is an implementation of the
     @class{gtk:selection-model} interface that allows selecting multiple
@@ -145,7 +145,7 @@
 (setf (liber:alias-for-function 'multi-selection-model)
       "Accessor"
       (documentation 'multi-selection-model 'function)
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @syntax{(gtk:multi-selection-model object) => model}
   @syntax{(setf (gtk:multi-selection-model object) model)}
   @argument[object]{a @class{gtk:multi-selection} object}
@@ -173,7 +173,7 @@
 (setf (liber:alias-for-function 'multi-selection-n-items)
       "Accessor"
       (documentation 'multi-selection-n-items 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:multi-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -193,7 +193,7 @@
 
 (defun multi-selection-new (&optional model)
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @argument[model]{a @class{g:list-model} object to manage, or the @code{nil}
     default value}
   @return{The new @class{gtk:multi-selection} object.}

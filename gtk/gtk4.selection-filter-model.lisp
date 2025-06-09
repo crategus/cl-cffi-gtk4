@@ -46,9 +46,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -174,7 +174,7 @@
 (setf (liber:alias-for-function 'selection-filter-model-n-items)
       "Accessor"
       (documentation 'selection-filter-model-n-items 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:selection-filter-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in

@@ -43,8 +43,8 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
-;;;     n-items                                            Since 4.8
+;;;     item-type                                           Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -140,7 +140,7 @@
 (setf (liber:alias-for-function 'multi-sorter-n-items)
       "Accessor"
       (documentation 'multi-sorter-n-items 'function)
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @syntax{(gtk:multi-sorter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -209,7 +209,7 @@
 
 (cffi:defcfun ("gtk_multi_sorter_remove" multi-sorter-remove) :void
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[sorter]{a @class{gtk:multi-sorter} object}
   @argument[pos]{an unsigned integer for the position of the sorter to remove}
   @begin{short}

@@ -51,9 +51,9 @@
 ;;; Properties
 ;;;
 ;;;     has-map
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -221,7 +221,7 @@
 (setf (liber:alias-for-function 'map-list-model-n-items)
       "Accessor"
       (documentation 'map-list-model-n-items 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:map-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -247,7 +247,7 @@
 (setf (liber:alias-for-symbol 'map-list-model-map-func)
       "Callback"
       (liber:symbol-documentation 'map-list-model-map-func)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{lambda (item) => result}
   @argument[item]{a @class{g:object} instance for the item to map}
   @argument[result]{a @class{g:object} instance for the item to map to, this

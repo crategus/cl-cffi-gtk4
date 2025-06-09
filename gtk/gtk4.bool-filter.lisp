@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'bool-filter 'type)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @begin{short}
     The @class{gtk:bool-filter} object is a simple filter that takes a boolean
     @class{gtk:expression} instance to determine whether to include items.
@@ -104,7 +104,7 @@
 (setf (liber:alias-for-function 'bool-filter-expression)
       "Accessor"
       (documentation 'bool-filter-expression 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:bool-filter-expression object) => expression}
   @syntax{(setf (gtk:bool-filter-expression object) expression)}
   @argument[object]{a @class{gtk:bool-filter} object}
@@ -132,7 +132,7 @@
 (setf (liber:alias-for-function 'bool-filter-invert)
       "Accessor"
       (documentation 'bool-filter-invert 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:bool-filter-invert object) => invert}
   @syntax{(setf (gtk:bool-filter-invert object) invert)}
   @argument[object]{a @class{gtk:bool-filter} object}
@@ -158,7 +158,7 @@
 (declaim (inline bool-filter-new))
 
 (defun bool-filter-new (&optional expression)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @argument[expression]{a @class{gtk:expression} instance or @code{nil} for
     none}
   @return{The new @class{gtk:bool-filter} object.}

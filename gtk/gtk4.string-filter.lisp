@@ -79,7 +79,7 @@
 (setf (liber:alias-for-symbol 'string-filter-match-mode)
       "GEnum"
       (liber:symbol-documentation 'string-filter-match-mode)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @begin{declaration}
 (gobject:define-genum \"GtkStringFilterMatchMode\" string-filter-match-mode
   (:export t
@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-filter 'type)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @begin{short}
     The @class{gtk:string-filter} object determines whether to include items by
     looking at strings and comparing them to a fixed search term.
@@ -156,7 +156,7 @@
 (setf (liber:alias-for-function 'string-filter-expression)
       "Accessor"
       (documentation 'string-filter-expression 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:string-filter-expression object) => expression}
   @syntax{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -184,7 +184,7 @@
 (setf (liber:alias-for-function 'string-filter-ignore-case)
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:string-filter-ignore-case object) => ignore}
   @syntax{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -211,7 +211,7 @@
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:string-filter-match-mode object) => mode}
   @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -238,7 +238,7 @@
 (setf (liber:alias-for-function 'string-filter-search)
       "Accessor"
       (documentation 'string-filter-search 'function)
- "@version{2024-9-28}
+ "@version{2024-09-28}
   @syntax{(gtk:string-filter-search object) => search}
   @syntax{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -258,7 +258,7 @@
 (declaim (inline string-filter-new))
 
 (defun string-filter-new (&optional expression)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[expression]{a @class{gtk:expression} instance for the expression
     to evaluate or @code{nil} for none}
   @return{The new @class{gtk:string-filter} object.}

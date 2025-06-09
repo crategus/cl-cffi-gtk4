@@ -44,8 +44,8 @@
 ;;;     gtk_sort_list_model_get_incremental
 ;;;     gtk_sort_list_model_set_incremental
 ;;;     gtk_sort_list_model_get_pending
-;;;     gtk_sort_list_model_get_section_sorter             Since 4.12
-;;;     gtk_sort_list_model_set_section_sorter             Since 4.12
+;;;     gtk_sort_list_model_get_section_sorter              Since 4.12
+;;;     gtk_sort_list_model_set_section_sorter              Since 4.12
 ;;;
 ;;; Functions
 ;;;
@@ -54,11 +54,11 @@
 ;;; Properties
 ;;;
 ;;;     incremental
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;     pending
-;;;     section-sorter                                     Since 4.12
+;;;     section-sorter                                      Since 4.12
 ;;;     sorter
 ;;;
 ;;; Hierarchy
@@ -69,7 +69,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GListModel
-;;;     GtkSectionModel                                    Since 4.12
+;;;     GtkSectionModel                                     Since 4.12
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -266,7 +266,7 @@
 (setf (liber:alias-for-function 'sort-list-model-n-items)
       "Accessor"
       (documentation 'sort-list-model-n-items 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:sort-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -290,7 +290,7 @@
 (setf (liber:alias-for-function 'sort-list-model-pending)
       "Accessor"
       (documentation 'sort-list-model-pending 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:sort-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[pending]{an unsigned integer for the estimate of unsorted items

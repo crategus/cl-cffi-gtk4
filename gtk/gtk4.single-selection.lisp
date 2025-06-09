@@ -56,9 +56,9 @@
 ;;;
 ;;;     autoselect
 ;;;     can-unselect
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;     selected
 ;;;     selected-item
 ;;;
@@ -85,7 +85,7 @@
 
 (defconstant +invalid-list-position+ 4294967295
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @variable-value{4294967295}
   @begin{short}
     The value used to refer to a guaranteed invalid position in a
@@ -168,7 +168,7 @@
 (setf (liber:alias-for-function 'single-selection-autoselect)
       "Accessor"
       (documentation 'single-selection-autoselect 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:single-selection-autoselect object) => autoselect}
   @syntax{(setf (gtk:single-selection-autoselect object) autoselect)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -199,7 +199,7 @@
 (setf (liber:alias-for-function 'single-selection-can-unselect)
       "Accessor"
       (documentation 'single-selection-can-unselect 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:single-selection-can-unselect object) => setting}
   @syntax{(setf (gtk:single-selection-can-unselect object) setting)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -257,7 +257,7 @@
 (setf (liber:alias-for-function 'single-selection-model)
       "Accessor"
       (documentation 'single-selection-model 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:single-selection-model object) => model}
   @syntax{(setf (gtk:single-selection-model object) model)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -285,7 +285,7 @@
 (setf (liber:alias-for-function 'single-selection-n-items)
       "Accessor"
       (documentation 'single-selection-n-items 'function)
- "@version{2025-4-18}
+ "@version{2025-04-18}
   @syntax{(gtk:single-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -309,7 +309,7 @@
 (setf (liber:alias-for-function 'single-selection-selected)
       "Accessor"
       (documentation 'single-selection-selected 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:single-selection-selected object) => pos}
   @syntax{(setf (gtk:single-selection-selected object) pos)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -344,7 +344,7 @@
 (setf (liber:alias-for-function 'single-selection-selected-item)
       "Accessor"
       (documentation 'single-selection-selected-item 'function)
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @syntax{(gtk:single-selection-selected object) => item}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[item]{a @class{g:object} instance for the selected item}
@@ -364,7 +364,7 @@
 
 (defun single-selection-new (&optional model)
  #+liber-documentation
- "@version{2025-3-17}
+ "@version{2025-03-17}
   @argument[model]{an optional @class{g:list-model} object to manage, the
     default is @code{nil}}
   @return{The new @class{gtk:single-selection} object.}

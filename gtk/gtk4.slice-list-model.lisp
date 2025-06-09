@@ -50,9 +50,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     model
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;     offset
 ;;;     size
 ;;;
@@ -64,7 +64,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GListModel
-;;;     GtkSectionModel                                    Since 4.12
+;;;     GtkSectionModel                                     Since 4.12
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -190,7 +190,7 @@
 (setf (liber:alias-for-function 'slice-list-model-n-items)
       "Accessor"
       (documentation 'slice-list-model-n-items 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:slice-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -214,7 +214,7 @@
 (setf (liber:alias-for-function 'slice-list-model-offset)
       "Accessor"
       (documentation 'slice-list-model-offset 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:slice-list-model-offset object) => offset}
   @syntax{(setf (gtk:slice-list-model-offset object) offset)}
   @argument[object]{a @class{gtk:slice-list-model} object}
@@ -241,7 +241,7 @@
 (setf (liber:alias-for-function 'slice-list-model-size)
       "Accessor"
       (documentation 'slice-list-model-size 'function)
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @syntax{(gtk:slice-list-model-size object) => size}
   @syntax{(setf (gtk:slice-list-model-size object) size)}
   @argument[object]{a @class{gtk:slice-list-model} object}
@@ -264,7 +264,7 @@
 
 (defun slice-list-model-new (model offset size)
  #+liber-documentation
- "@version{2025-3-18}
+ "@version{2025-03-18}
   @argument[model]{a @class{g:list-model} object to use, or @code{nil}}
   @argument[offset]{an unsigned integer for the offset of the slize}
   @argument[size]{an unsigned integer for the maximum size of the slize}

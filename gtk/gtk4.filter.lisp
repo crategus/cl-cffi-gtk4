@@ -75,7 +75,7 @@
 (setf (liber:alias-for-symbol 'filter-match)
       "GEnum"
       (liber:symbol-documentation 'filter-match)
- "@version{2024-9-27}
+ "@version{2024-09-27}
   @begin{declaration}
 (gobject:define-genum \"GtkFilterMatch\" filter-match
   (:export t
@@ -118,7 +118,7 @@
 (setf (liber:alias-for-symbol 'filter-change)
       "GEnum"
       (liber:symbol-documentation 'filter-change)
- "@version{2024-9-27}
+ "@version{2024-09-27}
   @begin{declaration}
 (gobject:define-genum \"GtkFilterChange\" filter-change
   (:export t
@@ -201,13 +201,8 @@ lambda (filter change)    :run-last
 ;;; gtk_filter_match
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_filter_match" %filter-match) :boolean
-  (filter (g:object filter))
-  (item :pointer))
-
-(defun filter-match (filter item)
- #+liber-documentation
- "@version{2025-3-13}
+(cffi:defcfun ("gtk_filter_match" filter-match) :boolean
+ "@version{2025-06-06}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[item]{a @class{g:object} instance for the item to check}
   @begin{return}
@@ -217,15 +212,9 @@ lambda (filter change)    :run-last
   @begin{short}
     Checks if the given @arg{item} is matched by the filter or not.
   @end{short}
-  @begin[Notes]{dictionary}
-    The C library takes a pointer as an @arg{item} argument. In the Lisp
-    implementation the function is generalized to take an object. The pointer
-    is retrieved from the object with the @fun{gobject:object-pointer} function.
-  @end{dictionary}
   @see-class{gtk:filter}"
-  (%filter-match filter (if (cffi:pointerp item)
-                            item
-                            (gobject:object-pointer item))))
+  (filter (g:object filter))
+  (item gobject:object))
 
 (export 'filter-match)
 
@@ -235,7 +224,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @argument[filter]{a @class{gtk:filter} object}
   @begin{return}
     The @symbol{gtk:filter-match} value with the strictness of @arg{filter}.
@@ -260,7 +249,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
  #+liber-documentation
- "@version{2024-9-27}
+ "@version{2024-09-27}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[change]{a @symbol{gtk:filter-change} value}
   @begin{short}
