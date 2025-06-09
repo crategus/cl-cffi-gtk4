@@ -63,6 +63,7 @@
            ;; List-based widgets
            #:do-list-view-applauncher
            #:do-list-view-recent-manager
+           #:do-list-view-bookmarks
            #:do-column-view-content-types
            #:do-column-view-ucd
            #:do-grid-view-clocks
