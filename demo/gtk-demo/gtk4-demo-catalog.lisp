@@ -1281,6 +1281,25 @@
        "::setup"
        "::bind"
        "::activate")
+
+      ("Bookmarks"
+       ":window"
+       "DO-LIST-VIEW-BOOKMARKS"
+       "gtk4-example"
+       "list-view-bookmarks.lisp"
+       :keywords
+       "GtkBookmarkList"
+       "gtk:bookmark-list")
+
+      ("Directory List"
+       ":window"
+       "DO-LIST-VIEW-DIRECTORY-LIST"
+       "gtk4-example"
+       "list-view-directory-list.lisp"
+       :keywords
+       "GtkDirectoryList"
+       "gtk:directory-list")
+
       ("Content Types"
        ":window"
        "DO-COLUMN-VIEW-CONTENT-TYPES"

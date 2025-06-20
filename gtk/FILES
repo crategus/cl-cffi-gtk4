@@ -39,7 +39,7 @@ GListModel support
   gtk4.selection-filter-model.lisp     GtkSelectionFilterModel        GTK 4.18
 
   gtk4.bookmark-list.lisp              GtkBookmarkList                GTK 4.18
-  gtk4.directory-list.lisp             GtkDirectoryList               GTK 4.16 .
+  gtk4.directory-list.lisp             GtkDirectoryList               GTK 4.18
   gtk4.string-list.lisp                GtkStringList                  GTK 4.18
 
 List-based Widgets

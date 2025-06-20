@@ -64,6 +64,7 @@
            #:do-list-view-applauncher
            #:do-list-view-recent-manager
            #:do-list-view-bookmarks
+           #:do-list-view-directory-list
            #:do-column-view-content-types
            #:do-column-view-ucd
            #:do-grid-view-clocks

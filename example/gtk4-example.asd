@@ -64,6 +64,7 @@
                (:file "list-view-applauncher")
                (:file "list-view-recent-manager")
                (:file "list-view-bookmarks")
+               (:file "list-view-directory-list")
                (:file "column-view-content-types")
                (:file "column-view-ucd")
                (:file "grid-view-clocks")
