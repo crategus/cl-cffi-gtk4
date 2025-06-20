@@ -363,7 +363,7 @@
 (setf (liber:alias-for-class 'requisition)
       "GBoxed"
       (documentation 'requisition 'type)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @begin{declaration}
 (glib:define-gboxed-cstruct requisition \"GtkRequisition\"
   (:export t
@@ -400,7 +400,7 @@
 (setf (liber:alias-for-function 'requisition-height)
       "Accessor"
       (documentation 'requisition-height 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:requisition-height instance) => height}
   @syntax{(setf (gtk:requisition-height instance) height)}
   @argument[instance]{a @class{gtk:requisition} instance}
@@ -426,7 +426,7 @@
 (setf (liber:alias-for-function 'requisition-width)
       "Accessor"
       (documentation 'requisition-width 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:requisition-width instance) => width}
   @syntax{(setf (gtk:requisition-width instance) width)}
   @argument[instance]{a @class{gtk:requisition} instance}
@@ -454,7 +454,7 @@
 
 (defun requisition-new (&key (width 0) (height 0))
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[width]{an integer for the width, default 0}
   @argument[height]{an integer for the height, default 0}
   @return{The new @class{gtk:requisition} instance.}
@@ -472,7 +472,7 @@
 
 (defun requisition-copy (requisition)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[requisition]{a @class{gtk:requisition} instance}
   @begin{return}
     The @class{gtk:requisition} instance with the copy of @arg{requisition}.
@@ -609,7 +609,7 @@
 
 #+liber-documentation
 (setf (documentation 'widget 'type)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @begin{short}
     The @class{gtk:widget} class is the base class all widgets in GTK derive
     from. It manages the widget life cycle, layout, states and style.
@@ -953,7 +953,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-focus)
       "Accessor"
       (documentation 'widget-can-focus 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-can-focus object) => setting}
   @syntax{(setf (gtk:widget-can-focus object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -984,7 +984,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-target)
       "Accessor"
       (documentation 'widget-can-target 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-can-target object) => setting}
   @syntax{(setf (gtk:widget-can-target object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1010,7 +1010,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-css-classes)
       "Accessor"
       (documentation 'widget-css-classes 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-css-classes object) => classes}
   @syntax{(setf (gtk:widget-css-classes object) classes)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1038,7 +1038,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-css-name)
       "Accessor"
       (documentation 'widget-css-name 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-css-name object) => name}
   @syntax{(setf (gtk:widget-css-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1063,7 +1063,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-cursor)
       "Accessor"
       (documentation 'widget-cursor 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-cursor object) => cursor}
   @syntax{(setf (gtk:widget-cursor object) cursor)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1093,7 +1093,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-focus-on-click)
       "Accessor"
       (documentation 'widget-focus-on-click 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-focus-on-click object) => setting}
   @syntax{(setf (gtk:widget-focus-on-click object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1122,7 +1122,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-focusable)
       "Accessor"
       (documentation 'widget-focusable 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-focusable object) => setting}
   @syntax{(setf (gtk:widget-focusable object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1162,7 +1162,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-halign)
       "Accessor"
       (documentation 'widget-halign 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-halign object) => align}
   @syntax{(setf (gtk:widget-halign object) align)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1189,7 +1189,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-default)
       "Accessor"
       (documentation 'widget-has-default 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-has-default object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget is the default widget}
@@ -1213,7 +1213,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-focus)
       "Accessor"
       (documentation 'widget-has-focus 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-has-focus object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget has the input focus}
@@ -1244,7 +1244,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-tooltip)
       "Accessor"
       (documentation 'widget-has-tooltip 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-has-tooltip object) => setting}
   @syntax{(setf (gtk:widget-has-tooltip object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1274,7 +1274,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-height-request)
       "Accessor"
       (documentation 'widget-height-request 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-height-request object) => height}
   @syntax{(setf (gtk:widget-height-request object) height)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1300,7 +1300,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand)
       "Accessor"
       (documentation 'widget-hexpand 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-hexpand object) => setting}
   @syntax{(setf (gtk:widget-hexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1350,7 +1350,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand-set)
       "Accessor"
       (documentation 'widget-hexpand-set 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-hexpand-set object) => setting}
   @syntax{(setf (gtk:widget-hexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1392,7 +1392,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-layout-manager)
       "Accessor"
       (documentation 'widget-layout-manager 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-layout-manager object) => manager}
   @syntax{(setf (gtk:widget-layout-manager object) manager)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1468,7 +1468,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-bottom)
       "Accessor"
       (documentation 'widget-margin-bottom 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-margin-bottom object) => margin}
   @syntax{(setf (gtk:widget-margin-bottom object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1501,7 +1501,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-end)
       "Accessor"
       (documentation 'widget-margin-end 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-margin-end object) => margin}
   @syntax{(setf (gtk:widget-margin-end object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1536,7 +1536,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-start)
       "Accessor"
       (documentation 'widget-margin-start 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-margin-start object) => margin}
   @syntax{(setf (gtk:widget-margin-start object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1570,7 +1570,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-top)
       "Accessor"
       (documentation 'widget-margin-top 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-margin-top object) => margin}
   @syntax{(setf (gtk:widget-margin-top object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1600,7 +1600,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-name)
       "Accessor"
       (documentation 'widget-name 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-name object) => name}
   @syntax{(setf (gtk:widget-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1633,11 +1633,12 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-opacity)
       "Accessor"
       (documentation 'widget-opacity 'function)
- "@version{2025-2-13}
+ "@version{2025-06-15}
   @syntax{(gtk:widget-opacity object) => opacity}
   @syntax{(setf (gtk:widget-opacity object) opacity)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[opacity]{a double float for the opacity of the widget}
+  @argument[opacity]{a number coerced to a double float for the opacity of
+    the widget}
   @begin{short}
     Accessor of the @slot[gtk:widget]{opacity} slot of the @class{gtk:widget}
     class.
@@ -1681,7 +1682,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-overflow)
       "Accessor"
       (documentation 'widget-overflow 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-overflow object) => overflow}
   @syntax{(setf (gtk:widget-overflow object) overflow)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1714,7 +1715,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-parent)
       "Accessor"
       (documentation 'widget-parent 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-parent object) => parent}
   @argument[object]{a @class{gtk:widget} object}
   @argument[parent]{a parent @class{gtk:widget} object}
@@ -1744,7 +1745,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-receives-default)
       "Accessor"
       (documentation 'widget-receives-default 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-receives-default object) => setting}
   @syntax{(setf (gtk:widget-receives-default object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1773,7 +1774,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-root)
       "Accessor"
       (documentation 'widget-root 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-root object) => root}
   @argument[object]{a @class{gtk:widget} object}
   @argument[root]{a @class{gtk:root} root widget}
@@ -1803,7 +1804,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-scale-factor)
       "Accessor"
       (documentation 'widget-scale-factor 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-scale-factor object) => scale}
   @argument[object]{a @class{gtk:widget} object}
   @argument[scale]{an integer for the scale factor}
@@ -1827,7 +1828,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-sensitive)
       "Accessor"
       (documentation 'widget-sensitive 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-sensitive object) => setting}
   @syntax{(setf (gtk:widget-sensitive object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1869,7 +1870,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-markup)
       "Accessor"
       (documentation 'widget-tooltip-markup 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-tooltip-markup object) => markup}
   @syntax{(setf (gtk:widget-tooltip-markup object) markup)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1911,7 +1912,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-text)
       "Accessor"
       (documentation 'widget-tooltip-text 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-tooltip-text object) => text}
   @syntax{(setf (gtk:widget-tooltip-text object) text)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1946,7 +1947,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-valign)
       "Accessor"
       (documentation 'widget-valign 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-valign object) => align}
   @syntax{(setf (gtk:widget-valign object) align)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1973,7 +1974,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand)
       "Accessor"
       (documentation 'widget-vexpand 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-vexpand object) => setting}
   @syntax{(setf (gtk:widget-vexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -2003,7 +2004,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand-set)
       "Accessor"
       (documentation 'widget-vexpand-set 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-vexpand-set object) => setting}
   @syntax{(setf (gtk:widget-vexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -2035,7 +2036,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-visible)
       "Accessor"
       (documentation 'widget-visible 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-visible object) => setting}
   @syntax{(setf (gtk:widget-visible object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -2068,7 +2069,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-width-request)
       "Accessor"
       (documentation 'widget-width-request 'function)
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-width-request object) => width}
   @syntax{(setf (gtk:widget-width-request object) width)}
   @argument[object]{a @class{gtk:widget} object}
@@ -2088,7 +2089,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_in_destruction" widget-in-destruction) :boolean
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} is being destroyed.}
   @begin{short}
@@ -2111,7 +2112,7 @@ lambda (widget)    :run-last
 
 (defun widget-show (widget)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to be displayed.
@@ -2145,7 +2146,7 @@ lambda (widget)    :run-last
 
 (defun widget-hide (widget)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Reverses the effects of the @fun{gtk:widget-show} function.
@@ -2171,7 +2172,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_map" widget-map) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be mapped if it is not already.
@@ -2189,7 +2190,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unmap" widget-unmap ) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be unmapped if it is currently mapped.
@@ -2207,7 +2208,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if the widget is mapped, @em{false} otherwise.}
   @begin{short}
@@ -2225,7 +2226,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_realize" widget-realize) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates the GDK resources associated with a widget.
@@ -2254,7 +2255,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unrealize" widget-unrealize) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be unrealized.
@@ -2273,7 +2274,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_realized" widget-realized) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if the widget is realized, @em{false} otherwise.}
   @begin{short}
@@ -2291,7 +2292,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_draw" widget-queue-draw) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Schedules the widget to be redrawn in the paint phase of the current or the
@@ -2308,7 +2309,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_resize" widget-queue-resize) :void
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to have its size renegotiated.
@@ -2335,7 +2336,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_allocate" widget-queue-allocate) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags the widget for a rerun of the @code{size_allocate ()} virtual
@@ -2361,7 +2362,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_frame_clock" widget-frame-clock)
     (g:object gdk-frame-clock)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     The @class{gdk:frame-clock} object, or @code{nil} if @arg{widget} is
@@ -2416,7 +2417,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-symbol 'tick-callback)
       "Callback"
       (liber:symbol-documentation 'tick-callback)
- "@version{2025-3-1}
+ "@version{2025-03-01}
   @syntax{lambda (widget clock) => result}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[clock]{a @class{gdk:frame-clock} object for the widget, same as
@@ -2446,7 +2447,7 @@ lambda (widget)    :run-last
 
 (defun widget-add-tick-callback (widget func)
  #+liber-documentation
- "@version{2025-3-1}
+ "@version{2025-03-01}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[func]{a @symbol{gtk:tick-callback} callback function to call for
     updating animations}
@@ -2499,7 +2500,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_remove_tick_callback" widget-remove-tick-callback)
     :void
  #+liber-documentation
- "@version{2025-3-1}
+ "@version{2025-03-01}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[id]{an unsigned integer for the ID returned by the
     @fun{gtk:widget-add-tick-callback} function}
@@ -2520,7 +2521,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_size_allocate" widget-size-allocate) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[allocation]{a @class{gdk:rectangle} instance for the position and
     size to be allocated to @arg{widget}}
@@ -2545,7 +2546,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_allocate" widget-allocate) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[width]{an integer for the new width of the widget}
   @argument[height]{an integer for the new height of the widget}
@@ -2581,7 +2582,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-add-shortcut (gtype shortcut)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[gtype]{a @class{g:type-t} type ID for the widget class to add the
     shortcut to}
   @argument[shortcut]{a @class{gtk:shortcut} object to add}
@@ -2740,7 +2741,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-layout-manager-type (gtype)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-class-layout-manager-type gtype) => value}
   @syntax{(setf (gtk:widget-class-layout-manager-type gtype) value)}
   @argument[gtype]{a @class{g:type-t} type ID for the widget class}
@@ -2843,7 +2844,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_activate" widget-activate) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object that is activatable}
   @return{@em{True} if the widget was activatable.}
   @begin{short}
@@ -2864,7 +2865,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_focus" widget-is-focus) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if the widget is the focus widget.}
   @begin{short}
@@ -2885,7 +2886,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_grab_focus" widget-grab-focus) :boolean
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if the focus is now inside @arg{widget}.}
   @begin{short}
@@ -2931,7 +2932,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_set_parent" widget-set-parent) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[parent]{a parent @class{gtk:widget} object}
   @begin{short}
@@ -2960,7 +2961,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unparent" widget-unparent) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Dissociate the widget from its parent.
@@ -2978,7 +2979,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_native" widget-native) (g:object native)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:native} widget of @arg{widget}, or @code{nil}.}
   @begin{short}
@@ -2999,7 +3000,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{an ancestor @class{g:type-t} type ID}
   @return{The @class{gtk:widget} ancestor widget, or @arg{nil} if not found.}
@@ -3026,7 +3027,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_ancestor" widget-is-ancestor) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[ancestor]{another @class{gtk:widget} object}
   @begin{return}
@@ -3059,7 +3060,7 @@ lambda (widget)    :run-last
 
 (defun widget-translate-coordinates (src dst xsrc ysrc)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-translate-coordinates src dest xsrc ysrc) => xdest, ydest}
   @argument[src]{a @class{gtk:widget} object}
   @argument[dest]{a @class{gtk:widget} object}
@@ -3106,7 +3107,7 @@ lambda (widget)    :run-last
 
 (defun widget-add-controller (widget controller)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[controller]{a @class{gtk:event-controller} object that has not
     added to a widget yet}
@@ -3128,7 +3129,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_remove_controller" widget-remove-controller) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[controller]{a @class{gtk:event-controller} object}
   @begin{short}
@@ -3161,7 +3162,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_direction" widget-direction) text-direction
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-direction widget) => direction}
   @syntax{(setf (gtk:widget-direction widget) direction)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3203,7 +3204,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_default_direction" widget-default-direction)
     text-direction
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-default-direction) => direction}
   @syntax{(setf (gtk:widget-default-direction) direction)}
   @argument[direction]{a value of the @symbol{gtk:text-direction} enumeration
@@ -3228,7 +3229,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_create_pango_context" widget-create-pango-context)
     (g:object pango:context :return)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The new @class{pango:context} object.}
   @begin{short}
@@ -3250,7 +3251,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_pango_context" widget-pango-context)
     (g:object pango:context)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{pango:context} object for the widget.}
   @begin{short}
@@ -3297,7 +3298,7 @@ lambda (widget)    :run-last
 
 (defun widget-font-options (widget)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-font-options widget) => options}
   @syntax{(setf (gtk:widget-font-options widget) options)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3339,7 +3340,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_font_map" widget-font-map)
     (g:object pango:font-map)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-font-map widget) => fontmap}
   @syntax{(setf (gtk:widget-font-map widget) fontmap)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3367,7 +3368,7 @@ lambda (widget)    :run-last
 
 (defun widget-create-pango-layout (widget text)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[text]{a string for the text to set on the Pango layout, can be
     @code{nil}}
@@ -3401,7 +3402,7 @@ lambda (widget)    :run-last
 
 (defun widget-set-cursor-from-name (widget name)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[name]{a string for the name of the cursor or @code{nil} to use
     the default cursor}
@@ -3445,7 +3446,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-accessible-role (gtype)
   #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-class-accessible-role gtype) => role}
   @syntax{(setf (gtk:widget-class-accessible-role gtype) role)}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -3472,7 +3473,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_child_focus" widget-child-focus) :boolean
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[direction]{a @symbol{gtk:direction-type} value for the direction
     of focus movement}
@@ -3521,7 +3522,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @syntax{(gtk:widget-child-visible widget) => visible}
   @syntax{(setf (gtk:widget-child-visible widget) visible)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3560,7 +3561,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_settings" widget-settings) (g:object settings)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The relevant @class{gtk:settings} object.}
   @begin{short}
@@ -3584,7 +3585,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_clipboard" widget-clipboard)
     (g:object gdk-clipboard)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The appropriate @class{gdk:clipboard} object.}
   @begin{short}
@@ -3608,7 +3609,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_primary_clipboard" widget-primary-clipboard)
     (g:object gdk:clipboard)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     The @class{gdk:clipboard} object with the appropriate clipboard object.
@@ -3632,7 +3633,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_display" widget-display) (g:object gdk:display)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gdk:display} object for the toplevel of this widget.}
   @begin{short}
@@ -3669,7 +3670,7 @@ lambda (widget)    :run-last
 
 (defun widget-size-request (widget)
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @syntax{(gtk:widget-size-request object) => width, height}
   @syntax{(setf (gtk:widget-size-request object) (list width height))}
   @argument[object]{a @class{gtk:widget} object}
@@ -3733,7 +3734,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_list_mnemonic_labels" widget-list-mnemonic-labels)
     (g:list-t (g:object widget))
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The list of @class{gtk:widget} objects with the mnemonic labels.}
   @begin{short}
@@ -3763,7 +3764,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_mnemonic_label" widget-add-mnemonic-label) :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[label]{a @class{gtk:widget} object that acts as a mnemonic label
     for @arg{widget}}
@@ -3792,7 +3793,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_remove_mnemonic_label" widget-remove-mnemonic-label)
     :void
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[label]{a @class{gtk:widget} object that was previously set as a
     mnemonic label for @arg{widget}}
@@ -3816,7 +3817,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_mnemonic_activate" widget-mnemonic-activate) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[cycling]{@em{true} if there are other widgets with the same
     mnemonic}
@@ -3838,7 +3839,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_error_bell" widget-error-bell) :void
  #+liber-documentation
- "@version{2025-2-3}
+ "@version{2025-02-03}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Notifies the user about an input-related error on this widget.
@@ -3862,7 +3863,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_keynav_failed" widget-keynav-failed) :boolean
  #+liber-documentation
- "@version{2025-2-13}
+ "@version{2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[direction]{a @symbol{gtk:direction-type} value for the direction
     of focus movement}
@@ -3916,7 +3917,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_tooltip_trigger_tooltip_query" widget-trigger-tooltip-query)
     :void
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Triggers a tooltip query on the display where the toplevel of @arg{widget}
@@ -3936,7 +3937,7 @@ lambda (widget)    :run-last
 
 (defun widget-allocated-width (widget)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object to query}
   @return{The integer with the width of the widget.}
   @begin{short}
@@ -3971,7 +3972,7 @@ lambda (widget)    :run-last
 
 (defun widget-allocated-height (widget)
  #+liber-documentation
- "@version{#2025-2-13}
+ "@version{#2025-02-13}
   @argument[widget]{a @class{gtk:widget} object to query}
   @return{The integer with the height of the widget.}
   @begin{short}
@@ -4008,7 +4009,7 @@ lambda (widget)    :run-last
 
 (defun widget-allocation (widget)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gdk:rectangle} instance with the allocation.}
   @begin{short}
@@ -4061,7 +4062,7 @@ lambda (widget)    :run-last
 
 (defun widget-allocated-baseline (widget)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object to query}
   @return{The integer with the baseline of the widget, or -1 if none.}
   @begin{short}
@@ -4086,7 +4087,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_width" widget-width) :int
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The integer with the width of @arg{widget}.}
   @begin{short}
@@ -4109,7 +4110,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_height" widget-height) :int
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The integer with the height of @arg{widget}.}
   @begin{short}
@@ -4132,7 +4133,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_size" widget-size) :int
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
     to query}
@@ -4164,7 +4165,7 @@ lambda (widget)    :run-last
 #+gtk-4-12
 (cffi:defcfun ("gtk_widget_get_baseline" widget-baseline) :int
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The integer with the baseline of @arg{widget}, or -1 if none.}
   @begin{short}
@@ -4192,7 +4193,7 @@ lambda (widget)    :run-last
 
 (defun widget-compute-bounds (widget target bounds)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[target]{a @class{gtk:widget} target widget}
   @argument[bounds]{a @symbol{graphene:rect-t} instance for the result}
@@ -4229,7 +4230,7 @@ lambda (widget)    :run-last
 
 (defun widget-compute-transform (widget target transform)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[target]{a @class{gtk:widget} object for the target widget that the
     matrix will transform to}
@@ -4264,7 +4265,7 @@ lambda (widget)    :run-last
 
 (defun widget-compute-point (widget target point out)
   #+liber-documentation
-  "@version{#2025-2-15}
+  "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object to query}
   @argument[target]{a @class{gtk:widget} object to transform into}
   @argument[point]{a @symbol{graphene:point-t} instance for a point in the
@@ -4298,7 +4299,7 @@ lambda (widget)    :run-last
 
 (defun widget-contains (widget x y)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object to query}
   @argument[x]{a number coerced to a double float for the x coordinate to test,
     relative to the origin of the widget}
@@ -4329,7 +4330,7 @@ lambda (widget)    :run-last
 
 (defun widget-pick (widget x y flags)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[x]{a number coerced to a double float for the x coordinate to test,
     relative to the origin of the widget}
@@ -4379,7 +4380,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_focus_child" widget-focus-child)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[child]{a @class{gtk:widget} object for a direct child widget, or
     @code{nil} to unset the focus child of @arg{widget}}
@@ -4405,7 +4406,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_sensitive" widget-is-sensitive) :boolean
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} is effectively sensitive.}
   @begin{short}
@@ -4424,7 +4425,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_visible" widget-is-visible) :boolean
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} and all its parents are visible.}
   @begin{short}
@@ -4453,7 +4454,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @syntax{(gtk:widget-state-flags widget) => flags}
   @syntax{(setf (gtk:widget-state-flags widget clear) flags)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4490,7 +4491,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unset_state_flags" widget-unset-state-flags) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[flags]{a @symbol{gtk:state-flags} value to turn off}
   @begin{short}
@@ -4514,7 +4515,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_has_visible_focus" widget-has-visible-focus) :boolean
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} should display a focus rectangle.}
   @begin{short}
@@ -4541,7 +4542,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_drawable" widget-is-drawable) :boolean
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} is drawable, @em{false} otherwise.}
   @begin{short}
@@ -4568,7 +4569,7 @@ lambda (widget)    :run-last
 
 (defun widget-measure (widget orientation for-size)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
     to measure}
@@ -4618,7 +4619,7 @@ lambda (widget)    :run-last
 
 (defun widget-snapshot (widget snapshot)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[snapshot]{a @class{gtk:snapshot} object as passed to the widget,
     in particular, no calls to the @fun{gtk:snapshot-translate} function or
@@ -4648,7 +4649,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_snapshot_child" widget-snapshot-child) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[child]{a @class{gtk:widget} child widget of @arg{widget}}
   @argument[snapshot]{a @class{gtk:snapshot} object as passed to the widget,
@@ -4686,7 +4687,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling)
     (g:object widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} sibling widget.}
   @begin{short}
@@ -4705,7 +4706,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_prev_sibling" widget-prev-sibling)
     (g:object widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} sibling widget.}
   @begin{short}
@@ -4724,7 +4725,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_first_child" widget-first-child)
     (g:object widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} object.}
   @begin{short}
@@ -4742,7 +4743,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_last_child" widget-last-child) (g:object widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:widget} object.}
   @begin{short}
@@ -4760,7 +4761,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_insert_before" widget-insert-before) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[parent]{a @class{gtk:widget} object for the parent widget to insert
     @arg{widget} into}
@@ -4793,7 +4794,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_insert_after" widget-insert-after) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[parent]{a @class{gtk:widget} object for the parent widget to insert
     @arg{widget} into}
@@ -4826,7 +4827,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_should_layout" widget-should-layout) :boolean
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     @em{True} if @arg{widget} should be included in measureing and allocating.
@@ -4854,7 +4855,7 @@ lambda (widget)    :run-last
 #+gtk-4-10
 (defun widget-color (widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gdk:rgba} instance with the color.}
   @begin{short}
@@ -4879,7 +4880,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string for the style class to add, without the leading
     \".\" used for notation of style classes}
@@ -4916,7 +4917,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_remove_css_class" widget-remove-css-class) :void
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string for the style class to remove from @arg{widget},
     without the leading \".\" used for notation of style classes}
@@ -4937,12 +4938,14 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_has_css_class" widget-has-css-class) :boolean
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-06-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string for the style class, without the leading \".\"
     used for notation of style classes}
-  @return{@em{True} if @arg{class} is currently applied to @arg{widget},
-    @em{false} otherwise.}
+  @begin{return}
+    @em{True} if @arg{class} is currently applied to @arg{widget}, @em{false}
+    otherwise.
+  @end{return}
   @short{Returns whether @arg{class} is currently applied to @arg{widget}.}
   @see-class{gtk:widget}
   @see-function{gtk:widget-add-css-class}"
@@ -4971,7 +4974,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-css-name (gtype)
   #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @syntax{(gtk:widget-class-css-name gtype) => name}
   @syntax{(setf (gtk:widget-class-css-name gtype) name)}
   @argument[gtype]{a @class{g:type-t} type ID}
@@ -5001,7 +5004,7 @@ lambda (widget)    :run-last
 
 (defun widget-style-context (widget)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gtk:style-context} object.}
   @begin{short}
@@ -5029,7 +5032,7 @@ lambda (widget)    :run-last
 (defun widget-add-provider (widget provider
                             &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer for the priority of the
@@ -5077,7 +5080,7 @@ lambda (widget)    :run-last
 
 (defun widget-remove-provider (widget key)
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[key]{a string for the unique identifier for the style provider,
     this is the return value of the @fun{gtk:widget-add-provider} function}
@@ -5106,7 +5109,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_request_mode" widget-request-mode)
     size-request-mode
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @symbol{gtk:size-request-mode} value preferred by @arg{widget}.}
   @begin{short}
@@ -5133,7 +5136,7 @@ lambda (widget)    :run-last
 
 (defun widget-preferred-size (widget)
  #+liber-documentation
- "@version{#2025-2-15}
+ "@version{#2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     @arg{minimum-size} -- a @class{gtk:requisition} instance with the minimum
@@ -5183,7 +5186,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_compute_expand" widget-compute-expand) :boolean
  #+liber-documentation
- "@version{2025-2-15}
+ "@version{2025-02-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[orientation]{a @symbol{gtk:orientation} value with the expand
     direction}
@@ -5217,7 +5220,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_init_template" widget-init-template) :void
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2024-09-14}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates and initializes child widgets defined in templates.
@@ -5248,7 +5251,7 @@ lambda (widget)    :run-last
 #+gtk-4-8
 (cffi:defcfun ("gtk_widget_dispose_template" widget-dispose-template) :void
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2024-09-14}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{a @class{g:type-t} type ID of the widget to finalize the
     template for}
@@ -5282,12 +5285,13 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2025-06-15}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{a @class{g:type-t} type ID to get a template child for}
-  @argument[name]{a string with the ID of the child defined in the template XML}
-  @return{The @class{g:object} instance built in the template XML with the ID
-    name.}
+  @argument[name]{a string for the ID of the child defined in the template XML}
+  @begin{return}
+    The @class{g:object} instance built in the template XML with the ID name.
+  @end{return}
   @begin{short}
     Fetch an object build from the template XML for @arg{gtype} in this widget
     instance.
@@ -5320,7 +5324,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-set-template (gtype template)
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2024-09-14}
   @argument[gtype]{a @class{g:type-t} type ID of the widget class}
   @argument[template]{a string holding the @class{gtk:builder} XML}
   @begin{short}
@@ -5364,9 +5368,9 @@ lambda (widget)    :run-last
 
 (defun widget-class-set-template-from-resource (gtype name)
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2025-06-15}
   @argument[gtype]{a @class{g:type-t} type ID of the widget class}
-  @argument[name]{a string with the name of the resource to load the template
+  @argument[name]{a string for the name of the resource to load the template
     from}
   @begin{short}
     A convenience function to call the @fun{gtk:widget-class-set-template}
@@ -5453,9 +5457,9 @@ lambda (widget)    :run-last
 
 (defun widget-class-bind-template-child (gtype name)
  #+liber-documentation
- "@version{2024-9-14}
+ "@version{2025-06-15}
   @argument[gtype]{a @class{g:type-t} type ID of the widget class}
-  @argument[name]{a string with the ID of the child defined in the template XML}
+  @argument[name]{a string for the ID of the child defined in the template XML}
   @begin{short}
     Binds a child widget defined in a template to the widget class of type
     @arg{gtype}.
@@ -5683,7 +5687,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_observe_children" widget-observe-children)
     (g:object gio:list-model :return)
- "@version{#2024-12-9}
+ "@version{#2024-12-09}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{g:list-model} object tracking the children of @arg{widet}.}
   @begin{short}
@@ -5706,10 +5710,11 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_observe_controllers" widget-observe-controllers)
     (g:object gio:list-model :return)
- "@version{#2024-12-9}
+ "@version{#2025-06-15}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{The @class{g:list-model} object tracking the controllers of
-    @arg{widet}.}
+  @begin{return}
+    The @class{g:list-model} object tracking the controllers of @arg{widet}.
+  @end{return}
   @begin{short}
     Returns a @class{g:list-model} object to track the
     @class{gtk:event-controller} objects of @arg{widget}.
@@ -5733,9 +5738,9 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_insert_action_group" widget-insert-action-group)
     :void
  #+liber-documentation
- "@version{2024-5-13}
+ "@version{2025-06-15}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[prefix]{a string with the prefix for actions in @arg{group}}
+  @argument[prefix]{a string for the prefix for actions in @arg{group}}
   @argument[group]{a @class{g:action-group} instance}
   @begin{short}
     Inserts an action group into @arg{widget}.
@@ -5800,11 +5805,13 @@ lambda (widget)    :run-last
 
 (defun widget-activate-action (widget name)
  #+liber-documentation
- "@version{2024-11-9}
+ "@version{2025-06-15}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[name]{a string with the name of the action to activate}
-  @return{@em{True} if the action was activated, @em{false} if the action does
-    not exist.}
+  @argument[name]{a string for the name of the action to activate}
+  @begin{return}
+    @em{True} if the action was activated, @em{false} if the action does not
+    exist.
+  @end{return}
   @begin{short}
     Looks up the action in the action groups associated with widget and its
     ancestors, and activates it.
@@ -5958,25 +5965,5 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_action_set_enabled                           not implemented
 ;;; ----------------------------------------------------------------------------
-
-#+nil
-(cffi:defcfun ("gtk_widget_action_set_enabled" widget-action-set-enabled) :void
- #+liber-documentation
- "@version{#2022-1-21}
-  @argument[widget]{a @class{gtk:widget} object}
-  @argument[name]{a string with the action name, such as \"clipboard.paste\"}
-  @argument[enabled]{whether the action is now enabled}
-  @begin{short}
-    Enable or disable an action installed with the
-    @fun{gtk:widget-class-install-action} function.
-  @end{short}
-  @see-class{gtk:widget}
-  @see-function{gtk:widget-action-set-enabled}"
-  (widget (g:object widget))
-  (name :string)
-  (enabled :boolean))
-
-#+nil
-(export 'widget-action-set-enabled)
 
 ;;; --- End of file gtk4.widget.lisp -------------------------------------------

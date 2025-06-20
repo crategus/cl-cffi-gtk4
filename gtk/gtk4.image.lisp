@@ -108,7 +108,7 @@
 (setf (liber:alias-for-symbol 'image-type)
       "GEnum"
       (liber:symbol-documentation 'image-type)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @begin{declaration}
 (gobject:define-genum \"GtkImageType\" image-type
   (:export t
@@ -181,7 +181,7 @@
 
 #+liber-documentation
 (setf (documentation 'image 'type)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @begin{short}
     The @class{gtk:image} widget displays an image.
   @end{short}
@@ -255,7 +255,7 @@
 (setf (liber:alias-for-function 'image-file)
       "Accessor"
       (documentation 'image-file 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-file object) => filename}
   @syntax{(setf (gtk:image-file object) filename)}
   @argument[object]{a @class{gtk:image} widget}
@@ -278,7 +278,7 @@
 (setf (liber:alias-for-function 'image-gicon)
       "Accessor"
       (documentation 'image-gicon 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-gicon object) => gicon}
   @syntax{(setf (gtk:image-gicon object) gicon)}
   @argument[object]{a @class{gtk:image} widget}
@@ -305,7 +305,7 @@
 (setf (liber:alias-for-function 'image-icon-name)
       "Accessor"
       (documentation 'image-icon-name 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-icon-name object) => name}
   @syntax{(setf (gtk:image-icon-name object) name)}
   @argument[object]{a @class{gtk:image} widget}
@@ -331,7 +331,7 @@
 (setf (liber:alias-for-function 'image-icon-size)
       "Accessor"
       (documentation 'image-icon-size 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-icon-size object) => size}
   @syntax{(setf (gtk:image-icon-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
@@ -356,7 +356,7 @@
 (setf (liber:alias-for-function 'image-paintable)
       "Accessor"
       (documentation 'image-paintable 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-paintable object) => paintable}
   @syntax{(setf (gtk:image-paintable object) paintable)}
   @argument[object]{a @class{gtk:image} widget}
@@ -389,7 +389,7 @@
 (setf (liber:alias-for-function 'image-pixel-size)
       "Accessor"
       (documentation 'image-pixel-size 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-pixel-size object) => size}
   @syntax{(setf (gtk:image-pixel-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
@@ -417,7 +417,7 @@
 (setf (liber:alias-for-function 'image-resource)
       "Accessor"
       (documentation 'image-resource 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-resource object) => path}
   @syntax{(setf (gtk:image-resource object) path)}
   @argument[object]{a @class{gtk:image} widget}
@@ -441,7 +441,7 @@
 (setf (liber:alias-for-function 'image-storage-type)
       "Accessor"
       (documentation 'image-storage-type 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-storage-type object) => type}
   @syntax{(setf (gtk:image-storage-type object) type)}
   @argument[object]{a @class{gtk:image} widget}
@@ -473,7 +473,7 @@
 (setf (liber:alias-for-function 'image-use-fallback)
       "Accessor"
       (documentation 'image-use-fallback 'function)
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @syntax{(gtk:image-use-fallback object) => setting}
   @syntax{(setf (gtk:image-use-fallback object) setting)}
   @argument[object]{a @class{gtk:image} widget}
@@ -495,7 +495,7 @@
 
 (defun image-new ()
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @return{The newly created @class{gtk:image} widget.}
   @short{Creates a new empty image.}
   @see-class{gtk:image}"
@@ -512,7 +512,7 @@
 
 (defun image-new-from-file (path)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[path]{a pathname or namestring for the name of the file}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
@@ -543,7 +543,7 @@
 (cffi:defcfun ("gtk_image_new_from_resource" image-new-from-resource)
     (g:object image)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[resource]{a string for a resource path}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
@@ -578,7 +578,7 @@
 
 (defun image-new-from-pixbuf (pixbuf)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
@@ -611,7 +611,7 @@
 (cffi:defcfun ("gtk_image_new_from_paintable" image-new-from-paintable)
     (g:object image)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[paintable]{a @class{gdk:paintable} object}
   @return{The new @class{gtk:image} widget.}
   @begin{short}
@@ -632,7 +632,7 @@
 (cffi:defcfun ("gtk_image_new_from_icon_name" image-new-from-icon-name)
     (g:object image)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[name]{a string for an icon name}
   @return{The new @class{gtk:image} widget displaying the themed icon.}
   @begin{short}
@@ -654,7 +654,7 @@
 (cffi:defcfun ("gtk_image_new_from_gicon" image-new-from-gicon)
     (g:object image)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[icon]{a @class{g:icon} object}
   @return{The new @class{gtk:image} widget displaying the themed icon.}
   @begin{short}
@@ -675,7 +675,7 @@
 
 (cffi:defcfun ("gtk_image_clear" image-clear) :void
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @short{Resets the image to be empty.}
   @see-class{gtk:image}"
@@ -693,7 +693,7 @@
 
 (defun image-set-from-file (image file)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[file]{a pathname or namestring for the file to load}
   @begin{short}
@@ -712,7 +712,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_resource" image-set-from-resource) :void
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[resource]{a string for a resource path}
   @begin{short}
@@ -736,7 +736,7 @@
 
 (defun image-set-from-pixbuf (image pixbuf)
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
@@ -762,7 +762,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_paintable" image-set-from-paintable) :void
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
@@ -783,7 +783,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_icon_name" image-set-from-icon-name) :void
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[name]{a string for an icon name}
   @begin{short}
@@ -803,7 +803,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_gicon" image-set-from-gicon) :void
  #+liber-documentation
- "@version{2025-4-26}
+ "@version{2025-04-26}
   @argument[image]{a @class{gtk:image} widget}
   @argument[icon]{a @class{g:icon} object for the themed icon}
   @begin{short}

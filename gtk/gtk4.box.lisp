@@ -110,7 +110,7 @@
 
 #+liber-documentation
 (setf (documentation 'box 'type)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @begin{short}
     The @class{gtk:box} widget arranges child widgets into a single row or
     column.
@@ -173,7 +173,7 @@
 (setf (liber:alias-for-function 'box-baseline-child)
       "Accessor"
       (documentation 'box-baseline-child 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:box-baseline-child object) => child}
   @syntax{(setf (gtk:box-baseline-child object) child)}
   @argument[object]{a @class{gtk:box} widget}
@@ -202,7 +202,7 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:box-baseline-position object) => position}
   @syntax{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
@@ -233,7 +233,7 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:box-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
@@ -261,7 +261,7 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:box-spacing object) => spacing}
   @syntax{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
@@ -283,7 +283,7 @@
 
 (defun box-new (&optional (orientation :horizontal) (spacing 0))
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[orientation]{an optional @symbol{gtk:orientation} value,
     the default is @code{:horizontal}}
   @argument[spacing]{an optional integer for the number of pixels to place by
@@ -309,7 +309,7 @@
 
 (cffi:defcfun ("gtk_box_append" box-append) :void
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the last child widget to the box.}
@@ -326,7 +326,7 @@
 
 (cffi:defcfun ("gtk_box_prepend" box-prepend) :void
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the first child widget to the box.}
@@ -343,7 +343,7 @@
 
 (cffi:defcfun ("gtk_box_remove" box-remove) :void
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -367,7 +367,7 @@
 
 (cffi:defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget after which to insert
@@ -392,7 +392,7 @@
 
 (cffi:defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget to move}
   @argument[sibling]{a @class{gtk:widget} sibling widget to move @arg{child}

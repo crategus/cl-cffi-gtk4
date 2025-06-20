@@ -219,7 +219,7 @@
 (setf (liber:alias-for-symbol 'delete-type)
       "GEnum"
       (liber:symbol-documentation 'delete-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkDeleteType\" delete-type
   (:export t
@@ -275,7 +275,7 @@
 (setf (liber:alias-for-symbol 'direction-type)
       "GEnum"
       (liber:symbol-documentation 'direction-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkDirectionType\" direction-type
   (:export t
@@ -314,7 +314,7 @@
 (setf (liber:alias-for-symbol 'icon-size)
       "GEnum"
       (liber:symbol-documentation 'icon-size)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @begin{declaration}
 (gobject:define-genum \"GtkIconSize\" icon-size
   (:export t
@@ -366,7 +366,7 @@
 (setf (liber:alias-for-symbol 'response-type)
       "GEnum"
       (liber:symbol-documentation 'response-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkResponseType\" response-type
   (:export t
@@ -455,7 +455,7 @@
 (setf (liber:alias-for-symbol 'sensitivity-type)
       "GEnum"
       (liber:symbol-documentation 'sensitivity-type)
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @begin{declaration}
 (gobject:define-genum \"GtkSensitivityType\" sensitivity-type
   (:export t
@@ -493,7 +493,7 @@
 (setf (liber:alias-for-symbol 'text-direction)
       "GEnum"
       (liber:symbol-documentation 'text-direction)
- "@version{2024-3-24}
+ "@version{2024-03-24}
   @begin{declaration}
 (gobject:define-genum \"GtkTextDirection\" text-direction
   (:export t
@@ -531,7 +531,7 @@
 (setf (liber:alias-for-symbol 'justification)
       "GEnum"
       (liber:symbol-documentation 'justification)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkJustification\" justification
   (:export t
@@ -573,7 +573,7 @@
 (setf (liber:alias-for-symbol 'message-type)
       "GEnum"
       (liber:symbol-documentation 'message-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkMessageType\" message-type
   (:export t
@@ -620,7 +620,7 @@
 (setf (liber:alias-for-symbol 'movement-step)
       "GEnum"
       (liber:symbol-documentation 'movement-step)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkMovementStep\" movement-step
   (:export t
@@ -674,7 +674,7 @@
 (setf (liber:alias-for-symbol 'natural-wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'natural-wrap-mode)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkNaturalWrapMode\" natural-wrap-mode
   (:export t
@@ -725,7 +725,7 @@
 (setf (liber:alias-for-symbol 'scroll-step)
       "GEnum"
       (liber:symbol-documentation 'scroll-step)
- "@version{2024-3-7}
+ "@version{2024-03-07}
   @begin{declaration}
 (gobject:define-genum \"GtkScrollStep\" scroll-step
   (:export t
@@ -791,7 +791,7 @@
 (setf (liber:alias-for-symbol 'overflow)
       "GEnum"
       (liber:symbol-documentation 'overflow)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkOverflow\" overflow
   (:export t
@@ -829,7 +829,7 @@
 (setf (liber:alias-for-symbol 'pack-type)
       "GEnum"
       (liber:symbol-documentation 'pack-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkPackType\" pack-type
   (:export t
@@ -865,7 +865,7 @@
 (setf (liber:alias-for-symbol 'position-type)
       "GEnum"
       (liber:symbol-documentation 'position-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkPositionType\" position-type
   (:export t
@@ -919,7 +919,7 @@
 (setf (liber:alias-for-symbol 'scroll-type)
       "GEnum"
       (liber:symbol-documentation 'scroll-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkScrollType\" scroll-type
   (:export t
@@ -966,7 +966,7 @@
 (setf (liber:alias-for-symbol 'selection-mode)
       "GEnum"
       (liber:symbol-documentation 'selection-mode)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkSelectionMode\" gtk:selection-mode
   (:export t
@@ -1013,7 +1013,7 @@
 (setf (liber:alias-for-symbol 'wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'wrap-mode)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkWrapMode\" wrap-mode
   (:export t
@@ -1053,7 +1053,7 @@
 (setf (liber:alias-for-symbol 'sort-type)
       "GEnum"
       (liber:symbol-documentation 'sort-type)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkSortType\" sort-type
   (:export t
@@ -1126,7 +1126,7 @@
 (setf (liber:alias-for-symbol 'size-request-mode)
       "GEnum"
       (liber:symbol-documentation 'size-request-mode)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkSizeRequestMode\" size-request-mode
   (:export t
@@ -1178,7 +1178,7 @@
 (setf (liber:alias-for-symbol 'state-flags)
       "GFlags"
       (liber:symbol-documentation 'state-flags)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-gflags \"GtkStateFlags\" state-flags
   (:export t
@@ -1251,7 +1251,7 @@
 (setf (liber:alias-for-symbol 'border-style)
       "GEnum"
       (liber:symbol-documentation 'border-style)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkBorderStyle\" border-style
   (:export t
@@ -1309,7 +1309,7 @@
 (setf (liber:alias-for-symbol 'input-purpose)
       "GEnum"
       (liber:symbol-documentation 'input-purpose)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkInputPurpose\" input-purpose
   (:export t
@@ -1387,7 +1387,7 @@
 (setf (liber:alias-for-symbol 'input-hints)
       "GFlags"
       (liber:symbol-documentation 'input-hints)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-gflags \"GtkInputHints\" input-hints
   (:export t
@@ -1457,7 +1457,7 @@
 (setf (liber:alias-for-symbol 'pick-flags)
       "GFlags"
       (liber:symbol-documentation 'pick-flags)
- "@version{2024-3-8}
+ "@version{2024-03-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkPickFlags\" pick-flags
   (:export t
@@ -1496,7 +1496,7 @@
 (setf (liber:alias-for-symbol 'constraint-relation)
       "GEnum"
       (liber:symbol-documentation 'constraint-relation)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintRelation\" constraint-relation
   (:export t
@@ -1532,7 +1532,7 @@
 (setf (liber:alias-for-symbol 'constraint-strength)
       "GEnum"
       (liber:symbol-documentation 'constraint-strength)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintStrength\" constraint-strength
   (:export t
@@ -1581,7 +1581,7 @@
 (setf (liber:alias-for-symbol 'constraint-attribute)
       "GEnum"
       (liber:symbol-documentation 'constraint-attribute)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintAttribute\" constraint-attribute
   (:export t
@@ -1643,7 +1643,7 @@
 (setf (liber:alias-for-symbol 'constraint-vfl-parser-error)
       "GEnum"
       (liber:symbol-documentation 'constraint-vfl-parser-error)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
   (:export t
@@ -1688,7 +1688,7 @@
 (setf (liber:alias-for-symbol 'symbolic-color)
       "GEnum"
       (liber:symbol-documentation 'symbolic-color)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkSymbolicColor\" symbolic-color
   (:export t
@@ -1817,7 +1817,7 @@
 (setf (liber:alias-for-symbol 'accessible-role)
       "GEnum"
       (liber:symbol-documentation 'accessible-role)
- "@version{2024-5-25}
+ "@version{2024-05-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRole\" accessible-role
   (:export t
@@ -2060,7 +2060,7 @@
 (setf (liber:alias-for-symbol 'accessible-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-state)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleState\" gtk:accessible-state
   (:export t
@@ -2397,7 +2397,7 @@
 (setf (liber:alias-for-symbol 'accessible-tristate)
       "GEnum"
       (liber:symbol-documentation 'accessible-tristate)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
@@ -2437,7 +2437,7 @@
 (setf (liber:alias-for-symbol 'accessible-invalid-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-invalid-state)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
@@ -2479,7 +2479,7 @@
 (setf (liber:alias-for-symbol 'accessible-autocomplete)
       "GEnum"
       (liber:symbol-documentation 'accessible-autocomplete)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
@@ -2527,7 +2527,7 @@
 (setf (liber:alias-for-symbol 'accessible-sort)
       "GEnum"
       (liber:symbol-documentation 'accessible-sort)
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleSort\" accessible-sort
   (:export t
@@ -2569,7 +2569,7 @@
 (setf (liber:alias-for-symbol 'accessible-announcement-priority)
       "GEnum"
       (liber:symbol-documentation 'accessible-announcement-priority)
- "@version{2024-11-3}
+ "@version{2024-11-03}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAnnouncementPriority\"
                       accessible-announcement-priority

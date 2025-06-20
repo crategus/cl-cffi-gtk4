@@ -219,7 +219,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @begin{short}
     The @class{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -521,7 +521,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-attributes)
       "Accessor"
       (documentation 'label-attributes 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-attributes object) => attrs}
   @syntax{(setf (gtk:label-attributes object) attrs)}
   @argument[object]{a @class{gtk:label} widget}
@@ -576,7 +576,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-ellipsize)
       "Accessor"
       (documentation 'label-ellipsize 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-ellipsize object) => mode}
   @syntax{(setf (gtk:label-ellipsize object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -604,7 +604,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-extra-menu)
       "Accessor"
       (documentation 'label-extra-menu 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-extra-menu object) => menu}
   @syntax{(setf (gtk:label-extra-menu object) menu)}
   @argument[object]{a @class{gtk:label} widget}
@@ -634,7 +634,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-justify)
       "Accessor"
       (documentation 'label-justify 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-justify object) => justify}
   @syntax{(setf (gtk:label-justify object) justify)}
   @argument[object]{a @class{gtk:label} widget}
@@ -669,7 +669,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-label)
       "Accessor"
       (documentation 'label-label 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-label object) => text}
   @syntax{(setf (gtk:label-label object) text)}
   @argument[object]{a @class{gtk:label} widget}
@@ -707,7 +707,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-lines)
       "Accessor"
       (documentation 'label-lines 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-lines object) => lines}
   @syntax{(setf (gtk:label-lines object) lines)}
   @argument[object]{a @class{gtk:label} widget}
@@ -740,7 +740,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-max-width-chars)
       "Accessor"
       (documentation 'label-max-width-chars 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-max-width-chars object) => n-chars}
   @syntax{(setf (gtk:label-max-width-chars object) n-chars)}
   @argument[object]{a @class{gtk:label} widget}
@@ -766,7 +766,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-keyval)
       "Accessor"
       (documentation 'label-mnemonic-keyval 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-mnemonic-keyval object) => keyval}
   @argument[object]{a @class{gtk:label} widget}
   @argument[keyval]{an unsigned integer for the keyval}
@@ -799,7 +799,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-widget)
       "Accessor"
       (documentation 'label-mnemonic-widget 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-mnemonic-widget object) => widget}
   @syntax{(setf (gtk:label-mnemonic-widget object) widget)}
   @argument[object]{a @class{gtk:label} widget}
@@ -851,7 +851,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-natural-wrap-mode)
       "Accessor"
       (documentation 'label-natural-wrap-mode 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-natural-wrap-mode object) => mode}
   @syntax{(setf (gtk:label-natural-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -883,7 +883,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-selectable)
       "Accessor"
       (documentation 'label-selectable 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-selectable object) => selectable}
   @syntax{(setf (gtk:label-selectable object) selectable)}
   @argument[object]{a @class{gtk:label} widget}
@@ -913,7 +913,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-single-line-mode)
       "Accessor"
       (documentation 'label-single-line-mode 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-single-line-mode object) => mode}
   @syntax{(setf (gtk:label-single-line-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -938,7 +938,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-tabs)
       "Accessor"
       (documentation 'label-tabs 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-tabs object) => tabs}
   @syntax{(setf (gtk:label-tabs object) tabs)}
   @argument[object]{a @class{gtk:label} widget}
@@ -968,7 +968,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-markup)
       "Accessor"
       (documentation 'label-use-markup 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-use-markup object) => setting}
   @syntax{(setf (gtk:label-use-markup object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -998,7 +998,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-underline)
       "Accessor"
       (documentation 'label-use-underline 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-use-underline object) => setting}
   @syntax{(setf (gtk:label-use-underline object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1030,7 +1030,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-width-chars)
       "Accessor"
       (documentation 'label-width-chars 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-width-chars object) => n-chars}
   @syntax{(setf (gtk:label-width-chars object) n-chars)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1056,7 +1056,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap)
       "Accessor"
       (documentation 'label-wrap 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-wrap object) => wrap}
   @syntax{(setf (gtk:label-wrap object) wrap)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1082,7 +1082,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap-mode)
       "Accessor"
       (documentation 'label-wrap-mode 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-wrap-mode object) => setting}
   @syntax{(setf (gtk:label-wrap-mode object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1114,7 +1114,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-xalign)
       "Accessor"
       (documentation 'label-xalign 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-xalign object) => xalign}
   @syntax{(setf (gtk:label-xalign object) xalign)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1146,7 +1146,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-yalign)
       "Accessor"
       (documentation 'label-yalign 'function)
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-yalign object) => yalign}
   @syntax{(setf (gtk:label-yalign object) yalign)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1168,7 +1168,7 @@ lambda (label step count extend)    :action
 
 (defun label-new (&optional text)
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[text]{an optional string for the text of the label, or @code{nil}}
   @return{The new @class{gtk:label} widget.}
   @begin{short}
@@ -1187,7 +1187,7 @@ lambda (label step count extend)    :action
 
 (defun label-new-with-mnemonic (text)
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[text]{a string for the text of the label, with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:label} widget.}
@@ -1229,7 +1229,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_text" label-text) :string
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-text label) => text}
   @syntax{(setf (gtk:label-text-label) text)}
   @argument[label]{a @class{gtk:label} widget}
@@ -1256,7 +1256,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_set_markup" label-set-markup) :void
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a markup string}
   @begin{short}
@@ -1278,7 +1278,7 @@ lambda (label step count extend)    :action
 (cffi:defcfun ("gtk_label_set_text_with_mnemonic" label-set-text-with-mnemonic)
     :void
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a string for the label}
   @begin{short}
@@ -1302,7 +1302,7 @@ lambda (label step count extend)    :action
 (cffi:defcfun ("gtk_label_set_markup_with_mnemonic"
                label-set-markup-with-mnemonic) :void
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a Pango markup string}
   @begin{short}
@@ -1327,7 +1327,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @return{The @class{pango:layout} object for this label.}
   @begin{short}
@@ -1355,7 +1355,7 @@ lambda (label step count extend)    :action
 
 (defun label-layout-offsets (label)
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-layout-offsets label) => x, y}
   @argument[label]{a @class{gtk:label} widget}
   @argument[x]{an integer for the x offset}
@@ -1395,7 +1395,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_select_region" label-select-region) :void
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @argument[start]{an integer for the start offset, in characters not bytes}
   @argument[end]{an integer for the end offset, in characters not bytes}
@@ -1425,7 +1425,7 @@ lambda (label step count extend)    :action
 
 (defun label-selection-bounds (label)
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @syntax{(gtk:label-selection-bounds label) => start, end}
   @argument[label]{a @class{gtk:label} widget}
   @argument[start]{an integer for the start of the selection, as a character
@@ -1448,7 +1448,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_current_uri" label-current-uri) :string
  #+liber-documentation
- "@version{2025-4-27}
+ "@version{2025-04-27}
   @argument[label]{a @class{gtk:label} widget}
   @return{The string with the currently active URI.}
   @begin{short}

@@ -86,7 +86,7 @@
 
 #+liber-documentation
 (setf (documentation 'action-bar 'type)
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @begin{short}
     The @class{gtk:action-bar} widget is designed to present contextual actions.
   @end{short}
@@ -142,7 +142,7 @@ actionbar
 (setf (liber:alias-for-function 'action-bar-revealed)
       "Accessor"
       (documentation 'action-bar-revealed 'function)
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @syntax{(gtk:action-bar-revealed object) => revealed}
   @syntax{(setf (gtk:action-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:action-bar} widget}
@@ -169,7 +169,7 @@ actionbar
 
 (defun action-bar-new ()
  #+liber-documentation
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @return{The new @class{gtk:action-bar} widget.}
   @short{Creates a new action bar.}
   @see-class{gtk:action-bar}"
@@ -183,7 +183,7 @@ actionbar
 
 (cffi:defcfun ("gtk_action_bar_pack_start" action-bar-pack-start) :void
  #+liber-documentation
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
   @arg{actionbar}}
@@ -204,7 +204,7 @@ actionbar
 
 (cffi:defcfun ("gtk_action_bar_pack_end" action-bar-pack-end) :void
  #+liber-documentation
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
     @arg{actionbar}}
@@ -225,7 +225,7 @@ actionbar
 
 (cffi:defcfun ("gtk_action_bar_remove" action-bar-remove) :void
  #+liber-documentation
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be removed}
   @short{Removes a child widget from the action bar.}
@@ -251,7 +251,7 @@ actionbar
 (cffi:defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2025-4-24}
+ "@version{2025-04-24}
   @syntax{(gtk:action-bar-center-widget actionbar) => widget}
   @syntax{(setf (gtk:action-bar-center-widget actionbar) widget)}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
