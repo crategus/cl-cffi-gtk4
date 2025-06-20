@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.directory-list.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -58,10 +58,10 @@
 ;;;     error
 ;;;     file
 ;;;     io-priority
-;;;     item-type                                          Since 4.8
+;;;     item-type                                           Since 4.8
 ;;;     loading
 ;;;     monitored
-;;;     n-items                                            Since 4.8
+;;;     n-items                                             Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -113,7 +113,7 @@
 
 #+liber-documentation
 (setf (documentation 'directory-list 'type)
- "@version{2024-12-15}
+ "@version{2025-06-15}
   @begin{short}
     The @class{gtk:directory-list} class is a list model that wraps the
     requested information from the @code{g_file_enumerate_children_async()}
@@ -138,7 +138,16 @@
   means you do not need access to the @class{gtk:directory-list} object but can
   access the @class{g:file} object directly from the @class{g:file-info} object
   when operating with a @class{gtk:list-view} widget or similar.
-  @see-class{g:list-model}")
+  @see-class{g:list-model}
+  @see-constructor{gtk:directory-list-new}
+  @see-slot{gtk:directory-list-attributes}
+  @see-slot{gtk:directory-list-error}
+  @see-slot{gtk:directory-list-file}
+  @see-slot{gtk:directory-list-io-priority}
+  @see-slot{gtk:directory-list-item-type}
+  @see-slot{gtk:directory-list-loading}
+  @see-slot{gtk:directory-list-monitored}
+  @see-slot{gtk:directory-list-n-items}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -156,11 +165,11 @@
 (setf (liber:alias-for-function 'directory-list-attributes)
       "Accessor"
       (documentation 'directory-list-attributes 'function)
- "@version{2024-12-15}
+ "@version{2025-06-15}
   @syntax{(gtk:directory-list-attributes object) => attributes}
   @syntax{(setf (gtk:directory-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[attributes]{a string with the attributes}
+  @argument[attributes]{a string for the attributes}
   @begin{short}
     Accessor of the @slot[gtk:directory-list]{attributes} slot of the
     @class{gtk:directory-list} class.
@@ -185,10 +194,10 @@
 (setf (liber:alias-for-function 'directory-list-error)
       "Accessor"
       (documentation 'directory-list-error 'function)
- "@version{2024-12-15}
+ "@version{2025-06-15}
   @syntax{(gtk:directory-list-error object) => error}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[error]{a @class{glib:error} instance with the loading error or
+  @argument[error]{a @class{glib:error} instance for the loading error or
   @code{nil} if loading finished successfully}
   @begin{short}
     Accessor of the @slot[gtk:directory-list]{error} slot of the
@@ -244,11 +253,11 @@
 (setf (liber:alias-for-function 'directory-list-io-priority)
       "Accessor"
       (documentation 'directory-list-io-priority 'function)
- "@version{2024-12-15}
+ "@version{2025-06-15}
   @syntax{(gtk:directory-list-io-priority object) => priority}
   @syntax{(setf (gtk:directory-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[priority]{an integer with the IO priority to use}
+  @argument[priority]{an integer for the IO priority to use}
   @begin{short}
     Accessor of the @slot[gtk:directory-list]{io-priority} slot of the
     @class{gtk:directory-list} class.
@@ -365,10 +374,10 @@
 (setf (liber:alias-for-function 'directory-list-n-items)
       "Accessor"
       (documentation 'directory-list-n-items 'function)
- "@version{2024-12-15}
+ "@version{2025-06-15}
   @syntax{(gtk:directory-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:directory-list} object}
-  @argument[n-items]{an unsigned integer with the number of items contained in
+  @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     Accessor of the @slot[gtk:directory-list]{n-items} slot of the
@@ -381,22 +390,30 @@
 ;;; gtk_directory_list_new
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline directory-list-new))
+(cffi:defcfun ("gtk_directory_list_new" %directory-list-new)
+    (gobject:object directory-list :return)
+  (attributes :string)
+  (file gio:file-as-namestring))
 
 (defun directory-list-new (attributes file)
  #+liber-documentation
- "@version{2024-12-15}
-  @argument[attributes]{a string with the attributes to query with}
-  @argument[file]{a @class{g:file} object to query}
+ "@version{2025-06-15}
+  @argument[attributes]{a string for the attributes to query with}
+  @argument[path]{a pathname or namestring for the directory to query}
   @return{The @class{gtk:directory-list} object.}
   @begin{short}
-    Creates a new directory list querying the given @arg{file} with the given
+    Creates a new directory list querying the given @arg{path} with the given
     @arg{attributes}.
   @end{short}
-  @see-class{gtk:directory-list}"
-  (make-instance 'directory-list
-                 :attributes attributes
-                 :file file))
+  @begin[Notes]{dictionary}
+    The C function takes a @class{g:file} instance for the @arg{path} argument.
+    In the Lisp implementation the @type{g:file-as-namestring} type specifier
+    is used to convert the pathname or namestring to a @class{g:file} instance.
+  @end{dictionary}
+  @see-class{gtk:directory-list}
+  @see-class{g:file}
+  @see-type{g:file-as-namestring}"
+  (%directory-list-new attributes file))
 
 (export 'directory-list-new)
 

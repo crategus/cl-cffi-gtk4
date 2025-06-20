@@ -87,12 +87,12 @@
 
 #+liber-documentation
 (setf (documentation 'string-object 'type)
- "@version{2025-3-29}
+ "@version{2025-06-15}
   @begin{short}
     The @class{gtk:string-object} class is the type of items in a
     @class{gtk:string-list} object.
   @end{short}
-  A @class{gtk:string-object} object is a wrapper around a string. It has a
+  The @class{gtk:string-object} object is a wrapper around a string. It has a
   @slot[gtk:string-object]{string} property that can be used for property
   bindings and expressions.
   @see-constructor{gtk:string-object-new}
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'string-object-string)
       "Accessor"
       (documentation 'string-object-string 'function)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @syntax{(gtk:string-object-string object) => string}
   @argument[object]{a @class{gtk:string-object} object}
   @argument[string]{a string}
@@ -137,7 +137,7 @@
 
 (defun string-object-new (&optional string)
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @argument[string]{a string to wrap, or @code{nil}}
   @return{The new @class{gtk:string-object} object.}
   @begin{short}
@@ -183,7 +183,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-list 'type)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @begin{short}
     The @class{gtk:string-list} class is a list model that wraps an array of
     strings.
@@ -242,7 +242,7 @@
 (setf (liber:alias-for-function 'string-list-item-type)
       "Accessor"
       (documentation 'string-list-item-type 'function)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @syntax{(gtk:string-list-item-type object) => type}
   @syntax{(setf (gtk:string-list-item-type object) type)}
   @argument[object]{a @class{gtk:string-list} object}
@@ -270,7 +270,7 @@
 (setf (liber:alias-for-function 'string-list-n-items)
       "Accessor"
       (documentation 'string-list-n-items 'function)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @syntax{(gtk:string-list-n-items object) => n-items}
   @syntax{(setf (gtk:string-list-n-items object) n-items)}
   @argument[object]{a @class{gtk:string-list} object}
@@ -288,7 +288,7 @@
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "strings" 'string-list) t)
  "The @code{strings} property of type @code{:string} (Construct only) @br{}
-  An array of strings. Since 4.10 @br{}
+  The array of strings. Since 4.10 @br{}
   @em{Note:} This property is not readable and not writable. You cannot
   initialize it in a @code{make-instance} method. Therefore, no accessor is
   exported.")
@@ -300,7 +300,7 @@
 (cffi:defcfun ("gtk_string_list_new" string-list-new)
     (g:object string-list :return)
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @argument[strings]{a list of strings to put in the model}
   @return{The new @class{gtk:string-list} object.}
   @begin{short}
@@ -322,11 +322,9 @@
 ;;; gtk_string_list_append
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: Is this implementation correct?
-
 (cffi:defcfun ("gtk_string_list_append" string-list-append) :void
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[string]{a string to insert}
   @begin{short}
@@ -348,7 +346,7 @@
 
 (cffi:defcfun ("gtk_string_list_remove" string-list-remove) :void
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[pos]{an unsigned integer for the position of the string that is
     to be removed}
@@ -375,7 +373,7 @@
 
 (defun string-list-splice (model pos n additions)
  #+liber-documentation
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[pos]{an unsigned integer for the position at which to make the
     change}
@@ -428,6 +426,17 @@
 
 #+gtk-4-18
 (cffi:defcfun ("gtk_string_list_find" string-list-find) :uint
+ "@version{#2025-06-15}
+  @argument[model]{a @class{gtk:string-list} object}
+  @argument[string]{a string to find}
+  @return{The unsigned integer with the position of the string.}
+  @begin{short}
+    Gets the position of the string in @arg{model}.
+  @end{short}
+  If @arg{model} does not contain @arg{string}, @code{G_MAXUINT} is returned.
+
+  Since 4.18
+  @see-class{gtk:string-list}"
   (model (g:object string-list))
   (str :string))
 

@@ -80,7 +80,7 @@
 
 #+liber-documentation
 (setf (documentation 'builder-list-item-factory 'type)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @begin{short}
     The @class{gtk:builder-list-item-factory} object is a
     @class{gtk:list-item-factory} object that creates widgets by instantiating
@@ -133,7 +133,7 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-bytes)
       "Accessor"
       (documentation 'builder-list-item-factory-bytes 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:builder-list-item-factory-bytes object) => bytes}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[bytes]{a @class{g:bytes} instance for the @class{gtk:builder} data}
@@ -161,7 +161,7 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-resource)
       "Accessor"
       (documentation 'builder-list-item-factory-resource 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:builder-list-item-factory-resource object) => resource}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a string for the path to the resource or @code{nil}
@@ -187,7 +187,7 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-scope)
       "Accessor"
       (documentation 'builder-list-item-factory-scope 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:builder-list-item-factory-scope object) => scope}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a @class{gtk:builder-scope} object used when
@@ -206,7 +206,7 @@
 
 (defun builder-list-item-factory-new-from-bytes (scope bytes)
  #+liber-documentation
- "@version{2025-3-16}
+ "@version{2025-03-16}
   @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
   @argument[bytes]{a @class{g:bytes} instance containing the UI file to
     instantiate}
@@ -230,7 +230,7 @@
 
 (defun builder-list-item-factory-new-from-resource (scope path)
  #+liber-documentation
- "@version{2025-3-16}
+ "@version{2025-03-16}
   @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
   @argument[path]{a string for a valid path to a resource that contains the
     data}

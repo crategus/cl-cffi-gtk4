@@ -58,7 +58,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-item-factory 'type)
- "@version{2025-3-16}
+ "@version{2025-03-16}
   @begin{short}
     The @class{gtk:list-item-factory} object creates widgets for the items
     taken from a @class{g:list-model} object.

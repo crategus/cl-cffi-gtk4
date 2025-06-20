@@ -68,7 +68,7 @@
 
 #+liber-documentation
 (setf (documentation 'signal-list-item-factory 'type)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @begin{short}
     The @class{gtk:signal-list-item-factory} object is a
     @class{gtk:list-item-factory} object that emits signals to manage list
@@ -78,8 +78,8 @@
   Signals are emitted for every list item in the same order:
   @begin{enumerate}
     @item{The @code{\"setup\"} signal is emitted to set up permanent things on
-      the list item. This usually means constructing the widgets used in the row
-      and adding them to the list item.}
+      the list item. This usually means constructing the widgets used in the
+      row and adding them to the list item.}
     @item{The @code{\"bind\"} signal is emitted to bind the item passed via the
       @slot[gtk:list-item]{item} property to the widgets that have been created
       in step 1 or to add item specific widgets. Signals are connected to listen
@@ -166,7 +166,7 @@ lambda (factory item)    :run-first
 (declaim (inline signal-list-item-factory-new))
 
 (defun signal-list-item-factory-new ()
- "@version{2025-3-16}
+ "@version{2025-03-16}
   @return{The new @class{gtk:signal-list-item-factory} object.}
   @begin{short}
     Creates a new @class{gtk:signal-list-item-factory} object.

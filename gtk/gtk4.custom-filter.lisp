@@ -63,10 +63,10 @@
 
 #+liber-documentation
 (setf (documentation 'custom-filter 'type)
- "@version{2024-09-27}
+ "@version{2025-06-16}
   @begin{short}
-    The @class{gtk:custom-filter} object is a @class{gtk:filter} object that
-    uses a callback to determine whether to include an item or not.
+    The @class{gtk:custom-filter} object is a @class{gtk:filter} implementation
+    that uses a callback to determine whether to include an item or not.
   @end{short}
   @see-constructor{gtk:custom-filter-new}
   @see-class{gtk:filter}")
