@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'native-dialog 'type)
- "@version{2025-3-24}
+ "@version{2025-06-22}
   @begin{short}
     Native dialogs are platform dialogs that do not use the @class{gtk:dialog}
     or @class{gtk:window} classes.
@@ -107,25 +107,27 @@
   a similar API in order to drive them. The @class{gtk:native-dialog} object is
   an API that allows you to do this. It allows you to set various common
   properties on the dialog, as well as show and hide it and get a
-  @code{\"response\"} signal when the user finished with the dialog.
+  @sig[gtk:native-dialog]{response} signal when the user finished with the
+  dialog.
 
   Note that unlike the @class{gtk:dialog} widget, @class{gtk:native-dialog}
   objects are not toplevel widgets, and GTK does not keep them alive. It is
   your responsibility to keep a reference until you are done with the object.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"response\" signal}
+    @begin[native-dialog::response]{signal}
       @begin{pre}
 lambda (dialog response)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:native-dialog} object on which the signal
           is emitted.}
         @entry[response]{The integer with the response ID.}
-      @end{table}
+      @end{simple-table}
       Emitted when the user responds to the dialog. When this is called the
       dialog has been hidden. If you call the @fun{gtk:native-dialog-hide}
       function before the user responds to the dialog this signal will not be
       emitted.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:native-dialog-modal}
   @see-slot{gtk:native-dialog-title}
@@ -150,7 +152,7 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-modal)
       "Accessor"
       (documentation 'native-dialog-modal 'function)
- "@version{2025-3-24}
+ "@version{2025-03-24}
   @syntax{(gtk:native-dialog-modal object) => modal}
   @syntax{(setf (gtk:native-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:native-dialog} object}
@@ -183,7 +185,7 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-title)
       "Accessor"
       (documentation 'native-dialog-title 'function)
- "@version{2025-3-24}
+ "@version{2025-03-24}
   @syntax{(gtk:native-dialog-title object) => title}
   @syntax{(setf (gtk:native-dialog-title object) title)}
   @argument[object]{a @class{gtk:native-dialog} object}
@@ -210,7 +212,7 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-transient-for)
       "Accessor"
       (documentation 'native-dialog-transient-for 'function)
- "@version{2025-3-24}
+ "@version{2025-03-24}
   @syntax{(gtk:native-dialog-transient-for object) => parent}
   @syntax{(setf (gtk:native-dialog-transient-for object) parent)}
   @argument[object]{a @class{gtk:native-dialog} object}
@@ -243,7 +245,7 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-visible)
       "Accessor"
       (documentation 'native-dialog-visible 'function)
- "@version{2025-3-24}
+ "@version{2025-03-24}
   @syntax{(gtk:native-dialog-visible object) => visible}
   @syntax{(setf (gtk:native-dialog-visible object) visible)}
   @argument[object]{a @class{gtk:native-dialog} object}
@@ -261,14 +263,14 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_native_dialog_show" native-dialog-show) :void
  #+liber-documentation
- "@version{2025-3-24}
+ "@version{2025-06-22}
   @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Shows the dialog on the display, allowing the user to interact with it.
   @end{short}
   When the user accepts the state of the dialog the dialog will be automatically
-  hidden and the @code{\"response\"} signal will be emitted. Multiple calls
-  while the dialog is visible will be ignored.
+  hidden and the @sig[gtk:native-dialog]{response} signal will be emitted.
+  Multiple calls while the dialog is visible will be ignored.
   @see-class{gtk:native-dialog}"
   (dialog (g:object native-dialog)))
 
@@ -280,13 +282,14 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
  #+liber-documentation
- "@version{#2025-3-24}
+ "@version{#2025-06-22}
   @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Hides the dialog if it is visilbe, aborting any interaction.
   @end{short}
-  Once this is called the @code{\"response\"} signal will not be emitted until
-  after the next call to the @fun{gtk:native-dialog-show} function.
+  Once this is called the @sig[gtk:native-dialog]{response} signal will not be
+  emitted until after the next call to the @fun{gtk:native-dialog-show}
+  function.
 
   If the dialog is not visible this does nothing.
   @see-class{gtk:native-dialog}
@@ -301,7 +304,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_native_dialog_destroy" native-dialog-destroy) :void
  #+liber-documentation
- "@version{2025-3-24}
+ "@version{2025-03-24}
   @argument[dialog]{a @class{gtk:native-dialog} object}
   @begin{short}
     Destroys a dialog.

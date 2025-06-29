@@ -259,7 +259,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2025-05-04}
+ "@version{2025-06-22}
   @begin{short}
     The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -305,68 +305,74 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
     titlebar child.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:window} implementation uses the @code{:window} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:window} implementation uses the
+    @val[gtk:accessible-role]{:window} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate-default\" signal}
+    @begin[window::activate-default]{signal}
       @begin{pre}
 lambda (window)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget which received the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       activates the default widget of the window.
-    @subheading{The \"activate-focus\" signal}
+    @end{signal}
+    @begin[window::activate-focus]{signal}
       @begin{pre}
 lambda (window)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget which received the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       activates the currently focused widget of the window.
-    @subheading{The \"close-request\" signal}
+    @end{signal}
+    @begin[window::close-request]{signal}
       @begin{pre}
 lambda (window)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked
           for the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user clicks on the Close button of the
       window.
-    @subheading{The \"enable-debugging\" signal}
+    @end{signal}
+    @begin[window::enable-debugging]{signal}
       @begin{pre}
 lambda (window toggle)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
         @entry[toggle]{The boolean which toggles the debugger.}
         @entry[Returns]{The boolean which is @em{true} if the key binding was
           handled.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user enables
       or disables interactive debugging. When the @arg{toggle} argument is
       @em{true}, interactive debugging is toggled on or off, when it is
       @em{false}, the debugger will be pointed at the widget under the pointer.
       The default bindings for this signal are the @kbd{Ctrl-Shift-I} and
       @kbd{Ctrl-Shift-D} keys.
-    @subheading{The \"keys-changed\" signal}
+    @end{signal}
+    @begin[window::keys-changed]{signal}
       @begin{pre}
 lambda (window)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget which received the signal.}
-      @end{table}
+      @end{simple-table}
       The signal gets emitted when the set of accelerators or mnemonics that
       are associated with the window changes. @br{}
       @em{Warning:} Deprecated since 4.10. Use @class{gtk:shortcut} and
       @class{gtk:event-controller} objects to implement keyboard shortcuts.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:window-new}
   @see-slot{gtk:window-application}
@@ -417,7 +423,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-application)
       "Accessor"
       (documentation 'window-application 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-application object) => application}
   @syntax{(setf (gtk:window-application object) application)}
   @argument[object]{a @class{gtk:window} widget}
@@ -455,7 +461,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-child)
       "Accessor"
       (documentation 'window-child 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-child object) => child}
   @syntax{(setf (gtk:window-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
@@ -481,7 +487,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-decorated)
       "Accessor"
       (documentation 'window-decorated 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-decorated object) => setting}
   @syntax{(setf (gtk:window-decorated object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -547,7 +553,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-widget)
       "Accessor"
       (documentation 'window-default-widget 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-default-widget object) => widget}
   @syntax{(setf (gtk:window-default-widget object) widget)}
   @argument[object]{a @class{gtk:window} widget}
@@ -603,7 +609,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-deletable)
       "Accessor"
       (documentation 'window-deletable 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-deletable object) => setting}
   @syntax{(setf (gtk:window-deletable object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -643,7 +649,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-destroy-with-parent)
       "Accessor"
       (documentation 'window-destroy-with-parent 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-destroy-with-parent object) => setting}
   @syntax{(setf (gtk:window-destroy-with-parent object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -675,7 +681,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-display)
       "Accessor"
       (documentation 'window-display 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-display object) => display}
   @syntax{(setf (gtk:window-display object) display)}
   @argument[object]{a @class{gtk:window} widget}
@@ -705,7 +711,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-focus-visible)
       "Accessor"
       (documentation 'window-focus-visible 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-focus-visible object) => setting}
   @syntax{(setf (gtk:window-focus-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -733,7 +739,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-focus-widget)
       "Accessor"
       (documentation 'window-focus-widget 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-focus-widget object) => widget}
   @syntax{(setf (gtk:window-focus-widget object) widget)}
   @argument[object]{a @class{gtk:window} widget}
@@ -772,7 +778,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-fullscreened)
       "Accessor"
       (documentation 'window-fullscreened 'function)
- "@version{2024-10-2}
+ "@version{2025-06-22}
   @syntax{(gtk:window-fullscreened object) => setting}
   @syntax{(setf (gtk:window-fullscreened object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -788,7 +794,7 @@ lambda (window)    :run-first
   Setting this property is the equivalent of calling the
   @fun{gtk:window-fullscreen} or @fun{gtk:window-unfullscreen} functions. Either
   operation is asynchronous, which means you will need to connect to the
-  @code{\"notify\"} signal in order to know whether the operation was
+  @sig[g:object]{notify} signal in order to know whether the operation was
   successful.
 
   If the window is not yet mapped, the value returned will show whether the
@@ -812,7 +818,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-handle-menubar-accel)
       "Accessor"
       (documentation 'window-handle-menubar-accel 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-handle-menubar-accel object) => setting}
   @syntax{(setf (gtk:window-handle-menubar-accel object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -842,7 +848,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-hide-on-close)
       "Accessor"
       (documentation 'window-hide-on-close 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-hide-on-close object) => setting}
   @syntax{(setf (gtk:window-hide-on-close object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -870,7 +876,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-icon-name)
       "Accessor"
       (documentation 'window-icon-name 'function)
- "@version{2025-1-5}
+ "@version{2025-01-05}
   @syntax{(gtk:window-icon-name object) => name}
   @syntax{(setf (gtk:window-icon-name object) name)}
   @argument[object]{a @class{gtk:window} widget}
@@ -901,7 +907,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-is-active)
       "Accessor"
       (documentation 'window-is-active 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-is-active object) => active}
   @syntax{(setf (gtk:window-is-active object) active)}
   @argument[object]{a @class{gtk:window} widget}
@@ -930,7 +936,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-maximized)
       "Accessor"
       (documentation 'window-maximized 'function)
- "@version{2024-10-2}
+ "@version{2025-06-22}
   @syntax{(gtk:window-maximized object) => maximized}
   @syntax{(setf (gtk:window-maximized object) maximized)}
   @argument[object]{a @class{gtk:window} widget}
@@ -942,7 +948,7 @@ lambda (window)    :run-first
   Setting this property is the equivalent of calling the
   @fun{gtk:window-maximize} or @fun{gtk:window-unmaximize} functions. Either
   operation is asynchronous, which means you will need to connect to the
-  @code{\"notify\"} signal in order to know whether the operation was
+  @sig[g:object]{notify} signal in order to know whether the operation was
   successful.
   @see-class{gtk:window}
   @see-function{gtk:window-maximize}
@@ -964,7 +970,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-mnemonics-visible)
       "Accessor"
       (documentation 'window-mnemonics-visible 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-mnemonics-visible object) => setting}
   @syntax{(setf (gtk:window-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -990,7 +996,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-modal)
       "Accessor"
       (documentation 'window-modal 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-modal object) => modal}
   @syntax{(setf (gtk:window-modal object) modal)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1023,7 +1029,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-resizable)
       "Accessor"
       (documentation 'window-resizable 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-resizable object) => resizable}
   @syntax{(setf (gtk:window-resizable object) resizable)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1086,7 +1092,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-suspended)
       "Accessor"
       (documentation 'window-suspended 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-suspended object) => suspended}
   @argument[object]{a @class{gtk:window} widget}
   @argument[suspended]{a boolean whether the window is suspended}
@@ -1146,7 +1152,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-titlebar)
       "Accessor"
       (documentation 'window-titlebar 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-titlebar window) => widget}
   @syntax{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
@@ -1185,7 +1191,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-transient-for)
       "Accessor"
       (documentation 'window-transient-for 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:window-transient-for object) => parent}
   @syntax{(setf (gtk:window-transient-for object) parent)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1219,7 +1225,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_new" window-new) (g:object widget)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @return{The new @class{gtk:window} widget.}
   @begin{short}
     Creates a new toplevel window, which can contain other widgets.
@@ -1243,7 +1249,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_destroy" window-destroy) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget to destroy}
   @short{Drop the internal reference GTK holds on toplevel windows.}
   @begin[Examples]{dictionary}
@@ -1338,7 +1344,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_is_maximized" window-is-maximized) :boolean
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @return{The boolean whether the window is maximized.}
   @begin{short}
@@ -1365,7 +1371,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_is_fullscreen" window-is-fullscreen) :boolean
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @return{The boolean whether the window has a fullscreen state.}
   @begin{short}
@@ -1393,14 +1399,15 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_toplevels" window-toplevels)
     (g:object g:list-model)
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2026-06-22}
   @return{The @class{g:list-model} object with the list of toplevel widgets.}
   @begin{short}
     Returns a list of all existing toplevel windows.
   @end{short}
   If you want to iterate through the list and perform actions involving
   callbacks that might destroy the widgets or add new ones, be aware that the
-  list of toplevels will change and emit the @code{\"items-changed\"} signal.
+  list of toplevels will change and emit the @sig[g:list-model]{items-changed}
+  signal.
   @see-class{gtk:window}
   @see-class{g:list-model}
   @see-function{gtk:window-list-toplevels}")
@@ -1414,7 +1421,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_list_toplevels" window-list-toplevels)
     (g:list-t (g:object window))
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @return{The list of toplevel @class{gtk:widget} objects.}
   @begin{short}
     Returns a list of all existing toplevel windows.
@@ -1531,7 +1538,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_close" window-close) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Requests that the window is closed.
@@ -1549,7 +1556,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_minimize" window-minimize) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to minimize the window.
@@ -1577,7 +1584,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unminimize" window-unminimize) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unminimize the window.
@@ -1603,7 +1610,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_maximize" window-maximize) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to maximize the window, so that it becomes full screen.
@@ -1631,7 +1638,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unmaximize" window-unmaximize) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unmaximize the window.
@@ -1656,7 +1663,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_fullscreen" window-fullscreen) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to place the window in the fullscreen state.
@@ -1683,7 +1690,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_fullscreen_on_monitor" window-fullscreen-on-monitor)
     :void
  #+liber-documentation
- "@version{#2024-10-2}
+ "@version{#2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @argument[monitor]{a @class{gdk:monitor} object to go fullscreen on}
   @begin{short}
@@ -1711,7 +1718,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unfullscreen" window-unfullscreen) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to toggle off the fullscreen state for the window.
@@ -1769,7 +1776,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_group" window-group)
     (g:object window-group)
  #+liber-documentation
- "@version{2025-3-30}
+ "@version{2025-03-30}
   @argument[window]{a @class{gtk:window} widget, or @code{nil}}
   @begin{return}
     The @class{gtk:window-group} object for the @arg{window} argument or the
@@ -1808,7 +1815,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_auto_startup_notification"
                window-set-auto-startup-notification) :void
  #+liber-documentation
- "@version{#2024-10-2}
+ "@version{#2024-10-02}
   @argument[setting]{@em{true} to automatically do startup notification}
   @begin{short}
     Call this function to disable the automatic startup notification.
@@ -1879,7 +1886,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_interactive_debugging"
                window-set-interactive-debugging) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[enable]{@em{true} to enable interactice debugging}
   @begin{short}
     Opens or closes the interactive debugger.
@@ -1898,7 +1905,7 @@ lambda (window)    :run-first
 #+gtk-4-12
 (cffi:defcfun ("gtk_window_is_suspended" window-is-suspended) :boolean
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[window]{a @class{gtk:window} widget}
   @return{The boolean whether the window is suspended.}
   @begin{short}

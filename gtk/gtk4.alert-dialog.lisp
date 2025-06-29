@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'alert-dialog 'type)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @begin{short}
     The @class{gtk:alert-dialog} object collects the arguments that are needed
     to present a message to the user.
@@ -164,7 +164,7 @@
 (setf (liber:alias-for-function 'alert-dialog-buttons)
       "Accessor"
       (documentation 'alert-dialog-buttons 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-buttons object) => buttons}
   @syntax{(setf (gtk:alert-dialog-buttons object) buttons)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -198,7 +198,7 @@
 (setf (liber:alias-for-function 'alert-dialog-cancel-button)
       "Accessor"
       (documentation 'alert-dialog-cancel-button 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-cancel-button object) => button}
   @syntax{(setf (gtk:alert-dialog-cancel-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -235,7 +235,7 @@
 (setf (liber:alias-for-function 'alert-dialog-default-button)
       "Accessor"
       (documentation 'alert-dialog-default-button 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-default-button object) => button}
   @syntax{(setf (gtk:alert-dialog-default-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -264,7 +264,7 @@
 (setf (liber:alias-for-function 'alert-dialog-detail)
       "Accessor"
       (documentation 'alert-dialog-detail 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-detail object) => detail}
   @syntax{(setf (gtk:alert-dialog-detail object) detail)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -292,7 +292,7 @@
 (setf (liber:alias-for-function 'alert-dialog-message)
       "Accessor"
       (documentation 'alert-dialog-message 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-message object) => message}
   @syntax{(setf (gtk:alert-dialog-message object) message)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -320,7 +320,7 @@
 (setf (liber:alias-for-function 'alert-dialog-modal)
       "Accessor"
       (documentation 'alert-dialog-modal 'function)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @syntax{(gtk:alert-dialog-modal object) => modal}
   @syntax{(setf (gtk:alert-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:alert-dialog} object}
@@ -342,7 +342,7 @@
 
 (defun alert-dialog-new (msg &rest args)
  #+liber-documentation
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @argument[msg]{a format string for the message}
   @argument[args]{arguments for @arg{msg}}
   @return{The new @class{gtk:alert-dialog} object.}
@@ -373,12 +373,12 @@
 
 (defun alert-dialog-choose (dialog parent cancellable func)
  #+liber-documentation
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     This function shows the alert dialog to the user.
   @end{short}
@@ -417,7 +417,7 @@
 
 (defun alert-dialog-choose-finish (dialog result)
  #+liber-documentation
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[result]{a @class{g:async-result} object for the result}
   @begin{return}
@@ -446,7 +446,7 @@
 
 (cffi:defcfun ("gtk_alert_dialog_show" alert-dialog-show) :void
  #+liber-documentation
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @begin{short}

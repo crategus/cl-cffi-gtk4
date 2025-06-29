@@ -144,7 +144,7 @@
  #+liber-documentation
  "@version{2025-05-15}
   @argument[group]{a @class{gtk:window-group} object}
-  @return{The list of windows inside the window group.}
+  @return{The list of @class{gtk:window} widgets inside the window group.}
   @short{Returns a list of windows that belong to the window group.}
   @see-class{gtk:window-group}
   @see-class{gtk:window}"

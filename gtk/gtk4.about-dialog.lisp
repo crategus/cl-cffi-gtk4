@@ -179,7 +179,7 @@
   (:0bsd 18))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:unknown]{No license specified.}
       @entry[:custom]{A license text is going to be specified by the developer.}
       @entry[:gpl-2-0]{The GNU General Public License, version 2.0.}
@@ -203,7 +203,7 @@
       @entry[:apache-2-0]{The Apache License, version 2.0.}
       @entry[:mpl-2-0]{The Mozilla Public License, version 2.0.}
       @entry[:0bsd]{Zero-clause BSD license. Since 4.14}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The type of license for an application.
@@ -275,7 +275,7 @@
 
 #+liber-documentation
 (setf (documentation 'about-dialog 'type)
- "@version{2025-05-12}
+ "@version{2025-06-26}
   @begin{short}
     The @class{gtk:about-dialog} widget offers a simple way to display
     information about a program like its logo, name, copyright, website and
@@ -291,7 +291,7 @@
   The about dialog often contain links and email addresses. The about dialog
   displays these as clickable links. By default, it calls the
   @fun{gtk:file-launcher-launch} function when a user clicks one. The behaviour
-  can be overridden with the @code{\"activate-link\"} signal.
+  can be overridden with the @sig[gtk:about-dialog]{activate-link} signal.
 
   To specify a person with an email address, use a string like
   @code{\"Edgar Allan Poe <edgar@@poe.com>\"}. To specify a website with a
@@ -317,19 +317,20 @@
     name @code{window} and the @code{.aboutdialog} style class.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate-link\" signal}
+    @begin[about-dialog::activate-link]{signal}
       @begin{pre}
 lambda (dialog uri)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:about-dialog} widget on which the signal
           was emitted.}
         @entry[uri]{The string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
-      @end{table}
+      @end{simple-table}
       Emitted when a URL is activated. Applications may connect to it to
       override the default behaviour, which is to call the
       @fun{gtk:file-launcher-launch} function.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:about-dialog-new}
   @see-slot{gtk:about-dialog-artists}
@@ -426,8 +427,8 @@ lambda (dialog uri)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "comments" 'about-dialog) t)
  "The @code{comments} property of type @code{:string} (Read / Write) @br{}
-  Comments about the program. This string is displayed in a label in the main
-  dialog, thus it should be a short explanation of the main purpose of the
+  The comments about the program. This string is displayed in a label in the
+  main dialog, thus it should be a short explanation of the main purpose of the
   program, not a detailed list of features. @br{}
   Default value: @code{nil}")
 
@@ -456,7 +457,7 @@ lambda (dialog uri)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "copyright" 'about-dialog) t)
  "The @code{copyright} property of type @code{:string} (Read / Write) @br{}
-  Copyright information for the program. @br{}
+  The copyright information for the program. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -517,8 +518,8 @@ lambda (dialog uri)    :run-last
   @slot[gtk:about-dialog]{wrap-license} property is set to @em{true}. Otherwise
   the text itself must contain the intended linebreaks. When setting this
   property to a non-@code{nil} value, the @slot[gtk:about-dialog]{license-type}
-  property is set to the @code{:custom} value of the @symbol{gtk:license}
-  enumeration as a side effect. @br{}
+  property is set to the @val[gtk:license]{:custom} value of the
+  @sym{gtk:license} enumeration as a side effect. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -548,37 +549,35 @@ lambda (dialog uri)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "license-type" 'about-dialog) t)
- "The @code{license-type} property of type @symbol{gtk:license} (Read / Write)
-  @br{}
-  The license of the program, as a value of the @symbol{gtk:license}
-  enumeration. The about dialog will automatically fill out a standard
-  disclaimer and link the user to the appropriate online resource for the
-  license text. If the @code{:unknown} value is used, the link used will be the
-  same specified in the @slot[gtk:about-dialog]{website} property. If the
-  @code{:custom} value is used, the current contents of the
+ "The @code{license-type} property of type @sym{gtk:license} (Read / Write)@br{}
+  The license of the program, as a value of the @sym{gtk:license} enumeration.
+  The about dialog will automatically fill out a standard disclaimer and link
+  the user to the appropriate online resource for the license text. If the
+  @val[gtk:license]{:unknown} value is used, the link used will be the same
+  specified in the @slot[gtk:about-dialog]{website} property. If the
+  @val[gtk:license]{:custom} value is used, the current contents of the
   @slot[gtk:about-dialog]{license} property are used. For any other
-  @symbol{gtk:license} value, the contents of the
-  @slot[gtk:about-dialog]{license} property are also set by this property as a
-  side effect. @br{}
-  Default value: @code{:unkown}")
+  @sym{gtk:license} value, the contents of the @slot[gtk:about-dialog]{license}
+  property are also set by this property as a side effect. @br{}
+  Default value: @val[gtk:license]{:unkown}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'about-dialog-license-type)
       "Accessor"
       (documentation 'about-dialog-license-type 'function)
- "@version{2025-05-12}
+ "@version{2025-06-26}
   @syntax{(gtk:about-dialog-license-type object) => license-type}
   @syntax{(setf (gtk:about-dialog-license-type object) license-type)}
   @argument[object]{a @class{gtk:about-dialog} widget}
-  @argument[license-type]{a value of the @symbol{gtk:license} enumeration}
+  @argument[license-type]{a value of the @sym{gtk:license} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:about-dialog]{license-type} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
   The @fun{gtk:about-dialog-license-type} function retrieves the license type
-  of type @symbol{gtk:license}. The @setf{gtk:about-dialog-license-type}
-  function sets the license of of the application showing the about dialog from
-  a list of known licenses. This function overrides the license set using the
+  of type @sym{gtk:license}. The @setf{gtk:about-dialog-license-type} function
+  sets the license of of the application showing the about dialog from a list
+  of known licenses. This function overrides the license set using the
   @fun{gtk:about-dialog-license} function.
   @see-class{gtk:about-dialog}
   @see-symbol{gtk:license}
@@ -678,9 +677,9 @@ lambda (dialog uri)    :run-last
                                                'about-dialog) t)
  "The @code{system-information} property of type @code{:string} (Read / Write)
   @br{}
-  Information about the system on which the program is running. This information
-  is displayed in a separate page, therefore it is fine to use a long
-  multi-paragraph text. Note that the text should contain the intended
+  The information about the system on which the program is running. This
+  information is displayed in a separate page, therefore it is fine to use a
+  long multi-paragraph text. Note that the text should contain the intended
   linebreaks. The text may contain links in this format
   @code{\"<http://www.some.place/>\"} and email references in the form
   @code{\"<mail-to@@some.body>\"}, and these will be converted into clickable
@@ -714,7 +713,7 @@ lambda (dialog uri)    :run-last
                                                'about-dialog) t)
  "The @code{translator-credits} property of type @code{:string} (Read / Write)
   @br{}
-  Credits to the translators. This string should be marked as translatable.
+  The credits to the translators. This string should be marked as translatable.
   The string may contain email addresses and URLs, which will be displayed as
   links. @br{}
   Default value: @code{nil}")
