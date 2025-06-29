@@ -2,7 +2,7 @@
 ;;; gtk4.header-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -43,6 +43,8 @@
 ;;;     gtk_header_bar_get_show_title_buttons
 ;;;     gtk_header_bar_set_title_widget
 ;;;     gtk_header_bar_get_title_widget
+;;;     gtk_header_bar_set_use_native_controls              Since 4.18
+;;;     gtk_header_bar_get_use_native_controls              Since 4.18
 ;;;
 ;;; Functions
 ;;;
@@ -56,6 +58,7 @@
 ;;;     decoration-layout
 ;;;     show-title-buttons
 ;;;     title-widget
+;;;     use-native-controls                                 Since 4.18
 ;;;
 ;;; Hierarchy
 ;;;
@@ -100,7 +103,7 @@
 
 #+liber-documentation
 (setf (documentation 'header-bar 'type)
- "@version{2025-2-22}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:header-bar} widget is similar to a horizontal @class{gtk:box}
     widget. It allows children to be placed at the start or the end. In
@@ -169,7 +172,7 @@ headerbar
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:header-bar} implementation uses the @code{:group} role
-    of the @symbol{gtk:accessible-role} enumeration.
+    of the @sym{gtk:accessible-role} enumeration.
   @end{dictionary}
   @see-constructor{gtk:header-bar-new}
   @see-slot{gtk:header-bar-decoration-layout}
@@ -199,7 +202,7 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-decoration-layout)
       "Accessor"
       (documentation 'header-bar-decoration-layout 'function)
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @syntax{(gtk:header-bar-decoration-layout object) => layout}
   @syntax{(setf (gtk:header-bar-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:header-bar} widget}
@@ -248,7 +251,7 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-show-title-buttons)
       "Accessor"
       (documentation 'header-bar-show-title-buttons 'function)
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @syntax{(gtk:header-bar-show-title-buttons object) => setting}
   @syntax{(setf (gtk:header-bar-show-title-buttons object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
@@ -276,7 +279,7 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-title-widget)
       "Accessor"
       (documentation 'header-bar-title-widget 'function)
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @syntax{(gtk:header-bar-title-widget object) => title}
   @syntax{(setf (gtk:header-bar-title-widget object) title)}
   @argument[object]{a @class{gtk:header-bar} widget}
@@ -316,7 +319,7 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-use-native-controls)
       "Accessor"
       (documentation 'header-bar-use-native-controls 'function)
- "@version{2025-3-31}
+ "@version{2025-03-31}
   @syntax{(gtk:header-bar-use-native-controls object) => setting}
   @syntax{(setf (gtk:header-bar-use-native-controls object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
@@ -343,7 +346,7 @@ headerbar
 
 (defun header-bar-new ()
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @return{The new @class{gtk:header-bar} widget.}
   @short{Creates a new header bar.}
   @see-class{gtk:header-bar}"
@@ -357,7 +360,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_pack_start" header-bar-pack-start) :void
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to the
     header bar}
@@ -401,7 +404,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_pack_end" header-bar-pack-end) :void
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to the
     header bar}
@@ -424,7 +427,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_remove" header-bar-remove) :void
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @begin{short}

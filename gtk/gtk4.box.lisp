@@ -110,7 +110,7 @@
 
 #+liber-documentation
 (setf (documentation 'box 'type)
- "@version{2025-04-23}
+ "@version{2025-06-26}
   @begin{short}
     The @class{gtk:box} widget arranges child widgets into a single row or
     column.
@@ -142,9 +142,10 @@
     @code{box}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    Until GTK 4.10, the @class{gtk:box} implementation used the @code{:group}
-    role of the @symbol{gtk:accessible-role} enumeration. Starting from
-    GTK 4.12, the @class{gtk:box} implementation uses the @code{:generic} role.
+    Until GTK 4.10, the @class{gtk:box} implementation used the
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
+    the @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:box-new}
   @see-slot{gtk:box-baseline-child}
@@ -193,10 +194,10 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-position" 'box) t)
- "The @code{baseline-position} property of type @symbol{gtk:baseline-position}
+ "The @code{baseline-position} property of type @sym{gtk:baseline-position}
   (Read / Write) @br{}
   The position of the baseline aligned widgets if extra space is available.@br{}
-  Default value: @code{:center}")
+  Default value: @val[gtk:baseline-position]{:center}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'box-baseline-position)
@@ -206,7 +207,7 @@
   @syntax{(gtk:box-baseline-position object) => position}
   @syntax{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
-  @argument[position]{a value of the @symbol{gtk:baseline-position} enumeration}
+  @argument[position]{a value of the @sym{gtk:baseline-position} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:box]{baseline-position} slot of the
     @class{gtk:box} class.
@@ -283,9 +284,9 @@
 
 (defun box-new (&optional (orientation :horizontal) (spacing 0))
  #+liber-documentation
- "@version{2025-04-23}
-  @argument[orientation]{an optional @symbol{gtk:orientation} value,
-    the default is @code{:horizontal}}
+ "@version{2025-06-26}
+  @argument[orientation]{an optional @sym{gtk:orientation} value, the default
+    is @val[gtk:orientation]{:horizontal}}
   @argument[spacing]{an optional integer for the number of pixels to place by
     default between children}
   @return{The new @class{gtk:box} widget.}

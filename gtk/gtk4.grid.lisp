@@ -120,7 +120,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid 'type)
- "@version{2025-05-10}
+ "@version{2025-06-26}
   @begin{short}
     The @class{gtk:grid} widget is a container which arranges its child widgets
     in rows and columns, with arbitrary positions and horizontal/vertical spans.
@@ -198,9 +198,10 @@
     @code{grid}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    Until GTK 4.10, the @class{gtk:grid} implementation used the @code{:group}
-    role of the @symbol{gtk:accessible-role} enumeration. Starting from
-    GTK 4.12, the @class{gtk:box} implementation uses the @code{:generic} role.
+    Until GTK 4.10, the @class{gtk:grid} implementation used the
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
+    the @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:grid-new}
   @see-slot{gtk:grid-baseline-row}
@@ -220,7 +221,7 @@
 (setf (documentation (liber:slot-documentation "baseline-row" 'grid) t)
  "The @code{baseline-row} property of type @code{:int} (Read / Write) @br{}
   The row to align to the baseline when @slot[gtk:widget]{valign} has the
-  @code{:center} value of the @symbol{gtk:align} enumeration. @br{}
+  @val[gtk:align]{:center} value of the @sym{gtk:align} enumeration. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0 @br{}")
 
@@ -426,14 +427,14 @@
 (defun grid-attach-next-to (grid child sibling side
                             &optional (width 1) (height 1))
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2025-06-26}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[sibling]{a @class{gtk:widget} sibling widget of the grid that
     @arg{child} will be placed next to, or @code{nil} to place @arg{child} at
     the beginning or end}
-  @argument[side]{a @symbol{gtk:position-type} value with the side of
-    @arg{sibling} that @arg{child} is positioned next to}
+  @argument[side]{a @sym{gtk:position-type} value for the side of @arg{sibling}
+    that @arg{child} is positioned next to}
   @argument[width]{an optional integer for the number of columns that
     @arg{child} will span, the default value is 1}
   @argument[height]{an optional integer for the number of rows that
@@ -640,18 +641,19 @@
 
 (cffi:defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2025-06-26}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget of the grid that the
     new row or column will be placed next to}
-  @argument[side]{a @symbol{gtk:position-type} value with the side of
-    @arg{sibling} that @arg{child} is positioned next to}
+  @argument[side]{a @sym{gtk:position-type} value for the side of @arg{sibling}
+    that @arg{child} is positioned next to}
   @begin{short}
     Inserts a row or column at the specified position.
   @end{short}
   The new row or column is placed next to @arg{sibling}, on the side determined
-  by @arg{side}. If the @arg{side} argument is @code{:top} or @code{:bottom}, a
-  row is inserted. If the @arg{side} argument is @code{:left} of @code{:right},
+  by @arg{side}. If the @arg{side} argument is @val[gtk:position-type]{:top} or
+  @val[gtk:position-type]{:bottom}, a row is inserted. If the @arg{side}
+  argument is @val[gtk:position-type]{:left} of @val[gtk:position-type]{:right},
   a column is inserted.
   @see-class{gtk:grid}
   @see-class{gtk:widget}
@@ -680,12 +682,12 @@
 (cffi:defcfun ("gtk_grid_get_row_baseline_position"
                grid-row-baseline-position) position-type
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2025-06-26}
   @syntax{(gtk:grid-row-baseline-position grid row) => pos}
   @syntax{(setf (gtk:grid-row-baseline-position grid row) pos)}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[row]{an integer for the row index}
-  @argument[pos]{a value of the @symbol{gtk:baseline-position} enumeration}
+  @argument[pos]{a value of the @sym{gtk:baseline-position} enumeration}
   @begin{short}
     The @fun{gtk:grid-row-baseline-position} function returns the baseline
     position of @arg{row}.
@@ -693,7 +695,7 @@
   The @setf{gtk:grid-row-baseline-position} function sets how the baseline
   should be positioned on @arg{row} of the grid, in case that @arg{row} is
   assigned more space than is requested. The default baseline position is
-  @code{:center}.
+  @val[gtk:baseline-position]{:center}.
   @see-class{gtk:grid}
   @see-symbol{gtk:baseline-position}"
   (grid (g:object grid))

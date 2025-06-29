@@ -82,7 +82,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack-switcher 'type)
- "@version{2025-4-23}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:stack-switcher} widget acts as a controller for a
     @class{gtk:stack} widget.
@@ -107,8 +107,9 @@
     pages.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:stack-switcher} implementation uses the @code{:tab-list} role
-    and uses the @code{:tab} role of the @symbol{gtk:accessible-role}
+    The @class{gtk:stack-switcher} implementation uses the
+    @val[gtk:accessible-role]{:tab-list} role and uses the
+    @val[gtk:accessible-role]{:tab} role of the @sym{gtk:accessible-role}
     enumeration for its buttons.
   @end{dictionary}
   @see-constructor{gtk:stack-switcher-new}
@@ -130,7 +131,7 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:stack-switcher-stack object) => stack}
   @syntax{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
@@ -152,7 +153,7 @@
 
 (defun stack-switcher-new ()
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @return{The new @class{gtk:stack-switcher} widget.}
   @short{Creates a new stack switcher.}
   @see-class{gtk:stack-switcher}"

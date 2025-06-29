@@ -140,9 +140,9 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:center-box} implementation used the
-    @code{:group} role of the @symbol{gtk:accessible-role} enumeration.
-    Starting from GTK 4.12, the @class{gtk:box} implementation uses the
-    @code{:generic} role.
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
+    the @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:center-box-new}
   @see-slot{gtk:center-box-baseline-position}
@@ -161,20 +161,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-position"
                                                'center-box) t)
- "The @code{baseline-position} property of type @symbol{gtk:baseline-position}
+ "The @code{baseline-position} property of type @sym{gtk:baseline-position}
   (Read / Write) @br{}
   The position of the baseline aligned widgets if extra space is available.@br{}
-  Default value: @code{:center}")
+  Default value: @val[gtk:baseline-position]{:center}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'center-box-baseline-position)
       "Accessor"
       (documentation 'center-box-baseline-position 'function)
- "@version{2025-05-10}
+ "@version{2025-06-26}
   @syntax{(gtk:center-box-baseline-position object) => position}
   @syntax{(setf (gtk:center-box-baseline-position object) position)}
   @argument[object]{a @class{gtk:center-box} widget}
-  @argument[position]{a value of the @symbol{gtk:baseline-position} enumeration}
+  @argument[position]{a value of the @sym{gtk:baseline-position} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:box]{baseline-position} slot of the
     @class{gtk:center-box} class.
@@ -194,7 +194,7 @@
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "center-widget" 'center-box) t)
- "The @code{center-widget} property of type @symbol{gtk:widget} (Read / Write)
+ "The @code{center-widget} property of type @class{gtk:widget} (Read / Write)
   @br{}
   The widget that is placed at the center position. Since 4.10")
 
@@ -221,8 +221,7 @@
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "end-widget" 'center-box) t)
- "The @code{end-widget} property of type @symbol{gtk:widget} (Read / Write)
-  @br{}
+ "The @code{end-widget} property of type @class{gtk:widget} (Read / Write) @br{}
   The widget that is placed at the end position. In vertical orientation, the
   end position is at the bottom. In horizontal orientation, the end position is
   at the trailing edge with respect to the text direction. Since 4.10")
@@ -290,7 +289,7 @@
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "start-widget" 'center-box) t)
- "The @code{start-widget} property of type @symbol{gtk:widget} (Read / Write)
+ "The @code{start-widget} property of type @class{gtk:widget} (Read / Write)
   @br{}
   The widget that is placed at the start position. In vertical orientation, the
   start position is at the top. In horizontal orientation, the start position is

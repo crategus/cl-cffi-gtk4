@@ -76,7 +76,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed 'type)
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @begin{short}
     The @class{gtk:fixed} widget is a container which can place child widgets
     at fixed positions and with fixed sizes, given in pixels.
@@ -126,7 +126,7 @@
 
 (defun fixed-new ()
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @return{The new @class{gtk:fixed} widget.}
   @short{Creates a new fixed widget.}
   @see-class{gtk:fixed}"
@@ -146,7 +146,7 @@
 
 (defun fixed-put (fixed child x y)
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[x]{a number coerced to a double float for the horizontal position
@@ -173,7 +173,7 @@
 
 (cffi:defcfun ("gtk_fixed_remove" fixed-remove) :void
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @begin{short}
@@ -200,7 +200,7 @@
 
 (defun fixed-move (fixed child x y)
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[x]{a number coerced to a double float for the horizontal position
@@ -233,7 +233,7 @@
 
 (defun fixed-child-position (fixed child)
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
   @begin{return}
@@ -270,7 +270,7 @@
 (cffi:defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
     (g:boxed gsk:transform)
  #+liber-documentation
- "@version{2025-3-25}
+ "@version{2025-03-25}
   @syntax{(gtk:fixed-child-transform object) => transform}
   @syntax{(setf (gtk:fixed-child-transform object) transform)}
   @argument[fixed]{a @class{gtk:fixed} widget}

@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack-sidebar 'type)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @begin{short}
     The @class{gtk:stack-sidebar} widget enables you to quickly and easily
     provide a consistent sidebar  object for your user interface.
@@ -118,7 +118,7 @@
 (setf (liber:alias-for-function 'stack-sidebar-stack)
       "Accessor"
       (documentation 'stack-sidebar-stack 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:stack-sidebar-stack object) => stack}
   @syntax{(setf (gtk:stack-sidebar-stack object) stack)}
   @argument[object]{a @class{gtk:stack-sidebar} widget}
@@ -144,7 +144,7 @@
 
 (defun stack-sidebar-new ()
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @return{The new @class{gtk:stack-sidebar} widget.}
   @short{Creates a new stack sidebar.}
   @see-class{gtk:stack-sidebar}"

@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.expander.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
 ;;; version 4.18 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
@@ -122,7 +122,7 @@
 
 #+liber-documentation
 (setf (documentation 'expander 'type)
- "@version{2025-05-28}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:expander} widget allows the user to hide or show its child
     by clicking on an expander triangle.
@@ -188,18 +188,19 @@ expander
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:expander} implementation uses the @code{:button} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    @sym{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[expander::activate]{signal}
       @begin{pre}
 lambda (expander)   :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[expander]{The @class{gtk:expander} widget which receives the
           signal.}
-      @end{table}
+      @end{simple-table}
       Activates the expander.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:expander-new}
   @see-constructor{gtk:expander-new-with-mnemonic}
@@ -437,7 +438,7 @@ lambda (expander)   :action
 
 (defun expander-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2025-05-28}
+ "@version{2025-05-29}
   @argument[label]{a string for the text of the label with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:expander} widget.}

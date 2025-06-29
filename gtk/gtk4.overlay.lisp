@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.overlay.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay 'type)
- "@version{2024-10-2}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:overlay} widget contains a single main widget, on top of
     which it can place overlay widgets.
@@ -104,16 +104,16 @@
 
   The position of each overlay widget is determined by its
   @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties. For
-  example, an overlay widget with both alignments set to @code{:start} will be
-  placed at the top left corner of the main widget, whereas an overlay widget
-  with the @slot[gtk:widget]{halign} property set to @code{:center} and the
-  @slot[gtk:widget]{valign} property set to @code{:end} will be placed a the
-  bottom edge of the main widget, horizontally centered. The position can be
-  adjusted by setting the margin properties of the overlay widget to non-zero
-  values.
+  example, an overlay widget with both alignments set to @val[gtk:align]{:start}
+  will be placed at the top left corner of the main widget, whereas an overlay
+  widget with the @slot[gtk:widget]{halign} property set to
+  @val[gtk:align]{:center} and the @slot[gtk:widget]{valign} property set to
+  @val[gtk:align]{:end} will be placed a the bottom edge of the main widget,
+  horizontally centered. The position can be adjusted by setting the margin
+  properties of the overlay widget to non-zero values.
 
   More complicated placement of overlay widgets is possible by connecting to
-  the @code{\"get-child-position\"} signal.
+  the @sig[gtk:overlay]{get-child-position} signal.
 
   The minimum and natural sizes of an overlay widget are those of its main
   child. The sizes of overlay children are not considered when measuring these
@@ -131,27 +131,29 @@
     and/or @code{.bottom} style classes according to their position.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"get-child-position\" signal}
+    @begin[overlay::get-child-position]{signal}
       @begin{pre}
 lambda (overlay widget allocation)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[overlay]{The @class{gtk:overlay} widget which emitted the
           signal.}
         @entry[widget]{The @class{gtk:widget} overlay widget to position.}
         @entry[allocation]{Return location of type @class{gdk:rectangle} for
           the allocation.}
         @entry[Returns]{@em{True} if @arg{allocation} has been filled.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted to determine the position and size of any overlay
       widgets. A handler for this signal should fill @arg{allocation} with the
       desired position and size for @arg{widget}, relative to the main child
       of the overlay. The default handler for this signal uses the
       @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties of the
       widget to determine the position and gives the widget its natural size,
-      except that an alignment of @code{:fill} will cause the overlay to be
-      full-width/height. If the main child is a @class{gtk:scrolled-window}
-      widget, the overlays are placed relative to its contents.
+      except that an alignment of @val[gtk:align]{:fill} will cause the overlay
+      to be full-width/height. If the main child is a
+      @class{gtk:scrolled-window} widget, the overlays are placed relative to
+      its contents.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:overlay-child}
   @see-constructor{gtk:overlay-new}")
@@ -172,7 +174,7 @@ lambda (overlay widget allocation)    :run-last
 (setf (liber:alias-for-function 'overlay-child)
       "Accessor"
       (documentation 'overlay-child 'function)
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:overlay-child object) => child}
   @syntax{(setf (gtk:overlay-child object) child)}
   @argument[object]{a @class{gtk:overlay} widget}
@@ -194,7 +196,7 @@ lambda (overlay widget allocation)    :run-last
 
 (defun overlay-new ()
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @return{The new @class{gtk:overlay} widget.}
   @short{Creates a new overlay.}
   @see-class{gtk:overlay}"
@@ -208,7 +210,7 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_add_overlay" overlay-add-overlay) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} overlay widget to be added}
   @begin{short}
@@ -234,7 +236,7 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_remove_overlay" overlay-remove-overlay) :void
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} overlay widget to be removed}
   @begin{short}
@@ -265,7 +267,7 @@ lambda (overlay widget allocation)    :run-last
 (cffi:defcfun ("gtk_overlay_get_measure_overlay" overlay-measure-overlay)
     :boolean
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:overlay-measure-overlay overlay widget) => measure}
   @syntax{(setf (gtk:overlay-measure-overlay overlay widget) measure)}
   @argument[overlay]{a @class{gtk:overlay} widget}
@@ -302,7 +304,7 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_get_clip_overlay" overlay-clip-overlay) :boolean
  #+liber-documentation
- "@version{2024-10-2}
+ "@version{2024-10-02}
   @syntax{(gtk:overlay-clip-overlay overlay widget) => clip}
   @syntax{(setf (gtk:overlay-clip-overlay overlay widget) clip)}
   @argument[overlay]{a @class{gtk:overlay} widget}

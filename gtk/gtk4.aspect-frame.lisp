@@ -2,7 +2,7 @@
 ;;; gtk4.aspect-frame.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -117,8 +117,9 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:aspect-frame} implementation used the
-    @code{:group} role. Starting from GTK 4.12, the @class{gtk:aspect-frame}
-    implementation uses the @code{:generic} role.
+    @val[gtk:accessible-role]{:group} role. Starting from GTK 4.12, the
+    @class{gtk:aspect-frame} implementation uses the
+    @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:aspect-frame-new}
   @see-slot{gtk:aspect-frame-child}
@@ -194,11 +195,11 @@
 (setf (liber:alias-for-function 'aspect-frame-ratio)
       "Accessor"
       (documentation 'aspect-frame-ratio 'function)
- "@version{2025-05-30}
+ "@version{2025-06-29}
   @syntax{(gtk:aspect-frame-ratio object) => ratio}
   @syntax{(setf (gtk:aspect-frame-ratio object) ratio)}
   @argument[object]{a @class{gtk:aspect-frame} widget}
-  @argument[ratio]{a number coerced to a single float with an aspect ratio}
+  @argument[ratio]{a number coerced to a single float for an aspect ratio}
   @begin{short}
     Accessor of the @slot[gtk:aspect-frame]{ratio} slot of the
     @class{gtk:aspect-frame} class.
@@ -221,11 +222,11 @@
 (setf (liber:alias-for-function 'aspect-frame-xalign)
       "Accessor"
       (documentation 'aspect-frame-xalign 'function)
- "@version{2025-05-30}
+ "@version{2025-06-29}
   @syntax{(gtk:aspect-frame-xalign object) => xalign}
   @syntax{(setf (gtk:aspect-frame-xalign object) xalign)}
   @argument[object]{a @class{gtk:aspect-frame} widget}
-  @argument[xalign]{a number coerced to a single float with the x alignment of
+  @argument[xalign]{a number coerced to a single float for the x alignment of
     the child widget}
   @begin{short}
     Accessor of the @slot[gtk:aspect-frame]{xalign} slot of the
@@ -247,11 +248,11 @@
 (setf (liber:alias-for-function 'aspect-frame-yalign)
       "Accessor"
       (documentation 'aspect-frame-yalign 'function)
- "@version{2025-05-30}
+ "@version{2025-06-29}
   @syntax{(gtk:aspect-frame-yalign object) => yalign}
   @syntax{(setf (gtk:aspect-frame-yalign object) yalign)}
   @argument[object]{a @class{gtk:aspect-frame} widget}
-  @argument[yalign]{a number coerced to a single float with the y alignment of
+  @argument[yalign]{a number coerced to a single float for the y alignment of
     the child widget}
   @begin{short}
     Accessor of the @slot[gtk:aspect-frame]{yalign} slot of the
@@ -268,14 +269,14 @@
 
 (defun aspect-frame-new (xalign yalign ratio obey)
  #+liber-documentation
- "@version{2025-05-30}
-  @argument[xalign]{a number coerced to a single float with the horizontal
+ "@version{2025-06-29}
+  @argument[xalign]{a number coerced to a single float for the horizontal
     alignment of the child within the allocation of the aspect frame, this
     ranges from 0.0 (left aligned) to 1.0 (right aligned)}
-  @argument[yalign]{a number coerced to a single float with the vertical
+  @argument[yalign]{a number coerced to a single float for the vertical
     alignment of the child within the allocation of the aspect frame, this
     ranges from 0.0 (left aligned) to 1.0 (right aligned)}
-  @argument[ratio]{a number coerced to a single float with the desired aspect
+  @argument[ratio]{a number coerced to a single float for the desired aspect
     ratio}
   @argument[obey]{if @em{true}, @arg{ratio} is ignored, and the aspect ratio is
     taken from the requistion of the child}

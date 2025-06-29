@@ -98,7 +98,7 @@
 (setf (liber:alias-for-symbol 'revealer-transition-type)
       "GEnum"
       (liber:symbol-documentation 'revealer-transition-type)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @begin{declaration}
 (gobject:define-genum \"GtkRevealerTransitionType\" revealer-transition-type
   (:export t
@@ -115,7 +115,7 @@
   (:swing-down 9))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No transition}
       @entry[:crossfade]{Fade in.}
       @entry[:slide-right]{Slide in from the left.}
@@ -126,7 +126,7 @@
       @entry[:swing-left]{Floop in from the right.}
       @entry[:swing-up]{Floop in from the bottom.}
       @entry[:swing-down]{Floop in from the top.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     These enumeration values describe the possible transitions when the child
@@ -163,7 +163,7 @@
 
 #+liber-documentation
 (setf (documentation 'revealer 'type)
- "@version{2025-4-23}
+ "@version{2025-06-26}
   @begin{short}
     The @class{gtk:revealer} widget is a container which animates the transition
     of its child widget from invisible to visible.
@@ -180,7 +180,7 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:revealer} implementation uses the @code{:group} role of the
-    @symbol{gtk:accessible-role} enumeration. The child widget of the
+    @sym{gtk:accessible-role} enumeration. The child widget of the
     @class{gtk:revealer} widget, if set, is always available in the
     accessibility tree, regardless of the state of the revealer widget.
   @end{dictionary}
@@ -207,7 +207,7 @@
 (setf (liber:alias-for-function 'revealer-child)
       "Accessor"
       (documentation 'revealer-child 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:revealer-child object) => child}
   @syntax{(setf (gtk:revealer-child object) child)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -233,7 +233,7 @@
 (setf (liber:alias-for-function 'revealer-child-revealed)
       "Accessor"
       (documentation 'revealer-child-revealed 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:revealer-child-revealed object) => revealed}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[revealed]{a boolean whether the child widget is revealed}
@@ -258,7 +258,7 @@
 (setf (liber:alias-for-function 'revealer-reveal-child)
       "Accessor"
       (documentation 'revealer-reveal-child 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:revealer-reveal-child object) => reveal}
   @syntax{(setf (gtk:revealer-reveal-child object) reveal)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -293,7 +293,7 @@
 (setf (liber:alias-for-function 'revealer-transition-duration)
       "Accessor"
       (documentation 'revealer-transition-duration 'function)
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @syntax{(gtk:revealer-transition-duration object) => duration}
   @syntax{(setf (gtk:revealer-transition-duration object) duration)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -311,20 +311,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transition-type" 'revealer) t)
- "The @code{transition-type} property of type
-  @symbol{gtk:revealer-transition-type} (Read / Write) @br{}
+ "The @code{transition-type} property of type @sym{gtk:revealer-transition-type}
+  (Read / Write) @br{}
   The type of animation used to transition. @br{}
-  Default value: @code{:slide-down}")
+  Default value: @val[gtk:revealer-transition-type]{:slide-down}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'revealer-transition-type)
       "Accessor"
       (documentation 'revealer-transition-type 'function)
- "@version{2025-4-23}
+ "@version{2025-06-26}
   @syntax{(gtk:revealer-transition-type object) => setting}
   @syntax{(setf (gtk:revealer-transition-type object) setting)}
   @argument[object]{a @class{gtk:revealer} widget}
-  @argument[setting]{a value of the @symbol{gtk:revealer-transition-type}
+  @argument[setting]{a value of the @sym{gtk:revealer-transition-type}
     enumeration}
   @begin{short}
     Accessor of the @slot[gtk:revealer]{transition-type} slot of the
@@ -345,7 +345,7 @@
 
 (defun revealer-new ()
  #+liber-documentation
- "@version{2025-4-23}
+ "@version{2025-04-23}
   @return{The new @class{gtk:revealer} widget.}
   @short{Creates a new revealer.}
   @see-class{gtk:revealer}"
