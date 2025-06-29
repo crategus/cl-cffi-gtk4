@@ -101,11 +101,14 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkBuilderClosureFlags
+;;; GtkBuilderClosureFlags                                  not exported
 ;;; ----------------------------------------------------------------------------
 
+;; This is internally needed for the implementation of the
+;; builder-scope-create-closure-impl method.
+
 (gobject:define-gflags "GtkBuilderClosureFlags" builder-closure-flags
-  (:export t
+  (:export nil
    :type-initializer "gtk_builder_closure_flags_get_type")
   (:swapped #.(ash 1 0)))
 
@@ -113,7 +116,7 @@
 (setf (liber:alias-for-symbol 'builder-closure-flags)
       "GFlags"
       (liber:symbol-documentation 'builder-closure-flags)
- "@version{2024-10-5}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-gflags \"GtkBuilderClosureFlags\" builder-closure-flags
   (:export t
@@ -121,9 +124,9 @@
   (:swapped #.(ash 1 0)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:swapped]{The closure should be created swapped.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The list of flags that can be passed to the @fun{gtk:builder-create-closure}
@@ -171,7 +174,7 @@
 (setf (liber:alias-for-class 'builder-scope)
       "Interface"
       (documentation 'builder-scope 'type)
- "@version{2024-10-6}
+ "@version{2024-10-06}
   @begin{short}
     The @class{gtk:builder-scope} interface is an interface to provide language
     binding support to the @class{gtk:builder} object.
@@ -229,7 +232,7 @@
 (setf (liber:alias-for-class 'builder-cl-scope)
       "Class"
       (documentation 'builder-cl-scope 'type)
- "@version{2024-11-3}
+ "@version{2024-11-03}
   @begin{short}
     The @class{gtk:builder-cl-scope} class is the implementation of the
     @class{gtk:builder-scope} interface for the Lisp binding.
@@ -282,8 +285,8 @@
 
 ;;; This Lisp extension is not documented
 #+nil
-(defmethod initialize-instance :after ((builder builder)
-                                       &key from-file from-string)
+(defmethod initialize-instance :after
+           ((builder builder) &key from-file from-string)
   (when from-file
     (builder-add-from-file builder (namestring from-file)))
   (when from-string
@@ -300,7 +303,7 @@
 
 #+liber-documentation
 (setf (documentation 'builder 'type)
- "@version{2025-05-04}
+ "@version{2025-06-21}
   @begin{short}
     The @class{gtk:builder} object reads XML descriptions of a user interface
     and instantiates the described objects.
@@ -352,7 +355,6 @@
   ...
 </interface>
   @end{pre}
-
   @subheading{Requirements}
   The target toolkit version(s) are described by @code{<requires>} elements, the
   @code{\"lib\"} attribute specifies the widget library in question, currently
@@ -366,7 +368,6 @@
   <requires lib=\"gtk\" version=\"4.0\" />
 </interface>
   @end{pre}
-
   @subheading{Objects}
   Objects are defined as children of the @code{<interface>} element. Objects
   are described by @code{<object>} elements, which can contain @code{<property>}
@@ -636,7 +637,7 @@
 (setf (liber:alias-for-function 'builder-current-object)
       "Accessor"
       (documentation 'builder-current-object 'function)
- "@version{2024-9-15}
+ "@version{2024-09-15}
   @syntax{(gtk:builder-current-object object) => current}
   @syntax{(setf (gtk:builder-current-object object) current)}
   @argument[object]{a @class{gtk:builder} object}
@@ -674,7 +675,7 @@
 (setf (liber:alias-for-function 'builder-scope)
       "Accessor"
       (documentation 'builder-scope 'function)
- "@version{2024-11-4}
+ "@version{2024-11-04}
   @syntax{(gtk:builder-scope object) => scope}
   @syntax{(setf (gtk:builder-scope object) scope)}
   @argument[object]{a @class{gtk:builder} object}
@@ -706,11 +707,11 @@
 (setf (liber:alias-for-function 'builder-translation-domain)
       "Accessor"
       (documentation 'builder-translation-domain 'function)
- "@version{2024-11-4}
+ "@version{2025-06-21}
   @syntax{(gtk:builder-translation-domain object) => domain}
   @syntax{(setf (gtk:builder-translation-domain object) domain)}
   @argument[object]{a @class{gtk:builder} object}
-  @argument[domain]{a string with the translation domain or @code{nil}}
+  @argument[domain]{a string for the translation domain or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:builder]{translation-domain} slot of the
     @class{gtk:builder} class.
@@ -733,7 +734,7 @@
 
 (defun builder-new ()
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-09-15}
   @return{The new @class{gtk:builder} object.}
   @begin{short}
     Creates a new builder object.
@@ -756,7 +757,7 @@
 
 (defun builder-new-from-file (path)
  #+liber-documentation
- "@version{2024-10-6}
+ "@version{2024-10-06}
   @argument[path]{a pathname or namestring for the file}
   @return{The @class{gtk:builder} object containing the described interface.}
   @begin{short}
@@ -779,7 +780,7 @@
 
 (defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{2025-3-1}
+ "@version{2025-03-01}
   @argument[path]{a string for the path of the resource file to parse}
   @begin{return}
     The new @class{gtk:builder} object containing the described interface.
@@ -904,7 +905,7 @@
 
 (defun builder-add-from-string (builder string)
  #+liber-documentation
- "@version{2024-10-5}
+ "@version{2024-10-05}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
   @return{@em{True} on sucess, @em{false} if an error occured.}
@@ -1106,7 +1107,7 @@
 
 (cffi:defcfun ("gtk_builder_get_object" builder-object) g:object
  #+liber-documentation
- "@version{2025-1-3}
+ "@version{2025-01-03}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[name]{a string for the name of the object to get}
   @begin{return}
@@ -1130,7 +1131,7 @@
 
 (cffi:defcfun ("gtk_builder_get_objects" builder-objects) (g:slist-t g:object)
  #+liber-documentation
- "@version{2024-9-15}
+ "@version{2024-09-15}
   @argument[builder]{a @class{gtk:builder} object}
   @begin{return}
     The list containing all the @class{g:object} instances constructed by the

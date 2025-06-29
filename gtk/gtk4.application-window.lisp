@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2025-05-12}
+ "@version{2025-06-21}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -167,12 +167,7 @@
   @see-slot{gtk:application-window-show-menubar}
   @see-constructor{gtk:application-window-new}
   @see-class{gtk:window}
-  @see-class{gtk:application}
-  @see-class{g:action-group}
-  @see-class{g:action-map}
-  @see-class{g:menu-model}
-  @see-class{gtk:actionable}
-  @see-class{gtk:builder}")
+  @see-class{gtk:application}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -216,12 +211,12 @@
 
 (defun application-window-new (&optional application)
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-06-22}
   @argument[application]{an optinoal @class{gtk:application} instance}
   @return{The newly created @class{gtk:application-window} widget.}
   @short{Creates a new application window.}
   New application windows must be added to an application after the
-  @code{GApplication::startup} signal has been emitted. See also the
+  @sig[g:application]{startup} signal has been emitted. See also the
   @fun{gtk:application-add-window} documentation.
   @see-class{gtk:application}
   @see-class{gtk:application-window}

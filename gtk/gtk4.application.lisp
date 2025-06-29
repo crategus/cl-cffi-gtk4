@@ -111,14 +111,14 @@
   (:idle    #.(ash 1 3)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:logout]{Inhibit ending the user session by logging out or by
         shutting down the computer.}
       @entry[:switch]{Inhibit user switching.}
       @entry[:suspend]{Inhibit suspending the session or computer.}
       @entry[:idle]{Inhibit the session being marked as idle and possibly
         locked.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Types of user actions that may be blocked by a @class{gtk:application}
@@ -153,7 +153,7 @@
 
 #+liber-documentation
 (setf (documentation 'application 'type)
- "@version{2025-05-12}
+ "@version{2025-06-26}
   @begin{short}
     The @class{gtk:application} class is a high-level API for writing
     applications.
@@ -182,6 +182,10 @@
   of a part of the menu structure. It is also possible to provide the menubar
   manually using the @fun{gtk:application-menubar} function.
 
+  Note that automatic resource loading uses the resource base path that is set
+  at construction time and will not work if the resource base path is changed
+  at a later time.
+
   The @class{gtk:application} instance will also automatically setup an icon
   search path for the default icon theme by appending @file{\"icons\"} to the
   resource base path. This allows your application to easily store its icons as
@@ -195,6 +199,11 @@
   keyboard accelerators, @kbd{Control-F1} and @kbd{Control-?}, to open it. To
   create a menu item that displays the shortcuts window, associate the menu
   item with the @code{\"win.show-help-overlay\"} action.
+
+  The @class{gtk:application} instance will also automatically set the
+  application ID as the default window icon. Use the
+  @fun{gtk:window-default-icon-name} function or the
+  @slot[gtk:window]{icon-name} property to override that behavior.
 
   The @class{gtk:application} instance optionally registers with a session
   manager of the users session, if you set the
@@ -286,55 +295,55 @@
     @end{pre}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"query-end\" signal}
+    @begin[application::query-end]{signal}
       @begin{pre}
 lambda (application)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[application]{The @class{gtk:application} instance which emitted
           the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when the session manager is about to end the session. This signal
       is only emitted if the @slot[gtk:application]{register-session} property
       is @em{true}. Applications can connect to this signal and call the
-      @fun{gtk:application-inhibit} function with the @code{:logout} value of
-      the @symbol{gtk:application-inhibit-flags} flags to delay the end of the
-      session until the state has been saved.
-    @subheading{The \"window-added\" signal}
+      @fun{gtk:application-inhibit} function with the
+      @val[gtk:application-inhibit-flags]{:logout} value to delay the end of
+      the session until the state has been saved.
+    @end{signal}
+    @begin[application::window-added]{signal}
       @begin{pre}
 lambda (application window)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[application]{The @class{gtk:application} instance which emitted
           the signal.}
         @entry[window]{The newly added @class{gtk:window} widget.}
-      @end{table}
+      @end{simple-table}
       Emitted when a @class{gtk:window} widget is added to the application
       through the @fun{gtk:application-add-window} function.
-    @subheading{The \"window-removed\" signal}
+    @end{signal}
+    @begin[application::window-removed]{signal}
       @begin{pre}
 lambda (application window)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[application]{The @class{gtk:application} instance which emitted
           the signal.}
         @entry[window]{The @class{gtk:window} widget that is being removed.}
-      @end{table}
+      @end{simple-table}
       Emitted when a @class{gtk:window} widget is removed from the application.
       This can happen as a side-effect of the window being destroyed or
       explicitly through the @fun{gtk:application-remove-window} function.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:application-active-window}
   @see-slot{gtk:application-menubar}
   @see-slot{gtk:application-register-session}
   @see-slot{gtk:application-screensaver-active}
   @see-constructor{gtk:application-new}
-  @see-class{gtk:application-window}
-  @see-class{gtk:builder}
-  @see-class{gtk:shortcuts-window}
-  @see-class{gtk:window}
   @see-class{g:application}
-  @see-class{g:menu-model}")
+  @see-class{gtk:application-window}
+  @see-class{gtk:builder}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -393,7 +402,8 @@ lambda (application window)    :run-first
 
   This is a menubar in the traditional sense. This can only be done in the
   primary instance of the application, after it has been registered. The
-  handler for the @code{\"startup\"} signal is a good place to set the menubar.
+  handler for the @sig[g:application]{startup} signal is a good place to set
+  the menubar.
 
   Depending on the desktop environment, the menubar may appear at the top of
   each window, or at the top of the screen. In some environments, if both the
@@ -491,10 +501,10 @@ lambda (application window)    :run-first
   gets registered as the primary instance.
 
   Concretely, the @fun{gtk:init} function is called in the default handler for
-  the @code{\"GApplication::startup\"} signal. Therefore,
-  @class{gtk:application} subclasses should always chain up in their
-  @code{\"GApplication::startup\"} handler before using any GTK API. Note that
-  commandline arguments are not passed to the @fun{gtk:init} function.
+  the @sig[g:application]{startup} signal. Therefore, @class{gtk:application}
+  subclasses should always chain up in their @sig[g:application]{startup}
+  handler before using any GTK API. Note that commandline arguments are not
+  passed to the @fun{gtk:init} function.
 
   The application ID must be valid. See the @fun{g:application-id-is-valid}
   function. If no application ID is given then some features, most notably
@@ -515,7 +525,7 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_add_window" application-add-window) :void
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-06-22}
   @argument[application]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
@@ -523,7 +533,7 @@ lambda (application window)    :run-first
   @end{short}
   This call can only happen after the application has started. Typically, you
   should add new application windows in response to the emission of the
-  @code{\"GApplication::activate\"} signal. This call is equivalent to setting
+  @sig[g:application]{activate} signal. This call is equivalent to setting
   the @slot[gtk:window]{application} property of the given @arg{window} to the
   given @arg{application}, that is:
   @begin{pre}
@@ -613,9 +623,9 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_window_by_id" application-window-by-id)
     (g:object window)
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-06-21}
   @argument[application]{a @class{gtk:application} instance}
-  @argument[id]{an unsigned integer identifier number}
+  @argument[id]{an unsigned integer for the identifier number}
   @begin{return}
     The @class{gtk:application-window} widget with ID @arg{id}, or @code{nil}
     if there is no window with this ID.
@@ -698,9 +708,9 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_uninhibit" application-uninhibit) :void
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-06-21}
   @argument[application]{a @class{gtk:application} instance}
-  @argument[cookie]{an unsigned integer cookie that was returned by the
+  @argument[cookie]{an unsigned integer for the cookie that was returned by the
     @fun{gtk:application-inhibit} function}
   @begin{short}
     Removes an inhibitor that has been established with the
@@ -774,13 +784,13 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_accels_for_action"
                application-accels-for-action) g:strv-t
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-06-21}
   @syntax{(gtk:application-accels-for-action application name) => accels}
   @syntax{(setf (gtk:application-accels-for-action application name) accels)}
   @argument[application]{a @class{gtk:application} instance}
   @argument[name]{a string for a detailed action name, specifying an action
     and target}
-  @argument[accels]{a string or a list of strings of accelerators in the format
+  @argument[accels]{a string or a list of strings for accelerators in the format
     understood by the @fun{gtk:accelerator-parse} function}
   @begin{short}
     The @fun{gtk:application-accels-for-action} function gets the keyboard

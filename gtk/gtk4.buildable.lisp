@@ -73,7 +73,7 @@
 (setf (liber:alias-for-class 'buildable)
       "Interface"
       (documentation 'buildable 'type)
- "@version{2025-4-17}
+ "@version{2025-04-17}
   @begin{short}
     The @class{gtk:buildable} interface allows objects to extend and customize
     their deserialization from @class{gtk:builder} UI descriptions.
@@ -96,7 +96,7 @@
 
 (cffi:defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
  #+liber-documentation
- "@version{2025-4-17}
+ "@version{2025-06-21}
   @argument[buildable]{a @class{gtk:buildable} object}
   @return{The string with the ID of the buildable object.}
   @begin{short}
@@ -104,7 +104,8 @@
   @end{short}
   The @class{gtk:builder} object sets the name based on the ID attribute of the
   tag used to construct the buildable object.
-  @see-class{gtk:buildable}"
+  @see-class{gtk:buildable}
+  @see-class{gtk:builder}"
   (buildable (g:object buildable)))
 
 (export 'buildable-buildable-id)
