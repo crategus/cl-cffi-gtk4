@@ -261,10 +261,10 @@ lambda (child)    :action
 
 (cffi:defcfun ("gtk_flow_box_child_get_index" flow-box-child-index) :int
  #+liber-documentation
- "@version{2024-06-22}
+ "@version{2024-07-12}
   @argument[child]{a @class{gtk:flow-box-child} widget}
   @begin{return}
-    The integer with the index of the child, or -1 if the child is not in a
+    The integer for the index of the child, or -1 if the child is not in a
     flow box.
   @end{return}
   @short{Gets the current index of the child widget in its flow box.}
@@ -447,7 +447,7 @@ lambda (flowbox step count)    :action
           emitted.}
         @entry[step]{The granularity to the move, as a value of the
           @sym{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
+        @entry[count]{The integer for the number of step units to move.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked for
           the event. @em{False} to propagate the event further.}
       @end{simple-table}
@@ -926,12 +926,12 @@ lambda (flowbox)    :action
 (cffi:defcfun ("gtk_flow_box_get_child_at_pos" flow-box-child-at-pos)
     (g:object flow-box-child)
  #+liber-documentation
- "@version{#2024-04-14}
+ "@version{#2025-07-12}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[x]{an integer for the x coordinate of the child widget}
   @argument[y]{an integer for the y coordinate of the child widget}
   @begin{return}
-    The child widget, which will always be a @class{gtk:flow-box-child} widget
+    The child widget that will always be a @class{gtk:flow-box-child} widget
     or @code{nil} in case no child widget exists for the given coordinates.
   @end{return}
   @begin{short}

@@ -666,7 +666,7 @@ lambda (notebook page)    :action
       @end{pre}
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[page]{The integer with the page index.}
+        @entry[page]{The integer for the page index.}
         @entry[Returns]{Whether the page was changed.}
       @end{simple-table}
       Emitted when the current page should be changed. The default bindings for
@@ -707,7 +707,7 @@ lambda (notebook direction)    :action
       @end{pre}
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[direction]{The @sym{gtk:direction-type} value with the direction
+        @entry[direction]{The @sym{gtk:direction-type} value for the direction
           to move the focus.}
       @end{simple-table}
       Emitted when focus was moved out. The default bindings for this signal
@@ -721,7 +721,7 @@ lambda (notebook child num)    :run-last
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
-        @entry[num]{The unsigned integer with the child page number.}
+        @entry[num]{The unsigned integer for the child page number.}
       @end{simple-table}
       The signal is emitted in the notebook right after a page is added to the
       notebook.
@@ -733,7 +733,7 @@ lambda (notebook child num)   :run-last
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
-        @entry[num]{The unsigned integer with the child page number.}
+        @entry[num]{The unsigned integer for the child page number.}
       @end{simple-table}
       The signal is emitted in the notebook right after a page is removed from
       the notebook.
@@ -745,7 +745,7 @@ lambda (notebook child num)    :run-last
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[child]{The @class{gtk:widget} child page affected.}
-        @entry[num]{The unsigned integer with the child page number.}
+        @entry[num]{The unsigned integer for the child page number.}
       @end{simple-table}
       The signal is emitted in the notebook right after a page has been
       reordered.
@@ -785,7 +785,7 @@ lambda (notebook page num)    :run-last
       @begin[code]{simple-table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[page]{The @class{gtk:widget} current page.}
-        @entry[num]{The unsigned integer with the index of the page.}
+        @entry[num]{The unsigned integer for the index of the page.}
       @end{simple-table}
       Emitted when the user or a function changes the current page.
     @end{signal}
@@ -1101,11 +1101,11 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_page_num" notebook-page-num) :int
  #+liber-documentation
- "@version{2024-10-04}
+ "@version{2025-07-12}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[child]{a @class{gtk:widget} child}
   @begin{return}
-    The index of the page containing child, or -1 if child is not in the
+    The index for the page containing child, or -1 if child is not in the
     notebook.
   @end{return}
   @begin{short}
@@ -1268,7 +1268,7 @@ lambda (notebook page num)    :run-last
   @argument[menu]{a @class{gtk:widget} object to use as a label for the
     page-switch menu, if that is enabled}
   @begin{return}
-    The integer with the index starting from 0 of the added page in the
+    The integer for the index starting from 0 of the added page in the
     notebook, or -1 if the function fails.
   @end{return}
   @begin{short}

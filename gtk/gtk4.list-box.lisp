@@ -410,10 +410,10 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_get_index" list-box-row-index) :int
  #+liber-documentation
- "@version{#2025-06-21}
+ "@version{#2025-07-12}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{return}
-    The integer with the index of the row in the list box, or -1 if the row
+    The integer for the index of the row in the list box, or -1 if the row
     is not in the list box.
   @end{return}
   @begin{short}
@@ -455,7 +455,7 @@ lambda (row)    :action
 
 #+liber-documentation
 (setf (documentation 'list-box 'type)
- "@version{2025-06-22}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:list-box} widget is a vertical list box that contains
     @class{gtk:list-box-row} children.
@@ -510,7 +510,7 @@ lambda (listbox step count)    :action
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[step]{The value of the @sym{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of steps.}
+        @entry[count]{The integer for the number of steps.}
       @end{simple-table}
     @end{signal}
     @begin[list-box::row-activated]{signal}

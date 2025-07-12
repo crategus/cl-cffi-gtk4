@@ -566,9 +566,10 @@
     @code{stack}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:stack} implementation uses the @code{:tab-panel} role of the
-    @symbol{gtk:accessible-role} enumeration for the stack pages, which are the
-    accessible parent objects of the child widgets.
+    The @class{gtk:stack} implementation uses the
+    @val[gtk:accessible-role]{:tab-panel} role of the @sym{gtk:accessible-role}
+    enumeration for the stack pages, which are the accessible parent objects of
+    the child widgets.
   @end{dictionary}
   @see-constructor{gtk:stack-new}
   @see-slot{gtk:stack-hhomogeneous}

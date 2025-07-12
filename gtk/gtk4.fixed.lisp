@@ -233,13 +233,12 @@
 
 (defun fixed-child-position (fixed child)
  #+liber-documentation
- "@version{2025-03-25}
+ "@version{2025-07-12}
+  @syntax{(gtk:fixed-child-position fixed child) => x, y}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
-  @begin{return}
-    @arg{x} -- a double float for the horizontal position of @arg{widget} @br{}
-    @arg{y} -- a double float for the vertical position of @arg{widget}
-  @end{return}
+  @argument[x]{a double float for the horizontal position of @arg{widget}}
+  @argument[y]{a double float for the vertical position of @arg{widget}}
   @begin{short}
     Retrieves the translation transformation of the given child widget in the
     fixed container.
