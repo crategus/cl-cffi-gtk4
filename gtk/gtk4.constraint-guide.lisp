@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.constraint-guide.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -111,7 +111,7 @@
 
 #+liber-documentation
 (setf (documentation 'constraint-guide 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     An object that can be added to a @class{gtk:constraint-layout} object and
     be used in constraints like a widget, without being drawn.
@@ -149,11 +149,11 @@
 (setf (liber:alias-for-function 'constraint-guide-max-height)
       "Accessor"
       (documentation 'constraint-guide-max-height 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-max-height object) => height}
   @syntax{(setf (gtk:constraint-guide-max-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[height]{an integer with the maximum height of the guide}
+  @argument[height]{an integer for the maximum height of the guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{max-height} slot of the
     @class{gtk:constraint-guide} class.
@@ -174,11 +174,11 @@
 (setf (liber:alias-for-function 'constraint-guide-max-width)
       "Accessor"
       (documentation 'constraint-guide-max-width 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-max-width object) => width}
   @syntax{(setf (gtk:constraint-guide-max-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[width]{an integer with the maximum width of the guide}
+  @argument[width]{an integer for the maximum width of the guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{max-width} slot of the
     @class{gtk:constraint-guide} class.
@@ -199,11 +199,11 @@
 (setf (liber:alias-for-function 'constraint-guide-min-height)
       "Accessor"
       (documentation 'constraint-guide-min-height 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-min-height object) => height}
   @syntax{(setf (gtk:constraint-guide-min-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[height]{an integer with the minimum height of the guide}
+  @argument[height]{an integer for the minimum height of the guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{min-height} slot of the
     @class{gtk:constraint-guide} class.
@@ -224,11 +224,11 @@
 (setf (liber:alias-for-function 'constraint-guide-min-width)
       "Accessor"
       (documentation 'constraint-guide-min-width 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-min-width object) => width}
   @syntax{(setf (gtk:constraint-guide-min-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[width]{an integer with the minimum width of the guide}
+  @argument[width]{an integer for the minimum width of the guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{min-width} slot of the
     @class{gtk:constraint-guide} class.
@@ -248,11 +248,11 @@
 (setf (liber:alias-for-function 'constraint-guide-name)
       "Accessor"
       (documentation 'constraint-guide-name 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-name object) => name}
   @syntax{(setf (gtk:constraint-guide-name object) name)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[name]{a string with the name for the guide}
+  @argument[name]{a string for the name for the guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{name} slot of the
     @class{gtk:constraint-guide} class.
@@ -276,11 +276,11 @@
 (setf (liber:alias-for-function 'constraint-guide-nat-height)
       "Accessor"
       (documentation 'constraint-guide-nat-height 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-nat-height object) => height}
   @syntax{(setf (gtk:constraint-guide-nat-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[height]{an integer with the preferred, or natural, height of the
+  @argument[height]{an integer for the preferred, or natural, height of the
     guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{nat-height} slot of the
@@ -302,11 +302,11 @@
 (setf (liber:alias-for-function 'constraint-guide-nat-width)
       "Accessor"
       (documentation 'constraint-guide-nat-width 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-nat-width object) => width}
   @syntax{(setf (gtk:constraint-guide-nat-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[width]{an integer with the preferred, or natural, width of the
+  @argument[width]{an integer for the preferred, or natural, width of the
     guide}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{nat-width} slot of the
@@ -318,21 +318,22 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "strength" 'constraint-guide) t)
- "The @code{name} property of type @code{:string} (Read / Write) @br{}
-  The @symbol{gtk:constraint-strength} value to be used for the constraint on
-  the natural size of the guide. @br{}
-  Default value: @code{:medium}")
+ "The @code{stength} property of type @sym{gtk:constraint-strength}
+  (Read / Write) @br{}
+  The @sym{gtk:constraint-strength} value to be used for the constraint on the
+  natural size of the guide. @br{}
+  Default value: @val[gtk:constraint-strength]{:medium}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'constraint-guide-strength)
       "Accessor"
       (documentation 'constraint-guide-strength 'function)
- "@version{2024-4-23}
+ "@version{2025-07-01}
   @syntax{(gtk:constraint-guide-strength object) => strength}
   @syntax{(setf (gtk:constraint-guide-strength object) strength)}
   @argument[object]{a @class{gtk:constraint-guide} object}
-  @argument[strength]{a @symbol{gtk:constraint-strength} value with the
-    strength of the constraint on the natural size}
+  @argument[strength]{a @sym{gtk:constraint-strength} value for the strength
+    of the constraint on the natural size}
   @begin{short}
     Accessor of the @slot[gtk:constraint-guide]{strength} slot of the
     @class{gtk:constraint-guide} class.
@@ -352,7 +353,7 @@
 
 (defun constraint-guide-new ()
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @return{The newly created @class{gtk:constraint-guide} object.}
   @short{Creates a new constraint guide.}
   @see-class{gtk:constraint-guide}"

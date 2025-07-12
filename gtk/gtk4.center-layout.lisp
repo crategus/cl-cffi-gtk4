@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.center-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'center-layout 'type)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @begin{short}
     The @class{gtk:center-layout} class is a layout manager that manages up to
     three children.
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'center-layout-shrink-center-last)
       "Accessor"
       (documentation 'center-layout-shrink-center-last 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:center-layout-shrink-center-last object) => setting}
   @syntax{(setf (gtk:center-layout-shrink-center-last object) setting)}
   @argument[object]{a @class{gtk:center-layout} object}
@@ -143,7 +143,7 @@
 
 (defun center-layout-new ()
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @return{The newly created @class{gtk:center-layout} object.}
   @short{Creates a new center layout manager.}
   @see-class{gtk:center-layout}"
@@ -166,11 +166,11 @@
 (cffi:defcfun ("gtk_center_layout_get_orientation" center-layout-orientation)
     orientation
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @syntax{(gtk:center-layout-orientation layout) => orientation}
   @syntax{(setf (gtk:center-layout-orientation layout) orientation)}
   @argument[layout]{a @class{gtk:center-layout} object}
-  @argument[orientation]{a @symbol{gtk:orientation} value}
+  @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
     The @fun{gtk:center-layout-orientation} function gets the current
     orienration of the layout manager.
@@ -197,11 +197,11 @@
 (cffi:defcfun ("gtk_center_layout_get_baseline_position"
                center-layout-baseline-position) baseline-position
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @syntax{(gtk:center-layout-baseline-position layout) => position}
   @syntax{(setf (gtk:center-layout-baseline-position layout) position)}
   @argument[layout]{a @class{gtk:center-layout} object}
-  @argument[position]{a @symbol{gtk:baseline-position} value}
+  @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
     The @fun{gtk:center-layout-baseline-position} function gets the current
     baseline position of the layout manager.
@@ -229,7 +229,7 @@
 (cffi:defcfun ("gtk_center_layout_get_start_widget" center-layout-start-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:center-layout-start-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-start-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
@@ -260,7 +260,7 @@
 (cffi:defcfun ("gtk_center_layout_get_center_widget"
                center-layout-center-widget) (g:object widget)
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:center-layout-center-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-center-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
@@ -291,7 +291,7 @@
 (cffi:defcfun ("gtk_center_layout_get_end_widget" center-layout-end-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:center-layout-end-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-end-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}

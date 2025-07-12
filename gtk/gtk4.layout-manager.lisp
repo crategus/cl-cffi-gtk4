@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.layout-manager.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -140,26 +140,26 @@ create_layout_child (GtkLayoutManager *manager,
 
 (defun layout-manager-measure (layout widget orientation size)
  #+liber-documentation
- "@version{2024-4-12}
+ "@version{2025-07-12}
+  @syntax{(gtk:layout-manager-measure layout widget orientation size) =>
+    minimum, natural, minimum-baseline, natural-baseline}
   @argument[layout]{a @class{gtk:layout-manager} object}
   @argument[widget]{a @class{gtk:widget} object using @arg{layout}}
-  @argument[orientation]{a @symbol{gtk:orientation} value to measure}
-  @argument[size]{an integer with the size for the opposite of
-  @arg{orientation}, for instance, if the orientation is @code{:horizontal},
-    this is the height of the widget, if the orientation is @code{:vertical},
-    this is the width of the widget, this allows to measure the height for the
-    given width, and the width for the given height, use -1 if the size is not
-    known}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum size for the given size and
-      orientation @br{}
-    @arg{natual} -- an integer with the natural, or preferred size for the
-      given size and orientation @br{}
-    @arg{minimum-baseline} -- an integer with the baseline position for the
-      minimum size @br{}
-    @arg{natural-baseline} -- an integer with the baseline position for the
-      natural size
-  @end{return}
+  @argument[orientation]{a @sym{gtk:orientation} value to measure}
+  @argument[size]{an integer for the size for the opposite of @arg{orientation},
+    for instance, if the orientation is @val[gtk:orientation]{:horizontal},
+    this is the height of the widget, if the orientation is
+    @val[gtk:orientation]{:vertical}, this is the width of the widget, this
+    allows to measure the height for the given width, and the width for the
+    given height, use -1 if the size is not known}
+  @argument[minimum]{an integer for the minimum size for the given size and
+    orientation}
+  @argument[naturual]{an integer for the natural, or preferred size for the
+    given size and orientation}
+  @argument[minimum-baseline]{an integer for the baseline position for the
+    minimum size}
+  @argument[natural-baseline]{an integer for the baseline position for the
+    natural size}
   @begin{short}
     Measures the size of the widget using @arg{layout}, for the given
     orientation and size.
@@ -194,12 +194,12 @@ create_layout_child (GtkLayoutManager *manager,
 
 (cffi:defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @argument[layout]{a @class{gtk:layout-manager} object}
   @argument[widget]{a @class{gtk:widget} object using @arg{layout}}
-  @argument[width]{an integer with the new width of the widget}
-  @argument[height]{an integer with the new height of the widget}
-  @argument[baseline]{an integer with the baseline position of the widget,
+  @argument[width]{an integer for the new width of the widget}
+  @argument[height]{an integer for the new height of the widget}
+  @argument[baseline]{an integer for the baseline position of the widget,
     or -1}
   @begin{short}
     This function assigns the given @arg{width}, @arg{height}, and
@@ -223,9 +223,9 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_request_mode"
                layout-manager-request-mode) size-request-mode
  #+liber-documentation
- "@version{2024-10-14}
+ "@version{2025-06-30}
   @argument[layout]{a @class{gtk:layout-manager} object}
-  @return{The @symbol{gtk:size-request-mode} value for @arg{layout}.}
+  @return{The @sym{gtk:size-request-mode} value for @arg{layout}.}
   @begin{short}
     Retrieves the request mode for the layout manager.
   @end{short}

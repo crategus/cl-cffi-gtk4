@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.overlay-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay-layout-child 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     The @class{gtk:overlay-layout-child} subclass for children in a
     @class{gtk:overlay-layout} object.
@@ -108,7 +108,7 @@
 (setf (liber:alias-for-function 'overlay-layout-child-clip-overlay)
       "Accessor"
       (documentation 'overlay-layout-child-clip-overlay 'function)
- "@version{#2024-4-23}
+ "@version{#2024-04-23}
   @syntax{(gtk:overlay-layout-child-clip-overlay object) => clip}
   @syntax{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
@@ -137,7 +137,7 @@
 (setf (liber:alias-for-function 'overlay-layout-child-measure)
       "Accessor"
       (documentation 'overlay-layout-child-measure 'function)
- "@version{#2024-4-23}
+ "@version{#2024-04-23}
   @syntax{(gtk:overlay-layout-child-measure object) => measure}
   @syntax{(setf (gtk:overlay-layout-child-measure object) measure)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
@@ -164,7 +164,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay-layout 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     The @class{gtk:overlay-layout} object is the layout manager used by
     the @class{gtk:overlay} widget.
@@ -183,8 +183,8 @@
 
 (defun overlay-layout-new ()
  #+liber-documentation
- "@version{2024-4-23}
-  @return{The newly created @class{gtk:overlay-layout} object}
+ "@version{2024-04-23}
+  @return{The newly created @class{gtk:overlay-layout} object.}
   @short{Creates a new overlay layout manager.}
   @see-class{gtk:overlay-layout}"
   (make-instance 'overlay-layout))

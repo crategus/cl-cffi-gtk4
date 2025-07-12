@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.box-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'box-layout 'type)
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @begin{short}
     The @class{gtk:box-layout} class is a layout manager that arranges the
     children of any widget using it into a single row or column.
@@ -137,11 +137,11 @@
 (setf (liber:alias-for-function 'box-layout-baseline-child)
       "Accessor"
       (documentation 'box-layout-baseline-child 'function)
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @syntax{(gtk:box-layout-baseline-child object) => index}
   @syntax{(setf (gtk:box-layout-baseline-child object) index)}
   @argument[object]{a @class{gtk:box-layout} object}
-  @argument[index]{an integer with the child position, or -1}
+  @argument[index]{an integer for the child position, or -1}
   @begin{short}
     Accessor of the @slot[box-layout]{baseline-child} slot of the
     @class{gtk:box-layout} class.
@@ -156,23 +156,23 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-position"
                                                'box-layout) t)
- "The @code{baseline-position} property of type @symbol{gtk:baseline-position}
+ "The @code{baseline-position} property of type @sym{gtk:baseline-position}
   (Read / Write) @br{}
   The position of the allocated baseline within the extra space allocated to
   each child of the widget using a box layout manager. This property is only
   relevant for horizontal layouts containing at least one child with a baseline
   alignment. @br{}
-  Default value: @code{:center}")
+  Default value: @val[gtk:baseline-position]{:center}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'box-layout-baseline-position)
       "Accessor"
       (documentation 'box-layout-baseline-position 'function)
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @syntax{(gtk:box-layout-baseline-position object) => position}
   @syntax{(setf (gtk:box-layout-baseline-position object) position)}
   @argument[object]{a @class{gtk:box-layout} object}
-  @argument[position]{a @symbol{gtk:baseline-position} value}
+  @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
     Accessor of the @slot[gtk:box-layout]{baseline-position} slot of the
     @class{gtk:box-layout} class.
@@ -201,7 +201,7 @@
 (setf (liber:alias-for-function 'box-layout-homogeneous)
       "Accessor"
       (documentation 'box-layout-homogeneous 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:box-layout-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-layout-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box-layout} object}
@@ -229,11 +229,11 @@
 (setf (liber:alias-for-function 'box-layout-spacing)
       "Accessor"
       (documentation 'box-layout-spacing 'function)
- "@version{2024-4-19}
+ "@version{2025-06-30}
   @syntax{(gtk:box-layout-spacing object) => spacing}
   @syntax{(setf (gtk:box-layout-spacing object) spacing)}
   @argument[object]{a @class{gtk:box-layout} object}
-  @argument[spacing]{an integer with the spacing of the box layout}
+  @argument[spacing]{an integer for the spacing of the box layout}
   @begin{short}
     Accessor of the @slot[gtk:box-layout]{spacing} slot of the
     @class{gtk:box-layout} class.
@@ -251,8 +251,8 @@
 
 (defun box-layout-new (orientation)
  #+liber-documentation
- "@version{2024-4-19}
-  @argument[orientation]{a @symbol{gtk:orientation} value}
+ "@version{2025-06-30}
+  @argument[orientation]{a @sym{gtk:orientation} value}
   @return{The new @class{gtk:box-layout} object.}
   @short{Creates a new box layout.}
   @see-class{gtk:box-layout}

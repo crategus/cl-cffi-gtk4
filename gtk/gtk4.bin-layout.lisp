@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.bin-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,7 +61,7 @@
 
 #+liber-documentation
 (setf (documentation 'bin-layout 'type)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @begin{short}
     The @class{gtk:bin-layout} class is a @class{gtk:layout-manager} subclass
     useful for create \"bins\" of widgets.
@@ -81,7 +81,7 @@
 
 (defun bin-layout-new ()
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @return{The newly created @class{gtk:bin-layout} object.}
   @short{Creates a new @class{gtk:bin-layout} object.}
   @see-class{gtk:bin-layout}"

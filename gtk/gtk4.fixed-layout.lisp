@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.fixed-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -69,10 +69,10 @@
 
 #+liber-documentation
 (setf (documentation 'fixed-layout-child 'type)
- "@version{2024-4-23}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:layout-child} subclass for children in a
-    @class{gtk:fixed-layout} class.
+    @class{gtk:fixed-layout} object.
   @end{short}
   @see-class{gtk:fixed-layout}
   @see-class{gtk:layout-child}
@@ -93,7 +93,7 @@
 (setf (liber:alias-for-function 'fixed-layout-child-transform)
       "Accessor"
       (documentation 'fixed-layout-child-transform 'function)
- "@version{#2024-4-23}
+ "@version{#2024-04-23}
   @syntax{(gtk:fixed-layout-child-transform object) => transform}
   @syntax{(setf (gtk:fixed-layout-child-transform object) transform)}
   @argument[object]{a @class{gtk:fixed-layout-child} widget}
@@ -121,7 +121,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed-layout 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     The @class{gtk:fixed-layout} object is a layout manager which can place
     child widgets at fixed positions, and with fixed sizes.
@@ -168,7 +168,7 @@
 
 (defun fixed-layout-new ()
  #+liber-documentation
- "@version{2024-4-24}
+ "@version{2024-04-24}
   @return{The newly created @class{gtk:fixed-layout} object.}
   @short{Creates a new @class{gtk:fixed-layout} object.}
   @see-class{gtk:fixed-layout}"

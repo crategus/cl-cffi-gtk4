@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.grid-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -112,7 +112,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid-layout-child 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     The @class{gtk:layout-child} subclass for children in a
     @class{gtk:grid-layout} object.
@@ -139,11 +139,11 @@
 (setf (liber:alias-for-function 'grid-layout-child-column)
       "Accessor"
       (documentation 'grid-layout-child-column 'function)
- "@version{#2024-4-23}
+ "@version{#2025-06-30}
   @syntax{(gtk:grid-layout-child-column object) => column}
   @syntax{(setf (gtk:grid-layout-child-column object) column)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
-  @argument[column]{an integer with the column to place the child widget in}
+  @argument[column]{an integer for the column to place the child widget in}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout-child]{column} slot of the
     @class{gtk:grid-layout-child} class.
@@ -167,11 +167,11 @@
 (setf (liber:alias-for-function 'grid-layout-child-column-span)
       "Accessor"
       (documentation 'grid-layout-child-column-span 'function)
- "@version{#2024-4-23}
+ "@version{#2025-06-30}
   @syntax{(gtk:grid-layout-child-column-span object) => span}
   @syntax{(setf (gtk:grid-layout-child-column-span object) span)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
-  @argument[span]{an integer with the number of columns}
+  @argument[span]{an integer for the number of columns}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout-child]{column-span} slot of the
     @class{gtk:grid-layout-child} class.
@@ -193,11 +193,11 @@
 (setf (liber:alias-for-function 'grid-layout-child-row)
       "Accessor"
       (documentation 'grid-layout-child-row 'function)
- "@version{#2024-4-23}
+ "@version{#2025-06-30}
   @syntax{(gtk:grid-layout-child-row object) => row}
   @syntax{(setf (gtk:grid-layout-child-column object) row)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
-  @argument[row]{an integer with the row to place the child widget in}
+  @argument[row]{an integer for the row to place the child widget in}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout-child]{row} slot of the
     @class{gtk:grid-layout-child} class.
@@ -220,11 +220,11 @@
 (setf (liber:alias-for-function 'grid-layout-child-row-span)
       "Accessor"
       (documentation 'grid-layout-child-row-span 'function)
- "@version{#2024-4-23}
+ "@version{#2025-06-30}
   @syntax{(gtk:grid-layout-child-row-span object) => span}
   @syntax{(setf (gtk:grid-layout-child-row-span object) span)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
-  @argument[span]{an integer with the number of rows}
+  @argument[span]{an integer for the number of rows}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout-child]{row-span} slot of the
     @class{gtk:grid-layout-child} class.
@@ -261,7 +261,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid-layout 'type)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @begin{short}
     Layout manager for grid like widgets.
   @end{short}
@@ -300,7 +300,7 @@
 (setf (documentation (liber:slot-documentation "baseline-row" 'grid-layout) t)
  "The @code{baseline-row} property of type @code{:int} (Read / Write) @br{}
   The row to align to the baseline, when the @slot[gtk:widget]{valign} property
-  is set to the @code{:baseline} of the @symbol{gtk:align} enumeration. @br{}
+  is set to @val[gtk:align]{:baseline}. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -308,11 +308,11 @@
 (setf (liber:alias-for-function 'grid-layout-baseline-row)
       "Accessor"
       (documentation 'grid-layout-baseline-row 'function)
- "@version{2024-4-23}
+ "@version{2025-06-30}
   @syntax{(gtk:grid-layout-baseline-row object) => row}
   @syntax{(setf (gtk:grid-layout-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid-layout} object}
-  @argument[row]{an integer with the row index}
+  @argument[row]{an integer for the row index}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout]{baseline-row} slot of the
     @class{gtk:grid-layout} class.
@@ -339,7 +339,7 @@
 (setf (liber:alias-for-function 'grid-layout-column-homogeneous)
       "Accessor"
       (documentation 'grid-layout-column-homogeneous 'function)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @syntax{(gtk:grid-layout-column-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-layout-column-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid-layout} object}
@@ -368,11 +368,11 @@
 (setf (liber:alias-for-function 'grid-layout-column-spacing)
       "Accessor"
       (documentation 'grid-layout-column-spacing 'function)
- "@version{2024-4-23}
+ "@version{2025-06-30}
   @syntax{(gtk:grid-layout-column-spacing object) => spacing}
   @syntax{(setf (gtk:grid-layout-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid-layout} object}
-  @argument[spacing]{an integer with the amount of space between to consecutive
+  @argument[spacing]{an integer for the amount of space between to consecutive
     columns}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout]{column-spacing} slot of the
@@ -397,7 +397,7 @@
 (setf (liber:alias-for-function 'grid-layout-row-homogeneous)
       "Accessor"
       (documentation 'grid-layout-row-homogeneous 'function)
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @syntax{(gtk:grid-layout-row-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-layout-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid-layout} object}
@@ -426,11 +426,11 @@
 (setf (liber:alias-for-function 'grid-layout-row-spacing)
       "Accessor"
       (documentation 'grid-layout-row-spacing 'function)
- "@version{2024-4-23}
+ "@version{2025-06-30}
   @syntax{(gtk:grid-layout-row-spacing object) => spacing}
   @syntax{(setf (gtk:grid-layout-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid-layout} object}
-  @argument[spacing]{an integer with the amount of space between to consecutive
+  @argument[spacing]{an integer for the amount of space between to consecutive
     rows}
   @begin{short}
     Accessor of the @slot[gtk:grid-layout]{row-spacing} slot of the
@@ -449,7 +449,7 @@
 
 (defun grid-layout-new ()
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2024-04-23}
   @return{The newly created @class{gtk:grid-layout} object.}
   @short{Creates a new grid layout.}
   @see-class{gtk:grid-layout}"
@@ -473,12 +473,12 @@
 (cffi:defcfun ("gtk_grid_layout_get_row_baseline_position"
                grid-layout-row-baseline-position) baseline-position
  #+liber-documentation
- "@version{2024-4-23}
+ "@version{2025-06-30}
   @syntax{(gtk:grid-layout-row-baseline-position layout) => position}
   @syntax{(setf (gtk:grid-layout-row-baseline-position layout) position)}
   @argument[layout]{a @class{gtk:grid-layout} object}
-  @argument[row]{an integer with the row index}
-  @argument[position]{a @symbol{gtk:baseline-position} value}
+  @argument[row]{an integer for the row index}
+  @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
     The @fun{gtk:grid-layout-row-baseline-position} function returns the
     baseline position of @arg{row}.
@@ -486,7 +486,8 @@
   The @setf{gtk:grid-layout-row-baseline-position} function sets how the
   baseline should be positioned on @arg{row} of the grid, in case that @arg{row}
   is assigned more space than is requested. The default value is the
-  @code{:center} value of the @symbol{gtk:baseline-position} enumeration.
+  @val[gtk:baseline-position]{:center} value of the @sym{gtk:baseline-position}
+  enumeration.
   @see-class{gtk:grid-layout}
   @see-symbol{gtk:baseline-position}"
   (layout (g:object grid-layout))

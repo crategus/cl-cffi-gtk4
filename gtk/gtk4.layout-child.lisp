@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.layout-child.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -75,7 +75,7 @@
 
 #+liber-documentation
 (setf (documentation 'layout-child 'type)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @begin{short}
     The @class{gtk:layout-child} class is the base class for objects that are
     meant to hold layout properties.
@@ -106,7 +106,7 @@
 (setf (liber:alias-for-function 'layout-child-child-widget)
       "Accessor"
       (documentation 'layout-child-child-widget 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:layout-child-child-widget object) => child}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[child]{a @class{gtk:widget} object}
@@ -130,7 +130,7 @@
 (setf (liber:alias-for-function 'layout-child-layout-manager)
       "Accessor"
       (documentation 'layout-child-layout-manager 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:layout-child-layout-manager object) => manager}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
