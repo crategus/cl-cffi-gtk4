@@ -153,7 +153,7 @@
 
 #+liber-documentation
 (setf (documentation 'application 'type)
- "@version{2025-06-26}
+ "@version{2025-07-11}
   @begin{short}
     The @class{gtk:application} class is a high-level API for writing
     applications.
@@ -300,7 +300,7 @@
 lambda (application)    :run-first
       @end{pre}
       @begin[code]{simple-table}
-        @entry[application]{The @class{gtk:application} instance which emitted
+        @entry[application]{The @class{gtk:application} instance that emitted
           the signal.}
       @end{simple-table}
       Emitted when the session manager is about to end the session. This signal
@@ -315,7 +315,7 @@ lambda (application)    :run-first
 lambda (application window)    :run-first
       @end{pre}
       @begin[code]{simple-table}
-        @entry[application]{The @class{gtk:application} instance which emitted
+        @entry[application]{The @class{gtk:application} instance that emitted
           the signal.}
         @entry[window]{The newly added @class{gtk:window} widget.}
       @end{simple-table}
@@ -327,7 +327,7 @@ lambda (application window)    :run-first
 lambda (application window)    :run-first
       @end{pre}
       @begin[code]{simple-table}
-        @entry[application]{The @class{gtk:application} instance which emitted
+        @entry[application]{The @class{gtk:application} instance that emitted
           the signal.}
         @entry[window]{The @class{gtk:window} widget that is being removed.}
       @end{simple-table}
@@ -623,15 +623,15 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_window_by_id" application-window-by-id)
     (g:object window)
  #+liber-documentation
- "@version{2025-06-21}
+ "@version{2025-07-11}
   @argument[application]{a @class{gtk:application} instance}
   @argument[id]{an unsigned integer for the identifier number}
   @begin{return}
-    The @class{gtk:application-window} widget with ID @arg{id}, or @code{nil}
-    if there is no window with this ID.
+    The @class{gtk:application-window} widget for the given @arg{id}, or
+    @code{nil} if there is no window with this ID.
   @end{return}
   @begin{short}
-    Returns the application window with the given ID.
+    Returns the application window for the given ID.
   @end{short}
   The ID of an application window can be retrieved with the
   @fun{gtk:application-window-id} function.
@@ -731,12 +731,12 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_menu_by_id" application-menu-by-id)
     (g:object g:menu)
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-07-11}
   @argument[application]{a @class{gtk:application} instance}
   @argument[id]{a string for the ID of the menu to look up}
   @begin{return}
-    Gets the @class{g:menu} object with the given @arg{id} argument from
-    the automatically loaded resources.
+    Gets the @class{g:menu} object for the given @arg{id} from the
+    automatically loaded resources.
   @end{return}
   @begin{short}
     Gets a menu from automatically loaded resources.
@@ -755,9 +755,9 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_list_action_descriptions"
                application-list-action-descriptions) g:strv-t
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-07-11}
   @argument[application]{a @class{gtk:application} instance}
-  @return{The list of strings with the detailed action names.}
+  @return{The list of strings for the detailed action names.}
   @begin{short}
     Lists the detailed action names which have associated accelerators.
   @end{short}

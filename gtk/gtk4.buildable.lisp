@@ -96,9 +96,9 @@
 
 (cffi:defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
  #+liber-documentation
- "@version{2025-06-21}
+ "@version{2025-07-11}
   @argument[buildable]{a @class{gtk:buildable} object}
-  @return{The string with the ID of the buildable object.}
+  @return{The string for the ID of the buildable object.}
   @begin{short}
     Gets the ID of the buildable object.
   @end{short}

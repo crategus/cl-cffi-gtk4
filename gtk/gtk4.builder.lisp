@@ -33,7 +33,7 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GtkBuilderClosureFlags
+;;;     GtkBuilderClosureFlags                              not exported
 ;;;     GtkBuilderError                                     not exported
 ;;;
 ;;;     GtkBuilderScope
@@ -116,7 +116,7 @@
 (setf (liber:alias-for-symbol 'builder-closure-flags)
       "GFlags"
       (liber:symbol-documentation 'builder-closure-flags)
- "@version{2025-06-29}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-gflags \"GtkBuilderClosureFlags\" builder-closure-flags
   (:export t
@@ -190,8 +190,8 @@
   implementation of the @class{gtk:builder-scope} instance for the C language.
 
   If you implement the @class{gtk:builder-scope} instance for a language
-  binding, you may want to (partially) derive from or fall back to a
-  @code{GtkBuilderCScope}, as that class implements support for automatic
+  binding, you may want to (partially) derive from or fall back to the
+  @code{GtkBuilderCScope} class, as that class implements support for automatic
   lookups from C symbols.
   @begin[Notes]{dictionary}
     The Lisp binding implements the @class{gtk:builder-cl-scope} subclass. For
@@ -563,13 +563,14 @@
 </object>
   @end{pre}
   The remaining attributes, @code{\"after\"}, @code{\"swapped\"} and
-  @code{\"object\"}, have the same meaning as the corresponding parameters of
-  the @fun{g:signal-connect-object} or @fun{g:signal-connect-data} functions:
+  @code{\"object\"}, have the following meaning:
   @begin{itemize}
-    @item{@code{\"after\"} matches the @code{:after} flag, and will ensure that
-      the handler is called after the default class closure for the signal}
-    @item{@code{\"swapped\"} matches the @code{:swapped} flag, and will swap
-      the instance and closure arguments when invoking the signal handler}
+    @item{@code{\"after\"} matches the @val[g:connect-flags]{:after} flag, and
+      will ensure that the handler is called after the default class closure
+      for the signal}
+    @item{@code{\"swapped\"} matches the @val[g:connect-flags]{:swapped} flag,
+      and will swap the instance and closure arguments when invoking the signal
+      handler}
     @item{@code{\"object\"} will bind the signal handler to the lifetime of the
       object referenced by the attribute}
   @end{itemize}
@@ -637,7 +638,7 @@
 (setf (liber:alias-for-function 'builder-current-object)
       "Accessor"
       (documentation 'builder-current-object 'function)
- "@version{2024-09-15}
+ "@version{2025-07-11}
   @syntax{(gtk:builder-current-object object) => current}
   @syntax{(setf (gtk:builder-current-object object) current)}
   @argument[object]{a @class{gtk:builder} object}
@@ -652,9 +653,9 @@
   working for and will often be used as the default object when an object is
   optional.
 
-  The @fun{gtk:widget-init-template} function for example will set the current
-  object to the widget the template is inited for. For functions like the
-  @fun{gtk:builder-new-from-resource} function, the current object will be
+  The @fun{gtk:widget-init-template} function, for example, will set the
+  current object to the widget the template is inited for. For functions like
+  the @fun{gtk:builder-new-from-resource} function, the current object will be
   @code{nil}.
   @see-class{gtk:builder}
   @see-class{g:object}
@@ -961,11 +962,11 @@
 
 (defun builder-add-objects-from-file (builder path &rest args)
  #+liber-documentation
- "@version{2025-05-03}
+ "@version{2025-07-11}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a pathname or namestring for the name of the file to parse}
   @argument[args]{strings for the object IDs to build}
-  @return{The positive value on success, 0 if an error occurred.}
+  @return{The positive integer on success, 0 if an error occurred.}
   @begin{short}
     Parses a file containing a @class{gtk:builder} UI definition building only
     the requested objects and merges them with the current contents of builder.
@@ -999,11 +1000,11 @@
 
 (defun builder-add-objects-from-resource (builder path &rest args)
  #+liber-documentation
- "@version{2025-05-03}
+ "@version{2025-07-11}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a string for the path of the resource file to parse}
   @argument[args]{strings for the object IDs to build}
-  @return{The positive value on success, 0 if an error occurred.}
+  @return{The positive integer on success, 0 if an error occurred.}
   @begin{short}
     Parses a resource file containing a @class{gtk:builder} UI definition
     building only the requested objects and merges them with the current
@@ -1038,11 +1039,11 @@
 
 (defun builder-add-objects-from-string (builder string &rest args)
  #+liber-documentation
- "@version{2025-05-03}
+ "@version{2025-07-11}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
   @argument[args]{strings for the object IDs to build}
-  @return{The positive value on success, 0 if an error occurred.}
+  @return{The positive integer on success, 0 if an error occurred.}
   @begin{short}
     Parses a string containing a @class{gtk:builder} UI definition building only
     the requested objects and merges them with the current contents of builder.

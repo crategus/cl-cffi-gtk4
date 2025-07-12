@@ -83,8 +83,9 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkBuilderClosureFlags
+;;;     GtkBuilderClosureFlags                              not exported
 
+#+nil
 (test gtk-builder-closure-flags
   ;; Check type
   (is (g:type-is-flags "GtkBuilderClosureFlags"))
@@ -492,4 +493,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; 2025-05-05
+;;; 2025-07-12

@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2025-06-21}
+ "@version{2025-07-11}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -134,7 +134,7 @@
     Create an application window with a menubar.
     @begin{pre}
 (defun do-application-window (&optional application)
-  (let ((menus
+  (let ((menu
          \"<interface>
            <menu id='menubar'>
              <submenu>
@@ -155,8 +155,8 @@
                                :application application
                                :title \"Application Window\"
                                :show-menubar t)))
-    ;; Read the menus from a string
-    (gtk:builder-add-from-string builder menus)
+    ;; Read the menu from a string
+    (gtk:builder-add-from-string builder menu)
     ;; Set the menubar
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder \"menubar\"))
@@ -211,8 +211,8 @@
 
 (defun application-window-new (&optional application)
  #+liber-documentation
- "@version{2025-06-22}
-  @argument[application]{an optinoal @class{gtk:application} instance}
+ "@version{2025-07-11}
+  @argument[application]{an optional @class{gtk:application} instance}
   @return{The newly created @class{gtk:application-window} widget.}
   @short{Creates a new application window.}
   New application windows must be added to an application after the
@@ -232,11 +232,11 @@
 
 (cffi:defcfun ("gtk_application_window_get_id" application-window-id) :uint
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-07-11}
   @argument[window]{a @class{gtk:application-window} widget}
   @begin{return}
-    The unique ID for @arg{window}, or 0 if @arg{window} has not yet been
-    added to a @class{gtk:application} instance.
+    The unsigned integer for the unique ID of @arg{window}, or 0 if @arg{window}
+    has not yet been added to a @class{gtk:application} instance.
   @end{return}
   @begin{short}
     Returns the unique ID of the application window.
