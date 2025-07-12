@@ -112,9 +112,9 @@
 
 (cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
  #+liber-documentation
- "@version{2025-05-15}
+ "@version{2025-07-12}
   @argument[native]{a @class{gtk:native} widget}
-  @return{The @class{gdk:surface} object of @arg{native}.}
+  @return{The @class{gdk:surface} object for @arg{native}.}
   @begin{short}
     Returns the surface of the native widget.
   @end{short}
@@ -131,9 +131,9 @@
 (cffi:defcfun ("gtk_native_get_renderer" native-renderer)
     (g:object gsk:renderer)
  #+liber-documentation
- "@version{2025-05-15}
+ "@version{2025-07-12}
   @argument[native]{a @class{gtk:native} widget}
-  @return{The @class{gsk:renderer} object of @arg{native}.}
+  @return{The @class{gsk:renderer} object for @arg{native}.}
   @begin{short}
     Returns the renderer that is used for the native widget.
   @end{short}

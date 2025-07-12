@@ -259,7 +259,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2025-06-22}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -315,7 +315,7 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
 lambda (window)    :action
       @end{pre}
       @begin[code]{simple-table}
-        @entry[window]{The @class{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget that received the signal.}
       @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       activates the default widget of the window.
@@ -325,7 +325,7 @@ lambda (window)    :action
 lambda (window)    :action
       @end{pre}
       @begin[code]{simple-table}
-        @entry[window]{The @class{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget that received the signal.}
       @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       activates the currently focused widget of the window.
@@ -350,8 +350,8 @@ lambda (window toggle)    :action
       @begin[code]{simple-table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
-        @entry[toggle]{The boolean which toggles the debugger.}
-        @entry[Returns]{The boolean which is @em{true} if the key binding was
+        @entry[toggle]{The boolean that toggles the debugger.}
+        @entry[Returns]{The boolean that is @em{true} if the key binding was
           handled.}
       @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user enables
@@ -366,7 +366,7 @@ lambda (window toggle)    :action
 lambda (window)    :run-first
       @end{pre}
       @begin[code]{simple-table}
-        @entry[window]{The @class{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget that received the signal.}
       @end{simple-table}
       The signal gets emitted when the set of accelerators or mnemonics that
       are associated with the window changes. @br{}
@@ -1399,8 +1399,8 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_toplevels" window-toplevels)
     (g:object g:list-model)
  #+liber-documentation
- "@version{2026-06-22}
-  @return{The @class{g:list-model} object with the list of toplevel widgets.}
+ "@version{2026-07-12}
+  @return{The @class{g:list-model} object for the list of toplevel widgets.}
   @begin{short}
     Returns a list of all existing toplevel windows.
   @end{short}

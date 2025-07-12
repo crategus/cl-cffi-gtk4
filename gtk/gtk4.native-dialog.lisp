@@ -121,7 +121,7 @@ lambda (dialog response)    :run-last
       @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:native-dialog} object on which the signal
           is emitted.}
-        @entry[response]{The integer with the response ID.}
+        @entry[response]{The integer for the response ID.}
       @end{simple-table}
       Emitted when the user responds to the dialog. When this is called the
       dialog has been hidden. If you call the @fun{gtk:native-dialog-hide}

@@ -324,7 +324,7 @@ lambda (dialog uri)    :run-last
       @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:about-dialog} widget on which the signal
           was emitted.}
-        @entry[uri]{The string with the URI that is activated.}
+        @entry[uri]{The string for the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{simple-table}
       Emitted when a URL is activated. Applications may connect to it to
@@ -722,7 +722,7 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-translator-credits)
       "Accessor"
       (documentation 'about-dialog-translator-credits 'function)
- "@version{2025-05-12}
+ "@version{2025-07-12}
   @syntax{(gtk:about-dialog-translator-credits object) => credits}
   @syntax{(setf (gtk:about-dialog-translator-credits object) credits)}
   @argument[object]{a @class{gtk:about-dialog} widget}
@@ -745,7 +745,8 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
   It is a good idea to use the customary \"translator-credits\" msgid for this
   purpose, since translators will already know the purpose of that msgid, and
   since the @class{gtk:about-dialog} widget will detect if the
-  \"translator-credits\" property is untranslated and hide the tab.
+  @slot[gtk:about-dialog]{translator-credits} property is untranslated and hide
+  the tab.
   @see-class{gtk:about-dialog}")
 
 ;;; --- gtk:about-dialog-version -----------------------------------------------

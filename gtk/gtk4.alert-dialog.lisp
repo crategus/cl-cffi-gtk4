@@ -417,11 +417,11 @@
 
 (defun alert-dialog-choose-finish (dialog result)
  #+liber-documentation
- "@version{2025-04-17}
+ "@version{2025-07-12}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[result]{a @class{g:async-result} object for the result}
   @begin{return}
-    The integer with the index of the button that was clicked, -1 if the alert
+    The integer for the index of the button that was clicked, -1 if the alert
     dialog was cancelled and the @slot[gtk:alert-dialog]{cancel-button} property
     is not set.
   @end{return}
