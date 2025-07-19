@@ -1062,9 +1062,9 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_get_n_pages" notebook-n-pages) :int
  #+liber-documentation
- "@version{2024-10-04}
+ "@version{2025-07-15}
   @argument[notebook]{a @class{gtk:notebook} widget}
-  @return{The integer with the number of pages in the notebook.}
+  @return{The integer for the number of pages in the notebook.}
   @short{Gets the number of pages in a notebook.}
   @see-class{gtk:notebook}"
   (notebook (g:object notebook)))

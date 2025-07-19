@@ -1000,10 +1000,10 @@
 
 (cffi:defcfun ("gtk_stack_get_page" stack-page) (g:object stack-page)
  #+liber-documentation
- "@version{2025-04-23}
+ "@version{2025-07-13}
   @argument[stack]{a @class{gtk:stack} widget}
   @argument[child]{a @class{gtk:widget} child widget}
-  @return{The @class{gtk:stack-page} object for the child widget}
+  @return{The @class{gtk:stack-page} object for the child widget.}
   @short{Returns the @class{gtk:stack-page} object for the child widget.}
   @see-class{gtk:stack}
   @see-class{gtk:widget}

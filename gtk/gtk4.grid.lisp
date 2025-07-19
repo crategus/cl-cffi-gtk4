@@ -229,7 +229,7 @@
 (setf (liber:alias-for-function 'grid-baseline-row)
       "Accessor"
       (documentation 'grid-baseline-row 'function)
- "@version{2025-05-10}
+ "@version{2025-07-16}
   @syntax{(gtk:grid-baseline-row object) => row}
   @syntax{(setf (gtk:grid-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -240,9 +240,9 @@
   @end{short}
   The @fun{gtk:grid-baseline-row} function returns which row defines the global
   baseline of the grid. The @setf{gtk:grid-baseline-row} function sets which row
-  defines the global baseline for the entire grid. Each row in the grid can have
-  its own local baseline, but only one of those is global, meaning it will be
-  the baseline in the parent of the grid.
+  defines the global baseline. Each row in the grid can have its own local
+  baseline, but only one of those is global, meaning it will be the baseline in
+  the parent of the grid.
   @see-class{gtk:grid}")
 
 ;;; --- gtk:grid-column-homogeneous --------------------------------------------
