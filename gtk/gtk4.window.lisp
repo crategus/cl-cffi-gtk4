@@ -487,7 +487,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-decorated)
       "Accessor"
       (documentation 'window-decorated 'function)
- "@version{2024-10-02}
+ "@version{2025-07-17}
   @syntax{(gtk:window-decorated object) => setting}
   @syntax{(setf (gtk:window-decorated object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -500,8 +500,8 @@ lambda (window)    :run-first
   set to have decorations. The @setf{gtk:window-decorated} function sets whether
   the window should be decorated.
 
-  By default, windows are decorated with a title bar, resize controls, etc.
-  Some window managers allow GTK to disable these decorations, creating a
+  By default, windows are decorated with a title bar, resize controls, and so
+  on. Some window managers allow GTK to disable these decorations, creating a
   borderless window. If you set the @slot[gtk:window]{decorated} property to
   @em{false} using this function, GTK will do its best to convince the window
   manager not to decorate the window. Depending on the system, this function may

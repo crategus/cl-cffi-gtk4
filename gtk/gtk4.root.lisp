@@ -86,9 +86,9 @@
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
  #+liber-documentation
- "@version{2025-05-15}
+ "@version{2025-07-12}
   @argument[root]{a @class{gtk:root} widget}
-  @return{The @class{gdk:display} object of @arg{root}.}
+  @return{The @class{gdk:display} object for @arg{root}.}
   @begin{short}
     Returns the display that the root widget is on.
   @end{short}
