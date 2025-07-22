@@ -143,7 +143,7 @@
 
 #+liber-documentation
 (setf (documentation 'entry-completion 'type)
- "@version{2024-5-2}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:entry-completion} object is an auxiliary object to be used in
     conjunction with the @class{gtk:entry} widget to provide the completion
@@ -164,22 +164,24 @@
   When the user selects a completion, the content of the text entry is updated.
   By default, the content of the text entry is replaced by the text column of
   the model, but this can be overridden by connecting to the
-  @code{\"match-selected\"} signal and updating the text entry in the signal
-  handler. Note that you should return @em{true} from the signal handler to
-  suppress the default behaviour.
+  @sig[gtk:entry-completion]{match-selected} signal and updating the text entry
+  in the signal handler. Note that you should return @em{true} from the signal
+  handler to suppress the default behaviour.
 
   To add completion functionality to a text entry, use the
   @fun{gtk:entry-completion} function.
 
   The @class{gtk:entry-completion} object uses a @class{gtk:tree-model-filter}
   model to represent the subset of the entire model that is currently matching.
-  While the @class{gtk:entry-completion} widget @code{\"match-selected\"} and
-  @code{\"cursor-on-match\"} signals take the original model and an iterator
-  pointing to that model as arguments, other callbacks and signals, such as a
-  @symbol{gtk:cell-layout-data-func} function or the @code{\"apply-attributes\"}
-  signal, will generally take the filter model as argument. As long as you are
-  only calling the @fun{gtk:tree-model-get} function, this will make no
-  difference to you. If for some reason, you need the original model, use the
+  While the @class{gtk:entry-completion} widget
+  @sig[gtk:entry-completion]{match-selected} and
+  @sig[gtk:entry-completion]{cursor-on-match} signals take the original model
+  and an iterator pointing to that model as arguments, other callbacks and
+  signals, such as a @sym{gtk:cell-layout-data-func} function or the
+  @sig[gtk:cell-area]{apply-attributes} signal, will generally take the filter
+  model as argument. As long as you are only calling the
+  @fun{gtk:tree-model-get} function, this will make no difference to you. If
+  for some reason, you need the original model, use the
   @fun{gtk:tree-model-filter-model} function. Do not forget to use the
   @fun{gtk:tree-model-filter-convert-iter-to-child-iter} function to obtain a
   matching iterator.
@@ -188,65 +190,69 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"cursor-on-match\" signal}
+    @begin[entry-completion::cursor-on-match]{signal}
       @begin{pre}
 lambda (widget model iter)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:entry-completion} object which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:entry-completion} object that received
           the signal.}
         @entry[model]{The @class{gtk:tree-model} object containing the matches.}
         @entry[iter]{The @class{gtk:tree-iter} instance positioned at the
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when a match from the cursor is on a match of the list. The
       default behaviour is to replace the contents of the text entry with the
       contents of the text column in the row pointed to by @arg{iter}. Note
       that @arg{model} is the model that was passed to the
       @fun{gtk:entry-completion-model} function.
-    @subheading{The \"insert-prefix\" signal}
+    @end{signal}
+    @begin[entry-completion::insert-prefix]{signal}
       @begin{pre}
 lambda (widget prefix)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:entry-completion} object which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:entry-completion} object that received
           the signal.}
-        @entry[prefix]{The string with the common prefix of all possible
+        @entry[prefix]{The string for the common prefix of all possible
           completions.}
         @entry[Returns]{@em{True} if the signal has been handled.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when the inline autocompletion is triggered. The default
       behaviour is to make the text entry display the whole prefix and select
       the newly inserted part. Applications may connect to this signal in order
       to insert only a smaller part of the prefix into the text entry, for
       example, the text entry used in the @class{gtk:file-chooser} widget
       inserts only the part of the prefix up to the next '/'.
-    @subheading{The \"match-selected\" signal}
+    @end{signal}
+    @begin[entry-completion::match-selected]{signal}
       @begin{pre}
 lambda (widget model iter)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:entry-completion} object which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:entry-completion} object that received
           the signal.}
         @entry[model]{The @class{gtk:tree-model} object containing the matches.}
         @entry[iter]{The @class{gtk:tree-iter} instance positioned at the
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when a match from the list is selected. The default behaviour
       is to replace the contents of the text entry with the contents of the text
       column in the row pointed to by @arg{iter}. Note that @arg{model} is the
       model that was passed to the @fun{gtk:entry-completion-model} function.
-    @subheading{The \"no-matches\" signal}
+    @end{signal}
+    @begin[entry-completion::no-matches]{signal}
       @begin{pre}
 lambda (widget)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:entry-completion} object which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:entry-completion} object that received
           the signal.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when the entry completion is out of suggestions.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:entry-completion-new}
   @see-constructor{gtk:entry-completion-new-with-area}
@@ -283,7 +289,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-cell-area)
       "Accessor"
       (documentation 'entry-completion-cell-area 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-cell-area object) => area}
   @syntax{(setf (gtk:entry-completion-cell-area object) area)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -322,7 +328,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-completion)
       "Accessor"
       (documentation 'entry-completion-inline-completion 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-inline-completion object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-completion object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -356,7 +362,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-selection)
       "Accessor"
       (documentation 'entry-completion-inline-selection 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-inline-selection object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-selection object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -390,7 +396,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{2025-3-19}
+ "@version{2025-03-19}
   @syntax{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -425,7 +431,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-model)
       "Accessor"
       (documentation 'entry-completion-model 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-model object) => model}
   @syntax{(setf (gtk:entry-completion-model object) model)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -462,7 +468,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-completion)
       "Accessor"
       (documentation 'entry-completion-popup-completion 'function)
- "@version{2024-5-3}
+ "@version{2024-05-03}
   @syntax{(gtk:entry-completion-popup object) => setting}
   @syntax{(setf (gtk:entry-completion-popup object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -496,7 +502,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-set-width)
       "Accessor"
       (documentation 'entry-completion-popup-set-width 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-popup-set-width object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-set-width object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -533,7 +539,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-single-match)
       "Accessor"
       (documentation 'entry-completion-popup-single-match 'function)
- "@version{2024-5-2}
+ "@version{2024-05-02}
   @syntax{(gtk:entry-completion-popup-single-match object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-single-match object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -569,7 +575,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-text-column)
       "Accessor"
       (documentation 'entry-completion-text-column 'function)
- "@version{2025-3-19}
+ "@version{2025-03-19}
   @syntax{(gtk:entry-completion-text-column) => column}
   @syntax{(setf (gtk:entry-completion-text-column object) column)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -608,7 +614,7 @@ lambda (widget)    :run-last
 
 (defun entry-completion-new ()
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @return{The newly created @class{gtk:entry-completion} object.}
   @short{Creates a new entry completion.}
   @begin[Warning]{dictionary}
@@ -628,7 +634,7 @@ lambda (widget)    :run-last
 
 (defun entry-completion-new-with-area (area)
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @argument[area]{a @class{gtk:cell-area} object used to layout cells}
   @return{The newly created @class{gtk:entry-completion} object.}
   @begin{short}
@@ -654,7 +660,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_get_entry" entry-completion-entry)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-3-19}
+ "@version{#2025-03-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @begin{return}
     The @class{gtk:widget} object the entry completion has been attached to.
@@ -686,7 +692,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-symbol 'entry-completion-match-func)
       "Callback"
       (liber:symbol-documentation 'entry-completion-match-func)
- "@version{#2024-5-3}
+ "@version{#2024-05-03}
   @syntax{lambda (completion key iter) => result}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @argument[key]{a string to match, normalized and case-folded}
@@ -725,10 +731,10 @@ lambda (widget)    :run-last
 
 (defun entry-completion-set-match-func (completion func)
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-07-22}
   @argument[completion]{a @class{gtk:entry-completion} object}
-  @argument[func]{a @symbol{gtk:entry-completion-match-func} callback
-    function to use}
+  @argument[func]{a @sym{gtk:entry-completion-match-func} callback function
+    to use}
   @begin{short}
     Sets the match function for the entry completion to be @arg{func}.
   @end{short}
@@ -761,11 +767,11 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_compute_prefix"
                entry-completion-compute-prefix) :string
  #+liber-documentation
- "@version{#2025-3-19}
+ "@version{#2025-07-22}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @argument[key]{a string for the text to complete for}
   @begin{return}
-    The string with the common prefix all rows starting with @arg{key} or
+    The string for the common prefix all rows starting with @arg{key} or
     @code{nil} if no row matches @arg{key}.
   @end{return}
   @begin{short}
@@ -792,7 +798,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_entry_completion_complete" entry-completion-complete) :void
  #+liber-documentation
- "@version{#2025-3-19}
+ "@version{#2025-03-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @begin{short}
     Requests a completion operation, or in other words a refiltering of the
@@ -816,9 +822,9 @@ lambda (widget)    :run-last
                entry-completion-completion-prefix)
     (:string :free-from-foreign t)
  #+liber-documentation
- "@version{#2024-5-2}
+ "@version{#2025-07-22}
   @argument[completion]{a @class{gtk:entry-completion} object}
-  @return{The string with the prefix for the current completion.}
+  @return{The string for the prefix for the current completion.}
   @begin{short}
     Get the original text entered by the user that triggered the completion or
     @code{nil} if there is no completion ongoing.
@@ -839,7 +845,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_entry_completion_insert_prefix"
                entry-completion-insert-prefix) :void
  #+liber-documentation
- "@version{#2025-3-19}
+ "@version{#2025-03-19}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @begin{short}
     Requests a prefix insertion.

@@ -97,7 +97,7 @@
 (setf (liber:alias-for-symbol 'buttons-type)
       "GEnum"
       (liber:symbol-documentation 'buttons-type)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkButtonsType\" buttons-type
   (:export t
@@ -110,22 +110,24 @@
   (:ok-cancel 5))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No buttons at all.}
       @entry[:ok]{An OK button.}
       @entry[:close]{A Close button.}
       @entry[:cancel]{A Cancel button.}
       @entry[:yes-no]{Yes and No buttons.}
       @entry[:ok-cancel]{OK and Cancel buttons.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Prebuilt sets of buttons for the dialog.
   @end{short}
-  If none of these choices are appropriate, simply use the @code{:none} value
-  and call the @fun{gtk:dialog-add-buttons} function to add your own buttons.
+  If none of these choices are appropriate, simply use the
+  @val[gtk:buttons-type]{:none} value and call the @fun{gtk:dialog-add-buttons}
+  function to add your own buttons.
 
-  Please note that the @code{:ok}, @code{:yes-no} and @code{:ok-cancel} values
+  Please note that the @val[gtk:buttons-type]{:ok},
+  @val[gtk:buttons-type]{:yes-no} and @val[gtk:buttons-type]{:ok-cancel} values
   are discouraged by the @url[https://developer.gnome.org/hig/]{GNOME Human
   Interface Guidelines}.
   @see-class{gtk:message-dialog}
@@ -174,7 +176,7 @@
 
 #+liber-documentation
 (setf (documentation 'message-dialog 'type)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:message-dialog} widget presents a dialog with some message
     text.
@@ -185,11 +187,11 @@
 
   @image[message-dialog]{Figure: GtkMessageDialog}
 
-  The easiest way to do a modal message dialog is to use the @code{:modal} flag
-  of the @symbol{gtk:dialog-flags} flags. The message dialog will prevent
-  interaction with the parent window until it is hidden or destroyed. You can
-  use the @code{\"response\"} signal to know when the user dismissed the
-  message dialog.
+  The easiest way to do a modal message dialog is to use the
+  @val[gtk:dialog-flags]{:modal} flag of the @sym{gtk:dialog-flags} flags. The
+  message dialog will prevent interaction with the parent window until it is
+  hidden or destroyed. You can use the @sig[gtk:dialog]{response} signal to know
+  when the user dismissed the message dialog.
   @begin[Examples]{dictionary}
     An example for creating a modal message dialog.
     @begin{pre}
@@ -255,12 +257,12 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buttons" 'message-dialog) t)
- "The @code{buttons} property of type @symbol{gtk:buttons-type}
-  (Construct Only) @br{}
+ "The @code{buttons} property of type @sym{gtk:buttons-type} (Construct Only)
+  @br{}
   The buttons shown in the message dialog. @br{}
   @em{Note:} The property can be set only in a constructor and is not
   readable or writable. There is no accessor. @br{}
-  Default value: @code{:none}")
+  Default value: @val[gtk:buttons-type]{:none}")
 
 ;; We have no accessor. Unexport the symbol.
 (unexport 'message-dialog-buttons)
@@ -271,8 +273,8 @@
 (setf (documentation (liber:slot-documentation "message-area"
                                                'message-dialog) t)
  "The @code{message-area} property of type @class{gtk:widget} (Read) @br{}
-  The @class{gtk:box} widget with @code{:vertical} orientation that corresponds
-  to the message area of the message dialog. See the
+  The @class{gtk:box} widget with @val[gtk:orientation]{:vertical} orientation
+  that corresponds to the message area of the message dialog. See the
   @fun{gtk:message-dialog-message-area} function for a detailed description of
   the message area.")
 
@@ -280,18 +282,19 @@
 (setf (liber:alias-for-function 'message-dialog-message-area)
       "Accessor"
       (documentation 'message-dialog-message-area 'function)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @syntax{(gtk:message-dialog-message-area object) => area}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
-  @argument[area]{a @class{gtk:box} widget with @code{:vertical} orientation}
+  @argument[area]{a @class{gtk:box} widget with @val[gtk:orientation]{:vertical}
+    orientation}
   @begin{short}
     Accessor of the @slot[gtk:message-dialog]{message-area} slot of the
     @class{gtk:message-dialog} class.
   @end{short}
   The @fun{gtk:message-dialog-message-area} function returns the @class{gtk:box}
-  widget with @code{:vertical} orientation corresponding to the \"message area\"
-  in the message dialog. This is the box where the primary and secondary labels
-  of the message dialog are packed.
+  widget with @val[gtk:orientation]{:vertical} orientation corresponding to the
+  \"message area\" in the message dialog. This is the box where the primary and
+  secondary labels of the message dialog are packed.
 
   You can add your own extra content to that box and it will appear below those
   labels. See the @fun{gtk:dialog-content-area} function for the corresponding
@@ -311,19 +314,19 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "message-type"
                                                'message-dialog) t)
- "The @code{message-type} property of type @symbol{gtk:message-type}
+ "The @code{message-type} property of type @sym{gtk:message-type}
   (Read / Write / Construct) @br{}
   The type of the message dialog. @br{}
-  Default value: @code{:info}")
+  Default value: @val[gtk:message-type]{:info}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'message-dialog-message-type)
       "Accessor"
       (documentation 'message-dialog-message-type 'function)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @syntax{(gtk:message-dialog-message-type object) => type}
   @argument[object]{a @class{gtk:message-dialog} widget}
-  @argument[type]{a value of the @symbol{gtk:message-type} enumeration}
+  @argument[type]{a value of the @sym{gtk:message-type} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:message-dialog]{message-type} slot of the
     @class{gtk:message-dialog} class.
@@ -350,7 +353,7 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-text)
       "Accessor"
       (documentation 'message-dialog-secondary-text 'function)
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @syntax{(gtk:message-dialog-secondary-text object) => text}
   @syntax{(setf (gtk:message-dialog-secondary-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -383,7 +386,7 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-use-markup)
       "Accessor"
       (documentation 'message-dialog-secondary-use-markup 'function)
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @syntax{(gtk:message-dialog-secondary-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-secondary-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -414,7 +417,7 @@
 (setf (liber:alias-for-function 'message-dialog-text)
       "Accessor"
       (documentation 'message-dialog-text 'function)
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @syntax{(gtk:message-dialog-text object) => text}
   @syntax{(setf (gtk:message-dialog-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -446,7 +449,7 @@
 (setf (liber:alias-for-function 'message-dialog-use-markup)
       "Accessor"
       (documentation 'message-dialog-use-markup 'function)
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @syntax{(gtk:message-dialog-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -469,12 +472,12 @@
 
 (defun message-dialog-new (parent flags type buttons message &rest args)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @argument[parent]{a transient @class{gtk:window} parent, or @code{nil} for
     none}
-  @argument[flags]{a @symbol{gtk:dialog-flags} value for the flags to use}
-  @argument[type]{a @symbol{gtk:message-type} value for the type of message}
-  @argument[buttons]{a @symbol{gtk:buttons-type} value for the buttons to use}
+  @argument[flags]{a @sym{gtk:dialog-flags} value for the flags to use}
+  @argument[type]{a @sym{gtk:message-type} value for the type of message}
+  @argument[buttons]{a @sym{gtk:buttons-type} value for the buttons to use}
   @argument[message]{a Lisp format string, or @code{nil}}
   @argument[args]{arguments for @arg{message}}
   @return{The new @class{gtk:message-dialog} widget.}
@@ -482,8 +485,8 @@
     Creates a new message dialog, which is a simple dialog with some text the
     user may want to see.
   @end{short}
-  When the user clicks a button a @code{\"response\"} signal is emitted with
-  response IDs from the @symbol{gtk:response-type} enumeration. See the
+  When the user clicks a button a @sig[gtk:dialog]{response} signal is emitted
+  with response IDs from the @sym{gtk:response-type} enumeration. See the
   @class{gtk:dialog} documentation for more details.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
@@ -521,12 +524,12 @@
 (defun message-dialog-new-with-markup (parent flags type buttons message
                                            &rest args)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @argument[parent]{a transient @class{gtk:window} parent, or @code{nil} for
     none}
-  @argument[flags]{a @symbol{gtk:dialog-flags} value for the flags to use}
-  @argument[type]{a @symbol{gtk:message-type} value for the type of message}
-  @argument[buttons]{a @symbol{gtk:buttons-type} value for the buttons to use}
+  @argument[flags]{a @sym{gtk:dialog-flags} value for the flags to use}
+  @argument[type]{a @sym{gtk:message-type} value for the type of message}
+  @argument[buttons]{a @sym{gtk:buttons-type} value for the buttons to use}
   @argument[message]{a Lisp format string, or @code{nil}}
   @argument[args]{arguments for @arg{message}}
   @return{The new @class{gtk:message-dialog} widget.}
@@ -534,8 +537,8 @@
     Creates a new message dialog, which is a simple dialog with some text which
     is marked up with the Pango text markup language.
   @end{short}
-  When the user clicks a button a @code{\"response\"} signal is emitted with
-  response IDs from the @symbol{gtk:response-type} enumeration. See the
+  When the user clicks a button a @sig[gtk:dialog]{response} signal is emitted
+  with response IDs from the @sym{gtk:response-type} enumeration. See the
   @class{gtk:dialog} documentation for more details.
 
   Special XML characters in the message arguments passed to this function will
@@ -598,7 +601,7 @@
 
 (defun message-dialog-set-markup (dialog text)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[text]{a markup string, see Pango markup format}
   @begin{short}
@@ -624,7 +627,7 @@
 
 (defun message-dialog-format-secondary-text (dialog message &rest args)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[message]{a Lisp format string, or @code{nil}}
   @argument[args]{arguments for @arg{message}}
@@ -654,7 +657,7 @@
 
 (defun message-dialog-format-secondary-markup (dialog message &rest args)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[message]{a Lisp format string with markup, see Pango markup format,
     or @code{nil}}

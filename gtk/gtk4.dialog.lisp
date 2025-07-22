@@ -103,7 +103,7 @@
 (setf (liber:alias-for-symbol 'dialog-flags)
       "GFlags"
       (liber:symbol-documentation 'dialog-flags)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-gflags \"GtkDialogFlags\" dialog-flags
   (:export t
@@ -113,13 +113,13 @@
   (:use-header-bar      #.(ash 1 2)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:modal]{Make the constructed dialog modal.}
       @entry[:destroy-with-parent]{Destroy the dialog when its parent is
         destroyed.}
       @entry[:use-header-bar]{Create the dialog with actions in the header bar
         instead of an action area.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags used to influence the @class{gtk:dialog} widget construction.
@@ -187,7 +187,7 @@
 
 #+liber-documentation
 (setf (documentation 'dialog 'type)
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @begin{short}
     Dialogs are a convenient way to prompt the user for a small amount of input.
   @end{short}
@@ -211,15 +211,16 @@
 
   The @class{gtk:dialog} widgets uses some heuristics to decide whether to add a
   Close button to the window decorations. If any of the action buttons use the
-  @code{:close} or @code{:cancel} response ID, the Close button is omitted.
+  @val[gtk:response-type]{:close} or @val[gtk:response-type]{:cancel} response
+  ID, the Close button is omitted.
 
   Clicking a button that was added as an action widget will emit the
-  @code{\"response\"} signal with a response ID that you specified. GTK will
-  never assign a meaning to positive response IDs. These are entirely
+  @sig[gtk:dialog]{response} signal with a response ID that you specified. GTK
+  will never assign a meaning to positive response IDs. These are entirely
   user-defined. But for convenience, you can use the response IDs in the
-  @symbol{gtk:response-type} enumeration, these all have values less than zero.
-  If a dialog receives a delete event, the @code{\"response\"} signal will be
-  emitted with the @code{:delete-event} response ID.
+  @sym{gtk:response-type} enumeration, these all have values less than zero.
+  If a dialog receives a delete event, the @sig[gtk:dialog]{response} signal
+  will be emitted with the @val[gtk:response-type]{:delete-event} response ID.
 
   Dialogs are created with a call to the @fun{gtk:dialog-new} function or the
   @fun{gtk:dialog-new-with-buttons} function. The latter is recommended. It
@@ -228,7 +229,7 @@
   A \"modal\" dialog, that is, one which freezes the rest of the application
   from user input, can be created by calling the @fun{gtk:window-modal} function
   on the dialog. When using the @fun{gtk:dialog-new-with-buttons} function, you
-  can also pass the @code{:modal} flag to make a dialog modal.
+  can also pass the @val[gtk:dialog-flags]{:modal} flag to make a dialog modal.
   @begin[Examples]{dictionary}
     For the simple dialog in the following example, a @class{gtk:message-dialog}
     widget would save some effort. But you would need to create the dialog
@@ -294,39 +295,42 @@
     @end{pre}
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:dialog} implementation uses the @code{:dialog} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:dialog} implementation uses the
+    @val[gtk:accessible-role]{:dialog} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
     @class{gtk:window} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"close\" signal}
+    @begin[dialog::close]{signal}
       @begin{pre}
 lambda (dialog)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:dialog} widget on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       A keybinding signal which gets emitted when the user uses a keybinding to
       close the dialog. The default binding for this signal is the @kbd{Escape}
       key.
-    @subheading{The \"response\" signal}
+    @end{signal}
+    @begin[dialog::response]{signal}
       @begin{pre}
 lambda (dialog response)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[dialog]{The @class{gtk:dialog} widget on which the signal is
           emitted.}
-        @entry[response]{The integer with the response ID.}
-      @end{table}
+        @entry[response]{The integer for the response ID.}
+      @end{simple-table}
       Emitted when an action widget is clicked. The signal is also emitted when
       the @fun{gtk:dialog-response} function is called. On a delete event, the
-      response ID is the @code{:delete-event} value of the
-      @symbol{gtk:response-type} enumeration. Otherwise, it depends on which
-      action widget was clicked.
+      response ID is the @val[gtk:response-type]{:delete-event} value of the
+      @sym{gtk:response-type} enumeration. Otherwise, it depends on which action
+      widget was clicked.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:dialog-new}
   @see-constructor{gtk:dialog-new-with-buttons}
@@ -354,7 +358,7 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'dialog-use-header-bar)
       "Accessor"
       (documentation 'dialog-use-header-bar 'function)
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @syntax{(gtk:dialog-use-header-bar object) => setting}
   @syntax{(setf (gtk:dialog-use-header-bar object) setting)}
   @argument[object]{a @class{gtk:dialog} widget}
@@ -397,7 +401,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new ()
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-02-26}
   @return{The new @class{gtk:dialog} widget.}
   @short{Creates a new dialog.}
   Widgets should not be packed into the dialog directly, but into the content
@@ -419,36 +423,37 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new-with-buttons (title parent flags &rest buttons)
  #+liber-documentation
- "@version{2025-2-26}
+ "@version{2025-07-22}
   @argument[title]{a string for the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent for the dialog,
     or @code{nil}}
-  @argument[flags]{a @symbol{gtk:dialog-flags} value for the flags of the
-    dialog}
+  @argument[flags]{a @sym{gtk:dialog-flags} value for the flags of the dialog}
   @argument[buttons]{pairs with a button text and the response ID for the
     button, which is a positive integer or a value of the
-    @symbol{gtk:response-type} enumeration}
+    @sym{gtk:response-type} enumeration}
   @return{The new @class{gtk:dialog} widget.}
   @begin{short}
     Creates a new dialog with title @arg{title}, or @code{nil} for the default
     title, and transient parent @arg{parent}, or @code{nil} for none.
   @end{short}
   The @arg{flags} argument can be used to make the dialog modal with the
-  @code{:modal} flag of the @symbol{gtk:dialog-flags} flags and/or to have it
-  destroyed along with its transient parent with the @code{:destroy-with-parent}
-  flag.
+  @val[gtk:dialog-flags]{:modal} flag of the @sym{gtk:dialog-flags} flags
+  and/or to have it destroyed along with its transient parent with the
+  @val[gtk:dialog-flags]{:destroy-with-parent} flag.
 
   After the @arg{flags} argument, button text/response ID pairs should be
   listed. Button text can be arbitrary text. A response ID can be any positive
-  number, or one of the values in the @symbol{gtk:response-type} enumeration.
-  If the user clicks one of these dialog buttons, the @class{gtk:dialog} widget
-  will emit the @code{\"response\"} signal with the corresponding response ID.
-  If a @class{gtk:dialog} widget receives the @code{\"delete-event\"} signal, it
-  will emit the @code{\"response\"} signal with a @code{:delete-event} response
-  ID. However, destroying a dialog does not emit the @code{\"response\"}
-  signal. So be careful relying on the @code{\"response\"} signal when using the
-  @code{:destroy-with-parent} flag. Buttons are from left to right, so the first
-  button in the list will be the leftmost button in the dialog.
+  number, or one of the values in the @sym{gtk:response-type} enumeration. If
+  the user clicks one of these dialog buttons, the @class{gtk:dialog} widget
+  will emit the @sig[gtk:dialog]{response} signal with the corresponding
+  response ID. If a @class{gtk:dialog} widget receives a delete event, it will
+  emit the @sig[gtk:dialog]{response} signal with a
+  @val[gtk:response-type]{:delete-event} response ID. However, destroying a
+  dialog does not emit the @sig[gtk:dialog]{response} signal. So be careful
+  relying on the @sig[gtk:dialog]{response} signal when using the
+  @val[gtk:dialog-flags]{:destroy-with-parent} flag. Buttons are from left to
+  right, so the first button in the list will be the leftmost button in the
+  dialog.
   @begin[Examples]{dictionary}
     @begin{pre}
 (let ((dialog (gtk:dialog-new-with-buttons \"My dialog\"
@@ -491,12 +496,12 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_response" dialog-response) :void
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value of
-    the @symbol{gtk:response-type} enumeration}
+    the @sym{gtk:response-type} enumeration}
   @begin{short}
-    Emits the @code{\"response\"} signal with the given response ID.
+    Emits the @sig[gtk:dialog]{response} signal with the given response ID.
   @end{short}
   Used to indicate that the user has responded to the dialog in some way.
   @begin[Warning]{dictionary}
@@ -517,15 +522,15 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_add_button" dialog-add-button) (g:object widget)
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[text]{a string for the text of the button}
   @argument[response]{response ID for the button, which is a positive integer
-    or a value of the @symbol{gtk:response-type} enumeration}
+    or a value of the @sym{gtk:response-type} enumeration}
   @return{The @class{gtk:button} widget that was added.}
   @begin{short}
     Adds a button with the given text and sets things up so that clicking the
-    button will emit the @code{\"response\"} signal with the given
+    button will emit the @sig[gtk:dialog]{response} signal with the given
     @arg{response} value.
   @end{short}
   The button is appended to the end of the action area of the dialog.
@@ -551,10 +556,10 @@ lambda (dialog response)    :run-last
 
 (defun dialog-add-buttons (dialog &rest buttons)
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[buttons]{pairs with a button text and the response ID, which is a
-    positive integer or a value of the @symbol{gtk:response-type} enumeration}
+    positive integer or a value of the @sym{gtk:response-type} enumeration}
   @begin{short}
     Adds more buttons, same as calling the @fun{gtk:dialog-add-button} function
     repeatedly.
@@ -584,15 +589,15 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_add_action_widget" dialog-add-action-widget) :void
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[child]{an activatable @class{gtk:widget} object}
   @argument[response]{response ID for @arg{child}, which is a positive
-    integer or a value of the @symbol{gtk:response-type} enumeration}
+    integer or a value of the @sym{gtk:response-type} enumeration}
   @begin{short}
     Adds an activatable child widget to the action area of the dialog,
-    connecting a signal handler that will emit the @code{\"response\"} signal
-    on the dialog when the child widget is activated.
+    connecting a signal handler that will emit the @sig[gtk:dialog]{response}
+    signal on the dialog when the child widget is activated.
   @end{short}
   The child widget is appended to the end of the action area of the dialog. If
   you want to add a non-activatable widget, simply pack it into the action area
@@ -620,10 +625,10 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_set_default_response" dialog-set-default-response)
     :void
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value
-    of the @symbol{gtk:response-type} enumeration}
+    of the @sym{gtk:response-type} enumeration}
   @begin{short}
     Sets the last widget in the action area of the dialog with the given
     @arg{response} value as the default widget for the dialog.
@@ -648,10 +653,10 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_set_response_sensitive"
                dialog-set-response-sensitive) :void
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value
-    of the @symbol{gtk:response-type} enumeration}
+    of the @sym{gtk:response-type} enumeration}
   @argument[setting]{@em{true} for sensitive}
   @begin{short}
     Calls the @fun{gtk:widget-sensitive} function for each widget in the
@@ -679,13 +684,16 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_response_for_widget" dialog-response-for-widget)
     :int
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-13}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[widget]{a @class{gtk:widget} object in the action area of
     @arg{dialog}}
-  @return{The response ID of @arg{widget}, which is a positive integer or a
-    value of the @symbol{gtk:response-type} enumeration, the value is
-    @code{:none} if @arg{widget} does not have a response ID set.}
+  @begin{return}
+    The response ID of @arg{widget}, which is a positive integer or a value of
+    the @sym{gtk:response-type} enumeration, the value is
+    @val[gtk:response-type]{:none} if @arg{widget} does not have a response ID
+    set.
+  @end{return}
   @begin{short}
     Gets the response ID of the widget in the action area of the dialog.
   @end{short}
@@ -710,12 +718,14 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_widget_for_response" dialog-widget-for-response)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-13}
   @argument[dialog]{a @class{gtk:dialog} widget}
-  @argument[response]{a response ID, which is a positive integer or a value
-    of the @symbol{gtk:response-type} enumeration}
-  @return{The @class{gtk:widget} button that uses the given @arg{response}
-    value, or @code{nil}.}
+  @argument[response]{a response ID, that is a positive integer or a value
+    of the @sym{gtk:response-type} enumeration}
+  @begin{return}
+    The @class{gtk:widget} button that uses the given @arg{response} value,
+    or @code{nil}.
+  @end{return}
   @begin{short}
     Gets the button that uses the given response ID in the action area of the
     dialog.
@@ -741,10 +751,10 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_content_area" dialog-content-area)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-07-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @begin{return}
-    The vertical @class{gtk:box} widget with the content area.
+    The vertical @class{gtk:box} widget for the content area.
   @end{return}
   @short{Returns the content area of the dialog.}
   @begin[Warning]{dictionary}
@@ -764,7 +774,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_get_header_bar" dialog-header-bar) (g:object widget)
  #+liber-documentation
- "@version{#2025-2-26}
+ "@version{#2025-02-26}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @return{The @class{gtk:header-bar} widget.}
   @begin{short}

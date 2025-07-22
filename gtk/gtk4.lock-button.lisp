@@ -109,7 +109,7 @@
 
 #+liber-documentation
 (setf (documentation 'lock-button 'type)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @begin{short}
     The @class{gtk:lock-button} widget is a widget that can be used in control
     panels or preference dialogs to allow users to obtain and revoke
@@ -153,7 +153,7 @@
 (setf (liber:alias-for-function 'lock-button-permission)
       "Accessor"
       (documentation 'lock-button-permission 'function)
- "@version{#2025-3-13}
+ "@version{#2025-03-13}
   @syntax{(gtk:lock-button-permission object) => permission}
   @syntax{(setf (gtk:lock-button-permission object) permission)}
   @argument[object]{a @class{gtk:lock-button} widget}
@@ -186,11 +186,11 @@
 (setf (liber:alias-for-function 'lock-button-text-lock)
       "Accessor"
       (documentation 'lock-button-text-lock 'function)
- "@version{#2025-3-13}
+ "@version{#2025-07-22}
   @syntax{(gtk:lock-button-text-lock object) => text}
   @syntax{(setf (gtk:lock-button-text-lock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
-  @argument[text]{a string with the text to display}
+  @argument[text]{a string for the text to display}
   @begin{short}
     Accessor of the @slot[gtk:lock-button]{text-lock} slot of the
     @class{gtk:lock-button} class.
@@ -216,11 +216,11 @@
 (setf (liber:alias-for-function 'lock-button-text-unlock)
       "Accessor"
       (documentation 'lock-button-text-unlock 'function)
- "@version{#2025-3-13}
+ "@version{#2025-07-22}
   @syntax{(gtk:lock-button-text-unlock object) => text}
   @syntax{(setf (gtk:lock-button-text-unlock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
-  @argument[text]{a string with the text to display}
+  @argument[text]{a string for the text to display}
   @begin{short}
     Accessor of the @slot[gtk:lock-button]{text-unlock} slot of the
     @class{gtk:lock-button} class.
@@ -247,11 +247,11 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-lock)
       "Accessor"
       (documentation 'lock-button-tooltip-lock 'function)
- "@version{#2025-3-13}
+ "@version{#2025-07-22}
   @syntax{(gtk:lock-button-tooltip-lock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-lock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
-  @argument[tooltip]{a string with the tooltip to display}
+  @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
     Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
     @class{gtk:lock-button} class.
@@ -280,11 +280,11 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-not-authorized)
       "Accessor"
       (documentation 'lock-button-tooltip-not-authorized 'function)
- "@version{#2025-3-13}
+ "@version{#2025-07-22}
   @syntax{(gtk:lock-button-tooltip-not-authorized object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-not-authorized object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
-  @argument[tooltip]{a string with the tooltip to display}
+  @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
     Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
     @class{gtk:lock-button} class.
@@ -310,11 +310,11 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-unlock)
       "Accessor"
       (documentation 'lock-button-tooltip-unlock 'function)
- "@version{#2025-3-13}
+ "@version{#2025-07-22}
   @syntax{(gtk:lock-button-tooltip-unlock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-unlock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
-  @argument[tooltip]{a string with the tooltip to display}
+  @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
     Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
     @class{gtk:lock-button} class.
@@ -333,7 +333,7 @@
 
 (defun lock-button-new (permission)
  #+liber-documentation
- "@version{#2025-3-13}
+ "@version{#2025-03-13}
   @argument[permission]{a @class{g:permission} object}
   @return{The new @class{gtk:lock-button} widget.}
   @short{Creates a new lock button which reflects the permission.}

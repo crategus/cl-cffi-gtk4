@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'volume-button 'type)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @begin{short}
     The @class{gtk:volume-button} class is a subclass of the
     @class{gtk:scale-button} class that has been tailored for use as a volume
@@ -116,7 +116,7 @@
 (setf (liber:alias-for-function 'volume-button-use-symbolic)
       "Accessor"
       (documentation 'volume-button-use-symbolic 'function)
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @syntax{(gtk:volume-button-use-symbolic object) => setting}
   @syntax{(setf (gtk:volume-button-use-symbolic object) setting)}
   @argument[object]{a @class{gtk:volume-button} widget}
@@ -143,7 +143,7 @@
 
 (defun volume-button-new ()
  #+liber-documentation
- "@version{2025-3-13}
+ "@version{2025-03-13}
   @return{The new @class{gtk:volume-button} widget.}
   @begin{short}
     Creates a volume button, with a range between 0.0 and 1.0, with
