@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk.cell-renderer-combo.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-combo 'type)
- "@version{2024-2-21}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:cell-renderer-combo} object renders text in a cell like
     the @class{gtk:cell-renderer-text} object from which it is derived.
@@ -95,37 +95,39 @@
   The combo cell renderer takes care of adding a text cell renderer to the
   combo box and sets it to display the column specified by its
   @slot[gtk:cell-renderer-combo]{text-column} property. Further properties of
-  the combo box can be set in a handler for the @code{\"editing-started\"}
-  signal.
+  the combo box can be set in a handler for the
+  @sig[gtk:cell-renderer]{editing-started} signal.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-combo} object is deprecated since 4.10. List
     views use widgets to display their contents. You should use the
     @class{gtk:drop-down} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"changed\" signal}
+    @begin[cell-renderer-combo::changed]{signal}
       @begin{pre}
 lambda (combo path iter)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:cell-renderer-combo} object on which the
           signal is emitted.}
         @entry[path]{The string of the path identifying the edited cell, relative
           to the tree view model.}
         @entry[iter]{The @class{gtk:tree-iter} instance selected in the combo
            box, relative to the combo box model.}
-       @end{table}
+      @end{simple-table}
       The signal is emitted each time after the user selected an item in the
       combo box, either by using the mouse or the arrow keys. Contrary to the
-      @class{gtk:combo-box} widget, the @code{\"changed\"} signal is not emitted
-      for changes made to a selected item in the text entry. The @arg{iter}
-      argument corresponds to the newly selected item in the combo box and it is
-      relative to the @class{gtk:tree-model} object set via the model property
-      on the @class{gtk:cell-renderer-combo} object. Note that as soon as you
-      change the model displayed in the tree view, the tree view will
-      immediately cease the editing operating. This means that you most probably
-      want to refrain from changing the model until the combo cell renderer
-      emits the edited or @code{\"editing-canceled\"} signal.
+      @class{gtk:combo-box} widget, the @sig[gtk:cell-renderer-combo]{changed}
+      signal is not emitted for changes made to a selected item in the text
+      entry. The @arg{iter} argument corresponds to the newly selected item in
+      the combo box and it is relative to the @class{gtk:tree-model} object set
+      via the model property on the @class{gtk:cell-renderer-combo} object. Note
+      that as soon as you change the model displayed in the tree view, the tree
+      view will immediately cease the editing operating. This means that you
+      most probably want to refrain from changing the model until the combo cell
+      renderer emits the edited or @sig[gtk:cell-renderer]{editing-canceled}
+      signal.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-combo-new}
   @see-slot{gtk:cell-renderer-combo-has-entry}
@@ -151,7 +153,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-has-entry)
       "Accessor"
       (documentation 'cell-renderer-combo-has-entry 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-combo-has-entry object) => has-entry}
   @syntax{(setf (gtk:cell-renderer-combo-has-entry object) has-entry)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -182,7 +184,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-model)
       "Accessor"
       (documentation 'cell-renderer-combo-model 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-combo-model object) => model}
   @syntax{(setf (gtk:cell-renderer-combo-model object) model)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -221,7 +223,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-text-column)
       "Accessor"
       (documentation 'cell-renderer-combo-text-column 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-combo-text-column object) => column}
   @syntax{(setf (gtk:cell-renderer-combo-text-column object) column)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -251,7 +253,7 @@ lambda (combo path iter)    :run-last
 
 (defun cell-renderer-combo-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @return{The new @class{gtk:cell-renderer-combo} object.}
   @begin{short}
     Creates a new cell renderer combo.

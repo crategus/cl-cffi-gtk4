@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-renderer-pixbuf.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-pixbuf 'type)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @begin{short}
     The @class{gtk:cell-renderer-pixbuf} object can be used to render an image
     in a cell.
@@ -148,7 +148,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-gicon)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-gicon 'function)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @syntax{(gtk:cell-renderer-pixbuf-gicon object) => icon}
   @syntax{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -180,11 +180,11 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-name)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-name 'function)
- "@version{2024-5-16}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-pixbuf-icon-name object) => name}
   @syntax{(setf (gtk:cell-renderer-pixbuf-icon-name object) name)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[name]{a string with the name of the themed icon to display}
+  @argument[name]{a string for the name of the themed icon to display}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-name} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
@@ -202,25 +202,24 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-size"
                                                'cell-renderer-pixbuf) t)
- "The @code{icon-size} property of type @symbol{gtk:icon-size} (Read / Write)
-  @br{}
+ "The @code{icon-size} property of type @sym{gtk:icon-size} (Read / Write) @br{}
   Specifies the icon size of the rendered icon. @br{}
-  Default value: @code{:inherit}")
+  Default value: @val[gtk:icon-size]{:inherit}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-size)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-size 'function)
- "@version{2024-5-16}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-pixbuf-icon-size object) => size}
   @syntax{(setf (gtk:cell-renderer-pixbuf-icon-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[size]{a @symbol{gtk:icon-size} value}
+  @argument[size]{a @sym{gtk:icon-size} value}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-size} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-  The @symbol{gtk:icon-size} value that specifies the size of the rendered icon.
+  The @sym{gtk:icon-size} value that specifies the size of the rendered icon.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -240,7 +239,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf 'function)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
@@ -268,7 +267,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-closed)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-closed 'function)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -297,7 +296,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-open)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-open 'function)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -325,7 +324,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-surface)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-texture 'function)
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @syntax{(gtk:cell-renderer-pixbuf-texture object) => texture}
   @syntax{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -349,7 +348,7 @@
 
 (defun cell-renderer-pixbuf-new ()
  #+liber-documentation
- "@version{2024-5-16}
+ "@version{2024-05-16}
   @return{The new @class{gtk:cell-renderer-pixbuf} object.}
   @begin{short}
     Creates a new cell renderer pixbuf.

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-renderer-accel.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -77,7 +77,7 @@
 (setf (liber:alias-for-symbol 'cell-renderer-accel-mode)
       "GEnum"
       (liber:symbol-documentation 'cell-renderer-accel-mode)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
   (:export t
@@ -86,10 +86,10 @@
   (:other 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:gtk]{GTK accelerators mode.}
       @entry[:other]{Other accelerator mode.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Determines if the edited accelerators are GTK accelerators.
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-accel 'type)
- "@version{2024-7-30}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:cell-renderer-accel} object displays a keyboard accelerator,
     that is a key combination like @kbd{Control+a}.
@@ -136,33 +136,35 @@
     implementation according to platform design guidelines.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"accel-cleared\" signal}
+    @begin[cell-renderer-accel::accel-cleared]{signal}
       @begin{pre}
 lambda (accel path)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
-        @entry[path]{The string with the path identifying the row of the edited
+        @entry[path]{The string for the path identifying the row of the edited
           cell.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when the user has removed the accelerator.
-    @subheading{The \"accel-edited\" signal}
+    @end{signal}
+    @begin[cell-renderer-accel::accel-edited]{signal}
       @begin{pre}
 lambda (accel path key mods keycode)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
-        @entry[path]{The string with the path identifying the row of the edited
+        @entry[path]{The string for the path identifying the row of the edited
           cell.}
-        @entry[key]{The unsigned integer with the new accelerator keyval.}
-        @entry[mods]{The @class{gdk:modifier-type} value with the new
+        @entry[key]{The unsigned integer for the new accelerator keyval.}
+        @entry[mods]{The @class{gdk:modifier-type} value for the new
           acclerator modifier mask.}
-        @entry[keycode]{The unsigned integer with the keycode of the new
+        @entry[keycode]{The unsigned integer for the keycode of the new
           accelerator.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when the user has selected a new accelerator.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-accel-new}
   @see-slot{gtk:cell-renderer-accel-accel-key}
@@ -189,11 +191,11 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-key)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-key 'function)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-accel-accel-key object) => key}
   @syntax{(setf (gtk:cell-renderer-accel-accel-key object) key)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
-  @argument[key]{an unsigned integer with the keyval of the accelerator}
+  @argument[key]{an unsigned integer for the keyval of the accelerator}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer]{accel-key} slot of the
     @class{gtk:cell-renderer-accel} class.
@@ -209,23 +211,23 @@ lambda (accel path key mods keycode)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accel-mode"
                                                'cell-renderer-accel) t)
- "The @code{accel-mode} property of type @symbol{gtk:cell-renderer-accel-mode}
+ "The @code{accel-mode} property of type @sym{gtk:cell-renderer-accel-mode}
   (Read / Write) @br{}
   Determines if the edited accelerators are GTK accelerators. If they are,
   consumed modifiers are suppressed, only accelerators accepted by GTK are
   allowed, and the accelerators are rendered in the same way as they are in
   menus. @br{}
-  Default value: @code{:gtk}")
+  Default value: @val[gtk:cell-renderer-accel-mode]{:gtk}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-mode)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mode 'function)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-accel-accel-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-accel-accel-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
-  @argument[mode]{a @symbol{gtk:cell-renderer-accel-mode} value}
+  @argument[mode]{a @sym{gtk:cell-renderer-accel-mode} value}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-accel]{accel-mode} slot of the
     @class{gtk:cell-renderer-accel} class.
@@ -246,20 +248,20 @@ lambda (accel path key mods keycode)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accel-mods"
                                                'cell-renderer-accel) t)
- "The @code{accel-mods} property of type @symbol{gdk:modifier-type}
-  (Read / Write) @br{}
+ "The @code{accel-mods} property of type @sym{gdk:modifier-type} (Read / Write)
+  @br{}
   The modifier mask of the accelerator.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-mods)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mods 'function)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-accel-accel-mods object) => accel-mods}
   @syntax{(setf (gtk:cell-renderer-accel-accel-mods object) accel-mods)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
-  @argument[accel-mode]{a @symbol{gdk:modifier-type} value with the modifier
-    mask of the accelerator}
+  @argument[accel-mods]{a @sym{gdk:modifier-type} value for the modifier mask
+    of the accelerator}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-accel]{accel-mods} slot of the
     @class{gtk:cell-renderer-accel} class.
@@ -287,11 +289,11 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-keycode)
       "Accessor"
       (documentation 'cell-renderer-accel-keycode 'function)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-renderer-accel-keycode object) => keycode}
   @syntax{(setf (gtk:cell-renderer-accel-keycode object) keycode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
-  @argument[keycode]{an unsigned integer with the hardware keycode of the
+  @argument[keycode]{an unsigned integer for the hardware keycode of the
     accelerator}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-accel]{keycode} slot of the

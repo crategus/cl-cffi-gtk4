@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-area-box.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area-box 'type)
- "@version{2024-2-21}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:cell-area-box} object renders cell renderers into a row or a
     column depending on its orientation.
@@ -92,10 +92,10 @@
   refers to adding cell renderers with reference to a particular position in a
   @class{gtk:cell-area-box} object. There are two reference positions: the start
   and the end of the box. When the @class{gtk:cell-area-box} object is oriented
-  in the @code{:vertical} orientation, the start is defined as the top of the
-  box and the end is defined as the bottom. In the @code{:horizontal}
-  orientation start is defined as the left side and the end is defined as the
-  right side.
+  in the @val[gtk:orientation]{:vertical} orientation, the start is defined as
+  the top of the box and the end is defined as the bottom. In the
+  @val[gtk:orientation]{:horizontal} orientation start is defined as the left
+  side and the end is defined as the right side.
 
   Alignments of @class{gtk:cell-renderer} objects rendered in adjacent rows can
   be configured by configuring the align child cell property with the
@@ -129,11 +129,11 @@
 (setf (liber:alias-for-function 'cell-area-box-spacing)
       "Accessor"
       (documentation 'cell-area-box-spacing 'function)
- "@version{2024-2-21}
+ "@version{2025-07-19}
   @syntax{(gtk:cell-area-box-spacing object) => spacing}
   @syntax{(setf (gtk:cell-area-box-spacing object) spacing)}
   @argument[object]{a @class{gtk:cell-area-box} object}
-  @argument[spacing]{an integer with the space to add between
+  @argument[spacing]{an integer for the space to add between
     @class{gtk:cell-renderer} objects}
   @begin{short}
     Accessor of the @slot[gtk:cell-area-box]{spacing} slot of the
@@ -156,7 +156,7 @@
 
 (defun cell-area-box-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @return{The newly created @class{gtk:cell-area-box} object.}
   @short{Creates a new cell area box.}
   @begin[Warning]{dictionary}
@@ -182,7 +182,7 @@
 (defun cell-area-box-pack-start (box renderer
                                  &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2024-2-21}
+ "@version{#2024-02-21}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
@@ -221,7 +221,7 @@
 (defun cell-area-box-pack-end (box child
                                &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2024-2-21}
+ "@version{#2024-02-21}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space

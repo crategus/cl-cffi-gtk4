@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-renderer-toggle.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -93,31 +93,32 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-toggle 'type)
- "@version{2024-2-22}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:cell-renderer-toggle} object renders a toggle button in a
     cell.
   @end{short}
   The button is drawn as a radio button or a check button, depending on the
   @slot[gtk:cell-renderer-toggle]{radio} property. When activated, it emits the
-  @code{\"toggled\"} signal.
+  @sig[gtk:cell-renderer-toggle]{toggled} signal.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10. List
     views use widgets to display their contents. You should use the
     @class{gtk:toggle-button} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"toggled\" signal}
+    @begin[cell-renderer-toggle::toggled]{signal}
       @begin{pre}
 lambda (renderer path)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[renderer]{The @class{gtk:cell-renderer-toggle} object which
           received the signal.}
         @entry[path]{String representation of the @class{gtk:tree-path} instance
           describing the event location.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the cell is toggled.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:cell-renderer-toggle-new}
   @see-slot{gtk:cell-renderer-toggle-activatable}
@@ -143,7 +144,7 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-activatable)
       "Accessor"
       (documentation 'cell-renderer-toggle-activatable 'function)
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @syntax{(gtk:cell-renderer-toggle-activatable object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-activatable object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
@@ -174,7 +175,7 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-active)
       "Accessor"
       (documentation 'cell-renderer-toggle-active 'function)
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @syntax{(gtk:cell-renderer-toggle-active object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-active object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
@@ -205,7 +206,7 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-inconsistent)
       "Accessor"
       (documentation 'cell-renderer-toggle-inconsistent 'function)
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @syntax{(gtk:cell-renderer-toggle-inconsistent object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-inconsistent object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
@@ -233,7 +234,7 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-radio)
       "Accessor"
       (documentation 'cell-renderer-toggle-radio 'function)
- "@version{2024-7-30}
+ "@version{2024-07-30}
   @syntax{(gtk:cell-renderer-toggle-radio object) => radio}
   @syntax{(setf (gtk:cell-renderer-toggle-radio object) radio)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
@@ -266,7 +267,7 @@ lambda (renderer path)    :run-last
 
 (defun cell-renderer-toggle-new ()
  #+liber-documentation
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @return{The new @class{gtk:cell-renderer-toggle} object.}
   @begin{short}
     Creates a new cell renderer toggle.

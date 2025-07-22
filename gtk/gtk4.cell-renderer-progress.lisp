@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-renderer-progress.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-progress 'type)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @begin{short}
     The @class{gtk:cell-renderer-progress} object renders a numeric value as a
     progress par in a cell.
@@ -130,7 +130,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-inverted)
       "Accessor"
       (documentation 'cell-renderer-progress-inverted 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-inverted object) => setting}
   @syntax{(setf (gtk:cell-renderer-progress-inverted object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -165,7 +165,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-pulse)
       "Accessor"
       (documentation 'cell-renderer-progress-pulse 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-pulse object) => pulse}
   @syntax{(setf (gtk:cell-renderer-progress-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -201,7 +201,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-text)
       "Accessor"
       (documentation 'cell-renderer-progress-text 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-text object) => text}
   @syntax{(setf (gtk:cell-renderer-progress-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -235,7 +235,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-text-xalign)
       "Accessor"
       (documentation 'cell-renderer-progress-text-xalign 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-text-xalign object) => align}
   @syntax{(setf (gtk:cell-renderer-progress-text-xalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -267,7 +267,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-text-yalign)
       "Accessor"
       (documentation 'cell-renderer-progress-text-yalign 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-text-yalign object) => align}
   @syntax{(setf (gtk:cell-renderer-progress-text-yalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -299,7 +299,7 @@
 (setf (liber:alias-for-function 'cell-renderer-progress-value)
       "Accessor"
       (documentation 'cell-renderer-progress-value 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:cell-renderer-progress-value object) => value}
   @syntax{(setf (gtk:cell-renderer-progress-value object) value)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
@@ -324,7 +324,7 @@
 
 (defun cell-renderer-progress-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @return{The new @class{gtk:cell-renderer-progress} object.}
   @begin{short}
     Creates a new cell renderer progress object.

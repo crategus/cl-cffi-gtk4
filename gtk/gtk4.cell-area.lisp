@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-area.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -146,7 +146,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area 'type)
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:cell-area} class is an abstract class for
     @class{gtk:cell-layout} widgets, also referred to as \"layouting widgets\",
@@ -353,10 +353,11 @@ while (valid)
   API as they come in. Usually the @class{gtk:cell-area} object is only
   interested in button events, however some customized derived areas can be
   implemented who are interested in handling other events. Handling an event
-  can trigger the @code{\"focus-changed\"} signal to fire. As well as the
-  @code{\"add-editable\"} signal in the case that an editable cell was clicked
-  and needs to start editing. You can call the @fun{gtk:cell-area-stop-editing}
-  function at any time to cancel any cell editing that is currently in progress.
+  can trigger the @sig[gtk:cell-area]{focus-changed} signal to fire. As well as
+  the @sig[gtk:cell-area]{add-editable} signal in the case that an editable cell
+  was clicked and needs to start editing. You can call the
+  @fun{gtk:cell-area-stop-editing} function at any time to cancel any cell
+  editing that is currently in progress.
 
   The @class{gtk:cell-area} object drives keyboard focus from cell to cell in a
   way similar to @class{gtk:widget} object. For layouting widgets that support
@@ -365,12 +366,12 @@ while (valid)
   has focus and to tell the area to paint the focus at render time.
 
   Layouting widgets that accept focus on cells should implement the
-  @code{focus()} virtual method. The layouting widget is always responsible
-  for knowing where @class{gtk:tree-model} rows are rendered inside the
-  widget, so at @code{focus()} time the layouting widget should use the
+  @code{focus()} virtual method. The layouting widget is always responsible for
+  knowing where @class{gtk:tree-model} rows are rendered inside the widget, so
+  at @code{focus()} time the layouting widget should use the
   @class{gtk:cell-area} methods to navigate focus inside the area and then
-  observe the @symbol{gtk:direction-type} value to pass the focus to adjacent
-  rows and areas.
+  observe the @sym{gtk:direction-type} value to pass the focus to adjacent rows
+  and areas.
 
   A basic example of how the @code{focus()} virtual method should be
   implemented:
@@ -438,7 +439,7 @@ foo_focus (GtkWidget       *widget,
 @}
   @end{pre}
   Note that the layouting widget is responsible for matching the
-  @symbol{gtk:direction-type} values to the way it lays out its cells.
+  @sym{gtk:direction-type} values to the way it lays out its cells.
 
   @subheading{Cell Properties}
   The @class{gtk:cell-area} class introduces cell properties for
@@ -463,11 +464,11 @@ foo_focus (GtkWidget       *widget,
     views use widgets for displaying their contents.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"add-editable\" signal}
+    @begin[cell-area::add-editable]{signal}
       @begin{pre}
 lambda (area renderer editable cell-area path)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[area]{The @class{gtk:cell-area} object where editing started.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that started the
           edited.}
@@ -477,15 +478,16 @@ lambda (area renderer editable cell-area path)    :run-first
           added.}
         @entry[path]{The @class{gtk:tree-path} string this edit was initiated
           for.}
-      @end{table}
+      @end{simple-table}
       Indicates that editing has started on @arg{renderer} and that
       @arg{editable} should be added to the owning cell-layouting widget at
       @arg{cell-area}.
-    @subheading{The \"apply-attributes\" signal}
+    @end{signal}
+    @begin[cell-area::apply-attributes]{signal}
       @begin{pre}
 lambda (area model iter is-expander is-expanded)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[area]{The @class{gtk:cell-area} object to apply the attributes
           to.}
         @entry[model]{The @class{gtk:tree-model} object to apply the attributes
@@ -495,35 +497,38 @@ lambda (area model iter is-expander is-expanded)    :run-first
         @entry[is-expander]{Whether the view shows children for this row.}
         @entry[is-expanded]{Whether the view is currently showing the children
           of this row.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever applying attributes to the cell area from
       the model.
-    @subheading{The \"focus-changed\" signal}
+    @end{signal}
+    @begin[cell-area::focus-changed]{signal}
       @begin{pre}
 lambda (area renderer path)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[area]{The @class{gtk:cell-area} object where focus changed.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that has focus.}
         @entry[path]{The current @class{gtk:tree-path} string set for area.}
-      @end{table}
+      @end{simple-table}
       Indicates that focus changed on the cell area. The signal is emitted
       either as a result of focus handling or event handling. It is possible
       that the signal is emitted even if the currently focused renderer did not
       change, this is because focus may change to the same renderer in the same
       cell area for a different row of data.
-    @subheading{The \"remove-editable\" signal}
+    @end{signal}
+    @begin[cell-area::remove-editable]{signal}
       @begin{pre}
 lambda (area renderer editable)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[area]{The @class{gtk:cell-area} object where editing finished.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that finished
           editeding.}
         @entry[editable]{The @class{gtk:cell-editable} widget to remove.}
-      @end{table}
+      @end{simple-table}
       Indicates that editing finished on @arg{renderer} and that @arg{editable}
       should be removed from the owning cell-layouting widget.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:cell-area-edit-widget}
   @see-slot{gtk:cell-area-edited-cell}
@@ -547,7 +552,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edit-widget)
       "Accessor"
       (documentation 'cell-area-edit-widget 'function)
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @syntax{(gtk:cell-area-edit-widget object) => widget}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:cell-editable} widget}
@@ -577,7 +582,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edited-cell)
       "Accessor"
       (documentation 'cell-area-edited-cell 'function)
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
@@ -606,7 +611,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-focus-cell)
       "Accessor"
       (documentation 'cell-area-focus-cell 'function)
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @syntax{(setf (gtk:cell-area-edited-cell object) renderer}
   @argument[object]{a @class{gtk:cell-area} object}
@@ -637,7 +642,7 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_add" cell-area-add) :void
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add to @arg{area}}
   @begin{short}
@@ -661,7 +666,7 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_remove" cell-area-remove) :void
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to remove from area}
   @short{Removes a cell renderer from the cell area.}
@@ -682,7 +687,7 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_has_renderer" cell-area-has-renderer) :boolean
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to check}
   @return{@em{True} if @arg{renderer} is in the @arg{area}.}
@@ -714,7 +719,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-callback)
       "Callback"
       (liber:symbol-documentation 'cell-callback)
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @syntax{lambda (renderer) => result}
   @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
   @argument[result]{@em{true} to stop iterating over cells}
@@ -740,9 +745,9 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-foreach (area func)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
-  @argument[func]{a @symbol{gtk:cell-callback} callback function to call}
+  @argument[func]{a @sym{gtk:cell-callback} callback function to call}
   @short{Calls a callback function for every cell renderer in the cell area.}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
@@ -775,7 +780,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-alloc-callback)
       "Callback"
       (liber:symbol-documentation 'cell-alloc-callback)
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @syntax{lambda (renderer cell background) => result}
   @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
   @argument[cell]{a @class{gdk:rectangle} area allocated to @arg{renderer}
@@ -812,15 +817,15 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-foreach-alloc (area context widget cell background func)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering to}
-  @argument[cell]{a @class{gdk:rectangle} instance with the relative coordinates
+  @argument[cell]{a @class{gdk:rectangle} instance for the relative coordinates
     and size of @arg{widget} for rendering @arg{area}}
-  @argument[background]{a @class{gdk:rectangle} instance with the relative
+  @argument[background]{a @class{gdk:rectangle} instance for the relative
     coordinates of the background for rendering @arg{area}}
-  @argument[func]{a @symbol{gtk:cell-alloc-callback} callback function}
+  @argument[func]{a @sym{gtk:cell-alloc-callback} callback function}
   @begin{short}
     Calls the callback function for every @class{gtk:cell-renderer} object in
     the cell area with the allocated rectangle inside @arg{cell}.
@@ -851,15 +856,15 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_event" cell-area-event) :int
  #+liber-documentation
- "@version{#2024-7-26}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object for this row of
     data}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering to}
   @argument[event]{a @class{gdk:event} instance to handle}
-  @argument[cell]{a @class{gdk:rectangle} instance with the widget relative
+  @argument[cell]{a @class{gdk:rectangle} instance for the widget relative
     coordinates for @arg{area}}
-  @argument[flags]{a @symbol{gtk:cell-renderer-state} value for @arg{area} in
+  @argument[flags]{a @sym{gtk:cell-renderer-state} value for @arg{area} in
     this row}
   @return{@em{True} if the event was handled by the cell area.}
   @begin{short}
@@ -890,18 +895,18 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_snapshot" cell-area-snapshot) :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object for this row of
     data}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering to}
   @argument[snapshot]{a @class{gtk:snapshot} object to draw to}
-  @argument[cell]{a @class{gdk:rectangle} instance with the widget relative
+  @argument[cell]{a @class{gdk:rectangle} instance for the widget relative
     coordinates for @arg{area}}
-  @argument[flags]{a @symbol{gtk:cell-renderer-state} value for @arg{area} in
+  @argument[flags]{a @sym{gtk:cell-renderer-state} value for @arg{area} in
     this row}
-  @argument[paint-focus]{a @symbol{gtk:cell-renderer-state} value for
-    @arg{area} in this row}
+  @argument[paint-focus]{a @sym{gtk:cell-renderer-state} value for @arg{area}
+    in this row}
   @begin{short}
     Snapshots @arg{area}'s cells according to @arg{area}'s layout onto at the
     given coordinates.
@@ -942,17 +947,18 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-allocation (area context widget renderer cell)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object used to hold sizes
     for area}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering on}
   @argument[renderer]{a @class{gtk:cell-renderer} object to get the allocation
     for}
-  @argument[cell]{a @class{gdk:rectangle} instance with the whole allocated
+  @argument[cell]{a @class{gdk:rectangle} instance for the whole allocated
     area for @arg{area} in @arg{widget} for this row}
-  @return{The @class{gdk:rectangle} instance with the allocation for
-    @arg{renderer}.}
+  @begin{return}
+    The @class{gdk:rectangle} instance for the allocation for @arg{renderer}.
+  @end{return}
   @begin{short}
     Derives the allocation of the cell renderer inside the cell area if
     @arg{cell} were to be renderered in @arg{area}.
@@ -989,15 +995,15 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-at-position (area context widget cell x y)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-19}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object used to hold sizes
     for @arg{area}}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering on}
-  @argument[cell]{a @class{gdk:rectangle} instance with the whole allocated area
+  @argument[cell]{a @class{gdk:rectangle} instance for the whole allocated area
     for @arg{area} in @arg{widget} for this row}
-  @argument[x]{an integer with the x position}
-  @argument[y]{an integer with the y position}
+  @argument[x]{an integer for the x position}
+  @argument[y]{an integer for the y position}
   @begin{return}
    The @class{gtk:cell-renderer} object at @arg{x} and @arg{y} for the first
    value and the @class{gdk:rectangle} allocation for the inner allocated area
@@ -1030,10 +1036,12 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_create_context" cell-area-create-context)
     (g:object cell-area-context :return)
  #+liber-documentation
- "@version{2024-10-9}
+ "@version{2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
-  @return{The newly created @class{gtk:cell-area-context} object which can be
-    used with @arg{area}.}
+  @begin{return}
+    The newly created @class{gtk:cell-area-context} object that can be used
+    with @arg{area}.
+  @end{return}
   @begin{short}
     Creates a cell area context to be used with @arg{area} for all purposes.
   @end{short}
@@ -1059,11 +1067,13 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_copy_context" cell-area-copy-context)
     (g:object cell-area-context :return)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object to copy}
-  @return{The newly created @class{gtk:cell-area-context} object copy of
-    @arg{context}.}
+  @begin{return}
+    The newly created @class{gtk:cell-area-context} object for the copy of
+    @arg{context}.
+  @end{return}
   @begin{short}
     This is sometimes needed for cases where rows need to share alignments in
     one orientation but may be separately grouped in the opposing orientation.
@@ -1093,9 +1103,9 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_get_request_mode" cell-area-request-mode)
     size-request-mode
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
-  @return{The @symbol{gtk:size-request-mode} value preferred by @arg{area}.}
+  @return{The @sym{gtk:size-request-mode} value preferred by @arg{area}.}
   @begin{short}
     Gets whether the area prefers a height-for-width layout or a
     width-for-height layout.
@@ -1124,16 +1134,16 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-preferred-width (area context widget)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-19}
+  @syntax{(gtk:cell-area-preferred-width area context widget) => minimum,
+    natural}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object to perform this
     request with}
   @argument[widget]{a @class{gtk:widget} object where @arg{area} will be
     rendering}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum width, or @code{nil} @br{}
-    @arg{natural} -- an integer with the natural width, or @code{nil}
-  @end{return}
+  @argument[minimum]{an integer for the minimum width, or @code{nil}}
+  @argument[natural]{an integer for the natural width, or @code{nil}}
   @begin{short}
     Retrieves an initial minimum and natural width of the cell area.
   @end{short}
@@ -1177,18 +1187,18 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-preferred-height-for-width (area context widget width)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-19}
+  @syntax{(gtk:cell-area-preferred-height-for-width area context widget width)
+    => minimum, natural}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object which has already
     been requested for widths}
   @argument[widget]{a @class{gtk:widget} object where @arg{area} will be
     rendering}
-  @argument[width]{an integer with the width for which to check the height of
+  @argument[width]{an integer for the width for which to check the height of
     this area}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum height, or @code{nil} @br{}
-    @arg{natural} -- an integer with the natural height, or @code{nil}
-  @end{return}
+  @argument[minimum]{an integer for the minimum height, or @code{nil}}
+  @argument[natural]{an integer for the natural height, or @code{nil}}
   @begin{short}
     Retrieves a minimum and natural height of the cell area if it would be given
     the specified width.
@@ -1239,15 +1249,15 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-preferred-height (area context widget)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-19}
+  @syntax{(gtk:cell-area-preferred-height area context widget) => minimum,
+    natural}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object to perform this
     request with}
   @argument[widget]{a @class{gtk:widget} where area will be rendering}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum height, or @code{nil} @br{}
-    @arg{natural} -- an integer with the natural height, or @code{nil}
-  @end{return}
+  @argument[minimum]{an integer for the minimum height, or @code{nil}}
+  @argument[natural]{an integer for the natural height, or @code{nil}}
   @begin{short}
     Retrieves an initial minimum and natural height of the cell area.
   @end{short}
@@ -1290,18 +1300,18 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-preferred-width-for-height (area context widget height)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-19}
+  @syntax{(gtk:cell-area-preferred-width-for-height area context widget height)
+    => minimum, natural}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object which has already
     been requested for widths}
   @argument[widget]{a @class{gtk:widget} object where @arg{area} will be
     rendering}
-  @argument[height]{an integer with the height for which to check the width of
+  @argument[height]{an integer for the height for which to check the width of
     this area}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum width, or @code{nil} @br{}
-    @arg{natural} -- an integer with the natural width, or @code{nil}
-  @end{return}
+  @argument[minimum]{an integer for the minimum width, or @code{nil}}
+  @argument[natural]{an integer for the natural width, or @code{nil}}
   @begin{short}
     Retrieves a minimum and natural width of the cell area if it would be given
     the specified height.
@@ -1346,10 +1356,12 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_get_current_path_string"
                cell-area-current-path-string) :string
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
-  @return{The current @class{gtk:tree-path} string for the current attributes
-    applied to @arg{area}.}
+  @begin{return}
+    The current @class{gtk:tree-path} string for the current attributes
+    applied to @arg{area}.
+  @end{return}
   @begin{short}
     Gets the current @class{gtk:tree-path} string for the currently applied
     @class{gtk:tree-iter} iterator.
@@ -1375,7 +1387,7 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_apply_attributes" cell-area-apply-attributes)
     :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[model]{a @class{gtk:tree-model} object to pull values from}
   @argument[iter]{a @class{gtk:tree-iter} iterator in @arg{model} to apply
@@ -1409,11 +1421,11 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_attribute_connect" cell-area-attribute-connect)
     :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to connect an attribute
     for}
-  @argument[attribute]{a string with the attribute name}
+  @argument[attribute]{a string for the attribute name}
   @argument[column]{an integer for the @class{gtk:tree-model} object column to
     fetch attribute values from}
   @begin{short}
@@ -1441,11 +1453,11 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_attribute_disconnect"
                cell-area-attribute-disconnect) :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to disconnect an
     attribute for}
-  @argument[attribute]{a string with the attribute name}
+  @argument[attribute]{a string for the attribute name}
   @begin{short}
     Disconnects @arg{attribute} for the renderer in the cell area so that
     @arg{attribute} will no longer be updated with values from the model.
@@ -1469,11 +1481,11 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_attribute_get_column"
                cell-area-attribute-column) :int
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-15}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
-  @argument[attribute]{a string with an attribute on the renderer}
-  @return{The integer with the model column, or -1.}
+  @argument[attribute]{a string for an attribute on the renderer}
+  @return{The integer for the model column, or -1.}
   @begin{short}
     Returns the model column that an attribute has been mapped to, or -1 if the
     attribute is not mapped.
@@ -1523,11 +1535,11 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-class-find-cell-property (gtype property)
  #+liber-documentation
- "@version{2024-12-29}
+ "@version{2025-07-22}
   @argument[gtype]{a @class{g:type-t} type ID}
-  @argument[property]{a string with the name of the cell property to find}
+  @argument[property]{a string for the name of the cell property to find}
   @begin{return}
-    The @symbol{g:param-spec} instance of the cell property or a
+    The @sym{g:param-spec} instance for the cell property or a
     @code{cffi:null-pointer} if the @arg{gtype} type has no child property with
     that name.
   @end{return}
@@ -1561,9 +1573,9 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-class-list-cell-properties (gtype)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @argument[gtype]{a @class{g:type-t} type ID}
-  @return{The list of @symbol{g:param-spec} instances.}
+  @return{The list of @sym{g:param-spec} instances.}
   @short{Returns the cell properties of a cell area class.}
   @begin[Notes]{dictionary}
     In the Lisp binding we pass the type of a cell area class and not
@@ -1595,7 +1607,7 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-add-with-properties (area renderer &rest args)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to be placed inside
     @arg{area}}
@@ -1623,7 +1635,7 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-set (area renderer &rest args)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is cell inside
     @arg{area}}
@@ -1650,11 +1662,11 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-get (area renderer &rest args)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is inside
     @arg{area}}
-  @argument[args]{strings with the cell property names to get the values for}
+  @argument[args]{strings for the cell property names to get the values for}
   @return{The list with the values of the cell properties.}
   @begin{short}
     Gets the values of one or more cell properties for the cell renderer in
@@ -1712,13 +1724,13 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-property (area renderer property)
  #+liber-documentation
- "@version{2024-7-7}
+ "@version{2025-07-22}
   @syntax{(gtk:cell-area-property area renderer property) => value}
   @syntax{(setf (gtk:cell-area-property area renderer property) value)}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is inside
     @arg{area}}
-  @argument[property]{a string with the name of the cell property}
+  @argument[property]{a string for the name of the cell property}
   @argument[value]{a value for the property}
   @begin{short}
     Gets or sets the value of a cell property for the cell renderer inside
@@ -1749,7 +1761,7 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_is_activatable" cell-area-is-activatable) :boolean
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @return{The boolean whether @arg{area} can do anything when activated.}
   @begin{short}
@@ -1771,14 +1783,14 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_activate" cell-area-activate) :boolean
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object in @arg{context}
     with the current row data}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering on}
-  @argument[cell]{a @class{gdk:rectangle} instance with the size and location of
+  @argument[cell]{a @class{gdk:rectangle} instance for the size and location of
     @arg{area} relative to allocation of the widget}
-  @argument[flags]{a @symbol{gtk:cell-renderer-state} value for @arg{area} for
+  @argument[flags]{a @sym{gtk:cell-renderer-state} value for @arg{area} for
     this row of data}
   @argument[edit-only]{if @em{true} then only cell renderers that are
     @code{:editable} will be activated}
@@ -1812,11 +1824,12 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_focus" cell-area-focus) :boolean
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
-  @argument[direction]{a value of the @symbol{gtk:direction-type} enumeration}
-  @return{@em{True} if focus remains inside @arg{area} as a result of this
-    call.}
+  @argument[direction]{a value of the @sym{gtk:direction-type} enumeration}
+  @begin{return}
+    @em{True} if focus remains inside @arg{area} as a result of this call.
+  @end{return}
   @begin{short}
     This should be called by the owning layout widget of the cell area when
     focus is to be passed to @arg{area}, or moved within @arg{area} for a given
@@ -1843,7 +1856,7 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling)
     :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
   @argument[sibling]{a @class{gtk:cell-renderer} object to add to the focus area
@@ -1875,7 +1888,7 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_remove_focus_sibling"
                cell-area-remove-focus-sibling) :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
   @argument[sibling]{a @class{gtk:cell-renderer} object to remove from the focus
@@ -1904,7 +1917,7 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling)
     :boolean
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
   @argument[sibling]{a @class{gtk:cell-renderer} object to check against
@@ -1935,7 +1948,7 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_get_focus_siblings" cell-area-focus-siblings)
     (g:list-t (g:object cell-renderer) :free-from-foreign nil)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2024-07-07}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
   @return{The list of @class{gtk:cell-renderer} objects.}
@@ -1960,11 +1973,13 @@ lambda (area renderer editable)    :run-first
 (cffi:defcfun ("gtk_cell_area_get_focus_from_sibling"
                cell-area-focus-from-sibling) (g:object cell-renderer)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-13}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
-  @return{The @class{gtk:cell-renderer} object for which @arg{renderer} is a
-    sibling, or @code{nil}.}
+  @begin{return}
+    The @class{gtk:cell-renderer} object for which @arg{renderer} is a sibling,
+    or @code{nil}.
+  @end{return}
   @begin{short}
     Gets the cell renderer which is expected to be focusable for which
     @arg{renderer} is, or may be a sibling.
@@ -1990,7 +2005,7 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_activate_cell" cell-area-activate-cell) :boolean
  #+liber-documentation
- "@version{#2024-7-26}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering
     onto}
@@ -2000,7 +2015,7 @@ lambda (area renderer editable)    :run-first
     should occur}
   @argument[cell]{a @class{gdk:rectangle} instance in @arg{widget} relative
     coordinates of @arg{renderer} for the current row}
-  @argument[flags]{a value of the @symbol{gtk:cell-renderer-state} flags for
+  @argument[flags]{a value of the @sym{gtk:cell-renderer-state} flags for
     @arg{renderer}}
   @return{The boolean whether cell activation was successful.}
   @begin{short}
@@ -2034,15 +2049,16 @@ lambda (area renderer editable)    :run-first
 
 (cffi:defcfun ("gtk_cell_area_stop_editing" cell-area-stop-editing) :void
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[canceled]{a boolean whether editing was canceled}
   @begin{short}
     Explicitly stops the editing of the currently edited cell.
   @end{short}
   If the @arg{canceled} argument is @em{true}, the currently edited cell
-  renderer will emit the @code{\"editing-canceled\"} signal, otherwise the
-  @code{\"editing-done\"} signal will be emitted on the current edit widget.
+  renderer will emit the @sig[gtk:cell-renderer]{editing-canceled} signal,
+  otherwise the @sig[gtk:cell-editable]{editing-done} signal will be emitted on
+  the current edit widget.
 
   See the @fun{gtk:cell-area-edited-cell} and @fun{gtk:cell-area-edit-widget}
   functions.
@@ -2070,13 +2086,13 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-inner-cell-area (area widget cell)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering
     onto}
-  @argument[cell]{a @class{gdk:rectangle} instance with the widget relative
+  @argument[cell]{a @class{gdk:rectangle} instance for the widget relative
     coordinates where one of the cells of the cell area is to be placed}
-  @return{The @class{gdk:rectangle} instance with the inner cell area.}
+  @return{The @class{gdk:rectangle} instance for the inner cell area.}
   @begin{short}
     This is a convenience function for @class{gtk:cell-area} implementations to
     get the inner area where a given @class{gtk:cell-renderer} object will be
@@ -2119,19 +2135,19 @@ lambda (area renderer editable)    :run-first
                                    widget
                                    for-size)
  #+liber-documentation
- "@version{#2024-7-7}
+ "@version{#2025-07-22}
+  @syntax{(gtk:cell-area-request-renderer area renderer orientation widget
+    for-size) => minimum, natural}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to request size for}
-  @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration in
+  @argument[orientation]{a value of the @sym{gtk:orientation} enumeration in
     which to request size}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering
     onto}
-  @argument[for-size]{an integer with the allocation contextual size to request
+  @argument[for-size]{an integer for the allocation contextual size to request
     for, or -1 if the base request for the orientation is to be returned}
-  @begin{return}
-    @arg{minimum} -- an integer with the minimum size, or @code{nil} @br{}
-    @arg{natural} -- an integer with the natural size, or @code{nil}
-  @end{return}
+  @argument[minimum]{an integer for the minimum size, or @code{nil}}
+  @argument[natural]{an integer for the natural size, or @code{nil}}
   @begin{short}
     This is a convenience function for @class{gtk:cell-area} implementations to
     request size for cell renderers.
