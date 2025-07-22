@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-model-sort.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-model-sort 'type)
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @begin{short}
     The @class{gtk:tree-model-sort} object is a model which implements the
     @class{gtk:tree-sortable} interface.
@@ -118,10 +118,11 @@
   ... )
     @end{pre}
     To demonstrate how to access the underlying child model from the sort model,
-    the next example will be a callback for the @code{\"changed\"} signal of the
-    @class{gtk:tree-selection} object. In this callback, we get a string from
-    @code{col1} of the model. We then modify the string, find the same selected
-    row on the child model, and change the row there.
+    the next example will be a callback for the
+    @sig[gtk:tree-selection]{changed} signal of the @class{gtk:tree-selection}
+    object. In this callback, we get a string from @code{col1} of the model. We
+    then modify the string, find the same selected row on the child model, and
+    change the row there.
     @begin{pre}
 (defun selection-changed (selection)
   (let* ((view (gtk:tree-selection-tree-view selection))
@@ -168,7 +169,7 @@
 (setf (liber:alias-for-function 'tree-model-sort-model)
       "Accessor"
       (documentation 'tree-model-sort-model 'function)
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @syntax{(gtk:tree-model-sort-model object) => model}
   @argument[object]{a @class{gtk:tree-model-sort} object}
   @argument[model]{a @class{gtk:tree-model} child model being sorted}
@@ -194,7 +195,7 @@
 
 (defun tree-model-sort-new-with-model (model)
  #+liber-documentation
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @argument[model]{a @class{gtk:tree-model} object, or @code{nil}}
   @return{The new @class{gtk:tree-model} object.}
   @begin{short}
@@ -220,7 +221,7 @@
                tree-model-sort-convert-child-path-to-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -254,7 +255,7 @@
 
 (defun tree-model-sort-convert-child-iter-to-iter (model iter)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a valid @class{gtk:tree-iter} instance pointing to a
     row on the child model}
@@ -287,7 +288,7 @@
                tree-model-sort-convert-path-to-child-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -321,7 +322,7 @@
 
 (defun tree-model-sort-convert-iter-to-child-iter (model iter)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator pointing to a
     row on @arg{model}}
@@ -349,7 +350,7 @@
 (cffi:defcfun ("gtk_tree_model_sort_reset_default_sort_func"
                tree-model-sort-reset-default-sort-func) :void
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @begin{short}
     This resets the default sort function to be in the 'unsorted' state.
@@ -374,7 +375,7 @@
 (cffi:defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
     :void
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2021-03-10}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @begin{short}
     This function should almost never be called. It clears the @arg{model} of
@@ -399,11 +400,12 @@
 (cffi:defcfun ("gtk_tree_model_sort_iter_is_valid"
                tree-model-sort-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
-  @return{@em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is
-    invalid.}
+  @begin{return}
+    @em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is invalid.
+  @end{return}
   @begin{short}
     Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:tree-model-sort} object.

@@ -154,7 +154,7 @@
 (setf (liber:alias-for-symbol 'tree-view-column-sizing)
       "GEnum"
       (liber:symbol-documentation 'tree-view-column-sizing)
- "@version{2024-4-27}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
   (:export t
@@ -164,19 +164,20 @@
   (:fixed 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:grow-only]{Columns only get bigger in reaction to changes in the
         model.}
       @entry[:autosize]{Columns resize to be the optimal size everytime the
         model changes.}
       @entry[:fixed]{Columns are a fixed numbers of pixels wide.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The sizing method the tree view column uses to determine its width.
   @end{short}
-  Please note that the @code{:autosize} value is inefficient for large tree
-  views, and can make tree view columns appear choppy.
+  Please note that the @val[gtk:tree-view-column-sizing]{:autosize} value is
+  inefficient for large tree views, and can make tree view columns appear
+  choppy.
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sizing}")
 
@@ -255,7 +256,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-view-column 'type)
- "@version{2024-2-19}
+ "@version{2025-07-22}
   @begin{short}
     The @class{gtk:tree-view-column} object represents a visible column in a
     @class{gtk:tree-view} widget.
@@ -272,15 +273,16 @@
     Please do not use it in newly written code.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"clicked\" signal}
+    @begin[tree-view-column::clicked]{signal}
       @begin{pre}
 lambda (column)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[column]{The @class{gtk:tree-view-column} object which
-          emitted the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[column]{The @class{gtk:tree-view-column} object that emitted
+          the signal.}
+      @end{simple-table}
       Emitted when the header of the column has been clicked.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:tree-view-column-new}
   @see-constructor{gtk:tree-view-column-new-with-area}
@@ -324,7 +326,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-alignment)
       "Accessor"
       (documentation 'tree-view-column-alignment 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-alignment object) => align}
   @syntax{(setf (gtk:tree-view-column-alignment object) align)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -359,7 +361,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-cell-area)
       "Accessor"
       (documentation 'tree-view-column-cell-area 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-cell-area object) => area}
   @syntax{(setf (gtk:tree-view-column-cell-area object) area)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -390,7 +392,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-clickable)
       "Accessor"
       (documentation 'tree-view-column-clickable 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-clickable object) => clickable}
   @syntax{(setf (gtk:tree-view-column-clickable object) clickable)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -422,7 +424,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-expand)
       "Accessor"
       (documentation 'tree-view-column-expand 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-expand object) => expand}
   @syntax{(setf (gtk:tree-view-column-expand object) expand)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -459,7 +461,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-fixed-width)
       "Accessor"
       (documentation 'tree-view-column-fixed-width 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-fixed-width object) => width}
   @syntax{(setf (gtk:tree-view-column-fixed-width object) width)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -472,9 +474,10 @@ lambda (column)    :run-last
   The @fun{gtk:tree-view-column-fixed-width} function gets the fixed width of
   the tree view column in pixels. The @setf{gtk:tree-view-column-fixed-width}
   function sets the width. This is meaningful only if the
-  @slot[gtk:tree-view-column]{sizing} property has the @code{:fixed} value. The
-  width of the tree view column is clamped to the min/max width for the column.
-  Please note that the min/max width of the column does not actually affect the
+  @slot[gtk:tree-view-column]{sizing} property has the
+  @val[gtk:tree-view-column-sizing]{:fixed} value. The width of the tree view
+  column is clamped to the min/max width for the column. Please note that the
+  min/max width of the column does not actually affect the
   @slot[gtk:tree-view-column]{fixed-width} property of the widget, just the
   actual width when displayed.
   @begin[Warning]{dictionary}
@@ -499,7 +502,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-max-width)
       "Accessor"
       (documentation 'tree-view-column-max-width 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-max-width object) => width}
   @syntax{(setf (gtk:tree-view-column-max-width object) width)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -535,7 +538,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-min-width)
       "Accessor"
       (documentation 'tree-view-column-min-width 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-min-width object) => width}
   @syntax{(setf (gtk:tree-view-column-min-width object) width)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -569,7 +572,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-reorderable)
       "Accessor"
       (documentation 'tree-view-column-reorderable 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-reorderable object) => reorderable}
   @syntax{(setf (gtk:tree-view-column-reorderable object) reorderable)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -599,7 +602,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-resizable)
       "Accessor"
       (documentation 'tree-view-column-resizable 'function)
- "@version{2024-2-19}
+ "@version{2025-07-22}
   @syntax{(gtk:tree-view-column-resizable object) => resizable}
   @syntax{(setf (gtk:tree-view-column-resizable object) resizable)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -614,7 +617,8 @@ lambda (column)    :run-last
   If @code{resizable} is @em{true}, then the user can explicitly resize the
   tree view column by grabbing the outer edge of the column button. If
   @code{resizable} is @em{true} and the sizing mode of the tree view column is
-  @code{:autosize}, then the sizing mode is changed to @code{:grow-only}.
+  @val[gtk:tree-view-column-sizing]{:autosize}, then the sizing mode is changed
+  to @val[gtk:tree-view-column-sizing]{:grow-only}.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -627,20 +631,20 @@ lambda (column)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sizing" 'tree-view-column) t)
- "The @code{sizing} property of type @symbol{gtk:tree-view-column-sizing}
+ "The @code{sizing} property of type @sym{gtk:tree-view-column-sizing}
   (Read / Write) @br{}
   The resize mode of the tree view column. @br{}
-  Default value: @code{:grow-only}")
+  Default value: @val[gtk:tree-view-column-sizing]{:grow-only}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'tree-view-column-sizing)
       "Accessor"
       (documentation 'tree-view-column-sizing 'function)
- "@version{2024-2-19}
+ "@version{2025-07-22}
   @syntax{(gtk:tree-view-column-sizing object) => type}
   @syntax{(setf (gtk:tree-view-column-sizing object) type)}
   @argument[object]{a @class{gtk:tree-view-column} object}
-  @argument[type]{a @symbol{gtk:tree-view-column-sizing} value}
+  @argument[type]{a @sym{gtk:tree-view-column-sizing} value}
   @begin{short}
     Accessor of the @slot[gtk:tree-view-column]{sizing} slot of the
     @class{gtk:tree-view-column} class.
@@ -671,11 +675,11 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-sort-column-id)
       "Accessor"
       (documentation 'tree-view-column-sort-column-id 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-sort-column-id object) => id}
   @syntax{(setf (gtk:tree-view-column-sort-column-id object) id)}
   @argument[object]{a @class{gtk:tree-view-column} object}
-  @argument[id]{an integer for the @code{sort-column-id} of the model to sort
+  @argument[id]{an integer for the sort column ID of the model to sort
     on}
   @begin{short}
     Accessor of the @slot[gtk:tree-view-column]{sort-column-id} slot of the
@@ -707,7 +711,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-sort-indicator)
       "Accessor"
       (documentation 'tree-view-column-sort-indicator 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-sort-indicator object) => setting}
   @syntax{(setf (gtk:tree-view-column-sort-indicator object) setting)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -734,20 +738,20 @@ lambda (column)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sort-order"
                                                'tree-view-column) t)
- "The @code{sort-order} property of type @symbol{gtk:sort-type} (Read / Write)
+ "The @code{sort-order} property of type @sym{gtk:sort-type} (Read / Write)
   @br{}
   The sort direction the sort indicator should indicate. @br{}
-  Default value: @code{:ascending}")
+  Default value: @val[gtk:sort-type]{:ascending}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'tree-view-column-sort-order)
       "Accessor"
       (documentation 'tree-view-column-sort-order 'function)
- "@version{2024-2-19}
+ "@version{2025-07-22}
   @syntax{(gtk:tree-view-column-sort-order object) => order}
   @syntax{(setf (gtk:tree-view-column-sort-order object) order)}
   @argument[object]{a @class{gtk:tree-view-column} object}
-  @argument[order]{a @symbol{gtk:sort-type} value}
+  @argument[order]{a @sym{gtk:sort-type} value}
   @begin{short}
     Accessor of the @slot[gtk:tree-view-column]{sort-order} slot of the
     @class{gtk:tree-view-column} class.
@@ -785,7 +789,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-spacing)
       "Accessor"
       (documentation 'tree-view-column-spacing 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-spacing object) => spacing}
   @syntax{(setf (gtk:tree-view-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -817,7 +821,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-title)
       "Accessor"
       (documentation 'tree-view-column-title 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-title object) => title}
   @syntax{(setf (gtk:tree-view-column-title object) title)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -848,7 +852,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-visible)
       "Accessor"
       (documentation 'tree-view-column-visible 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-visible object) => visible}
   @syntax{(setf (gtk:tree-view-column-visible object) visible)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -879,7 +883,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-widget)
       "Accessor"
       (documentation 'tree-view-column-widget 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:tree-view-column-widget object) => widget}
   @syntax{(setf (gtk:tree-view-column-widget object) widget)}
   @argument[object]{a @class{gtk:tree-view-column} object}
@@ -916,7 +920,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-width)
       "Accessor"
       (documentation 'tree-view-column-width 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-width object) => width}
   @argument[object]{a @class{gtk:tree-view-column} object}
   @argument[width]{an integer for the current width of the tree view column}
@@ -944,7 +948,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-function 'tree-view-column-x-offset)
       "Accessor"
       (documentation 'tree-view-column-x-offset 'function)
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-x-offset object) => offset}
   @argument[object]{a @class{gtk:tree-view-column} object}
   @argument[offset]{an integer for the current x offset in pixels}
@@ -966,7 +970,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-new ()
  #+liber-documentation
- "@version{2024-5-3}
+ "@version{2024-05-03}
   @return{The newly created @class{gtk:tree-view-column} object.}
   @begin{short}
     Creates a new tree view column.
@@ -990,7 +994,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-new-with-area (area)
  #+liber-documentation
- "@version{2024-3-8}
+ "@version{2024-03-08}
   @argument[area]{a @class{gtk:cell-area} object that the newly created
    tree view column should use to layout cell renderers}
   @return{The newly created @class{gtk:tree-view-column} object.}
@@ -1016,7 +1020,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-new-with-attributes (title renderer &rest attributes)
  #+liber-documentation
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @argument[title]{a string for the title to set the header to}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[attributes]{pairs of attributes}
@@ -1067,7 +1071,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-pack-start (column renderer &key (expand t))
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if the cell renderer is to be given extra space
@@ -1100,7 +1104,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-pack-end (column renderer &key (expand t))
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if the cell renderer is to be given extra space
@@ -1128,7 +1132,7 @@ lambda (column)    :run-last
 
 (cffi:defcfun ("gtk_tree_view_column_clear" tree-view-column-clear) :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{short}
     Unsets all the mappings on all cell renderers on the tree view column.
@@ -1149,7 +1153,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_add_attribute"
                tree-view-column-add-attribute) :void
  #+liber-documentation
- "@version{#2025-4-15}
+ "@version{#2025-04-15}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to set attributes on}
   @argument[attribute]{a string for an attribute on the cell renderer}
@@ -1183,7 +1187,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-set-attributes (column renderer &rest attributes)
  #+liber-documentation
- "@version{#2024-5-4}
+ "@version{#2024-05-04}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object we are setting the
     attributes of}
@@ -1225,13 +1229,13 @@ lambda (column)    :run-last
 (setf (liber:alias-for-symbol 'tree-cell-data-func)
       "Callback"
       (liber:symbol-documentation 'tree-cell-data-func)
- "@version{#2024-5-4}
+ "@version{#2025-07-22}
   @syntax{lambda (column renderer model iter)}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object that is being rendered
     by the tree view column}
   @argument[model]{a @class{gtk:tree-model} object being rendered}
-  @argument[iter]{a @class{gtk:tree-iter} object of the current row rendered}
+  @argument[iter]{a @class{gtk:tree-iter} object for the current row rendered}
   @begin{short}
     A function to set the properties of a cell instead of just using the
     straight mapping between the cell and the model.
@@ -1262,10 +1266,10 @@ lambda (column)    :run-last
 
 (defun tree-view-column-set-cell-data-func (column renderer func)
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2025-07-22}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
-  @argument[func]{a @symbol{gtk:tree-cell-data-func} callback function to use}
+  @argument[func]{a @sym{gtk:tree-cell-data-func} callback function to use}
   @begin{short}
     Sets the callback function to use for the tree view column.
   @end{short}
@@ -1303,7 +1307,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_clear_attributes"
                tree-view-column-clear-attributes) :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to clear the attribute
     mapping on}
@@ -1328,10 +1332,11 @@ lambda (column)    :run-last
 
 (cffi:defcfun ("gtk_tree_view_column_clicked" tree-view-column-clicked) :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2025-07-22}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{short}
-    Emits the @code{\"clicked\"} signal on the tree view column.
+    Emits the @sig[gtk:tree-view-column]{clicked} signal on the tree view
+    column.
   @end{short}
   This function will only work if the tree view column is clickable.
   @begin[Warning]{dictionary}
@@ -1350,11 +1355,11 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_get_button" tree-view-column-button)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-4-15}
+ "@version{#2025-07-22}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{return}
-    The @class{gtk:widget} object with the button for the tree view
-    column header.
+    The @class{gtk:widget} object for the button for the tree view column
+    header.
   @end{return}
   @begin{short}
     Returns the button used in the tree view column header.
@@ -1376,7 +1381,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_cell_set_cell_data"
                tree-view-column-cell-set-cell-data) :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[model]{a @class{gtk:tree-model} to to get the cell renderer's
     attributes from}
@@ -1419,7 +1424,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-cell-size (column)
  #+liber-documentation
- "@version{2025-4-15}
+ "@version{2025-04-15}
   @syntax{(gtk:tree-view-column-cell-size column) => xoffset, yoffset, width,
     height}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1464,7 +1469,7 @@ lambda (column)    :run-last
 
 (defun tree-view-column-cell-position (column renderer)
  #+liber-documentation
- "@version{#2025-4-15}
+ "@version{#2025-04-15}
   @syntax{(gtk:tree-view-column-cell-position column renderer) => offset, width}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
@@ -1495,7 +1500,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_cell_is_visible"
                tree-view-column-cell-is-visible) :boolean
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{return}
     @em{True}, if any of the cells packed into the tree view column are
@@ -1524,7 +1529,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_focus_cell" tree-view-column-focus-cell)
     :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @begin{short}
@@ -1549,7 +1554,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_queue_resize"
                tree-view-column-queue-resize) :void
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{short}
     Flags the tree view column, and the cell renderers added to this column, to
@@ -1571,7 +1576,7 @@ lambda (column)    :run-last
 (cffi:defcfun ("gtk_tree_view_column_get_tree_view" tree-view-column-tree-view)
     (g:object widget)
  #+liber-documentation
- "@version{#2024-3-8}
+ "@version{#2024-03-08}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @begin{return}
     The @class{gtk:tree-view} widget wherein the tree view column has been

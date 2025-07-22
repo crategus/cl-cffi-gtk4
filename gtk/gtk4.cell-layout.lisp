@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -76,7 +76,7 @@
 (setf (liber:alias-for-class 'cell-layout)
       "Interface"
       (documentation 'cell-layout 'type)
- "@version{2024-7-8}
+ "@version{2024-07-08}
   @begin{short}
     The @class{gtk:cell-layout} interface is an interface to be implemented by
     all objects which want to provide a @class{gtk:tree-view-column} object
@@ -151,7 +151,7 @@
 
 (defun cell-layout-pack-start (layout cell &key (expand t))
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-05-01}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if @arg{cell} is to be given extra space
@@ -185,7 +185,7 @@
 
 (defun cell-layout-pack-end (layout cell &key (expand t))
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2023-09-16}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if @arg{cell} is to be given extra space
@@ -214,7 +214,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_get_area" cell-layout-area)
     (g:object cell-area)
- "@version{#2023-9-16}
+ "@version{#2023-09-16}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @return{The @class{gtk:cell-area} object used by @arg{layout}.}
   @begin{short}
@@ -239,7 +239,7 @@
 (cffi:defcfun ("gtk_cell_layout_get_cells" cell-layout-cells)
     (g:list-t g:object)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-05-01}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @return{The list of @class{gtk:cell-renderer} objects.}
   @begin{short}
@@ -261,10 +261,10 @@
 
 (cffi:defcfun ("gtk_cell_layout_reorder" cell-layout-reorder) :void
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2025-07-22}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object to reorder}
-  @argument[position]{an integer with the new position to insert @arg{cell} at}
+  @argument[position]{an integer for the new position to insert @arg{cell} at}
   @begin{short}
     Reinserts @arg{cell} at the given position.
   @end{short}
@@ -288,7 +288,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_clear" cell-layout-clear) :void
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-05-01}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @begin{short}
     Unsets all the mappings on all renderers on @arg{layout} and removes
@@ -309,7 +309,7 @@
 
 (defun cell-layout-set-attributes (layout cell &rest attributes)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-05-01}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[attributes]{pairs of attributes}
@@ -337,11 +337,11 @@
 
 (cffi:defcfun ("gtk_cell_layout_add_attribute" cell-layout-add-attribute) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2025-07-22}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[attribute]{a string with an attribute on the renderer}
-  @argument[column]{an integer with the column position on the model to get the
+  @argument[attribute]{a string for an attribute on the renderer}
+  @argument[column]{an integer for the column position on the model to get the
     attribute from}
   @begin{short}
     Adds an attribute mapping to the list in @arg{layout}.
@@ -384,7 +384,7 @@
 (setf (liber:alias-for-symbol 'cell-layout-data-func)
       "Callback"
       (liber:symbol-documentation 'cell-layout-data-func)
- "@version{#2024-5-3}
+ "@version{#2024-05-03}
   @syntax{lambda (layout cell model iter)}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object whose value is to be set}
@@ -421,10 +421,10 @@
 
 (defun cell-layout-set-cell-data-func (layout cell func)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2025-07-22}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[func]{a @symbol{gtk:cell-layout-data-func} callback function to use,
+  @argument[func]{a @sym{gtk:cell-layout-data-func} callback function to use,
     or @code{nil}}
   @begin{short}
     Sets the callback function to use for @arg{layout}.
@@ -463,7 +463,7 @@
 (cffi:defcfun ("gtk_cell_layout_clear_attributes" cell-layout-clear-attributes)
      :void
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{#2023-09-16}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object to clear the attribute
     mapping on}

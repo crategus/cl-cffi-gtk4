@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tree-sortable.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -73,7 +73,7 @@
 
 (defconstant +tree-sortable-default-sort-column-id+ -1
  #+liber-documentation
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @variable-value{-1}
   @begin{short}
     The default sort column ID can be used to make a @class{gtk:tree-sortable}
@@ -95,7 +95,7 @@
 
 (defconstant +tree-sortable-unsorted-sort-column-id+ -2
  #+liber-documentation
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @variable-value{-2}
   @begin{short}
     The unsorted sort column ID can be used to make a @class{gtk:tree-sortable}
@@ -120,7 +120,7 @@
 (setf (liber:alias-for-class 'tree-sortable)
       "Interface"
       (documentation 'tree-sortable 'type)
- "@version{2024-5-9}
+ "@version{2024-05-09}
   @begin{short}
     The @class{gtk:tree-sortable} interface is an interface to be implemented by
     tree models which support sorting.
@@ -133,17 +133,18 @@
     @class{gtk:sort-list-model} implementation to wrap your list model instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"sort-column-changed\" signal}
+    @begin[tree-sortable::sort-column-changed]{signal}
       @begin{pre}
  lambda (sortable)    : Run Last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[sortable]{The @class{gtk:tree-sortable} object on which the
         signal is emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the sort column or sort order of @arg{sortable}
       is changed. The signal is emitted before the contents of @arg{sortable}
       are resorted.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-store}
@@ -220,10 +221,11 @@
 (cffi:defcfun ("gtk_tree_sortable_sort_column_changed"
                tree-sortable-sort-column-changed) :void
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
   @begin{short}
-    Emits a @code{\"sort-column-changed\"} signal on @arg{sortable}.
+    Emits a @sig[gtk:tree-sortable]{sort-column-changed} signal on
+    @arg{sortable}.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-sortable} implementation is deprecated since 4.10.
@@ -258,25 +260,25 @@
 
 (defun tree-sortable-sort-column-id (sortable)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @syntax{(gtk:tree-sortable-sort-column-id sortable) => column, order}
   @syntax{(setf (gtk:tree-sortable-sort-column-id sortable) column)}
   @syntax{(setf (gtk:tree-sortable-sort-column-id sortable) '(column order))}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
-  @argument[column]{an integer with the sort column ID}
-  @argument[order]{a value of the @symbol{gtk:sort-type} enumeration}
+  @argument[column]{an integer for the sort column ID}
+  @argument[order]{a value of the @sym{gtk:sort-type} enumeration}
   @begin{short}
     The @fun{gtk:tree-sortable-sort-column-id} function returns the current
     sort column ID and the sort order.
   @end{short}
   The @setf{gtk:tree-sortable-sort-column-id} function sets the sort column ID
   and the sort order. If no sort order is given, the sort order is set to the
-  default value @code{:ascending}.
+  default value @val[gtk:sort-type]{:ascending}.
 
   The sortable will resort itself to reflect this change, after emitting a
-  @code{\"sort-column-changed\"} signal. The @code{column} argument may either
-  be a regular column ID, or one of the following special values:
-  @var{gtk:+tree-sortable-default-sort-column-id+} or
+  @sig[gtk:tree-sortable]{sort-column-changed} signal. The @code{column}
+  argument may either be a regular column ID, or one of the following special
+  values: @var{gtk:+tree-sortable-default-sort-column-id+} or
   @var{gtk:+tree-sortable-unsorted-sort-column-id+}.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-sortable} implementation is deprecated since 4.10.
@@ -307,7 +309,7 @@
 (setf (liber:alias-for-symbol 'tree-iter-compare-func)
       "Callback"
       (liber:symbol-documentation 'tree-iter-compare-func)
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @syntax{lambda (model iter1 iter2) => result}
   @argument[model]{a @class{gtk:tree-model} object the comparison is within}
   @argument[iter1]{a @class{gtk:tree-iter} iterator in @arg{model}}
@@ -315,16 +317,16 @@
   @argument[result]{a negative integer, zero or a positive integer depending on
     whether @arg{iter1} sorts before, with or after @arg{iter2}}
   @begin{short}
-    The @symbol{gtk:tree-iter-compare-func} callback function should return a
+    The @sym{gtk:tree-iter-compare-func} callback function should return a
     negative integer, zero, or a positive integer if @arg{iter1} sorts before
     @arg{iter2}, @arg{iter1} sorts with @arg{iter2}, or @arg{iter1} sorts after
     @arg{iter2} respectively.
   @end{short}
   If two iterators compare as equal, their order in the sorted model is
   undefined. To ensure that the @class{gtk:tree-sortable} object behaves as
-  expected, the @symbol{gtk:tree-iter-compare-func} callback function must
-  define a partial order on the model, that is, it must be reflexive,
-  antisymmetric and transitive.
+  expected, the @sym{gtk:tree-iter-compare-func} callback function must define
+  a partial order on the model, that is, it must be reflexive, antisymmetric
+  and transitive.
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-sortable}
@@ -346,10 +348,10 @@
 
 (defun tree-sortable-set-sort-func (sortable column func)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
-  @argument[column]{an integer with the sort column ID to set the function for}
-  @argument[func]{a @symbol{gtk:tree-iter-compare-func} callback function}
+  @argument[column]{an integer for the sort column ID to set the function for}
+  @argument[func]{a @sym{gtk:tree-iter-compare-func} callback function}
   @begin{short}
     Sets the comparison function used when sorting to be @arg{func}.
   @end{short}
@@ -383,9 +385,9 @@
 
 (defun tree-sortable-set-default-sort-func (sortable func)
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2025-07-22}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
-  @argument[func]{a @symbol{gtk:tree-iter-compare-func} callback function}
+  @argument[func]{a @sym{gtk:tree-iter-compare-func} callback function}
   @begin{short}
     Sets the default comparison callback function used when sorting to be
     @arg{func}.
@@ -426,7 +428,7 @@
 (cffi:defcfun ("gtk_tree_sortable_has_default_sort_func"
                tree-sortable-has-default-sort-func) :boolean
  #+liber-documentation
- "@version{#2024-5-9}
+ "@version{#2024-05-09}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
   @return{@em{True}, if the model has a default sort function.}
   @begin{short}

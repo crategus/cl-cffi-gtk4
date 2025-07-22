@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.cell-view.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -116,7 +116,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-view 'type)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @begin{short}
     The @class{gtk:cell-view} widget displays a single row of a
     @class{gtk:tree-model} object using a @class{gtk:cell-area} object and
@@ -176,7 +176,7 @@
 (setf (liber:alias-for-function 'cell-view-cell-area)
       "Accessor"
       (documentation 'cell-view-cell-area 'function)
- "@version{2024-7-8}
+ "@version{2024-07-08}
   @syntax{(gtk:cell-view-cell-area object) => area}
   @syntax{(setf (gtk:cell-view-cell-area object) area)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -216,7 +216,7 @@
 (setf (liber:alias-for-function 'cell-view-cell-area-context)
       "Accessor"
       (documentation 'cell-view-cell-area-context 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:cell-view-cell-area-context object) => context}
   @syntax{(setf (gtk:cell-view-cell-area-context object) context)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -254,7 +254,7 @@
 (setf (liber:alias-for-function 'cell-view-draw-sensitive)
       "Accessor"
       (documentation 'cell-view-draw-sensitive 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:cell-view-draw-sensitive object) => setting}
   @syntax{(setf (gtk:cell-view-draw-sensitive object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -291,7 +291,7 @@
 (setf (liber:alias-for-function 'cell-view-fit-model)
       "Accessor"
       (documentation 'cell-view-fit-model 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:cell-view-fit-model object) => setting}
   @syntax{(setf (gtk:cell-view-fit-model object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -326,7 +326,7 @@
 (setf (liber:alias-for-function 'cell-view-model)
       "Accessor"
       (documentation 'cell-view-model 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:cell-view-model object) => model}
   @syntax{(setf (gtk:cell-view-model object) model)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -355,7 +355,7 @@
 
 (defun cell-view-new ()
  #+liber-documentation
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @return{The new @class{gtk:cell-view} widget.}
   @begin{short}
     Creates a new cell view.
@@ -377,7 +377,7 @@
 
 (defun cell-view-new-with-context (area context)
  #+liber-documentation
- "@version{2024-7-8}
+ "@version{2024-07-08}
   @argument[area]{a @class{gtk:cell-area} object to layout cells}
   @argument[context]{a @class{gtk:cell-area-context} object in which to
     calculate cell geometry}
@@ -409,8 +409,8 @@
 (cffi:defcfun ("gtk_cell_view_new_with_text" cell-view-new-with-text)
     (g:object cell-view)
  #+liber-documentation
- "@version{2024-5-20}
-  @argument[text]{a string with the text to display in the cell view}
+ "@version{2025-07-22}
+  @argument[text]{a string for the text to display in the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
   @begin{short}
     Creates a new cell view, adds a @class{gtk:cell-renderer-text} object to it,
@@ -433,8 +433,8 @@
 (cffi:defcfun ("gtk_cell_view_new_with_markup" cell-view-new-with-markup)
     (g:object cell-view)
  #+liber-documentation
- "@version{2024-5-20}
-  @argument[markup]{a string with the text to display in the cell view}
+ "@version{2025-07-22}
+  @argument[markup]{a string for the text to display in the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
   @begin{short}
     Creates a new cell view, adds a @class{gtk:cell-renderer-text} object to it,
@@ -458,8 +458,8 @@
 (cffi:defcfun ("gtk_cell_view_new_with_texture" cell-view-new-with-texture)
     (g:object cell-view)
   #+liber-documentation
- "@version{2024-5-20}
-  @argument[texture]{a @class{gdk:texture} object with the image to display in
+ "@version{2025-07-22}
+  @argument[texture]{a @class{gdk:texture} object for the image to display in
     the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
   @begin{short}
@@ -492,7 +492,7 @@
 (cffi:defcfun ("gtk_cell_view_get_display_row" cell-view-displayed-row)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-5-20}
+ "@version{#2024-05-20}
   @syntax{(gtk:cell-view-display-row cellview) => path}
   @syntax{(setf (gtk:cell-view-display-row cellview) path)}
   @argument[cellview]{a @class{gtk:cell-view} widget}
