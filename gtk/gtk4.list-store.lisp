@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.list-store.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-store 'type)
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:list-store} object is a list model for use with a
     @class{gtk:tree-view} widget.
@@ -114,15 +114,16 @@
   object will keep a reference to the object instead of copying the value. As a
   result, if the object is modified, it is up to the application writer to call
   the @fun{gtk:tree-model-row-changed} function to emit the
-  @code{\"row-changed\"} signal. This most commonly affects lists with
-  @class{gdk:texture} objects stored.
+  @sig[gtk:tree-model]{row-changed} signal. This most commonly affects lists
+  with @class{gdk:texture} objects stored.
 
   @subheading{Performance Considerations}
     Internally, the @class{gtk:list-store} object was implemented with a linked
     list with a tail pointer prior to GTK 2.6. As a result, it was fast at
     data insertion and deletion, and not fast at random data access. The
-    @class{gtk:list-store} object sets the @code{:iters-persist} flag of the
-    @symbol{gtk:tree-model-flags} flags, which means that @class{gtk:tree-iter}
+    @class{gtk:list-store} object sets the
+    @val[gtk:tree-model-flags]{:iters-persist} flag of the
+    @sym{gtk:tree-model-flags} flags, which means that @class{gtk:tree-iter}
     iterators can be cached while the row exists. Thus, if access to a
     particular row is needed often and your code is expected to run on older
     versions of GTK, it is worth keeping the iterator around.
@@ -134,17 +135,17 @@
     operation with regard to the @class{gtk:tree-model} interface signaling. In
     contrast, using, for example, the @fun{gtk:list-store-append} function and
     then the @fun{gtk:list-store-set} function will first create a row, which
-    triggers the @code{\"row-inserted\"} signal on the @class{gtk:list-store}
-    object. The row, however, is still empty, and any signal handler connecting
-    to the @code{\"row-inserted\"} signal on this particular store should be
-    prepared for the situation that the row might be empty. This is especially
-    important if you are wrapping the @class{gtk:list-store} object inside a
-    @class{gtk:tree-model-filter} object and are using a
-    @symbol{gtk:tree-model-filter-visible-func} callback function. Using any of
-    the non-atomic operations to append rows to the @class{gtk:list-store}
-    object will cause the @symbol{gtk:tree-model-filter-visible-func} callback
-    function to be visited with an empty row first. The function must be
-    prepared for that.
+    triggers the @sig[gtk:tree-model]{row-inserted} signal on the
+    @class{gtk:list-store} object. The row, however, is still empty, and any
+    signal handler connecting to the @sig[gtk:tree-model]{row-inserted} signal
+    on this particular store should be prepared for the situation that the row
+    might be empty. This is especially important if you are wrapping the
+    @class{gtk:list-store} object inside a @class{gtk:tree-model-filter} object
+    and are using a @sym{gtk:tree-model-filter-visible-func} callback function.
+    Using any of the non-atomic operations to append rows to the
+    @class{gtk:list-store} object will cause the
+    @sym{gtk:tree-model-filter-visible-func} callback function to be visited
+    with an empty row first. The function must be prepared for that.
   @begin[Examples]{dictionary}
     Creating a simple list store.
     @begin{pre}
@@ -246,7 +247,7 @@
 
 (defun list-store-new (&rest column-types)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @argument[column-types]{@class{g:type-t} type IDs for the columns, from first
     to last}
   @return{The new @class{gtk:list-store} object.}
@@ -296,7 +297,7 @@
 
 (defun list-store-set-column-types (store &rest column-types)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[store]{a @class{gtk:list-store} object}
   @argument[column-types]{@class{g:type-t} type IDs of the columns}
   @begin{short}
@@ -347,7 +348,7 @@
 
 (defun list-store-set (model iter &rest values)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a @class{gtk:tree-iter} row iterator}
   @argument[values]{values to set}
@@ -421,11 +422,11 @@
 
 (defun list-store-set-value (model iter column value)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator for the row being
     modified}
-  @argument[column]{an integer with the column number to modify}
+  @argument[column]{an integer for the column number to modify}
   @argument[value]{a new value for the cell}
   @begin{short}
     Sets the data in the cell specified by @arg{iter} and @arg{column}.
@@ -454,7 +455,7 @@
 
 (cffi:defcfun ("gtk_list_store_remove" list-store-remove) :boolean
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator}
   @return{@em{True} if @arg{iter} is valid, @code{nil} if not.}
@@ -486,10 +487,10 @@
 
 (defun list-store-insert (model pos)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
-  @argument[pos]{an integer with the position to insert the new row}
-  @return{The @class{gtk:tree-iter} iterator of the new row.}
+  @argument[pos]{an integer for the position to insert the new row}
+  @return{The @class{gtk:tree-iter} iterator for the new row.}
   @begin{short}
     Creates a new row at @arg{pos}.
   @end{short}
@@ -523,10 +524,10 @@
 
 (defun list-store-insert-before (model sibling)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[sibling]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
-  @return{The @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator for the new row.}
   @begin{short}
     Inserts a new row before @arg{sibling}.
   @end{short}
@@ -559,10 +560,10 @@
 
 (defun list-store-insert-after (model sibling)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[sibling]{a valid @class{gtk:tree-iter}, or @code{nil}}
-  @return{The @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator for the new row.}
   @begin{short}
     Inserts a new row after @arg{sibling}.
   @end{short}
@@ -606,12 +607,12 @@
 
 (defun list-store-insert-with-values (model pos &rest values)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
-  @argument[pos]{an integer with the position to insert the new row,
+  @argument[pos]{an integer for the position to insert the new row,
     or -1 to append after existing rows}
   @argument[values]{values to store in @arg{model}}
-  @return{The @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator for the new row.}
   @begin{short}
     Creates a new row at @arg{pos}.
   @end{short}
@@ -626,13 +627,14 @@
    (gtk:list-store-set model iter  ...)
  )
   @end{pre}
-  with the difference that the former will only emit a @code{\"row-inserted\"}
-  signal, while the latter will emit @code{\"row-inserted\"},
-  @code{\"row-changed\"} and, if the list store is sorted,
-  @code{\"rows-reordered\"} signals. Since emitting the
-  @code{\"rows-reordered\"} signal repeatedly can affect the performance of the
-  program, the @fun{gtk:list-store-insert-with-values} function should generally
-  be preferred when inserting rows in a sorted list store.
+  with the difference that the former will only emit a
+  @sig[gtk:tree-model]{row-inserted} signal, while the latter will emit
+  @sig[gtk:tree-model]{row-inserted}, @sig[gtk:tree-model]{row-changed} and, if
+  the list store is sorted, @sig[gtk:tree-model]{rows-reordered} signals. Since
+  emitting the @sig[gtk:tree-model]{rows-reordered} signal repeatedly can affect
+  the performance of the program, the @fun{gtk:list-store-insert-with-values}
+  function should generally be preferred when inserting rows in a sorted list
+  store.
   @begin[Warning]{dictionary}
     The @class{gtk:list-store} implementation is deprecated since 4.10.
     Use the @class{g:list-store} object instead.
@@ -674,9 +676,9 @@
 
 (defun list-store-prepend (model)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
-  @return{The @class{gtk:tree-iter} iterator to the prepended row.}
+  @return{The @class{gtk:tree-iter} iterator for the prepended row.}
   @begin{short}
     Prepends a new row to @arg{model}.
   @end{short}
@@ -707,9 +709,9 @@
 
 (defun list-store-append (model)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:list-store} object}
-  @return{The @class{gtk:tree-iter} iterator to the appended row.}
+  @return{The @class{gtk:tree-iter} iterator for the appended row.}
   @begin{short}
     Appends a new row to the list store.
   @end{short}
@@ -736,7 +738,7 @@
 
 (cffi:defcfun ("gtk_list_store_clear" list-store-clear) :void
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @short{Removes all rows from the list store.}
   @begin[Warning]{dictionary}
@@ -754,7 +756,7 @@
 
 (cffi:defcfun ("gtk_list_store_iter_is_valid" list-store-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @return{@em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is
@@ -787,7 +789,7 @@
 
 (defun list-store-reorder (model order)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[order]{a list of integer mapping the new position of each row
     to its old position before the re-ordering}
@@ -815,7 +817,7 @@
 
 (cffi:defcfun ("gtk_list_store_swap" list-store-swap) :void
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[a]{a @class{gtk:tree-iter} iterator}
   @argument[b]{a @class{gtk:tree-iter} iterator}
@@ -841,7 +843,7 @@
 
 (cffi:defcfun ("gtk_list_store_move_before" list-store-move-before) :void
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @argument[pos]{a @class{gtk:tree-iter} iterator, or @code{nil}}
@@ -869,7 +871,7 @@
 
 (cffi:defcfun ("gtk_list_store_move_after" list-store-move-after) :void
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @argument[pos]{a @class{gtk:tree-iter} iterator or @code{nil}}

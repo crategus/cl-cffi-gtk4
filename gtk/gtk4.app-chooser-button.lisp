@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.app-chooser-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -115,7 +115,7 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-button 'type)
- "@version{2024-5-21}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:app-chooser-button} widget is a widget that lets the user
     select an application.
@@ -138,11 +138,11 @@
 
   It is possible to add custom items to the list, using the
   @fun{gtk:app-chooser-button-append-custom-item} function. These items cause
-  the @code{\"custom-item-activated\"} signal to be emitted when they are
-  selected.
+  the @sig[gtk:app-chooser-button]{custom-item-activated} signal to be emitted
+  when they are selected.
 
-  To track changes in the selected application, use the @code{\"changed\"}
-  signal.
+  To track changes in the selected application, use the
+  @sig[gtk:app-chooser-button]{changed} signal.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:app-chooser-button} implementation has a single CSS node
     with the name @code{appchooserbutton}.
@@ -153,38 +153,41 @@
     design of each platform and/or application requiring them.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[app-chooser-button:activate]{signal}
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:app-chooser-button} widget which received
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:app-chooser-button} widget that received
           the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted to when the button is activated. The signal is an action signal
       and emitting it causes the button to pop up its dialog.
-    @subheading{The \"changed\" signal}
+    @end{signal}
+    @begin[app-chooser-button::changed]{signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:app-chooser-button} widget which received
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:app-chooser-button} widget that received
           the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when the active application on the @class{gtk:app-chooser-button}
       widget changes.
-    @subheading{The \"custom-item-activated\" signal}
+    @end{signal}
+    @begin[app-chooser-button::custom-item-activated]{signal}
       @begin{pre}
 lambda (button item)    :has-details
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:app-chooser-button} widget which received
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:app-chooser-button} widget that received
           the signal.}
-        @entry[item]{The string with the name of the activated item.}
-      @end{table}
+        @entry[item]{The string for the name of the activated item.}
+      @end{simple-table}
       Emitted when a custom item, previously added with the
       @fun{gtk:app-chooser-button-append-custom-item} function, is activated
       from the dropdown menu.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:app-chooser-button-new}
   @see-slot{gtk:app-chooser-button-heading}
@@ -211,7 +214,7 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-heading)
       "Accessor"
       (documentation 'app-chooser-button-heading 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-button-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-button-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -242,7 +245,7 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-modal)
       "Accessor"
       (documentation 'app-chooser-button-modal 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-button-modal object) => setting}
   @syntax{(setf (gtk:app-chooser-button-modal object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -274,7 +277,7 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-default-item)
       "Accessor"
       (documentation 'app-chooser-button-show-default-item 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-button-show-default-item object) => setting}
   @syntax{(setf (gtk:app-chooser-button-show-default-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -309,7 +312,7 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-dialog-item)
       "Accessor"
       (documentation 'app-chooser-button-show-dialog-item 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-button-show-dialog-item object) => setting}
   @syntax{(setf (gtk:app-chooser-button-show-dialog-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -334,8 +337,8 @@ lambda (button item)    :has-details
 
 (defun app-chooser-button-new (content-type)
  #+liber-documentation
- "@version{2023-8-29}
-  @argument[content-type]{a string with the content type to show applications
+ "@version{2025-07-17}
+  @argument[content-type]{a string for the content type to show applications
     for}
   @return{The newly created @class{gtk:app-chooser-button} widget.}
   @begin{short}
@@ -358,19 +361,19 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_append_custom_item"
                app-chooser-button-append-custom-item) :void
  #+liber-documentation
- "@version{#2024-2-22}
+ "@version{#2025-07-27}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
-  @argument[name]{a string with the name of the custom item}
-  @argument[label]{a string with the label for the custom item}
-  @argument[icon]{a @class{g:icon} instance with the icon for the custom item}
+  @argument[name]{a string for the name of the custom item}
+  @argument[label]{a string for the label for the custom item}
+  @argument[icon]{a @class{g:icon} instance for the icon for the custom item}
   @begin{short}
     Appends a custom item to the list of applications that is shown in the
     popup.
   @end{short}
   The item name must be unique per-widget. Clients can use the provided name as
-  a detail for the @code{\"custom-item-activated\"} signal, to add a callback
-  for the activation of a particular custom item in the list. See also the
-  @fun{gtk:app-chooser-button-append-separator} function.
+  a detail for the @sig[gtk:app-chooser-button]{custom-item-activated} signal,
+  to add a callback for the activation of a particular custom item in the list.
+  See also the @fun{gtk:app-chooser-button-append-separator} function.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -391,7 +394,7 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_append_separator"
                app-chooser-button-append-separator) :void
  #+liber-documentation
- "@version{#2024-2-22}
+ "@version{#2024-02-22}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
   @begin{short}
     Appends a separator to the list of applications that is shown in the popup.
@@ -411,9 +414,9 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_set_active_custom_item"
                app-chooser-button-set-active-custom-item) :void
  #+liber-documentation
- "@version{#2024-2-22}
+ "@version{#2025-07-17}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
-  @argument[name]{a string with the name of the custom item}
+  @argument[name]{a string for the name of the custom item}
   @begin{short}
     Selects a custom item previously added with the
     @fun{gtk:app-chooser-button-append-custom-item} function.

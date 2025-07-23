@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.combo-box.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -166,7 +166,7 @@
 
 #+liber-documentation
 (setf (documentation 'combo-box 'type)
- "@version{2024-4-7}
+ "@version{2025-07-21}
   @begin{short}
     The @class{gtk:combo-box} widget allows the user to choose from a list of
     valid choices.
@@ -226,48 +226,51 @@
     @code{arrow}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:combo-box} implementation uses the @code{:combo-box} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:combo-box} implementation uses the
+    @val[gtk:accessible-role]{:combo-box} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[combo-box::activate]{signal}
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       Emitted to when the combo box is activated. The signal is an action signal
       and emitting it causes the combo box to pop up its dropdown. Since 4.6
-    @subheading{The \"changed\" signal}
+    @end{signal}
+    @begin[combo-box::changed]{signal}
       @begin{pre}
 lambda (combo)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the active item is changed. The can be due to
       the user selecting a different item from the list, or due to a call to
       the @fun{gtk:combo-box-active-iter} function. It will also be emitted
       while typing into the text entry of a combo box with an entry.
-    @subheading{The \"format-entry-text\" signal}
+    @end{signal}
+    @begin[combo-box::format-entry-text]{signal}
       @begin{pre}
 lambda (combo pathstr)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
         @entry[pathstr]{The string representing the @class{gtk:tree-path}
           instance from the combo box's current model to format text for.}
         @entry[Returns]{The string representing the value at @argp{pathstr} for
           the current @class{gtk:combo-box} model.}
-      @end{table}
+      @end{simple-table}
       A signal which allows you to change how the text displayed in a entry of
       the combo box is displayed. Connect a signal handler which returns an
       allocated string representing @arg{path}. That string will then be used
@@ -284,37 +287,41 @@ lambda (combo pathstr)    :run-last
          (value (gtk:tree-model-value model iter col-value)))
     (format nil \"~a\" value)))
       @end{pre}
-    @subheading{The \"move-active\" signal}
+    @end{signal}
+    @begin[combo-box::move-active]{signal}
       @begin{pre}
 lambda (combo scroll)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
-        @entry[scroll]{The value of the @symbol{gtk:scroll-type} enumeration.}
-      @end{table}
+        @entry[scroll]{The value of the @sym{gtk:scroll-type} enumeration.}
+      @end{simple-table}
       A keybinding signal which gets emitted to move the active selection.
-    @subheading{The \"popdown\" signal}
+    @end{signal}
+    @begin[combo-box::popdown]{signal}
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       A keybinding signal which gets emitted to popdown the combo box list. The
       default bindings for this signal are the @kbd{Alt+Up} and @kbd{Escape}
       keys.
-    @subheading{The \"popup\" signal}
+    @end{signal}
+    @begin[combo-box::popup]{signal}
       @begin{pre}
 lambda (combo)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       A keybinding signal which gets emitted to popup the combo box list. The
       default binding for this signal is the @kbd{Alt+Down} key.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:combo-box-new}
   @see-constructor{gtk:combo-box-new-with-entry}
@@ -356,11 +363,11 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-active)
       "Accessor"
       (documentation 'combo-box-active 'function)
- "@version{2024-4-26}
+ "@version{2025-07-17}
   @syntax{(gtk:combo-box-active object) => index}
   @syntax{(setf (gtk:combo-box-active object) index)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[index]{an integer with the index in the model passed during
+  @argument[index]{an integer for the index in the model passed during
     construction, or -1 to have no active item}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{active} slot of the
@@ -394,11 +401,11 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-active-id)
       "Accessor"
       (documentation 'combo-box-active-id 'function)
- "@version{2024-4-26}
+ "@version{2025-07-23}
   @syntax{(gtk:combo-box-active-id object) => id}
   @syntax{(setf (gtk:combo-box-active-id object) id)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[id]{a string with the ID of the row to select, or @code{nil}}
+  @argument[id]{a string for the ID of the row to select, or @code{nil}}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{active-id} slot of the
     @class{gtk:combo-box} class.
@@ -427,21 +434,20 @@ lambda (combo)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "button-sensitivity"
                                                'combo-box) t)
- "The @code{button-sensitivity} property of type @symbol{gtk:sensitivity-type}
+ "The @code{button-sensitivity} property of type @sym{gtk:sensitivity-type}
   (Read / Write) @br{}
   Whether the dropdown button is sensitive when the model is empty. @br{}
-  Default value: @code{:auto}")
+  Default value: @val[gtk:sensitivity-type]{:auto}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'combo-box-button-sensitivity)
       "Accessor"
       (documentation 'combo-box-button-sensitivity 'function)
- "@version{2024-4-26}
+ "@version{2025-07-23}
   @syntax{(gtk:combo-box-button-sensitivity object) => sensitivity}
   @syntax{(setf (gtk:combo-box-button-sensitivity object) sensitivity)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[sensitivity]{a value of the @symbol{gtk:sensitivity-type}
-    enumeration}
+  @argument[sensitivity]{a value of the @sym{gtk:sensitivity-type} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{button-sensitivity} slot of the
     @class{gtk:combo-box} class.
@@ -451,10 +457,10 @@ lambda (combo)    :action
   model. The @setf{gtk:combo-box-button-sensitivity} function sets the
   sensitivity.
 
-  The @code{:on} value if the dropdown button is sensitive when the model is
-  empty, the @code{:off} value if the button is always insensitive or the
-  @code{:auto} value if it is only sensitive as long as the model has one item
-  to be selected.
+  The @val[gtk:sensitivity-type]{:on} value if the dropdown button is sensitive
+  when the model is empty, the @val[gtk:sensitivity-type]{:off} value if the
+  button is always insensitive or the @val[gtk:sensitivity-type]{:auto} value
+  if it is only sensitive as long as the model has one item to be selected.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -474,7 +480,7 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-child)
       "Accessor"
       (documentation 'combo-box-child 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:combo-box-child object) => child}
   @syntax{(setf (gtk:combo-box-child object) child)}
   @argument[object]{a @class{gtk:combo-box} widget}
@@ -509,11 +515,11 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-entry-text-column)
       "Accessor"
       (documentation 'combo-box-entry-text-column 'function)
- "@version{2024-4-26}
+ "@version{2025-07-19}
   @syntax{(gtk:combo-box-entry-text-column object) => column}
   @syntax{(setf (gtk:combo-box-entry-text-column object) column)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[column]{an integer with a column in the model to get the strings
+  @argument[column]{an integer for a column in the model to get the strings
     from for the internal entry}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{entry-text-column} slot of the
@@ -547,7 +553,7 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-has-entry)
       "Accessor"
       (documentation 'combo-box-has-entry 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:combo-box-has-entry object) => setting}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[setting]{a boolean whether the combo box has an entry}
@@ -576,7 +582,7 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-has-frame)
       "Accessor"
       (documentation 'combo-box-has-frame 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:combo-box-has-frame object) => setting}
   @syntax{(setf (gtk:combo-box-has-frame object) setting)}
   @argument[object]{a @class{gtk:combo-box} widget}
@@ -607,11 +613,11 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-id-column)
       "Accessor"
       (documentation 'combo-box-id-column 'function)
- "@version{2024-4-26}
+ "@version{2025-07-19}
   @syntax{(gtk:combo-box-id-column object) => column}
   @syntax{(setf (gtk:combo-box-id-column object) column)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[column]{an integer with a column in the model to get string IDs for
+  @argument[column]{an integer for a column in the model to get string IDs for
     values from}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{id-column} slot of the
@@ -641,7 +647,7 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-model)
       "Accessor"
       (documentation 'combo-box-model 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:combo-box-model object) => model}
   @syntax{(setf (gtk:combo-box-model object) model)}
   @argument[object]{a @class{gtk:combo-box} widget}
@@ -681,7 +687,7 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-popup-fixed-width)
       "Accessor"
       (documentation 'combo-box-popup-fixed-width 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:combo-box-popup-fixed-width object) => fixed}
   @syntax{(setf (gtk:combo-box-popup-fixed-width object) fixed)}
   @argument[object]{a @class{gtk:combo-box} widget}
@@ -708,14 +714,14 @@ lambda (combo)    :action
  "The @code{popup-shown} property of type @code{:boolean} (Read) @br{}
   Whether the combo boxes dropdown is popped up. Note that this property is
   mainly useful, because it allows you to connect to the
-  @code{\"notify::popup-shown\"} signal. @br{}
+  @sig[g:object]{notify::popup-shown} signal. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'combo-box-popup-shown)
       "Accessor"
       (documentation 'combo-box-popup-shown 'function)
- "@version{2024-4-26}
+ "@version{2025-07-21}
   @syntax{(gtk:combo-box-popup-shown object) => setting}
   @syntax{(setf (gtk:combo-box-popup-shown object) setting)}
   @argument[object]{a @class{gtk:combo-box} widget}
@@ -726,7 +732,7 @@ lambda (combo)    :action
   @end{short}
   Whether the combo boxes dropdown is popped up. Note that this property is
   mainly useful, because it allows you to connect to the
-  @code{\"notify::popup-shown\"} signal.
+  @sig[g:object]{notify::popup-shown} signal.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -742,7 +748,7 @@ lambda (combo)    :action
 
 (defun combo-box-new ()
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @return{The new @class{gtk:combo-box} widget.}
   @short{Creates a new empty combo box.}
   @begin[Warning]{dictionary}
@@ -763,7 +769,7 @@ lambda (combo)    :action
 
 (defun combo-box-new-with-entry ()
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @return{The new @class{gtk:combo-box} widget.}
   @short{Creates a new empty combo box with an entry.}
   @begin[Warning]{dictionary}
@@ -785,7 +791,7 @@ lambda (combo)    :action
 
 (defun combo-box-new-with-model (model)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @argument[model]{a @class{gtk:tree-model} object}
   @return{The new @class{gtk:combo-box} widget.}
   @begin{short}
@@ -811,7 +817,7 @@ lambda (combo)    :action
 
 (defun combo-box-new-with-model-and-entry (model)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2024-04-07}
   @argument[model]{a @class{gtk:tree-model} object}
   @return{The new @class{gtk:combo-box} widget.}
   @begin{short}
@@ -850,7 +856,7 @@ lambda (combo)    :action
 
 (defun combo-box-active-iter (combo)
  #+liber-documentation
- "@version{#2024-4-26}
+ "@version{#2024-04-26}
   @syntax{(gtk:combo-box-active-iter combo) => iter}
   @syntax{(setf (gtk:combo-box-active-iter combo) iter)}
   @argument[combo]{a @class{gtk:combo-box} widget}
@@ -886,7 +892,7 @@ lambda (combo)    :action
 
 (defun combo-box-popup (combo)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @begin{short}
     Pops up the menu or dropdown list of the combo box.
@@ -916,7 +922,7 @@ lambda (combo)    :action
 
 (defun combo-box-popup-for-device (combo device)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[device]{a @class{gdk:device} object}
   @begin{short}
@@ -947,7 +953,7 @@ lambda (combo)    :action
 
 (defun combo-box-popdown (combo)
  #+liber-documentation
- "@version{#2024-4-7}
+ "@version{#2024-04-07}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @begin{short}
     Hides the menu or dropdown list of the combo box.
@@ -981,9 +987,9 @@ lambda (combo)    :action
 
 (defun combo-box-set-row-separator-func (combo func)
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[combo]{a @class{gtk:combo-box} widget}
-  @argument[func]{a @symbol{gtk:tree-view-row-separator-func} callback function}
+  @argument[func]{a @sym{gtk:tree-view-row-separator-func} callback function}
   @begin{short}
     Sets the row separator function, which is used to determine whether a row
     should be drawn as a separator.

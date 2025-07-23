@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.combo-box-text.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,7 +90,7 @@
 
 #+liber-documentation
 (setf (documentation 'combo-box-text 'type)
- "@version{2024-4-6}
+ "@version{2024-04-06}
   @begin{short}
     The @class{gtk:combo-box-text} widget is a simple variant of the
     @class{gtk:combo-box} widget that hides the model-view complexity for
@@ -163,7 +163,7 @@
 
 (defun combo-box-text-new ()
  #+liber-documentation
- "@version{2024-4-6}
+ "@version{2024-04-06}
   @return{The new @class{gtk:combo-box-text} widget.}
   @begin{short}
     Creates a new combo box text widget, which is a @class{gtk:combo-box}
@@ -188,7 +188,7 @@
 
 (defun combo-box-text-new-with-entry ()
  #+liber-documentation
- "@version{2024-4-6}
+ "@version{2024-04-06}
   @return{The new @class{gtk:combo-box-text} widget.}
   @begin{short}
     Creates a new combo box text widget, which is a @class{gtk:combo-box}
@@ -218,10 +218,10 @@
 
 (defun combo-box-text-append (combo id text)
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2025-07-23}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @argument[id]{a string ID for this value, or @code{nil}}
-  @argument[text]{a string with the text}
+  @argument[text]{a string for the text}
   @begin{short}
     Appends @arg{text} to the list of strings stored in the combo box.
   @end{short}
@@ -253,10 +253,10 @@
 
 (defun combo-box-text-prepend (combo id text)
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2025-07-23}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[id]{a string ID for this value, or @code{nil}}
-  @argument[text]{a string with the text}
+  @argument[text]{a string for the text}
   @begin{short}
     Prepends @arg{text} to the list of strings stored in the combo box.
   @end{short}
@@ -288,11 +288,11 @@
 
 (defun combo-box-text-insert (combo pos id text)
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2025-07-23}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
-  @argument[pos]{an integer with an index to insert text}
+  @argument[pos]{an integer for an index to insert text}
   @argument[id]{a string ID for this value, or @code{nil}}
-  @argument[text]{a string with the text}
+  @argument[text]{a string for the text}
   @begin{short}
     Inserts @arg{text} at the given position in the list of strings stored in
     the combo box.
@@ -321,9 +321,9 @@
 (cffi:defcfun ("gtk_combo_box_text_append_text" combo-box-text-append-text)
     :void
  #+liber-documentation
- "@version{2024-4-6}
+ "@version{2025-07-23}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
-  @argument[text]{a string with the text}
+  @argument[text]{a string for the text}
   @begin{short}
     Appends @arg{text} to the list of strings stored in the combo box.
   @end{short}
@@ -349,9 +349,9 @@
 (cffi:defcfun ("gtk_combo_box_text_prepend_text" combo-box-text-prepend-text)
     :void
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2025-07-23}
   @argument[combo]{a @class{gtk:combo-box} widget}
-  @argument[text]{a string with the text}
+  @argument[text]{a string for the text}
   @begin{short}
     Prepends @arg{text} to the list of strings stored in the combo box.
   @end{short}
@@ -377,10 +377,10 @@
 (cffi:defcfun ("gtk_combo_box_text_insert_text" combo-box-text-insert-text)
     :void
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2025-07-23}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
-  @argument[pos]{an integer with an index to insert text}
-  @argument[text]{a string with the text}
+  @argument[pos]{an integer for an index to insert text}
+  @argument[text]{a string for the text}
   @begin{short}
     Inserts @arg{text} at the given position in the list of strings stored in
     the combo box.
@@ -407,9 +407,9 @@
 
 (cffi:defcfun ("gtk_combo_box_text_remove" combo-box-text-remove) :void
  #+liber-documentation
- "@version{2024-4-7}
+ "@version{2025-07-23}
   @argument[combo]{a @class{gtk:combo-box} widget}
-  @argument[pos]{an integer with index of the item to remove}
+  @argument[pos]{an integer for index of the item to remove}
   @begin{short}
     Removes the string at @arg{pos} from the combo box.
   @end{short}
@@ -431,7 +431,7 @@
 
 (cffi:defcfun ("gtk_combo_box_text_remove_all" combo-box-text-remove-all) :void
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{#2024-04-06}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @begin{short}
     Removes all the text entries from the combo box.
@@ -454,7 +454,7 @@
 (cffi:defcfun ("gtk_combo_box_text_get_active_text"
                combo-box-text-active-text) :string
  #+liber-documentation
- "@version{2024-4-6}
+ "@version{2024-04-06}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @return{The string containing the currently active text.}
   @begin{short}

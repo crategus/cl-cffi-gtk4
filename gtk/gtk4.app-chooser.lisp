@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.app-chooser.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -71,7 +71,7 @@
 (setf (liber:alias-for-class 'app-chooser)
       "Interface"
       (documentation 'app-chooser 'type)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @begin{short}
     The @class{gtk:app-chooser} interface is an interface that can be
     implemented by widgets which allow the user to choose an application,
@@ -123,10 +123,10 @@
 (setf (liber:alias-for-function 'app-chooser-content-type)
       "Accessor"
       (documentation 'app-chooser-content-type 'function)
- "@version{2024-4-26}
+ "@version{2025-07-23}
   @syntax{(gtk:app-chooser-content-type object) => content-type}
   @argument[object]{a @class{gtk:app-chooser} object}
-  @argument[content-type]{a string with the content type}
+  @argument[content-type]{a string for the content type}
   @begin{short}
     Accessor of the @slot[gtk:app-chooser]{content-type} slot of the
     @class{gtk:app-chooser} interface.
@@ -145,7 +145,7 @@
 (cffi:defcfun ("gtk_app_chooser_get_app_info" app-chooser-app-info)
     (g:object g-app-info)
  #+liber-documentation
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @argument[object]{a @class{gtk:app-chooser} object}
   @begin{return}
     The @class{g:app-info} object for the currently selected application, or
@@ -169,7 +169,7 @@
 
 (cffi:defcfun ("gtk_app_chooser_refresh" app-chooser-refresh) :void
  #+liber-documentation
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @argument[object]{a @class{gtk:app-chooser} object}
   @short{Reloads the list of applications.}
   @begin[Warning]{dictionary}

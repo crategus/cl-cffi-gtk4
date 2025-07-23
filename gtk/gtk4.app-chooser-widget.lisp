@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.app-chooser-widget.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-widget 'type)
- "@version{2024-2-22}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:app-chooser-widget} widget is a widget for selecting
     applications.
@@ -142,7 +142,8 @@
   groups of applications.
 
   To keep track of the selected application, use the
-  @code{\"application-selected\"} and @code{\"application-activated\"} signals.
+  @sig[gtk:app-chooser-widget]{application-selected} and
+  @sig[gtk:app-chooser-widget]{application-activated} signals.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:app-chooser-widget} implementation has a single CSS node with
     name @code{appchooser}.
@@ -153,29 +154,31 @@
     design of each platform and/or application requiring them.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"application-activated\" signal}
+    @begin[app-chooser-widget::application-activated]{signal}
       @begin{pre}
 lambda (widget application)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:app-chooser-widget} widget which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:app-chooser-widget} widget that received
           the signal.}
         @entry[application]{The activated @class{g:app-info} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when an application item is activated from the list of the widget.
       This usually happens when the user double clicks an item, or an item is
       selected and the user presses one of the @kbd{Space}, @kbd{Shift+Space},
       @kbd{Return} or @kbd{Enter} keys.
-    @subheading{The \"application-selected\" signal}
+    @end{signal}
+    @begin[app-chooser-widget::application-selected]{signal}
       @begin{pre}
 lambda (widget application)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:app-chooser-widget} widget which received
+      @begin[code]{simple-table}
+        @entry[widget]{The @class{gtk:app-chooser-widget} widget that received
           the signal.}
         @entry[application]{The selected @class{g:app-info} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when an application item is selected from the widget's list.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:app-chooser-widget-new}
   @see-slot{gtk:app-chooser-widget-default-text}
@@ -204,11 +207,11 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-default-text)
       "Accessor"
       (documentation 'app-chooser-widget-default-text 'function)
- "@version{2024-4-26}
+ "@version{2025-07-23}
   @syntax{(gtk:app-chooser-widget-default-text object) => text}
   @syntax{(setf (gtk:app-chooser-widget-default-text object) text)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
-  @argument[text]{a string with the text that appears in the widget}
+  @argument[text]{a string for the text that appears in the widget}
   @begin{short}
     Accessor of the @slot[gtk:app-chooser-widget]{default-text} slot of the
     @class{gtk:app-chooser-widget} class.
@@ -238,7 +241,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-all)
       "Accessor"
       (documentation 'app-chooser-widget-show-all 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-widget-show-all object) => setting}
   @syntax{(setf (gtk:app-chooser-widget-show-all object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -273,7 +276,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-default)
       "Accessor"
       (documentation 'app-chooser-widget-show-default 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-widget-show-default object) => setting}
   @syntax{(setf (gtk:app-chooser-widget-show-default object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -308,7 +311,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-fallback)
       "Accessor"
       (documentation 'app-chooser-widget-show-fallback 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-widget-show-fallback object) => setting}
   @syntax{(setf (gtk:app-chooser-widget-show-fallback object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -343,7 +346,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-other)
       "Accessor"
       (documentation 'app-chooser-widget-show-other 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-widget-show-other object) => setting}
   @syntax{(setf (gtk:app-chooser-widget-show-other object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -379,7 +382,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-recommended)
       "Accessor"
       (documentation 'app-chooser-widget-show-recommended 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:app-chooser-widget-show-recommended object) => setting}
   @syntax{(setf (gtk:app-chooser-widget-show-recommended object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -407,8 +410,8 @@ lambda (widget application)    :run-first
 
 (defun app-chooser-widget-new (content-type)
  #+liber-documentation
- "@version{2024-2-22}
-  @argument[content-type]{a string with the content type to show applications
+ "@version{2025-07-23}
+  @argument[content-type]{a string for the content type to show applications
     for}
   @return{The newly created @class{gtk:app-chooser-widget} widget.}
   @begin{short}
