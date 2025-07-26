@@ -487,11 +487,10 @@ lambda (application window)    :run-first
 (declaim (inline application-new))
 
 (defun application-new (id flags)
- "@version{2025-05-12}
+ "@version{2025-07-25}
   @argument[id]{a string for the application ID, or @code{nil} for no
     application ID}
-  @argument[flags]{a @symbol{g:application-flags} value for the application
-    flags}
+  @argument[flags]{a @sym{g:application-flags} value for the application flags}
   @return{The new @class{gtk:application} instance.}
   @begin{short}
     Creates a new application.
@@ -655,11 +654,11 @@ lambda (application window)    :run-first
 
 (cffi:defcfun ("gtk_application_inhibit" application-inhibit) :uint
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-07-25}
   @argument[application]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget, or @code{nil}}
-  @argument[flags]{a @symbol{gtk:application-inhibit-flags} value for the
-    types of user actions that should be inhibited}
+  @argument[flags]{a @sym{gtk:application-inhibit-flags} value for the types
+    of user actions that should be inhibited}
   @argument[reason]{a short, human readable string that explains why these
     operations are inhibited}
   @begin{return}

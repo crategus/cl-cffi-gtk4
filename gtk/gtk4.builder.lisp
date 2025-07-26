@@ -436,8 +436,8 @@
       for example, @code{\"GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE\"}, or
       @code{\"emoji|lowercase\"}}
     @item{colors, in a format understood by the @fun{gdk:rgba-parse} function}
-    @item{@symbol{g:variant} parameters, can be specified in the format
-      understood by the @fun{g:variant-parse} function}
+    @item{@sym{g:variant} parameters, can be specified in the format understood
+      by the @fun{g:variant-parse} function}
     @item{pixbufs, can be specified as an object ID, a resource path or a
       filename of an image file to load relative to the builder file or the
       current working directory if the @fun{gtk:builder-add-from-string}

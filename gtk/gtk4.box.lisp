@@ -110,7 +110,7 @@
 
 #+liber-documentation
 (setf (documentation 'box 'type)
- "@version{2025-06-26}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:box} widget arranges child widgets into a single row or
     column.
@@ -144,8 +144,8 @@
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:box} implementation used the
     @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
-    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
-    the @val[gtk:accessible-role]{:generic} role.
+    enumeration. Starting from GTK 4.12, it uses the
+    @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:box-new}
   @see-slot{gtk:box-baseline-child}
@@ -166,8 +166,9 @@
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "baseline-child" 'box) t)
  "The @code{baseline-child} property of type @code{:int} (Read / Write) @br{}
-  The position of the child widget that determines the baseline. This is only
-  relevant of the box is in vertical orientation. Since 4.12 @br{}
+  The position of the child widget that determines the baseline of the box in
+  vertical layout. This is only relevant of the box is in vertical orientation.
+  Since 4.12 @br{}
   Default value: -1")
 
 #+(and gtk-4-12 liber-documentation)

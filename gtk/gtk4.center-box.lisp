@@ -111,7 +111,7 @@
 
 #+liber-documentation
 (setf (documentation 'center-box 'type)
- "@version{2025-05-10}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:center-box} widget arranges three children in a horizontal or
     vertical arrangement, keeping the middle child centered as well as possible.
@@ -141,8 +141,8 @@
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:center-box} implementation used the
     @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
-    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
-    the @val[gtk:accessible-role]{:generic} role.
+    enumeration. Starting from GTK 4.12, it uses the
+    @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:center-box-new}
   @see-slot{gtk:center-box-baseline-position}
