@@ -59,764 +59,6 @@
   allows for maximum flexibility. Bindings for many other languages have been
   written, including C++, Objective-C, Guile/Scheme, Perl, Python, TOM, Ada95,
   Free Pascal, and Eiffel.
-  @begin[GListModel support]{section}
-    @begin[GtkBitset]{subsection}
-      @about-class{bitset}
-      @about-function{bitset-ref}
-      @about-function{bitset-unref}
-      @about-function{bitset-new-empty}
-      @about-function{bitset-new-range}
-      @about-function{bitset-copy}
-      @about-function{bitset-contains}
-      @about-function{bitset-is-empty}
-      @about-function{bitset-equals}
-      @about-function{bitset-minimum}
-      @about-function{bitset-maximum}
-      @about-function{bitset-size}
-      @about-function{bitset-size-in-range}
-      @about-function{bitset-nth}
-      @about-function{bitset-remove-all}
-      @about-function{bitset-add}
-      @about-function{bitset-remove}
-      @about-function{bitset-add-range}
-      @about-function{bitset-remove-range}
-      @about-function{bitset-add-range-closed}
-      @about-function{bitset-remove-range-closed}
-      @about-function{bitset-add-rectangle}
-      @about-function{bitset-remove-rectangle}
-      @about-function{bitset-union}
-      @about-function{bitset-intersect}
-      @about-function{bitset-subtract}
-      @about-function{bitset-difference}
-      @about-function{bitset-shift-left}
-      @about-function{bitset-shift-right}
-      @about-function{bitset-splice}
-    @end{subsection}
-    @begin[GtkBitsetIter]{subsection}
-      @about-symbol{bitset-iter}
-      @about-function{bitset-iter-init-first}
-      @about-function{bitset-iter-init-last}
-      @about-function{bitset-iter-init-at}
-      @about-function{bitset-iter-next}
-      @about-function{bitset-iter-previous}
-      @about-function{bitset-iter-value}
-      @about-function{bitset-iter-is-valid}
-    @end{subsection}
-    @begin[GtkExpression]{subsection}
-      @about-class{expression}
-      @about-function{expression-ref}
-      @about-function{expression-unref}
-      @about-function{expression-value-type}
-      @about-function{expression-is-static}
-      @about-function{expression-evaluate}
-      @about-function{expression-evaluate-value}
-      @about-function{expression-bind}
-      @about-symbol{expression-notify}
-      @about-function{expression-watch}
-      @about-class{expression-watch}
-      @about-function{expression-watch-evaluate}
-      @about-function{expression-watch-evaluate-value}
-      @about-function{expression-watch-unwatch}
-      @about-function{property-expression-new}
-      @about-function{property-expression-new-for-pspec}
-      @about-function{property-expression-expression}
-      @about-function{property-expression-pspec}
-      @about-function{constant-expression-new}
-      @about-function{constant-expression-new-for-value}
-      @about-function{constant-expression-value}
-      @about-function{object-expression-new}
-      @about-function{object-expression-object}
-      @about-function{closure-expression-new}
-      @about-function{cclosure-expression-new}
-      @about-symbol{VALUE_HOLDS_EXPRESSION}
-      @about-function{value-expression}
-      @about-function{value-take-expression}
-      @about-function{value-dup-expression}
-      @about-symbol{param-spec-expression}
-      @about-function{param-spec-expression}
-    @end{subsection}
-    @begin[GtkFilter]{subsection}
-      @about-symbol{filter-match}
-      @about-symbol{filter-change}
-      @about-class{filter}
-      @about-function{filter-match}
-      @about-function{filter-strictness}
-      @about-function{filter-changed}
-    @end{subsection}
-    @begin[GtkCustomFilter]{subsection}
-      @about-class{custom-filter}
-      @about-function{custom-filter-new}
-      @about-symbol{custom-filter-func}
-      @about-function{custom-filter-set-filter-func }
-    @end{subsection}
-    @begin[GtkMultiFilter]{subsection}
-      @about-class{multi-filter}
-      @about-generic{multi-filter-item-type}
-      @about-generic{multi-filter-n-items}
-      @about-function{multi-filter-append}
-      @about-function{multi-filter-remove}
-      @about-class{any-filter}
-      @about-function{any-filter-new}
-      @about-class{every-filter}
-      @about-function{every-filter-new}
-    @end{subsection}
-    @begin[GtkBoolFilter]{subsection}
-      @about-class{bool-filter}
-      @about-generic{bool-filter-expression}
-      @about-generic{bool-filter-invert}
-      @about-function{bool-filter-new}
-    @end{subsection}
-    @begin[GtkStringFilter]{subsection}
-      @about-symbol{string-filter-match-mode}
-      @about-class{string-filter}
-      @about-generic{string-filter-expression}
-      @about-generic{string-filter-ignore-case}
-      @about-generic{string-filter-match-mode}
-      @about-generic{string-filter-search}
-      @about-function{string-filter-new}
-    @end{subsection}
-    @begin[GtkFileFilter]{subsection}
-      @about-class{file-filter}
-      @about-generic{file-filter-mime-types}
-      @about-generic{file-filter-name}
-      @about-generic{file-filter-patterns}
-      @about-generic{file-filter-suffixes}
-      @about-function{file-filter-new}
-      @about-function{file-filter-new-from-gvariant}
-      @about-function{file-filter-add-mime-type}
-      @about-function{file-filter-add-pattern}
-      @about-function{file-filter-add-pixbuf-formats}
-      @about-function{file-filter-add-suffix}
-      @about-function{file-filter-attributes}
-      @about-function{file-filter-to-gvariant}
-    @end{subsection}
-    @begin[GtkSorter]{subsection}
-      @about-symbol{sorter-order}
-      @about-symbol{sorter-change}
-      @about-class{sorter}
-      @about-function{sorter-compare}
-      @about-function{sorter-order}
-      @about-function{sorter-changed}
-      @about-function{ordering-from-cmpfunc}
-    @end{subsection}
-    @begin[GtkCustomSorter]{subsection}
-      @about-class{custom-sorter}
-      @about-function{custom-sorter-new}
-      @about-function{custom-sorter-set-sort-func}
-    @end{subsection}
-    @begin[GtkMultiSorter]{subsection}
-      @about-class{multi-sorter}
-      @about-generic{multi-sorter-item-type}
-      @about-generic{multi-sorter-n-items}
-      @about-function{multi-sorter-new}
-      @about-function{multi-sorter-append}
-      @about-function{multi-sorter-remove}
-    @end{subsection}
-    @begin[GtkStringSorter]{subsection}
-      @about-symbol{collation}
-      @about-class{string-sorter}
-      @about-generic{string-sorter-collation}
-      @about-generic{string-sorter-expression}
-      @about-generic{string-sorter-ignore-case}
-      @about-function{string-sorter-new}
-    @end{subsection}
-    @begin[GtkNumericSorter]{subsection}
-      @about-class{numeric-sorter}
-      @about-generic{numeric-sorter-expression}
-      @about-generic{numeric-sorter-sort-order}
-      @about-function{numeric-sorter-new}
-    @end{subsection}
-    @begin[GtkSelectionModel]{subsection}
-      @about-class{selection-model}
-      @about-function{selection-model-is-selected}
-      @about-function{selection-model-selection}
-      @about-function{selection-model-selection-in-range}
-      @about-function{selection-model-select-item}
-      @about-function{selection-model-unselect-item}
-      @about-function{selection-model-select-range}
-      @about-function{selection-model-unselect-range}
-      @about-function{selection-model-select-all}
-      @about-function{selection-model-unselect-all}
-      @about-function{selection-model-set-selection}
-      @about-function{selection-model-selection-changed}
-    @end{subsection}
-    @begin[GtkNoSelection]{subsection}
-      @about-class{no-selection}
-      @about-generic{no-selection-item-type}
-      @about-generic{no-selection-model}
-      @about-generic{no-selection-n-items}
-      @about-function{no-selection-new}
-    @end{subsection}
-    @begin[GtkSingleSelection]{subsection}
-      @about-variable{gtk:+invalid-list-position+}
-      @about-class{single-selection}
-      @about-generic{single-selection-autoselect}
-      @about-generic{single-selection-can-unselect}
-      @about-generic{single-selection-item-type}
-      @about-generic{single-selection-model}
-      @about-generic{single-selection-n-items}
-      @about-generic{single-selection-selected}
-      @about-generic{single-selection-selected-item}
-      @about-function{single-selection-new}
-    @end{subsection}
-    @begin[GtkMultiSelection]{subsection}
-      @about-class{multi-selection}
-      @about-generic{multi-selection-item-type}
-      @about-generic{multi-selection-model}
-      @about-generic{multi-selection-n-items}
-      @about-function{multi-selection-new}
-    @end{subsection}
-    @begin[GtkSectionModel]{subsection}
-      @about-class{section-model}
-      @about-function{section-model-section}
-      @about-function{section-model-sections-changed}
-    @end{subsection}
-    @begin[GtkFilterListModel]{subsection}
-      @about-class{filter-list-model}
-      @about-generic{filter-list-model-filter}
-      @about-generic{filter-list-model-incremental}
-      @about-generic{filter-list-model-item-type}
-      @about-generic{filter-list-model-model}
-      @about-generic{filter-list-model-n-items}
-      @about-generic{filter-list-model-pending}
-      @about-function{filter-list-model-new}
-    @end{subsection}
-    @begin[GtkFlattenListModel]{subsection}
-      @about-class{flatten-list-model}
-      @about-generic{flatten-list-model-item-type}
-      @about-generic{flatten-list-model-model}
-      @about-generic{flatten-list-model-n-items}
-      @about-function{flatten-list-model-new}
-      @about-function{flatten-list-model-model-for-item}
-    @end{subsection}
-    @begin[GtkMapListModel]{subsection}
-      @about-class{map-list-model}
-      @about-generic{map-list-model-has-map}
-      @about-generic{map-list-model-item-type}
-      @about-generic{map-list-model-model}
-      @about-generic{map-list-model-n-items}
-      @about-function{map-list-model-new}
-      @about-symbol{map-list-model-map-func}
-      @about-function{map-list-model-set-map-func}
-    @end{subsection}
-    @begin[GtkSliceListModel]{subsection}
-      @about-class{slice-list-model}
-      @about-generic{slice-list-model-item-type}
-      @about-generic{slice-list-model-model}
-      @about-generic{slice-list-model-n-items}
-      @about-generic{slice-list-model-offset}
-      @about-generic{slice-list-model-size}
-      @about-function{slice-list-model-new}
-    @end{subsection}
-    @begin[GtkSortListModel]{subsection}
-      @about-class{sort-list-model}
-      @about-generic{sort-list-model-incremental}
-      @about-generic{sort-list-model-item-type}
-      @about-generic{sort-list-model-model}
-      @about-generic{sort-list-model-n-items}
-      @about-generic{sort-list-model-pending}
-      @about-generic{sort-list-model-section-sorter}
-      @about-generic{sort-list-model-sorter}
-      @about-function{sort-list-model-new}
-    @end{subsection}
-    @begin[GtkSelectionFilterModel]{subsection}
-      @about-class{selection-filter-model}
-      @about-generic{selection-filter-model-item-type}
-      @about-generic{selection-filter-model-model}
-      @about-generic{selection-filter-model-n-items}
-      @about-function{selection-filter-model-new}
-    @end{subsection}
-    @begin[GtkBookmarkList]{subsection}
-      @about-class{bookmark-list}
-      @about-generic{bookmark-list-attributes}
-      @about-generic{bookmark-list-filename}
-      @about-generic{bookmark-list-io-priority}
-      @about-generic{bookmark-list-item-type}
-      @about-generic{bookmark-list-loading}
-      @about-generic{bookmark-list-n-items}
-      @about-function{bookmark-list-new}
-      @about-function{bookmark-list-is-loading}
-    @end{subsection}
-    @begin[GtkDirectoryList]{subsection}
-      @about-class{directory-list}
-      @about-generic{directory-list-attributes}
-      @about-generic{directory-list-error}
-      @about-generic{directory-list-file}
-      @about-generic{directory-list-io-priority}
-      @about-generic{directory-list-item-type}
-      @about-generic{directory-list-loading}
-      @about-generic{directory-list-monitored}
-      @about-generic{directory-list-n-items}
-      @about-function{directory-list-new}
-      @about-function{directory-list-is-loading}
-    @end{subsection}
-    @begin[GtkStringList]{subsection}
-      @about-class{string-object}
-      @about-generic{string-object-string}
-      @about-function{string-object-new}
-      @about-class{string-list}
-      @about-generic{string-list-item-type}
-      @about-generic{string-list-n-items}
-      @about-function{string-list-new}
-      @about-function{string-list-append}
-      @about-function{string-list-take}
-      @about-function{string-list-remove}
-      @about-function{string-list-splice}
-      @about-function{string-list-string}
-      @about-function{string-list-find}
-    @end{subsection}
-  @end{section}
-  @begin[List-based Widgets]{section}
-    @begin[List Widget Overview]{subsection}
-      GTK provides powerful widgets to display and edit lists of data. This
-      document gives an overview over the concepts and how they work together
-      to allow developers to implement lists. Lists are intended to be used
-      whenever developers want to display many objects in roughly the same way.
-
-      Lists are perfectly fine to be used for very short list of only 2 or 3
-      elements, but generally scale to millions of items. Of course, the larger
-      the list grows, the more care needs to be taken to choose the right data
-      structures to keep things running well. Lists are meant to be used with
-      changing data, both with the items itself changing as well as the list
-      adding and removing items. Of course, they work just as well with static
-      data.
-
-      @subheading{Terminology}
-      These terms are used throughout the documentation when talking about lists
-      and you should be aware of what they refer to. These are often generic
-      terms that have a specific meaning in this context.
-
-      Views or list widgets are the widgets that hold and manage the lists.
-      Examples of these widgets would be the @class{gtk:list-view} or
-      @class{gtk:grid-view} widgets.
-
-      Views display data from a model. Models implement the @class{g:list-model}
-      interface and can be provided in a variety of ways:
-      @begin{itemize}
-        @item{List model implementations for many specific types of data already
-          exist, for example the @class{gtk:directory-list} or
-          @class{gtk:string-list} objects.}
-        @item{There are generic list model implementations like the
-          @class{g:list-store} object that allow building lists of arbitrary
-          objects.}
-        @item{Wrapping list models like @class{gtk:filter-list-model} or
-          @class{gtk:sort-list-model} objects modify, adapt or combine other
-          models.}
-        @item{Last but not least, developers are encouraged to create their own
-          @class{g:list-model} implementations. The interface is kept
-          deliberately small to make this easy.}
-      @end{itemize}
-      The same model can be used in multiple different views and wrapped with
-      multiple different models at once.
-
-      The elements in a model are called items. All items are @class{g:object}
-      instances. Every item in a model has a position which is the unsigned
-      integer that describes where in the model the item is located. The first
-      item in a model is at position 0. The position of an item can change as
-      other items are added or removed from the model.
-
-      It is important to be aware of the difference between items and positions
-      because the mapping from position to item is not permanent, so developers
-      should think about whether they want to track items or positions when
-      working with models. Oftentimes some things are really hard to do one way
-      but very easy the other way.
-
-      The other important part of a view is a factory. Each factory is a
-      @class{gtk:list-item-factory} implementation that takes care of mapping
-      the items of the model to widgets that can be shown in the view.
-
-      The way factories do this is by creating a list item for each item that is
-      currently in use. List items are always @class{gtk:list-item} instances.
-      They are only ever created by GTK and provide information about what item
-      they are meant to display.
-
-      Different factory implementations use various different methods to allow
-      developers to add the right widgets to list items and to link those
-      widgets with the item managed by the list item. Finding a suitable factory
-      implementation for the data displayed, the programming language and
-      development environment is an important task that can simplify setting up
-      the view tremendously.
-
-      Views support selections via a selection model. A selection model is an
-      implementation of the @class{gtk:selection-model} interface on top of the
-      @class{g:list-model} interface that allows marking each item in a model
-      as either selected or not selected. Just like regular models, this can be
-      implemented either by implementing the @class{gtk:selection-model}
-      interface directly or by wrapping a model with one of the GTK models
-      provided for this purposes, such as the @class{gtk:no-selection} or
-      @class{gtk:single-selection} models.
-
-      The behavior of selection models - that is, which items they allow
-      selecting and what effect this has on other items - is completely up to
-      the selection model. As such, single-selections, multi-selections or
-      sharing selection state between different selection models and/or views
-      is possible. The selection state of an item is exposed in the list item
-      via the @slot[gtk:list-item]{selected} property.
-
-      Views and list items also support activation. Activation means that double
-      clicking or pressing enter while inside a focused row will cause the view
-      to emit a signal such as the @code{GtkListView::activate} signal. This
-      provides an easy way to set up lists, but can also be turned off on
-      list items if undesired.
-
-      Both selections and activation are supported among other things via
-      widget actions. This allows developers to add widgets to their lists that
-      cause selections to change or to trigger activation via the
-      @class{gtk:actionable} interface. For a list of all supported actions see
-      the relevant documentation.
-
-      @subheading{Behind the scenes}
-      While it is not a problem for short lists to instantiate widgets for every
-      item in the model, once lists grow to thousands or millions of elements,
-      this gets less feasible. Because of this, the views only create a limited
-      amount of list items and recycle them by binding them to new items. In
-      general, views try to keep list items available only for the items that
-      can actually be seen on screen.
-
-      While this behavior allows views to scale effortlessly to huge lists, it
-      has a few implications for what can be done with views. For example, it is
-      not possible to query a view for a list item used for a certain position -
-      there might not be one and even if there is, that list item might soon be
-      recycled for a new position.
-
-      It is also important that developers save state they care about in the
-      item and do not rely on the widgets they created as those widgets can be
-      recycled for a new position at any time causing any state to be lost.
-
-      Another important requirement for views is that they need to know which
-      items are not visible so they can be recycled. Views achieve that by
-      implementing the @class{gtk:scrollable} interface and expecting to be
-      placed directly into a @class{gtk:scrolled-window} widget.
-
-      Of course, if you are only using models with few items, this is not
-      important and you can treat views like any other widget. But if you use
-      large lists and your performance suffers, you should be aware of this.
-      Views also allow tuning the number of list items they create such as with
-      the @fun{gtk:grid-view-max-columns} function, and developers running into
-      performance problems should definitely study the tradeoffs of those and
-      experiment with them.
-
-      @subheading{Choosing the right model}
-      GTK offers a wide variety of wrapping models which change or supplement an
-      existing model (or models) in some way. But when it comes to storing your
-      actual data, there are only a few ready-made choices available:
-      the @class{g:list-store}, @class{gtk:string-list}, and
-      @class{gtk:directory-list} objects.
-
-      The @class{g:list-store} object is backed by a balanced tree and has
-      performance characteristics that are expected for that data structure. It
-      works reasonably well for dataset sizes in the 1,000,000 range, and can
-      handle insertions and deletions. It uses a cached iterator to make linear
-      access to the items fast.
-
-      The @class{gtk:string-list} object is not a general store - it can only
-      handle strings. It is backed by an dynamically allocated array and has
-      performance characteristics that are expected for that data structure.
-      The @class{gtk:string-list} object is a good fit for any place where you
-      would otherwise use @code{char*[@]} and works best if the dataset is not
-      very dynamic.
-
-      The @class{gtk:directory-list} object is a list model that wraps the
-      @code{g_file_enumerate_children_async()} function. It presents a
-      @class{g:list-model} object and fills it asynchronously with the
-      @code{GFiles} returned from that function.
-
-      If these models do not fit your use case or scalability requirements, you
-      should make a custom @class{g:list-model} implementation. It is a small
-      interface and not very hard to implement.
-
-      @subheading{Displaying trees}
-      While the @class{gtk:tree-view} widget provided built-in support for
-      trees, the list widgets, and in particular the @class{g:list-model}
-      implementation do not. This was a design choice because the common use
-      case is displaying lists and not trees and it greatly simplifies the API
-      interface provided.
-
-      However, GTK provides functionality to make lists look and behave like
-      trees for use cases that require trees. This is achieved by using the
-      @class{gtk:tree-list-model} model to flatten a tree into a list. The
-      @class{gtk:tree-expander} widget can then be used inside a list item to
-      allow users to expand and collapse rows and provide a similar experience
-      to the @class{gtk:tree-view} widget. Developers should refer to those
-      objects’ API reference for more discussion on the topic.
-
-      @subheading{List styles}
-      One of the advantages of the new list widgets over GtkTreeView and cell
-      renderers is that they are styleable using GTK CSS. This provides a lot of
-      flexibility. The themes that ship with GTK provide a few predefined list
-      styles that can be used in many situations.
-
-      @image[rich-list]{Figure: Rich list}
-
-      This rich list style is low density, spacious and uses an outline focus
-      ring. It is suitable for lists of controls, for example, in preference
-      dialogs or settings panels. Use the @code{.rich-list} style class.
-
-      @image[navigation-sidebar]{Figure: Navigation sidebar}
-
-      The sidebar style of list is medium density, using a full background to
-      indicate focus and selection. Use the @code{.navigation-sidebar} style
-      class.
-
-      @image[data-table]{Figure: Data table}
-
-      The data table style of list is a high density table, similar in style to
-      a traditional tree view. Individual cells can be selectable and editable.
-      Use the @code{.data-table} style class.
-
-      @subheading{Sections}
-      List models can optionally group their items into sections, by
-      implementing the @class{gtk:section-model} interface. The
-      @class{gtk:list-view} widget can display headers for sections, by
-      installing a separate header factory.
-
-      Many GTK list models support section inherently, or they pass through the
-      section of a model they are wrapping.
-
-      @subheading{Comparison to GtkTreeView}
-      Developers familiar with GtkTreeView may wonder how this way of doing
-      lists compares to the way they know. This section will try to outline the
-      similarities and differences between the two.
-
-      This new approach tries to provide roughly the same functionality as the
-      old approach but often uses a very different way to achieve these goals.
-      The main difference and one of the primary reasons for this new
-      development is that items can be displayed using regular widgets and the
-      separate cell renderer machinery is no longer necessary. This allows all
-      benefits that widgets provide, such as complex layout, animations and CSS
-      styling.
-
-      The other big difference is the massive change to the data model.
-      The @class{gtk:tree-model} interface was a rather complex interface for a
-      tree data structure. The @class{g:list-model} interface is deliberately
-      designed to be a very simple data structure for lists only. See above for
-      how to still do trees with this new model. Another big change is that the
-      new model allows for bulk changes via the @code{GListModel::items-changed}
-      signal while the @class{gtk:tree-model} interface only allows a single
-      item to change at once. The goal here is of course to encourage
-      implementation of custom list models.
-
-      Another consequence of the new model is that it is now easily possible to
-      refer to the contents of a row in the model directly by keeping the item,
-      while the @class{gtk:tree-row-reference} implementation was a very slow
-      mechanism to achieve the same. And because the items are real objects,
-      developers can make them emit change signals causing list items and their
-      children to update, which was not possible with the @class{gtk:tree-model}
-      implementation.
-
-      The selection handling is also different. While selections used to be
-      managed via custom code in each widget, selection state is now meant to
-      be managed by the selection models. In particular this allows for complex
-      use cases with specialized requirements.
-
-      Finally here is a quick comparison chart of equivalent functionality to
-      look for when transitioning code:
-      @begin{pre}
-Old                     New
--------------------------------------------------------
-GtkTreeModel            GListModel
-GtkTreePath             guint position, GtkTreeListRow
-GtkTreeIter             guint position
-GtkTreeRowReference     GObject item
-GtkListStore            GListStore
-GtkTreeStore            GtkTreeListModel, GtkTreeExpander
-GtkTreeSelection        GtkSelectionModel
-GtkTreeViewColumn       GtkColumnView
-GtkTreeView             GtkListView, GtkColumnView
-GtkCellView             GtkListItem
-GtkComboBox             GtkDropDown
-GtkIconView             GtkGridView
-GtkTreeSortable         GtkColumnView
-GtkTreeModelSort        GtkSortListModel
-GtkTreeModelFilter      GtkFilterListModel
-GtkCellLayout           GtkListItemFactory
-GtkCellArea             GtkWidget
-GtkCellRenderer         GtkWidget
-      @end{pre}
-    @end{subsection}
-    @begin[GtkListItem]{subsection}
-      @about-class{list-item}
-      @about-generic{list-item-accessible-description}
-      @about-generic{list-item-accessible-label}
-      @about-generic{list-item-activatable}
-      @about-generic{list-item-child}
-      @about-generic{list-item-focusable}
-      @about-generic{list-item-item}
-      @about-generic{list-item-position}
-      @about-generic{list-item-selectable}
-      @about-generic{list-item-selected}
-    @end{subsection}
-    @begin[GtkListItemFactory]{subsection}
-      @about-class{list-item-factory}
-    @end{subsection}
-    @begin[GtkSignalListItemFactory]{subsection}
-      @about-class{signal-list-item-factory}
-      @about-function{signal-list-item-factory-new}
-    @end{subsection}
-    @begin[GtkBuilderListItemFactory]{subsection}
-      @about-class{builder-list-item-factory}
-      @about-generic{builder-list-item-factory-bytes}
-      @about-generic{builder-list-item-factory-resource}
-      @about-generic{builder-list-item-factory-scope}
-      @about-function{builder-list-item-factory-new-from-bytes}
-      @about-function{builder-list-item-factory-new-from-resource}
-    @end{subsection}
-    @begin[GtkScrollInfo]{subsection}
-      @about-class{scroll-info}
-      @about-function{scroll-info-new}
-      @about-function{scroll-info-enable-horizontal}
-      @about-function{scroll-info-enable-vertical}
-    @end{subsection}
-    @begin[GtkListHeader]{subsection}
-      @about-class{list-header}
-      @about-generic{list-header-child}
-      @about-generic{list-header-end}
-      @about-generic{list-header-item}
-      @about-generic{list-header-n-items}
-      @about-generic{list-header-start}
-    @end{subsection}
-    @begin[GtkListView]{subsection}
-      @about-symbol{list-tab-behavior}
-      @about-symbol{list-scroll-flags}
-      @about-class{list-base}
-      @about-generic{list-base-orientation}
-      @about-class{list-view}
-      @about-generic{list-view-enable-rubberband}
-      @about-generic{list-view-factory}
-      @about-generic{list-view-header-factory}
-      @about-generic{list-view-model}
-      @about-generic{list-view-show-separators}
-      @about-generic{list-view-single-click-activate}
-      @about-generic{list-view-tab-behavior}
-      @about-function{list-view-new}
-      @about-function{list-view-scroll-to}
-    @end{subsection}
-    @begin[GtkGridView]{subsection}
-      @about-class{grid-view}
-      @about-generic{grid-view-enable-rubberband}
-      @about-generic{grid-view-factory}
-      @about-generic{grid-view-max-columns}
-      @about-generic{grid-view-min-columns}
-      @about-generic{grid-view-model}
-      @about-generic{grid-view-single-click-activate}
-      @about-generic{grid-view-tab-behavior}
-      @about-function{grid-view-new}
-      @about-function{grid-view-scroll-to}
-    @end{subsection}
-    @begin[GtkColumnView]{subsection}
-      @about-class{column-view}
-      @about-generic{column-view-columns}
-      @about-generic{column-view-enable-rubberband}
-      @about-generic{column-view-header-factory}
-      @about-generic{column-view-model}
-      @about-generic{column-view-reorderable}
-      @about-generic{column-view-row-factory}
-      @about-generic{column-view-show-column-separators}
-      @about-generic{column-view-show-row-separators}
-      @about-generic{column-view-single-click-activate}
-      @about-generic{column-view-sorter}
-      @about-generic{column-view-tab-behavior}
-      @about-function{column-view-new}
-      @about-function{column-view-append-column}
-      @about-function{column-view-insert-column}
-      @about-function{column-view-remove-column}
-      @about-function{column-view-sort-by-column}
-    @end{subsection}
-    @begin[GtkColumnViewColumn]{subsection}
-      @about-class{column-view-column}
-      @about-generic{column-view-column-column-view}
-      @about-generic{column-view-column-expand}
-      @about-generic{column-view-column-factory}
-      @about-generic{column-view-column-fixed-width}
-      @about-generic{column-view-column-header-menu}
-      @about-generic{column-view-column-id}
-      @about-generic{column-view-column-resizable}
-      @about-generic{column-view-column-sorter}
-      @about-generic{column-view-column-title}
-      @about-generic{column-view-column-visible}
-      @about-function{column-view-column-new}
-    @end{subsection}
-    @begin[GtkColumnViewCell]{subsection}
-      @about-class{column-view-cell}
-      @about-generic{column-view-cell-child}
-      @about-generic{column-view-cell-focusable}
-      @about-generic{column-view-cell-item}
-      @about-generic{column-view-cell-position}
-      @about-generic{column-view-cell-selected}
-    @end{subsection}
-    @begin[GtkColumnViewRow]{subsection}
-      @about-class{column-view-row}
-      @about-generic{column-view-row-accessible-description}
-      @about-generic{column-view-row-accessible-label}
-      @about-generic{column-view-row-activatable}
-      @about-generic{column-view-row-focusable}
-      @about-generic{column-view-row-item}
-      @about-generic{column-view-row-position}
-      @about-generic{column-view-row-selectable}
-      @about-generic{column-view-row-selected}
-    @end{subsection}
-    @begin[GtkColumnViewSorter]{subsection}
-      @about-class{column-view-sorter}
-      @about-generic{column-view-sorter-primary-sort-column}
-      @about-generic{column-view-sorter-primary-sort-order}
-      @about-function{column-view-sorter-n-sort-columns}
-      @about-function{column-view-sorter-nth-sort-column}
-    @end{subsection}
-    @begin[GtkDropDown]{subsection}
-      @about-class{drop-down}
-      @about-generic{drop-down-enable-search}
-      @about-generic{drop-down-expression}
-      @about-generic{drop-down-factory}
-      @about-generic{drop-down-header-factory}
-      @about-generic{drop-down-list-factory}
-      @about-generic{drop-down-model}
-      @about-generic{drop-down-search-match-mode}
-      @about-generic{drop-down-selected}
-      @about-generic{drop-down-selected-item}
-      @about-generic{drop-down-show-arrow}
-      @about-function{drop-down-new}
-      @about-function{drop-down-new-from-strings}
-    @end{subsection}
-  @end{section}
-  @begin[Tree support]{section}
-    @begin[GtkTreeListModel]{subsection}
-      @about-class{tree-list-row}
-      @about-generic{tree-list-row-children}
-      @about-generic{tree-list-row-depth}
-      @about-generic{tree-list-row-expandable}
-      @about-generic{tree-list-row-expanded}
-      @about-generic{tree-list-row-item}
-      @about-function{tree-list-row-child-row}
-      @about-function{tree-list-row-parent}
-      @about-function{tree-list-row-position}
-      @about-function{tree-list-row-is-expandable}
-      @about-class{tree-list-model}
-      @about-generic{tree-list-model-autoexpand}
-      @about-generic{tree-list-model-item-type}
-      @about-generic{tree-list-model-model}
-      @about-generic{tree-list-model-n-items}
-      @about-generic{tree-list-model-passthrough}
-      @about-symbol{tree-list-model-create-model-func}
-      @about-function{tree-list-model-new}
-      @about-function{tree-list-model-row}
-      @about-function{tree-list-model-child-row}
-    @end{subsection}
-    @begin[GtkTreeListRowSorter]{subsection}
-      @about-class{tree-list-row-sorter}
-      @about-generic{tree-list-row-sorter-sorter}
-      @about-function{tree-list-row-sorter-new}
-    @end{subsection}
-    @begin[GtkTreeExpander]{subsection}
-      @about-class{tree-expander}
-      @about-generic{tree-expander-child}
-      @about-generic{tree-expander-hide-expander}
-      @about-generic{tree-expander-indent-for-depth}
-      @about-generic{tree-expander-indent-for-icon}
-      @about-generic{tree-expander-item}
-      @about-generic{tree-expander-list-row}
-      @about-function{tree-expander-new}
-    @end{subsection}
-  @end{section}
   @begin[Application support]{section}
     @begin[GtkApplication]{subsection}
       @about-symbol{application-inhibit-flags}
@@ -959,6 +201,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{about-dialog-logo}
       @about-generic{about-dialog-logo-icon-name}
       @about-generic{about-dialog-program-name}
+      @about-generic{about-dialog-system-information}
       @about-generic{about-dialog-translator-credits}
       @about-generic{about-dialog-version}
       @about-generic{about-dialog-website}
@@ -1052,7 +295,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{revealer-transition-type}
       @about-function{revealer-new}
     @end{subsection}
-    @begin[GtkListBox]{subsection}
+    @begin[GtkListBoxRow]{subsection}
       @about-class{list-box-row}
       @about-generic{list-box-row-activatable}
       @about-generic{list-box-row-child}
@@ -1062,6 +305,8 @@ GtkCellRenderer         GtkWidget
       @about-function{list-box-row-is-selected}
       @about-function{list-box-row-header}
       @about-function{list-box-row-index}
+    @end{subsection}
+    @begin[GtkListBox]{subsection}
       @about-class{list-box}
       @about-generic{list-box-accept-unpaired-release}
       @about-generic{list-box-activate-on-single-click}
@@ -1100,13 +345,15 @@ GtkCellRenderer         GtkWidget
       @about-symbol{list-box-create-widget-func}
       @about-function{list-box-bind-model}
     @end{subsection}
-    @begin[GtkFlowBox]{subsection}
+    @begin[GtkFlowBoxChild]{subsection}
       @about-class{flow-box-child}
       @about-generic{flow-box-child-child}
       @about-function{flow-box-child-new}
       @about-function{flow-box-child-index}
       @about-function{flow-box-child-is-selected}
       @about-function{flow-box-child-changed}
+   @end{subsection}
+    @begin[GtkFlowBox]{subsection}
       @about-class{flow-box}
       @about-generic{flow-box-accept-unpaired-release}
       @about-generic{flow-box-activate-on-single-click}
@@ -1142,7 +389,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{flow-box-create-widget-func}
       @about-function{flow-box-bind-model}
     @end{subsection}
-    @begin[GtkStack]{subsection}
+    @begin[GtkStackPage]{subsection}
       @about-symbol{stack-transition-type}
       @about-class{stack-page}
       @about-generic{stack-page-child}
@@ -1152,6 +399,8 @@ GtkCellRenderer         GtkWidget
       @about-generic{stack-page-title}
       @about-generic{stack-page-use-underline}
       @about-generic{stack-page-visible}
+    @end{subsection}
+    @begin[GtkStack]{subsection}
       @about-class{stack}
       @about-generic{stack-hhomogeneous}
       @about-generic{stack-interpolate-size}
@@ -1225,7 +474,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{paned-wide-handle}
       @about-function{paned-new}
     @end{subsection}
-    @begin[GtkNotebook]{subsection}
+    @begin[GtkNotebookPage]{subsection}
       @about-symbol{notebook-tab}
       @about-class{notebook-page}
       @about-generic{notebook-page-child}
@@ -1238,6 +487,8 @@ GtkCellRenderer         GtkWidget
       @about-generic{notebook-page-tab-expand}
       @about-generic{notebook-page-tab-fill}
       @about-generic{notebook-page-tab-label}
+    @end{subsection}
+    @begin[GtkNotebook]{subsection}
       @about-class{notebook-pages}
       @about-class{notebook}
       @about-generic{notebook-enable-popup}
@@ -1321,7 +572,7 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkBoxLayout]{subsection}
       @about-class{box-layout}
-      @about-generic{box-layout-child}
+      @about-generic{box-layout-baseline-child}
       @about-generic{box-layout-baseline-position}
       @about-generic{box-layout-homogeneous}
       @about-generic{box-layout-spacing}
@@ -1565,87 +816,10 @@ GtkCellRenderer         GtkWidget
       @about-function{calendar-date}
     @end{subsection}
   @end{section}
-  @begin[Media Support]{section}
-    @begin[GtkGraphicsOffload]{subsection}
-      @about-symbol{graphics-offload-enabled}
-      @about-class{graphics-offload}
-      @about-generic{graphics-offload-black-background}
-      @about-generic{graphics-offload-child}
-      @about-generic{graphics-offload-enabled}
-      @about-function{graphics-offload-new}
-    @end{subsection}
-    @begin[GtkVideo]{subsection}
-      @about-class{video}
-      @about-generic{video-autoplay}
-      @about-generic{video-file}
-      @about-generic{video-graphics-offload}
-      @about-generic{video-loop}
-      @about-generic{video-media-stream}
-      @about-function{video-new}
-      @about-function{video-new-for-media-stream}
-      @about-function{video-new-for-file}
-      @about-function{video-new-for-filename}
-      @about-function{video-new-for-resource}
-      @about-function{video-set-filename}
-      @about-function{video-set-resource}
-    @end{subsection}
-    @begin[GtkMediaControls]{subsection}
-      @about-class{media-controls}
-      @about-generic{media-controls-media-stream}
-      @about-function{media-controls-new}
-    @end{subsection}
-    @begin[GtkMediaStream]{subsection}
-      @about-class{media-stream}
-      @about-generic{media-stream-duration}
-      @about-generic{media-stream-ended}
-      @about-generic{media-stream-error}
-      @about-generic{media-stream-has-audio}
-      @about-generic{media-stream-has-video}
-      @about-generic{media-stream-loop}
-      @about-generic{media-stream-muted}
-      @about-generic{media-stream-playing}
-      @about-generic{media-stream-prepared}
-      @about-generic{media-stream-seekable}
-      @about-generic{media-stream-seeking}
-      @about-generic{media-stream-timestamp}
-      @about-generic{media-stream-volume}
-      @about-function{media-stream-is-prepared}
-      @about-function{media-stream-play}
-      @about-function{media-stream-pause}
-      @about-function{media-stream-is-seekable}
-      @about-function{media-stream-is-seeking}
-      @about-function{media-stream-seek}
-      @about-function{media-stream-realize}
-      @about-function{media-stream-unrealize}
-      @about-function{media-stream-prepared}
-      @about-function{media-stream-unprepared}
-      @about-function{media-stream-update}
-      @about-function{media-stream-ended}
-      @about-function{media-stream-seek-success}
-      @about-function{media-stream-seek-failed}
-      @about-function{media-stream-gerror}
-      @about-function{media-stream-error}
-      @about-function{media-stream-error-valist}
-    @end{subsection}
-    @begin[GtkMediaFile]{subsection}
-      @about-class{media-file}
-      @about-generic{media-file-file}
-      @about-generic{media-file-input-stream}
-      @about-function{media-file-new}
-      @about-function{media-file-new-for-filename}
-      @about-function{media-file-new-for-resource}
-      @about-function{media-file-new-for-file}
-      @about-function{media-file-new-for-input-stream}
-      @about-function{media-file-clear}
-      @about-function{media-file-set-filename}
-      @about-function{media-file-set-resource}
-      @about-function{media-file-file}
-      @about-function{media-file-input-stream}
-    @end{subsection}
-  @end{section}
   @begin[Buttons and Toggles]{section}
     @begin[GtkButton]{subsection}
       @about-class{button}
+      @about-generic{button-can-shrink}
       @about-generic{button-child}
       @about-generic{button-has-frame}
       @about-generic{button-icon-name}
@@ -1934,7 +1108,7 @@ GtkCellRenderer         GtkWidget
       GTK has a powerful framework for multiline text editing. The primary
       objects involved in the process are the @class{gtk:text-buffer} object,
       which represents the text being edited, and the @class{gtk:text-view}
-      widget, a widget which can display a @class{gtk:text-buffer} object. Each
+      widget, a widget that can display a @class{gtk:text-buffer} object. Each
       text buffer can be displayed by any number of views.
 
       One of the important things to remember about text in GTK is that it is
@@ -2395,6 +1569,845 @@ GtkCellRenderer         GtkWidget
       @about-function{text-view-reset-im-context}
       @about-function{text-view-ltr-context}
       @about-function{text-view-rtl-context}
+    @end{subsection}
+  @end{section}
+  @begin[Media Support]{section}
+    @begin[GtkGraphicsOffload]{subsection}
+      @about-symbol{graphics-offload-enabled}
+      @about-class{graphics-offload}
+      @about-generic{graphics-offload-black-background}
+      @about-generic{graphics-offload-child}
+      @about-generic{graphics-offload-enabled}
+      @about-function{graphics-offload-new}
+    @end{subsection}
+    @begin[GtkVideo]{subsection}
+      @about-class{video}
+      @about-generic{video-autoplay}
+      @about-generic{video-file}
+      @about-generic{video-graphics-offload}
+      @about-generic{video-loop}
+      @about-generic{video-media-stream}
+      @about-function{video-new}
+      @about-function{video-new-for-media-stream}
+      @about-function{video-new-for-file}
+      @about-function{video-new-for-filename}
+      @about-function{video-new-for-resource}
+      @about-function{video-set-filename}
+      @about-function{video-set-resource}
+    @end{subsection}
+    @begin[GtkMediaControls]{subsection}
+      @about-class{media-controls}
+      @about-generic{media-controls-media-stream}
+      @about-function{media-controls-new}
+    @end{subsection}
+    @begin[GtkMediaStream]{subsection}
+      @about-class{media-stream}
+      @about-generic{media-stream-duration}
+      @about-generic{media-stream-ended}
+      @about-generic{media-stream-error}
+      @about-generic{media-stream-has-audio}
+      @about-generic{media-stream-has-video}
+      @about-generic{media-stream-loop}
+      @about-generic{media-stream-muted}
+      @about-generic{media-stream-playing}
+      @about-generic{media-stream-prepared}
+      @about-generic{media-stream-seekable}
+      @about-generic{media-stream-seeking}
+      @about-generic{media-stream-timestamp}
+      @about-generic{media-stream-volume}
+      @about-function{media-stream-is-prepared}
+      @about-function{media-stream-play}
+      @about-function{media-stream-pause}
+      @about-function{media-stream-is-seekable}
+      @about-function{media-stream-is-seeking}
+      @about-function{media-stream-seek}
+      @about-function{media-stream-realize}
+      @about-function{media-stream-unrealize}
+      @about-function{media-stream-prepared}
+      @about-function{media-stream-unprepared}
+      @about-function{media-stream-update}
+      @about-function{media-stream-ended}
+      @about-function{media-stream-seek-success}
+      @about-function{media-stream-seek-failed}
+      @about-function{media-stream-gerror}
+      @about-function{media-stream-error}
+      @about-function{media-stream-error-valist}
+    @end{subsection}
+    @begin[GtkMediaFile]{subsection}
+      @about-class{media-file}
+      @about-generic{media-file-file}
+      @about-generic{media-file-input-stream}
+      @about-function{media-file-new}
+      @about-function{media-file-new-for-filename}
+      @about-function{media-file-new-for-resource}
+      @about-function{media-file-new-for-file}
+      @about-function{media-file-new-for-input-stream}
+      @about-function{media-file-clear}
+      @about-function{media-file-set-filename}
+      @about-function{media-file-set-resource}
+      @about-function{media-file-file}
+      @about-function{media-file-input-stream}
+    @end{subsection}
+  @end{section}
+  @begin[GListModel support]{section}
+    @begin[GtkBitset]{subsection}
+      @about-class{bitset}
+      @about-function{bitset-ref}
+      @about-function{bitset-unref}
+      @about-function{bitset-new-empty}
+      @about-function{bitset-new-range}
+      @about-function{bitset-copy}
+      @about-function{bitset-contains}
+      @about-function{bitset-is-empty}
+      @about-function{bitset-equals}
+      @about-function{bitset-minimum}
+      @about-function{bitset-maximum}
+      @about-function{bitset-size}
+      @about-function{bitset-size-in-range}
+      @about-function{bitset-nth}
+      @about-function{bitset-remove-all}
+      @about-function{bitset-add}
+      @about-function{bitset-remove}
+      @about-function{bitset-add-range}
+      @about-function{bitset-remove-range}
+      @about-function{bitset-add-range-closed}
+      @about-function{bitset-remove-range-closed}
+      @about-function{bitset-add-rectangle}
+      @about-function{bitset-remove-rectangle}
+      @about-function{bitset-union}
+      @about-function{bitset-intersect}
+      @about-function{bitset-subtract}
+      @about-function{bitset-difference}
+      @about-function{bitset-shift-left}
+      @about-function{bitset-shift-right}
+      @about-function{bitset-splice}
+    @end{subsection}
+    @begin[GtkBitsetIter]{subsection}
+      @about-symbol{bitset-iter}
+      @about-function{bitset-iter-init-first}
+      @about-function{bitset-iter-init-last}
+      @about-function{bitset-iter-init-at}
+      @about-function{bitset-iter-next}
+      @about-function{bitset-iter-previous}
+      @about-function{bitset-iter-value}
+      @about-function{bitset-iter-is-valid}
+    @end{subsection}
+    @begin[GtkExpression]{subsection}
+      @about-class{expression}
+      @about-function{expression-ref}
+      @about-function{expression-unref}
+      @about-function{expression-value-type}
+      @about-function{expression-is-static}
+      @about-function{expression-evaluate}
+      @about-function{expression-evaluate-value}
+      @about-function{expression-bind}
+      @about-symbol{expression-notify}
+      @about-function{expression-watch}
+      @about-class{expression-watch}
+      @about-function{expression-watch-evaluate}
+      @about-function{expression-watch-evaluate-value}
+      @about-function{expression-watch-unwatch}
+      @about-function{property-expression-new}
+      @about-function{property-expression-new-for-pspec}
+      @about-function{property-expression-expression}
+      @about-function{property-expression-pspec}
+      @about-function{constant-expression-new}
+      @about-function{constant-expression-new-for-value}
+      @about-function{constant-expression-value}
+      @about-function{object-expression-new}
+      @about-function{object-expression-object}
+      @about-function{closure-expression-new}
+      @about-function{cclosure-expression-new}
+      @about-symbol{VALUE_HOLDS_EXPRESSION}
+      @about-function{value-expression}
+      @about-function{value-take-expression}
+      @about-function{value-dup-expression}
+      @about-symbol{param-spec-expression}
+      @about-function{param-spec-expression}
+    @end{subsection}
+    @begin[GtkFilter]{subsection}
+      @about-symbol{filter-match}
+      @about-symbol{filter-change}
+      @about-class{filter}
+      @about-function{filter-match}
+      @about-function{filter-strictness}
+      @about-function{filter-changed}
+    @end{subsection}
+    @begin[GtkCustomFilter]{subsection}
+      @about-class{custom-filter}
+      @about-function{custom-filter-new}
+      @about-symbol{custom-filter-func}
+      @about-function{custom-filter-set-filter-func }
+    @end{subsection}
+    @begin[GtkMultiFilter]{subsection}
+      @about-class{multi-filter}
+      @about-generic{multi-filter-item-type}
+      @about-generic{multi-filter-n-items}
+      @about-function{multi-filter-append}
+      @about-function{multi-filter-remove}
+      @about-class{any-filter}
+      @about-function{any-filter-new}
+      @about-class{every-filter}
+      @about-function{every-filter-new}
+    @end{subsection}
+    @begin[GtkBoolFilter]{subsection}
+      @about-class{bool-filter}
+      @about-generic{bool-filter-expression}
+      @about-generic{bool-filter-invert}
+      @about-function{bool-filter-new}
+    @end{subsection}
+    @begin[GtkStringFilter]{subsection}
+      @about-symbol{string-filter-match-mode}
+      @about-class{string-filter}
+      @about-generic{string-filter-expression}
+      @about-generic{string-filter-ignore-case}
+      @about-generic{string-filter-match-mode}
+      @about-generic{string-filter-search}
+      @about-function{string-filter-new}
+    @end{subsection}
+    @begin[GtkFileFilter]{subsection}
+      @about-class{file-filter}
+      @about-generic{file-filter-mime-types}
+      @about-generic{file-filter-name}
+      @about-generic{file-filter-patterns}
+      @about-generic{file-filter-suffixes}
+      @about-function{file-filter-new}
+      @about-function{file-filter-new-from-gvariant}
+      @about-function{file-filter-add-mime-type}
+      @about-function{file-filter-add-pattern}
+      @about-function{file-filter-add-pixbuf-formats}
+      @about-function{file-filter-add-suffix}
+      @about-function{file-filter-attributes}
+      @about-function{file-filter-to-gvariant}
+    @end{subsection}
+    @begin[GtkSorter]{subsection}
+      @about-symbol{sorter-order}
+      @about-symbol{sorter-change}
+      @about-class{sorter}
+      @about-function{sorter-compare}
+      @about-function{sorter-order}
+      @about-function{sorter-changed}
+      @about-function{ordering-from-cmpfunc}
+    @end{subsection}
+    @begin[GtkCustomSorter]{subsection}
+      @about-class{custom-sorter}
+      @about-function{custom-sorter-new}
+      @about-function{custom-sorter-set-sort-func}
+    @end{subsection}
+    @begin[GtkMultiSorter]{subsection}
+      @about-class{multi-sorter}
+      @about-generic{multi-sorter-item-type}
+      @about-generic{multi-sorter-n-items}
+      @about-function{multi-sorter-new}
+      @about-function{multi-sorter-append}
+      @about-function{multi-sorter-remove}
+    @end{subsection}
+    @begin[GtkStringSorter]{subsection}
+      @about-symbol{collation}
+      @about-class{string-sorter}
+      @about-generic{string-sorter-collation}
+      @about-generic{string-sorter-expression}
+      @about-generic{string-sorter-ignore-case}
+      @about-function{string-sorter-new}
+    @end{subsection}
+    @begin[GtkNumericSorter]{subsection}
+      @about-class{numeric-sorter}
+      @about-generic{numeric-sorter-expression}
+      @about-generic{numeric-sorter-sort-order}
+      @about-function{numeric-sorter-new}
+    @end{subsection}
+    @begin[GtkSelectionModel]{subsection}
+      @about-class{selection-model}
+      @about-function{selection-model-is-selected}
+      @about-function{selection-model-selection}
+      @about-function{selection-model-selection-in-range}
+      @about-function{selection-model-select-item}
+      @about-function{selection-model-unselect-item}
+      @about-function{selection-model-select-range}
+      @about-function{selection-model-unselect-range}
+      @about-function{selection-model-select-all}
+      @about-function{selection-model-unselect-all}
+      @about-function{selection-model-set-selection}
+      @about-function{selection-model-selection-changed}
+    @end{subsection}
+    @begin[GtkNoSelection]{subsection}
+      @about-class{no-selection}
+      @about-generic{no-selection-item-type}
+      @about-generic{no-selection-model}
+      @about-generic{no-selection-n-items}
+      @about-function{no-selection-new}
+    @end{subsection}
+    @begin[GtkSingleSelection]{subsection}
+      @about-variable{gtk:+invalid-list-position+}
+      @about-class{single-selection}
+      @about-generic{single-selection-autoselect}
+      @about-generic{single-selection-can-unselect}
+      @about-generic{single-selection-item-type}
+      @about-generic{single-selection-model}
+      @about-generic{single-selection-n-items}
+      @about-generic{single-selection-selected}
+      @about-generic{single-selection-selected-item}
+      @about-function{single-selection-new}
+    @end{subsection}
+    @begin[GtkMultiSelection]{subsection}
+      @about-class{multi-selection}
+      @about-generic{multi-selection-item-type}
+      @about-generic{multi-selection-model}
+      @about-generic{multi-selection-n-items}
+      @about-function{multi-selection-new}
+    @end{subsection}
+    @begin[GtkSectionModel]{subsection}
+      @about-class{section-model}
+      @about-function{section-model-section}
+      @about-function{section-model-sections-changed}
+    @end{subsection}
+    @begin[GtkFilterListModel]{subsection}
+      @about-class{filter-list-model}
+      @about-generic{filter-list-model-filter}
+      @about-generic{filter-list-model-incremental}
+      @about-generic{filter-list-model-item-type}
+      @about-generic{filter-list-model-model}
+      @about-generic{filter-list-model-n-items}
+      @about-generic{filter-list-model-pending}
+      @about-function{filter-list-model-new}
+    @end{subsection}
+    @begin[GtkFlattenListModel]{subsection}
+      @about-class{flatten-list-model}
+      @about-generic{flatten-list-model-item-type}
+      @about-generic{flatten-list-model-model}
+      @about-generic{flatten-list-model-n-items}
+      @about-function{flatten-list-model-new}
+      @about-function{flatten-list-model-model-for-item}
+    @end{subsection}
+    @begin[GtkMapListModel]{subsection}
+      @about-class{map-list-model}
+      @about-generic{map-list-model-has-map}
+      @about-generic{map-list-model-item-type}
+      @about-generic{map-list-model-model}
+      @about-generic{map-list-model-n-items}
+      @about-function{map-list-model-new}
+      @about-symbol{map-list-model-map-func}
+      @about-function{map-list-model-set-map-func}
+    @end{subsection}
+    @begin[GtkSliceListModel]{subsection}
+      @about-class{slice-list-model}
+      @about-generic{slice-list-model-item-type}
+      @about-generic{slice-list-model-model}
+      @about-generic{slice-list-model-n-items}
+      @about-generic{slice-list-model-offset}
+      @about-generic{slice-list-model-size}
+      @about-function{slice-list-model-new}
+    @end{subsection}
+    @begin[GtkSortListModel]{subsection}
+      @about-class{sort-list-model}
+      @about-generic{sort-list-model-incremental}
+      @about-generic{sort-list-model-item-type}
+      @about-generic{sort-list-model-model}
+      @about-generic{sort-list-model-n-items}
+      @about-generic{sort-list-model-pending}
+      @about-generic{sort-list-model-section-sorter}
+      @about-generic{sort-list-model-sorter}
+      @about-function{sort-list-model-new}
+    @end{subsection}
+    @begin[GtkSelectionFilterModel]{subsection}
+      @about-class{selection-filter-model}
+      @about-generic{selection-filter-model-item-type}
+      @about-generic{selection-filter-model-model}
+      @about-generic{selection-filter-model-n-items}
+      @about-function{selection-filter-model-new}
+    @end{subsection}
+    @begin[GtkBookmarkList]{subsection}
+      @about-class{bookmark-list}
+      @about-generic{bookmark-list-attributes}
+      @about-generic{bookmark-list-filename}
+      @about-generic{bookmark-list-io-priority}
+      @about-generic{bookmark-list-item-type}
+      @about-generic{bookmark-list-loading}
+      @about-generic{bookmark-list-n-items}
+      @about-function{bookmark-list-new}
+      @about-function{bookmark-list-is-loading}
+    @end{subsection}
+    @begin[GtkDirectoryList]{subsection}
+      @about-class{directory-list}
+      @about-generic{directory-list-attributes}
+      @about-generic{directory-list-error}
+      @about-generic{directory-list-file}
+      @about-generic{directory-list-io-priority}
+      @about-generic{directory-list-item-type}
+      @about-generic{directory-list-loading}
+      @about-generic{directory-list-monitored}
+      @about-generic{directory-list-n-items}
+      @about-function{directory-list-new}
+      @about-function{directory-list-is-loading}
+    @end{subsection}
+    @begin[GtkStringObject]{subsection}
+      @about-class{string-object}
+      @about-generic{string-object-string}
+      @about-function{string-object-new}
+    @end{subsection}
+    @begin[GtkStringList]{subsection}
+      @about-class{string-list}
+      @about-generic{string-list-item-type}
+      @about-generic{string-list-n-items}
+      @about-function{string-list-new}
+      @about-function{string-list-append}
+      @about-function{string-list-remove}
+      @about-function{string-list-splice}
+      @about-function{string-list-string}
+      @about-function{string-list-find}
+    @end{subsection}
+  @end{section}
+  @begin[List-based Widgets]{section}
+    @begin[List Widget Overview]{subsection}
+      GTK provides powerful widgets to display and edit lists of data. This
+      document gives an overview over the concepts and how they work together
+      to allow developers to implement lists. Lists are intended to be used
+      whenever developers want to display many objects in roughly the same way.
+
+      Lists are perfectly fine to be used for very short list of only 2 or 3
+      elements, but generally scale to millions of items. Of course, the larger
+      the list grows, the more care needs to be taken to choose the right data
+      structures to keep things running well. Lists are meant to be used with
+      changing data, both with the items itself changing as well as the list
+      adding and removing items. Of course, they work just as well with static
+      data.
+
+      @subheading{Terminology}
+      These terms are used throughout the documentation when talking about lists
+      and you should be aware of what they refer to. These are often generic
+      terms that have a specific meaning in this context.
+
+      Views or list widgets are the widgets that hold and manage the lists.
+      Examples of these widgets would be the @class{gtk:list-view} or
+      @class{gtk:grid-view} widgets.
+
+      Views display data from a model. Models implement the @class{g:list-model}
+      interface and can be provided in a variety of ways:
+      @begin{itemize}
+        @item{List model implementations for many specific types of data already
+          exist, for example the @class{gtk:directory-list} or
+          @class{gtk:string-list} objects.}
+        @item{There are generic list model implementations like the
+          @class{g:list-store} object that allow building lists of arbitrary
+          objects.}
+        @item{Wrapping list models like @class{gtk:filter-list-model} or
+          @class{gtk:sort-list-model} objects modify, adapt or combine other
+          models.}
+        @item{Last but not least, developers are encouraged to create their own
+          @class{g:list-model} implementations. The interface is kept
+          deliberately small to make this easy.}
+      @end{itemize}
+      The same model can be used in multiple different views and wrapped with
+      multiple different models at once.
+
+      The elements in a model are called items. All items are @class{g:object}
+      instances. Every item in a model has a position which is the unsigned
+      integer that describes where in the model the item is located. The first
+      item in a model is at position 0. The position of an item can change as
+      other items are added or removed from the model.
+
+      It is important to be aware of the difference between items and positions
+      because the mapping from position to item is not permanent, so developers
+      should think about whether they want to track items or positions when
+      working with models. Oftentimes some things are really hard to do one way
+      but very easy the other way.
+
+      The other important part of a view is a factory. Each factory is a
+      @class{gtk:list-item-factory} implementation that takes care of mapping
+      the items of the model to widgets that can be shown in the view.
+
+      The way factories do this is by creating a list item for each item that is
+      currently in use. List items are always @class{gtk:list-item} instances.
+      They are only ever created by GTK and provide information about what item
+      they are meant to display.
+
+      Different factory implementations use various different methods to allow
+      developers to add the right widgets to list items and to link those
+      widgets with the item managed by the list item. Finding a suitable factory
+      implementation for the data displayed, the programming language and
+      development environment is an important task that can simplify setting up
+      the view tremendously.
+
+      Views support selections via a selection model. A selection model is an
+      implementation of the @class{gtk:selection-model} interface on top of the
+      @class{g:list-model} interface that allows marking each item in a model
+      as either selected or not selected. Just like regular models, this can be
+      implemented either by implementing the @class{gtk:selection-model}
+      interface directly or by wrapping a model with one of the GTK models
+      provided for this purposes, such as the @class{gtk:no-selection} or
+      @class{gtk:single-selection} models.
+
+      The behavior of selection models - that is, which items they allow
+      selecting and what effect this has on other items - is completely up to
+      the selection model. As such, single-selections, multi-selections or
+      sharing selection state between different selection models and/or views
+      is possible. The selection state of an item is exposed in the list item
+      via the @slot[gtk:list-item]{selected} property.
+
+      Views and list items also support activation. Activation means that double
+      clicking or pressing enter while inside a focused row will cause the view
+      to emit a signal such as the @code{GtkListView::activate} signal. This
+      provides an easy way to set up lists, but can also be turned off on
+      list items if undesired.
+
+      Both selections and activation are supported among other things via
+      widget actions. This allows developers to add widgets to their lists that
+      cause selections to change or to trigger activation via the
+      @class{gtk:actionable} interface. For a list of all supported actions see
+      the relevant documentation.
+
+      @subheading{Behind the scenes}
+      While it is not a problem for short lists to instantiate widgets for every
+      item in the model, once lists grow to thousands or millions of elements,
+      this gets less feasible. Because of this, the views only create a limited
+      amount of list items and recycle them by binding them to new items. In
+      general, views try to keep list items available only for the items that
+      can actually be seen on screen.
+
+      While this behavior allows views to scale effortlessly to huge lists, it
+      has a few implications for what can be done with views. For example, it is
+      not possible to query a view for a list item used for a certain position -
+      there might not be one and even if there is, that list item might soon be
+      recycled for a new position.
+
+      It is also important that developers save state they care about in the
+      item and do not rely on the widgets they created as those widgets can be
+      recycled for a new position at any time causing any state to be lost.
+
+      Another important requirement for views is that they need to know which
+      items are not visible so they can be recycled. Views achieve that by
+      implementing the @class{gtk:scrollable} interface and expecting to be
+      placed directly into a @class{gtk:scrolled-window} widget.
+
+      Of course, if you are only using models with few items, this is not
+      important and you can treat views like any other widget. But if you use
+      large lists and your performance suffers, you should be aware of this.
+      Views also allow tuning the number of list items they create such as with
+      the @fun{gtk:grid-view-max-columns} function, and developers running into
+      performance problems should definitely study the tradeoffs of those and
+      experiment with them.
+
+      @subheading{Choosing the right model}
+      GTK offers a wide variety of wrapping models which change or supplement an
+      existing model (or models) in some way. But when it comes to storing your
+      actual data, there are only a few ready-made choices available:
+      the @class{g:list-store}, @class{gtk:string-list}, and
+      @class{gtk:directory-list} objects.
+
+      The @class{g:list-store} object is backed by a balanced tree and has
+      performance characteristics that are expected for that data structure. It
+      works reasonably well for dataset sizes in the 1,000,000 range, and can
+      handle insertions and deletions. It uses a cached iterator to make linear
+      access to the items fast.
+
+      The @class{gtk:string-list} object is not a general store - it can only
+      handle strings. It is backed by an dynamically allocated array and has
+      performance characteristics that are expected for that data structure.
+      The @class{gtk:string-list} object is a good fit for any place where you
+      would otherwise use @code{char*[@]} and works best if the dataset is not
+      very dynamic.
+
+      The @class{gtk:directory-list} object is a list model that wraps the
+      @code{g_file_enumerate_children_async()} function. It presents a
+      @class{g:list-model} object and fills it asynchronously with the
+      @code{GFiles} returned from that function.
+
+      If these models do not fit your use case or scalability requirements, you
+      should make a custom @class{g:list-model} implementation. It is a small
+      interface and not very hard to implement.
+
+      @subheading{Displaying trees}
+      While the @class{gtk:tree-view} widget provided built-in support for
+      trees, the list widgets, and in particular the @class{g:list-model}
+      implementation do not. This was a design choice because the common use
+      case is displaying lists and not trees and it greatly simplifies the API
+      interface provided.
+
+      However, GTK provides functionality to make lists look and behave like
+      trees for use cases that require trees. This is achieved by using the
+      @class{gtk:tree-list-model} model to flatten a tree into a list. The
+      @class{gtk:tree-expander} widget can then be used inside a list item to
+      allow users to expand and collapse rows and provide a similar experience
+      to the @class{gtk:tree-view} widget. Developers should refer to those
+      objects’ API reference for more discussion on the topic.
+
+      @subheading{List styles}
+      One of the advantages of the new list widgets over GtkTreeView and cell
+      renderers is that they are styleable using GTK CSS. This provides a lot of
+      flexibility. The themes that ship with GTK provide a few predefined list
+      styles that can be used in many situations.
+
+      @image[rich-list]{Figure: Rich list}
+
+      This rich list style is low density, spacious and uses an outline focus
+      ring. It is suitable for lists of controls, for example, in preference
+      dialogs or settings panels. Use the @code{.rich-list} style class.
+
+      @image[navigation-sidebar]{Figure: Navigation sidebar}
+
+      The sidebar style of list is medium density, using a full background to
+      indicate focus and selection. Use the @code{.navigation-sidebar} style
+      class.
+
+      @image[data-table]{Figure: Data table}
+
+      The data table style of list is a high density table, similar in style to
+      a traditional tree view. Individual cells can be selectable and editable.
+      Use the @code{.data-table} style class.
+
+      @subheading{Sections}
+      List models can optionally group their items into sections, by
+      implementing the @class{gtk:section-model} interface. The
+      @class{gtk:list-view} widget can display headers for sections, by
+      installing a separate header factory.
+
+      Many GTK list models support section inherently, or they pass through the
+      section of a model they are wrapping.
+
+      @subheading{Comparison to GtkTreeView}
+      Developers familiar with GtkTreeView may wonder how this way of doing
+      lists compares to the way they know. This section will try to outline the
+      similarities and differences between the two.
+
+      This new approach tries to provide roughly the same functionality as the
+      old approach but often uses a very different way to achieve these goals.
+      The main difference and one of the primary reasons for this new
+      development is that items can be displayed using regular widgets and the
+      separate cell renderer machinery is no longer necessary. This allows all
+      benefits that widgets provide, such as complex layout, animations and CSS
+      styling.
+
+      The other big difference is the massive change to the data model.
+      The @class{gtk:tree-model} interface was a rather complex interface for a
+      tree data structure. The @class{g:list-model} interface is deliberately
+      designed to be a very simple data structure for lists only. See above for
+      how to still do trees with this new model. Another big change is that the
+      new model allows for bulk changes via the
+      @sig[g:list-model]{items-changed} signal while the @class{gtk:tree-model}
+      interface only allows a single item to change at once. The goal here is of
+      course to encourage implementation of custom list models.
+
+      Another consequence of the new model is that it is now easily possible to
+      refer to the contents of a row in the model directly by keeping the item,
+      while the @class{gtk:tree-row-reference} implementation was a very slow
+      mechanism to achieve the same. And because the items are real objects,
+      developers can make them emit change signals causing list items and their
+      children to update, which was not possible with the @class{gtk:tree-model}
+      implementation.
+
+      The selection handling is also different. While selections used to be
+      managed via custom code in each widget, selection state is now meant to
+      be managed by the selection models. In particular this allows for complex
+      use cases with specialized requirements.
+
+      Finally here is a quick comparison chart of equivalent functionality to
+      look for when transitioning code:
+      @begin{pre}
+Old                     New
+-------------------------------------------------------
+GtkTreeModel            GListModel
+GtkTreePath             guint position, GtkTreeListRow
+GtkTreeIter             guint position
+GtkTreeRowReference     GObject item
+GtkListStore            GListStore
+GtkTreeStore            GtkTreeListModel, GtkTreeExpander
+GtkTreeSelection        GtkSelectionModel
+GtkTreeViewColumn       GtkColumnView
+GtkTreeView             GtkListView, GtkColumnView
+GtkCellView             GtkListItem
+GtkComboBox             GtkDropDown
+GtkIconView             GtkGridView
+GtkTreeSortable         GtkColumnView
+GtkTreeModelSort        GtkSortListModel
+GtkTreeModelFilter      GtkFilterListModel
+GtkCellLayout           GtkListItemFactory
+GtkCellArea             GtkWidget
+GtkCellRenderer         GtkWidget
+      @end{pre}
+    @end{subsection}
+    @begin[GtkListItem]{subsection}
+      @about-class{list-item}
+      @about-generic{list-item-accessible-description}
+      @about-generic{list-item-accessible-label}
+      @about-generic{list-item-activatable}
+      @about-generic{list-item-child}
+      @about-generic{list-item-focusable}
+      @about-generic{list-item-item}
+      @about-generic{list-item-position}
+      @about-generic{list-item-selectable}
+      @about-generic{list-item-selected}
+    @end{subsection}
+    @begin[GtkListItemFactory]{subsection}
+      @about-class{list-item-factory}
+    @end{subsection}
+    @begin[GtkSignalListItemFactory]{subsection}
+      @about-class{signal-list-item-factory}
+      @about-function{signal-list-item-factory-new}
+    @end{subsection}
+    @begin[GtkBuilderListItemFactory]{subsection}
+      @about-class{builder-list-item-factory}
+      @about-generic{builder-list-item-factory-bytes}
+      @about-generic{builder-list-item-factory-resource}
+      @about-generic{builder-list-item-factory-scope}
+      @about-function{builder-list-item-factory-new-from-bytes}
+      @about-function{builder-list-item-factory-new-from-resource}
+    @end{subsection}
+    @begin[GtkScrollInfo]{subsection}
+      @about-class{scroll-info}
+      @about-function{scroll-info-new}
+      @about-function{scroll-info-enable-horizontal}
+      @about-function{scroll-info-enable-vertical}
+    @end{subsection}
+    @begin[GtkListHeader]{subsection}
+      @about-class{list-header}
+      @about-generic{list-header-child}
+      @about-generic{list-header-end}
+      @about-generic{list-header-item}
+      @about-generic{list-header-n-items}
+      @about-generic{list-header-start}
+    @end{subsection}
+    @begin[GtkListView]{subsection}
+      @about-symbol{list-tab-behavior}
+      @about-symbol{list-scroll-flags}
+      @about-class{list-base}
+      @about-generic{list-base-orientation}
+      @about-class{list-view}
+      @about-generic{list-view-enable-rubberband}
+      @about-generic{list-view-factory}
+      @about-generic{list-view-header-factory}
+      @about-generic{list-view-model}
+      @about-generic{list-view-show-separators}
+      @about-generic{list-view-single-click-activate}
+      @about-generic{list-view-tab-behavior}
+      @about-function{list-view-new}
+      @about-function{list-view-scroll-to}
+    @end{subsection}
+    @begin[GtkGridView]{subsection}
+      @about-class{grid-view}
+      @about-generic{grid-view-enable-rubberband}
+      @about-generic{grid-view-factory}
+      @about-generic{grid-view-max-columns}
+      @about-generic{grid-view-min-columns}
+      @about-generic{grid-view-model}
+      @about-generic{grid-view-single-click-activate}
+      @about-generic{grid-view-tab-behavior}
+      @about-function{grid-view-new}
+      @about-function{grid-view-scroll-to}
+    @end{subsection}
+    @begin[GtkColumnView]{subsection}
+      @about-class{column-view}
+      @about-generic{column-view-columns}
+      @about-generic{column-view-enable-rubberband}
+      @about-generic{column-view-header-factory}
+      @about-generic{column-view-model}
+      @about-generic{column-view-reorderable}
+      @about-generic{column-view-row-factory}
+      @about-generic{column-view-show-column-separators}
+      @about-generic{column-view-show-row-separators}
+      @about-generic{column-view-single-click-activate}
+      @about-generic{column-view-sorter}
+      @about-generic{column-view-tab-behavior}
+      @about-function{column-view-new}
+      @about-function{column-view-append-column}
+      @about-function{column-view-insert-column}
+      @about-function{column-view-remove-column}
+      @about-function{column-view-sort-by-column}
+    @end{subsection}
+    @begin[GtkColumnViewColumn]{subsection}
+      @about-class{column-view-column}
+      @about-generic{column-view-column-column-view}
+      @about-generic{column-view-column-expand}
+      @about-generic{column-view-column-factory}
+      @about-generic{column-view-column-fixed-width}
+      @about-generic{column-view-column-header-menu}
+      @about-generic{column-view-column-id}
+      @about-generic{column-view-column-resizable}
+      @about-generic{column-view-column-sorter}
+      @about-generic{column-view-column-title}
+      @about-generic{column-view-column-visible}
+      @about-function{column-view-column-new}
+    @end{subsection}
+    @begin[GtkColumnViewCell]{subsection}
+      @about-class{column-view-cell}
+      @about-generic{column-view-cell-child}
+      @about-generic{column-view-cell-focusable}
+      @about-generic{column-view-cell-item}
+      @about-generic{column-view-cell-position}
+      @about-generic{column-view-cell-selected}
+    @end{subsection}
+    @begin[GtkColumnViewRow]{subsection}
+      @about-class{column-view-row}
+      @about-generic{column-view-row-accessible-description}
+      @about-generic{column-view-row-accessible-label}
+      @about-generic{column-view-row-activatable}
+      @about-generic{column-view-row-focusable}
+      @about-generic{column-view-row-item}
+      @about-generic{column-view-row-position}
+      @about-generic{column-view-row-selectable}
+      @about-generic{column-view-row-selected}
+    @end{subsection}
+    @begin[GtkColumnViewSorter]{subsection}
+      @about-class{column-view-sorter}
+      @about-generic{column-view-sorter-primary-sort-column}
+      @about-generic{column-view-sorter-primary-sort-order}
+      @about-function{column-view-sorter-n-sort-columns}
+      @about-function{column-view-sorter-nth-sort-column}
+    @end{subsection}
+    @begin[GtkDropDown]{subsection}
+      @about-class{drop-down}
+      @about-generic{drop-down-enable-search}
+      @about-generic{drop-down-expression}
+      @about-generic{drop-down-factory}
+      @about-generic{drop-down-header-factory}
+      @about-generic{drop-down-list-factory}
+      @about-generic{drop-down-model}
+      @about-generic{drop-down-search-match-mode}
+      @about-generic{drop-down-selected}
+      @about-generic{drop-down-selected-item}
+      @about-generic{drop-down-show-arrow}
+      @about-function{drop-down-new}
+      @about-function{drop-down-new-from-strings}
+    @end{subsection}
+  @end{section}
+  @begin[Tree support]{section}
+    @begin[GtkTreeListRow]{subsection}
+      @about-class{tree-list-row}
+      @about-generic{tree-list-row-children}
+      @about-generic{tree-list-row-depth}
+      @about-generic{tree-list-row-expandable}
+      @about-generic{tree-list-row-expanded}
+      @about-generic{tree-list-row-item}
+      @about-function{tree-list-row-child-row}
+      @about-function{tree-list-row-parent}
+      @about-function{tree-list-row-position}
+      @about-function{tree-list-row-is-expandable}
+    @end{subsection}
+    @begin[GtkTreeListModel]{subsection}
+      @about-class{tree-list-model}
+      @about-generic{tree-list-model-autoexpand}
+      @about-generic{tree-list-model-item-type}
+      @about-generic{tree-list-model-model}
+      @about-generic{tree-list-model-n-items}
+      @about-generic{tree-list-model-passthrough}
+      @about-symbol{tree-list-model-create-model-func}
+      @about-function{tree-list-model-new}
+      @about-function{tree-list-model-row}
+      @about-function{tree-list-model-child-row}
+    @end{subsection}
+    @begin[GtkTreeListRowSorter]{subsection}
+      @about-class{tree-list-row-sorter}
+      @about-generic{tree-list-row-sorter-sorter}
+      @about-function{tree-list-row-sorter-new}
+    @end{subsection}
+    @begin[GtkTreeExpander]{subsection}
+      @about-class{tree-expander}
+      @about-generic{tree-expander-child}
+      @about-generic{tree-expander-hide-expander}
+      @about-generic{tree-expander-indent-for-depth}
+      @about-generic{tree-expander-indent-for-icon}
+      @about-generic{tree-expander-item}
+      @about-generic{tree-expander-list-row}
+      @about-function{tree-expander-new}
     @end{subsection}
   @end{section}
   @begin[Popovers]{section}

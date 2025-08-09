@@ -499,6 +499,109 @@
     :components
     ((:file "rtest-gtk4")
 
+     ;; GDK General
+     (:file "rtest-gdk4-enumerations")
+     (:file "rtest-gdk4-rectangle")
+     (:file "rtest-gdk4-rgba")
+     (:file "rtest-gdk4-keyval")
+     (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
+     (:file "rtest-gdk4-color-state"              :if-feature :gtk-4-16)
+     (:file "rtest-gdk4-cicp-params"              :if-feature :gtk-4-16)
+
+     ;; Displays, Devices, Monitors, Seats
+     (:file "rtest-gdk4-display-manager")
+     (:file "rtest-gdk4-display")
+     (:file "rtest-gdk4-device-tool")
+     (:file "rtest-gdk4-device")
+     (:file "rtest-gdk4-device-pad")
+     (:file "rtest-gdk4-monitor")
+     (:file "rtest-gdk4-seat")
+
+     ;; Paintables, Textures
+     (:file "rtest-gdk4-paintable")
+     (:file "rtest-gdk4-paintable-subclassing")
+     (:file "rtest-gdk4-texture")
+     (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk-4-10)
+     (:file "rtest-gdk4-dmabuf-texture"          :if-feature :gtk-4-14)
+
+     ;; Events
+     (:file "rtest-gdk4-event")
+
+     ;; Surfaces, Toplevels, Popups
+     (:file "rtest-gdk4-surface")
+     (:file "rtest-gdk4-toplevel-layout")
+     (:file "rtest-gdk4-toplevel")
+     (:file "rtest-gdk4-toplevel-size")
+     (:file "rtest-gdk4-popup")
+     (:file "rtest-gdk4-popup-layout")
+
+     ;; Draw contexts
+     (:file "rtest-gdk4-draw-context")
+     (:file "rtest-gdk4-gl-context")
+     (:file "rtest-gdk4-cairo-context")
+
+     ;; Clipboard, Drag and Drop
+     (:file "rtest-gdk4-content-formats")
+     (:file "rtest-gdk4-content-provider")
+     (:file "rtest-gdk4-content-serializer")
+     (:file "rtest-gdk4-content-deserializer")
+     (:file "rtest-gdk4-clipboard")
+     (:file "rtest-gdk4-drag")
+     (:file "rtest-gdk4-drop")
+     (:file "rtest-gdk4-drag-surface")
+
+     ;; Application launching
+     (:file "rtest-gdk4-app-launch-context")
+
+     ;; Miscellaneous
+     (:file "rtest-gdk4-cursor")
+     (:file "rtest-gdk4-frame-timings")
+     (:file "rtest-gdk4-frame-clock")
+
+     ;; Pixbuf, Pango, Cairo, Backends interaction
+     (:file "rtest-gdk4-pixbuf-interaction")
+     (:file "rtest-gdk4-pango-interaction")
+     (:file "rtest-gdk4-cairo-interaction")
+
+     ;; GSK
+     (:file "rtest-gsk4-rounded-rect")
+     (:file "rtest-gsk4-transform")
+     (:file "rtest-gsk4-path"                     :if-feature :gtk-4-14)
+     (:file "rtest-gsk4-path-builder"             :if-feature :gtk-4-14)
+     (:file "rtest-gsk4-renderer")
+     (:file "rtest-gsk4-render-node")
+
+     ;; GTK Core
+     (:file "rtest-gtk4-version")
+     (:file "rtest-gtk4-enumerations")
+     (:file "rtest-gtk4-main-loop")
+
+     ;; Theming in GTK
+     (:file "rtest-gtk4-style-provider")
+     (:file "rtest-gtk4-css-provider")
+     (:file "rtest-gtk4-style-context")
+     (:file "rtest-gtk4-icon-paintable")
+     (:file "rtest-gtk4-icon-theme")
+
+     ;; Interfaces
+     (:file "rtest-gtk4-accessible")
+     (:file "rtest-gtk4-accessible-range"         :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-accessible-text"          :if-feature :gtk-4-14)
+     (:file "rtest-gtk4-actionable")
+     (:file "rtest-gtk4-cell-editable")
+     (:file "rtest-gtk4-native")
+     (:file "rtest-gtk4-orientable")
+     (:file "rtest-gtk4-root")
+     (:file "rtest-gtk4-scrollable")
+     (:file "rtest-gtk4-shortcut-manager")
+
+     ;; Settings
+     (:file "rtest-gtk4-settings")
+
+     ;; Interface builder
+     (:file "rtest-gtk4-buildable")
+     (:file "rtest-gtk4-builder")
+
      ;; GListModel support
      (:file "rtest-gtk4-bitset")
      (:file "rtest-gtk4-expression")
@@ -534,57 +637,6 @@
      (:file "rtest-gtk4-directory-list")
      (:file "rtest-gtk4-string-list")
 
-     ;; List-based widgets
-     (:file "rtest-gtk4-list-item")
-     (:file "rtest-gtk4-list-item-factory")
-     (:file "rtest-gtk4-signal-list-item-factory")
-     (:file "rtest-gtk4-builder-list-item-factory")
-     (:file "rtest-gtk4-scroll-info"              :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-list-header"              :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-list-view")
-     (:file "rtest-gtk4-grid-view")
-     (:file "rtest-gtk4-column-view")
-     (:file "rtest-gtk4-column-view-column")
-     (:file "rtest-gtk4-column-view-cell"         :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-column-view-row"          :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-drop-down")
-
-     ;; Tree support
-     (:file "rtest-gtk4-tree-list-model")
-     (:file "rtest-gtk4-tree-list-row-sorter")
-     (:file "rtest-gtk4-tree-expander")
-
-     ;; GTK Core
-     (:file "rtest-gtk4-version")
-     (:file "rtest-gtk4-enumerations")
-     (:file "rtest-gtk4-main-loop")
-
-     ;; Theming in GTK
-     (:file "rtest-gtk4-style-provider")
-     (:file "rtest-gtk4-css-provider")
-     (:file "rtest-gtk4-style-context")
-     (:file "rtest-gtk4-icon-paintable")
-     (:file "rtest-gtk4-icon-theme")
-
-     ;; Interfaces
-     (:file "rtest-gtk4-accessible")
-     (:file "rtest-gtk4-accessible-range"         :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-accessible-text"          :if-feature :gtk-4-14)
-     (:file "rtest-gtk4-actionable")
-     (:file "rtest-gtk4-cell-editable")
-     (:file "rtest-gtk4-native")
-     (:file "rtest-gtk4-orientable")
-     (:file "rtest-gtk4-root")
-     (:file "rtest-gtk4-scrollable")
-     (:file "rtest-gtk4-shortcut-manager")
-
-     ;; Settings
-     (:file "rtest-gtk4-settings")
-
-     ;; Interface builder
-     (:file "rtest-gtk4-buildable")
-     (:file "rtest-gtk4-builder")
-
      ;; Layout Managers
      (:file "rtest-gtk4-layout-manager")
      (:file "rtest-gtk4-layout-child")
@@ -604,6 +656,26 @@
      (:file "rtest-gtk4-widget")
      (:file "rtest-gtk4-widget-subclassing")
      (:file "rtest-gtk4-range")
+
+     ;; List-based widgets
+     (:file "rtest-gtk4-list-item")
+     (:file "rtest-gtk4-list-item-factory")
+     (:file "rtest-gtk4-signal-list-item-factory")
+     (:file "rtest-gtk4-builder-list-item-factory")
+     (:file "rtest-gtk4-scroll-info"              :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-list-header"              :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-list-view")
+     (:file "rtest-gtk4-grid-view")
+     (:file "rtest-gtk4-column-view")
+     (:file "rtest-gtk4-column-view-column")
+     (:file "rtest-gtk4-column-view-cell"         :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-column-view-row"          :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-drop-down")
+
+     ;; Tree support
+     (:file "rtest-gtk4-tree-list-model")
+     (:file "rtest-gtk4-tree-list-row-sorter")
+     (:file "rtest-gtk4-tree-expander")
 
      ;; Layout Containers
      (:file "rtest-gtk4-box")
@@ -848,78 +920,6 @@
      ;; Application support
      (:file "rtest-gtk4-application")
      (:file "rtest-gtk4-application-window")
-
-     ;; GDK General
-     (:file "rtest-gdk4-enumerations")
-     (:file "rtest-gdk4-rectangle")
-     (:file "rtest-gdk4-rgba")
-     (:file "rtest-gdk4-keyval")
-     (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
-     (:file "rtest-gdk4-color-state"              :if-feature :gtk-4-16)
-     (:file "rtest-gdk4-cicp-params"              :if-feature :gtk-4-16)
-
-     ;; Displays, Devices, Monitors, Seats
-     (:file "rtest-gdk4-display-manager")
-     (:file "rtest-gdk4-display")
-     (:file "rtest-gdk4-device-tool")
-     (:file "rtest-gdk4-device")
-     (:file "rtest-gdk4-device-pad")
-     (:file "rtest-gdk4-monitor")
-     (:file "rtest-gdk4-seat")
-
-     ;; Paintables, Textures
-     (:file "rtest-gdk4-paintable")
-     (:file "rtest-gdk4-paintable-subclassing")
-     (:file "rtest-gdk4-texture")
-     (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk-4-10)
-     (:file "rtest-gdk4-dmabuf-texture"          :if-feature :gtk-4-14)
-
-     ;; Events
-     (:file "rtest-gdk4-event")
-
-     ;; Surfaces, Toplevels, Popups
-     (:file "rtest-gdk4-surface")
-     (:file "rtest-gdk4-toplevel-layout")
-     (:file "rtest-gdk4-toplevel")
-     (:file "rtest-gdk4-toplevel-size")
-     (:file "rtest-gdk4-popup")
-     (:file "rtest-gdk4-popup-layout")
-
-     ;; Draw contexts
-     (:file "rtest-gdk4-draw-context")
-     (:file "rtest-gdk4-gl-context")
-     (:file "rtest-gdk4-cairo-context")
-
-     ;; Clipboard, Drag and Drop
-     (:file "rtest-gdk4-content-formats")
-     (:file "rtest-gdk4-content-provider")
-     (:file "rtest-gdk4-content-serializer")
-     (:file "rtest-gdk4-content-deserializer")
-     (:file "rtest-gdk4-clipboard")
-     (:file "rtest-gdk4-drag")
-     (:file "rtest-gdk4-drop")
-     (:file "rtest-gdk4-drag-surface")
-
-     ;; Application launching
-     (:file "rtest-gdk4-app-launch-context")
-
-     ;; Miscellaneous
-     (:file "rtest-gdk4-cursor")
-     (:file "rtest-gdk4-frame-timings")
-     (:file "rtest-gdk4-frame-clock")
-
-     ;; Pixbuf, Pango, Cairo, Backends interaction
-     (:file "rtest-gdk4-pixbuf-interaction")
-     (:file "rtest-gdk4-pango-interaction")
-     (:file "rtest-gdk4-cairo-interaction")
-
-     ;; GSK
-     (:file "rtest-gsk4-renderer")
-     (:file "rtest-gsk4-transform")
-     (:file "rtest-gsk4-path"                     :if-feature :gtk-4-14)
-     (:file "rtest-gsk4-path-builder"             :if-feature :gtk-4-14)
-     (:file "rtest-gsk4-render-node")
-     (:file "rtest-gsk4-rounded-rect")
 
      (:file "rtest-gtk4-finish")
 ))))
