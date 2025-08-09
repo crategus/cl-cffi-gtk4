@@ -90,7 +90,7 @@
 
 #+liber-documentation
 (setf (documentation 'viewport 'type)
- "@version{2024-7-5}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:viewport} widget acts as an adaptor class, implementing
     scrollability for child widgets that lack their own scrolling capabilities.
@@ -105,8 +105,9 @@
     @code{viewport}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:viewport} implementation uses the @code{:group} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:viewport} implementation uses the
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-slot{gtk:viewport-child}
   @see-slot{gtk:viewport-scroll-to-focus}
@@ -129,7 +130,7 @@
 (setf (liber:alias-for-function 'viewport-child)
       "Accessor"
       (documentation 'viewport-child 'function)
- "@version{2024-7-5}
+ "@version{2024-07-05}
   @syntax{(gtk:viewport-child object) => child}
   @syntax{(setf (gtk:viewport-child object) child)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -155,7 +156,7 @@
 (setf (liber:alias-for-function 'viewport-scroll-to-focus)
       "Accessor"
       (documentation 'viewport-scroll-to-focus 'function)
- "@version{2024-7-5}
+ "@version{2024-07-05}
   @syntax{(gtk:viewport-scroll-to-focus object) => setting}
   @syntax{(setf (gtk:viewport-scroll-to-focus object) setting)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -179,7 +180,7 @@
 
 (defun viewport-new (&optional (hadjustment nil) (vadjustment nil))
  #+liber-documentation
- "@version{2024-7-5}
+ "@version{2024-07-05}
   @argument[hadjustment]{an optional horizontal @class{gtk:adjustment} object}
   @argument[vadjustment]{an optional vertical @class{gtk:adjustment} object}
   @return{The new @class{gtk:viewport} widget.}
@@ -208,7 +209,7 @@
 #+gtk-4-12
 (defun viewport-scroll-to (viewport descendant &optional scroll)
  #+liber-documentation
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @argument[viewport]{a @class{gtk:viewport} widget}
   @argument[descendant]{a descendant @class{gtk:widget} object of the viewport}
   @argument[scroll]{an optional @class{gtk:scroll-info} instance, or the default

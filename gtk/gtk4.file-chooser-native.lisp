@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-chooser-native.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-native 'type)
- "@version{2024-5-22}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:file-chooser-native} class is an abstraction of a dialog
     suitable for use with \"File Open\" or \"File Save as\" commands.
@@ -112,9 +112,10 @@
   @begin[Response Codes]{dictionary}
     The @class{gtk:file-chooser-native} class inherits from the
     @class{gtk:native-dialog} class, which means it will return the
-    @code{:accept} value if the user accepted, and the @code{:cancel} value if
-    the user pressed cancel. It can also return the @code{:delete-event} value
-    if the window was unexpectedly closed.
+    @val[gtk:response-type]{:accept} value if the user accepted, and the
+    @val[gtk:response-type]{:cancel} value if the user pressed cancel. It can
+    also return the @val[gtk:response-type]{:delete-event} value if the window
+    was unexpectedly closed.
   @end{dictionary}
   @begin[Differences from GtkFileChooserDialog]{dictionary}
     There are a few things in the @class{gtk:file-chooser} API that are not
@@ -209,11 +210,11 @@
 (setf (liber:alias-for-function 'file-chooser-native-accept-label)
       "Accessor"
       (documentation 'file-chooser-native-accept-label 'function)
- "@version{2024-4-26}
+ "@version{2025-07-25}
   @syntax{(gtk:file-chooser-native-accept-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-accept-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
-  @argument[label]{a string with the custom label or @code{nil} for the default}
+  @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-native]{accept-label} slot of the
     @class{gtk:file-chooser-native} interface.
@@ -248,11 +249,11 @@
 (setf (liber:alias-for-function 'file-chooser-native-cancel-label)
       "Accessor"
       (documentation 'file-chooser-native-cancel-label 'function)
- "@version{2024-4-26}
+ "@version{2025-07-25}
   @syntax{(gtk:file-chooser-native-cancel-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-cancel-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
-  @argument[label]{a string with the custom label or @code{nil} for the default}
+  @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-native]{cancel-label} slot of the
     @class{gtk:file-chooser-native} interface.
@@ -280,13 +281,13 @@
 (cffi:defcfun ("gtk_file_chooser_native_new" file-chooser-native-new)
     (g:object file-chooser-native)
  #+liber-documentation
- "@version{2024-4-26}
-  @argument[title]{a string with the title of the native file chooser}
+ "@version{2025-07-25}
+  @argument[title]{a string for the title of the native file chooser}
   @argument[parent]{a @class{gtk:window} transient parent window}
-  @argument[action]{a @symbol{gtk:file-chooser-action} value}
-  @argument[accept-label]{a string with the text to go in the accept button,
+  @argument[action]{a @sym{gtk:file-chooser-action} value}
+  @argument[accept-label]{a string for the text to go in the accept button,
     or @code{nil} for the default}
-  @argument[cancel-label]{a string with the text to go in the cancel button,
+  @argument[cancel-label]{a string for the text to go in the cancel button,
     or @code{nil} for the default}
   @return{The new @class{gtk:file-chooser-native} object.}
   @short{Creates a new @class{gtk:file-chooser-native} object.}

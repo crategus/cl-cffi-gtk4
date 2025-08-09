@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.tooltip.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,7 +65,7 @@
   nil)
 
 (setf (documentation 'tooltip 'type)
- "@version{2024-7-8}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:tooltip} object is an object representing a widget tooltip.
   @end{short}
@@ -83,18 +83,19 @@
       needed to determine when and where to show a tooltip.
     @end{item}
     @begin{item}
-      Connect to the @code{\"query-tooltip\"} signal. The signal will be emitted
-      when a tooltip is supposed to be shown. One of the arguments passed to the
-      signal handler is a @class{gtk:tooltip} object. This is the object that
-      we are about to display as a tooltip, and can be manipulated in your
-      callback function using functions like the @fun{gtk:tooltip-set-icon}
-      function. There are functions for setting the markup of the tooltip,
-      setting an image from a stock icon, or even putting in a custom widget.
+      Connect to the @sig[gtk:widget]{query-tooltip} signal. The signal will be
+      emitted when a tooltip is supposed to be shown. One of the arguments
+      passed to the signal handler is a @class{gtk:tooltip} object. This is the
+      object that we are about to display as a tooltip, and can be manipulated
+      in your callback function using functions like the
+      @fun{gtk:tooltip-set-icon} function. There are functions for setting the
+      markup of the tooltip, setting an image from a stock icon, or even putting
+      in a custom widget.
     @end{item}
     @begin{item}
-      Return @em{true} from your @code{\"query-tooltip\"} signal handler. This
-      causes the tooltip to be show. If you return @em{false}, it will not be
-      shown.
+      Return @em{true} from your @sig[gtk:widget]{query-tooltip} signal handler.
+      This causes the tooltip to be show. If you return @em{false}, it will not
+      be shown.
     @end{item}
   @end{itemize}
   @see-function{gtk:widget-tooltip-text}
@@ -107,7 +108,7 @@
 
 (cffi:defcfun ("gtk_tooltip_set_markup" tooltip-set-markup) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2024-07-08}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[markup]{a markup string, or @code{nil}}
   @begin{short}
@@ -128,7 +129,7 @@
 
 (cffi:defcfun ("gtk_tooltip_set_text" tooltip-set-text) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2024-07-08}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[text]{a text string, or @code{nil}}
   @begin{short}
@@ -149,7 +150,7 @@
 
 (cffi:defcfun ("gtk_tooltip_set_icon" tooltip-set-icon) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2024-07-08}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[paintable]{a @class{gdk:paintable} object, or @code{nil}}
   @begin{short}
@@ -171,9 +172,9 @@
 (cffi:defcfun ("gtk_tooltip_set_icon_from_icon_name"
                tooltip-set-icon-from-icon-name) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2025-07-27}
   @argument[tooltip]{a @class{gtk:tooltip} object}
-  @argument[name]{a string with the icon name, or @code{nil}}
+  @argument[name]{a string for the icon name, or @code{nil}}
   @begin{short}
     Sets the icon of the tooltip, which is in front of the text, to be the icon
     indicated by @arg{name}.
@@ -192,7 +193,7 @@
 (cffi:defcfun ("gtk_tooltip_set_icon_from_gicon" tooltip-set-icon-from-gicon)
     :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2024-07-08}
   @argument[tooltip]{a @class{gtk:tooltip} widget}
   @argument[gicon]{a @class{g:icon} representing the icon, or @code{nil}}
   @begin{short}
@@ -213,7 +214,7 @@
 
 (cffi:defcfun ("gtk_tooltip_set_custom" tooltip-set-custom) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2024-07-08}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[widget]{a @class{gtk:widget} custom widget, or @code{nil} to unset
     the old custom widget}
@@ -238,7 +239,7 @@
 
 (cffi:defcfun ("gtk_tooltip_set_tip_area" tooltip-set-tip-area) :void
  #+liber-documentation
- "@version{#2024-7-8}
+ "@version{#2025-07-17}
   @argument[tooltip]{a @class{gtk:tooltip} object}
   @argument[rectangle]{a @class{gdk:rectangle} instance}
   @begin{short}
@@ -246,7 +247,8 @@
     @arg{rectangle}, in widget coordinates.
   @end{short}
   This is especially useful for properly setting tooltips on
-  @class{gtk:tree-view} rows and cells, @class{gtk:icon-view} widgets, etc.
+  @class{gtk:tree-view} rows and cells, @class{gtk:icon-view} widgets, and so
+  on.
 
   For setting tooltips on the @class{gtk:tree-view} widget, please refer to the
   @fun{gtk:tree-view-set-tooltip-row} and @fun{gtk:tree-view-set-tooltip-cell}

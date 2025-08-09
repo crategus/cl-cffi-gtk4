@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-chooser.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,7 +100,7 @@
 (setf (liber:alias-for-symbol 'file-chooser-action)
       "GEnum"
       (liber:symbol-documentation 'file-chooser-action)
- "@version{2024-4-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkFileChooserAction\" gtk:file-chooser-action
   (:export t
@@ -110,14 +110,14 @@
   (:select-folder 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:open]{Indicates Open mode. The file chooser will only let the user
         pick an existing file.}
       @entry[:save]{Indicates Save mode. The file chooser will let the user pick
         an existing file, or type in a new filename.}
       @entry[:select-folder]{Indicates an Open mode for selecting folders. The
         file chooser will let the user pick an existing folder.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes whether a @class{gtk:file-chooser} widget is being used to
@@ -160,7 +160,7 @@
 (setf (liber:alias-for-class 'file-chooser)
       "Interface"
       (documentation 'file-chooser 'type)
- "@version{2024-5-20}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:file-chooser} interface is an interface that can be
     implemented by file selection widgets.
@@ -249,20 +249,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action" 'file-chooser) t)
- "The @code{action} property of type @symbol{gtk:file-chooser-action}
+ "The @code{action} property of type @sym{gtk:file-chooser-action}
   (Read / Write) @br{}
   The type of operation that the file selector is performing. @br{}
-  Default value: @code{:open}")
+  Default value: @val[gtk:file-chooser-action]{:open}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'file-chooser-action)
       "Accessor"
       (documentation 'file-chooser-action 'function)
- "@version{2024-4-26}
+ "@version{2025-07-25}
   @syntax{(gtk:file-chooser-action object) => action}
   @syntax{(setf (gtk:file-chooser-action object) action)}
   @argument[object]{a @class{gtk:file-chooser} widget}
-  @argument[action]{a @symbol{gtk:file-chooser-action} value}
+  @argument[action]{a @sym{gtk:file-chooser-action} value}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser]{action} slot of the
     @class{gtk:file-chooser} interface.
@@ -295,7 +295,7 @@
 (setf (liber:alias-for-function 'file-chooser-create-folders)
       "Accessor"
       (documentation 'file-chooser-create-folders 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:file-chooser-create-folders object) => setting}
   @syntax{(setf (gtk:file-chooser-create-folders object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
@@ -330,7 +330,7 @@
 (setf (liber:alias-for-function 'file-chooser-filter)
       "Accessor"
       (documentation 'file-chooser-filter 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:file-chooser-filter object) => filter}
   @syntax{(setf (gtk:file-chooser-filter object) filter)}
   @argument[object]{a @class{gtk:file-chooser} widget}
@@ -367,7 +367,7 @@
 (setf (liber:alias-for-function 'file-chooser-filters)
       "Accessor"
       (documentation 'file-chooser-filters 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:file-chooser-filters object) => filters}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[filters]{a @class{g:list-model} object containing the current set
@@ -404,7 +404,7 @@
 (setf (liber:alias-for-function 'file-chooser-select-multiple)
       "Accessor"
       (documentation 'file-chooser-select-multiple 'function)
- "@version{2024-4-26}
+ "@version{2024-04-26}
   @syntax{(gtk:file-chooser-select-multiple object) => setting}
   @syntax{(setf (gtk:file-chooser-select-multiple object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
@@ -439,7 +439,7 @@
 (setf (liber:alias-for-function 'file-chooser-shortcut-folders)
       "Accessor"
       (documentation 'file-chooser-shortcut-folders 'function)
- "@version{2024-5-20}
+ "@version{2024-05-20}
   @syntax{(gtk:file-chooser-shortcut-folders object) => folders}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[folders]{a @class{g:list-model} object of @class{g:file} objects}
@@ -475,11 +475,11 @@
 (cffi:defcfun ("gtk_file_chooser_get_current_name" file-chooser-current-name)
     (:string :free-from-foreign t :encoding :utf-8)
  #+liber-documentation
- "@version{2024-4-26}
+ "@version{2025-07-25}
   @syntax{(gtk:file-chooser-current-name chooser) => name}
   @syntax{(setf (gtk:file-chooser-current-name chooser) name)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[name]{a string with the filename to use, as a UTF-8 string}
+  @argument[name]{a string for the filename to use, as a UTF-8 string}
   @begin{short}
     The @fun{gtk:file-chooser-current-name} function gets the current name in
     the file selector, as entered by the user in the text entry for \"Name\".
@@ -642,7 +642,7 @@
 (cffi:defcfun ("gtk_file_chooser_get_files" file-chooser-files)
     (g:object g:list-model)
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2023-08-22}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @begin{return}
     The @class{g:list-model} object containing a @class{g:file} object for each
@@ -682,11 +682,11 @@
 (cffi:defcfun ("gtk_file_chooser_get_current_folder"
                file-chooser-current-folder) g:file-as-namestring
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-25}
   @syntax{(gtk:file-chooser-current-folder chooser) => path}
   @syntax{(setf (gtk:file-chooser-current-folder chooser) path)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[path]{a pathname or namestring with the full path of the new
+  @argument[path]{a pathname or namestring for the full path of the new
     current folder}
   @begin{short}
     The @fun{gtk:file-chooser-current-folder} function gets the current folder
@@ -720,7 +720,7 @@
 
 (cffi:defcfun ("gtk_file_chooser_add_filter" file-chooser-add-filter) :void
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2023-08-22}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
@@ -748,7 +748,7 @@
 (cffi:defcfun ("gtk_file_chooser_remove_filter" file-chooser-remove-filter)
     :void
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2023-08-22}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
@@ -779,9 +779,9 @@
 
 (defun file-chooser-add-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-25}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[folder]{a namestring with a filename of the folder to add}
+  @argument[folder]{a namestring for a filename of the folder to add}
   @begin{return}
     @em{True} if the folder could be added successfully, @em{false} otherwise.
   @end{return}
@@ -815,9 +815,9 @@
 
 (defun file-chooser-remove-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-25}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
-  @argument[folder]{a namestring with the filename of the folder to remove}
+  @argument[folder]{a namestring for the filename of the folder to remove}
   @begin{return}
     @em{True} if the operation succeeds, @em{false} otherwise.
   @end{return}

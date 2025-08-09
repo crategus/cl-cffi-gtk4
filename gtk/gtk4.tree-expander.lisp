@@ -119,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-expander 'type)
- "@version{2025-4-16}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:tree-expander} widget is a widget that provides an expander
     for a list.
@@ -161,10 +161,12 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:tree-expander} implementation used the
-    @code{:group} role. Since GTK 4.12, the @class{gtk:tree-expander}
-    implementation uses the @code{:button} role of the
-    @symbol{gtk:accessible-role} enumeration. Toggling it will change the
-    @code{:expanded} value of the @symbol{gtk:accessible-state} enumeration.
+    @val[gtk:accessible-role]{:group} role. Since GTK 4.12, the
+    @class{gtk:tree-expander} implementation uses the
+    @val[gtk:accessible-role]{:button} role of the @sym{gtk:accessible-role}
+    enumeration. Toggling it will change the
+    @val[gtk:accessible-state]{:expanded} value of the
+    @sym{gtk:accessible-state} enumeration.
   @end{dictionary}
   @see-constructor{gtk:tree-expander-new}
   @see-slot{gtk:tree-expander-child}
@@ -190,7 +192,7 @@
 (setf (liber:alias-for-function 'tree-expander-child)
       "Accessor"
       (documentation 'tree-expander-child 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-child object) => child}
   @syntax{(setf (gtk:tree-expander-child object) child)}
   @argument[object]{a @class{gtk:tree-expander} object}
@@ -223,7 +225,7 @@
 (setf (liber:alias-for-function 'tree-expander-hide-expander)
       "Accessor"
       (documentation 'tree-expander-hide-expander 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-hide-expander object) => setting}
   @syntax{(setf (gtk:tree-expander-hide-expander object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
@@ -255,7 +257,7 @@
 (setf (liber:alias-for-function 'tree-expander-indent-for-depth)
       "Accessor"
       (documentation 'tree-expander-indent-for-depth 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-indent-for-depth object) => setting}
   @syntax{(setf (gtk:tree-expander-indent-for-depth object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
@@ -288,7 +290,7 @@
 (setf (liber:alias-for-function 'tree-expander-indent-for-icon)
       "Accessor"
       (documentation 'tree-expander-indent-for-icon 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-indent-for-icon object) => setting}
   @syntax{(setf (gtk:tree-expander-indent-for-icon object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
@@ -318,7 +320,7 @@
 (setf (liber:alias-for-function 'tree-expander-item)
       "Accessor"
       (documentation 'tree-expander-item 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-item object) => item}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[item]{a @class{g:object} instance for the item of the row}
@@ -347,7 +349,7 @@
 (setf (liber:alias-for-function 'tree-expander-list-row)
       "Accessor"
       (documentation 'tree-expander-list-row 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-expander-list-row object) => row}
   @syntax{(setf (gtk:tree-expander-list-row object) row)}
   @argument[object]{a @class{gtk:tree-expander} object}
@@ -370,7 +372,7 @@
 
 (defun tree-expander-new ()
  #+liber-documentation
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @return{The new @class{gtk:tree-expander} widget.}
   @short{Creates a new tree expander.}
   @see-class{gtk:tree-expander}"

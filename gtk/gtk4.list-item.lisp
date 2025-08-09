@@ -109,7 +109,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-item 'type)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @begin{short}
     The @class{gtk:list-item} object is the object that list-handling containers
     such as the @class{gtk:list-view} widget use to represent list items in a
@@ -159,7 +159,7 @@
 (setf (liber:alias-for-function 'list-item-accessible-description)
       "Accessor"
       (documentation 'list-item-accessible-description 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-accessible-description object) => description}
   @syntax{(setf (gtk:list-item-accessible-description object) description)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -189,7 +189,7 @@
 (setf (liber:alias-for-function 'list-item-accessible-label)
       "Accessor"
       (documentation 'list-item-accessible-label 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-accessible-label object) => label}
   @syntax{(setf (gtk:list-item-accessible-label object) label)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -218,7 +218,7 @@
 (setf (liber:alias-for-function 'list-item-activatable)
       "Accessor"
       (documentation 'list-item-activatable 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-activatable object) => activatable}
   @syntax{(setf (gtk:list-item-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -235,7 +235,7 @@
   @kbd{Return} key or calling the @fun{gtk:widget-activate} function will
   activate the list item. Activating instructs the containing view to handle
   activation. The @class{gtk:list-view} widget for example will be emitting the
-  @code{\"activate\"} signal.
+  @sig[gtk:list-view]{activate} signal.
 
   By default, list items are activatable
   @see-class{gtk:list-item}
@@ -253,7 +253,7 @@
 (setf (liber:alias-for-function 'list-item-child)
       "Accessor"
       (documentation 'list-item-child 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-child object) => child}
   @syntax{(setf (gtk:list-item-child object) child)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -283,7 +283,7 @@
 (setf (liber:alias-for-function 'list-item-focusable)
       "Accessor"
       (documentation 'list-item-focusable 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-focusable object) => focusable}
   @syntax{(setf (gtk:list-item-focusable object) focusable)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -316,7 +316,7 @@
 (setf (liber:alias-for-function 'list-item-item)
       "Accessor"
       (documentation 'list-item-item 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-item object) => item}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[item]{a @class{g:object} instance for the list item displayed}
@@ -341,7 +341,7 @@
 (setf (liber:alias-for-function 'list-item-position)
       "Accessor"
       (documentation 'list-item-position 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:list-item-position object) => position}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[position]{an unsigned integer for the position of the item.}
@@ -367,7 +367,7 @@
 (setf (liber:alias-for-function 'list-item-selectable)
       "Accessor"
       (documentation 'list-item-selectable 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:list-item-selectable object) => selectable}
   @syntax{(setf (gtk:list-item-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-item} object}
@@ -402,7 +402,7 @@
 (setf (liber:alias-for-function 'list-item-selected)
       "Accessor"
       (documentation 'list-item-selected 'function)
- "@version{2025-3-15}
+ "@version{2025-03-15}
   @syntax{(gtk:list-item-selected object) => selected}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selected]{a boolean whether the item is selected}

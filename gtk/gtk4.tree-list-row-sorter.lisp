@@ -72,7 +72,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-list-row-sorter 'type)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @begin{short}
     The @class{gtk:tree-list-row-sorter} object is a special-purpose sorter that
     will apply a given sorter to the levels in a tree, while respecting the tree
@@ -109,7 +109,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 (setf (liber:alias-for-function 'tree-list-row-sorter-sorter)
       "Accessor"
       (documentation 'tree-list-row-sorter-sorter 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-list-row-sorter-sorter object) => sorter}
   @syntax{(setf (gtk:tree-list-row-sorter-sorter object) sorter)}
   @argument[object]{a @class{gtk:tree-list-row-sorter} object}
@@ -133,7 +133,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 
 (defun tree-list-row-sorter-new (sorter)
  #+liber-documentation
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @argument[sorter]{a @class{gtk:sorter} object}
   @return{The new @class{gtk:tree-list-row-sorter} object.}
   @begin{short}

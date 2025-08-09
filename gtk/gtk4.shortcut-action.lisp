@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcut-action.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,7 +90,7 @@
 (setf (liber:alias-for-symbol 'shortcut-action-flags)
       "GFlags"
       (liber:symbol-documentation 'shortcut-action-flags)
- "@version{2024-11-1}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-gflags \"GtkShortcutActionFlags\" shortcut-action-flags
   (:export t
@@ -98,11 +98,11 @@
   (:exclusive #.(ash 1 0)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:exclusive]{The action is the only action that can be activated.
         If this flag is not set, a future activation may select a different
         action.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     List of flags that can be passed to action activation.
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-action 'type)
- "@version{2024-11-1}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:shortcut-action} object is the object used to describe what a
     @class{gtk:shortcut} object should do when triggered.
@@ -140,7 +140,7 @@
   these are specified by the higher-level @class{gtk:shortcut} object.
 
   GTK provides various actions:
-  @begin[code]{table}
+  @begin[code]{simple-table}
     @entry[GtkMnemonicAction]{A shortcut action that calls the
       @fun{gtk:widget-mnemonic-activate} function.}
     @entry[GtkCallbackAction]{A shortcut action that invokes a given callback.}
@@ -150,7 +150,7 @@
     @entry[GtkNamedAction]{A shortcut action that calls the
       @fun{gtk:widget-activate-action} function.}
     @entry[GtkNothingAction]{A shortcut action that does nothing.}
-  @end{table}
+  @end{simple-table}
   @see-constructor{gtk:shortcut-action-parse-string}
   @see-class{gtk:shortcut}")
 
@@ -161,7 +161,7 @@
 (cffi:defcfun ("gtk_shortcut_action_parse_string" shortcut-action-parse-string)
     (g:object shortcut-action :return)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[str]{a string to parse}
   @return{The new @class{gtk:shortcut-action} object, or @code{nil} on error.}
   @begin{short}
@@ -195,7 +195,7 @@
 (cffi:defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string)
     :string
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
   @return{The human-readable string.}
   @begin{short}
@@ -220,11 +220,11 @@
 (cffi:defcfun ("gtk_shortcut_action_activated" shortcut-action-activate)
     :boolean
  #+liber-documentation
- "@version{#2024-11-1}
+ "@version{#2025-07-27}
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
-  @argument[flags]{a @symbol{gtk:shortcut-action-flags} value}
+  @argument[flags]{a @sym{gtk:shortcut-action-flags} value}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[args]{an array of @symbol{g:variant} parameters to pass}
+  @argument[args]{an array of @sym{g:variant} parameters to pass}
   @return{@em{True} if the action was activaed successfully.}
   @begin{short}
     Activates the action on the widget with the given @arg{args}.
@@ -259,7 +259,7 @@
 
 #+liber-documentation
 (setf (documentation 'nothing-action 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-action} object that does nothing.
   @end{short}
@@ -272,7 +272,7 @@
 (cffi:defcfun ("gtk_nothing_action_get" nothing-action-get)
     (g:object shortcut-action)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @return{The @class{gtk:nothing-action} object.}
   @begin{short}
     Gets the nothing action.
@@ -295,7 +295,7 @@
 
 #+liber-documentation
 (setf (documentation 'callback-action 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-action} object that invokes a callback.
   @end{short}
@@ -317,10 +317,10 @@
 (setf (liber:alias-for-symbol 'shortcut-func)
       "Callback"
       (liber:symbol-documentation 'shortcut-func)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{lambda (widget args)}
   @argument[widget]{a @class{gtk:widget} object passed to the activation}
-  @argument[args]{an array of @symbol{g:variant} parameters passed to the
+  @argument[args]{an array of @sym{g:variant} parameters passed to the
     activation}
   @begin{short}
     Prototype for shortcuts based on user callbacks.
@@ -341,8 +341,8 @@
 
 (defun callback-action-new (func)
  #+liber-documentation
- "@version{2024-11-1}
-  @argument[func]{a @symbol{gtk:shortcut-func} callback function to call}
+ "@version{2025-07-27}
+  @argument[func]{a @sym{gtk:shortcut-func} callback function to call}
   @return{The new @class{gtk:callback-action} object.}
   @short{Create a custom action that calls the given callback when activated.}
   @see-class{gtk:callback-action}
@@ -367,7 +367,7 @@
 
 #+liber-documentation
 (setf (documentation 'mnemonic-action 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-action} that calls the
     @fun{gtk:widget-mnemonic-activate} function.
@@ -382,7 +382,7 @@
 (cffi:defcfun ("gtk_mnemonic_action_get" mnemonic-action-get)
     (g:object shortcut-action)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @return{The @class{gtk:shortcut-action} mnemonic action.}
   @begin{short}
     Gets the mnemonic action.
@@ -407,7 +407,7 @@
 
 #+liber-documentation
 (setf (documentation 'activate-action 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-action} that calls the @fun{gtk:widget-activate}
     function.
@@ -422,7 +422,7 @@
 (cffi:defcfun ("gtk_activate_action_get" activate-action-get)
     (g:object shortcut-action)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @return{The @class{gtk:shortcut-action} activate action.}
   @begin{short}
     Gets the activate action.
@@ -449,13 +449,13 @@
 
 #+liber-documentation
 (setf (documentation 'signal-action 'type)
- "@version{2024-11-1}
+ "@version{2025-07-26}
   @begin{short}
     A @class{gtk:shortcut-action} that emits a signal.
   @end{short}
   Signals that are used in this way are referred to as keybinding signals,
-  and they are expected to be defined with the @code{:action} value of the
-  @symbol{g:signal-flags} flags.
+  and they are expected to be defined with the @val[g:signal-flags]{:action}
+  value of the @sym{g:signal-flags} flags.
   @see-slot{gtk:signal-action-signal-name}
   @see-constructor{gtk:signal-action-new}
   @see-class{gtk:shortcut-action}
@@ -474,11 +474,11 @@
 (setf (liber:alias-for-function 'signal-action-signal-name)
       "Accessor"
       (documentation 'signal-action-signal-name 'function)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{(gtk:signal-action-signal-name object) => name}
   @syntax{(setf (gtk:signal-action-signal-name object) name)}
   @argument[object]{a @class{gtk:signal-action} object}
-  @argument[name]{a string with the name of the signal to emit}
+  @argument[name]{a string for the name of the signal to emit}
   @begin{short}
     Accessor of the @slot[gtk:signal-action]{signal-name} slot of the
     @class{gtk:signal-action} class.
@@ -495,8 +495,8 @@
 
 (defun signal-action-new (name)
  #+liber-documentation
- "@version{2024-11-1}
-  @argument[name]{a string with the name of the signal to emit}
+ "@version{2025-07-27}
+  @argument[name]{a string for the name of the signal to emit}
   @return{The @class{gtk:signal-action} object.}
   @begin{short}
     Creates an action that when activated, emits the given action signal on the
@@ -524,7 +524,7 @@
 
 #+liber-documentation
 (setf (documentation 'named-action 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-action} that activates an action by name.
   @end{short}
@@ -545,11 +545,11 @@
 (setf (liber:alias-for-function 'named-action-action-name)
       "Accessor"
       (documentation 'named-action-action-name 'function)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{(gtk:named-action-action-name object) => name}
   @syntax{(setf (gtk:named-action-action-name object) name)}
   @argument[object]{a @class{gtk:named-action} object}
-  @argument[name]{a string with the name of the actopm that will be activated}
+  @argument[name]{a string for the name of the actopm that will be activated}
   @begin{short}
     Accessor of the @slot[gtk:named-action]{action-name} slot of the
     @class{gtk:named-action} class.
@@ -566,8 +566,8 @@
 
 (defun named-action-new (name)
  #+liber-documentation
- "@version{2024-11-1}
-  @argument[name]{a string with the detailed name of the action}
+ "@version{2025-07-27}
+  @argument[name]{a string for the detailed name of the action}
   @return{The new @class{gtk:named-action} object.}
   @begin{short}
     Creates an action that when activated, activates the action given by the

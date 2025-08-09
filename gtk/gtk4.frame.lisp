@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.frame.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -99,7 +99,7 @@
 
 #+liber-documentation
 (setf (documentation 'frame 'type)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @begin{short}
     The @class{gtk:frame} widget is a widget that surrounds its child widget
     with a frame and an optional label.
@@ -166,7 +166,7 @@ frame
 (setf (liber:alias-for-function 'frame-child)
       "Accessor"
       (documentation 'frame-child 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:frame-child object) => child}
   @syntax{(setf (gtk:frame-child object) child)}
   @argument[object]{a @class{gtk:frame} widget}
@@ -191,11 +191,11 @@ frame
 (setf (liber:alias-for-function 'frame-label)
       "Accessor"
       (documentation 'frame-label 'function)
- "@version{2024-4-19}
+ "@version{2025-07-27}
   @syntax{(gtk:frame-label object) => label}
   @syntax{(setf (gtk:frame-label object) label)}
   @argument[object]{a @class{gtk:frame} widget}
-  @argument[label]{a string with the text to use as the label of the frame}
+  @argument[label]{a string for the text to use as the label of the frame}
   @begin{short}
     Accessor of the @slot[gtk:frame]{label} slot of the @class{gtk:frame} class.
   @end{short}
@@ -224,7 +224,7 @@ frame
 (setf (liber:alias-for-function 'frame-label-widget)
       "Accessor"
       (documentation 'frame-label-widget 'function)
- "@version{2024-4-19}
+ "@version{2024-04-19}
   @syntax{(gtk:frame-label-widget object) => widget}
   @syntax{(setf (gtk:frame-label-widget object) widget)}
   @argument[object]{a @class{gtk:frame} widget}
@@ -254,12 +254,12 @@ frame
 (setf (liber:alias-for-function 'frame-label-xalign)
       "Accessor"
       (documentation 'frame-label-xalign 'function)
- "@version{2024-4-19}
+ "@version{2025-07-26}
   @syntax{(gtk:frame-label-xalign object) => xalign}
   @syntax{(setf (gtk:frame-label-xalign object) xalign)}
   @argument[object]{a @class{gtk:frame} widget}
-  @argument[xalign]{a float with the position of the label along the top edge
-    of the widget}
+  @argument[xalign]{a single float for the position of the label along the top
+    edge of the widget}
   @begin{short}
     Accessor of the @slot[gtk:frame]{label-xalign} slot of the @class{gtk:frame}
     class.
@@ -277,8 +277,8 @@ frame
 
 (defun frame-new (&optional label)
  #+liber-documentation
- "@version{2024-4-19}
-  @argument[label]{an optional string with the text to use as the label of the
+ "@version{2025-07-27}
+  @argument[label]{an optional string for the text to use as the label of the
     frame}
   @return{The new @class{gtk:frame} widget.}
   @begin{short}
@@ -300,12 +300,12 @@ frame
   (setf (frame-label-xalign frame) value))
 
 (defun frame-label-align (frame)
- "@version{2024-4-19}
+ "@version{2025-07-26}
   @syntax{(gtk:frame-label-align object) => align}
   @syntax{(setf (gtk:frame-label-align object) align)}
   @argument[frame]{a @class{gtk:frame} widget}
-  @argument[align]{a float with the position of the label along the top edge
-    of the widget}
+  @argument[align]{a single float for the position of the label along the top
+    edge of the widget}
   @begin{short}
     The @fun{gtk:frame-label-align} function retrieves the x alignment of the
     label of the frame.

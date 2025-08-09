@@ -119,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'snapshot 'type)
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @begin{short}
     The @class{gtk:snapshot} object is an auxiliary object that assists in
     creating @class{gsk:render-node} objects for widgets.
@@ -147,7 +147,7 @@
 
 (defun snapshot-new ()
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @return{The newly allocated @class{gtk:snapshot} object.}
   @short{Creates a new @class{gtk:snapshot} object.}
   @see-class{gtk:snapshot}"
@@ -164,7 +164,7 @@
 
 (defun snapshot-to-node (snapshot)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{return}
     The constructed @class{gsk:render-node} instance or @code{nil} if there
@@ -196,11 +196,10 @@
 
 (defun snapshot-to-paintable (snapshot &optional size)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[size]{a @symbol{graphene:size-t} instance for the size of the
-    resulting paintable or the @code{nil} default value to use the bounds of
-    the snapshot}
+  @argument[size]{a @sym{graphene:size-t} instance for the size of the resulting
+    paintable or the @code{nil} default value to use the bounds of the snapshot}
   @return{The new @class{gdk:paintable} object.}
   @begin{short}
     Returns a paintable encapsulating the render node that was constructed by
@@ -239,7 +238,7 @@
 
 (defun snapshot-push-opacity (snapshot opacity)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[opacity]{a number coerced to a double float for the opacity to use}
   @begin{short}
@@ -260,12 +259,12 @@
 (cffi:defcfun ("gtk_snapshot_push_color_matrix" snapshot-push-color-matrix)
     :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance for the color matrix
-    to use}
-  @argument[offset]{a @symbol{graphene:vec4-t} instance for the color offset
-    to use}
+  @argument[matrix]{a @sym{graphene:matrix-t} instance for the color matrix to
+    use}
+  @argument[offset]{a @sym{graphene:vec4-t} instance for the color offset to
+    use}
   @begin{short}
     Modifies the colors of an image by applying an affine transformation in RGB
     space.
@@ -300,12 +299,12 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-repeat (snapshot bounds &optional child-bounds)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds within
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds within
     which to repeat}
-  @argument[child-bounds]{a @symbol{graphene:rect-t} instance for the bounds
-    of the child or @code{nil} to use the full size of the collected child node}
+  @argument[child-bounds]{a @sym{graphene:rect-t} instance for the bounds of
+    the child or @code{nil} to use the full size of the collected child node}
   @begin{short}
     Creates a node that repeats the child node.
   @end{short}
@@ -325,10 +324,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_push_clip" snapshot-push-clip) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the rectangle
-    to clip to}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to clip
+    to}
   @begin{short}
     Clips an image to a rectangle.
   @end{short}
@@ -349,10 +348,10 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_push_rounded_clip" snapshot-push-rounded-clip)
     :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{gsk:rounded-rect} instance for the rounded
-    rectangle to clip to}
+  @argument[bounds]{a @sym{gsk:rounded-rect} instance for the rounded rectangle
+    to clip to}
   @begin{short}
     Clips an image to a rounded rectangle.
   @end{short}
@@ -376,7 +375,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-cross-fade (snapshot progress)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[progress]{a number coerced to a double float for the progress
     between to 0.0 and 1.0}
@@ -401,9 +400,9 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_push_blend" snapshot-push-blend) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[mode]{a @symbol{gsk:blend-mode} value to use}
+  @argument[mode]{a @sym{gsk:blend-mode} value to use}
   @begin{short}
     Blends together two images with the given blend mode.
   @end{short}
@@ -432,7 +431,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-blur (snapshot radius)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[radius]{a number coerced to a double float for the blur radius
     to use, must be postive}
@@ -458,7 +457,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-shadow (snapshot shadows)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[shadows]{a list of the form @code{'((color1 dx1 dy1 radius1)
     (color2 dx2 dy2 radius2) ...)} with the shadows to apply}
@@ -510,9 +509,9 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-10
 (cffi:defcfun ("gtk_snapshot_push_mask" snapshot-push-mask) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[mode]{a @symbol{gsk:mask-mode} value to use}
+  @argument[mode]{a @sym{gsk:mask-mode} value to use}
   @begin{short}
     Until the first call to the @fun{gtk:snapshot-pop} function, the mask image
     for the mask operation will be recorded.
@@ -540,11 +539,11 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_push_fill" snapshot-push-fill) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path describing the area
     to fill}
-  @argument[rule]{a @symbol{gsk:fill-rule} value to use}
+  @argument[rule]{a @sym{gsk:fill-rule} value to use}
   @begin{short}
     Fills the area given by @arg{path} and @arg{rule} with an image and discards
     everything outside of it.
@@ -573,7 +572,7 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_push_stroke" snapshot-push-stroke) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path to stroke}
   @argument[stroke]{a @class{gsk:stroke} instance for the stroke attributes}
@@ -610,7 +609,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_pop" snapshot-pop) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Removes the top element from the stack of render nodes, and appends it to
@@ -631,7 +630,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_save" snapshot-save) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Makes a copy of the current state of @arg{snapshot} and saves it on an
@@ -657,7 +656,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_restore" snapshot-restore) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Restores @arg{snapshot} to the state saved by a preceding call to the
@@ -676,7 +675,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_transform" snapshot-transform) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[transform]{a @class{gsk:transform} instance}
   @begin{short}
@@ -696,10 +695,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_transform_matrix" snapshot-transform-matrix) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance for the matrix
-    to muliply the transform with}
+  @argument[matrix]{a @sym{graphene:matrix-t} instance for the matrix to
+    muliply the transform with}
   @begin{short}
     Transforms the coordinate system of the snapshot with the given
     @arg{matrix}.
@@ -717,10 +716,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_translate" snapshot-translate) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[point]{a @symbol{graphene:point-t} instance for the point to
-    translate @arg{snapshot} by}
+  @argument[point]{a @sym{graphene:point-t} instance for the point to translate
+    @arg{snapshot} by}
   @begin{short}
     Translates the coordinate system of the snapshot by @arg{point} in
     2-dimensional space.
@@ -738,9 +737,9 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_translate_3d" snapshot-translate-3d) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[point]{a @symbol{graphene:point3d-t} instance for the point to
+  @argument[point]{a @sym{graphene:point3d-t} instance for the point to
     translate @arg{snapshot} by}
   @begin{short}
     Translates the coordinate system of the snapshot by @arg{point}.
@@ -762,7 +761,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate (snapshot angle)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees (clockwise)}
@@ -792,11 +791,11 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate-3d (snapshot angle axis)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees (clockwise)}
-  @argument[axis]{a @symbol{graphene:vec3-t} instance for the rotation axis}
+  @argument[axis]{a @sym{graphene:vec3-t} instance for the rotation axis}
   @begin{short}
     Rotates the coordinate system of the snapshot by @arg{angle} degrees around
     @arg{axis}.
@@ -820,7 +819,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale (snapshot xfactor yfactor)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the X axis}
@@ -850,7 +849,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale-3d (snapshot xfactor yfactor zfactor)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the X axis}
@@ -880,7 +879,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-perspective (snapshot depth)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[depth]{a number coerced to a single float for the distance of
     the @code{Z=0} plane}
@@ -901,7 +900,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_node" snapshot-append-node) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[node]{a @class{gsk:render-node} instance}
   @begin{short}
@@ -924,13 +923,13 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_append_cairo" snapshot-append-cairo)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
-    new node}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the new
+    node}
   @begin{return}
-    The @symbol{cairo:context-t} instance suitable for drawing the contents
-    of the newly created render node.
+    The @sym{cairo:context-t} instance suitable for drawing the contents of
+    the newly created render node.
   @end{return}
   @begin{short}
     Creates a new @class{gsk:cairo-node} instance and appends it to the current
@@ -951,10 +950,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_texture" snapshot-append-texture) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[texture]{a @class{gdk:texture} object for the texture to render}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     new node}
   @begin{short}
     Creates a new render node drawing the texture into the given bounds and
@@ -979,11 +978,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_color" snapshot-append-color) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[color]{a @class{gdk:rgba} instance for the color to draw}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
-    node}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the node}
   @begin{short}
     Creates a new render node drawing the color into the given bounds and
     appends it to the current render node of @arg{snapshot}.
@@ -1004,7 +1002,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_layout" snapshot-append-layout) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[layout]{a @class{pango:layout} instance to render}
   @argument[color]{a @class{gdk:rgba} instance for the foreground color to
@@ -1044,13 +1042,13 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-linear-gradient (snapshot bounds start end stops)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the rectangle to
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[start]{a @symbol{graphene:point-t} instance for the point at which
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will begin}
-  @argument[end]{a @symbol{graphene:point-t} instance for the point at which
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will finish}
   @argument[stops]{a list of the form @code{'((offset1 color1) (offset2
     color2) ...)} with the offsets and colors defining the gradient}
@@ -1100,13 +1098,13 @@ pixel = transpose(matrix) * pixel + offset
 (defun snapshot-append-repeating-linear-gradient (snapshot
                                                   bounds start end stops)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the rectangle to
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[start]{a @symbol{graphene:point-t} instance for the point at which
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will begin}
-  @argument[end]{a @symbol{graphene:point-t} instance for the point at which
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will finish}
   @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
     ...)} with the offsets and colors defining the gradient}
@@ -1156,11 +1154,11 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-conic-gradient (snapshot bounds center rotation stops)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     render node}
-  @argument[center]{a @symbol{graphene:point-t} instance for the center of the
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
     gradient}
   @argument[rotation]{a number coerced to a single float for the rotation of
     the gradient, in degrees}
@@ -1208,10 +1206,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-border (snapshot outline widths colors)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance for the outline of
-    the border}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
+    border}
   @argument[widths]{a list of 4 numbers coerced to single floats for the stroke
     width of the border on the top, right, bottom, and left side respectivly}
   @argument[colors]{a list of 4 @class{gdk:rgba} instances for the colors used
@@ -1252,10 +1250,10 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-inset-shadow (snapshot outline color dx dy spread radius)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance for the outline of
-    the border}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
+    border}
   @argument[color]{a @class{gdk:rgba} instance for the color of the shadow}
   @argument[dx]{a number coerced to a single float for the horizontal offset
     of the shadow}
@@ -1301,10 +1299,10 @@ pixel = transpose(matrix) * pixel + offset
                                       dx dy
                                       spread radius)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance for the outline of
-    the region surrounded by the shadow}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
+    region surrounded by the shadow}
   @argument[color]{a @class{gdk:rgba} instance for the color of the shadow}
   @argument[dx]{a number coerced to a single float for the horizontal offset of
     shadow}
@@ -1352,12 +1350,12 @@ pixel = transpose(matrix) * pixel + offset
                                         hradius vradius
                                         start end stops)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the rectangle to
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the radial gradient into}
-  @argument[center]{a @symbol{graphene:point-t} instance for the center of
-    the radial gradient}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    radial gradient}
   @argument[hradius]{a number coerced to a single float for the horizontal
     radius}
   @argument[vradius]{a number coerced to a single float for the vertical radius}
@@ -1424,12 +1422,12 @@ pixel = transpose(matrix) * pixel + offset
                                                   start end
                                                   stops)
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the rectangle to
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the radial gradient into}
-  @argument[center]{a @symbol{graphene:point-t} instance for the center of
-    the radial gradient}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    radial gradient}
   @argument[hradius]{a number coerced to a single float for the horizontal
     radius}
   @argument[vradius]{a number coerced to a single float for the vertical radius}
@@ -1482,11 +1480,11 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_append_scaled_texture"
                snapshot-append-scaled-texture) :void
  #+liber-documentation
- "@version{#2025-2-12}
+ "@version{#2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[texture]{a @class{gdk:texture} object for the texture to render}
-  @argument[filter]{a @symbol{gsk:scaling-filter} value for the filter to use}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
+  @argument[filter]{a @sym{gsk:scaling-filter} value for the filter to use}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     new node}
   @begin{short}
     Creates a new render node drawing the texture into the given bounds and
@@ -1516,11 +1514,11 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_append_fill" snapshot-append-fill) :void
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-07-26}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path describing the area
     to fill}
-  @argument[rule]{a @symbol{gsk:fill-rule} value to use}
+  @argument[rule]{a @sym{gsk:fill-rule} value to use}
   @argument[color]{a @class{gdk:rgba} instance for the color to fill the path
     with}
   @begin{short}
@@ -1550,7 +1548,7 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_append_stroke" snapshot-append-stroke) :void
  #+liber-documentation
- "@version{2025-3-1}
+ "@version{2025-03-01}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path to stroke}
   @argument[stroke]{a @class{gsk:stroke} instance for the stroke attributes}

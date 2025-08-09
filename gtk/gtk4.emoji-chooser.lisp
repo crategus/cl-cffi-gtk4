@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.emoji-chooser.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'emoji-chooser 'type)
- "@version{2023-8-28}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:emoji-chooser} widget is used by text widgets such as the
     @class{gtk:entry} or @class{gtk:text-view} widgets to offer users a
@@ -92,8 +92,8 @@
 
   @image[emoji-chooser]{Figure: GtkEmojiChooser}
 
-  The @class{gtk:emoji-chooser} widget emits the @code{\"emoji-picked\"} signal
-  when an Emoji is selected.
+  The @class{gtk:emoji-chooser} widget emits the
+  @sig[gtk:emoji-chooser]{emoji-picked} signal when an Emoji is selected.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 popover
@@ -120,16 +120,17 @@ popover
       @end{table}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"emoji-picked\" signal}
+    @begin[emoji-chooser::emoji-picked]{signal}
       @begin{pre}
 lambda (chooser text)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[chooser]{The @class{gtk:emoji-chooser} widget.}
-        @entry[text]{The string with the Unicode sequence for the picked Emoji,
+        @entry[text]{The string for the Unicode sequence for the picked Emoji,
           in UTF-8.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user selects an Emoji.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:popover}")
 
@@ -141,7 +142,7 @@ lambda (chooser text)    :run-last
 
 (defun emoji-chooser-new ()
  #+liber-documentation
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @return{The new @class{gtk:emoji-chooser} widget.}
   @short{Creates a new Emoji chooser dialog.}
   @see-class{gtk:emoji-chooser}"

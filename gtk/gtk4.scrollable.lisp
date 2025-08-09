@@ -80,7 +80,7 @@
 (setf (liber:alias-for-symbol 'scrollable-policy)
       "GEnum"
       (liber:symbol-documentation 'scrollable-policy)
- "@version{2025-05-06}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkScrollablePolicy\" scrollable-policy
   (:export t
@@ -89,10 +89,10 @@
   (:natural 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:minimum]{Scrollable adjustments are based on the minimum size.}
       @entry[:natural]{Scrollable adjustments are based on the natural size.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Defines the policy to be used in a scrollable widget when updating the
@@ -124,7 +124,7 @@
 (setf (liber:alias-for-class 'scrollable)
       "Interface"
       (documentation 'scrollable 'type)
- "@version{2025-05-06}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:scrollable} interface is an interface that is implemented by
     widgets with native scrolling ability.
@@ -155,8 +155,8 @@
       widget should update the properties of the adjustments with new values.
     @end{item}
     @begin{item}
-      When any of the adjustments emits the @code{\"value-changed\"} signal,
-      the scrollable widget should scroll its contents.
+      When any of the adjustments emits the @sig[gtk:adjustment]{value-changed}
+      signal, the scrollable widget should scroll its contents.
     @end{item}
   @end{itemize}
   @see-slot{gtk:scrollable-hadjustment}
@@ -203,22 +203,22 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hscroll-policy" 'scrollable) t)
- "The @code{hscroll-policy} property of type @symbol{gtk:scrollable-policy}
+ "The @code{hscroll-policy} property of type @sym{gtk:scrollable-policy}
   (Read / Write) @br{}
   Determines whether horizontal scrolling should start once the scrollable
   widget is allocated less than its minimum width or less than its natural
   width. @br{}
-  Default value: @code{:minimum}")
+  Default value: @val[gtk:scrollbable-policy]{:minimum}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'scrollable-hscroll-policy)
       "Accessor"
       (documentation 'scrollable-hscroll-policy 'function)
- "@version{2025-05-06}
+ "@version{2025-07-27}
   @syntax{(gtk:scrollable-hscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-hscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
-  @argument[policy]{a @symbol{gtk:scrollable-policy} value for the horizontal
+  @argument[policy]{a @sym{gtk:scrollable-policy} value for the horizontal
     scrolling policy}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{hscroll-policy} slot of the
@@ -266,22 +266,22 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vscroll-policy" 'scrollable) t)
- "The @code{vscroll-policy} property of type @symbol{gtk:scrollable-policy}
+ "The @code{vscroll-policy} property of type @sym{gtk:scrollable-policy}
   (Read / Write) @br{}
   Determines whether vertical scrolling should start once the scrollable
   widget is allocated less than its minimum height or less than its natural
   height. @br{}
-  Default value: @code{:minimum}")
+  Default value: @val[gtk:scrollable-policy]{:minimum}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'scrollable-vscroll-policy)
       "Accessor"
       (documentation 'scrollable-vscroll-policy 'function)
- "@version{2025-05-06}
+ "@version{2025-07-27}
   @syntax{(gtk:scrollable-vscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-vscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
-  @argument[policy]{a @symbol{gtk:scrollable-policy} value for the vertical
+  @argument[policy]{a @sym{gtk:scrollable-policy} value for the vertical
     scrolling policy}
   @begin{short}
     Accessor of the @slot[gtk:scrollable]{vscroll-policy} slot of the

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.media-file.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -124,11 +124,11 @@
 (setf (liber:alias-for-function 'media-file-file)
       "Accessor"
       (documentation 'media-file-file 'function)
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @syntax{(gtk:media-file-file object) => file}
   @syntax{(setf (gtk:media-file-file object) file)}
   @argument[object]{a @class{gtk:media-file} object}
-  @argument[file]{a @class{g:file} object with the file to play}
+  @argument[file]{a @class{g:file} object for the file to play}
   @begin{short}
     Accessor of the @slot[gtk:media-file]{file} slot of the
     @class{gtk:media-file} class.
@@ -155,11 +155,11 @@
 (setf (liber:alias-for-function 'media-file-input-stream)
       "Accessor"
       (documentation 'media-file-input-stream 'function)
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @syntax{(gtk:media-file-input-stream object) => stream}
   @syntax{(setf (gtk:media-file-input-stream object) stream)}
   @argument[object]{a @class{gtk:media-file} object}
-  @argument[stream]{a @code{GInputStream} object with the stream to play from}
+  @argument[stream]{a @code{GInputStream} object for the stream to play from}
   @begin{short}
     Accessor of the @slot[gtk:media-file]{input-stream} slot of the
     @class{gtk:media-file} class.
@@ -195,8 +195,8 @@
 (cffi:defcfun ("gtk_media_file_new_for_file" media-file-new-for-file)
     (g:object media-stream :return)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[file]{a @class{g:file} object with the file to play}
+ "@version{2025-07-27}
+  @argument[file]{a @class{g:file} object for the file to play}
   @return{The new @class{gtk:media-file} object playing @arg{file}.}
   @short{Creates a new media file.}
   @see-class{gtk:media-file}
@@ -215,8 +215,8 @@
 
 (defun media-file-new-for-filename (path)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[filename]{a pathname or namestring with the file to open}
+ "@version{2025-07-27}
+  @argument[filename]{a pathname or namestring for the file to open}
   @return{The new @class{gtk:media-file} object playing @arg{filename}.}
   @short{Creates a new media file.}
   This is a utility function that converts the given filename to a
@@ -242,8 +242,8 @@
 (cffi:defcfun ("gtk_media_file_new_for_resource" media-file-new-for-resource)
     (g:object media-stream :return)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[path]{a string with the resource path to open}
+ "@version{2025-07-27}
+  @argument[path]{a string for the resource path to open}
   @return{The new @class{gtk:media-file} object playing @arg{path}.}
   @short{Creates a new media file.}
   This is a utility function that converts the given resource to a
@@ -280,9 +280,9 @@
 
 (defun media-file-set-filename (mediafile path)
  #+liber-documentation
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @argument[mediafile]{a @class{gtk:media-file} object}
-  @argument[path]{a pathname or namestring with the name of file to play}
+  @argument[path]{a pathname or namestring for the name of file to play}
   @begin{short}
     This is a utility function that converts the given @arg{filename} to a
     @class{g:file} object and calls the @fun{gtk:media-file-file} function.
@@ -304,9 +304,9 @@
 
 (defun media-file-set-resource (mediafile path)
  #+liber-documentation
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @argument[mediafile]{a @class{gtk:media-file} object}
-  @argument[path]{a string with the path to the resource to playback}
+  @argument[path]{a string for the path to the resource to playback}
   @begin{short}
     This is a utility function that converts the given @arg{path} to a
     @class{g:file} object and calls the @fun{gtk:media-file-file} function.

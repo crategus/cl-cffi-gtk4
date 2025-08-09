@@ -259,8 +259,8 @@
                file-filter-new-from-gvariant)
     (g:object file-filter :return)
  #+liber-documentation
- "@version{2025-03-13}
-  @argument[variant]{a @symbol{g:variant} parameter of @code{a{sv@}} type}
+ "@version{2025-07-25}
+  @argument[variant]{a @sym{g:variant} parameter of @code{a{sv@}} type}
   @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Deserialize a file filter from a @code{a{sv@}} variant in the format
@@ -362,9 +362,9 @@
 (cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
  #+liber-documentation
- "@version{2025-06-06}
+ "@version{2025-07-27}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @return{The list of strings with the attributes.}
+  @return{The list of strings for the attributes.}
   @begin{short}
     Gets the attributes that need to be filled in for the @class{g:file-info}
     object passed to this file filter.
@@ -384,9 +384,9 @@
 (cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-25}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @return{The new @symbol{g:variant} parameter.}
+  @return{The new @sym{g:variant} parameter.}
   @short{Serialize a file filter to a @code{a{sv@}} variant.}
   @see-class{gtk:file-filter}
   @see-symbol{g:variant}"

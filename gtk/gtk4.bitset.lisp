@@ -99,7 +99,7 @@
 (setf (liber:alias-for-class 'bitset)
       "GBoxed"
       (documentation 'bitset 'type)
- "@version{2025-03-13}
+ "@version{2025-07-25}
   @begin{declaration}
 (glib:define-gboxed-opaque bitset \"GtkBitset\"
   :export t
@@ -119,7 +119,7 @@
   contains various functions to query metadata about the bitset, such as the
   minimum or maximum values or its size.
 
-  The fastest way to iterate values in a bitset is a @symbol{gtk:bitset-iter}
+  The fastest way to iterate values in a bitset is a @sym{gtk:bitset-iter}
   iterator.
 
   The main use case for the @class{gtk:bitset} structure is implementing
@@ -252,9 +252,9 @@
 
 (cffi:defcfun ("gtk_bitset_get_minimum" bitset-minimum) :uint
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
-  @return{The unsigned integer with the smallest value in @arg{bitset}.}
+  @return{The unsigned integer for the smallest value in @arg{bitset}.}
   @begin{short}
     Returns the smallest value in the bitset.
   @end{short}
@@ -281,9 +281,9 @@
 
 (cffi:defcfun ("gtk_bitset_get_maximum" bitset-maximum) :uint
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
-  @return{The unsigned integer with the largest value in @arg{bitset}.}
+  @return{The unsigned integer for the largest value in @arg{bitset}.}
   @begin{short}
     Returns the largest value in the bitset.
   @end{short}
@@ -301,9 +301,9 @@
 
 (cffi:defcfun ("gtk_bitset_get_size" bitset-size) :uint64
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
-  @return{The unsigned integer with the number of values in @arg{bitset}.}
+  @return{The unsigned integer for the number of values in @arg{bitset}.}
   @begin{short}
     Gets the number of values that were added to the bitset.
   @end{short}
@@ -326,12 +326,12 @@
 
 (cffi:defcfun ("gtk_bitset_get_size_in_range" bitset-size-in-range) :uint64
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[first]{an unsigned integer for the first element to include}
   @argument[last]{an unsigned integer for the last element to include}
   @begin{return}
-    The unsigned integer with the number of values in the set from @arg{first}
+    The unsigned integer for the number of values in the set from @arg{first}
     to @arg{last}.
   @end{return}
   @begin{short}
@@ -726,14 +726,14 @@
 
 (cffi:defcfun ("gtk_bitset_splice" bitset-splice) :void
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-23}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[pos]{an unsigned integer for the position at which to slice}
   @argument[removed]{an unsigned integer for the number of values to remove}
   @argument[added]{an unsigned integer for the number of values to add}
   @begin{short}
     This is a support function for @class{g:list-model} handling, by mirroring
-    the @code{\"items-changed\"} signal.
+    the @sig[g:list-model]{items-changed} signal.
   @end{short}
   First, it \"cuts\" the values from @arg{pos} to be removed from the bitset.
   That is, it removes all those values and shifts all larger values to the left
@@ -767,7 +767,7 @@
     An opaque, stack-allocated structure for iterating over the elements of a
     @class{gtk:bitset} instance.
   @end{short}
-  Before a @symbol{gtk:bitset-iter} instance can be used, it needs to be
+  Before a @sym{gtk:bitset-iter} instance can be used, it needs to be
   initialized with the @fun{gtk:bitset-iter-init-first},
   @fun{gtk:bitset-iter-init-last} or @fun{gtk:bitset-iter-init-at} function.
   @see-class{gtk:bitset}
@@ -788,11 +788,11 @@
 
 (defun bitset-iter-init-first (iter bitset)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[iter]{an uninitialized @class{gtk:bitset-iter} instance}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @begin{return}
-    The unsigned integer with the first value in @arg{bitset}, or @code{nil}
+    The unsigned integer for the first value in @arg{bitset}, or @code{nil}
     if @arg{bitset} is empty.
   @end{return}
   @begin{short}
@@ -819,11 +819,11 @@
 
 (defun bitset-iter-init-last (iter bitset)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[iter]{an uninitialized @class{gtk:bitset-iter} instance}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @begin{return}
-    The unsigned integer with the last value in @arg{bitset}, or @code{nil}
+    The unsigned integer for the last value in @arg{bitset}, or @code{nil}
     if the bitset is empty.
   @end{return}
   @begin{short}
@@ -851,13 +851,13 @@
 
 (defun bitset-iter-init-at (iter bitset target)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[iter]{an uninitialized @class{gtk:bitset-iter} instance}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[target]{an unsigned integer for the target value to start iterating
     at}
   @begin{return}
-    The unsigned integer with the found value in @arg{bitset}, or @code{nil}.
+    The unsigned integer for the found value in @arg{bitset}, or @code{nil}.
   @end{return}
   @begin{short}
     Initializes an iterator for the bitset to point to @arg{target}.
@@ -883,10 +883,10 @@
 
 (defun bitset-iter-next (iter)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[iter]{a valid @class{gtk:bitset-iter} instance}
   @begin{return}
-    The unsigned integer with the next value in @arg{bitset}, or @code{nil}
+    The unsigned integer for the next value in @arg{bitset}, or @code{nil}
     if no next value existed.
   @end{return}
   @begin{short}
@@ -911,10 +911,10 @@
 
 (defun bitset-iter-previous (iter)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-08-04}
   @argument[iter]{a valid @class{gtk:bitset-iter} instance}
   @begin{return}
-    The unsigned integer with the previous value in @arg{bitset}, or @code{nil}
+    The unsigned integer for the previous value in @arg{bitset}, or @code{nil}
     if @arg{iter} was already pointing to the first value.
   @end{return}
   @begin{short}
@@ -935,9 +935,9 @@
 
 (cffi:defcfun ("gtk_bitset_iter_get_value" bitset-iter-value) :uint
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-27}
   @argument[iter]{a valid @class{gtk:bitset-iter} instance}
-  @return{The unsigned integer with the current value @arg{iter} points to.}
+  @return{The unsigned integer for the current value @arg{iter} points to.}
   @begin{short}
     Gets the current value that @arg{iter} points to.
   @end{short}

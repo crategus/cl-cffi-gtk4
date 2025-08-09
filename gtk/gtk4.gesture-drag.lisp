@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-drag.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,55 +72,59 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-drag 'type)
- "@version{2024-4-29}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:gesture-drag} class is a @class{gtk:gesture} implementation
     that recognizes drag operations.
   @end{short}
-  The drag operation itself can be tracked throught the @code{\"drag-begin\"},
-  @code{\"drag-update\"} and @code{\"drag-end\"} signals, or the relevant
-  coordinates be extracted through the @fun{gtk:gesture-drag-offset} and
+  The drag operation itself can be tracked throught the
+  @sig[gtk:gesture-drag]{drag-begin}, @sig[gtk:gesture-drag]{drag-update} and
+  @val[gtk:gesture-drag]{drag-end} signals, or the relevant coordinates be
+  extracted through the @fun{gtk:gesture-drag-offset} and
   @fun{gtk:gesture-drag-start-point} functions.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"drag-begin\" signal}
+    @begin[gesture-drag::drag-begin]{signal}
       @begin{pre}
 lambda (gesture xstart ystart)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-drag} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-drag} object that received the
           signal.}
-        @entry[xstart]{The double float with the x coordinate, relative to the
+        @entry[xstart]{The double float for the x coordinate, relative to the
           widget allocation.}
-        @entry[ystart]{The double float with the y coordinate, relative to the
+        @entry[ystart]{The double float for the y coordinate, relative to the
           widget allocation.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever dragging starts.
-    @subheading{The \"drag-end\" signal}
+    @end{signal}
+    @begin[gesture-drag::drag-end]{signal}
       @begin{pre}
 lambda (gesture xoffset yoffset)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-drag} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-drag} object that received the
           signal.}
-        @entry[xoffset]{The double float with the x offset, relative to the
+        @entry[xoffset]{The double float for the x offset, relative to the
           start point.}
-        @entry[yoffset]{The double float with the y offset, relative to the
+        @entry[yoffset]{The double float for the y offset, relative to the
           start point.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the dragging is finished.
-    @subheading{The \"drag-update\" signal}
+    @end{signal}
+    @begin[gesture-drag::drag-update]{signal}
       @begin{pre}
 lambda (gesture xoffset yoffset)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-drag} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-drag} object that received the
           signal.}
-        @entry[xoffset]{The double float with the x offset, relative to the
+        @entry[xoffset]{The double float for the x offset, relative to the
           start point.}
-        @entry[yoffset]{The double float with the y offset, relative to the
+        @entry[yoffset]{The double float for the y offset, relative to the
           start point.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the dragging point moves.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:gesture}")
 
@@ -132,7 +136,7 @@ lambda (gesture xoffset yoffset)    :run-last
 
 (defun gesture-drag-new ()
  #+liber-documentation
- "@version{2024-4-29}
+ "@version{2024-04-29}
   @return{The newly created @class{gtk:gesture-drag} object.}
   @short{Returns a newly created gesture that recognizes drags.}
   @see-class{gtk:gesture-drag}"
@@ -152,13 +156,11 @@ lambda (gesture xoffset yoffset)    :run-last
 
 (defun gesture-drag-start-point (gesture)
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2025-07-26}
+  @syntax{(gtk:gesture-drag-start-point gesture) => x, y}
   @argument[gesture]{a @class{gtk:gesture-drag} object}
-  @begin{return}
-    @arg{x} -- a double float with the x coordinate for the drag start point
-    @br{}
-    @arg{y} -- a double float with the y coordinate for the drag start point
-  @end{return}
+  @argument[x]{a double float for the x coordinate of the drag start point}
+  @argument[y]{a double float for the y coordinate of the drag start point}
   @begin{short}
     If the gesture is active, this function returns the drag start coordinates,
     in widget-relative coordinates, otherwise @code{nil} is returned.
@@ -182,12 +184,11 @@ lambda (gesture xoffset yoffset)    :run-last
 
 (defun gesture-drag-offset (gesture)
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2025-07-26}
+  @syntax{(gtk:gesture-drag-offset gesture) => x, y}
   @argument[gesture]{a @class{gtk:gesture-drag} object}
-  @begin{return}
-    @arg{x} -- a double float with the x offset for the current point @br{}
-    @arg{y} -- a double float with the y offset for the current point
-  @end{return}
+  @argument[x]{a double float for the x offset of the current point}
+  @argument[y]{a double float for the y offset of the current point}
   @begin{short}
     If the gesture is active, this function returns the coordinates of the
     current point, as an offset to the starting drag point, otherwise @code{nil}

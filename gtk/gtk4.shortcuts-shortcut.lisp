@@ -88,7 +88,7 @@
 (setf (liber:alias-for-symbol 'shortcut-type)
       "GEnum"
       (liber:symbol-documentation 'shortcut-type)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @begin{declaration}
 (gobject:define-genum \"GtkShortcutType\" gtk:shortcut-type
   (:export t
@@ -105,7 +105,7 @@
   :gesture-swipe-right)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:accelerator]{The shortcut is a keyboard accelerator. The
         @slot[gtk:shortcuts-shortcut]{accelerator} property will be used.}
       @entry[:gesture-pinch]{The shortcut is a pinch gesture. GTK provides an
@@ -126,11 +126,11 @@
         an icon and subtitle.}
       @entry[:gesture-swipe-right]{The shortcut is a swipe gesture. GTK provides
         an icon and subtitle.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The @symbol{gtk:shortcut-type} enumeration specifies the kind of shortcut
-    that is being described.
+    The @sym{gtk:shortcut-type} enumeration specifies the kind of shortcut that
+    is being described.
   @end{short}
   @see-class{gtk:shortcuts-shortcut}
   @see-function{gtk:shortcuts-shortcut-accelerator}
@@ -188,7 +188,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-shortcut 'type)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:shortcuts-shortcut} widget represents a single keyboard
     shortcut or gesture with a short text.
@@ -255,19 +255,20 @@
  "The @code{accelerator} property of type @code{:string} (Read / Write) @br{}
   The accelerator(s) represented by this object. This property is used if the
   @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @code{:accelerator} value. The syntax of this property is an extension of the
-  syntax understood by the @fun{gtk:accelerator-parse} function. Multiple
-  accelerators can be specified by separating them with a space, but keep in
-  mind that the available width is limited. It is also possible to specify
-  ranges of shortcuts, using @code{...} between the keys. Sequences of keys can
-  be specified using a @kbd{+} or @kbd{&} between the keys. @br{}
+  @val[gtk:shortcut-type]{:accelerator} value. The syntax of this property is an
+  extension of the syntax understood by the @fun{gtk:accelerator-parse}
+  function. Multiple accelerators can be specified by separating them with a
+  space, but keep in mind that the available width is limited. It is also
+  possible to specify ranges of shortcuts, using @code{...} between the keys.
+  Sequences of keys can be specified using a @kbd{+} or @kbd{&} between the
+  keys. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-shortcut-accelerator)
       "Accessor"
       (documentation 'shortcuts-shortcut-accelerator 'function)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @syntax{(gtk:shortcuts-shortcut-accelerator object) => accelerator}
   @syntax{(setf (gtk:shortcuts-shortcut-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
@@ -278,12 +279,13 @@
   @end{short}
   The accelerator(s) represented by this object. This property is used if the
   @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @code{:accelerator} value. The syntax of this property is an extension of the
-  syntax understood by the @fun{gtk:accelerator-parse} function. Multiple
-  accelerators can be specified by separating them with a space, but keep in
-  mind that the available width is limited. It is also possible to specify
-  ranges of shortcuts, using @code{...} between the keys. Sequences of keys can
-  be specified using a @code{+} or @code{&} between the keys.
+  @val[gtk:shortcut-type]{:accelerator} value. The syntax of this property is an
+  extension of the syntax understood by the @fun{gtk:accelerator-parse}
+  function. Multiple accelerators can be specified by separating them with a
+  space, but keep in mind that the available width is limited. It is also
+  possible to specify ranges of shortcuts, using @code{...} between the keys.
+  Sequences of keys can be specified using a @code{+} or @code{&} between the
+  keys.
   @begin[Examples]{dictionary}
     A single shortcut: @kbd{<ctl><alt>delete} @br{}
     Two alternative shortcuts: @kbd{<shift>a Home} @br{}
@@ -309,17 +311,17 @@
                       'shortcuts-shortcut) t)
  "The @code{action-name} property of type @code{:string} (Read / Write) @br{}
   The detailed action name. If this is set for a shortcut of type
-  @code{:accelerator}, then GTK will use the accelerators that are associated
-  with the action via the @fun{gtk:application-accels-for-action} function,
-  and setting the @slot[gtk:shortcuts-shortcut]{accelerator} property is not
-  necessary. @br{}
+  @val[gtk:shortcut-type]{:accelerator}, then GTK will use the accelerators that
+  are associated with the action via the @fun{gtk:application-accels-for-action}
+  function, and setting the @slot[gtk:shortcuts-shortcut]{accelerator} property
+  is not necessary. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-shortcut-action-name)
       "Accessor"
       (documentation 'shortcuts-shortcut-action-name 'function)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @syntax{(gtk:shortcuts-shortcut-action-name object) => name}
   @syntax{(setf (gtk:shortcuts-shortcut-action-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
@@ -329,10 +331,10 @@
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
   A detailed action name. If this is set for a shortcut of type
-  @code{:accelerator}, then GTK will use the accelerators that are associated
-  with the action via the @fun{gtk:application-accels-for-action} function,
-  and setting the @slot[gtk:shortcuts-shortcut]{accelerator} property is not
-  necessary.
+  @val[gtk:shortcut-type]{:accelerator}, then GTK will use the accelerators that
+  are associated with the action via the @fun{gtk:application-accels-for-action}
+  function, and setting the @slot[gtk:shortcuts-shortcut]{accelerator} property
+  is not necessary.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-action-name} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -345,27 +347,29 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "direction"
                       'shortcuts-shortcut) t)
- "The @code{direction} property of type @symbol{gtk:text-direction}
-  (Read / Write) @br{}
+ "The @code{direction} property of type @sym{gtk:text-direction} (Read / Write)
+  @br{}
   The text direction for which this shortcut is active. If the shortcut is used
-  regardless of the text direction, set this property to @code{:none}. @br{}
-  Default value: @code{:dir-none}")
+  regardless of the text direction, set this property to
+  @val[gtk:text-direction]{:none}. @br{}
+  Default value: @val[gtk:text-direction]{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-shortcut-direction)
       "Accessor"
       (documentation 'shortcuts-shortcut-direction 'function)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @syntax{(gtk:shortcuts-shortcut-direction object) => direction}
   @syntax{(setf (gtk:shortcuts-shortcut-direction object) direction)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
-  @argument[direction]{a @symbol{gtk:text-direction} value}
+  @argument[direction]{a @sym{gtk:text-direction} value}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-shortcut]{direction} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
   The text direction for which this shortcut is active. If the shortcut is used
-  regardless of the text direction, set this property to the @code{:none} value.
+  regardless of the text direction, set this property to the
+  @val[gtk:direction-type]{:none} value.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-direction} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -380,14 +384,14 @@
  "The @code{icon} property of type @class{g:icon} (Read / Write) @br{}
   The icon to represent the shortcut or gesture. This property is used if the
   @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @code{:gesture} value. For the other predefined gesture types, GTK provides
-  an icon on its own.")
+  @val[gtk:shortcut-type]{:gesture} value. For the other predefined gesture
+  types, GTK provides an icon on its own.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-shortcut-icon)
       "Accessor"
       (documentation 'shortcuts-shortcut-icon 'function)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @syntax{(gtk:shortcuts-shortcut-icon object) => icon}
   @syntax{(setf (gtk:shortcuts-shortcut-icon object) icon)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
@@ -398,8 +402,8 @@
   @end{short}
   An icon to represent the shortcut or gesture. This property is used if the
   @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @code{:gesture} value. For the other predefined gesture types, GTK provides
-  an icon on its own.
+  @val[gtk:shortcut-type]{:gesture} value. For the other predefined gesture
+  types, GTK provides an icon on its own.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-icon} function is deprecated since 4.18.
     This widget will be removed in GTK 5.
@@ -442,20 +446,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "shortcut-type"
                       'shortcuts-shortcut) t)
- "The @code{shortcut-type} property of type @symbol{gtk:shortcut-type}
+ "The @code{shortcut-type} property of type @sym{gtk:shortcut-type}
   (Read / Write) @br{}
   The type of shortcut that is represented. @br{}
-  Default value: @code{:accelerator}")
+  Default value: @val[gtk:shortcut-type]{:accelerator}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-shortcut-shortcut-type)
       "Accessor"
       (documentation 'shortcuts-shortcut-shortcut-type 'function)
- "@version{2025-05-14}
+ "@version{2025-07-27}
   @syntax{(gtk:shortcuts-shortcut-shortcut-type object) => type}
   @syntax{(setf (gtk:shortcuts-shortcut-shortcut-type object) type)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
-  @argument[type]{a @symbol{gtk:shortcut-type} value}
+  @argument[type]{a @sym{gtk:shortcut-type} value}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-shortcut]{shortcut-type} slot of the
     @class{gtk:shortcuts-shortcut} class.

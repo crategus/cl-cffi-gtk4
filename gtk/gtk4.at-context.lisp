@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.at-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'at-context 'type)
- "@version{2023-8-31}
+ "@version{2025-07-19}
   @begin{short}
     The @class{gtk:at-context} class is an abstract class provided by GTK to
     communicate to platform-specific assistive technologies API.
@@ -92,15 +92,16 @@
   and is responsible for updating the accessible state in response to state
   changes in the @class{gtk:accessible} object.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"state-change\" signal}
+    @begin[at-context::state-changed]{signal}
       @begin{pre}
 lambda (context)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:at-context} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when the attributes of the accessible for the
       @class{gtk:at-context} instance change.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:at-context-create}
   @see-class{gtk:accessible}")
@@ -121,7 +122,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible)
       "Accessor"
       (documentation 'at-context-accessible 'function)
- "@version{2023-8-31}
+ "@version{2023-08-31}
   @syntax{(gtk:at-context-accessible object) => accessible}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[accessible]{a @class{gtk:accessible} object}
@@ -137,20 +138,20 @@ lambda (context)    :run-first
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accessible-role" 'at-context) t)
- "The @code{accessible-role} property of type @symbol{gtk:accessible-role}
+ "The @code{accessible-role} property of type @sym{gtk:accessible-role}
   (Read / Write / Construct) @br{}
   The accessible role used by the AT context. Depending on the given role,
   different states and properties can be set or retrieved. @br{}
-  Default value: @code{:none}")
+  Default value: @val[gtk:accessible-role]{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'at-context-accessible-role)
       "Accessor"
       (documentation 'at-context-accessible-role 'function)
- "@version{2023-8-31}
+ "@version{2025-07-25}
   @syntax{(gtk:at-context-accessible-role object) => role}
   @argument[object]{a @class{gtk:at-context} object}
-  @argument[role]{a @symbol{gtk:accessible-role} value}
+  @argument[role]{a @sym{gtk:accessible-role} value}
   @begin{short}
     Accessor of the @slot[gtk:at-context]{accessible-role} slot of the
     @class{gtk:at-context} class.
@@ -170,7 +171,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-display)
       "Accessor"
       (documentation 'at-context-display 'function)
- "@version{2023-8-31}
+ "@version{2023-08-31}
   @syntax{(gtk:at-context-display object) => display}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[display]{a @class{gdk:display} object}
@@ -187,8 +188,8 @@ lambda (context)    :run-first
 
 (cffi:defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
  #+liber-documentation
- "@version{2023-8-31}
-  @argument[role]{a @symbol{gtk:accessible-role} value used by the context}
+ "@version{2025-07-25}
+  @argument[role]{a @sym{gtk:accessible-role} value used by the context}
   @argument[accessible]{a @class{gtk:accessible} object using the context}
   @argument[display]{a @class{gdk:display} object used by the context}
   @return{The new @class{gtk:at-context} object.}

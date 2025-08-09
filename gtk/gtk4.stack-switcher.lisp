@@ -108,9 +108,9 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:stack-switcher} implementation uses the
-    @val[gtk:accessible-role]{:tab-list} role and uses the
-    @val[gtk:accessible-role]{:tab} role of the @sym{gtk:accessible-role}
-    enumeration for its buttons.
+    @val[gtk:accessible-role]{:tab-list} role of the @sym{gtk:accessible-role}
+    enumeration and uses the @val[gtk:accessible-role]{:tab} role for its
+    buttons.
   @end{dictionary}
   @see-constructor{gtk:stack-switcher-new}
   @see-slot{gtk:stack-switcher-stack}
@@ -131,17 +131,15 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-switcher-stack object) => stack}
   @syntax{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
   @argument[stack]{a @class{gtk:stack} widget}
   @begin{short}
-    Accessor of the @slot[gtk:stack-switcher]{stack} slot of the
-    @class{gtk:stack-switcher} class.
+    The accessor for the @slot[gtk:stack-switcher]{stack} slot of the
+    @class{gtk:stack-switcher} class gets or sets the stack to control.
   @end{short}
-  The @fun{gtk:stack-switcher-stack} function retrieves the stack. The
-  @setf{gtk:stack-switcher-stack} function sets the stack to control.
   @see-class{gtk:stack-switcher}
   @see-class{gtk:stack}")
 

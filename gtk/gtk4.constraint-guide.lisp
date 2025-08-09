@@ -149,14 +149,15 @@
 (setf (liber:alias-for-function 'constraint-guide-max-height)
       "Accessor"
       (documentation 'constraint-guide-max-height 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-max-height object) => height}
   @syntax{(setf (gtk:constraint-guide-max-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[height]{an integer for the maximum height of the guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{max-height} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{max-height} slot of the
+    @class{gtk:constraint-guide} class gets or sets the maximum height of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -174,14 +175,15 @@
 (setf (liber:alias-for-function 'constraint-guide-max-width)
       "Accessor"
       (documentation 'constraint-guide-max-width 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-max-width object) => width}
   @syntax{(setf (gtk:constraint-guide-max-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[width]{an integer for the maximum width of the guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{max-width} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{max-width} slot of the
+    @class{gtk:constraint-guide} class gets or sets the maximum width of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -199,14 +201,15 @@
 (setf (liber:alias-for-function 'constraint-guide-min-height)
       "Accessor"
       (documentation 'constraint-guide-min-height 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-min-height object) => height}
   @syntax{(setf (gtk:constraint-guide-min-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[height]{an integer for the minimum height of the guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{min-height} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{min-height} slot of the
+    @class{gtk:constraint-guide} class gets or sets the minimum height of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -224,14 +227,15 @@
 (setf (liber:alias-for-function 'constraint-guide-min-width)
       "Accessor"
       (documentation 'constraint-guide-min-width 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-min-width object) => width}
   @syntax{(setf (gtk:constraint-guide-min-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[width]{an integer for the minimum width of the guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{min-width} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{min-width} slot of the
+    @class{gtk:constraint-guide} class gets or sets the minimum width of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -248,17 +252,16 @@
 (setf (liber:alias-for-function 'constraint-guide-name)
       "Accessor"
       (documentation 'constraint-guide-name 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-name object) => name}
   @syntax{(setf (gtk:constraint-guide-name object) name)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[name]{a string for the name for the guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{name} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{name} slot of the
+    @class{gtk:constraint-guide} class gets or sets the name for the constraint
+    guide.
   @end{short}
-  The @fun{gtk:constraint-guide-name} function retrieves the name for the
-  constraint guide. The @setf{gtk:constraint-guide-name} function sets a name.
   The name is useful for debugging purposes.
   @see-class{gtk:constraint-guide}")
 
@@ -276,15 +279,16 @@
 (setf (liber:alias-for-function 'constraint-guide-nat-height)
       "Accessor"
       (documentation 'constraint-guide-nat-height 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-nat-height object) => height}
   @syntax{(setf (gtk:constraint-guide-nat-height object) height)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[height]{an integer for the preferred, or natural, height of the
     guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{nat-height} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{nat-height} slot of the
+    @class{gtk:constraint-guide} class gets or sets the preferred height of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -302,15 +306,16 @@
 (setf (liber:alias-for-function 'constraint-guide-nat-width)
       "Accessor"
       (documentation 'constraint-guide-nat-width 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-nat-width object) => width}
   @syntax{(setf (gtk:constraint-guide-nat-width object) width)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[width]{an integer for the preferred, or natural, width of the
     guide}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{nat-width} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{nat-width} slot of the
+    @class{gtk:constraint-guide} class gets or sets the preferred width of the
+    guide.
   @end{short}
   @see-class{gtk:constraint-guide}")
 
@@ -328,20 +333,17 @@
 (setf (liber:alias-for-function 'constraint-guide-strength)
       "Accessor"
       (documentation 'constraint-guide-strength 'function)
- "@version{2025-07-01}
+ "@version{2025-08-03}
   @syntax{(gtk:constraint-guide-strength object) => strength}
   @syntax{(setf (gtk:constraint-guide-strength object) strength)}
   @argument[object]{a @class{gtk:constraint-guide} object}
   @argument[strength]{a @sym{gtk:constraint-strength} value for the strength
     of the constraint on the natural size}
   @begin{short}
-    Accessor of the @slot[gtk:constraint-guide]{strength} slot of the
-    @class{gtk:constraint-guide} class.
+    The accessor for the @slot[gtk:constraint-guide]{strength} slot of the
+    @class{gtk:constraint-guide} class gets or sets the strength of the
+    constraint on the natural size of the given @arg{guide}.
   @end{short}
-  The @fun{gtk:constraint-guide-strength} function retrieves the strength of
-  the constraint on the natural size of the given @arg{guide}. The
-  @setf{gtk:constraint-guide-strength} function sets the strength of the
-  constraint.
   @see-class{gtk:constraint-guide}
   @see-symbol{gtk:constraint-strength}")
 

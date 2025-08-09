@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.event-controller-focus.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,47 +81,51 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller-focus 'type)
- "@version{2024-7-26}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:event-controller-focus} class is an event controller to keep
     track of keyboard focus.
   @end{short}
 
-  The event controller offers the @code{\"enter\"} and @code{\"leave\"} signals,
-  as well as the @slot[gtk:event-controller-focus]{is-focus} and
+  The event controller offers the @sig[gtk:event-controller-focus]{enter} and
+  @sig[gtk:event-controller-focus]{leave} signals, as well as the
+  @slot[gtk:event-controller-focus]{is-focus} and
   @slot[gtk:event-controller-focus]{contains-focus} properties which are updated
   to reflect focus changes inside the widget hierarchy that is rooted at the
   controllers widget.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"enter\" signal}
+    @begin[event-controller-focus::enter]{signal}
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[controller]{The @class{gtk:event-controller-focus} object which
+      @begin[code]{simple-table}
+        @entry[controller]{The @class{gtk:event-controller-focus} object that
           received the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the focus enters into the widget or one of
-      its descendents. Note that this means you may not get an @code{\"enter\"}
-      signal even though the widget becomes the focus location, in certain
-      cases, such as when the focus moves from a descendent of the widget to the
-      widget itself. If you are interested in these cases, you can monitor the
+      its descendents. Note that this means you may not get an
+      @sig[gtk:event-controller-focus]{enter} signal even though the widget
+      becomes the focus location, in certain cases, such as when the focus moves
+      from a descendent of the widget to the widget itself. If you are
+      interested in these cases, you can monitor the
       @slot[gtk:event-controller-focus]{is-focus} property for changes.
-    @subheading{The \"leave\" signal}
+    @end{signal}
+    @begin[event-controller-focus::leave]{signal}
       @begin{pre}
 lambda (controller)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[controller]{The @class{gtk:event-controller-focus} object which
+      @begin[code]{simple-table}
+        @entry[controller]{The @class{gtk:event-controller-focus} object that
           received the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the focus leaves the widget hierarchy that
       is rooted at the widget that the controller is attached to. Note that this
-      means you may not get a @code{\"leave\"} signal even though the focus
-      moves away from the widget, in certain cases, such as when the focus moves
-      from the widget to a descendent. If you are interested in these cases, you
-      can monitor the @slot[gtk:event-controller-focus]{is-focus} property for
-      changes.
+      means you may not get a @sig[gtk:event-controller-focus]{leave} signal
+      even though the focus moves away from the widget, in certain cases, such
+      as when the focus moves from the widget to a descendent. If you are
+      interested in these cases, you can monitor the
+      @slot[gtk:event-controller-focus]{is-focus} property for changes.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:event-controller-focus-new}
   @see-slot{gtk:event-controller-focus-contains-focus}
@@ -141,15 +145,15 @@ lambda (controller)    :run-last
   @em{True} if focus is contained in the controllers widget. See the
   @slot[gtk:event-controller-focus]{is-focus} property for whether the focus is
   in the widget itself or inside a descendent. When handling focus events, this
-  property is updated before the @code{\"enter\"} or @code{\"leave\"} signals
-  are emitted. @br{}
+  property is updated before the @sig[gtk:event-controller-focus]{enter} or
+  @sig[gtk:event-controller-focus]{leave} signals are emitted. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-focus-contains-focus)
       "Accessor"
       (documentation 'event-controller-focus-contains-focus 'function)
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @syntax{(gtk:event-controller-focus-contains-focus object) => contains}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[contains]{a boolean whether focus is within @arg{object}}
@@ -169,14 +173,15 @@ lambda (controller)    :run-last
  "The @code{is-focus} property of type @code{:boolean} (Read) @br{}
   @em{True} if focus is contained in the controllers widget, as opposed to in a
   descendent widget. When handling focus events, this property is updated before
-  the @code{\"enter\"} or @code{\"leave\"} signals are emitted. @br{}
+  the @sig[gtk:event-controller-focus]{enter} or
+  @sig[gtk:event-controller-focus]{leave} signals are emitted. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-focus-is-focus)
       "Accessor"
       (documentation 'event-controller-focus-is-focus 'function)
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @syntax{(gtk:event-controller-focus-is-focus object) => is-focus}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[is-focus]{a boolean whether focus is within the controllers widget,
@@ -197,7 +202,7 @@ lambda (controller)    :run-last
 
 (defun event-controller-focus-new ()
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @return{The new @class{gtk:event-controller-focus} object.}
   @short{Creates a new event controller that will handle focus events.}
   @see-class{gtk:event-controller-focus}"

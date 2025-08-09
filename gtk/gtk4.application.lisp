@@ -360,19 +360,18 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-active-window)
       "Accessor"
       (documentation 'application-active-window 'function)
- "@version{2025-05-12}
+ "@version{2025-07-28}
   @syntax{(gtk:application-active-window object) => window}
   @argument[object]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
-    Accessor of the @slot[gtk:application]{active-window} slot of the
-    @class{gtk:application} class.
+    The accessor for the @slot[gtk:application]{active-window} slot of the
+    @class{gtk:application} class returns the active window of the application.
   @end{short}
-  The @fun{gtk:application-active-window} function gets the active window for
-  the application. The active window is the one that was most recently focused
-  within the application. This window may not have the focus at the moment if
-  another application has it - this is just the most recently focused window
-  within this application.
+  The active window is the one that was most recently focused within the
+  application. This window may not have the focus at the moment if another
+  application has it - this is just the most recently focused window within
+  this application.
   @see-class{gtk:application}
   @see-class{gtk:window}")
 
@@ -387,18 +386,17 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-menubar)
       "Accessor"
       (documentation 'application-menubar 'function)
- "@version{2025-05-12}
+ "@version{2025-07-28}
   @syntax{(gtk:application-menubar object) => menubar}
   @syntax{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[menubar]{a @class{g:menu-model} object, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:application]{menubar} slot of the
-    @class{gtk:application} class.
+    The accessor for the @slot[gtk:application]{menubar} slot of the
+    @class{gtk:application} class gets or sets the menubar for windows of the
+    application.
   @end{short}
-  The @fun{gtk:application-menubar} function returns the menubar for windows
-  of the application. The @setf{gtk:application-menubar} function sets or unsets
-  the menubar.
+  Pass the @code{nil} value to unset the menubar.
 
   This is a menubar in the traditional sense. This can only be done in the
   primary instance of the application, after it has been registered. The
@@ -433,15 +431,17 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-register-session)
       "Accessor"
       (documentation 'application-register-session 'function)
- "@version{2025-05-12}
+ "@version{2025-07-29}
   @syntax{(gtk:application-register-session object) => setting}
   @syntax{(setf (gtk:application-register-session object) setting)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[setting]{a boolean whether to register with the session manager}
   @begin{short}
-    Accessor of the @slot[gtk:application]{register-session} slot of the
-    @class{gtk:application} class.
+    The accessor for the @slot[gtk:application]{register-session} slot of the
+    @class{gtk:application} class gets or sets whether to register with the
+    session manager.
   @end{short}
+
   Set the @slot[gtk:application]{register-session} property to @em{true} to
   register with the session mananger. This will make GTK track the session
   state, such as the @slot[gtk:application]{screensaver-active} property.
@@ -464,14 +464,16 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-screensaver-active)
       "Accessor"
       (documentation 'application-screensaver-active 'function)
- "@version{2025-05-12}
+ "@version{2025-07-29}
   @syntax{(gtk:application-screensaver-active object) => active}
   @argument[object]{a @class{gtk:application} instance}
   @argument[active]{a boolean whether the screensaver is active}
   @begin{short}
-    Accessor of the @slot[gtk:application]{screensaver-active} slot of the
-    @class{gtk:application} class.
+    The accessor for the @slot[gtk:application]{screensaver-active} slot of the
+    @class{gtk:application} class gets or sets whether the screensaver is
+    active.
   @end{short}
+
   The @slot[gtk:application]{screensaver-active} property is @em{true} if GTK
   believes that the screensaver is currently active. GTK only tracks session
   state, including this, when the @slot[gtk:application]{register-session}

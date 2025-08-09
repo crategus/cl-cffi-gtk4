@@ -2,9 +2,9 @@
 ;;; gtk4.actionable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
@@ -78,7 +78,7 @@
 (setf (liber:alias-for-class 'actionable)
       "Interface"
       (documentation 'actionable 'type)
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @begin{short}
     The @class{gtk:actionable} interface provides a convenient way of
     associating widgets with actions on a @class{gtk:application-window} widget
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'actionable-action-name)
       "Accessor"
       (documentation 'actionable-action-name 'function)
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @syntax{(gtk:actionable-action-name object) => name}
   @syntax{(setf (gtk:actionable-action-name object) name)}
   @argument[object]{a @class{gtk:actionable} widget}
@@ -153,21 +153,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-target" 'actionable) t)
- "The @code{action-target} property of type @symbol{g:variant} (Read / Write)
-  @br{}
+ "The @code{action-target} property of type @sym{g:variant} (Read / Write) @br{}
   The parameter for action invocations. @br{}
-  Allowed values: a @symbol{g:variant} parameter @br{}
+  Allowed values: a @sym{g:variant} parameter @br{}
   Default value: @code{cffi:null-pointer}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'actionable-action-target)
       "Accessor"
       (documentation 'actionable-action-target 'function)
- "@version{2025-2-23}
+ "@version{2025-07-25}
   @syntax{(gtk:actionable-action-target object) => value}
   @syntax{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
-  @argument[value]{a @symbol{g:variant} parameter as the target value, or
+  @argument[value]{a @sym{g:variant} parameter as the target value, or
     @code{cffi:null-pointer}}
   @begin{short}
     Accessor of the @slot[gtk:actionable]{action-target} slot of the
@@ -226,7 +225,7 @@
 (cffi:defcfun ("gtk_actionable_set_detailed_action_name"
                actionable-set-detailed-action-name) :void
  #+liber-documentation
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @argument[actionable]{a @class{gtk:actionable} widget}
   @argument[name]{a string for the detailed action name}
   @begin{short}

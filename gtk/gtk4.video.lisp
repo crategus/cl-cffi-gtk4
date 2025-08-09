@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.video.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -112,7 +112,7 @@
 
 #+liber-documentation
 (setf (documentation 'video 'type)
- "@version{2024-10-31}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:video} widget is a widget to show a @class{gtk:media-stream}
     object with media controls.
@@ -205,26 +205,26 @@
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "graphics-offload" 'video) t)
  "The @code{graphics-offload} property of type
-  @symbol{gtk:graphics-offload-enabled} (Read / Write) @br{}
+  @sym{gtk:graphics-offload-enabled} (Read / Write) @br{}
   Whether to enable graphics offload. Since 4.14 @br{}
-  Default value: @code{:disabled}")
+  Default value: @val[gtk:graphics-offload-enabled]{:disabled}")
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'video-graphics-offload)
       "Accessor"
       (documentation 'video-graphics-offload 'function)
- "@version{2024-10-31}
+ "@version{2025-07-25}
   @syntax{(gtk:video-graphics-offload object) => setting}
   @syntax{(setf (gtk:video-graphics-offload object) setting)}
   @argument[object]{a @class{gtk:video} widget}
-  @argument[setting]{a @symbol{gtk:graphics-offload-enabled} value}
+  @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
     Accessor of the @slot[gtk:video]{graphics-offload} slot of the
     @class{gtk:video} class.
   @end{short}
   The @fun{gtk:video-graphics-offload} function returns whether graphics offload
   is enabled. The @setf{gtk:video-graphics-offload} function sets whether to
-  enable graphics offload. See the @symbol{gtk:graphics-offload-enabled}
+  enable graphics offload. See the @sym{gtk:graphics-offload-enabled}
   documentation for more information on graphics offload.
 
   Since 4.14
@@ -355,8 +355,8 @@
 
 (defun video-new-for-filename (path)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[path]{a pathname or namestring with the file to playback}
+ "@version{2025-07-27}
+  @argument[path]{a pathname or namestring for the file to playback}
   @return{The new @class{gtk:video} widget.}
   @short{Creates a new @class{gtk:video} widget to playback the given file.}
   This is a utility function that calls the @fun{gtk:video-new-for-file}
@@ -374,8 +374,8 @@
 (cffi:defcfun ("gtk_video_new_for_resource" video-new-for-resource)
     (g:object video)
  #+liber-documentation
- "@version{2024-10-31}
-  @argument[path]{a string with the resource path to playback}
+ "@version{2025-07-27}
+  @argument[path]{a string for the resource path to playback}
   @return{The new @class{gtk:video} widget.}
   @short{Creates a new @class{gtk:video} widget to playback the given resource.}
   This is a utility function that calls the @fun{gtk:video-new-for-file}
@@ -396,9 +396,9 @@
 
 (defun video-set-filename (video path)
  #+liber-documentation
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @argument[video]{a @class{gtk:video} widget}
-  @argument[path]{a pathname or namestring with the file to playback}
+  @argument[path]{a pathname or namestring for the file to playback}
   @begin{short}
     Makes @arg{object} playback the given file.
   @end{short}
@@ -415,9 +415,9 @@
 
 (cffi:defcfun ("gtk_video_set_resource" video-set-resource) :void
  #+liber-documentation
- "@version{2024-10-31}
+ "@version{2025-07-27}
   @argument[video]{a @class{gtk:video} widget}
-  @argument[path]{a string with the resource to playback}
+  @argument[path]{a string for the resource to playback}
   @begin{short}
     Makes @arg{object} playback the given resource.
   @end{short}

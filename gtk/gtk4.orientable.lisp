@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.orientable.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,7 +67,7 @@
 (setf (liber:alias-for-class 'orientable)
       "Interface"
       (documentation 'orientable 'type)
- "@version{2024-9-26}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:orientable} interface is implemented by all widgets that can
     be oriented horizontally or vertically.
@@ -90,20 +90,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "orientation" 'orientable) t)
- "The @code{orientation} property of type @symbol{gtk:orientation}
-  (Read / Write) @br{}
+ "The @code{orientation} property of type @sym{gtk:orientation} (Read / Write)
+  @br{}
   The orientation of the orientable widget. @br{}
-  Default value: @code{:horizontal}")
+  Default value: @val[gtk:orientation]{:horizontal}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'orientable-orientation)
       "Accessor"
       (documentation 'orientable-orientation 'function)
- "@version{2024-9-26}
+ "@version{2025-07-26}
   @syntax{(gtk:orientable-orientation object) => orientation}
   @syntax{(setf (gtk:orientable-orientation object) orientation)}
   @argument[object]{a @class{gtk:orientable} widget}
-  @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
+  @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:orientable]{orientation} slot of the
     @class{gtk:orientable} interface.

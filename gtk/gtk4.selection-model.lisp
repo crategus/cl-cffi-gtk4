@@ -79,7 +79,7 @@
 (setf (liber:alias-for-class 'selection-model)
       "Interface"
       (documentation 'selection-model 'type)
- "@version{2025-03-17}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:selection-model} interface is an interface that extends the
     @class{g:list-model} interface by adding support for selections.
@@ -96,16 +96,17 @@
   indicating if an item is selected or not. This can be queried via the
   @fun{gtk:selection-model-is-selected} function. When the selected state of
   one or more items changes, the model will emit the
-  @code{\"selection-changed\"} signal by calling the
+  @sig[gtk:selection-model]{selection-changed} signal by calling the
   @fun{gtk:selection-model-selection-changed} function. The positions given in
   that signal may have their selection state changed, though that is not a
-  requirement. If new items added to the model via the @code{\"items-changed\"}
-  signal are selected or not is up to the implementation.
+  requirement. If new items added to the model via the
+  @sig[gtk:selection-model]{items-changed} signal are selected or not is up to
+  the implementation.
 
-  Note that items added via the @code{\"items-changed\"} signal may already be
-  selected and no @code{\"selection-changed\"} signal will be emitted for them.
-  So to track which items are selected, it is necessary to listen to both
-  signals.
+  Note that items added via the @sig[gtk:selection-model]{items-changed} signal
+  may already be selected and no @sig[gtk:selection-model]{selection-changed}
+  signal will be emitted for them. So to track which items are selected, it is
+  necessary to listen to both signals.
 
   Additionally, the interface can expose functionality to select and unselect
   items. If these functions are implemented, list widgets will allow users to
@@ -121,22 +122,23 @@
   Selections may happen asynchronously, so the only reliable way to find out
   when an item was selected is to listen to the signals that indicate selection.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"selection-changed\" signal}
+    @begin[selection-model::selection-changed]{signal}
       @begin{pre}
-lambda (model pos n-items)    :run-last
+lambda (model pos nitems)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[model]{The @class{gtk:selection-model} object.}
-        @entry[pos]{The unsigned integer with the first item that may have
+        @entry[pos]{The unsigned integer for the first item that may have
           changed.}
-        @entry[n-items]{The unsigned integer with the number of items with
+        @entry[nitems]{The unsigned integer for the number of items with
           changes.}
-      @end{table}
+      @end{simple-table}
       Emitted when the selection state of some of the items in model changes.
       Note that this signal does not specify the new selection state of the
       items, they need to be queried manually. It is also not necessary for a
       model to change the selection state of any of the items in the selection
       model, though it would be rather useless to emit such a signal.
+    @end{signal}
   @end{dictionary}
   @see-class{g:list-model}
   @see-class{gtk:single-selection}")
@@ -237,10 +239,10 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_get_selection_in_range"
                selection-model-selection-in-range) (g:boxed bitset :return)
  #+liber-documentation
- "@version{2025-03-17}
+ "@version{2025-07-12}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the start of the queried range}
-  @argument[n-items]{an unsigned integer for the number of items in the queried
+  @argument[nitems]{an unsigned integer for the number of items in the queried
     range}
   @begin{return}
     The @class{gtk:bitset} instance that matches the selection state for the
@@ -249,20 +251,21 @@ gtk_selection_model_selection_changed (model, first_changed_item,
   @end{return}
   @begin{short}
     Gets a bitset containing a set where the values in the range
-    [@arg{pos}, @arg{pos} + @arg{n-items}) match the selected state of the
+    [@arg{pos}, @arg{pos} + @arg{nitems}) match the selected state of the
     items in that range.
   @end{short}
   All values outside that range are undefined.
 
   This function is an optimization for the @fun{gtk:selection-model-selection}
   function when you are only interested in part of the model's selected state.
-  A common use case is in response to the @code{\"selection-changed\"} signal.
+  A common use case is in response to the
+  @sig[gtk:selection-model]{selection-changed} signal.
   @see-class{gtk:selection-model}
   @see-class{gtk:bitset}
   @see-function{gtk:selection-model-selection}"
   (model (g:object selection-model))
   (pos :uint)
-  (n-items :uint))
+  (nitems :uint))
 
 (export 'selection-model-selection-in-range)
 
@@ -418,20 +421,20 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (cffi:defcfun ("gtk_selection_model_selection_changed"
                selection-model-selection-changed) :void
  #+liber-documentation
- "@version{2025-03-17}
+ "@version{2025-07-12}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[pos]{an unsigned integer for the first changed item}
-  @argument[n-items]{an unsigned integer for the number of changed items}
+  @argument[nitems]{an unsigned integer for the number of changed items}
   @begin{short}
     Helper function for implementations of the @class{gtk:selection-model}
     class.
   @end{short}
-  Call this when the selection changes to emit the @code{\"selection-changed\"}
-  signal.
+  Call this when the selection changes to emit the
+  @sig[gtk:selection-model]{selection-changed} signal.
   @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (pos :uint)
-  (n-items :uint))
+  (nitems :uint))
 
 (export 'selection-model-selection-changed)
 

@@ -79,7 +79,7 @@
 (setf (liber:alias-for-symbol 'string-filter-match-mode)
       "GEnum"
       (liber:symbol-documentation 'string-filter-match-mode)
- "@version{2024-09-28}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkStringFilterMatchMode\" string-filter-match-mode
   (:export t
@@ -89,12 +89,12 @@
   (:prefix 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:exact]{The search string and text must match exactly.}
       @entry[:substring]{The search string must be contained as a substring
         inside the text.}
       @entry[:prefix]{The text must begin with the search string.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Specifies how search strings are matched inside text.
@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-filter 'type)
- "@version{2025-03-13}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:string-filter} object determines whether to include items by
     looking at strings and comparing them to a fixed search term.
@@ -202,20 +202,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "match-mode" 'string-filter) t)
- "The @code{match-mode} property of type @symbol{gtk:string-filter-match-mode}
+ "The @code{match-mode} property of type @sym{gtk:string-filter-match-mode}
   (Read / Write) @br{}
   Whether exact matches are necessary or if substrings are allowed. @br{}
-  Default value: @code{:substring}")
+  Default value: @val[gtk:string-filter-match-mode]{:substring}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{2024-09-28}
+ "@version{2025-07-26}
   @syntax{(gtk:string-filter-match-mode object) => mode}
   @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
-  @argument[mode]{a @symbol{gtk:string-filter-match-mode} value}
+  @argument[mode]{a @sym{gtk:string-filter-match-mode} value}
   @begin{short}
     Accessor of the @slot[gtk:string-filter]{match-mode} slot of the
     @class{gtk:string-filter} class.

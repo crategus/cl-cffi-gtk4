@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-zoom.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,26 +67,28 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-zoom 'type)
- "@version{2024-7-27}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:gesture-zoom} class is a @class{gtk:gesture} implementation
     for 2-finger pinch/zoom gestures.
   @end{short}
   Whenever the distance between both tracked sequences changes, the
-  @code{\"scale-changed\"} signal is emitted to report the scale factor.
+  @sig[gtk:gesture-zoom]{scale-changed} signal is emitted to report the scale
+  factor.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"scale-changed\" signal}
+    @begin[gesture-zoom::scale-changed]{signal}
       @begin{pre}
 lambda (gesture scale)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[gesture]{The @class{gtk:gesture-zoom} object on which the signal
           is emitted.}
-        @entry[scale]{The double float with the scale delta, taking the initial
+        @entry[scale]{The double float for the scale delta, taking the initial
           state as 1:1.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the distance between both tracked sequences
       changes.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:gesture-zoom-new}
   @see-class{gtk:gesture-rotate}")
@@ -99,7 +101,7 @@ lambda (gesture scale)    :run-first
 
 (defun gesture-zoom-new ()
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2024-07-27}
   @return{The newly created @class{gtk:gesture-zoom} object.}
   @begin{short}
     Returns a newly created gesture that recognizes pinch/zoom gestures.
@@ -116,9 +118,9 @@ lambda (gesture scale)    :run-first
 (cffi:defcfun ("gtk_gesture_zoom_get_scale_delta" gesture-zoom-scale-delta)
     :double
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2025-07-26}
   @argument[widget]{a @class{gtk:gesture-zoom} object}
-  @return{The double float with the scale delta.}
+  @return{The double float for the scale delta.}
   @begin{short}
     If the gesture is active, this function returns the zooming difference since
     the gesture was recognized, hence the starting point is considered 1:1.

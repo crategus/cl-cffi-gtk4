@@ -94,12 +94,12 @@
   (:ellipsize-end 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:clip]{Clip the remaining text.}
       @entry[:ellipsize-start]{Omit characters at the start of the text.}
       @entry[:ellipsize-middle]{Omit characters at the middle of the text.}
       @entry[:ellipsize-end]{Omit characters at the end of the text.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The different methods to handle text in the @class{gtk:inscription} widget
@@ -205,19 +205,17 @@
 (setf (liber:alias-for-function 'inscription-attributes)
       "Accessor"
       (documentation 'inscription-attributes 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-attributes object) => attrs}
   @syntax{(setf (gtk:inscription-attributes object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[attrs]{a @class{pango:attr-list} instance}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{attributes} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{attributes} slot of the
+    @class{gtk:inscription} class gets or sets the attribute list of the
+    inscription.
   @end{short}
-  The @fun{gtk:inscription-attributes} function gets the attribute list of the
-  inscription. The @setf{gtk:inscription-attributes} function applies attributes
-  to the inscription text. These attributes will not be evaluated for sizing the
-  inscription.
+  These attributes will not be evaluated for sizing the inscription.
 
   Since 4.8
   @see-class{gtk:inscription}
@@ -240,16 +238,15 @@
 (setf (liber:alias-for-function 'inscription-markup)
       "Accessor"
       (documentation 'inscription-markup 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(setf (gtk:inscription-markup object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[markup]{a string for the markup to display}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{markup} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{markup} slot of the
+    @class{gtk:inscription} class is an utility function to set the text and
+    attributes to be displayed.
   @end{short}
-  The @setf{gtk:inscription-markup} function is an utility function to set the
-  text and attributes to be displayed.
 
   Since 4.8
   @see-class{gtk:inscription}")
@@ -272,15 +269,16 @@
 (setf (liber:alias-for-function 'inscription-min-chars)
       "Accessor"
       (documentation 'inscription-min-chars 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-min-chars object) => chars}
   @syntax{(setf (gtk:inscription-min-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[chars]{an integer for the minimum number of characters that should
     fit, approximately}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{min-chars} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{min-chars} slot of the
+    @class{gtk:inscription} class gets or sets the number of characters that
+    should fit into the inscription at minimum.
   @end{short}
 
   Since 4.8
@@ -304,15 +302,16 @@
 (setf (liber:alias-for-function 'inscription-min-lines)
       "Accessor"
       (documentation 'inscription-min-lines 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-min-lines object) => lines}
   @syntax{(setf (gtk:inscription-min-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{an integer for the minimum number of lines that should fit,
     approximately}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{min-lines} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{min-lines} slot of the
+    @class{gtk:inscription} class gets or sets the number of lines that should
+    fit into the inscription at minimum.
   @end{short}
 
   Since 4.8
@@ -335,15 +334,16 @@
 (setf (liber:alias-for-function 'inscription-nat-chars)
       "Accessor"
       (documentation 'inscription-nat-chars 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-nat-chars object) => chars}
   @syntax{(setf (gtk:inscription-nat-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[chars]{an integer for the number of characters that should ideally
     fit}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{nat-chars} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{nat-chars} slot of the
+    @class{gtk:inscription} class gets or sets the number of characters that
+    should ideally fit into the inscription.
   @end{short}
 
   Since 4.8
@@ -366,14 +366,15 @@
 (setf (liber:alias-for-function 'inscription-nat-lines)
       "Accessor"
       (documentation 'inscription-nat-lines 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-nat-lines object) => lines}
   @syntax{(setf (gtk:inscription-nat-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{an integer for the number of lines that should ideally fit}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{nat-lines} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{nat-lines} slot of the
+    @class{gtk:inscription} class gets or sets the number of lines that should
+    ideally fit into the inscription.
   @end{short}
 
   Since 4.8
@@ -391,14 +392,14 @@
 (setf (liber:alias-for-function 'inscription-text)
       "Accessor"
       (documentation 'inscription-text 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-text object) => text}
   @syntax{(setf (gtk:inscription-text object) text)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{a string for the text to display}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{text} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{text} slot of the
+    @class{gtk:inscription} class gets or sets the displayed text.
   @end{short}
 
   Since 4.8
@@ -408,23 +409,24 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-overflow" 'inscription) t)
- "The @code{text-overflow} property of type @symbol{gtk:inscription-overflow}
+ "The @code{text-overflow} property of type @sym{gtk:inscription-overflow}
   (Read / Write) @br{}
   The overflow method to use for the text. @br{}
-  Default value: @code{:clip}")
+  Default value: @val[gtk:inscription-overflow]{:clip}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'inscription-text-overflow)
       "Accessor"
       (documentation 'inscription-text-overflow 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-text-overflow object) => setting}
   @syntax{(setf (gtk:inscription-text-overflow object) setting)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[setting]{a @symbol{gtk:inscription-overflow} value}
+  @argument[setting]{a @sym{gtk:inscription-overflow} value}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{text-overflow} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{text-overflow} slot of the
+    @class{gtk:inscription} class gets or sets the overflow method to use for
+    the text.
   @end{short}
 
   Since 4.8
@@ -435,24 +437,24 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-mode" 'inscription) t)
- "The @code{wrap-mode} property of type @symbol{pango:wrap-mode} (Read / Write)
+ "The @code{wrap-mode} property of type @sym{pango:wrap-mode} (Read / Write)
   @br{}
   Controls how the line wrapping is done. Note that unlike the @class{gtk:label}
-  widget, the default here is the @code{:word-char} value. @br{}
-  Default value: @code{:word-char}")
+  widget, the default here is the @val[pango:wrap-mode]{:word-char} value. @br{}
+  Default value: @val[pango:wrap-mode]{:word-char}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'inscription-wrap-mode)
       "Accessor"
       (documentation 'inscription-wrap-mode 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-wrap-mode object) => mode}
   @syntax{(setf (gtk:inscription-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:inscription} widget}
-  @argument[mode]{a @symbol{pango:wrap-mode} value}
+  @argument[mode]{a @sym{pango:wrap-mode} value}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{wrap-mode} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{wrap-mode} slot of the
+    @class{gtk:inscription} class gets or sets how the line wrapping is done.
   @end{short}
 
   Since 4.8
@@ -474,14 +476,15 @@
 (setf (liber:alias-for-function 'inscription-xalign)
       "Accessor"
       (documentation 'inscription-xalign 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-xalign object) => xalign}
   @syntax{(setf (gtk:inscription-xalign object) xalign)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[xalign]{a single float for the xalign value, between 0.0 and 1.0}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{xalign} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{xalign} slot of the
+    @class{gtk:inscription} class gets or sets the horizontal alignment of the
+    text inside the allocated size.
   @end{short}
 
   Since 4.8
@@ -502,14 +505,15 @@
 (setf (liber:alias-for-function 'inscription-yalign)
       "Accessor"
       (documentation 'inscription-yalign 'function)
- "@version{2025-05-04}
+ "@version{2025-08-03}
   @syntax{(gtk:inscription-yalign object) => yalign}
   @syntax{(setf (gtk:inscription-yalign object) yalign)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[yalign]{a single float for the yalign value, between 0.0 and 1.0}
   @begin{short}
-    Accessor of the @slot[gtk:inscription]{yalign} slot of the
-    @class{gtk:inscription} class.
+    The accessor for the @slot[gtk:inscription]{yalign} slot of the
+    @class{gtk:inscription} class gets or sets the vertical alignment of the
+    text inside the allocated size.
   @end{short}
 
   Since 4.8

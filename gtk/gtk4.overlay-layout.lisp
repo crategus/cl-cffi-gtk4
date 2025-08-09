@@ -108,19 +108,16 @@
 (setf (liber:alias-for-function 'overlay-layout-child-clip-overlay)
       "Accessor"
       (documentation 'overlay-layout-child-clip-overlay 'function)
- "@version{#2024-04-23}
+ "@version{#2025-08-03}
   @syntax{(gtk:overlay-layout-child-clip-overlay object) => clip}
   @syntax{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[clip]{a boolean whether the child widget is clipped}
   @begin{short}
-    Accessor of the @slot[gtk:overlay-layout-child]{clip-overlay} slot of the
-    @class{gtk:overlay-layout-child} class.
+    The accessor for the @slot[gtk:overlay-layout-child]{clip-overlay} slot of
+    the @class{gtk:overlay-layout-child} class gets or sets whether the child
+    widget is clipped.
   @end{short}
-  The @fun{gtk:overlay-layout-child-clip-overlay} function retrieves whether
-  the child widget is clipped. The
-  @setf{gtk:overlay-layout-child-clip-overlay} function sets whether to clip
-  the child widget.
   @see-class{gtk:overlay-layout-child}")
 
 ;;; --- gtk:overlay-layout-child-measure ---------------------------------------
@@ -137,18 +134,16 @@
 (setf (liber:alias-for-function 'overlay-layout-child-measure)
       "Accessor"
       (documentation 'overlay-layout-child-measure 'function)
- "@version{#2024-04-23}
+ "@version{#2025-08-03}
   @syntax{(gtk:overlay-layout-child-measure object) => measure}
   @syntax{(setf (gtk:overlay-layout-child-measure object) measure)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[measure]{a boolean whether to measure the child widget}
   @begin{short}
-    Accessor of the @slot[gtk:overlay-layout-child]{measure} slot of the
-    @class{gtk:overlay-layout-child} class.
+    The accessor for the @slot[gtk:overlay-layout-child]{measure} slot of the
+    @class{gtk:overlay-layout-child} class gets or sets whether the child widget
+    is measured.
   @end{short}
-  The @fun{gtk:overlay-layout-child-measure} function retrieves whether the
-  child widget is measured. The @setf{gtk:overlay-layout-child-measure} function
-  sets whether to measure the child widget.
   @see-class{gtk:overlay-layout-child}")
 
 ;;; ----------------------------------------------------------------------------

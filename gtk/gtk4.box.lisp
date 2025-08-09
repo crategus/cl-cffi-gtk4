@@ -167,7 +167,7 @@
 (setf (documentation (liber:slot-documentation "baseline-child" 'box) t)
  "The @code{baseline-child} property of type @code{:int} (Read / Write) @br{}
   The position of the child widget that determines the baseline of the box in
-  vertical layout. This is only relevant of the box is in vertical orientation.
+  vertical layout. This is only relevant if the box is in vertical orientation.
   Since 4.12 @br{}
   Default value: -1")
 
@@ -175,18 +175,17 @@
 (setf (liber:alias-for-function 'box-baseline-child)
       "Accessor"
       (documentation 'box-baseline-child 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:box-baseline-child object) => child}
   @syntax{(setf (gtk:box-baseline-child object) child)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[child]{an integer for the baseline child position, or -1}
   @begin{short}
-    Accessor of the @slot[gtk:box]{baseline-child} slot of the @class{gtk:box}
-    class.
+    The accessor for the @slot[gtk:box]{baseline-child} slot of the
+    @class{gtk:box} class gets or sets the position of the child widget that
+    determines the baseline of the box in vertical layout.
   @end{short}
-  The @fun{gtk:box-baseline-child} function gets the baseline child widget of a
-  box. The @setf{gtk:box-baseline-position} function sets the baseline child
-  widget. This affects only vertical boxes.
+  This is only relevant if the box is in vertical orientation.
 
   Since 4.12
   @see-class{gtk:box}")
@@ -204,17 +203,16 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:box-baseline-position object) => position}
   @syntax{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[position]{a value of the @sym{gtk:baseline-position} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:box]{baseline-position} slot of the
-    @class{gtk:box} class.
+    The accessor for the @slot[gtk:box]{baseline-position} slot of the
+    @class{gtk:box} class gets or sets the position of the baseline aligned
+    widgets if extra space is available.
   @end{short}
-  The @fun{gtk:box-baseline-position} function gets the baseline position of a
-  box. The @setf{gtk:box-baseline-position} function sets the baseline position.
 
   This affects only horizontal boxes with at least one baseline aligned child
   widget. If there is more vertical space available than requested, and the
@@ -235,19 +233,17 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:box-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[homogeneous]{@em{true} to create equal allotments, @em{false}
     for variable allotments}
   @begin{short}
-    Accessor of the @slot[gtk:box]{homogeneous} slot of the @class{gtk:box}
-    class.
+    The accessor for the @slot[gtk:box]{homogeneous} slot of the @class{gtk:box}
+    class gets or sets whether or not all children of the box are given equal
+    space in the box.
   @end{short}
-  The @fun{gtk:box-homogeneous} function returns whether or not all children of
-  the box are given equal space in the box. The @setf{gtk:box-homogeneous}
-  function sets the property.
   @see-class{gtk:box}")
 
 ;;; --- gtk:box-spacing --------------------------------------------------------
@@ -263,18 +259,17 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:box-spacing object) => spacing}
   @syntax{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[spacing]{an integer for the number of pixels to put between
     children}
   @begin{short}
-    Accessor of the @slot[gtk:box]{spacing} slot of the @class{gtk:box} class.
+    The accessor for the @slot[gtk:box]{spacing} slot of the @class{gtk:box}
+    class gets or sets the number of pixels to place between the children of
+    the box.
   @end{short}
-  The @fun{gtk:box-spacing} function returns the spacing between children. The
-  @setf{gtk:box-spacing} function sets the number of pixels to place between
-  the children of the box.
   @see-class{gtk:box}")
 
 ;;; ----------------------------------------------------------------------------

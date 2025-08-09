@@ -118,18 +118,16 @@
 (setf (liber:alias-for-function 'stack-sidebar-stack)
       "Accessor"
       (documentation 'stack-sidebar-stack 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-sidebar-stack object) => stack}
   @syntax{(setf (gtk:stack-sidebar-stack object) stack)}
   @argument[object]{a @class{gtk:stack-sidebar} widget}
   @argument[stack]{a @class{gtk:stack} widget}
   @begin{short}
-    Accessor of the @slot[gtk:stack-sidebar]{stack} slot of the
-    @class{gtk:stack-sidebar} class.
+    The accessor for the @slot[gtk:stack-sidebar]{stack} slot of the
+    @class{gtk:stack-sidebar} class gets or sets the associated stack for the
+    sidebar.
   @end{short}
-  The @fun{gtk:stack-sidebar-stack} function retrieves the stack. The
-  @setf{gtk:stack-sidebar-stack} function sets the stack associated with this
-  stack sidebar.
 
   The stack sidebar will automatically update according to the order (packing)
   and items within the given stack.

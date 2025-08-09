@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-header 'type)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @begin{short}
     The @class{gtk:list-header} object is used by list widgets to represent the
     headers they display.
@@ -117,7 +117,7 @@
 (setf (liber:alias-for-function 'list-header-child)
       "Accessor"
       (documentation 'list-header-child 'function)
- "@version{2025-4-11}
+ "@version{2025-04-11}
   @syntax{(gtk:list-header-child object) => child}
   @syntax{(setf (gtk:list-header-child object) child)}
   @argument[object]{a @class{gtk:list-header} object}
@@ -148,7 +148,7 @@
 (setf (liber:alias-for-function 'list-header-end)
       "Accessor"
       (documentation 'list-header-end 'function)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:list-header-end object) => end}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[end]{an unsigned integer for the end position of the section}
@@ -175,7 +175,7 @@
 (setf (liber:alias-for-function 'list-header-item)
       "Accessor"
       (documentation 'list-header-item 'function)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:list-header-item object) => item}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[item]{a @class{g:object} instance for the item displayed}
@@ -204,7 +204,7 @@
 (setf (liber:alias-for-function 'list-header-n-items)
       "Accessor"
       (documentation 'list-header-n-items 'function)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:list-header-n-items object) => n-items}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[n-items]{an unsigned integer for the number of items in the
@@ -232,7 +232,7 @@
 (setf (liber:alias-for-function 'list-header-start)
       "Accessor"
       (documentation 'list-header-start 'function)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:list-header-start object) => start}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[start]{an unsigned integer for the start position of the section}

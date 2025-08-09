@@ -733,7 +733,7 @@
 (setf (liber:alias-for-class 'tree-row-reference)
       "GBoxed"
       (documentation 'tree-row-reference 'type)
- "@version{2025-01-11}
+ "@version{2025-07-26}
   @begin{declaration}
 (glib:define-gboxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
   :export t

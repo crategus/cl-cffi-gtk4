@@ -94,11 +94,11 @@
 
 #+liber-documentation
 (setf (documentation 'map-list-model 'type)
- "@version{2024-12-15}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:map-list-model} object is a list model that takes a list
     model and maps the items in that model to different items according to a
-    @symbol{gtk:map-list-model-map-func} callback function.
+    @sym{gtk:map-list-model-map-func} callback function.
   @end{short}
   @begin[Examples]{dictionary}
     Create a list of @class{gtk:event-controller} objects.
@@ -275,10 +275,10 @@
 
 (defun map-list-model-new (model func)
  #+liber-documentation
- "@version{2024-12-15}
+ "@version{2025-07-26}
   @argument[model]{a @class{g:list-model} object to map or @code{nil} for none}
-  @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
-    to map items or @code{nil}}
+  @argument[func]{a @sym{gtk:map-list-model-map-func} callback function to map
+    items or @code{nil}}
   @return{The new @class{gtk:map-list-model} object.}
   @begin{short}
     Creates a new @class{gtk:map-list-model} object for the given arguments.
@@ -308,10 +308,10 @@
 
 (defun map-list-model-set-map-func (model func)
  #+liber-documentation
- "@version{2024-12-15}
+ "@version{2025-07-26}
   @argument[model]{a @class{gtk:map-list-model} object}
-  @argument[func]{a @symbol{gtk:map-list-model-map-func} callback function
-    to map items or @code{nil}}
+  @argument[func]{a @sym{gtk:map-list-model-map-func} callback function to map
+    items or @code{nil}}
   @begin{short}
     Sets the function used to map items.
   @end{short}

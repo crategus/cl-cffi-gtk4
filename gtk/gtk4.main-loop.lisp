@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.main-loop.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -48,7 +48,7 @@
 
 (cffi:defcfun ("gtk_init" init) :void
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @begin{short}
     Call this function before using any other GTK functions in your GUI
     applications.
@@ -79,9 +79,11 @@
 
 (cffi:defcfun ("gtk_init_check" init-check) :boolean
  #+liber-documentation
- "@version{2024-11-5}
-  @return{@em{True} if the windowing system has been successfully initialized,
-    @em{false} otherwise.}
+ "@version{2025-07-26}
+  @begin{return}
+    @em{True} if the windowing system has been successfully initialized,
+    @em{false} otherwise.
+  @end{return}
   @begin{short}
     This function does the same work as the @fun{gtk:init} function with only a
     single change.
@@ -101,8 +103,8 @@
 
 (cffi:defcfun ("gtk_is_initialized" is-initialized) :boolean
  #+liber-documentation
- "@version{2024-11-5}
-  @return{The boolean with the initialization status.}
+ "@version{2025-07-27}
+  @return{The boolean for the initialization status.}
   @begin{short}
     Use this function to check if GTK has been initialized with the
     @fun{gtk:init} or @fun{gtk:init-check} functions.
@@ -118,7 +120,7 @@
 
 (cffi:defcfun ("gtk_disable_setlocale" disable-setlocale) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2024-11-05}
   @begin{short}
     Prevents the @fun{gtk:init} and @fun{gtk:init-check} functions from
     automatically calling @code{setlocale(LC_ALL, \"\")}.
@@ -139,7 +141,7 @@
 
 (defun default-language ()
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @return{The default language as a @class{pango:language} instance.}
   @begin{short}
     Returns the Pango language instance for the default language currently in
@@ -171,8 +173,8 @@
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction
  #+liber-documentation
- "@version{2024-11-5}
-  @return{The @symbol{gtk:text-direction} value of the current locale.}
+ "@version{2025-07-27}
+  @return{The @sym{gtk:text-direction} value of the current locale.}
   @begin{short}
     Gets the direction of the current locale.
   @end{short}

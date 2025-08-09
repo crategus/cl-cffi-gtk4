@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.font-chooser-widget.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-widget 'type)
- "@version{2024-5-22}
+ "@version{2024-05-22}
   @begin{short}
     The @class{gtk:font-chooser-widget} widget lists the available fonts,
     styles and sizes, allowing the user to select a font.
@@ -125,7 +125,7 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:font-chooser-widget-tweak-action object) => action}
   @syntax{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
@@ -153,7 +153,7 @@
 
 (defun font-chooser-widget-new ()
  #+liber-documentation
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @return{The new @class{gtk:font-chooser-widget} widget.}
   @short{Creates a new font chooser widget.}
   @begin[Warning]{dictionary}

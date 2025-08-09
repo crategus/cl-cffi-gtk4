@@ -116,7 +116,7 @@
   (:scale-down 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:fill]{Make the content fill the entire allocation, without taking
         its aspect ratio in consideration. The resulting content will appear as
         stretched if its aspect ratio is different from the allocation aspect
@@ -131,7 +131,7 @@
         ratio.}
       @entry[:scale-down]{The content is scaled down to fit the allocation, if
         needed, otherwise its original size is used.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Controls how a content should be made to fit inside an allocation.
@@ -201,7 +201,7 @@
   @subheading{Sizing the paintable}
   You can influence how the paintable is displayed inside the
   @class{gtk:picture} widget by changing the @slot[gtk:picture]{content-fit}
-  property. See the @symbol{gtk:content-fit} enumeration for details. The
+  property. See the @sym{gtk:content-fit} enumeration for details. The
   @slot[gtk:picture]{can-shrink} property can be unset to make sure that
   paintables are never made smaller than their ideal size - but be careful if
   you do not know the size of the paintable in use, like when displaying
@@ -214,8 +214,9 @@
     @code{picture}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:picture} implementation uses the @code{:img} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:picture} implementation uses the
+    @val[gtk:accessible-role]{:img} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:picture-new}
   @see-constructor{gtk:picture-new-for-paintable}
@@ -251,21 +252,21 @@
 (setf (liber:alias-for-function 'picture-alternative-text)
       "Accessor"
       (documentation 'picture-alternative-text 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-alternative-text object) => text}
   @syntax{(setf (gtk:picture-alternative-text object) text)}
   @argument[object]{a @class{gtk:picture} widget}
   @argument[text]{a string for the alternative textual description for the
     picture}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{alternative-text} slot of the
-    @class{gtk:picture} class.
+    The accessor for the @slot[gtk:picture]{alternative-text} slot of the
+    @class{gtk:picture} class gets or sets the alternative textual description
+    of the picture.
   @end{short}
-  The @fun{gtk:picture-alternative-text} function gets the alternative textual
-  description of the picture or returns @code{nil} if the picture cannot be
-  described textually. The @setf{gtk:picture-alternative-text} function sets an
-  alternative textual description. It is equivalent to the \"alt\" attribute for
-  images on websites. This text will be made available to accessibility tools.
+  Returns @code{nil} if the picture cannot be described textually.
+
+  It is equivalent to the \"alt\" attribute for images on websites. This text
+  will be made available to accessibility tools.
   @see-class{gtk:picture}")
 
 ;;; --- gtk:picture-can-shrink -------------------------------------------------
@@ -281,16 +282,18 @@
 (setf (liber:alias-for-function 'picture-can-shrink)
       "Accessor"
       (documentation 'picture-can-shrink 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-can-shrink object) => setting}
   @syntax{(setf (gtk:picture-can-shrink object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
   @argument[setting]{a boolean whether the picture can be made smaller than it
     contents}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{can-shrink} slot of the
-    @class{gtk:picture} class.
+    The accessor for the @slot[gtk:picture]{can-shrink} slot of the
+    @class{gtk:picture} class gets or sets whether the picture can be made
+    smaller than the natural size of its contents.
   @end{short}
+
   If set to the @em{true} value, the picture can be made smaller than its
   contents. The contents will then be scaled down when rendering. If you want
   to still force a minimum size manually, consider using the
@@ -307,27 +310,25 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "content-fit" 'picture) t)
- "The @code{content-fit} property of type @symbol{gtk:content-fit}
-  (Read / Write) @br{}
+ "The @code{content-fit} property of type @sym{gtk:content-fit} (Read / Write)
+  @br{}
   How the content should be resized to fit inside the picture. Since 4.8 @br{}
-  Default value: @code{:contain}")
+  Default value: @val[gtk:content-fit]{:contain}")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'picture-content-fit)
       "Accessor"
       (documentation 'picture-content-fit 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-content-fit object) => setting}
   @syntax{(setf (gtk:picture-content-fit object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
-  @argument[setting]{a @symbol{gtk:content-fit} value}
+  @argument[setting]{a @sym{gtk:content-fit} value}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{content-fit} slot of the
-    @class{gtk:picture} class.
+    The accessor for the @slot[gtk:picture]{content-fit} slot of the
+    @class{gtk:picture} class gets or sets the fit mode for the content of the
+    picture.
   @end{short}
-  The @fun{gtk:picture-content-fit} function returns the fit mode for the
-  content of the picture. The @setf{gtk:picture-content-fit} function sets how
-  the content should be resized to fit the picture.
 
   Since 4.8
   @see-class{gtk:picture}
@@ -345,22 +346,20 @@
 (setf (liber:alias-for-function 'picture-file)
       "Accessor"
       (documentation 'picture-file 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-file object) => file}
   @syntax{(setf (gtk:picture-file object) file)}
   @argument[object]{a @class{gtk:picture} widget}
   @argument[file]{a @class{g:file} object that is displayed or @code{nil} if
     none}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{file} slot of the @class{gtk:picture}
-    class.
+    The accessor for the @slot[gtk:picture]{file} slot of the
+    @class{gtk:picture} class gets or sets the file currently displayed if the
+    picture is displaying a file.
   @end{short}
-  The @fun{gtk:picture-file} function gets the file currently displayed if
-  the picture is displaying a file. If the picture is not displaying a file,
-  for example when the @fun{gtk:picture-paintable} function was used, then
-  @code{nil} is returned. The @setf{gtk:picture-file} function makes the
-  picture load and display @arg{file}. See the @fun{gtk:picture-new-for-file}
-  documentation for more details.
+  If the picture is not displaying a file, for example when the
+  @fun{gtk:picture-paintable} function was used, then @code{nil} is returned.
+  See the @fun{gtk:picture-new-for-file} documentation for more details.
   @see-class{gtk:picture}
   @see-class{g:file}
   @see-function{gtk:picture-paintable}
@@ -381,15 +380,16 @@
 (setf (liber:alias-for-function 'picture-keep-aspect-ratio)
       "Accessor"
       (documentation 'picture-keep-aspect-ratio 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-keep-aspect-ratio object) => setting}
   @syntax{(setf (gtk:picture-keep-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
   @argument[setting]{a boolean whether the picture will render its contents
     trying to preserve the aspect ratio of the contents}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{keep-aspect-ratio} slot of the
-    @class{gtk:picture} class.
+    The accessor for the @slot[gtk:picture]{keep-aspect-ratio} slot of the
+    @class{gtk:picture} class gets or sets whether the picture will render its
+    contents trying to preserve th aspect ratio of the contents.
   @end{short}
   If set to the @em{true} value, the picture will render its contents according
   to its aspect ratio. That means that empty space may show up at the top/bottom
@@ -416,20 +416,18 @@
 (setf (liber:alias-for-function 'picture-paintable)
       "Accessor"
       (documentation 'picture-paintable 'function)
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @syntax{(gtk:picture-keep-paintable object) => paintable}
   @syntax{(setf (gtk:picture-paintable object) paintable)}
   @argument[object]{a @class{gtk:picture} widget}
   @argument[paintable]{a @class{gdk:paintable} object or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:picture]{paintable} slot of the
-    @class{gtk:picture} class.
+    The accessor for the @slot[gtk:picture]{paintable} slot of the
+    @class{gtk:picture} class gets or sets the paintable being displayed by the
+    picture.
   @end{short}
-  The @fun{gtk:picture-paintable} function gets the paintable being displayed
-  by the picture. The @setf{gtk:picture-paintable} function makes the picture
-  display the given paintable. If the paintable is @code{nil}, nothing will be
-  displayed. See the @fun{gtk:picture-new-for-paintable} documentation for more
-  details.
+  If the paintable is @code{nil}, nothing will be displayed. See the
+  @fun{gtk:picture-new-for-paintable} documentation for more details.
   @see-class{gtk:picture}
   @see-class{gdk:paintable}
   @see-function{gtk:picture-new-for-paintable}")

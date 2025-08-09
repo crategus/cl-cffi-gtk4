@@ -269,7 +269,7 @@
 (cffi:defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
     (g:boxed gsk:transform)
  #+liber-documentation
- "@version{2025-03-25}
+ "@version{2025-07-31}
   @syntax{(gtk:fixed-child-transform object) => transform}
   @syntax{(setf (gtk:fixed-child-transform object) transform)}
   @argument[fixed]{a @class{gtk:fixed} widget}
@@ -277,13 +277,11 @@
   @argument[transform]{a @class{gsk:transform} instance for the transformation
     assigned to the child widget}
   @begin{short}
-    The @fun{gtk:fixed-child-transform} function retrieves the transformation
-    for @arg{child}.
+    Gets or sets the transformation for @arg{child}.
   @end{short}
-  The @setf{gtk:fixed-child-transform} function sets the transformation. This
-  is a convenience function that retrieves the @class{gtk:fixed-layout-child}
-  instance associated to @arg{child} and calls the
-  @fun{gtk:fixed-layout-child-transform} function.
+  This is a convenience function that retrieves the
+  @class{gtk:fixed-layout-child} instance associated to @arg{child} and calls
+  the @fun{gtk:fixed-layout-child-transform} function.
   @see-class{gtk:fixed}
   @see-class{gtk:widget}
   @see-class{gsk:transform}

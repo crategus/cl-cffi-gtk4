@@ -200,8 +200,8 @@
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:grid} implementation used the
     @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
-    enumeration. Starting from GTK 4.12, the @class{gtk:box} implementation uses
-    the @val[gtk:accessible-role]{:generic} role.
+    enumeration. Starting from GTK 4.12, it uses the
+    @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:grid-new}
   @see-slot{gtk:grid-baseline-row}
@@ -229,21 +229,22 @@
 (setf (liber:alias-for-function 'grid-baseline-row)
       "Accessor"
       (documentation 'grid-baseline-row 'function)
- "@version{2025-07-16}
+ "@version{2025-07-29}
   @syntax{(gtk:grid-baseline-row object) => row}
   @syntax{(setf (gtk:grid-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[row]{an integer for the row index}
   @begin{short}
-    Accessor of the @slot[gtk:grid]{baseline-row} slot of the @class{gtk:grid}
-    class.
+    The accessor for the @slot[gtk:grid]{baseline-row} slot of the
+    @class{gtk:grid} class gets or sets the row to align to the baseline when
+    @slot[gtk:widget]{valign} has the @val[gtk:align]{:center} value of the
+    @sym{gtk:align} enumeration.
   @end{short}
-  The @fun{gtk:grid-baseline-row} function returns which row defines the global
-  baseline of the grid. The @setf{gtk:grid-baseline-row} function sets which row
-  defines the global baseline. Each row in the grid can have its own local
-  baseline, but only one of those is global, meaning it will be the baseline in
-  the parent of the grid.
-  @see-class{gtk:grid}")
+
+  Each row in the grid can have its own local baseline, but only one of those
+  is global, meaning it will be the baseline in the parent of the grid.
+  @see-class{gtk:grid}
+  @see-symbol{gtk:align}")
 
 ;;; --- gtk:grid-column-homogeneous --------------------------------------------
 
@@ -258,18 +259,16 @@
 (setf (liber:alias-for-function 'grid-column-homogeneous)
       "Accessor"
       (documentation 'grid-column-homogeneous 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:grid-column-homogeneous object) => homogenous}
   @syntax{(setf (gtk:grid-column-homogeneous object) homogenous)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[homogeneous]{@em{true} to make columns homogeneous}
   @begin{short}
-    Accessor of the @slot[gtk:grid]{column-homogeneous} slot of the
-    @class{gtk:grid} class.
+    The accessor for the @slot[gtk:grid]{column-homogeneous} slot of the
+    @class{gtk:grid} class gets or sets whether all columns of the grid have
+    the same width.
   @end{short}
-  The @fun{gtk:grid-column-homogeneous} function returns whether all columns of
-  the grid have the same width. The @setf{gtk:grid-column-homogeneous} function
-  sets whether all columns of the grid will have the same width.
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-homogeneous}")
 
@@ -286,19 +285,17 @@
 (setf (liber:alias-for-function 'grid-column-spacing)
       "Accessor"
       (documentation 'grid-column-spacing 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:grid-column-spacing object) => spacing}
   @syntax{(setf (gtk:grid-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[spacing]{an integer for the amount of space to insert between
     columns}
   @begin{short}
-    Accessor of the @slot[gtk:grid]{column-spacing} slot of the
-    @class{gtk:grid} class.
+    The accessor for the @slot[gtk:grid]{column-spacing} slot of the
+    @class{gtk:grid} class gets or sets the amount of space between two columns
+    of the grid.
   @end{short}
-  The @fun{gtk:grid-column-spacing} function returns the amount of space between
-  the columns of the grid. The @setf{gtk:grid-column-spacing} function sets the
-  amount of space.
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-spacing}")
 
@@ -315,18 +312,16 @@
 (setf (liber:alias-for-function 'grid-row-homogeneous)
       "Accessor"
       (documentation 'grid-row-homogeneous 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:grid-row-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[homogeneous]{@em{true} to make rows homogeneous}
   @begin{short}
-    Accessor of the @slot[gtk:grid]{row-homogeneous} slot of the
-    @class{gtk:grid} class.
+    The accessor for the @slot[gtk:grid]{row-homogeneous} slot of the
+    @class{gtk:grid} class gets or sets whether all rows of the grid have the
+    same height.
   @end{short}
-  The @fun{gtk:grid-row-homogeneous} function returns whether all rows of the
-  grid have the same height. The @setf{gtk:grid-row-homogeneous} function sets
-  whether all rows of the grid will have the same height.
   @see-class{gtk:grid}
   @see-function{gtk:grid-column-homogeneous}")
 
@@ -343,18 +338,16 @@
 (setf (liber:alias-for-function 'grid-row-spacing)
       "Accessor"
       (documentation 'grid-row-spacing 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:grid-row-spacing object) => spacing}
   @syntax{(setf (gtk:grid-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[spacing]{an integer for the amount of space to insert between rows}
   @begin{short}
-    Accessor of the @slot[gtk:grid]{row-spacing} slot of the @class{gtk:grid}
-    class.
+    The accessor for the @slot[gtk:grid]{row-spacing} slot of the
+    @class{gtk:grid} class gets or sets the amount of space between two rows of
+    the grid.
   @end{short}
-  The @fun{gtk:grid-row-spacing} function returns the amount of space between
-  the rows of the grid. The @setf{gtk:grid-row-spacing} function sets the amount
-  of space.
   @see-class{gtk:grid}
   @see-function{gtk:grid-column-spacing}")
 
@@ -653,7 +646,7 @@
   The new row or column is placed next to @arg{sibling}, on the side determined
   by @arg{side}. If the @arg{side} argument is @val[gtk:position-type]{:top} or
   @val[gtk:position-type]{:bottom}, a row is inserted. If the @arg{side}
-  argument is @val[gtk:position-type]{:left} of @val[gtk:position-type]{:right},
+  argument is @val[gtk:position-type]{:left} or @val[gtk:position-type]{:right},
   a column is inserted.
   @see-class{gtk:grid}
   @see-class{gtk:widget}

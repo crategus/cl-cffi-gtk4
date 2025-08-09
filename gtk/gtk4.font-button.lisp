@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.font-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -107,7 +107,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-button 'type)
- "@version{2024-5-22}
+ "@version{2025-07-31}
   @begin{short}
     The @class{gtk:font-button} widget is a button which displays the currently
     selected font and allows to open a font chooser dialog to change the font.
@@ -124,30 +124,32 @@
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[font-button::activate]{signal}
       @begin{pre}
 lambda (fontbutton)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[fontbutton]{The @class{gtk:font-button} widget which received
+      @begin[code]{simple-table}
+        @entry[fontbutton]{The @class{gtk:font-button} widget that received
           the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted to when the font button is activated. The signal on the
       @class{gtk:font-button} widget is an action signal and emitting it causes
       the button to present its dialog. Since 4.4
-    @subheading{The \"font-set\" signal}
+    @end{signal}
+    @begin[font-button::font-set]{signal}
       @begin{pre}
 lambda (fontbutton)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[fontbutton]{The @class{gtk:font-button} widget which received
+      @begin[code]{simple-table}
+        @entry[fontbutton]{The @class{gtk:font-button} widget that received
           the signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user selects a font. When handling this
       signal, use the @fun{gtk:font-chooser-font} function to find out which
       font was just selected. Note that this signal is only emitted when the
       user changes the font. If you need to react to programmatic font changes
-      as well, use the @code{\"notify::font-name\"} signal.
+      as well, use the @sig[g:object]{notify::font-name} signal.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:font-button-new}
   @see-constructor{gtk:font-button-new-with-font}
@@ -174,7 +176,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-modal)
       "Accessor"
       (documentation 'font-button-modal 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:font-button-modal object) => modal}
   @syntax{(setf (gtk:font-button-modal object) modal)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -204,7 +206,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-title)
       "Accessor"
       (documentation 'font-button-title 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:font-button-title object) => title}
   @syntax{(setf (gtk:font-button-title object) title)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -235,7 +237,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-use-font)
       "Accessor"
       (documentation 'font-button-use-font 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:font-button-title object) => use-font}
   @syntax{(setf (gtk:font-button-title object) use-font)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -265,7 +267,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-use-size)
       "Accessor"
       (documentation 'font-button-use-size 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:font-button-use-size object) => use-size}
   @syntax{(setf (gtk:font-button-use-size object) use-size)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -291,7 +293,7 @@ lambda (fontbutton)    :run-first
 
 (defun font-button-new ()
  #+liber-documentation
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @return{The new @class{gtk:font-button} widget.}
   @short{Creates a new font picker widget.}
   @begin[Warning]{dictionary}
@@ -311,8 +313,8 @@ lambda (fontbutton)    :run-first
 
 (defun font-button-new-with-font (fontname)
  #+liber-documentation
- "@version{2023-8-28}
-  @argument[fontname]{a string with the name of the font to display in the font
+ "@version{2025-07-25}
+  @argument[fontname]{a string for the name of the font to display in the font
     chooser dialog}
   @return{The new @class{gtk:font-button} widget.}
   @short{Creates a new font picker widget.}

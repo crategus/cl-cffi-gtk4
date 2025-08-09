@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.event-controller-legacy.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,7 +65,7 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller-legacy 'type)
- "@version{2024-7-26}
+ "@version{2025-07-20}
   @begin{short}
     The @class{gtk:event-controller-legacy} object is an event controller that
     gives you direct access to the event stream.
@@ -73,20 +73,21 @@
   It should only be used as a last resort if none of the other event controllers
   or gestures do the job.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"event\" signal}
+    @begin[event-controller-legacy::event]{signal}
       @begin{pre}
 lambda (controller event)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[controller]{The @class{gtk:event-controller-legacy} object which
+      @begin[code]{simple-table}
+        @entry[controller]{The @class{gtk:event-controller-legacy} object that
           received the signal.}
-        @entry[event]{The @class{gdk:event} instance which triggered the
+        @entry[event]{The @class{gdk:event} instance that triggered the
           signal.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked for
           the event and the emission of this signal. @em{False} to propagate
           the event further.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted for each GDK event delivered to @arg{controller}.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:event-controller-legacy-new}
   @see-class{gtk:event-controller}")
@@ -97,7 +98,7 @@ lambda (controller event)    :run-last
 
 (defun event-controller-legacy-new ()
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @return{The newly created @class{gtk:event-controller-legacy} object.}
   @short{Creates a new legacy event controller.}
   @see-class{gtk:event-controller-legacy}"

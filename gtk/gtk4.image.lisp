@@ -119,20 +119,20 @@
   (:paintable 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:empty]{There is no image displayed by the widget.}
       @entry[:icon-name]{The widget contains a named icon.}
       @entry[:gicon]{The widget contains a @class{g:icon} object.}
       @entry[:paintable]{The widget contains a @class{gdk:paintable} object.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the image data representation used by a @class{gtk:image} widget.
   @end{short}
   If you want to get the image from the widget, you can only get the currently
   stored representation. For example, if the @fun{gtk:image-storage-type}
-  function returns the @code{:paintable} value, then you can call the
-  @fun{gtk:image-paintable} function. For empty images, you can request any
+  function returns the @val[gtk:image-type]{:paintable} value, then you can call
+  the @fun{gtk:image-paintable} function. For empty images, you can request any
   storage type, but they will all return @code{nil} values.
   @see-class{gtk:image}
   @see-class{gdk:paintable}
@@ -218,8 +218,9 @@
     may appear, depending on the @slot[gtk:image]{icon-size} property.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:image} implementation uses the @code{:img} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:image} implementation uses the
+    @val[gtk:accessible-role]{:img} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:image-new}
   @see-constructor{gtk:image-new-from-file}
@@ -255,15 +256,16 @@
 (setf (liber:alias-for-function 'image-file)
       "Accessor"
       (documentation 'image-file 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-file object) => filename}
   @syntax{(setf (gtk:image-file object) filename)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[filename]{a string for the name of the file to load and display}
   @begin{short}
-    Accessor of the @slot[gtk:image]{file} slot of the @class{gtk:image} class.
+    The accessor for the @slot[gtk:image]{file} slot of the
+    @class{gtk:image} class gets or sets the name of the file to load and
+    display.
   @end{short}
-  The name of the file to load and display.
   @see-class{gtk:image}")
 
 ;;; --- gtk:image-gicon --------------------------------------------------------
@@ -278,16 +280,17 @@
 (setf (liber:alias-for-function 'image-gicon)
       "Accessor"
       (documentation 'image-gicon 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-gicon object) => gicon}
   @syntax{(setf (gtk:image-gicon object) gicon)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[gicon]{a @class{g:icon} icon}
   @begin{short}
-    Accessor of the @slot[gtk:image]{gicon} slot of the @class{gtk:image} class.
+    The accessor for the @slot[gtk:image]{gicon} slot of the @class{gtk:image}
+    class gets or sets the icon displayed in the image.
   @end{short}
-  The icon displayed in the image. For themed icons, if the icon theme is
-  changed, the image will be updated automatically.
+  For themed icons, if the icon theme is changed, the image will be updated
+  automatically.
   @see-class{gtk:image}
   @see-class{g:icon}
   @see-class{g:themed-icon}")
@@ -305,42 +308,39 @@
 (setf (liber:alias-for-function 'image-icon-name)
       "Accessor"
       (documentation 'image-icon-name 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-icon-name object) => name}
   @syntax{(setf (gtk:image-icon-name object) name)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[name]{a string for the name of the icon}
   @begin{short}
-    Accessor of the @slot[gtk:image]{icon-name} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{icon-name} slot of the
+    @class{gtk:image} class gets or sets the name of the icon in the icon theme.
   @end{short}
-  The name of the icon in the icon theme. If the icon theme is changed, the
-  image will be updated automatically.
+  If the icon theme is changed, the image will be updated automatically.
   @see-class{gtk:image}")
 
 ;;; --- gtk:image-icon-size ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-size" 'image) t)
- "The @code{icon-size} property of type @symbol{gtk:icon-size} (Read / Write)
-  @br{}
+ "The @code{icon-size} property of type @sym{gtk:icon-size} (Read / Write) @br{}
   The symbolic size to display icons at. @br{}
-  Default value: @code{:inherit}")
+  Default value: @val[gtk:icon-size]{:inherit}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'image-icon-size)
       "Accessor"
       (documentation 'image-icon-size 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-icon-size object) => size}
   @syntax{(setf (gtk:image-icon-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
-  @argument[size]{a @symbol{gtk:icon-size} value}
+  @argument[size]{a @sym{gtk:icon-size} value}
   @begin{short}
-    Accessor of the @slot[gtk:image]{icon-size} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{icon-size} slot of the
+    @class{gtk:image} class gets or sets the symbolic size to display icons at.
   @end{short}
-  The symbolic size to display icons at.
   @see-class{gtk:image}
   @see-symbol{gtk:icon-size}")
 
@@ -356,20 +356,20 @@
 (setf (liber:alias-for-function 'image-paintable)
       "Accessor"
       (documentation 'image-paintable 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-paintable object) => paintable}
   @syntax{(setf (gtk:image-paintable object) paintable)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
-    Accessor of the @slot[gtk:image]{paintable} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{paintable} slot of the
+    @class{gtk:image} class get or sets the paintable being displayed by the
+    image.
   @end{short}
-  The @fun{gtk:image-paintable} function gets the paintable being displayed by
-  the image. The @setf{gtk:image-paintable} function sets the paintable.
 
-  The @symbol{gtk:image-type} storage type of the image must be @code{:empty}
-  or @code{:paintable}, see the @fun{gtk:image-storage-type} function.
+  The @sym{gtk:image-type} storage type of the image must be
+  @val[gtk:image-type]{:empty} or @val[gtk:image-type]{:paintable}, see the
+  @fun{gtk:image-storage-type} function.
   @see-class{gtk:image}
   @see-class{gdk:paintable}
   @see-symbol{gtk:image-type}
@@ -381,7 +381,7 @@
 (setf (documentation (liber:slot-documentation "pixel-size" 'image) t)
  "The @code{pixel-size} property of type @code{:int} (Read / Write) @br{}
   Can be used to specify a fixed size overriding the @slot[gtk:image]{icon-size}
-  property for images of @code{:icon-name} type. @br{}
+  property for images of @val[gtk:image-type]{:icon-name} type. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -389,19 +389,17 @@
 (setf (liber:alias-for-function 'image-pixel-size)
       "Accessor"
       (documentation 'image-pixel-size 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-pixel-size object) => size}
   @syntax{(setf (gtk:image-pixel-size object) size)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[size]{an integer for the new pixel size}
   @begin{short}
-    Accessor of the @slot[gtk:image]{pixel-size} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{pixel-size} slot of the
+    @class{gtk:image} class gets or sets the pixel size used for named icons.
   @end{short}
-  The @fun{gtk:image-pixel-size} function gets the pixel size used for named
-  icons. The @setf{gtk:image-pixel-size} function sets the pixel size. If the
-  pixel size is set to a value not equal to -1, it is used instead of the
-  @slot[gtk:image]{icon-size} property.
+  If the pixel size is set to a value not equal to -1, it is used instead of
+  the @slot[gtk:image]{icon-size} property.
   @see-class{gtk:image}
   @see-function{gtk:image-icon-size}")
 
@@ -417,45 +415,42 @@
 (setf (liber:alias-for-function 'image-resource)
       "Accessor"
       (documentation 'image-resource 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-resource object) => path}
   @syntax{(setf (gtk:image-resource object) path)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[path]{a string for a resource path}
   @begin{short}
-    Accessor of the @slot[gtk:image]{resource} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{resource} slot of the
+    @class{gtk:image} class gets or sets a path to a resource file to display.
   @end{short}
-  A path to a resource file to display.
   @see-class{gtk:image}")
 
 ;;; --- gtk:image-storage-type -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "storage-type" 'image) t)
- "The @code{storage-type} property of type @symbol{gtk:image-type} (Read) @br{}
+ "The @code{storage-type} property of type @sym{gtk:image-type} (Read) @br{}
   The representation being used for image data. @br{}
-  Default value: @code{:empty}")
+  Default value: @val[gtk:image-type]{:empty}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'image-storage-type)
       "Accessor"
       (documentation 'image-storage-type 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-storage-type object) => type}
   @syntax{(setf (gtk:image-storage-type object) type)}
   @argument[object]{a @class{gtk:image} widget}
-  @argument[type]{a value of the @symbol{gtk:image-type} enumeration}
+  @argument[type]{a value of the @sym{gtk:image-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:image]{storage-type} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{storage-type} slot of the
+    @class{gtk:image} class gets or sets the type of representation being used
+    by the @class{gtk:image} widget to store image data.
   @end{short}
-  The @fun{gtk:image-storage-type} function gets the type of representation
-  being used by the @class{gtk:image} widget to store image data. The
-  @setf{gtk:image-storage-type} function sets the image type.
 
   If the @class{gtk:image} widget has no image data, the return value will be
-  @code{:empty}.
+  @val[gtk:image-type]{:empty}.
   @see-class{gtk:image}
   @see-symbol{gtk:image-type}")
 
@@ -465,26 +460,26 @@
 (setf (documentation (liber:slot-documentation "use-fallback" 'image) t)
  "The @code{use-fallback} property of type @code{:boolean} (Read / Write) @br{}
   Whether the icon displayed in the image will use standard icon names fallback.
-  The value of this property is only relevant for images of @code{:icon-name}
-  and @code{:gicon} type. @br{}
+  The value of this property is only relevant for images of
+  @val[gtk:image-type]{:icon-name} and @val[gtk:image-type]{:gicon} type. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'image-use-fallback)
       "Accessor"
       (documentation 'image-use-fallback 'function)
- "@version{2025-04-26}
+ "@version{2025-08-03}
   @syntax{(gtk:image-use-fallback object) => setting}
   @syntax{(setf (gtk:image-use-fallback object) setting)}
   @argument[object]{a @class{gtk:image} widget}
   @argument[setting]{a boolean whether to use standard icon names fallback}
   @begin{short}
-    Accessor of the @slot[gtk:image]{use-fallback} slot of the @class{gtk:image}
-    class.
+    The accessor for the @slot[gtk:image]{use-fallback} slot of the
+    @class{gtk:image} class gets or sets whether the icon displayed in the
+    @fun{gtk:image} widget will use standard icon names fallback.
   @end{short}
-  Whether the icon displayed in the @fun{gtk:image} widget will use standard
-  icon names fallback. The value of this property is only relevant for images
-  of @code{:icon-name} and @code{:gicon} type.
+  The value of this property is only relevant for images of
+  @val[gtk:image-type]{:icon-name} and @val[gtk:image-type]{:gicon} type.
   @see-class{gtk:image}")
 
 ;;; ----------------------------------------------------------------------------

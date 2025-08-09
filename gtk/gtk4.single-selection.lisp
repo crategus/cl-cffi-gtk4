@@ -136,7 +136,7 @@
 
 #+liber-documentation
 (setf (documentation 'single-selection 'type)
- "@version{2025-05-04}
+ "@version{2025-07-21}
   @begin{short}
     The @class{gtk:single-selection} class is an implementation of the
     @class{gtk:selection-model} interface that allows selecting a single
@@ -145,9 +145,9 @@
   It is the default selection method used by list widgets in GTK.
 
   Note that the selection is *persistent* -- if the selected item is removed
-  and re-added in the same @code{\"items-changed\"} signal emission, it stays
-  selected. In particular, this means that changing the sort order of an
-  underlying sort model will preserve the selection.
+  and re-added in the same @sig[g:list-model]{items-changed} signal emission,
+  it stays selected. In particular, this means that changing the sort order of
+  an underlying sort model will preserve the selection.
   @see-constructor{gtk:single-selection-new}
   @see-class{gtk:selection-model}")
 

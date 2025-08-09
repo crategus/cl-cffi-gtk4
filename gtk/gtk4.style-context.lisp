@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.style-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-class 'border)
       "GBoxed"
       (documentation 'border 'type)
- "@version{2023-8-30}
+ "@version{2025-07-22}
   @begin{declaration}
 (glib:define-gboxed-cstruct border \"GtkBorder\"
   (:export t
@@ -126,12 +126,12 @@
   (bottom :int16 :initform 0))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[left]{The width of the left border.}
       @entry[right]{The width of the right border.}
       @entry[top]{The width of the top border.}
       @entry[bottom]{The width of the bottom border.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     A structure that specifies a border around a rectangular area that can be
@@ -154,11 +154,11 @@
 (setf (liber:alias-for-function 'border-left)
       "Accessor"
       (documentation 'border-left 'function)
- "@version{2023-8-30}
+ "@version{2025-07-19}
   @syntax{(gtk:border-left instance) => left}
   @syntax{(setf (gtk:border-left instance) left)}
   @argument[instance]{a @class{gtk:border} instance}
-  @argument[left]{an integer with the width of the left border}
+  @argument[left]{an integer for the width of the left border}
   @begin{short}
     Accessor of the @code{left} slot of the @class{gtk:border} structure.
   @end{short}
@@ -172,11 +172,11 @@
 (setf (liber:alias-for-function 'border-right)
       "Accessor"
       (documentation 'border-right 'function)
- "@version{2023-8-30}
+ "@version{2025-07-19}
   @syntax{(gtk:border-right instance) => right}
   @syntax{(setf (gtk:border-right instance) right)}
   @argument[instance]{a @class{gtk:border} instance}
-  @argument[right]{an integer with the width of the right border}
+  @argument[right]{an integer for the width of the right border}
   @begin{short}
     Accessor of the @code{right} slot of the @class{gtk:border} structure.
   @end{short}
@@ -190,11 +190,11 @@
 (setf (liber:alias-for-function 'border-top)
       "Accessor"
       (documentation 'border-top 'function)
- "@version{2023-8-30}
+ "@version{2025-07-19}
   @syntax{(gtk:border-top instance) => top}
   @syntax{(setf (gtk:border-top instance) top)}
   @argument[instance]{a @class{gtk:border} instance}
-  @argument[top]{an integer with the width of the top border}
+  @argument[top]{an integer for the width of the top border}
   @begin{short}
     Accessor of the @code{top} slot of the @class{gtk:border} structure.
   @end{short}
@@ -208,11 +208,11 @@
 (setf (liber:alias-for-function 'border-bottom)
       "Accessor"
       (documentation 'border-bottom 'function)
- "@version{2023-8-30}
+ "@version{2025-07-19}
   @syntax{(gtk:border-top instance) => bottom}
   @syntax{(setf (gtk:border-top instance) bottom)}
   @argument[instance]{a @class{gtk:border} instance}
-  @argument[bottom]{an integer with the width of the bottom border}
+  @argument[bottom]{an integer for the width of the bottom border}
   @begin{short}
     Accessor of the @code{bottom} slot of the @class{gtk:border} structure.
   @end{short}
@@ -228,11 +228,11 @@
 
 (defun border-new (&key (left 0) (right 0) (top 0) (bottom 0))
  #+liber-documentation
- "@version{2023-8-30}
-  @argument[left]{an integer with the width of the left border}
-  @argument[right]{an integer with the width of the right border}
-  @argument[top]{an integer with the width of the top border}
-  @argument[bottom]{an integer with the width of the bottom border}
+ "@version{2025-07-19}
+  @argument[left]{an integer for the width of the left border}
+  @argument[right]{an integer for the width of the right border}
+  @argument[top]{an integer for the width of the top border}
+  @argument[bottom]{an integer for the width of the bottom border}
   @return{The newly allocated @class{gtk:border} instance.}
   @begin{short}
     Allocates a new @class{gtk:border} instance and initializes its elements.
@@ -250,9 +250,9 @@
 
 (defun border-copy (border)
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-07-26}
   @argument[border]{a @class{gtk:border} instance}
-  @return{The @class{gtk:border} instance with the copy of @arg{border}.}
+  @return{The @class{gtk:border} instance for the copy of @arg{border}.}
   @short{Copies a @class{gtk:border} instance.}
   @see-class{gtk:border}"
   (copy-border border))
@@ -286,7 +286,7 @@
 (setf (liber:alias-for-symbol 'style-context-print-flags)
       "GFlags"
       (liber:symbol-documentation 'style-context-print-flags)
- "@version{2023-8-30}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-gflags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
@@ -297,14 +297,14 @@
   (:show-change #.(ash 1 2)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{}
       @entry[:recurse]{Print the entire tree of CSS nodes starting at the node
         of the style context.}
       @entry[:show-style]{Show the values of the CSS properties for each node.}
       @entry[:show-change]{Show information about what changes affect the
         styles.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags that modify the behavior of the @fun{gtk:style-context-to-string}
@@ -334,7 +334,7 @@
 
 #+liber-documentation
 (setf (documentation 'style-context 'type)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @begin{short}
     The @class{gtk:style-context} object stores styling information affecting a
     widget.
@@ -398,7 +398,7 @@
 (setf (liber:alias-for-function 'style-context-display)
       "Accessor"
       (documentation 'style-context-display 'function)
- "@version{2023-9-18}
+ "@version{2023-09-18}
   @syntax{(gtk:style-context-display object) => display}
   @syntax{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
@@ -440,10 +440,10 @@
 
 (defun style-context-add-provider (context provider priority)
  #+liber-documentation
- "@version{2023-9-17}
+ "@version{2025-07-19}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[provider]{a @class{gtk:style-provider} object}
-  @argument[priority]{an unsigned integer with the priority of the style
+  @argument[priority]{an unsigned integer for the priority of the style
     provider}
   @begin{short}
     Adds a style provider to the style context, to be used in style
@@ -490,10 +490,10 @@
 (defun style-context-add-provider-for-display
     (display provider &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2024-4-19}
+ "@version{2025-07-19}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
-  @argument[priority]{an optional unsigned integer with the priority of the
+  @argument[priority]{an optional unsigned integer for the priority of the
     style provider, the default value is @var{gtk:+priority-application+}}
   @begin{short}
     Adds a global style provider to the display, which will be used in style
@@ -547,18 +547,18 @@
 
 (defun style-context-state (context)
  #+liber-documentation
- "@version{#2023-9-18}
+ "@version{#2025-07-26}
   @syntax{(gtk:style-context-state context) => state}
   @syntax{(setf (gtk:style-context-state context) state)}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a value of the @symbol{gtk:state-flags} flags to represent}
+  @argument[state]{a value of the @sym{gtk:state-flags} flags to represent}
   @begin{short}
     Accessor of the state used when rendering.
   @end{short}
   The @fun{gtk:style-context-state} function returns the state used for style
   matching. The @setf{gtk:style-context-state} function sets the state.
 
-  This function should only be used to retrieve the @symbol{gtk:state-flags}
+  This function should only be used to retrieve the @sym{gtk:state-flags}
   values to pass to the @class{gtk:style-context} functions, like the
   @fun{gtk:style-context-padding} function. If you need to retrieve the current
   state of a @class{gtk:widget} object, use the @fun{gtk:widget-state-flags}
@@ -589,9 +589,9 @@
 
 (defun style-context-color (context)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @return{The @class{gdk:rgba} instance with the foreground color.}
+  @return{The @class{gdk:rgba} instance for the foreground color.}
   @begin{short}
     Gets the foreground color for a given state.
   @end{short}
@@ -622,9 +622,9 @@
 
 (defun style-context-border (context state)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @symbol{gtk:state-flags} value to retrieve the border for}
+  @argument[state]{a @sym{gtk:state-flags} value to retrieve the border for}
   @return{Returns border settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the border settings for a given state.
@@ -655,9 +655,9 @@
 
 (defun style-context-padding (context state)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @symbol{gtk:state-flags} value to retrieve the padding for}
+  @argument[state]{a @sym{gtk:state-flags} value to retrieve the padding for}
   @return{Returns padding settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the padding settings for a given state.
@@ -688,9 +688,9 @@
 
 (defun style-context-margin (context state)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @symbol{gtk:state-flags} value to retrieve the margin for}
+  @argument[state]{a @sym{gtk:state-flags} value to retrieve the margin for}
   @return{Returns margin settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the margin settings for a given state.
@@ -722,9 +722,9 @@
 
 (defun style-context-lookup-color (context name)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-27}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[name]{a string with a color name to lookup}
+  @argument[name]{a string for a color name to lookup}
   @return{The looked up @class{gdk:rgba} color, or @code{nil}.}
   @begin{short}
     Looks up and resolves a color name in the style context color map.
@@ -756,7 +756,7 @@
 
 (defun style-context-remove-provider (context provider)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2023-09-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @begin{short}
@@ -784,7 +784,7 @@
 (cffi:defcfun ("gtk_style_context_remove_provider_for_display"
                style-context-remove-provider-for-display) :void
  #+liber-documentation
- "@version{2023-9-17}
+ "@version{2023-09-17}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @begin{short}
@@ -810,7 +810,7 @@
 
 (defun style-context-restore (context)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2023-09-17}
   @argument[context]{a @class{gtk:style-context} object}
   @begin{short}
     Restores the style context state to a previous stage.
@@ -839,7 +839,7 @@
 
 (defun style-context-save (context)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2023-09-17}
   @argument[context]{a @class{gtk:style-context} object}
   @begin{short}
     Saves the style context state.
@@ -875,9 +875,9 @@
 
 (defun style-context-add-class (context classname)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-27}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[classname]{a string with a class name to use in styling}
+  @argument[classname]{a string for a class name to use in styling}
   @begin{short}
     Adds a style class to the style context, so later uses of the style context
     will make use of this new class for styling.
@@ -919,9 +919,9 @@ GtkEntry.entry { ... @}
 
 (defun style-context-remove-class (context classname)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-27}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[classname]{a string with a class name to remove}
+  @argument[classname]{a string for a class name to remove}
   @begin{short}
     Removes a class name from the style context.
   @end{short}
@@ -950,9 +950,9 @@ GtkEntry.entry { ... @}
 
 (defun style-context-has-class (context classname)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-27}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[classname]{a string with a class name}
+  @argument[classname]{a string for a class name}
   @return{@em{True} if the style context has @arg{classname} defined.}
   @begin{short}
     Returns @em{true} if the style context currently has defined the given
@@ -988,11 +988,11 @@ GtkEntry.entry { ... @}
 
 (defun style-context-scale (context)
  #+liber-documentation
- "@version{#2023-9-18}
+ "@version{#2025-07-19}
   @syntax{(gtk:style-context-scale context) => scale}
   @syntax{(setf (gtk:style-context-scale context) scale)}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[scale]{an integer with a scale}
+  @argument[scale]{an integer for a scale}
   @begin{short}
     Accessor of the scale used for image assets for the style context.
   @end{short}
@@ -1024,9 +1024,9 @@ GtkEntry.entry { ... @}
 
 (defun style-context-to-string (context flags)
  #+liber-documentation
- "@version{2024-10-13}
+ "@version{2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[flags]{a @symbol{gtk:style-context-print-flags} value that
+  @argument[flags]{a @sym{gtk:style-context-print-flags} value that
     determine what to print}
   @return{The string representing the style context.}
   @begin{short}
@@ -1080,23 +1080,21 @@ GtkEntry.entry { ... @}
 
 (defun render-activity (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with the rectangle
-    width}
-  @argument[height]{a number, coerced to a double float, with the rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders an activity area such as in the @class{gtk:spinner} widget or the
     fill line in the @class{gtk:range} widget.
   @end{short}
-  The @code{:active} state of the @symbol{gtk:state-flags} flags determines
-  whether there is activity going on.
+  The @val[gtk:state-flags]{:active} state of the @sym{gtk:state-flags} flags
+  determines whether there is activity going on.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1130,22 +1128,23 @@ GtkEntry.entry { ... @}
 
 (defun render-arrow (context cr angle x y size)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[angle]{a number, coerced to a double float, with an arrow angle
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[angle]{a number coerced to a double float for the arrow angle
     from 0 to 2 * Pi, being 0 the arrow pointing to the north}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[x]{a number coerced to a double float for the x origin of the
     render area}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     render area}
-  @argument[size]{a number, coerced to a double float, with the square side for
-    render area}
+  @argument[size]{a number coerced to a double float for the square side of
+    the render area}
   @begin{short}
     Renders an arrow pointing to an angle.
   @end{short}
 
-  Typical arrow rendering at 0, 1/2 Pi, Pi, and 3/2 Pi: @image[render-arrow]{}
+  Typical arrow rendering at 0, 1/2 Pi, Pi, and 3/2 Pi: @br{}
+  @image[render-arrow]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1176,23 +1175,22 @@ GtkEntry.entry { ... @}
 
 (defun render-background (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     render area}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     render area}
-  @argument[width]{a number, coerced to a double float, with the rectangle
-    width}
-  @argument[height]{a number, coerced to a double float, with the rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders the background of an element.
   @end{short}
 
   Typical background rendering, showing the effect of @code{background-image},
-  @code{border-width} and @code{border-radius}: @image[render-background]{}
+  @code{border-width} and @code{border-radius}: @br{}
+  @image[render-background]{}
   @begin[Warning]{dictionary}
     The function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1223,24 +1221,25 @@ GtkEntry.entry { ... @}
 
 (defun render-check (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with a rectangle width}
-  @argument[height]{a number, coerced to a double float, with a rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders a checkmark as in a @class{gtk:check-button} widget.
   @end{short}
-  The @code{:checked} state of the @symbol{gtk:state-flags} flags determines
-  whether the check is on or off, and the @code{:inconsistent} state determines
-  whether it should be marked as undefined.
+  The @val[gtk:state-flags]{:checked} state of the @sym{gtk:state-flags} flags
+  determines whether the check is on or off, and the
+  @val[gtk:state-flags]{:inconsistent} state determines whether it should be
+  marked as undefined.
 
-  Typical checkmark rendering: @image[render-check]{}
+  Typical checkmark rendering: @br{}
+  @image[render-check]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1273,25 +1272,25 @@ GtkEntry.entry { ... @}
 
 (defun render-expander (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with a rectangle width}
-  @argument[height]{a number, coerced to a double float, with a rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders an expander as used in the @class{gtk:tree-view} widget and
     @class{gtk:expander} widget in the area defined by @arg{x}, @arg{y},
     @arg{width}, @arg{height}.
   @end{short}
-  The @code{:active} state of the @symbol{gtk:state-flags} flags determines
-  whether the expander is collapsed or expanded.
+  The @val[gtk:state-flags]{:active} state of the @sym{gtk:state-flags} flags
+  determines whether the expander is collapsed or expanded.
 
-  Typical expander rendering: @image[render-expander]{}
+  Typical expander rendering: @br{}
+  @image[render-expander]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1325,22 +1324,22 @@ GtkEntry.entry { ... @}
 
 (defun render-focus (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with a x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with a y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with a rectangle width}
-  @argument[height]{a number, coerced to a double float, with a rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders a focus indicator on the rectangle determined by @arg{x}, @arg{y},
     @arg{width}, @arg{height}.
   @end{short}
 
-  Typical focus rendering: @image[render-focus]{}
+  Typical focus rendering: @br{}
+  @image[render-focus]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1371,17 +1370,15 @@ GtkEntry.entry { ... @}
 
 (defun render-frame (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with the rectangle
-    width}
-  @argument[height]{a number, coerced to a double float, with the rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders a frame around the rectangle defined by @arg{x}, @arg{y},
     @arg{width}, @arg{height}.
@@ -1389,7 +1386,8 @@ GtkEntry.entry { ... @}
 
   Examples of frame rendering, showing the effect of @code{border-image},
   @code{border-color}, @code{border-width}, @code{border-radius} and
-  @code{junctions}: @image[render-frame]{}
+  @code{junctions}: @br{}
+  @image[render-frame]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1420,23 +1418,23 @@ GtkEntry.entry { ... @}
 
 (defun render-handle (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with a x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with a y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with a rectangle width}
-  @argument[height]{a number, coerced to a double float, with a rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders a handle, as the resize grip of the @class{gtk:paned} widget and
     @class{gtk:window} widget, in the rectangle determined by @arg{x}, @arg{y},
     @arg{width}, @arg{height}.
   @end{short}
 
-  Handles rendered for the paned and grip classes: @image[render-handle]{}
+  Handles rendered for the paned and grip classes: @br{}
+  @image[render-handle]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.
@@ -1467,13 +1465,13 @@ GtkEntry.entry { ... @}
 
 (defun render-icon (context cr texture x y)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @sym{cairo:context-t} context}
   @argument[texture]{a @class{gdk:texture} object containing the icon to draw}
-  @argument[x]{a number, coerced to a double float, with the x position for the
+  @argument[x]{a number coerced to a double float for the x position for the
     texture}
-  @argument[y]{a number, coerced to a double float, with the y position for the
+  @argument[y]{a number coerced to a double float for the y position for the
     texture}
   @begin{short}
     Renders the icon in a texture at the specified @arg{x} and @arg{y}
@@ -1510,14 +1508,14 @@ GtkEntry.entry { ... @}
 
 (defun render-layout (context cr x y layout)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with the x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double float for the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with the y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[layout]{a @symbol{pango:layout} object to render}
+  @argument[layout]{a @sym{pango:layout} object to render}
   @begin{short}
     Renders a Pango layout on the coordinates @arg{x}, @arg{y}.
   @end{short}
@@ -1551,16 +1549,16 @@ GtkEntry.entry { ... @}
 
 (defun render-line (context cr x0 y0 x1 y1)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x0]{a number, coerced to a double float, with the x coordinate for
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x0]{a number coerced to a double float for the x coordinate of
     the origin of the line}
-  @argument[y0]{a number, coerced to a double float, with the y coordinate for
+  @argument[y0]{a number coerced to a double float for the y coordinate of
     the origin of the line}
-  @argument[x1]{a number, coerced to a double float, with the x coordinate for
+  @argument[x1]{a number coerced to a double float for the x coordinate of
     the end of the line}
-  @argument[y1]{a number, coerced to a double float, with the y coordinate for
+  @argument[y1]{a number coerced to a double float for the y coordinate of
     the end of the line}
   @begin{short}
     Renders a line from @code{(x0,y0)} to @code{(x1,y1)}.
@@ -1595,24 +1593,25 @@ GtkEntry.entry { ... @}
 
 (defun render-option (context cr x y width height)
  #+liber-documentation
- "@version{#2023-9-17}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[x]{a number, coerced to a double float, with a x origin of the
+  @argument[cr]{a @sym{cairo:context-t} context}
+  @argument[x]{a number coerced to a double floatf or the x origin of the
     rectangle}
-  @argument[y]{a number, coerced to a double float, with a y origin of the
+  @argument[y]{a number coerced to a double float for the y origin of the
     rectangle}
-  @argument[width]{a number, coerced to a double float, with a rectangle width}
-  @argument[height]{a number, coerced to a double float, with a rectangle
-    height}
+  @argument[width]{a number coerced to a double float for the rectangle width}
+  @argument[height]{a number coerced to a double float for the rectangle height}
   @begin{short}
     Renders an option mark as in a @class{gtk:check-button} widget.
   @end{short}
-  The @code{:checked} state of the @symbol{gtk:state-flags} flags will determine
-  whether the option is on or off, and the @code{:inconsistent} state whether
-  it should be marked as undefined.
+  The @val[gtk:state-flags]{:checked} state of the @sym{gtk:state-flags} flags
+  will determine whether the option is on or off, and the
+  @val[gtk:state-flags]{:inconsistent} state whether it should be marked as
+  undefined.
 
-  Typical option mark rendering: @image[render-option]{}
+  Typical option mark rendering: @br{}
+  @image[render-option]{}
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Please do not use it in newly
     written code.

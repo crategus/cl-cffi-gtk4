@@ -373,7 +373,7 @@
 
 (defun string-list-splice (model pos n additions)
  #+liber-documentation
- "@version{2025-03-29}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[pos]{an unsigned integer for the position at which to make the
     change}
@@ -385,7 +385,7 @@
   @end{short}
   This function is more efficient than the @fun{gtk:string-list-append}
   function and the @fun{gtk:string-list-remove} function, because it only emits
-  the @code{\"items-changed\"} signal once for the change.
+  the @sig[g:list-model]{items-changed} signal once for the change.
 
   The @arg{pos} and @arg{n} parameters must be correct, that is,
   @arg{pos} + @arg{n} must be less than or equal to the length of the string
@@ -426,10 +426,10 @@
 
 #+gtk-4-18
 (cffi:defcfun ("gtk_string_list_find" string-list-find) :uint
- "@version{#2025-06-15}
+ "@version{#2025-07-27}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[string]{a string to find}
-  @return{The unsigned integer with the position of the string.}
+  @return{The unsigned integer for the position of the string.}
   @begin{short}
     Gets the position of the string in @arg{model}.
   @end{short}

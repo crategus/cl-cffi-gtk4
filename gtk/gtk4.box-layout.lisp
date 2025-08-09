@@ -137,18 +137,16 @@
 (setf (liber:alias-for-function 'box-layout-baseline-child)
       "Accessor"
       (documentation 'box-layout-baseline-child 'function)
- "@version{2025-06-30}
+ "@version{2025-08-01}
   @syntax{(gtk:box-layout-baseline-child object) => index}
   @syntax{(setf (gtk:box-layout-baseline-child object) index)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[index]{an integer for the child position, or -1}
   @begin{short}
-    Accessor of the @slot[box-layout]{baseline-child} slot of the
-    @class{gtk:box-layout} class.
+    The accessor for the @slot[box-layout]{baseline-child} slot of the
+    @class{gtk:box-layout} class gets or sets the index of the child that
+    determines the baseline in vertical layout.
   @end{short}
-  The @fun{gtk:box-layout-baseline-child} function gets the index ot the child
-  that determines the baseline in vertical layout. The
-  @setf{gtk:box-layout-baseline-child} function sets the index.
   @see-class{gtk:box-layout}")
 
 ;;; --- gtk:box-layout-baseline-position ---------------------------------------
@@ -168,18 +166,16 @@
 (setf (liber:alias-for-function 'box-layout-baseline-position)
       "Accessor"
       (documentation 'box-layout-baseline-position 'function)
- "@version{2025-06-30}
+ "@version{2025-08-01}
   @syntax{(gtk:box-layout-baseline-position object) => position}
   @syntax{(setf (gtk:box-layout-baseline-position object) position)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
-    Accessor of the @slot[gtk:box-layout]{baseline-position} slot of the
-    @class{gtk:box-layout} class.
+    The accessor for the @slot[gtk:box-layout]{baseline-position} slot of the
+    @class{gtk:box-layout} class gets or sets the baseline position of a box
+    layout.
   @end{short}
-  The @fun{gtk:box-layout-baseline-position} function gets the baseline
-  position. The @setf{gtk:box-layout-baseline-position} function sets the
-  baseline position of a box layout.
 
   The baseline position affects only horizontal boxes with at least one
   baseline aligned child. If there is more vertical space available than
@@ -201,18 +197,16 @@
 (setf (liber:alias-for-function 'box-layout-homogeneous)
       "Accessor"
       (documentation 'box-layout-homogeneous 'function)
- "@version{2024-04-19}
+ "@version{2025-08-01}
   @syntax{(gtk:box-layout-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-layout-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[homogeneous]{@em{true} if the box layout is homogeneous}
   @begin{short}
-    Accessor of the @slot[gtk:box-layout]{homogeneous} slot of the
-    @class{gtk:box-layout} class.
+    The accessor for the @slot[gtk:box-layout]{homogeneous} slot of the
+    @class{gtk:box-layout} class gets or sets whether the box layout will
+    allocate the same size to all children.
   @end{short}
-  The @fun{gtk:box-layout-homogeneous} function returns whether the box layout
-  will allocate the same size to all children. The
-  @setf{gtk:box-layout-homogeneous} function sets the property.
   @see-class{gtk:box-layout}")
 
 ;;; --- gtk:box-layout-spacing -------------------------------------------------
@@ -229,17 +223,18 @@
 (setf (liber:alias-for-function 'box-layout-spacing)
       "Accessor"
       (documentation 'box-layout-spacing 'function)
- "@version{2025-06-30}
+ "@version{2025-08-01}
   @syntax{(gtk:box-layout-spacing object) => spacing}
   @syntax{(setf (gtk:box-layout-spacing object) spacing)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[spacing]{an integer for the spacing of the box layout}
   @begin{short}
-    Accessor of the @slot[gtk:box-layout]{spacing} slot of the
-    @class{gtk:box-layout} class.
+    The accessor for the @slot[gtk:box-layout]{spacing} slot of the
+    @class{gtk:box-layout} class gets or sets the space that the box layout
+    puts between children.
   @end{short}
-  The @fun{gtk:box-layout-spacing} function returns the space that the box
-  layout puts between children. The @setf{gtk:box-layout-spacing} function sets
+  The @fun{gtk:box-layout-spacing} function
+  The @setf{gtk:box-layout-spacing} function sets
   the spacing.
   @see-class{gtk:box-layout}")
 

@@ -169,51 +169,56 @@ calendar.view
     @code{:selected} state assigned.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"day-selected\" signal}
+    @begin[calendar::day-selection]{signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[calendar]{The @class{gtk:calendar} widget which received the
+      @begin[code]{simple-table}
+        @entry[calendar]{The @class{gtk:calendar} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user selects a day.
-    @subheading{The \"next-month\" signal}
+    @end{signal}
+    @begin[calendar::next-month]{signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[calendar]{The @class{gtk:calendar} widget which received the
+      @begin[code]{simple-table}
+        @entry[calendar]{The @class{gtk:calendar} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user switched to the next month.
-    @subheading{The \"next-year\" signal}
+    @end{signal}
+    @begin[calendar::next-year]{signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[calendar]{The @class{gtk:calendar} widget which received the
+      @begin[code]{simple-table}
+        @entry[calendar]{The @class{gtk:calendar} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when user switched to the next year.
-    @subheading{The \"prev-month\" signal}
+    @end{signal}
+    @begin[calendar::prev-month]{signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[calendar]{The @class{gtk:calendar} widget which received the
+      @begin[code]{simple-table}
+        @entry[calendar]{The @class{gtk:calendar} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user switched to the previous month.
-    @subheading{The \"prev-year\" signal}
+    @end{signal}
+    @begin[calendar::prev-year]{signal}
       @begin{pre}
 lambda (calendar)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[calendar]{The @class{gtk:calendar} widget which received the
+      @begin[code]{simple-table}
+        @entry[calendar]{The @class{gtk:calendar} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when user switched to the previous year.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:calendar-new}
   @see-slot{gtk:calendar-day}
@@ -241,17 +246,17 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calender-day object) => day}
   @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[day]{an integer for the selected day}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{day} slot of the @class{gtk:calendar}
-    class.
+    The accessor for the @slot[gtk:calendar]{day} slot of the
+    @class{gtk:calendar} class gets or sets the selected day as a number between
+    1 and 31, or 0 to unselect the currently selected day.
   @end{short}
-  The selected day as a number between 1 and 31, or 0 to unselect the currently
-  selected day. This property gets initially set to the current day.
+  This property gets initially set to the current day.
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}
   @see-function{gtk:calendar-select-day}")
@@ -270,15 +275,17 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calendar-month object) => month}
   @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[month]{an integer for the selected month}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{month} slot of the @class{gtk:calendar}
-    class.
+    The accessor for the @slot[gtk:calendar]{month} slot of the
+    @class{gtk:calendar} class gets or sets the selected month as a number
+    between 0 and 11.
   @end{short}
+  This property gets initially set to the current month.
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}")
 
@@ -295,16 +302,15 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-day-names)
       "Accessor"
       (documentation 'calendar-show-day-names 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calendar-show-day-names object) => setting}
   @syntax{(setf (gtk:calendar-show-day-names object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether day names are displayed}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{show-day-names} slot of the
-    @class{gtk:calendar} class.
+    The accessor for the @slot[gtk:calendar]{show-day-names} slot of the
+    @class{gtk:calendar} class gets or sets whether day names are displayed.
   @end{short}
-  Determines whether day names are displayed.
   @see-class{gtk:calendar}")
 
 ;;; --- gtk:calendar-show-heading ----------------------------------------------
@@ -319,16 +325,15 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-heading)
       "Accessor"
       (documentation 'calendar-show-heading 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calendar-show-heading object) => setting}
   @syntax{(setf (gtk:calendar-show-heading object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether a heading is displayed}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{show-heading} slot of the
-    @class{gtk:calendar} class.
+    The accessor for the @slot[gtk:calendar]{show-heading} slot of the
+    @class{gtk:calendar} class gets or sets whether a heading is displayed.
   @end{short}
-  Determines whether a heading is displayed.
   @see-class{gtk:calendar}")
 
 ;;; --- gtk:calendar-show-week-numbers -----------------------------------------
@@ -344,16 +349,15 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-week-numbers)
       "Accessor"
       (documentation 'calendar-show-week-numbers 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calendar-show-week-numbers object) => setting}
   @syntax{(setf (gtk:calendar-show-week-numbers object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether week numbers are displayed}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{show-week-numbers} slot of the
-    @class{gtk:calendar} class.
+    The accessor for the @slot[gtk:calendar]{show-week-numbers} slot of the
+    @class{gtk:calendar} class gets or sets whether week numbers are displayed.
   @end{short}
-  Determines whether week numbers are displayed.
   @see-class{gtk:calendar}")
 
 ;;; --- gtk:calendar-year ------------------------------------------------------
@@ -369,16 +373,16 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2025-05-31}
+ "@version{2025-08-04}
   @syntax{(gtk:calendar-year object) => year}
   @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[year]{an integer for the selected year}
   @begin{short}
-    Accessor of the @slot[gtk:calendar]{year} slot of the @class{gtk:calendar}
-    class.
+    The accessor for the @slot[gtk:calendar]{year} slot of the
+    @class{gtk:calendar} class gets or sets the selected year.
   @end{short}
-  The selected year. This property gets initially set to the current year.
+  This property gets initially set to the current year.
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}")
 

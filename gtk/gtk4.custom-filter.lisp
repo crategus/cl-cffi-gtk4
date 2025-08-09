@@ -83,9 +83,9 @@
 
 (defun custom-filter-new (&optional func)
  #+liber-documentation
- "@version{2024-09-27}
-  @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
-    to filter items, the default value is @code{nil}}
+ "@version{2025-07-25}
+  @argument[func]{an optional @sym{gtk:custom-filter-func} callback function to
+    filter items, the default value is @code{nil}}
   @return{The new @class{gtk:custom-filter} object.}
   @begin{short}
     Creates a new custom filter using the given @arg{func} callback function to
@@ -146,10 +146,10 @@
 
 (defun custom-filter-set-filter-func (filter &optional func)
  #+liber-documentation
- "@version{2025-06-06}
+ "@version{2025-07-25}
   @argument[filter]{a @class{gtk:custom-filter} object}
-  @argument[func]{an optional @symbol{gtk:custom-filter-func} callback function
-    to filter items, or the default value @code{nil} to unset the function}
+  @argument[func]{an optional @sym{gtk:custom-filter-func} callback function to
+    filter items, or the default value @code{nil} to unset the function}
   @begin{short}
     Sets (or unsets) the function used for filtering items.
   @end{short}

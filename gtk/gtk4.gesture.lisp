@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -42,7 +42,7 @@
 ;;;     gtk_gesture_is_active
 ;;;     gtk_gesture_is_recognized
 ;;;     gtk_gesture_get_sequence_state
-;;;     gtk_gesture_set_sequence_state                     Deprecated 4.10
+;;;     gtk_gesture_set_sequence_state                      Deprecated 4.10
 ;;;     gtk_gesture_set_state
 ;;;     gtk_gesture_get_sequences
 ;;;     gtk_gesture_handles_sequence
@@ -95,7 +95,7 @@
 (setf (liber:alias-for-symbol 'event-sequence-state)
       "GEnum"
       (liber:symbol-documentation 'event-sequence-state)
- "@version{2024-7-27}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkEventSequenceState\" event-sequence-state
   (:export t
@@ -105,11 +105,11 @@
   (:denied 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{The sequence is handled, but not grabbed.}
       @entry[:claimed]{The sequence is handled and grabbed.}
       @entry[:denied]{The sequence is denied.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the state of a @class{gdk:event-sequence} instance in a
@@ -133,7 +133,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture 'type)
- "@version{2024-7-27}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:gesture} object is the base object for gesture recognition.
   @end{short}
@@ -151,10 +151,11 @@
 
   A recognized gesture will then emit the following signals:
   @begin{itemize}
-    @item{The @code{\"begin\"} signal when the gesture is recognized.}
-    @item{A number of @code{\"update\"} signals, whenever an input event is
-      processed.}
-    @item{The @code{\"end\"} signal when the gesture is no longer recognized.}
+    @item{The @sig[gtk:gesture]{begin} signal when the gesture is recognized.}
+    @item{A number of @sig[gtk:gesture]{update} signals, whenever an input event
+      is processed.}
+    @item{The @sig[gtk:gesture]{end} signal when the gesture is no longer
+      recognized.}
   @end{itemize}
   @subheading{Event propagation}
   In order to receive events, a gesture needs to set a propagation phase through
@@ -165,8 +166,8 @@
   get a chance to interact with the event before it reaches the target.
 
   In the bubble phase, events are propagated up from the target widget to the
-  toplevel, and gestures that are attached to containers above the widget get a
-  chance to interact with events that have not been handled yet.
+  toplevel, and gestures that are attached to containers above the widget get
+  a chance to interact with events that have not been handled yet.
 
   @subheading{States of a sequence}
   Whenever input interaction happens, a single event may trigger a cascade of
@@ -180,30 +181,31 @@
   @fun{gtk:gesture-set-state} function on one will effectively propagate the
   state throughout the group.
 
-  By default, all sequences start out in the @code{:none} state, sequences in
-  this state trigger the gesture event handler, but event propagation will
-  continue unstopped by gestures.
+  By default, all sequences start out in the @val[gtk:propagation-phase]{:none}
+  state, sequences in this state trigger the gesture event handler, but event
+  propagation will continue unstopped by gestures.
 
-  If a sequence enters into the @code{:denied} state, the gesture group will
-  effectively ignore the sequence, letting events go unstopped through the
-  gesture, but the \"slot\" will still remain occupied while the touch is
-  active.
+  If a sequence enters into the @val[gtk:propagation-phase]{:denied} state, the
+  gesture group will effectively ignore the sequence, letting events go
+  unstopped through the gesture, but the \"slot\" will still remain occupied
+  while the touch is active.
 
-  If a sequence enters in the @code{:claimed} state, the gesture group will
-  grab all interaction on the sequence, by:
+  If a sequence enters in the @val[gtk:propagation-phase]{:claimed} state, the
+  gesture group will grab all interaction on the sequence, by:
   @begin{itemize}
-    @item{Setting the same sequence to @code{:denied} on every other gesture
-      group within the widget, and every gesture on parent widgets in the
-      propagation chain.}
-    @item{Calling the @code{\"cancel\"} signal on every gesture in widgets
-      underneath in the propagation chain.}
+    @item{Setting the same sequence to @val[gtk:propagation-phase]{:denied} on
+      every other gesture group within the widget, and every gesture on parent
+      widgets in the propagation chain.}
+    @item{Calling the @sig[gtk:gesture]{cancel} signal on every gesture in
+      widgets underneath in the propagation chain.}
     @item{Stopping event propagation after the gesture group handles the event.}
   @end{itemize}
-  Note: if a sequence is set early to @code{:claimed} on
-  @code{:touch-begin}/@code{:button-press} events, so those events are captured
-  before reaching the event widget, this implies @code{:phase-capture}, one
-  similar event will emulated if the sequence changes to @code{:denied}. This
-  way event coherence is preserved before event propagation is unstopped again.
+  Note: if a sequence is set early to @val[gtk:propagation-phase]{:claimed} on
+  @val[gdk:event-type]{:touch-begin}/@val[gdk:event-type]{:button-press} events,
+  so those events are captured before reaching the event widget, this implies
+  @val[gtk:propagation-phase]{:phase-capture}, one similar event will emulated
+  if the sequence changes to @val[gtk:propagation-phase]{:denied}. This way
+  event coherence is preserved before event propagation is unstopped again.
 
   Sequence states can not be changed freely, see the
   @fun{gtk:gesture-set-state} function to know about the possible lifetimes of
@@ -214,54 +216,57 @@
   transparently touchpad gesture events. The only precautions users of the
   @class{gtk:gesture} object should do to enable this support are:
   @begin{itemize}
-    @item{If the gesture has the @code{:none} value of the
-      @symbol{gtk:propagation-phase} enumeration, ensuring events of type
-      @code{:touchpad-swipe} and @code{:touchpad-pinch} are handled by the
+    @item{If the gesture has the @val[gtk:gesture]{:none} value of the
+      @sym{gtk:propagation-phase} enumeration, ensuring events of type
+      @val[gdk:event-type]{:touchpad-swipe} and
+      @val[gdk:event-type]{:touchpad-pinch} are handled by the
       @class{gtk:gesture} object.}
   @end{itemize}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"begin\" signal}
+    @begin[gesture::begin]{signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture} object that received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} event that made the
           gesture to be recognized.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the gesture is recognized. This means the
-      number of touch sequences matches @code{n-points} Note: These conditions
-      may also happen when an extra touch, for example, a third touch on a
-      2-touches gesture, is lifted, in that situation sequence will not pertain
-      to the current set of active touches, so do not rely on this being true.
-    @subheading{The \"cancel\" signal}
+      number of touch sequences matches @slot[gtk:gesture]{n-points} Note: These
+      conditions may also happen when an extra touch, for example, a third touch
+      on a 2-touches gesture, is lifted, in that situation sequence will not
+      pertain to the current set of active touches, so do not rely on this being
+      true.
+    @end{signal}
+    @begin[gesture::cancel]{signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture} object that received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} instance that was
           cancelled.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever a sequence is cancelled. This usually
       happens on active touches when the @fun{gtk:event-controller-reset}
       function is called on @arg{gesture}, manually, due to grabs ..., or the
       individual sequence was claimed by controllers of the parent widgets, see
-      the @fun{gtk:gesture-set-sequence-state}) function. The @arg{gesture}
-      argument must forget everything about @arg{sequence} as a reaction to the
-      signal.
-    @subheading{The \"end\" signal}
+      the @fun{gtk:gesture-set-state}) function. The @arg{gesture} argument must
+      forget everything about @arg{sequence} as a reaction to the signal.
+    @end{signal}
+    @begin[gesture::end]{signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture} object that received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} instance that made
           gesture recognition to finish.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when gesture either stopped recognizing the event
       sequences as something to be handled, or the number of touch sequences
       became higher or lower than the @slot[gtk:gesture]{n-points} value. Note:
@@ -270,33 +275,36 @@ lambda (gesture sequence)    :run-last
       just pressed touch sequence that exceeds the @slot[gtk:gesture]{n-points}
       value. This situation may be detected by checking through the
       @fun{gtk:gesture-handles-sequence} function.
-    @subheading{The \"sequence-state-changed\" signal}
+    @end{signal}
+    @begin[gesture::sequence-state-changed]{signal}
       @begin{pre}
 lambda (gesture sequence state)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture} object that received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} instance that was
           cancelled.}
-        @entry[state]{The new @symbol{gtk:event-sequence-state} value.}
-      @end{table}
+        @entry[state]{The new @sym{gtk:event-sequence-state} value.}
+      @end{simple-table}
       The signal is emitted whenever a sequence state changes. See the
       @fun{gtk:gesture-sequence-state} function to know more about the
       expectable sequence lifetimes.
-    @subheading{The \"update\" signal}
+    @end{signal}
+    @begin[gesture::update]{signal}
       @begin{pre}
 lambda (gesture sequence)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture} object that received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} instance that was
           updated.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever an event is handled while the gesture is
       recognized. The @arg{sequence} argument is guaranteed to pertain to the
       set of active touches.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:gesture-n-points}
   @see-class{gtk:event-controller}
@@ -320,10 +328,10 @@ lambda (gesture sequence)    :run-last
 (setf (liber:alias-for-function 'gesture-n-points)
       "Accessor"
       (documentation 'gesture-n-points 'function)
- "@version{2024-7-27}
+ "@version{2025-07-27}
   @syntax{(gtk:gesture-n-points object) => n-points}
   @argument[object]{a @class{gtk:gesture} object}
-  @argument[n-points]{an integer with the number of touch points}
+  @argument[n-points]{an integer for the number of touch points}
   @begin{short}
     Accessor of the @slot[gtk:gesture]{n-points} slot of the
     @class{gtk:gesture} class.
@@ -337,7 +345,7 @@ lambda (gesture sequence)    :run-last
 
 (cffi:defcfun ("gtk_gesture_get_device" gesture-device) (g:object gdk:device)
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @return{The @class{gdk:device} object, or @code{nil}.}
   @begin{short}
@@ -355,7 +363,7 @@ lambda (gesture sequence)    :run-last
 
 (cffi:defcfun ("gtk_gesture_is_active" gesture-is-active) :boolean
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @return{@em{True} if @arg{gesture} is active.}
   @begin{short}
@@ -374,7 +382,7 @@ lambda (gesture sequence)    :run-last
 
 (cffi:defcfun ("gtk_gesture_is_recognized" gesture-is-recognized) :boolean
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @return{@em{True} if @arg{gesture} is recognized.}
   @begin{short}
@@ -403,12 +411,12 @@ lambda (gesture sequence)    :run-last
 (cffi:defcfun ("gtk_gesture_get_sequence_state" gesture-sequence-state)
     event-sequence-state
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-27}
   @syntax{(gtk:gesture-sequence-state gesture sequence) => state}
   @syntax{(setf (gtk:gesture-sequence-state gesture sequence) state)}
   @argument[gesture]{a @class{gtk:gesture} object}
   @argument[sequence]{a @class{gdk:event-sequence} instance}
-  @argument[state]{a @symbol{gtk:event-sequence-state} value}
+  @argument[state]{a @sym{gtk:event-sequence-state} value}
   @begin{short}
     The @fun{gtk:gesture-sequence-state} function returns the sequence state,
     as seen by the gesture.
@@ -433,11 +441,12 @@ lambda (gesture sequence)    :run-last
 
 (cffi:defcfun ("gtk_gesture_set_state" gesture-set-state) :boolean
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-24}
   @argument[gesture]{a @class{gtk:gesture} object}
-  @argument[state]{a @symbol{gtk:event-sequence-state} value}
-  @return{@em{True} if the state of at least one sequence was changed
-    successfully.}
+  @argument[state]{a @sym{gtk:event-sequence-state} value}
+  @begin{return}
+    @em{True} if the state of at least one sequence was changed successfully.
+  @end{return}
   @begin{short}
     Sets the state of all sequences that the gesture is currently interacting
     with.
@@ -453,9 +462,9 @@ lambda (gesture sequence)    :run-last
     @item{None → Claimed → Denied}
   @end{itemize}
   Note: Due to event handling ordering, it may be unsafe to set the state on
-  another gesture within a @code{\"begin\"} signal handler, as the callback
-  might be executed before the other gesture knows about the sequence. A safe
-  way to perform this could be:
+  another gesture within a @sig[gtk:gesture]{begin} signal handler, as the
+  callback might be executed before the other gesture knows about the sequence.
+  A safe way to perform this could be:
   @begin{pre}
 static void
 first_gesture_begin_cb (GtkGesture       *first_gesture,
@@ -496,7 +505,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 (cffi:defcfun ("gtk_gesture_get_sequences" gesture-sequences)
     (g:list-t (g:boxed gdk:event-sequence))
  #+liber-documentation
- "@version{2024-7-27}
+ "@version{2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @return{The list of @class{gdk:event-sequence} instances.}
   @begin{short}
@@ -515,11 +524,12 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (cffi:defcfun ("gtk_gesture_handles_sequence" gesture-handles-sequence) :boolean
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-26}
   @argument[gesture]{a @class{gtk:gesture} object}
   @argument[sequence]{a @class{gdk:event-sequence} instance, or @code{nil}}
-  @return{@em{True} if @arg{gesture} is handling @arg{sequence}, @em{false}
-    otherwise.}
+  @begin{return}
+    @em{True} if @arg{gesture} is handling @arg{sequence}, @em{false} otherwise.
+  @end{return}
   @begin{short}
     Returns @em{true} if @arg{gesture} is currently handling events
     corresponding to @arg{sequence}.
@@ -538,7 +548,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 (cffi:defcfun ("gtk_gesture_get_last_updated_sequence"
                gesture-last-updated-sequence) (g:boxed gdk:event-sequence)
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @return{The last updated @class{gdk:event-sequence} instance.}
   @begin{short}
@@ -557,7 +567,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (cffi:defcfun ("gtk_gesture_get_last_event" gesture-last-event) gdk:event
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @argument[sequence]{a @class{gdk:event-sequence} instance}
   @return{The last @class{gdk:event} instance from @arg{sequence}.}
@@ -586,14 +596,13 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (defun gesture-point (gesture sequence)
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-26}
+  @syntax{(gtk:gesture-point gesture sequence) => x, y}
   @argument[gesture]{a @class{gtk:gesture} object}
   @argument[sequence]{a @class{gdk:event-sequence} instance, or @code{nil}
     for pointer events}
-  @begin{return}
-    @arg{x} -- a double float with the x axis of the sequence coordinates @br{}
-    @arg{y} -- a double float with the y axis of the sequence coordinates
-  @end{return}
+  @argument[x]{a double float for the x axis of the sequence coordinates}
+  @argument[y]{a double float for the y axis of the sequence coordinates}
   @begin{short}
     If @arg{sequence} is currently being interpreted by @arg{gesture}, this
     function returns x and y with the last coordinates stored for that event
@@ -619,10 +628,12 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (defun gesture-bounding-box (gesture)
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-08-04}
   @argument[gesture]{a @class{gtk:gesture} object}
-  @return{The @class{gdk:rectangle} instance with the bounding box containing
-    all active touches.}
+  @begin{return}
+    The @class{gdk:rectangle} instance for the bounding box containing all
+    active touches.
+  @end{return}
   @begin{short}
     If there are touch sequences being currently handled by @arg{gesture}, this
     function returns the bounding box containing all active touches.
@@ -653,13 +664,11 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (defun gesture-bounding-box-center (gesture)
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-26}
+  @syntax{(gtk:gesture-bounding-box-center gesture) => x, y}
   @argument[gesture]{a @class{gtk:gesture} object}
-  @begin{return}
-    @arg{x} -- a double float with the x coordinate for the bounding box center
-    @br{}
-    @arg{y} -- a double float with the y coordinate for the bounding box center
-  @end{return}
+  @argument[x]{a double float for the x coordinate of the bounding box center}
+  @argument[y]{a double float for the y coordinate of the bounding box center}
   @begin{short}
     If there are touch sequences being currently handled by @arg{gesture}, this
     function returns in @arg{x} and @arg{y} the center of the bounding box
@@ -680,7 +689,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (cffi:defcfun ("gtk_gesture_group" gesture-group) :void
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2024-07-27}
   @argument[group]{a @class{gtk:gesture} object to group @arg{gesture} with}
   @argument[gesture]{a @class{gtk:gesture} object}
   @begin{short}
@@ -713,7 +722,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (cffi:defcfun ("gtk_gesture_ungroup" gesture-ungroup) :void
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @short{Separates @arg{gesture} into an isolated group.}
   @see-class{gtk:gesture}"
@@ -728,10 +737,11 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 (cffi:defcfun ("gtk_gesture_get_group" gesture-get-group)
     (g:list-t (g:object gesture))
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2025-07-26}
   @argument[gesture]{a @class{gtk:gesture} object}
-  @return{The list of all @class{gtk:gesture} objects in the group of
-    @arg{gesture}.}
+  @begin{return}
+    The list of all @class{gtk:gesture} objects in the group of @arg{gesture}.
+  @end{return}
   @short{Returns all gestures in the group of @arg{gesture}.}
   @see-class{gtk:gesture}"
   (gesture (g:object gesture)))
@@ -744,7 +754,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 (cffi:defcfun ("gtk_gesture_is_grouped_with" gesture-is-grouped-with) :boolean
  #+liber-documentation
- "@version{#2024-7-27}
+ "@version{#2024-07-27}
   @argument[gesture]{a @class{gtk:gesture} object}
   @argument[other]{another @class{gtk:gesture} object}
   @return{The boolean whether the gestures are grouped.}

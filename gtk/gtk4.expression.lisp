@@ -93,7 +93,7 @@
 (setf (liber:alias-for-class 'expression-watch)
       "GBoxed"
       (documentation 'expression-watch 'type)
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @begin{declaration}
 (glib:define-gboxed-opaque expression-watch \"GtkExpressionWatch\"
   :export t
@@ -136,7 +136,7 @@
 (setf (liber:alias-for-class 'expression)
       "GtkExpression"
       (documentation 'expression 'type)
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @begin{short}
     The @type{gtk:expression} type provides a way to describe references to
     values.
@@ -235,9 +235,9 @@ this->item->name
 
 (cffi:defcfun ("gtk_expression_ref" expression-ref) expression
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-26}
   @argument[expression]{a @class{gtk:expression} instance}
-  @return{The @class{gtk:expression} instance with an additional reference.}
+  @return{The @class{gtk:expression} instance for an additional reference.}
   @begin{short}
     Acquires a reference on the given @arg{expression}.
   @end{short}
@@ -252,7 +252,7 @@ this->item->name
 
 (cffi:defcfun ("gtk_expression_unref" expression-unref) :void
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
     Releases a reference on the given @class{gtk:expression} instance.
@@ -270,7 +270,7 @@ this->item->name
 
 (cffi:defcfun ("gtk_expression_get_value_type" expression-value-type) g:type-t
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{return}
     The @class{g:type-t} type ID returned from the @fun{gtk:expression-evaluate}
@@ -293,7 +293,7 @@ this->item->name
 
 (cffi:defcfun ("gtk_expression_is_static" expression-is-static) :boolean
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expresson]{a @class{gtk:expression} instance}
   @return{@em{True} if @arg{expression} is static.}
   @begin{short}
@@ -321,14 +321,14 @@ this->item->name
 
 (defun expression-evaluate (expression object value)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the evaluation}
-  @argument[value]{an initialized @symbol{g:value} instance}
+  @argument[value]{an initialized @sym{g:value} instance}
   @return{@em{True} if the expression could be evaluated.}
   @begin{short}
     Evaluates the given @arg{expression} and on success stores the result as
-    a @symbol{g:value} instance in @arg{gvalue}.
+    a @sym{g:value} instance in @arg{gvalue}.
   @end{short}
   The GType of the returned value will be the type given by the
   @fun{gtk:expression-value-type} function.
@@ -338,7 +338,7 @@ this->item->name
   @em{false} will be returned.
 
   See the @fun{gtk:expression-evaluate-value} function for a variant that does
-  not need an @symbol{g:value} instance, but returns the value.
+  not need an @sym{g:value} instance, but returns the value.
   @see-class{gtk:expression}
   @see-symbol{g:value}
   @see-function{gtk:expression-value-type}"
@@ -357,7 +357,7 @@ this->item->name
 
 (defun expression-evaluate-value (expression object)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the evaluation}
   @return{The evaluated value of the expression.}
@@ -365,7 +365,7 @@ this->item->name
     Evaluates the given @arg{expression} and on success returns the result.
   @end{short}
   This is a variant of the @fun{gtk:expression-evaluate} function that avoids
-  the usage of a @symbol{g:value} instance to get the value of the expression.
+  the usage of a @sym{g:value} instance to get the value of the expression.
   @see-class{gtk:expression}
   @see-function{gtk:expression-evaluate}"
   (gobject:with-value (gvalue)
@@ -393,7 +393,7 @@ this->item->name
 
 (defun expression-bind (expression target property source)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[target]{a @class{g:object} instance for the target to bind to}
   @argument[property]{a string for the name of the property on @arg{target} to
@@ -438,7 +438,7 @@ this->item->name
 (setf (liber:alias-for-symbol 'expression-notify)
       "Callback"
       (liber:symbol-documentation 'expression-notify)
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @syntax{lambda ()}
   @begin{short}
     Callback called by the @fun{gtk:expression-watch} function when the
@@ -462,10 +462,10 @@ this->item->name
 
 (defun expression-watch (expression object func)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-07-25}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the argument to watch}
-  @argument[func]{a @symbol{gtk:expression-notify} callback function to invoke
+  @argument[func]{a @sym{gtk:expression-notify} callback function to invoke
     when the expression changes}
   @begin{return}
     The newly installed @class{gtk:expression-watch} instance. Note that
@@ -510,9 +510,9 @@ this->item->name
 
 (defun expression-watch-evaluate (watch value)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[watch]{a @class{gtk:expression-watch} instance}
-  @argument[value]{an initialized @symbol{g:value} instance}
+  @argument[value]{an initialized @sym{g:value} instance}
   @begin{short}
     Evaluates the watched expression and on success returns the result in
     @arg{value}.
@@ -521,7 +521,7 @@ this->item->name
   the expression and the object originally used to create @arg{watch}.
 
   See the @fun{gtk:expression-watch-evaluate-value} function which returns
-  the value and does not need a @symbol{g:value} instance.
+  the value and does not need a @sym{g:value} instance.
   @see-class{gtk:expression-watch}
   @see-symbol{g:value}
   @see-function{gtk:expression-watch-evaluate}"
@@ -529,9 +529,9 @@ this->item->name
 
 (defun expression-watch-evaluate-value (watch)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-27}
   @argument[watch]{a @class{gtk:expression-watch} instance}
-  @return{The value with the result.}
+  @return{The value for the result.}
   @begin{short}
     Evaluates the watched expression and on success returns the result.
   @end{short}
@@ -539,7 +539,7 @@ this->item->name
   the expression and the object originally used to create @arg{watch}.
 
   This function is a variant of the @fun{gtk:expression-watch-evaluate} function
-  that avoids the usage of a @symbol{g:value} instance to get the value of the
+  that avoids the usage of a @sym{g:value} instance to get the value of the
   expression.
   @see-class{gtk:expression-watch}
   @see-symbol{g:value}
@@ -557,7 +557,7 @@ this->item->name
 
 (cffi:defcfun ("gtk_expression_watch_unwatch" expression-watch-unwatch) :void
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[watch]{a @class{gtk:expression-watch} instance to release}
   @begin{short}
     Stops watching an expression that was established with the
@@ -611,10 +611,10 @@ this->item->name
 
 (defun property-expression-new-for-pspec (expression pspec)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
-  @argument[pspec]{a @symbol{g:param-spec} instance for the property to query}
+  @argument[pspec]{a @sym{g:param-spec} instance for the property to query}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that looks up a property via the given
@@ -641,7 +641,7 @@ this->item->name
 
 (defun property-expression-expression (expression)
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expression]{a property @class{gtk:expression} instance}
   @return{The object @class{gtk:expression} instance.}
   @begin{short}
@@ -660,12 +660,12 @@ this->item->name
 (cffi:defcfun ("gtk_property_expression_get_pspec" property-expression-pspec)
     (:pointer (:struct g:param-spec))
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[expression]{a @class{gtk:expression} instance}
-  @return{The @symbol{g:param-spec} instance.}
+  @return{The @sym{g:param-spec} instance.}
   @begin{short}
-    Gets the @symbol{g:param-spec} instance specifying the property of a
-    property expression.
+    Gets the @sym{g:param-spec} instance specifying the property of a property
+    expression.
   @end{short}
   @see-class{gtk:expression}
   @see-symbol{g:param-spec}"
@@ -679,8 +679,8 @@ this->item->name
 
 (defun constant-expression-new (gtype value)
  #+liber-documentation
- "@version{2025-3-14}
-  @argument[gtype]{a @symbol{g:type-t} type ID}
+ "@version{2025-07-25}
+  @argument[gtype]{a @sym{g:type-t} type ID}
   @argument[value]{a value corresponding to @arg{gtype}}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
@@ -708,8 +708,8 @@ this->item->name
 (cffi:defcfun ("gtk_constant_expression_new_for_value"
                constant-expression-new-for-value) expression
  #+liber-documentation
- "@version{2025-3-14}
-  @argument[value]{a @symbol{g:value} instance}
+ "@version{2025-07-25}
+  @argument[value]{a @sym{g:value} instance}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that always evaluates to the given @arg{value}.
@@ -727,9 +727,9 @@ this->item->name
 (cffi:defcfun ("gtk_constant_expression_get_value" constant-expression-value)
     (:pointer (:struct g:value))
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-07-25}
   @argument[expression]{a constant @class{gtk:expression} instance}
-  @return{The @symbol{g:value} value.}
+  @return{The @sym{g:value} value.}
   @begin{short}
     Gets the value that a constant expression evaluates to.
   @end{short}
@@ -744,7 +744,7 @@ this->item->name
 
 (cffi:defcfun ("gtk_object_expression_new" object-expression-new) expression
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[object]{a @class{g:object} instance to watch}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
@@ -768,7 +768,7 @@ this->item->name
 (cffi:defcfun ("gtk_object-expression_get_object" object-expression-object)
     g:object
  #+liber-documentation
- "@version{2025-3-14}
+ "@version{2025-03-14}
   @argument[expression]{a @class{gtk:expression} instance for an object}
   @return{The @class{g:object} instance, or @code{nil}.}
   @short{Gets the object that the expression evaluates to.}
@@ -898,10 +898,10 @@ this->item->name
 
 (cffi:defcfun ("gtk_value_get_expression" value-expression) expression
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-07-25}
   @syntax{(gtk:value-expression value) => expression}
   @syntax{(setf (gtk:value-expression value) expression)}
-  @argument[value]{a @symbol{g:value} instance initialized for the
+  @argument[value]{a @sym{g:value} instance initialized for the
     @class{gtk:expression} type}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
@@ -909,8 +909,8 @@ this->item->name
     instance stored inside the given @arg{value}.
   @end{short}
   The @setf{gtk:value-expression} function stores the given
-  @class{gtk:expression} instance inside @arg{value}. The @symbol{g:value}
-  instance will acquire a reference to the expression.
+  @class{gtk:expression} instance inside @arg{value}. The @sym{g:value} instance
+  will acquire a reference to the expression.
   @see-class{gtk:expression}
   @see-symbol{g:value}"
   (value (:pointer (:struct g:value))))

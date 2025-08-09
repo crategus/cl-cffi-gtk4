@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-operation-preview.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,7 +63,7 @@
 (setf (liber:alias-for-class 'print-operation-preview)
       "Interface"
       (documentation 'print-operation-preview 'type)
- "@version{2023-8-28}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:print-operation-preview} interface is implemented by the
     @class{gtk:print-operation} class.
@@ -77,32 +77,34 @@
   @fun{gtk:print-operation-preview-is-selected} functions are useful when
   implementing a print preview.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"got-page-size\" signal}
+    @begin[print-operation-preview::got-page-size]{signal}
       @begin{pre}
 lambda (preview context page-setup)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[preview]{The @class{gtk:print-operation-preview} object on which
           the signal is emitted.}
         @entry[context]{The current @class{gtk:print-context} object.}
         @entry[page-setup]{The @class{gtk:page-setup} object for the current
           page.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted once for each page that gets rendered to the
       preview. A handler for this signal should update the context according to
       the @arg{page-setup} argument and set up a suitable Cairo context, using
       the @fun{gtk:print-context-set-cairo-context} function.
-    @subheading{The \"ready\" signal}
+    @end{signal}
+    @begin[print-operation-preview::ready]{signal}
       @begin{pre}
 lambda (preview context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[preview]{The @class{gtk:print-operation-preview} object on which
           the signal is emitted.}
         @entry[context]{The current @class{gtk:print-context} object.}
-      @end{table}
+      @end{simple-table}
       The signal gets emitted once per preview operation, before the first page
       is rendered. A handler for this signal can be used for setup tasks.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:print-operation}
   @see-class{gtk:print-context}
@@ -115,7 +117,7 @@ lambda (preview context)    :run-last
 (cffi:defcfun ("gtk_print_operation_preview_end_preview"
                print-operation-preview-end-preview) :void
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[preview]{a @class{gtk:print-operation-preview} object}
   @short{Ends a preview.}
   This function must be called to finish a custom print preview.
@@ -132,7 +134,7 @@ lambda (preview context)    :run-last
 (cffi:defcfun ("gtk_print_operation_preview_is_selected"
                print-operation-preview-is-selected) :boolean
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[preview]{a @class{gtk:print-operation-preview} object}
   @argument[page-nr]{a page number}
   @return{@em{True} if the page has been selected for printing.}
@@ -154,7 +156,7 @@ lambda (preview context)    :run-last
 (cffi:defcfun ("gtk_print_operation_preview_render_page"
                print-operation-preview-render-page) :void
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[preview]{a @class{gtk:print-operation-preview} object}
   @argument[page-nr]{the number of the page to render}
   @begin{short}

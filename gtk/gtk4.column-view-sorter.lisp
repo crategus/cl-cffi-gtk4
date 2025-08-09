@@ -59,8 +59,6 @@
 ;;; GtkColumnViewSorter
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Make a Lisp example
-
 (gobject:define-gobject "GtkColumnViewSorter" column-view-sorter
   (:superclass sorter
    :export t
@@ -75,7 +73,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-sorter 'type)
- "@version{2025-3-30}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:column-view-sorter} class is a sorter implementation that is
     geared towards the needs of the @class{gtk:column-view} widget.
@@ -96,7 +94,7 @@
   If you want to store the full sort configuration, including secondary sort
   columns that are used for tie breaking, then you can use the
   @fun{gtk:column-view-sorter-nth-sort-column} function. To get notified about
-  changes, use the @code{\"changed\"} signal.
+  changes, use the @sig[gtk:sorter]{changed} signal.
 
   Since 4.10
   @begin[Examples]{dictionary}
@@ -134,7 +132,7 @@
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-column)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-column 'function)
- "@version{2025-3-30}
+ "@version{2025-03-30}
   @syntax{(gtk:column-view-sorter-primary-sort-column object) => column}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @class{gtk:column-view-column} object for the primary
@@ -155,20 +153,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-sort-order"
                                                'column-view-sorter) t)
- "The @code{primary-sort-order} property of type @symbol{gtk:sort-type} (Read)
+ "The @code{primary-sort-order} property of type @sym{gtk:sort-type} (Read)
   @br{}
   The primary sort order determines whether the triangle displayed in the column
   view header of the primary sort column points upwards or downwards. @br{}
-  Default value: @code{:ascending}")
+  Default value: @val[gtk:sort-type]{:ascending}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-order)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-order 'function)
- "@version{2025-3-30}
+ "@version{2025-07-25}
   @syntax{(gtk:column-view-sorter-primary-sort-order object) => order}
   @argument[object]{a @class{gtk:column-view-sorter} object}
-  @argument[column]{a @symbol{gtk:sort-type} value for the primary sort order}
+  @argument[column]{a @sym{gtk:sort-type} value for the primary sort order}
   @begin{short}
     Accessor of the @slot[gtk:column-view-sorter]{primary-sort-order} slot of
     the @class{gtk:column-view-sorter} class.
@@ -176,7 +174,7 @@
   Returns the primary sort order. The primary sort order determines whether the
   triangle displayed in the column view header of the primary sort column points
   upwards or downwards. If there is no primary sort column, then this function
-  returns the @code{:ascending} value.
+  returns the @val[gtk:sort-type]{:ascending} value.
 
   Since 4.10
   @see-class{gtk:column-view-sorter}
@@ -189,16 +187,16 @@
 (cffi:defcfun ("gtk_column_view_sorter_get_n_sort_columns"
                column-view-sorter-n-sort-columns) :uint
  #+liber-documentation
- "@version{2025-3-30}
+ "@version{2025-07-24}
   @argument[sorter]{a @class{gtk:column-view-sorter} object}
-  @return{The unsigned integer with the number of sort columns.}
+  @return{The unsigned integer for the number of sort columns.}
   @begin{short}
     Returns the number of columns by which the sorter sorts.
   @end{short}
   If the sorter of the primary sort column does not determine a total order,
   then the secondary sorters are consulted to break the ties. Use the
-  @code{\"changed\"} signal to get notified when the number of sort columns
-  changes.
+  @sig[gtk:sorter]{changed} signal to get notified when the number of sort
+  columns changes.
 
   Since 4.10
   @see-class{gtk:column-view-sorter}"
@@ -219,17 +217,18 @@
 
 (defun column-view-sorter-nth-sort-column (sorter pos)
  #+liber-documentation
- "@version{2025-3-30}
+ "@version{2025-07-24}
   @syntax{(gtk:column-view-sorter-nth-sort-column sorter pos) => column, order}
   @argument[sorter]{a @class{gtk:column-view-sorter} object}
   @argument[pos]{an unsigned integer for the position of the sort column
     to retrieve, 0 for the primary sort column}
   @argument[column]{a @class{gtk:column-view-column} object}
-  @argument[order]{a @symbol{gtk:sort-type} value for the sort order}
+  @argument[order]{a @sym{gtk:sort-type} value for the sort order}
   @begin{short}
     Gets the position‘th sort column and its associated sort order.
   @end{short}
-  Use the @code{\"changed\"} signal to get notified when sort columns change.
+  Use the @sig[gtk:sorter]{changed} signal to get notified when sort columns
+  change.
 
   Since 4.10
   @see-class{gtk:column-view-sorter}

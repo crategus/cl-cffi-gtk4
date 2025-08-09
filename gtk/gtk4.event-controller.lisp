@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.event-controller.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@
 (setf (liber:alias-for-symbol 'propagation-phase)
       "GEnum"
       (liber:symbol-documentation 'propagation-phase)
- "@version{2024-7-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkPropagationPhase\" propagation-phase
   (:export t
@@ -108,7 +108,7 @@
   (:target 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Events are not delivered.}
       @entry[:capture]{Events are delivered in the capture phase. The capture
         phase happens before the bubble phase, runs from the toplevel down to
@@ -120,7 +120,7 @@
       @entry[:target]{Events are delivered in the default widget event handlers,
         note that widget implementations must chain up on button, motion, touch
         and grab broken handlers for controllers in this phase to be run.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the stage at which events are fed into a
@@ -142,7 +142,7 @@
 (setf (liber:alias-for-symbol 'propagation-limit)
       "GEnum"
       (liber:symbol-documentation 'propagation-limit)
- "@version{2024-7-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkPropagationLimit\" propagation-limit
   (:export t
@@ -151,12 +151,12 @@
   (:same-native 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Events are handled regardless of what their target is.}
       @entry[:same-native]{Events are only handled if their target is in the
         same @class{gtk:native} widget as the event controllers widget. Note
         that some event types have two targets (origin and destination).}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes limits of a @class{gtk:event-controller} object for handling
@@ -189,7 +189,7 @@
 
 #+liber-documentation
 (setf (documentation 'event-controller 'type)
- "@version{2024-7-26}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:event-controller} class is the base class for event
     controllers.
@@ -228,11 +228,11 @@
 (setf (liber:alias-for-function 'event-controller-name)
       "Accessor"
       (documentation 'event-controller-name 'function)
- "@version{2024-7-26}
+ "@version{2025-07-25}
   @syntax{(gtk:event-controller-name object) => name}
   @syntax{(setf (gtk:event-controller-name object) name)}
   @argument[object]{a @class{gtk:event-controller} object}
-  @argument[name]{a string with the name for the controller}
+  @argument[name]{a string for the name for the controller}
   @begin{short}
     Accessor of the @slot[gtk:event-controller]{name} slot of the
     @class{gtk:event-controller} class.
@@ -247,20 +247,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-limit"
                                                'event-controller) t)
- "The @code{propagation-limit} property of type
-  @symbol{gtk:propagation-limit} (Read / Write) @br{}
+ "The @code{propagation-limit} property of type @sym{gtk:propagation-limit}
+  (Read / Write) @br{}
   The limit for which events the controller will handle. @br{}
-  Default value: @code{:same-native}")
+  Default value: @val[gtk:propagation-limit]{:same-native}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-propagation-limit)
       "Accessor"
       (documentation 'event-controller-propagation-limit 'function)
- "@version{2024-7-26}
+ "@version{2025-07-25}
   @syntax{(gtk:event-controller-propagation-limit object) => limit}
   @syntax{(setf (gtk:event-controller-propagation-limit object) limit)}
   @argument[object]{a @class{gtk:event-controller} object}
-  @argument[limit]{a value of the @symbol{gtk:propagation-limit} enumeration}
+  @argument[limit]{a value of the @sym{gtk:propagation-limit} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:event-controller]{propagation-limit} slot of the
     @class{gtk:event-controller} class.
@@ -280,20 +280,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-phase"
                                                'event-controller) t)
- "The @code{propagation-phase} property of type
-  @symbol{gtk:propagation-phase} (Read / Write) @br{}
+ "The @code{propagation-phase} property of type @sym{gtk:propagation-phase}
+  (Read / Write) @br{}
   The propagation phase at which this controller will handle events. @br{}
-  Default value: @code{:bubble}")
+  Default value: @val[gtk:propagation-phase]{:bubble}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'event-controller-propagation-phase)
       "Accessor"
       (documentation 'event-controller-propagation-phase 'function)
- "@version{2024-7-26}
+ "@version{2025-07-25}
   @syntax{(gtk:event-controller-propagation-phase object) => phase}
   @syntax{(setf (gtk:event-controller-propagation-phase object) phase)}
   @argument[object]{a @class{gtk:event-controller} object}
-  @argument[phase]{a value of the @symbol{gtk:propagation-phase} enumeration}
+  @argument[phase]{a value of the @sym{gtk:propagation-phase} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:event-controller]{propagation-phase} slot of the
     @class{gtk:event-controller} class.
@@ -320,7 +320,7 @@
 (setf (liber:alias-for-function 'event-controller-widget)
       "Accessor"
       (documentation 'event-controller-widget 'function)
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @syntax{(gtk:event-controller-widget object) => widget}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[widget]{a @class{gtk:widget} object}
@@ -339,7 +339,7 @@
 
 (cffi:defcfun ("gtk_event_controller_reset" event-controller-reset) :void
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2024-07-26}
   @argument[controller]{a @class{gtk:event-controller} object}
   @short{Resets the controller to a clean state.}
   @see-class{gtk:event-controller}"
@@ -357,10 +357,12 @@
 
 (defun event-controller-current-event (controller)
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2025-07-26}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The @class{gdk:event} instance that is currently handled by
-    @arg{controller}, or @code{nil}.}
+  @begin{return}
+    The @class{gdk:event} instance that is currently handled by
+    @arg{controller}, or @code{nil}.
+  @end{return}
   @begin{short}
     Returns the event that is currently being handled by the controller, and
     @code{nil} at other times.
@@ -380,10 +382,11 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_device"
                event-controller-current-event-device) (g:object gdk:device)
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2025-07-26}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The @class{gdk:device} object that is currently handled by
-    @arg{controller}.}
+  @begin{return}
+    The @class{gdk:device} object that is currently handled by @arg{controller}.
+  @end{return}
   @begin{short}
     Returns the device of the event that is currently being handled by the
     controller, and @code{nil} otherwise.
@@ -401,10 +404,12 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_state"
                event-controller-current-event-state) gdk:modifier-type
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2025-07-25}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The @symbol{gdk:modifier-type} state that is currently handled by
-    @arg{controller}.}
+  @begin{return}
+    The @sym{gdk:modifier-type} state that is currently handled by
+    @arg{controller}.
+  @end{return}
   @begin{short}
     Returns the modifier state of the event that is currently being handled by
     the controller.
@@ -422,10 +427,12 @@
 (cffi:defcfun ("gtk_event_controller_get_current_event_time"
                event-controller-current-event-time) :uint32
  #+liber-documentation
- "@version{2024-7-26}
+ "@version{2025-07-26}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The unsigned integer with the timestamp of the event that is currently
-    handled by @arg{controller}.}
+  @begin{return}
+    The unsigned integer for the timestamp of the event that is currently
+    handled by @arg{controller}.
+  @end{return}
   @begin{short}
     Returns the timestamp of the event that is currently being handled by the
     controller, and 0 otherwise.

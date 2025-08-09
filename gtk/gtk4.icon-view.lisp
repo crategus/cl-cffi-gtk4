@@ -29,7 +29,7 @@
 ;;;
 ;;; GtkIconView
 ;;;
-;;;     A widget which displays a list of icons in a grid
+;;;     A widget that displays a list of icons in a grid
 ;;;
 ;;; Types and Values
 ;;;

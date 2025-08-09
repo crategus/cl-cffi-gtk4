@@ -248,18 +248,19 @@
 (setf (liber:alias-for-function 'media-stream-error)
       "Accessor"
       (documentation 'media-stream-error 'function)
- "@version{2025-05-30}
+ "@version{2025-07-05}
   @syntax{(gtk:media-stream-error object) => error}
   @argument[object]{a @class{gtk:media-stream} object}
-  @argument[error]{@code{nil} if not in an error state or the @class{g:error}
+  @argument[error]{@code{nil} if not in an error state or the @class{glib:error}
     instance of the stream}
   @begin{short}
     Accessor of the @slot[gtk:media-stream]{error} slot of the
     @class{gtk:media-stream} class.
   @end{short}
   If the stream is in an error state, the @fun{gtk:media-stream-error} function
-  returns the @class{g:error} instance explaining that state. Any type of error
-  can be reported here depending on the implementation of the media stream.
+  returns the @class{glib:error} instance explaining that state. Any type of
+  error can be reported here depending on the implementation of the media
+  stream.
 
   A media stream in an error cannot be operated on, calls like the
   @fun{gtk:media-stream-play} or @fun{gtk:media-stream-seek} functions will not
@@ -270,7 +271,7 @@
   @class{gtk:media-file} object will unset errors when a new source is set,
   for example, with the @setf{gtk:media-file-file} function.
   @see-class{gtk:media-stream}
-  @see-class{g:error}
+  @see-class{glib:error}
   @see-class{gtk:media-file}
   @see-function{gtk:media-stream-error}
   @see-function{gtk:media-stream-play}

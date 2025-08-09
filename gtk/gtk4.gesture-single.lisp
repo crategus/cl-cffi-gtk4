@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-single.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-single 'type)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @begin{short}
     The @class{gtk:gesture-single} class is a @class{gtk:gesture} implementation
     optimized for single-touch and mouse gestures.
@@ -129,11 +129,11 @@
 (setf (liber:alias-for-function 'gesture-single-button)
       "Accessor"
       (documentation 'gesture-single-button 'function)
- "@version{2024-2-19}
+ "@version{2025-07-27}
   @syntax{(gtk:gesture-single-button object) => button}
   @syntax{(setf (gtk:gesture-single-button object) button)}
   @argument[object]{a @class{gtk:gesture-single} object}
-  @argument[button]{an unsigned integer with the button number to listen to,
+  @argument[button]{an unsigned integer for the button number to listen to,
     or 0 for any button}
   @begin{short}
     Accessor of the @slot[gtk:gesture-single]{button} slot of the
@@ -159,7 +159,7 @@
 (setf (liber:alias-for-function 'gesture-single-exclusive)
       "Accessor"
       (documentation 'gesture-single-exclusive 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:gesture-single-exclusive object) => exclusive}
   @syntax{(setf (gtk:gesture-single-exclusive object) exclusive)}
   @argument[object]{a @class{gtk:gesture-single} object}
@@ -187,7 +187,7 @@
 (setf (liber:alias-for-function 'gesture-single-touch-only)
       "Accessor"
       (documentation 'gesture-single-touch-only 'function)
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @syntax{(gtk:gesture-single-touch-only object) => touch-only}
   @syntax{(setf (gtk:gesture-single-touch-only object) touch-only)}
   @argument[object]{a @class{gtk:gesture-single} object}
@@ -212,9 +212,9 @@
 (cffi:defcfun ("gtk_gesture_single_get_current_button"
                gesture-single-current-button) :uint
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2025-07-27}
   @argument[gesture]{a @class{gtk:gesture-single} object}
-  @return{The unsigned integer with the current button number.}
+  @return{The unsigned integer for the current button number.}
   @begin{short}
     Returns the button number currently interacting with @arg{gesture}, or 0 if
     there is none.
@@ -231,7 +231,7 @@
 (cffi:defcfun ("gtk_gesture_single_get_current_sequence"
                gesture-single-current-sequence) (g:boxed gdk:event-sequence)
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @argument[gesture]{a @class{gtk:gesture-single} object}
   @return{The current @class{gdk:event-sequence} instance.}
   @begin{short}

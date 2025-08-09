@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-cell 'type)
- "@version{2025-4-25}
+ "@version{2025-04-25}
   @begin{short}
     The @class{gtk:column-view-cell} object is used by the
     @class{gtk:column-view-column} object to represent items in a cell in the
@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'column-view-cell-child)
       "Accessor"
       (documentation 'column-view-cell-child 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-cell-child object) => child}
   @syntax{(setf (gtk:column-view-cell-child object) child)}
   @argument[object]{a @class{gtk:column-view-cell} object}
@@ -160,7 +160,7 @@
 (setf (liber:alias-for-function 'column-view-cell-focusable)
       "Accessor"
       (documentation 'column-view-cell-focusable 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-cell-focusable object) => focusable}
   @syntax{(setf (gtk:column-view-cell-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-cell} object}
@@ -194,7 +194,7 @@
 (setf (liber:alias-for-function 'column-view-cell-item)
       "Accessor"
       (documentation 'column-view-cell-item 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-cell-item object) => item}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[item]{a @class{g:object} instance for the item displayed}
@@ -221,7 +221,7 @@
 (setf (liber:alias-for-function 'column-view-cell-position)
       "Accessor"
       (documentation 'column-view-cell-position 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-cell-position object) => position}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[position]{an unsigned integer for the position of the item}
@@ -248,7 +248,7 @@
 (setf (liber:alias-for-function 'column-view-cell-selected)
       "Accessor"
       (documentation 'column-view-cell-selected 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-cell-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[selected]{a boolean whether the item is currently selected}

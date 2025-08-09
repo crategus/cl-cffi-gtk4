@@ -140,32 +140,31 @@ create_layout_child (GtkLayoutManager *manager,
 
 (defun layout-manager-measure (layout widget orientation size)
  #+liber-documentation
- "@version{2025-07-12}
+ "@version{2025-08-07}
   @syntax{(gtk:layout-manager-measure layout widget orientation size) =>
-    minimum, natural, minimum-baseline, natural-baseline}
+    min, nat, min-baseline, nat-baseline}
   @argument[layout]{a @class{gtk:layout-manager} object}
   @argument[widget]{a @class{gtk:widget} object using @arg{layout}}
   @argument[orientation]{a @sym{gtk:orientation} value to measure}
-  @argument[size]{an integer for the size for the opposite of @arg{orientation},
-    for instance, if the orientation is @val[gtk:orientation]{:horizontal},
-    this is the height of the widget, if the orientation is
-    @val[gtk:orientation]{:vertical}, this is the width of the widget, this
-    allows to measure the height for the given width, and the width for the
-    given height, use -1 if the size is not known}
-  @argument[minimum]{an integer for the minimum size for the given size and
+  @argument[size]{an integer for the size for the opposite of @arg{orientation}}
+  @argument[min]{an integer for the minimum size for the given size and
     orientation}
-  @argument[naturual]{an integer for the natural, or preferred size for the
+  @argument[nat]{an integer for the natural, or preferred size for the
     given size and orientation}
-  @argument[minimum-baseline]{an integer for the baseline position for the
-    minimum size}
-  @argument[natural-baseline]{an integer for the baseline position for the
-    natural size}
+  @argument[min-baseline]{an integer for the baseline position for the minimum
+    size}
+  @argument[nat-baseline]{an integer for the baseline position for the natural
+    size}
   @begin{short}
     Measures the size of the widget using @arg{layout}, for the given
     orientation and size.
   @end{short}
-  See the @class{gtk:widget} objects geometry management section for more
-  details.
+  For instance, if the orientation is @val[gtk:orientation]{:horizontal}, this
+  is the height of the widget, if the orientation is
+  @val[gtk:orientation]{:vertical}, this is the width of the widget, this allows
+  to measure the height for the given width, and the width for the given height,
+  use -1 if the size is not known. See the @class{gtk:widget} objects geometry
+  management section for more details.
   @see-class{gtk:layout-manager}
   @see-class{gtk:widget}
   @see-symbol{gtk:orientation}"
@@ -223,11 +222,11 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_request_mode"
                layout-manager-request-mode) size-request-mode
  #+liber-documentation
- "@version{2025-06-30}
+ "@version{2025-08-07}
   @argument[layout]{a @class{gtk:layout-manager} object}
   @return{The @sym{gtk:size-request-mode} value for @arg{layout}.}
   @begin{short}
-    Retrieves the request mode for the layout manager.
+    Retrieves the request mode of the layout manager.
   @end{short}
   @see-class{gtk:layout-manager}
   @see-symbol{gtk:size-request-mode}"

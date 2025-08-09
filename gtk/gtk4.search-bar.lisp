@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.search-bar.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'search-bar 'type)
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @begin{short}
     The @class{gtk:search-bar} widget is a container made to have a search
     entry.
@@ -159,8 +159,9 @@ searchbar
     the @code{.close} style class applied.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:search-bar} implementation uses the @code{:search} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:search-bar} implementation uses the
+    @val[gtk:accessible-role]{:search} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:search-bar-new}
   @see-slot{gtk:search-bar-child}
@@ -185,7 +186,7 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-child)
       "Accessor"
       (documentation 'search-bar-child 'function)
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @syntax{(gtk:search-bar-child object) => child}
   @syntax{(setf (gtk:search-bar-child object) child)}
   @argument[object]{a @class{gtk:search-bar} widget}
@@ -212,7 +213,7 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-key-capture-widget)
       "Accessor"
       (documentation 'search-bar-key-capture-widget 'function)
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @syntax{(gtk:search-bar-key-capture-widget object) => widget}
   @syntax{(setf (gtk:search-bar-key-capture-widget object) widget)}
   @argument[object]{a @class{gtk:search-bar} widget}
@@ -245,11 +246,11 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-search-mode-enabled)
       "Accessor"
       (documentation 'search-bar-search-mode-enabled 'function)
- "@version{2024-4-20}
+ "@version{2025-07-17}
   @syntax{(gtk:search-bar-search-mode-enabled object) => mode}
   @syntax{(setf (gtk:search-bar-search-mode-enabled object) mode)}
   @argument[object]{a @class{gtk:search-bar} widget}
-  @argument[mode]{a boolean with the state of the search mode}
+  @argument[mode]{a boolean for the state of the search mode}
   @begin{short}
     Accessor of the @slot[gtk:search-bar]{search-mode-enabled} slot of the
     @class{gtk:search-bar} class.
@@ -271,7 +272,7 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-show-close-button)
       "Accessor"
       (documentation 'search-bar-show-close-button 'function)
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @syntax{(gtk:search-bar-show-close-button object) => visible}
   @syntax{(setf (gtk:search-bar-show-close-button object) visible)}
   @argument[object]{a @class{gtk:search-bar} widget}
@@ -294,7 +295,7 @@ searchbar
 
 (defun search-bar-new ()
  #+liber-documentation
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @return{The new @class{gtk:search-bar} widget.}
   @begin{short}
     Creates a search bar.
@@ -313,7 +314,7 @@ searchbar
 
 (cffi:defcfun ("gtk_search_bar_connect_entry" search-bar-connect-entry) :void
  #+liber-documentation
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @argument[searchbar]{a @class{gtk:search-bar} widget}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}

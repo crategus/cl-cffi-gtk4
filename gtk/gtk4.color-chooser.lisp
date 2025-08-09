@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.color-chooser.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -89,7 +89,7 @@
 (setf (liber:alias-for-class 'color-chooser)
       "Interface"
       (documentation 'color-chooser 'type)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @begin{short}
     The @class{gtk:color-chooser} interface is an interface that is implemented
     by widgets for choosing colors.
@@ -106,19 +106,20 @@
     instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"color-activated\" signal}
+    @begin[color-chooser::color-activated]{signal}
       @begin{pre}
 lambda (chooser color)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[chooser]{The @class{gtk:color-chooser} widget which received
+      @begin[code]{simple-table}
+        @entry[chooser]{The @class{gtk:color-chooser} widget that received
           the signal.}
         @entry[color]{The @struct{gdk:rgba} color.}
-      @end{table}
+      @end{simple-table}
       Emitted when a color is activated from the color chooser. This usually
       happens when the user clicks a color swatch, or a color is selected and
       the user presses one of the @kbd{Space}, @kbd{Shift+Space}, @kbd{Return}
       or @kbd{Enter} keys.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:color-chooser-rgba}
   @see-slot{gtk:color-chooser-use-alpha}
@@ -143,7 +144,7 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-rgba)
       "Accessor"
       (documentation 'color-chooser-rgba 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-chooser-rgba object) => color}
   @syntax{(setf (gtk:color-chooser-rgba object) color)}
   @argument[object]{a @class{gtk:color-chooser} widget}
@@ -177,7 +178,7 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-use-alpha)
       "Accessor"
       (documentation 'color-chooser-use-alpha 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-chooser-use-alpha object) => use-alpha}
   @syntax{(setf (gtk:color-chooser-use-alpha object) use-alpha)}
   @argument[object]{a @class{gtk:color-chooser} widget}
@@ -209,12 +210,12 @@ lambda (chooser color)    :run-first
 
 (defun color-chooser-add-palette (chooser orientation colors-per-line colors)
  #+liber-documentation
- "@version{2024-5-21}
+ "@version{2025-07-27}
   @argument[chooser]{a @class{gtk:color-chooser} widget}
-  @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
-  @argument[colors-per-line]{an integer with the number of colors to show in
+  @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
+  @argument[colors-per-line]{an integer for the number of colors to show in
     each row/column}
-  @argument[colors]{a list with the @struct{gdk:rgba} colors of the palette,
+  @argument[colors]{a list for the @struct{gdk:rgba} colors of the palette,
     or @code{nil}}
   @begin{short}
     Adds a palette to the color chooser.
@@ -266,15 +267,14 @@ lambda (chooser color)    :run-first
 
 (defun hsv-to-rgb (h s v)
  #+liber-documentation
- "@version{2024-5-21}
-  @argument[h]{a number coerced to a float with the hue component}
-  @argument[s]{a number coerced to a float with the saturation component}
-  @argument[v]{a number coerced to a float with the value component}
-  @begin{return}
-    @arg{r} -- a float with the red component @br{}
-    @arg{g} -- a float with the green component @br{}
-    @arg{b} -- a float with the blue component
-  @end{return}
+ "@version{2025-07-26}
+  @syntax{(gtk:hsv-to-rgb h s v) => r, g, b}
+  @argument[h]{a number coerced to a single float for the hue component}
+  @argument[s]{a number coerced to a single float for the saturation component}
+  @argument[v]{a number coerced to a single float for the value component}
+  @argument[r]{a single float for the red component}
+  @argument[g]{a single float for the green component}
+  @argument[b]{a single float for the blue component}
   @begin{short}
     Converts a color from HSV space to RGB. Input values must be in the
     [0.0, 1.0] range, output values will be in the same range.
@@ -307,15 +307,14 @@ lambda (chooser color)    :run-first
 
 (defun rgb-to-hsv (r g b)
  #+liber-documentation
- "@version{2024-5-21}
-  @argument[r]{a number coerced to a float with the red component}
-  @argument[g]{a number coerced to a float with the green component}
-  @argument[b]{a number coerced to a float with the blue component}
-  @begin{return}
-    @arg{h} -- a float with the hue component @br{}
-    @arg{s} -- a float with the saturation component @br{}
-    @arg{v} -- a float with the value component
-  @end{return}
+ "@version{2025-07-26}
+  @syntax{(gtk:rgb-to-hsv r g b) => h, s, v}
+  @argument[r]{a number coerced to a single float for the red component}
+  @argument[g]{a number coerced to a single float for the green component}
+  @argument[b]{a number coerced to a single float for the blue component}
+  @argument[h]{a single float for the hue component}
+  @argument[s]{a single float for the saturation component}
+  @argument[v]{a single float for the value component}
   @begin{short}
     Converts a color from RGB space to HSV. Input values must be in the
     [0.0, 1.0] range. Output values will be in the same range.

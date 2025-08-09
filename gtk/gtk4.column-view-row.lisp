@@ -102,7 +102,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view-row 'type)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @begin{short}
     The @class{gtk:column-view-row} object is used by the
     @class{gtk:column-view} widget to allow configuring how rows are displayed.
@@ -141,7 +141,7 @@
 (setf (liber:alias-for-function 'column-view-row-accessible-description)
       "Accessor"
       (documentation 'column-view-row-accessible-description 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-accessible-description object) => description}
   @syntax{(setf (gtk:column-view-row-accessible-description object) description)}
   @argument[object]{a @class{gtk:column-view-row} object}
@@ -172,7 +172,7 @@
 (setf (liber:alias-for-function 'column-view-row-accessible-label)
       "Accessor"
       (documentation 'column-view-row-accessible-label 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-accessible-label object) => label}
   @syntax{(setf (gtk:column-view-row-accessible-label object) label)}
   @argument[object]{a @class{gtk:column-view-row} object}
@@ -202,7 +202,7 @@
 (setf (liber:alias-for-function 'column-view-row-activatable)
       "Accessor"
       (documentation 'column-view-row-activatable 'function)
- "@version{2025-4-13}
+ "@version{2025-07-21}
   @syntax{(gtk:column-view-row-activatable object) => activatable}
   @syntax{(setf (gtk:column-view-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:column-view-row} object}
@@ -218,7 +218,7 @@
   If a row is activatable, double-clicking on the row, using the @kbd{Return}
   key or calling the @fun{gtk:widget-activate} function will activate the row.
   Activating instructs the containing columnview to emit the
-  @code{\"GtkColumnView::activate\"} signal.
+  @sig[gtk:column-view]{activate} signal.
 
   By default, the rows are activatable.
 
@@ -238,7 +238,7 @@
 (setf (liber:alias-for-function 'column-view-row-focusable)
       "Accessor"
       (documentation 'column-view-row-focusable 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-focusable object) => focusable}
   @syntax{(setf (gtk:column-view-row-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-row} object}
@@ -272,7 +272,7 @@
 (setf (liber:alias-for-function 'column-view-row-item)
       "Accessor"
       (documentation 'column-view-row-item 'function)
- "@version{2025-4-25}
+ "@version{2025-04-25}
   @syntax{(gtk:column-view-row-item object) => item}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[item]{a @class{g:object} instance for the item of the row}
@@ -300,7 +300,7 @@
 (setf (liber:alias-for-function 'column-view-row-position)
       "Accessor"
       (documentation 'column-view-row-position 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-position object) => position}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[position]{an unsigned integer for the position of the row}
@@ -328,7 +328,7 @@
 (setf (liber:alias-for-function 'column-view-row-selectable)
       "Accessor"
       (documentation 'column-view-row-selectable 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-selectable object) => selectable}
   @syntax{(setf (gtk:column-view-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:column-view-row} object}
@@ -365,7 +365,7 @@
 (setf (liber:alias-for-function 'column-view-row-selected)
       "Accessor"
       (documentation 'column-view-row-selected 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[selected]{a boolean whether the item in the row is selected}

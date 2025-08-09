@@ -139,18 +139,16 @@
 (setf (liber:alias-for-function 'grid-layout-child-column)
       "Accessor"
       (documentation 'grid-layout-child-column 'function)
- "@version{#2025-06-30}
+ "@version{#2025-08-01}
   @syntax{(gtk:grid-layout-child-column object) => column}
   @syntax{(setf (gtk:grid-layout-child-column object) column)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
   @argument[column]{an integer for the column to place the child widget in}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout-child]{column} slot of the
-    @class{gtk:grid-layout-child} class.
+    The accessor for the @slot[gtk:grid-layout-child]{column} slot of the
+    @class{gtk:grid-layout-child} class gets or sets the column number to which
+    child attaches its left side.
   @end{short}
-  The @fun{gtk:grid-layout-child-column} function retrieves the column number
-  to which child attaches its left side. The
-  @setf{gtk:grid-layout-child-column} function sets the column number.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- gtk:grid-layout-child-column-span --------------------------------------
@@ -167,18 +165,16 @@
 (setf (liber:alias-for-function 'grid-layout-child-column-span)
       "Accessor"
       (documentation 'grid-layout-child-column-span 'function)
- "@version{#2025-06-30}
+ "@version{#2025-08-01}
   @syntax{(gtk:grid-layout-child-column-span object) => span}
   @syntax{(setf (gtk:grid-layout-child-column-span object) span)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
   @argument[span]{an integer for the number of columns}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout-child]{column-span} slot of the
-    @class{gtk:grid-layout-child} class.
+    The accessor for the @slot[gtk:grid-layout-child]{column-span} slot of the
+    @class{gtk:grid-layout-child} class gets or sets the number of columns that
+    the child widget spans to.
   @end{short}
-  The @fun{gtk:grid-layout-child-column-span} function retrieves the number of
-  columns that the child widget spans to. The
-  @setf{gtk:grid-layout-child-column-span} function sets the number of columns.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- gtk:grid-layout-child-row ----------------------------------------------
@@ -193,18 +189,16 @@
 (setf (liber:alias-for-function 'grid-layout-child-row)
       "Accessor"
       (documentation 'grid-layout-child-row 'function)
- "@version{#2025-06-30}
+ "@version{#2025-08-01}
   @syntax{(gtk:grid-layout-child-row object) => row}
   @syntax{(setf (gtk:grid-layout-child-column object) row)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
   @argument[row]{an integer for the row to place the child widget in}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout-child]{row} slot of the
-    @class{gtk:grid-layout-child} class.
+    The accessor for the @slot[gtk:grid-layout-child]{row} slot of the
+    @class{gtk:grid-layout-child} class gets or sets the row number to which
+    child attaches its top side.
   @end{short}
-  The @fun{gtk:grid-layout-child-row} function retrieves the row number to
-  which child attaches its top side. The
-  @setf{gtk:grid-layout-child-row} function sets the row number.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- gtk:grid-layout-child-row-span -----------------------------------------
@@ -220,18 +214,16 @@
 (setf (liber:alias-for-function 'grid-layout-child-row-span)
       "Accessor"
       (documentation 'grid-layout-child-row-span 'function)
- "@version{#2025-06-30}
+ "@version{#2025-08-01}
   @syntax{(gtk:grid-layout-child-row-span object) => span}
   @syntax{(setf (gtk:grid-layout-child-row-span object) span)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
   @argument[span]{an integer for the number of rows}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout-child]{row-span} slot of the
-    @class{gtk:grid-layout-child} class.
+    The accessor for the @slot[gtk:grid-layout-child]{row-span} slot of the
+    @class{gtk:grid-layout-child} class gets or sets the number of rows that
+    the child widget spans to.
   @end{short}
-  The @fun{gtk:grid-layout-child-row-span} function retrieves the number of
-  rows that the child widget spans to. The @setf{gtk:grid-layout-child-row-span}
-  function sets the number of rows.
   @see-class{gtk:grid-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
@@ -300,7 +292,7 @@
 (setf (documentation (liber:slot-documentation "baseline-row" 'grid-layout) t)
  "The @code{baseline-row} property of type @code{:int} (Read / Write) @br{}
   The row to align to the baseline, when the @slot[gtk:widget]{valign} property
-  is set to @val[gtk:align]{:baseline}. @br{}
+  is set to @val[gtk:align]{:baseline-fill}. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -308,18 +300,16 @@
 (setf (liber:alias-for-function 'grid-layout-baseline-row)
       "Accessor"
       (documentation 'grid-layout-baseline-row 'function)
- "@version{2025-06-30}
+ "@version{2025-08-03}
   @syntax{(gtk:grid-layout-baseline-row object) => row}
   @syntax{(setf (gtk:grid-layout-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid-layout} object}
   @argument[row]{an integer for the row index}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout]{baseline-row} slot of the
-    @class{gtk:grid-layout} class.
+    The accessor for the @slot[gtk:grid-layout]{baseline-row} slot of the
+    @class{gtk:grid-layout} class gets or sets which row defines the global
+    baseline for the entire grid.
   @end{short}
-  The @fun{gtk:grid-layout-baseline-row} function retrieves the baseline row.
-  The @setf{gtk:grid-layout-baseline-row} function sets which row defines the
-  global baseline for the entire grid.
 
   Each row in the grid can have its own local baseline, but only one of those
   is global, meaning it will be the baseline in the parent of the grid widget.
@@ -339,20 +329,17 @@
 (setf (liber:alias-for-function 'grid-layout-column-homogeneous)
       "Accessor"
       (documentation 'grid-layout-column-homogeneous 'function)
- "@version{2024-04-23}
+ "@version{2025.08-03}
   @syntax{(gtk:grid-layout-column-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-layout-column-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid-layout} object}
   @argument[homogeneous]{a boolean whether all the columns in the grid have the
     same width}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout]{column-homogeneous} slot of the
-    @class{gtk:grid-layout} class.
+    The accessor for the @slot[gtk:grid-layout]{column-homogeneous} slot of the
+    @class{gtk:grid-layout} class gets or sets whether all columns of the grid
+    should have the same width.
   @end{short}
-  The @fun{gtk:grid-layout-column-homogeneous} function checks whether all
-  columns of the grid should have the same width. The
-  @setf{gtk:grid-layout-column-homogeneous} function sets whether all columns
-  of the grid should have the same width.
   @see-class{gtk:grid-layout}")
 
 ;;; --- gtk:grid-layout-column-spacing -----------------------------------------
@@ -368,19 +355,17 @@
 (setf (liber:alias-for-function 'grid-layout-column-spacing)
       "Accessor"
       (documentation 'grid-layout-column-spacing 'function)
- "@version{2025-06-30}
+ "@version{2025-08-03}
   @syntax{(gtk:grid-layout-column-spacing object) => spacing}
   @syntax{(setf (gtk:grid-layout-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid-layout} object}
   @argument[spacing]{an integer for the amount of space between to consecutive
     columns}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout]{column-spacing} slot of the
-    @class{gtk:grid-layout} class.
+    The accessor for the @slot[gtk:grid-layout]{column-spacing} slot of the
+    @class{gtk:grid-layout} class gets or sets the amount of space to insert
+    between consecutive columns.
   @end{short}
-  The @fun{gtk:grid-layout-column-spacing} function retrieves the amount of
-  space to insert between consecutive columns. The
-  @setf{gtk:grid-layout-column-spacing} function sets the spacing.
   @see-class{gtk:grid-layout}")
 
 ;;; --- gtk:grid-layout-row-homogeneous ----------------------------------------
@@ -397,20 +382,17 @@
 (setf (liber:alias-for-function 'grid-layout-row-homogeneous)
       "Accessor"
       (documentation 'grid-layout-row-homogeneous 'function)
- "@version{2024-04-23}
+ "@version{2025-08-03}
   @syntax{(gtk:grid-layout-row-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:grid-layout-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid-layout} object}
   @argument[homogeneous]{a boolean whether all the rows in the grid have the
     same height}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout]{row-homogeneous} slot of the
-    @class{gtk:grid-layout} class.
+    The accessor for the @slot[gtk:grid-layout]{row-homogeneous} slot of the
+    @class{gtk:grid-layout} class gets or sets whether all rows of the grid
+    should have the same height.
   @end{short}
-  The @fun{gtk:grid-layout-row-homogeneous} function checks whether all
-  rows of the grid should have the same height. The
-  @setf{gtk:grid-layout-row-homogeneous} function sets whether all rows of the
-  grid should have the same height.
   @see-class{gtk:grid-layout}")
 
 ;;; --- gtk:grid-layout-row-spacing --------------------------------------------
@@ -426,19 +408,17 @@
 (setf (liber:alias-for-function 'grid-layout-row-spacing)
       "Accessor"
       (documentation 'grid-layout-row-spacing 'function)
- "@version{2025-06-30}
+ "@version{2025-08-03}
   @syntax{(gtk:grid-layout-row-spacing object) => spacing}
   @syntax{(setf (gtk:grid-layout-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid-layout} object}
   @argument[spacing]{an integer for the amount of space between to consecutive
     rows}
   @begin{short}
-    Accessor of the @slot[gtk:grid-layout]{row-spacing} slot of the
-    @class{gtk:grid-layout} class.
+    The accessor for the @slot[gtk:grid-layout]{row-spacing} slot of the
+    @class{gtk:grid-layout} class gets or sets the amount of space to insert
+    between consecutive rows.
   @end{short}
-  The @fun{gtk:grid-layout-row-spacing} function retrieves the amount of space
-  to insert between consecutive rows. The @setf{gtk:grid-layout-row-spacing}
-  function sets the spacing.
   @see-class{gtk:grid-layout}")
 
 ;;; ----------------------------------------------------------------------------

@@ -190,19 +190,16 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{2025-05-12}
+ "@version{2025-07-28}
   @syntax{(gtk:application-window-show-menubar object) => show}
   @syntax{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
   @argument[show]{a boolean whether to show a menubar when needed}
   @begin{short}
-    Accessor of the @slot[gtk:application-window]{show-menubar} slot of the
-    @class{gtk:application-window} class.
+    The accessor for the @slot[gtk:application-window]{show-menubar} slot of the
+    @class{gtk:application-window} class gets or sets whether the window will
+    display a menubar for the application menu and menubar as needed.
   @end{short}
-  The @fun{gtk:application-window-show-menubar} function returns whether the
-  window will display a menubar for the application menu and menubar as needed.
-  The @setf{gtk:application-window-show-menubar} function sets whether the
-  window will display a menubar.
   @see-class{gtk:application-window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -274,19 +271,16 @@
 
 (defun application-window-help-overlay (window)
  #+liber-documentation
- "@version{2025-05-12}
+ "@version{2025-08-03}
   @syntax{(gtk:application-window-help-overlay window) => overlay}
   @syntax{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}
   @argument[overlay]{a @class{gtk:shortcuts-window} widget}
   @begin{short}
-    Accessor of the shortcuts window associated with the application window.
+    Gets the shortcuts window, or associates a shortcuts window with the
+    application window, and sets up an action with the name
+    @code{\"win.show-help-overlay\"} to present it.
   @end{short}
-  The @fun{gtk:application-window-help-overlay} function gets the shortcuts
-  window. The @setf{gtk:application-window-help-overlay} function associates a
-  shortcuts window with the application window, and sets up an action with the
-  name @code{\"win.show-help-overlay\"} to present it.
-
   The window takes responsibility for destroying the help overlay.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.18. The @class{gtk:shortcuts-window}

@@ -314,18 +314,16 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-end-child)
       "Accessor"
       (documentation 'paned-end-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-end-child object) => child}
   @syntax{(setf (gtk:paned-end-child) object) child)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[child]{a @class{gtk:widget} second child widget}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{end-child} slot of the @class{gtk:paned}
-    class.
+    The accessor for the @slot[gtk:paned]{end-child} slot of the
+    @class{gtk:paned} class gets or sets the end child widget of the given
+    paned.
   @end{short}
-  The @fun{gtk:paned-end-child} function retrieves the end child widget of the
-  given paned. The @setf{gtk:paned-end-child} function sets the end child
-  widget.
   @see-class{gtk:paned}
   @see-class{gtk:widget}")
 
@@ -344,16 +342,15 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-max-position)
       "Accessor"
       (documentation 'paned-max-position 'function)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-max-position object) => position}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[position]{an integer for the largest possible position}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{max-position} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{max-position} slot of the
+    @class{gtk:paned} class gets the largest possible value for the position
+    property.
   @end{short}
-  The @fun{gtk:paned-max-position} function gets the largest possible value for
-  the position property.
   @see-class{gtk:paned}
   @see-function{gtk:paned-position}
   @see-function{gtk:paned-min-position}")
@@ -373,16 +370,15 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-min-position)
       "Accessor"
       (documentation 'paned-min-position 'function)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-min-position object) => position}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[position]{an integer for the smallest possible position}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{min-position} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{min-position} slot of the
+    @class{gtk:paned} class gets the smallest possible value for the position
+    property.
   @end{short}
-  The @fun{gtk:paned-min-position} function gets the smallest possible value
-  for the position property.
   @see-class{gtk:paned}
   @see-function{gtk:paned-position}
   @see-function{gtk:paned-max-position}")
@@ -401,19 +397,17 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-position)
       "Accessor"
       (documentation 'paned-position 'function)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-position object) => position}
   @syntax{(setf (gtk:paned-position position) position)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[position]{an integer for the pixel position of divider, a negative
     value means that the position is unset}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{position} slot of the @class{gtk:paned}
-    class.
+    The accessor for the @slot[gtk:paned]{position} slot of the
+    @class{gtk:paned} class gets or sets the position of the divider between
+    the two panes.
   @end{short}
-  The @fun{gtk:paned-position} function obtains the position of the divider
-  between the two panes. The @setf{gtk:paned-position} function sets the
-  position.
   @see-class{gtk:paned}
   @see-function{gtk:paned-max-position}
   @see-function{gtk:paned-min-position}")
@@ -431,20 +425,17 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-position-set)
       "Accessor"
       (documentation 'paned-position-set 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-position-set object) => setting}
   @syntax{(setf (gtk:paned-position-set position) setting)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[setting]{a boolean whether the @slot[gtk:paned]{position} property
     should be used}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{position-set} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{position-set} slot of the
+    @class{gtk:paned} class gets or sets whether the @slot[gtk:paned]{position}
+    property should be used.
   @end{short}
-  The @fun{gtk:paned-position-set} function gets whether the
-  @slot[gtk:paned]{position} property should be used. The
-  @setf{gtk:paned-position-set} function sets whether the property should be
-  used.
   @see-class{gtk:paned}
   @see-function{gtk:paned-position}")
 
@@ -462,18 +453,16 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-resize-end-child)
       "Accessor"
       (documentation 'paned-resize-end-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-resize-end-child object) => resize}
   @syntax{(setf (gtk:paned-resize-end-child) object) resize)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[resize]{a boolean whether the second child expands and shrinks}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{resize-end-child} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{resize-end-child} slot of the
+    @class{gtk:paned} class gets or sets whether the end child widget can be
+    resized.
   @end{short}
-  The @fun{gtk:paned-resize-end-child} function returns whether the end child
-  widget can be resized. The @setf{gtk:paned-resize-end-child} function sets
-  the property.
   @see-class{gtk:paned}")
 
 ;;; --- gtk:paned-resize-start-child -------------------------------------------
@@ -490,18 +479,16 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-resize-start-child)
       "Accessor"
       (documentation 'paned-resize-start-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-resize-start-child object) => resize}
   @syntax{(setf (gtk:paned-resize-start-child) object) resize)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[resize]{a boolean whether the first child expands and shrinks}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{resize-start-child} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{resize-start-child} slot of the
+    @class{gtk:paned} class gets or sets whether the first child widget can be
+    resized.
   @end{short}
-  The @fun{gtk:paned-resize-start-child} function returns whether the first
-  child widget can be resized. The @setf{gtk:paned-resize-start-child} function
-  sets the property.
   @see-class{gtk:paned}")
 
 ;;; --- gtk:paned-shrink-end-child ---------------------------------------------
@@ -518,19 +505,17 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-shrink-end-child)
       "Accessor"
       (documentation 'paned-shrink-end-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-shrink-end-child object) => shrink}
   @syntax{(setf (gtk:paned-shrink-end-child) object) shrink)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[shrink]{a boolean whether the second child can be made smaller than
     its requisition}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{shrink-end-child} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{shrink-end-child} slot of the
+    @class{gtk:paned} class gets or sets whether the second child widget can be
+    made smaller than its requisition.
   @end{short}
-  The @fun{gtk:paned-shrink-end-child} function returns whether the second
-  child widget can be made smaller than its requisition. The
-  @setf{gtk:paned-shrink-end-child} function sets the property.
   @see-class{gtk:paned}")
 
 ;;; --- gtk:paned-shrink-start-child -------------------------------------------
@@ -547,19 +532,17 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-shrink-start-child)
       "Accessor"
       (documentation 'paned-shrink-start-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-shrink-start-child object) => shrink}
   @syntax{(setf (gtk:paned-shrink-start-child) object) shrink)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[shrink]{a boolean whether the first child can be made smaller than
     its requisition}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{shrink-start-child} slot of the
-    @class{gtk:paned} class.
+    The accessor for the @slot[gtk:paned]{shrink-start-child} slot of the
+    @class{gtk:paned} class gets or sets whether the first child widget can be
+    made smaller than its requisition.
   @end{short}
-  The @fun{gtk:paned-shrink-start-child} function returns whether the first
-  child widget can be made smaller than its requisition. The
-  @setf{gtk:paned-shrink-start-child} function sets the property.
   @see-class{gtk:paned}")
 
 ;;; --- gtk:paned-start-child --------------------------------------------------
@@ -573,18 +556,16 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-start-child)
       "Accessor"
       (documentation 'paned-start-child 'function)
- "@version{2024-04-22}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-start-child object) => child}
   @syntax{(setf (gtk:paned-start-child) object) child)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[child]{a @class{gtk:widget} first child widget}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{start-child} slot of the @class{gtk:paned}
-    class.
+    The accessor for the @slot[gtk:paned]{start-child} slot of the
+    @class{gtk:paned} class gets or sets the start child widget of the given
+    paned.
   @end{short}
-  The @fun{gtk:paned-start-child} function retrieves the start child widget of
-  the given paned. The @setf{gtk:paned-start-child} function sets the start
-  child widget.
   @see-class{gtk:paned}
   @see-class{gtk:widget}")
 
@@ -602,19 +583,19 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'paned-wide-handle)
       "Accessor"
       (documentation 'paned-wide-handle 'function)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @syntax{(gtk:paned-wide-handle object) => wide}
   @syntax{(setf (gtk:paned-wide-handle object) wide)}
   @argument[object]{a @class{gtk:paned} widget}
   @argument[wide]{a boolean for the value of the @slot[gtk:paned]{wide-handle}
     property}
   @begin{short}
-    Accessor of the @slot[gtk:paned]{wide-handle} slot of the @class{gtk:paned}
-    class.
+    The accessor for the @slot[gtk:paned]{wide-handle} slot of the
+    @class{gtk:paned} class gets or sets whether the panded widget needs to
+    provide stronger visual separation.
   @end{short}
-  The @fun{gtk:paned-wide-handle} function gets the
-  @slot[gtk:paned]{wide-handle} property. The @setf{gtk:paned-wide-handle}
-  function sets the property.
+  For example, because it separates between two notebooks, whose tab rows would
+  otherwise merge visually.
   @see-class{gtk:paned}")
 
 ;;; ----------------------------------------------------------------------------

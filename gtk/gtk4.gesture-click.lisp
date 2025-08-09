@@ -2,8 +2,8 @@
 ;;; gtk4.gesture-click.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -70,76 +70,82 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-click 'type)
- "@version{2025-2-22}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:gesture-click} class is a @class{gtk:gesture} implementation
     for clicks.
   @end{short}
   It is able to recognize multiple clicks on a nearby zone, which can be
-  listened for through the @code{\"pressed\"} signal. Whenever time or distance
-  between clicks exceed the GTK defaults, the @code{\"stopped\"} signal is
-  emitted, and the click counter is reset.
+  listened for through the @sig[gtk:gesture-click]{pressed} signal. Whenever
+  time or distance between clicks exceed the GTK defaults, the
+  @sig[gtk:gesture-click]{stopped} signal is emitted, and the click counter is
+  reset.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"pressed\" signal}
+    @begin[gesture-click::pressed]{signal}
       @begin{pre}
 lambda (gesture n x y)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-click} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-click} object that received the
           signal.}
         @entry[n]{The integer of how many touch/button press happened with this
           one.}
-        @entry[x]{The double float with the x coordinate, in widget allocation
+        @entry[x]{The double float for the x coordinate, in widget allocation
           coordinates.}
-        @entry[y]{The double float with the y coordinate, in widget allocation
+        @entry[y]{The double float for the y coordinate, in widget allocation
           coordinates.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever a button or touch press happens.
-    @subheading{The \"released\" signal}
+    @end{signal}
+    @begin[gesture-click::released]{signal}
       @begin{pre}
 lambda (gesture n x y)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-click} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-click} object that received the
           signal.}
-        @entry[n]{The integer with the number of presses that is paired with
+        @entry[n]{The integer for the number of presses that is paired with
           this release.}
-        @entry[x]{The double float with the x coordinate, in widget allocation
+        @entry[x]{The double float for the x coordinate, in widget allocation
           coordinates.}
-        @entry[y]{The double float with the y coordinate, in widget allocation
+        @entry[y]{The double float for the y coordinate, in widget allocation
           coordinates.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a button or touch is released. The @arg{n}
       argument will report the number of press that is paired to this event,
-      note that the @code{\"stopped\"} signal may have been emitted between the
-      press and its release, @arg{n} will only start over at the next press.
-    @subheading{The \"stopped\" signal}
+      note that the @sig[gtk:gesture-click]{stopped} signal may have been
+      emitted between the press and its release, @arg{n} will only start over
+      at the next press.
+    @end{signal}
+    @begin[gesture-click::stopped]{signal}
       @begin{pre}
 lambda (gesture)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-click} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-click} object that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever any time/distance threshold has been
       exceeded.
-    @subheading{The \"unpaired-release\" signal}
+    @end{signal}
+    @begin[gesture-click::unpaired-release]{signal}
       @begin{pre}
 lambda (gesture x y button sequence)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-click} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-click} object that received the
           signal.}
-        @entry[x]{The double float with the x coordinate of the event.}
-        @entry[y]{The double float with the y coordinate of the event.}
-        @entry[button]{The unsigned integer with the button being released.}
+        @entry[x]{The double float for the x coordinate of the event.}
+        @entry[y]{The double float for the y coordinate of the event.}
+        @entry[button]{The unsigned integer for the button being released.}
         @entry[sequence]{The @class{gdk:event-sequence} instance being
           released.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the gesture receives a release event that
       had no previous corresponding press. Due to implicit grabs, this can only
       happen on situations where input is grabbed elsewhere mid-press or the
       pressed widget voluntarily relinquishes its implicit grab.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:gesture-click-new}
   @see-class{gtk:gesture}")
@@ -152,7 +158,7 @@ lambda (gesture x y button sequence)    :run-last
 
 (defun gesture-click-new ()
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @return{The newly created @class{gtk:gesture-click} object.}
   @begin{short}
     Returns a newly created gesture that recognizes single and multiple presses.

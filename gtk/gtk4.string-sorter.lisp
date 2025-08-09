@@ -79,7 +79,7 @@
 (setf (liber:alias-for-symbol 'collation)
       "GEnum"
       (liber:symbol-documentation 'collation)
- "@version{2024-10-24}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkCollation\" collation
   (:export t
@@ -89,19 +89,19 @@
   (:filename 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Do not do any collation.}
       @entry[:unicode]{Use the @code{g_utf8_collate_key()} function.}
       @entry[:filename]{Use the @code{g_utf8_collate_key_for_filename()}
         function.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes how a @class{gtk:string-sorter} object turns strings into sort
     keys to compare them.
   @end{short}
   Note that the result of sorting will in general depend on the current locale
-  unless the mode is @code{:none}.
+  unless the mode is @val[gtk:collation]{:none}.
 
   Since 4.10
   @see-class{gtk:string-sorter}")
@@ -128,7 +128,7 @@
 
 #+liber-documentation
 (setf (documentation 'string-sorter 'type)
- "@version{2024-10-24}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:string-sorter} object is a @class{gtk:sorter} implementation
     that compares strings.
@@ -154,23 +154,23 @@
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "collation" 'string-sorter) t)
- "The @code{collation} property of type @symbol{gtk:collation} (Read / Write)
-  @br{}
-  The collation method to use for sorting. The @code{:none} value is useful
-  when the expression already returns collation keys, or strings that need to
-  be compared byte-by-byte. The default value, @code{:unicode}, compares
-  strings according to the Unicode collation algorithm. Since 4.10 @br{}
-  Default value: @code{:unicode}")
+ "The @code{collation} property of type @sym{gtk:collation} (Read / Write) @br{}
+  The collation method to use for sorting. The @val[gtk:collation]{:none} value
+  is useful when the expression already returns collation keys, or strings that
+  need to be compared byte-by-byte. The default value,
+  @val[gtk:collation]{:unicode}, compares strings according to the Unicode
+  collation algorithm. Since 4.10 @br{}
+  Default value: @val[gtk:collation]{:unicode}")
 
 #+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'string-sorter-collation)
       "Accessor"
       (documentation 'string-sorter-collation 'function)
- "@version{2024-10-24}
+ "@version{2025-07-27}
   @syntax{(gtk:string-sorter-collation object) => collation}
   @syntax{(setf (gtk:string-sorter-collation object) collation)}
   @argument[object]{a @class{gtk:string-sorter} object}
-  @argument[collation]{a @symbol{gtk:collation} value}
+  @argument[collation]{a @sym{gtk:collation} value}
   @begin{short}
     Accessor of the @slot[gtk:string-sorter]{collation} slot of the
     @class{gtk:string-sorter} class.

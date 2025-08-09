@@ -316,7 +316,7 @@ lambda (accel path key mods keycode)    :run-last
 
 (defun cell-renderer-accel-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @return{The new @class{gtk:cell-renderer-accel} object.}
   @short{Creates a new cell renderer accel object.}
   @begin[Warning]{dictionary}

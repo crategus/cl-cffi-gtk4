@@ -118,18 +118,15 @@
 (setf (liber:alias-for-function 'spinner-spinning)
       "Accessor"
       (documentation 'spinner-spinning 'function)
- "@version{2025-05-30}
+ "@version{2025-08-04}
   @syntax{(gtk:spinner-spinning object) => spinning}
   @syntax{(setf (gtk:spinner-spinning object) spinning)}
   @argument[object]{a @class{gtk:spinner} widget}
   @argument[spinning]{a boolean whether the spinner is spinning}
   @begin{short}
-    Accessor of the @slot[gtk:spinner]{spinning} slot of the @class{gtk:spinner}
-    class.
+    The accessor for the @slot[gtk:spinner]{spinning} slot of the
+    @class{gtk:spinner} class gets or sets whether the spinner is spinning.
   @end{short}
-  The @fun{gtk:spinner-spinning} function returns whether the spinner is
-  spinning. The @setf{gtk:spinner-spinning} function sets the activity of the
-  spinner.
   @see-class{gtk:spinner}")
 
 ;;; ----------------------------------------------------------------------------

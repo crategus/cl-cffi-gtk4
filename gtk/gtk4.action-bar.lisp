@@ -142,14 +142,15 @@ actionbar
 (setf (liber:alias-for-function 'action-bar-revealed)
       "Accessor"
       (documentation 'action-bar-revealed 'function)
- "@version{2025-04-24}
+ "@version{2025-07-31}
   @syntax{(gtk:action-bar-revealed object) => revealed}
   @syntax{(setf (gtk:action-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:action-bar} widget}
   @argument[revealed]{a boolean whether the action bar shows its contents}
   @begin{short}
-    Accessor of the @slot[gtk:action-bar]{revealed} slot of the
-    @class{gtk:action-bar} class.
+    The accessor for the @slot[gtk:action-bar]{revealed} slot of the
+    @class{gtk:action-bar} class gets or sets whether the action bar shows
+    its contents.
   @end{short}
   Changing the @slot[gtk:action-bar]{revealed} property will make the action bar
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.
@@ -251,16 +252,14 @@ actionbar
 (cffi:defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2025-04-24}
+ "@version{2025-07-31}
   @syntax{(gtk:action-bar-center-widget actionbar) => widget}
   @syntax{(setf (gtk:action-bar-center-widget actionbar) widget)}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[widget]{a @class{gtk:widget} object to use for the center widget}
   @begin{short}
-    The @fun{gtk:action-bar-center-widget} function retrieves the center widget
-    of the action bar.
+    Gets or sets the center widget of the action bar.
   @end{short}
-  The @setf{gtk:action-bar-center-widget} function sets the center widget.
   @see-class{gtk:action-bar}
   @see-class{gtk:widget}"
   (actionbar (g:object action-bar)))

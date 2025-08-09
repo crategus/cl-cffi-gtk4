@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.range.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -90,7 +90,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
-;;;     GtkAccessibleRange                                 Since 4.10
+;;;     GtkAccessibleRange                                  Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -133,7 +133,7 @@
 
 #+liber-documentation
 (setf (documentation 'range 'type)
- "@version{2023-8-24}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:range} class is the common base class for widgets which
     visualize an adjustment, for example the @class{gtk:scale} widget.
@@ -145,56 +145,60 @@
   setting a \"fill level\" on range widgets. See the @fun{gtk:range-fill-level}
   function.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"adjust-bounds\" signal}
+    @begin[range::adjust-bounds]{signal}
       @begin{pre}
 lambda (range value)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
-        @entry[value]{The double float with the value before we clamp.}
-      @end{table}
+        @entry[value]{The double float for the value before we clamp.}
+      @end{simple-table}
       Emitted before clamping a value, to give the application a chance to
       adjust the bounds.
-    @subheading{The \"change-value\" signal}
+    @end{signal}
+    @begin[range::change-value]{signal}
       @begin{pre}
 lambda (range scroll value)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
-        @entry[scroll]{The @symbol{gtk:scroll-type} value of scroll action that
+        @entry[scroll]{The @sym{gtk:scroll-type} value of scroll action that
           was performed.}
         @entry[value]{The double float resulting from the scroll action.}
         @entry[Returns]{@em{True} to prevent other handlers from being invoked
           for the signal, @em{false} to propagate the signal further.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a scroll action is performed on a range. It
       allows an application to determine the type of scroll event that occurred
       and the resultant new value. The application can handle the event itself
       and return @em{true} to prevent further processing. Or, by returning
       @em{false}, it can pass the event to other handlers until the default GTK
       handler is reached. The value parameter is unrounded. An application that
-      overrides the @code{\"change-value\"} signal is responsible for clamping
-      the value to the desired number of decimal digits. The default GTK handler
-      clamps the value based on \"round-digits\". It is not possible to use
-      delayed update policies in an overridden @code{\"change-value\"} signal
-      handler.
-    @subheading{The \"move-slider\" signal}
+      overrides the @sig[gtk:range]{change-value} signal is responsible for
+      clamping the value to the desired number of decimal digits. The default
+      GTK handler clamps the value based on \"round-digits\". It is not possible
+      to use delayed update policies in an overridden
+      @sig[gtk:range]{change-value} signal handler.
+    @end{signal}
+    @begin[range::move-slider]{signal}
       @begin{pre}
 lambda (range step)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
-        @entry[step]{The @symbol{gtk:scroll-type} value how to move the slider.}
-      @end{table}
+        @entry[step]{The @sym{gtk:scroll-type} value how to move the slider.}
+      @end{simple-table}
       Virtual function that moves the slider. Used for key bindings.
-    @subheading{The \"value-changed\" signal}
+    @end{signal}
+    @begin[range::value-changed]{signal}
       @begin{pre}
 lambda (range)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when the range value changes.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:range-adjustment}
   @see-slot{gtk:range-fill-level}
@@ -221,7 +225,7 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-adjustment)
       "Accessor"
       (documentation 'range-adjustment 'function)
- "@version{2023-8-24}
+ "@version{2023-08-24}
   @syntax{(gtk:range-adjustment object) => adjustement}
   @syntax{(setf (gtk:range-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:range} widget}
@@ -255,11 +259,11 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-fill-level)
       "Accessor"
       (documentation 'range-fill-level 'function)
- "@version{2023-8-24}
+ "@version{2025-07-26}
   @syntax{(range-fill-level object) => fill-level}
   @syntax{(setf (gtk:range-fill-level object) fill-level)}
   @argument[object]{a @class{gtk:range} widget}
-  @argument[fill-level]{a double float with the new position of the fill level
+  @argument[fill-level]{a double float for the new position of the fill level
     indicator}
   @begin{short}
     Accessor of the @slot[gtk:range]{fill-level} slot of the @class{gtk:range}
@@ -299,7 +303,7 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-inverted)
       "Accessor"
       (documentation 'range-inverted 'function)
- "@version{2023-8-24}
+ "@version{2023-08-24}
   @syntax{(gtk:range-inverted object) => setting}
   @syntax{(setf (gtk:range-inverted object) setting)}
   @argument[object]{a @class{gtk:range} widget}
@@ -330,7 +334,7 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-restrict-to-fill-level)
       "Accessor"
       (documentation 'range-restrict-to-fill-level 'function)
- "@version{2023-8-24}
+ "@version{2023-08-24}
   @syntax{(gtk:range-restrict-to-fill-level object) => setting}
   @syntax{(setf (gtk:range-restrict-to-fill-level object) setting)}
   @argument[object]{a @class{gtk:range} widget}
@@ -353,7 +357,7 @@ lambda (range)    :run-last
 (setf (documentation (liber:slot-documentation "round-digits" 'range) t)
  "The @code{round-digits} property of type @code{:int} (Read / Write) @br{}
   The number of digits to round the value to when it changes, or -1. See the
-  @code{\"change-value\"} signal. @br{}
+  @sig[gtk:range]{change-value} signal. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -361,11 +365,11 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-round-digits)
       "Accessor"
       (documentation 'range-round-digits 'function)
- "@version{2023-8-24}
+ "@version{2025-07-21}
   @syntax{(gtk:range-round-digits object) => round-digits}
   @syntax{(setf (gtk:range-round-digits object) round-digits)}
   @argument[object]{a @class{gtk:range} widget}
-  @argument[round-digits]{an integer with the precision in digits, or -1}
+  @argument[round-digits]{an integer for the precision in digits, or -1}
   @begin{short}
     Accessor of the @slot[gtk:range]{round-digits} slot of the @class{gtk:range}
     class.
@@ -373,7 +377,7 @@ lambda (range)    :run-last
   The @fun{gtk:range-round-digits} function gets the number of digits to round
   the value to when it changes. The @setf{gtk:range-round-digits} function sets
   the number of digits to round the value to when it changes. See the
-  @code{\"change-value\"} signal.
+  @sig[gtk:range]{change-value} signal.
   @see-class{gtk:range}")
 
 ;;; --- gtk:range-show-fill-level ----------------------------------------------
@@ -390,7 +394,7 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-show-fill-level)
       "Accessor"
       (documentation 'range-show-fill-level 'function)
- "@version{2023-8-24}
+ "@version{2023-08-24}
   @syntax{(gtk:range-show-fill-level object) => show-fill-level}
   @syntax{(setf (gtk:range-show-fill-level object) show-fill-level)}
   @argument[object]{a @class{gtk:range} widget}
@@ -418,19 +422,18 @@ lambda (range)    :run-last
 
 (defun range-value (range)
  #+liber-documentation
- "@version{2023-8-24}
+ "@version{2025-07-26}
   @syntax{(gtk:range-value range) => value}
   @syntax{(setf (gtk:range-value range) value)}
   @argument[range]{a @class{gtk:range} widget}
-  @argument[value]{a double float with the value of the range}
+  @argument[value]{a double float for the value of the range}
   @begin{short}
-    Accessor of the value of the range.
+    The @fun{gtk:range-value} function gets the current value of the range.
   @end{short}
-  The @fun{gtk:range-value} function gets the current value of the range. The
-  @setf{gtk:range-value} function sets the current value of the range.
+  The @setf{gtk:range-value} function sets the current value of the range.
 
   If the value is outside the minimum or maximum range values, it will be
-  clamped to fit inside them. The range emits the @code{\"value-changed\"}
+  clamped to fit inside them. The range emits the @sig[gtk:range]{value-changed}
   signal if the value changes.
   @see-class{gtk:range}"
   (adjustment-value (range-adjustment range)))
@@ -445,10 +448,10 @@ lambda (range)    :run-last
 
 (defun range-set-increments (range step page)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-07-26}
   @argument[range]{a @class{gtk:range} widget}
-  @argument[step]{a double float with the step size}
-  @argument[page]{a double float with the page size}
+  @argument[step]{a double float for the step size}
+  @argument[page]{a double float for the page size}
   @begin{short}
     Sets the step and page sizes for the range.
   @end{short}
@@ -470,10 +473,10 @@ lambda (range)    :run-last
 
 (defun range-set-range (range min max)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-07-26}
   @argument[range]{a @class{gtk:range} widget}
-  @argument[min]{a double float with the minimum range value}
-  @argument[max]{a double float with the maximum range value}
+  @argument[min]{a double float for the minimum range value}
+  @argument[max]{a double float for the maximum range value}
   @begin{short}
     Sets the allowable values in the range, and clamps the range value to be
     between @arg{min} and @arg{max}.
@@ -500,7 +503,7 @@ lambda (range)    :run-last
 
 (cffi:defcfun ("gtk_range_get_flippable" range-flippable) :boolean
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2023-08-24}
   @syntax{gtk:range-flippable range) => flippable}
   @syntax{(setf (gtk:range-flippable range) flippable)}
   @argument[range]{a @class{gtk:range} widget}
@@ -526,9 +529,9 @@ lambda (range)    :run-last
 
 (defun range-range-rect (range)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-07-26}
   @argument[range]{a @class{gtk:range} widget}
-  @return{The @class{gdk:rectangle} instance with the range rectangle.}
+  @return{The @class{gdk:rectangle} instance for the range rectangle.}
   @begin{short}
     This function returns the area that contains the trough of the range and its
     steppers, in widget window coordinates.
@@ -553,12 +556,11 @@ lambda (range)    :run-last
 
 (defun range-slider-range (range)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2025-07-19}
+  @syntax{(gtk:range-slider-range range) => start, end}
   @argument[range]{a @class{gtk:range} widget}
-  @begin{return}
-    @arg{start} -- an integer with the start of the slider, or @code{nil} @br{}
-    @arg{end} -- an integer with the end of the slider, or @code{nil}
-  @end{return}
+  @argument[start]{an integer for the start of the slider, or @code{nil}}
+  @argument[end]{an integer for the end of the slider, or @code{nil}}
   @begin{short}
     This function returns sliders range along the long dimension, in
     widget window coordinates.
@@ -591,7 +593,7 @@ lambda (range)    :run-last
 (cffi:defcfun ("gtk_range_get_slider_size_fixed" range-slider-size-fixed)
     :boolean
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2023-08-24}
   @syntax{(gtk:range-slider-size-fixed range) => fixed}
   @syntax{(setf (gtk:range-slider-size-fixed range) fixed)}
   @argument[range]{a @class{gtk:range} widget}

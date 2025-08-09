@@ -60,7 +60,7 @@
 (setf (liber:alias-for-class 'section-model)
       "Interface"
       (documentation 'section-model 'type)
- "@version{2024-11-29}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:section-model} interface is an interface that adds support
     for sections to list models.
@@ -74,33 +74,35 @@
   sections of a model they are wrapping.
 
   When the section groupings of a model change, the model will emit the
-  @code{\"sections-changed\"} signal by calling the
+  @sig[gtk:section-model]{sections-changed} signal by calling the
   @fun{gtk:section-model-sections-changed} function. All sections in the given
-  range then need to be queried again. The @code{\"items-changed\"} signal has
-  the same effect, all sections in that range are invalidated, too.
+  range then need to be queried again. The @sig[g:list-model]{items-changed}
+  signal has the same effect, all sections in that range are invalidated, too.
 
   Since 4.12
   @begin[Signals]{dictionary}
-    @subheading{The \"sections-changed\" signal}
+    @begin[section-model::sections-changed]{signal}
       @begin{pre}
 lambda (model pos n-items)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[model]{The @class{gtk:section-model} object that emitted the
           signal.}
-        @entry[pos]{The unsigned integer with the first item that may have
+        @entry[pos]{The unsigned integer for the first item that may have
           changed.}
-        @entry[n-items]{The unsigned integer with the number of items with
+        @entry[n-items]{The unsigned integer for the number of items with
           changes.}
-      @end{table}
+      @end{simple-table}
       Emitted when the start-of-section state of some of the items in
       @arg{model} changes. Note that this signal does not specify the new
       section state of the items, they need to be queried manually. It is also
       not necessary for a model to change the section state of any of the items
       in the section model, though it would be rather useless to emit such a
-      signal. The @code{\"items-changed\"} signal of the @class{g:list-model}
-      class implies the effect of the @code{\"sections-changed\"} signal for
-      all the items it covers.
+      signal. The @sig[g:list-model]{items-changed} signal of the
+      @class{g:list-model} class implies the effect of the
+      @sig[gtk:section-model]{sections-changed} signal for all the items it
+      covers.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:list-view}
   @see-class{gtk:grid-view}")
@@ -149,13 +151,13 @@ lambda (model pos n-items)    :run-last
 (cffi:defcfun ("gtk_section_model_sections_changed"
                section-model-sections-changed) :void
  #+liber-documentation
- "@version{2025-03-17}
+ "@version{2025-07-23}
   @argument[model]{a @class{gtk:section-model} object}
   @argument[pos]{an unsigned integer for the first item hat may have
     changed}
   @argument[n-items]{an unsigned integer for the number of items with changes}
   @begin{short}
-    Emits the @code{\"sections-changed\"} signal on @arg{model}.
+    Emits the @sig[gtk:section-model]{sections-changed} signal on @arg{model}.
   @end{short}
 
   Since 4.12

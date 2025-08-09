@@ -638,18 +638,16 @@
 (setf (liber:alias-for-function 'builder-current-object)
       "Accessor"
       (documentation 'builder-current-object 'function)
- "@version{2025-07-11}
+ "@version{2025-07-28}
   @syntax{(gtk:builder-current-object object) => current}
   @syntax{(setf (gtk:builder-current-object object) current)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[current]{a @class{g:object} instance}
   @begin{short}
-    Accessor of the @slot[gtk:builder]{current-object} slot of the
-    @class{gtk:builder} class.
+    The accessor for the @slot[gtk:builder]{current-object} slot of the
+    @class{gtk:builder} class gets or sets the current object for the builder.
   @end{short}
-  The @fun{gtk:builder-current-object} function gets the current object for the
-  builder. The @setf{gtk:builder-current-object} function sets the current
-  object. The current object can be thought of the object that the builder is
+  The current object can be thought of the object that the builder is
   working for and will often be used as the default object when an object is
   optional.
 
@@ -676,19 +674,18 @@
 (setf (liber:alias-for-function 'builder-scope)
       "Accessor"
       (documentation 'builder-scope 'function)
- "@version{2024-11-04}
+ "@version{2025-07-28}
   @syntax{(gtk:builder-scope object) => scope}
   @syntax{(setf (gtk:builder-scope object) scope)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[scope]{a @class{gtk:builder-cl-scope} object}
   @begin{short}
-    Accessor of the @slot[gtk:builder]{scope} slot of the @class{gtk:builder}
-    class.
+    The accessor for the @slot[gtk:builder]{scope} slot of the
+    @class{gtk:builder} class gets or sets the scope the builder should operate
+    in.
   @end{short}
-  The @fun{gtk:builder-scope} function gets the scope in use. The
-  @setf{gtk:builder-scope} function sets the scope the builder should operate
-  in. If the @arg{scope} argument is @code{nil}, a
-  @class{gtk:builder-cl-scope} instance will be set as the default value.
+  If the @arg{scope} argument is @code{nil}, a @class{gtk:builder-cl-scope}
+  instance will be set as the default value.
   @see-class{gtk:builder}
   @see-class{gtk:builder-cl-scope}")
 
@@ -708,18 +705,16 @@
 (setf (liber:alias-for-function 'builder-translation-domain)
       "Accessor"
       (documentation 'builder-translation-domain 'function)
- "@version{2025-06-21}
+ "@version{2025-07-28}
   @syntax{(gtk:builder-translation-domain object) => domain}
   @syntax{(setf (gtk:builder-translation-domain object) domain)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[domain]{a string for the translation domain or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:builder]{translation-domain} slot of the
-    @class{gtk:builder} class.
+    The accessor for the @slot[gtk:builder]{translation-domain} slot of the
+    @class{gtk:builder} class gets or sets the translation domain of the
+    builder.
   @end{short}
-  The @fun{gtk:builder-translation-domain} function gets the translation domain
-  of the builder. The @setf{gtk:builder-translation-domain} function sets the
-  translation domain.
 
   The translation domain used when translating property values that have been
   marked as translatable in interface descriptions. If the translation domain

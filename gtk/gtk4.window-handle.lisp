@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.window-handle.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'window-handle 'type)
- "@version{2023-8-31}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:window-handle} widget is a titlebar area widget.
   @end{short}
@@ -93,9 +93,9 @@
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     Until GTK 4.10, the @class{gtk:window-handle} implementation uses the
-    @code{:group} role of the @symbol{gtk:accessible-role} enumeration.
-    Starting from GTK 4.12, the @class{gtk:window-handle} implementation uses
-    the @code{:generic} role.
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration. Starting from GTK 4.12, the @class{gtk:window-handle}
+    implementation uses the @val[gtk:accessible-role]{:generic} role.
   @end{dictionary}
   @see-class{gtk:window}
   @see-class{gtk:header-bar}")
@@ -115,7 +115,7 @@
 (setf (liber:alias-for-function 'window-handle-child)
       "Accessor"
       (documentation 'window-handle-child 'function)
- "@version{2023-7-23}
+ "@version{2023-07-23}
   @syntax{(gtk:window-handle-child object) => child}
   @syntax{(setf (gtk:window-handle-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
@@ -138,7 +138,7 @@
 
 (defun window-handle-new ()
  #+liber-documentation
- "@version{2023-7-23}
+ "@version{2023-07-23}
   @return{The new @class{gtk:window-handle} widget.}
   @short{Creates new @class{gtk:window-handle} widget.}
   @see-class{gtk:window-handle}"

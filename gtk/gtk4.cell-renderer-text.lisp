@@ -256,7 +256,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-text 'type)
- "@version{2025-07-01}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:cell-renderer-text} object renders a given text in its cell,
     using the font, color and style information provided by its properties.
@@ -274,8 +274,8 @@ lambda (renderer path text)    :run-last
       @begin[code]{simple-table}
         @entry[renderer]{The @class{gtk:cell-renderer-text} object which
           received the signal.}
-        @entry[path]{The string with the path identifying the edited cell.}
-        @entry[text]{The string with the new text.}
+        @entry[path]{The string for the path identifying the edited cell.}
+        @entry[text]{The string for the new text.}
       @end{simple-table}
       The signal is emitted after @arg{renderer} has been edited. It is the
       responsibility of the application to update the model and store @arg{text}

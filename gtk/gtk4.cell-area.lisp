@@ -1662,12 +1662,12 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-cell-get (area renderer &rest args)
  #+liber-documentation
- "@version{2025-07-22}
+ "@version{2025-07-27}
   @argument[area]{a @class{gtk:cell-area} object}
-  @argument[renderer]{a @class{gtk:cell-renderer} object which is inside
+  @argument[renderer]{a @class{gtk:cell-renderer} object that is inside
     @arg{area}}
   @argument[args]{strings for the cell property names to get the values for}
-  @return{The list with the values of the cell properties.}
+  @return{The list for the values of the cell properties.}
   @begin{short}
     Gets the values of one or more cell properties for the cell renderer in
     the cell area.

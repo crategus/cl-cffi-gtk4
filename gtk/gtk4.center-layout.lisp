@@ -115,19 +115,16 @@
 (setf (liber:alias-for-function 'center-layout-shrink-center-last)
       "Accessor"
       (documentation 'center-layout-shrink-center-last 'function)
- "@version{2024-04-19}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-shrink-center-last object) => setting}
   @syntax{(setf (gtk:center-layout-shrink-center-last object) setting)}
   @argument[object]{a @class{gtk:center-layout} object}
   @argument[setting]{a boolean whether to shrink the center widget after others}
   @begin{short}
-    Accessor of the @slot[gtk:center-layout]{shrink-center-last} slot of the
-    @class{gtk:center-layout} class.
+    The accessor for the @slot[gtk:center-layout]{shrink-center-last} slot of
+    the @class{gtk:center-layout} class gets or sets whether @arg{object}
+    shrinks the center widget after other children.
   @end{short}
-  The @fun{gtk:center-layout-shrink-center-last} function gets whether
-  @arg{object} shrinks the center widget after other children. The
-  @setf{gtk:center-layout-shrink-center-last} function sets whether to shrink
-  the center widget after other children.
 
   By default, when there is no space to give all three children their natural
   widths, the start and end widgets start shrinking and the center child keeps
@@ -166,16 +163,14 @@
 (cffi:defcfun ("gtk_center_layout_get_orientation" center-layout-orientation)
     orientation
  #+liber-documentation
- "@version{2025-06-30}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-orientation layout) => orientation}
   @syntax{(setf (gtk:center-layout-orientation layout) orientation)}
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
-    The @fun{gtk:center-layout-orientation} function gets the current
-    orienration of the layout manager.
+    Gets or sets the current orienration of the layout manager.
   @end{short}
-  The @setf{gtk:center-layout-orientation} function sets the orientation.
   @see-class{gtk:center-layout}
   @see-symbol{gtk:orientation}"
   (layout (g:object center-layout)))
@@ -197,17 +192,14 @@
 (cffi:defcfun ("gtk_center_layout_get_baseline_position"
                center-layout-baseline-position) baseline-position
  #+liber-documentation
- "@version{2025-06-30}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-baseline-position layout) => position}
   @syntax{(setf (gtk:center-layout-baseline-position layout) position)}
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
-    The @fun{gtk:center-layout-baseline-position} function gets the current
-    baseline position of the layout manager.
+    Gets or sets the current baseline position of the layout manager.
   @end{short}
-  The @setf{gtk:center-layout-baseline-position} function sets the
-  baseline-position.
   @see-class{gtk:center-layout}
   @see-symbol{gtk:baseline-position}"
   (layout (g:object center-layout)))
@@ -229,16 +221,14 @@
 (cffi:defcfun ("gtk_center_layout_get_start_widget" center-layout-start-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2024-04-19}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-start-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-start-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[widget]{a @class{gtk:widget} start widget}
   @begin{short}
-    The @fun{gtk:center-layout-start-widget} function returns the start widget
-     of the layout.
+    Gets or sets the start widget of the layout.
   @end{short}
-  The @setf{gtk:center-layout-start-widget} function sets the start widget.
   @see-class{gtk:center-layout}
   @see-symbol{gtk:widget}"
   (layout (g:object center-layout)))
@@ -260,16 +250,14 @@
 (cffi:defcfun ("gtk_center_layout_get_center_widget"
                center-layout-center-widget) (g:object widget)
  #+liber-documentation
- "@version{2024-04-19}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-center-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-center-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[widget]{a @class{gtk:widget} center widget}
   @begin{short}
-    The @fun{gtk:center-layout-center-widget} function returns the center
-     widget of the layout.
+    Gets or sets the center widget of the layout.
   @end{short}
-  The @setf{gtk:center-layout-center-widget} function sets the center widget.
   @see-class{gtk:center-layout}
   @see-symbol{gtk:widget}"
   (layout (g:object center-layout)))
@@ -291,16 +279,14 @@
 (cffi:defcfun ("gtk_center_layout_get_end_widget" center-layout-end-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2024-04-19}
+ "@version{2025-08-01}
   @syntax{(gtk:center-layout-end-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-end-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[widget]{a @class{gtk:widget} center widget}
   @begin{short}
-    The @fun{gtk:center-layout-end-widget} function returns the end widget of
-    the layout.
+    Gets or sets the end widget of the layout.
   @end{short}
-  The @setf{gtk:center-layout-end-widget} function sets the end widget.
   @see-class{gtk:center-layout}
   @see-symbol{gtk:widget}"
   (layout (g:object center-layout)))

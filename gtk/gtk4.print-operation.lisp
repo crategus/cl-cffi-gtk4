@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-operation.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -151,7 +151,7 @@
 (setf (liber:alias-for-symbol 'print-status)
       "GEnum"
       (liber:symbol-documentation 'print-status)
- "@version{2023-8-28}
+ "@version{2025-07-16}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintStatus\" print-status
   (:export t
@@ -167,11 +167,12 @@
   (:finished-aborted 8))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:initial]{The printing has not started yet. This status is set
         initially, and while the print dialog is shown.}
-      @entry[:preparing]{This status is set while the @code{\"begin-print\"}
-        signal is emitted and during pagination.}
+      @entry[:preparing]{This status is set while the
+        @sig[gtk:print-operation]{begin-print} signal is emitted and during
+        pagination.}
       @entry[:generating-data]{This status is set while the pages are being
         rendered.}
       @entry[:sending-data]{The print job is being sent off to the printer.}
@@ -182,7 +183,7 @@
       @entry[:printing]{The printer is processing the print job.}
       @entry[:finished]{The printing has been completed successfully.}
       @entry[:finished-aborted]{The printing has been aborted.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The status gives a rough indication of the completion of a running print
@@ -206,7 +207,7 @@
 (setf (liber:alias-for-symbol 'print-operation-action)
       "GEnum"
       (liber:symbol-documentation 'print-operation-action)
- "@version{2023-8-28}
+ "@version{2025-07-16}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintOperationAction\" print-operation-action
   (:export t
@@ -217,7 +218,7 @@
   (:export 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:print-dialog]{Show the print dialog.}
       @entry[:print]{Start to print without showing the print dialog, based on
         the current print settings.}
@@ -225,7 +226,7 @@
       @entry[:export]{Export to a file. This requires the
         @slot[gtk:print-operation]{export-filename} property of the
         @class{gtk:print-operation} object to be set.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The action parameter to the @fun{gtk:print-operation-run} function
@@ -250,7 +251,7 @@
 (setf (liber:alias-for-symbol 'print-operation-result)
       "GEnum"
       (liber:symbol-documentation 'print-operation-result)
- "@version{2023-8-28}
+ "@version{2025-07-16}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintOperationResult\" print-operation-result
   (:export t
@@ -261,14 +262,14 @@
   (:in-progress 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:error]{An error has occured.}
       @entry[:apply]{The print settings should be stored.}
       @entry[:cancel]{The print operation has been canceled, the print settings
         should not be stored.}
       @entry[:in-progress]{The print operation is not complete yet. This value
         will only be returned when running asynchronously.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     A value of this type is returned by the @fun{gtk:print-operation-run}
@@ -371,7 +372,7 @@
 
 #+liber-documentation
 (setf (documentation 'print-operation 'type)
- "@version{2023-8-28}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:print-operation} object is the high-level, portable printing
     API.
@@ -393,13 +394,13 @@
   @fun{gtk:print-operation-run} function. It will then show a dialog, let the
   user select a printer and options. When the user finished the dialog various
   signals will be emitted on the @class{gtk:print-operation} object, the main
-  one being the @code{\"draw-page\"} signal, which you are supposed to catch and
-  render the page on the provided the @class{gtk:print-context} object using
-  Cairo.
+  one being the @sig[gtk:print-operation]{draw-page} signal, which you are
+  supposed to catch and render the page on the provided the
+  @class{gtk:print-context} object using Cairo.
 
   By default the @class{gtk:print-operation} object uses an external application
   to do print preview. To implement a custom print preview, an application must
-  connect to the @code{\"preview\"} signal. The
+  connect to the @sig[gtk:print-operation]{preview} signal. The
   @fun{gtk:print-operation-preview-render-page},
   @fun{gtk:print-operation-preview-end-preview} and
   @fun{gtk:print-operation-preview-is-selected} functions are useful when
@@ -426,81 +427,87 @@
     @end{pre}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"begin-print\" signal}
+    @begin[print-operation::begin-print]{signal}
       @begin{pre}
 lambda (operation context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[context]{The @class{gtk:print-context} object for the current
           operation.}
-      @end{table}
+      @end{simple-table}
       Emitted after the user has finished changing print settings in the dialog,
-      before the actual rendering starts. A typical use for the \"begin-print\"
-      signal is to use the parameters from the @class{gtk:print-context}
-      object and paginate the document accordingly, and then set the number of
-      pages with the @fun{gtk:print-operation-n-pages} function.
-    @subheading{The \"create-custom-widget\" signal}
+      before the actual rendering starts. A typical use for the
+      @sig[gtk:print-operation]{begin-print} signal is to use the parameters
+      from the @class{gtk:print-context} object and paginate the document
+      accordingly, and then set the number of pages with the
+      @fun{gtk:print-operation-n-pages} function.
+    @end{signal}
+    @begin[print-operation::create-custom-widget]{signal}
       @begin{pre}
 lambda (operation)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
-        @entry[Returns]{A @class{gtk:widget} custom widget that gets embedded
+        @entry[Returns]{The @class{gtk:widget} custom widget that gets embedded
           in the print dialog, or @code{nil}.}
-      @end{table}
+      @end{simple-table}
       Emitted when displaying the print dialog. If you return a widget in a
       handler for this signal it will be added to a custom tab in the print
       dialog. You typically return a container widget with multiple widgets in
       it. The print dialog owns the returned widget, and its lifetime is not
       controlled by the application. However, the widget is guaranteed to stay
-      around until the @code{\"custom-widget-apply\"} signal is emitted on the
-      operation. Then you can read out any information you need from the
-      widgets.
-    @subheading{The \"custom-widget-apply\" signal}
+      around until the @sig[gtk:print-operation]{custom-widget-apply} signal is
+      emitted on the operation. Then you can read out any information you need
+      from the widgets.
+    @end{signal}
+    @begin[print-operation::custom-widget-apply]{signal}
       @begin{pre}
 lambda (operation widget)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[widget]{The @class{gtk:widget} custom widget added in a
-          @code{\"create-custom-widget\"} signal handler.}
-      @end{table}
-      Emitted right before the @code{\"begin-print\"} signal if you added a
-      custom widget in the @code{\"create-custom-widget\"} signal handler. When
-      you get this signal you should read the information from the custom
-      widgets, as the widgets are not guaraneed to be around at a later time.
-    @subheading{The \"done\" signal}
+          @sig[gtk:print-operation]{create-custom-widget} signal handler.}
+      @end{simple-table}
+      Emitted right before the @sig[gtk:print-operation]{begin-print} signal if
+      you added a custom widget in the
+      @sig[gtk:print-operation]{create-custom-widget} signal handler. When you
+      get this signal you should read the information from the custom widgets,
+      as the widgets are not guaraneed to be around at a later time.
+    @end{signal}
+    @begin[print-operation::done]{signal}
       @begin{pre}
 lambda (operation result)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
-        @entry[result]{The result of type @symbol{gtk:print-operation-result}
-          of the print operation.}
-      @end{table}
+        @entry[result]{The result of type @sym{gtk:print-operation-result} for
+          the print operation.}
+      @end{simple-table}
       Emitted when the print operation run has finished doing everything
       required for printing. @arg{result} gives you information about what
       happened during the run. If @arg{result} is @code{:error} then you can
       call the @code{gtk_print_operation_get_error ()} function for more
       information. If you enabled print status tracking then the
       @fun{gtk:print-operation-is-finished} function may still return
-      @em{false} after the @code{\"done\"} signal was emitted.
-    @subheading{The \"draw-page\" signal}
+      @em{false} after the @sig[gtk:print-operation]{done} signal was emitted.
+    @end{signal}
+    @begin[print-operation::draw-page]{signal}
       @begin{pre}
 lambda (operation context page-nr)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[context]{The @class{gtk:print-context} object for the current
           operation.}
-        @entry[page-nr]{The 0-based number of the currently printed page.}
-      @end{table}
+        @entry[page-nr]{The 0-based number for the currently printed page.}
+      @end{simple-table}
       Emitted for every page that is printed. The signal handler must render the
       @arg{page-nr}'s page onto the Cairo context obtained from @arg{context}
       using the @fun{gtk:print-context-cairo-context} function. Use the
@@ -533,44 +540,48 @@ lambda (operation context page-nr)    :run-last
     (cairo-move-to cr 0 (floor (/ (- *header-height* text-height) 2)))
     (pango:cairo-show-layout cr layout)))
       @end{pre}
-    @subheading{The \"end-print\" signal}
+    @end{signal}
+    @begin[print-operation::end-print]{signal}
       @begin{pre}
 lambda (operation context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[context]{The @class{gtk:print-context} object for the current
           operation.}
-      @end{table}
+      @end{simple-table}
       Emitted after all pages have been rendered. A handler for this signal can
       clean up any resources that have been allocated in the
-      @code{\"begin-print\"} signal handler.
-    @subheading{The \"paginate\" signal}
+      @sig[gtk:print-operation]{begin-print} signal handler.
+    @end{signal}
+    @begin[print-operation::paginate]{signal}
       @begin{pre}
 lambda (operation context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[context]{The @class{gtk:print-context} object for the current
           operation.}
-      @end{table}
-      Emitted after the @code{\"begin-print\"} signal, but before the actual
-      rendering starts. It keeps getting emitted until a connected signal
-      handler returns @em{true}. The @code{\"paginate\"} signal is intended to
-      be used for paginating a document in small chunks, to avoid blocking the
-      user interface for a long time. The signal handler should update the
-      number of pages using the @fun{gtk:print-operation-n-pages} function, and
-      return @em{true} if the document has been completely paginated. If you do
-      not need to do pagination in chunks, you can simply do it all in the
-      @code{\"begin-print\"} signal handler, and set the number of pages from
-      there.
-    @subheading{The \"preview\" signal}
+      @end{simple-table}
+      Emitted after the @sig[gtk:print-operation]{begin-print} signal, but
+      before the actual rendering starts. It keeps getting emitted until a
+      connected signal handler returns @em{true}. The
+      @sig[gtk:print-operation]{paginate} signal is intended to be used for
+      paginating a document in small chunks, to avoid blocking the user
+      interface for a long time. The signal handler should update the number of
+      pages using the @fun{gtk:print-operation-n-pages} function, and return
+      @em{true} if the document has been completely paginated. If you do not
+      need to do pagination in chunks, you can simply do it all in the
+      @sig[gtk:print-operation]{begin-print} signal handler, and set the number
+      of pages from there.
+    @end{signal}
+    @begin[print-operation::preview]{signal}
       @begin{pre}
 lambda (operation preview context parent)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[preview]{The @class{gtk:print-preview-operation} object for the
@@ -580,7 +591,7 @@ lambda (operation preview context parent)    :run-last
           or @code{nil}.}
         @entry[Returns]{@em{True} if the listener wants to take over control of
           the preview.}
-      @end{table}
+      @end{simple-table}
       Gets emitted when a preview is requested from the native dialog. The
       default handler for this signal uses an external viewer application to
       preview. To implement a custom print preview, an application must return
@@ -593,48 +604,52 @@ lambda (operation preview context parent)    :run-last
       which are selected for print and render them. The preview must be finished
       by calling the @fun{gtk:print-operation-preview-end-preview} function,
       typically in response to the user clicking a Close button.
-    @subheading{The \"request-page-setup\" signal}
+    @end{signal}
+    @begin[print-operation::request-page-setup]{signal}
       @begin{pre}
 lambda (operation context page-nr setup)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[context]{The @class{gtk:print-context} object for the current
           operation.}
-        @entry[page-nr]{The 0-based number of the currently printed page.}
+        @entry[page-nr]{The 0-based number for the currently printed page.}
         @entry[setup]{The @class{gtk:page-setup} object.}
-      @end{table}
+      @end{simple-table}
       Emitted once for every page that is printed, to give the application a
       chance to modify the page setup. Any changes done to the page setup will
       be in force only for printing this page.
-    @subheading{The \"status-changed\" signal}
+    @end{signal}
+    @begin[print-operation::status-changed]{signal}
       @begin{pre}
 lambda (operation)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
-      @end{table}
+      @end{simple-table}
       Emitted at between the various phases of the print operation. See the
-      @symbol{gtk:print-status} enumeration for the phases that are being
+      @sym{gtk:print-status} enumeration for the phases that are being
       discriminated. Use the @fun{gtk:print-operation-status} function to
       find out the current status.
-    @subheading{The \"update-custom-widget\" signal}
+    @end{signal}
+    @begin[print-operation::update-custom-widget]{signal}
       @begin{pre}
 lambda (operation widget setup settings)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[operation]{The @class{gtk:print-operation} object on which the
           signal was emitted.}
         @entry[widget]{The @class{gtk:widget} custom widget added in the
-        @code{\"create-custom-widget\"} signal handler.}
-        @entry[setup]{Actual @class{gtk:page-setup} object.}
-        @entry[settings]{Actual @class{gtk:print-settings} object.}
-      @end{table}
+        @sig[gtk:print-operation]{create-custom-widget} signal handler.}
+        @entry[setup]{The actual @class{gtk:page-setup} object.}
+        @entry[settings]{The actual @class{gtk:print-settings} object.}
+      @end{simple-table}
       Emitted after change of the selected printer. The actual page setup and
       print settings are passed to the custom widget, which can actualize
       itself according to this change.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:print-operation-new}
   @see-slot{gtk:print-operation-allow-async}
@@ -670,17 +685,19 @@ lambda (operation widget setup settings)    :run-last
  "The @code{allow-async} property of type @code{:boolean} (Read / Write) @br{}
   Determines whether the print operation may run asynchronously or not. Some
   systems do not support asynchronous printing, but those that do will return
-  @code{:in-progress} as the status, and emit the @code{\"done\"} signal when
-  the operation is actually done. The Windows port does not support asynchronous
-  operation at all, this is unlikely to change. On other platforms, all actions
-  except for @code{:export} support asynchronous operation. @br{}
+  @val[gtk:print-operation-result]{:in-progress} as the status, and emit the
+  @sig[gtk:print-operation]{done} signal when the operation is actually done.
+  The Windows port does not support asynchronous operation at all, this is
+  unlikely to change. On other platforms, all actions except for
+  @val[gtk:print-operation-action]{:export} support asynchronous operation.
+  @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'print-operation-allow-async)
       "Accessor"
       (documentation 'print-operation-allow-async 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-allow-async object) => alloc-async}
   @syntax{(setf (gtk:print-operation-allow-aysnc object) alloc-async)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -703,10 +720,10 @@ lambda (operation widget setup settings)    :run-last
 (setf (documentation (liber:slot-documentation "current-page"
                                                'print-operation) t)
  "The @code{current-page} property of type @code{:int} (Read / Write) @br{}
-  The current page in the document. If this is set before the function
-  @fun{gtk:print-operation-run}, the user will be able to select to print only
-  the current page. Note that this only makes sense for pre-paginated documents.
-  @br{}
+  The current page in the document. If this is set before the
+  @fun{gtk:print-operation-run} funtion, the user will be able to select to
+  print only the current page. Note that this only makes sense for pre-paginated
+  documents. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -714,7 +731,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-current-page)
       "Accessor"
       (documentation 'print-operation-current-page 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-current-page object) => current-page}
   @syntax{(setf (gtk:print-operation-current-page object) current-page)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -745,11 +762,11 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-custom-tab-label)
       "Accessor"
       (documentation 'print-operation-custom-tab-label 'function)
- "@version{2023-8-28}
+ "@version{2025-07-27}
   @syntax{(gtk:print-operation-tab-label object) => label}
   @syntax{(setf (gtk:print-operation-tab-label object) label)}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[label]{a string with the label to use, or @code{nil} to use the
+  @argument[label]{a string for the label to use, or @code{nil} to use the
     default label}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{custom-tab-label} slot of the
@@ -768,13 +785,14 @@ lambda (operation widget setup settings)    :run-last
   (Read / Write) @br{}
   The page setup used by default. This page setup will be used by the
   @fun{gtk:print-operation-run} function, but it can be overridden on a per-page
-  basis by connecting to the @code{\"request-page-setup\"} signal.")
+  basis by connecting to the @sig[gtk:print-operation]{request-page-setup}
+  signal.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'print-operation-default-page-setup)
       "Accessor"
       (documentation 'print-operation-default-page-setup 'function)
- "@version{2023-8-28}
+ "@version{2025-07-24}
   @syntax{(gtk:print-operation-default-page-setup object) => page-setup}
   @syntax{(setf (gtk:print-operation-default-page-setup object) page-setup)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -789,7 +807,7 @@ lambda (operation widget setup settings)    :run-last
 
   This page setup will be used by the @fun{gtk:print-operation-run} function,
   but it can be overridden on a per-page basis by connecting to the
-  @code{\"request-page-setup\"} signal.
+  @sig[gtk:print-operation]{request-page-setup} signal.
   @see-class{gtk:print-operation}")
 
 ;;; --- gtk:print-operation-embed-page-setup -----------------------------------
@@ -807,7 +825,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-embed-page-setup)
       "Accessor"
       (documentation 'print-operation-embed-page-setup 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-embed-page-setup object) => embed}
   @syntax{(setf (gtk:print-operation-embed-page-setup object) embed)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -843,11 +861,11 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-export-filename)
       "Accessor"
       (documentation 'print-operation-export-filename 'function)
- "@version{2023-8-28}
+ "@version{2025-07-27}
   @syntax{(gtk:print-operation-export-filename object) => filename}
   @syntax{(setf (gtk:print-operation-export-filename object) filename)}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[filename]{a string with the filename for the exported file}
+  @argument[filename]{a string for the filename for the exported file}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{export-filename} slot of the
     @class{gtk:print-operation} class.
@@ -879,7 +897,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-has-selection)
       "Accessor"
       (documentation 'print-operation-has-selection 'function)
- "@version{2023-8-28}
+ "@version{2025-07-24}
   @syntax{(gtk:print-operation-has-selection object object) => has-selection}
   @syntax{(setf (gtk:print-operation-has-selection object) has-selection)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -894,7 +912,7 @@ lambda (operation widget setup settings)    :run-last
 
   The application has to set the number of pages to which the selection will
   draw by the @fun{gtk:print-operation-n-pages} function in a callback of the
-  @code{\"begin-print\"} signal.
+  @sig[gtk:print-operation]{begin-print} signal.
   @see-class{gtk:print-operation}")
 
 ;;; --- gtk:print-operation-job-name -------------------------------------------
@@ -902,7 +920,7 @@ lambda (operation widget setup settings)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "job-name" 'print-operation) t)
  "The @code{job-name} property of type @code{:string} (Read / Write) @br{}
-  A string used to identify the job, for example, in monitoring applications
+  The string used to identify the job, for example, in monitoring applications
   like @code{eggcups}. If you do not set a job name, GTK picks a default one by
   numbering successive print jobs. @br{}
   Default value: \"\" ")
@@ -911,7 +929,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-job-name)
       "Accessor"
       (documentation 'print-operation-job-name 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-job-name object) => job-name}
   @syntax{(setf (gtk:print-operation-job-name object) job-name)}
   @argument[object]{a @class{gtk:print-operation-job-name} object}
@@ -936,11 +954,13 @@ lambda (operation widget setup settings)    :run-last
 (setf (documentation (liber:slot-documentation "n-pages" 'print-operation) t)
  "The @code{n-pages} property of type @code{:int} (Read / Write) @br{}
   The number of pages in the document. This must be set to a positive number
-  before the rendering starts. It may be set in a @code{\"begin-print\"} signal
-  handler. Note that the page numbers passed to the
-  @code{\"request-page-setup\"} and @code{\"draw-page\"} signal handlers are
-  0-based, that is, if the user chooses to print all pages, the last
-  @code{\"draw-page\"} signal will be for page @code{n-pages} - 1 @br{}
+  before the rendering starts. It may be set in a
+  @sig[gtk:print-operation]{begin-print} signal handler. Note that the page
+  numbers passed to the @sig[gtk:print-operation]{request-page-setup} and
+  @sig[gtk:print-operation]{draw-page} signal handlers are 0-based, that is, if
+  the user chooses to print all pages, the last
+  @sig[gtk:print-operation]{draw-page} signal will be for page @code{n-pages}-1
+  @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -948,11 +968,11 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-n-pages)
       "Accessor"
       (documentation 'print-operation-n-pages 'function)
- "@version{2024-2-16}
+ "@version{2025-07-24}
   @syntax{(gtk:print-operation-n-pages object) => npages}
   @syntax{(setf (gtk:print-operation-n-pages object) npages)}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[npages]{an integer with the number of pages}
+  @argument[npages]{an integer for the number of pages}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{n-pages} slot of the
     @class{gtk:print-operation} class.
@@ -962,10 +982,11 @@ lambda (operation widget setup settings)    :run-last
   of pages.
 
   This must be set to a positive number before the rendering starts. It may be
-  set in a @code{\"begin-print\"} signal handler. Note that the page numbers
-  passed to the @code{\"request-page-setup\"} and @code{\"draw-page\"} signal
-  handlers are 0-based, that is, if the user chooses to print all pages, the
-  last @code{\"draw-page\"} signal will be for page @arg{npages} - 1.
+  set in a @sig[gtk:print-operation]{begin-print} signal handler. Note that the
+  page numbers passed to the @sig[gtk:print-operation]{request-page-setup} and
+  @sig[gtk:print-operation]{draw-page} signal handlers are 0-based, that is, if
+  the user chooses to print all pages, the last
+  @sig[gtk:print-operation]{draw-page} signal will be for page @arg{npages} - 1.
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-n-pages-to-print}")
 
@@ -976,12 +997,13 @@ lambda (operation widget setup settings)    :run-last
                                                'print-operation) t)
  "The @code{n-pages-to-print} property of type @code{:int} (Read) @br{}
   The number of pages that will be printed. Note that this value is set during
-  the print preparation @code{:preparing} phase, so this value should never be
-  get before the data generation @code{:generating-data} phase. You can connect
-  to the @code{\"status-changed\"} signal and call the
+  the print preparation @val[gtk:print-status]{:preparing} phase, so this value
+  should never be get before the data generation
+  @val[gtk:print-status]{:generating-data} phase. You can connect to the
+  @sig[gtk:print-operation]{status-changed} signal and call the
   @fun{gtk:print-operation-n-pages-to-print} function when the print status is
-  in the @code{:generating-data} phase. This is typically used to track the
-  progress of print operation. @br{}
+  in the @val[gtk:print-status]{:generating-data} phase. This is typically used
+  to track the progress of print operation. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -989,10 +1011,10 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-n-pages-to-print)
       "Accessor"
       (documentation 'print-operation-n-pages-to-print 'function)
- "@version{2024-2-16}
+ "@version{2025-07-19}
   @syntax{(gtk:print-operation-n-pages-to-print object) => npages}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[npages]{an integer with the number of pages to print}
+  @argument[npages]{an integer for the number of pages to print}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{n-pages-to-print} slot of the
     @class{gtk:print-operation} class.
@@ -1000,13 +1022,13 @@ lambda (operation widget setup settings)    :run-last
   The @fun{gtk:print-operation-n-pages-to-print} function returns the number of
   pages that will be printed.
 
-  Note that this value is set during the print preparation @code{:preparing}
-  phase, so this function should never be called before the data generation
-  @code{:generating-data} phase. You can connect to the
-  @code{\"status-changed\"} signal and call the
-  @fun{gtk:print-operation-n-pages-to-print} function when the print status is
-  in the @code{:generating-data} phase. This is typically used to track the
-  progress of print operation.
+  Note that this value is set during the print preparation
+  @val[gtk:print-status]{:preparing} phase, so this function should never be
+  called before the data generation @val[gtk:print-status]{:generating-data}
+  phase. You can connect to the @sig[gtk:print-operation]{status-changed} signal
+  and call the @fun{gtk:print-operation-n-pages-to-print} function when the
+  print status is in the @val[gtk:print-status]{:generating-data} phase. This is
+  typically used to track the progress of print operation.
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-n-pages}")
 
@@ -1025,7 +1047,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-print-settings)
       "Accessor"
       (documentation 'print-operation-print-settings 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-print-settings object) => settings}
   @syntax{(setf (gtk:print-operation-print-settings object) settings)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1058,7 +1080,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-show-progress)
       "Accessor"
       (documentation 'print-operation-show-progress 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-show-progress object) => show-progress}
   @syntax{(setf (gtk:print-operation-show-progress object) show-progress)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1075,18 +1097,18 @@ lambda (operation widget setup settings)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "status" 'print-operation) t)
- "The @code{status} property of type @symbol{gtk:print-status} (Read) @br{}
+ "The @code{status} property of type @sym{gtk:print-status} (Read) @br{}
   The status of the print operation. @br{}
-  Default value: @code{:initial}")
+  Default value: @val[gtk:print-status]{:initial}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'print-operation-status)
       "Accessor"
       (documentation 'print-operation-status 'function)
- "@version{2023-8-28}
+ "@version{2025-07-27}
   @syntax{(gtk:print-operation-status object) => status}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[status]{the status of type @symbol{gtk:print-status} of the print
+  @argument[status]{a @sym{gtk:print-status} value for the status of the print
     operation}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{status} slot of the
@@ -1105,17 +1127,17 @@ lambda (operation widget setup settings)    :run-last
 (setf (documentation (liber:slot-documentation "status-string"
                                                'print-operation) t)
  "The @code{status-string} property of type @code{:string} (Read) @br{}
-  A string representation of the status of the print operation. The string is
+  The string representation of the status of the print operation. The string is
   translated and suitable for displaying the print status, for example in a
-  @class{gtk:statusbar} widget. See the @code{status} property for a status
-  value that is suitable for programmatic use. @br{}
+  @class{gtk:statusbar} widget. See the @slot[gtk:print-operation]{status}
+  property for a status value that is suitable for programmatic use. @br{}
   Default value: \"\"")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'print-operation-status-string)
       "Accessor"
       (documentation 'print-operation-status-string 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-status-string object) => status-string}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[status-string]{a string representation of the status of the print
@@ -1150,7 +1172,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-support-selection)
       "Accessor"
       (documentation 'print-operation-support-selection 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-status-support-selection object) => setting}
   @syntax{(setf (gtk:print-operation-support-selection object) setting)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1183,7 +1205,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-track-print-status)
       "Accessor"
       (documentation 'print-operation-track-print-status 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-track-print-status object) => track-status}
   @syntax{(setf (gtk:print-operation-track-print-status object) track-status)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1205,17 +1227,17 @@ lambda (operation widget setup settings)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "unit" 'print-operation) t)
- "The @code{unit} property of type @symbol{gtk:unit} (Read / Write) @br{}
+ "The @code{unit} property of type @sym{gtk:unit} (Read / Write) @br{}
   The transformation for the Cairo context obtained from the
   @class{gtk:print-context} object is set up in such a way that distances are
-  measured in units of a value of the @symbol{gtk:unit} enumeration. @br{}
-  Default value: @code{:pixel}")
+  measured in units of a value of the @sym{gtk:unit} enumeration. @br{}
+  Default value: @val[gtk:unit]{:pixel}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'print-operation-unit)
       "Accessor"
       (documentation 'print-operation-unit 'function)
- "@version{2023-8-28}
+ "@version{2025-07-16}
   @syntax{(gtk:print-operation-unit object) => unit}
   @syntax{(setf (gtk:print-operation-unit object) unit)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1227,7 +1249,7 @@ lambda (operation widget setup settings)    :run-last
   The @setf{gtk:print-operation-unit} function sets up the transformation for
   the Cairo context obtained from the @class{gtk:print-context} object in
   such a way that distances are measured in units of a value of the
-  @symbol{gtk:unit} enumeration.
+  @sym{gtk:unit} enumeration.
   @see-class{gtk:print-operation}")
 
 ;;; --- gtk:print-operation-use-full-page --------------------------------------
@@ -1247,7 +1269,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-use-full-page)
       "Accessor"
       (documentation 'print-operation-use-full-page 'function)
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @syntax{(gtk:print-operation-use-full-page object) => full-page}
   @syntax{(setf (gtk:print-operation-use-full-page object) full-page)}
   @argument[object]{a @class{gtk:print-operation} object}
@@ -1273,7 +1295,7 @@ lambda (operation widget setup settings)    :run-last
 
 (defun print-operation-new ()
  #+liber-documentation
- "@version{2023-8-28}
+ "@version{2023-08-28}
   @return{The new @class{gtk:print-operation} object.}
   @begin{short}
     Creates a new @class{gtk:print-operation} object.
@@ -1315,10 +1337,10 @@ lambda (operation widget setup settings)    :run-last
 
 (defun print-operation-run (operation action parent)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-16}
   @argument[operation]{a @class{gtk:print-operation} object}
-  @argument[action]{a @symbol{gtk:print-operation-action} value for the action
-    to start}
+  @argument[action]{a @sym{gtk:print-operation-action} value for the action to
+    start}
   @argument[parent]{a transient parent of the dialog}
   @begin{return}
     The result of the print operation. A return value of @code{:apply}
@@ -1335,16 +1357,16 @@ lambda (operation widget setup settings)    :run-last
   @end{short}
 
   Normally that this function does not return until the rendering of all pages
-  is complete. You can connect to the @code{\"status-changed\"} signal on the
-  print operation to obtain some information about the progress of the print
-  operation. Furthermore, it may use a recursive main loop to show the print
-  dialog.
+  is complete. You can connect to the @sig[gtk:print-operation]{status-changed}
+  signal on the print operation to obtain some information about the progress of
+  the print operation. Furthermore, it may use a recursive main loop to show the
+  print dialog.
 
   If you call the @fun{gtk:print-operation-allow-async} function the operation
   will run asynchronously if this is supported on the platform. The
-  @code{\"done\"} signal will be emitted with the result of the operation when
-  the it is done, that is, when the dialog is canceled, or when the print
-  succeeds or fails.
+  @sig[gtk:print-operation]{done} signal will be emitted with the result of the
+  operation when the it is done, that is, when the dialog is canceled, or when
+  the print succeeds or fails.
 
   Note that the @fun{gtk:print-operation-run} function can only be called once
   on a given @class{gtk:print-operation}.
@@ -1383,14 +1405,14 @@ lambda (operation widget setup settings)    :run-last
 
 (cffi:defcfun ("gtk_print_operation_cancel" print-operation-cancel) :void
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2025-07-24}
   @argument[operation]{a @class{gtk:print-operation} object}
   @begin{short}
     Cancels a running print operation.
   @end{short}
-  This function may be called from a @code{\"begin-print\"}, @code{\"paginate\"}
-  or @code{\"draw-page\"} signal handler to stop the currently running print
-  operation.
+  This function may be called from a @sig[gtk:print-operation]{begin-print},
+  @sig[gtk:print-operation]{paginate} or @sig[gtk:print-operation]{draw-page}
+  signal handler to stop the currently running print operation.
   @see-class{gtk:print-operation}"
   (operation (g:object print-operation)))
 
@@ -1403,7 +1425,7 @@ lambda (operation widget setup settings)    :run-last
 (cffi:defcfun ("gtk_print_operation_draw_page_finish"
                print-operation-draw-page-finish) :void
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[operation]{a @class{gtk:print-operation} object}
   @begin{short}
     Signalize that drawing of the particular page is complete.
@@ -1425,7 +1447,7 @@ lambda (operation widget setup settings)    :run-last
 (cffi:defcfun ("gtk_print_operation_set_defer_drawing"
                print-operation-set-defer-drawing) :void
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[operation]{a @class{gtk:print-operation} object}
   @begin{short}
     Sets up the @class{gtk:print-operation} object to wait for calling of the
@@ -1448,18 +1470,19 @@ lambda (operation widget setup settings)    :run-last
 (cffi:defcfun ("gtk_print_operation_is_finished" print-operation-is-finished)
     :boolean
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2025-07-24}
   @argument[operation]{a @class{gtk:print-operation} object}
   @return{@em{True}, if the print operation is finished.}
   @begin{short}
     A convenience function to find out if the print operation is finished,
-    either successfully @code{:finished} or unsuccessfully
-    @code{:finished-aborted}.
+    either successfully @val[gtk:print-status]{:finished} or unsuccessfully
+    @val[gtk:print-status]{:finished-aborted}.
   @end{short}
   @begin[Notes]{dictionary}
     When you enable print status tracking the print operation can be in a
-    non-finished state even after the @code{\"done\"} signal has been called,
-    as the operation status then tracks the print job status on the printer.
+    non-finished state even after the @sig[gtk:print-operation]{done} signal has
+    been called, as the operation status then tracks the print job status on the
+    printer.
   @end{dictionary}
   @see-class{gtk:print-operation}"
   (operation (g:object print-operation)))
@@ -1473,7 +1496,7 @@ lambda (operation widget setup settings)    :run-last
 (cffi:defcfun ("gtk_print_run_page_setup_dialog" print-run-page-setup-dialog)
     (g:object page-setup)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2023-08-28}
   @argument[parent]{transient parent}
   @argument[page-setup]{an existing @class{gtk:page-setup} object}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1512,7 +1535,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-symbol 'page-setup-done-func)
       "Callback"
       (liber:symbol-documentation 'page-setup-done-func)
- "@version{#2024-5-3}
+ "@version{#2024-05-03}
   @syntax{lambda (pagesetup)}
   @argument[pagesetup]{a @class{gtk:page-setup} object}
   @begin{short}
@@ -1541,7 +1564,7 @@ lambda (operation widget setup settings)    :run-last
 
 (defun print-run-page-setup-dialog-async (parent page-setup settings done-cb)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2025-07-24}
   @argument[parent]{a @class{gtk:window} transient parent, or @code{nil}}
   @argument[page-setup]{an existing @class{gtk:page-setup}, or @code{nil}}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1554,7 +1577,7 @@ lambda (operation widget setup settings)    :run-last
   In contrast to the @fun{gtk:print-run-page-setup-dialog} function, this
   function returns after showing the page setup dialog on platforms that support
   this, and calls @arg{done-cb} from a signal handler for the
-  @code{\"response\"} signal of the dialog.
+  @sig[gtk:dialog]{response} signal of the dialog.
   @see-class{gtk:print-operation}"
   (glib:with-stable-pointer (ptr done-cb)
     (%print-run-page-setup-dialog-async parent

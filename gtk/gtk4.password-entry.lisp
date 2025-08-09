@@ -2,8 +2,8 @@
 ;;; gtk4.password-entry.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -91,7 +91,7 @@
 
 #+(and gtk-4-4 liber-documentation)
 (setf (documentation 'password-entry-buffer 'type)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @begin{short}
     The @class{gtk:entry-buffer} object that locks the underlying memory to
     prevent it from being swapped to disk.
@@ -114,7 +114,7 @@
 #+gtk-4-4
 (defun password-entry-buffer-new ()
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @return{The newly created @class{gtk:password-entry-buffer} object.}
   @begin{short}
     Creates a new @class{gtk:entry-buffer} object using secure memory
@@ -154,7 +154,7 @@
 
 #+liber-documentation
 (setf (documentation 'password-entry 'type)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @begin{short}
     The @class{gtk:password-entry} class is a text entry that has been tailored
     for entering secrets.
@@ -185,23 +185,25 @@ entry.password
     possibly other children.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:password-entry} implementation uses the @code{:text-box} role
-    of the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:password-entry} implementation uses the
+    @val[gtk:accessible-role]{:text-box} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[password-entry::activate]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:password-entry} widget on which the signal
           is emitted.}
-      @end{table}
+      @end{simple-table}
       A keybinding signal which gets emitted when the user activates the
       password entry. Applications should not connect to it, but may emit it
       with the @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:password-entry-new}
   @see-slot{gtk:password-entry-activates-default}
@@ -229,7 +231,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-activates-default)
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:password-entry-activates-default object) => setting}
   @syntax{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -261,7 +263,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-extra-menu)
       "Accessor"
       (documentation 'password-entry-extra-menu 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:password-entry-extra-menu object) => menu}
   @syntax{(setf (gtk:password-entry-extra-menu object) menu)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -291,7 +293,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-placeholder-text)
       "Accessor"
       (documentation 'password-entry-placeholder-text 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:password-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:password-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -327,7 +329,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-show-peek-icon)
       "Accessor"
       (documentation 'password-entry-show-peek-icon 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:password-entry-show-peek-icon object) => setting}
   @syntax{(setf (gtk:password-entry-show-peek-icon object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -351,7 +353,7 @@ lambda (entry)    :action
 
 (defun password-entry-new ()
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @return{The new @class{gtk:password-entry} widget.}
   @short{Creates a password entry.}
   @see-class{gtk:password-entry}"

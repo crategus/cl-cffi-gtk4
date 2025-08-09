@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.drop-target-async.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 -2024 Dieter Kaiser
+;;; Copyright (C) 2022 -2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop-target-async 'type)
- "@version{2024-11-2}
+ "@version{2025-07-19}
   @begin{short}
     The @class{gtk:drop-target-async} object is an auxiliary object that can be
     used to receive Drag-and-Drop operations.
@@ -103,95 +103,115 @@
   the widget with the @fun{gtk:widget-add-controller} function.
 
   During a drag operation, the first signal that a @class{gtk:drop-target-async}
-  object emits is the @code{\"accept\"} signal, which is meant to determine
-  whether the target is a possible drop site for the ongoing drop. The default
-  handler for the @code{\"accept\"} signal accepts the drop if it finds a
-  compatible data format and an action that is supported on both sides.
+  object emits is the @sig[gtk:drop-target-async]{accept} signal, which is meant
+  to determine whether the target is a possible drop site for the ongoing drop.
+  The default handler for the @sig[gtk:drop-target-async]{accept} signal accepts
+  the drop if it finds a compatible data format and an action that is supported
+  on both sides.
 
   If it is, and the widget becomes a target, you will receive a
-  @code{\"drag-enter\"} signal, followed by @code{\"drag-motion\"} signals as
-  the pointer moves, optionally a @code{\"drop\"} signal when a drop happens,
-  and finally a @code{\"drag-leave\"} signal when the pointer moves off the
-  widget.
+  @sig[gtk:drop-target-async]{drag-enter} signal, followed by
+  @sig[gtk:drop-target-async]{drag-motion} signals as the pointer moves,
+  optionally a @sig[gtk:drop-target-async]{drop} signal when a drop happens,
+  and finally a @sig[gtk:drop-target-async]{drag-leave} signal when the pointer
+  moves off the widget.
 
-  The @code{\"drag-enter\"} and @code{\"drag-motion\"} handler return a
-  @symbol{gdk:drag-action} value to update the status of the ongoing operation.
-  The @code{\"drop\"} signal handler should decide if it ultimately accepts the
-  drop and if it does, it should initiate the data transfer and finish the
-  operation by calling the @fun{gdk:drop-finish} function.
+  The @sig[gtk:drop-target-async]{drag-enter} and
+  @sig[gtk:drop-target-async]{drag-motion} handler return a
+  @sym{gdk:drag-action} value to update the status of the ongoing operation.
+  The @sig[gtk:drop-target-async]{drop} signal handler should decide if it
+  ultimately accepts the drop and if it does, it should initiate the data
+  transfer and finish the operation by calling the @fun{gdk:drop-finish}
+  function.
 
-  Between the @code{\"drag-enter\"} and @code{\"drag-leave\"} signals the widget
-  is a current drop target, and will receive the @code{:drop-active} state of
-  the @symbol{gtk:state-flags} flags, which can be used by themes to style the
+  Between the @sig[gtk:drop-target-async]{drag-enter} and
+  @sig[gtk:drop-target-async]{drag-leave} signals the widget is a current drop
+  target, and will receive the @val[gtk:state-flags]{:drop-active} state of
+  the @sym{gtk:state-flags} flags, which can be used by themes to style the
   widget as a drop target.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"accept\" signal}
+    @begin[drop-target-async::accept]{signal}
       @begin{pre}
 lambda (target drop)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[target]{The @class{gtk:drop-target-async} object.}
         @entry[drop]{The @class{gdk:drop} object.}
         @entry[Returns]{@em{True} if the drop is accepted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted on the drop site when a drop operation is about to
       begin.  If the drop is not accepted, @em{false} will be returned and the
       drop target will ignore the drop. If @em{true} is returned, the drop is
       accepted for now but may be rejected later via a call to the
       @fun{gtk:drop-target-async-reject-drop} function or ultimately by
-      returning @em{false} from the @code{\"drop\"} signal handler. The default
-      handler for this signal decides whether to accept the drop based on the
-      formats provided by the @arg{drop} object. If the decision whether the
-      drop will be accepted or rejected needs further processing, such as
-      inspecting the data, this function should return @em{true} and proceed as
-      this drop was accepted and if it decides to reject the drop later, it
-      should call the @fun{gtk:drop-target-async-reject-drop} function.
-    @subheading{The \"drag-enter\" signal}
+      returning @em{false} from the @sig[gtk:drop-target-async]{drop} signal
+      handler. The default handler for this signal decides whether to accept the
+      drop based on the formats provided by the @arg{drop} object. If the
+      decision whether the drop will be accepted or rejected needs further
+      processing, such as inspecting the data, this function should return
+      @em{true} and proceed as this drop was accepted and if it decides to
+      reject the drop later, it should call the
+      @fun{gtk:drop-target-async-reject-drop} function.
+    @end{signal}
+    @begin[drop-target-async::drag-enter]{signal}
       @begin{pre}
 lambda (target drop x y)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[target]{The @class{gtk:drop-target-async} object.}
         @entry[drop]{The @class{gdk:drop} object.}
-        @entry[x]{A double float with the x coordinate of the current pointer
+        @entry[x]{The double float for the x coordinate of the current pointer
           position.}
-        @entry[y]{A double float with the y coordinate of the current pointer
+        @entry[y]{The double float for the y coordinate of the current pointer
           position.}
-        @entry[Returns]{A boolean with the preferred action for this drag
+        @entry[Returns]{The boolean for the preferred action for this drag
           operation.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted on the drop site when the pointer enters the widget.
       It can be used to set up custom highlighting.
-    @subheading{The \"drag-leave\" signal}
+    @end{signal}
+    @begin[drop-target-async::drag-leave]{signal}
       @begin{pre}
 lambda (target drop)    :run-last
       @end{pre}
+      @begin[code]{simple-table}
+        @entry[target]{The @class{gtk:drop-target-async} object.}
+        @entry[drop]{The @class{gdk:drop} object.}
+      @end{simple-table}
       The signal is emitted on the drop site when the pointer leaves the widget.
-      Its main purpose it to undo things done in the @code{\"drag-enter\"}
-      signal handler.
-      @begin[code]{table}
-        @entry[target]{The @class{gtk:drop-target-async} object.}
-        @entry[drop]{The @class{gdk:drop} object.}
-      @end{table}
-    @subheading{The \"drag-motion\" signal}
+      Its main purpose it to undo things done in the
+      @sig[gtk:drop-target-async]{drag-enter} signal handler.
+    @end{signal}
+    @begin[drop-target-async::drag-motion]{signal}
       @begin{pre}
 lambda (target drop x y)    :run-last
       @end{pre}
-      The signal is emitted while the pointer is moving over the drop target.
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[target]{The @class{gtk:drop-target-async} object.}
         @entry[drop]{The @class{gdk:drop} object.}
-        @entry[x]{A double float with the x coordinate of the current pointer
+        @entry[x]{The double float for the x coordinate of the current pointer
           position.}
-        @entry[y]{A double float with the y coordinate of the current pointer
+        @entry[y]{The double float for the y coordinate of the current pointer
           position.}
-        @entry[Returns]{A boolean with the preferred action for this drag
+        @entry[Returns]{The boolean for the preferred action for this drag
           operation.}
-      @end{table}
-    @subheading{The \"drop\" signal}
+      @end{simple-table}
+      The signal is emitted while the pointer is moving over the drop target.
+    @end{signal}
+    @begin[drop-target-async::drop]{signal}
       @begin{pre}
 lambda (target drop x y)    :run-last
       @end{pre}
+      @begin[code]{simple-table}
+        @entry[target]{The @class{gtk:drop-target-async} object.}
+        @entry[drop]{The @class{gdk:drop} object.}
+        @entry[x]{The double float for the x coordinate of the current pointer
+          position.}
+        @entry[y]{The double float for the y coordinate of the current pointer
+          position.}
+        @entry[Returns]{Whether the drop is accepted at the given pointer
+          position.}
+      @end{simple-table}
       The signal is emitted on the drop site when the user drops the data onto
       the widget. The signal handler must determine whether the pointer position
       is in a drop zone or not. If it is not in a drop zone, it returns
@@ -203,16 +223,7 @@ lambda (target drop x y)    :run-last
       received. To receive the data, use one of the read functions provides by
       the @class{gdk:drop} object such as the @fun{gdk:drop-read-async} or
       @fun{gdk:drop-read-value-async} functions.
-      @begin[code]{table}
-        @entry[target]{The @class{gtk:drop-target-async} object.}
-        @entry[drop]{The @class{gdk:drop} object.}
-        @entry[x]{A double float with the x coordinate of the current pointer
-          position.}
-        @entry[y]{A double float with the y coordinate of the current pointer
-          position.}
-        @entry[Returns]{Whether the drop is accepted at the given pointer
-          position.}
-      @end{table}
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:drop-target-async-new}
   @see-slot{gtk:drop-target-async-actions}
@@ -227,19 +238,18 @@ lambda (target drop x y)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drop-target-async) t)
- "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write)
-  @br{}
+ "The @code{actions} property of type @sym{gdk:drag-action} (Read / Write) @br{}
   The actions that this drop target supports.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-target-async-actions)
       "Accessor"
       (documentation 'drop-target-async-actions 'function)
- "@version{#2023-9-29}
+ "@version{#2025-07-25}
   @syntax{(gtk:drop-target-async-actions object) => actions}
   @syntax{(setf (gtk:drop-target-async-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target-async} object}
-  @argument[actions]{a @symbol{gdk:drag-action} value}
+  @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
     Accessor of the @slot[gtk:drop-target-async]{actions} slot of the
     @class{gtk:drop-target-async} class.
@@ -262,12 +272,12 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-formats)
       "Accessor"
       (documentation 'drop-target-async-formats 'function)
- "@version{#2023-9-29}
+ "@version{#2025-07-26}
   @syntax{(gtk:drop-target-async-formats object) => formats}
   @syntax{(setf (gtk:drop-target-async-formats object) formats)}
   @argument[object]{a @class{gtk:drop-target-async} object}
-  @argument[formats]{a @class{gdk:content-formats} instance with the
-    supported data formats}
+  @argument[formats]{a @class{gdk:content-formats} instance for the supported
+    data formats}
   @begin{short}
     Accessor of the @slot[gtk:drop-target-async]{formats} slot of the
     @class{gtk:drop-target-async} class.
@@ -286,11 +296,10 @@ lambda (target drop x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_async_new" drop-target-async-new)
     (g:object drop-target-async :return)
  #+liber-documentation
- "@version{#2023-9-29}
-  @argument[formats]{a @class{gdk:content-formats} instance with the supported
+ "@version{#2025-07-25}
+  @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
-  @argument[actions]{a @symbol{gdk:drag-action} value with the supported
-    actions}
+  @argument[actions]{a @sym{gdk:drag-action} value for the supported actions}
   @return{The new @class{gtk:drop-target-async} object.}
   @short{Creates a new @class{gtk:drop-target-async} object.}
   @see-class{gtk:drop-target-async}
@@ -308,7 +317,7 @@ lambda (target drop x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_async_reject_drop"
                drop-target-async-reject-drop) :void
  #+liber-documentation
- "@version{#2023-9-29}
+ "@version{#2023-09-29}
   @argument[target]{a @class{gtk:drop-target-async} object}
   @argument[drop]{a @class{gdk:drop} object of an ongoing drag operation}
   @begin{short}

@@ -99,7 +99,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-section 'type)
- "@version{2025-05-14}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:shortcuts-section} widget collects all the keyboard shortcuts
     and gestures for a major application mode.
@@ -118,18 +118,19 @@
     This widget will be removed in GTK 5.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"change-current-page\" signal}
+    @begin[shortcuts-section::change-current-page]{signal}
       @begin{pre}
 lambda (section offset data)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[section]{The @class{gtk:shortcuts-section} widget.}
         @entry[offset]{The integer for the offset.}
         @entry[data]{The foreign pointer to user data.}
         @entry[Return]{The boolean whether the page was changed.}
-      @end{table}
+      @end{simple-table}
       Emitted when the current page changes. The default bindings for this
       signal are @kbd{Ctrl+PgUp}, @kbd{PgUp}, @kbd{Ctrl+PgDn}, @kbd{PgDn}.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:shortcuts-section-max-height}
   @see-slot{gtk:shortcuts-section-section-name}

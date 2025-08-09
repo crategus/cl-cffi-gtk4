@@ -164,17 +164,16 @@
 (setf (liber:alias-for-function 'alert-dialog-buttons)
       "Accessor"
       (documentation 'alert-dialog-buttons 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-buttons object) => buttons}
   @syntax{(setf (gtk:alert-dialog-buttons object) buttons)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[buttons]{a list of strings for the button labels}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{buttons} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{buttons} slot of the
+    @class{gtk:alert-dialog} class gets or sets the button labels for the alert
+    dialog.
   @end{short}
-  The @fun{gtk:alert-dialog-buttons} function returns the button labels for the
-  alert dialog. The @setf{gtk:alert-dialog-buttons} function sets the buttons.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -198,19 +197,17 @@
 (setf (liber:alias-for-function 'alert-dialog-cancel-button)
       "Accessor"
       (documentation 'alert-dialog-cancel-button 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-cancel-button object) => button}
   @syntax{(setf (gtk:alert-dialog-cancel-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer for the new Cancel button}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{cancel-button} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{cancel-button} slot of the
+    @class{gtk:alert-dialog} class gets or sets the index of the Cancel button.
   @end{short}
-  The @fun{gtk:alert-dialog-cancel-button} function returns the index of the
-  Cancel button. The @setf{gtk:alert-dialog-cancel-button} function sets the
-  index of the Cancel button. See the @slot[gtk:alert-dialog]{cancel-button}
-  property for details of how this value is used.
+  See the @slot[gtk:alert-dialog]{cancel-button} property for details of how
+  this value is used.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -235,19 +232,17 @@
 (setf (liber:alias-for-function 'alert-dialog-default-button)
       "Accessor"
       (documentation 'alert-dialog-default-button 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-default-button object) => button}
   @syntax{(setf (gtk:alert-dialog-default-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer for the new Default button}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{default-button} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{default-button} slot of the
+    @class{gtk:alert-dialog} class gets or sets the index of the Default button.
   @end{short}
-  The @fun{gtk:alert-dialog-default-button} function returns the index of the
-  Default button. The @setf{gtk:alert-dialog-default-button} function sets the
-  index of the Default button. See the @slot[gtk:alert-dialog]{default-button}
-  property for details of how this value is used.
+  See the @slot[gtk:alert-dialog]{default-button} property for details of how
+  this value is used.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -264,18 +259,16 @@
 (setf (liber:alias-for-function 'alert-dialog-detail)
       "Accessor"
       (documentation 'alert-dialog-detail 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-detail object) => detail}
   @syntax{(setf (gtk:alert-dialog-detail object) detail)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[detail]{a string for the detail text}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{detail} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{detail} slot of the
+    @class{gtk:alert-dialog} class gets or sets the detail text that will be
+    shown in the alert dialog.
   @end{short}
-  The @fun{gtk:alert-dialog-detail} function returns the detail text that will
-  be shown in the alert dialog. The @setf{gtk:alert-dialog-detail} function
-  sets the detail text.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -292,18 +285,16 @@
 (setf (liber:alias-for-function 'alert-dialog-message)
       "Accessor"
       (documentation 'alert-dialog-message 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-message object) => message}
   @syntax{(setf (gtk:alert-dialog-message object) message)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[message]{a string for the message}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{message} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{message} slot of the
+    @class{gtk:alert-dialog} class gets or sets the message that will be shown
+    in the alert dialog.
   @end{short}
-  The @fun{gtk:alert-dialog-message} function returns the message that will be
-  shown in the alert dialog. The @setf{gtk:alert-dialog-message} function sets
-  the message.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
@@ -320,18 +311,16 @@
 (setf (liber:alias-for-function 'alert-dialog-modal)
       "Accessor"
       (documentation 'alert-dialog-modal 'function)
- "@version{2025-04-17}
+ "@version{2025-07-29}
   @syntax{(gtk:alert-dialog-modal object) => modal}
   @syntax{(setf (gtk:alert-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[modal]{a boolean whether the alert dialog is modal}
   @begin{short}
-    Accessor of the @slot[gtk:alert-dialog]{modal} slot of the
-    @class{gtk:alert-dialog} class.
+    The accessor for the @slot[gtk:alert-dialog]{modal} slot of the
+    @class{gtk:alert-dialog} class gets or sets whether the alert dialog blocks
+    interaction with the parent window while it is presented.
   @end{short}
-  The @fun{gtk:alert-dialog-modal} function returns whether the alert dialog
-  blocks interaction with the parent window while it is presented. The
-  @setf{gtk:alert-dialog-modal} function sets the property.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")

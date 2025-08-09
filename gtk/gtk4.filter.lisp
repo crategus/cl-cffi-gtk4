@@ -75,7 +75,7 @@
 (setf (liber:alias-for-symbol 'filter-match)
       "GEnum"
       (liber:symbol-documentation 'filter-match)
- "@version{2024-09-27}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkFilterMatch\" filter-match
   (:export t
@@ -85,14 +85,14 @@
   :all)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:some]{The filter matches some items, the @fun{gtk:filter-match}
         function may return @em{true} or @em{false}.}
       @entry[:none]{The filter does not match any item, the
         @fun{gtk:filter-match} function will always return @em{false}.}
       @entry[:all]{The filter matches all items, the @fun{gtk:filter-match}
         function will always return @em{true}.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the known strictness of a filter.
@@ -118,7 +118,7 @@
 (setf (liber:alias-for-symbol 'filter-change)
       "GEnum"
       (liber:symbol-documentation 'filter-change)
- "@version{2024-09-27}
+ "@version{2025-07-26}
   @begin{declaration}
 (gobject:define-genum \"GtkFilterChange\" filter-change
   (:export t
@@ -128,7 +128,7 @@
   :more-strict)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:different]{The filter change cannot be described with any of the
         other enumeration values.}
       @entry[:less-strict]{The filter is less strict than it was before. All
@@ -137,14 +137,14 @@
       @entry[:more-strict]{The filter is more strict than it was before. All
         items that it used to return @em{false} for still return @em{false},
         others now may, too.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes changes in a filter in more detail and allows objects using the
     filter to optimize refiltering items.
   @end{short}
   If you are writing an implementation and are not sure which value to pass,
-  the @code{:different} value is always a correct choice.
+  the @val[gtk:filter-change]{:different} value is always a correct choice.
   @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -160,7 +160,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter 'type)
- "@version{2024-10-20}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
@@ -170,9 +170,9 @@
   the ones that the function returns @em{true} for.
 
   Filters may change what items they match through their lifetime. In that
-  case, they will emit the @code{\"changed\"} signal to notify that previous
-  filter results are no longer valid and that items should be checked again via
-  the @fun{gtk:filter-match} function.
+  case, they will emit the @sig[gtk:filter]{changed} signal to notify that
+  previous filter results are no longer valid and that items should be checked
+  again via the @fun{gtk:filter-match} function.
 
   GTK provides various pre-made filter implementations for common filtering
   operations. These filters often include properties that can be linked to
@@ -180,20 +180,21 @@
   lists or complex search methods, it is also possible to subclass the
   @class{gtk:filter} class and provide one's own filter.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"changed\" signal}
+    @begin[filter::changed]{signal}
       @begin{pre}
 lambda (filter change)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[filter]{The @class{gtk:filter} object.}
-        @entry[change]{The @symbol{gtk:filter-change} value.}
-      @end{table}
+        @entry[change]{The @sym{gtk:filter-change} value.}
+      @end{simple-table}
       The signal is emitted whenever the filter changed. Users of the filter
       should then check items again via the @fun{gtk:filter-match} function.
       The @class{gtk:filter-list-model} object handles this signal
       automatically. Depending on the @arg{change} parameter, not all items
-      need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
+      need to be changed, but only some. Refer to the @sym{gtk:filter-change}
       documentation for details.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:filter-list-model}")
 
@@ -224,18 +225,19 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2025-07-24}
   @argument[filter]{a @class{gtk:filter} object}
   @begin{return}
-    The @symbol{gtk:filter-match} value with the strictness of @arg{filter}.
+    The @sym{gtk:filter-match} value for the strictness of @arg{filter}.
   @end{return}
   @begin{short}
     Gets the known strictness of the filter.
   @end{short}
-  If the strictness is not known, the @code{:match-some} value is returned. The
-  value may change after emission of the @code{\"changed\"} signal. This
-  function is meant purely for optimization purposes, filters can choose to
-  omit implementing it, but the @class{gtk:filter-list-model} class uses it.
+  If the strictness is not known, the @val[gtk:filter-match]{:some} value is
+  returned. The value may change after emission of the @sig[gtk:filter]{changed}
+  signal. This function is meant purely for optimization purposes, filters can
+  choose to omit implementing it, but the @class{gtk:filter-list-model} class
+  uses it.
   @see-class{gtk:filter}
   @see-class{gtk:filter-list-model}
   @see-symbol{gtk:filter-match}"
@@ -249,17 +251,17 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
  #+liber-documentation
- "@version{2024-09-27}
+ "@version{2025-07-24}
   @argument[filter]{a @class{gtk:filter} object}
-  @argument[change]{a @symbol{gtk:filter-change} value}
+  @argument[change]{a @sym{gtk:filter-change} value}
   @begin{short}
-    Emits the @code{\"changed\"} signal to notify all users of the filter that
-    the filter changed.
+    Emits the @sig[gtk:filter]{changed} signal to notify all users of the filter
+    that the filter changed.
   @end{short}
   Users of the filter should then check items again via the
   @fun{gtk:filter-match} function.
   Depending on the @arg{change} parameter, not all items need to be changed, but
-  only some. Refer to the @symbol{gtk:filter-change} documentation for details.
+  only some. Refer to the @sym{gtk:filter-change} documentation for details.
   This function is intended for implementors of @class{gtk:filter} subclasses
   and should not be called from other functions.
   @see-class{gtk:filter}

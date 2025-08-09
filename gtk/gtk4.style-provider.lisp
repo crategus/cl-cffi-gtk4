@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.style-provider.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,7 +70,7 @@
 (setf (liber:alias-for-variable '+priority-fallback+)
       "Constant"
       (documentation '+priority-fallback+ 'variable)
- "@version{2024-4-1}
+ "@version{2024-04-01}
   @variable-value{1}
   @begin{short}
     The priority used for default style information that is used in the absence
@@ -93,7 +93,7 @@
 (setf (liber:alias-for-variable '+priority-theme+)
       "Constant"
       (documentation '+priority-theme+ 'variable)
- "@version{2024-4-1}
+ "@version{2024-04-01}
   @variable-value{200}
   @begin{short}
     The priority used for style information provided by themes.
@@ -112,7 +112,7 @@
 (setf (liber:alias-for-variable '+priority-settings+)
       "Constant"
       (documentation '+priority-settings+ 'variable)
- "@version{2024-4-1}
+ "@version{2024-04-01}
   @variable-value{400}
   @begin{short}
     The priority used for style information provided via the
@@ -136,7 +136,7 @@
 (setf (liber:alias-for-variable '+priority-application+)
       "Constant"
       (documentation '+priority-application+ 'variable)
- "@version{2024-4-1}
+ "@version{2024-04-01}
   @variable-value{600}
   @begin{short}
     A priority that can be used when adding a @class{gtk:style-provider} object
@@ -156,7 +156,7 @@
 (setf (liber:alias-for-variable '+priority-user+)
       "Constant"
       (documentation '+priority-user+ 'variable)
- "@version{2024-4-1}
+ "@version{2024-04-01}
   @variable-value{800}
   @begin{short}
     The priority used for the style information from the
@@ -181,7 +181,7 @@
 (setf (liber:alias-for-class 'style-provider)
       "Interface"
       (documentation 'style-provider 'type)
- "@version{2024-11-2}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
@@ -193,15 +193,16 @@
   GTK uses the @class{gtk:style-provider} implementation for CSS in the
   @class{gtk:css-provider} implementation.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"gtk-private-changed\" signal}
+    @begin[style-provider::gtk-private-changed]{signal}
       @begin{pre}
 lambda (provider)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[provider]{The @class{gtk:style-provider} object which received
           the signal.}
-      @end{table}
+      @end{simple-table}
       No description available.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:css-provider}

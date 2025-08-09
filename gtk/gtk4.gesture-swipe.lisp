@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-swipe.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -68,7 +68,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-swipe 'type)
- "@version{2024-7-27}
+ "@version{2025-07-19}
   @begin{short}
     The @class{gtk:gesture-swipe} class is a @class{gtk:gesture} implementation
     for swipe gestures.
@@ -82,20 +82,21 @@
   signal handler for the @class{gdk:frame-clock} object. All velocities are
   reported in pixels/sec units.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"swipe\" signal}
+    @begin[gesture-swipe::swipe]{signal}
       @begin{pre}
 lambda (gesture xvel yvel)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture-swipe} object which received the
+      @begin[code]{simple-table}
+        @entry[gesture]{The @class{gtk:gesture-swipe} object that received the
           signal.}
-        @entry[xvel]{The double float with the velocity in the x axis,
+        @entry[xvel]{The double float for the velocity in the x axis,
           in pixels/sec.}
-        @entry[yvel]{The double float with the velocity in the y axis,
+        @entry[yvel]{The double float for the velocity in the y axis,
           in pixels/sec.}
-    @end{table}
-      The signal is emitted when the recognized gesture is finished, velocity
-      and direction are a product of previously recorded events.
+    @end{simple-table}
+    The signal is emitted when the recognized gesture is finished, velocity
+    and direction are a product of previously recorded events.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:gesture-swipe-new}
   @see-class{gtk:gesture}")
@@ -108,7 +109,7 @@ lambda (gesture xvel yvel)    :run-last
 
 (defun gesture-swipe-new ()
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2024-02-19}
   @return{The newly created @class{gtk:gesture-swipe} object.}
   @begin{short}
     Returns a newly created gesture that recognizes swipes.
@@ -130,14 +131,11 @@ lambda (gesture xvel yvel)    :run-last
 
 (defun gesture-swipe-velocity (gesture)
  #+liber-documentation
- "@version{2024-2-19}
+ "@version{2025-07-26}
+  @syntax{(gtk:gesture-swipe-velocity gesture) => xvel, yvel}
   @argument[gesture]{a @class{gtk:gesture-swipe} object}
-  @begin{return}
-    @arg{xvel} -- a double float with the velocity in the x axis, in
-      pixels/sec. @br{}
-    @arg{yvel} -- a double float with the velocity in the y axis, in
-      pixels/sec.
-  @end{return}
+  @argument[xvel]{a double float for the velocity in the x axis, in pixels/sec}
+  @argument[yvel]{a double float for the velocity in the y axis, in pixels/sec}
   @begin{short}
     If the gesture is recognized, this function returns the recorded velocity,
     as per the last event(s) processed, otherwise @code{nil} is returned.

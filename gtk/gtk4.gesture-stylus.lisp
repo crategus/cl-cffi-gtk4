@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.gesture-stylus.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -86,53 +86,57 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-stylus 'type)
- "@version{2024-2-21}
+ "@version{2025-07-19}
   @begin{short}
     The @class{gtk:gesture-stylus} class is a @class{gtk:gesture} implementation
     specific to stylus input.
   @end{short}
   The provided signals just provide the basic information of the stylus events.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"down\" signal}
+    @begin[gesture-stylus::down]{signal}
       @begin{pre}
 lambda (gesture x y)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{The double float with the x coordinate of the stylus event.}
-        @entry[y]{The double float with the y coordinate of the stylus event.}
-      @end{table}
-    @subheading{The \"motion\" signal}
+        @entry[x]{The double float for the x coordinate of the stylus event.}
+        @entry[y]{The double float for the y coordinate of the stylus event.}
+      @end{simple-table}
+    @end{signal}
+    @begin[gesture-stylus::motion]{signal}
       @begin{pre}
 lambda (gesture x y)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{The double float with the x coordinate of the stylus event.}
-        @entry[y]{The double float with the y coordinate of the stylus event.}
-      @end{table}
-    @subheading{The \"proximity\" signal}
+        @entry[x]{The double float for the x coordinate of the stylus event.}
+        @entry[y]{The double float for the y coordinate of the stylus event.}
+      @end{simple-table}
+    @end{signal}
+    @begin[gesture-stylus::proximity]{signal}
       @begin{pre}
 lambda (gesture x y)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{The double float with the x coordinate of the stylus event.}
-        @entry[y]{The double float with the y coordinate of the stylus event.}
-      @end{table}
-    @subheading{The \"up\" signal}
+        @entry[x]{The double float for the x coordinate of the stylus event.}
+        @entry[y]{The double float for the y coordinate of the stylus event.}
+      @end{simple-table}
+    @end{signal}
+    @begin[gesture-stylus::up]{signal}
       @begin{pre}
 lambda (gesture x y)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{The double float with the x coordinate of the stylus event.}
-        @entry[y]{The double float with the y coordinate of the stylus event.}
-      @end{table}
+        @entry[x]{The double float for the x coordinate of the stylus event.}
+        @entry[y]{The double float for the y coordinate of the stylus event.}
+      @end{simple-table}
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:gesture-stylus-new}
   @see-slot{gtk:gesture-stylus-stylus-only}
@@ -149,15 +153,15 @@ lambda (gesture x y)    :run-last
 (setf (documentation (liber:slot-documentation "stylus-only" 'gesture-stylus) t)
  "The @code{stylus-only} property of type @code{:boolean}
   (Read / Write / Construct) @br{}
-  If this gesture should exclusively react to stylus input devices. Since 4.10
-  @br{}
+  Whether this gesture should exclusively react to stylus input devices.
+  Since 4.10 @br{}
   Default value: @em{true}")
 
 #+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'gesture-stylus-stylus-only)
       "Accessor"
       (documentation 'gesture-stylus-stylus-only 'function)
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @syntax{(gtk:gesture-stylus-only object) => setting}
   @syntax{(setf (gtk:gesture-stylus-only object) setting)}
   @argument[object]{a @class{gtk:gesture-stylus} object}
@@ -181,7 +185,7 @@ lambda (gesture x y)    :run-last
 
 (defun gesture-stylus-new ()
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2024-02-21}
   @return{The newly created @class{gtk:gesture-stylus} object.}
   @begin{short}
     Creates a new stylus gesture.
@@ -202,15 +206,16 @@ lambda (gesture x y)    :run-last
 
 (defun gesture-stylus-axis (gesture axis)
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2025-07-24}
   @argument[gesture]{a @class{gtk:gesture-stylus} object}
-  @argument[axis]{a @symbol{gdk:axis-use} value with the requested device axis}
-  @return{The double float with the current value for the axis.}
+  @argument[axis]{a @sym{gdk:axis-use} value for the requested device axis}
+  @return{The double float for the current value for the axis.}
   @begin{short}
     Returns the current value for the requested axis.
   @end{short}
-  This function must be called from either the @code{\"down\"},
-  @code{\"motion\"}, @code{\"up\"} or @code{\"proximity\"} signals.
+  This function must be called from either the @sig[gtk:gesture-stylus]{down},
+  @sig[gtk:gesture-stylus]{motion}, @sig[gtk:gesture-stylus]{up} or
+  @sig[gtk:gesture-stylus]{proximity} signals.
   @see-class{gtk:gesture-stylus}
   @see-symbol{gdk:axis-use}"
   (cffi:with-foreign-object (value :double)
@@ -281,14 +286,15 @@ lambda (gesture x y)    :run-last
 (cffi:defcfun ("gtk_gesture_stylus_get_device_tool" gesture-stylus-device-tool)
     (g:object gdk:device-tool)
  #+liber-documentation
- "@version{2024-2-21}
+ "@version{2025-07-24}
   @argument[gesture]{a @class{gtk:gesture-stylus} object}
   @return{The current @class{gdk:device-tool} object.}
   @begin{short}
     Returns the device tool currently driving input through this gesture.
   @end{short}
-  This function must be called from either the @code{\"down\"},
-  @code{\"motion\"}, @code{\"up\"} or @code{\"proximity\"} signal handlers.
+  This function must be called from either the @sig[gtk:gesture-stylus]{down},
+  @sig[gtk:gesture-stylus]{motion}, @sig[gtk:gesture-stylus]{up} or
+  @sig[gtk:gesture-stylus]{proximity} signal handlers.
   @see-class{gtk:gesture-stylus}
   @see-class{gdk:device-tool}"
   (gesture (g:object gesture-stylus)))

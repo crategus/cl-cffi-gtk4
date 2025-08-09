@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.separator.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -89,8 +89,9 @@
     @code{.vertical} style classes.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:separator} implementation uses the @code{:separator} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:separator} implementation uses the
+    @val[gtk:accessible-role]{:separator} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-class{gtk:orientable}")
 
@@ -102,8 +103,8 @@
 
 (defun separator-new (orientation)
  #+liber-documentation
- "@version{2024-10-27}
-  @argument[orientation]{a value of the  @symbol{gtk:orientation} enumeration}
+ "@version{2025-07-27}
+  @argument[orientation]{a value of the  @sym{gtk:orientation} enumeration}
   @return{The new @class{gtk:separator} widget.}
   @begin{short}
     Creates a new separator widget with the given @arg{orientation}.

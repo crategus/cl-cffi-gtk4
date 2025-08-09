@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.uri-launcher.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -102,11 +102,11 @@
 (setf (liber:alias-for-function 'uri-launcher-uri)
       "Accessor"
       (documentation 'uri-launcher-uri 'function)
- "@version{#2023-10-12}
+ "@version{#2025-07-27}
   @syntax{(gtk:uri-launcher-uri object) => uri}
   @syntax{(setf (gtk:uri-launcher-uri object) uri)}
   @argument[object]{a @class{gtk:uri-launcher} object}
-  @argument[uri]{a string with the URI}
+  @argument[uri]{a string for the URI}
   @begin{short}
     Accessor of the @slot[gtk:uri-launcher]{uri} slot of the
     @class{gtk:uri-launcher} class.
@@ -125,8 +125,8 @@
 
 (defun uri-launcher-new (uri)
  #+liber-documentation
- "@version{#2023-10-19}
-  @argument[uri]{a string with the URI to open}
+ "@version{#2025-07-27}
+  @argument[uri]{a string for the URI to open}
   @return{The new @class{gtk:uri-launcher} object.}
   @short{Creates a new @class{gtk:uri-launcher} object.}
 
@@ -150,12 +150,12 @@
 
 (defun uri-launcher-launch (launcher parent cancellable func)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @argument[launcher]{a @class{gtk:uri-launcher} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     Launch an application to open the URI.
   @end{short}
@@ -191,10 +191,10 @@
 
 (defun uri-launcher-launch-finish (launcher result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-13}
   @argument[launcher]{a @class{gtk:uri-launcher} object}
-  @argument[result]{a @class{g:async-result} object with the result}
-  @return{@em{True} if an application was launched, or @em{false} on error}
+  @argument[result]{a @class{g:async-result} object for the result}
+  @return{@em{True} if an application was launched, or @em{false} on error.}
   @begin{short}
     Finishes the the @fun{gtk:uri-launcher-launch} function call and returns
     the result.

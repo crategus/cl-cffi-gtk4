@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcut-manager.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -62,7 +62,7 @@
 (setf (liber:alias-for-class 'shortcut-manager)
       "Interface"
       (documentation 'shortcut-manager 'type)
- "@version{2024-11-1}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:shortcut-manager} interface is used to implement shortcut
     scopes.
@@ -72,8 +72,8 @@
   scopes are limited to the same native.
 
   Every widget that implements the @class{gtk:shortcut-manager} interface will
-  be used with the @code{:managed} value of the @symbol{gtk:shortcut-scope}
-  enumeration.
+  be used with the @val[gtk:shortcut-scope]{:managed} value of the
+  @sym{gtk:shortcut-scope} enumeration.
 
   Examples for widgets implementing the @class{gtk:shortcut-manager} interface
   are the @class{gtk:window} and @class{gtk:popover} widgets.
@@ -90,7 +90,7 @@
 (cffi:defcfun ("gtk_shortcut_manager_add_controller"
                shortcut-manager-add-controller) :void
  #+liber-documentation
- "@version{#2024-11-1}
+ "@version{#2024-11-01}
   @argument[manager]{a @class{gtk:shortcut-manager} object}
   @argument[controller]{a @class{gtk:shortcut-controller} object}
   @begin{short}
@@ -110,7 +110,7 @@
 (cffi:defcfun ("gtk_shortcut_manager_remove_controller"
                shortcut-manager-remove-controller) :void
  #+liber-documentation
- "@version{#2024-11-1}
+ "@version{#2024-11-01}
   @argument[manager]{a @class{gtk:shortcut-manager} object}
   @argument[controller]{a @class{gtk:shortcut-controller} object}
   @begin{short}

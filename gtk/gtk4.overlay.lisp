@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay 'type)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @begin{short}
     The @class{gtk:overlay} widget contains a single main widget, on top of
     which it can place overlay widgets.
@@ -136,8 +136,7 @@
 lambda (overlay widget allocation)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[overlay]{The @class{gtk:overlay} widget which emitted the
-          signal.}
+        @entry[overlay]{The @class{gtk:overlay} widget that emitted the signal.}
         @entry[widget]{The @class{gtk:widget} overlay widget to position.}
         @entry[allocation]{Return location of type @class{gdk:rectangle} for
           the allocation.}
@@ -174,17 +173,15 @@ lambda (overlay widget allocation)    :run-last
 (setf (liber:alias-for-function 'overlay-child)
       "Accessor"
       (documentation 'overlay-child 'function)
- "@version{2024-10-02}
+ "@version{2025-07-31}
   @syntax{(gtk:overlay-child object) => child}
   @syntax{(setf (gtk:overlay-child object) child)}
   @argument[object]{a @class{gtk:overlay} widget}
   @argument[child]{a @class{gtk:widget} main widget}
   @begin{short}
-    Accessor of the @slot[gtk:overlay]{child} slot of the @class{gtk:overlay}
-    class.
+    The accessor for the @slot[gtk:overlay]{child} slot of the
+    @class{gtk:overlay} class gets or sets the main widget of the overlay.
   @end{short}
-  The @fun{gtk:overlay-child} function gets the main widget of the overlay.
-  The @setf{gtk:overlay-child} function sets the main widget.
   @see-class{gtk:paned}
   @see-class{gtk:widget}")
 
@@ -267,17 +264,16 @@ lambda (overlay widget allocation)    :run-last
 (cffi:defcfun ("gtk_overlay_get_measure_overlay" overlay-measure-overlay)
     :boolean
  #+liber-documentation
- "@version{2024-10-02}
+ "@version{2025-07-31}
   @syntax{(gtk:overlay-measure-overlay overlay widget) => measure}
   @syntax{(setf (gtk:overlay-measure-overlay overlay widget) measure)}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} overlay widget}
   @argument[measure]{a boolean whether the overlay widget should be measured}
   @begin{short}
-    The @fun{gtk:overlay-measure-overlay} function gets whether the size of the
-    overlay widget is included in the measurement of the overlay.
+    Gets or sets whether the size of the overlay widget is included in the
+    measurement of the overlay.
   @end{short}
-  The @setf{gtk:overlay-measure-overlay} function sets the property.
 
   The overlay will request the size of the largest overlay widget that has this
   property set to @em{true}. Children who are not included may be drawn outside
@@ -304,17 +300,16 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_get_clip_overlay" overlay-clip-overlay) :boolean
  #+liber-documentation
- "@version{2024-10-02}
+ "@version{2025-07-31}
   @syntax{(gtk:overlay-clip-overlay overlay widget) => clip}
   @syntax{(setf (gtk:overlay-clip-overlay overlay widget) clip)}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} overlay widget}
   @argument[clip]{a boolean whether the overlay widget should be clipped}
   @begin{short}
-    The @fun{gtk:overlay-clip-overlay} function gets whether the overlay widget
-    should be clipped within the overlay.
+    Gets or sets whether the overlay widget should be clipped within the
+    overlay.
   @end{short}
-  The @setf{gtk:overlay-clip-overlay} function sets the property.
   @see-class{gtk:overlay}
   @see-class{gtk:widget}"
   (overlay (g:object overlay))

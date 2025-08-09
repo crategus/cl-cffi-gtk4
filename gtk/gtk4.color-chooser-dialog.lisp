@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.color-chooser-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -91,7 +91,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-chooser-dialog 'type)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @begin{short}
     The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a
     color.
@@ -215,7 +215,7 @@
 (setf (liber:alias-for-function 'color-chooser-dialog-show-editor)
       "Accessor"
       (documentation 'color-chooser-dialog-show-editor 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-chooser-dialog-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-dialog-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-dialog} widget}
@@ -238,9 +238,9 @@
 
 (defun color-chooser-dialog-new (title parent)
  #+liber-documentation
- "@version{2024-5-21}
-  @argument[title]{a string with the title of the dialog, or @code{nil}}
-  @argument[parent]{a @class{gtk:window} transient parent of the dialog,
+ "@version{2025-07-25}
+  @argument[title]{a string for the title of the dialog, or @code{nil}}
+  @argument[parent]{a @class{gtk:window} transient parent for the dialog,
     or @code{nil}}
   @return{The new @class{gtk:color-chooser-dialog} widget.}
   @short{Creates a new color chooser dialog.}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcut-controller.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 (setf (liber:alias-for-symbol 'shortcut-scope)
       "GEnum"
       (liber:symbol-documentation 'shortcut-scope)
- "@version{2023-7-23}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkShortcutScope\" shortcut-scope
   (:export t
@@ -98,13 +98,13 @@
   :global)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:local]{Shortcuts are handled inside the widget the controller
         belongs to.}
       @entry[:managed]{Shortcuts are handled by the first ancestor that is a
         @class{gtk:shortcut-manager} object.}
       @entry[:global]{Shortcuts are handled by the root widget.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes where @class{gtk:shortcut} objects added to the
@@ -143,7 +143,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-controller 'type)
- "@version{2023-7-23}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:shortcut-controller} class is an event controller that
     manages shortcuts.
@@ -209,7 +209,7 @@
 (setf (liber:alias-for-function 'shortcut-controller-item-type)
       "Accessor"
       (documentation 'shortcut-controller-item-type 'function)
- "@version{2023-7-23}
+ "@version{2023-07-23}
   @syntax{(gtk:shortcut-controller-item-type object) => gtype}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[gtype]{a @class{g:type-t} item type ID}
@@ -227,20 +227,20 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-modifiers"
                                                'shortcut-controller) t)
- "The @code{mnemonic-modifiers} property of type @symbol{gdk:modifier-type}
+ "The @code{mnemonic-modifiers} property of type @sym{gdk:modifier-type}
   (Read / Write) @br{}
   The modifiers that need to be pressed to allow mnemonics activation. @br{}
-  Default value: @code{:alt-mask}")
+  Default value: @val[gdk:modifier-type]{:alt-mask}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-controller-mnemonic-modifiers)
       "Accessor"
       (documentation 'shortcut-controller-mnemonic-modifiers 'function)
- "@version{2023-7-23}
+ "@version{2025-07-26}
   @syntax{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers}
   @syntax{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[modifiers]{a @symbol{gdk:modifier-type} value}
+  @argument[modifiers]{a @sym{gdk:modifier-type} value}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{mnemonic-modifiers} slot of
     the @class{gtk:shortcut-controller} class.
@@ -276,7 +276,7 @@
 (setf (liber:alias-for-function 'shortcut-controller-model)
       "Accessor"
       (documentation 'shortcut-controller-model 'function)
- "@version{2023-7-23}
+ "@version{2023-07-23}
   @syntax{(gtk:shortcut-controller-model object) => model}
   @syntax{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
@@ -294,7 +294,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items"
                                                'shortcut-controller) t)
- "The @code{n-items} property of type @symbol{:uint} (Read) @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
   The number of items in the list model. Since 4.8 @br{}
   Default value: 0")
 
@@ -302,11 +302,11 @@
 (setf (liber:alias-for-function 'shortcut-controller-n-items)
       "Accessor"
       (documentation 'shortcut-controller-n-items 'function)
- "@version{2023-7-23}
+ "@version{2025-07-19}
   @syntax{(gtk:shortcut-controller-n-items object) => n-items}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[n-items]{an unsigned integer with the number of items in the
-    list model}
+  @argument[n-items]{an unsigned integer for the number of items in the list
+    model}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{n-items} slot of the
     @class{gtk:shortcut-controller} class.
@@ -320,20 +320,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scope" 'shortcut-controller) t)
- "The @code{scope} property of type @symbol{gtk:shortcut-scope} (Read / Write)
+ "The @code{scope} property of type @sym{gtk:shortcut-scope} (Read / Write)
   @br{}
   What scope the shortcuts will be handled in. @br{}
-  Default value: @code{:local}")
+  Default value: @val[gtk:shortcut-scope]{:local}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-controller-scope)
       "Accessor"
       (documentation 'shortcut-controller-scope 'function)
- "@version{2023-7-23}
+ "@version{2025-07-26}
   @syntax{(gtk:shortcut-controller-scope object) => scope}
   @syntax{(setf (gtk:shortcut-controller-scope object) scope)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[scope]{a @symbol{gtk:shortcut-scope} value}
+  @argument[scope]{a @sym{gtk:shortcut-scope} value}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{scope} slot of the
     @class{gtk:shortcut-controller} class.
@@ -346,8 +346,8 @@
   propagation. In particular, it allows installing global keyboard shortcuts
   that can be activated even when a widget does not have focus.
 
-  With the @code{:local} value, shortcuts will only be activated when the
-  widget has focus.
+  With the @val[gtk:shortcut-scope]{:local} value, shortcuts will only be
+  activated when the widget has focus.
   @see-class{gtk:shortcut-controller}
   @see-symbol{gtk:shortcut-scope}")
 
@@ -359,7 +359,7 @@
 
 (defun shortcut-controller-new ()
  #+liber-documentation
- "@version{2023-7-23}
+ "@version{2023-07-23}
   @return{The newly created @class{gtk:shortcut-controller} object.}
   @short{Creates a new shortcut controller.}
   @see-class{gtk:shortcut-controller}
@@ -376,7 +376,7 @@
 
 (defun shortcut-controller-new-for-model (model)
   #+liber-documentation
-  "@version{#2023-7-23}
+  "@version{#2023-07-23}
   @argument[model]{a @class{g:list-model} object containing shortcuts}
   @return{The newly created @class{gtk:shortcut-controller} object.}
   @begin{short}
@@ -400,7 +400,7 @@
 (cffi:defcfun ("gtk_shortcut_controller_add_shortcut"
                shortcut-controller-add-shortcut) :void
  #+liber-documentation
- "@version{2024-5-13}
+ "@version{2024-05-13}
   @argument[controller]{a @class{gtk:shortcut-controller} object}
   @argument[shortcut]{a @class{gtk:shortcut} object to add}
   @begin{short}
@@ -422,7 +422,7 @@
 (cffi:defcfun ("gtk_shortcut_controller_remove_shortcut"
                shortcut-controller-remove-shortcut) :void
  #+liber-documentation
- "@version{#2023-7-23}
+ "@version{#2023-07-23}
   @argument[controller]{a @class{gtk:shortcut-controller} object}
   @argument[shortcut]{a @class{gtk:shortcut} object to remove}
   @begin{short}

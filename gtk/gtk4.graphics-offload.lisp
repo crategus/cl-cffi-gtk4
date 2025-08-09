@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.graphics-offload.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 (setf (liber:alias-for-symbol 'graphics-offload-enabled)
       "GEnum"
       (liber:symbol-documentation 'graphics-offload-enabled)
- "@version{2024-11-9}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkGraphicsOffloadEnabled\" graphics-offload-enabled
   (:export t
@@ -90,10 +90,10 @@
   (:disabled 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:enabled]{Graphics offloading is enabled.}
       @entry[:disabled]{Graphics offloading is disabled.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Represents the state of graphics offloading.
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'graphics-offload 'type)
- "@version{2024-11-9}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:graphics-offload} widget is a widget that allows to bypass
     GSK rendering for its child by passing the content directly to the
@@ -181,7 +181,7 @@
 (setf (liber:alias-for-function 'graphics-offload-black-background)
       "Accessor"
       (documentation 'graphics-offload-black-background 'function)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @syntax{(gtk:graphics-offload-black-background object) => setting}
   @syntax{(setf (gtk:graphics-offload-black-background object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
@@ -218,7 +218,7 @@
 (setf (liber:alias-for-function 'graphics-offload-child)
       "Accessor"
       (documentation 'graphics-offload-child 'function)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @syntax{(gtk:graphics-offload-child object) => child}
   @syntax{(setf (gtk:graphics-offload-child object) child)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
@@ -238,20 +238,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enabled" 'graphics-offload) t)
- "The @code{enabled} property of type @symbol{gtk:graphics-offload-enabled}
+ "The @code{enabled} property of type @sym{gtk:graphics-offload-enabled}
   (Read / Write) @br{}
   Whether graphics offload is enabled. @br{}
-  Default value: @code{:enabled}")
+  Default value: @val[gtk:graphics-offload-enabled]{:enabled}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'graphics-offload-enabled)
       "Accessor"
       (documentation 'graphics-offload-enabled 'function)
- "@version{2024-11-9}
+ "@version{2025-07-26}
   @syntax{(gtk:graphics-offload-enabled object) => setting}
   @syntax{(setf (gtk:graphics-offload-enabled object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
-  @argument[setting]{a @symbol{gtk:graphics-offload-enabled} value}
+  @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
     Accessor of the @slot[gtk:graphics-offload]{enabled} slot of the
     @class{gtk:graphics-offload} class.
@@ -271,7 +271,7 @@
 
 (defun graphics-offload-new (&optional child)
  #+liber-documentation
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @argument[child]{an optional @class{gtk:widget} child widget}
   @return{The new @class{gtk:graphics-offload} widget.}
   @begin{short}

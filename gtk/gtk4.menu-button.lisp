@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.menu-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -122,7 +122,7 @@
 (setf (liber:alias-for-symbol 'arrow-type)
       "GEnum"
       (liber:symbol-documentation 'arrow-type)
- "@version{2024-4-20}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-genum \"GtkArrowType\" arrow-type
   (:export t
@@ -134,13 +134,13 @@
   (:none 4))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:up]{Represents an upward pointing arrow.}
       @entry[:down]{Represents a downward pointing arrow.}
       @entry[:left]{Represents a left pointing arrow.}
       @entry[:right]{Represents a right pointing arrow.}
       @entry[:none]{No arrow.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Used to indicate the direction in which an arrow should point in a
@@ -203,7 +203,7 @@
 
 #+liber-documentation
 (setf (documentation 'menu-button 'type)
- "@version{2024-5-4}
+ "@version{2025-07-12}
   @begin{short}
     The @class{gtk:menu-button} widget is used to display a popup when clicked
     on.
@@ -225,12 +225,12 @@
 
   For menus, the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign}
   properties of the menu are also taken into account. For example, when the
-  direction is @code{:down} and the horizontal alignment is @code{:start}, the
-  menu will be positioned below the button, with the starting edge, depending
-  on the text direction, of the menu aligned with the starting edge of the
-  button. If there is not enough space below the button, the menu is popped up
-  above the button instead. If the alignment would move part of the menu
-  offscreen, it is \"pushed in\".
+  direction is @val[gtk:arrow-type]{:down} and the horizontal alignment is
+  @val[gtk:align]{:start}, the menu will be positioned below the button, with
+  the starting edge, depending on the text direction, of the menu aligned with
+  the starting edge of the button. If there is not enough space below the
+  button, the menu is popped up above the button instead. If the alignment
+  would move part of the menu offscreen, it is \"pushed in\".
   @begin[CSS nodes]{dictionary}
     @begin{pre}
  menubutton
@@ -257,19 +257,21 @@
     class to request a round appearance.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:menu-button} implementation uses the @code{:button} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:menu-button} implementation uses the
+    @val[gtk:accessible-role]{:button} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[menu-button::activate]{signal}
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:button} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:button} widget that received the signal.}
+      @end{simple-table}
       The signal on the @class{gtk:menu-button} widget is an action signal and
       emitting it causes the button to pop up its menu. Since 4.4
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:menu-button-new}
   @see-slot{gtk:menu-button-active}
@@ -303,17 +305,16 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-active)
       "Accessor"
       (documentation 'menu-button-active 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-active object) => active}
   @syntax{(setf (gtk:menu-button-active object) active)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[active]{a boolean whether the menu button is active}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{active} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{active} slot of the
+    @class{gtk:menu-button} class gets or sets whether the menu button is
+    active.
   @end{short}
-  The @fun{gtk:menu-button-active} function returns whether the menu button is
-  active. The @setf{gtk:menu-button-active} function sets the property.
 
   Since 4.10
   @see-class{gtk:menu-button}")
@@ -333,19 +334,17 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-always-show-arrow)
       "Accessor"
       (documentation 'menu-button-always-show-arrow 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-always-show-arrow object) => setting}
   @syntax{(setf (gtk:menu-button-always-show-arrow object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether to show a dropdown arrow even when using
     an icon or a custom child}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{always-show-arrow} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{always-show-arrow} slot of the
+    @class{gtk:menu-button} class gets or sets whether to show a dropdown arrow
+    even when using an icon or a custom child.
   @end{short}
-  The @fun{gtk:menu-button-always-show-arrow} function gets whether to show a
-  dropdown arrow even when using an icon. The
-  @setf{gtk:menu-button-always-show-arrow} function sets the property.
 
   Since 4.4
   @see-class{gtk:menu-button}")
@@ -363,18 +362,16 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-can-shrink)
       "Accessor"
       (documentation 'menu-button-can-shrink 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-can-shrink object) => setting}
   @syntax{(setf (gtk:menu-button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the menu button can shrink}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{can-shrink} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{can-shrink} slot of the
+    @class{gtk:menu-button} class gets or sets whether the menu button can be
+    smaller than the natural size of its contents.
   @end{short}
-  The @fun{gtk:menu-button-can-shrink} function retrieves whether the menu
-  button can be smaller than the natural size of its contents. The
-  @setf{gtk:menu-button-can-shrink} function sets the property.
 
   For text menu buttons, setting the @slot[gtk:menu-button]{can-shrink} property
   to @em{true} will ellipsize the label. For icon menu buttons, this function
@@ -394,23 +391,22 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-child)
       "Accessor"
       (documentation 'menu-button-child 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-child object) => child}
   @syntax{(setf (gtk:menu-button-child object) child)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{child} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{child} slot of the
+    @class{gtk:menu-button} class gets or sets the child widget.
   @end{short}
-  The @fun{gtk:menu-button-child} function gets the child widget. The
-  @setf{gtk:menu-button-child} function sets the child widget.
 
   Setting a child widget resets the @slot[gtk:menu-button]{label} and
   @slot[gtk:menu-button]{icon-name} properties. If the
   @slot[gtk:menu-button]{always-show-arrow} property is set to @em{true} and
-  the @slot[gtk:menu-button]{direction} property is not @code{:none}, a
-  dropdown arrow will be shown next to the child widget.
+  the @slot[gtk:menu-button]{direction} property is not
+  @val[gtk:arrow-type]{:none}, a dropdown arrow will be shown next to the child
+  widget.
 
   Since 4.6
   @see-class{gtk:menu-button}
@@ -425,36 +421,34 @@ lambda (button)    :action
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "direction" 'menu-button) t)
- "The @code{direction} property of type @symbol{gtk:arrow-type} (Read / Write)
+ "The @code{direction} property of type @sym{gtk:arrow-type} (Read / Write)
   @br{}
   The arrow type representing the direction in which the menu or popover will
   be popped out. @br{}
-  Default value: @code{:down}")
+  Default value: @val[gtk:arrow-type]{:down}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'menu-button-direction)
       "Accessor"
       (documentation 'menu-button-direction 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-direction object) => direction}
   @syntax{(setf (gtk:menu-button-direction object) direction)}
   @argument[object]{a @class{gtk:menu-button} widget}
-  @argument[direction]{a value of the @symbol{gtk:arrow-type} enumeration}
+  @argument[direction]{a value of the @sym{gtk:arrow-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{direction} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{direction} slot of the
+    @class{gtk:menu-button} class gets or sets the direction the popup will be
+    pointing at when popped up.
   @end{short}
-  The @fun{gtk:menu-button-direction} function returns the direction the popup
-  will be pointing at when popped up. The @setf{gtk:menu-button-direction}
-  function sets the direction in which the popup will be popped up, as well as
-  changing the direction of the arrow. The child widget will not be changed to
-  an arrow if it was customized.
+  The child widget will not be changed to an arrow if it was customized.
 
   If the popup does not fit in the available space in the given direction, GTK
   will its best to keep it inside the screen and fully visible.
 
-  If you pass the @code{:none} value for a direction, the popup will behave as
-  if you passed the @code{:down} value, although you will not see any arrows.
+  If you pass the @val[gtk:arrow-type]{:none} value for a direction, the popup
+  will behave as if you passed the @val[gtk:arrow-type]{:down} value, although
+  you will not see any arrows.
   @see-class{gtk:menu-button}
   @see-symbol{gtk:arrow-type}")
 
@@ -470,18 +464,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-has-frame)
       "Accessor"
       (documentation 'menu-button-has-frame 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-has-frame object) => setting}
   @syntax{(setf (gtk:menu-button-has-frame object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the button has a frame}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{has-frame} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{has-frame} slot of the
+    @class{gtk:menu-button} class gets or sets whether the button has a frame.
   @end{short}
-  The @fun{gtk:menu-button-has-frame} function returns whether the button
-  has a frame. The @setf{gtk:menu-button-has-frame} function sets the style of
-  the button.
   @see-class{gtk:menu-button}")
 
 ;;; --- gtk:menu-button-icon-name ----------------------------------------------
@@ -496,18 +487,16 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-icon-name)
       "Accessor"
       (documentation 'menu-button-icon-name 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-icon-name object) => name}
   @syntax{(setf (gtk:menu-button-icon-name object) name)}
   @argument[object]{a @class{gtk:menu-button} widget}
-  @argument[name]{a string with the name of the icon}
+  @argument[name]{a string for the name of the icon}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{icon-name} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{icon-name} slot of the
+    @class{gtk:menu-button} class gets or sets the name of the icon shown in
+    the button.
   @end{short}
-  The @fun{gtk:menu-button-icon-name} function gets the name of the icon shown
-  in the button. The @setf{gtk:menu-button-icon-name} function sets the name of
-  the icon.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-label}")
 
@@ -523,17 +512,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-label)
       "Accessor"
       (documentation 'menu-button-label 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-label object) => label}
   @syntax{(setf (gtk:menu-button-label object) label)}
   @argument[object]{a @class{gtk:menu-button} widget}
-  @argument[label]{a string with the label}
+  @argument[label]{a string for the label}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{label} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{label} slot of the
+    @class{gtk:menu-button} class gets or sets the label shown in the button.
   @end{short}
-  The @fun{gtk:menu-button-label} function gets the label shown in the button.
-  The @setf{gtk:menu-button-label} function sets the label.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-icon-name}")
 
@@ -551,20 +538,18 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-menu-model)
       "Accessor"
       (documentation 'menu-button-menu-model 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-menu-model object) => model}
   @syntax{(setf (gtk:menu-button-menu-model object) model)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[model]{a @class{g:menu-model} object, or @code{nil} to unset and
     disable the button}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{menu-model} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{menu-model} slot of the
+    @class{gtk:menu-button} class gets or sets the menu model used to generate
+    the popup.
   @end{short}
-  The @fun{gtk:menu-button-menu-model} function returns the menu model used to
-  generate the popup. The @setf{gtk:menu-button-menu-model} function sets the
-  menu model from which the popup will be constructed, or @code{nil} to
-  dissociate any existing menu model and disable the button.
+  Pass @code{nil} to dissociate any existing menu model and disable the button.
 
   A @class{gtk:popover} widget will be created from the menu model with the
   @fun{gtk:popover-menu-new-from-model} function. Actions will be connected as
@@ -588,21 +573,19 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-popover)
       "Accessor"
       (documentation 'menu-button-popover 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-popover object) => popover}
   @syntax{(setf (gtk:menu-button-popover object) popover)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[popover]{a @class{gtk:popover} widget, or @code{nil} to unset and
     disable the button}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{popover} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{popover} slot of the
+    @class{gtk:menu-button} class gets or sets the popover that pops out of the
+    button.
   @end{short}
-  The @fun{gtk:menu-button-popover} function returns the popover that pops out
-  of the button. If the button is not using a popover, this function returns
-  @code{nil}. The @setf{gtk:menu-button-popover} function sets the popover that
-  will be popped up when the menu button is clicked, or @code{nil} to dissociate
-  any existing popover and disable the button.
+  If the button is not using a popover, this function returns @code{nil}. Pass
+  @code{nil} to dissociate any existing popover and disable the button.
 
   If the @slot[gtk:menu-button]{menu-model} property is set, the menu model is
   dissociated from the menu button, and the property is set to @code{nil}.
@@ -623,18 +606,17 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-primary)
       "Accessor"
       (documentation 'menu-button-primary 'function)
- "@version{2024-5-14}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-primary object) => setting}
   @syntax{(setf (gtk:menu-button-primary object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the menu button acts as a primary menu}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{primary} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{primary} slot of the
+    @class{gtk:menu-button} class gets or sets whether the menu button acts as
+    a primary menu.
   @end{short}
-  The @fun{gtk:menu-button-primary} function returns whether the menu button
-  acts as a primary menu. The @setf{gtk:menu-button-primary} function sets
-  the property. Primary menus can be opened with the @kbd{F10} key.
+  Primary menus can be opened with the @kbd{F10} key.
 
   Since 4.4
   @see-class{gtk:menu-button}")
@@ -652,19 +634,17 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-use-underline)
       "Accessor"
       (documentation 'menu-button-use-underline 'function)
- "@version{2024-4-20}
+ "@version{2025-08-05}
   @syntax{(gtk:menu-button-use-underline object) => setting}
   @syntax{(setf (gtk:menu-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether underlines in the text indicates
     mnemonics}
   @begin{short}
-    Accessor of the @slot[gtk:menu-button]{use-underline} slot of the
-    @class{gtk:menu-button} class.
+    The accessor for the @slot[gtk:menu-button]{use-underline} slot of the
+    @class{gtk:menu-button} class gets or sets whether an embedded underline in
+    the text indicates a mnemonic.
   @end{short}
-  The @fun{gtk:menu-button-use-underline} function returns whether an embedded
-  underline in the text indicates a mnemonic. The
-  @setf{gtk:menu-button-use-underline} function sets the property.
   @see-class{gtk:menu-button}")
 
 ;;; ----------------------------------------------------------------------------
@@ -675,7 +655,7 @@ lambda (button)    :action
 
 (defun menu-button-new ()
  #+liber-documentation
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @return{The new @class{gtk:menu-button} widget.}
   @begin{short}
     Creates a new menu button with downwards pointing arrow as the only child.
@@ -692,7 +672,7 @@ lambda (button)    :action
 
 (cffi:defcfun ("gtk_menu_button_popup" menu-button-popup) :void
  #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-05-04}
   @argument[button]{a @class{gtk:menu-button} widget}
   @short{Pop up the menu.}
   @see-class{gtk:menu-button}"
@@ -706,7 +686,7 @@ lambda (button)    :action
 
 (cffi:defcfun ("gtk_menu_button_popdown" menu-button-popdown) :void
  #+liber-documentation
- "@version{2024-5-4}
+ "@version{2024-05-04}
   @argument[button]{a @class{gtk:menu-button} widget}
   @short{Dismiss the menu.}
   @see-class{gtk:menu-button}"
@@ -728,7 +708,7 @@ lambda (button)    :action
 (setf (liber:alias-for-symbol 'menu-button-create-popup-func)
       "Callback"
       (liber:symbol-documentation 'menu-button-create-popup-func)
- "@version{2024-11-3}
+ "@version{2024-11-03}
   @syntax{lambda (button)}
   @argument[button]{a @class{gtk:menu-button} widget}
   @begin{short}
@@ -757,11 +737,11 @@ lambda (button)    :action
 
 (defun menu-button-set-create-popup-func (button func)
  #+liber-documentation
- "@version{2024-11-3}
+ "@version{2025-07-13}
   @argument[button]{a @class{gtk:menu-button} widget}
-  @argument[func]{a @symbol{gtk:menu-button-create-popup-func} callback
-    function to call when a popup is about to be shown, but none has been
-    provided by other means, or @code{nil} to reset to default behavior}
+  @argument[func]{a @sym{gtk:menu-button-create-popup-func} callback function
+    to call when a popup is about to be shown, but none has been provided by
+    other means, or @code{nil} to reset to default behavior}
   @begin{short}
     Sets @arg{func} to be called when a popup is about to be shown.
   @end{short}

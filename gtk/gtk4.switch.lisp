@@ -2,9 +2,9 @@
 ;;; gtk4.switch.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'switch 'type)
- "@version{2025-2-22}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:switch} widget is a widget that has two states: on or off.
   @end{short}
@@ -105,7 +105,8 @@
   or by dragging the handle.
 
   The @class{gtk:switch} widget can also handle situations where the underlying
-  state changes with a delay. See the @code{\"state-set\"} signal for details.
+  state changes with a delay. See the @sig[gtk:switch]{state-set} signal for
+  details.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
  switch
@@ -118,29 +119,31 @@
     labels. Neither of them is using any style classes.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:switch} implementation uses the @code{:switch} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:switch} implementation uses the
+    @val[gtk:accessible-role]{:switch} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[switch::activate]{signal}
       @begin{pre}
-lambda (widget)    :action
+lambda (switch)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[switch]{The @class{gtk:switch} widget that received the signal.}
+      @end{simple-table}
       The signal on the switch is an action signal and emitting it causes the
       switch to animate. Applications should never connect to this signal, but
-      use the @code{\"notify::active\"} signal.
-    @subheading{The \"state-set\" signal}
+      use the @sig[g:object]{notify::active} signal.
+    @end{signal}
+    @begin[switch::state-set]{signal}
       @begin{pre}
-lambda (widget state)    :run-last
+lambda (switch state)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
-        @entry[state]{The boolean with the state of the switch.}
+      @begin[code]{simple-table}
+        @entry[switch]{The @class{gtk:switch} widget that received the signal.}
+        @entry[state]{The boolean for the state of the switch.}
         @entry[Returns]{@em{True} to stop the signal emission.}
-      @end{table}
+      @end{simple-table}
       The signal on the switch is emitted to change the underlying state. It is
       emitted when the user changes the switch position. The default handler
       keeps the state in sync with the @slot[gtk:switch]{active} property.
@@ -154,6 +157,7 @@ lambda (widget state)    :run-last
       Visually, the underlying state is represented by the trough color of the
       switch, while the @slot[gtk:switch]{active} property is represented by
       the position of the switch.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:switch-new}
   @see-slot{gtk:switch-active}
@@ -176,19 +180,17 @@ lambda (widget state)    :run-last
 (setf (liber:alias-for-function 'switch-active)
       "Accessor"
       (documentation 'switch-active 'function)
- "@version{2025-2-22}
+ "@version{2025-08-06}
   @syntax{(gtk:switch-active object) => active)}
   @syntax{(setf (gtk:switch-active object) active)}
   @argument[object]{a @class{gtk:switch} widget}
   @argument[active]{@em{true} if the switch should be active, and @em{false}
     otherwise}
   @begin{short}
-    Accessor of the @slot[gtk:switch]{active} slot of the @class{gtk:switch}
-    class.
+    The accessor for the @slot[gtk:switch]{active} slot of the
+    @class{gtk:switch} class gets or sets whether the switch is in its \"on\"
+    or \"off\" state.
   @end{short}
-  The @fun{gtk:switch-active} function gets whether the switch is in its \"on\"
-  or \"off\" state. The @setf{gtk:switch-active} function changes the state of
-  the switch to the desired one.
   @see-class{gtk:switch}")
 
 ;;; --- gtk:switch-state -------------------------------------------------------
@@ -197,28 +199,26 @@ lambda (widget state)    :run-last
 (setf (documentation (liber:slot-documentation "state" 'switch) t)
  "The @code{state} property of type @code{:boolean} (Read / Write) @br{}
   The backend state that is controlled by the switch. See the
-  @code{\"state-set\"} signal for details. @br{}
+  @sig[gtk:switch]{state-set} signal for details. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'switch-state)
       "Accessor"
       (documentation 'switch-state 'function)
- "@version{2025-2-22}
+ "@version{2025-08-06}
   @syntax{(gtk:switch-state object) => state)}
   @syntax{(setf (gtk:switch-state object) state)}
   @argument[object]{a @class{gtk:switch} widget}
-  @argument[state]{a boolean with the state}
+  @argument[state]{a boolean for the state}
   @begin{short}
-    Accessor of the @slot[gtk:switch]{state} slot of the @class{gtk:switch}
-    class.
+    The accessor for the @slot[gtk:switch]{state} slot of the @class{gtk:switch}
+    class gets or sets the underlying state of the switch.
   @end{short}
-  The @fun{gtk:switch-active} function gets the underlying state of the switch.
-  The @setf{gtk:switch-active} function sets the underlying state.
 
   Normally, this is the same as the @slot[gtk:switch]{active} property, unless
   the switch is set up for delayed state changes. This function is typically
-  called from a @code{\"state-set\"} signal handler.
+  called from a @sig[gtk:switch]{state-set} signal handler.
   @see-class{gtk:switch}
   @see-function{gtk:switch-active}")
 
@@ -230,7 +230,7 @@ lambda (widget state)    :run-last
 
 (defun switch-new ()
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @return{The newly created @class{gtk:switch} widget.}
   @short{Creates a new switch.}
   @see-class{gtk:switch}"

@@ -99,7 +99,7 @@
 
 #+liber-documentation
 (setf (documentation 'window-controls 'type)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @begin{short}
     The @class{gtk:window-controls} widget shows window frame controls, such as
     Minimize, Maximize and Close buttons, and the window icon.
@@ -143,7 +143,9 @@ windowcontrols
     @code{.empty} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:window-controls} implementation uses the @code{:group} role.
+    The @class{gtk:window-controls} implementation uses the
+    @val[gtk:accessible-rol]{:group} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:window-controls-new}
   @see-slot{gtk:window-controls-decoration-layout}
@@ -171,7 +173,7 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-decoration-layout)
       "Accessor"
       (documentation 'window-controls-decoration-layout 'function)
- "@version{2025-3-29}
+ "@version{2025-07-25}
   @syntax{(gtk:window-controls-decoration-layout object) => layout}
   @syntax{(setf (gtk:window-controls-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:window-controls} widget}
@@ -194,9 +196,9 @@ windowcontrols
   For example, @code{\"icon:minimize,maximize,close\"} specifies a icon on the
   left, and Minimize, Maximize and Close buttons on the right.
 
-  If the @slot[gtk:window-controls]{side} property is the @code{:start} value
-  from the @symbol{gtk:pack-type} enumeration, @arg{object} will display the
-  part before the colon, otherwise after that.
+  If the @slot[gtk:window-controls]{side} property is the
+  @val[gtk:pack-type]{:start} value from the @sym{gtk:pack-type} enumeration,
+  @arg{object} will display the part before the colon, otherwise after that.
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
 
@@ -212,7 +214,7 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-empty)
       "Accessor"
       (documentation 'window-controls-empty 'function)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @syntax{(gtk:window-controls-empty object) => empty}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[empty]{@em{true} if the widget has window buttons, otherwise
@@ -229,19 +231,19 @@ windowcontrols
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "side" 'window-controls) t)
- "The @code{empty} property of type @symbol{gtk:pack-type} (Read / Write) @br{}
+ "The @code{empty} property of type @sym{gtk:pack-type} (Read / Write) @br{}
   Whether the widget shows start or end side of the decoration layout. @br{}
-  Default value: @code{:start}")
+  Default value: @val[gtk:pack-type]{:start}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'window-controls-side)
       "Accessor"
       (documentation 'window-controls-side 'function)
- "@version{2025-3-29}
+ "@version{2025-07-25}
   @syntax{(gtk:window-controls-side object) => side}
   @syntax{(setf (gtk:window-controls-side object) side)}
   @argument[object]{a @class{gtk:window-controls} widget}
-  @argument[side]{a @symbol{gtk:pack-type} value}
+  @argument[side]{a @sym{gtk:pack-type} value}
   @begin{short}
     Accessor of the @slot[gtk:window-controls]{side} slot of the
     @class{gtk:window-controls} class.
@@ -271,7 +273,7 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-use-native-controls)
       "Accessor"
       (documentation 'window-controls-use-native-controls 'function)
- "@version{2025-3-29}
+ "@version{2025-03-29}
   @syntax{(gtk:window-controls-use-native-controls object) => setting}
   @syntax{(setf (gtk:window-controls-use-native-controls object) setting)}
   @argument[object]{a @class{gtk:window-controls} widget}
@@ -298,8 +300,8 @@ windowcontrols
 
 (defun window-controls-new (side)
  #+liber-documentation
- "@version{2025-3-29}
-  @argument[side]{a @symbol{gtk:pack-type} value}
+ "@version{2025-07-25}
+  @argument[side]{a @sym{gtk:pack-type} value}
   @return{The new @class{gtk:window-controls} widget.}
   @short{Creates a new @class{gtk:window-controls} widget.}
   @see-class{gtk:window-controls}

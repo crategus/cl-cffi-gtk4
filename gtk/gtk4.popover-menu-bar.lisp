@@ -2,8 +2,8 @@
 ;;; gtk4.popover-menu-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.16 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu-bar 'type)
- "@version{2024-10-26}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:popover-menu-bar} widget presents a horizontal bar of items
     that pop up popover menus when clicked.
@@ -106,9 +106,10 @@ menubar
     the @code{.active} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:popover-menu-bar} implementation uses the @code{:menu-bar}
-    role of the @symbol{gtk:accessible-role} enumeration. The menu items use
-    the @code{:menu-item} role and the menus use the @code{:menu} role.
+    The @class{gtk:popover-menu-bar} implementation uses the
+    @val[gtk:accessible-role]{:menu-bar} role of the @sym{gtk:accessible-role}
+    enumeration. The menu items use the @val[gtk:accessible-role]{:menu-item}
+    role and the menus use the @val[gtk:accessible-role]{:menu} role.
   @end{dictionary}
   @see-constructor{gtk:popover-menu-bar-new-from-model}
   @see-slot{gtk:popover-menu-bar-menu-model}
@@ -178,10 +179,10 @@ menubar
 (cffi:defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child)
     :boolean
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{#2025-07-27}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
   @argument[child]{a @class{gtk:widget} object to add}
-  @argument[id]{a string with the ID to insert @arg{child} at}
+  @argument[id]{a string for the ID to insert @arg{child} at}
   @return{@em{True} if the ID was found and the widget added.}
   @begin{short}
     Adds a custom widget to a generated menu bar.

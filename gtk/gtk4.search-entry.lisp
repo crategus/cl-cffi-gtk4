@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.search-entry.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2024 Dieter Kaiser
+;;; Copyright (C) 2013 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -119,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'search-entry 'type)
- "@version{2024-5-26}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gtk:search-entry} widget is a text entry that has been tailored
     for use as a search entry.
@@ -136,12 +136,12 @@
   To make filtering appear more reactive, it is a good idea to not react to
   every change in the search entry text immediately, but only after a short
   delay. To support this, the @class{gtk:search-entry} widget emits the
-  @code{\"search-changed\"} signal which can be used instead of the
-  @code{\"changed\"} signal.
+  @sig[gtk:search-entry]{search-changed} signal which can be used instead of
+  the @sig[gtk:editable]{changed} signal.
 
-  The @code{\"previous-match\"}, @code{\"next-match\"} and
-  @code{\"stop-search\"} signals can be used to implement moving between search
-  results and ending the search.
+  The @sig[gtk:search-entry]{previous-match}, @sig[gtk:search-entry]{next-match}
+  and @sig[gtk:search-entry]{stop-search} signals can be used to implement
+  moving between search results and ending the search.
 
   Often, the @class{gtk:search-entry} widget will be fed events by means of
   being placed inside a @class{gtk:search-bar} widget. If that is not the case,
@@ -157,66 +157,72 @@ entry.search
     node is a child of that.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:search-entry} implementation uses the @code{:search-box} role
-    of the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:search-entry} implementation uses the
+    @val[gtk:accessible-role]{:search-box} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[search-entry::activate]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
-      @end{table}
-      The signal is forwarded from the @code{\"activated\"} signal, which is a
-      keybinding signal for all forms of the @kbd{Enter} key.
-    @subheading{The \"next-match\" signal}
+      @end{simple-table}
+      Emitted when the search entry is activated. The keybindings for this
+      signal are all forms of the @kbd{Enter} key.
+    @end{signal}
+    @begin[search-entry::next-match]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a move to the next match for the current search string.
       Applications should connect to it, to implement moving between matches.
       The default bindings for this signal is the @kbd{Ctrl-g} key.
-    @subheading{The \"previous-match\" signal}
+    @end{signal}
+    @begin[search-entry::previous-match]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
-        @end{table}
+        @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a move to the previous match for the current search string.
       Applications should connect to it, to implement moving between matches.
       The default bindings for this signal is the @kbd{Ctrl-Shift-g} key.
-    @subheading{The \"search-changed\" signal}
+    @end{signal}
+    @begin[search-entry::search-changed]{signal}
       @begin{pre}
 lambda (entry)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted with a short delay of 150 milliseconds after the
       last change to the text entry.
-    @subheading{The \"stop-search\" signal}
+    @end{signal}
+    @begin[search-entry::stop-search]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user stops
       a search via keyboard input. Applications should connect to it, to
       implement hiding the search entry in this case. The default bindings for
       this signal is the @kbd{Escape} key.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:search-entry-new}
   @see-slot{gtk:search-entry-activates-default}
@@ -245,7 +251,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-activates-default)
       "Accessor"
       (documentation 'search-entry-activates-default 'function)
- "@version{2024-5-22}
+ "@version{2024-05-22}
   @syntax{(gtk:search-entry-activates-default object) => setting}
   @syntax{(setf (gtk:search-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -269,21 +275,21 @@ lambda (entry)    :action
 
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "input-hints" 'search-entry) t)
- "The @code{input-hints} property of type @symbol{gtk:input-hints}
-  (Read / Write) @br{}
+ "The @code{input-hints} property of type @sym{gtk:input-hints} (Read / Write)
+  @br{}
   The hints about input for the search entry used to alter the behaviour of
   input methods. Since 4.14 @br{}
-  Default value: @code{:none}")
+  Default value: @val[gtk:input-hints]{:none}")
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'search-entry-input-hints)
       "Accessor"
       (documentation 'search-entry-input-hints 'function)
- "@version{2024-5-26}
+ "@version{2025-07-13}
   @syntax{(gtk:search-entry-input-hints object) => hints}
   @syntax{(setf (gtk:search-entry-input-hints object) hints)}
   @argument[object]{a @class{gtk:search-entry} widget}
-  @argument[hints]{a @symbol{gtk:input-hints} value}
+  @argument[hints]{a @sym{gtk:input-hints} value}
   @begin{short}
     Accessor of the @slot[gtk:search-entry]{input-hints} slot of the
     @class{gtk:search-entry} class.
@@ -300,21 +306,21 @@ lambda (entry)    :action
 
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "input-purpose" 'search-entry) t)
- "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
+ "The @code{input-purpose} property of type @sym{gtk:input-purpose}
   (Read / Write) @br{}
   The purpose for the search entry input used to alter the behaviour of input
   methods. Since 4.14 @br{}
-  Default value: @code{:free-form}")
+  Default value: @val[gtk:input-purpose]{:free-form}")
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'search-entry-input-purpose)
       "Accessor"
       (documentation 'search-entry-input-purpose 'function)
- "@version{2024-5-26}
+ "@version{2025-07-13}
   @syntax{(gtk:search-entry-input-purpose object) => purpose}
   @syntax{(setf (gtk:search-entry-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:search-entry} widget}
-  @argument[purpose]{a @symbol{gtk:input-purpose} value}
+  @argument[purpose]{a @sym{gtk:input-purpose} value}
   @begin{short}
     Accessor of the @slot[gtk:search-entry]{input-purpose} slot of the
     @class{gtk:search-entry} class.
@@ -342,7 +348,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-placeholder-text)
       "Accessor"
       (documentation 'search-entry-placeholder-text 'function)
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @syntax{(gtk:search-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:search-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -376,19 +382,19 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-search-delay)
       "Accessor"
       (documentation 'search-entry-search-delay 'function)
- "@version{2024-4-20}
+ "@version{2025-07-17}
   @syntax{(gtk:search-entry-search-delay object) => delay}
   @syntax{(setf (gtk:search-entry-search-delay object) delay)}
   @argument[object]{a @class{gtk:search-entry} widget}
-  @argument[delay]{an unsigned integer with the delay in milliseconds}
+  @argument[delay]{an unsigned integer for the delay in milliseconds}
   @begin{short}
     Accessor of the @slot[gtk:search-entry]{search-delay} slot of the
     @class{gtk:search-entry} class.
   @end{short}
-  The @fun{gtk:search-entry-search-delay} function gest the delay to be used
-  between the last keypress and the @code{\"search-changed\"} signal being
-  emitted. The @setf{gtk:search-entry-search-delay} function sets the search
-  delay.
+  The @fun{gtk:search-entry-search-delay} function gets the delay to be used
+  between the last keypress and the @sig[gtk:search-entry]{search-changed}
+  signal being emitted. The @setf{gtk:search-entry-search-delay} function sets
+  the search delay.
 
   Since 4.8
   @see-class{gtk:search-entry}")
@@ -401,7 +407,7 @@ lambda (entry)    :action
 
 (defun search-entry-new ()
  #+liber-documentation
- "@version{2024-4-20}
+ "@version{2024-04-20}
   @return{The new @class{gtk:search-entry} widget.}
   @begin{short}
     Creates a search entry, with a find icon when the search field is empty,
@@ -427,7 +433,7 @@ lambda (entry)    :action
 (cffi:defcfun ("gtk_search_entry_get_key_capture_widget"
                search-entry-key-capture-widget) (g:object widget)
  #+liber-documentation
- "@version{#2024-4-20}
+ "@version{#2024-04-20}
   @syntax{(gtk:search-entry-key-capture-widget entry) => widget}
   @syntax{(setf (gtk:search-entry-key-capture-widget entry) widget)}
   @argument[entry]{a @class{gtk:search-entry} widget}

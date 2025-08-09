@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'numeric-sorter 'type)
- "@version{2024-10-24}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:numeric-sorter} object is a @class{gtk:sorter} implementation
     that compares numbers.
@@ -130,20 +130,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sort-order" 'numeric-sorter) t)
- "The @code{sort-order} property of type @symbol{gtk:sort-type} (Read / Write)
+ "The @code{sort-order} property of type @sym{gtk:sort-type} (Read / Write)
   @br{}
   Whether the sorter will sort smaller numbers first. @br{}
-  Default value: @code{:ascending}")
+  Default value: @val[gtk:sort-type]{:ascending}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'numeric-sorter-sort-order)
       "Accessor"
       (documentation 'numeric-sorter-sort-order 'function)
- "@version{2024-10-24}
+ "@version{2025-07-27}
   @syntax{(gtk:numeric-sorter-sort-order object) => order}
   @syntax{(setf (gtk:numeric-sorter-sort-order object) order)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
-  @argument[order]{a @symbol{gtk:sort-type} value}
+  @argument[order]{a @sym{gtk:sort-type} value}
   @begin{short}
     Accessor of the @slot[gtk:numeric-sorter]{sort-order} slot of the
     @class{gtk:numeric-sorter} class.

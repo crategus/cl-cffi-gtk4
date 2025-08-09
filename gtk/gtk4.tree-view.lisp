@@ -3045,20 +3045,18 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_tree_view_get_search_entry" tree-view-search-entry)
     (g:object entry)
  #+liber-documentation
- "@version{#2024-03-10}
+ "@version{#2025-07-31}
   @syntax{(gtk:tree-view-search-entry view) => entry}
   @syntax{(setf (gtk:tree-view-search-entry view) entry)}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[entry]{a @class{gtk:entry} widget the interactive search code of
     the tree view should use or @code{nil}}
+
   @begin{short}
-    Accessor of the @class{gtk:entry} widget which is currently in use as
-    interactive search entry for the tree view.
+    Gets or sets the search entry that is currently in use as interactive
+    search entry for the tree view.
   @end{short}
-  The @fun{gtk:tree-view-search-entry} function returns the search entry which
-  is currently in use as interactive search entry for the tree view. In case
-  the built-in entry is being used, @code{nil} will be returned. The
-  @setf{gtk:tree-view-search-entry} function sets the search entry.
+  In case the built-in entry is being used, @code{nil} will be returned.
 
   This is useful when you want to provide a search entry in your interface at
   all time at a fixed position. Passing @code{nil} for @arg{entry} will make

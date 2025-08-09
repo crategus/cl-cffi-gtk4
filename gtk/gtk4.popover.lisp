@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.popover.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -138,7 +138,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover 'type)
- "@version{2024-10-26}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:popover} widget is a bubble-like context window, primarily
     meant to provide context-dependent information or options.
@@ -211,26 +211,28 @@
     used, and no box-shadow.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate-default\" signal}
+    @begin[popover::activate-default]{signal}
       @begin{pre}
 lambda (popover)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[popover]{The @class{gtk:popover} widget which received the
+      @begin[code]{simple-table}
+        @entry[popover]{The @class{gtk:popover} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       activates the default widget of the popover.
-    @subheading{The \"closed\" signal}
+    @end{signal}
+    @begin[popover::closed]{signal}
       @begin{pre}
 lambda (popover)    :run-last
       @end{pre}
-      @begin[code]{table}
-        @entry[popover]{The @class{gtk:popover} widget which received the
+      @begin[code]{simple-table}
+        @entry[popover]{The @class{gtk:popover} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the popover is dismissed either through API or
       user interaction.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:popover-new}
   @see-slot{gtk:popover-autohide}
@@ -448,21 +450,21 @@ lambda (popover)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position" 'popover) t)
- "The @code{position} property of type @symbol{gtk:position-type} (Read / Write)
+ "The @code{position} property of type @sym{gtk:position-type} (Read / Write)
   @br{}
   Sets the preferred position of the popover. @br{}
-  Default value: @code{:top}")
+  Default value: @val[gtk:position-type]{:top}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'popover-position)
       "Accessor"
       (documentation 'popover-position 'function)
- "@version{2024-10-26}
+ "@version{2025-07-26}
   @syntax{(gtk:popover-pointing-to object) => position}
   @syntax{(setf (gtk:popover-pointing-to object) position)}
   @argument[object]{a @class{gtk:popover} widget}
-  @argument[position]{a @symbol{gtk:position-type} value with the preferred
-    popover position}
+  @argument[position]{a @sym{gtk:position-type} value for the preferred popover
+    position}
   @begin{short}
     Accessor of the @slot[gtk:popover]{position} slot of the
     @class{gtk:popover} class.
@@ -575,12 +577,12 @@ lambda (popover)    :run-last
 
 (defun popover-offset (popover)
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{#2025-07-19}
   @syntax{(gtk:popover-offset popover) => xoffset, yoffset}
   @syntax{(setf (gtk:popover-offset popover) '(xoffset yoffset))}
   @argument[popover]{a @class{gtk:popover} widget}
-  @argument[xoffset]{an integer with the xoffset}
-  @argument[yoffset]{an integer with the yoffset}
+  @argument[xoffset]{an integer for the x offset}
+  @argument[yoffset]{an integer for the y offset}
   @begin{short}
     The @fun{gtk:popover-offset} function gets the offset to use when
     calculating the position of the popover.

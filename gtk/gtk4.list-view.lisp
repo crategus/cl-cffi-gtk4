@@ -117,7 +117,7 @@
 (setf (liber:alias-for-symbol 'list-tab-behavior)
       "GEnum"
       (liber:symbol-documentation 'list-tab-behavior)
- "@version{2025-4-8}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkListTabBehavior\" list-tab-behavior
   (:export t
@@ -127,7 +127,7 @@
   (:cell 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:all]{Cycle through all focusable items of the list.}
       @entry[:item]{Cycle through a single list element, then move focus out of
         the list. Moving focus between items needs to be done with the arrow
@@ -136,7 +136,7 @@
         list. Moving focus between cells needs to be done with the arrow keys.
         This is only relevant for cell-based widgets like the
         @class{gtk:column-view} widget, otherwise it behaves like @code{:item}.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Used to configure the focus behavior in the @code{:forward} and
@@ -164,7 +164,7 @@
 (setf (liber:alias-for-symbol 'list-scroll-flags)
       "GFlags"
       (liber:symbol-documentation 'list-scroll-flags)
- "@version{2025-4-8}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-gflags \"GtkListScrollFlags\" list-scroll-flags
   (:export t
@@ -174,11 +174,11 @@
   (:select #.(ash 1 1)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Do not do anything extra.}
       @entry[:focus]{Focus the target item.}
       @entry[:select]{Select the target item and unselect all other items.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     List of actions to perform when scrolling to items in a list widget.
@@ -206,7 +206,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-base 'type)
- "@version{2025-4-8}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:list-base} class is the abstract base class for GTK list
     widgets.
@@ -223,20 +223,20 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "orientation" 'list-base) t)
- "The @code{orientation} property of type @symbol{gtk:orientation}
-  (Read / Write) @br{}
+ "The @code{orientation} property of type @sym{gtk:orientation} (Read / Write)
+  @br{}
   The orientation of the list widget. @br{}
-  Default value: @code{:vertical}")
+  Default value: @val[gtk:orientation]{:vertical}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-base-orientation)
       "Accessor"
       (documentation 'list-base-orientation 'function)
- "@version{2025-4-11}
+ "@version{2025-07-27}
   @syntax{(gtk:list-base-orientation object) => orientation}
   @syntax{(setf (gtk:list-base-orientation object) orientation)}
   @argument[object]{a @class{gtk:list-base} widget}
-  @argument[orientation]{a @symbol{gtk:orientation} value}
+  @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
     Accessor of the @slot[gtk:list-base]{orientation} slot of the
     @class{gtk:list-base} class.
@@ -281,7 +281,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-view 'type)
- "@version{2025-4-25}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:list-view} widget is a widget to present a view into a large
     dynamic list of items.
@@ -384,25 +384,27 @@ listview[.separators][.rich-list][.navigation-sidebar][.data-table]
     classes to select the style of list presentation.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:list-view} implementation uses the @code{:list} role, and
-    the list items use the @code{:list-item} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:list-view} implementation uses the
+    @val[gtk:accessible-role]{:list} role, and the list items use the
+    @val[gtk:accessible-role]{:list-item} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[list-view::activate]{signal}
       @begin{pre}
 lambda (listview position)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[listview]{The @class{gtk:list-view} widget.}
-        @entry[position]{The unsigned integer with the position of the item to
+        @entry[position]{The unsigned integer for the position of the item to
         activate.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a row has been activated by the user, usually
       via activating the @code{GtkListView::list.activate-item} action. This
       allows for a convenient way to handle activation in a list view. See the
       @fun{gtk:list-item-activatable} function for details on how to use this
       signal.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:list-view-new}
   @see-slot{gtk:list-view-enable-rubberband}
@@ -434,7 +436,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-enable-rubberband)
       "Accessor"
       (documentation 'list-view-enable-rubberband 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:list-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -460,7 +462,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-factory)
       "Accessor"
       (documentation 'list-view-factory 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-factory object) => factory}
   @syntax{(setf (gtk:list-view-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -488,7 +490,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-header-factory)
       "Accessor"
       (documentation 'list-view-header-factory 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-header-factory object) => factory}
   @syntax{(setf (gtk:list-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -519,7 +521,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-model)
       "Accessor"
       (documentation 'list-view-model 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-model object) => model}
   @syntax{(setf (gtk:list-view-model object) model)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -547,7 +549,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-show-separators)
       "Accessor"
       (documentation 'list-view-show-separators 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-show-separators object) => setting}
   @syntax{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -575,7 +577,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-single-click-activate)
       "Accessor"
       (documentation 'list-view-single-click-activate 'function)
- "@version{2025-4-8}
+ "@version{2025-04-08}
   @syntax{(gtk:list-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:list-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -593,20 +595,20 @@ lambda (listview position)    :run-last
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "tab-behavior" 'list-view) t)
- "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
+ "The @code{tab-behavior} property of type @sym{gtk:list-tab-behavior}
   (Read / Write) @br{}
   The behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys. Since 4.12 @br{}
-  Default value: @code{:all}")
+  Default value: @val[gtk:list-tab-behavior]{:all}")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'list-view-tab-behavior)
       "Accessor"
       (documentation 'list-view-tab-behavior 'function)
- "@version{2025-4-8}
+ "@version{2025-07-27}
   @syntax{(gtk:list-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:list-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
-  @argument[setting]{a @symbol{gtk:list-tab-behavior} value}
+  @argument[setting]{a @sym{gtk:list-tab-behavior} value}
   @begin{short}
     Accessor of the @slot[gtk:list-view]{tab-behavior} slot of the
     @class{gtk:list-view} class.
@@ -627,13 +629,15 @@ lambda (listview position)    :run-last
 
 (defun list-view-new (&optional model factory)
  #+liber-documentation
- "@version{2025-4-11}
+ "@version{2025-07-26}
   @argument[model]{an optional @class{gtk:selection-model} object to use, or
     the default @code{nil} value}
   @argument[factory]{an optional @class{gtk:list-item-factory} object to
     populate items with or the default @code{nil} value}
-  @return{The new @class{gtk:list-view} widget using the given @arg{model} and
-    @arg{factory}.}
+  @begin{return}
+    The new @class{gtk:list-view} widget using the given @arg{model} and
+    @arg{factory}.
+  @end{return}
   @begin{short}
     Creates a new list view that uses the given @arg{factory} for mapping items
     to widgets.
@@ -661,11 +665,11 @@ lambda (listview position)    :run-last
 #+gtk-4-12
 (defun list-view-scroll-to (listview pos flags &optional scroll)
  #+liber-documentation
- "@version{#2025-4-8}
+ "@version{#2025-07-27}
   @argument[listview]{a @class{gtk:list-view} widget}
   @argument[pos]{an unsigned integer for the position of the item}
-  @argument[flags]{a @symbol{gtk:list-scroll-flags} value for the actions
-    to perform}
+  @argument[flags]{a @sym{gtk:list-scroll-flags} value for the actions to
+    perform}
   @argument[scroll]{an optional @class{gtk:scroll-info} instance for the details
     of how to perform the scroll operation or the default @code{nil} value to
     scroll into view}

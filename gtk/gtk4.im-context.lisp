@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.im-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'im-context 'type)
- "@version{2023-8-29}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:im-context} class defines the interface for GTK input
     methods.
@@ -107,8 +107,9 @@
   outputting the composed result. This is called preediting, and an input
   method may provide feedback about this process by displaying the intermediate
   composition states as preedit text. To do so, the @class{gtk:im-context}
-  object will emit the @code{\"preedit-start\"}, @code{\"preedit-changed\"} and
-  @code{\"preedit-end\"} signals.
+  object will emit the @sig[gtk:im-context]{preedit-start},
+  @sig[gtk:im-context]{preedit-changed} and @sig[gtk:im-context]{preedit-end}
+  signals.
 
   For instance, the built-in GTK @class{gtk:im-context-simple} input method
   implements the input of arbitrary Unicode code points by holding down the
@@ -129,79 +130,85 @@ Ctrl+Shift+u 2 0 A C
   To connect a widget to the users preferred input method, you should use the
   @class{gtk:im-multicontext} class.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"commit\" signal}
+    @begin[im-context::commit]{signal}
       @begin{pre}
 lambda (context str)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-        @entry[str]{The string with the completed character(s) entered by the
+        @entry[str]{The string for the completed character(s) entered by the
           user.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a complete input sequence has been entered by
       the user. This can be a single character immediately after a key press or
       the final result of preediting.
-    @subheading{The \"delete-surrounding\" signal}
+    @end{signal}
+    @begin[im-context::delete-surrounding]{signal}
       @begin{pre}
 lambda (context offset n-chars)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-        @entry[offset]{The integer with the character offset from the cursor
+        @entry[offset]{The integer for the character offset from the cursor
           position of the text to be deleted. A negative value indicates a
           position before the cursor.}
-        @entry[n-chars]{The integer with the number of characters to be
+        @entry[n-chars]{The integer for the number of characters to be
           deleted.}
         @entry[Returns]{@em{True} if the signal was handled.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the input method needs to delete all or part
       of the context surrounding the cursor.
-    @subheading{The \"preedit-changed\" signal}
+    @end{signal}
+    @begin[im-context::preedit-changed]{signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever the preedit sequence currently being
       entered has changed. It is also emitted at the end of a preedit sequence,
       in which case the @fun{gtk:im-context-preedit-string} function returns
       the empty string.
-    @subheading{The \"preedit-end\" signal}
+    @end{signal}
+    @begin[im-context::preedit-end]{signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a preediting sequence has been completed or
       canceled.
-    @subheading{The \"preedit-start\" signal}
+    @end{signal}
+    @begin[im-context::preedit-start]{signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a new preediting sequence starts.
-    @subheading{The \"retrieve-surrounding\" signal}
+    @end{signal}
+    @begin[im-context::retrieve-surrounding]{signal}
       @begin{pre}
 lambda (context)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
         @entry[Returns]{@em{True} if the signal was handled.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the input method requires the context
       surrounding the cursor. The callback should set the input method
       surrounding context by calling the @fun{gtk:im-context-surrounding}
       function.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:im-context-input-hints}
   @see-slot{gtk:im-context-input-purpose}
@@ -216,19 +223,19 @@ lambda (context)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'im-context) t)
- "The @code{input-hints} property of type @symbol{gtk:input-hints}
-  (Read / Write) @br{}
+ "The @code{input-hints} property of type @sym{gtk:input-hints} (Read / Write)
+  @br{}
   Hints for the text field behaviour.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'im-context-input-hints)
       "Accessor"
       (documentation 'im-context-input-hints 'function)
- "@version{2023-8-29}
+ "@version{2025-07-26}
   @syntax{(gtk:im-context-input-hints object) => hints}
   @syntax{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
-  @argument[hints]{a value of the @symbol{gtk:input-hints} enumeration}
+  @argument[hints]{a value of the @sym{gtk:input-hints} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:im-context]{input-hints} slot of the
     @class{gtk:im-context} class.
@@ -240,21 +247,20 @@ lambda (context)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-purpose" 'im-context) t)
- "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
+ "The @code{input-purpose} property of type @sym{gtk:input-purpose}
   (Read / Write) @br{}
   Purpose of the text field. @br{}
-  Default value: @code{:free-from}")
+  Default value: @val[gtk:input-purpose]{:free-from}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'im-context-input-purpose)
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
- "@version{2023-8-29}
+ "@version{2025-07-26}
   @syntax{(gtk:im-context-input-purpose object) => purpose}
   @syntax{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}
-  @argument[purpose]{a value of the @symbol{gtk:input-purpose}
-    enumeration}
+  @argument[purpose]{a value of the @sym{gtk:input-purpose} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:im-context]{input-purpose} slot of the
     @class{gtk:im-context} class.
@@ -312,9 +318,9 @@ lambda (context)    :run-last
 (cffi:defcfun ("gtk_im_context_filter-keypress" im-context-filter-keypress)
     :boolean
  #+liber-documentation
- "@version{#2023-10-21}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:im-context} object}
-  @argument[event]{a @class{gdk:event} instance with the key event}
+  @argument[event]{a @class{gdk:event} instance for the key event}
   @return{@em{True} if the input method handled the key event.}
   @begin{short}
     Allow an input method to internally handle key press and release events.

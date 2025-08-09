@@ -105,7 +105,7 @@
 (setf (liber:alias-for-symbol 'css-location)
       "CStruct"
       (liber:symbol-documentation 'css-location)
- "@version{2025-2-25}
+ "@version{2025-07-22}
   @begin{declaration}
 (cffi:defcstruct css-location
   (bytes :size)
@@ -115,14 +115,14 @@
   (line-chars :size))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[bytes]{Number of bytes parsed since the beginning.}
       @entry[chars]{Number of characters parsed since the beginning.}
       @entry[lines]{Number of full lines that have been parsed. If you want to
         display this as a line number, you need to add 1 to this.}
       @entry[line-bytes]{Number of bytes parsed since the last line break.}
       @entry[line-chars]{Number of characters parsed since the last line break.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The @class{gtk:css-location} structure is used to present a location in a
@@ -158,9 +158,9 @@
 
 (defun css-location-bytes (location)
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @syntax{(gtk:css-location-bytes location) => bytes}
-  @argument[location]{a @symbol{gtk:css-location} instance}
+  @argument[location]{a @sym{gtk:css-location} instance}
   @argument[bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the beginning.}
   @see-symbol{gtk:css-location}"
@@ -175,9 +175,9 @@
 
 (defun css-location-chars (location)
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @syntax{(gtk:css-location-chars location) => chars}
-  @argument[location]{a @symbol{gtk:css-location} instance}
+  @argument[location]{a @sym{gtk:css-location} instance}
   @argument[bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the beginning.}
   @see-symbol{gtk:css-location}"
@@ -192,9 +192,9 @@
 
 (defun css-location-lines (location)
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @syntax{(gtk:css-location-lines location) => lines}
-  @argument[location]{a @symbol{gtk:css-location} instance}
+  @argument[location]{a @sym{gtk:css-location} instance}
   @argument[lines]{a number of the foreign type @code{:size}}
   @short{Returns the number of full lines that have been parsed.}
   If you want to display this as a line number, you need to add 1 to this.
@@ -209,9 +209,9 @@
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @syntax{(gtk:css-location-line-bytes location) => line-bytes}
-  @argument[location]{a @symbol{gtk:css-location} instance}
+  @argument[location]{a @sym{gtk:css-location} instance}
   @argument[line-bytes]{a number of the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the last line break.}
   @see-symbol{gtk:css-location}"
@@ -225,9 +225,9 @@
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @syntax{(gtk:css-location-line-chars location) => line-chars}
-  @argument[location]{a @symbol{gtk:css-location} instance}
+  @argument[location]{a @sym{gtk:css-location} instance}
   @argument[line-chars]{a number of the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the last line break.}
   @see-symbol{gtk:css-location}"
@@ -248,7 +248,7 @@
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @begin{declaration}
 (glib:define-gboxed-opaque css-section \"GtkCssSection\"
   :export t
@@ -261,9 +261,9 @@
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
   @begin[Examples]{dictionary}
-    Access the @symbol{gtk:css-location} and @symbol{gtk:css-section} structures
-    in a @code{\"parsing-error\"} signal handler to mark an error in the
-    parsed CSS file, which is loaded into text buffer.
+    Access the @sym{gtk:css-location} and @sym{gtk:css-section} structures in a
+    @sig[gtk:css-provider]{parsing-error} signal handler to mark an error in
+    the parsed CSS file, which is loaded into the text buffer.
     @begin{pre}
 (g:signal-connect provider \"parsing-error\"
         (lambda (provider section err)
@@ -296,10 +296,10 @@
 (cffi:defcfun ("gtk_css_section_new" css-section-new)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @argument[path]{a pathname or namestring for the file this section refers to}
-  @argument[start]{a @symbol{gtk:css-location} instance for the start location}
-  @argument[end]{a @symbol{gtk:css-location} instance for the end location}
+  @argument[start]{a @sym{gtk:css-location} instance for the start location}
+  @argument[end]{a @sym{gtk:css-location} instance for the end location}
   @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
@@ -324,12 +324,12 @@
 (cffi:defcfun ("gtk_css_section_new_with_bytes" css-section-new-with-bytes)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{#2025-2-25}
+ "@version{#2025-07-25}
   @argument[path]{a pathname or namestring for the file this section refers to}
   @argument[bytes]{a @class{g:bytes} instance for the bytes this section
     refers to}
-  @argument[start]{a @symbol{gtk:css-location} instance for the start location}
-  @argument[end]{a @symbol{gtk:css-location} instance for the end location}
+  @argument[start]{a @sym{gtk:css-location} instance for the start location}
+  @argument[end]{a @sym{gtk:css-location} instance for the end location}
   @return{The new @class{gtk:css-section} instance.}
   @begin{short}
     Creates a new @class{gtk:css-section} instance referring to the section in
@@ -367,9 +367,9 @@
 
 (cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-07-25}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The string with the human-readable text form.}
+  @return{The string for the human-readable text form.}
   @begin{short}
     Prints the section into a human-readable text form.
   @end{short}
@@ -387,10 +387,10 @@
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
  #+liber-documentation
- "@version{#2025-05-10}
+ "@version{#2025-07-26}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
-    The @class{g:bytes} instance with the bytes from which @arg{section} was
+    The @class{g:bytes} instance for the bytes from which @arg{section} was
     parsed.
   @end{return}
   @begin{short}
@@ -436,7 +436,7 @@
 (cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
     (g:boxed css-section)
  #+liber-documentation
- "@version{#2025-2-25}
+ "@version{#2025-02-25}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The @class{gtk:css-section} parent section, or @code{nil} if none.}
   @begin{short}
@@ -455,11 +455,10 @@
 (cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2025-07-26}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
-    The @symbol{gtk:css-location} instance with the start location of the
-    section.
+    The @sym{gtk:css-location} instance for the start location of the section.
   @end{return}
   @begin{short}
     Returns the location in the CSS document where this section starts.
@@ -477,10 +476,10 @@
 (cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2025-07-26}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
-    The @symbol{gtk:css-location} instance with the end location of the section.
+    The @sym{gtk:css-location} instance for the end location of the section.
   @end{return}
   @begin{short}
     Returns the location in the CSS document where this section ends.
@@ -506,7 +505,7 @@
 
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2025-1-11}
+ "@version{2025-07-05}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -535,20 +534,20 @@
   @code{VERSION} is the GTK version number. If no file is found for the current
   version, GTK tries older versions all the way back to 4.0.
 
-  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
-  signal.
+  To track errors while loading CSS, connect to the
+  @sig[gtk:css-provider]{parsing-error} signal.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"parsing-error\" signal}
+    @begin[css-provider::parsing-error]{signal}
       @begin{pre}
 lambda (provider section error)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[provider]{The @class{gtk:css-provider} object that had a parsing
           error.}
         @entry[section]{The @class{gtk:css-section} instance the error happened
           in.}
-        @entry[error]{The parsing error of type @code{GError}.}
-      @end{table}
+        @entry[error]{The parsing error of @class{glib:error} type.}
+      @end{simple-table}
       Signals that a parsing error occured. The @arg{section} argument describes
       the actual location of the error as accurately as possible. Parsing errors
       are never fatal, so the parsing will resume after the error. Errors may
@@ -559,6 +558,7 @@ lambda (provider section error)    :run-last
       Note that this signal may be emitted at any time as the CSS provider may
       opt to defer parsing parts or all of the input to a later time than when
       a loading function was called.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:css-provider-new}
   @see-class{gtk:style-context}
@@ -573,7 +573,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-new ()
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-01-11}
   @return{The new @class{gtk:css-provider} object.}
   @short{Returns a newly created CSS provider object.}
   @see-class{gtk:css-provider}"
@@ -587,7 +587,7 @@ lambda (provider section error)    :run-last
 
 (cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
- "@version{2025-2-25}
+ "@version{2025-02-25}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
   @return{The string representing the CSS provider.}
   @begin{short}
@@ -615,7 +615,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-named (provider name &optional variant)
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-01-11}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[name]{a string for the theme name}
   @argument[variant]{an optional string for a variant to load, for example,
@@ -645,15 +645,16 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-07-05}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a string for the CSS data}
   @begin{short}
     Loads data into the CSS provider, making it clear any previously loaded
     information.
   @end{short}
-  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
-  signal of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the
+  @sig[gtk:css-provider]{parsing-error} signal of the @class{gtk:css-provider}
+  object.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the
     @fun{gtk:css-provider-load-from-string} or
@@ -674,15 +675,16 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file)
     :void
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-07-05}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[file]{a @class{g:file} object pointing to a file to load}
   @begin{short}
     Loads the data contained in @arg{file} into the CSS provider, making it
     clear any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
-  signal of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the
+  @sig[gtk:css-provider]{parsing-error} signal of the @class{gtk:css-provider}
+  object.
   @see-class{gtk:css-provider}
   @see-class{g:file}"
   (provider (g:object css-provider))
@@ -701,7 +703,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-path (provider path)
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-07-05}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[path]{a pathname or namestring for the path of a file to load, in
     the GLib filename encoding}
@@ -709,8 +711,9 @@ lambda (provider section error)    :run-last
     Loads the data contained in @arg{path} into the CSS provider, making it
     clear any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
-  signal of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the
+  @sig[gtk:css-provider]{parsing-error} signal of the @class{gtk:css-provider}
+  object.
   @see-class{gtk:css-provider}"
   (%css-provider-load-from-path provider (namestring path)))
 
@@ -723,15 +726,16 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_resource"
                css-provider-load-from-resource) :void
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-07-05}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[path]{a string for the resource path}
   @begin{short}
     Loads the data contained in the resource at @arg{path} into the CSS
     provider, clearing any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
-  signal of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the
+  @sig[gtk:css-provider]{parsing-error} signal of the @class{gtk:css-provider}
+  object.
   @see-class{gtk:css-provider}
   @see-class{g:resource}"
   (provider (g:object css-provider))
@@ -747,7 +751,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_bytes" css-provider-load-from-bytes)
     :void
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-01-11}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a @class{g:bytes} instance containing the CSS data to load}
   @begin{short}
@@ -771,7 +775,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_string"
                css-provider-load-from-string) :void
  #+liber-documentation
- "@version{2025-1-11}
+ "@version{2025-01-11}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[str]{a string for the CSS data to load}
   @begin{short}

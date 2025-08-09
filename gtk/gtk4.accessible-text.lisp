@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.accessible-text.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -68,7 +68,7 @@
 (setf (liber:alias-for-symbol 'accessible-text-content-change)
       "GEnum"
       (liber:symbol-documentation 'accessible-text-content-change)
- "@version{2024-11-5}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTextContentChange\"
                       accessible-text-content-change
@@ -78,10 +78,10 @@
   (:remove 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:insert]{Contents change as the result of an insert operation.}
       @entry[:remvve]{Contents change as the result of a remove operation.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The type of contents change operation.
@@ -106,7 +106,7 @@
 (setf (liber:alias-for-symbol 'accessible-text-granularity)
       "GEnum"
       (liber:symbol-documentation 'accessible-text-granularity)
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTextGranularity\" accessible-text-granularity
   (:export t
@@ -171,16 +171,17 @@
 (setf (liber:alias-for-class 'accessible-text)
       "Interface"
       (documentation 'accessible-text 'type)
- "@version{2024-5-26}
+ "@version{2025-07-25}
   @begin{short}
-    An interface for accessible objects containing formatted text.
+    The @class{gtk:accessible-text} interface is an interface for accessible
+    objects containing formatted text.
   @end{short}
-  The @class{gtk:accessible-text} interfaces is meant to be implemented by
-  accessible objects that have text formatted with attributes, or non-trivial
-  text contents.
+  It is meant to be implemented by accessible objects that have text formatted
+  with attributes, or non-trivial text contents.
 
-  You should use the @code{:label} or the @code{:description} values of the
-  @symbol{gtk:accessible-property} enumeration for accessible objects containing
+  You should use the @val[gtk:accessible-property]{:label} or the
+  @val[gtk:accessible-property]{:description} values of the
+  @sym{gtk:accessible-property} enumeration for accessible objects containing
   simple, unformatted text.
 
   Since 4.14
@@ -202,9 +203,9 @@
 (cffi:defcfun ("gtk_accessible_text_get_caret_position"
                accessible-text-caret-position) :uint
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-19}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @return{The unsigned integer with the position of the caret, in characters.}
+  @return{The unsigned integer for the position of the caret, in characters.}
   @begin{short}
     Retrieves the position of the caret inside the accessible object.
   @end{short}
@@ -221,13 +222,15 @@
 (cffi:defcfun ("gtk_accessible_text_get_contents" accessible-text-contents)
     (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-13}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @argument[start]{an unsigned integer with the beginning of the range, in
+  @argument[start]{an unsigned integer for the beginning of the range, in
     characters}
-  @argument[end]{an unsigned integer with the end of the range, in characters}
-  @return{The @class{g:bytes} instance with the requested slice of the contents
-    of the accessible object, as UTF-8.}
+  @argument[end]{an unsigned integer for the end of the range, in characters}
+  @begin{return}
+    The @class{g:bytes} instance for the requested slice of the contents
+    of the accessible object, as UTF-8.
+  @end{return}
   @begin{short}
     Retrieve the current contents of the accessible object within the given
     range.
@@ -257,17 +260,15 @@
 
 (defun accessible-text-contents-at (accessible offset granularity)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-19}
   @syntax{(gtk:accessible-text-contents-at accessible offset granularity)
      => start, end}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @argument[offset]{an unsigned integer with the offset, in characters}
-  @argument[granularity]{a @symbol{gtk:accessible-text-granularity} value}
-  @begin{return}
-    @arg{start} -- an unsigned integer with the start of the range, in
-    characters @br{}
-    @arg{end} -- an unsigned integer with the end of the range, in characters
-  @end{return}
+  @argument[offset]{an unsigned integer for the offset, in characters}
+  @argument[granularity]{a @sym{gtk:accessible-text-granularity} value}
+  @argument[start]{an unsigned integer for the start of the range, in
+    characters}
+  @argument[end]{an unsigned integer for the end of the range, in characters}
   @begin{short}
     Retrieve the current contents of the accessible object starting from the
     given offset, and using the given granularity.
@@ -312,13 +313,15 @@
 #+gtk-4-16
 (defun accessible-text-extents (accessible start end extents)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @argument[start]{an unsigned integer with the start offset, in characters}
-  @argument[end]{an unsigned integer with the end offset, in characters,}
-  @argument[extents]{a @symbol{graphene:rect-t} instance}
-  @return{The @symbol{graphene:rect-t} instance if the extents were filled,
-    @code{nil} otherwise.}
+  @argument[start]{an unsigned integer for the start offset, in characters}
+  @argument[end]{an unsigned integer for the end offset, in characters,}
+  @argument[extents]{a @sym{graphene:rect-t} instance}
+  @begin{return}
+    The @sym{graphene:rect-t} instance if the extents were filled, @code{nil}
+    otherwise.
+  @end{return}
   @begin{short}
     Obtains the extents of a range of text, in widget coordinates.
   @end{short}
@@ -346,10 +349,10 @@
 #+gtk-4-16
 (defun accessible-text-offset (accessible point)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @argument[point]{a @symbol{graphene:point-t} instance}
-  @return{The unsigned integer with the offset, if set, otherwise @code{nil}.}
+  @argument[point]{a @sym{graphene:point-t} instance}
+  @return{The unsigned integer for the offset, if set, otherwise @code{nil}.}
   @begin{short}
     Gets the text offset at a given point.
   @end{short}
@@ -378,7 +381,7 @@
 (cffi:defcfun ("gtk_accessible_text_update_caret_position"
                accessible-text-update-caret-position) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2024-11-05}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @begin{short}
     Updates the position of the caret.
@@ -400,12 +403,12 @@
 (cffi:defcfun ("gtk_accessible_text_update_contents"
                accessible-text-update-contents) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @argument[change]{a @symbol{gtk:accessible-text-content-change} value with
-    the type of change in the contents}
-  @argument[start]{an unsigned integer with the start offset, in characters}
-  @argument[end]{an unsigned integer with the end offset, in characters}
+  @argument[change]{a @sym{gtk:accessible-text-content-change} value for the
+    type of change in the contents}
+  @argument[start]{an unsigned integer for the start offset, in characters}
+  @argument[end]{an unsigned integer for the end offset, in characters}
   @begin{short}
     Notifies assistive technologies of a change in contents.
   @end{short}
@@ -433,7 +436,7 @@
 (cffi:defcfun ("gtk_accessible_text_update_selection_bound"
                accessible-text-update-selection-bound) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2024-11-05}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @begin{short}
     Updates the boundary of the selection.

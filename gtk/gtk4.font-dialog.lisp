@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.font-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-dialog 'type)
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @begin{short}
     The @class{gtk:font-dialog} object collects the arguments that are needed to
     present a font chooser dialog to the user, such as a title for the dialog
@@ -139,7 +139,7 @@
 (setf (liber:alias-for-function 'font-dialog-filter)
       "Accessor"
       (documentation 'font-dialog-filter 'function)
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @syntax{(gtk:font-dialog-filter object) => filter}
   @syntax{(setf (gtk:font-dialog-filter object) filter)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -172,7 +172,7 @@
 (setf (liber:alias-for-function 'font-dialog-font-map)
       "Accessor"
       (documentation 'font-dialog-font-map 'function)
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @syntax{(gtk:font-dialog-font-map object) => fontmap}
   @syntax{(setf (gtk:font-dialog-font-map object) fontmap)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -201,7 +201,7 @@
 (setf (liber:alias-for-function 'font-dialog-language)
       "Accessor"
       (documentation 'font-dialog-language 'function)
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @syntax{(gtk:font-dialog-language object) => language}
   @syntax{(setf (gtk:font-dialog-language object) language)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -229,7 +229,7 @@
 (setf (liber:alias-for-function 'font-dialog-modal)
       "Accessor"
       (documentation 'font-dialog-modal 'function)
- "@version{#2024-5-2}
+ "@version{#2024-05-02}
   @syntax{(gtk:font-dialog-modal object) => modal}
   @syntax{(setf (gtk:font-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -259,11 +259,11 @@
 (setf (liber:alias-for-function 'font-dialog-title)
       "Accessor"
       (documentation 'font-dialog-title 'function)
- "@version{#2024-5-2}
+ "@version{#2025-07-27}
   @syntax{(gtk:font-dialog-title object) => title}
   @syntax{(setf (gtk:font-dialog-title object) title)}
   @argument[object]{a @class{gtk:font-dialog} object}
-  @argument[title]{a string with the title}
+  @argument[title]{a string for the title}
   @begin{short}
     Accessor of the @slot[gtk:font-dialog]{title} slot of the
     @class{gtk:font-dialog} class.
@@ -307,13 +307,13 @@
 
 (defun font-dialog-choose-face (dialog parent face cancellable func)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[face]{a @class{pango:font-face} object}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-   when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     This function initiates a font selection operation by presenting a dialog to
     the user for selecting a font face, that is a font family and style, but not
@@ -377,13 +377,13 @@
 
 (defun font-dialog-choose-family (dialog parent family cancellable func)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[family]{a @class{pango:font-family} object}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-   when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     This function initiates a font selection operation by presenting a dialog to
     the user for selecting a font family.
@@ -449,13 +449,13 @@
 
 (defun font-dialog-choose-font (dialog parent desc cancellable func)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[desc]{a @class{pango:font-description} object}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-   when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     This function initiates a font selection operation by presenting a dialog to
     the user for selecting a font.
@@ -492,10 +492,10 @@
 
 (defun font-dialog-choose-font-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-27}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{pango:font-description} object with the selected font.}
+  @return{The @class{pango:font-description} object for the selected font.}
   @begin{short}
     Finishes the the @fun{gtk:font-dialog-choose-font} function call and
     returns the resulting font description.
@@ -525,13 +525,13 @@
 (defun font-dialog-choose-font-and-features (dialog
                                              parent desc cancellable func)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[desc]{a @class{pango:font-description} object}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-   when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     This function initiates a font selection operation by presenting a dialog to
     the user for selecting a font and font features.
@@ -572,14 +572,14 @@
 
 (defun font-dialog-choose-font-and-features-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-08-04}
+  @syntax{(gtk:font-dialog-choose-font-and-features-finish dialog result)
+    => desc, features, language}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @begin{return}
-    @arg{desc} -- a @class{pango:font-description} object @br{}
-    @arg{features} -- a string with the font features @br{}
-    @arg{language} -- a @class{pango:language} object
-  @end{return}
+  @argument[desc]{a @class{pango:font-description} object}
+  @argument[features]{a string for the font features}
+  @argument[language]{a @class{pango:language} object}
   @begin{short}
     Finishes the the @fun{gtk:font-dialog-choose-font} function call and
     returns the resulting font description.

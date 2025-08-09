@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcut-trigger.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-trigger 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     The @class{gtk:shortcut-trigger} object is the object used to track if a
     @class{gtk:shortcut} object should be activated.
@@ -115,7 +115,7 @@
                shortcut-trigger-parse-string)
     (g:object shortcut-trigger :return)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[str]{a string to parse}
   @return{The new @class{gtk:shortcut-trigger} object, or @code{nil} on error.}
   @begin{short}
@@ -153,12 +153,13 @@
 (cffi:defcfun ("gtk_shortcut_trigger_trigger" shortcut-trigger-trigger)
     gdk:key-match
  #+liber-documentation
- "@version{#2024-11-1}
+ "@version{#2025-07-26}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[event]{a @class{gdk:event} instance}
   @argument[enable]{a boolean whether mnemonics should trigger}
-  @return{The @symbol{gdk:key-match} value whether the event triggered the
-    shortcut.}
+  @begin{return}
+    The @sym{gdk:key-match} value whether the event triggered the shortcut.
+  @end{return}
   @begin{short}
     Checks if the given event triggers @arg{shortcut}.
   @end{short}
@@ -247,7 +248,7 @@
 (cffi:defcfun ("gtk_shortcut_trigger_to_string" shortcut-trigger-to-string)
     :string
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @return{The human-readable string.}
   @begin{short}
@@ -269,10 +270,10 @@
 (cffi:defcfun ("gtk_shortcut_trigger_to_label" shortcut-trigger-to-label)
     :string
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[display]{a @class{gdk:display} object}
-  @return{The string with the textual representation for the given trigger.}
+  @return{The string for the textual representation for the given trigger.}
   @begin{short}
     Gets textual representation for the given trigger.
   @end{short}
@@ -312,7 +313,7 @@
 
 #+liber-documentation
 (setf (documentation 'keyval-trigger 'type)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @begin{short}
     A @class{gtk:shortcut-trigger} object that triggers when a specific keyval
     and (optionally) modifiers are pressed.
@@ -334,10 +335,10 @@
 (setf (liber:alias-for-function 'keyval-trigger-keyval)
       "Accessor"
       (documentation 'keyval-trigger-keyval 'function)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{(gtk:keyval-trigger-keyval object) => keyval}
   @argument[object]{a @class{gtk:keyval-trigger} object}
-  @argument[keyval]{an unsigned integer with the keyval}
+  @argument[keyval]{an unsigned integer for the keyval}
   @begin{short}
     Accessor of the @slot[gtk:keyval-trigger]{keyval} slot of the
     @class{gtk:keyval-trigger} class.
@@ -351,18 +352,18 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modifiers"
                                                'keyval-trigger) t)
- "The @code{modifiers} property of type @symbol{gdk:modifier-type}
- (Read / Write / Construct only) @br{}
+ "The @code{modifiers} property of type @sym{gdk:modifier-type}
+  (Read / Write / Construct only) @br{}
   The key modifiers for the trigger.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'keyval-trigger-modifiers)
       "Accessor"
       (documentation 'keyval-trigger-modifiers 'function)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{(gtk:keyval-trigger-modifiers object) => modifiers}
   @argument[object]{a @class{gtk:keyval-trigger} object}
-  @argument[modifiers]{a @symbol{gdk:modifier-type} value}
+  @argument[modifiers]{a @sym{gdk:modifier-type} value}
   @begin{short}
     Accessor of the @slot[gtk:keyval-trigger]{modifiers} slot of the
     @class{gtk:keyval-trigger} class.
@@ -380,11 +381,9 @@
 
 (defun keyval-trigger-new (keyval modifiers)
  #+liber-documentation
- "@version{2024-11-1}
-  @argument[keyval]{a char or an unsigned integer with the keyval to trigger
-    for}
-  @argument[modifiers]{a @symbol{gdk:modifier-type} value that need to be
-    present}
+ "@version{2025-07-27}
+  @argument[keyval]{a char or an unsigned integer for the keyval to trigger for}
+  @argument[modifiers]{a @sym{gdk:modifier-type} value that need to be present}
   @return{The new @class{gtk:shortcut-trigger} object.}
   @begin{short}
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
@@ -413,7 +412,7 @@
 
 #+liber-documentation
 (setf (documentation 'mnemonic-trigger 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-trigger} object that triggers when a specific
     mnemonic is pressed.
@@ -435,10 +434,10 @@
 (setf (liber:alias-for-function 'mnemonic-trigger-keyval)
       "Accessor"
       (documentation 'mnemonic-trigger-keyval 'function)
- "@version{2024-11-1}
+ "@version{2025-07-27}
   @syntax{(gtk:mnemonic-trigger-keyval object) => keyval}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
-  @argument[keyval]{an unsigned integer with the keyval}
+  @argument[keyval]{an unsigned integer for the keyval}
   @begin{short}
     Accessor of the @slot[gtk:mnemonic-trigger]{keyval} slot of the
     @class{gtk:mnemonic-trigger} class.
@@ -455,8 +454,8 @@
 
 (defun mnemonic-trigger-new (keyval)
  #+liber-documentation
- "@version{2024-11-1}
-  @argument[keyval]{a char or an unsigned integer with the keyval to trigger
+ "@version{2025-07-27}
+  @argument[keyval]{a char or an unsigned integer for the keyval to trigger
     for}
   @return{The new @class{gtk:mnemonic-trigger} object.}
   @begin{short}
@@ -490,7 +489,7 @@
 
 #+liber-documentation
 (setf (documentation 'alternative-trigger 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-trigger} object that triggers when either of two
     @class{gtk:shortcut-trigger} objects trigger.
@@ -513,7 +512,7 @@
 (setf (liber:alias-for-function 'alternative-trigger-first)
       "Accessor"
       (documentation 'alternative-trigger-first 'function)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @syntax{(gtk:alternative-trigger-first object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a first @class{gtk:shortcut-trigger} object}
@@ -540,7 +539,7 @@
 (setf (liber:alias-for-function 'alternative-trigger-second)
       "Accessor"
       (documentation 'alternative-trigger-second 'function)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @syntax{(gtk:alternative-trigger-second object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a second @class{gtk:shortcut-trigger} object}
@@ -562,7 +561,7 @@
 
 (defun alternative-trigger-new (first second)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[first]{a @class{gtk:shortcut-trigger} object}
   @argument[second]{a @class{gtk:shortcut-trigger} object}
   @return{The new @class{gtk:shortcut-trigger} object.}
@@ -592,7 +591,7 @@
 
 #+liber-documentation
 (setf (documentation 'never-trigger 'type)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @begin{short}
     A @class{gtk:shortcut-trigger} object that never triggers.
   @end{short}
@@ -605,7 +604,7 @@
 (cffi:defcfun ("gtk_never_trigger_get" never-trigger-get)
     (g:object shortcut-trigger)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @return{The @class{gtk:never-trigger} object.}
   @begin{short}
     Gets the never trigger.

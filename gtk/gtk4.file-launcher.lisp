@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-launcher.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -86,7 +86,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-launcher 'type)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @begin{short}
     The @class{gtk:file-launcher} object collects the arguments that are needed
     to open a file with an application.
@@ -127,7 +127,7 @@
 (setf (liber:alias-for-function 'file-launcher-always-ask)
       "Accessor"
       (documentation 'file-launcher-always-ask 'function)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @syntax{(gtk:file-launcher-always-ask object) => setting}
   @syntax{(setf (gtk:file-launcher-always-ask object) setting)}
   @argument[object]{a @class{gtk:file-launcher} object}
@@ -156,7 +156,7 @@
 (setf (liber:alias-for-function 'file-launcher-file)
       "Accessor"
       (documentation 'file-launcher-file 'function)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @syntax{(gtk:file-launcher-file object) => file}
   @syntax{(setf (gtk:file-launcher-file object) file)}
   @argument[object]{a @class{gtk:file-launcher} object}
@@ -184,7 +184,7 @@
 (setf (liber:alias-for-function 'file-launcher-writable)
       "Accessor"
       (documentation 'file-launcher-writable 'function)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @syntax{(gtk:file-launcher-writable object) => writable}
   @syntax{(setf (gtk:file-launcher-writable object) writable)}
   @argument[object]{a @class{gtk:file-launcher} object}
@@ -208,9 +208,9 @@
 
 (defun file-launcher-new (&optional file)
  #+liber-documentation
- "@version{#2023-10-12}
+ "@version{#2025-07-13}
   @argument[file]{a @class{g:file} object}
-  @return{The new @class{gtk:file-launcher} object}
+  @return{The new @class{gtk:file-launcher} object.}
   @short{Creates a new @class{gtk:file-launcher} object.}
 
   Since 4.10
@@ -234,12 +234,12 @@
 
 (defun file-launcher-launch (launcher parent cancellable func)
  #+liber-documentation
- "@version{#2023-10-12}
+ "@version{#2025-07-25}
   @argument[launcher]{a @class{gtk:file-launcher} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     Launch an application to open the file.
   @end{short}
@@ -307,12 +307,12 @@
 
 (defun file-launcher-open-containing-folder (launcher parent cancellable func)
  #+liber-documentation
- "@version{#2023-10-12}
+ "@version{#2025-07-25}
   @argument[launcher]{a @class{gtk:file-launcher} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the operation is complete}
   @begin{short}
     Launch a file manager to show the file in its parent directory.
   @end{short}

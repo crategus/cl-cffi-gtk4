@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.shortcut.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut 'type)
- "@version{2024-11-1}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:shortcut} object is the low level object used for managing
     keyboard shortcuts.
@@ -127,7 +127,7 @@
 (setf (liber:alias-for-function 'shortcut-action)
       "Accessor"
       (documentation 'shortcut-action 'function)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @syntax{(gtk:shortcut-action object) => action)}
   @syntax{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -146,7 +146,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "arguments" 'shortcut) t)
- "The @code{arguments} property of type @symbol{g:variant} (Read / Write) @br{}
+ "The @code{arguments} property of type @sym{g:variant} (Read / Write) @br{}
   Arguments passed to activation. @br{}
   Default value: @code{cffi:null-pointer}")
 
@@ -154,11 +154,11 @@
 (setf (liber:alias-for-function 'shortcut-arguments)
       "Accessor"
       (documentation 'shortcut-arguments 'function)
- "@version{2024-11-1}
+ "@version{2025-07-26}
   @syntax{(gtk:shortcut-arguments object) => args)}
   @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
-  @argument[args]{a @symbol{g:variant} parameter to pass when activating the
+  @argument[args]{a @sym{g:variant} parameter to pass when activating the
     shortcut}
   @begin{short}
     Accessor of the @slot[gtk:shortcut]{arguments} slot of the
@@ -182,7 +182,7 @@
 (setf (liber:alias-for-function 'shortcut-trigger)
       "Accessor"
       (documentation 'shortcut-trigger 'function)
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @syntax{(gtk:shortcut-trigger object) => trigger)}
   @syntax{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -205,7 +205,7 @@
 
 (defun shortcut-new (trigger action)
  #+liber-documentation
- "@version{2024-11-1}
+ "@version{2024-11-01}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object that will trigger
     the shortcut}
   @argument[action]{a @class{gtk:shortcut-action} object that will be

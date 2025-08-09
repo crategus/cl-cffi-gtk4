@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.color-chooser-widget.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-chooser-widget 'type)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @begin{short}
     The @class{gtk:color-chooser-widget} widget lets the user select a color.
   @end{short}
@@ -157,7 +157,7 @@
 (setf (liber:alias-for-function 'color-chooser-widget-show-editor)
       "Accessor"
       (documentation 'color-chooser-widget-show-editor 'function)
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @syntax{(gtk:color-chooser-widget-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-widget} widget}
@@ -183,7 +183,7 @@
 
 (defun color-chooser-widget-new ()
  #+liber-documentation
- "@version{2024-2-22}
+ "@version{2024-02-22}
   @return{The new @class{gtk:color-chooser-widget} widget.}
   @short{Creates a new color chooser widget.}
   @begin[Warning]{dictionary}

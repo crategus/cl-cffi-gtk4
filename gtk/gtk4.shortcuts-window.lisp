@@ -97,7 +97,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-window 'type)
- "@version{2025-05-14}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:shortcuts-window} widget shows brief information about the
     keyboard shortcuts and gestures of an application.
@@ -143,26 +143,28 @@
     This widget will be removed in GTK 5.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"close\" signal}
+    @begin[shortcuts-window::close]{signal}
       @begin{pre}
 lambda (shortcutswindow)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user uses a
       keybinding to close the window. The default binding for this signal is the
       @kbd{Escape} key.
-    @subheading{The \"search\" signal}
+    @end{signal}
+    @begin[shortcuts-window::search]{signal}
       @begin{pre}
 lambda (shortcutswindow)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user uses a
       keybinding to start a search. The default binding for this signal is the
       @kbd{Control-F} key.
+    @end{signal}
   @end{dictionary}
   @see-slot{gtk:shortcuts-window-section-name}
   @see-slot{gtk:shortcuts-window-view-name}

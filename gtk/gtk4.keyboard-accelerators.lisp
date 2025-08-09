@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.keyboard-accelerators.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -51,9 +51,9 @@
 
 (cffi:defcfun ("gtk_accelerator_valid" accelerator-valid) :boolean
  #+liber-documentation
- "@version{2023-8-4}
-  @argument[keyval]{an unsigned integer with a GDK keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} value}
+ "@version{2025-07-19}
+  @argument[keyval]{an unsigned integer for a GDK keyval}
+  @argument[mask]{a @sym{gdk:modifier-type} value}
   @return{@em{True} if the accelerator is valid.}
   @begin{short}
     Determines whether a given @arg{keyval} and modifier mask constitute a
@@ -74,13 +74,12 @@
 
 (defun accelerator-parse (accelerator)
  #+liber-documentation
- "@version{2023-8-4}
+ "@version{2025-07-19}
+  @syntax{(gtk:accelerator-parse accelerator) => key, mask}
   @argument[accelerator]{a string representing an accelerator}
-  @begin{return}
-    @arg{key}  -- an unsigned integer with an accelerator keyval @br{}
-    @arg{mask} -- a @symbol{gdk:modifier-type} accelerator modifier mask,
-      or @code{nil}
-  @end{return}
+  @argument[key]{an unsigned integer for an accelerator keyval}
+  @argument[mask]{a @sym{gdk:modifier-type} accelerator modifier mask,
+    or @code{nil}}
   @begin{short}
     Parses a string representing an accelerator.
   @end{short}
@@ -129,11 +128,11 @@
 
 (cffi:defcfun ("gtk_accelerator_name" accelerator-name) :string
  #+liber-documentation
- "@version{2023-8-4}
-  @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator
-    modifier mask}
-  @return{The string with the accelerator name.}
+ "@version{2025-07-27}
+  @argument[key]{an unsigned integer for the accelerator keyval}
+  @argument[mask]{a @sym{gdk:modifier-type} value for the accelerator modifier
+    mask}
+  @return{The string for the accelerator name.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string parseable by
     the @fun{gtk:accelerator-parse} function.
@@ -160,10 +159,10 @@
 
 (cffi:defcfun ("gtk_accelerator_get_label" accelerator-label) :string
  #+liber-documentation
- "@version{2023-8-4}
-  @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator
-    modifier mask}
+ "@version{2025-07-27}
+  @argument[key]{an unsigned integer for the accelerator keyval}
+  @argument[mask]{a @sym{gdk:modifier-type} value for the accelerator modifier
+    mask}
   @return{The string representing the accelerator.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string which can be
@@ -296,15 +295,14 @@
 (cffi:defcfun ("gtk_accelerator_get_default_mod_mask"
                accelerator-default-mod-mask) gdk:modifier-type
  #+liber-documentation
- "@version{2023-8-4}
-  @return{The @symbol{gdk:modifier-type} value with the accelerator modifier
-    mask.}
+ "@version{2025-07-13}
+  @return{The @sym{gdk:modifier-type} value for the accelerator modifier mask.}
   @begin{short}
     Gets the default modifier mask.
   @end{short}
   The modifier mask determines which modifiers are considered significant for
   keyboard accelerators. This includes all keyboard modifiers except for
-  @code{GDK_LOCK_MASK}.
+  @val[gdk:modifier-type]{:lock-mask}.
   @see-symbol{gdk:modifier-type}")
 
 (export 'accelerator-default-mod-mask)

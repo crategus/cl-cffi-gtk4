@@ -657,9 +657,9 @@
 
 (defun message-dialog-format-secondary-markup (dialog message &rest args)
  #+liber-documentation
- "@version{2025-02-26}
+ "@version{2025-08-04}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
-  @argument[message]{a Lisp format string with markup, see Pango markup format,
+  @argument[message]{a format string for the markup, see Pango markup format,
     or @code{nil}}
   @argument[args]{arguments for @arg{message}}
   @begin{short}

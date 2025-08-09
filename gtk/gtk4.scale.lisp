@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.scale.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -113,7 +113,7 @@
 
 #+liber-documentation
 (setf (documentation 'scale 'type)
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @begin{short}
     The @class{gtk:scale} widget is a slider control used to select a numeric
     value.
@@ -122,7 +122,7 @@
   @class{gtk:range} class, in addition to the methods for the @class{gtk:scale}
   class itself. To set the value of a scale, you would normally use the
   @fun{gtk:range-value} function. To detect changes to the value, you would
-  normally use the @code{\"value-changed\"} signal.
+  normally use the @sig[gtk:range]{value-changed} signal.
 
   @image[scale]{Figure: GtkScale}
 
@@ -192,8 +192,9 @@ scale[.fine-tune][.marks-before][.marks-after]
     @code{.top} or @code{.bottom} style classes similar to the marks node.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:scale} implementation uses the @code{:slider} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:scale} implementation uses the
+    @val[gtk:accessible-role]{:slider} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:scale-new}
   @see-constructor{gtk:scale-new-with-range}
@@ -220,11 +221,11 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-digits)
       "Accessor"
       (documentation 'scale-digits 'function)
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @syntax{(gtk:scale-digits object) => digits}
   @syntax{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
-  @argument[digits]{an integer with the number of decimal places to display}
+  @argument[digits]{an integer for the number of decimal places to display}
   @begin{short}
     Accessor of the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
     class.
@@ -248,7 +249,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-draw-value)
       "Accessor"
       (documentation 'scale-draw-value 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:scale-draw-value object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -275,7 +276,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-has-origin)
       "Accessor"
       (documentation 'scale-has-origin 'function)
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @syntax{(gtk:scale-has-origin object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -296,21 +297,21 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "value-pos" 'scale) t)
- "The @code{value-pos} property of type @symbol{gtk:position-type}
-  (Read / Write) @br{}
+ "The @code{value-pos} property of type @sym{gtk:position-type} (Read / Write)
+  @br{}
   The position in which the current value is displayed. @br{}
-  Default value: @code{:top}")
+  Default value: @val[gtk:position-type]{:top}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'scale-value-pos)
       "Accessor"
       (documentation 'scale-value-pos 'function)
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @syntax{(gtk:scale-value-pos object) => pos}
   @syntax{(setf (gtk:scale-digits object) pos)}
   @argument[object]{a @class{gtk:scale} widget}
-  @argument[pos]{a @symbol{gtk:position-type} value with the position in which
-    the current value is displayed}
+  @argument[pos]{a @sym{gtk:position-type} value for the position in which the
+    current value is displayed}
   @begin{short}
     Accessor of the @slot[gtk:scale]{value-pos} slot of the @class{gtk:scale}
     class.
@@ -328,9 +329,9 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-new (orientation adjustment)
  #+liber-documentation
- "@version{2024-12-5}
-  @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
-  @argument[adjustment]{a @class{gtk:adjustment} object which sets the range
+ "@version{2025-07-17}
+  @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
+  @argument[adjustment]{a @class{gtk:adjustment} object that sets the range
     of the scale, or @code{nil} to create a new adjustment}
   @return{The new @class{gtk:scale} widget.}
   @short{Creates a new scale widget.}
@@ -351,11 +352,11 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-new-with-range (orientation min max step)
  #+liber-documentation
- "@version{2024-12-5}
-  @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
-  @argument[min]{a number coerced to a double float with the minimum value}
-  @argument[max]{a number coerced to a double float with the maximum value}
-  @argument[step]{a number coerced to a double float with the step increment,
+ "@version{2025-07-17}
+  @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
+  @argument[min]{a number coerced to a double float for the minimum value}
+  @argument[max]{a number coerced to a double float for the maximum value}
+  @argument[step]{a number coerced to a double float for the step increment,
     tick size, used with keyboard shortcuts}
   @return{The new @class{gtk:scale} widget.}
   @begin{short}
@@ -397,10 +398,10 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-symbol 'scale-format-value-func)
       "Callback"
       (liber:symbol-documentation 'scale-format-value-func)
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @syntax{lambda (scale value) => result}
   @argument[scale]{a @class{gtk:scale} widget}
-  @argument[value]{a double float with the numeric value to format}
+  @argument[value]{a double float for the numeric value to format}
   @argument[result]{a string describing a textual representation of the given
     numerical value}
   @begin{short}
@@ -426,9 +427,9 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-set-format-value-func (scale func)
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @argument[scale]{a @class{gtk:scale} widget}
-  @argument[func]{a @symbol{gtk:scale-format-value-func} callback function that
+  @argument[func]{a @sym{gtk:scale-format-value-func} callback function that
     formats the value}
   @begin{short}
     The @arg{func} callback function allows you to change how the scale value
@@ -460,7 +461,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (cffi:defcfun ("gtk_scale_get_layout" scale-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{return}
     The @class{pango:layout} instance for this scale, or @code{nil} if the
@@ -485,12 +486,11 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-layout-offsets (scale)
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2025-07-17}
+  @syntax{(gtk:scale-layout-offsets scale) => x, y}
   @argument[scale]{a @class{gtk:scale} widget}
-  @begin{return}
-    @arg{x} -- an integer with the x offset of the Pango layout @br{}
-    @arg{y} -- an integer with the y offset of the Pango layout
-  @end{return}
+  @argument[x]{an integer for the x offset of the Pango layout}
+  @argument[y]{an integer for the y offset of the Pango layout}
   @begin{short}
     Obtains the coordinates where the scale will draw the Pango layout
     representing the text in the scale.
@@ -523,22 +523,24 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (defun scale-add-mark (scale value pos &optional markup)
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2025-07-17}
   @argument[scale]{a @class{gtk:scale} widget}
-  @argument[value]{a number coerced to a double float with the value at which
+  @argument[value]{a number coerced to a double float for the value at which
     the mark is placed, must be between the lower and upper limits of the
     adjustment of the scale}
-  @argument[pos]{a value of the @symbol{gtk:position-type} enumeration}
-  @argument[markup]{a string with the text to be shown at the mark, using Pango
+  @argument[pos]{a value of the @sym{gtk:position-type} enumeration}
+  @argument[markup]{a string for the text to be shown at the mark, using Pango
     markup, or the default @code{nil} value}
   @begin{short}
     Adds a mark at @arg{value}.
   @end{short}
   A mark is indicated visually by drawing a tick mark next to the scale, and
   GTK makes it easy for the user to position the scale exactly at the marks
-  value. For a horizontal scale, @code{:top} and @code{:left} are drawn above
-  the scale, anything else below. For a vertical scale, @code{:left} and
-  @code{:top} are drawn to the left of the scale, anything else to the right.
+  value. For a horizontal scale, @val[gtk:position-type]{:top} and
+  @val[gtk:position-type]{:left} are drawn above the scale, anything else below.
+  For a vertical scale, @val[gtk:position-type]{:left} and
+  @val[gtk:position-type]{:top} are drawn to the left of the scale, anything
+  else to the right.
 
   If the @arg{markup} argument is not @code{nil}, text is shown next to the
   tick mark. To remove marks from a scale, use the @fun{gtk:scale-clear-marks}
@@ -559,7 +561,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 
 (cffi:defcfun ("gtk_scale_clear_marks" scale-clear-marks) :void
  #+liber-documentation
- "@version{2024-12-5}
+ "@version{2024-12-05}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{short}
     Removes any marks that have been added with the @fun{gtk:scale-add-mark}

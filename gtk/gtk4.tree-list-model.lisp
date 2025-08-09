@@ -172,7 +172,7 @@
 (setf (liber:alias-for-function 'tree-list-row-children)
       "Accessor"
       (documentation 'tree-list-row-children 'function)
- "@version{2024-10-17}
+ "@version{2025-07-25}
   @syntax{(gtk:tree-list-row-children object) => children}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[children]{a @class{g:list-model} object containing the children}
@@ -182,7 +182,7 @@
   @end{short}
   If the row is expanded, the @fun{gtk:tree-list-row-children} function gets
   the model holding the children of @arg{model}. This is the model created by
-  the @symbol{gtk:tree-list-model-create-model-func} callback function and
+  the @sym{gtk:tree-list-model-create-model-func} callback function and
   contains the original items, no matter what value the
   @slot[gtk:tree-list-model]{passthrough} property is set to.
   @see-class{gtk:tree-list-row}
@@ -201,7 +201,7 @@
 (setf (liber:alias-for-function 'tree-list-row-depth)
       "Accessor"
       (documentation 'tree-list-row-depth 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-list-row-depth object) => depth}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[depth]{an unsigned integer for the depth of the row}
@@ -275,7 +275,7 @@
 (setf (liber:alias-for-function 'tree-list-row-item)
       "Accessor"
       (documentation 'tree-list-row-item 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-list-row-item object) => item}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[item]{a @class{g:object} instance for the item held in this
@@ -295,10 +295,10 @@
 (cffi:defcfun ("gtk_tree_list_row_get_child_row" tree-list-row-child-row)
     (g:object tree-list-row :return)
  #+liber-documentation
- "@version{#2025-4-16}
+ "@version{#2025-07-27}
   @argument[listrow]{a @class{gtk:tree-list-row} object}
   @argument[pos]{an unsigned integer for the position of the child to get}
-  @return{The @class{gtk:tree-list-row} object with the child in @arg{pos}.}
+  @return{The @class{gtk:tree-list-row} object for the child in @arg{pos}.}
   @begin{short}
     If @arg{listrow} is not expanded or @arg{pos} is greater than the number of
     children, @code{nil} is returned.
@@ -338,9 +338,9 @@
 
 (cffi:defcfun ("gtk_tree_list_row_get_position" tree-list-row-position) :uint
  #+liber-documentation
- "@version{#2024-10-29}
+ "@version{#2025-07-27}
   @argument[listrow]{a @class{gtk:tree-list-row} object}
-  @return{The unsigned integer with the position in the model.}
+  @return{The unsigned integer for the position in the model.}
   @begin{short}
     Returns the position in the model that @arg{listrow} occupies at the moment.
   @end{short}
@@ -401,7 +401,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-list-model 'type)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @begin{short}
     The @class{gtk:tree-list-model} object is a list model that can create
     child models on demand.
@@ -515,7 +515,7 @@
 (setf (liber:alias-for-function 'tree-list-model-n-items)
       "Accessor"
       (documentation 'tree-list-model-n-items 'function)
- "@version{2025-4-16}
+ "@version{2025-04-16}
   @syntax{(gtk:tree-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:tree-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
@@ -577,9 +577,9 @@
 (setf (liber:alias-for-symbol 'tree-list-model-create-model-func)
       "Callback"
       (liber:symbol-documentation 'tree-list-model-create-model-func)
- "@version{2024-3-30}
+ "@version{2025-06-20}
   @syntax{lambda (object) => result}
-  @argument[object]{a @class{g:object} instance with the item that is being
+  @argument[object]{a @class{g:object} instance for the item that is being
     expanded}
   @argument[result]{a @class{g:list-model} object tracking the children of
     @arg{object} or @code{nil} if @arg{object} can never have children}
@@ -613,13 +613,13 @@
 
 (defun tree-list-model-new (root passthrough autoexpand func)
  #+liber-documentation
- "@version{2024-3-30}
+ "@version{2025-07-25}
   @argument[root]{a @class{g:list-model} object to use as root}
   @argument[passthrough]{@em{true} to pass through items from the models}
   @argument[autoexpand]{@em{true} to set the
     @slot[gtk:tree-list-model]{autoexpand} property and expand the root model}
-  @argument[func]{a @symbol{gtk:tree-list-model-create-model-func} callback
-    function to create the @class{g:list-model} object for the children of an
+  @argument[func]{a @sym{gtk:tree-list-model-create-model-func} callback
+  function to create the @class{g:list-model} object for the children of an
     item}
   @begin{short}
     Creates a new empty @class{gtk:tree-list-model} object displaying @arg{root}
@@ -645,10 +645,10 @@
 (cffi:defcfun ("gtk_tree_list_model_get_row" tree-list-model-row)
     (g:object tree-list-row)
  #+liber-documentation
- "@version{#2025-4-16}
+ "@version{#2025-07-27}
   @argument[model]{a @class{gtk:tree-list-model} object}
   @argument[position]{an unsigned integer for the position of the row to fetch}
-  @return{The @class{gtk:tree-list-row} object with the row item.}
+  @return{The @class{gtk:tree-list-row} object for the row item.}
   @begin{short}
     Gets the row object for the given row.
   @end{short}
@@ -678,11 +678,12 @@
 (cffi:defcfun ("gtk_tree_list_model_get_child_row" tree-list-model-child-row)
     (g:object tree-list-row)
  #+liber-documentation
- "@version{#2025-4-16}
+ "@version{#2025-07-26}
   @argument[model]{a @class{gtk:tree-list-model} object}
   @argument[position]{an unsigned integer for the position of the child to get}
-  @return{The @class{gtk:tree-list-row} object with the child in
-    @arg{position}.}
+  @begin{return}
+    The @class{gtk:tree-list-row} object with the child in @arg{position}.
+  @end{return}
   @begin{short}
     Gets the row item corresponding to the child at index @arg{position} for
     @arg{model}'s root model.

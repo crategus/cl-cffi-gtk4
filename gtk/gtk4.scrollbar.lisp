@@ -125,8 +125,9 @@ scrollbar
     related to overlay scrolling.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:scrollbar} implementation uses the @code{:scrollbar} role
-    of the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:scrollbar} implementation uses the
+    @val[gtk:accessible-role]{:scrollbar} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:scrollbar-new}
   @see-slot{gtk:scrollbar-adjustment}
@@ -172,9 +173,9 @@ scrollbar
 
 (defun scrollbar-new (orientation &optional (adjustment nil))
  #+liber-documentation
- "@version{2025-05-06}
-  @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
-    of the scrollbar}
+ "@version{2025-07-27}
+  @argument[orientation]{a @sym{gtk:orientation} value for the orientation of
+    the scrollbar}
   @argument[adjustment]{an optional @class{gtk:adjustment} object to use,
     the default is to create a new adjustment}
   @return{The new @class{gtk:scrollbar} widget.}

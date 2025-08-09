@@ -103,7 +103,7 @@
 
 #+liber-documentation
 (setf (documentation 'header-bar 'type)
- "@version{2025-06-29}
+ "@version{2025-07-31}
   @begin{short}
     The @class{gtk:header-bar} widget is similar to a horizontal @class{gtk:box}
     widget. It allows children to be placed at the start or the end. In
@@ -171,8 +171,9 @@ headerbar
     @class{gtk:window-controls} widget for details, as well as other children.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:header-bar} implementation uses the @code{:group} role
-    of the @sym{gtk:accessible-role} enumeration.
+    The @class{gtk:header-bar} implementation uses the
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @see-constructor{gtk:header-bar-new}
   @see-slot{gtk:header-bar-decoration-layout}
@@ -202,20 +203,18 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-decoration-layout)
       "Accessor"
       (documentation 'header-bar-decoration-layout 'function)
- "@version{2025-02-22}
+ "@version{2025-07-31}
   @syntax{(gtk:header-bar-decoration-layout object) => layout}
   @syntax{(setf (gtk:header-bar-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[layout]{a string for the decoration layout, or @code{nil} to unset
     the layout}
   @begin{short}
-    Accessor of the @slot[gtk:header-bar]{decoration-layout} slot of the
-    @class{gtk:header-bar} class.
+    The accessor for the @slot[gtk:header-bar]{decoration-layout} slot of the
+    @class{gtk:header-bar} class gets or sets the decoration layout for the
+    header bar, overriding the @slot[gtk:settings]{gtk-decoration-layout}
+    setting.
   @end{short}
-  The @fun{gtk:header-bar-decoration-layout} function gets the decoration
-  layout. The @setf{gtk:header-bar-decoration-layout} function sets the
-  decoration layout for the header bar, overriding the
-  @slot[gtk:settings]{gtk-decoration-layout} setting.
 
   There can be valid reasons for overriding the setting, such as a header bar
   design that does not allow for buttons to take room on the right, or only
@@ -251,20 +250,16 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-show-title-buttons)
       "Accessor"
       (documentation 'header-bar-show-title-buttons 'function)
- "@version{2025-02-22}
+ "@version{2025-07-31}
   @syntax{(gtk:header-bar-show-title-buttons object) => setting}
   @syntax{(setf (gtk:header-bar-show-title-buttons object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[setting]{@em{true} if title buttons are shown}
   @begin{short}
-    Accessor of the @slot[gtk:header-bar]{show-title-buttons} slot of the
-    @class{gtk:header-bar} class.
+    The accessor for the @slot[gtk:header-bar]{show-title-buttons} slot of the
+    @class{gtk:header-bar} class gets or sets whether the header bar shows the
+    standard window title buttons including Close, Maximize, and Minimize.
   @end{short}
-  The @fun{gtk:header-bar-show-title-buttons} function returns whether the
-  header bar shows the standard window title buttons. The
-  @setf{gtk:header-bar-show-title-buttons} function sets whether the header bar
-  shows the standard window title buttons including Close, Maximize, and
-  Minimize.
   @see-class{gtk:header-bar}")
 
 ;;; --- gtk:header-bar-title-widget --------------------------------------------
@@ -279,18 +274,16 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-title-widget)
       "Accessor"
       (documentation 'header-bar-title-widget 'function)
- "@version{2025-02-22}
+ "@version{2025-07-31}
   @syntax{(gtk:header-bar-title-widget object) => title}
   @syntax{(setf (gtk:header-bar-title-widget object) title)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[title]{a @class{gtk:widget} title widget for the header bar}
   @begin{short}
-    Accessor of the @slot[gtk:header-bar]{title-widget} slot of the
-    @class{gtk:header-bar} class.
+    The accessor for the @slot[gtk:header-bar]{title-widget} slot of the
+    @class{gtk:header-bar} class gets or sets the title widget of the header
+    bar.
   @end{short}
-  The @fun{gtk:header-bar-title-widget} function retrieves the title widget of
-  the header bar. The @setf{gtk:header-bar-title-widget} function sets the title
-  widget.
 
   When set to @code{nil}, the header bar will display the title of the window
   it is contained in. The title should help a user identify the current view.
@@ -319,20 +312,19 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-use-native-controls)
       "Accessor"
       (documentation 'header-bar-use-native-controls 'function)
- "@version{2025-03-31}
+ "@version{2025-07-31}
   @syntax{(gtk:header-bar-use-native-controls object) => setting}
   @syntax{(setf (gtk:header-bar-use-native-controls object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[setting]{@em{true} to show native controls}
   @begin{short}
-    Accessor of the @slot[gtk:header-bar]{use-native-controls} slot of the
-    @class{gtk:header-bar} class.
+    The accessor for the @slot[gtk:header-bar]{use-native-controls} slot of the
+    @class{gtk:header-bar} class gets or sets whether this header bar shows
+    platform native window controls.
   @end{short}
-  The @fun{gtk:header-bar-use-native-controls} function returns whether this
-  header bar shows platform native window controls. The
-  @setf{gtk:header-bar-use-native-controls} function sets this header bar shows
-  native window controls. This option shows the \"stoplight\" buttons on macOS.
-  for Linux, this option has no effect. See also
+
+  This option shows the \"stoplight\" buttons on macOS. For Linux, this option
+  has no effect. See also
   @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.
 
   Since 4.18

@@ -59,7 +59,7 @@
 (setf (liber:alias-for-class 'scroll-info)
       "GBoxed"
       (documentation 'scroll-info 'type)
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @begin{declaration}
 (glib:define-gboxed-opaque scroll-info \"GtkScrollInfo\"
   :export t
@@ -85,7 +85,7 @@
 
 (defun scroll-info-new ()
  #+liber-documentation
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @return{The new @class{gtk:scroll-info} instance.}
   @begin{short}
     Creates a new scroll info for scrolling an item into view.
@@ -102,7 +102,6 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scroll_info_ref                                     not needed
 ;;; ----------------------------------------------------------------------------
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scroll_info_unref                                   not needed
 ;;; ----------------------------------------------------------------------------
@@ -122,7 +121,7 @@
 (cffi:defcfun ("gtk_scroll_info_get_enable_horizontal"
                scroll-info-enable-horizontal) :boolean
  #+liber-documentation
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:scroll-info-enable-horizontal scrollinfo) => enable}
   @syntax{(setf (gtk:scroll-info-enable-horizontal scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}
@@ -154,7 +153,7 @@
 (cffi:defcfun ("gtk_scroll_info_get_enable_vertical"
                scroll-info-enable-vertical) :boolean
  #+liber-documentation
- "@version{2025-4-7}
+ "@version{2025-04-07}
   @syntax{(gtk:scroll-info-enable-vertical scrollinfo) => enable}
   @syntax{(setf (gtk:scroll-info-enable-vertical scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}

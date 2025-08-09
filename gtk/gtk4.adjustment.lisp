@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.adjustment.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -106,7 +106,7 @@
 
 #+liber-documentation
 (setf (documentation 'adjustment 'type)
- "@version{2023-8-25}
+ "@version{2025-07-01}
   @begin{short}
     The @class{gtk:adjustment} object represents a value which has an associated
     lower and upper bound, together with step and page increments, and a page
@@ -120,25 +120,27 @@
   is left up to the owner of the @class{gtk:adjustment} object to control the
   value.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"changed\" signal}
+    @begin[adjustment::changed]{signal}
       @begin{pre}
 lambda (adjustment)    :no-recurse
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when one or more of the adjustment properties have been changed,
       other than the @code{value} property.
-    @subheading{The \"value-changed\" signal}
+    @end{signal}
+    @begin[adjustment::value-changed]{signal}
       @begin{pre}
 lambda (adjustment)    :no-recurse
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when the @code{value} property of the adjustment has been changed.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:adjustment-new}
   @see-slot{gtk:adjustment-lower}
@@ -167,11 +169,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-lower)
       "Accessor"
       (documentation 'adjustment-lower 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-lower object) => lower}
   @syntax{(setf (gtk:adjustment-lower object) lower)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[lower]{a double float with the minimum value}
+  @argument[lower]{a double float for the minimum value}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{lower} slot of the
     @class{gtk:adjustment} class.
@@ -181,12 +183,12 @@ lambda (adjustment)    :no-recurse
   of the adjustment.
 
   When setting multiple adjustment properties via their individual setters,
-  multiple @code{\"changed\"} signals will be emitted. However, since the
-  emission of the @code{\"changed\"} signal is tied to the emission of the
-  @code{\"notify\"} signals of the changed properties, it is possible to
-  compress the @code{\"changed\"} signals into one by calling the
-  @fun{g:object-freeze-notify} and @fun{g:object-thaw-notify} functions around
-  the calls to the individual setters.
+  multiple @sig[gtk:adjustment]{changed} signals will be emitted. However, since
+  the emission of the @sig[gtk:adjustment]{changed} signal is tied to the
+  emission of the @sig[g:object]{notify} signals of the changed properties, it
+  is possible to compress the @sig[gtk:adjustment]{changed} signals into one by
+  calling the @fun{g:object-freeze-notify} and @fun{g:object-thaw-notify}
+  functions around the calls to the individual setters.
 
   Alternatively, using the @fun{gtk:adjustment-configure} function has the same
   effect of compressing \"changed\" emissions.
@@ -207,11 +209,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-page-increment)
       "Accessor"
       (documentation 'adjustment-page-increment 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-page-increment object) => increment}
   @syntax{(setf (gtk:adjustment-page-increment object) increment)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[increment]{a double float with the page increment}
+  @argument[increment]{a double float for the page increment}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{page-increment} slot of the
     @class{gtk:adjustment} class.
@@ -221,8 +223,8 @@ lambda (adjustment)    :no-recurse
   page increment of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the @code{\"changed\"} signal when setting multiple adjustment
-  properties.
+  emissions of the @sig[gtk:adjustment]{changed} signal when setting multiple
+  adjustment properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
 
@@ -240,11 +242,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-page-size)
       "Accessor"
       (documentation 'adjustment-page-size 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-page-size object) => size}
   @syntax{(setf (gtk:adjustment-page-size object) size)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[size]{a double float with the page size}
+  @argument[size]{a double float for the page size}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{page-size} slot of the
     @class{gtk:adjustment} class.
@@ -254,8 +256,8 @@ lambda (adjustment)    :no-recurse
   of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the @code{\"changed\"} signal when setting multiple adjustment
-  properties.
+  emissions of the @sig[gtk:adjustment]{changed} signal when setting multiple
+  adjustment properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
 
@@ -271,11 +273,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-step-increment)
       "Accessor"
       (documentation 'adjustment-step-increment 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-step-increment object) => increment}
   @syntax{(setf (gtk:adjustment-step-increment object) increment)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[increment]{a double float with the step increment}
+  @argument[increment]{a double float for the step increment}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{step-increment} slot of the
     @class{gtk:adjustment} class.
@@ -285,8 +287,8 @@ lambda (adjustment)    :no-recurse
   step increment of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the @code{\"changed\"} signal when setting multiple adjustment
-  properties.
+  emissions of the @sig[gtk:adjustment]{changed} signal when setting multiple
+  adjustment properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
 
@@ -304,11 +306,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-upper)
       "Accessor"
       (documentation 'adjustment-upper 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-upper object) => upper}
   @syntax{(setf (gtk:adjustment-upper object) upper)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[upper]{a double float with the maximum value}
+  @argument[upper]{a double float for the maximum value}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{upper} slot of the
     @class{gtk:adjustment} class.
@@ -322,8 +324,8 @@ lambda (adjustment)    :no-recurse
   @slot[gtk:adjustment]{page-size} value is nonzero.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the @code{\"changed\"} signal when setting multiple adjustment
-  properties.
+  emissions of the @sig[gtk:adjustment]{changed} signal when setting multiple
+  adjustment properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}
   @see-function{gtk:adjustment-upper}
@@ -341,11 +343,11 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-value)
       "Accessor"
       (documentation 'adjustment-value 'function)
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @syntax{(gtk:adjustment-value object) => value}
   @syntax{(setf (gtk:adjustment-value object) value)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[value]{a double float with the value}
+  @argument[value]{a double float for the value}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{value} slot of the
     @class{gtk:adjustment} class.
@@ -372,13 +374,13 @@ lambda (adjustment)    :no-recurse
 (defun adjustment-new (value lower upper
                        step-increment page-increment page-size)
  #+liber-documentation
- "@version{2023-8-25}
-  @argument[value]{a double float with the initial value}
-  @argument[lower]{a double float with the minimum value}
-  @argument[upper]{a double float with the maximum value}
-  @argument[step-increment]{a double float with the step increment}
-  @argument[page-increment]{a double float with the page increment}
-  @argument[page-size]{a double float with the page size}
+ "@version{2025-07-26}
+  @argument[value]{a double float for the initial value}
+  @argument[lower]{a double float for the minimum value}
+  @argument[upper]{a double float for the maximum value}
+  @argument[step-increment]{a double float for the step increment}
+  @argument[page-increment]{a double float for the page increment}
+  @argument[page-size]{a double float for the page size}
   @return{The new @class{gtk:adjustment} object.}
   @short{Creates a new adjustment.}
   @see-class{gtk:adjustment}"
@@ -400,17 +402,17 @@ lambda (adjustment)    :no-recurse
 
 (defun adjustment-clamp-page (adjustment lower upper)
  #+liber-documentation
- "@version{2023-8-25}
+ "@version{2025-07-26}
   @argument[adjustment]{a @class{gtk:adjustment} object}
-  @argument[lower]{a double float with the lower value}
-  @argument[upper]{a double float with the upper value}
+  @argument[lower]{a double float for the lower value}
+  @argument[upper]{a double float for the upper value}
   @begin{short}
     Updates the adjustment value to ensure that the range between @code{lower}
     and @code{upper} is in the current page.
   @end{short}
   If the range is larger than the page size, then only the start of it will be
-  in the current page. A @code{\"changed\"} signal will be emitted if the value
-  is changed.
+  in the current page. A @sig[gtk:adjustment]{changed} signal will be emitted if
+  the value is changed.
   @see-class{gtk:adjustment}"
   (cffi:foreign-funcall "gtk_adjustment_clamp_page"
                         (g:object adjustment) adjustment
@@ -426,20 +428,21 @@ lambda (adjustment)    :no-recurse
 
 (cffi:defcfun ("gtk_adjustment_configure" adjustment-configure) :void
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{#2025-07-26}
   @argument[adjustment]{a @class{gtk:adjustment} object}
-  @argument[value]{a double float with the new value}
-  @argument[lower]{a double float with the new minimum value}
-  @argument[upper]{a double float with the new maximum value}
-  @argument[step-increment]{a double float with the new step increment}
-  @argument[page-increment]{a double float with the new page increment}
-  @argument[page-size]{a double float with the new page size}
+  @argument[value]{a double float for the new value}
+  @argument[lower]{a double float for the new minimum value}
+  @argument[upper]{a double float for the new maximum value}
+  @argument[step-increment]{a double float for the new step increment}
+  @argument[page-increment]{a double float for the new page increment}
+  @argument[page-size]{a double float for the new page size}
   @begin{short}
     Sets all properties of the adjustment at once.
   @end{short}
-  Use this function to avoid multiple emissions of the @code{\"changed\"}
-  signal. See the @fun{gtk:adjustment-lower} function for an alternative way of
-  compressing multiple emissions of @code{\"changed\"} signals into one.
+  Use this function to avoid multiple emissions of the
+  @sig[gtk:adjustment]{changed} signal. See the @fun{gtk:adjustment-lower}
+  function for an alternative way of compressing multiple emissions of
+  @sig[gtk:adjustment]{changed} signals into one.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}"
   (adjustment (g:object adjustment))
@@ -460,9 +463,9 @@ lambda (adjustment)    :no-recurse
 
 (defun adjustment-minimum-increment (adjustment)
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{#2025-07-26}
   @argument[adjustment]{a @class{gtk:adjustment} object}
-  @return{The double float with the minimum increment of the adjustment.}
+  @return{The double float for the minimum increment of the adjustment.}
   @short{Gets the smaller of step increment and page increment.}
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-step-increment}

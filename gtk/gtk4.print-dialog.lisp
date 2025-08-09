@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -131,11 +131,11 @@
 (setf (liber:alias-for-function 'print-dialog-accept-label)
       "Accessor"
       (documentation 'print-dialog-accept-label 'function)
- "@version{2024-11-10}
+ "@version{2025-07-27}
   @syntax{(gtk:print-dialog-accecpt-label object) => label}
   @syntax{(setf (gtk:print-dialog-accept-label object) label)}
   @argument[object]{a @class{gtk:print-dialog} object}
-  @argument[label]{a string with the accept label}
+  @argument[label]{a string for the accept label}
   @begin{short}
     Accessor of the @slot[gtk:print-dialog]{accept-label} slot of the
     @class{gtk:print-dialog} class.
@@ -301,15 +301,15 @@
 
 (defun print-dialog-print-file (dialog parent setup file cancellable func)
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:print-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[setup]{a @class{gtk:print-setup} instance to use}
   @argument[file]{a @class{g:file} object to print}
   @argument[cancellable]{a @class{g:cancellable} instance to cancel the
     operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback funtion to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback funtion to call when
+    the operation is complete}
   @begin{short}
     The @fun{gtk:print-dialog-print-file} function prints a file.
   @end{short}
@@ -319,7 +319,7 @@
 
   This method completes asynchronously. Use the
   @fun{gtk:print-dialog-print-file-finish} function inside the
-  @symbol{g:async-ready-callback} callback function to obtain the result of the
+  @sym{g:async-ready-callback} callback function to obtain the result of the
   operation.
 
   Since 4.14
@@ -351,9 +351,9 @@
 
 (defun print-dialog-print-file-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{#2025-06-27}
   @argument[dialog]{a @class{gtk:print-dialog} object}
-  @argument[result]{a @symbol{g:async-result} instance}
+  @argument[result]{a @sym{g:async-result} instance}
   @return{The boolean whether the call was successful.}
   @begin{short}
     Finishes the @fun{gtk:print-dialog-print-file} function call and returns
@@ -381,13 +381,13 @@
 
 (defun print-dialog-setup (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:print-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} instance to cancel the
     operation}
-  @argument[func]{a @symbol{g:async-ready-callback} callback funtion to call
-    when the operation is complete}
+  @argument[func]{a @sym{g:async-ready-callback} callback funtion to call when
+    the operation is complete}
   @begin{short}
     The @fun{gtk:print-dialog-setup} function presents a print dialog to let
     the user select a printer, and set up print settings and page setup.
@@ -403,7 +403,7 @@
 
   This method completes asynchronously. Use the
   @fun{gtk:print-dialog-setup-finish} function inside the
-  @symbol{g:async-ready-callback} callback function to obtain the result of the
+  @sym{g:async-ready-callback} callback function to obtain the result of the
   operation.
 
   Since 4.14
@@ -434,17 +434,19 @@
 
 (defun print-dialog-setup-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{#2025-07-11}
   @argument[dialog]{a @class{gtk:print-dialog} object}
-  @argument[result]{a @symbol{g:async-result} instance}
-  @return{The @class{gtk:print-setup} instance that resulted from the call,
-    or @code{nil} if the call was not successful.}
+  @argument[result]{a @sym{g:async-result} instance}
+  @begin{return}
+    The @class{gtk:print-setup} instance that resulted from the call, or
+    @code{nil} if the call was not successful.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:print-dialog-setup} function call.
   @end{short}
   If the call was successful, it returns a @class{gtk:print-setup} instance
-  which contains the print settings and page setup information that will be used
-  to print.
+  which contains the print settings and page setup information that will be
+  used to print.
 
   Since 4.14
   @see-class{gtk:print-dialog}

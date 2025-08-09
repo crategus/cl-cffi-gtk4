@@ -93,18 +93,16 @@
 (setf (liber:alias-for-function 'fixed-layout-child-transform)
       "Accessor"
       (documentation 'fixed-layout-child-transform 'function)
- "@version{#2024-04-23}
+ "@version{#2025-08-01}
   @syntax{(gtk:fixed-layout-child-transform object) => transform}
   @syntax{(setf (gtk:fixed-layout-child-transform object) transform)}
   @argument[object]{a @class{gtk:fixed-layout-child} widget}
   @argument[transform]{a @class{gsk:transform} instance}
   @begin{short}
-    Accessor of the @slot[gtk:fixed-layout-child]{transform} slot of the
-    @class{gtk:fixed-layout-child} class.
+    The accessor for the @slot[gtk:fixed-layout-child]{transform} slot of the
+    @class{gtk:fixed-layout-child} class gets or sets the transformation of the
+    child widget of a @class{gtk:fixed-layout} object.
   @end{short}
-  The @fun{gtk:fixed-layout-child-transform} function retrieves the
-  transformation of the child widget of a @class{gtk:fixed-layout} object.
-  The @setf{gtk:fixed-layout-child-transform} function sets the transform.
   @see-class{gtk:fixed-layout-child}
   @see-class{gsk:transform}")
 

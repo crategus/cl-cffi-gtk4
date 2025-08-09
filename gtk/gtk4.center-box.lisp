@@ -170,18 +170,16 @@
 (setf (liber:alias-for-function 'center-box-baseline-position)
       "Accessor"
       (documentation 'center-box-baseline-position 'function)
- "@version{2025-06-26}
+ "@version{2025-07-29}
   @syntax{(gtk:center-box-baseline-position object) => position}
   @syntax{(setf (gtk:center-box-baseline-position object) position)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[position]{a value of the @sym{gtk:baseline-position} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:box]{baseline-position} slot of the
-    @class{gtk:center-box} class.
+    The accessor for the @slot[gtk:box]{baseline-position} slot of the
+    @class{gtk:center-box} class gets or sets the position of the baseline
+    aligned widgets if extra space is available.
   @end{short}
-  The @fun{gtk:center-box-baseline-position} function gets the baseline position
-  of a center box. The @setf{gtk:center-box-baseline-position} function sets the
-  baseline position.
 
   This affects only horizontal boxes with at least one baseline aligned child
   widget. If there is more vertical space available than requested, and the
@@ -202,18 +200,18 @@
 (setf (liber:alias-for-function 'center-box-center-widget)
       "Accessor"
       (documentation 'center-box-center-widget 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:center-box-center-widget object) => child}
   @syntax{(setf (gtk:center-box-center-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} center widget}
   @begin{short}
-    Accessor of the @slot[gtk:center-box]{center-widget} slot of the
-    @class{gtk:center-box} class.
+    The accessor for the @slot[gtk:center-box]{center-widget} slot of the
+    @class{gtk:center-box} class gets or sets the widget that is placed at the
+    center position in the box.
   @end{short}
-  The @fun{gtk:center-box-center-widget} function gets the center widget, or
-  @code{nil} if there is none. The @setf{gtk:center-box-center-widget} function
-  sets the center widget. To remove the existing center widget, pass @code{nil}.
+  Returns @code{nil} if the box has no center widget. To remove an existing
+  center widget, pass @code{nil}.
   @see-class{gtk:center-box}
   @see-class{gtk:widget}")
 
@@ -230,18 +228,18 @@
 (setf (liber:alias-for-function 'center-box-end-widget)
       "Accessor"
       (documentation 'center-box-end-widget 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:center-box-end-widget object) => child}
   @syntax{(setf (gtk:center-box-end-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} end widget}
   @begin{short}
-    Accessor of the @slot[gtk:center-box]{end-widget} slot of the
-    @class{gtk:center-box} class.
+    The accessor for the @slot[gtk:center-box]{end-widget} slot of the
+    @class{gtk:center-box} class gets or sets the widget that is placed at the
+    end position in the box.
   @end{short}
-  The @fun{gtk:center-box-end-widget} function gets the end widget, or
-  @code{nil} if there is none. The @setf{gtk:center-box-end-widget} function
-  sets the end widget. To remove the existing end widget, pass @code{nil}.
+  Returns @code{nil} if the box has no end widget. To remove an existing end
+  widget, pass @code{nil}.
   @see-class{gtk:center-box}
   @see-class{gtk:widget}")
 
@@ -263,19 +261,17 @@
 (setf (liber:alias-for-function 'center-box-shrink-center-last)
       "Accessor"
       (documentation 'center-box-shrink-center-last 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:center-box-shrink-center-last object) => setting}
   @syntax{(setf (gtk:center-box-shrink-center-last object) setting)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[setting]{a boolean whether to shrink the center widget after other
     children}
   @begin{short}
-    Accessor of the @slot[gtk:center-box]{shrink-center-last} slot of the
-    @class{gtk:center-box} class.
+    The accessor for the @slot[gtk:center-box]{shrink-center-last} slot of the
+    @class{gtk:center-box} class gets or sets whether to shrink the center
+    widget after other children.
   @end{short}
-  The @fun{gtk:center-box-shrink-center-last} function gets whether the center
-  box shrinks the center widget after other children. The
-  @setf{gtk:center-box-shrink-center-last} function sets the property.
 
   By default, when there is no space to give all three children their natural
   widths, the start and end widgets start shrinking and the center child keeps
@@ -299,18 +295,18 @@
 (setf (liber:alias-for-function 'center-box-start-widget)
       "Accessor"
       (documentation 'center-box-start-widget 'function)
- "@version{2025-05-10}
+ "@version{2025-07-29}
   @syntax{(gtk:center-box-start-widget object) => child}
   @syntax{(setf (gtk:center-box-start-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} start widget}
   @begin{short}
-    Accessor of the @slot[gtk:center-box]{start-widget} slot of the
-    @class{gtk:center-box} class.
+    The accessor for the @slot[gtk:center-box]{start-widget} slot of the
+    @class{gtk:center-box} class gets or sets the widget that is placed at the
+    start position in the box.
   @end{short}
-  The @fun{gtk:center-box-start-widget} function gets the start widget, or
-  @code{nil} if there is none. The @setf{gtk:center-box-start-widget} function
-  sets the start widget. To remove the existing start widget, pass @code{nil}.
+  Returns @code{nil} if the box has no start widget. To remove an existing
+  start widget, pass @code{nil}.
   @see-class{gtk:center-box}
   @see-class{gtk:widget}")
 

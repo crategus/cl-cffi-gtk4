@@ -2,8 +2,8 @@
 ;;; gtk4.link-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'link-button 'type)
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @begin{short}
     The @class{gtk:link-button} widget is a @class{gtk:button} widget with a
     hyperlink, similar to the one used by web browsers, which triggers an
@@ -117,32 +117,35 @@
 
   By default, the @class{gtk:link-button} widget calls the
   @fun{gtk:file-launcher-launch} function when the button is clicked. This
-  behaviour can be overridden by connecting to the @code{\"activate-link\"}
-  signal and returning @em{true} from the signal handler.
+  behaviour can be overridden by connecting to the
+  @sig[gtk:link-button]{activate-link} signal and returning @em{true} from the
+  signal handler.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:link-button} implementation has a single CSS node with name
     @code{button}. To differentiate it from a plain @class{gtk:button} widget,
     it gets the @code{.link} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:link-button} implementation uses the @code{:link} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:link-button} implementation uses the
+    @val[gtk:accessible-role]{:link} role of the @sym{gtk:accessible-role}
+    enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate-link\" signal}
+    @begin[link-button::activate-link]{signal}
       @begin{pre}
 lambda (button)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[button]{The @class{gtk:link-button} widget that emitted the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted each time the link button has been clicked. The
       default handler will call the @fun{gtk:file-launcher-launch} function
       with the URI stored inside the @slot[gtk:link-button]{uri} property.
       To override the default behavior, you can connect to the
-      @code{\"activate-link\"} signal and stop the propagation of the signal by
-      returning @em{true} from your handler.
+      @sig[gtk:link-button]{activate-link} signal and stop the propagation of
+      the signal by returning @em{true} from your handler.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:link-button-new}
   @see-constructor{gtk:link-button-new-with-label}
@@ -166,19 +169,17 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-uri)
       "Accessor"
       (documentation 'link-button-uri 'function)
- "@version{2025-2-22}
+ "@version{2025-08-05}
   @syntax{(gtk:link-button-uri object) => uri}
   @syntax{(setf (gtk:link-button-uri object) uri)}
   @argument[object]{a @class{gtk:link-button} widget}
   @argument[uri]{a string for a valid URI}
   @begin{short}
-    Accessor of the @slot[gtk:link-button]{uri} slot of the
-    @class{gtk:link-button} class.
+    The accessor for the @slot[gtk:link-button]{uri} slot of the
+    @class{gtk:link-button} class gets or sets the URI where the link button
+    points.
   @end{short}
-  The @fun{gtk:link-button-uri} function retrieves the URI. The
-  @setf{gtk:link-button-uri} function sets @slot[gtk:link-button]{uri} as the
-  URI where the link button points. As a side-effect this unsets the visited
-  state of the button.
+  As a side-effect this unsets the visited state of the button.
   @see-class{gtk:link-button}")
 
 ;;; --- gtk:link-button-visited ------------------------------------------------
@@ -194,18 +195,16 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-visited)
       "Accessor"
       (documentation 'link-button-visited 'function)
- "@version{2025-2-22}
+ "@version{2025-08-05}
   @syntax{(gtk:link-button-visited object) => visited}
   @syntax{(setf (gtk:link-button-visited object) visited)}
   @argument[object]{a @class{gtk:link-button} widget}
   @argument[visited]{a boolean for the \"visited\" state}
   @begin{short}
-    Accessor of the @slot[gtk:link-button]{visited} slot of the
-    @class{gtk:link-button} class.
+    The accessor for the @slot[gtk:link-button]{visited} slot of the
+    @class{gtk:link-button} class gets or sets the \"visited\" state of the URI
+    where the link button points.
   @end{short}
-  The @fun{gtk:link-button-visited} function retrieves the \"visited\" state of
-  the URI where the link button points. The @setf{gtk:link-button-visited}
-  function sets the \"visited\" state of the URI.
 
   The button becomes visited when it is clicked. If the URI is changed on the
   button, the visited state is unset again.
@@ -219,7 +218,7 @@ lambda (button)    :run-last
 
 (defun link-button-new (uri)
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @argument[uri]{a string for a valid URI}
   @return{The new @class{gtk:link-button} widget.}
   @short{Creates a new link button with the URI as its text.}
@@ -239,7 +238,7 @@ lambda (button)    :run-last
 
 (defun link-button-new-with-label (uri label)
  #+liber-documentation
- "@version{2025-2-22}
+ "@version{2025-02-22}
   @argument[uri]{a string for a valid URI}
   @argument[label]{a string for the text of the button}
   @return{The new @class{gtk:link-button} widget.}

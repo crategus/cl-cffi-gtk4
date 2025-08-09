@@ -77,7 +77,7 @@
 (setf (liber:alias-for-symbol 'sorter-order)
       "GEnum"
       (liber:symbol-documentation 'sorter-order)
- "@version{2024-10-18}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkSorterOrder\" sorter-order
   (:export t
@@ -87,17 +87,17 @@
   (:total 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
-      @entry[:partial]{A partial order, any value of the @symbol{gtk:ordering}
+    @begin[code]{simple-table}
+      @entry[:partial]{A partial order, any value of the @sym{gtk:ordering}
         enumeration is possible.}
       @entry[:none]{No order, all elements are considered equal. The
-        @fun{gtk:sorter-compare} function will only return the @code{:equal}
-        value of the @symbol{gtk:ordering} enumeration.}
+        @fun{gtk:sorter-compare} function will only return the
+        @val[gtk:ordering]{:equal} value of the @sym{gtk:ordering} enumeration.}
       @entry[:total]{A total order, the @fun{gtk:sorter-compare} function will
-        only return the @code{:equal} value of the @symbol{gtk:ordering}
-        enumeration if an item is compared with itself. Two different items will
-        never cause this value to be returned.}
-    @end{table}
+        only return the @val[gtk:ordering]{:equal} value of the
+        @sym{gtk:ordering} enumeration if an item is compared with itself. Two
+        different items will never cause this value to be returned.}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the type of order that a @class{gtk:sorter} object may describe.
@@ -122,7 +122,7 @@
 (setf (liber:alias-for-symbol 'sorter-change)
       "GEnum"
       (liber:symbol-documentation 'sorter-change)
- "@version{2024-10-18}
+ "@version{2025-07-27}
   @begin{declaration}
 (gobject:define-genum \"GtkSorterChange\" sorter-change
   (:export t
@@ -133,20 +133,20 @@
   (:more-strict 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:different]{The sorter change cannot be described by any of the
         other enumeration values.}
       @entry[:inverted]{The sort order was inverted. Comparisons that returned
-        the @code{:smaller} value now return the @code{:larger} value of the
-        @symbol{gtk:ordering} enumeration and vice versa. Other comparisons
-        return the same values as before.}
+        the @val[gtk:ordering]{:smaller} value now return the
+        @val[gtk:ordering]{:larger} value of the @sym{gtk:ordering} enumeration
+        and vice versa. Other comparisons return the same values as before.}
       @entry[:less-strict]{The sorter is less strict. Comparisons may now return
-        the @code{:equal} value of the @symbol{gtk:ordering} enumeration that
-        did not do so before.}
+        the @val[gtk:ordering]{:equal} value of the @sym{gtk:ordering}
+        enumeration that did not do so before.}
       @entry[:more-strict]{The sorter is more strict. Comparisons that did
-        return the @code{:equal} value of the @symbol{gtk:ordering} enumeration
-        may not do so anymore.}
-    @end{table}
+        return the @val[gtk:ordering]{:equal} value of the @sym{gtk:ordering}
+        enumeration may not do so anymore.}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes changes in a sorter in more detail and allows users to optimize
@@ -168,7 +168,7 @@
 
 #+liber-documentation
 (setf (documentation 'sorter 'type)
- "@version{2024-10-18}
+ "@version{2025-07-23}
   @begin{short}
     The @class{gtk:sorter} object is the way to describe sorting criteria.
   @end{short}
@@ -177,8 +177,8 @@
   calling the @fun{gtk:sorter-compare} function for pairs of items.
 
   Sorters may change their sorting behavior through their lifetime. In that
-  case, they will emit the @code{\"changed\"} signal to notify that the sort
-  order is no longer valid and should be updated by calling the
+  case, they will emit the @sig[gtk:sorter]{changed} signal to notify that the
+  sort order is no longer valid and should be updated by calling the
   @fun{gtk:sorter-compare} function again.
 
   GTK provides various pre-made sorter implementations for common sorting
@@ -189,21 +189,22 @@
   Of course, in particular for large lists, it is also possible to subclass the
   @class{gtk:sorter} object and provide one's own sorter.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"changed\" signal}
+    @begin[sorter::changed]{signal}
       @begin{pre}
 lambda (sorter change)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[sorter]{The @class{gtk:sorter} object.}
-        @entry[change]{How the sorter changed as a @symbol{gtk:sorter-change}
+        @entry[change]{How the sorter changed as a @sym{gtk:sorter-change}
           value.}
-      @end{table}
+      @end{simple-table}
       This signal is emitted whenever the sorter changed. Users of the sorter
       should then update the sort order again via the @fun{gtk:sorter-compare}
       function. The @class{gtk:sort-list-model} object handles this signal
       automatically. Depending on the change parameter, it may be possible to
       update the sort order without a full resorting. Refer to the
-      @symbol{gtk:sorter-change} documentation for details.
+      @sym{gtk:sorter-change} documentation for details.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:sort-list-model}")
 
@@ -213,14 +214,15 @@ lambda (sorter change)    :run-last
 
 (cffi:defcfun ("gtk_sorter_compare" sorter-compare) ordering
  #+liber-documentation
- "@version{2025-03-14}
+ "@version{2025-07-27}
   @argument[sorter]{a @class{gtk:sorter} object}
   @argument[obj1]{a @class{g:object} instance for the first item to compare}
   @argument[obj2]{a @class{g:object} instance for the second item to compare}
   @begin{return}
-    The @symbol{gtk:ordering} value with the @code{:equal} value if
-    @arg{obj1} = @arg{obj2}, the @code{:smaller} value if @arg{obj1} <
-    @arg{obj2}, the @code{:larger} value if @arg{obj1} > @arg{obj2}.
+    The @sym{gtk:ordering} value with the @val[gtk:ordering]{:equal} value if
+    @arg{obj1} = @arg{obj2}, the @val[gtk:ordering]{:smaller} value if
+    @arg{obj1} < @arg{obj2}, the @val[gtk:ordering]{:larger} value if
+    @arg{obj1} > @arg{obj2}.
   @end{return}
   @begin{short}
     Compares two given objects according to the sort order implemented by the
@@ -252,14 +254,14 @@ lambda (sorter change)    :run-last
 
 (cffi:defcfun ("gtk_sorter_get_order" sorter-order) sorter-order
  #+liber-documentation
- "@version{2024-10-18}
+ "@version{2025-07-27}
   @argument[sorter]{a @class{gtk:sorter} object}
-  @return{The @symbol{gtk:sorter-order} value.}
+  @return{The @sym{gtk:sorter-order} value.}
   @begin{short}
     Gets the order that @arg{sorter} conforms to.
   @end{short}
-  See the @symbol{gtk:sorter-order} enumeration for details of the possible
-  return values. This function is intended to allow optimizations.
+  See the @sym{gtk:sorter-order} enumeration for details of the possible return
+  values. This function is intended to allow optimizations.
   @see-class{gtk:sorter}
   @see-symbol{gtk:sorter-order}"
   (sorter (g:object sorter)))
@@ -272,18 +274,18 @@ lambda (sorter change)    :run-last
 
 (cffi:defcfun ("gtk_sorter_changed" sorter-changed) :void
  #+liber-documentation
- "@version{2024-10-18}
+ "@version{2025-07-23}
   @argument[sorter]{a @class{gtk:sorter} object}
-  @argument[change]{a @symbol{gtk:sorter-change} value}
+  @argument[change]{a @sym{gtk:sorter-change} value}
   @begin{short}
-    Emits the @code{\"changed\"} signal to notify all users of the sorter that
-    it has changed.
+    Emits the @sig[gtk:sorter]{changed} signal to notify all users of the sorter
+    that it has changed.
   @end{short}
   Users of the sorter should then update the sort order via the
   @fun{gtk:sorter-compare} function.
 
   Depending on the @arg{change} parameter, it may be possible to update the sort
-  order without a full resorting. Refer to the @symbol{gtk:sorter-change}
+  order without a full resorting. Refer to the @sym{gtk:sorter-change}
   documentation for details.
 
   This function is intended for implementors of @class{gtk:sorter} subclasses
@@ -303,12 +305,12 @@ lambda (sorter change)    :run-last
 #+gtk-4-2
 (defun ordering-from-cmpfunc (result)
  #+liber-documentation
- "@version{2025-03-14}
+ "@version{2025-07-27}
   @argument[result]{an integer for the result of a comparison function}
-  @return{The @symbol{gtk:ordering} value.}
+  @return{The @sym{gtk:ordering} value.}
   @begin{short}
-    Converts the result of a @symbol{g:compare-data-func} function to a
-    @symbol{gtk:ordering} value.
+    Converts the result of a @sym{g:compare-data-func} function to a
+    @sym{gtk:ordering} value.
   @end{short}
 
   Since 4.2

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.settings.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -131,7 +131,7 @@
 (setf (liber:alias-for-symbol 'system-setting)
       "GEnum"
       (liber:symbol-documentation 'system-setting)
- "@version{2024-10-13}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkSystemSetting\" system-setting
   (:export t
@@ -143,7 +143,7 @@
   :icon-theme)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:dpi]{The @slot[gtk:settings]{gtk-xft-dpi} setting has changed.}
       @entry[:font-name]{The @slot[gtk:settings]{gtk-font-name} setting has
         changed.}
@@ -157,7 +157,7 @@
       @entry[:display]{The display has changed.}
       @entry[:icon-theme]{The icon theme has changed in a way that requires
         icons to be looked up again.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Values that can be passed to the @code{GtkWidget::system_setting_changed}
@@ -190,7 +190,7 @@
 (setf (liber:alias-for-symbol 'font-rendering)
       "GEnum"
       (liber:symbol-documentation 'font-rendering)
- "@version{2024-10-13}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkFontRendering\" font-rendering
   (:export t
@@ -199,12 +199,12 @@
   (:manual 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:automatic]{Set up font rendering automatically, taking factors
         like screen resolution and scale into account.}
       @entry[:manual]{Follow low-level font-related settings when configuring
         font rendering.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Values for the @slot[gtk:settings]{gtk-font-rendering} setting that
@@ -386,7 +386,7 @@
 
 #+liber-documentation
 (setf (documentation 'settings 'type)
- "@version{2024-5-25}
+ "@version{2025-07-27}
   @begin{short}
     The @class{gtk:settings} object provide a mechanism to share global settings
     between applications.
@@ -484,7 +484,7 @@
 (setf (liber:alias-for-function 'settings-gtk-alternative-button-order)
       "Accessor"
       (documentation 'settings-gtk-alternative-button-order 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk:alternative-button-order object) => setting}
   @syntax{(setf (gtk:settings-gtk-alternative-button-order object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -513,7 +513,7 @@
 (setf (liber:alias-for-function 'settings-gtk-alternative-sort-arrows)
       "Accessor"
       (documentation 'settings-gtk-alternative-sort-arrows 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-alternative-sort-arrows object) => setting}
   @syntax{(setf (gtk:settings-gtk-alternative-sort-arrows object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -543,7 +543,7 @@
 (setf (liber:alias-for-function 'settings-gtk-application-prefer-dark-theme)
       "Accessor"
       (documentation 'settings-gtk-application-prefer-dark-theme 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-application-prefer-dark-theme object) => setting}
   @syntax{(setf (gtk:settings-gtk-application-prefer-dark-theme object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -572,11 +572,11 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-aspect-ratio)
       "Accessor"
       (documentation 'settings-gtk-cursor-aspect-ratio 'function)
- "@version{2023-8-30}
+ "@version{2025-07-26}
   @syntax{(gtk:settings-gtk-cursor-aspect-ratio object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a float with the aspect ratio of the text caret}
+  @argument[setting]{a single float for the aspect ratio of the text caret}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-cursor-aspect-ratio} slot of the
     @class{gtk:settings} class.
@@ -599,7 +599,7 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-cursor-blink object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -629,11 +629,11 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink-time)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink-time 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-cursor-blink-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the length of the cursor blink cycle,
+  @argument[setting]{an integer for the length of the cursor blink cycle,
     in milliseconds}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-cursor-blink-time} slot of the
@@ -659,11 +659,11 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink-timeout)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink-timeout 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-cursor-blink-timeout object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink-timeout object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the time after which the cursor stops
+  @argument[setting]{an integer for the time after which the cursor stops
     blinking, in seconds}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-cursor-blink-timeout} slot of the
@@ -688,11 +688,11 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-theme-name)
       "Accessor"
       (documentation 'settings-gtk-cursor-theme-name 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-cursor-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the cursor theme name}
+  @argument[setting]{a string for the cursor theme name}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-cursor-theme-name} slot of the
     @class{gtk:settings} class.
@@ -715,11 +715,11 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-theme-size)
       "Accessor"
       (documentation 'settings-gtk-cursor-theme-size 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-cursor-theme-size object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-theme-size object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the size to use for cursors}
+  @argument[setting]{an integer for the size to use for cursors}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-cursor-theme-size} slot of the
     @class{gtk:settings} class.
@@ -753,11 +753,11 @@
 (setf (liber:alias-for-function 'settings-gtk-decoration-layout)
       "Accessor"
       (documentation 'settings-gtk-decoration-layout 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-decoration-layout object) => setting}
   @syntax{(setf (gtk:settings-gtk-decoration-layout object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the settings for buttons}
+  @argument[setting]{a string for the settings for buttons}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-decoration-layout} slot of the
     @class{gtk:settings} class.
@@ -801,7 +801,7 @@
 (setf (liber:alias-for-function 'settings-gtk-dialogs-use-header)
       "Accessor"
       (documentation 'settings-gtk-dialogs-use-header 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-dialogs-use-header object) => setting}
   @syntax{(setf (gtk:settings-gtk-dialogs-use-header object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -832,11 +832,11 @@
 (setf (liber:alias-for-function 'settings-gtk-dnd-drag-threshold)
       "Accessor"
       (documentation 'settings-gtk-dnd-drag-threshold 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-dnd-drag-threshold object) => setting}
   @syntax{(setf (gtk:settings-gtk-dnd-drag-threshold object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the number of pixels the cursor can move}
+  @argument[setting]{an integer for the number of pixels the cursor can move}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-dnd-drag-threshold} slot of the
     @class{gtk:settings} class.
@@ -860,11 +860,11 @@
 (setf (liber:alias-for-function 'settings-gtk-double-click-distance)
       "Accessor"
       (documentation 'settings-gtk-double-click-distance 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-double-click-distance object) => setting}
   @syntax{(setf (gtk:settings-gtk-double-click-distance object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the maximum distance in pixels}
+  @argument[setting]{an integer for the maximum distance in pixels}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-double-click-distance} slot of the
     @class{gtk:settings} class.
@@ -889,11 +889,11 @@
 (setf (liber:alias-for-function 'settings-gtk-double-click-time)
       "Accessor"
       (documentation 'settings-gtk-double-click-time 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-double-click-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-double-click-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the maximum time allowed between two
+  @argument[setting]{an integer for the maximum time allowed between two
     clicks}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-double-click-time} slot of the
@@ -918,7 +918,7 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-accels)
       "Accessor"
       (documentation 'settings-gtk-enable-accels 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-enable-accels object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-accels object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -946,7 +946,7 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-animations)
       "Accessor"
       (documentation 'settings-gtk-enable-animations 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-enable-animations object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-animations object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -975,7 +975,7 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-event-sounds)
       "Accessor"
       (documentation 'settings-gtk-enable-event-sounds 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-enable-event-sounds object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-event-sounds object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -1008,7 +1008,7 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-input-feedback-sounds)
       "Accessor"
       (documentation 'settings-gtk-enable-input-feedback-sounds 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-enable-input-feedback-sounds object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-input-feedback-sounds object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -1038,7 +1038,7 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-primary-paste)
       "Accessor"
       (documentation 'settings-gtk-enable-primary-paste 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-enable-primary-paste object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-primary-paste object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -1068,7 +1068,7 @@
 (setf (liber:alias-for-function 'settings-gtk-entry-password-hint-timeout)
       "Accessor"
       (documentation 'settings-gtk-entry-password-hint-timeout 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-entry-password-hint-timeout object) => setting}
   @syntax{(setf (gtk:settings-gtk-entry-password-hint-timeout object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -1096,7 +1096,7 @@
 (setf (liber:alias-for-function 'settings-gtk-entry-select-on-focus)
       "Accessor"
       (documentation 'settings-gtk-entry-select-on-focus 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-entry-select-on-focus object) => setting}
   @syntax{(setf (gtk:settings-gtk-entry-select-on-focus object) setting)}
   @argument[object]{the @class{gtk:settings} object}
@@ -1124,7 +1124,7 @@
 (setf (liber:alias-for-function 'settings-gtk-error-bell)
       "Accessor"
       (documentation 'settings-gtk-error-bell 'function)
- "@version{2023-10-2}
+ "@version{2023-10-02}
   @syntax{(gtk:settings-gtk-error-bell object) => setting}
   @syntax{(setf (gtk:settings-gtk-error-bell object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1151,11 +1151,11 @@
 (setf (liber:alias-for-function 'settings-gtk-font-name)
       "Accessor"
       (documentation 'settings-gtk-font-name 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-font-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-font-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the name of the default font to use}
+  @argument[setting]{a string for the name of the default font to use}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-font-name} slot of the
     @class{gtk:settings} class.
@@ -1167,7 +1167,7 @@
 
 #+(and gtk-4-16 liber-documentation)
 (setf (documentation (liber:slot-documentation "gtk-font-rendering" 'settings) t)
- "The @code{gtk-font-rendering} property of type @symbol{gtk:font-rendering}
+ "The @code{gtk-font-rendering} property of type @sym{gtk:font-rendering}
   (Read / Write) @br{}
   How GTK font rendering is set up. When set to @code{:manual}, GTK respects the
   low-level font-related settings (@slot[gtk:settings]{gtk-hint-font-metrics},
@@ -1176,17 +1176,17 @@
   as much as practical. When set to @code{:automatic}, GTK will consider factors
   such as screen resolution and scale in deciding how to render fonts.
   Since 4.16 @br{}
-  Default value: @code{:automatic}")
+  Default value: @val[gtk:font-rendering]{:automatic}")
 
 #+(and gtk-4-16 liber-documentation)
 (setf (liber:alias-for-function 'settings-gtk-font-rendering)
       "Accessor"
       (documentation 'settings-gtk-font-rendering 'function)
- "@version{2024-10-13}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-font-rendering object) => setting}
   @syntax{(setf (gtk:settings-gtk-font-rendering object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a @symbol{gtk:font-rendering} value}
+  @argument[setting]{a @sym{gtk:font-rendering} value}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-font-rendering} slot of the
     @class{gtk:settings} class.
@@ -1220,11 +1220,11 @@
 (setf (liber:alias-for-function 'settings-gtk-fontconfig-timestamp)
       "Accessor"
       (documentation 'settings-gtk-fontconfig-timestamp 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-fontconfig-timestamp object) => setting}
   @syntax{(setf (gtk:settings-gtk-fontconfig-timestamp object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an unsigned integer with the timestamp}
+  @argument[setting]{an unsigned integer for the timestamp}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-fontconfig-timestamp} slot of the
     @class{gtk:settings} class.
@@ -1247,7 +1247,7 @@
 (setf (liber:alias-for-function 'settings-gtk-hint-font-metrics)
       "Accessor"
       (documentation 'settings-gtk-hint-font-metrics 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-hint-font-metrics object) => setting}
   @syntax{(setf (gtk:settings-gtk-hint-font-metrics object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1276,11 +1276,11 @@
 (setf (liber:alias-for-function 'settings-gtk-icon-theme-name)
       "Accessor"
       (documentation 'settings-gtk-icon-theme-name 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-icon-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-icon-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the icon theme name}
+  @argument[setting]{a string for the icon theme name}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-icon-theme-name} slot of the
     @class{gtk:settings} class.
@@ -1305,11 +1305,11 @@
 (setf (liber:alias-for-function 'settings-gtk-im-module)
       "Accessor"
       (documentation 'settings-gtk-im-module 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-im-module object) => setting}
   @syntax{(setf (gtk:settings-gtk-im-module object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the IM module}
+  @argument[setting]{a string for the IM module}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-im-module} slot of the
     @class{gtk:settings} class.
@@ -1339,7 +1339,7 @@
 (setf (liber:alias-for-function 'settings-gtk-keynav-use-caret)
       "Accessor"
       (documentation 'settings-gtk-keynav-use-caret 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-keynav-use-caret object) => setting}
   @syntax{(setf (gtk:settings-gtk-keynav-use-caret object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1367,7 +1367,7 @@
 (setf (liber:alias-for-function 'settings-gtk-label-select-on-focus)
       "Accessor"
       (documentation 'settings-gtk-label-select-on-focus 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-label-select-on-focus object) => setting}
   @syntax{(setf (gtk:settings-gtk-label-select-on-focus object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1395,11 +1395,11 @@
 (setf (liber:alias-for-function 'settings-gtk-long-press-time)
       "Accessor"
       (documentation 'settings-gtk-long-press-time 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-long-press-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-long-press-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an unsigned integer with the time for a button or touch
+  @argument[setting]{an unsigned integer for the time for a button or touch
     press to be considered a \"long press\"}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-long-press-time} slot of the
@@ -1423,7 +1423,7 @@
 (setf (liber:alias-for-function 'settings-gtk-overlay-scrolling)
       "Accessor"
       (documentation 'settings-gtk-overlay-scrolling 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-overlay-scrolling object) => setting}
   @syntax{(setf (gtk:settings-gtk-overlay-scrolling object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1452,7 +1452,7 @@
 (setf (liber:alias-for-function 'settings-gtk-primary-button-warps-slider)
       "Accessor"
       (documentation 'settings-gtk-primary-button-warps-slider 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-primary-button-warps-slider object) => setting}
   @syntax{(setf (gtk:settings-gtk-primary-button-warps-slider object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1483,11 +1483,11 @@
 (setf (liber:alias-for-function 'settings-gtk-print-backends)
       "Accessor"
       (documentation 'settings-gtk-print-backends 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-print-backends object) => setting}
   @syntax{(setf (gtk:settings-gtk-print-backends object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with a list of print backends}
+  @argument[setting]{a string for a list of print backends}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-print-backends} slot of the
     @class{gtk:settings} class.
@@ -1518,11 +1518,11 @@
 (setf (liber:alias-for-function 'settings-gtk-print-preview-command)
       "Accessor"
       (documentation 'settings-gtk-print-preview-command 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-print-preview-command object) => setting}
   @syntax{(setf (gtk:settings-gtk-print-preview-command object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with a command to run for displaying the print
+  @argument[setting]{a string for a command to run for displaying the print
     preview}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-print-preview-command} slot of the
@@ -1553,7 +1553,7 @@
 (setf (liber:alias-for-function 'settings-gtk-recent-files-enabled)
       "Accessor"
       (documentation 'settings-gtk-recent-files-enabled 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-recent-files-enabled object) => setting}
   @syntax{(setf (gtk:settings-gtk-recent-files-enabled object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1585,11 +1585,11 @@
 (setf (liber:alias-for-function 'settings-gtk-recent-files-max-age)
       "Accessor"
       (documentation 'settings-gtk-recent-files-max-age 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-recent-files-max-age object) => setting}
   @syntax{(setf (gtk:settings-gtk-recent-files-max-age object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the maximum age, in days}
+  @argument[setting]{an integer for the maximum age, in days}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-recent-files-max-page} slot of the
     @class{gtk:settings} class.
@@ -1615,7 +1615,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-app-menu)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-app-menu 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-app-menu object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-app-menu object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1644,7 +1644,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-desktop)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-desktop 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-desktop object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-desktop object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1673,7 +1673,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-menubar)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-menubar 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1702,7 +1702,7 @@
 (setf (liber:alias-for-function 'settings-gtk-show-status-shapes)
       "Accessor"
       (documentation 'settings-gtk-show-status-shapes 'function)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1734,11 +1734,11 @@
 (setf (liber:alias-for-function 'settings-gtk-sound-theme-name)
       "Accessor"
       (documentation 'settings-gtk-sound-theme-name 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-sound-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-sound-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the sound theme name}
+  @argument[setting]{a string for the sound theme name}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-sound-theme-name} slot of the
     @class{gtk:settings} class.
@@ -1763,7 +1763,7 @@
 (setf (liber:alias-for-function 'settings-gtk-split-cursor)
       "Accessor"
       (documentation 'settings-gtk-split-cursor 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-split-cursor object) => setting}
   @syntax{(setf (gtk:settings-gtk-split-cursor object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1788,11 +1788,11 @@
 (setf (liber:alias-for-function 'settings-gtk-theme-name)
       "Accessor"
       (documentation 'settings-gtk-theme-name 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the theme name}
+  @argument[setting]{a string for the theme name}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-theme-name} slot of the
     @class{gtk:settings} class.
@@ -1816,11 +1816,11 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-double-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-double-click 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-titlebar-double-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-double-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with an action}
+  @argument[setting]{a string for an action}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-titlebar-double-click} slot of the
     @class{gtk:settings} class.
@@ -1846,11 +1846,11 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-middle-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-middle-click 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-titlebar-middle-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-middle-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with an action}
+  @argument[setting]{a string for an action}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-titlebar-middle-click} slot of the
     @class{gtk:settings} class.
@@ -1876,11 +1876,11 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-right-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-right-click 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-titlebar-right-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-right-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with an action}
+  @argument[setting]{a string for an action}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-titlebar-right-click} slot of the
     @class{gtk:settings} class.
@@ -1904,7 +1904,7 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-antialias)
       "Accessor"
       (documentation 'settings-gtk-xft-antialias 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-xft-antialias object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-antialias object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1929,11 +1929,11 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-dpi)
       "Accessor"
       (documentation 'settings-gtk-xft-dpi 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-xft-dpi object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-dpi object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{an integer with the resolution for Xft}
+  @argument[setting]{an integer for the resolution for Xft}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-xft-dpi} slot of the
     @class{gtk:settings} class.
@@ -1955,7 +1955,7 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-hinting)
       "Accessor"
       (documentation 'settings-gtk-xft-hinting 'function)
- "@version{2023-8-30}
+ "@version{2023-08-30}
   @syntax{(gtk:settings-gtk-xft-hinting object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-hinting object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1982,11 +1982,11 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-hintstyle)
       "Accessor"
       (documentation 'settings-gtk-xft-hintstyle 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-xft-hintstyle object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-hintstyle object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the deegree of hinting}
+  @argument[setting]{a string for the deegree of hinting}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-xft-hintstyle} slot of the
     @class{gtk:settings} class.
@@ -2008,11 +2008,11 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-rgba)
       "Accessor"
       (documentation 'settings-gtk-xft-rgba 'function)
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @syntax{(gtk:settings-gtk-xft-rgba object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-rgba object) setting)}
   @argument[object]{a @class{gtk:settings} object}
-  @argument[setting]{a string with the type of subpixel antialiasing}
+  @argument[setting]{a string for the type of subpixel antialiasing}
   @begin{short}
     Accessor of the @slot[gtk:settings]{gtk-xft-rgba} slot of the
     @class{gtk:settings} class.
@@ -2027,7 +2027,7 @@
 
 (cffi:defcfun ("gtk_settings_get_default" settings-default) (g:object settings)
  #+liber-documentation
- "@version{2024-6-2}
+ "@version{2024-06-02}
   @begin{return}
     The @class{gtk:settings} object. If there is no default display, then
     returns @code{nil}.
@@ -2049,7 +2049,7 @@
 (cffi:defcfun ("gtk_settings_get_for_display" settings-for-display)
     (g:object settings)
  #+liber-documentation
- "@version{#2023-8-30}
+ "@version{#2023-08-30}
   @argument[display]{a @class{gdk:display} object}
   @return{The @class{gtk:settings} object.}
   @begin{short}
@@ -2068,9 +2068,9 @@
 
 (cffi:defcfun ("gtk_settings_reset_property" settings-reset-property) :void
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:settings} object}
-  @argument[name]{a string with the name of the setting to reset}
+  @argument[name]{a string for the name of the setting to reset}
   @begin{short}
     Undoes the effect of calling the @fun{g:object-property} function to install
     an application-specific value for a setting.

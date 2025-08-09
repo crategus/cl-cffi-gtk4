@@ -68,7 +68,7 @@
 
 #+liber-documentation
 (setf (documentation 'signal-list-item-factory 'type)
- "@version{2025-04-11}
+ "@version{2025-07-16}
   @begin{short}
     The @class{gtk:signal-list-item-factory} object is a
     @class{gtk:list-item-factory} object that emits signals to manage list
@@ -77,85 +77,92 @@
 
   Signals are emitted for every list item in the same order:
   @begin{enumerate}
-    @item{The @code{\"setup\"} signal is emitted to set up permanent things on
-      the list item. This usually means constructing the widgets used in the
-      row and adding them to the list item.}
-    @item{The @code{\"bind\"} signal is emitted to bind the item passed via the
-      @slot[gtk:list-item]{item} property to the widgets that have been created
-      in step 1 or to add item specific widgets. Signals are connected to listen
-      to changes - both to changes in the item to update the widgets or to
-      changes in the widgets to update the item. After this signal has been
-      called, the list item may be shown in a list widget.}
-    @item{The @code{\"unbind\"} signal is emitted to undo everything done in
-      step 2. Usually this means disconnecting signal handlers. Once this signal
-      has been called, the list item will no longer be used in a list widget.}
-    @item{The @code{\"bind\"} and @code{\"unbind\"} signals may be emitted
-      multiple times again to bind the list item for use with new items. By
-      reusing list items, potentially costly setup can be avoided. However, it
-      means code needs to make sure to properly clean up the list item in step
-      3 so that no information from the previous use leaks into the next use.}
-    @item{The @code{\"teardown\"} signal is emitted to allow undoing the effects
-      of the @code{\"setup\"} signal. After this signal was emitted on a list
-      item, the list item will be destroyed and not be used again.}
+    @item{The @sig[gtk:signal-list-item-factory]{setup} signal is emitted to set
+      up permanent things on the list item. This usually means constructing the
+      widgets used in the row and adding them to the list item.}
+    @item{The @sig[gtk:signal-list-item-factory]{bind} signal is emitted to bind
+      the item passed via the @slot[gtk:list-item]{item} property to the widgets
+      that have been created in step 1 or to add item specific widgets. Signals
+      are connected to listen to changes - both to changes in the item to update
+      the widgets or to changes in the widgets to update the item. After this
+      signal has been called, the list item may be shown in a list widget.}
+    @item{The @sig[gtk:signal-list-item-factory]{unbind} signal is emitted to
+      undo everything done in step 2. Usually this means disconnecting signal
+      handlers. Once this signal has been called, the list item will no longer
+      be used in a list widget.}
+    @item{The @sig[gtk:signal-list-item-factory]{bind} and
+      @sig[gtk:signal-list-item-factory]{unbind} signals may be emitted multiple
+      times again to bind the list item for use with new items. By reusing list
+      items, potentially costly setup can be avoided. However, it means code
+      needs to make sure to properly clean up the list item in step 3 so that no
+      information from the previous use leaks into the next use.}
+    @item{The @sig[gtk:signal-list-item-factory]{teardown} signal is emitted to
+      allow undoing the effects of the @sig[gtk:signal-list-item-factory]{setup}
+      signal. After this signal was emitted on a list item, the list item will
+      be destroyed and not be used again.}
   @end{enumerate}
   Note that during the signal emissions, changing properties on the list items
   passed will not trigger notify signals as the list item’s notifications are
   frozen. See the @fun{g:object-freeze-notify} function for details.
 
   For tracking changes in other properties in the list item, the
-  @code{\"::notify\"} signal is recommended. The signal can be connected in the
-  @code{\"setup\"} signal and removed again during the @code{\"teardown\"}
-  signal.
+  @sig[g:object]{notify} signal is recommended. The signal can be connected in
+  the @sig[gtk:signal-list-item-factory]{setup} signal and removed again during
+  the @sig[gtk:signal-list-item-factory]{teardown} signal.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"bind\" signal}
+    @begin[signal-list-item-factory::bind]{signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to bind.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a new item has been set on the list item and
       should be bound for use. After this signal was emitted, the list item
       might be shown in a @class{gtk:list-view} widget or other list widget.
-      The @code{\"unbind\"} signal is the opposite of this signal and can be
-      used to undo everything done in this signal. @break{}
-    @subheading{The \"setup\" signal}
+      The @sig[gtk:signal-list-item-factory]{unbind} signal is the opposite of
+      this signal and can be used to undo everything done in this signal.
+    @end{signal}
+    @begin[signal-list-item-factory::setup]{signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to set up.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a new list item has been created and needs to
       be setup for use. It is the first signal emitted for every list item.
-      The @code{\"teardown\"} signal is the opposite of this signal and can be
-      used to undo everything done in this signal. @break{}
-    @subheading{The \"teardown\" signal}
+      The @sig[gtk:signal-list-item-factory]{teardown} signal is the opposite of
+      this signal and can be used to undo everything done in this signal.
+    @end{signal}
+    @begin[signal-list-item-factory::teardown]{signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to teardown.}
-      @end{table}
-      The @code{\"teardown\"} signal is emitted when a list item is about to be
-      destroyed. It is the last signal ever emitted for this list item.
-      This signal is the opposite of the @code{\"setup\"} signal and should be
-      used to undo everything done in that signal. @break{}
-    @subheading{The \"unbind\" signal}
+      @end{simple-table}
+      The signal is emitted when a list item is about to be destroyed. It is the
+      last signal ever emitted for this list item. This signal is the opposite
+      of the @sig[signal-list-item-factory]{setup} signal and should be used to
+      undo everything done in that signal.
+    @end{signal}
+    @begin[signal-list-item-factory::unbind]{signal}
       @begin{pre}
 lambda (factory item)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[factory]{The @class{gtk:signal-list-item-factory} object.}
         @entry[item]{The @class{gtk:list-item} object to unbind.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a list item has been removed from use in a list
       widget and its new item is about to be unset. This signal is the opposite
-      of the @code{\"bind\"} signal and should be used to undo everything done
-      in that signal.
+      of the @sig[gtk:signal-list-item-factory]{bind} signal and should be used
+      to undo everything done in that signal.
+    @end{signal}
   @end{dictionary}
   @see-class{gtk:list-item-factory}")
 
@@ -166,14 +173,15 @@ lambda (factory item)    :run-first
 (declaim (inline signal-list-item-factory-new))
 
 (defun signal-list-item-factory-new ()
- "@version{2025-03-16}
+ "@version{2025-07-16}
   @return{The new @class{gtk:signal-list-item-factory} object.}
   @begin{short}
     Creates a new @class{gtk:signal-list-item-factory} object.
   @end{short}
-  You need to connect signal handlers to the @code{\"setup\"} and
-  @code{\"bind\"} signals before you use it. See the @class{gtk:list-view}
-  documentation for a complete example.
+  You need to connect signal handlers to the
+  @sig[gtk:signal-list-item-factory]{setup} and
+  @sig[gtk:signal-list-item-factory]{bind} signals before you use it. See the
+  @class{gtk:list-view} documentation for a complete example.
   @see-class{gtk:signal-list-item-factory}
   @see-class{gtk:list-view}"
   (make-instance 'signal-list-item-factory))

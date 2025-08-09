@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -121,7 +121,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-dialog 'type)
- "@version{2023-7-22}
+ "@version{2025-07-17}
   @begin{short}
     The @class{gtk:file-dialog} object collects the arguments that are needed to
     present a file chooser dialog to the user, such as a title for the dialog
@@ -129,9 +129,9 @@
   @end{short}
 
   The dialog is shown with the @fun{gtk:file-dialog-open} function, the
-  @fun{gtk:file-dialog-save} function, etc. These APIs follow the GIO async
-  pattern, and the result can be obtained by calling the corresponding finish
-  function, for example the @fun{gtk:file-dialog-open-finish} function.
+  @fun{gtk:file-dialog-save} function, and so on. These APIs follow the GIO
+  async pattern, and the result can be obtained by calling the corresponding
+  finish function, for example the @fun{gtk:file-dialog-open-finish} function.
 
   Since 4.10
   @see-constructor{gtk:file-dialog-new}
@@ -161,11 +161,11 @@
 (setf (liber:alias-for-function 'file-dialog-accept-label)
       "Accessor"
       (documentation 'file-dialog-accept-label 'function)
- "@version{2023-7-22}
+ "@version{2025-07-25}
   @syntax{(gtk:file-dialog-accept-label object) => label}
   @syntax{(setf (gtk:file-dialog-accept-label object) label)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[label]{a string with the accept label}
+  @argument[label]{a string for the accept label}
   @begin{short}
     Accessor of the @slot[gtk:file-dialog]{accept-label} slot of the
     @class{gtk:file-dialog} class.
@@ -199,7 +199,7 @@
 (setf (liber:alias-for-function 'file-dialog-default-filter)
       "Accessor"
       (documentation 'file-dialog-default-filter 'function)
- "@version{2023-7-22}
+ "@version{2023-07-22}
   @syntax{(gtk:file-dialog-default-filter object) => filter}
   @syntax{(setf (gtk:file-dialog-default-filter object) filter)}
   @argument[object]{a @class{gtk:file-dialog} object}
@@ -232,11 +232,11 @@
 (setf (liber:alias-for-function 'file-dialog-filters)
       "Accessor"
       (documentation 'file-dialog-filters 'function)
- "@version{2023-7-22}
+ "@version{2025-07-27}
   @syntax{(gtk:file-dialog-filters object) => filters}
   @syntax{(setf (gtk:file-dialog-filters object) filters)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[filters]{a @class{g:list-model} object with the
+  @argument[filters]{a @class{g:list-model} object for the
     @class{gtk:file-filter} objects}
   @begin{short}
     Accessor of the @slot[file-dialog]{filters} slot of the
@@ -266,11 +266,11 @@
 (setf (liber:alias-for-function 'file-dialog-initial-file)
       "Accessor"
       (documentation 'file-dialog-initial-file 'function)
- "@version{2023-7-22}
+ "@version{2025-07-27}
   @syntax{(gtk:file-dialog-initial-file object) => file}
   @syntax{(setf (gtk:file-dialog-initial-file object) file)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[file]{a @class{g:file} object with the file}
+  @argument[file]{a @class{g:file} object for the file}
   @begin{short}
     Accessor of the @slot[file-dialog]{initial-file} slot of the
     @class{gtk:file-dialog} class.
@@ -301,11 +301,11 @@
 (setf (liber:alias-for-function 'file-dialog-initial-folder)
       "Accessor"
       (documentation 'file-dialog-initial-folder 'function)
- "@version{2023-7-22}
+ "@version{2025-07-27}
   @syntax{(gtk:file-dialog-initial-folder object) => folder}
   @syntax{(setf (gtk:file-dialog-initial-folder object) folder)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[folder]{a @class{g:file} object with the folder}
+  @argument[folder]{a @class{g:file} object for the folder}
   @begin{short}
     Accessor of the @slot[file-dialog]{initial-folder} slot of the
     @class{gtk:file-dialog} class.
@@ -330,11 +330,11 @@
 (setf (liber:alias-for-function 'file-dialog-initial-name)
       "Accessor"
       (documentation 'file-dialog-initial-name 'function)
- "@version{2023-7-22}
+ "@version{2025-07-25}
   @syntax{(gtk:file-dialog-initial-name object) => name}
   @syntax{(setf (gtk:file-dialog-initial-name object) name)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[name]{a string with the name}
+  @argument[name]{a string for the name}
   @begin{short}
     Accessor of the @slot[file-dialog]{initial-name} slot of the
     @class{gtk:file-dialog} class.
@@ -364,7 +364,7 @@
 (setf (liber:alias-for-function 'file-dialog-modal)
       "Accessor"
       (documentation 'file-dialog-modal 'function)
- "@version{2023-7-22}
+ "@version{2023-07-22}
   @syntax{(gtk:file-dialog-modal object) => modal}
   @syntax{(setf (gtk:file-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:file-dialog} object}
@@ -392,11 +392,11 @@
 (setf (liber:alias-for-function 'file-dialog-title)
       "Accessor"
       (documentation 'file-dialog-title 'function)
- "@version{2023-7-22}
+ "@version{2025-07-25}
   @syntax{(gtk:file-dialog-title object) => title}
   @syntax{(setf (gtk:file-dialog-title object) title)}
   @argument[object]{a @class{gtk:file-dialog} object}
-  @argument[title]{a string with the title}
+  @argument[title]{a string for the title}
   @begin{short}
     Accessor of the @slot[file-dialog]{title} slot of the
     @class{gtk:file-dialog} class.
@@ -416,7 +416,7 @@
 
 (defun file-dialog-new ()
  #+liber-documentation
- "@version{2023-7-22}
+ "@version{2023-07-22}
   @return{The new @class{gtk:file-dialog} object.}
   @short{Creates a new file chooser dialog.}
   @see-class{gtk:file-dialog}"
@@ -442,12 +442,12 @@
 
 (defun file-dialog-open (dialog parent cancellable func)
  #+liber-documentation
- "@version{2023-7-27}
+ "@version{2025-07-25}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
     the argument can be @code{nil}}
-  @argument[func]{a @symbol{g:async-ready-callback} function to call when the
+  @argument[func]{a @sym{g:async-ready-callback} function to call when the
     operation is complete, the argument can be @code{nil}}
   @begin{short}
     This function initiates a file selection operation by presenting a file
@@ -483,11 +483,13 @@
 
 (defun file-dialog-open-finish (dialog result)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-26}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{g:file} object with the file that was selected, otherwise
-    @code{nil}.}
+  @begin{return}
+    The @class{g:file} object for the file that was selected, otherwise
+    @code{nil}.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-open} function call and returns the
     resulting file.
@@ -516,12 +518,12 @@
 
 (defun file-dialog-open-multiple (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
     the argument can be @code{nil}}
-  @argument[func]{a @symbol{g:async-ready-callback} function to call when the
+  @argument[func]{a @sym{g:async-ready-callback} function to call when the
     operation is complete, the argument can be @code{nil}}
   @begin{short}
     This function initiates a multi-file selection operation by presenting a
@@ -560,11 +562,13 @@
 
 (defun file-dialog-open-multiple-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{g:list-model} object with the @class{g:file} objects that
-    were selected, otherwise @code{nil}.}
+  @begin{return}
+    The @class{g:list-model} object for the @class{g:file} objects that
+    were selected, otherwise @code{nil}.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-open-multiple} function call and returns
     the resulting files in a @class{g:list-model} object.
@@ -594,12 +598,12 @@
 
 (defun file-dialog-save (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
     the argument can be @code{nil}}
-  @argument[func]{a @symbol{g:async-ready-callback} function to call when the
+  @argument[func]{a @sym{g:async-ready-callback} function to call when the
     operation is complete, the argument can be @code{nil}}
   @begin{short}
     This function initiates a file save operation by presenting a file chooser
@@ -635,11 +639,13 @@
 
 (defun file-dialog-save-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{g:file} object with the file that was selected, otherwise
-    @code{nil}.}
+  @begin{return}
+    The @class{g:file} object for the file that was selected, otherwise
+    @code{nil}.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-save} function call and returns the
     resulting file.
@@ -668,12 +674,12 @@
 
 (defun file-dialog-select-folder (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
     the argument can be @code{nil}}
-  @argument[func]{a @symbol{g:async-ready-callback} function to call when the
+  @argument[func]{a @sym{g:async-ready-callback} function to call when the
     operation is complete, the argument can be @code{nil}}
   @begin{short}
     This function initiates a directory selection operation by presenting a
@@ -712,11 +718,13 @@
 
 (defun file-dialog-select-folder-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{g:file} object with the file that was selected, otherwise
-    @code{nil}.}
+  @begin{return}
+    The @class{g:file} object for the file that was selected, otherwise
+    @code{nil}.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-select-folder} function call and returns
     the resulting folder.
@@ -746,12 +754,12 @@
 
 (defun file-dialog-select-multiple-folders (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2025-07-25}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
     the argument can be @code{nil}}
-  @argument[func]{a @symbol{g:async-ready-callback} function to call when the
+  @argument[func]{a @sym{g:async-ready-callback} function to call when the
     operation is complete, the argument can be @code{nil}}
   @begin{short}
     This function initiates a multi-directory selection operation by presenting
@@ -792,11 +800,13 @@
 
 (defun file-dialog-select-multiple-folders-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-26}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @class{g:file} object with the file that was selected, otherwise
-    @code{nil}.}
+  @begin{return}
+    The @class{g:file} object for the file that was selected, otherwise
+    @code{nil}.
+  @end{return}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-select-multiple-folders} function call
     and returns the resulting folders in a @class{g:list-model} object.

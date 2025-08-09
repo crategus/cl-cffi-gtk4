@@ -152,7 +152,7 @@
 
 #+liber-documentation
 (setf (documentation 'column-view 'type)
- "@version{2025-4-13}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:column-view} widget is a widget to present a view into a
     large dynamic list of items using multiple columns with headers.
@@ -198,25 +198,28 @@
     classes to select the  style of list presentation.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:column-view} implementation uses the @code{:tree-grid} role
-    of the @symbol{gtk:accessible-role} enumeration, header title widgets are
-    using the @code{:column-header} role. The row widgets are using the
-    @code{:row} role, and individual cells are using the @code{:grid-cell} role.
+    The @class{gtk:column-view} implementation uses the
+    @val[gtk:accessible-role]{:tree-grid} role of the @sym{gtk:accessible-role}
+    enumeration, header title widgets are using the
+    @val[gtk:accessible-role]{:column-header} role. The row widgets are using
+    the @val[gtk:accessible-role]{:row} role, and individual cells are using the
+    @val[gtk:accessible-role]{:grid-cell} role.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[column-view::activate]{signal}
       @begin{pre}
 lambda (columnview position)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[columnview]{The @class{gtk:column-view} widget.}
-        @entry[position]{The unsigned integer with the position of the item to
+        @entry[position]{The unsigned integer for the position of the item to
           activate.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a row has been activated by the user. This
       allows for a convenient way to handle activation in a columnview. See
       the @fun{gtk:list-item-activatable} function for details on how to use
       this signal.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:column-view-new}
   @see-slot{gtk:column-view-columns}
@@ -248,7 +251,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-columns)
       "Accessor"
       (documentation 'column-view-columns 'function)
- "@version{2025-4-13}
+ "@version{2025-07-23}
   @syntax{(gtk:column-view-columns object) => columns}
   @argument[object]{a @class{gtk:column-view} object}
   @argument[columns]{a @class{g:list-model} object for the list managing the
@@ -260,7 +263,7 @@ lambda (columnview position)    :run-last
   The @fun{gtk:column-view-columns} function gets the list of columns in this
   column view. This list is constant over the lifetime of @arg{object} and can
   be used to monitor changes to the columns of @arg{object} by connecting to the
-  @code{\"items-changed\"} signal.
+  @sig[g:list-model]{items-changed} signal.
   @see-class{gtk:column-view}")
 
 ;;; --- gtk:column-view-enable-rubberband --------------------------------------
@@ -277,7 +280,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-enable-rubberband)
       "Accessor"
       (documentation 'column-view-enable-rubberband 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:column-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -303,7 +306,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-header-factory)
       "Accessor"
       (documentation 'column-view-header-factory 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-header-factory object) => factory}
   @syntax{(setf (gtk:column-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -334,7 +337,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-model)
       "Accessor"
       (documentation 'column-view-model 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-model object) => model}
   @syntax{(setf (gtk:column-view-model object) model)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -362,7 +365,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-reorderable)
       "Accessor"
       (documentation 'column-view-reorderable 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-reorderable object) => reorderable}
   @syntax{(setf (gtk:column-view-reorderable object) reorderable)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -388,7 +391,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-row-factory)
       "Accessor"
       (documentation 'column-view-row-factory 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-row-factory object) => factory}
   @syntax{(setf (gtk:column-view-row-factory object) factory)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -427,7 +430,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-show-column-separators)
       "Accessor"
       (documentation 'column-view-show-column-separators 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-show-column-separators object) => setting}
   @syntax{(setf (gtk:column-view-show-column-separators object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -455,7 +458,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-show-row-separators)
       "Accessor"
       (documentation 'column-view-show-row-separators 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-show-row-separators object) => setting}
   @syntax{(setf (gtk:column-view-show-row-separators object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -483,7 +486,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-single-click-activate)
       "Accessor"
       (documentation 'column-view-single-click-activate 'function)
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @syntax{(gtk:column-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:column-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
@@ -508,7 +511,7 @@ lambda (columnview position)    :run-last
 (setf (liber:alias-for-function 'column-view-sorter)
       "Accessor"
       (documentation 'column-view-sorter 'function)
- "@version{2025-4-25}
+ "@version{2025-04-25}
   @syntax{(gtk:column-view-sorter object) => sorter}
   @argument[object]{a @class{gtk:column-view} object}
   @argument[sorter]{a @class{gtk:sorter} object}
@@ -544,20 +547,20 @@ lambda (columnview position)    :run-last
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "tab-behavior" 'column-view) t)
- "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
+ "The @code{tab-behavior} property of type @sym{gtk:list-tab-behavior}
   (Read / Write) @br{}
   The behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys. @br{}
-  Default value: @code{:all}")
+  Default value: @val[gtk:list-tab-behavior]{:all}")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'column-view-tab-behavior)
       "Accessor"
       (documentation 'column-view-tab-behavior 'function)
- "@version{2025-4-13}
+ "@version{2025-07-25}
   @syntax{(gtk:column-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:column-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:column-view} object}
-  @argument[setting]{a @symbol{gtk:list-tab-behavior} value}
+  @argument[setting]{a @sym{gtk:list-tab-behavior} value}
   @begin{short}
     Accessor of the @slot[gtk:column-view]{tab-behavior} slot of the
     @class{gtk:column-view} class.
@@ -576,7 +579,7 @@ lambda (columnview position)    :run-last
 
 (defun column-view-new (&optional model)
  #+liber-documentation
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @argument[model]{a @class{gtk:selection-model} object to use, or the default
     @code{nil} value}
   @return{The new @class{gtk:column-view} widget.}
@@ -599,7 +602,7 @@ lambda (columnview position)    :run-last
 
 (cffi:defcfun ("gtk_column_view_append_column" column-view-append-column) :void
  #+liber-documentation
- "@version{2025-4-25}
+ "@version{2025-04-25}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object that has not been
     added to @arg{columnview} yet}
@@ -619,7 +622,7 @@ lambda (columnview position)    :run-last
 
 (cffi:defcfun ("gtk_column_view_insert_column" column-view-insert-column) :void
  #+liber-documentation
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[pos]{an unsigned integer for the position to insert
     @arg{column} at}
@@ -643,7 +646,7 @@ lambda (columnview position)    :run-last
 
 (cffi:defcfun ("gtk_column_view_remove_column" column-view-remove-column) :void
  #+liber-documentation
- "@version{2025-4-13}
+ "@version{2025-04-13}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object to remove}
   @begin{short}
@@ -663,12 +666,11 @@ lambda (columnview position)    :run-last
 (cffi:defcfun ("gtk_column_view_sort_by_column" column-view-sort-by-column)
     :void
  #+liber-documentation
- "@version{#2025-4-13}
+ "@version{#2025-07-25}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object to sort by,
     or @code{nil}}
-  @argument[direction]{a @symbol{gtk:sort-type} value for the direction to sort
-    in}
+  @argument[direction]{a @sym{gtk:sort-type} value for the direction to sort in}
   @begin{short}
     Sets the sorting of the column view.
   @end{short}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.file-chooser-dialog.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -89,7 +89,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-dialog 'type)
- "@version{2024-7-30}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:file-chooser-dialog} widget is a dialog suitable for use
     with \"File/Open\" or \"File/Save as\" commands.
@@ -150,12 +150,11 @@
   ... )
     @end{pre}
     This will create buttons for \"Cancel\" and \"Open\" that  identifiers from
-    the @symbol{gtk:response-type} enumeration. For most dialogs you can use
-    your own custom response codes rather than the ones in the
-    @symbol{gtk:response-type} enumeration, but the
-    @class{gtk:file-chooser-dialog} widget assumes that its \"accept\"-type
-    action, for example, an \"Open\" or \"Save\" button, will have one of the
-    following response codes:
+    the @sym{gtk:response-type} enumeration. For most dialogs you can use your
+    own custom response codes rather than the ones in the
+    @sym{gtk:response-type} enumeration, but the @class{gtk:file-chooser-dialog}
+    widget assumes that its \"accept\"-type action, for example, an \"Open\" or
+    \"Save\" button, will have one of the following response codes:
     @begin{pre}
   @code{:accept}
   @code{:ok}
@@ -225,13 +224,13 @@
 
 (defun file-chooser-dialog-new (title parent action &rest buttons)
  #+liber-documentation
- "@version{2024-4-26}
-  @argument[title]{a string with the title of the dialog, or @code{nil}}
+ "@version{2025-07-27}
+  @argument[title]{a string for the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent window of the dialog,
     or @code{nil}}
-  @argument[action]{a @symbol{gtk:file-chooser-action} value}
-  @argument[buttons]{pairs with a button text and the response ID of type
-    @symbol{gtk:response-type} for the button}
+  @argument[action]{a @sym{gtk:file-chooser-action} value}
+  @argument[buttons]{pairs for a button text and the response ID of type
+    @sym{gtk:response-type} for the button}
   @return{The new @class{gtk:file-chooser-dialog} widget.}
   @begin{short}
     Creates a new file chooser dialog.

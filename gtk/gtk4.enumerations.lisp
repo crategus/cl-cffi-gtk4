@@ -104,7 +104,7 @@
 (setf (liber:alias-for-symbol 'align)
       "GEnum"
       (liber:symbol-documentation 'align)
- "@version{2025-05-10}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAlign\" align
   (:export t
@@ -121,19 +121,20 @@
   (:baseline-center 5))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:fill]{Stretch to fill all space if possible, center if no
         meaningful way to stretch.}
       @entry[:start]{Snap to left or top side, leaving space on right or
         bottom.}
       @entry[:end]{Snap to right or bottom side, leaving space on left or top.}
       @entry[:center]{Center natural width of widget inside the allocation.}
-      @entry[:baseline-fill]{A different name for @code{baseline}. Since 4.12}
+      @entry[:baseline-fill]{A different name for @val[gtk:align]{:baseline}.
+        Since 4.12}
       @entry[:baseline]{Align the widget according to the baseline. Deprecated
-        4.12: Use @code{:baseline-fill} instead.}
+        4.12: Use @val[gtk:align]{:baseline-fill} instead.}
       @entry[:baseline-center]{Stretch to fill all space, but align the
         baseline. Since 4.12}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Controls how a widget deals with extra space in a single dimension.
@@ -145,14 +146,15 @@
   scaled and stretched, it could be centered, or it could be positioned to one
   side of the space.
 
-  Note that in horizontal context the @code{:start} and @code{:end} values are
-  interpreted relative to text direction.
+  Note that in horizontal context the @val[gtk:align]{:start} and
+  @val[gtk:align]{:end} values are interpreted relative to text direction.
 
-  The @code{:baseline} support is optional for containers and widgets, and it
-  is only supported for vertical alignment. The @code{:baseline-center} and
-  @code{:baseline-fill} values are treated similar to the @code{:center} and
-  @code{:fill} values, except that it positions the widget to line up the
-  baselines, where that is supported.
+  The @val[gtk:align]{:baseline} support is optional for containers and widgets,
+  and it is only supported for vertical alignment. The
+  @val[gtk:align]{:baseline-center} and @val[gtk:align]{:baseline-fill} values
+  are treated similar to the @val[gtk:align]{:center} and @val[gtk:align]{:fill}
+  values, except that it positions the widget to line up the baselines, where
+  that is supported.
   @see-class{gtk:widget}
   @see-function{gtk:widget-halign}
   @see-function{gtk:widget-valign}")
@@ -172,7 +174,7 @@
 (setf (liber:alias-for-symbol 'baseline-position)
       "GEnum"
       (liber:symbol-documentation 'baseline-position)
- "@version{2025-05-10}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkBaselinePosition\" baseline-position
   (:export t
@@ -182,11 +184,11 @@
   (:bottom 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:top]{Align the baseline at the top.}
       @entry[:center]{Center the baseline.}
       @entry[:bottom]{Align the baseline at the bottom.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Baseline position in a row of widgets.
@@ -194,8 +196,8 @@
   Whenever a container has some form of natural row it may align children in
   that row along a common typographical baseline. If the amount of vertical
   space in the row is taller than the total requested height of the
-  baseline aligned children then it can use a @symbol{gtk:baseline-position}
-  value to select where to put the baseline inside the extra available space.
+  baseline aligned children then it can use a @sym{gtk:baseline-position} value
+  to select where to put the baseline inside the extra available space.
   @see-class{gtk:box}
   @see-class{gtk:grid}")
 
@@ -219,7 +221,7 @@
 (setf (liber:alias-for-symbol 'delete-type)
       "GEnum"
       (liber:symbol-documentation 'delete-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkDeleteType\" delete-type
   (:export t
@@ -234,7 +236,7 @@
   (:whitespace 7))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:chars]{Delete characters.}
       @entry[:word-ends]{Delete only the portion of the word to the left/right
         of cursor if we are in the middle of a word.}
@@ -248,7 +250,7 @@
         in Emacs (or its reverse).}
       @entry[:paragraphs]{Delete entire line. Like @kbd{C-k} in pico.}
       @entry[:whitespace]{Delete only whitespace. Like @code{M-\\} in Emacs.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The values of this enumeration are passed as an argument to various
@@ -275,7 +277,7 @@
 (setf (liber:alias-for-symbol 'direction-type)
       "GEnum"
       (liber:symbol-documentation 'direction-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkDirectionType\" direction-type
   (:export t
@@ -288,14 +290,14 @@
   (:right 5))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:tab-forward]{Move forward.}
       @entry[:tab-backward]{Move backward.}
       @entry[:up]{Move up.}
       @entry[:down]{Move down.}
       @entry[:left]{Move left.}
       @entry[:right]{Move right.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{Focus movement types.}")
 
@@ -314,7 +316,7 @@
 (setf (liber:alias-for-symbol 'icon-size)
       "GEnum"
       (liber:symbol-documentation 'icon-size)
- "@version{2025-04-27}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkIconSize\" icon-size
   (:export t
@@ -324,11 +326,11 @@
   (:large 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:inherit]{Keep the size of the parent element.}
       @entry[:normal]{Size similar to text size.}
       @entry[:large]{Large size, for example in an icon view.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Built-in icon sizes.
@@ -336,7 +338,7 @@
   Icon sizes default to being inherited. Where they cannot be inherited, text
   size is the default.
 
-  All widgets which use the @symbol{gtk:icon-size} enumeration set the
+  All widgets which use the @sym{gtk:icon-size} enumeration set the
   @code{.normal-icons} or @code{.large-icons} style classes correspondingly,
   and let themes determine the actual size to be used with the
   @code{-gtk:icon-size} CSS property.
@@ -366,7 +368,7 @@
 (setf (liber:alias-for-symbol 'response-type)
       "GEnum"
       (liber:symbol-documentation 'response-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkResponseType\" response-type
   (:export t
@@ -384,7 +386,7 @@
   (:help -11))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Returned if an action widget has no response ID, or if the
         dialog gets programmatically hidden or destroyed.}
       @entry[:reject]{Generic response ID, not used by GTK dialog.}
@@ -397,7 +399,7 @@
       @entry[:no]{Returned by No buttons in GTK dialog.}
       @entry[:apply]{Returned by Apply buttons in GTK dialog.}
       @entry[:help]{Returned by Help buttons in GTK dialog.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Predefined values for use as response IDs in the @fun{gtk:dialog-add-button}
@@ -414,14 +416,14 @@
 
 (defun response-type-keyword (response)
  #+liber-documentation
- "@version{2024-11-10}
-  @argument[response]{an integer with the response value of the
-    @symbol{gtk:response-type} enumeration}
+ "@version{2025-07-25}
+  @argument[response]{an integer for the response value of the
+    @sym{gtk:response-type} enumeration}
   @return{The keyword for the given @arg{response} value.}
   @begin{short}
     The @fun{gtk:response-type-keyword} function is an utility function which
     returns the corresponding keyword for an integer of the
-    @symbol{gtk:response-type} enumeration.
+    @sym{gtk:response-type} enumeration.
   @end{short}
   @begin[Notes]{dictionary}
     This is a helper function in the Lisp binding which uses the
@@ -455,7 +457,7 @@
 (setf (liber:alias-for-symbol 'sensitivity-type)
       "GEnum"
       (liber:symbol-documentation 'sensitivity-type)
- "@version{2024-04-07}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkSensitivityType\" sensitivity-type
   (:export t
@@ -465,12 +467,12 @@
   (:off 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:auto]{The control is made insensitive if no action can be
         triggered.}
       @entry[:on]{The control is always sensitive.}
       @entry[:off]{The control is always insensitive.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Determines how GTK handles the sensitivity of various controls, such as
@@ -493,7 +495,7 @@
 (setf (liber:alias-for-symbol 'text-direction)
       "GEnum"
       (liber:symbol-documentation 'text-direction)
- "@version{2024-03-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkTextDirection\" text-direction
   (:export t
@@ -503,11 +505,11 @@
   (:rtl 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No direction.}
       @entry[:ltr]{Left to right text direction.}
       @entry[:rtl]{Right to left text direction.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Reading directions for text.
@@ -531,7 +533,7 @@
 (setf (liber:alias-for-symbol 'justification)
       "GEnum"
       (liber:symbol-documentation 'justification)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkJustification\" justification
   (:export t
@@ -542,12 +544,12 @@
   (:fill 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:left]{The text is placed at the left edge of the label.}
       @entry[:right]{The text is placed at the right edge of the label.}
       @entry[:center]{The text is placed in the center of the label.}
       @entry[:fill]{The text is distributed across the label.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Used for justifying the text inside a @class{gtk:label} widget.
@@ -573,7 +575,7 @@
 (setf (liber:alias-for-symbol 'message-type)
       "GEnum"
       (liber:symbol-documentation 'message-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkMessageType\" message-type
   (:export t
@@ -585,13 +587,13 @@
   (:other 4))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:info]{Informational message.}
       @entry[:warning]{Non-fatal warning message.}
       @entry[:question]{Question requiring a choice.}
       @entry[:error]{Fatal error message.}
       @entry[:other]{None of the above.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The type of message being displayed in the message dialog.
@@ -620,7 +622,7 @@
 (setf (liber:alias-for-symbol 'movement-step)
       "GEnum"
       (liber:symbol-documentation 'movement-step)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkMovementStep\" movement-step
   (:export t
@@ -637,7 +639,7 @@
   (:horizontal-pages 9))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:logical-positions]{Move forward or back by graphemes.}
       @entry[:visual-positions]{Move left or right by graphemes.}
       @entry[:words]{Move forward or back by words.}
@@ -648,7 +650,7 @@
       @entry[:pages]{Move by pages.}
       @entry[:buffer-ends]{Move to ends of the buffer.}
       @entry[:horizontal-pages]{Move horizontally by pages.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The values of this enumeration are passed to various keybinding signals for
@@ -674,7 +676,7 @@
 (setf (liber:alias-for-symbol 'natural-wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'natural-wrap-mode)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkNaturalWrapMode\" natural-wrap-mode
   (:export t
@@ -684,17 +686,17 @@
   (:word 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:inherit]{Inherit the minimum size request. In particular, this
-        should be used with the @code{:char} value of the
-        @symbol{pango:wrap-mode} enumeration.}
+        should be used with the @val[pango:wrap-mode]{:char} value of the
+        @sym{pango:wrap-mode} enumeration.}
       @entry[:none]{Try not to wrap the text. This mode is the closest to the
         behavior of GTK 3 but can lead to a wide label leaving lots of empty
         space below the text.}
       @entry[:word]{Attempt to wrap at word boundaries. This is useful in
-        particular when using the @code{:word-char} value of the
-        @symbol{pango:wrap-mode} enumeration as the wrap mode.}
-    @end{table}
+        particular when using the @val[pango:wrap-mode]{:word-char} value of
+        the @sym{pango:wrap-mode} enumeration as the wrap mode.}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Options for selecting a different wrap mode for natural size requests.
@@ -753,7 +755,7 @@
 (setf (liber:alias-for-symbol 'orientation)
       "GEnum"
       (liber:symbol-documentation 'orientation)
- "@version{2025-05-04}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkOrientation\" orientation
   (:export t
@@ -762,10 +764,10 @@
   (:vertical 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:horizontal]{The object is in horizontal orientation.}
       @entry[:vertical]{The object is in vertical orientation.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Represents the orientation of widgets and other objects which can be
@@ -791,7 +793,7 @@
 (setf (liber:alias-for-symbol 'overflow)
       "GEnum"
       (liber:symbol-documentation 'overflow)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkOverflow\" overflow
   (:export t
@@ -800,12 +802,12 @@
   (:hidden 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:visible]{No change is applied. Content is drawn at the specified
         position.}
       @entry[:hidden]{Content is clipped to the bounds of the area. Content
         outside the area is not drawn and cannot be interacted with.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Defines how content overflowing a given area should be handled.
@@ -829,7 +831,7 @@
 (setf (liber:alias-for-symbol 'pack-type)
       "GEnum"
       (liber:symbol-documentation 'pack-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkPackType\" pack-type
   (:export t
@@ -838,10 +840,10 @@
   (:end 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:start]{The child is packed into the start of the widget.}
       @entry[:end]{The child is packed into the end of the widget.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Represents the packing location of the child widget in its parent.
@@ -865,7 +867,7 @@
 (setf (liber:alias-for-symbol 'position-type)
       "GEnum"
       (liber:symbol-documentation 'position-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkPositionType\" position-type
   (:export t
@@ -876,12 +878,12 @@
   (:bottom 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:left]{The feature is at the left edge.}
       @entry[:right]{The feature is at the right edge.}
       @entry[:top]{The feature is at the top edge.}
       @entry[:bottom]{The feature is at the bottom edge.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes which edge of a widget a certain feature is positioned at.
@@ -966,7 +968,7 @@
 (setf (liber:alias-for-symbol 'selection-mode)
       "GEnum"
       (liber:symbol-documentation 'selection-mode)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkSelectionMode\" gtk:selection-mode
   (:export t
@@ -977,19 +979,19 @@
   (:multiple 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No selection is possible.}
       @entry[:single]{Zero or one element may be selected.}
       @entry[:browse]{Exactly one element is selected. In some circumstances,
         such as initially or during a search operation, it is possible for no
-        element to be selected with the @code{:browse} value. What is really
-        enforced is that the user cannot deselect a currently selected element
-        except by selecting another element.}
+        element to be selected with the @val[gtk:selection-mode]{:browse} value.
+        What is really enforced is that the user cannot deselect a currently
+        selected element except by selecting another element.}
       @entry[:multiple]{Any number of elements may be selected. The @kbd{Ctrl}
         key may be used to enlarge the selection, and the @kbd{Shift} key to
         select between the focus and the child pointed to. Some widgets may
         also allow Click-drag to select a range of elements.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{Used to control what selections users are allowed to make.}
   @see-class{gtk:flow-box}
@@ -1013,7 +1015,7 @@
 (setf (liber:alias-for-symbol 'wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'wrap-mode)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkWrapMode\" wrap-mode
   (:export t
@@ -1024,7 +1026,7 @@
   (:word-char 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Do not wrap lines, just make the text area wider.}
       @entry[:char]{Wrap text, breaking lines anywhere the cursor can appear
         between characters, usually. If you want to be technical, between
@@ -1032,7 +1034,7 @@
       @entry[:word]{Wrap text, breaking lines in between words.}
       @entry[:word-char]{Wrap text, breaking lines in between words, or if that
         is not enough, also between graphemes.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{Describes a type of line wrapping.}
   @see-class{gtk:text-tag}
@@ -1053,7 +1055,7 @@
 (setf (liber:alias-for-symbol 'sort-type)
       "GEnum"
       (liber:symbol-documentation 'sort-type)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkSortType\" sort-type
   (:export t
@@ -1062,10 +1064,10 @@
   (:descending 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:ascending]{Sorting is in ascending order.}
       @entry[:descending]{Sorting is in descending order.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{Determines the direction of a sort.}
   @see-class{gtk:numeric-sorter}")
@@ -1085,7 +1087,7 @@
 (setf (liber:alias-for-symbol 'ordering)
       "GEnum"
       (liber:symbol-documentation 'ordering)
- "@version{2024-10-18}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkOrdering\" ordering
   (:export t
@@ -1095,19 +1097,19 @@
   (:larger 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:smaller]{The first value is smaller than the second.}
       @entry[:equal]{The two values are equal.}
       @entry[:larger]{The first value is larger than the second.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes the way two values can be compared.
   @end{short}
-  These values can be used with the @symbol{g:compare-data-func} callback
-  function. However, the @symbol{g:compare-data-func} function is allowed to
-  return any integers. For converting such a value to a @symbol{gtk:ordering}
-  value, use the @fun{gtk:ordering-from-cmpfunc} function.
+  These values can be used with the @sym{g:compare-data-func} callback function.
+  However, the @sym{g:compare-data-func} function is allowed to return any
+  integers. For converting such a value to a @sym{gtk:ordering} value, use the
+  @fun{gtk:ordering-from-cmpfunc} function.
   @see-function{g:compare-data-func}
   @see-function{gtk:ordering-from-cmpfunc}")
 
@@ -1126,7 +1128,7 @@
 (setf (liber:alias-for-symbol 'size-request-mode)
       "GEnum"
       (liber:symbol-documentation 'size-request-mode)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkSizeRequestMode\" size-request-mode
   (:export t
@@ -1136,12 +1138,12 @@
   (:constant-size 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:height-for-width]{Prefer height-for-width geometry management.}
       @entry[:width-for-height]{Prefer width-for-height geometry management.}
       @entry[:constant-size]{Do not trade height-for-width or width-for-height
         geometry management.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Specifies a preference for height-for-width or width-for-height geometry
@@ -1178,7 +1180,7 @@
 (setf (liber:alias-for-symbol 'state-flags)
       "GFlags"
       (liber:symbol-documentation 'state-flags)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-gflags \"GtkStateFlags\" state-flags
   (:export t
@@ -1201,7 +1203,7 @@
   (:focus-within  #.(ash 1 14)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:normal]{State during normal operation.}
       @entry[:active]{Widget is active.}
       @entry[:prelight]{Widget has a mouse pointer over it.}
@@ -1219,7 +1221,7 @@
       @entry[:drop-active]{Widget is highlighted as a drop target for DND.}
       @entry[:focus-visible]{Widget has the visible focus.}
       @entry[:focus-within]{Widget contains the keyboard focus.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes a widget state.
@@ -1251,7 +1253,7 @@
 (setf (liber:alias-for-symbol 'border-style)
       "GEnum"
       (liber:symbol-documentation 'border-style)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkBorderStyle\" border-style
   (:export t
@@ -1268,9 +1270,9 @@
   :ridge)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No visible border.}
-      @entry[:hidden]{Same as the @code{:none} value.}
+      @entry[:hidden]{Same as the @val[gtk:border-style]{:none} value.}
       @entry[:solid]{A single line segment.}
       @entry[:inset]{Looks as if the content is sunken into the canvas.}
       @entry[:outset]{Looks as if the content is coming out of the canvas.}
@@ -1279,7 +1281,7 @@
       @entry[:double]{Two parrallel lines with some space between them.}
       @entry[:groove]{Looks as if it were carved in the canvas.}
       @entry[:ridge]{Looks as if it were coming out of the canvas.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes how the border of a UI element should be rendered.
@@ -1309,7 +1311,7 @@
 (setf (liber:alias-for-symbol 'input-purpose)
       "GEnum"
       (liber:symbol-documentation 'input-purpose)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkInputPurpose\" input-purpose
   (:export t
@@ -1327,7 +1329,7 @@
   (:terminal 10))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:free-form]{Allow any character.}
       @entry[:alpha]{Allow only alphabetic characters.}
       @entry[:digits]{Allow only digits.}
@@ -1336,10 +1338,12 @@
       @entry[:url]{Edited field expects URL.}
       @entry[:email]{Edited field expects email address.}
       @entry[:name]{Edited field expects the name of a person.}
-      @entry[:password]{Like @code{:free-form}, but characters are hidden.}
-      @entry[:pin]{Like @code{:digits}, but characters are hidden.}
+      @entry[:password]{Like @val[gtk:input-purpose]{:free-form}, but characters
+        are hidden.}
+      @entry[:pin]{Like @val[gtk:input-purpose]{:digits}, but characters are
+        hidden.}
       @entry[:terminal]{Allow any character, in addition to control codes.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes primary purpose of the input widget.
@@ -1353,9 +1357,10 @@
   that is expressed by the purpose. The application is expected to validate
   the text entry contents, even if it specified a purpose.
 
-  The difference between the @code{:digits} and @code{:number} values is that
-  the former accepts only digits while the latter also some punctuation, like
-  commas or points, plus, minus, and 'e' or 'E' as in 3.14E+000.
+  The difference between the @val[gtk:input-purpose]{:digits} and
+  @val[gtk:input-purpose]{:number} values is that the former accepts only digits
+  while the latter also some punctuation, like commas or points, plus, minus,
+  and 'e' or 'E' as in 3.14E+000.
 
   This enumeration may be extended in the future. Input methods should
   interpret unknown values as 'free form'.
@@ -1387,7 +1392,7 @@
 (setf (liber:alias-for-symbol 'input-hints)
       "GFlags"
       (liber:symbol-documentation 'input-hints)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-gflags \"GtkInputHints\" input-hints
   (:export t
@@ -1407,7 +1412,7 @@
   (:private             #.(ash 1 11)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No special behaviour suggested.}
       @entry[:spellcheck]{Suggest checking for typos.}
       @entry[:no-spellcheck]{Suggest not checking for typos.}
@@ -1425,17 +1430,18 @@
       @entry[:no-emoji]{Suggest not offering Emoji support.}
       @entry[:private]{Request that the input method should not update
         personalized data (like typing history).}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Describes hints that might be taken into account by input methods or
     applications.
   @end{short}
   Note that input methods may already tailor their behaviour according to the
-  @symbol{gtk:input-purpose} value of the text entry.
+  @sym{gtk:input-purpose} value of the text entry.
 
   Some common sense is expected when using these flags - mixing
-  @code{:lowercase} with any of the uppercase hints makes no sense.
+  @val[gtk:input-hints]{:lowercase} with any of the uppercase hints makes no
+  sense.
 
   This flags may be extended in the future. Input methods should ignore
   unknown values.
@@ -1457,7 +1463,7 @@
 (setf (liber:alias-for-symbol 'pick-flags)
       "GFlags"
       (liber:symbol-documentation 'pick-flags)
- "@version{2024-03-08}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-gflags \"GtkPickFlags\" pick-flags
   (:export t
@@ -1467,13 +1473,13 @@
   (:non-targetable #.(ash 1 1)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:default]{The default behavior, include widgets that are
         receiving events.}
       @entry[:insensitive]{Include widgets that are insensitive.}
       @entry[:non-targetable]{Include widgets that are marked as non-targetable.
         See the @slot[gtk:widget]{can-target} property.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags that influence the behavior of the @fun{gtk:widget-pick} function.
@@ -1496,7 +1502,7 @@
 (setf (liber:alias-for-symbol 'constraint-relation)
       "GEnum"
       (liber:symbol-documentation 'constraint-relation)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintRelation\" constraint-relation
   (:export t
@@ -1506,11 +1512,11 @@
   (:ge 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:le]{Less than, or equal}
       @entry[:eq]{Equal}
       @entry[:ge]{Greater than, or equal}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The relation between two terms of a constraint.
@@ -1532,7 +1538,7 @@
 (setf (liber:alias-for-symbol 'constraint-strength)
       "GEnum"
       (liber:symbol-documentation 'constraint-strength)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintStrength\" constraint-strength
   (:export t
@@ -1543,12 +1549,12 @@
   (:weak     1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:required]{The constraint is required towards solving the layout.}
       @entry[:strong]{A strong constraint.}
       @entry[:medium]{A medium constraint.}
       @entry[:weak]{A weak constraint.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The strength of a constraint, expressed as a symbolic constant.
@@ -1581,7 +1587,7 @@
 (setf (liber:alias-for-symbol 'constraint-attribute)
       "GEnum"
       (liber:symbol-documentation 'constraint-attribute)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintAttribute\" constraint-attribute
   (:export t
@@ -1600,24 +1606,26 @@
   :baseline)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No attribute, used for constant relations.}
       @entry[:left]{The left edge of a widget, regardless of text direction.}
       @entry[:right]{The right edge of a widget, regardless of text direction.}
       @entry[:top]{The top edge of a widget.}
       @entry[:bottom]{The bottom edge of a widget.}
       @entry[:start]{The leading edge of a widget, depending on text direction.
-        Equivalent to the @code{:left} value for LTR languages, and the
-        @code{:right} value for RTL ones.}
+        Equivalent to the @val[gtk:constraint-attribute]{:left} value for LTR
+        languages, and the @val[gtk:constraint-attribute]{:right} value for RTL
+        ones.}
       @entry[:end]{The trailing edge of a widget, depending on text direction.
-        Equivalent to the @code{:right} value for LTR languages, and the
-        @code{:left} value for RTL ones.}
+        Equivalent to the @val[gtk:constraint-attribute]{:right} value for LTR
+        languages, and the @val[gtk:constraint-attribute]{:left} value for RTL
+        ones.}
       @entry[:width]{The width of a widget.}
       @entry[:height]{The height of a widget.}
       @entry[:center-x]{The center of a widget, on the horizontal axis.}
       @entry[:center-y]{The center of a widget, on the vertical axis.}
       @entry[:baseline]{The baseline of a widget.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The widget attributes that can be used when creating a
@@ -1643,7 +1651,7 @@
 (setf (liber:alias-for-symbol 'constraint-vfl-parser-error)
       "GEnum"
       (liber:symbol-documentation 'constraint-vfl-parser-error)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
   (:export t
@@ -1656,14 +1664,14 @@
   :invalid-relation)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:invalid-symbol]{Invalid or unknown symbol.}
       @entry[:invalid-attribute]{Invalid or unknown attribute.}
       @entry[:invalid-view]{Invalid or unknown view.}
       @entry[:invalid-metric]{Invalid or unknown metric.}
       @entry[:invalid-priority]{Invalid or unknown priority.}
       @entry[:invalid-relation]{Invalid or unknown relation.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Domain for VFL parsing errors.
@@ -1688,7 +1696,7 @@
 (setf (liber:alias-for-symbol 'symbolic-color)
       "GEnum"
       (liber:symbol-documentation 'symbolic-color)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkSymbolicColor\" symbolic-color
   (:export t
@@ -1699,12 +1707,12 @@
   (:success 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:foreground]{The default foreground color.}
       @entry[:error]{Indication color for errors.}
       @entry[:warning]{Indication color for warnings.}
       @entry[:success]{Indication color for success.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The indexes of colors passed to symbolic color rendering, such as the
@@ -1817,7 +1825,7 @@
 (setf (liber:alias-for-symbol 'accessible-role)
       "GEnum"
       (liber:symbol-documentation 'accessible-role)
- "@version{2024-05-25}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRole\" accessible-role
   (:export t
@@ -1916,7 +1924,7 @@
   :terminal)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:alert]{An element with important, and usually time-sensitive,
         information.}
       @entry[:alert-dialog]{ A type of dialog that contains an alert message.}
@@ -2029,7 +2037,7 @@
       @entry[:comment]{A comment contains content expressing reaction to other
         content. Since 4.14}
       @entry[:terminal]{A virtual terminal. Since 4.14}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The accessible role for a @class{gtk:accessible} implementation.
@@ -2060,7 +2068,7 @@
 (setf (liber:alias-for-symbol 'accessible-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-state)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleState\" gtk:accessible-state
   (:export t
@@ -2077,11 +2085,11 @@
    :visited)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:busy]{A \"busy\" state. This state has boolean values.}
       @entry[:checked]{A \"checked\" state. Indicates the current state of a
         @class{gtk:check-button} widget.
-        Value type: @symbol{gtk:accessible-tristate} enumeration}
+        Value type: @sym{gtk:accessible-tristate} enumeration}
       @entry[:disabled]{A \"disabled\" state. Corresponds to the
         @slot[gtk:widget]{sensitive} property on the @class{gtk:widget} object.
         It indicates a UI element that is perceivable, but not editable or
@@ -2092,18 +2100,19 @@
       @entry[:hidden]{A \"hidden\" state. Corresponds to the
         @slot[gtk:widget]{visible} property on the @class{gtk:widget} object.
         You can use this state explicitly on UI elements that should not be
-        exposed to an assistive technology. See also the @code{:disabled} value.
-        Value type: boolean}
+        exposed to an assistive technology. See also the
+        @val[gtk:accessible-state]{:disabled} value. Value type: boolean}
       @entry[:invalid]{An \"invalid\" state. Set when a widget is showing an
-        error. Value type: @symbol{gtk:accessible-invalid-state} enumeration}
+        error. Value type: @sym{gtk:accessible-invalid-state} enumeration}
       @entry[:pressed]{A \"pressed\" state. Indicates the current state of a
         @class{gtk:toggle-button} widget.
-        Value type: @symbol{gtk:accessible-tristate} enumeration}
+        Value type: @sym{gtk:accessible-tristate} enumeration}
       @entry[:selected]{A \"selected\" state. Set when a widget is selected.
         Value type: boolean or undefined}
-      @entry[:visited]{Indicates that a widget with the @code{:link} role has
-        been visited. Value type: boolean. Since 4.12}
-    @end{table}
+      @entry[:visited]{Indicates that a widget with the
+        @val[gtk:accessible-role]{:link} role has been visited. Value type:
+        boolean. Since 4.12}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The possible accessible states of a @class{gtk:accessible} widget.
@@ -2145,7 +2154,7 @@
 (setf (liber:alias-for-symbol 'accessible-property)
       "GEnum"
       (liber:symbol-documentation 'accessible-property)
- "@version{2024-10-13}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleProperty\" accessible-property
   (:export t
@@ -2172,12 +2181,12 @@
   :help-text)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:auto-complete]{Indicates whether inputting text could trigger
         display of one or more predictions of the user's intended value for a
         combobox, searchbox, or textbox and specifies how predictions would be
         presented if they were made.
-        Value type: @symbol{gtk:accessible-autocomplete} enumeration}
+        Value type: @sym{gtk:accessible-autocomplete} enumeration}
       @entry[:description]{Defines a string value that describes or annotates
         the current element. Value type: string}
       @entry[:has-popup]{Indicates the availability and type of interactive
@@ -2210,8 +2219,8 @@
         description for the role of an element. Value type: string}
       @entry[:sort]{Indicates if items in a table or grid are sorted in
         ascending or descending order. Possible property values are in the
-        @symbol{gtk:accessible-sort} enumeration. Value type:
-        @symbol{gtk:accessible-sort} enumeration}
+        @sym{gtk:accessible-sort} enumeration. Value type:
+        @sym{gtk:accessible-sort} enumeration}
       @entry[:value-max]{Defines the maximum allowed value for a range widget.
         Value type: double}
       @entry[:value-min]{Defines the minimum allowed value for a range widget.
@@ -2223,7 +2232,7 @@
       @entry[:help-text]{Defines a string value that provides a description
         of non-standard keyboard interactions of the current element. Value
         type: string. Since 4.16}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The possible accessible properties of a @class{gtk:accessible} widget.
@@ -2275,7 +2284,7 @@
 (setf (liber:alias-for-symbol 'accessible-relation)
       "GEnum"
       (liber:symbol-documentation 'accessible-relation)
- "@version{2025-05-13}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRelation\" accessible-relation
   (:export t
@@ -2306,7 +2315,7 @@
   :flow-error)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:active-descendant]{Identifies the currently active element when
         focus is on a composite widget, combobox, textbox, group, or
         application. Value type: reference}
@@ -2316,7 +2325,7 @@
         respect to the total number of columns within a table, grid, or
         treegrid. Value type: integer}
       @entry[:col-index-text]{Defines a human readable text alternative of the
-        @code{:col-index} value. Value type: string}
+        @val[gtk:accessible-relation]{:col-index} value. Value type: string}
       @entry[:col-span]{Defines the number of columns spanned by a cell or
         gridcell within a table, grid, or treegrid. Value type: integer}
       @entry[:controls]{Identifies the element (or elements) whose contents or
@@ -2374,7 +2383,7 @@
         allows assistive technology to override the general default of reading
         in document source order. This relation is managed by GTK and should
         not be set from application code. Value type: reference. Since 4.18}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The possible accessible relations of a @class{gtk:accessible} widget.
@@ -2397,7 +2406,7 @@
 (setf (liber:alias-for-symbol 'accessible-tristate)
       "GEnum"
       (liber:symbol-documentation 'accessible-tristate)
- "@version{2024-04-24}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
@@ -2407,17 +2416,19 @@
   :mixed)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:false]{The state is \"false\".}
       @entry[:true]{The state is \"true\".}
       @entry[:mixed]{The state is \"mixed\".}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The possible values for the @code{:pressed} accessible state.
+    The possible values for the @val[gtk:accessible-state]{:pressed} accessible
+    state.
   @end{short}
-  Note that the @code{:false} and @code{:true} values have the same values as
-  @em{false} and @em{true}.
+  Note that the @val[gtk:accessible-tristate]{:false} and
+  @val[gtk:accessible-tristate]{:true} values have the same values as @em{false}
+  and @em{true}.
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-state}")
 
@@ -2437,7 +2448,7 @@
 (setf (liber:alias-for-symbol 'accessible-invalid-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-invalid-state)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
@@ -2448,18 +2459,20 @@
   :spelling)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:false]{There are no detected errors in the value.}
       @entry[:true]{The value entered by the user has failed validation.}
       @entry[:grammar]{A grammatical error was detected.}
       @entry[:spelling]{A spelling error was detected.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The possible values for the @code{:invalid} accessible state.
+    The possible values for the @val[gtk:accessible-state]{:invalid} accessible
+    state.
   @end{short}
-  Note that the @code{:false} and @code{:true} values have the same values
-  as @em{false} and @em{true}.
+  Note that the @val[gtk:accessible-invalid-state]{:false} and
+  @val[gtk:accessible-invalid-state]{:true} values have the same values as
+  @em{false} and @em{true}.
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-state}")
 
@@ -2479,7 +2492,7 @@
 (setf (liber:alias-for-symbol 'accessible-autocomplete)
       "GEnum"
       (liber:symbol-documentation 'accessible-autocomplete)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
@@ -2490,7 +2503,7 @@
   :both)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{Automatic suggestions are not displayed.}
       @entry[:inline]{When a user is providing input, text suggesting one way
         to complete the provided input may be dynamically inserted after the
@@ -2503,10 +2516,11 @@
         displayed. If displayed, one value in the collection is automatically
         selected, and the text needed to complete the automatically selected
         value appears after the caret in the input.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The possible values for the @code{:autocomplete} accessible property.
+    The possible values for the @sym[gtk:accessible-property]{:autocomplete}
+    accessible property.
   @end{short}
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-property}")
@@ -2527,7 +2541,7 @@
 (setf (liber:alias-for-symbol 'accessible-sort)
       "GEnum"
       (liber:symbol-documentation 'accessible-sort)
- "@version{2024-04-24}
+ "@version{2025-07-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleSort\" accessible-sort
   (:export t
@@ -2538,16 +2552,17 @@
   :other)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{There is no defined sort applied to the column.}
       @entry[:ascending]{Items are sorted in ascending order by this column.}
       @entry[:descending]{Items are sorted in descending order by this column.}
       @entry[:other]{A sort algorithm other than ascending or descending has
         been applied.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The possible values for the @code{:sort} accessible property.
+    The possible values for the @val[gtk:accessible-property]{:sort} accessible
+    property.
   @end{short}
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-property}")
@@ -2569,7 +2584,7 @@
 (setf (liber:alias-for-symbol 'accessible-announcement-priority)
       "GEnum"
       (liber:symbol-documentation 'accessible-announcement-priority)
- "@version{2024-11-03}
+ "@version{2025-07-12}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAnnouncementPriority\"
                       accessible-announcement-priority
@@ -2580,7 +2595,7 @@
   :high)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:low]{The announcement is low priority, and might be read only on
         the request of the user.}
       @entry[:medium]{The announcement is of medium priority, and is usually
@@ -2591,7 +2606,7 @@
         cause them to not complete their current task, authors should not use
         high priority announcements unless the interruption is imperative. An
         example would be a notification about a critical battery power level.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The priority of an accessibility announcement.

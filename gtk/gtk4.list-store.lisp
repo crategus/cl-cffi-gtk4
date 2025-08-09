@@ -756,11 +756,12 @@
 
 (cffi:defcfun ("gtk_list_store_iter_is_valid" list-store-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2024-04-07}
+ "@version{#2025-07-26}
   @argument[model]{a @class{gtk:list-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
-  @return{@em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is
-    invalid.}
+  @begin{return}
+    @em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is invalid.
+  @end{return}
   @begin{short}
     Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:list-store}.

@@ -2,8 +2,8 @@
 ;;; gtk4.version.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; Version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2025 Dieter Kaiser
@@ -49,9 +49,10 @@
 
 (cffi:defcfun ("gtk_get_major_version" major-version) :uint
  #+liber-documentation
- "@version{2025-2-28}
-  @return{The unsigned integer with the major version number of the GTK
-    library.}
+ "@version{2025-07-26}
+  @begin{return}
+    The unsigned integer for the major version number of the GTK library.
+  @end{return}
   @begin{short}
     Returns the major version number of the GTK library.
   @end{short}
@@ -67,9 +68,10 @@
 
 (cffi:defcfun ("gtk_get_minor_version" minor-version) :uint
  #+liber-documentation
- "@version{2025-2-28}
-  @return{The unsigned integer with the minor version number of the GTK
-    library.}
+ "@version{2025-07-26}
+  @begin{return}
+    The unsigned integer for the minor version number of the GTK library.
+  @end{return}
   @begin{short}
     Returns the minor version number of the GTK library.
   @end{short}
@@ -85,9 +87,10 @@
 
 (cffi:defcfun ("gtk_get_micro_version" micro-version) :uint
  #+liber-documentation
- "@version{2025-2-28}
-  @return{The unsigned integer with the micro version number of the GTK
-    library.}
+ "@version{2025-07-26}
+  @begin{return}
+    The unsigned integer for the micro version number of the GTK library.
+  @end{return}
   @begin{short}
     Returns the micro version number of the GTK library.
   @end{short}
@@ -111,7 +114,7 @@
 
 (cffi:defcfun ("gtk_check_version" check-version) :string
  #+liber-documentation
- "@version{2025-2-28}
+ "@version{2025-02-28}
   @argument[major]{an unsigned integer for the required major version}
   @argument[minor]{an unsigned integer for the required minor version}
   @argument[micro]{an unsigned integer for the required micro version}
@@ -139,7 +142,7 @@
 
 (defun cl-cffi-gtk-build-info (&optional (out *standard-output*))
  #+liber-documentation
- "@version{2025-2-28}
+ "@version{2025-02-28}
   @argument[out]{an optional stream, the default is @code{*standard-output*}}
   @begin{short}
     Provides informations about the installation and the versions of the

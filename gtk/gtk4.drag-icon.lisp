@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.drag-icon.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-icon 'type)
- "@version{2023-7-31}
+ "@version{2023-07-31}
   @begin{short}
     The @class{gtk:drag-icon} widget is a @class{gtk:root} implementation with
     the sole purpose to serve as a drag icon during DND operations.
@@ -118,7 +118,7 @@
 (setf (liber:alias-for-function 'drag-icon-child)
       "Accessor"
       (documentation 'drag-icon-child 'function)
- "@version{#2023-7-31}
+ "@version{#2023-07-31}
   @syntax{(gtk:drag-icon-child object) => child}
   @syntax{(setf (gtk:drag-icon-child object) child)}
   @argument[object]{a @class{gtk:drag-icon} widget}
@@ -140,9 +140,9 @@
 (cffi:defcfun ("gtk_drag_icon_get_for_drag" drag-icon-for-drag)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-7-31}
+ "@version{#2025-07-27}
   @argument[drag]{a @class{gdk:drag} object}
-  @return{The @class{gtk:widget} object with the drag icon.}
+  @return{The @class{gtk:widget} object for the drag icon.}
   @begin{short}
     Gets the drag icon in use with @arg{drag}.
   @end{short}
@@ -161,11 +161,11 @@
 (cffi:defcfun ("gtk_drag_icon_set_from_paintable" drag-icon-set-from-paintable)
     :void
  #+liber-documentation
- "@version{#2023-7-31}
+ "@version{#2025-07-19}
   @argument[drag]{a @class{gdk:drag} object}
   @argument[paintable]{a @class{gdk:paintable} object to display}
-  @argument[xhot]{an integer with the x coordinate of the hotspot}
-  @argument[yhot]{an integer with the y coordinate of the hotspot}
+  @argument[xhot]{an integer for the x coordinate of the hotspot}
+  @argument[yhot]{an integer for the y coordinate of the hotspot}
   @begin{short}
     Creates a drag icon that shows @arg{paintable}, and associates it with the
     drag operation.
@@ -188,10 +188,12 @@
 (cffi:defcfun ("gtk_drag_icon_create_widget_for_value"
                drag-icon-create-widget-for-value) (g:object widget)
  #+liber-documentation
- "@version{#2023-7-31}
-  @argument[gvalue]{a @symbol{g:value} instance}
-  @return{The new @class{gtk:widget} object for displaying @arg{gvalue} as a
-    drag icon.}
+ "@version{#2025-07-11}
+  @argument[gvalue]{a @sym{g:value} instance}
+  @begin{return}
+    The new @class{gtk:widget} object for displaying @arg{gvalue} as a drag
+    icon.
+  @end{return}
   @begin{short}
     Creates a widget that can be used as a drag icon for the given @arg{gvalue}.
   @end{short}
@@ -202,7 +204,6 @@
   This method is used to set the default drag icon on drag and drop operations
   started by the @class{gtk:drag-source} object, so you do not need to set a
   drag icon using this function there.
-
   @see-class{gtk:drag-icon}
   @see-class{gtk:widget}
   @see-symbol{g:value}"

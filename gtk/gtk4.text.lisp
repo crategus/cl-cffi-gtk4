@@ -2,8 +2,8 @@
 ;;; gtk4.text.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -213,7 +213,7 @@
 
 #+liber-documentation
 (setf (documentation 'text 'type)
- "@version{2024-11-15}
+ "@version{2025-07-17}
   @begin{short}
     The @class{gtk:text} widget is a single line text entry.
   @end{short}
@@ -262,101 +262,109 @@ text[.read-only]
     @code{.insertion-cursor} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:text} implementation uses the @code{:none} role of the
-    @symbol{gtk:accessible-role} enumeration, which causes it to be skipped for
-    accessibility. This is because the @class{gtk:text} implementation is
-    expected to be used as a delegate for a @class{gtk:editable} implementation
-    that will be represented to accessibility.
+    The @class{gtk:text} implementation uses the
+    @val[gtk:accessible-role]{:none} role of the @sym{gtk:accessible-role}
+    enumeration, which causes it to be skipped for accessibility. This is
+    because the @class{gtk:text} implementation is expected to be used as a
+    delegate for a @class{gtk:editable} implementation that will be represented
+    to accessibility.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[text::activate]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[entry]{The @class{gtk:text} widget on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user hits the @kbd{Enter} key. The default
       bindings for this signal are all forms of the @kbd{Enter} key.
-    @subheading{The \"backspace\" signal}
+    @end{signal}
+    @begin[text::backspace]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user asks
       for it. The default bindings for this signal are the @kbd{Backspace} and
       @kbd{Shift-Backspace} keys.
-    @subheading{The \"copy-clipboard\" signal}
+    @end{signal}
+    @begin[text::copy-clipboard]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted to copy the selection
       to the clipboard. The default bindings for this signal are the
       @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
-    @subheading{The \"cut-clipboard\" signal}
+    @end{signal}
+    @begin[text::cut-clipboard]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted to cut the selection
       to the clipboard. The default bindings for this signal are the
       @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
-    @subheading{The \"delete-from-cursor\" signal}
+    @end{signal}
+    @begin[text::delete-from-cursor]{signal}
       @begin{pre}
 lambda (entry type count)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-        @entry[type]{The granularity of the deletion, as a value of the
-          @symbol{gtk:delete-type} enumeration.}
-        @entry[count]{The integer with the number of type units to delete.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+        @entry[type]{The granularity of the deletion as a value of the
+          @sym{gtk:delete-type} enumeration.}
+        @entry[count]{The integer for the number of type units to delete.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a text deletion. If the type is @code{:chars}, GTK deletes the
       selection if there is one, otherwise it deletes the requested number of
       characters. The default bindings for this signal are the @kbd{Delete} key
       for deleting a character and the @kbd{Ctrl-Delete} key for deleting a
       word.
-    @subheading{The \"insert-at-cursor\" signal}
+    @end{signal}
+    @begin[text::insert-at-cursor]{signal}
       @begin{pre}
 lambda (entry string)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
         @entry[string]{The string to insert.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       initiates the insertion of a fixed string at the cursor. This signal has
       no default bindings.
-    @subheading{The \"insert-emoji\" signal}
+    @end{signal}
+    @begin[text::insert-emoji]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted to present the Emoji
       chooser for the text entry. The default bindings for this signal are the
       @kbd{Ctrl-.} and @kbd{Ctrl-;} keys.
-    @subheading{The \"move-cursor\" signal}
+    @end{signal}
+    @begin[text::move-cursor]{signal}
       @begin{pre}
 lambda (entry step count extend)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-        @entry[step]{The granularity of the move, as a value of the
-        @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{The integer with the number of step units to move.}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+        @entry[step]{The granularity of the move as a value of the
+        @sym{gtk:movement-step} enumeration.}
+        @entry[count]{The integer for the number of step units to move.}
         @entry[extend]{@em{True} if the move should extend the selection.}
-      @end{table}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. If the cursor is not visible in the text
       entry, this signal causes the viewport to be moved instead. Applications
@@ -368,40 +376,44 @@ lambda (entry step count extend)    :action
       list them all here. Arrow keys move by individual characters/lines.
       @kbd{Ctrl}-arrow key combinations move by words/paragraphs.
       @kbd{Home}/@kbd{End} keys move to the ends of the text entry.
-    @subheading{The \"paste-clipboard\" signal}
+    @end{signal}
+    @begin[text::paste-clipboard]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted to paste the contents
       of the clipboard into the text entry. The default bindings for this signal
       are the @kbd{Ctrl-v} and @kbd{Shift-Insert} keys.
-    @subheading{The \"preedit-changed\" signal}
+    @end{signal}
+    @begin[text::preedit-changed]{signal}
       @begin{pre}
 lambda (entry preedit)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
         @entry[preedit]{The current preedit string.}
-      @end{table}
+      @end{simple-table}
       If an input method is used, the typed text will not immediately be
       committed to the entry buffer. So if you are interested in the text,
       connect to this signal.
-    @subheading{The \"toggle-overwrite\" signal}
+    @end{signal}
+    @begin[text::toggle-overwrite]{signal}
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      @begin[code]{table}
-        @entry[entry]{The @class{gtk:text} widget which received the signal.}
-      @end{table}
+      @begin[code]{simple-table}
+        @entry[entry]{The @class{gtk:text} widget that received the signal.}
+      @end{simple-table}
       The signal is a keybinding signal which gets emitted to toggle the
       overwrite mode of the text entry. The default bindings for this signal is
       the @kbd{Insert} key.
+    @end{signal}
   @end{dictionary}
   @begin[Action Details]{dictionary}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[menu.popup}{Opens the context menu.}
       @entry[text.redo]{Redoes the last change to the contents.}
       @entry[text.undo]{Undoes the last change to the contents.}
@@ -414,7 +426,7 @@ lambda (entry)    :action
       @entry[clipboard.copy]{Copies the contents to the clipboard.}
       @entry[clipboard.cut]{Copies the contents to the clipboard and deletes it
         from the widget.}
-    @end{table}
+    @end{simple-table}
   @end{dictionary}
   @see-constructor{gtk:text-new}
   @see-constructor{gtk:text-new-with-buffer}
@@ -457,7 +469,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-activates-default)
       "Accessor"
       (documentation 'text-activates-default 'function)
- "@version{2024-5-22}
+ "@version{2024-05-22}
   @syntax{(gtk:text-activates-default object) => setting}
   @syntax{(setf (gtk:text-activates-default object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -490,7 +502,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-attributes)
       "Accessor"
       (documentation 'text-attributes 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-attributes object) => attributes}
   @syntax{(setf (gtk:text-attributes object) attributes)}
   @argument[object]{a @class{gtk:text} widget}
@@ -517,7 +529,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-buffer)
       "Accessor"
       (documentation 'text-buffer 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-buffer object) => buffer}
   @syntax{(setf (gtk:text-buffer object) buffer)}
   @argument[object]{a @class{gtk:text} widget}
@@ -545,7 +557,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-enable-emoji-completion)
       "Accessor"
       (documentation 'text-enable-emoji-completion 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-enable-emoji-completion object) => setting}
   @syntax{(setf (gtk:text-enable-emoji-completion object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -573,7 +585,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-extra-menu)
       "Accessor"
       (documentation 'text-extra-menu 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-extra-menu object) => menu}
   @syntax{(setf (gtk:text-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text} widget}
@@ -603,11 +615,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-im-module)
       "Accessor"
       (documentation 'text-im-module 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-im-module object) => module}
   @syntax{(setf (gtk:text-im-module object) module)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[module]{a string with the IM (input method) module}
+  @argument[module]{a string for the IM (input method) module}
   @begin{short}
     Accessor of the @slot[gtk:text]{im-module} slot of the @class{gtk:text}
     class.
@@ -624,8 +636,8 @@ lambda (entry)    :action
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'text) t)
- "The @code{input-hints} property of type @symbol{gtk:input-hints}
-  (Read / Write) @br{}
+ "The @code{input-hints} property of type @sym{gtk:input-hints} (Read / Write)
+  @br{}
   The additional hints, beyond the @slot[gtk:text]{input-purpose} property,
   that allow input methods to fine-tune their behaviour.")
 
@@ -633,11 +645,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-hints)
       "Accessor"
       (documentation 'text-input-hints 'function)
- "@version{2024-5-23}
+ "@version{2025-07-17}
   @syntax{(gtk:text-input-hints object) => hints}
   @syntax{(setf (gtk:text-input-hints object) hints)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[hints]{a @symbol{gtk:input-hints} value}
+  @argument[hints]{a @sym{gtk:input-hints} value}
   @begin{short}
     Accessor of the @slot[gtk:text]{input-hints} slot of the @class{gtk:text}
     class.
@@ -652,23 +664,23 @@ lambda (entry)    :action
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-purpose" 'text) t)
- "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
+ "The @code{input-purpose} property of type @sym{gtk:input-purpose}
   (Read / Write) @br{}
   The purpose of the text entry. The property can be used by on-screen keyboards
   and other input methods to adjust their behaviour. Note that setting the
-  purpose to @code{:password} or @code{:pin} is independent from setting the
-  @slot[gtk:text]{visibility} property. @br{}
-  Default value: @code{:free-from}")
+  purpose to @val[gtk:input-purpose]{:password} or @val[gtk:input-purpose]{:pin}
+  is independent from setting the @slot[gtk:text]{visibility} property. @br{}
+  Default value: @val[gtk:input-purpose]{:free-from}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-input-purpose)
       "Accessor"
       (documentation 'text-input-purpose 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-input-purpose object) => purpose}
   @syntax{(setf (gtk:text-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[purpose]{a @symbol{gtk:input-purpose} value}
+  @argument[purpose]{a @sym{gtk:input-purpose} value}
   @begin{short}
     Accessor of the @slot[gtk:text]{input-purpose} slot of the @class{gtk:text}
     class.
@@ -693,11 +705,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char)
       "Accessor"
       (documentation 'text-invisible-char 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-invisible-char object) => char}
   @syntax{(setf (gtk:text-invisible-char object) char)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[char]{an unsigned integer with an Unicode character}
+  @argument[char]{an unsigned integer for an Unicode character}
   @begin{short}
     Accessor of the @slot[gtk:text]{invisible-char} slot of the @class{gtk:text}
     class.
@@ -726,7 +738,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char-set)
       "Accessor"
       (documentation 'text-invisible-char-set 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-invisible-char-set object) => setting}
   @syntax{(setf (gtk:text-invisible-char-set object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -752,11 +764,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-max-length)
       "Accessor"
       (documentation 'text-max-length 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-max-length object) => length}
   @syntax{(setf (gtk:text-max-length object) length)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[length]{an integer with the maximum length of the text entry or 0
+  @argument[length]{an integer for the maximum length of the text entry or 0
     if there is no maximum}
   @begin{short}
     Accessor of the @slot[gtk:text]{max-length} slot of the @class{gtk:text}
@@ -789,7 +801,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-overwrite-mode)
       "Accessor"
       (documentation 'text-overwrite-mode 'function)
- "@version{2024-5-23}
+ "@version{2024-05-23}
   @syntax{(gtk:text-overwrite-mode object) => setting}
   @syntax{(setf (gtk:text-overwrite-mode object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -817,7 +829,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-placeholder-text)
       "Accessor"
       (documentation 'text-placeholder-text 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-placeholder-text object) => text}
   @syntax{(setf (gtk:text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:text} widget}
@@ -846,7 +858,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-propagate-text-width)
       "Accessor"
       (documentation 'text-propagate-text-width 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-propagate-text-width object) => setting}
   @syntax{(setf (gtk:text-propagate-text-width object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -874,12 +886,12 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-scroll-offset)
       "Accessor"
       (documentation 'text-scroll-offset 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-scroll-offset object) => offset}
   @syntax{(setf (gtk:text-scroll-offset object) offset)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[offset]{an integer with the number of pixels the text entry
-    scrolled off the screen}
+  @argument[offset]{an integer for the number of pixels the text entry scrolled
+    off the screen}
   @begin{short}
     Accessor of the @slot[gtk:text]{scroll-offset} slot of the @class{gtk:text}
     class.
@@ -898,11 +910,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-tabs)
       "Accessor"
       (documentation 'text-tabs 'function)
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @syntax{(gtk:text-tabs object) => tabs}
   @syntax{(setf (gtk:text-tabs object) tabs)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[tabs]{a @class{pango:tab-array} instance with the tabstops}
+  @argument[tabs]{a @class{pango:tab-array} instance for the tabstops}
   @begin{short}
     Accessor of the @slot[gtk:text]{tabs} slot of the @class{gtk:text} class.
   @end{short}
@@ -925,7 +937,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-truncate-multiline)
       "Accessor"
       (documentation 'text-truncate-multiline 'function)
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @syntax{(gtk:text-truncate-multiline object) => setting}
   @syntax{(setf (gtk:text-truncate-multiline object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -953,7 +965,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-visibility)
       "Accessor"
       (documentation 'text-visibility 'function)
- "@version{2024-5-17}
+ "@version{2025-07-27}
   @syntax{(gtk:text-visibility object) => visible}
   @syntax{(setf (gtk:text-visibility object) visible)}
   @argument[object]{a @class{gtk:text} widget}
@@ -972,9 +984,9 @@ lambda (entry)    :action
   font, but it can be changed with the @fun{gtk:text-invisible-char} function.
 
   Note that you probably want to set the @slot[gtk:text]{input-purpose} property
-  to the @code{:password} or @code{:pin} value to inform input methods about
-  the purpose of the text entry, in addition to setting the
-  @slot[gtk:text]{visibility} property to @em{false}.
+  to the @val[gtk:input-purpose]{:password} or @val[gtk:input-purpose]{:pin}
+  value to inform input methods about the purpose of the text entry, in addition
+  to setting the @slot[gtk:text]{visibility} property to @em{false}.
   @see-class{gtk:text}
   @see-function{gtk:text-invisible-char}
   @see-function{gtk:text-input-purpose}")
@@ -985,7 +997,7 @@ lambda (entry)    :action
 
 (defun text-new ()
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @return{The new @class{gtk:text} widget.}
   @short{Creates a new text widget.}
   @see-class{gtk:text}
@@ -1000,7 +1012,7 @@ lambda (entry)    :action
 
 (defun text-new-with-buffer (buffer)
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @return{The new @class{gtk:text} widget.}
   @short{Creates a new text widget with the specified entry buffer.}
@@ -1018,7 +1030,7 @@ lambda (entry)    :action
 
 (cffi:defcfun ("gtk_text_unset_invisible_char" text-unset-invisible-char) :void
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2024-05-17}
   @argument[entry]{a @class{gtk:text} widget}
   @begin{short}
     Unsets the invisible char previously set with the
@@ -1037,10 +1049,12 @@ lambda (entry)    :action
 
 (defun text-text-length (entry)
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @argument[entry]{a @class{gtk:text} widget}
-  @return{The unsigned integer with the current number of characters in the
-    @class{gtk:text} widget.}
+  @begin{return}
+    The unsigned integer for the current number of characters in the
+    @class{gtk:text} widget.
+  @end{return}
   @begin{short}
     Retrieves the current length of the text in @arg{entry}.
   @end{short}
@@ -1089,12 +1103,12 @@ lambda (entry)    :action
 
 (defun text-compute-cursor-extents (entry position strong weak)
  #+liber-documentation
- "@version{2024-5-17}
+ "@version{2025-07-17}
   @argument[entry]{a @class{gtk:text} widget}
-  @argument[position]{an integer with the character position}
-  @argument[strong]{a @symbol{graphene:rect-t} instance to store the strong
+  @argument[position]{an integer for the character position}
+  @argument[strong]{a @sym{graphene:rect-t} instance to store the strong
     cursor position, the argument can be @code{nil}}
-  @argument[weak]{a @symbol{graphene:rect-t} instance to store the weak cursor
+  @argument[weak]{a @sym{graphene:rect-t} instance to store the weak cursor
     position, the argument can be @code{nil}}
   @begin{short}
     Determine the positions of the strong and weak cursors if the insertion

@@ -302,15 +302,14 @@
 (setf (liber:alias-for-function 'stack-page-child)
       "Accessor"
       (documentation 'stack-page-child 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-child object) => child}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{child} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{child} slot of the
+    @class{gtk:stack-page} class returns the child widget of the page.
   @end{short}
-  The @fun{gtk:stack-page-child} function returns the child widget of the page.
   @see-class{gtk:stack-page}
   @see-class{gtk:widget}")
 
@@ -326,17 +325,15 @@
 (setf (liber:alias-for-function 'stack-page-icon-name)
       "Accessor"
       (documentation 'stack-page-icon-name 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-icon-name object) => name}
   @syntax{(setf (gtk:stack-page-icon-name object) name)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[name]{a string for the icon name of the child page}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{icon-name} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{icon-name} slot of the
+    @class{gtk:stack-page} class gets for sets the icon name of the child page.
   @end{short}
-  The @fun{gtk:stack-page-icon-name} function returns the icon name of the
-  child page. The @setf{gtk:stack-page-icon-name} function sets the icon name.
   @see-class{gtk:stack-page}")
 
 ;;; --- gtk:stack-page-name ----------------------------------------------------
@@ -351,17 +348,15 @@
 (setf (liber:alias-for-function 'stack-page-name)
       "Accessor"
       (documentation 'stack-page-name 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-name object) => name}
   @syntax{(setf (gtk:stack-page-name object) name)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[name]{a string for the name of the child page}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{name} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{name} slot of the
+    @class{gtk:stack-page} class gets or sets the name of the page.
   @end{short}
-  The @fun{gtk:stack-page-name} function returns the name of the page. The
-  @setf{gtk:stack-page-name} function sets the name.
   @see-class{gtk:stack-page}")
 
 ;;; --- gtk:stack-page-needs-attention -----------------------------------------
@@ -380,19 +375,16 @@
 (setf (liber:alias-for-function 'stack-page-needs-attention)
       "Accessor"
       (documentation 'stack-page-needs-attention 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-needs-attention object) => setting}
   @syntax{(setf (gtk:stack-page-needs-attention object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[setting]{a boolean whether the page requires the user attention}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{needs-attention} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{needs-attention} slot of the
+    @class{gtk:stack-page} class whether the page is marked as \"needs
+    attention\".
   @end{short}
-  The @fun{gtk:stack-page-needs-attention} function returns whether the page is
-  marked as \"needs attention\". The @setf{gtk:stack-page-needs-attention}
-  function sets sets a flag specifying whether the page requires the user
-  attention.
 
   This is used by the @class{gtk:stack-switcher} widget  to change the
   appearance of the corresponding button when a page needs attention and it is
@@ -412,17 +404,15 @@
 (setf (liber:alias-for-function 'stack-page-title)
       "Accessor"
       (documentation 'stack-page-title 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-title object) => title}
   @syntax{(setf (gtk:stack-page-title object) title)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[title]{a string for the title of the child page}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{title} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{title} slot of the
+    @class{gtk:stack-page} class gets or sets the page title.
   @end{short}
-  The @fun{gtk:stack-page-title} function gets the page title. The
-  @setf{gtk:stack-page-title} function sets the page title.
   @see-class{gtk:stack-page}")
 
 ;;; --- gtk:stack-page-use-underline -------------------------------------------
@@ -438,19 +428,17 @@
 (setf (liber:alias-for-function 'stack-page-use-underline)
       "Accessor"
       (documentation 'stack-page-use-underline 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-use-underline object) => setting}
   @syntax{(setf (gtk:stack-page-use-underline object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[setting]{a boolean if set, an underline in the title indicates the
     next character should be used for the mnemonic accelerator key}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{use-underline} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{use-underline} slot of the
+    @class{gtk:stack-page} class gets or sets whether underlines in the page
+    title indicate mnemonics.
   @end{short}
-  The @fun{gtk:stack-page-use-underline} function gets whether underlines in the
-  page title indicate mnemonics. The @setf{gtk:stack-page-use-underline}
-  function sets the property.
   @see-class{gtk:stack-page}")
 
 ;;; --- gtk:stack-page-visible -------------------------------------------------
@@ -465,19 +453,16 @@
 (setf (liber:alias-for-function 'stack-page-visible)
       "Accessor"
       (documentation 'stack-page-visible 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-page-visible object) => setting}
   @syntax{(setf (gtk:stack-page-visible object) setting)}
   @argument[object]{a @class{gtk:stack-page} object}
   @argument[setting]{a boolean whether this page is visible}
   @begin{short}
-    Accessor of the @slot[gtk:stack-page]{visible} slot of the
-    @class{gtk:stack-page} class.
+    The accessor for the @slot[gtk:stack-page]{visible} slot of the
+    @class{gtk:stack-page} class gets or sets whether the page is visible in
+    its stack.
   @end{short}
-  The @fun{gtk:stack-page-visible} function returns whether the page is visible
-  in its stack. The @setf{gtk:stack-page-visible} function sets the property.
-  This is independent from the @slot[gtk:widget]{visible} property of its
-  widget.
   @see-class{gtk:stack-page}
   @see-function{gtk:widget-visible}")
 
@@ -601,18 +586,16 @@
 (setf (liber:alias-for-function 'stack-hhomogeneous)
       "Accessor"
       (documentation 'stack-hhomogeneous 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-hhomogeneous object) => homogeneous}
   @syntax{(setf (gtk:stack-hhomogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[homogeneous]{@em{true} to make stack horizontally homogeneous}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{hhomogeneous} slot of the @class{gtk:stack}
-    class.
+    The accessor for the @slot[gtk:stack]{hhomogeneous} slot of the
+    @class{gtk:stack} class gets or sets whether the stack is horizontally
+    homogeneous.
   @end{short}
-  The @fun{gtk:stack-hhomogeneous} function gets whether the stack is
-  horizontally homogeneous. The @setf{gtk:stack-hhomogeneous} function sets the
-  property.
 
   If the stack is homogeneous, the stack will request the same width for all its
   children. If it is not, the stack may change width when a different child
@@ -634,18 +617,16 @@
 (setf (liber:alias-for-function 'stack-interpolate-size)
       "Accessor"
       (documentation 'stack-interpolate-size 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-interpolate-size object) => interpolate}
   @syntax{(setf (gtk:stack-interpolate-size object) interpolate)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[interpolate]{@em{true} if child sizes are interpolated}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{interpolate-size} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{interpolate-size} slot of the
+    @class{gtk:stack} class gets or sets whether the stack is set up to
+    interpolate between the sizes of children on page switch.
   @end{short}
-  The @fun{gtk:stack-interpolate-size} function returns whether the stack is
-  set up to interpolate between the sizes of children on page switch. The
-  @setf{gtk:stack-interpolate-size} function sets the property.
 
   If the @slot[gtk:stack]{interpolate-size} property is set to @em{true}, the
   stack will interpolate its size between the current one and the one it will
@@ -668,17 +649,17 @@
 (setf (liber:alias-for-function 'stack-pages)
       "Accessor"
       (documentation 'stack-pages 'function)
- "@version{2025-04-23}
+ "@version{2025-08-03}
   @syntax{(gtk:stack-pages object) => pages}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[pages]{a @class{gtk:selection-model} object for the stacks pages}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{pages} slot of the @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{pages} slot of the @class{gtk:stack}
+    class gets a @class{g:list-model} object that contains the pages of the
+    stack, and can be used to keep an up-to-date view.
   @end{short}
-  The @fun{gtk:stack-pages} function returns a @class{g:list-model} object
-  that contains the pages of the stack, and can be used to keep an up-to-date
-  view. The model also implements the @class{gtk:selection-model} object and
-  can be used to track and modify the visible page.
+  The model also implements the @class{gtk:selection-model} object and can be
+  used to track and modify the visible page.
   @see-class{gtk:stack}
   @see-class{g:list-model}
   @see-class{gtk:selection-model}")
@@ -696,18 +677,16 @@
 (setf (liber:alias-for-function 'stack-transition-duration)
       "Accessor"
       (documentation 'stack-transition-duration 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-transition-duration object) => duration}
   @syntax{(setf (gtk:stack-transition-duration object) duration)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[duration]{an unsigned integer for the duration, in milliseconds}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{transition-duration} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{transition-duration} slot of the
+    @class{gtk:stack} class gets or sets the amount of time in milliseconds
+    that transitions between pages in the stack will take.
   @end{short}
-  The @fun{gtk:stack-transition-duration} function returns the amount of time
-  in milliseconds that transitions between pages in the stack will take. The
-  @setf{gtk:stack-transition-duration} function sets the duration.
   @see-class{gtk:stack}")
 
 ;;; --- gtk:stack-transition-running -------------------------------------------
@@ -722,15 +701,14 @@
 (setf (liber:alias-for-function 'stack-transition-running)
       "Accessor"
       (documentation 'stack-transition-running 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-transition-running object) => running}
   @argument[object]{a @class{gtk:stack} widget}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{transition-running} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{transition-running} slot of the
+    @class{gtk:stack} class returns whether the stack is currently in a
+    transition from one page to another.
   @end{short}
-  The @fun{gtk:stack-transition-running} function returns whether the stack is
-  currently in a transition from one page to another.
   @see-class{gtk:stack}")
 
 ;;; --- gtk:stack-transition-type ----------------------------------------------
@@ -746,18 +724,16 @@
 (setf (liber:alias-for-function 'stack-transition-type)
       "Accessor"
       (documentation 'stack-transition-type 'function)
- "@version{2025-06-29}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-transition-type object) => setting}
   @syntax{(setf (gtk:stack-transition-type object) setting)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[setting]{a value of the @sym{gtk:stack-transition-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{transition-type} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{transition-type} slot of the
+    @class{gtk:stack} class gets or sets the type of animation that will be
+    used for transitions between pages in the stack.
   @end{short}
-  The @fun{gtk:stack-transition-type} function gets the type of animation that
-  will be used for transitions between pages in the stack. The
-  @setf{gtk:stack-transition-type} function sets the type of animation.
   Available types include various kinds of fades and slides.
 
   The transition type can be changed without problems at runtime, so it is
@@ -778,18 +754,16 @@
 (setf (liber:alias-for-function 'stack-vhomogeneous)
       "Accessor"
       (documentation 'stack-vhomogeneous 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-vhomogeneous object) => homogeneous}
   @syntax{(setf (gtk:stack-vhomogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[homogeneous]{@em{true} to make the stack vertically homogeneous}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{vhomogeneous} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{vhomogeneous} slot of the
+    @class{gtk:stack} class gets or sets whether the stack is vertically
+    homogeneous.
   @end{short}
-  The @fun{gtk:stack-vhomogeneous} function gets whether the stack is vertically
-  homogeneous. The @setf{gtk:stack-vhomogeneous} function sets the stack to be
-  vertically homogeneous or not.
 
   If the stack is homogeneous, the stack will request the same height for all
   its children. If it is not, the stack may change height when a different
@@ -809,19 +783,17 @@
 (setf (liber:alias-for-function 'stack-visible-child)
       "Accessor"
       (documentation 'stack-visible-child 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-visible-child object) => child}
   @syntax{(setf (gtk:stack-visible-child object) child)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[child]{a @class{gtk:widget} child widget of the stack}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{visible-child} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{visible-child} slot of the
+    @class{gtk:stack} class gets or sets the currently visible child widget of
+    the stack.
   @end{short}
-  The @fun{gtk:stack-visible-child} function gets the currently visible child
-  widget of the stack, or @code{nil} if there are no visible children. The
-  @setf{gtk:stack-visible-child} function makes the child widget the visible
-  child widget of the stack.
+  Pass the @code{nil} value to unset the visible child widget.
 
   If @arg{widget} is different from the currently visible child widget, the
   transition between the two will be animated with the current transition type
@@ -847,19 +819,17 @@
 (setf (liber:alias-for-function 'stack-visible-child-name)
       "Accessor"
       (documentation 'stack-visible-child-name 'function)
- "@version{2025-04-23}
+ "@version{2025-07-30}
   @syntax{(gtk:stack-visible-child-name object) => name}
   @syntax{(setf (gtk:stack-visible-child-name object) name)}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[name]{a string for the name of the visible child of the stack}
   @begin{short}
-    Accessor of the @slot[gtk:stack]{visible-child-name} slot of the
-    @class{gtk:stack} class.
+    The accessor for the @slot[gtk:stack]{visible-child-name} slot of the
+    @class{gtk:stack} class gets or sets the name of the currently visible child
+    of the stack.
   @end{short}
-  The @fun{gtk:stack-visible-child-name} function returns the name of the
-  currently visible child of the stack, or @code{nil} if there is no visible
-  child. The @setf{gtk:stack-visible-child-name} function makes the child
-  widget with the given name visible.
+  Returns @code{nil} if there is no visible child.
 
   If the child widget is different from the currently visible child, the
   transition between the two will be animated with the current transition type

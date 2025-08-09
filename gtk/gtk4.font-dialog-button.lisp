@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.font-dialog-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; Version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -99,7 +99,7 @@
 (setf (liber:alias-for-symbol 'font-level)
       "GEnum"
       (liber:symbol-documentation 'font-level)
- "@version{2024-7-30}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-genum \"GtkFontLevel\" font-level
   (:export t
@@ -110,13 +110,13 @@
   (:features 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:family]{Select a font family.}
       @entry[:face]{Select a font face, that is a family and a style.}
       @entry[:font]{Select a font, that is, a face with a size, and possibly
         font variations).}
       @entry[:features]{Select a font and font features.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The level of granularity for the font selection.
@@ -165,7 +165,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-dialog-button 'type)
- "@version{#2023-10-19}
+ "@version{#2025-07-31}
   @begin{short}
     The @class{gtk:font-dialog-button} class is wrapped around a
     @class{gtk:font-dialog} object and allows to open a font chooser dialog to
@@ -188,17 +188,18 @@ fontbutton
     class.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[font-dialog-button::activate]{signal}
       @begin{pre}
 lambda (fontbutton)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[fontbutton]{The @class{gtk:font-dialog-button} widget which
+      @begin[code]{simple-table}
+        @entry[fontbutton]{The @class{gtk:font-dialog-button} widget that
           received the signal.}
-      @end{table}
+      @end{simple-table}
       Emitted when the font dialog button is activated. The signal is an action
       signal and emitting it causes the button to pop up its dialog. The signal
       can be directly emitted on objects from user code. Since 4.14
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:font-dialog-button-new}
   @see-slot{gtk:font-dialog-button-dialog}
@@ -251,8 +252,8 @@ lambda (fontbutton)    :run-first
   (Read / Write) @br{}
   The selected font. This property can be set to give the button its initial
   font, and it will be updated to reflect the users choice in the font chooser
-  dialog. Listen to @code{\"notify::font-desc\"} signal to get informed about
-  changes to the buttons font.")
+  dialog. Listen to the @sig[g:object]{notify::font-desc} signal to get informed
+  about changes to the buttons font.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-dialog-button-font-desc)
@@ -284,18 +285,18 @@ lambda (fontbutton)    :run-first
  "The @code{font-features} property of type @code{:string} (Read / Write) @br{}
   The selected font features. This property will be updated to reflect the users
   choice in the font chooser dialog. Listen to the
-  @code{\"notify::font-features\"} signal to get informed about changes to the
-  buttons font features.")
+  @sig[g:object]{notify::font-features} signal to get informed about changes to
+  the buttons font features.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-dialog-button-font-features)
       "Accessor"
       (documentation 'font-dialog-button-font-features 'function)
- "@version{#2023-10-19}
+ "@version{#2025-07-27}
   @syntax{(gtk:font-dialog-button-font-features object) => features}
   @syntax{(setf (gtk:font-dialog-button-font-features object) features)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
-  @argument[features]{a string with the selected font features}
+  @argument[features]{a string for the selected font features}
   @begin{short}
     Accessor of the @slot[gtk:font-dialog-button]{font-features} slot of the
     @class{gtk:font-dialog-button} class.
@@ -306,7 +307,7 @@ lambda (fontbutton)    :run-first
 
   This function is what should be used to obtain the font features that were
   chosen by the user. To get informed about changes, listen to the
-  @code{\"notify::font-features\"} signal.
+  @sig[g:object]{notify::font-features} signal.
 
   Note that the button will only let users choose font features if
   the @slot[gtk:font-dialog-button]{level} property is set to @code{:features}.
@@ -323,7 +324,7 @@ lambda (fontbutton)    :run-first
   @br{}
   The selected language for font features. This property will be updated to
   reflect the users choice in the font chooser dialog. Listen to
-  @code{\"notify::language\"} to get informed about changes to the buttons
+  @sig[g:object]{notify::language} to get informed about changes to the buttons
   language.")
 
 #+liber-documentation
@@ -351,19 +352,19 @@ lambda (fontbutton)    :run-first
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "level" 'font-dialog-button) t)
- "The @code{level} property of type @symbol{gtk:font-level} (Read / Write) @br{}
+ "The @code{level} property of type @sym{gtk:font-level} (Read / Write) @br{}
   The level of detail for the font chooser dialog. @br{}
-  Default value: @code{:font}")
+  Default value: @val[gtk:font-level]{:font}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-dialog-button-level)
       "Accessor"
       (documentation 'font-dialog-button-level 'function)
- "@version{#2023-10-19}
+ "@version{#2025-07-25}
   @syntax{(gtk:font-dialog-button-level object) => level}
   @syntax{(setf (gtk:font-dialog-button-level object) level)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
-  @argument[level]{a @symbol{gtk:font-level} value}
+  @argument[level]{a @sym{gtk:font-level} value}
   @begin{short}
     Accessor of the @slot[gtk:font-dialog-button]{level} slot of the
     @class{gtk:font-dialog-button} class.

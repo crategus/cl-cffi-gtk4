@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,7 +70,7 @@
 
 #+liber-documentation
 (setf (documentation 'print-context 'type)
- "@version{2024-2-16}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:print-context} object encapsulates context information that
     is required when drawing pages for printing, such as the Cairo context and
@@ -80,8 +80,9 @@
   that match the font metrics of the Cairo surface.
 
   The @class{gtk:print-context} object gets passed to the
-  @code{\"begin-print\"}, @code{\"end-print\"}, @code{\"request-page-setup\"}
-  and @code{\"draw-page\"} signal handlers on the print operation.
+  @sig[gtk:print-operation]{begin-print}, @sig[gtk:print-operation]{end-print},
+  @sig[gtk:print-operation]{request-page-setup} and
+  @sig[gtk:print-operation]{draw-page} signal handlers on the print operation.
   @begin[Examples]{dictionary}
     Using the @class{gtk:print-context} object in a @code{draw-page} callback
     function.
@@ -128,10 +129,11 @@
 (cffi:defcfun ("gtk_print_context_get_cairo_context"
                print-context-cairo-context) (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The @symbol{cairo:context-t} instance with the Cairo context of
-  @arg{context}.}
+  @begin{return}
+    The @sym{cairo:context-t} instance for the Cairo context of @arg{context}.
+  @end{return}
   @begin{short}
     Obtains the Cairo context that is associated with the print context.
   @end{short}
@@ -155,12 +157,12 @@
 
 (defun print-context-set-cairo-context (context cr xdpi ydpi)
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @argument[cr]{a @symbol{cairo:context-t} instance with the Cairo context}
-  @argument[xdpi]{a number coerced to a double float with the horizontal
+  @argument[cr]{a @sym{cairo:context-t} instance for the Cairo context}
+  @argument[xdpi]{a number coerced to a double float for the horizontal
     resolution to use with @arg{cr}}
-  @argument[ydpi]{a number coerced to a double float with the vertical
+  @argument[ydpi]{a number coerced to a double float for the vertical
     resolution to use with @arg{cr}}
   @begin{short}
     Sets a new Cairo context on a print context.
@@ -185,10 +187,11 @@
 (cffi:defcfun ("gtk_print_context_get_page_setup" print-context-page-setup)
     (g:object page-setup)
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The @class{gtk:page-setup} object with the page setup of the print
-    context.}
+  @begin{return}
+    The @class{gtk:page-setup} object for the page setup of the print context.
+  @end{return}
   @begin{short}
     Obtains the page setup that determines the page dimensions of the print
     context.
@@ -205,9 +208,9 @@
 
 (cffi:defcfun ("gtk_print_context_get_width" print-context-width) :double
  #+liber-documentation
- "@version{2024-2-16}
+ "@version{2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The double float with the width of @arg{context}.}
+  @return{The double float for the width of @arg{context}.}
   @begin{short}
     Obtains the width of the print context, in pixels.
   @end{short}
@@ -223,9 +226,9 @@
 
 (cffi:defcfun ("gtk_print_context_get_height" print-context-height) :double
  #+liber-documentation
- "@version{2024-2-16}
+ "@version{2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The double float with the height of @arg{context}.}
+  @return{The double float for the height of @arg{context}.}
   @begin{short}
     Obtains the height of the print context, in pixels.
   @end{short}
@@ -241,9 +244,9 @@
 
 (cffi:defcfun ("gtk_print_context_get_dpi_x" print-context-dpi-x) :double
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The double float with the horizontal resolution of @arg{context}.}
+  @return{The double float for the horizontal resolution of @arg{context}.}
   @begin{short}
     Obtains the horizontal resolution of the print context, in dots per inch.
   @end{short}
@@ -259,9 +262,9 @@
 
 (cffi:defcfun ("gtk_print_context_get_dpi_y" print-context-dpi-y) :double
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The double float with the vertical resolution of @arg{context}.}
+  @return{The double float for the vertical resolution of @arg{context}.}
   @begin{short}
     Obtains the vertical resolution of the print context, in dots per inch.
   @end{short}
@@ -278,9 +281,9 @@
 (cffi:defcfun ("gtk_print_context_get_pango_fontmap"
                print-context-pango-fontmap) (g:object pango:font-map)
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-27}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The @class{pango:font-map} object with the font map of @arg{context}.}
+  @return{The @class{pango:font-map} object for the font map of @arg{context}.}
   @begin{short}
     Returns a font map that is suitable for use with the print context.
   @end{short}
@@ -297,10 +300,12 @@
 (cffi:defcfun ("gtk_print_context_create_pango_context"
                print-context-create-pango-context) (g:object pango:context)
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-07-26}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{The new @class{pango:context} object with the Pango context for
-    @arg{context}.}
+  @begin{return}
+    The new @class{pango:context} object with the Pango context for
+    @arg{context}.
+  @end{return}
   @begin{short}
     Creates a new Pango context that can be used with the print context.
   @end{short}
@@ -317,7 +322,7 @@
 (cffi:defcfun ("gtk_print_context_create_pango_layout"
                print-context-create-pango-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2024-2-16}
+ "@version{2024-02-16}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The new @class{pango:layout} object for @arg{context}.}
   @begin{short}
@@ -343,14 +348,13 @@
 
 (defun print-context-hard-margins (context)
  #+liber-documentation
- "@version{#2024-2-16}
+ "@version{#2025-08-04}
+  @syntax{(gtk:print-context-hard-margins context) => top, bottom, left, right}
   @argument[context]{a @class{gtk:print-context} object}
-  @begin{return}
-    @arg{top} -- an integer with the top hardware printer margin @br{}
-    @arg{bottom} -- an integer with the bottom hardware printer margin @br{}
-    @arg{left} -- an integer with the left hardware printer margin @br{}
-    @arg{right} -- an integer with the right hardware printer margin
-  @end{return}
+  @argument[top]{an integer for the top hardware printer margin}
+  @argument[bottom]{an integer for the bottom hardware printer margin}
+  @argument[left]{an integer for the left hardware printer margin}
+  @argument[right]{an integer for the right hardware printer margin}
   @begin{short}
     Obtains the hardware printer margins of the print context, in units.
   @end{short}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.accessible.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -112,7 +112,7 @@
 (setf (liber:alias-for-symbol 'accessible-platform-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-platform-state)
- "@version{2024-5-8}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessiblePlatformState\" accessible-platform-state
   (:export t
@@ -122,11 +122,11 @@
   (:active 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:focusable]{Whether the accessible can be focused.}
       @entry[:focused]{Whether the accessible has focus.}
       @entry[:active]{Whether the accessible is active.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The various platform states which can be queried using the
@@ -150,7 +150,7 @@
 (setf (liber:alias-for-class 'accessible-list)
       "GBoxed"
       (documentation 'accessible-list 'type)
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @begin{declaration}
 (glib:define-gboxed-opaque accessible-list \"GtkAccessibleList\"
   :export t
@@ -178,7 +178,7 @@
 (cffi:defcfun ("gtk_accessible_list_new_from_list"
                accessible-list-new-from-list) (g:boxed accessible-list :return)
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @argument[list]{a list of @class{gtk:accessible} objects}
   @return{The new @class{gtk:accessible-list} instance.}
   @begin{short}
@@ -202,7 +202,7 @@
 (cffi:defcfun ("gtk_accessible_list_get_objects" accessible-list-objects)
     (g:slist-t (g:object accessible))
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @argument[list]{a @class{gtk:accessible-list} instance}
   @return{The list of @class{g:object} instances.}
   @begin{short}
@@ -231,7 +231,7 @@
 (setf (liber:alias-for-class 'accessible)
       "Interface"
       (documentation 'accessible 'type)
- "@version{2024-5-8}
+ "@version{2024-07-25}
   @begin{short}
     The @class{gtk:accessible} interface is an interface for describing UI
     elements for Assistive Technologies.
@@ -239,13 +239,12 @@
   Every accessible implementation has:
   @begin{itemize}
     @begin{item}
-      a \"role\", represented by a value of the @symbol{gtk:accessible-role}
+      a \"role\", represented by a value of the @sym{gtk:accessible-role}
       enumeration
     @end{item}
     @begin{item}
-      an \"attribute\", represented by a set of @symbol{gtk:accessible-state},
-      @symbol{gtk:accessible-property} and @symbol{gtk:accessible-relation}
-      values
+      an \"attribute\", represented by a set of @sym{gtk:accessible-state},
+      @sym{gtk:accessible-property} and @sym{gtk:accessible-relation} values
     @end{item}
   @end{itemize}
   The role cannot be changed after instantiating a @class{gtk:accessible}
@@ -284,7 +283,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accessible-role" 'accessible) t)
- "The @code{accessible-role} property of type @symbol{gtk:accessible-role}
+ "The @code{accessible-role} property of type @sym{gtk:accessible-role}
   (Read / Write) @br{}
   The accessible role of the given assistive implementation. The accessible
   role cannot be changed once set.")
@@ -293,16 +292,16 @@
 (setf (liber:alias-for-function 'accessible-accessible-role)
       "Accessor"
       (documentation 'accessible-accessible-role 'function)
- "@version{2024-5-8}
+ "@version{2025-07-25}
   @syntax{(gtk:accessible-accessible-role object) => role}
   @syntax{(setf (gtk:accessible-accessible-role object) role)}
   @argument[object]{a @class{gtk:accessible} widget}
-  @argument[role]{a value of the @symbol{gtk:accessible-role} enumeration}
+  @argument[role]{a value for the @sym{gtk:accessible-role} enumeration}
   @begin{short}
     Accessor of the @slot[gtk:accessible]{accessible-role} slot of the
     @class{gtk:accessible} class.
   @end{short}
-  Retrieves the @symbol{gtk:accessible-role} value for the given
+  Retrieves the @sym{gtk:accessible-role} value for the given
   @class{gtk:accessible} widget.
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-role}")
@@ -314,9 +313,9 @@
 (cffi:defcfun ("gtk_accessible_property_init_value"
                accessible-property-init-value) :void
  #+liber-documentation
- "@version{2024-11-5}
-  @argument[property]{a @symbol{gtk:accessible-property} value}
-  @argument[gvalue]{an uninitialized @symbol{g:value} instance}
+ "@version{2025-07-25}
+  @argument[property]{a @sym{gtk:accessible-property} value}
+  @argument[gvalue]{an uninitialized @sym{g:value} instance}
   @begin{short}
     Initializes @arg{gvalue} with the appropriate type for @arg{property}.
   @end{short}
@@ -336,9 +335,9 @@
 (cffi:defcfun ("gtk_accessible_relation_init_value"
                accessible-relation-init-value) :void
  #+liber-documentation
- "@version{2024-11-5}
-  @argument[relation]{a @symbol{gtk:accessible-relation} value}
-  @argument[gvalue]{an uninitialized @symbol{g:value} value}
+ "@version{2025-07-25}
+  @argument[relation]{a @sym{gtk:accessible-relation} value}
+  @argument[gvalue]{an uninitialized @sym{g:value} value}
   @begin{short}
     Initializes @arg{value} with the appropriate type for @arg{relation}.
   @end{short}
@@ -358,9 +357,9 @@
 (cffi:defcfun ("gtk_accessible_state_init_value" accessible-state-init-value)
     :void
  #+liber-documentation
- "@version{2024-11-5}
-  @argument[state]{a @symbol{gtk:accessible-state} value}
-  @argument[gvalue]{an uninitialized @symbol{g:value} value}
+ "@version{2025-07-25}
+  @argument[state]{a @sym{gtk:accessible-state} value}
+  @argument[gvalue]{an uninitialized @sym{g:value} value}
   @begin{short}
     Initializes @arg{gvalue} with the appropriate type for @arg{state}.
   @end{short}
@@ -391,7 +390,7 @@
 (cffi:defcfun ("gtk_accessible_get_accessible_parent"
                accessible-accessible-parent) (g:object accessible)
  #+liber-documentation
- "@version{2024-11-5}
+ "@version{2024-11-05}
   @syntax{(gtk:accessible-accessible-parent accessible) => parent}
   @syntax{(setf (gtk:accessible-accessible-parent accessible) parent)}
   @syntax{(setf (gtk:accessible-accessible-parent accessible sibling) parent)}
@@ -429,10 +428,11 @@
 (cffi:defcfun ("gtk_accessible_get_at_context" accessible-at-context)
     (g:object at-context :return)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-08-04}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @return{The @class{gtk:at-context} object with the accessible implementaton
-    object.}
+  @begin{return}
+    The @class{gtk:at-context} object for the accessible implementaton object.
+  @end{return}
   @begin{short}
     Retrieves the accessible implementation for the given @arg{accessible}.
   @end{short}
@@ -459,17 +459,15 @@
 #+gtk-4-10
 (defun accessible-bounds (accessible)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-19}
   @syntax{(gtk:accessible-bounds accessible) => x, y, width, height}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @begin{return}
-    @arg{x} -- an integer with the x coordinate of the top left corner of the
-    accessible object @br{}
-    @arg{y} -- an integer with the y coordinate of the top left corner of the
-    accessible object @br{}
-    @arg{width} -- an integer with the width of the accessible object @br{}
-    @arg{height} -- an integer with the height of the accessible object
-  @end{return}
+  @argument[x]{an integer for the x coordinate of the top left corner of the
+    accessible object}
+  @argument[y]{an integer for the y coordinate of the top left corner of the
+    accessible object}
+  @argument[width]{an integer for the width of the accessible object}
+  @argument[height]{an integer for the height of the accessible object}
   @begin{short}
     Queries the coordinates and dimensions of the accessible object.
   @end{short}
@@ -498,9 +496,9 @@
 (cffi:defcfun ("gtk_accessible_get_first_accessible_child"
                accessible-first-accessible-child) (g:object accessible :return)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-27}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @return{The @class{gtk:accessible} object with the first accessible child.}
+  @return{The @class{gtk:accessible} object for the first accessible child.}
   @begin{short}
     Retrieves the first accessible child of an accessible object.
   @end{short}
@@ -520,9 +518,9 @@
 (cffi:defcfun ("gtk_accessible_get_next_accessible_sibling"
                accessible-next-accessible-sibling) (g:object accessible :return)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-27}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @return{The @class{gtk:accessible} object with the next accessible sibling.}
+  @return{The @class{gtk:accessible} object for the next accessible sibling.}
   @begin{short}
     Retrieves the next accessible sibling of an accessible object.
   @end{short}
@@ -542,9 +540,9 @@
 (cffi:defcfun ("gtk_accessible_get_platform_state" accessible-platform-state)
     :boolean
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @argument[state]{a @symbol{gtk:accessible-platform-state} value to query}
+  @argument[state]{a @sym{gtk:accessible-platform-state} value to query}
   @return{The boolean value of @arg{state} for the accessible object.}
   @begin{short}
     Query a platform state, such as focus.
@@ -572,9 +570,9 @@
 
 (cffi:defcfun ("gtk_accessible_reset_property" accessible-reset-property) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @argument[property]{a @symbol{gtk:accessible-property} value}
+  @argument[property]{a @sym{gtk:accessible-property} value}
   @begin{short}
     Resets the accessible @arg{property} value to its default value.
   @end{short}
@@ -591,9 +589,9 @@
 
 (cffi:defcfun ("gtk_accessible_reset_relation" accessible-reset-relation) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} widget}
-  @argument[relation]{a @symbol{gtk:accessible-relation} value}
+  @argument[relation]{a @sym{gtk:accessible-relation} value}
   @begin{short}
     Resets the accessible @arg{relation} value to its default value.
   @end{short}
@@ -609,9 +607,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_accessible_reset_state" accessible-reset-state) :void
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} widget}
-  @argument[state]{a @symbol{gtk:accessible-state} value}
+  @argument[state]{a @sym{gtk:accessible-state} value}
   @begin{short}
     Resets the accessible @arg{state} value to its default value.
   @end{short}
@@ -630,9 +628,9 @@
 (cffi:defcfun ("gtk_accessible_update_next_accessible_sibling"
                accessible-update-next-accessible-sibling) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2026-06-21}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @argument[sibling]{a @class{gtk:accessible} object with the new next
+  @argument[sibling]{a @class{gtk:accessible} object for the new next
     accessible sibling to set, the argument can be @code{nil}}
   @begin{short}
     Updates the next accessible sibling of @arg{accessible}.
@@ -661,14 +659,14 @@
 
 (defun accessible-update-property (accessible properties values)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
   @argument[properties]{a list of @class{gtk:accessible-property} values}
-  @argument[values]{a list of @symbol{g:value} instances, one for each property}
+  @argument[values]{a list of @sym{g:value} instances, one for each property}
   @begin{short}
     Updates a list of accessible properties.
   @end{short}
-  See the @symbol{gtk:accessible-property} documentation for the value types of
+  See the @sym{gtk:accessible-property} documentation for the value types of
   accessible properties.
 
   This function should be called by @class{gtk:widget} types whenever an
@@ -710,14 +708,14 @@
 
 (defun accessible-update-relation (accessible relations values)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
   @argument[relations]{a list of @class{gtk:accessible-relation} values}
-  @argument[values]{a list of @symbol{g:value} instances, one for each relation}
+  @argument[values]{a list of @sym{g:value} instances, one for each relation}
   @begin{short}
     Updates a list of accessible relations.
   @end{short}
-  See the @symbol{gtk:accessible-relation} documentation for the value types of
+  See the @sym{gtk:accessible-relation} documentation for the value types of
   accessible relations.
 
   This function should be called by @class{gtk:widget} types whenever an
@@ -759,14 +757,14 @@
 
 (defun accessible-update-state (accessible states values)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
   @argument[states]{a list of @class{gtk:accessible-state} values}
-  @argument[values]{a list of @symbol{g:value} instances, one for each state}
+  @argument[values]{a list of @sym{g:value} instances, one for each state}
   @begin{short}
     Updates a list of accessible states.
   @end{short}
-  See the @symbol{gtk:accessible-state} documentation for the value types of
+  See the @sym{gtk:accessible-state} documentation for the value types of
   accessible states.
 
   This function should be called by @class{gtk:widget} types whenever an
@@ -802,10 +800,10 @@
 #+gtk-4-14
 (cffi:defcfun ("gtk_accessible_announce" accessible-announce) :void
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2025-07-25}
   @argument[accessible]{a @class{gtk:accessible} object}
-  @argument[message]{a string with the message to announce}
-  @argument[priority]{a @symbol{gtk:accessible-announcement-priority} value
+  @argument[message]{a string for the message to announce}
+  @argument[priority]{a @sym{gtk:accessible-announcement-priority} value
     for the priority of the announcement}
   @begin{short}
     Requests the user’s screen reader to announce the given message.

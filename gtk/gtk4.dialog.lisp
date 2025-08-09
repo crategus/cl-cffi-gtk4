@@ -423,12 +423,12 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new-with-buttons (title parent flags &rest buttons)
  #+liber-documentation
- "@version{2025-07-22}
+ "@version{2025-07-27}
   @argument[title]{a string for the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent for the dialog,
     or @code{nil}}
   @argument[flags]{a @sym{gtk:dialog-flags} value for the flags of the dialog}
-  @argument[buttons]{pairs with a button text and the response ID for the
+  @argument[buttons]{pairs for a button text and the response ID for the
     button, which is a positive integer or a value of the
     @sym{gtk:response-type} enumeration}
   @return{The new @class{gtk:dialog} widget.}
@@ -556,9 +556,9 @@ lambda (dialog response)    :run-last
 
 (defun dialog-add-buttons (dialog &rest buttons)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{#2025-07-27}
   @argument[dialog]{a @class{gtk:dialog} widget}
-  @argument[buttons]{pairs with a button text and the response ID, which is a
+  @argument[buttons]{pairs for a button text and the response ID, which is a
     positive integer or a value of the @sym{gtk:response-type} enumeration}
   @begin{short}
     Adds more buttons, same as calling the @fun{gtk:dialog-add-button} function

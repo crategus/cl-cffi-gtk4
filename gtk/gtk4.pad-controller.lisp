@@ -2,9 +2,9 @@
 ;;; gtk4.pad-controller.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
@@ -72,7 +72,7 @@
 (setf (liber:alias-for-symbol 'pad-action-type)
       "GEnum"
       (liber:symbol-documentation 'pad-action-type)
- "@version{2025-2-23}
+ "@version{2025-07-22}
     @begin{declaration}
 (gobject:define-genum \"GtkPadActionType\" pad-action-type
   (:export t
@@ -82,11 +82,11 @@
   :strip)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:button]{Action is triggered by a pad button.}
       @entry[:ring]{Action is triggered by a pad ring.}
       @entry[:strip]{Action is triggered by a pad strip.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The type of a pad action.
@@ -119,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'pad-controller 'type)
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @begin{short}
     The @class{gtk:pad-controller} object is an event controller for the pads
     found in drawing tablets.
@@ -191,7 +191,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-action-group)
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @syntax{(gtk:pad-controller-action-group object) => group}
   @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
@@ -215,7 +215,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-pad)
       "Accessor"
       (documentation 'pad-controller-pad 'function)
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @syntax{(gtk:pad-controller-pad object) => pad}
   @syntax{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
@@ -238,10 +238,10 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 
 (defun pad-controller-new (group &optional pad)
  #+liber-documentation
- "@version{2025-2-23}
+ "@version{2025-07-26}
   @argument[group]{a @class{g:action-group} instance to trigger actions from}
   @argument[pad]{a @class{gdk:device} object of @code{:tablet-pad} type of the
-    @symbol{gdk:input-source} enumeration, or the @code{nil} default value to
+    @sym{gdk:input-source} enumeration, or the @code{nil} default value to
     handle all pads}
   @return{The newly created @class{gtk:pad-controller} object.}
   @begin{short}
@@ -277,7 +277,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 
 (defun pad-controller-set-action-entries (controller entries)
  #+liber-documentation
- "@version{2025-2-23}
+ "@version{2025-02-23}
   @argument[controller]{a @class{gtk:pad-controller} object}
   @argument[entries]{a @code{'((type1 index1 mode1 label1 name1) ...)} list
     with the action entries to set on @arg{controller}}
@@ -302,10 +302,10 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 
 (cffi:defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void
  #+liber-documentation
- "@version{2025-2-23}
+ "@version{2025-07-26}
   @argument[controller]{a @class{gtk:pad-controller} object}
-  @argument[type]{a @symbol{gtk:pad-action-type} value for the pad feature
-    that will trigger the action}
+  @argument[type]{a @sym{gtk:pad-action-type} value for the pad feature that
+    will trigger the action}
   @argument[index]{an integer for the 0-indexed button/ring/strip number that
     will trigger the action}
   @argument[mode]{an integer for the mode that will trigger the action, or -1

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.popover-menu.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,7 +92,7 @@
 (setf (liber:alias-for-symbol 'popover-menu-flags)
       "GFlags"
       (liber:symbol-documentation 'popover-menu-flags)
- "@version{2024-10-26}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-gflags \"GtkPopoverMenuFlags\" popover-menu-flags
   (:export t
@@ -101,12 +101,12 @@
   (:nested #.(ash 1 0)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:sliding]{Submenus are presented as sliding submenus that replace
         the main menu. Since 4.14}
       @entry[:nested]{Create submenus as nested popovers. Without this flag,
         submenus are created as sliding pages that replace the main menu.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags that affect how popover menus built from a @class{g:menu-model}
@@ -141,7 +141,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu 'type)
- "@version{2024-10-26}
+ "@version{2025-07-26}
   @begin{short}
     The @class{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
     class that treats its children like menus and allows switching between them.
@@ -235,10 +235,12 @@
     class to the popover's main node.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:popover-menu} implementation uses the @code{:menu} role of
-    the @symbol{gtk:accessible-role} enumeration, and its items use the
-    @code{:menu-item}, @code{:menu-item-checkbox} role or @code{menu-item-radio}
-    roles, depending on the action they are connected to.
+    The @class{gtk:popover-menu} implementation uses the
+    @val[gtk:accessible-role]{:menu} role of the @sym{gtk:accessible-role}
+    enumeration, and its items use the @val[gtk:accessible-role]{:menu-item},
+    @val[gtk:accessible-role]{:menu-item-checkbox} role or
+    @val[gtk:accessible-role]{menu-item-radio} roles, depending on the action
+    they are connected to.
   @end{dictionary}
   @see-constructor{gtk:popover-menu-new-from-model}
   @see-constructor{gtk:popover-menu-new-from-model-full}
@@ -255,23 +257,23 @@
 
 #+(and gtk-4-14 liber-documentation)
 (setf (documentation (liber:slot-documentation "flags" 'popover-menu) t)
- "The @code{flags} property of type @symbol{gtk:popover-menu-flags}
-  (Read / Write) @br{}
+ "The @code{flags} property of type @sym{gtk:popover-menu-flags} (Read / Write)
+  @br{}
   The flags that popover uses to create/display a menu from its model. If a
   model is set and the flags change, contents are rebuilt, so if setting
   properties individually, set flags before model to avoid a redundant rebuild.
   Since 4.14 @br{}
-  Default value: @code{:sliding}")
+  Default value: @val[gtk:popover-menu-flags]{:sliding}")
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-function 'popover-menu-flags)
       "Accessor"
       (documentation 'popover-menu-flags 'function)
- "@version{2024-5-26}
+ "@version{2025-07-26}
   @syntax{(gtk:popover-menu-flags object) => flags}
   @syntax{(setf (gtk:popover-menu-flags object) flags)}
   @argument[object]{a @class{gtk:popover-menu} widget}
-  @argument[flags]{a @symbol{gtk:popover-menu-flags} value}
+  @argument[flags]{a @sym{gtk:popover-menu-flags} value}
   @begin{short}
     Accessor of the @slot[gtk:popover-menu]{flags} slot of the
     @class{gtk:popover-menu} class.
@@ -299,7 +301,7 @@
 (setf (liber:alias-for-function 'popover-menu-menu-model)
       "Accessor"
       (documentation 'popover-menu-menu-model 'function)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @syntax{(gtk:popover-menu-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
@@ -328,11 +330,11 @@
 (setf (liber:alias-for-function 'popover-menu-visible-submenu)
       "Accessor"
       (documentation 'popover-menu-visible-submenu 'function)
- "@version{2024-5-26}
+ "@version{2025-07-27}
   @syntax{(gtk:popover-menu-visible-submenu object) => submenu}
   @syntax{(setf (gtk:popover-menu-visible-submenu object) submenu)}
   @argument[object]{a @class{gtk:popover-menu} widget}
-  @argument[submenu]{a string with the name of the submenu}
+  @argument[submenu]{a string for the name of the submenu}
   @begin{short}
     Accessor of the @slot[gtk:popover-menu]{visible-submenu} slot of the
     @class{gtk:popover-menu} class.
@@ -381,9 +383,9 @@
                popover-menu-new-from-model-full)
     (g:object popover-menu :return)
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{#2025-07-26}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
-  @argument[flags]{a @symbol{gtk:popover-menu-flags} value, that affect hwo the
+  @argument[flags]{a @sym{gtk:popover-menu-flags} value that affects hwo the
     menu is created}
   @return{The new @class{gtk:popover-menu} widget.}
   @begin{short}
@@ -410,10 +412,10 @@
 
 (cffi:defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{#2025-07-27}
   @argument[popover]{a @class{gtk:popover-menu} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
-  @argument[id]{a string with the ID to insert the child widget at}
+  @argument[id]{a string for the ID to insert the child widget at}
   @return{@em{True} if the ID was found and the child widget added.}
   @begin{short}
     Adds a custom widget to a generated menu.

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.print-settings.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -149,7 +149,7 @@
 (setf (liber:alias-for-symbol 'page-orientation)
       "GEnum"
       (liber:symbol-documentation 'page-orientation)
- "@version{2024-2-17}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkPageOrienation\" page-orientation
   (:export t
@@ -160,12 +160,12 @@
   :reverse-landscape)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:portrait]{Portrait mode.}
       @entry[:landscape]{Landscape mode.}
       @entry[:reverse-portrait]{Reverse portrait mode.}
       @entry[:reverse-landscape]{Reverse landscape mode.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{See the @fun{gtk:print-settings-orientation} function.}
   @see-class{gtk:print-settings}
@@ -186,7 +186,7 @@
 (setf (liber:alias-for-symbol 'print-duplex)
       "GEnum"
       (liber:symbol-documentation 'print-duplex)
- "@version{2024-2-17}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintDuplex\" print-duplex
   (:export t
@@ -196,11 +196,11 @@
   :vertical)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:simplex]{No duplex.}
       @entry[:horizontal]{Horizontal duplex.}
       @entry[:vertical]{Vertical duplex.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{See the @fun{gtk:print-settings-duplex} function.}
   @see-class{gtk:print-settings}
@@ -222,7 +222,7 @@
 (setf (liber:alias-for-symbol 'print-quality)
       "GEnum"
       (liber:symbol-documentation 'print-quality)
- "@version{2024-2-17}
+ "@version{2025-07-22}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintQuality\" print-quality
   (:export t
@@ -233,12 +233,12 @@
   :draft)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:low]{Low quality.}
       @entry[:normal]{Normal quality.}
       @entry[:high]{High quality.}
       @entry[:draft]{Draft quality.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{See the @fun{gtk:print-settings-quality} function.}
   @see-class{gtk:print-settings}
@@ -264,7 +264,7 @@
 (setf (liber:alias-for-symbol 'number-up-layout)
       "GEnum"
       (liber:symbol-documentation 'number-up-layout)
- "@version{2024-2-17}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkNubmerUpLayout\" number-up-layout
   (:export t
@@ -279,7 +279,7 @@
   (:bottom-to-top-right-to-left 7))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:left-to-right-top-to-bottom]{@image[layout-lrtb]{}}
       @entry[:left-to-right-bottom-to-top]{@image[layout-lrbt]{}}
       @entry[:right-to-left-bottom-to-top]{@image[layout-rlbt]{}}
@@ -288,7 +288,7 @@
       @entry[:top-to-bottom-right-to-left]{@image[layout-tbrl]{}}
       @entry[:bottom-to-top-left-to-right]{@image[layout-btlr]{}}
       @entry[:bottom-to-top-right-to-left]{@image[layout-btrl]{}}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Used to determine the layout of pages on a sheet when printing multiple
@@ -313,7 +313,7 @@
 (setf (liber:alias-for-symbol 'print-pages)
       "GEnum"
       (liber:symbol-documentation 'print-pages)
- "@version{2024-2-17}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkPrintPages\" print-pages
   (:export t
@@ -324,12 +324,12 @@
   (:selection 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:all]{All pages.}
       @entry[:current]{Current page.}
       @entry[:ranges]{Range of pages.}
       @entry[:selection]{Selected pages.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     See the @fun{gtk:print-job-pages} and @fun{gtk:print-settings-print-pages}
@@ -375,7 +375,7 @@
 (setf (liber:alias-for-symbol 'page-set)
       "GEnum"
       (liber:symbol-documentation 'page-set)
- "@version{2024-2-17}
+ "@version{2025-07-23}
   @begin{declaration}
 (gobject:define-genum \"GtkPageSet\" page-set
   (:export t
@@ -385,11 +385,11 @@
   (:odd 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:all]{All pages.}
       @entry[:even]{Even pages.}
       @entry[:odd]{Odd pages.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @short{See the @fun{gtk:print-job-page-set} function.}
   @see-class{gtk:print-settings}
@@ -408,7 +408,7 @@
 
 #+liber-documentation
 (setf (documentation 'print-settings 'type)
- "@version{2024-2-17}
+ "@version{2024-02-17}
   @begin{short}
     A @class{gtk:print-settings} object represents the settings of a print
     dialog in a system independent way.
@@ -453,7 +453,7 @@
 
 (defun print-settings-new ()
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2024-02-17}
   @return{The new @class{gtk:print-settings} object.}
   @short{Creates a new @class{gtk:print-settings} object.}
   @see-class{gtk:print-settings}"
@@ -472,8 +472,8 @@
 
 (defun print-settings-new-from-file (path)
  #+liber-documentation
- "@version{2024-11-21}
-  @argument[path]{a pathname or namestring with the file to read the settings
+ "@version{2025-07-27}
+  @argument[path]{a pathname or namestring for the file to read the settings
     from}
   @return{The restored @class{gtk:print-settings} object.}
   @begin{short}
@@ -502,10 +502,10 @@
 
 (defun print-settings-new-from-key-file (keyfile group)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-27}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings
     from}
-  @argument[group]{a string with the name of the group to use, or @code{nil} to
+  @argument[group]{a string for the name of the group to use, or @code{nil} to
     use the default \"Print Settings\"}
   @return{The restored @class{gtk:print-settings} object.}
   @begin{short}
@@ -532,8 +532,8 @@
                print-settings-new-from-gvariant)
      (g:object print-settings :return)
  #+liber-documentation
- "@version{2024-2-18}
-  @argument[variant]{a @code{a{sv@}} @symbol{g:variant} parameter}
+ "@version{2025-07-27}
+  @argument[variant]{a @code{a{sv@}} @sym{g:variant} parameter}
   @return{The restored @class{gtk:print-settings} object.}
   @begin{short}
     Deserialize print settings from a @code{a{sv@}} variant in the format
@@ -575,10 +575,12 @@
 (cffi:defcfun ("gtk_print_settings_copy" print-settings-copy)
     (g:object print-settings :return)
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-26}
   @argument[other]{a @class{gtk:print-settings} object}
-  @return{The newly allocated @class{gtk:print-settings} object with the copy
-    of @arg{other}.}
+  @begin{return}
+    The newly allocated @class{gtk:print-settings} object with the copy of
+    @arg{other}.
+  @end{return}
   @short{Copies a @class{gtk:print-settings} object.}
   @see-class{gtk:print-settings}"
   (other (g:object print-settings)))
@@ -591,9 +593,9 @@
 
 (cffi:defcfun ("gtk_print_settings_has_key" print-settings-has-key) :boolean
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
+  @argument[key]{a string for a key}
   @return{@em{True}, if @arg{key} has a value.}
   @short{Returns @em{true}, if a value is associated with @arg{key}.}
   @see-class{gtk:print-settings}"
@@ -608,9 +610,9 @@
 
 (cffi:defcfun ("gtk_print_settings_get" print-settings-get) :string
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
+  @argument[key]{a string for a key}
   @return{The string value for @arg{key}.}
   @short{Looks up the string value associated with @arg{key}.}
   @see-class{gtk:print-settings}"
@@ -630,10 +632,10 @@
 
 (defun print-settings-set (settings key value)
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[value]{a string with a value, or @code{nil}}
+  @argument[key]{a string for a key}
+  @argument[value]{a string for a value, or @code{nil}}
   @short{Associates @arg{value} with @arg{key}.}
   If @arg{value} is @code{nil} removes any value associated with @arg{key}. This
   has the same effect as using the @func{gtk:print-settings-unset} function.
@@ -649,9 +651,9 @@
 
 (cffi:defcfun ("gtk_print_settings_unset" print-settings-unset) :void
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
+  @argument[key]{a string for a key}
   @begin{short}
     Removes any value associated with @arg{key}.
   @end{short}
@@ -680,10 +682,10 @@
 (setf (liber:alias-for-symbol 'print-settings-func)
       "Callback"
       (liber:symbol-documentation 'print-settings-func)
- "@version{2024-5-4}
+ "@version{2024-07-27}
   @syntax{lambda (key value)}
-  @argument[key]{a string with the key value}
-  @argument[value]{a string with the value for @arg{key}}
+  @argument[key]{a string for the key value}
+  @argument[value]{a string for the value for @arg{key}}
   @begin{short}
     The callback function that is called from the
     @fun{gtk:print-settings-foreach} function.
@@ -704,9 +706,9 @@
 
 (defun print-settings-foreach (settings func)
  #+liber-documentation
- "@version{2024-2-17}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[func]{a @symbol{gtk:print-settings-func} callback function to call}
+  @argument[func]{a @sym{gtk:print-settings-func} callback function to call}
   @begin{short}
     Calls @arg{func} for each key value pair of the print settings.
   @end{short}
@@ -734,11 +736,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_bool" print-settings-bool) :boolean
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2025-07-27}
   @syntax{(gtk:print-settings-bool settings key) => value}
   @syntax{(setf (gtk:print-settings-bool settings key) value)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
+  @argument[key]{a string for a key}
   @argument[value]{a boolean value}
   @begin{short}
     The @fun{gtk:print-settings-bool} function returns the boolean represented
@@ -768,7 +770,7 @@
 
 (cffi:defcfun ("gtk_print_settings_get_double" print-settings-double) :double
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-double settings key) => value}
   @syntax{(setf (gtk:print-settings-double settings key) value)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -799,10 +801,10 @@
 
 (defun print-settings-double-with-default (settings key default)
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[default]{a double float number with the default value}
+  @argument[key]{a string for a key}
+  @argument[default]{a double float number for the default value}
   @return{The double float number associated with @arg{key}.}
   @begin{short}
     Returns the double float number represented by the value that is
@@ -834,13 +836,13 @@
 
 (cffi:defcfun ("gtk_print_settings_get_length" print-settings-length) :double
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2025-07-27}
   @syntax{(gtk:print-settings-length settings key unit) => value}
   @syntax{(setf (gtk:print-settings-length settings key unit) value)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[unit]{a @symbol{gtk:unit} value with the unit of the return value}
-  @argument[value]{a number with the length}
+  @argument[key]{a string for a key}
+  @argument[unit]{a @sym{gtk:unit} value for the unit of the return value}
+  @argument[value]{a number for the length}
   @begin{short}
     The @fun{gtk:print-settings-length} function returns the length value of
     @arg{key}, converted to @arg{unit}.
@@ -879,12 +881,12 @@
 
 (cffi:defcfun ("gtk_print_settings_get_int" print-settings-int) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-int settings key) => value}
   @syntax{(setf (gtk:print-settings-int settings key) value)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[value]{an integer with the value}
+  @argument[key]{a string for a key}
+  @argument[value]{an integer for the value}
   @begin{short}
     The @fun{gtk:print-settings-int} function returns the integer for @arg{key},
     or 0.
@@ -904,10 +906,10 @@
 (cffi:defcfun ("gtk_print_settings_get_int_with_default"
                print-settings-int-with-default) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[key]{a string with a key}
-  @argument[default]{an integer with the default value}
+  @argument[key]{a string for a key}
+  @argument[default]{an integer for the default value}
   @return{The integer for @arg{key}.}
   @begin{short}
     Returns the value for @arg{key}, interpreted as an integer, or the default
@@ -935,11 +937,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_printer" print-settings-printer) :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-printer settings) => printer}
   @syntax{(setf (gtk:print-settings-printer settings) printer)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[printer]{a string with the printer name}
+  @argument[printer]{a string for the printer name}
   @begin{short}
     The @fun{gtk:print-settings-printer} function obtains the value of the
     @code{\"printer\"} setting.
@@ -966,15 +968,15 @@
 (cffi:defcfun ("gtk_print_settings_get_orientation" print-settings-orientation)
     page-orientation
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-orientation settings) => orientation}
   @syntax{(setf (gtk:print-settings-orientation settings) orientation)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[orientation]{a @symbol{gtk:page-orientation} value with the page
+  @argument[orientation]{a @sym{gtk:page-orientation} value for the page
     orientation}
   @begin{short}
     The @fun{gtk:print-settings-orientation} function gets the value of the
-    @code{\"orientation\"} setting, converted to a @symbol{gtk:page-orientation}
+    @code{\"orientation\"} setting, converted to a @sym{gtk:page-orientation}
     value.
   @end{short}
   The @setf{gtk:print-settings-orientation} function sets the value of the
@@ -1000,11 +1002,11 @@
 (cffi:defcfun ("gtk_print_settings_get_paper_size" print-settings-paper-size)
     (g:boxed paper-size)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2025-07-27}
   @syntax{(gtk:print-settings-paper-size settings) => size}
   @syntax{(setf (gtk:print-settings-paper-size settings) size)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[size]{a @class{gtk:paper-size} instance with the paper size}
+  @argument[size]{a @class{gtk:paper-size} instance for the paper size}
   @begin{short}
     The @fun{gtk:print-settings-paper-size} function gets the value of
     @code{\"paper-format\"} setting, converted to a @class{gtk:paper-size}
@@ -1045,12 +1047,12 @@
 (cffi:defcfun ("gtk_print_settings_get_paper_width"
                print-settings-paper-width) :double
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-26}
   @syntax{(gtk:print-settings-paper-width settings unit) => width}
   @syntax{(setf (gtk:print-settings-paper-width settings unit) width)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[unit]{a @symbol{gtk:unit} value with the unit for the return value}
-  @argument[width]{a double float with the paper width}
+  @argument[unit]{a @sym{gtk:unit} value for the unit for the return value}
+  @argument[width]{a double float for the paper width}
   @begin{short}
     The @fun{gtk:print-settings-paper-width} function gets the value of the
     @code{\"paper-width\"} setting converted to @arg{unit}.
@@ -1080,12 +1082,12 @@
 (cffi:defcfun ("gtk_print_settings_get_paper_height"
                print-settings-paper-height) :double
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-26}
   @syntax{(gtk:print-settings-paper-height settings unit) => height}
   @syntax{(setf (gtk:print-settings-paper-height settings unit) height)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[unit]{a @symbol{gtk:unit} value with the unit for the return value}
-  @argument[height]{a double float with the paper height}
+  @argument[unit]{a @sym{gtk:unit} value for the unit for the return value}
+  @argument[height]{a double float for the paper height}
   @begin{short}
     The @fun{gtk:print-settings-paper-height} function gets the value of the
     @code{\"paper-height\"} setting, converted to @arg{unit}.
@@ -1114,7 +1116,7 @@
 (cffi:defcfun ("gtk_print_settings_get_use_color" print-settings-use-color)
     :boolean
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-use-color settings) => use-color}
   @syntax{(setf (gtk:print-settings-use-color settings) use-color)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1144,7 +1146,7 @@
 
 (cffi:defcfun ("gtk_print_settings_get_collate" print-settings-collate) :boolean
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-collate settings) => collate}
   @syntax{(setf (gtk:print-settings-collate settings) collate)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1174,7 +1176,7 @@
 
 (cffi:defcfun ("gtk_print_settings_get_reverse" print-settings-reverse) :boolean
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-reverse settings) => reverse}
   @syntax{(setf (gtk:print-settings-reverse settings) reverse)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1206,11 +1208,11 @@
 (cffi:defcfun ("gtk_print_settings_get_duplex" print-settings-duplex)
     print-duplex
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-duplex settings) => duplex}
   @syntax{(setf (gtk:print-settings-duplex settings) duplex)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[duplex]{a @symbol{gtk:print-duplex} value}
+  @argument[duplex]{a @sym{gtk:print-duplex} value}
   @begin{short}
     Whether to print the output in duplex.
   @end{short}
@@ -1238,7 +1240,7 @@
 (cffi:defcfun ("gtk_print_settings_get_quality" print-settings-quality)
     print-quality
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-quality settings) => quality}
   @syntax{(setf (gtk:print-settings-quality settings) quality)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1269,11 +1271,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_n_copies" print-settings-n-copies) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-n-copies settings) => n-copies}
   @syntax{(setf (gtk:print-settings-n-copies settings) n-copies)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[n-copies]{an integer with the number of copies}
+  @argument[n-copies]{an integer for the number of copies}
   @begin{short}
     The number of copies to print.
   @end{short}
@@ -1299,11 +1301,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_number_up" print-settings-number-up) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-number-up settings) => number-up}
   @syntax{(setf (gtk:print-settings-number-up settings) number-up)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[number-up]{an integer with the number of pages per sheet}
+  @argument[number-up]{an integer for the number of pages per sheet}
   @begin{short}
     The number of pages per sheet.
   @end{short}
@@ -1330,11 +1332,11 @@
 (cffi:defcfun ("gtk_print_settings_get_number_up_layout"
                print-settings-number-up-layout) number-up-layout
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-number-up-layout settings) => number-up-layout}
   @syntax{(setf (gtk:print-settings-number-up-layout settings) number-up-layout)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[number-up-layout]{a @symbol{gtk:number-up-layout} value}
+  @argument[number-up-layout]{a @sym{gtk:number-up-layout} value}
   @begin{short}
     Layout of page in number-up mode.
   @end{short}
@@ -1363,11 +1365,11 @@
 (cffi:defcfun ("gtk_print_settings_get_resolution" print-settings-resolution)
     :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-resolution settings) => resolution}
   @syntax{(setf (gtk:print-settings-resolution settings) resolution)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[resolution]{an integer with the resolution in dpi}
+  @argument[resolution]{an integer for the resolution in dpi}
   @begin{short}
     The resolution in dpi.
   @end{short}
@@ -1391,10 +1393,10 @@
 (cffi:defcfun ("gtk_print_settings_set_resolution_xy"
                print-settings-set-resolution-xy) :void
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[xresolution]{an integer with the horizontal resolution in dpi}
-  @argument[yresolution]{an integer with the vertical resolution in dpi}
+  @argument[xresolution]{an integer for the horizontal resolution in dpi}
+  @argument[yresolution]{an integer for the vertical resolution in dpi}
   @begin{short}
     Sets the values of the @code{\"resolution\"}, @code{\"resolution-x\"} and
     @code{\"resolution-y\"} settings.
@@ -1412,9 +1414,9 @@
 (cffi:defcfun ("gtk_print_settings_get_resolution_x"
                print-settings-resolution-x) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-15}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @return{The integer with the horizontal resolution in dpi.}
+  @return{The integer for the horizontal resolution in dpi.}
   @short{Gets the value of the @code{\"resolution-x\"} setting.}
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-resolution}
@@ -1430,9 +1432,9 @@
 (cffi:defcfun ("gtk_print_settings_get_resolution_y"
                print-settings-resolution-y) :int
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-15}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @return{The integer with the vertical resolution in dpi.}
+  @return{The integer for the vertical resolution in dpi.}
   @short{Gets the value of the @code{\"resolution-y\"} setting.}
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-resolution}
@@ -1456,11 +1458,11 @@
 (cffi:defcfun ("gtk_print_settings_get_printer_lpi" print-settings-printer-lpi)
     :double
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-printer-lpi settings) => lpi}
   @syntax{(setf (gtk:print-settings-printer-lip settings) lpi)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[lpi]{an integer with the resolution in lpi (lines per inch)}
+  @argument[lpi]{an integer for the resolution in lpi (lines per inch)}
   @begin{short}
     The resolution in lpi (lines per inch).
   @end{short}
@@ -1486,11 +1488,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_scale" print-settings-scale) :double
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-26}
   @syntax{(gtk:print-settings-scale settings) => scale}
   @syntax{(setf (gtk:print-settings-scale settings) scale)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[scale]{a double float with the scale in percent}
+  @argument[scale]{a double float for the scale in percent}
   @begin{short}
     The scale in percent.
   @end{short}
@@ -1517,11 +1519,11 @@
 (cffi:defcfun ("gtk_print_settings_get_print_pages" print-settings-print-pages)
     print-pages
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-print-pages settings) => pages}
   @syntax{(setf (gtk:print-settings-print-pages settings) pages)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[pages]{a @symbol{gtk:print-pages} value}
+  @argument[pages]{a @sym{gtk:print-pages} value}
   @begin{short}
     Which pages to print.
   @end{short}
@@ -1554,7 +1556,7 @@
 
 (defun print-settings-page-ranges (settings)
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2024-02-18}
   @syntax{(gtk:print-settings-page-ranges settings) => ranges}
   @syntax{(setf (gtk:print-settings-page-ranges settings) ranges)}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1605,11 +1607,11 @@
 (cffi:defcfun ("gtk_print_settings_get_page_set" print-settings-page-set)
     page-set
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-page-set settings) => page-set}
   @syntax{(setf (gtk:print-settings-page-set settings) page-set)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[page-set]{a @symbol{gtk:page-set} value}
+  @argument[page-set]{a @sym{gtk:page-set} value}
   @begin{short}
     The set of pages to print.
   @end{short}
@@ -1637,11 +1639,11 @@
 (cffi:defcfun ("gtk_print_settings_get_default_source"
                print-settings-default-source) :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-default-source settings) => default-source}
   @syntax{(setf (gtk:print-settings-default-source settings) default-source)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[default-source]{a string with the default source}
+  @argument[default-source]{a string for the default source}
   @begin{short}
     The default source.
   @end{short}
@@ -1669,11 +1671,11 @@
 (cffi:defcfun ("gtk_print_settings_get_media_type" print-settings-media-type)
     :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-media-type settings) => media-type}
   @syntax{(setf (gtk:print-settings-media-type settings) media-type)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[media-type]{a string with the media type}
+  @argument[media-type]{a string for the media type}
   @begin{short}
     The @fun{gtk:print-settings-media-type} function gets the value of the
     @code{\"media-type\"} setting.
@@ -1700,11 +1702,11 @@
 
 (cffi:defcfun ("gtk_print_settings_get_dither" print-settings-dither) :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-dither settings) => dither}
   @syntax{(setf (gtk:print-settings-dither settings) dither)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[dither]{a string with the dithering that is used}
+  @argument[dither]{a string for the dithering that is used}
   @begin{short}
     The @fun{gtk:print-settings-dither} function gets the value of the
     @code{\"dither\"} setting.
@@ -1731,11 +1733,11 @@
 (cffi:defcfun ("gtk_print_settings_get_finishings" print-settings-finishings)
     :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-finishings settings) => finishings}
   @syntax{(setf (gtk:print-settings-finishings settings) finishings)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[finishings]{a string with the finishings}
+  @argument[finishings]{a string for the finishings}
   @begin{short}
     The @fun{gtk:print-settings-finishings} gets the value of the
     @code{\"finishings\"} setting.
@@ -1762,11 +1764,11 @@
 (cffi:defcfun ("gtk_print_settings_get_output_bin" print-settings-output-bin)
     :string
  #+liber-documentation
- "@version{#2024-2-18}
+ "@version{#2025-07-27}
   @syntax{(gtk:print-settings-output-bin settings) => output-bin}
   @syntax{(setf (gtk:print-settings-output-bin settings) output-bin)}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[output-bin]{a string with the output bin}
+  @argument[output-bin]{a string for the output bin}
   @begin{short}
     The @fun{gtk:print-settings-output-bin} function gets the value of the
     @code{\"output-bin\"} setting.
@@ -1790,9 +1792,9 @@
 
 (defun print-settings-load-file (settings path)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[path]{a pathname or namestring with the filename to read the
+  @argument[path]{a pathname or namestring for the filename to read the
     settings from}
   @return{@em{True} on success.}
   @begin{short}
@@ -1819,10 +1821,10 @@
 
 (defun print-settings-load-key-file (settings keyfile group)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[keyfile]{a @type{g:key-file} instance to retrieve the settings from}
-  @argument[group]{a string with the name of the group to use, or @code{nil} to
+  @argument[group]{a string for the name of the group to use, or @code{nil} to
     use the default \"Print Settings\"}
   @return{@em{True} on success.}
   @begin{short}
@@ -1851,9 +1853,9 @@
 
 (defun print-settings-to-file (settings path)
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[path]{a pathname or namestring with the file to save to}
+  @argument[path]{a pathname or namestring for the file to save to}
   @return{@em{True} on success.}
   @begin{short}
     This function saves the print settings from settings to @arg{path}.
@@ -1878,10 +1880,10 @@
 
 (defun print-settings-to-key-file (settings keyfile group)
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
   @argument[keyfile]{a @type{g:key-file} instance to save the print settings to}
-  @argument[group]{a string with the group to add the settings to in the key
+  @argument[group]{a string for the group to add the settings to in the key
     file, or @code{nil} to use the default \"Print Settings\" group.}
   @begin{short}
     This function adds the print settings to the key file.
@@ -1902,9 +1904,9 @@
 (cffi:defcfun ("gtk_print_settings_to_gvariant" print-settings-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
- "@version{2024-2-18}
+ "@version{2025-07-27}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @return{The new @symbol{g:variant} parameter of @code{a{sv@}} type.}
+  @return{The new @sym{g:variant} parameter of @code{a{sv@}} type.}
   @begin{short}
     Serialize print settings to a @code{a{sv@}} variant.
   @end{short}

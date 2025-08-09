@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.color-button.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.12 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-button 'type)
- "@version{2024-5-21}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gtk:color-button} widget is a button which displays the currently
     selected color and allows to open a color chooser dialog to change the
@@ -125,8 +125,8 @@ colorbutton
   @end{dictionary}
   @begin[Examples]{dictionary}
     The example shows a color button. The button is initialized with the color
-    \"Blue\". The handler for the @code{\"color-set\"} signal prints the
-    selected color on the console.
+    \"Blue\". The handler for the @sig[gtk:color-button]{color-set} signal
+    prints the selected color on the console.
     @begin{pre}
 (defun do-color-button (&optional application)
   (let* ((button (make-instance 'gtk:color-button
@@ -154,30 +154,32 @@ colorbutton
     Use the @class{gtk:color-dialog-button} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"activate\" signal}
+    @begin[color-button::activate]{signal}
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:color-button} widget which received the
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:color-button} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal on the @class{gtk:color-button} widget is an action signal and
       emitting it causes the button to pop up its color chooser dialog.
       Since 4.4
-    @subheading{The \"color-set\" signal}
+    @end{signal}
+    @begin[color-button::color-set]{signal}
       @begin{pre}
 lambda (button)    :run-first
       @end{pre}
-      @begin[code]{table}
-        @entry[button]{The @class{gtk:color-button} widget which received the
+      @begin[code]{simple-table}
+        @entry[button]{The @class{gtk:color-button} widget that received the
           signal.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the user selects a color. When handling this
       signal, use the @fun{gtk:color-chooser-rgba} function to find out which
       color was just selected. Note that this signal is only emitted when the
       user changes the color. If you need to react to programmatic color
-      changes as well, use the @code{\"notify::color\"} signal.
+      changes as well, use the @sig[g:object]{notify::color} signal.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gtk:color-button-new}
   @see-constructor{gtk:color-button-new-with-rgba}
@@ -204,7 +206,7 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-modal)
       "Accessor"
       (documentation 'color-button-modal 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-button-modal object) => modal}
   @syntax{(setf (gtk:color-button-modal object) modal)}
   @argument[object]{a @class{gtk:color-button} widget}
@@ -236,7 +238,7 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-show-editor)
       "Accessor"
       (documentation 'color-button-show-editor 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-button-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-button-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-button} widget}
@@ -268,7 +270,7 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-title)
       "Accessor"
       (documentation 'color-button-title 'function)
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @syntax{(gtk:color-button-title object) => title}
   @syntax{(setf (gtk:color-button-title object) title)}
   @argument[object]{a @class{gtk:color-button} widget}
@@ -293,7 +295,7 @@ lambda (button)    :run-first
 
 (defun color-button-new ()
  #+liber-documentation
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @return{The new @class{gtk:color-button} widget.}
   @begin{short}
     Creates a new color button.
@@ -320,7 +322,7 @@ lambda (button)    :run-first
 
 (defun color-button-new-with-rgba (rgba)
  #+liber-documentation
- "@version{2024-5-21}
+ "@version{2024-05-21}
   @argument[rgba]{a @struct{gdk:rgba} color to set the current color with}
   @return{The new @class{gtk:color-button} widget.}
   @begin{short}

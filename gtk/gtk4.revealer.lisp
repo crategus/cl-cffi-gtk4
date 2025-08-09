@@ -179,10 +179,11 @@
     @slot[gtk:revealer]{reveal-child} property is set to @em{false}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:revealer} implementation uses the @code{:group} role of the
-    @sym{gtk:accessible-role} enumeration. The child widget of the
-    @class{gtk:revealer} widget, if set, is always available in the
-    accessibility tree, regardless of the state of the revealer widget.
+    The @class{gtk:revealer} implementation uses the
+    @val[gtk:accessible-role]{:group} role of the @sym{gtk:accessible-role}
+    enumeration. The child widget of the @class{gtk:revealer} widget, if set, is
+    always available in the accessibility tree, regardless of the state of the
+    revealer widget.
   @end{dictionary}
   @see-constructor{gtk:revealer-new}
   @see-slot{gtk:revealer-child}
@@ -207,17 +208,15 @@
 (setf (liber:alias-for-function 'revealer-child)
       "Accessor"
       (documentation 'revealer-child 'function)
- "@version{2025-04-23}
+ "@version{2025-08-03}
   @syntax{(gtk:revealer-child object) => child}
   @syntax{(setf (gtk:revealer-child object) child)}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:revealer]{child} slot of the @class{gtk:revealer}
-    class.
+    The accessor for the @slot[gtk:revealer]{child} slot of the
+    @class{gtk:revealer} class gets or sets the child widget of the revealer.
   @end{short}
-  The @fun{gtk:revealer-child} function gets the child widget of the revealer.
-  The @setf{gtk:revealer-child} function sets the child widget.
   @see-class{gtk:revealer}
   @see-class{gtk:widget}")
 
@@ -233,17 +232,15 @@
 (setf (liber:alias-for-function 'revealer-child-revealed)
       "Accessor"
       (documentation 'revealer-child-revealed 'function)
- "@version{2025-04-23}
+ "@version{2025-07-28}
   @syntax{(gtk:revealer-child-revealed object) => revealed}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[revealed]{a boolean whether the child widget is revealed}
   @begin{short}
-    Accessor of the @slot[gtk:revealer]{child-revealed} slot of the
-    @class{gtk:revealer} class.
+    The accessor for the @slot[gtk:revealer]{child-revealed} slot of the
+    @class{gtk:revealer} class gets whether the child widget is fully revealed,
+    in other words whether the transition to the revealed state is completed.
   @end{short}
-  The @fun{gtk:revealer-child-revealed} function returns whether the child
-  widget is fully revealed, in other words whether the transition to the
-  revealed state is completed.
   @see-class{gtk:revealer}")
 
 ;;; --- gtk:revealer-reveal-child ----------------------------------------------
@@ -258,22 +255,20 @@
 (setf (liber:alias-for-function 'revealer-reveal-child)
       "Accessor"
       (documentation 'revealer-reveal-child 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:revealer-reveal-child object) => reveal}
   @syntax{(setf (gtk:revealer-reveal-child object) reveal)}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[reveal]{@em{true} to reveal the child widget}
   @begin{short}
-    Accessor of the @slot[gtk:revealer]{reveal-child} slot of the
-    @class{gtk:revealer} class.
+    The accessor for the @slot[gtk:revealer]{reveal-child} slot of the
+    @class{gtk:revealer} class gets whether the child widget is currently
+    revealed, or tells the revealer to reveal or conceal its child widget.
   @end{short}
-  The @fun{gtk:revealer-reveal-child} function returns whether the child widget
-  is currently revealed. The @setf{gtk:revealer-reveal-child} function tells
-  the revealer to reveal or conceal its child widget.
 
   This function returns @em{true} as soon as the transition to the revealed
   state is started. To find out whether the child widget is fully revealed, that
-  is the transition is complete, use the @fun{gtk:revealer-child-revealed}
+  is, the transition is complete, use the @fun{gtk:revealer-child-revealed}
   function. The transition will be animated with the current transition type of
   the revealer.
   @see-class{gtk:revealer}
@@ -293,18 +288,16 @@
 (setf (liber:alias-for-function 'revealer-transition-duration)
       "Accessor"
       (documentation 'revealer-transition-duration 'function)
- "@version{2025-04-23}
+ "@version{2025-07-29}
   @syntax{(gtk:revealer-transition-duration object) => duration}
   @syntax{(setf (gtk:revealer-transition-duration object) duration)}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[duration]{an unsigned integer for the duration, in milliseconds}
   @begin{short}
-    Accessor of the @slot[gtk:revealer]{transition-duration} slot of the
-    @class{gtk:revealer} class.
+    The accessor for the @slot[gtk:revealer]{transition-duration} slot of the
+    @class{gtk:revealer} class gets or sets the amount of time in milliseconds
+    that transitions will take.
   @end{short}
-  The @fun{gtk:revealer-transition-duration} function returns the amount of
-  time in milliseconds that transitions will take. The
-  @setf{gtk:revealer-transition-duration} function sets the duration.
   @see-class{gtk:revealer}")
 
 ;;; --- gtk:revealer-transition-type -------------------------------------------
@@ -320,19 +313,17 @@
 (setf (liber:alias-for-function 'revealer-transition-type)
       "Accessor"
       (documentation 'revealer-transition-type 'function)
- "@version{2025-06-26}
+ "@version{2025-07-29}
   @syntax{(gtk:revealer-transition-type object) => setting}
   @syntax{(setf (gtk:revealer-transition-type object) setting)}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[setting]{a value of the @sym{gtk:revealer-transition-type}
     enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:revealer]{transition-type} slot of the
-    @class{gtk:revealer} class.
+    The accessor for the @slot[gtk:revealer]{transition-type} slot of the
+    @class{gtk:revealer} class gets or sets the type of animation that will be
+    used for transitions in the revealer.
   @end{short}
-  The @fun{gtk:revealer-transition-type} function gets the type of animation
-  that will be used for transitions in the revealer. The
-  @setf{gtk:revealer-transition-duration} function sets the type of animation.
   Available types include various kinds of fades and slides.
   @see-class{gtk:revealer}
   @see-symbol{gtk:revealer-transition-type}")

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.accessible-range.lisp
 ;;;
-;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GTK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -56,14 +56,14 @@
 (setf (liber:alias-for-class 'accessible-range)
       "Interface"
       (documentation 'accessible-range 'type)
- "@version{2024-11-5}
+ "@version{2025-07-25}
   @begin{short}
     The @class{gtk:accessible-range} interface describes ranged controls, for
     example, controls which have a single value within an allowed range and
     that can optionally be changed by the user.
   @end{short}
   The interface is expected to be implemented by controls using the following
-  roles of the @symbol{gtk:accessible-role} enumeration:
+  roles of the @sym{gtk:accessible-role} enumeration:
   @begin{itemize}
     @item{:meter}
     @item{:progress-bar}
@@ -75,7 +75,7 @@
 
   In addition to this interface, its implementors are expected to provide the
   correct values for the following properties of the
-  @symbol{gtk:accessible-property} enumeration:
+  @sym{gtk:accessible-property} enumeration:
   @begin{itemize}
     @item{:value-max}
     @item{:value-min}
@@ -98,7 +98,7 @@
 #+nil
 (defun accessible-range-set-current-value (accessible value)
  #+liber-documentation
- "@version{#2024-11-5}
+ "@version{#2024-11-05}
   @argument[accessible]{a @class{gtk:accessible-range} object}
   @argument[value]{a number coerced to a double float for the value}
   @begin{short}
