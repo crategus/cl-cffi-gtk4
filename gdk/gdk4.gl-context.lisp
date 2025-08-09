@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.gl-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; See <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -118,7 +118,7 @@
 (setf (liber:alias-for-symbol 'gl-api)
       "GFlags"
       (liber:symbol-documentation 'gl-api)
- "@version{#2023-8-3}
+ "@version{#2025-07-30}
   @begin{declaration}
 (gobject:define-gflags \"GdkGLAPI\" gl-api
   (:export t
@@ -128,11 +128,11 @@
   (:gles #.(ash 1 1)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No API.}
       @entry[:gl]{The OpenGL API.}
       @entry[:gles]{The OpenGL ES API.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The list of the different APIs that a @class{gdk:gl-context} object can
@@ -164,7 +164,7 @@
 
 #+liber-documentation
 (setf (documentation 'gl-context 'type)
- "@version{#2023-8-3}
+ "@version{#2025-08-02}
   @begin{short}
     The @class{gdk:gl-context} object is an object representing the platform
     specific OpenGL draw context.
@@ -230,8 +230,7 @@
 
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "allowed-apis" 'gl-context) t)
- "The @code{allowed-apis} property of type @symbol{gdk:gl-api} (Read / Write)
-  @br{}
+ "The @code{allowed-apis} property of type @sym{gdk:gl-api} (Read / Write) @br{}
   The allowed APIs. Since 4.6 @br{}
   Default value: @code{'(:gl :gles)}")
 
@@ -239,19 +238,18 @@
 (setf (liber:alias-for-function 'gl-context-allowed-apis)
       "Accessor"
       (documentation 'gl-context-allowed-apis 'function)
- "@version{#2023-8-4}
+ "@version{#2025-08-02}
   @syntax{(gdk:gl-context-allowed-apis object) => apis}
   @syntax{(setf (gdk:gl-context-allowed-apis object) apis)}
   @argument[object]{a @class{gdk:gl-context} object}
-  @argument[apis]{a @symbol{gdk:gl-apis} value}
+  @argument[apis]{a @sym{gdk:gl-api} value}
   @begin{short}
-    Accessor of the @slot[gdk:gl-context]{allowed-apis} slot of the
-    @class{gdk:gl-context} class.
+    The accessor for the @slot[gdk:gl-context]{allowed-apis} slot of the
+    @class{gdk:gl-context} class gets or sets the allowed APIs.
   @end{short}
-  The @fun{gdk:gl-context-allowed-apis} function gets the allowed APIs. The
-  @setf{gdk:gl-context-allowed-apis} function sets the allowed APIs. When the
-  @fun{gdk:gl-context-realize} function is called, only the allowed APIs will
-  be tried. If you set this to @code{:none}, realizing will always fail.
+  When the @fun{gdk:gl-context-realize} function is called, only the allowed
+  APIs will be tried. If you set this to @val[gdk:gl-api]{:none}, realizing
+  will always fail.
 
   If you set it on a realized context, the property will not have any effect.
   It is only relevant during the @fun{gdk:gl-context-realize} function.
@@ -275,16 +273,16 @@
 (setf (liber:alias-for-function 'gl-context-api)
       "Accessor"
       (documentation 'gl-context-api 'function)
- "@version{#2023-8-4}
+ "@version{#2025-08-02}
   @syntax{(gdk:gl-context-api object) => api}
   @argument[object]{a @class{gdk:gl-context} object}
-  @argument[api]{a @symbol{gdk:gl-api} value}
+  @argument[api]{a @sym{gdk:gl-api} value}
   @begin{short}
     Accessor of the @slot[gdk:gl-context]{api} slot of the
-    @class{gdk:gl-context} class.
+    @class{gdk:gl-context} class gets the API currently in use.
   @end{short}
-  The @fun{gdk:gl-context-api} function gets the API currently in use. If the
-  renderer has not been realized yet, @code{:none} is returned.
+  If the renderer has not been realized yet, @val[gdk:gl-api]{:none} is
+  returned.
 
   Since 4.6
   @see-class{gdk:gl-context}
@@ -303,7 +301,7 @@
 (setf (liber:alias-for-function 'gl-context-shared-context)
       "Accessor"
       (documentation 'gl-context-shared-context 'function)
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @syntax{(gdk:gl-context-shared-context object) => context}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[context]{a @class{gdk:gl-context} object or @code{nil}}
@@ -324,7 +322,7 @@
 (cffi:defcfun ("gdk_gl_context_get_display" gl-context-display)
     (g:object display)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{The @class{gdk:display} object or @code{nil}.}
   @begin{short}
@@ -343,7 +341,7 @@
 (cffi:defcfun ("gdk_gl_context_get_surface" gl-context-surface)
     (g:object surface)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{The @class{gdk:surface} object or @code{nil}.}
   @begin{short}
@@ -366,12 +364,11 @@
 
 (defun gl-context-version (context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2025-08-04}
+  @syntax{(gdk:gl-context-version context) => major, minor}
   @argument[context]{a @class{gdk:gl-context} object}
-  @begin{return}
-    @arg{major} - an integer with the major version @br{}
-    @arg{minor} - an integer with the minor version
-  @end{return}
+  @argument[major]{an integer for the major version}
+  @argument[minor]{an integer for the minor version}
   @begin{short}
     Retrieves the OpenGL version of the GL context.
   @end{short}
@@ -406,21 +403,16 @@
 
 (defun gl-context-required-version (context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2025-08-04}
   @syntax{(gdk:gl-context-required-version object) => major, minor}
   @syntax{(setf gdk:gl-context-required-version object) (list major minor))}
   @argument[context]{a @class{gdk:gl-context} object}
-  @begin{return}
-    @arg{major} - an integer with the major version to request @br{}
-    @arg{minor} - an integer with the minor version to request
-  @end{return}
+  @argument[major]{an integer for the major version to request}
+  @argument[minor]{an integer for the minor version to request}
   @begin{short}
-    The @fun{gdk:gl-context-required-version} function retrieves the major and
-    minor version of OpenGL to request.
+    Gets or sets the major and minor version of OpenGL to request.
   @end{short}
-  The @setf{gdk:gl-context-required-version} function sets the major and minor
-  version to request. Setting @arg{major} and @arg{minor} to zero will use the
-  default values.
+  Setting @arg{major} and @arg{minor} to zero will use the default values.
 
   The @class{gdk:gl-context} object must not be realized or made current prior
   to calling this function.
@@ -447,7 +439,7 @@
 (cffi:defcfun ("gdk_gl_context_get_debug_enabled"
                gl-context-debug-enabled) :boolean
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @syntax{(gdk:gl-context-debug-enabled object) => enabled}
   @syntax{(setf gdk:gl-context-debug-enabled object) enabled)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -482,7 +474,7 @@
 (cffi:defcfun ("gdk_gl_context_get_forward_compatible"
                gl-context-forward-compatible) :boolean
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @syntax{(gdk:gl-context-forward-compatible object) => setting}
   @syntax{(setf gdk:gl-context-forward-compatible object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -521,7 +513,7 @@
 
 (cffi:defcfun ("gdk_gl_context_get_use_es" gl-context-use-es) :boolean
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @syntax{(gdk:gl-context-uses-es object) => setting}
   @syntax{(setf gdk:gl-context-use-es object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -553,7 +545,7 @@
 
 (cffi:defcfun ("gdk_gl_context_is_legacy" gl-context-is-legacy) :boolean
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{@em{True} if the GL context is in legacy mode.}
   @begin{short}
@@ -608,7 +600,7 @@
 
 (cffi:defcfun ("gdk_gl_context_make_current" gl-context-make-current) :void
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @argument[context]{a @class{gdk:gl-context} object}
   @begin{short}
     Makes the GL context the current one.
@@ -625,7 +617,7 @@
 (cffi:defcfun ("gdk_gl_context_get_current" gl-context-current)
     (g:object gl-context)
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @return{The current @class{gdk:gl-context} object, or @code{nil}.}
   @begin{short}
     Retrieves the current GL context.
@@ -640,7 +632,7 @@
 
 (cffi:defcfun ("gdk_gl_context_clear_current" gl-context-clear-current) :void
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-08-03}
   @begin{short}
     Clears the current GL context.
   @end{short}

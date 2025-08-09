@@ -66,7 +66,7 @@
 (setf (liber:alias-for-symbol 'device-pad-feature)
       "GEnum"
       (liber:symbol-documentation 'device-pad-feature)
- "@version{2025-2-28}
+ "@version{2025-07-30}
   @begin{declaration}
 (gobject:define-genum \"GdkDevicePadFeature\" device-pad-feature
   (:export t
@@ -76,11 +76,11 @@
   :strip)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:button]{A button.}
       @entry[:ring]{A ring-shaped interactive area.}
       @entry[:strip]{A straight interactive area.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     A pad feature.
@@ -101,10 +101,11 @@
 (setf (liber:alias-for-class 'device-pad)
       "Interface"
       (documentation 'device-pad 'type)
- "@version{2025-2-28}
+ "@version{2025-02-28}
   @begin{short}
     The @class{gdk:device-pad} interface is an interface implemented by devices
-    of @code{:tablet-pad} type of the @symbol{gdk:input-source} enumeration.
+    of @val[gdk:input-source]{:tablet-pad} type of the @sym{gdk:input-source}
+    enumeration.
   @end{short}
   It allows querying the features provided by the pad device
 
@@ -120,8 +121,9 @@
   (current) for each given group, different groups may have different current
   modes. The number of available modes in a group can be found out through the
   @fun{gdk:device-pad-group-n-modes} function, and the current mode for a
-  given group will be notified through events of @code{:pad-group-mode} type of
-  the @symbol{gdk:event-type} enumeration.
+  given group will be notified through events of
+  @val[gdk:event-type]{:pad-group-mode} type of the @sym{gdk:event-type}
+  enumeration.
   @see-class{gdk:device}
   @see-symbol{gdk:input-source}
   @see-symbol{gdk:event-type}")
@@ -132,10 +134,10 @@
 
 (cffi:defcfun ("gdk_device_pad_get_n_groups" device-pad-n-groups) :int
  #+liber-documentation
- "@version{#2025-2-28}
+ "@version{#2025-08-04}
   @argument[pad]{a @class{gdk:device-pad} object}
   @begin{return}
-    The integer with the number of button/ring/strip groups in the pad device.
+    The integer for the number of button/ring/strip groups in the pad device.
   @end{return}
   @begin{short}
     Returns the number of groups this pad device has.
@@ -153,11 +155,11 @@
 
 (cffi:defcfun ("gdk_device_pad_get_group_n_modes" device-pad-group-n-modes) :int
  #+liber-documentation
- "@version{#2025-2-28}
+ "@version{#2025-08-04}
   @argument[pad]{a @class{gdk:device-pad} object}
   @argument[index]{an integer for the group to get the number of available
     modes from}
-  @return{The integer with the number of modes available in the group,}
+  @return{The integer for the number of modes available in the group.}
   @begin{short}
     Returns the number of modes that the group may have.
   @end{short}
@@ -173,12 +175,11 @@
 
 (cffi:defcfun ("gdk_device_pad_get_n_features" device-pad-n-features) :int
  #+liber-documentation
- "@version{#2025-2-28}
+ "@version{#2025-07-31}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @argument[feature]{a @symbol{gdk:device-pad-feature} value for the pad
-    feature}
+  @argument[feature]{a @sym{gdk:device-pad-feature} value for the pad feature}
   @begin{return}
-    The integer with the amount of elements of type feature that this pad has.
+    The integer for the amount of elements of type feature that this pad has.
   @end{return}
   @begin{short}
     Returns the number of features a tablet pad has.
@@ -196,13 +197,13 @@
 
 (cffi:defcfun ("gdk_device_pad_get_feature_group" device-pad-feature-group) :int
  #+liber-documentation
- "@version{#2025-2-28}
+ "@version{#2025-07-31}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @argument[feature]{a @symbol{gdk:device-pad-feature} value for the pad
-    feature to get the group from}
+  @argument[feature]{a @sym{gdk:device-pad-feature} value for the pad feature
+    to get the group from}
   @argument[index]{an integer for the index of the feature to get the
     group from}
-  @return{The integer with the group number of the queried pad feature.}
+  @return{The integer for the group number of the queried pad feature.}
   @begin{short}
     Returns the group the given feature and @arg{index} belong to, or -1 if
     feature/index do not exist in pad .

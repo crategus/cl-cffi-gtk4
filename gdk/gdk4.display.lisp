@@ -124,7 +124,7 @@
 
 #+liber-documentation
 (setf (documentation 'display 'type)
- "@version{2025-05-01}
+ "@version{2025-08-04}
   @begin{short}
     The @class{gdk:display} object is the GDK representation of a workstation.
   @end{short}
@@ -144,57 +144,62 @@
   accessed with the @fun{gdk:display-monitor-at-surface} function and similar
   APIs.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"closed\" signal}
+    @begin[display::closed]{signal}
       @begin{pre}
 lambda (display is-error)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
        @entry[is-error]{The boolean that is @em{true} if @arg{display} was
          closed due to an error.}
-      @end{table}
+      @end{simple-table}
       Emitted when the connection to the windowing system for @arg{display} is
       closed.
-    @subheading{The \"opened\" signal}
+    @end{signal}
+    @begin[display::opened]{signal}
       @begin{pre}
 lambda (display)   :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
-      @end{table}
+      @end{simple-table}
       Emitted when the connection to the windowing system for @arg{display} is
       opened.
-    @subheading{The \"seat-added\" signal}
+    @end{signal}
+    @begin[display::seat-added]{signal}
       @begin{pre}
 lambda (display seat)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
         @entry[seat]{The @class{gdk:seat} object that was just added.}
-      @end{table}
+      @end{simple-table}
       Emitted whenever a new seat is made known to the windowing system.
-    @subheading{The \"seat-removed\" signal}
+    @end{signal}
+    @begin[display::seat-removed]{signal}
       @begin{pre}
 lambda (display seat)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
         @entry[seat]{The @class{gdk:seat} object that was just removed.}
-      @end{table}
+      @end{simple-table}
       Emitted whenever a seat is removed by the windowing system.
-  @subheading{The \"setting-changed\" signal}
-    @begin{pre}
+    @end{signal}
+    @begin[display::setting-changed]{signal}
+      @begin{pre}
 lambda (display setting)    :run-last
-    @end{pre}
-    @begin[code]{table}
-      @entry[display]{The @class{gdk:display} object on which the signal is
-        emitted.}
-      @entry[setting]{The string with the name of the setting that changed.}
-    @end{table}
+      @end{pre}
+      @begin[code]{simple-table}
+        @entry[display]{The @class{gdk:display} object on which the signal is
+          emitted.}
+        @entry[setting]{The string for the name of the setting that changed.}
+      @end{simple-table}
+    @end{signal}
   @end{dictionary}
   @see-slot{gdk:display-composited}
   @see-slot{gdk:display-dmabuf-formats}
@@ -756,11 +761,11 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
     (g:object monitor)
  #+liber-documentation
- "@version{#2025-05-01}
+ "@version{#2025-08-04}
   @argument[display]{a @class{gdk:display} object}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{return}
-    The @class{gdk:monitor} object with the largest overlap with @arg{surface}.
+    The @class{gdk:monitor} object for the largest overlap with @arg{surface}.
   @end{return}
   @begin{short}
     Gets the monitor in which the largest area of the surface resides.
@@ -856,9 +861,9 @@ lambda (display setting)    :run-last
 
 (defun display-startup-notification-id (display)
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2025-08-04}
   @argument[display]{a @class{gdk:display} object}
-  @return{The string with the startup notification ID for @arg{display}.}
+  @return{The string for the startup notification ID for @arg{display}.}
   @begin{short}
     Gets the startup notification ID for a Wayland display, or @code{nil} if no
     ID has been defined.
@@ -898,11 +903,11 @@ lambda (display setting)    :run-last
 
 (defun display-map-keyval (display keyval)
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2025-08-04}
   @argument[display]{a @class{gdk:display} object}
   @argument[keyval]{an unsigned integer for the keyval}
   @begin{return}
-    The list of integer with the grouped keycode/group/level combinations,
+    The list of integer for the grouped keycode/group/level combinations,
     or @code{nil}.
   @end{return}
   @begin{short}
@@ -1002,18 +1007,18 @@ lambda (display setting)    :run-last
 
 (defun display-translate-key (display keycode state group)
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2025-07-31}
+  @syntax{(gdk:display-translate-key display keycode state group) =>
+    keyval, effective, level, consumed}
   @argument[display]{a @class{gdk:display} object}
   @argument[keycode]{an unsigned integer for the keycode}
-  @argument[state]{a @symbol{gdk:modifier-type} state}
+  @argument[state]{a @sym{gdk:modifier-type} state}
   @argument[group]{an integer for the active keyboard group}
-  @begin{return}
-    @arg{keyval} - an unsigned integer with the keyval @br{}
-    @arg{effective} - an integer with the effective group @br{}
-    @arg{level} - an integer with the level @br{}
-    @arg{consumend} - a @symbol{gdk:modifier-type} value with the modifiers
-      that were used to determine the group or level
-  @end{return}
+  @argument[keyval]{an unsigned integer for the keyval}
+  @argument[effective]{an integer for the effective group}
+  @argument[level]{an integer for the level}
+  @argument[consumend]{a @sym{gdk:modifier-type} value for the modifiers that
+    were used to determine the group or level}
   @begin{short}
     Translates a keycode into a keyval, effective group, and level.
   @end{short}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.clipboard.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'clipboard 'type)
- "@version{2023-7-30}
+ "@version{2025-06-29}
   @begin{short}
     The @class{gdk:clipboard} object represents data shared between applications
     or inside an application.
@@ -124,15 +124,16 @@
   @fun{gdk:clipboard-read-text-async} or @fun{gdk:clipboard-read-texture-async}
   functions.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"changed\" signal}
+    @begin[clipboard::changed]{signal}
       @begin{pre}
 lambda (clipboard)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[clipboard]{The @class{gdk:clipboard} object on which the signal
          was emitted.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when the clipboard changes ownership.
+    @end{signal}
   @end{dictionary}
   @see-slot{gdk:clipboard-content}
   @see-slot{gdk:clipboard-display}
@@ -157,7 +158,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-content)
       "Accessor"
       (documentation 'clipboard-content 'function)
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @syntax{(gdk:clipboard-content object) => content}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[content]{a @class{gdk:content-provider} instance}
@@ -189,7 +190,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-display)
       "Accessor"
       (documentation 'clipboard-display 'function)
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @syntax{(gdk:clipboard-display object) => display}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[display]{a @class{gdk:display} object}
@@ -213,7 +214,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-formats)
       "Accessor"
       (documentation 'clipboard-formats 'function)
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @syntax{(gdk:clipboard-formats object) => formats}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -238,7 +239,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-local)
       "Accessor"
       (documentation 'clipboard-local 'function)
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @syntax{(gdk:clipboard-local object) => local}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[local]{a boolean whether the contents of the clipboard are owned
@@ -258,7 +259,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
  #+liber-documentation
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @return{@em{True} if the clipboard is local.}
   @begin{short}
@@ -286,13 +287,13 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-store-async (clipboard priority cancellable func)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[priority]{an integer for the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the request is satisfied}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the request is satisfied}
   @begin{short}
     Asynchronously instructs the clipboard to store its contents remotely to
     preserve them for later usage.
@@ -421,14 +422,14 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-value-async (clipboard gtype priority cancellable func)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[gtype]{a @class{g:type-t} type ID to read}
-  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[priority]{an integer for the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the request is satisfied}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the request is satisfied}
   @begin{short}
     Asynchronously request the clipboard contents converted to the given
     @arg{gtype}.
@@ -467,11 +468,13 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-value-finish (clipboard result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{The @symbol{g:value} instance which holds the value of the content of
-    @arg{clipboard}.}
+  @begin{return}
+    The @sym{g:value} instance that holds the value of the content of
+    @arg{clipboard}.
+  @end{return}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
     @fun{gdk:clipboard-read-value-async} function.
@@ -497,12 +500,12 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-texture-async (clipboard cancellable func)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the request is satisfied}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the request is satisfied}
   @begin{short}
     Asynchronously request the clipboard contents converted to a
     @class{gdk:pixbuf} object.
@@ -539,11 +542,13 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-texture-finish (clipboard result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-08-04}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{The @class{gdk:texture} object which holds the value of the content
-    of @arg{clipboard}.}
+  @begin{return}
+    The @class{gdk:texture} object which holds the value of the content of
+    @arg{clipboard}.
+  @end{return}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
     @fun{gdk:clipboard-read-texture-async} function.
@@ -568,12 +573,12 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-text-async (clipboard cancellable func)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the request is satisfied}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the request is satisfied}
   @begin{short}
     Asynchronously request the clipboard contents converted to a string.
   @end{short}
@@ -630,7 +635,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_content" clipboard-set-content) :boolean
  #+liber-documentation
- "@version{2023-7-30}
+ "@version{2023-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[content]{a new @class{gdk:content-provider} object or @code{nil}
     to clear the clipboard}
@@ -662,7 +667,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-set (clipboard gtype value)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[gtype]{a @class{g:type-t} type ID of value to set}
   @argument[value]{a Lisp value to be set}
@@ -670,9 +675,9 @@ lambda (clipboard)    :run-last
     Sets the clipboard to contain the given @arg{value}.
   @end{short}
   @begin[Notes]{dictionary}
-    This function intializes a @symbol{g:value} instance  of the given
-    @arg{gtype}, stores @arg{value} in the @symbol{g:value} instance and calls
-    the @fun{gdk:clipboard-set-value} function.
+    This function intializes a @sym{g:value} instance  of the given @arg{gtype},
+    stores @arg{value} in the @sym{g:value} instance and calls the
+    @fun{gdk:clipboard-set-value} function.
   @end{dictionary}
   @see-class{gdk:clipboard}
   @see-class{g:type-t}"
@@ -708,13 +713,13 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_value" clipboard-set-value) :void
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-07-30}
   @argument[clipoboard]{a @class{gdk:clipboard} object}
-  @argument[gvalue]{a @symbol{g:value} instance}
+  @argument[gvalue]{a @sym{g:value} instance}
   @short{Sets the clipboard to contain the given @arg{gvalue}.}
   @begin[Notes]{dictionary}
     This function is called from the @fun{gdk:clipboard-set} function to store
-    the @symbol{g:value} instance into the clipboard.
+    the @sym{g:value} instance into the clipboard.
   @end{dictionary}
   @see-class{gdk:clipboard}
   @see-symbol{g:value}
@@ -730,9 +735,9 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_text" clipboard-set-text) :void
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2025-08-02}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[text]{a string with the text to put into the clipboard}
+  @argument[text]{a string for the text to put into the clipboard}
   @short{Puts the given @arg{text} into the clipboard.}
   @see-class{gdk:clipboard}"
   (clipboard (g:object clipboard))
@@ -746,7 +751,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_texture" clipboard-set-texture) :void
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2023-07-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[texture]{a @class{gdk:texture} object to put into the clipboard}
   @short{Puts the given @arg{texture} into the clipboard.}

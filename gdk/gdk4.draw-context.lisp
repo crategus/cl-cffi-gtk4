@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.draw-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -160,10 +160,10 @@
 
 (defun draw-context-begin-frame (context region)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2025-07-31}
   @argument[context]{a @class{gdk:draw-context} object used to draw the frame}
-  @argument[region]{a @symbol{cairo:region-t} instance with the minimum region
-    that should be drawn}
+  @argument[region]{a @sym{cairo:region-t} instance for the minimum region that
+    should be drawn}
   @begin{short}
     Indicates that you are beginning the process of redrawing @arg{region} on
     the surface of @arg{context}.
@@ -216,7 +216,7 @@
 
 (defun draw-context-end-frame (context)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2024-11-07}
   @argument[context]{a @class{gdk:draw-context} object}
   @begin{short}
     Ends a drawing operation started with the @fun{gdk:draw-context-begin-frame}
@@ -251,11 +251,13 @@
 
 (defun draw-context-is-in-frame (context)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2024-11-07}
   @argument[context]{a @class{gdk:draw-context} object}
-  @return{@em{True} if the draw context is between the
-  @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
-  function calls.}
+  @begin{return}
+    @em{True} if the draw context is between the
+    @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
+    function calls.
+  @end{return}
   @begin{short}
     Returns @em{true} if @arg{context} is in the process of drawing to its
     surface after a call to the @fun{gdk:draw-context-begin-frame} function and
@@ -288,10 +290,12 @@
 
 (defun draw-context-frame-region (context)
  #+liber-documentation
- "@version{2024-12-29}
+ "@version{2025-07-31}
   @argument[context]{a @class{gdk:draw-context} object}
-  @return{The @symbol{cairo:region-t} instance or @code{cffi:null-pointer} if
-    not drawing a frame.}
+  @begin{return}
+    The @sym{cairo:region-t} instance or @code{cffi:null-pointer} if not
+    drawing a frame.
+  @end{return}
   @begin{short}
     Retrieves the region that is currently in the process of being repainted.
   @end{short}

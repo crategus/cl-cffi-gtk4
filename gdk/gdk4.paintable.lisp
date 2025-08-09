@@ -81,7 +81,7 @@
 (setf (liber:alias-for-symbol 'paintable-flags)
       "GFlags"
       (liber:symbol-documentation 'paintable-flags)
- "@version{2025-05-09}
+ "@version{2025-07-24}
   @begin{declaration}
 (gobject:define-gflags \"GdkPaintableFlags\" paintable-flags
   (:export t
@@ -90,12 +90,12 @@
   (:static-contents #.(ash 1 1)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
-      @entry[:static-size]{The size is immutable. The @code{\"invalidate-size\"}
-      signal will never be emitted.}
+    @begin[code]{simple-table}
+      @entry[:static-size]{The size is immutable. The
+        @sig[gdk:paintable]{invalidate-size} signal will never be emitted.}
       @entry[:static-contents]{The content is immutable. The
-        @code{\"invalidate-contents\"} signal will never be emitted.}
-    @end{table}
+        @sig[gdk:paintable]{invalidate-contents} signal will never be emitted.}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags about a @class{gdk:paintable} object.
@@ -137,7 +137,7 @@
 (setf (liber:alias-for-class 'paintable)
       "Interface"
       (documentation 'paintable 'type)
- "@version{2025-05-09}
+ "@version{2025-07-24}
   @begin{short}
     The @class{gdk:paintable} interface is a simple interface used by GDK and
     GTK to represent objects that can be painted anywhere at any size without
@@ -162,49 +162,51 @@
   A @class{gdk:paintable} object may change its contents, meaning that it will
   now produce a different output with the same snapshot. Once that happens, it
   will call the @fun{gdk:paintable-invalidate-contents} function which will
-  emit the @code{\"invalidate-contents\"} signal. If a paintable is known to
-  never change its contents, it will set the @code{:static-contents} flag. If a
-  consumer cannot deal with changing contents, it may call the
-  @fun{gdk:paintable-current-image} function which will return a static
-  paintable and use that.
+  emit the @sig[gdk:paintable]{invalidate-contents} signal. If a paintable is
+  known to never change its contents, it will set the
+  @val[gdk:paintable-flags]{:static-contents} flag. If a consumer cannot deal
+  with changing contents, it may call the @fun{gdk:paintable-current-image}
+  function which will return a static paintable and use that.
 
   A paintable can report an intrinsic (or preferred) size or aspect ratio it
   wishes to be rendered at, though it does not have to. Consumers of the
   interface can use this information to layout thepaintable appropriately. Just
   like the contents, the size of a paintable can change. A paintable will
   indicate this by calling the @fun{gdk:paintable-invalidate-size} function
-  which will emit the @code{\"invalidate-size\"} signal. And just like for
-  contents, if a paintable is known to never change its size, it will set the
-  @code{:static-size} flag.
+  which will emit the @sig[gdk:paintable]{invalidate-size} signal. And just like
+  for contents, if a paintable is known to never change its size, it will set
+  the @val[gdk:paintable-flags]{:static-size} flag.
 
   Besides API for applications, there are some functions that are only useful
   for implementing subclasses and should not be used by applications:
   @fun{gdk:paintable-invalidate-contents}, @fun{gdk:paintable-invalidate-size},
   @fun{gdk:paintable-new-empty}.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"invalidate-contents\" signal}
+    @begin[paintable::invalidate-contents]{signal}
       @begin{pre}
 lambda (paintable)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[paintable]{The @class{gdk:paintable} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when the contents of the paintable change. Examples for such an
       event would be videos changing to the next frame or the icon theme for an
       icon changing.
-    @subheading{The \"invalidate-size\" signal}
+    @end{signal}
+    @begin[paintable::invalidate-size]{signal}
       @begin{pre}
 lambda (paintable)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[paintable]{The @class{gdk:paintable} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when the intrinsic size of the paintable changes. This means the
       values reported by at least one of the
       @fun{gdk:paintable-intrinsic-width}, @fun{gdk:paintable-intrinsic-height}
       or @fun{gdk:paintable-intrinsic-aspect-ratio} function has changed.
       Examples for such an event would be a paintable displaying the contents
       of a toplevel surface being resized.
+    @end{signal}
   @end{dictionary}
   @see-class{gdk:texture}
   @see-class{gtk:image}
@@ -247,7 +249,7 @@ lambda (paintable)    :run-last
   (get-intrinsic-aspect-ratio (:double (paintable (g:object paintable)))))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[snapshot]{Virtual function called by the
         @fun{gdk:paintable-snapshot} function. You must implement the
         @fun{gdk:paintable-snapshot-impl} method, when subclassing from the
@@ -271,7 +273,7 @@ lambda (paintable)    :run-last
         @fun{gdk:paintable-intrinsic-aspect-ratio} function. You must implement
         the @fun{gdk:paintable-get-intrinsic-aspect-ratio-impl} method, when
         subclassing from the @class{gdk:paintable} interface.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   The list of functions that can be implemented for the @class{gdk:paintable}
   interface.
@@ -617,14 +619,14 @@ lambda (paintable)    :run-last
 
 (cffi:defcfun ("gdk_paintable_get_flags" paintable-flags) paintable-flags
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{The @symbol{gdk:paintable-flags} value for this paintable.}
+  @return{The @sym{gdk:paintable-flags} value for this paintable.}
   @begin{short}
     Get flags for the paintable.
   @end{short}
-  This is oftentimes useful for optimizations. See the
-  @symbol{gdk:paintable-flags} documentation for the flags and what they mean.
+  This is oftentimes useful for optimizations. See the @sym{gdk:paintable-flags}
+  documentation for the flags and what they mean.
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-flags}"
   (paintable (g:object paintable)))
@@ -638,10 +640,10 @@ lambda (paintable)    :run-last
 (cffi:defcfun ("gdk_paintable_get_intrinsic_width" paintable-intrinsic-width)
     :int
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{return}
-    The integer with the the intrinsic width of @arg{paintable} or 0 if none.
+    The integer for the the intrinsic width of @arg{paintable} or 0 if none.
   @end{return}
   @begin{short}
     Gets the preferred width the paintable would like to be displayed at.
@@ -666,10 +668,10 @@ lambda (paintable)    :run-last
 (cffi:defcfun ("gdk_paintable_get_intrinsic_height" paintable-intrinsic-height)
     :int
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-04}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{return}
-    The integer with the the intrinsic height of @arg{paintable} or 0 if none.
+    The integer for the the intrinsic height of @arg{paintable} or 0 if none.
   @end{return}
   @begin{short}
     Gets the preferred height the paintable would like to be displayed at.
@@ -694,10 +696,10 @@ lambda (paintable)    :run-last
 (cffi:defcfun ("gdk_paintable_get_intrinsic_aspect_ratio"
                paintable-intrinsic-aspect-ratio) :double
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-03}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{return}
-    The double float with the intrinsic aspect ratio of @arg{paintable}
+    The double float for the intrinsic aspect ratio of @arg{paintable}
     or 0 if none.
   @end{return}
   @begin{short}
@@ -740,7 +742,9 @@ lambda (paintable)    :run-last
 
 (defun paintable-compute-concrete-size (paintable swidth sheight dwidth dheight)
  #+liber-documentation
- "@version{#2025-05-09}
+ "@version{#2025-08-04}
+  @syntax{(gdk:paintable-compute-concrete-size paintable swidth sheight
+    dwidth dheight) => cwidth, cheight}
   @argument[paintable]{a @class{gdk:paintable} object}
   @argument[swidth]{a number coerced to a double float for the width
     @arg{paintable} could be drawn into or 0.0 if unknown}
@@ -750,10 +754,8 @@ lambda (paintable)    :run-last
     @arg{paintable} would be drawn into if no other constraints were given}
   @argument[dheight]{a number coerced to a double float for the height
     @arg{paintable} would be drawn into if no other constraints were given}
-  @begin{return}
-    @arg{cwidth} - a double float with the concrete width computed @br{}
-    @arg{cheight} - a double float with the concrete height computed
-  @end{return}
+  @argument[cwidth]{a double float for the concrete width computed}
+  @argument[cheight]{a double float for the concrete height computed}
   @begin{short}
     Applies the sizing algorithm outlined in
     https://drafts.csswg.org/css-images-3/default-sizing to the given
@@ -785,7 +787,7 @@ lambda (paintable)    :run-last
 (cffi:defcfun ("gdk_paintable_invalidate_contents"
                paintable-invalidate-contents) :void
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
     Called by implementations of a @class{gdk:paintable} subclass to invalidate
@@ -795,9 +797,9 @@ lambda (paintable)    :run-last
   multiple calls of the @fun{gdk:paintable-snapshot} function produce the same
   output.
 
-  This function will emit the @code{\"invalidate-contents\"} signal. If a
-  paintable reports the @code{:static-contents} value of the
-  @symbol{gdk:paintable-flags} flags, it must not call this function.
+  This function will emit the @sig[gdk:paintable]{invalidate-contents} signal.
+  If a paintable reports the @val[gdk:paintable-flags]{:static-contents} value
+  of the @sym{gdk:paintable-flags} flags, it must not call this function.
   @see-class{gdk:paintable}
   @see-class{gdk:snapshot}
   @see-symbol{gdk:paintable-flags}"
@@ -811,7 +813,7 @@ lambda (paintable)    :run-last
 
 (cffi:defcfun ("gdk_paintable_invalidate_size" paintable-invalidate-size) :void
  #+liber-documentation
- "@version{#2025-05-09}
+ "@version{#2025-08-02}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
     Called by implementations of @class{gdk:paintable} subclasses to invalidate
@@ -820,8 +822,9 @@ lambda (paintable)    :run-last
   As long as the size is not invalidated, @arg{paintable} must return the same
   values for its intrinsic width, height and aspect ratio.
 
-  This function will emit the @code{\"invalidate-size\"} signal. If a paintable
-  reports the @code{:static-size} flag, it must not call this function.
+  This function will emit the @sig[gdk:paintable]{invalidate-size} signal. If a
+  paintable reports the @val[gdk:paintable-flags]{:static-size} flag, it must
+  not call this function.
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-flags}"
   (paintable (g:object paintable)))

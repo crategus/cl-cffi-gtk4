@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.toplevel-size.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -64,7 +64,7 @@
 (setf (liber:alias-for-symbol 'toplevel-size)
       "CStruct"
       (liber:symbol-documentation 'toplevel-size)
- "@version{#2023-4-10}
+ "@version{#2023-04-10}
   @begin{short}
     The @class{gdk:toplevel-size} structure contains information that may be
     useful for users of @class{gdk:toplevel} objects to compute a surface size.
@@ -85,11 +85,11 @@
 
 (defun toplevel-size-bounds (size)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{#2025-08-02}
   @syntax{(gdk:toplevel-size size) => width, height}
-  @argument[size]{a @symbol{gdk:toplevel-size} instance}
-  @argument[width]{an integer with the width}
-  @argument[height]{an integer with the height}
+  @argument[size]{a @sym{gdk:toplevel-size} instance}
+  @argument[width]{an integer for the width}
+  @argument[height]{an integer for the height}
   @begin{short}
     Retrieves the bounds the toplevel is placed within.
   @end{short}
@@ -113,10 +113,10 @@
 
 (cffi:defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
  #+liber-documentation
- "@version{#2023-4-10}
-  @argument[size]{a @symbol{gdk:toplevel-size} instance}
-  @argument[width]{an integer with the width}
-  @argument[height]{an integer with the height}
+ "@version{#2025-08-02}
+  @argument[size]{a @sym{gdk:toplevel-size} instance}
+  @argument[width]{an integer for the width}
+  @argument[height]{an integer for the height}
   @begin{short}
     Sets the size the toplevel prefers to be resized to.
   @end{short}
@@ -138,17 +138,17 @@
 (cffi:defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size)
     :void
  #+liber-documentation
- "@version{#2023-4-10}
-  @argument[size]{a @symbol{gdk:toplevel-size} instance}
-  @argument[width]{an integer with the minimum width}
-  @argument[height]{an integer with the minimum height}
+ "@version{#2025-08-02}
+  @argument[size]{a @sym{gdk:toplevel-size} instance}
+  @argument[width]{an integer for the minimum width}
+  @argument[height]{an integer for the minimum height}
   @begin{short}
     The minimum size corresponds to the limitations the toplevel can be shrunk
     to, without resulting in incorrect painting.
   @end{short}
   A user of a @class{gdk:toplevel} object should calculate these given both the
-  existing size, and the bounds retrieved from the @symbol{gdk:toplevel-size}
-  object.
+  existing size, and the bounds retrieved from the @sym{gdk:toplevel-size}
+  instance.
 
   The minimum size should be within the bounds. see the
   @fun{gdk:toplevel-size-bounds} function.
@@ -168,12 +168,12 @@
 (cffi:defcfun ("gdk_toplevel_size_set_shadow_width"
                toplevel-size-set-shadow-width) :void
  #+liber-documentation
- "@version{#2023-4-10}
-  @argument[size]{a @symbol{gdk:toplevel-size} instance}
-  @argument[left]{an integer with the width of the left part of the shadow}
-  @argument[right]{an integer with the width of the right part of the shadow}
-  @argument[top]{an integer with the height of the top part of the shadow}
-  @argument[bottom]{an integer with the height of the bottom part of the shadow}
+ "@version{#2025-08-02}
+  @argument[size]{a @sym{gdk:toplevel-size} instance}
+  @argument[left]{an integer for the width of the left part of the shadow}
+  @argument[right]{an integer for the width of the right part of the shadow}
+  @argument[top]{an integer for the height of the top part of the shadow}
+  @argument[bottom]{an integer for the height of the bottom part of the shadow}
   @begin{short}
     The shadow width corresponds to the part of the computed surface size that
     would consist of the shadow margin surrounding the window, would there be

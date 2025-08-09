@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.dmabuf-formats.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -56,7 +56,7 @@
 (setf (liber:alias-for-class 'dmabuf-formats)
       "GBoxed"
       (documentation 'dmabuf-formats 'type)
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @begin{declaration}
 (glib:define-gboxed-opaque dmabuf-formats \"GdkDmabufFormats\"
   :export t
@@ -89,12 +89,13 @@
 
 (cffi:defcfun ("gdk_dmabuf_formats_contains" dmabuf-formats-contains) :boolean
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2025-08-02}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
-  @argument[fourcc]{an integer with the format code}
-  @argument[modifier]{an integer with the format modifier}
-  @return{@em{True} if the format specified by the arguments is part of
-    @arg{formats}.}
+  @argument[fourcc]{an integer for the format code}
+  @argument[modifier]{an integer for the format modifier}
+  @begin{return}
+    @em{True} if the format specified by the arguments is part of @arg{formats}.
+  @end{return}
   @begin{short}
     Returns whether a given format is contained in @arg{formats}.
   @end{short}
@@ -113,7 +114,7 @@
 
 (cffi:defcfun ("gdk_dmabuf_formats_equal" dmabuf-formats-equal) :boolean
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2024-07-10}
   @argument[formats1]{a @class{gdk:dmabuf-formats} instance}
   @argument[formats2]{another @class{gdk:dmabuf-formats} instance}
   @return{@em{True} if @arg{formats1} and @arg{formats2} are equal.}
@@ -141,13 +142,12 @@
 
 (defun dmabuf-formats-format (formats idx)
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2025-08-02}
+  @syntax{(gdk:dmabuf-formats-format formats idx) => fourcc, modifier}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
-  @argument[idx]{an integer with the index of the format to return}
-  @begin{return}
-    @arg{fourcc} -- an integer with the format code @br{}
-    @arg{modifier} -- an integer with the format modifier
-  @end{return}
+  @argument[idx]{an integer for the index of the format to return}
+  @argument[fourcc]{an integer for the format code}
+  @argument[modifier]{an integer for the format modifier}
   @begin{short}
     Gets the fourcc code and modifier for a format that is contained in
     @arg{formats}.
@@ -169,9 +169,9 @@
 (cffi:defcfun ("gdk_dmabuf_formats_get_n_formats" dmabuf-formats-n-formats)
     :size
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2025-08-04}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
-  @return{The integer with the number for formats.}
+  @return{The integer for the number of formats.}
   @begin{short}
     Returns the number of formats that the formats object contains.
   @end{short}

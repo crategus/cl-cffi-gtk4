@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.display-manager.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'display-manager 'type)
- "@version{2024-7-10}
+ "@version{2025-06-29}
   @begin{short}
     The purpose of the @class{gdk:display-manager} singleton object is to offer
     notification when displays appear or disappear or the default display
@@ -93,16 +93,17 @@
   @class{gdk:display-manager} object determines which backend is used at
   runtime.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"display-opened\" signal}
+    @begin[display-manager::display-opened]{signal}
       @begin{pre}
 lambda (manager display)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[manager]{The @class{gdk:display-manager} object on which the
           signal is emitted.}
         @entry[display]{The opened @class{gdk:display} object.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a display is opened.
+    @end{signal}
   @end{dictionary}
   @see-slot{gdk:display-manager-default-display}
   @see-class{gdk:display}
@@ -125,7 +126,7 @@ lambda (manager display)    :run-last
 (setf (liber:alias-for-function 'display-manager-default-display)
       "Accessor"
       (documentation 'display-manager-default-display 'function)
- "@version{2024-7-10}
+ "@version{2024-07-10}
   @syntax{(gdk:display-manager-default-display object) => display}
   @syntax{(setf (gdk:display-manager-default-display object) display)}
   @argument[object]{a @class{gdk:display-manager} object}
@@ -154,7 +155,7 @@ lambda (manager display)    :run-last
 (cffi:defcfun ("gdk_display_manager_get" display-manager-get)
     (g:object display-manager)
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2024-07-10}
   @return{The global @class{gdk:display-manager} singleton object.}
   @begin{short}
     Gets the @class{gdk:display-manager} singleton object.
@@ -179,7 +180,7 @@ lambda (manager display)    :run-last
 (cffi:defcfun ("gdk_display_manager_list_displays"
                display-manager-list-displays) (g:slist-t (g:object display))
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2024-07-10}
   @argument[manager]{a @class{gdk:display-manager} object}
   @return{The list of @class{gdk:display} objects.}
   @short{List all currently open displays.}
@@ -196,9 +197,9 @@ lambda (manager display)    :run-last
 (cffi:defcfun ("gdk_display_manager_open_display" display-manager-open-display)
     (g:object display)
  #+liber-documentation
- "@version{2024-7-10}
+ "@version{2025-08-02}
   @argument[manager]{a @class{gdk:display-manager} object}
-  @argument[name]{a string with the name of the display to open}
+  @argument[name]{a string for the name of the display to open}
   @begin{return}
     The @class{gdk:display} object, or @code{nil} if the display could not be
     opened.
@@ -217,8 +218,8 @@ lambda (manager display)    :run-last
 
 (cffi:defcfun ("gdk_set_allowed_backends" set-allowed-backends) :void
  #+liber-documentation
- "@version{#2024-7-10}
-  @argument[backends]{a string with a comma-separated list of backends}
+ "@version{#2025-08-02}
+  @argument[backends]{a string for a comma-separated list of backends}
   @begin{short}
     Sets a list of backends that GDK should try to use.
   @end{short}

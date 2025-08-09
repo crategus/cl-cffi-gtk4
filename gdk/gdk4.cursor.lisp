@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.cursor.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2024 Dieter Kaiser
+;;; Copyright (C) 2011 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'cursor 'type)
- "@version{2024-6-30}
+ "@version{2024-06-30}
   @begin{short}
     The @class{gdk:cursor} object represents a cursor.
   @end{short}
@@ -152,16 +152,15 @@
 (setf (liber:alias-for-function 'cursor-fallback)
       "Accessor"
       (documentation 'cursor-fallback 'function)
- "@version{2024-6-30}
+ "@version{2025-08-04}
   @syntax{(gdk:cursor-fallback object) => fallback}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[fallback]{a @class{gdk:cursor} object with the fallback of the
+  @argument[fallback]{a @class{gdk:cursor} object for the fallback of the
     cursor or @code{nil} to use the default cursor as fallback}
   @begin{short}
-    Accessor of the @slot[gdk:cursor]{fallback} slot of the @class{gdk:cursor}
-    class.
+    The accessor for the @slot[gdk:cursor]{fallback} slot of the
+    @class{gdk:cursor} class returns the fallback for @arg{cursor}.
   @end{short}
-  The @fun{gdk:cursor-fallback} function returns the fallback for @arg{cursor}.
   The fallback will be used if the cursor is not available on a given
   @class{gdk:display} object.
 
@@ -186,18 +185,16 @@
 (setf (liber:alias-for-function 'cursor-hotspot-x)
       "Accessor"
       (documentation 'cursor-hotspot-x 'function)
- "@version{2024-6-30}
+ "@version{2025-08-04}
   @syntax{(gdk:cursor-hotspot-x object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[hotspot]{an integer with the horizontal offset of the hotspot or
-    0 for named cursors}
+  @argument[hotspot]{an integer for the horizontal offset of the hotspot or 0
+    for named cursors}
   @begin{short}
-    Accessor of the @slot[gdk:cursor]{hotspot-x} slot of the @class{gdk:cursor}
-    class.
+    The accessor for the @slot[gdk:cursor]{hotspot-x} slot of the
+    @class{gdk:cursor} class returns the horizontal offset of the hotspot.
   @end{short}
-  The @fun{gdk:cursor-hotspot-x} function returns the horizontal offset of the
-  hotspot. The hotspot indicates the pixel that will be directly above the
-  cursor.
+  The hotspot indicates the pixel that will be directly above the cursor.
 
   Note that named cursors may have a nonzero hotspot, but this function will
   only return the hotspot position for cursors created with the
@@ -220,18 +217,16 @@
 (setf (liber:alias-for-function 'cursor-hotspot-y)
       "Accessor"
       (documentation 'cursor-hotspot-y 'function)
- "@version{2024-6-30}
+ "@version{2025-08-04}
   @syntax{(gdk:cursor-hotspot-y object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[hotspot]{an integer with the vertical offset of the hotspot or
-    0 for named cursors}
+  @argument[hotspot]{an integer for the vertical offset of the hotspot or 0
+    or named cursors}
   @begin{short}
-    Accessor of the @slot[gdk:cursor]{hotspot-y} slot of the @class{gdk:cursor}
-    class.
+    The accessor for the @slot[gdk:cursor]{hotspot-y} slot of the
+    @class{gdk:cursor} class returns the vertical offset of the hotspot.
   @end{short}
-  The @fun{gdk:cursor-hotspot-y} function returns the vertical offset of the
-  hotspot. The hotspot indicates the pixel that will be directly above the
-  cursor.
+  The hotspot indicates the pixel that will be directly above the cursor.
 
   Note that named cursors may have a nonzero hotspot, but this function will
   only return the hotspot position for cursors created with the
@@ -253,17 +248,16 @@
 (setf (liber:alias-for-function 'cursor-name)
       "Accessor"
       (documentation 'cursor-name 'function)
- "@version{2024-6-30}
+ "@version{2025-08-04}
   @syntax{(gdk:cursor-name object) => name}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[name]{a string with the name of the cursor or @code{nil} if it is
+  @argument[name]{a string for the name of the cursor or @code{nil} if it is
     not a named cursor}
   @begin{short}
-    Accessor of the @slot[gdk:cursor]{name} slot of the @class{gdk:cursor}
-    class.
+    The accessor for the @slot[gdk:cursor]{name} slot of the @class{gdk:cursor}
+    class gets or sets the name of the cursor.
   @end{short}
-  The @fun{gdk:cursor-name} function returns the name of the cursor. If the
-  cursor is not a named cursor, @code{nil} will be returned.
+  If the cursor is not a named cursor, @code{nil} will be returned.
   @see-class{gdk:cursor}")
 
 ;;; --- gdk:cursor-texture -----------------------------------------------------
@@ -278,17 +272,16 @@
 (setf (liber:alias-for-function 'cursor-texture)
       "Accessor"
       (documentation 'cursor-texture 'function)
- "@version{2024-6-30}
+ "@version{2024-08-04}
   @syntax{(gdk:cursor-texture object) => texture}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[texture]{a @class{gdk:texture} object with the texture for
-  @arg{cursor} or @code{nil} if it is a named cursor}
+  @argument[texture]{a @class{gdk:texture} object for the texture for
+    @arg{cursor} or @code{nil} if it is a named cursor}
   @begin{short}
-    Accessor of the @slot[gdk:cursor]{texture} slot of the @class{gdk:cursor}
-    class.
+    The accessor for the @slot[gdk:cursor]{texture} slot of the
+    @class{gdk:cursor} class returns the texture for the cursor.
   @end{short}
-  The @fun{gdk:cursor-texture} function returns the texture for the cursor. If
-  the cursor is a named cursor, @code{nil} will be returned.
+  If the cursor is a named cursor, @code{nil} will be returned.
   @see-class{gdk:cursor}
   @see-class{gdk:texture}")
 
@@ -305,12 +298,12 @@
 
 (defun cursor-new-from-texture (texture xhotspot yhotspot &optional fallback)
  #+liber-documentation
- "@version{2024-6-30}
-  @argument[texture]{a @class{gdk:texture} object with the texture providing
+ "@version{2025-08-04}
+  @argument[texture]{a @class{gdk:texture} object for the texture providing
     the pixel data}
-  @argument[xhotspot]{an integer with the horizontal offset of the hotspot of
+  @argument[xhotspot]{an integer for the horizontal offset of the hotspot of
     the cursor}
-  @argument[yhotspot]{an integer with the vertical offset of the hotspot of
+  @argument[yhotspot]{an integer for the vertical offset of the hotspot of
     the cursor}
   @argument[fallback]{an optional @class{gdk:cursor} object to fall back to
     when this one cannot be supported, the default is @code{nil}}
@@ -335,12 +328,14 @@
 
 (defun cursor-new-from-name (name &optional fallback)
  #+liber-documentation
- "@version{2024-6-30}
-  @argument[name]{a string with the name of the cursor}
+ "@version{2025-08-04}
+  @argument[name]{a string for the name of the cursor}
   @argument[fallback]{an optional @class{gdk:cursor} object to fall back to
     when this one cannot be supported, the default is @code{nil}}
-  @return{The new @class{gdk:cursor} object, or @code{nil} if there is no
-    cursor with the given @arg{name}.}
+  @begin{return}
+    The new @class{gdk:cursor} object, or @code{nil} if there is no cursor with
+    the given @arg{name}.
+  @end{return}
   @begin{short}
     Creates a new cursor by looking up @arg{name} in the current cursor theme.
   @end{short}

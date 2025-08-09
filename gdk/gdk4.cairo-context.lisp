@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.cairo-context.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -55,7 +55,7 @@
 
 #+liber-documentation
 (setf (documentation 'cairo-context 'type)
- "@version{2023-4-7}
+ "@version{2023-04-07}
   @begin{short}
     The @class{gdk:cairo-context} object is an object representing the platform
     specific draw context.
@@ -74,12 +74,14 @@
 (cffi:defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2025-07-30}
   @argument[context]{a @class{gdk:cairo-context} object that is currently
     drawing}
-  @return{The @symbol{cairo:context-t} instance with the Cairo context to be
-    used to draw the contents of the @class{gdk:surface} object. @code{NULL} is
-    returned when @arg{context} is not drawing.}
+  @begin{return}
+    The @sym{cairo:context-t} instance for the Cairo context to be used to draw
+    the contents of the @class{gdk:surface} object. @code{NULL} is returned when
+    @arg{context} is not drawing.
+  @end{return}
   @begin{short}
     Retrieves a Cairo context to be used to draw on the @class{gdk:surface}
     object of @arg{context}.

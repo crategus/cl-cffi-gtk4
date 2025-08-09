@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.pixbuf-interaction.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -53,16 +53,17 @@
 
 (defun pixbuf-from-surface (surface xsrc ysrc width height)
  #+liber-documentation
- "@version{2024-7-16}
-  @argument[surface]{a @symbol{cairo:surface-t} instance to copy from}
-  @argument[xsrc]{an integer with the source x coordinate within @arg{surface}}
-  @argument[ysrc]{an integer with the source y coordinate within @arg{surface}}
-  @argument[width]{an integer with the width in pixels of region to get}
-  @argument[height]{an integer with the height in pixels of region to get}
-  @return{The newly created @class{gdk-pixbuf:pixbuf} object, or @code{nil} on
-    error.}
+ "@version{2025-08-02}
+  @argument[surface]{a @sym{cairo:surface-t} instance to copy from}
+  @argument[xsrc]{an integer for the source x coordinate within @arg{surface}}
+  @argument[ysrc]{an integer for the source y coordinate within @arg{surface}}
+  @argument[width]{an integer for the width in pixels of region to get}
+  @argument[height]{an integer for the height in pixels of region to get}
+  @begin{return}
+    The newly created @class{gdk-pixbuf:pixbuf} object, or @code{nil} on error.
+  @end{return}
   @begin{short}
-    Transfers image data from a @symbol{cairo:surface-t} instance and converts
+    Transfers image data from a @sym{cairo:surface-t} instance and converts
     it to an RGB(A) representation inside a @class{gdk-pixbuf:pixbuf} object.
   @end{short}
   This allows you to efficiently read individual pixels from Cairo surfaces.
@@ -93,7 +94,7 @@
 
 (defun pixbuf-from-texture (texture)
  #+liber-documentation
- "@version{2024-7-16}
+ "@version{2024-07-16}
   @argument[texture]{a @class{gdk:texture} object}
   @return{The new @class{gdk-pixbuf:pixbuf} object, or @code{nil} on error.}
   @begin{short}

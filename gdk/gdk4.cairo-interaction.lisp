@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.cairo-interaction.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2024 Dieter Kaiser
+;;; Copyright (C) 2012 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -49,8 +49,8 @@
 
 (cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
- "@version{2024-6-30}
-  @argument[cr]{a @symbol{cairo:context-t} instance}
+ "@version{2025-07-30}
+  @argument[cr]{a @sym{cairo:context-t} instance}
   @argument[rgba]{a @class{gdk:rgba} color}
   @begin{short}
     Sets the specified @arg{rgba} color as the source color of the Cairo
@@ -90,18 +90,19 @@
 
 (defun cairo-set-source-pixbuf (cr pixbuf x y)
  #+liber-documentation
- "@version{#2024-7-16}
-  @argument[cr]{a @symbol{cairo:context-t} instance}
+ "@version{#2025-07-30}
+  @argument[cr]{a @sym{cairo:context-t} instance}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
-  @argument[x]{a number coerced to a double float with the x coordinate to
+  @argument[x]{a number coerced to a double float for the x coordinate to
     place upper left corner of @arg{pixbuf}}
-  @argument[y]{a number coerced to a double float with the y coordinate to
+  @argument[y]{a number coerced to a double float for the y coordinate to
     place upper left corner of @arg{pixbuf}}
   @begin{short}
     Sets the given @arg{pixbuf} as the source pattern for @arg{cr}.
   @end{short}
-  The pattern has a @code{:none} extend mode of the @symbol{cairo:extend-t}
-  enumeration and is aligned so that the origin of the pixbuf is @code{(x,y)}.
+  The pattern has a @val[cairo:extend-t]{:none} extend mode of the
+  @sym{cairo:extend-t} enumeration and is aligned so that the origin of the
+  pixbuf is @code{(x,y)}.
   @see-symbol{cairo:context-t}
   @see-symbol{cairo:extend-t}
   @see-class{gdk-pixbuf:pixbuf}"
@@ -118,8 +119,8 @@
 
 (cffi:defcfun ("gdk_cairo_rectangle" cairo-rectangle) :void
  #+liber-documentation
- "@version{#2024-7-16}
-  @argument[cr]{a @symbol{cairo:context-t} instance}
+ "@version{#2025-07-30}
+  @argument[cr]{a @sym{cairo:context-t} instance}
   @argument[rectangle]{a @class{gdk:rectangle} instance}
   @begin{short}
     Adds the given @arg{rectangle} to the current path of @arg{cr}.
@@ -137,9 +138,9 @@
 
 (cffi:defcfun ("gdk_cairo_region" cairo-region) :void
  #+liber-documentation
- "@version{#2024-7-16}
-  @argument[cr]{a @symbol{cairo:context-t} instance}
-  @argument[region]{a @symbol{cairo:region-t} instance}
+ "@version{#2025-07-30}
+  @argument[cr]{a @sym{cairo:context-t} instance}
+  @argument[region]{a @sym{cairo:region-t} instance}
   @begin{short}
     Adds the given @arg{region} to the current path of @arg{cr}.
   @end{short}
@@ -158,10 +159,10 @@
                cairo-region-create-from-surface)
     (:pointer (:struct cairo:region-t))
  #+liber-documentation
- "@version{#2024-7-16}
-  @argument[surface]{a @symbol{cairo:surface-t} instance}
+ "@version{#2025-07-30}
+  @argument[surface]{a @sym{cairo:surface-t} instance}
   @begin{return}
-    The @symbol{cairo:region-t} instance, must be freed with the
+    The new @sym{cairo:region-t} instance, must be freed with the
     @fun{cairo:region-destroy} function.
   @end{return}
   @begin{short}
@@ -195,8 +196,8 @@
 
 (defun cairo-draw-from-gl (cr surface source type scale x y width height)
  #+liber-documentation
- "@version{#2025-1-25}
-  @argument[cr]{a @symbol{cairo:context-t} instance}
+ "@version{#2025-07-30}
+  @argument[cr]{a @sym{cairo:context-t} instance}
   @argument[surface]{a @class{gdk:surface} object that is being rendered for,
     not necessarily into}
   @argument[source]{an integer for the GL ID of the source buffer}

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.popup.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,7 +80,7 @@
 (setf (liber:alias-for-class 'popup)
       "Interface"
       (documentation 'popup 'type)
- "@version{#2023-4-9}
+ "@version{#2023-04-09}
   @begin{short}
     A @class{gdk:popup} object is a surface that is attached to another surface,
     called its \"parent\", and is positioned relative to it.
@@ -107,7 +107,7 @@
 (setf (liber:alias-for-function 'popup-autohide)
       "Accessor"
       (documentation 'popup-autohide 'function)
- "@version{#2023-4-9}
+ "@version{#2023-04-09}
   @syntax{(gdk:popup-autohide object) => autohide}
   @syntax{(setf (gdk:popup-autohide object) autohide)}
   @argument[object]{a @class{gdk:popup} object}
@@ -133,7 +133,7 @@
 (setf (liber:alias-for-function 'popup-parent)
       "Accessor"
       (documentation 'popup-parent 'function)
- "@version{#2023-4-9}
+ "@version{#2023-04-09}
   @syntax{(gdk:popup-parent object) => parent}
   @syntax{(setf (gdk:popup-parent object) parent)}
   @argument[object]{a @class{gdk:popup} object}
@@ -152,10 +152,10 @@
 
 (cffi:defcfun ("gdk_popup_present" popup-present) :boolean
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{#2025-08-02}
   @argument[popup]{a @class{gdk:popup} object to show}
-  @argument[width]{an integer with the unconstrained popup width to layout}
-  @argument[height]{an integer with the unconstrained popup height to layout}
+  @argument[width]{an integer for the unconstrained popup width to layout}
+  @argument[height]{an integer for the unconstrained popup height to layout}
   @argument[layout]{a @class{gdk:popup-layout} object used to layout}
   @return{@em{False} if it failed to be presented, otherwise @em{true}.}
   @begin{short}
@@ -166,15 +166,15 @@
   change position according to @arg{layout}.
 
   After calling this function, the result should be handled in response to the
-  @code{\"layout\"} signal being emitted. The resulting popup position can be
-  queried using the @fun{gdk:popup-position-x}, @fun{gdk:popup-position-y}
-  functions, and the resulting size will be sent as parameters in the layout
-  signal. Use the @fun{gdk:popup-rect-anchor} and @fun{gdk:popup-surface-anchor}
-  function to get the resulting anchors.
+  @sig[gdk:surface]{layout} signal being emitted. The resulting popup position
+  can be queried using the @fun{gdk:popup-position-x},
+  @fun{gdk:popup-position-y} functions, and the resulting size will be sent as
+  parameters in the layout signal. Use the @fun{gdk:popup-rect-anchor} and
+  @fun{gdk:popup-surface-anchor} function to get the resulting anchors.
 
   Presenting may fail, for example if the popup is set to autohide and is
   immediately hidden upon being presented. If presenting failed, the
-  @code{\"layout\"} signal will not me emitted.
+  @sig[gdk:surface]{layout} signal will not me emitted.
   @see-class{gdk:popup}
   @see-class{gdk:popup-layout}
   @see-function{gdk:popup-position-x}
@@ -194,15 +194,16 @@
 
 (cffi:defcfun ("gdk_popup_get_surface_anchor" popup-surface-anchor) gravity
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{#2025-08-02}
   @argument[popup]{a @class{gdk:popup} object}
-  @return{The @symbol{gdk:gravity} value with the current anchor value of
-    @arg{popup}.}
+  @begin{return}
+    The @sym{gdk:gravity} value for the current anchor value of @arg{popup}.
+  @end{return}
   @begin{short}
     Gets the current popup surface anchor.
   @end{short}
   The value returned may change after calling the @fun{gdk:popup-present}
-  function, or after the @code{\"layout\"} signal is emitted.
+  function, or after the @sig[gdk:surface]{layout} signal is emitted.
   @see-class{gdk:popup}
   @see-symbol{gdk:gravity}"
   (popup (g:object popup)))
@@ -214,15 +215,17 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_get_rect_anchor" popup-rect-anchor) gravity
- "@version{#2023-4-10}
+ "@version{#2025-08-02}
   @argument[popup]{a @class{gdk:popup} object}
-  @return{The @symbol{gdk:gravity} value with the current rectangle anchor
-    value of @arg{popup}.}
+  @begin{return}
+    The @sym{gdk:gravity} value for the current rectangle anchor value of
+    @arg{popup}.
+  @end{return}
   @begin{short}
     Gets the current popup surface anchor.
   @end{short}
   The value returned may change after calling the @fun{gdk:popup-present}
-  function, or after the @code{\"layout\"} signal is emitted.
+  function, or after the @sig[gdk:surface]{layout} signal is emitted.
   @see-class{gdk:popup}
   @see-symbol{gdk:gravity}"
   (popup (g:object popup)))
@@ -235,9 +238,9 @@
 
 (cffi:defcfun ("gdk_popup_get_position_x" popup-position-x) :int
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{#2025-08-04}
   @argument[popup]{a @class{gdk:popup} object}
-  @return{The integer with the x coordinate of @arg{popup} position.}
+  @return{The integer for the x coordinate of @arg{popup} position.}
   @short{Obtains the position of the popup relative to its parent.}
   @see-class{gdk:popup}"
   (popup (g:object popup)))
@@ -250,9 +253,9 @@
 
 (cffi:defcfun ("gdk_popup_get_position_y" popup-position-y) :int
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{#2025-08-04}
   @argument[popup]{a @class{gdk:popup} object}
-  @return{The integer with the y coordinate of @arg{popup} position.}
+  @return{The integer for the y coordinate of @arg{popup} position.}
   @short{Obtains the position of the popup relative to its parent.}
   @see-class{gdk:popup}"
   (popup (g:object popup)))

@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.keyval.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -52,10 +52,12 @@
 
 (cffi:defcfun ("gdk_keyval_name" keyval-name) :string
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{The string containing the name of the key, or @code{nil} if
-    @arg{keyval} is not a valid key.}
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    The string containing the name of the key, or @code{nil} if @arg{keyval} is
+    not a valid key.
+  @end{return}
   @begin{short}
     Converts a key value into a symbolic name.
   @end{short}
@@ -72,10 +74,12 @@
 
 (cffi:defcfun ("gdk_keyval_from_name" keyval-from-name) :uint
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[name]{a string with the key name}
-  @return{The unsigned integer with the corresponding key value, or
-    @code{#xffffff} if the key name is not a valid key}
+ "@version{2025-08-02}
+  @argument[name]{a string for the key name}
+  @begin{return}
+    The unsigned integer for the corresponding key value, or @code{#xffffff} if
+    the key name is not a valid key
+  @end{return}
   @begin{short}
     Converts a key name to a key value.
   @end{short}
@@ -97,13 +101,12 @@
 
 (defun keyval-convert-case (keyval)
  #+liber-documentation
- "@version{2024-7-9}
+ "@version{2025-08-02}
   @syntax{(gdk:keyval-convert-case keyval) => lower, upper}
-  @argument[keyval]{an unsigned integer with the key value}
-  @argument[lower]{an unsigned integer with the lowercase version of
+  @argument[keyval]{an unsigned integer for the key value}
+  @argument[lower]{an unsigned integer for the lowercase version of
     @arg{keyval}}
-  @argument[upper]{an unsigned integer with the uppercase verson of
-    @arg{keyval}}
+  @argument[upper]{an unsigned integer for the uppercase verson of @arg{keyval}}
   @begin{short}
     Obtains the upper-case and lower-case versions of the key value.
   @end{short}
@@ -122,11 +125,13 @@
 
 (cffi:defcfun ("gdk_keyval_to_upper" keyval-to-upper) :uint
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{The unsigned integer with the upper case form of @arg{keyval}, or
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    The unsigned integer for the upper case form of @arg{keyval}, or
     @arg{keyval} itself if it is already in upper case or it is not subject to
-    case conversion.}
+    case conversion.
+  @end{return}
   @begin{short}
     Converts a key value to upper case, if applicable.
   @end{short}
@@ -141,11 +146,13 @@
 
 (cffi:defcfun ("gdk_keyval_to_lower" keyval-to-lower) :uint
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{The unsigned integer with the lower case form of @arg{keyval}, or
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    The unsigned integer for the lower case form of @arg{keyval}, or
     @arg{keyval} itself if it is already in lower case or it is not subject to
-    case conversion.}
+    case conversion.
+  @end{return}
   @begin{short}
     Converts a key value to lower case, if applicable.
   @end{short}
@@ -160,10 +167,12 @@
 
 (cffi:defcfun ("gdk_keyval_is_upper" keyval-is-upper) :boolean
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{@em{True} if @arg{keyval} is in upper case, or if @arg{keyval} is not
-    subject to case conversion.}
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    @em{True} if @arg{keyval} is in upper case, or if @arg{keyval} is not
+    subject to case conversion.
+  @end{return}
   @begin{short}
     Returns @em{true} if the given key value is in upper case.
   @end{short}
@@ -178,10 +187,12 @@
 
 (cffi:defcfun ("gdk_keyval_is_lower" keyval-is-lower) :boolean
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{@em{True} if @arg{keyval} is in lower case, or if @arg{keyval} is not
-    subject to case conversion.}
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    @em{True} if @arg{keyval} is in lower case, or if @arg{keyval} is not
+    subject to case conversion.
+  @end{return}
   @begin{short}
     Returns @em{true} if the given key value is in lower case.
   @end{short}
@@ -196,10 +207,12 @@
 
 (cffi:defcfun ("gdk_keyval_to_unicode" keyval-to-unicode) :uint32
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[keyval]{an unsigned integer with the key value}
-  @return{The unsigned integer with the corresponding unicode character, or 0
-    if there is no corresponding character.}
+ "@version{2025-08-02}
+  @argument[keyval]{an unsigned integer for the key value}
+  @begin{return}
+    The unsigned integer for the corresponding unicode character, or 0 if there
+    is no corresponding character.
+  @end{return}
   @begin{short}
     Convert from a GDK key value to the corresponding ISO10646 (Unicode)
     character.
@@ -218,11 +231,12 @@
 
 (cffi:defcfun ("gdk_unicode_to_keyval" unicode-to-keyval) :uint
  #+liber-documentation
- "@version{2024-7-9}
-  @argument[unicode]{an unsigned integer with a ISO10646 encoded character}
-  @return{The unsigned integer with the corresponding GDK key value, if one
-    exists, or, if there is no corresponding symbol,
-    @code{wc | 0x01000000}}
+ "@version{2025-08-02}
+  @argument[unicode]{an unsigned integer for a ISO10646 encoded character}
+  @begin{return}
+    The unsigned integer for the corresponding GDK key value, if one exists,
+    or, if there is no corresponding symbol, @code{wc | 0x01000000}.
+  @end{return}
   @begin{short}
     Convert from a ISO10646 character to a GDK key value.
   @end{short}

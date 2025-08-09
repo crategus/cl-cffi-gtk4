@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.toplevel.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -32,7 +32,7 @@
 ;;;     GdkToplevelState
 ;;;     GdkFullScreenMode
 ;;;     GdkSurfaceEdge
-;;;     GdkTitlebarGesture                                 Since 4.4
+;;;     GdkTitlebarGesture                                  Since 4.4
 ;;;
 ;;;     GdkToplevel
 ;;;
@@ -59,7 +59,7 @@
 ;;;     gdk_toplevel_restore_system_shortcuts
 ;;;     gdk_toplevel_begin_resize
 ;;;     gdk_toplevel_begin_move
-;;;     gdk_toplevel_titlebar_gesture                      Since 4.4
+;;;     gdk_toplevel_titlebar_gesture                       Since 4.4
 ;;;
 ;;; Properties
 ;;;
@@ -93,6 +93,7 @@
 (gobject:define-gflags "GdkToplevelState" toplevel-state
   (:export t
    :type-initializer "gdk_toplevel_state_get_type")
+  (:none 0)
   (:minimized #.(ash 1 0))
   (:maximized #.(ash 1 1))
   (:sticky #.(ash 1 2))
@@ -114,11 +115,12 @@
 (setf (liber:alias-for-symbol 'toplevel-state)
       "GFlags"
       (liber:symbol-documentation 'toplevel-state)
- "@version{2024-7-12}
+ "@version{2025-08-04}
   @begin{declaration}
 (gobject:define-gflags \"GdkToplevelState\" toplevel-state
   (:export t
    :type-initializer \"gdk_toplevel_state_get_type\")
+  (:none 0)
   (:minimized #.(ash 1 0))
   (:maximized #.(ash 1 1))
   (:sticky #.(ash 1 2))
@@ -137,7 +139,8 @@
   (:left-resizable #.(ash 1 15)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
+      @entry[:none]{No flags set.}
       @entry[:minimized]{The surface is minimized.}
       @entry[:maximized]{The surface is maximized.}
       @entry[:sticky]{The surface is sticky.}
@@ -155,15 +158,16 @@
       @entry[:bottom-resizable]{Whether the bottom edge is resizable.}
       @entry[:left-tiled]{Whether the left edge is tiled.}
       @entry[:left-resizable]{Whether the left edge is resizable.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Specifies the state of a toplevel surface.
   @end{short}
   On platforms that support information about individual edges, the
-  @code{:state-tiled} state will be set whenever any of the individual tiled
-  states is set. On platforms that lack that support, the tiled state will give
-  an indication of tiledness without any of the per-edge states being set.
+  @val[gdk:toplevel-state]{:tiled} state will be set whenever any of the
+  individual tiled states is set. On platforms that lack that support, the tiled
+  state will give an indication of tiledness without any of the per-edge states
+  being set.
   @see-class{gdk:toplevel}")
 
 ;;; ----------------------------------------------------------------------------
@@ -180,7 +184,7 @@
 (setf (liber:alias-for-symbol 'fullscreen-mode)
       "GEnum"
       (liber:symbol-documentation 'fullscreen-mode)
- "@version{2024-7-12}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-genum \"GdkFullscreenMode\" fullscreen-mode
   (:export t
@@ -189,10 +193,10 @@
   (:on-all-monitor 1))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:on-current-monitor]{Fullscreen on current monitor only.}
       @entry[:on-all-monitor]{Span across all monitors when fullscreen.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Indicates which monitor (in a multi-head setup) a surface should span over
@@ -220,7 +224,7 @@
 (setf (liber:alias-for-symbol 'surface-edge)
       "GEnum"
       (liber:symbol-documentation 'surface-edge)
- "@version{2024-7-12}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-genum \"GdkSurfaceEdge\" surface-edge
   (:export t
@@ -235,7 +239,7 @@
   (:south-east 7))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:north-west]{The top left corner.}
       @entry[:north]{The top edge.}
       @entry[:north-east]{The top right corner.}
@@ -244,7 +248,7 @@
       @entry[:south-west]{The lower left corner.}
       @entry[:south]{The lower edge.}
       @entry[:south-east]{The lower right corner.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Determines a surface edge or corner.
@@ -267,7 +271,7 @@
 (setf (liber:alias-for-symbol 'titlebar-gesture)
       "GEnum"
       (liber:symbol-documentation 'titlebar-gesture)
- "@version{2024-7-12}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-genum \"GdkTitlebarGesture\" titlebar-gesture
   (:export t
@@ -277,11 +281,11 @@
   (:middle-click 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:double-click]{No description available.}
       @entry[:right-click]{No description available.}
       @entry[:middle-click]{No description available.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The kind of title bar gesture to emit with the
@@ -335,7 +339,7 @@
 (setf (liber:alias-for-class 'toplevel)
       "Interface"
       (documentation 'toplevel 'type)
- "@version{2014-4-7}
+ "@version{2025-08-02}
   @begin{short}
     The @class{gdk:toplevel} object is a freestanding toplevel surface.
   @end{short}
@@ -343,22 +347,23 @@
   the windowing system, such as controlling maximization and size of the
   surface, setting icons and transient parents for dialogs.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"compute-size\" signal}
+    @begin[toplevel::compute-size]{signal}
       @begin{pre}
 lambda (toplevel size)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[toplevel]{The @class{gdk:toplevel} object.}
-        @entry[size]{The @symbol{gdk:toplevel-size} instance.}
-      @end{table}
+        @entry[size]{The @sym{gdk:toplevel-size} instance.}
+      @end{simple-table}
       Compute the desired size of the toplevel, given the information passed
-      via the @symbol{gdk:toplevel-size} instance. It will normally be emitted
+      via the @sym{gdk:toplevel-size} instance. It will normally be emitted
       during or after the @fun{gdk:toplevel-present} function, depending on the
       configuration received by the windowing system. It may also be emitted at
       any other point in time, in response to the windowing system spontaneously
       changing the configuration. It is the responsibility of the toplevel user
       to handle this signal. Failing to do so will result in an arbitrary size
       being used as a result.
+    @end{signal}
   @end{dictionary}
   @see-slot{gdk:toplevel-decorated}
   @see-slot{gdk:toplevel-deletable}
@@ -389,14 +394,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-decorated)
       "Accessor"
       (documentation 'toplevel-decorated 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-decorated object) => decorated}
   @syntax{(setf (gdk:toplevel-decorated object) decorated)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[decorated]{a boolean whether to request decorations}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{decorated} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{decorated} slot of the
+    @class{gdk:toplevel} class gets or sets whether the toplevel is decorated.
   @end{short}
   Setting @arg{decorated} to @em{false} hints the desktop environment that the
   surface has its own, client-side decorations and does not need to have window
@@ -415,14 +420,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-deletable)
       "Accessor"
       (documentation 'toplevel-deletable 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-deletable object) => deletable}
   @syntax{(setf (gdk:toplevel-deletable object) deletable)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[deletable]{a boolean whether to request a delete button}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{deletable} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{deletable} slot of the
+    @class{gdk:toplevel} class gets or sets whether the toplevel is deletable.
   @end{short}
   Setting @arg{deletable} to @em{true} hints the desktop environment that it
   should offer the user a way to close the surface.
@@ -432,23 +437,23 @@ lambda (toplevel size)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fullscreen-mode" 'toplevel) t)
- "The @code{fullscreen-mode} property of type @symbol{gdk:fullscreen-mode}
+ "The @code{fullscreen-mode} property of type @sym{gdk:fullscreen-mode}
   (Read / Write) @br{}
   The fullscreen mode of the toplevel. @br{}
-  Default value: @code{:on-current-monitor}")
+  Default value: @val[gdk:fullscreen-mode]{:on-current-monitor}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'toplevel-fullscreen-mode)
       "Accessor"
       (documentation 'toplevel-fullscreen-mode 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-fullscreen-mode object) => mode}
   @syntax{(setf (gdk:toplevel-fullscreen-mode object) mode)}
   @argument[object]{a @class{gdk:toplevel} object}
-  @argument[mode]{a boolean with the fullscreen mode of the surface}
+  @argument[mode]{a boolean for the fullscreen mode of the surface}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{fullscreen-mode} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{fullscreen-mode} slot of the
+    @class{gdk:toplevel} class gets or sets the fullscreen mode of the toplevel.
   @end{short}
   @see-class{gdk:toplevel}")
 
@@ -463,20 +468,19 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-icon-list)
       "Accessor"
       (documentation 'toplevel-icon-list 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-icon-list object) => surfaces}
   @syntax{(setf (gdk:toplevel-icon-list object) surfaces)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[surfaces]{a list of textures to use as icon, of different sizes}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{icon-list} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{icon-list} slot of the
+    @class{gdk:toplevel} class gets or sets the list of icon textures.
   @end{short}
-  The @setf{gdk:toplevel-icon-list} function sets a list of icons for the
-  surface. One of these will be used to represent the surface in iconic form.
-  The icon may be shown in window lists or task bars. Which icon size is shown
-  depends on the window manager. The window manager can scale the icon but
-  setting several size icons can give better image quality.
+  One of these will be used to represent the surface in iconic form. The icon
+  may be shown in window lists or task bars. Which icon size is shown depends on
+  the window manager. The window manager can scale the icon but setting several
+  size icons can give better image quality.
 
   Note that some platforms do not support surface icons.
   @see-class{gdk:toplevel}")
@@ -493,14 +497,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-modal)
       "Accessor"
       (documentation 'toplevel-modal 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-modal object) => modal}
   @syntax{(setf (gdk:toplevel-modal object) modal)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[modal]{@em{true} if the surface is modal, @em{false} otherwise}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{modal} slot of the @class{gdk:toplevel}
-    class.
+    The accessor for the @slot[gdk:toplevel]{modal} slot of the
+    @class{gdk:toplevel} class gets or sets whether the toplevel is modal.
   @end{short}
   The application can use this hint to tell the window manager that a certain
   surface has modal behaviour. The window manager can use this information to
@@ -525,14 +529,15 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-shortcuts-inhibited)
       "Accessor"
       (documentation 'toplevel-shortcuts-inhibited 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-shortcuts-inhibited object) => inhibited}
   @syntax{(setf (gdk:toplevel-shortcuts-inhibited object) inhibited)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[inhibited]{a boolean whether keyboard shortcuts are inhibited}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{shortcuts-inhibited} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{shortcuts-inhibited} slot of the
+    @class{gdk:toplevel} class gets or sets whether keyboard shortcuts are
+    inhibited.
   @end{short}
   @see-class{gdk:toplevel}")
 
@@ -548,14 +553,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-startup-id)
       "Accessor"
       (documentation 'toplevel-startup-id 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-startup-id object) => startup-id}
   @syntax{(setf (gdk:toplevel-startup-id object) startup-id)}
   @argument[object]{a @class{gdk:toplevel} object}
-  @argument[startup-id]{a string with startup-notification identifier}
+  @argument[startup-id]{a string for the startup notification identifier}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{startup-id} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{startup-id} slot of the
+    @class{gdk:toplevel} class gets or sets the startup ID of the surface.
   @end{short}
   When using GTK, typically you should use the @fun{gtk:window-startup-id}
   function instead of this low-level function.
@@ -566,24 +571,24 @@ lambda (toplevel size)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "state" 'toplevel) t)
- "The @code{state} property of type @symbol{gdk:toplevel-state} (Read) @br{}
-  The state of the toplevel.")
+ "The @code{state} property of type @sym{gdk:toplevel-state} (Read) @br{}
+  The state of the toplevel. @br{}
+  Default value: @val[gdk:toplevel-state]{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'toplevel-state)
       "Accessor"
       (documentation 'toplevel-state 'function)
- "@version{#2024-4-7}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-state object) => state}
   @syntax{(setf (gdk:toplevel-state object) state)}
   @argument[object]{a @class{gdk:toplevel} object}
-  @argument[state]{a @symbol{gdk:toplevel-state} value}
+  @argument[state]{a @sym{gdk:toplevel-state} value}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{state} slot of the @class{gdk:toplevel}
-    class.
+    The accessor for the @slot[gdk:toplevel]{state} slot of the
+    @class{gdk:toplevel} class gets the bitwise OR of the currently active
+    surface state flags from the @sym{gdk:toplevel-state} enumeration.
   @end{short}
-  Gets the bitwise OR of the currently active surface state flags, from the
-  @symbol{gdk:toplevel-state} enumeration.
   @see-class{gdk:toplevel}
   @see-symbol{gdk:toplevel-state}")
 
@@ -599,17 +604,16 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-title)
       "Accessor"
       (documentation 'toplevel-title 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-title object) => title}
   @syntax{(setf (gdk:toplevel-title object) title)}
   @argument[object]{a @class{gdk:toplevel} object}
-  @argument[state]{a string with the title of surface}
+  @argument[state]{a string for the title of the surface}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{state} slot of the @class{gdk:toplevel}
-    class.
+    The accessor for the @slot[gdk:toplevel]{state} slot of the
+    @class{gdk:toplevel} class gets or sets the title of a toplevel surface, to
+    be displayed in the titlebar, in lists of windows, and so on.
   @end{short}
-  Sets the title of a toplevel surface, to be displayed in the titlebar, in
-  lists of windows, etc.
   @see-class{gdk:toplevel}")
 
 ;;; --- gdk:toplevel-transient-for ---------------------------------------------
@@ -624,14 +628,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-transient-for)
       "Accessor"
       (documentation 'toplevel-transient-for 'function)
- "@version{#2023-4-8}
+ "@version{#2025-08-04}
   @syntax{(gdk:toplevel-transient-for object) => parent}
   @syntax{(setf (gdk:toplevel-transient-for object) parent)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[parent]{a toplevel @class{gdk:surface} object}
   @begin{short}
-    Accessor of the @slot[gdk:toplevel]{transient-for} slot of the
-    @class{gdk:toplevel} class.
+    The accessor for the @slot[gdk:toplevel]{transient-for} slot of the
+    @class{gdk:toplevel} class gets or sets the transient parent of the surface.
   @end{short}
   Indicates to the window manager that surface is a transient dialog associated
   with the application surface @arg{parent}. This allows the window manager to
@@ -644,12 +648,12 @@ lambda (toplevel size)    :run-last
   @see-class{gtk:dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_present ()
+;;; gdk_toplevel_present
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_present" toplevel-present) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object to show}
   @argument[layout]{a @class{gdk:toplevel-layout} instance used to layout}
   @begin{short}
@@ -659,9 +663,9 @@ lambda (toplevel size)    :run-last
   If the toplevel was previously not showing, it will be showed, otherwise it
   will change layout according to @arg{layout}.
 
-  GDK may emit the @code{\"compute-size\"} signal to let the user of this
-  toplevel compute the preferred size of the toplevel surface. See
-  @code{\"compute-size\"} signal for details.
+  GDK may emits the @sig[gdk:toplevel]{compute-size} signal to let the user of
+  this toplevel compute the preferred size of the toplevel surface. See
+  @sig[gdk:toplevel]{compute-size} signal for details.
 
   Presenting is asynchronous and the specified layout parameters are not
   guaranteed to be respected.
@@ -673,12 +677,12 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-present)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_minimize ()
+;;; gdk_toplevel_minimize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_minimize" toplevel-minimize) :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @return{@em{True} if the surface was minimized.}
   @begin{short}
@@ -691,12 +695,12 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-minimize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_lower ()
+;;; gdk_toplevel_lower
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_lower" toplevel-lower) :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @return{@em{True} if the surface was lowered.}
   @begin{short}
@@ -709,14 +713,14 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-lower)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_focus ()
+;;; gdk_toplevel_focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_focus" toplevel-focus) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2025-08-04}
   @argument[toplevel]{a @class{gdk:toplevel} object}
-  @argument[timestamp]{an unsigned integer with the timestamp of the event
+  @argument[timestamp]{an unsigned integer for the timestamp of the event
     triggering the surface focus}
   @begin{short}
     Sets keyboard focus to surface .
@@ -732,13 +736,13 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_show_window_menu ()
+;;; gdk_toplevel_show_window_menu
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_show_window_menu" toplevel-show-window-menu)
     :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[event]{a @class{gdk:event} instance to show the menu for}
   @return{@em{True} if the window menu was shown and @em{false} otherwise.}
@@ -757,13 +761,13 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-show-window-menu)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_supports_edge_constraints ()
+;;; gdk_toplevel_supports_edge_constraints
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_supports_edge_constraints"
                toplevel-supports-edge-constraints) :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @return{@em{True} if the desktop environment supports tiled window states.}
   @begin{short}
@@ -775,13 +779,13 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-supports-edge-constraints)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_inhibit_system_shortcuts ()
+;;; gdk_toplevel_inhibit_system_shortcuts
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_inhibit_system_shortcuts"
                toplevel-inhibit-system-shortcuts) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object requesting system keyboard
     shortcuts}
   @argument[event]{a @class{gdk:event} instance that is triggering the inhibit
@@ -816,13 +820,13 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-inhibit-system-shortcuts)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_restore_system_shortcuts ()
+;;; gdk_toplevel_restore_system_shortcuts
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_restore_system_shortcuts"
                toplevel-restore-system-shortcuts) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @begin{short}
     Restore default system keyboard shortcuts which were previously requested
@@ -836,23 +840,23 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-restore-system-shortcuts)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_begin_resize ()
+;;; gdk_toplevel_begin_resize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_begin_resize" toplevel-begin-resize) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2025-08-02}
   @argument[toplevel]{a @class{gdk:toplevel} object}
-  @argument[edge]{a @symbol{gdk:surface-edge} value with the edge or corner
-    from which the drag is started}
+  @argument[edge]{a @sym{gdk:surface-edge} value for the edge or corner from
+    which the drag is started}
   @argument[device]{a @class{gdk:device} object used for the operation}
-  @argument[button]{an integer with the button being used to drag, or 0 for a
+  @argument[button]{an integer for the button being used to drag, or 0 for a
     keyboard-initiated drag}
-  @argument[x]{a double float with the surface x coordinate of mouse click that
+  @argument[x]{a double float for the surface x coordinate of mouse click that
     began the drag}
-  @argument[y]{a double float with the surface y coordinate of mouse click that
+  @argument[y]{a double float for the surface y coordinate of mouse click that
     began the drag}
-  @argument[timestamp]{an unsigned integer with the timestamp of mouse click
+  @argument[timestamp]{an unsigned integer for the timestamp of mouse click
     that began the drag, use the @fun{gdk:event-time} function.}
   @begin{short}
     Begins an interactive resize operation, for a toplevel surface.
@@ -873,21 +877,21 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-begin-resize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_begin_move ()
+;;; gdk_toplevel_begin_move
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_begin_move" toplevel-begin-move) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2025-08-04}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[device]{a @class{gdk:device} object used for the operation}
-  @argument[button]{an integer with the button being used to drag, or 0 for a
+  @argument[button]{an integer for the button being used to drag, or 0 for a
     keyboard-initiated drag}
-  @argument[x]{a double float with the surface x coordinate of mouse click that
+  @argument[x]{a double float for the surface x coordinate of mouse click that
     began the drag}
-  @argument[y]{a double float with the surface y coordinate of mouse click that
+  @argument[y]{a double float for the surface y coordinate of mouse click that
     began the drag}
-  @argument[timestamp]{an unsigned integer with the timestamp of mouse click
+  @argument[timestamp]{an unsigned integer for the timestamp of mouse click
     that began the drag}
   @begin{short}
     Begins an interactive move operation, for a toplevel surface.
@@ -906,16 +910,16 @@ lambda (toplevel size)    :run-last
 (export 'toplevel-begin-move)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_toplevel_titlebar_gesture                          Since 4.4
+;;; gdk_toplevel_titlebar_gesture                           Since 4.4
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
 (cffi:defcfun ("gdk_toplevel_titlebar_gesture" toplevel-titlebar-gesture)
     :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2025-08-02}
   @argument[toplevel]{a @class{gdk:toplevel} object}
-  @argument[gesture]{a @symbol{gdk:titlebar-gesture} value}
+  @argument[gesture]{a @sym{gdk:titlebar-gesture} value}
   @return{The boolean value.}
   @begin{short}
     No description available.

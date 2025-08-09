@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.drop.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop 'type)
- "@version{#2023-8-7}
+ "@version{#2025-07-31}
   @begin{short}
     The @class{gdk:drop} object represents the target side of an ongoing DND
     operation.
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drop) t)
- "The @code{actions} property of type @symbol{gdk:drag-action}
+ "The @code{actions} property of type @sym{gdk:drag-action}
   (Read / Write / Construct Only) @br{}
   The possible actions for the drop. @br{}
   Default value: '(:copy :move :link)")
@@ -132,21 +132,21 @@
 (setf (liber:alias-for-function 'drop-actions)
       "Accessor"
       (documentation 'drop-actions 'function)
- "@version{#2024-7-12}
+ "@version{#2025-07-31}
   @syntax{(gdk:drop-actions object) => actions}
   @argument[object]{a @class{gdk:drop} object}
-  @argument[actions]{a @symbol{gdk:drag-action} value}
+  @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    Accessor of the @slot[gdk:drop]{actions} slot of the @class{gdk:drop}
-    class.
+    The accessor for the @slot[gdk:drop]{actions} slot of the @class{gdk:drop}
+    class returns the possible actions for the drop object.
   @end{short}
-  The @fun{gdk:drop-actions} function returns the possible actions for the
-  drop object. If this value contains multiple actions, that is, the
+  If this value contains multiple actions, that is, the
   @fun{gdk:drag-action-is-unique} function returns @em{false} for the result,
   the @fun{gdk:drop-finish} function must choose the action to use when
-  accepting the drop. This will only happen if you passed @code{:ask} as one of
-  the possible actions in the @fun{gdk:drop-status} function. The @code{:ask}
-  value itself will not be included in the actions returned by this function.
+  accepting the drop. This will only happen if you passed
+  @val[gdk:drag-action]{:ask} as one of the possible actions in the
+  @fun{gdk:drop-status} function. The @val[gdk:drag-action]{:ask} value itself
+  will not be included in the actions returned by this function.
 
   This value may change over the lifetime of the drop object both as a response
   to source side actions as well as to calls to the @fun{gdk:drop-status}
@@ -170,7 +170,7 @@
 (setf (liber:alias-for-function 'drop-device)
       "Accessor"
       (documentation 'drop-device 'function)
- "@version{#2023-8-7}
+ "@version{#2023-08-07}
   @syntax{(gdk:drop-device object) => device}
   @argument[object]{a @class{gdk:drop} object}
   @argument[device]{a @class{gdk:device} object performing the drop}
@@ -193,7 +193,7 @@
 (setf (liber:alias-for-function 'drop-display)
       "Accessor"
       (documentation 'drop-display 'function)
- "@version{#2023-8-7}
+ "@version{#2023-08-07}
   @syntax{(gdk:drop-display object) => display}
   @argument[object]{a @class{gdk:drop} object}
   @argument[display]{a @class{gdk:display} object}
@@ -218,7 +218,7 @@
 (setf (liber:alias-for-function 'drop-drag)
       "Accessor"
       (documentation 'drop-drag 'function)
- "@version{#2023-8-7}
+ "@version{#2023-08-07}
   @syntax{(gdk:drop-drag object) => drag}
   @argument[object]{a @class{gdk:drop} object}
   @argument[drag]{a corresponding @class{gdk:drag} object}
@@ -243,7 +243,7 @@
 (setf (liber:alias-for-function 'drop-formats)
       "Accessor"
       (documentation 'drop-formats 'function)
- "@version{#2023-8-7}
+ "@version{#2023-08-07}
   @syntax{(gdk:drop-formats object) => formats}
   @argument[object]{a @class{gdk:drop} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -268,7 +268,7 @@
 (setf (liber:alias-for-function 'drop-surface)
       "Accessor"
       (documentation 'drop-surface 'function)
- "@version{#2023-8-7}
+ "@version{#2023-08-07}
   @syntax{(gdk:drop-surface object) => surface}
   @argument[object]{a @class{gdk:drop} object}
   @argument[surface]{a @class{gdk:surface} object performing the drop}
@@ -281,18 +281,18 @@
   @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drop_status ()
+;;; gdk_drop_status
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drop_status" drop-status) :void
  #+liber-documentation
- "@version{#2023-8-7}
+ "@version{#2025-07-31}
   @argument[drop]{a @class{gdk:drop} object}
-  @argument[actions]{a @symbol{gdk:drag-action} value with the supported
-    actions of the destination, or @code{:none} to indicate that a drop will
-    not be accepted}
-  @argument[preferred]{a @symbol{gdk:drag-action} value with the unique action
-    that is a member of @arg{actions} indicating the preferred action}
+  @argument[actions]{a @sym{gdk:drag-action} value for the supported actions
+    of the destination, or @val[gdk:drag-action]{:none} to indicate that a drop
+    will not be accepted}
+  @argument[preferred]{a @sym{gdk:drag-action} value for the unique action that
+    is a member of @arg{actions} indicating the preferred action}
   @begin{short}
     Selects all actions that are potentially supported by the destination.
   @end{short}
@@ -304,9 +304,9 @@
   action to use when multiple actions are possible.
 
   This function should be called by drag destinations in response to
-  @code{:enter} or @code{:motion} events. If the destination does not yet know
-  the exact actions it supports, it should set any possible actions first and
-  then later call this function again.
+  @val[gdk:event-type]{:drag-enter} or @val[gdk:event-type]{:drag-motion} events.
+  If the destination does not yet know the exact actions it supports, it should
+  set any possible actions first and then later call this function again.
   @see-class{gdk:drop}
   @see-symbol{gdk:drag-action}
   @see-function{gdk:drop-actions}"
@@ -317,15 +317,15 @@
 (export 'drop-status)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drop_finish ()
+;;; gdk_drop_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drop_finish" drop-finish) :void
  #+liber-documentation
- "@version{#2023-8-7}
+ "@version{#2025-07-31}
   @argument[drop]{a @class{gdk:drop} object}
-  @argument[action]{a @symbol{gdk:drag-action} value with the action performed
-    by the destination or @code{:none} if the drop failed}
+  @argument[action]{a @sym{gdk:drag-action} value for the action performed by
+    the destination or @val[gdk:drag-action]{:none} if the drop failed}
   @begin{short}
     Ends the drag operation after a drop.
   @end{short}
@@ -403,7 +403,7 @@
 ;; We need GInputStream for the implementation.
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drop_read_value_async ()
+;;; gdk_drop_read_value_async
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drop_read_async" %drop-read-value-async) :void
@@ -416,21 +416,21 @@
 
 (defun drop-read-value-async (drop gtype priority cancellable func)
  #+liber-documentation
- "@version{#2023-8-7}
+ "@version{#2025-07-31}
   @argument[drop]{a @class{gdk:drop} object}
   @argument[gtype]{a @class{g:type-t} type ID to read}
-  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[priority]{an integer for the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} object, @code{nil}
     to ignore}
-  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
-    when the request is satisfied}
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
+    the request is satisfied}
   @begin{short}
     Asynchronously request the drag operation's contents converted to the given
     @arg{gtype}.
   @end{short}
   When the operation is finished @arg{func} will be called. You can then call
   the @fun{gdk:drop-read-value-finish} function to get the resulting
-  @symbol{g:value} value.
+  @sym{g:value} value.
 
   For local drag'n'drop operations that are available in the given @arg{gtype},
   the value will be copied directly. Otherwise, GDK will try to use the
@@ -447,7 +447,7 @@
 (export 'drop-read-value-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drop_read_value_finish ()
+;;; gdk_drop_read_value_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drop_read_value_finish" %drop-read-value-finish)
@@ -458,10 +458,10 @@
 
 (defun drop-read-value-finish (drop result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2025-07-31}
   @argument[drop]{a @class{gdk:drop} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{The @symbol{g:value} value containing the result.}
+  @return{The @sym{g:value} value containing the result.}
   @begin{short}
     Finishes an async drop read started with the @fun{gdk:drop-read-value-async}
     function.

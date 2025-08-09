@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.drag-surface.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,9 +61,9 @@
 (setf (liber:alias-for-symbol 'drag-surface-size)
       "CStruct"
       (liber:symbol-documentation 'drag-surface-size)
- "@version{#2023-11-4}
+ "@version{#2025-07-31}
   @begin{short}
-    The @symbol{gdk:drag-surface-size} structure contains information that is
+    The @sym{gdk:drag-surface-size} structure contains information that is
     useful to compute the size of a drag surface.
   @end{short}
 
@@ -81,10 +81,10 @@
 (cffi:defcfun ("gdk_drag_surface_size_set_size" drag-surface-size-set-size)
     :void
  #+liber-documentation
- "@version{#2023-11-4}
-  @argument[size]{a @symbol{gdk:drag-surface-size} instance}
-  @argument[width]{an integer with the width}
-  @argument[height]{an integer with the height}
+ "@version{#2025-07-31}
+  @argument[size]{a @sym{gdk:drag-surface-size} instance}
+  @argument[width]{an integer for the width}
+  @argument[height]{an integer for the height}
   @begin{short}
     Sets the size the drag surface prefers to be resized to.
   @end{short}
@@ -112,30 +112,31 @@
 (setf (liber:alias-for-class 'drag-surface)
       "Interface"
       (documentation 'drag-surface 'type)
- "@version{2024-11-7}
+ "@version{2025-08-04}
   @begin{short}
     The @class{gdk:drag-surface} interface is an interface for surfaces used
     during DND.
   @end{short}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"compute-size\" signal}
+    @begin[drag-surface::compute-size]{signal}
       @begin{pre}
 lambda (surface size)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[surface]{The @class{gdk:drag-surface} object.}
-        @entry[size]{The @symbol{gdk:drag-surface-size} instance with the size
-          of the drag surface.}
-      @end{table}
+        @entry[size]{The @sym{gdk:drag-surface-size} instance for the size of
+          the drag surface.}
+      @end{simple-table}
       Emitted when the size for the surface needs to be computed, when it is
       present. This signal will normally be emitted during the native surface
       layout cycle when the surface size needs to be recomputed. It is the
       responsibility of the drag surface user to handle this signal and compute
       the desired size of the surface, storing the computed size in the
-      @symbol{gdk:drag-surface-size} instance that is passed to the signal
-      handler, using the @fun{gdk:drag-surface-size-set-size} function. Failing
-      to set a size so will result in an arbitrary size being used as a result.
+      @sym{gdk:drag-surface-size} instance that is passed to the signal handler,
+      using the @fun{gdk:drag-surface-size-set-size} function. Failing to set a
+      size so will result in an arbitrary size being used as a result.
       Since 4.12
+    @end{signal}
   @end{dictionary}
   @see-class{gdk:surface}
   @see-class{gdk:drag}
@@ -147,14 +148,15 @@ lambda (surface size)    :run-last
 
 (cffi:defcfun ("gdk_drag_surface_present" drag-surface-present) :boolean
  #+liber-documentation
- "@version{#2023-11-4}
+ "@version{#2025-08-04}
   @argument[surface]{a @class{gdk:drag-surface} object to show}
-  @argument[width]{an integer with the unconstrained @arg{surface} width to
+  @argument[width]{an integer for the unconstrained @arg{surface} width to
     layout}
-  @argument[height]{an integer with the unconstrained @arg{surface} height to
+  @argument[height]{an integer for the unconstrained @arg{surface} height to
     layout}
-  @return{@em{False} if the drag surface failed to be presented, otherwise
-    @em{true}.}
+  @begin{return}
+    @em{False} if the drag surface failed to be presented, otherwise @em{true}.
+  @end{return}
   @short{Present the drag surface.}
   @see-class{gdk:drag-surface}"
   (surface (g:object drag-surface))

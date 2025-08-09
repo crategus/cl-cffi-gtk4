@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.seat.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2024 Dieter Kaiser
+;;; Copyright (C) 2019 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,7 +87,7 @@
 (setf (liber:alias-for-symbol 'seat-capabilities)
       "GFlags"
       (liber:symbol-documentation 'seat-capabilities)
- "@version{2024-7-12}
+ "@version{2025-06-29}
   @begin{declaration}
 (gobject:define-gflags \"GdkSeatCapabilities\" seat-capabilities
   (:export t
@@ -102,7 +102,7 @@
   (:all 31))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:none]{No input capabilities.}
       @entry[:pointer]{The seat has a pointer,for example, mouse.}
       @entry[:touch]{The seat has touchscreen(s) attached.}
@@ -111,7 +111,7 @@
       @entry[:tablet-pad]{The seat has drawing tablet pad(s) attached.}
       @entry[:all-pointing]{The union of all pointing capabilities.}
       @entry[:all]{The union of all capabilities.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags describing the seat capabilities.
@@ -133,56 +133,60 @@
 
 #+liber-documentation
 (setf (documentation 'seat 'type)
- "@version{2024-7-12}
+ "@version{2025-08-02}
   @begin{short}
     The @class{gdk:seat} object represents a collection of input devices that
     belong to a user.
   @end{short}
   @begin[Signal Details]{dictionary}
-    @subheading{The \"device-added\" signal}
+    @begin[seat::device-added]{signal}
       @begin{pre}
 lambda (seat device)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[device]{The newly added @class{gdk:device} object.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when a new input device is related to this seat.
-    @subheading{The \"device-removed\" signal}
+    @end{signal}
+    @begin[seat::device-removed]{signal}
       @begin{pre}
 lambda (seat device)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[device]{The just removed @class{gdk:device} object.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted when an input device is removed, for example,
       unplugged.
-    @subheading{The \"tool-added\" signal}
+    @end{signal}
+    @begin[seat::tool-added]{signal}
       @begin{pre}
 lambda (seat tool)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[tool]{The new @class{gdk:device-tool} object known to the seat.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever a new tool is made known to the seat.
       The tool may later be assigned to a device, that is on proximity with
-      a tablet. The device will emit the @code{\"tool-changed\"} signal
+      a tablet. The device will emit the @sig[gdk:device]{tool-changed} signal
       accordingly. A same tool may be used by several devices.
-    @subheading{The \"tool-removed\" signal}
+    @end{signal}
+    @begin[seat::tool-removed]{signal}
       @begin{pre}
 lambda (seat tool)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[seat]{The @class{gdk:seat} object on which the signal is
           emitted.}
         @entry[tool]{The just removed @class{gdk:device-tool} object.}
-      @end{table}
+      @end{simple-table}
       The signal is emitted whenever a tool is no longer known to this seat.
+    @end{signal}
   @end{dictionary}
   @see-slot{gdk:seat-display}
   @see-class{gdk:display}
@@ -204,7 +208,7 @@ lambda (seat tool)    :run-last
 (setf (liber:alias-for-function 'seat-display)
       "Accessor"
       (documentation 'seat-display 'function)
- "@version{2024-7-12}
+ "@version{2024-07-12}
   @syntax{(gdk:seat-display object) => display}
   @argument[object]{a @class{gdk:seat} object}
   @argument[display]{a @class{gdk:display} object}
@@ -221,9 +225,9 @@ lambda (seat tool)    :run-last
 
 (cffi:defcfun ("gdk_seat_get_capabilities" seat-capabilities) seat-capabilities
  #+liber-documentation
- "@version{2023-4-15}
+ "@version{2025-08-02}
   @argument[seat]{a @class{gdk:seat} object}
-  @return{The seat capabilities as a @symbol{gdk:seat-capabilities} value.}
+  @return{The seat capabilities as a @sym{gdk:seat-capabilities} value.}
   @begin{short}
     Returns the capabilities this @class{gdk:seat} object currently has.
   @end{short}
@@ -239,9 +243,9 @@ lambda (seat tool)    :run-last
 
 (cffi:defcfun ("gdk_seat_get_pointer" seat-pointer) (g:object device)
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2025-08-04}
   @argument[seat]{a @class{gdk:seat} object}
-  @return{The master @class{gdk:device} object with pointer capabilities.}
+  @return{The master @class{gdk:device} object for pointer capabilities.}
   @begin{short}
     Returns the master device that routes pointer events.
   @end{short}
@@ -257,9 +261,9 @@ lambda (seat tool)    :run-last
 
 (cffi:defcfun ("gdk_seat_get_keyboard" seat-keyboard) (g:object device)
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2024-08-04}
   @argument[seat]{a @class{gdk:seat} object}
-  @return{The master @class{gdk:device} object with keyboard capabilities.}
+  @return{The master @class{gdk:device} object for keyboard capabilities.}
   @begin{short}
     Returns the master device that routes keyboard events.
   @end{short}
@@ -275,9 +279,9 @@ lambda (seat tool)    :run-last
 
 (cffi:defcfun ("gdk_seat_get_devices" seat-devices) (g:list-t (g:object device))
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2025-08-02}
   @argument[seat]{a @class{gdk:seat} object}
-  @argument[capabilities]{a @symbol{gdk:seat-capabilities} value to get the
+  @argument[capabilities]{a @sym{gdk:seat-capabilities} value to get the
     devices for}
   @return{The list of @class{gdk:device} objects.}
   @begin{short}
@@ -297,7 +301,7 @@ lambda (seat tool)    :run-last
 (cffi:defcfun ("gdk_seat_get_tools" seat-tools)
     (g:list-t (g:object device-tool))
  #+liber-documentation
- "@version{2024-7-12}
+ "@version{2024-07-12}
   @argument[seat]{a @class{gdk:seat} object}
   @return{The list of @class{gdk:device-tool} objects.}
   @begin{short}

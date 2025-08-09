@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.content-formats.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -134,7 +134,7 @@
 (setf (liber:alias-for-class 'content-formats)
       "GBoxed"
       (documentation 'content-formats 'type)
- "@version{2023-11-5}
+ "@version{2023-11-05}
   @begin{short}
     The @class{gdk:content-formats} structure is used to advertise and negotiate
     the format of content.
@@ -206,8 +206,8 @@
 
 (defun content-formats-new (mime-types)
  #+liber-documentation
- "@version{#2023-8-4}
-  @argument[mime-types]{a list of strings with the mime types}
+ "@version{#2025-08-02}
+  @argument[mime-types]{a list of strings for the mime types}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Creates a new @class{gdk:content-formats} instance from a list of
@@ -230,7 +230,7 @@
 (cffi:defcfun ("gdk_content_formats_new_for_gtype"
                content-formats-new-for-gtype) (g:boxed content-formats :return)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[gtype]{a @class{g:type-t} type ID}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -261,9 +261,9 @@
 (cffi:defcfun ("gdk_content_formats_to_string" content-formats-to-string)
     :string
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2025-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{The string with the content formats.}
+  @return{The string for the content formats.}
   @begin{short}
     Prints the given @arg{formats} into a human-readable string.
   @end{short}
@@ -283,7 +283,7 @@
 
 (defun content-formats-gtypes (formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The list with the @class{g:type-t} type IDs included in @arg{formats}.}
   @begin{short}
@@ -313,7 +313,7 @@
 
 (defun content-formats-mime-types (formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The list of strings with the mime types included in @arg{formats}.}
   @begin{short}
@@ -333,10 +333,10 @@
 (cffi:defcfun ("gdk_content_formats_union" content-formats-union)
     (g:boxed content-formats :return)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[first]{a @class{gdk:content-formats} instance to merge into}
   @argument[second]{a @class{gdk:content-formats} instance to merge from}
-  @return{The new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Append all missing types from @arg{second} to @arg{first}, in the order
     they had in @arg{second}.
@@ -353,7 +353,7 @@
 
 (cffi:defcfun ("gdk_content_formats_match" content-formats-match) :boolean
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @return{@em{True} if a matching format was found.}
@@ -373,7 +373,7 @@
 (cffi:defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype)
     g:type-t
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @return{The first common @class{g:type-t} type ID or @code{nil} if none.}
@@ -396,11 +396,12 @@
 (cffi:defcfun ("gdk_content_formats_match_mime_type"
                content-formats-match-mime-type) :string
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2025-08-04}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
-  @return{The string with the first common mime type type or @code{nil} if
-    none.}
+  @begin{return}
+    The string for the first common mime type type or @code{nil} if none.
+  @end{return}
   @begin{short}
     Finds the first mime type from @arg{first} that is also contained in
     @arg{second}.
@@ -420,7 +421,7 @@
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
                content-formats-contain-gtype) :boolean
  #+liber-documentation
- "@version{2023-11-5}
+ "@version{2023-11-05}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[gtype]{a @class{g:type-t} type ID}
   @return{@em{True} if given @arg{gtype} was found.}
@@ -439,9 +440,9 @@
 (cffi:defcfun ("gdk_content_formats_contain_mime_type"
                content-formats-contain-mime-type) :boolean
  #+liber-documentation
- "@version{#2023-11-5}
+ "@version{#2025-08-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @argument[mime-type]{a string with the mime type to search for}
+  @argument[mime-type]{a string for the mime type to search for}
   @return{@em{True} if given @arg{mime-type} was found.}
   @short{Checks if a given mime type is part of the given @arg{formats}.}
   @see-class{gdk:content-formats}"
@@ -457,7 +458,7 @@
 (cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
                content-formats-union-serialize-gtypes) (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -478,7 +479,7 @@
                content-formats-union-deserialize-gtypes)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -499,7 +500,7 @@
                content-formats-union-serialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -520,7 +521,7 @@
                content-formats-union-deserialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -541,10 +542,12 @@
 (cffi:defcfun ("gdk_content_formats_parse" content-formats-parse)
     (g:boxed content-formats :return)
  #+liber-documentation
- "@version{#2023-4-14}
+ "@version{#2025-08-04}
   @argument[str]{a string to parse}
-  @return{The @class{gdk:content-formats} instance with the content formats if
-    @arg{str} is valid.}
+  @begin{return}
+    The @class{gdk:content-formats} instance for the content formats if
+    @arg{str} is valid.
+  @end{return}
   @begin{short}
     Parses the given @arg{str} into a @class{gdk:content-formats} instance and
     returns the formats.

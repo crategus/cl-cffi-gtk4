@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.cicp-params.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 (setf (liber:alias-for-symbol 'cicp-range)
       "GEnum"
       (liber:symbol-documentation 'cicp-range)
- "@version{2024-11-10}
+ "@version{2025-07-30}
   @begin{declaration}
 (gobject:define-genum \"GdkCicpRange\" cicp-range
   (:export t
@@ -81,11 +81,11 @@
   :full)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:narrow]{The values use the range of 16-235 (for Y) and 16-240
         for u and v.}
       @entry[:full]{The values use the full range.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
   The values of this enumeration describe whether image data uses the full range
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'cicp-params 'type)
- "@version{2024-11-10}
+ "@version{2025-07-30}
   @begin{short}
    The @class{gdk:cicp-params} object contains the parameters that define a
    colorstate according to the
@@ -169,18 +169,15 @@
 (setf (liber:alias-for-function 'cicp-params-color-primaries)
       "Accessor"
       (documentation 'cicp-params-color-primaries 'function)
- "@version{#2024-11-10}
+ "@version{#2025-08-02}
   @syntax{(gdk:cicp-params-color-primaries object) => primaries}
   @syntax{(setf (gdk:cicp-params-color-primaries object) primaries)}
   @argument[object]{a @class{gdk:cicp-params} object}
-  @argument[primaries]{an unsigned integer with the color primaries value}
+  @argument[primaries]{an unsigned integer for the color primaries value}
   @begin{short}
-    Accessor of the @slot[gdk:cicp-params]{color-primaries} slot of the
-    @class{gdk:cicp-params} class.
+    The accessor for the @slot[gdk:cicp-params]{color-primaries} slot of the
+    @class{gdk:cicp-params} class gets or sets the color primaries value.
   @end{short}
-  The @fun{gdk:cicp-params-color-primaries} function returns the color
-  primaries value. The @setf{gdk:cicp-params-color-primaries} function sets
-  the value.
 
   Supported values are:
   @begin{itemize}
@@ -208,19 +205,16 @@
 (setf (liber:alias-for-function 'cicp-params-matrix-coefficients)
       "Accessor"
       (documentation 'cicp-params-matrix-coefficients 'function)
- "@version{#2024-11-10}
+ "@version{#2025-08-02}
   @syntax{(gdk:cicp-params-matrix-coefficients object) => coefficients}
   @syntax{(setf (gdk:cicp-params-matrix-coefficients object) coefficients)}
   @argument[object]{a @class{gdk:cicp-params} object}
-  @argument[coefficients]{an unsigned integer with the matrix coefficients
-    value}
+  @argument[coefficients]{an unsigned integer for the matrix coefficients value}
   @begin{short}
-    Accessor of the @slot[gdk:cicp-params]{matrix-coefficients} slot of the
-    @class{gdk:cicp-params} class.
+    The accessor for the @slot[gdk:cicp-params]{matrix-coefficients} slot of the
+    @class{gdk:cicp-params} class gets or sets the matrix coefficients of
+    @arg{object}.
   @end{short}
-  The @fun{gdk:cicp-params-matrix-coefficients} function gets the matrix
-  coefficients of @arg{object}. The @setf{gdk:cicp-params-matrix-coefficients}
-  function sets the matrix coefficients.
 
   Supported values are:
   @begin{itemize}
@@ -234,25 +228,23 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "range" 'cicp-params) t)
- "The @code{range} property of type @symbol{gdk:cicp-range} (Read / Write) @br{}
+ "The @code{range} property of type @sym{gdk:cicp-range} (Read / Write) @br{}
   Whether the data is using the full range of values. @br{}
-  Default value: @code{:narrow}")
+  Default value: @val[gdk:cicp-range]{:narrow}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cicp-params-range)
       "Accessor"
       (documentation 'cicp-params-range 'function)
- "@version{#2024-11-10}
+ "@version{#2025-07-30}
   @syntax{(gdk:cicp-params-range object) => range}
   @syntax{(setf (gdk:cicp-params-range object) range)}
   @argument[object]{a @class{gdk:cicp-params} object}
-  @argument[range]{a @symbol{gdk:cicp-range} value}
+  @argument[range]{a @sym{gdk:cicp-range} value}
   @begin{short}
-    Accessor of the @slot[gdk:cicp-params]{range} slot of the
-    @class{gdk:cicp-params} class.
+    The accessor for the @slot[gdk:cicp-params]{range} slot of the
+    @class{gdk:cicp-params} class gets or sets the range value of @arg{object}.
   @end{short}
-  The @fun{gdk:cicp-params-range} function gets the range value of @arg{object}.
-  The @setf{gdk:cicp-params-range} function sets the range value.
   @see-class{gdk:cicp-params}
   @see-symbol{gdk:cicp-range}")
 
@@ -270,18 +262,16 @@
 (setf (liber:alias-for-function 'cicp-params-transfer-function)
       "Accessor"
       (documentation 'cicp-params-transfer-function 'function)
- "@version{#2024-11-10}
+ "@version{#2025-08-02}
   @syntax{(gdk:cicp-params-transfer-function object) => function}
   @syntax{(setf (gdk:cicp-params-transfer-function object) function)}
   @argument[object]{a @class{gdk:cicp-params} object}
-  @argument[function]{an unsigned integer with the transfer function value}
+  @argument[function]{an unsigned integer for the transfer function value}
   @begin{short}
-    Accessor of the @slot[gdk:cicp-params]{transfer-function} slot of the
-    @class{gdk:cicp-params} class.
+    The accessor for the @slot[gdk:cicp-params]{transfer-function} slot of the
+    @class{gdk:cicp-params} class gets or sets the transfer function value of
+    @arg{object}.
   @end{short}
-  The @fun{gdk:cicp-params-transfer-function} function gets the transfer
-  function value of @arg{object}. The @setf{gdk:cicp-params-transfer-function}
-  function sets the transfer function value.
 
   Supported values are:
   @begin{itemize}

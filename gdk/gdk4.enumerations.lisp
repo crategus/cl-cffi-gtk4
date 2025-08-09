@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.enumerations.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -58,7 +58,7 @@
 (setf (liber:alias-for-symbol 'gravity)
       "GEnum"
       (liber:symbol-documentation 'gravity)
- "@version{2024-5-26}
+ "@version{2025-06-30}
   @begin{declaration}
 (gobject:define-genum \"GdkGravity\" gravity
   (:export t
@@ -75,7 +75,7 @@
   (:static 10))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:north-west]{The reference point is at the top left corner.}
       @entry[:north]{The reference point is in the middle of the top edge.}
       @entry[:north-east]{The reference point is at the top right corner.}
@@ -87,7 +87,7 @@
       @entry[:sout-east]{The reference point is at the lower right corner.}
       @entry[:static]{The reference point is at the top left corner of the
         surface itself, ignoring window manager decorations.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Defines the reference point of a surface and is used in the
@@ -113,7 +113,7 @@
                 :hyper-mask
                 :meta-mask)
  #+liber-documentation
- "@version{2024-5-26}
+ "@version{2024-05-26}
   @variable-value{@code{'(:shift-mask
                 :lock-mask
                 :control-mask
@@ -127,7 +127,7 @@
                 :hyper-mask
                 :meta-mask)}}
   @begin{short}
-    A mask covering all entries in the @symbol{gdk:modifier-type} enumeration.
+    A mask covering all entries in the @sym{gdk:modifier-type} enumeration.
   @end{short}
   @see-symbol{gdk:modifier-type}")
 
@@ -164,7 +164,7 @@
 (setf (liber:alias-for-symbol 'modifier-type)
       "GFlags"
       (liber:symbol-documentation 'modifier-type)
- "@version{2024-5-25}
+ "@version{2025-06-30}
   @begin{declaration}
 (gobject:define-gflags \"GdkModifierType\" modifier-type
   (:export t
@@ -187,7 +187,7 @@
   (:meta-mask    #.(ash 1 28)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:no-modifier-mask]{No modifier key. Since 4.14}
       @entry[:shift-mask]{The @kbd{Shift} key.}
       @entry[:lock-mask]{The @kbd{Lock} key, depending on the modifier mapping
@@ -205,7 +205,7 @@
       @entry[:super-mask]{The Super modifier.}
       @entry[:hyper-mask]{The Hyper modifier.}
       @entry[:meta-mask]{The Meta modifier.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags to indicate the state of modifier keys and mouse buttons in events.

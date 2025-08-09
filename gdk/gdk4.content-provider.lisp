@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.content-provider.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -79,9 +79,9 @@
 
 #+liber-documentation
 (setf (documentation 'content-provider 'type)
- "@version{#2023-8-4}
+ "@version{#2025-06-29}
   @begin{short}
-    A @class{gdk:content-provider} object is used to provide content for the
+    The @class{gdk:content-provider} object is used to provide content for the
     clipboard in a number of formats.
   @end{short}
   To create a @class{gdk:content-provider} object, use the
@@ -92,14 +92,15 @@
   the @class{gdk:content-serializer} and @class{gdk:content-deserializer}
   objects if you want to add support for application specific data formats.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"content-changed\" signal}
+    @begin[content-provider::content-changed]{signal}
       @begin{pre}
 lambda (provider)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
         @entry[provider]{The @class{gdk:content-provider} object.}
-      @end{table}
+      @end{simple-table}
       Emitted whenever the content provided by the provider has changed.
+    @end{signal}
   @end{dictionary}
   @see-class{gdk:content-serializer}
   @see-class{gdk:content-deserializer}")
@@ -119,10 +120,10 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-function 'content-provider-formats)
       "Accessor"
       (documentation 'content-provider-formats 'function)
- "@version{#2023-8-4}
+ "@version{#2025-08-04}
   @syntax{(gdk:content-provider-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
-  @argument[formats]{a @class{gdk:content-formats} instance with the formats of
+  @argument[formats]{a @class{gdk:content-formats} instance for the formats of
     the content provider}
   @begin{short}
     Gets the formats that the content provider can provide its current contents
@@ -145,10 +146,10 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-function 'content-provider-storable-formats)
       "Accessor"
       (documentation 'content-provider-storable-formats 'function)
- "@version{#2023-8-4}
+ "@version{#2025-08-04}
   @syntax{(gdk:content-provider-storable-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
-  @argument[formats]{a @class{gdk:content-formats} instance with the storable
+  @argument[formats]{a @class{gdk:content-formats} instance for the storable
     formats of the content provider}
   @begin{short}
     Gets the formats that the content provider suggests other applications to
@@ -167,7 +168,7 @@ lambda (provider)    :run-last
 (cffi:defcfun ("gdk_content_provider_new_for_value"
                content-provider-new-for-value) (g:object content-provider)
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-08-04}
   @argument[gvalue]{a @class{g:value} instance}
   @return{The new @class{gdk:content-provider} object.}
   @begin{short}

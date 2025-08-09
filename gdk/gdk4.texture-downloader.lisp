@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.texture-downloader.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 - 2024 Dieter Kaiser
+;;; Copyright (C) 2023 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 (cffi:defcfun ("gdk_texture_downloader_new" texture-downloader-new)
     (g:boxed texture-downloader :return)
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @argument[texture]{a @class{gdk:texture} object to download}
   @return{The new @class{gdk:texture-downloader} instance.}
   @begin{short}
@@ -117,7 +117,7 @@
 (cffi:defcfun ("gdk_texture_downloader_copy" texture-downloader-copy)
     (g:boxed texture-downloader :return)
  #+liber-documentation
-  "@version{#2024-12-2}
+  "@version{#2024-12-02}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}
   @return{The @class{gdk:texture-downloader} object with a copy.}
   @begin{short}
@@ -145,11 +145,11 @@
 
 (defun texture-downloader-download-bytes (downloader)
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-01}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}
-  @argument[stride]{an unsigned integer with the stride of the resulting data
+  @argument[stride]{an unsigned integer for the stride of the resulting data
     in bytes}
-  @return{The @class{g:bytes} instance with the downloaded pixels.}
+  @return{The @class{g:bytes} instance for the downloaded pixels.}
   @begin{short}
     Downloads the given texture pixels into a @class{g:bytes} instance.
   @end{short}
@@ -177,11 +177,11 @@
 (cffi:defcfun ("gdk_texture_downloader_download_into"
                texture-downloader-download-into) :void
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-01}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}
   @argument[data]{a pointer to enough memory to be filled with the downloaded
     data of the texture}
-  @argument[stride]{an unsigned integer with the rowstrides in bytes}
+  @argument[stride]{an unsigned integer for the rowstrides in bytes}
   @begin{short}
     Downloads the texture into local memory.
   @end{short}
@@ -211,11 +211,11 @@
 (cffi:defcfun ("gdk_texture_downloader_get_color_state"
                texture-downloader-color-state) (g:boxed color-state :return)
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2025-08-01}
   @syntax{(gdk:texture-downloader-color-state downloader) => state}
   @syntax{(setf (gdk:texture-downloader-color-state downloader) state)}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}
-  @argument[state]{a @class{gdk:color-state} instance with the color state to
+  @argument[state]{a @class{gdk:color-state} instance for the color state to
     use}
   @begin{short}
     Sets the color state the downloader will convert the data to.
@@ -246,15 +246,15 @@
 (cffi:defcfun ("gdk_texture_downloader_get_format" texture-downloader-format)
     memory-format
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2025-08-01}
   @syntax{(gdk:texture-downloader-format downloader) => format}
   @syntax{(setf (gdk:texture-downloader-format downloader) format)}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}
-  @argument[format]{a @class{gdk:memory-format} value with the format to use}
+  @argument[format]{a @sym{gdk:memory-format} value for the format to use}
   @begin{short}
-    Sets the format the downloader will download.
+    Gets or sets the format the downloader will download.
   @end{short}
-  By default, the @code{:default} value is set.
+  By default, the @var{gdk:+memory-default+} value is set.
 
   Since 4.10
   @see-class{gdk:texture-downloader}
@@ -278,7 +278,7 @@
 (cffi:defcfun ("gdk_texture_downloader_get_texture" texture-downloader-texture)
     (g:object texture)
  #+liber-documentation
- "@version{2024-12-2}
+ "@version{2024-12-02}
   @syntax{(gdk:texture-downloader-texture downloader) => texture}
   @syntax{(setf (gdk:texture-downloader-texture downloader) texture)}
   @argument[downloader]{a @class{gdk:texture-downloader} instance}

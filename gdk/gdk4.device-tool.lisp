@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.device-tool.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.16 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 Dieter Kaiser
+;;; Copyright (C) 2024 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -74,7 +74,7 @@
 (setf (liber:alias-for-symbol 'device-tool-type)
       "GEnum"
       (liber:symbol-documentation 'device-tool-type)
- "@version{2024-7-11}
+ "@version{2025-07-30}
   @begin{declaration}
 (gobject:define-genum \"GdkDeviceToolType\" device-tool-type
   (:export t
@@ -89,7 +89,7 @@
   :lens)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:unkown]{Tool is of an unknown type.}
       @entry[:pen]{Tool is a standard tablet stylus.}
       @entry[:eraser]{Tool is standard tablet eraser.}
@@ -98,7 +98,7 @@
       @entry[:airbrush]{Tool is an airbrush stylus.}
       @entry[:mouse]{Tool is a mouse.}
       @entry[:lens]{Tool is a lens cursor.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Indicates the specific type of tool being used being a tablet.
@@ -131,7 +131,7 @@
 
 #+liber-documentation
 (setf (documentation 'device-tool 'type)
- "@version{2024-1-7}
+ "@version{2025-07-31}
   @short{A physical tool associated to a @class{gdk:device} object.}
   @see-slot{gdk:device-tool-axes}
   @see-slot{gdk:device-tool-hardware-id}
@@ -147,7 +147,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "axes" 'device-tool) t)
- "The @code{axes} property of type @symbol{gdk:axis-flags}
+ "The @code{axes} property of type @sym{gdk:axis-flags}
   (Read / Write / Construct Only) @br{}
   The device tool axes.")
 
@@ -155,15 +155,14 @@
 (setf (liber:alias-for-function 'device-tool-axes)
       "Accessor"
       (documentation 'device-tool-axes 'function)
- "@version{2024-1-7}
+ "@version{2025-07-31}
   @syntax{(gdk:device-tool-axes object) => axes}
   @argument[object]{a @class{gdk:device-tool} object}
-  @argument[axes]{a @symbol{gdk:axis-flags} value}
+  @argument[axes]{a @sym{gdk:axis-flags} value}
   @begin{short}
-    Accessor of the @slot[gdk:device-tool]{axes} slot of the
-    @class{gdk:device-tool} class.
+    The accessor for the @slot[gdk:device-tool]{axes} slot of the
+    @class{gdk:device-tool} class gets the axes of the device tool.
   @end{short}
-  The @fun{gdk:device-tool-axes} function gets the axes of the device tool.
   @see-class{gdk:device-tool}
   @see-symbol{gdk:axis-flags}")
 
@@ -180,25 +179,24 @@
 (setf (liber:alias-for-function 'device-tool-hardware-id)
       "Accessor"
       (documentation 'device-tool-hardware-id 'function)
- "@version{2024-1-7}
+ "@version{2025-07-31}
   @syntax{(gdk:device-tool-hardware-id object) => hardware-id}
   @argument[object]{a @class{gdk:device-tool} object}
-  @argument[hardware-id]{an unsigned integer with the hardware identificator of
+  @argument[hardware-id]{an unsigned integer for the hardware identificator of
     the device tool}
   @begin{short}
-    Accessor of the @slot[gdk:device-tool]{hardware-id} slot of the
-    @class{gdk:device-tool} class.
+    The accessor for the @slot[gdk:device-tool]{hardware-id} slot of the
+    @class{gdk:device-tool} class gets the hardware ID of the device tool, or 0
+    if it is not known.
   @end{short}
-  The @fun{gdk:device-tool-hardware-id} function gets the hardware ID of the
-  device tool, or 0 if it is not known. When non-zero, the identificator is
-  unique for the given tool model, meaning that two identical tools will share
-  the same hardware ID, but will have different serial numbers. See the
-  @fun{gdk:device-tool-serial} function.
+  When non-zero, the identificator is unique for the given tool model, meaning
+  that two identical tools will share the same hardware ID, but will have
+  different serial numbers. See the @fun{gdk:device-tool-serial} function.
 
   This is a more concrete and device specific method to identify a
   device tool than the @fun{gdk:device-tool-tool-type} function, as a tablet may
-  support multiple devices with the same @symbol{gdk:device-tool-type} value,
-  but having different hardware identificators.
+  support multiple devices with the same @sym{gdk:device-tool-type} value, but
+  having different hardware identificators.
   @see-class{gdk:device-tool}
   @see-symbol{gdk:device-tool-type}
   @see-function{gdk:device-tool-serial}
@@ -217,16 +215,15 @@
 (setf (liber:alias-for-function 'device-tool-serial)
       "Accessor"
       (documentation 'device-tool-serial 'function)
- "@version{2024-1-7}
+ "@version{2025-08-04}
   @syntax{(gdk:device-tool-serial object) => serial}
   @argument[object]{a @class{gdk:device-tool} object}
-  @argument[serial]{an unsigned integer with the serial ID for the device tool}
+  @argument[serial]{an unsigned integer for the serial ID for the device tool}
   @begin{short}
-    Accessor of the @slot[gdk:device-tool]{serial} slot of the
-    @class{gdk:device-tool} class.
+    The accessor for the @slot[gdk:device-tool]{serial} slot of the
+    @class{gdk:device-tool} class gets the serial of the device tool.
   @end{short}
-  The @fun{gdk:device-tool-serial} function gets the serial of the device tool,
-  the value can be used to identify a physical tool, for example, a tablet pen,
+  The value can be used to identify a physical tool, for example, a tablet pen,
   across program executions.
   @see-class{gdk:device-tool}")
 
@@ -234,26 +231,26 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tool-type" 'device-tool) t)
- "The @code{tool-type} property of type @symbol{gdk:device-tool-type}
+ "The @code{tool-type} property of type @sym{gdk:device-tool-type}
   (Read / Write / Construct Only) @br{}
   The tool type. @br{}
-  Default value: @code{:unknown}")
+  Default value: @val[gdk:device-tool-type]{:unknown}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'device-tool-tool-type)
       "Accessor"
       (documentation 'device-tool-tool-type 'function)
- "@version{2024-1-7}
+ "@version{2025-07-31}
   @syntax{(gdk:device-tool-tool-type object) => tool-type}
   @argument[object]{a @class{gdk:device-tool} object}
-  @argument[tool-type]{a @symbol{gdk:device-tool-type} value}
+  @argument[tool-type]{a @sym{gdk:device-tool-type} value}
   @begin{short}
-    Accessor of the @slot[gdk:device-tool]{tool-type} slot of the
-    @class{gdk:device-tool} class.
+    The accessor for the @slot[gdk:device-tool]{tool-type} slot of the
+    @class{gdk:device-tool} class gets the @sym{gdk:device-tool-type} value of
+    the device tool.
   @end{short}
-  The @fun{gdk:device-tool-tool-type} function gets the
-  @symbol{gdk:device-tool-type} value of the device tool. This can be used to
-  figure out what sort of pen is being used, such as an airbrush or a pencil.
+  This can be used to figure out what sort of pen is being used, such as an
+  airbrush or a pencil.
   @see-class{gdk:device-tool}
   @see-symbol{gdk:device-tool-type}")
 

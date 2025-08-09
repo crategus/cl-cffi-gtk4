@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.toplevel-layout.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,7 +70,7 @@
 (setf (liber:alias-for-class 'toplevel-layout)
       "GBoxed"
       (documentation 'toplevel-layout 'type)
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @begin{declaration}
 (glib:define-gboxed-opaque toplevel-layout \"GdkToplevelLayout\"
   :type-initializer \"gdk_toplevel_layout_get_type\"
@@ -95,7 +95,7 @@
 
 (defun toplevel-layout-new ()
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @return{The newly created @class{gdk:toplevel-layout} instance.}
   @begin{short}
     Create a toplevel layout description.
@@ -127,10 +127,11 @@
 (cffi:defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
      (g:boxed toplevel-layout :return)
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2025-08-04}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
-  @return{The @class{gdk:toplevel-layout} instance with the copy of
-    @arg{layout}.}
+  @begin{return}
+    The @class{gdk:toplevel-layout} instance for the copy of @arg{layout}.
+  @end{return}
   @begin{short}
     Create a new @class{gdk:toplevel-layout} instance and copy the contents of
     @arg{layout} into it.
@@ -146,11 +147,13 @@
 
 (cffi:defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2025-08-04}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[other]{another @class{gdk:toplevel-layout} instance}
-  @return{@em{True} if @arg{layout} and @arg{other} have identical layout
-    properties, otherwise @em{false}.}
+  @begin{return}
+    @em{True} if @arg{layout} and @arg{other} have identical layout properties,
+    otherwise @em{false}.
+  @end{return}
   @begin{short}
     Check whether @arg{layout} and @arg{other} have identical layout properties.
   @end{short}
@@ -182,7 +185,7 @@
 
 (defun toplevel-layout-maximized (layout)
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @syntax{(gdk:toplevel-layout-maximized layout) => maximized}
   @syntax{(setf (gdk:toplevel-layout-maximized layout) maximized)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
@@ -222,7 +225,7 @@
 
 (defun toplevel-layout-fullscreen (layout)
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @syntax{(gdk:toplevel-layout-fullscreen layout) => fullscreen}
   @syntax{(setf (gdk:toplevel-layout-fullscreen layout) fullscreen)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
@@ -247,7 +250,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
                toplevel-layout-fullscreen-monitor) (g:object monitor)
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @argument[layout]{a @class{gdk:toplevel-layout} object}
   @return{The @class{gdk:monitor} object on which @arg{layout} fullscreens.}
   @begin{short}
@@ -274,7 +277,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
     :boolean
  #+liber-documentation
- "@version{2024-1-9}
+ "@version{2024-01-09}
   @syntax{(gdk:toplevel-layout-resizable layout) => resizable}
   @syntax{(setf (gdk:toplevel-layout-resizable layout) resizable)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}

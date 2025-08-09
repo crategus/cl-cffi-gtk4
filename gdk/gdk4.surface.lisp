@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.surface.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -39,7 +39,7 @@
 ;;;     gdk_surface_get_frame_clock
 ;;;     gdk_surface_get_height
 ;;;     gdk_surface_get_mapped
-;;;     gdk_surface_get_scale                              Since 4.12
+;;;     gdk_surface_get_scale                               Since 4.12
 ;;;     gdk_surface_get_scale_factor
 ;;;     gdk_surface_get_width
 ;;;
@@ -53,11 +53,11 @@
 ;;;     gdk_surface_hide
 ;;;     gdk_surface_translate_coordinates
 ;;;     gdk_surface_beep
-;;;     gdk_surface_set_opaque_region                      Deprecated 4.16
+;;;     gdk_surface_set_opaque_region                       Deprecated 4.16
 ;;;     gdk_surface_create_gl_context
-;;;     gdk_surface_create_vulkan_context                  Deprecated 4.14
+;;;     gdk_surface_create_vulkan_context                   Deprecated 4.14
 ;;;     gdk_surface_create_cairo_context
-;;;     gdk_surface_create_similar_surface                 Deprecated 4.12
+;;;     gdk_surface_create_similar_surface                  Deprecated 4.12
 ;;;     gdk_surface_queue_render
 ;;;     gdk_surface_request_layout
 ;;;     gdk_surface_set_input_region
@@ -72,7 +72,7 @@
 ;;;     frame-clock
 ;;;     height
 ;;;     mapped
-;;;     scale                                              Since 4.12
+;;;     scale                                               Since 4.12
 ;;;     scale-factor
 ;;;     width
 ;;;
@@ -129,7 +129,7 @@
 
 #+liber-documentation
 (setf (documentation 'surface 'type)
- "@version{2024-7-12}
+ "@version{2025-08-04}
   @begin{short}
     The @class{gdk:surface} object is a rectangular region on the screen.
   @end{short}
@@ -141,58 +141,63 @@
   API to interact with these surfaces. Other, more specialized surface types
   exist, but you will rarely interact with them directly.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"enter-monitor\" signal}
+    @begin[surface::enter-monitor]{signal}
       @begin{pre}
 lambda (surface monitor)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[monitor]{The @class{gdk:monitor} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when @arg{surface} starts being present on the monitor.
-    @subheading{The \"event\" signal}
+    @end{signal}
+    @begin[surface::event]{signal}
       @begin{pre}
 lambda (surface event)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[event]{The @class{gdk:event} instance to an input event.}
        @entry[Returns]{@em{True} to indicate that the event has been handled.}
-      @end{table}
+      @end{simple-table}
       Emitted when GDK receives an input event for @arg{surface}.
-    @subheading{The \"layout\" signal}
+    @end{signal}
+    @begin[surface::layout]{signal}
       @begin{pre}
 lambda (surface width height)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[surface]{The @class{gdk:surface} object.}
-       @entry[width]{The integer with the current width.}
-       @entry[height]{The integer with the current height.}
-      @end{table}
+       @entry[width]{The integer for the current width.}
+       @entry[height]{The integer for the current height.}
+      @end{simple-table}
       Emitted when the size of @arg{surface} is changed, or when relayout
       should be performed. The surface size is reported in \"application
       pixels\", not \"device pixels\". See the @fun{gdk:surface-scale-factor}
       function.
-    @subheading{The \"leave-monitor\" signal}
+    @end{signal}
+    @begin[surface::leave-monitor]{signal}
       @begin{pre}
 lambda (surface monitor)    :run-first
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[surface]{The @class{gdk:surface} object.}
        @entry[monitor]{The @class{gdk:monitor} object.}
-      @end{table}
+      @end{simple-table}
       Emitted when @arg{surface} stops being present on the monitor.
-    @subheading{The \"render\" signal}
+    @end{signal}
+    @begin[surface::render]{signal}
       @begin{pre}
 lambda (surface region)    :run-last
       @end{pre}
-      @begin[code]{table}
+      @begin[code]{simple-table}
        @entry[surface]{The @class{gdk:surface} object.}
-       @entry[region]{The @symbol{cairo:region-t} instance that needs to be
+       @entry[region]{The @sym{cairo:region-t} instance that needs to be
          redrawn.}
        @entry[Returns]{@em{True} to indicate that the signal has been handled.}
-      @end{table}
+      @end{simple-table}
       Emitted when part of the surface needs to be redrawn.
+    @end{signal}
   @end{dictionary}
   @see-constructor{gdk:surface-new-toplevel}
   @see-constructor{gdk:surface-new-popup}
@@ -222,7 +227,7 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-cursor)
       "Accessor"
       (documentation 'surface-cursor 'function)
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @syntax{(gdk:surface-cursor object) => cursor}
   @syntax{(setf (gdk:surface-cursor object) cursor)}
   @argument[object]{a @class{gdk:surface} object}
@@ -260,7 +265,7 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-display)
       "Accessor"
       (documentation 'surface-display 'function)
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @syntax{(gdk:surface-display object) => display}
   @syntax{(setf (gdk:surface-display object) display)}
   @argument[object]{a @class{gdk:surface} object}
@@ -286,7 +291,7 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-frame-clock)
       "Accessor"
       (documentation 'surface-frame-clock 'function)
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @syntax{(gdk:surface-frame-clock object) => clock}
   @syntax{(setf (gdk:surface-frame-clock object) clock)}
   @argument[object]{a @class{gdk:surface} object}
@@ -314,18 +319,17 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-height)
       "Accessor"
       (documentation 'surface-height 'function)
- "@version{2024-1-8}
+ "@version{2025-08-02}
   @syntax{(gdk:surface-height object) => height}
   @syntax{(setf (gdk:surface-height object) height)}
   @argument[object]{a @class{gdk:surface} object}
-  @argument[width]{an integer with the height of the surface}
+  @argument[width]{an integer for the height of the surface}
   @begin{short}
-    Accessor of the @slot[gdk:surface]{height} slot of the @class{gdk:surface}
-    class.
+    The accessor for the @slot[gdk:surface]{height} slot of the
+    @class{gdk:surface} class returns the height of the given @arg{surface}.
   @end{short}
-  The @fun{gdk:surface-height} function returns the height of the given
-  @arg{surface}. Surface size is reported in \"application pixels\", not
-  \"device pixels\". See the @fun{gdk:surface-scale-factor} function.
+  Surface size is reported in \"application pixels\", not \"device pixels\".
+  See the @fun{gdk:surface-scale-factor} function.
   @see-class{gdk:surface}
   @see-function{gdk:surface-scale-factor}")
 
@@ -341,7 +345,7 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-mapped)
       "Accessor"
       (documentation 'surface-mapped 'function)
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @syntax{(gdk:surface-mapped object) => mapped}
   @syntax{(setf (gdk:surface-mapped object) mapped)}
   @argument[object]{a @class{gdk:surface} object}
@@ -369,20 +373,19 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-scale)
       "Accessor"
       (documentation 'surface-scale 'function)
- "@version{2024-1-8}
+ "@version{2025-08-02}
   @syntax{(gdk:surface-scale object) => scale}
   @syntax{(setf (gdk:surface-scale object) scale)}
   @argument[object]{a @class{gdk:surface} object}
-  @argument[scale]{a double float with the scale}
+  @argument[scale]{a double float for the scale}
   @begin{short}
-    Accessor of the @slot[gdk:surface]{scale} slot of the @class{gdk:surface}
-    class.
+    The accessor for the @slot[gdk:surface]{scale} slot of the
+    @class{gdk:surface} class returns the internal scale that maps from surface
+    coordinates to the actual device pixels.
   @end{short}
-  The @fun{gdk:surface-scale} function returns the internal scale that maps from
-  surface coordinates to the actual device pixels. When the scale is bigger than
-  1, the windowing system prefers to get buffers with a resolution that is
-  bigger than the surface size, for example, to show the surface on a
-  high-resolution display, or in a magnifier.
+  When the scale is bigger than 1, the windowing system prefers to get buffers
+  with a resolution that is bigger than the surface size, for example, to show
+  the surface on a high-resolution display, or in a magnifier.
 
   Compare with the @fun{gdk:surface-scale-factor} function, which returns the
   next larger integer.
@@ -406,19 +409,17 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-scale-factor)
       "Accessor"
       (documentation 'surface-scale-factor 'function)
- "@version{2024-1-8}
+ "@version{2025-08-02}
   @syntax{(gdk:surface-scale-factor object) => factor}
-  @syntax{(setf (gdk:surface-scale-factor object) factor)}
   @argument[object]{a @class{gdk:surface} object}
-  @argument[factor]{an integer with the scale factor}
+  @argument[factor]{an integer for the scale factor}
   @begin{short}
-    Accessor of the @slot[gdk:surface]{scale-factor} slot of the
-    @class{gdk:surface} class.
+    The accessor for the @slot[gdk:surface]{scale-factor} slot of the
+    @class{gdk:surface} class returns the internal scale factor that maps from
+    surface coordinates to the actual device pixels.
   @end{short}
-  The @fun{gdk:surface-scale-factor} function returns the internal scale factor
-  that maps from surface coordinates to the actual device pixels. On traditional
-  systems this is 1, but on very high density outputs this can be a higher value
-  (often 2).
+  On traditional systems this is 1, but on very high density outputs this can
+  be a higher value (often 2).
 
   A higher value means that drawing is automatically scaled up to a higher
   resolution, so any code doing drawing will automatically look nicer. However,
@@ -441,18 +442,16 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-width)
       "Accessor"
       (documentation 'surface-width 'function)
- "@version{2024-1-8}
+ "@version{2025-08-02}
   @syntax{(gdk:surface-width object) => width}
-  @syntax{(setf (gdk:surface-width object) width)}
   @argument[object]{a @class{gdk:surface} object}
-  @argument[width]{an integer with the width of the surface}
+  @argument[width]{an integer for the width of the surface}
   @begin{short}
-    Accessor of the @slot[gdk:surface]{width} slot of the @class{gdk:surface}
-    class.
+    The accessor for the @slot[gdk:surface]{width} slot of the
+    @class{gdk:surface} class returns the width of the given @arg{surface}.
   @end{short}
-  The @fun{gdk:surface-width} function returns the width of the given
-  @arg{surface}. Surface size is reported in \"application pixels\", not
-  \"device pixels\". See the @fun{gdk:surface-scale-factor} function.
+  Surface size is reported in \"application pixels\", not \"device pixels\".
+  See the @fun{gdk:surface-scale-factor} function.
   @see-class{gdk:surface}
   @see-function{gdk:surface-scale-factor}")
 
@@ -480,8 +479,8 @@ lambda (surface region)    :run-last
 (cffi:defcfun ("gdk_surface_new_popup" surface-new-popup)
     (g:object surface)
  #+liber-documentation
- "@version{2024-12-19}
-  @argument[parent]{a @class{gdk:surface} object with the parent surface to
+ "@version{2025-08-02}
+  @argument[parent]{a @class{gdk:surface} object for the parent surface to
     attach the surface to}
   @argument[autohide]{a boolean whether to hide the surface on outside clicks}
   @return{The new @class{gdk:surface} object.}
@@ -503,7 +502,7 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_destroy" surface-destroy) :void
  #+liber-documentation
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
     Destroys the window system resources associated with @arg{surface} and
@@ -525,7 +524,7 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_is_destroyed" surface-is-destroyed) :boolean
  #+liber-documentation
- "@version{2024-1-8}
+ "@version{2024-01-08}
   @argument[surface]{a @class{gdk:surface} object}
   @return{@em{True} if the surface is destroyed.}
   @short{Check to see if a surface is destroyed.}
@@ -540,7 +539,7 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_hide" surface-hide) :void
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2023-04-08}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
     For toplevel surfaces, withdraws them, so they will no longer be known to
@@ -567,17 +566,16 @@ lambda (surface region)    :run-last
 
 (defun surface-translate-coordinates (from to x y)
  #+liber-documentation
- "@version{#2024-7-12}
-  @argument[from]{a @class{gdk:surface} object with the origin surface}
-  @argument[to]{a @class{gdk:surface} object with the target surface}
-  @argument[x]{a number coerced to a double float with the x coordinate to
+ "@version{#2025-08-02}
+  @syntax{(gdk:surface-translate-coordinates from to x y) => xnew, ynew}
+  @argument[from]{a @class{gdk:surface} object for the origin surface}
+  @argument[to]{a @class{gdk:surface} object for the target surface}
+  @argument[x]{a number coerced to a double float for the x coordinate to
     translate}
-  @argument[x]{a number coerced to a double float with the y coordinate to
+  @argument[x]{a number coerced to a double float for the y coordinate to
     translate}
-  @begin{return}
-    @arg{xnew} -- a double float with the result for the x coordinate @br{}
-    @arg{ynew} -- a double float with the result for the y coordinate
-  @end{return}
+  @argument[xnew]{a double float for the result for the x coordinate}
+  @argument[ynew]{a double float for the result for the y coordinate}
   @begin{short}
     Translates the given coordinates from being relative to the @arg{from}
     surface to being relative to the @arg{to} surface.
@@ -603,7 +601,7 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_beep" surface-beep) :void
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2023-04-08}
   @argument[surface]{a toplevel @class{gdk:surface} object}
   @begin{short}
     Emits a short beep associated to @arg{surface} in the appropriate display,
@@ -627,9 +625,9 @@ lambda (surface region)    :run-last
 
 (defun surface-set-opaque-region (surface region)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2025-08-02}
   @argument[surface]{a toplevel or non-native @class{gdk:surface} object}
-  @argument[region]{a @symbol{cairo:region-t} instance, or @code{nil}}
+  @argument[region]{a @sym{cairo:region-t} instance, or @code{nil}}
   @begin{short}
     For optimisation purposes, compositing window managers may like to not draw
     obscured regions of surfaces, or turn off blending during for these regions.
@@ -698,7 +696,7 @@ lambda (surface region)    :run-last
 (cffi:defcfun ("gdk_surface_create_cairo_context" surface-create-cairo-context)
     (g:object cairo-context)
  #+liber-documentation
- "@version{#2023-7-30}
+ "@version{#2023-07-30}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The newly created @class{gdk:cairo-context} object.}
   @begin{short}
@@ -725,15 +723,15 @@ lambda (surface region)    :run-last
 
 (defun surface-create-similar-surface (surface content width height)
  #+liber-documentation
- "@version{#2024-1-8}
+ "@version{#2025-08-02}
   @argument[surface]{a @class{gdk:surface} object to make the new surface
     similar to}
-  @argument[content]{a @symbol{cairo:content-t} value for the content of the
-    new surface}
-  @argument[width]{an integer with the width of the new surface}
-  @argument[height]{an integer with the height of the new surface}
+  @argument[content]{a @sym{cairo:content-t} value for the content of the new
+    surface}
+  @argument[width]{an integer for the width of the new surface}
+  @argument[height]{an integer for the height of the new surface}
   @begin{return}
-    A newly allocated @symbol{cairo:surface-t} instance. The caller owns the
+    The newly allocated @sym{cairo:surface-t} instance. The caller owns the
     surface and should call the @fun{cairo:surface-destroy} function when done
     with it. This function always returns a valid pointer, but it will return
     a \"nil\" surface if the surface is in an error state.
@@ -772,10 +770,11 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_queue_render" surface-queue-render) :void
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2025-08-02}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
-    Forces a @code{\"render\"} signal emission for surface to be scheduled.
+    Forces a @sig[gdk:surface]{render} signal emission for surface to be
+    scheduled.
   @end{short}
   This function is useful for implementations that track invalid regions on
   their own.
@@ -790,7 +789,7 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_request_layout" surface-request-layout) :void
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2023-04-08}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
     Request a layout phase from the frame clock of the surface.
@@ -808,9 +807,9 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_set_input_region" surface-set-input-region) :void
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2025-08-02}
   @argument[surface]{a @class{gdk:surface} object}
-  @argument[region]{a @symbol{cairo:region-t} instance with the region of
+  @argument[region]{a @sym{cairo:region-t} instance for the region of
     @arg{surface} to be reactive}
   @begin{short}
     Apply the region to the surface for the purpose of event handling.
@@ -846,14 +845,13 @@ lambda (surface region)    :run-last
 
 (defun surface-device-position (surface device)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2025-08-02}
+  @syntax{(gdk:surface-device-position surface device) => x, y, mask}
   @argument[surface]{a @class{gdk:surface} object}
   @argument[device]{a @class{gdk:device} object}
-  @begin{return}
-    @arg{x} -- a double float with the x coordinate of @arg{device} @br{}
-    @arg{y} -- a double float with the y coordinate of @arg{device} @br{}
-    @arg{mask} -- a @symbol{gdk:modifier-type} value
-  @end{return}
+  @argument[x]{a double float for the x coordinate of @arg{device}}
+  @argument[y]{a double float for the y coordinate of @arg{device}}
+  @argument[mask]{a @sym{gdk:modifier-type} value}
   @begin{short}
     Obtains the current device position in doubles and modifier state.
   @end{short}
@@ -883,7 +881,7 @@ lambda (surface region)    :run-last
 (cffi:defcfun ("gdk_surface_get_device_cursor" surface-device-cursor)
     (g:object cursor)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2023-04-08}
   @syntax{(gdk:surface-device-cursor surface device) => cursor}
   @syntax{(setf (gdk:surface-device-cursor surface device) cursor)}
   @argument[surface]{a @class{gdk:surface} object}

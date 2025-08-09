@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gdk4.pango-interaction.lisp
 ;;;
-;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GDK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GDK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -53,17 +53,19 @@
 
 (defun pango-layout-clip-region (layout xorigin yorigin ranges)
  #+liber-documentation
- "@version{#2024-7-16}
+ "@version{#2025-08-04}
   @argument[layout]{a @class{pango:layout} object}
-  @argument[xorigin]{an integer with the x pixel where you intend to draw the
+  @argument[xorigin]{an integer for the x pixel where you intend to draw the
     layout with this clip }
-  @argument[yorigin]{an integer with the y pixel where you intend to draw the
+  @argument[yorigin]{an integer for the y pixel where you intend to draw the
     layout with this clip }
-  @argument[ranges]{a list of integer with the byte indexes into the layout,
+  @argument[ranges]{a list of integer for the byte indexes into the layout,
     where even members of the list are start indexes and odd elements end
     indexes}
-  @return{The @symbol{cairo:region-t} instance with the clip region containing
-    the given ranges.}
+  @begin{return}
+    The @sym{cairo:region-t} instance for the clip region containing the given
+    ranges.
+  @end{return}
   @begin{short}
     Obtains a clip region which contains the areas where the given ranges of
     text would be drawn.
@@ -102,17 +104,19 @@
 
 (defun pango-layout-line-clip-region (line xorigin yorigin ranges)
  #+liber-documentation
- "@version{#2024-7-16}
+ "@version{#2025-08-04}
   @argument[line]{a @class{pango:layout-line} instance}
-  @argument[xorigin]{an integer with the x pixel where you intend to draw the
+  @argument[xorigin]{an integer for the x pixel where you intend to draw the
     layout line with this clip }
-  @argument[yorigin]{an integer with the y pixel where you intend to draw the
+  @argument[yorigin]{an integer for the y pixel where you intend to draw the
     layout line with this clip }
-  @argument[ranges]{a list of integer with the byte indexes into the layout,
+  @argument[ranges]{a list of integer for the byte indexes into the layout,
     where even members of the list are start indexes and odd elements end
     indexes}
-  @return{The @symbol{cairo:region-t} instance with the clip region containing
-    the given ranges.}
+  @begin{return}
+    The @sym{cairo:region-t} instance for the clip region containing the given
+    ranges.
+  @end{return}
   @begin{short}
     Obtains a clip region which contains the areas where the given ranges of
     text would be drawn.

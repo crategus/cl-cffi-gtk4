@@ -97,13 +97,12 @@
 (setf (liber:alias-for-variable '+memory-default+)
       "Constant"
       (documentation '+memory-default+ 'variable)
- "@version{2025-3-11}
+ "@version{2025-07-30}
   @begin{short}
-    The default @symbol{gdk:memory-format} value for the memory format used by
-    GTK.
+    The default @sym{gdk:memory-format} value for the memory format used by GTK.
   @end{short}
   This is the format provided by the @fun{gdk:texture-download} function. It is
-  equal to the @code{:argb32} value of the @symbol{cairo:format-t} enumeration.
+  equal to the @code{:argb32} value of the @sym{cairo:format-t} enumeration.
 
   Be aware that this format is different for different endianness.
   @see-symbol{gdk:memory-format}
@@ -182,7 +181,7 @@
 (setf (liber:alias-for-symbol 'memory-format)
       "GEnum"
       (liber:symbol-documentation 'memory-format)
- "@version{2025-3-11}
+ "@version{2025-07-30}
   @begin{declaration}
 (gobject:define-genum \"GdkMemoryFormat\" memory-format
   (:export t
@@ -223,7 +222,7 @@
   :N-FORMATS)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes for blue, green, red, alpha. The
         color values are premultiplied with the alpha value. This is the default
         memory format for little endianness.}
@@ -278,17 +277,18 @@
       @entry[:X8B8G8R8]{4 bytes for unused, blue, green, red. Since 4.14}
       @entry[:N-FORMATS]{The number of formats. This value will change as more
         formats get added, so do not rely on its concrete integer.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
-    The @symbol{gdk:memory-format} enumeration describes a format that bytes
-    can have in memory.
+    The @sym{gdk:memory-format} enumeration describes a format that bytes can
+    have in memory.
   @end{short}
   It describes formats by listing the contents of the memory passed to it. So
-  @code{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed by a byte each of
-  red, green and blue. It is not endian-dependent, so the @code{:argb32} value
-  of the @symbol{cairo:format-t} enumeration is represented by different
-  memory format values on architectures with different endiannesses.
+  @val[gdk:memory-format]{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed
+  by a byte each of red, green and blue. It is not endian-dependent, so the
+  @val[gdk:memory-format]{:argb32} value of the @sym{cairo:format-t} enumeration
+  is represented by different memory format values on architectures with
+  different endiannesses.
 
   Its naming is modelled after
   @url[https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#VkFormat]{VkFormat}.
@@ -321,7 +321,7 @@
 (setf (liber:alias-for-class 'texture)
       "Class"
       (documentation 'texture 'type)
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @begin{short}
     The @class{gdk:texture} object is the basic element used to refer to pixel
     data.
@@ -364,7 +364,7 @@
 (setf (liber:alias-for-function 'texture-color-state)
       "Accessor"
       (documentation 'texture-color-state 'function)
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @syntax{(gdk:texture-color-state object) => state}
   @argument[object]{a @class{gdk:texture} object}
   @argument[state]{a @class{gdk:color-state} instance}
@@ -393,16 +393,14 @@
 (setf (liber:alias-for-function 'texture-height)
       "Accessor"
       (documentation 'texture-height 'function)
- "@version{2025-3-11}
+ "@version{2025-08-04}
   @syntax{(gdk:texture-height object) => height}
   @argument[object]{a @class{gdk:texture} object}
-  @argument[height]{an integer with the height of the texture}
+  @argument[height]{an integer for the height of the texture}
   @begin{short}
-    Accessor of the @slot[gdk:texture]{height} slot of the @class{gdk:texture}
-    class.
+    The accessor for the @slot[gdk:texture]{height} slot of the
+    @class{gdk:texture} class returns the height of the texture, in pixels.
   @end{short}
-  The @fun{gdk:texture-height} function returns the height of the texture , in
-  pixels.
   @see-class{gdk:texture}")
 
 ;;; --- gdk:texture-width ------------------------------------------------------
@@ -419,16 +417,14 @@
 (setf (liber:alias-for-function 'texture-width)
       "Accessor"
       (documentation 'texture-width 'function)
- "@version{2025-3-11}
+ "@version{2025-08-04}
   @syntax{(gdk:texture-width object) => width}
   @argument[object]{a @class{gdk:texture} object}
-  @argument[width]{an integer with the width of the texture}
+  @argument[width]{an integer for the width of the texture}
   @begin{short}
-    Accessor of the @slot[gdk:texture]{width} slot of the @class{gdk:texture}
-    class.
+    The accessor of the @slot[gdk:texture]{width} slot of the
+    @class{gdk:texture} class returns the width of the texture, in pixels.
   @end{short}
-  The @fun{gdk:texture-width} function returns the width of the texture , in
-  pixels.
   @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
@@ -438,7 +434,7 @@
 (cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
     (g:object texture :return)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -457,7 +453,7 @@
 (cffi:defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
     (g:object texture :return)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[path]{a string for the path of the resource file}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -487,7 +483,7 @@
 
 (defun texture-new-from-file (file)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[file]{a @class{g:file} object to load}
   @begin{return}
     The newly created @class{gdk:texture} object, or @code{nil} if an error
@@ -518,7 +514,7 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[path]{a pathname or namestring for the file to load}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -554,7 +550,7 @@
 #+gtk-4-6
 (defun texture-new-from-bytes (bytes)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[bytes]{a @class{g:bytes} instance containing data to load}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
@@ -584,7 +580,7 @@
 
 (cffi:defcfun ("gdk_texture_download" texture-download) :void
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-07-30}
   @argument[texture]{a @class{gdk:texture} object}
   @argument[data]{a pointer to enough memory to be filled with the downloaded
     data of @arg{texture}}
@@ -595,9 +591,9 @@
   This may be an expensive operation, as the actual texture data may reside on
   a GPU or on a remote display server.
 
-  The data format of the downloaded data is equivalent to the @code{:argb32}
-  value of the @symbol{cairo:format-t} enumeration, so every downloaded pixel
-  requires 4 bytes of memory.
+  The data format of the downloaded data is equivalent to the
+  @val[cairo:format-t]{:argb32} value of the @sym{cairo:format-t} enumeration,
+  so every downloaded pixel requires 4 bytes of memory.
   @begin[Examples]{dictionary}
   Downloading a texture into a Cairo image surface:
   @begin{pre}
@@ -625,7 +621,7 @@
 
 (cffi:defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
  #+liber-documentation
- "@version{#2025-3-11}
+ "@version{#2025-03-11}
   @argument[texture]{a @class{gdk:texture} object}
   @argument[filename]{a string for the filename to store to}
   @return{@em{True} if saving succed, @em{false} on failure.}
@@ -650,7 +646,7 @@
 (cffi:defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
     (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[texture]{a @class{gdk:texture} object}
   @return{The newly allocated @class{g:bytes} instance containing PNG data.}
   @begin{short}
@@ -681,7 +677,7 @@
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
  #+liber-documentation
- "@version{#2025-3-11}
+ "@version{#2025-03-11}
   @argument[texture]{a @class{gdk:texture} object}
   @argument[filename]{a string for the filename to store to}
   @return{@em{True} if saving succeeded, @em{false} on failure.}
@@ -706,7 +702,7 @@
 (cffi:defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
     (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @argument[texture]{a @class{gdk:texture} object}
   @return{The newly allocated @class{g:bytes} instance containing TIFF data.}
   @begin{short}
@@ -739,11 +735,11 @@
 #+gtk-4-10
 (cffi:defcfun ("gdk_texture_get_format" texture-format) memory-format
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-07-30}
   @argument[texture]{a @class{gdk:texture} object}
   @begin{return}
-    The @symbol{gdk:memory-format} value with the preferred format for the
-    data of the texture.
+    The @sym{gdk:memory-format} value with the preferred format for the data
+    of the texture.
   @end{return}
   @begin{short}
     Gets the memory format most closely associated with the data of the texture.
@@ -780,7 +776,7 @@
 (setf (liber:alias-for-class 'memory-texture)
       "Class"
       (documentation 'memory-texture 'type)
- "@version{2025-3-11}
+ "@version{2025-03-11}
   @begin{short}
     The @class{gdk:memory-texture} class is a @class{gdk:texture} implementation
     representing image data in memory.
@@ -794,11 +790,10 @@
 (cffi:defcfun ("gdk_memory_texture_new" memory-texture-new)
     (g:object texture :return)
  #+liber-documentation
- "@version{2025-3-11}
+ "@version{2025-07-30}
   @argument[width]{an integer for the width of the texture}
   @argument[height]{an integer for the height of the texture}
-  @argument[format]{a @symbol{gdk:memory-format} value for the format of the
-    data}
+  @argument[format]{a @sym{gdk:memory-format} value for the format of the data}
   @argument[bytes]{a @class{g:bytes} instance containing the pixel data}
   @argument[stride]{an integer for the rowstride of the data}
   @return{The newly created @class{gdk:texture} object.}
@@ -836,7 +831,7 @@
 (setf (liber:alias-for-class 'gl-texture)
       "Class"
       (documentation 'gl-texture 'type)
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @begin{short}
     A @class{gdk:texture} implementation representing a GL texture object.
   @end{short}
@@ -861,17 +856,17 @@
 #+nil
 (defun gl-texture-new (context id width height)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2025-08-04}
   @argument[context]{a @class{gdk:gl-context} object}
-  @argument[id]{an unsigned integer with the ID of a texture that was created
+  @argument[id]{an unsigned integer for the ID of a texture that was created
     with @arg{context}}
-  @argument[width]{an integer with the nominal width of the texture}
-  @argument[height]{an integer with the nominal height of the texture}
+  @argument[width]{an integer for the nominal width of the texture}
+  @argument[height]{an integer for the nominal height of the texture}
   @argument[destroy]{a destroy notify that will be called when the GL resources
     are released, not implemented at this time (2023-8-1)}
   @argument[data]{data that gets passed to destroy, not implemented at this
     time (2023-8-1)}
-  @return{A newly created @class{gdk:texture} object.}
+  @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture for an existing GL texture.
   @end{short}
@@ -898,7 +893,7 @@
 #+nil
 (cffi:defcfun ("gdk_gl_texture_release" gl-texture-release) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2023-08-01}
   @argument[texture]{a @class{gdk:gl-texture} object}
   @begin{short}
     Releases the GL resources held by a @class{gdk:gl-texture} object that was
