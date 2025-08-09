@@ -7,7 +7,7 @@
 ;;;; In addition, this example demonstrate how to use CSS style information to
 ;;;; change the appearance of a widget.
 ;;;;
-;;;; 2024-4-19
+;;;; 2025-07-26
 
 (in-package :gtk4-example)
 
@@ -39,21 +39,21 @@
                                 :title "Center Box"))
          (provider (make-instance 'gtk:css-provider)))
     ;; Add Start button
-    (let ((button (make-instance 'gtk:button
-                                 :label "START")))
-      (setf (gtk:widget-width-request (gtk:button-child button)) 120)
-      (setf (gtk:widget-height-request (gtk:button-child button)) 120)
-      (setf (gtk:center-box-start-widget box) button))
+    (setf (gtk:center-box-start-widget box)
+          (make-instance 'gtk:button
+                         :label "START"
+                         :width-request 120
+                         :height-request 120))
     ;; Add Center button
-    (let ((button (make-instance 'gtk:button
-                                 :label "CENTER")))
-      (setf (gtk:widget-width-request (gtk:button-child button)) 80)
-      (setf (gtk:center-box-center-widget box) button))
+    (setf (gtk:center-box-center-widget box)
+          (make-instance 'gtk:button
+                         :label "CENTER"
+                         :width-request 80))
     ;; Add End button
-    (let ((button (make-instance 'gtk:button
-                                  :label "END")))
-      (setf (gtk:widget-width-request (gtk:button-child button)) 60)
-      (setf (gtk:center-box-end-widget box) button))
+    (setf (gtk:center-box-end-widget box)
+          (make-instance 'gtk:button
+                         :label "END"
+                         :width-request 60))
     ;; Load CSS from data into the provider and apply CSS
     (gtk:css-provider-load-from-string provider css-button)
     (gtk:widget-add-css-class box "centerbox")

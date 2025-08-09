@@ -25,6 +25,8 @@
            ;; Layout Containers
            #:do-box-append
            #:do-box-center
+           #:do-box-baseline
+           #:do-box-baseline-vertical
            #:do-grid-spacing
            #:do-grid-buildable
            #:do-revealer
@@ -45,7 +47,9 @@
            #:do-fixed
 
            ;; Layout Managers
+           #:do-layout-manager-transition
            #:do-fixed-layout
+           #:do-fixed-layout-transformations
            #:do-constraint-simple
            #:do-constraint-interactive
            #:do-constraint-builder
@@ -264,10 +268,26 @@ sem venenatis, vitae ultricies arcu laoreet."))
                                      :package "gtk4-example"
                                      :sourcedir "resource/"
                                      :verbose t))
-    (let (;; Create an application
-          (app (make-instance 'gtk:application
-                              :application-id "com.crategus.run-example"
-                              :resource-base-path (null-pointer))))
+    (let* (;; Create an application
+           (app (make-instance 'gtk:application
+                               :application-id "com.crategus.run-example"
+                               :resource-base-path (null-pointer)))
+           (entries (list (list "inspector"
+                                (lambda (action parameter)
+                                  (declare (ignore action parameter))
+                                  (gtk:window-set-interactive-debugging t)))
+                          (list "quit"
+                                (lambda (action parameter)
+                                  (declare (ignore action parameter))
+                                  (let ((windows (gtk:application-windows app)))
+                                    (dolist (window windows)
+                                      (gtk:window-destroy window))))))))
+      ;; Add actions entries for the application
+      (g:action-map-add-action-entries app entries)
+      ;; Add accelerators for the application
+      (setf (gtk:application-accels-for-action app "app.quit") "<Control>q")
+      (setf (gtk:application-accels-for-action app "app.inspector") "<Control>d")
+
       ;; Connect signal "activate" to the application
       (g:signal-connect app "activate"
           (lambda (application)

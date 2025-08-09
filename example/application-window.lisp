@@ -5,12 +5,12 @@
 ;;;; <tt>gtk:application</tt> features. Notably, it can handle an application
 ;;;; menubar.
 ;;;;
-;;;; Last version: 2024-5-24
+;;;; Last version: 2025-07-11
 
 (in-package :gtk4-example)
 
 (defun do-application-window (&optional application)
-  (let ((menus
+  (let ((menu
          "<interface>
            <menu id='menubar'>
              <submenu>
@@ -31,8 +31,8 @@
                                :application application
                                :title "Application Window"
                                :show-menubar t)))
-    ;; Read the menus from a string
-    (gtk:builder-add-from-string builder menus)
+    ;; Read the menu from a string
+    (gtk:builder-add-from-string builder menu)
     ;; Set the menubar
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))

@@ -25,6 +25,8 @@
                ;; Layout Containers
                (:file "box-append")
                (:file "box-center")
+               (:file "box-baseline")
+               (:file "box-baseline-vertical")
                (:file "grid-spacing")
                (:file "grid-buildable")
                (:file "revealer")
@@ -45,7 +47,9 @@
                (:file "fixed")
 
                ;; Layout Managers
+               (:file "layout-manager-transition")
                (:file "fixed-layout")
+               (:file "fixed-layout-transformations")
                (:file "constraint-simple")
                (:file "constraint-interactive")
                (:file "constraint-builder")
