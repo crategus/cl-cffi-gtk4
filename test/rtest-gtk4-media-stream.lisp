@@ -34,30 +34,31 @@
              (glib-test:list-signals "GtkMediaStream")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkMediaStream" GTK:MEDIA-STREAM
-                      (:SUPERCLASS G:OBJECT
+                      (:SUPERCLASS GOBJECT:OBJECT
                        :EXPORT T
                        :INTERFACES ("GdkPaintable")
                        :TYPE-INITIALIZER "gtk_media_stream_get_type")
-                      ((DURATION MEDIA-STREAM-DURATION
-                        "duration" "gint64" T NIL)
+                      ((DURATION MEDIA-STREAM-DURATION "duration" "gint64" T
+                        NIL)
                        (ENDED MEDIA-STREAM-ENDED "ended" "gboolean" T NIL)
                        (ERROR MEDIA-STREAM-ERROR "error" "GError" T NIL)
-                       (HAS-AUDIO MEDIA-STREAM-HAS-AUDIO
-                        "has-audio" "gboolean" T NIL)
-                       (HAS-VIDEO MEDIA-STREAM-HAS-VIDEO
-                        "has-video" "gboolean" T NIL)
+                       (HAS-AUDIO MEDIA-STREAM-HAS-AUDIO "has-audio"
+                        "gboolean" T NIL)
+                       (HAS-VIDEO MEDIA-STREAM-HAS-VIDEO "has-video"
+                        "gboolean" T NIL)
                        (LOOP MEDIA-STREAM-LOOP "loop" "gboolean" T T)
                        (MUTED MEDIA-STREAM-MUTED "muted" "gboolean" T T)
                        (PLAYING MEDIA-STREAM-PLAYING "playing" "gboolean" T T)
-                       (PREPARED MEDIA-STREAM-PREPARED
-                        "prepared" "gboolean" T T)
-                       (SEEKABLE MEDIA-STREAM-SEEKABLE
-                        "seekable" "gboolean" T NIL)
-                       (SEEKING MEDIA-STREAM-SEEKING
-                        "seeking" "gboolean" T NIL)
-                       (TIMESTAMP MEDIA-STREAM-TIMESTAMP
-                        "timestamp" "gint64" T NIL)
+                       (PREPARED MEDIA-STREAM-PREPARED "prepared" "gboolean"
+                        T NIL)
+                       (SEEKABLE MEDIA-STREAM-SEEKABLE "seekable" "gboolean"
+                        T NIL)
+                       (SEEKING MEDIA-STREAM-SEEKING "seeking" "gboolean" T
+                        NIL)
+                       (TIMESTAMP MEDIA-STREAM-TIMESTAMP "timestamp" "gint64"
+                        T NIL)
                        (VOLUME MEDIA-STREAM-VOLUME "volume" "gdouble" T T)))
+
              (gobject:get-gtype-definition "GtkMediaStream"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -118,4 +119,4 @@
 ;;;     gtk_media_stream_error
 ;;;     gtk_media_stream_error_valist
 
-;;; 2024-9-20
+;;; 2025-08-05

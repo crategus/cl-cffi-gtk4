@@ -84,8 +84,7 @@
 
 (test gtk-directory-list-new
   (let* ((path (glib-sys:sys-path "test/"))
-         (file (g:file-new-for-path path))
-         (model (gtk:directory-list-new "standard::*" file)))
+         (model (gtk:directory-list-new "standard::*" path)))
     (is-false (gtk:directory-list-error model))
     (is (string= "standard::*" (gtk:directory-list-attributes model)))
     (is-true (gtk:directory-list-is-loading model))
@@ -93,4 +92,4 @@
     ;; TODO: Directories are loaded, but we have no items in the  list. Why?
     (is (= 0 (gtk:directory-list-n-items model)))))
 
-;;; 2024-12-15
+;;; 2025-08-05

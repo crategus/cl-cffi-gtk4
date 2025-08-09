@@ -96,4 +96,4 @@
                                      (:META-MASK 268435456))
              (gobject:get-gtype-definition "GdkModifierType"))))
 
-;;; 2024-9-18
+;;; 2024-09-18

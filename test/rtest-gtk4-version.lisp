@@ -19,7 +19,7 @@
 
 #+crategus
 (test gtk-micro-version
-  (is (= 4 (gtk:micro-version))))
+  (is (= 5 (gtk:micro-version))))
 
 #+windows
 (test gtk-micro-version
@@ -35,4 +35,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2025-05-25
+;;; 2025-08-05

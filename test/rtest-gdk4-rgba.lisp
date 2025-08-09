@@ -79,4 +79,4 @@
 (test gdk-rgba-to-string
   (is (string= "rgb(255,0,0)" (gdk:rgba-to-string (gdk:rgba-parse "red")))))
 
-;;; 2024-7-27
+;;; 2024-07-27
