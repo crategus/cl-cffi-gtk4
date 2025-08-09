@@ -70,7 +70,7 @@
 (setf (liber:alias-for-symbol 'corner)
       "GEnum"
       (liber:symbol-documentation 'corner)
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @begin{declaration}
 (gobject:define-genum \"GskCorner\" corner
   (:export t
@@ -89,7 +89,7 @@
     @end{table}
   @end{values}
   @begin{short}
-    The corner indices used by the @symbol{gsk:rounded-rect} instance.
+    The corner indices used by the @sym{gsk:rounded-rect} instance.
   @end{short}
   @see-symbol{gsk:rounded-rect}")
 
@@ -107,7 +107,7 @@
 (setf (liber:alias-for-symbol 'rounded-rect)
       "CStruct"
       (liber:symbol-documentation 'rounded-rect)
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @begin{declaration}
 (cffi:defcstruct rounded-rect
   (bounds (:struct graphene:rect-t))
@@ -115,10 +115,10 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[bounds]{The @symbol{graphene:rect-t} instance with the bounds of
-        the rounded rectangle.}
-      @entry[corner]{The array of @symbol{graphene:size-t} instances with the
-        size of the 4 rounded corners.}
+      @entry[bounds]{The @sym{graphene:rect-t} instance for the bounds of the
+        rounded rectangle.}
+      @entry[corner]{The array of @sym{graphene:size-t} instances for the size
+        of the 4 rounded corners.}
     @end{table}
   @end{values}
   @begin{short}
@@ -129,9 +129,9 @@
   bounds of the rounded rectangle are normalized and ensure that the corner
   values are positive and the corners do not overlap.
 
-  All functions taking a @symbol{gsk:rounded-rect} instance as an argument will
+  All functions taking a @sym{gsk:rounded-rect} instance as an argument will
   internally operate on a normalized copy. All functions returning a
-  @symbol{gsk:rounded-rect} instance will always return a normalized one.
+  @sym{gsk:rounded-rect} instance will always return a normalized one.
 
   The algorithm used for normalizing corner sizes is described in the
   @url[https://drafts.csswg.org/css-backgrounds-3/#border-radius]{CSS specification}.
@@ -145,11 +145,14 @@
 
 (defun rounded-rect-bounds (rect)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @syntax{(gsk:rounded-rect-bounds rect) => bounds}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance}
-  @short{Accessor of the @arg{bounds} slot of the rounded rectangle.}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[bounds]{a @sym{graphene:rect-t} instance}
+  @begin{short}
+    The accessor for the @arg{bounds} slot of the rounded rectangle returns
+    the bounds of the rounded rectangle.
+  @end{short}
   @see-symbol{gsk:rounded-rect}
   @see-symbol{graphene:rect-t}"
   (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'bounds))
@@ -158,13 +161,16 @@
 
 (defun rounded-rect-corner (rect nth)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @syntax{(gsk:rounded-rect-corner rect nth) => corner}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
   @argument[nth]{an integer for the number of the corner to retrieve}
-  @argument[corner]{a @symbol{graphene:size-t} instance for the size of
-    the @arg{nth} corner}
-  @short{Accessor of the @arg{nth} corner of the rounded rectangle.}
+  @argument[corner]{a @sym{graphene:size-t} instance for the size of the
+    @arg{nth} corner}
+  @begin{short}
+    The accessor for the @arg{nth} corner of the rounded rectangle returns
+    the size of the 4 rounded corners.
+  @end{short}
   @see-symbol{gsk:rounded-rect}
   @see-symbol{graphene:size-t}"
   (let ((ptr (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'corner)))
@@ -176,30 +182,28 @@
 
 (defmacro with-rounded-rect ((var &rest args) &body body)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @syntax{(gsk:with-rounded-rect (rounded) body) => result}
   @syntax{(gsk:with-rounded-rect (rounded source) body) => result}
   @syntax{(gsk:with-rounded-rect (rounded rect radius) body) => result}
   @syntax{(gsk:with-rounded-rect (rounded rect ltop rtop lbottom rbottom) body)
     => result}
-  @argument[rounded]{a @symbol{gsk:rounded-rect} instance to create and
-    initialize}
-  @argument[source]{a @symbol{gsk:rounded-rect} instance to use for
-    initialization}
-  @argument[rect]{a @symbol{graphene:rect-t} instance describing the bounds}
+  @argument[rounded]{a @sym{gsk:rounded-rect} instance to create and initialize}
+  @argument[source]{a @sym{gsk:rounded-rect} instance to use for initialization}
+  @argument[rect]{a @sym{graphene:rect-t} instance describing the bounds}
   @argument[radius]{a number coerced to a single float for the border radius}
-  @argument[ltop]{a @symbol{graphene:size-t} instance for the rounding radius
-    of the top left corner}
-  @argument[rtop]{a @symbol{graphene:size-t} instance for the rounding radius
-    of the top rigth corner}
-  @argument[lbottom]{a @symbol{graphene:size-t} instance for the rounding
-    radius of the bottom left corner}
-  @argument[rbottom]{a @symbol{graphene:size-t} instance for the rounding
-    radius of the bottom rigth corner}
+  @argument[ltop]{a @sym{graphene:size-t} instance for the rounding radius of
+    the top left corner}
+  @argument[rtop]{a @sym{graphene:size-t} instance for the rounding radius of
+    the top rigth corner}
+  @argument[lbottom]{a @sym{graphene:size-t} instance for the rounding radius
+    of the bottom left corner}
+  @argument[rbottom]{a @sym{graphene:size-t} instance for the rounding radius
+    of the bottom rigth corner}
   @begin{short}
-    The @fun{gsk:with-rounded-rect} macro allocates a new
-    @symbol{gsk:rounded-rect} instance, initializes the rounded rect with the
-    given values and executes the body that uses the rounded rect.
+    The @fun{gsk:with-rounded-rect} macro allocates a new @sym{gsk:rounded-rect}
+    instance, initializes the rounded rect with the given values and executes
+    the body that uses the rounded rect.
   @end{short}
   After execution of the body the allocated memory for the rounded rect is
   released.
@@ -207,9 +211,9 @@
   If no argument is given the components of the rounded rectangle are
   uninitialized. The initialization with one argument uses the
   @fun{gsk:rounded-rect-init-copy} function, which initializes the rounded from
-  another rounded rect. The initialization from a @symbol{graphene:rect-t}
-  instance and a number uses the @fun{gsk:rounded-rect-init-from-rect} function.
-  If six arguments are given, the rounded rectangle is initialized with the
+  another rounded rect. The initialization from a @sym{graphene:rect-t} instance
+  and a number uses the @fun{gsk:rounded-rect-init-from-rect} function. If six
+  arguments are given, the rounded rectangle is initialized with the
   @fun{gsk:rounded-rect-init} function.
   @see-symbol{gsk:rounded-rect}
   @see-symbol{graphene:rect-t}
@@ -243,9 +247,9 @@
 
 (defmacro with-rounded-rects (vars &body body)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2025-08-02}
   @syntax{(gsk:with-rounded-rects (rounded1 ... roundedn) body) => result}
-  @argument[rounded1 ... roundedn]{newly created @symbol{gsk:rounded-rect}
+  @argument[rounded1 ... roundedn]{newly created @sym{gsk:rounded-rect}
     instances}
   @argument[body]{a body that uses the bindings @arg{rounded1 ... roundedn}}
   @begin{short}
@@ -275,18 +279,18 @@
 (cffi:defcfun ("gsk_rounded_rect_init" rounded-rect-init)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance to initialize}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance describing the bounds}
-  @argument[top-left]{a @symbol{graphene:size-t} instance for the rounding
-    radius of the top left corner}
-  @argument[top-right]{a @symbol{graphene:size-t} instance for the rounding
-    radius of the top right corner}
-  @argument[bottom-right]{a @symbol{graphene:size-t} instance for the rounding
+ "@version{2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance to initialize}
+  @argument[bounds]{a @sym{graphene:rect-t} instance describing the bounds}
+  @argument[top-left]{a @sym{graphene:size-t} instance for the rounding radius
+    of the top left corner}
+  @argument[top-right]{a @sym{graphene:size-t} instance for the rounding radius
+    of the top right corner}
+  @argument[bottom-right]{a @sym{graphene:size-t} instance for the rounding
     radius of the bottom right corner}
-  @argument[bottom-left]{a @symbol{graphene:size-t} instance for the rounding
+  @argument[bottom-left]{a @sym{graphene:size-t} instance for the rounding
     radius of the bottom left corner}
-  @return{The initialized @symbol{gsk:rounded-rect} instance.}
+  @return{The initialized @sym{gsk:rounded-rect} instance.}
   @begin{short}
     Initializes the given @arg{rect} with the given values.
   @end{short}
@@ -316,11 +320,11 @@
 
 (defun rounded-rect-init-from-rect (rect bounds radius)
  #+liber-documentation
- "@version{2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance}
-  @argument[radius]{a number coerced to a float for the border radius}
-  @return{The initialized @symbol{gsk:rounded-rect} instance.}
+ "@version{2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[bounds]{a @sym{graphene:rect-t} instance}
+  @argument[radius]{a number coerced to a single float for the border radius}
+  @return{The initialized @sym{gsk:rounded-rect} instance.}
   @begin{short}
     Initializes @arg{rect} to the given @arg{bounds} and sets the radius of all
     four corners to @arg{radius}.
@@ -339,10 +343,10 @@
 (cffi:defcfun ("gsk_rounded_rect_init_copy" rounded-rect-init-copy)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[src]{a @symbol{gsk:rounded-rect} instance}
-  @return{The initialized @symbol{gsk:rounden-rect} instance.}
+ "@version{2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[src]{a @sym{gsk:rounded-rect} instance}
+  @return{The initialized @sym{gsk:rounden-rect} instance.}
   @begin{short}
     Initializes @arg{rect} using the given @arg{src} rounded rectangle.
   @end{short}
@@ -361,9 +365,9 @@
 (cffi:defcfun ("gsk_rounded_rect_normalize" rounded-rect-normalize)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @return{The normalized @symbol{gsk:rounded-rect} instance.}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @return{The normalized @sym{gsk:rounded-rect} instance.}
   @begin{short}
     Normalizes the passed rounded rectangle.
   @end{short}
@@ -387,9 +391,9 @@
 
 (defun rounded-rect-offset (rect dx dy)
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @return{The offset @symbol{gsk:rounded-rect} instance.}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @return{The offset @sym{gsk:rounded-rect} instance.}
   @begin{short}
     Offsets the origin of the bound by @arg{dx} and @arg{dy}.
   @end{short}
@@ -415,17 +419,17 @@
 
 (defun rounded-rect-shrink (rect top right bottom left)
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[top]{a number coerced to a float how far to move the top side
-    downwards}
-  @argument[right]{a number coerced to a float how far to move the right side
-    to the left}
-  @argument[bottom]{a number coerced to a float how far to move the bottom
-    side upwards}
-  @argument[left]{a number coerced to a float how far to move the left side
-    to the right}
-  @return{The resized @symbol{gsk:rounded-rect} instance.}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[top]{a number coerced to a single float how far to move the top
+    side downwards}
+  @argument[right]{a number coerced to a single float how far to move the right
+    side to the left}
+  @argument[bottom]{a number coerced to a single float how far to move the
+    bottom side upwards}
+  @argument[left]{a number coerced to a single float how far to move the left
+    side to the right}
+  @return{The resized @sym{gsk:rounded-rect} instance.}
   @begin{short}
     Shrinks (or grows) the given rounded rectangle by moving the 4 sides
     according to the offsets given.
@@ -451,8 +455,8 @@
 (cffi:defcfun ("gsk_rounded_rect_is_rectilinear" rounded-rect-is-rectilinear)
     :boolean
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance to check}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance to check}
   @return{@em{True} if the rounded rectangle is rectilinear.}
   @begin{short}
     Checks if all corners of @arg{rect} are right angles and the rounded
@@ -472,9 +476,9 @@
 (cffi:defcfun ("gsk_rounded_rect_contains_point" rounded-rect-contains-point)
     :boolean
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance for the point to check}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[point]{a @sym{graphene:point-t} instance for the point to check}
   @return{@em{True} if the point is inside the rounded rectangle.}
   @begin{short}
     Checks if the given point is inside the rounded rectangle.
@@ -494,12 +498,12 @@
 (cffi:defcfun ("gsk_rounded_rect_contains_rect" rounded-rect-contains-rect)
     :boolean
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[other]{a @symbol{graphene:rect-t} instance for the rectangle to
-    check}
-  @return{@em{True} if @arg{other} is fully contained inside the rounded
-    rectangle.}
+ "@version{#2025-08-03}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[other]{a @sym{graphene:rect-t} instance for the rectangle to check}
+  @begin{return}
+    @em{True} if @arg{other} is fully contained inside the rounded rectangle.
+  @end{return}
   @begin{short}
     Checks if the given @arg{other} is contained inside the rounded rectangle.
   @end{short}
@@ -519,9 +523,9 @@
 (cffi:defcfun ("gsk_rounded_rect_intersects_rect" rounded-rect-intersects-rect)
     :boolean
  #+liber-documentation
- "@version{#2025-05-09}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[other]{a @symbol{graphene:rect-t} instance to check}
+ "@version{#2025-08-02}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance}
+  @argument[other]{a @sym{graphene:rect-t} instance to check}
   @return{@em{True} if @arg{other} intersects with the rounded rectangle.}
   @begin{short}
     Checks if part of the given @arg{other} is contained inside the rounded

@@ -2,8 +2,8 @@
 ;;; gsk.path-builder.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2024 - 2025 Dieter Kaiser
@@ -163,10 +163,12 @@ construct_path (void)
 (cffi:defcfun ("gsk_path_builder_to_path" path-builder-to-path)
     (g:boxed path :return)
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @return{The newly created @class{gsk:path} instance with all the contours
-    added to the path builder.}
+  @begin{return}
+    The newly created @class{gsk:path} instance for all the contours added to
+    the path builder.
+  @end{return}
   @begin{short}
     Creates a new @class{gsk:path} instance from the given path builder.
   @end{short}
@@ -195,10 +197,10 @@ construct_path (void)
 
 (defun path-builder-current-point (path point)
  #+liber-documentation
- "@version{#2024-11-13}
+ "@version{#2025-08-02}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance for the current point}
-  @return{The @symbol{graphene:point-t} instance with the current point.}
+  @argument[point]{a @sym{graphene:point-t} instance for the current point}
+  @return{The @sym{graphene:point-t} instance for the current point.}
   @begin{short}
     Gets the current point.
   @end{short}
@@ -247,10 +249,10 @@ construct_path (void)
 
 (cffi:defcfun ("gsk_path_builder_add_rect" path-builder-add-rect) :void
  #+liber-documentation
- "@version{2025-1-3}
+ "@version{2025-08-02}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[rect]{a @symbol{graphene:rect-t} instance for the rectangle
-    to create a path for}
+  @argument[rect]{a @sym{graphene:rect-t} instance for the rectangle to create
+    a path for}
   @begin{short}
     Adds @arg{rect} as a new contour to the path built by the path builder.
   @end{short}
@@ -278,12 +280,12 @@ construct_path (void)
 
 (defun path-builder-add-circle (builder center radius)
  #+liber-documentation
- "@version{2023-11-13}
+ "@version{2025-08-02}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[center]{a @symbol{graphene:point-t} instance with the center of
-    the circle}
-  @argument[radius]{a number coerced to a single float with the radius of
-    the circle}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    circle}
+  @argument[radius]{a number coerced to a single float for the radius of the
+    circle}
   @begin{short}
     Adds a circle with @arg{center} and @arg{radius}.
   @end{short}
@@ -303,10 +305,9 @@ construct_path (void)
 
 (cffi:defcfun ("gsk_path_builder_add_layout" path-builder-add-layout) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[layout]{a @class{pango:layout} instance with the Pango layout to
-    add}
+  @argument[layout]{a @class{pango:layout} instance for the Pango layout to add}
   @begin{short}
     Adds the outlines for the glyphs in @arg{layout} to the path builder.
   @end{short}
@@ -325,9 +326,9 @@ construct_path (void)
 
 (cffi:defcfun ("gsk_path_builder_add_path" path-builder-add-path) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[path]{a @class{gsk:path} instance with the path to append}
+  @argument[path]{a @class{gsk:path} instance for the path to append}
   @begin{short}
     Appends all of @arg{path} to the path builder.
   @end{short}
@@ -347,9 +348,9 @@ construct_path (void)
 (cffi:defcfun ("gsk_path_builder_add_reverse_path"
                path-builder-add-reverse-path) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[path]{a @class{gsk:path} instance with the path to append}
+  @argument[path]{a @class{gsk:path} instance for the path to append}
   @begin{short}
     Appends all of @arg{path} to the path builder, reverse order.
   @end{short}
@@ -369,10 +370,9 @@ construct_path (void)
 (cffi:defcfun ("gsk_path_builder_add_rounded_rect"
                path-builder-add-rounded-rect) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-02}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[rect]{a @symbol{gsk:rounded-rect} instance with the rounded
-    rectangle}
+  @argument[rect]{a @sym{gsk:rounded-rect} instance for the rounded rectangle}
   @begin{short}
     Adds @arg{rect} as a new contour to the path built in @arg{builder}.
   @end{short}
@@ -392,14 +392,14 @@ construct_path (void)
 
 (cffi:defcfun ("gsk_path_builder_add_segment" path-builder-add-segment) :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[path]{a @class{gsk:path} instance with the path to take the
-    segment to}
-  @argument[start]{a @class{gsk:path-point} instance with the point on
-    @arg{path} to start at}
-  @argument[end]{a @class{gsk:path-point} instance with the point on
-    @arg{path} to end at}
+  @argument[path]{a @class{gsk:path} instance for the path to take the segment
+    to}
+  @argument[start]{a @class{gsk:path-point} instance for the point on @arg{path}
+    to start at}
+  @argument[end]{a @class{gsk:path-point} instance for the point on @arg{path}
+    to end at}
   @begin{short}
     Adds to @arg{builder} the segment of @arg{path} from @arg{start} to
     @arg{end}.
@@ -432,9 +432,9 @@ construct_path (void)
 (cffi:defcfun ("gsk_path_builder_add_cairo_path" path-builder-add-cairo-path)
     :void
  #+liber-documentation
- "@version{2024-11-13}
+ "@version{2025-08-02}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[context]{a @symbol{cairo:path-t} instance with a path}
+  @argument[context]{a @sym{cairo:path-t} instance for a path}
   @begin{short}
     Adds a Cairo path to the path builder.
   @end{short}
@@ -461,10 +461,10 @@ construct_path (void)
 
 (defun path-builder-move-to (builder x y)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x]{a number coerced to a single float with the X coordinate}
-  @argument[y]{a number coerced to a single float with the Y coordinate}
+  @argument[x]{a number coerced to a single float for the X coordinate}
+  @argument[y]{a number coerced to a single float for the Y coordinate}
   @begin{short}
     Starts a new contour by placing the pen at @arg{x, y}.
   @end{short}
@@ -489,10 +489,10 @@ construct_path (void)
 
 (defun path-builder-rel-move-to (builder x y)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x]{a number coerced to a single float with the X offset}
-  @argument[y]{a number coerced to a single float with the Y offset}
+  @argument[x]{a number coerced to a single float for the X offset}
+  @argument[y]{a number coerced to a single float for the Y offset}
   @begin{short}
     Starts a new contour by placing the pen at @arg{x, y} relative to the
     current point.
@@ -518,10 +518,10 @@ construct_path (void)
 
 (defun path-builder-line-to (builder x y)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x]{a number coerced to a single float with the X coordinate}
-  @argument[y]{a number coerced to a single float with the Y coordinate}
+  @argument[x]{a number coerced to a single float for the X coordinate}
+  @argument[y]{a number coerced to a single float for the Y coordinate}
   @begin{short}
     Draws a line from the current point to @arg{x, y} and makes it the new
     current point.
@@ -548,10 +548,10 @@ construct_path (void)
 
 (defun path-builder-rel-line-to (builder x y)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x]{a number coerced to a single float with the X offset}
-  @argument[y]{a number coerced to a single float with the Y offset}
+  @argument[x]{a number coerced to a single float for the X offset}
+  @argument[y]{a number coerced to a single float for the Y offset}
   @begin{short}
     Draws a line from the current point to a point offset from it by @arg{x, y}
     and makes it the new current point.
@@ -578,15 +578,15 @@ construct_path (void)
 
 (defun path-builder-arc-to (builder x1 y1 x2 y2)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
   @begin{short}
     Adds an elliptical arc from the current point to @arg{x2, y2} with
@@ -625,15 +625,15 @@ construct_path (void)
 
 (defun path-builder-rel-arc-to (builder x1 y1 x2 y2)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
   @begin{short}
     Adds an elliptical arc from the current point to @arg{x2, y2} with
@@ -667,17 +667,17 @@ construct_path (void)
 
 (defun path-builder-conic-to (builder x1 y1 x2 y2 weight)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[weight]{a number coerced to a single float with the weight of the
+  @argument[weight]{a number coerced to a single float for the weight of the
     control point, must be greater than zero}
   @begin{short}
     Adds a conic curve from the current point to @arg{x2, y2} with the given
@@ -718,17 +718,17 @@ construct_path (void)
 
 (defun path-builder-rel-conic-to (builder x1 y1 x2 y2 weight)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[weight]{a number coerced to a single float with the weight of the
+  @argument[weight]{a number coerced to a single float for the weight of the
     control point, must be greater than zero}
   @begin{short}
     Adds a conic curve from the current point to @arg{x2, y2} with the given
@@ -763,19 +763,19 @@ construct_path (void)
 
 (defun path-builder-cubic-to (builder x1 y1 x2 y2 x3 y3)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[x3]{a number coerced to a single float with the X coordinate of
+  @argument[x3]{a number coerced to a single float for the X coordinate of
     the end of the curve}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the end of the curve}
   @begin{short}
     Adds a cubic Bézier curve from the current point to @arg{x3, y3} with
@@ -810,19 +810,19 @@ construct_path (void)
 
 (defun path-builder-rel-cubic-to (builder x1 y1 x2 y2 x3 y3)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[x3]{a number coerced to a single float with the X coordinate of
+  @argument[x3]{a number coerced to a single float for the X coordinate of
     the end of the curve}
-  @argument[y3]{a number coerced to a single float with the Y coordinate of
+  @argument[y3]{a number coerced to a single float for the Y coordinate of
     the end of the curve}
   @begin{short}
     Adds a cubic Bézier curve from the current point to @arg{x3, y3} with
@@ -856,13 +856,13 @@ construct_path (void)
  #+liber-documentation
  "@version{#2024-11-14}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the end of the curve}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the end of the curve}
   @begin{short}
     Adds a quadratic Bézier curve from the current point to @arg{x2, y2} with
@@ -893,15 +893,15 @@ construct_path (void)
 
 (defun path-builder-rel-quad-to (builder x1 y1 x2 y2)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the end of the curve}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the end of the curve}
   @begin{short}
     Adds a quadratic Bézier curve from the current point to @arg{x2, y2} with
@@ -932,17 +932,17 @@ construct_path (void)
 
 (defun path-builder-html-arc-to (builder x1 y1 x2 y2 radius)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[radius]{a number coerced to a single float with the radius of
+  @argument[radius]{a number coerced to a single float for the radius of
     the circle}
   @begin{short}
     Implements arc-to according to the HTML Canvas spec.
@@ -974,17 +974,17 @@ construct_path (void)
 
 (defun path-builder-rel-html-arc-to (builder x1 y1 x2 y2 radius)
  #+liber-documentation
- "@version{#2024-11-14}
+ "@version{#2025-08-03}
   @argument[builder]{a @class{gsk:path-builder} instance}
-  @argument[x1]{a number coerced to a single float with the X coordinate of
+  @argument[x1]{a number coerced to a single float for the X coordinate of
     the first control point}
-  @argument[y1]{a number coerced to a single float with the Y coordinate of
+  @argument[y1]{a number coerced to a single float for the Y coordinate of
     the first control point}
-  @argument[x2]{a number coerced to a single float with the X coordinate of
+  @argument[x2]{a number coerced to a single float for the X coordinate of
     the second control point}
-  @argument[y2]{a number coerced to a single float with the Y coordinate of
+  @argument[y2]{a number coerced to a single float for the Y coordinate of
     the second control point}
-  @argument[radius]{a number coerced to a single float with the radius of
+  @argument[radius]{a number coerced to a single float for the radius of
     the circle}
   @begin{short}
     Implements arc-to according to the HTML Canvas spec.
@@ -1019,16 +1019,16 @@ construct_path (void)
                                         positive-sweep
                                         x y)
  #+liber-documentation
- "@version{#2024-11-14}
-  @argument[rx]{a number coerced to a single float with the X radius}
-  @argument[ry]{a number coerced to a single float with the Y radius}
-  @argument[x-axis-rotation]{a number coerced to a single float with the
+ "@version{#2025-08-03}
+  @argument[rx]{a number coerced to a single float for the X radius}
+  @argument[ry]{a number coerced to a single float for the Y radius}
+  @argument[x-axis-rotation]{a number coerced to a single float for the
     rotation of the ellipsis}
   @argument[large-arc]{whether to add the large arc}
   @argument[positive-sweep]{whether to sweep in the positive direction}
-  @argument[x]{a number coerced to a single float with the X coordinate
+  @argument[x]{a number coerced to a single float for the X coordinate
     of the end point}
-  @argument[y]{a number coerced to a single float with the Y coordinate
+  @argument[y]{a number coerced to a single float for the Y coordinate
     of the end point}
   @begin{short}
     Implements arc-to according to the SVG spec.
@@ -1070,16 +1070,16 @@ construct_path (void)
                                             positive-sweep
                                             x y)
  #+liber-documentation
- "@version{#2024-11-14}
-  @argument[rx]{a number coerced to a single float with the X radius}
-  @argument[ry]{a number coerced to a single float with the Y radius}
-  @argument[x-axis-rotation]{a number coerced to a single float with the
+ "@version{#2025-08-03}
+  @argument[rx]{a number coerced to a single float for the X radius}
+  @argument[ry]{a number coerced to a single float for the Y radius}
+  @argument[x-axis-rotation]{a number coerced to a single float for the
     rotation of the ellipsis}
   @argument[large-arc]{whether to add the large arc}
   @argument[positive-sweep]{whether to sweep in the positive direction}
-  @argument[x]{a number coerced to a single float with the X coordinate
+  @argument[x]{a number coerced to a single float for the X coordinate
     of the end point}
-  @argument[y]{a number coerced to a single float with the Y coordinate
+  @argument[y]{a number coerced to a single float for the Y coordinate
     of the end point}
   @begin{short}
     Implements arc-to according to the SVG spec.

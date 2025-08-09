@@ -2,8 +2,8 @@
 ;;; gsk.path.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2024 - 2025 Dieter Kaiser
@@ -119,7 +119,7 @@
 (setf (liber:alias-for-symbol 'path-foreach-flags)
       "GFlags"
       (liber:symbol-documentation 'path-foreach-flags)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (gobject:define-gflags \"GskPathForeachFlags\" path-foreach-flags
   (:export t
@@ -168,7 +168,7 @@
 (setf (liber:alias-for-symbol 'path-operation)
       "GEnum"
       (liber:symbol-documentation 'path-operation)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (gobject:define-genum \"GskPathOperation\" path-operation
   (:export t
@@ -224,7 +224,7 @@
 (setf (liber:alias-for-symbol 'path-direction)
       "GEnum"
       (liber:symbol-documentation 'path-direction)
- "@version{2024-11-9}
+ "@version{2025-08-02}
   @begin{declaration}
 (gobject:define-genum \"GskPathDirection\" path-direction
   (:export t
@@ -247,12 +247,14 @@
     @end{table}
   @end{values}
   @begin{short}
-    The values of the @symbol{gsk:path-direction} enumeration are used to pick
-    one of the four tangents at a given point on the path.
+    The values of the @sym{gsk:path-direction} enumeration are used to pick one
+    of the four tangents at a given point on the path.
   @end{short}
-  Note that the directions for @code{:from-start}/@code{:to-end} and
-  @code{:to-start}/@code{:from-end} will coincide for smooth points. Only sharp
-  turns will exhibit four different directions.
+  Note that the directions for
+  @val[gsk:path-direction]{:from-start}/@val[gsk:path-direction]{:to-end} and
+  @val[gsk:path-direction]{:to-start}/@val[gsk:path-direction]{:from-end} will
+  coincide for smooth points. Only sharp turns will exhibit four different
+  directions.
 
   @image[directions-light]{Figure: GtkPathDirection}
 
@@ -274,7 +276,7 @@
 (setf (liber:alias-for-symbol 'line-cap)
       "GEnum"
       (liber:symbol-documentation 'line-cap)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (gobject:define-genum \"GskLineCap\" line-cap
   (:export t
@@ -319,7 +321,7 @@
 (setf (liber:alias-for-symbol 'line-join)
       "GEnum"
       (liber:symbol-documentation 'line-join)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (gobject:define-genum \"GskLineJoin\" line-join
   (:export t
@@ -362,7 +364,7 @@
 (setf (liber:alias-for-symbol 'fill-rule)
       "GEnum"
       (liber:symbol-documentation 'fill-rule)
- "@version{2024-11-9}
+ "@version{2025-08-02}
   @begin{declaration}
 (gobject:define-genum \"GskFillRule\" fill-rule
   (:export t
@@ -383,8 +385,7 @@
     @end{table}
   @end{values}
   @begin{short}
-    The @symbol{gsk:fill-rule} enumeration is used to select how paths are
-    filled.
+    The @sym{gsk:fill-rule} enumeration is used to select how paths are filled.
   @end{short}
   Whether or not a point is included in the fill is determined by taking a ray
   from that point to infinity and looking at intersections with the path. The
@@ -411,7 +412,7 @@
 (setf (liber:alias-for-class 'path-measure)
       "GBoxed"
       (documentation 'path-measure 'type)
- "@version{2024-11-8}
+ "@version{2024-11-08}
   @begin{declaration}
 (glib:define-gboxed-opaque path-measure \"GskPathMeasure\"
   :export t
@@ -463,7 +464,7 @@
 (setf (liber:alias-for-class 'path-point)
       "GBoxed"
       (documentation 'path-point 'type)
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @begin{declaration}
 (glib:define-gboxed-opaque path-point \"GskPathPoint\"
   :export t
@@ -503,7 +504,7 @@
 (setf (liber:alias-for-class 'stroke)
       "GBoxed"
       (documentation 'stroke 'type)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (glib:define-gboxed-opaque stroke \"GskStroke\"
   :export t
@@ -533,7 +534,7 @@
 (setf (liber:alias-for-class 'path)
       "GBoxed"
       (documentation 'path 'type)
- "@version{2024-11-9}
+ "@version{2024-11-09}
   @begin{declaration}
 (glib:define-gboxed-opaque path \"GskPath\"
   :export t
@@ -568,8 +569,8 @@
 (cffi:defcfun ("gsk_path_measure_new" path-measure-new)
     (g:boxed path-measure :return)
  #+liber-documentation
- "@version{2024-11-8}
-  @argument[path]{a @class{gsk:path} instance with the path to measure}
+ "@version{2025-08-03}
+  @argument[path]{a @class{gsk:path} instance for the path to measure}
   @return{The new @class{gsk:path-measure} instance representing @arg{path}.}
   @begin{short}
     Creates a measure object for the given @arg{path} with the default
@@ -594,9 +595,9 @@
 
 (defun path-measure-new-with-tolerance (path tolerance)
  #+liber-documentation
- "@version{2024-11-8}
-  @argument[path]{a @class{gsk:path} instance with the path to measure}
-  @argument[tolerance]{a number coerced to a float with the tolerance for
+ "@version{2025-08-03}
+  @argument[path]{a @class{gsk:path} instance for the path to measure}
+  @argument[tolerance]{a number coerced to a single float for the tolerance of
     measuring operations}
   @return{The new @class{gsk:path-measure} instance representing @arg{path}.}
   @begin{short}
@@ -616,9 +617,11 @@
 
 (cffi:defcfun ("gsk_path_measure_get_length" path-measure-length) :float
  #+liber-documentation
- "@version{2024-11-8}
+ "@version{2025-08-03}
   @argument[measure]{a @class{gsk:path-measure} instance}
-  @return{The float with the length of the path measured by @arg{measure.}}
+  @begin{return}
+    The single float for the length of the path measured by @arg{measure.}
+  @end{return}
   @begin{short}
     Gets the length of the path being measured.
   @end{short}
@@ -636,7 +639,7 @@
 
 (cffi:defcfun ("gsk_path_measure_get_path" path-measure-path) (g:boxed path)
  #+liber-documentation
- "@version{2024-11-8}
+ "@version{2024-11-08}
   @argument[measure]{a @class{gsk:path-measure} instance}
   @return{The @class{gsk:path} instance of @arg{measure}.}
   @begin{short}
@@ -660,9 +663,9 @@
 
 (defun path-measure-point (measure distance)
  #+liber-documentation
- "@version{2024-11-9}
+ "@version{2025-08-03}
   @argument[measure]{a @class{gsk:path-measure} instance}
-  @argument[distance]{a number coerced to a float with the distance}
+  @argument[distance]{a number coerced to a single float for the distance}
   @begin{short}
     Returns the point at the given distance into the path.
   @end{short}
@@ -683,9 +686,9 @@
 
 (cffi:defcfun ("gsk_path_measure_get_tolerance" path-measure-tolerance) :float
  #+liber-documentation
- "@version{2024-11-9}
+ "@version{2025-08-03}
   @argument[measure]{a @class{gsk:path-measure} instance}
-  @return{The float with the tolerance of @arg{measure}}
+  @return{The single float for the tolerance of @arg{measure}}
   @begin{short}
     Returns the tolerance that the measure was created with.
   @end{short}
@@ -710,15 +713,17 @@
 
 (cffi:defcfun ("gsk_path_point_get_curvature" path-point-curvature) :float
  #+liber-documentation
- "@version{2024-11-9}
+ "@version{2025-08-02}
   @argument[point]{a @class{gsk:path-point} instance}
-  @argument[path]{a @class{gsk:path} instance with the path that @arg{point}
+  @argument[path]{a @class{gsk:path} instance for the path that @arg{point}
     is on}
-  @argument[direction]{a @symbol{gsk:path-direction} value with the direction
-    for which to return the curvature}
-  @argument[center]{a @symbol{graphene:point-t} instance which will be set
-    with the center of the osculating circle}
-  @return{The float with the curvature of the path at the given @arg{point}.}
+  @argument[direction]{a @sym{gsk:path-direction} value with the direction for
+    which to return the curvature}
+  @argument[center]{a @sym{graphene:point-t} instance that will be set with
+    the center of the osculating circle}
+  @begin{return}
+    The single float for the curvature of the path at the given @arg{point}.
+  @end{return}
   @begin{short}
     Calculates the curvature of the path at the point.
   @end{short}
@@ -752,10 +757,10 @@
 
 (cffi:defcfun ("gsk_path_point_get_distance" path-point-distance) :float
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2025-08-03}
   @argument[point]{a @class{gsk:path-point} instance}
   @argument[measure]{a @class{gsk:path-measure} instance for the path}
-  @return{The float with the distance of @arg{point}.}
+  @return{The single float for the distance of @arg{point}.}
   @begin{short}
     Returns the distance from the beginning of the path to point.
   @end{short}
@@ -779,12 +784,12 @@
 
 (defun path-point-position (point path pos)
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2025-08-02}
   @argument[point]{a @class{gsk:path-point} instance}
-  @argument[path]{a @class{gsk:path} instance with the path @arg{point} is on}
-  @argument[pos]{a @symbol{graphene:point-t} instance for the coordinates of
-    the point}
-  @return{The @symbol{graphene:point-t} instance.}
+  @argument[path]{a @class{gsk:path} instance for the path @arg{point} is on}
+  @argument[pos]{a @sym{graphene:point-t} instance for the coordinates of the
+    point}
+  @return{The @sym{graphene:point-t} instance.}
   @begin{short}
     Gets the position of the point.
   @end{short}
@@ -804,14 +809,16 @@
 
 (cffi:defcfun ("gsk_path_point_get_rotation" path-point-rotation) :float
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2025-08-02}
   @argument[point]{a @class{gsk:path-point} instance}
-  @argument[path]{a @class{gsk:path} instance with the path that @arg{point}
+  @argument[path]{a @class{gsk:path} instance for the path that @arg{point}
     is on}
-  @argument[direction]{a @symbol{gsk:path-direction} value with the direction
+  @argument[direction]{a @sym{gsk:path-direction} value for the direction
     for which to return the rotation}
-  @return{The float with the angle between the tangent and the X axis,
-    in degrees.}
+  @begin{return}
+    The single float for the angle between the tangent and the X axis,
+    in degrees.
+  @end{return}
   @begin{short}
     Gets the direction of the tangent at a given point.
   @end{short}
@@ -843,15 +850,15 @@
 
 (defun path-point-tangent (point path direction tangent)
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2025-08-02}
   @argument[point]{a @class{gsk:path-point} instance}
-  @argument[path]{a @class{gsk:path} instance with the path that @arg{point}
+  @argument[path]{a @class{gsk:path} instance for the path that @arg{point}
     is on}
-  @argument[direction]{a @symbol{gsk:path-direction} value with the direction
-    for which to return the tangent}
-  @argument[tangent]{a @symbol{graphene:vec2-t} instance for the tangent at
-    the point}
-  @return{The @symbol{graphene:vec2-t} instance.}
+  @argument[direction]{a @sym{gsk:path-direction} value for the direction for
+    which to return the tangent}
+  @argument[tangent]{a @sym{graphene:vec2-t} instance for the tangent at the
+    point}
+  @return{The @sym{graphene:vec2-t} instance.}
   @begin{short}
     Gets the tangent of the path at the point.
   @end{short}
@@ -883,11 +890,13 @@
 
 (cffi:defcfun ("gsk_path_point_compare" path-point-compare) :int
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2025-08-03}
   @argument[point1]{a @class{gsk:path-point} instance}
   @argument[point2]{another @class{gsk:path-point} instance}
-  @return{The integer which is -1 if @arg{point1} is before @arg{point2},
-    1 if @arg{point1} is after @arg{point2}, 0 if they are equal.}
+  @begin{return}
+    The integer which is -1 if @arg{point1} is before @arg{point2}, 1 if
+    @arg{point1} is after @arg{point2}, 0 if they are equal.
+  @end{return}
   @begin{short}
     Returns whether @arg{point1} is before or after @arg{point2}.
   @end{short}
@@ -906,7 +915,7 @@
 (cffi:defcfun ("gsk_path_point_copy" path-point-copy)
     (g:boxed path-point :return)
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2024-11-09}
   @argument[point]{a @class{gsk:path-point} instance}
   @return{The copied @class{gsk:path-point} instance.}
   @short{Copies a path point.}
@@ -921,7 +930,7 @@
 
 (cffi:defcfun ("gsk_path_point_equal" path-point-equal) :boolean
  #+liber-documentation
- "@version{#2024-11-9}
+ "@version{#2024-11-09}
   @argument[point1]{a @class{gsk:path-point} instance}
   @argument[point2]{another @class{gsk:path-point} instance}
   @return{@em{True} if @arg{point1} and @arg{point2} are equal.}
@@ -953,11 +962,11 @@
 
 (defun stroke-new (width)
  #+liber-documentation
- "@version{2025-3-1}
+ "@version{2025-08-03}
   @argument[width]{a number coerced to a single float for the line width of the
     stroke, must be > 0}
   @return{The new @class{gsk:stroke} instance.}
-  @short{Creates a new @class{gsk:stroke} instance with the given @arg{width}.}
+  @short{Creates a new @class{gsk:stroke} instance for the given @arg{width}.}
 
   Since 4.14
   @see-class{gsk:stroke}"
@@ -1079,11 +1088,11 @@
 
 (cffi:defcfun ("gsk_stroke_get_dash_offset" stroke-dash-offset) :float
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-03}
   @syntax{(gsk:stroke-dash-offset stroke) => offset}
   @syntax{(setf (gsk:stroke-dash-offset stroke) offset)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[offset]{a number coerced to a float with the offset into the
+  @argument[offset]{a number coerced to a single float for the offset into the
     dash pattern}
   @begin{short}
     The @fun{gsk:stroke-dash-offset} function returns the dash offset of a
@@ -1117,16 +1126,15 @@
 
 (cffi:defcfun ("gsk_stroke_get_line_cap" stroke-line-cap) line-cap
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-02}
   @syntax{(gsk:stroke-line-cap stroke) => cap}
   @syntax{(setf (gsk:stroke-line-cap stroke) cap)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[cap]{a @symbol{gsk:line-cap} value}
+  @argument[cap]{a @sym{gsk:line-cap} value}
   @begin{short}
-    The @fun{gsk:stroke-line-cap} function gets the line cap used.
+    Gets or sets the line cap to be used when stroking.
   @end{short}
-  The @setf{gsk:stroke-line-cap} functionsets the line cap to be used when
-  stroking. See the @symbol{gsk:line-cap} documentation for details.
+  See the @sym{gsk:line-cap} documentation for details.
 
   Since 4.14
   @see-class{gsk:stroke}
@@ -1149,16 +1157,15 @@
 
 (cffi:defcfun ("gsk_stroke_get_line_join" stroke-line-join) line-join
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-02}
   @syntax{(gsk:stroke-line-join stroke) => join}
   @syntax{(setf (gsk:stroke-line-join stroke) join)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[join]{a @symbol{gsk:line-join} value}
+  @argument[join]{a @sym{gsk:line-join} value}
   @begin{short}
-    The @fun{gsk:stroke-line-join} function gets the line join used.
+    Gets or sets the line join to be used when stroking.
   @end{short}
-  The @setf{gsk:stroke-line-join} function sets the line join to be used when
-  stroking. See the @symbol{gsk:line-join} documentation for details.
+  See the @sym{gsk:line-join} documentation for details.
 
   Since 4.14
   @see-class{gsk:stroke}
@@ -1182,11 +1189,11 @@
 
 (cffi:defcfun ("gsk_stroke_get_line_width" stroke-line-width) :float
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-03}
   @syntax{(gsk:stroke-line-width stroke) => width}
   @syntax{(setf (gsk:stroke-line-width stroke) width)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[width]{a number coerced to a float with the width of the line
+  @argument[width]{a number coerced to a single float for the width of the line
     in pixels}
   @begin{short}
     The @fun{gsk:stroke-line-width} function gets the line width used.
@@ -1215,11 +1222,11 @@
 
 (cffi:defcfun ("gsk_stroke_get_miter_limit" stroke-miter-limit) :float
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-03}
   @syntax{(gsk:stroke-miter-limit stroke) => limit}
   @syntax{(setf (gsk:stroke-miter-limit stroke) limit)}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[limit]{a number coerced to a float with the miter limit}
+  @argument[limit]{a number coerced to a single float for the miter limit}
   @begin{short}
     The @fun{gsk:stroke-miter-limit} function returns the miter limit of a
     @class{gsk:stroke} instance.
@@ -1244,9 +1251,9 @@
 
 (cffi:defcfun ("gsk_stroke_to_cairo" stroke-to-cairo) :void
  #+liber-documentation
- "@version{#2024-11-11}
+ "@version{#2025-08-02}
   @argument[stroke]{a @class{gsk:stroke} instance}
-  @argument[context]{a @symbol{cairo:context-t} instance to configure}
+  @argument[context]{a @sym{cairo:context-t} instance to configure}
   @begin{short}
     A helper function that sets the stroke parameters of @arg{context} from the
     values found in @arg{stroke}.
@@ -1336,15 +1343,17 @@
 (setf (liber:alias-for-symbol 'path-foreach-func)
       "Callback"
       (liber:symbol-documentation 'path-foreach-func)
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @syntax{lambda (operation points n-points weight)}
-  @argument[operation]{a @symbol{gsk:path-operation} value}
-  @argument[points]{an array of @symbol{graphene:point-t} instances}
-  @argument[n-points]{an integer with the points of the operation}
-  @argument[weight]{a float with the weight for conic curves, or unused if not
-    a conic curve}
-  @return{@em{True} to continue iterating the path, @em{false} to immediately
-  abort and not call the function again}
+  @argument[operation]{a @sym{gsk:path-operation} value}
+  @argument[points]{an array of @sym{graphene:point-t} instances}
+  @argument[n-points]{an integer for the points of the operation}
+  @argument[weight]{a single float for the weight for conic curves, or unused
+    if not a conic curve}
+  @begin{return}
+    @em{True} to continue iterating the path, @em{false} to immediately abort
+    and not call the function again.
+  @end{return}
   @begin{short}
     Prototype of the callback function to iterate through the operations of a
     path.
@@ -1354,8 +1363,9 @@
   conic curves. The @arg{n-points} argument is somewhat redundant, since the
   number of points can be inferred from the operation.
 
-  Each contour of the path starts with a @code{:move} operation. Closed contours
-  end with a @code{:close} operation.
+  Each contour of the path starts with a @val[gsk:path-operation]{:move}
+  operation. Closed contours end with a @val[gsk:path-operation]{:close}
+  operation.
 
   Since 4.14
   @see-function{gsk:path-foreach}
@@ -1375,11 +1385,11 @@
 
 (defun path-foreach (path flags func)
  #+liber-documentation
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[flags]{a @symbol{gsk:path-foreach-flags} value with the flags to
-    pass to @arg{func}}
-  @argument[func]{a @symbol{gsk:path-foreach-func} callback function}
+  @argument[flags]{a @sym{gsk:path-foreach-flags} value for the flags to pass
+    to @arg{func}}
+  @argument[func]{a @sym{gsk:path-foreach-func} callback function}
   @return{@em{False} if @arg{func} returned @em{false}, @em{true} otherwise}
   @begin{short}
     Calls @arg{func} for every operation of the path.
@@ -1422,11 +1432,11 @@
 
 (defun path-bounds (path bounds)
  #+liber-documentation
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     given @arg{path}}
-  @return{The @symbol{graphene:rect-t} instance or @code{nil}.}
+  @return{The @sym{graphene:rect-t} instance or @code{nil}.}
   @begin{short}
     Computes the bounds of the given @arg{path}.
   @end{short}
@@ -1463,15 +1473,13 @@
 
 (defun path-closest-point (path point threshold)
  #+liber-documentation
- "@version{2024-11-12}
+ "@version{2025-08-02}
   @syntax{(gsk:path-closest-point path point threshold) => result, distance}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance}
-  @argument[threshold]{a float with the maximum allowed distance}
-  @begin{return}
-    @arg{result} -- a @class{gsk:path-point} instance with the closest point
-    @arg{distance} -- a float with the distance
-  @end{return}
+  @argument[point]{a @sym{graphene:point-t} instance}
+  @argument[threshold]{a single float for the maximum allowed distance}
+  @argument[result]{a @class{gsk:path-point} instance for the closest point}
+  @argument[distance]{a single float for the distance}
   @begin{short}
     Computes the closest point on the path to the given @arg{point} and sets
     the result to it.
@@ -1499,9 +1507,9 @@
 
 (defun path-start-point (path)
  #+liber-documentation
- "@version{2024-11-12}
+ "@version{2025-08-03}
   @argument[path]{a @class{gsk:path} instance}
-  @return{The @class{gsk:path-point} instance with the point.}
+  @return{The @class{gsk:path-point} instance for the point.}
   @begin{short}
     Gets the start point of the path.
   @end{short}
@@ -1526,9 +1534,9 @@
 
 (defun path-end-point (path)
  #+liber-documentation
- "@version{2024-11-12}
+ "@version{2025-08-03}
   @argument[path]{a @class{gsk:path} instance}
-  @return{The @class{gsk:path-point} instance with the point.}
+  @return{The @class{gsk:path-point} instance for the point.}
   @begin{short}
     Gets the end point of the path.
   @end{short}
@@ -1554,12 +1562,11 @@
 
 (defun path-stroke-bounds (path stroke bounds)
  #+liber-documentation
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[stroke]{a @class{gsk:stroke} instance with the stroke parameters}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds to
-    fill in}
-  @return{The @symbol{graphene:rect-t} instance with the bounds, or @code{nil}.}
+  @argument[stroke]{a @class{gsk:stroke} instance for the stroke parameters}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds to fill in}
+  @return{The @sym{graphene:rect-t} instance for the bounds, or @code{nil}.}
   @begin{short}
     Computes the bounds for stroking the given @arg{path} with the parameters
     in stroke.
@@ -1583,10 +1590,10 @@
 
 (cffi:defcfun ("gsk_path_in_fill" path-in-fill) :boolean
  #+liber-documentation
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance with the point to test}
-  @argument[rule]{a @symbol{gsk:fill-rule} value}
+  @argument[point]{a @sym{graphene:point-t} instance for the point to test}
+  @argument[rule]{a @sym{gsk:fill-rule} value}
   @return{@em{True} if @arg{point} is inside.}
   @begin{short}
     Returns whether the given @arg{point} is inside the area that would be
@@ -1660,9 +1667,9 @@
 
 (cffi:defcfun ("gsk_path_to_cairo" path-to-cairo) :void
  #+liber-documentation
- "@version{#2024-11-12}
+ "@version{#2025-08-02}
   @argument[path]{a @class{gsk:path} instance}
-  @argument[context]{a @symbol{cairo:context-t} instance}
+  @argument[context]{a @sym{cairo:context-t} instance}
   @begin{short}
     Appends the given @arg{path} to the given Cairo @arg{context} for drawing
     with Cairo.

@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'renderer 'type)
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @begin{short}
     The @class{gsk:renderer} class is a class that renders a scene graph
     defined by a tree of @class{gsk:render-node} instances.
@@ -121,14 +121,15 @@
 (setf (liber:alias-for-function 'renderer-realized)
       "Accessor"
       (documentation 'renderer-realized 'function)
- "@version{2024-11-7}
+ "@version{2025-08-03}
   @syntax{(gsk:renderer-realized object) => realized}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[realized]{a boolean whether the renderer has been associated with
     a surface or draw context}
   @begin{short}
-    Accessor of the @slot[gsk:renderer]{realized} slot of the
-    @class{gsk:renderer} class.
+    The accessor for the @slot[gsk:renderer]{realized} slot of the
+    @class{gsk:renderer} class gets whether the renderer has been associated
+    with a surface or draw context.
   @end{short}
   @see-class{gsk:renderer}")
 
@@ -143,17 +144,16 @@
 (setf (liber:alias-for-function 'renderer-surface)
       "Accessor"
       (documentation 'renderer-surface 'function)
- "@version{2024-11-7}
+ "@version{2025-08-03}
   @syntax{(gsk:renderer-surface object) => surface}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
-    Accessor of the @slot[gsk:renderer]{surface} slot of the
-    @class{gsk:renderer} class.
+    The accessor for the @slot[gsk:renderer]{surface} slot of the
+    @class{gsk:renderer} class retrieves the @class{gdk:surface} object set
+    using the @fun{gsk:renderer-realize} function.
   @end{short}
-  The @fun{gsk:renderer-surface} function retrieves the @class{gdk:surface}
-  object set using the @fun{gsk:renderer-realize} function. If the renderer has
-  not been realized yet, @code{nil} will be returned.
+  If the renderer has not been realized yet, @code{nil} will be returned.
   @see-class{gsk:renderer}
   @see-class{gdk:surface}")
 
@@ -164,7 +164,7 @@
 (cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The new @class{gsk:renderer} instance.}
   @begin{short}
@@ -212,7 +212,7 @@
 
 (cffi:defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2024-11-07}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @begin{short}
     Releases all the resources created by the @fun{gsk:renderer-realize}
@@ -230,7 +230,7 @@
 
 (cffi:defcfun ("gsk_renderer_is_realized" renderer-is-realized) :boolean
  #+liber-documentation
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @return{@em{True} if @arg{renderer} was realized, and @em{false} otherwise.}
   @short{Checks whether the renderer is realized or not.}
@@ -250,12 +250,11 @@
 
 (defun renderer-render (renderer root &optional region)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2025-08-03}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @argument[root]{a @class{gsk:render-node} instance}
-  @argument[region]{an optional @symbol{cairo:context-t} instance with the
-    region that must be redrawn or the default @code{nil} value for the whole
-    window}
+  @argument[region]{an optional @sym{cairo:context-t} instance for the region
+    that must be redrawn or the default @code{nil} value for the whole window}
   @begin{short}
     Renders the scene graph, described by a tree of @class{gsk:render-node}
     instances, ensuring that the given region gets redrawn.
@@ -287,14 +286,14 @@
 
 (defun renderer-render-texture (renderer root &optional viewport)
  #+liber-documentation
- "@version{#2024-11-7}
+ "@version{#2025-08-03}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @argument[root]{a @class{gsk:render-node} instance}
-  @argument[viewport]{an optional @symbol{graphene:rect-t} instance with the
-    section to draw or the default @code{nil} value to use the bounds of
-    @arg{root}}
-  @return{The @class{gdk:texture} instance with the rendered contents of
-    @arg{root}.}
+  @argument[viewport]{an optional @sym{graphene:rect-t} instance for the section
+    to draw or the default @code{nil} value to use the bounds of @arg{root}}
+  @begin{return}
+    The @class{gdk:texture} instance for the rendered contents of @arg{root}.
+  @end{return}
   @begin{short}
     Renders the scene graph, described by a tree of @class{gsk:render-node}
     instances, to a @class{gdk:texture} instance.
@@ -326,7 +325,7 @@
 
 #+liber-documentation
 (setf (documentation 'cairo-renderer 'type)
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @begin{short}
     The GSK renderer that is using Cairo.
   @end{short}
@@ -342,7 +341,7 @@
 (cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @return{The new Cairo @class{gsk:renderer} instance.}
   @begin{short}
     Creates a new @class{gsk:renderer} instance using Cairo.
@@ -372,7 +371,7 @@
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation 'gl-renderer 'type)
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @begin{short}
     The OpenGL based renderer.
   @end{short}
@@ -389,7 +388,7 @@
 (cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @return{The new OpenGL @class{gsk:renderer} instance.}
   @begin{short}
     Creates a new @class{gsk:renderer} instance using OpenGL.
@@ -416,7 +415,7 @@
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation 'ngl-renderer 'type)
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @begin{short}
     The new experimental OpenGL based renderer.
   @end{short}
@@ -433,7 +432,7 @@
 (cffi:defcfun ("gsk_ngl_renderer_new" ngl-renderer-new)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-7}
+ "@version{2024-11-07}
   @return{The new experimental OpenGL @class{gsk:renderer} instance.}
   @begin{short}
     Creates an instance of the new experimental OpenGL renderer.

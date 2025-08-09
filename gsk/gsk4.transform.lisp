@@ -87,7 +87,7 @@
 (setf (liber:alias-for-symbol 'transform-category)
       "GEnum"
       (liber:symbol-documentation 'transform-category)
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @begin{declaration}
 (gobject:define-genum \"GskTransformCategory\" transform-category
   (:export t
@@ -162,7 +162,7 @@
 (setf (liber:alias-for-class 'transform)
       "GBoxed"
       (documentation 'transform 'type)
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @begin{declaration}
 (glib:define-gboxed-opaque transform ¸\"GskTransform\"
   :export t
@@ -173,7 +173,7 @@
     The @class{gsk:transform} structure is a structure to describe transform
     matrices.
   @end{short}
-  Unlike the @symbol{graphene:matrix-t} structure, the @class{gsk:transform}
+  Unlike the @sym{graphene:matrix-t} structure, the @class{gsk:transform}
   structure retains the steps in how a transform was constructed, and allows
   inspecting them. It is modeled after the way CSS describes transforms.
 
@@ -192,7 +192,7 @@
 
 (defun transform-new ()
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @return{The new @class{gsk:transform} instance.}
   @short{Creates a new transform matrix.}
   @see-class{gsk:transform}"
@@ -221,10 +221,12 @@
 (cffi:defcfun ("gsk_transform_get_category" transform-category)
     transform-category
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @symbol{gsk:transform-category} value with the category of the
-    transform matrix.}
+  @begin{return}
+    The @sym{gsk:transform-category} value with the category of the transform
+    matrix.
+  @end{return}
   @short{Returns the category this transform matrix belongs to.}
   @see-class{gsk:transform}
   @see-symbol{gsk:transform-category}"
@@ -245,9 +247,9 @@
   (transform :pointer))
 
 (defun transform-parse (str)
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[str]{a string to parse}
-  @return{The @class{gsk:transform} instance with the transform matrix.}
+  @return{The @class{gsk:transform} instance for the transform matrix.}
   @begin{short}
     Parses the given string into a transform matrix.
   @end{short}
@@ -282,7 +284,7 @@
 
 (cffi:defcfun ("gsk_transform_to_string" transform-to-string) :string
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @return{The string for @arg{transform}.}
   @begin{short}
@@ -316,11 +318,10 @@
 
 (defun transform-to-matrix (transform matrix)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix
-    to set}
-  @return{The @symbol{graphene:matrix-t} instance with the matrix.}
+  @argument[matrix]{a @sym{graphene:matrix-t} instance for the matrix to set}
+  @return{The @sym{graphene:matrix-t} instance for the matrix.}
   @begin{short}
     Computes the actual values of the transform matrix and stores it in
     @arg{matrix}.
@@ -348,10 +349,12 @@
 
 (defun  transform-to-2d (transform)
  #+liber-documentation
- "@version{2024-3-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gtk:transform} instance}
-  @return{The @code{(xx xy yx yy dx dy)} list with the single floats of the
-    2D transformation matrix.}
+  @begin{return}
+    The @code{(xx xy yx yy dx dy)} list for the single floats of the 2D
+    transformation matrix.
+  @end{return}
   @begin{short}
     Converts a @class{gsk:transform} instace to a 2D transformation matrix.
   @end{short}
@@ -397,10 +400,12 @@
 #+gtk-4-6
 (defun transform-to-2d-components (transform)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @code{(xskew yskew xscale yscale angle dx dy)} list with
-    single floats for the 2D transformation factors.}
+  @begin{return}
+    The @code{(xskew yskew xscale yscale angle dx dy)} list with single floats
+    for the 2D transformation factors.
+  @end{return}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D transformation factors.
   @end{short}
@@ -451,10 +456,12 @@
 
 (defun transform-to-affine (transform)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @code{(xscale yscale dx dy)} list of single floats with the
-    2D affine transformation factors.}
+  @begin{return}
+    The @code{(xscale yscale dx dy)} list of single floats for the 2D affine
+    transformation factors.
+  @end{return}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D affine transformation
     factors.
@@ -482,10 +489,11 @@
 
 (defun transform-to-translate (transform)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{The @code{(dx dy)} list with single floats for a translation
-    operation.}
+  @begin{return}
+    The @code{(dx dy)} list with single floats for a translation operation.
+  @end{return}
   @begin{short}
     Converts a @class{gsk:transform} instance to a translation operation.
   @end{short}
@@ -510,7 +518,7 @@
 
 (defun transform-transform (transform other)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[other]{a @class{gsk:transform} instance}
   @return{The new @class{gsk:transform} instance.}
@@ -533,10 +541,12 @@
 
 (defun transform-invert (transform)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance to invert}
-  @return{The @class{gsk:transform} instance with the inverted transform or
-    @code{nil} if the transform cannot be inverted.}
+  @begin{return}
+    The @class{gsk:transform} instance for the inverted transform or @code{nil}
+    if the transform cannot be inverted.
+  @end{return}
   @begin{short}
     Inverts the given transform.
   @end{short}
@@ -560,9 +570,9 @@
 
 (defun transform-matrix (transform matrix)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance}
+  @argument[matrix]{a @sym{graphene:matrix-t} instance}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
     Multiplies @arg{transform} with the given matrix.
@@ -584,10 +594,10 @@
 
 (defun transform-translate (transform point)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance with the point to
-    translate the transform matrix by}
+  @argument[point]{a @sym{graphene:point-t} instance for the point to translate
+    the transform matrix by}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
     Translates the transform matrix in 2dimensional space by @arg{point}.
@@ -609,9 +619,9 @@
 
 (defun transform-translate-3d (transform point)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[point]{a @symbol{graphene:point3d-t} instance with the point to
+  @argument[point]{a @sym{graphene:point3d-t} instance for the point to
     translate the transform matrix by}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
@@ -634,9 +644,9 @@
 
 (defun transform-rotate (transform angle)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[angle]{a number coerced to a single float with the rotation angle,
+  @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees (clockwise)}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
@@ -660,11 +670,11 @@
 
 (defun transform-rotate-3d (transform angle axis)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[angle]{a number coerced to a single float with the rotation angle,
+  @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees and clockwise}
-  @argument[axis]{a @symbol{graphene:vec3-t} instance with the rotation axis}
+  @argument[axis]{a @sym{graphene:vec3-t} instance for the rotation axis}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
     Rotates the transform matrix @arg{angle} degrees around @arg{axis}.
@@ -691,11 +701,11 @@
 
 (defun transform-scale (transform xfactor yfactor)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[xfactor]{a number coerced to a single float with the scaling factor
+  @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the x axis}
-  @argument[yfactor]{a number coerced to a single float with the scaling factor
+  @argument[yfactor]{a number coerced to a single float for the scaling factor
     on the y axis}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
@@ -723,15 +733,15 @@
 
 (defun transform-scale-3d (transform xfactor yfactor zfactor)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-04}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[xfactor]{a number coerced to a single float with the scaling factor
+  @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the x axis}
-  @argument[yfactor]{a number coerced to a single float with the scaling factor
+  @argument[yfactor]{a number coerced to a single float for the scaling factor
     on the y axis}
-  @argument[zfactor]{a number coerced to a single float with the scaling factor
+  @argument[zfactor]{a number coerced to a single float for the scaling factor
     on the z axis}
-  @return{A new @class{gsk:transform} instance.}
+  @return{The new @class{gsk:transform} instance.}
   @begin{short}
     Scales the transform matrix by the given factors.
   @end{short}
@@ -756,11 +766,11 @@
 #+gtk-4-6
 (defun transform-skew (transform xskew yskew)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[xskew]{a number coerced to a single float with the skew factor
+  @argument[xskew]{a number coerced to a single float for the skew factor
     on the x axis, in degrees}
-  @argument[yskew]{a number coerced to a single float with the skew factor
+  @argument[yskew]{a number coerced to a single float for the skew factor
     on the y axis, in degrees}
   @return{The new @class{gsk:transform} instance.}
   @short{Applies a skew transform.}
@@ -785,9 +795,9 @@
 
 (defun transform-perspective (transform depth)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-03}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[depth]{a number coerced to a single float with the distance of the
+  @argument[depth]{a number coerced to a single float for the distance of the
     z=0 plane, lower values give a more flattened pyramid and therefore a more
     pronounced perspective effect}
   @return{The new @class{gsk:transform} instance.}
@@ -809,7 +819,7 @@
 
 (cffi:defcfun ("gsk_transform_equal" transform-equal) :boolean
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2024-04-21}
   @argument[first]{a first @class{gsk:transform} instance}
   @argument[second]{a second @class{gsk:transform} instance}
   @return{@em{True} if the two transforms perform the same operation.}
@@ -832,14 +842,14 @@
 
 (defun transform-transform-bounds (transform rect bounds)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[rect]{a @symbol{graphene:rect-t} instance}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of
-    the transformed rectangle}
-  @return{The @symbol{graphene:rect-t} instance with the bounds.}
+  @argument[rect]{a @sym{graphene:rect-t} instance}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
+    transformed rectangle}
+  @return{The @sym{graphene:rect-t} instance for the bounds.}
   @begin{short}
-    Transforms a @symbol{graphene:rect-t} instance using the given transform
+    Transforms a @sym{graphene:rect-t} instance using the given transform
     matrix.
   @end{short}
   The result is the bounding box containing the coplanar quad.
@@ -861,14 +871,13 @@
 
 (defun transform-transform-point (transform point result)
  #+liber-documentation
- "@version{2024-4-21}
+ "@version{2025-08-02}
   @argument[transform]{a @class{gsk:transform} instance}
-  @argument[point]{a @symbol{graphene:point-t} instance}
-  @argument[result]{a @symbol{graphene:point-t} instance for the transformed
-    point}
-  @return{The @symbol{graphene:point-t} instance with the transformed point.}
+  @argument[point]{a @sym{graphene:point-t} instance}
+  @argument[result]{a @sym{graphene:point-t} instance for the transformed point}
+  @return{The @sym{graphene:point-t} instance for the transformed point.}
   @begin{short}
-    Transforms a @symbol{graphene:point-t} instance using the given transform
+    Transforms a @sym{graphene:point-t} instance using the given transform
     matrix.
   @end{short}
   @see-class{gsk:transform}

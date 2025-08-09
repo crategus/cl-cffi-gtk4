@@ -2,8 +2,8 @@
 ;;; gsk.render-node.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library,
-;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2025 Dieter Kaiser
@@ -263,7 +263,7 @@
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{2024-5-25}
+ "@version{2024-05-25}
   @begin{declaration}
 (gobject:define-genum \"GskRenderNodeType\" render-node-type
   (:export t
@@ -411,7 +411,7 @@
 (setf (liber:alias-for-symbol 'scaling-filter)
       "GEnum"
       (liber:symbol-documentation 'scaling-filter)
- "@version{2023-9-22}
+ "@version{2023-09-22}
   @begin{declaration}
 (gobject:define-genum \"GskScalingFilter\" scaling-filter
   (:export t
@@ -666,9 +666,9 @@
 
 (cffi:defcfun ("gsk_render_node_ref" render-node-ref) render-node
  #+liber-documentation
- "@version{2023-10-25}
+ "@version{2025-08-04}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with an additional reference}
+  @return{The @class{gsk:render-node} instance with an additional reference.}
   @short{Acquires a reference on the given render node.}
   @see-class{gsk:render-node}"
   (node render-node))
@@ -699,9 +699,9 @@
 (cffi:defcfun ("gsk_render_node_get_node_type" render-node-node-type)
     render-node-type
  #+liber-documentation
- "@version{2023-10-26}
+ "@version{2025-08-02}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @symbol{gsk:render-node-type} value with the type of @arg{node}.}
+  @return{The @sym{gsk:render-node-type} value for the type of @arg{node}.}
   @short{Returns the type of the render node.}
   @see-class{gsk:render-node}
   @see-symbol{gsk:render-node-type}"
@@ -715,9 +715,9 @@
 
 (cffi:defcfun ("gsk_render_node_draw" render-node-draw) :void
  #+liber-documentation
- "@version{2023-10-26}
+ "@version{2025-08-02}
   @argument[node]{a @class{gsk:render-node} instance}
-  @argument[cr]{a @symbol{cairo:context-t} instance to draw to}
+  @argument[cr]{a @sym{cairo:context-t} instance to draw to}
   @begin{short}
     Draw the contents of @arg{node} to the given Cairo context.
   @end{short}
@@ -826,7 +826,7 @@
 
 (defun render-node-write-to-file (node path)
  #+liber-documentation
- "@version{2025-2-8}
+ "@version{2025-02-08}
   @argument[node]{a @class{gsk:render-node} instance}
   @argument[path]{a pathname or namestring for the file to save it to}
   @return{@em{True} if saving was successful.}
@@ -859,10 +859,10 @@ color {
 
 (defun render-node-bounds (node bounds)
  #+liber-documentation
- "@version{2023-10-26}
+ "@version{2025-08-02}
   @argument[node]{a @class{gsk:render-node} instance}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance}
-  @return{The @arg{bounds} value with the boundaries.}
+  @argument[bounds]{a @sym{graphene:rect-t} instance}
+  @return{The @arg{bounds} value for the boundaries.}
   @begin{short}
     Retrieves the boundaries of the render node.
   @end{short}
@@ -930,7 +930,7 @@ color {
 
 (defun container-node-new (children)
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2023-11-06}
   @argument[children]{a list of @class{gsk:render-node} instances with the
     children of the render node}
   @return{The new @class{gsk:container-node} instance.}
@@ -955,9 +955,9 @@ color {
 (cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
     :uint
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:container-node} instance}
-  @return{The unsigned integer with the number of children of @arg{node}.}
+  @return{The unsigned integer for the number of children of @arg{node}.}
   @begin{short}
     Retrieves the number of direct children of @arg{node}.
   @end{short}
@@ -972,9 +972,9 @@ color {
 
 (cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:container-node} instance}
-  @argument[index]{an unsigned integer with the position of the child to get}
+  @argument[index]{an unsigned integer for the position of the child to get}
   @return{The @arg{index}'th child of @arg{node}.}
   @short{Gets one of the children of the container node.}
   @see-class{gsk:container-node}"
@@ -1009,8 +1009,8 @@ color {
 
 (cffi:defcfun ("gsk_cairo_node_new" cairo-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render to}
   @return{The new @class{gsk:render-node} instance.}
   @begin{short}
@@ -1033,10 +1033,12 @@ color {
 (cffi:defcfun ("gsk_cairo_node_get_draw_context" cairo-node-draw-context)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:cairo-node} instance for a Cairo surface}
-  @return{The Cairo context used for drawing, use the @fun{cairo:destroy} function
-    when done drawing.}
+  @begin{return}
+    The Cairo context used for drawing, use the @fun{cairo:destroy} function
+    when done drawing.
+  @end{return}
   @begin{short}
     Creates a Cairo context for drawing using the surface associated to the
     render node.
@@ -1055,9 +1057,9 @@ color {
 (cffi:defcfun ("gsk_cairo_node_get_surface" cairo-node-surface)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:cairo-node} instance for a Cairo surface}
-  @return{The @symbol{cairo:surface-t} instance with a Cairo surface.}
+  @return{The @sym{cairo:surface-t} instance for a Cairo surface.}
   @begin{short}
     Retrieves the Cairo surface used by the render node.
   @end{short}
@@ -1093,9 +1095,9 @@ color {
 
 (cffi:defcfun ("gsk_color_node_new" color-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-25}
+ "@version{#2025-08-02}
   @argument[rgba]{a @class{gdk:rgba} instance specifying a color}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the color into}
   @return{The new @class{gsk:color-node} instance.}
   @begin{short}
@@ -1116,9 +1118,9 @@ color {
 
 (cffi:defcfun ("gsk_color_node_get_color" color-node-color) (g:boxed gdk:rgba)
  #+liber-documentation
- "@version{#2023-10-25}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:color-node} instance}
-  @return{The @class{gdk:rgba} instance with the color of the render node}
+  @return{The @class{gdk:rgba} instance for the color of the render node.}
   @short{Retrieves the color of the given render node.}
   @see-class{gsk:color-node}
   @see-class{gdk:rgba}"
@@ -1160,12 +1162,12 @@ color {
 
 (defun linear-gradient-node-new (bounds start end color-stops)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[start]{a @symbol{graphene:point-t} instance with the point at which
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will begin}
-  @argument[end]{a @symbol{graphene:point-t} instance with the point at which
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will finish}
   @argument[color-stops]{a list of the form @code{'((offset1 color1) (offset2
     color2) ...)} with the offsets and colors defining the gradient}
@@ -1203,9 +1205,9 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_start" linear-gradient-node-start)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:linear-gradient-node} instance}
-  @return{The @symbol{graphene:point-t} instance with the initial point.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:linear-gradient-node} instance}
+  @return{The @sym{graphene:point-t} instance for the initial point.}
   @short{Retrieves the initial point of the linear gradient.}
   @see-class{gsk:linear-gradient-node}
   @see-class{gsk:render-node}
@@ -1221,9 +1223,9 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_end" linear-gradient-node-end)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:linear-gradient-node} instance}
-  @return{The @symbol{graphene:point-t} instance with the final point.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:linear-gradient-node} instance}
+  @return{The @sym{graphene:point-t} instance for the final point.}
   @short{Retrieves the final point of the linear gradient.}
   @see-class{gsk:linear-gradient-node}
   @see-class{gsk:render-node}
@@ -1239,9 +1241,9 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_n_color_stops"
                linear-gradient-node-n-color-stops) :size
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:linear-gradient-node} instance}
-  @return{The unsigned integer with the number of color stops.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:linear-gradient-node} instance}
+  @return{The unsigned integer for the number of color stops.}
   @short{Retrieves the number of color stops in the linear gradient.}
   @see-class{gsk:linear-gradient-node}"
   (node render-node))
@@ -1259,10 +1261,12 @@ color {
 
 (defun linear-gradient-node-color-stops (node)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:linear-gradient-node} instance}
-  @return{The list of the form @code{'((offset1 color1) (offset2 color2) ...)}
-    with the offsets and colors of the linear gradient.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:linear-gradient-node} instance}
+  @begin{return}
+    The list of the form @code{'((offset1 color1) (offset2 color2) ...)} with
+    the offsets and colors of the linear gradient.
+  @end{return}
   @short{Retrieves the color stops in the linear gradient.}
   @see-class{gsk:linear-gradient-node}"
   (cffi:with-foreign-object (n-stops :size)
@@ -1312,12 +1316,12 @@ color {
 
 (defun repeating-linear-gradient-node-new (bounds start end color-stops)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[start]{a @symbol{graphene:point-t} instance with the point at which
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will begin}
-  @argument[end]{a @symbol{graphene:point-t} instance with the point at which
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
     the linear gradient will finish}
   @argument[color-stops]{a list of the form @code{'((offset1 color1) (offset2
     color2) ...)} with the offsets and colors defining the gradient}
@@ -1391,19 +1395,20 @@ color {
                                  start end
                                  color-stops)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[center]{a @symbol{graphene:point-t} instance with the center of
+  @argument[center]{a @sym{graphene:point-t} instance for the center of
     the radial gradient}
-  @argument[hradius]{a number coerced to float with the horizontal radius}
-  @argument[vradius]{a number coerced to a float with the vertical radius}
-  @argument[start]{a number coerced to a float with the percentage >= 0 that
-    defines the start of the radial gradient around center}
-  @argument[end]{a number coerced to a float with the percentage >= 0 that
+  @argument[hradius]{a number coerced to a single float for the horizontal
+    radius}
+  @argument[vradius]{a number coerced to a single float for the vertical radius}
+  @argument[start]{a number coerced to a single float for the percentage >= 0
+    that defines the start of the radial gradient around center}
+  @argument[end]{a number coerced to a single float for the percentage >= 0 that
     defines the end of the radial gradient around center}
   @argument[color-stops]{a list of the form @code{'((offset1 color1) (offset2
-    color2) ...)} with the offsets and colors defining the gradient}
+    color2) ...)} for the offsets and colors defining the gradient}
   @return{The new @class{gsk:radial-gradient-node} instance.}
   @begin{short}
     Creates a render node that will create a radial gradient.
@@ -1447,9 +1452,9 @@ color {
 (cffi:defcfun ("gsk_radial_gradient_node_get_n_color_stops"
                radial-gradient-node-n-color-stops) :size
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:radial-gradient-node} instance}
-  @return{The unsigned integer with the number of color stops.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:radial-gradient-node} instance}
+  @return{The unsigned integer for the number of color stops.}
   @short{Retrieves the number of color stops in the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1467,10 +1472,12 @@ color {
 
 (defun radial-gradient-node-color-stops (node)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:radial-gradient-node} instance}
-  @return{The list of the form @code{'((offset1 color1) (offset2 color2) ...)}
-    with the offsets and colors of the radial gradient.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:radial-gradient-node} instance}
+  @begin{return}
+    The list of the form @code{'((offset1 color1) (offset2 color2) ...)} for
+    the offsets and colors of the radial gradient.
+  @end{return}
   @short{Retrieves the color stops in the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (cffi:with-foreign-object (n-stops :size)
@@ -1493,9 +1500,9 @@ color {
 (cffi:defcfun ("gsk_radial_gradient_node_get_start" radial-gradient-node-start)
     :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:radial-gradient-node} instance}
-  @return{The float with the start value for the radial gradient.}
+  @return{The single float for the start value for the radial gradient.}
   @short{Retrieves the start value for the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1509,9 +1516,9 @@ color {
 (cffi:defcfun ("gsk_radial_gradient_node_get_end" radial-gradient-node-end)
     :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:radial-gradient-node} instance}
-  @return{The float with the end value for the radial gradient.}
+  @return{The single float for the end value for the radial gradient.}
   @short{Retrieves the end value for the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1525,9 +1532,9 @@ color {
 (cffi:defcfun ("gsk_radial_gradient_node_get_hradius"
                radial-gradient-node-hradius) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:radial-gradient-node} instance}
-  @return{The float with the horizontal radius for the radial gradient.}
+  @return{The single float for the horizontal radius for the radial gradient.}
   @short{Retrieves the horizontal radius for the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1541,9 +1548,9 @@ color {
 (cffi:defcfun ("gsk_radial_gradient_node_get_vradius"
                radial-gradient-node-vradius) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:radial-gradient-node} instance}
-  @return{The float with the vertical radius for the radial gradient.}
+  @return{The single float for the vertical radius for the radial gradient.}
   @short{Retrieves the vertical radius for the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1558,10 +1565,12 @@ color {
                radial-gradient-node-center)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:radial-gradient-node} instance}
-  @return{The @symbol{graphene:point-t} instance with the center point for the
-    radial gradient.}
+  @begin{return}
+    The @sym{graphene:point-t} instance for the center point for the radial
+    gradient.
+  @end{return}
   @short{Retrieves the center point for the radial gradient.}
   @see-class{gsk:radial-gradient-node}"
   (node render-node))
@@ -1609,19 +1618,20 @@ color {
                                            start end
                                            color-stops)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
-  @argument[center]{a @symbol{graphene:point-t} instance with the center of
+  @argument[center]{a @sym{graphene:point-t} instance for the center of
     the radial gradient}
-  @argument[hradius]{a number coerced to a float with the horizontal radius}
-  @argument[vradius]{a number coerced to a float with the vertical radius}
-  @argument[start]{a number coerced to a float with the percentage >= 0 that
-    defines the start of the radial gradient around center}
-  @argument[end]{a number coerced to a float with the percentage >= 0 that
+  @argument[hradius]{a number coerced to a single float for the horizontal
+    radius}
+  @argument[vradius]{a number coerced to a single float for the vertical radius}
+  @argument[start]{a number coerced to a single float for the percentage >= 0
+    that defines the start of the radial gradient around center}
+  @argument[end]{a number coerced to a single float for the percentage >= 0 that
     defines the end of the radial gradient around center}
   @argument[color-stops]{a list of the form @code{'((offset1 color1) (offset2
-    color2) ...)} with the offsets and colors defining the gradient}
+    color2) ...)} for the offsets and colors defining the gradient}
   @return{The new @class{gsk:repeating-radial-gradient-node} instance.}
   @begin{short}
     Creates a render node that will create a repeating radial gradient.
@@ -1692,16 +1702,17 @@ color {
 
 (defun conic-gradient-node-new (bounds center rotation color-stops)
  #+liber-documentation
- "@version{#2023-11-24}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds of the
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     render node}
-  @argument[center]{a @symbol{graphene:point-t} instance with the center of the
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
     gradient}
-  @argument[rotation]{a float with the rotation of the gradient in degrees}
-  @argument[stops]{a list with the color stops defining the gradient, the
-    offset of all color steps must be increasing, the first stop's offset must
+  @argument[rotation]{a single float for the rotation of the gradient in
+    degrees}
+  @argument[stops]{a list for the color stops defining the gradient, the offset
+    of all color steps must be increasing, the first stop's offset must
     be >= 0 and the last stop's offset must be <= 1}
-  @argument[n-stops]{an integer with the number of elements in @arg{stops}}
+  @argument[n-stops]{an integer for the number of elements in @arg{stops}}
   @return{The new @class{gsk:conic-gradient-node} instance.}
   @begin{short}
     Creates a render node that draws a conic gradient.
@@ -1740,10 +1751,10 @@ color {
 (cffi:defcfun ("gsk_conic_gradient_node_get_n_color_stops"
                conic-gradient-node-n-color-stops) :size
  #+liber-documentation
- "@version{#2023-11-23}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:conic-gradient-node} instance for a conic
     gradient}
-  @return{The unsigned integer with the number of color stops.}
+  @return{The unsigned integer for the number of color stops.}
   @short{Retrieves the number of color stops in the conic gradient.}
   @see-class{gsk:conic-gradient-node}"
   (node render-node))
@@ -1761,10 +1772,12 @@ color {
 
 (defun conic-gradient-node-color-stops (node)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:conic-gradient-node} instance}
-  @return{The list of the form @code{'((offset1 color1) (offset2 color2) ...)}
-    with the offsets and colors of the conic gradient.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:conic-gradient-node} instance}
+  @begin{return}
+    The list of the form @code{'((offset1 color1) (offset2 color2) ...)} for
+    the offsets and colors of the conic gradient.
+  @end{return}
   @short{Retrieves the color stops in the conic gradient.}
   @see-class{gsk:conic-gradient-node}"
   (cffi:with-foreign-object (n-stops :size)
@@ -1787,11 +1800,12 @@ color {
 (cffi:defcfun ("gsk_conic_gradient_node_get_center"
                conic-gradient-node-center) (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2023-11-23}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:conic-gradient-node} instance for a conic
     gradient}
-  @return{The @symbol{graphene:point-t} instance with the center point for the
-    gradient.}
+  @begin{return}
+    The @sym{graphene:point-t} instance for the center point for the gradient.
+  @end{return}
   @begin{short}
     Retrieves the center pointer for the gradient.
   @end{short}
@@ -1808,9 +1822,9 @@ color {
 (cffi:defcfun ("gsk_conic_gradient_node_get_rotation"
                conic-gradient-node-rotation) :float
  #+liber-documentation
- "@version{#2023-11-23}
-  @argument[node]{a @symbol{gsk:conic-gradient-node} instance}
-  @return{The float with the rotation for the conic gradient.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:conic-gradient-node} instance}
+  @return{The single float for the rotation for the conic gradient.}
   @short{Retrieves the rotation for the conic gradient in degrees.}
   @see-class{gsk:conic-gradient-node}"
   (node render-node))
@@ -1848,9 +1862,9 @@ color {
 
 (defun border-node-new (outline widths colors)
  #+liber-documentation
- "@version{2023-11-19}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance describing the
-    outline of the border}
+ "@version{2025-08-02}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance describing the outline
+    of the border}
   @argument[widths]{a list with 4 single floats for the stroke width of the
     border on the top, right, bottom, and left side respectively}
   @argument[colors]{a list with 4 @class{gdk:rgba} instances for the color
@@ -1881,9 +1895,9 @@ color {
 (cffi:defcfun ("gsk_border_node_get_outline" border-node-outline)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{2023-11-19}
+ "@version{2025-08-02}
   @argument[node]{a @class{gsk:border-node} instance}
-  @return{The @symbol{gsk:rounded-rect} instance with the outline of the border}
+  @return{The @sym{gsk:rounded-rect} instance for the outline of the border.}
   @begin{short}
     Retrieves the outline of the border.
   @end{short}
@@ -1903,10 +1917,12 @@ color {
 
 (defun border-node-widths (node)
  #+liber-documentation
- "@version{2023-11-19}
+ "@version{2025-08-03}
   @argument[node]{a @class{gsk:border-node} instance for a border}
-  @return{The list with 4 single floats for the top, right, bottom, and
-    left stroke width of the border, respectively.}
+  @begin{return}
+    The list with 4 single floats for the top, right, bottom, and left stroke
+    width of the border, respectively.
+  @end{return}
   @begin{short}
     Retrieves the stroke widths of the border.
   @end{short}
@@ -1926,10 +1942,12 @@ color {
 
 (defun border-node-colors (node)
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:border-node} instance for a border}
-  @return{The list with 4 @class{gdk:rgba} instances for the top, right, bottom,
-    and left color of the border.}
+  @begin{return}
+    The list with 4 @class{gdk:rgba} instances for the top, right, bottom, and
+    left color of the border.
+  @end{return}
   @begin{short}
     Retrieves the colors of the border.
   @end{short}
@@ -1970,11 +1988,11 @@ color {
 
 (cffi:defcfun ("gsk_texture_node_new" texture-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-23}
+ "@version{#2025-08-02}
   @argument[texture]{a @class{gdk:texture} object}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle
-    to render the texture into}
-  @return{The new @symbol{gsk:texure-node} instance.}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
+    render the texture into}
+  @return{The new @sym{gsk:texure-node} instance.}
   @begin{short}
     Creates a render node that will render the given texture into the area
     given by @arg{bounds}.
@@ -2038,18 +2056,18 @@ color {
 
 (defun inset-shadow-node-new (outline color dx dy spread radius)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
-    the region containing the shadow}
-  @argument[color]{a @class{gdk:rgba} instance with the color of the shadow}
-  @argument[dx]{a number coerced to a float with the horizontal offset of the
-    shadow}
-  @argument[dy]{a number coerced to a float with the vertical offset of the
-    shadow}
-  @argument[spread]{a number coerced to a float how far the shadow spreads
-    towards the inside}
-  @argument[radius]{a number coerced to a float how much blur to apply to the
-    shadow}
+ "@version{#2025-08-02}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
+    region containing the shadow}
+  @argument[color]{a @class{gdk:rgba} instance for the color of the shadow}
+  @argument[dx]{a number coerced to a single float for the horizontal offset
+    of the shadow}
+  @argument[dy]{a number coerced to a single float for the vertical offset
+    of the shadow}
+  @argument[spread]{a number coerced to a single float how far the shadow
+    spreads towards the inside}
+  @argument[radius]{a number coerced to a single float how much blur to apply
+    to the shadow}
   @return{The @class{gsk:inset-shadow-node} instance.}
   @begin{short}
     Creates a render node that will render an inset shadow into the box given
@@ -2072,9 +2090,9 @@ color {
 (cffi:defcfun ("gsk_inset_shadow_node_get_outline" inset-shadow-node-outline)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The @symbol{gsk:rounded-rect} instance with the rounded rectangle.}
+  @return{The @sym{gsk:rounded-rect} instance for the rounded rectangle.}
   @short{Retrieves the outline rectangle of the inset shadow.}
   @see-class{gsk:inset-shadow-node}
   @see-symbol{gsk:rounded-rect}"
@@ -2089,9 +2107,9 @@ color {
 (cffi:defcfun ("gsk_inset_shadow_node_get_color" inset-shadow-node-color)
     (g:boxed gdk:rgba)
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The @class{gdk:rgba} instance with the color of the shadow.}
+  @return{The @class{gdk:rgba} instance for the color of the shadow.}
   @short{Retrieves the color of the inset shadow.}
   @see-class{gsk:inset-shadow-node}
   @see-class{gdk:rgba}"
@@ -2105,9 +2123,9 @@ color {
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_dx" inset-shadow-node-dx) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The float with an offset, in pixels.}
+  @return{The single float for an offset, in pixels.}
   @short{Retrieves the horizontal offset of the inset shadow.}
   @see-class{gsk:inset-shadow-node}"
   (node render-node))
@@ -2120,9 +2138,9 @@ color {
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_dy" inset-shadow-node-dy) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The float with an offset, in pixels.}
+  @return{The single float for an offset, in pixels.}
   @short{Retrieves the vertical offset of the inset shadow.}
   @see-class{gsk:inset-shadow-node}"
   (node render-node))
@@ -2136,9 +2154,9 @@ color {
 (cffi:defcfun ("gsk_inset_shadow_node_get_spread" inset-shadow-node-spread)
     :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The float with the size of the shadow, in pixels.}
+  @return{The single float for the size of the shadow, in pixels.}
   @short{Retrieves how much the shadow spreads inwards.}
   @see-class{gsk:inset-shadow-node}"
   (node render-node))
@@ -2152,9 +2170,9 @@ color {
 (cffi:defcfun ("gsk_inset_shadow_node_get_blur_radius"
                inset-shadow-node-blur-radius) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:inset-shadow-node} instance}
-  @return{The float with the blur radius, in pixels.}
+  @return{The single float for the blur radius, in pixels.}
   @short{Retrieves the blur radius to apply to the shadow.}
   @see-class{gsk:inset-shadow-node}"
   (node render-node))
@@ -2195,18 +2213,18 @@ color {
 
 (defun outset-shadow-node-new (outline color dx dy spread radius)
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
+ "@version{#2025-08-02}
+  @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of
     the region containing the shadow}
-  @argument[color]{a @class{gdk:rgba} instance with the color of the shadow}
-  @argument[dx]{a number coerced to a float with the horizontal offset of the
-    shadow}
-  @argument[dy]{a number coerced to a float with the vertical offset of the
-    shadow}
-  @argument[spread]{a number coerced to a float how far the shadow spreads
-    towards the inside}
-  @argument[radius]{a number coerced to a float how much blur to apply to the
-    shadow}
+  @argument[color]{a @class{gdk:rgba} instance for the color of the shadow}
+  @argument[dx]{a number coerced to a single float for the horizontal offset
+    of the shadow}
+  @argument[dy]{a number coerced to a single float for the vertical offset
+    of the shadow}
+  @argument[spread]{a number coerced to a single float how far the shadow
+    spreads towards the inside}
+  @argument[radius]{a number coerced to a single float how much blur to apply
+    to the shadow}
   @return{The @class{gsk:outset-shadow-node} instance.}
   @begin{short}
     Creates a render node that will render an outset shadow into the box given
@@ -2230,9 +2248,9 @@ color {
 (cffi:defcfun ("gsk_outset_shadow_node_get_outline" outset-shadow-node-outline)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The @symbol{gsk:rounded-rect} instance with the rounded rectangle.}
+  @return{The @sym{gsk:rounded-rect} instance for the rounded rectangle.}
   @short{Retrieves the outline rectangle of the outset shadow.}
   @see-class{gsk:outset-shadow-node}
   @see-symbol{gsk:rounded-rect}"
@@ -2247,9 +2265,9 @@ color {
 (cffi:defcfun ("gsk_outset_shadow_node_get_color" outset-shadow-node-color)
     (g:boxed gdk:rgba)
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The @class{gdk:rgba} instance with the color of the shadow.}
+  @return{The @class{gdk:rgba} instance for the color of the shadow.}
   @short{Retrieves the color of the outset shadow.}
   @see-class{gsk:outset-shadow-node}
   @see-class{gdk:rgba}"
@@ -2263,9 +2281,9 @@ color {
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_dx" outset-shadow-node-dx) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The float with an offset, in pixels.}
+  @return{The single float for an offset, in pixels.}
   @short{Retrieves the horizontal offset of the outset shadow.}
   @see-class{gsk:outset-shadow-node}"
   (node render-node))
@@ -2278,9 +2296,9 @@ color {
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_dy" outset-shadow-node-dy) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The float with an offset, in pixels.}
+  @return{The single float for an offset, in pixels.}
   @short{Retrieves the vertical offset of the outset shadow.}
   @see-class{gsk:outset-shadow-node}"
   (node render-node))
@@ -2294,9 +2312,9 @@ color {
 (cffi:defcfun ("gsk_outset_shadow_node_get_spread" outset-shadow-node-spread)
     :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The float with the size of the shadow, in pixels.}
+  @return{The single float for the size of the shadow, in pixels.}
   @short{Retrieves how much the shadow spreads inwards.}
   @see-class{gsk:outset-shadow-node}"
   (node render-node))
@@ -2310,9 +2328,9 @@ color {
 (cffi:defcfun ("gsk_outset_shadow_node_get_blur_radius"
                outset-shadow-node-blur-radius) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:outset-shadow-node} instance}
-  @return{The float with the blur radius, in pixels.}
+  @return{The float for the blur radius, in pixels.}
   @short{Retrieves the blur radius to apply to the shadow.}
   @see-class{gsk:outset-shadow-node}"
   (node render-node))
@@ -2331,10 +2349,10 @@ color {
 (setf (liber:alias-for-class 'transform-node)
       "GskRenderNode"
       (documentation 'transform-node 'type)
- "@version{#2023-10-27}
+ "@version{#2025-08-02}
   @begin{short}
-    A render node applying a @symbol{gsk:transform} instance to its single
-    child render node.
+    A render node applying a @sym{gsk:transform} instance to its single child
+    render node.
   @end{short}
   @see-class{gsk:render-node}
   @see-symbol{gsk:transform}")
@@ -2347,10 +2365,10 @@ color {
 
 (cffi:defcfun ("gsk_transform_node_new" transform-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-27}
-  @argument[child]{a @class{gsk:render-node} instance with the render node
+ "@version{#2025-08-03}
+  @argument[child]{a @class{gsk:render-node} instance for the render node
     to transform}
-  @argument[transform]{a @class{gsk:transform} instance with the transform
+  @argument[transform]{a @class{gsk:transform} instance for the transform
     to apply}
   @return{The new @class{gsk:transform-node} instance.}
   @begin{short}
@@ -2371,10 +2389,12 @@ color {
 
 (cffi:defcfun ("gsk_transform_node_get_child" transform-node-child) render-node
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:transform-node} instance}
-  @return{The @class{gsk:render-node} instance with the child render node that
-    is getting transformed.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child render node that is
+    getting transformed.
+  @end{return}
   @begin{short}
     Gets the child render node that is getting transformed by the given
     @arg{node}.
@@ -2392,11 +2412,11 @@ color {
 (cffi:defcfun ("gsk_transform_node_get_transform" transform-node-transform)
     (g:boxed transform)
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:transform-node} instance}
-  @return{The @symbol{gsk:transform} instance.}
+  @return{The @sym{gsk:transform} instance.}
   @begin{short}
-    Retrieves the @symbol{gsk:transform} instance used by @arg{node}.
+    Retrieves the @sym{gsk:transform} instance used by @arg{node}.
   @end{short}
   @see-class{gsk:transform-node}
   @see-symbol{gsk:transform}"
@@ -2434,9 +2454,10 @@ color {
 
 (defun opacity-node-new (child opacity)
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[child]{a @class{gsk:render-node} instance}
-  @argument[opacity]{a number coerced to a float with the opacity to apply}
+  @argument[opacity]{a number coerced to a single float for the opacity to
+    apply}
   @return{The new @class{gsk:opacity-node} instance.}
   @begin{short}
     Creates a render node that will draw the child with reduced @arg{opacity}.
@@ -2452,10 +2473,12 @@ color {
 
 (cffi:defcfun ("gsk_opacity_node_get_child" opacity-node-child) render-node
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[child]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with the child that is getting
-    opacityed.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child that is getting
+    opacityed.
+  @end{return}
   @begin{short}
     Gets the child node that is getting opacityed by the given @arg{node}.
   @end{short}
@@ -2471,9 +2494,9 @@ color {
 
 (cffi:defcfun ("gsk_opacity_node_get_opacity" opacity-node-opacity) :float
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-03}
   @argument[child]{a @class{gsk:render-node} instance}
-  @return{The float with the opacity factor.}
+  @return{The single float for the opacity factor.}
   @short{Gets the transparency factor for an opacity node.}
   @see-class{gsk:opacity-node}"
   (node render-node))
@@ -2506,13 +2529,12 @@ color {
 
 (cffi:defcfun ("gsk_color_matrix_node_new" color-matrix-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-27}
-  @argument[child]{a @class{gsk:render-node} instance with the child render
-    node to draw}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix to
-    apply}
-  @argument[offset]{a @symbol{graphene:vec4-t} instance with the values to add
-    to the color}
+ "@version{#2025-08-02}
+  @argument[child]{a @class{gsk:render-node} instance for the child render node
+    to draw}
+  @argument[matrix]{a @sym{graphene:matrix-t} instance for the matrix to apply}
+  @argument[offset]{a @sym{graphene:vec4-t} instance for the values to add to
+    the color}
   @return{The new @class{gsk:rende-node} instance.}
   @begin{short}
     Creates a render node that will draw the child render node with reduced
@@ -2535,10 +2557,12 @@ color {
 (cffi:defcfun ("gsk_color_matrix_node_get_child" color-matrix-node-child)
     render-node
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{The @class{gsk:render-node} instance with the child render node that
-    is getting its colors modified.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child render node that is
+    getting its colors modified.
+  @end{return}
   @begin{short}
     Gets the child render node that is getting its colors modified by the given
     @arg{node}.
@@ -2557,9 +2581,9 @@ color {
                color-matrix-node-color-matrix)
     (:pointer (:struct graphene:matrix-t))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{The @symbol{graphene:matrix-t} instance with a 4x4 color matrix.}
+  @return{The @sym{graphene:matrix-t} instance for a 4x4 color matrix.}
   @begin{short}
     Retrieves the color matrix used by @arg{node}.
   @end{short}
@@ -2577,9 +2601,9 @@ color {
                color-matrix-node-color-offset)
     (:pointer (:struct graphene:vec4-t))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{The @symbol{graphene:vec4-t} instance with a color vector}
+  @return{The @sym{graphene:vec4-t} instance for a color vector.}
   @begin{short}
     Retrieves the color offset used by @arg{node}.
   @end{short}
@@ -2615,12 +2639,12 @@ color {
 
 (cffi:defcfun ("gsk_repeat_node_new" repeat-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds of the
+ "@version{#2025-08-02}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
     area to be painted}
-  @argument[child]{a @class{gsk:render-node} instance with the child to repeat}
-  @argument[child-bounds]{a @symbol{graphene:rect-t} instance with the area
-    of the child to repeat or @code{nil} to use the child's bounds}
+  @argument[child]{a @class{gsk:render-node} instance for the child to repeat}
+  @argument[child-bounds]{a @sym{graphene:rect-t} instance for the area of the
+    child to repeat or @code{nil} to use the child's bounds}
   @return{The new @class{gsk:repeat-node} instance.}
   @begin{short}
     Creates a render node that will repeat the drawing of child across the
@@ -2641,9 +2665,9 @@ color {
 
 (cffi:defcfun ("gsk_repeat_node_get_child" repeat-node-child) render-node
  #+liber-documentation
- "@version{#2023-11-27}
-  @argument[node]{a @symbol{gsk:repeat-node} instance}
-  @return{The @class{gsk:render-node} instance with the child.}
+ "@version{#2025-08-02}
+  @argument[node]{a @sym{gsk:repeat-node} instance}
+  @return{The @class{gsk:render-node} instance for the child.}
   @short{Retrieves the child of @arg{node}.}
   @see-class{gsk:repeat-node}
   @see-class{gsk:render-node}"
@@ -2658,9 +2682,9 @@ color {
 (cffi:defcfun ("gsk_repeat_node_get_child_bounds" repeat-node-child-bounds)
     (:pointer (:struct graphene:rect-t))
  #+liber-documentation
- "@version{#2023-11-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:repeat-node} instance}
-  @return{The @symbol{graphene:rect-t} instance with the bounding rectangle.}
+  @return{The @sym{graphene:rect-t} instance for the bounding rectangle.}
   @short{Retrieves the bounding rectangle of the child of @arg{node}.}
   @see-class{gsk:repeat-node}
   @see-symbol{graphene:rect-t}"
@@ -2694,10 +2718,10 @@ color {
 
 (cffi:defcfun ("gsk_clip_node_new" clip-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-27}
-  @argument[child]{a @class{gsk:render-node} instance with the render node to
+ "@version{#2025-08-02}
+  @argument[child]{a @class{gsk:render-node} instance for the render node to
     draw}
-  @argument[clip]{a @symbol{graphene:rect-t} instance with the clip to apply}
+  @argument[clip]{a @sym{graphene:rect-t} instance for the clip to apply}
   @return{The new @class{gsk:render-node} instance.}
   @begin{short}
     Creates a render node that will clip the child render node to the area
@@ -2716,10 +2740,12 @@ color {
 
 (cffi:defcfun ("gsk_clip_node_get_child" clip-node-child) render-node
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:clip-node} instance}
-  @return{The @class{gsk:render-node} instance with the child render node that
-    is getting clipped.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child render node that is
+    getting clipped.
+  @end{return}
   @begin{short}
     Gets the child render node that is getting clipped by the given @arg{node}.
   @end{short}
@@ -2736,9 +2762,9 @@ color {
 (cffi:defcfun ("gsk_clip_node_get_clip" clip-node-clip)
     (:pointer (:struct graphene:rect-t))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:clip-node} instance}
-  @return{The @symbol{graphene:rect-t} instance with a clip rectangle.}
+  @return{The @sym{graphene:rect-t} instance for a clip rectangle.}
   @begin{short}
     Retrieves the clip rectangle for @arg{node}.
   @end{short}
@@ -2775,9 +2801,9 @@ color {
 
 (cffi:defcfun ("gsk_rounded_clip_node_new" rounded-clip-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-29}
-  @argument[child]{a @class{gsk:render-node} instance with the node to draw}
-  @argument[clip]{a @symbol{gsk:rounded-rect} instance with the clip to apply}
+ "@version{#2025-08-02}
+  @argument[child]{a @class{gsk:render-node} instance for the node to draw}
+  @argument[clip]{a @sym{gsk:rounded-rect} instance for the clip to apply}
   @return{The new @class{gsk:rounded-clip-node} instance.}
   @begin{short}
     Creates a render node that will clip the child node to the area given by
@@ -2798,10 +2824,11 @@ color {
 (cffi:defcfun ("gsk_rounded_clip_node_get_child" rounded-clip-node-child)
     render-node
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:rounded-clip-node} instance}
-  @return{The @class{gsk:render-node} instance with the child that is getting
-    clipped.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child that is getting clipped.
+  @end{return}
   @begin{short}
     Gets the child node that is getting clipped by the given @arg{node}.
   @end{short}
@@ -2818,9 +2845,9 @@ color {
 (cffi:defcfun ("gsk_rounded_clip_node_get_clip" rounded-clip-node-clip)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:rounded-clip-node} instance}
-  @return{The @symbol{gsk:rounded-rect} instance with the rounded rectangle.}
+  @return{The @sym{gsk:rounded-rect} instance for the rounded rectangle.}
   @begin{short}
     Retrievs the rounded rectangle used to clip the contents of @arg{node}.
   @end{short}
@@ -2862,7 +2889,7 @@ color {
 
 (defun shadow-node-new (child shadows)
  #+liber-documentation
- "@version{2025-2-12}
+ "@version{2025-02-12}
   @argument[child]{a @class{gsk:render-node} instance for the node to draw}
   @argument[shadows]{a list of the form @code{'((color1 dx1 dy1 radius1)
     (color2 dx2 dy2 radius2) ...)} with the shadows to apply}
@@ -2900,11 +2927,12 @@ color {
 
 (defun shadow-node-shadow (node index)
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:shadow-node} instance}
-  @argument[index]{an unsigned integer with the given index}
-  @return{The list of the form @code{'(color dxi dy radius)} with the shadow
-    data.}
+  @argument[index]{an unsigned integer for the given index}
+  @begin{return}
+    The list of the form @code{'(color dxi dy radius)} with the shadow data.
+  @end{return}
   @short{Retrieves the shadow data at the given index.}
   @see-class{gsk:shadow-node}"
   (let ((ptr (%shadow-node-shadow node index))
@@ -2923,9 +2951,9 @@ color {
 
 (cffi:defcfun ("gsk_shadow_node_get_n_shadows" shadow-node-n-shadows) :size
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:shadow-node} instace}
-  @return{The unsigned integer with the number of shadows.}
+  @return{The unsigned integer for the number of shadows.}
   @short{Retrieves the number of shadows in @arg{node}.}
   @see-class{gsk:shadow-node}"
   (node render-node))
@@ -2938,9 +2966,9 @@ color {
 
 (cffi:defcfun ("gsk_shadow_node_get_child" shadow-node-child) render-node
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:shadow-node} instance}
-  @return{The @class{gsk:render-node} instance with the child render node.}
+  @return{The @class{gsk:render-node} instance for the child render node.}
   @short{Retrieves the child render node of the shadow node.}
   @see-class{gsk:shadow-node}
   @see-class{gsk:render-node}"
@@ -2974,12 +3002,12 @@ color {
 
 (cffi:defcfun ("gsk_blend_node_new" blend-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-26}
-  @argument[bottom]{a @class{gsk:render-node} instance with the bottom node to
+ "@version{#2025-08-02}
+  @argument[bottom]{a @class{gsk:render-node} instance for the bottom node to
     be drawn}
-  @argument[top]{a @class{gsk:render-node} instance with the top node to
+  @argument[top]{a @class{gsk:render-node} instance for the top node to
     be blended onto the bottom node}
-  @argument[mode]{a @symbol{gsk:blend-mode} value with the blend mode to use}
+  @argument[mode]{a @sym{gsk:blend-mode} value for the blend mode to use}
   @return{The new @class{gsk:blend-node} instance.}
   @begin{short}
     Creates a render node that will use @arg{mode} to blend the top node onto
@@ -3000,9 +3028,9 @@ color {
 (cffi:defcfun ("gsk_blend_node_get_bottom_child" blend-node-bottom-child)
     render-node
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:blend-node} instance}
-  @return{The @class{gsk:render-node} instance with the bottom child node}
+  @return{The @class{gsk:render-node} instance for the bottom child node.}
   @begin{short}
     Retrieves the bottom render node child of @arg{node}.
   @end{short}
@@ -3018,9 +3046,9 @@ color {
 
 (cffi:defcfun ("gsk_blend_node_get_top_child" blend-node-top-child) render-node
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:blend-node} instance}
-  @return{The @class{gsk:render-node} instance with the top child node}
+  @return{The @class{gsk:render-node} instance for the top child node.}
   @begin{short}
     Retrieves the top render node child of @arg{node}.
   @end{short}
@@ -3036,9 +3064,9 @@ color {
 
 (cffi:defcfun ("gsk_blend_node_get_blend_mode" blend-node-blend-mode) blend-mode
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:blend-node} instance}
-  @return{The @symbol{gsk:blend-mode} value with the blend mode.}
+  @return{The @sym{gsk:blend-mode} value for the blend mode.}
   @begin{short}
     Retrieves the blend mode used by @arg{node}.
   @end{short}
@@ -3074,13 +3102,13 @@ color {
 
 (cffi:defcfun ("gsk_cross_fade_node_new" cross-fade-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-6}
-  @argument[start]{a @class{gsk:render-node} instance with the start render
+ "@version{#2025-08-03}
+  @argument[start]{a @class{gsk:render-node} instance for the start render
     node to be drawn}
-  @argument[end]{a @class{gsk:render-node} instance with the render node to be
+  @argument[end]{a @class{gsk:render-node} instance for the render node to be
     cross-fadeed onto the start node}
-  @argument[progress]{a float how far the fade has progressed from start to end,
-    the value will be clamped to the range [0 ... 1]}
+  @argument[progress]{a single float how far the fade has progressed from start
+    to end, the value will be clamped to the range [0 ... 1]}
   @return{The new @class{gsk:cross-fade-node} instance.}
   @begin{short}
     Creates a render node that will do a cross-fade between @arg{start} and
@@ -3101,7 +3129,7 @@ color {
 (cffi:defcfun ("gsk_cross_fade_node_get_start_child"
                cross-fade-node-start-child) render-node
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2023-11-06}
   @argument[node]{a @class{gsk:cross-fade-node} instance}
   @return{The @class{gsk:render-node} instance.}
   @begin{short}
@@ -3120,7 +3148,7 @@ color {
 (cffi:defcfun ("gsk_cross_fade_node_get_end_child"
                cross-fade-node-end-child) render-node
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2023-11-06}
   @argument[node]{a @class{gsk:cross-fade-node} instance}
   @return{The @class{gsk:render-node} instance.}
   @begin{short}
@@ -3139,9 +3167,9 @@ color {
 (cffi:defcfun ("gsk_cross_fade_node_get_progress" cross-fade-node-progress)
     :float
  #+liber-documentation
- "@version{#2023-11-6}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:cross-fade-node} instance}
-  @return{The float with the progress value, between 0 and 1.}
+  @return{The single float for the progress value, between 0 and 1.}
   @short{Retrieves the progress value of the cross fade node.}
   @see-class{gsk:cross-fade-node}"
   (node render-node))
@@ -3174,13 +3202,13 @@ color {
 
 (cffi:defcfun ("gsk_text_node_new" text-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-02}
   @argument[font]{a @class{pango:font} object containing the glyphs}
   @argument[glyphs]{a @class{pango:glyph-string} instance to render}
-  @argument[color]{a @class{gdk:rgba} instance with the foreground color to
+  @argument[color]{a @class{gdk:rgba} instance for the foreground color to
     render with}
-  @argument[offset]{a @symbol{graphene:point-t} instance with the offset of
-    the baseline}
+  @argument[offset]{a @sym{graphene:point-t} instance for the offset of the
+    baseline}
   @return{The new @class{gsk:text-node} instance.}
   @begin{short}
     Creates a render node that renders the given glyphs.
@@ -3204,9 +3232,9 @@ color {
 
 (cffi:defcfun ("gsk_text_node_get_font" text-node-font) (g:object pango:font)
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-04}
   @argument[node]{a @class{gsk:text-node} instance}
-  @return{The @class{pango:font} object with the font}
+  @return{The @class{pango:font} object for the font.}
   @short{Returns the font used by the text node.}
   @see-class{gsk:text-node}
   @see-class{pango:font}"
@@ -3250,9 +3278,9 @@ color {
 
 (cffi:defcfun ("gsk_text_node_get_color" text-node-color) (g:boxed gdk:rgba)
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:text-node} instance}
-  @return{The @class{gdk:rgba} instance with the text color}
+  @return{The @class{gdk:rgba} instance for the text color}
   @short{Retrieves the color used by the text node.}
   @see-class{gsk:text-node}
   @see-class{gdk:rgba}"
@@ -3282,9 +3310,9 @@ color {
 
 (cffi:defcfun ("gsk_text_node_get_num_glyphs" text-node-num-glyphs) :uint
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:text-node} instance}
-  @return{The unsigned integer with the number of glyphs.}
+  @return{The unsigned integer for the number of glyphs.}
   @short{Retrieves the number of glyphs in the text node.}
   @see-class{gsk:text-node}"
   (node render-node))
@@ -3298,10 +3326,11 @@ color {
 (cffi:defcfun ("gsk_text_node_get_offset" text-node-offset)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2023-11-29}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:text-node} instance}
-  @return{The @symbol{graphene:point-t} instance with the horizontal and
-    vertical offsets.}
+  @begin{return}
+    The @sym{graphene:point-t} instance for the horizontal and vertical offsets.
+  @end{return}
   @short{Retrieves the offset applied to the text node.}
   @see-class{gsk:text-node}
   @see-symbol{grapene:point-t}"
@@ -3335,9 +3364,9 @@ color {
 
 (cffi:defcfun ("gsk_blur_node_new" blur-node-new) render-node
  #+liber-documentation
- "@version{#2023-10-26}
-  @argument[child]{a @class{gsk:render-node} instance with the child to blur}
-  @argument[radius]{a float with the blur radius}
+ "@version{#2025-08-03}
+  @argument[child]{a @class{gsk:render-node} instance for the child to blur}
+  @argument[radius]{a single float for the blur radius}
   @return{The new @class{gsk:blur-node} instance.}
   @begin{short}
     Creates a render node that blurs the child render node.
@@ -3355,10 +3384,11 @@ color {
 
 (cffi:defcfun ("gsk_blur_node_get_child" blur-node-child) render-node
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:blur-node} instance}
-  @return{The @class{gsk:render-node} instance with the blurred child render
-    node.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the blurred child render node.
+  @end{return}
   @begin{short}
     Retrieves the child render node of the blur render node.
   @end{short}
@@ -3374,9 +3404,9 @@ color {
 
 (cffi:defcfun ("gsk_blur_node_get_radius" blur-node-radius) :float
  #+liber-documentation
- "@version{#2023-10-26}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:blur-node} instance}
-  @return{The float with the blur radius.}
+  @return{The single float for the blur radius.}
   @begin{short}
     Retrieves the blur radius of the blur render node.
   @end{short}
@@ -3412,10 +3442,10 @@ color {
 
 (cffi:defcfun ("gsk_debug_node_new" debug-node-new) render-node
  #+liber-documentation
- "@version{#2023-11-16}
-  @argument[child]{a @class{gsk:render-node} instance with the child to add
+ "@version{#2025-08-03}
+  @argument[child]{a @class{gsk:render-node} instance for the child to add
     debug info for}
-  @argument[message]{a string with the debug message}
+  @argument[message]{a string for the debug message}
   @return{The new @class{gsk:debug-node} instance.}
   @begin{short}
     Creates a render node that will add debug information about the given
@@ -3520,12 +3550,11 @@ color {
 #+gtk-4-10
 (cffi:defcfun ("gsk_texture_scale_new" texture-scale-new) render-node
  #+liber-documentation
- "@version{#2024-11-16}
+ "@version{#2025-08-02}
   @argument[texture]{a @class{gdk:texture} object to scale}
-  @argument[bounds]{a @symbol{graphene:rect-t} instance with the size of the
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the size of the
     texture to scale to}
-  @argument[filter]{a @symbol{gsk:scaling-filter} value how to scale the
-    texture}
+  @argument[filter]{a @sym{gsk:scaling-filter} value how to scale the texture}
   @return{The new @class{gsk:texture-scale-node} instance.}
   @begin{short}
     Creates a node that scales the texture to the size given by the bounds
@@ -3560,12 +3589,12 @@ color {
 (cffi:defcfun ("gsk_texture_scale_node_get_filter" texture-scale-node-filter)
     scaling-filter
  #+liber-documentation
- "@version{#2024-11-16}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:texture-scale-node} instance}
-  @return{The @symbol{gsk:scaling-filter} value.}
+  @return{The @sym{gsk:scaling-filter} value.}
   @begin{short}
-    Retrieves the @symbol{gsk:scaling-filter} value used when creating the
-    render node.
+    Retrieves the @sym{gsk:scaling-filter} value used when creating the render
+    node.
   @end{short}
 
   Since 4.10
@@ -3633,12 +3662,12 @@ color {
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_new" mask-node-new) render-node
  #+liber-documentation
- "@version{#2024-12-2}
-  @argument[source]{a @class{gsk:render-node} instance with the source node
+ "@version{#2025-08-02}
+  @argument[source]{a @class{gsk:render-node} instance for the source node
     to be drawn}
-  @argument[mask]{a @class{gsk:render-node} instance with the node to be used
+  @argument[mask]{a @class{gsk:render-node} instance for the node to be used
     as mask}
-  @argument[mode]{a @symbol{gsk:mask-mode} value with the mask mode to use}
+  @argument[mode]{a @sym{gsk:mask-mode} value for the mask mode to use}
   @begin{short}
     Creates a @class{gsk:render-node} instance that will mask a given node by
     another.
@@ -3663,11 +3692,11 @@ color {
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_mask" mask-node-mask) render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with the mask child node}
+  @return{The @class{gsk:render-node} instance for the mask child node.}
   @begin{short}
-    Retrieves the @class{gsk:render-node} instance with the mask child of the
+    Retrieves the @class{gsk:render-node} instance for the mask child of the
     node.
   @end{short}
 
@@ -3685,9 +3714,9 @@ color {
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_mask_mode" mask-node-mask-mode) mask-mode
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @symbol{gsk:mask-mode} value with the mask mode.}
+  @return{The @sym{gsk:mask-mode} value for the mask mode.}
   @begin{short}
     Retrieves the mask mode used by @arg{node}.
   @end{short}
@@ -3706,12 +3735,13 @@ color {
 #+gtk-4-10
 (cffi:defcfun ("gsk_mask_node_get_source" mask-node-source) render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with the source child of the
-    node.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the source child of the node.
+  @end{return}
   @begin{short}
-    Retrieves the @class{gsk:render-node} instance with the source child of the
+    Retrieves the @class{gsk:render-node} instance for the source child of the
     node.
   @end{short}
 
@@ -3735,10 +3765,10 @@ color {
 (setf (liber:alias-for-class 'fill-node)
       "GskRenderNode"
       (documentation 'fill-node 'type)
- "@version{#2024-11-15}
+ "@version{#2025-08-02}
   @begin{short}
     A render node filling the area given by a @class{gsk:path} instance and
-    a @symbol{gsk:fill-rule} value with the child node.
+    a @sym{gsk:fill-rule} value for the child node.
   @end{short}
 
   Since 4.14
@@ -3757,12 +3787,12 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_new" fill-node-new) render-node
  #+liber-documentation
- "@version{#2024-12-2}
-  @argument[child]{a @class{gsk:render-node} instance with the node to fill the
+ "@version{#2025-08-02}
+  @argument[child]{a @class{gsk:render-node} instance for the node to fill the
     area with}
-  @argument[path]{a @class{gsk:path} instance with the path describing the area
+  @argument[path]{a @class{gsk:path} instance for the path describing the area
     to fill}
-  @argument[rule]{a @symbol{gsk:fill-rule} value with the fill rule to use}
+  @argument[rule]{a @sym{gsk:fill-rule} value for the fill rule to use}
   @begin{short}
     Creates a @class{gsk:render-node} instance that will fill the child in the
     area given by @arg{path} and @arg{rule}.
@@ -3787,10 +3817,11 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_child" fill-node-child) render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with child that is
-    getting drawn}
+  @begin{return}
+    The @class{gsk:render-node} instance for child that is getting drawn.
+  @end{return}
   @begin{short}
     Gets the child node that is getting drawn by the given @arg{node}.
   @end{short}
@@ -3810,9 +3841,9 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_fill_rule" fill-node-fill-rule) fill-rule
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-02}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @symbol{gsk:fill-rule} value.}
+  @return{The @sym{gsk:fill-rule} value.}
   @begin{short}
     Retrieves the fill rule used to determine how the path is filled.
   @end{short}
@@ -3832,7 +3863,7 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_fill_node_get_path" fill-node-path) (g:boxed path)
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2024-12-02}
   @argument[node]{a @class{gsk:render-node} instance}
   @return{The @class{gsk:path} instance.}
   @begin{short}
@@ -3883,13 +3914,12 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_new" stroke-node-new) render-node
  #+liber-documentation
- "@version{#2024-12-2}
-  @argument[child]{a @class{gsk:render-node} instance with the node to stroke
+ "@version{#2025-08-02}
+  @argument[child]{a @class{gsk:render-node} instance for the node to stroke
     the area with}
-  @argument[path]{a @class{gsk:path} instance with the path describing the area
+  @argument[path]{a @class{gsk:path} instance for the path describing the area
     to stroke}
-  @argument[stroke]{a @symbol{gsk:stroke} value with the stroke attributes
-    to use}
+  @argument[stroke]{a @sym{gsk:stroke} value for the stroke attributes to use}
   @begin{short}
     Creates a @class{gsk:render-node} instance that will fill the outline
     generated by stroking the given @arg{path} using the attributes defined in
@@ -3916,10 +3946,11 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_child" stroke-node-child) render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with the child that is getting
-    drawn.}
+  @begin{return}
+    The @class{gsk:render-node} instance for the child that is getting drawn.
+  @end{return}
   @begin{short}
     Gets the child node that is getting drawn by the given @arg{node}.
   @end{short}
@@ -3939,7 +3970,7 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_path" stroke-node-path) (g:boxed path)
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2024-12-02}
   @argument[node]{a @class{gsk:render-node} instance}
   @return{The @class{gsk:path} instance.}
   @begin{short}
@@ -3962,7 +3993,7 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_stroke_node_get_stroke" stroke-node-stroke) (g:boxed stroke)
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2024-12-02}
   @argument[node]{a @class{gsk:render-node} instance}
   @return{The @class{gsk:stroke} value.}
   @begin{short}
@@ -4011,7 +4042,7 @@ color {
 #+gtk-4-14
 (cffi:defcfun ("gsk_subsurface_node_new" subsurface-node-new) render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2024-12-02}
   @argument[child]{a @class{gsk:render-node} instance}
   @argument[subsurface]{a pointer with the subsurface to use}
   @return{The new @class{gsk:render-node} instance.}
@@ -4042,7 +4073,7 @@ color {
 (cffi:defcfun ("gsk_subsurface_node_get_subsurface" subsurface-node-subsurface)
     :pointer
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2024-12-02}
   @argument[node]{a @class{gsk:render-node} instance}
   @return{The pointer with the subsurface.}
   @begin{short}
@@ -4065,9 +4096,9 @@ color {
 (cffi:defcfun ("gsk_subsurface_node_get_child" subsurface-node-child)
     render-node
  #+liber-documentation
- "@version{#2024-12-2}
+ "@version{#2025-08-03}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with the child.}
+  @return{The @class{gsk:render-node} instance for the child.}
   @begin{short}
     Gets the child node that is getting drawn by the given @arg{node}.
   @end{short}
