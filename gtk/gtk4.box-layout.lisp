@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'box-layout 'type)
- "@version{2025-06-30}
+ "@version{2025-08-12}
   @begin{short}
     The @class{gtk:box-layout} class is a layout manager that arranges the
     children of any widget using it into a single row or column.
@@ -107,10 +107,9 @@
   of each child widget.
 
   If you want all children to be assigned the same size, you can use the
-  @slot[gtk:box-layout]{homogeneous} property.
-
-  If you want to specify the amount of space placed between each child, you
-  can use the @slot[gtk:box-layout]{spacing} property.
+  @slot[gtk:box-layout]{homogeneous} property. If you want to specify the
+  amount of space placed between each child, you can use the
+  @slot[gtk:box-layout]{spacing} property.
   @see-constructor{gtk:box-layout-new}
   @see-slot{gtk:box-layout-baseline-child}
   @see-slot{gtk:box-layout-baseline-position}
@@ -143,7 +142,7 @@
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[index]{an integer for the child position, or -1}
   @begin{short}
-    The accessor for the @slot[box-layout]{baseline-child} slot of the
+    The accessor for the @slot[gtk:box-layout]{baseline-child} slot of the
     @class{gtk:box-layout} class gets or sets the index of the child that
     determines the baseline in vertical layout.
   @end{short}
@@ -223,7 +222,7 @@
 (setf (liber:alias-for-function 'box-layout-spacing)
       "Accessor"
       (documentation 'box-layout-spacing 'function)
- "@version{2025-08-01}
+ "@version{2025-08-12}
   @syntax{(gtk:box-layout-spacing object) => spacing}
   @syntax{(setf (gtk:box-layout-spacing object) spacing)}
   @argument[object]{a @class{gtk:box-layout} object}
@@ -233,9 +232,6 @@
     @class{gtk:box-layout} class gets or sets the space that the box layout
     puts between children.
   @end{short}
-  The @fun{gtk:box-layout-spacing} function
-  The @setf{gtk:box-layout-spacing} function sets
-  the spacing.
   @see-class{gtk:box-layout}")
 
 ;;; ----------------------------------------------------------------------------

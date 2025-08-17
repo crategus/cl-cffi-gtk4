@@ -292,17 +292,16 @@
 (setf (liber:alias-for-function 'accessible-accessible-role)
       "Accessor"
       (documentation 'accessible-accessible-role 'function)
- "@version{2025-07-25}
+ "@version{2025-08-12}
   @syntax{(gtk:accessible-accessible-role object) => role}
   @syntax{(setf (gtk:accessible-accessible-role object) role)}
   @argument[object]{a @class{gtk:accessible} widget}
   @argument[role]{a value for the @sym{gtk:accessible-role} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:accessible]{accessible-role} slot of the
-    @class{gtk:accessible} class.
+    The accessor for the @slot[gtk:accessible]{accessible-role} slot of the
+    @class{gtk:accessible} class gets or sets the @sym{gtk:accessible-role}
+    value for the given @class{gtk:accessible} widget.
   @end{short}
-  Retrieves the @sym{gtk:accessible-role} value for the given
-  @class{gtk:accessible} widget.
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-role}")
 

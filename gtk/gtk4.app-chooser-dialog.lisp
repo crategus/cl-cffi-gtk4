@@ -145,16 +145,16 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-gfile)
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
- "@version{2024-04-26}
+ "@version{2025-08-13}
   @syntax{(gtk:app-chooser-dialog-gfile object) => file}
   @syntax{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[file]{a @class{g:file} object}
   @begin{short}
-    Accessor of the @slot[gtk:app-chooser-dialog]{gfile} slot of the
-    @class{gtk:app-chooser-dialog} class.
+    The accessor for the @slot[gtk:app-chooser-dialog]{gfile} slot of the
+    @class{gtk:app-chooser-dialog} class gets the @class{g:file} object used by
+    the @class{gtk:app-chooser-dialog} widget.
   @end{short}
-  The @class{g:file} object used by the @class{gtk:app-chooser-dialog} widget.
   The dialog's content type will be guessed from the file, if present.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-dialog} implementation is deprecated since 4.10.
@@ -176,19 +176,17 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-heading)
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
- "@version{2024-04-26}
+ "@version{2025-08-13}
   @syntax{(gtk:app-chooser-dialog-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[heading]{a string containing Pango markup}
   @begin{short}
-    Accessor of the @slot[gtk:app-chooser-dialog]{heading} slot of the
-    @class{gtk:app-chooser-dialog} class.
+    The accessor for the @slot[gtk:app-chooser-dialog]{heading} slot of the
+    @class{gtk:app-chooser-dialog} class get or sets the text to display at the
+    top of the dialog.
   @end{short}
-  The @fun{gtk:app-chooser-dialog-heading} function returns the text to display
-  at the top of the dialog. The @setf{gtk:app-chooser-dialog-heading} function
-  sets the text to display at the top of the dialog. If the heading is not set,
-  the dialog displays a default text.
+  If the heading is not set, the dialog displays a default text.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-dialog} implementation is deprecated since 4.10.
   @end{dictionary}

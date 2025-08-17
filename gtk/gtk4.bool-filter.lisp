@@ -104,19 +104,17 @@
 (setf (liber:alias-for-function 'bool-filter-expression)
       "Accessor"
       (documentation 'bool-filter-expression 'function)
- "@version{2024-09-28}
+ "@version{2025-08-15}
   @syntax{(gtk:bool-filter-expression object) => expression}
   @syntax{(setf (gtk:bool-filter-expression object) expression)}
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
-    Accessor of the @slot[gtk:bool-filter]{expression} slot of the
-    @class{gtk:bool-filter} class.
+    The accessor for the @slot[gtk:bool-filter]{expression} slot of the
+    @class{gtk:bool-filter} class gets or sets the expression that the filter
+    uses to evaluate if an item should be filtered.
   @end{short}
-  The @fun{gtk:bool-filter-expression} function gets the expression that the
-  filter uses to evaluate if an item should be filtered. The
-  @setf{gtk:bool-filter-expression} function sets the expression. The expression
-  must have a @code{\"gboolean\"} value type.
+  The expression must have a @code{\"gboolean\"} value type.
   @see-class{gtk:bool-filter}
   @see-class{gtk:expression}")
 
@@ -132,18 +130,16 @@
 (setf (liber:alias-for-function 'bool-filter-invert)
       "Accessor"
       (documentation 'bool-filter-invert 'function)
- "@version{2024-09-28}
+ "@version{2025-08-15}
   @syntax{(gtk:bool-filter-invert object) => invert}
   @syntax{(setf (gtk:bool-filter-invert object) invert)}
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[invert]{@em{true} to invert}
   @begin{short}
-    Accessor of the @slot[gtk:bool-filter]{invert} slot of the
-    @class{gtk:bool-filter} class.
-  @end{short}
-  The @fun{gtk:bool-filter-invert} function returns whether the filter inverts
-  the expression. The @setf{gtk:bool-filter-expression} function sets whether
-  the filter should invert the expression.
+    The accessor for the @slot[gtk:bool-filter]{invert} slot of the
+    @class{gtk:bool-filter} class gets or sets whether the filter inverts the
+    expression.
+  @end{short}.
   @begin[Notes]{dictionary}
     If no expression is set, this function returns the @code{cffi:null-pointer}
     value. To unset the expression for the bool filter, use the

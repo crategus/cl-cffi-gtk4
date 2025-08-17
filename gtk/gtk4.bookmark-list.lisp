@@ -138,18 +138,15 @@
 (setf (liber:alias-for-function 'bookmark-list-attributes)
       "Accessor"
       (documentation 'bookmark-list-attributes 'function)
- "@version{2025-06-08}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-attributes object) => attributes}
   @syntax{(setf (gtk:bookmark-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[attributes]{a string for the attributes}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{attributes} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{attributes} slot of the
+    @class{gtk:bookmark-list} class gets or sets the attributes to query.
   @end{short}
-  The @fun{gtk:bookmark-list-attributes} function gets the attributes queried
-  on the children. The @setf{gtk:bookmark-list-attributes} function sets the
-  attributes to be enumerated and starts the enumeration.
 
   If the @arg{attributes} argument is @code{nil}, no attributes will be queried,
   but a list of @class{g:file-info} objects will still be created.
@@ -169,16 +166,15 @@
 (setf (liber:alias-for-function 'bookmark-list-filename)
       "Accessor"
       (documentation 'bookmark-list-filename 'function)
- "@version{2025-06-08}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-filename object) => filename}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[filename]{a string for the filename of the @file{.xbel} file}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{filename} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{filename} slot of the
+    @class{gtk:bookmark-list} class returns the filename of the bookmark file
+    that the bookmark list is loading.
   @end{short}
-  The @fun{gtk:bookmark-list-filename} function returns the filename of the
-  bookmark file that the bookmark list is loading.
   @begin[Notes]{dictionary}
     The default location of the bookmark file is
     @file{$XDG_USER_DATA/recently-used.xbel}. This filename is the default
@@ -202,19 +198,17 @@
 (setf (liber:alias-for-function 'bookmark-list-io-priority)
       "Accessor"
       (documentation 'bookmark-list-io-priority 'function)
- "@version{2025-06-08}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-io-priority object) => priority}
   @syntax{(setf (gtk:bookmark-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[priority]{an integer for the IO priority to use}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{io-priority} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{io-priority} slot of the
+    @class{gtk:bookmark-list} class gets or sets the IO priority while loading
+    files.
   @end{short}
-  The @fun{gtk:bookmark-list-io-priority} function gets the IO priority. The
-  @setf{gtk:bookmark-list-io-priority} function sets the IO priority to use
-  while loading files. The default IO priority is the @var{g:+priority-default+}
-  value.
+  The default IO priority is the @var{g:+priority-default+} value.
   @see-class{gtk:bookmark-list}
   @see-variable{g:+priority-default+}")
 
@@ -229,16 +223,16 @@
 (setf (liber:alias-for-function 'bookmark-list-item-type)
       "Accessor"
       (documentation 'bookmark-list-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{item-type} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{item-type} slot of the
+    @class{gtk:bookmark-list} class gets the type of items contained in the
+    list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -261,13 +255,13 @@
 (setf (liber:alias-for-function 'bookmark-list-loading)
       "Accessor"
       (documentation 'bookmark-list-loading 'function)
- "@version{2024-12-15}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-loading object) => loading}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{loading} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{loading} slot of the
+    @class{gtk:bookmark-list} class gets whether files are being loaded.
   @end{short}
   @see-class{gtk:bookmark-list}")
 
@@ -283,14 +277,14 @@
 (setf (liber:alias-for-function 'bookmark-list-n-items)
       "Accessor"
       (documentation 'bookmark-list-n-items 'function)
- "@version{2025-06-08}
+ "@version{2025-08-15}
   @syntax{(gtk:bookmark-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:bookmark-list]{n-items} slot of the
-    @class{gtk:bookmark-list} class.
+    The accessor for the @slot[gtk:bookmark-list]{n-items} slot of the
+    @class{gtk:bookmark-list} class gets the number of items.
   @end{short}
   @see-class{gtk:bookmark-list}
   @see-function{g:list-model-n-items}")

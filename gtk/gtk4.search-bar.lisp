@@ -186,17 +186,16 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-child)
       "Accessor"
       (documentation 'search-bar-child 'function)
- "@version{2024-04-20}
+ "@version{2025-08-11}
   @syntax{(gtk:search-bar-child object) => child}
   @syntax{(setf (gtk:search-bar-child object) child)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:search-bar]{child} slot of the
-    @class{gtk:search-bar} class.
+    The accessor for the @slot[gtk:search-bar]{child} slot of the
+    @class{gtk:search-bar} class gets or sets the child widget of the search
+    bar.
   @end{short}
-  The @fun{gtk:search-bar-child} function gets the child widget of the search
-  bar. The @setf{gtk:search-bar-child} function sets the child widget.
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}")
 
@@ -213,19 +212,16 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-key-capture-widget)
       "Accessor"
       (documentation 'search-bar-key-capture-widget 'function)
- "@version{2024-04-20}
+ "@version{2025-08-11}
   @syntax{(gtk:search-bar-key-capture-widget object) => widget}
   @syntax{(setf (gtk:search-bar-key-capture-widget object) widget)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[widget]{a @class{gtk:widget} key capture widget}
   @begin{short}
-    Accessor of the @slot[gtk:search-bar]{key-capture-widget} slot of the
-    @class{gtk:search-bar} class.
+    The accessor for the @slot[gtk:search-bar]{key-capture-widget} slot of the
+    @class{gtk:search-bar} class gets or sets the widget that the search bar is
+    capturing key events from.
   @end{short}
-  The @fun{gtk:search-bar-key-capture-widget} function gets the widget that the
-  search bar is capturing key events from. The
-  @setf{gtk:search-bar-key-capture-widget} function sets @arg{widget} as
-  the widget that the search bar will capture key events from.
 
   If key events are handled by the search bar, the search bar will be shown,
   and the search entry populated with the entered text.
@@ -246,16 +242,16 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-search-mode-enabled)
       "Accessor"
       (documentation 'search-bar-search-mode-enabled 'function)
- "@version{2025-07-17}
+ "@version{2025-08-11}
   @syntax{(gtk:search-bar-search-mode-enabled object) => mode}
   @syntax{(setf (gtk:search-bar-search-mode-enabled object) mode)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[mode]{a boolean for the state of the search mode}
   @begin{short}
-    Accessor of the @slot[gtk:search-bar]{search-mode-enabled} slot of the
-    @class{gtk:search-bar} class.
+    The accessor for the @slot[gtk:search-bar]{search-mode-enabled} slot of the
+    @class{gtk:search-bar} class gets or sets whether the search mode is on and
+    the search bar shown.
   @end{short}
-  Switches the search mode on or off.
   @see-class{gtk:search-bar}")
 
 ;;; --- gtk:search-bar-show-close-button ---------------------------------------
@@ -272,18 +268,15 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-show-close-button)
       "Accessor"
       (documentation 'search-bar-show-close-button 'function)
- "@version{2024-04-20}
+ "@version{2025-08-11}
   @syntax{(gtk:search-bar-show-close-button object) => visible}
   @syntax{(setf (gtk:search-bar-show-close-button object) visible)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[visible]{a boolean whether the Close button will be shown or not}
   @begin{short}
-    Accessor of the @slot[gtk:search-bar]{show-close-button} slot of the
-    @class{gtk:search-bar} class.
+    The accessor for the @slot[gtk:search-bar]{show-close-button} slot of the
+    @class{gtk:search-bar} class gets or sets whether the Close button is shown.
   @end{short}
-  The @fun{gtk:search-bar-show-close-button} function returns whether the Close
-  button is shown. The @setf{gtk:search-bar-show-close-button} function shows
-  or hides the Close button.
 
   Applications that already have a search toggle button should not show a Close
   button in their search bar, as it duplicates the role of the toggle button.

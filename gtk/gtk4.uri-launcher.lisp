@@ -102,17 +102,15 @@
 (setf (liber:alias-for-function 'uri-launcher-uri)
       "Accessor"
       (documentation 'uri-launcher-uri 'function)
- "@version{#2025-07-27}
+ "@version{#2025-08-13}
   @syntax{(gtk:uri-launcher-uri object) => uri}
   @syntax{(setf (gtk:uri-launcher-uri object) uri)}
   @argument[object]{a @class{gtk:uri-launcher} object}
   @argument[uri]{a string for the URI}
   @begin{short}
-    Accessor of the @slot[gtk:uri-launcher]{uri} slot of the
-    @class{gtk:uri-launcher} class.
+    The accessor for the @slot[gtk:uri-launcher]{uri} slot of the
+    @class{gtk:uri-launcher} class gets or sets the URI that will be opened.
   @end{short}
-  The @fun{gtk:uri-launcher-uri} function gets the URI that will be opened.
-  The @setf{gtk:uri-launcher-uri} function sets the URI.
 
   Since 4.10
   @see-class{gtk:uri-launcher}")

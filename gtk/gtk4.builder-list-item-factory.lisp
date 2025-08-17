@@ -133,16 +133,15 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-bytes)
       "Accessor"
       (documentation 'builder-list-item-factory-bytes 'function)
- "@version{2025-04-11}
+ "@version{2025-08-15}
   @syntax{(gtk:builder-list-item-factory-bytes object) => bytes}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[bytes]{a @class{g:bytes} instance for the @class{gtk:builder} data}
   @begin{short}
-    Accessor of the @slot[gtk:builder-list-item-factory]{bytes} slot of the
-    @class{gtk:builder-list-item-factory} class.
+    The accessor for the @slot[gtk:builder-list-item-factory]{bytes} slot of the
+    @class{gtk:builder-list-item-factory} class gets the data used as the
+    @class{gtk:builder} UI template for constructing list items.
   @end{short}
-  The @fun{gtk:builder-list-item-factory-bytes} function gets the data used as
-  the @class{gtk:builder} UI template for constructing list items.
   @see-class{gtk:builder-list-item-factory}
   @see-class{gtk:builder}
   @see-class{g:bytes}")
@@ -161,16 +160,16 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-resource)
       "Accessor"
       (documentation 'builder-list-item-factory-resource 'function)
- "@version{2025-04-11}
+ "@version{2025-08-15}
   @syntax{(gtk:builder-list-item-factory-resource object) => resource}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a string for the path to the resource or @code{nil}
     if none}
   @begin{short}
-    Accessor of the @slot[gtk:builder-list-item-factory]{resource} slot of the
-    @class{gtk:builder-list-item-factory} class.
+    The accessor for the @slot[gtk:builder-list-item-factory]{resource} slot of
+    the @class{gtk:builder-list-item-factory} class gets the resource path
+    containing the UI definition.
   @end{short}
-  If the data references a resource, gets the path of that resource.
   @see-class{gtk:builder-list-item-factory}
   @see-class{g:resource}")
 
@@ -187,16 +186,16 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-scope)
       "Accessor"
       (documentation 'builder-list-item-factory-scope 'function)
- "@version{2025-04-11}
+ "@version{2025-08-15}
   @syntax{(gtk:builder-list-item-factory-scope object) => scope}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a @class{gtk:builder-scope} object used when
     constructing list items}
   @begin{short}
-    Accessor of the @slot[gtk:builder-list-item-factory]{scope} slot of the
-    @class{gtk:builder-list-item-factory} class.
+    The accessor for the @slot[gtk:builder-list-item-factory]{scope} slot of the
+    @class{gtk:builder-list-item-factory} class gets or sets the scope used when
+    constructing list items.
   @end{short}
-  Gets the scope used when constructing list items.
   @see-class{gtk:builder-list-item-factory}
   @see-class{g:resource}")
 

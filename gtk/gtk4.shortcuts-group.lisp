@@ -136,15 +136,15 @@
 (setf (liber:alias-for-function 'shortcuts-group-accel-size-group)
       "Accessor"
       (documentation 'shortcuts-group-accel-size-group 'function)
- "@version{2025-05-14}
+ "@version{2025-08-11}
   @syntax{(setf (gtk:shortcuts-group-accel-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-group]{accel-size-group} slot of the
-    @class{gtk:shortcuts-group} class.
+    The accessor for the @slot[gtk:shortcuts-group]{accel-size-group} slot of
+    the @class{gtk:shortcuts-group} class gets the size group for the
+    accelerator portion of shortcuts in this group.
   @end{short}
-  The size group for the accelerator portion of shortcuts in this group.
   This is used internally by GTK, and must not be modified by applications.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-group-accel-size-group} function is deprecated since
@@ -166,17 +166,17 @@
 (setf (liber:alias-for-function 'shortcuts-group-height)
       "Accessor"
       (documentation 'shortcuts-group-height 'function)
- "@version{2025-05-14}
+ "@version{2025-08-11}
   @syntax{(gtk:shortcuts-group-height object) => height}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
   @argument[height]{an unsigned integer for the measure for the number of
     lines}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-group]{height} slot of the
-    @class{gtk:shortcuts-group} class.
+    The accessor for the @slot[gtk:shortcuts-group]{height} slot of the
+    @class{gtk:shortcuts-group} class gets the rough measure for the number of
+    lines in this group.
   @end{short}
-  A rough measure for the number of lines in this group. This is used
-  internally by GTK, and is not useful for applications.
+  This is used internally by GTK, and is not useful for applications.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-group-height} function is deprecated since 4.18.
     This widget will be removed in GTK 5.
@@ -196,16 +196,16 @@
 (setf (liber:alias-for-function 'shortcuts-group-title)
       "Accessor"
       (documentation 'shortcuts-group-title 'function)
- "@version{2025-05-14}
+ "@version{2025-08-11}
   @syntax{(gtk:shortcuts-group-title object) => title}
   @syntax{(setf (gtk:shortcuts-group-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
   @argument[title]{a string for the title for this group of shortcuts}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-group]{title} slot of the
-    @class{gtk:shortcuts-group} class.
+    The accessor for the @slot[gtk:shortcuts-group]{title} slot of the
+    @class{gtk:shortcuts-group} class gets or sets the title for this group of
+    shortcuts.
   @end{short}
-  The title for this group of shortcuts.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-group-title} function is deprecated since 4.18.
     This widget will be removed in GTK 5.
@@ -226,16 +226,16 @@
 (setf (liber:alias-for-function 'shortcuts-group-title-size-group)
       "Accessor"
       (documentation 'shortcuts-group-title-size-group 'function)
- "@version{2025-05-14}
+ "@version{2025-08-11}
   @syntax{(setf (gtk:shortcuts-group-title-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-group]{title-size-group} slot of the
-    @class{gtk:shortcuts-group} class.
+    The accessor for the @slot[gtk:shortcuts-group]{title-size-group} slot of
+    the @class{gtk:shortcuts-group} class sets the size group for the textual
+    portion of shortcuts in this group.
   @end{short}
-  The size group for the textual portion of shortcuts in this group. This is
-  used internally by GTK, and must not be modified by applications.
+  This is used internally by GTK, and must not be modified by applications.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-group-title-size-group} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -259,19 +259,19 @@
 (setf (liber:alias-for-function 'shortcuts-group-view)
       "Accessor"
       (documentation 'shortcuts-group-view 'function)
- "@version{2025-05-14}
+ "@version{2025-08-11}
   @syntax{(gtk:shortcuts-group-view object) => view}
   @syntax{(setf (gtk:shortcuts-group-view object) view)}
   @argument[object]{a @class{gtk:shortcuts-group} widget}
   @argument[view]{a string for an optional view}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-group]{view} slot of the
-    @class{gtk:shortcuts-group} class.
+    The accessor for the @slot[gtk:shortcuts-group]{view} slot of the
+    @class{gtk:shortcuts-group} class gets or sets the optional view that the
+    shortcuts in this group are relevant for.
   @end{short}
-  An optional view that the shortcuts in this group are relevant for. The group
-  will be hidden if the @slot[gtk:shortcuts-window]{view-name} property does not
-  match the view of this group. Set this to @code{nil} to make the group always
-  visible.
+  The group will be hidden if the @slot[gtk:shortcuts-window]{view-name}
+  property does not match the view of this group. Set this to @code{nil} to make
+  the group always visible.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-group-view} function is deprecated since 4.18.
     This widget will be removed in GTK 5.

@@ -115,22 +115,20 @@
 (setf (liber:alias-for-function 'actionable-action-name)
       "Accessor"
       (documentation 'actionable-action-name 'function)
- "@version{2025-02-23}
+ "@version{2025-08-12}
   @syntax{(gtk:actionable-action-name object) => name}
   @syntax{(setf (gtk:actionable-action-name object) name)}
   @argument[object]{a @class{gtk:actionable} widget}
   @argument[name]{a string for the action name, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:actionable]{action-name} slot of the
-    @class{gtk:actionable} inferface.
+    The accessor for the @slot[gtk:actionable]{action-name} slot of the
+    @class{gtk:actionable} inferface gets or sets the name of the action with
+    which @arg{object} should be associated.
   @end{short}
-  The @fun{gtk:actionable-action-name} function gets the action name for
-  @arg{object}, or @code{nil} if none is set. The
-  @setf{gtk:actionable-action-name} function specifies the name of the action
-  with which this widget should be associated. If the @arg{name} argument is
-  @code{nil} then the widget will be unassociated from any previous action.
-  Usually this function is used when the widget is located, or will be located,
-  within the hierarchy of a @class{gtk:application-window} widget.
+  If the @arg{name} argument is @code{nil} then the widget will be unassociated
+  from any previous action. Usually this function is used when the widget is
+  located, or will be located, within the hierarchy of a
+  @class{gtk:application-window} widget.
 
   Names are of the form @code{\"win.save\"} or @code{\"app.quit\"} for actions
   on the containing @class{gtk:application-window} widget or its associated
@@ -162,20 +160,19 @@
 (setf (liber:alias-for-function 'actionable-action-target)
       "Accessor"
       (documentation 'actionable-action-target 'function)
- "@version{2025-07-25}
+ "@version{2025-08-12}
   @syntax{(gtk:actionable-action-target object) => value}
   @syntax{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
   @argument[value]{a @sym{g:variant} parameter as the target value, or
     @code{cffi:null-pointer}}
   @begin{short}
-    Accessor of the @slot[gtk:actionable]{action-target} slot of the
-    @class{gtk:actionable} inferface.
+    The accessor for the @slot[gtk:actionable]{action-target} slot of the
+    @class{gtk:actionable} inferface gets or sets the current target value of
+    an actionable widget.
   @end{short}
-  The @fun{gtk:actionable-action-target} function gets the current target value
-  of an actionable widget. The @setf{gtk:actionable-action-target} function sets
-  the target value. If the @arg{value} argument is a @code{cffi:null-pointer}
-  then the target value is unset.
+  If the @arg{value} argument is a @code{cffi:null-pointer} then the target
+  value is unset.
 
   The target value has two purposes. First, it is used as the parameter to
   activation of the action associated with the @class{gtk:actionable} widget.

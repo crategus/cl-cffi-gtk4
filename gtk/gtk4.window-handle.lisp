@@ -115,18 +115,16 @@
 (setf (liber:alias-for-function 'window-handle-child)
       "Accessor"
       (documentation 'window-handle-child 'function)
- "@version{2023-07-23}
+ "@version{2025-08-13}
   @syntax{(gtk:window-handle-child object) => child}
   @syntax{(setf (gtk:window-handle-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:window-handle]{child} slot of the
-    @class{gtk:window-handle} class.
+    The accessor for the @slot[gtk:window-handle]{child} slot of the
+    @class{gtk:window-handle} class gets or sets the child widget of the window
+    handle.
   @end{short}
-  The @fun{gtk:window-handle-child} function gets the child widget of the
-  window handle. The @setf{gtk:window-handle-child} function sets the child
-  widget.
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 

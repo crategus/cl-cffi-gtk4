@@ -139,7 +139,7 @@
 (setf (liber:alias-for-function 'grid-layout-child-column)
       "Accessor"
       (documentation 'grid-layout-child-column 'function)
- "@version{#2025-08-01}
+ "@version{#2025-08-12}
   @syntax{(gtk:grid-layout-child-column object) => column}
   @syntax{(setf (gtk:grid-layout-child-column object) column)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
@@ -147,7 +147,7 @@
   @begin{short}
     The accessor for the @slot[gtk:grid-layout-child]{column} slot of the
     @class{gtk:grid-layout-child} class gets or sets the column number to which
-    child attaches its left side.
+    the child widget attaches its left side.
   @end{short}
   @see-class{gtk:grid-layout-child}")
 
@@ -189,7 +189,7 @@
 (setf (liber:alias-for-function 'grid-layout-child-row)
       "Accessor"
       (documentation 'grid-layout-child-row 'function)
- "@version{#2025-08-01}
+ "@version{#2025-08-12}
   @syntax{(gtk:grid-layout-child-row object) => row}
   @syntax{(setf (gtk:grid-layout-child-column object) row)}
   @argument[object]{a @class{gtk:grid-layout-child} object}
@@ -197,7 +197,7 @@
   @begin{short}
     The accessor for the @slot[gtk:grid-layout-child]{row} slot of the
     @class{gtk:grid-layout-child} class gets or sets the row number to which
-    child attaches its top side.
+    the child widget attaches its top side.
   @end{short}
   @see-class{gtk:grid-layout-child}")
 
@@ -253,7 +253,7 @@
 
 #+liber-documentation
 (setf (documentation 'grid-layout 'type)
- "@version{2024-04-23}
+ "@version{2024-08-12}
   @begin{short}
     Layout manager for grid like widgets.
   @end{short}

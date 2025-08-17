@@ -131,18 +131,16 @@
 (setf (liber:alias-for-function 'print-dialog-accept-label)
       "Accessor"
       (documentation 'print-dialog-accept-label 'function)
- "@version{2025-07-27}
+ "@version{2025-08-12}
   @syntax{(gtk:print-dialog-accecpt-label object) => label}
   @syntax{(setf (gtk:print-dialog-accept-label object) label)}
   @argument[object]{a @class{gtk:print-dialog} object}
   @argument[label]{a string for the accept label}
   @begin{short}
-    Accessor of the @slot[gtk:print-dialog]{accept-label} slot of the
-    @class{gtk:print-dialog} class.
+    The accessor for the @slot[gtk:print-dialog]{accept-label} slot of the
+    @class{gtk:print-dialog} class gets or sets the label that will be shown on
+    the accept button of the print dialog.
   @end{short}
-  The @fun{gtk:print-dialog-accept-label} function returns the label that will
-  be shown on the accept button of the print dialog. The
-  @setf{gtk:print-dialog-accept-label} function sets the label.
 
   Since 4.14
   @see-class{gtk:print-dialog}")
@@ -159,18 +157,16 @@
 (setf (liber:alias-for-function 'print-dialog-modal)
       "Accessor"
       (documentation 'print-dialog-modal 'function)
- "@version{2024-11-10}
+ "@version{2025-08-12}
   @syntax{(gtk:print-dialog-modal object) => setting}
   @syntax{(setf (gtk:print-dialog-modal object) setting)}
   @argument[object]{a @class{gtk:print-dialog} object}
   @argument[setting]{a boolean whether the print dialog is modal}
   @begin{short}
-    Accessor of the @slot[gtk:print-dialog]{modal} slot of the
-    @class{gtk:print-dialog} class.
+    The accessor for the @slot[gtk:print-dialog]{modal} slot of the
+    @class{gtk:print-dialog} class gets or sets whether the print dialog blocks
+    interaction with the parent window while it is presented.
   @end{short}
-  The @fun{gtk:print-dialog-modal} function returns whether the print dialog
-  blocks interaction with the parent window while it is presented. The
-  @setf{gtk:print-dialog-modal} sets the property.
 
   Since 4.14
   @see-class{gtk:print-dialog}")
@@ -187,18 +183,16 @@
 (setf (liber:alias-for-function 'print-dialog-page-setup)
       "Accessor"
       (documentation 'print-dialog-page-setup 'function)
- "@version{2024-11-10}
+ "@version{2025-08-12}
   @syntax{(gtk:print-dialog-page-setup object) => setup}
   @syntax{(setf (gtk:print-dialog-page-setup object) setup)}
   @argument[object]{a @class{gtk:print-dialog} object}
   @argument[setup]{a @class{gtk:page-setup} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-dialog]{page-setup} slot of the
-    @class{gtk:print-dialog} class.
+    The accessor for the @slot[gtk:print-dialog]{page-setup} slot of the
+    @class{gtk:print-dialog} class gets or sets the page setup for the print
+    dialog.
   @end{short}
-  The @fun{gtk:print-dialog-page-setup} function gets the page setup for the
-  print dialog. The @setf{gtk:print-dialog-page-setup} function sets the page
-  setup.
 
   Since 4.14
   @see-class{gtk:print-dialog}
@@ -217,18 +211,16 @@
 (setf (liber:alias-for-function 'print-dialog-print-settings)
       "Accessor"
       (documentation 'print-dialog-print-settings 'function)
- "@version{2024-11-10}
+ "@version{2025-08-12}
   @syntax{(gtk:print-dialog-print-settings object) => settings}
   @syntax{(setf (gtk:print-dialog-print-settings object) settings)}
   @argument[object]{a @class{gtk:print-dialog} object}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-dialog]{print-settings} slot of the
-    @class{gtk:print-dialog} class.
+    The accessor for the @slot[gtk:print-dialog]{print-settings} slot of the
+    @class{gtk:print-dialog} class gets or sets the print settings for the
+    print dialog.
   @end{short}
-  The @fun{gtk:print-dialog-print-settings} function returns the print settings
-  for the print dialog. The @setf{gtk:print-dialog-print-settings} function sets
-  the print settings.
 
   Since 4.14
   @see-class{gtk:print-dialog}
@@ -246,18 +238,16 @@
 (setf (liber:alias-for-function 'print-dialog-title)
       "Accessor"
       (documentation 'print-dialog-title 'function)
- "@version{2024-11-10}
+ "@version{2025-08-12}
   @syntax{(gtk:print-dialog-title object) => title}
   @syntax{(setf (gtk:print-dialog-title object) title)}
   @argument[object]{a @class{gtk:print-dialog} object}
   @argument[title]{a @class{gtk:print-settings} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-dialog]{title} slot of the
-    @class{gtk:print-dialog} class.
+    The accessor for the @slot[gtk:print-dialog]{title} slot of the
+    @class{gtk:print-dialog} class gets or sets the title that will be shown on
+    the print dialog.
   @end{short}
-  The @fun{gtk:print-dialog-title} function returns the title that will be shown
-  on the print dialog. The @setf{gtk:print-dialog-title} function sets the
-  title.
 
   Since 4.14
   @see-class{gtk:print-dialog}")

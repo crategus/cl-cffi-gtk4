@@ -129,18 +129,17 @@
 (setf (liber:alias-for-function 'text-mark-left-gravity)
       "Accessor"
       (documentation 'text-mark-left-gravity 'function)
- "@version{2024-07-02}
+ "@version{2025-08-13}
   @syntax{(gtk:text-mark-left-gravity object) => gravity}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[gravity]{@em{true} if the text mark has left gravity}
   @begin{short}
-    Accessor of the @slot[gtk:text-mark]{left-gravity} slot of the
-    @class{gtk:text-mark} class.
+    The accessor for the @slot[gtk:text-mark]{left-gravity} slot of the
+    @class{gtk:text-mark} class gets whether the text mark has left gravity.
   @end{short}
-  The @fun{gtk:text-mark-left-gravity} function determines whether the text mark
-  has left gravity. When text is inserted at the current location of the text
-  mark, if the text mark has left gravity it will be moved to the left of the
-  newly-inserted text, otherwise to the right.
+  When text is inserted at the current location of the text mark, if the text
+  mark has left gravity it will be moved to the left of the newly-inserted text,
+  otherwise to the right.
   @see-class{gtk:text-mark}")
 
 ;;; --- gtk:text-mark-name -----------------------------------------------------
@@ -156,16 +155,15 @@
 (setf (liber:alias-for-function 'text-mark-name)
       "Accessor"
       (documentation 'text-mark-name 'function)
- "@version{2025-07-27}
+ "@version{2025-08-13}
   @syntax{(gtk:text-mark-name object) => name}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[name]{a string for the name of the text mark}
   @begin{short}
-    Accessor of the @slot[gtk:text-mark]{name} slot of the
-    @class{gtk:text-mark} class.
+    The accessor for the @slot[gtk:text-mark]{name} slot of the
+    @class{gtk:text-mark} class returns the name of the text mark or @code{nil}
+    for anonymous text marks.
   @end{short}
-  The @fun{gtk:text-mark-name} function returns the name of the text mark or
-  @code{nil} for anonymous text marks.
   @see-class{gtk:text-mark}")
 
 ;;; ----------------------------------------------------------------------------

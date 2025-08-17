@@ -226,19 +226,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-dialog)
       "Accessor"
       (documentation 'font-dialog-button-dialog 'function)
- "@version{#2023-10-19}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-dialog object) => dialog}
   @syntax{(setf (gtk:font-dialog-button-dialog object) dialog)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{dialog} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{dialog} slot of the
+    @class{gtk:font-dialog-button} class gets or sets the font dialog that
+    contains parameters for the font chooser dialog.
   @end{short}
-  The @fun{gtk:font-dialog-button-dialog} function returns the font dialog. The
-  @setf{gtk:font-dialog-button-dialog} function sets a font dialog to use for
-  creating the font chooser dialog that is presented when the user clicks the
-  button.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}")
@@ -259,19 +256,19 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-font-desc)
       "Accessor"
       (documentation 'font-dialog-button-font-desc 'function)
- "@version{#2023-10-19}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-font-desc object) => desc}
   @syntax{(setf (gtk:font-dialog-button-font-desc object) desc)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[desc]{a @class{pango:font-description} instance}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{font-desc} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{font-desc} slot of the
+    @class{gtk:font-dialog-button} class gets or sets the selected font.
   @end{short}
-  The @fun{gtk:font-dialog-button-font-desc} function returns the font dialog.
-  The @setf{gtk:font-dialog-button-font-desc} function sets a font dialog to use
-  for creating the font chooser dialog that is presented when the user clicks
-  the button.
+  This property can be set to give the button its initial font, and it will be
+  updated to reflect the users choice in the font chooser dialog. Listen to the
+  @sig[g:object]{notify::font-desc} signal to get informed about changes to the
+  buttons font.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}
@@ -292,18 +289,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-font-features)
       "Accessor"
       (documentation 'font-dialog-button-font-features 'function)
- "@version{#2025-07-27}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-font-features object) => features}
   @syntax{(setf (gtk:font-dialog-button-font-features object) features)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[features]{a string for the selected font features}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{font-features} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{font-features} slot of
+    the @class{gtk:font-dialog-button} class gets or sets the selected font
+    features of the button.
   @end{short}
-  The @fun{gtk:font-dialog-button-font-features} function returns the font
-  features of the button. The @setf{gtk:font-dialog-button-font-features}
-  function sets the font features.
 
   This function is what should be used to obtain the font features that were
   chosen by the user. To get informed about changes, listen to the
@@ -331,18 +326,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-language)
       "Accessor"
       (documentation 'font-dialog-button-language 'function)
- "@version{#2023-10-19}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-language object) => language}
   @syntax{(setf (gtk:font-dialog-button-language object) language)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[language]{a @class{pango:language} instance}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{language} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{language} slot of the
+    @class{gtk:font-dialog-button} class gets or sets the language that is used
+    for font features.
   @end{short}
-  The @fun{gtk:font-dialog-button-language} function returns the language that
-  is used for font features. The @setf{gtk:font-dialog-button-language} function
-  sets the language.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}
@@ -360,18 +353,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-level)
       "Accessor"
       (documentation 'font-dialog-button-level 'function)
- "@version{#2025-07-25}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-level object) => level}
   @syntax{(setf (gtk:font-dialog-button-level object) level)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[level]{a @sym{gtk:font-level} value}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{level} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{level} slot of the
+    @class{gtk:font-dialog-button} class gets or sets the level of detail at
+    which this dialog lets the user select fonts.
   @end{short}
-  The @fun{gtk:font-dialog-button-level} function returns the level of detail
-  at which this dialog lets the user select fonts. The
-  @setf{gtk:font-dialog-button-level} function sets the level.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}
@@ -390,19 +381,17 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-use-font)
       "Accessor"
       (documentation 'font-dialog-button-use-font 'function)
- "@version{#2023-10-19}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-use-font object) => setting}
   @syntax{(setf (gtk:font-dialog-button-use-font object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[setting]{a boolean whether the buttons label will be drawn in the
     selected font}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{use-font} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{use-font} slot of the
+    @class{gtk:font-dialog-button} class gets or sets whether the selected
+    font is used in the label.
   @end{short}
-  The @fun{gtk:font-dialog-button-use-font} function returns whether the
-  selected font is used in the label. The @setf{gtk:font-dialog-button-use-font}
-  function sets the property.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}")
@@ -420,19 +409,17 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-use-size)
       "Accessor"
       (documentation 'font-dialog-button-use-size 'function)
- "@version{#2023-10-19}
+ "@version{#2025-08-13}
   @syntax{(gtk:font-dialog-button-use-size object) => setting}
   @syntax{(setf (gtk:font-dialog-button-use-size object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[setting]{a boolean whether the buttons label will use the selected
     font size}
   @begin{short}
-    Accessor of the @slot[gtk:font-dialog-button]{use-size} slot of the
-    @class{gtk:font-dialog-button} class.
+    The accessor for the @slot[gtk:font-dialog-button]{use-size} slot of the
+    @class{gtk:font-dialog-button} class gets or sets whether the selected font
+    size is used in the label.
   @end{short}
-  The @fun{gtk:font-dialog-button-use-size} function returns whether the
-  selected font size is used in the label. The
-  @setf{gtk:font-dialog-button-use-size} function sets the property.
 
   Since 4.10
   @see-class{gtk:font-dialog-button}")

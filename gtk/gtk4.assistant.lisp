@@ -252,16 +252,15 @@
 (setf (liber:alias-for-function 'assistant-page-child)
       "Accessor"
       (documentation 'assistant-page-child 'function)
- "@version{2025-02-27}
+ "@version{2025-08-13}
   @syntax{(gtk:assistant-page-child object) => page}
   @argument[object]{a @class{gtk:assistant-page} object}
   @argument[page]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:assistant-page]{child} slot of the
-    @class{gtk:assistant-page} class.
+    The accessor for the @slot[gtk:assistant-page]{child} slot of the
+    @class{gtk:assistant-page} class gets the child widget to which the page
+    belongs.
   @end{short}
-  The @class{gtk:assistant-page-child} function returns the child widget to
-  which the page belongs.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant-page} implementation is deprecated since 4.10.
     This widget will be removed in GTK 5.
@@ -450,17 +449,15 @@ lambda (assistant page)    :run-last
 (setf (liber:alias-for-function 'assistant-pages)
       "Accessor"
       (documentation 'assistant-pages 'function)
- "@version{2025-07-22}
+ "@version{2025-08-13}
   @syntax{(gtk:assistant-pages object) => pages}
   @syntax{(setf (gtk:assistant-pages object) pages)}
   @argument[object]{a @class{gtk:assistant} widget}
   @argument[pages]{a @class{g:list-model} object for the pages}
   @begin{short}
-    Accessor of the @slot[gtk:assistant]{pages} slot of the
-    @class{gtk:assistant} class.
+    The accessor for the @slot[gtk:assistant]{pages} slot of the
+    @class{gtk:assistant} class gets a list model with the assistant pages.
   @end{short}
-  The @fun{gtk:assistant-pages} function gets a list model with the assistant
-  pages.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.
@@ -484,18 +481,18 @@ lambda (assistant page)    :run-last
 (setf (liber:alias-for-function 'assistant-use-header-bar)
       "Accessor"
       (documentation 'assistant-use-header-bar 'function)
- "@version{2025-02-27}
+ "@version{2025-08-13}
   @syntax{(gtk:assistant-use-header-bar object) => setting}
   @syntax{(setf (gtk:assistant-use-header-bar object) setting)}
   @argument[object]{a @class{gtk:assistant} widget}
   @argument[setting]{@em{true} if the assistant uses a header bar}
   @begin{short}
-    Accessor of the @slot[gtk:assistant]{use-header-bar} slot of the
-    @class{gtk:assistant} class.
+    The accessor for the @slot[gtk:assistant]{use-header-bar} slot of the
+    @class{gtk:assistant} class gets or sets whether the assistant uses a header
+    bar for action buttons instead of the action area.
   @end{short}
-  @em{True} if the assistant uses a header bar for action buttons instead of the
-  action area. For technical reasons, this property is declared as an integer
-  property, use the value 1 for @em{true} or -1 for @em{false}.
+  For technical reasons, this property is declared as an integer property, use
+  the value 1 for @em{true} or -1 for @em{false}.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.

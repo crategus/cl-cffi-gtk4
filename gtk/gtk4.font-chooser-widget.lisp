@@ -125,19 +125,19 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{2023-08-28}
+ "@version{2025-08-12}
   @syntax{(gtk:font-chooser-widget-tweak-action object) => action}
   @syntax{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
   @argument[action]{a @class{g:action} toggle action}
   @begin{short}
-    Accessor of the @slot[gtk:font-chooser-widget]{tweak-action} slot of the
-    @class{gtk:font-chooser-widget} class.
+    The accessor for the @slot[gtk:font-chooser-widget]{tweak-action} slot of
+    the @class{gtk:font-chooser-widget} class gets or sets the toggle action
+    that can be used to switch to the tweak page of the font chooser widget.
   @end{short}
-  A toggle action that can be used to switch to the tweak page of the font
-  chooser widget, which lets the user tweak the OpenType features and variation
-  axes of the selected font. The action will be enabled or disabled depending
-  on whether the selected font has any features or axes.
+  This lets the user tweak the OpenType features and variation axes of the
+  selected font. The action will be enabled or disabled depending on whether the
+  selected font has any features or axes.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
     Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.

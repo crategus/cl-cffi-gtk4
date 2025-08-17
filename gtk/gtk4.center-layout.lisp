@@ -169,7 +169,7 @@
   @argument[layout]{a @class{gtk:center-layout} object}
   @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
-    Gets or sets the current orienration of the layout manager.
+    Gets or sets the current orientation of the layout manager.
   @end{short}
   @see-class{gtk:center-layout}
   @see-symbol{gtk:orientation}"
@@ -279,11 +279,11 @@
 (cffi:defcfun ("gtk_center_layout_get_end_widget" center-layout-end-widget)
     (g:object widget)
  #+liber-documentation
- "@version{2025-08-01}
+ "@version{2025-08-12}
   @syntax{(gtk:center-layout-end-widget layout) => widget}
   @syntax{(setf (gtk:center-layout-end-widget layout) widget)}
   @argument[layout]{a @class{gtk:center-layout} object}
-  @argument[widget]{a @class{gtk:widget} center widget}
+  @argument[widget]{a @class{gtk:widget} end widget}
   @begin{short}
     Gets or sets the end widget of the layout.
   @end{short}

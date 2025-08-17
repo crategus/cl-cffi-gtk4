@@ -122,15 +122,15 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible)
       "Accessor"
       (documentation 'at-context-accessible 'function)
- "@version{2023-08-31}
+ "@version{2025-08-13}
   @syntax{(gtk:at-context-accessible object) => accessible}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[accessible]{a @class{gtk:accessible} object}
   @begin{short}
-    Accessor of the @slot[gtk:at-context]{accessible} slot of the
-    @class{gtk:at-context} class.
+    The accessor for the @slot[gtk:at-context]{accessible} slot of the
+    @class{gtk:at-context} class retrieves the @class{gtk:accessible} object
+    using this context.
   @end{short}
-  Retrieves the @class{gtk:accessible} object using this context.
   @see-class{gtk:at-context}
   @see-class{gtk:accessible}")
 
@@ -148,15 +148,14 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible-role)
       "Accessor"
       (documentation 'at-context-accessible-role 'function)
- "@version{2025-07-25}
+ "@version{2025-08-13}
   @syntax{(gtk:at-context-accessible-role object) => role}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[role]{a @sym{gtk:accessible-role} value}
   @begin{short}
-    Accessor of the @slot[gtk:at-context]{accessible-role} slot of the
-    @class{gtk:at-context} class.
+    The accessor for the @slot[gtk:at-context]{accessible-role} slot of the
+    @class{gtk:at-context} class retrieves the accessible role of the context.
   @end{short}
-  Retrieves the accessible role of the context.
   @see-class{gtk:at-context}
   @see-symbol{gtk:accessible-role}")
 
@@ -171,13 +170,13 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-display)
       "Accessor"
       (documentation 'at-context-display 'function)
- "@version{2023-08-31}
+ "@version{2025-08-13}
   @syntax{(gtk:at-context-display object) => display}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gtk:at-context]{display} slot of the
-    @class{gtk:at-context} class.
+    The accessor for the @slot[gtk:at-context]{display} slot of the
+    @class{gtk:at-context} class gets or sets the display for the AT context.
   @end{short}
   @see-class{gtk:at-context}
   @see-class{gdk:display}")

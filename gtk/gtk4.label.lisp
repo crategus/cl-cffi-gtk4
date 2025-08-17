@@ -219,7 +219,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2025-07-12}
+ "@version{2025-08-14}
   @begin{short}
     The @class{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -916,7 +916,7 @@ lambda (label step count extend)    :action
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "tabs" 'label) t)
  "The @code{tabs} property of type @class{pango:tab-array} (Read / Write) @br{}
-  Custom tabs for this label.")
+  The custom tabs for this label.")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'label-tabs)

@@ -363,19 +363,18 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-active)
       "Accessor"
       (documentation 'combo-box-active 'function)
- "@version{2025-07-17}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-active object) => index}
   @syntax{(setf (gtk:combo-box-active object) index)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[index]{an integer for the index in the model passed during
     construction, or -1 to have no active item}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{active} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{active} slot of the
+    @class{gtk:combo-box} class gets or sets the index of the currently active
+    item.
   @end{short}
-  The @fun{gtk:combo-box-active} function returns the index of the currently
-  active item, or -1 if there is no active item. The
-  @setf{gtk:combo-box-active} function sets the active item.
+  Returns -1 if there is no active item.
 
   If the model is a non-flat tree model, and the active item is not an
   immediate child of the root of the tree, this function returns
@@ -401,22 +400,17 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-active-id)
       "Accessor"
       (documentation 'combo-box-active-id 'function)
- "@version{2025-07-23}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-active-id object) => id}
   @syntax{(setf (gtk:combo-box-active-id object) id)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[id]{a string for the ID of the row to select, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{active-id} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{active-id} slot of the
+    @class{gtk:combo-box} class gets or sets the ID of the active row of the
+    combo box.
   @end{short}
-  The @fun{gtk:combo-box-active-id} function returns the ID of the active row
-  of the combo box. This value is taken from the active row and the column
-  specified by the @slot[gtk:combo-box]{id-column} property of the combo box.
-  The @setf{gtk:combo-box-active-id} function changes the active row of the
-  combo box to the one that has an ID equal to @arg{id}, or unsets the active
-  row if the @arg{id} argument is @code{nil}. Rows having a @code{nil} ID
-  string cannot be made active by this function.
+  Rows having a @code{nil} ID string cannot be made active by this function.
 
   If the @slot[gtk:combo-box]{id-column} property of the combo box is unset or
   if no row has the given ID then the function does nothing and returns
@@ -443,19 +437,16 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-button-sensitivity)
       "Accessor"
       (documentation 'combo-box-button-sensitivity 'function)
- "@version{2025-07-23}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-button-sensitivity object) => sensitivity}
   @syntax{(setf (gtk:combo-box-button-sensitivity object) sensitivity)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[sensitivity]{a value of the @sym{gtk:sensitivity-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{button-sensitivity} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{button-sensitivity} slot of the
+    @class{gtk:combo-box} class gets or sets whether the combo box sets the
+    dropdown button sensitive or not when there are no items in the model.
   @end{short}
-  The @fun{gtk:combo-box-button-sensitivity} function returns whether the combo
-  box sets the dropdown button sensitive or not when there are no items in the
-  model. The @setf{gtk:combo-box-button-sensitivity} function sets the
-  sensitivity.
 
   The @val[gtk:sensitivity-type]{:on} value if the dropdown button is sensitive
   when the model is empty, the @val[gtk:sensitivity-type]{:off} value if the
@@ -480,17 +471,15 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-child)
       "Accessor"
       (documentation 'combo-box-child 'function)
- "@version{2024-04-26}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-child object) => child}
   @syntax{(setf (gtk:combo-box-child object) child)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{child} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{child} slot of the
+    @class{gtk:combo-box} class gets or sets the child of the combo box.
   @end{short}
-  The @fun{gtk:combo-box-child} function gets the child of the combo box. The
-  @setf{gtk:combo-box-child} function sets the child widget.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -515,20 +504,17 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-entry-text-column)
       "Accessor"
       (documentation 'combo-box-entry-text-column 'function)
- "@version{2025-07-19}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-entry-text-column object) => column}
   @syntax{(setf (gtk:combo-box-entry-text-column object) column)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[column]{an integer for a column in the model to get the strings
     from for the internal entry}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{entry-text-column} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{entry-text-column} slot of the
+    @class{gtk:combo-box} class gets or sets the model column which the combo
+    box is using to get the strings from to display in the internal entry.
   @end{short}
-  The @fun{gtk:combo-box-entry-text-column} function returns the column which
-  the combo box is using to get the strings from to display in the internal
-  entry. The @setf{gtk:combo-box-entry-text-column} function sets the model
-  column which the combo box should use to get strings.
 
   The @arg{column} value in the model of the combo box must be of type
   @code{gchararray}. This is only relevant if the combo box has been created
@@ -553,16 +539,14 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-has-entry)
       "Accessor"
       (documentation 'combo-box-has-entry 'function)
- "@version{2024-04-26}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-has-entry object) => setting}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[setting]{a boolean whether the combo box has an entry}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{has-entry} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{has-entry} slot of the
+    @class{gtk:combo-box} class gets whether the combo box has an entry.
   @end{short}
-  The @fun{gtk:combo-box-has-entry} function returns whether the combo box has
-  an entry.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -582,16 +566,16 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-has-frame)
       "Accessor"
       (documentation 'combo-box-has-frame 'function)
- "@version{2024-04-26}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-has-frame object) => setting}
   @syntax{(setf (gtk:combo-box-has-frame object) setting)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[setting]{a boolean whether a frame is drawn around the text entry}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{has-frame} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{has-frame} slot of the
+    @class{gtk:combo-box} class gets or sets whether a frame is drawn around
+    the text entry.
   @end{short}
-  Controls whether a frame is drawn around the text entry.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -613,19 +597,17 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-id-column)
       "Accessor"
       (documentation 'combo-box-id-column 'function)
- "@version{2025-07-19}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-id-column object) => column}
   @syntax{(setf (gtk:combo-box-id-column object) column)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[column]{an integer for a column in the model to get string IDs for
     values from}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{id-column} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{id-column} slot of the
+    @class{gtk:combo-box} class gets or sets the model column which the combo
+    box is using to get string IDs for values from.
   @end{short}
-  The @fun{gtk:combo-box-id-column} function returns the model column which the
-  combo box is using to get string IDs for values from. The
-  @setf{gtk:combo-box-id-column} function sets the model column.
 
   The @arg{column} value in the model of the combo box must be of type
   @code{gchararray}.
@@ -647,19 +629,18 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-model)
       "Accessor"
       (documentation 'combo-box-model 'function)
- "@version{2024-04-26}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-model object) => model}
   @syntax{(setf (gtk:combo-box-model object) model)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{model} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{model} slot of the
+    @class{gtk:combo-box} class gets or sets the model which is acting as data
+    source for the combo box.
   @end{short}
-  The @fun{gtk:combo-box-model} function returns the model which is acting as
-  data source for the combo box. The @setf{gtk:combo-box-model} function sets
-  the model. Will unset a previously set model, if applicable. If @arg{model}
-  is @code{nil}, then it will unset the model.
+  Will unset a previously set model, if applicable. If @arg{model} is
+  @code{nil}, then it will unset the model.
 
   Note that this function does not clear the cell renderers, you have to call
   the @fun{gtk:cell-layout-clear} function yourself if you need to set up
@@ -687,19 +668,16 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-popup-fixed-width)
       "Accessor"
       (documentation 'combo-box-popup-fixed-width 'function)
- "@version{2024-04-26}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-popup-fixed-width object) => fixed}
   @syntax{(setf (gtk:combo-box-popup-fixed-width object) fixed)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[fixed]{a boolean whether to use a fixed popup width}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{popup-fixed-width} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{popup-fixed-width} slot of the
+    @class{gtk:combo-box} class gets or sets whether the popup uses a fixed
+    width matching the allocated width of the combo box.
   @end{short}
-  The @fun{gtk:combo-box-popup-fixed-width} function gets whether the popup
-  uses a fixed width matching the allocated width of the combo box. The
-  @setf{gtk:combo-box-popup-fixed-width} function specifies whether the width
-  of the popup should be a fixed.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -721,18 +699,18 @@ lambda (combo)    :action
 (setf (liber:alias-for-function 'combo-box-popup-shown)
       "Accessor"
       (documentation 'combo-box-popup-shown 'function)
- "@version{2025-07-21}
+ "@version{2025-08-12}
   @syntax{(gtk:combo-box-popup-shown object) => setting}
   @syntax{(setf (gtk:combo-box-popup-shown object) setting)}
   @argument[object]{a @class{gtk:combo-box} widget}
   @argument[setting]{a boolean whether the combo boxes dropdown is popped up}
   @begin{short}
-    Accessor of the @slot[gtk:combo-box]{popup-shown} slot of the
-    @class{gtk:combo-box} class.
+    The accessor for the @slot[gtk:combo-box]{popup-shown} slot of the
+    @class{gtk:combo-box} class gets or sets whether the combo boxes dropdown
+    is popped up.
   @end{short}
-  Whether the combo boxes dropdown is popped up. Note that this property is
-  mainly useful, because it allows you to connect to the
-  @sig[g:object]{notify::popup-shown} signal.
+  Note that this property is mainly useful, because it allows you to connect to
+  the @sig[g:object]{notify::popup-shown} signal.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.
@@ -856,18 +834,16 @@ lambda (combo)    :action
 
 (defun combo-box-active-iter (combo)
  #+liber-documentation
- "@version{#2024-04-26}
+ "@version{#2025-08-12}
   @syntax{(gtk:combo-box-active-iter combo) => iter}
   @syntax{(setf (gtk:combo-box-active-iter combo) iter)}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[iter]{a @class{gtk:tree-iter} instance, or @code{nil}}
   @begin{short}
-    Accessor of the active iterator of the combo box.
+    Gets or sets the current active item to be the one referenced by
+    @arg{iter}.
   @end{short}
-  The @fun{gtk:combo-box-active-iter} function returns @arg{iter} to point to
-  the current active item, if it exists. The @setf{gtk:combo-box-active-iter}
-  function sets the current active item to be the one referenced by @arg{iter},
-  or unsets the active item if @arg{iter} is @code{nil}.
+  Unsets the active item if @arg{iter} is @code{nil}.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.

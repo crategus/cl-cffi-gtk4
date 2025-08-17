@@ -118,18 +118,17 @@
 (setf (liber:alias-for-function 'widget-paintable-widget)
       "Accessor"
       (documentation 'widget-paintable-widget 'function)
- "@version{2023-08-31}
+ "@version{2025-08-13}
   @syntax{(gtk:widget-paintable-widget object) => widget}
   @syntax{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
   @argument[widget]{a @class{gtk:widget} object to observe or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:widget-paintable]{widget} slot of the
-    @class{gtk:widget-paintable} object.
+    The accessor for the @slot[gtk:widget-paintable]{widget} slot of the
+    @class{gtk:widget-paintable} object gets or sets the widget that is
+    observed.
   @end{short}
-  The @fun{gtk:widget-paintable-widget} function returns the widget that is
-  observed or @code{nil} if none. The @setf{gtk:widget-paintable-widget}
-  function sets the widget that should be observed.
+  Returns @code{nil} if none.
   @see-class{gtk:widget-paintable}")
 
 ;;; ----------------------------------------------------------------------------

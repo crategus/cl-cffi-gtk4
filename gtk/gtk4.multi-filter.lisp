@@ -112,16 +112,16 @@
 (setf (liber:alias-for-function 'multi-filter-item-type)
       "Accessor"
       (documentation 'multi-filter-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-12}
   @syntax{(gtk:multi-filter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:multi-filter]{item-type} slot of the
-    @class{gtk:multi-filter} class.
+    The accessor for the @slot[gtk:multi-filter]{item-type} slot of the
+    @class{gtk:multi-filter} class gets the type of items contained in the list
+    model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -144,14 +144,15 @@
 (setf (liber:alias-for-function 'multi-filter-n-items)
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
- "@version{2025-03-13}
+ "@version{2025-08-12}
   @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:multi-filter]{n-items} slot of the
-    @class{gtk:multi-filter} class.
+    The accessor for the @slot[gtk:multi-filter]{n-items} slot of the
+    @class{gtk:multi-filter} class gets the number of items contained in the
+    model.
   @end{short}
 
   Since 4.8

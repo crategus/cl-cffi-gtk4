@@ -119,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed-layout 'type)
- "@version{2024-04-23}
+ "@version{2025-08-12}
   @begin{short}
     The @class{gtk:fixed-layout} object is a layout manager which can place
     child widgets at fixed positions, and with fixed sizes.
@@ -135,10 +135,10 @@
       Themes, which may change widget sizes.
     @end{item}
     @begin{item}
-      Fonts other than the one you used to write the app will of course change
-      the size of widgets containing text; keep in mind that users may use a
-      larger font because of difficulty reading the default, or they may be
-      using a different OS that provides different fonts.
+      Fonts other than the one you used to write the application will of course
+      change the size of widgets containing text. Keep in mind that users may
+      use a larger font because of difficulty reading the default, or they may
+      be using a different OS that provides different fonts.
     @end{item}
     @begin{item}
       Translation of text into other languages changes its size. Also, display

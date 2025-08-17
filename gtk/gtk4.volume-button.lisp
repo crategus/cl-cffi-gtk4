@@ -116,18 +116,18 @@
 (setf (liber:alias-for-function 'volume-button-use-symbolic)
       "Accessor"
       (documentation 'volume-button-use-symbolic 'function)
- "@version{2025-03-13}
+ "@version{2025-08-13}
   @syntax{(gtk:volume-button-use-symbolic object) => setting}
   @syntax{(setf (gtk:volume-button-use-symbolic object) setting)}
   @argument[object]{a @class{gtk:volume-button} widget}
   @argument[setting]{a boolean whether to use symbolic icons}
   @begin{short}
-    Accessor of the @slot[gtk:volume-button]{use-symbolic} slot of the
-    @class{gtk:volume-button} class.
+    The accessor for the @slot[gtk:volume-button]{use-symbolic} slot of the
+    @class{gtk:volume-button} class gets or sets whether to use symbolic icons
+    as the icons.
   @end{short}
-  Whether to use symbolic icons as the icons. Note that if the symbolic icons
-  are not available in your installed theme, then the normal, potentially
-  colorful icons will be used.
+  Note that if the symbolic icons are not available in your installed theme,
+  then the normal, potentially colorful icons will be used.
   @begin[Warning]{dictionary}
     The @class{gtk:volume-button} implementation has been deprecated since
     version 4.10 and should not be used in newly written code. This widget will
