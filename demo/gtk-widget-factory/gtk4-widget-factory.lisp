@@ -363,7 +363,7 @@
            (data (cffi:foreign-alloc :uchar :count size :initial-element #xff))
            (bytes (g:bytes-new data size))
            (texture (gdk:memory-texture-new 110 70
-                                            :B8G8R8A8-PREMULTIPLIED
+                                            gdk:+memory-default+
                                             bytes
                                             (* 4 110)))
            (child (gtk:picture-new-for-paintable texture)))
