@@ -242,14 +242,15 @@
 (setf (liber:alias-for-function 'string-list-item-type)
       "Accessor"
       (documentation 'string-list-item-type 'function)
- "@version{2025-03-29}
+ "@version{2025-08-17}
   @syntax{(gtk:string-list-item-type object) => type}
   @syntax{(setf (gtk:string-list-item-type object) type)}
   @argument[object]{a @class{gtk:string-list} object}
   @argument[type]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:string-list]{item-type} slot of the
-    @class{gtk:string-list} class.
+    The accessor for the @slot[gtk:string-list]{item-type} slot of the
+    @class{gtk:string-list} class returns the type of items contained in the
+    string list.
   @end{short}
 
   Since 4.14
@@ -270,14 +271,15 @@
 (setf (liber:alias-for-function 'string-list-n-items)
       "Accessor"
       (documentation 'string-list-n-items 'function)
- "@version{2025-03-29}
+ "@version{2025-08-17}
   @syntax{(gtk:string-list-n-items object) => n-items}
   @syntax{(setf (gtk:string-list-n-items object) n-items)}
   @argument[object]{a @class{gtk:string-list} object}
   @argument[n-items]{an unsigned integer}
   @begin{short}
-    Accessor of the @slot[gtk:string-list]{n-items} slot of the
-    @class{gtk:string-list} class.
+    The accessor for the @slot[gtk:string-list]{n-items} slot of the
+    @class{gtk:string-list} class returns the number of items contained in the
+    string list.
   @end{short}
   @see-class{gtk:string-list}")
 

@@ -552,16 +552,15 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edit-widget)
       "Accessor"
       (documentation 'cell-area-edit-widget 'function)
- "@version{2024-07-07}
+ "@version{2025-08-20}
   @syntax{(gtk:cell-area-edit-widget object) => widget}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:cell-editable} widget}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area]{edit-widget} slot of the
-    @class{gtk:cell-area} class.
+    The accessor for the @slot[gtk:cell-area]{edit-widget} slot of the
+    @class{gtk:cell-area} class returns the widget currently used to edit the
+    currently edited cell.
   @end{short}
-  The @fun{gtk:cell-area-edit-widget} function gets the widget currently used
-  to edit the currently edited cell.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
     views use widgets for displaying their contents.
@@ -582,16 +581,15 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edited-cell)
       "Accessor"
       (documentation 'cell-area-edited-cell 'function)
- "@version{2024-07-07}
+ "@version{2025-08-20}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area]{edited-cell} slot of the
-    @class{gtk:cell-area} class.
+  The accessor for the @slot[gtk:cell-area]{edited-cell} slot of the
+    @class{gtk:cell-area} class returns the @class{gtk:cell-renderer} object in
+    the area that is currently being edited.
   @end{short}
-  The @fun{gtk:cell-area-edited-cell} function gets the
-  @class{gtk:cell-renderer} object in the area that is currently being edited.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
     views use widgets for displaying their contents.
@@ -611,18 +609,16 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-focus-cell)
       "Accessor"
       (documentation 'cell-area-focus-cell 'function)
- "@version{2024-07-07}
+ "@version{2025-08-20}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @syntax{(setf (gtk:cell-area-edited-cell object) renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to give focus to}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area]{focus-cell} slot of the
-    @class{gtk:cell-area} class.
+    The accessor for the @slot[gtk:cell-area]{focus-cell} slot of the
+    @class{gtk:cell-area} class gets or sets the cell in the area that currently
+    has focus.
   @end{short}
-  The @fun{gtk:cell-area-focus-cell} function retrieves the currently focused
-  cell for the area. The @setf{gtk:cell-area-focus-cell} function explicitly
-  sets the currently focused cell to @arg{renderer}.
 
   This is generally called by implementations of the
   @code{GtkCellAreaClass.focus()} or @code{GtkCellAreaClass.event()} functions,

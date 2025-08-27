@@ -141,16 +141,16 @@ lambda (editable)    :run-last
 (setf (liber:alias-for-function 'cell-editable-editing-canceled)
       "Accessor"
       (documentation 'cell-editable-editing-canceled 'function)
- "@version{#2024-11-05}
+ "@version{#2025-08-17}
   @syntax{(gtk:cell-editable-editing-canceled object) => canceled}
   @syntax{(setf (gtk:cell-editable-editing-canceled object) canceled)}
   @argument[object]{a @class{gtk:cell-editable} object}
   @argument[canceled]{a boolean whether editing on the cell has been canceled}
   @begin{short}
-    Accessor of the @slot[gtk:cell-editable]{editing-canceled} slot of the
-    @class{gtk:cell-editable} class.
+    The accessor for the @slot[gtk:cell-editable]{editing-canceled} slot of the
+    @class{gtk:cell-editable} class gets or sets whether editing on the cell has
+    been canceled.
   @end{short}
-  Indicates whether editing on the cell has been canceled.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-editable} implementation is deprecated since 4.10,
     Please do not use it in newly written code.

@@ -209,18 +209,16 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-actions)
       "Accessor"
       (documentation 'drag-source-actions 'function)
- "@version{2025-07-27}
+ "@version{2025-08-23}
   @syntax{(gtk:drag-source-actions object) => actions}
   @syntax{(setf (gtk:drag-source-actions object) actions)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[actions]{a @sym{gdk:drag-action} value for the actions to offer}
   @begin{short}
-    Accessor of the @slot[gtk:drag-source]{actions} slot of the
-    @class{gtk:drag-source} class.
+    The accessor for the @slot[gtk:drag-source]{actions} slot of the
+    @class{gtk:drag-source} class gets or sets the actions that are supported
+    by drag operations from the source.
   @end{short}
-  The @fun{gtk:drag-source-actions} function gets the actions that are
-  currently set on the @class{gtk:drag-source} object. The
-  @setf{gtk:drag-source-actions} function sets the actions.
 
   During a DND operation, the actions are offered to potential drop targets.
   If @arg{actions} include @val[gdk:drag-action]{:move}, you need to listen to
@@ -245,20 +243,20 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-content)
       "Accessor"
       (documentation 'drag-source-content 'function)
- "@version{2025-07-24}
+ "@version{2025-08-23}
   @syntax{(gtk:drag-source-content object) => content}
   @syntax{(setf (gtk:drag-source-content object) content)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[content]{a @class{gdk:content-provider} object for @arg{source},
     or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:drag-source]{content} slot of the
-    @class{gtk:drag-source} class.
+    The accessor for the @slot[gtk:drag-source]{content} slot of the
+    @class{gtk:drag-source} class gets or sets the data that is offered by drag
+    operations from this source, in the form of a @class{gdk:content-provider}
+    object.
   @end{short}
-  The @fun{gtk:drag-source-content} function gets the current content provider
-  of a @class{gtk:drag-source} object. The @setf{gtk:drag-source-content}
-  function sets a content provider. When the data is requested in the cause of
-  a DND operation, it will be obtained from the content provider.
+  When the data is requested in the cause of a DND operation, it will be
+  obtained from the content provider.
 
   This function can be called before a drag is started, or in a handler for the
   @sig[gtk:drag-source]{prepare} signal. You may consider setting the content

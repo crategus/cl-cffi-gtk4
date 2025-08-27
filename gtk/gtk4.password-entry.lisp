@@ -231,18 +231,17 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-activates-default)
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:password-entry-activates-default object) => setting}
   @syntax{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[setting]{@em{true} to activate the default widget of the window on
     @kbd{Enter} keypress}
   @begin{short}
-    Accessor of the @slot[gtk:password-entry]{activates-default} slot of the
-    @class{gtk:password-entry} class.
+    The accessor for the @slot[gtk:password-entry]{activates-default} slot of
+    the @class{gtk:password-entry} class gets or sets whether to activate the
+    default widget, when the @kbd{Enter} key is pressed.
   @end{short}
-  The @fun{gtk:password-entry-activates-default} function retrieves whether to
-  activate the default widget, when the @kbd{Enter} key is pressed.
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
   the password entry will activate the default widget for the window containing
@@ -263,18 +262,16 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-extra-menu)
       "Accessor"
       (documentation 'password-entry-extra-menu 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:password-entry-extra-menu object) => menu}
   @syntax{(setf (gtk:password-entry-extra-menu object) menu)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:password-entry]{extra-menu} slot of the
-    @class{gtk:password-entry} class.
+    The accessor for the @slot[gtk:password-entry]{extra-menu} slot of the
+    @class{gtk:password-entry} class gets or sets the menu model whose contents
+    will be appended to the context menu for the password entry.
   @end{short}
-  The @fun{gtk:password-entry-extra-menu} function gets the menu model. The
-  @setf{gtk:password-entry-extra-menu} function sets a menu model to add when
-  constructing the context menu for the password entry.
   @see-class{gtk:password-entry}
   @see-class{g:menu-model}")
 
@@ -293,21 +290,19 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-placeholder-text)
       "Accessor"
       (documentation 'password-entry-placeholder-text 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:password-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:password-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[text]{a string to be displayed when @arg{entry} is empty and
     unfocused, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:password-entry]{placeholder-text} slot of the
-    @class{gtk:password-entry} class.
+    The accessor for the @slot[gtk:password-entry]{placeholder-text} slot of the
+    @class{gtk:password-entry} class gets or sets the text that will be
+    displayed when the password entry is empty and unfocused.
   @end{short}
-  The @fun{gtk:password-entry-placeholder-text} function retrieves the text
-  that will be displayed when the password entry is empty and unfocused. The
-  @setf{gtk:password-entry-placeholder-text} function sets the text. This
-  can be used to give a visual hint of the expected contents of the password
-  entry.
+  This can be used to give a visual hint of the expected contents of the
+  password entry.
 
   Note that since the placeholder text gets removed when the password entry
   received focus, using this feature is a bit problematic if the password entry
@@ -329,19 +324,17 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-show-peek-icon)
       "Accessor"
       (documentation 'password-entry-show-peek-icon 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:password-entry-show-peek-icon object) => setting}
   @syntax{(setf (gtk:password-entry-show-peek-icon object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[setting]{a boolean whether to show the peek icon}
   @begin{short}
-    Accessor of the @slot[gtk:password-entry]{show-peek-icon} slot of the
-    @class{gtk:password-entry} class.
+    The accessor for the @slot[gtk:password-entry]{show-peek-icon} slot of the
+    @class{gtk:password-entry} class gets or sets whether the password entry is
+    showing a clickable icon to reveal the contents of the password entry in
+    clear text.
   @end{short}
-  The @fun{gtk:password-entry-show-peek-icon} function returns whether the
-  password entry is showing a clickable icon to reveal the contents of the
-  password entry in clear text. The @setf{gtk:password-entry-show-peek-icon}
-  function sets whether the password entry should have a clickable icon.
   Setting this to @em{false} also hides the text again.
   @see-class{gtk:password-entry}")
 

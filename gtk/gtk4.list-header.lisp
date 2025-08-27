@@ -204,17 +204,17 @@
 (setf (liber:alias-for-function 'list-header-n-items)
       "Accessor"
       (documentation 'list-header-n-items 'function)
- "@version{2025-04-07}
+ "@version{2025-08-17}
   @syntax{(gtk:list-header-n-items object) => n-items}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[n-items]{an unsigned integer for the number of items in the
     section}
   @begin{short}
-    Accessor of the @slot[gtk:list-header]{n-items} slot of the
-    @class{gtk:list-header} class.
+    The accessor for the @slot[gtk:list-header]{n-items} slot of the
+    @class{gtk:list-header} class returns the the number of items in the
+    section.
   @end{short}
-  The @fun{gtk:list-header-n-items} function gets the the number of items in
-  the section. If @arg{object} is unbound, 0 is returned.
+  If @arg{object} is unbound, 0 is returned.
 
   Since 4.12
   @see-class{gtk:list-header}

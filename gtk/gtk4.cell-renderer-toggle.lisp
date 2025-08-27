@@ -144,18 +144,16 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-activatable)
       "Accessor"
       (documentation 'cell-renderer-toggle-activatable 'function)
- "@version{2024-02-22}
+ "@version{2025-08-22}
   @syntax{(gtk:cell-renderer-toggle-activatable object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-activatable object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-toggle]{activatable} slot of the
-    @class{gtk:cell-renderer-toggle} class.
+    The accessor for the @slot[gtk:cell-renderer-toggle]{activatable} slot of
+    the @class{gtk:cell-renderer-toggle} class gets or sets whether the cell
+    renderer is activatable.
   @end{short}
-  The @fun{gtk:cell-renderer-toggle-activatable} function returns whether the
-  cell renderer is activatable. The @setf{gtk:cell-renderer-toggle-activatable}
-  function makes the cell renderer activatable.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -175,18 +173,16 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-active)
       "Accessor"
       (documentation 'cell-renderer-toggle-active 'function)
- "@version{2024-02-22}
+ "@version{2025-08-22}
   @syntax{(gtk:cell-renderer-toggle-active object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-active object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-toggle]{active} slot of the
-    @class{gtk:cell-renderer-toggle} class.
+    The accessor for the @slot[gtk:cell-renderer-toggle]{active} slot of the
+    @class{gtk:cell-renderer-toggle} class gets or sets whether the cell
+    renderer is active.
   @end{short}
-  The @fun{gtk:cell-renderer-toggle-active} function returns whether the cell
-  renderer is active. The @setf{gtk:cell-renderer-toggle-active} function
-  activates or deactivates a cell renderer.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -206,16 +202,16 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-inconsistent)
       "Accessor"
       (documentation 'cell-renderer-toggle-inconsistent 'function)
- "@version{2024-02-22}
+ "@version{2025-08-22}
   @syntax{(gtk:cell-renderer-toggle-inconsistent object) => setting}
   @syntax{(setf (gtk:cell-renderer-toggle-inconsistent object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-toggle]{inconsistent} slot of the
-    @class{gtk:cell-renderer-toggle} class.
+    The accessor for the @slot[gtk:cell-renderer-toggle]{inconsistent} slot of
+    the @class{gtk:cell-renderer-toggle} class gets or sets the inconsistent
+    state of the button.
   @end{short}
-  The inconsistent state of the button.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -234,14 +230,15 @@ lambda (renderer path)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-toggle-radio)
       "Accessor"
       (documentation 'cell-renderer-toggle-radio 'function)
- "@version{2024-07-30}
+ "@version{2025-08-22}
   @syntax{(gtk:cell-renderer-toggle-radio object) => radio}
   @syntax{(setf (gtk:cell-renderer-toggle-radio object) radio)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[radio]{@em{true} to make the toggle look like a radio button}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-toggle]{radio} slot of the
-    @class{gtk:cell-renderer-toggle} class.
+    The accessor for the @slot[gtk:cell-renderer-toggle]{radio} slot of the
+    @class{gtk:cell-renderer-toggle} class gets or sets whether to draw the
+    toggle button as a radio button.
   @end{short}
   If the @arg{radio} argument is @em{true}, the cell renderer renders a radio
   toggle, that is, a toggle in a group of mutually-exclusive toggles. If

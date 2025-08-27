@@ -209,13 +209,13 @@
 (setf (liber:alias-for-function 'shortcut-controller-item-type)
       "Accessor"
       (documentation 'shortcut-controller-item-type 'function)
- "@version{2023-07-23}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcut-controller-item-type object) => gtype}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[gtype]{a @class{g:type-t} item type ID}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-controller]{item-type} slot of the
-    @class{gtk:shortcut-controller} class.
+    The accessor for the @slot[gtk:shortcut-controller]{item-type} slot of the
+    @class{gtk:shortcut-controller} class returns the type of items.
   @end{short}
 
   Since 4.8
@@ -302,14 +302,15 @@
 (setf (liber:alias-for-function 'shortcut-controller-n-items)
       "Accessor"
       (documentation 'shortcut-controller-n-items 'function)
- "@version{2025-07-19}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcut-controller-n-items object) => n-items}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[n-items]{an unsigned integer for the number of items in the list
     model}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-controller]{n-items} slot of the
-    @class{gtk:shortcut-controller} class.
+    The accessor for the @slot[gtk:shortcut-controller]{n-items} slot of the
+    @class{gtk:shortcut-controller} class returns the number of items in the
+    list model.
   @end{short}
 
   Since 4.8

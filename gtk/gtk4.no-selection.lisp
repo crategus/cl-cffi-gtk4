@@ -115,16 +115,16 @@
 (setf (liber:alias-for-function 'no-selection-item-type)
       "Accessor"
       (documentation 'no-selection-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-17}
   @syntax{(gtk:no-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:no-selection]{item-type} slot of the
-    @class{gtk:no-selection} class.
+    The accessor for the @slot[gtk:no-selection]{item-type} slot of the
+    @class{gtk:no-selection} class returns the type of items contained in the
+    list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -146,19 +146,17 @@
 (setf (liber:alias-for-function 'no-selection-model)
       "Accessor"
       (documentation 'no-selection-model 'function)
- "@version{2025-03-17}
+ "@version{2025-08-17}
   @syntax{(gtk:no-selection-model object) => model}
   @syntax{(setf (gtk:no-selection-model object) model)}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    Accessor of the @slot[gtk:no-selection]{model} slot of the
-    @class{gtk:no-selection} class.
+    The accessor for the @slot[gtk:no-selection]{model} slot of the
+    @class{gtk:no-selection} class gets or sets the model that @arg{object} is
+    wrapping.
   @end{short}
-  The @fun{gtk:no-selection-model} function gets the model that @arg{object}
-  is wrapping. The @setf{gtk:no-selection-model} function sets the model that
-  @arg{object} should wrap. If @arg{model} is @code{nil}, this model will be
-  empty.
+  If @arg{model} is @code{nil}, this model will be empty.
   @see-class{gtk:no-selection}
   @see-class{g:list-model}")
 
@@ -166,22 +164,23 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'no-selection) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'no-selection-n-items)
       "Accessor"
       (documentation 'no-selection-n-items 'function)
- "@version{2025-03-17}
+ "@version{2025-08-17}
   @syntax{(gtk:no-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:no-selection]{n-items} slot of the
-    @class{gtk:no-selection} class.
+    The accessor for the @slot[gtk:no-selection]{n-items} slot of the
+    @class{gtk:no-selection} class returns the number of items contained in the
+    model.
   @end{short}
 
   Since 4.8

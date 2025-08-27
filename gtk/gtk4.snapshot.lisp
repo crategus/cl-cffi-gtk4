@@ -978,7 +978,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_color" snapshot-append-color) :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2025-08-23}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[color]{a @class{gdk:rgba} instance for the color to draw}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the node}
@@ -987,6 +987,18 @@ pixel = transpose(matrix) * pixel + offset
     appends it to the current render node of @arg{snapshot}.
   @end{short}
   You should try to avoid calling this function if @arg{color} is transparent.
+  @begin[Examples]{dictionary}
+    This is an example of a snapshot method for a user defined
+    @code{\"ColorSwatch\"} subclass that calls this function:
+    @begin{pre}
+(defmethod color-swatch-snapshot-impl ((swatch color-swatch) snapshot)
+  (let ((width (gtk:widget-width swatch))
+        (height (gtk:widget-height swatch))
+        (color (color-swatch-color swatch)))
+    (graphene:with-rect (bounds 0 0 width height)
+      (gtk:snapshot-append-color snapshot color bounds))))
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:snapshot}
   @see-class{gdk:rgba}
   @see-symbol{graphene:rect-t}"

@@ -124,18 +124,16 @@
 (setf (liber:alias-for-function 'shortcut-label-accelerator)
       "Accessor"
       (documentation 'shortcut-label-accelerator 'function)
- "@version{2025-05-14}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcut-label-accelerator object) => accelerator}
   @syntax{(setf (gtk:shortcut-label-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
   @argument[accelerator]{a string for the accelerator}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-label]{accelerator} slot of the
-    @class{gtk:shortcut-label} class.
+    The accessor for the @slot[gtk:shortcut-label]{accelerator} slot of the
+    @class{gtk:shortcut-label} class gets or sets the accelerator that the
+    shortcut label displays.
   @end{short}
-  The @fun{gtk:shortcut-label-accelerator} function retrieves the current
-  accelerator of the shortcut label. The
-  @setf{gtk:shortcut-label-accelerator} function sets the accelerator.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcut-label-accelerator} function is deprecated since 4.18.
     This widget will be removed in GTK 5.
@@ -155,18 +153,16 @@
 (setf (liber:alias-for-function 'shortcut-label-disabled-text)
       "Accessor"
       (documentation 'shortcut-label-disabled-text 'function)
- "@version{2025-05-14}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcut-label- object) => text}
   @syntax{(setf (gtk:shortcut-label-accelerator object) text)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
   @argument[text]{a string for text to be displayed when no accelerator is set}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-label]{accelerator} slot of the
-    @class{gtk:shortcut-label} class.
+    The accessor for the @slot[gtk:shortcut-label]{accelerator} slot of the
+    @class{gtk:shortcut-label} class gets or sets the text that is displayed
+    when no accelerator is set.
   @end{short}
-  The @fun{gtk:shortcut-label-disabled-text} function retrieves the text that
-  is displayed when no accelerator is set. The
-  @setf{gtk:shortcut-label-disabled-text} function sets the text.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcut-label-disabled-text} function is deprecated since
     4.18. This widget will be removed in GTK 5.

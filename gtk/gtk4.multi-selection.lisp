@@ -114,16 +114,16 @@
 (setf (liber:alias-for-function 'multi-selection-item-type)
       "Accessor"
       (documentation 'multi-selection-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-17}
   @syntax{(gtk:multi-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:multi-selection]{item-type} slot of the
-    @class{gtk:multi-selection} class.
+    The accessor for the @slot[gtk:multi-selection]{item-type} slot of the
+    @class{gtk:multi-selection} class returns the type of items contained in
+    the list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -165,22 +165,23 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-selection) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'multi-selection-n-items)
       "Accessor"
       (documentation 'multi-selection-n-items 'function)
- "@version{2025-03-17}
+ "@version{2025-08-17}
   @syntax{(gtk:multi-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:multi-selection]{n-items} slot of the
-    @class{gtk:multi-selection} class.
+    The accessor for the @slot[gtk:multi-selection]{n-items} slot of the
+    @class{gtk:multi-selection} class returns the number of items contained in
+    the model.
   @end{short}
   @see-class{g:multi-selection}
   @see-function{g:list-model-n-items}")

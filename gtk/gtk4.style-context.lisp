@@ -154,13 +154,13 @@
 (setf (liber:alias-for-function 'border-left)
       "Accessor"
       (documentation 'border-left 'function)
- "@version{2025-07-19}
+ "@version{2025-08-21}
   @syntax{(gtk:border-left instance) => left}
   @syntax{(setf (gtk:border-left instance) left)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[left]{an integer for the width of the left border}
   @begin{short}
-    Accessor of the @code{left} slot of the @class{gtk:border} structure.
+    The accessor for the @code{left} slot of the @class{gtk:border} structure.
   @end{short}
   @see-class{gtk:border}")
 
@@ -172,13 +172,13 @@
 (setf (liber:alias-for-function 'border-right)
       "Accessor"
       (documentation 'border-right 'function)
- "@version{2025-07-19}
+ "@version{2025-08-21}
   @syntax{(gtk:border-right instance) => right}
   @syntax{(setf (gtk:border-right instance) right)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[right]{an integer for the width of the right border}
   @begin{short}
-    Accessor of the @code{right} slot of the @class{gtk:border} structure.
+    The accessor for the @code{right} slot of the @class{gtk:border} structure.
   @end{short}
   @see-class{gtk:border}")
 
@@ -190,13 +190,13 @@
 (setf (liber:alias-for-function 'border-top)
       "Accessor"
       (documentation 'border-top 'function)
- "@version{2025-07-19}
+ "@version{2025-08-21}
   @syntax{(gtk:border-top instance) => top}
   @syntax{(setf (gtk:border-top instance) top)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[top]{an integer for the width of the top border}
   @begin{short}
-    Accessor of the @code{top} slot of the @class{gtk:border} structure.
+    The accessor for the @code{top} slot of the @class{gtk:border} structure.
   @end{short}
   @see-class{gtk:border}")
 
@@ -208,13 +208,13 @@
 (setf (liber:alias-for-function 'border-bottom)
       "Accessor"
       (documentation 'border-bottom 'function)
- "@version{2025-07-19}
+ "@version{2025-08-21}
   @syntax{(gtk:border-top instance) => bottom}
   @syntax{(setf (gtk:border-top instance) bottom)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[bottom]{an integer for the width of the bottom border}
   @begin{short}
-    Accessor of the @code{bottom} slot of the @class{gtk:border} structure.
+    The accessor for the @code{bottom} slot of the @class{gtk:border} structure.
   @end{short}
   @see-class{gtk:border}")
 
@@ -398,18 +398,16 @@
 (setf (liber:alias-for-function 'style-context-display)
       "Accessor"
       (documentation 'style-context-display 'function)
- "@version{2023-09-18}
+ "@version{2025-08-21}
   @syntax{(gtk:style-context-display object) => display}
   @syntax{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gtk:style-context]{display} slot of the
-    @class{gtk:style-context} class.
+    The accessor for the @slot[gtk:style-context]{display} slot of the
+    @class{gtk:style-context} class gets or sets the display to which the style
+    context is attached.
   @end{short}
-  The @fun{gtk:style-context-display} function returns the display to which the
-  style context is attached. The @setf{gtk:style-context-display} function
-  attaches the style context to the given display.
 
   The display is used to add style information from 'global' style providers,
   such as the @class{gtk:settings} instance of the display. If you are using a
@@ -547,17 +545,14 @@
 
 (defun style-context-state (context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2025-08-21}
   @syntax{(gtk:style-context-state context) => state}
   @syntax{(setf (gtk:style-context-state context) state)}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[state]{a value of the @sym{gtk:state-flags} flags to represent}
   @begin{short}
-    Accessor of the state used when rendering.
+    Gets or sets the state used for style matching.
   @end{short}
-  The @fun{gtk:style-context-state} function returns the state used for style
-  matching. The @setf{gtk:style-context-state} function sets the state.
-
   This function should only be used to retrieve the @sym{gtk:state-flags}
   values to pass to the @class{gtk:style-context} functions, like the
   @fun{gtk:style-context-padding} function. If you need to retrieve the current
@@ -988,17 +983,14 @@ GtkEntry.entry { ... @}
 
 (defun style-context-scale (context)
  #+liber-documentation
- "@version{#2025-07-19}
+ "@version{#2025-08-21}
   @syntax{(gtk:style-context-scale context) => scale}
   @syntax{(setf (gtk:style-context-scale context) scale)}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[scale]{an integer for a scale}
   @begin{short}
-    Accessor of the scale used for image assets for the style context.
+    Gets or sets the scale to use when getting image assets for the style.
   @end{short}
-  The @fun{gtk:style-context-scale} function returns the scale to use when
-  getting image assets for the style. The @setf{gtk:style-context-scale}
-  function sets the scale.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Use the
     @fun{gtk:widget-scale-factor} function instead.

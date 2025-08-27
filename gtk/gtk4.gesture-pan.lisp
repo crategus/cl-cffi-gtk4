@@ -173,18 +173,16 @@ lambda (gesture direction offset)    :run-last
 (setf (liber:alias-for-function 'gesture-pan-orientation)
       "Accessor"
       (documentation 'gesture-pan-orientation 'function)
- "@version{2025-07-26}
+ "@version{2025-08-17}
   @syntax{(gtk:gesture-pan-orientation object) => orientation}
   @syntax{(setf (gtk:gesture-pan-orientation object) orientation)}
   @argument[object]{a @class{gtk:gesture} object}
   @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-pan]{orientation} slot of the
-    @class{gtk:gesture-pan} class.
+    The accessor for the @slot[gtk:gesture-pan]{orientation} slot of the
+    @class{gtk:gesture-pan} class gets or sets the orientation of the pan
+    gestures that this gesture expects.
   @end{short}
-  The @fun{gtk:gesture-pan-orientation} function returns the orientation of the
-  pan gestures that this gesture expects. The @setf{gtk:gesture-pan-orientation}
-  function sets the orientation.
   @see-class{gtk:gesture-pan}
   @see-symbol{gtk:orientation}")
 

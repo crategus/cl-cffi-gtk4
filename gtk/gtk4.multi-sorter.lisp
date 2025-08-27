@@ -108,16 +108,16 @@
 (setf (liber:alias-for-function 'multi-sorter-item-type)
       "Accessor"
       (documentation 'multi-sorter-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-17}
   @syntax{(gtk:multi-sorter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:multi-sorter]{item-type} slot of the
-    @class{gtk:multi-sorter} class.
+    The accessor for the @slot[gtk:multi-sorter]{item-type} slot of the
+    @class{gtk:multi-sorter} class returns the type of items contained in the
+    list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -132,22 +132,23 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-sorter) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'multi-sorter-n-items)
       "Accessor"
       (documentation 'multi-sorter-n-items 'function)
- "@version{2025-03-14}
+ "@version{2025-08-17}
   @syntax{(gtk:multi-sorter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-sorter} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:multi-sorter]{n-items} slot of the
-    @class{gtk:multi-sorter} class.
+    The accessor for the @slot[gtk:multi-sorter]{n-items} slot of the
+    @class{gtk:multi-sorter} class returns the number of items contained in
+    the model.
   @end{short}
 
   Since 4.8

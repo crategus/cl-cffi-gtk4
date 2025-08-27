@@ -109,18 +109,17 @@
 (setf (liber:alias-for-function 'media-controls-media-stream)
       "Accessor"
       (documentation 'media-controls-media-stream 'function)
- "@version{2024-10-31}
+ "@version{2025-08-17}
   @syntax{(gtk:media-controls-media-stream object) => stream}
   @syntax{(setf (gtk:media-controls-media-stream object) stream)}
   @argument[object]{a @class{gtk:media-controls} widget}
   @argument[stream]{a @class{gtk:media-stream} object, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:media-controls]{media-stream} slot of the
-    @class{gtk:media-controls} class.
+    The accessor for the @slot[gtk:media-controls]{media-stream} slot of the
+    @class{gtk:media-controls} class gets or sets the media stream managed by
+    the media controls
   @end{short}
-  The @fun{gtk:media-controls-media-stream} function gets the media stream
-  managed by the media controls or @code{nil} if none. The
-  @setf{gtk:media-controls-media-stream} function sets the media stream.
+  Returns @code{nil} if none.
   @see-class{gtk:media-controls}
   @see-class{gtk:media-stream}")
 

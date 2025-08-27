@@ -125,17 +125,17 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-adjustment)
       "Accessor"
       (documentation 'cell-renderer-spin-adjustment 'function)
- "@version{2024-02-22}
+ "@version{2025-08-17}
   @syntax{(gtk:cell-renderer-spin-adjustment object) => adjustment}
   @syntax{(setf (gtk:cell-renderer-spin-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spin]{adjustment} slot of the
-    @class{gtk:cell-renderer-spin} class.
+    The accessor for the @slot[gtk:cell-renderer-spin]{adjustment} slot of the
+    @class{gtk:cell-renderer-spin} class gets or sets the adjustment that holds
+    the value of the spin button.
   @end{short}
-  The adjustment that holds the value of the spin button. This must be
-  non-@code{nil} for the cell renderer to be editable.
+  This must be non-@code{nil} for the cell renderer to be editable.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spin} object is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -157,14 +157,15 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-climb-rate)
       "Accessor"
       (documentation 'cell-renderer-spin-climb-rate 'function)
- "@version{2025-07-22}
+ "@version{2025-08-17}
   @syntax{(gtk:cell-renderer-spin-climb-rate object) => climb-rate}
   @syntax{(setf (gtk:cell-renderer-spin-climb-rate object) climb-rate)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[climb-rate]{a double float for the acceleration rate}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spin]{climb-rate} slot of the
-    @class{gtk:cell-renderer-spin} class.
+    The accessor for the @slot[gtk:cell-renderer-spin]{climb-rate} slot of the
+    @class{gtk:cell-renderer-spin} class gets or sets the acceleration rate when
+    you hold down a button.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spin} object is deprecated since 4.10.
@@ -185,15 +186,16 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-digits)
       "Accessor"
       (documentation 'cell-renderer-spin-digits 'function)
- "@version{2025-07-19}
+ "@version{2025-08-17}
   @syntax{(gtk:cell-renderer-spin-digits object) => digits}
   @syntax{(setf (gtk:cell-renderer-spin-digits object) digits)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[digits]{an unsigned integer for the number of decimal places to
     display}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spin]{digits} slot of the
-    @class{gtk:cell-renderer-spin} class.
+    The accessor for the @slot[gtk:cell-renderer-spin]{digits} slot of the
+    @class{gtk:cell-renderer-spin} class gets or sets the number of decimal
+    places to display.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spin} object is deprecated since 4.10.

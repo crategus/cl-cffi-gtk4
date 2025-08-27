@@ -190,17 +190,18 @@ lambda (shortcutswindow)    :action
 (setf (liber:alias-for-function 'shortcuts-window-section-name)
       "Accessor"
       (documentation 'shortcuts-window-section-name 'function)
- "@version{2025-05-14}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcuts-window-section-name object) => name}
   @syntax{(setf (gtk:shortcuts-window-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
   @argument[name]{a string for a name of the section to show}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-window]{section-name} slot of the
-    @class{gtk:shortcuts-window} class.
+    The accessor for the @slot[gtk:shortcuts-window]{section-name} slot of the
+    @class{gtk:shortcuts-window} class gets or sets the name of the section to
+    show.
   @end{short}
-  The name of the section to show. This should be the section name of one of the
-  @class{gtk:shortcuts-section} objects that are in this shortcuts window.
+  This should be the section name of one of the @class{gtk:shortcuts-section}
+  objects that are in this shortcuts window.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-window-section-name} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -223,19 +224,19 @@ lambda (shortcutswindow)    :action
 (setf (liber:alias-for-function 'shortcuts-window-view-name)
       "Accessor"
       (documentation 'shortcuts-window-view-name 'function)
- "@version{2025-05-14}
+ "@version{2025-08-17}
   @syntax{(gtk:shortcuts-window-view-name object) => name}
   @syntax{(setf (gtk:shortcuts-window-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
   @argument[name]{a string for the view name by which to filter the contents}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-window]{view-name} slot of the
-    @class{gtk:shortcuts-window} class.
+    The accessor for the @slot[gtk:shortcuts-window]{view-name} slot of the
+    @class{gtk:shortcuts-window} class gets or sets the view name by which to
+    filter the contents.
   @end{short}
-  The view name by which to filter the contents. This should correspond to the
-  @slot[gtk:shortcuts-group]{view} property of some of the
-  @class{gtk:shortcuts-group} objects that are inside this shortcuts window.
-  Set this to @code{nil} to show all groups.
+  This should correspond to the @slot[gtk:shortcuts-group]{view} property of
+  some of the @class{gtk:shortcuts-group} objects that are inside this shortcuts
+  window. Set this to @code{nil} to show all groups.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-window-view-name} function is deprecated since
     4.18. This widget will be removed in GTK 5.

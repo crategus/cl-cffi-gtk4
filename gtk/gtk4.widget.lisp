@@ -36,8 +36,8 @@
 ;;;     GtkWidget
 ;;;
 ;;;     GtkRequisition
- ;;     GtkAllocation                                     not implemented
-; ;     GtkTextDirection                                  gtk4.enumerations.lisp
+;;;     GtkAllocation                                     not implemented
+;;;     GtkTextDirection                                  gtk4.enumerations.lisp
 ;;;     GtkPickFlags                                      gtk4.enumerations.lisp
 ;;;     GtkOverflow                                       gtk4.enumerations.lisp
 ;;;     GtkSizeRequestMode                                gtk4.emumerations.lisp
@@ -400,13 +400,14 @@
 (setf (liber:alias-for-function 'requisition-height)
       "Accessor"
       (documentation 'requisition-height 'function)
- "@version{2025-02-13}
+ "@version{2025-08-22}
   @syntax{(gtk:requisition-height instance) => height}
   @syntax{(setf (gtk:requisition-height instance) height)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[height]{an integer for the height}
   @begin{short}
-    Accessor of the @arg{height} slot of the @class{gtk:requisition} structure.
+    The accessor for the @arg{height} slot of the @class{gtk:requisition}
+    structure gets or sets the height.
   @end{short}
   @begin[Examples]{dictionary}
     @begin{pre}
@@ -426,13 +427,14 @@
 (setf (liber:alias-for-function 'requisition-width)
       "Accessor"
       (documentation 'requisition-width 'function)
- "@version{2025-02-13}
+ "@version{2025-08-22}
   @syntax{(gtk:requisition-width instance) => width}
   @syntax{(setf (gtk:requisition-width instance) width)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[width]{an integer for the width}
   @begin{short}
-    Accessor of the @arg{width} slot of the @class{gtk:requisition} structure.
+    The accessor for the @arg{width} slot of the @class{gtk:requisition}
+    structure gets or sets the height.
   @end{short}
   @begin[Examples]{dictionary}
     @begin{pre}
@@ -1382,19 +1384,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-layout-manager)
       "Accessor"
       (documentation 'widget-layout-manager 'function)
- "@version{2025-02-13}
+ "@version{2025-08-22}
   @syntax{(gtk:widget-layout-manager object) => manager}
   @syntax{(setf (gtk:widget-layout-manager object) manager)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
-    Accessor of the @slot[gtk:widget]{layout-manager} slot of the
-    @class{gtk:widget} class.
+    The accessor for the @slot[gtk:widget]{layout-manager} slot of the
+    @class{gtk:widget} class gets or sets the layout manager delegate instance
+    that provides an implementation for measuring and allocating the children
+    of the widget.
   @end{short}
-  The @fun{gtk:widget-layout-manager} function retrieves the layout manager used
-  by the widget. The @setf{gtk:widget-layout-manager} function sets the layout
-  manager delegate instance that provides an implementation for measuring and
-  allocating the children of the widget.
   @begin[Examples]{dictionary}
     Get the layout manager for a button and a grid:
     @begin{pre}
@@ -1590,17 +1590,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-name)
       "Accessor"
       (documentation 'widget-name 'function)
- "@version{2025-02-13}
+ "@version{2025-08-24}
   @syntax{(gtk:widget-name object) => name}
   @syntax{(setf (gtk:widget-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string for the name of the widget}
   @begin{short}
-    Accessor of the @slot[gtk:widget]{name} slot of the @class{gtk:widget}
-    class.
+    The accessor for the @slot[gtk:widget]{name} slot of the @class{gtk:widget}
+    class gets or sets the name of the widget.
   @end{short}
-  The @fun{gtk:widget-name} function retrieves the name of the widget. The
-  @setf{gtk:widget-name} function sets the name.
 
   Widgets can be named, which allows you to refer to them from a CSS file. You
   can apply a style to widgets with a particular name in the CSS file. Note
@@ -2438,7 +2436,7 @@ lambda (widget)    :run-last
 
 (defun widget-add-tick-callback (widget func)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-08-22}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[func]{a @sym{gtk:tick-callback} callback function to call for
     updating animations}
@@ -2467,9 +2465,9 @@ lambda (widget)    :run-last
   trying to display isolated frames at particular times.
 
   This is a more convenient alternative to connecting directly to the
-  @sig[gtk:widget]{update} signal of the @class{gdk:frame-clock} object, since
-  you do not have to worry about when the @class{gdk:frame-clock} object is
-  assigned to a widget.
+  @sig[gdk:frame-clock]{update} signal of the @class{gdk:frame-clock} object,
+  since you do not have to worry about when the @class{gdk:frame-clock} object
+  is assigned to a widget.
   @see-class{gtk:widget}
   @see-class{gdk:frame-clock}
   @see-function{gtk:widget-remove-tick-callback}
@@ -2733,7 +2731,7 @@ lambda (widget)    :run-last
 
 (defun widget-class-layout-manager-type (gtype)
  #+liber-documentation
- "@version{2025-02-13}
+ "@version{2025-08-22}
   @syntax{(gtk:widget-class-layout-manager-type gtype) => value}
   @syntax{(setf (gtk:widget-class-layout-manager-type gtype) value)}
   @argument[gtype]{a @class{g:type-t} type ID for the widget class}
@@ -2741,13 +2739,9 @@ lambda (widget)    :run-last
     implements the @class{gtk:layout-manager} object for the widget class of
     @arg{gtype} type}
   @begin{short}
-    The @fun{gtk:widget-class-layout-manager-type} function retrieves the type
-    of the @class{gtk:layout-manager} object used by the widget of the given
-    @arg{gtype} type.
+    Gets or sets the type to be used for creating layout managers for widgets
+    of @arg{gtype} type.
   @end{short}
-  The @fun{gtk:widget-class-layout-manager-type} function sets the type to be
-  used for creating layout managers for widgets of @arg{gtype} type.
-
   This function should only be called from class init functions of widgets.
   @begin[Examples]{dictionary}
     @begin{pre}
@@ -4074,7 +4068,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_width" widget-width) :int
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-08-23}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The integer for the width of @arg{widget}.}
   @begin{short}
@@ -4083,10 +4077,12 @@ lambda (widget)    :run-last
   @end{short}
   This is the size you should be using in the @code{GtkWidgetClass.snapshot()}
   virtual function. For pointer events, see the @fun{gtk:widget-contains}
-  function.
+  function. See the @fun{gtk:snapshot-append-color} documentation for an
+  example.
   @see-class{gtk:widget}
   @see-function{gtk:widget-contains}
-  @see-function{gtk:widget-height}"
+  @see-function{gtk:widget-height}
+  @see-function{gtk:snapshot-append-color}"
   (widget (g:object widget)))
 
 (export 'widget-width)
@@ -4097,7 +4093,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_height" widget-height) :int
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-08-23}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The integer for the height of @arg{widget}.}
   @begin{short}
@@ -4106,10 +4102,12 @@ lambda (widget)    :run-last
   @end{short}
   This is the size you should be using in the @code{GtkWidgetClass.snapshot()}
   virtual function. For pointer events, see the @fun{gtk:widget-contains}
-  function.
+  function. See the @fun{gtk:snapshot-append-color} documentation for an
+  example.
   @see-class{gtk:widget}
   @see-function{gtk:widget-contains}
-  @see-function{gtk:widget-width}"
+  @see-function{gtk:widget-width}
+  @see-function{gtk:snapshot-append-color}"
   (widget (g:object widget)))
 
 (export 'widget-height)
@@ -4816,7 +4814,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_should_layout" widget-should-layout) :boolean
  #+liber-documentation
- "@version{#2025-02-15}
+ "@version{2025-08-22}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     @em{True} if @arg{widget} should be included in measureing and allocating.
@@ -4950,36 +4948,51 @@ lambda (widget)    :run-last
 
 (defun (setf widget-class-css-name) (name gtype)
   (let ((class (g:type-class-ref gtype)))
-    (unwind-protect
-      (cffi:foreign-funcall "gtk_widget_class_set_css_name"
-                            :pointer class
-                            :string name
-                            :void)
-      (g:type-class-unref class))
-    name))
+    (when class
+      (unwind-protect
+        (cffi:foreign-funcall "gtk_widget_class_set_css_name"
+                              :pointer class
+                              :string name
+                              :void)
+        (g:type-class-unref class))
+      name)))
 
 (cffi:defcfun ("gtk_widget_class_get_css_name" %widget-class-css-name) :string
   (class :pointer))
 
 (defun widget-class-css-name (gtype)
   #+liber-documentation
- "@version{2025-02-15}
+ "@version{2025-08-23}
   @syntax{(gtk:widget-class-css-name gtype) => name}
   @syntax{(setf (gtk:widget-class-css-name gtype) name)}
   @argument[gtype]{a @class{g:type-t} type ID}
   @argument[name]{a string for the CSS name}
   @begin{short}
-    The @fun{gtk:widget-class-css-name} function gets the name used by this
-   widget class for matching in CSS code.
+    Gets or sets the name to be used for CSS matching of widgets.
   @end{short}
-  The @setf{gtk:widget-class-css-name} function sets the name. If this function
-  is not called for a given class, the name of the parent class is used.
+  Returns @code{nil} if there is no class for @arg{gtype}. If this function is
+  not called for a given class, the name set on the parent class is used. By
+  default the @class{gtk:widget} class uses the name @code{\"widget\"}.
+  @begin[Examples]{dictionary}
+    Get the CSS name for the @code{\"GtkButton\"} class and change it.
+    @begin{pre}
+(gtk:widget-class-css-name \"GtkButton\") => \"button\"
+(setf (gtk:widget-class-css-name \"GtkButton\") \"new\") => \"new\"
+(gtk:widget-class-css-name \"GtkButton\") => \"new\"
+    @end{pre}
+    There is no class of @code{\"unknown\"} type:
+    @begin{pre}
+(gtk:widget-class-css-name \"unknown\") => NIL
+(setf (gtk:widget-class-css-name \"unknown\") \"name\") => NIL
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:widget}
   @see-class{g:type-t}"
   (let ((class (g:type-class-ref gtype)))
-    (unwind-protect
-      (%widget-class-css-name class)
-      (g:type-class-unref class))))
+    (when class
+      (unwind-protect
+        (%widget-class-css-name class)
+        (g:type-class-unref class)))))
 
 (export 'widget-class-css-name)
 
@@ -5125,7 +5138,7 @@ lambda (widget)    :run-last
 
 (defun widget-preferred-size (widget)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2025-08-22}
   @syntax{(gtk:widget-preferred-size widget) => minimum-size, natural-size}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[minimum-size]{a @class{gtk:requisition} instance for the minimum

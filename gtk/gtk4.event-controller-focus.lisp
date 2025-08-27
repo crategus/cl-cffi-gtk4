@@ -153,16 +153,15 @@ lambda (controller)    :run-last
 (setf (liber:alias-for-function 'event-controller-focus-contains-focus)
       "Accessor"
       (documentation 'event-controller-focus-contains-focus 'function)
- "@version{2024-07-26}
+ "@version{2025-08-17}
   @syntax{(gtk:event-controller-focus-contains-focus object) => contains}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[contains]{a boolean whether focus is within @arg{object}}
   @begin{short}
-    Accessor of the @slot[gtk:event-controller-focus]{contains-focus} slot of
-    the @class{gtk:event-controller-focus} class.
+    The accessor for the @slot[gtk:event-controller-focus]{contains-focus} slot
+    of the @class{gtk:event-controller-focus} class returns @em{true} if focus
+    is within the controllers widget or one of its children.
   @end{short}
-  The @fun{gtk:event-controller-focus-contains-focus} function returns @em{true}
-  if focus is within the controllers widget or one of its children.
   @see-class{gtk:event-controller-focus}")
 
 ;;; --- gtk:event-controller-focus-is-focus ------------------------------------
@@ -181,17 +180,16 @@ lambda (controller)    :run-last
 (setf (liber:alias-for-function 'event-controller-focus-is-focus)
       "Accessor"
       (documentation 'event-controller-focus-is-focus 'function)
- "@version{2024-07-26}
+ "@version{2025-08-17}
   @syntax{(gtk:event-controller-focus-is-focus object) => is-focus}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[is-focus]{a boolean whether focus is within the controllers widget,
     but not one of its children}
   @begin{short}
-    Accessor of the @slot[gtk:event-controller-focus]{is-focus} slot of the
-    @class{gtk:event-controller-focus} class.
+    The accessor for the @slot[gtk:event-controller-focus]{is-focus} slot of the
+    @class{gtk:event-controller-focus} class returns @em{true} if focus is
+    within the controllers widget, but not one of its children.
   @end{short}
-  The @fun{gtk:event-controller-focus-is-focus} function returns @em{true} if
-  focus is within the controllers widget, but not one of its children.
   @see-class{gtk:event-controller-focus}")
 
 ;;; ----------------------------------------------------------------------------

@@ -269,22 +269,23 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'bookmark-list) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'bookmark-list-n-items)
       "Accessor"
       (documentation 'bookmark-list-n-items 'function)
- "@version{2025-08-15}
+ "@version{2025-08-17}
   @syntax{(gtk:bookmark-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
     The accessor for the @slot[gtk:bookmark-list]{n-items} slot of the
-    @class{gtk:bookmark-list} class gets the number of items.
+    @class{gtk:bookmark-list} class returns the number of items contained in
+    the model.
   @end{short}
   @see-class{gtk:bookmark-list}
   @see-function{g:list-model-n-items}")

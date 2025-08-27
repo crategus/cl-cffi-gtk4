@@ -358,7 +358,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'directory-list) t)
  "The @code{n-items} property of type @code{:uint} (Read) @br{}
-  The number of items. Since 4.8 @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)

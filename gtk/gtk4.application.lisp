@@ -464,14 +464,13 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-screensaver-active)
       "Accessor"
       (documentation 'application-screensaver-active 'function)
- "@version{2025-07-29}
+ "@version{2025-08-21}
   @syntax{(gtk:application-screensaver-active object) => active}
   @argument[object]{a @class{gtk:application} instance}
   @argument[active]{a boolean whether the screensaver is active}
   @begin{short}
     The accessor for the @slot[gtk:application]{screensaver-active} slot of the
-    @class{gtk:application} class gets or sets whether the screensaver is
-    active.
+    @class{gtk:application} class returns whether the screensaver is active.
   @end{short}
 
   The @slot[gtk:application]{screensaver-active} property is @em{true} if GTK
@@ -785,7 +784,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_accels_for_action"
                application-accels-for-action) g:strv-t
  #+liber-documentation
- "@version{2025-06-21}
+ "@version{2025-08-21}
   @syntax{(gtk:application-accels-for-action application name) => accels}
   @syntax{(setf (gtk:application-accels-for-action application name) accels)}
   @argument[application]{a @class{gtk:application} instance}
@@ -794,12 +793,8 @@ lambda (application window)    :run-first
   @argument[accels]{a string or a list of strings for accelerators in the format
     understood by the @fun{gtk:accelerator-parse} function}
   @begin{short}
-    The @fun{gtk:application-accels-for-action} function gets the keyboard
-    accelerators that will trigger the given action.
+    Gets or sets the keyboard accelerators that will trigger the given action.
   @end{short}
-  The @setf{gtk:application-accels-for-action} function sets zero or more
-  keyboard accelerators.
-
   The first item in the list of accelerators will be the primary accelerator,
   which may be displayed in the UI. To remove all accelerators for an action,
   use an empty list.

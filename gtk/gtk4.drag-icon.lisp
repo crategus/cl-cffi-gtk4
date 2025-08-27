@@ -118,18 +118,15 @@
 (setf (liber:alias-for-function 'drag-icon-child)
       "Accessor"
       (documentation 'drag-icon-child 'function)
- "@version{#2023-07-31}
+ "@version{#2025-08-17}
   @syntax{(gtk:drag-icon-child object) => child}
   @syntax{(setf (gtk:drag-icon-child object) child)}
   @argument[object]{a @class{gtk:drag-icon} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:drag-icon]{child} slot of the
-    @class{gtk:drag-icon} class.
+    The accessor for the @slot[gtk:drag-icon]{child} slot of the
+    @class{gtk:drag-icon} class gets or sets the widget to display as drag icon.
   @end{short}
-  The @fun{gtk:drag-icon-child} function gets the widget currently used as drag
-  icon. The @setf{gtk:drag-icon-child} function sets the widget to display as
-  the drag icon.
   @see-class{gtk:drag-icon}
   @see-class{gtk:widget}")
 

@@ -153,18 +153,16 @@
 (setf (liber:alias-for-function 'lock-button-permission)
       "Accessor"
       (documentation 'lock-button-permission 'function)
- "@version{#2025-03-13}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-permission object) => permission}
   @syntax{(setf (gtk:lock-button-permission object) permission)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[permission]{a @class{g:permission} object, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{permission} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{permission} slot of the
+    @class{gtk:lock-button} class gets or sets the permission controlling the
+    lock button.
   @end{short}
-  The @fun{gtk:lock-button-permission} function obtains the permission that
-  controls the lock button. The @setf{gtk:lock-button-permission} function sets
-  the permission.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -186,16 +184,16 @@
 (setf (liber:alias-for-function 'lock-button-text-lock)
       "Accessor"
       (documentation 'lock-button-text-lock 'function)
- "@version{#2025-07-22}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-text-lock object) => text}
   @syntax{(setf (gtk:lock-button-text-lock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[text]{a string for the text to display}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{text-lock} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{text-lock} slot of the
+    @class{gtk:lock-button} class gets or sets the text to display when
+    prompting the user to lock.
   @end{short}
-  The text to display when prompting the user to lock.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -216,16 +214,16 @@
 (setf (liber:alias-for-function 'lock-button-text-unlock)
       "Accessor"
       (documentation 'lock-button-text-unlock 'function)
- "@version{#2025-07-22}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-text-unlock object) => text}
   @syntax{(setf (gtk:lock-button-text-unlock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[text]{a string for the text to display}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{text-unlock} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{text-unlock} slot of the
+    @class{gtk:lock-button} class gets or sets the text to display when
+    prompting the user to unlock.
   @end{short}
-  The text to display when prompting the user to unlock.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -247,16 +245,16 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-lock)
       "Accessor"
       (documentation 'lock-button-tooltip-lock 'function)
- "@version{#2025-07-22}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-tooltip-lock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-lock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{tooltip-lock} slot of the
+    @class{gtk:lock-button} class gets or sets the tooltip to display when
+    prompting the user to lock.
   @end{short}
-  The tooltip to display when prompting the user to lock.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -280,16 +278,16 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-not-authorized)
       "Accessor"
       (documentation 'lock-button-tooltip-not-authorized 'function)
- "@version{#2025-07-22}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-tooltip-not-authorized object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-not-authorized object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{tooltip-lock} slot of the
+    @class{gtk:lock-button} class gets or sets the tooltip to display when
+    prompting the user cannot obtain authorization.
   @end{short}
-  The tooltip to display when prompting the user cannot obtain authorization.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -310,16 +308,16 @@
 (setf (liber:alias-for-function 'lock-button-tooltip-unlock)
       "Accessor"
       (documentation 'lock-button-tooltip-unlock 'function)
- "@version{#2025-07-22}
+ "@version{2025-08-20}
   @syntax{(gtk:lock-button-tooltip-unlock object) => tooltip}
   @syntax{(setf (gtk:lock-button-tooltip-unlock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string for the tooltip to display}
   @begin{short}
-    Accessor of the @slot[gtk:lock-button]{tooltip-lock} slot of the
-    @class{gtk:lock-button} class.
+    The accessor for the @slot[gtk:lock-button]{tooltip-lock} slot of the
+    @class{gtk:lock-button} class gets or sets the tooltip to display when
+    prompting the user to unlock.
   @end{short}
-  The tooltip to display when prompting the user to unlock.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -333,7 +331,7 @@
 
 (defun lock-button-new (permission)
  #+liber-documentation
- "@version{#2025-03-13}
+ "@version{2025-03-13}
   @argument[permission]{a @class{g:permission} object}
   @return{The new @class{gtk:lock-button} widget.}
   @short{Creates a new lock button which reflects the permission.}

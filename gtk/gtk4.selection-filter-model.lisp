@@ -109,16 +109,16 @@
 (setf (liber:alias-for-function 'selection-filter-model-item-type)
       "Accessor"
       (documentation 'selection-filter-model-item-type 'function)
- "@version{2024-12-22}
+ "@version{2025-08-17}
   @syntax{(gtk:selection-filter-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:selection-filter-model]{item-type} slot of the
-    @class{gtk:selection-filter-model} class.
+    The accessor for the @slot[gtk:selection-filter-model]{item-type} slot of
+    the @class{gtk:selection-filter-model} class returns the type of items
+    contained in the list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -166,22 +166,23 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items"
                                                'selection-filter-model) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'selection-filter-model-n-items)
       "Accessor"
       (documentation 'selection-filter-model-n-items 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:selection-filter-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:selection-filter-model]{n-items} slot of the
-    @class{gtk:selection-filter-model} class.
+    The accessor for the @slot[gtk:selection-filter-model]{n-items} slot of the
+    @class{gtk:selection-filter-model} class returns the number of items
+    contained in the model.
   @end{short}
   @see-class{gtk:selection-filter-model}
   @see-function{g:list-model-n-items}")

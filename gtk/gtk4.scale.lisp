@@ -221,20 +221,17 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-digits)
       "Accessor"
       (documentation 'scale-digits 'function)
- "@version{2025-07-17}
+ "@version{2025-08-20}
   @syntax{(gtk:scale-digits object) => digits}
   @syntax{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[digits]{an integer for the number of decimal places to display}
   @begin{short}
-    Accessor of the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
-    class.
+    The accessor for the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
+    class gets or sets the number of decimal places that are displayed.
   @end{short}
-  The @fun{gtk:scale-digits} function returns the number of decimal places that
-  are displayed. The @setf{gtk:scale-digits} function sets the number of
-  decimal places. Also causes the value of the adjustment to be rounded off to
-  this number of @arg{digits}, so the retrieved value matches the value the
-  user saw.
+  Also causes the value of the adjustment to be rounded off to this number of
+  @arg{digits}, so the retrieved value matches the value the user saw.
   @see-class{gtk:scale}")
 
 ;;; --- gtk:scale-draw-value ---------------------------------------------------
@@ -249,19 +246,16 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-draw-value)
       "Accessor"
       (documentation 'scale-draw-value 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:scale-draw-value object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[setting]{@em{true} to draw the value}
   @begin{short}
-    Accessor of the @slot[gtk:scale]{draw-value} slot of the @class{gtk:scale}
-    class.
+    The accessor for the @slot[gtk:scale]{draw-value} slot of the
+    @class{gtk:scale} class gets or sets whether the current value is displayed
+    as a string next to the slider.
   @end{short}
-  The @fun{gtk:scale-draw-value} function returns whether the current value is
-  displayed as a string next to the slider. The
-  @setf{gtk:scale-draw-value} function specifies whether the current value is
-  displayed as a string next to the slider.
   @see-class{gtk:scale}")
 
 ;;; --- gtk:scale-has-origin ---------------------------------------------------
@@ -276,17 +270,15 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-has-origin)
       "Accessor"
       (documentation 'scale-has-origin 'function)
- "@version{2024-12-05}
+ "@version{2025-08-20}
   @syntax{(gtk:scale-has-origin object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[setting]{@em{true} if the scale has an origin}
   @begin{short}
-    Accessor of the @slot[gtk:scale]{has-origin} slot of the @class{gtk:scale}
-    class.
+    The accessor for the @slot[gtk:scale]{has-origin} slot of the
+    @class{gtk:scale} class gets or sets whether the scale has an origin.
   @end{short}
-  The @fun{gtk:scale-has-origin} function returns whether the scale has an
-  origin.
 
   If the @slot[gtk:scale]{has-origin} property is set to @em{true}, the default,
   the scale will highlight the part of the scale between the origin, bottom or
@@ -306,18 +298,17 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-value-pos)
       "Accessor"
       (documentation 'scale-value-pos 'function)
- "@version{2025-07-17}
+ "@version{2025-08-20}
   @syntax{(gtk:scale-value-pos object) => pos}
   @syntax{(setf (gtk:scale-digits object) pos)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[pos]{a @sym{gtk:position-type} value for the position in which the
     current value is displayed}
   @begin{short}
-    Accessor of the @slot[gtk:scale]{value-pos} slot of the @class{gtk:scale}
-    class.
+    The accessor for the @slot[gtk:scale]{value-pos} slot of the
+    @class{gtk:scale} class gets or sets the position in which the current value
+    is displayed.
   @end{short}
-  The @fun{gtk:scale-value-pos} function gets the position in which the current
-  value is displayed. The @setf{gtk:scale-value-pos} function sets the position.
   @see-class{gtk:scale}
   @see-symbol{gtk:position-type}")
 

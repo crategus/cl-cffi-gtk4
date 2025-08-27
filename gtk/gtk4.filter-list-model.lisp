@@ -140,19 +140,17 @@
 (setf (liber:alias-for-function 'filter-list-model-filter)
       "Accessor"
       (documentation 'filter-list-model-filter 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:filter-list-model-filter object) => filter}
   @syntax{(setf (gtk:filter-list-model-filter object) filter)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[filter]{a @class{gtk:filter} object to use or @code{nil} to not
     filter items}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{filter} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{filter} slot of the
+    @class{gtk:filter-list-model} class gets or sets the filter used to filter
+    items.
   @end{short}
-  The @fun{gtk:filter-list-model-filter} function gets the filter currently set.
-  The @setf{gtk:filter-list-model-model} function sets the filter used to filter
-  items.
   @see-class{gtk:filter-list-model}
   @see-class{gtk:filter}")
 
@@ -169,18 +167,16 @@
 (setf (liber:alias-for-function 'filter-list-model-incremental)
       "Accessor"
       (documentation 'filter-list-model-incremental 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:filter-list-model-incremental object) => incremental}
   @syntax{(setf (gtk:filter-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[incremental]{@em{true} if incremental filtering is enabled}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{incremental} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{incremental} slot of the
+    @class{gtk:filter-list-model} class gets or sets Whether the model should
+    filter items incrementally.
   @end{short}
-  The @fun{gtk:filter-list-model-incremental} function returns whether
-  incremental filtering was enabled. The
-  @setf{gtk:filter-list-model-incremental} function sets incremental filtering.
 
   When incremental filtering is enabled, the @class{gtk:filter-list-model}
   object will not run filters immediately, but will instead queue an idle
@@ -209,16 +205,16 @@
 (setf (liber:alias-for-function 'filter-list-model-item-type)
       "Accessor"
       (documentation 'filter-list-model-item-type 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:filter-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{item-type} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{item-type} slot of the
+    @class{gtk:filter-list-model} class gets the type of items contained in the
+    list model.
   @end{short}
-  The type of items contained in the list model. Items must be subclasses of
-  the @class{g:object} class.
+  Items must be subclasses of the @class{g:object} class.
 
   Since 4.8
   @begin[Notes]{dictionary}
@@ -240,18 +236,16 @@
 (setf (liber:alias-for-function 'filter-list-model-model)
       "Accessor"
       (documentation 'filter-list-model-model 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:filter-list-model-model object) => model}
   @syntax{(setf (gtk:filter-list-model-model object) model)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets filtered}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{model} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{model} slot of the
+    @class{gtk:filter-list-model} class gets or sets the model to be filtered.
   @end{short}
-  The @fun{gtk:filter-list-model-model} function gets the model currently
-  filtered or @code{nil} if none. The @setf{gtk:filter-list-model-model}
-  function sets the model to be filtered.
+  Returns @code{nil} if none.
 
   Note that GTK makes no effort to ensure that @arg{model} conforms to the item
   type of @arg{object}. It assumes that the caller knows what they are doing and
@@ -263,22 +257,23 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'filter-list-model) t)
- "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. Since 4.8 @br{}
+ "The @code{n-items} property of type @code{:uint} (Read) @br{}
+  The number of items contained in the model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'filter-list-model-n-items)
       "Accessor"
       (documentation 'filter-list-model-n-items 'function)
- "@version{2025-03-18}
+ "@version{2025-08-17}
   @syntax{(gtk:filter-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{n-items} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{n-items} slot of the
+    @class{gtk:filter-list-model} class gets the number of items contained in
+    the model.
   @end{short}
   @see-class{gtk:filter-list-model}
   @see-function{g:list-model-n-items}")
@@ -295,17 +290,16 @@
 (setf (liber:alias-for-function 'filter-list-model-pending)
       "Accessor"
       (documentation 'filter-list-model-pending 'function)
- "@version{2025-03-18}
+ "@version{2025-09-17}
   @syntax{(gtk:filter-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[pending]{an unsigned integer for the number of items not yet
     filtered.}
   @begin{short}
-    Accessor of the @slot[gtk:filter-list-model]{pending} slot of the
-    @class{gtk:filter-list-model} class.
+    The accessor for the @slot[gtk:filter-list-model]{pending} slot of the
+    @class{gtk:filter-list-model} class returns the number of items that have
+    not been filtered yet.
   @end{short}
-  The @fun{gtk:filter-list-model-pending} function returns the number of items
-  that have not been filtered yet.
 
   You can use this value to check if @arg{object} is busy filtering by comparing
   the return value to 0 or you can compute the percentage of the filter

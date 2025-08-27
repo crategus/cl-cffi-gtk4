@@ -221,18 +221,16 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-enable-rubberband)
       "Accessor"
       (documentation 'grid-view-enable-rubberband 'function)
- "@version{2025-04-11}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:grid-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[setting]{@em{true} if rubberband selection is enabled}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{enable-rubberband} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{enable-rubberband} slot of the
+    @class{gtk:grid-view} class gets or sets whether selections can be selected
+    by dragging with the mouse.
   @end{short}
-  The @fun{gtk:grid-view-enable-rubberband} function returns whether selections
-  can be selected by dragging with the mouse. The
-  @setf{gtk:grid-view-enable-rubberband} function sets the property.
   @see-class{gtk:grid-view}")
 
 ;;; --- gtk:grid-view-factory --------------------------------------------------
@@ -247,19 +245,17 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-factory)
       "Accessor"
       (documentation 'grid-view-factory 'function)
- "@version{2025-04-11}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-factory object) => factory}
   @syntax{(setf (gtk:grid-view-factory object) factory)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use, or
     @code{nil} for none}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{factory} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{factory} slot of the
+    @class{gtk:grid-view} class gets or sets the factory that is used to
+    populate list items.
   @end{short}
-  The @fun{gtk:grid-view-factory} function gets the factory that is currently
-  used to populate list items. The @setf{gtk:grid-view-factory} function sets
-  the factory.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
@@ -277,20 +273,19 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-max-columns)
       "Accessor"
       (documentation 'grid-view-max-columns 'function)
- "@version{2025-04-11}
+ "@version{2025-08-2ß}
   @syntax{(gtk:grid-view-max-colums object) => max}
   @syntax{(setf (gtk:grid-view-max-columns object) max)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[max]{an unsigned integer for the maximum of columns}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{max-columns} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{max-columns} slot of the
+    @class{gtk:grid-view} class gets or sets the maximum number of columns that
+    the grid will use.
   @end{short}
-  The @fun{gtk:grid-view-max-columns} function gets the maximum number of
-  columns that the grid will use. The @setf{gtk:grid-view-max-columns} function
-  sets the maximum number. This number must be at least 1. If the
-  @slot[gtk:grid-view]{max-columns} property is smaller than the minimum set via
-  the @fun{gtk:grid-view-min-columns} function, that value is used instead.
+  This number must be at least 1. If the @slot[gtk:grid-view]{max-columns}
+  property is smaller than the minimum set via the
+  @fun{gtk:grid-view-min-columns} function, that value is used instead.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-min-columns}")
 
@@ -307,20 +302,19 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-min-columns)
       "Accessor"
       (documentation 'grid-view-min-columns 'function)
- "@version{2025-04-11}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-max-colums object) => min}
   @syntax{(setf (gtk:grid-view-min-columns object) min)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[min]{an unsigned integer for the minimum of columns}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{min-columns} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{min-columns} slot of the
+    @class{gtk:grid-view} class gets or sets the minimum number of columns that
+    the grid will use.
   @end{short}
-  The @fun{gtk:grid-view-min-columns} function gets the minimum number of
-  columns that the grid will use. The @setf{gtk:grid-view-min-columns} function
-  sets the minimum number. This number must be at least 1. If the
-  @slot[gtk:grid-view]{min-columns} property is smaller than the minimum set via
-  the @fun{gtk:grid-view-max-columns} function, that value is ignored.
+  This number must be at least 1. If the @slot[gtk:grid-view]{min-columns}
+  property is smaller than the minimum set via the
+  @fun{gtk:grid-view-max-columns} function, that value is ignored.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-max-columns}")
 
@@ -336,18 +330,17 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-model)
       "Accessor"
       (documentation 'grid-view-model 'function)
- "@version{2025-04-11}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-model object) => model}
   @syntax{(setf (gtk:grid-view-model object) model)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[model]{a @class{gtk:selection-model} object to use}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{model} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{model} slot of the
+    @class{gtk:grid-view} class gets or sets the model that is used to read the
+    items displayed.
   @end{short}
-  The @fun{gtk:grid-view-model} function gets the model that is currently used
-  to read the items displayed. The @setf{gtk:grid-view-model} function sets the
-  model to use. This must be a @class{gtk:selection-model} object.
+  This must be a @class{gtk:selection-model} object.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
@@ -365,18 +358,16 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-single-click-activate)
       "Accessor"
       (documentation 'grid-view-single-click-activate 'function)
- "@version{2025-04-11}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:grid-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[setting]{@em{true} if rows are activated on single click}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{single-click-activate} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{single-click-activate} slot of the
+    @class{gtk:grid-view} class gets or sets whether rows will be activated on
+    single click and selected on hover.
   @end{short}
-  The @fun{gtk:grid-view-single-click-activate} function returns whether rows
-  will be activated on single click and selected on hover. The
-  @setf{gtk:grid-view-single-click-activate} function sets the property.
   @see-class{gtk:grid-view}")
 
 ;;; --- gtk:grid-view-tab-behavior ---------------------------------------------
@@ -392,18 +383,16 @@ lambda (gridview position)    :run-last
 (setf (liber:alias-for-function 'grid-view-tab-behavior)
       "Accessor"
       (documentation 'grid-view-tab-behavior 'function)
- "@version{2025-07-26}
+ "@version{2025-08-20}
   @syntax{(gtk:grid-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:grid-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[setting]{a @sym{gtk:list-tab-behavior} value}
   @begin{short}
-    Accessor of the @slot[gtk:grid-view]{tab-behavior} slot of the
-    @class{gtk:grid-view} class.
+    The accessor for the @slot[gtk:grid-view]{tab-behavior} slot of the
+    @class{gtk:grid-view} class gets or sets the behavior of the @kbd{Tab} and
+    @kbd{Shift+Tab} keys.
   @end{short}
-  The @fun{gtk:grid-view-tab-behavior} function gets the behavior of the
-  @kbd{Tab} and @kbd{Shift+Tab} keys. The @setf{gtk:grid-view-tab-behavior}
-  function sets the tab behavior.
   @see-class{gtk:grid-view}
   @see-symbol{gtk:list-tab-behavior}")
 
