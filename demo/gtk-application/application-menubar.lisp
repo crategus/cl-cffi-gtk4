@@ -9,7 +9,7 @@
 ;;;; contains a vertical GTK:BOX widget as a child widget. This box contains a
 ;;;; GTK:TEXT-VIEW widget and a GTK:LABEL widget that represent a status bar at
 ;;;; the bottom of the application window. The status bar displays information
-;;;; about the activated menu items.
+;;;; about activated menu items.
 ;;;;
 ;;;; Some action entries for menu items are defined and installed for the
 ;;;; application window with the g:action-map-add-action-entries function.
