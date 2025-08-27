@@ -9,7 +9,7 @@
            #:application-simple
            #:application-resources
            #:application-register
-           #:sunny
+           #:application-sunny
            #:bloatpad
   ))
 

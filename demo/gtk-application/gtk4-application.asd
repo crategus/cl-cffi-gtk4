@@ -14,7 +14,7 @@
                (:file "application-simple")
                (:file "application-resources")
                (:file "application-register")
-               (:file "sunny")
+               (:file "application-sunny")
                (:file "bloatpad")
               ))
 

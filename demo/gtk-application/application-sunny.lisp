@@ -1,32 +1,33 @@
 ;;;; Application Sunny
 ;;;;
-;;;; 2024-6-2
+;;;; This example allows several filenames to be passed in on the command line.
+;;;; The files are then opened and displayed in their own text view window.
+;;;;
+;;;; The application is created using the :handles-open value for the FLAGS
+;;;; flags for the FLAGS property of the GTK:APPLICATION object. If no command
+;;;; line options are present, the ACTIVATE signal will be emitted after the
+;;;; STARTUP signal, creating a new empty window.
+;;;;
+;;;; However, if one or more file names are passed on the command line, the OPEN
+;;;; signal handler will be executed. A window is created for each file, and the
+;;;; file is loaded into the text buffer of a text view to display.
+;;;;
+;;;; This application defines three actions: "New", "About" and "Quit". These
+;;;; actions are added to the action map of the application using the
+;;;; g:action-map-add-action-entries function. The corresponding keyboard
+;;;; shortcuts "Ctrl+N", "F1" and "Ctrl+Q" are installed using the
+;;;; gtk:application-accels-for-action function.
+;;;;
+;;;; This example introduces subclassing using the
+;;;; gobject:define-gobject-subclass macro to define the SUNNY subclass of the
+;;;; GtkApplication class. The SUNNY subclass inherits all of the properties and
+;;;; signals of its parent class. In this example, no new properties or
+;;;; functionality are added to the subclass. Therefore, subclassing could have
+;;;; been omitted.
+;;;;
+;;;; Last updated: 2025-08-27
 
 (in-package :gtk4-application)
-
-(defparameter *sunny-menus*
-"<interface>
-  <menu id='menubar'>
-    <submenu>
-      <attribute name='label' translatable='yes'>Sunny</attribute>
-      <section>
-        <item>
-          <attribute name='label' translatable='yes'>_New Window</attribute>
-          <attribute name='action'>app.new</attribute>
-        </item>
-        <item>
-          <attribute name='label' translatable='yes'>_About Sunny</attribute>
-          <attribute name='action'>app.about</attribute>
-        </item>
-        <item>
-          <attribute name='label' translatable='yes'>_Quit</attribute>
-          <attribute name='action'>app.quit</attribute>
-          <attribute name='accel'>&lt;Primary&gt;q</attribute>
-        </item>
-      </section>
-    </submenu>
-  </menu>
-</interface>")
 
 (gobject:define-gobject-subclass "Sunny" sunny
   (:superclass gtk:application
@@ -48,7 +49,7 @@
                                 :title "Sunny"
                                 :child overlay
                                 :show-menubar t
-                                :icon-name "sunny"
+                                :icon-name "gnome-weather"
                                 :default-width 480
                                 :default-height 320)))
     ;; Load the file into the buffer
@@ -69,7 +70,7 @@
                            :modal t
                            :program-name "Sunny"
                            :title "About Sunny"
-                           :logo-icon-name "sunny"
+                           :logo-icon-name "gnome-weather"
                            :comments "A cheap Bloatpad clone.")))
 
 (defun sunny-action-quit (application action parameter)
@@ -79,7 +80,29 @@
       (gtk:window-destroy window))))
 
 (defun sunny (&rest argv)
-  (let ((argv (cons "sunny" (or argv (uiop:command-line-arguments))))
+  (let ((menus "<interface>
+                  <menu id='menubar'>
+                    <submenu>
+                      <attribute name='label'>Sunny</attribute>
+                      <section>
+                        <item>
+                          <attribute name='label'>_New Window</attribute>
+                          <attribute name='action'>app.new</attribute>
+                        </item>
+                        <item>
+                          <attribute name='label'>_About Sunny</attribute>
+                          <attribute name='action'>app.about</attribute>
+                        </item>
+                        <item>
+                          <attribute name='label'>_Quit</attribute>
+                          <attribute name='action'>app.quit</attribute>
+                          <attribute name='accel'>&lt;Primary&gt;q</attribute>
+                        </item>
+                      </section>
+                    </submenu>
+                  </menu>
+                </interface>")
+        (argv (cons "sunny" (or argv (uiop:command-line-arguments))))
         ;; Create the application
         (app (make-instance 'sunny
                             :application-id "com.crategus.sunny"
@@ -97,7 +120,7 @@
                             ,(lambda (action param)
                                (sunny-action-new application action param)))))
                 (builder (make-instance 'gtk:builder)))
-          ;; Set the application name
+          ;; Set application name
           (unless (g:application-name)
             (setf (g:application-name) "Sunny"))
           ;; Add the actions
@@ -105,8 +128,8 @@
           ;; The application shows the menu
           (setf (gtk:settings-gtk-shell-shows-app-menu (gtk:settings-default))
                 nil)
-          ;; Read the menus from a string
-          (gtk:builder-add-from-string builder *sunny-menus*)
+          ;; Read menus from a string
+          (gtk:builder-add-from-string builder menus)
           ;; Set the application menu
           (setf (gtk:application-menubar application)
                 (gtk:builder-object builder "menubar"))
