@@ -69,8 +69,36 @@
 ;;;     tooltip-not-authorized
 ;;;     tooltip-unlock
 
+#+crategus
+(test gtk-lock-button-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (button)
+      (is (typep (setf button (make-instance 'gtk:lock-button)) 'gtk:lock-button))
+      (is-false (gtk:lock-button-permission button))
+      (is (string= "Sperren" (gtk:lock-button-text-lock button)))
+      (is (string= "Entsperren" (gtk:lock-button-text-unlock button)))
+      (is (string= "Dialog ist entsperrt.
+Klicken Sie, um Ände-
+rungen zu verhindern" (gtk:lock-button-tooltip-lock button)))
+      (is (string= "Die Systemrichtlinien verhindern Änderungen.
+Bitte kontaktieren Sie Ihren Systemadministrator"
+                   (gtk:lock-button-tooltip-not-authorized button)))
+      (is (string= "Dialog ist gesperrt.
+Klicken Sie für
+Änderungen" (gtk:lock-button-tooltip-unlock button))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_lock_button_new
 
-;;; 2024-9-20
+(test gtk-lock-button-new
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (button permission)
+      (is (typep (setf permission (g:simple-permission-new t))
+                 'g:simple-permission))
+      (is (typep (setf button (gtk:lock-button-new permission))
+                 'gtk:lock-button))
+      ;; Remove references
+      (is-false (setf (gtk:lock-button-permission button) nil)))))
+
+;;; 2025-08-20
