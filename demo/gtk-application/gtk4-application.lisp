@@ -11,7 +11,6 @@
            #:application-register
            #:sunny
            #:bloatpad
-           #:my-application
   ))
 
 (in-package :gtk4-application)

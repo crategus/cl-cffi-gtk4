@@ -56,6 +56,7 @@
 
            ;; Display Widgets
            #:do-label-various
+           #:do-label-attributes
            #:do-images
            #:do-spinner
            #:do-info-bar

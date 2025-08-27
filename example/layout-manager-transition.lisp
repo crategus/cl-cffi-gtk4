@@ -1,32 +1,148 @@
-;;;; Layout Manger Transition
+;;;; Layout Manager Transition
+;;;;
+;;;; This demo shows a simple example of a custom layout manager and a widget
+;;;; using it. The layout manager places the children of the widget in a grid
+;;;; or a circle.
+;;;;
+;;;; The widget is animating the transition between the two layouts.
+;;;;
+;;;; Click to start the transition.
+;;;;
+;;;; 2025-08-22
 
 (in-package :gtk4-example)
 
-#|
-static void
-demo_child_init (DemoChild *self)
-{
-}
+(gobject:define-gobject-subclass "DemoLayout" demo-layout
+  (:superclass gtk:layout-manager
+   :export t
+   :interfaces ())
+  ((position
+    demo-layout-position
+    "position" "gfloat" t t)
+   (:cl
+    pos
+    :accessor demo-layout-pos
+    :initform (make-array 16 :initial-element 0))))
 
-static void
-demo_child_class_init (DemoChildClass *class)
-{
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
+(gobject:define-vtable ("DemoLayout" demo-layout)
+  (:skip parent-instance (:struct gobject::object-class))
+  ;; Install a virtual get-request-mode function
+  (get-request-mode (gtk:size-request-mode
+                     (manager (g:object gtk:layout-manager))
+                     (widget (g:object gtk:widget))))
+  ;; Install a virtual measure function
+  (measure (:void (manager (g:object gtk:layout-manager))
+                  (widget (g:object demo-child))
+                  (orientation gtk:orientation)
+                  (for-size :int)
+                  (minimum (:pointer :int))
+                  (natural (:pointer :int))
+                  (minimum-baseline (:pointer :int))
+                  (natural-baseline (:pointer :int))))
+  ;; Install a virtual allocate function
+  (allocate (:void (manager (g:object gtk:layout-manager))
+                   (widget (g:object gtk:widget))
+                   (width :int)
+                   (height :int)
+                   (baseline :int)))
+  (:skip create-layout-child :pointer)
+  (:skip root :pointer)
+  (:skip unroot :pointer))
 
-  widget_class->snapshot = demo_child_snapshot;
-  widget_class->measure = demo_child_measure;
-}
-|#
+;(eval-when (:compile-toplevel :load-toplevel :execute)
+;  (gobject::install-vtable "DemoLayout"))
 
+(defmethod demo-layout-measure-impl
+           ((layout demo-layout)
+            widget orientation for-size
+            minimum natural minimum-baseline natural-baseline)
+  (declare (ignore minimum-baseline natural-baseline))
+  (let ((min-size 0) (nat-size 0))
+    (iter (for child first (gtk:widget-first-child widget)
+                     then (gtk:widget-next-sibling child))
+          (while child)
+          (when (gtk:widget-should-layout child)
+            (multiple-value-bind (min nat min-baseline nat-baseline)
+                (gtk:widget-measure child orientation -1)
+              (declare (ignore min-baseline nat-baseline))
+              (setf min-size (max min-size min))
+              (setf nat-size (max nat-size nat)))))
+    ;; Reserve enough space for arranging 16 children in a circle
+    (setf (cffi:mem-ref minimum :int)
+          (truncate (+ min-size (/ (* 16 min-size) pi))))
+    (setf (cffi:mem-ref natural :int)
+          (truncate (+ nat-size (/ (* 16 nat-size) pi))))))
 
-;; /* This is a trivial child widget just for demo purposes.
-;;  * It draws a 32x32 square in fixed color.
-;;  */
-;; struct _DemoChild
-;; {
-;;   GtkWidget parent_instance;
-;;   GdkRGBA color;
-;; };
+(defmethod demo-layout-allocate-impl
+           ((layout demo-layout) widget width height baseline)
+  (declare (ignore baseline))
+  (let ((t1 (demo-layout-position layout))
+        (child-width 0)
+        (child-height 0))
+    (iter (for child first (gtk:widget-first-child widget)
+                     then (gtk:widget-next-sibling child))
+          (while child)
+          (when (gtk:widget-should-layout child)
+            (let ((min-size (gtk:widget-preferred-size child)))
+              (setf child-width
+                    (max child-width (gtk:requisition-width min-size)))
+              (setf child-height
+                    (max child-height (gtk:requisition-height min-size))))))
+    (let ((x0 (/ width 2))
+          (y0 (/ height 2))
+          (r (/ (* 8 child-width) pi)))
+      (iter (for child first (gtk:widget-first-child widget)
+                       then (gtk:widget-next-sibling child))
+            (for i from 0 to 15)
+            (while child)
+            (when (gtk:widget-should-layout child)
+              (let* ((a (/ (* pi (aref (demo-layout-pos layout) i)) 8))
+                     (min-size (gtk:widget-preferred-size child))
+                     ;; The grid position of child
+                     (gx (+ x0 (* (- (mod i 4) 2) child-width)))
+                     (gy (+ y0 (* (- (truncate (/ i 4)) 2) child-height)))
+                     ;; The circle position of child. Note that we
+                     ;; are adjusting the position by half the child size
+                     ;; to place the center of child on a centered circle.
+                     ;; This assumes that the children don't use align flags
+                     ;; or uneven margins that would shift the center.
+                     (cx (+ x0
+                            (* r (sin a))
+                            (- (/ (gtk:requisition-width min-size) 2))))
+                     (cy (+ y0
+                            (* r (cos a))
+                            (- (/ (gtk:requisition-height min-size) 2))))
+                     ;; We interpolate between the two layouts according to
+                     ;; the position value that has been set on the layout.
+                     (x (round (+ (* t1 cx) (* (- 1 t1) gx))))
+                     (y (round (+ (* t1 cy) (* (- 1 t1) gy))))
+                     ;; Create the allocation
+                     (allocation (gdk:rectangle-new :x x
+                                                    :y y
+                                                    :width child-width
+                                                    :height child-height)))
+                (gtk:widget-size-allocate child allocation -1)))))))
+
+(defmethod demo-layout-get-request-mode-impl
+           ((layout demo-layout) widget)
+  (declare (ignore widget))
+  :constant-size)
+
+(defun demo-layout-init (layout)
+  (dotimes (i 16)
+    (setf (aref (demo-layout-pos layout) i) i)))
+
+(defun demo-layout-shuffle (layout)
+  (dotimes (i 16)
+    (let ((j (random (1+ i)))
+          (tmp (aref (demo-layout-pos layout) i)))
+      (setf (aref (demo-layout-pos layout) i) (aref (demo-layout-pos layout) j))
+      (setf (aref (demo-layout-pos layout) j) tmp))))
+
+;;; ----------------------------------------------------------------------------
+
+;; This is a trivial child widget just for demo purposes.
+;; It draws a 32 x 32 square in fixed color.
 (gobject:define-gobject-subclass "DemoChild" demo-child
   (:superclass gtk:widget
    :export t
@@ -50,7 +166,6 @@ demo_child_class_init (DemoChildClass *class)
   (:skip state-flags-changed :pointer)
   (:skip direction-changed :pointer)
   (:skip get-request-mode :pointer)
-  (:skip measure :pointer)
   ;; Install a virtual measure function
   (measure (:void (widget (g:object demo-child))
                   (orientation gtk:orientation)
@@ -74,65 +189,28 @@ demo_child_class_init (DemoChildClass *class)
                    (snapshot (g:object gtk:snapshot))))
   (:skip contains :pointer))
 
-;; static void
-;; demo_child_snapshot (GtkWidget   *widget,
-;;                      GtkSnapshot *snapshot)
-;; {
-;;   DemoChild *self = DEMO_CHILD (widget);
-;;   int width, height;
-;;
-;;   width = gtk_widget_get_width (widget);
-;;   height = gtk_widget_get_height (widget);
-;;
-;;   gtk_snapshot_append_color (snapshot, &self->color,
-;;                              &GRAPHENE_RECT_INIT(0, 0, width, height));
-;; }
+;(eval-when (:compile-toplevel :load-toplevel :execute)
+;  (gobject::install-vtable "DemoChild"))
+
 (defmethod demo-child-snapshot-impl ((widget demo-child) snapshot)
   (let ((width (gtk:widget-width widget))
         (height (gtk:widget-height widget))
         (color (demo-child-color widget)))
-    (format t "in DEMO-CHILD-SNAPSHOT-IMPL~%")
-    (format t "    width : ~a~%" width)
-    (format t "   height : ~a~%" height)
-    (format t "    color : ~a~%" color)
-    (graphene:with-rect (bounds 0 0 width height)
-      (gtk:snapshot-append-color snapshot color bounds))))
+    (when snapshot
+      (graphene:with-rect (bounds 0 0 width height)
+        (gtk:snapshot-append-color snapshot color bounds)))))
 
-;; static void
-;; demo_child_measure (GtkWidget        *widget,
-;;                     GtkOrientation    orientation,
-;;                     int               for_size,
-;;                     int              *minimum,
-;;                     int              *natural,
-;;                     int              *minimum_baseline,
-;;                     int              *natural_baseline)
-;; {
-;;   *minimum = *natural = 32;
-;; }
-(defmethod demo-child-measure-impl ((widget demo-child) orientation for-size
+(defmethod demo-child-measure-impl ((widget demo-child)
+                                    orientation
+                                    for-size
                                     minimum
                                     natural
                                     minimum-baseline
                                     natural-baseline)
   (declare (ignore minimum-baseline natural-baseline))
-  (format t "in DEMO-CHILD-MEASURE-IMPL~%")
-;  (setf (cffi:mem-ref minimum :int) 32)
-;  (setf (cffi:mem-ref natural :int) 32)
-  )
+  (setf (cffi:mem-ref minimum :int) 32)
+  (setf (cffi:mem-ref natural :int) 32))
 
-;; GtkWidget *
-;; demo_child_new (const char *color)
-;; {
-;;   DemoChild *self;
-
-;;   self = g_object_new (DEMO_TYPE_CHILD,
-;;                        "tooltip-text", color,
-;;                        NULL);
-
-;;   gdk_rgba_parse (&self->color, color);
-
-;;   return GTK_WIDGET (self);
-;; }
 (defun demo-child-new (color)
   (make-instance 'demo-child
                  :tooltip-text color
@@ -140,194 +218,76 @@ demo_child_class_init (DemoChildClass *class)
 
 ;;; ----------------------------------------------------------------------------
 
-#|
-GtkWidget *
-do_layoutmanager (GtkWidget *parent)
-{
-  static GtkWidget *window = NULL;
+;; The widget is controlling the transition by calling the
+;; DEMO-LAYOUT-POSITION function in a tick callback.
 
-  if (!window)
-    {
-      GtkWidget *widget;
-      GtkWidget *child;
-      const char *color[] = {
-        "red", "orange", "yellow", "green",
-        "blue", "grey", "magenta", "lime",
-        "yellow", "firebrick", "aqua", "purple",
-        "tomato", "pink", "thistle", "maroon"
-      };
-      int i;
+;; We take two seconds to go from one layout to the other
+(defvar duration (* 2 internal-time-units-per-second))
 
-      window = gtk_window_new ();
-      gtk_window_set_title (GTK_WINDOW (window), "Layout Manager — Transition");
-      gtk_window_set_default_size (GTK_WINDOW (window), 600, 600);
-      g_object_add_weak_pointer (G_OBJECT (window), (gpointer *)&window);
-
-      widget = demo_widget_new ();
-
-      for (i = 0; i < 16; i++)
-        {
-          child = demo_child_new (color[i]);
-          gtk_widget_set_margin_start (child, 4);
-          gtk_widget_set_margin_end (child, 4);
-          gtk_widget_set_margin_top (child, 4);
-          gtk_widget_set_margin_bottom (child, 4);
-          demo_widget_add_child (DEMO_WIDGET (widget), child);
-        }
-
-      gtk_window_set_child (GTK_WINDOW (window), widget);
-    }
-
-  if (!gtk_widget_get_visible (window))
-    gtk_widget_set_visible (window, TRUE);
-  else
-    gtk_window_destroy (GTK_WINDOW (window));
-
-  return window;
-
-}
-|#
-
-;;; ----------------------------------------------------------------------------
-
-#|
-
-
-
-struct _DemoWidgetClass
-{
-  GtkWidgetClass parent_class;
-};
-
-G_DEFINE_TYPE (DemoWidget, demo_widget, GTK_TYPE_WIDGET)
-
-/* The widget is controlling the transition by calling
- * demo_layout_set_position() in a tick callback.
- *
- * We take half a second to go from one layout to the other.
- */
-
-#define DURATION (0.5 * G_TIME_SPAN_SECOND)
-
-static gboolean
-transition (GtkWidget     *widget,
-            GdkFrameClock *frame_clock,
-            gpointer       data)
-{
-  DemoWidget *self = DEMO_WIDGET (widget);
-  DemoLayout *demo_layout = DEMO_LAYOUT (gtk_widget_get_layout_manager (widget));
-  gint64 now = gdk_frame_clock_get_frame_time (frame_clock);
-
-  gtk_widget_queue_allocate (widget);
-
-  if (self->backward)
-    demo_layout_set_position (demo_layout, 1.0 - (now - self->start_time) / DURATION);
-  else
-    demo_layout_set_position (demo_layout, (now - self->start_time) / DURATION);
-
-  if (now - self->start_time >= DURATION)
-    {
-      self->backward = !self->backward;
-      demo_layout_set_position (demo_layout, self->backward ? 1.0 : 0.0);
-      /* keep things interesting by shuffling the positions */
-      if (!self->backward)
-        demo_layout_shuffle (demo_layout);
-      self->tick_id = 0;
-
-      return G_SOURCE_REMOVE;
-    }
-
-  return G_SOURCE_CONTINUE;
-}
-
-static void
-clicked (GtkGestureClick *gesture,
-         guint            n_press,
-         double           x,
-         double           y,
-         gpointer         data)
-{
-  DemoWidget *self = data;
-  GdkFrameClock *frame_clock;
-
-  if (self->tick_id != 0)
-    return;
-
-  frame_clock = gtk_widget_get_frame_clock (GTK_WIDGET (self));
-  self->start_time = gdk_frame_clock_get_frame_time (frame_clock);
-  self->tick_id = gtk_widget_add_tick_callback (GTK_WIDGET (self), transition, NULL, NULL);
-}
-
-static void
-demo_widget_init (DemoWidget *self)
-{
-  GtkGesture *gesture;
-
-  gesture = gtk_gesture_click_new ();
-  g_signal_connect (gesture, "pressed", G_CALLBACK (clicked), self);
-  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (gesture));
-}
-
-static void
-demo_widget_dispose (GObject *object)
-{
-  GtkWidget *child;
-
-  while ((child = gtk_widget_get_first_child (GTK_WIDGET (object))))
-    gtk_widget_unparent (child);
-
-  G_OBJECT_CLASS (demo_widget_parent_class)->dispose (object);
-}
-
-static void
-demo_widget_class_init (DemoWidgetClass *class)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (class);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
-
-  object_class->dispose = demo_widget_dispose;
-
-  /* here is where we use our custom layout manager */
-  gtk_widget_class_set_layout_manager_type (widget_class, DEMO_TYPE_LAYOUT);
-}
-|#
-
-;; struct _DemoWidget
-;; {
-;;   GtkWidget parent_instance;
-;;
-;;   gboolean backward; /* whether we go 0 -> 1 or 1 -> 0 */
-;;   gint64 start_time; /* time the transition started */
-;;   guint tick_id;     /* our tick cb */
-;; };
 (gobject:define-gobject-subclass "DemoWidget" demo-widget
   (:superclass gtk:widget
    :export t
    :interfaces ())
-  ((backward                       ; whether we go 0 -> 1 or 1 ->0
+  ((backward                       ; whether we go 0 -> 1 or 1 -> 0
     demo-widget-backward
     "backward" "gboolean" t t)
    (start                          ; time the transition started
     demo-widget-start
     "start" "guint64" t t)
-   (tickid                         ; our tick callback
+   (tickid                         ; tick callback
     demo-widget-tickid
     "tickid" "guint" t t)))
 
-;; GtkWidget *
-;; demo_widget_new (void)
-;; {
-;;  return g_object_new (DEMO_TYPE_WIDGET, NULL);
-;; }
-(defun demo-widget-new ()
-  (make-instance 'demo-widget))
+(defmethod gobject:object-class-init :after
+           ((subclass (eql (find-class 'demo-widget))) class data)
+  (setf (gtk:widget-class-layout-manager-type "DemoWidget") "DemoLayout"))
 
-;; void
-;; demo_widget_add_child (DemoWidget *self,
-;;                        GtkWidget  *child)
-;; {
-;;   gtk_widget_set_parent (child, GTK_WIDGET (self));
-;; }
+(defun demo-widget-new ()
+  (let ((widget (make-instance 'demo-widget)))
+    (demo-layout-init (gtk:widget-layout-manager widget))
+    widget))
+
+(defun transition (widget clock)
+  (let ((layout (gtk:widget-layout-manager widget))
+        (now (gdk:frame-clock-frame-time clock)))
+    (gtk:widget-queue-allocate widget)
+    (if (demo-widget-backward widget)
+        (setf (demo-layout-position layout)
+              (- 1.0 (/ (- now (demo-widget-start widget)) duration)))
+        (setf (demo-layout-position layout)
+              (/ (- now (demo-widget-start widget)) duration)))
+    (if (> (- now (demo-widget-start widget)) duration)
+        (progn
+          (setf (demo-widget-backward widget)
+                (not (demo-widget-backward widget)))
+          (setf (demo-layout-position layout)
+                (if (demo-widget-backward widget)
+                    1.0
+                    0.0))
+          (when (not (demo-widget-backward widget))
+            (demo-layout-shuffle layout))
+          (setf (demo-widget-tickid widget) 0)
+          g:+source-remove+)
+        g:+source-continue+)))
+
+(defun clicked (widget)
+  (when (= (demo-widget-tickid widget) 0)
+    (let ((clock (gtk:widget-frame-clock widget)))
+      (setf (demo-widget-start widget)
+            (gdk:frame-clock-frame-time clock))
+      (setf (demo-widget-tickid widget)
+            (gtk:widget-add-tick-callback widget
+                                          (lambda (widget clock)
+                                            (transition widget clock)))))))
+
+(defmethod initialize-instance :after ((obj demo-widget) &key)
+  (let ((gesture (gtk:gesture-click-new)))
+    (g:signal-connect gesture "pressed"
+                      (lambda (gesture npress x y)
+                        (declare (ignore gesture npress x y))
+                        (clicked obj)))
+    (gtk:widget-add-controller obj gesture)))
+
 (defun demo-widget-add-child (widget child)
   (gtk:widget-set-parent child widget))
 
@@ -338,21 +298,35 @@ demo_widget_class_init (DemoWidgetClass *class)
                         "blue" "grey" "magenta" "lime"
                         "yellow" "firebrick" "aqua" "purple"
                         "tomato" "pink" "thistle" "maroon"))
+          (vbox (make-instance 'gtk:box
+                               :orientation :vertical
+                               :margin-top 6
+                               :margin-start 6
+                               :margin-end 6
+                               :spacing 24))
+          (hbox (make-instance 'gtk:box
+                               :orientation :horizontal))
           (widget (demo-widget-new))
           (window (make-instance 'gtk:window
                                  :application application
-                                 :title "Layout Manger Transitions"
-                                 :child widget
-                                 :default-width 600
-                                 :default-height 600)))
-    (gobject::install-vtable "DemoChild")
+                                 :title "Layout Manger Transition"
+                                 :child vbox
+                                 :default-width 520
+                                 :default-height 360)))
+    ;; Create a horizontal box with colors
+    (dolist (color colors)
+      (gtk:box-append hbox (demo-child-new color)))
+    ;; Create demo widget and fill it with children
     (dolist (color colors)
       (demo-widget-add-child widget
                              (make-instance 'demo-child
                                             :tooltip-text color
                                             :color (gdk:rgba-parse color)
-                                            :margin-start 4
-                                            :margin-end 4
-                                            :margin-top 4
-                                            :margin-bottom 4)))
+                                            :margin-start 3
+                                            :margin-end 3
+                                            :margin-top 3
+                                            :margin-bottom 3)))
+    ;; Pack boxes and present window
+    (gtk:box-append vbox hbox)
+    (gtk:box-append vbox widget)
     (gtk:window-present window)))

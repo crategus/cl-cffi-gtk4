@@ -17,7 +17,7 @@
       "main-listitem.ui"
       "gtk4-demo.xml")
 
-     "Application"
+     "Application Support"
      (("Simple Application"
        ":application"
        "APPLICATION-SIMPLE"
@@ -127,7 +127,7 @@
        ":vexpand"
        "gtk:align"
        ":fill"
-       "gtk:winow-present"
+       "gtk:window-present"
        "g:object-data"
        "g:source-remove"
        "g:timeout-add"
@@ -1097,7 +1097,15 @@
        "gtk:builder-new-from-file"
        "gtk:builder-object"
        "gtk:window-application"
-       "gobject:define-gobject-subclass"))
+       "gobject:define-gobject-subclass")
+      ("Layout Manager Transition"
+       ":window"
+       "DO-LAYOUT-MANAGER-TRANSITION"
+       "gtk4-example"
+       "layout-manager-transition.lisp"
+       :keywords
+       "GtkLayoutManager"
+       "gtk:layout-manager"))
 
      "Display Widgets"
      (("Various Label"
@@ -1993,7 +2001,27 @@
        "resource/page-setup.ini"))
 
      "Drag and Drop, Clipboard"
-     (("Clipboard"
+     (("Drag and Drop"
+       ":window"
+       "DO-DRAG-AND-DROP"
+       "gtk4-example"
+       "drag-and-drop.lisp"
+       "resource/drag-and-drop.css"
+       :keywords
+       "gtk:widget-width"
+       "gtk:widget-height"
+       "gtk:widget-add-controller"
+       "gtk:widget-class-css-name"
+       "gtk:widget-class-layout-manager-type"
+       "gtk:snapshot-append-color"
+       "GtkDragSource"
+       "gtk:drag-source-new"
+       "gdk:content-provider-new-for-value"
+       "gdk:rgba-parse"
+       "g:with-value"
+       "graphene:with-rect"
+      )
+      ("Clipboard"
        ":window"
        "DO-CLIPBOARD"
        "gtk4-example"

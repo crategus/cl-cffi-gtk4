@@ -344,6 +344,7 @@
     (when (gtk-demo-name demo)
       (gtk-demo-run demo application))))
 
+;;TODO: Improve the screenshot functionality.
 (defun screenshot (widget)
   (let* ((paintable (gtk:widget-paintable-new widget))
          (snapshot (gtk:snapshot-new))

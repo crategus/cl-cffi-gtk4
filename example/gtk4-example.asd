@@ -56,6 +56,7 @@
 
                ;; Display Widgets
                (:file "label-various")
+               (:file "label-attributes")
                (:file "images")
                (:file "spinner")
                (:file "info-bar")
@@ -181,4 +182,4 @@
                (:file "paintable-emblem")
               ))
 
-;;; --- 2023-10-24 -------------------------------------------------------------
+;;; --- 2025-08-22 -------------------------------------------------------------

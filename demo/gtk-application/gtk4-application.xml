@@ -7,8 +7,4 @@
   <gresource prefix="/com/crategus/application/icons">
     <file>gtk-logo.png</file>
   </gresource>
-  <gresource prefix="/com/crategus/myapplication">
-    <file>my-app-window.ui</file>
-    <file>my-app-window-gears-menu.ui</file>
-  </gresource>
 </gresources>

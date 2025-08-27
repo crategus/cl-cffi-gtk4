@@ -2,7 +2,7 @@
 ;;;;
 ;;;; This example is included in the API documentation for GtkApplication.
 ;;;;
-;;;; Last version: 2025-4-21
+;;;; Last version: 2025-05-12
 
 (in-package :gtk4-application)
 
