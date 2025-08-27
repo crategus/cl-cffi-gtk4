@@ -79,14 +79,13 @@
 
 #+liber-documentation
 (setf (documentation 'content-provider 'type)
- "@version{#2025-06-29}
+ "@version{2025-08-23}
   @begin{short}
     The @class{gdk:content-provider} object is used to provide content for the
     clipboard in a number of formats.
   @end{short}
   To create a @class{gdk:content-provider} object, use the
-  @fun{gdk:content-provider-new-for-value} or the
-  @fun{gdk:content-provider-new-for-bytes} functions.
+  @fun{gdk:content-provider-new-for-value} function.
 
   GDK knows how to handle common text and image formats out-of-the-box. See
   the @class{gdk:content-serializer} and @class{gdk:content-deserializer}
@@ -111,6 +110,9 @@ lambda (provider)    :run-last
 
 ;;; --- gdk:content-provider-formats -------------------------------------------
 
+;; TODO: Check the implementation carefully.
+;; The C library has the gdk_content_provider_ref_formats function.
+
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'content-provider) t)
  "The @code{formats} property of type @class{gdk:content-formats} (Read) @br{}
@@ -120,33 +122,35 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-function 'content-provider-formats)
       "Accessor"
       (documentation 'content-provider-formats 'function)
- "@version{#2025-08-04}
+ "@version{2025-08-23}
   @syntax{(gdk:content-provider-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the formats of
     the content provider}
   @begin{short}
-    Gets the formats that the content provider can provide its current contents
-    in.
+    Gets the possible formats that the content provider can provide its data in.
   @end{short}
   @see-class{gdk:content-provider}
   @see-class{gdk:content-formats}")
 
 ;;; --- gdk:content-provider-storable-formats ----------------------------------
 
+;; TODO: Check the implementation carefully.
+;; The C library has the gdk_content_provider_ref_storable_formats function.
+
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "storable-formats"
                                                'content-provider) t)
  "The @code{storable-formats} property of type @class{gdk:content-formats}
   (Read) @br{}
-  The subset of formats that clipboard managers should store the dato of the
+  The subset of formats that clipboard managers should store the data of the
   content provider in.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'content-provider-storable-formats)
       "Accessor"
       (documentation 'content-provider-storable-formats 'function)
- "@version{#2025-08-04}
+ "@version{2025-08-23}
   @syntax{(gdk:content-provider-storable-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the storable
@@ -156,7 +160,7 @@ lambda (provider)    :run-last
     store the data in.
   @end{short}
   An example of such an application would be a clipboard manager. This can be
-  assumed to be a subset of @slot[gdk:content-provider]{storable-formats}.
+  assumed to be a subset of @slot[gdk:content-provider]{formats}.
   @see-class{gdk:content-provider}
   @see-class{gdk:content-formats}
   @see-function{gdk:content-provider-formats}")
@@ -168,13 +172,26 @@ lambda (provider)    :run-last
 (cffi:defcfun ("gdk_content_provider_new_for_value"
                content-provider-new-for-value) (g:object content-provider)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2025-08-23}
   @argument[gvalue]{a @class{g:value} instance}
   @return{The new @class{gdk:content-provider} object.}
   @begin{short}
     Creates a content provider that provides the given @arg{gvalue}.
   @end{short}
+  @begin[Examples]{dictionary}
+    A signal handler for a @class{gtk:drag-source} instance that provides a
+    @class{gdk:rgba} instance as value:
+    @begin{pre}
+(g:signal-connect source \"prepare\"
+        (lambda (source x y)
+          (declare (ignore source x y))
+          (g:with-value (gvalue \"GdkRGBA\" (color-swatch-color swatch))
+            (gdk:content-provider-new-for-value gvalue))))
+    @end{pre}
+  @end{dictionary}
   @see-class{gdk:content-provider}
+  @see-class{gtk:drag-source}
+  @see-class{gdk:rgba}
   @see-symbol{g:value}"
   (gvalue (:pointer (:struct g:value))))
 
