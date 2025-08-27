@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gsk4.transform.lisp
 ;;;
-;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.16 and modified to document the Lisp binding to the GTK library.
-;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;; The documentation in this file is taken from the GSK 4 Reference Manual
+;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
+;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2024 Dieter Kaiser
+;;; Copyright (C) 2022 - 2025 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,7 +87,7 @@
 (setf (liber:alias-for-symbol 'transform-category)
       "GEnum"
       (liber:symbol-documentation 'transform-category)
- "@version{2024-04-21}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskTransformCategory\" transform-category
   (:export t
@@ -101,7 +101,7 @@
    :identity)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:unknown]{The category of the matrix has not been determined.}
       @entry[:any]{Analyzing the matrix concluded that it does not fit in any
         other category.}
@@ -115,7 +115,7 @@
         can be transformed exactly using this matrix.}
       @entry[:2d-translate]{The matrix is a 2D translation.}
       @entry[:identity]{The matrix is the identity matrix.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The categories of matrices relevant for GSK and GTK.

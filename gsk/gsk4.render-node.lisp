@@ -263,7 +263,7 @@
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{2024-05-25}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskRenderNodeType\" render-node-type
   (:export t
@@ -306,7 +306,7 @@
   :subsurface-node)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:not-a-render-node]{Error type. No node will ever have this type.}
       @entry[:container-node]{A node containing a stack of children.}
       @entry[:cairo-node]{A node drawing a `cairo_surface_t`}
@@ -345,7 +345,7 @@
       @entry[:stroke-node]{A node that strokes a path. Since 4.14}
       @entry[:subsurface-node]{A node that possibly redirects part of the scene
         graph to a subsurface. Since 4.14}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The type of a node determines what the node is rendering.
@@ -411,7 +411,7 @@
 (setf (liber:alias-for-symbol 'scaling-filter)
       "GEnum"
       (liber:symbol-documentation 'scaling-filter)
- "@version{2023-09-22}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskScalingFilter\" scaling-filter
   (:export t
@@ -421,12 +421,12 @@
   (:trilinear 2))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:linear]{Linear interpolation filter.}
       @entry[:nearest]{Nearest neighbor interpolation filter.}
       @entry[:trilinear]{Linear interpolation along each axis, plus mipmap
         generation, with linear interpolation along the mipmap levels.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The filters used when scaling texture data.
@@ -515,7 +515,7 @@
 (setf (liber:alias-for-symbol 'blend-mode)
       "GEnum"
       (liber:symbol-documentation 'blend-mode)
- "@version{2023-10-26}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskBlendMode\" blend-mode
   (:export t
@@ -538,7 +538,7 @@
   (:luminosity 15))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:default]{The default blend mode, which specifies no blending.}
       @entry[:multiply]{The source color is multiplied by the destination and
         replaces the destination.}
@@ -569,7 +569,7 @@
         color and the hue and luminosity of the destination color.}
       @entry[:luminosity]{Creates a color with the luminosity of the source
         color and the hue and saturation of the destination color.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The blend modes available for render nodes.
@@ -596,7 +596,7 @@
 (setf (liber:alias-for-symbol 'mask-mode)
       "GEnum"
       (liber:symbol-documentation 'mask-mode)
- "@version{2023-10-26}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskMaskMode\" mask-mode
   (:export t
@@ -607,14 +607,14 @@
   (:inverted-luminace 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:alpha]{Use the alpha channel of the mask.}
       @entry[inverted-alpha]{Use the inverted alpha channel of the mask.}
       @entry[:luminance]{Use the luminance of the mask, multiplied by mask
         alpha.}
       @entry[:inverted-luminance]{Use the inverted luminance of the mask,
         multiplied by mask alpha.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The mask modes available for mask nodes.

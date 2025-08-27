@@ -70,7 +70,7 @@
 (setf (liber:alias-for-symbol 'corner)
       "GEnum"
       (liber:symbol-documentation 'corner)
- "@version{2025-08-02}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskCorner\" corner
   (:export t
@@ -81,12 +81,12 @@
   (:bottom-left 3))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:top-left]{The top left corner.}
       @entry[:top-right]{The top right corner.}
       @entry[:bottom-right]{The bottom right corner.}
       @entry[:bottom-left]{The bottom left corner.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The corner indices used by the @sym{gsk:rounded-rect} instance.
@@ -107,19 +107,19 @@
 (setf (liber:alias-for-symbol 'rounded-rect)
       "CStruct"
       (liber:symbol-documentation 'rounded-rect)
- "@version{2025-08-02}
+ "@version{2025-08-23}
   @begin{declaration}
 (cffi:defcstruct rounded-rect
   (bounds (:struct graphene:rect-t))
   (corner (:struct graphene:size-t) :count 4))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[bounds]{The @sym{graphene:rect-t} instance for the bounds of the
         rounded rectangle.}
       @entry[corner]{The array of @sym{graphene:size-t} instances for the size
         of the 4 rounded corners.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     A rectangular region with rounded corners.

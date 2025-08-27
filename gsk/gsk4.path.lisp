@@ -119,7 +119,7 @@
 (setf (liber:alias-for-symbol 'path-foreach-flags)
       "GFlags"
       (liber:symbol-documentation 'path-foreach-flags)
- "@version{2024-11-09}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-gflags \"GskPathForeachFlags\" path-foreach-flags
   (:export t
@@ -130,12 +130,12 @@
   (:allow-conic #.(ash 1 2)))
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:allow-only-lines]{The default behavior, only allow lines.}
       @entry[:allow-quad]{Allow emission of @code{:quad} operations.}
       @entry[:allow-cubic]{Allow emission of @code{:cubic} operations.}
       @entry[:allow-conic]{Allow emission of @code{:conic} operations.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Flags that can be passed to the @fun{gsk:path-foreach} function to influence
@@ -168,7 +168,7 @@
 (setf (liber:alias-for-symbol 'path-operation)
       "GEnum"
       (liber:symbol-documentation 'path-operation)
- "@version{2024-11-09}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskPathOperation\" path-operation
   (:export t
@@ -181,7 +181,7 @@
   :conic)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:move]{A move-to operation, with 1 point describing the target
         point.}
       @entry[:close]{A close operation ending the current contour with a line
@@ -198,7 +198,7 @@
       @entry[:conic]{A rational quadratic Bézier curve with 3 points describing
         the start point, control point and end point of the curve. A weight for
         the curve will be passed, too.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Path operations are used to describe the segments of a @class{gsk:path}
@@ -235,7 +235,7 @@
   :from-end)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:from-start]{The tangent in path direction of the incoming side of
         the path.}
       @entry[:to-start]{The tangent against path direction of the incoming side
@@ -244,7 +244,7 @@
         the path.}
       @entry[:from-end]{The tangent against path direction of the outgoing side
         of the path.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The values of the @sym{gsk:path-direction} enumeration are used to pick one
@@ -286,13 +286,13 @@
   :square)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:butt]{Start and stop the line exactly at the start and end point.}
       @entry[:round]{Use a round ending, the center of the circle is the start
         or end point.}
       @entry[:square]{Use squared ending, the center of the square is the start
         or end point.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Specifies how to render the start and end points of contours or dashes when
@@ -321,7 +321,7 @@
 (setf (liber:alias-for-symbol 'line-join)
       "GEnum"
       (liber:symbol-documentation 'line-join)
- "@version{2024-11-09}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskLineJoin\" line-join
   (:export t
@@ -331,13 +331,13 @@
   :bevel)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:miter]{Use a sharp angled corner.}
       @entry[:round]{Use a round join, the center of the circle is the join
         point.}
       @entry[:bevel]{Use a cut-off join, the join is cut off at half the line
         width from the joint point.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     Specifies how to render the junction of two lines when stroking.
@@ -364,7 +364,7 @@
 (setf (liber:alias-for-symbol 'fill-rule)
       "GEnum"
       (liber:symbol-documentation 'fill-rule)
- "@version{2025-08-02}
+ "@version{2025-08-23}
   @begin{declaration}
 (gobject:define-genum \"GskFillRule\" fill-rule
   (:export t
@@ -373,7 +373,7 @@
   :even-odd)
   @end{declaration}
   @begin{values}
-    @begin[code]{table}
+    @begin[code]{simple-table}
       @entry[:winding]{If the path crosses the ray from left-to-right, counts
         +1. If the path crosses the ray from right to left, counts -1. (Left
         and right are determined from the perspective of looking along the ray
@@ -382,7 +382,7 @@
       @entry[:even-odd]{Counts the total number of intersections, without
         regard to the orientation of the contour. If the total number of
         intersections is odd, the point will be filled.}
-    @end{table}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The @sym{gsk:fill-rule} enumeration is used to select how paths are filled.
@@ -686,9 +686,9 @@
 
 (cffi:defcfun ("gsk_path_measure_get_tolerance" path-measure-tolerance) :float
  #+liber-documentation
- "@version{2025-08-03}
+ "@version{2025-08-23}
   @argument[measure]{a @class{gsk:path-measure} instance}
-  @return{The single float for the tolerance of @arg{measure}}
+  @return{The single float for the tolerance of @arg{measure}.}
   @begin{short}
     Returns the tolerance that the measure was created with.
   @end{short}
