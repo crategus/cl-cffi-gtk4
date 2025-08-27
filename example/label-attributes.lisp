@@ -6,13 +6,6 @@
 
 (defparameter *text1* "The label with Pango attributes.")
 
-(defun make-header (text)
-  (make-instance 'gtk:label
-                 :xalign 0
-                 :margin-top 6
-                 :use-markup t
-                 :label (format nil "<b>~A</b>" text)))
-
 (defun do-label-attributes (&optional application)
   (let* ((attrlist (pango:attr-list-new))
          (label (make-instance 'gtk:label
