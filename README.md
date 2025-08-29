@@ -52,7 +52,7 @@ The `cl-cffi-gtk4` API documentation is available at
 
 ### Documentation on Wiki
 
-Visit the [https://github.com/crategus/cl-cffi-gtk4/wiki](Wiki page) to learn
+Visit the [github Wiki](https://github.com/crategus/cl-cffi-gtk4/wiki) to learn
 more about using the library.
 
 ## GTK demo and examples
