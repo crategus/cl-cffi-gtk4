@@ -50,6 +50,11 @@ These libraries are available from [github](https://github.com/crategus).
 The `cl-cffi-gtk4` API documentation is available at
 [crategus.com](https://crategus.com/books/cl-cffi-gtk4/).
 
+### Documentation on Wiki
+
+Visit the [https://github.com/crategus/cl-cffi-gtk4/wiki](Wiki page) to learn
+more about using the library.
+
 ## GTK demo and examples
 
 The `cl-cffi-gtk4` library comes with examples and a GTK demo. Use
