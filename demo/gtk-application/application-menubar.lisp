@@ -59,14 +59,14 @@
   (let ((msg (format nil "Action ~:@(~a~) called with parameter ~:@(~a~)"
                          (g:action-name action)
                          (g:variant-boolean parameter))))
-    (status-message1 statusbar msg)
+    (status-message statusbar msg)
     (setf (g:action-state action) parameter)))
 
 (defun change-radio-state (statusbar action parameter)
   (let ((msg (format nil "Action ~:@(~a~) called with parameter ~:@(~a~)"
                          (g:action-name action)
                          (g:variant-string parameter))))
-    (status-message1 statusbar msg)
+    (status-message statusbar msg)
     (setf (g:action-state action) parameter)))
 
 (defun application-menubar (&rest argv)
