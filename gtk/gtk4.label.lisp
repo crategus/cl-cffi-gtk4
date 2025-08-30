@@ -219,7 +219,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2025-08-14}
+ "@version{2025-08-28}
   @begin{short}
     The @class{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -236,10 +236,10 @@
   @fun{gtk:label-set-text-with-mnemonic} functions.
 
   Mnemonics automatically activate any activatable widget the label is inside,
-  such as a @class{gtk:button} widget. If the label is not inside the
-  target widget of the mnemonic, you have to tell the label about the target
-  using the @fun{gtk:label-mnemonic-widget} function. Here is a simple example
-  where the label is inside a button:
+  such as a @class{gtk:button} widget. If the label is not inside the target
+  widget of the mnemonic, you have to tell the label about the target using the
+  @slot[gtk:label]{mnemonic-widget} property. Here is a simple example where the
+  label is inside a button:
   @begin{pre}
 ;; Pressing Alt+H will activate this button
 (let* ((label (gtk:label-new-with-mnemonic \"_Hello\"))
@@ -255,35 +255,35 @@
   @end{pre}
   To create a mnemonic for a widget alongside the label, such as a
   @class{gtk:entry} widget, you have to point the label at the text entry with
-  the @fun{gtk:label-mnemonic-widget} function:
+  the @slot[gtk:label]{mnemonic-widget} property:
   @begin{pre}
 ;; Pressing Alt+H will focus the text entry
 (let ((entry (make-instance 'gtk:entry))
-      (label (gtk:label-new-with-mnemonic \"_Hello\")))
-   (setf (gtk:label-mnemonic-widget label) entry)
-   ... )
+      (label (make-instance 'gtk:label
+                            :use-underline t
+                            :label \"_Hello\"
+                            :mnemonic-widget entry)))
+  ... )
   @end{pre}
   @subheading{Markup (styled text)}
   To make it easy to format text in a label, changing colors, fonts, and so on,
   label text can be provided in a simple markup format. Here is how to create
   a label with a small font:
   @begin{pre}
-(let ((label (make-instance 'gtk:label)))
-  (gtk:label-set-markup label
-                        \"<small>Small text</small>\")
+(let ((label (make-instance 'gtk:label
+                            :use-markup t
+                            :label \"<small>Small text</small>\")))
   ... )
   @end{pre}
   See complete documentation of available tags in the Pango manual.
 
   The markup passed to the @fun{gtk:label-set-markup} function must be valid.
-  For example, literal <, > and & characters must be escaped as \<, \gt;, and
-  \&. If you pass text obtained from the user, file, or a network to the
-  @fun{gtk:label-set-markup} function, you will want to escape it with the
-  @code{g_markup_escape_text()} or @code{g_markup_printf_escaped()} functions.
+  For example, literal @code{<}, @code{>} and @code{&} characters must be
+  escaped as @code{&lt;}, @code{&gt;} and @code{&amp;}.
 
   Markup strings are just a convenient way to set the @class{pango:attr-list}
-  instance on a label. The @fun{gtk:label-attributes} function may be a simpler
-  way to set attributes in some cases. Be careful though, a
+  instance on a label. The @slot[gtk:label]{attributes} property may be a
+  simpler way to set attributes in some cases. Be careful though, a
   @class{pango:attr-list} instance tends to cause internationalization problems,
   unless you are applying attributes to the entire string, that is, unless you
   set the range of each attribute to @code{[0, G_MAXINT]}). The reason is that
@@ -292,7 +292,7 @@
   being displayed, so translations will cause problems.
 
   @subheading{Selectable labels}
-  Labels can be made selectable with the @fun{gtk:label-selectable} function.
+  Labels can be made selectable with the @slot[gtk:label]{selectable} property.
   Selectable labels allow the user to copy the label contents to the clipboard.
   Only labels that contain useful-to-copy information - such as error messages -
   should be made selectable.
@@ -300,13 +300,11 @@
   @subheading{Text layout}
   A label can contain any number of paragraphs, but will have performance
   problems if it contains more than a small number. Paragraphs are separated
-  by newlines or other paragraph separators understood by Pango.
+  by newlines or other paragraph separators understood by Pango. Labels can
+  automatically wrap text if you set the @slot[gtk:label]{wrap} property.
 
-  Labels can automatically wrap text if you call the @fun{gtk:label-wrap}
-  function.
-
-  The @fun{gtk:label-justify} function sets how the lines in a label align with
-  one another. If you want to set how the label as a whole aligns in its
+  The @slot[gtk:label]{justify} property sets how the lines in a label align
+  with one another. If you want to set how the label as a whole aligns in its
   available space, see the @slot[gtk:widget]{halign} and
   @slot[gtk:widget]{valign} properties.
 
@@ -327,10 +325,12 @@
 
   @subheading{Links}
   GTK supports markup for clickable hyperlinks in addition to regular Pango
-  markup. The markup for links is borrowed from HTML, using the @code{a} with
-  href and title attributes. GTK renders links similar to the way they appear
-  in web browsers, with colored, underlined text. The title attribute is
-  displayed as a tooltip on the link. An example looks like this:
+  markup. The markup for links is borrowed from HTML, using the @code{<a>} tag
+  with @code{\"href\"}, @code{\"title\"} and @code{\"class\"} attributes. GTK
+  renders links similar to the way they appear in web browsers, with colored,
+  underlined text. The @code{\"title\"} attribute is displayed as a tooltip on
+  the link. The @code{\"class\"} attribute is used as style class on the CSS
+  node for the link. An example looks like this:
   @begin{pre}
 (gtk:label-set-markup label
                       \"Go to <a href=\"http://gtk.org/\">GTK Website</a> ...\")
@@ -343,7 +343,7 @@
     supports a custom @code{<attributes>} element, which supports any number of
     @code{<attribute>} elements. The @code{<attribute>} element has attributes
     named @code{name}, @code{value}, @code{start} and @code{end} and allows you
-    to specify @code{PangoAttribute} values for the label.
+    to specify Pango attribute values for the label.
 
     @b{Example:} A UI definition fragment specifying Pango attributes
   @begin{pre}
@@ -526,7 +526,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-attributes)
       "Accessor"
       (documentation 'label-attributes 'function)
- "@version{2025-08-03}
+ "@version{2025-08-28}
   @syntax{(gtk:label-attributes object) => attrs}
   @syntax{(setf (gtk:label-attributes object) attrs)}
   @argument[object]{a @class{gtk:label} widget}
@@ -541,7 +541,7 @@ lambda (label step count extend)    :action
   see the @fun{gtk:label-set-markup} function. If you want to get the
   effective attributes for the label, use
   @begin{pre}
-(pango:layout-attributes (gtk:label-layout label))
+(pango:layout-attributes (gtk:label-layout label)) => attrs
   @end{pre}
   @begin[Notes]{dictionary}
     The attributes set with this function will be applied and merged with any
@@ -572,14 +572,15 @@ lambda (label step count extend)    :action
   particular, this means that ellipsizing labels do not work well in notebook
   tabs, unless the @slot[gtk:notebook-page]{tab-expand} child property of the
   tab is set to @em{true}. Other ways to set a width of the label are the
-  @fun{gtk:widget-size-request} and @fun{gtk:label-width-chars} functions. @br{}
+  @slot[gtk:widget]{width-request}, @slot[gtk:widget]{height-request} and
+  @slot[gtk:label]{width-chars} properties. @br{}
   Default value: @val[pango:ellipsize-mode]{:none}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'label-ellipsize)
       "Accessor"
       (documentation 'label-ellipsize 'function)
- "@version{2025-08-03}
+ "@version{2025-08-28}
   @syntax{(gtk:label-ellipsize object) => mode}
   @syntax{(setf (gtk:label-ellipsize object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -588,7 +589,7 @@ lambda (label step count extend)    :action
     The accessor for the @slot[gtk:label]{ellipsize} slot of the
     @class{gtk:label} class gets or sets the mode used to ellipsize the label.
   @end{short}
-  Add an ellipsis: \"...\", to the text if there is not enough space to render
+  Adds an ellipsis: \"...\", to the text if there is not enough space to render
   the entire string.
   @see-class{gtk:label}
   @see-symbol{pango:ellipsize-mode}")
@@ -633,7 +634,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-justify)
       "Accessor"
       (documentation 'label-justify 'function)
- "@version{2025-08-03}
+ "@version{2025-08-28}
   @syntax{(gtk:label-justify object) => justify}
   @syntax{(setf (gtk:label-justify object) justify)}
   @argument[object]{a @class{gtk:label} widget}
@@ -646,9 +647,9 @@ lambda (label step count extend)    :action
 
   The @val[gtk:justification]{:left} value is the default value when the widget
   is first created with the @fun{gtk:label-new} function. If you instead want
-  to set the alignment of the label as a whole, use the @fun{gtk:widget-halign}
-  function instead. The @setf{gtk:label-justify} function has no effect on
-  labels containing only a single line.
+  to set the alignment of the label as a whole, use the
+  @slot[gtk:widget]{halign} property instead. Setting the property has no effect
+  on labels containing only a single line.
   @see-class{gtk:label}
   @see-symbol{gtk:justification}
   @see-function{gtk:label-new}
@@ -733,11 +734,11 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-max-width-chars)
       "Accessor"
       (documentation 'label-max-width-chars 'function)
- "@version{2025-08-03}
-  @syntax{(gtk:label-max-width-chars object) => n-chars}
-  @syntax{(setf (gtk:label-max-width-chars object) n-chars)}
+ "@version{2025-08-28}
+  @syntax{(gtk:label-max-width-chars object) => chars}
+  @syntax{(setf (gtk:label-max-width-chars object) chars)}
   @argument[object]{a @class{gtk:label} widget}
-  @argument[n-chars]{an integer for the desired maximum width, in characters}
+  @argument[chars]{an integer for the desired maximum width, in characters}
   @begin{short}
     The accessor for the @slot[gtk:label]{max-width-chars} slot of the
     @class{gtk:label} class gets or sets the maximum width of the label in
@@ -787,7 +788,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-widget)
       "Accessor"
       (documentation 'label-mnemonic-widget 'function)
- "@version{2025-08-03}
+ "@version{2025-08-28}
   @syntax{(gtk:label-mnemonic-widget object) => widget}
   @syntax{(setf (gtk:label-mnemonic-widget object) widget)}
   @argument[object]{a @class{gtk:label} widget}
@@ -795,7 +796,7 @@ lambda (label step count extend)    :action
   @begin{short}
     The accessor for the @slot[gtk:label]{mnemonic-widget} slot of the
     @class{gtk:label} class gets or sets the target of the mnemonic of the
-    label
+    label.
   @end{short}
   Returns @code{nil} if none has been set and the default algorithm will be
   used.
@@ -868,7 +869,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-selectable)
       "Accessor"
       (documentation 'label-selectable 'function)
- "@version{2025-08-03}
+ "@version{2025-08-28}
   @syntax{(gtk:label-selectable object) => selectable}
   @syntax{(setf (gtk:label-selectable object) selectable)}
   @argument[object]{a @class{gtk:label} widget}
@@ -878,7 +879,7 @@ lambda (label step count extend)    :action
     @class{gtk:label} class gets or sets wheter the label text can be selected
     with the mouse.
   @end{short}
-  Selectable labels allow the user to select text from the label, for copy and
+  Selectable labels allow the user to select text from the label for copy and
   paste.
   @see-class{gtk:label}")
 
@@ -995,7 +996,7 @@ lambda (label step count extend)    :action
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-chars" 'label) t)
- "The @code{width-chars} property of @code{:int} (Read / Write) @br{}
+ "The @code{width-chars} property of type @code{:int} (Read / Write) @br{}
   The desired width of the label, in characters. If this property is set to
   -1, the width will be calculated automatically. See the section on text
   layout for details of how the @slot[gtk:label]{width-chars} and
@@ -1008,11 +1009,11 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-width-chars)
       "Accessor"
       (documentation 'label-width-chars 'function)
- "@version{2025-08-03}
-  @syntax{(gtk:label-width-chars object) => n-chars}
-  @syntax{(setf (gtk:label-width-chars object) n-chars)}
+ "@version{2025-08-28}
+  @syntax{(gtk:label-width-chars object) => chars}
+  @syntax{(setf (gtk:label-width-chars object) chars)}
   @argument[object]{a @class{gtk:label} widget}
-  @argument[n-chars]{an integer for the new desired width, in characters}
+  @argument[chars]{an integer for the new desired width, in characters}
   @begin{short}
     The accessor for the @slot[gtk:label]{width-chars} slot of the
     @class{gtk:label} class gets or sets the desired width of the label, in
@@ -1112,7 +1113,7 @@ lambda (label step count extend)    :action
 (setf (documentation (liber:slot-documentation "yalign" 'label) t)
  "The @code{yalign} property of type @code{:float} (Read / Write) @br{}
   Determines the vertical aligment of the label text inside the size allocation
-  of the label. Compare this to @slot[gtk:widget]{valign} property, which
+  of the label. Compare this to the @slot[gtk:widget]{valign} property, which
   determines how the size allocation is positioned in the space available for
   the label. @br{}
   Allowed values: [0.0, 1.0] @br{}
@@ -1162,12 +1163,12 @@ lambda (label step count extend)    :action
 
 (defun label-new-with-mnemonic (text)
  #+liber-documentation
- "@version{2025-04-27}
+ "@version{2025-08-28}
   @argument[text]{a string for the text of the label, with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:label} widget.}
   @begin{short}
-    Creates a new @class{gtk:label} widget, containing the given text.
+    Creates a new @class{gtk:label} widget containing the given text.
   @end{short}
 
   If characters in @arg{text} are preceded by an underscore, they are
@@ -1175,9 +1176,9 @@ lambda (label step count extend)    :action
   (two underscores). The first underlined character represents a keyboard
   accelerator called a mnemonic. The mnemonic key can be used to activate
   another widget, chosen automatically, or explicitly using the
-  @fun{gtk:label-mnemonic-widget} function.
+  @slot[gtk:label]{mnemonic-widget} property.
 
-  If the @fun{gtk:label-mnemonic-widget} function is not called, then the first
+  If the @slot[gtk:label]{mnemonic-widget} property is not set, then the first
   activatable ancestor of the @class{gtk:label} widget will be chosen as the
   mnemonic widget. For instance, if the label is inside a button or menu item,
   the button or menu item will automatically become the mnemonic widget and be
@@ -1204,17 +1205,14 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_text" label-text) :string
  #+liber-documentation
- "@version{2025-04-27}
+ "@version{2025-08-28}
   @syntax{(gtk:label-text label) => text}
   @syntax{(setf (gtk:label-text-label) text)}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a string for the text}
   @begin{short}
-    The @fun{gtk:label-text} function fetches the text from a label, as
-    displayed on the screen.
+    Gets or sets the text of a label, as displayed on the screen.
   @end{short}
-  The @setf{gtk:label-text} function sets the text.
-
   It overwrites any text that was there before. This will also clear any
   previously set mnemonic accelerators. This does not include any embedded
   underlines indicating mnemonics or Pango markup. See the @fun{gtk:label-label}
@@ -1253,7 +1251,7 @@ lambda (label step count extend)    :action
 (cffi:defcfun ("gtk_label_set_text_with_mnemonic" label-set-text-with-mnemonic)
     :void
  #+liber-documentation
- "@version{2025-04-27}
+ "@version{2025-08-28}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a string for the label}
   @begin{short}
@@ -1262,7 +1260,7 @@ lambda (label step count extend)    :action
   If characters in @arg{text} are preceded by an underscore, they are underlined
   indicating that they represent a keyboard accelerator called a mnemonic. The
   mnemonic key can be used to activate another widget, chosen automatically, or
-  explicitly using the @fun{gtk:label-mnemonic-widget} function.
+  explicitly using the @slot[gtk:label]{mnemonic-widget} property.
   @see-class{gtk:label}
   @see-function{gtk:label-mnemonic-widget}"
   (label (g:object label))
@@ -1277,7 +1275,7 @@ lambda (label step count extend)    :action
 (cffi:defcfun ("gtk_label_set_markup_with_mnemonic"
                label-set-markup-with-mnemonic) :void
  #+liber-documentation
- "@version{2025-04-27}
+ "@version{2025-08-28}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a Pango markup string}
   @begin{short}
@@ -1288,7 +1286,7 @@ lambda (label step count extend)    :action
   If characters in @arg{text} are preceded by an underscore, they are underlined
   indicating that they represent a keyboard accelerator called a mnemonic.
   The mnemonic key can be used to activate another widget, chosen automatically,
-  or explicitly using the @fun{gtk:label-mnemonic-widget} function.
+  or explicitly using the @slot[gtk:label]{mnemonic-widget} property.
   @see-class{gtk:label}
   @see-function{gtk:label-mnemonic-widget}"
   (label (g:object label))
@@ -1370,16 +1368,16 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_select_region" label-select-region) :void
  #+liber-documentation
- "@version{2025-04-27}
+ "@version{2025-08-28}
   @argument[label]{a @class{gtk:label} widget}
   @argument[start]{an integer for the start offset, in characters not bytes}
   @argument[end]{an integer for the end offset, in characters not bytes}
   @begin{short}
     Selects a range of characters in the label, if the label is selectable.
   @end{short}
-  See the @fun{gtk:label-selectable} function. If the label is not
-  selectable, this function has no effect. If @arg{start} or @arg{end} are -1,
-  then the end of the label will be substituted.
+  See the @slot[gtk:label]{selectable} property. If the label is not selectable,
+  this function has no effect. If @arg{start} or @arg{end} are -1, then the end
+  of the label will be substituted.
   @see-class{gtk:label}
   @see-function{gtk:label-selectable}"
   (label (g:object label))
@@ -1423,7 +1421,7 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_current_uri" label-current-uri) :string
  #+liber-documentation
- "@version{2025-07-12}
+ "@version{2025-08-28}
   @argument[label]{a @class{gtk:label} widget}
   @return{The string for the currently active URI.}
   @begin{short}
@@ -1432,8 +1430,8 @@ lambda (label step count extend)    :action
   The active link is the one under the mouse pointer or, in a selectable label,
   the link in which the text cursor is currently positioned.
 
-  This function is intended for use in a @sig[gtk:label]{activate-link} signal
-  handler or for use in a @sig[gtk:widget]{query-tooltip} signal handler.
+  This function is intended for use in a @sig[gtk:label]{activate-link} or in a
+  @sig[gtk:widget]{query-tooltip} signal handler.
   @see-class{gtk:label}"
   (label (g:object label)))
 

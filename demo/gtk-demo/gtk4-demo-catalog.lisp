@@ -1125,6 +1125,23 @@
        ":use-underline"
        ":selectable"
        ":wrap")
+      ("Label with Pango Attributes"
+       ":window"
+       "DO-LABEL-ATTRIBUTES"
+       "gtk4-example"
+       "label-attributes.lisp"
+       :keywords
+       "GtkLabel"
+       "gtk:label"
+       "gtk:label-tabs"
+       "gtk:label-attributes"
+       "pango:attribute-new"
+       "pango:attribute-type"
+       "pango:attr-type" ":bold" ":italic" ":background" ":foreground"
+       "pango:attr-list-insert"
+       "pango:tab-array-new-with-positions"
+       "pango:tab-array-decimal-point"
+       "pango:tab-align" ":left" ":right" ":center")
       ("Images and Pictures"
        ":window"
        "DO-IMAGES"
