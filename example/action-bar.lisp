@@ -9,7 +9,7 @@
 ;;;; full width of the box, even if the children at either side take up
 ;;;; different amounts of space.
 ;;;;
-;;;; 2024-4-21
+;;;; 2025-08-30
 
 (in-package :gtk4-example)
 
@@ -20,7 +20,7 @@
                                 :title "Action Bar"
                                 :application application
                                 :child vbox
-                                :default-width 320
+                                :default-width 380
                                 :default-height 180))
           (actionbar (make-instance 'gtk:action-bar)))
     ;; Pack start widgets
