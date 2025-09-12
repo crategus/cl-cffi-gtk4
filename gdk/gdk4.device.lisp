@@ -423,13 +423,12 @@ lambda (device tool)    :run-last
   @argument[object]{a @class{gdk:device} object}
   @argument[index]{an integer for the layout index of the active layout, or -1.}
   @begin{short}
-    Accessor of the @slot[gdk:device]{active-layout-index} slot of the
-    @class{gdk:device} class.
+    The accessor for the @slot[gdk:device]{active-layout-index} slot of the
+    @class{gdk:device} class retrieves the index of the active layout of the
+    keyboard.
   @end{short}
-  The @fun{gdk:device-active-layout-index} function retrieves the index of the
-  active layout of the keyboard. If there is no valid active layout for the
-  device, this function will return -1. This is only relevant for keyboard
-  devices.
+  If there is no valid active layout for the device, this function will return
+  -1. This is only relevant for keyboard devices.
 
   Since 4.18
   @see-class{gdk:device}")
@@ -446,16 +445,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-caps-lock-state)
       "Accessor"
       (documentation 'device-caps-lock-state 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-caps-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{a boolean whether the keyboard caps lock is on}
   @begin{short}
-    Accessor of the @slot[gdk:device]{caps-lock-state} slot of the
-    @class{gdk:device} class.
+   The accessor for the @slot[gdk:device]{caps-lock-state} slot of the
+    @class{gdk:device} class retrieves whether the Caps Lock modifier of the
+    keyboard is locked, if @arg{object} is a keyboard device.
   @end{short}
-  The @fun{gdk:device-caps-lock-state} function retrieves whether the Caps Lock
-  modifier of the keyboard is locked, if @arg{object} is a keyboard device.
   @see-class{gdk:device}")
 
 ;;; --- gdk:device-direction ---------------------------------------------------
@@ -495,16 +493,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-display)
       "Accessor"
       (documentation 'device-display 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-display object) => display}
   @argument[object]{a @class{gdk:device} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:device]{display} slot of the @class{gdk:device}
-    class.
+    The accessor for the @slot[gdk:device]{display} slot of the
+    @class{gdk:device} class returns the display to which the device pertains.
   @end{short}
-  The @fun{gdk:device-display} function returns the display to which the device
-  pertains.
   @see-class{gdk:device}
   @see-class{gdk:display}")
 
@@ -546,17 +542,16 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-has-cursor)
       "Accessor"
       (documentation 'device-has-cursor 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-has-cursor object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if the pointer follows device motion}
   @begin{short}
-    Accessor of the @slot[gdk:device]{has-cursor} slot of the @class{gdk:device}
-    class.
+    The accessor for the @slot[gdk:device]{has-cursor} slot of the
+    @class{gdk:device} class determines whether the pointer follows device
+    motion.
   @end{short}
-  The @fun{gdk:device-has-cursor} function determines whether the pointer
-  follows device motion. This is not meaningful for keyboard devices, which
-  do not have a pointer.
+  This is not meaningful for keyboard devices, which do not have a pointer.
   @see-class{gdk:device}")
 
 ;;; --- gdk:device-layout-names ------------------------------------------------
@@ -571,16 +566,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-layout-names)
       "Accessor"
       (documentation 'device-layout-names 'function)
- "@version{2025-03-31}
+ "@version{2025-08-31}
   @syntax{(gdk:device-layout-names object) => names}
   @argument[object]{a @class{gdk:device} object}
-  @argument[names]{a list of strings of layouts}
+  @argument[names]{a list of strings for the layouts}
   @begin{short}
-    Accessor of the @slot[gdk:device]{layout-names} slot of the
-    @class{gdk:device} class.
+    The accessor for the @slot[gdk:device]{layout-names} slot of the
+    @class{gdk:device} class retrieves the names of the layouts of the keyboard.
   @end{short}
-  The @fun{gdk:device-layout-names} function retrieves the names of the layouts
-  of the keyboard. This is only relevant for keyboard devices.
+  This is only relevant for keyboard devices.
 
   Since 4.18
   @see-class{gdk:device}")
@@ -668,16 +662,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-num-lock-state)
       "Accessor"
       (documentation 'device-num-lock-state 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-num-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if Num Lock is on for the device}
   @begin{short}
-    Accessor of the @slot[gdk:device]{num-lock-state} slot of the
-    @class{gdk:device} class.
+    The accessor for the @slot[gdk:device]{num-lock-state} slot of the
+    @class{gdk:device} class retrieves whether the Num Lock modifier of the
+    keyboard is locked, if @arg{object} is a keyboard device.
   @end{short}
-  The @fun{gdk:device-num-lock-state} function retrieves whether the Num Lock
-  modifier of the keyboard is locked, if @arg{object} is a keyboard device.
   @see-class{gdk:device}")
 
 ;;; --- gdk:device-num-touches -------------------------------------------------
@@ -744,16 +737,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-scroll-lock-state)
       "Accessor"
       (documentation 'device-scroll-lock-state 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-scroll-lock-id object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[scroll-lock-id]{@em{true} if Scroll Lock is on for the device}
   @begin{short}
-    Accessor of the @slot[gdk:device]{scroll-lock-state} slot of the
-    @class{gdk:device} class.
+    The accessor for the @slot[gdk:device]{scroll-lock-state} slot of the
+    @class{gdk:device} class retrieves whether the Scroll Lock modifier of the
+    keyboard is locked, if @arg{object} is a keyboard device.
   @end{short}
-  The @fun{gdk:device-scroll-lock-state} function retrieves whether the Scroll
-  Lock modifier of the keyboard is locked, if @arg{object} is a keyboard device.
   @see-class{gdk:device}")
 
 ;;; --- gdk:device-seat --------------------------------------------------------
@@ -767,17 +759,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-seat)
       "Accessor"
       (documentation 'device-seat 'function)
- "@version{2024-01-07}
+ "@version{2025-08-31}
   @syntax{(gdk:device-seat object) => seat}
   @syntax{(setf (gdk:device-seat object) seat)}
   @argument[object]{a @class{gdk:device} object}
   @argument[seat]{a @class{gdk:seat} object}
   @begin{short}
-    Accessor of the @slot[gdk:device]{seat} slot of the @class{gdk:device}
-    class.
+    The accessor for the @slot[gdk:device]{seat} slot of the @class{gdk:device}
+    class gets or sets the seat the device belongs to.
   @end{short}
-  The @fun{gdk:device-seat} function returns the seat the device belongs to.
-  The @setf{gdk:device-seat} function sets the seat.
   @see-class{gdk:device}
   @see-class{gdk:seat}")
 

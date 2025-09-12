@@ -227,19 +227,18 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-composited)
       "Accessor"
       (documentation 'display-composited 'function)
- "@version{2025-05-01}
+ "@version{2025-08-31}
   @syntax{(gdk:display-composited object) => composited}
   @argument[object]{a @class{gdk:display} object}
   @argument[composited]{@em{true} if the display properly composites the alpha
     channel}
   @begin{short}
-    Accessor of the @slot[gdk:display]{composited} slot of the
-    @class{gdk:display} class.
+    The accessor for the @slot[gdk:display]{composited} slot of the
+    @class{gdk:display} class returns whether surfaces can reasonably be
+    expected to have their alpha channel drawn correctly on the screen.
   @end{short}
-  The @fun{gdk:display-composited} function returns whether surfaces can
-  reasonably be expected to have their alpha channel drawn correctly on the
-  screen. Check with the @fun{gdk:display-is-rgba} function for whether the
-  display supports an alpha channel.
+  Check with the @fun{gdk:display-is-rgba} function for whether the display
+  supports an alpha channel.
 
   On X11 this function returns whether a compositing manager is compositing on
   display. On modern displays, this value is always @em{true}.
@@ -258,12 +257,13 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-dmabuf-formats)
       "Accessor"
       (documentation 'display-dmabuf-formats 'function)
- "@version{2025-05-01}
+ "@version{2025-08-31}
   @syntax{(gdk:display-dmabuf-formats object) => formats}
   @argument[object]{a @class{gdk:display} object}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
   @begin{short}
-    Returns the dma-buf formats that are supported on the display.
+    The accessor for the @slot[gdk:display]{dmabuf-formats} slot returns the
+    dma-buf formats that are supported on the display.
   @end{short}
   GTK may use OpenGL or Vulkan to support some formats. Calling this function
   will then initialize them if they are not yet.
@@ -289,17 +289,17 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-input-shapes)
       "Accessor"
       (documentation 'display-input-shapes 'function)
- "@version{2025-05-01}
+ "@version{2025-08-31}
   @syntax{(gdk:display-input-shapes object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports input shapes}
   @begin{short}
-    Accessor of the @slot[gdk:display]{input-shapes} slot of the
-    @class{gdk:display} class.
+    The accessor for the @slot[gdk:display]{input-shapes} slot of the
+    @class{gdk:display} class returns @em{true} if the display supports input
+    shapes.
   @end{short}
-  The @fun{gdk:display-input-shapes} function returns @em{true} if the display
-  supports input shapes. This means that the @fun{gdk:surface-set-input-region}
-  function can be used to modify the input shape of surfaces on the display.
+  This means that the @fun{gdk:surface-set-input-region} function can be used
+  to modify the input shape of surfaces on the display.
 
   On modern displays, this value is always @em{true}.
   @see-class{gdk:display}
@@ -316,16 +316,15 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-rgba)
       "Accessor"
       (documentation 'display-rgba 'function)
- "@version{2025-05-01}
+ "@version{2025-08-31}
   @syntax{(gdk:display-rgba object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports an alpha channel}
   @begin{short}
-    Accessor of the @slot[gdk:display]{rgba} slot of the @class{gdk:display}
-    class.
+    The accessor for the @slot[gdk:display]{rgba} slot of the
+    @class{gdk:display} class returns whether surfaces on the display are
+    created with an alpha channel.
   @end{short}
-  The @fun{gdk:display-rgba} function returns whether surfaces on the display
-  are created with an alpha channel.
 
   Even if a @em{true} is returned, it is possible that the alpha channel of the
   surface will not be honored when displaying the surface on the screen. In
@@ -348,14 +347,14 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-shadow-width)
       "Accessor"
       (documentation 'display-shadow-width 'function)
- "@version{2025-05-01}
+ "@version{2025-08-31}
   @syntax{(gdk:display-shadow-width object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if surfaces can draw shadows or @em{false} if
     the display does not support this functionality}
   @begin{short}
-    Returns whether it is possible for a surface to draw outside of the window
-    area.
+    The accessor for the @slot[gdk:display]{shadow-width} slot returns whether
+    it is possible for a surface to draw outside of the window area.
   @end{short}
   If @em{true} is returned the application decides if it wants to draw shadows.
   If @em{false} is returned, the compositor decides if it wants to draw shadows.

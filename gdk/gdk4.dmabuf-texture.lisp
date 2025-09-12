@@ -245,19 +245,17 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-display)
       "Accessor"
       (documentation 'dmabuf-texture-builder-display 'function)
- "@version{2024-07-11}
+ "@version{2025-08-31}
   @syntax{(gdk:dmabuf-texture-builder-display object) => display}
   @syntax{(setf (gdk:dmabuf-texture-builder-display object) display)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:dmabuf-texture-builder]{display} slot of the
-    @class{gdk:dmabuf-texture-builder} class.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{display} slot of the
+    @class{gdk:dmabuf-texture-builder} class gets or sets the display that this
+    texture builder is associated with.
   @end{short}
-  The @fun{gdk:dmabuf-texture-builder-display} function returns the display that
-  this texture builder is associated with. The
-  @setf{gdk:dmabuf-texture-builder-display} function sets the display. The
-  display is used to determine the supported dma-buf formats.
+  The display is used to determine the supported dma-buf formats.
 
   Since 4.14
   @see-class{gdk:dmabuf-texture-builder}
@@ -392,18 +390,16 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-premultiplied)
       "Accessor"
       (documentation 'dmabuf-texture-builder-premultiplied 'function)
- "@version{2024-07-11}
+ "@version{2025-08-31}
   @syntax{(gdk:dmabuf-texture-builder-premultiplied object) => premultiplied}
   @syntax{(setf (gdk:dmabuf-texture-builder-premultiplied object) premultiplied)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[premultiplied]{a boolean whether the data is premultiplied}
   @begin{short}
-    Accessor of the @slot[gdk:dmabuf-texture-builder]{premultiplied} slot of
-    the @class{gdk:dmabuf-texture-builder} class.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{premultiplied} slot
+    of the @class{gdk:dmabuf-texture-builder} class gets or sets whether the
+    data is premultiplied.
   @end{short}
-  The @fun{gdk:dmabuf-texture-builder-premultiplied} function gets whether the
-  data is premultiplied. The @setf{gdk:dmabuf-texture-builder-premultiplied}
-  function sets whether the data is premultiplied.
 
   Unless otherwise specified, all formats including alpha channels are assumed
   to be premultiplied.
@@ -463,20 +459,20 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-update-texture)
       "Accessor"
       (documentation 'dmabuf-texture-builder-update-texture 'function)
- "@version{2024-07-11}
+ "@version{2025-08-31}
   @syntax{(gdk:dmabuf-texture-builder-update-texture object) => texture}
   @syntax{(setf (gdk:dmabuf-texture-builder-update-region object) texture)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[texture]{a @class{gdk:texture} object}
   @begin{short}
-    Accessor of the @slot[gdk:dmabuf-texture-builder]{update-texture} slot of
-    the @class{gdk:dmabuf-texture-builder} class.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{update-texture} slot
+    of the @class{gdk:dmabuf-texture-builder} class gets or sets the texture
+    to be updated by this texture.
   @end{short}
-  The @fun{gdk:dmabuf-texture-builder-update-texture} function gets the texture
-  previously set or @code{nil} if none was set. The
-  @setf{gdk:dmabuf-texture-builder-update-texture} function sets the texture to
-  be updated by this texture. See the
-  @fun{gdk:dmabuf-texture-builder-update-region} function for an explanation.
+  Returns @code{nil} if none was set.
+
+  See the @fun{gdk:dmabuf-texture-builder-update-region} function for an
+  explanation.
   @see-class{gdk:dmabuf-texture-builder}
   @see-function{gdk:dmabuf-texture-builder-update-region}")
 

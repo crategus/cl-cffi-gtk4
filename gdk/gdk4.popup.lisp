@@ -107,17 +107,16 @@
 (setf (liber:alias-for-function 'popup-autohide)
       "Accessor"
       (documentation 'popup-autohide 'function)
- "@version{#2023-04-09}
+ "@version{#2025-08-31}
   @syntax{(gdk:popup-autohide object) => autohide}
   @syntax{(setf (gdk:popup-autohide object) autohide)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[autohide]{@em{True} if @arg{popup} will autohide.}
   @begin{short}
-    Accessor of the @slot[gdk:popup]{autohide} slot of the @class{gdk:popup}
-    class.
+    The accessor for the @slot[gdk:popup]{autohide} slot of the
+    @class{gdk:popup} class returns whether the popup is set to hide on outside
+    clicks.
   @end{short}
-  The @fun{gdk:popup-autohide} function returns whether the popup is set to
-  hide on outside clicks.
   @see-class{gdk:popup}
   @see-class{gdk:surface}")
 
@@ -133,16 +132,15 @@
 (setf (liber:alias-for-function 'popup-parent)
       "Accessor"
       (documentation 'popup-parent 'function)
- "@version{#2023-04-09}
+ "@version{#2025-08-31}
   @syntax{(gdk:popup-parent object) => parent}
   @syntax{(setf (gdk:popup-parent object) parent)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[parent]{a @class{gdk:surface} parent surface}
   @begin{short}
-    Accessor of the @slot[gdk:popup]{parent} slot of the @class{gdk:popup}
-    class.
+    The accessor for the @slot[gdk:popup]{parent} slot of the @class{gdk:popup}
+    class returns the parent surface of a popup.
   @end{short}
-  The @fun{gdk:popup-parent} function returns the parent surface of a popup.
   @see-class{gdk:popup}
   @see-class{gdk:surface}")
 
