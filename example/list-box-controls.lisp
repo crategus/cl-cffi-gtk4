@@ -1,10 +1,10 @@
 ;;;; List Box Controls
 ;;;;
-;;;; The <tt>GtkListBox</tt> widget is well-suited for creating “button strips”
-;;;; — lists of controls for use in preference dialogs or settings panels. To
+;;;; The <tt>GtkListBox</tt> widget is well-suited for creating "button strips"
+;;;; - lists of controls for use in preference dialogs or settings panels. To
 ;;;; create this style of list, use the <tt>.rich-list</tt> style class.
 ;;;;
-;;;; 2024-4-13
+;;;; 2025-09-03
 
 (in-package :gtk4-example)
 
