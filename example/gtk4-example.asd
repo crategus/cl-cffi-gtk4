@@ -58,6 +58,8 @@
                (:file "label-various")
                (:file "label-attributes")
                (:file "images")
+               (:file "image-view")
+               (:file "image-scaling")
                (:file "spinner")
                (:file "info-bar")
                (:file "progress-bar")

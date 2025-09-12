@@ -58,6 +58,7 @@
            #:do-label-various
            #:do-label-attributes
            #:do-images
+           #:do-image-scaling
            #:do-spinner
            #:do-info-bar
            #:do-progress-bar
