@@ -3,9 +3,14 @@
 *.ini
 *.c
 TODO
+doc/pages/
+doc/single-page/
+doc/index.*
+doc/lambda.icon
+generate-book.lisp
 test/rtest-templates.lisp
-test/out/*
-test/report/*
+test/out/
+test/report/
 make-coverage.lisp
-demo/gtk-demo/out/*
+demo/gtk-demo/out/
 
