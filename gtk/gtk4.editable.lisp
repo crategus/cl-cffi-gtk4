@@ -273,17 +273,21 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-cursor-position)
       "Accessor"
       (documentation 'editable-cursor-position 'function)
- "@version{2025-08-06}
+ "@version{2025-09-13}
   @syntax{(gtk:editable-cursor-position object) => position}
-  @syntax{(setf (gtk:editable-cursor-position object) position)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[position]{an integer for the current cursor position}
   @begin{short}
     The accessor for the @slot[gtk:editable]{cursor-position} slot of the
-    @class{gtk:editable} class gets or sets the current position of the
-    insertion cursor in chars.
+    @class{gtk:editable} class returns the current position of the insertion
+    cursor in chars.
   @end{short}
-  @see-class{gtk:editable}")
+  @begin[Notes]{dictionary}
+    The @slot[gtk:editable]{cursor-position} slot is not writable. Use the
+    @fun{gtk:editable-position} function to set the cursor position.
+  @end{dictionary}
+  @see-class{gtk:editable}
+  @see-function{gtk:editable-position}")
 
 ;;; --- gtk:editable-editable --------------------------------------------------
 
@@ -654,24 +658,26 @@ lambda (editable text length position)    :run-last
 
 (cffi:defcfun ("gtk_editable_get_position" editable-position) :int
  #+liber-documentation
- "@version{2025-05-31}
+ "@version{2025-09-13}
   @syntax{(gtk:editable-position editable) => pos}
   @syntax{(setf (gtk:editable-position editable) pos)}
   @argument[editable]{a @class{gtk:editable} widget}
   @argument[pos]{an integer for the position of the cursor, in chars}
   @begin{short}
-    The @fun{gtk:editable-position} function retrieves the current position of
-    the cursor relative to the start of the content of the editable widget.
+    Gets or sets the position of the cursor relative to the start of the content
+    of the editable widget.
   @end{short}
-  The @setf{gtk:editable-position} function sets the cursor position in the
-  editable widget to the given value.
-
   The cursor is displayed before the character with the given (base 0) index
   in the contents of the editable widget. The value must be less than or equal
   to the number of characters in the editable widget. A value of -1 indicates
-  that the position should be set after the last character of the editable.
-  Note that @arg{pos} is in characters, not in bytes.
-  @see-class{gtk:editable}"
+  that the position should be set after the last character of the editable
+  widget. Note that @arg{pos} is in characters, not in bytes.
+  @begin[Notes]{dictionary}
+    The @slot[gtk:editable]{cursor-position} slot is not writable. Use this
+    function to set the cursor position of the editable widget.
+  @end{dictionary}
+  @see-class{gtk:editable}
+  @see-function{gtk:editable-cursor-position}"
   (editable (g:object editable)))
 
 (export 'editable-position)
@@ -686,23 +692,19 @@ lambda (editable text length position)    :run-last
 
 (defun editable-alignment (editable)
  #+liber-documentation
- "@version{2025-05-31}
+ "@version{2025-09-13}
   @syntax{(gtk:editable-alignment editable) => align}
   @syntax{(setf (gtk:editable-alignment editable) align)}
   @argument[editable]{a @class{gtk:editable} widget}
   @argument[align]{a number coerced to a single float for the horizontal
     alignment, from 0.0 (left) to 1.0 (right), reversed for RTL layouts}
   @begin{short}
-    The @fun{gtk:editable-alignment} function gets the value of the horizontal
-    alignment of the editable widget.
+    Gets or sets the value of the horizontal alignment of the editable widget.
   @end{short}
-  The @setf{gtk:editable-alignment} function sets the alignment. This controls
-  the horizontal positioning of the contents when the displayed text is shorter
-  than the width of the editable widget.
+  This controls the horizontal positioning of the contents when the displayed
+  text is shorter than the width of the editable widget.
   @begin[Notes]{dictionary}
-    This function is equivalent to the @fun{gtk:editable-xalign} function. The
-    Lisp implementation calls the corresponding @fun{gtk:editable-xalign}
-    function.
+    This function is equivalent to the @fun{gtk:editable-xalign} function.
   @end{dictionary}
   @see-class{gtk:editable}
   @see-function{gtk:editable-xalign}"
