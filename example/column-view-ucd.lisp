@@ -370,20 +370,28 @@
                   (format nil "0x~x" codepoint))
             (setf (gtk:label-label (gtk:builder-object builder "char"))
                   (format nil "~a" ch))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "category"))
                   (get-unicode-category (sb-unicode:general-category ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "bidi_class"))
                   (get-unicode-bidi-class (sb-unicode:bidi-class ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "combining_class"))
                   (format nil "~a" (sb-unicode:combining-class ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "script"))
                   (format nil "~a" (sb-unicode:script ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "grapheme_break"))
                   (get-unicode-breaktype (sb-unicode:grapheme-break-class ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "word_break"))
                   (get-unicode-breaktype (sb-unicode:word-break-class ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "sentence_break"))
                   (get-unicode-breaktype (sb-unicode:sentence-break-class ch)))
+            #+sbcl
             (setf (gtk:label-label (gtk:builder-object builder "line_break"))
                   (get-unicode-breaktype (sb-unicode:line-break-class ch)))
             (gtk:window-present dialog))))
