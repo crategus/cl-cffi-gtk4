@@ -90,11 +90,9 @@
 
 (test gtk-scrollable-border
   (glib-test:with-check-memory (scrollable)
-    (let (border)
-      (is (typep (setf scrollable
-                       (make-instance 'gtk:text-view)) 'gtk:text-view))
-    ;; TODO: Can we construct a test different from nil
-    (is-false (setf border
-                    (gtk:scrollable-border scrollable))))))
+    (is (typep (setf scrollable
+                     (make-instance 'gtk:text-view)) 'gtk:text-view))
+    ;; TODO: Construct a test different from nil
+    (is-false (gtk:scrollable-border scrollable))))
 
-;;; 2025-05-06
+;;; 2025-09-18

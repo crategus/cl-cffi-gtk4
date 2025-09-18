@@ -94,11 +94,8 @@
 (test gtk-builder-list-item-factory-new-from-resource
   (g:with-resource (resource (glib-sys:sys-path "test/rtest-resource.gresource"))
     (let ((path "/com/crategus/test/gtk-builder-list-item-factory.ui")
-          (scope (make-instance 'gtk:builder-cl-scope))
-          factory)
-      (is (typep (setf factory
-                       (gtk:builder-list-item-factory-new-from-resource scope path))
-                 'gtk:builder-list-item-factory))
-)))
+          (scope (make-instance 'gtk:builder-cl-scope)))
+      (is (typep (gtk:builder-list-item-factory-new-from-resource scope path)
+                 'gtk:builder-list-item-factory)))))
 
-;;; 2025-3-16
+;;; 2025-09-18

@@ -315,6 +315,7 @@ dann benutzen Sie es immer noch.")
     (gtk:text-buffer-insert-paintable buffer iter paintable)
     (let ((iter (gtk:text-buffer-iter-at-offset buffer 12)))
       (is (typep (gtk:text-iter-paintable iter) 'gdk:texture))
+      #+sbcl ; FIXME: What is the object replacement character for ccl?
       (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter)))
       (is (eq #\Nul (gtk:text-iter-char (gtk:text-buffer-end-iter buffer)))))
     ;; Check memory management
@@ -840,4 +841,4 @@ dann benutzen Sie es immer noch.")
     (is-false (gtk:text-iter-in-range start end center))
     (is-false (gtk:text-iter-in-range end center start))))
 
-;;; 2024-10-26
+;;; 2025-09-18

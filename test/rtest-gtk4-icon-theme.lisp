@@ -122,10 +122,7 @@
 ;;;     gtk_icon_theme_get_for_display
 
 (test gtk-icon-theme-for-display
-  (let (theme)
-    (is (typep (setf theme
-                     (gtk:icon-theme-for-display (gdk:display-default)))
-               'gtk:icon-theme))))
+  (is (typep (gtk:icon-theme-for-display (gdk:display-default)) 'gtk:icon-theme)))
 
 ;;;     gtk_icon_theme_add_search_path
 ;;;     gtk_icon_theme_add_resource_path
@@ -160,4 +157,4 @@
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; 2025-05-25
+;;; 2025-09-18

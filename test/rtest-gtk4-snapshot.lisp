@@ -130,9 +130,8 @@
 
 (test gtk-snapshot-to-node.1
   (glib-test:with-check-memory (snapshot)
-    (let (node)
-      (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-      (is-false (setf node (gtk:snapshot-to-node snapshot))))))
+    (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
+    (is-false (gtk:snapshot-to-node snapshot))))
 
 (test gtk-snapshot-to-node.2
   (let ((filename "test/out/snapshot-draw-clock.png")
@@ -594,4 +593,4 @@
 ;;;     gtk_snapshot_render_focus                          Deprecated 4.10
 ;;;     gtk_snapshot_render_layout                         Deprecated 4.10
 
-;;; 2025-2-12
+;;; 2025-09-18

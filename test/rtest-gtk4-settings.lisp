@@ -245,8 +245,7 @@
     (is (string= "cpdb,file" (gtk:settings-gtk-print-backends settings)))
     (is (string= "evince --unlink-tempfile --preview --print-settings %s %f"
                  (gtk:settings-gtk-print-preview-command settings)))
-    ;; FIXME: Signals an error: null-pointer in parse-g-param-spec.
-    (signals (error) (gtk:settings-gtk-recent-files-enabled settings))
+    (is-true (gtk:settings-gtk-recent-files-enabled settings))
     (is (= -1 (gtk:settings-gtk-recent-files-max-age settings)))
     (is-false (gtk:settings-gtk-shell-shows-app-menu settings))
     ;; FIXME: Can be TRUE. Why?
@@ -315,4 +314,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2025-3-30
+;;; 2025-09-18

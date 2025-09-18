@@ -139,6 +139,7 @@
 
 
 (defmethod canvas-item-snapshot-impl ((widget canvas-item) snapshot)
+  (declare (ignorable snapshot))
   (error "Widget of type ~a does not implement GTK:CANVAS-ITEM-SNAPSHOT-IMPL"
          (g:type-name (g:type-from-instance widget))))
 
@@ -148,3 +149,6 @@
 (defmethod gtk:widget-map-impl ((widget canvas-item))
   (error "Widget of type ~a does not implement GTK:WIDGET-MAP-IMPL"
          (g:type-name (g:type-from-instance widget))))
+
+;;; 2025-09-18
+

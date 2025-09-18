@@ -302,7 +302,7 @@
     (is-true (gtk:entry-invisible-char-set entry))
     (is-false (gtk:entry-unset-invisible-char entry))
     ;; Default char is #\BULLET and not \*
-    #-windows
+    #+sbcl ; FIXME: What is the BULLET character for ccl?
     (is (= (char-code #\BULLET) (gtk:entry-invisible-char entry)))
     #+windows
     (is (= (char-code #\BLACK_CIRCLE) (gtk:entry-invisible-char entry)))
@@ -341,4 +341,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2025-05-31
+;;; 2025-09-18

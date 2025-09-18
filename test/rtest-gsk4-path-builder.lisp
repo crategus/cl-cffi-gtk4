@@ -112,11 +112,10 @@
                               (top-right graphene:size-t 0.2 0.2)
                               (bottom-right graphene:size-t 0.3 0.3)
                               (bottom-left graphene:size-t 0.4 0.4))
-        (setf rect
-              (gsk:rounded-rect-init rect bounds top-left
-                                                 top-right
-                                                 bottom-right
-                                                 bottom-left))
+        (gsk:rounded-rect-init rect bounds top-left
+                                           top-right
+                                           bottom-right
+                                           bottom-left)
         (is-false (gsk:path-builder-add-rounded-rect builder rect))
         (is (string= (format nil
                              "M 0.100000001 10 L 19.7999992 10 O 20 10, 20 ~
@@ -173,4 +172,4 @@
 ;;;     gsk_path_builder_ref
 ;;;     gsk_path_builder_unref
 
-;;; 2025-05-30
+;;; 2025-09-18

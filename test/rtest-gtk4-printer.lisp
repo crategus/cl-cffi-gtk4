@@ -130,13 +130,12 @@
 
 (test gtk-printer-properties
   (glib-test:with-check-memory (:strong 1)
-    (let (printer backend)
+    (let (printer)
       (when (setf printer (get-default-printer))
         (is-true (gtk:printer-accepting-jobs printer))
         (is-true (gtk:printer-accepts-pdf printer))
         (is-true (gtk:printer-accepts-ps printer))
-        (is (typep (setf backend
-                         (gtk:printer-backend printer)) 'gtk:print-backend))
+        (is (typep (gtk:printer-backend printer) 'gtk:print-backend))
         (is (string= "document-save" (gtk:printer-icon-name printer)))
         (is-true (gtk:printer-is-virtual printer))
         (is (= 0 (gtk:printer-job-count printer)))
@@ -262,4 +261,4 @@
         (let ((size (gtk:paper-size-new (gtk:paper-size-default))))
           (is-false (gtk:printer-hard-margins-for-paper-size printer size)))))))
 
-;;; 2025-4-12
+;;; 2025-09-18

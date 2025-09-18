@@ -305,7 +305,10 @@
     (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
 
     (is (eq #\t (gtk:text-iter-char iter)))
+    #+sbcl
     (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
+    #+ccl ; FIXME: What is the object replacement character for ccl?
+    (is (characterp (gtk:text-iter-char iter1)))
     ;; Check memory management
     (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
     (is (= 1 (g:object-ref-count anchor)))
@@ -327,7 +330,10 @@
     (setf iter1 (gtk:text-buffer-iter-at-child-anchor buffer anchor))
 
     (is (eq #\t (gtk:text-iter-char iter)))
+    #+sbcl
     (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
+    #+ccl ; FIXME: What is the object replacement character for ccl?
+    (is (characterp (gtk:text-iter-char iter1)))
     ;; Check memory management
     (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
     (is (= 1 (g:object-ref-count anchor)))
@@ -613,4 +619,4 @@
 ;;;     gtk_text_buffer_add_commit_notify                   Since 4.16
 ;;;     gtk_text_buffer_remove_commit_notify                Since 4.16
 
-;;; 2024-10-26
+;;; 2025-09-18

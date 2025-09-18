@@ -332,7 +332,7 @@
     (is-true (gtk:text-invisible-char-set text))
     (is-false (gtk:text-unset-invisible-char text))
     ;; Default char is #\BULLET and not \*
-    #+crategus
+    #+sbcl ; FIXME: What is the BULLET character for ccl?
     (is (= (char-code #\BULLET) (gtk:text-invisible-char text)))
     #+windows
     (is (= (char-code #\BLACK_CIRCLE) (gtk:text-invisible-char text)))
@@ -445,4 +445,4 @@
       (is (= 17.0 (graphene:rect-height weak))))
     (is-false (setf (gtk:text-buffer text) nil))))
 
-;;; 2025-05-30
+;;; 2025-09-18

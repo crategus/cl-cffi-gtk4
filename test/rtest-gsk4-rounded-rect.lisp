@@ -161,11 +161,10 @@
                             (top-right graphene:size-t 0.2 0.2)
                             (bottom-right graphene:size-t 0.3 0.3)
                             (bottom-left graphene:size-t 0.4 0.4))
-      (setf rect
-            (gsk:rounded-rect-init rect bounds top-left
-                                               top-right
-                                               bottom-right
-                                               bottom-left))
+      (gsk:rounded-rect-init rect bounds top-left
+                                         top-right
+                                         bottom-right
+                                         bottom-left)
       ;; Get the values of the bounds rectangle
       (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
       (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
@@ -191,13 +190,12 @@
                             (size2 graphene:size-t)
                             (size3 graphene:size-t)
                             (size4 graphene:size-t))
-      (setf rect
-            (gsk:rounded-rect-init rect
-                                   bounds
-                                   (graphene:size-init size1 0.1 0.1)
-                                   (graphene:size-init size2 0.2 0.2)
-                                   (graphene:size-init size3 0.3 0.3)
-                                   (graphene:size-init size4 0.4 0.4)))
+      (gsk:rounded-rect-init rect
+                             bounds
+                             (graphene:size-init size1 0.1 0.1)
+                             (graphene:size-init size2 0.2 0.2)
+                             (graphene:size-init size3 0.3 0.3)
+                             (graphene:size-init size4 0.4 0.4))
       ;; Get the values of the bounds rectangle
       (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
       (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
@@ -227,13 +225,12 @@
                             (bottom-right graphene:size-t 0.3 0.3)
                             (bottom-left graphene:size-t 0.4 0.4))
       ;; Initialize src
-      (setf src
-            (gsk:rounded-rect-init rect bounds top-left
-                                               top-right
-                                               bottom-right
-                                               bottom-left))
+      (is (cffi:pointerp (gsk:rounded-rect-init src bounds top-left
+                                                           top-right
+                                                           bottom-right
+                                                           bottom-left)))
       ;; Initialize rect from src
-      (setf rect (gsk:rounded-rect-init-copy rect src))
+      (is (cffi:pointerp (gsk:rounded-rect-init-copy rect src)))
       ;; Get the values of the bounds rectangle
       (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
       (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
@@ -257,7 +254,7 @@
 (test gsk-rounded-rect-init-from-rect
   (cffi:with-foreign-object (rect '(:struct gsk:rounded-rect))
     (graphene:with-object (bounds graphene:rect-t 0 10 20 30)
-      (setf rect (gsk:rounded-rect-init-from-rect rect bounds 2))
+      (is (cffi:pointerp (gsk:rounded-rect-init-from-rect rect bounds 2)))
       ;; Get the values of the bounds rectangle
       (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
       (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
@@ -311,4 +308,4 @@
 ;;;     gsk_rounded_rect_contains_rect
 ;;;     gsk_rounded_rect_intersects_rect
 
-;;; 2025-05-09
+;;; 2025-09-18

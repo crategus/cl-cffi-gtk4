@@ -25,12 +25,10 @@
 (test gdk-texture-downloader-new
   (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) (texture 2) :strong 2)
-      (let ((path (glib-sys:sys-path "test/resource/ducky.png"))
-             downloader)
+      (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
         (setf pixbuf (gdk:pixbuf-new-from-file path))
         (setf texture (gdk:texture-new-for-pixbuf pixbuf))
-        (is (typep (setf downloader
-                         (gdk:texture-downloader-new texture))
+        (is (typep (gdk:texture-downloader-new texture)
                    'gdk:texture-downloader))))))
 
 ;;;     gdk_texture_downloader_copy
@@ -101,4 +99,4 @@
         (is (eq texture (setf (gdk:texture-downloader-texture downloader) texture)))
         (is (eq texture (gdk:texture-downloader-texture downloader)))))))
 
-;;; 2025-4-26
+;;; 2025-09-18

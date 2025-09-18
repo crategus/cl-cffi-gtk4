@@ -10,6 +10,7 @@
 (test gtk-accelerator-valid
   (is-true (gtk:accelerator-valid (char-code #\a) :shift-mask))
   (is-true (gtk:accelerator-valid (char-code #\a) :control-mask))
+  #-ccl ; FIXME: What is the FULLWIDTH_MACRON character for ccl?
   (is-false (gtk:accelerator-valid (char-code #\fullwidth_macron)
                                    :no-modifier-mask)))
 
@@ -62,4 +63,4 @@
                :META-MASK)
              (gtk:accelerator-default-mod-mask))))
 
-;;; 2024-1-9
+;;; 2025-09-18

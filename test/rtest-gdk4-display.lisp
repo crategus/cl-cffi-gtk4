@@ -157,8 +157,7 @@
 (test gdk-display-default
  (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 1)
-      (let (display)
-        (is (typep (setf display (gdk:display-default)) 'gdk:display))))))
+        (is (typep (gdk:display-default) 'gdk:display)))))
 
 ;;;     gdk_display_get_name
 
@@ -387,4 +386,4 @@
 ;;;     gdk_display_prepare_gl                              Since 4.4
 ;;;     gdk_display_create_gl_context                       Since 4.6
 
-;;; 2025-05-01
+;;; 2025-09-18
