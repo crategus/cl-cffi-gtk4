@@ -75,7 +75,7 @@
     "formats" "GdkContentFormats" t nil)
    (storable-formats
     content-provider-storable-formats
-    "storeable-formats" "GdkContentFormats" t nil)))
+    "storable-formats" "GdkContentFormats" t nil)))
 
 #+liber-documentation
 (setf (documentation 'content-provider 'type)
