@@ -464,18 +464,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-activate-on-single-click)
       "Accessor"
       (documentation 'icon-view-activate-on-single-click 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:icon-view-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[setting]{a boolean that is @em{true} to emit the
     @sig[gtk:icon-view]{item-activated} signal on a single click}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{activate-on-single-click} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{activate-on-single-click} slot of
+    the @class{gtk:icon-view} class gets or sets whether the
+    @sig[gtk:icon-view]{item-activated} signal will be emitted after a single
+    click.
   @end{short}
-  Causes the @sig[gtk:icon-view]{item-activated} signal to be emitted on a
-  single click instead of a double click.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -497,15 +497,15 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-cell-area)
       "Accessor"
       (documentation 'icon-view-cell-area 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-cell-area object) => area}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[area]{a @class{gtk:cell-area} object used to layout cell renderers}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{cell-area} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{cell-area} slot of the
+    @class{gtk:icon-view} class gets the cell area used to layout cell renderers
+    for this icon view.
   @end{short}
-  The @class{gtk:cell-area} object used to layout cell renderers for this view.
   If no area is specified when creating the icon view with the
   @fun{gtk:icon-view-new-with-area} function a @class{gtk:cell-area-box} object
   will be used.
@@ -533,16 +533,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-column-spacing)
       "Accessor"
       (documentation 'icon-view-column-spacing 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-column-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[spacing]{an integer for the column spacing}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{column-spacing} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{column-spacing} slot of the
+    @class{gtk:icon-view} class gets or sets the space which is inserted between
+    the columns of the icon view.
   @end{short}
-  Specifies the space which is inserted between the columns of the icon view.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -565,17 +565,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-columns)
       "Accessor"
       (documentation 'icon-view-columns 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-columns object) => columns}
   @syntax{(setf (gtk:icon-view-columns object) columns)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[columns]{an integer for the number of columns}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{columns} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{columns} slot of the
+    @class{gtk:icon-view} class gets or sets the number of the columns in which
+    the items should be displayed.
   @end{short}
-  Determines in how many columns the icons are arranged. If columns is -1, the
-  number of columns will be chosen automatically to fill the available area.
+  If @arg{columns} is -1, the number of columns will be chosen automatically to
+  fill the available area.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -597,17 +598,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-orientation)
       "Accessor"
       (documentation 'icon-view-item-orientation 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-item-orientation object) => orientation}
   @syntax{(setf (gtk:icon-view-item-orientation object) orientation)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[orientation]{a @sym{gtk:orientation} value for the relative
     position of texts and icons}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{item-orientation} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{item-orientation} slot of the
+    @class{gtk:icon-view} class gets or sets whether the labels are drawn beside
+    the icons instead of below.
   @end{short}
-  Determines whether the labels are drawn beside the icons instead of below.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -629,16 +630,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-padding)
       "Accessor"
       (documentation 'icon-view-item-padding 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-item-padding object) => padding}
   @syntax{(setf (gtk:icon-view-item-padding object) padding)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[padding]{an integer for the item padding}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{item-padding} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{item-padding} slot of the
+    @class{gtk:icon-view} class gets or sets the padding around each of the icon
+    view's items.
   @end{short}
-  Specifies the padding around each of the icon view's items.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -660,17 +661,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-item-width)
       "Accessor"
       (documentation 'icon-view-item-width 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-item-width object) => width}
   @syntax{(setf (gtk:icon-view-item-width object) width)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[width]{an integer for the width for each item}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{item-width} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{item-width} slot of the
+    @class{gtk:icon-view} class gets or sets the width to use for each item.
   @end{short}
-  Specifies the width to use for each item. If it is set to -1, the icon view
-  will automatically determine a suitable item size.
+  If it is set to -1, the icon view will automatically determine a suitable
+  item size.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -691,17 +692,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-margin)
       "Accessor"
       (documentation 'icon-view-margin 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-margin object) => margin}
   @syntax{(setf (gtk:icon-view-margin object) margin)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[margin]{an integer for the margin}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{margin} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{margin} slot of the
+    @class{gtk:icon-view} class gets or sets the space which is inserted at the
+    top, bottom, left and right of the icon view.
   @end{short}
-  Specifies the space which is inserted at the top, bottom, left and right of
-  the icon view.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -726,19 +726,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-markup-column)
       "Accessor"
       (documentation 'icon-view-markup-column 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-markup-column object) => column}
   @syntax{(setf (gtk:icon-view-markup-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[column]{an integer for a column in the currently used model, or -1
     to display no text}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{markup-column} slot of
-    the @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{markup-column} slot of the
+    @class{gtk:icon-view} class gets or sets the column with markup text for
+    the icon view.
   @end{short}
-  The @fun{gtk:icon-view-markup-column} function returns the column with markup
-  text for the icon view. The @setf{gtk:icon-view-markup-column} function sets
-  the column with markup information.
 
   The markup column must be of @code{\"gchararray\"} type. If the markup column
   is set to something, it overrides the text column set by the
@@ -762,18 +760,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-model)
       "Accessor"
       (documentation 'icon-view-model 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-model object) => model}
   @syntax{(setf (gtk:icon-view-model object) model)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{model} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{model} slot of the
+    @class{gtk:icon-view} class gets or sets the model for the icon view.
   @end{short}
-  The @fun{gtk:icon-view-model} function returns the model the
-  @class{gtk:icon-view} widget is based on. Returns @code{nil} if the model is
-  unset. The @setf{gtk:icon-view-model} function sets the model.
+  Returns @code{nil} if the model is unset.
 
   If the icon view already has a model set, it will remove it before setting
   the new model. If @arg{model} is @code{nil}, then it will unset the old model.
@@ -800,20 +796,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-pixbuf-column)
       "Accessor"
       (documentation 'icon-view-pixbuf-column 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-pixbuf-column object) => column}
   @syntax{(setf (gtk:icon-view-pixbuf-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[column]{an integer for a column in the currently used model, or
     -1 to disable}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{pixbuf-column} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{pixbuf-column} slot of the
+    @class{gtk:icon-view} class gets or sets the number of the model column
+    containing the pixbufs which are displayed.
   @end{short}
-  The @fun{gtk:icon-view-pixbuf-column} function returns the column with pixbufs
-  for the icon view. The @setf{gtk:icon-view-pixbuf-column} function sets the
-  column with pixbufs.
-
   The pixbuf column must be of @code{\"GdkPixbuf\"} type.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
@@ -836,20 +829,19 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-reorderable)
       "Accessor"
       (documentation 'icon-view-reorderable 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-reorderable object) => reorderable}
   @syntax{(setf (gtk:icon-view-reorderable object) reorderable)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[reorderable]{@em{true}, if the list of items can be reordered}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{reorderable} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{reorderable} slot of the
+    @class{gtk:icon-view} class gets or sets whether the user can reorder the
+    list via drag and drop.
   @end{short}
-  The @fun{gtk:icon-view-reorderable} function retrieves whether the user can
-  reorder the list via drag and drop. The @setf{gtk:icon-view-reorderable}
-  function sets whether the user can reorder the list. This function is a
-  convenience function to allow you to reorder models that support the
-  @class{gtk:tree-drag-source} and the @class{gtk:tree-drag-dest} interfaces.
+  This function is a convenience function to allow you to reorder models that
+  support the @class{gtk:tree-drag-source} and the @class{gtk:tree-drag-dest}
+  interfaces.
 
   Both @class{gtk:tree-store} and @class{gtk:list-store} objects support these.
   If @arg{reorderable} is @em{true}, then the user can reorder the model by
@@ -886,16 +878,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-row-spacing)
       "Accessor"
       (documentation 'icon-view-row-spacing 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-row-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[spacing]{an integer for the row spacing}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{row-spacing} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{row-spacing} slot of the
+    @class{gtk:icon-view} class gets or sets the space which is inserted between
+    the rows of the icon view.
   @end{short}
-  Specifies the space which is inserted between the rows of the icon view.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -909,7 +901,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "selection-mode" 'icon-view) t)
  "The @code{selection-mode} property of type @sym{gtk:selection-mode}
   (Read / Write) @br{}
-  Specifies the selection mode of an icon view. If the mode is
+  Specifies the selection mode of the icon view. If the mode is
   @val[gtk:selection-mode]{:multiple}, rubberband selection is enabled, for the
   other modes, only keyboard selection is possible. @br{}
   Default value: @val[gtk:selection-mode]{:single}")
@@ -918,18 +910,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-selection-mode)
       "Accessor"
       (documentation 'icon-view-selection-mode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-selection-mode object) => mode}
   @syntax{(setf (gtk:icon-view-selection-mode object) mode)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[mode]{a @sym{gtk:selection-mode} value}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{selection-mode} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{selection-mode} slot of the
+    @class{gtk:icon-view} class gets or sets the selection mode of the icon
+    view.
   @end{short}
-  The @fun{gtk:icon-view-selection-mode} function gets the selection mode of the
-  icon view. The @setf{gtk:icon-view-selection-mode} function sets the selection
-  mode.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -952,17 +942,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-spacing)
       "Accessor"
       (documentation 'icon-view-spacing 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-spacing object) => spacing}
   @syntax{(setf (gtk:icon-view-spacing object) spacing)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[spacing]{an integer for the spacing}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{spacing} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{spacing} slot of the
+    @class{gtk:icon-view} class gets or sets the space which is inserted
+    between the cells, that is the icon and the text, of an item.
   @end{short}
-  Specifies the space which is inserted between the cells, that is the icon and
-  the text, of an item.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
     Use the @class{gtk:grid-view} implementation instead.
@@ -986,18 +975,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-text-column)
       "Accessor"
       (documentation 'icon-view-text-column 'function)
- "@version{2025-03-03}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-text-column object) => column}
   @syntax{(setf (gtk:icon-view-text-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[column]{an integer for a column in the currently used model, or
     -1 to display no text}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{text-column} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{text-column} slot of the
+    @class{gtk:icon-view} class gets or sets the number of the model column
+    containing the texts which are displayed.
   @end{short}
-  The @fun{gtk:icon-view-text-column} function returns the column with text for
-  the icon view. The @setf{gtk:icon-view-text-column} function sets the column.
   The text column must be of @code{\"gchararray\"} type.
   @begin[Warning]{dictionary}
     The @class{gtk:icon-view} implementation is deprecated since 4.10.
@@ -1019,18 +1007,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'icon-view-tooltip-column)
       "Accessor"
       (documentation 'icon-view-tooltip-column 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:icon-view-tooltip-column object) => column}
   @syntax{(setf (gtk:icon-view-tooltip-column object) column)}
   @argument[object]{a @class{gtk:icon-view} widget}
   @argument[column]{an integer that is a valid column number}
   @begin{short}
-    Accessor of the @slot[gtk:icon-view]{tooltip-column} slot of the
-    @class{gtk:icon-view} class.
+    The accessor for the @slot[gtk:icon-view]{tooltip-column} slot of the
+    @class{gtk:icon-view} class gets or sets the column in the model containing
+    the tooltip texts for the items.
   @end{short}
-  The @fun{gtk:icon-view-tooltip-column} function returns the column of the icon
-  view's model which is being used for displaying tooltips on the icon view's
-  rows. The @setf{gtk:icon-view-tooltip-column} function sets the column.
 
   If you only plan to have simple (text-only) tooltips on full items, you can
   use this function to have the @class{gtk:icon-view} widget handle these

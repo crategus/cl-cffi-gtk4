@@ -282,19 +282,19 @@
 (setf (liber:alias-for-function 'message-dialog-message-area)
       "Accessor"
       (documentation 'message-dialog-message-area 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-message-area object) => area}
   @argument[dialog]{a @class{gtk:message-dialog} widget}
   @argument[area]{a @class{gtk:box} widget with @val[gtk:orientation]{:vertical}
     orientation}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{message-area} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{message-area} slot of the
+    @class{gtk:message-dialog} class returns the @class{gtk:box} widget with
+    @val[gtk:orientation]{:vertical} orientation corresponding to the \"message
+    area\" in the message dialog.
   @end{short}
-  The @fun{gtk:message-dialog-message-area} function returns the @class{gtk:box}
-  widget with @val[gtk:orientation]{:vertical} orientation corresponding to the
-  \"message area\" in the message dialog. This is the box where the primary and
-  secondary labels of the message dialog are packed.
+  This is the box where the primary and secondary labels of the message dialog
+  are packed.
 
   You can add your own extra content to that box and it will appear below those
   labels. See the @fun{gtk:dialog-content-area} function for the corresponding
@@ -323,15 +323,14 @@
 (setf (liber:alias-for-function 'message-dialog-message-type)
       "Accessor"
       (documentation 'message-dialog-message-type 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-message-type object) => type}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[type]{a value of the @sym{gtk:message-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{message-type} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{message-type} slot of the
+    @class{gtk:message-dialog} class returns the type of the message.
   @end{short}
-  The type of the message.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
     @class{gtk:alert-dialog} widget instead.
@@ -353,16 +352,16 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-text)
       "Accessor"
       (documentation 'message-dialog-secondary-text 'function)
- "@version{2025-02-26}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-secondary-text object) => text}
   @syntax{(setf (gtk:message-dialog-secondary-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[text]{a string for the secondary text of the message dialog}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{secondary-text} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{secondary-text} slot of the
+    @class{gtk:message-dialog} class gets or sets the secondary text for the
+    message dialog.
   @end{short}
-  The secondary text for the message dialog.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
     @class{gtk:alert-dialog} widget instead.
@@ -386,16 +385,16 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-use-markup)
       "Accessor"
       (documentation 'message-dialog-secondary-use-markup 'function)
- "@version{2025-02-26}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-secondary-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-secondary-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[setting]{a boolean whether to use Pango markup}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{secondary-use-markup} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{secondary-use-markup} slot
+    of the @class{gtk:message-dialog} class gets or sets whether the secondary
+    text of the message dialog includes Pango markup.
   @end{short}
-  @em{True} if the secondary text for the message dialog includes Pango markup.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
     @class{gtk:alert-dialog} widget instead.
@@ -417,17 +416,17 @@
 (setf (liber:alias-for-function 'message-dialog-text)
       "Accessor"
       (documentation 'message-dialog-text 'function)
- "@version{2025-02-26}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-text object) => text}
   @syntax{(setf (gtk:message-dialog-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[text]{a string for the primary text of the message dialog}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{text} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{text} slot of the
+    @class{gtk:message-dialog} class gets or sets the primary text for the
+    message dialog.
   @end{short}
-  The primary text for the message dialog. If the message dialog has a secondary
-  text, this will appear as the title.
+  If the message dialog has a secondary text, this will appear as the title.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
     @class{gtk:alert-dialog} widget instead.
@@ -449,16 +448,16 @@
 (setf (liber:alias-for-function 'message-dialog-use-markup)
       "Accessor"
       (documentation 'message-dialog-use-markup 'function)
- "@version{2025-02-26}
+ "@version{2025-09-16}
   @syntax{(gtk:message-dialog-use-markup object) => setting}
   @syntax{(setf (gtk:message-dialog-use-markup object) setting)}
   @argument[object]{a @class{gtk:message-dialog} widget}
   @argument[setting]{a boolean whether to use Pango markup}
   @begin{short}
-    Accessor of the @slot[gtk:message-dialog]{use-markup} slot of the
-    @class{gtk:message-dialog} class.
+    The accessor for the @slot[gtk:message-dialog]{use-markup} slot of the
+    @class{gtk:message-dialog} class gets or sets whether the primary text for
+    the message dialog includes Pango markup.
   @end{short}
-  @em{True} if the primary text for the message dialog includes Pango markup.
   @begin[Warning]{dictionary}
     The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
     @class{gtk:alert-dialog} widget instead.

@@ -232,18 +232,16 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-message-type)
       "Accessor"
       (documentation 'info-bar-message-type 'function)
- "@version{2025-07-22}
+ "@version{2025-09-16}
   @syntax{(gtk:info-bar-message-type object) => message-type}
   @syntax{(setf (gtk:info-bar-message-type object) message-type)}
   @argument[object]{a @class{gtk:info-bar} widget}
   @argument[message-type]{a value of the @sym{gtk:message-type} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:info-bar]{message-type} slot of the
-    @class{gtk:info-bar} class.
+    The accessor for the @slot[gtk:info-bar]{message-type} slot of the
+    @class{gtk:info-bar} class gets or sets the type of the message.
   @end{short}
-  The @fun{gtk:info-bar-message-type} function returns the message type of the
-  message area. The @setf{gtk:info-bar-message-type} function sets the message
-  type. GTK uses the message type to determine how the message is displayed.
+  GTK uses the message type to determine how the message is displayed.
   @begin[Warning]{dictionary}
     The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
     use it in newly written code.
@@ -263,18 +261,16 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-revealed)
       "Accessor"
       (documentation 'info-bar-revealed 'function)
- "@version{2025-03-13}
+ "@version{2025-09-16}
   @syntax{(gtk:info-bar-revealed object) => revealed}
   @syntax{(setf (gtk:info-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:info-bar} widget}
   @argument[revealed]{a boolean whether the action bar shows its contents}
   @begin{short}
-    Accessor of the @slot[gtk:info-bar]{revealed} slot of the
-    @class{gtk:info-bar} class.
+    The accessor for the @slot[gtk:info-bar]{revealed} slot of the
+    @class{gtk:info-bar} class gets or sets whether the info bar is currently
+    revealed.
   @end{short}
-  The @fun{gtk:info-bar-revealed} function returns whether the info bar is
-  currently revealed. The @setf{gtk:info-bar-revealed} function sets the
-  property.
 
   Changing this will make the info bar reveal or conceal itself by means of
   a sliding transition. Note: this does not show or hide the info bar in the
@@ -300,18 +296,18 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-show-close-button)
       "Accessor"
       (documentation 'info-bar-show-close-button 'function)
- "@version{2025-03-13}
+ "@version{2025-09-16}
   @syntax{(gtk:info-bar-show-close-button object) => setting}
   @syntax{(setf (gtk:info-bar-show-close-button object) setting)}
   @argument[object]{a @class{gtk:info-bar} widget}
   @argument[setting]{@em{true} to include a Close button}
   @begin{short}
-    Accessor of the @slot[gtk:info-bar]{show-close-button} slot of the
-    @class{gtk:info-bar} class.
+    The accessor for the @slot[gtk:info-bar]{show-close-button} slot of the
+    @class{gtk:info-bar} class gets or sets whether to include a standard Close
+    button.
   @end{short}
-  The @fun{gtk:info-bar-show-close-button} function returns whether the widget
-  will display a standard Close button. If @em{true}, a standard Close button
-  is shown. When clicked it emits the @val[gtk:response-type]{:close} response.
+  If @em{true}, a standard Close button is shown. When clicked it emits the
+  @val[gtk:response-type]{:close} response.
   @begin[Warning]{dictionary}
     The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
     use it in newly written code.
