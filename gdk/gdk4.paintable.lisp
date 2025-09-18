@@ -353,6 +353,7 @@ lambda (paintable)    :run-last
 ;;; --- gdk:paintable-snapshot-impl --------------------------------------------
 
 (defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
+  (declare (ignorable snapshot width height))
   (error "Paintable of type ~a  does not implement GDK:PAINTABLE-SNAPSHOT-IMPL"
          (g:type-name (g:type-from-instance paintable))))
 

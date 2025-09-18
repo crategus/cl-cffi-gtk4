@@ -251,8 +251,9 @@
 ;; UI definition. Can we improve the implementation to allow the
 ;; mechanism of swapping objects?
 
-(defmethod builder-scope-create-closure-impl ((scope builder-cl-scope)
-                                              builder funcname flags object err)
+(defmethod builder-scope-create-closure-impl
+           ((scope builder-cl-scope) builder funcname flags object err)
+  (declare (ignorable builder flags err))
   (let ((func (find-symbol (setf funcname (string-upcase funcname)))))
     (if func
         (if object
