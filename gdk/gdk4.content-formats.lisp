@@ -293,12 +293,10 @@
   particular when they are empty. In that case @code{nil} will be returned.
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
-  (cffi:with-foreign-objects ((ptr :pointer) (n :size))
-    (setf (cffi:mem-ref ptr :pointer)
-          (%content-formats-gtypes formats n))
-    (setf n (cffi:mem-ref n :size))
-    (iter (for i from 0 below n)
-          (collect (cffi:mem-aref ptr 'g:type-t i)))))
+  (cffi:with-foreign-object (n :size)
+    (let ((ptr (%content-formats-gtypes formats n)))
+      (iter (for i from 0 below (cffi:mem-ref n :size))
+            (collect (cffi:mem-aref ptr 'g:type-t i))))))
 
 (export 'content-formats-gtypes)
 
