@@ -333,7 +333,7 @@
     "gtk-print-preview-command" "gchararray" t t)
    (gtk-recent-files-enabled
     settings-gtk-recent-files-enabled
-    "gtk-settings-gtk-recent-files-enabled" "gboolean" t t)
+    "gtk-recent-files-enabled" "gboolean" t t)
    (gtk-recent-files-max-age
     settings-gtk-recent-files-max-age
     "gtk-recent-files-max-age" "gint" t t)
