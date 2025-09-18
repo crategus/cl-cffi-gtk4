@@ -90,11 +90,6 @@
    :type-initializer "gtk_list_store_get_type")
   nil)
 
-#+(and gtk-4-10 gtk-warn-deprecated)
-(defmethod initialize-instance :after ((obj list-store) &key)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:LIST-STORE is deprecated since 4.10")))
-
 #+liber-documentation
 (setf (documentation 'list-store 'type)
  "@version{2025-07-23}
@@ -233,11 +228,13 @@
 ;;; ----------------------------------------------------------------------------
 
 (defmethod initialize-instance :after
-    ((store list-store)
-     &rest initargs
-     &key (column-types nil column-types-p)
-     &allow-other-keys)
+           ((store list-store)
+            &rest initargs
+            &key (column-types nil column-types-p) &allow-other-keys)
   (declare (ignore initargs))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:LIST-STORE is deprecated since 4.10"))
   (when column-types-p
     (apply #'list-store-set-column-types store column-types)))
 

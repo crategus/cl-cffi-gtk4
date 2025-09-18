@@ -92,11 +92,6 @@
    :type-initializer "gtk_tree_store_get_type")
   nil)
 
-#+(and gtk-4-10 gtk-warn-deprecated)
-(defmethod initialize-instance :after ((obj tree-store) &key)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:TREE-STORE is deprecated since 4.10")))
-
 #+liber-documentation
 (setf (documentation 'tree-store 'type)
  "@version{2024-05-16}
@@ -137,13 +132,14 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(defmethod initialize-instance :after ((store tree-store)
-                                       &rest initargs
-                                       &key (column-types
-                                             nil
-                                             column-types-p)
-                                       &allow-other-keys)
+(defmethod initialize-instance :after
+           ((store tree-store)
+            &rest initargs &key (column-types nil column-types-p)
+            &allow-other-keys)
   (declare (ignore initargs))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-STORE is deprecated since 4.10"))
   (when column-types-p
     (tree-store-set-column-types store column-types)))
 
