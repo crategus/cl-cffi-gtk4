@@ -1032,7 +1032,7 @@
 
 (cffi:defcfun ("gsk_stroke_get_dash" %stroke-dash) (:pointer :float)
   (stroke (g:boxed stroke))
-  (n-dash :size))
+  (n-dash (:pointer :size)))
 
 (defun stroke-dash (stroke)
  #+liber-documentation
@@ -1066,10 +1066,10 @@
   Since 4.14
   @see-class{gsk:stroke}
   @see-function{gsk:stroke-dash-offset}"
-  (cffi:with-foreign-objects ((ptr :pointer) (n :size))
-    (setf ptr (%stroke-dash stroke n))
-    (iter (for i from 0 below (cffi:mem-ref n :size))
-          (collect (cffi:mem-aref ptr :float i)))))
+  (cffi:with-foreign-object (n :size)
+    (let ((ptr (%stroke-dash stroke n)))
+      (iter (for i from 0 below (cffi:mem-ref n :size))
+            (collect (cffi:mem-aref ptr :float i))))))
 
 (export 'stroke-dash)
 
