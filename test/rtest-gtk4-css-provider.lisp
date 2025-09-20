@@ -215,10 +215,6 @@
     (is-false (gtk:css-provider-load-named provider "Yaru"))
     (is (= 415016 (length (gtk:css-provider-to-string provider))))))
 
-;; FIXME: The name "dark" causes a warning:
-;;   Gtk-WARNING: Theme parser error: <data>:9:31-32: Expected a valid selector
-;; Find a working example!?
-
 #+crategus
 (test gtk-css-provider-load-named.2
   (glib-test:with-check-memory (provider)

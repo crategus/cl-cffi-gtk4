@@ -301,9 +301,11 @@
     (is (= 43 (gtk:entry-invisible-char entry)))
     (is-true (gtk:entry-invisible-char-set entry))
     (is-false (gtk:entry-unset-invisible-char entry))
-    ;; Default char is #\BULLET and not \*
-    #+sbcl ; FIXME: What is the BULLET character for ccl?
+    ;; Default char is #\BULLET and not #\*
+    #+sbcl
     (is (= (char-code #\BULLET) (gtk:entry-invisible-char entry)))
+    #-sbcl
+    (is (= (char-code #\U+2022) (gtk:entry-invisible-char entry)))
     #+windows
     (is (= (char-code #\BLACK_CIRCLE) (gtk:entry-invisible-char entry)))
     (is-false (gtk:entry-invisible-char-set entry))))

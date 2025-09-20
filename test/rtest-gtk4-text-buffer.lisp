@@ -307,8 +307,8 @@
     (is (eq #\t (gtk:text-iter-char iter)))
     #+sbcl
     (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
-    #+ccl ; FIXME: What is the object replacement character for ccl?
-    (is (characterp (gtk:text-iter-char iter1)))
+    #-sbcl
+    (is (eq #\U+FFFC (gtk:text-iter-char iter1)))
     ;; Check memory management
     (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
     (is (= 1 (g:object-ref-count anchor)))
@@ -332,8 +332,8 @@
     (is (eq #\t (gtk:text-iter-char iter)))
     #+sbcl
     (is (eq #\OBJECT_REPLACEMENT_CHARACTER (gtk:text-iter-char iter1)))
-    #+ccl ; FIXME: What is the object replacement character for ccl?
-    (is (characterp (gtk:text-iter-char iter1)))
+    #-sbcl
+    (is (eq #\U+FFFC (gtk:text-iter-char iter1)))
     ;; Check memory management
     (is (string= "" (setf (gtk:text-buffer-text buffer) "")))
     (is (= 1 (g:object-ref-count anchor)))
