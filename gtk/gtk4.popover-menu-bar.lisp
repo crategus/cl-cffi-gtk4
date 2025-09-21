@@ -135,18 +135,16 @@ menubar
 (setf (liber:alias-for-function 'popover-menu-bar-menu-model)
       "Accessor"
       (documentation 'popover-menu-bar-menu-model 'function)
- "@version{2024-10-26}
+ "@version{2025-09-21}
   @syntax{(gtk:popover-menu-bar-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-bar-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[model]{a @class{g:menu-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:popover-menu-bar]{menu-model} slot of the
-    @class{gtk:popover-menu} class.
+    The accessor for the @slot[gtk:popover-menu-bar]{menu-model} slot of the
+    @class{gtk:popover-menu} class gets or sets the model from which the
+    contents of the menu bar are taken.
   @end{short}
-  The @fun{gtk:popover-menu-bar-menu-model} function returns the model from
-  which the contents of the menu bar are taken. The
-  @setf{gtk:popover-menu-bar-menu-model} function sets a menu model.
   @see-class{gtk:popover-menu-bar}
   @see-class{g:menu-model}")
 

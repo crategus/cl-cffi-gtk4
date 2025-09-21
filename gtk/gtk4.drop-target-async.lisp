@@ -245,18 +245,16 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-actions)
       "Accessor"
       (documentation 'drop-target-async-actions 'function)
- "@version{#2025-07-25}
+ "@version{#2025-09-21}
   @syntax{(gtk:drop-target-async-actions object) => actions}
   @syntax{(setf (gtk:drop-target-async-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target-async]{actions} slot of the
-    @class{gtk:drop-target-async} class.
+    The accessor for the @slot[gtk:drop-target-async]{actions} slot of the
+    @class{gtk:drop-target-async} class gets or sets the actions that this drop
+    target supports.
   @end{short}
-  The @fun{gtk:drop-target-async-actions} function gets the actions that this
-  drop target supports. The @setf{gtk:drop-target-async-actions} function sets
-  the actions.
   @see-class{gtk:drop-target-async}
   @see-symbol{gdk:drag-action}")
 
@@ -272,20 +270,18 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-formats)
       "Accessor"
       (documentation 'drop-target-async-formats 'function)
- "@version{#2025-07-26}
+ "@version{#2025-09-21}
   @syntax{(gtk:drop-target-async-formats object) => formats}
   @syntax{(setf (gtk:drop-target-async-formats object) formats)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target-async]{formats} slot of the
-    @class{gtk:drop-target-async} class.
+    The accessor for the @slot[gtk:drop-target-async]{formats} slot of the
+    @class{gtk:drop-target-async} class gets or sets the data formats that this
+    drop target accepts.
   @end{short}
-  The @fun{gtk:drop-target-async-formats} function gets the data formats that
-  this drop target accepts. If the result is @code{nil}, all formats are
-  expected to be supported. The @setf{gtk:drop-target-async-formats} function
-  sets the data formats that this drop target will accept.
+  If the result is @code{nil}, all formats are expected to be supported.
   @see-class{gtk:drop-target-async}
   @see-class{gdk:content-formats}")
 

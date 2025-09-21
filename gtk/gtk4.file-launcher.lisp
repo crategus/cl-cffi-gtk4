@@ -127,20 +127,18 @@
 (setf (liber:alias-for-function 'file-launcher-always-ask)
       "Accessor"
       (documentation 'file-launcher-always-ask 'function)
- "@version{2024-05-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-launcher-always-ask object) => setting}
   @syntax{(setf (gtk:file-launcher-always-ask object) setting)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[setting]{a boolean whether to always ask the user}
   @begin{short}
-    Accessor of the @slot[gtk:file-launcher]{always-ask} slot of the
-    @class{gtk:file-launcher} class.
+    The accessor for the @slot[gtk:file-launcher]{always-ask} slot of the
+    @class{gtk:file-launcher} class gets or sets whether to ask the user to
+    choose an application for opening the file.
   @end{short}
-  The @fun{gtk:file-launcher-always-ask} function returns whether to ask the
-  user to choose an application for opening the file. The
-  @setf{gtk:file-launcher-always-ask} function sets whether to always ask the
-  user. If @em{false}, the file might be opened with a default application or
-  the previous choice.
+  If @em{false}, the file might be opened with a default application or the
+  previous choice.
 
   Since 4.12
   @see-class{gtk:file-launcher}")
@@ -156,17 +154,15 @@
 (setf (liber:alias-for-function 'file-launcher-file)
       "Accessor"
       (documentation 'file-launcher-file 'function)
- "@version{2024-05-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-launcher-file object) => file}
   @syntax{(setf (gtk:file-launcher-file object) file)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[file]{a @class{g:file} object}
   @begin{short}
-    Accessor of the @slot[gtk:file-launcher]{file} slot of the
-    @class{gtk:file-launcher} class.
+    The accessor for the @slot[gtk:file-launcher]{file} slot of the
+    @class{gtk:file-launcher} class gets or sets the file that will be opened.
   @end{short}
-  The @fun{gtk:file-launcher-file} function gets the file that will be opened.
-  The @setf{gtk:file-launcher-file} function sets the file.
 
   Since 4.10
   @see-class{gtk:file-launcher}
@@ -184,18 +180,16 @@
 (setf (liber:alias-for-function 'file-launcher-writable)
       "Accessor"
       (documentation 'file-launcher-writable 'function)
- "@version{2024-05-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-launcher-writable object) => writable}
   @syntax{(setf (gtk:file-launcher-writable object) writable)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[writable]{a boolean whether to make the file writable}
   @begin{short}
-    Accessor of the @slot[gtk:file-launcher]{writable} slot of the
-    @class{gtk:file-launcher} class.
+    The accessor for the @slot[gtk:file-launcher]{writable} slot of the
+    @class{gtk:file-launcher} class gets or sets whether to make the file
+    writable for the handler.
   @end{short}
-  The @fun{gtk:file-launcher-writable} function returns whether to make the
-  file writable for the handler. The @setf{gtk:file-launcher-writable} function
-  sets whether to make the file writable for the handler.
 
   Since 4.14
   @see-class{gtk:file-launcher}")

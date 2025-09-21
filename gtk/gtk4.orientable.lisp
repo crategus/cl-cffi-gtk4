@@ -99,18 +99,16 @@
 (setf (liber:alias-for-function 'orientable-orientation)
       "Accessor"
       (documentation 'orientable-orientation 'function)
- "@version{2025-07-26}
+ "@version{2025-09-21}
   @syntax{(gtk:orientable-orientation object) => orientation}
   @syntax{(setf (gtk:orientable-orientation object) orientation)}
   @argument[object]{a @class{gtk:orientable} widget}
   @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:orientable]{orientation} slot of the
-    @class{gtk:orientable} interface.
+    The accessor for the @slot[gtk:orientable]{orientation} slot of the
+    @class{gtk:orientable} interface get or sets the orientation of the
+    orientable widget.
   @end{short}
-  The @fun{gtk:orientable-orientation} function returns the orientation of the
-  orientable widget. The @setf{gtk:orientable-orientation} function sets the
-  orientation.
   @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}")
 

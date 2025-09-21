@@ -200,15 +200,14 @@
 (setf (liber:alias-for-function 'media-stream-duration)
       "Accessor"
       (documentation 'media-stream-duration 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-duration object) => duration}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[duration]{an integer for the duration of the stream}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{duration} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{duration} slot of the
+    @class{gtk:media-stream} class returns the duration of the stream.
   @end{short}
-  The @fun{gtk:media-stream-duration} function gets the duration of the stream.
   If the duration is not known, 0 will be returned.
   @see-class{gtk:media-stream}")
 
@@ -224,16 +223,15 @@
 (setf (liber:alias-for-function 'media-stream-ended)
       "Accessor"
       (documentation 'media-stream-ended 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-ended object) => ended}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[ended]{a boolean whether the playback is finished}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{ended} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{ended} slot of the
+    @class{gtk:media-stream} class returns whether the streams playback is
+    finished.
   @end{short}
-  The @fun{gtk:media-stream-ended} function returns whether the streams
-  playback is finished.
   @see-class{gtk:media-stream}")
 
 ;;; --- gtk:media-stream-error -------------------------------------------------
@@ -248,19 +246,18 @@
 (setf (liber:alias-for-function 'media-stream-error)
       "Accessor"
       (documentation 'media-stream-error 'function)
- "@version{2025-07-05}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-error object) => error}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[error]{@code{nil} if not in an error state or the @class{glib:error}
     instance of the stream}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{error} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{error} slot of the
+    @class{gtk:media-stream} class returns @code{nil} for a properly working
+    stream or the @class{glib:error} instance that the stream is in.
   @end{short}
-  If the stream is in an error state, the @fun{gtk:media-stream-error} function
-  returns the @class{glib:error} instance explaining that state. Any type of
-  error can be reported here depending on the implementation of the media
-  stream.
+  Any type of error can be reported here depending on the implementation of the
+  media stream.
 
   A media stream in an error cannot be operated on, calls like the
   @fun{gtk:media-stream-play} or @fun{gtk:media-stream-seek} functions will not
@@ -289,16 +286,14 @@
 (setf (liber:alias-for-function 'media-stream-has-audio)
       "Accessor"
       (documentation 'media-stream-has-audio 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-has-audio object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has audio}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{has-audio} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{has-audio} slot of the
+    @class{gtk:media-stream} class returns whether the stream has audio.
   @end{short}
-  The @fun{gtk:media-stream-has-audio} function returns whether the stream has
-  audio.
   @see-class{gtk:media-stream}")
 
 ;;; --- gtk:media-stream-has-video ---------------------------------------------
@@ -313,16 +308,14 @@
 (setf (liber:alias-for-function 'media-stream-has-video)
       "Accessor"
       (documentation 'media-stream-has-video 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-has-video object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has video}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{has-video} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{has-video} slot of the
+    @class{gtk:media-stream} class returns whether the stream has video.
   @end{short}
-  The @fun{gtk:media-stream-has-video} function returns whether the stream has
-  video.
   @see-class{gtk:media-stream}")
 
 ;;; --- gtk:media-stream-loop --------------------------------------------------
@@ -337,19 +330,17 @@
 (setf (liber:alias-for-function 'media-stream-loop)
       "Accessor"
       (documentation 'media-stream-loop 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-loop object) => setting}
   @syntax{(setf (gtk:media-stream-loop object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream should loop}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{loop} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{loop} slot of the
+    @class{gtk:media-stream} class gets or sets whether the stream is set to
+    loop.
   @end{short}
-  The @fun{gtk:media-stream-loop} function returns whether the stream is set to
-  loop. The @setf{gtk:media-stream-loop} function sets whether the stream should
-  loop, that is, restart playback from the beginning instead of stopping at the
-  end.
+  That is, restart playback from the beginning instead of stopping at the end.
 
   Not all streams may support looping, in particular non-seekable streams.
   Those streams will ignore the loop setting and just end.
@@ -367,20 +358,19 @@
 (setf (liber:alias-for-function 'media-stream-muted)
       "Accessor"
       (documentation 'media-stream-muted 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-muted object) => setting}
   @syntax{(setf (gtk:media-stream-muted object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream should be muted}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{muted} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{muted} slot of the
+    @class{gtk:media-stream} class gets or sets whether the audio for the stream
+    is muted.
   @end{short}
-  The @fun{gtk:media-stream-muted} function returns whether the audio for the
-  stream is muted. The @setf{gtk:media-stream-muted} function sets whether the
-  audio stream should be muted. Muting a stream will cause no audio to be
-  played, but it does not modify the volume. This means that muting and then
-  unmuting the stream will restore the volume settings.
+  Muting a stream will cause no audio to be played, but it does not modify the
+  volume. This means that muting and then unmuting the stream will restore the
+  volume settings.
 
   If the stream has no audio, calling this function will still work but it will
   not have an audible effect.
@@ -398,18 +388,15 @@
 (setf (liber:alias-for-function 'media-stream-playing)
       "Accessor"
       (documentation 'media-stream-playing 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-playing object) => setting}
   @syntax{(setf (gtk:media-stream-playing object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether to start or pause playback}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{playing} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{playing} slot of the
+    @class{gtk:media-stream} class gets or sets whether the stream is playing.
   @end{short}
-  The @fun{gtk:media-stream-playing} function returns whether the stream is
-  currently playing. The @setf{gtk:media-stream-playing} function starts or
-  pauses playback of the stream.
   @see-class{gtk:media-stream}")
 
 ;;; --- gtk:media-stream-prepared ----------------------------------------------
@@ -425,15 +412,16 @@
 (setf (liber:alias-for-function 'media-stream-prepared)
       "Accessor"
       (documentation 'media-stream-prepared 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-prepared object) => setting}
   @syntax{(setf (gtk:media-stream-prepared object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether the stream has finished initializing
     and existence of audio and video is known}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{prepared} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{prepared} slot of the
+    @class{gtk:media-stream} class gets or sets whether the stream has finished
+    initializing and existence of audio and video is known.
   @end{short}
   @see-class{gtk:media-stream}")
 
@@ -449,13 +437,14 @@
 (setf (liber:alias-for-function 'media-stream-seekable)
       "Accessor"
       (documentation 'media-stream-seekable 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-seekable object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether the stream is known to support seeking}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{seekable} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{seekable} slot of the
+    @class{gtk:media-stream} class returns whether the stream is known to
+    support seeking.
   @end{short}
   @see-class{gtk:media-stream}")
 
@@ -471,13 +460,13 @@
 (setf (liber:alias-for-function 'media-stream-seeking)
       "Accessor"
       (documentation 'media-stream-seeking 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-seeking object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether a seek is in progress}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{seeking} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{seeking} slot of the
+    @class{gtk:media-stream} class returns whether a seek is in progress.
   @end{short}
   @see-class{gtk:media-stream}")
 
@@ -494,16 +483,15 @@
 (setf (liber:alias-for-function 'media-stream-timestamp)
       "Accessor"
       (documentation 'media-stream-timestamp 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-timestamp object) => timestamp}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[timestamp]{an integer for the timestamp in microseconds}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{timestamp} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{timestamp} slot of the
+    @class{gtk:media-stream} class returns the current presentation timestamp
+    in microseconds.
   @end{short}
-  The @fun{gtk:media-stream-timestamp} function returns the current presentation
-  timestamp in microseconds.
   @see-class{gtk:media-stream}")
 
 ;;; --- gtk:media-stream-volume ------------------------------------------------
@@ -519,19 +507,18 @@
 (setf (liber:alias-for-function 'media-stream-volume)
       "Accessor"
       (documentation 'media-stream-volume 'function)
- "@version{2025-05-30}
+ "@version{2025-09-21}
   @syntax{(gtk:media-stream-volume object) => volume}
   @syntax{(setf (gtk:media-stream-playing object) volume)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[volume]{a number coerced to a double float for the volume of the
     stream from 0.0 to 1.0}
   @begin{short}
-    Accessor of the @slot[gtk:media-stream]{volume} slot of the
-    @class{gtk:media-stream} class.
+    The accessor for the @slot[gtk:media-stream]{volume} slot of the
+    @class{gtk:media-stream} class gets or sets the volume of the audio for the
+    stream.
   @end{short}
-  The @fun{gtk:media-stream-volume} function returns the volume of the audio for
-  the stream. The @setf{gtk:media-stream-volume} function sets the volume of the
-  audio stream. This function call will work even if the stream is muted.
+  This function call will work even if the stream is muted.
 
   The given volume should range from 0.0 for silence to 1.0 for as loud as
   possible. Values outside of this range will be clamped to the nearest value.

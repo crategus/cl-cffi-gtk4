@@ -161,20 +161,18 @@ lambda (gesture x y)    :run-last
 (setf (liber:alias-for-function 'gesture-stylus-stylus-only)
       "Accessor"
       (documentation 'gesture-stylus-stylus-only 'function)
- "@version{2024-02-21}
+ "@version{2025-09-21}
   @syntax{(gtk:gesture-stylus-only object) => setting}
   @syntax{(setf (gtk:gesture-stylus-only object) setting)}
   @argument[object]{a @class{gtk:gesture-stylus} object}
   @argument[setting]{a boolean whether the gesture is used exclusivly for
     stylus events}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-stylus]{stylus-only} slot of the
-    @class{gtk:gesture-stylus} class.
+    The accessor for the @slot[gtk:gesture-stylus]{stylus-only} slot of the
+    @class{gtk:gesture-stylus} class gets or sets whether the gesture handle
+    events from stylus input devices.
   @end{short}
-  The @fun{gtk:gesture-stylus-stylus-only} function checks whether the gesture
-  handle events from stylus input devices, otherwise it will handle events from
-  any pointing device. The @setf{gtk:gesture-stylus-stylus-only} function sets
-  the state of the property.
+  Otherwise it will handle events from any pointing device.
 
   Since 4.10
   @see-class{gtk:gesture-stylus}")

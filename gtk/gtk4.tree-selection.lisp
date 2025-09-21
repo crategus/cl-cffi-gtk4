@@ -161,19 +161,18 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-function 'tree-selection-mode)
       "Accessor"
       (documentation 'tree-selection-mode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-21}
   @syntax{(gtk:tree-selection-mode object) => mode}
   @syntax{(setf (gtk:tree-selection-mode object) mode)}
   @argument[object]{a @class{gtk:tree-selection} object}
   @argument[mode]{a @sym{gtk:selection-mode} value}
   @begin{short}
-    Accessor of the @slot[gtk:tree-selection]{mode} slot of the
-    @class{gtk:tree-selection} class.
+    The accessor for the @slot[gtk:tree-selection]{mode} slot of the
+    @class{gtk:tree-selection} class gets or sets the selection mode of the
+    selection.
   @end{short}
-  The @fun{gtk:tree-selection-mode} function gets the current selection mode of
-  the selection. The @setf{gtk:tree-selection-mode} function sets the selection
-  mode. If the previous type was @val[gtk:selection-mode]{:multiple}, then the
-  anchor is kept selected, if it was previously selected.
+  If the previous type was @val[gtk:selection-mode]{:multiple}, then the anchor
+  is kept selected, if it was previously selected.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-selection} implementation is deprecated since 4.10.
     Please do not use it in newly written code.

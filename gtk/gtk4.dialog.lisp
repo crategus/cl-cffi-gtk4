@@ -358,18 +358,17 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'dialog-use-header-bar)
       "Accessor"
       (documentation 'dialog-use-header-bar 'function)
- "@version{2025-02-26}
+ "@version{2025-09-21}
   @syntax{(gtk:dialog-use-header-bar object) => setting}
-  @syntax{(setf (gtk:dialog-use-header-bar object) setting)}
   @argument[object]{a @class{gtk:dialog} widget}
   @argument[setting]{@em{true} if the dialog uses a header bar}
   @begin{short}
-    Accessor of the @slot[gtk:dialog]{use-header-bar} slot of the
-    @class{gtk:dialog} class.
+    The accessor for the @slot[gtk:dialog]{use-header-bar} slot of the
+    @class{gtk:dialog} class returns @em{true} if the dialog uses a header bar
+    for action buttons instead of the action area.
   @end{short}
-  @em{True} if the dialog uses a header bar for action buttons instead of the
-  action area. For technical reasons, this property is declared as an integer
-  property, use the value 1 for @em{true} or -1 for @em{false}.
+  For technical reasons, this property is declared as an integer property, use
+  the value 1 for @em{true} or -1 for @em{false}.
 
   Builtin @class{gtk:dialog} subclasses such as the
   @class{gtk:color-chooser-dialog} widget set the

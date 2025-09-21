@@ -258,20 +258,20 @@
 (setf (liber:alias-for-function 'file-chooser-action)
       "Accessor"
       (documentation 'file-chooser-action 'function)
- "@version{2025-07-25}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-action object) => action}
   @syntax{(setf (gtk:file-chooser-action object) action)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[action]{a @sym{gtk:file-chooser-action} value}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{action} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{action} slot of the
+    @class{gtk:file-chooser} interface gets or sets the type of operation that
+    the file chooser is performing.
   @end{short}
-  The @fun{gtk:file-chooser-action} function gets the type of operation that
-  the file chooser is performing. The @setf{gtk:file-chooser-action} function
-  sets the type of operation. The user interface is adapted to suit the selected
-  action. For example, an option to create a new folder might be shown if the
-  action is @code{:save} but not if the action is @code{:open}.
+  The user interface is adapted to suit the selected action. For example, an
+  option to create a new folder might be shown if the action is
+  @val[gtk:file-chooser-action]{:save} but not if the action is
+  @val[gtk:file-chooser-action]{:open}.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -287,29 +287,27 @@
                                                'file-chooser) t)
  "The @code{create-folders} property of type @code{:boolean} (Read / Write)
   @br{}
-  Whether a file chooser not in @code{:open} mode will offer the user to create
-  new folders. @br{}
+  Whether a file chooser not in @val[gtk:file-chooser-action]{:open} mode will
+  offer the user to create new folders. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'file-chooser-create-folders)
       "Accessor"
       (documentation 'file-chooser-create-folders 'function)
- "@version{2024-04-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-create-folders object) => setting}
   @syntax{(setf (gtk:file-chooser-create-folders object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[setting]{@em{true} if the @kbd{New Folder} button should be
     displayed}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{create-folders} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{create-folders} slot of the
+    @class{gtk:file-chooser} interface gets or sets whether the file chooser
+    will offer to create new folders.
   @end{short}
-  The @fun{gtk:file-chooser-create-folders} function gets whether the file
-  chooser will offer to create new folders. The
-  @setf{gtk:file-chooser-create-folders} function sets whether the file chooser
-  will offer to create new folders. This is only relevant if the action of the
-  file chooser is not set to be in @code{:open} mode.
+  This is only relevant if the action of the file chooser is not set to be in
+  @val[gtk:file-chooser-action]{:open} mode.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -330,18 +328,17 @@
 (setf (liber:alias-for-function 'file-chooser-filter)
       "Accessor"
       (documentation 'file-chooser-filter 'function)
- "@version{2024-04-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-filter object) => filter}
   @syntax{(setf (gtk:file-chooser-filter object) filter)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{filter} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{filter} slot of the
+    @class{gtk:file-chooser} interface gets or sets the filter for selecting
+    which files are displayed.
   @end{short}
-  The @fun{gtk:file-chooser-filter} function gets the current filter. The
-  @setf{gtk:file-chooser-filter} function sets the current filter. Only the
-  files that pass the filter will be displayed.
+  Only the files that pass the filter will be displayed.
 
   If the user selectable list of filters is non-empty, then the filter should
   be one of the filters in that list. Setting the current filter when the list
@@ -367,19 +364,18 @@
 (setf (liber:alias-for-function 'file-chooser-filters)
       "Accessor"
       (documentation 'file-chooser-filters 'function)
- "@version{2024-05-20}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-filters object) => filters}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[filters]{a @class{g:list-model} object containing the current set
     of user-selectable filters}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{filters} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{filters} slot of the
+    @class{gtk:file-chooser} interface returns the current set of user
+    selectable filters, as a list model.
   @end{short}
-  The @fun{gtk:file-chooser-filters} function gets the current set of
-  user-selectable filters, as a list model. See the
-  @fun{gtk:file-chooser-add-filter}, and @fun{gtk:file-chooser-remove-filter}
-  functions.
+  See the @fun{gtk:file-chooser-add-filter}, and
+  @fun{gtk:file-chooser-remove-filter} functions.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -404,20 +400,19 @@
 (setf (liber:alias-for-function 'file-chooser-select-multiple)
       "Accessor"
       (documentation 'file-chooser-select-multiple 'function)
- "@version{2024-04-26}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-select-multiple object) => setting}
   @syntax{(setf (gtk:file-chooser-select-multiple object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[setting]{@em{true} if multiple files can be selected}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{select-multiple} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{select-multiple} slot of the
+    @class{gtk:file-chooser} interface gets or sets whether multiple files can
+    be selected in the file selector.
   @end{short}
-  The @fun{gtk:file-chooser-select-multiple} function gets whether multiple
-  files can be selected in the file selector. The
-  @setf{gtk:file-chooser-select-multiple} function sets whether multiple files
-  can be selected. This is only relevant if the action of the file chooser is
-  set to be in @code{:open} or @code{:select-folder} mode.
+  This is only relevant if the action of the file chooser is set to be in
+  @val[gtk:file-chooser-action]{:open} or
+  @val[gtk:file-chooser-action]{:select-folder} mode.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -439,17 +434,16 @@
 (setf (liber:alias-for-function 'file-chooser-shortcut-folders)
       "Accessor"
       (documentation 'file-chooser-shortcut-folders 'function)
- "@version{2024-05-20}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-shortcut-folders object) => folders}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[folders]{a @class{g:list-model} object of @class{g:file} objects}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser]{shortcut-folders} slot of the
-    @class{gtk:file-chooser} interface.
+    The accessor for the @slot[gtk:file-chooser]{shortcut-folders} slot of the
+    @class{gtk:file-chooser} interface returns the list of shortcut folders in
+    the file chooser, as set by the @fun{gtk:file-chooser-add-shortcut-folder}
+    function.
   @end{short}
-  The @fun{gtk:file-chooser-shortcut-folders} function queries the list of
-  shortcut folders in the file chooser, as set by the
-  @fun{gtk:file-chooser-add-shortcut-folder} function.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -475,16 +469,15 @@
 (cffi:defcfun ("gtk_file_chooser_get_current_name" file-chooser-current-name)
     (:string :free-from-foreign t :encoding :utf-8)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-current-name chooser) => name}
   @syntax{(setf (gtk:file-chooser-current-name chooser) name)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[name]{a string for the filename to use, as a UTF-8 string}
   @begin{short}
-    The @fun{gtk:file-chooser-current-name} function gets the current name in
-    the file selector, as entered by the user in the text entry for \"Name\".
+    Gets or sets the current name in the file selector, as entered by the user
+    in the text entry for \"Name\".
   @end{short}
-  The @setf{gtk:file-chooser-current-name} function sets the current name.
 
   This is meant to be used in save dialogs, to get the currently typed filename
   when the file itself does not exist yet. For example, an application that adds
@@ -528,7 +521,7 @@
 
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-file) g:object
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-file chooser) => file}
   @syntax{(setf (gtk:file-chooser-file chooser) file)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -543,9 +536,9 @@
 
   The @setf{gtk:file-chooser-file} function sets @arg{file} as the current
   filename for the file chooser, by changing to the parent folder of the file
-  and actually selecting the file. If the file chooser is in @code{:save} mode,
-  the base name of the file will also appear in the file name entry of the
-  dialog.
+  and actually selecting the file. If the file chooser is in
+  @val[gtk:file-chooser-action]{:save} mode, the base name of the file will
+  also appear in the file name entry of the dialog.
 
   If the file name is not in the current folder of the file chooser, then the
   current folder of the file chooser will be changed to the folder containing
@@ -600,7 +593,7 @@
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
     g:file-as-namestring
  #+liber-documentation
- "@version{2024-11-21}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-namestring chooser) => path}
   @syntax{(setf (gtk:file-chooser-namestring chooser) path)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -615,8 +608,9 @@
 
   The @setf{gtk:file-chooser-namestring} function sets @arg{namestring} as the
   current file for the file chooser, by changing to the file's parent folder
-  and actually selecting the file in list. If the chooser is in @code{:save}
-  mode, the file's base name will also appear in the dialog's file name entry.
+  and actually selecting the file in list. If the chooser is in
+  @val[gtk:file-chooser-action]{:save} mode, the file's base name will also
+  appear in the dialog's file name entry.
   @begin[Lisp implementation]{dictionary}
    This function corresponds to the @fun{gtk:file-chooser-file} function, but
    has a Lisp namestring as an argument for the file. The type conversion
@@ -682,7 +676,7 @@
 (cffi:defcfun ("gtk_file_chooser_get_current_folder"
                file-chooser-current-folder) g:file-as-namestring
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-21}
   @syntax{(gtk:file-chooser-current-folder chooser) => path}
   @syntax{(setf (gtk:file-chooser-current-folder chooser) path)}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -699,8 +693,9 @@
 
   Note that this is the folder that the file chooser is currently displaying,
   for example, @file{/home/username/Documents}, which is not the same as the
-  currently selected folder if the chooser is in @code{:select-folder} mode,
-  for example, @file{/home/username/Documents/selected-folder/}.
+  currently selected folder if the chooser is in
+  @val[gtk:file-chooser-action]{:select-folder} mode, for example,
+  @file{/home/username/Documents/selected-folder/}.
 
   In general, you should not use this function. See the section on setting up
   a file chooser dialog for the rationale behind this.

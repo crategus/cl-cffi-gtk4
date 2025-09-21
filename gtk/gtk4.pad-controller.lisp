@@ -110,10 +110,10 @@
    :type-initializer "gtk_pad_controller_get_type")
   ((action-group
     pad-controller-action-group
-    "action-group" "GActionGroup" t t)
+    "action-group" "GActionGroup" t nil)
    (pad
     pad-controller-pad
-    "pad" "GdkDevice" t t)))
+    "pad" "GdkDevice" t nil)))
 
 ;; TODO: Make a Lisp example
 
@@ -191,14 +191,14 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-action-group)
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
- "@version{2025-02-23}
+ "@version{2025-09-21}
   @syntax{(gtk:pad-controller-action-group object) => group}
-  @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[group]{a @class{g:action-group} instance}
   @begin{short}
-    Accessor of the @slot[gtk:pad-controller]{action-group} slot of the
-    @class{gtk:pad-controller} class.
+    The accessor for the @slot[gtk:pad-controller]{action-group} slot of the
+    @class{gtk:pad-controller} class returns the action group to launch actions
+    from.
   @end{short}
   @see-class{gtk:pad-controller}
   @see-class{g:action-group}")
@@ -215,14 +215,13 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-pad)
       "Accessor"
       (documentation 'pad-controller-pad 'function)
- "@version{2025-02-23}
+ "@version{2025-09-21}
   @syntax{(gtk:pad-controller-pad object) => pad}
-  @syntax{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[pad]{a @class{gdk:device} object}
   @begin{short}
-    Accessor of the @slot[gtk:pad-controller]{pad} slot of the
-    @class{gtk:pad-controller} class.
+    The accessor for the @slot[gtk:pad-controller]{pad} slot of the
+    @class{gtk:pad-controller} class returns the pad device to control.
   @end{short}
   @see-class{gtk:pad-controller}
   @see-class{gdk:device}")

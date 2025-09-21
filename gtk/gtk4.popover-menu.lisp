@@ -269,18 +269,16 @@
 (setf (liber:alias-for-function 'popover-menu-flags)
       "Accessor"
       (documentation 'popover-menu-flags 'function)
- "@version{2025-07-26}
+ "@version{2025-09-21}
   @syntax{(gtk:popover-menu-flags object) => flags}
   @syntax{(setf (gtk:popover-menu-flags object) flags)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[flags]{a @sym{gtk:popover-menu-flags} value}
   @begin{short}
-    Accessor of the @slot[gtk:popover-menu]{flags} slot of the
-    @class{gtk:popover-menu} class.
+    The accessor for the @slot[gtk:popover-menu]{flags} slot of the
+    @class{gtk:popover-menu} class gets or sets the flags that popover uses to
+    create/display a menu from its model.
   @end{short}
-  The @fun{gtk:popover-menu-flags} function returns the flags that popover uses
-  to create/display a menu from its model. The @setf{gtk:popover-menu-flags}
-  function sets the flags that popover uses.
 
   If a model is set and the flags change, contents are rebuilt, so if setting
   properties individually, set flags before model to avoid a redundant rebuild.
@@ -301,19 +299,18 @@
 (setf (liber:alias-for-function 'popover-menu-menu-model)
       "Accessor"
       (documentation 'popover-menu-menu-model 'function)
- "@version{2024-05-26}
+ "@version{2025-09-21}
   @syntax{(gtk:popover-menu-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[model]{a @class{g:menu-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:popover-menu]{menu-model} slot of the
-    @class{gtk:popover-menu} class.
+    The accessor for the @slot[gtk:popover-menu]{menu-model} slot of the
+    @class{gtk:popover-menu} class gets or sets the menu model used to populate
+    the popover.
   @end{short}
-  The @fun{gtk:popover-menu-menu-model} function returns the menu model used to
-  populate the popover. The @setf{gtk:popover-menu-menu-model} function sets the
-  menu model. The existing contents of the popover are removed, and the popover
-  is populated with new contents according to the menu model.
+  The existing contents of the popover are removed, and the popover is populated
+  with new contents according to the menu model.
   @see-class{gtk:popover-menu}
   @see-class{g:menu-model}")
 
@@ -330,16 +327,15 @@
 (setf (liber:alias-for-function 'popover-menu-visible-submenu)
       "Accessor"
       (documentation 'popover-menu-visible-submenu 'function)
- "@version{2025-07-27}
+ "@version{2025-09-21}
   @syntax{(gtk:popover-menu-visible-submenu object) => submenu}
   @syntax{(setf (gtk:popover-menu-visible-submenu object) submenu)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[submenu]{a string for the name of the submenu}
   @begin{short}
-    Accessor of the @slot[gtk:popover-menu]{visible-submenu} slot of the
-    @class{gtk:popover-menu} class.
+    The accessor for the @slot[gtk:popover-menu]{visible-submenu} slot of the
+    @class{gtk:popover-menu} class gets or sets the name of the visible submenu.
   @end{short}
-  The name of the visible submenu.
   @see-class{gtk:popover-menu}")
 
 ;;; ----------------------------------------------------------------------------

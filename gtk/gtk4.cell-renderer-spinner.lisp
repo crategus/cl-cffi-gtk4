@@ -121,16 +121,16 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-active)
       "Accessor"
       (documentation 'cell-renderer-spinner-active 'function)
- "@version{2024-07-30}
+ "@version{2025-09-21}
   @syntax{(gtk:cell-renderer-spinner-active object) => active}
   @syntax{(setf (gtk:cell-renderer-spinner-active object) active)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[active]{a boolean whether the spinner is active}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spinner]{active} slot of the
-    @class{gtk:cell-renderer-spinner} class.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{active} slot of the
+    @class{gtk:cell-renderer-spinner} class gets or sets whether the spinner is
+    active, that is, shown in the cell.
   @end{short}
-  Whether the spinner is active, that is, shown in the cell.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -153,19 +153,20 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-pulse)
       "Accessor"
       (documentation 'cell-renderer-spinner-pulse 'function)
- "@version{2025-07-19}
+ "@version{2025-09-21}
   @syntax{(gtk:cell-renderer-spinner-pulse object) => pulse}
   @syntax{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[pulse]{an unsigned integer for the pulse of the spinner}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spinner]{pulse} slot of the
-    @class{gtk:cell-renderer-spinner} class.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{pulse} slot of the
+    @class{gtk:cell-renderer-spinner} class gets or sets the pulse of the
+    spinner.
   @end{short}
-  The pulse of the spinner. Increment this value to draw the next frame of the
-  spinner animation. Usually, you would update this value in a timeout. By
-  default, the @class{gtk:spinner} widget draws one full cycle of the animation,
-  consisting of 12 frames, in 750 milliseconds.
+  Increment this value to draw the next frame of the spinner animation. Usually,
+  you would update this value in a timeout. By default, the @class{gtk:spinner}
+  widget draws one full cycle of the animation, consisting of 12 frames, in 750
+  milliseconds.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -185,16 +186,16 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-size)
       "Accessor"
       (documentation 'cell-renderer-spinner-size 'function)
- "@version{2025-07-22}
+ "@version{2025-09-21}
   @syntax{(gtk:cell-renderer-spinner-size object) => size}
   @syntax{(setf (gtk:cell-renderer-spinner-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[size]{a @sym{gtk:icon-size} value}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-spinner]{size} slot of the
-    @class{gtk:cell-renderer-spinner} class.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{size} slot of the
+    @class{gtk:cell-renderer-spinner} class gets or sets the icon size that
+    specifies the size of the rendered spinner.
   @end{short}
-  The icon size that specifies the size of the rendered spinner.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.

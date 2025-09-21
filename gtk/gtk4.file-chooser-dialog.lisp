@@ -89,7 +89,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-dialog 'type)
- "@version{2025-07-25}
+ "@version{2025-09-21}
   @begin{short}
     The @class{gtk:file-chooser-dialog} widget is a dialog suitable for use
     with \"File/Open\" or \"File/Save as\" commands.
@@ -115,20 +115,21 @@
     @begin{itemize}
       @begin{item}
         To select a file for opening, as for a File/Open command. Use
-        @code{:open}.
+        @val[gtk:file-chooser-action]{:open}.
       @end{item}
       @begin{item}
         To save a file for the first time, as for a File/Save command. Use
-        @code{:save}, and suggest a name such as \"Untitled\" with the
-        @fun{gtk:file-chooser-current-name} function.
+        @val[gtk:file-chooser-action]{:save}, and suggest a name such as
+        \"Untitled\" with the @fun{gtk:file-chooser-current-name} function.
       @end{item}
       @begin{item}
         To save a file under a different name, as for a File/Save As command.
-        Use @code{:save}, and set the existing filename with the
-        @fun{gtk:file-chooser-file} function.
+        Use @val[gtk:file-chooser-action]{:save}, and set the existing filename
+        with the @fun{gtk:file-chooser-file} function.
       @end{item}
       @begin{item}
-        To choose a folder instead of a file. Use @code{:select-folder}.
+        To choose a folder instead of a file. Use
+        @val[gtk:file-chooser-action]{:select-folder}.
       @end{item}
     @end{itemize}
     In general, you should only cause the file chooser to show a specific folder
