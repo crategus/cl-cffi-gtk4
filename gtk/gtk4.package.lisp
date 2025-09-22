@@ -1238,10 +1238,10 @@
          (buffer (gtk:text-view-buffer textview)))
     (setf (gtk:text-buffer-text buffer) \"Hello, this is some text.\")
     ;; Load CSS from data into the provider and apply CSS
-    (gtk:css-provider-load-from-data provider
-                                     \".viewstyle textview {
-                                        color : Green;
-                                        font : 20px Purisa; @}\")
+    (gtk:css-provider-load-from-string provider
+                                       \".viewstyle textview {
+                                          color : Green;
+                                          font : 20px Purisa; @}\")
     (gtk:widget-add-css-class window \"viewstyle\")
     (gtk:widget-add-provider window provider)
     ;; Use a tag to change the color for just one part of the text view

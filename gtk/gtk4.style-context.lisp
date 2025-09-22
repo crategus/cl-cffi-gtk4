@@ -488,7 +488,7 @@
 (defun style-context-add-provider-for-display
     (display provider &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2025-07-19}
+ "@version{2025-09-22}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer for the priority of the
@@ -505,10 +505,10 @@
     window.
     @begin{pre}
 (let ((provider (gtk:css-provider-new)))
-  (gtk:css-provider-load-from-data provider
-                                   \".viewstyle textview {
-                                      color : Green;
-                                      font : 20px Purisa; @}\")
+  (gtk:css-provider-load-from-string provider
+                                     \".viewstyle textview {
+                                        color : Green;
+                                        font : 20px Purisa; @}\")
   (gtk:widget-add-css-class window \"viewstyle\")
   (gtk:style-context-add-provider-for-display (gtk:widget-display window)
                                               provider)
