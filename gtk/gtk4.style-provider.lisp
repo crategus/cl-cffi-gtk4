@@ -70,15 +70,15 @@
 (setf (liber:alias-for-variable '+priority-fallback+)
       "Constant"
       (documentation '+priority-fallback+ 'variable)
- "@version{2024-04-01}
+ "@version{2025-09-22}
   @variable-value{1}
   @begin{short}
-    The priority used for default style information that is used in the absence
-    of themes.
+    The priority used for the default style information that is used in the
+    absence of themes.
   @end{short}
   Note that this is not very useful for providing default styling for custom
-  style classes - themes are likely to override styling provided at this
-  priority with catch-all @code{* {...@}} rules.
+  style classes, as themes are likely to override any styling provided at this
+  priority using catch-all @code{* {...@}} rules.
   @see-class{gtk:style-provider}")
 
 (export '+priority-fallback+)
@@ -112,14 +112,14 @@
 (setf (liber:alias-for-variable '+priority-settings+)
       "Constant"
       (documentation '+priority-settings+ 'variable)
- "@version{2024-04-01}
+ "@version{2025-09-22}
   @variable-value{400}
   @begin{short}
-    The priority used for style information provided via the
+    The priority used for style information provided with the
     @class{gtk:settings} object.
   @end{short}
-  This priority is higher than the @var{gtk:+priority-theme+} value to let
-  settings override themes.
+  This priority is higher than the @var{gtk:+priority-theme+} value, enabling
+  settings to override themes.
   @see-class{gtk:style-provider}
   @see-class{gtk:settings}
   @see-variable{gtk:+priority-theme+}")
@@ -181,7 +181,7 @@
 (setf (liber:alias-for-class 'style-provider)
       "Interface"
       (documentation 'style-provider 'type)
- "@version{2025-06-29}
+ "@version{2025-09-22}
   @begin{short}
     The @class{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
@@ -198,10 +198,9 @@
 lambda (provider)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[provider]{The @class{gtk:style-provider} object which received
+        @entry[provider]{The @class{gtk:style-provider} object that received
           the signal.}
       @end{simple-table}
-      No description available.
     @end{signal}
   @end{dictionary}
   @see-class{gtk:style-context}

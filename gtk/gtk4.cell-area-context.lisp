@@ -138,16 +138,15 @@
 (setf (liber:alias-for-function 'cell-area-context-area)
       "Accessor"
       (documentation 'cell-area-context-area 'function)
- "@version{2024-02-21}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-area-context-area object) => area}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area-context]{area} slot of the
-    @class{gtk:cell-area-context} class.
+    The accessor for the @slot[gtk:cell-area-context]{area} slot of the
+    @class{gtk:cell-area-context} class returns the cell area the context was
+    created by.
   @end{short}
-  The @fun{gtk:cell-area-context-area} function fetches the cell area the
-  context was created by.
 
   This is generally unneeded by layouting widgets. However it is important for
   the context implementation itself to fetch information about the area it is
@@ -178,18 +177,17 @@
 (setf (liber:alias-for-function 'cell-area-context-minimum-height)
       "Accessor"
       (documentation 'cell-area-context-minimum-height 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-area-context-minimum-height object) => height}
-  @syntax{(setf (gtk:cell-area-context-minimum-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer for the minimum height}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area-context]{minimum-height} slot of the
-    @class{gtk:cell-area-context} class.
+    The accessor for the @slot[gtk:cell-area-context]{minimum-height} slot of
+    the @class{gtk:cell-area-context} class returns the minimum height for the
+    cell area in this context for all @class{gtk:tree-model} rows that this
+    context was requested for using the @fun{gtk:cell-area-preferred-height}
+    function.
   @end{short}
-  The minimum height for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-height} function.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -214,18 +212,16 @@
 (setf (liber:alias-for-function 'cell-area-context-minimum-width)
       "Accessor"
       (documentation 'cell-area-context-minimum-width 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-area-context-minimum-width object) => width}
-  @syntax{(setf (gtk:cell-area-context-minimum-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer for the minimum width}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area-context]{minimum-width} slot of the
-    @class{gtk:cell-area-context} class.
+    The accessor for the @slot[gtk:cell-area-context]{minimum-width} slot of the
+    @class{gtk:cell-area-context} class returns the minimum width for the cell
+    area in this context for all @class{gtk:tree-model} rows that this context
+    was requested for using the @fun{gtk:cell-area-preferred-width} function.
   @end{short}
-  The minimum width for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-width} function.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -251,18 +247,17 @@
 (setf (liber:alias-for-function 'cell-area-context-natural-height)
       "Accessor"
       (documentation 'cell-area-context-natural-height 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-area-context-natural-height object) => height}
-  @syntax{(setf (gtk:cell-area-context-natural-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer for the natural height}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area-context]{natural-height} slot of the
-    @class{gtk:cell-area-context} class.
+    The accessor for the @slot[gtk:cell-area-context]{natural-height} slot of
+    the @class{gtk:cell-area-context} class returns the natural height for the
+    cell area in this context for all @class{gtk:tree-model} rows that this
+    context was requested for using the @fun{gtk:cell-area-preferred-height}
+    function.
   @end{short}
-  The natural height for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-height} function.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -287,18 +282,16 @@
 (setf (liber:alias-for-function 'cell-area-context-natural-width)
       "Accessor"
       (documentation 'cell-area-context-natural-width 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-area-context-natural-width object) => width}
-  @syntax{(setf (gtk:cell-area-context-natural-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer for the natural width}
   @begin{short}
-    Accessor of the @slot[gtk:cell-area-context]{natural-width} slot of the
-    @class{gtk:cell-area-context} class.
+    The accessor for the @slot[gtk:cell-area-context]{natural-width} slot of the
+    @class{gtk:cell-area-context} class returns the natural width for the cell
+    area in this context for all @class{gtk:tree-model} rows that this context
+    was requested for using the @fun{gtk:cell-area-preferred-width} function.
   @end{short}
-  The natural width for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-width} function.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.

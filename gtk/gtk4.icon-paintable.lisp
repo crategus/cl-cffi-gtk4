@@ -142,7 +142,7 @@
 
 #+liber-documentation
 (setf (documentation 'icon-paintable 'type)
- "@version{2023-08-30}
+ "@version{2025-09-22}
   @begin{short}
     Contains information found when looking up an icon in a
     @class{gtk:icon-theme} object and supports painting it as a
@@ -156,7 +156,7 @@
   @see-constructor{gtk:icon-paintable-new-for-file}
   @see-class{gtk:icon-theme}
   @see-class{gdk:paintable}
-  @see-class{gtk:symbol-paintable}")
+  @see-class{gtk:symbolic-paintable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -166,7 +166,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'icon-paintable) t)
- "The @code{file} property of type @class{g-file} (Read / Write / Construct
+ "The @code{file} property of type @class{g:file} (Read / Write / Construct
   only) @br{}
   The file representing the icon, if any.")
 
@@ -174,19 +174,18 @@
 (setf (liber:alias-for-function 'icon-paintable-file)
       "Accessor"
       (documentation 'icon-paintable-file 'function)
- "@version{2023-08-30}
+ "@version{2025-09-22}
   @syntax{(gtk:icon-paintable-file object) => file}
   @argument[object]{a @class{gtk:icon-paintable} object}
-  @argument[file]{a @class{g-file} object for the icon, or @code{nil}}
+  @argument[file]{a @class{g:file} object for the icon, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:icon-paintable]{file} slot of the
-    @class{gtk:icon-paintable} class.
+    The accessor for the @slot[gtk:icon-paintable]{file} slot of the
+    @class{gtk:icon-paintable} class returns the @class{g:file} object that was
+    used to load the icon, or @code{nil} if the icon was not loaded from a file.
   @end{short}
-  The @fun{gtk:icon-paintable-file} function gets the @class{g-file} object
-  that was used to load the icon, or @code{nil} if the icon was not loaded from
-  a file.
+  The @fun{gtk:icon-paintable-file} function gets
   @see-class{gtk:icon-paintable}
-  @see-class{g-file}")
+  @see-class{g:file}")
 
 ;;; --- gtk:icon-paintable-icon-name -------------------------------------------
 
@@ -200,17 +199,16 @@
 (setf (liber:alias-for-function 'icon-paintable-icon-name)
       "Accessor"
       (documentation 'icon-paintable-icon-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-22}
   @syntax{(gtk:icon-paintable-icon-name object) => name}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[name]{a string for the themed icon name for the icon, or @code{nil}
     if its not a themed icon}
   @begin{short}
-    Accessor of the @slot[gtk:icon-paintable]{icon-name} slot of the
-    @class{gtk:icon-paintable} class.
+    The accessor for the @slot[gtk:icon-paintable]{icon-name} slot of the
+    @class{gtk:icon-paintable} class returns the icon name being used for this
+    icon.
   @end{short}
-  The @fun{gtk:icon-paintable-icon-name} function gets the icon name being used
-  for this icon.
 
   When an icon looked up in the icon theme was not available, the icon theme
   may use fallback icons - either those specified to the
@@ -235,17 +233,16 @@
 (setf (liber:alias-for-function 'icon-paintable-is-symbolic)
       "Accessor"
       (documentation 'icon-paintable-is-symbolic 'function)
- "@version{2023-08-30}
+ "@version{2025-09-22}
   @syntax{(gtk:icon-paintable-is-symbolic object) => symbolic}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[symbolic]{@em{true} if the icon is symbolic, @em{false} otherwise}
   @begin{short}
-    Accessor of the @slot[gtk:icon-paintable]{is-symbolic} slot of the
-    @class{gtk:icon-paintable} class.
+    The accessor for the @slot[gtk:icon-paintable]{is-symbolic} slot of the
+    @class{gtk:icon-paintable} class checks if the icon is symbolic or not.
   @end{short}
-  The @fun{gtk:icon-paintable-is-symbolic} function checks if the icon is
-  symbolic or not. This currently uses only the file name and not the file
-  contents for determining this. This behaviour may change in the future.
+  This currently uses only the file name and not the file contents for
+  determining this. This behaviour may change in the future.
 
   Note that to render a symbolic @class{gtk:icon-paintable} object properly,
   with recoloring, you have to set its icon name on a @class{gtk:image} widget.
@@ -256,11 +253,16 @@
 ;;; gtk_icon_paintable_new_for_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_paintable_new_for_file" icon-paintable-new-for-file)
+(cffi:defcfun ("gtk_icon_paintable_new_for_file" %icon-paintable-new-for-file)
     (g:object icon-paintable :return)
+  (file g:file-as-namestring)
+  (size :int)
+  (scale :int))
+
+(defun icon-paintable-new-for-file (path size scale)
  #+liber-documentation
- "@version{2025-07-27}
-  @argument[file]{a @class{g:file} object}
+ "@version{2025-09-22}
+  @argument[path]{a pathname or namestring for the file}
   @argument[size]{an integer for the desired icon size}
   @argument[scale]{an integer for the desired scale}
   @return{The @class{gtk:icon-paintable} object containing the icon.}
@@ -270,11 +272,8 @@
   @end{short}
   The icon can then be rendered by using it as a @class{gdk:paintable} object.
   @see-class{gtk:icon-paintable}
-  @see-class{gdk:paintable}
-  @see-class{g-file}"
-  (file g:object)
-  (size :int)
-  (scale :int))
+  @see-class{gdk:paintable}"
+  (%icon-paintable-new-for-file (namestring path) size scale))
 
 (export 'icon-paintable-new-for-file)
 

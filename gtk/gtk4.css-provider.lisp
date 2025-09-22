@@ -105,7 +105,7 @@
 (setf (liber:alias-for-symbol 'css-location)
       "CStruct"
       (liber:symbol-documentation 'css-location)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @begin{declaration}
 (cffi:defcstruct css-location
   (bytes :size)
@@ -137,7 +137,7 @@
   @code{\"\\r\\n\"}, @code{\"\\r\"}, @code{\"\\n\"} and @code{\"\\f\"} as
   newlines. If your document uses different rules for line breaking, you might
   want run into problems here. See the @class{gtk:css-section} documentation
-  of an example.
+  for an example.
   @see-slot{gtk:css-location-bytes}
   @see-slot{gtk:css-location-chars}
   @see-slot{gtk:css-location-lines}
@@ -158,10 +158,10 @@
 
 (defun css-location-bytes (location)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @syntax{(gtk:css-location-bytes location) => bytes}
   @argument[location]{a @sym{gtk:css-location} instance}
-  @argument[bytes]{a number of the foreign type @code{:size}}
+  @argument[bytes]{a number with the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the beginning.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'bytes))
@@ -175,10 +175,10 @@
 
 (defun css-location-chars (location)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @syntax{(gtk:css-location-chars location) => chars}
   @argument[location]{a @sym{gtk:css-location} instance}
-  @argument[bytes]{a number of the foreign type @code{:size}}
+  @argument[bytes]{a number with the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the beginning.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'chars))
@@ -192,10 +192,10 @@
 
 (defun css-location-lines (location)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @syntax{(gtk:css-location-lines location) => lines}
   @argument[location]{a @sym{gtk:css-location} instance}
-  @argument[lines]{a number of the foreign type @code{:size}}
+  @argument[lines]{a number with the foreign type @code{:size}}
   @short{Returns the number of full lines that have been parsed.}
   If you want to display this as a line number, you need to add 1 to this.
   @see-symbol{gtk:css-location}"
@@ -209,10 +209,10 @@
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @syntax{(gtk:css-location-line-bytes location) => line-bytes}
   @argument[location]{a @sym{gtk:css-location} instance}
-  @argument[line-bytes]{a number of the foreign type @code{:size}}
+  @argument[line-bytes]{a number with the foreign type @code{:size}}
   @short{Returns the number of bytes parsed since the last line break.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'line-bytes))
@@ -225,10 +225,10 @@
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @syntax{(gtk:css-location-line-chars location) => line-chars}
   @argument[location]{a @sym{gtk:css-location} instance}
-  @argument[line-chars]{a number of the foreign type @code{:size}}
+  @argument[line-chars]{a number with the foreign type @code{:size}}
   @short{Returns the number of characters parsed since the last line break.}
   @see-symbol{gtk:css-location}"
   (cffi:foreign-slot-value location '(:struct css-location) 'line-chars))
@@ -248,7 +248,7 @@
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{2025-07-25}
+ "@version{2025-09-22}
   @begin{declaration}
 (glib:define-gboxed-opaque css-section \"GtkCssSection\"
   :export t
@@ -261,9 +261,9 @@
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
   @begin[Examples]{dictionary}
-    Access the @sym{gtk:css-location} and @sym{gtk:css-section} structures in a
-    @sig[gtk:css-provider]{parsing-error} signal handler to mark an error in
-    the parsed CSS file, which is loaded into the text buffer.
+    Use the @sym{gtk:css-location} and @sym{gtk:css-section} structures in a
+    @sig[gtk:css-provider]{parsing-error} handler to mark an error in
+    the parsed CSS file, that is loaded into the text buffer.
     @begin{pre}
 (g:signal-connect provider \"parsing-error\"
         (lambda (provider section err)
@@ -285,7 +285,7 @@
   @see-constructor{gtk:css-section-new}
   @see-constructor{gtk:css-section-new-with-bytes}
   @see-class{gtk:css-provider}
-  @see-function{gtk:css-section-parent}")
+  @see-class{gtk:location}")
 
 (export 'css-section)
 
@@ -318,13 +318,11 @@
 ;;; gtk_css_section_new_with_bytes                          Since 4.16
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Allow a GFile, a pathname or a namestring
-
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_new_with_bytes" css-section-new-with-bytes)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2025-09-22}
   @argument[path]{a pathname or namestring for the file this section refers to}
   @argument[bytes]{a @class{g:bytes} instance for the bytes this section
     refers to}
@@ -339,8 +337,8 @@
 
   Since 4.16
   @see-class{gtk:css-section}
-  @see-class{g:bytes}
-  @see-class{g:file}"
+  @see-class{gtk:css-location}
+  @see-class{g:bytes}"
   (path g:file-as-namestring)
   (bytes (g:boxed g:bytes))
   (start (:pointer (:struct css-location)))
@@ -387,7 +385,7 @@
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2025-07-26}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The @class{g:bytes} instance for the bytes from which @arg{section} was
@@ -409,10 +407,10 @@
 ;;; gtk_css_section_get_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_get_file" css-section-file)
+(cffi:defcfun ("gtk_css_section_get_file" css-section-file)
     g:file-as-namestring
  #+liber-documentation
- "@version{#2025-05-10}
+ "@version{2025-05-10}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The namestring for the file that @arg{section} was parsed from or
@@ -436,9 +434,12 @@
 (cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
     (g:boxed css-section)
  #+liber-documentation
- "@version{#2025-02-25}
+ "@version{2025-09-22}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{gtk:css-section} parent section, or @code{nil} if none.}
+  @begin{return}
+    The @class{gtk:css-section} instance for the parent section, or @code{nil}
+    if none.
+  @end{return}
   @begin{short}
     Gets the parent section for the given section.
   @end{short}
@@ -501,11 +502,9 @@
    :type-initializer "gtk_css_provider_get_type")
   nil)
 
-;; TODO: Add an example for a "parse-error" signal handler
-
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2025-07-05}
+ "@version{2025-09-22}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -526,8 +525,8 @@
   @file{$XDG_DATA_DIRS/themes/THEME/gtk-VERSION/gtk-VARIANT.css} and
   @file{DATADIR/share/themes/THEME/gtk-VERSION/gtk-VARIANT.css}, where
   @code{THEME} is  the name of the current theme, see the
-  @slot[gtk:settings]{gtk-icon-theme-name setting} setting,
-  @code{VARIANT} is the variant to load, see the
+  @slot[gtk:settings]{gtk-icon-theme-name} setting, @code{VARIANT} is the
+  variant to load, see the
   @slot[gtk:settings]{gtk-application-prefer-dark-theme} setting,
   @code{DATADIR} is the prefix configured when GTK was compiled (unless
   overridden by the @code{GTK_DATA_PREFIX} environment variable), and
@@ -546,7 +545,7 @@ lambda (provider section error)    :run-last
           error.}
         @entry[section]{The @class{gtk:css-section} instance the error happened
           in.}
-        @entry[error]{The parsing error of @class{glib:error} type.}
+        @entry[error]{The @class{glib:error} instance for the parsing error.}
       @end{simple-table}
       Signals that a parsing error occured. The @arg{section} argument describes
       the actual location of the error as accurately as possible. Parsing errors
@@ -561,7 +560,6 @@ lambda (provider section error)    :run-last
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:css-provider-new}
-  @see-class{gtk:style-context}
   @see-class{gtk:style-provider}
   @see-class{gtk:css-section}")
 
@@ -645,7 +643,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
- "@version{2025-07-05}
+ "@version{2025-09-22}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a string for the CSS data}
   @begin{short}
@@ -660,7 +658,9 @@ lambda (provider section error)    :run-last
     @fun{gtk:css-provider-load-from-string} or
     @fun{gtk:css-provider-load-from-bytes} functions instead.
   @end{dictionary}
-  @see-class{gtk:css-provider}"
+  @see-class{gtk:css-provider}
+  @see-function{gtk:css-provider-load-from-string}
+  @see-function{gtk:css-provider-load-from-bytes}"
   #+(and gtk-4-12 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:CSS-PROVIDER-LOAD-FROM-DATA is deprecated since 4.12."))

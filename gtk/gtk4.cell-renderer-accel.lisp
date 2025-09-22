@@ -191,14 +191,15 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-key)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-key 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-renderer-accel-accel-key object) => key}
   @syntax{(setf (gtk:cell-renderer-accel-accel-key object) key)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[key]{an unsigned integer for the keyval of the accelerator}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{accel-key} slot of the
-    @class{gtk:cell-renderer-accel} class.
+    The accessor for the @slot[gtk:cell-renderer]{accel-key} slot of the
+    @class{gtk:cell-renderer-accel} class gets or sets the keyval of the
+    accelerator.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
@@ -223,19 +224,19 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-mode)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-renderer-accel-accel-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-accel-accel-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[mode]{a @sym{gtk:cell-renderer-accel-mode} value}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-accel]{accel-mode} slot of the
-    @class{gtk:cell-renderer-accel} class.
+    The accessor for the @slot[gtk:cell-renderer-accel]{accel-mode} slot of the
+    @class{gtk:cell-renderer-accel} class gets or sets whether the edited
+    accelerators are GTK accelerators.
   @end{short}
-  Determines if the edited accelerators are GTK accelerators. If they are,
-  consumed modifiers are suppressed, only accelerators accepted by GTK are
-  allowed, and the accelerators are rendered in the same way as they are in
-  menus.
+  If they are, consumed modifiers are suppressed, only accelerators accepted by
+  GTK are allowed, and the accelerators are rendered in the same way as they are
+  in menus.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -256,15 +257,16 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-accel-mods)
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mods 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-renderer-accel-accel-mods object) => accel-mods}
   @syntax{(setf (gtk:cell-renderer-accel-accel-mods object) accel-mods)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[accel-mods]{a @sym{gdk:modifier-type} value for the modifier mask
     of the accelerator}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-accel]{accel-mods} slot of the
-    @class{gtk:cell-renderer-accel} class.
+    The accessor for the @slot[gtk:cell-renderer-accel]{accel-mods} slot of the
+    @class{gtk:cell-renderer-accel} class gets or sets the modifier mask of the
+    accelerator.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
@@ -289,19 +291,20 @@ lambda (accel path key mods keycode)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-accel-keycode)
       "Accessor"
       (documentation 'cell-renderer-accel-keycode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-22}
   @syntax{(gtk:cell-renderer-accel-keycode object) => keycode}
   @syntax{(setf (gtk:cell-renderer-accel-keycode object) keycode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[keycode]{an unsigned integer for the hardware keycode of the
     accelerator}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-accel]{keycode} slot of the
-    @class{gtk:cell-renderer-accel} class.
+    The accessor for the @slot[gtk:cell-renderer-accel]{keycode} slot of the
+    @class{gtk:cell-renderer-accel} class gets or sets the hardware keycode of
+    the accelerator.
   @end{short}
-  The hardware keycode of the accelerator. Note that the hardware keycode is
-  only relevant if the key does not have a keyval. Normally, the keyboard
-  configuration should assign keyvals to all keys.
+  Note that the hardware keycode is only relevant if the key does not have a
+  keyval. Normally, the keyboard configuration should assign keyvals to all
+  keys.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
