@@ -8,7 +8,7 @@
 ;;;;
 ;;;; Click to start the transition.
 ;;;;
-;;;; 2025-08-22
+;;;; 2025-09-22
 
 (in-package :gtk4-example)
 
@@ -56,7 +56,7 @@
            ((layout demo-layout)
             widget orientation for-size
             minimum natural minimum-baseline natural-baseline)
-  (declare (ignore minimum-baseline natural-baseline))
+  (declare (ignore for-size minimum-baseline natural-baseline))
   (let ((min-size 0) (nat-size 0))
     (iter (for child first (gtk:widget-first-child widget)
                      then (gtk:widget-next-sibling child))
@@ -207,7 +207,7 @@
                                     natural
                                     minimum-baseline
                                     natural-baseline)
-  (declare (ignore minimum-baseline natural-baseline))
+  (declare (ignore widget orientation for-size minimum-baseline natural-baseline))
   (setf (cffi:mem-ref minimum :int) 32)
   (setf (cffi:mem-ref natural :int) 32))
 
@@ -240,6 +240,7 @@
 
 (defmethod gobject:object-class-init :after
            ((subclass (eql (find-class 'demo-widget))) class data)
+  (declare (ignorable subclass class data))
   (setf (gtk:widget-class-layout-manager-type "DemoWidget") "DemoLayout"))
 
 (defun demo-widget-new ()

@@ -59,6 +59,7 @@
 
 (defmethod gobject:object-class-init :after
            ((subclass (eql (find-class 'color-swatch))) class data)
+  (declare (ignorable subclass class data))
   (setf (gtk:widget-class-css-name "ColorSwatch") "colorswatch"))
 
 (defmethod color-swatch-measure-impl
