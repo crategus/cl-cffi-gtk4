@@ -3,6 +3,68 @@
 (def-suite gtk-css-provider :in gtk-theming)
 (in-suite gtk-css-provider)
 
+;; Taken from the CSS Accordion example
+(defparameter +css-button+
+".accordion button {
+  background-color: rgb(187,187,187);
+  border-bottom-color: rgb(51,51,51);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-left-color: rgb(51,51,51);
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: rgb(51,51,51);
+  border-right-style: solid;
+  border-right-width: 0;
+  border-top-color: rgb(51,51,51);
+  border-top-style: solid;
+  border-top-width: 2px;
+  color: rgb(0,0,0);
+  padding-bottom: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 12px;
+}
+
+.accordion button:first-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 0;
+}
+
+.accordion button:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-top-width: 2px;
+}
+
+.accordion button:hover {
+  background-color: rgb(72,112,188);
+  padding-bottom: 12px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-top: 12px;
+}
+
+.accordion button *:hover {
+  color: rgb(255,255,255);
+}
+
+.accordion button:active {
+  background-color: rgb(153,52,1);
+}
+
+.accordion button:hover:active {
+  background-color: rgb(153,52,1);
+}
+")
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkCssLocation
@@ -73,23 +135,64 @@
                   gtk::lines 5
                   gtk::line-bytes 0
                   gtk::line-chars 0))
-
+          ;; Create section from file
           (is (typep (setf section (gtk:css-section-new filename start end))
                      'gtk:css-section))
           (is (string= "css-accordion.css:1:1-6:1"
-                       (gtk:css-section-to-string section))))))))
+                       (gtk:css-section-to-string section)))
+          ;; Access section
+          (is-false (gtk:css-section-bytes section))
+          (is (string= filename (gtk:css-section-file section)))
+          (is-false (gtk:css-section-parent section))
+          (is (cffi:pointerp (gtk:css-section-start-location section)))
+          (is (cffi:pointerp (gtk:css-section-end-location section))))))))
 
 ;;;     gtk_css_section_new_with_bytes                      Since 4.16
+
+(test gtk-css-section-new-with-bytes
+  (glib-test:with-check-memory ()
+    (multiple-value-bind (data len)
+        (cffi:foreign-string-alloc +css-button+)
+      (cffi:with-foreign-objects ((start '(:struct gtk:css-location))
+                                  (end '(:struct gtk:css-location)))
+        ;; Set start slots
+        (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                   gtk::line-bytes gtk::line-chars)
+                                  start
+                                  (:struct gtk:css-location))
+          (setf gtk::bytes 0
+                gtk::chars 0
+                gtk::lines 0
+                gtk::line-bytes 0
+                gtk::line-chars 0))
+        ;; Set end slots
+        (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                   gtk::line-bytes gtk::line-chars)
+                                  end
+                                  (:struct gtk:css-location))
+          (setf gtk::bytes 10
+                gtk::chars 10
+                gtk::lines 5
+                gtk::line-bytes 0
+                gtk::line-chars 0))
+        (let ((bytes (g:bytes-new data len))
+               section)
+          ;; Create section from bytes
+          (is (typep (setf section
+                           (gtk:css-section-new-with-bytes nil bytes start end))
+                     'gtk:css-section))
+          (is (string= "<data>:1:1-6:1"
+                       (gtk:css-section-to-string section)))
+          ;; Access section
+          (is (typep (gtk:css-section-bytes section) 'g:bytes))
+          (is-false (gtk:css-section-file section))
+          (is-false (gtk:css-section-parent section))
+          (is (cffi:pointerp (gtk:css-section-start-location section)))
+          (is (cffi:pointerp (gtk:css-section-end-location section))))))))
 
 ;;;     gtk_css_section_ref                                 not implemented
 ;;;     gtk_css_section_unref                               not implemented
 ;;;     gtk_css_section_print                               not implemented
-;;;     gtk_css_section_to_string
-;;;     gtk_css_section_get_bytes                           Since 4.16
-;;;     gtk_css_section_get_file
-;;;     gtk_css_section_get_parent
-;;;     gtk_css_section_get_start_location
-;;;     gtk_css_section_get_end_location
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -136,69 +239,23 @@
 
 ;;;     parsing-error
 
+(test gtk-css-provider-parsing-error-signal
+  (let* ((name "parsing-error")
+         (gtype (g:gtype "GtkCssProvider"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkCssSection" "GError")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
-
-;; Taken from the CSS Accordion example
-(defparameter +css-button+
-".accordion button {
-  background-color: rgb(187,187,187);
-  border-bottom-color: rgb(51,51,51);
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-left-color: rgb(51,51,51);
-  border-left-style: solid;
-  border-left-width: 2px;
-  border-right-color: rgb(51,51,51);
-  border-right-style: solid;
-  border-right-width: 0;
-  border-top-color: rgb(51,51,51);
-  border-top-style: solid;
-  border-top-width: 2px;
-  color: rgb(0,0,0);
-  padding-bottom: 12px;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-top: 12px;
-}
-
-.accordion button:first-child {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 0;
-}
-
-.accordion button:last-child {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 5px;
-  border-bottom-width: 2px;
-  border-left-width: 2px;
-  border-right-width: 2px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 5px;
-  border-top-width: 2px;
-}
-
-.accordion button:hover {
-  background-color: rgb(72,112,188);
-  padding-bottom: 12px;
-  padding-left: 48px;
-  padding-right: 48px;
-  padding-top: 12px;
-}
-
-.accordion button *:hover {
-  color: rgb(255,255,255);
-}
-
-.accordion button:active {
-  background-color: rgb(153,52,1);
-}
-
-.accordion button:hover:active {
-  background-color: rgb(153,52,1);
-}
-")
 
 ;;;     gtk_css_provider_new
 
@@ -353,4 +410,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2025-05-13
+;;; 2025-09-22

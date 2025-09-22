@@ -80,18 +80,16 @@
 ;;;     gtk_icon_paintable_new_for_file
 
 (test gtk-icon-paintable-new-for-file
-  (let* ((file (g:file-new-for-path "gtk-logo-24.png"))
-         (paintable (gtk:icon-paintable-new-for-file file 24 1)))
+  (let* ((path (glib-sys:sys-path "gtk-logo-24.png"))
+         (paintable (gtk:icon-paintable-new-for-file path 24 1)))
     (is (typep paintable 'gtk:icon-paintable))
     (is (= 1 (g:object-ref-count paintable)))
-    (is (= 2 (g:object-ref-count file)))
     (is (string= "gtk-logo-24.png"
                  (g:file-basename (gtk:icon-paintable-file paintable))))
     (is-false (gtk:icon-paintable-icon-name paintable))
     (is-false (gtk:icon-paintable-is-symbolic paintable))
     ;; The FILE slot is not writable, therefore we can not remove FILE
     ;; from PAINTABLE
-    (is (= 2 (g:object-ref-count file)))
     (is (= 1 (g:object-ref-count paintable)))))
 
-;;; 2024-10-9
+;;; 2025-09-22
