@@ -112,13 +112,14 @@
 (setf (liber:alias-for-function 'draw-context-display)
       "Accessor"
       (documentation 'draw-context-display 'function)
- "@version{2025-08-31}
+ "@version{2025-09-25}
   @syntax{(gdk:draw-context-display object) => display}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[display]{a @class{gdk:display} object or @code{nil}}
   @begin{short}
-    The accessor for the @code{display} slot of the @class{gdk:draw-context}
-    class retrieves the display the draw context is created for.
+    The accessor for the @slot[gdk:draw-context]{display} slot of the
+    @class{gdk:draw-context} class retrieves the display the draw context is
+    created for.
   @end{short}
   @see-class{gdk:draw-context}
   @see-class{gdk:display}")
@@ -135,13 +136,14 @@
 (setf (liber:alias-for-function 'draw-context-surface)
       "Accessor"
       (documentation 'draw-context-surface 'function)
- "@version{2025-08-31}
+ "@version{2025-09-25}
   @syntax{(gdk:draw-context-surface object) => surface}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[surface]{a @class{gdk:surface} object or @code{nil}}
   @begin{short}
-    The accessor for the @code{surface} slot of the @class{gdk:draw-context}
-    class retrieves the surface used by the draw context.
+    The accessor for the @slot[gdk:cairo-context]{surface} slot of the
+    @class{gdk:draw-context} class retrieves the surface used by the draw
+    context.
   @end{short}
   @see-class{gdk:draw-context}
   @see-class{gdk:surface}")

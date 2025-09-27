@@ -775,19 +775,6 @@
       @about-symbol{notify-type}
       @about-class{event-sequence}
       @about-class{event}
-      @about-class{button-event}
-      @about-class{scroll-event}
-      @about-class{motion-event}
-      @about-class{key-event}
-      @about-class{focus-event}
-      @about-class{crossing-event}
-      @about-class{grab-broken-event}
-      @about-class{delete-event}
-      @about-class{dnd-event}
-      @about-class{touch-event}
-      @about-class{touchpad-event}
-      @about-class{pad-event}
-      @about-class{proximity-event}
       @about-function{event-ref}
       @about-function{event-unref}
       @about-function{event-event-type}
@@ -805,11 +792,18 @@
       @about-function{event-history}
       @about-function{event-pointer-emulated}
       @about-function{event-triggers-context-menu}
+      @about-function{events-angle}
+      @about-function{events-center}
+      @about-function{events-distance}
+      @about-class{button-event}
       @about-function{button-event-button}
+      @about-class{scroll-event}
       @about-function{scroll-event-direction}
       @about-function{scroll-event-deltas}
       @about-function{scroll-event-is-stop}
       @about-function{scroll-event-unit}
+      @about-class{motion-event}
+      @about-class{key-event}
       @about-function{key-event-keyval}
       @about-function{key-event-keycode}
       @about-function{key-event-consumed-modifiers}
@@ -818,25 +812,31 @@
       @about-function{key-event-is-modifier}
       @about-function{key-event-matches}
       @about-function{key-event-match}
+      @about-class{focus-event}
       @about-function{focus-event-in}
-      @about-function{touch-event-emulating-pointer}
+      @about-class{crossing-event}
       @about-function{crossing-event-mode}
       @about-function{crossing-event-detail}
       @about-function{crossing-event-focus}
+      @about-class{grab-broken-event}
       @about-function{grab-broken-event-grab-surface}
       @about-function{grab-broken-event-implicit}
+      @about-class{delete-event}
+      @about-class{dnd-event}
       @about-function{dnd-event-drop}
+      @about-class{touch-event}
+      @about-function{touch-event-emulating-pointer}
+      @about-class{touchpad-event}
       @about-function{touchpad-event-gesture-phase}
       @about-function{touchpad-event-n-fingers}
       @about-function{touchpad-event-deltas}
       @about-function{touchpad-event-pinch-angle-delta}
       @about-function{touchpad-event-pinch-scale}
+      @about-class{pad-event}
       @about-function{pad-event-axis-value}
       @about-function{pad-event-button}
       @about-function{pad-event-group-mode}
-      @about-function{events-angle}
-      @about-function{events-center}
-      @about-function{events-distance}
+      @about-class{proximity-event}
     @end{subsection}
     @begin[Cursors]{subsection}
       @about-class{cursor}

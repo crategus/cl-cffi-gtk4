@@ -49,24 +49,22 @@
 ;;; GdkToplevelSize
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type toplevel-size-type ()
-  ()
-  (:actual-type :pointer)
-  (:simple-parser toplevel-size))
-
-(defmethod cffi:translate-to-foreign (proxy (type toplevel-size-type))
-  proxy)
-
-(defmethod cffi:translate-from-foreign (native (type toplevel-size-type))
-  native)
+(cffi:defcstruct toplevel-size
+  ;; no available fields
+  )
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'toplevel-size)
       "CStruct"
       (liber:symbol-documentation 'toplevel-size)
- "@version{#2023-04-10}
+ "@version{2025-09-25}
+  @begin{declaration}
+(cffi:defcstruct toplevel-size
+  ;; no available fields
+  )
+  @end{declaration}
   @begin{short}
-    The @class{gdk:toplevel-size} structure contains information that may be
+    The @sym{gdk:toplevel-size} structure contains information that may be
     useful for users of @class{gdk:toplevel} objects to compute a surface size.
   @end{short}
   It also carries information back with the computational result.
@@ -79,14 +77,14 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_size_bounds" %toplevel-size-bounds) :void
-  (size toplevel-size)
+  (size (:pointer (:struct toplevel-size)))
   (width (:pointer :int))
   (height (:pointer :int)))
 
 (defun toplevel-size-bounds (size)
  #+liber-documentation
- "@version{#2025-08-02}
-  @syntax{(gdk:toplevel-size size) => width, height}
+ "@version{#2025-09-25}
+  @syntax{(gdk:toplevel-size-bounds size) => width, height}
   @argument[size]{a @sym{gdk:toplevel-size} instance}
   @argument[width]{an integer for the width}
   @argument[height]{an integer for the height}
@@ -113,7 +111,7 @@
 
 (cffi:defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @argument[size]{a @sym{gdk:toplevel-size} instance}
   @argument[width]{an integer for the width}
   @argument[height]{an integer for the height}
@@ -125,7 +123,7 @@
   assumed to be respected by the windowing system, or backend.
   @see-symbol{gdk:toplevel-size}
   @see-function{gdk:toplevel-size-bounds}"
-  (size toplevel-size)
+  (size (:pointer (:struct toplevel-size)))
   (width :int)
   (height :int))
 
@@ -138,7 +136,7 @@
 (cffi:defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size)
     :void
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @argument[size]{a @sym{gdk:toplevel-size} instance}
   @argument[width]{an integer for the minimum width}
   @argument[height]{an integer for the minimum height}
@@ -155,7 +153,7 @@
   @see-symbol{gdk:toplevel-size}
   @see-class{gdk:toplevel}
   @see-function{gdk:toplevel-size-bounds}"
-  (size toplevel-size)
+  (size (:pointer (:struct toplevel-size)))
   (width :int)
   (height :int))
 
@@ -168,7 +166,7 @@
 (cffi:defcfun ("gdk_toplevel_size_set_shadow_width"
                toplevel-size-set-shadow-width) :void
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @argument[size]{a @sym{gdk:toplevel-size} instance}
   @argument[left]{an integer for the width of the left part of the shadow}
   @argument[right]{an integer for the width of the right part of the shadow}
@@ -180,7 +178,7 @@
     any.
   @end{short}
   @see-symbol{gdk:toplevel-size}"
-  (size toplevel-size)
+  (size (:pointer (:struct toplevel-size)))
   (left :int)
   (right :int)
   (top :int)

@@ -317,15 +317,14 @@
 (cffi:defcfun ("gdk_popup_layout_get_anchor_rect" popup-layout-anchor-rect)
     (g:boxed rectangle)
  #+liber-documentation
- "@version{2024-02-17}
+ "@version{2025-09-25}
   @syntax{(gdk:popup-layout-anchor-rect layout) => rect}
   @syntax{(setf (gdk:popup-layout-anchor-rect layout) rect)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[rect]{an anchor @class{gdk:rectangle} instance}
   @begin{short}
-    The @fun{gdk:popup-layout-anchor-rect} function gets the anchor rectangle.
+    Gets or sets the anchor rectangle.
   @end{short}
-  The @setf{gdk:popup-layout-anchor-rect} function sets the anchor rectangle.
   @see-class{gdk:popup-layout}
   @see-class{gdk:rectangle}"
   (layout (g:boxed popup-layout)))

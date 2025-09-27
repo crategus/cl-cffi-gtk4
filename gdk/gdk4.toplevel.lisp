@@ -271,7 +271,7 @@
 (setf (liber:alias-for-symbol 'titlebar-gesture)
       "GEnum"
       (liber:symbol-documentation 'titlebar-gesture)
- "@version{2025-06-29}
+ "@version{2025-09-25}
   @begin{declaration}
 (gobject:define-genum \"GdkTitlebarGesture\" titlebar-gesture
   (:export t
@@ -282,16 +282,15 @@
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
-      @entry[:double-click]{No description available.}
-      @entry[:right-click]{No description available.}
-      @entry[:middle-click]{No description available.}
+      @entry[:double-click]{Double click gesture.}
+      @entry[:right-click]{Right click gesture.}
+      @entry[:middle-click]{Middle click gesture.}
     @end{simple-table}
   @end{values}
   @begin{short}
     The kind of title bar gesture to emit with the
     @fun{gdk:toplevel-titlebar-gesture} function.
   @end{short}
-
   Since 4.4
   @see-class{gdk:toplevel}
   @see-function{gdk:toplevel-titlebar-gesture}")
@@ -300,8 +299,11 @@
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: Is this the correct implementation? GdkToplevel is an interface
+;; derived from GdkSurface which is an abstract class.
+
 (gobject:define-ginterface "GdkToplevel" toplevel
-  (:superclass g:object
+  (:superclass surface
    :export t
    :type-initializer "gdk_toplevel_get_type")
   ((decorated
@@ -579,9 +581,8 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-state)
       "Accessor"
       (documentation 'toplevel-state 'function)
- "@version{#2025-08-04}
+ "@version{#2025-09-25}
   @syntax{(gdk:toplevel-state object) => state}
-  @syntax{(setf (gdk:toplevel-state object) state)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[state]{a @sym{gdk:toplevel-state} value}
   @begin{short}
@@ -843,19 +844,28 @@ lambda (toplevel size)    :run-last
 ;;; gdk_toplevel_begin_resize
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_toplevel_begin_resize" toplevel-begin-resize) :void
+(cffi:defcfun ("gdk_toplevel_begin_resize" %toplevel-begin-resize) :void
+  (toplevel (g:object toplevel))
+  (edge surface-edge)
+  (device (g:object device))
+  (button :int)
+  (x :double)
+  (y :double)
+  (timestamp :uint32))
+
+(defun toplevel-begin-resize (toplevel edge device button x y timestamp)
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[edge]{a @sym{gdk:surface-edge} value for the edge or corner from
     which the drag is started}
   @argument[device]{a @class{gdk:device} object used for the operation}
   @argument[button]{an integer for the button being used to drag, or 0 for a
     keyboard-initiated drag}
-  @argument[x]{a double float for the surface x coordinate of mouse click that
-    began the drag}
-  @argument[y]{a double float for the surface y coordinate of mouse click that
-    began the drag}
+  @argument[x]{a number coerced to a double float for the surface x coordinate
+    of mouse click that began the drag}
+  @argument[y]{a number coerced to a double float for the surface y coordinate
+    of mouse click that began the drag}
   @argument[timestamp]{an unsigned integer for the timestamp of mouse click
     that began the drag, use the @fun{gdk:event-time} function.}
   @begin{short}
@@ -866,13 +876,13 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:device}
   @see-symbol{gdk:surface-edge}
   @see-function{gdk:event-time}"
-  (toplevel (g:object toplevel))
-  (edge surface-edge)
-  (device (g:object device))
-  (button :int)
-  (x :double)
-  (y :double)
-  (timestamp :uint32))
+  (%toplevel-begin-resize toplevel
+                          edge
+                          device
+                          button
+                          (coerce x 'double-float)
+                          (coerce y 'double-float)
+                          timestamp))
 
 (export 'toplevel-begin-resize)
 
@@ -880,17 +890,25 @@ lambda (toplevel size)    :run-last
 ;;; gdk_toplevel_begin_move
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_toplevel_begin_move" toplevel-begin-move) :void
+(cffi:defcfun ("gdk_toplevel_begin_move" %toplevel-begin-move) :void
+  (toplevel (g:object toplevel))
+  (device (g:object device))
+  (button :int)
+  (x :double)
+  (y :double)
+  (timestamp :uint32))
+
+(defun toplevel-begin-move (toplevel device button x y timestamp)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{#2025-09-25}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[device]{a @class{gdk:device} object used for the operation}
   @argument[button]{an integer for the button being used to drag, or 0 for a
     keyboard-initiated drag}
-  @argument[x]{a double float for the surface x coordinate of mouse click that
-    began the drag}
-  @argument[y]{a double float for the surface y coordinate of mouse click that
-    began the drag}
+  @argument[x]{a number coerced to a double float for the surface x coordinate
+    of mouse click that began the drag}
+  @argument[y]{a number coerced to a double float for the surface y coordinate
+    of mouse click that began the drag}
   @argument[timestamp]{an unsigned integer for the timestamp of mouse click
     that began the drag}
   @begin{short}
@@ -900,12 +918,12 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:toplevel}
   @see-class{gdk:device}
   @see-function{gdk:event-time}"
-  (toplevel (g:object toplevel))
-  (device (g:object device))
-  (button :int)
-  (x :double)
-  (y :double)
-  (timestamp :uint32))
+  (%toplevel-begin-move toplevel
+                        device
+                        button
+                        (coerce x 'double-float)
+                        (coerce y 'double-float)
+                        timestamp))
 
 (export 'toplevel-begin-move)
 
@@ -917,12 +935,12 @@ lambda (toplevel size)    :run-last
 (cffi:defcfun ("gdk_toplevel_titlebar_gesture" toplevel-titlebar-gesture)
     :boolean
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[gesture]{a @sym{gdk:titlebar-gesture} value}
-  @return{The boolean value.}
+  @return{The boolean value whether the gesture was perfomed.}
   @begin{short}
-    No description available.
+    Performs a title bar gesture.
   @end{short}
 
   Since 4.4

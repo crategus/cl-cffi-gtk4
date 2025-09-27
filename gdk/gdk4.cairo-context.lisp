@@ -37,7 +37,7 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_cairo_context_cairo_create
+;;;     gdk_cairo_context_cairo_create                      Deprecated 4.18
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
@@ -55,7 +55,7 @@
 
 #+liber-documentation
 (setf (documentation 'cairo-context 'type)
- "@version{2023-04-07}
+ "@version{2025-09-25}
   @begin{short}
     The @class{gdk:cairo-context} object is an object representing the platform
     specific draw context.
@@ -68,13 +68,16 @@
   @see-function{gdk:surface-create-cairo-context}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_context_cairo_create
+;;; gdk_cairo_context_cairo_create                          Deprecated 4.18
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
+(cffi:defcfun ("gdk_cairo_context_cairo_create" %cairo-context-cairo-create)
     (:pointer (:struct cairo:context-t))
+  (context (g:object cairo-context)))
+
+(defun cairo-context-cairo-create (context)
  #+liber-documentation
- "@version{2025-07-30}
+ "@version{2025-09-25}
   @argument[context]{a @class{gdk:cairo-context} object that is currently
     drawing}
   @begin{return}
@@ -90,11 +93,19 @@
   must have been done or this function will return @code{NULL}. The returned
   context is guaranteed to be valid until the @fun{gdk:draw-context-end-frame}
   function is called.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.18. Drawing content with Cairo should
+    be done via Cairo rendernodes, not by using renderers.
+  @end{dictionary}
   @see-class{gdk:cairo-context}
+  @see-class{gdk:surface}
   @see-symbol{cairo:context-t}
   @see-function{gdk:draw-context-begin-frame}
   @see-function{gdk:draw-context-end-frame}"
-  (context (g:object cairo-context)))
+  #+(and gtk-4-18 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CAIRO-CONTEXT-CAIRO-CREATE is deprecated since 4.18."))
+  (%cairo-context-cairo-create context))
 
 (export 'cairo-context-cairo-create)
 

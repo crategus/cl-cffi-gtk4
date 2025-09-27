@@ -80,10 +80,10 @@
 (setf (liber:alias-for-class 'popup)
       "Interface"
       (documentation 'popup 'type)
- "@version{#2023-04-09}
+ "@version{2025-09-25}
   @begin{short}
-    A @class{gdk:popup} object is a surface that is attached to another surface,
-    called its \"parent\", and is positioned relative to it.
+    The @class{gdk:popup} object is a surface that is attached to another
+    surface, called its \"parent\", and is positioned relative to it.
   @end{short}
   @class{gdk:popup} objects are typically used to implement menus and similar
   popups. They can be modal, which is indicated by the @code{autohide} property.
@@ -107,7 +107,7 @@
 (setf (liber:alias-for-function 'popup-autohide)
       "Accessor"
       (documentation 'popup-autohide 'function)
- "@version{#2025-08-31}
+ "@version{#2025-09-25}
   @syntax{(gdk:popup-autohide object) => autohide}
   @syntax{(setf (gdk:popup-autohide object) autohide)}
   @argument[object]{a @class{gdk:popup} object}
@@ -117,8 +117,7 @@
     @class{gdk:popup} class returns whether the popup is set to hide on outside
     clicks.
   @end{short}
-  @see-class{gdk:popup}
-  @see-class{gdk:surface}")
+  @see-class{gdk:popup}")
 
 ;;; --- gdk:popup-parent -------------------------------------------------------
 

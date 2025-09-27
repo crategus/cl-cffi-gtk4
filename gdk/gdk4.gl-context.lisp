@@ -273,13 +273,13 @@
 (setf (liber:alias-for-function 'gl-context-api)
       "Accessor"
       (documentation 'gl-context-api 'function)
- "@version{#2025-08-02}
+ "@version{#2025-09-25}
   @syntax{(gdk:gl-context-api object) => api}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[api]{a @sym{gdk:gl-api} value}
   @begin{short}
-    Accessor of the @slot[gdk:gl-context]{api} slot of the
-    @class{gdk:gl-context} class gets the API currently in use.
+    The accessor for the @slot[gdk:gl-context]{api} slot of the
+    @class{gdk:gl-context} class returns the API currently in use.
   @end{short}
   If the renderer has not been realized yet, @val[gdk:gl-api]{:none} is
   returned.
@@ -301,16 +301,15 @@
 (setf (liber:alias-for-function 'gl-context-shared-context)
       "Accessor"
       (documentation 'gl-context-shared-context 'function)
- "@version{#2023-08-04}
+ "@version{#2025-09-25}
   @syntax{(gdk:gl-context-shared-context object) => context}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[context]{a @class{gdk:gl-context} object or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gdk:gl-context]{shared-context} slot of the
-    @class{gdk:gl-context} class.
+    The accessor for the @slot[gdk:gl-context]{shared-context} slot of the
+    @class{gdk:gl-context} class returns the GL context that this context share
+    data with.
   @end{short}
-  The @fun{gdk:gl-context-shared-context} function retrieves the GL context
-  that this context share data with.
 
   Deprecated since 4.6
   @see-class{gdk:gl-context}")
@@ -439,18 +438,16 @@
 (cffi:defcfun ("gdk_gl_context_get_debug_enabled"
                gl-context-debug-enabled) :boolean
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{#2025-09-25}
   @syntax{(gdk:gl-context-debug-enabled object) => enabled}
   @syntax{(setf gdk:gl-context-debug-enabled object) enabled)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[enabled]{a boolean whether debugging is enabled}
   @begin{short}
-    The @fun{gdk:gl-context-debug-enabled} function retrieves whether debugging
-    is enabled.
+    Gets or sets whether the GL context should perform extra validations and
+    run time checking.
   @end{short}
-  The @setf{gdk:gl-context-debug-enabled} function sets whether the GL context
-  should perform extra validations and run time checking. This is useful during
-  development, but has additional overhead.
+  This is useful during development, but has additional overhead.
 
   The @class{gdk:gl-context} object must not be realized or made current prior
   to calling this function.
@@ -474,17 +471,14 @@
 (cffi:defcfun ("gdk_gl_context_get_forward_compatible"
                gl-context-forward-compatible) :boolean
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{#2025-09-25}
   @syntax{(gdk:gl-context-forward-compatible object) => setting}
   @syntax{(setf gdk:gl-context-forward-compatible object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{a boolean whether @arg{context} is forward compatible}
   @begin{short}
-    The @fun{gdk:gl-context-forward-compatible} function returns whether the
-    GL context should be forward compatible.
+    Gets or sets whether the GL context should be forward compatible.
   @end{short}
-  The @setf{gdk:gl-context-forward-compatible} function sets whether the GL
-  context should be forward compatible.
 
   Forward compatible GL contexts must not support OpenGL functionality that has
   been marked as deprecated in the requested version. Non-forward compatible
@@ -513,19 +507,19 @@
 
 (cffi:defcfun ("gdk_gl_context_get_use_es" gl-context-use-es) :boolean
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{#2025-09-25}
   @syntax{(gdk:gl-context-uses-es object) => setting}
   @syntax{(setf gdk:gl-context-use-es object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{an integer whether the context uses OpenGL instead of
     OpenGL, or -1 to allow auto-detection}
   @begin{short}
-    The @fun{gdk:gl-context-uses-es} function checks whether the context is
-    using an OpenGL or OpenGL ES profile.
+    This function checks whether the context is using an OpenGL or OpenGL ES
+    profile.
   @end{short}
-  The @fun{gdk:gl-context-uses-es} function requests that GDK create an OpenGL
-  ES context instead of an OpenGL one, if the platform and windowing system
-  allows it. The context must not have been realized.
+  It requests that GDK create an OpenGL ES context instead of an OpenGL one, if
+  the platform and windowing system allows it. The context must not have been
+  realized.
 
   By default, GDK will attempt to automatically detect whether the underlying
   GL implementation is OpenGL or OpenGL ES once the context is realized.

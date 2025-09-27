@@ -70,7 +70,7 @@
 (setf (liber:alias-for-class 'toplevel-layout)
       "GBoxed"
       (documentation 'toplevel-layout 'type)
- "@version{2024-01-09}
+ "@version{2025-09-25}
   @begin{declaration}
 (glib:define-gboxed-opaque toplevel-layout \"GdkToplevelLayout\"
   :type-initializer \"gdk_toplevel_layout_get_type\"
@@ -78,7 +78,7 @@
   @end{declaration}
   @begin{short}
     Toplevel surfaces are sovereign windows that can be presented to the user
-    in various states (maximized, on all workspaces, etc).
+    in various states (maximized, on all workspaces, and so on).
   @end{short}
   The @class{gdk:toplevel-layout} structure contains information that is
   necessary to do so, and is passed to the @fun{gdk:toplevel-present} function.
@@ -277,17 +277,15 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
     :boolean
  #+liber-documentation
- "@version{2024-01-09}
+ "@version{2025-09-25}
   @syntax{(gdk:toplevel-layout-resizable layout) => resizable}
   @syntax{(setf (gdk:toplevel-layout-resizable layout) resizable)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[resizable]{@em{true} if the layout is resizable}
   @begin{short}
-    The @fun{gdk:toplevel-layout-resizable} function returns whether the layout
-    should allow the user to resize the surface.
+    Gets or sets whether the layout should allow the user to resize the surface
+    after it has been presented.
   @end{short}
-  The @setf{gdk:toplevel-layout-resizable} function sets whether the layout
-  should allow the user to resize the surface after it has been presented.
   @see-class{gdk:toplevel-layout}"
   (layout (g:boxed toplevel-layout)))
 
