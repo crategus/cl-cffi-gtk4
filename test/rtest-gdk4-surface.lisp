@@ -3,6 +3,8 @@
 (def-suite gdk-surface :in gdk-suite)
 (in-suite gdk-surface)
 
+(defvar *display-default* (gdk:display-default))
+
 ;;; --- Type and Values --------------------------------------------------------
 
 ;;;     GdkSurface
@@ -38,20 +40,20 @@
              (glib-test:list-signals "GdkSurface")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkSurface" GDK:SURFACE
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_surface_get_type")
-                       ((CURSOR SURFACE-CURSOR "cursor" "GdkCursor" T T)
-                        (DISPLAY SURFACE-DISPLAY "display" "GdkDisplay" T NIL)
-                        (FRAME-CLOCK SURFACE-FRAME-CLOCK
-                         "frame-clock" "GdkFrameClock" T NIL)
-                        (HEIGHT SURFACE-HEIGHT "height" "gint" T NIL)
-                        (MAPPED SURFACE-MAPPED "mapped" "gboolean" T NIL)
-                        (SCALE SURFACE-SCALE "scale" "gdouble" T NIL)
-                        (SCALE-FACTOR SURFACE-SCALE-FACTOR
-                         "scale-factor" "gint" T NIL)
-                        (WIDTH SURFACE-WIDTH "width" "gint" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_surface_get_type")
+                      ((CURSOR SURFACE-CURSOR "cursor" "GdkCursor" T T)
+                       (DISPLAY SURFACE-DISPLAY "display" "GdkDisplay" T NIL)
+                       (FRAME-CLOCK SURFACE-FRAME-CLOCK
+                        "frame-clock" "GdkFrameClock" T NIL)
+                       (HEIGHT SURFACE-HEIGHT "height" "gint" T NIL)
+                       (MAPPED SURFACE-MAPPED "mapped" "gboolean" T NIL)
+                       (SCALE SURFACE-SCALE "scale" "gdouble" T NIL)
+                       (SCALE-FACTOR SURFACE-SCALE-FACTOR
+                        "scale-factor" "gint" T NIL)
+                       (WIDTH SURFACE-WIDTH "width" "gint" T NIL)))
              (gobject:get-gtype-definition "GdkSurface"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -133,10 +135,15 @@
 ;;;     width
 
 (test gdk-surface-properties
-  (glib-test:with-check-memory (surface :strong 1)
-    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-    ;; Access the slots
-    (is-false (gdk:surface-cursor surface))
+  (glib-test:with-check-memory (surface :strong 2)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel *display-default*))
+               'gdk:surface))
+    ;; Set cursor
+    (is (typep (setf (gdk:surface-cursor surface)
+                     (gdk:cursor-new-from-name "help")) 'gdk:cursor))
+    ;; Get cursor
+    (is (typep (gdk:surface-cursor surface) 'gdk:cursor))
     (is (typep (gdk:surface-display surface) 'gdk:display))
     (is (typep (gdk:surface-frame-clock surface) 'gdk:frame-clock))
     (is (= 1 (gdk:surface-height surface)))
@@ -148,6 +155,16 @@
     (is-false (gdk:surface-destroy surface))))
 
 ;;; --- Functions --------------------------------------------------------------
+
+;;;     gdk_surface_new_toplevel
+
+(test gdk-surface-new-toplevel
+  (glib-test:with-check-memory (surface :strong 1)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    ;; Remove references
+    (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_surface_new_popup
 
@@ -163,16 +180,6 @@
     (is-false (gdk:surface-destroy popup2))
     (is-false (gdk:surface-destroy surface))))
 
-;;;     gdk_surface_new_toplevel
-
-(test gdk-surface-new-toplevel
-  (glib-test:with-check-memory (surface :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel (gdk:display-default)))
-               'gdk:surface))
-    ;; Remove references
-    (is-false (gdk:surface-destroy surface))))
-
 ;;;     gdk_surface_destroy
 ;;;     gdk_surface_is_destroyed
 
@@ -185,16 +192,24 @@
 
 ;;;     gdk_surface_hide
 
+(test gdk-surface-hide
+  (glib-test:with-check-memory (surface :strong 1)
+    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+    (is-false (gdk:surface-hide surface))
+    ;; Remove references
+    (is-false (gdk:surface-destroy surface))))
+
 ;;;     gdk_surface_translate_coordinates
 
 (test gdk-surface-translate-coordinates
   (glib-test:with-check-memory ((toplevel 3) from to :strong 2)
-    (setf toplevel (gdk:surface-new-toplevel (gdk:display-default)))
-    (setf from (gdk:surface-new-popup toplevel nil))
-    (setf to (gdk:surface-new-popup toplevel nil))
-    (is (typep toplevel 'gdk:surface))
-    (is (typep from 'gdk:surface))
-    (is (typep to 'gdk:surface))
+    (is (typep (setf toplevel
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    (is (typep (setf from
+                     (gdk:surface-new-popup toplevel nil)) 'gdk:surface))
+    (is (typep (setf to
+                     (gdk:surface-new-popup toplevel nil)) 'gdk:surface))
     (is (equal '(10.0d0 10.0d0)
                (multiple-value-list
                  (gdk:surface-translate-coordinates from to 10 10))))
@@ -207,16 +222,142 @@
     (is-true (gdk:surface-is-destroyed toplevel))))
 
 ;;;     gdk_surface_beep
+
+(test gdk-surface-beep
+  (glib-test:with-check-memory (surface :strong 1)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    (is-false (gdk:surface-beep surface))
+    ;; Remove referenced
+    (is-false (gdk:surface-destroy surface))))
+
 ;;;     gdk_surface_set_opaque_region
+
+(test gdk-surface-set-opaque-region
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (surface :strong 1)
+      (let ((region (cairo:region-create-rectangle 10 20 100 200)))
+        (is (typep (setf surface
+                         (gdk:surface-new-toplevel (gdk:display-default)))
+                   'gdk:surface))
+        (is-false (gdk:surface-set-opaque-region surface region))
+        (is-false (gdk:surface-set-opaque-region surface nil))
+        ;; Remove references
+        (is-false (gdk:surface-destroy surface))))))
+
 ;;;     gdk_surface_create_gl_context
+
+(test gdk-surface-create-gl-context
+  (glib-test:with-check-memory ((surface 2) context :strong 1)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    (is (typep (setf context
+                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+    ;; Remove references
+    (is-false (gdk:surface-destroy surface))))
+
 ;;;     gdk_surface_create_vulkan_context
+
 ;;;     gdk_surface_create_cairo_context
+
+(test gdk-surface-create-cairo-context
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((surface 2) context :strong 1)
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is (typep (setf context
+                       (gdk:surface-create-cairo-context surface))
+                 'gdk:cairo-context))
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
 ;;;     gdk_surface_create_similar_surface                 Deprecated 4.12
+
+(test gdk-surface-create-similar-surface
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (surface :strong 1)
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is (cffi:pointerp
+              (gdk:surface-create-similar-surface surface :color 100 200)))
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
 ;;;     gdk_surface_queue_render
+
+;; TODO: Does not emit the "render" signal !?
+
+(test gdk-surface-queue-render
+  (let (msg)
+    (glib-test:with-check-memory (surface :strong 1)
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (g:signal-connect surface "render"
+                        (lambda (surface region)
+                          (push "render" msg)
+                          (is (typep surface 'gdk:surface))
+                          (is (cffi:pointerp region))
+                          gdk:+event-stop+))
+      (is-false (gdk:surface-queue-render surface))
+      (is-false msg)
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
 ;;;     gdk_surface_request_layout
+
+(test gdk-surface-request-layout
+  (glib-test:with-check-memory (surface :strong 1)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    (is-false (gdk:surface-request-layout surface))
+    ;; Remove referenced
+    (is-false (gdk:surface-destroy surface))))
+
 ;;;     gdk_surface_set_input_region
+
+(test gdk-surface-set-input-region
+  (glib-test:with-check-memory (surface :strong 1)
+    (let ((region (cairo:region-create-rectangle 10 20 100 200)))
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is-false (gdk:surface-set-input-region surface region))
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
 ;;;     gdk_surface_get_device_position
+
+(test gdk-surface-device-position
+  (glib-test:with-check-memory (surface :strong 2)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-pointer seat)))
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is-false (gdk:surface-device-position surface device))
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
 ;;;     gdk_surface_get_device_cursor
 ;;;     gdk_surface_set_device_cursor
 
-;;; 2024-12-20
+(test gdk-surface-device-position
+  (glib-test:with-check-memory (surface :strong 3)
+    (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+           (device (gdk:seat-pointer seat)))
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is (typep (setf (gdk:surface-device-cursor surface device)
+                       (gdk:cursor-new-from-name "help")) 'gdk:cursor))
+      (is (typep (gdk:surface-device-cursor surface device) 'gdk:cursor))
+      ;; Remove references
+      (is-false (gdk:surface-destroy surface)))))
+
+;;; 2025-09-24

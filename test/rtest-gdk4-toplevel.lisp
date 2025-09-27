@@ -211,6 +211,52 @@
                              "transient-for" "GdkSurface" T T))
              (gobject:get-gtype-definition "GdkToplevel"))))
 
+;;; ----------------------------------------------------------------------------
+
+#+windows
+(gobject:define-gobject "GdkWin32Toplevel" win32-toplevel
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkToplevel")
+   :type-initializer "gdk_display_get_type")
+  nil)
+
+#+windows
+(test gdk-win32-toplevel-class
+  ;; Check type
+  (is (g:type-is-object "GdkWin32Toplevel"))
+  ;; Check registered name
+  (is (eq 'g:object
+          (glib:symbol-for-gtype "GdkWin32Toplevel")))
+  ;; Check type initializer
+  #+nil ; not exported
+  (is (eq (g:gtype "GObject")
+          (g:gtype (cffi:foreign-funcall "gdk_win32_toplevel_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GdkWin32Surface")
+          (g:type-parent "GdkWin32Toplevel")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GdkWin32Toplevel")))
+  ;; Check interfaces
+  (is (equal '("GdkToplevel")
+             (glib-test:list-interfaces "GdkWin32Toplevel")))
+  ;; Check properties
+  (is (equal '("decorated" "deletable" "fullscreen-mode" "icon-list" "modal"
+               "shortcuts-inhibited" "startup-id" "state" "title"
+               "transient-for")
+             (glib-test:list-properties "GdkWin32Toplevel")))
+  ;; Check signals
+  (is (equal '()
+             (glib-test:list-signals "GdkWin32Toplevel")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkWin32Toplevel" WIN32-TOPLEVEL
+                      (:SUPERCLASS GDK-WIN32-SURFACE
+                       :EXPORT T
+                       :INTERFACES ("GdkToplevel"))
+                      NIL)
+             (gobject:get-gtype-definition "GdkWin32Toplevel"))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     decorated
@@ -242,4 +288,4 @@
 ;;;     gdk_toplevel_begin_move
 ;;;     gdk_toplevel_titlebar_gesture                      Since 4.4
 
-;;; 2024-9-18
+;;; 2025-09-25
