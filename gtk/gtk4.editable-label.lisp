@@ -150,17 +150,16 @@ editablelabel[.editing]
 (setf (liber:alias-for-function 'editable-label-editing)
       "Accessor"
       (documentation 'editable-label-editing 'function)
- "@version{2025-05-31}
+ "@version{2025-09-25}
   @syntax{(gtk:editable-label-editing object) => setting}
   @syntax{(setf (gtk:editable-label-editing object) setting)}
   @argument[object]{a @class{gtk:editable-label} widget}
   @argument[setting]{a boolean whether the label is currently in editing mode}
   @begin{short}
-    Accessor of the @slot[gtk:editable-label]{editing} slot of the
-    @class{gtk:editable-label} class.
+    The accessor for the @slot[gtk:editable-label]{editing} slot of the
+    @class{gtk:editable-label} class returns whether the label is currently in
+    editing mode.
   @end{short}
-  The @fun{gtk:editable-label-editing} function returns whether the label is
-  currently in editing mode.
   @see-class{gtk:editable-label}")
 
 ;;; ----------------------------------------------------------------------------

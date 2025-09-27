@@ -176,14 +176,13 @@
 (setf (liber:alias-for-function 'cell-view-cell-area)
       "Accessor"
       (documentation 'cell-view-cell-area 'function)
- "@version{2024-07-08}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-view-cell-area object) => area}
-  @syntax{(setf (gtk:cell-view-cell-area object) area)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-view]{cell-area} slot of the
-    @class{gtk:cell-view} class.
+    The accessor for the @slot[gtk:cell-view]{cell-area} slot of the
+    @class{gtk:cell-view} class returns the cell area rendering cells.
   @end{short}
   If no cell area is specified when creating the cell view with the
   @fun{gtk:cell-view-new-with-context} function a horizontally oriented
@@ -216,14 +215,14 @@
 (setf (liber:alias-for-function 'cell-view-cell-area-context)
       "Accessor"
       (documentation 'cell-view-cell-area-context 'function)
- "@version{2024-05-20}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-view-cell-area-context object) => context}
-  @syntax{(setf (gtk:cell-view-cell-area-context object) context)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[cellarea]{a @class{gtk:cell-area-context} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-view]{cell-area-context} slot of the
-    @class{gtk:cell-view} class.
+    The accessor for the @slot[gtk:cell-view]{cell-area-context} slot of the
+    @class{gtk:cell-view} class returns the cell area used to compute the
+    geometry of the cell view.
   @end{short}
   A group of cell views can be assigned the same context in order to ensure the
   sizes and cell alignments match across all the views with the same context.
@@ -254,19 +253,16 @@
 (setf (liber:alias-for-function 'cell-view-draw-sensitive)
       "Accessor"
       (documentation 'cell-view-draw-sensitive 'function)
- "@version{2024-05-20}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-view-draw-sensitive object) => setting}
   @syntax{(setf (gtk:cell-view-draw-sensitive object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[setting]{a boolean whether to draw all cells in a sensitive state}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{draw-sensitive} slot of the
-    @class{gtk:cell-view} class.
+    The accessor for the @slot[gtk:tree-view]{draw-sensitive} slot of the
+    @class{gtk:cell-view} class gets or sets whether the cell view is configured
+    to draw all of its cells in a sensitive state.
   @end{short}
-  The @fun{gtk:cell-view-draw-sensitive} function gets whether the cell view is
-  configured to draw all of its cells in a sensitive state. The
-  @setf{gtk:cell-view-draw-sensitive} function sets the property.
-
   This is used by @class{gtk:combo-box} menus to ensure that rows with
   insensitive cells that contain children appear sensitive in the parent menu
   item.
@@ -291,20 +287,17 @@
 (setf (liber:alias-for-function 'cell-view-fit-model)
       "Accessor"
       (documentation 'cell-view-fit-model 'function)
- "@version{2024-05-20}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-view-fit-model object) => setting}
   @syntax{(setf (gtk:cell-view-fit-model object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[setting]{whether the cell view should request space for the whole
     model}
   @begin{short}
-    Accessor of the @slot[gtk:cell-view]{fit-model}  slot of the
-    @class{gtk:cell-view} class.
+    The accessor for the @slot[gtk:cell-view]{fit-model}  slot of the
+    @class{gtk:cell-view} class gets or sets whether the cell view is configured
+    to request space to fit the entire @class{gtk:tree-model} object.
   @end{short}
-  The @fun{gtk:cell-view-fit-model} function gets whether the cell view is
-  configured to request space to fit the entire @class{gtk:tree-model}
-  object. The @setf{gtk:cell-view-fit-model} function sets the property.
-
   This is used by @class{gtk:combo-box} widgets to ensure that the cell view
   displayed on the combo box's button always gets enough space and does not
   resize when selection changes.
@@ -326,20 +319,18 @@
 (setf (liber:alias-for-function 'cell-view-model)
       "Accessor"
       (documentation 'cell-view-model 'function)
- "@version{2024-05-20}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-view-model object) => model}
   @syntax{(setf (gtk:cell-view-model object) model)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-view]{model} slot of the
-    @class{gtk:cell-view} class.
+    The accessor for the @slot[gtk:cell-view]{model} slot of the
+    @class{gtk:cell-view} class gets or sets the model for the cell view.
   @end{short}
-  The @fun{gtk:cell-view-model} function returns the model for the cell view.
-  If no model is used @code{nil} is returned. The @setf{gtk:cell-view-model}
-  function sets the model. If the cell view already has a model set, it will
-  remove it before setting the new model. If @arg{model} is @code{nil}, then it
-  will unset the old model.
+  If no model is used @code{nil} is returned. If the cell view already has a
+  model set, it will remove it before setting the new model. If @arg{model} is
+  @code{nil}, then it will unset the old model.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-view} implementation is deprecated since 4.10.
     Please do not use it in newly written code.

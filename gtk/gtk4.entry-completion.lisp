@@ -289,17 +289,16 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-cell-area)
       "Accessor"
       (documentation 'entry-completion-cell-area 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-cell-area object) => area}
-  @syntax{(setf (gtk:entry-completion-cell-area object) area)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{cell-area} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{cell-area} slot of the
+    @class{gtk:entry-completion} class returns the cell area used to layout cell
+    renderers in the tree view column.
   @end{short}
-  The cell area used to layout cell renderers in the tree view column. If no
-  area is specified when creating the entry completion with the
+  If no area is specified when creating the entry completion with the
   @fun{gtk:entry-completion-new-with-area} function a horizontally oriented
   @class{gtk:cell-area-box} object will be used.
   @begin[Warning]{dictionary}
@@ -328,19 +327,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-completion)
       "Accessor"
       (documentation 'entry-completion-inline-completion 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-inline-completion object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-completion object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do inline completion}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{inline-completion} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{inline-completion} slot of
+    the @class{gtk:entry-completion} class gets or sets whether the common
+    prefix of the possible completions should be automatically inserted in the
+    text entry.
   @end{short}
-  The @fun{gtk:entry-completion-inline-completion} function returns whether the
-  common prefix of the possible completions should be automatically inserted in
-  the text entry. The @setf{gtk:entry-completion-inline-completion} function
-  sets the property.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -362,19 +359,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-selection)
       "Accessor"
       (documentation 'entry-completion-inline-selection 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-inline-selection object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-selection object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do inline selection}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{inline-selection} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{inline-selection} slot of
+    the @class{gtk:entry-completion} class gets or sets whether the possible
+    completions on the popup will appear in the text entry as you navigate
+    through them.
   @end{short}
-  The @fun{gtk:entry-completion-inline-selection} function returns @em{true} if
-  inline selection mode is turned on. The
-  @setf{gtk:entry-completion-inline-selection} function sets whether it is
-  possible to cycle through the possible completions inside the text entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -396,20 +391,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{2025-03-19}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[length]{an integer for the minimum length of the key in order to
     start completing}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{minimum-key-length} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{minimum-key-length} slot of
+    the @class{gtk:entry-completion} class gets or sets the minimum key length
+    as set for the entry completion.
   @end{short}
-  The @fun{gtk:entry-completion-minimum-key-length} function returns the
-  minimum key length as set for the entry completion. The
-  @setf{gtk:entry-completion-minimum-key-length} function sets the length of
-  the search key for the entry completion to be at least @arg{length}.
 
   This is useful for long lists, where completing using a small key takes a
   lot of time and will come up with meaningless results anyway, that is, a too
@@ -431,21 +423,19 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-model)
       "Accessor"
       (documentation 'entry-completion-model 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-model object) => model}
   @syntax{(setf (gtk:entry-completion-model object) model)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{model} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{model} slot of the
+    @class{gtk:entry-completion} class gets or sets the model for a entry
+    completion.
   @end{short}
-  The @fun{gtk:entry-completion-model} function returns the
-  @class{gtk:tree-model} object, or @code{nil} if none is currently being used.
-  The @setf{gtk:entry-completion-model} function sets the model for a entry
-  completion. If the entry completion already has a model set, it will remove it
-  before setting the new model. If @arg{model} is @code{nil}, then it will unset
-  the model.
+  Returns @code{nil} if none is currently being used. If the entry completion
+  already has a model set, it will remove it before setting the new model. If
+  @arg{model} is @code{nil}, then it will unset the model.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -468,19 +458,16 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-completion)
       "Accessor"
       (documentation 'entry-completion-popup-completion 'function)
- "@version{2024-05-03}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-popup object) => setting}
   @syntax{(setf (gtk:entry-completion-popup object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do popup completion}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{popup-completion} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{popup-completion} slot of
+    the @class{gtk:entry-completion} class gets or sets whether the completions
+    should be presented in a popup window.
   @end{short}
-  The @fun{gtk:entry-completion-popup-completion} function returns whether the
-  completions should be presented in a popup window. The
-  @setf{gtk:entry-completion-popup-completion} function sets whether the
-  completions should be presented in a popup window.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -502,21 +489,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-set-width)
       "Accessor"
       (documentation 'entry-completion-popup-set-width 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-popup-set-width object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-set-width object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to make the width of the popup the same as the
     text entry}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{popup-set-width} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{popup-set-width} slot of
+    the @class{gtk:entry-completion} class gets or sets whether the completion
+    popup window will be resized to the width of the text entry.
   @end{short}
-  The @fun{gtk:entry-completion-popup-set-width} function returns whether the
-  completion popup window will be resized to the width of the text entry. The
-  @setf{gtk:entry-completion-popup-set-width} function sets whether the
-  completion popup window will be resized to be the same width as the text
-  entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -539,21 +522,18 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-single-match)
       "Accessor"
       (documentation 'entry-completion-popup-single-match 'function)
- "@version{2024-05-02}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-popup-single-match object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-single-match object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} if the popup should appear even for a single
     match}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{popup-single-match} slot
-    of the @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{popup-single-match} slot
+    of the @class{gtk:entry-completion} class gets or sets whether the
+    completions popup window will shown for a single possible completion.
   @end{short}
-  The @fun{gtk:entry-completion-popup-single-match} function returns @em{true}
-  if the popup window will appear regardless of the number of matches. The
-  @setf{gtk:entry-completion-popup-single-match} function sets whether the
-  completion popup window will appear even if there is only a single match. You
-  may want to set this to @em{false} if you are using inline completion.
+  You may want to set this to @em{false} if you are using inline completion.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -575,21 +555,17 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-text-column)
       "Accessor"
       (documentation 'entry-completion-text-column 'function)
- "@version{2025-03-19}
+ "@version{2025-09-24}
   @syntax{(gtk:entry-completion-text-column) => column}
   @syntax{(setf (gtk:entry-completion-text-column object) column)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[column]{an integer for the column in the model of the completion
     to get strings from}
   @begin{short}
-    Accessor of the @slot[gtk:entry-completion]{text-column} slot of the
-    @class{gtk:entry-completion} class.
+    The accessor for the @slot[gtk:entry-completion]{text-column} slot of the
+    @class{gtk:entry-completion} class gets or sets the column in the model of
+    the completion to get strings from.
   @end{short}
-  The @fun{gtk:entry-completion-text-column} function returns the column in the
-  model of the completion to get strings from. The
-  @setf{gtk:entry-completion-text-column} function is a convenience function
-  for setting up the most used case: a completion list with just strings.
-
   This function will set up completion to have a list displaying all, and just,
   strings in the completion list, and to get those strings from column in the
   model of completion.

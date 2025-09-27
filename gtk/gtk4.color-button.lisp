@@ -206,17 +206,16 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-modal)
       "Accessor"
       (documentation 'color-button-modal 'function)
- "@version{2024-05-21}
+ "@version{2025-09-24}
   @syntax{(gtk:color-button-modal object) => modal}
   @syntax{(setf (gtk:color-button-modal object) modal)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[modal]{a boolean whether the color chooser dialog is modal}
   @begin{short}
-    Accessor of the @slot[gtk:color-button]{modal} slot of the
-    @class{gtk:color-button} class.
+    The accessor for the @slot[gtk:color-button]{modal} slot of the
+    @class{gtk:color-button} class gets or sets whether the color chooser dialog
+    is modal.
   @end{short}
-  The @fun{gtk:color-button-modal} function sets whether the color chooser
-  dialog is modal. The @setf{gtk:color-button-modal} function sets the property.
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.
@@ -238,20 +237,19 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-show-editor)
       "Accessor"
       (documentation 'color-button-show-editor 'function)
- "@version{2024-05-21}
+ "@version{2025-09-24}
   @syntax{(gtk:color-button-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-button-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[show-editor]{a boolean whether to skip the palette in the color
     chooser dialog}
   @begin{short}
-    Accessor of the @slot[gtk:color-button]{show-editor} slot of the
-    @class{gtk:color-button} class.
+    The accessor for the @slot[gtk:color-button]{show-editor} slot of the
+    @class{gtk:color-button} class gets or sets whether to skip the palette in
+    the color chooser dialog and go directly to the color editor.
   @end{short}
-  Set this property to @em{true} to skip the palette in the color chooser
-  dialog and go directly to the color editor. This property should be used in
-  cases where the palette in the editor would be redundant, such as when the
-  color button is already part of a palette.
+  This property should be used in cases where the palette in the editor would be
+  redundant, such as when the color button is already part of a palette.
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.
@@ -270,17 +268,16 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-title)
       "Accessor"
       (documentation 'color-button-title 'function)
- "@version{2024-05-21}
+ "@version{2025-09-24}
   @syntax{(gtk:color-button-title object) => title}
   @syntax{(setf (gtk:color-button-title object) title)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[title]{a string containing the title of the color chooser dialog}
   @begin{short}
-    Accessor of the @slot[gtk:color-button]{title} slot of the
-    @class{gtk:color-button} class.
+    The accessor for the @slot[gtk:color-button]{title} slot of the
+    @class{gtk:color-button} class gets or sets the title of the color chooser
+    dialog.
   @end{short}
-  The @fun{gtk:color-button-title} function gets the title of the color
-  chooser dialog. The @setf{gtk:color-button-title} function sets the title.
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.

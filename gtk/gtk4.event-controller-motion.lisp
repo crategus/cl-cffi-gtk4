@@ -152,17 +152,15 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'event-controller-motion-contains-pointer)
       "Accessor"
       (documentation 'event-controller-motion-contains-pointer 'function)
- "@version{2024-07-26}
+ "@version{2025-09-25}
   @syntax{(gtk:event-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[contains]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
-    Accessor of the @slot[gtk:event-controller-motion]{contains-pointer} slot
-    of the @class{gtk:event-controller-motion} class.
+    The accessor for the @slot[gtk:event-controller-motion]{contains-pointer}
+    slot of the @class{gtk:event-controller-motion} class returns @em{true} if
+    the pointer is within the controllers widget or one of its children.
   @end{short}
-  The @fun{gtk:event-controller-motion-contains-pointer} function returns
-  @em{true} if the pointer is within the controllers widget or one of its
-  children.
   @see-class{gtk:event-controller-motion}")
 
 ;;; --- gtk:event-controller-motion-is-pointer ---------------------------------
@@ -181,16 +179,15 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'event-controller-motion-is-pointer)
       "Accessor"
       (documentation 'event-controller-motion-is-pointer 'function)
- "@version{2024-07-26}
+ "@version{2025-09-25}
   @syntax{(gtk:event-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[is-pointer]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
-    Accessor of the @slot[gtk:event-controller-motion]{is-pointer} slot of the
-    @class{gtk:event-controller-motion} class.
+    The accessor for the @slot[gtk:event-controller-motion]{is-pointer} slot of
+    the @class{gtk:event-controller-motion} class returns @em{true} if the
+    pointer is within the controllers widget but not one of its children.
   @end{short}
-  The @fun{gtk:event-controller-motion-is-pointer} function returns @em{true}
-  if the pointer is within the controllers widget but not one of its children.
   @see-class{gtk:event-controller-motion}")
 
 ;;; ----------------------------------------------------------------------------

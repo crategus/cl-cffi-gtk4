@@ -258,17 +258,16 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-actions)
       "Accessor"
       (documentation 'drop-target-actions 'function)
- "@version{#2025-07-25}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-actions object) => actions}
   @syntax{(setf (gtk:drop-target-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{actions} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{actions} slot of the
+    @class{gtk:drop-target} class gets or sets the actions that this drop target
+    supports.
   @end{short}
-  The @fun{gtk:drop-target-actions} function gets the actions that this drop
-  target supports. The @setf{gtk:drop-target-actions} function sets the actions.
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drag-action}")
 
@@ -283,16 +282,15 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-current-drop)
       "Accessor"
       (documentation 'drop-target-current-drop 'function)
- "@version{#2025-07-27}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-current-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{current-drop} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{current-drop} slot of the
+    @class{gtk:drop-target} class returns the currently handled drop operation.
   @end{short}
-  The @fun{gtk:drop-target-current-drop} function gets the currently handled
-  drop operation. If no drop operation is going on, @code{nil} is returned.
+  If no drop operation is going on, @code{nil} is returned.
 
   Since 4.4
   @see-class{gtk:drop-target}
@@ -309,16 +307,14 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-drop)
       "Accessor"
       (documentation 'drop-target-drop 'function)
- "@version{#2025-07-27}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{drop} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{drop} slot of the
+    @class{gtk:drop-target} class returns the currently handled drop operation.
   @end{short}
-  The @fun{gtk:drop-target-drop} function gets the currently handled drop
-  operation.
 
   Deprecated 4.4
   @see-class{gtk:drop-target}
@@ -335,18 +331,17 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-formats)
       "Accessor"
       (documentation 'drop-target-formats 'function)
- "@version{#2025-07-26}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-formats object) => formats}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{formats} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{formats} slot of the
+    @class{gtk:drop-target} class returns the data formats that this drop target
+    accepts.
   @end{short}
-  The @fun{gtk:drop-target-formats} function gets the data formats that this
-  drop target accepts. If the result is @code{nil}, all formats are expected to
-  be supported.
+  If the result is @code{nil}, all formats are expected to be supported.
   @see-class{gtk:drop-target}
   @see-class{gdk:content-formats}")
 
@@ -372,18 +367,17 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-preload)
       "Accessor"
       (documentation 'drop-target-preload 'function)
- "@version{#2023-09-18}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-preload object) => preload}
   @syntax{(setf (gtk:drop-target-preload object) preload)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[preload]{a boolean whether the drop data should be preloaded}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{preload} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{preload} slot of the
+    @class{gtk:drop-target} class gets or sets whether the drop data should be
+    preloaded when the pointer is only hovering over the widget but has not been
+    released.
   @end{short}
-  The @fun{gtk:drop-target-preload} function gets the value of the
-  @slot[gtk:drop-target]{preload} property. The
-  @setf{gtk:drop-target-preload} function sets the property.
   @see-class{gtk:drop-target}")
 
 ;;; --- gtk:drop-target-value --------------------------------------------------
@@ -401,16 +395,16 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-value)
       "Accessor"
       (documentation 'drop-target-value 'function)
- "@version{#2025-07-25}
+ "@version{#2025-09-22}
   @syntax{(gtk:drop-target-value object) => value}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[value]{a @sym{g:value} instance for the current drop data}
   @begin{short}
-    Accessor of the @slot[gtk:drop-target]{value} slot of the
-    @class{gtk:drop-target} class.
+    The accessor for the @slot[gtk:drop-target]{value} slot of the
+    @class{gtk:drop-target} class returns the value for this drop operation or
+    @code{nil} if the data has not been loaded yet or no drop operation is going
+    on.
   @end{short}
-  The @fun{gtk:drop-target-value} function gets the value of the
-  @slot[gtk:drop-target]{value} property.
   @see-class{gtk:drop-target}
   @see-symbol{g:value}")
 

@@ -298,17 +298,17 @@ Data exchange, Clipboards and Drag-and-Drop
 
 GTK Core Reference
 
-  gtk4.main-loop.lisp                  Initialization                 GTK 4.16 .
-  gtk4.version.lisp                    Version Information            GTK 4.16
-  gtk4.settings.lisp                   GtkSettings                    Gtk 4.16 .
+  gtk4.main-loop.lisp                  Initialization                 GTK 4.18
+  gtk4.version.lisp                    Version Information            GTK 4.18
+  gtk4.settings.lisp                   GtkSettings                    Gtk 4.18
   gtk4.enumerations.lisp               Standard Enumerations          GTK 4.18 +
 
 Theming in GTK
 
-  gtk4.style-provider.lisp             GtkStyleProvider               GTK 4.16 .
-  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.18 .
-  gtk4.icon-paintable.lisp             GtkIconPaintable               GTK 4.16 +
-  gtk4.icon-theme.lisp                 GtkIconTheme                   GTK 4.18 .
+  gtk4.style-provider.lisp             GtkStyleProvider               GTK 4.18
+  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.18
+  gtk4.icon-paintable.lisp             GtkIconPaintable               GTK 4.18 +
+  gtk4.icon-theme.lisp                 GtkIconTheme                   GTK 4.18
 
 Deprecated
 

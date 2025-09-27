@@ -236,19 +236,16 @@
 (setf (liber:alias-for-function 'shortcut-controller-mnemonic-modifiers)
       "Accessor"
       (documentation 'shortcut-controller-mnemonic-modifiers 'function)
- "@version{2025-07-26}
+ "@version{2025-09-24}
   @syntax{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers}
   @syntax{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[modifiers]{a @sym{gdk:modifier-type} value}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-controller]{mnemonic-modifiers} slot of
-    the @class{gtk:shortcut-controller} class.
+    The accessor for the @slot[gtk:shortcut-controller]{mnemonic-modifiers} slot
+    of the @class{gtk:shortcut-controller} class gets or sets the modifiers that
+    need to be pressed to allow mnemonics activation.
   @end{short}
-  The @fun{gtk:shortcut-controller-mnemonic-modifiers} function gets the
-  mnemonics modifiers for when this controller activates its shortcuts. The
-  @setf{gtk:shortcut-controller-mnemonic-modifiers} function sets the controller
-  to have the given @arg{modifiers}.
 
   The mnemonics modifiers determines which modifiers need to be pressed to
   allow activation of shortcuts with mnemonics triggers. GTK normally uses the
@@ -276,16 +273,15 @@
 (setf (liber:alias-for-function 'shortcut-controller-model)
       "Accessor"
       (documentation 'shortcut-controller-model 'function)
- "@version{2023-07-23}
+ "@version{2025-09-24}
   @syntax{(gtk:shortcut-controller-model object) => model}
-  @syntax{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[model]{a @class{g:list-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-controller]{model} slot of the
-    @class{gtk:shortcut-controller} class.
+    The accessor for the @slot[gtk:shortcut-controller]{model} slot of the
+    @class{gtk:shortcut-controller} class returns the list model to take
+    shortcuts from.
   @end{short}
-  A list model to take shortcuts from.
   @see-class{gtk:shortcut-controller}
   @see-class{g:list-model}")
 
@@ -330,18 +326,16 @@
 (setf (liber:alias-for-function 'shortcut-controller-scope)
       "Accessor"
       (documentation 'shortcut-controller-scope 'function)
- "@version{2025-07-26}
+ "@version{2025-09-24}
   @syntax{(gtk:shortcut-controller-scope object) => scope}
   @syntax{(setf (gtk:shortcut-controller-scope object) scope)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[scope]{a @sym{gtk:shortcut-scope} value}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut-controller]{scope} slot of the
-    @class{gtk:shortcut-controller} class.
+    The accessor for the @slot[gtk:shortcut-controller]{scope} slot of the
+    @class{gtk:shortcut-controller} class gets or sets the scope for when the
+    controller activates its shortcuts.
   @end{short}
-  The @fun{gtk:shortcut-controller-scope} function gets the scope for when the
-  controller activates its shortcuts. The @setf{gtk:shortcut-controller-scope}
-  function sets the controller to have the given @arg{scrope}.
 
   The scope allows shortcuts to be activated outside of the normal event
   propagation. In particular, it allows installing global keyboard shortcuts

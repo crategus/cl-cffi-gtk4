@@ -148,17 +148,16 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-gicon)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-gicon 'function)
- "@version{2024-05-16}
+ "@version{2024-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-gicon object) => icon}
   @syntax{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[icon]{a @class{g:icon} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{gicon} slot of the
-    @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{gicon} slot of the
+    @class{gtk:cell-renderer-pixbuf} class gets or sets the icon to display.
   @end{short}
-  The @class{g:icon} object representing the icon to display. If the icon theme
-  is changed, the image will be updated automatically.
+  If the icon theme is changed, the image will be updated automatically.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -180,17 +179,18 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-name)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-name 'function)
- "@version{2025-07-22}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-icon-name object) => name}
   @syntax{(setf (gtk:cell-renderer-pixbuf-icon-name object) name)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[name]{a string for the name of the themed icon to display}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-name} slot of the
-    @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{icon-name} slot of the
+    @class{gtk:cell-renderer-pixbuf} class gets or sets the name of the themed
+    icon to display.
   @end{short}
-  The name of the themed icon to display. This property only has an effect if
-  not overridden by the @slot[gtk:cell-renderer-pixbuf]{pixbuf} property.
+  This property only has an effect if not overridden by the
+  @slot[gtk:cell-renderer-pixbuf]{pixbuf} property.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -210,16 +210,16 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-size)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-size 'function)
- "@version{2025-07-22}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-icon-size object) => size}
   @syntax{(setf (gtk:cell-renderer-pixbuf-icon-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[size]{a @sym{gtk:icon-size} value}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-size} slot of the
-    @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{icon-size} slot of the
+    @class{gtk:cell-renderer-pixbuf} class gets or sets the size of the rendered
+    icon.
   @end{short}
-  The @sym{gtk:icon-size} value that specifies the size of the rendered icon.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
     4.10. Please do not use it in newly written code.
@@ -239,13 +239,13 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf 'function)
- "@version{2024-05-16}
+ "@version{2025-09-26}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf} slot of the
-    @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{pixbuf} slot of the
+    @class{gtk:cell-renderer-pixbuf} class sets the pixbuf to render.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
@@ -267,14 +267,15 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-closed)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-closed 'function)
- "@version{2024-05-16}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-closed}
-    slot of the @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-closed}
+    slot of the @class{gtk:cell-renderer-pixbuf} class gets or sets the pixbuf
+    for the closed expander.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
@@ -296,14 +297,15 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-open)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-open 'function)
- "@version{2024-05-16}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-open} slot
-    of the @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-open}
+    slot of the @class{gtk:cell-renderer-pixbuf} class gets or sets the pixbuf
+    for the open expander.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
@@ -324,14 +326,14 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-surface)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-texture 'function)
- "@version{2024-05-16}
+ "@version{2025-09-26}
   @syntax{(gtk:cell-renderer-pixbuf-texture object) => texture}
   @syntax{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[texture]{a @class{gdk:texture} instance to render}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer-pixbuf]{texture} slot of the
-    @class{gtk:cell-renderer-pixbuf} class.
+    The accessor for the @slot[gtk:cell-renderer-pixbuf]{texture} slot of the
+    @class{gtk:cell-renderer-pixbuf} class gets or sets the texture to render.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since

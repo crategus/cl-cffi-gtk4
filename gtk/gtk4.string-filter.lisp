@@ -156,19 +156,17 @@
 (setf (liber:alias-for-function 'string-filter-expression)
       "Accessor"
       (documentation 'string-filter-expression 'function)
- "@version{2024-09-28}
+ "@version{2025-09-25}
   @syntax{(gtk:string-filter-expression object) => expression}
   @syntax{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
-    Accessor of the @slot[gtk:string-filter]{expression} slot of the
-    @class{gtk:string-filter} class.
+    The accessor for the @slot[gtk:string-filter]{expression} slot of the
+    @class{gtk:string-filter} class gets or sets the expression that the string
+    filter uses to obtain strings from items.
   @end{short}
-  The @fun{gtk:string-filter-expression} function gets the expression that the
-  string filter uses to obtain strings from items. The
-  @setf{gtk:string-filter-expression} function sets the expression. The
-  expression must have a @code{\"gchararray\"} value type.
+  The expression must have a @code{\"gchararray\"} value type.
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}")
 
@@ -184,18 +182,16 @@
 (setf (liber:alias-for-function 'string-filter-ignore-case)
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
- "@version{2024-09-28}
+ "@version{2025-09-25}
   @syntax{(gtk:string-filter-ignore-case object) => ignore}
   @syntax{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[ignore]{@em{true} to ignore case}
   @begin{short}
-    Accessor of the @slot[gtk:string-filter]{ignore-case} slot of the
-    @class{gtk:string-filter} class.
+    The accessor for the @slot[gtk:string-filter]{ignore-case} slot of the
+    @class{gtk:string-filter} class gets or sets whether the filter ignores case
+    differences.
   @end{short}
-  The @fun{gtk:string-filter-ignore-case} function returns whether the filter
-  ignores case differences. The @setf{gtk:string-filter-ignore-case} function
-  sets whether the filter ignores case differences.
   @see-class{gtk:string-filter}")
 
 ;;; --- gtk:string-filter-match-mode -------------------------------------------
@@ -211,18 +207,16 @@
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{2025-07-26}
+ "@version{2025-09-25}
   @syntax{(gtk:string-filter-match-mode object) => mode}
   @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[mode]{a @sym{gtk:string-filter-match-mode} value}
   @begin{short}
-    Accessor of the @slot[gtk:string-filter]{match-mode} slot of the
-    @class{gtk:string-filter} class.
+    The accessor for the @slot[gtk:string-filter]{match-mode} slot of the
+    @class{gtk:string-filter} class gets or sets the match mode that the filter
+    is using.
   @end{short}
-  The @fun{gtk:string-filter-match-mode} function returns the match mode that
-  the filter is using. The @setf{gtk:string-filter-match-mode} function sets the
-  match mode for the filter.
   @see-class{gtk:string-filter}
   @see-symbol{gtk:string-filter-match-mode}")
 
@@ -238,17 +232,16 @@
 (setf (liber:alias-for-function 'string-filter-search)
       "Accessor"
       (documentation 'string-filter-search 'function)
- "@version{2024-09-28}
+ "@version{2025-09-25}
   @syntax{(gtk:string-filter-search object) => search}
   @syntax{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[search]{a string to search for or @code{nil} to clear the search}
   @begin{short}
-    Accessor of the @slot[gtk:string-filter]{search} slot of the
-    @class{gtk:string-filter} class.
+    The accessor for the @slot[gtk:string-filter]{search} slot of the
+    @class{gtk:string-filter} class gets or sets the search string to search
+    for.
   @end{short}
-  The @fun{gtk:string-filter-search} function gets the search string. The
-  @setf{gtk:string-filter-search} function sets the string to search for.
   @see-class{gtk:string-filter}")
 
 ;;; ----------------------------------------------------------------------------

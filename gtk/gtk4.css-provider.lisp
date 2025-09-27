@@ -125,7 +125,7 @@
     @end{simple-table}
   @end{values}
   @begin{short}
-    The @class{gtk:css-location} structure is used to present a location in a
+    The @sym{gtk:css-location} structure is used to present a location in a
     file or other source of data parsed by the CSS engine.
   @end{short}
   The @code{bytes} and @code{line-bytes} offsets are meant to be used to

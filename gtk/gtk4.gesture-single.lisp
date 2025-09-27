@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-single 'type)
- "@version{2024-02-19}
+ "@version{2025-09-25}
   @begin{short}
     The @class{gtk:gesture-single} class is a @class{gtk:gesture} implementation
     optimized for single-touch and mouse gestures.
@@ -122,28 +122,27 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "button" 'gesture-single) t)
  "The @code{button} property of type @code{:uint} (Read / Write) @br{}
-  Mouse button number to listen to, or 0 to listen for any button. @br{}
+  The mouse button number to listen to, or 0 to listen for any button. @br{}
   Default value: 1")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'gesture-single-button)
       "Accessor"
       (documentation 'gesture-single-button 'function)
- "@version{2025-07-27}
+ "@version{2025-09-25}
   @syntax{(gtk:gesture-single-button object) => button}
   @syntax{(setf (gtk:gesture-single-button object) button)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[button]{an unsigned integer for the button number to listen to,
     or 0 for any button}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-single]{button} slot of the
-    @class{gtk:gesture-single} class.
+    The accessor for the @slot[gtk:gesture-single]{button} slot of the
+    @class{gtk:gesture-single} class gets or sets the button number the gesture
+    listens to.
   @end{short}
-  The @fun{gtk:gesture-single-button} function returns the button number gesture
-  listens for, or 0 to listen for any button. The
-  @setf{gtk:gesture-single-button} function sets the button number. If non-0,
-  every button press from a different button number will be ignored. Touch
-  events implicitly match with button 1.
+  If 0 the gesture listen for any button. If non-0, every button press from a
+  different button number will be ignored. Touch events implicitly match with
+  button 1.
   @see-class{gtk:gesture-single}")
 
 ;;; --- gtk:gesture-single-exclusive -------------------------------------------
@@ -159,20 +158,19 @@
 (setf (liber:alias-for-function 'gesture-single-exclusive)
       "Accessor"
       (documentation 'gesture-single-exclusive 'function)
- "@version{2024-02-19}
+ "@version{2025-09-25}
   @syntax{(gtk:gesture-single-exclusive object) => exclusive}
   @syntax{(setf (gtk:gesture-single-exclusive object) exclusive)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[exclusive]{@em{true} to make the gesture exclusive}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-single]{exclusive} slot of the
-    @class{gtk:gesture-single} class.
+    The accessor for the @slot[gtk:gesture-single]{exclusive} slot of the
+    @class{gtk:gesture-single} class gets or sets whether the gesture is
+    exclusive.
   @end{short}
-  The @fun{gtk:gesture-single-exclusive} function gets whether the gesture is
-  exclusive. The @setf{gtk:gesture-single-exclusive} function sets whether the
-  gesture is exclusive. An exclusive gesture will only handle pointer and
-  \"pointer emulated\" touch events, so at any given time, there is only one
-  sequence able to interact with those.
+  An exclusive gesture will only handle pointer and \"pointer emulated\" touch
+  events, so at any given time, there is only one sequence able to interact
+  with those.
   @see-class{gtk:gesture-single}")
 
 ;;; --- gtk:gesture-single-touch-only ------------------------------------------
@@ -187,22 +185,20 @@
 (setf (liber:alias-for-function 'gesture-single-touch-only)
       "Accessor"
       (documentation 'gesture-single-touch-only 'function)
- "@version{2024-02-19}
+ "@version{2025-09-25}
   @syntax{(gtk:gesture-single-touch-only object) => touch-only}
   @syntax{(setf (gtk:gesture-single-touch-only object) touch-only)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[touch-only]{a boolean whether gesture handles only touch events}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-single]{touch-only} slot of the
-    @class{gtk:gesture-single} class.
+    The accessor for the @slot[gtk:gesture-single]{touch-only} slot of the
+    @class{gtk:gesture-single} class gets or sets whether the gesture handles
+    only touch events.
   @end{short}
-  The @fun{gtk:gesture-single-touch-only} function returns @em{true} if the
-  gesture is only triggered by touch events. The
-  @setf{gtk:gesture-single-touch-only} function sets whether the gesture is
-  only triggered by touch events. If the @arg{touch-only} argument is @em{true},
-  the gesture will only handle events of type @code{:touch-begin},
-  @code{:touch-update} or @code{:touch-end}. If @em{false}, mouse events will
-  be handled too.
+  If the @arg{touch-only} argument is @em{true}, the gesture will only handle
+  events of type @val[gdk:event-type]{:touch-begin},
+  @val[gdk:event-type]{:touch-update} or @val[gdk:event-type]{:touch-end}.
+  If @em{false}, mouse events will be handled too.
   @see-class{gtk:gesture-single}")
 
 ;;; ----------------------------------------------------------------------------

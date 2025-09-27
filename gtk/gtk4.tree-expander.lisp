@@ -192,18 +192,16 @@
 (setf (liber:alias-for-function 'tree-expander-child)
       "Accessor"
       (documentation 'tree-expander-child 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-child object) => child}
   @syntax{(setf (gtk:tree-expander-child object) child)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[child]{a @class{gtk:widget} object}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{child} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{child} slot of the
+    @class{gtk:tree-expander} class gets or sets the child widget with the
+    actual contents.
   @end{short}
-  The @fun{gtk:tree-expander-child} function gets the child widget displayed by
-  @arg{object}. The @setf{gtk:tree-expander-child} function sets the content
-  widget to display.
   @see-class{gtk:tree-expander}
   @see-class{gtk:widget}")
 
@@ -225,19 +223,16 @@
 (setf (liber:alias-for-function 'tree-expander-hide-expander)
       "Accessor"
       (documentation 'tree-expander-hide-expander 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-hide-expander object) => setting}
   @syntax{(setf (gtk:tree-expander-hide-expander object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{a boolean whether the expander icon should be hidden}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{hide-expander} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{hide-expander} slot of the
+    @class{gtk:tree-expander} class gets or sets whether the tree expander
+    should be hidden in a @class{gtk:tree-list-row} object.
   @end{short}
-  The @fun{gtk:tree-expander-hide-expander} function gets whether the
-  tree expander should be hidden in a @class{gtk:tree-list-row} object. The
-  @setf{gtk:tree-expander-hide-expander} function sets whether the expander icon
-  should be visible in a @class{gtk:tree-list-row} object.
 
   Since 4.10
   @see-class{gtk:tree-expander}
@@ -257,20 +252,17 @@
 (setf (liber:alias-for-function 'tree-expander-indent-for-depth)
       "Accessor"
       (documentation 'tree-expander-indent-for-depth 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-indent-for-depth object) => setting}
   @syntax{(setf (gtk:tree-expander-indent-for-depth object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{a boolean whether the expander indents the child according
     to its depth}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{indent-for-depth} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{indent-for-depth} slot of the
+    @class{gtk:tree-expander} class gets or sets whether the tree expander
+    indents each level of depth with an additional indent.
   @end{short}
-  The @fun{gtk:tree-expander-indent-for-depth} function gets whether the tree
-  expander indents each level of depth with an additional indent. The
-  @setf{gtk:tree-expander-indent-for-depth} function sets if the tree expander
-  should indent the child according to its depth.
 
   Since 4.10
   @see-class{gtk:tree-expander}")
@@ -290,21 +282,17 @@
 (setf (liber:alias-for-function 'tree-expander-indent-for-icon)
       "Accessor"
       (documentation 'tree-expander-indent-for-icon 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-indent-for-icon object) => setting}
   @syntax{(setf (gtk:tree-expander-indent-for-icon object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{@em{true} if the child should be indented without expander,
     otherwise @em{false}}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{indent-for-icon} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{indent-for-icon} slot of the
+    @class{gtk:tree-expander} class gets or sets whether the tree expander
+    indents the child by the width of an expander-icon if it is not expandable.
   @end{short}
-  The @fun{gtk:tree-expander-indent-for-icon} function gets whether the tree
-  expander indents the child by the width of an expander-icon if it is not
-  expandable. The @setf{gtk:tree-expander-indent-for-icon} function sets whether
-  the tree expander should indent the child by the width of an expander-icon
-  when it is not expandable.
 
   Since 4.6
   @see-class{gtk:tree-expander}")
@@ -320,17 +308,17 @@
 (setf (liber:alias-for-function 'tree-expander-item)
       "Accessor"
       (documentation 'tree-expander-item 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-item object) => item}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[item]{a @class{g:object} instance for the item of the row}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{item} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{item} slot of the
+    @class{gtk:tree-expander} class forwards the item set on the
+    @class{gtk:tree-list-row} object that @arg{object} is managing.
   @end{short}
-  The @fun{gtk:tree-expander-item} function forwards the item set on the
-  @class{gtk:tree-list-row} object that @arg{object} is managing. This call is
-  essentially equivalent to calling:
+
+  This call is essentially equivalent to calling:
   @begin{pre}
 (gtk:tree-list-row-item (gtk:tree-expander-list-row object))
   @end{pre}
@@ -341,26 +329,24 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "list-row" 'tree-expander) t)
- "The @code{list-row} property of type @class{gtk:tree-list-row}
-  (Read / Write) @br{}
+ "The @code{list-row} property of type @class{gtk:tree-list-row} (Read / Write)
+  @br{}
   The list row to track for expander state.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'tree-expander-list-row)
       "Accessor"
       (documentation 'tree-expander-list-row 'function)
- "@version{2025-04-16}
+ "@version{2025-09-22}
   @syntax{(gtk:tree-expander-list-row object) => row}
   @syntax{(setf (gtk:tree-expander-list-row object) row)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[row]{a @class{gtk:tree-list-row} object}
   @begin{short}
-    Accessor of the @slot[gtk:tree-expander]{list-row} slot of the
-    @class{gtk:tree-expander} class.
+    The accessor for the @slot[gtk:tree-expander]{list-row} slot of the
+    @class{gtk:tree-expander} class gets or sets the tree list row that this
+    expander should manage.
   @end{short}
-  The @fun{gtk:tree-expander-list-row} function gets the list row managed by
-  @arg{object}. The @setf{gtk:tree-expander-list-row} function sets the tree
-  list row that this expander should manage.
   @see-class{gtk:tree-expander}
   @see-class{gtk:tree-list-row}")
 

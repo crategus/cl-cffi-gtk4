@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'im-context 'type)
- "@version{2025-07-26}
+ "@version{2025-09-25}
   @begin{short}
     The @class{gtk:im-context} class defines the interface for GTK input
     methods.
@@ -225,22 +225,22 @@ lambda (context)    :run-last
 (setf (documentation (liber:slot-documentation "input-hints" 'im-context) t)
  "The @code{input-hints} property of type @sym{gtk:input-hints} (Read / Write)
   @br{}
-  Hints for the text field behaviour.")
+  The hints for the text field behaviour.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'im-context-input-hints)
       "Accessor"
       (documentation 'im-context-input-hints 'function)
- "@version{2025-07-26}
+ "@version{2025-09-25}
   @syntax{(gtk:im-context-input-hints object) => hints}
   @syntax{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[hints]{a value of the @sym{gtk:input-hints} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:im-context]{input-hints} slot of the
-    @class{gtk:im-context} class.
+    The accessor for the @slot[gtk:im-context]{input-hints} slot of the
+    @class{gtk:im-context} class gets or sets the hints for the text field
+    behaviour.
   @end{short}
-  Hints for the text field behaviour.
   @see-class{gtk:im-context}")
 
 ;;; --- gtk:im-context-input-purpose -------------------------------------------
@@ -249,23 +249,22 @@ lambda (context)    :run-last
 (setf (documentation (liber:slot-documentation "input-purpose" 'im-context) t)
  "The @code{input-purpose} property of type @sym{gtk:input-purpose}
   (Read / Write) @br{}
-  Purpose of the text field. @br{}
+  The purpose of the text field. @br{}
   Default value: @val[gtk:input-purpose]{:free-from}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'im-context-input-purpose)
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
- "@version{2025-07-26}
+ "@version{2025-09-25}
   @syntax{(gtk:im-context-input-purpose object) => purpose}
   @syntax{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[purpose]{a value of the @sym{gtk:input-purpose} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:im-context]{input-purpose} slot of the
-    @class{gtk:im-context} class.
+    The accessor for the @slot[gtk:im-context]{input-purpose} slot of the
+    @class{gtk:im-context} class gets or sets the purpose of the text field.
   @end{short}
-  Purpose of the text field.
   @see-class{gtk:im-context}")
 
 ;;; ----------------------------------------------------------------------------

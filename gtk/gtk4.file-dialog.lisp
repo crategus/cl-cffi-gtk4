@@ -121,7 +121,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-dialog 'type)
- "@version{2025-07-17}
+ "@version{2025-09-26}
   @begin{short}
     The @class{gtk:file-dialog} object collects the arguments that are needed to
     present a file chooser dialog to the user, such as a title for the dialog
@@ -155,24 +155,22 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accept-label" 'file-dialog) t)
  "The @code{accept-label} property of type @code{:string} (Read / Write) @br{}
-  Label for the accept button of the file dialog.")
+  The label for the accept button of the file dialog.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'file-dialog-accept-label)
       "Accessor"
       (documentation 'file-dialog-accept-label 'function)
- "@version{2025-07-25}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-accept-label object) => label}
   @syntax{(setf (gtk:file-dialog-accept-label object) label)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[label]{a string for the accept label}
   @begin{short}
-    Accessor of the @slot[gtk:file-dialog]{accept-label} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{accept-label} slot of the
+    @class{gtk:file-dialog} class gets or sets the label shown on the accept
+    button of the file chooser dialog.
   @end{short}
-  The @fun{gtk:file-dialog-accept-label} function gets the label shown on the
-  accept button of the file chooser dialog. The
-  @setf{gtk:file-dialog-accept-label} function sets the label.
 
   Leaving the accept label unset or setting it as @code{nil} will fall back to
   a default label, depending on what API is used to launch the file chooser
@@ -199,18 +197,16 @@
 (setf (liber:alias-for-function 'file-dialog-default-filter)
       "Accessor"
       (documentation 'file-dialog-default-filter 'function)
- "@version{2023-07-22}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-default-filter object) => filter}
   @syntax{(setf (gtk:file-dialog-default-filter object) filter)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
-    Accessor of the @slot[file-dialog]{default-filter} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{default-filter} slot of the
+    @class{gtk:file-dialog} class gets or sets the filter that will be selected
+    by default in the file chooser dialog.
   @end{short}
-  The @class{gtk:file-dialog-default-filter} function gets the filter that will
-  be selected by default in the file chooser dialog. The
-  @setf{gtk:file-dialog-default-filter} function sets the filter.
 
   If set to @code{nil}, the first item in @slot[gtk:file-dialog]{filters} will
   be used as the default filter. If that list is empty, the dialog will be
@@ -232,19 +228,17 @@
 (setf (liber:alias-for-function 'file-dialog-filters)
       "Accessor"
       (documentation 'file-dialog-filters 'function)
- "@version{2025-07-27}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-filters object) => filters}
   @syntax{(setf (gtk:file-dialog-filters object) filters)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[filters]{a @class{g:list-model} object for the
     @class{gtk:file-filter} objects}
   @begin{short}
-    Accessor of the @slot[file-dialog]{filters} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{filters} slot of the
+    @class{gtk:file-dialog} class gets or sets the filters that will be offered
+    to the user in the file chooser dialog.
   @end{short}
-  The @fun{gtk:file-dialog-filters} function gets the filters that will be
-  offered to the user in the file chooser dialog. The
-  @setf{gtk:file-dialog-filters} function sets the filters.
 
   Since 4.10
   @see-class{gtk:file-dialog}
@@ -266,18 +260,16 @@
 (setf (liber:alias-for-function 'file-dialog-initial-file)
       "Accessor"
       (documentation 'file-dialog-initial-file 'function)
- "@version{2025-07-27}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-initial-file object) => file}
   @syntax{(setf (gtk:file-dialog-initial-file object) file)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[file]{a @class{g:file} object for the file}
   @begin{short}
-    Accessor of the @slot[file-dialog]{initial-file} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{initial-file} slot of the
+    @class{gtk:file-dialog} class gets or sets the file that will be initially
+    selected in the file chooser dialog.
   @end{short}
-  The @fun{gtk:file-dialog-initial-file} function gets the file that will be
-  initially selected in the file chooser dialog. The
-  @setf{gtk:file-dialog-initial-file} function sets the file.
 
   This function is a shortcut for calling both the
   @fun{gtk:file-dialog-initial-folder} and @fun{gtk:file-dialog-initial-name}
@@ -301,18 +293,16 @@
 (setf (liber:alias-for-function 'file-dialog-initial-folder)
       "Accessor"
       (documentation 'file-dialog-initial-folder 'function)
- "@version{2025-07-27}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-initial-folder object) => folder}
   @syntax{(setf (gtk:file-dialog-initial-folder object) folder)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[folder]{a @class{g:file} object for the folder}
   @begin{short}
-    Accessor of the @slot[file-dialog]{initial-folder} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{initial-folder} slot of the
+    @class{gtk:file-dialog} class gets or sets the folder that will be set as
+    the initial folder in the file chooser dialog.
   @end{short}
-  The @fun{gtk:file-dialog-initial-folder} function gets the folder that will
-  be set as the initial folder in the file chooser dialog. The
-  @setf{gtk:file-dialog-initial-folder} function sets the folder.
 
   Since 4.10
   @see-class{gtk:file-dialog}
@@ -330,19 +320,17 @@
 (setf (liber:alias-for-function 'file-dialog-initial-name)
       "Accessor"
       (documentation 'file-dialog-initial-name 'function)
- "@version{2025-07-25}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-initial-name object) => name}
   @syntax{(setf (gtk:file-dialog-initial-name object) name)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[name]{a string for the name}
   @begin{short}
-    Accessor of the @slot[file-dialog]{initial-name} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{initial-name} slot of the
+    @class{gtk:file-dialog} class gets or sets the name for the file
+  that should be initially set.
   @end{short}
-  The @fun{gtk:file-dialog-initial-name} function gets the name for the file
-  that should be initially set. The @setf{gtk:file-dialog-initial-name} function
-  sets the name. For saving dialogs, this will usually be pre-entered into the
-  name field.
+  For saving dialogs, this will usually be pre-entered into the name field.
 
   If a file with this name already exists in the directory set via the
   @slot[gtk:file-dialog]{initial-folder} property, the dialog should preselect
@@ -364,18 +352,16 @@
 (setf (liber:alias-for-function 'file-dialog-modal)
       "Accessor"
       (documentation 'file-dialog-modal 'function)
- "@version{2023-07-22}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-modal object) => modal}
   @syntax{(setf (gtk:file-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[modal]{a boolean whether the file chooser dialog is modal}
   @begin{short}
-    Accessor of the @slot[file-dialog]{modal} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{modal} slot of the
+    @class{gtk:file-dialog} class gets or sets whether the file chooser dialog
+    blocks interaction with the parent window while it is presented.
   @end{short}
-  The @fun{gtk:file-dialog-modal} function returns whether the file chooser
-  dialog blocks interaction with the parent window while it is presented.
-  The @setf{gtk:file-dialog-modal} function sets the property.
 
   Since 4.10
   @see-class{gtk:file-dialog}")
@@ -385,25 +371,23 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'file-dialog) t)
  "The @code{title} property of type @code{:string} (Read / Write) @br{}
-  A title that may be shown on the file chooser dialog. @br{}
+  The title that may be shown on the file chooser dialog. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'file-dialog-title)
       "Accessor"
       (documentation 'file-dialog-title 'function)
- "@version{2025-07-25}
+ "@version{2025-09-26}
   @syntax{(gtk:file-dialog-title object) => title}
   @syntax{(setf (gtk:file-dialog-title object) title)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[title]{a string for the title}
   @begin{short}
-    Accessor of the @slot[file-dialog]{title} slot of the
-    @class{gtk:file-dialog} class.
+    The accessor for the @slot[gtk:file-dialog]{title} slot of the
+    @class{gtk:file-dialog} class gets or sets the title that will be shown on
+    the file chooser dialog.
   @end{short}
-  The @fun{gtk:file-dialog-title} function returns the title that will be shown
-  on the file chooser dialog. The @setf{gtk:file-dialog-title} function sets the
-  title.
 
   Since 4.10
   @see-class{gtk:file-dialog}")
@@ -416,7 +400,7 @@
 
 (defun file-dialog-new ()
  #+liber-documentation
- "@version{2023-07-22}
+ "@version{2025-09-26}
   @return{The new @class{gtk:file-dialog} object.}
   @short{Creates a new file chooser dialog.}
   @see-class{gtk:file-dialog}"
@@ -434,11 +418,6 @@
   (cancellable (g:object g:cancellable))
   (func :pointer)
   (data :pointer))
-
-;; FIXME: We must use glib:allocate-stable-pointer but cannot install a
-;; glib:stable-pointer-destroy-notify function to free the pointer. This causes
-;; a memory leak. Can we free the stable pointer in the gio:async-ready-callback
-;; function?
 
 (defun file-dialog-open (dialog parent cancellable func)
  #+liber-documentation

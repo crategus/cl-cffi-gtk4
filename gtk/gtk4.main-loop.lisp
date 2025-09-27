@@ -48,7 +48,7 @@
 
 (cffi:defcfun ("gtk_init" init) :void
  #+liber-documentation
- "@version{2024-11-05}
+ "@version{2025-09-23}
   @begin{short}
     Call this function before using any other GTK functions in your GUI
     applications.
@@ -57,7 +57,7 @@
 
   If you are using the @class{gtk:application} class, you do not have to call
   the @fun{gtk:init} or @fun{gtk:init-check} functions. The
-  @code{\"GApplication::startup\"} handler does it for you.
+  @sig[g:application]{startup} handler does it for you.
 
   This function will terminate your program if it was unable to initialize the
   windowing system for some reason. If you want your program to fall back to a
@@ -173,15 +173,15 @@
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction
  #+liber-documentation
- "@version{2025-07-27}
-  @return{The @sym{gtk:text-direction} value of the current locale.}
+ "@version{2025-09-23}
+  @return{The @sym{gtk:text-direction} value for the current locale.}
   @begin{short}
     Gets the direction of the current locale.
   @end{short}
   This is the expected reading direction for text and UI. This function depends
   on the current locale being set with the @code{setlocale()} function and will
-  default to setting the @code{:ltr} direction otherwise. The @code{:none}
-  direction will never be returned.
+  default to setting the @val[gtk:text-direction]{:ltr} direction otherwise. The
+  @val[gtk:text-direction]{:none} direction will never be returned.
 
   GTK sets the default text direction according to the locale during the
   @fun{gtk:init} function, and you should normally use the

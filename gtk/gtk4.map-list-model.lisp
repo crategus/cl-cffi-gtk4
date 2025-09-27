@@ -137,16 +137,15 @@
 (setf (liber:alias-for-function 'map-list-model-has-map)
       "Accessor"
       (documentation 'map-list-model-has-map 'function)
- "@version{2024-12-15}
+ "@version{2025-09-25}
   @syntax{(gtk:map-list-model-has-map object) => setting}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[setting]{a boolean whether a map function is set for this model}
   @begin{short}
-    Accessor of the @slot[gtk:map-list-model]{has-map} slot of the
-    @class{gtk:map-list-model} class.
+    The accessor for the @slot[gtk:map-list-model]{has-map} slot of the
+    @class{gtk:map-list-model} class checks if a map function is currently set
+    on @arg{object}.
   @end{short}
-  The @fun{gtk:map-list-model-has-map} function checks if a map function is
-  currently set on @arg{object}.
   @see-class{gtk:map-list-model}")
 
 ;;; --- gtk:map-list-model-item-type -------------------------------------------
@@ -192,16 +191,15 @@
 (setf (liber:alias-for-function 'map-list-model-model)
       "Accessor"
       (documentation 'map-list-model-model 'function)
- "@version{2024-12-15}
+ "@version{2025-09-25}
   @syntax{(gtk:map-list-model-model object) => model}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets mapped}
   @begin{short}
-    Accessor of the @slot[gtk:map-list-model]{model} slot of the
-    @class{gtk:map-list-model} class.
+    The accessor for the @slot[gtk:map-list-model]{model} slot of the
+    @class{gtk:map-list-model} class returns the model that is currently being
+    mapped or @code{nil} if none.
   @end{short}
-  The @fun{gtk:map-list-model-model} function gets the model that is currently
-  being mapped or @code{nil} if none.
 
   GTK makes no effort to ensure that the model conforms to the item type
   expected by the map function. It assumes that the caller knows what they are
