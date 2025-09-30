@@ -122,7 +122,10 @@
 (test gtk-inscription-new
   (glib-test:with-check-memory (inscription)
     (is (typep (setf inscription (gtk:inscription-new)) 'gtk:inscription))
+    (is-false (gtk:inscription-text inscription))
     (is (typep (setf inscription (gtk:inscription-new nil)) 'gtk:inscription))
-    (is (typep (setf inscription (gtk:inscription-new "text")) 'gtk:inscription))))
+    (is-false (gtk:inscription-text inscription))
+    (is (typep (setf inscription (gtk:inscription-new "text")) 'gtk:inscription))
+    (is (string= "text" (gtk:inscription-text inscription)))))
 
-;;; 2025-05-05
+;;; 2025-09-28
