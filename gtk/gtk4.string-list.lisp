@@ -115,16 +115,15 @@
 (setf (liber:alias-for-function 'string-object-string)
       "Accessor"
       (documentation 'string-object-string 'function)
- "@version{2025-03-29}
+ "@version{2025-09-27}
   @syntax{(gtk:string-object-string object) => string}
   @argument[object]{a @class{gtk:string-object} object}
   @argument[string]{a string}
   @begin{short}
-    Accessor of the @slot[gtk:string-object]{string} slot of the
-    @class{gtk:string-object} class.
+    The accessor for the @slot[gtk:string-object]{string} slot of the
+    @class{gtk:string-object} class returns the string contained in a
+    @class{gtk:string-object} object.
   @end{short}
-  The @fun{gtk:string-object-string} function returns the string contained in a
-  @class{gtk:string-object} object.
   @see-class{gtk:string-object}")
 
 ;;; ----------------------------------------------------------------------------

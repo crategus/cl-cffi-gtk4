@@ -215,13 +215,13 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-accepting-jobs)
       "Accessor"
       (documentation 'printer-accepting-jobs 'function)
- "@version{2024-07-06}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-accepting-jobs object) => accepting-jobs}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepting-jobs]{a boolean whether the printer is accepting jobs}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{accepting-jobs} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{accepting-jobs} slot of the
+    @class{gtk:printer} class returns whether the printer is accepting jobs.
   @end{short}
   @see-class{gtk:printer}
   @see-function{gtk:printer-is-accepting-jobs}")
@@ -239,15 +239,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-accepts-pdf)
       "Accessor"
       (documentation 'printer-accepts-pdf 'function)
- "@version{2024-07-06}
+ "@version{2024-09-29}
   @syntax{(gtk:printer-accepts-pdf object) => accepts-pdf}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepts-pdf]{a boolean whether the printer can accept PDF}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{accepts-pdf} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{accepts-pdf} slot of the
+    @class{gtk:printer} class returns whether the printer accepts input in PDF
+    format.
   @end{short}
-  Returns whether the printer accepts input in PDF format.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-accepts-ps -------------------------------------------------
@@ -263,15 +263,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-accepts-ps)
       "Accessor"
       (documentation 'printer-accepts-ps 'function)
- "@version{2024-07-06}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-accepts-ps object) => accepts-ps}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepts-ps]{a boolean whether the printer can accept PostScript}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{accepts-ps} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{accepts-ps} slot of the
+    @class{gtk:printer} class returns whether the printer accepts input in
+    PostScript format.
   @end{short}
-  Returns whether the printer accepts input in PostScript format.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-backend ----------------------------------------------------
@@ -286,16 +286,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-backend)
       "Accessor"
       (documentation 'printer-backend 'function)
- "@version{2024-07-06}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-backend object) => backend}
   @argument[object]{a @class{gtk:printer} object}
   @argument[backend]{a @class{gtk:print-backend} object}
   @return{The @class{gtk:print-backend} backend of the printer.}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{backend} slot of the @class{gtk:printer}
-    class.
+    The accessor for the @slot[gtk:printer]{backend} slot of the
+    @class{gtk:printer} class returns the backend of the printer.
   @end{short}
-  Returns the backend of the printer.
   @see-class{gtk:printer}
   @see-class{gtk:print-backend}")
 
@@ -311,15 +310,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-icon-name)
       "Accessor"
       (documentation 'printer-icon-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-icon-name object) => icon-name}
   @argument[object]{a @class{gtk:printer} object}
   @argument[icon-name]{a string for the icon name}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{icon-name} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{icon-name} slot of the
+    @class{gtk:printer} class returns the name of the icon to use for the
+    printer.
   @end{short}
-  Gets the name of the icon to use for the printer.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-is-virtual -------------------------------------------------
@@ -335,16 +334,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-is-virtual)
       "Accessor"
       (documentation 'printer-is-virtual 'function)
- "@version{2024-07-06}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-is-virtual object) => is-virtual}
   @argument[object]{a @class{gtk:printer} object}
   @argument[is-virtual]{a boolean whether the printer is real hardware printer}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{is-virtual} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{is-virtual} slot of the
+    @class{gtk:printer} class returns whether the printer is virtual, that is,
+    does not represent actual printer hardware, but something like a CUPS class.
   @end{short}
-  Returns whether the printer is virtual, that is, does not represent actual
-  printer hardware, but something like a CUPS class.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-job-count --------------------------------------------------
@@ -360,15 +358,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-job-count)
       "Accessor"
       (documentation 'printer-job-count 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-job-count object) => count}
   @argument[object]{a @class{gtk:printer} object}
   @argument[count]{an integer for the number of jobs queued on the printer}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{job-count} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{job-count} slot of the
+    @class{gtk:printer} class returns the number of jobs currently queued on
+    the printer.
   @end{short}
-  Gets the number of jobs currently queued on the printer.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-location ---------------------------------------------------
@@ -383,15 +381,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-location)
       "Accessor"
       (documentation 'printer-location 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-location object) => location}
   @argument[object]{a @class{gtk:printer} object}
   @argument[location]{a string for the location of the printer}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{location} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{location} slot of the
+    @class{gtk:printer} class returns a description of the location of the
+    printer.
   @end{short}
-  Returns a description of the location of the printer.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-name -------------------------------------------------------
@@ -407,15 +405,14 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-name)
       "Accessor"
       (documentation 'printer-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-name object) => name}
   @argument[object]{a @class{gtk:printer} object}
   @argument[name]{a string for the name of the printer}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{name} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{name} slot of the
+    @class{gtk:printer} class returns the name of the printer.
   @end{short}
-  Returns the name of the printer.
   @see-class{gtk:printer}")
 
 ;;; --- gtk:printer-paused -----------------------------------------------------
@@ -431,14 +428,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-paused)
       "Accessor"
       (documentation 'printer-paused 'function)
- "@version{2024-07-06}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-paused object) => paused}
   @argument[object]{a @class{gtk:printer} object}
   @argument[paused]{a boolean whether the printer is paused}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{paused} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{paused} slot of the
+    @class{gtk:printer} class returns whether the printer is paused.
   @end{short}
+  A paused printer still accepts jobs, but it does not print them.
   @see-class{gtk:printer}
   @see-function{gtk:printer-is-paused}")
 
@@ -454,15 +452,15 @@ lambda (printer success)    :run-last
 (setf (liber:alias-for-function 'printer-state-message)
       "Accessor"
       (documentation 'printer-state-message 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:printer-state-message object) => message}
   @argument[object]{a @class{gtk:printer} object}
   @argument[message]{a string for the current state of the printer}
   @begin{short}
-    Accessor of the @slot[gtk:printer]{state-message} slot of the
-    @class{gtk:printer} class.
+    The accessor for the @slot[gtk:printer]{state-message} slot of the
+    @class{gtk:printer} class returns the state message describing the current
+    state of the printer.
   @end{short}
-  Returns the state message describing the current state of the printer.
   @see-class{gtk:printer}")
 
 ;;; ----------------------------------------------------------------------------
@@ -652,10 +650,10 @@ lambda (printer success)    :run-last
 (cffi:defcfun ("gtk_printer_get_capabilities" printer-capabilities)
     print-capabilities
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-09-29}
   @argument[printer]{a @class{gtk:printer} object}
   @begin{return}
-    The @sym{gtk:print-capabilities} value with the capabilities of the printer.
+    The @sym{gtk:print-capabilities} value for the capabilities of the printer.
   @end{return}
   @begin{short}
     Returns the capabilities of the printer.

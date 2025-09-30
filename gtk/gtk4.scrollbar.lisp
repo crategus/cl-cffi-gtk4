@@ -150,18 +150,16 @@ scrollbar
 (setf (liber:alias-for-function 'scrollbar-adjustment)
       "Accessor"
       (documentation 'scrollbar-adjustment 'function)
- "@version{2025-05-06}
+ "@version{2025-09-28}
   @syntax{(gtk:scrollbar-adjustment object) => adjustment}
   @syntax{(setf (gtk:scrollbar-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrollbar} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
-    Accessor of the @slot[gtk:scrollbar]{adjustment} slot of the
-    @class{gtk:scrollbar} class.
+    The accessor for the @slot[gtk:scrollbar]{adjustment} slot of the
+    @class{gtk:scrollbar} class gets or sets the adjustment that contains the
+    current value of this scrollbar.
   @end{short}
-  The @fun{gtk:scrollbar-adjustment} function returns the adjustment of the
-  scrollbar. The @setf{gtk:scrollbar-adjustment} function makes the scrollbar
-  use the given @arg{adjustment}.
   @see-class{gtk:scrollbar}
   @see-class{gtk:adjustment}")
 

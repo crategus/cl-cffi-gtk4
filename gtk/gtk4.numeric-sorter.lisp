@@ -107,18 +107,16 @@
 (setf (liber:alias-for-function 'numeric-sorter-expression)
       "Accessor"
       (documentation 'numeric-sorter-expression 'function)
- "@version{2024-10-24}
+ "@version{2025-09-29}
   @syntax{(gtk:numeric-sorter-expression object) => expression}
   @syntax{(setf (gtk:numeric-sorter-expression object) expression)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
   @argument[expression]{a @class{gtk:expression} instance, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:numeric-sorter]{expression} slot of the
-    @class{gtk:numeric-sorter} class.
+    The accessor for the @slot[gtk:numeric-sorter]{expression} slot of the
+    @class{gtk:numeric-sorter} class gets or sets the expression that is
+    evaluated to obtain numbers from items.
   @end{short}
-  The @fun{gtk:numeric-sorter-expression} function gets the expression that is
-  evaluated to obtain numbers from items. The
-  @setf{gtk:numeric-sorter-expression} function sets the expression.
 
   Unless an expression is set on @arg{object}, the sorter will always compare
   items as invalid. The expression must have a return type that can be compared
@@ -139,18 +137,16 @@
 (setf (liber:alias-for-function 'numeric-sorter-sort-order)
       "Accessor"
       (documentation 'numeric-sorter-sort-order 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:numeric-sorter-sort-order object) => order}
   @syntax{(setf (gtk:numeric-sorter-sort-order object) order)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
   @argument[order]{a @sym{gtk:sort-type} value}
   @begin{short}
-    Accessor of the @slot[gtk:numeric-sorter]{sort-order} slot of the
-    @class{gtk:numeric-sorter} class.
+    The accessor for the @slot[gtk:numeric-sorter]{sort-order} slot of the
+    @class{gtk:numeric-sorter} class gets or sets whether this sorter will sort
+    smaller numbers first.
   @end{short}
-  The @fun{gtk:numeric-sorter-sort-order} function gets whether this sorter will
-  sort smaller numbers first. The @setf{gtk:numeric-sorter-sort-order} function
-  sets the property.
   @see-class{gtk:numeric-sorter}
   @see-symbol{gtk:sort-type}")
 

@@ -159,19 +159,16 @@
 (setf (liber:alias-for-function 'video-autoplay)
       "Accessor"
       (documentation 'video-autoplay 'function)
- "@version{2024-10-31}
+ "@version{2025-09-28}
   @syntax{(gtk:video-autoplay object) => autoplay}
   @syntax{(setf (gtk:video-autoplay object) autoplay)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[autoplay]{a boolean whether media streams should autoplay}
   @begin{short}
-    Accessor of the @slot[gtk:video]{autoplay} slot of the @class{gtk:video}
-    class.
+    The accessor for the @slot[gtk:video]{autoplay} slot of the
+    @class{gtk:video} class gets or sets whether the video should automatically
+    begin playing.
   @end{short}
-  The @fun{gtk:video-autoplay} function returns @em{true} if videos have been
-  set to loop via the @fun{gtk:video-loop} function. The
-  @setf{gtk:video-autoplay} function sets whether self automatically starts
-  playback when it becomes visible or when a new file gets loaded.
   @see-class{gtk:video}
   @see-function{gtk:video-loop}")
 
@@ -186,17 +183,17 @@
 (setf (liber:alias-for-function 'video-file)
       "Accessor"
       (documentation 'video-file 'function)
- "@version{2024-10-31}
+ "@version{2025-09-28}
   @syntax{(gtk:video-file object) => file}
   @syntax{(setf (gtk:video-file object) file)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[file]{a @class{g:file} object to play}
   @begin{short}
-    Accessor of the @slot[gtk:video]{file} slot of the @class{gtk:video} class.
+    The accessor for the @slot[gtk:video]{file} slot of the @class{gtk:video}
+    class gets or sets the file played back by the video if the video is playing
+    a file.
   @end{short}
-  The @fun{gtk:video-file} function gets the file played back by @arg{object}
-  or @code{nil} if not playing back a file. The @setf{gtk:video-file} function
-  makes @arg{object} playback the given @arg{file}.
+  Returns @code{nil} if not playing back a file.
   @see-class{gtk:video}
   @see-class{g:file}")
 
@@ -213,19 +210,17 @@
 (setf (liber:alias-for-function 'video-graphics-offload)
       "Accessor"
       (documentation 'video-graphics-offload 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:video-graphics-offload object) => setting}
   @syntax{(setf (gtk:video-graphics-offload object) setting)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
-    Accessor of the @slot[gtk:video]{graphics-offload} slot of the
-    @class{gtk:video} class.
+    The accessor for the @slot[gtk:video]{graphics-offload} slot of the
+    @class{gtk:video} class gets or sets whether graphics offload is enabled.
   @end{short}
-  The @fun{gtk:video-graphics-offload} function returns whether graphics offload
-  is enabled. The @setf{gtk:video-graphics-offload} function sets whether to
-  enable graphics offload. See the @sym{gtk:graphics-offload-enabled}
-  documentation for more information on graphics offload.
+  See the @sym{gtk:graphics-offload-enabled} documentation for more information
+  on graphics offload.
 
   Since 4.14
   @see-class{gtk:video}
@@ -243,17 +238,16 @@
 (setf (liber:alias-for-function 'video-loop)
       "Accessor"
       (documentation 'video-loop 'function)
- "@version{2024-10-31}
+ "@version{2025-09-28}
   @syntax{(gtk:video-loop object) => loop}
   @syntax{(setf (gtk:video-loop object) loop)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[loop]{a boolean whether media streams should loop}
   @begin{short}
-    Accessor of the @slot[gtk:video]{loop} slot of the @class{gtk:video} class.
+    The accessor for the @slot[gtk:video]{loop} slot of the @class{gtk:video}
+    class gets or sets whether new files loaded by @arg{object} should be set
+    to loop.
   @end{short}
-  The @fun{gtk:video-loop} function returns @em{true} if videos have been set
-  to loop. The @setf{gtk:video-loop} function sets whether new files loaded by
-  @arg{object} should be set to loop.
   @see-class{gtk:video}")
 
 ;;; --- gtk:video-media-stream -------------------------------------------------
@@ -268,21 +262,20 @@
 (setf (liber:alias-for-function 'video-media-stream)
       "Accessor"
       (documentation 'video-media-stream 'function)
- "@version{2024-10-31}
+ "@version{2025-09-28}
   @syntax{(gtk:video-media-stream object) => stream}
   @syntax{(setf (gtk:video-media-stream object) stream)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[stream]{a @class{gtk:media-stream} object to play or @code{nil}
     to unset}
   @begin{short}
-    Accessor of the @slot[gtk:video]{media-stream} slot of the @class{gtk:video}
-    class.
+    The accessor for the @slot[gtk:video]{media-stream} slot of the
+    @class{gtk:video} class gets or sets the media stream managed by
+    @arg{object}.
   @end{short}
-  The @fun{gtk:video-media-stream} function gets the media stream managed by
-  @arg{object} or @code{nil} if none. The @setf{gtk:video-media-stream} function
-  sets the media stream to be played back. The @arg{object} argument will take
-  full control of managing the media stream. If you want to manage a media
-  stream yourself, consider using a @class{gtk:picture} widget for display.
+  Returns @code{nil} if none. The @arg{object} argument will take full control
+  of managing the media stream. If you want to manage a media stream yourself,
+  consider using a @class{gtk:picture} widget for display.
 
   If you want to display a file, consider using the @fun{gtk:video-file}
   function instead.

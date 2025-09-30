@@ -183,18 +183,16 @@
 (setf (liber:alias-for-function 'scrollable-hadjustment)
       "Accessor"
       (documentation 'scrollable-hadjustment 'function)
- "@version{2025-05-06}
+ "@version{2025-09-29}
   @syntax{(gtk:scrollable-hadjustment object) => hadjustment}
   @syntax{(setf (gtk:scrollable-hadjustment object) hadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[hadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
-    Accessor of the @slot[gtk:scrollable]{hadjustment} slot of the
-    @class{gtk:scrollable} interface.
+    The accessor for the @slot[gtk:scrollable]{hadjustment} slot of the
+    @class{gtk:scrollable} interface gets or sets the adjustment used for
+    horizontal scrolling.
   @end{short}
-  The @fun{gtk:scrollable-hadjustment} function retrieves the adjustment used
-  for horizontal scrolling. The @setf{gtk:scrollable-hadjustment} function sets
-  the horizontal adjustment.
   @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-vadjustment}")
@@ -214,21 +212,18 @@
 (setf (liber:alias-for-function 'scrollable-hscroll-policy)
       "Accessor"
       (documentation 'scrollable-hscroll-policy 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:scrollable-hscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-hscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[policy]{a @sym{gtk:scrollable-policy} value for the horizontal
     scrolling policy}
   @begin{short}
-    Accessor of the @slot[gtk:scrollable]{hscroll-policy} slot of the
-    @class{gtk:scrollable} interface.
+    The accessor for the @slot[gtk:scrollable]{hscroll-policy} slot of the
+    @class{gtk:scrollable} interface gets or sets the horizontal scrolling
+    policy which determines whether horizontal scrolling should start below the
+    minimum width or below the natural width.
   @end{short}
-  The @fun{gtk:scrollable-hscroll-policy} function gets the horizontal scrolling
-  policy which determines whether horizontal scrolling should start below the
-  minimum width or below the natural width. The
-  @setf{gtk:scrollable-hscroll-policy} function sets the horizontal scrolling
-  policy.
   @see-class{gtk:scrollable}
   @see-symbol{gtk:scrollable-policy}
   @see-function{gtk:scrollable-vscroll-policy}")
@@ -246,18 +241,16 @@
 (setf (liber:alias-for-function 'scrollable-vadjustment)
       "Accessor"
       (documentation 'scrollable-vadjustment 'function)
- "@version{2025-05-06}
+ "@version{2025-09-29}
   @syntax{(gtk:scrollable-vadjustment object) => vadjustment}
   @syntax{(setf (gtk:scrollable-vadjustment object) vadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[vadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
-    Accessor of the @slot[gtk:scrollable]{vadjustment} slot of the
-    @class{gtk:scrollable} interface.
+    The accessor for the @slot[gtk:scrollable]{vadjustment} slot of the
+    @class{gtk:scrollable} interface gets or sets the adjustment used for
+    vertical scrolling.
   @end{short}
-  The @fun{gtk:scrollable-vadjustment} function retrieves the adjustment used
-  for vertical scrolling. The @setf{gtk:scrollable-vadjustment} function sets
-  the vertical adjustment.
   @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-hadjustment}")
@@ -277,21 +270,18 @@
 (setf (liber:alias-for-function 'scrollable-vscroll-policy)
       "Accessor"
       (documentation 'scrollable-vscroll-policy 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:scrollable-vscroll-policy object) => policy}
   @syntax{(setf (gtk:scrollable-vscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[policy]{a @sym{gtk:scrollable-policy} value for the vertical
     scrolling policy}
   @begin{short}
-    Accessor of the @slot[gtk:scrollable]{vscroll-policy} slot of the
-    @class{gtk:scrollable} interface.
+    The accessor for the @slot[gtk:scrollable]{vscroll-policy} slot of the
+    @class{gtk:scrollable} interface gets or sets the vertical scrolling policy
+    which determines whether vertical scrolling should start below the minimum
+    height or below the natural height.
   @end{short}
-  The @fun{gtk:scrollable-vscroll-policy} function gets the vertical scrolling
-  policy which determines whether vertical scrolling should start below the
-  minimum height or below the natural height. The
-  @setf{gtk:scrollable-hscroll-policy} function sets the vertical scrolling
-  policy.
   @see-class{gtk:scrollable}
   @see-symbol{gtk:scrollable-policy}
   @see-function{gtk:scrollable-hscroll-policy}")

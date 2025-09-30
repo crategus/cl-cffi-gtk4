@@ -109,19 +109,18 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 (setf (liber:alias-for-function 'tree-list-row-sorter-sorter)
       "Accessor"
       (documentation 'tree-list-row-sorter-sorter 'function)
- "@version{2025-04-16}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-sorter-sorter object) => sorter}
   @syntax{(setf (gtk:tree-list-row-sorter-sorter object) sorter)}
   @argument[object]{a @class{gtk:tree-list-row-sorter} object}
   @argument[sorter]{a @class{gtk:sorter} object to use, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row-sorter]{sorter} slot of the
-    @class{gtk:tree-list-row-sorter} class.
+    The accessor for the @slot[gtk:tree-list-row-sorter]{sorter} slot of the
+    @class{gtk:tree-list-row-sorter} class gets or sets the sorter used by
+    @arg{object}.
   @end{short}
-  The @fun{gtk:tree-list-row-sorter-sorter} function returns the sorter used by
-  @arg{object}. The @setf{gtk:tree-list-row-sorter-sorter} function sets the
-  sorter to use for items with the same parent. This sorter will be passed the
-  @slot[gtk:tree-list-row]{item} of the tree list rows passed to @arg{object}.
+  This sorter will be passed the @slot[gtk:tree-list-row]{item} of the tree list
+  rows passed to @arg{object}.
   @see-class{gtk:tree-list-row-sorter}
   @see-function{gtk:tree-list-row-item}")
 

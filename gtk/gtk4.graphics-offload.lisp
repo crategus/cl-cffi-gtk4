@@ -181,20 +181,17 @@
 (setf (liber:alias-for-function 'graphics-offload-black-background)
       "Accessor"
       (documentation 'graphics-offload-black-background 'function)
- "@version{2024-11-09}
+ "@version{2025-09-27}
   @syntax{(gtk:graphics-offload-black-background object) => setting}
   @syntax{(setf (gtk:graphics-offload-black-background object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[setting]{a boolean whether to draw a black background behind
     the content}
   @begin{short}
-    Accessor of the @slot[gtk:graphics-offload]{black-background} slot of the
-    @class{gtk:graphics-offload} class.
+    The accessor for the @slot[gtk:graphics-offload]{black-background} slot of
+    the @class{gtk:graphics-offload} class gets or sets whether the widget draws
+    a black background.
   @end{short}
-  The @fun{gtk:graphics-offload-black-background} function returns whether the
-  widget draws a black background. The
-  @setf{gtk:graphics-offload-black-background} function sets whether
-  @arg{object} will draw a black background.
 
   A main use case for this is letterboxing where black bars are visible next to
   the content if the aspect ratio of the content does not match the dimensions
@@ -218,17 +215,15 @@
 (setf (liber:alias-for-function 'graphics-offload-child)
       "Accessor"
       (documentation 'graphics-offload-child 'function)
- "@version{2024-11-09}
+ "@version{2025-09-27}
   @syntax{(gtk:graphics-offload-child object) => child}
   @syntax{(setf (gtk:graphics-offload-child object) child)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:graphics-offload]{child} slot of the
-    @class{gtk:graphics-offload} class.
+    The accessor for the @slot[gtk:graphics-offload]{child} slot of the
+    @class{gtk:graphics-offload} class gets or sets the child widget.
   @end{short}
-  The @fun{gtk:graphics-offload-child} function gets the child widget. The
-  @setf{gtk:graphics-offload-child} function sets the child widget.
 
   Since 4.14
   @see-class{gtk:graphics-offload}
@@ -247,19 +242,17 @@
 (setf (liber:alias-for-function 'graphics-offload-enabled)
       "Accessor"
       (documentation 'graphics-offload-enabled 'function)
- "@version{2025-07-26}
+ "@version{2025-09-27}
   @syntax{(gtk:graphics-offload-enabled object) => setting}
   @syntax{(setf (gtk:graphics-offload-enabled object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
-    Accessor of the @slot[gtk:graphics-offload]{enabled} slot of the
-    @class{gtk:graphics-offload} class.
+    The accessor for the @slot[gtk:graphics-offload]{enabled} slot of the
+    @class{gtk:graphics-offload} class gets or sets whether the
+    @class{gtk:graphics-offload} widget will attempt to offload the content of
+    its child widget.
   @end{short}
-  The @fun{gtk:graphics-offload-enabled} function returns whether offload is
-  enabled. The @setf{gtk:graphics-offload-enabled} function sets whether the
-  @class{gtk:graphics-offload} widget will attempt to offload the content of
-  its child widget.
 
   Since 4.14
   @see-class{gtk:graphics-offload}

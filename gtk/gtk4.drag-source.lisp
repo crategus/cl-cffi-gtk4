@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-source 'type)
- "@version{2025-07-24}
+ "@version{2025-09-29}
   @begin{short}
     The @class{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
@@ -141,7 +141,7 @@ lambda (source drag reason)    :run-last
       @begin[code]{simple-table}
         @entry[source]{The @class{gtk:drag-source} object.}
         @entry[drag]{The @class{gdk:drag} object.}
-        @entry[reason]{The @sym{gdk:drag-cancel-reason} value with the
+        @entry[reason]{The @sym{gdk:drag-cancel-reason} value for the
           information on why the drag failed.}
         @entry[Returns]{@em{True} if the failed drag operation has been already
           handled.}

@@ -205,7 +205,7 @@
 (setf (liber:alias-for-function 'inscription-attributes)
       "Accessor"
       (documentation 'inscription-attributes 'function)
- "@version{2025-08-03}
+ "@version{2025-09-28}
   @syntax{(gtk:inscription-attributes object) => attrs}
   @syntax{(setf (gtk:inscription-attributes object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -218,6 +218,21 @@
   These attributes will not be evaluated for sizing the inscription.
 
   Since 4.8
+  @begin[Examples]{dictionary}
+    Set text with Pango markup and retrieve the attributes:
+    @begin{pre}
+(defvar inscription (make-instance 'gtk:inscription))
+=> INSCRIPTION
+(setf (gtk:inscription-markup inscription) \"<b>Bold Text</b>\")
+=> \"<b>Bold Text</b>\"
+(gtk:inscription-text inscription)
+=> \"Bold Text\"
+(gtk:inscription-attributes inscription)
+=> #<PANGO:ATTR-LIST {1002E2D353@}>
+(pango:attr-list-to-string *)
+=> \"0 9 weight bold\"
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:inscription}
   @see-class{pango:attr-list}")
 
@@ -238,8 +253,8 @@
 (setf (liber:alias-for-function 'inscription-markup)
       "Accessor"
       (documentation 'inscription-markup 'function)
- "@version{2025-08-03}
-  @syntax{(setf (gtk:inscription-markup object) attrs)}
+ "@version{2025-09-28}
+  @syntax{(setf (gtk:inscription-markup object) markup)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[markup]{a string for the markup to display}
   @begin{short}
@@ -334,7 +349,7 @@
 (setf (liber:alias-for-function 'inscription-nat-chars)
       "Accessor"
       (documentation 'inscription-nat-chars 'function)
- "@version{2025-08-03}
+ "@version{2025-09-28}
   @syntax{(gtk:inscription-nat-chars object) => chars}
   @syntax{(setf (gtk:inscription-nat-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -347,7 +362,8 @@
   @end{short}
 
   Since 4.8
-  @see-class{gtk:inscription}")
+  @see-class{gtk:inscription}
+  @see-function{gtk:inscription-min-chars}")
 
 ;;; --- gtk:inscription-nat-lines ----------------------------------------------
 
@@ -366,7 +382,7 @@
 (setf (liber:alias-for-function 'inscription-nat-lines)
       "Accessor"
       (documentation 'inscription-nat-lines 'function)
- "@version{2025-08-03}
+ "@version{2025-09-28}
   @syntax{(gtk:inscription-nat-lines object) => lines}
   @syntax{(setf (gtk:inscription-nat-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
@@ -378,7 +394,8 @@
   @end{short}
 
   Since 4.8
-  @see-class{gtk:inscription}")
+  @see-class{gtk:inscription}
+  @see-function{gtk:inscription-min-lines}")
 
 ;;; --- gtk:inscription-text ---------------------------------------------------
 
@@ -527,13 +544,13 @@
 
 (defun inscription-new (&optional text)
  #+liber-documentation
- "@version{2025-05-04}
+ "@version{2025-09-28}
   @argument[text]{an optional string for the text to display, or @code{nil}}
   @return{The new @class{gtk:inscription} widget.}
   @begin{short}
     Creates a new @class{gtk:inscription} widget with the given text.
   @end{short}
-  You can pass @code{nil}, the default value, to an empty inscription.
+  You can pass @code{nil}, the default value, to create an empty inscription.
 
   Since 4.8
   @see-class{gtk:inscription}"

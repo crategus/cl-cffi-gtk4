@@ -124,21 +124,19 @@
 (setf (liber:alias-for-function 'media-file-file)
       "Accessor"
       (documentation 'media-file-file 'function)
- "@version{2025-07-27}
+ "@version{2025-09-27}
   @syntax{(gtk:media-file-file object) => file}
   @syntax{(setf (gtk:media-file-file object) file)}
   @argument[object]{a @class{gtk:media-file} object}
   @argument[file]{a @class{g:file} object for the file to play}
   @begin{short}
-    Accessor of the @slot[gtk:media-file]{file} slot of the
-    @class{gtk:media-file} class.
+    The accessor for the @slot[gtk:media-file]{file} slot of the
+    @class{gtk:media-file} class gets or sets the file that @arg{object} is
+    currently playing from.
   @end{short}
-  The @fun{gtk:media-file-file} function returns the file that @arg{object} is
-  currently playing from. When @arg{object} is not playing or not playing from
-  a file, @code{nil} is returned.
-
-  The @setf{gtk:media-file-file} function sets the file. If any file is still
-  playing, stop playing it. Then start playing the given @arg{file}.
+  When @arg{object} is not playing or not playing from a file, @code{nil} is
+  returned. If any file is still playing, stop playing it. Then start playing
+  the given @arg{file}.
   @see-class{gtk:media-file}
   @see-class{g:file}")
 
@@ -155,23 +153,22 @@
 (setf (liber:alias-for-function 'media-file-input-stream)
       "Accessor"
       (documentation 'media-file-input-stream 'function)
- "@version{2025-07-27}
+ "@version{2025-09-27}
   @syntax{(gtk:media-file-input-stream object) => stream}
   @syntax{(setf (gtk:media-file-input-stream object) stream)}
   @argument[object]{a @class{gtk:media-file} object}
   @argument[stream]{a @code{GInputStream} object for the stream to play from}
   @begin{short}
-    Accessor of the @slot[gtk:media-file]{input-stream} slot of the
-    @class{gtk:media-file} class.
+    The accessor for the @slot[gtk:media-file]{input-stream} slot of the
+    @class{gtk:media-file} class gets or sets the stream that @arg{object} is
+    playing from.
   @end{short}
-  The @fun{gtk:media-file-input-stream} function returns the stream that
-  @arg{object} is currently playing from. When @arg{object} is not playing or
-  not playing from a stream, @code{nil} is returned.
+  When @arg{object} is not playing or not playing from a stream, @code{nil} is
+  returned.
 
-  The @setf{gtk:media-file-input-stream} function sets the stream. If anything
-  is still playing, stop playing it. Then start playing the given @arg{stream}.
-  Full control about the stream is assumed for the duration of playback. The
-  stream will not bt be closed.
+  If anything is still playing, stop playing it. Then start playing the given
+  @arg{stream}. Full control about the stream is assumed for the duration of
+  playback. The stream will not bt be closed.
   @see-class{gtk:media-file}")
 
 ;;; ----------------------------------------------------------------------------

@@ -234,18 +234,17 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-enable-search)
       "Accessor"
       (documentation 'drop-down-enable-search 'function)
- "@version{2024-01-10}
+ "@version{2024-09-29}
   @syntax{(gtk:drop-down-enable-search object) => setting}
   @syntax{(setf (gtk:drop-down-enable-search object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[setting]{a boolean whether to enable search}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{enable-search} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{enable-search} slot of the
+    @class{gtk:drop-down} class gets or sets whether a search entry will be
+    shown in the popup that allows to search for items in the list.
   @end{short}
-  The @fun{gtk:drop-down-enable-search} function returns whether search is
-  enabled. The @setf{drop-down-enable-search} function sets whether a search
-  entry will be shown in the popup that allows to search for items in the list.
+
   Note that the @slot[gtk:drop-down]{expression} property must be set for
   search to work.
   @see-class{gtk:drop-down}
@@ -266,19 +265,17 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-expression)
       "Accessor"
       (documentation 'drop-down-expression 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-expression object) => expression}
   @syntax{(setf (gtk:drop-down-expression object) expression)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[expression]{a @class{gtk:expression} object, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{expression} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{expression} slot of the
+    @class{gtk:drop-down} class gets or sets the expression that gets evaluated
+    to obtain strings from items when searching in the popup.
   @end{short}
-  The @fun{gtk:drop-down-expression} function gets the expression. The
-  @setf{drop-down-expression} function sets the expression that gets evaluated
-  to obtain strings from items when searching in the popup. The expression must
-  have a value type of \"gchararray\".
+  The expression must have a value type of \"gchararray\".
   @see-class{gtk:drop-down}
   @see-class{gtk:expression}")
 
@@ -294,21 +291,21 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-factory)
       "Accessor"
       (documentation 'drop-down-factory 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-factory object) => factory}
   @syntax{(setf (gtk:drop-down-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{factory} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{factory} slot of the
+    @class{gtk:drop-down} class gets or sets the factory that is used to
+    populate list items.
   @end{short}
-  The @fun{gtk:drop-down-factory} function gets the factory that is currently
-  used to populate list items. The @setf{drop-down-factory} function sets the
-  factory to use for populating list items. The factory is always used for the
-  item in the button. It is also used for items in the popup if
-  the @slot[gtk:drop-down]{list-factory} property is not set.
+  The @fun{gtk:drop-down-factory} function gets
+  The factory is always used for the item in the button. It is also used for
+  items in the popup if the @slot[gtk:drop-down]{list-factory} property is not
+  set.
   @see-class{gtk:drop-down}
   @see-class{gtk:list-item-factory}")
 
@@ -324,19 +321,17 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-header-factory)
       "Accessor"
       (documentation 'drop-down-header-factory 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-header-factory object) => factory}
   @syntax{(setf (gtk:drop-down-header-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{header-factory} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{header-factory} slot of the
+    @class{gtk:drop-down} class gets or sets the factory that is used to create
+    header widgets for the popup.
   @end{short}
-  The @fun{gtk:drop-down-header-factory} function sets the factory that is
-  currently used to create header widgets for the popup. The
-  @setf{drop-down-header-factory} function sets the factory.
 
   Since 4.12
   @see-class{gtk:drop-down}
@@ -355,20 +350,17 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-list-factory)
       "Accessor"
       (documentation 'drop-down-list-factory 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-list-factory object) => factory}
   @syntax{(setf (gtk:drop-down-list-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{list-factory} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{list-factory} slot of the
+    @class{gtk:drop-down} class gets or sets the factory that is used to
+    populate list items in the popup.
   @end{short}
-  The @fun{gtk:drop-down-list-factory} function gets the factory that is
-  currently used to populate list items in the popup. The
-  @setf{drop-down-list-factory} function sets the factory to use for populating
-  list items in the popup.
   @see-class{gtk:drop-down}
   @see-class{gtk:list-item-factory}")
 
@@ -383,17 +375,16 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-model)
       "Accessor"
       (documentation 'drop-down-model 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-model object) => model}
   @syntax{(setf (gtk:drop-down-model object) model)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{model} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{model} slot of the
+    @class{gtk:drop-down} class gets or sets the model that provides the
+    displayed items.
   @end{short}
-  The @fun{gtk:drop-down-model} function gets the model that provides the
-  displayed items. The @setf{drop-down-model} function sets the model to use.
   @see-class{gtk:drop-down}
   @see-class{g:list-model}")
 
@@ -410,18 +401,16 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-search-match-mode)
       "Accessor"
       (documentation 'drop-down-search-match-mode 'function)
- "@version{2025-07-25}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-search-match-mode object) => mode}
   @syntax{(setf (gtk:drop-down-search-match-mode object) mode)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[mode]{a @sym{gtk:string-filter-match-mode} value for the match mode}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{search-match-mode} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{search-match-mode} slot of the
+    @class{gtk:drop-down} class gets or sets the match mode that the search
+    filter is using.
   @end{short}
-  The @fun{gtk:drop-down-search-match-mode} function returns the match mode
-  that the search filter is using. The @setf{drop-down-search-match-mode}
-  function sets the match mode for the search filter.
 
   Since 4.12
   @see-class{gtk:drop-down}
@@ -440,7 +429,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-selected)
       "Accessor"
       (documentation 'drop-down-selected 'function)
- "@version{2025-06-20}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-selected object) => selected}
   @syntax{(setf (gtk:drop-down-selected object) selected)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -448,12 +437,9 @@ lambda (dropdown)    :action
     select, or the @var{gtk:+invalid-list-position+} value if no position is
     selected}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{selected} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{selected} slot of the
+    @class{gtk:drop-down} class gets or sets the position of the selected item.
   @end{short}
-  The @fun{gtk:drop-down-selected} function gets the position of the selected
-  item. The @setf{drop-down-selected} function selects the item at the given
-  position.
   @see-class{gtk:drop-down}")
 
 ;;; --- gtk:drop-down-selected-item --------------------------------------------
@@ -467,16 +453,15 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-selected-item)
       "Accessor"
       (documentation 'drop-down-selected-item 'function)
- "@version{2025-06-20}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-selected-item object) => item}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[item]{a @class{g:object} instance for the selected item}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{selected-item} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{selected-item} slot of the
+    @class{gtk:drop-down} class returns the selected item.
   @end{short}
-  The @fun{gtk:drop-down-selected-item} function gets the selected item. If no
-  item is selected, @code{nil} is returned.
+  If no item is selected, @code{nil} is returned.
   @see-class{gtk:drop-down}")
 
 ;;; --- gtk:drop-down-show-arrow -----------------------------------------------
@@ -491,18 +476,16 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-show-arrow)
       "Accessor"
       (documentation 'drop-down-show-arrow 'function)
- "@version{2024-01-10}
+ "@version{2025-09-29}
   @syntax{(gtk:drop-down-show-arrow object) => setting}
   @syntax{(setf (gtk:drop-down-show-arrow object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[setting]{a boolean whether to show an arrow within the widget}
   @begin{short}
-    Accessor of the @slot[gtk:drop-down]{show-arrow} slot of the
-    @class{gtk:drop-down} class.
+    The accessor for the @slot[gtk:drop-down]{show-arrow} slot of the
+    @class{gtk:drop-down} class gets or sets whether to show an arrow within the
+    widget.
   @end{short}
-  The @fun{gtk:drop-down-show-arrow} function returns whether to show an arrow
-  within the widget. The @setf{drop-down-show-arrow} function sets whether an
-  arrow will be displayed.
 
   Since 4.6
   @see-class{gtk:drop-down}")

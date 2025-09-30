@@ -79,7 +79,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-long-press 'type)
- "@version{2025-07-24}
+ "@version{2025-09-28}
   @begin{short}
     The @class{gtk:gesture-long-press} object is a gesture for long presses.
   @end{short}
@@ -135,7 +135,7 @@ lambda (gesture x y)    :run-last
 (setf (documentation (liber:slot-documentation "delay-factor"
                                                'gesture-long-press) t)
  "The @code{delay-factor} property of type @code{:double} (Read / Write) @br{}
-  Factor by which to modify the default timeout. @br{}
+  The factor by which to modify the default timeout. @br{}
   Allowed values: [0.5d0, 2.0d0] @br{}
   Default value: 1.0d0")
 
@@ -143,15 +143,16 @@ lambda (gesture x y)    :run-last
 (setf (liber:alias-for-function 'gesture-long-press-delay-factor)
       "Accessor"
       (documentation 'gesture-long-press-delay-factor 'function)
- "@version{2025-07-26}
+ "@version{2025-09-28}
   @syntax{(gtk:gesture-long-press-delay-factor object) => factor}
   @syntax{(setf (gtk:gesture-long-press-delay-factor object) factor)}
   @argument[object]{a @class{gtk:gesture-long-press} object}
-  @argument[factor]{a double float for the factor by which to modify the
-    default timeout}
+  @argument[factor]{a number coerced to a double float for the factor by which
+    to modify the default timeout}
   @begin{short}
-    Accessor of the @slot[gtk:gesture-long-press]{delay-factor} slot of the
-    @class{gtk:gesture-long-press} class.
+    The accessor for the @slot[gtk:gesture-long-press]{delay-factor} slot of the
+    @class{gtk:gesture-long-press} class gets or sets the factor by which to
+    modify the default timeout.
   @end{short}
   @see-class{gtk:gesture-long-press}")
 

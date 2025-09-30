@@ -207,18 +207,16 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'drawing-area-content-height)
       "Accessor"
       (documentation 'drawing-area-content-height 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:drawing-area-content-height object) => height}
   @syntax{(setf (gtk:drawing-area-content-height object) height)}
   @argument[object]{a @class{gtk:drawing-area} widget}
   @argument[height]{an integer for the content height}
   @begin{short}
-    Accessor of the @slot[gtk:drawing-area]{content-height} slot of the
-    @class{gtk:drawing-area} class.
+    The accessor for the @slot[gtk:drawing-area]{content-height} slot of the
+    @class{gtk:drawing-area} class gets or sets the content height of the
+    drawing area.
   @end{short}
-  The @fun{gtk:drawing-area-content-height} function retrieves the content
-  height of the drawing area. The @setf{gtk:drawing-area-content-height}
-  function sets the desired height of the contents.
 
   Note that because widgets may be allocated larger sizes than they requested,
   it is possible that the actual height passed to your draw function is larger
@@ -244,18 +242,16 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'drawing-area-content-width)
       "Accessor"
       (documentation 'drawing-area-content-width 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:drawing-area-content-width object) => width}
   @syntax{(setf (gtk:drawing-area-content-width object) width)}
   @argument[object]{a @class{gtk:drawing-area} widget}
   @argument[width]{an integer for the content height}
   @begin{short}
-    Accessor of the @slot[gtk:drawing-area]{content-width} slot of the
-    @class{gtk:drawing-area} class.
+    The accessor for the @slot[gtk:drawing-area]{content-width} slot of the
+    @class{gtk:drawing-area} class gets or sets the content width of the drawing
+    area.
   @end{short}
-  The @fun{gtk:drawing-area-content-width} function retrieves the content
-  width of the drawing area. The @setf{gtk:drawing-area-content-width} function
-  sets the desired width of the contents.
 
   Note that because widgets may be allocated larger sizes than they requested,
   it is possible that the actual height passed to your draw function is larger

@@ -166,18 +166,16 @@
 (setf (liber:alias-for-function 'string-sorter-collation)
       "Accessor"
       (documentation 'string-sorter-collation 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:string-sorter-collation object) => collation}
   @syntax{(setf (gtk:string-sorter-collation object) collation)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[collation]{a @sym{gtk:collation} value}
   @begin{short}
-    Accessor of the @slot[gtk:string-sorter]{collation} slot of the
-    @class{gtk:string-sorter} class.
+    The accessor for the @slot[gtk:string-sorter]{collation} slot of the
+    @class{gtk:string-sorter} class gets or sets the collation method to use for
+    sorting.
   @end{short}
-  The @fun{gtk:string-sorter-collation} function gets which collation method
-  the sorter uses. The @setf{gtk:string-sorter-collation} function sets the
-  collation method.
 
   Since 4.10
   @see-class{gtk:string-sorter}
@@ -199,20 +197,18 @@
 (setf (liber:alias-for-function 'string-sorter-expression)
       "Accessor"
       (documentation 'string-sorter-expression 'function)
- "@version{2024-10-24}
+ "@version{2025-09-28}
   @syntax{(gtk:string-sorter-expression object) => expression}
   @syntax{(setf (gtk:string-sorter-expression object) expression)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[expression]{a @class{gtk:expression} instance, or
     @code{(cffi:null-pointer)}}
   @begin{short}
-    Accessor of the @slot[gtk:string-sorter]{expression} slot of the
-    @class{gtk:string-sorter} class.
+    The accessor for the @slot[gtk:string-sorter]{expression} slot of the
+    @class{gtk:string-sorter} class gets or sets the expression that is
+    evaluated to obtain strings from items.
   @end{short}
-  The @fun{gtk:string-sorter-expression} function gets the expression that is
-  evaluated to obtain strings from items. The
-  @setf{gtk:string-sorter-expression} function sets the expression. The
-  expression must have the @code{\"gchararray\"} type.
+  The expression must have the @code{\"gchararray\"} type.
   @see-class{gtk:string-sorter}
   @see-class{gtk:expression}")
 
@@ -228,18 +224,16 @@
 (setf (liber:alias-for-function 'string-sorter-ignore-case)
       "Accessor"
       (documentation 'string-sorter-ignore-case 'function)
- "@version{2024-10-24}
+ "@version{2025-09-28}
   @syntax{(gtk:string-sorter-ignore-case object) => setting}
   @syntax{(setf (gtk:string-sorter-ignore-case object) setting)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[setting]{@em{true} to ignore case differences}
   @begin{short}
-    Accessor of the @slot[gtk:string-sorter]{ignore-case} slot of the
-    @class{gtk:string-sorter} class.
+    The accessor for the @slot[gtk:string-sorter]{ignore-case} slot of the
+    @class{gtk:string-sorter} class gets or sets whether the sorter ignores case
+    differences.
   @end{short}
-  The @fun{gtk:string-sorter-ignore-case} function gets whether the sorter
-  ignores case differences. The @setf{gtk:string-sorter-ignore-case} function
-  sets the property.
   @see-class{gtk:string-sorter}")
 
 ;;; ----------------------------------------------------------------------------

@@ -230,16 +230,16 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-accel-size-group)
       "Accessor"
       (documentation 'shortcuts-shortcut-accel-size-group 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(setf (gtk:shortcuts-shortcut-accel-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{accel-size-group} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{accel-size-group} slot of
+    the @class{gtk:shortcuts-shortcut} class gets or sets the size group for the
+    accelerator portion of this shortcut.
   @end{short}
-  The size group for the accelerator portion of this shortcut. This is used
-  internally by GTK, and must not be modified by applications.
+  This is used internally by GTK, and must not be modified by applications.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-accel-size-group} function is deprecated
     since 4.18. This widget will be removed in GTK 5.
@@ -268,24 +268,24 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-accelerator)
       "Accessor"
       (documentation 'shortcuts-shortcut-accelerator 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-accelerator object) => accelerator}
   @syntax{(setf (gtk:shortcuts-shortcut-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[accelerator]{a string for the accelerator}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{accelerator} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{accelerator} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the accelerator(s)
+    represented by this object.
   @end{short}
-  The accelerator(s) represented by this object. This property is used if the
-  @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @val[gtk:shortcut-type]{:accelerator} value. The syntax of this property is an
-  extension of the syntax understood by the @fun{gtk:accelerator-parse}
-  function. Multiple accelerators can be specified by separating them with a
-  space, but keep in mind that the available width is limited. It is also
-  possible to specify ranges of shortcuts, using @code{...} between the keys.
-  Sequences of keys can be specified using a @code{+} or @code{&} between the
-  keys.
+  This property is used if the @slot[gtk:shortcuts-shortcut]{shortcut-type}
+  property is set to the @val[gtk:shortcut-type]{:accelerator} value. The syntax
+  of this property is an extension of the syntax understood by the
+  @fun{gtk:accelerator-parse} function. Multiple accelerators can be specified
+  by separating them with a space, but keep in mind that the available width is
+  limited. It is also possible to specify ranges of shortcuts, using @code{...}
+  between the keys. Sequences of keys can be specified using a @code{+} or
+  @code{&} between the keys.
   @begin[Examples]{dictionary}
     A single shortcut: @kbd{<ctl><alt>delete} @br{}
     Two alternative shortcuts: @kbd{<shift>a Home} @br{}
@@ -321,20 +321,19 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-action-name)
       "Accessor"
       (documentation 'shortcuts-shortcut-action-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-action-name object) => name}
   @syntax{(setf (gtk:shortcuts-shortcut-action-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[name]{a string for the detailed action name}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{action-name} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{action-name} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the detailed action name.
   @end{short}
-  A detailed action name. If this is set for a shortcut of type
-  @val[gtk:shortcut-type]{:accelerator}, then GTK will use the accelerators that
-  are associated with the action via the @fun{gtk:application-accels-for-action}
-  function, and setting the @slot[gtk:shortcuts-shortcut]{accelerator} property
-  is not necessary.
+  If this is set for a shortcut of type @val[gtk:shortcut-type]{:accelerator},
+  then GTK will use the accelerators that are associated with the action via the
+  @fun{gtk:application-accels-for-action} function, and setting the
+  @slot[gtk:shortcuts-shortcut]{accelerator} property is not necessary.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-action-name} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -358,18 +357,18 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-direction)
       "Accessor"
       (documentation 'shortcuts-shortcut-direction 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-direction object) => direction}
   @syntax{(setf (gtk:shortcuts-shortcut-direction object) direction)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[direction]{a @sym{gtk:text-direction} value}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{direction} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{direction} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the text direction for
+    which this shortcut is active.
   @end{short}
-  The text direction for which this shortcut is active. If the shortcut is used
-  regardless of the text direction, set this property to the
-  @val[gtk:direction-type]{:none} value.
+  If the shortcut is used regardless of the text direction, set this property to
+  the @val[gtk:direction-type]{:none} value.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-direction} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -391,19 +390,19 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-icon)
       "Accessor"
       (documentation 'shortcuts-shortcut-icon 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-icon object) => icon}
   @syntax{(setf (gtk:shortcuts-shortcut-icon object) icon)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[icon]{a @class{g:icon} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{icon} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{icon} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the icon to represent the
+    shortcut or gesture.
   @end{short}
-  An icon to represent the shortcut or gesture. This property is used if the
-  @slot[gtk:shortcuts-shortcut]{shortcut-type} property is set to the
-  @val[gtk:shortcut-type]{:gesture} value. For the other predefined gesture
-  types, GTK provides an icon on its own.
+  This property is used if the @slot[gtk:shortcuts-shortcut]{shortcut-type}
+  property is set to the @val[gtk:shortcut-type]{:gesture} value. For the other
+  predefined gesture types, GTK provides an icon on its own.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-icon} function is deprecated since 4.18.
     This widget will be removed in GTK 5.
@@ -425,16 +424,16 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-icon-set)
       "Accessor"
       (documentation 'shortcuts-shortcut-icon-set 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-icon-set object) => setting}
   @syntax{(setf (gtk:shortcuts-shortcut-icon-set object) setting)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[setting]{a boolean whether an icon has been set}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{icon-set} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{icon-set} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets whether an icon has been
+    set.
   @end{short}
-  @em{True} if an icon has been set.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-icon-set} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -455,16 +454,16 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-shortcut-type)
       "Accessor"
       (documentation 'shortcuts-shortcut-shortcut-type 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-shortcut-type object) => type}
   @syntax{(setf (gtk:shortcuts-shortcut-shortcut-type object) type)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[type]{a @sym{gtk:shortcut-type} value}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{shortcut-type} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{shortcut-type} slot of
+    the @class{gtk:shortcuts-shortcut} class gets or sets the type of shortcut
+    that is represented.
   @end{short}
-  The type of shortcut that is represented.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-shortcut-type} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -487,18 +486,19 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-subtitle)
       "Accessor"
       (documentation 'shortcuts-shortcut-subtitle 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-subtitle object) => subtitle}
   @syntax{(setf (gtk:shortcuts-shortcut-subtitle object) subtitle)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[subtitle]{a string for the subtitle for the shortcut}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{subtitle} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{subtitle} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the subtitle for the
+    shortcut or gesture.
   @end{short}
-  The subtitle for the shortcut or gesture. This is typically used for gestures
-  and should be a short, one-line text that describes the gesture itself. For
-  the predefined gesture types, GTK provides a subtitle on its own.
+  This is typically used for gestures and should be a short, one-line text that
+  describes the gesture itself. For the predefined gesture types, GTK provides
+  a subtitle on its own.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-subtitle} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -518,16 +518,16 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-subtitle-set)
       "Accessor"
       (documentation 'shortcuts-shortcut-subtitle-set 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-subtitle-set object) => setting}
   @syntax{(setf (gtk:shortcuts-shortcut-subtitle-set object) setting)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[setting]{a boolean whether a subtitle has been set}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{subtitle-set} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{subtitle-set} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets whether a subtitle has
+    been set.
   @end{short}
-  @em{True} if a subtitle has been set.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-subtitle-set} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -548,17 +548,17 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-title)
       "Accessor"
       (documentation 'shortcuts-shortcut-title 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(gtk:shortcuts-shortcut-title object) => title}
   @syntax{(setf (gtk:shortcuts-shortcut-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[title]{a string for the textual description for the shortcut}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{title} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{title} slot of the
+    @class{gtk:shortcuts-shortcut} class gets or sets the textual description
+    for the shortcut or gesture represented by this object.
   @end{short}
-  The textual description for the shortcut or gesture represented by this
-  object. This should be a short string that can fit in a single line.
+  This should be a short string that can fit in a single line.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-title} function is deprecated since
     4.18. This widget will be removed in GTK 5.
@@ -579,16 +579,16 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-title-size-group)
       "Accessor"
       (documentation 'shortcuts-shortcut-title-size-group 'function)
- "@version{2025-05-14}
+ "@version{2025-09-29}
   @syntax{(setf (gtk:shortcuts-shortcut-title-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcuts-shortcut]{title-size-group} slot of the
-    @class{gtk:shortcuts-shortcut} class.
+    The accessor for the @slot[gtk:shortcuts-shortcut]{title-size-group} slot of
+    the @class{gtk:shortcuts-shortcut} class sets the size group for the textual
+    portion of this shortcut.
   @end{short}
-  The size group for the textual portion of this shortcut. This is used
-  internally by GTK, and must not be modified by applications.
+  This is used internally by GTK, and must not be modified by applications.
   @begin[Warning]{dictionary}
     The @fun{gtk:shortcuts-shortcut-title-size-group} function is deprecated
     since 4.18. This widget will be removed in GTK 5.

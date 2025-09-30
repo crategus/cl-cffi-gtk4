@@ -362,15 +362,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background)
       "Accessor"
       (documentation 'cell-renderer-cell-background 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(setf (gtk:cell-renderer-cell-background object) background)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[background]{a string for the cell background color}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{cell-background} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background} slot of the
+    @class{gtk:cell-renderer} class sets te cell background color as a string.
   @end{short}
-  The cell background color as a string. This property is not readable.
+  This property is not readable.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -391,16 +391,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background-rgba)
       "Accessor"
       (documentation 'cell-renderer-cell-background-rgba 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-cell-background-rgba object) => background}
   @syntax{(setf (gtk:cell-renderer-cell-background-rgba object) background)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[background]{a @class{gdk:rgba} color for the cell background color}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{cell-background-rgba} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background-rgba} slot of
+    the @class{gtk:cell-renderer} class gets or sets the cell background RGBA
+    color.
   @end{short}
-  The cell background RGBA color.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -422,17 +422,17 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background-set)
       "Accessor"
       (documentation 'cell-renderer-cell-background-set 'function)
- "@version{2024-05-15}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-cell-background-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-cell-background-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether this tag affects the cell background
     color}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{cell-background-set} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background-set} slot of
+    the @class{gtk:cell-renderer} class gets or sets whether this tag affects
+    the cell background color.
   @end{short}
-  Whether this tag affects the cell background color.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -453,15 +453,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-editing)
       "Accessor"
       (documentation 'cell-renderer-editing 'function)
- "@version{2024-05-15}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-editing object) => setting}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the cell renderer is in editing mode}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{editing} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{editing} slot of the
+    @class{gtk:cell-renderer} class returns whether the cell renderer is
+    currently in editing mode.
   @end{short}
-  Whether the cell renderer is currently in editing mode.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -481,16 +481,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-height)
       "Accessor"
       (documentation 'cell-renderer-height 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-height object) => height}
   @syntax{(setf (gtk:cell-renderer-height object) height)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[height]{an integer for the fixed height}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{height} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{height} slot of the
+    @class{gtk:cell-renderer} class gets or sets the fixed height.
   @end{short}
-  The fixed height.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -510,16 +509,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-is-expanded)
       "Accessor"
       (documentation 'cell-renderer-is-expanded 'function)
- "@version{2024-05-15}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-is-expanded object) => setting}
   @syntax{(setf (gtk:cell-renderer-is-expanded object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the row is expanded}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{is-expanded} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{is-expanded} slot of the
+    @class{gtk:cell-renderer} class gets or sets whether the row is an expander
+    row, and is expanded.
   @end{short}
-  Whether the row is an expander row, and is expanded.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -538,16 +537,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-is-expander)
       "Accessor"
       (documentation 'cell-renderer-is-expander 'function)
- "@version{2024-05-15}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-is-expander object) => setting}
   @syntax{(setf (gtk:cell-renderer-is-expander object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the row has children}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{is-expander} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{is-expander} slot of the
+    @class{gtk:cell-renderer} class gets or sets whether row has children.
   @end{short}
-  Whether row has children.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -567,16 +565,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-mode)
       "Accessor"
       (documentation 'cell-renderer-mode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[mode]{a value of the @sym{gtk:cell-renderer-mode} enumeration}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{mode} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{mode} slot of the
+    @class{gtk:cell-renderer} class gets or sets the editable mode of the cell
+    renderer.
   @end{short}
-  The editable mode of the cell renderer.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -596,18 +594,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-sensitive)
       "Accessor"
       (documentation 'cell-renderer-sensitive 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-sensitive object) => sensitive}
   @syntax{(setf (gtk:cell-renderer-sensitive object) sensitive)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[sensitive]{a boolean for the sensitivity of the cell}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{sensitive} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{sensitive} slot of the
+    @class{gtk:cell-renderer} class gets or sets the cell sensitivity of the
+    renderer.
   @end{short}
-  The @fun{gtk:cell-renderer-sensitive} function returns the cell sensitivity
-  of the renderer. The @setf{gtk:cell-renderer-sensitive} function sets the
-  sensitivity.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -626,18 +622,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-visible)
       "Accessor"
       (documentation 'cell-renderer-visible 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-visible object) => visible}
   @syntax{(setf (gtk:cell-renderer-visible object) visible)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[visible]{a boolean for the visibility of the cell}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{visible} of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{visible} of the
+    @class{gtk:cell-renderer} class gets or sets the cell visibility of the cell
+    renderer.
   @end{short}
-  The @fun{gtk:cell-renderer-sensitive} function returns the cell visibility of
-  the renderer. The @setf{gtk:cell-renderer-sensitive} function sets the
-  visibility.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -657,16 +651,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-width)
       "Accessor"
       (documentation 'cell-renderer-width 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-width object) => width}
   @syntax{(setf (gtk:cell-renderer-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[width]{an integer for the fixed width}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{width} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{width} slot of the
+    @class{gtk:cell-renderer} class gets or sets the fixed width.
   @end{short}
-  The fixed width.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -688,17 +681,17 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-xalign)
       "Accessor"
       (documentation 'cell-renderer-xalign 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-xalign object) => align}
   @syntax{(setf (gtk:cell-renderer-xalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[align]{a single float for the x-align}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{xalign} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{xalign} slot of the
+    @class{gtk:cell-renderer} class gets or sets the horizontal alignment, from
+    0.0 (left) to 1.0 (right).
   @end{short}
-  The horizontal alignment, from 0.0 (left) to 1.0 (right). Reversed for RTL
-  layouts.
+  Reversed for RTL layouts.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -718,16 +711,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-xpad)
       "Accessor"
       (documentation 'cell-renderer-xpad 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-xpad object) => padding}
   @syntax{(setf (gtk:cell-renderer-xpad object) padding)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[padding]{an unsigned integer for the padding}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{xpad} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{xpad} slot of the
+    @class{gtk:cell-renderer} class gets or sets the amount of space to add on
+    the left and right, in pixels.
   @end{short}
-  The amount of space to add on the left and right, in pixels.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -748,16 +741,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-yalign)
       "Accessor"
       (documentation 'cell-renderer-yalign 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-yalign object) => align}
   @syntax{(setf (gtk:cell-renderer-yalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[align]{a single float for the y-align}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{yalign} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{yalign} slot of the
+    @class{gtk:cell-renderer} class gets or sets the vertical alignment, from
+    0.0 (top) to 1.0 (bottom).
   @end{short}
-  The vertical alignment, from 0.0 (top) to 1.0 (bottom).
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -777,16 +770,16 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-ypad)
       "Accessor"
       (documentation 'cell-renderer-ypad 'function)
- "@version{2025-07-22}
+ "@version{2025-09-29}
   @syntax{(gtk:cell-renderer-ypad object) => padding}
   @syntax{(setf (gtk:cell-renderer-ypad object) padding)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[padding]{an unsigned integer for the padding}
   @begin{short}
-    Accessor of the @slot[gtk:cell-renderer]{ypad} slot of the
-    @class{gtk:cell-renderer} class.
+    The accessor for the @slot[gtk:cell-renderer]{ypad} slot of the
+    @class{gtk:cell-renderer} class gets or sets the amount of space to add on
+    the top and bottom, in pixels.
   @end{short}
-  The amount of space to add on the top and bottom, in pixels.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.

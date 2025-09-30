@@ -235,17 +235,15 @@
 (setf (liber:alias-for-function 'size-group-mode)
       "Accessor"
       (documentation 'size-group-mode 'function)
- "@version{2025-07-26}
+ "@version{2025-09-27}
   @syntax{(gtk:size-group-mode object) => mode}
   @syntax{(setf (gtk:size-group-mode object) mode)}
   @argument[object]{a @class{gtk:size-group} object}
   @argument[mode]{a @sym{gtk:size-group-mode} value to set for the size group}
   @begin{short}
-    Accessor of the @slot[gtk:size-group]{mode} slot of the
-    @class{gtk:size-group} class.
+    The accessor for the @slot[gtk:size-group]{mode} slot of the
+    @class{gtk:size-group} class gets or sets the mode of the size group.
   @end{short}
-  The @fun{gtk:size-group-mode} function gets the current mode of the size
-  group. The @setf{gtk:size-group-mode} function sets the mode.
 
   The mode of the size group determines whether the widgets in the size group
   should all have the same horizontal requisition, @code{:horizontal}, all have

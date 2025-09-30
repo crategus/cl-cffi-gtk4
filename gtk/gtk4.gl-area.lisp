@@ -306,19 +306,18 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-allowed-apis)
       "Accessor"
       (documentation 'gl-area-allowed-apis 'function)
- "@version{2025-07-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-allowed-apis object) => apis}
   @syntax{(setf (gtk:gl-area-allowed-apis object) apis)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[apis]{a @sym{gdk:gl-api} value}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{allowed-apis} slot of the
-    @class{gtk:gl-area} class.
+    The accessor for the @slot[gtk:gl-area]{allowed-apis} slot of the
+    @class{gtk:gl-area} class gets or sets the allowed APIs to create a context
+    with.
   @end{short}
-  The @fun{gtk:gl-area-allowed-apis} function gets the allowed APIs. The
-  @setf{gtk:gl-area-allowed-apis} function sets the allowed APIs to create a
-  context with. You should check the @slot[gtk:gl-area]{api} property before
-  drawing with either API. By default, all APIs are allowed.
+  You should check the @slot[gtk:gl-area]{api} property before drawing with
+  either API. By default, all APIs are allowed.
 
   Since 4.12
   @see-class{gtk:gl-area}
@@ -337,16 +336,15 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-api)
       "Accessor"
       (documentation 'gl-area-api 'function)
- "@version{2025-07-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-api object) => api}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[api]{a @sym{gdk:gl-api} value}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{api} slot of the @class{gtk:gl-area}
-    class.
+    The accessor for the @slot[gtk:gl-area]{api} slot of the @class{gtk:gl-area}
+    class returns the API is currently in use.
   @end{short}
-  The @fun{gtk:gl-area-api} function gets the API is currently in use. If the
-  GL area has not been realized yet, @code{'()} is returned.
+  If the GL area has not been realized yet, @code{'()} is returned.
 
   Since 4.12
   @see-class{gtk:gl-area}
@@ -371,18 +369,16 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-auto-render)
       "Accessor"
       (documentation 'gl-area-auto-render 'function)
- "@version{2025-07-24}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-auto-render object) => setting}
   @syntax{(setf (gtk:gl-area-auto-render object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the area is auto rendering}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{auto-render} slot of the
-    @class{gtk:gl-area} class.
+    The accessor for the @slot[gtk:gl-area]{auto-render} slot of the
+    @class{gtk:gl-area} class gets or sets whether the area is in auto render
+    mode or not.
   @end{short}
-  The @fun{gtk:gl-area-auto-render} function returns whether the area is in
-  auto render mode or not. The @setf{gtk:gl-area-auto-render} function sets the
-  property.
 
   If @arg{setting} is @em{true} the @sig[gtk:gl-area]{render} signal will be
   emitted every time the widget draws. This is the default and is useful if
@@ -408,17 +404,16 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-context)
       "Accessor"
       (documentation 'gl-area-context 'function)
- "@version{2024-10-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-context object) => context}
   @syntax{(setf (gtk:gl-area-context object) context)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[context]{a @class{gdk:gl-context} object}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{context} slot of the @class{gtk:gl-area}
-    class.
+    The accessor for the @slot[gtk:gl-area]{context} slot of the
+    @class{gtk:gl-area} class returns the @class{gdk:gl-context} instance used
+    by @arg{object}.
   @end{short}
-  The @fun{gtk:gl-area-context} function retrieves the @class{gdk:gl-context}
-  instance used by @arg{object}.
   @see-class{gtk:gl-area}
   @see-class{gdk:gl-context}")
 
@@ -436,19 +431,16 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-has-depth-buffer)
       "Accessor"
       (documentation 'gl-area-has-depth-buffer 'function)
- "@version{2024-10-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-has-depth-buffer object) => setting}
   @syntax{(setf (gtk:gl-area-has-depth-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget will allocate and enable a
     depth buffer}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{has-depth-buffer} slot of the
-    @class{gtk:gl-area} class.
+    The accessor for the @slot[gtk:gl-area]{has-depth-buffer} slot of the
+    @class{gtk:gl-area} class gets or sets whether the area has a depth buffer.
   @end{short}
-  The @fun{gtk:gl-area-has-depth-buffer} function returns whether the area has
-  a depth buffer. The @setf{gtk:gl-area-has-depth-buffer} function sets the
-  property.
 
   If @arg{setting} is @em{true} the widget will allocate and enable a depth
   buffer for the target framebuffer. Otherwise there will be none.
@@ -468,19 +460,17 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-has-stencil-buffer)
       "Accessor"
       (documentation 'gl-area-has-stencil-buffer 'function)
- "@version{2024-10-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-has-stencil-buffer object) => setting}
   @syntax{(setf (gtk:gl-area-has-stencil-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget will allocate and enable a
     stencil buffer}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{has-stencil-buffer} slot of the
-    @class{gtk:gl-area} class.
+    The accessor for the @slot[gtk:gl-area]{has-stencil-buffer} slot of the
+    @class{gtk:gl-area} class gets or sets whether the area has a stencil
+    buffer.
   @end{short}
-  The @fun{gtk:gl-area-has-stencil-buffer} function returns whether the area has
-  a stencil buffer. The @setf{gtk:gl-area-has-stencil-buffer} function sets the
-  property.
 
   If @arg{setting} is @em{true} the widget will allocate and enable a stencil
   buffer for the target framebuffer. Otherwise there will be none.
@@ -499,20 +489,19 @@ lambda (area width height)    :run-last
 (setf (liber:alias-for-function 'gl-area-use-es)
       "Accessor"
       (documentation 'gl-area-use-es 'function)
- "@version{2024-10-26}
+ "@version{2025-09-29}
   @syntax{(gtk:gl-area-use-es object) => setting}
   @syntax{(setf (gtk:gl-area-use-es object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget should create an OpenGL ES
     context}
   @begin{short}
-    Accessor of the @slot[gtk:gl-area]{use-es} slot of the @class{gtk:gl-area}
-    class.
+    The accessor for the @slot[gtk:gl-area]{use-es} slot of the
+    @class{gtk:gl-area} class gets or sets whether the area should create an
+    OpenGL or an OpenGL ES context.
   @end{short}
-  The @fun{gtk:gl-area-use-es} function retrieves the property. The
-  @setf{gtk:gl-area-use-es} function sets whether the area should create an
-  OpenGL or an OpenGL ES context. You should check the capabilities of the
-  @class{gdk:gl-context} instance before drawing with either API.
+  You should check the capabilities of the @class{gdk:gl-context} instance
+  before drawing with either API.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the @fun{gtk:gl-area-api}
     function.

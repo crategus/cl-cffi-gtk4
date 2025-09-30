@@ -145,19 +145,17 @@
 (setf (liber:alias-for-function 'multi-selection-model)
       "Accessor"
       (documentation 'multi-selection-model 'function)
- "@version{2024-12-02}
+ "@version{2025-09-28}
   @syntax{(gtk:multi-selection-model object) => model}
   @syntax{(setf (gtk:multi-selection-model object) model)}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    Accessor of the @slot[gtk:multi-selection]{model} slot of the
-    @class{gtk:multi-selection} class.
+    The accessor for the @slot[gtk:multi-selection]{model} slot of the
+    @class{gtk:multi-selection} class gets or sets the underlying model of
+    @arg{object}.
   @end{short}
-  The @fun{gtk:multi-selection-model} function returns the underlying model of
-  @arg{object}. The @setf{gtk:multi-selection-model} function sets the model
-  that @arg{object} should wrap. If @arg{model} is @code{nil}, @arg{object}
-  will be empty.
+  If @arg{model} is @code{nil}, @arg{object} will be empty.
   @see-class{gtk:multi-selection}
   @see-class{g:list-model}")
 

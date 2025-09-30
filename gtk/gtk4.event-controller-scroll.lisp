@@ -233,18 +233,16 @@ lambda (controller)    :run-first
 (setf (liber:alias-for-function 'event-controller-scroll-flags)
       "Accessor"
       (documentation 'event-controller-scroll-flags 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:event-controller-scroll-flags object) => flags}
   @syntax{(setf (gtk:event-controller-scroll-flags object) flags)}
   @argument[object]{a @class{gtk:event-controller-scroll} object}
   @argument[flags]{a @sym{gtk:event-controller-scroll-flags} value}
   @begin{short}
-    Accessor of the @slot[gtk:event-controller-scroll]{flags} slot of the
-    @class{gtk:event-controller-scroll} class.
+    The accessor for the @slot[gtk:event-controller-scroll]{flags} slot of the
+    @class{gtk:event-controller-scroll} class gets or sets the flags
+    conditioning the scroll controller behavior.
   @end{short}
-  The @fun{gtk:event-controller-scroll-flags} function gets the flags
-  conditioning the scroll controller behavior. The
-  @setf{gtk:event-controller-scroll-flags} function sets the flags.
   @see-class{gtk:event-controller-scroll}
   @see-symbol{gtk:event-controller-scroll-flags}")
 

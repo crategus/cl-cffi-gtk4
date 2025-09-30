@@ -169,16 +169,15 @@
 (setf (liber:alias-for-function 'tree-model-sort-model)
       "Accessor"
       (documentation 'tree-model-sort-model 'function)
- "@version{2024-05-09}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-model-sort-model object) => model}
   @argument[object]{a @class{gtk:tree-model-sort} object}
   @argument[model]{a @class{gtk:tree-model} child model being sorted}
   @begin{short}
-    Accessor of the @slot[gtk:tree-model-sort]{model} slot of the
-    @class{gtk:tree-model-sort} class.
+    The accessor for the @slot[gtk:tree-model-sort]{model} slot of the
+    @class{gtk:tree-model-sort} class returns the model the
+    @class{gtk:tree-model-sort} object is sorting.
   @end{short}
-  The @fun{gtk:tree-model-sort-model} function returns the model the
-  @class{gtk:tree-model-sort} object is sorting.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.

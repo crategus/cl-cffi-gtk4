@@ -144,17 +144,15 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-rgba)
       "Accessor"
       (documentation 'color-chooser-rgba 'function)
- "@version{2024-05-21}
+ "@version{2025-09-29}
   @syntax{(gtk:color-chooser-rgba object) => color}
   @syntax{(setf (gtk:color-chooser-rgba object) color)}
   @argument[object]{a @class{gtk:color-chooser} widget}
   @argument[color]{a @struct{gdk:rgba} color}
   @begin{short}
-    Accessor of the @slot[gtk:color-chooser]{rgba} slot of the
-    @class{gtk:color-chooser} class.
+    The accessor for the @slot[gtk:color-chooser]{rgba} slot of the
+    @class{gtk:color-chooser} class gets or sets the selected color.
   @end{short}
-  The @class{gtk:color-chooser-rgba} function gets the currently selected color.
-  The @setf{gtk:color-chooser-rgba} function sets the color.
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog} widget instead.
@@ -178,19 +176,17 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-use-alpha)
       "Accessor"
       (documentation 'color-chooser-use-alpha 'function)
- "@version{2024-05-21}
+ "@version{2025-09-29}
   @syntax{(gtk:color-chooser-use-alpha object) => use-alpha}
   @syntax{(setf (gtk:color-chooser-use-alpha object) use-alpha)}
   @argument[object]{a @class{gtk:color-chooser} widget}
   @argument[use-alpha]{@em{true} if the color chooser should use alpha channel,
     @em{false} if not}
   @begin{short}
-    Accessor of the @slot[gtk:color-chooser]{use-alpha} slot of the
-    @class{gtk:color-chooser} class.
+    The accessor for the @slot[gtk:color-chooser]{use-alpha} slot of the
+    @class{gtk:color-chooser} class gets or sets whether the color chooser shows
+    the alpha channel.
   @end{short}
-  The @fun{gtk:color-chooser-use-alpha} function returns whether the color
-  chooser shows the alpha channel. The @setf{gtk:color-chooser-use-alpha}
-  function sets the property.
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog} widget instead.

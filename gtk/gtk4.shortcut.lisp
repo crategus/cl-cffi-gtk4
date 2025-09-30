@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut 'type)
- "@version{2025-07-26}
+ "@version{2025-09-27}
   @begin{short}
     The @class{gtk:shortcut} object is the low level object used for managing
     keyboard shortcuts.
@@ -127,18 +127,17 @@
 (setf (liber:alias-for-function 'shortcut-action)
       "Accessor"
       (documentation 'shortcut-action 'function)
- "@version{2024-11-01}
+ "@version{2025-09-27}
   @syntax{(gtk:shortcut-action object) => action)}
   @syntax{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[action]{a @class{gtk:shortcut-action} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut]{action} slot of the
-    @class{gtk:shortcut} class.
+    The accessor for the @slot[gtk:shortcut]{action} slot of the
+    @class{gtk:shortcut} class gets or sets the action that is activated by the
+    shortcut.
   @end{short}
-  The @fun{gtk:shortcut-action} function gets the action that is activated by
-  the shortcut. The @setf{gtk:shortcut-action} function sets the new action. If
-  @arg{action} is @code{nil}, the nothing action will be used.
+  If @arg{action} is @code{nil}, the nothing action will be used.
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-action}")
 
@@ -147,26 +146,24 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "arguments" 'shortcut) t)
  "The @code{arguments} property of type @sym{g:variant} (Read / Write) @br{}
-  Arguments passed to activation. @br{}
+  The arguments passed to activation. @br{}
   Default value: @code{cffi:null-pointer}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-arguments)
       "Accessor"
       (documentation 'shortcut-arguments 'function)
- "@version{2025-07-26}
+ "@version{2025-09-27}
   @syntax{(gtk:shortcut-arguments object) => args)}
   @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[args]{a @sym{g:variant} parameter to pass when activating the
     shortcut}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut]{arguments} slot of the
-    @class{gtk:shortcut} class.
+    The accessor for the @slot[gtk:shortcut]{arguments} slot of the
+    @class{gtk:shortcut} class gets or sets the arguments that are passed when
+    activating the shortcut.
   @end{short}
-  The @fun{gtk:shortcut-arguments} function gets the arguments that are passed
-  when activating the shortcut. The @setf{gtk:shortcut-arguments} function sets
-  the arguments.
   @see-class{gtk:shortcut}
   @see-symbol{g:variant}")
 
@@ -182,17 +179,16 @@
 (setf (liber:alias-for-function 'shortcut-trigger)
       "Accessor"
       (documentation 'shortcut-trigger 'function)
- "@version{2024-11-01}
+ "@version{2025-09-27}
   @syntax{(gtk:shortcut-trigger object) => trigger)}
   @syntax{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object}
   @begin{short}
-    Accessor of the @slot[gtk:shortcut]{trigger} slot of the
-    @class{gtk:shortcut} class.
+    The accessor for the @slot[gtk:shortcut]{trigger} slot of the
+    @class{gtk:shortcut} class gets or sets the trigger used to trigger the
+    shortcut.
   @end{short}
-  The @fun{gtk:shortcut-trigger} function gets the trigger used to trigger
-  the shortcut. The @setf{gtk:shortcut-trigger} function sets the new trigger.
   If @arg{trigger} is @code{nil}, the never trigger will be used.
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-trigger}")
@@ -201,11 +197,15 @@
 ;;; gtk_shortcut_new
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Since the GtkShortcut object takes ownership of the GtkShortcutTrigger
+;; and GtkShortcutAcion objects, we add a reference before passing these objects
+;; to the constructor. Check this in more detail and add tests.
+
 (declaim (inline shortcut-new))
 
 (defun shortcut-new (trigger action)
  #+liber-documentation
- "@version{2024-11-01}
+ "@version{2025-09-30}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object that will trigger
     the shortcut}
   @argument[action]{a @class{gtk:shortcut-action} object that will be
@@ -219,8 +219,8 @@
   @see-class{gtk:shortcut-trigger}
   @see-class{gtk:shortcut-action}"
   (make-instance 'shortcut
-                 :trigger trigger
-                 :action action))
+                 :trigger (g:object-ref trigger)
+                 :action (g:object-ref action)))
 
 (export 'shortcut-new)
 

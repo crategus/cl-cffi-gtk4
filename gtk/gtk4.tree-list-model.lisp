@@ -172,13 +172,14 @@
 (setf (liber:alias-for-function 'tree-list-row-children)
       "Accessor"
       (documentation 'tree-list-row-children 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-children object) => children}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[children]{a @class{g:list-model} object containing the children}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row]{children} slot of the
-    @class{gtk:tree-list-row} class.
+    The accessor for the @slot[gtk:tree-list-row]{children} slot of the
+    @class{gtk:tree-list-row} class returns the model holding the children of
+    the row.
   @end{short}
   If the row is expanded, the @fun{gtk:tree-list-row-children} function gets
   the model holding the children of @arg{model}. This is the model created by
@@ -201,16 +202,15 @@
 (setf (liber:alias-for-function 'tree-list-row-depth)
       "Accessor"
       (documentation 'tree-list-row-depth 'function)
- "@version{2025-04-16}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-depth object) => depth}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[depth]{an unsigned integer for the depth of the row}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row]{depth} slot of the
-    @class{gtk:tree-list-row} class.
+    The accessor for the @slot[gtk:tree-list-row]{depth} slot of the
+    @class{gtk:tree-list-row} class returns the depth in the tree of the row.
   @end{short}
-  The @fun{gtk:tree-list-row-depth} function gets the depth of the row. Rows
-  that correspond to items in the root model have a depth of zero, rows
+  Rows that correspond to items in the root model have a depth of zero, rows
   corresponding to items of models of direct children of the root model have a
   depth of 1 and so on. The depth of a row never changes until the row is
   removed from its model at which point it will forever return 0.
@@ -228,16 +228,15 @@
 (setf (liber:alias-for-function 'tree-list-row-expandable)
       "Accessor"
       (documentation 'tree-list-row-expandable 'function)
- "@version{2024-10-17}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-expandable object) => expandable}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[expandable]{a boolean whether the row can ever be expanded}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row]{expandable} slot of the
-    @class{gtk:tree-list-row} class.
+    The accessor for the @slot[gtk:tree-list-row]{expandable} slot of the
+    @class{gtk:tree-list-row} class returns whether the row can ever be
+    expanded.
   @end{short}
-  The @fun{gtk:tree-list-row-expandable} function gets whether the row can
-  ever be expanded.
   @see-class{gtk:tree-list-row}")
 
 ;;; --- gtk:tree-list-row-expanded ---------------------------------------------
@@ -252,16 +251,15 @@
 (setf (liber:alias-for-function 'tree-list-row-expanded)
       "Accessor"
       (documentation 'tree-list-row-expanded 'function)
- "@version{2024-10-17}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-expanded object) => expanded}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[expanded]{a boolean whether the row is currently expanded}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row]{expanded} slot of the
-    @class{gtk:tree-list-row} class.
+    The accessor for the @slot[gtk:tree-list-row]{expanded} slot of the
+    @class{gtk:tree-list-row} class gets or sets whether the row is currently
+    expanded.
   @end{short}
-  The @fun{gtk:tree-list-row-expanded} function gets if a row is currently
-  expanded.
   @see-class{gtk:tree-list-row}")
 
 ;;; --- gtk:tree-list-row-item -------------------------------------------------
@@ -275,17 +273,16 @@
 (setf (liber:alias-for-function 'tree-list-row-item)
       "Accessor"
       (documentation 'tree-list-row-item 'function)
- "@version{2025-04-16}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-row-item object) => item}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[item]{a @class{g:object} instance for the item held in this
     list row}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-row]{item} slot of the
-    @class{gtk:tree-list-row} class.
+    The accessor for the @slot[gtk:tree-list-row]{item} slot of the
+    @class{gtk:tree-list-row} class returns the item corresponding to this list
+    row.
   @end{short}
-  The @fun{gtk:tree-list-row-item} function gets the item corresponding to this
-  list row.
   @see-class{gtk:tree-list-row}")
 
 ;;; ----------------------------------------------------------------------------
@@ -429,22 +426,20 @@
 (setf (liber:alias-for-function 'tree-list-model-autoexpand)
       "Accessor"
       (documentation 'tree-list-model-autoexpand 'function)
- "@version{2024-10-17}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-model-autoexpand object) => autoexpand}
   @syntax{(setf (gtk:tree-list-model-autoexpand object) autoexpand)}
   @argument[object]{a @class{gtk:tree-list-model} object}
   @argument[autoexpand]{@em{true} if the model is set to autoexpand}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-model]{autoexpand} slot of the
-    @class{gtk:tree-list-model} class.
+    The accessor for the @slot[gtk:tree-list-model]{autoexpand} slot of the
+    @class{gtk:tree-list-model} class gets or sets whether the model is set to
+    automatically expand new rows that get added.
   @end{short}
-  The @fun{gtk:tree-list-model-autoexpand} function gets whether the model is
-  set to automatically expand new rows that get added.
 
-  If set to @em{true} with the @setf{gtk:tree-list-model-autoexpand} function,
-  the model will recursively expand all rows that get added to the model.  This
-  can be either rows added by changes to the underlying models or via the
-  @fun{gtk:tree-list-row-expanded} function.
+  If set to @em{true} the model will recursively expand all rows that get added
+  to the model. This can be either rows added by changes to the underlying
+  models or via the @fun{gtk:tree-list-row-expanded} function.
   @see-class{gtk:tree-list-model}
   @see-function{gtk:tree-list-row-expanded}")
 
@@ -490,16 +485,15 @@
 (setf (liber:alias-for-function 'tree-list-model-model)
       "Accessor"
       (documentation 'tree-list-model-model 'function)
- "@version{2024-10-17}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-model-model object) => model}
   @argument[object]{a @class{gtk:tree-list-model} object}
   @argument[model]{a @class{g:list-model} object root model}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-model]{model} slot of the
-    @class{gtk:tree-list-model} class.
+    The accessor for the @slot[gtk:tree-list-model]{model} slot of the
+    @class{gtk:tree-list-model} class returns the root model that @arg{object}
+    was created with.
   @end{short}
-  The @fun{gtk:tree-list-model-model} function gets the root model that
-  @arg{object} was created with.
   @see-class{gtk:tree-list-model}
   @see-class{g:list-model}")
 
@@ -543,18 +537,18 @@
 (setf (liber:alias-for-function 'tree-list-model-passthrough)
       "Accessor"
       (documentation 'tree-list-model-passthrough 'function)
- "@version{2024-10-17}
+ "@version{2025-09-28}
   @syntax{(gtk:tree-list-model-passthrough object) => passthrough}
   @argument[object]{a @class{gtk:tree-list-model} object}
   @argument[passthrough]{@em{true} if the model is passing through original row
     items}
   @begin{short}
-    Accessor of the @slot[gtk:tree-list-model]{passthrough} slot of the
-    @class{gtk:tree-list-model} class.
+    The accessor for the @slot[gtk:tree-list-model]{passthrough} slot of the
+    @class{gtk:tree-list-model} class returns whether the @class{g:list-model}
+    functions for this object return custom @class{gtk:tree-list-row} objects.
   @end{short}
-  If the @fun{gtk:tree-list-model-passthrough} function returns @em{false}, the
-  @class{g:list-model} functions for @arg{object} return custom
-  @class{gtk:tree-list-row} objects. You need to call the
+  If @em{false}, the @class{g:list-model} functions for @arg{object} return
+  custom @class{gtk:tree-list-row} objects. You need to call the
   @fun{gtk:tree-list-row-item} function on these objects to get the original
   item.
 

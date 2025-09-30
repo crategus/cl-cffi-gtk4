@@ -147,18 +147,16 @@
 (setf (liber:alias-for-function 'flatten-list-model-model)
       "Accessor"
       (documentation 'flatten-list-model-model 'function)
- "@version{2024-12-09}
+ "@version{2025-09-28}
   @syntax{(gtk:flatten-list-model-model object) => model}
   @syntax{(setf (gtk:flatten-list-model-model object) model)}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets flattened}
   @begin{short}
-    Accessor of the @slot[gtk:flatten-list-model]{model} slot of the
-    @class{gtk:flatten-list-model} class.
+    The accessor for the @slot[gtk:flatten-list-model]{model} slot of the
+    @class{gtk:flatten-list-model} class gets or sets the model to be flattened.
   @end{short}
-  The @fun{gtk:flatten-list-model-model} function gets the model currently
-  flattened or @code{nil} if none. The @setf{gtk:flatten-list-model-model}
-  function sets the model to be flattened.
+  Returns @code{nil} if none.
   @see-class{gtk:flatten-list-model}
   @see-class{g:list-model}")
 

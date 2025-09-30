@@ -132,17 +132,17 @@
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-column)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-column 'function)
- "@version{2025-03-30}
+ "@version{2025-09-28}
   @syntax{(gtk:column-view-sorter-primary-sort-column object) => column}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @class{gtk:column-view-column} object for the primary
     sort column}
   @begin{short}
-    Accessor of the @slot[gtk:column-view-sorter]{primary-sort-column} slot of
-    the @class{gtk:column-view-sorter} class.
+    The accessor for the @slot[gtk:column-view-sorter]{primary-sort-column} slot
+    of the @class{gtk:column-view-sorter} class returns the primary sort column.
   @end{short}
-  Returns the primary sort column. The primary sort column is the one that
-  displays the triangle in a column view header.
+  The primary sort column is the one that displays the triangle in a column view
+  header.
 
   Since 4.10
   @see-class{gtk:column-view-sorter}
@@ -163,18 +163,18 @@
 (setf (liber:alias-for-function 'column-view-sorter-primary-sort-order)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-order 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:column-view-sorter-primary-sort-order object) => order}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @sym{gtk:sort-type} value for the primary sort order}
   @begin{short}
-    Accessor of the @slot[gtk:column-view-sorter]{primary-sort-order} slot of
-    the @class{gtk:column-view-sorter} class.
+    The accessor for the @slot[gtk:column-view-sorter]{primary-sort-order} slot
+    of the @class{gtk:column-view-sorter} class returns the primary sort order.
   @end{short}
-  Returns the primary sort order. The primary sort order determines whether the
-  triangle displayed in the column view header of the primary sort column points
-  upwards or downwards. If there is no primary sort column, then this function
-  returns the @val[gtk:sort-type]{:ascending} value.
+  The primary sort order determines whether the triangle displayed in the column
+  view header of the primary sort column points upwards or downwards. If there
+  is no primary sort column, then this function returns the
+  @val[gtk:sort-type]{:ascending} value.
 
   Since 4.10
   @see-class{gtk:column-view-sorter}

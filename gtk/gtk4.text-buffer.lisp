@@ -489,16 +489,15 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-can-redo)
       "Accessor"
       (documentation 'text-buffer-can-redo 'function)
- "@version{2024-07-03}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-can-redo object) => setting}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[setting]{@em{true} if there is an redoable action}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{can-redo} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{can-redo} slot of the
+    @class{gtk:text-buffer} class returns whether there is a redoable action in
+    the history.
   @end{short}
-  The @fun{gtk:text-buffer-can-redo} function gets whether there is a redoable
-  action in the history.
   @see-class{gtk:text-buffer}")
 
 ;;; --- gtk:text-buffer-can-undo -----------------------------------------------
@@ -514,16 +513,15 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-can-undo)
       "Accessor"
       (documentation 'text-buffer-can-undo 'function)
- "@version{2024-07-03}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-can-undo object) => setting}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[setting]{@em{true} if there is an undoable action}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{can-undo} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{can-undo} slot of the
+    @class{gtk:text-buffer} class returns whether there is a undoable action in
+    the history.
   @end{short}
-  The @fun{gtk:text-buffer-can-undo} function gets whether there is a undoable
-  action in the history.
   @see-class{gtk:text-buffer}")
 
 ;;; --- gtk:text-buffer-cursor-position ----------------------------------------
@@ -541,16 +539,16 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-cursor-position)
       "Accessor"
       (documentation 'text-buffer-cursor-position 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-cursor-position object) => position}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[position]{an integer for the position of the insert mark}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{cursor-position} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{cursor-position} slot of the
+    @class{gtk:text-buffer} class returns the position of the insert mark, as
+    offset from the beginning of the text buffer.
   @end{short}
-  The position of the insert mark, as offset from the beginning of the text
-  buffer. It is useful for getting notified when the cursor moves.
+  It is useful for getting notified when the cursor moves.
   @see-class{gtk:text-buffer}")
 
 ;;; --- gtk:text-buffer-enable-undo --------------------------------------------
@@ -566,20 +564,18 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-enable-undo)
       "Accessor"
       (documentation 'text-buffer-enable-undo 'function)
- "@version{2024-07-03}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-cursor-position object) => setting}
   @syntax{(setf (gtk:text-buffer-enable-undo object) setting)}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[setting]{@em{true} to enable undo}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{enable-undo} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{enable-undo} slot of the
+    @class{gtk:text-buffer} class gets or sets whether the text buffer is saving
+    modifications to the text buffer to allow for undo and redo actions.
   @end{short}
-  The @fun{gtk:text-buffer-enable-undo} function gets whether the text buffer is
-  saving modifications to the text buffer to allow for undo and redo actions.
-  The @setf{gtk:text-buffer-enable-undo} sets whether or not to enable undoable
-  actions in the text buffer. If enabled, the user will be able to undo the last
-  number of actions up to the @fun{gtk:text-buffer-max-undo-levels} value.
+  If enabled, the user will be able to undo the last number of actions up to the
+  @fun{gtk:text-buffer-max-undo-levels} value.
 
   See the @fun{gtk:text-buffer-begin-irreversible-action} and
   @fun{gtk:text-buffer-end-irreversible-action} functions to create changes to
@@ -601,15 +597,15 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-has-selection)
       "Accessor"
       (documentation 'text-buffer-has-selection 'function)
- "@version{2024-07-03}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-has-selection object) => setting}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[setting]{@em{true} if there is text selected}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{has-selection} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{has-selection} slot of the
+    @class{gtk:text-buffer} class returns whether the text buffer has some text
+    currently selected.
   @end{short}
-  Indicates whether the text buffer has some text currently selected.
   @see-class{gtk:text-buffer}")
 
 ;;; --- gtk:text-buffer-tag-table ----------------------------------------------
@@ -624,15 +620,15 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-tag-table)
       "Accessor"
       (documentation 'text-buffer-tag-table 'function)
- "@version{2024-07-03}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-tag-table object) => table}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{tag-table} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{tag-table} slot of the
+    @class{gtk:text-buffer} class returns the tag table associated with the text
+    buffer.
   @end{short}
-  Gets the tag table associated with the text buffer.
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag-table}")
 
@@ -648,18 +644,16 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-text)
       "Accessor"
       (documentation 'text-buffer-text 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:text-buffer-text object) => text}
   @syntax{(setf (gtk:text-buffer-text object) text)}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[text]{a string for the UTF-8 text}
   @begin{short}
-    Accessor of the @slot[gtk:text-buffer]{text} slot of the
-    @class{gtk:text-buffer} class.
+    The accessor for the @slot[gtk:text-buffer]{text} slot of the
+    @class{gtk:text-buffer} class gets or sets the text of the text buffer,
+    without child widgets and images.
   @end{short}
-  The @fun{gtk:text-buffer-text} function retrieves the text of the text buffer,
-  without child widgets and images. The @setf{gtk:text-buffer-text} function
-  deletes current contents of the text buffer, and inserts @arg{text} instead.
   The text must be valid UTF-8.
   @begin[Notes]{dictionary}
     Use the @fun{gtk:text-buffer-get-text} function to retrieve a range of text

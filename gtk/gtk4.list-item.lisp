@@ -159,19 +159,17 @@
 (setf (liber:alias-for-function 'list-item-accessible-description)
       "Accessor"
       (documentation 'list-item-accessible-description 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-accessible-description object) => description}
   @syntax{(setf (gtk:list-item-accessible-description object) description)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[description]{a string for the description}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{accessible-description} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{accessible-description} slot of
+    the @class{gtk:list-item} class gets or sets the accessible description for
+    the list item.
   @end{short}
-  The @fun{gtk:list-item-accessible-description} function gets the accessible
-  description for the list item. The @setf{gtk:list-item-accessible-description}
-  function sets the accessible description. The accessible description may be
-  used by screen readers, for example.
+  The accessible description may be used by screen readers, for example.
 
   Since 4.12
   @see-class{gtk:list-item}")
@@ -189,19 +187,17 @@
 (setf (liber:alias-for-function 'list-item-accessible-label)
       "Accessor"
       (documentation 'list-item-accessible-label 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-accessible-label object) => label}
   @syntax{(setf (gtk:list-item-accessible-label object) label)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[label]{a string for the label}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{accessible-label} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{accessible-label} slot of the
+    @class{gtk:list-item} class gets or sets the accessible label for the list
+    item.
   @end{short}
-  The @fun{gtk:list-item-accessible-label} function gets the accessible label
-  for the list item. The @setf{gtk:list-item-accessible-label} function sets
-  the accessible label. The accessible label may be used by screen readers, for
-  example.
+  The accessible label may be used by screen readers, for example.
 
   Since 4.12
   @see-class{gtk:list-item}")
@@ -218,18 +214,16 @@
 (setf (liber:alias-for-function 'list-item-activatable)
       "Accessor"
       (documentation 'list-item-activatable 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-activatable object) => activatable}
   @syntax{(setf (gtk:list-item-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[activatable]{a boolean whether the list item should be activatable}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{activatable} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{activatable} slot of the
+    @class{gtk:list-item} class gets or sets whether the list item has been set
+    to be activatable.
   @end{short}
-  The @fun{gtk:list-item-activatable} function checks if a list item has been
-  set to be activatable. The @setf{gtk:list-item-activatable} function sets
-  @arg{object} to be activatable.
 
   If a list item is activatable, double-clicking on the list item, using the
   @kbd{Return} key or calling the @fun{gtk:widget-activate} function will
@@ -253,21 +247,18 @@
 (setf (liber:alias-for-function 'list-item-child)
       "Accessor"
       (documentation 'list-item-child 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-child object) => child}
   @syntax{(setf (gtk:list-item-child object) child)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{child} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{child} slot of the
+    @class{gtk:list-item} class gets or sets the child widget.
   @end{short}
-  The @fun{gtk:list-item-child} function gets the child widget or @code{nil}
-  if none was set. The @setf{gtk:list-item-child} function sets the child widget
-  to be used for this list item.
-
-  This function is typically called by applications when setting up a list item
-  so that the widget can be reused when binding it multiple times.
+  Returns @code{nil} if none was set. This function is typically called by
+  applications when setting up a list item so that the widget can be reused when
+  binding it multiple times.
   @see-class{gtk:list-item}
   @see-class{gtk:widget}")
 
@@ -283,19 +274,18 @@
 (setf (liber:alias-for-function 'list-item-focusable)
       "Accessor"
       (documentation 'list-item-focusable 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-focusable object) => focusable}
   @syntax{(setf (gtk:list-item-focusable object) focusable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[focusable]{a boolean whether the list item can be focused}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{focusable} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{focusable} slot of the
+    @class{gtk:list-item} class gets or sets whether the list item has been set
+    to be focusable.
   @end{short}
-  The @fun{gtk:list-item-focusable} function checks if a list item has been
-  set to be focusable. The @setf{gtk:list-item-focusable} function sets the list
-  item to be focusable. If a list item is focusable, it can be focused using the
-  keyboard. This works similar to the @fun{gtk:widget-focusable} function.
+  If a list item is focusable, it can be focused using the keyboard. This works
+  similar to the @fun{gtk:widget-focusable} function.
 
   Note that if list items are not focusable, the keyboard cannot be used to
   activate them and selecting only works if one of the children of the list item
@@ -316,16 +306,16 @@
 (setf (liber:alias-for-function 'list-item-item)
       "Accessor"
       (documentation 'list-item-item 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-item object) => item}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[item]{a @class{g:object} instance for the list item displayed}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{item} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{item} slot of the
+    @class{gtk:list-item} class returns the list item that is currently
+    displayed in the model that @arg{object} is currently bound to or @code{nil}
+    if @arg{object} is unbound.
   @end{short}
-  Gets the list item that is currently displayed in the model that @arg{object}
-  is currently bound to or @code{nil} if @arg{object} is unbound.
   @see-class{gtk:list-item}
   @see-class{g:object}")
 
@@ -341,16 +331,16 @@
 (setf (liber:alias-for-function 'list-item-position)
       "Accessor"
       (documentation 'list-item-position 'function)
- "@version{2025-04-11}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-position object) => position}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[position]{an unsigned integer for the position of the item.}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{position} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{position} slot of the
+    @class{gtk:list-item} class returns the position in the model that
+    @arg{object} currently displays.
   @end{short}
-  Gets the position in the model that @arg{object} currently displays. If
-  @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
+  If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
   @see-class{gtk:list-item}
   @see-variable{gtk:+invalid-list-position+}")
@@ -367,21 +357,19 @@
 (setf (liber:alias-for-function 'list-item-selectable)
       "Accessor"
       (documentation 'list-item-selectable 'function)
- "@version{2025-04-11}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-selectable object) => selectable}
   @syntax{(setf (gtk:list-item-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selectable]{a boolean whether the item should be selectable}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{selectable} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{selectable} slot of the
+    @class{gtk:list-item} class gets or sets whether the list item has been set
+    to be selectable.
   @end{short}
-  The @fun{gtk:list-item-selectable} function checks if a list item has been
-  set to be selectable. The @setf{gtk:list-item-selectable} function sets
-  @arg{object} to be selectable. If an item is selectable, clicking on the item
-  or using the keyboard will try to select or unselect the item. If this
-  succeeds is up to the model to determine, as it is managing the selected
-  state.
+  If an item is selectable, clicking on the item or using the keyboard will try
+  to select or unselect the item. If this succeeds is up to the model to
+  determine, as it is managing the selected state.
 
   Note that this means that making an item non-selectable has no influence on
   the selected state at all. A non-selectable item may still be selected.
@@ -402,16 +390,17 @@
 (setf (liber:alias-for-function 'list-item-selected)
       "Accessor"
       (documentation 'list-item-selected 'function)
- "@version{2025-03-15}
+ "@version{2025-09-29}
   @syntax{(gtk:list-item-selected object) => selected}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selected]{a boolean whether the item is selected}
   @begin{short}
-    Accessor of the @slot[gtk:list-item]{selected} slot of the
-    @class{gtk:list-item} class.
+    The accessor for the @slot[gtk:list-item]{selected} slot of the
+    @class{gtk:list-item} class returns whether the list item is displayed as
+    selected.
   @end{short}
-  Checks if the list item is displayed as selected. The selected state is
-  maintained by the container and its list model and cannot be set otherwise.
+  The selected state is maintained by the container and its list model and
+  cannot be set otherwise.
   @see-class{gtk:list-item}")
 
 ;;; --- End of file gtk4.list-item.lisp ----------------------------------------

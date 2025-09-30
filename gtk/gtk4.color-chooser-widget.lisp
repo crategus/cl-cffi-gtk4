@@ -157,18 +157,17 @@
 (setf (liber:alias-for-function 'color-chooser-widget-show-editor)
       "Accessor"
       (documentation 'color-chooser-widget-show-editor 'function)
- "@version{2024-02-22}
+ "@version{2025-09-29}
   @syntax{(gtk:color-chooser-widget-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-widget} widget}
   @argument[show-editor]{a boolean whether to show the single-color editor}
   @begin{short}
-    Accessor of the @slot[gtk:color-chooser-widget]{show-editor} slot of the
-    @class{gtk:color-chooser-widget} class.
+    The accessor for the @slot[gtk:color-chooser-widget]{show-editor} slot of
+    the @class{gtk:color-chooser-widget} class gets or sets whether the color
+    chooser is showing the single-color editor.
   @end{short}
-  The @slot[gtk:color-chooser-widget]{show-editor} property is @em{true} when
-  the color chooser is showing the single-color editor. It can be set to switch
-  the color chooser into single-color editing mode.
+  It can be set to switch the color chooser into single-color editing mode.
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser-widget} implementation is deprecated
     since 4.10.

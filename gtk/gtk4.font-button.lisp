@@ -176,18 +176,15 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-modal)
       "Accessor"
       (documentation 'font-button-modal 'function)
- "@version{2023-08-28}
+ "@version{2025-09-29}
   @syntax{(gtk:font-button-modal object) => modal}
   @syntax{(setf (gtk:font-button-modal object) modal)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[modal]{a boolean whether the dialog is modal}
   @begin{short}
-    Accessor of the @slot[gtk:font-button]{modal} slot of the
-    @class{gtk:font-button} class.
+    The accessor for the @slot[gtk:font-button]{modal} slot of the
+    @class{gtk:font-button} class gets or sets whether the dialog is modal.
   @end{short}
-  The @fun{gtk:font-button-modal} function gets whether the dialog is modal.
-  The @setf{gtk:font-button-modal} funtion sets whether the dialog should be
-  modal.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
@@ -206,18 +203,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-title)
       "Accessor"
       (documentation 'font-button-title 'function)
- "@version{2023-08-28}
+ "@version{2025-09-29}
   @syntax{(gtk:font-button-title object) => title}
   @syntax{(setf (gtk:font-button-title object) title)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[title]{a string containing the font chooser dialog title}
   @begin{short}
-    Accessor of the @slot[gtk:font-button]{title} slot of the
-    @class{gtk:font-button} class.
+    The accessor for the @slot[gtk:font-button]{title} slot of the
+    @class{gtk:font-button} class gets or sets the title of the font chooser
+    dialog.
   @end{short}
-  The @fun{gtk:font-button-title} function retrieves the title of the font
-  chooser dialog. The @setf{gtk:font-button-title} function sets the title for
-  the font chooser dialog.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
@@ -237,17 +232,16 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-use-font)
       "Accessor"
       (documentation 'font-button-use-font 'function)
- "@version{2023-08-28}
+ "@version{2025-09-29}
   @syntax{(gtk:font-button-title object) => use-font}
   @syntax{(setf (gtk:font-button-title object) use-font)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[use-font]{if @em{true}, font name will be written using font chosen}
   @begin{short}
-    Accessor of the @slot[gtk:font-button]{use-font} slot of the
-    @class{gtk:font-button} class.
+    The accessor for the @slot[gtk:font-button]{use-font} slot of the
+    @class{gtk:font-button} class gets or sets whether the label will be drawn
+    in the selected font.
   @end{short}
-  If @arg{use-font} is @em{true}, the font name will be written using the
-  selected font.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
@@ -267,18 +261,17 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-use-size)
       "Accessor"
       (documentation 'font-button-use-size 'function)
- "@version{2023-08-28}
+ "@version{2025-09-29}
   @syntax{(gtk:font-button-use-size object) => use-size}
   @syntax{(setf (gtk:font-button-use-size object) use-size)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[use-size]{if @em{true}, the font name will be written using the
     selected size}
   @begin{short}
-    Accessor of the @slot[gtk:font-button]{use-size} slot of the
-    @class{gtk:font-button} class.
+    The accessor for the @slot[gtk:font-button]{use-size} slot of the
+    @class{gtk:font-button} class gets or sets the font name will be written
+    using the selected size.
   @end{short}
-  If @arg{use-size} is @em{true}, the font name will be written using the
-  selected size.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.

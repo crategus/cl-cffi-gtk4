@@ -117,21 +117,19 @@
 (setf (liber:alias-for-function 'list-header-child)
       "Accessor"
       (documentation 'list-header-child 'function)
- "@version{2025-04-11}
+ "@version{2025-00-27}
   @syntax{(gtk:list-header-child object) => child}
   @syntax{(setf (gtk:list-header-child object) child)}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:list-header]{child} slot of the
-    @class{gtk:list-header} class.
+    The accessor for the @slot[gtk:list-header]{child} slot of the
+    @class{gtk:list-header} class gets or sets the child widget to be used for
+    this list item.
   @end{short}
-  The @fun{gtk:list-header-child} function gets the child widget previously set
-  or @code{nil} if none was set. The @setf{gtk:list-header-child} function sets
-  the child widget to be used for this list item.
-
-  This function is typically called by applications when setting up a header so
-  that the widget can be reused when binding it multiple times.
+  Returns @code{nil} if none was set. This function is typically called by
+  applications when setting up a header so that the widget can be reused when
+  binding it multiple times.
 
   Since 4.12
   @see-class{gtk:list-header}")
@@ -148,17 +146,17 @@
 (setf (liber:alias-for-function 'list-header-end)
       "Accessor"
       (documentation 'list-header-end 'function)
- "@version{2025-04-07}
+ "@version{2025-09-27}
   @syntax{(gtk:list-header-end object) => end}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[end]{an unsigned integer for the end position of the section}
   @begin{short}
-    Accessor of the @slot[gtk:list-header]{end} slot of the
-    @class{gtk:list-header} class.
+    The accessor for the @slot[gtk:list-header]{end} slot of the
+    @class{gtk:list-header} class returns the end position in the model of the
+    section that @arg{object} is currently the header for.
   @end{short}
-  The @fun{gtk:list-header-end} function gets the end position in the model of
-  the section that @arg{object} is currently the header for. If @arg{object} is
-  unbound, the @var{gtk:+invalid-list-position+} value is returned.
+  If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
+  returned.
 
   Since 4.12
   @see-class{gtk:list-header}
@@ -175,19 +173,18 @@
 (setf (liber:alias-for-function 'list-header-item)
       "Accessor"
       (documentation 'list-header-item 'function)
- "@version{2025-04-07}
+ "@version{2025-09-27}
   @syntax{(gtk:list-header-item object) => item}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[item]{a @class{g:object} instance for the item displayed}
   @begin{short}
-    Accessor of the @slot[gtk:list-header]{item} slot of the
-    @class{gtk:list-header} class.
+    The accessor for the @slot[gtk:list-header]{item} slot of the
+    @class{gtk:list-header} class returns the model item at the start of the
+    section.
   @end{short}
-  The @fun{gtk:list-header-item} function gets the model item at the start of
-  the section. This is the item that occupies the list model at the
-  @slot[gtk:list-header]{start} position.
-
-  If @arg{object} is unbound, this function returns @code{nil}.
+  This is the item that occupies the list model at the
+  @slot[gtk:list-header]{start} position. If @arg{object} is unbound, this
+  function returns @code{nil}.
 
   Since 4.12
   @see-class{gtk:list-header}
@@ -232,17 +229,15 @@
 (setf (liber:alias-for-function 'list-header-start)
       "Accessor"
       (documentation 'list-header-start 'function)
- "@version{2025-04-07}
+ "@version{2025-09-27}
   @syntax{(gtk:list-header-start object) => start}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[start]{an unsigned integer for the start position of the section}
   @begin{short}
-    Accessor of the @slot[gtk:list-header]{start} slot of the
-    @class{gtk:list-header} class.
+    The accessor for the @slot[gtk:list-header]{start} slot of the
+    @class{gtk:list-header} class returns the start position in the model of
+    the section that @arg{object} is currently the header for.
   @end{short}
-  The @fun{gtk:list-header-start} function gets the start position in the model
-  of the section that @arg{object} is currently the header for.
-
   If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
 

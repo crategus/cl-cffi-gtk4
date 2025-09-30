@@ -328,15 +328,15 @@ lambda (gesture sequence)    :run-last
 (setf (liber:alias-for-function 'gesture-n-points)
       "Accessor"
       (documentation 'gesture-n-points 'function)
- "@version{2025-07-27}
+ "@version{2025-09-29}
   @syntax{(gtk:gesture-n-points object) => n-points}
   @argument[object]{a @class{gtk:gesture} object}
   @argument[n-points]{an integer for the number of touch points}
   @begin{short}
-    Accessor of the @slot[gtk:gesture]{n-points} slot of the
-    @class{gtk:gesture} class.
+    The accessor for the @slot[gtk:gesture]{n-points} slot of the
+    @class{gtk:gesture} class returns the number of touch points that trigger
+    recognition on this gesture.
   @end{short}
-  The number of touch points that trigger recognition on this gesture.
   @see-class{gtk:gesture}")
 
 ;;; ----------------------------------------------------------------------------

@@ -464,8 +464,7 @@
 ;;; --- gtk:signal-action-signal-name ------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "signal-name"
-                                               'signal-action) t)
+(setf (documentation (liber:slot-documentation "signal-name" 'signal-action) t)
  "The @code{signal-name} property of type @code{:string}
   (Read / Write / Construct only) @br{}
   The name of the signal to emit.")
@@ -474,17 +473,15 @@
 (setf (liber:alias-for-function 'signal-action-signal-name)
       "Accessor"
       (documentation 'signal-action-signal-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:signal-action-signal-name object) => name}
-  @syntax{(setf (gtk:signal-action-signal-name object) name)}
   @argument[object]{a @class{gtk:signal-action} object}
   @argument[name]{a string for the name of the signal to emit}
   @begin{short}
-    Accessor of the @slot[gtk:signal-action]{signal-name} slot of the
-    @class{gtk:signal-action} class.
+    The accessor for the @slot[gtk:signal-action]{signal-name} slot of the
+    @class{gtk:signal-action} class returns the name of the signal that will be
+    emitted.
   @end{short}
-  The @fun{gtk:signal-action-signal-name} function returns the name of the
-  signal that will be emitted.
   @see-class{gtk:signal-action}")
 
 ;;; ----------------------------------------------------------------------------
@@ -545,17 +542,15 @@
 (setf (liber:alias-for-function 'named-action-action-name)
       "Accessor"
       (documentation 'named-action-action-name 'function)
- "@version{2025-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:named-action-action-name object) => name}
-  @syntax{(setf (gtk:named-action-action-name object) name)}
   @argument[object]{a @class{gtk:named-action} object}
   @argument[name]{a string for the name of the actopm that will be activated}
   @begin{short}
-    Accessor of the @slot[gtk:named-action]{action-name} slot of the
-    @class{gtk:named-action} class.
+    The accessor for the @slot[gtk:named-action]{action-name} slot of the
+    @class{gtk:named-action} class returns the name of the action that will be
+    activated.
   @end{short}
-  The @fun{gtk:named-action-action-name} function returns the name of the
-  action that will be activated.
   @see-class{gtk:named-action}")
 
 ;;; ----------------------------------------------------------------------------

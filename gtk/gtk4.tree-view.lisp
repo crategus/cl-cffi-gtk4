@@ -352,7 +352,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-view 'type)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @begin{short}
     Widget that displays any object that implements the @class{gtk:tree-model}
     interface.
@@ -672,18 +672,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-activate-on-single-click)
       "Accessor"
       (documentation 'tree-view-activate-on-single-click 'function)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:tree-view-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[setting]{a boolean that is @em{true} to emit the
     @sig[gtk:tree-view]{row-activated} signal on a single click}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{activate-on-single-click} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{activate-on-single-click} slot of
+    the @class{gtk:tree-view} class gets or sets whether the
+    @sig[gtk:tree-view]{row-activated} signal will be emitted after a single
+    click.
   @end{short}
-  Cause the @sig[gtk:tree-view]{row-activated} signal to be emitted on a single
-  click instead of a double click.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -704,16 +704,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-enable-grid-lines)
       "Accessor"
       (documentation 'tree-view-enable-grid-lines 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-enable-grid-lines object) => setting}
   @syntax{(setf (gtk:tree-view-enable-grid-lines object) setting)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[setting]{a boolean whether grid lines should be drawn}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{enable-grid-lines} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{enable-grid-lines} slot of the
+    @class{gtk:tree-view} class gets or sets whether grid lines should be drawn
+    in the tree view.
   @end{short}
-  Whether grid lines should be drawn in the tree view.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -733,14 +733,15 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-enable-search)
       "Accessor"
       (documentation 'tree-view-enable-search 'function)
- "@version{2024-03-10}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-enable-search object) => enable}
   @syntax{(setf (gtk:tree-view-enable-search object) enable)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[enable]{@em{true}, if the user can search interactively}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{enable-search} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{enable-search} slot of the
+    @class{gtk:tree-view} class gets or sets whether the tree view allows user
+    to search through columns interactively.
   @end{short}
   If the @slot[gtk:tree-view]{enable-search} property is set, then the user can
   type in text to search through the tree view interactively, this is sometimes
@@ -767,19 +768,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-enable-tree-lines)
       "Accessor"
       (documentation 'tree-view-enable-tree-lines 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-enable-tree-lines object) => enable}
   @syntax{(setf (gtk:tree-view-enable-tree-lines object) enable)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[enable]{@em{true}, to enable tree line drawing, @em{false}
     otherwise}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{enable-tree-lines} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{enable-tree-lines} slot of the
+    @class{gtk:tree-view} class gets or sets whether or not tree lines are drawn
+    in the tree view.
   @end{short}
-  The @fun{gtk:tree-view-enable-tree-lines} function returns whether or not
-  tree lines are drawn in the tree view. The
-  @setf{gtk:tree-view-enable-tree-lines} function sets whether to draw lines.
   This does not have any visible effects for lists.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
@@ -799,21 +798,19 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-expander-column)
       "Accessor"
       (documentation 'tree-view-expander-column 'function)
- "@version{2025-04-15}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-expander-column object) => column}
   @syntax{(setf (gtk:tree-view-expander-column object) column)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[column]{a @class{gtk:tree-view-column} object for the column to
     draw the expander arrow at, or @code{nil}}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{expander-column} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{expander-column} slot of the
+    @class{gtk:tree-view} class gets or sets the column that is the expander
+    column.
   @end{short}
-  The @fun{gtk:tree-view-expander-column} function returns the column that is
-  the current expander column. The @setf{gtk:tree-view-expander-column} function
-  sets the column to draw the expander arrow at. It must be in the tree view. If
-  the @arg{column} argument is @code{nil}, then the expander arrow is always at
-  the first visible column.
+  It must be in the tree view. If the @arg{column} argument is @code{nil}, then
+  the expander arrow is always at the first visible column.
 
   If you do not want expander arrow to appear in your tree, set the expander
   column to a hidden column.
@@ -841,19 +838,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-fixed-height-mode)
       "Accessor"
       (documentation 'tree-view-fixed-height-mode 'function)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-fixed-height-mode object) => enable}
   @syntax{(setf (gtk:tree-view-fixed-height-mode object) enable)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[enable]{@em{true} to enable fixed height mode}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{fixed-height-mode} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{fixed-height-mode} slot of the
+    @class{gtk:tree-view} class gets or sets whether fixed height mode is turned
+    on for the tree view.
   @end{short}
-  The @fun{gtk:tree-view-fixed-height-mode} function returns whether fixed
-  height mode is turned on for the tree view. The
-  @setf{gtk:tree-view-fixed-height-mode} function enables or disables the fixed
-  height mode.
 
   Fixed height mode speeds up the tree view by assuming that all rows have the
   same height. Only enable this option if all rows are the same height and all
@@ -880,18 +874,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-headers-clickable)
       "Accessor"
       (documentation 'tree-view-headers-clickable 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-headers-clickable object) => setting}
   @syntax{(setf (gtk:tree-view-headers-clickable object) setting)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[setting]{@em{true} if the columns are clickable}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{headers-clickable} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{headers-clickable} slot of the
+    @class{gtk:tree-view} class gets or sets whether all header columns are
+    clickable.
   @end{short}
-  The @fun{gtk:tree-view-headers-clickable} function returns whether all header
-  columns are clickable. The @setf{gtk:tree-view-headers-clickable} function
-  allow the column title buttons to be clicked.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -911,18 +903,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-headers-visible)
       "Accessor"
       (documentation 'tree-view-headers-visible 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-headers-visible object) => visible}
   @syntax{(setf (gtk:tree-view-headers-visible object) visible)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[visible]{@em{true} if the headers are visible}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{headers-visible} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{headers-visible} slot of the
+    @class{gtk:tree-view} class gets or sets wether to show the column header
+    buttons.
   @end{short}
-  The @fun{gtk:tree-view-headers-visible} function returns @em{true} if the
-  headers on the tree view are visible. The @setf{gtk:tree-view-headers-visible}
-  function sets the visibility state of the headers.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -942,19 +932,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-hover-expand)
       "Accessor"
       (documentation 'tree-view-hover-expand 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-hover-expand object) => expand}
   @syntax{(setf (gtk:tree-view-hover-expand object) expand)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[expand]{@em{true} to enable hover selection mode}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{hover-expand} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{hover-expand} slot of the
+    @class{gtk:tree-view} class gets or sets whether hover expansion mode is
+    turned on for the tree view.
   @end{short}
-  The @fun{gtk:tree-view-hover-expand} function returns whether hover expansion
-  mode is turned on for the tree view. The @setf{gtk:tree-view-hover-expand}
-  function enables or disables the hover expansion mode. Hover expansion makes
-  rows expand or collapse if the pointer moves over them.
+  Hover expansion makes rows expand or collapse if the pointer moves over them.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -977,19 +965,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-hover-selection)
       "Accessor"
       (documentation 'tree-view-hover-selection 'function)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-hover-selection object) => setting}
   @syntax{(setf (gtk:tree-view-hover-selection object) setting)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[setting]{@em{true} to enable hover selection mode}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{hover-selection} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{hover-selection} slot of the
+    @class{gtk:tree-view} class gets or sets whether hover selection mode is
+    turned on for the tree view.
   @end{short}
-  The @fun{gtk:tree-view-hover-selection} function returns whether hover
-  selection mode is turned on for the tree view. The
-  @setf{gtk:tree-view-hover-selection} function enables or disables the hover
-  selection mode. Hover selection makes the selected row follow the pointer.
+  Hover selection makes the selected row follow the pointer.
   Currently, this works only for the @val[gtk:selection-mode]{:single} and
   @val[gtk:selection-mode]{:browse} selection modes.
   @begin[Warning]{dictionary}
@@ -1013,20 +999,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-level-indentation)
       "Accessor"
       (documentation 'tree-view-level-indentation 'function)
- "@version{2025-04-15}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-level-indentation object) => indentation}
   @syntax{(setf (gtk:tree-view-level-indentation object) indentation)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[indentation]{an integer for the amount, in pixels, of extra
     indentation}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{level-indentation} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{level-indentation} slot of the
+    @class{gtk:tree-view} class gets or sets the amount, in pixels, of extra
+    indentation for child levels in the tree view in addition to the default
+    indentation.
   @end{short}
-  The @fun{gtk:tree-view-level-indentation} function returns the amount, in
-  pixels, of extra indentation for child levels in the tree view in addition to
-  the default indentation. The @setf{gtk:tree-view-level-indentation} function
-  sets the amount of extra indentation.
 
   The value should be specified in pixels, a value of 0 disables this feature
   and in this case only the default indentation will be used. This does not
@@ -1048,20 +1032,19 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-model)
       "Accessor"
       (documentation 'tree-view-model 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-model object) => model}
   @syntax{(setf (gtk:tree-view-model object) model)}
   @argument[objet]{a @class{gtk:tree-view} widget}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{model} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{model} slot of the
+    @class{gtk:tree-view} class gets or sets the model the tree view is based
+    on.
   @end{short}
-  The @fun{gtk:tree-view-model} function returns the model the tree view is
-  based on. Returns @code{nil} if the model is unset. The
-  @setf{gtk:tree-view-model} function sets the model. If the tree view already
-  has a model set, it will remove it before setting the new model. If the
-  @arg{model} argument is @code{nil}, then it will unset the old model.
+  Returns @code{nil} if the model is unset. If the tree view already has a model
+  set, it will remove it before setting the new model. If the @arg{model}
+  argument is @code{nil}, then it will unset the old model.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -1074,21 +1057,22 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "reorderable" 'tree-view) t)
  "The @code{reorderable} property of type @code{:boolean} (Read / Write) @br{}
-  The tree view is reorderable. @br{}
+  Whether tree view is reorderable. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'tree-view-reorderable)
       "Accessor"
       (documentation 'tree-view-reorderable 'function)
- "@version{2024-03-10}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-reorderable object) => reorderable}
   @syntax{(setf (gtk:tree-view-reorderable object) rorderable)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[reorderable]{@em{true}, if the tree view can be reordered}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{reorderable} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{reorderable} slot of the
+    @class{gtk:tree-view} class gets or sets whether the tree view is
+    reorderable.
   @end{short}
   This function is a convenience function to allow you to reorder models that
   support the @class{gtk:tree-drag-source} and the @class{gtk:tree-drag-dest}
@@ -1129,20 +1113,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-rubber-banding)
       "Accessor"
       (documentation 'tree-view-rubber-banding 'function)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-rubber-banding object) => enable}
   @syntax{(setf (gtk:tree-view-rubber-banding object) enable)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[enable]{@em{true}, to enable rubber banding}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{rubber-banding} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{rubber-banding} slot of the
+    @class{gtk:tree-view} class gets or sets whether rubber banding is turned on
+    for the tree view.
   @end{short}
-  The @fun{gtk:tree-view-rubber-banding} function returns whether rubber
-  banding is turned on for the tree view. The
-  @setf{gtk:tree-view-rubber-banding} function enables or disables rubber
-  banding. If the selection mode is @val[gtk:selection-mode]{:multiple}, rubber
-  banding will allow the user to select multiple rows by dragging the mouse.
+  If the selection mode is @val[gtk:selection-mode]{:multiple}, rubber banding
+  will allow the user to select multiple rows by dragging the mouse.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -1155,7 +1137,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "search-column" 'tree-view) t)
  "The @code{search-column} property of type @code{:int} (Read / Write) @br{}
-  Model column to search through during interactive search. @br{}
+  The model column to search through during interactive search. @br{}
   The allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -1163,20 +1145,17 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-search-column)
       "Accessor"
       (documentation 'tree-view-search-column 'function)
- "@version{2025-04-15}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-search-column object) => column}
   @syntax{(setf (gtk:tree-view-search-column object) column)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[column]{an integer for the column of the model to search in, or
     -1 to disable searching}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{search-column} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{search-column} slot of the
+    @class{gtk:tree-view} class gets or sets the column searched on by the
+    interactive search code.
   @end{short}
-  The @fun{gtk:tree-view-search-column} function gets the column searched on by
-  the interactive search code. The @setf{gtk:tree-view-search-column} function
-  sets @arg{column} as the column where the interactive search code should
-  search in for the current model.
 
   If the search column is set, users can use the \"start-interactive-search\"
   key binding to bring up search popup. The @slot[gtk:tree-view]{enable-search}
@@ -1205,24 +1184,21 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-show-expanders)
       "Accessor"
       (documentation 'tree-view-show-expanders 'function)
- "@version{2024-03-09}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-show-expanders object) => enabled}
   @syntax{(setf (gtk:tree-view-show-expanders object) enabled)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[enabled]{@em{true} to enable expander drawing, @em{false} otherwise}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{show-expanders} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{show-expanders} slot of the
+    @class{gtk:tree-view} class gets or sets whether or not expanders are drawn
+    in the tree view.
   @end{short}
-  The @fun{gtk:tree-view-show-expanders} function returns whether or not
-  expanders are drawn in the tree view. The @setf{gtk:tree-view-show-expanders}
-  function sets whether to draw and enable expanders and indent child rows in
-  the tree view. When disabled there will be no expanders visible in tree views
-  and there will be no way to expand and collapse rows by default. Also note
-  that hiding the expanders will disable the default indentation. You can set a
-  custom indentation in this case using the
-  @fun{gtk:tree-view-level-indentation} function. This does not have any visible
-  effects for lists.
+  When disabled there will be no expanders visible in tree views and there will
+  be no way to expand and collapse rows by default. Also note that hiding the
+  expanders will disable the default indentation. You can set a custom
+  indentation in this case using the @fun{gtk:tree-view-level-indentation}
+  function. This does not have any visible effects for lists.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -1243,19 +1219,18 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'tree-view-tooltip-column)
       "Accessor"
       (documentation 'tree-view-tooltip-column 'function)
- "@version{2025-07-22}
+ "@version{2025-09-27}
   @syntax{(gtk:tree-view-tooltip-column object) => column}
   @syntax{(setf (gtk:tree-view-tooltip-column object) column)}
   @argument[object]{a @class{gtk:tree-view} widget}
   @argument[column]{an integer that is a valid column number for tree
     view's model}
   @begin{short}
-    Accessor of the @slot[gtk:tree-view]{tooltip-column} slot of the
-    @class{gtk:tree-view} class.
+    The accessor for the @slot[gtk:tree-view]{tooltip-column} slot of the
+    @class{gtk:tree-view} class gets or sets the column of the tree view's model
+    which is being used for displaying tooltips on the tree view's rows.
   @end{short}
-  The @fun{gtk:tree-view-tooltip-column} function returns the column of the
-  tree view's model which is being used for displaying tooltips on the tree
-  view's rows.
+  The @fun{gtk:tree-view-tooltip-column} function returns
 
   If you only plan to have simple (text-only) tooltips on full rows, you can
   use this function to have the @class{gtk:tree-view} widget handle these

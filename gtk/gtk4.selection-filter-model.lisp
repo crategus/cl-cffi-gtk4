@@ -141,19 +141,16 @@
 (setf (liber:alias-for-function 'selection-filter-model-model)
       "Accessor"
       (documentation 'selection-filter-model-model 'function)
- "@version{2024-12-15}
+ "@version{2025-09-28}
   @syntax{(gtk:selection-filter-model-model object) => model}
   @syntax{(setf (gtk:selection-filter-model-model object) model)}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    Accessor of the @slot[gtk:selection-filter-model]{model} slot of the
-    @class{gtk:selection-filter-model} class.
+    The accessor for the @slot[gtk:selection-filter-model]{model} slot of the
+    @class{gtk:selection-filter-model} class gets or sets the model filtered.
   @end{short}
-  The @fun{gtk:selection-filter-model-model} function gets the model
-  currently filtered or @code{nil} if none. The
-  @setf{gtk:selection-filter-model-model} function sets the model to be
-  filtered.
+  Returns @code{nil} if none.
 
   Note that GTK makes no effort to ensure that @arg{model} conforms to the item
   type of @arg{object}. It assumes that the caller knows what they are doing and

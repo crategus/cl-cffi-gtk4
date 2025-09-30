@@ -180,13 +180,13 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-page-setup)
       "Accessor"
       (documentation 'print-job-page-setup 'function)
- "@version{2024-07-07}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-page-setup object) => setup}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[setup]{a @class{gtk:page-setup} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-job]{page-setup} slot of the
-    @class{gtk:print-job} class.
+    The accessor for the @slot[gtk:print-job]{page-setup} slot of the
+    @class{gtk:print-job} class returns the page setup.
   @end{short}
   @see-class{gtk:print-job}
   @see-class{gtk:page-setup}")
@@ -203,15 +203,14 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-printer)
       "Accessor"
       (documentation 'print-job-printer 'function)
- "@version{2024-07-07}
+ "@version{2025-09-27}
   @syntax{(gtk:print-job-printer object) => printer}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[printer]{a @class{gtk:printer} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-job]{printer} of the @class{gtk:print-job}
-    class.
+    The accessor for the @slot[gtk:print-job]{printer} of the
+    @class{gtk:print-job} class returns the printer to print the job to.
   @end{short}
-  Gets the printer of the print job.
   @see-class{gtk:print-job}
   @see-class{gtk:printer}")
 
@@ -227,15 +226,14 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-settings)
       "Accessor"
       (documentation 'print-job-settings 'function)
- "@version{2024-07-07}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-settings object) => settings}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
-    Accessor of the @slot[gtk:print-job]{settings} slot of the
-    @class{gtk:print-job} class.
+    The accessor for the @slot[gtk:print-job]{settings} slot of the
+    @class{gtk:print-job} class returns the print settings of the print job.
   @end{short}
-  Gets the print settings of the print job.
   @see-class{gtk:print-job}
   @see-class{gtk:print-settings}")
 
@@ -252,15 +250,14 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-title)
       "Accessor"
       (documentation 'print-job-title 'function)
- "@version{2025-07-22}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-title object) => title}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[title]{a string for the job title.}
   @begin{short}
-    Accessor of the @slot[gtk:print-job]{title} slot of the
-    @class{gtk:print-job} class.
+    The accessor for the @slot[gtk:print-job]{title} slot of the
+    @class{gtk:print-job} class returns the title of the print job.
   @end{short}
-  Gets the job title.
   @see-class{gtk:print-job}")
 
 ;;; --- gtk:print-job-track-print-status ---------------------------------------
@@ -279,18 +276,16 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-track-print-status)
       "Accessor"
       (documentation 'print-job-track-print-status 'function)
- "@version{2024-07-07}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-track-print-status object) => status}
   @syntax{(setf (gtk:print-job-track-print-status object) status)}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[status]{@em{true} to track status after printing}
   @begin{short}
-    Accessor of the @slot[gtk:print-job]{track-print-status} slot of the
-    @class{gtk:print-job} class.
+    The accessor for the @slot[gtk:print-job]{track-print-status} slot of the
+    @class{gtk:print-job} class gets or sets whether print jobs will be tracked
+    after printing.
   @end{short}
-  The @fun{gtk:print-job-track-print-status} function returns whether jobs will
-  be tracked after printing.
-
   If the @arg{status} argument is @em{true}, the print job will try to continue
   report on the status of the print job in the printer queues and printer.
 
@@ -525,16 +520,14 @@ lambda (job)    :run-last
 
 (defun print-job-page-ranges (job)
  #+liber-documentation
- "@version{2025-07-22}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-page-ranges job) => ranges}
   @syntax{(setf (gtk:print-job-page-ranges job) ranges)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[ranges]{a list of integers for the page ranges}
   @begin{short}
-    Accessor of the page ranges for the print job.
+    Gets or sets the page ranges for the print job.
   @end{short}
-  The @fun{gtk:print-job-page-ranges} function gets the page ranges for the
-  print job. The @setf{gtk:print-job-page-ranges} function sets the page ranges.
   See the @fun{gtk:print-settings-page-ranges} function.
   @see-class{gtk:print-job}
   @see-function{gtk:print-settings-page-ranges}"
@@ -586,17 +579,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_num_copies" print-job-num-copies) :int
  #+liber-documentation
- "@version{2024-07-27}
+ "@version{2025-09-28}
   @syntax{(gtk:print-job-num-copies job) => num-copies}
   @syntax{(setf (gtk:print-job-num-copies job) num-copies)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[num-copies]{an integer for the number of copies}
   @begin{short}
-    Accessor of the number of copies for the print job.
+    Gets or sets the number of copies for the print job.
   @end{short}
-  The @fun{gtk:print-job-num-copies} function gets the number of copies of the
-  print job. The @setf{gtk:print-job-num-copies} function sets the number of
-  copies for the print job.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 

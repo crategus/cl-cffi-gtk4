@@ -210,19 +210,16 @@
 (setf (liber:alias-for-function 'file-chooser-native-accept-label)
       "Accessor"
       (documentation 'file-chooser-native-accept-label 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:file-chooser-native-accept-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-accept-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser-native]{accept-label} slot of the
-    @class{gtk:file-chooser-native} interface.
+    The accessor for the @slot[gtk:file-chooser-native]{accept-label} slot of
+    the @class{gtk:file-chooser-native} interface gets or sets the custom label
+    text for the accept button.
   @end{short}
-  The @fun{gtk:file-chooser-native-accept-label} function retrieves the custom
-  label text for the accept button. The
-  @setf{gtk:file-chooser-native-accept-label} function sets the custom label
-  text.
 
   If characters in label are preceded by an underscore, they are underlined. If
   you need a literal underscore character in a label, use \"__\" (two
@@ -249,19 +246,16 @@
 (setf (liber:alias-for-function 'file-chooser-native-cancel-label)
       "Accessor"
       (documentation 'file-chooser-native-cancel-label 'function)
- "@version{2025-07-25}
+ "@version{2025-09-28}
   @syntax{(gtk:file-chooser-native-cancel-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-cancel-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
-    Accessor of the @slot[gtk:file-chooser-native]{cancel-label} slot of the
-    @class{gtk:file-chooser-native} interface.
+    The accessor for the @slot[gtk:file-chooser-native]{cancel-label} slot of
+    the @class{gtk:file-chooser-native} interface gets or sets the custom label
+    text for the cancel button.
   @end{short}
-  The @fun{gtk:file-chooser-native-cancel-label} function retrieves the custom
-  label text for the cancel button. The
-  @setf{gtk:file-chooser-native-cancel-label} function sets the custom label
-  text.
 
   If characters in label are preceded by an underscore, they are underlined. If
   you need a literal underscore character in a label, use \"__\" (two

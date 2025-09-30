@@ -180,20 +180,19 @@
 (setf (liber:alias-for-function 'file-filter-name)
       "Accessor"
       (documentation 'file-filter-name 'function)
- "@version{2025-03-13}
+ "@version{2025-09-28}
   @syntax{(gtk:file-filter-name object) => name}
   @syntax{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
   @argument[name]{a string for the human-readable name for the filter, or
     @code{nil} to remove any existing name}
   @begin{short}
-    Accessor of the @slot[gtk:file-filter]{name} slot of the
-    @class{gtk:file-filter} class.
+    The accessor for the @slot[gtk:file-filter]{name} slot of the
+    @class{gtk:file-filter} class gets or sets the human-readable name for the
+    file filter.
   @end{short}
-  The @fun{gtk:file-filter-name} function gets the human-readable name for the
-  file filter. The @setf{gtk:file-filter-name} function sets a human-readable
-  name. This is the name that will be displayed in the file chooser if there
-  is a selectable list of filters.
+  This is the name that will be displayed in the file chooser if there is a
+  selectable list of filters.
   @see-class{gtk:file-filter}")
 
 ;;; --- gtk:file-filter-patterns -----------------------------------------------

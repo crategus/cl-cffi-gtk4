@@ -130,14 +130,14 @@
 (setf (liber:alias-for-function 'viewport-child)
       "Accessor"
       (documentation 'viewport-child 'function)
- "@version{2024-07-05}
+ "@version{2025-09-29}
   @syntax{(gtk:viewport-child object) => child}
   @syntax{(setf (gtk:viewport-child object) child)}
   @argument[object]{a @class{gtk:viewport} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    Accessor of the @slot[gtk:viewport]{child} slot of the
-    @class{gtk:viewport} class.
+    The accessor for the @slot[gtk:viewport]{child} slot of the
+    @class{gtk:viewport} class gets or sets the child widget of the viewport.
   @end{short}
   @see-class{gtk:viewport}
   @see-class{gtk:widget}")
@@ -156,20 +156,17 @@
 (setf (liber:alias-for-function 'viewport-scroll-to-focus)
       "Accessor"
       (documentation 'viewport-scroll-to-focus 'function)
- "@version{2024-07-05}
+ "@version{2025-09-29}
   @syntax{(gtk:viewport-scroll-to-focus object) => setting}
   @syntax{(setf (gtk:viewport-scroll-to-focus object) setting)}
   @argument[object]{a @class{gtk:viewport} widget}
   @argument[setting]{a boolean whether to keep the focus widget scrolled to
     view}
   @begin{short}
-    Accessor of the @slot[gtk:viewport]{scroll-to-focus} slot of the
-    @class{gtk:viewport} class.
+    The accessor for the @slot[gtk:viewport]{scroll-to-focus} slot of the
+    @class{gtk:viewport} class gets or sets whether the viewport should
+    automatically scroll to keep the focused child in view.
   @end{short}
-  The @fun{gtk:viewport-scroll-to-focus} function gets whether the viewport is
-  scrolling to keep the focused child in view. The
-  @setf{gtk:viewport-scroll-to-focus} function sets whether the viewport should
-  automatically scroll to keep the focused child in view.
   @see-class{gtk:viewport}")
 
 ;;; ----------------------------------------------------------------------------
