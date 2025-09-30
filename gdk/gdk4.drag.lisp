@@ -305,17 +305,15 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-content)
       "Accessor"
       (documentation 'drag-content 'function)
- "@version{#2024-05-02}
+ "@version{#2025-09-29}
   @syntax{(gdk:drag-content object) => content}
   @argument[object]{a @class{gdk:drag} object}
   @argument[content]{a @class{gdk:content-provider} object associated to
     @arg{object}}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{content} slot of the @class{gdk:drag}
-    class.
+    The accessor for the @slot[gdk:drag]{content} slot of the @class{gdk:drag}
+    class returns the content provider associated to the drag object.
   @end{short}
-  The @fun{gdk:drag-content} function returns the content provider associated
-  to the drag object.
   @see-class{gdk:drag}
   @see-class{gdk:content-provider}")
 
@@ -331,16 +329,14 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-device)
       "Accessor"
       (documentation 'drag-device 'function)
- "@version{#2024-05-02}
+ "@version{#2025-09-29}
   @syntax{(gdk:drag-device object) => device}
   @argument[object]{a @class{gdk:drag} object}
   @argument[device]{a @class{gdk:device} object associated to @arg{object}}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{device} slot of the @class{gdk:drag}
-    class.
+    The accessor for the @slot[gdk:drag]{device} slot of the @class{gdk:drag}
+    class returns the device associated to the drag object.
   @end{short}
-  The @fun{gdk:drag-device} function returns the device associated to the drag
-  object.
   @see-class{gdk:drag}
   @see-class{gdk:device}")
 
@@ -355,16 +351,14 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-display)
       "Accessor"
       (documentation 'drag-display 'function)
- "@version{#2024-05-02}
+ "@version{#2025-09-29}
   @syntax{(gdk:drag-display object) => display}
   @argument[object]{a @class{gdk:drag} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{display} slot of the @class{gdk:drag}
-    class.
+    The accessor for the @slot[gdk:drag]{display} slot of the @class{gdk:drag}
+    class returns the display that the drag object was created for.
   @end{short}
-  The @fun{gdk:drag-display} function returns the display that the drag object
-  was created for.
   @see-class{gdk:drag}
   @see-class{gdk:display}")
 
@@ -380,16 +374,14 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-formats)
       "Accessor"
       (documentation 'drag-formats 'function)
- "@version{#2024-05-02}
+ "@version{#2025-09-29}
   @syntax{(gdk:drag-formats object) => formats}
   @argument[object]{a @class{gdk:drag} object}
   @argument[formats]{a @class{gdk:content-formats} object}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{formats} slot of the @class{gdk:drag}
-    class.
+    The accessor for the @slot[gdk:drag]{formats} slot of the @class{gdk:drag}
+    class returns the formats supported by the drag object.
   @end{short}
-  The @fun{gdk:drag-formats} function retrieves the formats supported by the
-  drag object.
   @see-class{gdk:drag}
   @see-class{gdk:content-formats}")
 
@@ -429,16 +421,14 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-surface)
       "Accessor"
       (documentation 'drag-surface 'function)
- "@version{#2024-05-02}
+ "@version{#2025-09-29}
   @syntax{(gdk:drag-surface object) => surface}
   @argument[object]{a @class{gdk:drag} object}
   @argument[surface]{a @class{gdk:surface} object where the drag originates}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{surface} slot of the @class{gdk:drag}
-    class.
+    The accessor for the @slot[gdk:drag]{surface} slot of the @class{gdk:drag}
+    class returns the surface where the drag originates.
   @end{short}
-  The @fun{gdk:drag-surface} function returns the surface where the drag
-  originates.
   @see-class{gdk:drag}
   @see-class{gdk:surface}")
 

@@ -126,19 +126,17 @@ lambda (manager display)    :run-last
 (setf (liber:alias-for-function 'display-manager-default-display)
       "Accessor"
       (documentation 'display-manager-default-display 'function)
- "@version{2024-07-10}
+ "@version{2025-09-29}
   @syntax{(gdk:display-manager-default-display object) => display}
   @syntax{(setf (gdk:display-manager-default-display object) display)}
   @argument[object]{a @class{gdk:display-manager} object}
   @argument[display]{a default @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:display-manager]{default-display} slot of the
-    @class{gdk:display-manager} class.
+    The accessor for the @slot[gdk:display-manager]{default-display} slot of the
+    @class{gdk:display-manager} class gets or sets the default
+    @class{gdk:display} object.
   @end{short}
-  The @fun{gdk:display-manager-default-display} function gets the default
-  @class{gdk:display} object, or @code{nil} if there is no default display. The
-  @setf{gdk:display-manager-default-display} function sets @arg{display}
-  as the default display.
+  Returns @code{nil} if there is no default display.
   @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:display-manager-default-display (gdk:display-manager-get))

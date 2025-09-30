@@ -158,18 +158,17 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-content)
       "Accessor"
       (documentation 'clipboard-content 'function)
- "@version{2023-07-30}
+ "@version{2025-09-29}
   @syntax{(gdk:clipboard-content object) => content}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[content]{a @class{gdk:content-provider} instance}
   @begin{short}
-    Accessor of the @slot[gdk:clipboard]{content} slot of the
-    @class{gdk:clipboard} class.
+    The accessor for the @slot[gdk:clipboard]{content} slot of the
+    @class{gdk:clipboard} class returns the @class{gdk:content-provider} object
+    currently set on @arg{clipboard}.
   @end{short}
-  The @fun{gdk:clipboard-content} function returns the
-  @class{gdk:content-provider} object currently set on @arg{clipboard}. If the
-  clipboard is empty or its contents are not owned by the current process,
-  @code{nil} will be returned.
+  If the clipboard is empty or its contents are not owned by the current
+  process, @code{nil} will be returned.
   @begin[Notes]{dictionary}
     The @slot[gdk:clipboard]{content} property is not writeable. Use the
     @fun{gdk:clipboard-set-content} function to set the content provider.
@@ -190,16 +189,15 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-display)
       "Accessor"
       (documentation 'clipboard-display 'function)
- "@version{2023-07-30}
+ "@version{2025-09-29}
   @syntax{(gdk:clipboard-display object) => display}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:clipboard]{display} slot of the
-    @class{gdk:clipboard} class.
+    The accessor for the @slot[gdk:clipboard]{display} slot of the
+    @class{gdk:clipboard} class returns the display that the clipboard was
+    created for.
   @end{short}
-  The @fun{gdk:clipboard-display} function returns the display that the
-  clipboard was created for.
   @see-class{gdk:clipboard}
   @see-class{gdk:display}")
 
@@ -214,16 +212,15 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-formats)
       "Accessor"
       (documentation 'clipboard-formats 'function)
- "@version{2023-07-30}
+ "@version{2025-09-29}
   @syntax{(gdk:clipboard-formats object) => formats}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{short}
-    Accessor of the @slot[gdk:clipboard]{formats} slot of the
-    @class{gdk:clipboard} class.
+    The accessor for the @slot[gdk:clipboard]{formats} slot of the
+    @class{gdk:clipboard} class returns the formats that the clipboard can
+    provide its current contents in.
   @end{short}
-  The @fun{gdk:clipboard-formats} function gets the formats that the clipboard
-  can provide its current contents in.
   @see-class{gdk:clipboard}
   @see-class{gdk:content-formats}")
 
@@ -239,16 +236,15 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-local)
       "Accessor"
       (documentation 'clipboard-local 'function)
- "@version{2023-07-30}
+ "@version{2025-09-29}
   @syntax{(gdk:clipboard-local object) => local}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[local]{a boolean whether the contents of the clipboard are owned
     by this process}
   @begin{short}
-    Accessor of the @slot[gdk:clipboard]{local} slot of the
-    @class{gdk:clipboard} class.
+    The accessor for the @slot[gdk:clipboard]{local} slot of the
+    @class{gdk:clipboard} class returns whether the clipboard is local.
   @end{short}
-  The @fun{gdk:clipboard-local} function returns whether the clipboard is local.
   See also the @fun{gdk:clipboard-is-local} function.
   @see-class{gdk:clipboard}
   @see-function{gdk:clipboard-is-local}")

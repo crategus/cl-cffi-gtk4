@@ -112,13 +112,13 @@
 (setf (liber:alias-for-function 'rectangle-x)
       "Accessor"
       (documentation 'rectangle-x 'function)
- "@version{2025-06-30}
+ "@version{2025-09-29}
   @syntax{(gdk:rectangle-x instance) => x}
   @syntax{(setf (gdk:rectangle-x instance) x)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[x]{an integer for the x coordinate of the rectangle}
   @begin{short}
-    Accessor of the @code{x} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{x} slot of the @class{gdk:rectangle} structure.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -128,13 +128,13 @@
 (setf (liber:alias-for-function 'rectangle-y)
       "Accessor"
       (documentation 'rectangle-y 'function)
- "@version{2025-06-30}
+ "@version{2025-09-29}
   @syntax{(gdk:rectangle-y instance) => y}
   @syntax{(setf (gdk:rectangle-y instance) y)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[y]{an integer for the y coordinate of the rectangle}
   @begin{short}
-    Accessor of the @code{y} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{y} slot of the @class{gdk:rectangle} structure.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -144,13 +144,14 @@
 (setf (liber:alias-for-function 'rectangle-width)
       "Accessor"
       (documentation 'rectangle-width 'function)
- "@version{2025-06-30}
+ "@version{2025-09-29}
   @syntax{(gdk:rectangle-width instance) => width}
   @syntax{(setf (gdk:rectangle-width instance) width)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[width]{an integer for the width of the rectangle}
   @begin{short}
-    Accessor of the @code{width} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{width} slot of the @class{gdk:rectangle}
+    structure.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -160,13 +161,14 @@
 (setf (liber:alias-for-function 'rectangle-height)
       "Accessor"
       (documentation 'rectangle-height 'function)
- "@version{2025-06-30}
+ "@version{2025-09-29}
   @syntax{(gdk:rectangle-height instance) => height}
   @syntax{(setf (gdk:rectangle-height instance) height)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[height]{an integer for the height of the rectangle}
   @begin{short}
-    Accessor of the @code{height} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{height} slot of the @class{gdk:rectangle}
+    structure.
   @end{short}
   @see-class{gdk:rectangle}")
 

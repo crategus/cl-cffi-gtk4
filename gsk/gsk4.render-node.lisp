@@ -666,9 +666,9 @@
 
 (cffi:defcfun ("gsk_render_node_ref" render-node-ref) render-node
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2025-09-29}
   @argument[node]{a @class{gsk:render-node} instance}
-  @return{The @class{gsk:render-node} instance with an additional reference.}
+  @return{The @class{gsk:render-node} instance for an additional reference.}
   @short{Acquires a reference on the given render node.}
   @see-class{gsk:render-node}"
   (node render-node))

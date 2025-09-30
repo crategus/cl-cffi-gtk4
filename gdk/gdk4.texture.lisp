@@ -364,16 +364,15 @@
 (setf (liber:alias-for-function 'texture-color-state)
       "Accessor"
       (documentation 'texture-color-state 'function)
- "@version{2025-03-11}
+ "@version{2025-09-29}
   @syntax{(gdk:texture-color-state object) => state}
   @argument[object]{a @class{gdk:texture} object}
   @argument[state]{a @class{gdk:color-state} instance}
   @begin{short}
-    Accessor of the @slot[gdk:texture]{color-state} slot of the
-    @class{gdk:texture} class.
+    The accessor for the @slot[gdk:texture]{color-state} slot of the
+    @class{gdk:texture} class returns the color state associated with the
+    texture.
   @end{short}
-  The @fun{gdk:texture-color-state} function returns the color state associated
-  with the texture.
 
   Since 4.16
   @see-class{gdk:texture}
@@ -422,7 +421,7 @@
   @argument[object]{a @class{gdk:texture} object}
   @argument[width]{an integer for the width of the texture}
   @begin{short}
-    The accessor of the @slot[gdk:texture]{width} slot of the
+    The accessor for the @slot[gdk:texture]{width} slot of the
     @class{gdk:texture} class returns the width of the texture, in pixels.
   @end{short}
   @see-class{gdk:texture}")

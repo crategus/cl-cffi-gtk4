@@ -208,14 +208,14 @@ lambda (seat tool)    :run-last
 (setf (liber:alias-for-function 'seat-display)
       "Accessor"
       (documentation 'seat-display 'function)
- "@version{2024-07-12}
+ "@version{2025-09-29}
   @syntax{(gdk:seat-display object) => display}
   @argument[object]{a @class{gdk:seat} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    Accessor of the @slot[gdk:seat]{display} slot of the @class{gdk:seat} class.
+    The accessor for the @slot[gdk:seat]{display} slot of the @class{gdk:seat}
+    class returns the display this seat belongs to.
   @end{short}
-  The @fun{gdk:seat-display} function returns the display this seat belongs to.
   @see-class{gdk:seat}
   @see-class{gdk:display}")
 
