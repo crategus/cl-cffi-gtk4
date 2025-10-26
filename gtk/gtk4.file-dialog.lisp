@@ -66,6 +66,13 @@
 ;;;     gtk_file_dialog_select_multiple_folders
 ;;;     gtk_file_dialog_select_multiple_folders_finish
 ;;;
+;;;     gtk_file_dialog_open_multiple_text_files            Since 4.18
+;;;     gtk_file_dialog_open_multiple_text_files_finish     Since 4.18
+;;;     gtk_file_dialog_open_text_file                      Since 4.18
+;;;     gtk_file_dialog_open_text_file_finish               Since 4.18
+;;;     gtk_file_dialog_save_text_file                      Since 4.18
+;;;     gtk_file_dialog_save_text_file_finish               Since 4.18
+;;;
 ;;; Properties
 ;;;
 ;;;     accept-label
@@ -801,5 +808,29 @@
     (%file-dialog-select-multiple-folders-finish dialog result err)))
 
 (export 'file-dialog-select-multiple-folders-finish)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_open_multiple_text_files                Since 4.18
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_open_multiple_text_files_finish         Since 4.18
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_open_text_file                          Since 4.18
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_open_text_file_finish                   Since 4.18
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_save_text_file                          Since 4.18
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_save_text_file_finish                   Since 4.18
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.file-dialog.lisp --------------------------------------
