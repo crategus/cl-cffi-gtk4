@@ -51,7 +51,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-adjustment-properties
-  (let ((adjustment (make-instance 'gtk:adjustment)))
+  (glib-test:with-check-memory (adjustment)
+    (is (typep (setf adjustment
+                     (make-instance 'gtk:adjustment)) 'gtk:adjustment))
     ;; adjustment-lower
     (is (= 0.0d0 (gtk:adjustment-lower adjustment)))
     (is (= 1.0d0 (setf (gtk:adjustment-lower adjustment) 1.0d0)))
@@ -74,36 +76,46 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 (test gtk-adjustment-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "changed" "GtkAdjustment"))))
-    (is (string= "changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkAdjustment"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "changed")
+         (gtype (g:gtype "GtkAdjustment"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:NO-RECURSE :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 (test gtk-adjustment-value-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "value-changed"
-                                                "GtkAdjustment"))))
-    (is (string= "value-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkAdjustment"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "value-changed")
+         (gtype (g:gtype "GtkAdjustment"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:NO-RECURSE :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_adjustment_new
 
 (test gtk-adjustment-new
-  (let ((adjustment (gtk:adjustment-new 10.0 1 20 1/2 3/4 2.5d0)))
+  (glib-test:with-check-memory (adjustment)
+    (is (typep (setf adjustment
+                     (gtk:adjustment-new 10.0 1 20 1/2 3/4 2.5d0))
+               'gtk:adjustment))
     (is (= 10.00d0 (gtk:adjustment-value adjustment)))
     (is (=  1.00d0 (gtk:adjustment-lower adjustment)))
     (is (= 20.00d0 (gtk:adjustment-upper adjustment)))
@@ -114,7 +126,9 @@
 ;;;     gtk_adjustment_clamp_page
 
 (test gtk-adjustment-clamp-page
-  (let ((adjustment (gtk:adjustment-new 10 0 20 0 0 0)))
+  (glib-test:with-check-memory (adjustment)
+    (is (typep (setf adjustment
+                     (gtk:adjustment-new 10 0 20 0 0 0)) 'gtk:adjustment))
     (is (= 10 (gtk:adjustment-value adjustment)))
     (is (=  0 (gtk:adjustment-lower adjustment)))
     (is (= 20 (gtk:adjustment-upper adjustment)))
@@ -124,6 +138,26 @@
     (is (= 20 (gtk:adjustment-upper adjustment)))))
 
 ;;;     gtk_adjustment_configure
+
+(test gtk-adjustment-configure
+  (glib-test:with-check-memory (adjustment)
+    (is (typep (setf adjustment
+                     (make-instance 'gtk:adjustment)) 'gtk:adjustment))
+    (is-false (gtk:adjustment-configure adjustment 2 1.0 4.0 1/2 1 5))
+    (is (= 1.0d0 (gtk:adjustment-value adjustment)))
+    (is (= 1.0d0 (gtk:adjustment-lower adjustment)))
+    (is (= 4.0d0 (gtk:adjustment-upper adjustment)))
+    (is (= 0.5d0 (gtk:adjustment-step-increment adjustment)))
+    (is (= 1.0d0 (gtk:adjustment-page-increment adjustment)))
+    (is (= 5.0d0 (gtk:adjustment-page-size adjustment)))))
+
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; 2024-9-19
+(test gtk-adjustment-minimum-increment
+  (glib-test:with-check-memory (adjustment)
+    (is (typep (setf adjustment
+                     (gtk:adjustment-new 10.0 1 20 1/2 3/4 2.5d0))
+               'gtk:adjustment))
+    (is (= 0.5 (gtk:adjustment-minimum-increment adjustment)))))
+
+;;; 2025-10-25
