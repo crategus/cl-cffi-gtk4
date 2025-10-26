@@ -34,6 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkWidget
+;;;     GtkWidgetClass
 ;;;
 ;;;     GtkRequisition
 ;;;     GtkAllocation                                     not implemented
@@ -488,6 +489,267 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_requisition_free                                    not needed
 ;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GtkWidgetClass
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcstruct widget-class
+  ;; Parent class
+  (:parent-class (:struct gobject:object-class))
+  ;; Virtual functions
+  (show :pointer)
+  (hide :pointer)
+  (map :pointer)
+  (unmap :pointer)
+  (realize :pointer)
+  (unrealize :pointer)
+  (root :pointer)
+  (unroot :pointer)
+  (size-allocate :pointer)
+  (state-flags-changed :pointer)
+  (direcion-changed :pointer)
+  (get-request-mode :pointer)
+  (measure :pointer)
+  (mnemonic-activate :pointer)
+  (grab-focus :pointer)
+  (focus :pointer)
+  (set-focus-child :pointer)
+  (move-focus :pointer)
+  (keynav-failed :pointer)
+  (query-tooltip :pointer)
+  (compute-expand :pointer)
+  (css-changed :pointer)
+  (system-setting-changed :pointer)
+  (snapshot :pointer)
+  (contains :pointer)
+  ;; Private
+  (priv :pointer)
+  (padding :pointer :count 8))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'widget-class)
+      "CStruct"
+      (liber:symbol-documentation 'widget-class)
+ "@version{2025-10-22}
+  @begin{declaration}
+(cffi:defcstruct widget-class
+  ;; Parent class
+  (:parent-class (:struct gobject:object-class))
+  ;; Virtual functions
+  (show :pointer)
+  (hide :pointer)
+  (map :pointer)
+  (unmap :pointer)
+  (realize :pointer)
+  (unrealize :pointer)
+  (root :pointer)
+  (unroot :pointer)
+  (size-allocate :pointer)
+  (state-flags-changed :pointer)
+  (direcion-changed :pointer)
+  (get-request-mode :pointer)
+  (measure :pointer)
+  (mnemonic-activate :pointer)
+  (grab-focus :pointer)
+  (focus :pointer)
+  (set-focus-child :pointer)
+  (move-focus :pointer)
+  (keynav-failed :pointer)
+  (query-tooltip :pointer)
+  (compute-expand :pointer)
+  (css-changed :pointer)
+  (system-setting-changed :pointer)
+  (snapshot :pointer)
+  (contains :pointer)
+  ;; Private
+  (priv :pointer)
+  (padding :pointer :count 8))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[parent-class]{The object class structure needs to be the first
+        element in the widget class structure in order for the class mechanism
+        to work correctly.}
+      @entry[show]{Signal emitted when the widget is shown.}
+      @entry[hide]{Signal emitted when the widget is hidden.}
+      @entry[map]{Signal emitted when the widget is going to be mapped, that is
+        when the widget is visible, which is controlled with the
+        @fun{gtk:widget-visible} function and all its parents up to the toplevel
+        widget are also visible.}
+      @entry[unmap]{Signal emitted when the widget is going to be unmapped,
+        which means that either it or any of its parents up to the toplevel
+        widget have been set as hidden.}
+      @entry[realize]{Signal emitted when the widget is associated with a
+        @class{gdk:surface} object, which means that the
+        @fun{gtk:widget-realize} function has been called or the widget has been
+        mapped, that is, it is going to be drawn.}
+      @entry[unrealize]{Signal emitted when the @class{gdk:surface} object
+        associated with the widget is destroyed, which means that the
+        @fun{gtk:widget-unrealize} function has been called or the widget has
+        been unmapped, that is, it is going to be hidden.}
+      @entry[root]{Called when the widget gets added to a @class{gtk:root}
+        widget. Must chain up.}
+      @entry[unroot]{Called when the widget is about to be removed from its
+        @class{gtk:root} widget. Must chain up.}
+      @entry[size-allocate]{Called to set the allocation, if the widget does not
+        have a layout manager.}
+      @entry[state-flags-changed]{Signal emitted when the widget state changes,
+        see the @fun{gtk:widget-state-flags} function.}
+      @entry[direction-changed]{Signal emitted when the text direction of a
+        widget changes.}
+      @entry[get-request-mode]{Called to get the request mode, if the widget
+        does not have a layout manager. This allows a widget to tell its parent
+        container whether it prefers to be allocated in
+        @val[gtk:size-request-mode]{:height-for-width} or
+        @val[gtk:size-request-mode]{:width-for-height} mode. The
+        @val[gtk:size-request-mode]{:height-for-width} value means the widget
+        prefers to have @code{GtkWidgetClass.measure()} called first to get the
+        default width (passing a @arg{for-size} of -1), then again to get the
+        height for said default width. The
+        @val[gtk:size-request-mode]{:constant-size} value disables any
+        height-for-width or width-for-height geometry management for said widget
+        and is the default return. It is important to note that any widget which
+        trades height-for-width or width-for-height must respond properly to a
+        @arg{for-size} value >= -1 passed to @code{GtkWidgetClass.measure}, for
+        both possible orientations.}
+      @entry[measure]{Called to obtain the minimum and natural size of the
+        widget, if the widget does not have a layout manager. Depending on the
+        orientation parameter, the passed @arg{for-size} can be interpreted as
+        width or height. A widget will never be allocated less than its minimum
+        size.}
+      @entry[mnemonic-activate]{Activates the widget if @arg{cycling} is
+        @em{false}, and just grabs the focus if @arg{cycling} is @em{true}.}
+      @entry[grab-focus]{Causes the widget to have the keyboard focus for the
+        @code{GtkWindow} it is inside.}
+      @entry[focus]{Virtual function for the @fun{gtk:widget-child-focus}
+        function.}
+      @entry[set-focus-child]{Sets the focused child of the widget. Must chain
+        up.}
+      @entry[move-focus]{Signal emitted when a change of focus is requested.}
+      @entry[keynav-failed]{Signal emitted if keyboard navigation fails.}
+      @entry[query-tooltip]{Signal emitted when the
+        @slot[gtk:widget]{has-tooltip} is @em{true} and the hover timeout has
+        expired with the cursor hovering \"above\" widget; or emitted when
+        widget got focus in keyboard mode.}
+      @entry[compute-expand]{Computes whether a container should give the
+        widget extra space when possible.}
+      @entry[css-changed]{Called when the CSS used by the widget was changed.
+        Widgets should then discard their caches that depend on CSS and queue
+        resizes or redraws accordingly. The default implementation will take
+        care of this for all the default CSS properties, so implementations must
+        chain up.}
+      @entry[system-setting-changed]{Emitted when a system setting was changed.
+        Must chain up.}
+      @entry[snapshot]{Called when a new snapshot of the widget has to be
+        taken.}
+      @entry[contains]{Virtual function for the @fun{gtk:widget-contains}
+       function.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    The class structure for the @class{gtk:widget} class.
+  @end{short}
+  The main purpose for the Lisp API user is to use the size of the
+  @symbol{gtk:widget-class} structure and the documentation to implement virtual
+  function tables for subclasses of the @class{gtk:widget} class.
+  @see-class{gtk:widget}
+  @see-symbol{gtk:widget-vtable}
+  @see-macro{gobject:define-vtable}
+  @see-macro{gobject:define-gobject-subclass}")
+
+(export 'widget-class)
+
+;;; ----------------------------------------------------------------------------
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'widget-vtable)
+      "VTable"
+      (liber:symbol-documentation 'widget-vtable)
+ "@version{2025-10-25}
+  @begin{declaration}
+(gobject:define-vtable (\"MyWidget\" my-widget)
+  ;; Parent class
+  (:skip parent-instance (:struct gobject:object-class))
+  ;; Virtual functions
+  (show                   (:void (widget (g:object gtk:widget))))
+  (hide                   (:void (widget (g:object gtk:widget))))
+  (map                    (:void (widget (g:object gtk:widget))))
+  (unmap                  (:void (widget (g:object gtk:widget))))
+  (realize                (:void (widget (g:object gtk:widget))))
+  (unrealize              (:void (widget (g:object gtk:widget))))
+  (root                   (:void (widget (g:object gtk:widget))))
+  (unroot                 (:void (widget (g:object gtk:widget))))
+  (size-allocate          (:void
+                           (widget (g:object gtk:widget))
+                           (width :int)
+                           (height :int)
+                           (baseline :int)))
+  (state-flags-changed    (:void
+                           (widget (g:object gtk:widget))
+                           (previous gtk:state-flags)))
+  (direction-changed      (:void
+                           (widget (g:object gtk:widget))
+                           (previous gtk:text-direction)))
+  (get-request-mode       (gtk:size-request-mode
+                           (widget (g:object gtk:widget))))
+  (measure                (:void
+                           (widget (g:object gtk:widget))
+                           (orientation gtk:orientation)
+                           (for-size :int)
+                           (minimum :int)
+                           (natural :int)
+                           (minimum-baseline :int)
+                           (natural-baseline :int)))
+  (mnemonic-activate      (:boolean
+                           (widget (g:object gtk:widget))
+                           (cycling :boolean)))
+  (grab-focus             (:boolean (widget (g:object gtk:widget))))
+  (focus                  (:boolean
+                           (widget (g:object gtk:widget))
+                           (direction gtk:direction-type)))
+  (set-focus-child        (:void
+                           (widget (g:object gtk:widget))
+                           (child (g:object gtk:widget))))
+  (move-focus             (:void
+                           (widget (g:object gtk:widget))
+                           (direction gtk:direction-type)))
+  (keynav-failed          (:boolean
+                           (widget (g:object gtk:widget))
+                           (direction gtk:direction-type)))
+  (query-tooltip          (:boolean
+                           (widget (g:object gtk:widget))
+                           (x :int)
+                           (y :int)
+                           (keyboard-tooltip :boolean)
+                           (tooltip (g:object gtk:tooltip))))
+  (compute-expand         (:void
+                           (widget (g:object gtk:widget))
+                           (hexpand-p :boolean)
+                           (vexpand-p :boolean)))
+  (css-changed            (:void
+                           (widget (g:object gtk:widget))
+                           (change :pointer))) ; for GtkCssStyleChange structure
+  (system-setting-changed (:void
+                           (widget (g:object gtk:widget))
+                           (settings gtk:system-setting)))
+  (snapshot               (:void
+                           (widget (g:object gtk:widget))
+                           (snapshot (g:object gtk:snapshot))))
+  (contains               (:boolean
+                           (widget (g:object gtk:widget))
+                           (x :double)
+                           (y :double))))
+  @end{declaration}
+  @begin{short}
+    Virtual function table for a widget that is subclassed from the
+    @class{gtk:widget} class.
+  @end{short}
+  @see-class{gtk:widget}
+  @see-symbol{gtk:widget-class}
+  @see-macro{gobject:define-vtable}")
+
+(export 'widget-vtable)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkWidget
@@ -4394,7 +4656,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2025-10-23}
   @syntax{(gtk:widget-state-flags widget) => flags}
   @syntax{(setf (gtk:widget-state-flags widget clear) flags)}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4402,11 +4664,8 @@ lambda (widget)    :run-last
   @argument[clear]{an optional boolean whether to clear the state flags before
     turning on flags}
   @begin{short}
-    The @fun{gtk:widget-state-flags} function returns the widget state as a
-    flag set.
+    Gets or sets the widget state as a flag set.
   @end{short}
-  The @setf{gtk:widget-state-flags} function sets the widget state flags.
-
   It is worth mentioning that the effective @val[gtk:state-flags]{:insensitive}
   state will be returned, that is, also based on parent insensitivity, even if
   @arg{widget} itself is sensitive.
