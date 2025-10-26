@@ -53,7 +53,8 @@
          ;; Create a Cairo context to check the properties
          (context (gdk:surface-create-cairo-context surface)))
     (is (eq (gdk:display-default) (gdk:draw-context-display context)))
-    (is (eq surface (gdk:draw-context-surface context)))))
+    (is (eq surface (gdk:draw-context-surface context)))
+    (is-false (gdk:surface-destroy surface))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -62,4 +63,4 @@
 ;;;     gdk_draw_context_is_in_frame                        Deprecated 4.16
 ;;;     gdk_draw_context_get_frame_region                   Deprecated 4.16
 
-;;; 2024-11-29
+;;; 2025-10-26

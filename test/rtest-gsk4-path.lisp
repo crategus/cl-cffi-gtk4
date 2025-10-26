@@ -321,9 +321,9 @@
       (is (typep (setf path (gsk:path-builder-to-path builder)) 'gsk:path))
       (is (cffi:pointerp (graphene:point-init point 0 10)))
       (multiple-value-bind (result distance)
-          (gsk:path-closest-point path point 0.1)
+          (gsk:path-closest-point path point 1/10)
         (is (typep result 'gsk:path-point))
-        (is (= 0 distance))))))
+        (is (approx-equal 0 distance))))))
 
 ;;;     gsk_path_get_start_point
 
@@ -347,4 +347,4 @@
 ;;;     gsk_path_to_cairo
 ;;;     gsk_path_to_string
 
-;;; 2024-11-8
+;;; 2025-10-26

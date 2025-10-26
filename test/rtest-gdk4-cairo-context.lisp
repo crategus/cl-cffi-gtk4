@@ -49,7 +49,8 @@
 ;;;     gdk_cairo_context_cairo_create
 
 (test gdk-cairo-context-cairo-create
-  (let* ((surface (gdk:surface-new-toplevel (gdk:display-default))))
-    (is (typep (gdk:surface-create-cairo-context surface) 'gdk:cairo-context))))
+  (let ((surface (gdk:surface-new-toplevel (gdk:display-default))))
+    (is (typep (gdk:surface-create-cairo-context surface) 'gdk:cairo-context))
+    (is-false (gdk:surface-destroy surface))))
 
-;;; 2025-09-18
+;;; 2025-10-26

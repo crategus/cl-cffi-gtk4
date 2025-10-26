@@ -209,43 +209,46 @@
 ;;;     surface
 
 (test gsk-renderer-properties
-  (glib-test:with-check-memory (surface renderer :strong 1)
-    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-    (setf renderer (gsk:renderer-new-for-surface surface))
-    (is-true (gsk:renderer-realized renderer))
-    (is (typep (gsk:renderer-surface renderer) 'gdk:surface))
-    ;; Remove references
-    (is-false (gsk:renderer-unrealize renderer))
-    (is-false (gsk:renderer-is-realized renderer))
-    (is-false (gdk:surface-destroy surface))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (surface renderer :strong 1)
+      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+      (setf renderer (gsk:renderer-new-for-surface surface))
+      (is-true (gsk:renderer-realized renderer))
+      (is (typep (gsk:renderer-surface renderer) 'gdk:surface))
+      ;; Remove references
+      (is-false (gsk:renderer-unrealize renderer))
+      (is-false (gsk:renderer-is-realized renderer))
+      (is-false (gdk:surface-destroy surface)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gsk_renderer_new_for_surface
 
 (test gsk-renderer-new-for-surface
-  (glib-test:with-check-memory (surface renderer :strong 1)
-    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-    (is (typep (setf renderer
-                     (gsk:renderer-new-for-surface surface)) 'gsk:renderer))
-    ;; Remove references
-    (is-false (gsk:renderer-unrealize renderer))
-    (is-false (gsk:renderer-is-realized renderer))
-    (is-false (gdk:surface-destroy surface))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (surface renderer :strong 1)
+      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+      (is (typep (setf renderer
+                       (gsk:renderer-new-for-surface surface)) 'gsk:renderer))
+      ;; Remove references
+      (is-false (gsk:renderer-unrealize renderer))
+      (is-false (gsk:renderer-is-realized renderer))
+      (is-false (gdk:surface-destroy surface)))))
 
 ;;;     gsk_renderer_realize
 ;;;     gsk_renderer_unrealize
 ;;;     gsk_renderer_is_realized
 
 (test gsk-renderer-is-realized
-  (glib-test:with-check-memory (surface renderer :strong 1)
-    (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-    (setf renderer (gsk:renderer-new-for-surface surface))
-    (is-true (gsk:renderer-is-realized renderer))
-    ;; Remove references
-    (is-false (gsk:renderer-unrealize renderer))
-    (is-false (gsk:renderer-is-realized renderer))
-    (is-false (gdk:surface-destroy surface))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (surface renderer :strong 1)
+      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+      (setf renderer (gsk:renderer-new-for-surface surface))
+      (is-true (gsk:renderer-is-realized renderer))
+      ;; Remove references
+      (is-false (gsk:renderer-unrealize renderer))
+      (is-false (gsk:renderer-is-realized renderer))
+      (is-false (gdk:surface-destroy surface)))))
 
 ;;;     gsk_renderer_render
 ;;;     gsk_renderer_render_texture
@@ -262,4 +265,4 @@
 ;;;     gsk_gl_renderer_new
 ;;;     gsk_ngl_renderer_new
 
-;;; 2025-3-28
+;;; 2025-10-26

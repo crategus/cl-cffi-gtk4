@@ -7,6 +7,34 @@
 
 ;;;     GtkTextViewLayer
 
+(test gtk-text-view-layer
+  ;; Check type
+  (is (g:type-is-enum "GtkTextViewLayer"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkTextViewLayer")
+          (g:gtype (cffi:foreign-funcall "gtk_text_view_layer_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:text-view-layer
+          (glib:symbol-for-gtype "GtkTextViewLayer")))
+  ;; Check names
+  (is (equal '("GTK_TEXT_VIEW_LAYER_BELOW_TEXT"
+               "GTK_TEXT_VIEW_LAYER_ABOVE_TEXT")
+             (glib-test:list-enum-item-names "GtkTextViewLayer")))
+  ;; Check values
+  (is (equal '(0 1)
+             (glib-test:list-enum-item-values "GtkTextViewLayer")))
+  ;; Check nick names
+  (is (equal '("below-text" "above-text")
+             (glib-test:list-enum-item-nicks "GtkTextViewLayer")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkTextViewLayer" GTK:TEXT-VIEW-LAYER
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_text_view_layer_get_type")
+                                    (:BELOW-TEXT 0)
+                                    (:ABOVE-TEXT 1))
+             (gobject:get-gtype-definition "GtkTextViewLayer"))))
+
 ;;;     GtkTextWindowType
 
 (test gtk-text-window-type
@@ -306,6 +334,7 @@
 ;;;     gtk_text_view_move_mark_onscreen
 ;;;     gtk_text_view_place_cursor_onscreen
 ;;;     gtk_text_view_get_visible_rect
+;;;     gtk_text_view_get_visible_offset                    Since 4.18
 ;;;     gtk_text_view_get_iter_location
 ;;;     gtk_text_view_get_cursor_locations
 ;;;     gtk_text_view_get_line_at_y
@@ -333,4 +362,4 @@
 ;;;     gtk_text_view_get_ltr_context                      Since 4.4
 ;;;     gtk_text_view_get_rtl_context                      Since 4.4
 
-;;; 2024-10-26
+;;; 2025-10-23

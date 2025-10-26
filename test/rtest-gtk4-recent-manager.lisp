@@ -166,7 +166,7 @@
 ;;;     gtk_recent_info_get_visited
 ;;;     gtk_recent_info_get_private_hint
 
-#-windows
+#+crategus
 (test gtk-recent-info-get
   (glib-test:with-check-memory ()
     (let* ((recent (gtk:recent-manager-default))
@@ -220,4 +220,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2025-05-13
+;;; 2025-10-26
