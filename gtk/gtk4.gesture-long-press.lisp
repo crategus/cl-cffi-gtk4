@@ -79,17 +79,17 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-long-press 'type)
- "@version{2025-09-28}
+ "@version{2025-10-19}
   @begin{short}
     The @class{gtk:gesture-long-press} object is a gesture for long presses.
   @end{short}
   This gesture is also known as \"Press and Hold\".
 
-  When the timeout is exceeded, the gesture is triggering the @code{\"pressed\"}
-  signal. If the touchpoint is lifted before the timeout passes, or if it drifts
-  too far of the initial press point, the
-  @sig[gtk:gesture-long-press]{cancelled} signal will be emitted. How long the
-  timeout is before the @sig[gtk:gesture-long-press]{pressed} signal gets
+  When the timeout is exceeded, the gesture is triggering the
+  @sig[gtk:gesture-long-press]{pressed} signal. If the touchpoint is lifted
+  before the timeout passes, or if it drifts too far of the initial press point,
+  the @sig[gtk:gesture-long-press]{cancelled} signal will be emitted. How long
+  the timeout is before the @sig[gtk:gesture-long-press]{pressed} signal gets
   emitted is determined by the @slot[gtk:settings]{gtk-long-press-time} setting.
   It can be modified by the @slot[gtk:gesture-long-press]{delay-factor}
   property.
