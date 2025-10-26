@@ -34,6 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkTextView
+;;;     GtkTextViewClass
 ;;;
 ;;;     GtkTextViewLayer
 ;;;     GtkTextWindowType
@@ -100,6 +101,7 @@
 ;;;     gtk_text_view_move_mark_onscreen
 ;;;     gtk_text_view_place_cursor_onscreen
 ;;;     gtk_text_view_get_visible_rect
+;;;     gtk_text_view_get_visible_offset                    Since 4.18
 ;;;     gtk_text_view_get_iter_location
 ;;;     gtk_text_view_get_cursor_locations
 ;;;     gtk_text_view_get_line_at_y
@@ -200,17 +202,41 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkTextViewLayer
-;;;
-;;; Used to reference the layers of GtkTextView for the purpose of customized
-;;; drawing with the ::snapshot_layer vfunc.
-;;
-;;; GTK_TEXT_VIEW_LAYER_BELOW_TEXT :
-;;;     The layer rendered below the text (but above the background).
-;;;
-;;; GTK_TEXT_VIEW_LAYER_ABOVE_TEXT :
-;;;     The layer rendered above the text.
+;;; GtkTextViewLayer
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-genum "GtkTextViewLayer" text-view-layer
+  (:export t
+   :type-initializer "gtk_text_view_layer_get_type")
+  (:below-text 0)
+  (:abvove-text 1))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'text-view-layer)
+      "GEnum"
+      (liber:symbol-documentation 'text-view-layer)
+ "@version{2025-10-22}
+  @begin{declaration}
+(gobject:define-genum \"GtkTextViewLayer\" text-view-layer
+  (:export t
+   :type-initializer \"gtk_text_view_layer_get_type\")
+  (:below-text 0)
+  (:abvove-text 1))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:below-text]{The layer rendered below the text, but above the
+        background.}
+      @entry[:above-text]{The layer rendered above the text.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Used to reference the layers of the @class{gtk:text-view} widget for the
+    purpose of customized drawing with the @code{::snapshot_layer} virtual
+    function.
+  @end{short}")
+
+(export 'text-view-layer)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextWindowType
@@ -419,6 +445,154 @@
   (anchor (g:object text-child-anchor)))
 
 (export 'text-child-anchor-deleted)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkTextViewClass
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcstruct text-view-class
+  ;; Parent class
+  (:parent-class (:struct gtk:widget-class))
+  ;; Virtual functions
+  (move-cursor :pointer)
+  (set-anchor :pointer)
+  (insert-at-cursor :pointer)
+  (delete-from-cursor :pointer)
+  (backspace :pointer)
+  (cut-clipboard :pointer)
+  (copy-clipboard :pointer)
+  (paste-clipboard :pointer)
+  (toggle-overwrite :pointer)
+  (create-buffer :pointer)
+  (snapshot-layer :pointer)
+  (extend-selection :pointer)
+  (insert-emoji :pointer)
+  ;; Private
+  (padding :pointer :count 8))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'text-view-class)
+      "CStruct"
+      (liber:symbol-documentation 'text-view-class)
+ "@version{2025-10-26}
+  @begin{declaration}
+(cffi:defcstruct text-view-class
+  ;; Parent class
+  (:parent-class (:struct gtk:widget-class))
+  ;; Virtual functions
+  (move-cursor :pointer)
+  (set-anchor :pointer)
+  (insert-at-cursor :pointer)
+  (delete-from-cursor :pointer)
+  (backspace :pointer)
+  (cut-clipboard :pointer)
+  (copy-clipboard :pointer)
+  (paste-clipboard :pointer)
+  (toggle-overwrite :pointer)
+  (create-buffer :pointer)
+  (snapshot-layer :pointer)
+  (extend-selection :pointer)
+  (insert-emoji :pointer)
+  ;; Private
+  (padding :pointer :count 8))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[parent-class]{The object class structure needs to be the first.}
+      @entry[move-cursor]{The class handler for the
+        @sig[gtk:text-view]{move-cursor} keybinding signal.}
+      @entry[set-anchor]{The class handler for the
+        @sig[gtk:text-view]{set-anchor} keybinding signal.}
+      @entry[insert-at-cursor]{The class handler for the
+        @sig[gtk:text-view]{insert-at-cursor} keybinding signal.}
+      @entry[delete-from-cursor]{The class handler for the
+        @sig[gtk:text-view]{delete-from-cursor} keybinding signal.}
+      @entry[backspace]{The class handler for the
+        @sig[gtk:text-view]{backspace} keybinding signal.}
+      @entry[cut-clipboard]{The class handler for the
+        @sig[gtk:text-view]{cut-clipboard} keybinding signal.}
+      @entry[copy-clipboard]{The class handler for the
+        @sig[gtk:text-view]{copy-clipboard} keybinding signal.}
+      @entry[past-clipboard]{The class handler for the
+        @sig[gtk:text-view]{paste-clipboard} keybinding signal.}
+      @entry[toggle-overwrite]{The class handler for the
+        @sig[gtk:text-view]{toggle-overwrite} keybinding signal.}
+      @entry[create-buffer]{This virtual function is called to create the
+        @class{gtk:text-buffer} object for the text view. The default
+        implementation is to just call the @fun{gtk:text-buffer-new} function.}
+      @entry[snapshot-layer]{This virtual function is called before and after
+        the text view is drawing its own text. Applications can override this
+        virtual function in a subclass to draw customized content underneath or
+        above the text. In the @val[gtk:text-view-layer]{:below-text} and
+        @val[gtk:text-view-layer]{:above-text} layers the drawing is done in the
+        buffer coordinate space.}
+      @entry[extend-selection]{The class handler for the
+        @sig[gtk:text-view]{extend-selection} signal.}
+      @entry[insert-emoji]{The class handler for the
+        @sig[gtk:text-view]{insert-emoji} signal.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    The class structure for the @class{gtk:text-view} class.
+  @end{short}
+  @see-class{gtk:text-view}
+  @see-symbol{gtk:text-view-layer}")
+
+(export 'text-view-class)
+
+;;; ----------------------------------------------------------------------------
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'text-view-vtable)
+      "VTable"
+      (liber:symbol-documentation 'text-view-vtable)
+ "@version{2025-10-26}
+  @begin{declaration}
+(gobject:define-vtable (\"GtkTextView\" text-view)
+  ;; Parent class
+  (:skip parent-instance (:struct gtk:widget-class))
+  ;; Virtual functions
+  (move-cursor        (:void
+                       (textview (g:object gtk:text-view))
+                       (step gtk:movement-step)
+                       (count :int)
+                       (extend-selection :boolean)))
+  (set-anchor         (:void (textview (g:object gtk:text-view))))
+  (insert-at-cursor   (:void
+                       (textview (g:object gtk:text-view))
+                       (str :string)))
+  (delete-from-cursor (:void
+                       (textview (g:object gtk:text-view))
+                       (type gtk:delete-type)
+                       (count :int)))
+  (backspace          (:void (textview (g:object gtk:text-view))))
+  (cut-clipboard      (:void (textview (g:object gtk:text-view))))
+  (copy-clipboard     (:void (textview (g:object gtk:text-view))))
+  (paste-clipboard    (:void (textview (g:object gtk:text-view))))
+  (toggle-overwrite   (:void (textview (g:object gtk:text-view))))
+  (create-buffer     ((g:object gtk:text-buffer)
+                      (textview (g:object gtk:text-view))))
+  (snapshot-layer    (:void
+                      (textview (g:object gtk:text-view))
+                      (layer gtk:text-view-layer)
+                      (snapshot (g:object gtk:snapshot))))
+  (extend-selection  (:boolean
+                      (textview (g:object gtk:text-view))
+                      (granularity gtk:text-extend-selection)
+                      (location (g:boxed gtk:iter))
+                      (start (g:boxed gtk:iter))
+                      (end (g:boxed gtk:iter))))
+  (insert-emoji      (:void (text-view (g:object gtk:text-view)))))
+  @end{declaration}
+  @begin{short}
+    Virtual function table for a widget that is subclassed from the
+    @class{gtk:text-view} class.
+  @end{short}
+  @see-class{gtk:text-view}
+  @see-symbol{gtk:text-view-class}
+  @see-symbol{gtk:widget-class}")
+
+(export 'text-view-vtable)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextView
@@ -1600,6 +1774,46 @@ lambda (view)    :action
     rect))
 
 (export 'text-view-visible-rect)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_text_view_get_visible_offset
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-18
+(cffi:defcfun ("gtk_text_view_get_visible_offset" %text-view-visible-offset)
+    :void
+  (view (g:object text-view))
+  (xoffset (:pointer :double))
+  (yoffset (:pointer :double)))
+
+#+gtk-4-18
+(defun text-view-visible-offset (view)
+ "@version{#2025-10-23}
+  @syntax{(gtk:text-view-visible-offset view) => xoffset, yoffset}
+  @argument[view]{a @class{gtk:text-view} widget}
+  @argument[xoffset]{a double float for the x offset}
+  @argument[yoffset]{a double float for the y offset}
+  @begin{short}
+    Gets the x, y offset in buffer coordinates of the top-left corner of the
+    the text view contents.
+  @end{short}
+  This allows for more precise positioning than what is provided by the
+  @fun{gtk:text-view-visible-rect} function as you can discover what device
+  pixel is being quantized for text positioning.
+
+  You might want this when making ulterior widgets align with quantized device
+  pixels of the text view contents such as line numbers.
+
+  Since 4.18
+  @see-class{gtk:text-view}
+  @see-function{gtk:text-view-visible-rect}"
+  (cffi:with-foreign-objects ((xoffset :double) (yoffset :double))
+    (%text-view-visible-offset view xoffset yoffset)
+    (values (cffi:mem-ref xoffset :double)
+            (cffi:mem-ref yoffset :double))))
+
+#+gtk-4-18
+(export 'text-view-visible-offset)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_view_get_iter_location
