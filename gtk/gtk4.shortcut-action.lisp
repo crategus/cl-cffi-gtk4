@@ -269,16 +269,24 @@
 ;;; gtk_nothing_action_get
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_nothing_action_get" nothing-action-get)
-    (g:object shortcut-action)
- #+liber-documentation
- "@version{2024-11-01}
-  @return{The @class{gtk:nothing-action} object.}
-  @begin{short}
-    Gets the nothing action.
-  @end{short}
-  This is an action that does nothing and where activating it always fails.
-  @see-class{gtk:nothing-action}")
+;; GtkNothingAction creates a global singleton object. We store and return it.
+
+(cffi:defcfun ("gtk_nothing_action_get" %nothing-action-get)
+    (g:object shortcut-action :return))
+
+(let (action)
+  (defun nothing-action-get ()
+   #+liber-documentation
+   "@version{2025-10-01}
+    @return{The @class{gtk:nothing-action} object.}
+    @begin{short}
+      Gets the nothing action.
+    @end{short}
+    This is an action that does nothing and where activating it always fails.
+    @see-class{gtk:nothing-action}"
+    (unless action
+      (setf action (%nothing-action-get)))
+    action))
 
 (export 'nothing-action-get)
 

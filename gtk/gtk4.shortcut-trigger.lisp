@@ -596,17 +596,25 @@
 ;;; gtk_never_trigger_get
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_never_trigger_get" never-trigger-get)
-    (g:object shortcut-trigger)
- #+liber-documentation
- "@version{2024-11-01}
-  @return{The @class{gtk:never-trigger} object.}
-  @begin{short}
-    Gets the never trigger.
-  @end{short}
-  This is a singleton for a trigger that never triggers. Use this trigger
-  because it implements all virtual functions.
-  @see-class{gtk:never-trigger}")
+;; GtkNeverTrigger creates a global singleton object. We store and return it.
+
+(cffi:defcfun ("gtk_never_trigger_get" %never-trigger-get)
+    (g:object shortcut-trigger :return))
+
+(let (trigger)
+  (defun never-trigger-get ()
+   #+liber-documentation
+   "@version{2025-10-01}
+    @return{The @class{gtk:never-trigger} object.}
+    @begin{short}
+      Gets the never trigger.
+    @end{short}
+    This is a singleton for a trigger that never triggers. Use this trigger
+    because it implements all virtual functions.
+    @see-class{gtk:never-trigger}"
+    (unless trigger
+      (setf trigger (%never-trigger-get)))
+  trigger))
 
 (export 'never-trigger-get)
 
