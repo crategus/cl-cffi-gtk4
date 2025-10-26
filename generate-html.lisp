@@ -63,7 +63,6 @@
 
 (unexport 'gobject:create-fn-ref :gobject)
 (unexport 'gobject:define-cb-methods :gobject)
-(unexport 'gobject:define-vtable :gobject)
 (unexport 'gobject:get-enum-items :gobject)
 (unexport 'gobject:enum-item-name :gobject)
 (unexport 'gobject:enum-item-nick :gobject)
@@ -72,7 +71,6 @@
 (unexport 'gobject:flags-item-name :gobject)
 (unexport 'gobject:flags-item-nick :gobject)
 (unexport 'gobject:flags-item-value :gobject)
-(unexport 'gobject:gobject-class :gobject)
 (unexport 'gobject:get-gvalue :gobject)
 (unexport 'gobject:set-gvalue :gobject)
 
