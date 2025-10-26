@@ -1473,11 +1473,12 @@
 
 (defun path-closest-point (path point threshold)
  #+liber-documentation
- "@version{2025-08-02}
+ "@version{2025-10-26}
   @syntax{(gsk:path-closest-point path point threshold) => result, distance}
   @argument[path]{a @class{gsk:path} instance}
   @argument[point]{a @sym{graphene:point-t} instance}
-  @argument[threshold]{a single float for the maximum allowed distance}
+  @argument[threshold]{a number coerced to a single float for the maximum
+    allowed distance}
   @argument[result]{a @class{gsk:path-point} instance for the closest point}
   @argument[distance]{a single float for the distance}
   @begin{short}
@@ -1489,7 +1490,8 @@
 
   Since 4.14
   @see-class{gsk:path}"
-  (let ((result (make-instance 'path-point)))
+  (let ((result (make-instance 'path-point))
+        (threshold (coerce threshold 'single-float)))
     (cffi:with-foreign-object (distance :float)
       (when (%path-closest-point path point threshold result distance)
         (values result
