@@ -34,8 +34,8 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_graphics_offload_get_black_background
-;;;     gtk_graphics_offload_set_black_background
+;;;     gtk_graphics_offload_get_black_background           Since 4.16
+;;;     gtk_graphics_offload_set_black_background           Since 4.16
 ;;;     gtk_graphics_offload_get_child
 ;;;     gtk_graphics_offload_set_child
 ;;;     gtk_graphics_offload_get_enabled
@@ -47,7 +47,7 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     black-background
+;;;     black-background                                    Since 4.16
 ;;;     child
 ;;;     enabled
 ;;;
@@ -111,7 +111,8 @@
    :export t
    :interfaces ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
    :type-initializer "gtk_graphics_offload_get_type")
-  ((black-background
+  (#+gtk-4-16
+   (black-background
     graphics-offload-black-background
     "black-background" "gboolean" t t)
    (child
