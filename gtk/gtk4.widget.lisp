@@ -668,7 +668,7 @@
       (liber:symbol-documentation 'widget-vtable)
  "@version{2025-10-25}
   @begin{declaration}
-(gobject:define-vtable (\"MyWidget\" my-widget)
+(gobject:define-vtable (\"GtkWidget\" widget)
   ;; Parent class
   (:skip parent-instance (:struct gobject:object-class))
   ;; Virtual functions
@@ -729,7 +729,7 @@
                            (vexpand-p :boolean)))
   (css-changed            (:void
                            (widget (g:object gtk:widget))
-                           (change :pointer))) ; for GtkCssStyleChange structure
+                           (change gtk:css-style-change)))
   (system-setting-changed (:void
                            (widget (g:object gtk:widget))
                            (settings gtk:system-setting)))
