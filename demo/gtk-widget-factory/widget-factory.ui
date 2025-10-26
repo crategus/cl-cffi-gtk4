@@ -1987,7 +1987,7 @@ microphone-sensitivity-medium-symbolic</property>
                                       <object class="GtkScrolledWindow">
                                         <property name="vexpand">1</property>
                                         <child>
-                                          <object class="MyTextView" id="text3">
+                                          <object class="WFTextView" id="text3">
                                             <property name="visible">True</property>
                                             <property name="buffer">textbuffer1</property>
                                             <property name="wrap-mode">2</property>
@@ -2761,7 +2761,7 @@ microphone-sensitivity-medium-symbolic</property>
                                           <object class="GtkNotebookPage">
                                             <property name="tab-expand">1</property>
                                             <property name="child">
-                                              <object class="GtkBox" id="closable_page_1">
+                                              <object class="GtkBox" id="closable_page1">
                                                 <property name="height-request">120</property>
                                               </object>
                                             </property>
@@ -2775,7 +2775,7 @@ microphone-sensitivity-medium-symbolic</property>
                                                   </object>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton">
+                                                  <object class="GtkButton" id="closable_page1_button">
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>
@@ -2795,7 +2795,7 @@ microphone-sensitivity-medium-symbolic</property>
                                           <object class="GtkNotebookPage">
                                             <property name="tab-expand">1</property>
                                             <property name="child">
-                                              <object class="GtkBox" id="closable_page_2">
+                                              <object class="GtkBox" id="closable_page2">
                                                 <property name="vexpand">1</property>
                                               </object>
                                             </property>
@@ -2809,7 +2809,7 @@ microphone-sensitivity-medium-symbolic</property>
                                                   </object>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton">
+                                                  <object class="GtkButton" id="closable_page2_button">
                                                     <property name="has-frame">0</property>
                                                     <property name="focus-on-click">0</property>
                                                     <property name="icon-name">window-close-symbolic</property>

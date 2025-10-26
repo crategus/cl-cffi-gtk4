@@ -4,7 +4,7 @@
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
-  :depends-on (:cl-cffi-gtk4)
-  :components ((:file "gtk4-widget-factory")))
+  :components ((:file "gtk4-widget-factory"))
+  :depends-on (:cl-cffi-gtk4))
 
-;; 2024-10-20
+;; 2025-10-26
