@@ -1512,7 +1512,8 @@
       @about-symbol{text-view-layer}
       @about-symbol{text-window-type}
       @about-symbol{text-extend-selection}
-      @about-function{TEXT-VIEW-PRIORITY-VALIDATE}
+      @about-symbol{text-view-class}
+      @about-symbol{text-view-vtable}
       @about-class{text-view}
       @about-generic{text-view-accepts-tab}
       @about-generic{text-view-bottom-margin}
@@ -1544,6 +1545,7 @@
       @about-function{text-view-move-mark-onscreen}
       @about-function{text-view-place-cursor-onscreen}
       @about-function{text-view-visible-rect}
+      @about-function{text-view-visible-offset}
       @about-function{text-view-iter-location}
       @about-function{text-view-cursor-locations}
       @about-function{text-view-line-at-y}
@@ -2707,6 +2709,8 @@ GtkCellRenderer         GtkWidget
       @about-function{requisition-height}
       @about-function{requisition-new}
       @about-function{requisition-copy}
+      @about-symbol{widget-class}
+      @about-symbol{widget-vtable}
       @about-class{widget}
       @about-generic{widget-can-focus}
       @about-generic{widget-can-target}
