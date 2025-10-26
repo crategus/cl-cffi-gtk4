@@ -197,10 +197,6 @@
 ;;; gtk_shortcut_new
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Since the GtkShortcut object takes ownership of the GtkShortcutTrigger
-;; and GtkShortcutAcion objects, we add a reference before passing these objects
-;; to the constructor. Check this in more detail and add tests.
-
 (declaim (inline shortcut-new))
 
 (defun shortcut-new (trigger action)
@@ -219,8 +215,8 @@
   @see-class{gtk:shortcut-trigger}
   @see-class{gtk:shortcut-action}"
   (make-instance 'shortcut
-                 :trigger (g:object-ref trigger)
-                 :action (g:object-ref action)))
+                 :trigger trigger
+                 :action action))
 
 (export 'shortcut-new)
 
