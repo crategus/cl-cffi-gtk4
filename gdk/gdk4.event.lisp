@@ -2,7 +2,7 @@
 ;;; gdk4.event.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -320,13 +320,15 @@
   :pad-group-mode
   #+gtk-4-6
   :touchpad-hold
+  #+gtk-4-20
+  :pad-dial
   :event-last)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'event-type)
       "GEnum"
       (liber:symbol-documentation 'event-type)
- "@version{2025-07-31}
+ "@version{2025-11-02}
   @begin{declaration}
 (gobject:define-genum \"GdkEventType\" event-type
   (:export t
@@ -361,6 +363,7 @@
   :pad-strip
   :pad-group-mode
   :touchpad-hold
+  :pad-dial
   :event-last)
   @end{declaration}
   @begin{values}
@@ -405,6 +408,7 @@
       @entry[:pad-group-mode]{The tablet pad group mode change.}
       @entry[:touchpad-hold]{The touchpad hold gesture event, the current state
         is determined by its phase field. Since 4.6}
+      @entry[:pad-dial]{A tablet pad axis event from a \"dial\". Since 4.20}
       @entry[:event-last]{Marks the end of the @sym{gdk:event-type}
         enumeration.}
     @end{simple-table}

@@ -2,7 +2,7 @@
 ;;; gdk4.drag.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -137,7 +137,7 @@
 (setf (liber:alias-for-symbol 'drag-action)
       "GFlags"
       (liber:symbol-documentation 'drag-action)
- "@version{2025-07-26}
+ "@version{2025-11-02}
   @begin{declaration}
 (gobject:define-gflags \"GdkDragAction\" drag-action
   (:export t
@@ -150,6 +150,7 @@
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
+      @entry[:none]{No action.}
       @entry[:copy]{Copy the data.}
       @entry[:move]{Move the data, that is, first copy it, then delete it from
         the source using the @code{DELETE} target of the X selection protocol.}

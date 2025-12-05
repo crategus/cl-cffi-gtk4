@@ -2,7 +2,7 @@
 ;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -175,13 +175,77 @@
   :R8G8B8X8
   #+gtk-4-14
   :X8B8G8R8
+  #+gtk-20
+  (:G8-B8R8-420 33)
+  #+gtk-20
+  (:G8-R8B8-420 34)
+  #+gtk-20
+  (:G8-B8R8-422 35)
+  #+gtk-20
+  (:G8-R8B8-422 36)
+  #+gtk-20
+  (:G8-B8R8-444 37)
+  #+gtk-20
+  (:G8-R8B8-444 38)
+  #+gtk-20
+  (:G10X6-B10X6R10X6-420 39)
+  #+gtk-20
+  (:G12X4-B12X4R12X4-420 40)
+  #+gtk-20
+  (:G16-B16R16-420 41)
+  #+gtk-20
+  (:G8-B8-R8-410 42)
+  #+gtk-20
+  (:G8-R8-B8-410 43)
+  #+gtk-20
+  (:G8-B8-R8-411 44)
+  #+gtk-20
+  (:G8-R8-B8-411 45)
+  #+gtk-20
+  (:G8-B8-R8-420 46)
+  #+gtk-20
+  (:G8-R8-B8-420 47)
+  #+gtk-20
+  (:G8-B8-R8-422 48)
+  #+gtk-20
+  (:G8-R8-B8-422 49)
+  #+gtk-20
+  (:G8-B8-R8-444 50)
+  #+gtk-20
+  (:G8-R8-B8-444 51)
+  #+gtk-20
+  (:G8B8G8R8-422 52)
+  #+gtk-20
+  (:G8R8G8B8-422 53)
+  #+gtk-20
+  (:R8G8B8G8-422 54)
+  #+gtk-20
+  (:B8G8R8G8-422 55)
+  #+gtk-20
+  (:X6G10-X6B10-X6R10-420 56)
+  #+gtk-20
+  (:X6G10-X6B10-X6R10-422 57)
+  #+gtk-20
+  (:X6G10-X6B10-X6R10-444 58)
+  #+gtk-20
+  (:X4G12-X4B12-X4R12-420 59)
+  #+gtk-20
+  (:X4G12-X4B12-X4R12-422 60)
+  #+gtk-20
+  (:X4G12-X4B12-X4R12-444 61)
+  #+gtk-20
+  (:G16-B16-R16-420 62)
+  #+gtk-20
+  (:G16-B16-R16-422 63)
+  #+gtk-20
+  (:G16-B16-R16-444 64)
   :N-FORMATS)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'memory-format)
       "GEnum"
       (liber:symbol-documentation 'memory-format)
- "@version{2025-07-30}
+ "@version{2025-11-02}
   @begin{declaration}
 (gobject:define-genum \"GdkMemoryFormat\" memory-format
   (:export t
@@ -219,6 +283,38 @@
   :X8R8G8B8
   :R8G8B8X8
   :X8B8G8R8
+  :G8-B8R8-420
+  :G8-R8B8-420
+  :G8-B8R8-422
+  :G8-R8B8-422
+  :G8-B8R8-444
+  :G8-R8B8-444
+  :G10X6-B10X6R10X6-420
+  :G12X4-B12X4R12X4-420
+  :G16-B16R16-420
+  :G8-B8-R8-410
+  :G8-R8-B8-410
+  :G8-B8-R8-411
+  :G8-R8-B8-411
+  :G8-B8-R8-420
+  :G8-R8-B8-420
+  :G8-B8-R8-422
+  :G8-R8-B8-422
+  :G8-B8-R8-444
+  :G8-R8-B8-444
+  :G8B8G8R8-422
+  :G8R8G8B8-422
+  :R8G8B8G8-422
+  :B8G8R8G8-422
+  :X6G10-X6B10-X6R10-420
+  :X6G10-X6B10-X6R10-422
+  :X6G10-X6B10-X6R10-444
+  :X4G12-X4B12-X4R12-420
+  :X4G12-X4B12-X4R12-422
+  :X4G12-X4B12-X4R12-444
+  :G16-B16-R16-420
+  :G16-B16-R16-422
+  :G16-B16-R16-444
   :N-FORMATS)
   @end{declaration}
   @begin{values}
@@ -275,6 +371,212 @@
       @entry[:X8R8G8B8]{4 bytes for unused, red, green, blue. Since 4.14}
       @entry[:R8G8B8X8]{4 bytes for red, green, blue, unused. Since 4.14}
       @entry[:X8B8G8R8]{4 bytes for unused, blue, green, red. Since 4.14}
+      @entry[:G8-B8R8-420]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cb followed by Cr. Subsampled in
+        both the X and Y direction. Commonly known by the fourcc NV12.
+        Since 4.20}
+      @entry[:G8-R8B8-420]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cr followed by Cb. Subsampled in
+        both the X and Y direction. Commonly known by the fourcc NV21.
+        Since 4.20}
+      @entry[:G8-B8R8-422]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cb followed by Cr. Subsampled in
+        the X direction. Commonly known by the fourcc NV16. Since 4.20}
+      @entry[:G8-R8B8-422]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cr followed by Cb. Subsampled in
+        the X direction. Commonly known by the fourcc NV61. Since 4.20}
+      @entry[:G8-B8R8-444]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cb followed by Cr. This format is
+        not subsampled. Commonly known by the fourcc NV24. Since 4.20}
+      @entry[:G8-R8B8-444]{Multiplane format with 2 planes. The first plane
+        contains the first channel, usually containing luma values. The second
+        plane with interleaved chroma values, Cr followed by Cb. This format is
+        not subsampled. Commonly known by the fourcc NV42. Since 4.20}
+      @entry[:G10X6-B10X6R10X6-420]{Multiplane format with 2 planes. Each
+        channel is a 16 bit integer, but only the highest 10 bits are used. The
+        first plane contains the first channel, usually containing luma values.
+        The second plane with interleaved chroma values, Cr followed by Cb. This
+        format is not subsampled. Commonly known by the fourcc P010. Since 4.20}
+      @entry[:G12X4-B12X4R12X4-420]{Multiplane format with 2 planes. Each
+        channel is a 16 bit integer, but only the highest 10 bits are used. The
+        first plane contains the first channel, usually containing luma values.
+        The second plane with interleaved chroma values, Cr followed by Cb. This
+        format is not subsampled. Commonly known by the fourcc P012. Since 4.20}
+      @entry[:G16-B16R16-420]{Multiplane format with 2 planes. Each channel is a
+        16 bit integer. The first plane contains the first channel, usually
+        containing luma values. The second plane with interleaved chroma values,
+        Cr followed by Cb. This format is not subsampled. Commonly known by the
+        fourcc P016. Since 4.20}
+      @entry[:G8-B8-R8-410]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the first
+        chroma chanel. Subsampled in both the X and Y direction with 4:1 ratio.
+        It is mapped into the 3rd channel. The third plane usually contains the
+        second chroma channel. Subsampled in both the X and Y direction with 4:1
+        ratio. It is mapped into the 1st channel. Commonly known by the fourcc
+        YUV410. Since 4.20}
+      @entry[:G8-R8-B8-410]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the
+        second chroma chanel. Subsampled in both the X and Y direction with 4:1
+        ratio. It is mapped into the 1st channel. The third plane usually
+        contains the first chroma channel. Subsampled in both the X and Y
+        direction with 4:1 ratio. It is mapped into the 3rd channel. Commonly
+        known by the fourcc YVU410. Since 4.20}
+      @entry[:G8-B8-R8-411]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the first
+        chroma chanel. Subsampled in the X direction with 4:1 ratio. It is
+        mapped into the 3rd channel. The third plane usually contains the second
+        chroma channel. Subsampled in the X direction with 4:1 ratio. It is
+        mapped into the 1st channel. Commonly known by the fourcc YUV411.
+        Since 4.20}
+      @entry[:G8-R8-B8-411]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the
+        second chroma chanel. Subsampled in the X direction with 4:1 ratio. It
+        is mapped into the 1st channel. The third plane usually contains the
+        first chroma channel. Subsampled in the X direction with 4:1 ratio. It
+        is mapped into the 3rd channel. Commonly known by the fourcc YVU411.
+        Since 4.20}
+      @entry[:G8-B8-R8-420]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the first
+        chroma chanel. Subsampled in both the X and Y direction. It is mapped
+        into the 3rd channel. The third plane usually contains the second chroma
+        channel. Subsampled in both the X and Y direction. It is mapped into the
+        1st channel. Commonly known by the fourcc YUV420. Since 4.20}
+      @entry[:G8-R8-B8-420]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the
+        second chroma chanel. Subsampled in both the X and Y direction. It is
+        mapped into the 1st channel. The third plane usually contains the first
+        chroma channel. Subsampled in both the X and Y direction. It is mapped
+        into the 3rd channel. Commonly known by the fourcc YVU420. Since 4.20}
+      @entry[:G8-B8-R8-422]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the first
+        chroma chanel. Subsampled in the X direction. It is mapped into the 3rd
+        channel. The third plane usually contains the second chroma channel.
+        Subsampled in the X direction. It is mapped into the 1st channel.
+        Commonly known by the fourcc YUV422. Since 4.20}
+      @entry[:G8-R8-B8-422]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the
+        second chroma chanel. Subsampled in the X direction. It is mapped into
+        the 1st channel. The third plane usually contains the first chroma
+        channel. Subsampled in the X direction. It is mapped into the 3rd
+        channel. Commonly known by the fourcc YVU422.}
+      @entry[:G8-B8-R8-444]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the first
+        chroma chanel. It is mapped into the 3rd channel. The third plane
+        usually contains the second chroma channel. It is mapped into the 1st
+        channel. Commonly known by the fourcc YUV444. Since 4.20}
+      @entry[:G8-R8-B8-444]{Multiplane format with 3 planes. Each channel is a
+        8 bit integer. The first plane usually contains the luma channel. It is
+        mapped into the 2nd channel. The second plane usually contains the
+        second chroma chanel. Subsampled in the X direction. It is mapped into
+        the 1st channel. The third plane usually contains the first chroma
+        channel. Subsampled in the X direction. It is mapped into the 3rd
+        channel. Commonly known by the fourcc YVU444. Since 4.20}
+      @entry[:G8B8G8R8-422]{Packed format with subsampled channels. Each channel
+        is a 8 bit integer. The red and blue/chroma channels are subsampled and
+        interleaved with the green/luma channel. Each block contains 2 pixels,
+        so the width must be a multiple of 2. Commonly known by the fourcc YUYV.
+        Since 4.20}
+      @entry[:G8R8G8B8-422]{Packed format with subsampled channels. Each channel
+        is a 8 bit integer. The red and blue/chroma channels are subsampled and
+        interleaved with the green/luma channel. Each block contains 2 pixels,
+        so the width must be a multiple of 2. Commonly known by the fourcc YVYU.
+        Since 4.20}
+      @entry[:R8G8B8G8-422]{Packed format with subsampled channels. Each channel
+        is a 8 bit integer. The red and blue/chroma channels are subsampled and
+        interleaved with the green/luma channel. Each block contains 2 pixels,
+        so the width must be a multiple of 2. Commonly known by the fourcc VYUY.
+        Since 4.20}
+      @entry[:B8G8R8G8-422]{Packed format with subsampled channels. Each channel
+        is a 8 bit integer. The red and blue/chroma channels are subsampled and
+        interleaved with the green/luma channel. Each block contains 2 pixels,
+        so the width must be a multiple of 2. Commonly known by the fourcc UYVY.
+        Since 4.20}
+      @entry[:X6G10-X6B10-X6R10-420]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 10 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. Subsampled in both the X
+        and Y direction. It is mapped into the 3rd channel. The third plane
+        usually contains the second chroma channel. Subsampled in both the X and
+        Y direction. It is mapped into the 1st channel. Commonly known by the
+        fourcc S010. Since 4.20}
+      @entry[:X6G10-X6B10-X6R10-422]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 10 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. Subsampled in the X
+        direction. It is mapped into the 3rd channel. The third plane usually
+        contains the second chroma channel. Subsampled in the X direction. It is
+        mapped into the 1st channel. Commonly known by the fourcc S210. Since
+        4.20}
+      @entry[:X6G10-X6B10-X6R10-444]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 10 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. It is mapped into the
+        3rd channel. The third plane usually contains the second chroma channel.
+        It is mapped into the 1st channel. Commonly known by the fourcc S410.
+        Since 4.20}
+      @entry[:X4G12-X4B12-X4R12-420]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 12 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. Subsampled in both the X
+        and Y direction. It is mapped into the 3rd channel. The third plane
+        usually contains the second chroma channel. Subsampled in both the X and
+        Y direction. It is mapped into the 1st channel. Commonly known by the
+        fourcc S012. Since 4.20}
+      @entry[:X4G12-X4B12-X4R12-422]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 12 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. Subsampled in the X
+        direction. It is mapped into the 3rd channel. The third plane usually
+        contains the second chroma channel. Subsampled in the X direction. It is
+        mapped into the 1st channel. Commonly known by the fourcc S212. Since
+        4.20}
+      @entry[:X4G12-X4B12-X4R12-444]{Multiplane format with 3 planes. Each
+        channel is a 16 bit integer. Only the 12 lower bits are used. The
+        remaining ones must be set to 0 by the producer. The first plane usually
+        contains the luma channel. It is mapped into the 2nd channel. The second
+        plane usually contains the first chroma chanel. It is mapped into the
+        3rd channel. The third plane usually contains the second chroma channel.
+        It is mapped into the 1st channel. Commonly known by the fourcc S412.
+        Since 4.20}
+      @entry[:G16-B16-R16-420]{Multiplane format with 3 planes. Each channel is
+        a 16 bit integer. The first plane usually contains the luma channel. It
+        is mapped into the 2nd channel. The second plane usually contains the
+        first chroma chanel. Subsampled in both the X and Y direction. It is
+        mapped into the 3rd channel. The third plane usually contains the second
+        chroma channel. Subsampled in both the X and Y direction. It is mapped
+        into the 1st channel. Commonly known by the fourcc S016. Since 4.20}
+      @entry[:G16-B16-R16-422]{Multiplane format with 3 planes. Each channel is
+        a 16 bit integer. The first plane usually contains the luma channel. It
+        is mapped into the 2nd channel. The second plane usually contains the
+        first chroma chanel. Subsampled in the X direction. It is mapped into
+        the 3rd channel. The third plane usually contains the second chroma
+        channel. Subsampled in the X direction. It is mapped into the 1st
+        channel. Commonly known by the fourcc S216. Since 4.20}
+      @entry[:G16-B16-R16-444]{Multiplane format with 3 planes. Each channel is
+        a 16 bit integer. The first plane usually contains the luma channel. It
+        is mapped into the 2nd channel. The second plane usually contains the
+        first chroma chanel. It is mapped into the 3rd channel. The third plane
+        usually contains the second chroma channel. It is mapped into the 1st
+        channel. Commonly known by the fourcc S416. Since 4.20}
       @entry[:N-FORMATS]{The number of formats. This value will change as more
         formats get added, so do not rely on its concrete integer.}
     @end{simple-table}

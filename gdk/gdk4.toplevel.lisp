@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,13 +33,17 @@
 ;;;     GdkFullScreenMode
 ;;;     GdkSurfaceEdge
 ;;;     GdkTitlebarGesture                                  Since 4.4
+;;;     GdkCapabilities                                     Since 4.20
 ;;;
 ;;;     GdkToplevel
 ;;;
 ;;; Accessors
 ;;;
+;;;     gdk_toplevel_get_capabilites                        Since 4.20
 ;;;     gdk_toplevel_set_decorated
 ;;;     gdk_toplevel_set_deletable
+;;;     gdk_toplevel_get_gravity                            Since 4.20
+;;;     gdk_toplevel_set_gravity                            Since 4.20
 ;;;     gdk_toplevel_set_icon_list
 ;;;     gdk_toplevel_set_modal
 ;;;     gdk_toplevel_set_startup_id
@@ -63,9 +67,11 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     capabilities                                        Since 4.20
 ;;;     decorated
 ;;;     deletable
 ;;;     fullscreen-mode
+;;;     gravity                                             Since 4.20
 ;;;     icon-list
 ;;;     modal
 ;;;     shortcuts-inhibited
@@ -296,6 +302,66 @@
   @see-function{gdk:toplevel-titlebar-gesture}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GdkToplevelCapabilities
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(gobject:define-gflags "GdkToplevelCapabilites" toplevel-capabilities
+  (:export t
+   :type-initializer "gdk_toplevel_capabilities_get_type")
+  (:edge-constraints 1)
+  (:inhibit-shortcuts 2)
+  (:titlebar-gestures 4)
+  (:window-menu 8)
+  (:maximize 16)
+  (:fullscreen 32)
+  (:minimize 64)
+  (:lower 128))
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-symbol 'toplevel-capabilities)
+      "GFlags"
+      (liber:symbol-documentation 'toplevel-capabilities)
+ "@version{2025-11-02}
+  @begin{declaration}
+(gobject:define-gflags \"GdkToplevelCapabilites\" toplevel-capabilites
+  (:export t
+   :type-initializer \"gdk_toplevel_capabilities_get_type\")
+  (:edge-constraints 1)
+  (:inhibit-shortcuts 2)
+  (:titlebar-gestures 4)
+  (:window-menu 8)
+  (:maximize 16)
+  (:fullscreen 32)
+  (:minimize 64)
+  (:lower 128))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:edge-constraints]{Whether tiled window states are supported.}
+      @entry[:inhibit-shortcuts]{Whether inhibiting system shortcuts is
+        supported. See the @fun{gdk:toplevel-inhibit-system-shortcuts}
+        function.}
+      @entry[:titlebar-gestures]{Whether titlebar gestures are supported. See
+        the @fun{gdk:toplevel-titlebar-gesture} function.}
+      @entry[:window-menu]{Whether showing the window menu is supported. See
+        the @fun{gdk:toplevel-show-window-menu} function.}
+      @entry[:maximize]{Whether the toplevel can be maximized.}
+      @entry[:fullscreen]{Whether the toplevel can be made fullscreen.}
+      @entry[:minimize]{Whether the toplevel can be minimized. See the
+        @fun{gdk:toplevel-minimize} function.}
+      @entry[:lower]{Whether the toplevel can be lowered. See the
+        @fun{gdk:toplevel-lower} function.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Reflects what features a @class{gdk:toplevel} object supports.
+  @end{short}
+
+  Since 4.20
+  @see-class{gdk:toplevel}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
@@ -306,7 +372,11 @@
   (:superclass surface
    :export t
    :type-initializer "gdk_toplevel_get_type")
-  ((decorated
+  (#+gtk-4-20
+   (capabilities
+    toplevel-capabilities
+    "capabilities" "GdkToplevelCapabilities" t nil)
+   (decorated
     toplevel-decorated
     "decorated" "gboolean" t t)
    (deletable
@@ -315,6 +385,10 @@
    (fullscreen-mode
     toplevel-fullscreen-mode
     "fullscreen-mode" "GdkFullscreenMode" t t)
+   #+gtk-4-20
+   (gravity
+    toplevel-gravity
+    "gravity" "GdkGravity" t t)
    (icon-list
     toplevel-icon-list
     "icon-list" "gpointer" t t)
@@ -341,7 +415,7 @@
 (setf (liber:alias-for-class 'toplevel)
       "Interface"
       (documentation 'toplevel 'type)
- "@version{2025-08-02}
+ "@version{2025-11-02}
   @begin{short}
     The @class{gdk:toplevel} object is a freestanding toplevel surface.
   @end{short}
@@ -367,9 +441,11 @@ lambda (toplevel size)    :run-last
       being used as a result.
     @end{signal}
   @end{dictionary}
+  @see-slot{gdk:toplevel-capabilities}
   @see-slot{gdk:toplevel-decorated}
   @see-slot{gdk:toplevel-deletable}
   @see-slot{gdk:toplevel-fullscreen-mode}
+  @see-slot{gdk:toplevel-gravity}
   @see-slot{gdk:toplevel-icon-list}
   @see-slot{gdk:toplevel-modal}
   @see-slot{gdk:toplevel-shortcuts-inhibited}
@@ -383,6 +459,33 @@ lambda (toplevel size)    :run-last
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gdk:toplevel-capabilities ----------------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "capabilities" 'toplevel) t)
+ "The @code{capabilities} property of type @sym{gdk:toplevel-capabilities}
+  (Read) @br{}
+  The capabilities that are available for this toplevel. @br{}
+  Default value: 0")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'toplevel-capabilities)
+      "Accessor"
+      (documentation 'toplevel-capabilities 'function)
+ "@version{#2025-11-02}
+  @syntax{(gdk:toplevel-capabilities object) => capabilities}
+  @argument[object]{a @class{gdk:toplevel} object}
+  @argument[capabilities]{a @sym{gdk:toplevel-capabilities} value}
+  @begin{short}
+    The accessor for the @slot[gdk:toplevel]{capabilities} slot of the
+    @class{gdk:toplevel} class returns the capabilities that are available for
+    this toplevel.
+  @end{short}
+
+  Since 4.20
+  @see-class{gdk:toplevel}
+  @see-symbol{gdk:toplevel-capabilities}")
 
 ;;; --- gdk:toplevel-decorated -------------------------------------------------
 
@@ -458,6 +561,40 @@ lambda (toplevel size)    :run-last
     @class{gdk:toplevel} class gets or sets the fullscreen mode of the toplevel.
   @end{short}
   @see-class{gdk:toplevel}")
+
+;;; --- gdk:toplevel-gravity ---------------------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "gravity" 'toplevel) t)
+ "The @code{gravity} property of type @sym{gdk:gravity} (Read / Write) @br{}
+  The gravity to use when resizing a surface programmatically. Gravity describes
+  which point of the surface we want to keep fixed (meaning that the surface
+  will grow in the opposite direction). For example, a gravity of
+  @val[gdk:gravity]{:north-east} means that we want to fix top right corner of
+  the surface. This property is just a hint that may affect the result when
+  negotiating toplevel sizes with the windowing system. It does not affect
+  interactive resizes started with the @fun{gdk:toplevel-begin-resize} function.
+  Since 4.20 @br{}
+  Default value: @val[gdk:gravity]{:north-east}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'toplevel-gravity)
+      "Accessor"
+      (documentation 'toplevel-gravity 'function)
+ "@version{#2025-11-02}
+  @syntax{(gdk:toplevel-gravity object) => gravity}
+  @syntax{(setf (gdk:toplevel-gravity object) gravity)}
+  @argument[object]{a @class{gdk:toplevel} object}
+  @argument[gravity]{a @sym{gdk:gravity} value}
+  @begin{short}
+    The accessor for the @slot[gdk:toplevel]{gravity} slot of the
+    @class{gdk:toplevel} class gets or sets the gravity that is used when
+    changing the toplevel size programmatically.
+  @end{short}
+
+  Since 4.20
+  @see-class{gdk:toplevel}
+  @see-symbol{gdk:gravity}")
 
 ;;; --- gdk:toplevel-icon-list -------------------------------------------------
 
