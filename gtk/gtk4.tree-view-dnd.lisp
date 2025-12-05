@@ -321,13 +321,16 @@
 (cffi:defcfun ("gtk_tree_create_row_drag_content" tree-create-row-drag-content)
     (g:object gdk:content-provider)
  #+liber-documentation
- "@version{#2025-04-15}
+ "@version{#2025-11-16}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[path]{a @class{gtk:tree-path} instance for a row in @arg{model}}
   @return{The new @class{gdk:content-provider} object.}
   @begin{short}
     Creates a content provider for dragging @arg{path} from @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gdk:content-provider}"

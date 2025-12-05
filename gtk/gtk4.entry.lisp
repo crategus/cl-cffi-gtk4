@@ -2,7 +2,7 @@
 ;;; gtk4.entry.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -104,6 +104,8 @@
 ;;;     gtk_entry_get_current_icon_drag_source
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
+;;;     gtk_entry_get_menu_entry_icon_text                  Since 4.20
+;;;     gtk_entry_set_menu_entry_icon_text                  Since 4.20
 ;;;
 ;;; Properties
 ;;;
@@ -120,6 +122,8 @@
 ;;;     invisible-char
 ;;;     invisible-char-set
 ;;;     max-length
+;;;     menu-entry-icon-primary-text                        Since 4.20
+;;;     menu-entry-icon-secondary-text                      Since 4.20
 ;;;     overwrite-mode
 ;;;     placeholder-text
 ;;;     primary-icon-activatable
@@ -258,6 +262,14 @@
    (max-length
     entry-max-length
     "max-length" "gint" t t)
+   #+gtk-4-20
+   (menu-entry-icon-primary-text
+    entry-menu-entry-icon-primary-text
+    "menu-entry-icon-primary-text" "gchararray" t t)
+   #+gtk-4-20
+   (menu-entry-icon-secondary-text
+    entry-menu-entry-icon-secondary-text
+    "menu-entry-icon-secondary-text" "gchararray" t t)
    (overwrite-mode
     entry-overwrite-mode
     "overwrite-mode" "gboolean" t t)
@@ -339,7 +351,7 @@
 
 #+liber-documentation
 (setf (documentation 'entry 'type)
- "@version{2025-07-17}
+ "@version{2025-11-16}
   @begin{short}
     The @class{gtk:entry} widget is a single line text entry.
   @end{short}
@@ -485,6 +497,10 @@ lambda (entry pos)    :run-last
   @see-slot{gtk:entry-invisible-char}
   @see-slot{gtk:entry-invisible-char-set}
   @see-slot{gtk:entry-max-length}
+
+  @see-slot{gtk:entry-menu-entry-icon-primary-text}
+  @see-slot{gtk:entry-menu-entry-icon-secondary-text}
+
   @see-slot{gtk:entry-overwrite-mode}
   @see-slot{gtk:entry-placeholder-text}
   @see-slot{gtk:entry-primary-icon-activatable}
@@ -902,6 +918,72 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-max-length}")
+
+;;; --- gtk:entry-menu-entry-icon-primary-text ---------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "menu-entry-icon-primary-text"
+                                               'entry) t)
+ "The @code{menu-entry-icon-primary-text} property of type @code{:string}
+  (Read / Write) @br{}
+  The text for an item in the context menu to activate the primary icon action.
+  When the primary icon is activatable and this property has been set, a new
+  entry in the context menu of this @class{gtk:entry} widget will appear with
+  this text. Selecting that menu entry will result in the primary icon being
+  activated, exactly in the same way as it would be activated from a mouse
+  click. This simplifies adding accessibility support to applications using
+  activatable icons. The activatable icons are not focusable when navigating
+  the interface with the keyboard This is why GTK recommends to also add those
+  actions in the context menu. This set of methods greatly simplifies this, by
+  adding a menu item that, when enabled, calls the same callback than clicking
+  on the icon. Since 4.20 @br{}
+  Default value: @code{nil}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'entry-menu-entry-icon-primary-text)
+      "Accessor"
+      (documentation 'entry-menu-entry-icon-primary-text 'function)
+ "@version{2025-11-16}
+  @syntax{(gtk:entry-menu-entry-icon-primary-text object) => text}
+  @syntax{(setf (gtk:entry-menu-entry-icon-primary-text object) text)}
+  @argument[object]{a @class{gtk:entry} widget}
+  @argument[text]{a string for the text that will be used in the menu item}
+  @begin{short}
+    The accessor for the @slot[gtk:entry]{menu-entry-icon-primary-text} slot of
+    the @class{gtk:entry} class.
+  @end{short}
+
+  Since 4.20
+  @see-class{gtk:entry}")
+
+;;; --- gtk:entry-menu-entry-icon-secondary-text -------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "menu-entry-icon-secondary-text"
+                                               'entry) t)
+ "The @code{menu-entry-icon-secondary-text} property of type @code{:string}
+  (Read / Write) @br{}
+  The text for an item in the context menu to activate the secondary icon
+  action. See the @slot[gtk:entry]{menu-entry-icon-primary-text} property.
+  Since 4.20 @br{}
+  Default value: @code{nil}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'entry-menu-entry-icon-secondary-text)
+      "Accessor"
+      (documentation 'entry-menu-entry-icon-secondary-text 'function)
+ "@version{2025-11-16}
+  @syntax{(gtk:entry-menu-entry-icon-secondary-text object) => text}
+  @syntax{(setf (gtk:entry-menu-entry-icon-secondary-text object) text)}
+  @argument[object]{a @class{gtk:entry} widget}
+  @argument[text]{a string for the text that will be used in the menu item}
+  @begin{short}
+    The accessor for the @slot[gtk:entry]{menu-entry-icon-secondary-text} slot
+    of the @class{gtk:entry} class.
+  @end{short}
+
+  Since 4.20
+  @see-class{gtk:entry}")
 
 ;;; --- gtk:entry-overwrite-mode -----------------------------------------------
 
@@ -2273,5 +2355,51 @@ lambda (entry pos)    :run-last
   (entry (g:object entry)))
 
 (export 'entry-grab-focus-without-selecting)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_entry_get_menu_entry_icon_text                      Since 4.20
+;;; gtk_entry_set_menu_entry_icon_text                      Since 4.20
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(defun (setf entry-menu-entry-icon-text) (text entry pos)
+  (cond ((eq pos :primary)
+         (setf (entry-menu-entry-icon-primary-text entry) text))
+        ((eq pos :secondary)
+         (setf (entry-menu-entry-icon-secondary-text entry) text))
+        (t
+         (error "GTK:ENTRY-MENU-ENTRY-ICON-TEXT: Unexpected icon position"))))
+
+#+gtk-4-20
+(defun entry-menu-entry-icon-text (entry pos)
+ #+liber-documentation
+ "@version{2025-11-16}
+  @syntax{(gtk:entry-menu-entry-icon-text entry pos) => text}
+  @syntax{(setf (gtk:entry-menu-entry-icon-text entry pos) text)}
+  @argument[entry]{a @class{gtk:entry} widget}
+  @argument[pos]{a @sym{gtk:entry-icon-position} value for the icon position}
+  @argument[text]{a string for the text used for the menu item in the context
+    menu}
+  @begin{short}
+    Gets or sets the text that will be used in the context menu of the
+    @class{gtk:entry} widget when the specified icon is activatable.
+  @end{short}
+  Selecting this item in the menu results, from all aspects, the same than
+  clicking on the specified icon. This greatly simplifies making accessible
+  applications, because the icons are not focusable when using keyboard
+  navigation. This is why GTK recommends to add the same action to the context
+  menu.
+  @see-class{gtk:entry}
+  @see-symbol{gtk:entry-icon-position}
+  @see-function{gtk:entry-menu-entry-icon-primary-text}
+  @see-function{gtk:entry-menu-entry-icon-secondary-text}"
+  (cond ((eq pos :primary)
+         (entry-menu-entry-icon-primary-text entry))
+        ((eq pos :secondary)
+         (entry-menu-entry-icon-secondary-text entry))
+        (t
+         (error "GTK:ENTRY-MENU-ENTRY-ICON-TEXT: Unexpected icon position"))))
+
+(export 'entry-menu-entry-icon-text)
 
 ;;; --- End of file gtk4.entry.lisp --------------------------------------------

@@ -2,7 +2,7 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,21 +55,28 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkCssProvider
+;;;     GtkInferfaceColorScheme                             Since 4.20
+;;;     GtkInterfaceContrast                                Since 4.20
+;;;
 ;;;     GtkCssParserError                                   not implemented
 ;;;     GtkCssParserWarning                                 not implemented
-;;;     GTK_CSS_PARSER_ERROR                                not implemented
 ;;;
 ;;; Functions
 ;;;
 ;;;     gtk_css_provider_new
 ;;;     gtk_css_provider_to_string
-;;;     gtk_css_provider_load_named
+;;;     gtk_css_provider_load_named                         Deprecated 4.20
 ;;;     gtk_css_provider_load_from_data                     Deprecated 4.12
 ;;;     gtk_css_provider_load_from_file
 ;;;     gtk_css_provider_load_from_path
 ;;;     gtk_css_provider_load_from_resource
 ;;;     gtk_css_provider_load_from_bytes                    Since 4.12
 ;;;     gtk_css_provider_load_from_string                   Since 4.12
+;;;
+;;; Properties
+;;;
+;;;     prefers-color-scheme                                Since 4.20
+;;;     prefers-contrast                                    Since 4.20
 ;;;
 ;;; Signals
 ;;;
@@ -89,6 +96,106 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkInterfaceColorScheme
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(gobject:define-genum "GtkInterfaceColorScheme" interface-color-scheme
+  (:export t
+   :type-initializer "gtk_interface_color_scheme_get_type")
+  (:unsupported 0)
+  (:default 1)
+  (:dark 2)
+  (:light 3))
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-symbol 'interface-color-scheme)
+      "GEnum"
+      (liber:symbol-documentation 'interface-color-scheme)
+ "@version{2025-11-08}
+  @begin{declaration}
+(gobject:define-genum \"GtkInterfaceColorScheme\" interface-color-scheme
+  (:export t
+   :type-initializer \"gtk_interface_color_scheme_get_type\")
+  (:unsupported 0)
+  (:default 1)
+  (:dark 2)
+  (:light 3))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:unsupported]{The system does not support color schemes.}
+      @entry[:default]{The default color scheme is used.}
+      @entry[:dark]{A dark color scheme is used.}
+      @entry[:light]{A light color scheme is used.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Values for the @slot[gtk:settings]{gtk-interface-color-scheme} and
+    @slot[gtk:css-provider]{prefers-color-scheme} properties that indicates what
+    color scheme is used.
+  @end{short}
+  This information can be used inside CSS via media queries.
+
+  More values may be added to this enumeration. Unknown values should be treated
+  the same as the @val[gtk:interface-color-scheme]{:default} value.
+
+  Since 4.20
+  @see-class{gtk:css-provider}
+  @see-function{gtk:css-provider-prefers-color-scheme}
+  @see-function{gtk:settings-gtk-interface-color-scheme}")
+
+;;; ----------------------------------------------------------------------------
+;;; GtkInterfaceContrast
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(gobject:define-genum "GtkInterfaceContrast" interface-contrast
+  (:export t
+   :type-initializer "gtk_interface_contrast_get_type")
+  (:unsupported 0)
+  (:no-preference 1)
+  (:more 2)
+  (:less 3))
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-symbol 'interface-contrast)
+      "GEnum"
+      (liber:symbol-documentation 'interface-contrast)
+ "@version{2025-11-08}
+  @begin{declaration}
+(gobject:define-genum \"GtkInterfaceContrast\" interface-contrast
+  (:export t
+   :type-initializer \"gtk_interface_contrast_get_type\")
+  (:unsupported 0)
+  (:no-preference 1)
+  (:more 2)
+  (:less 3))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:unsupported]{The system does not support contrast levels.}
+      @entry[:no-preference]{No particular preference for contrast.}
+      @entry[:more]{More contrast is preferred.}
+      @entry[:less]{Less contrast is preferred.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Values for the @slot[gtk:settings]{gtk-interface-contrast} and
+    @slot[gtk:css-provider]{prefers-contrast} properties that indicates the
+    preferred level of contrast.
+  @end{short}
+  This information can be used inside CSS via media queries.
+
+  More values may be added to this enumeration. Unknown values should be treated
+  the same as the @val[gtk:interface-contrast]{:no-preference} value.
+
+  Since 4.20
+  @see-class{gtk:css-provider}
+  @see-function{gtk:css-provider-prefers-contrast}
+  @see-function{gtk:settings-gtk-interface-contrast}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkCssLocation
@@ -500,11 +607,18 @@
    :export t
    :interfaces ("GtkStyleProvider")
    :type-initializer "gtk_css_provider_get_type")
-  nil)
+  (#+gtk-4-20
+   (prefers-color-scheme
+    css-provider-prefers-color-scheme
+    "prefers-color-scheme" "GtkInterfaceColorScheme" t t)
+   #+gtk-4-20
+   (prefers-contrast
+    css-provider-prefers-contrast
+    "prefers-contrast" "GtkInterfaceContrast" t t)))
 
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2025-09-22}
+ "@version{2025-11-08}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -560,8 +674,96 @@ lambda (provider section error)    :run-last
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:css-provider-new}
+  @see-slot{gtk:css-provider-prefers-color-scheme}
+  @see-slot{gtk:css-provider-prefers-contrast}
   @see-class{gtk:style-provider}
   @see-class{gtk:css-section}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- gtk:css-provider-prefers-color-scheme ----------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "prefers-color-scheme"
+                                               'css-provider) t)
+ "The @code{prefers-color-scheme} property of type
+  @sym{gtk:interface-color-scheme} (Read / Write) @br{}
+  Defines the color scheme used for rendering the user interface. @br{}
+  Default value: @val[gtk:interface-color-scheme]{:default}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'css-provider-prefers-color-scheme)
+      "Accessor"
+      (documentation 'css-provider-prefers-color-scheme 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:css-provider-prefers-color-scheme object) => mode}
+  @syntax{(setf (gtk:css-provider-prefers-color-scheme object) mode)}
+  @argument[object]{a @class{gtk:css-provider} object}
+  @argument[mode]{a @sym{gtk:instance-color-scheme} value}
+  @begin{short}
+    The accessor for the @slot[gtk:css-provider]{prefers-color-scheme} slot
+    of the @class{gtk:css-provider} class gets or sets the color scheme used for
+    rendering the user interface.
+  @end{short}
+  The UI can be set to either @val[gtk:interface-color-scheme]{:light} or
+  @val[gtk:interface-color-scheme]{:dark} mode. Other values will be interpreted
+  the same as the @val[gtk:interface-color-scheme]{:light} value.
+
+  This setting is be available for media queries in CSS:
+  @begin{pre}
+@@media (prefers-color-scheme: dark) {
+  // some dark mode styling
+@}
+  @end{pre}
+  Changing this setting will reload the style sheet.
+
+  Since 4.20
+  @see-class{gtk:css-provider}
+  @see-symbol{gtk:interface-color-scheme}")
+
+;;; --- gtk:css-provider-prefers-contrast --------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "prefers-contrast"
+                                               'css-provider) t)
+ "The @code{prefers-contrast} property of type @sym{gtk:interface-contrast}
+  (Read / Write) @br{}
+  Defines the contrast mode to use for the user interface. @br{}
+  Default value: @val[gtk:interface-contrast]{:no-preferences}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'css-provider-prefers-contrast)
+      "Accessor"
+      (documentation 'css-provider-prefers-contrast 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:css-provider-prefers-color-scheme object) => mode}
+  @syntax{(setf (gtk:css-provider-prefers-color-scheme object) mode)}
+  @argument[object]{a @class{gtk:css-provider} object}
+  @argument[mode]{a @sym{gtk:instance-contrast} value}
+  @begin{short}
+    The accessor for the @slot[gtk:css-provider]{prefers-contrast} slot
+    of the @class{gtk:css-provider} class gets or sets the contrast mode to use
+    for the user interface.
+  @end{short}
+
+  When set to @val[gtk:interface-contrast]{:more} or
+  @val[gtk:interface-contrast]{:less}, the UI is rendered in high or low
+  contrast. When set to @val[gtk:interface-contrast]{:no-preference} (the
+  default), the user interface will be rendered in default mode.
+
+  This setting is be available for media queries in CSS:
+  @begin{pre}
+@@media (prefers-contrast: more) {
+  // some style with high contrast
+@}
+  @end{pre}
+  Changing this setting will reload the style sheet.
+
+  Since 4.20
+  @see-class{gtk:css-provider}
+  @see-symbol{gtk:interface-contrast}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_new
@@ -613,7 +815,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-named (provider name &optional variant)
  #+liber-documentation
- "@version{2025-01-11}
+ "@version{2025-11-08}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[name]{a string for the theme name}
   @argument[variant]{an optional string for a variant to load, for example,
@@ -624,6 +826,10 @@ lambda (provider section error)    :run-last
   The actual process of finding the theme might change between releases, but it
   is guaranteed that this function uses the same mechanism to load the theme
   that GTK uses for loading its own theme.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20. Using any of the other theme
+    loaders, combine with media queries.
+  @end{dictionary}
   @see-class{gtk:css-provider}"
   (%css-provider-load-named provider
                             name

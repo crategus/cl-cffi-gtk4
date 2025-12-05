@@ -2,7 +2,7 @@
 ;;; gtk4.calendar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,6 +37,8 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gtk_calendar_get_date                               Since 4.20
+;;;     gtk_calendar_set_date                               Since 4.20
 ;;;     gtk_calendar_get_show_day_names
 ;;;     gtk_calendar_set_show_day_names
 ;;;     gtk_calendar_get_show_heading
@@ -47,15 +49,15 @@
 ;;; Functions
 ;;;
 ;;;     gtk_calendar_new
-;;;     gtk_calendar_select_day
+;;;     gtk_calendar_select_day                             Deprecated 4.20
 ;;;     gtk_calendar_mark_day
 ;;;     gtk_calendar_unmark_day
 ;;;     gtk_calendar_get_day_is_marked
 ;;;     gtk_calendar_clear_marks
-;;;     gtk_calendar_get_date
 ;;;
 ;;; Properties
 ;;;
+;;;     date
 ;;;     day
 ;;;     month
 ;;;     show-day-names
@@ -98,7 +100,11 @@
                 "GtkBuildable"
                 "GtkConstraintTarget")
    :type-initializer "gtk_calendar_get_type")
-  ((day
+  (#+gtk-4-20
+   (date
+    %calendar-date
+    "date" "GDateTime" t t)
+   (day
     calendar-day
     "day" "gint" t t)
    (month
@@ -115,6 +121,8 @@
    (year
     calendar-year
     "year" "gint" t t)))
+
+(unexport '%calendar-date)
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
@@ -231,6 +239,21 @@ lambda (calendar)    :run-first
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;; FIXME: The test gives a wrong time. Correct the implementation.
+
+#+gtk-4-20
+(defun calendar-date (object)
+  (cffi:convert-from-foreign (glib::pointer (%calendar-date object))
+                             'g:date-time))
+
+#+gtk-4-20
+(defun (setf calendar-date) (value object)
+  (setf (%calendar-date object)
+        (cffi:convert-to-foreign value 'g:date-time)))
+
+#+gtk-4-20
+(export 'calendar-date)
 
 ;;; --- gtk:calendar-day -------------------------------------------------------
 
@@ -519,6 +542,7 @@ lambda (calendar)    :run-first
 ;; TODO: The C implementation introduces the GDateTime type. We return
 ;; the values from the calendar widget.
 
+#-gtk-4-20
 (defun calendar-date (calendar)
  #+liber-documentation
  "@version{2025-05-31}

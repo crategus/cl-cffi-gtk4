@@ -715,7 +715,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-callback)
       "Callback"
       (liber:symbol-documentation 'cell-callback)
- "@version{2024-07-07}
+ "@version{2025-11-16}
   @syntax{lambda (renderer) => result}
   @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
   @argument[result]{@em{true} to stop iterating over cells}
@@ -724,6 +724,9 @@ lambda (area renderer editable)    :run-first
     of a @class{gtk:cell-area} object, see the @fun{gtk:cell-area-foreach}
     function.
   @end{short}
+  @begin[Warning]{dictionary}
+    This callback is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-foreach}")
@@ -776,7 +779,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-alloc-callback)
       "Callback"
       (liber:symbol-documentation 'cell-alloc-callback)
- "@version{2024-07-07}
+ "@version{2025-11-16}
   @syntax{lambda (renderer cell background) => result}
   @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
   @argument[cell]{a @class{gdk:rectangle} area allocated to @arg{renderer}
@@ -791,6 +794,9 @@ lambda (area renderer editable)    :run-first
     renderers of a @class{gtk:cell-area} object, see the
     @fun{gtk:cell-area-foreach-alloc} function.
   @end{short}
+  @begin[Warning]{dictionary}
+    This callback is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-class{gdk:rectangle}

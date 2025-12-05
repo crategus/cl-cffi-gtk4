@@ -2,7 +2,7 @@
 ;;; gtk4.settings.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -49,7 +49,7 @@
 ;;;
 ;;;     gtk-alternative-button-order
 ;;;     gtk-alternative-sort-arrows
-;;;     gtk-application-prefer-dark-theme
+;;;     gtk-application-prefer-dark-theme                   Deprecated 4.20
 ;;;     gtk-cursor-aspect-ratio
 ;;;     gtk-cursor-blink
 ;;;     gtk-cursor-blink-time
@@ -75,6 +75,8 @@
 ;;;     gtk-hint-font-metrics                               Since 4.6
 ;;;     gtk-icon-theme-name
 ;;;     gtk-im-module
+;;;     gtk-interface-color-scheme                          Since 4.20
+;;;     gtk-interface-contrast                              Since 4.20
 ;;;     gtk-keynav-use-caret
 ;;;     gtk-label-select-on-focus
 ;;;     gtk-long-press-time
@@ -84,9 +86,9 @@
 ;;;     gtk-print-preview-command
 ;;;     gtk-recent-files-enabled
 ;;;     gtk-recent-files-max-age
-;;;     gtk-shell-shows-app-menu
-;;;     gtk-shell-shows-desktop
-;;;     gtk-shell-shows-menubar
+;;;     gtk-shell-shows-app-menu                            Deprecated 4.20
+;;;     gtk-shell-shows-desktop                             Deprecated 4.20
+;;;     gtk-shell-shows-menubar                             Deprecated 4-20
 ;;;     gtk-show-status-shapes                              Since 4.14
 ;;;     gtk-sound-theme-name
 ;;;     gtk-split-cursor
@@ -310,6 +312,14 @@
    (gtk-im-module
     settings-gtk-im-module "gtk-im-module"
     "gchararray" t t)
+   #+gtk-4-20
+   (gtk-interface-color-scheme
+    settings-gtk-interface-color-scheme
+    "gtk-interface-color-scheme" "GtkInterfaceColorScheme" t t)
+   #+gtk-4-20
+   (gtk-interface-contrast
+    settings-gtk-interface-contrast
+    "gtk-interface-contrast" "GtkInterfaceContrast" t t)
    (gtk-keynav-use-caret
     settings-gtk-keynav-use-caret
     "gtk-keynav-use-caret" "gboolean" t t)
@@ -440,6 +450,8 @@
   @see-slot{gtk:settings-gtk-fontconfig-timestamp}
   @see-slot{gtk:settings-gtk-icon-theme-name}
   @see-slot{gtk:settings-gtk-im-module}
+  @see-slot{gtk:settings-gtk-interface-color-scheme}
+  @see-slot{gtk:settings-gtk-interface-contrast}
   @see-slot{gtk:settings-gtk-keynav-use-caret}
   @see-slot{gtk:settings-gtk-label-select-on-focus}
   @see-slot{gtk:settings-gtk-long-press-time}
@@ -536,14 +548,15 @@
  "The @code{gtk-application-prefer-dark-theme} property of type @code{:boolean}
   (Read / Write) @br{}
   Whether the application prefers to use a dark theme. If a GTK theme includes
-  a dark variant, it will be used instead of the configured theme. @br{}
+  a dark variant, it will be used instead of the configured theme.
+  Deprecated 4.20 @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'settings-gtk-application-prefer-dark-theme)
       "Accessor"
       (documentation 'settings-gtk-application-prefer-dark-theme 'function)
- "@version{2025-09-23}
+ "@version{2025-11-08}
   @syntax{(gtk:settings-gtk-application-prefer-dark-theme object) => setting}
   @syntax{(setf (gtk:settings-gtk-application-prefer-dark-theme object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -556,6 +569,10 @@
   @end{short}
   If a GTK theme includes a dark variant, it will be used instead of the
   configured theme.
+  @begin[Warning]{dictionary}
+    This property is deprecated since 4.20. Use @class{gtk:css-provider}
+    properties instead.
+  @end{dictionary}
   @see-class{gtk:settings}")
 
 ;;; --- gtk:settings-gtk-cursor-aspect-ratio -----------------------------------
@@ -1321,6 +1338,66 @@
   @see-class{gtk:im-context}
   @see-function{gtk:settings-gtk-show-input-method-menu}")
 
+;;; --- gtk:settings-gtk-interface-color-scheme --------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "gtk-interface-color-scheme"
+                                               'settings) t)
+ "The @code{gtk-interface-color-scheme} property of type
+  @sym{gtk:interface-color-scheme} (Read / Write) @br{}
+  The color scheme used for rendering the user interface. @br{}
+  Default value: @val[gtk:interface-color-scheme]{:unsupported}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'settings-gtk-interface-color-scheme)
+      "Accessor"
+      (documentation 'settings-gtk-interface-color-scheme 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:settings-gtk-interface-color-scheme object) => mode}
+  @syntax{(setf (gtk:settings-gtk-interface-color-scheme object) mode)}
+  @argument[object]{a @class{gtk:settings} object}
+  @argument[mode]{a @sym{gtk:interface-color-scheme} value}
+  @begin{short}
+    The color scheme used for rendering the user interface.
+  @end{short}
+  This setting communicates the system-wide preference. The color scheme that is
+  actually used when applying CSS styles can be set with the
+  @slot[gtk:css-provider]{prefers-color-scheme} property.
+
+  Since 4.20
+  @see-class{gtk:settings}
+  @see-function{gtk:css-provider-prefers-color-scheme}")
+
+;;; --- gtk:settings-gtk-interface-contrast ------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "gtk-interface-contrast"
+                                               'settings) t)
+ "The @code{gtk-interface-contrast} property of type
+  @sym{gtk:interface-contrast} (Read / Write) @br{}
+  The level of contrast to use for the user interface. @br{}
+  Default value: @val[gtk:interface-contrast]{:unsupported}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'settings-gtk-interface-contrast)
+      "Accessor"
+      (documentation 'settings-gtk-interface-contrast 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:settings-gtk-interface-contrast object) => mode}
+  @syntax{(setf (gtk:settings-gtk-interface-contrast object) mode)}
+  @argument[object]{a @class{gtk:settings} object}
+  @argument[mode]{a @sym{gtk:interface-contrast} value}
+  @begin{short}
+    The level of contrast to use for the user interface.
+  @end{short}
+  This setting communicates the system-wide preference. The contrast level that
+  is actually used when applying CSS styles can be set with the
+  @slot[gtk:css-provider]{prefers-contrast} property.
+
+  Since 4.20
+  @see-class{gtk:settings}
+  @see-function{gtk:css-provider-prefers-contrast}")
+
 ;;; --- gtk:settings-gtk-keynav-use-caret --------------------------------------
 
 #+liber-documentation
@@ -1611,7 +1688,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-app-menu)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-app-menu 'function)
- "@version{2025-09-23}
+ "@version{2025-11-08}
   @syntax{(gtk:settings-gtk-shell-shows-app-menu object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-app-menu object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1624,6 +1701,10 @@
   @end{short}
   Set to @em{true} if the desktop environment is displaying the application
   menu, @em{false} if the application should display it itself.
+  @begin[Warning]{dictionary}
+    This property is deprecated since 4.20. This setting is not relevant
+    anymore.
+  @end{dictionary}
   @see-class{gtk:settings}")
 
 ;;; --- gtk:settings-gtk-shell-shows-desktop -----------------------------------
@@ -1641,7 +1722,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-desktop)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-desktop 'function)
- "@version{2025-09-23}
+ "@version{2025-11-08}
   @syntax{(gtk:settings-gtk-shell-shows-desktop object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-desktop object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1654,6 +1735,10 @@
   @end{short}
   Set to @em{true} if the desktop environment is displaying the desktop folder,
   @em{false} if not.
+  @begin[Warning]{dictionary}
+    This property is deprecated since 4.20. This setting is not relevant
+    anymore.
+  @end{dictionary}
   @see-class{gtk:settings}")
 
 ;;; --- gtk:settings-gtk-shell-shows-menubar -----------------------------------
@@ -1671,7 +1756,7 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-menubar)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-menubar 'function)
- "@version{2025-09-23}
+ "@version{2025-11-08}
   @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1684,6 +1769,10 @@
   @end{short}
   Set to @em{true} if the desktop environment is displaying the menubar,
   @em{false} if the application should display it itself.
+  @begin[Warning]{dictionary}
+    This property is deprecated since 4.20. This setting is not relevant
+    anymore.
+  @end{dictionary}
   @see-class{gtk:settings}")
 
 ;;; --- gtk:settings-gtk-show-status-shapes ------------------------------------

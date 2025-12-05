@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-scroll.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -79,13 +79,15 @@
   (:horizontal 2)
   (:discrete 4)
   (:kinetic 8)
+  #+gtk-4-20
+  (:physical-direction 16)
   (:both-axes 3))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'event-controller-scroll-flags)
       "GFlags"
       (liber:symbol-documentation 'event-controller-scroll-flags)
- "@version{2025-07-22}
+ "@version{2025-11-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkEventControllerScrollFlags\" event-controller-scroll-flags
   (:export t
@@ -95,6 +97,7 @@
   (:horizontal 2)
   (:discrete 4)
   (:kinetic 8)
+  (:physical-direction 16)
   (:both-axes 3))
   @end{declaration}
   @begin{values}
@@ -105,6 +108,8 @@
       @entry[:discrete]{Only emit deltas that are multiples of 1.}
       @entry[:kinetic]{Emit the @sig[gtk:event-controller-scroll]{decelerate}
         signal after continuous scroll finishes.}
+      @entry[:physical-direction]{A  value to prefer physical direction over
+        logical direction, that is oblivious to natural scroll. Since 4.20}
       @entry[:both-axes]{Emit scroll on both axes.}
     @end{simple-table}
   @end{values}

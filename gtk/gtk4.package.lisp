@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -136,6 +136,7 @@
       @about-function{native-unrealize}
     @end{subsection}
     @begin[GtkWindow]{subsection}
+      @about-symbol{gtk:window-gravity}
       @about-class{window}
       @about-generic{window-application}
       @about-generic{window-child}
@@ -149,6 +150,7 @@
       @about-generic{window-focus-visible}
       @about-generic{window-focus-widget}
       @about-generic{window-fullscreened}
+      @about-geneirc{window-gravity}
       @about-generic{window-handle-menubar-accel}
       @about-generic{window-hide-on-close}
       @about-generic{window-icon-name}
@@ -801,6 +803,7 @@
     @end{subsection}
     @begin[GtkCalendar]{subsection}
       @about-class{calendar}
+      @about-function{calendar-date}
       @about-generic{calendar-day}
       @about-generic{calendar-month}
       @about-generic{calendar-show-day-names}
@@ -979,6 +982,8 @@
       @about-generic{entry-invisible-char}
       @about-generic{entry-invisible-char-set}
       @about-generic{entry-max-length}
+      @about-generic{entry-menu-entry-icon-primary-text}
+      @about-generic{entry-menu-entry-icon-secondary-text}
       @about-generic{entry-overwrite-mode}
       @about-generic{entry-placeholder-text}
       @about-generic{entry-primary-icon-activatable}
@@ -1871,6 +1876,7 @@
       @about-generic{filter-list-model-model}
       @about-generic{filter-list-model-n-items}
       @about-generic{filter-list-model-pending}
+      @about-generic{filter-list-model-watch-items}
       @about-function{filter-list-model-new}
     @end{subsection}
     @begin[GtkFlattenListModel]{subsection}
@@ -3683,6 +3689,8 @@ GtkCellRenderer         GtkWidget
       @about-generic{settings-gtk-hint-font-metrics}
       @about-generic{settings-gtk-icon-theme-name}
       @about-generic{settings-gtk-im-module}
+      @about-generic{settings-gtk-interface-color-scheme}
+      @about-generic{settings-gtk-interface-contrast}
       @about-generic{settings-gtk-keynav-use-caret}
       @about-generic{settings-gtk-label-select-on-focus}
       @about-generic{settings-gtk-long-press-time}
@@ -3777,7 +3785,11 @@ GtkCellRenderer         GtkWidget
       @about-function{css-section-end-location}
     @end{subsection}
     @begin[GtkCssProvider]{subsection}
+      @about-symbol{gtk:interface-color-scheme}
+      @about-symbol{gtk:interface-contrast}
       @about-class{css-provider}
+      @about-generic{css-provider-prefers-color-scheme}
+      @about-generic{css-provider-prefers-contrast}
       @about-function{css-provider-new}
       @about-function{css-provider-load-named}
       @about-function{css-provider-load-from-bytes}
@@ -3795,6 +3807,8 @@ GtkCellRenderer         GtkWidget
       @about-generic{icon-paintable-file}
       @about-generic{icon-paintable-icon-name}
       @about-generic{icon-paintable-is-symbolic}
+      @about-generic{icon-paintable-scale}
+      @about-generic{icon-paintable-size}
       @about-function{icon-paintable-new-for-file}
     @end{subsection}
     @begin[GtkIconTheme]{subsection}
@@ -4307,7 +4321,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{cell-area-edit-widget}
       @about-generic{cell-area-edited-cell}
       @about-generic{cell-area-focus-cell}
-      @about-symbol{GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID}
       @about-function{cell-area-add}
       @about-function{cell-area-remove}
       @about-function{cell-area-has-renderer}

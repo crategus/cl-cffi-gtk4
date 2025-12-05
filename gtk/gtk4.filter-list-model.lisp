@@ -2,7 +2,7 @@
 ;;; gtk4.filter-list-model.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -44,6 +44,8 @@
 ;;;     gtk_filter_list_model_set_incremental
 ;;;     gtk_filter_list_model_get_incremental
 ;;;     gtk_filter_list_model_get_pending
+;;;     gtk_filter_list_model_get_watch_items
+;;;     gtk_filter_list_model_set_watch_items
 ;;;
 ;;; Functions
 ;;;
@@ -57,6 +59,7 @@
 ;;;     model
 ;;;     n-items                                             Since 4.8
 ;;;     pending
+;;;     watch-items                                         Since 4.20
 ;;;
 ;;; Hierarchy
 ;;;
@@ -100,11 +103,15 @@
     "n-items" "guint" t nil)
    (pending
     filter-list-model-pending
-    "pending" "guint" t nil)))
+    "pending" "guint" t nil)
+    #+gtk-4-20
+    (watch-items
+     filter-list-model-watch-items
+     "watch-items" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'filter-list-model 'type)
- "@version{2025-03-26}
+ "@version{2025-11-02}
   @begin{short}
     The @class{gtk:filter-list-model} object is a list model that filters the
     elements of the underlying model according to a @class{gtk:filter} object.
@@ -114,7 +121,8 @@
 
   The model can be set up to do incremental searching, so that filtering long
   lists does not block the UI. See the @fun{gtk:filter-list-model-incremental}
-  function for details.
+  function for details. The model passes through sections from the underlying
+  model.
   @see-constructor{gtk:filter-list-model-new}
   @see-slot{gtk:filter-list-model-filter}
   @see-slot{gtk:filter-list-model-incremental}
@@ -122,6 +130,7 @@
   @see-slot{gtk:filter-list-model-model}
   @see-slot{gtk:filter-list-model-n-items}
   @see-slot{gtk:filter-list-model-pending}
+  @see-slot{gtk:filter-list-model-watch-items}
   @see-class{g:list-model}
   @see-class{gtk:filter}")
 
@@ -315,6 +324,39 @@
   function returns 0.
   @see-class{gtk:filter-list-model}
   @see-function{gtk:filter-list-model-incremental}")
+
+;;; --- gtk:filter-list-model-watch-items --------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "watch-items"
+                                               'filter-list-model) t)
+ "The @code{watch-items} property of type @code{:boolean} (Read / Write) @br{}
+  Whether to monitor the list items for changes. It may impact performance.
+  Since 4.20 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'filter-list-model-watch-items)
+      "Accessor"
+      (documentation 'filter-list-model-watch-items 'function)
+ "@version{#2025-11-02}
+  @syntax{(gtk:filter-list-model-watch-items object) => setting}
+  @syntax{(setf (gtk:filter-list-model-watch-items object) setting)}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[setting]{a boolean whether to monitor list items for changes}
+  @begin{short}
+    The accessor for the @slot[gtk:filter-list-model]{watch-items} slot of the
+    @class{gtk:filter-list-model} class gets or sets whether watching items is
+    enabled.
+  @end{short}
+  This allows implementations of the @class{gtk:filter} object that support
+  expression watching to react to property changes. This property has no effect
+  if the current filter does not support watching items. By default, watching
+  items is disabled.
+
+  Since 4.20
+  @see-class{gtk:filter-list-model}
+  @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_filter_list_model_new

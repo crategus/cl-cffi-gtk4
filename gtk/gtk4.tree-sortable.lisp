@@ -73,13 +73,15 @@
 
 (defconstant +tree-sortable-default-sort-column-id+ -1
  #+liber-documentation
- "@version{2024-05-09}
+ "@version{2025-11-16}
   @variable-value{-1}
   @begin{short}
     The default sort column ID can be used to make a @class{gtk:tree-sortable}
     object use the default sort function.
   @end{short}
   See also the @fun{gtk:tree-sortable-sort-column-id} function.
+
+  Deprecated 4.20
   @see-class{gtk:tree-sortable}
   @see-function{gtk:tree-sortable-sort-column-id}")
 
@@ -95,13 +97,15 @@
 
 (defconstant +tree-sortable-unsorted-sort-column-id+ -2
  #+liber-documentation
- "@version{2024-05-09}
+ "@version{2025-11-16}
   @variable-value{-2}
   @begin{short}
     The unsorted sort column ID can be used to make a @class{gtk:tree-sortable}
     object use no sorting.
   @end{short}
   See also the @fun{gtk:tree-sortable-sort-column-id} function.
+
+  Deprecated 4.20
   @see-class{gtk:tree-sortable}
   @see-function{gtk:tree-sortable-sort-column-id}")
 

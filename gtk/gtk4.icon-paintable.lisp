@@ -2,7 +2,7 @@
 ;;; gtk4.icon-paintable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -39,8 +39,8 @@
 ;;; Accessors
 ;;;
 ;;;     gtk_icon_paintable_get_file
-;;;     gtk_icon_paintable_get_icon_name
-;;;     gtk_icon_paintable_is_symbolic
+;;;     gtk_icon_paintable_get_icon_name                    Deprecated 4.20
+;;;     gtk_icon_paintable_is_symbolic                      Deprecated 4.20
 ;;;
 ;;; Functions
 ;;;
@@ -51,8 +51,10 @@
 ;;; Properties
 ;;;
 ;;;     file
-;;;     icon-name
-;;;     is-symbolic
+;;;     icon-name                                           Deprecated 4.20
+;;;     is-symbolic                                         Deprecated 4.20
+;;;     scale                                               Since 4.20
+;;;     size                                                Since 4.20
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -138,11 +140,19 @@
     "icon-name" "gchararray" t t)
    (is-symbolic
     icon-paintable-is-symbolic
-    "is-symbolic" "gboolean" t t)))
+    "is-symbolic" "gboolean" t t)
+   #+gtk-4-20
+   (scale
+    icon-paintable-scale
+    "scale" "gint" t t)
+   #+gtk-4-20
+   (size
+    icon-paintable-size
+    "size" "gint" t t)))
 
 #+liber-documentation
 (setf (documentation 'icon-paintable 'type)
- "@version{2025-09-22}
+ "@version{2025-11-08}
   @begin{short}
     Contains information found when looking up an icon in a
     @class{gtk:icon-theme} object and supports painting it as a
@@ -153,6 +163,8 @@
   @see-slot{gtk:icon-paintable-file}
   @see-slot{gtk:icon-paintable-icon-name}
   @see-slot{gtk:icon-paintable-is-symbolic}
+  @see-slot{gtk:icon-paintable-scale}
+  @see-slot{gtk:icon-paintable-size}
   @see-constructor{gtk:icon-paintable-new-for-file}
   @see-class{gtk:icon-theme}
   @see-class{gdk:paintable}
@@ -174,7 +186,7 @@
 (setf (liber:alias-for-function 'icon-paintable-file)
       "Accessor"
       (documentation 'icon-paintable-file 'function)
- "@version{2025-09-22}
+ "@version{2025-11-08}
   @syntax{(gtk:icon-paintable-file object) => file}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[file]{a @class{g:file} object for the icon, or @code{nil}}
@@ -183,7 +195,6 @@
     @class{gtk:icon-paintable} class returns the @class{g:file} object that was
     used to load the icon, or @code{nil} if the icon was not loaded from a file.
   @end{short}
-  The @fun{gtk:icon-paintable-file} function gets
   @see-class{gtk:icon-paintable}
   @see-class{g:file}")
 
@@ -193,13 +204,14 @@
 (setf (documentation (liber:slot-documentation "icon-name" 'icon-paintable) t)
  "The @code{icon-name} property of type @code{:string}
   (Read / Write / Construct only) @br{}
-  The icon name that was chosen during lookup.")
+  The icon name that was chosen during lookup. Deprecated 4.20 @br{}
+  Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'icon-paintable-icon-name)
       "Accessor"
       (documentation 'icon-paintable-icon-name 'function)
- "@version{2025-09-22}
+ "@version{2025-11-08}
   @syntax{(gtk:icon-paintable-icon-name object) => name}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[name]{a string for the themed icon name for the icon, or @code{nil}
@@ -217,6 +229,10 @@
 
   If the icon was created without an icon theme, this function returns
   @code{nil}.
+  @begin[Warning]{dictionary}
+    The @slot[gtk:icon-paintable]{icon-name} property is deprecated since 4.20.
+    Do not use this function in newly written code.
+  @end{dictionary}
   @see-class{gtk:icon-paintable}
   @see-class{gtk:icon-theme}
   @see-function{gtk:icon-theme-lookup-icon}")
@@ -227,13 +243,14 @@
 (setf (documentation (liber:slot-documentation "is-symbolic" 'icon-paintable) t)
  "The @code{is-symbolic} property of type @code{:boolean} (Read / Write /
   Construct only) @br{}
-  Whether the icon is symbolic or not.")
+  Whether the icon is symbolic or not. Deprecated 4.20. @br{}
+  Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'icon-paintable-is-symbolic)
       "Accessor"
       (documentation 'icon-paintable-is-symbolic 'function)
- "@version{2025-09-22}
+ "@version{2025-11-08}
   @syntax{(gtk:icon-paintable-is-symbolic object) => symbolic}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[symbolic]{@em{true} if the icon is symbolic, @em{false} otherwise}
@@ -243,11 +260,57 @@
   @end{short}
   This currently uses only the file name and not the file contents for
   determining this. This behaviour may change in the future.
+  @begin[Warning]{dictionary}
+    The @slot[gtk:icon-paintable]{is-symbolic} property is deprecated since
+    4.20. Do not use this function in newly written code.
+  @end{dictionary}
+  @see-class{gtk:icon-paintable}")
 
-  Note that to render a symbolic @class{gtk:icon-paintable} object properly,
-  with recoloring, you have to set its icon name on a @class{gtk:image} widget.
-  @see-class{gtk:icon-paintable}
-  @see-class{gtk:image}")
+;;; --- gtk:icon-paintable-scale -----------------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "scale" 'icon-paintable) t)
+ "The @code{scale} property of type @code{:int} (Read / Write) @br{}
+  No desription available. Since 4.20 @br{}
+  Default value: 1")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'icon-paintable-scale)
+      "Accessor"
+      (documentation 'icon-paintable-scale 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:icon-paintable-scale object) => scale}
+  @syntax{(setf (gtk:icon-paintable-scale object) scale)}
+  @argument[object]{a @class{gtk:icon-paintable} object}
+  @argument[scale]{no description available}
+  @begin{short}
+    The accessor for the @slot[gtk:icon-paintable]{scale} slot of the
+    @class{gtk:icon-paintable} class.
+  @end{short}
+  @see-class{gtk:icon-paintable}")
+
+;;; --- gtk:icon-paintable-size ------------------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "size" 'icon-paintable) t)
+ "The @code{size} property of type @code{:int} (Read / Write) @br{}
+  No desription available. Since 4.20 @br{}
+  Default value: 16")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'icon-paintable-size)
+      "Accessor"
+      (documentation 'icon-paintable-size 'function)
+ "@version{2025-11-08}
+  @syntax{(gtk:icon-paintable-size object) => size}
+  @syntax{(setf (gtk:icon-paintable-size object) size)}
+  @argument[object]{a @class{gtk:icon-paintable} object}
+  @argument[size]{no description available}
+  @begin{short}
+    The accessor for the @slot[gtk:icon-paintable]{size} slot of the
+    @class{gtk:icon-paintable} class.
+  @end{short}
+  @see-class{gtk:icon-paintable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_icon_paintable_new_for_file

@@ -2,7 +2,7 @@
 ;;; gtk4.window.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,6 +33,7 @@
 ;;;
 ;;; Types and Values
 ;;;
+;;;     GtkWindowGravity
 ;;;     GtkWindow
 ;;;
 ;;; Accessors
@@ -52,6 +53,8 @@
 ;;;     gtk_window_set_display
 ;;;     gtk_window_get_focus_visible
 ;;;     gtk_window_set_focus_visible
+;;;     gtk_window_get_gravity                              Since 4.20
+;;;     gtk_window_set_gravity                              Since 4.20
 ;;;     gtk_window_get_handle_menubar_accel                 Since 4.2
 ;;;     gtk_window_set_handle_menubar_accel                 Since 4.2
 ;;;     gtk_window_get_hide_on_close
@@ -118,6 +121,7 @@
 ;;;     focus-visible
 ;;;     focus-widget
 ;;;     fullscreened
+;;;     gravity                                             Since 4.20
 ;;;     handle-menubar-accel                                Since 4.2
 ;;;     hide-on-close
 ;;;     icon-name
@@ -163,6 +167,86 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkWindowGravity
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(gobject:define-genum "GtkWindowGravity" window-gravity
+  (:export t
+   :type-initializer "gtk_window_gravity_get_type")
+  (:top-left 0)
+  (:top 1)
+  (:top-right 2)
+  (:left 3)
+  (:center 4)
+  (:right 5)
+  (:bottom-left 6)
+  (:bottom 7)
+  (:bottom-right 8)
+  (:top-start 9)
+  (:top-end 10)
+  (:start 11)
+  (:end 12)
+  (:bottom-start 13)
+  (:bottom-end 14))
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-symbol 'window-gravity)
+      "GEnum"
+      (liber:symbol-documentation 'window-gravity)
+ "@version{#2025-11-03}
+  @begin{declaration}
+(gobject:define-genum \"GtkWindowGravity\" window-gravity
+  (:export t
+   :type-initializer \"gtk_window_gravity_get_type\")
+  (:top-left 0)
+  (:top 1)
+  (:top-right 2)
+  (:left 3)
+  (:center 4)
+  (:right 5)
+  (:bottom-left 6)
+  (:bottom 7)
+  (:bottom-right 8)
+  (:top-start 9)
+  (:top-end 10)
+  (:start 11)
+  (:end 12)
+  (:bottom-start 13)
+  (:bottom-end 14))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:top-left]{The top left corner.}
+      @entry[:top]{The top edge.}
+      @entry[:top-right]{The top right corner.}
+      @entry[:left]{The left edge.}
+      @entry[:center]{The center pointer.}
+      @entry[:right]{The right edge.}
+      @entry[:bottom-left]{The bottom left corner.}
+      @entry[:bottom]{The bottom edge.}
+      @entry[:bottom-right]{The bottom right corner.}
+      @entry[:top-start]{The top left or top right corner, depending on the text
+        direction.}
+      @entry[:top-end]{The top right or top left corner, depending on the text
+        direction.}
+      @entry[:start]{The left or right edge, depending on the text direction.}
+      @entry[:end]{The right or left edge, depending on the text direction.}
+      @entry[:bottom-start]{The bottom left or top right corner, depending on
+        the text direction.}
+      @entry[:bottom-end]{The bottom right or top left corner, depending on the
+        text direction.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Determines which point or edge of a window is meant to remain fixed when a
+    window changes size.
+  @end{short}
+
+  Since 4.20
+  @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkWindow
@@ -214,6 +298,10 @@
    (fullscreened
     window-fullscreened
     "fullscreened" "gboolean" t t)
+   #+gtk-4-20
+   (gravity
+    window-gravity
+    "gravity" "GtkWindowGravity" t t)
    #+gtk-4-2
    (handle-menubar-accel
     window-handle-menubar-accel
@@ -306,8 +394,7 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:window} implementation uses the
-    @val[gtk:accessible-role]{:window} role of the @sym{gtk:accessible-role}
-    enumeration.
+    @val[gtk:accessible-role]{:window} role.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @begin[window::activate-default]{signal}
@@ -387,6 +474,7 @@ lambda (window)    :run-first
   @see-slot{gtk:window-focus-visible}
   @see-slot{gtk:window-focus-widget}
   @see-slot{gtk:window-fullscreened}
+  @see-slot{gtk:window-gravity}
   @see-slot{gtk:window-handle-menubar-accel}
   @see-slot{gtk:window-hide-on-close}
   @see-slot{gtk:window-icon-name}
@@ -790,6 +878,37 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-fullscreen}
   @see-function{gtk:window-unfullscreen}")
+
+;;; --- gtk:window-gravity -----------------------------------------------------
+
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "gravity" 'window) t)
+ "The @code{gravity} property of type @symbol{gtk:window-gravity} (Read / Write)
+  @br{}
+  The gravity to use when resizing the window programmatically. Gravity
+  describes which point of the window we want to keep fixed (meaning that the
+  window will grow in the opposite direction). For example, a gravity of
+  @val[gtk:window-gravity]{:top-right} means that we want the to fix top right
+  corner of the window. Since 4.20 @br{}
+  Default value: @val[gtk:window-gravity]{:top-start}")
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-function 'window-gravity)
+      "Accessor"
+      (documentation 'window-gravity 'function)
+ "@version{#2025-11-03}
+  @syntax{(gtk:window-gravity object) => gravity}
+  @syntax{(setf (gtk:window-gravity object) gravity)}
+  @argument[object]{a @class{gtk:window} widget}
+  @argument[gravity]{a @symbol{gtk:window-gravity} value}
+  @begin{short}
+    The accessor for the @slot[gtk:window]{gravity} slot of the
+    @class{gtk:window} class gets or sets the gravity that is used when changing
+    the window size programmatically.
+  @end{short}
+
+  Since 4.20
+  @see-class{gtk:window}")
 
 ;;; --- gtk:window-handle-menubar-accel ----------------------------------------
 

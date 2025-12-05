@@ -2,7 +2,7 @@
 ;;; gtk4.filter.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -112,13 +112,19 @@
    :type-initializer "gtk_filter_change_get_type")
   :different
   :less-strict
-  :more-strict)
+  :more-strict
+  #+gtk-4-20
+  :different-rewatch
+  #+gtk-4-20
+  :less-strict-rewatch
+  #+gtk-4-20
+  :more-strict-rewatch)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'filter-change)
       "GEnum"
       (liber:symbol-documentation 'filter-change)
- "@version{2025-07-26}
+ "@version{2025-11-02}
   @begin{declaration}
 (gobject:define-genum \"GtkFilterChange\" filter-change
   (:export t
@@ -137,6 +143,18 @@
       @entry[:more-strict]{The filter is more strict than it was before. All
         items that it used to return @em{false} for still return @em{false},
         others now may, too.}
+      @entry[:different-rewatch]{Similar to @val[gtk:filter-change]{:different},
+        but signs that item watches should be recreated. This is used by the
+        @class{gtk:filter-list-model} object to keep the list up-to-date when
+        items change. Since 4.20}
+      @entry[:less-strict-rewatch]{Similar to
+        @val[gtk:filter-change]{:less-strict}, but signs that item watches
+        should be recreated. This is used by the @class{gtk:filter-list-model}
+        object to keep the list up-to-date when items change. Since 4.20}
+      @entry[:more-strict-rewatch]{Similar to
+        @val[gtk:filter-change]{:more-strict}, but signs that item watches
+        should be recreated. This is used by the @class{gtk:filter-list-model}
+        object to keep the list up-to-date when items change. Since 4.20}
     @end{simple-table}
   @end{values}
   @begin{short}
