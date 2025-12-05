@@ -2,7 +2,7 @@
 ;;; gsk.render-node.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -73,6 +73,7 @@
 ;;;     GskFillNode                                         Since 4.14
 ;;;     GskStrokeNode                                       Since 4.14
 ;;;     GskSubsurfaceNode                                   Since 4.14
+;;;     GskComponentTransferNode                            Since 4.20
 ;;;
 ;;; Functions
 ;;;
@@ -86,6 +87,7 @@
 ;;;     gsk_render_node_deserialize
 ;;;     gsk_render_node_write_to_file
 ;;;     gsk_render_node_get_bounds
+;;;     gsk_render_node_get_opaque_rect                     Since 4.16
 ;;;
 ;;;     gsk_value_dup_render_node                           Since 4.6
 ;;;     gsk_value_get_render_node                           Since 4.6
@@ -207,6 +209,9 @@
 ;;;     gsk_subsurface_node_new                             Since 4.14
 ;;;     gsk_subsurface_node_subsurface                      Since 4.14
 ;;;     gsk_subsurface_node_child                           Since 4.14
+;;;     gsk_component_transfer_node_new                     Since 4.20
+;;;     gsk_component_transfer_node_get_child               Since 4.20
+;;;     gsk_component_transfer_node_get_transfer            Since 4.20
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -257,13 +262,15 @@
   #+gtk-4-14
   :stroke-node
   #+gtk-4-14
-  :subsurface-node)
+  :subsurface-node
+  #+gtk-4-20
+  :component-transfer-node)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{2025-08-23}
+ "@version{2025-11-02}
   @begin{declaration}
 (gobject:define-genum \"GskRenderNodeType\" render-node-type
   (:export t
@@ -303,7 +310,9 @@
   #+gtk-4-14
   :stroke-node
   #+gtk-4-14
-  :subsurface-node)
+  :subsurface-node
+  #+gtk-4-20
+  :component-transfer-node)
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -345,6 +354,8 @@
       @entry[:stroke-node]{A node that strokes a path. Since 4.14}
       @entry[:subsurface-node]{A node that possibly redirects part of the scene
         graph to a subsurface. Since 4.14}
+      @entry[:component-transfer-node]{A node that applies some function to each
+        color component. Since 4.20}
     @end{simple-table}
   @end{values}
   @begin{short}
@@ -872,6 +883,12 @@ color {
   bounds)
 
 (export 'render-node-bounds)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_render_node_get_opaque_rect                         Since 4.16
+;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the function
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_value_dup_render_node                               Since 4.6
@@ -4110,5 +4127,23 @@ color {
 
 #+gtk-4-14
 (export 'subsurface-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; GskComponentTransferNode                                Since 4.20
+;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the type and functions
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_component_transfer_node_new                         Since 4.20
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_component_transfer_node_get_child                   Since 4.20
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_component_transfer_node_get_transfer                Since 4.20
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gsk4.render-node.lis ---------------------------------------
