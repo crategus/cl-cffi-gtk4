@@ -13,10 +13,10 @@
 
 (in-package :gtk-test)
 
-;; Check the library version we are running against. The testsuite requieres
-;;; the last version.
+;; Check which version of the library we are running. The testsuite requires
+;; the latest version.
 (glib-init:require-library-version "GTK"
-                                   4 18
+                                   4 20
                                    (gtk:major-version)
                                    (gtk:minor-version))
 
@@ -189,9 +189,14 @@ sem venenatis, vitae ultricies arcu laoreet."))
 
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: The first call generates an internal error message. Can we remove it?
+;; [Error] [Frontend] Error in DBus call doListing:
+;; GDBus.Error:org.freedesktop.DBus.Error.NoReply: Message recipient
+;; disconnected from message bus without replying
+
 ;; Get a default printer for printer tests
 (let (default-printer)
-  (defun get-default-printer ()
+  (defun get-default-printer (&optional verbose)
     #-windows
     (unless default-printer
       (gtk:enumerate-printers (lambda (printer)
@@ -199,10 +204,11 @@ sem venenatis, vitae ultricies arcu laoreet."))
                                     (setf default-printer printer)
                                     nil))
                               t)
-      (if default-printer
-          (format t "~&Default printer for testsuite is \"~a\"~%"
-                    (gtk:printer-name default-printer))
-          (format t "~&No printer for testsuite available~%")))
+      (when verbose
+        (if default-printer
+            (format t "~&Default printer for testsuite is \"~a\"~%"
+                      (gtk:printer-name default-printer))
+            (format t "~&No printer for testsuite available~%"))))
     default-printer))
 
-;;; 2025-05-30
+;;; 2025-12-05

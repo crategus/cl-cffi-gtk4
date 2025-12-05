@@ -12,8 +12,7 @@
   (is (g:type-is-enum "GskRenderNodeType"))
   ;; Check type initializer
   (is (eq (g:gtype "GskRenderNodeType")
-          (g:gtype (cffi:foreign-funcall "gsk_render_node_type_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gsk_render_node_type_get_type" :size))))
   ;; Check registered name
   (is (eq 'gsk:render-node-type
           (glib:symbol-for-gtype "GskRenderNodeType")))
@@ -29,11 +28,11 @@
                "GSK_CROSS_FADE_NODE" "GSK_TEXT_NODE" "GSK_BLUR_NODE"
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE" "GSK_TEXTURE_SCALE_NODE"
                "GSK_MASK_NODE" "GSK_FILL_NODE" "GSK_STROKE_NODE"
-               "GSK_SUBSURFACE_NODE")
+               "GSK_SUBSURFACE_NODE" "GSK_COMPONENT_TRANSFER_NODE")
              (glib-test:list-enum-item-names "GskRenderNodeType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-               25 26 27 28 29 30)
+               25 26 27 28 29 30 31)
              (glib-test:list-enum-item-values "GskRenderNodeType")))
   ;; Check nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
@@ -45,43 +44,45 @@
                "rounded-clip-node" "shadow-node" "blend-node" "cross-fade-node"
                "text-node" "blur-node" "debug-node" "gl-shader-node"
                "texture-scale-node" "mask-node" "fill-node" "stroke-node"
-               "subsurface-node")
+               "subsurface-node" "component-transfer-node")
              (glib-test:list-enum-item-nicks "GskRenderNodeType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GskRenderNodeType" GSK:RENDER-NODE-TYPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gsk_render_node_type_get_type")
-                       (:NOT-A-RENDER-NODE 0)
-                       (:CONTAINER-NODE 1)
-                       (:CAIRO-NODE 2)
-                       (:COLOR-NODE 3)
-                       (:LINEAR-GRADIENT-NODE 4)
-                       (:REPEATING-LINEAR-GRADIENT-NODE 5)
-                       (:RADIAL-GRADIENT-NODE 6)
-                       (:REPEATING-RADIAL-GRADIENT-NODE 7)
-                       (:CONIC-GRADIENT-NODE 8)
-                       (:BORDER-NODE 9)
-                       (:TEXTURE-NODE 10)
-                       (:INSET-SHADOW-NODE 11)
-                       (:OUTSET-SHADOW-NODE 12)
-                       (:TRANSFORM-NODE 13)
-                       (:OPACITY-NODE 14)
-                       (:COLOR-MATRIX-NODE 15)
-                       (:REPEAT-NODE 16)
-                       (:CLIP-NODE 17)
-                       (:ROUNDED-CLIP-NODE 18)
-                       (:SHADOW-NODE 19)
-                       (:BLEND-NODE 20)
-                       (:CROSS-FADE-NODE 21)
-                       (:TEXT-NODE 22)
-                       (:BLUR-NODE 23)
-                       (:DEBUG-NODE 24)
-                       (:GL-SHADER-NODE 25)
-                       (:TEXTURE-SCALE-NODE 26)
-                       (:MASK-NODE 27)
-                       (:FILL-NODE 28)
-                       (:STROKE-NODE 29)
-                       (:SUBSURFACE-NODE 30))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gsk_render_node_type_get_type")
+                                    (:NOT-A-RENDER-NODE 0)
+                                    (:CONTAINER-NODE 1)
+                                    (:CAIRO-NODE 2)
+                                    (:COLOR-NODE 3)
+                                    (:LINEAR-GRADIENT-NODE 4)
+                                    (:REPEATING-LINEAR-GRADIENT-NODE 5)
+                                    (:RADIAL-GRADIENT-NODE 6)
+                                    (:REPEATING-RADIAL-GRADIENT-NODE 7)
+                                    (:CONIC-GRADIENT-NODE 8)
+                                    (:BORDER-NODE 9)
+                                    (:TEXTURE-NODE 10)
+                                    (:INSET-SHADOW-NODE 11)
+                                    (:OUTSET-SHADOW-NODE 12)
+                                    (:TRANSFORM-NODE 13)
+                                    (:OPACITY-NODE 14)
+                                    (:COLOR-MATRIX-NODE 15)
+                                    (:REPEAT-NODE 16)
+                                    (:CLIP-NODE 17)
+                                    (:ROUNDED-CLIP-NODE 18)
+                                    (:SHADOW-NODE 19)
+                                    (:BLEND-NODE 20)
+                                    (:CROSS-FADE-NODE 21)
+                                    (:TEXT-NODE 22)
+                                    (:BLUR-NODE 23)
+                                    (:DEBUG-NODE 24)
+                                    (:GL-SHADER-NODE 25)
+                                    (:TEXTURE-SCALE-NODE 26)
+                                    (:MASK-NODE 27)
+                                    (:FILL-NODE 28)
+                                    (:STROKE-NODE 29)
+                                    (:SUBSURFACE-NODE 30)
+                                    (:COMPONENT-TRANSFER-NODE 31))
              (gobject:get-gtype-definition "GskRenderNodeType"))))
 
 ;;;     GskScalingFilter
@@ -712,4 +713,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; 2024-11-15
+;;; 2025-11-02

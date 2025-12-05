@@ -63,6 +63,7 @@
                "enable-emoji-completion" "enable-undo" "extra-menu" "has-frame"
                "im-module" "input-hints" "input-purpose" "invisible-char"
                "invisible-char-set" "max-length" "max-width-chars"
+               "menu-entry-icon-primary-text" "menu-entry-icon-secondary-text"
                "overwrite-mode" "placeholder-text" "primary-icon-activatable"
                "primary-icon-gicon" "primary-icon-name" "primary-icon-paintable"
                "primary-icon-sensitive" "primary-icon-storage-type"
@@ -112,7 +113,16 @@
                         "invisible-char" "guint" T T)
                        (INVISIBLE-CHAR-SET ENTRY-INVISIBLE-CHAR-SET
                         "invisible-char-set" "gboolean" T T)
+
                        (MAX-LENGTH ENTRY-MAX-LENGTH "max-length" "gint" T T)
+
+                       (MENU-ENTRY-ICON-PRIMARY-TEXT
+                        ENTRY-MENU-ENTRY-ICON-PRIMARY-TEXT
+                        "menu-entry-icon-primary-text" "gchararray" T T)
+                       (MENU-ENTRY-ICON-SECONDARY-TEXT
+                        ENTRY-MENU-ENTRY-ICON-SECONDARY-TEXT
+                        "menu-entry-icon-secondary-text" "gchararray" T T)
+
                        (OVERWRITE-MODE ENTRY-OVERWRITE-MODE
                         "overwrite-mode" "gboolean" T T)
                        (PLACEHOLDER-TEXT ENTRY-PLACEHOLDER-TEXT
@@ -343,4 +353,17 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2025-09-18
+;;;     gtk_entry_get_menu_entry_icon_text                  Since 4.20
+;;;     gtk_entry_set_menu_entry_icon_text                  Since 4.20
+
+(test gtk-entry-menu-entry-icon-text
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry (gtk:entry-new)) 'gtk:entry))
+    (is (string= "text"
+                 (setf (gtk:entry-menu-entry-icon-text entry :primary) "text")))
+    (is (string= "text" (gtk:entry-menu-entry-icon-text entry :primary)))
+    (is (string= "text"
+                 (setf (gtk:entry-menu-entry-icon-text entry :secondary) "text")))
+    (is (string= "text" (gtk:entry-menu-entry-icon-text entry :secondary)))))
+
+;;; 2025-11-16

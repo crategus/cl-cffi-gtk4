@@ -26,26 +26,30 @@
   (is (equal '("GListModel" "GtkSectionModel")
              (glib-test:list-interfaces "GtkFilterListModel")))
   ;; Check properties
-  (is (equal '("filter" "incremental" "item-type" "model" "n-items" "pending")
+  (is (equal '("filter" "incremental" "item-type" "model" "n-items" "pending"
+               "watch-items")
              (glib-test:list-properties "GtkFilterListModel")))
   ;; Check signals
   (is (equal '()
              (glib-test:list-signals "GtkFilterListModel")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFilterListModel" GTK:FILTER-LIST-MODEL
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES ("GListModel" "GtkSectionModel")
-                        :TYPE-INITIALIZER "gtk_filter_list_model_get_type")
-                       ((FILTER FILTER-LIST-MODEL-FILTER "filter" "GtkFilter" T T)
-                        (INCREMENTAL FILTER-LIST-MODEL-INCREMENTAL
-                         "incremental" "gboolean" T T)
-                        (ITEM-TYPE FILTER-LIST-MODEL-ITEM-TYPE
-                         "item-type" "GType" T NIL)
-                        (MODEL FILTER-LIST-MODEL-MODEL "model" "GListModel" T T)
-                        (N-ITEMS FILTER-LIST-MODEL-N-ITEMS "n-items" "guint" T NIL)
-                        (PENDING FILTER-LIST-MODEL-PENDING
-                         "pending" "guint" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES ("GListModel" "GtkSectionModel")
+                       :TYPE-INITIALIZER "gtk_filter_list_model_get_type")
+                      ((FILTER FILTER-LIST-MODEL-FILTER "filter" "GtkFilter" T T)
+                       (INCREMENTAL FILTER-LIST-MODEL-INCREMENTAL
+                        "incremental" "gboolean" T T)
+                       (ITEM-TYPE FILTER-LIST-MODEL-ITEM-TYPE
+                        "item-type" "GType" T NIL)
+                       (MODEL FILTER-LIST-MODEL-MODEL "model" "GListModel" T T)
+                       (N-ITEMS FILTER-LIST-MODEL-N-ITEMS "n-items" "guint" T NIL)
+                       (PENDING FILTER-LIST-MODEL-PENDING
+                        "pending" "guint" T NIL)
+                       (WATCH-ITEMS FILTER-LIST-MODEL-WATCH-ITEMS
+                        "watch-items" "gboolean" T T)))
+
              (gobject:get-gtype-definition "GtkFilterListModel"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -122,4 +126,4 @@
       (is-false (setf (gtk:filter-list-model-filter model) nil))
       (is-false (setf (gtk:filter-list-model-model model) nil)))))
 
-;;; 2024-12-17
+;;; 2025-11-02

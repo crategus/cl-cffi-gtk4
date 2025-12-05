@@ -50,11 +50,12 @@
                "GDK_TOUCH_END" "GDK_TOUCH_CANCEL" "GDK_TOUCHPAD_SWIPE"
                "GDK_TOUCHPAD_PINCH" "GDK_PAD_BUTTON_PRESS"
                "GDK_PAD_BUTTON_RELEASE" "GDK_PAD_RING" "GDK_PAD_STRIP"
-               "GDK_PAD_GROUP_MODE" "GDK_TOUCHPAD_HOLD" "GDK_EVENT_LAST")
+               "GDK_PAD_GROUP_MODE" "GDK_TOUCHPAD_HOLD" "GDK_PAD_DIAL"
+               "GDK_EVENT_LAST")
              (glib-test:list-enum-item-names "GdkEventType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-               25 26 27 28 29)
+               25 26 27 28 29 30)
              (glib-test:list-enum-item-values "GdkEventType")))
   ;; Check nick names
   (is (equal '("delete" "motion-notify" "button-press" "button-release"
@@ -64,7 +65,7 @@
                "touch-begin" "touch-update" "touch-end" "touch-cancel"
                "touchpad-swipe" "touchpad-pinch" "pad-button-press"
                "pad-button-release" "pad-ring" "pad-strip" "pad-group-mode"
-               "touchpad-hold" "event-last")
+               "touchpad-hold" "pad-dial" "event-last")
              (glib-test:list-enum-item-nicks "GdkEventType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GdkEventType" GDK:EVENT-TYPE
@@ -99,7 +100,8 @@
                                     (:PAD-STRIP 26)
                                     (:PAD-GROUP-MODE 27)
                                     (:TOUCHPAD-HOLD 28)
-                                    (:EVENT-LAST 29))
+                                    (:pad-dial 29)
+                                    (:EVENT-LAST 30))
              (gobject:get-gtype-definition "GdkEventType"))))
 
 ;;;     GdkKeymapKey
@@ -399,4 +401,4 @@
 ;;;     gdk_events_get_center
 ;;;     gdk_events_get_distance
 
-;;; 2024-9-18
+;;; 2025-11-02

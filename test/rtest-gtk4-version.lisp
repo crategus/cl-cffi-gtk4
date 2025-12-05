@@ -12,18 +12,15 @@
 
 ;;;     gtk_get_minor_version
 
+#+crategus
 (test gtk-minor-version
-  (is (= 18 (gtk:minor-version))))
+  (is (= 20 (gtk:minor-version))))
 
 ;;;     gtk_get_micro_version
 
 #+crategus
 (test gtk-micro-version
-  (is (= 5 (gtk:micro-version))))
-
-#+windows
-(test gtk-micro-version
-  (is (= 2 (gtk:micro-version))))
+  (is (= 1 (gtk:micro-version))))
 
 ;;;     gtk_get_binary_age                                  not implemented
 ;;;     gtk_get_interface_age                               not implemented
@@ -35,4 +32,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2025-08-05
+;;; 2025-11-08

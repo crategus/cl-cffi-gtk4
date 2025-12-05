@@ -42,6 +42,7 @@
                "gtk-entry-select-on-focus" "gtk-error-bell" "gtk-font-name"
                "gtk-font-rendering" "gtk-fontconfig-timestamp"
                "gtk-hint-font-metrics" "gtk-icon-theme-name" "gtk-im-module"
+               "gtk-interface-color-scheme" "gtk-interface-contrast"
                "gtk-keynav-use-caret" "gtk-label-select-on-focus"
                "gtk-long-press-time" "gtk-overlay-scrolling"
                "gtk-primary-button-warps-slider" "gtk-print-backends"
@@ -141,6 +142,12 @@
                         "gtk-icon-theme-name" "gchararray" T T)
                        (GTK-IM-MODULE SETTINGS-GTK-IM-MODULE
                         "gtk-im-module" "gchararray" T T)
+                       (GTK-INTERFACE-COLOR-SCHEME
+                        SETTINGS-GTK-INTERFACE-COLOR-SCHEME
+                        "gtk-interface-color-scheme"
+                        "GtkInterfaceColorScheme" T T)
+                       (GTK-INTERFACE-CONTRAST SETTINGS-GTK-INTERFACE-CONTRAST
+                        "gtk-interface-contrast" "GtkInterfaceContrast" T T)
                        (GTK-KEYNAV-USE-CARET SETTINGS-GTK-KEYNAV-USE-CARET
                         "gtk-keynav-use-caret" "gboolean" T T)
                        (GTK-LABEL-SELECT-ON-FOCUS
@@ -237,6 +244,8 @@
     (is (= 0 (gtk:settings-gtk-fontconfig-timestamp settings)))
     (is (string= "Yaru" (gtk:settings-gtk-icon-theme-name settings)))
     (is (stringp (gtk:settings-gtk-im-module settings)))
+    (is (eq :default (gtk:settings-gtk-interface-color-scheme settings)))
+    (is (eq :no-preference (gtk:settings-gtk-interface-contrast settings)))
     (is-false (gtk:settings-gtk-keynav-use-caret settings))
     (is-true (gtk:settings-gtk-label-select-on-focus settings))
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))

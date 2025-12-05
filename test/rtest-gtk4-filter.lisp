@@ -48,14 +48,19 @@
   (is (eq 'gtk:filter-change
           (glib:symbol-for-gtype "GtkFilterChange")))
   ;; Check names
-  (is (equal '("GTK_FILTER_CHANGE_DIFFERENT" "GTK_FILTER_CHANGE_LESS_STRICT"
-               "GTK_FILTER_CHANGE_MORE_STRICT")
+  (is (equal '("GTK_FILTER_CHANGE_DIFFERENT"
+               "GTK_FILTER_CHANGE_LESS_STRICT"
+               "GTK_FILTER_CHANGE_MORE_STRICT"
+               "GTK_FILTER_CHANGE_DIFFERENT_REWATCH"
+               "GTK_FILTER_CHANGE_LESS_STRICT_REWATCH"
+               "GTK_FILTER_CHANGE_MORE_STRICT_REWATCH")
              (glib-test:list-enum-item-names "GtkFilterChange")))
   ;; Check values
-  (is (equal '(0 1 2)
+  (is (equal '(0 1 2 3 4 5)
              (glib-test:list-enum-item-values "GtkFilterChange")))
   ;; Check nick names
-  (is (equal '("different" "less-strict" "more-strict")
+  (is (equal '("different" "less-strict" "more-strict" "different-rewatch"
+               "less-strict-rewatch" "more-strict-rewatch")
              (glib-test:list-enum-item-nicks "GtkFilterChange")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkFilterChange" GTK:FILTER-CHANGE
@@ -64,7 +69,10 @@
                                      "gtk_filter_change_get_type")
                                     (:DIFFERENT 0)
                                     (:LESS-STRICT 1)
-                                    (:MORE-STRICT 2))
+                                    (:MORE-STRICT 2)
+                                    (:DIFFERENT-REWATCH 3)
+                                    (:LESS-STRICT-REWATCH 4)
+                                    (:MORE-STRICT-REWATCH 5))
              (gobject:get-gtype-definition "GtkFilterChange"))))
 
 ;;;     GtkFilter
@@ -209,4 +217,4 @@
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2025-06-06
+;;; 2025-11-02

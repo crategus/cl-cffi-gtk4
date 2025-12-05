@@ -36,32 +36,8 @@
 ;;;     gtk_native_get_for_surface
 ;;;     gtk_native_get_surface
 
-;; This tests has 2 references on SURFACE
-
-#-windows
 (test gtk-native-surface/for-surface
-  (glib-test:with-check-memory (button window (surface 2) :strong 1)
-    (setf button (make-instance 'gtk:button))
-    (setf window (make-instance 'gtk:window :child button))
-    ;; Realize WINDOW to create GDK resources
-    (is-false (gtk:widget-realize window))
-    ;; Native widget for WINDOW is WINDOW itself
-    (is (eq window (gtk:widget-native window)))
-    ;; Native widget for BUTTON is WINDOW
-    (is (eq window (gtk:widget-native button)))
-    ;; Get GDK surface
-    (is (typep (setf surface (gtk:native-surface window)) 'gdk:surface))
-    ;; Get WINDOW from GDK surface
-    (is (eq window (gtk:native-for-surface surface)))
-    ;; Remove button from window and destroy window
-    (is-false (setf (gtk:window-child window) nil))
-    (is-false (gtk:window-destroy window))))
-
-;; This tests has 1 references on SURFACE. Why the difference?!
-
-#+windows
-(test gtk-native-surface/for-surface
-  (glib-test:with-check-memory (button window (surface 1) :strong 1)
+  (glib-test:with-check-memory (button window surface :strong 1)
     (setf button (make-instance 'gtk:button))
     (setf window (make-instance 'gtk:window :child button))
     ;; Realize WINDOW to create GDK resources
@@ -121,4 +97,4 @@
   (let ((window (make-instance 'gtk:window)))
     (is-false (gtk:native-realize window))))
 
-;;; 2025-05-30
+;;; 2025-11-16

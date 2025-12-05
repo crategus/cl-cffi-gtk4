@@ -23,26 +23,29 @@
                "GTK_EVENT_CONTROLLER_SCROLL_HORIZONTAL"
                "GTK_EVENT_CONTROLLER_SCROLL_DISCRETE"
                "GTK_EVENT_CONTROLLER_SCROLL_KINETIC"
+               "GTK_EVENT_CONTROLLER_SCROLL_PHYSICAL_DIRECTION"
                "GTK_EVENT_CONTROLLER_SCROLL_BOTH_AXES")
              (glib-test:list-flags-item-names "GtkEventControllerScrollFlags")))
   ;; Check values
-  (is (equal '(0 1 2 4 8 3)
+  (is (equal '(0 1 2 4 8 16 3)
              (glib-test:list-flags-item-values "GtkEventControllerScrollFlags")))
   ;; Check nick names
-  (is (equal '("none" "vertical" "horizontal" "discrete" "kinetic" "both-axes")
+  (is (equal '("none" "vertical" "horizontal" "discrete" "kinetic"
+               "physical-direction" "both-axes")
              (glib-test:list-flags-item-nicks "GtkEventControllerScrollFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkEventControllerScrollFlags"
                                      GTK:EVENT-CONTROLLER-SCROLL-FLAGS
-                       (:EXPORT T
-                        :TYPE-INITIALIZER
-                        "gtk_event_controller_scroll_flags_get_type")
-                       (:NONE 0)
-                       (:VERTICAL 1)
-                       (:HORIZONTAL 2)
-                       (:DISCRETE 4)
-                       (:KINETIC 8)
-                       (:BOTH-AXES 3))
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_event_controller_scroll_flags_get_type")
+                                     (:NONE 0)
+                                     (:VERTICAL 1)
+                                     (:HORIZONTAL 2)
+                                     (:DISCRETE 4)
+                                     (:KINETIC 8)
+                                     (:physical-direction 16)
+                                     (:BOTH-AXES 3))
              (gobject:get-gtype-definition "GtkEventControllerScrollFlags"))))
 
 ;;;     GtkEventControllerScroll
@@ -182,4 +185,4 @@
   (let ((controller (gtk:event-controller-scroll-new :both-axes)))
     (is (eq :wheel (gtk:event-controller-scroll-unit controller)))))
 
-;;; 2024-9-20
+;;; 2025-11-08

@@ -67,6 +67,78 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkInterfaceColorScheme
+
+(test gtk-interface-color-scheme
+  ;; Check type
+  (is (g:type-is-enum "GtkInterfaceColorScheme"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkInterfaceColorScheme")
+          (g:gtype (cffi:foreign-funcall "gtk_interface_color_scheme_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:interface-color-scheme
+          (glib:symbol-for-gtype "GtkInterfaceColorScheme")))
+  ;; Check names
+  (is (equal '("GTK_INTERFACE_COLOR_SCHEME_UNSUPPORTED"
+               "GTK_INTERFACE_COLOR_SCHEME_DEFAULT"
+               "GTK_INTERFACE_COLOR_SCHEME_DARK"
+               "GTK_INTERFACE_COLOR_SCHEME_LIGHT")
+             (glib-test:list-enum-item-names "GtkInterfaceColorScheme")))
+  ;; Check values
+  (is (equal '(0 1 2 3)
+             (glib-test:list-enum-item-values "GtkInterfaceColorScheme")))
+  ;; Check nick names
+  (is (equal '("unsupported" "default" "dark" "light")
+             (glib-test:list-enum-item-nicks "GtkInterfaceColorScheme")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkInterfaceColorScheme"
+                                    GTK:INTERFACE-COLOR-SCHEME
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_interface_color_scheme_get_type")
+                                    (:UNSUPPORTED 0)
+                                    (:DEFAULT 1)
+                                    (:DARK 2)
+                                    (:LIGHT 3))
+             (gobject:get-gtype-definition "GtkInterfaceColorScheme"))))
+
+;;;     GtkInterfaceContrast
+
+(test gtk-interface-contrast
+  ;; Check type
+  (is (g:type-is-enum "GtkInterfaceContrast"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkInterfaceContrast")
+          (g:gtype (cffi:foreign-funcall "gtk_interface_contrast_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:interface-contrast
+          (glib:symbol-for-gtype "GtkInterfaceContrast")))
+  ;; Check names
+  (is (equal '("GTK_INTERFACE_CONTRAST_UNSUPPORTED"
+               "GTK_INTERFACE_CONTRAST_NO_PREFERENCE"
+               "GTK_INTERFACE_CONTRAST_MORE"
+               "GTK_INTERFACE_CONTRAST_LESS")
+             (glib-test:list-enum-item-names "GtkInterfaceContrast")))
+  ;; Check values
+  (is (equal '(0 1 2 3)
+             (glib-test:list-enum-item-values "GtkInterfaceContrast")))
+  ;; Check nick names
+  (is (equal '("unsupported" "no-preference" "more" "less")
+             (glib-test:list-enum-item-nicks "GtkInterfaceContrast")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkInterfaceContrast"
+                                    GTK:INTERFACE-CONTRAST
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_interface_contrast_get_type")
+                                    (:UNSUPPORTED 0)
+                                    (:NO-PREFERENCE 1)
+                                    (:MORE 2)
+                                    (:LESS 3))
+             (gobject:get-gtype-definition "GtkInterfaceContrast"))))
+
 ;;;     GtkCssLocation
 
 (test gtk-css-location-properties
@@ -221,7 +293,7 @@
   (is (equal '("GtkStyleProvider")
              (glib-test:list-interfaces "GtkCssProvider")))
   ;; Check properties
-  (is (equal '()
+  (is (equal '("prefers-color-scheme" "prefers-contrast")
              (glib-test:list-properties "GtkCssProvider")))
   ;; Check signals
   (is (equal '("parsing-error")
@@ -232,7 +304,11 @@
                        :EXPORT T
                        :INTERFACES ("GtkStyleProvider")
                        :TYPE-INITIALIZER "gtk_css_provider_get_type")
-                      NIL)
+                      ((PREFERS-COLOR-SCHEME
+                        CSS-PROVIDER-PREFERS-COLOR-SCHEME
+                        "prefers-color-scheme" "GtkInterfaceColorScheme" T T)
+                       (PREFERS-CONTRAST CSS-PROVIDER-PREFERS-CONTRAST
+                        "prefers-contrast" "GtkInterfaceContrast" T T)))
              (gobject:get-gtype-definition "GtkCssProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -255,6 +331,14 @@
     (is (equal '("GtkCssSection" "GError")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-css-provider-properties
+  (glib-test:with-check-memory (provider)
+    (is (typep (setf provider (gtk:css-provider-new)) 'gtk:css-provider))
+    (is (eq :default (gtk:css-provider-prefers-color-scheme provider)))
+    (is (eq :no-preference (gtk:css-provider-prefers-contrast provider)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_css_provider_new
@@ -270,14 +354,14 @@
   (glib-test:with-check-memory (provider)
     (setf provider (gtk:css-provider-new))
     (is-false (gtk:css-provider-load-named provider "Yaru"))
-    (is (= 415016 (length (gtk:css-provider-to-string provider))))))
+    (is (= 415930 (length (gtk:css-provider-to-string provider))))))
 
 #+crategus
 (test gtk-css-provider-load-named.2
   (glib-test:with-check-memory (provider)
     (setf provider (gtk:css-provider-new))
     (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
-    (is (= 410139 (length (gtk:css-provider-to-string provider))))))
+    (is (= 411065 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_load_from_data
 
@@ -290,8 +374,10 @@
 
 ;;;     gtk_css_provider_load_from_file
 
+;; TODO: Adds a strong reference for the GFile object.
+;; This is new since GtK 4.20
 (test gtk-css-provider-load-from-file
-  (glib-test:with-check-memory (provider)
+  (glib-test:with-check-memory (provider :strong 1)
     (let* ((path (glib-sys:sys-path "test/resource/css-accordion.css"))
            (file (g:file-new-for-path path)))
       (setf provider (gtk:css-provider-new))
@@ -410,4 +496,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2025-09-22
+;;; 2025-11-08

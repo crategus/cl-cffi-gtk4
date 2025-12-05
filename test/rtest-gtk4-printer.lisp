@@ -22,7 +22,7 @@
     (is (eq (g:gtype "GObject")
             (g:type-parent "GtkPrintBackend")))
     ;; Check children
-    (is (equal '("GtkPrintBackendCpdb" "GtkPrintBackendFile")
+    (is (equal '("GtkPrintBackendCpdbBuiltin" "GtkPrintBackendFileBuiltin")
                (glib-test:list-children "GtkPrintBackend")))
     ;; Check interfaces
     (is (equal '()
@@ -261,4 +261,4 @@
         (let ((size (gtk:paper-size-new (gtk:paper-size-default))))
           (is-false (gtk:printer-hard-margins-for-paper-size printer size)))))))
 
-;;; 2025-09-18
+;;; 2025-11-16

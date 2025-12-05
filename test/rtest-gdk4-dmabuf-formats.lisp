@@ -45,11 +45,11 @@
   (glib-test:with-check-memory ()
     (let* ((display (gdk:display-default))
            (formats (gdk:display-dmabuf-formats display)))
-      (is (equal '(538982482 72057594037927937)
+      (is (equal '(538982482 0)
                  (multiple-value-list (gdk:dmabuf-formats-format formats 0))))
-      (is (equal '(538982482 72057594037927938)
-                 (multiple-value-list (gdk:dmabuf-formats-format formats 1))))
       (is (equal '(538982482 72057594037927937)
+                 (multiple-value-list (gdk:dmabuf-formats-format formats 1))))
+      (is (equal '(538982482 72057594037927938)
                  (multiple-value-list (gdk:dmabuf-formats-format formats 2)))))))
 
 ;;;     gdk_dmabuf-formats-get_n_formats
@@ -59,8 +59,8 @@
     (let* ((display (gdk:display-default))
            (formats (gdk:display-dmabuf-formats display)))
       #-windows
-      (is (= 271 (gdk:dmabuf-formats-n-formats formats)))
+      (is (= 321 (gdk:dmabuf-formats-n-formats formats)))
       #+windows
       (is (= 0 (gdk:dmabuf-formats-n-formats formats))))))
 
-;;; 2024-12-20
+;;; 2035-11-02

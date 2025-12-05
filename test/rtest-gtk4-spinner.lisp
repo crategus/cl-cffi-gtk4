@@ -34,7 +34,7 @@
   (is (string= "spinner"
                (gtk:widget-class-css-name "GtkSpinner")))
   ;; Check accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkSpinner")))
+  (is (eq :progress-bar (gtk:widget-class-accessible-role "GtkSpinner")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkSpinner" GTK:SPINNER
                       (:SUPERCLASS GTK:WIDGET
@@ -74,4 +74,4 @@
     (is-false (gtk:spinner-stop spinner))
     (is-false (gtk:spinner-spinning spinner))))
 
-;;; 2025-05-30
+;;; 2025-11-03

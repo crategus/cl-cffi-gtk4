@@ -21,7 +21,8 @@
           (g:type-parent "GtkIMContext")))
   ;; Check children
   #-windows
-  (is (equal '("GtkIMContextSimple" "GtkIMMulticontext" "IBusIMContext")
+  (is (equal '("GtkIMContextSimple" "GtkIMContextWayland" "GtkIMMulticontext"
+               "IBusIMContext")
              (glib-test:list-children "GtkIMContext")))
   #+windows
   (is (equal '("GtkIMContextIME" "GtkIMContextSimple" "GtkIMMulticontext")
@@ -167,10 +168,10 @@
 ;;;     gtk_im_context_set_client_widget
 ;;;     gtk_im_context_set_cursor_location
 ;;;     gtk_im_context_set_use_preedit
-;;;     gtk_im_context_set_surrounding                     Deprecated 4.2
-;;;     gtk_im_context_get_surrounding                     Deprecated 4.2
+;;;     gtk_im_context_set_surrounding                      Deprecated 4.2
+;;;     gtk_im_context_get_surrounding                      Deprecated 4.2
 ;;;     gtk_im_context_delete_surrounding
-;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
-;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
+;;;     gtk_im_context_get_surrounding_with_selection       Since 4.2
+;;;     gtk_im_context_set_surrounding_with_selection       Since 4.2
 
-;;; 2024-9-20
+;;; 2025-11-16

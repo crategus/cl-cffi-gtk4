@@ -39,11 +39,31 @@
                "GDK_MEMORY_A16_FLOAT" "GDK_MEMORY_A32_FLOAT"
                "GDK_MEMORY_A8B8G8R8_PREMULTIPLIED" "GDK_MEMORY_B8G8R8X8"
                "GDK_MEMORY_X8R8G8B8" "GDK_MEMORY_R8G8B8X8" "GDK_MEMORY_X8B8G8R8"
+               "GDK_MEMORY_G8_B8R8_420" "GDK_MEMORY_G8_R8B8_420"
+               "GDK_MEMORY_G8_B8R8_422" "GDK_MEMORY_G8_R8B8_422"
+               "GDK_MEMORY_G8_B8R8_444" "GDK_MEMORY_G8_R8B8_444"
+               "GDK_MEMORY_G10X6_B10X6R10X6_420"
+               "GDK_MEMORY_G12X4_B12X4R12X4_420"
+               "GDK_MEMORY_G16_B16R16_420" "GDK_MEMORY_G8_B8_R8_410"
+               "GDK_MEMORY_G8_R8_B8_410" "GDK_MEMORY_G8_B8_R8_411"
+               "GDK_MEMORY_G8_R8_B8_411" "GDK_MEMORY_G8_B8_R8_420"
+               "GDK_MEMORY_G8_R8_B8_420" "GDK_MEMORY_G8_B8_R8_422"
+               "GDK_MEMORY_G8_R8_B8_422" "GDK_MEMORY_G8_B8_R8_444"
+               "GDK_MEMORY_G8_R8_B8_444" "GDK_MEMORY_G8B8G8R8_422"
+               "GDK_MEMORY_G8R8G8B8_422" "GDK_MEMORY_R8G8B8G8_422"
+               "GDK_MEMORY_B8G8R8G8_422" "GDK_MEMORY_X6G10_X6B10_X6R10_420"
+               "GDK_MEMORY_X6G10_X6B10_X6R10_422"
+               "GDK_MEMORY_X6G10_X6B10_X6R10_444"
+               "GDK_MEMORY_X4G12_X4B12_X4R12_420"
+               "GDK_MEMORY_X4G12_X4B12_X4R12_422"
+               "GDK_MEMORY_X4G12_X4B12_X4R12_444" "GDK_MEMORY_G16_B16_R16_420"
+               "GDK_MEMORY_G16_B16_R16_422" "GDK_MEMORY_G16_B16_R16_444"
                "GDK_MEMORY_N_FORMATS")
              (glib-test:list-enum-item-names "GdkMemoryFormat")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
-               24 25 26 27 28 29 30 31 32 33)
+               24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+               45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65)
              (glib-test:list-enum-item-values "GdkMemoryFormat")))
   ;; Check nick names
   (is (equal '("b8g8r8a8-premultiplied" "a8r8g8b8-premultiplied"
@@ -55,46 +75,89 @@
                "r32g32b32a32-float" "g8a8-premultiplied" "g8a8" "g8"
                "g16a16-premultiplied" "g16a16" "g16" "a8" "a16" "a16-float"
                "a32-float" "a8b8g8r8-premultiplied" "b8g8r8x8" "x8r8g8b8"
-               "r8g8b8x8" "x8b8g8r8" "n-formats")
+               "r8g8b8x8" "x8b8g8r8" "g8-b8r8-420" "g8-r8b8-420" "g8-b8r8-422"
+               "g8-r8b8-422" "g8-b8r8-444" "g8-r8b8-444" "g10x6-b10x6r10x6-420"
+               "g12x4-b12x4r12x4-420" "g16-b16r16-420" "g8-b8-r8-410"
+               "g8-r8-b8-410" "g8-b8-r8-411" "g8-r8-b8-411" "g8-b8-r8-420"
+               "g8-r8-b8-420" "g8-b8-r8-422" "g8-r8-b8-422" "g8-b8-r8-444"
+               "g8-r8-b8-444" "g8b8g8r8-422" "g8r8g8b8-422" "r8g8b8g8-422"
+               "b8g8r8g8-422" "x6g10-x6b10-x6r10-420" "x6g10-x6b10-x6r10-422"
+               "x6g10-x6b10-x6r10-444" "x4g12-x4b12-x4r12-420"
+               "x4g12-x4b12-x4r12-422" "x4g12-x4b12-x4r12-444"
+               "g16-b16-r16-420" "g16-b16-r16-422" "g16-b16-r16-444"
+               "n-formats")
              (glib-test:list-enum-item-nicks "GdkMemoryFormat")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GdkMemoryFormat" GDK:MEMORY-FORMAT
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gdk_memory_format_get_type")
-                       (:B8G8R8A8-PREMULTIPLIED 0)
-                       (:A8R8G8B8-PREMULTIPLIED 1)
-                       (:R8G8B8A8-PREMULTIPLIED 2)
-                       (:B8G8R8A8 3)
-                       (:A8R8G8B8 4)
-                       (:R8G8B8A8 5)
-                       (:A8B8G8R8 6)
-                       (:R8G8B8 7)
-                       (:B8G8R8 8)
-                       (:R16G16B16 9)
-                       (:R16G16B16A16-PREMULTIPLIED 10)
-                       (:R16G16B16A16 11)
-                       (:R16G16B16-FLOAT 12)
-                       (:R16G16B16A16-FLOAT-PREMULTIPLIED 13)
-                       (:R16G16B16A16-FLOAT 14)
-                       (:R32G32B32-FLOAT 15)
-                       (:R32G32B32A32-FLOAT-PREMULTIPLIED 16)
-                       (:R32G32B32A32-FLOAT 17)
-                       (:G8A8-PREMULTIPLIED 18)
-                       (:G8A8 19)
-                       (:G8 20)
-                       (:G16A16-PREMULTIPLIED 21)
-                       (:G16A16 22)
-                       (:G16 23)
-                       (:A8 24)
-                       (:A16 25)
-                       (:A16-FLOAT 26)
-                       (:A32-FLOAT 27)
-                       (:A8B8G8R8-PREMULTIPLIED 28)
-                       (:B8G8R8X8 29)
-                       (:X8R8G8B8 30)
-                       (:R8G8B8X8 31)
-                       (:X8B8G8R8 32)
-                       (:N-FORMATS 33))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_memory_format_get_type")
+                                    (:B8G8R8A8-PREMULTIPLIED 0)
+                                    (:A8R8G8B8-PREMULTIPLIED 1)
+                                    (:R8G8B8A8-PREMULTIPLIED 2)
+                                    (:B8G8R8A8 3)
+                                    (:A8R8G8B8 4)
+                                    (:R8G8B8A8 5)
+                                    (:A8B8G8R8 6)
+                                    (:R8G8B8 7)
+                                    (:B8G8R8 8)
+                                    (:R16G16B16 9)
+                                    (:R16G16B16A16-PREMULTIPLIED 10)
+                                    (:R16G16B16A16 11)
+                                    (:R16G16B16-FLOAT 12)
+                                    (:R16G16B16A16-FLOAT-PREMULTIPLIED 13)
+                                    (:R16G16B16A16-FLOAT 14)
+                                    (:R32G32B32-FLOAT 15)
+                                    (:R32G32B32A32-FLOAT-PREMULTIPLIED 16)
+                                    (:R32G32B32A32-FLOAT 17)
+                                    (:G8A8-PREMULTIPLIED 18)
+                                    (:G8A8 19)
+                                    (:G8 20)
+                                    (:G16A16-PREMULTIPLIED 21)
+                                    (:G16A16 22)
+                                    (:G16 23)
+                                    (:A8 24)
+                                    (:A16 25)
+                                    (:A16-FLOAT 26)
+                                    (:A32-FLOAT 27)
+                                    (:A8B8G8R8-PREMULTIPLIED 28)
+                                    (:B8G8R8X8 29)
+                                    (:X8R8G8B8 30)
+                                    (:R8G8B8X8 31)
+                                    (:X8B8G8R8 32)
+                                    (:G8-B8R8-420 33)
+                                    (:G8-R8B8-420 34)
+                                    (:G8-B8R8-422 35)
+                                    (:G8-R8B8-422 36)
+                                    (:G8-B8R8-444 37)
+                                    (:G8-R8B8-444 38)
+                                    (:G10X6-B10X6R10X6-420 39)
+                                    (:G12X4-B12X4R12X4-420 40)
+                                    (:G16-B16R16-420 41)
+                                    (:G8-B8-R8-410 42)
+                                    (:G8-R8-B8-410 43)
+                                    (:G8-B8-R8-411 44)
+                                    (:G8-R8-B8-411 45)
+                                    (:G8-B8-R8-420 46)
+                                    (:G8-R8-B8-420 47)
+                                    (:G8-B8-R8-422 48)
+                                    (:G8-R8-B8-422 49)
+                                    (:G8-B8-R8-444 50)
+                                    (:G8-R8-B8-444 51)
+                                    (:G8B8G8R8-422 52)
+                                    (:G8R8G8B8-422 53)
+                                    (:R8G8B8G8-422 54)
+                                    (:B8G8R8G8-422 55)
+                                    (:X6G10-X6B10-X6R10-420 56)
+                                    (:X6G10-X6B10-X6R10-422 57)
+                                    (:X6G10-X6B10-X6R10-444 58)
+                                    (:X4G12-X4B12-X4R12-420 59)
+                                    (:X4G12-X4B12-X4R12-422 60)
+                                    (:X4G12-X4B12-X4R12-444 61)
+                                    (:G16-B16-R16-420 62)
+                                    (:G16-B16-R16-422 63)
+                                    (:G16-B16-R16-444 64)
+                                    (:N-FORMATS 65))
              (gobject:get-gtype-definition "GdkMemoryFormat"))))
 
 ;;; ----------------------------------------------------------------------------
@@ -371,4 +434,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2025-4-26
+;;; 2025-11-02

@@ -20,7 +20,7 @@
   (is (eq (g:gtype "GtkMediaStream")
           (g:type-parent "GtkMediaFile")))
   ;; Check children
-  (is (equal '("GtkGstMediaFile" "GtkNoMediaFile")
+  (is (equal '("GtkGstMediaFileBuiltin" "GtkNoMediaFile")
              (glib-test:list-children "GtkMediaFile")))
   ;; Check interfaces
   (is (equal '("GdkPaintable")
@@ -134,4 +134,4 @@
                      (g:file-basename (gtk:media-file-file media))))
         (is-false (gtk:media-file-clear media))))))
 
-;;; 2024-12-23
+;;; 2025-11-16

@@ -7,6 +7,57 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkWindowGravity
+
+(test gtk-window-gravity
+  ;; Check type
+  (is (g:type-is-enum "GtkWindowGravity"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkWindowGravity")
+          (g:gtype (cffi:foreign-funcall "gtk_window_gravity_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:window-gravity
+          (glib:symbol-for-gtype "GtkWindowGravity")))
+  ;; Check names
+  (is (equal '("GTK_WINDOW_GRAVITY_TOP_LEFT" "GTK_WINDOW_GRAVITY_TOP"
+               "GTK_WINDOW_GRAVITY_TOP_RIGHT" "GTK_WINDOW_GRAVITY_LEFT"
+               "GTK_WINDOW_GRAVITY_CENTER" "GTK_WINDOW_GRAVITY_RIGHT"
+               "GTK_WINDOW_GRAVITY_BOTTOM_LEFT" "GTK_WINDOW_GRAVITY_BOTTOM"
+               "GTK_WINDOW_GRAVITY_BOTTOM_RIGHT" "GTK_WINDOW_GRAVITY_TOP_START"
+               "GTK_WINDOW_GRAVITY_TOP_END" "GTK_WINDOW_GRAVITY_START"
+               "GTK_WINDOW_GRAVITY_END" "GTK_WINDOW_GRAVITY_BOTTOM_START"
+               "GTK_WINDOW_GRAVITY_BOTTOM_END")
+             (glib-test:list-enum-item-names "GtkWindowGravity")))
+  ;; Check values
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14)
+             (glib-test:list-enum-item-values "GtkWindowGravity")))
+  ;; Check nick names
+  (is (equal '("top-left" "top" "top-right" "left" "center" "right"
+               "bottom-left" "bottom" "bottom-right" "top-start" "top-end"
+               "start" "end" "bottom-start" "bottom-end")
+             (glib-test:list-enum-item-nicks "GtkWindowGravity")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkWindowGravity" GTK:WINDOW-GRAVITY
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_window_gravity_get_type")
+                                    (:TOP-LEFT 0)
+                                    (:TOP 1)
+                                    (:TOP-RIGHT 2)
+                                    (:LEFT 3)
+                                    (:CENTER 4)
+                                    (:RIGHT 5)
+                                    (:BOTTOM-LEFT 6)
+                                    (:BOTTOM 7)
+                                    (:BOTTOM-RIGHT 8)
+                                    (:TOP-START 9)
+                                    (:TOP-END 10)
+                                    (:START 11)
+                                    (:END 12)
+                                    (:BOTTOM-START 13)
+                                    (:BOTTOM-END 14))
+             (gobject:get-gtype-definition "GtkWindowGravity"))))
+
 ;;;     GtkWindow
 
 (test gtk-window-class
@@ -33,7 +84,7 @@
   (is (equal '("application" "child" "decorated" "default-height"
                "default-widget" "default-width" "deletable"
                "destroy-with-parent" "display" "focus-visible"
-               "focus-widget" "fullscreened" "handle-menubar-accel"
+               "focus-widget" "fullscreened" "gravity" "handle-menubar-accel"
                "hide-on-close" "icon-name" "is-active" "maximized"
                "mnemonics-visible" "modal" "resizable" "startup-id" "suspended"
                "title" "titlebar" "transient-for")
@@ -78,6 +129,7 @@
                         "focus-widget" "GtkWidget" T T)
                        (FULLSCREENED WINDOW-FULLSCREENED
                         "fullscreened" "gboolean" T T)
+                       (GRAVITY WINDOW-GRAVITY "gravity" "GtkWindowGravity" T T)
                        (HANDLE-MENUBAR-ACCEL WINDOW-HANDLE-MENUBAR-ACCEL
                         "handle-menubar-accel" "gboolean" T T)
                        (HIDE-ON-CLOSE WINDOW-HIDE-ON-CLOSE
@@ -118,6 +170,8 @@
     (is-true  (gtk:window-focus-visible window))
     (is-false (gtk:window-focus-widget window))
     (is-false (gtk:window-fullscreened window))
+    #+gtk-4-20
+    (is (eq :top-start (gtk:window-gravity window)))
     (is-true  (gtk:window-handle-menubar-accel window))
     (is-false (gtk:window-hide-on-close window))
     (is-false (gtk:window-icon-name window))
@@ -490,4 +544,4 @@
     (is-false (gtk:window-is-suspended window))
     (is-false (gtk:window-destroy window))))
 
-;;; 2025-3-31
+;;; 2025-11-03

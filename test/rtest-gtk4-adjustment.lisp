@@ -143,13 +143,13 @@
   (glib-test:with-check-memory (adjustment)
     (is (typep (setf adjustment
                      (make-instance 'gtk:adjustment)) 'gtk:adjustment))
-    (is-false (gtk:adjustment-configure adjustment 2 1.0 4.0 1/2 1 5))
-    (is (= 1.0d0 (gtk:adjustment-value adjustment)))
+    (is-false (gtk:adjustment-configure adjustment 2 1.0 9.0 1/2 1 1))
+    (is (= 2.0d0 (gtk:adjustment-value adjustment)))
     (is (= 1.0d0 (gtk:adjustment-lower adjustment)))
-    (is (= 4.0d0 (gtk:adjustment-upper adjustment)))
+    (is (= 9.0d0 (gtk:adjustment-upper adjustment)))
     (is (= 0.5d0 (gtk:adjustment-step-increment adjustment)))
     (is (= 1.0d0 (gtk:adjustment-page-increment adjustment)))
-    (is (= 5.0d0 (gtk:adjustment-page-size adjustment)))))
+    (is (= 1.0d0 (gtk:adjustment-page-size adjustment)))))
 
 ;;;     gtk_adjustment_get_minimum_increment
 
@@ -160,4 +160,4 @@
                'gtk:adjustment))
     (is (= 0.5 (gtk:adjustment-minimum-increment adjustment)))))
 
-;;; 2025-10-25
+;;; 2025-11-08

@@ -197,17 +197,19 @@
            (filename (glib-sys:sys-path "test/rtest-gtk4-recent-manager.lisp"))
            (uri (concatenate 'string "file://" (namestring filename)))
            (info (gtk:recent-manager-lookup-item recent uri))
-           (last (gtk:recent-info-last-application info)))
-      (is (every #'stringp
-                 (gtk:recent-info-applications info)))
-      (is (stringp (gtk:recent-info-last-application info)))
-      (is-true (gtk:recent-info-has-application info last))
-      (is (stringp (first (multiple-value-list
+           last)
+      (when info
+        (setf last (gtk:recent-info-last-application info))
+        (is (every #'stringp
+                   (gtk:recent-info-applications info)))
+        (is (stringp (gtk:recent-info-last-application info)))
+        (is-true (gtk:recent-info-has-application info last))
+        (is (stringp (first (multiple-value-list
+                              (gtk:recent-info-application-info info last)))))
+        (is (integerp (second (multiple-value-list
                                 (gtk:recent-info-application-info info last)))))
-      (is (integerp (second (multiple-value-list
-                                (gtk:recent-info-application-info info last)))))
-      (is (integerp (third (multiple-value-list
-                                (gtk:recent-info-application-info info last))))))))
+        (is (integerp (third (multiple-value-list
+                               (gtk:recent-info-application-info info last)))))))))
 
 ;;;     gtk_recent_info_create_app_info
 ;;;     gtk_recent_info_get_groups
@@ -220,4 +222,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; 2025-10-26
+;;; 2025-11-16

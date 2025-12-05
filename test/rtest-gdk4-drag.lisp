@@ -49,20 +49,21 @@
   (is (eq (g:gtype "GdkDragAction")
           (g:gtype (cffi:foreign-funcall "gdk_drag_action_get_type" :size))))
   ;; Check names
-  (is (equal '("GDK_ACTION_COPY" "GDK_ACTION_MOVE" "GDK_ACTION_LINK"
-               "GDK_ACTION_ASK")
+  (is (equal '("GDK_ACTION_NONE" "GDK_ACTION_COPY" "GDK_ACTION_MOVE"
+               "GDK_ACTION_LINK" "GDK_ACTION_ASK")
              (glib-test:list-flags-item-names "GdkDragAction")))
   ;; Check values
-  (is (equal '(1 2 4 8)
+  (is (equal '(0 1 2 4 8)
              (glib-test:list-flags-item-values "GdkDragAction")))
   ;; Check nick names
-  (is (equal '("copy" "move" "link" "ask")
+  (is (equal '("none" "copy" "move" "link" "ask")
              (glib-test:list-flags-item-nicks "GdkDragAction")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkDragAction" GDK:DRAG-ACTION
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
                                       "gdk_drag_action_get_type")
+                                     (:NONE 0)
                                      (:COPY 1)
                                      (:MOVE 2)
                                      (:LINK 4)
@@ -171,4 +172,4 @@
 ;;;     gdk_drag_set_hotspot
 ;;;     gdk_drag_action_is_unique
 
-;;; 2024-9-19
+;;; 2025-11-02

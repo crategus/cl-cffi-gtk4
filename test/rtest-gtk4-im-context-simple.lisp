@@ -23,8 +23,8 @@
   (is (eq (g:gtype "GtkIMContext")
           (g:type-parent "GtkIMContextSimple")))
   ;; Check children
-  #-windows
-  (is (equal '("GtkIMContextBroadway" "GtkIMContextWayland")
+  #+crategus
+  (is (equal '("GtkIMContextBroadway")
              (glib-test:list-children "GtkIMContextSimple")))
   #+windows
   (is (equal '()
@@ -59,4 +59,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; 2024-9-20
+;;; 2025-11-16

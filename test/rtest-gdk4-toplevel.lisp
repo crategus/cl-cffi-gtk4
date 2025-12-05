@@ -165,6 +165,53 @@
                                     (:MIDDLE-CLICK 3))
              (gobject:get-gtype-definition "GdkTitlebarGesture"))))
 
+;;;     GdkToplevelCapabilities
+
+(test gdk-toplevel-capabilities-flags
+  ;; Check type
+  (is (g:type-is-flags "GdkToplevelCapabilities"))
+  ;; Check registered name
+  ;; FIXME: The symbol is not available. What is wrong?
+  #+nil
+  (is (eq 'gdk:toplevel-capabilities
+          (glib:symbol-for-gtype "GdkToplevelCapabilities")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GdkToplevelCapabilities")
+          (g:gtype (cffi:foreign-funcall "gdk_toplevel_capabilities_get_type"
+                   :size))))
+  ;; Check names
+  (is (equal '("GDK_TOPLEVEL_CAPABILITIES_EDGE_CONSTRAINTS"
+               "GDK_TOPLEVEL_CAPABILITIES_INHIBIT_SHORTCUTS"
+               "GDK_TOPLEVEL_CAPABILITIES_TITLEBAR_GESTURES"
+               "GDK_TOPLEVEL_CAPABILITIES_WINDOW_MENU"
+               "GDK_TOPLEVEL_CAPABILITIES_MAXIMIZE"
+               "GDK_TOPLEVEL_CAPABILITIES_FULLSCREEN"
+               "GDK_TOPLEVEL_CAPABILITIES_MINIMIZE"
+               "GDK_TOPLEVEL_CAPABILITIES_LOWER")
+             (glib-test:list-flags-item-names "GdkToplevelCapabilities")))
+  ;; Check values
+  (is (equal '(1 2 4 8 16 32 64 128)
+             (glib-test:list-flags-item-values "GdkToplevelCapabilities")))
+  ;; Check nick names
+  (is (equal '("edge-constraints" "inhibit-shortcuts" "titlebar-gestures"
+               "window-menu" "maximize" "fullscreen" "minimize" "lower")
+             (glib-test:list-flags-item-nicks "GdkToplevelCapabilities")))
+  ;; Check flags definition
+  (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkToplevelCapabilities"
+                                     GDK-TOPLEVEL-CAPABILITIES
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gdk_toplevel_capabilities_get_type")
+                                     (:EDGE-CONSTRAINTS 1)
+                                     (:INHIBIT-SHORTCUTS 2)
+                                     (:TITLEBAR-GESTURES 4)
+                                     (:WINDOW-MENU 8)
+                                     (:MAXIMIZE 16)
+                                     (:FULLSCREEN 32)
+                                     (:MINIMIZE 64)
+                                     (:LOWER 128))
+             (gobject:get-gtype-definition "GdkToplevelCapabilities"))))
+
 ;;;     GdkToplevel
 
 (test gdk-toplevel-interface
@@ -180,35 +227,34 @@
   (is (equal '("GdkSurface")
              (glib-test:list-interface-prerequisites "GdkToplevel")))
   ;; Check interface properties
-  (is (equal '("decorated" "deletable" "fullscreen-mode" "icon-list" "modal"
-               "shortcuts-inhibited" "startup-id" "state" "title"
-               "transient-for")
+  (is (equal '("capabilities" "decorated" "deletable" "fullscreen-mode"
+               "gravity" "icon-list" "modal" "shortcuts-inhibited" "startup-id"
+               "state" "title" "transient-for")
              (glib-test:list-interface-properties "GdkToplevel")))
   ;; Check signals
   (is (equal '("compute-size")
              (glib-test:list-signals "GdkToplevel")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkToplevel" GDK:TOPLEVEL
-                            (:EXPORT T
-                             :TYPE-INITIALIZER "gdk_toplevel_get_type")
-                            (DECORATED TOPLEVEL-DECORATED
-                             "decorated" "gboolean" T T)
-                            (DELETABLE TOPLEVEL-DELETABLE
-                             "deletable" "gboolean" T T)
-                            (FULLSCREEN-MODE TOPLEVEL-FULLSCREEN-MODE
-                             "fullscreen-mode" "GdkFullscreenMode" T T)
-                            (ICON-LIST TOPLEVEL-ICON-LIST
-                             "icon-list" "gpointer" T T)
-                            (MODAL TOPLEVEL-MODAL "modal" "gboolean" T T)
-                            (SHORTCUTS-INHIBITED TOPLEVEL-SHORTCUTS-INHIBITED
-                             "shortcuts-inhibited" "gboolean" T NIL)
-                            (STARTUP-ID TOPLEVEL-STARTUP-ID
-                             "startup-id" "gchararray" T T)
-                            (STATE TOPLEVEL-STATE
-                             "state" "GdkToplevelState" T NIL)
-                            (TITLE TOPLEVEL-TITLE "title" "gchararray" T T)
-                            (TRANSIENT-FOR TOPLEVEL-TRANSIENT-FOR
-                             "transient-for" "GdkSurface" T T))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gdk_toplevel_get_type")
+                      (CAPABILITIES TOPLEVEL-CAPABILITIES "capabilities"
+                       "GdkToplevelCapabilities" T NIL)
+                      (DECORATED TOPLEVEL-DECORATED "decorated" "gboolean" T T)
+                      (DELETABLE TOPLEVEL-DELETABLE "deletable" "gboolean" T T)
+                      (FULLSCREEN-MODE TOPLEVEL-FULLSCREEN-MODE
+                       "fullscreen-mode" "GdkFullscreenMode" T T)
+                      (GRAVITY TOPLEVEL-GRAVITY "gravity" "GdkGravity" T T)
+                      (ICON-LIST TOPLEVEL-ICON-LIST "icon-list" "gpointer" T T)
+                      (MODAL TOPLEVEL-MODAL "modal" "gboolean" T T)
+                      (SHORTCUTS-INHIBITED TOPLEVEL-SHORTCUTS-INHIBITED
+                       "shortcuts-inhibited" "gboolean" T NIL)
+                      (STARTUP-ID TOPLEVEL-STARTUP-ID "startup-id" "gchararray"
+                       T T)
+                      (STATE TOPLEVEL-STATE "state" "GdkToplevelState" T NIL)
+                      (TITLE TOPLEVEL-TITLE "title" "gchararray" T T)
+                      (TRANSIENT-FOR TOPLEVEL-TRANSIENT-FOR "transient-for"
+                       "GdkSurface" T T))
              (gobject:get-gtype-definition "GdkToplevel"))))
 
 ;;; ----------------------------------------------------------------------------
@@ -288,4 +334,4 @@
 ;;;     gdk_toplevel_begin_move
 ;;;     gdk_toplevel_titlebar_gesture                      Since 4.4
 
-;;; 2025-09-25
+;;; 2025-11-02

@@ -18,13 +18,13 @@
           (glib:symbol-for-gtype "GtkPadActionType")))
   ;; Check names
   (is (equal '("GTK_PAD_ACTION_BUTTON" "GTK_PAD_ACTION_RING"
-               "GTK_PAD_ACTION_STRIP")
+               "GTK_PAD_ACTION_STRIP" "GTK_PAD_ACTION_DIAL")
              (glib-test:list-enum-item-names "GtkPadActionType")))
   ;; Check values
-  (is (equal '(0 1 2)
+  (is (equal '(0 1 2 3)
              (glib-test:list-enum-item-values "GtkPadActionType")))
   ;; Check nick names
-  (is (equal '("button" "ring" "strip")
+  (is (equal '("button" "ring" "strip" "dial")
              (glib-test:list-enum-item-nicks "GtkPadActionType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPadActionType" GTK:PAD-ACTION-TYPE
@@ -33,7 +33,8 @@
                                      "gtk_pad_action_type_get_type")
                                     (:BUTTON 0)
                                     (:RING 1)
-                                    (:STRIP 2))
+                                    (:STRIP 2)
+                                    (:DIAL 3))
              (gobject:get-gtype-definition "GtkPadActionType"))))
 
 ;;;     GtkPadController
@@ -142,4 +143,4 @@
       ;; FIXME: Does not return a GAction object. Why?
       (is-false (g:action-map-lookup-action group "pad.action")))))
 
-;;; 2025-2-23
+;;; 2025-11-08

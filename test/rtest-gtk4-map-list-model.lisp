@@ -40,7 +40,7 @@
                       ((HAS-MAP MAP-LIST-MODEL-HAS-MAP "has-map" "gboolean" T NIL)
                        (ITEM-TYPE MAP-LIST-MODEL-ITEM-TYPE
                         "item-type" "GType" T NIL)
-                       (MODEL MAP-LIST-MODEL-MODEL "model" "GListModel" T NIL)
+                       (MODEL MAP-LIST-MODEL-MODEL "model" "GListModel" T T)
                        (N-ITEMS MAP-LIST-MODEL-N-ITEMS
                         "n-items" "guint" T NIL)))
              (gobject:get-gtype-definition "GtkMapListModel"))))
@@ -152,4 +152,4 @@
       (is-false (gtk:box-remove box button1))
       (is-false (gtk:box-remove box button2)))))
 
-;;; 2024-12-17
+;;; 2025-11-02
