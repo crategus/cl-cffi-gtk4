@@ -816,7 +816,6 @@
       @about-function{calendar-unmark-day}
       @about-function{calendar-day-is-marked}
       @about-function{calendar-clear-marks}
-      @about-function{calendar-date}
     @end{subsection}
   @end{section}
   @begin[Buttons and Toggles]{section}

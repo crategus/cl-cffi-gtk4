@@ -57,13 +57,13 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     date
-;;;     day
-;;;     month
+;;;     date                                                Since 4.20
+;;;     day                                                 Deprecated 4.20
+;;;     month                                               Deprecated 4.20
 ;;;     show-day-names
 ;;;     show-heading
 ;;;     show-week-numbers
-;;;     year
+;;;     year                                                Deprecated 4.20
 ;;;
 ;;; Signals
 ;;;
@@ -102,7 +102,7 @@
    :type-initializer "gtk_calendar_get_type")
   (#+gtk-4-20
    (date
-    %calendar-date
+    %calendar-date ; We do not export this accessor
     "date" "GDateTime" t t)
    (day
     calendar-day
@@ -126,7 +126,7 @@
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
- "@version{2025-05-31}
+ "@version{2025-12-05}
   @begin{short}
     The @class{gtk:calendar} widget displays a Gregorian calendar, one month at
     a time.
@@ -135,9 +135,8 @@
 
   @image[calendar]{Figure: GtkCalendar}
 
-  The date that is currently displayed can be altered with the
-  @fun{gtk:calendar-select-day} function. The selected date can be retrieved
-  from a @class{gtk:calendar} widget using the @fun{gtk:calendar-date} function.
+  The selected date can be retrieved and altered from a @class{gtk:calendar}
+  widget using the @fun{gtk:calendar-date} accessor function.
 
   To place a visual marker on a particular day, use the
   @fun{gtk:calendar-mark-day} function and to remove the marker, the
@@ -229,6 +228,7 @@ lambda (calendar)    :run-first
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:calendar-new}
+  @see-slot{gtk:calendar-date}
   @see-slot{gtk:calendar-day}
   @see-slot{gtk:calendar-month}
   @see-slot{gtk:calendar-show-day-names}
@@ -240,17 +240,36 @@ lambda (calendar)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: The test gives a wrong time. Correct the implementation.
-
-#+gtk-4-20
-(defun calendar-date (object)
-  (cffi:convert-from-foreign (glib::pointer (%calendar-date object))
-                             'g:date-time))
+#+(and gtk-4-20 liber-documentation)
+(setf (documentation (liber:slot-documentation "date" 'calendar) t)
+ "The @code{date} property of type @class{g:date-time} (Read / Write) @br{}
+  The selected date. This property gets initially set to the current date. The
+  accessor translates the internal @class{g:date-time} instance into the
+  Lisp universal time. Since 4.20")
 
 #+gtk-4-20
 (defun (setf calendar-date) (value object)
   (setf (%calendar-date object)
-        (cffi:convert-to-foreign value 'g:date-time)))
+        (cffi:convert-to-foreign value 'g:date-time))
+  value)
+
+#+gtk-4-20
+(defun calendar-date (object)
+ #+liber-documentation
+ "@version{2025-12-05}
+  @syntax{(gtk:calendar-date object) => date}
+  @syntax{(setf (gtk:calendar-date object) date)}
+  @argument[object]{a @class{gtk:calendar} widget}
+  @argument[date]{an unsigned integer for the Lisp universal time}
+  @begin{short}
+    The accessor for the @slot[gtk:calendar]{date} slot of the
+    @class{gtk:calendar} class gets or sets the date of the calendar.
+  @end{short}
+  The date represents the shown year, month and the selected day.
+
+  Since 4.20
+  @see-class{gtk:calendar}"
+  (cffi:convert-from-foreign (%calendar-date object) 'g:date-time))
 
 #+gtk-4-20
 (export 'calendar-date)
@@ -261,7 +280,8 @@ lambda (calendar)    :run-first
 (setf (documentation (liber:slot-documentation "day" 'calendar) t)
  "The @code{day} property of type @code{:int} (Read / Write) @br{}
   The selected day as a number between 1 and 31, or 0 to unselect the currently
-  selected day. This property gets initially set to the current day. @br{}
+  selected day. This property gets initially set to the current day. Deprecated
+  4.20 @br{}
   Allowed values: [0, 31] @br{}
   Default value: 0")
 
@@ -269,7 +289,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2025-08-04}
+ "@version{2025-12-05}
   @syntax{(gtk:calender-day object) => day}
   @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -280,6 +300,10 @@ lambda (calendar)    :run-first
     1 and 31, or 0 to unselect the currently selected day.
   @end{short}
   This property gets initially set to the current day.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20. Use the @fun{gtk:calendar-date}
+    function instead.
+  @end{dictionary}
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}
   @see-function{gtk:calendar-select-day}")
@@ -290,7 +314,7 @@ lambda (calendar)    :run-first
 (setf (documentation (liber:slot-documentation "month" 'calendar) t)
  "The @code{month} property of type @code{:int} (Read / Write) @br{}
   The selected month as a number between 0 and 11. This property gets initially
-  set to the current month. @br{}
+  set to the current month. Deprecated 4.20 @br{}
   Allowed values: [0, 11] @br{}
   Default value: 0")
 
@@ -298,7 +322,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2025-08-04}
+ "@version{2025-12-05}
   @syntax{(gtk:calendar-month object) => month}
   @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -309,6 +333,10 @@ lambda (calendar)    :run-first
     between 0 and 11.
   @end{short}
   This property gets initially set to the current month.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20. Use the @fun{gtk:calendar-date}
+    function instead.
+  @end{dictionary}
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}")
 
@@ -388,7 +416,8 @@ lambda (calendar)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "year" 'calendar) t)
  "The @code{year} property of type @code{:int} (Read / Write) @br{}
-  The selected year. This property gets initially set to the current year. @br{}
+  The selected year. This property gets initially set to the current year.
+  Deprecated 4.20 @br{}
   Allowed values: [0, 4194303] @br{}
   Default value: 0")
 
@@ -396,7 +425,7 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2025-08-04}
+ "@version{2025-12-05}
   @syntax{(gtk:calendar-year object) => year}
   @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
@@ -406,6 +435,10 @@ lambda (calendar)    :run-first
     @class{gtk:calendar} class gets or sets the selected year.
   @end{short}
   This property gets initially set to the current year.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20. Use the @fun{gtk:calendar-date}
+    function instead.
+  @end{dictionary}
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}")
 
@@ -428,7 +461,7 @@ lambda (calendar)    :run-first
 (export 'calendar-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_select_day
+;;; gtk_calendar_select_day                                 Deprecated 4.20
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: The C implementation introduces the GDateTime type. We pass in the
@@ -438,7 +471,7 @@ lambda (calendar)    :run-first
 
 (defun calendar-select-day (calendar year month day)
  #+liber-documentation
- "@version{2025-05-31}
+ "@version{2025-12-05}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[year]{an integer for the year}
   @argument[month]{an integer for the month}
@@ -446,7 +479,14 @@ lambda (calendar)    :run-first
   @begin{short}
     Will switch to the year and month of the date and select its day.
   @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20. Use the @fun{gtk:calendar-date}
+    function instead.
+  @end{dictionary}
   @see-class{gtk:calendar}"
+  #+(and gtk-4-20 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:CALENDAR-SELECT-DAY is deprecated since 4.20."))
   (setf (calendar-year calendar) year
         (calendar-month calendar) month
         (calendar-day calendar) day)

@@ -71,7 +71,7 @@ Display Widgets
   gtk4.spinner.lisp                     GtkSpinner                   GTK 4.20 .
   gtk4.progress-bar.lisp                GtkProgressBar               GTK 4.18 *
   gtk4.level-bar.lisp                   GtkLevelBar                  GTK 4.18 *
-  gtk4.calendar.lisp                    GtkCalendar                  GTK 4.20 +
+  gtk4.calendar.lisp                    GtkCalendar                  GTK 4.20
 
 Buttons and Toggles
 

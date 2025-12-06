@@ -150,10 +150,10 @@
 
 (test gtk-calendar-properties
   (glib-test:with-check-memory (calendar)
-    (let* ((time (multiple-value-list (get-decoded-time)))
-           (day (fourth time))
-           (month (fifth time))
-           (year (sixth time)))
+    (let* ((time1 (multiple-value-list (get-decoded-time)))
+           (day (fourth time1))
+           (month (fifth time1))
+           (year (sixth time1)))
       (is (typep (setf calendar (make-instance 'gtk:calendar)) 'gtk:calendar))
       (is (= day (gtk:calendar-day calendar)))
       (is (= (1- month) (gtk:calendar-month calendar)))
@@ -161,6 +161,14 @@
       (is-true (gtk:calendar-show-heading calendar))
       (is-false (gtk:calendar-show-week-numbers calendar))
       (is (= year (gtk:calendar-year calendar))))))
+
+(test gtk-calendar-date
+  (let* ((time1 (encode-universal-time 12 36 20 12 5 2025 -1))
+         (calendar (make-instance 'gtk:calendar))
+         time2)
+    (is (= time1 (setf (gtk:calendar-date calendar) time1)))
+    (is (= time1 (setf time2 (gtk:calendar-date calendar))))
+    (is (= 0 (- time1 time2)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -174,13 +182,14 @@
 ;;;     gtk_calendar_get_date
 
 (test gtk-calendar-select-day
-  (glib-test:with-check-memory (calendar)
-    (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
-    (is-false (gtk:calendar-select-day calendar 2024 7 5))
-    ;; FIXME: Correct the time implementation, there is an offset
-    (is (equal '(0 0 23 4 8 2024 6 T -1)
-               (multiple-value-list
-                 (decode-universal-time (gtk:calendar-date calendar)))))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (calendar)
+      (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
+      (is-false (gtk:calendar-select-day calendar 2024 7 5))
+      ;; FIXME: Correct the time implementation, there is an offset
+      (is (equal '(0 0 23 4 8 2024 6 T -1)
+                 (multiple-value-list
+                   (decode-universal-time (gtk:calendar-date calendar))))))))
 
 ;;;     gtk_calendar_mark_day
 ;;;     gtk_calendar_unmark_day
@@ -207,4 +216,4 @@
     (is-false (gtk:calendar-day-is-marked calendar 5))
     (is-false (gtk:calendar-day-is-marked calendar 6))))
 
-;;; 2025-11-16
+;;; 2025-12-05
