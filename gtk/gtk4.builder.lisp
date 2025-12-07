@@ -252,18 +252,24 @@
 ;; mechanism of swapping objects?
 
 (defmethod builder-scope-create-closure-impl
-           ((scope builder-cl-scope) builder funcname flags object err)
-  (declare (ignorable builder flags err))
-  (let ((func (find-symbol (setf funcname (string-upcase funcname)))))
-    (if func
-        (if object
-            (gobject:create-closure-for-instance object func)
-            (progn
-              (warn "BUILDER-SCOPE-CREATE-CLOSURE: No object given")
-              (cffi:null-pointer)))
-        (progn
-          (warn "BUILDER-SCOPE-CREATE-CLOSURE: Unknown function ~a" funcname)
-          (cffi:null-pointer)))))
+           ((scope builder-cl-scope) builder name flags object err)
+  (declare (ignorable builder flags))
+  (glib:with-ignore-error (err)
+    (let* ((name (string-upcase name))
+           (pos (position #\: name))
+           (func (if pos
+                     (find-symbol (subseq name (1+ pos))
+                                  (find-package (subseq name 0 pos)))
+                     (find-symbol name))))
+      (if func
+          (if object
+              (gobject:create-closure-for-instance object func)
+              (progn
+                (warn "BUILDER-SCOPE-CREATE-CLOSURE: No object given")
+                (cffi:null-pointer)))
+          (progn
+            (warn "BUILDER-SCOPE-CREATE-CLOSURE: Unknown function ~a" name)
+            (cffi:null-pointer))))))
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkBuilder
@@ -777,8 +783,8 @@
 
 (defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{2025-03-01}
-  @argument[path]{a string for the path of the resource file to parse}
+ "@version{2025-12-06}
+  @argument[path]{a string for the resource path to parse}
   @begin{return}
     The new @class{gtk:builder} object containing the described interface.
   @end{return}
@@ -867,9 +873,9 @@
 
 (defun builder-add-from-resource (builder path)
  #+liber-documentation
- "@version{2025-05-03}
+ "@version{2025-12-06}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a string for the path of the resouce file to parse}
+  @argument[path]{a string for the resource path to parse}
   @begin{short}
     Parses a resource file containing a @class{gtk:builder} UI definition and
     merges it with the current contents of the builder.
@@ -996,9 +1002,9 @@
 
 (defun builder-add-objects-from-resource (builder path &rest args)
  #+liber-documentation
- "@version{2025-07-11}
+ "@version{2025-12-06}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[path]{a string for the path of the resource file to parse}
+  @argument[path]{a string for the resource path to parse}
   @argument[args]{strings for the object IDs to build}
   @return{The positive integer on success, 0 if an error occurred.}
   @begin{short}
