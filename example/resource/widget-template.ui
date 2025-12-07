@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MyAppWindow" parent="GtkApplicationWindow">
+    <property name="title">Example Application</property>
+    <child>
+      <object class="GtkBox" id="content_box">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkGrid" id="mygrid">
+            <property name="row-spacing">10</property>
+            <property name="column-spacing">10</property>
+            <property name="margin-start">20</property>
+            <property name="margin-end">20</property>
+            <property name="margin-top">20</property>
+            <property name="margin-bottom">20</property>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label">Button 1</property>
+                <signal name="clicked"
+                        object="button1"
+                        handler="gtk4-example:button1-clicked"/>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="button2">
+                <property name="label">Button 2</property>
+                <signal name="clicked"
+                        object="button2"
+                        handler="gtk4-example:button2-clicked"/>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label">Button 3</property>
+                <signal name="clicked"
+                        object="button3"
+                        handler="gtk4-example:button-clicked"/>
+                <layout>
+                  <property name="column">2</property>
+                  <property name="row">0</property>
+                  <property name="row-span">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="button4">
+                <property name="label">Button 4</property>
+                <signal name="clicked"
+                        object="button4"
+                        handler="gtk4-example:button-clicked"/>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                  <property name="column-span">2</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
