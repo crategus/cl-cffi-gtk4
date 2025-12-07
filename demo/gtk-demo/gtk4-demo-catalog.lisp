@@ -2306,7 +2306,19 @@
         "cairo-example"
         "draw-logo.lisp")))
      "Miscellaneous"
-     (("Cursors"
+     (("Widget Templates"
+       ":window"
+       "DO-WIDGET-TEMPLATE"
+       "gtk4-example"
+       "widget-template.lisp"
+       "resource/widget-template.ui"
+       :keywords
+       "gtk:widget-init-template"
+       "gtk:widget-template-child"
+       "gtk:widget-class-set-template-from-file"
+       "gtk:widget-class-set-template-scope"
+       "gtk:widget-class-bind-template-child")
+      ("Cursors"
        ":window"
        "DO-CURSORS"
        "gtk4-example"
