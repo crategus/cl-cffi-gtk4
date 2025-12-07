@@ -60,8 +60,7 @@
     <file>zoom_out_cursor.png</file>
   </gresource>
   <gresource prefix="/template">
-    <file>windows.ui</file>
-    <file>gears-menu.ui</file>
+    <file>widget-template.ui</file>
   </gresource>
   <gresource prefix="/frames">
     <file>frame-clock.ui</file>
