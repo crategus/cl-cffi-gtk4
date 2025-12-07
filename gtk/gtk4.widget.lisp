@@ -2,7 +2,7 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -113,15 +113,12 @@
 ;;;     gtk_widget_in_destruction
 ;;;     gtk_widget_show                                     Deprecated 4.10
 ;;;     gtk_widget_hide                                     Deprecated 4.10
-
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
 ;;;     gtk_widget_get_mapped
-
 ;;;     gtk_widget_realize
 ;;;     gtk_widget_unrealize
 ;;;     gtk_widget_get_realized
-
 ;;;     gtk_widget_queue_draw
 ;;;     gtk_widget_queue_resize
 ;;;     gtk_widget_queue_allocate
@@ -225,9 +222,7 @@
 ;;;     gtk_widget_insert_before
 ;;;     gtk_widget_insert_after
 ;;;     gtk_widget_should_layout
-
 ;;;     gtk_widget_get_color                                Since 4.10
-
 ;;;     gtk_widget_add_css_class
 ;;;     gtk_widget_remove_css_class
 ;;;     gtk_widget_has_css_class
@@ -253,12 +248,13 @@
 ;;;     gtk_widget_class_set_template_from_resource
 ;;;     gtk_widget_class_set_template_scope
 ;;;     gtk_widget_class_bind_template_child
-;;;     gtk_widget_class_bind_template_child_internal
-;;;     gtk_widget_class_bind_template_child_private
-;;;     gtk_widget_class_bind_template_child_internal_private
-;;;     gtk_widget_class_bind_template_child_full
-;;;     gtk_widget_class_bind_template_callback
-;;;     gtk_widget_class_bind_template_callback_full
+;;;     gtk_widget_class_bind_template_child_full           not exported
+;;;
+;;;     gtk_widget_class_bind_template_child_internal          not implemented
+;;;     gtk_widget_class_bind_template_child_private           not implemented
+;;;     gtk_widget_class_bind_template_child_internal_private  not implemented
+;;;     gtk_widget_class_bind_template_callback                not implemented
+;;;     gtk_widget_class_bind_template_callback_full           not implemented
 ;;;
 ;;;     gtk_widget_observe_children
 ;;;     gtk_widget_observe_controllers
@@ -5433,26 +5429,77 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_init_template" widget-init-template) :void
  #+liber-documentation
- "@version{2024-09-14}
+ "@version{2025-12-07}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates and initializes child widgets defined in templates.
   @end{short}
-  This function must be called in the instance initializer for any class which
-  assigned itself a template using the @fun{gtk:widget-class-set-template}
-  function.
+  Any class that uses the @fun{gtk:widget-class-set-template} function to assign
+  itself a template must call this function in its instance initializer. The
+  @fun{g:object-instance-init} method is a good place to do so.
 
   It is important to call this function in the instance initializer of a
-  GtkWidget subclass. One reason is that generally derived widgets will assume
-  that parent class composite widgets have been created in their instance
+  @class{gtk:widget} subclass. One reason is that generally derived widgets will
+  assume that parent class composite widgets have been created in their instance
   initializers. Another reason is that when calling the @fun{g:object-new}
   function on a widget with composite templates, it is important to build the
   composite widgets before the construct properties are set. Properties passed
   to the @fun{g:object-new} function should take precedence over properties set
   in the private template XML.
+  @begin[Examples]{dictionary}
+    This is a complete example of how to use templates. It is part of the
+    GTK Demo, that comes with the @code{cl-cffi-gtk4} library.
+    @begin{pre}
+;; Subclass from GtkApplicationWindow
+(gobject:define-gobject-subclass \"MyAppWindow\" my-app-window
+  (:superclass gtk:application-window
+   :export t
+   :interfaces nil)
+  nil)
+
+;; Set template and bindings during class initialization
+(defmethod gobject:object-class-init :after
+           ((subclass (eql (find-class 'my-app-window))) class data)
+  (declare (ignorable subclass class data))
+  ;; Load template from file, this is a Lisp extension
+  (let ((path (glib-sys:sys-path \"resource/widget-template.ui\")))
+    (gtk:widget-class-set-template-from-file \"MyAppWindow\" path))
+  ;; Set builder scope
+  (gtk:widget-class-set-template-scope \"MyAppWindow\"
+                                       (make-instance 'gtk:builder-cl-scope))
+  ;; Bind objects from the template
+  (gtk:widget-class-bind-template-child \"MyAppWindow\" \"button1\")
+  (gtk:widget-class-bind-template-child \"MyAppWindow\" \"button2\")
+  (gtk:widget-class-bind-template-child \"MyAppWindow\" \"button3\")
+  (gtk:widget-class-bind-template-child \"MyAppWindow\" \"button4\"))
+
+;; Init usage of template in instance initialization
+(defmethod gobject:object-instance-init :after
+           ((subclass (eql (find-class 'my-app-window))) instance data)
+  (declare (ignorable subclass data))
+  (gtk:widget-init-template instance))
+
+;; Signal handlers for the buttons in the template
+(defun button-clicked (button)
+  (format t \"  Button is clicked: ~a~%\" button))
+(defun button1-clicked (button)
+  (format t \"  Button 1 is clicked: ~a~%\" button))
+(defun button2-clicked (button)
+  (format t \"  Button 2 is clicked: ~a~%\" button))
+
+(defun do-widget-template (&optional application)
+  (let* ((window (make-instance 'my-app-window
+                                :application application
+                                :title \"Application Window\"
+                                :show-menubar t)))
+    ;; Present the application window
+    (gtk:window-present window)))
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:widget}
   @see-function{gtk:widget-class-set-template}
-  @see-function{g:object-new}"
+  @see-function{g:object-new}
+  @see-function{g:object-instance-init}"
   (widget (g:object widget)))
 
 (export 'widget-init-template)
@@ -5464,9 +5511,9 @@ lambda (widget)    :run-last
 #+gtk-4-8
 (cffi:defcfun ("gtk_widget_dispose_template" widget-dispose-template) :void
  #+liber-documentation
- "@version{2024-09-14}
+ "@version{#2025-12-07}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[gtype]{a @class{g:type-t} type ID of the widget to finalize the
+  @argument[gtype]{a @class{g:type-t} type ID for the widget to finalize the
     template for}
   @begin{short}
     Clears the template children for the given @arg{widget}.
@@ -5498,7 +5545,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
  #+liber-documentation
- "@version{2025-06-15}
+ "@version{2025-12-07}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{a @class{g:type-t} type ID to get a template child for}
   @argument[name]{a string for the ID of the child defined in the template XML}
@@ -5510,11 +5557,7 @@ lambda (widget)    :run-last
     instance.
   @end{short}
   This will only report children which were previously declared with the
-  @fun{gtk:widget-class-bind-template-child} function or one of its variants.
-
-  This function is only meant to be called for code which is private to the
-  @arg{gtype} which declared the child and is meant for language bindings
-  which cannot easily make use of the @class{g:object} structure offsets.
+  @fun{gtk:widget-class-bind-template-child} function.
   @see-class{gtk:widget}
   @see-class{g:object}
   @see-class{g:type-t}
@@ -5529,46 +5572,72 @@ lambda (widget)    :run-last
 ;;; gtk_widget_class_set_template
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: This implementation does not work. What is wrong?
-
 (cffi:defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
   (class (:pointer (:struct gobject:type-class)))
   (template (g:boxed glib:bytes)))
 
 (defun widget-class-set-template (gtype template)
  #+liber-documentation
- "@version{2024-09-14}
-  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
+ "@version{2025-12-07}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
   @argument[template]{a string holding the @class{gtk:builder} XML}
   @begin{short}
     This should be called at class initialization time to specify the
     @class{gtk:builder} XML to be used to extend a widget.
   @end{short}
-  For convenience, the @fun{gtk:widget-class-set-template-from-resource}
-  function is also provided.
+  The @fun{g:object-class-init} method is a good place to do so. For
+  convenience, the @fun{gtk:widget-class-set-template-from-file} and
+  @fun{gtk:widget-class-set-template-from-resource} functions are also provided.
 
   Note that any class that installs templates must call the
   @fun{gtk:widget-init-template} function in the instance initializer of the
-  widget.
+  widget. See its documentation for an example.
   @see-class{gtk:widget}
+  @see-function{g:object-class-init}
   @see-function{gtk:widget-init-template}
+  @see-function{gtk:widget-class-set-template-from-file}
   @see-function{gtk:widget-class-set-template-from-resource}"
   (let ((class (gobject:type-class-ref gtype)))
     (multiple-value-bind (data len)
-        (cffi:foreign-string-alloc template)
-        (let ((bytes (glib:bytes-new data len)))
-          (format t "  data : ~a~%" (glib:bytes-data bytes))
-          (format t "  size : ~a~%" (glib:bytes-size bytes))
-          (format t "   str : ~a~%"
-                    (cffi:foreign-string-to-lisp (glib:bytes-data bytes)))
-          (unwind-protect
-            (%widget-class-set-template class bytes)
-            (progn
-              (gobject:type-class-unref class)
-;             (cffi:foreign-string-free data)
-))))))
+        (cffi:foreign-string-alloc template :null-terminated-p nil)
+      (let ((bytes (glib:bytes-new data len)))
+        (unwind-protect
+          (%widget-class-set-template class bytes)
+          (progn
+            (gobject:type-class-unref class)
+            (cffi:foreign-string-free data)))))))
 
 (export 'widget-class-set-template)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk:widget-class-set-template-from-file                 Lisp extension
+;;; ----------------------------------------------------------------------------
+
+(defun widget-class-set-template-from-file (gtype file)
+
+ #+liber-documentation
+ "@version{2025-12-07}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
+  @argument[path]{a pathname or namestring holding the @class{gtk:builder} XML}
+  @begin{short}
+    This should be called at class initialization time to specify the
+    @class{gtk:builder} XML to be used to extend a widget.
+  @end{short}
+  This is a convenience function for the Lisp library. It reads a file into a
+  string and then calls the @fun{gtk:widget-class-set-template} function.
+
+  Note that any class that installs templates must call the
+  @fun{gtk:widget-init-template} function in the instance initializer of the
+  widget. See its documentation for an example.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-init-template}
+  @see-function{gtk:widget-class-set-template}"
+  (with-open-file (stream file)
+   (let ((contents (make-string (file-length stream))))
+     (read-sequence contents stream)
+     (widget-class-set-template gtype contents))))
+
+(export 'widget-class-set-template-from-file)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_set_template_from_resource
@@ -5576,308 +5645,158 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_class_set_template_from_resource"
                %widget-class-set-template-from-resource) :void
-  (class (:pointer (:struct gobject:type-class)))
-  (name :string))
+  (cclass (:pointer (:struct gobject:type-class)))
+  (filename :string))
 
-(defun widget-class-set-template-from-resource (gtype name)
+(defun widget-class-set-template-from-resource (gtype path)
  #+liber-documentation
- "@version{2025-06-15}
-  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
-  @argument[name]{a string for the name of the resource to load the template
-    from}
+ "@version{2025-12-07}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
+  @argument[path]{a string for the resource path to load the template from}
   @begin{short}
     A convenience function to call the @fun{gtk:widget-class-set-template}
     function.
   @end{short}
-
   Note that any class that installs templates must call the
   @fun{gtk:widget-init-template} function in the instance initializer of the
-  widget.
+  widget. See its documentation for an example.
   @see-class{gtk:widget}
   @see-class{g:type-t}
   @see-function{gtk:widget-class-set-template}
   @see-function{gtk:widget-init-template}"
-  (let ((class (gobject:type-class-ref gtype)))
+  (let ((cclass (gobject:type-class-ref gtype)))
     (unwind-protect
-      (%widget-class-set-template-from-resource class name)
-      (gobject:type-class-unref class))))
+      (%widget-class-set-template-from-resource cclass path)
+      (gobject:type-class-unref cclass))))
 
 (export 'widget-class-set-template-from-resource)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_set_template_scope ()
-;;;
-;;; void
-;;; gtk_widget_class_set_template_scope (GtkWidgetClass *widget_class,
-;;;                                      GtkBuilderScope *scope);
-;;;
-;;; For use in language bindings, this will override the default GtkBuilderScope
-;;; to be used when parsing GtkBuilder XML from this class’s template data.
-;;;
-;;; Note that this must be called from a composite widget classes class
-;;; initializer after calling gtk_widget_class_set_template().
-;;;
-;;; widget_class :
-;;;     A GtkWidgetClass
-;;;
-;;; scope :
-;;;     The GtkBuilderScope to use when loading the class template.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_set_template_scope"
                %widget-class-set-template-scope) :void
-  (class :pointer)
+  (cclass :pointer)
   (scope (g:object builder-scope)))
 
 (defun widget-class-set-template-scope (gtype scope)
-  (let ((class (gobject:type-class-ref gtype)))
+ #+liber-documentation
+ "@version{2025-12-07}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
+  @argument[scope]{a @class{gtk:builder-cl-scope} instance to use when loading
+    the class template}
+  @begin{short}
+    For use in language bindings, this will override the default
+    @class{gtk:builder-scope} instance to be used when parsing GtkBuilder XML
+    from the template data of the class.
+  @end{short}
+  Note that this must be called from a composite widget class initializer after
+  calling the @fun{gtk:widget-class-set-template} function.
+
+  See the @fun{gtk:widget-init-template} documentation for an example.
+  @see-class{gtk:widget}
+  @see-class{g:type-t}
+  @see-class{gtk:builder-cl-scope}
+  @see-function{gtk:widget-class-set-template}
+  @see-function{gtk:widget-init-template}"
+  (let ((cclass (gobject:type-class-ref gtype)))
     (unwind-protect
-      (%widget-class-set-template-scope class scope)
-      (gobject:type-class-unref class))))
+      (%widget-class-set-template-scope cclass scope)
+      (gobject:type-class-unref cclass))))
 
 (export 'widget-class-set-template-scope)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child()
-;;;
-;;; #define
-;;; gtk_widget_class_bind_template_child(widget_class, TypeName, member_name)
-;;;
-;;; Binds a child widget defined in a template to the widget_class .
-;;;
-;;; This macro is a convenience wrapper around the
-;;; gtk_widget_class_bind_template_child_full() function.
-;;;
-;;; This macro will use the offset of the member_name inside the TypeName
-;;; instance structure.
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; TypeName :
-;;;     the type name of this widget
-;;;
-;;; member_name :
-;;;     name of the instance member in the instance struct for data_type
+;;; gtk_widget_class_bind_template_child ()
+;;; gtk_widget_class_bind_template_child_full ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_bind_template_child_full"
                %widget-class-bind-template-child-full) :void
-  (class :pointer)
+  (cclass :pointer)
   (name :string)
   (internal :boolean)
   (offset :size))
 
 (defun widget-class-bind-template-child (gtype name)
  #+liber-documentation
- "@version{2025-06-15}
-  @argument[gtype]{a @class{g:type-t} type ID of the widget class}
+ "@version{2025-12-07}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
   @argument[name]{a string for the ID of the child defined in the template XML}
   @begin{short}
     Binds a child widget defined in a template to the widget class of type
     @arg{gtype}.
   @end{short}
-  @see-class{gtk:widget}"
-  (let ((class (gobject:type-class-ref gtype)))
+  Automatically assign an object declared in the class template XML to be set
+  accessible via the @fun{gtk:widget-template-child} function.
+
+  Note that this must be called from a composite widget class initializer after
+  calling the @fun{gtk:widget-class-set-template} function.
+  @see-class{gtk:widget}
+  @see-class{g:type-id}
+  @see-function{gtk:widget-template-child}
+  @see-function{gtk:widget-set-template}"
+  (let ((cclass (gobject:type-class-ref gtype)))
     (unwind-protect
-      (%widget-class-bind-template-child-full class name nil 0)
-      (gobject:type-class-unref class))))
+      (%widget-class-bind-template-child-full cclass name nil 0)
+      (gobject:type-class-unref cclass))))
 
 (export 'widget-class-bind-template-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child_internal()
-;;;
-;;; #define
-;;; gtk_widget_class_bind_template_child_internal(widget_class,
-;;;                                               TypeName, member_name)
-;;;
-;;; Binds a child widget defined in a template to the widget_class , and also
-;;; makes it available as an internal child in GtkBuilder, under the name
-;;; member_name .
-;;;
-;;; This macro is a convenience wrapper around the
-;;; gtk_widget_class_bind_template_child_full() function.
-;;;
-;;; This macro will use the offset of the member_name inside the TypeName
-;;; instance structure.
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; TypeName :
-;;;     the type name, in CamelCase
-;;;
-;;; member_name :
-;;;     name of the instance member in the instance struct for data_type
+;;; gtk_widget_class_bind_template_child_internal ()        not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child_private()
-;;;
-;;; #define
-;;; gtk_widget_class_bind_template_child_private(widget_class,
-;;;                                              TypeName, member_name)
-;;;
-;;; Binds a child widget defined in a template to the widget_class .
-;;;
-;;; This macro is a convenience wrapper around the
-;;; gtk_widget_class_bind_template_child_full() function.
-;;;
-;;; This macro will use the offset of the member_name inside the TypeName
-;;; private data structure (it uses G_PRIVATE_OFFSET(), so the private struct
-;;; must be added with G_ADD_PRIVATE()).
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; TypeName :
-;;;     the type name of this widget
-;;;
-;;; member_name :
-;;;     name of the instance private member in the private struct for data_type
+;;; gtk_widget_class_bind_template_child_private ()         not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child_internal_private()
-;;;
-;;; #define
-;;; gtk_widget_class_bind_template_child_internal_private(widget_class,
-;;;                                                       TypeName, member_name)
-;;;
-;;; Binds a child widget defined in a template to the widget_class , and also
-;;; makes it available as an internal child in GtkBuilder, under the name
-;;; member_name .
-;;;
-;;; This macro is a convenience wrapper around the
-;;; gtk_widget_class_bind_template_child_full() function.
-;;;
-;;; This macro will use the offset of the member_name inside the TypeName
-;;; private data structure.
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; TypeName :
-;;;     the type name, in CamelCase
-;;;
-;;; member_name :
-;;;     name of the instance private member on the private struct for data_type
+;;; gtk_widget_class_bind_template_child_internal_private() not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child_full ()
-;;;
-;;; void
-;;; gtk_widget_class_bind_template_child_full
-;;;                                (GtkWidgetClass *widget_class,
-;;;                                 const char *name,
-;;;                                 gboolean internal_child,
-;;;                                 gssize struct_offset);
-;;;
-;;; Automatically assign an object declared in the class template XML to be set
-;;; to a location on a freshly built instance’s private data, or alternatively
-;;; accessible via gtk_widget_get_template_child().
-;;;
-;;; The struct can point either into the public instance, then you should use
-;;; G_STRUCT_OFFSET(WidgetType, member) for struct_offset , or in the private
-;;; struct, then you should use G_PRIVATE_OFFSET(WidgetType, member).
-;;;
-;;; An explicit strong reference will be held automatically for the duration of
-;;; your instance’s life cycle, it will be released automatically when
-;;; GObjectClass.dispose() runs on your instance and if a struct_offset that is
-;;; != 0 is specified, then the automatic location in your instance public or
-;;; private data will be set to NULL. You can however access an automated child
-;;; pointer the first time your classes GObjectClass.dispose() runs, or
-;;; alternatively in GtkWidgetClass.destroy().
-;;;
-;;; If internal_child is specified, GtkBuildableIface.get_internal_child() will
-;;; be automatically implemented by the GtkWidget class so there is no need to
-;;; implement it manually.
-;;;
-;;; The wrapper macros gtk_widget_class_bind_template_child(),
-;;; gtk_widget_class_bind_template_child_internal(),
-;;; gtk_widget_class_bind_template_child_private() and
-;;; gtk_widget_class_bind_template_child_internal_private() might be more
-;;; convenient to use.
-;;;
-;;; Note that this must be called from a composite widget classes class
-;;; initializer after calling gtk_widget_class_set_template().
-;;;
-;;; widget_class :
-;;;     A GtkWidgetClass
-;;;
-;;; name :
-;;;     The “id” of the child defined in the template XML
-;;;
-;;; internal_child :
-;;;     Whether the child should be accessible as an “internal-child” when this
-;;;     class is used in GtkBuilder XML
-;;;
-;;; struct_offset :
-;;;     The structure offset into the composite widget’s instance public or
-;;;     private structure where the automated child pointer should be set, or 0
-;;;     to not assign the pointer.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_callback()
-;;;
-;;; #define
-;;; gtk_widget_class_bind_template_callback(widget_class, callback)
-;;;
-;;; Binds a callback function defined in a template to the widget_class .
-;;;
-;;; This macro is a convenience wrapper around the
-;;; gtk_widget_class_bind_template_callback_full() function. It is not supported
-;;; after gtk_widget_class_set_template_scope() has been used on widget_class .
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; callback :
-;;;     the callback symbol
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
+;;; gtk_widget_class_bind_template_callback ()              not implemented
 ;;; gtk_widget_class_bind_template_callback_full ()
-;;;
-;;; void
-;;; gtk_widget_class_bind_template_callback_full
-;;;                                (GtkWidgetClass *widget_class,
-;;;                                 const char *callback_name,
-;;;                                 GCallback callback_symbol);
-;;;
-;;; Declares a callback_symbol to handle callback_name from the template XML
-;;; defined for widget_type . This function is not supported after
-;;; gtk_widget_class_set_template_scope() has been used on widget_class . See
-;;; gtk_builder_cscope_add_callback_symbol().
-;;;
-;;; Note that this must be called from a composite widget classes class
-;;; initializer after calling gtk_widget_class_set_template().
-;;;
-;;; widget_class :
-;;;     A GtkWidgetClass
-;;;
-;;; callback_name :
-;;;     The name of the callback as expected in the template XML
-;;;
-;;; callback_symbol :
-;;;     The callback symbol.
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: Does not work for the Lisp library. Can we improve the implementation?
+
+#+nil
 (cffi:defcfun ("gtk_widget_class_bind_template_callback_full"
                %widget-class-bind-template-callback-full) :void
-  (class :pointer)
+  (cclass :pointer)
   (name :string)
   (symbol :string))
 
+#+nil
 (defun widget-class-bind-template-callback (gtype name symbol)
-  (let ((class (gobject:type-class-ref gtype)))
-    (unwind-protect
-      (%widget-class-bind-template-callback-full class name symbol)
-      (gobject:type-class-unref class))))
+ #+liber-documentation
+ "@version{#2025-12-06}
+  @argument[gtype]{a @class{g:type-t} type ID for the widget class}
+  @argument[name]{a string for the ID of the child defined in the template XML}
+  @argument[symbol]{a string for the name of the callback as expected in the
+    template XML}
+  @begin{short}
+    Binds a callback function defined in a template to the widget class.
+  @end{short}
+  This function is not supported after the
+  @fun{gtk:widget-class-set-template-scope} function has been used on the widget
+  class.
 
+  Note that this must be called from a composite widget class initializer after
+  calling the @fun{gtk:widget-class-set-template} function.
+  @see-class{gtk:widget}
+  @see-class{g:type-id}
+  @see-function{gtk:widget-class-set-template}
+  @see-function{gtk:widget-class-set-template-scope}"
+  (let ((cclass (gobject:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-bind-template-callback-full cclass name symbol)
+      (gobject:type-class-unref cclass))))
+
+#+nil
 (export 'widget-class-bind-template-callback)
 
 ;;; ----------------------------------------------------------------------------

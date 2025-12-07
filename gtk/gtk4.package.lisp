@@ -2856,17 +2856,13 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-compute-expand}
       @about-function{widget-init-template}
       @about-function{widget-dispose-template}
-      @about-function{widget-class-set-template}
-      @about-function{widget-class-set-template-from-resource}
       @about-function{widget-template-child}
-      @about-function{widget-class-bind-template-child}
-      @about-function{widget-class-bind-template-child-internal}
-      @about-function{widget-class-bind-template-child-private}
-      @about-function{widget-class-bind-template-child-internal-private}
-      @about-function{widget-class-bind-template-child-full}
-      @about-function{widget-class-bind-template-callback}
-      @about-function{widget-class-bind-template-callback-full}
+      @about-function{widget-class-set-template}
+      @about-function{widget-class-set-template-from-file}
+      @about-function{widget-class-set-template-from-resource}
       @about-function{widget-class-set-template-scope}
+      @about-function{widget-class-bind-template-child}
+      @about-function{widget-class-bind-template-callback}
       @about-function{widget-observe-children}
       @about-function{widget-observe-controllers}
       @about-function{widget-insert-action-group}
