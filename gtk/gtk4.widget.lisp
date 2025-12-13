@@ -5808,7 +5808,7 @@ lambda (widget)    :run-last
 ;; gtk:widget-observe-controllers function
 (gobject:define-gobject "GtkListListModel" list-list-model
   (:superclass g:object
-   :export t
+   :export nil
    :interfaces ("GListModel"))
   ((item-type
     %list-list-model-item-type
