@@ -66,13 +66,12 @@
 (setf (liber:alias-for-class 'native)
       "Interface"
       (documentation 'native 'type)
- "@version{2025-05-15}
+ "@version{2025-12-08}
   @begin{short}
     The @class{gtk:native} interface is the interface implemented by all widgets
     that can provide a @class{gdk:surface} object for widgets to render on.
   @end{short}
-  The obvious example of a @class{gtk:native} widget is the @class{gtk:window}
-  widget.
+  The obvious example is the @class{gtk:window} widget.
 
   Every widget that is not itself a @class{gtk:native} widget is contained in
   one, and you can get it with the @fun{gtk:widget-native} function. To get the

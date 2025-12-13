@@ -2,7 +2,7 @@
 ;;; gtk4.root.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -112,24 +112,23 @@
 
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
- "@version{2025-05-15}
+ "@version{2025-12-08}
   @syntax{(gtk:root-focus root) => widget}
   @syntax{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}
   @argument[widget]{a @class{gtk:widget} focus widget, or @code{nil} if there
     is none}
   @begin{short}
-    The @fun{gtk:root-focus} function retrieves the current focused widget
-    within the root widget.
+    Retrieves the current focused widget within the root widget.
   @end{short}
   Note that this is the widget that would have the focus if the root widget is
   active. If the root widget is not focused then the @fun{gtk:widget-has-focus}
   function will return @em{false} for the widget.
 
   If the @arg{widget} argument is not the current focus widget, and is
-  focusable, the @setf{gtk:root-focus} function sets it as the focus widget for
-  the root widget. If the @arg{widget} argument is @code{nil}, unsets the focus
-  widget for the root widget.
+  focusable, sets it as the focus widget for the root widget. If the
+  @arg{widget} argument is @code{nil}, unsets the focus widget for the root
+  widget.
 
   To set the focus to a particular widget in the root widget, it is usually
   more convenient to use the @fun{gtk:widget-grab-focus} function instead of

@@ -2,7 +2,7 @@
 ;;; gtk4.progress-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; cersion 4.18 and modified to document the Lisp binding to the GTK library,
+;;; cersion 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -116,7 +116,7 @@
 
 #+liber-documentation
 (setf (documentation 'progress-bar 'type)
- "@version{2025-05-30}
+ "@version{2025-12-09}
   @begin{short}
     The @class{gtk:progress-bar} widget is typically used to display the
     progress of a long running operation.
@@ -164,8 +164,7 @@ progressbar[.osd]
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:progress-bar} implementation uses the
-    @val[gtk:accessible-role]{:progress-bar} role of the
-    @sym{gtk:accessible-role} enumeration.
+    @val[gtk:accessible-role]{:progress-bar} role.
   @end{dictionary}
   @see-constructor{gtk:progress-bar-new}
   @see-slot{gtk:progress-bar-ellipsize}

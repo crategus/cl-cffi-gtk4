@@ -196,7 +196,7 @@
 (setf (liber:alias-for-symbol 'window-gravity)
       "GEnum"
       (liber:symbol-documentation 'window-gravity)
- "@version{#2025-11-03}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkWindowGravity\" window-gravity
   (:export t
@@ -246,7 +246,8 @@
   @end{short}
 
   Since 4.20
-  @see-class{gtk:window}")
+  @see-class{gtk:window}
+  @see-function{gtk:window-gravity}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkWindow
@@ -347,7 +348,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2025-07-12}
+ "@version{2025-12-08}
   @begin{short}
     The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -370,16 +371,15 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
 ╰── <titlebar child>.titlebar [.default-decoration]
     @end{pre}
     The @class{gtk:window} implementation has a main CSS node with name
-    @code{window} and @code{.background} style class.
-
-    Style classes that are typically used with the main CSS node are
-    @code{.csd}, when client-side decorations are in use, @code{.solid-csd},
-    for client-side decorations without invisible borders, @code{.ssd}, used by
-    mutter when rendering server-side decorations. The @class{gtk:window}
-    implementation also represents window states with the following style
-    classes on the main node: @code{.tiled}, @code{.maximized},
-    @code{.fullscreen}. Specialized types of window often add their own
-    discriminating style classes, such as @code{.popup} or @code{.tooltip}.
+    @code{window} and @code{.background} style class. Style classes that are
+    typically used with the main CSS node are @code{.csd}, when client-side
+    decorations are in use, @code{.solid-csd}, for client-side decorations
+    without invisible borders, @code{.ssd}, used by mutter when rendering
+    server-side decorations. The @class{gtk:window} implementation also
+    represents window states with the following style classes on the main node:
+    @code{.tiled}, @code{.maximized}, @code{.fullscreen}. Specialized types of
+    window often add their own discriminating style classes, such as
+    @code{.popup} or @code{.tooltip}.
 
     Generally, some CSS properties do not make sense on the toplevel window
     node, such as margins or padding. When client-side decorations without
@@ -885,18 +885,14 @@ lambda (window)    :run-first
 (setf (documentation (liber:slot-documentation "gravity" 'window) t)
  "The @code{gravity} property of type @symbol{gtk:window-gravity} (Read / Write)
   @br{}
-  The gravity to use when resizing the window programmatically. Gravity
-  describes which point of the window we want to keep fixed (meaning that the
-  window will grow in the opposite direction). For example, a gravity of
-  @val[gtk:window-gravity]{:top-right} means that we want the to fix top right
-  corner of the window. Since 4.20 @br{}
+  The gravity to use when resizing the window programmatically. Since 4.20 @br{}
   Default value: @val[gtk:window-gravity]{:top-start}")
 
 #+(and gtk-4-20 liber-documentation)
 (setf (liber:alias-for-function 'window-gravity)
       "Accessor"
       (documentation 'window-gravity 'function)
- "@version{#2025-11-03}
+ "@version{2025-12-08}
   @syntax{(gtk:window-gravity object) => gravity}
   @syntax{(setf (gtk:window-gravity object) gravity)}
   @argument[object]{a @class{gtk:window} widget}
@@ -907,8 +903,14 @@ lambda (window)    :run-first
     the window size programmatically.
   @end{short}
 
+  Gravity describes which point of the window we want to keep fixed, meaning
+  that the window will grow in the opposite direction. For example, a gravity
+  of @val[gtk:window-gravity]{:top-right} means that we want the to fix top
+  right corner of the window.
+
   Since 4.20
-  @see-class{gtk:window}")
+  @see-class{gtk:window}
+  @see-symbol{gtk:window-gravity}")
 
 ;;; --- gtk:window-handle-menubar-accel ----------------------------------------
 
@@ -1286,7 +1288,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-transient-for)
       "Accessor"
       (documentation 'window-transient-for 'function)
- "@version{2025-07-29}
+ "@version{2025-12-08}
   @syntax{(gtk:window-transient-for object) => parent}
   @syntax{(setf (gtk:window-transient-for object) parent)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1295,21 +1297,16 @@ lambda (window)    :run-first
     The accessor for the @slot[gtk:window]{transient-for} slot of the
     @class{gtk:window} class gets or sets the transient parent for the window.
   @end{short}
-
   Dialog windows should be set transient for the main application window they
   were spawned from. This allows window managers to, for example, keep the
   dialog on top of the main window, or center the dialog over the main window.
-  The @fun{gtk:dialog-new-with-buttons} function and other convenience functions
-  in GTK will sometimes call the @fun{gtk:window-transient-for} function on
-  your behalf.
 
   Passing @code{nil} for the @arg{parent} argument unsets the current transient
   window.
 
   On Windows, this function puts the child window on top of the parent, much
   as the window manager would have done on X11.
-  @see-class{gtk:window}
-  @see-function{gtk:dialog-new-with-buttons}")
+  @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_window_new
@@ -1372,21 +1369,19 @@ lambda (window)    :run-first
 
 (defun window-default-size (window)
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2025-12-08}
   @syntax{(gtk:window-default-size window) => width, height}
   @syntax{(setf (gtk:window-default-size window) (list width height))}
   @argument[window]{a @class{gtk:window} widget}
   @argument[width]{an integer for the default width of the window}
   @argument[height]{an integer for the default height of the window}
   @begin{short}
-    The @fun{gtk:window-default-size} function gets the default size of the
-    window.
+    Gets or sets the default size of the window.
   @end{short}
-  The @setf{gtk:window-default-size} function sets the default size. A value of
-  -1 for the width or height indicates that a default size has not been
-  explicitly set for that dimension, so the \"natural\" size of the window will
-  be used. If the \"natural\" size of the window, its size request, is larger
-  than the default, the default will be ignored.
+  A value of -1 for the width or height indicates that a default size has not
+  been explicitly set for that dimension, so the \"natural\" size of the window
+  will be used. If the \"natural\" size of the window, its size request, is
+  larger than the default, the default will be ignored.
 
   Unlike the @fun{gtk:widget-size-request} function, which sets a size request
   for a widget and thus would keep users from shrinking the window, this
@@ -1407,14 +1402,6 @@ lambda (window)    :run-first
   @fun{gtk:window-default-size} function. Using the window allocation directly
   will not work in all circumstances and can lead to growing or shrinking
   windows.
-  @begin[Examples]{dictionary}
-   @begin{pre}
-(let ((window (make-instance 'gtk:window)))
-  (setf (gtk:window-default-size window) '(300 200))
-  (gtk:window-default-size window))
-=> 300, 200
-    @end{pre}
-  @end{dictionary}
   @see-class{gtk:window}
   @see-function{gtk:window-default-width}
   @see-function{gtk:window-default-height}
@@ -1676,7 +1663,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unminimize" window-unminimize) :void
  #+liber-documentation
- "@version{2024-10-02}
+ "@version{2025-12-08}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unminimize the window.
@@ -1690,7 +1677,7 @@ lambda (window)    :run-first
   You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property.
   @see-class{gtk:window}
-  @see-class{gdk:toplevel}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-maximized}"
   (window (g:object window)))
 
@@ -1730,7 +1717,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unmaximize" window-unmaximize) :void
  #+liber-documentation
- "@version{2024-10-02}
+ "@version{2025-12-08}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unmaximize the window.
@@ -1743,7 +1730,7 @@ lambda (window)    :run-first
   property, or by listening to notifications on the @slot[gtk:window]{maximized}
   property.
   @see-class{gtk:window}
-  @see-class{gdk:toplevel}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-maximized}"
   (window (g:object window)))
 
@@ -1845,17 +1832,15 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_default_icon_name" window-default-icon-name)
     :string
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2025-12-08}
   @syntax{(gtk:window-default-icon-name) => name}
   @syntax{(setf (gtk:window-default-icon-name) name)}
   @argument[name]{a string for the name of the themed icon}
   @begin{short}
-    The @fun{gtk:window-default-icon-name} function returns the fallback icon
-    name for windows.
+    Gets or sets the fallback icon name for windows.
   @end{short}
-  The @setf{gtk:window-default-icon-name} function sets an icon to be used as
-  fallback for windows that have not had the @fun{gtk:window-icon-name} function
-  called on them.
+  This is the icon to be used as fallback for windows that have not had the
+  @fun{gtk:window-icon-name} function called on them.
   @see-class{gtk:window}
   @see-function{gtk:window-icon-name}")
 
@@ -1907,16 +1892,15 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_auto_startup_notification"
                window-set-auto-startup-notification) :void
  #+liber-documentation
- "@version{#2024-10-02}
+ "@version{#2025-12-08}
   @argument[setting]{@em{true} to automatically do startup notification}
   @begin{short}
     Call this function to disable the automatic startup notification.
   @end{short}
   By default, after showing the first window, GTK calls the
-  @fun{gdk:display-notify-startup-complete} function. Call this function to
-  disable the automatic startup notification. You might do this if your first
-  window is a splash screen, and you want to delay notification until after your
-  real main window has been shown, for example.
+  @fun{gdk:display-notify-startup-complete} function. You might call this
+  function if your first window is a splash screen, and you want to delay
+  notification until after your real main window has been shown, for example.
 
   In that example, you would disable startup notification temporarily, show your
   splash screen, then re-enable it so that showing the main window would
@@ -1978,13 +1962,18 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_interactive_debugging"
                window-set-interactive-debugging) :void
  #+liber-documentation
- "@version{2024-10-02}
+ "@version{2025-12-08}
   @argument[enable]{@em{true} to enable interactice debugging}
   @begin{short}
     Opens or closes the interactive debugger.
   @end{short}
   The debugger offers access to the widget hierarchy of the application and to
   useful debugging tools.
+
+  There is the @sig[gtk:window]{enable-debugging} signal which gets emitted when
+  the user enables or disables interactive debugging. The default bindings are
+  the @kbd{Ctrl-Shift-I} or @kbd{Ctrl-Shift-D} keys, which starts the
+  @code{GTK-Inspector}.
   @see-class{gtk:window}"
   (enable :boolean))
 
