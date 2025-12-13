@@ -106,15 +106,14 @@
 
 #+liber-documentation
 (setf (documentation 'adjustment 'type)
- "@version{2025-10-25}
+ "@version{2025-12-07}
   @begin{short}
     The @class{gtk:adjustment} object represents a value which has an associated
     lower and upper bound, together with step and page increments, and a page
     size.
   @end{short}
-  It is used within several widgets, including the @class{gtk:spin-button},
-  @class{gtk:viewport}, and @class{gtk:range} widget, which is a base class for
-  the @class{gtk:scale} widget.
+  Adjustments are used within several widgets, including the
+  @class{gtk:spin-button}, @class{gtk:viewport} and @class{gtk:scale} widget.
 
   The @class{gtk:adjustment} object does not update the value itself. Instead it
   is left up to the owner of the object to control the value.
@@ -417,6 +416,16 @@ lambda (adjustment)    :no-recurse
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_adjustment_configure" %adjustment-configure) :void
+  (adjustment (g:object adjustment))
+  (value :double)
+  (lower :double)
+  (upper :double)
+  (step-increment :double)
+  (page-increment :double)
+  (page-size :double))
+
+(defun adjustment-configure
+       (adjustment value lower upper step-increment page-increment page-size)
  #+liber-documentation
  "@version{2025-10-25}
   @argument[adjustment]{a @class{gtk:adjustment} object}
@@ -439,16 +448,6 @@ lambda (adjustment)    :no-recurse
   @end{dictionary}
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}"
-  (adjustment (g:object adjustment))
-  (value :double)
-  (lower :double)
-  (upper :double)
-  (step-increment :double)
-  (page-increment :double)
-  (page-size :double))
-
-(defun adjustment-configure
-       (adjustment value lower upper step-increment page-increment page-size)
   (%adjustment-configure adjustment
                          (coerce value 'double-float)
                          (coerce lower 'double-float)
