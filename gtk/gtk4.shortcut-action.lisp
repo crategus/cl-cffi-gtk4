@@ -319,6 +319,7 @@
      (args (:pointer (:struct g:variant)))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func widget args)))
 
 #+liber-documentation
