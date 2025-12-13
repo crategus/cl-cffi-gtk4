@@ -2,7 +2,7 @@
 ;;; gtk4.button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -210,7 +210,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-can-shrink)
       "Accessor"
       (documentation 'button-can-shrink 'function)
- "@version{2025-08-05}
+ "@version{2025-12-12}
   @syntax{(gtk:button-can-shrink object) => setting}
   @syntax{(setf (gtk:button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -220,9 +220,9 @@ lambda (button)    :action
     @class{gtk:button} class gets or sets whether the button can be smaller
     than the natural size of its contents.
   @end{short}
-  For text buttons, setting the @slot[gtk:button]{can-shrink} to @em{true} will
-  ellipsize the label. For icons and custom children, this function has no
-  effect.
+  For text buttons, setting the @slot[gtk:button]{can-shrink} property to
+  @em{true} will ellipsize the label. For icons and custom children, this
+  function has no effect.
 
   Since 4.12
   @see-class{gtk:button}")
@@ -239,7 +239,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2025-08-05}
+ "@version{2025-12-12}
   @syntax{(gtk:button-child object) => child}
   @syntax{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
@@ -252,17 +252,17 @@ lambda (button)    :action
   Note that by using this API, you take full responsibility for setting up the
   proper accessibility label and description information for the button. Most
   likely, you will either set the accessibility label or description for the
-  button explicitly, or you will set a labelled-by or described-by relations
+  button explicitly, or you will set a labelled-by or described-by relation
   from the child widget to the button.
   @begin[Examples]{dictionary}
-    Get the text of the label from the button:
+    Get the text of the label from the child widget:
     @begin{pre}
 (defvar button (gtk:button-new-with-label \"Save\"))
 => BUTTON
 (gtk:label-label (gtk:button-child button))
 => \"Save\"
     @end{pre}
-    Create a button with an image and a label:
+    Create a button using a @class{gtk:box} widget with an image and a label:
     @begin{pre}
 (defvar button (gtk:button-new))
 => BUTTON
@@ -394,10 +394,10 @@ lambda (button)    :action
 
 (defun button-new ()
  #+liber-documentation
- "@version{2025-05-30}
+ "@version{2025-12-12}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
-    Creates a new button.
+    Creates a new empty button.
   @end{short}
   To add a child widget to the button, use the @fun{gtk:button-child} function.
   @see-class{gtk:button}
@@ -414,11 +414,11 @@ lambda (button)    :action
 
 (defun button-new-with-label (label)
  #+liber-documentation
- "@version{2025-05-30}
-  @argument[label]{a string for the text for the button}
+ "@version{2025-12-12}
+  @argument[label]{a string for the text of the button}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
-    Creates a button with a label containing the given text.
+    Creates a button with a @class{gtk:label} widget containing the given text.
   @end{short}
   @see-class{gtk:button}
   @see-class{gtk:label}"
@@ -435,19 +435,21 @@ lambda (button)    :action
 
 (defun button-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2025-05-30}
+ "@version{2025-12-12}
   @argument[label]{a string for the text of the button, with an underscore in
     front of the mnemonic character}
   @return{The new @class{gtk:button} widget.}
   @begin{short}
-    Creates a new button widget containing a label with a mnemonic.
+    Creates a new button widget containing a @class{gtk:label} widget with a
+    mnemonic.
   @end{short}
   If characters in @arg{label} are preceded by an underscore, they are
   underlined. If you need a literal underscore character in a label, use
   '__' (two underscores). The first underlined character represents a keyboard
   accelerator called a mnemonic. Pressing @kbd{Alt} and that key activates the
   button.
-  @see-class{gtk:button}"
+  @see-class{gtk:button}
+  @see-class{gtk:label}"
   (make-instance 'button
                  :label label
                  :use-underline t))
