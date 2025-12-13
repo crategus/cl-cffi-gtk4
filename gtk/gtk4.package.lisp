@@ -150,7 +150,7 @@
       @about-generic{window-focus-visible}
       @about-generic{window-focus-widget}
       @about-generic{window-fullscreened}
-      @about-geneirc{window-gravity}
+      @about-generic{window-gravity}
       @about-generic{window-handle-menubar-accel}
       @about-generic{window-hide-on-close}
       @about-generic{window-icon-name}
