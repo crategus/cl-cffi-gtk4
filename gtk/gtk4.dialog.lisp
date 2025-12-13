@@ -103,7 +103,7 @@
 (setf (liber:alias-for-symbol 'dialog-flags)
       "GFlags"
       (liber:symbol-documentation 'dialog-flags)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkDialogFlags\" dialog-flags
   (:export t
@@ -124,6 +124,9 @@
   @begin{short}
     Flags used to influence the @class{gtk:dialog} widget construction.
   @end{short}
+  @begin[Warning]{dictionary}
+    This bitfield is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:dialog}")
 
 ;;; ----------------------------------------------------------------------------

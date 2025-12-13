@@ -77,7 +77,7 @@
 (setf (liber:alias-for-symbol 'cell-renderer-accel-mode)
       "GEnum"
       (liber:symbol-documentation 'cell-renderer-accel-mode)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
   (:export t
@@ -97,6 +97,9 @@
   If they are, consumed modifiers are suppressed, only accelerators accepted by
   GTK are allowed, and the accelerators are rendered in the same way as they
   are in menus.
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}")
 
 ;;; ----------------------------------------------------------------------------

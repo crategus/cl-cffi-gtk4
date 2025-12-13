@@ -200,7 +200,7 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-symbol 'tree-selection-func)
       "Callback"
       (liber:symbol-documentation 'tree-selection-func)
- "@version{#2025-04-15}
+ "@version{#2025-12-08}
   @syntax{lambda (selection model path selected) => result}
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[model]{a @class{gtk:tree-model} object being viewed}
@@ -214,6 +214,9 @@ lambda (selection)    :run-first
   It is called whenever the selection state of a row might change. A return
   value of @em{true} indicates to selection that it is okay to change the
   selection.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
@@ -365,7 +368,7 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-symbol 'tree-selection-foreach-func)
       "Callback"
       (liber:symbol-documentation 'tree-selection-foreach-func)
- "@version{#2024-11-05}
+ "@version{#2025-12-08}
   @syntax{lambda (model path iter)}
   @argument[model]{a @class{gtk:tree-model} object being viewed}
   @argument[path]{a @class{gtk:tree-path} instance of a selected row}
@@ -375,6 +378,9 @@ lambda (selection)    :run-first
     function to map all selected rows.
   @end{short}
   It will be called on every selected row in the view.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}

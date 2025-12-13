@@ -219,7 +219,7 @@
 (setf (liber:alias-for-symbol 'tree-view-drop-position)
       "GEnum"
       (liber:symbol-documentation 'tree-view-drop-position)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkTreeViewDropPosition\" tree-view-drop-position
   (:export t
@@ -241,6 +241,9 @@
   @begin{short}
     An enumeration for determining where a dropped row goes in a tree view.
   @end{short}
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view}")
 
 ;;; ----------------------------------------------------------------------------
@@ -259,7 +262,7 @@
 (setf (liber:alias-for-symbol 'tree-view-grid-lines)
       "GEnum"
       (liber:symbol-documentation 'tree-view-grid-lines)
- "@version{2024-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkTreeViewGridLines\" tree-view-grid-lines
   (:export t
@@ -280,6 +283,9 @@
   @begin{short}
     Used to indicate which grid lines to draw in a tree view.
   @end{short}
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1640,7 +1646,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-column-drop-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-column-drop-func)
- "@version{#2024-05-04}
+ "@version{#2025-12-08}
   @syntax{lambda (view column prev next) => result}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[column]{a @class{gtk:tree-view-column} object being dragged}
@@ -1659,6 +1665,9 @@ lambda (view)    :action
   spot. Please note that returning @em{true} does not actually indicate that
   the column drop was made, but is meant only to indicate a possible drop spot
   to the user.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}")
 
@@ -2078,7 +2087,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-mapping-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-mapping-func)
- "@version{#2024-05-04}
+ "@version{#2025-12-08}
   @syntax{lambda (view path)}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance that is expanded}
@@ -2086,6 +2095,9 @@ lambda (view)    :action
     Callback function used for the @fun{gtk:tree-view-map-expanded-rows}
     function.
   @end{short}
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-view-map-expanded-rows}")
@@ -2939,7 +2951,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-search-equal-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-search-equal-func)
- "@version{#2025-04-15}
+ "@version{#2025-12-08}
   @syntax{lambda (model column key iter data) => result}
   @argument[model]{a @class{gtk:tree-model} object being searched}
   @argument[column]{an integer for the search column set by the
@@ -2953,6 +2965,9 @@ lambda (view)    :action
     search key string entered by the user.
   @end{short}
   Note the return value is reversed from what you would normally expect.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-view-set-search-equal-func}")
@@ -3060,7 +3075,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-row-separator-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-row-separator-func)
- "@version{2024-04-07}
+ "@version{2025-12-08}
   @syntax{lambda (model iter) => result}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[iter]{a @class{gtk:tree-iter} instance pointing at a row in
@@ -3072,6 +3087,9 @@ lambda (view)    :action
   @end{short}
   A common way to implement this is to have a boolean column in the model,
   whose values the callback function returns.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}")

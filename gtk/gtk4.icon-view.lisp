@@ -176,7 +176,7 @@
 (setf (liber:alias-for-symbol 'icon-view-drop-position)
       "GEnum"
       (liber:symbol-documentation 'icon-view-drop-position)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkIconViewDropPosition\" icon-view-drop-position
   (:export t
@@ -199,6 +199,9 @@
     @end{simple-table}
   @end{values}
   @short{An enumeration for determining where a dropped item goes.}
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1279,7 +1282,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'icon-view-foreach-func)
       "Callback"
       (liber:symbol-documentation 'icon-view-foreach-func)
- "@version{#2025-07-22}
+ "@version{#2025-12-08}
   @syntax{lambda (view path)}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance for a selected row}
@@ -1288,6 +1291,9 @@ lambda (view)    :action
     function to map all selected rows.
   @end{short}
   It will be called on every selected row in the view.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-function{gtk:icon-view-selected-foreach}")

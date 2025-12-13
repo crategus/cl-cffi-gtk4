@@ -101,7 +101,7 @@
 (setf (liber:alias-for-symbol 'font-chooser-level)
       "GFlags"
       (liber:symbol-documentation 'font-chooser-level)
- "@version{2025-07-25}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkFontChooserLevel\" font-chooser-level
   (:export t
@@ -126,6 +126,9 @@
     selection that is desired in a font chooser.
   @end{short}
   Applications should ignore unknown values.
+  @begin[Warning]{dictionary}
+    This bitfield is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:font-chooser}")
 
 ;;; ----------------------------------------------------------------------------
@@ -555,7 +558,7 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-symbol 'font-filter-func)
       "Callback"
       (liber:symbol-documentation 'font-filter-func)
- "@version{#2024-05-22}
+ "@version{#2025-12-08}
   @syntax{lambda (family face) => result}
   @argument[family]{a @class{pango:font-family} object}
   @argument[face]{a @class{pango:font-face} object belonging to @arg{family}}
@@ -565,6 +568,9 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} widget.
   @end{short}
   See the @fun{gtk:font-chooser-set-filter-func} function.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:font-chooser}
   @see-class{pango:font-family}
   @see-class{pango:font-face}

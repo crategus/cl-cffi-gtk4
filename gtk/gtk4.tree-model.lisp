@@ -140,7 +140,7 @@
 (setf (liber:alias-for-symbol 'tree-model-flags)
       "GFlags"
       (liber:symbol-documentation 'tree-model-flags)
- "@version{2025-07-13}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkTreeModelFlags\" tree-model-flags
   (:export t
@@ -162,6 +162,9 @@
   static for the lifetime of the model. A more complete description of the
   @val[gtk:tree-model-flags]{:iters-persist} value can be found in the overview
   of this section.
+  @begin[Warning]{dictionary}
+    This bitfield is deprecated since 4.10. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-function{gtk:tree-model-flags}")
 
@@ -1755,7 +1758,7 @@ lambda (model path iter order)    :run-first
 (setf (liber:alias-for-symbol 'tree-model-foreach-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-foreach-func)
- "@version{#2025-03-03}
+ "@version{#2025-12-08}
   @syntax{lambda (model path iter) => result}
   @argument[model]{a @class{gtk:tree-model} object being iterated}
   @argument[path]{a current @class{gtk:tree-path} instance}
@@ -1765,6 +1768,9 @@ lambda (model path iter order)    :run-first
     Type of the callback function passed to the @fun{gtk:tree-model-foreach}
     function to iterate over the rows in a tree model.
   @end{short}
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}

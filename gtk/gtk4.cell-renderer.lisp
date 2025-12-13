@@ -126,7 +126,7 @@
 (setf (liber:alias-for-symbol 'cell-renderer-state)
       "GFlags"
       (liber:symbol-documentation 'cell-renderer-state)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-gflags \"GtkCellRendererState\" cell-renderer-state
   (:export t
@@ -152,6 +152,9 @@
     @end{simple-table}
   @end{values}
   @short{Tells how a cell is to be rendererd.}
+  @begin[Warning]{dictionary}
+    This bitfield is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
@@ -169,7 +172,7 @@
 (setf (liber:alias-for-symbol 'cell-renderer-mode)
       "GEnum"
       (liber:symbol-documentation 'cell-renderer-mode)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkCellRendererMode\" cell-renderer-mode
   (:export t
@@ -188,6 +191,9 @@
     @end{simple-table}
   @end{values}
   @short{Identifies how the user can interact with a particular cell.}
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------

@@ -313,7 +313,7 @@
 (setf (liber:alias-for-symbol 'tree-iter-compare-func)
       "Callback"
       (liber:symbol-documentation 'tree-iter-compare-func)
- "@version{#2025-07-22}
+ "@version{#2025-12-08}
   @syntax{lambda (model iter1 iter2) => result}
   @argument[model]{a @class{gtk:tree-model} object the comparison is within}
   @argument[iter1]{a @class{gtk:tree-iter} iterator in @arg{model}}
@@ -331,6 +331,9 @@
   expected, the @sym{gtk:tree-iter-compare-func} callback function must define
   a partial order on the model, that is, it must be reflexive, antisymmetric
   and transitive.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-sortable}

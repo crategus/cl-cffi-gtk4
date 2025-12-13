@@ -154,7 +154,7 @@
 (setf (liber:alias-for-symbol 'tree-view-column-sizing)
       "GEnum"
       (liber:symbol-documentation 'tree-view-column-sizing)
- "@version{2025-07-22}
+ "@version{2025-12-08}
   @begin{declaration}
 (gobject:define-genum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
   (:export t
@@ -178,6 +178,9 @@
   Please note that the @val[gtk:tree-view-column-sizing]{:autosize} value is
   inefficient for large tree views, and can make tree view columns appear
   choppy.
+  @begin[Warning]{dictionary}
+    This enumeration is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sizing}")
 
@@ -1205,7 +1208,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-symbol 'tree-cell-data-func)
       "Callback"
       (liber:symbol-documentation 'tree-cell-data-func)
- "@version{#2025-07-22}
+ "@version{#2025-12-08}
   @syntax{lambda (column renderer model iter)}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object that is being rendered
@@ -1220,6 +1223,9 @@ lambda (column)    :run-last
   might get an integer from the tree model, and render it to the @code{\"text\"}
   attribute of the cell by converting it to its written equivalent. This is set
   by calling the @fun{gtk:tree-view-column-set-cell-data-func} function.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:tree-model}

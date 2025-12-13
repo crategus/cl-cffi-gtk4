@@ -284,7 +284,7 @@
 (setf (liber:alias-for-symbol 'tree-model-filter-visible-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-visible-func)
- "@version{#2024-05-03}
+ "@version{#2025-12-08}
   @syntax{lambda (model iter) => result}
   @argument[model]{a child model of the @class{gtk:tree-model-filter} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator pointing to the row in model
@@ -295,6 +295,9 @@
     A callback function which decides whether the row indicated by @arg{iter}
     is visible.
   @end{short}
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-iter}
   @see-symbol{gtk:tree-model-filter-set-visible-func}")
@@ -364,7 +367,7 @@
 (setf (liber:alias-for-symbol 'tree-model-filter-modify-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-modify-func)
- "@version{#2025-07-22}
+ "@version{#2025-12-08}
   @syntax{lambda (model iter value column)}
   @argument[model]{a @class{gtk:tree-model-filter} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator pointing to the row whose
@@ -381,6 +384,9 @@
 
   Since this function is called for each data access, it is not a particularly
   efficient operation.
+  @begin[Warning]{dictionary}
+    This callback function is deprecated since 4.20. There is no replacement.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-iter}
   @see-symbol{g:value}
