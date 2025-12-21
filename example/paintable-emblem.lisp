@@ -4,7 +4,7 @@
 ;;;; on top of an icon. The emblem can either be another icon, or an arbitrary
 ;;;; paintable.
 ;;;;
-;;;; 2025-3-10
+;;;; 2025-12-21
 
 (in-package :gtk4-example)
 
@@ -97,6 +97,7 @@
     ;; First icon with emblem from theme
     (let* ((icon (emblemed-icon-new "folder" "emblem-important"))
            (image (gtk:image-new-from-paintable icon)))
+      (setf (gtk:image-pixel-size image) 128)
       (setf (gtk:widget-hexpand image) t)
       (setf (gtk:widget-vexpand image) t)
       (gtk:box-append box image))
@@ -105,6 +106,7 @@
                                   :drawbackground nil))
            (icon (emblemed-icon-new-with-paintable "drive-multidisk" emblem))
            (image (gtk:image-new-from-paintable icon)))
+      (setf (gtk:image-pixel-size image) 128)
       (setf (gtk:widget-hexpand image) t)
       (setf (gtk:widget-vexpand image) t)
       (gtk:box-append box image))

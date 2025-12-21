@@ -8,7 +8,7 @@
 ;;;; common usage is inside <tt>GtkImage</tt> and that is what we are going to
 ;;;; do here.
 ;;;;
-;;;; 2024-4-6
+;;;; 2025-12-21
 
 (in-package :gdk)
 
@@ -78,4 +78,5 @@
                                 :title "Nuclear Icon"
                                 :default-width 300
                                 :default-height 200)))
+    (setf (gtk:image-pixel-size image) 128)
     (gtk:window-present window)))

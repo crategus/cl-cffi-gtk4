@@ -8,7 +8,7 @@
 ;;;; Paintables can also change their size, this works similarly, but we will
 ;;;; not demonstrate this here as our icon does not have any size.
 ;;;;
-;;;; 2024-4-6
+;;;; 2025-12-21
 
 (in-package :gdk)
 
@@ -114,4 +114,5 @@
                                 :title "Nuclear Animation"
                                 :default-width 300
                                 :default-height 200)))
+    (setf (gtk:image-pixel-size image) 128)
     (gtk:window-present window)))
