@@ -5708,8 +5708,8 @@ lambda (widget)    :run-last
 (export 'widget-class-set-template-scope)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_bind_template_child ()
-;;; gtk_widget_class_bind_template_child_full ()
+;;; gtk_widget_class_bind_template_child
+;;; gtk_widget_class_bind_template_child_full
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_bind_template_child_full"
@@ -5721,22 +5721,24 @@ lambda (widget)    :run-last
 
 (defun widget-class-bind-template-child (gtype name)
  #+liber-documentation
- "@version{2025-12-07}
+ "@version{2025-12-28}
   @argument[gtype]{a @class{g:type-t} type ID for the widget class}
   @argument[name]{a string for the ID of the child defined in the template XML}
   @begin{short}
     Binds a child widget defined in a template to the widget class of type
     @arg{gtype}.
   @end{short}
-  Automatically assign an object declared in the class template XML to be set
+  Automatically assigns an object declared in the class template XML to be set
   accessible via the @fun{gtk:widget-template-child} function.
 
   Note that this must be called from a composite widget class initializer after
-  calling the @fun{gtk:widget-class-set-template} function.
+  calling the @fun{gtk:widget-class-set-template} function. See the
+  @fun{gtk:widget-init-template} documentation for an example.
   @see-class{gtk:widget}
-  @see-class{g:type-id}
+  @see-class{g:type-t}
   @see-function{gtk:widget-template-child}
-  @see-function{gtk:widget-set-template}"
+  @see-function{gtk:widget-class-set-template}
+  @see-function{gtk:widget-init-template}"
   (let ((cclass (gobject:type-class-ref gtype)))
     (unwind-protect
       (%widget-class-bind-template-child-full cclass name nil 0)
