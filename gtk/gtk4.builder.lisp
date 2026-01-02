@@ -258,7 +258,7 @@
     (let* ((name (string-upcase name))
            (pos (position #\: name))
            (func (if pos
-                     (find-symbol (subseq name (1+ pos))
+                     (find-symbol (string-trim ":" (subseq name (1+ pos)))
                                   (find-package (subseq name 0 pos)))
                      (find-symbol name))))
       (if func
