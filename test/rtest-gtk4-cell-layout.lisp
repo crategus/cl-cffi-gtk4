@@ -34,17 +34,86 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     GtkCellLayoutDataFunc
-
 ;;;     gtk_cell_layout_pack_start
 ;;;     gtk_cell_layout_pack_end
 ;;;     gtk_cell_layout_get_area
 ;;;     gtk_cell_layout_get_cells
-;;;     gtk_cell_layout_reorder
 ;;;     gtk_cell_layout_clear
-;;;     gtk_cell_layout_set_attributes
+
+(test gtk-cell-layout-pack-start/end
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer1 renderer2)
+      (is (typep (setf area
+                       (gtk:cell-area-box-new)) 'gtk:cell-area-box))
+      (is (typep (setf renderer1
+                       (gtk:cell-renderer-text-new)) 'gtk:cell-renderer-text))
+      (is (typep (setf renderer2
+                       (gtk:cell-renderer-text-new)) 'gtk:cell-renderer-text))
+      (is (eq area (gtk:cell-layout-area area)))
+      (is-false (gtk:cell-layout-pack-start area renderer1))
+      (is-false (gtk:cell-layout-pack-end area renderer2))
+      (is (= 2 (length (gtk:cell-layout-cells area))))
+      (is (every (lambda (x) (typep x 'gtk:cell-renderer-text))
+                 (gtk:cell-layout-cells area)))
+      ;; Remove references
+      (is-false (gtk:cell-layout-clear area)))))
+
+;;;     gtk_cell_layout_reorder
+
+(test gtk-cell-layout-reorder
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer1 renderer2)
+      (is (typep (setf area
+                       (gtk:cell-area-box-new)) 'gtk:cell-area-box))
+      (is (typep (setf renderer1
+                       (gtk:cell-renderer-text-new)) 'gtk:cell-renderer-text))
+      (is (typep (setf renderer2
+                       (gtk:cell-renderer-pixbuf-new)) 'gtk:cell-renderer-pixbuf))
+      (is-false (gtk:cell-layout-pack-end area renderer1))
+      (is-false (gtk:cell-layout-pack-end area renderer2))
+      (is (equal '(gtk:cell-renderer-text gtk:cell-renderer-pixbuf)
+                 (mapcar (lambda (x) (type-of x))
+                         (gtk:cell-layout-cells area))))
+      (is-false (gtk:cell-layout-reorder area renderer2 0))
+      (is (equal '(gtk:cell-renderer-pixbuf gtk:cell-renderer-text)
+                 (mapcar (lambda (x) (type-of x))
+                         (gtk:cell-layout-cells area))))
+      ;; Remove references
+      (is-false (gtk:cell-layout-clear area)))))
+
 ;;;     gtk_cell_layout_add_attribute
-;;;     gtk_cell_layout_set_cell_data_func
+
+(test gtk-cell-layout-add-attribute
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer)
+      (is (typep (setf area
+                       (gtk:cell-area-box-new)) 'gtk:cell-area-box))
+      (is (typep (setf renderer
+                       (gtk:cell-renderer-text-new)) 'gtk:cell-renderer-text))
+      (is-false (gtk:cell-layout-pack-end area renderer))
+      (is-false (gtk:cell-layout-add-attribute area renderer "font" 0))
+      ;; Remove references
+      (is-false (gtk:cell-layout-clear area)))))
+
+;;;     gtk_cell_layout_set_attributes
 ;;;     gtk_cell_layout_clear_attributes
 
-;;; 2024-9-20
+(test gtk-cell-layout-set-attributes
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (area renderer)
+      (is (typep (setf area
+                       (gtk:cell-area-box-new)) 'gtk:cell-area-box))
+      (is (typep (setf renderer
+                       (gtk:cell-renderer-text-new)) 'gtk:cell-renderer-text))
+      (is-false (gtk:cell-layout-pack-end area renderer))
+      (is-false (gtk:cell-layout-set-attributes area renderer
+                                                "font" 0
+                                                "text" 1))
+      (is-false (gtk:cell-layout-clear-attributes area renderer))
+      ;; Remove references
+      (is-false (gtk:cell-layout-clear area)))))
+
+;;;     GtkCellLayoutDataFunc
+;;;     gtk_cell_layout_set_cell_data_func
+
+;;; 2026-01-17

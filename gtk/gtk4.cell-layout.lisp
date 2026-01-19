@@ -92,6 +92,7 @@
   rendered by the cell renderer. Finally, it is possible to specify a function
   with the @fun{gtk:cell-layout-set-cell-data-func} function that is called to
   determine the value of the attribute for each cell that is rendered.
+
   @begin[GtkCellLayouts as GtkBuildable]{dictionary}
     Implementations of the @class{gtk:cell-layout} interface which also
     implement the @class{gtk:buildable} interface accept
@@ -151,7 +152,7 @@
 
 (defun cell-layout-pack-start (layout cell &key (expand t))
  #+liber-documentation
- "@version{#2024-05-01}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if @arg{cell} is to be given extra space
@@ -185,7 +186,7 @@
 
 (defun cell-layout-pack-end (layout cell &key (expand t))
  #+liber-documentation
- "@version{#2023-09-16}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[expand]{@em{true} if @arg{cell} is to be given extra space
@@ -214,7 +215,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_get_area" cell-layout-area)
     (g:object cell-area)
- "@version{#2023-09-16}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @return{The @class{gtk:cell-area} object used by @arg{layout}.}
   @begin{short}
@@ -239,7 +240,7 @@
 (cffi:defcfun ("gtk_cell_layout_get_cells" cell-layout-cells)
     (g:list-t g:object)
  #+liber-documentation
- "@version{#2024-05-01}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @return{The list of @class{gtk:cell-renderer} objects.}
   @begin{short}
@@ -261,7 +262,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_reorder" cell-layout-reorder) :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object to reorder}
   @argument[position]{an integer for the new position to insert @arg{cell} at}
@@ -288,7 +289,7 @@
 
 (cffi:defcfun ("gtk_cell_layout_clear" cell-layout-clear) :void
  #+liber-documentation
- "@version{#2024-05-01}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @begin{short}
     Unsets all the mappings on all renderers on @arg{layout} and removes
@@ -304,40 +305,12 @@
 (export 'cell-layout-clear)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_layout_set_attributes
-;;; ----------------------------------------------------------------------------
-
-(defun cell-layout-set-attributes (layout cell &rest attributes)
- #+liber-documentation
- "@version{#2024-05-01}
-  @argument[layout]{a @class{gtk:cell-layout} object}
-  @argument[cell]{a @class{gtk:cell-renderer} object}
-  @argument[attributes]{pairs of attributes}
-  @begin{short}
-    Sets the attributes of @arg{layout}.
-  @end{short}
-  The attributes should be in attribute/column order, as in the
-  @fun{gtk:cell-layout-add-attribute} function. All existing attributes are
-  removed, and replaced with the new attributes.
-  @begin[Warning]{dictionary}
-    The @class{gtk:cell-layout} implementation is deprecated since 4.10. Please
-    do not use it in newly written code.
-  @end{dictionary}
-  @see-class{gtk:layout}
-  @see-class{gtk:cell-renderer}
-  @see-function{gtk:cell-layout-add-attribute}"
-  (iter (for (attribute column) on attributes by #'cddr)
-        (cell-layout-add-attribute layout cell attribute column)))
-
-(export 'cell-layout-set-attributes)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_layout_add_attribute
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_layout_add_attribute" cell-layout-add-attribute) :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-01-17}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[attribute]{a string for an attribute on the renderer}
@@ -364,6 +337,61 @@
   (column :int))
 
 (export 'cell-layout-add-attribute)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_cell_layout_set_attributes
+;;; ----------------------------------------------------------------------------
+
+(defun cell-layout-set-attributes (layout cell &rest attributes)
+ #+liber-documentation
+ "@version{2026-01-17}
+  @argument[layout]{a @class{gtk:cell-layout} object}
+  @argument[cell]{a @class{gtk:cell-renderer} object}
+  @argument[attributes]{pairs of attributes}
+  @begin{short}
+    Sets the attributes of @arg{layout}.
+  @end{short}
+  The attributes should be in attribute/column order, as in the
+  @fun{gtk:cell-layout-add-attribute} function. All existing attributes are
+  removed, and replaced with the new attributes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-layout} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-layout}
+  @see-class{gtk:cell-renderer}
+  @see-function{gtk:cell-layout-add-attribute}"
+  (iter (for (attribute column) on attributes by #'cddr)
+        (cell-layout-add-attribute layout cell attribute column)))
+
+(export 'cell-layout-set-attributes)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_cell_layout_clear_attributes
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_cell_layout_clear_attributes" cell-layout-clear-attributes)
+     :void
+ #+liber-documentation
+ "@version{2026-01-17}
+  @argument[layout]{a @class{gtk:cell-layout} object}
+  @argument[cell]{a @class{gtk:cell-renderer} object to clear the attribute
+    mapping on}
+  @begin{short}
+    Clears all existing attributes previously set with the
+    @fun{gtk:cell-layout-add-attribute} function.
+  @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-layout} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-layout}
+  @see-class{gtk:cell-renderer}
+  @see-function{gtk:cell-layout-add-attribute}"
+  (layout (g:object cell-layout))
+  (cell (g:object cell-renderer)))
+
+(export 'cell-layout-clear-attributes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkCellLayoutDataFunc
@@ -455,32 +483,5 @@
               (cffi:null-pointer))))
 
 (export 'cell-layout-set-cell-data-func)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_cell_layout_clear_attributes
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_cell_layout_clear_attributes" cell-layout-clear-attributes)
-     :void
- #+liber-documentation
- "@version{#2023-09-16}
-  @argument[layout]{a @class{gtk:cell-layout} object}
-  @argument[cell]{a @class{gtk:cell-renderer} object to clear the attribute
-    mapping on}
-  @begin{short}
-    Clears all existing attributes previously set with the
-    @fun{gtk:cell-layout-add-attribute} function.
-  @end{short}
-  @begin[Warning]{dictionary}
-    The @class{gtk:cell-layout} implementation is deprecated since 4.10. Please
-    do not use it in newly written code.
-  @end{dictionary}
-  @see-class{gtk:cell-layout}
-  @see-class{gtk:cell-renderer}
-  @see-function{gtk:cell-layout-add-attribute}"
-  (layout (g:object cell-layout))
-  (cell (g:object cell-renderer)))
-
-(export 'cell-layout-clear-attributes)
 
 ;;; --- End of file gtk4.cell-layout.lisp --------------------------------------
