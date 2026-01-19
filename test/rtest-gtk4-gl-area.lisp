@@ -59,7 +59,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-gl-area-properties
-  (let ((area (make-instance 'gtk:gl-area)))
+  (glib-test:with-check-memory (area)
+    (is (typep (setf area (make-instance 'gtk:gl-area)) 'gtk:gl-area))
     (is (equal '(:gl :gles) (gtk:gl-area-allowed-apis area)))
     (is-false (gtk:gl-area-api area))
     (is-true (gtk:gl-area-auto-render area))
@@ -71,12 +72,29 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gl_area_new
+
+(test gtk-gl-area-new
+  (glib-test:with-check-memory (area)
+    (is (typep (setf area (gtk:gl-area-new)) 'gtk:gl-area))))
+
 ;;;     gtk_gl_area_make_current
 ;;;     gtk_gl_area_queue_render
 ;;;     gtk_gl_area_attach_buffers
+
 ;;;     gtk_gl_area_set_error
 ;;;     gtk_gl_area_get_error
+
 ;;;     gtk_gl_area_get_required_version
 ;;;     gtk_gl_area_set_required_version
 
-;;; 2024-10-26
+(test gtk-gl-area-required-version
+  (glib-test:with-check-memory (area)
+    (is (typep (setf area (gtk:gl-area-new)) 'gtk:gl-area))
+    (is (equal '(1 2)
+               (multiple-value-list
+                   (setf (gtk:gl-area-required-version area) '(1 2)))))
+    (is (equal '(1 2)
+               (multiple-value-list
+                   (gtk:gl-area-required-version area))))))
+
+;;; 2026-01-10

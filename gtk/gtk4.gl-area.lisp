@@ -2,7 +2,7 @@
 ;;; gtk4.gl-area.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -287,7 +287,8 @@ lambda (area width height)    :run-last
   @see-slot{gtk:gl-area-context}
   @see-slot{gtk:gl-area-has-depth-buffer}
   @see-slot{gtk:gl-area-has-stencil-buffer}
-  @see-slot{gtk:gl-area-use-es}")
+  @see-slot{gtk:gl-area-use-es}
+  @see-class{gdk:gl-context}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -517,7 +518,7 @@ lambda (area width height)    :run-last
 
 (defun gl-area-new ()
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{2026-01-10}
   @return{The new @class{gtk:gl-area} widget.}
   @short{Creates a new @class{gtk:gl-area} widget.}
   @see-class{gtk:gl-area}"
@@ -531,14 +532,15 @@ lambda (area width height)    :run-last
 
 (cffi:defcfun ("gtk_gl_area_make_current" gl-area-make-current) :void
  #+liber-documentation
- "@version{#2023-10-21}
+ "@version{2026-01-10}
   @argument[area]{a @class{gtk:gl-area} object}
   @begin{short}
     Ensures that the @class{gdk:gl-context} object used by @arg{area} is
     associated with the the @class{gtk:gl-area} object.
   @end{short}
-  This function is automatically called before emitting the @code{\"render\"}
-  signal, and does not normally need to be called by application code.
+  This function is automatically called before emitting the
+  @sig[gtk:gl-area]{render} signal, and does not normally need to be called by
+  application code.
   @see-class{gtk:gl-area}"
   (area (g:object gl-area)))
 
@@ -572,15 +574,16 @@ lambda (area width height)    :run-last
 
 (cffi:defcfun ("gtk_gl_area_attach_buffers" gl-area-attach-buffers) :void
  #+liber-documentation
- "@version{#2024-10-26}
+ "@version{#2026-01-10}
   @argument[area]{a @class{gtk:gl-area} object}
   @begin{short}
     Ensures that the area framebuffer object is made the current draw and read
     target, and that all the required buffers for the area are created and bound
     to the framebuffer.
   @end{short}
-  This function is automatically called before emitting the @code{\"render\"}
-  signal, and does not normally need to be called by application code.
+  This function is automatically called before emitting the
+  @sig[gtk:gl-area]{render} signal, and does not normally need to be called by
+  application code.
   @see-class{gtk:gl-area}"
   (area (g:object gl-area)))
 
@@ -654,19 +657,17 @@ lambda (area width height)    :run-last
 
 (defun gl-area-required-version (area)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-01-10}
   @syntax{(gtk:gl-area-required-version area) => major, minor}
   @syntax{(setf (gtk:gl-area-required-version area) '(major minor))}
   @argument[area]{a @class{gtk:gl-area} object}
   @argument[major]{an integer for the required major version}
   @argument[minor]{an integer for the required minor version}
   @begin{short}
-    The @fun{gtk:gl-area-required-version} function retrieves the required
-    version of OpenGL.
+    Gets or sets the required version of OpenGL to be used when creating the
+    context for the widget.
   @end{short}
-  The @setf{gtk:gl-area-required-version} function sets the required version of
-  OpenGL to be used when creating the context for the widget. This function must
-  be called before the area has been realized.
+  This function must be called before the area has been realized.
   @see-class{gtk:gl-area}"
   (cffi:with-foreign-objects ((major :int) (minor :int))
     (%gl-area-required-version area major minor)
