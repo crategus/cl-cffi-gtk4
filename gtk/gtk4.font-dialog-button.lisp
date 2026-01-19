@@ -2,7 +2,7 @@
 ;;; gtk4.font-dialog-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; Version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,7 +99,7 @@
 (setf (liber:alias-for-symbol 'font-level)
       "GEnum"
       (liber:symbol-documentation 'font-level)
- "@version{2025-06-29}
+ "@version{2026-01-09}
   @begin{declaration}
 (gobject:define-genum \"GtkFontLevel\" font-level
   (:export t
@@ -114,7 +114,7 @@
       @entry[:family]{Select a font family.}
       @entry[:face]{Select a font face, that is a family and a style.}
       @entry[:font]{Select a font, that is, a face with a size, and possibly
-        font variations).}
+        font variations.}
       @entry[:features]{Select a font and font features.}
     @end{simple-table}
   @end{values}
@@ -165,7 +165,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-dialog-button 'type)
- "@version{#2025-07-31}
+ "@version{2026-01-09}
   @begin{short}
     The @class{gtk:font-dialog-button} class is wrapped around a
     @class{gtk:font-dialog} object and allows to open a font chooser dialog to
@@ -208,7 +208,8 @@ lambda (fontbutton)    :run-first
   @see-slot{gtk:font-dialog-button-language}
   @see-slot{gtk:font-dialog-button-level}
   @see-slot{gtk:font-dialog-button-use-font}
-  @see-slot{gtk:font-dialog-button-use-size}")
+  @see-slot{gtk:font-dialog-button-use-size}
+  @see-class{gtk:font-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -226,7 +227,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-dialog)
       "Accessor"
       (documentation 'font-dialog-button-dialog 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-dialog object) => dialog}
   @syntax{(setf (gtk:font-dialog-button-dialog object) dialog)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -256,7 +257,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-font-desc)
       "Accessor"
       (documentation 'font-dialog-button-font-desc 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-font-desc object) => desc}
   @syntax{(setf (gtk:font-dialog-button-font-desc object) desc)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -289,7 +290,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-font-features)
       "Accessor"
       (documentation 'font-dialog-button-font-features 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-font-features object) => features}
   @syntax{(setf (gtk:font-dialog-button-font-features object) features)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -319,14 +320,14 @@ lambda (fontbutton)    :run-first
   @br{}
   The selected language for font features. This property will be updated to
   reflect the users choice in the font chooser dialog. Listen to
-  @sig[g:object]{notify::language} to get informed about changes to the buttons
-  language.")
+  @sig[g:object]{notify::language} signal to get informed about changes to the
+  buttons language.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-dialog-button-language)
       "Accessor"
       (documentation 'font-dialog-button-language 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-language object) => language}
   @syntax{(setf (gtk:font-dialog-button-language object) language)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -353,7 +354,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-level)
       "Accessor"
       (documentation 'font-dialog-button-level 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-level object) => level}
   @syntax{(setf (gtk:font-dialog-button-level object) level)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -381,7 +382,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-use-font)
       "Accessor"
       (documentation 'font-dialog-button-use-font 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-use-font object) => setting}
   @syntax{(setf (gtk:font-dialog-button-use-font object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -409,7 +410,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-dialog-button-use-size)
       "Accessor"
       (documentation 'font-dialog-button-use-size 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-10}
   @syntax{(gtk:font-dialog-button-use-size object) => setting}
   @syntax{(setf (gtk:font-dialog-button-use-size object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
@@ -432,7 +433,7 @@ lambda (fontbutton)    :run-first
 
 (defun font-dialog-button-new (&optional dialog)
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{2026-01-10}
   @argument[dialog]{an optional @class{gtk:font-dialog} object to use}
   @begin{short}
     Creates a new @class{gtk:font-dialog-button} widget with the given

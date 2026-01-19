@@ -2,7 +2,7 @@
 ;;; gtk4.font-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-dialog 'type)
- "@version{#2024-05-02}
+ "@version{2026-01-03}
   @begin{short}
     The @class{gtk:font-dialog} object collects the arguments that are needed to
     present a font chooser dialog to the user, such as a title for the dialog
@@ -139,7 +139,7 @@
 (setf (liber:alias-for-function 'font-dialog-filter)
       "Accessor"
       (documentation 'font-dialog-filter 'function)
- "@version{#2025-09-29}
+ "@version{2026-01-03}
   @syntax{(gtk:font-dialog-filter object) => filter}
   @syntax{(setf (gtk:font-dialog-filter object) filter)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -154,7 +154,10 @@
   @class{pango:font-family} and @class{pango:font-face} objects.
 
   Since 4.10
-  @see-class{gtk:font-dialog}")
+  @see-class{gtk:font-dialog}
+  @see-class{gtk:filter}
+  @see-class{pango:font-family}
+  @see-clas{pango-font-face}")
 
 ;;; --- gtk:font-dialog-font-map -----------------------------------------------
 
@@ -170,7 +173,7 @@
 (setf (liber:alias-for-function 'font-dialog-font-map)
       "Accessor"
       (documentation 'font-dialog-font-map 'function)
- "@version{#2025-09-29}
+ "@version{2026-01-03}
   @syntax{(gtk:font-dialog-font-map object) => fontmap}
   @syntax{(setf (gtk:font-dialog-font-map object) fontmap)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -183,7 +186,8 @@
   Returns @code{nil} for the default fontmap.
 
   Since 4.10
-  @see-class{gtk:font-dialog}")
+  @see-class{gtk:font-dialog}
+  @see-class{pango:font-map}")
 
 ;;; --- gtk:font-dialog-language -----------------------------------------------
 
@@ -197,7 +201,7 @@
 (setf (liber:alias-for-function 'font-dialog-language)
       "Accessor"
       (documentation 'font-dialog-language 'function)
- "@version{#2025-09-29}
+ "@version{2026-01-03}
   @syntax{(gtk:font-dialog-language object) => language}
   @syntax{(setf (gtk:font-dialog-language object) language)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -209,7 +213,8 @@
   @end{short}
 
   Since 4.10
-  @see-class{gtk:font-dialog}")
+  @see-class{gtk:font-dialog}
+  @see-class{pango:language}")
 
 ;;; --- gtk:font-dialog-modal --------------------------------------------------
 
@@ -223,7 +228,7 @@
 (setf (liber:alias-for-function 'font-dialog-modal)
       "Accessor"
       (documentation 'font-dialog-modal 'function)
- "@version{#2025-09-29}
+ "@version{2026-01-03}
   @syntax{(gtk:font-dialog-modal object) => modal}
   @syntax{(setf (gtk:font-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -250,7 +255,7 @@
 (setf (liber:alias-for-function 'font-dialog-title)
       "Accessor"
       (documentation 'font-dialog-title 'function)
- "@version{#2025-09-29}
+ "@version{2026-01-03}
   @syntax{(gtk:font-dialog-title object) => title}
   @syntax{(setf (gtk:font-dialog-title object) title)}
   @argument[object]{a @class{gtk:font-dialog} object}
@@ -272,7 +277,7 @@
 
 (defun font-dialog-new ()
  #+liber-documentation
- "@version{#2023-10-19}
+ "@version{2026-01-03}
   @return{The new @class{gtk:font-dialog} object.}
   @short{Creates a new @class{gtk:font-dialog} object.}
 
@@ -296,7 +301,7 @@
 
 (defun font-dialog-choose-face (dialog parent face cancellable func)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[face]{a @class{pango:font-face} object}
@@ -313,6 +318,10 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{gtk:window}
+  @see-class{pango:font-face}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
   @see-function{gtk:font-dialog-choose-face-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-face dialog
@@ -329,14 +338,15 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_face_finish"
-               %font-dialog-choose-face-finish) (g:object pango:font-face)
+               %font-dialog-choose-face-finish)
+    (g:object pango:font-face :return)
   (dialog (g:object font-dialog))
   (result (g:object g:async-result))
   (err :pointer))
 
 (defun font-dialog-choose-face-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{short}
@@ -346,6 +356,7 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{g:async-result}
   @see-function{gtk:font-dialog-choose-face}"
   (glib:with-ignore-error (err)
     (%font-dialog-choose-face-finish dialog result err)))
@@ -366,7 +377,7 @@
 
 (defun font-dialog-choose-family (dialog parent family cancellable func)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[family]{a @class{pango:font-family} object}
@@ -382,6 +393,10 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{gtk:window}
+  @see-class{pango:font-family}
+  @see-class{g:cancellable}
+  @see-symbol{g:asyn-ready-callback}
   @see-function{gtk:font-dialog-choose-family-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-family dialog
@@ -398,14 +413,15 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_family_finish"
-               %font-dialog-choose-family-finish) (g:object pango:font-family)
+               %font-dialog-choose-family-finish)
+    (g:object pango:font-family :return)
   (dialog (g:object font-dialog))
   (result (g:object g:async-result))
   (err :pointer))
 
 (defun font-dialog-choose-family-finish (dialog result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @begin{short}
@@ -418,6 +434,7 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{g:async-result}
   @see-function{gtk:font-dialog-choose-family}"
   (glib:with-ignore-error (err)
     (%font-dialog-choose-family-finish dialog result err)))
@@ -431,14 +448,14 @@
 (cffi:defcfun ("gtk_font_dialog_choose_font" %font-dialog-choose-font) :void
   (dialog (g:object font-dialog))
   (parent (g:object window))
-  (desc (g:object pango:font-description))
+  (desc (g:boxed pango:font-description))
   (cancellable (g:object g:cancellable))
   (func :pointer)
   (data :pointer))
 
 (defun font-dialog-choose-font (dialog parent desc cancellable func)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[desc]{a @class{pango:font-description} object}
@@ -457,7 +474,12 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
-  @see-function{gtk:font-dialog-choose-font-finish}"
+  @see-class{gtk:window}
+  @see-class{pango:font-description}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
+  @see-function{gtk:font-dialog-choose-font-finish}
+  @see-function{gtk:font-dialog-choose-font-and-features}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-font dialog
                               parent
@@ -474,14 +496,14 @@
 
 (cffi:defcfun ("gtk_font_dialog_choose_font_finish"
                %font-dialog-choose-font-finish)
-    (g:object pango:font-description)
+    (g:boxed pango:font-description :return)
   (dialog (g:object font-dialog))
   (result (g:object g:async-result))
   (err :pointer))
 
 (defun font-dialog-choose-font-finish (dialog result)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{The @class{pango:font-description} object for the selected font.}
@@ -492,7 +514,9 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
-  @see-function{gtk:font-dialog-choose-family}"
+  @see-class{g:async-result}
+  @see-class{pango:font-description}
+  @see-function{gtk:font-dialog-choose-font}"
   (glib:with-ignore-error (err)
     (%font-dialog-choose-font-finish dialog result err)))
 
@@ -506,7 +530,7 @@
                %font-dialog-choose-font-and-features) :void
   (dialog (g:object font-dialog))
   (parent (g:object window))
-  (desc (g:object pango:font-description))
+  (desc (g:boxed pango:font-description))
   (cancellable (g:object g:cancellable))
   (func :pointer)
   (data :pointer))
@@ -514,7 +538,7 @@
 (defun font-dialog-choose-font-and-features (dialog
                                              parent desc cancellable func)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-04}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[desc]{a @class{pango:font-description} object}
@@ -534,6 +558,10 @@
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{gtk:window}
+  @see-class{pango:font-description}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
   @see-function{gtk:font-dialog-choose-font-and-features-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-font-and-features
@@ -554,14 +582,14 @@
                %font-dialog-choose-font-and-features-finish) :boolean
   (dialog (g:object font-dialog))
   (result (g:object g:async-result))
-  (desc (g:boxed pango:font-description))
-  (features (:pointer :string))
-  (language (g:boxed pango:language))
+  (desc :pointer)
+  (features :pointer)
+  (language :pointer)
   (err :pointer))
 
 (defun font-dialog-choose-font-and-features-finish (dialog result)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-01-04}
   @syntax{(gtk:font-dialog-choose-font-and-features-finish dialog result)
     => desc, features, language}
   @argument[dialog]{a @class{gtk:font-dialog} object}
@@ -570,24 +598,32 @@
   @argument[features]{a string for the font features}
   @argument[language]{a @class{pango:language} object}
   @begin{short}
-    Finishes the the @fun{gtk:font-dialog-choose-font} function call and
-    returns the resulting font description.
+    Finishes the the @fun{gtk:font-dialog-choose-font-and-features} function
+    call and returns the resulting font description.
   @end{short}
 
   Since 4.10
   @see-class{gtk:font-dialog}
+  @see-class{g:async-result}
+  @see-class{pango:font-description}
+  @see-class{pango:language}
   @see-function{gtk:font-dialog-choose-font-and-features}"
-  (let ((desc (pango:font-description-new))
-        (features nil)
-        (language (pango:language-default)))
-    (glib:with-ignore-error (err)
+  (glib:with-ignore-error (err)
+    (cffi:with-foreign-objects ((desc :pointer)
+                                (feat :pointer)
+                                (lang :pointer))
       (when (%font-dialog-choose-font-and-features-finish dialog
                                                           result
                                                           desc
-                                                          features
-                                                          language
+                                                          feat
+                                                          lang
                                                           err))
-        (values desc features language))))
+        (values (cffi:convert-from-foreign
+                    desc '(g:boxed pango:font-description :return))
+                (cffi:convert-from-foreign
+                    (cffi:mem-ref feat :pointer) '(:string :free-from-foreign t))
+                (cffi:convert-from-foreign
+                    lang '(g:boxed pango:language :return))))))
 
 (export 'font-dialog-choose-font-and-features-finish)
 

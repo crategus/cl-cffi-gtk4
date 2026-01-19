@@ -104,6 +104,19 @@
 ;;;     use-font
 ;;;     use-size
 
+(test gtk-font-dialog-button-properties
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (make-instance 'gtk:font-dialog-button))
+               'gtk:font-dialog-button))
+    (is-false (gtk:font-dialog-button-dialog button))
+    (is (typep (gtk:font-dialog-button-font-desc button) 'pango:font-description))
+    (is-false (gtk:font-dialog-button-font-features button))
+    (is-false (gtk:font-dialog-button-language button))
+    (is (eq :font (gtk:font-dialog-button-level button)))
+    (is-false (gtk:font-dialog-button-use-font button))
+    (is-false (gtk:font-dialog-button-use-size button))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     activate
@@ -125,4 +138,16 @@
 
 ;;;     gtk_font_dialog_button_new
 
-;;; 2024-9-20
+(test gtk-font-dialog-button-new.1
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:font-dialog-button-new)) 'gtk:font-dialog-button))))
+
+(test gtk-font-dialog-button-new.2
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:font-dialog-button-new (gtk:font-dialog-new)))
+               'gtk:font-dialog-button))
+    (is-false (setf (gtk:font-dialog-button-dialog button) nil))))
+
+;;; 2026-01-09
