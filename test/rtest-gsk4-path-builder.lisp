@@ -79,7 +79,10 @@
       (setf layout (gtk:label-layout (setf label (gtk:label-new "-"))))
       (is (= 2 (g:object-ref-count layout)))
       (is-false (gsk:path-builder-add-layout builder layout))
-      (is (string= (format nil "M 4 10 L 1 10 L 1 9 L 4 9 Z")
+      (is (string= (format nil "M 4.04296875 10.0351562 ~
+                                L 0.84375 10.0351562 L 0.84375 9.28125 ~
+                                L 4.04296875 9.28125 ~
+                                Z")
                    (gsk:path-to-string (gsk:path-builder-to-path builder))))
       ;; Remove references
       (is (string= "" (setf (gtk:label-label label) ""))))))
@@ -172,4 +175,4 @@
 ;;;     gsk_path_builder_ref
 ;;;     gsk_path_builder_unref
 
-;;; 2025-09-18
+;;; 2026-01-09

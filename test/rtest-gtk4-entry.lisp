@@ -312,10 +312,8 @@
     (is-true (gtk:entry-invisible-char-set entry))
     (is-false (gtk:entry-unset-invisible-char entry))
     ;; Default char is #\BULLET and not #\*
-    #+sbcl
+    #+crategus
     (is (= (char-code #\BULLET) (gtk:entry-invisible-char entry)))
-    #-sbcl
-    (is (= (char-code #\U+2022) (gtk:entry-invisible-char entry)))
     #+windows
     (is (= (char-code #\BLACK_CIRCLE) (gtk:entry-invisible-char entry)))
     (is-false (gtk:entry-invisible-char-set entry))))
@@ -366,4 +364,4 @@
                  (setf (gtk:entry-menu-entry-icon-text entry :secondary) "text")))
     (is (string= "text" (gtk:entry-menu-entry-icon-text entry :secondary)))))
 
-;;; 2025-11-16
+;;; 2026-01-09

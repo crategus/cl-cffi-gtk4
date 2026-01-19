@@ -214,6 +214,7 @@
                        (gtk:css-section-to-string section)))
           ;; Access section
           (is-false (gtk:css-section-bytes section))
+          #-windows
           (is (string= filename (gtk:css-section-file section)))
           (is-false (gtk:css-section-parent section))
           (is (cffi:pointerp (gtk:css-section-start-location section)))

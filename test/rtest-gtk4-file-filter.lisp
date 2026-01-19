@@ -138,7 +138,7 @@
       (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
                    (g:variant-print variant)))
       #+windows
-      (is (string= "('.mhjl-Dateityp', [(1, '.mhjl')])"
+      (is (string= "('.txt-Dateityp', [(1, '.txt')])"
                    (g:variant-print variant)))
       (is (eq 'gtk:file-filter
               (type-of (setf filter
@@ -148,7 +148,7 @@
       (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
                    (g:variant-print variant)))
       #+windows
-      (is (string= "('.mhjl-Dateityp', [(1, '*')])"
+      (is (string= "('.txt-Dateityp', [(1, '*')])"
                    (g:variant-print variant))))))
 
-;;; 2024-12-16
+;;; 2026-01-09

@@ -7,6 +7,7 @@
 
 ;;;     GtkLabel
 
+#-windows
 (test gtk-label-class
   ;; Check type
   (is (g:type-is-object "GtkLabel"))
@@ -48,6 +49,85 @@
                        :EXPORT T
                        :INTERFACES
                        ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_label_get_type")
+                      ((ATTRIBUTES LABEL-ATTRIBUTES
+                        "attributes" "PangoAttrList" T T)
+                       (ELLIPSIZE LABEL-ELLIPSIZE
+                        "ellipsize" "PangoEllipsizeMode" T T)
+                       (EXTRA-MENU LABEL-EXTRA-MENU
+                        "extra-menu" "GMenuModel" T T)
+                       (JUSTIFY LABEL-JUSTIFY "justify" "GtkJustification" T T)
+                       (LABEL LABEL-LABEL "label" "gchararray" T T)
+                       (LINES LABEL-LINES "lines" "gint" T T)
+                       (MAX-WIDTH-CHARS LABEL-MAX-WIDTH-CHARS
+                        "max-width-chars" "gint" T T)
+                       (MNEMONIC-KEYVAL LABEL-MNEMONIC-KEYVAL
+                        "mnemonic-keyval" "guint" T NIL)
+                       (MNEMONIC-WIDGET LABEL-MNEMONIC-WIDGET
+                        "mnemonic-widget" "GtkWidget" T T)
+                       (NATURAL-WRAP-MODE LABEL-NATURAL-WRAP-MODE
+                        "natural-wrap-mode" "GtkNaturalWrapMode" T T)
+                       (SELECTABLE LABEL-SELECTABLE "selectable"
+                        "gboolean" T T)
+                       (SINGLE-LINE-MODE LABEL-SINGLE-LINE-MODE
+                        "single-line-mode" "gboolean" T T)
+                       (TABS LABEL-TABS "tabs" "PangoTabArray" T T)
+                       (USE-MARKUP LABEL-USE-MARKUP "use-markup"
+                        "gboolean" T T)
+                       (USE-UNDERLINE LABEL-USE-UNDERLINE
+                        "use-underline" "gboolean" T T)
+                       (WIDTH-CHARS LABEL-WIDTH-CHARS "width-chars" "gint" T T)
+                       (WRAP LABEL-WRAP "wrap" "gboolean" T T)
+                       (WRAP-MODE LABEL-WRAP-MODE
+                        "wrap-mode" "PangoWrapMode" T T)
+                       (XALIGN LABEL-XALIGN "xalign" "gfloat" T T)
+                       (YALIGN LABEL-YALIGN "yalign" "gfloat" T T)))
+             (gobject:get-gtype-definition "GtkLabel"))))
+
+#+windows
+(test gtk-label-class
+  ;; Check type
+  (is (g:type-is-object "GtkLabel"))
+  ;; Check registered name
+  (is (eq 'gtk:label
+          (glib:symbol-for-gtype "GtkLabel")))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkLabel")
+          (g:gtype (cffi:foreign-funcall "gtk_label_get_type" :size))))
+  ;; Check parent
+  (is (eq (g:gtype "GtkWidget")
+          (g:type-parent "GtkLabel")))
+  ;; Check children
+  (is (equal '()
+             (glib-test:list-children "GtkLabel")))
+  ;; Check interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+               "GtkAccessibleText" "GtkAccessibleHypertext")
+             (glib-test:list-interfaces "GtkLabel")))
+  ;; Check properties
+  (is (equal '("attributes" "ellipsize" "extra-menu" "justify" "label" "lines"
+               "max-width-chars" "mnemonic-keyval" "mnemonic-widget"
+               "natural-wrap-mode" "selectable" "single-line-mode" "tabs"
+               "use-markup" "use-underline" "width-chars" "wrap" "wrap-mode"
+               "xalign" "yalign")
+             (glib-test:list-properties "GtkLabel")))
+  ;; Check signals
+  (is (equal '("activate-current-link" "activate-link" "copy-clipboard"
+               "move-cursor")
+             (glib-test:list-signals "GtkLabel")))
+  ;; Check CSS name
+  (is (string= "label"
+               (gtk:widget-class-css-name "GtkLabel")))
+  ;; Check accessible role
+  (is (eq :label (gtk:widget-class-accessible-role "GtkLabel")))
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLabel" GTK:LABEL
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleHypertext"
+                        "GtkAccessibleText" "GtkBuildable"
                         "GtkConstraintTarget")
                        :TYPE-INITIALIZER "gtk_label_get_type")
                       ((ATTRIBUTES LABEL-ATTRIBUTES
@@ -314,4 +394,4 @@
     (is-false (gtk:label-select-region label 8 17))
     (is-false (gtk:label-current-uri label))))
 
-;;; 2025-4-27
+;;; 2026-01-10
