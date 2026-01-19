@@ -215,7 +215,9 @@
 
 #-windows
 (test gtk-settings-properties
-  (let ((settings (gtk:settings-default)))
+  (glib-test:with-check-memory ((settings 3) :strong 1)
+    (is (typep (setf settings
+                     (gtk:settings-default)) 'gtk:settings))
     (is-false (gtk:settings-gtk-alternative-button-order settings))
     (is-false (gtk:settings-gtk-alternative-sort-arrows settings))
     (is-false (gtk:settings-gtk-application-prefer-dark-theme settings))
@@ -278,15 +280,19 @@
 ;;;     gtk_settings_get_default
 
 (test gtk-settings-default
-  (is (typep (gtk:settings-default) 'gtk:settings)))
+  (glib-test:with-check-memory ((settings 3))
+    (is (typep (setf settings (gtk:settings-default)) 'gtk:settings))))
 
 ;;;     gtk_settings_get_for_display
 
+(test gtk-settings-for-display
+  (glib-test:with-check-memory ((settings 3))
+    (is (typep (setf settings
+                     (gtk:settings-for-display (gdk:display-default)))
+               'gtk:settings))))
+
 ;;;     gtk_settings_reset_property
 
-;; FIXME: Can cause a memory fault
-
-#+nil
 (test gtk-settings-reset-property
   (let ((settings (gtk:settings-default)))
     (is-false (gtk:settings-reset-property settings
@@ -303,15 +309,15 @@
                  "gtk-enable-primary-paste" "gtk-entry-password-hint-timeout"
                  "gtk-entry-select-on-focus" "gtk-error-bell" "gtk-font-name"
                  "gtk-font-rendering" "gtk-fontconfig-timestamp"
-                 "gtk-hint-font-metrics" "gtk-icon-theme-name"
-                 "gtk-im-module" "gtk-keynav-use-caret"
-                 "gtk-label-select-on-focus" "gtk-long-press-time"
-                 "gtk-overlay-scrolling" "gtk-primary-button-warps-slider"
-                 "gtk-print-backends" "gtk-print-preview-command"
-                 "gtk-recent-files-enabled" "gtk-recent-files-max-age"
-                 "gtk-shell-shows-app-menu" "gtk-shell-shows-desktop"
-                 "gtk-shell-shows-menubar" "gtk-show-status-shapes"
-                 "gtk-sound-theme-name"
+                 "gtk-hint-font-metrics" "gtk-icon-theme-name" "gtk-im-module"
+                 "gtk-interface-color-scheme" "gtk-interface-contrast"
+                 "gtk-keynav-use-caret" "gtk-label-select-on-focus"
+                 "gtk-long-press-time" "gtk-overlay-scrolling"
+                 "gtk-primary-button-warps-slider" "gtk-print-backends"
+                 "gtk-print-preview-command" "gtk-recent-files-enabled"
+                 "gtk-recent-files-max-age" "gtk-shell-shows-app-menu"
+                 "gtk-shell-shows-desktop" "gtk-shell-shows-menubar"
+                 "gtk-show-status-shapes" "gtk-sound-theme-name"
                  "gtk-split-cursor" "gtk-theme-name" "gtk-titlebar-double-click"
                  "gtk-titlebar-middle-click" "gtk-titlebar-right-click"
                  "gtk-xft-antialias" "gtk-xft-dpi" "gtk-xft-hinting"
@@ -323,4 +329,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2025-09-18
+;;; 2026-01-17

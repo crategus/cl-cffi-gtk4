@@ -88,7 +88,7 @@
 ;;;     gtk-recent-files-max-age
 ;;;     gtk-shell-shows-app-menu                            Deprecated 4.20
 ;;;     gtk-shell-shows-desktop                             Deprecated 4.20
-;;;     gtk-shell-shows-menubar                             Deprecated 4-20
+;;;     gtk-shell-shows-menubar                             Deprecated 4.20
 ;;;     gtk-show-status-shapes                              Since 4.14
 ;;;     gtk-sound-theme-name
 ;;;     gtk-split-cursor
@@ -2111,20 +2111,25 @@
 ;;; gtk_settings_get_default
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_settings_get_default" settings-default) (g:object settings)
- #+liber-documentation
- "@version{2024-06-02}
-  @begin{return}
-    The @class{gtk:settings} object, if there is no default display, then
-    returns @code{nil}.
-  @end{return}
-  @begin{short}
-    Gets the @class{gtk:settings} object for the default GDK display, creating
-    it if necessary.
-  @end{short}
-  See the @fun{gtk:settings-for-display} function.
-  @see-class{gtk:settings}
-  @see-function{gtk:settings-for-display}")
+(cffi:defcfun ("gtk_settings_get_default" %settings-default) (g:object settings))
+
+(let ((settings nil))
+  (defun settings-default  ()
+   #+liber-documentation
+   "@version{2026-01-17}
+    @begin{return}
+      The @class{gtk:settings} object, if there is no default display, then
+      returns @code{nil}.
+    @end{return}
+    @begin{short}
+      Gets the @class{gtk:settings} object for the default GDK display, creating
+      it if necessary.
+    @end{short}
+    See the @fun{gtk:settings-for-display} function.
+    @see-class{gtk:settings}
+    @see-function{gtk:settings-for-display}"
+    (or settings
+        (setf settings (%settings-default)))))
 
 (export 'settings-default)
 
@@ -2132,19 +2137,24 @@
 ;;; gtk_settings_get_for_display
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_settings_get_for_display" settings-for-display)
+(cffi:defcfun ("gtk_settings_get_for_display" %settings-for-display)
     (g:object settings)
- #+liber-documentation
- "@version{#2023-08-30}
-  @argument[display]{a @class{gdk:display} object}
-  @return{The @class{gtk:settings} object.}
-  @begin{short}
-    Gets the @class{gtk:settings} object for @arg{display}, creating it if
-    necessary.
-  @end{short}
-  @see-class{gtk:settings}
-  @see-class{gdk:display}"
-  (screen (g:object gdk:display)))
+  (display (g:object gdk:display)))
+
+(let ((settings nil))
+  (defun settings-for-display (display)
+   #+liber-documentation
+   "@version{2026-01-17}
+    @argument[display]{a @class{gdk:display} object}
+    @return{The @class{gtk:settings} object.}
+    @begin{short}
+      Gets the @class{gtk:settings} object for @arg{display}, creating it if
+      necessary.
+    @end{short}
+    @see-class{gtk:settings}
+    @see-class{gdk:display}"
+    (or settings
+        (setf settings (%settings-for-display display)))))
 
 (export 'settings-for-display)
 
