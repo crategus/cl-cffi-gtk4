@@ -2,7 +2,7 @@
 ;;; gtk4.drag-source.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-source 'type)
- "@version{2025-09-29}
+ "@version{2026-01-12}
   @begin{short}
     The @class{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
@@ -131,8 +131,8 @@ lambda (source drag)    :run-last
         @entry[drag]{The @class{gdk:drag} object.}
       @end{simple-table}
       The signal is emitted on the drag source when a drag is started. It can
-      be used to, for example, set a custom drag icon with the
-      @fun{gtk:drag-source-set-icon} function.
+      be used to set a custom drag icon with the @fun{gtk:drag-source-set-icon}
+      function.
     @end{signal}
     @begin[drag-source::drag-cancel]{signal}
       @begin{pre}
@@ -189,7 +189,9 @@ lambda (source x y)    :run-last
   @end{dictionary}
   @see-slot{gtk:drag-source-actions}
   @see-slot{gtk:drag-source-content}
-  @see-constructor{gtk:drag-source-new}")
+  @see-constructor{gtk:drag-source-new}
+  @see-class{gdk:drag}
+  @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -200,8 +202,8 @@ lambda (source x y)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drag-source) t)
  "The @code{actions} property of type @sym{gdk:drag-action} (Read / Write) @br{}
-  The actions that are supported by drag operations from the source. Note that
-  you must handle the @sig[gtk:drag-source]{drag-end} signal if the actions
+  The actions that are supported by drag operations from the drag source. Note
+  that you must handle the @sig[gtk:drag-source]{drag-end} signal if the actions
   include the @val[gdk:drag-action]{:move} value. @br{}
   Default value: @val[gdk:drag-action]{:copy}")
 
@@ -209,7 +211,7 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-actions)
       "Accessor"
       (documentation 'drag-source-actions 'function)
- "@version{2025-08-23}
+ "@version{2026-01-12}
   @syntax{(gtk:drag-source-actions object) => actions}
   @syntax{(setf (gtk:drag-source-actions object) actions)}
   @argument[object]{a @class{gtk:drag-source} object}
@@ -217,7 +219,7 @@ lambda (source x y)    :run-last
   @begin{short}
     The accessor for the @slot[gtk:drag-source]{actions} slot of the
     @class{gtk:drag-source} class gets or sets the actions that are supported
-    by drag operations from the source.
+    by drag operations from the drag source.
   @end{short}
 
   During a DND operation, the actions are offered to potential drop targets.
@@ -236,24 +238,24 @@ lambda (source x y)    :run-last
 (setf (documentation (liber:slot-documentation "content" 'drag-source) t)
  "The @code{content} property of type @class{gdk:content-provider}
   (Read / Write) @br{}
-  The data that is offered by drag operations from this source, in the form
+  The data that is offered by drag operations from this drag source, in the form
   of a @class{gdk:content-provider} object.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drag-source-content)
       "Accessor"
       (documentation 'drag-source-content 'function)
- "@version{2025-08-23}
+ "@version{2026-01-12}
   @syntax{(gtk:drag-source-content object) => content}
   @syntax{(setf (gtk:drag-source-content object) content)}
   @argument[object]{a @class{gtk:drag-source} object}
-  @argument[content]{a @class{gdk:content-provider} object for @arg{source},
+  @argument[content]{a @class{gdk:content-provider} object for the drag source,
     or @code{nil}}
   @begin{short}
     The accessor for the @slot[gtk:drag-source]{content} slot of the
     @class{gtk:drag-source} class gets or sets the data that is offered by drag
-    operations from this source, in the form of a @class{gdk:content-provider}
-    object.
+    operations from this drag source, in the form of a
+    @class{gdk:content-provider} object.
   @end{short}
   When the data is requested in the cause of a DND operation, it will be
   obtained from the content provider.
@@ -273,7 +275,7 @@ lambda (source x y)    :run-last
 
 (defun drag-source-new ()
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-01-12}
   @return{The new @class{gtk:drag-source} object.}
   @short{Creates a new drag source.}
   @see-class{gtk:drag-source}"
@@ -287,12 +289,12 @@ lambda (source x y)    :run-last
 
 (cffi:defcfun ("gtk_drag_source_set_icon" drag-source-set-icon) :void
  #+liber-documentation
- "@version{#2025-07-24}
+ "@version{2026-01-12}
   @argument[source]{a @class{gtk:drag-source} object}
   @argument[paintable]{a @class{gdk:paintable} object to use as icon, or
     @code{nil}}
-  @argument[xhot]{an integer for the hotspot x coordinate on the icon}
-  @argument[yhot]{an integer for the hotspot y coordinate on the icon}
+  @argument[xhot]{an integer for the x coordinate of the hotspot on the icon}
+  @argument[yhot]{an integer for the y coordinate of the hotspot on the icon}
   @begin{short}
     Sets a paintable to use as icon during DND operations.
   @end{short}
@@ -318,7 +320,7 @@ lambda (source x y)    :run-last
 
 (cffi:defcfun ("gtk_drag_source_drag_cancel" drag-source-drag-cancel) :void
  #+liber-documentation
- "@version{#2023-07-31}
+ "@version{#2026-01-12}
   @argument[source]{a @class{gtk:drag-source} object}
   @short{Cancels a currently ongoing drag operation.}
   @see-class{gtk:drag-source}"
@@ -332,7 +334,7 @@ lambda (source x y)    :run-last
 
 (cffi:defcfun ("gtk_drag_source_get_drag" drag-source-drag) (g:object gdk:drag)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-01-12}
   @argument[source]{a @class{gtk:drag-source} object}
   @begin{return}
     The @class{gdk:drag} object for the current drag operation, or @code{nil}.
@@ -350,10 +352,10 @@ lambda (source x y)    :run-last
 
 (cffi:defcfun ("gtk_drag_check_threshold" drag-check-threshold) :boolean
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{#2026-01-12}
   @argument[source]{a @class{gtk:drag-source} object}
-  @argument[xstart]{an integer for the x coordinate of start of drag}
-  @argument[ystart]{an integer for the y coordinate of start of drag}
+  @argument[xstart]{an integer for the x coordinate of the start of the drag}
+  @argument[ystart]{an integer for the y coordinate of the start of the drag}
   @argument[xcurrent]{an integer for the current x coordinate}
   @argument[ycurrent]{an integer for the current y coordinate}
   @return{@em{True} if the drag threshold has been passed.}

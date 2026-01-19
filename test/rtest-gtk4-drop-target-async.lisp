@@ -47,19 +47,123 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     accept
+
+(test gtk-drop-target-async-accept-signal
+  (let* ((name "accept")
+         (gtype (g:gtype "GtkDropTargetAsync"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drag-enter
+
+(test gtk-drop-target-async-drag-enter-signal
+  (let* ((name "drag-enter")
+         (gtype (g:gtype "GtkDropTargetAsync"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "GdkDragAction") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drag-leave
+
+(test gtk-drop-target-async-drag-leave-signal
+  (let* ((name "drag-leave")
+         (gtype (g:gtype "GtkDropTargetAsync"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drag-motion
+
+(test gtk-drop-target-async-drag-motion-signal
+  (let* ((name "drag-motion")
+         (gtype (g:gtype "GtkDropTargetAsync"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "GdkDragAction") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drop
+
+(test gtk-drop-target-async-drop-signal
+  (let* ((name "drop")
+         (gtype (g:gtype "GtkDropTargetAsync"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     actions
 ;;;     formats
 
+(test gtk-drop-target-async-properties
+  (glib-test:with-check-memory (target)
+    (is (typep (setf target
+                     (make-instance 'gtk:drop-target-async))
+               'gtk:drop-target-async))
+    (is-false (gtk:drop-target-async-actions target))
+    (is-false (gtk:drop-target-async-formats target))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drop_target_async_new
+
+(test gtk-drop-target-async-new
+  (glib-test:with-check-memory (target)
+
+    (let ((formats (gdk:content-formats-new '("text/plain")))
+          (actions '(:copy :ask)))
+      (is (typep (setf target
+                       (gtk:drop-target-async-new formats actions))
+                 'gtk:drop-target-async))
+      (is (equal '(:copy :ask) (gtk:drop-target-async-actions target)))
+      (is (typep (gtk:drop-target-async-formats target) 'gdk:content-formats)))))
+
 ;;;     gtk_drop_target_async_reject_drop
 
-;;; 2024-11-2
+;;; 2026-01-15

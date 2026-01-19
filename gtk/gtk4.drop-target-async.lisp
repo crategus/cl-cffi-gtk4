@@ -2,7 +2,7 @@
 ;;; gtk4.drop-target-async.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -88,14 +88,15 @@
 
 #+liber-documentation
 (setf (documentation 'drop-target-async 'type)
- "@version{2025-07-19}
+ "@version{2026-01-17}
   @begin{short}
     The @class{gtk:drop-target-async} object is an auxiliary object that can be
     used to receive Drag-and-Drop operations.
   @end{short}
   It is the more complete but also more complex method of handling drop
-  operations compared to GtkDropTarget and you should only use it if
-  @class{gtk:drop-target} object does not provide all the features you need.
+  operations compared to the @class{gtk:drop-target} object and you should only
+  use it if the @class{gtk:drop-target} object does not provide all the features
+  you need.
 
   To use a @class{gtk:drop-target-async} object to receive drops on a widget,
   you create a @class{gtk:drop-target-async} object, configure which data
@@ -221,8 +222,8 @@ lambda (target drop x y)    :run-last
       let the source know that the drop is done. The call to the
       @fun{gdk:drop-finish} function must only be done when all data has been
       received. To receive the data, use one of the read functions provides by
-      the @class{gdk:drop} object such as the @fun{gdk:drop-read-async} or
-      @fun{gdk:drop-read-value-async} functions.
+      the @class{gdk:drop} object such as the @fun{gdk:drop-read-value-async}
+      function.
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:drop-target-async-new}
@@ -245,7 +246,7 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-actions)
       "Accessor"
       (documentation 'drop-target-async-actions 'function)
- "@version{#2025-09-21}
+ "@version{2026-01-17}
   @syntax{(gtk:drop-target-async-actions object) => actions}
   @syntax{(setf (gtk:drop-target-async-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target-async} object}
@@ -270,7 +271,7 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-formats)
       "Accessor"
       (documentation 'drop-target-async-formats 'function)
- "@version{#2025-09-21}
+ "@version{2026-01-17}
   @syntax{(gtk:drop-target-async-formats object) => formats}
   @syntax{(setf (gtk:drop-target-async-formats object) formats)}
   @argument[object]{a @class{gtk:drop-target-async} object}
@@ -292,7 +293,7 @@ lambda (target drop x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_async_new" drop-target-async-new)
     (g:object drop-target-async :return)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-17}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
   @argument[actions]{a @sym{gdk:drag-action} value for the supported actions}
@@ -313,7 +314,7 @@ lambda (target drop x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_async_reject_drop"
                drop-target-async-reject-drop) :void
  #+liber-documentation
- "@version{#2023-09-29}
+ "@version{#2026-01-17}
   @argument[target]{a @class{gtk:drop-target-async} object}
   @argument[drop]{a @class{gdk:drop} object of an ongoing drag operation}
   @begin{short}

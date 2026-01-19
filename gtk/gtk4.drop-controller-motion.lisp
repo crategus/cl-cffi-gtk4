@@ -2,7 +2,7 @@
 ;;; gtk4.drop-controller-motion.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,12 +35,15 @@
 ;;;
 ;;;     GtkDropControllerMotion
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_drop_controller_motion_new
 ;;;     gtk_drop_controller_motion_contains_pointer
 ;;;     gtk_drop_controller_motion_is_pointer
 ;;;     gtk_drop_controller_motion_get_drop
+;;;
+;;; Functions
+;;;
+;;;     gtk_drop_controller_motion_new
 ;;;
 ;;; Properties
 ;;;
@@ -84,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop-controller-motion 'type)
- "@version{2025-07-24}
+ "@version{2026-01-17}
   @begin{short}
     The @class{gtk:drop-controller-motion} object is an event controller meant
     for tracking the pointer hovering over a widget during a drag and drop
@@ -157,7 +160,7 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-contains-pointer)
       "Accessor"
       (documentation 'drop-controller-motion-contains-pointer 'function)
- "@version{#2025-09-28}
+ "@version{2026-01-17}
   @syntax{(gtk:drop-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[contains]{@em{true} if a dragging pointer is within @arg{object}
@@ -187,7 +190,7 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-drop)
       "Accessor"
       (documentation 'drop-controller-motion-drop 'function)
- "@version{#2025-09-28}
+ "@version{2026-01-17}
   @syntax{(gtk:drop-controller-motion-drop object) => drop}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[drop]{a @class{gdk:drop} object currently happening within
@@ -217,7 +220,7 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-is-pointer)
       "Accessor"
       (documentation 'drop-controller-motion-is-pointer 'function)
- "@version{#2025-09-28}
+ "@version{2026-01-17}
   @syntax{(gtk:drop-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[is-pointer]{@em{true} if a dragging pointer is within @arg{object}
@@ -237,7 +240,7 @@ lambda (controller x y)    :run-first
 
 (defun drop-controller-motion-new ()
  #+liber-documentation
- "@version{#2023-09-29}
+ "@version{2026-01-17}
   @return{The new @class{gtk:drop-controller-motion} object.}
   @begin{short}
     Creates a new event controller that will handle pointer motion events during

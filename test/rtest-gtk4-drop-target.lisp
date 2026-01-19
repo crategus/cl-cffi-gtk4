@@ -57,32 +57,126 @@
 ;;;     preload
 ;;;     value
 
+(test gtk-drop-target-properties
+  (glib-test:with-check-memory (target)
+    (is (typep (setf target (make-instance 'gtk:drop-target)) 'gtk:drop-target))
+    (is-false (gtk:drop-target-actions target))
+    (is-false (gtk:drop-target-current-drop target))
+    (is-false (gtk:drop-target-drop target))
+    (is (typep (gtk:drop-target-formats target) 'gdk:content-formats))
+    (is-false (gtk:drop-target-preload target))
+    (is (cffi:pointerp (gtk:drop-target-value target)))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     accept
+
+(test gtk-drop-target-accept-signal
+  (let* ((name "accept")
+         (gtype (g:gtype "GtkDropTarget"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDrop")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     drop
+
+(test gtk-drop-target-drop-signal
+  (let* ((name "drop")
+         (gtype (g:gtype "GtkDropTarget"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GValue" "gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     enter
+
+(test gtk-drop-target-enter-signal
+  (let* ((name "enter")
+         (gtype (g:gtype "GtkDropTarget"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "GdkDragAction") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     leave
+
+(test gtk-drop-target-leave-signal
+  (let* ((name "leave")
+         (gtype (g:gtype "GtkDropTarget"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     motion
+
+(test gtk-drop-target-motion-signal
+  (let* ((name "motion")
+         (gtype (g:gtype "GtkDropTarget"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "GdkDragAction") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drop_target_new
 
 (test gtk-drop-target-new
-  (let (target)
+  (glib-test:with-check-memory (target)
     (is (typep (setf target
-                     (gtk:drop-target-new "GtkBox" :none)) 'gtk:drop-target))
-    (is (= 1 (g:object-ref-count target)))))
+                     (gtk:drop-target-new "GtkBox" :none)) 'gtk:drop-target))))
 
 ;;;     gtk_drop_target_set_gtypes
 ;;;     gtk_drop_target_get_gtypes
 
 (test gtk-drop-target-gtypes.1
-  (let ((target (gtk:drop-target-new "GtkBox" :none)))
+  (glib-test:with-check-memory (target)
+    (is (typep (setf target
+                     (gtk:drop-target-new "GtkBox" :none)) 'gtk:drop-target))
     (is (equal '("GtkBox")
-               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))
-    (is (= 1 (g:object-ref-count target)))))
+               (mapcar #'g:type-name (gtk:drop-target-gtypes target))))))
 
 (test gtk-drop-target-gtypes.2
   (let ((target (gtk:drop-target-new nil :none)))
@@ -96,4 +190,4 @@
 
 ;;;     gtk_drop_target_reject
 
-;;; 2024-11-2
+;;; 2026-01-13

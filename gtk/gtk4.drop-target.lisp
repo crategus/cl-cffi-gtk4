@@ -2,7 +2,7 @@
 ;;; gtk4.drop-target.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -109,7 +109,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop-target 'type)
- "@version{2025-07-24}
+ "@version{2026-01-13}
   @begin{short}
     The @class{gtk:drop-target} object is an event controller implementing a
     simple way to receive Drag-and-Drop operations.
@@ -137,15 +137,16 @@
   object gives you this ability.
 
   While a pointer is dragged over the drop target's widget and the drop has
-  not been rejected, that widget will receive the @code{:drop-active} state,
-  which can be used to style the widget.
+  not been rejected, that widget will receive the
+  @val[gtk:state-flags]{:drop-active} state, which can be used to style the
+  widget.
   @begin[Signal Details]{dictionary}
     @begin[drop-target::accept]{signal}
       @begin{pre}
 lambda (target drop)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drop-target} object.}
         @entry[drop]{The @class{gdk:drop} object.}
         @entry[Returns]{@em{True} if @arg{drop} is accepted.}
       @end{simple-table}
@@ -170,7 +171,7 @@ lambda (target drop)    :run-last
 lambda (target value x y)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drop-target} object.}
         @entry[value]{The @sym{g:value} instance being dropped.}
         @entry[x]{The double float for the x coordinate of the current pointer
           position.}
@@ -192,7 +193,7 @@ lambda (target value x y)    :run-last
 lambda (target x y)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drop-target} object.}
         @entry[x]{The double float for the x coordinate of the current pointer
           position.}
         @entry[y]{The double float for the x coordinate of the current pointer
@@ -209,7 +210,7 @@ lambda (target x y)    :run-last
 lambda (target)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drop-target} object.}
       @end{simple-table}
       The signal is emitted on the drop site when the pointer leaves the widget.
       Its main purpose is to undo things done in the
@@ -220,7 +221,7 @@ lambda (target)    :run-last
 lambda (target x y)    :run-last
       @end{pre}
       @begin[code]{simple-table}
-        @entry[target]{The @class{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drop-target} object.}
         @entry[x]{The double float for the x coordinate of the current pointer
           position.}
         @entry[y]{The double float for the x coordinate of the current pointer
@@ -258,7 +259,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-actions)
       "Accessor"
       (documentation 'drop-target-actions 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-actions object) => actions}
   @syntax{(setf (gtk:drop-target-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target} object}
@@ -282,7 +283,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-current-drop)
       "Accessor"
       (documentation 'drop-target-current-drop 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-current-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
@@ -307,7 +308,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-drop)
       "Accessor"
       (documentation 'drop-target-drop 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
@@ -331,7 +332,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-formats)
       "Accessor"
       (documentation 'drop-target-formats 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-formats object) => formats}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
@@ -359,7 +360,7 @@ lambda (target x y)    :run-last
   drop target, this data will be downloaded, even if the data is ultimately
   dropped elsewhere. For a lot of data formats, the amount of data is very
   small, like the @class{gdk:rgba} color, so enabling this property does not
-  hurt at all. And for local-only drag'n'drop operations, no data transfer is
+  hurt at all. And for local-only Drag-and-Drop operations, no data transfer is
   done, so enabling it there is free. @br{}
   Default value: @em{false}")
 
@@ -367,7 +368,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-preload)
       "Accessor"
       (documentation 'drop-target-preload 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-preload object) => preload}
   @syntax{(setf (gtk:drop-target-preload object) preload)}
   @argument[object]{a @class{gtk:drop-target} object}
@@ -395,7 +396,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-value)
       "Accessor"
       (documentation 'drop-target-value 'function)
- "@version{#2025-09-22}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-value object) => value}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[value]{a @sym{g:value} instance for the current drop data}
@@ -415,7 +416,7 @@ lambda (target x y)    :run-last
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new)
     (g:object drop-target :return)
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-01-13}
   @argument[gtype]{a @class{g:type-t} type ID for the supported type}
   @argument[actions]{a @sym{gdk:drag-action} value for the supported actions}
   @return{The new @class{gtk:drop-target} object.}
@@ -460,17 +461,15 @@ lambda (target x y)    :run-last
 
 (defun drop-target-gtypes (target)
  #+liber-documentation
- "@version{2024-11-02}
+ "@version{2026-01-13}
   @syntax{(gtk:drop-target-gtypes target) => gtypes}
   @syntax{(setf (gtk:drop-target-gtypes target) gtypes)}
   @argument[target]{a @class{gtk:drop-target} object}
   @argument[gtypes]{a list of @class{g:type-t} type IDs}
   @begin{short}
-    The @fun{gtk:drop-target-gtypes} function gets the list of supported GTypes
-    for @arg{target}.
+    Gets or sets the list of supported GTypes for @arg{target}.
   @end{short}
-  If no type have been set, @code{nil} will be returned. The
-  @setf{gtk:drop-target} function sets the supported GTypes for the drop target.
+  If no type has been set, @code{nil} will be returned.
   @see-class{gtk:drop-target}
   @see-class{g:type-t}"
   (cffi:with-foreign-object (n-gtypes :size)
@@ -486,7 +485,7 @@ lambda (target x y)    :run-last
 
 (cffi:defcfun ("gtk_drop_target_reject" drop-target-reject) :void
  #+liber-documentation
- "@version{#2025-07-24}
+ "@version{#2026-01-13}
   @argument[target]{a @class{gtk:drop-target} object}
   @begin{short}
     Rejects the ongoing drop operation.

@@ -2,7 +2,7 @@
 ;;; gtk4.drag-icon.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,7 +87,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-icon 'type)
- "@version{2023-07-31}
+ "@version{2026-01-13}
   @begin{short}
     The @class{gtk:drag-icon} widget is a @class{gtk:root} implementation with
     the sole purpose to serve as a drag icon during DND operations.
@@ -101,7 +101,8 @@
   function to set whatever widget should be used for the drag icon.
 
   Keep in mind that drag icons do not allow user input.
-  @see-slot{gtk:drag-icon-child}")
+  @see-slot{gtk:drag-icon-child}
+  @see-class{gdk:drag}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -118,7 +119,7 @@
 (setf (liber:alias-for-function 'drag-icon-child)
       "Accessor"
       (documentation 'drag-icon-child 'function)
- "@version{#2025-08-17}
+ "@version{2026-01-13}
   @syntax{(gtk:drag-icon-child object) => child}
   @syntax{(setf (gtk:drag-icon-child object) child)}
   @argument[object]{a @class{gtk:drag-icon} widget}
@@ -185,7 +186,7 @@
 (cffi:defcfun ("gtk_drag_icon_create_widget_for_value"
                drag-icon-create-widget-for-value) (g:object widget)
  #+liber-documentation
- "@version{#2025-07-11}
+ "@version{2026-01-13}
   @argument[gvalue]{a @sym{g:value} instance}
   @begin{return}
     The new @class{gtk:widget} object for displaying @arg{gvalue} as a drag

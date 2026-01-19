@@ -52,10 +52,23 @@
 
 ;;;     child
 
+(test gtk-drag-icon-properties
+  (glib-test:with-check-memory (icon)
+    (is (typep (setf icon (make-instance 'gtk:drag-icon)) 'gtk:drag-icon))
+    (is-false (gtk:drag-icon-child icon))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drag_icon_get_for_drag
 ;;;     gtk_drag_icon_set_from_paintable
+
 ;;;     gtk_drag_icon_create_widget_for_value
 
-;;; 2024-7-3
+(test gtk-drag-icon-create-widget-for-value
+  (glib-test:with-check-memory (widget)
+    (g:with-value (value "gchararray" "string")
+      (is (typep (setf widget
+                       (gtk:drag-icon-create-widget-for-value value)) 'gtk:label))
+      (is (string= "string" (gtk:label-label widget))))))
+
+;;; 2026-01-12

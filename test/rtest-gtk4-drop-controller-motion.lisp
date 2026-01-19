@@ -51,8 +51,58 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     enter
+
+(test gtk-drop-controller-motion-enter-signal
+  (let* ((name "enter")
+         (gtype (g:gtype "GtkDropControllerMotion"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     leave
-;;;     move
+
+(test gtk-drop-controller-motion-leave-signal
+  (let* ((name "leave")
+         (gtype (g:gtype "GtkDropControllerMotion"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     motion
+
+(test gtk-drop-controller-motion-move-signal
+  (let* ((name "motion")
+         (gtype (g:gtype "GtkDropControllerMotion"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -60,11 +110,23 @@
 ;;;     drop
 ;;;     is-pointer
 
+(test gtk-drop-controller-motion-properties
+  (glib-test:with-check-memory (controller)
+    (is (typep (setf controller
+                     (make-instance 'gtk:drop-controller-motion))
+               'gtk:drop-controller-motion))
+    (is-false (gtk:drop-controller-motion-contains-pointer controller))
+    (is-false (gtk:drop-controller-motion-drop controller))
+    (is-false (gtk:drop-controller-motion-is-pointer controller))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drop_controller_motion_new
-;;;     gtk_drop_controller_motion_contains_pointer
-;;;     gtk_drop_controller_motion_is_pointer
-;;;     gtk_drop_controller_motion_get_drop
 
-;;; 2024-11-2
+(test gtk-drop-controller-motion-new
+  (glib-test:with-check-memory (controller)
+    (is (typep (setf controller
+                     (gtk:drop-controller-motion-new))
+               'gtk:drop-controller-motion))))
+
+;;; 2026-01-17
