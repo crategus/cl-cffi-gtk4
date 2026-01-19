@@ -2506,6 +2506,7 @@ GtkCellRenderer         GtkWidget
       @about-class{uri-launcher}
       @about-generic{uri-launcher-uri}
       @about-function{uri-launcher-new}
+      @about-function{uri-launcher-can-launch}
       @about-function{uri-launcher-launch}
       @about-function{uri-launcher-launch-finish}
     @end{subsection}
@@ -2986,7 +2987,15 @@ GtkCellRenderer         GtkWidget
       @about-symbol{page-set}
       @about-class{print-settings}
       @about-function{print-settings-new}
+      @about-function{print-settings-new-from-file}
+      @about-function{print-settings-new-from-key-file}
+      @about-function{print-settings-new-from-gvariant}
       @about-function{print-settings-copy}
+      @about-function{print-settings-load-file}
+      @about-function{print-settings-load-key-file}
+      @about-function{print-settings-to-file}
+      @about-function{print-settings-to-key-file}
+      @about-function{print-settings-to-gvariant}
       @about-function{print-settings-has-key}
       @about-function{print-settings-get}
       @about-function{print-settings-set}
@@ -3026,14 +3035,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-settings-dither}
       @about-function{print-settings-finishings}
       @about-function{print-settings-output-bin}
-      @about-function{print-settings-new-from-file}
-      @about-function{print-settings-new-from-key-file}
-      @about-function{print-settings-new-from-gvariant}
-      @about-function{print-settings-load-file}
-      @about-function{print-settings-load-key-file}
-      @about-function{print-settings-to-file}
-      @about-function{print-settings-to-key-file}
-      @about-function{print-settings-to-gvariant}
     @end{subsection}
     @begin[GtkPageSetup]{subsection}
       @about-class{page-setup}
@@ -4196,11 +4197,11 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-layout-cells}
       @about-function{cell-layout-reorder}
       @about-function{cell-layout-clear}
-      @about-function{cell-layout-set-attributes}
       @about-function{cell-layout-add-attribute}
+      @about-function{cell-layout-set-attributes}
+      @about-function{cell-layout-clear-attributes}
       @about-symbol{cell-layout-data-func}
       @about-function{cell-layout-set-cell-data-func}
-      @about-function{cell-layout-clear-attributes}
     @end{subsection}
     @begin[GtkCellView]{subsection}
       @about-class{cell-view}
@@ -4765,21 +4766,21 @@ GtkCellRenderer         GtkWidget
       @about-class{style-context}
       @about-generic{style-context-display}
       @about-function{style-context-add-provider}
+      @about-function{style-context-remove-provider}
       @about-function{style-context-add-provider-for-display}
+      @about-function{style-context-remove-provider-for-display}
       @about-function{style-context-state}
+      @about-function{style-context-scale}
       @about-function{style-context-color}
       @about-function{style-context-border}
       @about-function{style-context-padding}
       @about-function{style-context-margin}
       @about-function{style-context-lookup-color}
-      @about-function{style-context-remove-provider}
-      @about-function{style-context-remove-provider-for-display}
-      @about-function{style-context-restore}
       @about-function{style-context-save}
+      @about-function{style-context-restore}
+      @about-function{style-context-has-class}
       @about-function{style-context-add-class}
       @about-function{style-context-remove-class}
-      @about-function{style-context-has-class}
-      @about-function{style-context-scale}
       @about-function{style-context-to-string}
       @about-struct{border}
       @about-function{border-left}

@@ -65,7 +65,7 @@ Layout Managers
 Display Widgets
 
   gtk4.label.lisp                       GtkLabel                     GTK 4.18 *
-  gtk4.inscription.lisp                 GtkInscription               GTK 4.18 *
+  gtk4.inscription.lisp                 GtkInscription               GTK 4.20 .
   gtk4.image.lisp                       GtkImage                     GTK 4.18 *
   gtk4.picture.lisp                     GtkPicture                   GTK 4.18 *
   gtk4.spinner.lisp                     GtkSpinner                   GTK 4.20
@@ -186,15 +186,15 @@ Selector Widgets and Dialogs
   gtk4.color-dialog-button.lisp        GtkColorDialogButton          GTK 4.18 *
   gtk4.file-dialog.lisp                GtkFileDialog                 GTK 4.18 *+
   gtk4.file-launcher.lisp              GtkFileLauncher               GTK 4.18 *
-  gtk4.uri-launcher.lisp               GtkUriLauncher                GTK 4.18 *
-  gtk4.font-dialog.lisp                GtkFontDialog                 GTK 4.18 *
-  gtk4.font-dialog-button.lisp         GtkFontDialogButton           GTK 4.18 *
+  gtk4.uri-launcher.lisp               GtkUriLauncher                GTK 4.20 .
+  gtk4.font-dialog.lisp                GtkFontDialog                 GTK 4.20 .
+  gtk4.font-dialog-button.lisp         GtkFontDialogButton           GTK 4.20 .
   gtk4.emoji-chooser.lisp              GtkEmojiChooser               GTK 4.18 *
 
 Widgets for custom drawing
 
   gtk4.drawing-area.lisp               GtkDrawingArea                GTK 4.18 *
-  gtk4.gl-area.lisp                    GtkGlArea                     GTK 4.18 *+
+  gtk4.gl-area.lisp                    GtkGlArea                     GTK 4.20 &.
 
 Scrolling
 
@@ -205,10 +205,10 @@ Scrolling
 
 Printing
 
-  gtk4.print-operation-preview.lisp    GtkPrintOperationPreview      GTK 4.18 *
-  gtk4.print-operation.lisp            GtkPrintOperation             GTK 4.18 *
+  gtk4.print-operation-preview.lisp    GtkPrintOperationPreview      GTK 4.20 .
+  gtk4.print-operation.lisp            GtkPrintOperation             GTK 4.20 .
   gtk4.print-context.lisp              GtkPrintContext               GTK 4.18 *
-  gtk4.print-settings.lisp             GtkPrintSettings              GTK 4.18 *
+  gtk4.print-settings.lisp             GtkPrintSettings              GTK 4.20 .
   gtk4.paper-size.lisp                 GtkPaperSize                  GTK 4.18 *
   gtk4.page-setup.lisp                 GtkPageSetup                  GTK 4.18 *
   gtk4.printer.lisp                    GtkPrinter                    GTK 4.20 .
@@ -251,7 +251,7 @@ Interfaces
 Abstract Base Classes
 
   gtk4.widget.lisp                     GtkWidget                     GTK 4.20 &.
-  gtk4.range.lisp                      GtkRange                      GTK 4.18 *
+  gtk4.range.lisp                      GtkRange                      GTK 4.20 .
 
 Recently Used Documents
 
@@ -278,7 +278,7 @@ Gestures and event handling
   gtk4.gesture-stylus.lisp             GtkGestureStylus              GTK 4.18 *+
 
   gtk4.pad-controller.lisp             GtkPadController              GTK 4.20 .
-  gtk4.shortcut-controller.lisp        GtkShortcutController         GTK 4.18 *
+  gtk4.shortcut-controller.lisp        GtkShortcutController         GTK 4.20 .
 
 Keyboard shortcuts
 
@@ -290,11 +290,11 @@ Keyboard shortcuts
 
 Data exchange, Clipboards and Drag-and-Drop
 
-  gtk4.drag-source.lisp                GtkDragSource                 GTK 4.18 *
-  gtk4.drag-icon.lisp                  GtkDragIcon                   GTK 4.18 *
-  gtk4.drop-target.lisp                GtkDropTarget                 GTK 4.18 *
-  gtk4.drop-target-async.lisp          GtkDropTargetAsync            GTK 4.18 *
-  gtk4.drop-controller-motion.lisp     GtkDropControllerMotion       GTK 4.18 *
+  gtk4.drag-source.lisp                GtkDragSource                 GTK 4.20 .
+  gtk4.drag-icon.lisp                  GtkDragIcon                   GTK 4.20 .
+  gtk4.drop-target.lisp                GtkDropTarget                 GTK 4.20 .
+  gtk4.drop-target-async.lisp          GtkDropTargetAsync            GTK 4.20 .
+  gtk4.drop-controller-motion.lisp     GtkDropControllerMotion       GTK 4.20 .
 
 GTK Core Reference
 
@@ -391,4 +391,4 @@ Deprecated
   gtk4.shortcuts-shortcut.lisp         GtkShortcutsShortcut          GTK 4.18
   gtk4.shortcut-label.lisp             GtkShortcutLabel              GTK 4.18
 
-2025-12-08
+2026-01-17
