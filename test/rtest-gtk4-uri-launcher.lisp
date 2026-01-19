@@ -44,10 +44,48 @@
 
 ;;;     uri
 
+(test gtk-uri-launcher-properties
+  (glib-test:with-check-memory (launcher)
+    (setf launcher (gtk:uri-launcher-new "https://docs.gtk.org//gtk4/"))
+    (is (string= "https://docs.gtk.org//gtk4/"
+                 (gtk:uri-launcher-uri launcher)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_uri_launcher_new
+
+(test gtk-uri-launcher-new.1
+  (glib-test:with-check-memory (launcher)
+    (is (typep (setf launcher
+                     (gtk:uri-launcher-new "https://docs.gtk.org//gtk4/"))
+               'gtk:uri-launcher))
+    (is (string= "https://docs.gtk.org//gtk4/"
+                 (gtk:uri-launcher-uri launcher)))))
+
+(test gtk-uri-launcher-new.2
+  (glib-test:with-check-memory (launcher)
+    (is (typep (setf launcher
+                     (gtk:uri-launcher-new nil))
+               'gtk:uri-launcher))
+    (is-false (gtk:uri-launcher-uri launcher))))
+
+;;;     gtk_uri_launcher_can_launch
+
+(test gtk-uri-launcher-can-launch.1
+  (glib-test:with-check-memory (launcher)
+    (is (typep (setf launcher
+                     (gtk:uri-launcher-new "https://docs.gtk.org//gtk4/"))
+               'gtk:uri-launcher))
+    (is-true (gtk:uri-launcher-can-launch launcher nil))))
+
+(test gtk-uri-launcher-can-launch.2
+  (glib-test:with-check-memory (launcher)
+    (is (typep (setf launcher
+                     (gtk:uri-launcher-new nil))
+               'gtk:uri-launcher))
+    (is-false (gtk:uri-launcher-can-launch launcher nil))))
+
 ;;;     gtk_uri_launcher_launch
 ;;;     gtk_uri_launcher_launch_finish
 
-;;; 2024-9-20
+;;; 2026-01-03

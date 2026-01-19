@@ -2,7 +2,7 @@
 ;;; gtk4.uri-launcher.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -38,7 +38,8 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_uri_launcher_uri
+;;;     gtk_uri_launcher_new
+;;;     gtk_uri_launcher_can_launch                         Since 4.20
 ;;;     gtk_uri_launcher_launch
 ;;;     gtk_uri_launcher_launch_finish
 ;;;
@@ -69,10 +70,10 @@
 
 #+liber-documentation
 (setf (documentation 'uri-launcher 'type)
- "@version{#2023-10-19}
+ "@version{2026-01-03}
   @begin{short}
-    A @class{gtk:uri-launcher} object collects the arguments that are needed to
-    open a URI with an application.
+    The @class{gtk:uri-launcher} object collects the arguments that are needed
+    to open a URI with an application.
   @end{short}
   Depending on system configuration, user preferences and available APIs, this
   may or may not show an app chooser dialog or launch the default application
@@ -85,6 +86,25 @@
   To launch a file, use the @class{gtk:file-launcher} object.
 
   Since 4.10
+  @begin[Examples]{dictionary}
+  The following example shows a signal handler for a button. The signal handler
+  retrieves the URI from the label of the button and launches it.
+    @begin{pre}
+(g:signal-connect picker \"clicked\"
+    (lambda (button)
+      (let* ((parent (gtk:widget-root button))
+             (uri (gtk:button-label button))
+             (launcher (gtk:uri-launcher-new uri)))
+        (gtk:uri-launcher-launch launcher parent nil
+            (lambda (source result)
+              (let ((success (gtk:uri-launcher-launch-finish source result)))
+                (if success
+                    (format t \"URI ~a successfully launched.~%\" uri)
+                    (format t \"URI ~a not launched.~%\" uri))))))))
+    @end{pre}
+  @end{dictionary}
+  @see-constructor{gtk:uri-launcher-new}
+  @see-slot{gtk:uri-launcher-uri}
   @see-class{gtk:file-launcher}")
 
 ;;; ----------------------------------------------------------------------------
@@ -102,7 +122,7 @@
 (setf (liber:alias-for-function 'uri-launcher-uri)
       "Accessor"
       (documentation 'uri-launcher-uri 'function)
- "@version{#2025-08-13}
+ "@version{2026-01-03}
   @syntax{(gtk:uri-launcher-uri object) => uri}
   @syntax{(setf (gtk:uri-launcher-uri object) uri)}
   @argument[object]{a @class{gtk:uri-launcher} object}
@@ -123,17 +143,47 @@
 
 (defun uri-launcher-new (uri)
  #+liber-documentation
- "@version{#2025-07-27}
-  @argument[uri]{a string for the URI to open}
+ "@version{2026-01-03}
+  @argument[uri]{a string for the URI to open, can be @code{nil}}
   @return{The new @class{gtk:uri-launcher} object.}
   @short{Creates a new @class{gtk:uri-launcher} object.}
 
   Since 4.10
   @see-class{gtk:uri-launcher}"
   (make-instance 'uri-launcher
-                 :uri uri))
+                 :uri (if uri uri (cffi:null-pointer))))
 
 (export 'uri-launcher-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_uri_launcher_can_launch                             Since 4.20
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(cffi:defcfun ("gtk_uri_launcher_can_launch" uri-launcher-can-launch) :boolean
+ #+liber-documentation
+ "@version{2026-01-03}
+  @argument[launcher]{a @class{gtk:uri-launcher} object}
+  @argument[parent]{a @class{gtk:window} parent window, can be @code{nil}}
+  @begin{return}
+    @em{False} if the launcher is known not to support the URI, @em{true}
+    otherwise.
+  @end{return}
+  @begin{short}
+    Returns whether the launcher is likely to succeed in launching an
+    application for its URI.
+  @end{short}
+  This can be used to disable controls that trigger the launcher when they are
+  known not to work.
+
+  Since 4.20
+  @see-class{gtk:uri-launcher}
+  @see-class{gtk:window}"
+  (launcher (g:object uri-launcher))
+  (parent (g:object window)))
+
+#+gtk-4-20
+(export 'uri-launcher-can-launch)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_uri_launcher_launch
@@ -148,7 +198,7 @@
 
 (defun uri-launcher-launch (launcher parent cancellable func)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-01-03}
   @argument[launcher]{a @class{gtk:uri-launcher} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
@@ -181,15 +231,15 @@
 ;;; gtk_uri_launcher_launch_finish
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_uri_launcher_launch-finish" %uri-launcher-launch-finish)
+(cffi:defcfun ("gtk_uri_launcher_launch_finish" %uri-launcher-launch-finish)
     :boolean
-  (launcher (g:object file-launcher))
+  (launcher (g:object uri-launcher))
   (result (g:object g:async-result))
   (err :pointer))
 
 (defun uri-launcher-launch-finish (launcher result)
  #+liber-documentation
- "@version{#2025-07-13}
+ "@version{2026-01-03}
   @argument[launcher]{a @class{gtk:uri-launcher} object}
   @argument[result]{a @class{g:async-result} object for the result}
   @return{@em{True} if an application was launched, or @em{false} on error.}
