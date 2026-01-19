@@ -1,10 +1,12 @@
-;;;; Pickers and Launchers - 2023-8-27
+;;;; Pickers and Launchers
 ;;;;
 ;;;; The dialogs are mainly intended for use in preference dialogs.
 ;;;; They allow to select colors, fonts and applications.
 ;;;;
 ;;;; The launchers let you open files or URIs in applications that
 ;;;; can handle them.
+;;;;
+;;;; Last version: 2026-01-03
 
 ;; TODO: The implementation of drag and drop is missing.
 
@@ -86,22 +88,25 @@
       (gtk:box-append picker label1)
       (gtk:box-append picker button)
       (gtk:box-append picker app-picker)
-      (gtk:grid-attach grid picker 1 2 1 1))    
-    (let ((label (make-instance 'gtk:label 
+      (gtk:grid-attach grid picker 1 2 1 1))
+    (let ((label (make-instance 'gtk:label
                                 :label "URI:"
                                 :halign :start
                                 :valign :center
                                 :hexpand t))
           (picker (make-instance 'gtk:button
-                                 :label "www.gtk.org")))
+                                 :label "http://www.gtk.org")))
       (g:signal-connect picker "clicked"
           (lambda (button)
             (let* ((parent (gtk:widget-root button))
-                   (launcher (gtk:uri-launcher-new "http://www.gtk.org")))
+                   (uri (gtk:button-label button))
+                   (launcher (gtk:uri-launcher-new uri)))
               (gtk:uri-launcher-launch launcher parent nil
                   (lambda (source result)
-                    (declare (ignore source result))
-                    (format t "OPEN URI DONE~%"))))))
+                    (let ((success (gtk:uri-launcher-launch-finish source result)))
+                      (if success
+                          (format t "URI ~a successfully launched.~%" uri)
+                          (format t "URI ~a not launched.~%" uri))))))))
       (gtk:grid-attach grid label 0 3 1 1)
       (gtk:grid-attach grid picker 1 3 1 1))
     (gtk:window-present window)))

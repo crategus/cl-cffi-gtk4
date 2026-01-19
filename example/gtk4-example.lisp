@@ -122,6 +122,9 @@
            #:do-combo-box-text
 
            ;; Selector Widgets and Dialogs
+           #:do-pickers
+           #:do-font-dialog
+
            #:do-color-button
            #:do-color-button-label
            #:do-color-chooser-dialog
@@ -139,8 +142,6 @@
 
            #:do-font-button
            #:do-font-button-label
-
-           #:do-pickers
 
            ;; Ornaments
            #:do-frame

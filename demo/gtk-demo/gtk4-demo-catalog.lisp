@@ -1773,8 +1773,18 @@
        "::changed"
        "::icon-press"))
 
-     "Selectors (Color/File/Font)"
-     (("Color Button"
+     "Selectors and launchers (Color/Font/File/URI)"
+     (("Pickers"
+       ":window"
+       "DO-PICKERS"
+       "gtk4-example"
+       "pickers.lisp"
+       :keywords
+       "gtk:color-dialog"
+       "gtk:font-dialog"
+       "gtk:file-dialog"
+       "gtk:uri-launcher")
+      ("Color Button"
        ":window"
        "DO-COLOR-BUTTON"
        "gtk4-example"

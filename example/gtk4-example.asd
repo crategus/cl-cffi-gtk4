@@ -123,6 +123,9 @@
                (:file "combo-box-text")
 
                ;; Selector Widgets and Dialogs
+               (:file "pickers")
+               (:file "font-dialog")
+
                (:file "color-button")
                (:file "color-button-label")
                (:file "color-chooser-dialog")
@@ -135,8 +138,6 @@
 
                (:file "font-button")
                (:file "font-button-label")
-
-               (:file "pickers")
 
                ;; Ornaments
                (:file "frame")
