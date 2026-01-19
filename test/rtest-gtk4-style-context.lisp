@@ -120,30 +120,139 @@
           (is (eq display (gdk:display-default)))
           (is-false (gtk:window-destroy dialog)))))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     changed
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_style_context_add_provider
+;;;     gtk_style_context_remove_provider
+
+(test gtk-style-context-add/remove-provider
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button provider :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is (typep (setf provider
+                       (gtk:css-provider-new)) 'gtk:css-provider))
+
+      (is-false (gtk:style-context-add-provider context provider 800))
+      (is-false (gtk:style-context-remove-provider context provider)))))
+
 ;;;     gtk_style_context_add_provider_for_display
+;;;     gtk_style_context_remove_provider_for_display
+
+(test gtk-style-context-add/remove-provider-for-display
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (provider)
+      (let (display)
+        (is (typep (setf provider
+                         (gtk:css-provider-new)) 'gtk:css-provider))
+        (is (typep (setf display (gdk:display-default)) 'gdk:display))
+        (is-false (gtk:style-context-add-provider-for-display display provider))
+        (is-false (gtk:style-context-remove-provider-for-display display provider))))))
+
 ;;;     gtk_style_context_get_state
 ;;;     gtk_style_context_set_state
+
+(test gtk-style-context-state
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+
+      (is (equal '(:dir-ltr) (gtk:style-context-state context)))
+      (is (equal '(:dir-ltr :active)
+                 (setf (gtk:style-context-state context) '(:dir-ltr :active))))
+      (is (equal '(:ACTIVE :DIR-LTR) (gtk:style-context-state context))))))
+
+;;;     gtk_style_context_set_scale
+;;;     gtk_style_context_get_scale
+
+(test gtk-style-context-scale
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is (= 1 (gtk:style-context-scale context)))
+      (is (= 2 (setf (gtk:style-context-scale context) 2)))
+      (is (= 2 (gtk:style-context-scale context))))))
+
 ;;;     gtk_style_context_get_color
+
+#+nil
+(test gtk-style-context-color
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is (typep (gtk:style-context-color context) 'gdk:rgba))
+      (is (gdk:rgba-equal (gtk:widget-color button)
+                          (gtk:style-context-color context))))))
+
 ;;;     gtk_style_context_get_border
 ;;;     gtk_style_context_get_padding
 ;;;     gtk_style_context_get_margin
+
+(test gtk-style-context-border
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is (typep (gtk:style-context-border context) 'gtk:border))
+      (is (typep (gtk:style-context-padding context) 'gtk:border))
+      (is (typep (gtk:style-context-margin context) 'gtk:border)))))
+
 ;;;     gtk_style_context_lookup_color
-;;;     gtk_style_context_remove_provider
-;;;     gtk_style_context_remove_provider_for_display
-;;;     gtk_style_context_restore
+
+(test gtk-style-context-lookup-color
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      ;; What is a valid color name in the color map?
+      (is-false (gtk:style-context-lookup-color context "white")))))
+
 ;;;     gtk_style_context_save
+;;;     gtk_style_context_restore
+
+(test gtk-style-context-save/restore
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is-false (gtk:style-context-save context))
+      (is-false (gtk:style-context-add-class context "text-button"))
+      (is-true (gtk:style-context-has-class context "text-button"))
+      (is-false (gtk:style-context-restore context))
+      (is-false (gtk:style-context-has-class context "text-button")))))
+
+;;;     gtk_style_context_has_class
 ;;;     gtk_style_context_add_class
 ;;;     gtk_style_context_remove_class
-;;;     gtk_style_context_has_class
-;;;     gtk_style_context_set_scale
-;;;     gtk_style_context_get_scale
+
+(test gtk-style-context-has/add/remove-class
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory ((context 2) button :strong 1)
+      (is (typep (setf context
+                       (gtk:widget-style-context (setf button
+                                                       (make-instance 'gtk:button))))
+                 'gtk:style-context))
+      (is-false (gtk:style-context-add-class context "text-button"))
+      (is-true (gtk:style-context-has-class context "text-button"))
+      (is-false (gtk:style-context-remove-class context "text-button"))
+      (is-false (gtk:style-context-has-class context "text-button")))))
 
 ;;;     gtk_style_context_to_string
 
@@ -177,4 +286,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; 2024-12-23
+;;; 2026-01-18

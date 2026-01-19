@@ -47,28 +47,28 @@
 ;;; Functions
 ;;;
 ;;;     gtk_style_context_add_provider
+;;;     gtk_style_context_remove_provider
 ;;;     gtk_style_context_add_provider_for_display
+;;;     gtk_style_context_remove_provider_for_display
 ;;;     gtk_style_context_get_state
 ;;;     gtk_style_context_set_state
 ;;;     gtk_style_context_get_color
+;;;     gtk_style_context_set_scale
+;;;     gtk_style_context_get_scale
 ;;;     gtk_style_context_get_border
 ;;;     gtk_style_context_get_padding
 ;;;     gtk_style_context_get_margin
 ;;;     gtk_style_context_lookup_color
-;;;     gtk_style_context_remove_provider
-;;;     gtk_style_context_remove_provider_for_display
-;;;     gtk_style_context_restore
 ;;;     gtk_style_context_save
+;;;     gtk_style_context_restore
+;;;     gtk_style_context_has_class
 ;;;     gtk_style_context_add_class
 ;;;     gtk_style_context_remove_class
-;;;     gtk_style_context_has_class
-;;;     gtk_style_context_set_scale
-;;;     gtk_style_context_get_scale
 ;;;     gtk_style_context_to_string
 ;;;
 ;;;     gtk_border_new
 ;;;     gtk_border_copy
-;;;     gtk_border_free
+;;;     gtk_border_free                                     not needed
 ;;;
 ;;;     gtk_render_activity
 ;;;     gtk_render_arrow
@@ -86,10 +86,6 @@
 ;;; Properties
 ;;;
 ;;;     display
-;;;
-;;; Signals
-;;;
-;;;     changed
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -260,14 +256,7 @@
 (export 'border-copy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_border_free ()
-;;;
-;;; void gtk_border_free (GtkBorder *border_);
-;;;
-;;; Frees a GtkBorder structure.
-;;;
-;;; border_ :
-;;;     a GtkBorder
+;;; gtk_border_free                                         not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -286,7 +275,7 @@
 (setf (liber:alias-for-symbol 'style-context-print-flags)
       "GFlags"
       (liber:symbol-documentation 'style-context-print-flags)
- "@version{2025-07-22}
+ "@version{2026-01-18}
   @begin{declaration}
 (gobject:define-gflags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
@@ -334,7 +323,7 @@
 
 #+liber-documentation
 (setf (documentation 'style-context 'type)
- "@version{2023-08-30}
+ "@version{2026-01-18}
   @begin{short}
     The @class{gtk:style-context} object stores styling information affecting a
     widget.
@@ -398,7 +387,7 @@
 (setf (liber:alias-for-function 'style-context-display)
       "Accessor"
       (documentation 'style-context-display 'function)
- "@version{2025-08-21}
+ "@version{2026-01-18}
   @syntax{(gtk:style-context-display object) => display}
   @syntax{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
@@ -438,7 +427,7 @@
 
 (defun style-context-add-provider (context provider priority)
  #+liber-documentation
- "@version{2025-07-19}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an unsigned integer for the priority of the style
@@ -476,6 +465,40 @@
 (export 'style-context-add-provider)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_style_context_remove_provider
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline style-context-remove-provider))
+
+(cffi:defcfun ("gtk_style_context_remove_provider"
+               %style-context-remove-provider) :void
+  (context (g:object style-context))
+  (provider (g:object style-provider)))
+
+(defun style-context-remove-provider (context provider)
+ #+liber-documentation
+ "@version{2026-01-18}
+  @argument[context]{a @class{gtk:style-context} object}
+  @argument[provider]{a @class{gtk:style-provider} object}
+  @begin{short}
+    Removes the style provider from the style providers list in the style
+    context.
+  @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Please do not use it in newly
+    written code.
+  @end{dictionary}
+  @see-class{gtk:style-context}
+  @see-class{gtk:style-provider}
+  @see-function{gtk:style-context-add-provider}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-REMOVE-PROVIDER is deprecated since 4.10."))
+  (%style-context-remove-provider context provider))
+
+(export 'style-context-remove-provider)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_add_provider_for_display
 ;;; ----------------------------------------------------------------------------
 
@@ -488,7 +511,7 @@
 (defun style-context-add-provider-for-display
     (display provider &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-01-18}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer for the priority of the
@@ -529,6 +552,28 @@
 (export 'style-context-add-provider-for-display)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_style_context_remove_provider_for_display
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_style_context_remove_provider_for_display"
+               style-context-remove-provider-for-display) :void
+ #+liber-documentation
+ "@version{2026-01-18}
+  @argument[display]{a @class{gdk:display} object}
+  @argument[provider]{a @class{gtk:style-provider} object}
+  @begin{short}
+    Removes the style provider from the global style providers list in the
+    display.
+  @end{short}
+  @see-class{gdk:display}
+  @see-class{gtk:style-provider}
+  @see-function{gtk:style-context-add-provider-for-display}"
+  (display (g:object gdk:display))
+  (provider (g:object style-provider)))
+
+(export 'style-context-remove-provider-for-display)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_get_state
 ;;; gtk_style_context_set_state
 ;;; ----------------------------------------------------------------------------
@@ -545,7 +590,7 @@
 
 (defun style-context-state (context)
  #+liber-documentation
- "@version{#2025-08-21}
+ "@version{2026-01-18}
   @syntax{(gtk:style-context-state context) => state}
   @syntax{(setf (gtk:style-context-state context) state)}
   @argument[context]{a @class{gtk:style-context} object}
@@ -575,6 +620,44 @@
 (export 'style-context-state)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_style_context_get_scale
+;;; gtk_style_context_set_scale
+;;; ----------------------------------------------------------------------------
+
+(defun (setf style-context-scale) (scale context)
+  (cffi:foreign-funcall "gtk_style_context_set_scale"
+                        (g:object style-context) context
+                        :int scale
+                        :void)
+  scale)
+
+(cffi:defcfun ("gtk_style_context_get_scale" %style-context-scale) :int
+  (context (g:object style-context)))
+
+(defun style-context-scale (context)
+ #+liber-documentation
+ "@version{2026-01-18}
+  @syntax{(gtk:style-context-scale context) => scale}
+  @syntax{(setf (gtk:style-context-scale context) scale)}
+  @argument[context]{a @class{gtk:style-context} object}
+  @argument[scale]{an integer for a scale}
+  @begin{short}
+    Gets or sets the scale to use when getting image assets for the style.
+  @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-scale-factor} function instead.
+  @end{dictionary}
+  @see-class{gtk:style-context}
+  @see-function{gtk:widget-scale-factor}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-SCALE is deprecated since 4.10."))
+  (%style-context-scale context))
+
+(export 'style-context-scale)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_get_color
 ;;; ----------------------------------------------------------------------------
 
@@ -584,7 +667,7 @@
 
 (defun style-context-color (context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @return{The @class{gdk:rgba} instance for the foreground color.}
   @begin{short}
@@ -612,14 +695,12 @@
 
 (cffi:defcfun ("gtk_style_context_get_border" %style-context-border) :void
   (context (g:object style-context))
-  (state state-flags)
   (border (g:boxed border)))
 
-(defun style-context-border (context state)
+(defun style-context-border (context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @sym{gtk:state-flags} value to retrieve the border for}
   @return{Returns border settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the border settings for a given state.
@@ -628,13 +709,12 @@
     This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
-  @see-class{gtk:border}
-  @see-symbol{gtk:state-flags}"
+  @see-class{gtk:border}"
   #+(and gtk-4-10 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-BORDER is deprecated since 4.10."))
   (let ((border (border-new)))
-    (%style-context-border context state border)
+    (%style-context-border context border)
     border))
 
 (export 'style-context-border)
@@ -645,14 +725,12 @@
 
 (cffi:defcfun ("gtk_style_context_get_padding" %style-context-padding) :void
   (context (g:object style-context))
-  (state state-flags)
   (padding (g:boxed border)))
 
-(defun style-context-padding (context state)
+(defun style-context-padding (context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @sym{gtk:state-flags} value to retrieve the padding for}
   @return{Returns padding settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the padding settings for a given state.
@@ -667,7 +745,7 @@
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-PADDING is deprecated since 4.10."))
   (let ((padding (border-new)))
-    (%style-context-padding context state padding)
+    (%style-context-padding context padding)
     padding))
 
 (export 'style-context-padding)
@@ -678,14 +756,12 @@
 
 (cffi:defcfun ("gtk_style_context_get_margin" %style-context-margin) :void
   (context (g:object style-context))
-  (state state-flags)
   (margin (g:boxed border)))
 
-(defun style-context-margin (context state)
+(defun style-context-margin (context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
-  @argument[state]{a @sym{gtk:state-flags} value to retrieve the margin for}
   @return{Returns margin settings as a @class{gtk:border} instance.}
   @begin{short}
     Gets the value for the margin settings for a given state.
@@ -700,7 +776,7 @@
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-MARGIN is deprecated since 4.10."))
   (let ((margin (border-new)))
-    (%style-context-margin context state margin)
+    (%style-context-margin context margin)
     margin))
 
 (export 'style-context-margin)
@@ -717,7 +793,7 @@
 
 (defun style-context-lookup-color (context name)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[name]{a string for a color name to lookup}
   @return{The looked up @class{gdk:rgba} color, or @code{nil}.}
@@ -739,91 +815,6 @@
 (export 'style-context-lookup-color)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_remove_provider
-;;; ----------------------------------------------------------------------------
-
-(declaim (inline style-context-remove-provider))
-
-(cffi:defcfun ("gtk_style_context_remove_provider"
-               %style-context-remove-provider) :void
-  (context (g:object style-context))
-  (provider (g:object style-provider)))
-
-(defun style-context-remove-provider (context provider)
- #+liber-documentation
- "@version{#2023-09-17}
-  @argument[context]{a @class{gtk:style-context} object}
-  @argument[provider]{a @class{gtk:style-provider} object}
-  @begin{short}
-    Removes the style provider from the style providers list in the style
-    context.
-  @end{short}
-  @begin[Warning]{dictionary}
-    This function is deprecated since 4.10. Please do not use it in newly
-    written code.
-  @end{dictionary}
-  @see-class{gtk:style-context}
-  @see-class{gtk:style-provider}
-  @see-function{gtk:style-context-add-provider}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:STYLE-CONTEXT-REMOVE-PROVIDER is deprecated since 4.10."))
-  (%style-context-remove-provider context provider))
-
-(export 'style-context-remove-provider)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_remove_provider_for_display
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_style_context_remove_provider_for_display"
-               style-context-remove-provider-for-display) :void
- #+liber-documentation
- "@version{2023-09-17}
-  @argument[display]{a @class{gdk:display} object}
-  @argument[provider]{a @class{gtk:style-provider} object}
-  @begin{short}
-    Removes the style provider from the global style providers list in the
-    display.
-  @end{short}
-  @see-class{gdk:display}
-  @see-class{gtk:style-provider}
-  @see-function{gtk:style-context-add-provider-for-display}"
-  (display (g:object gdk:display))
-  (provider (g:object style-provider)))
-
-(export 'style-context-remove-provider-for-display)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_restore
-;;; ----------------------------------------------------------------------------
-
-(declaim (inline style-context-restore))
-
-(cffi:defcfun ("gtk_style_context_restore" %style-context-restore) :void
-  (context (g:object style-context)))
-
-(defun style-context-restore (context)
- #+liber-documentation
- "@version{#2023-09-17}
-  @argument[context]{a @class{gtk:style-context} object}
-  @begin{short}
-    Restores the style context state to a previous stage.
-  @end{short}
-  See the @fun{gtk:style-context-save} function.
-  @begin[Warning]{dictionary}
-    This function is deprecated since 4.10. This API will be removed in GTK 5.
-  @end{dictionary}
-  @see-class{gtk:style-context}
-  @see-function{gtk:style-context-save}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:STYLE-CONTEXT-RESTORE is deprecated since 4.10."))
-  (%style-context-restore context))
-
-(export 'style-context-restore)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_save
 ;;; ----------------------------------------------------------------------------
 
@@ -834,7 +825,7 @@
 
 (defun style-context-save (context)
  #+liber-documentation
- "@version{#2023-09-17}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @begin{short}
     Saves the style context state.
@@ -859,6 +850,68 @@
 (export 'style-context-save)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_style_context_restore
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline style-context-restore))
+
+(cffi:defcfun ("gtk_style_context_restore" %style-context-restore) :void
+  (context (g:object style-context)))
+
+(defun style-context-restore (context)
+ #+liber-documentation
+ "@version{2026-01-18}
+  @argument[context]{a @class{gtk:style-context} object}
+  @begin{short}
+    Restores the style context state to a previous stage.
+  @end{short}
+  See the @fun{gtk:style-context-save} function.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
+  @end{dictionary}
+  @see-class{gtk:style-context}
+  @see-function{gtk:style-context-save}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-RESTORE is deprecated since 4.10."))
+  (%style-context-restore context))
+
+(export 'style-context-restore)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_style_context_has_class
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline style-context-has-class))
+
+(cffi:defcfun ("gtk_style_context_has_class" %style-context-has-class) :boolean
+  (context (g:object style-context))
+  (classname :string))
+
+(defun style-context-has-class (context classname)
+ #+liber-documentation
+ "@version{2026-01-18}
+  @argument[context]{a @class{gtk:style-context} object}
+  @argument[classname]{a string for a class name}
+  @return{@em{True} if the style context has @arg{classname} defined.}
+  @begin{short}
+    Returns @em{true} if the style context currently has defined the given
+    class name.
+  @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-has-css-class} function instead.
+  @end{dictionary}
+  @see-class{gtk:style-context}
+  @see-function{gtk:widget-has-css-class}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-HAS-CLASS is deprecated since 4.10."))
+  (%style-context-has-class context classname))
+
+(export 'style-context-has-class)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_add_class
 ;;; ----------------------------------------------------------------------------
 
@@ -870,7 +923,7 @@
 
 (defun style-context-add-class (context classname)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[classname]{a string for a class name to use in styling}
   @begin{short}
@@ -878,12 +931,12 @@
     will make use of this new class for styling.
   @end{short}
   @begin[Examples]{dictionary}
-    In the CSS file format, a GtkEntry defining an \"entry\" class, would be
-    matched by:
+    In the CSS file format, a @code{GtkEntry} defining an @code{\"entry\"}
+    class, would be matched by:
     @begin{pre}
 GtkEntry.entry { ... @}
   @end{pre}
-  While any widget defining an \"entry\" class would be matched by:
+  While any widget defining an @code{\"entry\"} class would be matched by:
   @begin{pre}
 .entry { ... @}
     @end{pre}
@@ -914,7 +967,7 @@ GtkEntry.entry { ... @}
 
 (defun style-context-remove-class (context classname)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[classname]{a string for a class name to remove}
   @begin{short}
@@ -934,77 +987,6 @@ GtkEntry.entry { ... @}
 (export 'style-context-remove-class)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_has_class
-;;; ----------------------------------------------------------------------------
-
-(declaim (inline style-context-has-class))
-
-(cffi:defcfun ("gtk_style_context_has_class" %style-context-has-class) :boolean
-  (context (g:object style-context))
-  (classname :string))
-
-(defun style-context-has-class (context classname)
- #+liber-documentation
- "@version{#2025-07-27}
-  @argument[context]{a @class{gtk:style-context} object}
-  @argument[classname]{a string for a class name}
-  @return{@em{True} if the style context has @arg{classname} defined.}
-  @begin{short}
-    Returns @em{true} if the style context currently has defined the given
-    class name.
-  @end{short}
-  @begin[Warning]{dictionary}
-    This function is deprecated since 4.10. Use the
-    @fun{gtk:widget-has-css-class} function instead.
-  @end{dictionary}
-  @see-class{gtk:style-context}
-  @see-function{gtk:widget-hass-css-class}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:STYLE-CONTEXT-HAS-CLASS is deprecated since 4.10."))
-  (%style-context-has-class context classname))
-
-(export 'style-context-has-class)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_get_scale
-;;; gtk_style_context_set_scale
-;;; ----------------------------------------------------------------------------
-
-(defun (setf style-context-scale) (scale context)
-  (cffi:foreign-funcall "gtk_style_context_set_scale"
-                        (g:object style-context) context
-                        :int scale
-                        :void)
-  scale)
-
-(cffi:defcfun ("gtk_style_context_get_scale" %style-context-scale) :int
-  (context (g:object style-context)))
-
-(defun style-context-scale (context)
- #+liber-documentation
- "@version{#2025-08-21}
-  @syntax{(gtk:style-context-scale context) => scale}
-  @syntax{(setf (gtk:style-context-scale context) scale)}
-  @argument[context]{a @class{gtk:style-context} object}
-  @argument[scale]{an integer for a scale}
-  @begin{short}
-    Gets or sets the scale to use when getting image assets for the style.
-  @end{short}
-  @begin[Warning]{dictionary}
-    This function is deprecated since 4.10. Use the
-    @fun{gtk:widget-scale-factor} function instead.
-  @end{dictionary}
-  @see-class{gtk:style-context}
-  @see-function{gtk:widget-scale-factor}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:STYLE-CONTEXT-SCALE is deprecated since 4.10."))
-  (%style-context-scale context))
-
-(export 'style-context-scale)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_to_string
 ;;; ----------------------------------------------------------------------------
 
@@ -1016,7 +998,7 @@ GtkEntry.entry { ... @}
 
 (defun style-context-to-string (context flags)
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-01-18}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[flags]{a @sym{gtk:style-context-print-flags} value that
     determine what to print}
