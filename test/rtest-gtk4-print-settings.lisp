@@ -263,11 +263,74 @@
 (test gtk-print-settings-new
   (is (typep (gtk:print-settings-new) 'gtk:print-settings)))
 
+;;;     gtk_print_settings_new_from_file
+;;;     gtk_print_settings_to_file
+
+(test gtk-print-settings-new-from-file
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+        settings)
+    (is (typep (setf settings
+                     (gtk:print-settings-new-from-file path))
+               'gtk:print-settings))
+    (is-true (gtk:print-settings-to-file settings path))))
+
+;;;     gtk_print_settings_new_from_key_file
+;;;     gtk_print_settings_to_key_file
+
+(test gtk-print-settings-new-from-key-file
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+        settings)
+    (glib:with-key-file (keyfile)
+      (is-true (glib:key-file-load-from-file keyfile path :none))
+      (is (typep (setf settings
+                       (gtk:print-settings-new-from-key-file keyfile nil))
+                 'gtk:print-settings))
+      (is-false (gtk:print-settings-to-key-file settings keyfile nil))
+      (is-true (g:key-file-save-to-file keyfile path)))))
+
+;;;     gtk_print_settings_new_from_gvariant
+;;;     gtk_print_settings_to_gvariant
+
+(test gtk-print-settings-new-from-gvariant
+  (let* ((variant (g:variant-parse "a{sv}"
+                                   "{'scale': <'100'>,
+                                     'number-up': <'1'>,
+                                     'n-copies': <'1'>,
+                                     'page-ranges': <'0-11'>,
+                                     'page-set': <'all'>,
+                                     'printer': <'In Datei drucken'>,
+                                     'print-pages': <'ranges'>,
+                                     'reverse': <'false'>,
+                                     'collate': <'false'>,
+                                     'output-file-format': <'pdf'>}"))
+         settings)
+    (is (typep (setf settings
+                     (gtk:print-settings-new-from-gvariant variant))
+               'gtk:print-settings))
+    (is (g:variant-equal variant
+                         (gtk:print-settings-to-gvariant settings)))))
+
 ;;;     gtk_print_settings_copy
 
 (test gtk-print-settings-copy
   (let ((settings (gtk:print-settings-new)))
     (is (typep (gtk:print-settings-copy settings) 'gtk:print-settings))))
+
+;;;     gtk_print_settings_load_file
+
+(test gtk-print-settings-load-file
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+        (settings (gtk:print-settings-new)))
+    (is-true (gtk:print-settings-load-file settings path))))
+
+;;;     gtk_print_settings_load_key_file
+
+(test gtk-print-settings-load-key-file
+  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+        (settings (gtk:print-settings-new)))
+    (glib:with-key-file (keyfile)
+      (is-true (glib:key-file-load-from-file keyfile path :none))
+      (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
 
 ;;;     gtk_print_settings_has_key
 ;;;     gtk_print_settings_get
@@ -293,7 +356,6 @@
   (is-false (gtk:print-settings-set settings "printer" nil))
   (is-false (gtk:print-settings-get settings "printer"))))
 
-
 ;;;     gtk_print_settings_foreach
 
 (test gtk-print-settings-foreach
@@ -303,16 +365,10 @@
     (is-false (gtk:print-settings-foreach settings
         (lambda (key value)
           (push (list key value) values))))
-    (is (equal '(("scale" "100")
-                 ("number-up" "1")
-                 ("n-copies" "1")
-                 ("page-ranges" "0-11")
-                 ("page-set" "all")
-                 ("printer" "In Datei drucken")
-                 ("print-pages" "ranges")
-                 ("reverse" "false")
-                 ("collate" "false")
-                 ("output-file-format" "pdf"))
+    (is (equal '(("paper-height" "") ("scale" "100") ("number-up" "1") ("n-copies" "1")
+ ("page-ranges" "0-11") ("orientation" "landscape") ("page-set" "all")
+ ("print-pages" "ranges") ("printer" "In Datei drucken") ("reverse" "false")
+ ("collate" "false") ("output-file-format" "pdf") ("paper-width" "210.0"))
                (reverse values)))))
 
 ;;;     gtk_print_settings_get_bool
@@ -326,26 +382,70 @@
     (is-true (gtk:print-settings-bool settings "reverse"))))
 
 ;;;     gtk_print_settings_get_double
-;;;     gtk_print_settings_get_double_with_default
 ;;;     gtk_print_settings_set_double
+
+(test gtk-print-settings-double
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (= 210.0d0 (gtk:print-settings-double settings "paper-width")))
+    (is (= 100.0d0 (setf (gtk:print-settings-double settings "paper-width") 100)))
+    (is (= 100.0d0 (gtk:print-settings-double settings "paper-width")))))
+
+;;;     gtk_print_settings_get_double_with_default
+
+(test gtk-print-settings-double-with-default
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (= 0.0d0 (gtk:print-settings-double settings "reverse")))
+    (is (= 99.0d0
+           (gtk:print-settings-double-with-default settings "reverse" 99.0)))))
 
 ;;;     gtk_print_settings_get_length
 ;;;     gtk_print_settings_set_length
 
 (test gtk-print-settings-length
   (let ((settings (gtk:print-settings-new)))
-    (is (= 100.0d0 (setf (gtk:print-settings-length settings "paper-width" :mm)
-                         100.0d0)))
+    (is (= 100.0d0
+           (setf (gtk:print-settings-length settings "paper-width" :mm) 100.0d0)))
     (is (= 100.0d0 (gtk:print-settings-length settings "paper-width" :mm)))))
 
 ;;;     gtk_print_settings_get_int
-;;;     gtk_print_settings_get_int_with_default
 ;;;     gtk_print_settings_set_int
+
+(test gtk-print-settings-int
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (= 100 (gtk:print-settings-int settings "scale")))
+    (is (=  90 (setf (gtk:print-settings-int settings "scale") 90)))
+    (is (=  90 (gtk:print-settings-int settings "scale")))))
+
+;;;     gtk_print_settings_get_int_with_default
+
+(test gtk-print-settings-int-with-default
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (=  0 (gtk:print-settings-int settings "reverse")))
+    (is (= 10 (gtk:print-settings-int-with-default settings "reverse" 10)))))
 
 ;;;     gtk_print_settings_get_printer
 ;;;     gtk_print_settings_set_printer
+
+(test gtk-print-settings-printer
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (string= "In Datei drucken" (gtk:print-settings-printer settings)))
+    (is (string= "" (setf (gtk:print-settings-printer settings) "")))
+    (is (string= "" (gtk:print-settings-printer settings)))))
+
 ;;;     gtk_print_settings_get_orientation
 ;;;     gtk_print_settings_set_orientation
+
+(test gtk-print-settings-orientation
+  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+         (settings (gtk:print-settings-new-from-file path)))
+    (is (eq :landscape (gtk:print-settings-orientation settings)))
+    (is (eq :portrait (setf (gtk:print-settings-orientation settings) :portrait)))
+    (is (eq :portrait (gtk:print-settings-orientation settings)))))
 
 ;;;     gtk_print_settings_get_paper_size
 ;;;     gtk_print_settings_set_paper_size
@@ -417,67 +517,4 @@
 ;;;     gtk_print_settings_get_output_bin
 ;;;     gtk_print_settings_set_output_bin
 
-;;;     gtk_print_settings_new_from_file
-;;;     gtk_print_settings_to_file
-
-(test gtk-print-settings-new-from-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        settings)
-    (is (typep (setf settings
-                     (gtk:print-settings-new-from-file path))
-               'gtk:print-settings))
-    (is-true (gtk:print-settings-to-file settings path))))
-
-;;;     gtk_print_settings_new_from_key_file
-;;;     gtk_print_settings_to_key_file
-
-(test gtk-print-settings-new-from-key-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        settings)
-    (glib:with-key-file (keyfile)
-      (is-true (glib:key-file-load-from-file keyfile path :none))
-      (is (typep (setf settings
-                       (gtk:print-settings-new-from-key-file keyfile nil))
-                 'gtk:print-settings))
-      (is-false (gtk:print-settings-to-key-file settings keyfile nil))
-      (is-true (g:key-file-save-to-file keyfile path)))))
-
-;;;     gtk_print_settings_new_from_gvariant
-;;;     gtk_print_settings_to_gvariant
-
-(test gtk-print-settings-new-from-gvariant
-  (let* ((variant (g:variant-parse "a{sv}"
-                                   "{'scale': <'100'>,
-                                     'number-up': <'1'>,
-                                     'n-copies': <'1'>,
-                                     'page-ranges': <'0-11'>,
-                                     'page-set': <'all'>,
-                                     'printer': <'In Datei drucken'>,
-                                     'print-pages': <'ranges'>,
-                                     'reverse': <'false'>,
-                                     'collate': <'false'>,
-                                     'output-file-format': <'pdf'>}"))
-         settings)
-    (is (typep (setf settings
-                     (gtk:print-settings-new-from-gvariant variant))
-               'gtk:print-settings))
-    (is (g:variant-equal variant
-                         (gtk:print-settings-to-gvariant settings)))))
-
-;;;     gtk_print_settings_load_file
-
-(test gtk-print-settings-load-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        (settings (gtk:print-settings-new)))
-    (is-true (gtk:print-settings-load-file settings path))))
-
-;;;     gtk_print_settings_load_key_file
-
-(test gtk-print-settings-load-key-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        (settings (gtk:print-settings-new)))
-    (glib:with-key-file (keyfile)
-      (is-true (glib:key-file-load-from-file keyfile path :none))
-      (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
-
-;;; 2024-11-25
+;;; 2026-01-10

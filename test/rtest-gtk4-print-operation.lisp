@@ -222,23 +222,211 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     begin-print
+
+(test gtk-print-operation-begin-print-signal
+  (let* ((name "begin-print")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     create-custom-widget
+
+(test gtk-print-operation-create-custom-widget-signal
+  (let* ((name "create-custom-widget")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "GObject") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     custom-widget-apply
+
+(test gtk-print-operation-custom-widget-apply-signal
+  (let* ((name "custom-widget-apply")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkWidget")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     done
+
+(test gtk-print-operation-done-signal
+  (let* ((name "done")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintOperationResult")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     draw-page
+
+(test gtk-print-operation-draw-page-signal
+  (let* ((name "draw-page")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext" "gint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     end-print
+
+(test gtk-print-operation-end-print-signal
+  (let* ((name "end-print")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     paginate
+
+(test gtk-print-operation-paginate-signal
+  (let* ((name "paginate")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     preview
+
+(test gtk-print-operation-preview-signal
+  (let* ((name "preview")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintOperationPreview" "GtkPrintContext" "GtkWindow")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     request-page-setup
+
+(test gtk-print-operation-request-page-setup-signal
+  (let* ((name "request-page-setup")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext" "gint" "GtkPageSetup")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     status-changed
+
+(test gtk-print-operation-status-changed-signal
+  (let* ((name "status-changed")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     update-custom-widget
+
+(test gtk-print-operation-update-custom-widget-signal
+  (let* ((name "update-custom-widget")
+         (gtype (g:gtype "GtkPrintOperation"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkWidget" "GtkPageSetup" "GtkPrintSettings")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_print_operation_new
 
 (test gtk-print-operation-new
-  (is (typep (gtk:print-operation-new) 'gtk:print-operation)))
+  (glib-test:with-check-memory (operation)
+    (is (typep (setf operation
+                     (gtk:print-operation-new)) 'gtk:print-operation))))
 
 ;;;     gtk_print_operation_get_error
 ;;;     gtk_print_operation_run
@@ -252,4 +440,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; 2024-10-27
+;;; 2026-01-11

@@ -37,7 +37,40 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     got-page-size
+
+(test gtk-print-operation-preview-got-page-size-signal
+  (let* ((name "got-page-size")
+         (gtype (g:gtype "GtkPrintOperationPreview"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext" "GtkPageSetup")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     ready
+
+(test gtk-print-operation-preview-ready-signal
+  (let* ((name "ready")
+         (gtype (g:gtype "GtkPrintOperationPreview"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPrintContext")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -45,4 +78,4 @@
 ;;;     gtk_print_operation_preview_is_selected
 ;;;     gtk_print_operation_preview_render_page
 
-;;; 2024-9-20
+;;; 2026-01-11
