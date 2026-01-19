@@ -2,7 +2,7 @@
 ;;; gtk4.range.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -251,7 +251,7 @@ lambda (range)    :run-last
 (setf (documentation (liber:slot-documentation "fill-level" 'range) t)
  "The @code{fill-level} property of type @code{:double} (Read / Write) @br{}
   The fill level, for example, prebuffering of a network stream. @br{}
-  Default value: 1.79769e+308")
+  Default value: 1.7976931348623157d308")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'range-fill-level)
@@ -411,16 +411,14 @@ lambda (range)    :run-last
 
 (defun range-value (range)
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-01-10}
   @syntax{(gtk:range-value range) => value}
   @syntax{(setf (gtk:range-value range) value)}
   @argument[range]{a @class{gtk:range} widget}
   @argument[value]{a double float for the value of the range}
   @begin{short}
-    The @fun{gtk:range-value} function gets the current value of the range.
+    Gets or sets the current value of the range.
   @end{short}
-  The @setf{gtk:range-value} function sets the current value of the range.
-
   If the value is outside the minimum or maximum range values, it will be
   clamped to fit inside them. The range emits the @sig[gtk:range]{value-changed}
   signal if the value changes.
@@ -437,7 +435,7 @@ lambda (range)    :run-last
 
 (defun range-set-increments (range step page)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-10}
   @argument[range]{a @class{gtk:range} widget}
   @argument[step]{a double float for the step size}
   @argument[page]{a double float for the page size}
@@ -450,7 +448,8 @@ lambda (range)    :run-last
   @see-class{gtk:range}
   @see-class{gtk:scale}"
   (setf (adjustment-page-increment (range-adjustment range)) page
-        (adjustment-step-increment (range-adjustment range)) step))
+        (adjustment-step-increment (range-adjustment range)) step)
+  nil)
 
 (export 'range-set-increments)
 
@@ -462,7 +461,7 @@ lambda (range)    :run-last
 
 (defun range-set-range (range min max)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-10}
   @argument[range]{a @class{gtk:range} widget}
   @argument[min]{a double float for the minimum range value}
   @argument[max]{a double float for the maximum range value}
@@ -474,7 +473,8 @@ lambda (range)    :run-last
   @code{(max - page-size)}.
   @see-class{gtk:range}"
   (setf (adjustment-lower (range-adjustment range)) min
-        (adjustment-upper (range-adjustment range)) max))
+        (adjustment-upper (range-adjustment range)) max)
+  nil)
 
 (export 'range-set-range)
 
@@ -492,17 +492,19 @@ lambda (range)    :run-last
 
 (cffi:defcfun ("gtk_range_get_flippable" range-flippable) :boolean
  #+liber-documentation
- "@version{#2025-08-12}
+ "@version{2026-01-10}
   @syntax{gtk:range-flippable range) => flippable}
   @syntax{(setf (gtk:range-flippable range) flippable)}
   @argument[range]{a @class{gtk:range} widget}
-  @argument[[flippable]{@em{true} to make the range flippable}
+  @argument[flippable]{@em{true} to make the range flippable}
   @begin{short}
     Gets or sets whether the range is flippable.
   @end{short}
   If a range is flippable, it will switch its direction if it is horizontal and
-  its direction is @code{:rtl}. See the @fun{gtk:widget-direction} function.
+  its direction is @val[gtk:text-direction]{:rtl}. See the
+  @fun{gtk:widget-direction} function.
   @see-class{gtk:range}
+  @see-symbol{gtk:text-direction}
   @see-function{gtk:widget-direction}"
   (range (g:object range)))
 
@@ -514,11 +516,11 @@ lambda (range)    :run-last
 
 (cffi:defcfun ("gtk_range_get_range_rect" %range-get-range-rect) :void
   (range (g:object range))
-  (range-rect (g:boxed gdk:rectangle)))
+  (rect (g:boxed gdk:rectangle)))
 
 (defun range-range-rect (range)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-01-10}
   @argument[range]{a @class{gtk:range} widget}
   @return{The @class{gdk:rectangle} instance for the range rectangle.}
   @begin{short}
@@ -528,9 +530,9 @@ lambda (range)    :run-last
   This function is useful mainly for @class{gtk:range} subclasses.
   @see-class{gtk:range}
   @see-class{gdk:rectangle}"
-  (let ((range-rect (gdk:rectangle-new)))
-    (%range-get-range-rect range range-rect)
-    range-rect))
+  (let ((rect (gdk:rectangle-new)))
+    (%range-get-range-rect range rect)
+    rect))
 
 (export 'range-range-rect)
 
@@ -545,7 +547,7 @@ lambda (range)    :run-last
 
 (defun range-slider-range (range)
  #+liber-documentation
- "@version{#2025-07-19}
+ "@version{2026-01-10}
   @syntax{(gtk:range-slider-range range) => start, end}
   @argument[range]{a @class{gtk:range} widget}
   @argument[start]{an integer for the start of the slider, or @code{nil}}
@@ -582,17 +584,15 @@ lambda (range)    :run-last
 (cffi:defcfun ("gtk_range_get_slider_size_fixed" range-slider-size-fixed)
     :boolean
  #+liber-documentation
- "@version{#2023-08-24}
+ "@version{2026-01-10}
   @syntax{(gtk:range-slider-size-fixed range) => fixed}
   @syntax{(setf (gtk:range-slider-size-fixed range) fixed)}
   @argument[range]{a @class{gtk:range} widget}
   @argument[fixed]{@em{true} to make the slider size constant}
   @begin{short}
-    Whether the slider of the range has a fixed size.
+    Gets or sets whether the slider of the range has a fixed size or a size
+    that depends on its page size of the adjustment.
   @end{short}
-  Sets whether the slider of the range has a fixed size, or a size that depends
-  on its page size of the adjustment.
-
   This function is useful mainly for @class{gtk:range} subclasses.
   @see-class{gtk:range}"
   (range (g:object range)))

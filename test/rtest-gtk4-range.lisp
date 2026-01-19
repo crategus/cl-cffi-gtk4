@@ -68,23 +68,90 @@
 ;;;     show-fill-level
 
 (test gtk-range-properties
-  (let ((range (make-instance 'gtk:range)))
+  (glib-test:with-check-memory (range)
+    (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
     (is (typep (gtk:range-adjustment range) 'gtk:adjustment))
     (is (= 1.7976931348623157d308 (gtk:range-fill-level range)))
     (is-false (gtk:range-inverted range))
     (is-true (gtk:range-restrict-to-fill-level range))
     (is (= -1 (gtk:range-round-digits range)))
     (is-false (gtk:range-show-fill-level range))
-
     (is-false (setf (gtk:range-adjustment range) nil))
     (is (= 1 (g:object-ref-count range)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     adjust-bounds
+
+(test gtk-range-adjust-bounds-signal
+  (let* ((name "adjust-bounds")
+         (gtype (g:gtype "GtkRange"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     change-value
+
+(test gtk-range-change-value-signal
+  (let* ((name "change-value")
+         (gtype (g:gtype "GtkRange"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkScrollType" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     move-slider
+
+(test gtk-range-move-slider-signal
+  (let* ((name "move-slider")
+         (gtype (g:gtype "GtkRange"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkScrollType")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     value-changed
+
+(test gtk-range-value-changed-signal
+  (let* ((name "value-changed")
+         (gtype (g:gtype "GtkRange"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -114,12 +181,73 @@
     (is (= 1 (g:object-ref-count range)))))
 
 ;;;     gtk_range_set_increments
+
+(test gtk-range-set-increments
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (range :strong 1)
+      (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+      (is-false (gtk:range-set-increments range 1 2))
+      (is (= 1.0d0 (gtk:adjustment-step-increment (gtk:range-adjustment range))))
+      (is (= 2.0d0 (gtk:adjustment-page-increment (gtk:range-adjustment range)))))))
+
 ;;;     gtk_range_set_range
+
+(test gtk-range-set-range.1
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (range :strong 1)
+      (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+      (is-false (gtk:range-set-range range 1 2))
+      (is (= 1.0d0 (gtk:adjustment-lower (gtk:range-adjustment range))))
+      (is (= 2.0d0 (gtk:adjustment-upper (gtk:range-adjustment range)))))))
+
+(test gtk-range-set-range.2
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (range :strong 1)
+      (is (typep (setf range
+                       (make-instance 'gtk:range
+                                      :adjustment
+                                      (make-instance 'gtk:adjustment
+                                                     :lower 10
+                                                     :upper 100
+                                                     :page-size 10)))
+                 'gtk:range))
+      (is-false (gtk:range-set-range range 20 80))
+      (is (= 10.0d0 (gtk:adjustment-page-size (gtk:range-adjustment range))))
+      (is (= 20.0d0 (gtk:adjustment-lower (gtk:range-adjustment range))))
+      (is (= 80.0d0 (gtk:adjustment-upper (gtk:range-adjustment range)))))))
+
 ;;;     gtk_range_get_flippable
 ;;;     gtk_range_set_flippable
+
+(test gtk-range-flippable
+  (glib-test:with-check-memory (range)
+    (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+    (is-false (gtk:range-flippable range))
+    (is-true (setf (gtk:range-flippable range) t))
+    (is-true (gtk:range-flippable range))))
+
 ;;;     gtk_range_get_range_rect
+
+(test gtk-range-range-rect
+  (glib-test:with-check-memory (range)
+    (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+    (is (typep (gtk:range-range-rect range) 'gdk:rectangle))))
+
 ;;;     gtk_range_get_slider_range
+
+(test gtk-range-slider-range
+  (glib-test:with-check-memory (range)
+    (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+    (is (equal '(0 0) (multiple-value-list (gtk:range-slider-range range))))))
+
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; 2024-11-2
+(test gtk-range-slider-size-fixed
+  (glib-test:with-check-memory (range)
+    (is (typep (setf range (make-instance 'gtk:range)) 'gtk:range))
+    (is-false (gtk:range-slider-size-fixed range))
+    (is-true (setf (gtk:range-slider-size-fixed range) t))
+    (is-true (gtk:range-slider-size-fixed range))))
+
+;;; 2026-01-10
