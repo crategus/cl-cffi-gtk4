@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,15 +83,15 @@
 (setf (liber:alias-for-class 'symbolic-paintable)
       "Interface"
       (documentation 'symbolic-paintable 'type)
- "@version{2023-08-30}
+ "@version{2026-01-31}
   @begin{short}
     The @class{gtk:symbolic-paintable} interface is an interface that support
     symbolic colors in paintables.
   @end{short}
   The @class{gdk:paintable} classes implementing the interface will have the
-  @code{Gtk.SymbolicPaintableInterface.snapshot_symbolic} virtual function
-  called and have the colors for drawing symbolic icons passed. At least 4
-  colors are guaranteed to be passed every time.
+  @code{snapshot_symbolic} virtual function called and have the colors for
+  drawing symbolic icons passed. At least 4 colors are guaranteed to be passed
+  every time.
 
   These 4 colors are the foreground color, and the colors to use for errors,
   warnings and success information in that order. More colors may be added in
@@ -103,22 +103,55 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_symbolic_paintable_snapshot_symbolic
-;;;
-;;; void
-;;; gtk_symbolic_paintable_snapshot_symbolic (GtkSymbolicPaintable* paintable,
-;;;                                           GdkSnapshot* snapshot,
-;;;                                           double width,
-;;;                                           double height,
-;;;                                           const GdkRGBA* colors,
-;;;                                           gsize n_colors)
-;;;
-;;; Snapshots the paintable with the given colors.
-;;;
-;;; If less than 4 colors are provided, GTK will pad the array with default
-;;; colors.
-;;;
-;;; Available since: 4.6
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-6
+(cffi:defcfun ("gtk_symbolic_paintable_snapshot_symbolic"
+               %symbolic-paintable-snapshot-symbolic) :void
+  (paintable (g:object symbolic-paintable))
+  (snapshot (g:object gdk:snapshot))
+  (width :double)
+  (height :double)
+  (colors :pointer)
+  (ncolors :size))
+
+#+gtk-4-6
+(defun symbolic-paintable-snapshot-symbolic
+       (paintable snapshot width height colors)
+ #+liber-documentation
+ "@version{#2026-01-31}
+  @argument[paintable]{a @class{gtk:symbolic-paintable} object}
+  @argument[snapshot]{a @class{gdk:snapshot} object to snapshot to}
+  @argument[width]{an integer for the width to snapshot in}
+  @argument[height]{an integer for the height to snapshot in}
+  @argument[colors]{a list of @class{gdk:rgba} colors}
+  @begin{short}
+    Snapshots the paintable with the given colors.
+  @end{short}
+  If less than 4 colors are provided, GTK will pad the array with default
+  colors.
+
+  Since 4.6
+  @see-class{gtk:symbolic-paintable}
+  @see-class{gdk:snapshot}
+  @see-class{gdk:rgba}"
+  (if colors
+      (glib:with-gboxed-array (ncolors ptr gdk:rgba colors)
+        (%symbolic-paintable-snapshot-symbolic paintable
+                                               snapshot
+                                               width
+                                               height
+                                               ptr
+                                               ncolors))
+      (%symbolic-paintable-snapshot-symbolic paintable
+                                             snapshot
+                                             width
+                                             height
+                                             (cffi:null-pointer)
+                                             0)))
+
+#+gtk-4-6
+(export 'symbolic-paintable-snapshot-symbolic)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkIconPaintable
