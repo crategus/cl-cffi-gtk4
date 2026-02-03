@@ -200,34 +200,71 @@
 ;;;     gtk_cell_renderer_activate
 ;;;     gtk_cell_renderer_start_editing
 ;;;     gtk_cell_renderer_stop_editing
+
 ;;;     gtk_cell_renderer_get_fixed_size
 ;;;     gtk_cell_renderer_set_fixed_size
+
+(test gtk-cell-renderer-fixed-size
+  (glib-test:with-check-memory (renderer)
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (is (typep (setf renderer
+                       (make-instance 'gtk:cell-renderer-text))
+                 'gtk:cell-renderer-text))
+      (is (equal '(-1 -1)
+                 (multiple-value-list (gtk:cell-renderer-fixed-size renderer))))
+      (is (equal '(1 2)
+                 (multiple-value-list (setf (gtk:cell-renderer-fixed-size renderer)
+                                            '(1 2)))))
+      (is (equal '(1 2)
+                 (multiple-value-list (gtk:cell-renderer-fixed-size renderer)))))))
 
 ;;;     gtk_cell_renderer_get_alignment
 ;;;     gtk_cell_renderer_set_alignment
 
 (test gtk-cell-renderer-alignment.1
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (renderer (make-instance 'gtk:cell-renderer-text)))
-    (is (equal '(0.0 0.5)
-               (multiple-value-list (gtk:cell-renderer-alignment renderer))))
-    (is (equal '(0.2 0.2)
-               (multiple-value-list (setf (gtk:cell-renderer-alignment renderer)
-                                          '(0.2 0.2)))))
-    (is (equal '(0.2 0.2)
-               (multiple-value-list (gtk:cell-renderer-alignment renderer))))))
+  (glib-test:with-check-memory (renderer)
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (is (typep (setf renderer
+                       (make-instance 'gtk:cell-renderer-text))
+                 'gtk:cell-renderer-text))
+      (is (equal '(0.0 0.5)
+                 (multiple-value-list (gtk:cell-renderer-alignment renderer))))
+      (is (equal '(0.2 0.2)
+                 (multiple-value-list (setf (gtk:cell-renderer-alignment renderer)
+                                            '(0.2 0.2)))))
+      (is (equal '(0.2 0.2)
+                 (multiple-value-list (gtk:cell-renderer-alignment renderer)))))))
 
 (test gtk-cell-renderer-alignment.2
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (renderer (make-instance 'gtk:cell-renderer-text)))
-    (is (equal '(0.5 0.75)
-               (multiple-value-list (setf (gtk:cell-renderer-alignment renderer)
-                                          '(1/2 0.75d0)))))
-    (is (equal '(0.5 0.75)
-               (multiple-value-list (gtk:cell-renderer-alignment renderer))))))
+  (glib-test:with-check-memory (renderer)
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+
+      (is (typep (setf renderer
+                       (make-instance 'gtk:cell-renderer-text))
+                 'gtk:cell-renderer-text))
+      (is (equal '(0.5 0.75)
+                 (multiple-value-list (setf (gtk:cell-renderer-alignment renderer)
+                                            '(1/2 0.75d0)))))
+      (is (equal '(0.5 0.75)
+                 (multiple-value-list (gtk:cell-renderer-alignment renderer)))))))
 
 ;;;     gtk_cell_renderer_get_padding
 ;;;     gtk_cell_renderer_set_padding
+
+(test gtk-cell-renderer-padding
+  (glib-test:with-check-memory (renderer)
+    (let ((gtk-init:*gtk-warn-deprecated* nil))
+      (is (typep (setf renderer
+                       (make-instance 'gtk:cell-renderer-text))
+                 'gtk:cell-renderer-text))
+      (is (equal '(2 2)
+                 (multiple-value-list (gtk:cell-renderer-padding renderer))))
+      (is (equal '(3 4)
+                 (multiple-value-list (setf (gtk:cell-renderer-padding renderer)
+                                            '(3 4)))))
+      (is (equal '(3 4)
+                 (multiple-value-list (gtk:cell-renderer-padding renderer)))))))
+
 ;;;     gtk_cell_renderer_get_state
 ;;;     gtk_cell_renderer_is_activatable
 ;;;     gtk_cell_renderer_get_preferred_height
@@ -237,4 +274,4 @@
 ;;;     gtk_cell_renderer_get_preferred_width_for_height
 ;;;     gtk_cell_renderer_get_request_mode
 
-;;; 2024-9-20
+;;; 2026-01-31

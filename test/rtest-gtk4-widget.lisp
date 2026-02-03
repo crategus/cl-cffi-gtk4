@@ -556,8 +556,19 @@
             (setf (gtk:widget-class-accessible-role "GtkButton") role)))))
 
 ;;;     gtk_widget_child_focus
+
 ;;;     gtk_widget_get_child_visible
 ;;;     gtk_widget_set_child_visible
+
+(test gtk-widget-child-visible
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (gtk:button-new-with-label "label")) 'gtk:button))
+    (is (typep (gtk:button-child button) 'gtk:label))
+    (is-true (gtk:widget-child-visible button))
+    (is-false (setf (gtk:widget-child-visible button) nil))
+    (is-false (gtk:widget-child-visible button))
+    ;; Remove reference
+    (is-false (setf (gtk:button-child button) nil))))
 
 ;;;     gtk_widget_get_settings
 
@@ -943,4 +954,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2025-12-06
+;;; 2026-01-24

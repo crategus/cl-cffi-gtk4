@@ -45,33 +45,27 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-widget-paintable-properties
-  (let* ((widget (make-instance 'gtk:label))
-         (button (make-instance 'gtk:button))
-         (paintable (gtk:widget-paintable-new widget)))
-    (is (typep (gtk:widget-paintable-widget paintable) 'gtk:label))
-    (is (typep (setf (gtk:widget-paintable-widget paintable) button) 'gtk:button))
-    (is (typep (gtk:widget-paintable-widget paintable) 'gtk:button))
-
-    ;; FIXME: We have to remove the widget from the paintable to avoid
-    ;; an error with the memory management
-    (is-false (setf (gtk:widget-paintable-widget paintable) nil))
-
-    (is (= 1 (g:object-ref-count button)))
-    (is (= 1 (g:object-ref-count widget)))
-    (is (= 1 (g:object-ref-count paintable)))))
+  (glib-test:with-check-memory (paintable)
+    (let ((widget (make-instance 'gtk:label))
+          (button (make-instance 'gtk:button)))
+      (is (typep (setf paintable
+                       (gtk:widget-paintable-new widget)) 'gtk:widget-paintable))
+      (is (typep (gtk:widget-paintable-widget paintable) 'gtk:label))
+      (is (typep (setf (gtk:widget-paintable-widget paintable) button) 'gtk:button))
+      (is (typep (gtk:widget-paintable-widget paintable) 'gtk:button))
+      ;; Remove references
+      (is-false (setf (gtk:widget-paintable-widget paintable) nil)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_widget_paintable_new
 
 (test gtk-widget-paintable-new
-  (let (paintable)
+  (glib-test:with-check-memory (paintable)
     (is (typep (setf paintable
                      (gtk:widget-paintable-new (make-instance 'gtk:button)))
                'gtk:widget-paintable))
-    ;; FIXME: We have to remove the widget from the paintable to avoid
-    ;; an error with the memory management
-    (is-false (setf (gtk:widget-paintable-widget paintable) nil))
-    (is (= 1 (g:object-ref-count paintable)))))
+    ;; Remove references
+    (is-false (setf (gtk:widget-paintable-widget paintable) nil))))
 
-;;; 2024-11-2
+;;; 2026-01-31

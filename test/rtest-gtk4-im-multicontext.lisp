@@ -45,12 +45,19 @@
 ;;;     gtk_im_multicontext_new
 
 (test gtk-im-multicontext-new
-  (let ((method (gtk:im-multicontext-new)))
-    (is (typep method 'gtk:im-multicontext))
-    (is (equal '() (gtk:im-context-input-hints method)))
-    (is (eq :free-form (gtk:im-context-input-purpose method)))))
+  (glib-test:with-check-memory (context)
+    (is (typep (setf context (gtk:im-multicontext-new)) 'gtk:im-multicontext))
+    (is (equal '() (gtk:im-context-input-hints context)))
+    (is (eq :free-form (gtk:im-context-input-purpose context)))))
 
 ;;;     gtk_im_multicontext_get_context_id
 ;;;     gtk_im_multicontext_set_context_id
 
-;;; 2024-9-20
+#+crategus
+(test gtk-im-multicontext-context-id
+  (glib-test:with-check-memory (context)
+    (is (typep (setf context
+                     (gtk:im-multicontext-new)) 'gtk:im-multicontext))
+    (is (string= "wayland" (gtk:im-multicontext-context-id context)))))
+
+;;; 2026-01-31

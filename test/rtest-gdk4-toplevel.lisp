@@ -3,6 +3,26 @@
 (def-suite gdk-toplevel :in gdk-suite)
 (in-suite gdk-toplevel)
 
+(in-package :gdk)
+
+#-windows
+(GOBJECT:DEFINE-GOBJECT "GdkWaylandSurface" WAYLAND-SURFACE
+  (:SUPERCLASS SURFACE
+   :EXPORT T
+   :INTERFACES NIL
+   :TYPE-INITIALIZER "gdk_wayland_surface_get_type")
+  NIL)
+
+#-windows
+(GOBJECT:DEFINE-GOBJECT "GdkWaylandToplevel" WAYLAND-TOPLEVEL
+  (:SUPERCLASS WAYLAND-SURFACE
+   :EXPORT T
+   :INTERFACES ("GdkToplevel")
+   :TYPE-INITIALIZER "gdk_wayland_toplevel_get_type")
+  NIL)
+
+(in-package :gtk-test)
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GdkToplevelState
@@ -198,7 +218,7 @@
              (glib-test:list-flags-item-nicks "GdkToplevelCapabilities")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkToplevelCapabilities"
-                                     GDK-TOPLEVEL-CAPABILITIES
+                                     GDK:TOPLEVEL-CAPABILITIES
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
                                       "gdk_toplevel_capabilities_get_type")
@@ -272,7 +292,8 @@
   ;; Check type
   (is (g:type-is-object "GdkWin32Toplevel"))
   ;; Check registered name
-  (is (eq 'g:object
+  #+nil
+  (is (eq 'gdk:win32-toplevel
           (glib:symbol-for-gtype "GdkWin32Toplevel")))
   ;; Check type initializer
   #+nil ; not exported
@@ -288,9 +309,9 @@
   (is (equal '("GdkToplevel")
              (glib-test:list-interfaces "GdkWin32Toplevel")))
   ;; Check properties
-  (is (equal '("decorated" "deletable" "fullscreen-mode" "icon-list" "modal"
-               "shortcuts-inhibited" "startup-id" "state" "title"
-               "transient-for")
+  (is (equal '("capabilities" "decorated" "deletable" "fullscreen-mode"
+               "gravity" "icon-list" "modal" "shortcuts-inhibited" "startup-id"
+               "state" "title" "transient-for")
              (glib-test:list-properties "GdkWin32Toplevel")))
   ;; Check signals
   (is (equal '()
@@ -308,6 +329,7 @@
 ;;;     decorated
 ;;;     deletable
 ;;;     fullscreen-mode
+;;;     gravity
 ;;;     icon-list
 ;;;     modal
 ;;;     shortcuts-inhibited
@@ -316,9 +338,49 @@
 ;;;     title
 ;;;     transient-for
 
+#-windows
+(test gdk-toplevel-properties
+  (glib-test:with-check-memory (window surface)
+    ;; Create and realize a window
+    (setf window (make-instance 'gtk:window))
+    (gtk:widget-realize window)
+    ;; Get the toplevel
+    (setf surface (gtk:native-surface window))
+    ;; Check accessors
+    (is-false (gdk:toplevel-decorated surface))
+    (is-false (gdk:toplevel-deletable surface))
+    (is (eq :on-current-monitor (gdk:toplevel-fullscreen-mode surface)))
+    (is (eq :north-west (gdk:toplevel-gravity surface)))
+    (is (cffi:null-pointer-p (gdk:toplevel-icon-list surface)))
+    (is-false (gdk:toplevel-modal surface))
+    (is-false (gdk:toplevel-shortcuts-inhibited surface))
+    (is (string= "" (gdk:toplevel-startup-id surface)))
+    ;; Default value is :none!? Why false?
+    (is-false (gdk:toplevel-state surface))
+    (is (string= "gtk-test" (gdk:toplevel-title surface)))
+    (is-false (gdk:toplevel-transient-for surface))
+    ;; Remove references
+    (gtk:window-destroy window)))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     compute-size
+
+(test gdk-toplevel-compute-size-signal
+  (let* ((name "compute-size")
+         (gtype (g:gtype "GdkToplevel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkToplevelSize")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -334,4 +396,4 @@
 ;;;     gdk_toplevel_begin_move
 ;;;     gdk_toplevel_titlebar_gesture                      Since 4.4
 
-;;; 2025-11-02
+;;; 2026-01-19

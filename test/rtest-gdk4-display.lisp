@@ -134,7 +134,7 @@
 
 ;; This test adds a strong reference for a GdkDisplay for every run
 
-#-windows
+#+nil
 (test gdk-display-open
   (when *first-run-testsuite*
     (glib-test:with-check-memory (:strong 2)

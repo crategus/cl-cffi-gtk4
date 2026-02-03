@@ -56,7 +56,15 @@
     (is (equal '() (gtk:im-context-input-hints method)))
     (is (eq :free-form (gtk:im-context-input-purpose method)))))
 
-;;;     gtk_im_context_simple_add_table
+;;;     gtk_im_context_simple_add_table                     Deprecated 4.4
+
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; 2025-11-16
+(test gtk-im-context-simple-add-compose-file
+  (glib-test:with-check-memory (context)
+    (let ((file "/usr/share/X11/locale/am_ET.UTF-8/Compose"))
+      (is (typep (setf context
+                       (gtk:im-context-simple-new)) 'gtk:im-context-simple))
+      (is-false (gtk:im-context-simple-add-compose-file context file)))))
+
+;;; 2026-01-31

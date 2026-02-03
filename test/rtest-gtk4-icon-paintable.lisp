@@ -27,6 +27,8 @@
                        :TYPE-INITIALIZER "gtk_symbolic_paintable_get_type"))
              (gobject:get-gtype-definition "GtkSymbolicPaintable"))))
 
+;;; gtk_symbolic_paintable_snapshot_symbolic
+
 ;;;     GtkIconPaintable
 
 (test gtk-icon-paintable-class
@@ -71,27 +73,27 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-icon-paintable-properties
-  (let ((paintable (make-instance 'gtk:icon-paintable)))
+  (glib-test:with-check-memory (paintable)
+    (is (typep (setf paintable
+                     (make-instance 'gtk:icon-paintable)) 'gtk:icon-paintable))
     (is-false (gtk:icon-paintable-file paintable))
     (is-false (gtk:icon-paintable-icon-name paintable))
-    (is-false (gtk:icon-paintable-is-symbolic paintable))
-    (is (= 1 (g:object-ref-count paintable)))))
+    (is-false (gtk:icon-paintable-is-symbolic paintable))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_icon_paintable_new_for_file
 
 (test gtk-icon-paintable-new-for-file
-  (let* ((path (glib-sys:sys-path "gtk-logo-24.png"))
-         (paintable (gtk:icon-paintable-new-for-file path 24 1)))
-    (is (typep paintable 'gtk:icon-paintable))
-    (is (= 1 (g:object-ref-count paintable)))
+  (glib-test:with-check-memory (paintable :strong 1)
+    (let ((path (glib-sys:sys-path "gtk-logo-24.png")))
+
+    (is (typep (setf paintable
+                     (gtk:icon-paintable-new-for-file path 24 1))
+               'gtk:icon-paintable))
     (is (string= "gtk-logo-24.png"
                  (g:file-basename (gtk:icon-paintable-file paintable))))
     (is-false (gtk:icon-paintable-icon-name paintable))
-    (is-false (gtk:icon-paintable-is-symbolic paintable))
-    ;; The FILE slot is not writable, therefore we can not remove FILE
-    ;; from PAINTABLE
-    (is (= 1 (g:object-ref-count paintable)))))
+    (is-false (gtk:icon-paintable-is-symbolic paintable)))))
 
-;;; 2025-09-22
+;;; 2026-01-31

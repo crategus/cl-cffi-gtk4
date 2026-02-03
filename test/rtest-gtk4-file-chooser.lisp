@@ -79,7 +79,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-#+nil
 (test gtk-file-chooser-properties
   (when *first-run-testsuite*
     (let ((*gtk-warn-deprecated* nil))
@@ -98,7 +97,6 @@
 ;;;     gtk_file_chooser_set_current_name
 ;;;     gtk_file_chooser_get_current_name
 
-#+nil
 (test gtk-file-chooser-current-name
   (when *first-run-testsuite*
     (let ((*gtk-warn-deprecated* nil))
@@ -127,9 +125,13 @@
           (is (= 1 (g:object-ref-count chooser)))
           (is (g:type-is-a (g:type-from-instance file) "GFile"))
           (is-false (gtk:file-chooser-file chooser))
+          (is-false (gtk:file-chooser-current-folder chooser))
+
           (is (eq file (setf (gtk:file-chooser-file chooser) file)))
-          ;; TODO: FILE is not stored in the GtkFileChooserDialog object. Why?
-          (is-false (gtk:file-chooser-file chooser)))))))
+
+          ;; TODO: FILE is not stored in the GtkFileChooserWidget object. Why?
+          (is-false (gtk:file-chooser-file chooser))
+          (is-false (gtk:file-chooser-current-folder chooser)))))))
 
 #+nil
 (test gtk-file-chooser-namestring
@@ -148,11 +150,16 @@
 
 ;;;     gtk_file_chooser_get_files
 
-#+nil
 (test gtk-file-chooser-files
   (let ((*gtk-warn-deprecated* nil))
-    (let ((chooser (make-instance 'gtk:file-chooser-widget)))
-      (is (typep (gtk:file-chooser-files chooser) 'g:list-model)))))
+    (glib-test:with-check-memory (chooser (model 2) :strong 1)
+      (is (typep (setf chooser
+                       (make-instance 'gtk:file-chooser-widget))
+                 'gtk:file-chooser))
+      (is (typep (setf model
+                       (gtk:file-chooser-files chooser)) 'g:list-model))
+      (is (= 0 (g:list-model-n-items model)))
+      (is (eq (g:gtype "GFile") (g:list-model-item-type model))))))
 
 ;;;     gtk_file_chooser_set_current_folder
 ;;;     gtk_file_chooser_get_current_folder
@@ -169,11 +176,37 @@
 
 ;;;     gtk_file_chooser_add_filter
 ;;;     gtk_file_chooser_remove_filter
+
+(test gtk-file-chooser-add/remove-filter
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (chooser filter (model 5) :strong 1)
+      (is (typep (setf chooser
+                       (make-instance 'gtk:file-chooser-widget))
+                 'gtk:file-chooser))
+      (is (typep (setf filter (gtk:file-filter-new)) 'gtk:file-filter))
+      (is-false (gtk:file-chooser-add-filter chooser filter))
+      (is (typep (setf model (gtk:file-chooser-filters chooser)) 'g:list-model))
+      (is (= 1 (g:list-model-n-items model)))
+      (is (eq (g:gtype "GtkFileFilter") (g:list-model-item-type model)))
+      (is-false (gtk:file-chooser-remove-filter chooser filter))
+      (is (= 0 (g:list-model-n-items model))))))
+
 ;;;     gtk_file_chooser_add_shortcut_folder
 ;;;     gtk_file_chooser_remove_shortcut_folder
+
+(test gtk-file-chooser-add/remove-shortcut-folder
+  (let ((*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (chooser :strong 1)
+      (let ((path (glib-sys:sys-path "test/")))
+        (is (typep (setf chooser
+                         (make-instance 'gtk:file-chooser-widget))
+                   'gtk:file-chooser))
+        (is-true (gtk:file-chooser-add-shortcut-folder chooser path))
+        (is-true (gtk:file-chooser-remove-shortcut-folder chooser path))))))
+
 ;;;     gtk_file_chooser_add_choice
 ;;;     gtk_file_chooser_remove_choice
 ;;;     gtk_file_chooser_set_choice
 ;;;     gtk_file_chooser_get_choice
 
-;;; 2024-12-23
+;;; 2026-02-03

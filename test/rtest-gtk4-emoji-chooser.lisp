@@ -50,11 +50,28 @@
 
 ;;;     emoji-picked
 
+(test gtk-emoji-chooser-emoji-picked-signal
+  (let* ((name "emoji-picked")
+         (gtype (g:gtype "GtkEmojiChooser"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_emoji_chooser_new
 
 (test gtk-emoji-chooser-new
-  (is (typep (gtk:emoji-chooser-new) 'gtk:emoji-chooser)))
+  (glib-test:with-check-memory (chooser)
+    (is (typep (setf chooser (gtk:emoji-chooser-new)) 'gtk:emoji-chooser))))
 
-;;; 2024-9-20
+;;; 2026-01-31

@@ -66,7 +66,47 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_app_chooser_dialog_new
+
+(test gtk-app-chooser-dialog-new
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog (file 2) :strong 1)
+      (let ((path (glib-sys:sys-path "test/rtest-gtk4-app-chooser-dialog.lisp")))
+        (is (typep (setf file (g:file-new-for-path path)) 'g:object))
+        (is (typep (setf dialog
+                         (gtk:app-chooser-dialog-new nil :modal file))
+                   'gtk:app-chooser-dialog))
+        (is (typep (gtk:app-chooser-dialog-gfile dialog) 'g:object))
+        (is-false (gtk:app-chooser-dialog-heading dialog))
+        (is (string= "Select"
+                     (setf (gtk:app-chooser-dialog-heading dialog) "Select")))
+        (is (string= "Select" (gtk:app-chooser-dialog-heading dialog)))
+        (is-false (gtk:window-destroy dialog))))))
+
 ;;;     gtk_app_chooser_dialog_new_for_content_type
+
+(test gtk-app-chooser-dialog-new-for-content-type
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog)
+      (is (typep (setf dialog
+                       (gtk:app-chooser-dialog-new-for-content-type nil
+                                                                    :modal
+                                                                    "text/plain"))
+                 'gtk:app-chooser-dialog))
+      (is-false (gtk:app-chooser-dialog-gfile dialog))
+      (is-false (gtk:app-chooser-dialog-heading dialog))
+      (is-false (gtk:window-destroy dialog)))))
+
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; 2024-12-24
+(test gtk-app-chooser-dialog-widget
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog :strong 1)
+      (is (typep (setf dialog
+                       (gtk:app-chooser-dialog-new-for-content-type nil
+                                                                    :modal
+                                                                    "text/plain"))
+                 'gtk:app-chooser-dialog))
+      (is (typep (gtk:app-chooser-dialog-widget dialog) 'gtk:app-chooser-widget))
+      (is-false (gtk:window-destroy dialog)))))
+
+;;; 2026-02-03

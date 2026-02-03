@@ -134,12 +134,38 @@
 ;;;     gdk_clipboard_read_value_finish
 ;;;     gdk_clipboard_read_texture_async
 ;;;     gdk_clipboard_read_texture_finish
+
 ;;;     gdk_clipboard_read_text_async
 ;;;     gdk_clipboard_read_text_finish
+
+(test gdk-clipboard-read-text-async
+  (glib-test:with-check-memory ((clipboard 3))
+    (let (content)
+    (is (typep (setf clipboard
+                     (gdk:display-clipboard (gdk:display-default)))
+               'gdk:clipboard))
+    (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
+    ;; FIXME: Can we read the clipboard in the testsuite!
+    (gdk:clipboard-read-text-async clipboard nil
+        (lambda (source result)
+          (setf content (gdk:clipboard-read-text-finish source result))))
+    (is-false content)
+)))
+
 ;;;     gdk_clipboard_set
 ;;;     gdk_clipboard_set_valist
 ;;;     gdk_clipboard_set_value
+
 ;;;     gdk_clipboard_set_text
+
+(test gtk-clipboard-set-text
+  (glib-test:with-check-memory ((clipboard 3))
+    (is (typep (setf clipboard
+                     (gdk:display-clipboard (gdk:display-default)))
+               'gdk:clipboard))
+    (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
+))
+
 ;;;     gdk_clipboard_set_texture
 
 ;;; 2025-4-26

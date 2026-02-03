@@ -51,7 +51,9 @@
 ;;;     child
 
 (test gtk-window-handle-properties
-  (let ((handle (make-instance 'gtk:window-handle)))
+  (glib-test:with-check-memory (handle)
+    (is (typep (setf handle
+                     (make-instance 'gtk:window-handle)) 'gtk:window-handle))
     (is-false (gtk:window-handle-child handle))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -59,6 +61,7 @@
 ;;;     gtk_window_handle_new
 
 (test gtk-window-handle-new
-  (is (typep (gtk:window-handle-new) 'gtk:window-handle)))
+  (glib-test:with-check-memory (handle)
+    (is (typep (setf handle (gtk:window-handle-new)) 'gtk:window-handle))))
 
-;;; 2024-9-20
+;;; 2026-01-31
