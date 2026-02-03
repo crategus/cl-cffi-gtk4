@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -3585,8 +3585,8 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkWidgetPaintable]{subsection}
       @about-class{widget-paintable}
+      @about-generic{widget-paintable-widget}
       @about-function{widget-paintable-new}
-      @about-function{widget-paintable-widget}
     @end{subsection}
     @begin[GtkWindowControls]{subsection}
       @about-class{window-controls}

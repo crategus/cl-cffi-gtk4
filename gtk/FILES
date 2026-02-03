@@ -189,7 +189,7 @@ Selector Widgets and Dialogs
   gtk4.uri-launcher.lisp               GtkUriLauncher                GTK 4.20 .
   gtk4.font-dialog.lisp                GtkFontDialog                 GTK 4.20 .
   gtk4.font-dialog-button.lisp         GtkFontDialogButton           GTK 4.20 .
-  gtk4.emoji-chooser.lisp              GtkEmojiChooser               GTK 4.18 *
+  gtk4.emoji-chooser.lisp              GtkEmojiChooser               GTK 4.20 .
 
 Widgets for custom drawing
 
@@ -228,8 +228,8 @@ Accessibility
 Input Methods
 
   gtk4.im-context.lisp                 GtkIMContext                  GTK 4.20 +
-  gtk4.im-context-simple.lisp          GtkIMContextSimple            GTK 4.20 +
-  gtk4.im-multicontext.lisp            GtkIMMulticontext             GTK 4.18 *+
+  gtk4.im-context-simple.lisp          GtkIMContextSimple            GTK 4.20 .
+  gtk4.im-multicontext.lisp            GtkIMMulticontext             GTK 4.20 .
 
 Miscellaneous
 
@@ -239,9 +239,9 @@ Miscellaneous
   gtk4.separator.lisp                  GtkSeparator                  GTK 4.18 *
   gtk4.snapshot.lisp                   GtkSnapshot                   GTK 4.18 *
   gtk4.tooltip.lisp                    GtkTooltip                    GTK 4.18 *
-  gtk4.widget-paintable.lisp           GtkWidgetPaintable            GTK 4.18 *
+  gtk4.widget-paintable.lisp           GtkWidgetPaintable            GTK 4.20 .
   gtk4.window-controls.lisp            GtkWindowControls             GTK 4.18 *
-  gtk4.window-handle.lisp              GtkWindowHandle               GTK 4.18 *
+  gtk4.window-handle.lisp              GtkWindowHandle               GTK 4.20 .
 
 Interfaces
 
@@ -391,4 +391,4 @@ Deprecated
   gtk4.shortcuts-shortcut.lisp         GtkShortcutsShortcut          GTK 4.18
   gtk4.shortcut-label.lisp             GtkShortcutLabel              GTK 4.18
 
-2026-01-17
+2026-02-03
