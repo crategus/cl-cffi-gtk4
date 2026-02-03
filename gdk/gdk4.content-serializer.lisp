@@ -2,11 +2,11 @@
 ;;; gdk4.content-serializer.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2024 - 2025 Dieter Kaiser
+;;; Copyright (C) 2024 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -86,7 +86,7 @@
   @end{short}
   The @class{gdk:content-serializer} object transforms an object that is
   identified by a @class{g:type-t} type ID into a serialized form, that is a
-  byte stream, that is identified by a mime type.
+  byte stream, that is identified by a MIME type.
 
   GTK provides serializers and deserializers for common data types such as text,
   colors, images or file lists. To register your own serialization functions,
@@ -105,7 +105,7 @@
 ;;; The type of a function that can be registered with
 ;;; gdk_content_register_serializer(). When the function gets called to operate
 ;;; on content, it can call functions on the serializer object to obtain the
-;;; mime type, output stream, user data, etc. for its operation.
+;;; MIME type, output stream, user data, etc. for its operation.
 ;;;
 ;;; serializer :
 ;;;     a GdkContentSerializer
@@ -117,13 +117,13 @@
 ;;; const char *
 ;;; gdk_content_serializer_get_mime_type (GdkContentSerializer *serializer);
 ;;;
-;;; Gets the mime type to serialize to.
+;;; Gets the MIME type to serialize to.
 ;;;
 ;;; serializer :
 ;;;     a GdkContentSerializer
 ;;;
 ;;; Returns :
-;;;     the mime type for the current operation.
+;;;     the MIME type for the current operation.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -294,13 +294,13 @@
 ;;;                                  GDestroyNotify notify);
 ;;;
 ;;; Registers a function to convert objects of the given type to a serialized
-;;; representation with the given mime type.
+;;; representation with the given MIME type.
 ;;;
 ;;; type :
 ;;;     the type of objects that the function can serialize
 ;;;
 ;;; mime_type :
-;;;     the mime type to serialize to
+;;;     the MIME type to serialize to
 ;;;
 ;;; serialize :
 ;;;     the callback
@@ -332,7 +332,7 @@
 ;;;     a GOutputStream to write the serialized content to
 ;;;
 ;;; mime_type :
-;;;     the mime type to serialize to
+;;;     the MIME type to serialize to
 ;;;
 ;;; value :
 ;;;     the content to serialize

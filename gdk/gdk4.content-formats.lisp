@@ -2,11 +2,11 @@
 ;;; gdk4.content-formats.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -48,10 +48,11 @@
 ;;;
 ;;;     gdk_content_formats_new
 ;;;     gdk_content_formats_new_for_gtype
-;;;     gdk_content_formats_ref                             not implemented
+;;;     gdk_content_formats_ref                             not needed
 ;;;     gdk_content_formats_unref                           not needed
 ;;;     gdk_content_formats_print                           not needed
 ;;;     gdk_content_formats_to_string
+;;;     gdk_content_formats_is_empty                        Since 4.18
 ;;;     gdk_content_formats_get_gtypes
 ;;;     gdk_content_formats_get_mime_types
 ;;;     gdk_content_formats_union
@@ -134,7 +135,14 @@
 (setf (liber:alias-for-class 'content-formats)
       "GBoxed"
       (documentation 'content-formats 'type)
- "@version{2023-11-05}
+ "@version{2026-01-20}
+  @begin{declaration}
+(glib:define-gboxed-opaque content-formats \"GdkContentFormats\"
+  :export t
+  :type-initializer \"gdk_content_formats_get_type\"
+  :alloc
+  (error \"GdkContentFormats must be created with gdk:content-formats-new\"))
+  @end{declaration}
   @begin{short}
     The @class{gdk:content-formats} structure is used to advertise and negotiate
     the format of content.
@@ -144,8 +152,8 @@
   window or application, like @class{gdk:drag}, @class{gdk:drop},
   @class{gdk:clipboard} or @class{gdk:content-provider} objects.
 
-  GDK supports content in two forms: GType and mime type. Using GTypes is meant
-  only for in-process content transfers. Mime types are meant to be used for
+  GDK supports content in two forms: GType and MIME type. Using GTypes is meant
+  only for in-process content transfers. MIME types are meant to be used for
   data passing both in-process and out-of-process. The details of how data is
   passed is described in the documentation of the actual implementations. To
   transform between the two forms, the @class{gdk:content-serializer} and
@@ -153,7 +161,7 @@
 
   A @class{gdk:content-formats} instance describes a set of possible formats
   content can be exchanged in. It is assumed that this set is ordered. GTypes
-  are more important than mime types. Order between different GTypes or mime
+  are more important than MIME types. Order between different GTypes or MIME
   types is the order they were added in, most important first. Functions that
   care about order, such as the @fun{gdk:content-formats-union} function, will
   describe in their documentation how they interpret that order, though in
@@ -177,23 +185,25 @@
   @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_intern_mime_type ()
-;;;
-;;; const char *
-;;; gdk_intern_mime_type (const char *string);
-;;;
-;;; Canonicalizes the given mime type and interns the result.
-;;;
-;;; If string is not a valid mime type, NULL is returned instead. See RFC 2048
-;;; for the syntax of mime types.
-;;;
-;;; string :
-;;;     string of a potential mime type.
-;;;
-;;; Returns :
-;;;     An interned string for the canonicalized mime type or NULL if the
-;;;     string wasn't a valid mime type
+;;; gdk_intern_mime_type
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_intern_mime_type" intern-mime-type) :string
+ #+liber-documentation
+ "@version{2026-01-20}
+  @argument[str]{a string for the potential MIME type}
+  @begin{return}
+    The string for the canonicalized MIME type or @code{nil} if the string
+    is not a valid MIME type.
+  @end{return}
+  @begin{short}
+    Canonicalizes the given MIME type and interns the result.
+  @end{short}
+  If @arg{str} is not a valid MIME type, @code{nil} is returned instead. See
+  RFC 2048 for the syntax of MIME types."
+  (str :string))
+
+(export 'intern-mime-type)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_new
@@ -201,25 +211,24 @@
 
 (cffi:defcfun ("gdk_content_formats_new" %content-formats-new)
     (g:boxed content-formats :return)
-  (mime-types :pointer)
-  (n-mime-types :uint))
+  (mtypes :pointer)
+  (n-mtypes :uint))
 
-(defun content-formats-new (mime-types)
+(defun content-formats-new (mtypes)
  #+liber-documentation
- "@version{#2025-08-02}
-  @argument[mime-types]{a list of strings for the mime types}
+ "@version{2026-01-20}
+  @argument[mtypes]{a string or a list of strings for the MIME types}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Creates a new @class{gdk:content-formats} instance from a list of
-    mime types.
+    MIME types.
   @end{short}
-  The mime types must be valid and different from each other or the behavior
-  of the return value is undefined. If you cannot guarantee this, use the
-  @class{gdk:content-formats-builder} object instead.
-  @see-class{gdk:content-formats}
-  @see-class{gdk:content-formats-builder}"
-  (let ((n (length mime-types)))
-    (%content-formats-new (cffi:convert-to-foreign mime-types 'g:strv-t) n)))
+  The MIME types must be valid and different from each other or the behavior
+  of the return value is undefined.
+  @see-class{gdk:content-formats}"
+  (let* ((mtypes (if (listp mtypes) mtypes (list mtypes)))
+         (n (length mtypes)))
+    (%content-formats-new (cffi:convert-to-foreign mtypes 'g:strv-t) n)))
 
 (export 'content-formats-new)
 
@@ -230,7 +239,7 @@
 (cffi:defcfun ("gdk_content_formats_new_for_gtype"
                content-formats-new-for-gtype) (g:boxed content-formats :return)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[gtype]{a @class{g:type-t} type ID}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -241,6 +250,37 @@
   (gtype g:type-t))
 
 (export 'content-formats-new-for-gtype)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_content_formats_parse                              Since 4.4
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-4
+(cffi:defcfun ("gdk_content_formats_parse" content-formats-parse)
+    (g:boxed content-formats :return)
+ #+liber-documentation
+ "@version{2026-01-20}
+  @argument[str]{a string to parse}
+  @begin{return}
+    The @class{gdk:content-formats} instance for the content formats if
+    @arg{str} is valid.
+  @end{return}
+  @begin{short}
+    Parses the given @arg{str} into a @class{gdk:content-formats} instance and
+    returns the formats.
+  @end{short}
+  Strings printed via the @fun{gdk:content-formats-to-string} function can be
+  read in again successfully using this function.
+
+  If @arg{str} does not describe valid content formats, @code{nil} is returned.
+
+  Since 4.4
+  @see-class{gdk:content-formats}
+  @see-function{gdk:content-formats-to-string}"
+  (str :string))
+
+#+gtk-4-4
+(export 'content-formats-parse)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_ref                                 not needed
@@ -261,7 +301,7 @@
 (cffi:defcfun ("gdk_content_formats_to_string" content-formats-to-string)
     :string
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The string for the content formats.}
   @begin{short}
@@ -271,6 +311,29 @@
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-to-string)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_content_formats_is_empty                            Since 4.18
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-18
+(cffi:defcfun ("gdk_content_formats_is_empty" content-formats-is-empty) :boolean
+ #+liber-documentation
+ "@version{2026-01-20}
+  @argument[formats]{a @class{gdk:content-formats} instance}
+  @begin{return}
+    @em{True} if @arg{formats} contains no MIME types and no GTypes.
+  @end{return}
+  @begin{short}
+    Returns whether the content formats contain any formats.
+  @end{short}
+
+  Since 4.18
+  @see-class{gdk:content-formats}"
+  (formats (g:boxed content-formats)))
+
+#+gtk-4-18
+(export 'content-formats-is-empty)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_get_gtypes
@@ -283,7 +346,7 @@
 
 (defun content-formats-gtypes (formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The list with the @class{g:type-t} type IDs included in @arg{formats}.}
   @begin{short}
@@ -307,18 +370,18 @@
 (cffi:defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
     g:strv-t
   (formats (g:boxed content-formats))
-  (n-mime-types :pointer))
+  (n-mtypes :pointer))
 
 (defun content-formats-mime-types (formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{The list of strings with the mime types included in @arg{formats}.}
+  @return{The list of strings with the MIME types included in @arg{formats}.}
   @begin{short}
-    Gets the mime types included in @arg{formats}.
+    Gets the MIME types included in @arg{formats}.
   @end{short}
-  Note that formats may not contain any mime types, in particular when they are
-  empty. In that case @code{nil} will be returned.
+  Note that @arg{formats} may not contain any MIME types, in particular when
+  they are empty. In that case @code{nil} will be returned.
   @see-class{gdk:content-formats}"
   (%content-formats-mime-types formats (cffi:null-pointer)))
 
@@ -331,7 +394,7 @@
 (cffi:defcfun ("gdk_content_formats_union" content-formats-union)
     (g:boxed content-formats :return)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[first]{a @class{gdk:content-formats} instance to merge into}
   @argument[second]{a @class{gdk:content-formats} instance to merge from}
   @return{The new @class{gdk:content-formats} instance.}
@@ -351,7 +414,7 @@
 
 (cffi:defcfun ("gdk_content_formats_match" content-formats-match) :boolean
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @return{@em{True} if a matching format was found.}
@@ -371,7 +434,7 @@
 (cffi:defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype)
     g:type-t
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{2026-01-20}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @return{The first common @class{g:type-t} type ID or @code{nil} if none.}
@@ -394,14 +457,14 @@
 (cffi:defcfun ("gdk_content_formats_match_mime_type"
                content-formats-match-mime-type) :string
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-01-20}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @begin{return}
-    The string for the first common mime type type or @code{nil} if none.
+    The string for the first common MIME type or @code{nil} if none.
   @end{return}
   @begin{short}
-    Finds the first mime type from @arg{first} that is also contained in
+    Finds the first MIME type from @arg{first} that is also contained in
     @arg{second}.
   @end{short}
   If no matching @class{g:type-t} type ID is found, @code{nil} is returned.
@@ -419,7 +482,7 @@
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
                content-formats-contain-gtype) :boolean
  #+liber-documentation
- "@version{2023-11-05}
+ "@version{2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[gtype]{a @class{g:type-t} type ID}
   @return{@em{True} if given @arg{gtype} was found.}
@@ -438,14 +501,14 @@
 (cffi:defcfun ("gdk_content_formats_contain_mime_type"
                content-formats-contain-mime-type) :boolean
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @argument[mime-type]{a string for the mime type to search for}
-  @return{@em{True} if given @arg{mime-type} was found.}
-  @short{Checks if a given mime type is part of the given @arg{formats}.}
+  @argument[mtype]{a string for the MIME type to search for}
+  @return{@em{True} if given @arg{mtype} was found.}
+  @short{Checks if a given MIME type is part of the given @arg{formats}.}
   @see-class{gdk:content-formats}"
   (formats (g:boxed content-formats))
-  (mime-type :string))
+  (mtype :string))
 
 (export 'content-formats-contain-mime-type)
 
@@ -456,11 +519,11 @@
 (cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
                content-formats-union-serialize-gtypes) (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{#2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add @class{g:type-t} type IDs for the mime types in formats for which
+    Add @class{g:type-t} type IDs for the MIME types in formats for which
     serializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -477,11 +540,11 @@
                content-formats-union-deserialize-gtypes)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{#2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add @class{g:type-t} type IDs for the mime types in formats for which
+    Add @class{g:type-t} type IDs for the MIME types in formats for which
     deserializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -498,11 +561,11 @@
                content-formats-union-serialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{#2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add mime types for @class{g:type-t} type IDs in formats for which
+    Add MIME types for @class{g:type-t} type IDs in formats for which
     serializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -519,11 +582,11 @@
                content-formats-union-deserialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2023-08-04}
+ "@version{#2026-01-20}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Add mime types for @class{g:type-t} type IDs in formats for which
+    Add MIME types for @class{g:type-t} type IDs in formats for which
     deserializers are registered.
   @end{short}
   @see-class{gdk:content-formats}
@@ -531,37 +594,6 @@
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-union-deserialize-mime-types)
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_parse                              Since 4.4
-;;; ----------------------------------------------------------------------------
-
-#+gtk-4-4
-(cffi:defcfun ("gdk_content_formats_parse" content-formats-parse)
-    (g:boxed content-formats :return)
- #+liber-documentation
- "@version{#2025-08-04}
-  @argument[str]{a string to parse}
-  @begin{return}
-    The @class{gdk:content-formats} instance for the content formats if
-    @arg{str} is valid.
-  @end{return}
-  @begin{short}
-    Parses the given @arg{str} into a @class{gdk:content-formats} instance and
-    returns the formats.
-  @end{short}
-  Strings printed via the @fun{gdk:content-formats-to-string} function can be
-  read in again successfully using this function.
-
-  If @arg{str} does not describe valid content formats, @code{nil} is returned.
-
-  Since 4.4
-  @see-class{gdk:content-formats}
-  @see-function{gdk:content-formats-to-string}"
-  (str :string))
-
-#+gtk-4-4
-(export 'content-formats-parse)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentFormatsBuilder
@@ -652,7 +684,7 @@
 ;;;     a GdkContentFormatsBuilder
 ;;;
 ;;; mime_type :
-;;;     a mime type
+;;;     a MIME type
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------

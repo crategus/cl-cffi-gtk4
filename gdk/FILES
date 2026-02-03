@@ -35,10 +35,10 @@ Content from the GDK 4.20 Reference Manual
 
  Surfaces, Toplevels, Popups
 
-  gdk4.surface.lisp                GdkSurface                        GDK 4.18 *
+  gdk4.surface.lisp                GdkSurface                        GDK 4.20 .
   gdk4.toplevel-size.lisp          GdkToplevelSize                   GDK 4.18 *
   gdk4.toplevel-layout.lisp        GdkToplevelLayout                 GDK 4.18 *
-  gdk4.toplevel.lisp               GdkToplevel                       GDK 4.20 +
+  gdk4.toplevel.lisp               GdkToplevel                       GDK 4.20 .
   gdk4.popup-layout.lisp           GdkPopupLayout                    GDK 4.18 *
   gdk4.popup.lisp                  GdkPopup                          GDK 4.18 *
 
@@ -51,14 +51,14 @@ Content from the GDK 4.20 Reference Manual
 
  Clipbord, Drag and Drop
 
-  gdk4.content-formats.lisp        GdkContentFormats                 GDK 4.16 +*
+  gdk4.content-formats.lisp        GdkContentFormats                 GDK 4.20 +
   gdk4.content-provider.lisp       GdkContentProvider                GDK 4.20 +
-  gdk4.content-serializer.lisp     GdkContentSerializer              GDK 4.16 +*
-  gdk4.content-deserializer.lisp   GdkContentDeserializer            GDK 4.16 +*
-  gdk4.clipboard.lisp              GdkClipboard                      GDK 4.16 +*
-  gdk4.drag.lisp                   GdkDrag                           GDK 4.20 +
-  gdk4.drop.lisp                   GdkDrop                           GDK 4.16 +*
-  gdk4.drag-surface.lisp           GdkDragSurface                    GDK 4.16 *
+  gdk4.content-serializer.lisp     GdkContentSerializer              GDK 4.20 +
+  gdk4.content-deserializer.lisp   GdkContentDeserializer            GDK 4.20 +
+  gdk4.clipboard.lisp              GdkClipboard                      GDK 4.20 .
+  gdk4.drag.lisp                   GdkDrag                           GDK 4.20 .
+  gdk4.drop.lisp                   GdkDrop                           GDK 4.20 .
+  gdk4.drag-surface.lisp           GdkDragSurface                    GDK 4.20 .
 
  Application launching
 
@@ -77,4 +77,4 @@ Content from the GDK 4.20 Reference Manual
   gdk4.pango-interaction.lisp      Pango interaction                 GDK 4.16 *
   gdk4.cairo-interaction.lisp      Cairo interaction                 GDK 4.16 *
 
-2025-11-02
+2026-02-03

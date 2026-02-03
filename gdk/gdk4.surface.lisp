@@ -2,11 +2,11 @@
 ;;; gdk4.surface.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -533,16 +533,16 @@ lambda (surface region)    :run-last
 
 (cffi:defcfun ("gdk_surface_hide" surface-hide) :void
  #+liber-documentation
- "@version{2025-09-24}
+ "@version{2026-01-24}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
     For toplevel surfaces, withdraws them, so they will no longer be known to
     the window manager.
   @end{short}
   For all surfaces, unmaps them, so they will not be displayed. Normally done
-  automatically as part of the @fun{gtk:widget-hide} function.
+  automatically as part of the @fun{gtk:widget-visible} function.
   @see-class{gdk:surface}
-  @see-function{gtk:widget-hide}"
+  @see-function{gtk:widget-visible}"
   (surface (g:object surface)))
 
 (export 'surface-hide)
