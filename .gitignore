@@ -13,6 +13,7 @@ test/out/
 test/report/
 make-coverage.lisp
 demo/gtk-demo/out/
-demo/getting-started/binary/
-demo/getting-started/README
+demo/gtk-getting-started/binary/
+demo/gtk-getting-started/README
+demo/gtk-getting-started/*.desktop
 example/FILES
