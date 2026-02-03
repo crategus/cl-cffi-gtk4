@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -73,10 +73,10 @@
 
 #+liber-documentation
 (setf (documentation 'im-context-simple 'type)
- "@version{2023-08-29}
+ "@version{2026-01-31}
   @begin{short}
     The @class{gtk:im-context-simple} class is a simple input method context
-    supporting table-based input methods.
+    supporting compose sequences, dead keys and numeric Unicode input.
   @end{short}
 
   @subheading{Compose sequences}
@@ -120,7 +120,7 @@ dead_acute a
 
 (defun im-context-simple-new ()
  #+liber-documentation
- "@version{2023-08-29}
+ "@version{2026-01-31}
   @return{The new @class{gtk:im-context-simple} object.}
   @short{Creates a new simple input method.}
   @see-class{gtk:im-context-simple}"
@@ -129,52 +129,31 @@ dead_acute a
 (export 'im-context-simple-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_im_context_simple_add_table ()
+;;; gtk_im_context_simple_add_table                         Deprecated 4.4
 ;;;
-;;; void
-;;; gtk_im_context_simple_add_table (GtkIMContextSimple *context_simple,
-;;;                                  guint16 *data,
-;;;                                  int max_seq_len,
-;;;                                  int n_seqs);
-;;;
-;;; Adds an additional table to search to the input context. Each row of the
-;;; table consists of max_seq_len key symbols followed by two guint16
-;;; interpreted as the high and low words of a gunicode value. Tables are
-;;; searched starting from the last added.
-;;;
-;;; The table must be sorted in dictionary order on the numeric value of the key
-;;; symbol fields. (Values beyond the length of the sequence should be zero.)
-;;;
-;;; Deprecated 4.4
-;;;
-;;; context_simple :
-;;;     A GtkIMContextSimple
-;;;
-;;; data :
-;;;     the table.
-;;;
-;;; max_seq_len :
-;;;     Maximum length of a sequence in the table (cannot be greater than
-;;;     GTK_MAX_COMPOSE_LEN)
-;;;
-;;; n_seqs :
-;;;     number of sequences in the table
+;;; Adds an additional table to search to the input context.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_im_context_simple_add_compose_file ()
-;;;
-;;; void
-;;; gtk_im_context_simple_add_compose_file (GtkIMContextSimple *context_simple,
-;;;                                         const char *compose_file);
-;;;
-;;; Adds an additional table from the X11 compose file.
-;;;
-;;; context_simple :
-;;;     A GtkIMContextSimple
-;;;
-;;; compose_file :
-;;;     The path of compose file
+;;; gtk_im_context_simple_add_compose_file
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_im_context_simple_add_compose_file"
+               %im-context-simple-add-compose-file) :void
+  (context (g:object im-context-simple))
+  (file :string))
+
+(defun im-context-simple-add-compose-file (context file)
+ #+liber-documentation
+ "@version{2026-01-31}
+  @argument[context]{a @class{gtk:im-context-simple} object}
+  @argument[file]{a pathname or namestring for the path of the compose file}
+  @begin{short}
+    Adds an additional table from the X11 compose file.
+  @end{short}
+  @see-class{gtk:im-context-simple}"
+  (%im-context-simple-add-compose-file context (namestring file)))
+
+(export 'im-context-simple-add-compose-file)
 
 ;;; --- End of file gtk4.im-context-simple.lisp --------------------------------
