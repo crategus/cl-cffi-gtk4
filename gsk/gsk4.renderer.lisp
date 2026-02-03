@@ -2,11 +2,11 @@
 ;;; gsk4.renderer.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -47,6 +47,7 @@
 ;;;     gsk_renderer_new_for_surface
 ;;;
 ;;;     gsk_renderer_realize
+;;;     gsk_renderer_realize_for_display                    Since 4.14
 ;;;     gsk_renderer_unrealize
 ;;;     gsk_renderer_is_realized
 ;;;     gsk_renderer_render
@@ -207,12 +208,47 @@
 (export 'renderer-realize)
 
 ;;; ----------------------------------------------------------------------------
+;;; gsk_renderer_realize_for_display                        Since 4.14
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(cffi:defcfun ("gsk_renderer_realize_for_display" %renderer-realize-for-display)
+    :boolean
+  (renderer (g:object renderer))
+  (display (g:object gdk:display))
+  (err :pointer))
+
+#+gtk-4-14
+(defun renderer-realize-for-display (renderer display)
+ #+liber-documentation
+ "@version{#2026-01-21}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @argument[display]{a @class{gdk:display} object that the renderer will be
+    used on}
+  @return{The boolean whether the renderer was successfully realized.}
+  @begin{short}
+    Creates the resources needed by the renderer.
+  @end{short}
+  Note that it is mandatory to call the @fun{gsk:renderer-unrealize} function
+  before destroying the renderer.
+
+  Since 4.14
+  @see-class{gsk:renderer}
+  @see-class{gdk:display}
+  @see-function{gsk:renderer-unrealize}"
+  (glib:with-error (err)
+    (%renderer-realize-for-display renderer display err)))
+
+#+gtk-4-14
+(export 'renderer-realize-for-display)
+
+;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_unrealize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
  #+liber-documentation
- "@version{#2024-11-07}
+ "@version{2026-01-21}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @begin{short}
     Releases all the resources created by the @fun{gsk:renderer-realize}

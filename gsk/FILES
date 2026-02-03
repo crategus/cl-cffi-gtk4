@@ -6,7 +6,7 @@ Content from the GSK 4.20 Reference Manual
     %   not fully implemented
     &   objects and structures are implemented, but functions are missing
 
-  gsk4.renderer.lisp         Renders a scene                         GSK 4.16 *+
+  gsk4.renderer.lisp         Renders a scene                         GSK 4.20 .
   gsk4.render-node.lisp      Simple scene graph element              GSK 4.20 +
   gsk4.path.lisp             GskPath                                 GSK 4.16 *
   gsk4.path-builder.lisp     GskPathBuilder                          GSK 4.16 *
@@ -17,4 +17,4 @@ Content from the GSK 4.20 Reference Manual
 
   not implemened             Fragment shaders for GSK
 
-2025-11-02
+2026-03-02
