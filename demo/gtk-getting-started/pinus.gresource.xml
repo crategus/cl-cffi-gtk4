@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/crategus/pinus">
+    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">window2.ui</file>
+    <file preprocess="xml-stripblanks">window3.ui</file>
+    <file preprocess="xml-stripblanks">window4.ui</file>
+    <file preprocess="xml-stripblanks">window5.ui</file>
+    <file preprocess="xml-stripblanks">window6.ui</file>
+    <file preprocess="xml-stripblanks">window7.ui</file>
+    <file preprocess="xml-stripblanks">window8.ui</file>
+    <file preprocess="xml-stripblanks">prefs.ui</file>
+    <file preprocess="xml-stripblanks">prefs6.ui</file>
+    <file preprocess="xml-stripblanks">prefs7.ui</file>
+    <file preprocess="xml-stripblanks">prefs8.ui</file>
+    <file preprocess="xml-stripblanks">gears-menu.ui</file>
+  </gresource>
+</gresources>

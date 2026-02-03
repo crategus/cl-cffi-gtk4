@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/com/crategus/pinus/" id="com.crategus.pinus">
+    <key name="font" type="s">
+      <default>'Monospace 12'</default>
+      <summary>Font</summary>
+      <description>The font to be used for content.</description>
+    </key>
+    <key name="transition" type="s">
+      <choices>
+        <choice value='none'/>
+        <choice value='crossfade'/>
+        <choice value='slide-left-right'/>
+      </choices>
+      <default>'none'</default>
+      <summary>Transition</summary>
+      <description>The transition to use when switching tabs.</description>
+    </key>
+    <key name="show-words" type="b">
+      <default>false</default>
+      <summary>Show words</summary>
+      <description>Whether to show a word list in the sidebar.</description>
+    </key>
+    <key name="words" type="as">
+      <default>['APPLICATION-ACTIVATE', 'APPLICATION-STARTUP',
+                'APPLICATION-OPEN', 'PREFS-NEW', 'PREFS-SETTINGS', 'PREFS-FONT',
+                'PREFS-TRANSITION', 'QUIT-ACTIVATED', 'FONT-DESC-TO-STRING',
+                'UPDATE-WORDS', 'PREFERENCES-ACTIVATED', 'POS-TO-TRANSITION',
+                'UPDATE-LINES', 'FIND-WORD', 'TRANSITION-TO-POS',
+                'STRING-TO-FONT-DESC', 'SEARCH-TEXT-CHANGED',
+                'VISIBLE-CHILD-CHANGED', 'WINDOW-NEW', 'WINDOW-OPEN',
+                'WINDOW-SETTINGS', 'WINDOW-STACK', 'WINDOW-SEARCH',
+                'WINDOW-LINES', 'WINDOW-GEARS', 'WINDOW-SIDEBAR',
+                'WINDOW-LINES-LABEL', 'WINDOW-SEARCHBAR', 'WINDOW-SEARCHENTRY',
+                'WINDOW-WORDS']</default>
+      <summary>List of words</summary>
+      <description>The list of words for the sidebar.</description>
+    </key>
+  </schema>
+</schemalist>
