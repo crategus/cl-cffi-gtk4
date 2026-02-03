@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,10 +63,11 @@
 ;;;     gtk_file_chooser_remove_filter
 ;;;     gtk_file_chooser_add_shortcut_folder
 ;;;     gtk_file_chooser_remove_shortcut_folder
-;;;     gtk_file_chooser_add_choice
-;;;     gtk_file_chooser_remove_choice
-;;;     gtk_file_chooser_set_choice
-;;;     gtk_file_chooser_get_choice
+;;;
+;;;     gtk_file_chooser_add_choice                         not implemented
+;;;     gtk_file_chooser_remove_choice                      not implemented
+;;;     gtk_file_chooser_set_choice                         not implemented
+;;;     gtk_file_chooser_get_choice                         not implemented
 ;;;
 ;;; Properties
 ;;;
@@ -517,7 +518,7 @@
                           g:object file
                           :pointer err
                           :boolean)
-     file))
+    file))
 
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-file) g:object
  #+liber-documentation
@@ -636,7 +637,7 @@
 (cffi:defcfun ("gtk_file_chooser_get_files" file-chooser-files)
     (g:object g:list-model)
  #+liber-documentation
- "@version{2023-08-22}
+ "@version{2026-02-03}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @begin{return}
     The @class{g:list-model} object containing a @class{g:file} object for each
@@ -652,6 +653,7 @@
   @end{dictionary}
   @see-class{gtk:file-chooser}
   @see-class{g:file}
+  @see-class{g:list-model}
   @see-class{gtk:file-dialog}"
   (chooser (g:object file-chooser)))
 
@@ -713,9 +715,13 @@
 ;;; gtk_file_chooser_add_filter
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_file_chooser_add_filter" file-chooser-add-filter) :void
+(cffi:defcfun ("gtk_file_chooser_add_filter" %file-chooser-add-filter) :void
+  (chooser (g:object file-chooser))
+  (filter (g:object file-filter)))
+
+(defun file-chooser-add-filter (chooser filter)
  #+liber-documentation
- "@version{2023-08-22}
+ "@version{2026-02-03}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
@@ -731,8 +737,7 @@
   @see-class{gtk:file-filter}
   @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-remove-filter}"
-  (chooser (g:object file-chooser))
-  (filter (g:object file-filter)))
+  (%file-chooser-add-filter chooser (gobject:object-ref filter)))
 
 (export 'file-chooser-add-filter)
 
@@ -743,7 +748,7 @@
 (cffi:defcfun ("gtk_file_chooser_remove_filter" file-chooser-remove-filter)
     :void
  #+liber-documentation
- "@version{#2023-08-22}
+ "@version{2026-02-03}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
@@ -774,7 +779,7 @@
 
 (defun file-chooser-add-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-02-03}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[folder]{a namestring for a filename of the folder to add}
   @begin{return}
@@ -810,7 +815,7 @@
 
 (defun file-chooser-remove-shortcut-folder (chooser folder)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-02-03}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
   @argument[folder]{a namestring for the filename of the folder to remove}
   @begin{return}
