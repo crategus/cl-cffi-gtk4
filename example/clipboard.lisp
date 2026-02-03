@@ -3,12 +3,10 @@
 ;;;; <tt>GdkClipboard</tt> is used for clipboard handling. This demo shows how
 ;;;; to copy and paste text, images, colors or files to and from the clipboard.
 ;;;;
-;;;; You can also use Drag-And-Drop to copy the data from the source to the
+;;;; You can also use Drag-and-Drop to copy the data from the source to the
 ;;;; target.
 ;;;;
-;;;; Last version: 2024-5-14
-
-;; TODO: Improve the example: We get an error when dragging a NIL file.
+;;;; Last version: 2026-01-27
 
 (in-package :gtk4-example)
 
@@ -156,7 +154,8 @@
             (t
              (let ((file (g:object-data button "file")))
                (g:value-set gvalue file "GFile"))))
-      (gdk:content-provider-new-for-value gvalue))))
+      (when (g:value-get gvalue)
+        (gdk:content-provider-new-for-value gvalue)))))
 
 (defun do-clipboard (&optional (application nil))
   (let* ((path (glib-sys:sys-path "resource/clipboard.ui"))

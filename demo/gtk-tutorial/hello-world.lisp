@@ -1,4 +1,6 @@
-;;;; Example Hello World - 2023-4-5
+;;;; Example Hello World
+;;;;
+;;;; Last version: 2026-01-24
 
 (in-package :gtk4-tutorial)
 
@@ -32,5 +34,5 @@
                           (format t "Hello World~%")
                           (gtk:window-destroy window)))
                 (gtk:box-append box button)
-                (gtk:widget-show window))))
+                (gtk:window-present window))))
     (g:application-run app nil)))

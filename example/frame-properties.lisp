@@ -2,7 +2,7 @@
 ;;;;
 ;;;; This example allows to change interactively the appearance of the frame.
 ;;;;
-;;;; 2024-4-6
+;;;; 2026-01-24
 
 (in-package :gtk4-example)
 
@@ -93,11 +93,11 @@
                   (setf label-widget (gtk:frame-label-widget frame))
                   (setf (gtk:widget-sensitive entry) nil)
                   (setf (gtk:frame-label-widget frame) image)
-                  (gtk:widget-show image))
-                  ;; Restore the saved Label Widget.
-                  (progn
-                    (setf (gtk:widget-sensitive entry) t)
-                    (setf (gtk:frame-label-widget frame) label-widget)))))
+                  (setf (gtk:widget-visible image) t))
+                ;; Restore the saved Label Widget.
+                (progn
+                  (setf (gtk:widget-sensitive entry) t)
+                  (setf (gtk:frame-label-widget frame) label-widget)))))
       (gtk:box-append action
                       (make-instance 'gtk:label
                                      :use-markup t

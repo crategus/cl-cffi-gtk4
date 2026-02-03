@@ -9,7 +9,7 @@
 ;;;; If you do not need to wait for a button to be clicked, you can use the
 ;;;; <tt>gtk:alert-dialog-show</tt> function.
 ;;;;
-;;;; 2024-4-4
+;;;; 2026-01-25
 
 (in-package :gtk4-example)
 
@@ -26,7 +26,7 @@
     (g:timeout-add-seconds 10
                            (lambda ()
                              (g:cancellable-cancel cancellable)
-                             glib:+source-remove+))
+                             g:+source-remove+))
     ;; Show alert dialog
     (gtk:alert-dialog-choose dialog
         parent

@@ -1,4 +1,6 @@
-;;;; Example Button packing with GtkBuilder - 2023-4-6
+;;;; Example Button packing with GtkBuilder
+;;;;
+;;;; Last version: 2026-01-24
 
 (in-package :gtk4-tutorial)
 
@@ -66,5 +68,5 @@
                         (lambda (widget)
                           (declare (ignore widget))
                           (gtk:window-destroy window)))
-                (gtk:widget-show window))))
+                (gtk:window-present window))))
     (g:application-run app nil)))

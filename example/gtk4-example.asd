@@ -1,4 +1,4 @@
-;;;; gtk-example.asd
+;;;; gtk4-example.asd
 
 (asdf:defsystem :gtk4-example
   :author "Dieter Kaiser"
@@ -26,7 +26,6 @@
                (:file "box-append")
                (:file "box-center")
                (:file "box-baseline")
-               (:file "box-baseline-vertical")
                (:file "grid-spacing")
                (:file "grid-buildable")
                (:file "revealer")
@@ -185,4 +184,4 @@
                (:file "paintable-emblem")
               ))
 
-;;; --- 2025-08-22 -------------------------------------------------------------
+;;; --- 2026-01-25 -------------------------------------------------------------

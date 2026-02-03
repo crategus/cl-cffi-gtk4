@@ -122,5 +122,5 @@
                             (cairo:set-source-rgb cr 1 1 1)
                             (cairo:paint cr)
                             (cairo:destroy cr)))))
-              (gtk:widget-show window))))
+              (gtk:window-present window))))
     (g:application-run app nil)))

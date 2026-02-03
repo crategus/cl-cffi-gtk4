@@ -431,7 +431,7 @@
     (let ((entry (gtk:search-bar-child searchbar)))
       (setf *searchneedle* nil)
       (setf (gtk:editable-text entry) "")
-      (gtk:filter-changed filter :different))))
+      (gtk:filter-changed filter :different-rewatch))))
 
 (defun demo-search-changed-cb (entry filter)
   (let ((text (gtk:editable-text entry)))
@@ -444,7 +444,7 @@
               (mapcar #'string-upcase
                       (split-sequence:split-sequence #\space text))))
     (tag-searchneedle (gtk:text-view-buffer *sourceview*) *searchneedle*)
-    (gtk:filter-changed filter :different)))
+    (gtk:filter-changed filter :different-rewatch)))
 
 (defun demo-filter-by-name (row)
   (let ((parent (gtk:tree-list-row-parent row))

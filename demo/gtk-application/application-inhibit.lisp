@@ -1,4 +1,6 @@
-;;;; Application Inhibit - 2023-7-16
+;;;; Application Inhibit
+;;;;
+;;;; Last version: 2026-01-24
 
 ;; FIXME: This examples does not work as expected. Try to work out an example
 ;; that demonstrates the gtk:application-inhibit function.
@@ -39,6 +41,6 @@
                         (setf cookie 0)
                         (format t "Application is unhibited: ~a~%" cookie)))))
             ;; Show the application window
-            (gtk:widget-show window))))
+            (gtk:window-present window))))
     ;; Run the application
     (g:application-run app argv)))

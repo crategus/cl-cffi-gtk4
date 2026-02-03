@@ -1,4 +1,6 @@
-;;;; Example Button packing - 2023-4-6
+;;;; Example Button packing
+;;;;
+;;;; Last version: 2026-01-24
 
 (in-package :gtk4-tutorial)
 
@@ -46,7 +48,5 @@
                 (gtk:grid-attach grid button1 0 0 1 1)
                 (gtk:grid-attach grid button2 1 0 1 1)
                 (gtk:grid-attach grid button3 0 1 2 1)
-                (gtk:widget-show window))))
-
+                (gtk:window-present window))))
     (g:application-run app nil)))
-

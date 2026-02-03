@@ -3,7 +3,7 @@
 ;;;; Demonstrates a traditional interface, loaded from a XML description, and
 ;;;; shows how to connect actions to the menu items and toolbar buttons.
 ;;;;
-;;;; Last version: 2024-5-13
+;;;; Last version: 2026-01-25
 
 (in-package :gtk4-example)
 
@@ -17,7 +17,7 @@
                          (lambda ()
                            (setf (gtk:label-text status) "")
                            (setf (g:object-data status "timeout") nil)
-                           glib:+source-remove+)))))
+                           g:+source-remove+)))))
 
 (defun not-implemented (status action parameter)
   (declare (ignore parameter))

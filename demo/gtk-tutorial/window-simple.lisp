@@ -1,7 +1,9 @@
-;;;; Example Simple Window - 2022-11-11
+;;;; Example Simple Window
 ;;;;
 ;;;; This example shows a very simple window. The window has the title "Window".
 ;;;; The window can be sized and moved.
+;;;;
+;;;; Last version: 2026-01-24
 
 (in-package :gtk4-tutorial)
 
@@ -17,5 +19,5 @@
                                                      :resizable nil
                                                      :default-width 200
                                                      :default-height 200)))
-                          (gtk:widget-show window))))
+                          (gtk:window-present window))))
     (g:application-run app nil)))

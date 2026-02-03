@@ -1,4 +1,6 @@
-;;;; Example Icon View Content Type - 2022-11-24
+;;;; Example Icon View Content Type
+;;;;
+;;;; Last version: 2026-01-24
 
 ;; FIXME: The code does not work. GtkIconView uses GdkPixbufs, but
 ;; GtkIconTheme only gives us GdkPaintable objects.
@@ -42,4 +44,4 @@
                                   :application application
                                   :default-width 500
                                   :default-height 350)))
-      (gtk:widget-show window))))
+      (gtk:window-present window))))

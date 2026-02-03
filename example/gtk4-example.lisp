@@ -1,3 +1,5 @@
+;;; gtk4-example.lisp
+
 (defpackage :gtk4-example
   (:use :cffi :iterate :split-sequence :common-lisp)
   (:import-from :gtk)
@@ -26,7 +28,6 @@
            #:do-box-append
            #:do-box-center
            #:do-box-baseline
-           #:do-box-baseline-vertical
            #:do-grid-spacing
            #:do-grid-buildable
            #:do-revealer
@@ -313,4 +314,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
       ;; Run the application
       (g:application-run app nil))))
 
-;;; 2024-10-2
+;;; 2026-01-25

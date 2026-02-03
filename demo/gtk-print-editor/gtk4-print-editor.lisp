@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4-print-editor.lisp
 ;;;
-;;; Copyright (C) 2023 - 2025 Dieter Kaiser
+;;; Copyright (C) 2023 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -22,11 +22,11 @@
 ;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 
-(defpackage :gtk4-print-editor
+(defpackage :gtk-print-editor
   (:use :iterate :common-lisp)
-  (:export :gtk4-print-editor))
+  (:export :gtk-print-editor))
 
-(in-package :gtk4-print-editor)
+(in-package :gtk-print-editor)
 
 (defparameter *menu*
 "<interface>
@@ -233,7 +233,7 @@
           (gtk:font-button-new-with-font (print-data-font data)))
     (gtk:box-append hbox (print-data-fontbutton data))
     (gtk:box-append vbox hbox)
-    (gtk:widget-show vbox)
+    (setf (gtk:widget-visible vbox) t)
     vbox))
 
 (defun custom-widget-apply (operation widget data)
@@ -421,9 +421,9 @@
         (setf *filename* filename)
         (load-file-buffer *buffer* filename)))))
 
-(defun gtk4-print-editor (&rest argv)
+(defun gtk-print-editor (&rest argv)
   (let* ((app (make-instance 'gtk:application
-                             :application-id "com.crategus.gtk4-print-editor"
+                             :application-id "com.crategus.gtk-print-editor"
                              :flags :handles-open))
          (entries (list (list "new" #'activate-new)
                         (list "open" #'activate-open)
@@ -436,7 +436,7 @@
                         (list "page-setup" #'activate-page-setup)
                         (list "preview" #'activate-preview)
                         (list "print" #'activate-print)))
-         (argv (cons "gtk4-print-editor"
+         (argv (cons "gtk-print-editor"
                      (or argv (uiop:command-line-arguments))))
          (path-settings (sys-path "print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path-settings))

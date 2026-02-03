@@ -7,9 +7,9 @@
 ;;;; Warning:
 ;;;;
 ;;;; The <tt>gtk:assistant</tt> implementation is deprecated since 4.10. This
-;;;; widget will be removed from GTk 5.
+;;;; widget will be removed from GTK 5.
 ;;;;
-;;;; 2024-4-19
+;;;; 2026-01-24
 
 (in-package :gtk4-example)
 

@@ -1,6 +1,6 @@
 ;;;; GTK 4 Demo
 ;;;;
-;;;; 2025-05-04
+;;;; 2026-01-24
 
 (in-package :gtk4-demo)
 
@@ -451,7 +451,27 @@
        "resource/builder.ui"
        :keywords
        "GtkBuilder"
-       "gtk:builder"))
+       "gtk:builder"
+       "gtk:builder-new-from-file"
+       "gtk:builder-object"
+       "gtk:shortcut-new"
+       "gtk:keyval-trigger-new"
+       "gtk:named-action-new"
+       "gtk:shortcut-controller-new"
+       "gtk:shortcut-controller-scope"
+       "gtk:shortcut-controller-add-shortcut"
+       "gtk:widget-add-controller"
+       "gtk:widget-insert-action-group"
+       "gtk:window-transient-for"
+       "gtk:window-hide-on-close"
+       "g:simple-action-group-new"
+       "g:object-data"
+       "g:object-set-data-full"
+       "g:source-remove"
+       "g:timeout-add"
+       "g:+source-remove+"
+       "g:action-name"
+       "g:action-map-add-action-entries"))
 
      "Windows"
      (("Simple Window"
@@ -580,7 +600,8 @@
        "gtk:alert-dialog-choose-finish"
        "g:cancellable-new"
        "g:canellable-cancel"
-       "g:timeout-add-seconds")
+       "g:timeout-add-seconds"
+       "g:+source-remove+")
       ("Assistant"
        ":window"
        "DO-ASSISTANT"
@@ -595,7 +616,9 @@
        "gtk:assistant-commit"
        "gtk:assistant-page-title"
        "gtk:assistant-page-type"
-       "gtk:assistant-page-complete")
+       "gtk:assistant-page-complete"
+       "::prepare"
+       "::apply")
        ("Application Window"
         ":window"
         "DO-APPLICATION-WINDOW"
@@ -605,6 +628,8 @@
         "GtkApplicationWindow"
         "gtk:application-window"
         "gtk:application-menubar"
+        "GtkBuilder"
+        "gtk:builder"
         "gtk:builder-object"
         "gtk:builder-add-from-string"))
 
@@ -618,7 +643,24 @@
        "GtkBox"
        "gtk:box"
        "gtk:box-append"
-       "gtk:button-new-with-label")
+       "gtk:button-new-with-label"
+       "gtk:orientation")
+      ("Box Baseline"
+       ":window"
+       "DO-BOX-BASELINE"
+       "gtk4-example"
+       "box-baseline.lisp"
+       :keywords
+       "GtkBox"
+       "gtk:box"
+       "gtk:box-append"
+       "gtk:orientation"
+       "gtk:align"
+       "gtk:orientation"
+       "gtk:css-provider"
+       "gtk:css-provider-load-from-string"
+       "gtk:widget-add-css-class"
+       "gtk:widget-add-provider")
       ("Center Box"
        ":window"
        "DO-BOX-CENTER"
@@ -627,9 +669,15 @@
        :keywords
        "GtkCenterBox"
        "gtk:center-box"
+       "gtk:orientation"
+       "gtk:align"
        "gtk:center-box-start-widget"
        "gtk:center-box-center-widget"
-       "gtk:center-box-end-widget")
+       "gtk:center-box-end-widget"
+       "gtk:css-provider"
+       "gtk:css-provider-load-from-string"
+       "gtk:widget-add-css-class"
+       "gtk:widget-add-provider")
       ("Grid with spacing"
        ":window"
        "DO-GRID-SPACING"
@@ -994,6 +1042,7 @@
        :keywords
        "GtkAspectFrame"
        "gtk:aspect-frame"
+       "GtkDrawingArea"
        "gtk:drawing-area"
        "gtk:drawing-area-set-draw-func"
        "gtk:widget-color"
@@ -1177,7 +1226,6 @@
        "gtk:info-bar-add-child"
        "gtk:info-bar-add-button"
        "gtk:info-bar-message-type"
-       "gtk:widget-hide"
        ;; Properties
        ":no-show-all")
       ("Progress Bar"
@@ -1286,7 +1334,6 @@
        "gtk:list-item-item"
        "gtk:single-selection-new"
        "gtk:signal-list-item-factory-new"
-       "gtk:widget-display"
        "gtk:widget-root"
        "gtk:widget-first-child"
        "gtk:widget-next-sibling"
@@ -2356,7 +2403,6 @@
        "gdk:app-launch-context-default-for-uri"
        "gdk:app-launch-context-set-timestamp"
        "gdk:display-app-launch-context"
-       "gtk:widget-display"
        "g:app-info-launch-default-for-uri"
        "g:app-info-name"
        "g:type-from-instance"
@@ -2373,7 +2419,6 @@
        "GdkAppLaunchContext"
        "gdk:app-launch-context"
        "gdk:display-app-launch-context"
-       "gtk:widget-display"
        "g:app-info-launch-default-for-uri-async"
        "g:app-info-launch-default-for-uri-finish")
       ("Frame Clock"

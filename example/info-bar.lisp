@@ -6,7 +6,7 @@
 ;;;; has a horizontal action area at the bottom, the info bar has a vertical
 ;;;; action area at the side.
 ;;;;
-;;;; 2024-4-4
+;;;; 2026-01-24
 
 (in-package :gtk4-example)
 
@@ -21,7 +21,7 @@
     (g:signal-connect infobar "response"
                       (lambda (widget response)
                         (declare (ignore response))
-                        (gtk:widget-hide widget)))
+                        (setf (gtk:widget-visible widget) nil)))
     infobar))
 
 (defun do-info-bar (&optional application)
@@ -49,13 +49,12 @@
         (lambda (gesture n x y)
           (declare (ignore gesture n x y))
           (when (not (gtk:widget-is-visible infobar))
-            (gtk:widget-show infobar))))
+            (setf (gtk:widget-visible infobar) t))))
     ;; Pack and show the widgets
     (gtk:box-append vbox infobar)
     (gtk:box-append vbox label)
-    (gtk:widget-hide infobar)
+    (setf (gtk:widget-visible infobar) nil)
     (gtk:window-present window)))
-
 
 (defun do-info-bar-1 (&optional application)
   (let* ((vbox (make-instance 'gtk:box
@@ -78,7 +77,7 @@
        (lambda (widget response-id)
          (declare (ignore widget))
          (format t "response-id is ~A~%" response-id)
-         (gtk:widget-hide infobar)))
+         (setf (gtk:widget-visible infobar) nil)))
     ;; Show the info bar
     (gtk:box-append vbox infobar)
     (setf (gtk:label-text message) "An Info Message in the content area.")
