@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -1022,18 +1022,16 @@ lambda (renderer editable path)    :run-first
 
 (defun cell-renderer-fixed-size (cell)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-01-31}
   @syntax{(gtk:cell-renderer-fixed-size cell) => width, height}
   @syntax{(setf (gtk:cell-renderer-fixe-size cell) (list width height))}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[width]{an integer for the width of the cell renderer, or -1}
   @argument[height]{an integer for the height of the cell renderer, or -1}
   @begin{short}
-    The @fun{gtk:cell-renderer-fixed-size} function returns @arg{width} and
-    @arg{height} with the appropriate size of @arg{cell}.
+    Gets or sets @arg{width} and @arg{height} with the appropriate size of
+    @arg{cell}.
   @end{short}
-  The @setf{gtk:cell-renderer-fixed-size} function sets the renderer size to be
-  explicit, independent of the properties set.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.
@@ -1069,19 +1067,17 @@ lambda (renderer editable path)    :run-first
 
 (defun cell-renderer-alignment (cell)
  #+liber-documentation
- "@version{2023-12-03}
+ "@version{2026-01-31}
   @syntax{(gtk:cell-renderer-alignment cell) => xalign, yalign}
   @syntax{(setf (gtk:cell-renderer-alignment cell) (list xalign yalign))}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[xalign]{a single float for the x alignment of the cell renderer}
   @argument[yalign]{a single float for the y alignment of the cell renderer}
   @begin{short}
-    The @fun{gtk:cell-renderer-alignment} function returns the appropriate
-    @arg{xalign} and @arg{yalign} values of the cell renderer.
+    Gets or sets the alignment of the cell renderer within its available space.
   @end{short}
-  The @setf{gtk:cell-renderer-alignment} function sets the alignment of the
-  cell renderer within its available space.The @arg{xalign} and @arg{yalign}
-  values are coerced to single floats before assignment.
+  The @arg{xalign} and @arg{yalign} values are coerced to single floats before
+  assignment.
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((xalign :float) (yalign :float))
     (%cell-renderer-alignment cell xalign yalign)
@@ -1111,18 +1107,15 @@ lambda (renderer editable path)    :run-first
 
 (defun cell-renderer-padding (cell)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-01-31}
   @syntax{(gtk:cell-renderer-padding cell) => xpad, ypad}
   @syntax{(setf (gtk:cell-renderer-padding cell) (list xpad ypad))}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[xpad]{an integer for the x padding of the cell renderer}
   @argument[ypad]{an integer for the y padding of the cell renderer}
   @begin{short}
-    The @fun{gtk:cell-renderer-padding} function returns the appropriate
-    @arg{xpad} and @arg{ypad} of the cell renderer.
+    Gets or sets the padding of the cell renderer.
   @end{short}
-  The @setf{gtk:cell-renderer-padding} function sets the padding of the cell
-  renderer.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
     List views use widgets for displaying their contents.

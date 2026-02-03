@@ -2,11 +2,11 @@
 ;;; gtk4.emoji-chooser.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'emoji-chooser 'type)
- "@version{2025-07-24}
+ "@version{2026-01-31}
   @begin{short}
     The @class{gtk:emoji-chooser} widget is used by text widgets such as the
     @class{gtk:entry} or @class{gtk:text-view} widgets to offer users a
@@ -94,6 +94,21 @@
 
   The @class{gtk:emoji-chooser} widget emits the
   @sig[gtk:emoji-chooser]{emoji-picked} signal when an Emoji is selected.
+  @begin[Shortcuts and Gestures]{dictionary}
+    The @class{gtk:emoji-chooser} installation supports the following keyboard
+    shortcuts:
+    @begin[code]{table}
+      @entry[Ctrl+N]{scrolls to the next section.}
+      @entry[Ctrl+P]{scrolls to the previous section.}
+    @end{table}
+  @end{dictionary}
+  @begin[Action Details]{dictionary}
+    The @class{gtk:emoji-chooser} installation defines a set of built-in
+    actions:
+    @begin[code]{table}
+      @entry[scroll.section]{scrolls to the next or previous section.}
+    @end{table}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 popover
@@ -108,16 +123,9 @@ popover
     @code{popover}. The contents of the popover are largely implementation
     defined and supposed to inherit general styles. The top searchbar used to
     search emoji and gets the @code{.emoji-searchbar} style class itself. The
-    bottom toolbar used to switch between different emoji categories consists of
-    buttons with the @code{.emoji-section} style class and gets the
+    bottom toolbar used to switch between different emoji categories consists
+    of buttons with the @code{.emoji-section} style class and gets the
     @code{.emoji-toolbar} style class itself.
-  @end{dictionary}
-  @begin[Action Details]{dictionary}
-    @subheading{The \"scroll.section\" action}
-      Scrolls to the next or previous section.
-      @begin[code]{table}
-        @entry[direction]{1 to scroll forward, -1 to scroll back}
-      @end{table}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @begin[emoji-chooser::emoji-picked]{signal}
@@ -142,7 +150,7 @@ lambda (chooser text)    :run-last
 
 (defun emoji-chooser-new ()
  #+liber-documentation
- "@version{2023-08-28}
+ "@version{2026-01-31}
   @return{The new @class{gtk:emoji-chooser} widget.}
   @short{Creates a new Emoji chooser dialog.}
   @see-class{gtk:emoji-chooser}"

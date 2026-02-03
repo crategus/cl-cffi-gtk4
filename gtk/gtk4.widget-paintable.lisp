@@ -2,11 +2,11 @@
 ;;; gtk4.widget-paintable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -74,7 +74,7 @@
     "widget" "GtkWidget" t t)))
 
 (setf (documentation 'widget-paintable 'type)
- "@version{2023-08-31}
+ "@version{2026-01-31}
   @begin{short}
     The @class{gtk:widget-paintable} object is an implementation of the
     the @class{gdk:paintable} interface that allows displaying the contents of
@@ -86,13 +86,12 @@
   draw nothing or where it does not have a size, like when it is hidden, and
   report no size in that case.
 
-  Of course, the @class{gtk:widget-paintable} object allows you to monitor
-  widgets for size changes by emitting the @sig[gdk:paintable]{invalidate-size}
-  signal whenever the size of the widget changes as well as for visual changes
-  by emitting the @sig[gdk:paintable]{invalidate-contents} signal whenever the
-  widget changes.
+  The @class{gtk:widget-paintable} object allows you to monitor widgets for size
+  changes by emitting the @sig[gdk:paintable]{invalidate-size} signal whenever
+  the size of the widget changes as well as for visual changes by emitting the
+  @sig[gdk:paintable]{invalidate-contents} signal whenever the widget changes.
 
-  You can of course use a @class{gtk:widget-paintable} object everywhere a
+  You can use a @class{gtk:widget-paintable} object everywhere a
   @class{gdk:paintable} object is allowed, including using it on a
   @class{gtk:picture} widget, or one of its parents, that it was set on itself
   via the @fun{gtk:picture-paintable} function. The paintable will take care of
@@ -118,7 +117,7 @@
 (setf (liber:alias-for-function 'widget-paintable-widget)
       "Accessor"
       (documentation 'widget-paintable-widget 'function)
- "@version{2025-08-13}
+ "@version{2026-01-31}
   @syntax{(gtk:widget-paintable-widget object) => widget}
   @syntax{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
@@ -129,7 +128,8 @@
     observed.
   @end{short}
   Returns @code{nil} if none.
-  @see-class{gtk:widget-paintable}")
+  @see-class{gtk:widget-paintable}
+  @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_paintable_new
@@ -138,7 +138,7 @@
 (cffi:defcfun ("gtk_widget_paintable_new" widget-paintable-new)
     (g:object widget-paintable :return)
  #+liber-documentation
- "@version{2024-11-02}
+ "@version{2026-01-31}
   @argument[widget]{a @class{gtk:widget} object or @code{nil}}
   @return{The new @class{gtk:widget-paintable} object.}
   @short{Creates a new paintable widget observing the given @arg{widget}.}

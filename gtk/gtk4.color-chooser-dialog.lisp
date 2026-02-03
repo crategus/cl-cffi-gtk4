@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -91,7 +91,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-chooser-dialog 'type)
- "@version{2024-05-21}
+ "@version{2026-01-24}
   @begin{short}
     The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a
     color.
@@ -144,8 +144,7 @@
       (gtk:drawing-area-set-draw-func area
           (lambda (widget cr width height)
             (declare (ignore widget width height))
-            (let (;(cr (pointer cr))
-                  (red (gdk:rgba-red bg-color))
+            (let ((red (gdk:rgba-red bg-color))
                   (green (gdk:rgba-green bg-color))
                   (blue (gdk:rgba-blue bg-color)))
                   ;; Paint the current color on the drawing area
@@ -184,7 +183,7 @@
                       (setf bg-color (gtk:color-chooser-rgba dialog))
                       (gtk:widget-queue-draw area))
                     (gtk:window-destroy dialog)))
-              (gtk:widget-show dialog))))
+              (gtk:window-present dialog))))
       ;; Show the window
       (gtk:window-present window))))
     @end{pre}

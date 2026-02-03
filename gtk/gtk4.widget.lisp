@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -869,7 +869,7 @@
 
 #+liber-documentation
 (setf (documentation 'widget 'type)
- "@version{2025-08-04}
+ "@version{2026-01-24}
   @begin{short}
     The @class{gtk:widget} class is the base class all widgets in GTK derive
     from. It manages the widget life cycle, layout, states and style.
@@ -1031,8 +1031,7 @@ lambda (widget)    :run-first
       @begin[code]{simple-table}
         @entry[widget]{The @class{gtk:widget} object that received the signal.}
       @end{simple-table}
-      Emitted when the widget is hidden, for example with the
-      @fun{gtk:widget-hide} function.
+      Emitted when the widget is hidden.
     @end{signal}
     @begin[widget::keynav-failed]{signal}
       @begin{pre}
@@ -1130,8 +1129,7 @@ lambda (widget)
       @begin[code]{simple-table}
         @entry[widget]{The @class{gtk:widget} object that received the signal.}
       @end{simple-table}
-      Emitted when the widget is shown, for example with the
-      @fun{gtk:widget-show} function.
+      Emitted when the widget is shown.
     @end{signal}
     @begin[widget::state-flags-changed]{signal}
       @begin{pre}
@@ -2313,16 +2311,16 @@ lambda (widget)    :run-last
 
 (defun widget-show (widget)
  #+liber-documentation
- "@version{2025-02-13}
+ "@version{2026-01-24}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to be displayed.
   @end{short}
   Any widget that is not shown will not appear on the screen. Remember that you
-  have to show the containers containing a widget, in addition to the widget
-  itself, before it will appear onscreen. When a toplevel container is shown,
+  have to show the widgets containing a widget, in addition to the widget
+  itself, before it will appear onscreen. When a toplevel widget is shown,
   it is immediately realized and mapped. Other shown widgets are realized and
-  mapped when their toplevel container is realized and mapped.
+  mapped when their toplevel widget is realized and mapped.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Use the @fun{gtk:widget-visible}
     function instead.
@@ -3715,34 +3713,29 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
  #+liber-documentation
- "@version{#2025-02-13}
+ "@version{2026-01-24}
   @syntax{(gtk:widget-child-visible widget) => visible}
   @syntax{(setf (gtk:widget-child-visible widget) visible)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[visible]{if @em{true}, @arg{widget} should be mapped along with its
     parent}
   @begin{short}
-    The @fun{gtk:widget-child-visible} function returns @em{true} if the widget
-    is mapped with the parent.
+    Gets or sets whether the widget should be mapped along with its parent.
   @end{short}
-  The @setf{gtk:widget-child-visible} function sets whether the widget should be
-  mapped along with its parent when its parent is mapped and the widget has been
-  shown with the @fun{gtk:widget-show} function.
-
   The child visibility can be set for the widget before it is added to a
-  container with the @fun{gtk:widget-parent} function, to avoid mapping children
-  unnecessary before immediately unmapping them. However it will be reset to its
-  default state of @em{true} when the widget is removed from a container.
+  container with the @fun{gtk:widget-set-parent} function, to avoid mapping
+  children unnecessary before immediately unmapping them. However it will be
+  reset to its default state of @em{true} when the widget is removed from a
+  container.
 
   Note that changing the child visibility of a widget does not queue a resize
   on the widget. Most of the time, the size of a widget is computed from all
   visible children, whether or not they are mapped. If this is not the case,
   the container can queue a resize itself.
 
-  This function is only useful for container implementations and never should
+  This function is only useful for widget implementations and should never
   be called by an application.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-show}
   @see-function{gtk:widget-parent}"
   (widget (g:object widget)))
 

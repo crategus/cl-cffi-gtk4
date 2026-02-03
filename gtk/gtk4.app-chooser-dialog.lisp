@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2025 Dieter Kaiser
+;;; Copyright (C) 2013 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -102,11 +102,13 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-dialog 'type)
- "@version{2023-08-29}
+ "@version{2026-02-03}
   @begin{short}
     The @class{gtk:app-chooser-dialog} widget shows a
     @class{gtk:app-chooser-widget} widget inside a @class{gtk:dialog} widget.
   @end{short}
+
+  @image[app-chooser-dialog]{Figure: GtkAppChooserDialog}
 
   Note that the @class{gtk:app-chooser-dialog} widget does not have any
   interesting methods of its own. Instead, you should get the embedded
@@ -145,7 +147,7 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-gfile)
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
- "@version{2025-08-13}
+ "@version{2026-02-03}
   @syntax{(gtk:app-chooser-dialog-gfile object) => file}
   @syntax{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
@@ -176,7 +178,7 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-heading)
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
- "@version{2025-08-13}
+ "@version{2026-02-03}
   @syntax{(gtk:app-chooser-dialog-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
@@ -199,7 +201,7 @@
 (cffi:defcfun ("gtk_app_chooser_dialog_new" app-chooser-dialog-new)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-07-23}
+ "@version{2026-02-03}
   @argument[parent]{a @class{gtk:window}, or @code{nil}}
   @argument[flags]{a @sym{gtk:dialog-flags} value for the flags for this dialog}
   @argument[file]{a @class{g:file} object}
@@ -228,10 +230,10 @@
 (cffi:defcfun ("gtk_app_chooser_dialog_new_for_content_type"
                app-chooser-dialog-new-for-content-type) (g:object widget)
  #+liber-documentation
- "@version{#2025-07-23}
+ "@version{2026-03-03}
   @argument[parent]{a @class{gtk:window}, or @code{nil}}
   @argument[flags]{a @sym{gtk:dialog-flags} value for the flags for this dialog}
-  @argument[content-type]{a content type string}
+  @argument[ctype]{a content type string}
   @return{The newly created @class{gtk:app-chooser-dialog} widget.}
   @begin{short}
     Creates a new application chooser dialog for the provided content type, to
@@ -245,7 +247,7 @@
   @see-symbol{gtk:dialog-flags}"
   (parent (g:object gtk:window))
   (flags dialog-flags)
-  (content-type :string))
+  (ctype :string))
 
 (export 'app-chooser-dialog-new-for-content-type)
 
@@ -256,7 +258,7 @@
 (cffi:defcfun ("gtk_app_chooser_dialog_get_widget" app-chooser-dialog-widget)
     (g:object widget)
  #+liber-documentation
- "@version{#2024-04-26}
+ "@version{2026-02-03}
   @argument[dialog]{a @class{gtk:app-chooser-dialog} widget}
   @return{The @class{gtk:app-chooser-widget} widget of @arg{dialog}.}
   @begin{short}
@@ -267,7 +269,7 @@
   @end{dictionary}
   @see-class{gtk:app-chooser-dialog}
   @see-class{gtk:app-chooser-widget}"
-  (widget (g:object app-chooser-dialog)))
+  (dialog (g:object app-chooser-dialog)))
 
 (export 'app-chooser-dialog-widget)
 
