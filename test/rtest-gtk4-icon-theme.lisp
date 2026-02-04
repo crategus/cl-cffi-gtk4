@@ -87,7 +87,6 @@
 ;;;     changed
 
 (test gtk-icon-theme-signals
-  ;; Query info for "changed" signal
   (let ((query (g:signal-query (g:signal-lookup "changed" "GtkIconTheme"))))
     (is (string= "changed" (g:signal-query-signal-name query)))
     (is (string= "GtkIconTheme"
@@ -125,7 +124,22 @@
   (is (typep (gtk:icon-theme-for-display (gdk:display-default)) 'gtk:icon-theme)))
 
 ;;;     gtk_icon_theme_add_search_path
+
+(test gtk-icon-theme-add-search-path
+  (glib-test:with-check-memory (:strong 2)
+    (let ((path (namestring (glib-sys:sys-path "test/")))
+          (theme (gtk:icon-theme-for-display (gdk:display-default))))
+      (is-false (gtk:icon-theme-add-search-path theme path))
+      (is (member path (gtk:icon-theme-search-path theme) :test #'string=)))))
+
 ;;;     gtk_icon_theme_add_resource_path
+
+(test gtk-icon-theme-add-resource-path
+  (glib-test:with-check-memory (:strong 2)
+    (let ((path "com/crategus/test/")
+          (theme (gtk:icon-theme-for-display (gdk:display-default))))
+      (is-false (gtk:icon-theme-add-resource-path theme path))
+      (is (member path (gtk:icon-theme-resource-path theme) :test #'string=)))))
 
 ;;;     gtk_icon_theme_has_icon
 

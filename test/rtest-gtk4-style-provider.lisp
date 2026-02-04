@@ -62,4 +62,4 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-;;; 2024-11-2
+;;; 2024-11-02

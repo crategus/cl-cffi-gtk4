@@ -2,11 +2,11 @@
 ;;; gtk4.keyboard-accelerators.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -41,6 +41,7 @@
 ;;;     gtk_accelerator_name_with_keycode                  not implemented
 ;;;     gtk_accelerator_get_label_with_keycode             not implemented
 ;;;     gtk_accelerator_get_default_mod_mask
+;;;     gtk_accelerator_get_accessible_label               Since 4.22
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -306,5 +307,11 @@
   @see-symbol{gdk:modifier-type}")
 
 (export 'accelerator-default-mod-mask)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accelerator_get_accessible_label                    Since 4.22
+;;;
+;;; Generates an accessible description of an accelerator.
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.keyboard-accelerators.lisp ----------------------------

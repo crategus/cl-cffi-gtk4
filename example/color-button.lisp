@@ -4,7 +4,7 @@
 ;;;; "Blue". The handler for the <tt>"color-set"</tt> signal prints the selected
 ;;;; color on the console.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-04-06
 
 (in-package :gtk4-example)
 

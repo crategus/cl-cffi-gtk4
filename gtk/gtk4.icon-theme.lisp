@@ -2,11 +2,11 @@
 ;;; gtk4.icon-theme.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -35,12 +35,6 @@
 ;;;
 ;;;     GtkIconTheme
 ;;;     GtkIconLookupFlags
-;;;
-;;;     GTK_ICON_THEME_ERROR
-;;;     GTK_TYPE_ICON_THEME_ERROR
-;;;     GTK_TYPE_ICON_LOOKUP_FLAGS
-;;;
-;;;     GtkIconThemeError
 ;;;
 ;;; Accessors
 ;;;
@@ -101,7 +95,7 @@
 (setf (liber:alias-for-symbol 'icon-lookup-flags)
       "GFlags"
       (liber:symbol-documentation 'icon-lookup-flags)
- "@version{2025-07-22}
+ "@version{2026-02-03}
   @begin{declaration}
 (gobject:define-gflags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
@@ -125,40 +119,8 @@
   @begin{short}
     Used to specify options for the @fun{gtk:icon-theme-lookup-icon} function.
   @end{short}
-  @see-class{gtk:icon-theme}")
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_ICON_THEME_ERROR
-;;;
-;;; #define GTK_ICON_THEME_ERROR gtk_icon_theme_error_quark ()
-;;;
-;;; The GQuark used for GtkIconThemeError errors.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_TYPE_ICON_THEME_ERROR
-;;;
-;;; #define GTK_TYPE_ICON_THEME_ERROR (gtk_icon_theme_error_get_type ())
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_TYPE_ICON_LOOKUP_FLAGS
-;;;
-;;; #define GTK_TYPE_ICON_LOOKUP_FLAGS (gtk_icon_lookup_flags_get_type ())
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; enum GtkIconThemeError
-;;;
-;;; Error codes for GtkIconTheme operations.
-;;;
-;;;
-;;; GTK_ICON_THEME_NOT_FOUND :
-;;;     The icon specified does not exist in the theme
-;;;
-;;; GTK_ICON_THEME_FAILED :
-;;;     An unspecified error occurred.
-;;; ----------------------------------------------------------------------------
+  @see-class{gtk:icon-theme}
+  @see-function{gtk:icon-theme-lookup-icon}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkIconTheme
@@ -187,21 +149,22 @@
 
 #+liber-documentation
 (setf (documentation 'icon-theme 'type)
- "@version{2025-09-22}
+ "@version{2026-02-03}
   @begin{short}
     The @class{gtk:icon-theme} class provides a facility for looking up icons
     by name and size.
   @end{short}
   The main reason for using a name rather than simply providing a filename is
   to allow different icons to be used depending on what icon theme is selected
-  by the user. The operation of icon themes on Linux and Unix follows the Icon
-  Theme Specification. There is a default icon theme, named Hicolor where
+  by the user. The operation of icon themes on Linux and Unix follows the
+  @url[https://specifications.freedesktop.org/icon-theme/latest/]{Icon Theme
+  Specification}. There is a default icon theme, named Hicolor where
   applications should install their icons, but more additional application
   themes can be installed as operating system vendors and users choose.
 
   In many cases, named themes are used indirectly, via the @class{gtk:image}
-  widget rather than directly, but looking up icons directly is also simple. The
-  @class{gtk:icon-theme} object acts as a database of all the icons in the
+  widget rather than directly, but looking up icons directly is also simple.
+  The @class{gtk:icon-theme} object acts as a database of all the icons in the
   current theme. You can create new @class{gtk:icon-theme} objects, but it is
   much more efficient to use the standard icon theme of the @class{gtk:widget}
   widget so that the icon information is shared with other people looking up
@@ -452,19 +415,23 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_add_search_path
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path)
+(cffi:defcfun ("gtk_icon_theme_add_search_path" %icon-theme-add-search-path)
     :void
+  (theme (g:object icon-theme))
+  (path :string))
+
+(defun icon-theme-add-search-path (theme path)
  #+liber-documentation
- "@version{#2025-03-29}
+ "@version{2026-02-03}
   @argument[theme]{a @class{gtk:icon-theme} object}
-  @argument[path]{a string for the directory name to append to the icon path}
+  @argument[path]{a pathname or namestring for the directory name to append to
+    the icon path}
   @begin{short}
     Appends a directory to the search path.
   @end{short}
   @see-class{gtk:icon-theme}
   @see-function{gtk:icon-theme-search-path}"
-  (theme (g:object icon-theme))
-  (path :string))
+  (%icon-theme-add-search-path theme (namestring path)))
 
 (export 'icon-theme-add-search-path)
 
@@ -475,7 +442,7 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_add_resource_path"
                icon-theme-add-resource-path) :void
  #+liber-documentation
- "@version{#2025-03-29}
+ "@version{2026-02-03}
   @argument[theme]{a @class{gtk:icon-theme} object}
   @argument[path]{a string for a resource path}
   @begin{short}
@@ -642,7 +609,7 @@ lambda (theme)    :run-last
   A size of -1 means that the icon is available in a scalable format.
   @see-class{gtk:icon-theme}"
   (let ((ptr (%icon-theme-icon-sizes theme name)))
-    (cffi:foreign-array-to-lisp ptr '(:array :int 1 ) :adjustable t)))
+    (cffi:foreign-array-to-lisp ptr '(:array :int 1) :adjustable t)))
 
 (export 'icon-theme-icon-sizes)
 

@@ -282,11 +282,11 @@ Gestures and event handling
 
 Keyboard shortcuts
 
-  gtk4.keyboard-accelerators.lisp      Utilities for accelerators    GTK 4.18 *+
-  gtk4.shortcut-manager.lisp           GtkShortcutManager            GTK 4.18 *
-  gtk4.shortcut.lisp                   GtkShortcut                   GTK 4.18 *+
-  gtk4.shortcut-trigger.lisp           GtkShortcutTrigger            GTK 4.18 *+
-  gtk4.shortcut-action.lisp            GtkShortcutAction             GTK 4.18 *
+  gtk4.keyboard-accelerators.lisp      Utilities for accelerators    GTK 4.20 +
+  gtk4.shortcut-manager.lisp           GtkShortcutManager            GTK 4.20 .
+  gtk4.shortcut.lisp                   GtkShortcut                   GTK 4.20 +
+  gtk4.shortcut-trigger.lisp           GtkShortcutTrigger            GTK 4.20 +
+  gtk4.shortcut-action.lisp            GtkShortcutAction             GTK 4.20 .
 
 Data exchange, Clipboards and Drag-and-Drop
 
@@ -298,17 +298,17 @@ Data exchange, Clipboards and Drag-and-Drop
 
 GTK Core Reference
 
-  gtk4.main-loop.lisp                  Initialization                GTK 4.18 *
+  gtk4.main-loop.lisp                  Initialization                GTK 4.20 .
   gtk4.version.lisp                    Version Information           GTK 4.20 .
   gtk4.settings.lisp                   GtkSettings                   Gtk 4.20 .
-  gtk4.enumerations.lisp               Standard Enumerations         GTK 4.20 +.
+  gtk4.enumerations.lisp               Standard Enumerations         GTK 4.20 +
 
 Theming in GTK
 
-  gtk4.style-provider.lisp             GtkStyleProvider              GTK 4.18 *
+  gtk4.style-provider.lisp             GtkStyleProvider              GTK 4.20 .
   gtk4.css-provider.lisp               GtkCssProvider                GTK 4.20 .
   gtk4.icon-paintable.lisp             GtkIconPaintable              GTK 4.20 +
-  gtk4.icon-theme.lisp                 GtkIconTheme                  GTK 4.18 *
+  gtk4.icon-theme.lisp                 GtkIconTheme                  GTK 4.20 .
 
 Deprecated
 
