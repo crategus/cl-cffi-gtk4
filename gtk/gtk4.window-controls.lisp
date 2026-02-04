@@ -2,11 +2,11 @@
 ;;; gtk4.window-controls.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -42,8 +42,8 @@
 ;;;     gtk_window_controls_get_decoration_layout
 ;;;     gtk_window_controls_set_decoration_layout
 ;;;     gtk_window_controls_get_empty
-;;;     gtk_window_controls_get_use_native_controls
-;;;     gtk_window_controls_set_use_native_controls
+;;;     gtk_window_controls_get_use_native_controls         Since 4.18
+;;;     gtk_window_controls_set_use_native_controls         Since 4.18
 ;;;
 ;;; Functions
 ;;;
@@ -54,7 +54,7 @@
 ;;;     decoration-layout
 ;;;     empty
 ;;;     side
-;;;     use-native-controls
+;;;     use-native-controls                                 Since 4.18
 ;;;
 ;;; Object Hierarchy
 ;;;

@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2025 Dieter Kaiser
+;;; Copyright (C) 2019 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -54,7 +54,7 @@
 ;;;     gtk_event_controller_get_current_event_device
 ;;;     gtk_event_controller_get_current_event_state
 ;;;     gtk_event_controller_get_current_event_time
-;;;     gtk_event_contoller_set_static_name                Since 4.8
+;;;     gtk_event_contoller_set_static_name                 Since 4.8
 ;;;
 ;;; Properties
 ;;;
@@ -435,7 +435,7 @@
 (export 'event-controller-current-event-time)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_set_static_name
+;;; gtk_event_controller_set_static_name                    not needed
 ;;;
 ;;; Sets a name on the controller that can be used for debugging.
 ;;;
