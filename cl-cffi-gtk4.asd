@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4.asd
 ;;;
-;;; Copyright (C) 2021 - 2025 Dieter Kaiser
+;;; Copyright (C) 2021 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),

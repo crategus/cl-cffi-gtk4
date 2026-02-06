@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -107,7 +107,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-button 'type)
- "@version{2025-07-31}
+ "@version{2026-02-05}
   @begin{short}
     The @class{gtk:font-button} widget is a button which displays the currently
     selected font and allows to open a font chooser dialog to change the font.
@@ -158,7 +158,7 @@ lambda (fontbutton)    :run-first
   @see-slot{gtk:font-button-use-font}
   @see-slot{gtk:font-button-use-size}
   @see-class{gtk:font-chooser-dialog}
-  @see-class{gtk:color-button}")
+  @see-class{gtk:font-dialog-button}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -176,7 +176,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-modal)
       "Accessor"
       (documentation 'font-button-modal 'function)
- "@version{2025-09-29}
+ "@version{2026-02-05}
   @syntax{(gtk:font-button-modal object) => modal}
   @syntax{(setf (gtk:font-button-modal object) modal)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -189,7 +189,8 @@ lambda (fontbutton)    :run-first
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}")
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}")
 
 ;;; --- gtk:font-button-title --------------------------------------------------
 
@@ -203,7 +204,7 @@ lambda (fontbutton)    :run-first
 (setf (liber:alias-for-function 'font-button-title)
       "Accessor"
       (documentation 'font-button-title 'function)
- "@version{2025-09-29}
+ "@version{2026-02-05}
   @syntax{(gtk:font-button-title object) => title}
   @syntax{(setf (gtk:font-button-title object) title)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -217,22 +218,22 @@ lambda (fontbutton)    :run-first
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}")
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}")
 
 ;;; --- gtk:font-button-use-font -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-font" 'font-button) t)
  "The @code{use-font} property of type  @code{:boolean} (Read / Write) @br{}
-  If this property is set to @em{true}, the label will be drawn in the selected
-  font. @br{}
+  Whether the label will be drawn in the selected font. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-button-use-font)
       "Accessor"
       (documentation 'font-button-use-font 'function)
- "@version{2025-09-29}
+ "@version{2026-02-05}
   @syntax{(gtk:font-button-title object) => use-font}
   @syntax{(setf (gtk:font-button-title object) use-font)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -246,22 +247,22 @@ lambda (fontbutton)    :run-first
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}")
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}")
 
 ;;; --- gtk:font-button-use-size -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-size" 'font-button) t)
  "The @code{use-size} property of type @code{:boolean} (Read / Write) @br{}
-  If this property is set to @em{true}, the label will be drawn with the
-  selected font size. @br{}
+  Whether the label will be drawn with the selected font size. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-button-use-size)
       "Accessor"
       (documentation 'font-button-use-size 'function)
- "@version{2025-09-29}
+ "@version{2026-02-05}
   @syntax{(gtk:font-button-use-size object) => use-size}
   @syntax{(setf (gtk:font-button-use-size object) use-size)}
   @argument[object]{a @class{gtk:font-button} widget}
@@ -276,7 +277,8 @@ lambda (fontbutton)    :run-first
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}")
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_button_new
@@ -286,14 +288,15 @@ lambda (fontbutton)    :run-first
 
 (defun font-button-new ()
  #+liber-documentation
- "@version{2023-08-28}
+ "@version{2026-02-05}
   @return{The new @class{gtk:font-button} widget.}
   @short{Creates a new font picker widget.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}"
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}"
   (make-instance 'font-button))
 
 (export 'font-button-new)
@@ -306,7 +309,7 @@ lambda (fontbutton)    :run-first
 
 (defun font-button-new-with-font (fontname)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2026-02-05}
   @argument[fontname]{a string for the name of the font to display in the font
     chooser dialog}
   @return{The new @class{gtk:font-button} widget.}
@@ -315,7 +318,8 @@ lambda (fontbutton)    :run-first
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-button}"
+  @see-class{gtk:font-button}
+  @see-class{gtk:font-dialog-button}"
   (make-instance 'font-button
                  :font-name fontname))
 

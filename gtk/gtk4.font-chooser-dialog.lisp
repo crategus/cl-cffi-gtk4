@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-dialog 'type)
- "@version{2023-08-28}
+ "@version{2026-02-05}
   @begin{short}
     The @class{gtk:font-chooser-dialog} widget is a dialog for selecting a font.
   @end{short}
@@ -106,7 +106,7 @@
     Use the @class{gtk:font-dialog} widget instead.
   @end{dictionary}
   @see-class{gtk:font-chooser}
-  @see-class{gtk:dialog}")
+  @see-class{gtk:font-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_chooser_dialog_new
@@ -115,7 +115,7 @@
 (cffi:defcfun ("gtk_font_chooser_dialog_new" font-chooser-dialog-new)
     (g:object widget)
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-02-05}
   @argument[title]{a string for the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog, or
     @code{nil}}
@@ -125,7 +125,9 @@
     The @class{gtk:font-chooser-dialog} implementation is deprecated since 4.10.
     Use the @class{gtk:font-dialog} widget instead.
   @end{dictionary}
-  @see-class{gtk:font-chooser-dialog}"
+  @see-class{gtk:font-chooser-dialog}
+  @see-class{gtk:window}
+  @see-class{gtk:font-dialog}"
   (title :string)
   (parent (g:object window)))
 

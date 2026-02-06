@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-widget 'type)
- "@version{2024-05-22}
+ "@version{2026-02-05}
   @begin{short}
     The @class{gtk:font-chooser-widget} widget lists the available fonts,
     styles and sizes, allowing the user to select a font.
@@ -102,7 +102,7 @@
   @end{dictionary}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
+    Direct use of this widget is deprecated.
   @end{dictionary}
   @see-class{gtk:font-chooser-dialog}")
 
@@ -116,7 +116,7 @@
 (setf (documentation (liber:slot-documentation "tweak-action"
                                                'font-chooser-widget) t)
  "The @code{tweak-action} property of type @class{g:action} (Read) @br{}
-  A toggle action that can be used to switch to the tweak page of the font
+  The toggle action that can be used to switch to the tweak page of the font
   chooser widget, which lets the user tweak the OpenType features and variation
   axes of the selected font. The action will be enabled or disabled depending
   on whether the selected font has any features or axes.")
@@ -125,7 +125,7 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{2025-08-12}
+ "@version{2026-02-05}
   @syntax{(gtk:font-chooser-widget-tweak-action object) => action}
   @syntax{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
@@ -140,7 +140,7 @@
   selected font has any features or axes.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
+    Direct use of this widget is deprecated.
   @end{dictionary}
   @see-class{gtk:font-chooser-widget}
   @see-class{g:action}")
@@ -153,12 +153,12 @@
 
 (defun font-chooser-widget-new ()
  #+liber-documentation
- "@version{2023-08-28}
+ "@version{2026-02-05}
   @return{The new @class{gtk:font-chooser-widget} widget.}
   @short{Creates a new font chooser widget.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
+    Direct use of this widget is deprecated.
   @end{dictionary}
   @see-class{gtk:font-chooser-widget}"
   (make-instance 'font-chooser-widget))
