@@ -368,6 +368,7 @@
     @about-function{transform-transform}
     @about-function{transform-invert}
     @about-function{transform-matrix}
+    @about-function{transform-matrix-2d}
     @about-function{transform-translate}
     @about-function{transform-translate-3d}
     @about-function{transform-rotate}
@@ -379,46 +380,6 @@
     @about-function{transform-equal}
     @about-function{transform-transform-bounds}
     @about-function{transform-transform-point}
-  @end{section}
-  @begin[GskGLShader]{section}
-    @about-symbol{gl-uniform-type}
-    @about-symbol{shader-args-builder}
-    @about-class{gl-shader}
-    @about-generic{gl-shader-resource}
-    @about-generic{gl-shader-source}
-    @about-function{gl-shader-new-from-bytes}
-    @about-function{gl-shader-new-from-resource}
-    @about-function{gl-shader-compile}
-    @about-function{gl-shader-source}
-    @about-function{gl-shader-resource}
-    @about-function{gl-shader-n-textures}
-    @about-function{gl-shader-n-uniforms}
-    @about-function{gl-shader-uniform-name}
-    @about-function{gl-shader-find-uniform-by-name}
-    @about-function{gl-shader-uniform-type}
-    @about-function{gl-shader-uniform-offset}
-    @about-function{gl-shader-args-size}
-    @about-function{gl-shader-arg-float}
-    @about-function{gl-shader-arg-int}
-    @about-function{gl-shader-arg-uint}
-    @about-function{gl-shader-arg-bool}
-    @about-function{gl-shader-arg-vec2}
-    @about-function{gl-shader-arg-vec3}
-    @about-function{gl-shader-arg-vec4}
-    @about-function{gl-shader-format-args-va}
-    @about-function{gl-shader-format-args}
-    @about-function{shader-args-builder-new}
-    @about-function{shader-args-builder-to-args}
-    @about-function{shader-args-builder-free-to-args}
-    @about-function{shader-args-builder-unref}
-    @about-function{shader-args-builder-ref}
-    @about-function{shader-args-builder-set-float}
-    @about-function{shader-args-builder-set-int}
-    @about-function{shader-args-builder-set-uint}
-    @about-function{shader-args-builder-set-bool}
-    @about-function{shader-args-builder-set-vec2}
-    @about-function{shader-args-builder-set-vec3}
-    @about-function{shader-args-builder-set-vec4}
   @end{section}
  ")
 

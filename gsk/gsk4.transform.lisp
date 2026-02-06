@@ -2,11 +2,11 @@
 ;;; gsk4.transform.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GTK library,
+;;; version 4.20 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -42,7 +42,7 @@
 ;;;     gsk_transform_ref                                   not exported
 ;;;     gsk_transform_unref                                 not exported
 ;;;     gsk_transform_get_category
-;;;     gsk_transform_print                                 not implemented
+;;;     gsk_transform_print                                 not needed
 ;;;     gsk_transform_parse
 ;;;     gsk_transform_to_string
 ;;;     gsk_transform_to_matrix
@@ -53,6 +53,7 @@
 ;;;     gsk_transform_transform
 ;;;     gsk_transform_invert
 ;;;     gsk_transform_matrix
+;;;     gsk_transform_matrix_2d                             Since 4.20
 ;;;     gsk_transform_translate
 ;;;     gsk_transform_translate_3d
 ;;;     gsk_transform_rotate
@@ -201,14 +202,14 @@
 (export 'transform-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_ref ()                                    not exported
+;;; gsk_transform_ref                                       not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_ref" %transform-ref) (g:boxed transform)
   (transform (g:boxed transform)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_unref ()                                  not exported
+;;; gsk_transform_unref                                     not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_unref" %transform-unref) :void
@@ -235,7 +236,7 @@
 (export 'transform-category)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_print ()                                  not implemented
+;;; gsk_transform_print                                     not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -582,6 +583,54 @@
   (%transform-matrix (%transform-ref transform) matrix))
 
 (export 'transform-matrix)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_transform_matrix_2d                                 Since 4.20
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(cffi:defcfun ("gsk_transform_matrix_2d" %transform-matrix-2d)
+    (g:boxed transform :return)
+  (transform (g:boxed transform))
+  (xx :float)
+  (yx :float)
+  (xy :float)
+  (yy :float)
+  (dx :float)
+  (dy :float))
+
+#+gtk-4-20
+(defun transform-matrix-2d (transform xx yx xy yy dx dy)
+ #+liber-documentation
+ "@version{2026-02-04}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[xx]{a number coerced to a single float for the @code{xx} member}
+  @argument[yx]{a number coerced to a single float for the @code{yx} member}
+  @argument[xy]{a number coerced to a single float for the @code{xv} member}
+  @argument[yy]{a number coerced to a single float for the @code{yy} member}
+  @argument[dx]{a number coerced to a single float for the @code{dx} member}
+  @argument[dy]{a number coerced to a single float for the @code{dy} member}
+  @return{The new @class{gsk:transform} instance.}
+  @begin{short}
+    Multiplies @arg{transform} with the matrix
+    @code{ [ xx yx dx; xy yy dy; 0 0 1 ]}.
+  @end{short}
+  The result of calling the @fun{gsk:transform-to-2d} function on the returned
+  @class{gsk:transform} instance should match the input passed to this function.
+
+  Since 4.20
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-matrix-to-2d}"
+  (%transform-matrix-2d (%transform-ref transform)
+                        (coerce xx 'single-float)
+                        (coerce yx 'single-float)
+                        (coerce xy 'single-float)
+                        (coerce yy 'single-float)
+                        (coerce dx 'single-float)
+                        (coerce dy 'single-float)))
+
+#+gtk-4-20
+(export 'transform-matrix-2d)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_translate

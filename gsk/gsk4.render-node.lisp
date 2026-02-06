@@ -209,6 +209,17 @@
 ;;;     gsk_subsurface_node_new                             Since 4.14
 ;;;     gsk_subsurface_node_subsurface                      Since 4.14
 ;;;     gsk_subsurface_node_child                           Since 4.14
+;;;
+;;;     gsk_component_transfer_new_discrete                 Since 4.20
+;;;     gsk_component_transfer_new_gamma                    Since 4.20
+;;;     gsk_component_transfer_new_identity                 Since 4.20
+;;;     gsk_component_transfer_new_levels                   Since 4.20
+;;;     gsk_component_transfer_new_linear                   Since 4.20
+;;;     gsk_component_transfer_new_table                    Since 4.20
+;;;     gsk_component_transfer_copy                         Since 4.20
+;;;     gsk_component_transfer_free                         Since 4.20
+;;;     gsk_component_transfer_equal                        Since 4.20
+;;;
 ;;;     gsk_component_transfer_node_new                     Since 4.20
 ;;;     gsk_component_transfer_node_get_child               Since 4.20
 ;;;     gsk_component_transfer_node_get_transfer            Since 4.20
@@ -929,10 +940,11 @@ color {
 (setf (liber:alias-for-class 'container-node)
       "GskRenderNode"
       (documentation 'container-node 'type)
- "@version{#2023-10-27}
+ "@version{2026-02-05}
   @begin{short}
-    A render node that can contain other render nodes.
+    The render node that can contain other render nodes.
   @end{short}
+  @see-constructor{gsk:container-node-new}
   @see-class{gsk:render-node}")
 
 (export 'container-node)
@@ -947,7 +959,7 @@ color {
 
 (defun container-node-new (children)
  #+liber-documentation
- "@version{#2023-11-06}
+ "@version{2026-02-05}
   @argument[children]{a list of @class{gsk:render-node} instances with the
     children of the render node}
   @return{The new @class{gsk:container-node} instance.}
@@ -972,7 +984,7 @@ color {
 (cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
     :uint
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-02-05}
   @argument[node]{a @class{gsk:container-node} instance}
   @return{The unsigned integer for the number of children of @arg{node}.}
   @begin{short}
@@ -989,7 +1001,7 @@ color {
 
 (cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-02-05}
   @argument[node]{a @class{gsk:container-node} instance}
   @argument[index]{an unsigned integer for the position of the child to get}
   @return{The @arg{index}'th child of @arg{node}.}
@@ -1012,10 +1024,11 @@ color {
 (setf (liber:alias-for-class 'cairo-node)
       "GskRenderNode"
       (documentation 'cairo-node 'type)
- "@version{2023-10-27}
+ "@version{2026-02-05}
   @begin{short}
-    A render node for a Cairo surface.
+    The render node for a Cairo surface.
   @end{short}
+  @see-constructor{gsk:cairo-node-new}
   @see-class{gsk:render-node}")
 
 (export 'cairo-node)
@@ -1026,10 +1039,10 @@ color {
 
 (cffi:defcfun ("gsk_cairo_node_new" cairo-node-new) render-node
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render to}
-  @return{The new @class{gsk:render-node} instance.}
+  @return{The new @class{gsk:cairo-node} instance.}
   @begin{short}
     Creates a render node that will render a Cairo surface into the area given
     by @arg{bounds}.
@@ -1037,7 +1050,7 @@ color {
   You can draw to the Cairo surface using the @fun{gsk:cairo-node-draw-context}
   function.
   @see-class{gsk:cairo-node}
-  @see-class{gsk:render-node}
+  @see-symbol{graphene:rect-t}
   @see-function{gsk:cairo-node-draw-context}"
   (bounds (:pointer (:struct graphene:rect-t))))
 
@@ -1050,11 +1063,11 @@ color {
 (cffi:defcfun ("gsk_cairo_node_get_draw_context" cairo-node-draw-context)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{#2025-08-03}
+ "@version{2026-02-05}
   @argument[node]{a @class{gsk:cairo-node} instance for a Cairo surface}
   @begin{return}
-    The Cairo context used for drawing, use the @fun{cairo:destroy} function
-    when done drawing.
+    The @symbol{cairo:context-t} instance used for drawing, use the
+    @fun{cairo:destroy} function when done drawing.
   @end{return}
   @begin{short}
     Creates a Cairo context for drawing using the surface associated to the
@@ -1062,7 +1075,8 @@ color {
   @end{short}
   If no surface exists yet, a surface will be created optimized for rendering.
   @see-class{gsk:cairo-node}
-  @see-symbol{cairo:context-t}"
+  @see-symbol{cairo:context-t}
+  @see-function{cairo:destroy}"
   (node cairo-node))
 
 (export 'cairo-node-draw-context)
@@ -1074,7 +1088,7 @@ color {
 (cffi:defcfun ("gsk_cairo_node_get_surface" cairo-node-surface)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[node]{a @class{gsk:cairo-node} instance for a Cairo surface}
   @return{The @sym{cairo:surface-t} instance for a Cairo surface.}
   @begin{short}
@@ -1098,10 +1112,11 @@ color {
 (setf (liber:alias-for-class 'color-node)
       "GskRenderNode"
       (documentation 'color-node 'type)
- "@version{#2023-10-25}
+ "@version{2026-02-05}
   @begin{short}
-    A render node for a solid color.
+    The render node for a solid color.
   @end{short}
+  @see-constructor{gsk:color-node-new}
   @see-class{gsk:render-node}")
 
 (export 'color-node)
@@ -1112,7 +1127,7 @@ color {
 
 (cffi:defcfun ("gsk_color_node_new" color-node-new) render-node
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[rgba]{a @class{gdk:rgba} instance specifying a color}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the color into}
@@ -1135,7 +1150,7 @@ color {
 
 (cffi:defcfun ("gsk_color_node_get_color" color-node-color) (g:boxed gdk:rgba)
  #+liber-documentation
- "@version{#2025-08-03}
+ "@version{2026-02-05}
   @argument[node]{a @class{gsk:color-node} instance}
   @return{The @class{gdk:rgba} instance for the color of the render node.}
   @short{Retrieves the color of the given render node.}
@@ -1157,10 +1172,11 @@ color {
 (setf (liber:alias-for-class 'linear-gradient-node)
       "GskRenderNode"
       (documentation 'linear-gradient-node 'type)
- "@version{#2023-10-27}
+ "@version{2026-02-05}
   @begin{short}
-    A render node for a linear gradient.
+    The render node for a linear gradient.
   @end{short}
+  @see-constructor{gsk:linear-gradient-node}
   @see-class{gsk:render-node}")
 
 (export 'linear-gradient-node)
@@ -1179,7 +1195,7 @@ color {
 
 (defun linear-gradient-node-new (bounds start end color-stops)
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
     render the linear gradient into}
   @argument[start]{a @sym{graphene:point-t} instance for the point at which
@@ -1222,12 +1238,11 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_start" linear-gradient-node-start)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[node]{a @sym{gsk:linear-gradient-node} instance}
   @return{The @sym{graphene:point-t} instance for the initial point.}
   @short{Retrieves the initial point of the linear gradient.}
   @see-class{gsk:linear-gradient-node}
-  @see-class{gsk:render-node}
   @see-symbol{graphene:point-t}"
   (node render-node))
 
@@ -1240,12 +1255,11 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_end" linear-gradient-node-end)
     (:pointer (:struct graphene:point-t))
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[node]{a @sym{gsk:linear-gradient-node} instance}
   @return{The @sym{graphene:point-t} instance for the final point.}
   @short{Retrieves the final point of the linear gradient.}
   @see-class{gsk:linear-gradient-node}
-  @see-class{gsk:render-node}
   @see-symbol{graphene:point-t}"
   (node render-node))
 
@@ -1258,7 +1272,7 @@ color {
 (cffi:defcfun ("gsk_linear_gradient_node_get_n_color_stops"
                linear-gradient-node-n-color-stops) :size
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[node]{a @sym{gsk:linear-gradient-node} instance}
   @return{The unsigned integer for the number of color stops.}
   @short{Retrieves the number of color stops in the linear gradient.}
@@ -1278,7 +1292,7 @@ color {
 
 (defun linear-gradient-node-color-stops (node)
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @argument[node]{a @sym{gsk:linear-gradient-node} instance}
   @begin{return}
     The list of the form @code{'((offset1 color1) (offset2 color2) ...)} with
@@ -3565,9 +3579,9 @@ color {
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
-(cffi:defcfun ("gsk_texture_scale_new" texture-scale-new) render-node
+(cffi:defcfun ("gsk_texture_scale_node_new" texture-scale-node-new) render-node
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{#2026-02-05}
   @argument[texture]{a @class{gdk:texture} object to scale}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the size of the
     texture to scale to}
@@ -3575,7 +3589,7 @@ color {
   @return{The new @class{gsk:texture-scale-node} instance.}
   @begin{short}
     Creates a node that scales the texture to the size given by the bounds
-    using the filter and then places it at the bounds’ position.
+    using the filter and then places it at the position of the bounds.
   @end{short}
   Note that further scaling and other transformations which are applied to the
   node will apply linear filtering to the resulting texture, as usual.
@@ -3596,7 +3610,7 @@ color {
   (filter scaling-filter))
 
 #+gtk-4-10
-(export 'texture-scale-new)
+(export 'texture-scale-node-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_texture_scale_node_get_filter                       Since 4.10
@@ -4127,6 +4141,21 @@ color {
 
 #+gtk-4-14
 (export 'subsurface-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; GskComponentTransfer                                    Since 4.20
+;;;
+;;; gsk_component_transfer_new_discrete                     Since 4.20
+;;; gsk_component_transfer_new_gamma                        Since 4.20
+;;; gsk_component_transfer_new_identity                     Since 4.20
+;;; gsk_component_transfer_new_levels                       Since 4.20
+;;; gsk_component_transfer_new_linear                       Since 4.20
+;;; gsk_component_transfer_new_table                        Since 4.20
+;;;
+;;; gsk_component_transfer_copy                             Since 4.20
+;;; gsk_component_transfer_free                             Since 4.20
+;;; gsk_component_transfer_equal                            Since 4.20
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskComponentTransferNode                                Since 4.20
