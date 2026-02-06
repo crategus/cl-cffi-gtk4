@@ -41,77 +41,103 @@
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFontButton")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontButton" GTK:FONT-BUTTON
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkFontChooser")
-                        :TYPE-INITIALIZER "gtk_font_button_get_type")
-                       ((MODAL FONT-BUTTON-MODAL "modal" "gboolean" T T)
-                        (TITLE FONT-BUTTON-TITLE "title" "gchararray" T T)
-                        (USE-FONT FONT-BUTTON-USE-FONT "use-font" "gboolean" T T)
-                        (USE-SIZE FONT-BUTTON-USE-SIZE "use-size" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkFontChooser")
+                       :TYPE-INITIALIZER "gtk_font_button_get_type")
+                      ((MODAL FONT-BUTTON-MODAL "modal" "gboolean" T T)
+                       (TITLE FONT-BUTTON-TITLE "title" "gchararray" T T)
+                       (USE-FONT FONT-BUTTON-USE-FONT "use-font" "gboolean" T T)
+                       (USE-SIZE FONT-BUTTON-USE-SIZE "use-size" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkFontButton"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-font-button-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (button (make-instance 'gtk:font-button)))
-    (is-true (gtk:font-button-modal button))
-    #-windows
-    (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
-    #+windows
-    (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
-    (is-false (gtk:font-button-use-font button))
-    (is-false (gtk:font-button-use-size button))))
-
 ;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate                                           Since 4.4
+
+(test gtk-font-button-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkFontButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     font-set
 
 (test gtk-font-button-font-set-signal
-  (let* ((name "font-set") (gtype "GtkFontButton")
+  (let* ((name "font-set")
+         (gtype (g:gtype "GtkFontButton"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-font-button-properties
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (button)
+      (is (typep (setf button
+                       (make-instance 'gtk:font-button)) 'gtk:font-button))
+      (is-true (gtk:font-button-modal button))
+      #-windows
+      (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
+      #+windows
+      (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
+      (is-false (gtk:font-button-use-font button))
+      (is-false (gtk:font-button-use-size button)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_font_button_new
 
 (test gtk-font-button-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
-    (is (typep (gtk:font-button-new) 'gtk:font-button))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (button)
+      (is (typep (setf button
+                       (gtk:font-button-new)) 'gtk:font-button)))))
 
 ;;;     gtk_font_button_new_with_font
 
 (test gtk-font-button-new-with-font
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
-         (button (gtk:font-button-new-with-font "Sans Italic 12")))
-    (is-true (gtk:font-button-modal button))
-    #-windows
-    (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
-    #+windows
-    (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
-    (is-false (gtk:font-button-use-font button))
-    (is-false (gtk:font-button-use-size button))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (button)
+      (is (typep (setf button
+                       (gtk:font-button-new-with-font "Sans Italic 12"))
+                 'gtk:font-button))
+      (is-true (gtk:font-button-modal button))
+      #-windows
+      (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
+      #+windows
+      (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
+      (is-false (gtk:font-button-use-font button))
+      (is-false (gtk:font-button-use-size button))
 
-    (is (string= "Sans 12" (gtk:font-chooser-font button)))
-    (is (typep (gtk:font-chooser-font-desc button) 'pango:font-description))
-    (is-false (gtk:font-chooser-font-features button))
-    (is (string= "de-de" (gtk:font-chooser-language button)))
-    (is (equal '(:style :size) (gtk:font-chooser-level button)))
-    (is-false (gtk:font-chooser-preview-text button))
-    (is-true (gtk:font-chooser-show-preview-entry button))))
+      (is (string= "Sans 12" (gtk:font-chooser-font button)))
+      (is (typep (gtk:font-chooser-font-desc button) 'pango:font-description))
+      (is-false (gtk:font-chooser-font-features button))
+      (is (string= "de-de" (gtk:font-chooser-language button)))
+      (is (equal '(:style :size) (gtk:font-chooser-level button)))
+      (is-false (gtk:font-chooser-preview-text button))
+      (is-true (gtk:font-chooser-show-preview-entry button)))))
 
-;;; 2024-9-20
+;;; 2026-02-05

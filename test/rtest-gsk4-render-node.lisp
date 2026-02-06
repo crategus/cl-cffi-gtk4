@@ -200,7 +200,7 @@
                        (:INVERTED-LUMINANCE 3))
              (gobject:get-gtype-definition "GskMaskMode"))))
 
-;;;     GskRenderNode
+;;; --- GskRenderNode ----------------------------------------------------------
 
 ;;;     gsk_render_node_ref
 ;;;     gsk_render_node_unref
@@ -219,10 +219,11 @@
 
 ;;;     gsk_render_node_draw
 
+;; Function for drawing a node on a PDF surface
 (defun render-node-draw-to-pdf (node width height &optional (filename nil))
   (let* ((path (if filename
-                  (glib-sys:sys-path filename)
-                  (glib-sys:sys-path "test/out/render-node.pdf")))
+                   (glib-sys:sys-path filename)
+                   (glib-sys:sys-path "test/out/render-node.pdf")))
          (surface (cairo:pdf-surface-create path width height))
          (context (cairo:create surface)))
     (gsk:render-node-ref node)
@@ -240,38 +241,14 @@
     (cairo:destroy context)
     (gsk:render-node-unref node)))
 
+;; Check the function
 (test gsk-render-node-draw.1
-  (graphene:with-rect (rect 20 20 60 60)
-    (let* ((color (gdk:rgba-parse "blue"))
-           (node (gsk:color-node-new color rect))
-           (path (glib-sys:sys-path "test/out/render-node.1.pdf"))
-           (width 100) (height 100)
-           (surface (cairo:pdf-surface-create path width height))
-           (context (cairo:create surface)))
-      (cairo:save context)
-      ;; Clear surface
-      (cairo:set-source-rgb context 1.0 1.0 1.0)
-      (cairo:paint context)
-      ;; Draw the render node
-      (gsk:render-node-draw node context)
-      (cairo:stroke context)
-      (cairo:restore context)
-      (cairo:show-page context)
-      ;; Clean the resources.
-      (cairo:surface-destroy surface)
-      (cairo:destroy context)
-      (gsk:render-node-unref node))))
-
-(test gsk-render-node-draw.2
   (graphene:with-rect (rect 20 20 60 60)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
-           (filename "test/out/render-node.2.pdf")
            (width 100) (height 100))
-      (render-node-draw-to-pdf node width height filename)
+      (render-node-draw-to-pdf node width height)
       (gsk:render-node-unref node))))
-
-;;;     GskParseErrorFunc
 
 ;;;     gsk_render_node_serialize
 ;;;     gsk_render_node_deserialize
@@ -292,7 +269,7 @@
   (graphene:with-rect (rect 0 0 10 20)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
-           (filename  (glib-sys:sys-path "test/out/render-node-to-file.txt")))
+           (filename  (glib-sys:sys-path "test/out/render-node.txt")))
       (gsk:render-node-write-to-file node filename))))
 
 ;;;     gsk_render_node_get_bounds
@@ -332,8 +309,8 @@
   (graphene:with-rects ((rect1 10 10 80 80)
                         (rect2 20 20 60 60)
                         (rect3 30 30 40 40))
-    (let* ((filename  (glib-sys:sys-path "test/out/render-node-to-file.txt"))
-           (pdffile (glib-sys:sys-path "test/out/draw-container-node.pdf"))
+    (let* ((filename  (glib-sys:sys-path "test/out/container-node.txt"))
+           (pdffile (glib-sys:sys-path "test/out/container-node.pdf"))
            (color1 (gsk:color-node-new (gdk:rgba-new :red 1 :alpha 1) rect1))
            (color2 (gsk:color-node-new (gdk:rgba-new :green 1 :alpha 1) rect2))
            (color3 (gsk:color-node-new (gdk:rgba-new :blue 1 :alpha 1) rect3))
@@ -357,11 +334,13 @@
       (is (cffi:pointerp (setf context (gsk:cairo-node-draw-context node))))
       (is (cffi:pointer-eq (cairo:target context)
                            (gsk:cairo-node-surface node)))
+      ;; Free memory
       (is-false (cairo:destroy context))
       (is-false (gsk:render-node-unref node)))))
 
 (test gsk-cairo-node-draw
-  (let ((filename (glib-sys:sys-path "test/out/draw-cairo-node.pdf"))
+  (let ((filename (glib-sys:sys-path "test/out/cairo-node.txt"))
+        (pdffile (glib-sys:sys-path "test/out/cairo-node.pdf"))
         (width 100) (height 100)
         node context)
     (graphene:with-rect (bounds 0 0 width height)
@@ -384,9 +363,10 @@
       (cairo:rectangle context 0.25 0.25 0.5 0.5)
       (cairo:stroke context)
       (cairo:restore context)
-      ;; Draw GskCairoNode into PDF file
-      (is-false (render-node-draw-to-pdf node 100 100 filename))
-
+      ;; Draw GskCairoNode into PDF and text file
+      (is-false (render-node-draw-to-pdf node 100 100 pdffile))
+      (is-true (gsk:render-node-write-to-file node filename))
+      ;; Free memory
       (is-false (cairo:destroy context))
       (is-false (gsk:render-node-unref node)))))
 
@@ -437,31 +417,34 @@
 (test gsk-linear-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/linear-gradient-node.txt"))
+        (pdffile (glib-sys:sys-path "test/out/linear-gradient-node.pdf"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
-      (graphene:with-points ((start 0 0) (end 100 100))
+      (graphene:with-points ((start 0 0) (end 0 100))
 
-        (setf node (gsk:linear-gradient-node-new bounds
-                                                 start end color-stops))
-        (is-false (render-node-draw-to-pdf node 100 100))
+        (setf node
+              (gsk:linear-gradient-node-new bounds start end color-stops))
+        (is-false (render-node-draw-to-pdf node 100 100 pdffile))
         (is-true (gsk:render-node-write-to-file node filename))))))
 
-;;;     GskRepeatingLinearGradientNode
+;;; --- GskRepeatingLinearGradientNode -----------------------------------------
+
 ;;;     gsk_repeating_linear_gradient_node_new
 
 (test gsk-repeating-linear-gradient-node-draw
   (let ((color-stops (list (list 0.0 (gdk:rgba-parse "red"))
                            (list 1.0 (gdk:rgba-parse "blue"))))
-        (filename (glib-sys:sys-path "test/out/render-node-to-file.txt"))
+        (filename (glib-sys:sys-path "test/out/repeating-linear-gradient-node.txt"))
+        (pdffile (glib-sys:sys-path "test/out/repeating-linear-gradient-node.pdf"))
         node)
     (graphene:with-rect (bounds 0 0 100 100)
       (graphene:with-points ((start 0 0) (end 30 30))
-
-        (setf node (gsk:repeating-linear-gradient-node-new bounds
-                                                           start end
-                                                           color-stops))
-        (is-false (render-node-draw-to-pdf node 100 100))
+        (setf node
+              (gsk:repeating-linear-gradient-node-new bounds
+                                                      start end
+                                                      color-stops))
+        (is-false (render-node-draw-to-pdf node 100 100 pdffile))
         (is-true (gsk:render-node-write-to-file node filename))))))
 
 ;;;     GskRadialGradientNode
@@ -713,4 +696,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; 2025-11-02
+;;; 2026-02-05

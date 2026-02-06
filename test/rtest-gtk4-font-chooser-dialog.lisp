@@ -55,7 +55,7 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_font_chooser_dialog_new ()
+;;;     gtk_font_chooser_dialog_new
 
 (test gtk-font-chooser-dialog-new
   (let ((*gtk-warn-deprecated* nil))
@@ -65,4 +65,4 @@
                  'gtk:font-chooser-dialog))
       (is-false (gtk:window-destroy dialog)))))
 
-;;; 2024-12-24
+;;; 2026-02-05

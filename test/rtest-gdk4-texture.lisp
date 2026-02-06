@@ -214,7 +214,7 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkTexture")))
   ;; Check children
-  (is (equal '("GdkDmabufTexture" "GdkMemoryTexture")
+  (is (equal '("GdkDmabufTexture" "GdkGLTexture" "GdkMemoryTexture")
              (glib-test:list-children "GdkTexture")))
   ;; Check interfaces
   (is (equal '("GdkPaintable" "GIcon" "GLoadableIcon")
@@ -274,7 +274,6 @@
 
 ;;;     GdkGLTexture
 
-#+nil
 (test gdk-gl-texture-class
   ;; Check type
   (is (g:type-is-object "GdkGLTexture"))
@@ -434,4 +433,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2025-11-02
+;;; 2026-02-05

@@ -51,8 +51,10 @@
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkEntry")))
   ;; Check children
-  (is (equal '()
-             (glib-test:list-children "GtkEntry")))
+  ;; In the second run, we get the undocumented child GtkFileChooserEntry
+  (when *first-run-testsuite*
+    (is (equal '()
+               (glib-test:list-children "GtkEntry"))))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkCellEditable")
@@ -186,16 +188,17 @@
 ;;;     activate
 
 (test gtk-entry-activate-signal
-  (let* ((name "activate") (gtype "GtkEntry")
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkEntry"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -203,16 +206,17 @@
 ;;;     icon-press
 
 (test gtk-entry-icon-press-signal
-  (let* ((name "icon-press") (gtype "GtkEntry")
+  (let* ((name "icon-press")
+         (gtype (g:gtype "GtkEntry"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("GtkEntryIconPosition")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -220,16 +224,17 @@
 ;;;     icon-release
 
 (test gtk-entry-icon-release-signal
-  (let* ((name "icon-release") (gtype "GtkEntry")
+  (let* ((name "icon-release")
+         (gtype (g:gtype "GtkEntry"))
          (query (g:signal-query (g:signal-lookup name gtype))))
     ;; Retrieve name and gtype
     (is (string= name (g:signal-query-signal-name query)))
-    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    (is (eq gtype (g:signal-query-owner-type query)))
     ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
     ;; Check return type
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
     ;; Check parameter types
     (is (equal '("GtkEntryIconPosition")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
@@ -364,4 +369,4 @@
                  (setf (gtk:entry-menu-entry-icon-text entry :secondary) "text")))
     (is (string= "text" (gtk:entry-menu-entry-icon-text entry :secondary)))))
 
-;;; 2026-01-09
+;;; 2026-02-05

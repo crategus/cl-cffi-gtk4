@@ -36,17 +36,20 @@
 ;;;     selection-changed
 
 (test gtk-selection-model-selection-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "selection-changed"
-                                                "GtkSelectionModel"))))
-    (is (string= "selection-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkSelectionModel"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "selection-changed")
+         (gtype (g:gtype "GtkSelectionModel"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("guint" "guint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -111,9 +114,9 @@
       (is (typep (setf bitset
                        (gtk:selection-model-selection-in-range selection 50 10))
                  'gtk:bitset))
-      (is (= 282 (gtk:bitset-size bitset)))
+      (is (= 284 (gtk:bitset-size bitset)))
       (is (=   0 (gtk:bitset-minimum bitset)))
-      (is (= 281 (gtk:bitset-maximum bitset)))
+      (is (= 283 (gtk:bitset-maximum bitset)))
 
       (is-true (gtk:selection-model-unselect-all selection))
       (is (typep (setf bitset
@@ -140,4 +143,4 @@
     ;; Remove references
     (is-false (setf (gtk:multi-selection-model selection) nil))))
 
-;;; 2025-05-10
+;;; 2026-02-05

@@ -248,6 +248,23 @@
                  (graphene:matrix-to-float
                      (gsk:transform-to-matrix transform matrix)))))))
 
+;;;     gsk_transform_matrix_2d
+
+(test gsk-transform-matrix-2d
+  (graphene:with-matrix (matrix)
+    (let ((transform (gsk:transform-new)))
+      (graphene:matrix-init-scale matrix 1 2 3)
+      (setf transform
+            (apply #'gsk:transform-matrix-2d
+                   transform
+                   (graphene:matrix-to-2d matrix)))
+      (is (equal '(1.0 0.0 0.0 0.0
+                   0.0 2.0 0.0 0.0
+                   0.0 0.0 1.0 0.0
+                   0.0 0.0 0.0 1.0)
+                 (graphene:matrix-to-float
+                     (gsk:transform-to-matrix transform matrix)))))))
+
 ;;;     gsk_transform_translate
 
 (test gsk-transform-translate

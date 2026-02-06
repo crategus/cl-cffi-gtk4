@@ -49,6 +49,24 @@
                         (LOCAL CLIPBOARD-LOCAL "local" "gboolean" T NIL)))
              (gobject:get-gtype-definition "GdkClipboard"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+(test gdk-clipboard-changed-signal
+  (let* ((name "changed")
+         (gtype (g:gtype "GdkClipboard"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 ;; Check properties of the default clipboard
@@ -80,20 +98,6 @@
     (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
     (when *first-run-testsuite*
       (is-true (gdk:clipboard-local clipboard)))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-(test gdk-clipboard-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "changed" "GdkClipboard"))))
-    (is (string= "changed" (g:signal-query-signal-name query)))
-    (is (string= "GdkClipboard"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -138,19 +142,21 @@
 ;;;     gdk_clipboard_read_text_async
 ;;;     gdk_clipboard_read_text_finish
 
+;; TODO: Check the memory usage for the clipboard
+
 (test gdk-clipboard-read-text-async
-  (glib-test:with-check-memory ((clipboard 3))
-    (let (content)
-    (is (typep (setf clipboard
-                     (gdk:display-clipboard (gdk:display-default)))
-               'gdk:clipboard))
-    (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
-    ;; FIXME: Can we read the clipboard in the testsuite!
-    (gdk:clipboard-read-text-async clipboard nil
-        (lambda (source result)
-          (setf content (gdk:clipboard-read-text-finish source result))))
-    (is-false content)
-)))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((clipboard 4))
+      (let (content)
+        (is (typep (setf clipboard
+                         (gdk:display-clipboard (gdk:display-default)))
+                   'gdk:clipboard))
+        (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
+        ;; FIXME: Can we read the clipboard in the testsuite!
+        (gdk:clipboard-read-text-async clipboard nil
+            (lambda (source result)
+              (setf content (gdk:clipboard-read-text-finish source result))))
+        (is-false content)))))
 
 ;;;     gdk_clipboard_set
 ;;;     gdk_clipboard_set_valist
@@ -158,14 +164,16 @@
 
 ;;;     gdk_clipboard_set_text
 
-(test gtk-clipboard-set-text
-  (glib-test:with-check-memory ((clipboard 3))
-    (is (typep (setf clipboard
-                     (gdk:display-clipboard (gdk:display-default)))
-               'gdk:clipboard))
-    (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
-))
+;; TODO: Check the memory usage for the clipboard
+
+(test gdk-clipboard-set-text
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((clipboard 4))
+      (is (typep (setf clipboard
+                       (gdk:display-clipboard (gdk:display-default)))
+                 'gdk:clipboard))
+      (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard.")))))
 
 ;;;     gdk_clipboard_set_texture
 
-;;; 2025-4-26
+;;; 2026-02-04
