@@ -2,11 +2,11 @@
 ;;; gdk4.device.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -40,11 +40,13 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gdk_device_get_active_layout_index                  Since 4.18
 ;;;     gdk_device_get_caps_lock_state
 ;;;     gdk_device_get_direction
 ;;;     gdk_device_get_display
 ;;;     gdk_device_has_bidi_layouts
 ;;;     gdk_device_get_has_cursor
+;;;     gdk_device_get_layout_names                         Since 4.18
 ;;;     gdk_device_get_modifier_state
 ;;;     gdk_device_get_name
 ;;;     gdk_device_get_num_lock_state
@@ -59,17 +61,17 @@
 ;;; Functions
 ;;;
 ;;;     gdk_device_get_surface_at_position
-;;;     gdk_device_get_timestamp                           Since 4.2
+;;;     gdk_device_get_timestamp                            Since 4.2
 ;;;
 ;;; Properties
 ;;;
-;;;     active-layout-index
+;;;     active-layout-index                                 Since 4.18
 ;;;     caps-lock-state
 ;;;     direction
 ;;;     display
 ;;;     has-bidi-layouts
 ;;;     has-cursor
-;;;     layout-names
+;;;     layout-names                                        Since 4.18
 ;;;     modifier-state
 ;;;     n-axes
 ;;;     name

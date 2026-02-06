@@ -327,7 +327,7 @@
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
       @about-class{device}
-      @ablut-generic{device-active-layout-index}
+      @about-generic{device-active-layout-index}
       @about-generic{device-caps-lock-state}
       @about-generic{device-direction}
       @about-generic{device-display}
@@ -593,11 +593,11 @@
       @about-function{gl-context-forward-compatible}
       @about-function{gl-context-use-es}
       @about-function{gl-context-is-legacy}
+      @about-function{gl-context-is-shared}
       @about-function{gl-context-realize}
       @about-function{gl-context-make-current}
       @about-function{gl-context-current}
       @about-function{gl-context-clear-current}
-      @about-function{gl-context-is-shared}
     @end{subsection}
     @begin[GdkCairoContext]{subsection}
       @about-class{cairo-context}

@@ -2,11 +2,11 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -34,7 +34,7 @@
 ;;; Functions
 ;;;
 ;;;     gdk_cairo_set_source_rgba
-;;;     gdk_cairo_set_source_pixbuf
+;;;     gdk_cairo_set_source_pixbuf                         Deprecated 4.20
 ;;;     gdk_cairo_rectangle
 ;;;     gdk_cairo_region
 ;;;     gdk_cairo_region_create_from_surface
@@ -103,9 +103,15 @@
   The pattern has a @val[cairo:extend-t]{:none} extend mode of the
   @sym{cairo:extend-t} enumeration and is aligned so that the origin of the
   pixbuf is @code{(x,y)}.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20.
+  @end{dictionary}
   @see-symbol{cairo:context-t}
   @see-symbol{cairo:extend-t}
   @see-class{gdk-pixbuf:pixbuf}"
+  #+(and gtk-4-20 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CAIRO-SET-SOURCE-PIXBUF is deprecated since 4.20."))
   (%cairo-set-source-pixbuf cr
                             pixbuf
                             (coerce x 'double-float)

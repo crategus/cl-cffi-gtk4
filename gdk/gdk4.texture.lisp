@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -1118,7 +1118,6 @@
 ;;; GdkGLTexture
 ;;; ----------------------------------------------------------------------------
 
-#+nil
 (gobject:define-gobject "GdkGLTexture" gl-texture
   (:superclass texture
    :export t
@@ -1128,13 +1127,13 @@
    :type-initializer "gdk_gl_texture_get_type")
   nil)
 
-#+nil
+#+liber-documentation
 (setf (liber:alias-for-class 'gl-texture)
       "Class"
       (documentation 'gl-texture 'type)
- "@version{#2023-08-01}
+ "@version{2026-02-05}
   @begin{short}
-    A @class{gdk:texture} implementation representing a GL texture object.
+    The @class{gdk:texture} implementation representing a GL texture object.
   @end{short}
   @see-class{gdk:texture}")
 

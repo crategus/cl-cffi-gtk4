@@ -2,11 +2,11 @@
 ;;; gdk4.gl-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.18 and modified to document the Lisp binding to the GDK library,
+;;; version 4.20 and modified to document the Lisp binding to the GDK library,
 ;;; See <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -35,7 +35,6 @@
 ;;;
 ;;;     GdkGLContext
 ;;;     GDKGLAPI
-;;;     GdkGLError
 ;;;
 ;;; Accessors
 ;;;
@@ -58,12 +57,11 @@
 ;;;     gdk_gl_context_set_use_es
 ;;;     gdk_gl_context_get_use_es
 ;;;     gdk_gl_context_is_legacy
+;;;     gdk_gl_context_is_shared                           Since 4.4
 ;;;     gdk_gl_context_realize
 ;;;     gdk_gl_context_make_current
 ;;;     gdk_gl_context_get_current
 ;;;     gdk_gl_context_clear_current
-;;;
-;;;     gdk_gl_context_is_shared                           Since 4.4
 ;;;
 ;;; Properties
 ;;;
@@ -79,27 +77,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
-
-;;; ----------------------------------------------------------------------------
-;;; enum GdkGLError
-;;;
-;;; Error enumeration for GdkGLContext.
-;;;
-;;; GDK_GL_ERROR_NOT_AVAILABLE :
-;;;     OpenGL support is not available
-;;;
-;;; GDK_GL_ERROR_UNSUPPORTED_FORMAT :
-;;;     The requested visual format is not supported
-;;;
-;;; GDK_GL_ERROR_UNSUPPORTED_PROFILE :
-;;;     The requested profile is not supported
-;;;
-;;; GDK_GL_ERROR_COMPILATION_FAILED :
-;;;     The shader compilation failed
-;;;
-;;; GDK_GL_ERROR_LINK_FAILED :
-;;;     The shader linking failed
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkGLAPI
@@ -118,7 +95,7 @@
 (setf (liber:alias-for-symbol 'gl-api)
       "GFlags"
       (liber:symbol-documentation 'gl-api)
- "@version{#2025-07-30}
+ "@version{2026-02-05}
   @begin{declaration}
 (gobject:define-gflags \"GdkGLAPI\" gl-api
   (:export t
@@ -164,16 +141,16 @@
 
 #+liber-documentation
 (setf (documentation 'gl-context 'type)
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @begin{short}
     The @class{gdk:gl-context} object is an object representing the platform
     specific OpenGL draw context.
   @end{short}
-  A @class{gdk:gl-context} object is created for a @class{gdk:surface} object
+  The @class{gdk:gl-context} object is created for a @class{gdk:surface} object
   using the @fun{gdk:surface-create-gl-context} function, and the context will
   match the the characteristics of the surface.
 
-  A @class{gdk:gl-context} object is not tied to any particular normal
+  The @class{gdk:gl-context} object is not tied to any particular normal
   framebuffer. For instance, it cannot draw to the @class{gdk:surface} back
   buffer. The GDK repaint system is in full control of the painting to that.
   Instead, you can create render buffers or textures and use
@@ -184,7 +161,7 @@
   Support for the @class{gdk:gl-context} object is platform specific, context
   creation can fail, returning a @code{NULL} context.
 
-  A @class{gdk:gl-context} object has to be made \"current\" in order to start
+  The @class{gdk:gl-context} object has to be made \"current\" in order to start
   using it, otherwise any OpenGL call will be ignored.
 
   @subheading{Creating a new OpenGL context}
@@ -192,7 +169,7 @@
   @class{gdk:surface} object, which you typically get during the realize call
   of a widget.
 
-  A @class{gdk:gl-context} object is not realized until either the
+  The @class{gdk:gl-context} object is not realized until either the
   @fun{gdk:gl-context-make-current} function, or until it is realized using
   the @fun{gdk:gl-context-realize} function. It is possible to specify details
   of the GL context like the OpenGL version to be used, or whether the GL
@@ -203,7 +180,7 @@
   again.
 
   @subheading{Using a GdkGLContext}
-  You will need to make the @class{gdk:gl-ontext} object the current context
+  You will need to make the @class{gdk:gl-context} object the current context
   before issuing OpenGL calls. The system sends OpenGL commands to whichever
   context is current. It is possible to have multiple contexts, so you always
   need to ensure that the one which you want to draw with is the current one
@@ -238,7 +215,7 @@
 (setf (liber:alias-for-function 'gl-context-allowed-apis)
       "Accessor"
       (documentation 'gl-context-allowed-apis 'function)
- "@version{#2025-08-02}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-allowed-apis object) => apis}
   @syntax{(setf (gdk:gl-context-allowed-apis object) apis)}
   @argument[object]{a @class{gdk:gl-context} object}
@@ -273,7 +250,7 @@
 (setf (liber:alias-for-function 'gl-context-api)
       "Accessor"
       (documentation 'gl-context-api 'function)
- "@version{#2025-09-25}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-api object) => api}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[api]{a @sym{gdk:gl-api} value}
@@ -295,13 +272,13 @@
  "The @code{shared-context} property of type @class{gdk:gl-context}
   (Read / Write / Construct only) @br{}
   The GL context that this context is sharing data with, or @code{nil}.
-  Deprecated since 4.4")
+  Deprecated 4.4")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'gl-context-shared-context)
       "Accessor"
       (documentation 'gl-context-shared-context 'function)
- "@version{#2025-09-25}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-shared-context object) => context}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[context]{a @class{gdk:gl-context} object or @code{nil}}
@@ -321,7 +298,7 @@
 (cffi:defcfun ("gdk_gl_context_get_display" gl-context-display)
     (g:object display)
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{The @class{gdk:display} object or @code{nil}.}
   @begin{short}
@@ -340,7 +317,7 @@
 (cffi:defcfun ("gdk_gl_context_get_surface" gl-context-surface)
     (g:object surface)
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{The @class{gdk:surface} object or @code{nil}.}
   @begin{short}
@@ -363,7 +340,7 @@
 
 (defun gl-context-version (context)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-version context) => major, minor}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[major]{an integer for the major version}
@@ -402,7 +379,7 @@
 
 (defun gl-context-required-version (context)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-required-version object) => major, minor}
   @syntax{(setf gdk:gl-context-required-version object) (list major minor))}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -421,7 +398,7 @@
     (values (cffi:mem-ref major :int)
             (cffi:mem-ref minor :int))))
 
-(export 'gl-context-version)
+(export 'gl-context-required-version)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_context_set_debug_enabled
@@ -438,7 +415,7 @@
 (cffi:defcfun ("gdk_gl_context_get_debug_enabled"
                gl-context-debug-enabled) :boolean
  #+liber-documentation
- "@version{#2025-09-25}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-debug-enabled object) => enabled}
   @syntax{(setf gdk:gl-context-debug-enabled object) enabled)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -471,7 +448,7 @@
 (cffi:defcfun ("gdk_gl_context_get_forward_compatible"
                gl-context-forward-compatible) :boolean
  #+liber-documentation
- "@version{#2025-09-25}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-forward-compatible object) => setting}
   @syntax{(setf gdk:gl-context-forward-compatible object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -500,14 +477,14 @@
 ;; TODO: The return value is of type boolean, but an integer when setting.
 
 (defun (setf gl-context-use-es) (value context)
-  (cffi:foreign-funcall "gdk_gl_context_set_uses-es"
+  (cffi:foreign-funcall "gdk_gl_context_set_use_es"
                         (g:object gl-context) context
                         :int value)
   value)
 
 (cffi:defcfun ("gdk_gl_context_get_use_es" gl-context-use-es) :boolean
  #+liber-documentation
- "@version{#2025-09-25}
+ "@version{2026-02-05}
   @syntax{(gdk:gl-context-uses-es object) => setting}
   @syntax{(setf gdk:gl-context-use-es object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
@@ -539,7 +516,7 @@
 
 (cffi:defcfun ("gdk_gl_context_is_legacy" gl-context-is-legacy) :boolean
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{@em{True} if the GL context is in legacy mode.}
   @begin{short}
@@ -566,6 +543,40 @@
 (export 'gl-context-is-legacy)
 
 ;;; ----------------------------------------------------------------------------
+;;; gdk_gl_context_is_shared                                Since 4.4
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-4
+(cffi:defcfun ("gdk_gl_context_is_shared" gl-context-is-shared) :boolean
+ #+liber-documentation
+ "@version{2026-02-05}
+  @argument[context]{a @class{gdk:gl-context} object}
+  @argument[other]{another @class{gdk:gl-context} object}
+  @return{@em{True} if the two GL contexts are compatible.}
+  @begin{short}
+    Checks if the two GL contexts can share resources.
+  @end{short}
+  When they can, the texture IDs from @arg{other} can be used in @arg{context}.
+  This is particularly useful when passing @class{gdk:gl-texture} objects
+  between different contexts.
+
+  Contexts created for the same display with the same properties will always be
+  compatible, even if they are created for different surfaces. For other
+  contexts it depends on the GL backend.
+
+  Both contexts must be realized for this check to succeed. If either one is
+  not, this function will return @em{false}.
+
+  Since 4.4
+  @see-class{gdk:gl-context}
+  @see-class{gdk:gl-texture}"
+  (context (g:object gl-context))
+  (other (g:object gl-context)))
+
+#+gtk-4-4
+(export 'gl-context-is-shared)
+
+;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_context_realize
 ;;; ----------------------------------------------------------------------------
 
@@ -575,7 +586,7 @@
 
 (defun gl-context-realize (context)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2026-02-05}
   @argument[context]{a @class{gdk:gl-context} object}
   @return{@em{True} if the OpenGL context is realized.}
   @begin{short}
@@ -594,7 +605,7 @@
 
 (cffi:defcfun ("gdk_gl_context_make_current" gl-context-make-current) :void
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @argument[context]{a @class{gdk:gl-context} object}
   @begin{short}
     Makes the GL context the current one.
@@ -611,7 +622,7 @@
 (cffi:defcfun ("gdk_gl_context_get_current" gl-context-current)
     (g:object gl-context)
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @return{The current @class{gdk:gl-context} object, or @code{nil}.}
   @begin{short}
     Retrieves the current GL context.
@@ -626,7 +637,7 @@
 
 (cffi:defcfun ("gdk_gl_context_clear_current" gl-context-clear-current) :void
  #+liber-documentation
- "@version{#2023-08-03}
+ "@version{2026-02-05}
   @begin{short}
     Clears the current GL context.
   @end{short}
