@@ -199,7 +199,7 @@
   @see-function{gdk:draw-context-frame-region}
   @see-function{gdk:draw-context-end-frame}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CONTEXT-BEGIN-FRAME is deprecated since 4.16"))
   (%draw-context-begin-frame context region))
 
@@ -233,7 +233,7 @@
   @see-class{gdk:draw-context}
   @see-function{gdk:draw-context-begin-frame}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CONTEXT-END-FRAME is deprecated since 4.16"))
   (%draw-context-end-frame context))
 
@@ -272,7 +272,7 @@
   @see-function{gdk:draw-context-begin-frame}
   @see-function{gdk:draw-context-end-frame}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CONTEXT-IS-IN-FRAME is deprecated since 4.16"))
   (%draw-context-is-in-frame context))
 
@@ -313,7 +313,7 @@
   @see-class{gdk:draw-context}
   @see-symbol{cairo:region-t}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CONTEXT-FRAME-REGION is deprecated since 4.16"))
   (%draw-context-frame-region context))
 

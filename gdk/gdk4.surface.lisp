@@ -642,7 +642,7 @@ lambda (surface region)    :run-last
   @see-class{gdk:surface}
   @see-symbol{cairo:region-t}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:SURFACE-SET-OPAQUE-REGION is deprecated since 4.16."))
   (%surface-set-opaque-region surface
                               (or region (cffi:null-pointer))))
@@ -708,7 +708,7 @@ lambda (surface region)    :run-last
   @see-class{gdk:surface}
   @see-class{gdk:cairo-context}"
   #+(and gtk-4-18 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:SURFACE-CREATE-CAIRO-CONTEXT is deprecated since 4.18."))
   (%surface-create-cairo-context surface))
 
@@ -763,7 +763,7 @@ lambda (surface region)    :run-last
   @see-function{cairo:surface-destroy}
   @see-function{cairo:surface-type}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:SURFACE-CREATE-SIMILAR-SURFACE is deprecated since 4.12."))
   (%surface-create-similar-surface surface content width height))
 

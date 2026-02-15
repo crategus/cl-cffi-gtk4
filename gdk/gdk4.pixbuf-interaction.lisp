@@ -78,7 +78,7 @@
   @see-class{gdk:texture}
   @see-symbol{cairo:surface-t}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:PIXBUF-FROM-SURFACE is deprecated since 4.12."))
   (%pixbuf-from-surface surface xsrc ysrc width height))
 
@@ -109,7 +109,7 @@
   @see-class{gdk:texture}
   @see-class{gdk-pixbuf:pixbuf}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:PIXBUF-FROM-TEXTURE is deprecated since 4.12."))
   (%pixbuf-from-texture texture))
 

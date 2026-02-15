@@ -103,7 +103,7 @@
   @see-function{gdk:draw-context-begin-frame}
   @see-function{gdk:draw-context-end-frame}"
   #+(and gtk-4-18 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CAIRO-CONTEXT-CAIRO-CREATE is deprecated since 4.18."))
   (%cairo-context-cairo-create context))
 

@@ -110,7 +110,7 @@
   @see-symbol{cairo:extend-t}
   @see-class{gdk-pixbuf:pixbuf}"
   #+(and gtk-4-20 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CAIRO-SET-SOURCE-PIXBUF is deprecated since 4.20."))
   (%cairo-set-source-pixbuf cr
                             pixbuf
@@ -248,7 +248,7 @@
   @see-function{gdk:gl-texture-new}
   @see-function{gdk:texture-download}"
   #+(and gtk-4-6 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:CAIRO-DRAW-FROM-GL is deprecated since 4.6."))
   (%cairo-draw-from-gl cr surface source type scale x y width height))
 

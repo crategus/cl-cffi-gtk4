@@ -673,7 +673,7 @@ lambda (display setting)    :run-last
   @see-class{gtk:window}
   @see-function{gdk:toplevel-startup-id}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:DISPLAY-NOTIFY-STARTUP-COMPLETE is deprecated since 4.10."))
   (%display-notify-startup-complete display startup))
 
@@ -873,7 +873,7 @@ lambda (display setting)    :run-last
   @end{dictionary}
   @see-class{gdk:display}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GDK:DISPLAY-STARTUP-NOTIFICATION-ID is deprecated since 4.10."))
   (%display-startup-notification-id display))
 
