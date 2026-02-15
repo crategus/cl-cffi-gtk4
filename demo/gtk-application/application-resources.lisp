@@ -36,7 +36,7 @@
 
 (defun application-resources (&rest argv)
   (let (;; Switch off warnings for deprecated shortcuts window implementation
-        (gtk-init:*gtk-warn-deprecated* nil))
+        (gtk-init:*warn-deprecated* nil))
     ;; Register the resources for automatic loading
     (g:with-resource (resource (glib-sys:check-and-create-resources
                                        "gtk4-application.xml"

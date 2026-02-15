@@ -13,8 +13,8 @@
 ;;;; The <tt>GtkMessageDialog</tt> widget is deprectated since version 4.10. See
 ;;;; the <tt>GtkAlertDialog</tt> widget for a replacement of the message dialog.
 ;;;;
-;;;; In this example, we bind the <tt>gtk-init:*gtk-warn-deprecated*</tt>
-;;;; global variable to <tt>NIL</tt> to avoid warnings.
+;;;; In this example, we bind the <tt>gtk-init:*warn-deprecated*</tt> global
+;;;; variable to <tt>NIL</tt> to avoid warnings.
 ;;;;
 ;;;; 2026-02-15
 
@@ -23,7 +23,7 @@
 ;; Variant 1
 
 (defun create-message-dialog-simple (parent)
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:message-dialog
                                  :transient-for parent
                                  :modal t
@@ -41,7 +41,7 @@
 ;; Variant 2
 
 (defun create-message-dialog-simple2 (parent)
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (gtk:message-dialog-new parent
                                           '(:modal)
                                           :info

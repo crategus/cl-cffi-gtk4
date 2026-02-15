@@ -15,7 +15,7 @@
 (in-package :gtk4-example)
 
 (defun create-file-chooser-native (&optional parent)
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (native (gtk:file-chooser-native-new "Open File"
                                               parent
                                               :open

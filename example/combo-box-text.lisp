@@ -26,7 +26,7 @@
 
 (defun do-combo-box-text (&optional application)
   (let* (;; Switch off warnings for deprectated GtkComboBoxText widget
-         (gtk-init:*gtk-warn-deprecated* nil)
+         (gtk-init:*warn-deprecated* nil)
          (hbox (make-instance 'gtk:box
                               :orientation :horizontal
                               :margin-top 24

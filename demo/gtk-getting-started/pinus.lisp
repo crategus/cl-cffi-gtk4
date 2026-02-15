@@ -76,7 +76,7 @@
            (error "POS-TO-TRANSITION: Unknown position.")))))
 
 (defun prefs-new (win)
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (prefs (make-instance 'prefs
                                :transient-for win
                                :use-header-bar 1))

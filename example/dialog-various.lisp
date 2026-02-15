@@ -10,8 +10,8 @@
 ;;;; <tt>GtkDialog</tt> and the <tt>GtkAlertDialog</tt> widget for a replacement
 ;;;; of <tt>GtkMessageDialog</tt>.
 ;;;;
-;;;; In these examples, we bind the <tt>gtk-init:*gtk-warn-deprecated*</tt>
-;;;; global variable to <tt>NIL</tt> to avoid warnings.
+;;;; In these examples, we bind the <tt>gtk-init:*warn-deprecated*</tt> global
+;;;; variable to <tt>NIL</tt> to avoid warnings.
 ;;;;
 ;;;; 2026-02-15
 
@@ -39,7 +39,7 @@
            SOFTWARE."))
 
 (defun create-dialog (parent &optional (headerbar-p -1))
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:dialog
                                  :transient-for parent
                                  :modal t
@@ -73,7 +73,7 @@
       (gtk:window-present dialog))))
 
 (defun create-dialog-from-ui (parent)
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((builder (make-instance 'gtk:builder)))
       (gtk:builder-add-from-file builder (glib-sys:sys-path "resource/dialog.ui"))
       (let ((dialog (gtk:builder-object builder "dialog")))
@@ -85,7 +85,7 @@
         (gtk:window-present dialog)))))
 
 (defun create-message-dialog (parent &optional (mtype :info))
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:message-dialog
                                  :transient-for parent
                                  :modal t

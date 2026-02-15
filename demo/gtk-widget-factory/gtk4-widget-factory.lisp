@@ -1789,7 +1789,7 @@
                                      :package "gtk4-widget-factory"))
     (unless (string= "GTK4 Widget Factory" (g:application-name))
       (setf (g:application-name) "GTK4 Widget Factory"))
-    (let* ((gtk-init:*gtk-warn-deprecated* nil)
+    (let* ((gtk-init:*warn-deprecated* nil)
            (argv (cons (g:application-name)
                        (or argv (uiop:command-line-arguments))))
            (app (setf *factory*
