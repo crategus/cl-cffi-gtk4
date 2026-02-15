@@ -24,13 +24,13 @@
 
 (defpackage :gtk-init
   (:use :cl)
-  (:export *gtk-warn-deprecated*))
+  (:export *warn-deprecated*))
 
 (in-package :gtk-init)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (defvar *gtk-warn-deprecated* t)
-  (when *gtk-warn-deprecated*
+  (defvar *warn-deprecated* t)
+  (when *warn-deprecated*
     (pushnew :gtk-warn-deprecated *features*)))
 
 #+sbcl
