@@ -204,7 +204,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj assistant-page) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:ASSISTANT-PAGE is deprecated since 4.10")))
 
 #+liber-documentation
@@ -318,7 +318,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj assistant) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:ASSISTANT is deprecated since 4.10")))
 
 #+liber-documentation

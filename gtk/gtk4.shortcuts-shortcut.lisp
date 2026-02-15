@@ -183,7 +183,7 @@
 
 #+(and gtk-4-18 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj shortcuts-shortcut) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:SHORTCUTS-SHORTCUT is deprecated since 4.18")))
 
 #+liber-documentation

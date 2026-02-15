@@ -71,7 +71,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj tree-drag-source) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TREE-DRAG-SOURCE is deprecated since 4.10")))
 
 #+liber-documentation
@@ -211,7 +211,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj tree-drag-dest) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TREE-DRAG-DEST is deprecated since 4.10")))
 
 #+liber-documentation

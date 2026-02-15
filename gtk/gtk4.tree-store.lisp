@@ -138,7 +138,7 @@
             &allow-other-keys)
   (declare (ignore initargs))
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TREE-STORE is deprecated since 4.10"))
   (when column-types-p
     (tree-store-set-column-types store column-types)))

@@ -140,7 +140,7 @@
   @end{short}
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:window}"
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (dialog (make-instance 'page-setup-unix-dialog)))
     (when title
       (setf (window-title dialog) title))

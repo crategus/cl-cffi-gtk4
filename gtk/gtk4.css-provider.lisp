@@ -868,7 +868,7 @@ lambda (provider section error)    :run-last
   @see-function{gtk:css-provider-load-from-string}
   @see-function{gtk:css-provider-load-from-bytes}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:CSS-PROVIDER-LOAD-FROM-DATA is deprecated since 4.12."))
   (%css-provider-load-from-data provider data -1))
 

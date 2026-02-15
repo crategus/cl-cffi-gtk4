@@ -593,7 +593,7 @@
   @see-function{gtk:image-new-from-paintable}
   @see-function{gdk:texture-new-for-pixbuf}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:IMAGE-NEW-FROM-PIXBUF is deprecated since 4.12"))
   (%image-new-from-pixbuf pixbuf))
 
@@ -745,7 +745,7 @@
   @see-class{gdk-pixbuf:pixbuf}
   @see-function{gtk:image-set-from-paintable}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:IMAGE-SET-FROM-PIXBUF is deprecated since 4.12"))
     (%image-set-from-pixbuf image pixbuf))
 

@@ -1605,7 +1605,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-present}"
   #+(and gtk-4-14 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-PRESENT-WITH-TIME is deprecated since 4.14"))
   (%window-present-with-time window timestamp))
 

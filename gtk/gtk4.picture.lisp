@@ -502,7 +502,7 @@
   @see-function{gtk:picture-new-for-paintable}
   @see-function{gdk:texture-new-for-pixbuf}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:PICTURE-NEW-FOR-PIXBUF is deprecated since 4.12"))
   (%picture-new-for-pixbuf pixbuf))
 
@@ -608,7 +608,7 @@
   @see-function{gtk:picture-new-for-pixbuf}
   @see-function{gtk:picture-paintable}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:PICTURE-SET-PIXBUF is deprecated since 4.12"))
   (%picture-set-pixbuf picture pixbuf))
 

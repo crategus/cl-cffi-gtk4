@@ -318,7 +318,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj style-context) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT is deprecated since 4.10.")))
 
 #+liber-documentation
@@ -458,7 +458,7 @@
   @see-class{gtk:style-provider}
   @see-function{gtk:style-context-add-provider-for-display}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-ADD-PROVIDER is deprecated since 4.10."))
   (%style-context-add-provider context provider priority))
 
@@ -492,7 +492,7 @@
   @see-class{gtk:style-provider}
   @see-function{gtk:style-context-add-provider}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-REMOVE-PROVIDER is deprecated since 4.10."))
   (%style-context-remove-provider context provider))
 
@@ -613,7 +613,7 @@
   @see-function{gtk:widget-state-flags}
   @see-function{gtk:style-context-padding}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-STATE is deprecated since 4.10."))
   (%style-context-state context))
 
@@ -651,7 +651,7 @@
   @see-class{gtk:style-context}
   @see-function{gtk:widget-scale-factor}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-SCALE is deprecated since 4.10."))
   (%style-context-scale context))
 
@@ -681,7 +681,7 @@
   @see-class{gdk:rgba}
   @see-function{gtk:widget-color}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-COLOR is deprecated since 4.10."))
   (let ((color (gdk:rgba-new)))
     (%style-context-color context color)
@@ -711,7 +711,7 @@
   @see-class{gtk:style-context}
   @see-class{gtk:border}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-BORDER is deprecated since 4.10."))
   (let ((border (border-new)))
     (%style-context-border context border)
@@ -742,7 +742,7 @@
   @see-class{gtk:border}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-PADDING is deprecated since 4.10."))
   (let ((padding (border-new)))
     (%style-context-padding context padding)
@@ -773,7 +773,7 @@
   @see-class{gtk:border}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-MARGIN is deprecated since 4.10."))
   (let ((margin (border-new)))
     (%style-context-margin context margin)
@@ -806,7 +806,7 @@
   @see-class{gtk:style-context}
   @see-class{gdk:rgba}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-LOOKUP-COLOR is deprecated since 4.10."))
   (let ((color (gdk:rgba-new)))
     (when (%style-context-lookup-color context name color)
@@ -843,7 +843,7 @@
   @see-function{gtk:style-context-state}
   @see-function{gtk:style-context-restore}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-SAVE is deprecated since 4.10."))
   (%style-context-save context))
 
@@ -872,7 +872,7 @@
   @see-class{gtk:style-context}
   @see-function{gtk:style-context-save}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-RESTORE is deprecated since 4.10."))
   (%style-context-restore context))
 
@@ -905,7 +905,7 @@
   @see-class{gtk:style-context}
   @see-function{gtk:widget-has-css-class}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-HAS-CLASS is deprecated since 4.10."))
   (%style-context-has-class context classname))
 
@@ -948,7 +948,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-function{gtk:widget-add-css-class}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-ADD-CLASS is deprecated since 4.10."))
   (%style-context-add-class context classname))
 
@@ -980,7 +980,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-function{gtk:widget-remove-css-class}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-REMOVE-CLASS is deprecated since 4.10."))
   (%style-context-remove-class context classname))
 
@@ -1034,7 +1034,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{gtk:style-context-print-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:STYLE-CONTEXT-TO-STRING is deprecated since 4.10."))
   (%style-context-to-string context flags))
 
@@ -1079,7 +1079,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-ACTIVITY is deprecated since 4.10."))
   (%render-activity context cr (coerce x 'double-float)
                                (coerce y 'double-float)
@@ -1126,7 +1126,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-ARROW is deprecated since 4.10."))
   (%render-arrow context cr (coerce angle 'double-float)
                             (coerce x 'double-float)
@@ -1172,7 +1172,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-BACKGROUND is deprecated since 4.10."))
   (%render-background context cr (coerce x 'double-float)
                                  (coerce y 'double-float)
@@ -1223,7 +1223,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-CHECK is deprecated since 4.10."))
   (%render-check context cr (coerce x 'double-float)
                             (coerce y 'double-float)
@@ -1275,7 +1275,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-EXPANDER is deprecated since 4.10."))
   (%render-expander context cr (coerce x 'double-float)
                                (coerce y 'double-float)
@@ -1321,7 +1321,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-FOCUS is deprecated since 4.10."))
   (%render-focus context cr (coerce x 'double-float)
                             (coerce y 'double-float)
@@ -1369,7 +1369,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-FRAME is deprecated since 4.10."))
   (%render-frame context cr (coerce x 'double-float)
                             (coerce y 'double-float)
@@ -1417,7 +1417,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:window}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-HANDLE is deprecated since 4.10."))
   (%render-handle context cr (coerce x 'double-float)
                              (coerce y 'double-float)
@@ -1462,7 +1462,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-class{gdk:texture}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-ICON is deprecated since 4.10."))
   (%render-icon context cr texture (coerce x 'double-float)
                                    (coerce y 'double-float)))
@@ -1501,7 +1501,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{pango:layout}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-LAYOUT is deprecated since 4.10."))
   (%render-layout context cr (coerce x 'double-float)
                              (coerce y 'double-float)
@@ -1544,7 +1544,7 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-LINE is deprecated since 4.10."))
   (%render-line context cr (coerce x0 'double-float)
                            (coerce y0 'double-float)
@@ -1595,7 +1595,7 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:RENDER-OPTION is deprecated since 4.10."))
   (%render-option context cr (coerce x 'double-float)
                              (coerce y 'double-float)

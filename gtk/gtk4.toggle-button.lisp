@@ -368,7 +368,7 @@ lambda (toggle)    :run-first
   @end{dictionary}
   @see-class{gtk:toggle-button}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TOGGLE-BUTTON-TOGGLED is deprecated since 4.10"))
   (%toggle-button-toggled button))
 

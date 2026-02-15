@@ -82,7 +82,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj color-chooser) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:COLOR-CHOOSER is deprecated since 4.10")))
 
 #+liber-documentation

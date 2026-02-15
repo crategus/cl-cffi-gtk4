@@ -485,7 +485,7 @@ lambda (calendar)    :run-first
   @end{dictionary}
   @see-class{gtk:calendar}"
   #+(and gtk-4-20 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:CALENDAR-SELECT-DAY is deprecated since 4.20."))
   (setf (calendar-year calendar) year
         (calendar-month calendar) month

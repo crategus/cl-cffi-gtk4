@@ -2328,7 +2328,7 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}
   @see-function{gtk:widget-visible}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-SHOW is deprecated since 4.10."))
   (%widget-show widget))
 
@@ -2359,7 +2359,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-show}
   @see-function{gtk:widget-visible}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-HIDE is deprecated since 4.10."))
   (%widget-hide widget))
 
@@ -3280,7 +3280,7 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}
   @see-function{gtk:widget-compute-point}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TRANSLATE-COORDINATES is deprecated since 4.12."))
   (cffi:with-foreign-objects ((xdst :int) (ydst :int))
     (when (%widget-translate-coordinates src dst xsrc ysrc xdst ydst)
@@ -3475,7 +3475,7 @@ lambda (widget)    :run-last
 
 (defun (setf widget-font-options) (options widget)
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-FONT-OPTIONS is deprecated since 4.16."))
   (let ((options1 (or options (cffi:null-pointer))))
     (cffi:foreign-funcall "gtk_widget_set_font_options"
@@ -3509,7 +3509,7 @@ lambda (widget)    :run-last
   @see-class{gdk:screen}
   @see-symbol{cairo:font-options-t}"
   #+(and gtk-4-16 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-FONT-OPTIONS is deprecated since 4.16."))
   (let ((options (%widget-font-options widget)))
     (unless (cffi:null-pointer-p options)
@@ -4143,7 +4143,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-allocated-height}
   @see-function{gtk:widget-allocation}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-ALLOCATED-WIDTH is deprecated since 4.12."))
   (%widget-allocated-width widget))
 
@@ -4179,7 +4179,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-allocation}
   @see-function{gtk:widget-height}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-ALLOCATED-HEIGHT is deprecated since 4.12."))
   (%widget-allocated-height widget))
 
@@ -4230,7 +4230,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-width}
   @see-function{gtk:widget-height}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-ALLOCATION is deprecated since 4.12."))
   (let ((allocation (gdk:rectangle-new)))
     (%widget-allocation widget allocation)
@@ -4261,7 +4261,7 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}
   @see-function{gtk:widget-baseline}"
   #+(and gtk-4-12 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-ALLOCATED-BASELINE is deprecated since 4.12."))
   (%widget-allocated-baseline widget))
 
@@ -5223,7 +5223,7 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}
   @see-class{gtk:style-context}"
   #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:WIDGET-STYLE-CONTEXT is deprecated since 4.10."))
   (%widget-style-context widget))
 

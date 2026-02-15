@@ -257,7 +257,7 @@
 
 (defun (setf application-window-help-overlay) (overlay window)
   #+(and gtk-4-18 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:APPLICATION-WINDOW-HELP-OVERLAY is deprecated since 4.18."))
   (cffi:foreign-funcall "gtk_application_window_set_help_overlay"
                         (g:object application-window) window
@@ -289,7 +289,7 @@
   @see-class{gtk:application-window}
   @see-class{gtk:shortcuts-window}"
   #+(and gtk-4-18 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:APPLICATION-WINDOW-HELP-OVERLAY is deprecated since 4.18."))
   (%application-window-help-overlay window))
 

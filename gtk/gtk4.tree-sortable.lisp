@@ -156,7 +156,7 @@
 
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj tree-sortable) &key)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GTK:TREE-SORTABLE is deprecated since 4.10")))
 
 ;;; ----------------------------------------------------------------------------
