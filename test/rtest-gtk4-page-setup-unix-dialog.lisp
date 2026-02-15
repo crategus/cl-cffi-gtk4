@@ -56,9 +56,46 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_page_setup_unix_dialog_new
+
+(test gtk-page-setup-unix-dialog-new
+  (glib-test:with-check-memory (dialog :strong 1)
+    (is (typep (setf dialog
+                     (gtk:page-setup-unix-dialog-new "title" nil))
+               'gtk:page-setup-unix-dialog))
+    ;; Page setup object is present.
+    (is (typep (gtk:page-setup-unix-dialog-page-setup dialog) 'gtk:page-setup))
+    ;; No print settings object.
+    (is-false (gtk:page-setup-unix-dialog-print-settings dialog))
+    ;; Destroy dialog
+    (is-false (gtk:window-destroy dialog))))
+
 ;;;     gtk_page_setup_unix_dialog_set_page_setup
 ;;;     gtk_page_setup_unix_dialog_get_page_setup
+
+(test gtk-page-setup-unix-dialog-page-setup
+  (glib-test:with-check-memory (dialog :strong 1)
+    (is (typep (setf dialog
+                     (gtk:page-setup-unix-dialog-new "title" nil))
+               'gtk:page-setup-unix-dialog))
+    (is (typep (setf (gtk:page-setup-unix-dialog-page-setup dialog)
+                     (gtk:page-setup-new)) 'gtk:page-setup))
+    (is (typep (gtk:page-setup-unix-dialog-page-setup dialog) 'gtk:page-setup))
+    (is-false (setf (gtk:page-setup-unix-dialog-page-setup dialog) nil))
+    (is-false (gtk:window-destroy dialog))))
+
 ;;;     gtk_page_setup_unix_dialog_set_print_settings
 ;;;     gtk_page_setup_unix_dialog_get_print_settings
 
-;;; 2024-9-20
+(test gtk-page-setup-unix-dialog-print-settings
+  (glib-test:with-check-memory (dialog :strong 1)
+    (is (typep (setf dialog
+                     (gtk:page-setup-unix-dialog-new "title" nil))
+               'gtk:page-setup-unix-dialog))
+    (is (typep (setf (gtk:page-setup-unix-dialog-print-settings dialog)
+                     (gtk:print-settings-new)) 'gtk:print-settings))
+    (is (typep (gtk:page-setup-unix-dialog-print-settings dialog)
+               'gtk:print-settings))
+    (is-false (setf (gtk:page-setup-unix-dialog-print-settings dialog) nil))
+    (is-false (gtk:window-destroy dialog))))
+
+;;; 2026-02-13

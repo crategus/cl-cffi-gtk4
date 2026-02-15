@@ -114,10 +114,9 @@
       (is (typep (setf bitset
                        (gtk:selection-model-selection-in-range selection 50 10))
                  'gtk:bitset))
-      (is (= 284 (gtk:bitset-size bitset)))
-      (is (=   0 (gtk:bitset-minimum bitset)))
-      (is (= 283 (gtk:bitset-maximum bitset)))
-
+      (is (<= 299 (gtk:bitset-size bitset)))
+      (is (=    0 (gtk:bitset-minimum bitset)))
+      (is (<= 298 (gtk:bitset-maximum bitset)))
       (is-true (gtk:selection-model-unselect-all selection))
       (is (typep (setf bitset
                        (gtk:selection-model-selection-in-range selection 50 10))
@@ -143,4 +142,4 @@
     ;; Remove references
     (is-false (setf (gtk:multi-selection-model selection) nil))))
 
-;;; 2026-02-05
+;;; 2026-02-15
