@@ -3,7 +3,7 @@
 ;;;; This example shows a very simple window. The window has the title
 ;;;; "Simple Window". The window can be sized and moved.
 ;;;;
-;;;; 2024-4-10
+;;;; 2024-04-10
 
 (in-package :gtk4-example)
 

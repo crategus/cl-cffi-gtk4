@@ -1,9 +1,19 @@
 ;;;; Various Dialog Windows
 ;;;;
-;;;; In this example, various GtkDialog, GtkMessageDialog and GtkAboutDialog
-;;;; widgets are shown.
+;;;; In this example, various <tt>GtkDialog</tt>, <tt>GtkMessageDialog</tt> and
+;;;; <tt>GtkAboutDialog</tt> widgets are shown.
 ;;;;
-;;;; 2024-4-4
+;;;; <b>Warning</b>
+;;;;
+;;;; The <tt>GtkDialog</tt> and <tt>GtkMessageDialog</tt> widgets are deprecated
+;;;; since GTK 4.10. See the <tt>GtkWindow</tt> widget for a replacement of
+;;;; <tt>GtkDialog</tt> and the <tt>GtkAlertDialog</tt> widget for a replacement
+;;;; of <tt>GtkMessageDialog</tt>.
+;;;;
+;;;; In these examples, we bind the <tt>gtk-init:*gtk-warn-deprecated*</tt>
+;;;; global variable to <tt>NIL</tt> to avoid warnings.
+;;;;
+;;;; 2026-02-15
 
 (in-package :gtk4-example)
 
@@ -29,66 +39,69 @@
            SOFTWARE."))
 
 (defun create-dialog (parent &optional (headerbar-p -1))
-  (let ((dialog (make-instance 'gtk:dialog
-                               :transient-for parent
-                               :modal t
-                               :use-header-bar headerbar-p
-                               :title "Dialog Window")))
-    ;; Connect a handler to the "response" signal
-    (g:signal-connect dialog "response"
-                      (lambda (widget response)
-                        (format t "Response is: ~s~%" response)
-                        (gtk:window-destroy widget)))
-    ;; Add a label widget within a box to the content area
-    (let ((vbox (make-instance 'gtk:box
-                               :orientation :vertical
-                               :margin-top 12
-                               :margin-bottom 12
-                               :margin-start 12
-                               :margin-end 12))
-          (label (make-instance 'gtk:label
-                                :wrap t
-                                :label
-                                (format nil
-                                        "The content area is the place to ~
-                                         put in the widgets."))))
-      (gtk:box-append vbox label)
-      (gtk:box-append (gtk:dialog-content-area dialog) vbox))
-    ;; Add buttons to the action area
-    (gtk:dialog-add-button dialog "Yes" :yes)
-    (gtk:dialog-add-button dialog "Cancel" :cancel)
-    (gtk:dialog-set-default-response dialog :cancel)
-    ;; Show the dialog
-    (gtk:window-present dialog)))
-
-(defun create-dialog-from-ui (parent)
-  (let ((builder (make-instance 'gtk:builder)))
-    (gtk:builder-add-from-file builder (glib-sys:sys-path "resource/dialog.ui"))
-    (let ((dialog (gtk:builder-object builder "dialog")))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((dialog (make-instance 'gtk:dialog
+                                 :transient-for parent
+                                 :modal t
+                                 :use-header-bar headerbar-p
+                                 :title "Dialog Window")))
+      ;; Connect a handler to the "response" signal
       (g:signal-connect dialog "response"
                         (lambda (widget response)
-                          (format t "response ID is : ~a~%" response)
+                          (format t "Response is: ~s~%" response)
                           (gtk:window-destroy widget)))
-      (setf (gtk:window-transient-for dialog) parent)
+      ;; Add a label widget within a box to the content area
+      (let ((vbox (make-instance 'gtk:box
+                                 :orientation :vertical
+                                 :margin-top 12
+                                 :margin-bottom 12
+                                 :margin-start 12
+                                 :margin-end 12))
+            (label (make-instance 'gtk:label
+                                  :wrap t
+                                  :label
+                                  (format nil
+                                          "The content area is the place to ~
+                                           put in the widgets."))))
+        (gtk:box-append vbox label)
+        (gtk:box-append (gtk:dialog-content-area dialog) vbox))
+      ;; Add buttons to the action area
+      (gtk:dialog-add-button dialog "Yes" :yes)
+      (gtk:dialog-add-button dialog "Cancel" :cancel)
+      (gtk:dialog-set-default-response dialog :cancel)
+      ;; Show the dialog
       (gtk:window-present dialog))))
 
+(defun create-dialog-from-ui (parent)
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((builder (make-instance 'gtk:builder)))
+      (gtk:builder-add-from-file builder (glib-sys:sys-path "resource/dialog.ui"))
+      (let ((dialog (gtk:builder-object builder "dialog")))
+        (g:signal-connect dialog "response"
+                          (lambda (widget response)
+                            (format t "response ID is : ~a~%" response)
+                            (gtk:window-destroy widget)))
+        (setf (gtk:window-transient-for dialog) parent)
+        (gtk:window-present dialog)))))
+
 (defun create-message-dialog (parent &optional (mtype :info))
-  (let ((dialog (make-instance 'gtk:message-dialog
-                               :transient-for parent
-                               :modal t
-                               :message-type mtype
-                               :buttons :ok
-                               :text "Message Dialog"
-                               :secondary-text
-                               (format nil
-                                       "This is a message dialog of type ~a."
-                                       mtype))))
-    (g:signal-connect dialog "response"
-                      (lambda (widget response)
-                        (declare (ignore response))
-                        (gtk:window-destroy widget)))
-    ;; Show the message dialog
-    (gtk:window-present dialog)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((dialog (make-instance 'gtk:message-dialog
+                                 :transient-for parent
+                                 :modal t
+                                 :message-type mtype
+                                 :buttons :ok
+                                 :text "Message Dialog"
+                                 :secondary-text
+                                 (format nil
+                                         "This is a message dialog of type ~a."
+                                         mtype))))
+      (g:signal-connect dialog "response"
+                        (lambda (widget response)
+                          (declare (ignore response))
+                          (gtk:window-destroy widget)))
+      ;; Show the message dialog
+      (gtk:window-present dialog))))
 
 (defun create-about-dialog (parent)
   (gtk:show-about-dialog parent
@@ -214,5 +227,5 @@
       (setf (gtk:check-button-group radio) group)
       (gtk:box-append hbox radio)
       (gtk:box-append vbox hbox))
-    ;; Pack and show the widgets
+    ;; Present the window
     (gtk:window-present window)))
