@@ -350,13 +350,13 @@
 
 (defun callback-action-new (func)
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-02-14}
   @argument[func]{a @sym{gtk:shortcut-func} callback function to call}
   @return{The new @class{gtk:callback-action} object.}
   @short{Create a custom action that calls the given callback when activated.}
   @see-class{gtk:callback-action}
   @see-symbol{gtk:shortcut-func}"
-  (glib:with-stable-pointer (ptr func)
+  (let ((ptr (glib:allocate-stable-pointer func)))
     (%callback-action-new (cffi:callback shortcut-func)
                            ptr
                            (cffi:callback glib:stable-pointer-destroy-notify))))
