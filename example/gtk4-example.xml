@@ -24,7 +24,7 @@
   <gresource prefix="cursors/images">
     <file>default_cursor.png</file>
     <file>none_cursor.png</file>
-    <file>gtk_logo_cursor.png</file>
+    <file>gtk-logo-cursor.png</file>
     <file>context_menu_cursor.png</file>
     <file>help_cursor.png</file>
     <file>pointer_cursor.png</file>

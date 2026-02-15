@@ -78,7 +78,7 @@
                (:file "drop-down")
 
                ;; Media Support
-               (:file "video")
+               (:file "video-player")
 
                ;; Buttons and Toggle Widgets
                (:file "button-various")

@@ -79,7 +79,7 @@
            #:do-drop-down
 
            ;; Media Support
-           #:do-video
+           #:do-video-player
 
            ;; Button and Toggle Widgets
            #:do-button-various
