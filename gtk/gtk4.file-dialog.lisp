@@ -128,7 +128,7 @@
 
 #+liber-documentation
 (setf (documentation 'file-dialog 'type)
- "@version{2025-09-26}
+ "@version{2026-02-14}
   @begin{short}
     The @class{gtk:file-dialog} object collects the arguments that are needed to
     present a file chooser dialog to the user, such as a title for the dialog
@@ -142,14 +142,14 @@
 
   Since 4.10
   @see-constructor{gtk:file-dialog-new}
-  @see-slot{gtk:accept-label}
-  @see-slot{gtk:default-filter}
-  @see-slot{gtk:filters}
-  @see-slot{gtk:initial-file}
-  @see-slot{gtk:initial-folder}
-  @see-slot{gtk:initial-name}
-  @see-slot{gtk:modal}
-  @see-slot{gtk:title}
+  @see-slot{gtk:file-dialog-accept-label}
+  @see-slot{gtk:file-dialog-default-filter}
+  @see-slot{gtk:file-dialog-filters}
+  @see-slot{gtk:file-dialog-initial-file}
+  @see-slot{gtk:file-dialog-initial-folder}
+  @see-slot{gtk:file-dialog-initial-name}
+  @see-slot{gtk:file-dialog-modal}
+  @see-slot{gtk:file-dialog-title}
   @see-class{gio:async-result}
   @see-class{gio:task}")
 

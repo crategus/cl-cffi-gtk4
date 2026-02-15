@@ -82,7 +82,7 @@
 
 #+liber-documentation
 (setf (documentation 'page-setup-unix-dialog 'type)
- "@version{2024-05-01}
+ "@version{2026-02-12}
   @begin{short}
     The @class{page-setup-unix-dialog} widget implements a page setup dialog
     for platforms which do not provide a native page setup dialog, like Unix.
@@ -91,25 +91,32 @@
   @image[pagesetupdialog]{Figure: GtkPageSetupUnixDialog}
 
   It can be used very much like any other GTK dialog, at the cost of the
-  portability offered by the high-level printing API.
+  portability offered by the high-level printing API in the
+  @class{gtk:print-operation} implementation.
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:page-setup-unix-dialog} implementation has a single CSS node
+    with the name @code{window} and @code{.pagesetup} style class.
+  @end{dictionary}
   @begin[Examples]{dictionary}
     @begin{pre}
 (defun create-page-setup-dialog (&optional parent)
-  (let* ((path (sys-path \"resource/page-setup.ini\"))
-         (pagesetup (gtk:page-setup-new))
-         (dialog (gtk:page-setup-unix-dialog-new \"Page Setup Dialog\" parent)))
+  (let* ((path (glib-sys:sys-path \"resource/page-setup.ini\"))
+         (dialog (gtk:page-setup-unix-dialog-new \"Page Setup Dialog\" parent))
+         (pagesetup (gtk:page-setup-new)))
     ;; Connect a handler to the \"response\" signal
     (g:signal-connect dialog \"response\"
             (lambda (widget response)
-              (when (= -5 response)
+              (when (= -5 response) ; response type is :ok
+                (format t \"Update page setup and print settings.~%\")
+                ;; Get page setup and store it
                 (setf pagesetup
                       (gtk:page-setup-unix-dialog-page-setup dialog))
                 (gtk:page-setup-to-file pagesetup path))
               (gtk:window-destroy widget)))
-    ;; Load and set Page setup from file
+    ;; Load and set page setup from file
     (if (gtk:page-setup-load-file pagesetup path)
-        (format t \"PAGE SETUP successfully loaded~%\")
-        (format t \"PAGE SETUP cannot be loaded, use standard settings~%\"))
+        (format t \"Page setup successfully loaded.~%\")
+        (format t \"Page setup cannot be loaded.~%\"))
     (setf (gtk:page-setup-unix-dialog-page-setup dialog) pagesetup)
     ;; Present dialog
     (gtk:window-present dialog)))
@@ -123,7 +130,7 @@
 
 (defun page-setup-unix-dialog-new (title parent)
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-02-12}
   @argument[title]{a string for the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog,
     or @code{nil}}
@@ -158,17 +165,15 @@
 (cffi:defcfun ("gtk_page_setup_unix_dialog_get_page_setup"
                page-setup-unix-dialog-page-setup) (g:object page-setup)
  #+liber-documentation
- "@version{2024-01-05}
+ "@version{2026-02-12}
   @syntax{(gtk:page-setup-unix-dialog-page-setup dialog) => setup}
   @syntax{(setf (gtk:page-setup-unix-dialog-page-setup dialog) setup)}
   @argument[dialog]{a @class{gtk:page-setup-unix-dialog} widget}
   @argument[setup]{a @class{gtk:page-setup} object}
   @begin{short}
-    The @fun{gtk:page-setup-unix-dialog-page-setup} function gets the currently
-    selected page setup from the page setup dialog.
+    Gets or sets the page setup from which the page setup dialog takes its
+    values.
   @end{short}
-  The @setf{gtk:page-setup-unix-dialog-page-setup} function sets the page setup
-  from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:page-setup}"
   (dialog (g:object page-setup-unix-dialog)))
@@ -188,19 +193,18 @@
   settings)
 
 (cffi:defcfun ("gtk_page_setup_unix_dialog_get_print_settings"
-               page-setup-unix-dialog-print-settings) :void
+               page-setup-unix-dialog-print-settings)
+    (g:object print-settings)
  #+liber-documentation
- "@version{#2024-01-05}
+ "@version{2026-02-12}
   @syntax{(gtk:page-setup-unix-dialog-print-settings dialog) => settings}
   @syntax{(setf (gtk:page-setup-unix-dialog-print-settings dialog) settings)}
   @argument[dialog]{a @class{gtk:page-setup-unix-dialog} widget}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
-    The @fun{gtk:page-setup-unix-dialog-print-settings} function gets the
-    current print settings from the page setup dialog.
+    Gets or sets the print settings from which the page setup dialog takes its
+    values.
   @end{short}
-  The @setf{gtk:page-setup-unix-dialog-print-settings} function sets the print
-  settings from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:print-settings}"
   (dialog (g:object page-setup-unix-dialog)))
