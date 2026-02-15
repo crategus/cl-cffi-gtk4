@@ -31,7 +31,7 @@ Content from the GDK 4.20 Reference Manual
   gdk4.paintable.lisp              GdkPaintable, GdkSnapshot         GDK 4.20 .
   gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ... GDK 4.20 +
   gdk4.texture-downloader.lisp     GdkTextureDownloader              GDK 4.20 .
-  gdk4.dmabuf-texture.lisp         GdkDmabufTexture, ...             GDK 4.20 +
+  gdk4.dmabuf-texture.lisp         GdkDmabufTexture, ...             GDK 4.20 .
 
  Surfaces, Toplevels, Popups
 
@@ -76,4 +76,4 @@ Content from the GDK 4.20 Reference Manual
   gdk4.pango-interaction.lisp      Pango interaction                 GDK 4.20 .
   gdk4.cairo-interaction.lisp      Cairo interaction                 GDK 4.20 .
 
-2026-02-04
+2026-02-14

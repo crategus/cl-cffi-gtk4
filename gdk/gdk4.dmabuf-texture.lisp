@@ -105,7 +105,7 @@
 (setf (liber:alias-for-class 'dmabuf-texture)
       "Class"
       (documentation 'dmabuf-texture 'type)
- "@version{2025-02-22}
+ "@version{2026-02-14}
   @begin{short}
     The @class{gdk:dmabuf-texture} class is a @class{gdk:texture} implementation
     representing a DMA buffer.
@@ -162,7 +162,7 @@
 (setf (liber:alias-for-class 'dmabuf-texture-builder)
       "Class"
       (documentation 'dmabuf-texture-builder 'type)
- "@version{2024-07-11}
+ "@version{2026-02-14}
   @begin{short}
     The @class{gdk:dmabuf-texture-builder} object is a builder used to construct
     @class{gdk:texture} objects from DMA buffers.
@@ -218,8 +218,9 @@
       and memory layout of the dma-buf.}
     @item{The file descriptor, offset and stride for each of the planes.}
   @end{itemize}
-  GdkDmabufTextureBuilder can be used for quick one-shot construction of
-  textures as well as kept around and reused to construct multiple textures.
+  The @class{gdk:dmabuf-texture-builder} implementation can be used for quick
+  one-shot construction of textures as well as kept around and reused to
+  construct multiple textures.
 
   For further information, see the Linux kernel
   @url[https://docs.kernel.org/driver-api/dma-buf.html]{Linux kernel documentation}
@@ -245,7 +246,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-display)
       "Accessor"
       (documentation 'dmabuf-texture-builder-display 'function)
- "@version{2025-08-31}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-display object) => display}
   @syntax{(setf (gdk:dmabuf-texture-builder-display object) display)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -273,7 +274,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-fourcc)
       "Accessor"
       (documentation 'dmabuf-texture-builder-fourcc 'function)
- "@version{2025-08-02}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-fourcc object) => fourcc}
   @syntax{(setf (gdk:dmabuf-texture-builder-fourcc object) fourcc)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -283,10 +284,11 @@
     @class{gdk:dmabuf-texture-builder} class gets or sets the format of the
     texture.
   @end{short}
-  Returns 0 if the format was not set. The format is specified as a fourcc code.
+  Returns 0 if the format was not set. The format is specified as a
+  @code{fourcc} code.
 
-  The format must be set before calling the @fun{gdk:gl-texture-builder-build}
-  function.
+  The format must be set before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
 
   Since 4.14
   @see-class{gdk:dmabuf-texture-builder}
@@ -305,7 +307,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-height)
       "Accessor"
       (documentation 'dmabuf-texture-builder-height 'function)
- "@version{2025-08-02}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-height object) => height}
   @syntax{(setf (gdk:dmabuf-texture-builder-height object) height)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -314,15 +316,15 @@
     The accessor for the @slot[gdk:dmabuf-texture-builder]{height} slot of the
     @class{gdk:dmabuf-texture-builder} class gets or sets the height of the
     texture.
-  previously set or 0 if the height was not set.
   @end{short}
   Returns 0 if the height was not set.
 
-  The height must be set before calling the @fun{gdk:gl-texture-builder-build}
-  function.
+  The height must be set before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
 
   Since 4.14
-  @see-class{gdk:dmabuf-texture-builder}")
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-function{gdk:dmabuf-texture-builder-build}")
 
 ;;; --- gdk:dmabuf-texture-builder-modifier ------------------------------------
 
@@ -337,7 +339,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-modifier)
       "Accessor"
       (documentation 'dmabuf-texture-builder-modifier 'function)
- "@version{2025-08-02}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-modifier object) => modifier}
   @syntax{(setf (gdk:dmabuf-texture-builder-modifier object) modifier)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -363,7 +365,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-n-planes)
       "Accessor"
       (documentation 'dmabuf-texture-builder-n-planes 'function)
- "@version{2025-08-02}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-n-planes object) => n-planes}
   @syntax{(setf (gdk:dmabuf-texture-builder-n-planes object) n-planes)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -390,7 +392,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-premultiplied)
       "Accessor"
       (documentation 'dmabuf-texture-builder-premultiplied 'function)
- "@version{2025-08-31}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-premultiplied object) => premultiplied}
   @syntax{(setf (gdk:dmabuf-texture-builder-premultiplied object) premultiplied)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -421,7 +423,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-update-region)
       "Accessor"
       (documentation 'dmabuf-texture-builder-update-region 'function)
- "@version{2025-07-31}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-update-region object) => region}
   @syntax{(setf (gdk:dmabuf-texture-builder-update-region object) region)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -459,7 +461,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-update-texture)
       "Accessor"
       (documentation 'dmabuf-texture-builder-update-texture 'function)
- "@version{2025-08-31}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-update-texture object) => texture}
   @syntax{(setf (gdk:dmabuf-texture-builder-update-region object) texture)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -489,7 +491,7 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-width)
       "Accessor"
       (documentation 'dmabuf-texture-builder-width 'function)
- "@version{2025-08-02}
+ "@version{2026-02-14}
   @syntax{(gdk:dmabuf-texture-builder-width object) => width}
   @syntax{(setf (gdk:dmabuf-texture-builder-width object) width)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
@@ -501,11 +503,12 @@
   @end{short}
   Returns 0 if the width was not set.
 
-  The width must be set before calling the @fun{gdk:gl-texture-builder-build}
-  function.
+  The width must be set before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
 
   Since 4.14
-  @see-class{gdk:dmabuf-texture-builder}")
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-function{gdk:dmabuf-texture-builder-build}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_new
@@ -515,7 +518,7 @@
 
 (defun dmabuf-texture-builder-new ()
  #+liber-documentation
- "@version{#2024-01-10}
+ "@version{2026-02-14}
   @return{The new @class{gdk:dmabuf-texture-builder} object.}
   @short{Create a new texture builder.}
 
@@ -527,40 +530,163 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_build
-;;;
-;;; Builds a new GdkTexture with the values set up in the builder.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Passing a destroy function is not implemented.
+
+(cffi:defcfun ("gdk_dmabuf_texture_builder_build" %dmabuf-texture-builder-build)
+    (g:object texture :return)
+  (builder (g:object dmabuf-texture-builder))
+  (destory :pointer)
+  (data :pointer)
+  (err :pointer))
+
+(defun dmabuf-texture-builder-build (builder)
+ #+liber-documentation
+ "@version{2026-02-14}
+  @argument[builder]{a @class{gdk:dmabuf-texture-builder} object}
+  @begin{return}
+    The newly built @class{gdk:texture} object or @code{nil} if the format is
+    not supported.
+  @end{return}
+  @begin{short}
+    Builds a new @class{gdk:texture} object with the values set up in the
+    builder.
+  @end{short}
+  It is a programming error to call this function if any mandatory property has
+  not been set.
+
+  Not all formats defined in the @file{drm_fourcc.h} header are supported. You
+  can use the @fun{gdk:display-dmabuf-formats} function to get a list of
+  supported formats. If the format is not supported by GTK, @code{nil} will be
+  returned.
+
+  It is the responsibility of the caller to keep the file descriptors for the
+  planes open until the created texture is no longer used, and close them
+  afterwards (possibly using the destroy notify).
+
+  It is possible to call this function multiple times to create multiple
+  textures, possibly with changing properties in between.
+
+  Since 4.14
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-class{gdk:texture}
+  @see-function{gdk:display-dmabuf-formats}"
+  (glib:with-error (err)
+    (%dmabuf-texture-builder-build builder
+                                   (cffi:null-pointer)
+                                   (cffi:null-pointer)
+                                   err)))
+
+(export 'dmabuf-texture-builder-build)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_get_fd
 ;;; gdk_dmabuf_texture_builder_set_fd
-;;;
-;;; Gets the file descriptor for a plane.
-;;; Sets the file descriptor for a plane.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+(defun (setf dmabuf-texture-builder-fd) (fd builder plane)
+  (cffi:foreign-funcall "gdk_dmabuf_texture_builder_set_fd"
+                        (g:object dmabuf-texture-builder) builder
+                        :uint plane
+                        :int fd
+                        :void)
+  fd)
+
+(cffi:defcfun ("gdk_dmabuf_texture_builder_get_fd"
+               dmabuf-texture-builder-fd) :int
+ #+liber-documentation
+ "@version{2026-02-14}
+  @syntax{(gdk:dmabuf-texture-builder-fd builder plane) => fd}
+  @syntax{(setf (gdk:dmabuf-texture-builder-fd builder plane) fd)}
+  @argument[builder]{a @class{gdk:dmabuf-texture-builder} object}
+  @argument[plane]{an unsigned integer for the plane to get the file descriptor
+    for}
+  @argument[offset]{an unsigned integer for the file descriptor value}
+  @begin{short}
+    Gets or sets the file descriptor for a plane.
+  @end{short}
+  The file descriptor must be set for all planes before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
+
+  Since 4.14
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-function{gdk:dmabuf-texture-builder-build}"
+  (builder (g:object dmabuf-texture-builder))
+  (plane :uint))
+
+(export 'dmabuf-texture-builder-fd)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_get_offset
 ;;; gdk_dmabuf_texture_builder_set_offset
-;;;
-;;; Gets the offset value for a plane.
-;;; Sets the offset for a plane.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+(defun (setf dmabuf-texture-builder-offset) (offset builder plane)
+  (cffi:foreign-funcall "gdk_dmabuf_texture_builder_set_offset"
+                        (g:object dmabuf-texture-builder) builder
+                        :uint plane
+                        :uint offset
+                        :void)
+  offset)
+
+(cffi:defcfun ("gdk_dmabuf_texture_builder_get_offset"
+               dmabuf-texture-builder-offset) :uint
+ #+liber-documentation
+ "@version{2026-02-14}
+  @syntax{(gdk:dmabuf-texture-builder-offset builder plane) => offset}
+  @syntax{(setf (gdk:dmabuf-texture-builder-offset builder plane) offset)}
+  @argument[builder]{a @class{gdk:dmabuf-texture-builder} object}
+  @argument[plane]{an unsigned integer for the plane to get the offset for}
+  @argument[offset]{an unsigned integer for the offset value}
+  @begin{short}
+    Gets or sets the offset for a plane.
+  @end{short}
+  The offset must be set for all planes before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
+
+  Since 4.14
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-function{gdk:dmabuf-texture-builder-build}"
+  (builder (g:object dmabuf-texture-builder))
+  (plane :uint))
+
+(export 'dmabuf-texture-builder-offset)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dmabuf_texture_builder_get_stride
 ;;; gdk_dmabuf_texture_builder_set_stride
-;;;
-;;; Gets the stride value for a plane.
-;;; Sets the stride for a plane.
-;;;
-;;; Since 4.14
 ;;; ----------------------------------------------------------------------------
+
+(defun (setf dmabuf-texture-builder-stride) (stride builder plane)
+  (cffi:foreign-funcall "gdk_dmabuf_texture_builder_set_stride"
+                        (g:object dmabuf-texture-builder) builder
+                        :uint plane
+                        :uint stride
+                        :void)
+  stride)
+
+(cffi:defcfun ("gdk_dmabuf_texture_builder_get_stride"
+               dmabuf-texture-builder-stride) :uint
+ #+liber-documentation
+ "@version{2026-02-14}
+  @syntax{(gdk:dmabuf-texture-builder-stride builder plane) => stride}
+  @syntax{(setf (gdk:dmabuf-texture-builder-stride builder plane) stride)}
+  @argument[builder]{a @class{gdk:dmabuf-texture-builder} object}
+  @argument[plane]{an unsigned integer for the plane to get the stride for}
+  @argument[stride]{an unsigned integer for the stride value}
+  @begin{short}
+    Gets or sets the stride for a plane.
+  @end{short}
+  The stride must be set for all planes before calling the
+  @fun{gdk:dmabuf-texture-builder-build} function.
+
+  Since 4.14
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-function{gdk:dmabuf-texture-builder-build}"
+  (builder (g:object dmabuf-texture-builder))
+  (plane :uint))
+
+(export 'dmabuf-texture-builder-stride)
 
 ;;; --- End of file gdk4.dmabuf-texture.lisp -----------------------------------

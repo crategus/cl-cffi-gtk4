@@ -127,15 +127,40 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_dmabuf_texture_builder_new
-;;;     gdk_dmabuf_texture_builder_build
 
+(test gdk-dmabuf-texture-builder-new
+  (glib-test:with-check-memory (builder)
+    (is (typep (setf builder
+                     (gdk:dmabuf-texture-builder-new))
+               'gdk:dmabuf-texture-builder))))
+
+;;;     gdk_dmabuf_texture_builder_build
 ;;;     gdk_dmabuf_texture_builder_get_fd
 ;;;     gdk_dmabuf_texture_builder_set_fd
-
 ;;;     gdk_dmabuf_texture_builder_get_offset
 ;;;     gdk_dmabuf_texture_builder_set_offset
-
 ;;;     gdk_dmabuf_texture_builder_get_stride
 ;;;     gdk_dmabuf_texture_builder_set_stride
 
-;;; 2024-12-20
+(test gdk-dmabuf-texture-builder-build
+  (glib-test:with-check-memory (builder :strong 1)
+    (is (typep (setf builder
+                     (make-instance 'gdk:dmabuf-texture-builder
+                                    :fourcc 538982482
+                                    :modifier 0
+                                    :n-planes 1
+                                    :width 100
+                                    :height 100))
+               'gdk:dmabuf-texture-builder))
+
+    (setf (gdk:dmabuf-texture-builder-fd builder 0) 999)
+    (setf (gdk:dmabuf-texture-builder-offset builder 0) 0)
+    (setf (gdk:dmabuf-texture-builder-stride builder 0) 800)
+
+    (is (= 999 (gdk:dmabuf-texture-builder-fd builder 0)))
+    (is (= 0 (gdk:dmabuf-texture-builder-offset builder 0)))
+    (is (= 800 (gdk:dmabuf-texture-builder-stride builder 0)))
+
+    (is (typep (gdk:dmabuf-texture-builder-build builder) 'gdk:dmabuf-texture))))
+
+;;; 2026-02-14
