@@ -801,6 +801,20 @@ lambda (application window)    :run-first
 
   For the detailed action name, see the @fun{g:action-parse-detailed-name} and
   @fun{g:action-print-detailed-name} functions.
+  @begin[Examples]{dictionary}
+    @begin{pre}
+(let (...
+      ;; List of accels
+      (accels '(\"win-show-help-overlay\" \"F1\"
+                \"win.about\" \"<Control>A\"))
+      .. )
+  ...
+  ;; Add accelerators for the application
+  (iter (for (name accel) on accels by #'cddr)
+        (setf (gtk:application-accels-for-action application name) accel))
+  ... )
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:application}
   @see-function{gtk:accelerator-parse}
   @see-function{g:action-parse-detailed-name}
