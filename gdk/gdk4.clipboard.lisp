@@ -255,7 +255,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
  #+liber-documentation
- "@version{2023-07-30}
+ "@version{2026-02-12}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @return{@em{True} if the clipboard is local.}
   @begin{short}
@@ -283,7 +283,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-store-async (clipboard priority cancellable func)
  #+liber-documentation
- "@version{#2025-07-30}
+ "@version{#2026-02-12}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[priority]{an integer for the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
@@ -635,7 +635,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_content" clipboard-set-content) :boolean
  #+liber-documentation
- "@version{2023-07-30}
+ "@version{2026-02-12}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[content]{a new @class{gdk:content-provider} object or @code{nil}
     to clear the clipboard}
