@@ -8,7 +8,7 @@
 ;;;     GtkFontChooserDialog
 
 (test gtk-font-chooser-dialog-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkFontChooserDialog"))
     ;; Check registered name
@@ -58,7 +58,7 @@
 ;;;     gtk_font_chooser_dialog_new
 
 (test gtk-font-chooser-dialog-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog
                        (gtk:font-chooser-dialog-new "title" nil))

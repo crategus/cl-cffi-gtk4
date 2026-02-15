@@ -117,7 +117,7 @@
 
 (test gtk-tree-view-column-properties
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (column :strong 1)
         (setf column (make-instance 'gtk:tree-view-column))
         (is (= 0.0 (gtk:tree-view-column-alignment column)))
@@ -145,7 +145,7 @@
 ;;;     gtk_tree_view_column_new
 
 (test gtk-tree-view-column-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
     (is (typep (gtk:tree-view-column-new) 'gtk:tree-view-column)))))
 
@@ -153,7 +153,7 @@
 
 (test gtk-tree-view-column-new-with-area
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((box 3) :strong 1)
         (setf box (gtk:cell-area-box-new))
         (is (typep (gtk:tree-view-column-new-with-area box)
@@ -163,7 +163,7 @@
 
 (test gtk-tree-view-column-new-with-attributes
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((renderer 2) :strong 1)
         (setf renderer (gtk:cell-renderer-text-new))
         (is (typep (gtk:tree-view-column-new-with-attributes "Example"

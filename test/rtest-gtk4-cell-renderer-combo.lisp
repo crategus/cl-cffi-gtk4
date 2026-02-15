@@ -50,7 +50,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-combo-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-combo)))
     (is-true (gtk:cell-renderer-combo-has-entry renderer))
     (is-false (gtk:cell-renderer-combo-model renderer))
@@ -80,7 +80,7 @@
 ;;;     gtk_cell_renderer_combo_new
 
 (test gtk-cell-renderer-combo-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-combo-new) 'gtk:cell-renderer-combo))))
 
 ;;; 2024-9-20

@@ -94,7 +94,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-font-button-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button)
       (is (typep (setf button
                        (make-instance 'gtk:font-button)) 'gtk:font-button))
@@ -111,7 +111,7 @@
 ;;;     gtk_font_button_new
 
 (test gtk-font-button-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button)
       (is (typep (setf button
                        (gtk:font-button-new)) 'gtk:font-button)))))
@@ -119,7 +119,7 @@
 ;;;     gtk_font_button_new_with_font
 
 (test gtk-font-button-new-with-font
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button)
       (is (typep (setf button
                        (gtk:font-button-new-with-font "Sans Italic 12"))

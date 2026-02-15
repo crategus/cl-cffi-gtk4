@@ -52,7 +52,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcut-label-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (label)
       (is (typep (setf label (make-instance 'gtk:shortcut-label))
                  'gtk:shortcut-label))
@@ -64,7 +64,7 @@
 ;;;     gtk_shortcut_label_new
 
 (test gtk-shortcut-label-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (label)
       (is (typep (setf label (gtk:shortcut-label-new "<Control>a"))
                  'gtk:shortcut-label)))))

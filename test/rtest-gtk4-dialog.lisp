@@ -39,7 +39,7 @@
 ;;;     GtkDialog
 
 (test gtk-dialog-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkDialog"))
     ;; Check registered name
@@ -120,7 +120,7 @@
 ;;;     use-header-bar
 
 (test gtk-dialog-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (setf dialog (make-instance 'gtk:dialog))
       ;; The default value is not -1.
@@ -132,7 +132,7 @@
 ;;;     gtk_dialog_new
 
 (test gtk-dialog-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog (gtk:dialog-new)) 'gtk:dialog))
       (is-false (gtk:window-destroy dialog)))))
@@ -150,7 +150,7 @@
 #+nil
 (test gtk-dialog-new-with-buttons
   (when *first-run-testsuite*
-    (let* ((*gtk-warn-deprecated* nil))
+    (let* ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (parent dialog :strong 2)
         (is (typep (setf parent (gtk:window-new)) 'gtk:window))
         (is (typep (setf dialog

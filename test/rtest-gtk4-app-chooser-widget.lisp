@@ -65,7 +65,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-widget-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((widget (make-instance 'gtk:app-chooser-widget)))
       (is-false (gtk:app-chooser-widget-default-text widget))
       (is-false (gtk:app-chooser-widget-show-all widget))
@@ -84,7 +84,7 @@
 ;;;     gtk_app_chooser_widget_new
 
 (test gtk-app-chooser-widget-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:app-chooser-widget-new "text/plain")
                'gtk:app-chooser-widget))))
 

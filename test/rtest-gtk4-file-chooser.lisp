@@ -81,7 +81,7 @@
 
 (test gtk-file-chooser-properties
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (chooser :strong 2)
         (setf chooser (make-instance 'gtk:file-chooser-dialog))
         (is (eq :open (gtk:file-chooser-action chooser)))
@@ -99,7 +99,7 @@
 
 (test gtk-file-chooser-current-name
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (chooser)
         (setf chooser
               (make-instance 'gtk:file-chooser-dialog :action :save))
@@ -116,7 +116,7 @@
 #+nil
 (test gtk-file-chooser-file
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (file chooser)
         (let ((filename (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp")))
           (setf file (g:file-new-for-path filename))
@@ -136,7 +136,7 @@
 #+nil
 (test gtk-file-chooser-namestring
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (chooser)
         (let ((path (glib-sys:sys-path "test/rtest-gtk4-file-chooser.lisp")))
           (setf chooser (make-instance 'gtk:file-chooser-widget
@@ -151,7 +151,7 @@
 ;;;     gtk_file_chooser_get_files
 
 (test gtk-file-chooser-files
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (chooser (model 2) :strong 1)
       (is (typep (setf chooser
                        (make-instance 'gtk:file-chooser-widget))
@@ -167,7 +167,7 @@
 #+nil
 (test gtk-file-chooser-current-folder
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (let ((path (glib-sys:sys-path "test/"))
             (chooser (make-instance 'gtk:file-chooser-widget)))
         (is-false (gtk:file-chooser-current-folder chooser))
@@ -178,7 +178,7 @@
 ;;;     gtk_file_chooser_remove_filter
 
 (test gtk-file-chooser-add/remove-filter
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (chooser filter (model 5) :strong 1)
       (is (typep (setf chooser
                        (make-instance 'gtk:file-chooser-widget))
@@ -195,7 +195,7 @@
 ;;;     gtk_file_chooser_remove_shortcut_folder
 
 (test gtk-file-chooser-add/remove-shortcut-folder
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (chooser :strong 1)
       (let ((path (glib-sys:sys-path "test/")))
         (is (typep (setf chooser

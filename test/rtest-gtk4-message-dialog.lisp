@@ -42,7 +42,7 @@
 ;;;     GtkMessageDialog
 
 (test gtk-message-dialog-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkMessageDialog"))
     ;; Check registered name
@@ -102,7 +102,7 @@
 
 (test gtk-message-dialog-properties
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (dialog :strong 1)
         (setf dialog (make-instance 'gtk:message-dialog))
         (is (typep  (gtk:message-dialog-message-area dialog) 'gtk:box))

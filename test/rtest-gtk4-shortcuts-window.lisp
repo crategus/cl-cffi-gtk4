@@ -85,7 +85,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcuts-window-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (window)
       (is (typep (setf window (make-instance 'gtk:shortcuts-window))
                  'gtk:shortcuts-window))

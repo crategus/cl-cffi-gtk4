@@ -49,7 +49,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-spinner-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-spinner)))
     (is-false (gtk:cell-renderer-spinner-active renderer))
     (is (= 0 (gtk:cell-renderer-spinner-pulse renderer)))
@@ -60,7 +60,7 @@
 ;;;     gtk_cell_renderer_spinner_new
 
 (test gtk-cell-renderer-spinner-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-spinner-new) 'gtk:cell-renderer-spinner))))
 
 ;;; 2024-9-20

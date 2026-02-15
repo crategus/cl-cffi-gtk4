@@ -109,7 +109,7 @@
 
 (test gtk-style-context-properties
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((context 2) dialog :strong 2)
         (let (display)
           (setf context
@@ -126,7 +126,7 @@
 ;;;     gtk_style_context_remove_provider
 
 (test gtk-style-context-add/remove-provider
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button provider :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -142,7 +142,7 @@
 ;;;     gtk_style_context_remove_provider_for_display
 
 (test gtk-style-context-add/remove-provider-for-display
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (provider)
       (let (display)
         (is (typep (setf provider
@@ -155,7 +155,7 @@
 ;;;     gtk_style_context_set_state
 
 (test gtk-style-context-state
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -171,7 +171,7 @@
 ;;;     gtk_style_context_get_scale
 
 (test gtk-style-context-scale
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -185,7 +185,7 @@
 
 #+nil
 (test gtk-style-context-color
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -200,7 +200,7 @@
 ;;;     gtk_style_context_get_margin
 
 (test gtk-style-context-border
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -213,7 +213,7 @@
 ;;;     gtk_style_context_lookup_color
 
 (test gtk-style-context-lookup-color
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -226,7 +226,7 @@
 ;;;     gtk_style_context_restore
 
 (test gtk-style-context-save/restore
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -243,7 +243,7 @@
 ;;;     gtk_style_context_remove_class
 
 (test gtk-style-context-has/add/remove-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((context 2) button :strong 1)
       (is (typep (setf context
                        (gtk:widget-style-context (setf button
@@ -258,7 +258,7 @@
 
 (test gtk-style-context-to-string
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (dialog (context 2) :strong 1)
         (setf context
               (gtk:widget-style-context (setf dialog

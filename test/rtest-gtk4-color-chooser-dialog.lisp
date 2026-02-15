@@ -55,7 +55,7 @@
 ;;;     show-editor
 
 (test gtk-color-chooser-dialog-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog
                        (make-instance 'gtk:color-chooser-dialog))
@@ -68,7 +68,7 @@
 ;;;     gtk_color_chooser_dialog_new
 
 (test gtk-color-chooser-dialog-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog
                        (gtk:color-chooser-dialog-new "title" nil))

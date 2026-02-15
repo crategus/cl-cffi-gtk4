@@ -84,7 +84,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-accel-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-accel)))
     (is (= 0 (gtk:cell-renderer-accel-accel-key renderer)))
     (is (eq :gtk (gtk:cell-renderer-accel-accel-mode renderer)))
@@ -132,7 +132,7 @@
 ;;;     gtk_cell_renderer_accel_new
 
 (test gtk-cell-renderer-accel-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-accel-new) 'gtk:cell-renderer-accel))))
 
 ;;; 2024-9-20

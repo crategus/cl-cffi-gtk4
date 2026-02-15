@@ -52,7 +52,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-toggle-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-toggle)))
     (is-true (gtk:cell-renderer-toggle-activatable renderer))
     (is-false (gtk:cell-renderer-toggle-active renderer))
@@ -81,7 +81,7 @@
 ;;;     gtk_cell_renderer_toggle_new
 
 (test gtk-cell-renderer-toggle-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-toggle-new) 'gtk:cell-renderer-toggle))))
 
 ;;; 2024-9-20

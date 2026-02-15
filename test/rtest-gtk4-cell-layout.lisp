@@ -41,7 +41,7 @@
 ;;;     gtk_cell_layout_clear
 
 (test gtk-cell-layout-pack-start/end
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer1 renderer2)
       (is (typep (setf area
                        (gtk:cell-area-box-new)) 'gtk:cell-area-box))
@@ -61,7 +61,7 @@
 ;;;     gtk_cell_layout_reorder
 
 (test gtk-cell-layout-reorder
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer1 renderer2)
       (is (typep (setf area
                        (gtk:cell-area-box-new)) 'gtk:cell-area-box))
@@ -84,7 +84,7 @@
 ;;;     gtk_cell_layout_add_attribute
 
 (test gtk-cell-layout-add-attribute
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer)
       (is (typep (setf area
                        (gtk:cell-area-box-new)) 'gtk:cell-area-box))
@@ -99,7 +99,7 @@
 ;;;     gtk_cell_layout_clear_attributes
 
 (test gtk-cell-layout-set-attributes
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer)
       (is (typep (setf area
                        (gtk:cell-area-box-new)) 'gtk:cell-area-box))

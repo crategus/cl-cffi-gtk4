@@ -46,7 +46,7 @@
 ;;;     spacing
 
 (test gtk-cell-area-box-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (box (make-instance 'gtk:cell-area-box)))
     (is (= 0 (gtk:cell-area-box-spacing box)))))
 
@@ -55,7 +55,7 @@
 ;;;     gtk_cell_area_box_new
 
 (test gtk-cell-area-box-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-area-box-new) 'gtk:cell-area-box))))
 
 ;;;     gtk_cell_area_box_pack_start

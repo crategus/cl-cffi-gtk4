@@ -8,7 +8,7 @@
 ;;;     GtkFileChooserDialog
 
 (test gtk-file-chooser-dialog-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkFileChooserDialog"))
     ;; Check registered name

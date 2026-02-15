@@ -103,7 +103,7 @@
 ;;;     gtk_toggle_button_toggled
 
 (test gtk-toggle-button-toggled
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (button (gtk:toggle-button-new))
          (msg nil))
     (g:signal-connect button "toggled"

@@ -126,7 +126,7 @@
 
 (test gtk-icon-view-properties
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (view :strong 1)
         (setf view (make-instance 'gtk:icon-view))
         (is-false (gtk:icon-view-activate-on-single-click view))

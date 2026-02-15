@@ -60,7 +60,7 @@
 ;;; ---  Properties ------------------------------------------------------------
 
 (test gtk-cell-renderer-pixbuf-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
     (is-false (gtk:cell-renderer-pixbuf-gicon renderer))
     (is-false (gtk:cell-renderer-pixbuf-icon-name renderer))
@@ -76,7 +76,7 @@
 ;;;     gtk_cell_renderer_pixbuf_new
 
 (test gtk-cell-renderer-pixbuf-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-pixbuf-new) 'gtk:cell-renderer-pixbuf))))
 
 ;;; 2024-9-20

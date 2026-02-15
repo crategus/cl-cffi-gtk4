@@ -47,7 +47,7 @@
 ;;;     model
 
 (test gtk-tree-model-sort-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (model)
       (setf model (make-instance 'gtk:tree-model-sort))
       (is-false (gtk:tree-model-sort-model model)))))
@@ -58,7 +58,7 @@
 
 (test gtk-tree-model-sort-new-with-model
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((model 2) sortmodel :strong 1)
         (setf model (create-list-store-for-package))
         (is (typep (setf sortmodel

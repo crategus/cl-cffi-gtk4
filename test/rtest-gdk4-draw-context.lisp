@@ -49,7 +49,7 @@
 ;;;     surface
 
 (test gdk-draw-context-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
            ;; Create a Cairo context to check the properties
            (context (gdk:surface-create-cairo-context surface)))

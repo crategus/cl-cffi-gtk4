@@ -4,7 +4,7 @@
 (in-suite gtk-tree-view)
 
 (defun create-and-fill-model-simple ()
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (gtk:tree-store-new "gchararray" "gchararray" "guint")))
       ;; First Book
       (let ((iter (gtk:tree-store-append model nil))) ; Toplevel iterator
@@ -225,7 +225,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-tree-view-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view)
       (setf view (make-instance 'gtk:tree-view))
       (is-false (gtk:tree-view-activate-on-single-click view))
@@ -251,7 +251,7 @@
 ;;;     gtk_tree_view_new
 
 (test gtk-tree-view-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view)
       (is (typep (setf view
                        (gtk:tree-view-new)) 'gtk:tree-view)))))
@@ -260,7 +260,7 @@
 
 (test gtk-tree-view-new-with-model
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((model 2) view :strong 1)
         (setf model (gtk:list-store-new "gint" "gchararray" "GdkPixbuf"))
         (is (typep (setf view
@@ -271,7 +271,7 @@
 
 (test gtk-tree-view-selection
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (view :strong 1)
         (setf view (gtk:tree-view-new))
         (is (typep (gtk:tree-view-selection view) 'gtk:tree-selection))))))
@@ -283,7 +283,7 @@
 ;;;     gtk_tree_view_get_n_columns
 
 (test gtk-tree-view-append-column
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view column)
       (setf view (gtk:tree-view-new))
       (setf column (gtk:tree-view-column-new))
@@ -298,7 +298,7 @@
 ;;;     gtk_tree_view_get_columns
 
 (test gtk-tree-view-insert-column
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view column0 column1 column2)
       (setf view (gtk:tree-view-new))
       (setf column0 (gtk:tree-view-column-new))
@@ -321,7 +321,7 @@
 
 (test gtk-tree-view-insert-column-with-attributes
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((model 2) view :strong 4)
         (setf model (create-and-fill-model-simple))
         (setf view (gtk:tree-view-new-with-model model))
@@ -362,7 +362,7 @@
 
 (test gtk-tree-view-insert-column-with-data-func
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (view (model 2) (renderer 2) :strong 2)
         (setf model (create-and-fill-model-simple))
         (setf view (gtk:tree-view-new-with-model model))
@@ -384,7 +384,7 @@
 ;;;     gtk_tree_view_move_column_after
 
 (test gtk-tree-view-move-column-after.1
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view column0 column1 column2)
       (setf view (gtk:tree-view-new))
       (setf column0 (make-instance 'gtk:tree-view-column))
@@ -405,7 +405,7 @@
       (is (= 0 (gtk:tree-view-remove-column view column2))))))
 
 (test gtk-tree-view-move-column-after.2
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view column0 column1 column2)
       (setf view (gtk:tree-view-new))
       (setf column0 (make-instance 'gtk:tree-view-column))
@@ -429,7 +429,7 @@
 ;;;     gtk_tree_view_set_column_drag_function
 
 (test gtk-tree-view-set-column-drag-function
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view)
       (setf view (gtk:tree-view-new))
       (is-false (gtk:tree-view-set-column-drag-function view
@@ -446,7 +446,7 @@
 ;;;     gtk_tree_view_get_cursor
 
 (test gtk-tree-view-get-cursor
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (view)
       (setf view (gtk:tree-view-new))
       (is (equal '(nil nil)

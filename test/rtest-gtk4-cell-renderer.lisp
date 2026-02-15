@@ -143,7 +143,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-text)))
     (signals (error) (gtk:cell-renderer-cell-background renderer))
     (is (typep (gtk:cell-renderer-cell-background-rgba renderer) 'gdk:rgba))
@@ -206,7 +206,7 @@
 
 (test gtk-cell-renderer-fixed-size
   (glib-test:with-check-memory (renderer)
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (is (typep (setf renderer
                        (make-instance 'gtk:cell-renderer-text))
                  'gtk:cell-renderer-text))
@@ -223,7 +223,7 @@
 
 (test gtk-cell-renderer-alignment.1
   (glib-test:with-check-memory (renderer)
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (is (typep (setf renderer
                        (make-instance 'gtk:cell-renderer-text))
                  'gtk:cell-renderer-text))
@@ -237,7 +237,7 @@
 
 (test gtk-cell-renderer-alignment.2
   (glib-test:with-check-memory (renderer)
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
 
       (is (typep (setf renderer
                        (make-instance 'gtk:cell-renderer-text))
@@ -253,7 +253,7 @@
 
 (test gtk-cell-renderer-padding
   (glib-test:with-check-memory (renderer)
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (is (typep (setf renderer
                        (make-instance 'gtk:cell-renderer-text))
                  'gtk:cell-renderer-text))

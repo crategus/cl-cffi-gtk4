@@ -52,7 +52,7 @@
 ;;;     GtkPrintUnixDialog
 
 (test gtk-print-unix-dialog-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkPrintUnixDialog"))
     ;; Check registered name
@@ -119,7 +119,7 @@
 
 #+nil
 (test gtk-print-unix-dialog-properties
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (dialog (make-instance 'gtk:print-unix-dialog)))
     (is (= -1 (gtk:print-unix-dialog-current-page dialog)))
     (is-false (gtk:print-unix-dialog-embed-page-setup dialog))
@@ -138,7 +138,7 @@
 
 #+nil
 (test gtk-print-unix-dialog-new
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (dialog (gtk:print-unix-dialog-new "Title" nil)))
     (is (typep dialog 'gtk:print-unix-dialog))
     (is (= -1 (gtk:print-unix-dialog-current-page dialog)))
@@ -157,7 +157,7 @@
 
 #+nil
 (test gtk-print-unix-dialog-settings
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (dialog (gtk:print-unix-dialog-new "Title" nil)))
     (is (typep (setf (gtk:print-unix-dialog-settings dialog)
                      (gtk:print-settings-new)) 'gtk:print-settings))

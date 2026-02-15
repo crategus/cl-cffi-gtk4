@@ -419,7 +419,7 @@
 ;;;     gtk_window_has_group
 
 (test gtk-window-has-group
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (window group :strong 7) ; for default group
       (setf window (make-instance 'gtk:window))
       (setf group (gtk:window-group-new))
@@ -474,7 +474,7 @@
 ;;;     gtk_window_present_with_time
 
 (test gtk-window-present-with-time
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (window)
       (setf window (make-instance 'gtk:window))
       (is-false (gtk:window-present-with-time window gdk:+current-time+))

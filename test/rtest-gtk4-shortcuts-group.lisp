@@ -58,7 +58,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcuts-group-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (group)
       (is (typep (setf group (make-instance 'gtk:shortcuts-group))
                  'gtk:shortcuts-group))

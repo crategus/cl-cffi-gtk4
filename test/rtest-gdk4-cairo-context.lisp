@@ -49,7 +49,7 @@
 ;;;     gdk_cairo_context_cairo_create
 
 (test gdk-cairo-context-cairo-create
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((surface (gdk:surface-new-toplevel (gdk:display-default))))
       (is (typep (gdk:surface-create-cairo-context surface) 'gdk:cairo-context))
       (is-false (gdk:surface-destroy surface)))))

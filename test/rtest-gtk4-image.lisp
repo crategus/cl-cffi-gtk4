@@ -167,7 +167,7 @@
 #+nil
 (test gtk-image-new-from-pixbuf
   (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
-    (let* ((*gtk-warn-deprecated* nil)
+    (let* ((gtk-init:*warn-deprecated* nil)
            (path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
       (is (typep (setf pixbuf (gdk:pixbuf-new-from-file path)) 'gdk:pixbuf))
       (is (typep (setf image (gtk:image-new-from-pixbuf pixbuf)) 'gtk:image))
@@ -300,7 +300,7 @@
 #+nil
 (test gtk-image-set-from-pixbuf
   (glib-test:with-check-memory ((pixbuf 2) image :strong 1)
-    (let ((*gtk-warn-deprecated* nil)
+    (let ((gtk-init:*warn-deprecated* nil)
           (path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
       (is (typep (setf pixbuf (gdk:pixbuf-new-from-file path)) 'gdk:pixbuf))
       (is (typep (setf image (gtk:image-new)) 'gtk:image))

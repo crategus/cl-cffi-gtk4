@@ -71,7 +71,7 @@
 
 #+crategus
 (test gtk-lock-button-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button)
       (is (typep (setf button (make-instance 'gtk:lock-button)) 'gtk:lock-button))
       (is-false (gtk:lock-button-permission button))
@@ -92,7 +92,7 @@ Klicken Sie für
 ;;;     gtk_lock_button_new
 
 (test gtk-lock-button-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button permission)
       (is (typep (setf permission (g:simple-permission-new t))
                  'g:simple-permission))

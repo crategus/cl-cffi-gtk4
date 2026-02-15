@@ -54,7 +54,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-dialog-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog
                        (make-instance 'gtk:app-chooser-dialog))
@@ -68,7 +68,7 @@
 ;;;     gtk_app_chooser_dialog_new
 
 (test gtk-app-chooser-dialog-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog (file 2) :strong 1)
       (let ((path (glib-sys:sys-path "test/rtest-gtk4-app-chooser-dialog.lisp")))
         (is (typep (setf file (g:file-new-for-path path)) 'g:object))
@@ -85,7 +85,7 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 
 (test gtk-app-chooser-dialog-new-for-content-type
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog)
       (is (typep (setf dialog
                        (gtk:app-chooser-dialog-new-for-content-type nil
@@ -99,7 +99,7 @@
 ;;;     gtk_app_chooser_dialog_get_widget
 
 (test gtk-app-chooser-dialog-widget
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (dialog :strong 1)
       (is (typep (setf dialog
                        (gtk:app-chooser-dialog-new-for-content-type nil

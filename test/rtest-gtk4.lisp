@@ -2,7 +2,7 @@
   (:use :fiveam :iterate :common-lisp)
   (:export                  #:run!
                             #:approx-equal)
-  (:import-from :gtk-init   #:*gtk-warn-deprecated*)
+  (:import-from :gtk-init)
   (:import-from :glib-test  #:*first-run-testsuite*
                             #:run-repeat
                             #:approx-equal)

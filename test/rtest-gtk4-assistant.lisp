@@ -84,7 +84,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-assistant-page-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (page)
       (setf page (make-instance 'gtk:assistant-page))
       (is-false (gtk:assistant-page-child page)))))
@@ -92,7 +92,7 @@
 ;;;     GtkAssistant
 
 (test gtk-assistant-class
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     ;; Check type
     (is (g:type-is-object "GtkAssistant"))
     ;; Check registered name
@@ -150,7 +150,7 @@
 
 (test gtk-assistant-properties
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (assistant :strong 1)
         (setf assistant (make-instance 'gtk:assistant))
         (is (typep (gtk:assistant-pages assistant) 'g:object))
@@ -163,7 +163,7 @@
 ;;;     gtk_assistant_new
 
 (test gtk-assistant-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (assistant)
       (is (typep (setf assistant (gtk:assistant-new)) 'gtk:assistant))
       (is-false (gtk:window-destroy assistant)))))

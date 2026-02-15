@@ -56,7 +56,7 @@
 ;;;     gtk_statusbar_new
 
 (test gtk-statusbar-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:statusbar-new) 'gtk:statusbar))))
 
 ;;;     gtk_statusbar_get_context_id

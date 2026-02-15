@@ -182,7 +182,7 @@
 ;;;     gtk_calendar_get_date
 
 (test gtk-calendar-select-day
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (calendar)
       (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
       (is-false (gtk:calendar-select-day calendar 2024 7 5))

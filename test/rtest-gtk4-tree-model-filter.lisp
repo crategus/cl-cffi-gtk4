@@ -47,7 +47,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-tree-model-filter-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (model)
       (setf model (make-instance 'gtk:tree-model-filter))
       (is-false (gtk:tree-model-filter-child-model model))
@@ -61,7 +61,7 @@
 
 (test gtk-tree-model-filter-new
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((child 2) model :strong 1)
         (is (typep (setf child
                          (create-list-store-for-package)) 'gtk:tree-model))
@@ -79,7 +79,7 @@
 
 #+nil
 (test gtk-tree-model-filter-set-visible-func
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((child (create-list-store-for-package))
            (model (gtk:tree-model-filter-new child nil)))
 

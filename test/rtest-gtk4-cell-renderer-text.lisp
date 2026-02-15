@@ -141,7 +141,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-text-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-text)))
     (is-false (gtk:cell-renderer-text-align-set renderer))
     (is (eq :left (gtk:cell-renderer-text-alignment renderer)))
@@ -224,7 +224,7 @@
 ;;;     gtk_cell_renderer_text_new
 
 (test gtk-cell-renderer-text-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-text-new) 'gtk:cell-renderer-text))))
 
 ;;;     gtk_cell_renderer_text_set_fixed_height_from_font

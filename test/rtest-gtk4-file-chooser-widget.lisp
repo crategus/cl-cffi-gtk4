@@ -61,7 +61,7 @@
 
 #+nil
 (test gtk-file-chooser-widget-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((widget (make-instance 'gtk:file-chooser-widget)))
       (is-false (gtk:file-chooser-widget-search-mode widget))
       (is-false (gtk:file-chooser-widget-show-time widget))
@@ -88,7 +88,7 @@
 
 #+nil
 (test gtk-file-chooser-widget-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:file-chooser-widget-new :open) 'gtk:file-chooser-widget))
     (is (typep (gtk:file-chooser-widget-new :save) 'gtk:file-chooser-widget))
     (is (typep (gtk:file-chooser-widget-new :select-folder)

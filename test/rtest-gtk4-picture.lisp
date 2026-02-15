@@ -126,7 +126,7 @@
 ;;;     gtk_picture_new_for_pixbuf
 
 (test gtk-picture-new-for-pixbuf
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
          (pixbuf (gdk:pixbuf-new-from-file path))
          (picture nil))
@@ -165,7 +165,7 @@
 ;;;     gtk_picture_set_pixbuf
 
 (test gtk-picture-set-pixbuf
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
          (pixbuf (gdk:pixbuf-new-from-file path))
          (picture (gtk:picture-new)))

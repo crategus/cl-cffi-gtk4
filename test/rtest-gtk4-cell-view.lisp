@@ -61,7 +61,7 @@
 
 (test gtk-cell-view-properties
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (view :strong 2)
         (setf view (make-instance 'gtk:cell-view))
         (is (typep (gtk:cell-view-cell-area view) 'gtk:cell-area-box))
@@ -75,7 +75,7 @@
 ;;;     gtk_cell_view_new
 
 (test gtk-cell-view-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
       (is (typep (gtk:cell-view-new) 'gtk:cell-view)))))
 
@@ -83,7 +83,7 @@
 
 (test gtk-cell-view-new-with-context
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((area 2) (context 2) view :strong 2)
         (setf area (make-instance 'gtk:cell-area-box))
         (setf context (make-instance 'gtk:cell-area-context))
@@ -96,14 +96,14 @@
 ;;;     gtk_cell_view_new_with_text
 
 (test gtk-cell-view-new-with-text
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
       (is (typep (gtk:cell-view-new-with-text "text") 'gtk:cell-view)))))
 
 ;;;     gtk_cell_view_new_with_markup
 
 (test gtk-cell-view-new-with-markup
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
       (is (typep (gtk:cell-view-new-with-text "<b>text</b>") 'gtk:cell-view)))))
 
@@ -111,7 +111,7 @@
 
 (test gtk-cell-view-new-with-texture
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((texture 2) view :strong 1)
         (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
           (setf texture (gdk:texture-new-from-filename path))

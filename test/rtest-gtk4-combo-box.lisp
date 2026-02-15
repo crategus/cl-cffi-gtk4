@@ -71,7 +71,7 @@
 
 (test gtk-combo-box-properties
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (combo :strong 1)
         (is (typep (setf combo (gtk:combo-box-new)) 'gtk:combo-box))
         (is (= -1 (gtk:combo-box-active combo)))
@@ -100,14 +100,14 @@
 ;;;     gtk_combo_box_new
 
 (test gtk-combo-box-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (combo)
       (is (typep (setf combo (gtk:combo-box-new)) 'gtk:combo-box)))))
 
 ;;;     gtk_combo_box_new_with_entry
 
 (test gtk-combo-box-new-with-entry
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (combo)
       (is (typep (setf combo
                        (gtk:combo-box-new-with-entry)) 'gtk:combo-box)))))
@@ -116,7 +116,7 @@
 
 (test gtk-combo-box-new-with-model
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (combo (model 2) :strong 1)
         (is (typep (setf model
                          (gtk:list-store-new "gchararray")) 'gtk:list-store))
@@ -130,7 +130,7 @@
 
 (test gtk-combo-box-new-with-model-and-entry
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (combo (model 2) :strong 1)
         (is (typep (setf model
                          (gtk:list-store-new "gchararray")) 'gtk:list-store))

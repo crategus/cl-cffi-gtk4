@@ -280,7 +280,7 @@
 
 (test gtk-tree-row-reference-new
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((model 3) :strong 1)
         (let ((path (gtk:tree-path-new-from-string "2"))
               row)
@@ -324,14 +324,14 @@
 ;;;     gtk_tree_model_get_flags
 
 (test gtk-tree-model-flags
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (make-instance 'gtk:list-store)))
       (is (equal '(:ITERS-PERSIST :LIST-ONLY) (gtk:tree-model-flags model))))))
 
 ;;;     gtk_tree_model_get_n_columns
 
 (test gtk-tree-model-n-columns
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (make-instance 'gtk:list-store
                                 :column-types
                                 '("gint" "gchararray" "gboolean"))))
@@ -340,7 +340,7 @@
 ;;;     gtk_tree_model_get_column_type
 
 (test gtk-tree-model-column-type
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (make-instance 'gtk:list-store
                                 :column-types
                                 '("gint" "gchararray" "gboolean"))))
@@ -353,7 +353,7 @@
 ;;;     gtk_tree_model_get_iter
 
 (test gtk-tree-model-iter
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (create-and-fill-list-store))
           (path (gtk:tree-path-new-from-string "2")))
       (is (typep (gtk:tree-model-iter model path) 'gtk:tree-iter)))))
@@ -361,21 +361,21 @@
 ;;;     gtk_tree_model_get_iter_from_string
 
 (test gtk-tree-model-iter-from-string
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (create-and-fill-list-store)))
       (is (typep (gtk:tree-model-iter-from-string model "2") 'gtk:tree-iter)))))
 
 ;;;     gtk_tree_model_get_iter_first
 
 (test gtk-tree-model-iter-first
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (create-and-fill-list-store)))
       (is (eq 'gtk:tree-iter (type-of (gtk:tree-model-iter-first model)))))))
 
 ;;;     gtk_tree_model_get_path
 
 (test gtk-tree-model-path
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((model (create-and-fill-list-store))
            (iter (gtk:tree-model-iter-from-string model "2"))
            path)
@@ -387,7 +387,7 @@
 ;;;     gtk_tree_model_get_value
 
 (test gtk-tree-model-value
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((model (create-and-fill-list-store))
            (iter (gtk:tree-model-iter-from-string model "2")))
       (is (= 2 (gtk:tree-model-value model iter 0)))

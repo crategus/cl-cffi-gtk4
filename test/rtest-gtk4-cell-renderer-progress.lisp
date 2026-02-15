@@ -54,7 +54,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-progress-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (renderer (make-instance 'gtk:cell-renderer-progress)))
     (is-false (gtk:cell-renderer-progress-inverted renderer))
     (is (= -1 (gtk:cell-renderer-progress-pulse renderer)))
@@ -68,7 +68,7 @@
 ;;;     gtk_cell_renderer_progress_new
 
 (test gtk:cell-renderer-progress-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:cell-renderer-progress-new) 'gtk:cell-renderer-progress))))
 
 ;;; 2024-9-20

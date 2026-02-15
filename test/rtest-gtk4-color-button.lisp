@@ -53,7 +53,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-color-button-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (button (make-instance 'gtk:color-button)))
     (is-true (gtk:color-button-modal button))
     (is-false (setf (gtk:color-button-modal button) nil))
@@ -99,13 +99,13 @@
 ;;;     gtk_color_button_new
 
 (test gtk-color-button-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:color-button-new) 'gtk:color-button))))
 
 ;;;     gtk_color_button_new_with_rgba
 
 (test gtk-color-button-new-with-rgba
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (button (gtk:color-button-new-with-rgba (gdk:rgba-parse "Blue"))))
     (is (typep button 'gtk:color-button))
     (is (string= "rgb(0,0,255)"

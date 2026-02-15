@@ -48,7 +48,7 @@
 ;;;     gtk_tree_store_new
 
 (test gtk-tree-store-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:tree-store-new "gint" "gchararray" "GdkPixbuf")
                'gtk:tree-store))))
 

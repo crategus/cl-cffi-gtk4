@@ -368,7 +368,7 @@
 
 (test gtk-css-provider-load-from-data
   (glib-test:with-check-memory (provider)
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
         (setf provider (gtk:css-provider-new))
         (is-false (gtk:css-provider-load-from-data provider +css-button+))
         (is (= 1314 (length (gtk:css-provider-to-string provider)))))))

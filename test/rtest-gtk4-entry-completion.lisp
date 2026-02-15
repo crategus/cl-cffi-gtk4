@@ -71,7 +71,7 @@
 
 (test gtk-entry-completion-properties
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (entry :strong 1)
         (setf entry (make-instance 'gtk:entry-completion))
         (is (typep (gtk:entry-completion-cell-area entry) 'gtk:cell-area-box))
@@ -94,7 +94,7 @@
 
 (test gtk-entry-completion-new-with-area
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((area 4) entry :strong 1)
         (setf area (gtk:cell-area-box-new))
         (is (typep (setf entry

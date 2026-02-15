@@ -58,7 +58,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-info-bar-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (infobar)
       (setf infobar (make-instance 'gtk:info-bar))
       (is (eq :info (gtk:info-bar-message-type infobar)))
@@ -70,7 +70,7 @@
 ;;;     gtk_info_bar_new
 
 (test gtk-info-bar-new
-  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+  (let* ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
       (is (typep (gtk:info-bar-new) 'gtk:info-bar)))))
 
@@ -78,7 +78,7 @@
 
 (test gtk-info-bar-new-with-buttons
   (when *first-run-testsuite*
-    (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (let* ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (infobar :strong 4)
         (is (typep (setf infobar
                          (gtk:info-bar-new-with-buttons "_OK" :accept

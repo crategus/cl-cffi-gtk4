@@ -236,7 +236,7 @@
 ;;;     gdk_surface_set_opaque_region
 
 (test gdk-surface-set-opaque-region
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (surface :strong 1)
       (let ((region (cairo:region-create-rectangle 10 20 100 200)))
         (is (typep (setf surface
@@ -264,7 +264,7 @@
 ;;;     gdk_surface_create_cairo_context
 
 (test gdk-surface-create-cairo-context
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((surface 2) context :strong 1)
       (is (typep (setf surface
                        (gdk:surface-new-toplevel (gdk:display-default)))
@@ -278,7 +278,7 @@
 ;;;     gdk_surface_create_similar_surface                 Deprecated 4.12
 
 (test gdk-surface-create-similar-surface
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (surface :strong 1)
       (is (typep (setf surface
                        (gdk:surface-new-toplevel (gdk:display-default)))

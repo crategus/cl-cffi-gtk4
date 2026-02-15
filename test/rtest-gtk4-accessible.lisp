@@ -91,7 +91,7 @@
 
 #-windows
 (test gtk-accessible-properties.2
-  (let ((*gtk-warn-deprecated* nil)) ; no warnings for deprecated widgets
+  (let ((gtk-init:*warn-deprecated* nil)) ; no warnings for deprecated widgets
     (let ((children (remove nil
                             (mapcar #'glib:symbol-for-gtype
                                     (mapcar #'g:type-name

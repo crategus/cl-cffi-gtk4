@@ -8,7 +8,7 @@
 ;;;     GtkPageSetupUnixDialog
 
 (test gtk-page-setup-unix-dialog-class
- (let ((*gtk-warn-deprecated*))
+ (let ((gtk-init:*warn-deprecated*))
     ;; Check type
     (is (g:type-is-object "GtkPageSetupUnixDialog"))
     ;; Check registered name

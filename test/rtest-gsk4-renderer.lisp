@@ -345,7 +345,7 @@
 ;; Do not realize this renderer. Its usage is deprecated.
 
 (test gsk-ngl-renderer-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (renderer)
       (is (typep (setf renderer
                        (gsk:ngl-renderer-new)) 'gsk:ngl-renderer)))))

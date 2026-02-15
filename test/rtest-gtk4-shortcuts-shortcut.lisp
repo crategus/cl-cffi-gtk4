@@ -122,7 +122,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-shortcuts-shortcut
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (shortcut)
       (is (typep (setf shortcut (make-instance 'gtk:shortcuts-shortcut))
                  'gtk:shortcuts-shortcut))

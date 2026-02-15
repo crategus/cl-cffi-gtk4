@@ -83,7 +83,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-font-chooser-properties
-  (let* ((*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (chooser (make-instance 'gtk:font-chooser-dialog)))
     #-gtk-4-18
     (is (string= "Sans 10" (gtk:font-chooser-font chooser)))

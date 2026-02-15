@@ -60,7 +60,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-button-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((button (make-instance 'gtk:app-chooser-button)))
       (is-false (gtk:app-chooser-button-heading button))
       (is-true (gtk:app-chooser-button-modal button))
@@ -78,7 +78,7 @@
 ;;;     gtk_app_chooser_button_new
 
 (test gtk-app-chooser-button-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((button (gtk:app-chooser-button-new "text/plain")))
       (is (typep button 'gtk:app-chooser-button))
       (is (string= "text/plain" (gtk:app-chooser-content-type button))))))

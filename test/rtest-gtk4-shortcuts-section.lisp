@@ -81,7 +81,7 @@
 ;;;     view-name
 
 (test gtk-shortcuts-section-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (section)
     (is (typep (setf section (make-instance 'gtk:shortcuts-section))
                'gtk:shortcuts-section))

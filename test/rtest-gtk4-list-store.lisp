@@ -48,14 +48,14 @@
 ;;;     gtk_list_store_new
 
 (test gtk-list-store-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:list-store-new "gint" "gchararray" "GdkPixbuf")
                'gtk:list-store))))
 
 ;;;     gtk_list_store_set
 
 (test gtk-list-store-set
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (gtk:list-store-new "gchararray" "gchararray" "guint")))
 
       (is (= 3 (gtk:tree-model-n-columns model)))
@@ -83,7 +83,7 @@
 ;;;     gtk_list_store_set_value
 
 (test gtk-list-store-set-value
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((model (gtk:list-store-new "gboolean" "guint" "gchararray"))
            (iter (gtk:list-store-append model)))
 
@@ -102,7 +102,7 @@
 ;;;     gtk_list_store_insert_after
 
 (test gtk-list-store-insert
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((model (gtk:list-store-new "gint"))
           (iter nil))
       (is (typep (setf iter
@@ -127,7 +127,7 @@
 ;;;     gtk_list_store_insert_with_values
 
 (test gtk-list-store-insert-with-values
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((model (gtk:list-store-new "gboolean" "gint" "gchararray"))
            (iter nil))
       (is (typep (setf iter

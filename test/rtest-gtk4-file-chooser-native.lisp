@@ -50,7 +50,7 @@
 
 #+nil
 (test gtk-file-chooser-native-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let ((chooser (make-instance 'gtk:file-chooser-native)))
       (is-false (gtk:file-chooser-native-accept-label chooser))
       (is-false (gtk:file-chooser-native-cancel-label chooser)))))
@@ -61,7 +61,7 @@
 
 #+nil
 (test gtk-file-chooser-native-new
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (let* ((window (gtk:window-new))
            (dialog (gtk:file-chooser-native-new "title"
                                                 window

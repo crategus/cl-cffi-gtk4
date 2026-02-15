@@ -54,7 +54,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-color-chooser-widget-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (widget (make-instance 'gtk:color-chooser-widget)))
     (is-false (gtk:color-chooser-widget-show-editor widget))))
 
@@ -63,7 +63,7 @@
 ;;;     gtk_color_chooser_widget_new
 
 (test gtk-color-chooser-widget-new
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (is (typep (gtk:color-chooser-widget-new) 'gtk:color-chooser-widget))))
 
 ;;; 2024-9-20

@@ -107,7 +107,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-area-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area)
       (setf area (make-instance 'gtk:cell-area-box))
       (is-false (gtk:cell-area-edit-widget area))
@@ -133,7 +133,7 @@
 ;;;     gtk_cell_area_has_renderer
 
 (test gtk-cell-area-add/remove
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer1 renderer2 renderer3)
       (setf area (gtk:cell-area-box-new))
       (setf renderer1 (gtk:cell-renderer-pixbuf-new))
@@ -158,7 +158,7 @@
 ;;;     gtk_cell_area_foreach
 
 (test gtk-cell-area-foreach
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (area (gtk:cell-area-box-new))
          (renderer1 (gtk:cell-renderer-pixbuf-new))
          (renderer2 (gtk:cell-renderer-progress-new))
@@ -201,7 +201,7 @@
 
 (test gtk-cell-area-create-context
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((area 2) context :strong 1)
         (setf area (gtk:cell-area-box-new))
         (is (typep (setf context
@@ -212,7 +212,7 @@
 
 (test gtk-cell-area-copy-context
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory ((area 3) context :strong 1)
         (setf area (gtk:cell-area-box-new))
         (setf context (gtk:cell-area-create-context area))
@@ -222,7 +222,7 @@
 ;;;     gtk_cell_area_get_request_mode
 
 (test gtk-cell-area-request-mode
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area)
       (setf area (gtk:cell-area-box-new))
       (is (eq :HEIGHT-FOR-WIDTH (gtk:cell-area-request-mode area))))))
@@ -241,7 +241,7 @@
 ;;;     gtk_cell_area_class_find_cell_property
 
 (test gtk-cell-area-class-find-cell-property
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer)
       (setf area (make-instance 'gtk:cell-area-box))
       (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))
@@ -263,7 +263,7 @@
 ;;;     gtk_cell_area_class_list_cell_properties
 
 (test gtk-cell-area-class-list-cell-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ()
       (is (equal '("expand" "align" "fixed-size" "pack-type")
                  (mapcar #'g:param-spec-name
@@ -275,7 +275,7 @@
 ;;;     gtk_cell_area_cell_get
 
 (test gtk-cell-area-cell-set/get
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer)
       (setf area (make-instance 'gtk:cell-area-box))
       (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))
@@ -302,7 +302,7 @@
 ;;;     gtk_cell_area_cell_get_property
 
 (test gtk-cell-area-cell-property
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (area renderer)
       (setf area (make-instance 'gtk:cell-area-box))
       (setf renderer (make-instance 'gtk:cell-renderer-pixbuf))

@@ -44,7 +44,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-tree-selection-properties
-  (let ((*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (selection)
       (setf selection (make-instance 'gtk:tree-selection))
       (is (eq :single (gtk:tree-selection-mode selection))))))
@@ -66,7 +66,7 @@
 
 (test gtk-tree-selection-tree-view
   (when *first-run-testsuite*
-    (let ((*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (view (selection 2) :strong 1)
         (setf view (gtk:tree-view-new))
         (setf selection (gtk:tree-view-selection view))

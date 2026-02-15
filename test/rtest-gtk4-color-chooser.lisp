@@ -37,7 +37,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-color-chooser-properties
-  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+  (let* ((gtk-init:*warn-deprecated* nil)
          (chooser (make-instance 'gtk:color-button)))
     (is (typep (gtk:color-chooser-rgba chooser) 'gdk:rgba))
     (is (typep (setf (gtk:color-chooser-rgba chooser) (gdk:rgba-parse "Blue"))

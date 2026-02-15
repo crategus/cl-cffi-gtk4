@@ -36,7 +36,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-properties
-  (let ((gtk-init:*gtk-warn-deprecated* nil))
+  (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (button)
       (setf button (make-instance 'gtk:app-chooser-button))
       (is-false (gtk:app-chooser-content-type button)))))
@@ -48,7 +48,7 @@
 #-windows
 (test gtk-app-chooser-app-info
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (button :strong 1)
         (setf button (gtk:app-chooser-button-new "text/plain"))
         (is (typep (gtk:app-chooser-app-info button) 'g:object))))))
@@ -58,7 +58,7 @@
 #-windows
 (test gtk-app-chooser-refresh
   (when *first-run-testsuite*
-    (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((gtk-init:*warn-deprecated* nil))
       (glib-test:with-check-memory (button :strong 1)
         (setf button (gtk:app-chooser-button-new "text/plain"))
         (is-false (gtk:app-chooser-refresh button))
