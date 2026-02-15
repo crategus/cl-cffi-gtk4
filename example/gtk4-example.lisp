@@ -12,17 +12,12 @@
 
            ;; Windows
            #:do-window-simple
-           #:do-dialog-quick-message
+           #:do-application-window
+           #:create-message-dialog
+           #:create-message-dialog-2
            #:do-dialog-various
-           #:create-message-dialog-simple
-           #:create-message-dialog-simple2
-           #:do-message-dialog-new
-           #:do-message-dialog-new-with-markup
-           #:do-message-dialog-with-markup
-           #:do-message-dialog-with-secondary-markup
            #:create-alert-dialog
            #:do-assistant
-           #:do-application-window
 
            ;; Layout Containers
            #:do-box-append
@@ -314,4 +309,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
       ;; Run the application
       (g:application-run app nil))))
 
-;;; 2026-01-25
+;;; 2026-02-15

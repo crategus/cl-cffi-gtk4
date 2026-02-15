@@ -14,13 +14,11 @@
 
                ;; Windows
                (:file "window-simple")
-               (:file "dialog-quick-message")
+               (:file "application-window")
+               (:file "message-dialog")
                (:file "dialog-various")
-               (:file "message-dialog-simple")
-               (:file "message-dialog-various")
                (:file "alert-dialog")
                (:file "assistant")
-               (:file "application-window")
 
                ;; Layout Containers
                (:file "box-append")
@@ -184,4 +182,4 @@
                (:file "paintable-emblem")
               ))
 
-;;; --- 2026-01-25 -------------------------------------------------------------
+;;; 2026-02-15

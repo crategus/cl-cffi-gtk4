@@ -23,7 +23,7 @@
                                :modal t))
         (cancellable (g:cancellable-new)))
     ;; Cancel alert dialog after waiting 10 seconds for user response
-    (g:timeout-add-seconds 10
+    (g:timeout-add-seconds 5
                            (lambda ()
                              (g:cancellable-cancel cancellable)
                              g:+source-remove+))

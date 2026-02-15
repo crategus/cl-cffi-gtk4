@@ -1,4 +1,4 @@
-;;;; Simple Message Dialog
+;;;; Message Dialog
 ;;;;
 ;;;; This file contains two variants for creating a message dialog. The first
 ;;;; variant uses the <tt>make-instance</tt> function. The second variant
@@ -22,7 +22,7 @@
 
 ;; Variant 1
 
-(defun create-message-dialog-simple (parent)
+(defun create-message-dialog (parent)
   (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:message-dialog
                                  :transient-for parent
@@ -40,7 +40,7 @@
 
 ;; Variant 2
 
-(defun create-message-dialog-simple2 (parent)
+(defun create-message-dialog-2 (parent)
   (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (gtk:message-dialog-new parent
                                           '(:modal)

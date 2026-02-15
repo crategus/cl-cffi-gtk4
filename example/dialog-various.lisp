@@ -48,7 +48,7 @@
       ;; Connect a handler to the "response" signal
       (g:signal-connect dialog "response"
                         (lambda (widget response)
-                          (format t "Response is: ~s~%" response)
+                          (format t "Response ID is ~s~%" response)
                           (gtk:window-destroy widget)))
       ;; Add a label widget within a box to the content area
       (let ((vbox (make-instance 'gtk:box
@@ -79,7 +79,7 @@
       (let ((dialog (gtk:builder-object builder "dialog")))
         (g:signal-connect dialog "response"
                           (lambda (widget response)
-                            (format t "response ID is : ~a~%" response)
+                            (format t "Response ID is ~a~%" response)
                             (gtk:window-destroy widget)))
         (setf (gtk:window-transient-for dialog) parent)
         (gtk:window-present dialog)))))
@@ -127,7 +127,7 @@
                                ("Question" . :question)
                                ("Error" . :error))
                              :test #'string=))))
-      (format t "message type is : ~a~%" mtype)
+      (format t "Message type is ~a~%" mtype)
       mtype)))
 
 (defun do-dialog-various (&optional application)

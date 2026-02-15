@@ -3,7 +3,7 @@
 ;;;; The <tt>gtk:drawing-area</tt> widget is a widget that allows drawing with
 ;;;; Cairo. It is essentially a blank widget. You can draw on it.
 ;;;;
-;;;; 2024-4-6
+;;;; 2026-02-15
 
 (in-package :gtk4-example)
 
@@ -28,5 +28,5 @@
                        0.0
                        (* 2.0 pi))
             (cairo:fill cr))))
-    ;; Show the window
+    ;; Present the window
     (gtk:window-present window)))

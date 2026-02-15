@@ -1,6 +1,6 @@
 ;;;; GTK 4 Demo
 ;;;;
-;;;; 2026-01-24
+;;;; 2026-02-15
 
 (in-package :gtk4-demo)
 
@@ -483,40 +483,43 @@
        "GtkWindow"
        "gtk:window"
        "gtk:window-application"
-       "gtk:window-present"
-       ":title")
-      ("Simple Message Dialog"
-       ":dialog"
-       "CREATE-MESSAGE-DIALOG-SIMPLE"
+       "gtk:window-present")
+      ("Application Window"
+       ":window"
+       "DO-APPLICATION-WINDOW"
        "gtk4-example"
-       "message-dialog-simple.lisp"
+       "application-window.lisp"
+       :keywords
+       "GtkApplicationWindow"
+       "gtk:application-window"
+       "gtk:application-menubar"
+       "GtkBuilder"
+       "gtk:builder"
+       "gtk:builder-object"
+       "gtk:builder-add-from-string")
+      ("Message Dialog"
+       ":dialog"
+       "CREATE-MESSAGE-DIALOG"
+       "gtk4-example"
+       "message-dialog.lisp"
        :keywords
        "GtkMessageDialog"
        "gtk:message-dialog"
        "gtk:message-dialog-new"
        "gtk:message-dialog-secondary-text"
-       "gtk:window-destroy"
-       "gtk:window-present"
-       ;; Properties
-       ":transient-for"
-       ":modal"
-       ":message-type" "gtk:message-type" ":info"
-       ":buttons"
-       ":text"
-       ":secondary-text"
+       "gtk:message-type"
        ;; Signals
        "::response")
-       (("Variant 1"
+       (("Message Dialog Variant 1"
        ":dialog"
-       "CREATE-MESSAGE-DIALOG-SIMPLE"
+       "CREATE-MESSAGE-DIALOG"
        "gtk4-example"
-       "message-dialog-simple.lisp")
-       ("Variant 2"
+       "message-dialog.lisp")
+       ("Message Dialog Variant 2"
        ":dialog"
-       "CREATE-MESSAGE-DIALOG-SIMPLE2"
+       "CREATE-MESSAGE-DIALOG-2"
        "gtk4-example"
-       "message-dialog-simple.lisp"))
-
+       "message-dialog.lisp"))
       ("Various Dialogs"
        ":window"
        "DO-DIALOG-VARIOUS"
@@ -534,60 +537,13 @@
        "gtk:message-dialog"
        "gtk:about-dialog"
        "gtk:show-about-dialog"
-       "gtk:window"
-       "gtk:window-destroy"
-       "gtk:window-present"
        "gtk:window-transient-for"
-       "gtk:box"
-       "gtk:box-append"
-       "gtk:label"
-       "gtk:builder"
        "gtk:builder-add-from-file"
        "gtk:builder-object"
-       "gtk:check-button"
-       "gtk:check-button-active"
-       "gtk:check-button-label"
-       "gtk:check-button-new-with-label"
-       "gtk:check-button-group"
-       "gtk:button"
-       "g:signal-connect"
        ;; Signals
        "::response"
        "::clicked"
-       "::toggled"
-       ;; Properties
-       ":transient-for"
-       ":modal"
-       ":message-type"
-       ":buttons"
-       ":text"
-       ":secondary-text"
-       ":use-header-bar"
-       ":title"
-       ":program-name"
-       ":version"
-       ":copyright"
-       ":website"
-       ":website-label"
-       ":license"
-       ":authors"
-       ":documenters"
-       ":artists"
-       ":logo-icon-name"
-       ":wrap-license"
-       ":orientation"
-       ":margin-top"
-       ":margin-bottom"
-       ":margin-start"
-       ":margin-end"
-       ":spacing"
-       ":application"
-       ":type"
-       ":child"
-       ":default-width"
-       ":default-height"
-       ":wrap"
-       ":label")
+       "::toggled")
       ("Alert Dialog"
        ":dialog"
        "CREATE-ALERT-DIALOG"
@@ -618,20 +574,7 @@
        "gtk:assistant-page-type"
        "gtk:assistant-page-complete"
        "::prepare"
-       "::apply")
-       ("Application Window"
-        ":window"
-        "DO-APPLICATION-WINDOW"
-        "gtk4-example"
-        "application-window.lisp"
-        :keywords
-        "GtkApplicationWindow"
-        "gtk:application-window"
-        "gtk:application-menubar"
-        "GtkBuilder"
-        "gtk:builder"
-        "gtk:builder-object"
-        "gtk:builder-add-from-string"))
+       "::apply"))
 
      "Layout Containers"
      (("Box Append"
@@ -2023,15 +1966,9 @@
        "gtk:drawing-area"
        "gtk:drawing-area-set-draw-func"
        "gtk:widget-color"
-       "gtk:window"
        "gdk:cairo-set-source-rgba"
        "cairo:arc"
-       "cairo:fill"
-       ":application"
-       ":child"
-       ":title"
-       ":default-width"
-       ":default-height")
+       "cairo:fill")
       ("Scribble on Drawing Area"
        ":window"
        "DO-DRAWING-AREA-SCRIBBLE"

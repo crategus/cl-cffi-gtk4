@@ -4,12 +4,12 @@
 ;;;; an operation into several simpler sequential steps, and to guide the user
 ;;;; through these steps.
 ;;;;
-;;;; Warning:
+;;;; <b>Warning</b>
 ;;;;
 ;;;; The <tt>gtk:assistant</tt> implementation is deprecated since 4.10. This
 ;;;; widget will be removed from GTK 5.
 ;;;;
-;;;; 2026-01-24
+;;;; 2026-02-15
 
 (in-package :gtk4-example)
 
@@ -81,7 +81,8 @@
   (setf (gtk:assistant-page-complete assistant pbar) nil))
 
 (defun do-assistant (&optional application)
-  (let* ((assistant (make-instance 'gtk:assistant
+  (let* ((gtk-init:*warn-deprecated* nil)
+         (assistant (make-instance 'gtk:assistant
                                    :title "Assistant"
                                    :use-header-bar 1
                                    :application application
@@ -128,5 +129,5 @@
     (create-assistant-page2 assistant)
     (create-assistant-page3 assistant)
     (create-assistant-page4 assistant pbar)
-    ;; Show the assistant
+    ;; Present the assistant
     (gtk:window-present assistant)))

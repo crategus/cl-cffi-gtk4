@@ -1,40 +1,38 @@
-;;;; Drawing Area
+;;;; Scribble on Drawing Area
 ;;;;
-;;;; GtkDrawingArea is a blank area where you can draw custom displays of
-;;;; various kinds.
+;;;; The <tt>GtkDrawingArea</tt> widget is a blank area where you can draw
+;;;; custom displays of various kinds.
 ;;;;
 ;;;; The "scribble" area is a bit more advanced, and shows how to handle events
 ;;;; such as button presses and mouse motion. Click the mouse and drag in the
 ;;;; scribble area to draw squiggles. Resize the window to clear the area.
 ;;;;
-;;;; Last version: 2024-5-16
+;;;; 2026-02-15
 
 (in-package :gtk4-example)
 
 (let ((surface nil))
 
   ;; Create a new surface of the appropriate size to store our scribbles
-  (defun create-surface (widget)
-    (format t "create-surface : ~a~%" surface)
+  (defun create-surface (widget width height)
     (when surface
       (cairo:destroy surface))
     (setf surface
-          (cairo:image-surface-create :argb32
-                                      (gtk:widget-width widget)
-                                      (gtk:widget-height widget)))
-    ;; Initialize the surface to white
+          (cairo:image-surface-create :argb32 width height))
+    ;; Clear background
     (cairo:with-context (context surface)
       (cairo:set-source-rgb context 1.0 1.0 1.0)
       (cairo:paint context)))
 
   (defun draw-brush (widget x y)
-    (format t "draw-brush : ~a ~a~%" x y)
     (when (or (not surface)
               (not (= (cairo:image-surface-width surface)
                       (gtk:widget-width widget)))
               (not (= (cairo:image-surface-height surface)
                       (gtk:widget-height widget))))
-    (create-surface widget))
+      (create-surface widget
+                      (gtk:widget-width widget)
+                      (gtk:widget-height widget)))
     (let ((rect (gdk:rectangle-new :x (- (truncate x) 3)
                                    :y (- (truncate y) 3)
                                    :width 6
@@ -65,8 +63,7 @@
                           (setf surface nil)))
       (g:signal-connect area "resize"
                         (lambda (widget width height)
-                          (declare (ignore width height))
-                          (create-surface widget)))
+                          (create-surface widget width height)))
       (gtk:drawing-area-set-draw-func area
               ;; Redraw the screen from the surface
               (lambda (area cr height width)
@@ -74,7 +71,7 @@
                 (cairo:set-source-surface cr surface 0 0)
                 (cairo:paint cr)))
       (gtk:widget-add-controller area drag)
-      ;; Signal handlers for drag and drop
+      ;; Signal handlers for drag controller
       (let ((xstart 0.0d0) (ystart 0.0d0))
         (g:signal-connect drag "drag-begin"
                           (lambda (gesture x y)

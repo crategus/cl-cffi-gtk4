@@ -5,7 +5,7 @@
 ;;;; <tt>gtk:application</tt> features. Notably, it can handle an application
 ;;;; menubar.
 ;;;;
-;;;; Last version: 2025-07-11
+;;;; 2026-02-15
 
 (in-package :gtk4-example)
 
