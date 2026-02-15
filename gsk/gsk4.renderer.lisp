@@ -532,7 +532,7 @@
   @see-class{gsk:ngl-renderer}
   @see-class{gsk:renderer}"
   #+(and gtk-4-18 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
+  (when gtk-init:*warn-deprecated*
     (warn "GSK:NGL-RENDERER-NEW is deprecated since 4.18."))
   (%ngl-renderer-new))
 
