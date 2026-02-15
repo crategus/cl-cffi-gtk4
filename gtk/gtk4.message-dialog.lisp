@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -176,7 +176,7 @@
 
 #+liber-documentation
 (setf (documentation 'message-dialog 'type)
- "@version{2025-07-22}
+ "@version{2026-02-15}
   @begin{short}
     The @class{gtk:message-dialog} widget presents a dialog with some message
     text.
@@ -193,9 +193,9 @@
   hidden or destroyed. You can use the @sig[gtk:dialog]{response} signal to know
   when the user dismissed the message dialog.
   @begin[Examples]{dictionary}
-    An example for creating a modal message dialog.
+    The GTK Demo offers an example of how to create a modal message dialog.
     @begin{pre}
-(defun create-message-dialog-simple (parent)
+(defun create-message-dialog (parent)
   (let ((dialog (make-instance 'gtk:message-dialog
                                :transient-for parent
                                :modal t
@@ -210,9 +210,9 @@
     (gtk:window-present dialog)))
     @end{pre}
     This is a variant that uses the @fun{gtk:message-dialog-new} function. The
-    first example is more lispy and the implementation more favorable.
+    first example is more lispy and its implementation preferable.
     @begin{pre}
-(defun create-message-dialog-simple2 (parent)
+(defun create-message-dialog-2 (parent)
   (let ((dialog (gtk:message-dialog-new parent
                                         '(:modal)
                                         :info

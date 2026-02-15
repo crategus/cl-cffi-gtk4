@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'drawing-area 'type)
- "@version{2025-07-24}
+ "@version{2026-02-15}
   @begin{short}
     The @class{gtk:drawing-area} widget is a widget that allows drawing with
     Cairo.
@@ -164,8 +164,8 @@
                        0.0
                        (* 2.0 pi))
             (cairo:fill cr))))
-    ;; Show the window
-    (setf (gtk:widget-visible window) t)))
+    ;; Present the window
+    (gtk:window-present window)))
     @end{pre}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
