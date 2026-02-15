@@ -63,6 +63,8 @@
     @about-function{renderer-render-texture}
     @about-class{cairo-renderer}
     @about-function{cairo-renderer-new}
+    @about-class{vulkan-renderer}
+    @about-function{vulkan-renderer-new}
     @about-class{gl-renderer}
     @about-function{gl-renderer-new}
     @about-class{ngl-renderer}
@@ -173,6 +175,16 @@
     @about-symbol{shadow}
     @about-symbol{blend-mode}
     @about-symbol{mask-mode}
+    @about-class{component-transfer}
+    @about-function{component-transfer-new-discrete}
+    @about-function{component-transfer-new-gamma}
+    @about-function{component-transfer-new-identity}
+    @about-function{component-transfer-new-levels}
+    @about-function{component-transfer-new-linear}
+    @about-function{component-transfer-new-table}
+    @about-function{component-transfer-copy}
+    @about-function{component-transfer-free}
+    @about-function{component-transfer-equal}
     @about-class{render-node}
     @about-function{render-node-ref}
     @about-function{render-node-unref}
@@ -331,6 +343,10 @@
     @about-function{subsurface-node-new}
     @about-function{subsurface-node-subsurface}
     @about-function{subsurface-node-child}
+    @about-class{component-transfer-node}
+    @about-function{component-transfer-node-new}
+    @about-function{component-transfer-node-child}
+    @about-function{component-transfer-node-transfer}
   @end{section}
   @begin[GskRoundedRect]{section}
     @about-symbol{corner}

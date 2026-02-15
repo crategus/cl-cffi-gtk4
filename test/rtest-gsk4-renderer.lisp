@@ -5,8 +5,6 @@
 
 ;; TODO: The class GskGpuRenderer is used, but not documented and not
 ;; implemented for Lisp.
-;;
-;; Check the implementation of the classes and documentation again.
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -25,10 +23,6 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GskRenderer")))
   ;; Check children
-  #-gtk-4-18
-  (is (equal '("GskCairoRenderer" "GskGLRenderer" "GskGpuRenderer")
-             (glib-test:list-children "GskRenderer")))
-  #+gtk-4-18
   (is (equal '("GskCairoRenderer" "GskGpuRenderer" "GskNglRenderer")
              (glib-test:list-children "GskRenderer")))
   ;; Check interfaces
@@ -42,14 +36,14 @@
              (glib-test:list-signals "GskRenderer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GskRenderer" GSK:RENDERER
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gsk_renderer_get_type")
-                       ((REALIZED RENDERER-REALIZED "realized" "gboolean" T
-                         NIL)
-                        (SURFACE RENDERER-SURFACE "surface" "GdkSurface" T
-                         NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gsk_renderer_get_type")
+                      ((REALIZED RENDERER-REALIZED "realized" "gboolean" T
+                        NIL)
+                       (SURFACE RENDERER-SURFACE "surface" "GdkSurface" T
+                        NIL)))
              (gobject:get-gtype-definition "GskRenderer"))))
 
 ;;;     GskCairoRenderer
@@ -211,10 +205,13 @@
 (test gsk-renderer-properties
   (when *first-run-testsuite*
     (glib-test:with-check-memory (surface renderer :strong 1)
-      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-      (setf renderer (gsk:renderer-new-for-surface surface))
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is (typep (setf renderer
+                       (gsk:renderer-new-for-surface surface)) 'gsk:renderer))
       (is-true (gsk:renderer-realized renderer))
-      (is (typep (gsk:renderer-surface renderer) 'gdk:surface))
+      (is (eq surface (gsk:renderer-surface renderer)))
       ;; Remove references
       (is-false (gsk:renderer-unrealize renderer))
       (is-false (gsk:renderer-is-realized renderer))
@@ -227,9 +224,12 @@
 (test gsk-renderer-new-for-surface
   (when *first-run-testsuite*
     (glib-test:with-check-memory (surface renderer :strong 1)
-      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
       (is (typep (setf renderer
                        (gsk:renderer-new-for-surface surface)) 'gsk:renderer))
+      (is-true (gsk:renderer-realized renderer))
       ;; Remove references
       (is-false (gsk:renderer-unrealize renderer))
       (is-false (gsk:renderer-is-realized renderer))
@@ -239,19 +239,76 @@
 ;;;     gsk_renderer_unrealize
 ;;;     gsk_renderer_is_realized
 
-(test gsk-renderer-is-realized
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (surface renderer :strong 1)
-      (setf surface (gdk:surface-new-toplevel (gdk:display-default)))
-      (setf renderer (gsk:renderer-new-for-surface surface))
-      (is-true (gsk:renderer-is-realized renderer))
-      ;; Remove references
-      (is-false (gsk:renderer-unrealize renderer))
-      (is-false (gsk:renderer-is-realized renderer))
-      (is-false (gdk:surface-destroy surface)))))
+(test gsk-renderer-is-realized.1
+  (glib-test:with-check-memory (renderer surface)
+    (is (typep (setf surface
+                     (gdk:surface-new-toplevel (gdk:display-default)))
+               'gdk:surface))
+    (is (typep (setf renderer
+                     (gsk:cairo-renderer-new)) 'gsk:cairo-renderer))
+    (is-true (gsk:renderer-realize renderer surface))
+    (is-true (gsk:renderer-is-realized renderer))
+    ;; Remove references
+    (is-false (gsk:renderer-unrealize renderer))
+    (is-false (gsk:renderer-is-realized renderer))
+    (is-false (gdk:surface-destroy surface))))
+
+(test gsk-renderer-is-realized.2
+  (glib-test:with-check-memory (renderer)
+    (is (typep (setf renderer
+                     (gsk:cairo-renderer-new)) 'gsk:cairo-renderer))
+    (is-true (gsk:renderer-realize renderer nil))
+    (is-true (gsk:renderer-is-realized renderer))
+    ;; Remove references
+    (is-false (gsk:renderer-unrealize renderer))
+    (is-false (gsk:renderer-is-realized renderer))))
+
+(test gsk-renderer-is-realized.3
+  (glib-test:with-check-memory (renderer)
+    (is (typep (setf renderer
+                     (gsk:cairo-renderer-new)) 'gsk:cairo-renderer))
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+    (is-true (gsk:renderer-is-realized renderer))
+    ;; Remove references
+    (is-false (gsk:renderer-unrealize renderer))
+    (is-false (gsk:renderer-is-realized renderer))))
 
 ;;;     gsk_renderer_render
+
+;; Does not work.
+
+#+nil
+(test gsk-renderer-render
+  (let* ((str "color { bounds: 0 0 20 20;
+                       color: rgb(255,0,0); }")
+         (bytes (g:bytes-new-from-string str))
+         (node (gsk:render-node-deserialize bytes))
+         (surface (gdk:surface-new-toplevel (gdk:display-default)))
+         (renderer (gsk:renderer-new-for-surface surface)))
+
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+    (is-false (gsk:renderer-render renderer node))
+))
+
 ;;;     gsk_renderer_render_texture
+
+;; Does not work.
+
+#+nil
+(test gsk-renderer-render-texture
+ (glib-test:with-check-memory (texture)
+    (let* ((str "color { bounds: 0 0 20 20;
+                         color: rgb(255,0,0); }")
+          (bytes (g:bytes-new-from-string str))
+          (node (gsk:render-node-deserialize bytes))
+         (surface (gdk:surface-new-toplevel (gdk:display-default)))
+         (renderer (gsk:renderer-new-for-surface surface)))
+
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+      (is (typep (setf texture
+                       (gsk:renderer-render-texture renderer node))
+                 'gdk:texture))
+)))
 
 ;;;     gsk_cairo_renderer_new
 
@@ -259,10 +316,38 @@
   (glib-test:with-check-memory (renderer)
     (is (typep (setf renderer
                      (gsk:cairo-renderer-new)) 'gsk:cairo-renderer))
-    ;; Check memory management
-    (is-false (gsk:renderer-is-realized renderer))))
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+    (is-true (gsk:renderer-is-realized renderer))
+    (is-false (gsk:renderer-unrealize renderer))))
+
+;;;     gsk_vulkan_renderer_new
+
+(test gsk-vulkan-renderer-new
+  (glib-test:with-check-memory (renderer)
+    (is (typep (setf renderer
+                     (gsk:vulkan-renderer-new)) 'gsk:vulkan-renderer))
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+    (is-true (gsk:renderer-is-realized renderer))
+    (is-false (gsk:renderer-unrealize renderer))))
 
 ;;;     gsk_gl_renderer_new
-;;;     gsk_ngl_renderer_new
 
-;;; 2025-10-26
+(test gsk-gl-renderer-new
+  (glib-test:with-check-memory (renderer)
+    (is (typep (setf renderer
+                     (gsk:gl-renderer-new)) 'gsk:gl-renderer))
+    (is-true (gsk:renderer-realize-for-display renderer (gdk:display-default)))
+    (is-true (gsk:renderer-is-realized renderer))
+    (is-false (gsk:renderer-unrealize renderer))))
+
+;;;     gsk_ngl_renderer_new                                Deprecated 4.18
+
+;; Do not realize this renderer. Its usage is deprecated.
+
+(test gsk-ngl-renderer-new
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (glib-test:with-check-memory (renderer)
+      (is (typep (setf renderer
+                       (gsk:ngl-renderer-new)) 'gsk:ngl-renderer)))))
+
+;;; 2026-02-09

@@ -35,8 +35,9 @@
 ;;;
 ;;;     GskRenderer
 ;;;     GskCairoRenderer
+;;;     GskVulkanRenderer
 ;;;     GskGLRenderer                                       Since 4.2
-;;;     GskNGLRenderer                                      Since 4.2
+;;;     GskNglRenderer                                      Since 4.2
 ;;;
 ;;; Accessors
 ;;;
@@ -54,8 +55,9 @@
 ;;;     gsk_renderer_render_texture
 ;;;
 ;;;     gsk_cairo_renderer_new
+;;;     gsk_vulkan_renderer_new
 ;;;     gsk_gl_renderer_new                                 Since 4.2
-;;;     gsk_ngl_renderer_new                                Since 4.2
+;;;     gsk_ngl_renderer_new                                Deprecated 4.18
 ;;;
 ;;; Properties
 ;;;
@@ -88,7 +90,7 @@
 
 #+liber-documentation
 (setf (documentation 'renderer 'type)
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @begin{short}
     The @class{gsk:renderer} class is a class that renders a scene graph
     defined by a tree of @class{gsk:render-node} instances.
@@ -122,7 +124,7 @@
 (setf (liber:alias-for-function 'renderer-realized)
       "Accessor"
       (documentation 'renderer-realized 'function)
- "@version{2025-08-03}
+ "@version{2026-02-08}
   @syntax{(gsk:renderer-realized object) => realized}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[realized]{a boolean whether the renderer has been associated with
@@ -145,7 +147,7 @@
 (setf (liber:alias-for-function 'renderer-surface)
       "Accessor"
       (documentation 'renderer-surface 'function)
- "@version{2025-08-03}
+ "@version{2026-02-11}
   @syntax{(gsk:renderer-surface object) => surface}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[surface]{a @class{gdk:surface} object}
@@ -156,7 +158,8 @@
   @end{short}
   If the renderer has not been realized yet, @code{nil} will be returned.
   @see-class{gsk:renderer}
-  @see-class{gdk:surface}")
+  @see-class{gdk:surface}
+  @see-function{gsk:renderer-realize}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_new_for_surface
@@ -165,7 +168,7 @@
 (cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The new @class{gsk:renderer} instance.}
   @begin{short}
@@ -194,16 +197,27 @@
 
 (defun renderer-realize (renderer surface)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{2026-02-08}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @argument[surface]{a @class{gdk:surface} object}
+  @return{The boolean whether the renderer was successfully realized.}
   @begin{short}
     Creates the resources needed by the renderer to render the scene graph.
   @end{short}
+
+  Since GTK 4.6, the surface may be @code{nil}, which allows using renderers
+  without having to create a surface. Since GTK 4.14, it is recommended to use
+  the @fun{gsk:renderer-realize-for-display} function for this case.
+
+  Note that it is mandatory to call the @fun{gsk:renderer-unrealize} function
+  before destroying the renderer.
   @see-class{gsk:renderer}
-  @see-class{gdk:surface}"
-  (glib:with-error (err)
-    (%renderer-realize renderer surface err)))
+  @see-class{gdk:surface}
+  @see-function{gsk:renderer-realize-for-display}
+  @see-function{gsk:renderer-unrealize}"
+  (let ((surface (or surface (cffi:null-pointer))))
+    (glib:with-error (err)
+      (%renderer-realize renderer surface err))))
 
 (export 'renderer-realize)
 
@@ -221,7 +235,7 @@
 #+gtk-4-14
 (defun renderer-realize-for-display (renderer display)
  #+liber-documentation
- "@version{#2026-01-21}
+ "@version{2026-02-08}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @argument[display]{a @class{gdk:display} object that the renderer will be
     used on}
@@ -235,6 +249,7 @@
   Since 4.14
   @see-class{gsk:renderer}
   @see-class{gdk:display}
+  @see-function{gsk:renderer-realize}
   @see-function{gsk:renderer-unrealize}"
   (glib:with-error (err)
     (%renderer-realize-for-display renderer display err)))
@@ -248,7 +263,7 @@
 
 (cffi:defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
  #+liber-documentation
- "@version{2026-01-21}
+ "@version{2026-02-08}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @begin{short}
     Releases all the resources created by the @fun{gsk:renderer-realize}
@@ -266,7 +281,7 @@
 
 (cffi:defcfun ("gsk_renderer_is_realized" renderer-is-realized) :boolean
  #+liber-documentation
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @argument[renderer]{a @class{gsk:renderer} instance}
   @return{@em{True} if @arg{renderer} was realized, and @em{false} otherwise.}
   @short{Checks whether the renderer is realized or not.}
@@ -281,15 +296,15 @@
 
 (cffi:defcfun ("gsk_renderer_render" %renderer-render) :void
   (renderer (g:object renderer))
-  (root (g:object render-node))
+  (node (g:object render-node))
   (region (:pointer (:struct cairo:region-t))))
 
-(defun renderer-render (renderer root &optional region)
+(defun renderer-render (renderer node &optional region)
  #+liber-documentation
- "@version{#2025-08-03}
+ "@version{#2026-02-11}
   @argument[renderer]{a @class{gsk:renderer} instance}
-  @argument[root]{a @class{gsk:render-node} instance}
-  @argument[region]{an optional @sym{cairo:context-t} instance for the region
+  @argument[node]{a @class{gsk:render-node} instance}
+  @argument[region]{an optional @sym{cairo:region-t} instance for the region
     that must be redrawn or the default @code{nil} value for the whole window}
   @begin{short}
     Renders the scene graph, described by a tree of @class{gsk:render-node}
@@ -306,7 +321,7 @@
   @see-class{gsk:render-node}
   @see-symbol{cairo:region-t}"
   (let ((region (or region (cffi:null-pointer))))
-    (%renderer-render renderer root region)))
+    (%renderer-render renderer node region)))
 
 (export 'renderer-render)
 
@@ -317,18 +332,18 @@
 (cffi:defcfun ("gsk_renderer_render_texture" %renderer-render-texture)
     (g:object gdk:texture)
   (renderer (g:object renderer))
-  (root (g:object render-node))
+  (node (g:object render-node))
   (viewport (:pointer (:struct graphene:rect-t))))
 
-(defun renderer-render-texture (renderer root &optional viewport)
+(defun renderer-render-texture (renderer node &optional viewport)
  #+liber-documentation
- "@version{#2025-08-03}
+ "@version{#2026-02-09}
   @argument[renderer]{a @class{gsk:renderer} instance}
-  @argument[root]{a @class{gsk:render-node} instance}
+  @argument[node]{a @class{gsk:render-node} instance}
   @argument[viewport]{an optional @sym{graphene:rect-t} instance for the section
-    to draw or the default @code{nil} value to use the bounds of @arg{root}}
+    to draw or the default @code{nil} value to use the bounds of @arg{node}}
   @begin{return}
-    The @class{gdk:texture} instance for the rendered contents of @arg{root}.
+    The @class{gdk:texture} instance for the rendered contents of @arg{node}.
   @end{return}
   @begin{short}
     Renders the scene graph, described by a tree of @class{gsk:render-node}
@@ -337,14 +352,14 @@
   The renderer will acquire a reference on the @class{gsk:render-node} tree
   while the rendering is in progress.
 
-  If you want to apply any transformations to @arg{root}, you should put it
+  If you want to apply any transformations to @arg{node}, you should put it
   into a transform node and pass that node instead.
   @see-class{gsk:renderer}
   @see-class{gsk:render-node}
   @see-class{gdk:texture}
   @see-symbol{graphene:rect-t}"
   (let ((viewport (or viewport (cffi:null-pointer))))
-    (%renderer-render-texture renderer root viewport)))
+    (%renderer-render-texture renderer node viewport)))
 
 (export 'renderer-render-texture)
 
@@ -361,7 +376,7 @@
 
 #+liber-documentation
 (setf (documentation 'cairo-renderer 'type)
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @begin{short}
     The GSK renderer that is using Cairo.
   @end{short}
@@ -377,25 +392,63 @@
 (cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-07}
-  @return{The new Cairo @class{gsk:renderer} instance.}
+ "@version{2026-02-08}
+  @return{The new @class{gsk:cairo-renderer} instance.}
   @begin{short}
-    Creates a new @class{gsk:renderer} instance using Cairo.
+    Creates a new Cairo renderer.
   @end{short}
   The Cairo renderer is the fallback renderer drawing in ways similar to how
   GTK 3 drew its content. Its primary use is as comparison tool.
 
   The Cairo renderer is incomplete. It cannot render 3D transformed content and
   will instead render an error marker. Its usage should be avoided.
-  @see-class{gsk:renderer}")
+  @see-class{gsk:cairo-renderer}")
 
 (export 'cairo-renderer-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskGLRenderer                                           Since 4.2
+;;; GskVulkanRenderer
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Implements undocumented GdkDmabufDownloader interface
+(gobject:define-gobject "GskVulkanRenderer" vulkan-renderer
+  (:superclass renderer
+   :export t
+   :interfaces ()
+   :type-initializer "gsk_vulkan_renderer_get_type")
+  nil)
+
+#+liber-documentation
+(setf (documentation 'vulkan-renderer 'type)
+ "@version{2026-02-08}
+  @begin{short}
+    The GSK renderer that is using Vulkan.
+  @end{short}
+  This renderer will fail to realize if Vulkan is not supported.
+  @see-constructor{gsk:vulkan-renderer-new}
+  @see-class{gsk:renderer}")
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_vulkan_renderer_new
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_vulkan_renderer_new" vulkan-renderer-new)
+    (g:object renderer :return)
+ #+liber-documentation
+ "@version{2026-02-08}
+  @return{The new @class{gsk:vulkan-renderer} instance.}
+  @begin{short}
+    Creates a new Vulkan renderer.
+  @end{short}
+  The Vulkan renderer is a renderer that uses the Vulkan library for rendering.
+  This renderer will fail to realize when GTK was not compiled with Vulkan
+  support.
+  @see-class{gsk:vulkan-renderer}")
+
+(export 'vulkan-renderer-new)
+
+;;; ----------------------------------------------------------------------------
+;;; GskGLRenderer                                           Since 4.2
+;;; ----------------------------------------------------------------------------
 
 #+gtk-4-2
 (gobject:define-gobject "GskGLRenderer" gl-renderer
@@ -407,7 +460,7 @@
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation 'gl-renderer 'type)
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @begin{short}
     The OpenGL based renderer.
   @end{short}
@@ -424,22 +477,19 @@
 (cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new)
     (g:object renderer :return)
  #+liber-documentation
- "@version{2024-11-07}
-  @return{The new OpenGL @class{gsk:renderer} instance.}
+ "@version{2026-02-08}
+  @return{The new @class{gsk:gl-renderer} instance.}
   @begin{short}
-    Creates a new @class{gsk:renderer} instance using OpenGL.
+    Creates a new OpenGL renderer.
   @end{short}
   This is the default renderer used by GTK.
-  @see-class{gsk:gl-renderer}
-  @see-class{gsk:renderer}")
+  @see-class{gsk:gl-renderer}")
 
 (export 'gl-renderer-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskNGLRenderer                                          Since 4.2
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Implements undocumented GdkDmabufDownloader interface
 
 #+gtk-4-2
 (gobject:define-gobject "GskNglRenderer" ngl-renderer
@@ -451,30 +501,40 @@
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation 'ngl-renderer 'type)
- "@version{2024-11-07}
+ "@version{2026-02-08}
   @begin{short}
     The new experimental OpenGL based renderer.
   @end{short}
-  See the @class{gsk:renderer} documentation.
+  See the @class{gsk:gl-renderer} documentation.
 
   Since 4.2
   @see-constructor{gsk:ngl-renderer-new}
-  @see-class{gsk:renderer}")
+  @see-class{gsk:gl-renderer}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_ngl_renderer_new                                    Since 4.2
+;;; gsk_ngl_renderer_new                                    Deprecated 4.18
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_ngl_renderer_new" ngl-renderer-new)
-    (g:object renderer :return)
+(cffi:defcfun ("gsk_ngl_renderer_new" %ngl-renderer-new)
+    (g:object renderer :return))
+
+(defun ngl-renderer-new ()
  #+liber-documentation
- "@version{2024-11-07}
-  @return{The new experimental OpenGL @class{gsk:renderer} instance.}
+ "@version{2026-02-08}
+  @return{The new @class{gsk:ngl-renderer} instance.}
   @begin{short}
-    Creates an instance of the new experimental OpenGL renderer.
+    Creates an instance of the OpenGL renderer.
   @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.18. Use the @fun{gsk:gl-renderer-new}
+    function.
+  @end{dictionary}
   @see-class{gsk:ngl-renderer}
-  @see-class{gsk:renderer}")
+  @see-class{gsk:renderer}"
+  #+(and gtk-4-18 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GSK:NGL-RENDERER-NEW is deprecated since 4.18."))
+  (%ngl-renderer-new))
 
 (export 'ngl-renderer-new)
 
