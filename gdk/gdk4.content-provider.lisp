@@ -246,23 +246,6 @@ lambda (provider)    :run-last
 ;;; gdk_content_provider_new_union (GdkContentProvider **providers,
 ;;;                                 gsize n_providers);
 ;;;
-;;; Creates a content provider that represents all the given providers .
-;;;
-;;; Whenever data needs to be written, the union provider will try the given
-;;; providers in the given order and the first one supporting a format will be
-;;; chosen to provide it.
-;;;
-;;; This allows an easy way to support providing data in different formats. For
-;;; example, an image may be provided by its file and by the image contents with
-;;; a call such as
-;;;
-;;; gdk_content_provider_new_union ((GdkContentProvider *[2])
-;;;    {
-;;;     gdk_content_provider_new_typed
-;;;                    (G_TYPE_FILE, file),
-;;;                     gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
-;;;    }, 2);
-;;;
 ;;; providers :
 ;;;     The GdkContentProviders to present the union of.
 ;;;
@@ -271,6 +254,39 @@ lambda (provider)    :run-last
 ;;;
 ;;; Returns :
 ;;;     a new GdkContentProvider
+
+(cffi:defcfun ("gdk_content_provider_new_union" %content-provider-new-union)
+    (g:object content-provider)
+  (providers (:pointer (:pointer (g:object content-provider))))
+  (n-providers :size))
+
+
+(defun content-provider-new-union (&rest providers)
+  "Creates a content provider that represents all the given PROVIDERS.
+
+Whenever data needs to be written, the union provider will try the given
+providers in the given order and the first one supporting a format will be
+chosen to provide it.
+
+This allows an easy way to support providing data in different formats. For
+example, an image may be provided by its file and by the image contents with
+a call such as
+
+(g:with-values ((gitem \"BibItem\" item)
+                (gstring \"gchararray\" (item-key item)))
+           (gdk:content-provider-new-union
+            (gdk:content-provider-new-for-value gitem)
+            (gdk:content-provider-new-for-value gstring)))
+
+Returns a new `gdk:content-provider'"
+
+  (let ((data (apply 'vector (mapcar #'g:object-pointer providers))))
+    (cffi:with-foreign-array (pointer data `(:array (:pointer (g:object content-provider))
+                                                    ,(length data)))
+      (%content-provider-new-union pointer (length data)))))
+
+(export 'content-provider-new-union)
+
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
