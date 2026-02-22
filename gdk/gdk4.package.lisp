@@ -326,6 +326,10 @@
       @about-symbol{input-source}
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
+      @about-symbol{time-coord}
+      @about-function{time-coord-time}
+      @about-function{time-coord-flags}
+      @about-function{time-coord-axes}
       @about-class{device}
       @about-generic{device-active-layout-index}
       @about-generic{device-caps-lock-state}
@@ -848,8 +852,8 @@
       @about-generic{cursor-texture}
       @about-function{cursor-new-from-texture}
       @about-function{cursor-new-from-name}
+      @about-symbol{cursor-texture-callback}
       @about-function{cursor-new-from-callback}
-      @about-symbol{cursor-get-texture-callback}
     @end{subsection}
     @begin[GdkFrameTimings]{subsection}
       @about-class{frame-timings}
