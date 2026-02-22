@@ -247,35 +247,47 @@ lambda (gesture x y)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_get_backlog ()
-;;;
-;;; gboolean
-;;; gtk_gesture_stylus_get_backlog (GtkGestureStylus *gesture,
-;;;                                 GdkTimeCoord **backlog,
-;;;                                 guint *n_elems);
-;;;
-;;; By default, GTK will limit rate of input events. On stylus input where
-;;; accuracy of strokes is paramount, this function returns the accumulated
-;;; coordinate/timing state before the emission of the current “motion” signal.
-;;;
-;;; This function may only be called within a “motion” signal handler, the state
-;;; given in this signal and obtainable through gtk_gesture_stylus_get_axis()
-;;; call express the latest (most up-to-date) state in motion history.
-;;;
-;;; The backlog is provided in chronological order.
-;;;
-;;; gesture :
-;;;     a GtkGestureStylus
-;;;
-;;; backlog :
-;;;     coordinates and times for the backlog events.
-;;;
-;;; n_elems :
-;;;     return location for the number of elements.
-;;;
-;;; Returns :
-;;;     TRUE if there is a backlog to unfold in the current state.
+;;; gtk_gesture_stylus_get_backlog
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_gesture_stylus_get_backlog" %gesture-stylus-backlog)
+    :boolean
+  (gesture (g:object gesture-stylus))
+  (backlog :pointer)
+  (n-elems (:pointer :uint)))
+
+(defun gesture-stylus-backlog (gesture)
+ #+liber-documentation
+ "@version{2026-02-21}
+  @argument[gesture]{a @class{gtk:gesture-stylus} instance}
+  @begin{return}
+    The list of @class{gdk:time-coord} instances for the coordinates and times
+    for the backlog events, or @code{nil} if there is no backlog.
+  @end{return}
+  @begin{short}
+    Returns the backlog events.
+  @end{short}
+  By default, GTK will limit rate of input events. On stylus input where
+  accuracy of strokes is paramount, this function returns the accumulated
+  coordinate and timing state before the emission of the current
+  @sig[gtk:gesture-stylus]{motion} signal.
+
+  This function may only be called within a @sig[gtk:gesture-stylus]{motion}
+  signal handler, the state given in this signal and obtainable through the
+  @fun{gtk:gesture-stylus-axis} function call express the latest
+  (most up-to-date) state in motion history.
+
+  The backlog is provided in chronological order.
+  @see-class{gtk:gesture-stylus}
+  @see-class{gdk:time-coord}
+  @see-function{gtk:gesture-stylus-axis}"
+  (cffi:with-foreign-objects ((backlog :pointer) (n :uint))
+    (when (%gesture-stylus-backlog gesture backlog n)
+      (iter (for i from 0 below (cffi:mem-ref n :uint))
+            (for ptr = (cffi:mem-aptr backlog '(:struct gdk::%time-coord) i))
+            (collect (cffi:convert-from-foreign ptr 'gdk:time-coord))))))
+
+(export 'gesture-stylus-backlog)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_stylus_get_device_tool
