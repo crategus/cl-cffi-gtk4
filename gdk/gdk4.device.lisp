@@ -37,6 +37,7 @@
 ;;;     GdkInputSource
 ;;;     GdkAxisUse
 ;;;     GdkAxisFlags
+;;;     GdkTimeCoord
 ;;;
 ;;; Accessors
 ;;;
@@ -279,6 +280,120 @@
     Flags describing the current capabilities of a device/tool.
   @end{short}
   @see-class{gdk:device}")
+
+;;; ----------------------------------------------------------------------------
+;;; GdkTimeCoord
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcstruct %time-coord
+  (time :uint32)
+  (flags axis-flags)
+  (axes :double :count 12))
+
+(defstruct time-coord
+  time
+  flags
+  axes)
+
+(cffi:define-foreign-type time-coord-type ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser time-coord))
+
+(cffi:define-parse-method time-coord (&key)
+  (make-instance 'time-coord-type))
+
+(defmethod cffi:translate-to-foreign (coord (type time-coord-type))
+  (let ((ptr (g:malloc (cffi:foreign-type-size '(:struct %time-coord)))))
+    (cffi:with-foreign-slots ((time flags axes) ptr (:struct %time-coord))
+      (setf time (time-coord-time coord))
+      (setf flags (time-coord-flags coord))
+      (cffi:lisp-array-to-foreign (time-coord-axes coord)
+                                  axes
+                                  '(:array :double 12)))
+    ptr))
+
+(defmethod cffi:translate-from-foreign (ptr (type time-coord-type))
+  (cffi:with-foreign-slots ((time flags axes) ptr (:struct %time-coord))
+    (make-time-coord :time time
+                     :flags flags
+                     :axes
+                     (cffi:foreign-array-to-lisp axes '(:array :double 12)))))
+
+(defmethod cffi:free-translated-object (ptr (type time-coord-type) param)
+  (declare (ignore param))
+  (g:free ptr))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'time-coord)
+      "Struct"
+      (liber:symbol-documentation 'time-coord)
+ "@version{2026-02-21}
+  @begin{declaration}
+(defstruct time-coord
+  time
+  flags
+  axes)
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[time]{an unsigned integer for the timestamp of the event}
+      @entry[flags]{an @symbol{gdk:axis-flags} value indicating what axes
+        are present}
+      @entry[axes]{an array for 12 double floats for the axis values}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    The @symbol{gdk:time-coord} structure stores a single event in a motion
+    history.
+  @end{short}
+  To check whether an axis is present, check whether the corresponding flag from
+  the @symbol{gdk:axis-flags} enumeration is set in the @arg{flags} value. To
+  access individual axis values, use the values of the values of the
+  @symbol{gdk:axis-use} enumeration as indices.
+  @see-symbol{gdk:axis-flags}
+  @see-symbol{gdk:axis-use}")
+
+(export 'time-coord)
+
+#+liber-documentation
+(setf (liber:alias-for-function 'time-coord-time)
+      "Accessor"
+      (documentation 'time-coord-time 'function)
+ "@version{2026-02-21}
+  @begin{short}
+    The accessor for the @code{time} slot of the @symbol{gdk:time-coord}
+    structure.
+  @end{short}
+  @see-symbol{gdk:time-coord}")
+
+(export 'time-coord-time)
+
+#+liber-documentation
+(setf (liber:alias-for-function 'time-coord-flags)
+      "Accessor"
+      (documentation 'time-coord-flags 'function)
+ "@version{2026-02-21}
+  @begin{short}
+    The accessor for the @code{flags} slot of the @symbol{gdk:time-coord}
+    structure.
+  @end{short}
+  @see-symbol{gdk:time-coord}")
+
+(export 'time-coord-flags)
+
+#+liber-documentation
+(setf (liber:alias-for-function 'time-coord-axes)
+      "Accessor"
+      (documentation 'time-coord-axes 'function)
+ "@version{2026-02-21}
+  @begin{short}
+    The accessor for the @code{axes} slot of the @symbol{gdk:time-coord}
+    structure.
+  @end{short}
+  @see-symbol{gdk:time-coord}")
+
+(export 'time-coord-axes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDevice
