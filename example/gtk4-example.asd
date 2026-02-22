@@ -143,6 +143,8 @@
                ;; Widgets for custom drawing
                (:file "drawing-area")
                (:file "drawing-area-scribble")
+               (:file "drawing-area-knockout-groups")
+               (:file "drawing-area-paint")
 
                ;; Scrolling
                (:file "scrolled-window")
@@ -168,6 +170,7 @@
                (:file "css-multiplebgs")
                (:file "css-pixbufs")
                (:file "css-shadows")
+               (:file "css-style-classes")
 
                ;; Subclassing
                (:file "subclassing-figure")

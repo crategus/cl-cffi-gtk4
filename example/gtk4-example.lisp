@@ -146,6 +146,8 @@
            ;; Widgets for custom drawing
            #:do-drawing-area
            #:do-drawing-area-scribble
+           #:do-drawing-area-knockout-groups
+           #:do-drawing-area-paint
 
            ;; Scrolling
            #:do-scrolled-window
@@ -171,6 +173,7 @@
            #:do-css-multiplebgs
            #:do-css-pixbufs
            #:do-css-shadows
+           #:do-css-style-classes
 
            ;; Subclassing
            #:do-sublclassing-figure
