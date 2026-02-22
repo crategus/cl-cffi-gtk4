@@ -33,15 +33,15 @@
              (glib-test:list-signals "GdkCursor")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkCursor" GDK:CURSOR
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_cursor_get_type")
-                       ((FALLBACK CURSOR-FALLBACK "fallback" "GdkCursor" T NIL)
-                        (HOTSPOT-X CURSOR-HOTSPOT-X "hotspot-x" "gint" T NIL)
-                        (HOTSPOT-Y CURSOR-HOTSPOT-Y "hotspot-y" "gint" T NIL)
-                        (NAME CURSOR-NAME "name" "gchararray" T NIL)
-                        (TEXTURE CURSOR-TEXTURE "texture" "GdkTexture" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_cursor_get_type")
+                      ((FALLBACK CURSOR-FALLBACK "fallback" "GdkCursor" T NIL)
+                       (HOTSPOT-X CURSOR-HOTSPOT-X "hotspot-x" "gint" T NIL)
+                       (HOTSPOT-Y CURSOR-HOTSPOT-Y "hotspot-y" "gint" T NIL)
+                       (NAME CURSOR-NAME "name" "gchararray" T NIL)
+                       (TEXTURE CURSOR-TEXTURE "texture" "GdkTexture" T NIL)))
              (gobject:get-gtype-definition "GdkCursor"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -94,4 +94,28 @@
     (is (typep (gdk:cursor-new-from-name "help" nil) 'gdk:cursor))
     (is (typep (gdk:cursor-new-from-name "help" fallback) 'gdk:cursor))))
 
-;;; 2024-9-19
+;;;     gdk_cursor_new_from_callback
+
+(defun cursor-callback (cursor size scale width height xhotspot yhotspot)
+  (declare (ignore cursor))
+  (let* ((scaled (ceiling (* size scale)))
+         (path (glib-sys:sys-path "/resource/gtk_logo_cursor.svg"))
+         (pixbuf (gdk:pixbuf-new-from-file-at-scale path scaled scaled t)))
+    (setf (cffi:mem-ref width :int) (truncate size))
+    (setf (cffi:mem-ref height :int) (truncate size))
+    (setf (cffi:mem-ref xhotspot :int) (truncate (* 18 (/ size 32))))
+    (setf (cffi:mem-ref yhotspot :int) (truncate (* 2 (/ size 32))))
+    (when pixbuf
+      (gdk:texture-new-for-pixbuf pixbuf))))
+
+(test gdk-cursor-new-from-callback
+  (glib-test:with-check-memory (cursor)
+    (is (typep (setf cursor
+                     (gdk:cursor-new-from-callback #'cursor-callback))
+               'gdk:cursor))
+    (is-false (gdk:cursor-fallback cursor))
+    (is-false (gdk:cursor-texture cursor))
+    (is (= 0 (gdk:cursor-hotspot-x cursor)))
+    (is (= 0 (gdk:cursor-hotspot-y cursor)))))
+
+;;; 2026-02-22

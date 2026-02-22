@@ -66,7 +66,7 @@ Content from the GDK 4.20 Reference Manual
  Miscellaneous
 
   gdk4.event.lisp                  GdkEvent                          GDK 4.20 +
-  gdk4.cursor.lisp                 GdkCursor                         GDK 4.20 +
+  gdk4.cursor.lisp                 GdkCursor                         GDK 4.20 .
   gdk4.frame-clock.lisp            GdkFrameClock                     GDK 4.20 .
   gdk4.frame-timings.lisp          GdkFrameTimings                   GDK 4.20 .
 

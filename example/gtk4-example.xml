@@ -21,43 +21,44 @@
     <file>gtk-logo.png</file>
     <file>org.gtk.demo4.svg</file>
   </gresource>
-  <gresource prefix="cursors/images">
-    <file>default_cursor.png</file>
-    <file>none_cursor.png</file>
-    <file>gtk-logo-cursor.png</file>
-    <file>context_menu_cursor.png</file>
-    <file>help_cursor.png</file>
-    <file>pointer_cursor.png</file>
-    <file>progress_cursor.png</file>
-    <file>wait_cursor.png</file>
-    <file>cell_cursor.png</file>
-    <file>crosshair_cursor.png</file>
-    <file>text_cursor.png</file>
-    <file>vertical_text_cursor.png</file>
-    <file>alias_cursor.png</file>
-    <file>copy_cursor.png</file>
-    <file>move_cursor.png</file>
-    <file>no_drop_cursor.png</file>
-    <file>not_allowed_cursor.png</file>
-    <file>grab_cursor.png</file>
-    <file>grabbing_cursor.png</file>
-    <file>all_scroll_cursor.png</file>
-    <file>col_resize_cursor.png</file>
-    <file>row_resize_cursor.png</file>
-    <file>n_resize_cursor.png</file>
-    <file>e_resize_cursor.png</file>
-    <file>s_resize_cursor.png</file>
-    <file>w_resize_cursor.png</file>
-    <file>ne_resize_cursor.png</file>
-    <file>nw_resize_cursor.png</file>
-    <file>se_resize_cursor.png</file>
-    <file>sw_resize_cursor.png</file>
-    <file>ew_resize_cursor.png</file>
-    <file>ns_resize_cursor.png</file>
-    <file>nesw_resize_cursor.png</file>
-    <file>nwse_resize_cursor.png</file>
-    <file>zoom_in_cursor.png</file>
-    <file>zoom_out_cursor.png</file>
+  <gresource prefix="/images">
+    <file>cursors/gtk_logo_cursor.svg</file>
+    <file>cursors/default_cursor.png</file>
+    <file>cursors/none_cursor.png</file>
+    <file>cursors/gtk_logo_cursor.png</file>
+    <file>cursors/context_menu_cursor.png</file>
+    <file>cursors/help_cursor.png</file>
+    <file>cursors/pointer_cursor.png</file>
+    <file>cursors/progress_cursor.png</file>
+    <file>cursors/wait_cursor.png</file>
+    <file>cursors/cell_cursor.png</file>
+    <file>cursors/crosshair_cursor.png</file>
+    <file>cursors/text_cursor.png</file>
+    <file>cursors/vertical_text_cursor.png</file>
+    <file>cursors/alias_cursor.png</file>
+    <file>cursors/copy_cursor.png</file>
+    <file>cursors/move_cursor.png</file>
+    <file>cursors/no_drop_cursor.png</file>
+    <file>cursors/not_allowed_cursor.png</file>
+    <file>cursors/grab_cursor.png</file>
+    <file>cursors/grabbing_cursor.png</file>
+    <file>cursors/all_scroll_cursor.png</file>
+    <file>cursors/col_resize_cursor.png</file>
+    <file>cursors/row_resize_cursor.png</file>
+    <file>cursors/n_resize_cursor.png</file>
+    <file>cursors/e_resize_cursor.png</file>
+    <file>cursors/s_resize_cursor.png</file>
+    <file>cursors/w_resize_cursor.png</file>
+    <file>cursors/ne_resize_cursor.png</file>
+    <file>cursors/nw_resize_cursor.png</file>
+    <file>cursors/se_resize_cursor.png</file>
+    <file>cursors/sw_resize_cursor.png</file>
+    <file>cursors/ew_resize_cursor.png</file>
+    <file>cursors/ns_resize_cursor.png</file>
+    <file>cursors/nesw_resize_cursor.png</file>
+    <file>cursors/nwse_resize_cursor.png</file>
+    <file>cursors/zoom_in_cursor.png</file>
+    <file>cursors/zoom_out_cursor.png</file>
   </gresource>
   <gresource prefix="/template">
     <file>widget-template.ui</file>

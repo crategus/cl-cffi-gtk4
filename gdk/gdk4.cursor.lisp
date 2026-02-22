@@ -45,11 +45,11 @@
 ;;;
 ;;; Functions
 ;;;
+;;;     GdkCursorGetTextureCallback                         Since 4.16
+;;;
 ;;;     gdk_cursor_new_from_texture
 ;;;     gdk_cursor_new_from_name
 ;;;     gdk_cursor_new_from_callback                        Since 4.16
-;;;
-;;;     GdkCursorGetTextureCallback                         Since 4.16
 ;;;
 ;;; Properties
 ;;;
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'cursor 'type)
- "@version{2024-06-30}
+ "@version{2026-02-22}
   @begin{short}
     The @class{gdk:cursor} object represents a cursor.
   @end{short}
@@ -112,6 +112,7 @@
   shared. However, the appearance of cursors may vary when used on different
   platforms.
 
+  @subheading{Named and texture cursors}
   There are multiple ways to create cursors. The platform's own cursors can be
   created with the @fun{gdk:cursor-new-from-name} function. That function lists
   the commonly available names that are shared with the CSS specification. Other
@@ -130,11 +131,13 @@
   can be supported, the default cursor will be the ultimate fallback.
   @see-constructor{gdk:cursor-new-from-name}
   @see-constructor{gdk:cursor-new-from-texture}
+  @see-constructor{gdk:cursor-new-from-callback}
   @see-slot{gdk:cursor-fallback}
   @see-slot{gdk:cursor-hotspot-x}
   @see-slot{gdk:cursor-hotspot-y}
   @see-slot{gdk:cursor-name}
-  @see-slot{gdk:cursor-texture}")
+  @see-slot{gdk:cursor-texture}
+  @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -146,13 +149,13 @@
 (setf (documentation (liber:slot-documentation "fallback" 'cursor) t)
  "The @code{fallback} property of type @class{gdk:cursor}
   (Read / Write / Construct only) @br{}
-  Cursor image to fall back to if the cursor cannot be displayed.")
+  The cursor image to fall back to if the cursor cannot be displayed.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cursor-fallback)
       "Accessor"
       (documentation 'cursor-fallback 'function)
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @syntax{(gdk:cursor-fallback object) => fallback}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[fallback]{a @class{gdk:cursor} object for the fallback of the
@@ -177,7 +180,7 @@
 (setf (documentation (liber:slot-documentation "hotspot-x" 'cursor) t)
  "The @code{hotspot-x} property of type @code{:int}
   (Read / Write / Construct only) @br{}
-  Horizontal offset of the cursor hotspot. @br{}
+  The horizontal offset of the cursor hotspot. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -185,7 +188,7 @@
 (setf (liber:alias-for-function 'cursor-hotspot-x)
       "Accessor"
       (documentation 'cursor-hotspot-x 'function)
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @syntax{(gdk:cursor-hotspot-x object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[hotspot]{an integer for the horizontal offset of the hotspot or 0
@@ -209,7 +212,7 @@
 (setf (documentation (liber:slot-documentation "hotspot-y" 'cursor) t)
  "The @code{hotspot-y} property of type @code{:int}
   (Read / Write / Construct only) @br{}
-  Vertical offset of the cursor hotspot. @br{}
+  The vertical offset of the cursor hotspot. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -217,7 +220,7 @@
 (setf (liber:alias-for-function 'cursor-hotspot-y)
       "Accessor"
       (documentation 'cursor-hotspot-y 'function)
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @syntax{(gdk:cursor-hotspot-y object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[hotspot]{an integer for the vertical offset of the hotspot or 0
@@ -248,7 +251,7 @@
 (setf (liber:alias-for-function 'cursor-name)
       "Accessor"
       (documentation 'cursor-name 'function)
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @syntax{(gdk:cursor-name object) => name}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[name]{a string for the name of the cursor or @code{nil} if it is
@@ -272,7 +275,7 @@
 (setf (liber:alias-for-function 'cursor-texture)
       "Accessor"
       (documentation 'cursor-texture 'function)
- "@version{2024-08-04}
+ "@version{2026-02-22}
   @syntax{(gdk:cursor-texture object) => texture}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[texture]{a @class{gdk:texture} object for the texture for
@@ -290,7 +293,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cursor_new_from_texture" %cursor-new-from-texture)
-    (g:object cursor)
+    (g:object cursor :return)
   (texture (g:object texture))
   (xhotspot :int)
   (yhotspot :int)
@@ -298,7 +301,7 @@
 
 (defun cursor-new-from-texture (texture xhotspot yhotspot &optional fallback)
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @argument[texture]{a @class{gdk:texture} object for the texture providing
     the pixel data}
   @argument[xhotspot]{an integer for the horizontal offset of the hotspot of
@@ -322,13 +325,13 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cursor_new_from_name" %cursor-new-from-name)
-    (g:object cursor)
+    (g:object cursor :return)
   (name :string)
   (fallback (g:object cursor)))
 
 (defun cursor-new-from-name (name &optional fallback)
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-02-22}
   @argument[name]{a string for the name of the cursor}
   @argument[fallback]{an optional @class{gdk:cursor} object to fall back to
     when this one cannot be supported, the default is @code{nil}}
@@ -390,11 +393,92 @@
 (export 'cursor-new-from-name)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gdk_cursor_new_from_callback                        Since 4.16
+;;; GdkCursorGetTextureCallback                             Since 4.16
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-16
+(cffi:defcallback cursor-texture-callback (g:object texture :return)
+    ((cursor (g:object cursor))
+     (size :int)
+     (scale :double)
+     (width (:pointer :int))
+     (height (:pointer :int))
+     (xhotspot (:pointer :int))
+     (yhotspot (:pointer :int))
+     (data :pointer))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func cursor size scale width height xhotspot yhotspot)))
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-symbol 'cursor-texture-callback)
+      "Callback"
+      (liber:symbol-documentation 'cursor-texture-callback)
+ "@version{2026-02-22}
+  @syntax{lambda (cursor size scale width height xhotspot yhotspot) => texture}
+  @argument[cursor]{a @class{gdk:cursor} object}
+  @argument[size]{an integer for the nominal cursor size, in application pixels}
+  @argument[scale]{an double float for the device scale}
+  @argument[width]{a foreign pointer to an integer that serves as the return
+    location for the actual cursor width, in application pixels}
+  @argument[height]{a foreign pointer to an integer that serves as the return
+    location for the actual cursor height, in application pixels}
+  @argument[xhotspot]{a foreign pointer to an integer that serves as the return
+    location for the hotspot X position, in application pixels}
+  @argument[yhotspot]{a foreign pointer to an integer that serves as the return
+    location for the hotspot Y position, in application pixels}
+  @argument[texture]{a new @class{gdk:texture} object}
+  @begin{short}
+    The type of callback used by a dynamic @class{gdk:cursor} object to generate
+    a texture for the cursor image at the given @arg{size} and @arg{scale}.
+  @end{short}
+  The actual cursor size in application pixels may be different from
+  @arg{size} x @arg{size}, and will be returned in @arg{width}, @arg{height}.
+  The returned texture should have a size that corresponds to the actual cursor
+  size, in device pixels, that is application pixels, multiplied by scale.
+
+  This function may fail and return @code{nil}, in which case the fallback
+  cursor will be used.
+
+  Since 4.16
+  @see-class{gdk:cursor}
+  @see-class{gdk:texture}")
+
+#+gtk-4-16
+(export 'cursor-texture-callback)
+
 ;;; ----------------------------------------------------------------------------
-;;;     GdkCursorGetTextureCallback                         Since 4.16
+;;; gdk_cursor_new_from_callback                            Since 4.16
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-16
+(cffi:defcfun ("gdk_cursor_new_from_callback" %cursor-new-from-callback)
+    (g:object cursor :return)
+  (callback :pointer)
+  (data :pointer)
+  (destroy :pointer)
+  (fallback (g:object cursor)))
+
+#+gtk-4-16
+(defun cursor-new-from-callback (func &optional fallback)
+ #+liber-documentation
+ "@version{2026-02-22}
+  @argument[func]{a @symbol{gdk:cursor-texture-callback} callback function}
+  @argument[fallback]{a @class{gdk:cursor} object to fall back to when this one
+    cannot be supported}
+  @begin{short}
+    Creates a new callback-based cursor object.
+  @end{short}
+  Cursors of this kind produce textures for the cursor image on demand, when
+  the callback is called.
+
+  Since 4.16
+  @see-class{gdk:cursor}"
+  (%cursor-new-from-callback (cffi:callback cursor-texture-callback)
+                             (glib:allocate-stable-pointer func)
+                             (cffi:callback glib:stable-pointer-destroy-notify)
+                             fallback))
+
+#+gtk-4-16
+(export 'cursor-new-from-callback)
 
 ;;; --- End of file gdk4.cursor.lisp -------------------------------------------
