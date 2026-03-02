@@ -275,7 +275,7 @@
 
 #+liber-documentation
 (setf (documentation 'about-dialog 'type)
- "@version{2025-06-26}
+ "@version{2026-02-26}
   @begin{short}
     The @class{gtk:about-dialog} widget offers a simple way to display
     information about a program like its logo, name, copyright, website and
@@ -312,6 +312,13 @@
                        :logo example-logo
                        :title \"About ExampleCode\")
   @end{pre}
+  @begin[Shortcuts and Gestures]{dictionary}
+    The @class{gtk:about-dialog} implementation supports the following keyboard
+    shortcuts:
+    @begin[code]{simple-table}
+      @entry[Escape]{Closes the window.}
+    @end{simple-table}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:about-dialog} implementation has a single CSS node with the
     name @code{window} and the @code{.aboutdialog} style class.
@@ -489,15 +496,15 @@ lambda (dialog uri)    :run-last
 (setf (liber:alias-for-function 'about-dialog-documenters)
       "Accessor"
       (documentation 'about-dialog-documenters 'function)
- "@version{2025-07-29}
+ "@version{2026-02-26}
   @syntax{(gtk:about-dialog-documenters object) => documenters}
   @syntax{(setf (gtk:about-dialog-documenters object) documenters)}
   @argument[object]{a @class{gtk:about-dialog} widget}
   @argument[documenters]{a string for the people documenting the program}
   @begin{short}
     The accessor for the @slot[gtk:about-dialog]{documenters} slot of the
-    @class{gtk:about-dialog} class gets or sets returns the strings which are
-    displayed in the documenters credits page.
+    @class{gtk:about-dialog} class gets or sets the strings which are displayed
+    in the documenters credits page.
   @end{short}
   Each string may contain email addresses and URLs, which will be displayed as
   links.

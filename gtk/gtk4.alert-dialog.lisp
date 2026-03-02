@@ -331,7 +331,7 @@
 
 (defun alert-dialog-new (msg &rest args)
  #+liber-documentation
- "@version{2025-04-17}
+ "@version{2026-02-26}
   @argument[msg]{a format string for the message}
   @argument[args]{arguments for @arg{msg}}
   @return{The new @class{gtk:alert-dialog} object.}
@@ -339,7 +339,10 @@
     Creates a new alert dialog.
   @end{short}
   The message will be set to the formatted string resulting from the arguments.
-
+  @begin[Notes]{dictionary}
+   The @arg{msg} and @arg{args} arguments follow the convention for the Lisp
+   @code{format} function.
+  @end{dictionary}
   Since 4.10
   @see-class{gtk:alert-dialog}"
   (if msg
@@ -362,7 +365,7 @@
 
 (defun alert-dialog-choose (dialog parent cancellable func)
  #+liber-documentation
- "@version{2025-04-17}
+ "@version{2026-02-26}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
@@ -385,12 +388,18 @@
   @see-symbol{g:async-ready-callback}
   @see-function{gtk:alert-dialog-choose-finish}
   @see-function{gtk:alert-dialog-show}"
-  (let ((ptr (glib:allocate-stable-pointer func)))
-    (%alert-dialog-choose dialog
-                          parent
-                          cancellable
-                          (cffi:callback g:async-ready-callback)
-                          ptr)))
+  (if func
+      (let ((ptr (glib:allocate-stable-pointer func)))
+        (%alert-dialog-choose dialog
+                              parent
+                              (or cancellable (cffi:null-pointer))
+                              (cffi:callback g:async-ready-callback)
+                              ptr))
+      (%alert-dialog-choose dialog
+                            parent
+                            (or cancellable (cffi:null-pointer))
+                            (cffi:null-pointer)
+                            (cffi:null-pointer))))
 
 (export 'alert-dialog-choose)
 
