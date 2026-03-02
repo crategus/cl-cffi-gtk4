@@ -1,6 +1,6 @@
 ;;;; GTK 4 Demo
 ;;;;
-;;;; 2026-02-15
+;;;; 2026-03-01
 
 (in-package :gtk4-demo)
 
@@ -439,53 +439,18 @@
        "gtk:builder"
        "gtk:builder-object"
        "gtk:builder-add-from-string")
-      ("Message Dialog"
+      ("About Dialog"
        ":dialog"
-       "CREATE-MESSAGE-DIALOG"
+       "CREATE-ABOUT-DIALOG"
        "gtk4-example"
-       "message-dialog.lisp"
+       "about-dialog.lisp"
        :keywords
-       "GtkMessageDialog"
-       "gtk:message-dialog"
-       "gtk:message-dialog-new"
-       "gtk:message-dialog-secondary-text"
-       "gtk:message-type"
-       ;; Signals
-       "::response")
-       (("Message Dialog Variant 1"
-       ":dialog"
-       "CREATE-MESSAGE-DIALOG"
-       "gtk4-example"
-       "message-dialog.lisp")
-       ("Message Dialog Variant 2"
-       ":dialog"
-       "CREATE-MESSAGE-DIALOG-2"
-       "gtk4-example"
-       "message-dialog.lisp"))
-      ("Various Dialogs"
-       ":window"
-       "DO-DIALOG-VARIOUS"
-       "gtk4-example"
-       "dialog-various.lisp"
-       "resource/dialog.ui"
-       :keywords
-       "GtkDialog"
-       "GtkMessageDialog"
        "GtkAboutDialog"
-       "gtk:dialog"
-       "gtk:dialog-content-area"
-       "gtk:dialog-add-button"
-       "gtk:dialog-set-default-response"
-       "gtk:message-dialog"
        "gtk:about-dialog"
        "gtk:show-about-dialog"
-       "gtk:window-transient-for"
-       "gtk:builder-add-from-file"
-       "gtk:builder-object"
-       ;; Signals
-       "::response"
-       "::clicked"
-       "::toggled")
+       "gtk:icon-paintable-new-for-file"
+       "gtk:version-string"
+       "gtk:cl-cffi-gtk-build-info")
       ("Alert Dialog"
        ":dialog"
        "CREATE-ALERT-DIALOG"
@@ -500,23 +465,7 @@
        "g:canellable-cancel"
        "g:timeout-add-seconds"
        "g:+source-remove+")
-      ("Assistant"
-       ":window"
-       "DO-ASSISTANT"
-       "gtk4-example"
-       "assistant.lisp"
-       :keywords
-       "GtkAssistant"
-       "gtk:assistant"
-       "gtk:assistant-current-page"
-       "gtk:assistant-nth-page"
-       "gtk:assistant-append-page"
-       "gtk:assistant-commit"
-       "gtk:assistant-page-title"
-       "gtk:assistant-page-type"
-       "gtk:assistant-page-complete"
-       "::prepare"
-       "::apply"))
+       )
 
      "Layout Containers"
      (("Box Append"
@@ -2358,4 +2307,69 @@
        "gtk:widget-frame-clock"
        "gtk:widget-add-tick-callback"
        "gtk:widget-remove-tick-callback"))
+
+     "Deprecated in GTK"
+     ("Since GTK 4.10"
+      (("Message Dialog"
+        ":dialog"
+        "CREATE-MESSAGE-DIALOG"
+        "gtk4-example"
+        "message-dialog.lisp"
+        :keywords
+        "GtkMessageDialog"
+        "gtk:message-dialog"
+        "gtk:message-dialog-new"
+        "gtk:message-dialog-secondary-text"
+        "gtk:message-type"
+        ;; Signals
+        "::response")
+       (("Message Dialog Variant 1"
+         ":dialog"
+         "CREATE-MESSAGE-DIALOG"
+         "gtk4-example"
+         "message-dialog.lisp")
+        ("Message Dialog Variant 2"
+         ":dialog"
+         "CREATE-MESSAGE-DIALOG-2"
+         "gtk4-example"
+         "message-dialog.lisp"))
+       ("Various Dialogs"
+        ":window"
+        "DO-DIALOG-VARIOUS"
+        "gtk4-example"
+        "dialog-various.lisp"
+        "resource/dialog.ui"
+        :keywords
+        "GtkDialog"
+        "GtkMessageDialog"
+        "gtk:dialog"
+        "gtk:dialog-content-area"
+        "gtk:dialog-add-button"
+        "gtk:dialog-set-default-response"
+        "gtk:message-dialog"
+        "gtk:window-transient-for"
+        "gtk:builder-add-from-file"
+        "gtk:builder-object"
+        ;; Signals
+        "::response"
+        "::clicked"
+        "::toggled")
+       ("Assistant"
+        ":window"
+        "DO-ASSISTANT"
+        "gtk4-example"
+        "assistant.lisp"
+        :keywords
+        "GtkAssistant"
+        "gtk:assistant"
+        "gtk:assistant-current-page"
+        "gtk:assistant-nth-page"
+        "gtk:assistant-append-page"
+        "gtk:assistant-commit"
+        "gtk:assistant-page-title"
+        "gtk:assistant-page-type"
+        "gtk:assistant-page-complete"
+        "::prepare"
+        "::apply")
+      ))
 ))

@@ -11,11 +11,10 @@
 ;;;; You can also use the GTK Inspector, available from the menu on the top
 ;;;; right, to poke at the running demos, and see how they are put together.
 ;;;;
-;;;; Last version: 2024-11-24
+;;;; 2026-03-01
 
 (in-package :gtk4-demo)
 
-;; Globals
 (defvar *infoview* nil)
 (defvar *sourceview* nil)
 (defvar *currentfile* nil)
@@ -303,22 +302,27 @@
 
 ;; Callback functions for actions
 
-(defun activate-about (action parameter)
+(defun activate-about (action parameter application)
   (declare (ignore action parameter))
-  (let ((version (asdf:component-version (asdf:find-system :gtk4-demo))))
-    (gtk:show-about-dialog nil
+  (let* ((parent (g:object-data application "mainwindow"))
+         (version (format nil "Runing against GTK ~a" (gtk:version-string)))
+         (path (glib-sys:sys-path "gtk-logo.png" :gtk4-demo))
+         (logo (gtk:icon-paintable-new-for-file path 64 1))
+         (system (with-output-to-string (stream)
+                   (gtk:cl-cffi-gtk-build-info stream))))
+    (gtk:show-about-dialog parent
                            :modal t
-                           :program-name "GTK4 Lisp Demo"
+                           :program-name "GTK Lisp Code Demos"
+                           :comments
+                           "Program that demonstrates the Lisp API for GTK"
                            :version version
-                           :copyright "(c) Dieter Kaiser"
-                           :website "github.com/crategus/cl-cffi-gtk4"
+                           :copyright "(C) 2011 - 2026 Dieter Kaiser"
+                           :website "http://github.com/crategus/cl-cffi-gtk4"
                            :website-label "Project web site"
-                           :license "MIT"
+                           :license-type :mit-x11
                            :authors '("Dieter Kaiser")
-                           :documenters '("Dieter Kaiser")
-                           :artists '("None")
-                           :logo-icon-name "applications-development"
-                           :wrap-license t)))
+                           :logo logo
+                           :system-information system)))
 
 (defun activate-quit (application)
   (let ((windows (gtk:application-windows application)))
@@ -385,7 +389,7 @@
 ;      (cairo:fill context)
 
       (unless (cairo:surface-write-to-png (cairo:target context) path)
-        (format t "Erro: Image not saved~%"))
+        (format t "Error: Image not saved~%"))
       (gsk:render-node-unref node))))
 
 (defun activate-screenshot (application action parameter)
@@ -484,7 +488,7 @@
          (listmodel (create-and-fill-list-store *gtk-demos*))
          (treemodel (gtk:tree-list-model-new listmodel
                                              nil
-                                             t
+                                             nil
                                              #'get-child-model))
          (filter (gtk:custom-filter-new #'demo-filter-by-name))
          (filtermodel (gtk:filter-list-model-new treemodel filter))
@@ -494,6 +498,7 @@
                                    :can-unselect t))
          (searchentry (gtk:builder-object builder "search-entry")))
     (gtk:application-add-window application window)
+    (setf (g:object-data application "mainwindow") window)
     (g:signal-connect window "close-request"
                       (lambda (window)
                         (declare (ignore window))
@@ -607,7 +612,9 @@
            ;; Get the command line arguments
            (argv (cons "gtk4-demo" (or argv (uiop:command-line-arguments))))
            ;; Define action entries
-           (entries (list (list "about" #'activate-about)
+           (entries (list (list "about"
+                                (lambda (action parameter)
+                                  (activate-about action parameter app)))
                           (list "quit"
                                 (lambda (action parameter)
                                   (declare (ignore action parameter))

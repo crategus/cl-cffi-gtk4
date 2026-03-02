@@ -15,6 +15,7 @@
                ;; Windows
                (:file "window-simple")
                (:file "application-window")
+               (:file "about-dialog")
                (:file "message-dialog")
                (:file "dialog-various")
                (:file "alert-dialog")

@@ -13,7 +13,7 @@
 ;;;; In these examples, we bind the <tt>gtk-init:*warn-deprecated*</tt> global
 ;;;; variable to <tt>NIL</tt> to avoid warnings.
 ;;;;
-;;;; 2026-02-15
+;;;; 2026-03-01
 
 (in-package :gtk4-example)
 
@@ -103,22 +103,6 @@
       ;; Show the message dialog
       (gtk:window-present dialog))))
 
-(defun create-about-dialog (parent)
-  (gtk:show-about-dialog parent
-                         :modal t
-                         :program-name "GTK Demo"
-                         :version
-                         (asdf:component-version (asdf:find-system :gtk4-demo))
-                         :copyright "(c) Dieter Kaiser"
-                         :website "github.com/crategus/cl-cffi-gtk4"
-                         :website-label "Project web site"
-                         :license (dialog-license-text)
-                         :authors '("Dieter Kaiser")
-                         :documenters '("Dieter Kaiser")
-                         :artists '("None")
-                         :logo-icon-name "applications-development"
-                         :wrap-license t))
-
 (defun radio-button-toggled (button)
   (when (gtk:check-button-active button)
     (let ((mtype (cdr (assoc (gtk:check-button-label button)
@@ -171,16 +155,6 @@
            (create-dialog-from-ui window))))
     ;; Add the check button to the vertical box
     (gtk:box-append vbox check)
-    ;; Show about dialog
-    (let ((button (make-instance 'gtk:button
-                                 :margin-bottom 12
-                                 :label "Show About Dialog")))
-      (gtk:box-append vbox button)
-      (g:signal-connect button "clicked"
-         (lambda (widget)
-           (declare (ignore widget))
-           ;; Create and show the about dialog
-           (create-about-dialog window))))
     ;; Show message dialog
     (let ((button (make-instance 'gtk:button
                                  :label "Show Message Dialog")))

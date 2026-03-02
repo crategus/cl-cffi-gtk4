@@ -13,6 +13,7 @@
            ;; Windows
            #:do-window-simple
            #:do-application-window
+           #:create-about-dialog
            #:create-message-dialog
            #:create-message-dialog-2
            #:do-dialog-various
