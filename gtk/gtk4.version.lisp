@@ -39,6 +39,9 @@
 ;;;     gtk_get_binary_age                                 not implemented
 ;;;     gtk_get_interface_age                              not implemented
 ;;;     gtk_check_version
+;;;
+;;;     gtk:version-string
+;;;     gtk:cl-cffi-gtk-build-info
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -140,6 +143,23 @@
 
 ;;; ----------------------------------------------------------------------------
 
+(defun version-string ()
+ #+liber-documentation
+ "@version{2026-03-01}
+  @return{The string containing the GTK version.}
+  @begin{short}
+    Returns the version of the GTK library as a human readable string of the
+    form \"x.y.z\".
+  @end{short}
+  @see-function{gtk:major-version}
+  @see-function{gtk:minor-version}
+  @see-function{gtk:micro-version}"
+  (format nil "~a.~a.~a" (major-version) (minor-version) (micro-version)))
+
+(export 'version-string)
+
+;;; ----------------------------------------------------------------------------
+
 (defun cl-cffi-gtk-build-info (&optional (out *standard-output*))
  #+liber-documentation
  "@version{2025-02-28}
@@ -179,20 +199,14 @@ NIL
   @see-function{cairo:version-string}"
   (format out "cl-cffi-gtk version: ~a~%" *cl-cffi-gtk-version*)
   (format out "cl-cffi-gtk build date: ~a:~a ~a/~a/~a~%"
-          (third *cl-cffi-gtk-build-time*)
-          (second *cl-cffi-gtk-build-time*)
-          (fifth *cl-cffi-gtk-build-time*)
-          (fourth *cl-cffi-gtk-build-time*)
-          (sixth *cl-cffi-gtk-build-time*))
-  (format out "GTK version: ~a.~a.~a~%"
-          (major-version)
-          (minor-version)
-          (micro-version))
-  (format out "GLIB version: ~a.~a.~a~%"
-          glib:+major-version+
-          glib:+minor-version+
-          glib:+micro-version+)
-  (format out "GDK-Pixbuf version: ~a~%" gdk-pixbuf:+version+)
+              (third *cl-cffi-gtk-build-time*)
+              (second *cl-cffi-gtk-build-time*)
+              (fifth *cl-cffi-gtk-build-time*)
+              (fourth *cl-cffi-gtk-build-time*)
+              (sixth *cl-cffi-gtk-build-time*))
+  (format out "GTK version: ~a~%" (version-string))
+  (format out "GLIB version: ~a~%" (glib:version-string))
+  (format out "GDK-Pixbuf version: ~a~%" (gdk-pixbuf:version-string))
   (format out "Pango version: ~a~%" (pango:version-string))
   (format out "Cairo version: ~a~%" (cairo:version-string))
   (format out "Machine type: ~a~%" (machine-type))

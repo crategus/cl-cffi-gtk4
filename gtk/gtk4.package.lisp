@@ -3651,6 +3651,7 @@ GtkCellRenderer         GtkWidget
       @about-function{minor-version}
       @about-function{micro-version}
       @about-function{check-version}
+      @about-function{version-string}
       @about-function{cl-cffi-gtk-build-info}
     @end{subsection}
     @begin[GtkSettings]{subsection}
