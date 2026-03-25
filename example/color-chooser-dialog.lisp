@@ -1,15 +1,23 @@
 ;;;; Color Chooser Dialog
 ;;;;
+;;;; The <b><tt>gtk:color-chooser-dialog</tt></b> widget is a dialog for
+;;;; choosing a color. It implements the <b><tt>gtk:color-chooser</tt></b>
+;;;; interface and does not provide much API of its own. To create a
+;;;; <b><tt>gtk:color-chooser-dialog</tt></b> widget, use the
+;;;; <b><tt>gtk:color-chooser-dialog-new</tt></b> function. To get or change the
+;;;; initially selected color, use the <b><tt>gtk:color-chooser-rgba</tt></b>
+;;;; function.
+;;;;
 ;;;; Clicking on the drawing area opens a color chooser dialog to select a
 ;;;; background color for the drawing area. The default palette is replaced
 ;;;; for this color chooser dialog.
 ;;;;
-;;;; 2024-11-23
+;;;; 2026-03-04
 
 (in-package :gtk4-example)
 
 (let ((message "Click to change the background color.")
-      (bg-color (gdk:rgba-parse "White"))
+      (bgcolor (gdk:rgba-parse "White"))
       ;; Color palette with 9 Red RGBA colors
       (palette1 (list (gdk:rgba-parse "IndianRed")
                       (gdk:rgba-parse "LightCoral")
@@ -43,16 +51,14 @@
       (gtk:drawing-area-set-draw-func area
           (lambda (widget cr width height)
             (declare (ignore widget width height))
-            (let ((red (gdk:rgba-red bg-color))
-                  (green (gdk:rgba-green bg-color))
-                  (blue (gdk:rgba-blue bg-color)))
+            (let ((red (gdk:rgba-red bgcolor))
+                  (green (gdk:rgba-green bgcolor))
+                  (blue (gdk:rgba-blue bgcolor)))
                   ;; Paint the current color on the drawing area
                   (cairo:set-source-rgb cr red green blue)
                   (cairo:paint cr)
                   ;; Print a hint on the drawing area
-                  (cairo:set-source-rgb cr (- 1 red)
-                                           (- 1 green)
-                                           (- 1 blue))
+                  (cairo:set-source-rgb cr (- 1 red) (- 1 green) (- 1 blue))
                   (cairo:select-font-face cr "Sans")
                   (cairo:set-font-size cr 12)
                   (cairo:move-to cr 12 24)
@@ -63,23 +69,24 @@
       (g:signal-connect gesture "pressed"
           (lambda (gesture n x y)
             (declare (ignore gesture n x y))
-            (let ((dialog (make-instance 'gtk:color-chooser-dialog
-                                         :transient-for window
-                                         :use-alpha nil)))
+            (let* ((gtk-init:*warn-deprecated* nil)
+                   (dialog (make-instance 'gtk:color-chooser-dialog
+                                          :transient-for window
+                                          :use-alpha nil)))
               ;; Add a custom palette to the dialog
               (gtk:color-chooser-add-palette dialog :vertical 1 palette1)
               ;; Add a second coustom palette to the dialog
               (gtk:color-chooser-add-palette dialog :vertical 1 palette2)
               ;; Set the actual background color for the color chooser
-              (setf (gtk:color-chooser-rgba dialog) bg-color)
+              (setf (gtk:color-chooser-rgba dialog) bgcolor)
               ;; Connect handler to the response signal of the dialog
               (g:signal-connect dialog "response"
                   (lambda (dialog response)
                     (when (= -5 response) ; the :ok value
                       ;; Change the background color for the drawing area
-                      (format t "new color is ~a~%"
+                      (format t "New color is ~a~%"
                                 (gtk:color-chooser-rgba dialog))
-                      (setf bg-color (gtk:color-chooser-rgba dialog))
+                      (setf bgcolor (gtk:color-chooser-rgba dialog))
                       (gtk:widget-queue-draw area))
                     (gtk:window-destroy dialog)))
               (gtk:window-present dialog))))

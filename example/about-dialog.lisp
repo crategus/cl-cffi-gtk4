@@ -11,7 +11,7 @@
 ;;;; the <b><tt>gtk:show-about-dialog</tt></b> function which constructs and
 ;;;; shows an about dialog and keeps it around so that it can be shown again.
 ;;;;
-;;;; 2026-03-01
+;;;; 2026-03-02
 
 (in-package :gtk4-example)
 
@@ -34,3 +34,34 @@
                            :authors '("Dieter Kaiser")
                            :logo logo
                            :system-information system)))
+
+;; Variant with constructor MAKE-INSTANCE
+(defun create-about-dialog-2 (parent)
+  (let* ((version (format nil "Runing against GTK ~a" (gtk:version-string)))
+         (path (glib-sys:sys-path "resource/gtk-logo.png"))
+         (logo (gtk:icon-paintable-new-for-file path 64 1))
+         (system (with-output-to-string (stream)
+                   (gtk:cl-cffi-gtk-build-info stream)))
+         (dialog (make-instance 'gtk:about-dialog
+                                :modal t
+                                :transient-for parent
+                                :program-name "GTK Lisp Code Demos"
+                                :comments
+                                "Program that demonstrates the Lisp API for GTK"
+                                :version version
+                                :copyright "(C) 2011 - 2026 Dieter Kaiser"
+                                :website "http://github.com/crategus/cl-cffi-gtk4"
+                                :website-label "Project web site"
+                                :license-type :mit-x11
+                                :authors '("Dieter Kaiser")
+                                :logo logo
+                                :system-information system)))
+    ;; Add credit section
+    (gtk:about-dialog-add-credit-section dialog "Credit Section" '("Crategus"))
+    ;; Install signal handler
+    (g:signal-connect dialog "close-request"
+                      (lambda (widget)
+                        (setf (gtk:widget-visible widget) nil)
+                        t))
+    ;; Present dialog
+    (gtk:window-present dialog)))

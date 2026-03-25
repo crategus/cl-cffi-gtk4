@@ -1,15 +1,15 @@
 ;;;; Color Chooser Palette
 ;;;;
-;;;; The <tt>gtk:color-chooser-widget</tt> widget lets the user select a color.
-;;;; By default, the chooser presents a prefined palette of colors, plus a small
-;;;; number of settable custom colors. It is also possible to select a different
-;;;; color with the single-color editor. To enter the single-color editing mode,
-;;;; use the context menu of any color of the palette, or use the '+' button to
-;;;; add a new custom color.
+;;;; The <b><tt>gtk:color-chooser-widget</tt></b> widget lets the user select a
+;;;; color. By default, the chooser presents a prefined palette of colors, plus
+;;;; a small number of settable custom colors. It is also possible to select a
+;;;; different color with the single-color editor. To enter the single-color
+;;;; editing mode, use the context menu of any color of the palette, or use the
+;;;; '+' button to add a new custom color.
 ;;;;
 ;;;; This example allows you to add more palettes interactively.
 ;;;;
-;;;; 2024-4-6
+;;;; 2026-03-04
 
 (in-package :gtk4-example)
 
@@ -218,10 +218,10 @@
                                 :title "Color Chooser Palette"
                                 :default-width 400))
          (builder (gtk:builder-new-from-string *color-chooser-palette-ui*))
-         (action-grid (gtk:builder-object builder "action-grid"))
-         (combo-add-palette (gtk:builder-object builder "combo-add-palette"))
-         (color-chooser (make-instance 'gtk:color-chooser-widget)))
-      (g:signal-connect combo-add-palette "changed"
+         (grid (gtk:builder-object builder "action-grid"))
+         (combobox (gtk:builder-object builder "combo-add-palette"))
+         (chooser (make-instance 'gtk:color-chooser-widget)))
+      (g:signal-connect combobox "changed"
           (lambda (combo)
             (let* ((palette (gtk:combo-box-text-active-text combo))
                    (colors (mapcar #'first
@@ -230,12 +230,12 @@
             (format t "~%")
             (format t "Palette : ~a~%" palette)
             (format t "Colors  : ~a~%" colors)
-            (gtk:color-chooser-add-palette color-chooser
+            (gtk:color-chooser-add-palette chooser
                                            :horizontal
                                            colors-per-line
                                            (mapcar #'gdk:rgba-parse
                                                    colors)))))
-      (setf (gtk:combo-box-active combo-add-palette) 0)
-      (gtk:box-append hbox color-chooser)
-      (gtk:box-append hbox action-grid)
+      (setf (gtk:combo-box-active combobox) 0)
+      (gtk:box-append hbox chooser)
+      (gtk:box-append hbox grid)
       (gtk:window-present window)))

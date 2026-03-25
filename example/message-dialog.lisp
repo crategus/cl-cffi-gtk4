@@ -1,8 +1,8 @@
 ;;;; Message Dialog
 ;;;;
 ;;;; This file contains two variants for creating a message dialog. The first
-;;;; variant uses the <tt>make-instance</tt> function. The second variant
-;;;; constructs the message dialog with the <tt>gtk:message-dialog-new</tt>
+;;;; variant uses the <b><tt>make-instance</tt></b> function. The second variant
+;;;; constructs the message dialog with the <b><tt>gtk:message-dialog-new</tt></b>
 ;;;; function.
 ;;;;
 ;;;; The installed signal handler for the <tt>"response"</tt> signal writes the
@@ -10,19 +10,20 @@
 ;;;;
 ;;;; <b>Warning</b>
 ;;;;
-;;;; The <tt>GtkMessageDialog</tt> widget is deprectated since version 4.10. See
-;;;; the <tt>GtkAlertDialog</tt> widget for a replacement of the message dialog.
+;;;; The <b><tt>GtkMessageDialog</tt></b> widget is deprectated since version
+;;;; 4.10. See the <b><tt>GtkAlertDialog</tt></b> widget for a replacement of
+;;;; the message dialog.
 ;;;;
-;;;; In this example, we bind the <tt>gtk-init:*warn-deprecated*</tt> global
-;;;; variable to <tt>NIL</tt> to avoid warnings.
+;;;; In this example, we bind the <b><tt>gtk-init:*warn-deprecated*</tt></b>
+;;;; global variable to <tt>NIL</tt> to avoid warnings.
 ;;;;
-;;;; 2026-02-15
+;;;; 2026-03-02
 
 (in-package :gtk4-example)
 
 ;; Variant 1
 
-(defun create-message-dialog (parent)
+(defun create-message-dialog-1 (parent)
   (let ((gtk-init:*warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:message-dialog
                                  :transient-for parent

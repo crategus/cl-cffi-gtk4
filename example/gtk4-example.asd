@@ -146,6 +146,7 @@
                (:file "drawing-area-scribble")
                (:file "drawing-area-knockout-groups")
                (:file "drawing-area-paint")
+;              (:file "opengl-area")
 
                ;; Scrolling
                (:file "scrolled-window")

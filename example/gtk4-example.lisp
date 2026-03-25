@@ -14,11 +14,8 @@
            #:do-window-simple
            #:do-application-window
            #:create-about-dialog
-           #:create-message-dialog
-           #:create-message-dialog-2
-           #:do-dialog-various
+           #:create-about-dialog-2
            #:create-alert-dialog
-           #:do-assistant
 
            ;; Layout Containers
            #:do-box-append
@@ -149,6 +146,7 @@
            #:do-drawing-area-scribble
            #:do-drawing-area-knockout-groups
            #:do-drawing-area-paint
+;          #:do-opengl-area
 
            ;; Scrolling
            #:do-scrolled-window
@@ -179,7 +177,7 @@
            ;; Subclassing
            #:do-sublclassing-figure
 
-           ;;; Gdk examples
+           ;; Gdk examples
            #:do-app-launch-context
            #:do-app-launch-context-async
            #:do-frame-clock
@@ -187,6 +185,12 @@
            #:do-paintable-simple
            #:do-paintable-animation
            #:do-paintable-emblem
+
+           ;; Deprecated
+           #:create-message-dialog
+           #:create-message-dialog-2
+           #:do-dialog-various
+           #:do-assistant
            ))
 
 (in-package :gtk4-example)

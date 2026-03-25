@@ -1,6 +1,15 @@
 ;;;; Content Types
 ;;;;
-;;;; 2025-05-03
+;;;; The <b><tt>gtk:column-view</tt></b> widget is a widget to present a view
+;;;; into a large dynamic list of items using multiple columns with headers. The
+;;;; <b><tt>gtk:column-view</tt></b> widget uses the factories of its columns to
+;;;; generate a cell widget for each column, for each visible item and displays
+;;;; them together as the row for this item.
+;;;;
+;;;; This example shows the known content types, that define the type of a file.
+;;;; It also shows the default application assosiated with each content type.
+;;;;
+;;;; 2026-03-04
 
 (in-package :gtk4-example)
 
