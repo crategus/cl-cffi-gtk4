@@ -860,7 +860,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 (cffi:defcfun ("gtk_about_dialog_add_credit_section"
                about-dialog-add-credit-section) :void
  #+liber-documentation
- "@version{#2025-05-12}
+ "@version{2026-03-02}
   @argument[about]{a @class{gtk:about-dialog} widget}
   @argument[section]{a string for the name of the section}
   @argument[people]{a list of strings for the people who belong to that section}
