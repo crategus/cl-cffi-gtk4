@@ -170,9 +170,10 @@ lambda (provider)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_provider_new_for_value"
-               content-provider-new-for-value) (g:object content-provider)
+               content-provider-new-for-value)
+    (g:object content-provider :return)
  #+liber-documentation
- "@version{2025-08-23}
+ "@version{2026-03-25}
   @argument[gvalue]{a @class{g:value} instance}
   @return{The new @class{gdk:content-provider} object.}
   @begin{short}
@@ -240,54 +241,48 @@ lambda (provider)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_provider_new_union ()
-;;;
-;;; GdkContentProvider *
-;;; gdk_content_provider_new_union (GdkContentProvider **providers,
-;;;                                 gsize n_providers);
-;;;
-;;; providers :
-;;;     The GdkContentProviders to present the union of.
-;;;
-;;; n_providers :
-;;;     the number of providers
-;;;
-;;; Returns :
-;;;     a new GdkContentProvider
+;;; gdk_content_provider_new_union
+;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_provider_new_union" %content-provider-new-union)
-    (g:object content-provider)
+    (g:object content-provider :return)
   (providers (:pointer (:pointer (g:object content-provider))))
   (n-providers :size))
 
-
 (defun content-provider-new-union (&rest providers)
-  "Creates a content provider that represents all the given PROVIDERS.
-
-Whenever data needs to be written, the union provider will try the given
-providers in the given order and the first one supporting a format will be
-chosen to provide it.
-
-This allows an easy way to support providing data in different formats. For
-example, an image may be provided by its file and by the image contents with
-a call such as
-
+ #+liber-documentation
+ "@version{2026-03-25}
+  @argument[providers]{a list of @class{gdk:content-provider} objects}
+  @begin{return}
+    The new @class{gdk:content-provider} object representing the union of the
+    given @arg{providers}.
+  @end{return}
+  @begin{short}
+    Creates a content provider that represents all the given @arg{providers}.
+  @end{short}
+  Whenever data needs to be written, the union provider will try the given
+  @arg{providers} in the given order and the first one supporting a format will
+  be chosen to provide it. This allows an easy way to support providing data in
+  different formats.
+  @begin[Examples]{dictionary}
+    For example, an image may be provided by its file and by the image contents
+    with a call such as
+    @begin{pre}
 (g:with-values ((gitem \"BibItem\" item)
                 (gstring \"gchararray\" (item-key item)))
-           (gdk:content-provider-new-union
-            (gdk:content-provider-new-for-value gitem)
-            (gdk:content-provider-new-for-value gstring)))
-
-Returns a new `gdk:content-provider'"
-
+  (gdk:content-provider-new-union
+      (gdk:content-provider-new-for-value gitem)
+      (gdk:content-provider-new-for-value gstring))
+  ...)
+    @end{pre}
+  @end{dictionary}
+  @see-class{gdk:content-provider}"
   (let ((data (apply 'vector (mapcar #'g:object-pointer providers))))
     (cffi:with-foreign-array (pointer data `(:array (:pointer (g:object content-provider))
                                                     ,(length data)))
       (%content-provider-new-union pointer (length data)))))
 
 (export 'content-provider-new-union)
-
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_provider_ref_formats ()

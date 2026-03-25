@@ -23,8 +23,9 @@
   (if *first-run-testsuite*
       (is (equal '()
                  (glib-test:list-children "GdkContentProvider")))
-      (is (equal '("GdkContentProviderValue" "GtkLabelContent" "GtkLinkContent"
-                   "GtkTextBufferContent" "GtkTextContent")
+      (is (equal '("GdkContentProviderUnion" "GdkContentProviderValue"
+                   "GtkLabelContent" "GtkLinkContent" "GtkTextBufferContent"
+                   "GtkTextContent")
                  (glib-test:list-children "GdkContentProvider"))))
   ;; Check interfaces
   (is (equal '()
@@ -90,9 +91,40 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_content_provider_new_for_value
+
+(test gdk-content-provider-new-for-value
+  (glib-test:with-check-memory (provider)
+    (g:with-value (gvalue "gchararray" "content")
+      (is (typep (setf provider
+                       (gdk:content-provider-new-for-value gvalue))
+                 'gdk:content-provider))
+      (is (equal '("gchararray")
+                 (mapcar #'g:type-name
+                         (gdk:content-formats-gtypes
+                             (gdk:content-provider-formats provider))))))))
+
 ;;;     gdk_content_provider_new_typed
 ;;;     gdk_content_provider_new_for_bytes
+
 ;;;     gdk_content_provider_new_union
+
+(test gdk-content-provider-new-union
+  (glib-test:with-check-memory (provider :strong 1)
+    (g:with-values ((gvalue1 "gchararray" "content")
+                    (gvalue2 "gint" 100)
+                    (gvalue3 "GObject" (make-instance 'gtk:button)))
+      (is (typep (setf provider
+                       (gdk:content-provider-new-union
+                           (gdk:content-provider-new-for-value gvalue1)
+                           (gdk:content-provider-new-for-value gvalue2)
+                           ;; Adds a strong reference for the button
+                           (gdk:content-provider-new-for-value gvalue3)))
+                 'gdk:content-provider))
+      (is (equal '("gchararray" "gint" "GObject")
+                 (mapcar #'g:type-name
+                         (gdk:content-formats-gtypes
+                             (gdk:content-provider-formats provider))))))))
+
 ;;;     gdk_content_provider_ref_formats
 ;;;     gdk_content_provider_ref_storable_formats
 ;;;     gdk_content_provider_content_changed
@@ -100,4 +132,4 @@
 ;;;     gdk_content_provider_write_mime_type_finish
 ;;;     gdk_content_provider_get_value
 
-;;; 2025-11-16
+;;; 2026-03-25
