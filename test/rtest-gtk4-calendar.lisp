@@ -185,9 +185,9 @@
   (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (calendar)
       (is (typep (setf calendar (gtk:calendar-new)) 'gtk:calendar))
-      (is-false (gtk:calendar-select-day calendar 2024 7 5))
-      ;; FIXME: Correct the time implementation, there is an offset
-      (is (equal '(0 0 23 4 8 2024 6 T -1)
+      ;; Month is a value in [0,11], July is 6 and not 7
+      (is-false (gtk:calendar-select-day calendar 2024 (1- 7) 5))
+      (is (equal '(0 0 0 5 7 2024 4 T -1)
                  (multiple-value-list
                    (decode-universal-time (gtk:calendar-date calendar))))))))
 
@@ -216,4 +216,4 @@
     (is-false (gtk:calendar-day-is-marked calendar 5))
     (is-false (gtk:calendar-day-is-marked calendar 6))))
 
-;;; 2025-12-05
+;;; 2026-03-21
