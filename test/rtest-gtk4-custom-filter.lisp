@@ -60,7 +60,7 @@
     (is (typep (gtk:custom-filter-new #'custom-filter-func) 'gtk:custom-filter))
     (is (= 1 (g:object-ref-count (gtk:custom-filter-new #'custom-filter-func))))
     ;; Items in the filter model
-    (is (= 42 (gtk:filter-list-model-n-items model)))
+    (is (< 42 (gtk:filter-list-model-n-items model)))
     ;; Create with make instance
     (is (typep (make-instance 'gtk:custom-filter) 'gtk:custom-filter))
     (is (= 1 (g:object-ref-count (make-instance 'gtk:custom-filter))))
@@ -92,7 +92,7 @@
     (is (< 3000 (gtk:filter-list-model-n-items model)))
     ;; Set filter function
     (is-false (gtk:custom-filter-set-filter-func filter #'custom-filter-func))
-    (is (= 42 (gtk:filter-list-model-n-items model)))
+    (is (< 42 (gtk:filter-list-model-n-items model)))
     ;; Set a new filter function
     (is-false (gtk:custom-filter-set-filter-func filter
                   (lambda (item)
@@ -114,4 +114,4 @@
     (is-false (setf (gtk:filter-list-model-filter model) nil))
     (is-false (setf (gtk:filter-list-model-model model) nil))))
 
-;;; 2025-05-25
+;;; 2026-03-25

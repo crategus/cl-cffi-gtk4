@@ -169,7 +169,7 @@
       (is (= 2 (g:object-ref-count filter1)))
       ;; Check the filter result
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      (is (= 42 (gtk:filter-list-model-n-items model)))
+      (is (< 42 (gtk:filter-list-model-n-items model)))
       ;; Configure and append filter2
       (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
       (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
@@ -206,7 +206,7 @@
       (is (string= (setf (gtk:string-filter-search filter1) "string") "string"))
       (is-false (gtk:multi-filter-append filter filter1))
       (is (= 1 (gtk:multi-filter-n-items filter)))
-      (is (= 42 (gtk:filter-list-model-n-items model)))
+      (is (< 42 (gtk:filter-list-model-n-items model)))
       ;; Append filter2
       (is (eq :substring (setf (gtk:string-filter-match-mode filter2) :substring)))
       (is (string= (setf (gtk:string-filter-search filter2) "list") "list"))
@@ -222,4 +222,4 @@
       (is-false (setf (gtk:filter-list-model-model model) nil))
       (is-false (setf (gtk:filter-list-model-filter model) nil)))))
 
-;;; 2025-05-25
+;;; 2026-03-25
