@@ -326,7 +326,7 @@
       @about-symbol{input-source}
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
-      @about-symbol{time-coord}
+      @about-struct{time-coord}
       @about-function{time-coord-time}
       @about-function{time-coord-flags}
       @about-function{time-coord-axes}
@@ -616,7 +616,7 @@
       @about-function{content-formats-new-for-gtype}
       @about-function{content-formats-parse}
       @about-function{content-formats-to-string}
-      @about-function{content-formats-is-emptý}
+      @about-function{content-formats-is-empty}
       @about-function{content-formats-gtypes}
       @about-function{content-formats-mime-types}
       @about-function{content-formats-union}
@@ -629,14 +629,13 @@
       @about-function{content-formats-union-deserialize-gtypes}
       @about-function{content-formats-union-serialize-mime-types}
       @about-function{content-formats-union-deserialize-mime-types}
-      @about-symbol{content-formats-builder}
+    @end{subsection}
+    @begin[Content Formats Builder]{subsection}
+      @about-class{content-formats-builder}
       @about-function{content-formats-builder-new}
-      @about-function{content-formats-builder-free-to-formats}
       @about-function{content-formats-builder-add-formats}
       @about-function{content-formats-builder-add-gtype}
       @about-function{content-formats-builder-add-mime-type}
-      @about-function{content-formats-builder-ref}
-      @about-function{content-formats-builder-unref}
       @about-function{content-formats-builder-to-formats}
     @end{subsection}
     @begin[GdkContentProvider]{subsection}

@@ -76,6 +76,7 @@
 
      ;; Clipboard, Drag and Drop
      (:file "gdk4.content-formats")
+     (:file "gdk4.content-formats-builder")
      (:file "gdk4.content-provider")
      (:file "gdk4.content-serializer")
      (:file "gdk4.content-deserializer")
@@ -542,6 +543,7 @@
 
      ;; Clipboard, Drag and Drop
      (:file "rtest-gdk4-content-formats")
+     (:file "rtest-gdk4-content-formats-builder")
      (:file "rtest-gdk4-content-provider")
      (:file "rtest-gdk4-content-serializer")
      (:file "rtest-gdk4-content-deserializer")
