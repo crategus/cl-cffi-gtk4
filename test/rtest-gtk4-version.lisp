@@ -25,6 +25,12 @@
 ;;;     gtk_get_binary_age                                  not implemented
 ;;;     gtk_get_interface_age                               not implemented
 
+;;;     gtk:version-string
+
+#+crategus
+(test gtk-version-string
+  (is (string= "4.20.1" (gtk:version-string))))
+
 ;;;     gtk_check_version
 
 (test gtk-check-version
@@ -32,4 +38,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2025-11-08
+;;; 2026-03-26

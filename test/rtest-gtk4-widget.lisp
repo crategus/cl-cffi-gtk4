@@ -482,8 +482,22 @@
 
 ;;;     gtk_widget_get_direction
 ;;;     gtk_widget_set_direction
+
+(test gtk-widget-direction
+  (glib-test:with-check-memory (button)
+    (setf button (gtk:button-new))
+    (is (eq :ltr (gtk:widget-direction button)))
+    (is (eq :rtl (setf (gtk:widget-direction button) :rtl)))
+    (is (eq :rtl (gtk:widget-direction button)))))
+
 ;;;     gtk_widget_get_default_direction
 ;;;     gtk_widget_set_default_direction
+
+(test gtk-widget-default-direction
+  (let ((default (gtk:widget-default-direction)))
+    (is (eq :rtl (setf (gtk:widget-default-direction) :rtl)))
+    (is (eq :rtl (gtk:widget-default-direction)))
+    (is (eq default (setf (gtk:widget-default-direction) default)))))
 
 ;;;     gtk_widget_create_pango_context
 

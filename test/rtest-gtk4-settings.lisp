@@ -213,7 +213,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-#-windows
+#+crategus
 (test gtk-settings-properties
   (glib-test:with-check-memory ((settings 3) :strong 1)
     (is (typep (setf settings
