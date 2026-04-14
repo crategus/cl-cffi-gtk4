@@ -46,20 +46,20 @@
 ;;;     gdk_clipboard_is_local
 ;;;     gdk_clipboard_store_async
 ;;;     gdk_clipboard_store_finish
-;;;     gdk_clipboard_read_async
-;;;     gdk_clipboard_read_finish
+;;;     gdk_clipboard_read_async                            not implemented
+;;;     gdk_clipboard_read_finish                           not implemented
 ;;;     gdk_clipboard_read_value_async
 ;;;     gdk_clipboard_read_value_finish
-;;;     gdk_clipboard_read_texture_async
-;;;     gdk_clipboard_read_texture_finish
+;;;     gdk_clipboard_read_texture_async                    not exported
+;;;     gdk_clipboard_read_texture_finish                   not exported
 ;;;     gdk_clipboard_read_text_async
 ;;;     gdk_clipboard_read_text_finish
 ;;;     gdk_clipboard_set_content
 ;;;     gdk_clipboard_set
-;;;     gdk_clipboard_set_valist
+;;;     gdk_clipboard_set_valist                            not implemented
 ;;;     gdk_clipboard_set_value
 ;;;     gdk_clipboard_set_text
-;;;     gdk_clipboard_set_texture
+;;;     gdk_clipboard_set_texture                           not exported
 ;;;
 ;;; Properties
 ;;;
@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'clipboard 'type)
- "@version{2025-06-29}
+ "@version{2026-03-29}
   @begin{short}
     The @class{gdk:clipboard} object represents data shared between applications
     or inside an application.
@@ -116,12 +116,13 @@
   @fun{gdk:clipboard-formats} function.
 
   To make text or image data available in a clipboard, use the
-  @fun{gdk:clipboard-set-text} or @fun{gdk:clipboard-set-texture} functions.
-  For other data, you can use the @fun{gdk:clipboard-set-content} function,
-  which takes a @class{gdk:content-provider} object.
+  @fun{gdk:clipboard-set}, @fun{gdk:clipboard-set-value} or
+  @fun{gdk:clipboard-set-text} functions. For other data, you can use the
+  @fun{gdk:clipboard-set-content} function, which takes a
+  @class{gdk:content-provider} object.
 
   To read textual or image data from a clipboard, use the
-  @fun{gdk:clipboard-read-text-async} or @fun{gdk:clipboard-read-texture-async}
+  @fun{gdk:clipboard-read-value-async} or @fun{gdk:clipboard-read-text-async}
   functions.
   @begin[Signal Details]{dictionary}
     @begin[clipboard::changed]{signal}
@@ -158,7 +159,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-content)
       "Accessor"
       (documentation 'clipboard-content 'function)
- "@version{2025-09-29}
+ "@version{2026-03-29}
   @syntax{(gdk:clipboard-content object) => content}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[content]{a @class{gdk:content-provider} instance}
@@ -189,7 +190,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-display)
       "Accessor"
       (documentation 'clipboard-display 'function)
- "@version{2025-09-29}
+ "@version{2026-03-29}
   @syntax{(gdk:clipboard-display object) => display}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[display]{a @class{gdk:display} object}
@@ -212,7 +213,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-formats)
       "Accessor"
       (documentation 'clipboard-formats 'function)
- "@version{2025-09-29}
+ "@version{2026-03-29}
   @syntax{(gdk:clipboard-formats object) => formats}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -236,7 +237,7 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-local)
       "Accessor"
       (documentation 'clipboard-local 'function)
- "@version{2025-09-29}
+ "@version{2026-03-29}
   @syntax{(gdk:clipboard-local object) => local}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[local]{a boolean whether the contents of the clipboard are owned
@@ -255,7 +256,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
  #+liber-documentation
- "@version{2026-02-12}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @return{@em{True} if the clipboard is local.}
   @begin{short}
@@ -283,7 +284,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-store-async (clipboard priority cancellable func)
  #+liber-documentation
- "@version{#2026-02-12}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[priority]{an integer for the I/O priority of the request}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
@@ -322,7 +323,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-store-finish (clipboard result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{@em{True} if storing was successful.}
@@ -339,68 +340,11 @@ lambda (clipboard)    :run-last
 (export 'clipboard-store-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_async ()
-;;;
-;;; void
-;;; gdk_clipboard_read_async (GdkClipboard *clipboard,
-;;;                           const char **mime_types,
-;;;                           int io_priority,
-;;;                           GCancellable *cancellable,
-;;;                           GAsyncReadyCallback callback,
-;;;                           gpointer user_data);
-;;;
-;;; Asynchronously requests an input stream to read the clipboard 's contents
-;;; from. When the operation is finished callback will be called. You can then
-;;; call gdk_clipboard_read_finish() to get the result of the operation.
-;;;
-;;; The clipboard will choose the most suitable mime type from the given list to
-;;; fulfill the request, preferring the ones listed first.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; mime_types :
-;;;     a NULL-terminated array of mime types to choose from
-;;;
-;;; io_priority :
-;;;     the I/O priority of the request.
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
+;;; gdk_clipboard_read_async                                not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_finish ()
-;;;
-;;; GInputStream *
-;;; gdk_clipboard_read_finish (GdkClipboard *clipboard,
-;;;                            GAsyncResult *result,
-;;;                            const char **out_mime_type,
-;;;                            GError **error);
-;;;
-;;; Finishes an asynchronous clipboard read started with
-;;; gdk_clipboard_read_async().
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; out_mime_type :
-;;;     pointer to store the chosen mime type in or NULL.
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     a GInputStream or NULL on error.
+;;; gdk_clipboard_read_finish                               not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -418,7 +362,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-value-async (clipboard gtype priority cancellable func)
  #+liber-documentation
- "@version{2026-01-28}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[gtype]{a @class{g:type-t} type ID to read}
   @argument[priority]{an integer for the I/O priority of the request}
@@ -436,13 +380,13 @@ lambda (clipboard)    :run-last
 
   For local clipboard contents that are available in the given @arg{gtype}, the
   value will be copied directly. Otherwise, GDK will try to use the
-  @fun{gdk:content-deserialize-async} function to convert the clipboard's data.
+  @code{gdk_content_deserialize_async()} function to convert the clipboard's
+  data.
   @see-class{gdk:clipboard}
   @see-class{g:cancellable}
   @see-class{g:type-t}
   @see-symbol{g:async-ready-callback}
-  @see-function{gdk:clipboard-read-value-finish}
-  @see-function{gdk:content-deserialize-async}"
+  @see-function{gdk:clipboard-read-value-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%clipboard-read-value-async clipboard
                                  gtype
@@ -465,7 +409,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-value-finish (clipboard result)
  #+liber-documentation
- "@version{2026-01-28}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @begin{return}
@@ -486,9 +430,14 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-value-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_texture_async
+;;; gdk_clipboard_read_texture_async                        not exported
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: This function is not tested. The gdk:clipboard-set-texture function
+;; does not work in the Lisp binding. Use the gdk:clipboard-read-value-async
+;; function.
+
+#+nil
 (cffi:defcfun ("gdk_clipboard_read_texture_async"
                %clipboard-read-texture-async) :void
   (clipboard (g:object clipboard))
@@ -496,9 +445,10 @@ lambda (clipboard)    :run-last
   (func :pointer)
   (data :pointer))
 
+#+nil
 (defun clipboard-read-texture-async (clipboard cancellable func)
  #+liber-documentation
- "@version{#2026-01-27}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
@@ -526,21 +476,28 @@ lambda (clipboard)    :run-last
                                    (cffi:callback g:async-ready-callback)
                                    ptr)))
 
+#+nil
 (export 'clipboard-read-texture-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_texture_finish
+;;; gdk_clipboard_read_texture_finish                       no exported
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: This function is not tested. The gdk:clipboard-set-texture function
+;; does not work in the Lisp binding. Use the gdk:clipboard-read-value-async
+;; function.
+
+#+nil
 (cffi:defcfun ("gdk_clipoard_read_texture_finish"
                %clipboard-read-texture-finish) (g:object texture)
   (clipboard (g:object clipboard))
   (result (g:object g:async-result))
   (err :pointer))
 
+#+nil
 (defun clipboard-read-texture-finish (clipboard result)
  #+liber-documentation
- "@version{#2026-01-27}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @begin{return}
@@ -558,6 +515,7 @@ lambda (clipboard)    :run-last
   (glib:with-ignore-error (err)
     (%clipboard-read-texture-finish clipboard result err)))
 
+#+nil
 (export 'clipboard-read-texture-finish)
 
 ;;; ----------------------------------------------------------------------------
@@ -572,7 +530,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-text-async (clipboard cancellable func)
  #+liber-documentation
- "@version{#2026-01-27}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
     to ignore}
@@ -613,7 +571,7 @@ lambda (clipboard)    :run-last
 
 (defun clipboard-read-text-finish (clipboard result)
  #+liber-documentation
- "@version{#2024-11-21}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
   @return{The string which holds the value of the content of @arg{clipboard}.}
@@ -635,10 +593,10 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_content" clipboard-set-content) :boolean
  #+liber-documentation
- "@version{2026-02-12}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[content]{a new @class{gdk:content-provider} object or @code{nil}
-    to clear the clipboard}
+  @argument[content]{a @class{gdk:content-provider} object or @code{nil} to
+    clear the clipboard}
   @return{@em{True} if setting the clipboard succeeded.}
   @begin{short}
     Sets a new content provider on @arg{clipboard}.
@@ -662,14 +620,14 @@ lambda (clipboard)    :run-last
 (export 'clipboard-set-content)
 
 ;;; ----------------------------------------------------------------------------
-;;;gdk_clipboard_set
+;;; gdk_clipboard_set
 ;;; ----------------------------------------------------------------------------
 
 (defun clipboard-set (clipboard gtype value)
  #+liber-documentation
- "@version{2026-01-28}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
-  @argument[gtype]{a @class{g:type-t} type ID of value to set}
+  @argument[gtype]{a @class{g:type-t} type ID for the value to set}
   @argument[value]{a Lisp value to be set}
   @begin{short}
     Sets the clipboard to contain the given @arg{value}.
@@ -683,30 +641,13 @@ lambda (clipboard)    :run-last
   @see-class{g:type-t}
   @see-symbol{g:value}
   @see-function{gdk:clipboard-set-value}"
-  (cffi:with-foreign-object (gvalue '(:pointer (:struct g:value)))
-    (g:value-set gvalue value gtype)
+  (g:with-value (gvalue gtype value)
     (clipboard-set-value clipboard gvalue)))
 
 (export 'clipboard-set)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_valist ()
-;;;
-;;; void
-;;; gdk_clipboard_set_valist (GdkClipboard *clipboard,
-;;;                           GType type,
-;;;                           va_list args);
-;;;
-;;; Sets the clipboard to contain the value collected from the given args .
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; type :
-;;;     type of value to set
-;;;
-;;; args :
-;;;     varargs containing the value of type
+;;; gdk_clipboard_set_valist                                not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -715,7 +656,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_value" clipboard-set-value) :void
  #+liber-documentation
- "@version{#2025-07-30}
+ "@version{2026-03-29}
   @argument[clipoboard]{a @class{gdk:clipboard} object}
   @argument[gvalue]{a @sym{g:value} instance}
   @short{Sets the clipboard to contain the given @arg{gvalue}.}
@@ -737,7 +678,7 @@ lambda (clipboard)    :run-last
 
 (cffi:defcfun ("gdk_clipboard_set_text" clipboard-set-text) :void
  #+liber-documentation
- "@version{2026-01-28}
+ "@version{2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[text]{a string for the text to put into the clipboard}
   @short{Puts the given @arg{text} into the clipboard.}
@@ -748,12 +689,16 @@ lambda (clipboard)    :run-last
 (export 'clipboard-set-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_texture
+;;; gdk_clipboard_set_texture                               not exported
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Does not work with the Lisp binding. For instance, a GdkMemoryTexture
+;; is not regocnized as a GdkTexture.
+
+#+nil
 (cffi:defcfun ("gdk_clipboard_set_texture" clipboard-set-texture) :void
  #+liber-documentation
- "@version{#2023-07-30}
+ "@version{#2026-03-29}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[texture]{a @class{gdk:texture} object to put into the clipboard}
   @short{Puts the given @arg{texture} into the clipboard.}
@@ -762,6 +707,7 @@ lambda (clipboard)    :run-last
   (clipboard (g:object clipboard))
   (texture (g:object texture)))
 
+#+nil
 (export 'clipboard-set-texture)
 
 ;;; --- End of file gdk4.clipboard.lisp ----------------------------------------
