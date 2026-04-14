@@ -2205,6 +2205,18 @@
        "gtk:builder-new-from-file"
        "gtk:builder-object"
        "gtk:window-application")
+      ("Monitors"
+       ":window"
+       "DO-MONITOR"
+       "gtk4-example"
+       "monitor.lisp"
+       :keywords
+       "GdkMonitor"
+       "gdk:monitor"
+       "gdk:monitor-is-valid"
+       "gdk:display-monitors"
+       "gdk:display-monitor-at-surface"
+       "gtk:window-fullscreen-on-monitor")
       ("Size Groups"
        ":window"
        "DO-SIZE-GROUP"

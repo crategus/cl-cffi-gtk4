@@ -164,6 +164,7 @@
            #:do-emblemed-icon
            #:do-event-controller
            #:do-widget-template
+           #:do-monitor
 
            ;; Theming in GTK
            #:do-css-accordion

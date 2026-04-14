@@ -164,6 +164,7 @@
                (:file "emblemed-icon")
                (:file "event-controller")
                (:file "widget-template")
+               (:file "monitor")
 
                ;; Theming in GTK
                (:file "css-accordion")

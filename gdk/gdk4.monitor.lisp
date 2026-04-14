@@ -98,7 +98,7 @@
 (setf (liber:alias-for-symbol 'subpixel-layout)
       "GEnum"
       (liber:symbol-documentation 'subpixel-layout)
- "@version{2025-06-29}
+ "@version{2026-04-14}
   @begin{declaration}
 (gobject:define-genum \"GdkSubpixelLayout\" subpixel-layout
   (:export t
@@ -181,7 +181,7 @@
 (setf (liber:alias-for-class 'monitor)
       "Class"
       (documentation 'monitor 'type)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @begin{short}
     The @class{gdk:monitor} objects represent the individual outputs that are
     associated with a @class{gdk:display} object.
@@ -234,7 +234,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-connector)
       "Accessor"
       (documentation 'monitor-connector 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-connector object) => connector}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[connector]{a string for the name of the connector}
@@ -258,7 +258,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-description)
       "Accessor"
       (documentation 'monitor-description 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-description object) => description}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[description]{a string for the monitor description}
@@ -284,7 +284,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-display)
       "Accessor"
       (documentation 'monitor-display 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-display object) => display}
   @syntax{(setf (gdk:monitor-display object) display)}
   @argument[object]{a @class{gdk:monitor} object}
@@ -308,7 +308,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-geometry)
       "Accessor"
       (documentation 'monitor-geometry 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-geometry object) => geometry}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[geometry]{a @class{gdk:rectangle} instance for the monitor geometry}
@@ -336,7 +336,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-height-mm)
       "Accessor"
       (documentation 'monitor-height-mm 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-height-mm object) => height}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[height]{an integer for physical height of the monitor}
@@ -358,7 +358,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-manufacturer)
       "Accessor"
       (documentation 'monitor-manufacturer 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-manufacturer object) => manufacturer}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[manufacturer]{a string for the name of the manufacturer, or
@@ -384,7 +384,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-model)
       "Accessor"
       (documentation 'monitor-model 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-model object) => model}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[model]{a string for the monitor model, or @code{nil}}
@@ -408,7 +408,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-refresh-rate)
       "Accessor"
       (documentation 'monitor-refresh-rate 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-refresh-rate object) => rate}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[rate]{an integer for the refresh rate in milli-Hertz, or 0}
@@ -426,20 +426,22 @@ lambda (monitor)    :run-first
 (setf (documentation (liber:slot-documentation "scale" 'monitor) t)
  "The @code{scale} property of type @code{:int} (Read) @br{}
   The scale of the monitor. Since 4.14 @br{}
-  Default value: 1.0")
+  Default value: 1.0d0")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'monitor-scale)
       "Accessor"
       (documentation 'monitor-scale 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-scale object) => scale}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[scale]{a double float for the scale}
   @begin{short}
-    Gets the internal scale factor that maps from monitor coordinates to device
-    pixels.
+    The accessor for the @slot[gdk:monitor]{scale} slot of the
+    @class{gdk:monitor} class gets the internal scale factor that maps from
+    monitor coordinates to device pixels.
   @end{short}
+
   This can be used if you want to create pixel based data for a particular
   monitor, but most of the time you are drawing to a surface where it is better
   to use the @fun{gdk:surface-scale} function instead.
@@ -453,7 +455,8 @@ lambda (monitor)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scale-factor" 'monitor) t)
  "The @code{scale-factor} property of type @code{:int} (Read) @br{}
-  The scale factor. @br{}
+  The scale factor. This is the next larger integer, compared to the
+  @slot[gdk:monitor]{scale} property. @br{}
   Allowed values: >= 0 @br{}
   Default value: 1")
 
@@ -461,7 +464,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-scale-factor)
       "Accessor"
       (documentation 'monitor-scale-factor 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-scale-factor object) => scale}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[scale]{an integer for the scale factor}
@@ -492,7 +495,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-subpixel-layout)
       "Accessor"
       (documentation 'monitor-subpixel-layout 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-subpixel-layout object) => layout}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[layout]{a @sym{gdk:subpixel-layout} value}
@@ -516,7 +519,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-valid)
       "Accessor"
       (documentation 'monitor-valid 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-valid object) => valid}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[valid]{an boolean whether the monitor is still valid}
@@ -539,7 +542,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-width-mm)
       "Accessor"
       (documentation 'monitor-width-mm 'function)
- "@version{2025-08-02}
+ "@version{2026-04-14}
   @syntax{(gdk:monitor-width-mm object) => width}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[width]{an integer for physical width of the monitor}
@@ -555,7 +558,7 @@ lambda (monitor)    :run-first
 
 (cffi:defcfun ("gdk_monitor_is_valid" monitor-is-valid) :boolean
  #+liber-documentation
- "@version{2024-01-07}
+ "@version{2026-04-14}
   @argument[monitor]{a @class{gdk:monitor} object}
   @begin{short}
     Returns @em{true} if the monitor object corresponds to a physical monitor.
