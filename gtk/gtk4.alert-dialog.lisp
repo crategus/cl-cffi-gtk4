@@ -339,11 +339,12 @@
     Creates a new alert dialog.
   @end{short}
   The message will be set to the formatted string resulting from the arguments.
+
+  Since 4.10
   @begin[Notes]{dictionary}
    The @arg{msg} and @arg{args} arguments follow the convention for the Lisp
    @code{format} function.
   @end{dictionary}
-  Since 4.10
   @see-class{gtk:alert-dialog}"
   (if msg
       (make-instance 'alert-dialog

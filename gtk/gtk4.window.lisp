@@ -1769,7 +1769,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_fullscreen_on_monitor" window-fullscreen-on-monitor)
     :void
  #+liber-documentation
- "@version{#2024-10-02}
+ "@version{2026-04-05}
   @argument[window]{a @class{gtk:window} widget}
   @argument[monitor]{a @class{gdk:monitor} object to go fullscreen on}
   @begin{short}
@@ -1892,21 +1892,23 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_auto_startup_notification"
                window-set-auto-startup-notification) :void
  #+liber-documentation
- "@version{#2025-12-08}
+ "@version{#2026-04-11}
   @argument[setting]{@em{true} to automatically do startup notification}
   @begin{short}
-    Call this function to disable the automatic startup notification.
+    Sets whether the window should request startup notification.
   @end{short}
+
   By default, after showing the first window, GTK calls the
-  @fun{gdk:display-notify-startup-complete} function. You might call this
-  function if your first window is a splash screen, and you want to delay
-  notification until after your real main window has been shown, for example.
+  @fun{gdk:toplevel-startup-id} function. Call this function to disable the
+  automatic startup notification. You might do this if your first window is a
+  splash screen, and you want to delay notification until after your real main
+  window has been shown, for example.
 
   In that example, you would disable startup notification temporarily, show your
   splash screen, then re-enable it so that showing the main window would
   automatically result in notification.
   @see-class{gtk:window}
-  @see-function{gdk:display-notify-startup-complete}"
+  @see-function{gdk:toplevel-startup-id}"
   (setting :boolean))
 
 (export 'window-set-auto-startup-notification)

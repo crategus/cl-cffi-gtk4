@@ -325,10 +325,10 @@
   (g:free ptr))
 
 #+liber-documentation
-(setf (liber:alias-for-symbol 'time-coord)
+(setf (liber:alias-for-class 'time-coord)
       "Struct"
-      (liber:symbol-documentation 'time-coord)
- "@version{2026-02-21}
+      (documentation 'time-coord 'type)
+ "@version{2026-03-26}
   @begin{declaration}
 (defstruct time-coord
   time

@@ -3358,17 +3358,14 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_direction" widget-direction) text-direction
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-03-26}
   @syntax{(gtk:widget-direction widget) => direction}
   @syntax{(setf (gtk:widget-direction widget) direction)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[direction]{a value of the @sym{gtk:text-direction} enumeration}
   @begin{short}
-    The @fun{gtk:widget-direction} function gets the reading direction for the
-    widget.
+    Gets or sets the reading direction for the widget.
   @end{short}
-  The @setf{gtk:widget-direction} function sets the reading direction.
-
   This direction controls the primary direction for widgets containing text,
   and also the direction in which the children of a container are packed. The
   ability to set the direction is present in order so that correct localization
@@ -3400,18 +3397,15 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_default_direction" widget-default-direction)
     text-direction
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-03-26}
   @syntax{(gtk:widget-default-direction) => direction}
   @syntax{(setf (gtk:widget-default-direction) direction)}
   @argument[direction]{a value of the @sym{gtk:text-direction} enumeration for
     the default direction, this cannot be @val[gtk:text-direction]{:none}.}
   @begin{short}
-    The @fun{gtk:widget-default-direction} function obtains the current default
-    reading direction.
+    Gets or sets the default reading direction for widgets where the direction
+    has not been explicitly set by the @fun{gtk:widget-direction} function.
   @end{short}
-  The @setf{gtk:widget-default-direction} function sets the default reading
-  direction for widgets where the direction has not been explicitly set by the
-  @fun{gtk:widget-direction} function.
   @see-class{gtk:widget}
   @see-symbol{gtk:text-direction}
   @see-function{gtk:widget-direction}")

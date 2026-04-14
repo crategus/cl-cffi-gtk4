@@ -33,7 +33,7 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GtkSystemSetting
+;;;     GtkSystemSetting                                    not exported
 ;;;     GtkFontRendering
 ;;;
 ;;;     GtkSettings
@@ -115,13 +115,13 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkSystemSetting
+;;; GtkSystemSetting                                        not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Consider to remove the implementation.
 
 (gobject:define-genum "GtkSystemSetting" system-setting
-  (:export t
+  (:export nil
    :type-initializer "gtk_system_setting_get_type")
   :dpi
   :font-name
@@ -129,7 +129,7 @@
   :display
   :icon-theme)
 
-#+liber-documentation
+#+nil
 (setf (liber:alias-for-symbol 'system-setting)
       "GEnum"
       (liber:symbol-documentation 'system-setting)
@@ -396,16 +396,16 @@
 
 #+liber-documentation
 (setf (documentation 'settings 'type)
- "@version{2025-09-23}
+ "@version{2026-03-26}
   @begin{short}
-    The @class{gtk:settings} object provide a mechanism to share global settings
-    between applications.
+    The @class{gtk:settings} object provides a mechanism to share global
+    settings between applications.
   @end{short}
-
-  On the X window system, this sharing is realized by an XSettings manager
-  that is usually part of the desktop environment, along with utilities that
-  let the user change these settings. On Wayland, the settings are obtained
-  either via a settings portal, or by reading desktop settings from DConf.
+  GTK relies on the platform-specific API to obtain desktop-wide settings. On
+  Wayland, these settings are obtained via a settings portal that is part of the
+  Linux desktop API for applications. On the X window system, this sharing is
+  realised by an @code{XSettings} manager. On macOS, the settings are obtained
+  from @code{NSUserDefaults}.
 
   In the absence of these sharing mechanisms, GTK reads default values for
   settings from @file{settings.ini} files in @file{/etc/gtk-4.0},
@@ -2137,24 +2137,19 @@
 ;;; gtk_settings_get_for_display
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_settings_get_for_display" %settings-for-display)
+(cffi:defcfun ("gtk_settings_get_for_display" settings-for-display)
     (g:object settings)
+#+liber-documentation
+ "@version{2026-03-26}
+  @argument[display]{a @class{gdk:display} object}
+  @return{The @class{gtk:settings} object.}
+  @begin{short}
+    Gets the @class{gtk:settings} object for @arg{display}, creating it if
+    necessary.
+  @end{short}
+  @see-class{gtk:settings}
+  @see-class{gdk:display}"
   (display (g:object gdk:display)))
-
-(let ((settings nil))
-  (defun settings-for-display (display)
-   #+liber-documentation
-   "@version{2026-01-17}
-    @argument[display]{a @class{gdk:display} object}
-    @return{The @class{gtk:settings} object.}
-    @begin{short}
-      Gets the @class{gtk:settings} object for @arg{display}, creating it if
-      necessary.
-    @end{short}
-    @see-class{gtk:settings}
-    @see-class{gdk:display}"
-    (or settings
-        (setf settings (%settings-for-display display)))))
 
 (export 'settings-for-display)
 

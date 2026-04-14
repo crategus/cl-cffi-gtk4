@@ -48,16 +48,20 @@
 
 (cffi:defcfun ("gtk_init" init) :void
  #+liber-documentation
- "@version{2025-09-23}
+ "@version{2026-03-26}
   @begin{short}
-    Call this function before using any other GTK functions in your GUI
-    applications.
+    Initializes GTK.
   @end{short}
-  It will initialize everything needed to operate the toolkit.
+  This function must be called before using any other GTK functions in your GUI
+  applications. It will initialize everything needed to operate the toolkit. In
+  particular, it will open the default display, see the
+  @fun{gdk:display-default} function.
 
   If you are using the @class{gtk:application} class, you do not have to call
-  the @fun{gtk:init} or @fun{gtk:init-check} functions. The
-  @sig[g:application]{startup} handler does it for you.
+  this function. The @sig[g:application]{startup} handler does it for you.
+  Though, if you are using @class{g:application} methods that will be invoked
+  before @sig[g:application]{startup}, such as the @code{local_command_line()}
+  virtual function, you may need to initialize GTK explicitly.
 
   This function will terminate your program if it was unable to initialize the
   windowing system for some reason. If you want your program to fall back to a
@@ -69,7 +73,9 @@
   the handler after the @fun{gtk:init} call, but notice that other libraries,
   for example, @code{libdbus} or @code{gvfs}, might do similar things.
   @see-class{gtk:application}
-  @see-function{gtk:init-check}")
+  @see-class{g:application}
+  @see-function{gtk:init-check}
+  @see-function{gdk:display-default}")
 
 (export 'init)
 
@@ -79,17 +85,17 @@
 
 (cffi:defcfun ("gtk_init_check" init-check) :boolean
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-03-26}
   @begin{return}
     @em{True} if the windowing system has been successfully initialized,
     @em{false} otherwise.
   @end{return}
   @begin{short}
-    This function does the same work as the @fun{gtk:init} function with only a
-    single change.
+    Initializes GTK.
   @end{short}
-  It does not terminate the program if the windowing system cannot be
-  initialized. Instead it returns @em{false} on failure.
+  This function does the same work as the @fun{gtk:init} function with only a
+  single change. It does not terminate the program if the windowing system
+  cannot be initialized. Instead it returns @em{false} on failure.
 
   This way the application can fall back to some other means of communication
   with the user - for example a curses or command line interface.
@@ -120,10 +126,10 @@
 
 (cffi:defcfun ("gtk_disable_setlocale" disable-setlocale) :void
  #+liber-documentation
- "@version{#2024-11-05}
+ "@version{2026-03-26}
   @begin{short}
     Prevents the @fun{gtk:init} and @fun{gtk:init-check} functions from
-    automatically calling @code{setlocale(LC_ALL, \"\")}.
+    calling @code{setlocale()}.
   @end{short}
   You would want to use this function if you wanted to set the locale for your
   program to something other than the locale of the user, or if you wanted to
@@ -141,8 +147,8 @@
 
 (defun default-language ()
  #+liber-documentation
- "@version{2024-11-05}
-  @return{The default language as a @class{pango:language} instance.}
+ "@version{2026-03-26}
+  @return{The @class{pango:language} instance for the default language.}
   @begin{short}
     Returns the Pango language instance for the default language currently in
     effect.
@@ -173,7 +179,7 @@
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction
  #+liber-documentation
- "@version{2025-09-23}
+ "@version{2026-03-26}
   @return{The @sym{gtk:text-direction} value for the current locale.}
   @begin{short}
     Gets the direction of the current locale.
@@ -191,8 +197,7 @@
   This function is only needed rare cases when the locale is changed after GTK
   has already been initialized.
   @begin[Examples]{dictionary}
-    You can use the @fun{gtk:locale-direction} function to update the default
-    text direction as follows:
+    You can use this function to update the default text direction as follows:
     @begin{pre}
 (setf (gtk:widget-default-direction) (gtk:locale-direction))
 => :LTR

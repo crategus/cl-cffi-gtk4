@@ -178,11 +178,12 @@
 
 (cffi:defcfun ("gtk_native_realize" native-realize) :void
  #+liber-documentation
- "@version{#2025-05-15}
+ "@version{#2026-04-11}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Realizes the native widget.
   @end{short}
+  This should only be used by subclasses.
   @see-class{gtk:native}"
   (native (g:object native)))
 
@@ -194,11 +195,12 @@
 
 (cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void
  #+liber-documentation
- "@version{#2025-05-15}
+ "@version{#2026-04-11}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Unrealizes the native widget.
   @end{short}
+  This should only be used by subclasses.
   @see-class{gtk:native}"
   (native (g:object native)))
 

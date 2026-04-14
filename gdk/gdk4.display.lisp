@@ -653,7 +653,7 @@ lambda (display setting)    :run-last
 
 (defun display-notify-startup-complete (display startup)
  #+liber-documentation
- "@version{#2025-05-01}
+ "@version{#2026-04-11}
   @argument[display]{a @class{gdk:display} object}
   @argument[startup]{a string for a startup notification identifier, for which
     notification process should be completed}
@@ -666,12 +666,13 @@ lambda (display setting)    :run-last
   @fun{gtk:window-set-auto-startup-notification} function is called to disable
   that feature.
   @begin[Warning]{dictionary}
-    The @fun{gdk:display-notify-startup-complete} function is deprecated since
-    4.10. Using the @fun{gdk:toplevel-startup-id} function is sufficient.
+    This function is deprecated since 4.10. Using the
+    @setf{gdk:toplevel-startup-id} function is sufficient.
   @end{dictionary}
   @see-class{gdk:display}
   @see-class{gtk:window}
-  @see-function{gdk:toplevel-startup-id}"
+  @see-function{gdk:toplevel-startup-id}
+  @see-function{gtk:window-set-auto-startup-notification}"
   #+(and gtk-4-10 gtk-warn-deprecated)
   (when gtk-init:*warn-deprecated*
     (warn "GDK:DISPLAY-NOTIFY-STARTUP-COMPLETE is deprecated since 4.10."))
@@ -723,8 +724,6 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_monitors
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Consider to export the CREATE-GOBJECT-FROM-POINTER function
-
 (cffi:defcfun ("gdk_display_get_monitors" %display-monitors)
     (g:object g:list-model)
   (display (g:object display)))
@@ -760,7 +759,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
     (g:object monitor)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-04-05}
   @argument[display]{a @class{gdk:display} object}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{return}
@@ -769,7 +768,7 @@ lambda (display setting)    :run-last
   @begin{short}
     Gets the monitor in which the largest area of the surface resides.
   @end{short}
-  Returns a monitor close to surface if it is outside of all monitors.
+  Returns a monitor close to @arg{surface} if it is outside of all monitors.
   @see-class{gdk:display}
   @see-class{gdk:surface}
   @see-class{gdk:monitor}"

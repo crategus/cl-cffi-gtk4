@@ -162,7 +162,7 @@
 
 (defun cl-cffi-gtk-build-info (&optional (out *standard-output*))
  #+liber-documentation
- "@version{2025-02-28}
+ "@version{2026-03-26}
   @argument[out]{an optional stream, the default is @code{*standard-output*}}
   @begin{short}
     Provides informations about the installation and the versions of the
@@ -188,13 +188,9 @@ Lisp implementation version: 2.0.0
 NIL
     @end{pre}
   @end{dictionary}
-  @see-function{gtk:major-version}
-  @see-function{gtk:minor-version}
-  @see-function{gtk:micro-version}
-  @see-symbol{glib:+major-version+}
-  @see-symbol{glib:+minor-version+}
-  @see-symbol{glib:+micro-version+}
-  @see-symbol{gdk-pixbuf:+version+}
+  @see-function{gtk:version-string}
+  @see-function{glib:version-string}
+  @see-function{gdk-pixbuf:version-string}
   @see-function{pango:version-string}
   @see-function{cairo:version-string}"
   (format out "cl-cffi-gtk version: ~a~%" *cl-cffi-gtk-version*)
