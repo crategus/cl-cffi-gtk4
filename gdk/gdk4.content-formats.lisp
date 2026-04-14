@@ -34,7 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GdkContentFormats
-;;;     GdkContentFormatsBuilder                            not implemented
+;;;     GdkContentFormatsBuilder
 ;;;
 ;;;     GdkFileList                                         Since 4.6
 ;;;
@@ -66,15 +66,6 @@
 ;;;     gdk_content_formats_union_serialize_mime_types
 ;;;     gdk_content_formats_union_deserialize_mime_types
 ;;;     gdk_content_formats_parse                           Since 4.4
-;;;
-;;;     gdk_content_formats_builder_new
-;;;     gdk_content_formats_builder_free_to_formats
-;;;     gdk_content_formats_builder_add_formats
-;;;     gdk_content_formats_builder_add_gtype
-;;;     gdk_content_formats_builder_add_mime_type
-;;;     gdk_content_formats_builder_ref
-;;;     gdk_content_formats_builder_unref
-;;;     gdk_content_formats_builder_to_formats
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -135,7 +126,7 @@
 (setf (liber:alias-for-class 'content-formats)
       "GBoxed"
       (documentation 'content-formats 'type)
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @begin{declaration}
 (glib:define-gboxed-opaque content-formats \"GdkContentFormats\"
   :export t
@@ -159,7 +150,7 @@
   transform between the two forms, the @class{gdk:content-serializer} and
   @class{gdk:content-deserializer} objects are used.
 
-  A @class{gdk:content-formats} instance describes a set of possible formats
+  The @class{gdk:content-formats} instance describes a set of possible formats
   content can be exchanged in. It is assumed that this set is ordered. GTypes
   are more important than MIME types. Order between different GTypes or MIME
   types is the order they were added in, most important first. Functions that
@@ -214,21 +205,21 @@
   (mtypes :pointer)
   (n-mtypes :uint))
 
-(defun content-formats-new (mtypes)
+(defun content-formats-new (&rest mtypes)
  #+liber-documentation
- "@version{2026-01-20}
-  @argument[mtypes]{a string or a list of strings for the MIME types}
+ "@version{2026-04-02}
+  @argument[mtypes]{strings for the MIME types}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
-    Creates a new @class{gdk:content-formats} instance from a list of
+    Creates a new @class{gdk:content-formats} instance from the given
     MIME types.
   @end{short}
   The MIME types must be valid and different from each other or the behavior
   of the return value is undefined.
   @see-class{gdk:content-formats}"
-  (let* ((mtypes (if (listp mtypes) mtypes (list mtypes)))
-         (n (length mtypes)))
-    (%content-formats-new (cffi:convert-to-foreign mtypes 'g:strv-t) n)))
+  (let ((n (length mtypes)))
+    (glib-sys:with-foreign-string-array (strptr mtypes)
+      (%content-formats-new strptr n))))
 
 (export 'content-formats-new)
 
@@ -259,7 +250,7 @@
 (cffi:defcfun ("gdk_content_formats_parse" content-formats-parse)
     (g:boxed content-formats :return)
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[str]{a string to parse}
   @begin{return}
     The @class{gdk:content-formats} instance for the content formats if
@@ -270,9 +261,8 @@
     returns the formats.
   @end{short}
   Strings printed via the @fun{gdk:content-formats-to-string} function can be
-  read in again successfully using this function.
-
-  If @arg{str} does not describe valid content formats, @code{nil} is returned.
+  read in again successfully using this function. If @arg{str} does not describe
+  valid content formats, @code{nil} is returned.
 
   Since 4.4
   @see-class{gdk:content-formats}
@@ -301,13 +291,16 @@
 (cffi:defcfun ("gdk_content_formats_to_string" content-formats-to-string)
     :string
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{The string for the content formats.}
+  @return{The string representing the content formats.}
   @begin{short}
     Prints the given @arg{formats} into a human-readable string.
   @end{short}
-  @see-class{gdk:content-formats}"
+  The string can be read in again successfully using the
+  @fun{gdk:content-formats-parse} function.
+  @see-class{gdk:content-formats}
+  @see-function{gdk:content-formats-parse}"
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-to-string)
@@ -319,7 +312,7 @@
 #+gtk-4-18
 (cffi:defcfun ("gdk_content_formats_is_empty" content-formats-is-empty) :boolean
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{return}
     @em{True} if @arg{formats} contains no MIME types and no GTypes.
@@ -346,14 +339,14 @@
 
 (defun content-formats-gtypes (formats)
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{The list with the @class{g:type-t} type IDs included in @arg{formats}.}
+  @return{The list of @class{g:type-t} type IDs included in @arg{formats}.}
   @begin{short}
     Gets the @class{g:type-t} type IDs included in @arg{formats}.
   @end{short}
   Note that @arg{formats} may not contain any @class{g:type-t} type IDs, in
-  particular when they are empty. In that case @code{nil} will be returned.
+  particular it is empty. In this case @code{nil} will be returned.
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
   (cffi:with-foreign-object (n :size)
@@ -374,14 +367,14 @@
 
 (defun content-formats-mime-types (formats)
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The list of strings with the MIME types included in @arg{formats}.}
   @begin{short}
     Gets the MIME types included in @arg{formats}.
   @end{short}
   Note that @arg{formats} may not contain any MIME types, in particular when
-  they are empty. In that case @code{nil} will be returned.
+  it is empty. In this case @code{nil} will be returned.
   @see-class{gdk:content-formats}"
   (%content-formats-mime-types formats (cffi:null-pointer)))
 
@@ -455,9 +448,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_match_mime_type"
-               content-formats-match-mime-type) :string
+               content-formats-match-mime-type) (:string :free-from-foreign nil)
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @begin{return}
@@ -482,10 +475,10 @@
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
                content-formats-contain-gtype) :boolean
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[gtype]{a @class{g:type-t} type ID}
-  @return{@em{True} if given @arg{gtype} was found.}
+  @return{@em{True} if the given @arg{gtype} was found.}
   @short{Checks if a given @arg{gtype} is part of the given @arg{formats}.}
   @see-class{gdk:content-formats}
   @see-class{g:type-t}"
@@ -501,10 +494,10 @@
 (cffi:defcfun ("gdk_content_formats_contain_mime_type"
                content-formats-contain-mime-type) :boolean
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[mtype]{a string for the MIME type to search for}
-  @return{@em{True} if given @arg{mtype} was found.}
+  @return{@em{True} if the given @arg{mtype} was found.}
   @short{Checks if a given MIME type is part of the given @arg{formats}.}
   @see-class{gdk:content-formats}"
   (formats (g:boxed content-formats))
@@ -519,7 +512,7 @@
 (cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
                content-formats-union-serialize-gtypes) (g:boxed content-formats)
  #+liber-documentation
- "@version{#2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -540,7 +533,7 @@
                content-formats-union-deserialize-gtypes)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -561,7 +554,7 @@
                content-formats-union-serialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -582,7 +575,7 @@
                content-formats-union-deserialize-mime-types)
     (g:boxed content-formats)
  #+liber-documentation
- "@version{#2026-01-20}
+ "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
@@ -594,150 +587,5 @@
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-union-deserialize-mime-types)
-
-;;; ----------------------------------------------------------------------------
-;;; GdkContentFormatsBuilder
-;;;
-;;; typedef struct _GdkContentFormatsBuilder GdkContentFormatsBuilder;
-;;;
-;;; A GdkContentFormatsBuilder struct is an opaque struct. It is meant to not
-;;; be kept around and only be used to create new GdkContentFormats objects.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_new ()
-;;;
-;;; GdkContentFormatsBuilder *
-;;; gdk_content_formats_builder_new (void);
-;;;
-;;; Create a new GdkContentFormatsBuilder object. The resulting builder would
-;;; create an empty GdkContentFormats. Use addition functions to add types to
-;;; it.
-;;;
-;;; Returns :
-;;;     a new GdkContentFormatsBuilder
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_free_to_formats ()
-;;;
-;;; GdkContentFormats *
-;;; gdk_content_formats_builder_free_to_formats
-;;;                                (GdkContentFormatsBuilder *builder);
-;;;
-;;; Creates a new GdkContentFormats from the current state of the given
-;;; builder , and frees the builder instance.
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; Returns :
-;;;     the newly created GdkContentFormats with all the formats added to
-;;;     builder .
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_add_formats ()
-;;;
-;;; void
-;;; gdk_content_formats_builder_add_formats
-;;;                                (GdkContentFormatsBuilder *builder,
-;;;                                 const GdkContentFormats *formats);
-;;;
-;;; Appends all formats from formats to builder , skipping those that already
-;;; exist.
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; formats :
-;;;     the formats to add
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_add_gtype ()
-;;;
-;;; void
-;;; gdk_content_formats_builder_add_gtype (GdkContentFormatsBuilder *builder,
-;;;                                        GType type);
-;;;
-;;; Appends gtype to builder if it has not already been added.
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; type :
-;;;     a GType
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_add_mime_type ()
-;;;
-;;; void
-;;; gdk_content_formats_builder_add_mime_type
-;;;                                (GdkContentFormatsBuilder *builder,
-;;;                                 const char *mime_type);
-;;;
-;;; Appends mime_type to builder if it has not already been added.
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; mime_type :
-;;;     a MIME type
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_ref ()
-;;;
-;;; GdkContentFormatsBuilder *
-;;; gdk_content_formats_builder_ref (GdkContentFormatsBuilder *builder);
-;;;
-;;; Acquires a reference on the given builder .
-;;;
-;;; This function is intended primarily for bindings. GdkContentFormatsBuilder
-;;; objects should not be kept around.
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; Returns :
-;;;     the given GdkContentFormatsBuilder with its reference count increased.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_unref ()
-;;;
-;;; void
-;;; gdk_content_formats_builder_unref (GdkContentFormatsBuilder *builder);
-;;;
-;;; Releases a reference on the given builder .
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_builder_to_formats ()
-;;;
-;;; GdkContentFormats *
-;;; gdk_content_formats_builder_to_formats
-;;;                                (GdkContentFormatsBuilder *builder);
-;;;
-;;; Creates a new GdkContentFormats from the given builder .
-;;;
-;;; The given GdkContentFormatsBuilder is reset once this function returns; you
-;;; cannot call this function multiple times on the same builder instance.
-;;;
-;;; This function is intended primarily for bindings. C code should use
-;;; gdk_content_formats_builder_free_to_formats().
-;;;
-;;; builder :
-;;;     a GdkContentFormatsBuilder
-;;;
-;;; Returns :
-;;;     the newly created GdkContentFormats with all the formats added to
-;;;     builder .
-;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gdk4.content-formats.lisp ----------------------------------
