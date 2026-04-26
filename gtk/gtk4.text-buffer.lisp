@@ -1592,7 +1592,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-apply-tag (buffer tag start end)
  #+liber-documentation
- "@version{2024-07-03}
+ "@version{2026-04-21}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[tag]{a @class{gtk:text-tag} object, or a string for the tag name}
   @argument[start]{a @class{gtk:text-iter} iterator for the start bound of
@@ -1607,7 +1607,7 @@ lambda (buffer)    :run-last
   @begin[Notes]{dictionary}
     The Lisp implementation combines the two @code{gtk_text_buffer_apply_tag()}
     and @code{gtk_text_buffer_apply_tag_by_name()} functions. The second
-    funtion is not exported.
+    function is not exported.
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag}
@@ -1638,7 +1638,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-remove-tag (buffer tag start end)
  #+liber-documentation
- "@version{2025-07-23}
+ "@version{2026-04-21}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[tag]{a @class{gtk:text-tag} object, or a string for the tag name}
   @argument[start]{a @class{gtk:text-iter} iterator for the start bound of the
@@ -1654,7 +1654,7 @@ lambda (buffer)    :run-last
   @begin[Notes]{dictionary}
     The Lisp implementation combines the two @code{gtk_text_buffer_remove_tag()}
     and @code{gtk_text_buffer_remove_tag_by_name()} functions. The second
-    funtion is not exported.
+    function is not exported.
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag}

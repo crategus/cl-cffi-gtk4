@@ -686,7 +686,7 @@ lambda (operation widget setup settings)    :run-last
                                                'print-operation) t)
  "The @code{current-page} property of type @code{:int} (Read / Write) @br{}
   The current page in the document. If this is set before the
-  @fun{gtk:print-operation-run} funtion, the user will be able to select to
+  @fun{gtk:print-operation-run} function, the user will be able to select to
   print only the current page. Note that this only makes sense for pre-paginated
   documents. @br{}
   Allowed values: >= -1 @br{}

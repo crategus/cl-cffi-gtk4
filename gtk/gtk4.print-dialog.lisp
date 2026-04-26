@@ -291,14 +291,14 @@
 
 (defun print-dialog-print-file (dialog parent setup file cancellable func)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-04-21}
   @argument[dialog]{a @class{gtk:print-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[setup]{a @class{gtk:print-setup} instance to use}
   @argument[file]{a @class{g:file} object to print}
   @argument[cancellable]{a @class{g:cancellable} instance to cancel the
     operation}
-  @argument[func]{a @sym{g:async-ready-callback} callback funtion to call when
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
     the operation is complete}
   @begin{short}
     The @fun{gtk:print-dialog-print-file} function prints a file.
@@ -371,12 +371,12 @@
 
 (defun print-dialog-setup (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-04-21}
   @argument[dialog]{a @class{gtk:print-dialog} object}
   @argument[parent]{a parent @class{gtk:window} widget}
   @argument[cancellable]{a @class{g:cancellable} instance to cancel the
     operation}
-  @argument[func]{a @sym{g:async-ready-callback} callback funtion to call when
+  @argument[func]{a @sym{g:async-ready-callback} callback function to call when
     the operation is complete}
   @begin{short}
     The @fun{gtk:print-dialog-setup} function presents a print dialog to let

@@ -396,7 +396,7 @@
 
 #+liber-documentation
 (setf (documentation 'settings 'type)
- "@version{2026-03-26}
+ "@version{2026-04-19}
   @begin{short}
     The @class{gtk:settings} object provides a mechanism to share global
     settings between applications.
@@ -1639,7 +1639,8 @@
     items inside the recently used resources list.
   @end{short}
   If set to @em{false}, the list will always be empty.
-  @see-class{gtk:settings}")
+  @see-class{gtk:settings}
+  @see-class{gtk:recent-manager}")
 
 ;;; --- gtk:settings-gtk-recent-files-max-age ----------------------------------
 
@@ -1650,28 +1651,27 @@
   (Read / Write) @br{}
   The maximum age, in days, of the items inside the recently used resources
   list. Items older than this setting will be excised from the list. If set to
-  0, the list will always be empty; if set to -1, no item will be
-  removed. @br{}
-  Allowed values: >= 30 @br{}
-  Default value: 30")
+  0, the list will always be empty, if set to -1, no item will be removed. @br{}
+  Default value: -1")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'settings-gtk-recent-files-max-age)
       "Accessor"
       (documentation 'settings-gtk-recent-files-max-age 'function)
- "@version{2025-09-23}
+ "@version{2026-04-19}
   @syntax{(gtk:settings-gtk-recent-files-max-age object) => setting}
   @syntax{(setf (gtk:settings-gtk-recent-files-max-age object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the maximum age, in days}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-recent-files-max-page} slot of
+    The accessor for the @slot[gtk:settings]{gtk-recent-files-max-age} slot of
     the @class{gtk:settings} class gets or sets the maximum age, in days, of the
     items inside the recently used resources list.
   @end{short}
   Items older than this setting will be excised from the list. If set to 0, the
   list will always be empty, if set to -1, no item will be removed.
-  @see-class{gtk:settings}")
+  @see-class{gtk:settings}
+  @see-class{gtk:recent-manager}")
 
 ;;; --- gtk:settings-gtk-shell-shows-app-menu ----------------------------------
 

@@ -530,7 +530,7 @@
 
 (cffi:defcfun ("gtk_bitset_add_rectangle" bitset-add-rectangle) :void
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2026-04-21}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer for the first value to add}
   @argument[width]{an unsigned integer for the width of the rectangle}
@@ -542,7 +542,7 @@
     @arg{width} and @arg{height}.
   @end{short}
   @begin[Notes]{dictionary}
-    This funtion is equivalent to:
+    This function is equivalent to:
     @begin{pre}
 (dotimes (i height)
   (gtk:bitset-add-range bitset (+ (* i stride) start) width))
@@ -564,7 +564,7 @@
 
 (cffi:defcfun ("gtk_bitset_remove_rectangle" bitset-remove-rectangle) :void
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2026-04-21}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer for the first value to remove}
   @argument[width]{an unsigned integer for the width of the rectangle}
@@ -576,7 +576,7 @@
     @arg{width} and @arg{height}.
   @end{short}
   @begin[Notes]{dictionary}
-    This funtion is equivalent to:
+    This function is equivalent to:
     @begin{pre}
 (dotimes (i height)
   (gtk:bitset-remove-range bitset (+ (* i stride) start) width))

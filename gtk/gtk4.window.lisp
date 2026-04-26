@@ -1585,7 +1585,7 @@ lambda (window)    :run-first
 
 (defun window-present-with-time (window timestamp)
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2026-04-21}
   @argument[window]{a @class{gtk:window} widget}
   @argument[timestamp]{an unsigned integer for the timestamp of the user
     interaction, typically a button or key press event, which triggered this
@@ -1600,7 +1600,7 @@ lambda (window)    :run-first
   shown.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.14. Use the @fun{gtk:window-present}
-    funtion.
+    function.
   @end{dictionary}
   @see-class{gtk:window}
   @see-function{gtk:window-present}"
