@@ -119,7 +119,7 @@ lambda (model pos n-items)    :run-last
 
 (defun section-model-section (model pos)
  #+liber-documentation
- "@version{2025-03-17}
+ "@version{2026-04-26}
   @syntax{(gtk:section-model-section model pos) => start, end}
   @argument[model]{a @class{gtk:section-model} object}
   @argument[pos]{an unsigned integer for the position of the item to query}
@@ -131,9 +131,9 @@ lambda (model pos n-items)    :run-last
     Query the section that covers the given position.
   @end{short}
   The number of items in the section can be computed by @arg{end} - @arg{start}.
-
   If the position is larger than the number of items, a single range from
-  @code{n-items} to @code{G_MAXUINT} will be returned.
+  @code{n-items} to @code{G_MAXUINT} will be returned. @code{G_MAXUINT} is the
+  @code{#xffffffff} value.
 
   Since 4.12
   @see-class{gtk:section-model}"

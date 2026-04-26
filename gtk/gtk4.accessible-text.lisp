@@ -222,7 +222,7 @@
 (cffi:defcfun ("gtk_accessible_text_get_contents" accessible-text-contents)
     (g:boxed g:bytes :return)
  #+liber-documentation
- "@version{#2025-07-13}
+ "@version{#2026-04-26}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @argument[start]{an unsigned integer for the beginning of the range, in
     characters}
@@ -235,8 +235,8 @@
     Retrieve the current contents of the accessible object within the given
     range.
   @end{short}
-  If end is @code{G_MAXUINT}, the end of the range is the full content of the
-  accessible object.
+  If @arg{end} is @code{G_MAXUINT}, which is the @code{#xffffffff} value, the
+  end of the range is the full content of the accessible object.
 
   Since 4.14
   @see-class{gtk:accessible-text}"
