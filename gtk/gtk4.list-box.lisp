@@ -85,9 +85,11 @@
 ;;;
 ;;; Functions
 ;;;
+;;;     GtkListBoxForeachFunc
 ;;;     GtkListBoxFilterFunc
 ;;;     GtkListBoxSortFunc
 ;;;     GtkListBoxUpdateHeaderFunc
+;;;     GtkListBoxCreateWidgetFunc
 ;;;
 ;;;     gtk_list_box_new
 ;;;     gtk_list_box_prepend
@@ -100,9 +102,6 @@
 ;;;     gtk_list_box_select_all
 ;;;     gtk_list_box_unselect_all
 ;;;     gtk_list_box_get_selected_row
-;;;
-;;;     GtkListBoxForeachFunc
-;;;
 ;;;     gtk_list_box_selected_foreach
 ;;;     gtk_list_box_get_selected_rows
 ;;;     gtk_list_box_get_adjustment
@@ -118,9 +117,6 @@
 ;;;     gtk_list_box_set_sort_func
 ;;;     gtk_list_box_drag_highlight_row
 ;;;     gtk_list_box_drag_unhighlight_row
-;;;
-;;;     GtkListBoxCreateWidgetFunc
-;;;
 ;;;     gtk_list_box_bind_model
 ;;;
 ;;; Properties
@@ -183,11 +179,14 @@
 
 #+liber-documentation
 (setf (documentation 'list-box-row 'type)
- "@version{2024-06-22}
+ "@version{2026-05-01}
   @begin{short}
     The @class{gtk:list-box-row} widget is a child widget for the
     @class{gtk:list-box} widget.
   @end{short}
+  The @class{gtk:list-box} widget will automatically wrap its children in a
+  @class{gtk:list-box-row} widget when necessary.
+
   The @class{gtk:list-box-row} widget can be marked as activatable or
   selectable. If a row is activatable, the @sig[gtk:list-box]{row-activated}
   signal will be emitted for it when the user tries to activate it. If it is
@@ -196,7 +195,7 @@
   @begin[Signal Details]{dictionary}
     @begin[list-box-row::activate]{signal}
       @begin{pre}
-lambda (row)    :action
+lambda (row)    :action :run-first
       @end{pre}
       @begin[code]{simple-table}
         @entry[row]{The @class{gtk:list-box-row} widget on which the signal is
@@ -221,8 +220,7 @@ lambda (row)    :action
 ;;; --- gtk:list-box-row-activatable -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "activatable"
-                                               'list-box-row) t)
+(setf (documentation (liber:slot-documentation "activatable" 'list-box-row) t)
  "The @code{activatable} property of type @code{:boolean} (Read / Write) @br{}
   Determines whether the @sig[gtk:list-box]{row-activated} signal will be
   emitted for this row. @br{}
@@ -232,7 +230,7 @@ lambda (row)    :action
 (setf (liber:alias-for-function 'list-box-row-activatable)
       "Accessor"
       (documentation 'list-box-row-activatable 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-row-activatable object) => activatable}
   @syntax{(setf (gtk:list-box-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
@@ -255,7 +253,7 @@ lambda (row)    :action
 (setf (liber:alias-for-function 'list-box-row-child)
       "Accessor"
       (documentation 'list-box-row-child 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-row-child object) => child}
   @syntax{(setf (gtk:list-box-row-child object) child)}
   @argument[object]{a @class{gtk:list-box-row} widget}
@@ -271,8 +269,7 @@ lambda (row)    :action
 ;;; --- gtk:list-box-row-selectable --------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "selectable"
-                                               'list-box-row) t)
+(setf (documentation (liber:slot-documentation "selectable" 'list-box-row) t)
  "The @code{selectable} property of type @code{:boolean} (Read / Write) @br{}
   Determines whether this row can be selected. @br{}
   Default value: @em{true}")
@@ -281,7 +278,7 @@ lambda (row)    :action
 (setf (liber:alias-for-function 'list-box-row-selectable)
       "Accessor"
       (documentation 'list-box-row-selectable 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-row-selectable object) => selectable}
   @syntax{(setf (gtk:list-box-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
@@ -300,12 +297,11 @@ lambda (row)    :action
 
 (defun list-box-row-new ()
  #+liber-documentation
- "@version{2024-04-13}
+ "@version{2026-05-01}
   @return{The new @class{gtk:list-box-row} widget.}
   @begin{short}
     Creates a new list box row, to be used as a child widget of a list box.
   @end{short}
-  @see-class{gtk:list-box}
   @see-class{gtk:list-box-row}"
   (make-instance 'list-box-row))
 
@@ -317,7 +313,7 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_changed" list-box-row-changed) :void
  #+liber-documentation
- "@version{2025-07-28}
+ "@version{2026-05-01}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
     Marks the list box row as changed, causing any state that depends on this
@@ -327,10 +323,10 @@ lambda (row)    :action
 
   Note that calls to this method must be in sync with the data used for the row
   functions. For instance, if the list box is mirroring some external data set
-  and two rows changed in the external data set, then when you call the
-  @fun{gtk:list-box-row-changed} function on the first row, the sort function
-  must only read the new data for the first of the two changed rows, otherwise
-  the resorting of the rows will be wrong.
+  and two rows changed in the external data set, then when you call this
+  function on the first row, the sort function must only read the new data for
+  the first of the two changed rows, otherwise the resorting of the rows will
+  be wrong.
 
   This generally means that if you do not fully control the data model you have
   to duplicate the data that affects the list box row functions into the row
@@ -350,7 +346,7 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_is_selected" list-box-row-is-selected) :boolean
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @return{@em{True} if @arg{row} is selected.}
   @begin{short}
@@ -376,20 +372,15 @@ lambda (row)    :action
 (cffi:defcfun ("gtk_list_box_row_get_header" list-box-row-header)
     (g:object widget)
  #+liber-documentation
- "@version{2025-06-26}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-row-header row) => header}
   @syntax{(setf (gtk:list-box-row-header row) header)}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @argument[header]{a @class{gtk:widget} object}
   @begin{short}
-    The @fun{gtk:list-box-row-header} function returns the current header of
-    the list box row.
+    Gets or sets the current header of the list box row.
   @end{short}
-  This can be used in a @sym{gtk:list-box-update-header-func} callback function
-  to see if there is a header set already, and if so to update the state of it.
-
-  The @setf{gtk:list-box-row-header} function sets the current header. This is
-  only allowed to be called from a @sym{gtk:list-box-update-header-func}
+  This is only allowed to be called from a @sym{gtk:list-box-update-header-func}
   callback function. It will replace any existing header in the row, and be
   shown in front of the row in the list box.
   @see-class{gtk:list-box-row}
@@ -405,7 +396,7 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_get_index" list-box-row-index) :int
  #+liber-documentation
- "@version{#2025-07-28}
+ "@version{2026-05-01}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{return}
     The integer for the index of the row in the list box, or -1 if the row
@@ -414,7 +405,6 @@ lambda (row)    :action
   @begin{short}
     Gets the current index of the row in its list box.
   @end{short}
-  @see-class{gtk:list-box}
   @see-class{gtk:list-box-row}"
   (row (g:object list-box-row)))
 
@@ -450,7 +440,7 @@ lambda (row)    :action
 
 #+liber-documentation
 (setf (documentation 'list-box 'type)
- "@version{2025-07-28}
+ "@version{2026-05-01}
   @begin{short}
     The @class{gtk:list-box} widget is a vertical list box that contains
     @class{gtk:list-box-row} children.
@@ -472,20 +462,46 @@ lambda (row)    :action
   signal will be emitted for it when the user tries to activate it. If it is
   selectable, the row will be marked as selected when the user tries to select
   it.
+  @begin[GtkListBox as GtkBuildable]{dictionary}
+    The @class{gtk:list-box} implementation of the @class{gtk:buildable}
+    interface supports setting a child as the placeholder by specifying
+    @code{\"placeholder\"} as the @code{\"type\"} attribute of a @code{<child>}
+    element. See also the @fun{gtk:list-box-set-placeholder} function.
+  @end{dictionary}
+  @begin[Shortcuts and Gestures]{dictionary}
+    The following signals have default keybindings:
+    @begin{itemize}
+      @item{@sig[gtk:list-box]{move-cursor}}
+      @item{@sig[gtk:list-box]{select-all}}
+      @item{@sig[gtk:list-box]{toggle-cursor-row}}
+      @item{@sig[gtk:list-box]{unselect-all}}
+    @end{itemize}
+  @end{dictionary}
   @begin[CSS Nodes]{dictionary}
     @begin{pre}
-list
- ╰── row[.activatable]
+list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
+╰── row[.activatable]
     @end{pre}
     The @class{gtk:list-box} implementation uses a single CSS node named
-    @code{list}. Each @class{gtk:list-box-row} widget uses a single CSS node
-    named @code{row}. The row nodes get the @code{.activatable} style class
-    added when appropriate.
+    @code{list}. It may carry the @code{.separators} style class, when the
+    @slot[gtk:list-box]{show-separators} property is set. Each
+    @class{gtk:list-box-row} widget uses a single CSS node named @code{row}. The
+    row nodes get the @code{.activatable} style class added when appropriate.
+    It may also carry the @code{.boxed-list} style class. In this case, the
+    list will be automatically surrounded by a frame and have separators. The
+    main list node may also carry style classes to select the style of list
+    presentation: @code{.rich-list}, @code{.navigation-sidebar} or
+    @code{.data-table}.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @class{gtk:list-box} implementation uses the
+    @val[gtk:accessible-role]{:list} role. The @class{gtk:list-box-row}
+    implementation uses the @val[gtk:accessible-role]{:list-item} role.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @begin[list-box::activate-cursor-row]{signal}
       @begin{pre}
-lambda (listbox)    :action
+lambda (listbox)    :action :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
@@ -495,19 +511,21 @@ lambda (listbox)    :action
     @end{signal}
     @begin[list-box::move-cursor]{signal}
       @begin{pre}
-lambda (listbox step count)    :action
+lambda (listbox step count extend modify)    :action :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[step]{The value of the @sym{gtk:movement-step} enumeration.}
         @entry[count]{The integer for the number of steps.}
+        @entry[extend]{The boolean whether to extend the selection.}
+        @entry[modify]{The boolean whether to modify the selection.}
       @end{simple-table}
       The signal is emitted when the user initiates a cursor movement. The
       default bindings for this signal come in two variants, the variant with
       the @kbd{Shift} modifier extends the selection, the variant without the
-      @kbd{Shift} modifier does not. There are too many key combinations to list
-      them all here.
+      @kbd{Shift} modifier does not. There are too many key combinations to
+      list them all here.
       @begin{itemize}
         @item{@kbd{←}, @kbd{→}, @kbd{↑}, @kbd{↓} move by individual children,}
         @item{@kbdk{Home}, @kbd{End} move to the ends of the box,}
@@ -525,7 +543,6 @@ lambda (listbox row)    :run-last
       @end{simple-table}
       The signal is emitted when a row has been activated by the user.
     @end{signal}
-
     @begin[list-box::row-selected]{signal}
       @begin{pre}
 lambda (listbox row)    :run-last
@@ -543,7 +560,7 @@ lambda (listbox row)    :run-last
     @end{signal}
     @begin[list-box::select-all]{signal}
       @begin{pre}
-lambda (listbox)    :action
+lambda (listbox)    :action :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
@@ -551,7 +568,7 @@ lambda (listbox)    :action
       @end{simple-table}
       The signal is a keybinding signal which gets emitted to select all
       children of the list box, if the selection mode permits it. The default
-      bindings for this signal is the @kbd{Ctrl-a} key.
+      binding for this signal is the @kbd{Ctrl-a} key.
     @end{signal}
     @begin[list-box::selected-rows-changed]{signal}
       @begin{pre}
@@ -565,7 +582,7 @@ lambda (listbox)    :run-first
     @end{signal}
     @begin[list-box::toggle-cursor-row]{signal}
       @begin{pre}
-lambda (listbox)    :action
+lambda (listbox)    :action :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
@@ -576,7 +593,7 @@ lambda (listbox)    :action
     @end{signal}
     @begin[list-box::unselect-all]{signal}
       @begin{pre}
-lambda (listbox)    :action
+lambda (listbox)    :action :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
@@ -615,7 +632,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-accept-unpaired-release)
       "Accessor"
       (documentation 'list-box-accept-unpaired-release 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-accept-unpaired-release object) => setting}
   @syntax{(setf (gtk:list-box-accept-unpaired-release object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
@@ -642,7 +659,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-activate-on-single-click)
       "Accessor"
       (documentation 'list-box-activate-on-single-click 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:list-box-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
@@ -668,7 +685,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-selection-mode)
       "Accessor"
       (documentation 'list-box-selection-mode 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-selection-mode object) => mode}
   @syntax{(setf (gtk:list-box-selection-mode object) mode)}
   @argument[object]{a @class{gtk:list-box} widget}
@@ -694,7 +711,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-show-separators)
       "Accessor"
       (documentation 'list-box-show-separators 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-show-separators object) => setting}
   @syntax{(setf (gtk:list-box-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
@@ -719,7 +736,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-function 'list-box-tab-behavior)
       "Accessor"
       (documentation 'list-box-tab-behavior 'function)
- "@version{2025-07-29}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-tab-behavior object) => behavior}
   @syntax{(setf (gtk:list-box-tab-behavior object) behavior)}
   @argument[object]{a @class{gtk:list-box} widget}
@@ -742,7 +759,7 @@ lambda (listbox)    :action
 
 (defun list-box-new ()
  #+liber-documentation
- "@version{2024-04-13}
+ "@version{2026-05-01}
   @return{The new @class{gtk:list-box} widget.}
   @short{Creates a new list box.}
   @see-class{gtk:list-box}"
@@ -756,7 +773,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_prepend" list-box-prepend) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @begin{short}
@@ -778,7 +795,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_append" list-box-append) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to append}
   @begin{short}
@@ -800,7 +817,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_insert" list-box-insert) :void
  #+liber-documentation
- "@version{2026-06-21}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[position]{an integer for the position to insert the child widget in}
@@ -828,7 +845,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_remove" list-box-remove) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @short{Removes a child widget from the list box.}
@@ -846,7 +863,7 @@ lambda (listbox)    :action
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_box_remove_all" list-box-remove-all) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @short{Removes all child widgets from the list box.}
 
@@ -863,7 +880,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_select_row" list-box-select-row) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @short{Make the list box row the currently selected row.}
@@ -880,7 +897,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_unselect_row" list-box-unselect-row) :void
  #+liber-documentation
- "@version{2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
@@ -904,7 +921,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_select_all" list-box-select-all) :void
  #+liber-documentation
- "@version{2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Select all children of the list box, if the selection mode allows it.
@@ -925,7 +942,7 @@ lambda (listbox)    :action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_list_box_unselect_all" list-box-unselect-all) :void
- "@version{2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Unselect all children of the list box, if the selection mode allows it.
@@ -947,7 +964,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_get_selected_row" list-box-selected-row)
     (g:object list-box-row)
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @return{The selected @class{gtk:list-box-row} widget.}
   @begin{short}
@@ -980,7 +997,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-foreach-func)
       "Callback"
       (liber:symbol-documentation 'list-box-foreach-func)
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @syntax{lambda (listbox row)}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
@@ -1006,7 +1023,7 @@ lambda (listbox)    :action
 
 (defun list-box-selected-foreach (listbox func)
  #+liber-documentation
- "@version{2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[func]{a @sym{gtk:list-box-foreach-func} callback function}
   @begin{short}
@@ -1029,7 +1046,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_selected_rows" list-box-selected-rows)
     (g:list-t (g:object list-box-row))
  #+liber-documentation
- "@version{2025-06-21}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{return}
     The list containing the @class{gtk:list-box-row} widget for each selected
@@ -1057,7 +1074,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
     (g:object adjustment)
  #+liber-documentation
- "@version{2025-07-28}
+ "@version{2026-05-01}
   @syntax{(gtk:list-box-adjustment listbox) => adjustment}
   @syntax{(setf (gtk:list-box-adjustment listbox) adjustment)}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1084,7 +1101,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_set_placeholder" list-box-set-placeholder) :void
  #+liber-documentation
- "@version{2024-10-11}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[placeholder]{a @class{gtk:widget} object}
   @begin{short}
@@ -1105,7 +1122,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_row_at_index" list-box-row-at-index)
     (g:object list-box-row)
  #+liber-documentation
- "@version{2025-06-21}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[index]{an integer for the index of the row}
   @return{The @class{gtk:list-box-row} widget at @arg{index}.}
@@ -1128,7 +1145,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_get_row_at_y" list-box-row-at-y)
     (g:object list-box-row)
  #+liber-documentation
- "@version{#2025-06-21}
+ "@version{#2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[y]{an integer for the position of the row}
   @return{The @class{gtk:list-box-row} widget for the given @arg{y} coordinate.}
@@ -1144,7 +1161,7 @@ lambda (listbox)    :action
 ;;; GtkListBoxFilterFunc
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcallback list-row-filter-func :boolean
+(cffi:defcallback list-box-filter-func :boolean
     ((row (g:object list-box-row))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
@@ -1157,7 +1174,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-filter-func)
       "Callback"
       (liber:symbol-documentation 'list-box-filter-func)
- "@version{#2024-04-13}
+ "@version{2026-05-01}
   @syntax{lambda (row) => result}
   @argument[row]{a @class{gtk:list-box-row} widget that may be filtered}
   @argument[result]{@em{true} if the row should be visible, @em{false}
@@ -1183,10 +1200,10 @@ lambda (listbox)    :action
 
 (defun list-box-set-filter-func (listbox func)
  #+liber-documentation
- "@version{#2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[func]{a @sym{gtk:list-box-filter-func} callback function that
-    lets you filter which rows to show}
+    lets you filter which rows to show, the argument can be @code{nil}}
   @begin{short}
     By setting a filter function on the list box one can decide dynamically
     which of the rows to show.
@@ -1202,13 +1219,19 @@ lambda (listbox)    :action
   Note that using a filter function is incompatible with using a model,
   see the @fun{gtk:list-box-bind-model} function.
   @see-class{gtk:list-box}
+  @see-symbol{gtk:list-box-filter-func}
   @see-function{gtk:list-box-row-changed}
   @see-function{gtk:list-box-invalidate-filter}
   @see-function{gtk:list-box-bind-model}"
-  (%list-box-set-filter-func listbox
-          (cffi:callback list-box-filter-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%list-box-set-filter-func listbox
+              (cffi:callback list-box-filter-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%list-box-set-filter-func listbox
+                                 (cffi:null-pointer)
+                                 (cffi:null-pointer)
+                                 (cffi:null-pointer))))
 
 (export 'list-box-set-filter-func)
 
@@ -1219,7 +1242,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_invalidate_filter" list-box-invalidate-filter)
     :void
  #+liber-documentation
- "@version{#2024-04-13}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Update the filtering for all rows.
@@ -1251,7 +1274,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-update-header-func)
       "Callback"
       (liber:symbol-documentation 'list-box-update-header-func)
- "@version{#2025-06-21}
+ "@version{#2026-05-01}
   @syntax{lambda (row before)}
   @argument[row]{a @class{gtk:list-box-row} widget for the row to update}
   @argument[before]{a @class{gtk:list-box-row} widget before @arg{row}, or
@@ -1279,10 +1302,10 @@ lambda (listbox)    :action
 
 (defun list-box-set-header-func (listbox func)
  #+liber-documentation
- "@version{#2025-06-26}
+ "@version{#2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[func]{a @sym{gtk:list-box-update-header-func} callback function
-    that lets you add row headers}
+    that lets you add row headers, the argument can be @code{nil}}
   @begin{short}
     By setting a header function on the list box one can dynamically add headers
     in front of rows, depending on the contents of the row and its position in
@@ -1312,10 +1335,15 @@ lambda (listbox)    :action
   @see-function{gtk:list-box-row-header}
   @see-function{gtk:list-box-row-changed}
   @see-function{gtk:list-box-invalidate-headers}"
-  (%list-box-set-header-func listbox
-          (cffi:callback list-box-update-header-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%list-box-set-header-func listbox
+              (cffi:callback list-box-update-header-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%list-box-set-header-func listbox
+                                 (cffi:null-pointer)
+                                 (cffi:null-pointer)
+                                 (cffi:null-pointer))))
 
 (export 'list-box-set-header-func)
 
@@ -1326,7 +1354,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_invalidate_headers" list-box-invalidate-headers)
     :void
  #+liber-documentation
- "@version{#2024-04-13}
+ "@version{#2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Update the separators for all rows.
@@ -1358,7 +1386,7 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-sort-func)
       "Callback"
       (liber:symbol-documentation 'list-box-sort-func)
- "@version{#2025-07-19}
+ "@version{2026-05-01}
   @syntax{lambda (row1 row2) => result}
   @argument[row1]{a @class{gtk:list-box-row} widget for the first row}
   @argument[row2]{a @class{gtk:list-box-row} widget for the second row}
@@ -1385,7 +1413,7 @@ lambda (listbox)    :action
 
 (defun list-box-set-sort-func (listbox func)
  #+liber-documentation
- "@version{#2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[func]{a @sym{gtk:list-box-sort-func} callback function for the sort
     function}
@@ -1406,10 +1434,15 @@ lambda (listbox)    :action
   @see-function{gtk:list-box-row-changed}
   @see-function{gtk:list-box-invalidate-sort}
   @see-function{gtk:list-box-bind-model}"
-  (%list-box-set-sort-func listbox
-          (cffi:callback list-box-sort-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%list-box-set-sort-func listbox
+              (cffi:callback list-box-sort-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%list-box-set-sort-func listbox
+                               (cffi:null-pointer)
+                               (cffi:null-pointer)
+                               (cffi:null-pointer))))
 
 (export 'list-box-set-sort-func)
 
@@ -1419,7 +1452,7 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_invalidate_sort" list-box-invalidate-sort) :void
  #+liber-documentation
- "@version{#2024-04-13}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     Update the sorting for all rows.
@@ -1439,7 +1472,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_drag_highlight_row" list-box-drag-highlight-row)
     :void
  #+liber-documentation
- "@version{#2025-06-26}
+ "@version{#2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
@@ -1466,7 +1499,7 @@ lambda (listbox)    :action
 (cffi:defcfun ("gtk_list_box_drag_unhighlight_row"
                list-box-drag-unhighlight-row) :void
  #+liber-documentation
- "@version{#2024-04-13}
+ "@version{#2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
     If a row has previously been highlighted via the
@@ -1483,22 +1516,21 @@ lambda (listbox)    :action
 ;;; GtkListBoxCreateWidgetFunc
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check this?! We convert the pointer to a GObject. We need an example.
-
 (cffi:defcallback list-box-create-widget-func (g:object widget)
     ((item :pointer)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data))
         (object (cffi:convert-from-foreign item 'g:object)))
-    (funcall func object)))
+    ;; We need to add a reference to ensure correct memory management.
+    (g:object-ref (funcall func object))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'list-box-create-widget-func)
       "Callback"
       (liber:symbol-documentation 'list-box-create-widget-func)
- "@version{#2024-04-15}
-  @syntax{lambda (object) => result}
-  @argument[object]{a @class{g:object} instance for the item from the model for
+ "@version{2026-05-01}
+  @syntax{lambda (item) => result}
+  @argument[item]{a @class{g:object} instance for the item from the model for
     which to create a widget for}
   @argument[result]{a @class{gtk:widget} object that represents @arg{item}}
   @begin{short}
@@ -1510,6 +1542,9 @@ lambda (listbox)    :action
   widget will be inserted as the child of an intermediate
   @class{gtk:list-box-row} widget.
   @see-class{gtk:list-box}
+  @see-class{gtk:list-box-row}
+  @see-class{g:object}
+  @see-class{gtk:widget}
   @see-class{g:list-model}
   @see-function{gtk:list-box-bind-model}")
 
@@ -1528,7 +1563,7 @@ lambda (listbox)    :action
 
 (defun list-box-bind-model (listbox model func)
  #+liber-documentation
- "@version{#2025-06-26}
+ "@version{2026-05-01}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[model]{a @class{g:list-model} object to be bound to @arg{listbox}}
   @argument[func]{a @sym{gtk:list-box-create-widget-func} callback function
@@ -1538,12 +1573,10 @@ lambda (listbox)    :action
     Binds a model to the list box.
   @end{short}
   If the list box was already bound to a model, that previous binding is
-  destroyed.
-
-  The contents of the list box are cleared and then filled with widgets that
-  represent items from the model. The list box is updated whenever the model
-  changes. If the @arg{model} argument is @code{nil}, the list box is left
-  empty.
+  destroyed. The contents of the list box are cleared and then filled with
+  widgets that represent items from the model. The list box is updated whenever
+  the model changes. If the @arg{model} argument is @code{nil}, the list box is
+  left empty.
 
   It is undefined to add or remove widgets directly, for example, with the
   @fun{gtk:list-box-insert} function, while the list box is bound to a model.

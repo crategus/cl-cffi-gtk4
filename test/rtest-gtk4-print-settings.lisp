@@ -47,12 +47,13 @@
              (glib-test:list-enum-item-nicks "GtkPageOrientation")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPageOrientation" GTK:PAGE-ORIENTATION
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_page_orientation_get_type")
-                       (:PORTRAIT 0)
-                       (:LANDSCAPE 1)
-                       (:REVERSE-PORTRAIT 2)
-                       (:REVERSE-LANDSCAPE 3))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_page_orientation_get_type")
+                                    (:PORTRAIT 0)
+                                    (:LANDSCAPE 1)
+                                    (:REVERSE-PORTRAIT 2)
+                                    (:REVERSE-LANDSCAPE 3))
              (gobject:get-gtype-definition "GtkPageOrientation"))))
 
 ;;;     GtkPrintDuplex
@@ -78,11 +79,11 @@
              (glib-test:list-enum-item-nicks "GtkPrintDuplex")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintDuplex" GTK:PRINT-DUPLEX
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_print_duplex_get_type")
-                       (:SIMPLEX 0)
-                       (:HORIZONTAL 1)
-                       (:VERTICAL 2))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_print_duplex_get_type")
+                                    (:SIMPLEX 0)
+                                    (:HORIZONTAL 1)
+                                    (:VERTICAL 2))
              (gobject:get-gtype-definition "GtkPrintDuplex"))))
 
 ;;;     GtkPrintQuality
@@ -108,12 +109,12 @@
              (glib-test:list-enum-item-nicks "GtkPrintQuality")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintQuality" GTK:PRINT-QUALITY
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_print_quality_get_type")
-                       (:LOW 0)
-                       (:NORMAL 1)
-                       (:HIGH 2)
-                       (:DRAFT 3))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_print_quality_get_type")
+                                    (:LOW 0)
+                                    (:NORMAL 1)
+                                    (:HIGH 2)
+                                    (:DRAFT 3))
              (gobject:get-gtype-definition "GtkPrintQuality"))))
 
 ;;;     GtkNumberUpLayout
@@ -145,16 +146,17 @@
              (glib-test:list-enum-item-nicks "GtkNumberUpLayout")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkNumberUpLayout" GTK:NUMBER-UP-LAYOUT
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_number_up_layout_get_type")
-                       (:LRTB 0)
-                       (:LRBT 1)
-                       (:RLTB 2)
-                       (:RLBT 3)
-                       (:TBLR 4)
-                       (:TBRL 5)
-                       (:BTLR 6)
-                       (:BTRL 7))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_number_up_layout_get_type")
+                                    (:LRTB 0)
+                                    (:LRBT 1)
+                                    (:RLTB 2)
+                                    (:RLBT 3)
+                                    (:TBLR 4)
+                                    (:TBRL 5)
+                                    (:BTLR 6)
+                                    (:BTRL 7))
              (gobject:get-gtype-definition "GtkNumberUpLayout"))))
 
 ;;;     GtkPrintPages
@@ -180,12 +182,12 @@
              (glib-test:list-enum-item-nicks "GtkPrintPages")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPrintPages" GTK:PRINT-PAGES
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_print_pages_get_type")
-                       (:ALL 0)
-                       (:CURRENT 1)
-                       (:RANGES 2)
-                       (:SELECTION 3))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_print_pages_get_type")
+                                    (:ALL 0)
+                                    (:CURRENT 1)
+                                    (:RANGES 2)
+                                    (:SELECTION 3))
              (gobject:get-gtype-definition "GtkPrintPages"))))
 
 ;;;     GtkPageRange
@@ -212,11 +214,11 @@
              (glib-test:list-enum-item-nicks "GtkPageSet")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkPageSet" GTK:PAGE-SET
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_page_set_get_type")
-                       (:ALL 0)
-                       (:EVEN 1)
-                       (:ODD 2))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER "gtk_page_set_get_type")
+                                    (:ALL 0)
+                                    (:EVEN 1)
+                                    (:ODD 2))
              (gobject:get-gtype-definition "GtkPageSet"))))
 
 ;;;     GtkPrintSettings
@@ -247,90 +249,93 @@
              (glib-test:list-signals "GtkPrintSettings")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkPrintSettings" GTK:PRINT-SETTINGS
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_print_settings_get_type")
-                       NIL)
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_print_settings_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GtkPrintSettings"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     GtkPrintSettingsFunc
-
 ;;;     gtk_print_settings_new
 
 (test gtk-print-settings-new
-  (is (typep (gtk:print-settings-new) 'gtk:print-settings)))
+  (glib-test:with-check-memory (settings)
+    (is (typep (setf settings
+                     (gtk:print-settings-new)) 'gtk:print-settings))))
 
 ;;;     gtk_print_settings_new_from_file
 ;;;     gtk_print_settings_to_file
 
 (test gtk-print-settings-new-from-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        settings)
-    (is (typep (setf settings
-                     (gtk:print-settings-new-from-file path))
-               'gtk:print-settings))
-    (is-true (gtk:print-settings-to-file settings path))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (is (typep (setf settings
+                       (gtk:print-settings-new-from-file path))
+                 'gtk:print-settings))
+      (is-true (gtk:print-settings-to-file settings path)))))
 
 ;;;     gtk_print_settings_new_from_key_file
 ;;;     gtk_print_settings_to_key_file
 
 (test gtk-print-settings-new-from-key-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        settings)
-    (glib:with-key-file (keyfile)
-      (is-true (glib:key-file-load-from-file keyfile path :none))
-      (is (typep (setf settings
-                       (gtk:print-settings-new-from-key-file keyfile nil))
-                 'gtk:print-settings))
-      (is-false (gtk:print-settings-to-key-file settings keyfile nil))
-      (is-true (g:key-file-save-to-file keyfile path)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (glib:with-key-file (keyfile)
+        (is-true (glib:key-file-load-from-file keyfile path :none))
+        (is (typep (setf settings
+                         (gtk:print-settings-new-from-key-file keyfile nil))
+                   'gtk:print-settings))
+        (is-false (gtk:print-settings-to-key-file settings keyfile nil))
+        (is-true (g:key-file-save-to-file keyfile path))))))
 
 ;;;     gtk_print_settings_new_from_gvariant
 ;;;     gtk_print_settings_to_gvariant
 
 (test gtk-print-settings-new-from-gvariant
-  (let* ((variant (g:variant-parse "a{sv}"
-                                   "{'scale': <'100'>,
-                                     'number-up': <'1'>,
-                                     'n-copies': <'1'>,
-                                     'page-ranges': <'0-11'>,
-                                     'page-set': <'all'>,
-                                     'printer': <'In Datei drucken'>,
-                                     'print-pages': <'ranges'>,
-                                     'reverse': <'false'>,
-                                     'collate': <'false'>,
-                                     'output-file-format': <'pdf'>}"))
-         settings)
-    (is (typep (setf settings
-                     (gtk:print-settings-new-from-gvariant variant))
-               'gtk:print-settings))
-    (is (g:variant-equal variant
-                         (gtk:print-settings-to-gvariant settings)))))
+  (glib-test:with-check-memory (settings)
+    (let ((variant (g:variant-parse "a{sv}"
+                                    "{'scale': <'100'>,
+                                      'number-up': <'1'>,
+                                      'n-copies': <'1'>,
+                                      'page-ranges': <'0-11'>,
+                                      'page-set': <'all'>,
+                                      'printer': <'In Datei drucken'>,
+                                      'print-pages': <'ranges'>,
+                                      'reverse': <'false'>,
+                                      'collate': <'false'>,
+                                      'output-file-format': <'pdf'>}")))
+      (is (typep (setf settings
+                       (gtk:print-settings-new-from-gvariant variant))
+                 'gtk:print-settings))
+      (is (g:variant-equal variant
+                           (gtk:print-settings-to-gvariant settings))))))
 
 ;;;     gtk_print_settings_copy
 
 (test gtk-print-settings-copy
-  (let ((settings (gtk:print-settings-new)))
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
     (is (typep (gtk:print-settings-copy settings) 'gtk:print-settings))))
 
 ;;;     gtk_print_settings_load_file
 
 (test gtk-print-settings-load-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        (settings (gtk:print-settings-new)))
-    (is-true (gtk:print-settings-load-file settings path))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new))
+      (is-true (gtk:print-settings-load-file settings path)))))
 
 ;;;     gtk_print_settings_load_key_file
 
 (test gtk-print-settings-load-key-file
-  (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-        (settings (gtk:print-settings-new)))
-    (glib:with-key-file (keyfile)
-      (is-true (glib:key-file-load-from-file keyfile path :none))
-      (is-true (gtk:print-settings-load-key-file settings keyfile nil)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new))
+      (glib:with-key-file (keyfile)
+        (is-true (glib:key-file-load-from-file keyfile path :none))
+        (is-true (gtk:print-settings-load-key-file settings keyfile nil))))))
 
 ;;;     gtk_print_settings_has_key
 ;;;     gtk_print_settings_get
@@ -338,166 +343,339 @@
 ;;;     gtk_print_settings_unset
 
 (test gtk-print-settings-get/set
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
 
-  (is-true (gtk:print-settings-has-key settings "scale"))
-  (is (string= "100" (gtk:print-settings-get settings "scale")))
-  (is-false (gtk:print-settings-set settings "scale" "200"))
-  (is (string= "200" (gtk:print-settings-get settings "scale")))
+      (is-true (gtk:print-settings-has-key settings "scale"))
+      (is (string= "100" (gtk:print-settings-get settings "scale")))
+      (is-false (gtk:print-settings-set settings "scale" "200"))
+      (is (string= "200" (gtk:print-settings-get settings "scale")))
 
-  (is-true (gtk:print-settings-has-key settings "page-set"))
-  (is (string= "all" (gtk:print-settings-get settings "page-set")))
-  (is-false (gtk:print-settings-unset settings "page-set"))
-  (is-false (gtk:print-settings-get settings "page-set"))
+      (is-true (gtk:print-settings-has-key settings "page-set"))
+      (is (string= "all" (gtk:print-settings-get settings "page-set")))
+      (is-false (gtk:print-settings-unset settings "page-set"))
+      (is-false (gtk:print-settings-get settings "page-set"))
 
-  (is-true (gtk:print-settings-has-key settings "printer"))
-  (is (string= "In Datei drucken" (gtk:print-settings-get settings "printer")))
-  (is-false (gtk:print-settings-set settings "printer" nil))
-  (is-false (gtk:print-settings-get settings "printer"))))
+      (is-true (gtk:print-settings-has-key settings "printer"))
+      (is (string= "In Datei drucken" (gtk:print-settings-get settings "printer")))
+      (is-false (gtk:print-settings-set settings "printer" nil))
+      (is-false (gtk:print-settings-get settings "printer")))))
 
+;;;     GtkPrintSettingsFunc
 ;;;     gtk_print_settings_foreach
 
 (test gtk-print-settings-foreach
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path))
-         values)
-    (is-false (gtk:print-settings-foreach settings
-        (lambda (key value)
-          (push (list key value) values))))
-    (is (equal '(("paper-height" "") ("scale" "100") ("number-up" "1") ("n-copies" "1")
- ("page-ranges" "0-11") ("orientation" "landscape") ("page-set" "all")
- ("print-pages" "ranges") ("printer" "In Datei drucken") ("reverse" "false")
- ("collate" "false") ("output-file-format" "pdf") ("paper-width" "210.0"))
-               (reverse values)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini"))
+          values)
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is-false (gtk:print-settings-foreach settings
+          (lambda (key value)
+            (push (list key value) values))))
+      (is (equal '(("paper-height" "")
+                   ("scale" "100")
+                   ("number-up" "1")
+                   ("n-copies" "1")
+                   ("page-ranges" "0-11")
+                   ("orientation" "landscape")
+                   ("page-set" "all")
+                   ("print-pages" "ranges")
+                   ("printer" "In Datei drucken")
+                   ("reverse" "false")
+                   ("collate" "false")
+                   ("output-file-format" "pdf")
+                   ("paper-width" "210.0"))
+               (reverse values))))))
 
 ;;;     gtk_print_settings_get_bool
 ;;;     gtk_print_settings_set_bool
 
 (test gtk-print-settings-bool
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is-false (gtk:print-settings-bool settings "reverse"))
-    (is-true (setf (gtk:print-settings-bool settings "reverse") t))
-    (is-true (gtk:print-settings-bool settings "reverse"))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is-false (gtk:print-settings-bool settings "reverse"))
+      (is-true (setf (gtk:print-settings-bool settings "reverse") t))
+      (is-true (gtk:print-settings-bool settings "reverse")))))
 
 ;;;     gtk_print_settings_get_double
 ;;;     gtk_print_settings_set_double
 
 (test gtk-print-settings-double
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (= 210.0d0 (gtk:print-settings-double settings "paper-width")))
-    (is (= 100.0d0 (setf (gtk:print-settings-double settings "paper-width") 100)))
-    (is (= 100.0d0 (gtk:print-settings-double settings "paper-width")))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (= 210.0d0 (gtk:print-settings-double settings "paper-width")))
+      (is (= 100.0d0 (setf (gtk:print-settings-double settings "paper-width") 100)))
+      (is (= 100.0d0 (gtk:print-settings-double settings "paper-width"))))))
 
 ;;;     gtk_print_settings_get_double_with_default
 
 (test gtk-print-settings-double-with-default
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (= 0.0d0 (gtk:print-settings-double settings "reverse")))
-    (is (= 99.0d0
-           (gtk:print-settings-double-with-default settings "reverse" 99.0)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (= 0.0d0 (gtk:print-settings-double settings "reverse")))
+      (is (= 99.0d0 (gtk:print-settings-double-with-default settings "reverse" 99))))))
 
 ;;;     gtk_print_settings_get_length
 ;;;     gtk_print_settings_set_length
 
 (test gtk-print-settings-length
-  (let ((settings (gtk:print-settings-new)))
-    (is (= 100.0d0
-           (setf (gtk:print-settings-length settings "paper-width" :mm) 100.0d0)))
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is (= 100.0d0 (setf (gtk:print-settings-length settings "paper-width" :mm) 100.0d0)))
     (is (= 100.0d0 (gtk:print-settings-length settings "paper-width" :mm)))))
 
 ;;;     gtk_print_settings_get_int
 ;;;     gtk_print_settings_set_int
 
 (test gtk-print-settings-int
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (= 100 (gtk:print-settings-int settings "scale")))
-    (is (=  90 (setf (gtk:print-settings-int settings "scale") 90)))
-    (is (=  90 (gtk:print-settings-int settings "scale")))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (= 100 (gtk:print-settings-int settings "scale")))
+      (is (=  90 (setf (gtk:print-settings-int settings "scale") 90)))
+      (is (=  90 (gtk:print-settings-int settings "scale"))))))
 
 ;;;     gtk_print_settings_get_int_with_default
 
 (test gtk-print-settings-int-with-default
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (=  0 (gtk:print-settings-int settings "reverse")))
-    (is (= 10 (gtk:print-settings-int-with-default settings "reverse" 10)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (=  0 (gtk:print-settings-int settings "reverse")))
+      (is (= 10 (gtk:print-settings-int-with-default settings "reverse" 10))))))
 
 ;;;     gtk_print_settings_get_printer
 ;;;     gtk_print_settings_set_printer
 
 (test gtk-print-settings-printer
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (string= "In Datei drucken" (gtk:print-settings-printer settings)))
-    (is (string= "" (setf (gtk:print-settings-printer settings) "")))
-    (is (string= "" (gtk:print-settings-printer settings)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (string= "In Datei drucken" (gtk:print-settings-printer settings)))
+      (is (string= "" (setf (gtk:print-settings-printer settings) "")))
+      (is (string= "" (gtk:print-settings-printer settings))))))
 
 ;;;     gtk_print_settings_get_orientation
 ;;;     gtk_print_settings_set_orientation
 
 (test gtk-print-settings-orientation
-  (let* ((path (glib-sys:sys-path "test/out/print-settings.ini"))
-         (settings (gtk:print-settings-new-from-file path)))
-    (is (eq :landscape (gtk:print-settings-orientation settings)))
-    (is (eq :portrait (setf (gtk:print-settings-orientation settings) :portrait)))
-    (is (eq :portrait (gtk:print-settings-orientation settings)))))
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (eq :landscape (gtk:print-settings-orientation settings)))
+      (is (eq :portrait (setf (gtk:print-settings-orientation settings) :portrait)))
+      (is (eq :portrait (gtk:print-settings-orientation settings))))))
 
 ;;;     gtk_print_settings_get_paper_size
 ;;;     gtk_print_settings_set_paper_size
 
 (test gtk-print-settings-paper-size
-  (let ((settings (gtk:print-settings-new)))
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
     (is (typep (setf (gtk:print-settings-paper-size settings)
                      (gtk:paper-size-new "iso_a4"))
                'gtk:paper-size))
     (is (typep (gtk:print-settings-paper-size settings) 'gtk:paper-size))
-    (is (= 210.0d0
-           (gtk:paper-size-width (gtk:print-settings-paper-size settings) :mm)))
-    (is (= 297.0d0
-           (gtk:paper-size-height (gtk:print-settings-paper-size settings) :mm)))))
+    (is (= 210.0d0 (gtk:paper-size-width (gtk:print-settings-paper-size settings) :mm)))
+    (is (= 297.0d0 (gtk:paper-size-height (gtk:print-settings-paper-size settings) :mm)))))
 
 ;;;     gtk_print_settings_get_paper_width
 ;;;     gtk_print_settings_set_paper_width
+
+(test gtk-print-settings-paper-width
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (= 210.0d0 (gtk:print-settings-paper-width settings :mm)))
+      (is (= 100.0d0 (setf (gtk:print-settings-paper-width settings :mm) 100)))
+      (is (= 100.0d0 (gtk:print-settings-paper-width settings :mm))))))
+
 ;;;     gtk_print_settings_get_paper_height
 ;;;     gtk_print_settings_set_paper_height
+
+(test gtk-print-settings-paper-height
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      (setf settings (gtk:print-settings-new-from-file path))
+      (is (= 0.0d0 (gtk:print-settings-paper-height settings :mm)))
+      (is (= 100.0d0 (setf (gtk:print-settings-paper-height settings :mm) 100)))
+      (is (= 100.0d0 (gtk:print-settings-paper-height settings :mm))))))
+
 ;;;     gtk_print_settings_get_use_color
 ;;;     gtk_print_settings_set_use_color
+
+(test gtk-print-settings-use-color
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is-true (gtk:print-settings-use-color settings))
+    (is-false (setf (gtk:print-settings-use-color settings) nil))
+    (is-false (gtk:print-settings-use-color settings))))
+
 ;;;     gtk_print_settings_get_collate
 ;;;     gtk_print_settings_set_collate
+
+(test gtk-print-settings-collate
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is-true (gtk:print-settings-collate settings))
+    (is-false (setf (gtk:print-settings-collate settings) nil))
+    (is-false (gtk:print-settings-collate settings))))
+
 ;;;     gtk_print_settings_get_reverse
 ;;;     gtk_print_settings_set_reverse
+
+(test gtk-print-settings-reverse
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is-false (gtk:print-settings-reverse settings))
+    (is-true (setf (gtk:print-settings-reverse settings) t))
+    (is-true (gtk:print-settings-reverse settings))))
+
 ;;;     gtk_print_settings_get_duplex
 ;;;     gtk_print_settings_set_duplex
+
+(test gtk-print-settings-duplex
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is (eq :simplex (gtk:print-settings-duplex settings)))
+    (is (eq :horizontal (setf (gtk:print-settings-duplex settings) :horizontal)))
+    (is (eq :horizontal (gtk:print-settings-duplex settings)))))
+
 ;;;     gtk_print_settings_get_quality
 ;;;     gtk_print_settings_set_quality
+
+(test gtk-print-settings-quality
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is (eq :normal (gtk:print-settings-quality settings)))
+    (is (eq :draft (setf (gtk:print-settings-quality settings) :draft)))
+    (is (eq :draft (gtk:print-settings-quality settings)))))
+
 ;;;     gtk_print_settings_get_n_copies
 ;;;     gtk_print_settings_set_n_copies
+
+(test gtk-print-settings-n-copies
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is (=  1 (gtk:print-settings-n-copies settings)))
+    (is (= 10 (setf (gtk:print-settings-n-copies settings) 10)))
+    (is (= 10 (gtk:print-settings-n-copies settings)))))
+
 ;;;     gtk_print_settings_get_number_up
 ;;;     gtk_print_settings_set_number_up
+
+(test gtk-print-settings-number-up
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
+    (is (=  1 (gtk:print-settings-number-up settings)))
+    (is (= 10 (setf (gtk:print-settings-number-up settings) 10)))
+    (is (= 10 (gtk:print-settings-number-up settings)))))
+
 ;;;     gtk_print_settings_get_number_up_layout
 ;;;     gtk_print_settings_set_number_up_layout
+
+(test gtk-print-settings-number-up-layout
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check function
+      (is (eq :lrtb (gtk:print-settings-number-up-layout settings)))
+      (is (eq :btrl (setf (gtk:print-settings-number-up-layout settings) :btrl)))
+      (is (eq :btrl (gtk:print-settings-number-up-layout settings))))))
+
 ;;;     gtk_print_settings_get_resolution
 ;;;     gtk_print_settings_set_resolution
-;;;     gtk_print_settings_set_resolution_xy
 ;;;     gtk_print_settings_get_resolution_x
 ;;;     gtk_print_settings_get_resolution_y
+
+(test gtk-print-settings-resolution
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check resolution
+      (is (= 300 (gtk:print-settings-resolution settings)))
+      (is (= 300 (gtk:print-settings-resolution-x settings)))
+      (is (= 300 (gtk:print-settings-resolution-y settings)))
+      (is (= 600 (setf (gtk:print-settings-resolution settings) 600)))
+      (is (= 600 (gtk:print-settings-resolution settings)))
+      (is (= 600 (gtk:print-settings-resolution-x settings)))
+      (is (= 600 (gtk:print-settings-resolution-y settings))))))
+
+;;;     gtk_print_settings_set_resolution_xy
+
+(test gtk-print-settings-set-resolution-xy.1
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check resolution
+      (is-false (gtk:print-settings-set-resolution-xy settings 600 300))
+      (is (= 600 (gtk:print-settings-resolution settings)))
+      (is (= 600 (gtk:print-settings-resolution-x settings)))
+      (is (= 300 (gtk:print-settings-resolution-y settings))))))
+
+(test gtk-print-settings-set-resolution-xy.2
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check resolution
+      (is-false (gtk:print-settings-set-resolution-xy settings 300 600))
+      (is (= 300 (gtk:print-settings-resolution settings)))
+      (is (= 300 (gtk:print-settings-resolution-x settings)))
+      (is (= 600 (gtk:print-settings-resolution-y settings))))))
+
 ;;;     gtk_print_settings_get_printer_lpi
 ;;;     gtk_print_settings_set_printer_lpi
+
+(test gtk-print-settings-printer-lpi
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check printer lpi
+      (is (= 150.0d0 (gtk:print-settings-printer-lpi settings)))
+      (is (= 300.0d0 (setf (gtk:print-settings-printer-lpi settings) 300)))
+      (is (= 300.0d0 (gtk:print-settings-printer-lpi settings))))))
+
 ;;;     gtk_print_settings_get_scale
 ;;;     gtk_print_settings_set_scale
+
+(test gtk-print-settings-scale
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check printer lpi
+      (is (= 100.0d0 (gtk:print-settings-scale settings)))
+      (is (= 200.0d0 (setf (gtk:print-settings-scale settings) 200)))
+      (is (= 200.0d0 (gtk:print-settings-scale settings))))))
+
 ;;;     gtk_print_settings_get_print_pages
 ;;;     gtk_print_settings_set_print_pages
+
+(test gtk-print-settings-print-pages
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check print pages
+      (is (eq :ranges (gtk:print-settings-print-pages settings)))
+      (is (eq :selection (setf (gtk:print-settings-print-pages settings) :selection)))
+      (is (eq :selection (gtk:print-settings-print-pages settings))))))
 
 ;;;     gtk_print_settings_get_page_ranges
 ;;;     gtk_print_settings_set_page_ranges
 
 (test gtk-print-settings-page-ranges
-  (let ((settings (gtk:print-settings-new)))
+  (glib-test:with-check-memory (settings)
+    (setf settings (gtk:print-settings-new))
     (is (equal '((1) (15 20) (25))
                (setf (gtk:print-settings-page-ranges settings)
                      '((1) (15 20) (25)))))
@@ -506,15 +684,85 @@
 
 ;;;     gtk_print_settings_get_page_set
 ;;;     gtk_print_settings_set_page_set
+
+(test gtk-print-settings-page-set
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check print pages
+      (is (eq :all (gtk:print-settings-page-set settings)))
+      (is (eq :odd (setf (gtk:print-settings-page-set settings) :odd)))
+      (is (eq :odd (gtk:print-settings-page-set settings))))))
+
 ;;;     gtk_print_settings_get_default_source
 ;;;     gtk_print_settings_set_default_source
+
+(test gtk-print-settings-default-source
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check default source
+      (is-false (gtk:print-settings-default-source settings))
+      (is (string= "default"
+                   (setf (gtk:print-settings-default-source settings) "default")))
+      (is (string= "default" (gtk:print-settings-default-source settings))))))
+
 ;;;     gtk_print_settings_get_media_type
 ;;;     gtk_print_settings_set_media_type
+
+(test gtk-print-settings-media-type
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check media type
+      (is-false (gtk:print-settings-media-type settings))
+      (is (string= "iso_a4_210x297mm"
+                   (setf (gtk:print-settings-media-type settings) "iso_a4_210x297mm")))
+      (is (string= "iso_a4_210x297mm" (gtk:print-settings-media-type settings))))))
+
 ;;;     gtk_print_settings_get_dither
 ;;;     gtk_print_settings_set_dither
+
+(test gtk-print-settings-dither
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check media type
+      (is-false (gtk:print-settings-dither settings))
+      (is (string= "ordered"
+                   (setf (gtk:print-settings-dither settings) "ordered")))
+      (is (string= "ordered" (gtk:print-settings-dither settings))))))
+
 ;;;     gtk_print_settings_get_finishings
 ;;;     gtk_print_settings_set_finishings
+
+(test gtk-print-settings-finishings
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check media type
+      (is-false (gtk:print-settings-finishings settings))
+      (is (string= "stapling"
+                   (setf (gtk:print-settings-finishings settings) "stapling")))
+      (is (string= "stapling" (gtk:print-settings-finishings settings))))))
+
 ;;;     gtk_print_settings_get_output_bin
 ;;;     gtk_print_settings_set_output_bin
 
-;;; 2026-01-10
+(test gtk-print-settings-output-bin
+  (glib-test:with-check-memory (settings)
+    (let ((path (glib-sys:sys-path "test/out/print-settings.ini")))
+      ;; Create print settings
+      (setf settings (gtk:print-settings-new-from-file path))
+      ;; Check media type
+      (is-false (gtk:print-settings-output-bin settings))
+      (is (string= "bin"
+                   (setf (gtk:print-settings-output-bin settings) "bin")))
+      (is (string= "bin" (gtk:print-settings-output-bin settings))))))
+
+;;; 2026-05-03

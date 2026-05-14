@@ -156,7 +156,7 @@
 (test gtk-drop-target-async-new
   (glib-test:with-check-memory (target)
 
-    (let ((formats (gdk:content-formats-new '("text/plain")))
+    (let ((formats (gdk:content-formats-new "text/plain"))
           (actions '(:copy :ask)))
       (is (typep (setf target
                        (gtk:drop-target-async-new formats actions))
@@ -166,4 +166,4 @@
 
 ;;;     gtk_drop_target_async_reject_drop
 
-;;; 2026-01-15
+;;; 2026-05-03

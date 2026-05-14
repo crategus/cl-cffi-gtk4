@@ -130,12 +130,36 @@
 
 (test gtk-string-list-new.1
   (glib-test:with-check-memory (model)
-    (setf model (gtk:string-list-new '()))
+    (setf model (gtk:string-list-new))
     (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
     (is (= 0 (g:list-model-n-items model)))
     (is (typep model 'gtk:string-list))))
 
 (test gtk-string-list-new.2
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new nil))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+    (is (= 0 (g:list-model-n-items model)))
+    (is (typep model 'gtk:string-list))))
+
+(test gtk-string-list-new.3
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new '()))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+    (is (= 0 (g:list-model-n-items model)))
+    (is (typep model 'gtk:string-list))))
+
+(test gtk-string-list-new.4
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new "Factory" "Home" "Subway"))
+    (is (= 3 (gtk:string-list-n-items model)))))
+
+(test gtk-string-list-new.5
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new "Factory" '("Home" "Subway")))
+    (is (= 3 (gtk:string-list-n-items model)))))
+
+(test gtk-string-list-new.6
   (glib-test:with-check-memory (model)
     (setf model (gtk:string-list-new '("Factory" "Home" "Subway")))
     (is (= 1 (g:object-ref-count model)))
@@ -150,18 +174,15 @@
     (is (string= "Home" (gtk:string-list-string model 1)))
     (is (string= "Subway" (gtk:string-list-string model 2)))
 
-    (is (string= "Factory"
-                 (gtk:string-object-string (g:list-model-item model 0))))
-    (is (string= "Home"
-                 (gtk:string-object-string (g:list-model-item model 1))))
-    (is (string= "Subway"
-                 (gtk:string-object-string (g:list-model-item model 2))))
+    (is (string= "Factory" (gtk:string-object-string (g:list-model-item model 0))))
+    (is (string= "Home" (gtk:string-object-string (g:list-model-item model 1))))
+    (is (string= "Subway" (gtk:string-object-string (g:list-model-item model 2))))
     ;; Remove references
     (is-false (gtk:string-list-remove model 2))
     (is-false (gtk:string-list-remove model 1))
     (is-false (gtk:string-list-remove model 0))))
 
-(test gtk-string-list-new.3
+(test gtk-string-list-new.7
   ;; Create with make instance
   (is (typep (make-instance 'gtk:string-list) 'gtk:string-list))
   (is (= 1 (g:object-ref-count (make-instance 'gtk:string-list))))
@@ -194,38 +215,62 @@
 
 ;;;     gtk_string_list_splice
 
-(test gtk-string-list-splice
+(test gtk-string-list-splice.1
   (glib-test:with-check-memory (model)
-    (setf model (gtk:string-list-new '("Factory" "Home" "Subway")))
+    (setf model (gtk:string-list-new "Factory" "Home" "Subway"))
     (is (= 3 (g:list-model-n-items model)))
     (is (string= "Factory" (gtk:string-list-string model 0)))
     (is (string= "Home" (gtk:string-list-string model 1)))
     (is (string= "Subway" (gtk:string-list-string model 2)))
-    (is-false (gtk:string-list-splice model 1 2
-                                      '("Factory" "Home" "Subway")))
+    (is-false (gtk:string-list-splice model 1 2 '("Factory" "Home" "Subway")))
     (is (string= "Factory" (gtk:string-list-string model 0)))
     (is (string= "Factory" (gtk:string-list-string model 1)))
     (is (string= "Home" (gtk:string-list-string model 2)))
     (is (string= "Subway" (gtk:string-list-string model 3)))))
+
+(test gtk-string-list-splice.2
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new "Factory" "Home" "Subway"))
+    (is (= 3 (g:list-model-n-items model)))
+    (is (string= "Factory" (gtk:string-list-string model 0)))
+    (is (string= "Home" (gtk:string-list-string model 1)))
+    (is (string= "Subway" (gtk:string-list-string model 2)))
+    (is-false (gtk:string-list-splice model 1 2 "Factory" "Home" "Subway"))
+    (is (string= "Factory" (gtk:string-list-string model 0)))
+    (is (string= "Factory" (gtk:string-list-string model 1)))
+    (is (string= "Home" (gtk:string-list-string model 2)))
+    (is (string= "Subway" (gtk:string-list-string model 3)))))
+
+;;;     gtk_string_list_get_string
+
+(test gtk-string-list-string
+  (glib-test:with-check-memory (model)
+    (setf model (gtk:string-list-new "Factory" "Home" "Subway"))
+    (is (string= "Factory" (gtk:string-list-string model 0)))
+    (is (string= "Home" (gtk:string-list-string model 1)))
+    (is (string= "Subway" (gtk:string-list-string model 2)))
+    (is-false (gtk:string-list-string model #xff))
+    (is-false (gtk:string-list-string model #xffffffff))))
 
 ;;;     gtk_string_list_find
 
 #+gtk-4-18
 (test gtk-string-list-find
   (glib-test:with-check-memory (model)
-    (setf model (gtk:string-list-new '("Factory" "Home" "Subway")))
+    (setf model (gtk:string-list-new "Factory" "Home" "Subway"))
     (is (= 0 (gtk:string-list-find model "Factory")))
     (is (= 1 (gtk:string-list-find model "Home")))
-    (is (= 2 (gtk:string-list-find model "Subway")))))
+    (is (= 2 (gtk:string-list-find model "Subway")))
+    (is (= #xffffffff (gtk:string-list-find model "unknown")))))
 
-;;; Example with a string list of external GTK symbols
+;;; Example for a string list with the external GTK symbols
 
 (test gtk-string-list-gtk-symbols
   (glib-test:with-check-memory (model)
-    (setf model (gtk:string-list-new '()))
+    (setf model (gtk:string-list-new))
     (do-external-symbols (symbol (find-package "GTK"))
       (gtk:string-list-append model (string-downcase (format nil "~a" symbol))))
     (is (g:type-is-object (g:list-model-item-type model)))
     (is (< 3000 (g:list-model-n-items model)))))
 
-;;; 2025-3-29
+;;; 2026-04-26

@@ -68,4 +68,4 @@
     (is-false (setf (gdk:toplevel-layout-resizable layout) nil))
     (is-false (gdk:toplevel-layout-resizable layout))))
 
-;;; 2024-7-12
+;;; 2026-04-21

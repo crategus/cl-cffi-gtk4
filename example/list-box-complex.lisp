@@ -1,9 +1,23 @@
-;;;; List Box
+;;;; List Box Complex
 ;;;;
-;;;; The <tt>GtkListBox</tt> widget allows lists with complicated layouts, using
-;;;; regular widgets supporting sorting and filtering.
+;;;; The <b>gtk:list-box</b> widget is a vertical list box that contains
+;;;; <b>gtk:list-box-row</b> children. These rows can by dynamically sorted and
+;;;; filtered, and headers can be added dynamically depending on the row
+;;;; content. It also allows keyboard and mouse navigation and selection like a
+;;;; typical list.
 ;;;;
-;;;; 2024-4-13
+;;;; Although a <b>gtk:list-box</b> widget must have only
+;;;; <b>gtk:list-box-row</b> children you can add any kind of widget to it via
+;;;; the <b>gtk:list-box-prepend</b>, <b>gtk:list-box-append</b>, and
+;;;; <b>gtk:list-box-insert</b> functions, and a <b>gtk:list-box-row</b> widget
+;;;; will automatically be inserted between the list and the widget.
+;;;;
+;;;; The <b>gtk:list-box-row</b> widget can be marked as activatable or
+;;;; selectable. If a row is activatable, the "row-activated" signal will be
+;;;; emitted for it when the user tries to activate it. If it is selectable,
+;;;; the row will be marked as selected when the user tries to select it.
+;;;;
+;;;; 2026-05-01
 
 (in-package :gtk4-example)
 
@@ -41,7 +55,7 @@
 
 (defun message-new (str)
   (let ((msg (make-instance 'message))
-        (entries (split-sequence:split-sequence #\| str)))
+        (entries (uiop:split-string str :separator "|")))
     (setf (message-id msg) (parse-integer (pop entries) :junk-allowed t))
     (setf (message-name msg) (pop entries))
     (setf (message-nick msg) (pop entries))
@@ -115,8 +129,11 @@
 
 (defun message-row-update (row)
   (let ((message (message-row-message row)))
-    (gtk:image-set-from-file (message-row-avatar-image row)
-                             (glib-sys:sys-path "resource/apple-red.png"))
+    (if (string= "GTKtoolkit" (message-nick message))
+        (gtk:image-set-from-file (message-row-avatar-image row)
+                                 (glib-sys:sys-path "resource/org.gtk.demo4.svg"))
+        (gtk:image-set-from-file (message-row-avatar-image row)
+                                 (glib-sys:sys-path "resource/apple-red.png")))
     (setf (gtk:label-label (message-row-source-name row))
           (message-name message))
     (setf (gtk:label-label (message-row-source-nick row))
@@ -221,29 +238,45 @@
                                   :child listbox
                                   :vexpand t
                                   :hscrollbar-policy :never
-                                  :vscrollbar-policy :automatic)))
-      (gtk:box-append vbox label)
-      (gtk:box-append vbox scrolled)
-      (gtk:list-box-set-sort-func listbox
-          (lambda (row1 row2)
-            (- (message-time (message-row-message row2))
-               (message-time (message-row-message row1)))))
-      (g:signal-connect listbox "row-activated"
-                        (lambda (listbox row)
-                          (declare (ignore listbox))
-                          (message-row-expand row)))
-      (g:application-mark-busy application)
-      (with-open-file (stream (glib-sys:sys-path "resource/list-box-message.txt"))
-        (format t "Loading the messages ... ~%")
-        (do ((msg nil) (row nil)
-             (line (read-line stream nil)
-                   (read-line stream nil)))
-            ((null line))
-          (setf msg (message-new line))
-          (setf row (message-row-new msg))
-          (setf (gtk:widget-visible row) t)
-          (gtk:list-box-append listbox row))
-         (format t "Loading of messages finished~%"))
-      (g:application-unmark-busy application)
-      ;; Present window
-      (gtk:window-present window)))
+                                  :vscrollbar-policy :automatic))
+         (entry (make-instance 'gtk:search-entry)))
+    ;; Configure search entry and filter function
+    (g:signal-connect entry "search-changed"
+                      (lambda (entry)
+                        (declare (ignore entry))
+                        (gtk:list-box-invalidate-filter listbox)))
+    (gtk:list-box-set-filter-func listbox
+        (lambda (row)
+          (let* ((message (message-row-message row))
+                 (text (string-downcase (gtk:editable-text entry))))
+            (or (search text (string-downcase (message-message message)))
+                (search text (string-downcase (message-name message)))
+                (search text (string-downcase (message-nick message)))))))
+    ;; Configure sort function
+    (gtk:list-box-set-sort-func listbox
+        (lambda (row1 row2)
+          (- (message-time (message-row-message row2))
+             (message-time (message-row-message row1)))))
+    (g:signal-connect listbox "row-activated"
+                      (lambda (listbox row)
+                        (declare (ignore listbox))
+                        (message-row-expand row)))
+    ;; Read messages from file
+    (g:application-mark-busy application)
+    (with-open-file (stream (glib-sys:sys-path "resource/list-box-message.txt"))
+      (format t "Loading the messages ...~%")
+      (do ((msg nil) (row nil)
+           (line (read-line stream nil)
+                 (read-line stream nil)))
+          ((null line))
+        (setf msg (message-new line))
+        (setf row (message-row-new msg))
+        (setf (gtk:widget-visible row) t)
+        (gtk:list-box-append listbox row))
+       (format t "Loading of messages finished~%"))
+    (g:application-unmark-busy application)
+    ;; Pack widgets and present window
+    (gtk:box-append vbox entry)
+    (gtk:box-append vbox label)
+    (gtk:box-append vbox scrolled)
+    (gtk:window-present window)))

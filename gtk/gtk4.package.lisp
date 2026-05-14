@@ -3257,8 +3257,6 @@ GtkCellRenderer         GtkWidget
   @begin[Recently Used Documents]{section}
     @begin[GtkRecentInfo]{subsection}
       @about-class{recent-info}
-      @about-function{recent-info-ref}
-      @about-function{recent-info-unref}
       @about-function{recent-info-uri}
       @about-function{recent-info-display-name}
       @about-function{recent-info-description}
@@ -3267,6 +3265,12 @@ GtkCellRenderer         GtkWidget
       @about-function{recent-info-modified}
       @about-function{recent-info-visited}
       @about-function{recent-info-private-hint}
+      @about-function{recent-info-gicon}
+      @about-function{recent-info-short-name}
+      @about-function{recent-info-uri-display}
+      @about-function{recent-info-age}
+      @about-function{recent-info-is-local}
+      @about-function{recent-info-exists}
       @about-function{recent-info-application-info}
       @about-function{recent-info-applications}
       @about-function{recent-info-last-application}
@@ -3274,28 +3278,20 @@ GtkCellRenderer         GtkWidget
       @about-function{recent-info-create-app-info}
       @about-function{recent-info-groups}
       @about-function{recent-info-has-group}
-      @about-function{recent-info-gicon}
-      @about-function{recent-info-short-name}
-      @about-function{recent-info-uri-display}
-      @about-function{recent-info-age}
-      @about-function{recent-info-is-local}
-      @about-function{recent-info-exists}
       @about-function{recent-info-match}
     @end{subsection}
     @begin[GtkRecentManager]{subsection}
-      @about-symbol{recent-data}
       @about-class{recent-manager}
       @about-generic{recent-manager-filename}
       @about-generic{recent-manager-size}
       @about-function{recent-manager-new}
       @about-function{recent-manager-default}
-      @about-function{recent-manager-add-item}
-      @about-function{recent-manager-add-full}
-      @about-function{recent-manager-remove-item}
-      @about-function{recent-manager-lookup-item}
-      @about-function{recent-manager-has-item}
-      @about-function{recent-manager-move-item}
       @about-function{recent-manager-items}
+      @about-function{recent-manager-has-item}
+      @about-function{recent-manager-lookup-item}
+      @about-function{recent-manager-add-item}
+      @about-function{recent-manager-remove-item}
+      @about-function{recent-manager-move-item}
       @about-function{recent-manager-purge-items}
     @end{subsection}
   @end{section}

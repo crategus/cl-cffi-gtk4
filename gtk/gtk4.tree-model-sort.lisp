@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-model-sort 'type)
- "@version{2024-05-09}
+ "@version{2026-05-08}
   @begin{short}
     The @class{gtk:tree-model-sort} object is a model which implements the
     @class{gtk:tree-sortable} interface.
@@ -169,7 +169,7 @@
 (setf (liber:alias-for-function 'tree-model-sort-model)
       "Accessor"
       (documentation 'tree-model-sort-model 'function)
- "@version{2025-09-28}
+ "@version{2026-05-08}
   @syntax{(gtk:tree-model-sort-model object) => model}
   @argument[object]{a @class{gtk:tree-model-sort} object}
   @argument[model]{a @class{gtk:tree-model} child model being sorted}
@@ -194,7 +194,7 @@
 
 (defun tree-model-sort-new-with-model (model)
  #+liber-documentation
- "@version{2024-05-09}
+ "@version{2026-05-08}
   @argument[model]{a @class{gtk:tree-model} object, or @code{nil}}
   @return{The new @class{gtk:tree-model} object.}
   @begin{short}
@@ -220,7 +220,7 @@
                tree-model-sort-convert-child-path-to-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-05-09}
+ "@version{2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -254,12 +254,12 @@
 
 (defun tree-model-sort-convert-child-iter-to-iter (model iter)
  #+liber-documentation
- "@version{#2024-05-09}
+ "@version{2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a valid @class{gtk:tree-iter} instance pointing to a
     row on the child model}
   @begin{return}
-    The valid @class{gtk:tree-iter} iterator to a visible row in the sorted
+    The valid @class{gtk:tree-iter} instance to a visible row in the sorted
     model, or @code{nil}.
   @end{return}
   @begin{short}
@@ -287,7 +287,7 @@
                tree-model-sort-convert-path-to-child-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2024-05-09}
+ "@version{2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -321,11 +321,11 @@
 
 (defun tree-model-sort-convert-iter-to-child-iter (model iter)
  #+liber-documentation
- "@version{#2024-05-09}
+ "@version{2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
-  @argument[iter]{a valid @class{gtk:tree-iter} iterator pointing to a
-    row on @arg{model}}
-  @return{The @class{gtk:tree-iter} iterator.}
+  @argument[iter]{a valid @class{gtk:tree-iter} instance pointing to a row on
+    @arg{model}}
+  @return{The @class{gtk:tree-iter} instance.}
   @begin{short}
     Converts @arg{iter} to point to a row on @arg{model}.
   @end{short}
@@ -349,7 +349,7 @@
 (cffi:defcfun ("gtk_tree_model_sort_reset_default_sort_func"
                tree-model-sort-reset-default-sort-func) :void
  #+liber-documentation
- "@version{#2024-05-09}
+ "@version{#2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @begin{short}
     This resets the default sort function to be in the 'unsorted' state.
@@ -374,16 +374,16 @@
 (cffi:defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
     :void
  #+liber-documentation
- "@version{#2021-03-10}
+ "@version{#2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @begin{short}
     This function should almost never be called. It clears the @arg{model} of
-    any cached iterators that have not been reffed with the function
-    @fun{gtk:tree-model-ref-node}.
+    any cached iterators that have not been reffed with the
+    @fun{gtk:tree-model-ref-node} function.
   @end{short}
   This might be useful if the child model being sorted is static (and does not
   change often) and there has been a lot of unreffed access to nodes. As a side
-  effect of this function, all unreffed iters will be invalid.
+  effect of this function, all unreffed iterators will be invalid.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.
@@ -399,9 +399,9 @@
 (cffi:defcfun ("gtk_tree_model_sort_iter_is_valid"
                tree-model-sort-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{#2026-05-08}
   @argument[model]{a @class{gtk:tree-model-sort} object}
-  @argument[iter]{a @class{gtk:tree-iter} iterator}
+  @argument[iter]{a @class{gtk:tree-iter} instance}
   @begin{return}
     @em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is invalid.
   @end{return}

@@ -38,8 +38,6 @@
 ;;;     GdkDragCancelReason
 ;;;     GdkDragAction
 ;;;
-;;;     GDK_ACTION_ALL
-;;;
 ;;; Accessors
 ;;;
 ;;;     gdk_drag_get_actions
@@ -57,7 +55,6 @@
 ;;;     gdk_drag_get_drag_surface
 ;;;     gdk_drag_set_hotspot
 ;;;     gdk_drag_action_is_unique
-;;;
 ;;;
 ;;; Properties
 ;;;
@@ -98,7 +95,7 @@
 (setf (liber:alias-for-symbol 'drag-cancel-reason)
       "GEnum"
       (liber:symbol-documentation 'drag-cancel-reason)
- "@version{2025-07-26}
+ "@version{2026-05-02}
   @begin{declaration}
 (gobject:define-genum \"GdkDragCancelReason\" drag-cancel-reason
   (:export t
@@ -115,8 +112,8 @@
     @end{simple-table}
   @end{values}
   @begin{short}
-    Used in the @class{gdk:drag} object to the reason of a cancelled DND
-    operation.
+    Used in the @class{gdk:drag} object to the reason of a cancelled Drag and
+    Drop operation.
   @end{short}
   @see-class{gdk:drag}")
 
@@ -137,7 +134,7 @@
 (setf (liber:alias-for-symbol 'drag-action)
       "GFlags"
       (liber:symbol-documentation 'drag-action)
- "@version{2025-11-02}
+ "@version{2026-05-02}
   @begin{declaration}
 (gobject:define-gflags \"GdkDragAction\" drag-action
   (:export t
@@ -166,16 +163,6 @@
   @end{short}
   @see-function{gdk:drag}
   @see-function{gdk:drop}")
-
-;;; ----------------------------------------------------------------------------
-;;; GDK_ACTION_ALL
-;;;
-;;; #define GDK_ACTION_ALL (GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK)
-;;;
-;;; Defines all possible DND actions. This can be used in gdk_drop_status()
-;;; messages when any drop can be accepted or a more specific drop method is
-;;; not yet known.
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDrag
@@ -210,15 +197,16 @@
 
 #+liber-documentation
 (setf (documentation 'drag 'type)
- "@version{2025-07-31}
+ "@version{2026-05-02}
   @begin{short}
-    The @class{gdk:drag} object represents the source of an ongoing DND
-    operation.
+    The @class{gdk:drag} object represents the source of an ongoing Drag and
+    Drop operation.
   @end{short}
-  A @class{gdk:drag} object is created when a drag is started, and stays alive
-  for duration of the DND operation. After a drag has been started with the
-  @fun{gdk:drag-begin} function, the caller gets informed about the status of
-  the ongoing drag operation with signals on the @class{gdk:drag} object.
+  The @class{gdk:drag} object is created when a drag is started, and stays alive
+  for duration of the Drag and Drop operation. After a drag has been started
+  with the @fun{gdk:drag-begin} function, the caller gets informed about the
+  status of the ongoing drag operation with signals on the @class{gdk:drag}
+  object.
 
   GTK provides a higher level abstraction based on top of these functions, and
   so they are not normally needed in GTK applications. See the \"Drag and Drop\"
@@ -283,7 +271,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-actions)
       "Accessor"
       (documentation 'drag-actions 'function)
- "@version{#2025-07-31}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-actions object) => actions}
   @argument[object]{a @class{gdk:drag} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
@@ -306,7 +294,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-content)
       "Accessor"
       (documentation 'drag-content 'function)
- "@version{#2025-09-29}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-content object) => content}
   @argument[object]{a @class{gdk:drag} object}
   @argument[content]{a @class{gdk:content-provider} object associated to
@@ -330,7 +318,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-device)
       "Accessor"
       (documentation 'drag-device 'function)
- "@version{#2025-09-29}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-device object) => device}
   @argument[object]{a @class{gdk:drag} object}
   @argument[device]{a @class{gdk:device} object associated to @arg{object}}
@@ -352,7 +340,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-display)
       "Accessor"
       (documentation 'drag-display 'function)
- "@version{#2025-09-29}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-display object) => display}
   @argument[object]{a @class{gdk:drag} object}
   @argument[display]{a @class{gdk:display} object}
@@ -375,7 +363,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-formats)
       "Accessor"
       (documentation 'drag-formats 'function)
- "@version{#2025-09-29}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-formats object) => formats}
   @argument[object]{a @class{gdk:drag} object}
   @argument[formats]{a @class{gdk:content-formats} object}
@@ -399,7 +387,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-selected-action)
       "Accessor"
       (documentation 'drag-selected-action 'function)
- "@version{#2025-07-31}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-selected-action object) => action}
   @argument[object]{a @class{gdk:drag} object}
   @argument[action]{a @sym{gdk:drag-action} value}
@@ -422,7 +410,7 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-surface)
       "Accessor"
       (documentation 'drag-surface 'function)
- "@version{#2025-09-29}
+ "@version{2026-05-02}
   @syntax{(gdk:drag-surface object) => surface}
   @argument[object]{a @class{gdk:drag} object}
   @argument[surface]{a @class{gdk:surface} object where the drag originates}
@@ -439,7 +427,7 @@ lambda (drag)    :run-last
 
 (cffi:defcfun ("gdk_drag_drop_done" drag-drop-done) :void
  #+liber-documentation
- "@version{#2024-01-07}
+ "@version{2026-05-02}
   @argument[drag]{a @class{gdk:drag} object}
   @argument[success]{a boolean whether the drag was ultimatively successful}
   @begin{short}
@@ -449,9 +437,9 @@ lambda (drag)    :run-last
   animation. This function is called by the drag source, and should be the last
   call before dropping the reference to the drag object.
 
-  The @class{gdk:drag} object will only take the first @fun{gdk:drag-drop-done}
-  function call as effective, if this function is called multiple times, all
-  subsequent calls will be ignored.
+  The @class{gdk:drag} object will only take the first call of this function as
+  effective, if this function is called multiple times, all subsequent calls
+  will be ignored.
   @see-class{gdk:drag}"
   (drag (g:object drag))
   (success :boolean))
@@ -462,20 +450,28 @@ lambda (drag)    :run-last
 ;;; gdk_drag_begin
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_drag_begin" drag-begin) (g:object drag)
+(cffi:defcfun ("gdk_drag_begin" %drag-begin) (g:object drag :return)
+  (surface (g:object surface))
+  (device (g:object device))
+  (content (g:object content-provider))
+  (actions drag-action)
+  (dx :double)
+  (dy :double))
+
+(defun drag-begin (surface device content actions dx dy)
  #+liber-documentation
- "@version{#2025-08-02}
+ "@version{2026-05-02}
   @argument[surface]{a @class{gdk:surface} object for this drag object}
   @argument[device]{a @class{gdk:device} object that controls the drag object}
   @argument[content]{a @class{gdk:content-provider} object for the offered
     content}
   @argument[actions]{a @sym{gdk:drag-action} value for the actions supported
     by this drag object}
-  @argument[dx]{a double float for the x offset to the position of the device
-    where the drag nominally started}
-  @argument[dy]{a double float for the y offset to the position of the device
-    where the drag nominally started}
-  @return{The newly created @class{gdk:drag} object of @code{nil} on error.}
+  @argument[dx]{a number coerced to a double float for the x offset to the
+    position of the device where the drag nominally started}
+  @argument[dy]{a number coerced to a double float for the y offset to the
+    position of the device where the drag nominally started}
+  @return{The newly created @class{gdk:drag} object or @code{nil} on error.}
   @begin{short}
     Starts a drag and creates a new drag context for it.
   @end{short}
@@ -484,7 +480,8 @@ lambda (drag)    :run-last
   @fun{gdk:drag-drag-surface} function.
 
   This function returns a reference to the @class{gdk:drag} object, but GTK
-  keeps its own reference as well, as long as the DND operation is going on.
+  keeps its own reference as well, as long as the Drag and Drop operation is
+  going on.
 
   Note: If @arg{actions} include @val[gdk:drag-action]{:move}, you need to
   listen for the @sig[gdk:drag]{dnd-finished} signal and delete the data at the
@@ -497,12 +494,9 @@ lambda (drag)    :run-last
   @see-symbol{gdk:drag-action}
   @see-function{gdk:drag-drag-surface}
   @see-function{gdk:drag-selected-action}"
-  (surface (g:object surface))
-  (device (g:object device))
-  (content (g:object content-provider))
-  (actions drag-action)
-  (dx :double)
-  (dy :double))
+  (let ((dx (coerce dx 'double-float))
+        (dy (coerce dy 'double-float)))
+    (%drag-begin surface device content actions dx dy)))
 
 (export 'drag-begin)
 
@@ -510,9 +504,9 @@ lambda (drag)    :run-last
 ;;; gdk_drag_get_drag_surface
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_drag_drag_surface" drag-drag-surface) (g:object surface)
+(cffi:defcfun ("gdk_drag_get_drag_surface" drag-drag-surface) (g:object surface)
  #+liber-documentation
- "@version{#2024-01-07}
+ "@version{2026-05-02}
   @argument[drag]{a @class{gdk:drag} object}
   @return{The @class{gdk:surface} object or @code{nil}.}
   @begin{short}
@@ -535,7 +529,7 @@ lambda (drag)    :run-last
 
 (cffi:defcfun ("gdk_drag_set_hotspot" drag-set-hotspot) :void
  #+liber-documentation
- "@version{#2025-08-01}
+ "@version{2026-05-02}
   @argument[drag]{a @class{gdk:drag} object}
   @argument[xhotspot]{an integer for the x coordinate of the drag surface
     hotspot}
@@ -559,7 +553,7 @@ lambda (drag)    :run-last
 
 (cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean
  #+liber-documentation
- "@version{#2025-07-31}
+ "@version{2026-05-02}
   @argument[action]{a @sym{gdk:drag-action} value}
   @return{@em{True} if exactly one action was given.}
   @begin{short}
@@ -568,6 +562,12 @@ lambda (drag)    :run-last
   @end{short}
   When @arg{action} is @code{:none}, that is no action was given, @em{true} is
   returned.
+  @begin{dictionary}
+    @begin{pre}
+(gdk:drag-action-is-unique :move) => T
+(gdk:drag-action-is-unique '(:move :copy)) => NIL
+    @end{pre}
+  @end{dictionary}
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}"
   (action drag-action))

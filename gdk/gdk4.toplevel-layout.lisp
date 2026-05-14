@@ -38,8 +38,8 @@
 ;;; Functions
 ;;;
 ;;;     gdk_toplevel_layout_new
-;;;     gdk_toplevel_layout_ref
-;;;     gdk_toplevel_layout_unref
+;;;     gdk_toplevel_layout_ref                             not needed
+;;;     gdk_toplevel_layout_unref                           not needed
 ;;;     gdk_toplevel_layout_copy
 ;;;     gdk_toplevel_layout_equal
 ;;;     gdk_toplevel_layout_set_maximized
@@ -70,7 +70,7 @@
 (setf (liber:alias-for-class 'toplevel-layout)
       "GBoxed"
       (documentation 'toplevel-layout 'type)
- "@version{2025-09-25}
+ "@version{2026-04-21}
   @begin{declaration}
 (glib:define-gboxed-opaque toplevel-layout \"GdkToplevelLayout\"
   :type-initializer \"gdk_toplevel_layout_get_type\"
@@ -80,8 +80,8 @@
     Toplevel surfaces are sovereign windows that can be presented to the user
     in various states (maximized, on all workspaces, and so on).
   @end{short}
-  The @class{gdk:toplevel-layout} structure contains information that is
-  necessary to do so, and is passed to the @fun{gdk:toplevel-present} function.
+  The @class{gdk:toplevel-layout} structure contains the necessary information
+  to do so and is passed to the @fun{gdk:toplevel-present} function.
   @see-constructor{gdk:toplevel-layout-new}
   @see-constructor{gdk:toplevel-layout-copy}
   @see-class{gdk:toplevel}
@@ -95,10 +95,10 @@
 
 (defun toplevel-layout-new ()
  #+liber-documentation
- "@version{2024-01-09}
+ "@version{2026-04-21}
   @return{The newly created @class{gdk:toplevel-layout} instance.}
   @begin{short}
-    Create a toplevel layout description.
+    Creates a toplevel layout description.
   @end{short}
   Used together with the @fun{gdk:toplevel-present} function to describe how a
   toplevel surface should be placed and behave on-screen.
@@ -127,7 +127,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
      (g:boxed toplevel-layout :return)
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-04-21}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @begin{return}
     The @class{gdk:toplevel-layout} instance for the copy of @arg{layout}.
@@ -147,7 +147,7 @@
 
 (cffi:defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-04-21}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[other]{another @class{gdk:toplevel-layout} instance}
   @begin{return}
@@ -155,7 +155,8 @@
     otherwise @em{false}.
   @end{return}
   @begin{short}
-    Check whether @arg{layout} and @arg{other} have identical layout properties.
+    Checks whether @arg{layout} and @arg{other} have identical layout
+    properties.
   @end{short}
   @see-class{gdk:toplevel-layout}"
   (layout (g:boxed toplevel-layout))
@@ -167,9 +168,6 @@
 ;;; gdk_toplevel_layout_set_maximized
 ;;; gdk_toplevel_layout_get_maximized
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: The implementation is not quiet correct. The return value specifies
-;; whether the layout specifies the maximized state for the toplevel.
 
 (defun (setf toplevel-layout-maximized) (maximized layout)
   (cffi:foreign-funcall "gdk_toplevel_layout_set_maximized"
@@ -185,7 +183,7 @@
 
 (defun toplevel-layout-maximized (layout)
  #+liber-documentation
- "@version{2024-01-09}
+ "@version{2026-04-21}
   @syntax{(gdk:toplevel-layout-maximized layout) => maximized}
   @syntax{(setf (gdk:toplevel-layout-maximized layout) maximized)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
@@ -207,9 +205,6 @@
 ;;; gdk_toplevel_layout_set_fullscreen
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: The implementation is not quiet correct. The return value specifies
-;; whether the layout specifies the fullscreen state for the toplevel.
-
 (defun (setf toplevel-layout-fullscreen) (fullscreen layout monitor)
   (cffi:foreign-funcall "gdk_toplevel_layout_set_fullscreen"
                         (g:boxed toplevel-layout) layout
@@ -225,7 +220,7 @@
 
 (defun toplevel-layout-fullscreen (layout)
  #+liber-documentation
- "@version{2024-01-09}
+ "@version{2026-04-21}
   @syntax{(gdk:toplevel-layout-fullscreen layout) => fullscreen}
   @syntax{(setf (gdk:toplevel-layout-fullscreen layout) fullscreen)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
@@ -250,7 +245,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
                toplevel-layout-fullscreen-monitor) (g:object monitor)
  #+liber-documentation
- "@version{2024-01-09}
+ "@version{2026-04-21}
   @argument[layout]{a @class{gdk:toplevel-layout} object}
   @return{The @class{gdk:monitor} object on which @arg{layout} fullscreens.}
   @begin{short}
@@ -277,7 +272,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
     :boolean
  #+liber-documentation
- "@version{2025-09-25}
+ "@version{2026-04-21}
   @syntax{(gdk:toplevel-layout-resizable layout) => resizable}
   @syntax{(setf (gdk:toplevel-layout-resizable layout) resizable)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}

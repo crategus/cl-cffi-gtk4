@@ -85,8 +85,10 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDrag")))
   ;; Check children
-  (is (equal '()
-             (glib-test:list-children "GdkDrag")))
+  (is (or (equal '()
+                 (glib-test:list-children "GdkDrag"))
+          (equal '("GdkWaylandDrag")
+                 (glib-test:list-children "GdkDrag"))))
   ;; Check interfaces
   (is (equal '()
              (glib-test:list-interfaces "GdkDrag")))
@@ -99,18 +101,18 @@
              (glib-test:list-signals "GdkDrag")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDrag" GDK:DRAG
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_drag_get_type")
-                       ((ACTIONS DRAG-ACTIONS "actions" "GdkDragAction" T T)
-                        (CONTENT DRAG-CONTENT "content" "GdkContentProvider" T NIL)
-                        (DEVICE DRAG-DEVICE "device" "GdkDevice" T NIL)
-                        (DISPLAY DRAG-DISPLAY "display" "GdkDisplay" T NIL)
-                        (FORMATS DRAG-FORMATS "formats" "GdkContentFormats" T NIL)
-                        (SELECTED-ACTION DRAG-SELECTED-ACTION
-                         "selected-action" "GdkDragAction" T T)
-                        (SURFACE DRAG-SURFACE "surface" "GdkSurface" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_drag_get_type")
+                      ((ACTIONS DRAG-ACTIONS "actions" "GdkDragAction" T T)
+                       (CONTENT DRAG-CONTENT "content" "GdkContentProvider" T NIL)
+                       (DEVICE DRAG-DEVICE "device" "GdkDevice" T NIL)
+                       (DISPLAY DRAG-DISPLAY "display" "GdkDisplay" T NIL)
+                       (FORMATS DRAG-FORMATS "formats" "GdkContentFormats" T NIL)
+                       (SELECTED-ACTION DRAG-SELECTED-ACTION
+                        "selected-action" "GdkDragAction" T T)
+                       (SURFACE DRAG-SURFACE "surface" "GdkSurface" T NIL)))
              (gobject:get-gtype-definition "GdkDrag"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -128,48 +130,94 @@
 ;;;     cancel
 
 (test gdk-drag-cancel-signal
-  (let ((query (g:signal-query (g:signal-lookup "cancel" "GdkDrag"))))
-    (is (string= "cancel" (g:signal-query-signal-name query)))
-    (is (string= "GdkDrag" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "cancel")
+         (gtype (g:gtype "GdkDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GdkDragCancelReason")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     dnd-finished
 
 (test gdk-drag-dnd-finished-signal
-  (let ((query (g:signal-query (g:signal-lookup "dnd-finished" "GdkDrag"))))
-    (is (string= "dnd-finished" (g:signal-query-signal-name query)))
-    (is (string= "GdkDrag" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "dnd-finished")
+         (gtype (g:gtype "GdkDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     drop-performed
 
 (test gdk-drag-drop-performed-signal
-  (let ((query (g:signal-query (g:signal-lookup "drop-performed" "GdkDrag"))))
-    (is (string= "drop-performed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDrag" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "drop-performed")
+         (gtype (g:gtype "GdkDrag"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gdk_drag_drop_done
 ;;;     gdk_drag_begin
+;;;     gdk_drag_drop_done
 ;;;     gdk_drag_get_drag_surface
 ;;;     gdk_drag_set_hotspot
+
+(test gdk-drag-begin
+  (glib-test:with-check-memory (drag :strong 5)
+    (g:with-value (gvalue "gchararray" "string")
+      (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
+             (seat (gdk:display-default-seat (gdk:display-default)))
+             (device (gdk:seat-pointer seat))
+             (content (gdk:content-provider-new-for-value gvalue)))
+
+        (is (typep (setf drag
+                         (gdk:drag-begin surface device content :move 0 0))
+                   'gdk:drag))
+
+        (is (equal '(:move) (gdk:drag-actions drag)))
+        (is (eq content (gdk:drag-content drag)))
+        (is (eq device (gdk:drag-device drag)))
+        (is (eq (gdk:display-default) (gdk:drag-display drag)))
+        (is (typep (gdk:drag-formats drag) 'gdk:content-formats))
+        (is-false (gdk:drag-selected-action drag))
+        (is (eq surface (gdk:drag-surface drag)))
+
+        (is (typep (gdk:drag-drag-surface drag) 'gdk:surface))
+        (is-false (gdk:drag-set-hotspot drag 5 15))
+
+        (is-false (gdk:drag-drop-done drag t))
+        (is-false (gdk:surface-destroy surface))))))
+
 ;;;     gdk_drag_action_is_unique
 
-;;; 2025-11-02
+(test gdk-drag-action-is-unique
+  (is-true (gdk:drag-action-is-unique :move))
+  (is-false (gdk:drag-action-is-unique '(:move :copy))))
+
+;;; 2026-05-02

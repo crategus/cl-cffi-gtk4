@@ -67,8 +67,10 @@
 ;;;     enable-search
 ;;;     expression
 ;;;     factory
+;;;     header-factory
 ;;;     list-factory
 ;;;     model
+;;;     search-match-mode
 ;;;     selected
 ;;;     selected-item
 ;;;     show-arrow
@@ -78,8 +80,10 @@
     (is-false (gtk:drop-down-enable-search dropdown))
     (is (cffi:null-pointer-p (gtk:drop-down-expression dropdown)))
     (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
+    (is-false (gtk:drop-down-header-factory dropdown))
     (is-false (gtk:drop-down-list-factory dropdown))
     (is-false (gtk:drop-down-model dropdown))
+    (is (eq :prefix (gtk:drop-down-search-match-mode dropdown)))
     (is (= gtk:+invalid-list-position+ (gtk:drop-down-selected dropdown)))
     (is-false (gtk:drop-down-selected-item dropdown))
     (is-true (gtk:drop-down-show-arrow dropdown))))
@@ -88,28 +92,119 @@
 
 ;;;     activate
 
-(test gtk-drop-down-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkDropDown"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkDropDown" (g:type-name (g:signal-query-owner-type query))))
+(test gtk-drop-down-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkDropDown"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drop_down_new
 
-(test gtk-drop-down-new
-  (is (typep (gtk:drop-down-new nil nil) 'gtk:drop-down)))
+(test gtk-drop-down-new.1
+  (glib-test:with-check-memory (dropdown)
+    (is (typep (setf dropdown (gtk:drop-down-new)) 'gtk:drop-down))))
+
+;; Adds a strong reference for GtkStringObject instance
+
+(test gtk-drop-down-new.2
+  (glib-test:with-check-memory (dropdown model :strong 1)
+    ;; Create model and dropdown
+    (is (typep (setf model
+                     (gtk:string-list-new '("Factory" "Home" "Subway")))
+               'g:list-model))
+    (is (typep (setf dropdown (gtk:drop-down-new model)) 'gtk:drop-down))
+    ;; Check properties
+    (is-false (gtk:drop-down-enable-search dropdown))
+    (is (cffi:null-pointer-p (gtk:drop-down-expression dropdown)))
+    (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
+    (is-false (gtk:drop-down-header-factory dropdown))
+    (is-false (gtk:drop-down-list-factory dropdown))
+    (is (typep (gtk:drop-down-model dropdown) 'gtk:string-list))
+    (is (eq :prefix (gtk:drop-down-search-match-mode dropdown)))
+    (is (= 0 (gtk:drop-down-selected dropdown)))
+    (is (typep (gtk:drop-down-selected-item dropdown) 'gtk:string-object))
+    (is-true (gtk:drop-down-show-arrow dropdown))
+    ;; Get selected item
+    (is (string= "Factory"
+                 (gtk:string-object-string
+                     (gtk:drop-down-selected-item dropdown))))
+    ;; Remove references
+    (is-false (setf (gtk:drop-down-model dropdown) nil))
+    (is-false (setf (gtk:drop-down-factory dropdown) nil))))
+
+;; Adds a strong reference for GtkLabel widget
+
+(test gtk-drop-down-new.3
+  (let (expression)
+    (glib-test:with-check-memory (dropdown model :strong 1)
+      ;; Create model
+      (is (typep (setf model
+                       (g:list-store-new "GObject"))
+                 'g:list-model))
+      ;; Create GListModel
+      (is-false (g:list-store-append model (make-instance 'gtk:label)))
+      (is-false (g:list-store-append model (make-instance 'gtk:button)))
+      (is-false (g:list-store-append model (make-instance 'gtk:text)))
+      ;; Create expression
+      (is (cffi:pointerp (setf expression
+                               (gtk:property-expression-new "GtkWidget" nil "css-name"))))
+      ;; Create dropdown
+      (is (typep (setf dropdown
+                       (gtk:drop-down-new model expression)) 'gtk:drop-down))
+      ;; Check properties
+      (is-false (gtk:drop-down-enable-search dropdown))
+      (is (cffi:pointer-eq expression (gtk:drop-down-expression dropdown)))
+      (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
+      (is-false (gtk:drop-down-header-factory dropdown))
+      (is-false (gtk:drop-down-list-factory dropdown))
+      (is (typep (gtk:drop-down-model dropdown) 'g:list-store))
+      (is (eq :prefix (gtk:drop-down-search-match-mode dropdown)))
+      (is (= 0 (gtk:drop-down-selected dropdown)))
+      (is (typep (gtk:drop-down-selected-item dropdown) 'gtk:label))
+      (is-true (gtk:drop-down-show-arrow dropdown))
+      ;; Remove references
+      (is-false (setf (gtk:drop-down-model dropdown) nil))
+      (is-false (g:list-store-remove-all model))
+      (is-false (setf (gtk:drop-down-factory dropdown) nil)))))
 
 ;;;     gtk_drop_down_new_from_strings
 
-(test gtk-drop-down-new-from-strings
-  (is (typep (gtk:drop-down-new-from-strings '("string1" "string2" "string3"))
-             'gtk:drop-down)))
+;; Adds a strong reference for GtkStringObject instance
 
-;;; 2024-9-19
+(test gtk-drop-down-new-from-strings
+  (glib-test:with-check-memory (dropdown :strong 1)
+    (is (typep (setf dropdown
+                     (gtk:drop-down-new-from-strings "string1" "string2" "string3"))
+               'gtk:drop-down))
+    ;; Check properties
+    (is-false (gtk:drop-down-enable-search dropdown))
+    (is (cffi:null-pointer-p (gtk:drop-down-expression dropdown)))
+    (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
+    (is-false (gtk:drop-down-header-factory dropdown))
+    (is-false (gtk:drop-down-list-factory dropdown))
+    (is (typep (gtk:drop-down-model dropdown) 'gtk:string-list))
+    (is (eq :prefix (gtk:drop-down-search-match-mode dropdown)))
+    (is (= 0 (gtk:drop-down-selected dropdown)))
+    (is (typep (gtk:drop-down-selected-item dropdown) 'gtk:string-object))
+    (is-true (gtk:drop-down-show-arrow dropdown))
+    ;; Get selected item
+    (is (string= "string1"
+                 (gtk:string-object-string
+                     (gtk:drop-down-selected-item dropdown))))
+    ;; Remove references
+    (is-false (setf (gtk:drop-down-model dropdown) nil))
+    (is-false (setf (gtk:drop-down-factory dropdown) nil))))
+
+;;; 2026-04-12

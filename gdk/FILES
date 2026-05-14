@@ -37,7 +37,7 @@ Content from the GDK 4.20 Reference Manual
 
   gdk4.surface.lisp                GdkSurface                        GDK 4.20 .
   gdk4.toplevel-size.lisp          GdkToplevelSize                   GDK 4.20 .
-  gdk4.toplevel-layout.lisp        GdkToplevelLayout                 GDK 4.20 .
+  gdk4.toplevel-layout.lisp        GdkToplevelLayout                 GDK 4.20
   gdk4.toplevel.lisp               GdkToplevel                       GDK 4.20 .
   gdk4.popup-layout.lisp           GdkPopupLayout                    GDK 4.20 .
   gdk4.popup.lisp                  GdkPopup                          GDK 4.20 .
@@ -55,7 +55,7 @@ Content from the GDK 4.20 Reference Manual
   gdk4.content-serializer.lisp     GdkContentSerializer              GDK 4.20 +
   gdk4.content-deserializer.lisp   GdkContentDeserializer            GDK 4.20 +
   gdk4.clipboard.lisp              GdkClipboard                      GDK 4.20 .
-  gdk4.drag.lisp                   GdkDrag                           GDK 4.20 .
+  gdk4.drag.lisp                   GdkDrag                           GDK 4.20
   gdk4.drop.lisp                   GdkDrop                           GDK 4.20 .
   gdk4.drag-surface.lisp           GdkDragSurface                    GDK 4.20 .
 

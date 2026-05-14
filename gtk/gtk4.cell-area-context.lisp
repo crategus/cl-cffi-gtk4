@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area-context 'type)
- "@version{2024-02-21}
+ "@version{2026-05-09}
   @begin{short}
     The @class{gtk:cell-area-context} object is created by a given
     @class{gtk:cell-area} implementation via its @code{create_context()} virtual
@@ -138,7 +138,7 @@
 (setf (liber:alias-for-function 'cell-area-context-area)
       "Accessor"
       (documentation 'cell-area-context-area 'function)
- "@version{2025-09-22}
+ "@version{2026-05-09}
   @syntax{(gtk:cell-area-context-area object) => area}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[area]{a @class{gtk:cell-area} object}
@@ -147,13 +147,9 @@
     @class{gtk:cell-area-context} class returns the cell area the context was
     created by.
   @end{short}
-
   This is generally unneeded by layouting widgets. However it is important for
   the context implementation itself to fetch information about the area it is
-  being used for. For instance at @code{GtkCellAreaContextClass.allocate()}
-  time its important to know details about any cell spacing that the cell area
-  is configured with in order to compute a proper
-  allocation.
+  being used for.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -167,9 +163,7 @@
 (setf (documentation (liber:slot-documentation "minimum-height"
                                                'cell-area-context) t)
  "The @code{minimum-height} property of type @code{:int} (Read) @br{}
-  The minimum height for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-height} function. @br{}
+  The minimum height for the cell area in this context. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -202,9 +196,7 @@
 (setf (documentation (liber:slot-documentation "minimum-width"
                                                'cell-area-context) t)
  "The @code{minimum-width} property of type @code{:int} (Read) @br{}
-  The minimum width for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-width} function. @br{}
+  The minimum width for the cell area in this context. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -237,9 +229,7 @@
 (setf (documentation (liber:slot-documentation "natural-height"
                                                'cell-area-context) t)
  "The @code{natural-height} property of type @code{:int} (Read) @br{}
-  The natural height for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-height} function. @br{}
+  The natural height for the cell area in this context. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -272,9 +262,7 @@
 (setf (documentation (liber:slot-documentation "natural-width"
                                                'cell-area-context) t)
  "The @code{natural-width} property of type @code{:int} (Read) @br{}
-  The natural width for the cell area in this context for all
-  @class{gtk:tree-model} rows that this context was requested for using the
-  @fun{gtk:cell-area-preferred-width} function. @br{}
+  The natural width for the cell area in this context. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 

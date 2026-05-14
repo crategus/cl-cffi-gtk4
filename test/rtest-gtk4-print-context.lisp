@@ -43,7 +43,24 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_print_context_get_cairo_context
+
 ;;;     gtk_print_context_set_cairo_context
+
+;; FIXME: This function does not work!? The call crashes What goes wrong?
+
+#+nil
+(test gtk-print-context-cairo-context
+
+  (glib-test:with-check-memory (context)
+
+    (cairo:with-context-for-image-surface (cr :argb32 200 100)
+
+      (is (typep (setf context
+                       (make-instance 'gtk:print-context)) 'gtk:print-context))
+
+      (is-false (gtk:print-context-set-cairo-context context cr 600 600))
+)))
+
 ;;;     gtk_print_context_get_page_setup
 ;;;     gtk_print_context_get_width
 ;;;     gtk_print_context_get_height
@@ -54,4 +71,4 @@
 ;;;     gtk_print_context_create_pango_layout
 ;;;     gtk_print_context_get_hard_margins
 
-;;; 2024-9-20
+;;; 2026-05-03

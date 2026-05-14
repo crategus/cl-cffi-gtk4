@@ -46,9 +46,12 @@
 ;;;     spacing
 
 (test gtk-cell-area-box-properties
-  (let* ((gtk-init:*warn-deprecated* nil)
-         (box (make-instance 'gtk:cell-area-box)))
-    (is (= 0 (gtk:cell-area-box-spacing box)))))
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (box)
+      (is (typep (setf box (make-instance 'gtk:cell-area-box)) 'gtk:cell-area-box))
+      (is (=  0 (gtk:cell-area-box-spacing box)))
+      (is (= 12 (setf (gtk:cell-area-box-spacing box) 12)))
+      (is (= 12 (gtk:cell-area-box-spacing box))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -56,9 +59,26 @@
 
 (test gtk-cell-area-box-new
   (let ((gtk-init:*warn-deprecated* nil))
-    (is (typep (gtk:cell-area-box-new) 'gtk:cell-area-box))))
+    (glib-test:with-check-memory (box)
+      (is (typep (setf box (gtk:cell-area-box-new)) 'gtk:cell-area-box)))))
 
 ;;;     gtk_cell_area_box_pack_start
 ;;;     gtk_cell_area_box_pack_end
 
-;;; 2024-9-20
+(test gtk-cell-area-box-pack-start/end
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (box renderer1 renderer2)
+      ;; Create area box and renderer
+      (is (typep (setf box (gtk:cell-area-box-new)) 'gtk:cell-area-box))
+      (is (typep (setf renderer1 (gtk:cell-renderer-text-new)) 'gtk:cell-renderer))
+      (is (typep (setf renderer2 (gtk:cell-renderer-text-new)) 'gtk:cell-renderer))
+      ;; Pack renderer in box
+      (is-false (gtk:cell-area-box-pack-start box renderer1))
+      (is-false (gtk:cell-area-box-pack-end box renderer2))
+      (is-true (gtk:cell-area-has-renderer box renderer1))
+      (is-true (gtk:cell-area-has-renderer box renderer2))
+      ;; Remove references
+      (is-false (gtk:cell-area-remove box renderer1))
+      (is-false (gtk:cell-area-remove box renderer2)))))
+
+;;; 2026-05-13

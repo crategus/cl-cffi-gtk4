@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area-box 'type)
- "@version{2025-07-22}
+ "@version{2026-05-13}
   @begin{short}
     The @class{gtk:cell-area-box} object renders cell renderers into a row or a
     column depending on its orientation.
@@ -108,11 +108,7 @@
   @end{dictionary}
   @see-constructor{gtk:cell-area-box-new}
   @see-slot{gtk:cell-area-box-spacing}
-  @see-class{gtk:cell-renderer}
-  @see-symbol{gtk:orientation}
-  @see-function{gtk:cell-area-cell-property}
-  @see-function{gtk:cell-area-box-pack-start}
-  @see-function{gtk:cell-area-box-pack-end}")
+  @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -129,7 +125,7 @@
 (setf (liber:alias-for-function 'cell-area-box-spacing)
       "Accessor"
       (documentation 'cell-area-box-spacing 'function)
- "@version{2025-08-13}
+ "@version{2026-05-13}
   @syntax{(gtk:cell-area-box-spacing object) => spacing}
   @syntax{(setf (gtk:cell-area-box-spacing object) spacing)}
   @argument[object]{a @class{gtk:cell-area-box} object}
@@ -154,7 +150,7 @@
 
 (defun cell-area-box-new ()
  #+liber-documentation
- "@version{2024-02-21}
+ "@version{2026-05-13}
   @return{The newly created @class{gtk:cell-area-box} object.}
   @short{Creates a new cell area box.}
   @begin[Warning]{dictionary}
@@ -180,7 +176,7 @@
 (defun cell-area-box-pack-start (box renderer
                                  &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2024-02-21}
+ "@version{2026-05-13}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
@@ -219,7 +215,7 @@
 (defun cell-area-box-pack-end (box child
                                &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2024-02-21}
+ "@version{2026-05-13}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space

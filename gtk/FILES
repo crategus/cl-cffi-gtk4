@@ -32,7 +32,7 @@ Layout Widgets
   gtk4.center-box.lisp                 GtkCenterBox                  GTK 4.20 .
   gtk4.grid.lisp                       GtkGrid                       GTK 4.20 .
   gtk4.revealer.lisp                   GtkRevealer                   GTK 4.20 .
-  gtk4.list-box.lisp                   GtkListBox                    GTK 4.20 .
+  gtk4.list-box.lisp                   GtkListBox                    GTK 4.20
   gtk4.flow-box.lisp                   GtkFlowBox                    GTK 4.20 .
   gtk4.stack.lisp                      GtkStack                      GTK 4.20 .
   gtk4.stack-switcher.lisp             GtkStackSwitcher              GTK 4.20 .
@@ -208,7 +208,7 @@ Printing
   gtk4.print-operation-preview.lisp    GtkPrintOperationPreview      GTK 4.20 .
   gtk4.print-operation.lisp            GtkPrintOperation             GTK 4.20 .
   gtk4.print-context.lisp              GtkPrintContext               GTK 4.20 .
-  gtk4.print-settings.lisp             GtkPrintSettings              GTK 4.20 .
+  gtk4.print-settings.lisp             GtkPrintSettings              GTK 4.20
   gtk4.paper-size.lisp                 GtkPaperSize                  GTK 4.20 .
   gtk4.page-setup.lisp                 GtkPageSetup                  GTK 4.20 .
   gtk4.printer.lisp                    GtkPrinter                    GTK 4.20 .
@@ -255,7 +255,7 @@ Abstract Base Classes
 
 Recently Used Documents
 
-  gtk4.recent-manager.lisp             GtkRecentManager              GTK 4.20 .
+  gtk4.recent-manager.lisp             GtkRecentManager              GTK 4.20
 
 Gestures and event handling
 
@@ -326,11 +326,11 @@ Deprecated
 
   gtk4.entry-completion.lisp            GtkEntryCompletion           GTK 4.12
 
-  gtk4.tree-model.lisp                  GtkTreeModel                 GTK 4.12
-  gtk4.tree-selection.lisp              GtkTreeSelection             GTK 4.12
-  gtk4.tree-view-column.lisp            GtkTreeViewColumn            GTK 4.12
-  gtk4.tree-view.lisp                   GtkTreeView                  GTK 4.12
-  gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop      GTK 4.12
+  gtk4.tree-model.lisp                  GtkTreeModel                 GTK 4.12 +
+  gtk4.tree-selection.lisp              GtkTreeSelection             GTK 4.12 +
+  gtk4.tree-view-column.lisp            GtkTreeViewColumn            GTK 4.12 +
+  gtk4.tree-view.lisp                   GtkTreeView                  GTK 4.12 +
+  gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop      GTK 4.12 +
 
   gtk4.cell-layout.lisp                 GtkCellLayout                GTK 4.12
   gtk4.cell-view.lisp                   GtkCellView                  GTK 4.12

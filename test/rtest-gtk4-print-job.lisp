@@ -238,11 +238,9 @@
       (let* ((settings (gtk:print-settings-new))
              (setup (gtk:page-setup-new))
              (job (gtk:print-job-new "printjob" printer settings setup)))
-        (is (eq :LEFT-TO-RIGHT-TOP-TO-BOTTOM (gtk:print-job-n-up-layout job)))
-        (is (eq :bottom-to-top-right-to-left
-                (setf (gtk:print-job-n-up-layout job)
-                      :bottom-to-top-right-to-left)))
-        (is (eq :bottom-to-top-right-to-left (gtk:print-job-n-up-layout job)))))))
+        (is (eq :LRTB (gtk:print-job-n-up-layout job)))
+        (is (eq :BTLR (setf (gtk:print-job-n-up-layout job) :BTLR)))
+        (is (eq :BTLR (gtk:print-job-n-up-layout job)))))))
 
 ;;;     gtk_print_job_get_rotate
 ;;;     gtk_print_job_set_rotate
@@ -283,4 +281,4 @@
         (is-true (setf (gtk:print-job-reverse job) t))
         (is-true (gtk:print-job-reverse job))))))
 
-;;; 2025-4-12
+;;; 2026-05-03

@@ -142,7 +142,7 @@
 
 #+liber-documentation
 (setf (documentation 'drop-down 'type)
- "@version{2025-07-25}
+ "@version{2026-04-12}
   @begin{short}
     The @class{gtk:drop-down} widget is a widget that allows the user to choose
     an item from a list of options.
@@ -154,7 +154,12 @@
   The options are given to the @class{gtk:drop-down} widget in the form of a
   @class{g:list-model} object, and how the individual options are represented
   is determined by a @class{gtk:list-item-factory} object. The default factory
-  displays simple strings.
+  displays simple strings, and adds a checkmark to the selected item in the
+  popup.
+
+  To set your own factory, use the @fun{gtk:drop-down-factory} function. It is
+  possible to use a separate factory for the items in the popup, with the
+  @fun{gtk:drop-down-list-factory} function.
 
   The @class{gtk:drop-down} widget knows how to obtain strings from the items
   in a @class{gtk:string-list} object. For other models, you have to provide an
@@ -164,6 +169,8 @@
   The @class{gtk:drop-down} widget can optionally allow search in the popup,
   which is useful if the list of options is long. To enable the search entry,
   use the @fun{gtk:drop-down-enable-search} function.
+
+  To learn more about the list widget framework, see the List Widget overview.
   @begin[Examples]{dictionary}
     This is a UI definition example for @class{gtk:drop-down} widget with a
     simple model:
@@ -180,10 +187,15 @@
   </property>
 </object>
     @end{pre}
+    If a @class{gtk:drop-down} widget is created in this manner, or with the
+    @fun{gtk:drop-down-new-from-strings} function, for instance, the object
+    returned from the @fun{gtk:drop-down-selected-item} function will be a
+    @class{gtk:string-object} object.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:drop-down} implementation has a single CSS node with name
-    @code{dropdown}, with the button and popover nodes as children.
+    @code{dropdown}, with the @code{button} and @code{popover} nodes as
+    children.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:drop-down} implementation uses the
@@ -198,9 +210,9 @@ lambda (dropdown)    :action
       @begin[code]{simple-table}
         @entry[dropdown]{The @class{gtk:drop-down} widget.}
       @end{simple-table}
-      The signal is an action signal and emitting it causes the drop down to
-      pop up its dropdown. The default handler is called before the handlers.
-      Since 4.6
+      The signal is an action signal. Emitting it causes the popup to appear.
+      The default handler is invoked before any handlers added using the
+      @fun{g:signal-connect} function. Since 4.6
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:drop-down-new}
@@ -215,7 +227,9 @@ lambda (dropdown)    :action
   @see-slot{gtk:drop-down-selected}
   @see-slot{gtk:drop-down-selected-item}
   @see-slot{gtk:drop-down-show-arrow}
-  @see-class{gtk:combo-box}")
+  @see-class{g:list-model}
+  @see-class{gtk:list-item-factory}
+  @see-class{gtk:string-list}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -234,7 +248,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-enable-search)
       "Accessor"
       (documentation 'drop-down-enable-search 'function)
- "@version{2024-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-enable-search object) => setting}
   @syntax{(setf (gtk:drop-down-enable-search object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -244,7 +258,6 @@ lambda (dropdown)    :action
     @class{gtk:drop-down} class gets or sets whether a search entry will be
     shown in the popup that allows to search for items in the list.
   @end{short}
-
   Note that the @slot[gtk:drop-down]{expression} property must be set for
   search to work.
   @see-class{gtk:drop-down}
@@ -259,23 +272,30 @@ lambda (dropdown)    :action
   The expression to evaluate to obtain strings to match against the search term
   See the @slot[gtk:drop-down]{enable-search} property. If the
   @slot[gtk:drop-down]{factory} property is not set, the expression is also
-  used to bind strings to labels produced by a default factory.")
+  used to bind strings to labels produced by a default factory. @br{}
+  Default value: @code{NULL}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-down-expression)
       "Accessor"
       (documentation 'drop-down-expression 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-expression object) => expression}
   @syntax{(setf (gtk:drop-down-expression object) expression)}
   @argument[object]{a @class{gtk:drop-down} widget}
-  @argument[expression]{a @class{gtk:expression} object, or @code{nil}}
+  @argument[expression]{a @class{gtk:expression} object, or the
+    @code{NULL} pointer}
   @begin{short}
     The accessor for the @slot[gtk:drop-down]{expression} slot of the
     @class{gtk:drop-down} class gets or sets the expression that gets evaluated
     to obtain strings from items when searching in the popup.
   @end{short}
-  The expression must have a value type of \"gchararray\".
+  The expression must have a value of @code{\"gchararray\"} type.
+  @begin[Notes]{dictionary}
+    The expression is represented as a foreign pointer. Use the
+    @code{(cffi:null-pointer)} function to retrieve the @code{NULL} pointer
+    representation.
+  @end{dictionary}
   @see-class{gtk:drop-down}
   @see-class{gtk:expression}")
 
@@ -291,7 +311,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-factory)
       "Accessor"
       (documentation 'drop-down-factory 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-factory object) => factory}
   @syntax{(setf (gtk:drop-down-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -302,12 +322,12 @@ lambda (dropdown)    :action
     @class{gtk:drop-down} class gets or sets the factory that is used to
     populate list items.
   @end{short}
-  The @fun{gtk:drop-down-factory} function gets
   The factory is always used for the item in the button. It is also used for
   items in the popup if the @slot[gtk:drop-down]{list-factory} property is not
   set.
   @see-class{gtk:drop-down}
-  @see-class{gtk:list-item-factory}")
+  @see-class{gtk:list-item-factory}
+  @see-function{gtk:drop-down-list-factory}")
 
 ;;; --- gtk:drop-down-header-factory -------------------------------------------
 
@@ -317,11 +337,11 @@ lambda (dropdown)    :action
   (Read / Write) @br{}
   The factory for creating header widgets for the popup. Since 4.12")
 
-#+liber-documentation
+#+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'drop-down-header-factory)
       "Accessor"
       (documentation 'drop-down-header-factory 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-header-factory object) => factory}
   @syntax{(setf (gtk:drop-down-header-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -350,7 +370,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-list-factory)
       "Accessor"
       (documentation 'drop-down-list-factory 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-list-factory object) => factory}
   @syntax{(setf (gtk:drop-down-list-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -375,7 +395,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-model)
       "Accessor"
       (documentation 'drop-down-model 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-model object) => model}
   @syntax{(setf (gtk:drop-down-model object) model)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -395,13 +415,14 @@ lambda (dropdown)    :action
                                                'drop-down) t)
  "The @code{search-match-mode} property of type
   @sym{gtk:string-filter-match-mode} (Read / Write) @br{}
-  The match mode for the search filter. Since 4.12")
+  The match mode for the search filter. Since 4.12 @br{}
+  Default value: @val[gtk:string-filter-match-mode]{:prefix}")
 
-#+liber-documentation
+#+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'drop-down-search-match-mode)
       "Accessor"
       (documentation 'drop-down-search-match-mode 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-search-match-mode object) => mode}
   @syntax{(setf (gtk:drop-down-search-match-mode object) mode)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -429,7 +450,7 @@ lambda (dropdown)    :action
 (setf (liber:alias-for-function 'drop-down-selected)
       "Accessor"
       (documentation 'drop-down-selected 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-selected object) => selected}
   @syntax{(setf (gtk:drop-down-selected object) selected)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -440,20 +461,21 @@ lambda (dropdown)    :action
     The accessor for the @slot[gtk:drop-down]{selected} slot of the
     @class{gtk:drop-down} class gets or sets the position of the selected item.
   @end{short}
-  @see-class{gtk:drop-down}")
+  @see-class{gtk:drop-down}
+  @see-variable{gtk:+invalid-list-position+}")
 
 ;;; --- gtk:drop-down-selected-item --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected-item" 'drop-down) t)
  "The @code{selected-item} property of type @class{g:object} (Read) @br{}
-  The selecte item.")
+  The selected item.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-down-selected-item)
       "Accessor"
       (documentation 'drop-down-selected-item 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-selected-item object) => item}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[item]{a @class{g:object} instance for the selected item}
@@ -469,14 +491,14 @@ lambda (dropdown)    :action
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "show-arrow" 'drop-down) t)
  "The @code{show-arrow} property of type @code{:boolean} (Read / Write) @br{}
-  Whether to show an arrow within the GtkDropDown widget. Since 4.6 @br{}
+  Whether to show an arrow within the dropdown. Since 4.6 @br{}
   Default value: @em{true}")
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-function 'drop-down-show-arrow)
       "Accessor"
       (documentation 'drop-down-show-arrow 'function)
- "@version{2025-09-29}
+ "@version{2026-04-12}
   @syntax{(gtk:drop-down-show-arrow object) => setting}
   @syntax{(setf (gtk:drop-down-show-arrow object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
@@ -498,12 +520,13 @@ lambda (dropdown)    :action
   (model (g:object g:list-model))
   (expression expression))
 
-(defun drop-down-new (model expression)
+(defun drop-down-new (&optional model expression)
  #+liber-documentation
- "@version{2024-08-16}
-  @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
-  @argument[expression]{a @class{gtk:expression} instance to use, or @code{nil}
-    for none}
+ "@version{2026-04-12}
+  @argument[model]{an optional @class{g:list-model} object to use, or the
+    @code{nil} default value for none}
+  @argument[expression]{an optional @class{gtk:expression} instance to use, or
+    the @code{nil} default value for none}
   @return{The new @class{gtk:drop-down} widget.}
   @begin{short}
     Creates a new @class{gtk:drop-down} widget.
@@ -512,7 +535,8 @@ lambda (dropdown)    :action
   to map its items to widgets.
   @see-class{gtk:drop-down}
   @see-function{gtk:drop-down-factory}"
-  (let ((expression (or expression (cffi:null-pointer))))
+  (let ((expression (or expression (cffi:null-pointer)))
+        (model (when model (g:object-ref model))))
     (%drop-down-new model expression)))
 
 (export 'drop-down-new)
@@ -521,18 +545,24 @@ lambda (dropdown)    :action
 ;;; gtk_drop_down_new_from_strings
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_drop_down_new_from_strings" drop-down-new-from-strings)
+(cffi:defcfun ("gtk_drop_down_new_from_strings" %drop-down-new-from-strings)
     (g:object widget)
+  (strings g:strv-t))
+
+(defun drop-down-new-from-strings (&rest strings)
  #+liber-documentation
- "@version{2024-01-10}
-  @argument[strings]{a list of strings to put in the dropdown}
+ "@version{2026-04-26}
+  @argument[strings]{strings to put in the dropdown}
   @return{The new @class{gtk:drop-down} widget.}
   @begin{short}
     Creates a new dropdown widget that is populated with the strings in
     @arg{strings}.
   @end{short}
+  Each @arg{strings} argument can be a string, a list of strings or a nested
+  list of strings. If no arguments are provided, an empty drop down is
+  created.
   @see-class{gtk:drop-down}"
-  (strings g:strv-t))
+  (funcall #'%drop-down-new-from-strings (glib-sys:flatten strings)))
 
 (export 'drop-down-new-from-strings)
 

@@ -153,7 +153,19 @@
   font)
 
 (defun begin-print (operation context data)
+
   (format t "in BEGIN-PRINT~%")
+  (format t "     context : ~a~%" context)
+  (format t "          cr : ~a~%" (gtk:print-context-cairo-context context))
+  (format t "  page-setup : ~a~%" (gtk:print-context-page-setup context))
+  (format t "       width : ~a~%" (gtk:print-context-width context))
+  (format t "      height : ~a~%" (gtk:print-context-height context))
+  (format t "        xdpi : ~a~%" (gtk:print-context-dpi-x context))
+  (format t "        ydpi : ~a~%" (gtk:print-context-dpi-y context))
+  (format t "     fontmap : ~a~%" (gtk:print-context-pango-fontmap context))
+  (format t "     margins : ~a~%" (multiple-value-list
+                                      (gtk:print-context-hard-margins context)))
+
   (let* ((width (gtk:print-context-width context))
          (height (gtk:print-context-height context))
          (layout (setf (print-data-layout data)

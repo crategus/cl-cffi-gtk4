@@ -70,7 +70,7 @@
 
 #+liber-documentation
 (setf (documentation 'print-context 'type)
- "@version{2025-07-24}
+ "@version{2026-04-22}
   @begin{short}
     The @class{gtk:print-context} object encapsulates context information that
     is required when drawing pages for printing, such as the Cairo context and
@@ -84,8 +84,8 @@
   @sig[gtk:print-operation]{request-page-setup} and
   @sig[gtk:print-operation]{draw-page} signal handlers on the print operation.
   @begin[Examples]{dictionary}
-    Using the @class{gtk:print-context} object in a @code{draw-page} callback
-    function.
+    Using the @class{gtk:print-context} object in a
+    @sig[gtk:print-operation]{draw-page} callback function.
     @begin{pre}
 (defun draw-page (operation context pagenr)
   (declare (ignore operation pagenr))
@@ -129,7 +129,7 @@
 (cffi:defcfun ("gtk_print_context_get_cairo_context"
                print-context-cairo-context) (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @begin{return}
     The @sym{cairo:context-t} instance for the Cairo context of @arg{context}.
@@ -148,6 +148,8 @@
 ;;; gtk_print_context_set_cairo_context
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: This function does not work!? What goes wrong?
+
 (cffi:defcfun ("gtk_print_context_set_cairo_context"
                %print-context-set-cairo-context) :void
   (context (g:object print-context))
@@ -157,7 +159,7 @@
 
 (defun print-context-set-cairo-context (context cr xdpi ydpi)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @argument[cr]{a @sym{cairo:context-t} instance for the Cairo context}
   @argument[xdpi]{a number coerced to a double float for the horizontal
@@ -187,7 +189,7 @@
 (cffi:defcfun ("gtk_print_context_get_page_setup" print-context-page-setup)
     (g:object page-setup)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @begin{return}
     The @class{gtk:page-setup} object for the page setup of the print context.
@@ -208,7 +210,7 @@
 
 (cffi:defcfun ("gtk_print_context_get_width" print-context-width) :double
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The double float for the width of @arg{context}.}
   @begin{short}
@@ -226,7 +228,7 @@
 
 (cffi:defcfun ("gtk_print_context_get_height" print-context-height) :double
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The double float for the height of @arg{context}.}
   @begin{short}
@@ -244,7 +246,7 @@
 
 (cffi:defcfun ("gtk_print_context_get_dpi_x" print-context-dpi-x) :double
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The double float for the horizontal resolution of @arg{context}.}
   @begin{short}
@@ -262,7 +264,7 @@
 
 (cffi:defcfun ("gtk_print_context_get_dpi_y" print-context-dpi-y) :double
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The double float for the vertical resolution of @arg{context}.}
   @begin{short}
@@ -281,7 +283,7 @@
 (cffi:defcfun ("gtk_print_context_get_pango_fontmap"
                print-context-pango-fontmap) (g:object pango:font-map)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The @class{pango:font-map} object for the font map of @arg{context}.}
   @begin{short}
@@ -300,7 +302,7 @@
 (cffi:defcfun ("gtk_print_context_create_pango_context"
                print-context-create-pango-context) (g:object pango:context)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @begin{return}
     The new @class{pango:context} object with the Pango context for
@@ -322,7 +324,7 @@
 (cffi:defcfun ("gtk_print_context_create_pango_layout"
                print-context-create-pango-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{2024-02-16}
+ "@version{2026-04-22}
   @argument[context]{a @class{gtk:print-context} object}
   @return{The new @class{pango:layout} object for @arg{context}.}
   @begin{short}
@@ -348,7 +350,7 @@
 
 (defun print-context-hard-margins (context)
  #+liber-documentation
- "@version{#2025-08-04}
+ "@version{2026-04-22}
   @syntax{(gtk:print-context-hard-margins context) => top, bottom, left, right}
   @argument[context]{a @class{gtk:print-context} object}
   @argument[top]{an integer for the top hardware printer margin}
@@ -360,11 +362,11 @@
   @end{short}
   @see-class{gtk:print-context}"
   (cffi:with-foreign-objects ((top :int) (bottom :int) (left :int) (right :int))
-    (%print-context-hard-margins context top bottom left right)
-    (values (cffi:mem-ref top :int)
-            (cffi:mem-ref bottom :int)
-            (cffi:mem-ref left :int)
-            (cffi:mem-ref right :int))))
+    (when (%print-context-hard-margins context top bottom left right)
+      (values (cffi:mem-ref top :int)
+              (cffi:mem-ref bottom :int)
+              (cffi:mem-ref left :int)
+              (cffi:mem-ref right :int)))))
 
 (export 'print-context-hard-margins)
 

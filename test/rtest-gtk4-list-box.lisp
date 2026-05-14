@@ -46,17 +46,17 @@
   (is (eq :list-item (gtk:widget-class-accessible-role "GtkListBoxRow")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListBoxRow" GTK:LIST-BOX-ROW
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkActionable" "GtkBuildable"
-                         "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_list_box_row_get_type")
-                       ((ACTIVATABLE LIST-BOX-ROW-ACTIVATABLE
-                         "activatable" "gboolean" T T)
-                        (CHILD LIST-BOX-ROW-CHILD "child" "GtkWidget" T T)
-                        (SELECTABLE LIST-BOX-ROW-SELECTABLE
-                         "selectable" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkActionable" "GtkBuildable"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_list_box_row_get_type")
+                      ((ACTIVATABLE LIST-BOX-ROW-ACTIVATABLE
+                        "activatable" "gboolean" T T)
+                       (CHILD LIST-BOX-ROW-CHILD "child" "GtkWidget" T T)
+                       (SELECTABLE LIST-BOX-ROW-SELECTABLE
+                        "selectable" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkListBoxRow"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -82,7 +82,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-list-box-row-properties
-  (let ((row (make-instance 'gtk:list-box-row)))
+  (glib-test:with-check-memory (row)
+    (is (typep (setf row (make-instance 'gtk:list-box-row)) 'gtk:list-box-row))
     (is-true (gtk:list-box-row-activatable row))
     (is-false (gtk:list-box-row-child row))
     (is-true (gtk:list-box-row-selectable row))))
@@ -92,13 +93,15 @@
 ;;;     gtk_list_box_row_new
 
 (test gtk-list-box-row-new
-  (is (typep (gtk:list-box-row-new) 'gtk:list-box-row)))
+  (glib-test:with-check-memory (row)
+    (is (typep (setf row (gtk:list-box-row-new)) 'gtk:list-box-row))))
 
 ;;;     gtk_list_box_row_changed
 ;;;     gtk_list_box_row_is_selected
 
 (test gtk-list-box-row-changed/is-selected
-  (let ((row (make-instance 'gtk:list-box-row)))
+  (glib-test:with-check-memory (row)
+    (is (typep (setf row (make-instance 'gtk:list-box-row)) 'gtk:list-box-row))
     (is-false (gtk:list-box-row-changed row))
     (is-false (gtk:list-box-row-is-selected row))))
 
@@ -106,8 +109,9 @@
 ;;;     gtk_list_box_row_set_header
 
 (test gtk-list-box-row-header
-  (let ((row (gtk:list-box-row-new))
-        (box (gtk:box-new)))
+  (glib-test:with-check-memory (row box)
+    (is (typep (setf row (gtk:list-box-row-new)) 'gtk:list-box-row))
+    (is (typep (setf box (gtk:box-new)) 'gtk:box))
     (is-false (gtk:list-box-row-header row))
     (is (eq box (setf (gtk:list-box-row-header row) box)))
     (is (eq box (gtk:list-box-row-header row)))
@@ -115,9 +119,33 @@
 
 ;;;     gtk_list_box_row_get_index
 
-(test gtk-list-box-row-index
-  (let ((row (gtk:list-box-row-new)))
+(test gtk-list-box-row-index.1
+  (glib-test:with-check-memory (row)
+    (is (typep (setf row (gtk:list-box-row-new)) 'gtk:list-box-row))
     (is (= -1 (gtk:list-box-row-index row)))))
+
+(test gtk-list-box-row-index.2
+  (glib-test:with-check-memory (listbox row1 row2 row3)
+    ;; Create GtkListbox and GtkListBoxRow
+    (is (typep (setf listbox (gtk:list-box-new)) 'gtk:list-box))
+    (is (typep (setf row1 (gtk:list-box-row-new)) 'gtk:list-box-row))
+    (is (typep (setf row2 (gtk:list-box-row-new)) 'gtk:list-box-row))
+    (is (typep (setf row3 (gtk:list-box-row-new)) 'gtk:list-box-row))
+    ;; Append rows
+    (is-false (gtk:list-box-append listbox row1))
+    (is-false (gtk:list-box-append listbox row2))
+    (is-false (gtk:list-box-append listbox row3))
+    ;; Get index
+    (is (= 0 (gtk:list-box-row-index row1)))
+    (is (= 1 (gtk:list-box-row-index row2)))
+    (is (= 2 (gtk:list-box-row-index row3)))
+    ;; Remove row2
+    (is-false (gtk:list-box-remove listbox row2))
+    (is (=  0 (gtk:list-box-row-index row1)))
+    (is (= -1 (gtk:list-box-row-index row2)))
+    (is (=  1 (gtk:list-box-row-index row3)))
+    ;; Remove references
+    (is-false (gtk:list-box-remove-all listbox))))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -158,20 +186,20 @@
   (is (eq :list (gtk:widget-class-accessible-role "GtkListBox")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkListBox" GTK:LIST-BOX
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_list_box_get_type")
-                       ((ACCEPT-UNPAIRED-RELEASE LIST-BOX-ACCEPT-UNPAIRED-RELEASE
-                         "accept-unpaired-release" "gboolean" T T)
-                        (ACTIVATE-ON-SINGLE-CLICK
-                         LIST-BOX-ACTIVATE-ON-SINGLE-CLICK
-                         "activate-on-single-click" "gboolean" T T)
-                        (SELECTION-MODE LIST-BOX-SELECTION-MODE
-                         "selection-mode" "GtkSelectionMode" T T)
-                        (SHOW-SEPARATORS LIST-BOX-SHOW-SEPARATORS
-                         "show-separators" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_list_box_get_type")
+                      ((ACCEPT-UNPAIRED-RELEASE LIST-BOX-ACCEPT-UNPAIRED-RELEASE
+                        "accept-unpaired-release" "gboolean" T T)
+                       (ACTIVATE-ON-SINGLE-CLICK
+                        LIST-BOX-ACTIVATE-ON-SINGLE-CLICK
+                        "activate-on-single-click" "gboolean" T T)
+                       (SELECTION-MODE LIST-BOX-SELECTION-MODE
+                        "selection-mode" "GtkSelectionMode" T T)
+                       (SHOW-SEPARATORS LIST-BOX-SHOW-SEPARATORS
+                        "show-separators" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkListBox"))))
 
 #+gtk-4-18
@@ -377,11 +405,13 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-list-box-properties
-  (let ((listbox (make-instance 'gtk:list-box)))
+  (glib-test:with-check-memory (listbox)
+    (is (typep (setf listbox (make-instance 'gtk:list-box)) 'gtk:list-box))
     (is-false (gtk:list-box-accept-unpaired-release listbox))
     (is-true (gtk:list-box-activate-on-single-click listbox))
     (is (eq :single (gtk:list-box-selection-mode listbox)))
-    (is-false (gtk:list-box-show-separators listbox))))
+    (is-false (gtk:list-box-show-separators listbox))
+    (is (eq :all (gtk:list-box-tab-behavior listbox)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -672,13 +702,13 @@
     (is (= 1 (g:object-ref-count widget2)))
     (is (= 1 (g:object-ref-count widget3)))))
 
-;;;     GtkListBoxUpdateHeaderFunc
-;;;     gtk_list_box_set_header_func
-;;;     gtk_list_box_invalidate_headers
-
 ;;;     GtkListBoxFilterFunc
 ;;;     gtk_list_box_set_filter_func
 ;;;     gtk_list_box_invalidate_filter
+
+;;;     GtkListBoxUpdateHeaderFunc
+;;;     gtk_list_box_set_header_func
+;;;     gtk_list_box_invalidate_headers
 
 ;;;     GtkListBoxSortFunc
 ;;;     gtk_list_box_set_sort_func
@@ -690,4 +720,34 @@
 ;;;     GtkListBoxCreateWidgetFunc
 ;;;     gtk_list_box_bind_model
 
-;;; 2025-4-26
+(test gtk-list-box-bind-model
+  (glib-test:with-check-memory (listbox model row :strong 3)
+    (is (typep (setf listbox (gtk:list-box-new)) 'gtk:list-box))
+    (is (typep (setf model
+                     (gtk:string-list-new "Factory" "Home" "Subway"))
+               'gtk:string-list))
+    (is-false (gtk:list-box-bind-model listbox model
+                  (lambda (item)
+                    (gtk:label-new (gtk:string-object-string item)))))
+    ;; Check reference count for row and child
+    (is (typep (setf row (gtk:list-box-row-at-index listbox 0)) 'gtk:list-box-row))
+    (is (= 2 (g:object-ref-count row)))
+    (is (= 2 (g:object-ref-count (gtk:list-box-row-child row))))
+    ;; Retrieve string from first label
+    (is (typep (setf row (gtk:list-box-row-at-index listbox 0)) 'gtk:list-box-row))
+    (is (typep (gtk:list-box-row-child row) 'gtk:label))
+    (is (string= "Factory" (gtk:label-label (gtk:list-box-row-child row))))
+    ;; Retrieve string from second label
+    (is (typep (setf row (gtk:list-box-row-at-index listbox 1)) 'gtk:list-box-row))
+    (is (typep (gtk:list-box-row-child row) 'gtk:label))
+    (is (string= "Home" (gtk:label-label (gtk:list-box-row-child row))))
+    ;; Retrieve string from third label
+    (is (typep (setf row (gtk:list-box-row-at-index listbox 2)) 'gtk:list-box-row))
+    (is (typep (gtk:list-box-row-child row) 'gtk:label))
+    (is (string= "Subway" (gtk:label-label (gtk:list-box-row-child row))))
+    ;; Remove references
+    (is-false (gtk:string-list-splice model 0 3))
+    (is-false (gtk:list-box-bind-model listbox nil nil))
+    (is (= 0 (gtk:string-list-n-items model)))))
+
+;;; 2026-05-01

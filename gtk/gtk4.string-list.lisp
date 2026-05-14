@@ -44,6 +44,7 @@
 ;;;     gtk_string_list_remove
 ;;;     gtk_string_list_splice
 ;;;     gtk_string_list_get_string
+;;;     gtk_string_list_find                                Since 4.18
 ;;;
 ;;;     gtk_string_object_new
 ;;;     gtk_string_object_get_string
@@ -182,14 +183,15 @@
 
 #+liber-documentation
 (setf (documentation 'string-list 'type)
- "@version{2025-03-29}
+ "@version{2026-04-26}
   @begin{short}
     The @class{gtk:string-list} class is a list model that wraps an array of
     strings.
   @end{short}
-  The objects in the model have a @slot[gtk:string-object]{string} property. The
-  @class{gtk:string-list} object is well-suited for any place where you would
-  typically use a string, but need a list model.
+  The objects in the model are of @class{gtk:string-object} type and have a
+  @slot[gtk:string-object]{string} property that can be used inside expressions.
+  The @class{gtk:string-list} object is well-suited for any place where you
+  would typically use a string, but need a list model.
   @begin[GtkStringList as GtkBuildable]{dictionary}
     The @class{gtk:string-list} implementation of the @class{gtk:buildable}
     interface supports adding items directly using the @code{<items>} element
@@ -298,24 +300,38 @@
 ;;; gtk_string_list_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_string_list_new" string-list-new)
+(cffi:defcfun ("gtk_string_list_new" %string-list-new)
     (g:object string-list :return)
+  (strings g:strv-t))
+
+(defun string-list-new (&rest strings)
  #+liber-documentation
- "@version{2025-03-29}
-  @argument[strings]{a list of strings to put in the model}
+ "@version{2026-04-26}
+  @argument[strings]{strings to put in the model}
   @return{The new @class{gtk:string-list} object.}
   @begin{short}
     Creates a new string list with the given @arg{strings}.
   @end{short}
+  Each @arg{strings} argument can be a string, a list of strings or a nested
+  list of strings. If no arguments are provided, an empty string list is
+  created.
   @begin[Examples]{dictionary}
     @begin{pre}
+(gtk:string-list-new \"Factory\" \"Home\" \"Subway\")
+=> #<GTK:STRING-LIST {100536C373@}>
+(gtk:string-list-new \"Factory\" '(\"Home\" \"Subway\"))
+=>#<GTK:STRING-LIST {100536C773@}>
 (gtk:string-list-new '(\"Factory\" \"Home\" \"Subway\"))
 => #<GTK:STRING-LIST {1003E7BC63@}>
 (gtk:string-list-string * 0) => \"Factory\"
     @end{pre}
+    If no arguments are provided, an emtpy string list is created:
+    @begin{pre}
+(gtk:string-list-n-items (gtk:string-list-new)) => 0
+    @end{pre}
   @end{dictionary}
   @see-class{gtk:string-list}"
-  (strings g:strv-t))
+  (funcall #'%string-list-new (glib-sys:flatten strings)))
 
 (export 'string-list-new)
 
@@ -372,21 +388,23 @@
   (n :uint)
   (additions g:strv-t))
 
-(defun string-list-splice (model pos n additions)
+(defun string-list-splice (model pos n &rest additions)
  #+liber-documentation
- "@version{2025-07-23}
+ "@version{2026-04-26}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[pos]{an unsigned integer for the position at which to make the
     change}
   @argument[n]{an unsigned integer for the number of strings to remove}
-  @argument[additions]{a list of strings to add}
+  @argument[additions]{strings to add}
   @begin{short}
     Changes the string list by removing @arg{n} strings and adding
     @arg{additions} to it.
   @end{short}
-  This function is more efficient than the @fun{gtk:string-list-append}
-  function and the @fun{gtk:string-list-remove} function, because it only emits
-  the @sig[g:list-model]{items-changed} signal once for the change.
+  Each @arg{additions} argument can be a string, a list of strings or a nested
+  list of strings. This function is more efficient than the
+  @fun{gtk:string-list-append} function and the @fun{gtk:string-list-remove}
+  function, because it only emits the @sig[g:list-model]{items-changed} signal
+  once for the change.
 
   The @arg{pos} and @arg{n} parameters must be correct, that is,
   @arg{pos} + @arg{n} must be less than or equal to the length of the string
@@ -394,7 +412,7 @@
   @see-class{gtk:string-list}
   @see-function{gtk:string-list-append}
   @see-function{gtk:string-list-remove}"
-  (%string-list-splice model pos n additions))
+  (funcall #'%string-list-splice model pos n (glib-sys:flatten additions)))
 
 (export 'string-list-splice)
 
@@ -427,14 +445,15 @@
 
 #+gtk-4-18
 (cffi:defcfun ("gtk_string_list_find" string-list-find) :uint
- "@version{#2025-07-27}
+ "@version{2026-04-26}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[string]{a string to find}
   @return{The unsigned integer for the position of the string.}
   @begin{short}
     Gets the position of the string in @arg{model}.
   @end{short}
-  If @arg{model} does not contain @arg{string}, @code{G_MAXUINT} is returned.
+  If @arg{model} does not contain @arg{string}, then @code{G_MAXUINT} is
+  returned, which is the @code{#xffffffff} value.
 
   Since 4.18
   @see-class{gtk:string-list}"

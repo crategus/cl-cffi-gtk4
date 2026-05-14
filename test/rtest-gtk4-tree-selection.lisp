@@ -41,6 +41,26 @@
                         "mode" "GtkSelectionMode" T T)))
              (gobject:get-gtype-definition "GtkTreeSelection"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     changed
+
+(test gtk-tree-selection-changed-signal
+  (let* ((name "changed")
+         (gtype (g:gtype "GtkTreeSelection"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-tree-selection-properties
@@ -48,10 +68,6 @@
     (glib-test:with-check-memory (selection)
       (setf selection (make-instance 'gtk:tree-selection))
       (is (eq :single (gtk:tree-selection-mode selection))))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     changed
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -87,4 +103,4 @@
 ;;;     gtk_tree_selection_select_range
 ;;;     gtk_tree_selection_unselect_range
 
-;;; 2024-12-24
+;;; 2026-05-13

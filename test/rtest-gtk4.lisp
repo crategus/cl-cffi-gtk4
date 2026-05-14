@@ -190,9 +190,7 @@ sem venenatis, vitae ultricies arcu laoreet."))
 ;;; ----------------------------------------------------------------------------
 
 ;; FIXME: The first call generates an internal error message. Can we remove it?
-;; [Error] [Frontend] Error in DBus call doListing:
-;; GDBus.Error:org.freedesktop.DBus.Error.NoReply: Message recipient
-;; disconnected from message bus without replying
+;; [Error] [Frontend] Error in DBus call doListing: Zeitüberschreitung wurde erreicht
 
 ;; Get a default printer for printer tests
 (let (default-printer)
@@ -200,15 +198,15 @@ sem venenatis, vitae ultricies arcu laoreet."))
     #-windows
     (unless default-printer
       (gtk:enumerate-printers (lambda (printer)
-                                (if printer
-                                    (setf default-printer printer)
-                                    nil))
-                              t)
-      (when verbose
-        (if default-printer
-            (format t "~&Default printer for testsuite is \"~a\"~%"
-                      (gtk:printer-name default-printer))
-            (format t "~&No printer for testsuite available~%"))))
+                                ;; Store the first printer as default printer
+                                (setf default-printer printer)
+                                t)
+                              nil)) ; Do not wait
+    (when verbose
+      (if default-printer
+          (format t "~&Default printer for testsuite is \"~a\"~%"
+                    (gtk:printer-name default-printer))
+          (format t "~&No printer for testsuite available~%")))
     default-printer))
 
-;;; 2025-12-05
+;;; 2026-05-03
