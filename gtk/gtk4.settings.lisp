@@ -2,7 +2,7 @@
 ;;; gtk4.settings.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,6 +77,7 @@
 ;;;     gtk-im-module
 ;;;     gtk-interface-color-scheme                          Since 4.20
 ;;;     gtk-interface-contrast                              Since 4.20
+;;;     gtk-interface-reduced-motion                        Since 4.22
 ;;;     gtk-keynav-use-caret
 ;;;     gtk-label-select-on-focus
 ;;;     gtk-long-press-time
@@ -320,6 +321,10 @@
    (gtk-interface-contrast
     settings-gtk-interface-contrast
     "gtk-interface-contrast" "GtkInterfaceContrast" t t)
+   #+gtk-4-22
+   (gtk-interface-reduced-motion
+    settings-gtk-interface-reduced-motion
+    "gtk-interface-reduced-motion" "GtkReducedMotion" t t)
    (gtk-keynav-use-caret
     settings-gtk-keynav-use-caret
     "gtk-keynav-use-caret" "gboolean" t t)
@@ -1397,6 +1402,40 @@
   Since 4.20
   @see-class{gtk:settings}
   @see-function{gtk:css-provider-prefers-contrast}")
+
+;;; --- gtk:settings-gtk-interface-reduced-motion ------------------------------
+
+#+(and gtk-4-22 liber-documentation)
+(setf (documentation (liber:slot-documentation "gtk-interface-reduced-motion"
+                                               'settings) t)
+ "The @code{gtk-interface-reduced-motion} property of type
+  @sym{gtk:interface-reduced-motion} (Read / Write) @br{}
+  Whether animations should be reduced to essential motions. This setting
+  communicates the system-wide preference. The motion level that is actually
+  used when applying CSS styles can be set with the
+  @slot[gtk:css-provider]{prefers-reduced-motion} property. Since 4.22 @br{}
+  Default value: @val[gtk:interface-reduced-motion]{:no-preference}")
+
+#+(and gtk-4-22 liber-documentation)
+(setf (liber:alias-for-function 'settings-gtk-interface-reduced-motion)
+      "Accessor"
+      (documentation 'settings-gtk-interface-reduced-motion 'function)
+ "@version{2026-05-15}
+  @syntax{(gtk:settings-gtk-interface-reduced-motion object) => setting}
+  @syntax{(setf (gtk:settings-gtk-interface-reduced-motion object) setting)}
+  @argument[object]{a @class{gtk:settings} object}
+  @argument[setting]{a @sym{gtk:interface-reduced-motion} value}
+  @begin{short}
+    Gets or sets whether animations should be reduced to essential motions.
+  @end{short}
+  This setting communicates the system-wide preference. The motion level that
+  is actually used when applying CSS styles can be set with the
+  @slot[gtk:css-provider]{prefers-reduced-motion} property.
+
+  Since 4.22
+  @see-class{gtk:settings}
+  @see-symbol{gtk:interface-reduced-motion}
+  @see-function{gtk:css-provider-prefers-reduced-motion}")
 
 ;;; --- gtk:settings-gtk-keynav-use-caret --------------------------------------
 

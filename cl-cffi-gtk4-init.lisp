@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4-init.lisp
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -60,7 +60,6 @@
     ;; gtk:minor-version because GTK is not compiled at this time.
     (cffi:foreign-funcall "gtk_get_major_version" :int)
     (cffi:foreign-funcall "gtk_get_minor_version" :int)
-    4 0   ; Since 2021-01-09
     4 2   ; Since 2021-03-27
     4 4   ; Since 2021-08-10
     4 6   ; Since 2021-12-30
@@ -71,6 +70,7 @@
     4 16  ; Since 2024-09-07
     4 18  ; Since 2025-03-14
     4 20  ; Since 2025-08-26
+    4 22  ; Since 2026-03-06
     )
 
 ;;; --- End of file cl-cffi-gtk4-init.lisp -------------------------------------

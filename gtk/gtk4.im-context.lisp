@@ -2,7 +2,7 @@
 ;;; gtk4.im-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,6 +62,7 @@
 ;;;
 ;;;     commit
 ;;;     delete-surrounding
+;;;     invalid-compostion                                  Since 4.22
 ;;;     preedit-changed
 ;;;     preedit-end
 ;;;     preedit-start
@@ -95,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'im-context 'type)
- "@version{2025-09-25}
+ "@version{2026-05-17}
   @begin{short}
     The @class{gtk:im-context} class defines the interface for GTK input
     methods.
@@ -115,13 +116,11 @@
   implements the input of arbitrary Unicode code points by holding down the
   @kbd{Control} and @kbd{Shift} keys and then typing @kbd{u} followed by the
   hexadecimal digits of the code point. When releasing the @kbd{Control} and
-  @kbd{Shift} keys, preediting ends and the character is inserted as text. For
-  example,
+  @kbd{Shift} keys, preediting ends and the character is inserted as text.
+  This example results in the € sign:
   @begin{pre}
 Ctrl+Shift+u 2 0 A C
   @end{pre}
-  results in the € sign.
-
   Additional input methods can be made available for use by GTK widgets as
   loadable modules. An input method module is a small shared library which
   provides a @code{GIOExtension} for the extension point named
@@ -160,6 +159,21 @@ lambda (context offset n-chars)    :run-last
       @end{simple-table}
       The signal is emitted when the input method needs to delete all or part
       of the context surrounding the cursor.
+    @end{signal}
+    @begin[im-context::invalid-compostion]{signal}
+      @begin{pre}
+lambda (context str)     :run-last
+      @end{pre}
+      @begin[code]{simple-table}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
+        @entry[str]{The string for the completed character(s) entered by the
+          user.}
+        @entry[Returns]{The boolean whether the IM context avoid beeping on
+          invalid composition.}
+      @end{simple-table}
+      Emitted when the filtered keys do not compose to a single valid character.
+      Since 4.22
     @end{signal}
     @begin[im-context::preedit-changed]{signal}
       @begin{pre}
@@ -231,7 +245,7 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-hints)
       "Accessor"
       (documentation 'im-context-input-hints 'function)
- "@version{2025-09-25}
+ "@version{2026-05-17}
   @syntax{(gtk:im-context-input-hints object) => hints}
   @syntax{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
@@ -256,7 +270,7 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-purpose)
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
- "@version{2025-09-25}
+ "@version{2026-05-17}
   @syntax{(gtk:im-context-input-purpose object) => purpose}
   @syntax{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}

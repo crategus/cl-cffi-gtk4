@@ -2,7 +2,7 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,6 +77,7 @@
 ;;;
 ;;;     prefers-color-scheme                                Since 4.20
 ;;;     prefers-contrast                                    Since 4.20
+;;;     prefers-reduced-motion                              Since 4.22
 ;;;
 ;;; Signals
 ;;;
@@ -114,7 +115,7 @@
 (setf (liber:alias-for-symbol 'interface-color-scheme)
       "GEnum"
       (liber:symbol-documentation 'interface-color-scheme)
- "@version{2025-11-08}
+ "@version{2026-05-16}
   @begin{declaration}
 (gobject:define-genum \"GtkInterfaceColorScheme\" interface-color-scheme
   (:export t
@@ -164,7 +165,7 @@
 (setf (liber:alias-for-symbol 'interface-contrast)
       "GEnum"
       (liber:symbol-documentation 'interface-contrast)
- "@version{2025-11-08}
+ "@version{2026-05-16}
   @begin{declaration}
 (gobject:define-genum \"GtkInterfaceContrast\" interface-contrast
   (:export t
@@ -198,6 +199,50 @@
   @see-function{gtk:settings-gtk-interface-contrast}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GtkReducedMotion
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-22
+(gobject:define-genum "GtkReducedMotion" reduced-motion
+  (:export t
+   :type-initializer "gtk_reduced_motion_get_type")
+  (:no-preference 0)
+  (:reduce 1))
+
+#+(and gtk-4-22 liber-documentation)
+(setf (liber:alias-for-symbol 'reduced-motion)
+      "GEnum"
+      (liber:symbol-documentation 'reduced-motion)
+ "@version{2026-05-16}
+  @begin{declaration}
+(gobject:define-genum \"GtkReducedMotion\" reduced-motion
+  (:export t
+   :type-initializer \"gtk_reduced_motion_get_type\")
+  (:no-preference 0)
+  (:reduce 1))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:no-preference]{The user has made no preference known to the
+        system.}
+      @entry[:reduce]{The user has notified the system that they prefer an
+        interface that removes or replaces the types of motion-based animation
+        that either trigger discomfort for those with vestibular motion
+        sensitivity, or distraction for those with attention deficits.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Values for the @slot[gtk:settings]{gtk-interface-reduced-motion} and
+    @slot[gtk:css-provider]{prefers-reduced-motion} properties that indicates
+    the preferred level of motion animations.
+  @end{short}
+  This information can be used inside CSS via media queries.
+
+  Since 4.22
+  @see-function{gtk:settings-gtk-interface-reduced-motion}
+  @see-function{gtk:css-provider-prefers-reduced-motion}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkCssLocation
 ;;; ----------------------------------------------------------------------------
 
@@ -212,7 +257,7 @@
 (setf (liber:alias-for-symbol 'css-location)
       "CStruct"
       (liber:symbol-documentation 'css-location)
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @begin{declaration}
 (cffi:defcstruct css-location
   (bytes :size)
@@ -265,7 +310,7 @@
 
 (defun css-location-bytes (location)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @syntax{(gtk:css-location-bytes location) => bytes}
   @argument[location]{a @sym{gtk:css-location} instance}
   @argument[bytes]{a number with the foreign type @code{:size}}
@@ -282,7 +327,7 @@
 
 (defun css-location-chars (location)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @syntax{(gtk:css-location-chars location) => chars}
   @argument[location]{a @sym{gtk:css-location} instance}
   @argument[bytes]{a number with the foreign type @code{:size}}
@@ -299,7 +344,7 @@
 
 (defun css-location-lines (location)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @syntax{(gtk:css-location-lines location) => lines}
   @argument[location]{a @sym{gtk:css-location} instance}
   @argument[lines]{a number with the foreign type @code{:size}}
@@ -316,7 +361,7 @@
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @syntax{(gtk:css-location-line-bytes location) => line-bytes}
   @argument[location]{a @sym{gtk:css-location} instance}
   @argument[line-bytes]{a number with the foreign type @code{:size}}
@@ -332,7 +377,7 @@
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @syntax{(gtk:css-location-line-chars location) => line-chars}
   @argument[location]{a @sym{gtk:css-location} instance}
   @argument[line-chars]{a number with the foreign type @code{:size}}
@@ -355,7 +400,7 @@
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @begin{declaration}
 (glib:define-gboxed-opaque css-section \"GtkCssSection\"
   :export t
@@ -392,7 +437,7 @@
   @see-constructor{gtk:css-section-new}
   @see-constructor{gtk:css-section-new-with-bytes}
   @see-class{gtk:css-provider}
-  @see-class{gtk:location}")
+  @see-class{gtk:css-location}")
 
 (export 'css-section)
 
@@ -403,7 +448,7 @@
 (cffi:defcfun ("gtk_css_section_new" css-section-new)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2026-05-16}
   @argument[path]{a pathname or namestring for the file this section refers to}
   @argument[start]{a @sym{gtk:css-location} instance for the start location}
   @argument[end]{a @sym{gtk:css-location} instance for the end location}
@@ -429,7 +474,7 @@
 (cffi:defcfun ("gtk_css_section_new_with_bytes" css-section-new-with-bytes)
     (g:boxed css-section :return)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @argument[path]{a pathname or namestring for the file this section refers to}
   @argument[bytes]{a @class{g:bytes} instance for the bytes this section
     refers to}
@@ -472,7 +517,7 @@
 
 (cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @return{The string for the human-readable text form.}
   @begin{short}
@@ -492,7 +537,7 @@
 #+gtk-4-16
 (cffi:defcfun ("gtk_css_section_get_bytes" css-section-bytes) (g:boxed g:bytes)
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The @class{g:bytes} instance for the bytes from which @arg{section} was
@@ -517,7 +562,7 @@
 (cffi:defcfun ("gtk_css_section_get_file" css-section-file)
     g:file-as-namestring
  #+liber-documentation
- "@version{2025-05-10}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The namestring for the file that @arg{section} was parsed from or
@@ -541,7 +586,7 @@
 (cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
     (g:boxed css-section)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The @class{gtk:css-section} instance for the parent section, or @code{nil}
@@ -563,7 +608,7 @@
 (cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The @sym{gtk:css-location} instance for the start location of the section.
@@ -584,7 +629,7 @@
 (cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
     (:pointer (:struct css-location))
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-16}
   @argument[section]{a @class{gtk:css-section} instance}
   @begin{return}
     The @sym{gtk:css-location} instance for the end location of the section.
@@ -614,11 +659,15 @@
    #+gtk-4-20
    (prefers-contrast
     css-provider-prefers-contrast
-    "prefers-contrast" "GtkInterfaceContrast" t t)))
+    "prefers-contrast" "GtkInterfaceContrast" t t)
+   #+gtk-4-22
+   (prefers-reduced-motion
+    css-provider-prefers-reduced-motion
+    "prefers-reduced-motion" "GtkReducedMotion" t t)))
 
 #+liber-documentation
 (setf (documentation 'css-provider 'type)
- "@version{2025-11-08}
+ "@version{2026-05-16}
   @begin{short}
     The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
@@ -676,6 +725,7 @@ lambda (provider section error)    :run-last
   @see-constructor{gtk:css-provider-new}
   @see-slot{gtk:css-provider-prefers-color-scheme}
   @see-slot{gtk:css-provider-prefers-contrast}
+  @see-slot{gtk:css-provider-prefers-reduced-motion}
   @see-class{gtk:style-provider}
   @see-class{gtk:css-section}")
 
@@ -697,7 +747,7 @@ lambda (provider section error)    :run-last
 (setf (liber:alias-for-function 'css-provider-prefers-color-scheme)
       "Accessor"
       (documentation 'css-provider-prefers-color-scheme 'function)
- "@version{2025-11-08}
+ "@version{2026-05-16}
   @syntax{(gtk:css-provider-prefers-color-scheme object) => mode}
   @syntax{(setf (gtk:css-provider-prefers-color-scheme object) mode)}
   @argument[object]{a @class{gtk:css-provider} object}
@@ -731,15 +781,15 @@ lambda (provider section error)    :run-last
  "The @code{prefers-contrast} property of type @sym{gtk:interface-contrast}
   (Read / Write) @br{}
   Defines the contrast mode to use for the user interface. @br{}
-  Default value: @val[gtk:interface-contrast]{:no-preferences}")
+  Default value: @val[gtk:interface-contrast]{:no-preference}")
 
 #+(and gtk-4-20 liber-documentation)
 (setf (liber:alias-for-function 'css-provider-prefers-contrast)
       "Accessor"
       (documentation 'css-provider-prefers-contrast 'function)
- "@version{2025-11-08}
-  @syntax{(gtk:css-provider-prefers-color-scheme object) => mode}
-  @syntax{(setf (gtk:css-provider-prefers-color-scheme object) mode)}
+ "@version{2026-05-16}
+  @syntax{(gtk:css-provider-prefers-contrast object) => mode}
+  @syntax{(setf (gtk:css-provider-prefers-contrast object) mode)}
   @argument[object]{a @class{gtk:css-provider} object}
   @argument[mode]{a @sym{gtk:instance-contrast} value}
   @begin{short}
@@ -765,6 +815,47 @@ lambda (provider section error)    :run-last
   @see-class{gtk:css-provider}
   @see-symbol{gtk:interface-contrast}")
 
+;;; --- gtk:css-provider-prefers-reduced-motion --------------------------------
+
+#+(and gtk-4-22 liber-documentation)
+(setf (documentation (liber:slot-documentation "prefers-reduced-motion"
+                                               'css-provider) t)
+ "The @code{prefers-reduced-motion} property of type @sym{gtk:reduced-motion}
+  (Read / Write) @br{}
+  Define the type of reduced motion to use for the user interface. @br{}
+  Default value: @val[gtk:reduced-motion]{:no-preference}")
+
+#+(and gtk-4-22 liber-documentation)
+(setf (liber:alias-for-function 'css-provider-prefers-reduced-motion)
+      "Accessor"
+      (documentation 'css-provider-prefers-reduced-motion 'function)
+ "@version{2026-05-16}
+  @syntax{(gtk:css-provider-prefers-reduced-motion object) => setting}
+  @syntax{(setf (gtk:css-provider-prefers-reduced-motion object) setting)}
+  @argument[object]{a @class{gtk:css-provider} object}
+  @argument[setting]{a @sym{gtk:reduced-motion} value}
+  @begin{short}
+    The accessor for the @slot[gtk:css-provider]{prefers-reduced-motion} slot
+    of the @class{gtk:css-provider} class gets or sets the type of reduced
+    motion to use for the user interface.
+  @end{short}
+  When set to @val[gtk:reduced-motion]{:reduce} the UI is rendered in
+  with reduced motion animations. When set to
+  @val[gtk:reduced-motion]{:no-preference} (the default), the user interface
+  will be rendered in default mode.
+
+  This setting is be available for media queries in CSS:
+  @begin{pre}
+@@media (prefers-reduced-motion: reduce) {
+  // some style with reduced motion
+@}
+  @end{pre}
+  Changing this setting will reload the style sheet.
+
+  Since 4.22
+  @see-class{gtk:css-provider}
+  @see-symbol{gtk:reduced-motion}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_new
 ;;; ----------------------------------------------------------------------------
@@ -773,7 +864,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-new ()
  #+liber-documentation
- "@version{2025-01-11}
+ "@version{2026-05-16}
   @return{The new @class{gtk:css-provider} object.}
   @short{Returns a newly created CSS provider object.}
   @see-class{gtk:css-provider}"
@@ -787,7 +878,7 @@ lambda (provider section error)    :run-last
 
 (cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
- "@version{2025-02-25}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
   @return{The string representing the CSS provider.}
   @begin{short}
@@ -815,7 +906,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-named (provider name &optional variant)
  #+liber-documentation
- "@version{2025-11-08}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[name]{a string for the theme name}
   @argument[variant]{an optional string for a variant to load, for example,
@@ -827,10 +918,13 @@ lambda (provider section error)    :run-last
   is guaranteed that this function uses the same mechanism to load the theme
   that GTK uses for loading its own theme.
   @begin[Warning]{dictionary}
-    This function is deprecated since 4.20. Using any of the other theme
-    loaders, combine with media queries.
+    This function is deprecated since 4.20. Use any of the other theme loaders
+    and combine them with media queries.
   @end{dictionary}
   @see-class{gtk:css-provider}"
+  #+(and gtk-4-20 gtk-warn-deprecated)
+  (when gtk-init:*warn-deprecated*
+    (warn "GTK:CSS-PROVIDER-LOAD-NAMED is deprecated since 4.20."))
   (%css-provider-load-named provider
                             name
                             (or variant (cffi:null-pointer))))
@@ -849,7 +943,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
- "@version{2025-09-22}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a string for the CSS data}
   @begin{short}
@@ -881,7 +975,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file)
     :void
  #+liber-documentation
- "@version{2025-07-05}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[file]{a @class{g:file} object pointing to a file to load}
   @begin{short}
@@ -909,7 +1003,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-path (provider path)
  #+liber-documentation
- "@version{2025-07-05}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[path]{a pathname or namestring for the path of a file to load, in
     the GLib filename encoding}
@@ -932,7 +1026,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_resource"
                css-provider-load-from-resource) :void
  #+liber-documentation
- "@version{2025-07-05}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[path]{a string for the resource path}
   @begin{short}
@@ -957,7 +1051,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_bytes" css-provider-load-from-bytes)
     :void
  #+liber-documentation
- "@version{2025-01-11}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a @class{g:bytes} instance containing the CSS data to load}
   @begin{short}
@@ -981,7 +1075,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_string"
                css-provider-load-from-string) :void
  #+liber-documentation
- "@version{2025-01-11}
+ "@version{2026-05-16}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[str]{a string for the CSS data to load}
   @begin{short}

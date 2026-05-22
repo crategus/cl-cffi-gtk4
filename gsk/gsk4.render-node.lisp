@@ -2,7 +2,7 @@
 ;;; gsk.render-node.lisp
 ;;;
 ;;; The documentation in this file is taken from the GSK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -276,13 +276,25 @@
   #+gtk-4-14
   :subsurface-node
   #+gtk-4-20
-  :component-transfer-node)
+  :component-transfer-node
+  #+gtk-4-22
+  :copy-node
+  #+gtk-4-22
+  :paste-node
+  #+gtk-4-22
+  :composite-node
+  #+gtk-4-22
+  :isolation-node
+  #+gtk-4-22
+  :displacement-node
+  #+gtk-4-22
+  :arithmetic-node)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{2025-11-02}
+ "@version{2026-05-14}
   @begin{declaration}
 (gobject:define-genum \"GskRenderNodeType\" render-node-type
   (:export t
@@ -313,18 +325,18 @@
   :blur-node
   :debug-node
   :gl-shader-node
-  #+gtk-4-10
   :texture-scale-node
-  #+gtk-4-10
   :mask-node
-  #+gtk-4-14
   :fill-node
-  #+gtk-4-14
   :stroke-node
-  #+gtk-4-14
   :subsurface-node
-  #+gtk-4-20
-  :component-transfer-node)
+  :component-transfer-node
+  :copy-node
+  :paste-node
+  :composite-node
+  :isolation-node
+  :displacement-node
+  :arithmetic-node)
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -368,6 +380,18 @@
         graph to a subsurface. Since 4.14}
       @entry[:component-transfer-node]{A node that applies some function to each
         color component. Since 4.20}
+      @entry[:copy-node]{A node that copies the rendering canvas to be pasted
+        later. Since 4.22}
+      @entry[:paste-node]{A node that pastes a previously copied canvas.
+        Since 4.22}
+      @entry[:composite-node]{A node that combines a child with the background
+        using Porter/Duff operations. Since 4.22}
+      @entry[:isolation-node]{A node that isolated content of its child from
+        previous content. Since 4.22}
+      @entry[:displacement-node]{A node that displaces content according to
+        some mask. Since 4.22}
+      @entry[:arithmetic-node]{A node that combines two child nodes in an
+        arithmetic way. Since 4.22}
     @end{simple-table}
   @end{values}
   @begin{short}

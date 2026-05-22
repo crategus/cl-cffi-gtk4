@@ -2,7 +2,7 @@
 ;;; gtk4.at-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -49,6 +49,7 @@
 ;;;     accessible
 ;;;     accessible-role
 ;;;     display
+;;;     realized                                            Since 4.22
 ;;;
 ;;; Signals
 ;;;
@@ -79,11 +80,15 @@
     "accessible-role" "GtkAccessibleRole" t t)
    (display
     at-context-display
-    "display" "GdkDidplay" t t)))
+    "display" "GdkDisplay" t t)
+   #+gtk-4-22
+   (realized
+    at-context-realized
+    "realized" "gboolean" t nil)))
 
 #+liber-documentation
 (setf (documentation 'at-context 'type)
- "@version{2025-07-19}
+ "@version{2026-05-16}
   @begin{short}
     The @class{gtk:at-context} class is an abstract class provided by GTK to
     communicate to platform-specific assistive technologies API.
@@ -104,6 +109,10 @@ lambda (context)    :run-first
     @end{signal}
   @end{dictionary}
   @see-constructor{gtk:at-context-create}
+  @see-slot{gtk:at-context-accessible}
+  @see-slot{gtk:at-context-accessible-role}
+  @see-slot{gtk:at-context-display}
+  @see-slot{gtk:at-context-realized}
   @see-class{gtk:accessible}")
 
 ;;; ----------------------------------------------------------------------------
@@ -122,7 +131,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible)
       "Accessor"
       (documentation 'at-context-accessible 'function)
- "@version{2025-08-13}
+ "@version{2026-05-16}
   @syntax{(gtk:at-context-accessible object) => accessible}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[accessible]{a @class{gtk:accessible} object}
@@ -148,7 +157,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible-role)
       "Accessor"
       (documentation 'at-context-accessible-role 'function)
- "@version{2025-08-13}
+ "@version{2026-05-16}
   @syntax{(gtk:at-context-accessible-role object) => role}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[role]{a @sym{gtk:accessible-role} value}
@@ -170,7 +179,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-display)
       "Accessor"
       (documentation 'at-context-display 'function)
- "@version{2025-08-13}
+ "@version{2026-05-16}
   @syntax{(gtk:at-context-display object) => display}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[display]{a @class{gdk:display} object}
@@ -181,13 +190,37 @@ lambda (context)    :run-first
   @see-class{gtk:at-context}
   @see-class{gdk:display}")
 
+;;; --- gtk:at-context-realized ------------------------------------------------
+
+#+(and gtk-4-22 liber-documentation)
+(setf (documentation (liber:slot-documentation "realized" 'at-context) t)
+ "The @code{realized} property of type @code{:boolean} (Read) @br{}
+  Whether the AT context has been realized or not. @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-22 liber-documentation)
+(setf (liber:alias-for-function 'at-context-realized)
+      "Accessor"
+      (documentation 'at-context-realized 'function)
+ "@version{2026-05-16}
+  @syntax{(gtk:at-context-realized object) => realized}
+  @argument[object]{a @class{gtk:at-context} object}
+  @argument[realized]{a boolean whether the AT context has been realized or not}
+  @begin{short}
+    The accessor for the @slot[gtk:at-context]{realized} slot of the
+    @class{gtk:at-context} class returns whether the AT context has been
+    realized or not.
+  @end{short}
+  @see-class{gtk:at-context}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_at_context_create
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
+(cffi:defcfun ("gtk_at_context_create" at-context-create)
+    (g:object at-context :return)
  #+liber-documentation
- "@version{2025-07-25}
+ "@version{2026-05-16}
   @argument[role]{a @sym{gtk:accessible-role} value used by the context}
   @argument[accessible]{a @class{gtk:accessible} object using the context}
   @argument[display]{a @class{gdk:display} object used by the context}

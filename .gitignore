@@ -3,6 +3,7 @@
 *.ini
 *.c
 TODO
+STATISTIC
 doc/pages/
 doc/single-page/
 doc/index.*

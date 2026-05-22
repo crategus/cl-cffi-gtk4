@@ -2,7 +2,7 @@
 ;;; gtk4.enumerations.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -1314,7 +1314,7 @@
 (setf (liber:alias-for-symbol 'input-purpose)
       "GEnum"
       (liber:symbol-documentation 'input-purpose)
- "@version{2025-07-12}
+ "@version{2026-05-17}
   @begin{declaration}
 (gobject:define-genum \"GtkInputPurpose\" input-purpose
   (:export t
@@ -1366,8 +1366,9 @@
   and 'e' or 'E' as in 3.14E+000.
 
   This enumeration may be extended in the future. Input methods should
-  interpret unknown values as 'free form'.
+  interpret unknown values as @val[gtk:input-purpose]{:free-form}.
   @see-class{gtk:entry}
+  @see-class{gtk:im-context}
   @see-symbol{gtk:input-hints}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1395,7 +1396,7 @@
 (setf (liber:alias-for-symbol 'input-hints)
       "GFlags"
       (liber:symbol-documentation 'input-hints)
- "@version{2025-07-25}
+ "@version{2026-05-17}
   @begin{declaration}
 (gobject:define-gflags \"GtkInputHints\" input-hints
   (:export t
@@ -1449,6 +1450,7 @@
   This flags may be extended in the future. Input methods should ignore
   unknown values.
   @see-class{gtk:entry}
+  @see-class{gtk:im-context}
   @see-symbol{gtk:input-purpose}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1693,13 +1695,15 @@
   (:foreground 0)
   (:error 1)
   (:warning 2)
-  (:success 3))
+  (:success 3)
+  #+gtk-4-22
+  (:accent 4))
 
 #+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-symbol 'symbolic-color)
       "GEnum"
       (liber:symbol-documentation 'symbolic-color)
- "@version{2025-07-12}
+ "@version{2026-05-15}
   @begin{declaration}
 (gobject:define-genum \"GtkSymbolicColor\" symbolic-color
   (:export t
@@ -1707,7 +1711,8 @@
   (:foreground 0)
   (:error 1)
   (:warning 2)
-  (:success 3))
+  (:success 3)
+  (:accent 4))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -1715,6 +1720,7 @@
       @entry[:error]{Indication color for errors.}
       @entry[:warning]{Indication color for warnings.}
       @entry[:success]{Indication color for success.}
+      @entry[:accent]{The system accent color. Since 4.22}
     @end{simple-table}
   @end{values}
   @begin{short}

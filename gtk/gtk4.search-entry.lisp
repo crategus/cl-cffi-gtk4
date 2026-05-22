@@ -2,7 +2,7 @@
 ;;; gtk4.search-entry.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -41,6 +41,8 @@
 ;;;     gtk_search_entry_set_input_hints                    Since 4.14
 ;;;     gtk_search_entry_get_input_purpose                  Since 4.14
 ;;;     gtk_search_entry_set_input-purpose                  Since 4.14
+;;;     gtk_search_entry_get_key_capture_widget             Since 4.22
+;;;     gtk_search_entry_set_key_capture_widget             Since 4.22
 ;;;     gtk_search_entry_get_placeholder_text               Since 4.10
 ;;;     gtk_search_entry_set_placeholder_text               Since 4.10
 ;;;     gtk_search_entry_get_search_delay                   Since 4.8
@@ -49,14 +51,15 @@
 ;;; Functions
 ;;;
 ;;;     gtk_search_entry_new
-;;;     gtk_search_entry_set_key_capture_widget
-;;;     gtk_search_entry_get_key_capture_widget
+;;;     gtk_search_entry_set_key_capture_widget             Until 4.22
+;;;     gtk_search_entry_get_key_capture_widget             Until 4.22
 ;;;
 ;;; Properties
 ;;;
 ;;;     activates-default
 ;;;     input-hints                                         Since 4.14
 ;;;     input-purpose                                       Since 4.14
+;;;     key-capture-widget                                  Since 4.22
 ;;;     placeholder-text
 ;;;     search-delay                                        Since 4.8
 ;;;
@@ -109,6 +112,10 @@
    (input-purpose
     search-entry-input-purpose
     "input-purpose" "GtkInputPurpose" t t)
+   #+gtk-4-22
+   (key-capture-widget
+    search-entry-key-capture-widget
+    "key-capture-widget" "GtkWidget" t t)
    (placeholder-text
     search-entry-placeholder-text
     "placeholder-text" "gchararray" t t)
@@ -119,7 +126,7 @@
 
 #+liber-documentation
 (setf (documentation 'search-entry 'type)
- "@version{2025-06-29}
+ "@version{2026-05-17}
   @begin{short}
     The @class{gtk:search-entry} widget is a text entry that has been tailored
     for use as a search entry.
@@ -147,6 +154,18 @@
   being placed inside a @class{gtk:search-bar} widget. If that is not the case,
   you can use the @fun{gtk:search-entry-key-capture-widget} function to let it
   capture key input from another widget.
+
+  The @class{gtk:search-entry} widget provides only minimal API and should be
+  used with the @class{gtk:editable} API.
+  @begin[Shortcuts and Gestures]{dictionary}
+    The following signals have default keybindings:
+    @begin{itemize}
+      @item{@sig[gtk:search-entry]{activate}}
+      @item{@sig[gtk:search-entry]{next-match}}
+      @item{@sig[gtk:search-entry]{previous-match}}
+      @item{@sig[gtk:search-entry]{stop-search}}
+    @end{itemize}
+  @end{dictionary}
   @begin[CSS Nodes]{dictionary}
     @begin{pre}
 entry.search
@@ -228,6 +247,7 @@ lambda (entry)    :action
   @see-slot{gtk:search-entry-activates-default}
   @see-slot{gtk:search-entry-input-hints}
   @see-slot{gtk:search-entry-input-purpose}
+  @see-slot{gtk:search-entry-key-capture-widget}
   @see-slot{gtk:search-entry-placeholder-text}
   @see-slot{gtk:search-entry-search-delay}
   @see-class{gtk:entry}")
@@ -251,7 +271,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-activates-default)
       "Accessor"
       (documentation 'search-entry-activates-default 'function)
- "@version{2025-08-11}
+ "@version{2026-05-17}
   @syntax{(gtk:search-entry-activates-default object) => setting}
   @syntax{(setf (gtk:search-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -284,7 +304,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-input-hints)
       "Accessor"
       (documentation 'search-entry-input-hints 'function)
- "@version{2025-08-11}
+ "@version{2026-05-17}
   @syntax{(gtk:search-entry-input-hints object) => hints}
   @syntax{(setf (gtk:search-entry-input-hints object) hints)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -313,7 +333,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-input-purpose)
       "Accessor"
       (documentation 'search-entry-input-purpose 'function)
- "@version{2025-08-11}
+ "@version{2026-05-17}
   @syntax{(gtk:search-entry-input-purpose object) => purpose}
   @syntax{(setf (gtk:search-entry-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -327,6 +347,51 @@ lambda (entry)    :action
   Since 4.14
   @see-class{gtk:search-entry}
   @see-symbol{gtk:input-purpose}")
+
+;;; --- gtk:search-entry-key-capture-widget ------------------------------------
+
+#+(and gtk-4-22 liber-documentation)
+(setf (documentation (liber:slot-documentation "key-capture-widget"
+                                               'search-entry) t)
+ "The @code{key-capture-widget} property of type @class{gtk:widget}
+  (Read / Write) @br{}
+  The widget that the search entry will use to capture key events. Key events
+  are consumed by the search entry to start or continue a search. Since 4.22
+  @br{}")
+
+#+(and gtk-4-22 liber-documentation)
+(setf (liber:alias-for-function 'search-key-capture-widget)
+      "Accessor"
+      (documentation 'search-entry-key-capture-widget 'function)
+ "@version{2026-05-17}
+  @syntax{(gtk:search-entry-key-capture-widget object) => widget}
+  @syntax{(setf (gtk:search-entry-key-capture-widget object) widget)}
+  @argument[object]{a @class{gtk:search-entry} widget}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @begin{short}
+    The accessor for the @slot[gtk:search-entry]{key-capture-widget} slot of the
+    @class{gtk:search-entry} class gets or sets @arg{widget} as the widget that
+    the search entry will capture key events from.
+  @end{short}
+  Key events are consumed by the search entry to start or continue a search.
+
+  If the search entry is part of a @class{gtk:search-bar} widget, it is
+  preferable to call the @fun{gtk:search-bar-key-capture-widget} function
+  instead, which will reveal the search in addition to triggering the search
+  entry.
+
+  Note that despite the name of this function, the events are only captured in
+  the bubble phase, which means that editable child widgets of widget will
+  receive text input before it gets captured. If that is not desired, you can
+  capture and forward the events yourself with the
+  @fun{gtk:event-controller-key-forward} function.
+
+  Since 4.22
+  @see-class{gtk:search-entry}
+  @see-class{gtk:widget}
+  @see-class{gtk:search-bar}
+  @see-function{gtk:search-bar-key-capture-widget}
+  @see-function{gtk:event-controller-key-forward}")
 
 ;;; --- gtk:search-entry-placeholder-text --------------------------------------
 
@@ -343,7 +408,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-placeholder-text)
       "Accessor"
       (documentation 'search-entry-placeholder-text 'function)
- "@version{2025-08-11}
+ "@version{2026-05-17}
   @syntax{(gtk:search-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:search-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -376,7 +441,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-search-delay)
       "Accessor"
       (documentation 'search-entry-search-delay 'function)
- "@version{2025-08-11}
+ "@version{2026-05-17}
   @syntax{(gtk:search-entry-search-delay object) => delay}
   @syntax{(setf (gtk:search-entry-search-delay object) delay)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -399,7 +464,7 @@ lambda (entry)    :action
 
 (defun search-entry-new ()
  #+liber-documentation
- "@version{2024-04-20}
+ "@version{2026-05-17}
   @return{The new @class{gtk:search-entry} widget.}
   @begin{short}
     Creates a search entry, with a find icon when the search field is empty,
@@ -415,6 +480,7 @@ lambda (entry)    :action
 ;;; gtk_search_entry_set_key_capture_widget
 ;;; ----------------------------------------------------------------------------
 
+#-gtk-4-22
 (defun (setf search-entry-key-capture-widget) (widget entry)
   (cffi:foreign-funcall "gtk_search_entry_set_key_capture_widget"
                         (g:object search-entry) entry
@@ -422,6 +488,7 @@ lambda (entry)    :action
                         :void)
   widget)
 
+#-gtk-4-22
 (cffi:defcfun ("gtk_search_entry_get_key_capture_widget"
                search-entry-key-capture-widget) (g:object widget)
  #+liber-documentation
@@ -445,6 +512,7 @@ lambda (entry)    :action
   @see-function{gtk:search-bar-key-capture-widget}"
   (entry (g:object search-entry)))
 
+#-gtk-4-22
 (export 'search-entry-key-capture-widget)
 
 ;;; --- End of file gtk4.search-entry.lisp -------------------------------------

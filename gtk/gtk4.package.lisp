@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -757,6 +757,7 @@
       @about-generic{picture-can-shrink}
       @about-generic{picture-content-fit}
       @about-generic{picture-file}
+      @about-generic{picture-isolate-contents}
       @about-generic{picture-keep-aspect-ratio}
       @about-generic{picture-paintable}
       @about-function{picture-new}
@@ -1084,10 +1085,10 @@
       @about-generic{search-entry-activates-default}
       @about-generic{search-entry-input-hints}
       @about-generic{search-entry-input-purpose}
+      @about-generic{search-entry-key-capture-widget}
       @about-generic{search-entry-placeholder-text}
       @about-generic{search-entry-search-delay}
       @about-function{search-entry-new}
-      @about-function{search-entry-key-capture-widget}
     @end{subsection}
     @begin[GtkSearchBar]{subsection}
       @about-class{search-bar}
@@ -3221,6 +3222,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{at-context-accessible}
       @about-generic{at-context-accessible-role}
       @about-generic{at-context-display}
+      @about-generic{at-context-realized}
       @about-function{at-context-create}
     @end{subsection}
   @end{section}
@@ -3684,6 +3686,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{settings-gtk-im-module}
       @about-generic{settings-gtk-interface-color-scheme}
       @about-generic{settings-gtk-interface-contrast}
+      @about-generic{settings-gtk-interface-reduced-motion}
       @about-generic{settings-gtk-keynav-use-caret}
       @about-generic{settings-gtk-label-select-on-focus}
       @about-generic{settings-gtk-long-press-time}
@@ -3780,9 +3783,11 @@ GtkCellRenderer         GtkWidget
     @begin[GtkCssProvider]{subsection}
       @about-symbol{gtk:interface-color-scheme}
       @about-symbol{gtk:interface-contrast}
+      @about-symbol{gtk:reduced-motion}
       @about-class{css-provider}
       @about-generic{css-provider-prefers-color-scheme}
       @about-generic{css-provider-prefers-contrast}
+      @about-generic{css-provider-prefers-reduced-motion}
       @about-function{css-provider-new}
       @about-function{css-provider-load-named}
       @about-function{css-provider-load-from-bytes}

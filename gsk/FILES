@@ -1,4 +1,4 @@
-Content from the GSK 4.20 Reference Manual
+Content from the GSK 4.22 Reference Manual
 
     .   needs proofreading
     *   needs update
@@ -7,7 +7,7 @@ Content from the GSK 4.20 Reference Manual
     &   objects and structures are implemented, but functions are missing
 
   gsk4.renderer.lisp         Renders a scene                         GSK 4.20 .
-  gsk4.render-node.lisp      Simple scene graph element              GSK 4.20 +
+  gsk4.render-node.lisp      Simple scene graph element              GSK 4.22 +
   gsk4.path.lisp             GskPath                                 GSK 4.20 .
   gsk4.path-builder.lisp     GskPathBuilder                          GSK 4.20 .
   gsk4.rounded-rect.lisp     Rounded rectangle                       GSK 4.20 .
@@ -17,4 +17,4 @@ Content from the GSK 4.20 Reference Manual
 
   not implemened             Fragment shaders for GSK
 
-2026-03-02
+2026-05-14

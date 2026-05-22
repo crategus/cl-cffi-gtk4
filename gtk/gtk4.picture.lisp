@@ -2,7 +2,7 @@
 ;;; gtk4.picture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,6 +46,8 @@
 ;;;     gtk_picture_get_content_fit                        Since 4.8
 ;;;     gtk_picture_set_file
 ;;;     gtk_picture_get_file
+;;;     gtk_picture_set_isolate_contents                   Since 4.22
+;;;     gtk_picture_get_isolate_contents                   Since 4.22
 ;;;     gtk_picture_set_keep_aspect_ratio                  Deprecated 4.8
 ;;;     gtk_picture_get_keep_aspect_ratio                  Deprecated 4.8
 ;;;     gtk_picture_set_paintable
@@ -69,6 +71,7 @@
 ;;;     can-shrink
 ;;;     content-fit                                        Since 4.8
 ;;;     file
+;;;     isolate-contents                                   Since 4.22
 ;;;     keep-aspect-ratio                                  Deprecated 4.8
 ;;;     paintable
 ;;;
@@ -105,7 +108,7 @@
 (setf (liber:alias-for-symbol 'content-fit)
       "GEnum"
       (liber:symbol-documentation 'content-fit)
- "@version{2024-10-13}
+ "@version{2026-05-17}
   @begin{declaration}
 (gobject:define-genum \"GtkContentFit\" content-fit
   (:export t
@@ -163,6 +166,10 @@
    (file
     picture-file
     "file" "GFile" t t)
+   #+gtk-4-22
+   (isolate-contents
+    picture-isolate-contents
+    "isolate-contents" "gboolean" t t)
    (keep-aspect-ratio
     picture-keep-aspect-ratio
     "keep-aspect-ratio" "gboolean" t t)
@@ -172,7 +179,7 @@
 
 #+liber-documentation
 (setf (documentation 'picture 'type)
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @begin{short}
     The @class{gtk:picture} widget displays a @class{gdk:paintable} object.
   @end{short}
@@ -197,6 +204,10 @@
   such as image files. See the documentation of the @class{g:resource} API for
   details. In this case, the @fun{gtk:picture-new-for-resource} and
   @fun{gtk:picture-set-resource} functions should be used.
+
+  The @class{gtk:picture} widget displays an image at its natural size. See
+  the @class{gkt:image} widget if you want to display a fixed-size image, such
+  as an icon.
 
   @subheading{Sizing the paintable}
   You can influence how the paintable is displayed inside the
@@ -228,18 +239,17 @@
   @see-slot{gtk:picture-can-shrink}
   @see-slot{gtk:picture-content-fit}
   @see-slot{gtk:picture-file}
+  @see-slot{gtk:picture-isolate-contents}
   @see-slot{gtk:picture-keep-aspect-ratio}
   @see-slot{gtk:picture-paintable}
-  @see-class{gdk:paintable}")
+  @see-class{gdk:paintable}
+  @see-class{gtk:image}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- gtk:picture-alternative-text -------------------------------------------
-
-;; TODO: To unset the text we have to use the CFFI:NULL-POINTER value. For use
-;; of the NIL value we have to implement a new SETF function.
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "alternative-text" 'picture) t)
@@ -252,7 +262,7 @@
 (setf (liber:alias-for-function 'picture-alternative-text)
       "Accessor"
       (documentation 'picture-alternative-text 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-alternative-text object) => text}
   @syntax{(setf (gtk:picture-alternative-text object) text)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -282,7 +292,7 @@
 (setf (liber:alias-for-function 'picture-can-shrink)
       "Accessor"
       (documentation 'picture-can-shrink 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-can-shrink object) => setting}
   @syntax{(setf (gtk:picture-can-shrink object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -319,7 +329,7 @@
 (setf (liber:alias-for-function 'picture-content-fit)
       "Accessor"
       (documentation 'picture-content-fit 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-content-fit object) => setting}
   @syntax{(setf (gtk:picture-content-fit object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -346,7 +356,7 @@
 (setf (liber:alias-for-function 'picture-file)
       "Accessor"
       (documentation 'picture-file 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-file object) => file}
   @syntax{(setf (gtk:picture-file object) file)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -365,6 +375,39 @@
   @see-function{gtk:picture-paintable}
   @see-function{gtk:picture-new-for-file}")
 
+;;; --- gtk:picture-isolate-contents -------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "isolate-contents" 'picture) t)
+ "The @code{isolate-contents} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Whether the rendering of the contents is isolated from the rest of the widget
+  tree. Since 4.22 @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'picture-isolate-contents)
+      "Accessor"
+      (documentation 'picture-isolate-contents 'function)
+ "@version{2026-05-17}
+  @syntax{(gtk:picture-isolate-contents object) => setting}
+  @syntax{(setf (gtk:picture-isolate-contents object) setting)}
+  @argument[object]{a @class{gtk:picture} widget}
+  @argument[setting]{a boolean whether the rendering of the contents is isolated
+    from the rest of the widget tree}
+  @begin{short}
+    The accessor for the @slot[gtk:picture]{isolate-contents} slot of the
+    @class{gtk:picture} class gets or sets whether the contents are isolated.
+  @end{short}
+  If set to false the contents will be able to erase or otherwise mix with the
+  background. GTK supports finer grained isolation, in rare cases where you need
+  this, you can use the @fun{gtk:snapshot-push-isolation} function yourself to
+  achieve this. By default contents are isolated.
+
+  Since 4.22
+  @see-class{gtk:picture}
+  @see-function{gtk:snapshot-push-isolation}")
+
 ;;; --- gtk:picture-keep-aspect-ratio ------------------------------------------
 
 #+liber-documentation
@@ -380,7 +423,7 @@
 (setf (liber:alias-for-function 'picture-keep-aspect-ratio)
       "Accessor"
       (documentation 'picture-keep-aspect-ratio 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-keep-aspect-ratio object) => setting}
   @syntax{(setf (gtk:picture-keep-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -389,7 +432,7 @@
   @begin{short}
     The accessor for the @slot[gtk:picture]{keep-aspect-ratio} slot of the
     @class{gtk:picture} class gets or sets whether the picture will render its
-    contents trying to preserve th aspect ratio of the contents.
+    contents trying to preserve the aspect ratio of the contents.
   @end{short}
   If set to the @em{true} value, the picture will render its contents according
   to its aspect ratio. That means that empty space may show up at the top/bottom
@@ -416,7 +459,7 @@
 (setf (liber:alias-for-function 'picture-paintable)
       "Accessor"
       (documentation 'picture-paintable 'function)
- "@version{2025-08-04}
+ "@version{2026-05-17}
   @syntax{(gtk:picture-keep-paintable object) => paintable}
   @syntax{(setf (gtk:picture-paintable object) paintable)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -440,7 +483,7 @@
 
 (defun picture-new ()
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @return{The newly created @class{gtk:picture} widget.}
   @short{Creates a new empty picture.}
   @see-class{gtk:picture}"
@@ -456,7 +499,7 @@
 
 (defun picture-new-for-paintable (paintable)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[paintable]{a @class{gdk:paintable} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -483,7 +526,7 @@
 
 (defun picture-new-for-pixbuf (pixbuf)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @return{The new @class{gtk:picture} widget}
   @begin{short}
@@ -516,7 +559,7 @@
 
 (defun picture-new-for-file (file)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[file]{a @class{g:file} object}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -545,7 +588,7 @@
 
 (defun picture-new-for-filename (filename)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[filename]{a pathname or namestring for the file}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -566,7 +609,7 @@
 (cffi:defcfun ("gtk_picture_new_for_resource" picture-new-for-resource)
      (g:object widget)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[path]{a string for the resource path}
   @return{The new @class{gtk:picture} widget.}
   @begin{short}
@@ -592,7 +635,7 @@
 
 (defun picture-set-pixbuf (picture pixbuf)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @begin{short}
@@ -624,7 +667,7 @@
 
 (defun picture-set-filename (picture filename)
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[filename]{a pathname or namestring for the filename}
   @begin{short}
@@ -643,7 +686,7 @@
 
 (cffi:defcfun ("gtk_picture_set_resource" picture-set-resource) :void
  #+liber-documentation
- "@version{2025-05-09}
+ "@version{2026-05-17}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[path]{a string for the resource path}
   @begin{short}

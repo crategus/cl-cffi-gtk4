@@ -2,7 +2,7 @@
 ;;; gtk4.revealer.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,13 +92,21 @@
   (:swing-right 6)
   (:swing-left 7)
   (:swing-up 8)
-  (:swing-down 9))
+  (:swing-down 9)
+  #+gtk-4-22
+  (:fade-slide-right 10)
+  #+gtk-4-22
+  (:fade-slide-left 11)
+  #+gtk-4-22
+  (:fade-slide-up 12)
+  #+gtk-4-22
+  (:fade-slide-down 13))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'revealer-transition-type)
       "GEnum"
       (liber:symbol-documentation 'revealer-transition-type)
- "@version{2025-04-23}
+ "@version{2026-05-14}
   @begin{declaration}
 (gobject:define-genum \"GtkRevealerTransitionType\" revealer-transition-type
   (:export t
@@ -112,7 +120,11 @@
   (:swing-right 6)
   (:swing-left 7)
   (:swing-up 8)
-  (:swing-down 9))
+  (:swing-down 9)
+  (:fade-slide-right 10)
+  (:fade-slide-left 11)
+  (:fade-slide-up 12)
+  (:fade-slide-down 13))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -126,6 +138,18 @@
       @entry[:swing-left]{Floop in from the right.}
       @entry[:swing-up]{Floop in from the bottom.}
       @entry[:swing-down]{Floop in from the top.}
+      @entry[:fade-slide-right]{Combination of
+        @val[gtk:revealer-transition-type]{:crossfade} and
+        @val[gtk:revealer-transition-type]{:slide-right}. Since 4.22}
+      @entry[:fade-slide-left]{Combination of
+        @val[gtk:revealer-transition-type]{:crossfade} and
+        @val[gtk:revealer-transition-type]{:slide-left}. Since 4.22}
+      @entry[:fade-slide-up]{Combination of
+        @val[gtk:revealer-transition-type]{:crossfade} and
+        @val[gtk:revealer-transition-type]{:slide-up}. Since 4.22}
+      @entry[:fade-slide-down]{Combination of
+        @val[gtk:revealer-transition-type]{:crossfade} and
+        @val[gtk:revealer-transition-type]{:slide-down}. Since 4.22}
     @end{simple-table}
   @end{values}
   @begin{short}
