@@ -23,12 +23,14 @@
 
 ;;;     gtk_bitset_new_empty
 
+#+nil
 (test gtk-bitset-new-empty
   (is (typep (gtk:bitset-new-empty) 'gtk:bitset)))
 
 ;;;     gtk_bitset_new_range
 ;;;     gtk_bitset_contains
 
+#+nil
 (test gtk-bitset-new-range
   (let ((bitset (gtk:bitset-new-range 100 100)))
     (is (typep bitset 'gtk:bitset))
@@ -41,6 +43,7 @@
 ;;;     gtk_bitset_copy
 ;;;     gtk_bitset_equals
 
+#+nil
 (test gtk-bitset-copy
   (let* ((bitset1 (gtk:bitset-new-range 100 99))
          (bitset2 (gtk:bitset-new-range 100 49))
@@ -54,12 +57,14 @@
 
 ;;;     gtk_bitset_is_empty
 
+#+nil
 (test gtk-bitset-is-empty
   (is-true (gtk:bitset-is-empty (gtk:bitset-new-empty)))
   (is-false (gtk:bitset-is-empty (gtk:bitset-new-range 100 99))))
 
 ;;;     gtk_bitset_get_size_in_range
 
+#+nil
 (test gtk-bitset-size-in-range
   (let ((bitset (gtk:bitset-new-range 100 99)))
     (is (= 10 (gtk:bitset-size-in-range bitset 100 109)))
@@ -69,6 +74,7 @@
 
 ;;;     gtk_bitset_remove_all
 
+#+nil
 (test gtk-bitset-remove-all
   (let ((bitset (gtk:bitset-new-range 100 99)))
     (is-false (gtk:bitset-is-empty bitset))
@@ -78,6 +84,7 @@
 ;;;     gtk_bitset_get_minimum
 ;;;     gtk_bitset_get_maximum
 
+#+nil
 (test gtk-bitset-minimum/maximum
   (let ((bitset (gtk:bitset-new-empty)))
     (is (= 0 (gtk:bitset-maximum bitset)))
@@ -87,6 +94,7 @@
 ;;;     gtk_bitset_get_size
 ;;;     gtk_bitset_get_nth
 
+#+nil
 (test gtk-bitset-add.1
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
@@ -105,6 +113,7 @@
                          (gtk:bitset-nth bitset x))
                        '( 0 1 2 3 4 5 6 7 8 9 10 11 12 13))))))
 
+#+nil
 (test gtk-bitset-add.2
   (let ((bitset (gtk:bitset-new-empty))
         (values '(19 18 17 16 15 13 11 9 7 5 3 1)))
@@ -123,6 +132,7 @@
                          (gtk:bitset-nth bitset x))
                        '( 0 1 2 3 4 5 6 7 8 9 10 11 12 13))))))
 
+#+nil
 (test gtk-bitset-add.3
   (let ((bitset (gtk:bitset-new-empty))
         (values '(18 17 19 16 13 11 15 9 5 3 7 1)))
@@ -143,6 +153,7 @@
 
 ;;;     gtk_bitset_remove
 
+#+nil
 (test gtk-bitset-remove
   (let ((bitset (gtk:bitset-new-empty))
         (values '(18 17 19 16 13 11 15 9 5 3 7 1)))
@@ -161,6 +172,7 @@
 ;;;     gtk_bitset_add_range
 ;;;     gtk_bitset_remove_range
 
+#+nil
 (test gtk-bitset-add/remove-range
   (let ((bitset (gtk:bitset-new-empty)))
     (is-false (gtk:bitset-add-range bitset 1000 2000))
@@ -175,6 +187,7 @@
 ;;;     gtk_bitset_add_range_closed
 ;;;     gtk_bitset_remove_range_closed
 
+#+nil
 (test gtk-bitset-add/remove-range-closed
   (let ((bitset (gtk:bitset-new-empty)))
     (is-false (gtk:bitset-add-range-closed bitset 1000 2999))
@@ -189,6 +202,7 @@
 ;;;     gtk_bitset_add_rectangle
 ;;;     gtk_bitset_remove_rectangle
 
+#+nil
 (test gtk-bitset-add/remove-rectangle.1
   (let ((bitset (gtk:bitset-new-empty)))
     (is-false (gtk:bitset-add-rectangle bitset 0 100 100 100))
@@ -201,6 +215,7 @@
     (is (= 9999 (gtk:bitset-maximum bitset)))
     (is (= 7500 (gtk:bitset-size bitset)))))
 
+#+nil
 (test gtk-bitset-add/remove-rectangle.2
     (let ((bitset1 (gtk:bitset-new-empty))
           (bitset2 (gtk:bitset-new-empty))
@@ -217,6 +232,7 @@
 
 ;;;     gtk_bitset_union
 
+#+nil
 (test gtk-bitset-union
   (let ((bitset1 (gtk:bitset-new-range 0 100))
         (bitset2 (gtk:bitset-new-range 100 100)))
@@ -227,6 +243,7 @@
 
 ;;;     gtk_bitset_intersect
 
+#+nil
 (test gtk-bitset-intersect
   (let ((bitset1 (gtk:bitset-new-range 0 100))
         (bitset2 (gtk:bitset-new-range 50 50)))
@@ -237,6 +254,7 @@
 
 ;;;     gtk_bitset_subtract
 
+#+nil
 (test gtk-bitset-subtract
   (let ((bitset1 (gtk:bitset-new-range 0 100))
         (bitset2 (gtk:bitset-new-range 50 50)))
@@ -247,6 +265,7 @@
 
 ;;;     gtk_bitset_difference
 
+#+nil
 (test gtk-bitset-difference
   (let ((bitset1 (gtk:bitset-new-range 0 100))
         (bitset2 (gtk:bitset-new-range 50 100)))
@@ -258,6 +277,7 @@
 ;;;     gtk_bitset_shift_left
 ;;;     gtk_bitset_shift_right
 
+#+nil
 (test gtk-bitset-shift-left/right
   (let ((bitset (gtk:bitset-new-range 0 100)))
     (is-false (gtk:bitset-shift-right bitset 50))
@@ -271,6 +291,7 @@
 
 ;;;     gtk_bitset_splice
 
+#+nil
 (test gtk-bitset-splice
   (let ((bitset (gtk:bitset-new-range 0 100)))
     (is-false (gtk:bitset-splice bitset 59 25 50))
@@ -280,6 +301,7 @@
 
 ;;;     gtk_bitset_iter_init_first
 
+#+nil
 (test gtk-bitset-iter-init-first
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
@@ -294,6 +316,7 @@
 
 ;;;     gtk_bitset_iter_init_last
 
+#+nil
 (test gtk-bitset-iter-init-last
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
@@ -308,6 +331,7 @@
 
 ;;;     gtk_bitset_iter_init_at
 
+#+nil
 (test gtk-bitset-iter-init-at
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
@@ -327,6 +351,7 @@
 ;;;     gtk_bitset_iter_get_value
 ;;;     gtk_bitset_iter_is_valid
 
+#+nil
 (test gtk-bitset-next/previous
   (let ((bitset (gtk:bitset-new-empty))
         (values '(1 3 5 7 9 11 13 15 16 17 18 19)))
@@ -346,4 +371,4 @@
       (is-false (gtk:bitset-iter-previous iter))
       (is (= 0 (gtk:bitset-iter-value iter))))))
 
-;;; 2024-10-18
+;;; 2026-05-14

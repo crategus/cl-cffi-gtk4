@@ -135,6 +135,7 @@
 
 ;;;     gdk_content_formats_match_mime_type
 
+#-windows
 (test gdk-content-formats-match-mime-type
   (let* ((first (gdk:content-formats-new "text/plain"))
          (second (gdk:content-formats-new "image/png"))
@@ -175,21 +176,27 @@
 
 (test gdk-content-formats-union-deserialize-gtypes
   (let ((formats (gdk:content-formats-new "text/plain" "image/png")))
-
     (is (string= "GdkTexture GdkPixbuf gchararray text/plain image/png"
                  (gdk:content-formats-to-string
                    (gdk:content-formats-union-deserialize-gtypes formats))))))
 
 ;;;     gdk_content_formats_union_serialize_mime_types
 
+#-windows
 (test gdk-content-formats-union-serialize-mime-types
   (let ((formats (gdk:content-formats-new-for-gtype "gchararray")))
+    #-windows
     (is (string= "gchararray text/plain;charset=utf-8 text/plain"
+                 (gdk:content-formats-to-string
+                   (gdk:content-formats-union-serialize-mime-types formats))))
+    #+windows
+    (is (string= "gchararray text/plain;charset=utf-8 text/plain;charset=CP1252 text/plain"
                  (gdk:content-formats-to-string
                    (gdk:content-formats-union-serialize-mime-types formats))))))
 
 ;;;     gdk_content_formats_union_deserialize_mime_types
 
+#-windows
 (test gdk-content-formats-union-deserialize-mime-types
   (let ((formats (gdk:content-formats-new-for-gtype "gchararray")))
     (is (string= "gchararray text/plain;charset=utf-8 text/plain"

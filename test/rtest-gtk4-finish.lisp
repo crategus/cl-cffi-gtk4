@@ -44,7 +44,8 @@
                "GstBitmask"
                "GstFlagSet"
                "GstValueList"
-               "GstValueArray")
+               "GstValueArray"
+               "GstValueUniqueList")
              (mapcar #'glib:gtype-name gtypes)))))
 
 ;;; ----------------------------------------------------------------------------
@@ -58,4 +59,4 @@
          (when *test-dribble*
            (format t "~%Second or more run of the gtk-test suite finished.~%")))))
 
-;;; 2025-4-26
+;;; 2026-05-15

@@ -59,10 +59,6 @@
 .accordion button:active {
   background-color: rgb(153,52,1);
 }
-
-.accordion button:hover:active {
-  background-color: rgb(153,52,1);
-}
 ")
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -138,6 +134,36 @@
                                     (:MORE 2)
                                     (:LESS 3))
              (gobject:get-gtype-definition "GtkInterfaceContrast"))))
+
+;;;     GtkReducedMotion
+
+#+gtk-4-22
+(test gtk-reduce-motion
+  ;; Check type
+  (is (g:type-is-enum "GtkReducedMotion"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkReducedMotion")
+          (g:gtype (cffi:foreign-funcall "gtk_reduced_motion_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:reduced-motion
+          (glib:symbol-for-gtype "GtkReducedMotion")))
+  ;; Check names
+  (is (equal '("GTK_REDUCED_MOTION_NO_PREFERENCE" "GTK_REDUCED_MOTION_REDUCE")
+             (glib-test:list-enum-item-names "GtkReducedMotion")))
+  ;; Check values
+  (is (equal '(0 1)
+             (glib-test:list-enum-item-values "GtkReducedMotion")))
+  ;; Check nick names
+  (is (equal '("no-preference" "reduce")
+             (glib-test:list-enum-item-nicks "GtkReducedMotion")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkReducedMotion" GTK:REDUCED-MOTION
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_reduced_motion_get_type")
+                                    (:NO-PREFERENCE 0)
+                                    (:REDUCE 1))
+             (gobject:get-gtype-definition "GtkReducedMotion"))))
 
 ;;;     GtkCssLocation
 
@@ -224,54 +250,48 @@
 
 (test gtk-css-section-new-with-bytes
   (glib-test:with-check-memory ()
-    (multiple-value-bind (data len)
-        (cffi:foreign-string-alloc +css-button+)
-      (cffi:with-foreign-objects ((start '(:struct gtk:css-location))
-                                  (end '(:struct gtk:css-location)))
-        ;; Set start slots
-        (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
-                                   gtk::line-bytes gtk::line-chars)
-                                  start
-                                  (:struct gtk:css-location))
-          (setf gtk::bytes 0
-                gtk::chars 0
-                gtk::lines 0
-                gtk::line-bytes 0
-                gtk::line-chars 0))
-        ;; Set end slots
-        (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
-                                   gtk::line-bytes gtk::line-chars)
-                                  end
-                                  (:struct gtk:css-location))
-          (setf gtk::bytes 10
-                gtk::chars 10
-                gtk::lines 5
-                gtk::line-bytes 0
-                gtk::line-chars 0))
-        (let ((bytes (g:bytes-new data len))
-               section)
-          ;; Create section from bytes
-          (is (typep (setf section
-                           (gtk:css-section-new-with-bytes nil bytes start end))
-                     'gtk:css-section))
-          (is (string= "<data>:1:1-6:1"
-                       (gtk:css-section-to-string section)))
-          ;; Access section
-          (is (typep (gtk:css-section-bytes section) 'g:bytes))
-          (is-false (gtk:css-section-file section))
-          (is-false (gtk:css-section-parent section))
-          (is (cffi:pointerp (gtk:css-section-start-location section)))
-          (is (cffi:pointerp (gtk:css-section-end-location section))))))))
+    (cffi:with-foreign-objects ((start '(:struct gtk:css-location))
+                                (end '(:struct gtk:css-location)))
+      ;; Set start slots
+      (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                 gtk::line-bytes gtk::line-chars)
+                                start
+                                (:struct gtk:css-location))
+        (setf gtk::bytes 0
+              gtk::chars 0
+              gtk::lines 0
+              gtk::line-bytes 0
+              gtk::line-chars 0))
+      ;; Set end slots
+      (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                 gtk::line-bytes gtk::line-chars)
+                                end
+                                (:struct gtk:css-location))
+        (setf gtk::bytes 10
+              gtk::chars 10
+              gtk::lines 5
+              gtk::line-bytes 0
+              gtk::line-chars 0))
+      (let ((bytes (g:bytes-new-from-string +css-button+))
+             section)
+        ;; Create section from bytes
+        (is (typep (setf section
+                         (gtk:css-section-new-with-bytes nil bytes start end))
+                   'gtk:css-section))
+        (is (string= "<data>:1:1-6:1"
+                     (gtk:css-section-to-string section)))
+        ;; Access section
+        (is (typep (gtk:css-section-bytes section) 'g:bytes))
+        (is-false (gtk:css-section-file section))
+        (is-false (gtk:css-section-parent section))
+        (is (cffi:pointerp (gtk:css-section-start-location section)))
+        (is (cffi:pointerp (gtk:css-section-end-location section)))))))
 
 ;;;     gtk_css_section_ref                                 not implemented
 ;;;     gtk_css_section_unref                               not implemented
 ;;;     gtk_css_section_print                               not implemented
 
 ;;; --- Types and Values -------------------------------------------------------
-
-;;;     GtkCssParserError                                   not implemented
-;;;     GtkCssParserWarning                                 not implemented
-;;;     GTK_CSS_PARSER_ERROR                                not implemented
 
 ;;;     GtkCssProvider
 
@@ -294,6 +314,10 @@
   (is (equal '("GtkStyleProvider")
              (glib-test:list-interfaces "GtkCssProvider")))
   ;; Check properties
+  #+gtk-4-22
+  (is (equal '("prefers-color-scheme" "prefers-contrast" "prefers-reduced-motion")
+             (glib-test:list-properties "GtkCssProvider")))
+  #-gtk-4-22
   (is (equal '("prefers-color-scheme" "prefers-contrast")
              (glib-test:list-properties "GtkCssProvider")))
   ;; Check signals
@@ -305,11 +329,12 @@
                        :EXPORT T
                        :INTERFACES ("GtkStyleProvider")
                        :TYPE-INITIALIZER "gtk_css_provider_get_type")
-                      ((PREFERS-COLOR-SCHEME
-                        CSS-PROVIDER-PREFERS-COLOR-SCHEME
+                      ((PREFERS-COLOR-SCHEME CSS-PROVIDER-PREFERS-COLOR-SCHEME
                         "prefers-color-scheme" "GtkInterfaceColorScheme" T T)
                        (PREFERS-CONTRAST CSS-PROVIDER-PREFERS-CONTRAST
-                        "prefers-contrast" "GtkInterfaceContrast" T T)))
+                        "prefers-contrast" "GtkInterfaceContrast" T T)
+                       (PREFERS-REDUCED-MOTION CSS-PROVIDER-PREFERS-REDUCED-MOTION
+                        "prefers-reduced-motion" "GtkReducedMotion" T T)))
              (gobject:get-gtype-definition "GtkCssProvider"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -336,9 +361,26 @@
 
 (test gtk-css-provider-properties
   (glib-test:with-check-memory (provider)
+    ;; Create CSS provider
     (is (typep (setf provider (gtk:css-provider-new)) 'gtk:css-provider))
+    ;; Property PREFERS-COLOR-SCHEME since 4.20
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkCssProvider" "prefers-color-scheme")))
     (is (eq :default (gtk:css-provider-prefers-color-scheme provider)))
-    (is (eq :no-preference (gtk:css-provider-prefers-contrast provider)))))
+    (is (eq :dark (setf (gtk:css-provider-prefers-color-scheme provider) :dark)))
+    ;; Property PREFERS-CONTRAST since 4.20
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkCssProvider" "prefers-contrast")))
+    (is (eq :no-preference (gtk:css-provider-prefers-contrast provider)))
+    (is (eq :more (setf (gtk:css-provider-prefers-contrast provider) :more)))
+    ;; Property PREFERS-REDUCED--MOTION since 4.22
+    #+gtk-4-22
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkCssProvider" "prefers-reduced-motion")))
+    #+gtk-4-22
+    (is (eq :no-preference (gtk:css-provider-prefers-reduced-motion provider)))
+    #+gtk-4-22
+    (is (eq :reduce (setf (gtk:css-provider-prefers-reduced-motion provider) :reduce)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -352,26 +394,42 @@
 
 #+crategus
 (test gtk-css-provider-load-named.1
-  (glib-test:with-check-memory (provider)
-    (setf provider (gtk:css-provider-new))
-    (is-false (gtk:css-provider-load-named provider "Yaru"))
-    (is (= 415930 (length (gtk:css-provider-to-string provider))))))
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (provider)
+      (setf provider (gtk:css-provider-new))
+      (is-false (gtk:css-provider-load-named provider "Yaru"))
+      (is (= 419345 (length (gtk:css-provider-to-string provider)))))))
 
 #+crategus
 (test gtk-css-provider-load-named.2
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (provider)
+      (setf provider (gtk:css-provider-new))
+      (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
+      (is (= 414487 (length (gtk:css-provider-to-string provider)))))))
+
+;;;     gtk_css_provider_load_from_bytes
+
+;; FIXME: Creates a warning, but the result is correct.
+;; Gtk-WARNING : Theme parser error: <data>:55:1-2: Expected a valid selector
+;; What is the problem?
+
+#+nil
+(test gtk-css-provider-load-from-bytes
   (glib-test:with-check-memory (provider)
-    (setf provider (gtk:css-provider-new))
-    (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
-    (is (= 411065 (length (gtk:css-provider-to-string provider))))))
+    (let ((bytes (g:bytes-new-from-string +css-button+)))
+      (setf provider (gtk:css-provider-new))
+      (is-false (gtk:css-provider-load-from-bytes provider bytes))
+      (is (= 1243 (length (gtk:css-provider-to-string provider)))))))
 
 ;;;     gtk_css_provider_load_from_data
 
 (test gtk-css-provider-load-from-data
-  (glib-test:with-check-memory (provider)
-    (let ((gtk-init:*warn-deprecated* nil))
-        (setf provider (gtk:css-provider-new))
-        (is-false (gtk:css-provider-load-from-data provider +css-button+))
-        (is (= 1314 (length (gtk:css-provider-to-string provider)))))))
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (provider)
+      (setf provider (gtk:css-provider-new))
+      (is-false (gtk:css-provider-load-from-data provider +css-button+))
+      (is (= 1243 (length (gtk:css-provider-to-string provider)))))))
 
 ;;;     gtk_css_provider_load_from_file
 
@@ -406,33 +464,19 @@
         (is-false (gtk:css-provider-load-from-resource provider path))
         (is (= 2716 (length (gtk:css-provider-to-string provider))))))))
 
-;;;     gtk_css_provider_load_from_bytes
-
-;; FIXME: We get a warning for this example. But loading seems to work.
-;; Gtk-WARNING **: Theme parser error: <data>:33:1-2: Expected a valid selector
-;; What is the problem in this example?
-
-#+nil
-(test gtk-css-provider-load-from-bytes
-  (glib-test:with-check-memory (provider)
-    (multiple-value-bind (data len)
-        (cffi:foreign-string-alloc +css-button+)
-      (let ((bytes (g:bytes-new data len)))
-        (setf provider (gtk:css-provider-new))
-        (is-false (gtk:css-provider-load-from-bytes provider bytes))
-        (is (= 1314 (length (gtk:css-provider-to-string provider))))))))
-
 ;;;     gtk_css_provider_load_from_string
 
 (test gtk-css-provider-load-from-string
-  (let ((provider (gtk:css-provider-new)))
+  (glib-test:with-check-memory (provider)
+    (setf provider (gtk:css-provider-new))
     (is-false (gtk:css-provider-load-from-string provider +css-button+))
-    (is (= 1314 (length (gtk:css-provider-to-string provider))))))
+    (is (= 1243 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_to_string
 
 (test gtk-css-provider-to-string
-  (let ((provider (gtk:css-provider-new)))
+  (glib-test:with-check-memory (provider)
+    (setf provider (gtk:css-provider-new))
     (is (string= "" (gtk:css-provider-to-string provider)))
     (is-false (gtk:css-provider-load-from-string provider +css-button+))
     (is (string=
@@ -490,11 +534,7 @@
 .accordion button:active {
   background-color: rgb(153,52,1);
 }
-
-.accordion button:hover:active {
-  background-color: rgb(153,52,1);
-}
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;; 2025-11-08
+;;; 2026-05-16

@@ -43,18 +43,17 @@
                "gtk-font-rendering" "gtk-fontconfig-timestamp"
                "gtk-hint-font-metrics" "gtk-icon-theme-name" "gtk-im-module"
                "gtk-interface-color-scheme" "gtk-interface-contrast"
-               "gtk-keynav-use-caret" "gtk-label-select-on-focus"
-               "gtk-long-press-time" "gtk-overlay-scrolling"
-               "gtk-primary-button-warps-slider" "gtk-print-backends"
-               "gtk-print-preview-command" "gtk-recent-files-enabled"
-               "gtk-recent-files-max-age" "gtk-shell-shows-app-menu"
-               "gtk-shell-shows-desktop" "gtk-shell-shows-menubar"
-               "gtk-show-status-shapes"
+               "gtk-interface-reduced-motion" "gtk-keynav-use-caret"
+               "gtk-label-select-on-focus" "gtk-long-press-time"
+               "gtk-overlay-scrolling" "gtk-primary-button-warps-slider"
+               "gtk-print-backends" "gtk-print-preview-command"
+               "gtk-recent-files-enabled" "gtk-recent-files-max-age"
+               "gtk-shell-shows-app-menu" "gtk-shell-shows-desktop"
+               "gtk-shell-shows-menubar" "gtk-show-status-shapes"
                "gtk-sound-theme-name" "gtk-split-cursor" "gtk-theme-name"
                "gtk-titlebar-double-click" "gtk-titlebar-middle-click"
-               "gtk-titlebar-right-click" "gtk-xft-antialias"
-               "gtk-xft-dpi" "gtk-xft-hinting" "gtk-xft-hintstyle"
-               "gtk-xft-rgba")
+               "gtk-titlebar-right-click" "gtk-xft-antialias" "gtk-xft-dpi"
+               "gtk-xft-hinting" "gtk-xft-hintstyle" "gtk-xft-rgba")
              (glib-test:list-properties "GtkSettings")))
   ;; Check signals
   (is (equal '("notify")
@@ -148,6 +147,9 @@
                         "GtkInterfaceColorScheme" T T)
                        (GTK-INTERFACE-CONTRAST SETTINGS-GTK-INTERFACE-CONTRAST
                         "gtk-interface-contrast" "GtkInterfaceContrast" T T)
+                       (GTK-INTERFACE-REDUCED-MOTION
+                        SETTINGS-GTK-INTERFACE-REDUCED-MOTION
+                        "gtk-interface-reduced-motion" "GtkReducedMotion" T T)
                        (GTK-KEYNAV-USE-CARET SETTINGS-GTK-KEYNAV-USE-CARET
                         "gtk-keynav-use-caret" "gboolean" T T)
                        (GTK-LABEL-SELECT-ON-FOCUS
@@ -248,12 +250,13 @@
     (is (stringp (gtk:settings-gtk-im-module settings)))
     (is (eq :default (gtk:settings-gtk-interface-color-scheme settings)))
     (is (eq :no-preference (gtk:settings-gtk-interface-contrast settings)))
+    (is (eq :no-preference (gtk:settings-gtk-interface-reduced-motion settings)))
     (is-false (gtk:settings-gtk-keynav-use-caret settings))
     (is-true (gtk:settings-gtk-label-select-on-focus settings))
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))
     (is-true (gtk:settings-gtk-overlay-scrolling settings))
     (is-true (gtk:settings-gtk-primary-button-warps-slider settings))
-    (is (string= "cpdb,file" (gtk:settings-gtk-print-backends settings)))
+    (is (string= "cups,file" (gtk:settings-gtk-print-backends settings)))
     (is (string= "evince --unlink-tempfile --preview --print-settings %s %f"
                  (gtk:settings-gtk-print-preview-command settings)))
     (is-true (gtk:settings-gtk-recent-files-enabled settings))
@@ -332,4 +335,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; 2026-01-17
+;;; 2026-05-15

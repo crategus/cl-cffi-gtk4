@@ -198,7 +198,7 @@
       (is (string= "rtest-gtk4-recent-manager.lisp"
                    (gtk:recent-info-display-name info)))
       (is-false (gtk:recent-info-description info))
-      (is (string= "text/x-common-lisp" (gtk:recent-info-mime-type info)))
+      (is (string= "text/plain" (gtk:recent-info-mime-type info)))
       (is (integerp (gtk:recent-info-added info)))
       (is (integerp (gtk:recent-info-modified info)))
       (is (integerp (gtk:recent-info-visited info)))
@@ -297,4 +297,4 @@
       (is-true (gtk:recent-info-match info2 info2))
       (is-false (gtk:recent-info-match info1 info2)))))
 
-;;; 2026-04-19
+;;; 2026-05-15

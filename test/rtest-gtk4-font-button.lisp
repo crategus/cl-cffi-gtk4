@@ -99,9 +99,6 @@
       (is (typep (setf button
                        (make-instance 'gtk:font-button)) 'gtk:font-button))
       (is-true (gtk:font-button-modal button))
-      #-windows
-      (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
-      #+windows
       (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
       (is-false (gtk:font-button-use-font button))
       (is-false (gtk:font-button-use-size button)))))
@@ -125,9 +122,6 @@
                        (gtk:font-button-new-with-font "Sans Italic 12"))
                  'gtk:font-button))
       (is-true (gtk:font-button-modal button))
-      #-windows
-      (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
-      #+windows
       (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
       (is-false (gtk:font-button-use-font button))
       (is-false (gtk:font-button-use-size button))
@@ -140,4 +134,4 @@
       (is-false (gtk:font-chooser-preview-text button))
       (is-true (gtk:font-chooser-show-preview-entry button)))))
 
-;;; 2026-02-05
+;;; 2026-05-15

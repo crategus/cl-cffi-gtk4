@@ -7,6 +7,7 @@
 
 ;;;     GskRenderNodeType
 
+#+gtk-4-22
 (test gsk-render-node-type
   ;; Check type
   (is (g:type-is-enum "GskRenderNodeType"))
@@ -28,11 +29,13 @@
                "GSK_CROSS_FADE_NODE" "GSK_TEXT_NODE" "GSK_BLUR_NODE"
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE" "GSK_TEXTURE_SCALE_NODE"
                "GSK_MASK_NODE" "GSK_FILL_NODE" "GSK_STROKE_NODE"
-               "GSK_SUBSURFACE_NODE" "GSK_COMPONENT_TRANSFER_NODE")
+               "GSK_SUBSURFACE_NODE" "GSK_COMPONENT_TRANSFER_NODE"
+               "GSK_COPY_NODE" "GSK_PASTE_NODE" "GSK_COMPOSITE_NODE"
+               "GSK_ISOLATION_NODE" "GSK_DISPLACEMENT_NODE" "GSK_ARITHMETIC_NODE")
              (glib-test:list-enum-item-names "GskRenderNodeType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-               25 26 27 28 29 30 31)
+               25 26 27 28 29 30 31 32 33 34 35 36 37)
              (glib-test:list-enum-item-values "GskRenderNodeType")))
   ;; Check nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
@@ -44,7 +47,9 @@
                "rounded-clip-node" "shadow-node" "blend-node" "cross-fade-node"
                "text-node" "blur-node" "debug-node" "gl-shader-node"
                "texture-scale-node" "mask-node" "fill-node" "stroke-node"
-               "subsurface-node" "component-transfer-node")
+               "subsurface-node" "component-transfer-node" "copy-node"
+               "paste-node" "composite-node" "isolation-node"
+               "displacement-node" "arithmetic-node")
              (glib-test:list-enum-item-nicks "GskRenderNodeType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GskRenderNodeType" GSK:RENDER-NODE-TYPE
@@ -82,7 +87,13 @@
                                     (:FILL-NODE 28)
                                     (:STROKE-NODE 29)
                                     (:SUBSURFACE-NODE 30)
-                                    (:COMPONENT-TRANSFER-NODE 31))
+                                    (:COMPONENT-TRANSFER-NODE 31)
+                                    (:COPY-NODE 32)
+                                    (:PASTE-NODE 33)
+                                    (:COMPOSITE-NODE 34)
+                                    (:ISOLATION-NODE 35)
+                                    (:DISPLACEMENT-NODE 36)
+                                    (:ARITHMETIC-NODE 37))
              (gobject:get-gtype-definition "GskRenderNodeType"))))
 
 ;;;     GskScalingFilter
@@ -379,7 +390,7 @@
   (let ((color (gdk:rgba-parse "red"))
         (node nil))
     (graphene:with-rect (rect 0 0 1 10)
-      (is (eq (g:gtype "GskColorNode")
+      (is (eq (g:type-ensure "GskColorNode")
               (g:type-from-instance (setf node
                                           (gsk:color-node-new color rect)))))
     (is (gdk:rgba-equal (gdk:rgba-new :red 1 :alpha 1)
@@ -1040,6 +1051,5 @@
 ;;;     GskSubsurfaceNode                                   Since 4.14
 ;;;     GskComponentTransferNode                            Since 4.20
 
-;;; --- Functions --------------------------------------------------------------
 
-;;; 2026-03-25
+;;; 2026-05-14

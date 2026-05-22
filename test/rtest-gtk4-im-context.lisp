@@ -34,8 +34,9 @@
   (is (equal '("input-hints" "input-purpose")
              (glib-test:list-properties "GtkIMContext")))
   ;; Check signals
-  (is (equal '("commit" "delete-surrounding" "preedit-changed" "preedit-end"
-               "preedit-start" "retrieve-surrounding")
+  (is (equal '("commit" "delete-surrounding" "invalid-composition"
+               "preedit-changed" "preedit-end" "preedit-start"
+               "retrieve-surrounding")
              (glib-test:list-signals "GtkIMContext")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkIMContext" GTK:IM-CONTEXT
@@ -48,114 +49,152 @@
                          "input-purpose" "GtkInputPurpose" T T)))
              (gobject:get-gtype-definition "GtkIMContext"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     commit
+
+(test gtk-im-context-commit-signal
+  (let* ((name "commit")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     delete-surrounding
+
+(test gtk-im-context-delete-surrounding-signal
+  (let* ((name "delete-surrounding")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gint" "gint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     invalid-composition
+
+(test gtk-im-context-invalid-composition-signal
+  (let* ((name "invalid-composition")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     preedit-changed
+
+(test gtk-im-context-preedit-changed-signal
+  (let* ((name "preedit-changed")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     preedit-end
+
+(test gtk-im-context-preedit-end-signal
+  (let* ((name "preedit-end")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     preedit-start
+
+(test gtk-im-context-preedit-start-signal
+  (let* ((name "preedit-start")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     retrieve-surrounding
+
+(test gtk-im-context-retrieve-surrounding-signal
+  (let* ((name "retrieve-surrounding")
+         (gtype (g:gtype "GtkIMContext"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 ;; GTK-IM-CONTEXT is an abstract class, we use GTK-IM-CONTEXT-SIMPLE
 
-;;;     input-hints
-;;;     input-purpose
-
 (test gtk-im-context-properties
-  (let ((method (make-instance 'gtk:im-context-simple)))
-    (is (typep method 'gtk:im-context))
+  (glib-test:with-check-memory (context)
+    (is (typep (setf context (gtk:im-context-simple-new)) 'gtk:im-context-simple))
     ;; Property INPUT-HINTS
-    (is (equal '() (gtk:im-context-input-hints method)))
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkIMContext" "input-hints")))
+    (is (equal '() (gtk:im-context-input-hints context)))
     (is (equal '(:spellcheck :lowercase)
-               (setf (gtk:im-context-input-hints method)
-                     '(:spellcheck :lowercase))))
-    (is (equal '(:spellcheck :lowercase)
-               (gtk:im-context-input-hints method)))
+               (setf (gtk:im-context-input-hints context) '(:spellcheck :lowercase))))
     ;; Property INPUT-PURPOSE
-    (is (eq :free-form (gtk:im-context-input-purpose method)))
-    (is (eq :alpha (setf (gtk:im-context-input-purpose method) :alpha)))
-    (is (eq :alpha (gtk:im-context-input-purpose method)))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     commit
-;;;     delete-surrounding
-;;;     preedit-changed
-;;;     preedit-end
-;;;     preedit-start
-;;;     retrieve-surrounding
-
-(test gtk-im-context-signals
-  ;; Query info for "commit" signal
-  (let ((query (g:signal-query (g:signal-lookup "commit" "GtkIMContext"))))
-    (is (string= "commit" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("gchararray")
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query)))
-  ;; Query info for "delete-surrounding" signal
-  (let ((query (g:signal-query (g:signal-lookup "delete-surrounding"
-                                                "GtkIMContext"))))
-    (is (string= "delete-surrounding" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("gint" "gint")
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query)))
-  ;; Query info for "preedit-changed" signal
-  (let ((query (g:signal-query (g:signal-lookup "preedit-changed"
-                                                "GtkIMContext"))))
-    (is (string= "preedit-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query)))
-  ;; Query info for "preedit-end" signal
-  (let ((query (g:signal-query (g:signal-lookup "preedit-end" "GtkIMContext"))))
-    (is (string= "preedit-end" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query)))
-  ;; Query info for "preedit-start" signal
-  (let ((query (g:signal-query (g:signal-lookup "preedit-start"
-                                                "GtkIMContext"))))
-    (is (string= "preedit-start" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query)))
-  ;; Query info for "retrieve-surrounding" signal
-  (let ((query (g:signal-query (g:signal-lookup "retrieve-surrounding"
-                                                "GtkIMContext"))))
-    (is (string= "retrieve-surrounding" (g:signal-query-signal-name query)))
-    (is (string= "GtkIMContext"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query))))
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkIMContext" "input-purpose")))
+    (is (eq :free-form (gtk:im-context-input-purpose context)))
+    (is (eq :alpha (setf (gtk:im-context-input-purpose context) :alpha)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -174,4 +213,4 @@
 ;;;     gtk_im_context_get_surrounding_with_selection       Since 4.2
 ;;;     gtk_im_context_set_surrounding_with_selection       Since 4.2
 
-;;; 2025-11-16
+;;; 2026-05-15

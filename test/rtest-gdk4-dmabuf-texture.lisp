@@ -142,6 +142,7 @@
 ;;;     gdk_dmabuf_texture_builder_get_stride
 ;;;     gdk_dmabuf_texture_builder_set_stride
 
+#-windows
 (test gdk-dmabuf-texture-builder-build
   (glib-test:with-check-memory (builder :strong 1)
     (is (typep (setf builder

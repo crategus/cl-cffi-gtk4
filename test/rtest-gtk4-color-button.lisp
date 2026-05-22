@@ -59,9 +59,6 @@
     (is-false (setf (gtk:color-button-modal button) nil))
     (is-false (gtk:color-button-show-editor button))
     (is-true (setf (gtk:color-button-show-editor button) t))
-    #-windows
-    (is (string= "Wählen Sie eine Farbe" (gtk:color-button-title button)))
-    #+windows
     (is (string= "Eine Farbe wählen" (gtk:color-button-title button)))
     (is (string= "Wähle eine Farbe"
                  (setf (gtk:color-button-title button) "Wähle eine Farbe")))))
@@ -112,4 +109,4 @@
                  (gdk:rgba-to-string (gtk:color-chooser-rgba button))))
     (is-false (gtk:color-chooser-use-alpha button))))
 
-;;; 2024-9-20
+;;; 2026-05-15

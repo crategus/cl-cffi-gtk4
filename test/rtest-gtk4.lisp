@@ -202,6 +202,7 @@ sem venenatis, vitae ultricies arcu laoreet."))
                                 (setf default-printer printer)
                                 t)
                               nil)) ; Do not wait
+    #-windows
     (when verbose
       (if default-printer
           (format t "~&Default printer for testsuite is \"~a\"~%"
@@ -209,4 +210,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
           (format t "~&No printer for testsuite available~%")))
     default-printer))
 
-;;; 2026-05-03
+;;; 2026-05-20

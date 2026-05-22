@@ -1106,7 +1106,8 @@
   (is (equal '(0 1 2 3 4 5)
              (glib-test:list-enum-item-values "GtkConstraintVflParserError")))
   ;; Check nick names
-  (is (equal '("symbol" "attribute" "view" "metric" "priority" "relation")
+  (is (equal '("invalid-symbol" "invalid-attribute" "invalid-view"
+               "invalid-metric" "invalid-priority" "invalid-relation")
              (glib-test:list-enum-item-nicks "GtkConstraintVflParserError")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkConstraintVflParserError"
@@ -1114,12 +1115,12 @@
                                     (:EXPORT T
                                      :TYPE-INITIALIZER
                                      "gtk_constraint_vfl_parser_error_get_type")
-                                    (:SYMBOL 0)
-                                    (:ATTRIBUTE 1)
-                                    (:VIEW 2)
-                                    (:METRIC 3)
-                                    (:PRIORITY 4)
-                                    (:RELATION 5))
+                                    (:INVALID-SYMBOL 0)
+                                    (:INVALID-ATTRIBUTE 1)
+                                    (:INVALID-VIEW 2)
+                                    (:INVALID-METRIC 3)
+                                    (:INVALID-PRIORITY 4)
+                                    (:INVALID-RELATION 5))
              (gobject:get-gtype-definition "GtkConstraintVflParserError"))))
 
 ;;;     GtkSymbolicColor
@@ -1135,13 +1136,14 @@
           (glib:symbol-for-gtype "GtkSymbolicColor")))
   ;; Check names
   (is (equal '("GTK_SYMBOLIC_COLOR_FOREGROUND" "GTK_SYMBOLIC_COLOR_ERROR"
-               "GTK_SYMBOLIC_COLOR_WARNING" "GTK_SYMBOLIC_COLOR_SUCCESS")
+               "GTK_SYMBOLIC_COLOR_WARNING" "GTK_SYMBOLIC_COLOR_SUCCESS"
+               "GTK_SYMBOLIC_COLOR_ACCENT")
              (glib-test:list-enum-item-names "GtkSymbolicColor")))
   ;; Check values
-  (is (equal '(0 1 2 3)
+  (is (equal '(0 1 2 3 4)
              (glib-test:list-enum-item-values "GtkSymbolicColor")))
   ;; Check nick names
-  (is (equal '("foreground" "error" "warning" "success")
+  (is (equal '("foreground" "error" "warning" "success" "accent")
              (glib-test:list-enum-item-nicks "GtkSymbolicColor")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkSymbolicColor" GTK:SYMBOLIC-COLOR
@@ -1151,7 +1153,8 @@
                                     (:FOREGROUND 0)
                                     (:ERROR 1)
                                     (:WARNING 2)
-                                    (:SUCCESS 3))
+                                    (:SUCCESS 3)
+                                    (:ACCENT 4))
              (gobject:get-gtype-definition "GtkSymbolicColor"))))
 
 ;;;     GtkAccessibleRole
@@ -1766,4 +1769,4 @@
                        (:HIGH 2))
              (gobject:get-gtype-definition "GtkAccessibleAnnouncementPriority"))))
 
-;;; 2025-05-13
+;;; 2026-05-15

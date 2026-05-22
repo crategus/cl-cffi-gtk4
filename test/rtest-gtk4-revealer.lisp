@@ -27,14 +27,20 @@
                "GTK_REVEALER_TRANSITION_TYPE_SWING_RIGHT"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_LEFT"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_UP"
-               "GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN")
+               "GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN"
+               "GTK_REVEALER_TRANSITION_TYPE_FADE_SLIDE_RIGHT"
+               "GTK_REVEALER_TRANSITION_TYPE_FADE_SLIDE_LEFT"
+               "GTK_REVEALER_TRANSITION_TYPE_FADE_SLIDE_UP"
+               "GTK_REVEALER_TRANSITION_TYPE_FADE_SLIDE_DOWN")
              (glib-test:list-enum-item-names "GtkRevealerTransitionType")))
   ;; Check values
-  (is (equal '(0 1 2 3 4 5 6 7 8 9)
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13)
              (glib-test:list-enum-item-values "GtkRevealerTransitionType")))
   ;; Check nick names
   (is (equal '("none" "crossfade" "slide-right" "slide-left" "slide-up"
-               "slide-down" "swing-right" "swing-left" "swing-up" "swing-down")
+               "slide-down" "swing-right" "swing-left" "swing-up" "swing-down"
+               "fade-slide-right" "fade-slide-left" "fade-slide-up"
+               "fade-slide-down")
              (glib-test:list-enum-item-nicks "GtkRevealerTransitionType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkRevealerTransitionType"
@@ -51,7 +57,11 @@
                                     (:SWING-RIGHT 6)
                                     (:SWING-LEFT 7)
                                     (:SWING-UP 8)
-                                    (:SWING-DOWN 9))
+                                    (:SWING-DOWN 9)
+                                    (:FADE-SLIDE-RIGHT 10)
+                                    (:FADE-SLIDE-LEFT 11)
+                                    (:FADE-SLIDE-UP 12)
+                                    (:FADE-SLIDE-DOWN 13))
              (gobject:get-gtype-definition "GtkRevealerTransitionType"))))
 
 ;;;     GtkRevealer
@@ -123,4 +133,4 @@
   (glib-test:with-check-memory (revealer)
     (is (typep (setf revealer (gtk:revealer-new)) 'gtk:revealer))))
 
-;;; 2025-4-23
+;;; 2026-05-14

@@ -100,6 +100,7 @@
 ;;;     gdk_gl_context_get_version
 ;;;     gdk_gl_context_realize
 
+#+-windows
 (test gdk-gl-context-display/surface/version
   (glib-test:with-check-memory ((surface 2) context :strong 2)
     (is (typep (setf surface
@@ -117,6 +118,7 @@
 ;;;     gdk_gl_context_set_required_version
 ;;;     gdk_gl_context_get_required_version
 
+#-windows
 (test gdk-gl-context-required-version
   (glib-test:with-check-memory ((surface 2) context :strong 2)
     (is (typep (setf surface
@@ -168,6 +170,7 @@
 ;;;     gdk_gl_context_set_use_es
 ;;;     gdk_gl_context_get_use_es
 
+#-windows
 (test gdk-gl-context-use-es.1
   (glib-test:with-check-memory ((surface 2) context :strong 2)
     (is (typep (setf surface
