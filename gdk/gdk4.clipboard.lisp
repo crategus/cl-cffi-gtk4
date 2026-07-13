@@ -563,8 +563,8 @@ lambda (clipboard)    :run-last
 ;;; gdk_clipboard_read_text_finish
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_clipoard_read_text_finish"
-               %clipboard-read-text-finish) :string
+(cffi:defcfun ("gdk_clipboard_read_text_finish" %clipboard-read-text-finish)
+    :string
   (clipboard (g:object clipboard))
   (result (g:object g:async-result))
   (err :pointer))
