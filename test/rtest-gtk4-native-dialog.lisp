@@ -5,7 +5,7 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   ;; FIXME: After loading GTK the symbol for "GtkNativeDialog" is not
-  ;; registered. Why?
+  ;; registered.
   (g:type-ensure "GtkNativeDialog")
   (setf (glib:symbol-for-gtype "GtkNativeDialog") 'gtk:native-dialog))
 
@@ -100,4 +100,4 @@
 ;;;     gtk_native_dialog_hide
 ;;;     gtk_native_dialog_destroy
 
-;;; 2025-3-24
+;;; 2026-07-12

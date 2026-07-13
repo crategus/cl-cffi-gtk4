@@ -2,7 +2,7 @@
 ;;; gtk4.application-window.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -50,6 +50,10 @@
 ;;; Properties
 ;;;
 ;;;     show-menubar
+;;;
+;;; Signals
+;;;
+;;;     save-state                                          Since 4.24
 ;;;
 ;;; Hierarchy
 ;;;
@@ -190,15 +194,15 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{2025-07-28}
+ "@version{2026-07-11}
   @syntax{(gtk:application-window-show-menubar object) => show}
   @syntax{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
   @argument[show]{a boolean whether to show a menubar when needed}
   @begin{short}
-    The accessor for the @slot[gtk:application-window]{show-menubar} slot of the
-    @class{gtk:application-window} class gets or sets whether the window will
-    display a menubar for the application menu and menubar as needed.
+    The accessor for the @slot[gtk:application-window]{show-menubar} slot gets
+    or sets whether the window will display a menubar for the application menu
+    and menubar as needed.
   @end{short}
   @see-class{gtk:application-window}")
 

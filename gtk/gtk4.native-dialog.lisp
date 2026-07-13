@@ -2,7 +2,7 @@
 ;;; gtk4.native-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -152,17 +152,15 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-modal)
       "Accessor"
       (documentation 'native-dialog-modal 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:native-dialog-modal object) => modal}
   @syntax{(setf (gtk:native-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:native-dialog} object}
   @argument[modal]{@em{true} if the dialog is modal}
   @begin{short}
-    The accessor for the @slot[gtk:native-dialog]{modal} slot of the
-    @class{gtk:native-dialog} class gets whether the dialog is modal, or
-    sets a dialog modal or non-modal.
+    The accessor for the @slot[gtk:native-dialog]{modal} slot gets whether the
+    dialog is modal, or sets a dialog modal or non-modal.
   @end{short}
-
   Modal dialogs prevent interaction with other windows in the same application.
   To keep modal dialogs on top of main application windows, use the
   @fun{gtk:native-dialog-transient-for} function to make the dialog transient
@@ -183,15 +181,15 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-title)
       "Accessor"
       (documentation 'native-dialog-title 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:native-dialog-title object) => title}
   @syntax{(setf (gtk:native-dialog-title object) title)}
   @argument[object]{a @class{gtk:native-dialog} object}
   @argument[title]{a string for the title of the dialog, or @code{nil} if
     none has been set explicitly}
   @begin{short}
-    The accessor for the @slot[gtk:native-dialog]{title} slot of the
-    @class{gtk:native-dialog} class gets or sets the title of the dialog.
+    The accessor for the @slot[gtk:native-dialog]{title} slot gets or sets the
+    title of the dialog.
   @end{short}
   @see-class{gtk:native-dialog}")
 
@@ -208,17 +206,15 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-transient-for)
       "Accessor"
       (documentation 'native-dialog-transient-for 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:native-dialog-transient-for object) => parent}
   @syntax{(setf (gtk:native-dialog-transient-for object) parent)}
   @argument[object]{a @class{gtk:native-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @begin{short}
-    The accessor for the @slot[gtk:native-dialog]{transient-for} slot of the
-    @class{gtk:native-dialog} class gets or sets fetches the transient parent
-    for the dialog.
+    The accessor for the @slot[gtk:native-dialog]{transient-for} slot gets or
+    sets fetches the transient parent for the dialog.
   @end{short}
-
   Dialog windows should be set transient for the main application window they
   were spawned from. This allows window managers, for example, to keep the
   dialog on top of the main window, or center the dialog over the main window.
@@ -239,15 +235,14 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'native-dialog-visible)
       "Accessor"
       (documentation 'native-dialog-visible 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:native-dialog-visible object) => visible}
   @syntax{(setf (gtk:native-dialog-visible object) visible)}
   @argument[object]{a @class{gtk:native-dialog} object}
   @argument[visible]{@em{true} if the dialog is visible}
   @begin{short}
-    The accessor for the @slot[gtk:native-dialog]{visible} slot of the
-    @class{gtk:native-dialog} class gets or sets whether the dialog is
-    currently visible.
+    The accessor for the @slot[gtk:native-dialog]{visible} slot gets or sets
+    whether the dialog is currently visible.
   @end{short}
   @see-class{gtk:native-dialog}")
 

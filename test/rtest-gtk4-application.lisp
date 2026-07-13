@@ -26,12 +26,13 @@
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GtkApplicationInhibitFlags"
                                      GTK:APPLICATION-INHIBIT-FLAGS
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_application_inhibit_flags_get_type")
-                       (:LOGOUT 1)
-                       (:SWITCH 2)
-                       (:SUSPEND 4)
-                       (:IDLE 8))
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_application_inhibit_flags_get_type")
+                                     (:LOGOUT 1)
+                                     (:SWITCH 2)
+                                     (:SUSPEND 4)
+                                     (:IDLE 8))
              (gobject:get-gtype-definition "GtkApplicationInhibitFlags"))))
 
 ;;;     GtkApplication
@@ -133,7 +134,7 @@
     (is (equal '("GtkWindow")
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
-;;; --- Properties and Accessors -----------------------------------------------
+;;; --- Properties -------------------------------------------------------------
 
 (test gtk-application-properties
   (glib-test:with-check-memory (application)
@@ -149,19 +150,25 @@
 ;;;     gtk_application_new
 
 (test gtk-application-new.1
-  ;; Create with constructor function
-  (is (typep (gtk:application-new nil nil) 'gtk:application))
-  (is (= 1 (g:object-ref-count (gtk:application-new nil nil))))
-  ;; Create with MAKE-INSTANCE
-  (is (typep (make-instance 'gtk:application) 'gtk:application))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:application))))
-  ;; Create with G:OBJECT-NEW
-  (is (typep (g:object-new "GtkApplication") 'gtk:application))
-  (is (= 1 (g:object-ref-count (g:object-new "GtkApplication")))))
+  (glib-test:with-check-memory (application)
+    ;; Create with constructor function
+    (is (typep (setf application
+                     (gtk:application-new nil nil)) 'gtk:application))
+    (is (= 1 (g:object-ref-count application)))
+    ;; Create with MAKE-INSTANCE
+    (is (typep (setf application
+                     (make-instance 'gtk:application)) 'gtk:application))
+    (is (= 1 (g:object-ref-count application)))
+    ;; Create with G:OBJECT-NEW
+    (is (typep (setf application
+                     (g:object-new "GtkApplication")) 'gtk:application))
+    (is (= 1 (g:object-ref-count application)))))
 
 (test gtk-application-new.2
-  (let ((application (gtk:application-new "com.crategus.test" '(:handles-open))))
-    (is (typep application 'gtk:application))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (gtk:application-new "com.crategus.test" '(:handles-open)))
+               'gtk:application))
     (is (= 1 (g:object-ref-count application)))
     (is-true (g:application-id-is-valid "com.crategus.test"))
     (is (string= "com.crategus.test"
@@ -169,8 +176,10 @@
     (is (equal '(:handles-open) (g:application-flags application)))))
 
 (test gtk-application-new.3
-  (let ((application (gtk:application-new nil '(:handles-open))))
-    (is (typep application 'gtk:application))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (gtk:application-new nil '(:handles-open)))
+               'gtk:application))
     (is (= 1 (g:object-ref-count application)))
     (is-false (g:application-application-id application))
     (is (equal '(:handles-open) (g:application-flags application)))))
@@ -180,14 +189,11 @@
 ;;;     gtk_application_get_window_by_id
 ;;;     gtk_application_get_windows
 
-;; FIXME: We get critical errors for this test
-;; GLib-CRITICAL : g_atomic_rc_box_release_full:
-;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
-;;
-;; GLib-CRITICAL : g_atomic_rc_box_release_full:
-;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
+;; FIXME: Can cause a critical warning. What is the problem?
+;;   (gtk-test:14664): GLib-CRITICAL:
+;;   g_atomic_rc_box_release_full: assertion
+;;   'real_box->magic == G_BOX_MAGIC' failed
 
-#+nil
 (test gtk-application-add/remove-window
   (let ((message nil)
         (application (make-instance 'gtk:application)))
@@ -251,7 +257,9 @@
 ;;;     gtk_application_set_accels_for_action
 
 (test gtk-application-accels-for-action
-  (let ((application (make-instance 'gtk:application)))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (make-instance 'gtk:application)) 'gtk:application))
     (is-false (gtk:application-accels-for-action application "win::close"))
     (is (equal '("<Control>q" "<Shift><Alt>F1" "<Control>z")
                (setf (gtk:application-accels-for-action application "win::close")
@@ -262,7 +270,9 @@
 ;;;     gtk_application_get_actions_for_accel
 
 (test gtk-application-actions-for-accel
-  (let ((application (make-instance 'gtk:application)))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (make-instance 'gtk:application)) 'gtk:application))
     (is (equal '("<Control>q" "<Shift><Alt>F1" "<Control>z")
                (setf (gtk:application-accels-for-action application "win::close")
                      '("<Control>q" "<Shift><Alt>F1" "<Control>z"))))
@@ -286,7 +296,9 @@
 ;;;     gtk_application_list_action_descriptions
 
 (test gtk-application-list-action-descriptions
-  (let ((application (make-instance 'gtk:application)))
+  (glib-test:with-check-memory (application)
+    (is (typep (setf application
+                     (make-instance 'gtk:application)) 'gtk:application))
     (is (equal '()
                (gtk:application-list-action-descriptions application)))
     (is (equal '("<Control>q" "<Shift><Alt>F1" "<Control>z")
@@ -295,6 +307,4 @@
     (is (equal '("win::close")
                (gtk:application-list-action-descriptions application)))))
 
-;;;     gtk_application_uninhibit
-
-;;; 2025-3-26
+;;; 2026-07-11

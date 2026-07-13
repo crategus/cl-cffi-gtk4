@@ -98,14 +98,10 @@
 
 ;; Initialize an application window with an application
 
-;; FIXME: We get critical errors from this test
-;; GLib-CRITICAL : g_atomic_rc_box_release_full:
-;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
-;;
+;; FIXME: Can throw an critical warning
 ;; GLib-CRITICAL : g_atomic_rc_box_release_full:
 ;;                 assertion 'real_box->magic == G_BOX_MAGIC' failed
 
-#+nil
 (test gtk-application-window-new.2
   (glib-test:with-check-memory (application)
     (let (message)

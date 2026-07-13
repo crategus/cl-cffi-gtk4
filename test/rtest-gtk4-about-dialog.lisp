@@ -101,41 +101,41 @@
   (is (eq :window (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkAboutDialog" GTK:ABOUT-DIALOG
-                       (:SUPERCLASS GTK:WINDOW
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkNative" "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_about_dialog_get_type")
-                       ((ARTISTS ABOUT-DIALOG-ARTISTS "artists" "GStrv" T T)
-                        (AUTHORS ABOUT-DIALOG-AUTHORS "authors" "GStrv" T T)
-                        (COMMENTS ABOUT-DIALOG-COMMENTS
-                         "comments" "gchararray" T T)
-                        (COPYRIGHT ABOUT-DIALOG-COPYRIGHT
-                         "copyright" "gchararray" T T)
-                        (DOCUMENTERS ABOUT-DIALOG-DOCUMENTERS
-                         "documenters" "GStrv" T T)
-                        (LICENSE ABOUT-DIALOG-LICENSE
-                         "license" "gchararray" T T)
-                        (LICENSE-TYPE ABOUT-DIALOG-LICENSE-TYPE
-                         "license-type" "GtkLicense" T T)
-                        (LOGO ABOUT-DIALOG-LOGO "logo" "GdkPaintable" T T)
-                        (LOGO-ICON-NAME ABOUT-DIALOG-LOGO-ICON-NAME
-                         "logo-icon-name" "gchararray" T T)
-                        (PROGRAM-NAME ABOUT-DIALOG-PROGRAM-NAME
-                         "program-name" "gchararray" T T)
-                        (SYSTEM-INFORMATION ABOUT-DIALOG-SYSTEM-INFORMATION
-                         "system-information" "gchararray" T T)
-                        (TRANSLATOR-CREDITS ABOUT-DIALOG-TRANSLATOR-CREDITS
-                         "translator-credits" "gchararray" T T)
-                        (VERSION ABOUT-DIALOG-VERSION
-                         "version" "gchararray" T T)
-                        (WEBSITE ABOUT-DIALOG-WEBSITE
-                         "website" "gchararray" T T)
-                        (WEBSITE-LABEL ABOUT-DIALOG-WEBSITE-LABEL
-                         "website-label" "gchararray" T T)
-                        (WRAP-LICENSE ABOUT-DIALOG-WRAP-LICENSE
-                         "wrap-license" "gboolean" T T)))
+                      (:SUPERCLASS GTK:WINDOW
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                        "GtkNative" "GtkRoot" "GtkShortcutManager")
+                       :TYPE-INITIALIZER "gtk_about_dialog_get_type")
+                      ((ARTISTS ABOUT-DIALOG-ARTISTS "artists" "GStrv" T T)
+                       (AUTHORS ABOUT-DIALOG-AUTHORS "authors" "GStrv" T T)
+                       (COMMENTS ABOUT-DIALOG-COMMENTS
+                        "comments" "gchararray" T T)
+                       (COPYRIGHT ABOUT-DIALOG-COPYRIGHT
+                        "copyright" "gchararray" T T)
+                       (DOCUMENTERS ABOUT-DIALOG-DOCUMENTERS
+                        "documenters" "GStrv" T T)
+                       (LICENSE ABOUT-DIALOG-LICENSE
+                        "license" "gchararray" T T)
+                       (LICENSE-TYPE ABOUT-DIALOG-LICENSE-TYPE
+                        "license-type" "GtkLicense" T T)
+                       (LOGO ABOUT-DIALOG-LOGO "logo" "GdkPaintable" T T)
+                       (LOGO-ICON-NAME ABOUT-DIALOG-LOGO-ICON-NAME
+                        "logo-icon-name" "gchararray" T T)
+                       (PROGRAM-NAME ABOUT-DIALOG-PROGRAM-NAME
+                        "program-name" "gchararray" T T)
+                       (SYSTEM-INFORMATION ABOUT-DIALOG-SYSTEM-INFORMATION
+                        "system-information" "gchararray" T T)
+                       (TRANSLATOR-CREDITS ABOUT-DIALOG-TRANSLATOR-CREDITS
+                        "translator-credits" "gchararray" T T)
+                       (VERSION ABOUT-DIALOG-VERSION
+                        "version" "gchararray" T T)
+                       (WEBSITE ABOUT-DIALOG-WEBSITE
+                        "website" "gchararray" T T)
+                       (WEBSITE-LABEL ABOUT-DIALOG-WEBSITE-LABEL
+                        "website-label" "gchararray" T T)
+                       (WRAP-LICENSE ABOUT-DIALOG-WRAP-LICENSE
+                        "wrap-license" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkAboutDialog"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -189,4 +189,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2025-3-31
+;;; 2026-06-13

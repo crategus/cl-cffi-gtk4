@@ -2,7 +2,7 @@
 ;;; gtk4.application.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -56,17 +56,24 @@
 ;;;     gtk_application_get_accels_for_action
 ;;;     gtk_application_set_accels_for_action
 ;;;     gtk_application_get_actions_for_accel
+;;;     gtk_application_forget                              Since 4.24
+;;;     gtk_application_save                                Since 4.24
 ;;;
 ;;; Properties
 ;;;
 ;;;     active-window
+;;;     autosave-interval                                   Since 4.24
 ;;;     menubar
-;;;     register-session
+;;;     register-session                                    Deprecated 4.22
 ;;;     screensaver-active
+;;;     support-save                                        Since 4.24
 ;;;
 ;;; Signals
 ;;;
 ;;;     query-end
+;;;     restore-state                                       Since 4.24
+;;;     restore-window                                      Since 4.24
+;;;     save-state                                          Since 4.24
 ;;;     window-added
 ;;;     window-removed
 ;;;
@@ -153,24 +160,46 @@
 
 #+liber-documentation
 (setf (documentation 'application 'type)
- "@version{2025-07-11}
+ "@version{2026-07-10}
   @begin{short}
     The @class{gtk:application} class is a high-level API for writing
     applications.
   @end{short}
   It supports many aspects of a GTK application in a convenient fashion,
-  without enforcing a one-size-fits-all application model.
-
-  Currently, the @class{gtk:application} class handles GTK initialization,
-  application uniqueness, session management, provides some basic scriptability
-  and desktop shell integration by exporting actions and menus and manages a
-  list of toplevel windows whose life cycle is automatically tied to the
-  life cycle of the application.
+  without enforcing a one-size-fits-all application model. Currently, the
+  @class{gtk:application} class handles GTK initialization, application
+  uniqueness, session management, provides some basic scriptability and desktop
+  shell integration by exporting actions and menus and manages a list of
+  toplevel windows whose life cycle is automatically tied to the life cycle of
+  the application.
 
   While the @class{gtk:application} class works fine with plain
   @class{gtk:window} widgets, it is recommended to use it together with
   @class{gtk:application-window} widgets.
 
+  @subheading{Initialization}
+  A typical @class{gtk:application} instance will create a window in its
+  @sig[g:application]{activate}, @sig[g:application]{open} or
+  @sig[g:application]{command-line} signal handlers. Note that all of these
+  signals may be emitted multiple times, so signal handlers must be careful to
+  take existing windows into account.
+
+  A typical @sig[g:application]{activate} signal handler should look like this:
+  @begin{pre}
+;; Connect signal \"activate\" to the application
+(g:signal-connect app \"activate\"
+    (lambda (application)
+      (let ((window (gtk:application-active-window application)))
+        (unless window
+          ;; Create an application window
+          (setf window (make-instance 'gtk:application-window
+                                      :application application
+                                      :title \"Simple Application\"
+                                      :default-width 480
+                                      :default-height 300)))
+        ;; Present the application window
+        (gtk:window-present window))))
+  @end{pre}
   @subheading{Automatic resources}
   The @class{gtk:application} instance will automatically load menus from the
   @class{gtk:builder} resource located at @file{\"gtk/menus.ui\"}, relative to
@@ -205,11 +234,7 @@
   @fun{gtk:window-default-icon-name} function or the
   @slot[gtk:window]{icon-name} property to override that behavior.
 
-  The @class{gtk:application} instance optionally registers with a session
-  manager of the users session, if you set the
-  @slot[gtk:application]{register-session} property, and offers various
-  functionality related to the session life cycle.
-
+  @subheading{Inhibiting}
   An application can block various ways to end the session with the
   @fun{gtk:application-inhibit} function. Typical use cases for this kind of
   inhibiting are long-running, uninterruptible operations, such as burning a CD
@@ -227,71 +252,18 @@
     ;; Connect signal \"activate\" to the application
     (g:signal-connect app \"activate\"
         (lambda (application)
-          ;; Create an application window
-          (let ((window (make-instance 'gtk:application-window
-                                       :application application
-                                       :title \"Simple Application\"
-                                       :default-width 480
-                                       :default-height 300)))
+          (let ((window (gtk:application-active-window application)))
+            (unless window
+              ;; Create an application window
+              (setf window (make-instance 'gtk:application-window
+                                          :application application
+                                          :title \"Simple Application\"
+                                          :default-width 480
+                                          :default-height 300)))
             ;; Present the application window
             (gtk:window-present window))))
   ;; Run the application
   (g:application-run app argv)))
-    @end{pre}
-    A resource definition with menus, a shortcuts window and an icon for
-    automatically loading resources:
-    @begin{pre}
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<gresources>
-  <gresource prefix=\"/com/crategus/application/gtk\">
-    <file>menus.ui</file>
-    <file>help-overlay.ui</file>
-  </gresource>
-  <gresource prefix=\"/com/crategus/application/icons\">
-    <file>my-gtk-logo.png</file>
-  </gresource>
-</gresources>
-    @end{pre}
-    The application that automatically loads the resources:
-    @begin{pre}
-(defun application-resources (&rest argv)
-  ;; Register the resources
-  (g:with-resource (resource (glib-sys:check-and-create-resources
-                                     \"gtk4-application.xml\"
-                                     :package \"gtk4-application\"
-                                     :sourcedir \"resource/\"))
-    (let (;; Create an application
-          (app (make-instance 'gtk:application
-                               :flags :default-flags
-                               :application-id
-                               \"com.crategus.application\")))
-      ;; Connect \"activate\" signal
-      (g:signal-connect app \"activate\"
-          (lambda (application)
-            (g:application-hold application)
-            ;; Create an application window
-            (let (;; Define action entries for the menu items
-                  (entries '((\"about\")))
-                  (accels '(\"win-show-help-overlay\" \"F1\"
-                            \"win.about\" \"<Control>A\"))
-                  (window (make-instance 'gtk:application-window
-                                         :application application
-                                         :title \"Application Resources\"
-                                         :show-menubar t
-                                         :icon-name \"gtk-logo\"
-                                         :default-width 480
-                                         :default-height 300)))
-              ;; Add accelerators for the application
-              (iter (for (name accel) on accels by #'cddr)
-                    (setf (gtk:application-accels-for-action application name)
-                          accel))
-              ;; Add the action entries to the application window
-              (g:action-map-add-action-entries window entries)
-              ;; Present the window
-              (gtk:window-present window)
-              (g:application-release application))))
-      ;; Run the application
-      (g:application-run app argv))))
     @end{pre}
   @end{dictionary}
   @begin[Signal Details]{dictionary}
@@ -303,12 +275,10 @@ lambda (application)    :run-first
         @entry[application]{The @class{gtk:application} instance that emitted
           the signal.}
       @end{simple-table}
-      Emitted when the session manager is about to end the session. This signal
-      is only emitted if the @slot[gtk:application]{register-session} property
-      is @em{true}. Applications can connect to this signal and call the
-      @fun{gtk:application-inhibit} function with the
-      @val[gtk:application-inhibit-flags]{:logout} value to delay the end of
-      the session until the state has been saved.
+      Emitted when the session manager is about to end the session. Applications
+      can connect to this signal and call the @fun{gtk:application-inhibit}
+      function with the @val[gtk:application-inhibit-flags]{:logout} value to
+      delay the end of the session until the state has been saved.
     @end{signal}
     @begin[application::window-added]{signal}
       @begin{pre}
@@ -360,17 +330,17 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-active-window)
       "Accessor"
       (documentation 'application-active-window 'function)
- "@version{2025-07-28}
+ "@version{2026-07-10}
   @syntax{(gtk:application-active-window object) => window}
   @argument[object]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
-    The accessor for the @slot[gtk:application]{active-window} slot of the
-    @class{gtk:application} class returns the active window of the application.
+    The accessor for the @slot[gtk:application]{active-window} slot returns the
+    active window of the application.
   @end{short}
   The active window is the one that was most recently focused within the
   application. This window may not have the focus at the moment if another
-  application has it - this is just the most recently focused window within
+  application has it. This is just the most recently focused window within
   this application.
   @see-class{gtk:application}
   @see-class{gtk:window}")
@@ -386,22 +356,19 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-menubar)
       "Accessor"
       (documentation 'application-menubar 'function)
- "@version{2025-07-28}
+ "@version{2026-07-10}
   @syntax{(gtk:application-menubar object) => menubar}
   @syntax{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[menubar]{a @class{g:menu-model} object, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:application]{menubar} slot of the
-    @class{gtk:application} class gets or sets the menubar for windows of the
-    application.
+    The accessor for the @slot[gtk:application]{menubar} slot gets or sets the
+    menubar for windows of the application.
   @end{short}
-  Pass the @code{nil} value to unset the menubar.
-
-  This is a menubar in the traditional sense. This can only be done in the
-  primary instance of the application, after it has been registered. The
-  handler for the @sig[g:application]{startup} signal is a good place to set
-  the menubar.
+  Pass the @code{nil} value to unset the menubar. This is a menubar in the
+  traditional sense. This can only be done in the primary instance of the
+  application, after it has been registered. The handler for the
+  @sig[g:application]{startup} signal is a good place to set the menubar.
 
   Depending on the desktop environment, the menubar may appear at the top of
   each window, or at the top of the screen. In some environments, if both the
@@ -424,27 +391,31 @@ lambda (application window)    :run-first
                                                'application) t)
  "The @code{register-session} property of type @code{:boolean} (Read / Write)
   @br{}
-  Set the property to @em{true} to register with the session manager. @br{}
+  Set this property to @em{true} to register with the session manager. @br{}
+  @em{Warning:} This property is deprecated since 4.22 and is ignored. GTK
+  always registers with the session manager. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'application-register-session)
       "Accessor"
       (documentation 'application-register-session 'function)
- "@version{2025-07-29}
+ "@version{2026-07-10}
   @syntax{(gtk:application-register-session object) => setting}
   @syntax{(setf (gtk:application-register-session object) setting)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[setting]{a boolean whether to register with the session manager}
   @begin{short}
-    The accessor for the @slot[gtk:application]{register-session} slot of the
-    @class{gtk:application} class gets or sets whether to register with the
-    session manager.
+    The accessor for the @slot[gtk:application]{register-session} slot gets or
+    sets whether to register with the session manager.
   @end{short}
-
-  Set the @slot[gtk:application]{register-session} property to @em{true} to
-  register with the session mananger. This will make GTK track the session
-  state, such as the @slot[gtk:application]{screensaver-active} property.
+  Set this property to @em{true} to register with the session mananger. This
+  will make GTK track the session state, such as the
+  @slot[gtk:application]{screensaver-active} property.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.22. GTK always registers with the
+    sesstion manager.
+  @end{dictionary}
   @see-class{gtk:application}
   @see-function{gtk:application-screensaver-active}")
 
@@ -454,32 +425,25 @@ lambda (application window)    :run-first
 (setf (documentation (liber:slot-documentation "screensaver-active"
                                                'application) t)
  "The @code{screensaver-active} property of type @code{:boolean} (Read) @br{}
-  The property is @em{true} if GTK believes that the screensaver is currently
-  active. GTK only tracks session state, when the
-  @slot[gtk:application]{register-session} property is set to @em{true}.
-  Tracking the screensaver state is supported on Linux. @br{}
+  This property is @em{true} if GTK believes that the screensaver is currently
+  active.  Tracking the screensaver state is supported on Linux. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'application-screensaver-active)
       "Accessor"
       (documentation 'application-screensaver-active 'function)
- "@version{2025-08-21}
+ "@version{2026-07-10}
   @syntax{(gtk:application-screensaver-active object) => active}
   @argument[object]{a @class{gtk:application} instance}
   @argument[active]{a boolean whether the screensaver is active}
   @begin{short}
-    The accessor for the @slot[gtk:application]{screensaver-active} slot of the
-    @class{gtk:application} class returns whether the screensaver is active.
+    The accessor for the @slot[gtk:application]{screensaver-active} slot
+    returns whether the screensaver is active.
   @end{short}
-
-  The @slot[gtk:application]{screensaver-active} property is @em{true} if GTK
-  believes that the screensaver is currently active. GTK only tracks session
-  state, including this, when the @slot[gtk:application]{register-session}
-  property is set to @em{true}. Tracking the screensaver state is supported on
-  Linux.
-  @see-class{gtk:application}
-  @see-function{gtk:application-register-session}")
+  This property is @em{true} if GTK believes that the screensaver is currently
+  active. Tracking the screensaver state is supported on Linux.
+  @see-class{gtk:application}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_application_new

@@ -33,11 +33,11 @@
              (glib-test:list-signals "GtkWindowGroup")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkWindowGroup" GTK:WINDOW-GROUP
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_window_group_get_type")
-                       NIL)
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_window_group_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GtkWindowGroup"))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -83,4 +83,4 @@
     (is-false (gtk:window-destroy window1))
     (is-false (gtk:window-destroy window2))))
 
-;;; 2024-12-23
+;;; 2026-07-12

@@ -2,7 +2,7 @@
 ;;; gtk4.alert-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'alert-dialog 'type)
- "@version{2025-04-17}
+ "@version{2026-07-12}
   @begin{short}
     The @class{gtk:alert-dialog} object collects the arguments that are needed
     to present a message to the user.
@@ -164,15 +164,14 @@
 (setf (liber:alias-for-function 'alert-dialog-buttons)
       "Accessor"
       (documentation 'alert-dialog-buttons 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-buttons object) => buttons}
   @syntax{(setf (gtk:alert-dialog-buttons object) buttons)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[buttons]{a list of strings for the button labels}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{buttons} slot of the
-    @class{gtk:alert-dialog} class gets or sets the button labels for the alert
-    dialog.
+    The accessor for the @slot[gtk:alert-dialog]{buttons} slot gets or sets
+    the button labels for the alert dialog.
   @end{short}
 
   Since 4.10
@@ -183,11 +182,11 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cancel-button" 'alert-dialog) t)
  "The @code{cancel-button} property of type @code{:int} (Read / Write) @br{}
-  This property determines what happens when the @kbd{Escape} key is pressed
-  while the alert dialog is shown. If this property holds the index of a button
-  in the @slot[gtk:alert-dialog]{buttons} property, then pressing the
-  @kbd{Escape} key is treated as if that button was pressed. If it is -1 or not
-  a valid index for the buttons array, then an error is returned. If the
+  Determines what happens when the @kbd{Escape} key is pressed while the alert
+  dialog is shown. If this property holds the index of a button in the
+  @slot[gtk:alert-dialog]{buttons} property, then pressing the @kbd{Escape} key
+  is treated as if that button was pressed. If it is -1 or not a valid index
+  for the buttons array, then an error is returned. If the
   @slot[gtk:alert-dialog]{buttons} property is @code{nil}, then the
   automatically created Close button is treated as both Cancel and Default
   button, so 0 is returned. @br{}
@@ -197,14 +196,14 @@
 (setf (liber:alias-for-function 'alert-dialog-cancel-button)
       "Accessor"
       (documentation 'alert-dialog-cancel-button 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-cancel-button object) => button}
   @syntax{(setf (gtk:alert-dialog-cancel-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer for the new Cancel button}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{cancel-button} slot of the
-    @class{gtk:alert-dialog} class gets or sets the index of the Cancel button.
+    The accessor for the @slot[gtk:alert-dialog]{cancel-button} slot gets or
+    sets the index of the Cancel button.
   @end{short}
   See the @slot[gtk:alert-dialog]{cancel-button} property for details of how
   this value is used.
@@ -218,11 +217,11 @@
 (setf (documentation (liber:slot-documentation "default-button"
                                                'alert-dialog) t)
  "The @code{default-button} property of type @code{:int} (Read / Write) @br{}
-  This property determines what happens when the @kbd{Return} key is pressed
-  while the alert dialog is shown. If this property holds the index of a button
-  in the @slot[gtk:alert-dialog]{buttons} property, then pressing the
-  @kbd{Return} key is treated as if that button was pressed. If it is -1 or not
-  a valid index for the buttons list, then nothing happens. If the
+  Determines what happens when the @kbd{Return} key is pressed while the alert
+  dialog is shown. If this property holds the index of a button in the
+  @slot[gtk:alert-dialog]{buttons} property, then pressing the @kbd{Return} key
+  is treated as if that button was pressed. If it is -1 or not a valid index
+  for the buttons list, then nothing happens. If the
   @slot[gtk:alert-dialog]{buttons} property is @code{nil}, then the
   automatically created Close button is treated as both
   Cancel and Default button, so 0 is returned. @br{}
@@ -232,14 +231,14 @@
 (setf (liber:alias-for-function 'alert-dialog-default-button)
       "Accessor"
       (documentation 'alert-dialog-default-button 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-default-button object) => button}
   @syntax{(setf (gtk:alert-dialog-default-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer for the new Default button}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{default-button} slot of the
-    @class{gtk:alert-dialog} class gets or sets the index of the Default button.
+    The accessor for the @slot[gtk:alert-dialog]{default-button} slot gets or
+    sets the index of the Default button.
   @end{short}
   See the @slot[gtk:alert-dialog]{default-button} property for details of how
   this value is used.
@@ -259,15 +258,14 @@
 (setf (liber:alias-for-function 'alert-dialog-detail)
       "Accessor"
       (documentation 'alert-dialog-detail 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-detail object) => detail}
   @syntax{(setf (gtk:alert-dialog-detail object) detail)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[detail]{a string for the detail text}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{detail} slot of the
-    @class{gtk:alert-dialog} class gets or sets the detail text that will be
-    shown in the alert dialog.
+    The accessor for the @slot[gtk:alert-dialog]{detail} slot gets or sets the
+    detail text that will be shown in the alert dialog.
   @end{short}
 
   Since 4.10
@@ -285,15 +283,14 @@
 (setf (liber:alias-for-function 'alert-dialog-message)
       "Accessor"
       (documentation 'alert-dialog-message 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-message object) => message}
   @syntax{(setf (gtk:alert-dialog-message object) message)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[message]{a string for the message}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{message} slot of the
-    @class{gtk:alert-dialog} class gets or sets the message that will be shown
-    in the alert dialog.
+    The accessor for the @slot[gtk:alert-dialog]{message} slot gets or sets the
+    message that will be shown in the alert dialog.
   @end{short}
 
   Since 4.10
@@ -311,15 +308,15 @@
 (setf (liber:alias-for-function 'alert-dialog-modal)
       "Accessor"
       (documentation 'alert-dialog-modal 'function)
- "@version{2025-07-29}
+ "@version{2026-07-12}
   @syntax{(gtk:alert-dialog-modal object) => modal}
   @syntax{(setf (gtk:alert-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[modal]{a boolean whether the alert dialog is modal}
   @begin{short}
-    The accessor for the @slot[gtk:alert-dialog]{modal} slot of the
-    @class{gtk:alert-dialog} class gets or sets whether the alert dialog blocks
-    interaction with the parent window while it is presented.
+    The accessor for the @slot[gtk:alert-dialog]{modal} slot gets or sets
+    whether the alert dialog blocks interaction with the parent window while
+    it is presented.
   @end{short}
 
   Since 4.10
