@@ -1742,6 +1742,7 @@
     ((char g:unichar)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func char)
       (return-true () :report "Return T" t)
@@ -1751,12 +1752,12 @@
 (setf (liber:alias-for-symbol 'text-char-predicate)
       "Callback"
       (liber:symbol-documentation 'text-char-predicate)
- "@version{2024-07-01}
+ "@version{2026-07-12}
   @syntax{lambda (ch) => result}
   @argument[ch]{a Unichar character}
   @argument[result]{@em{true} if the character was found}
   @begin{short}
-    A callback function used by the @fun{gtk:text-iter-find-char} function to
+    The callback function used by the @fun{gtk:text-iter-find-char} function to
     search a char in the text buffer.
   @end{short}
   @see-class{gtk:text-iter}

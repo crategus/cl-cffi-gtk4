@@ -404,6 +404,7 @@
    (iter (g:boxed tree-iter))
    (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func layout cell model iter)
       (return () :report "Return NIL" nil))))
@@ -412,7 +413,7 @@
 (setf (liber:alias-for-symbol 'cell-layout-data-func)
       "Callback"
       (liber:symbol-documentation 'cell-layout-data-func)
- "@version{#2024-05-03}
+ "@version{#2026-07-12}
   @syntax{lambda (layout cell model iter)}
   @argument[layout]{a @class{gtk:cell-layout} object}
   @argument[cell]{a @class{gtk:cell-renderer} object whose value is to be set}
@@ -420,7 +421,7 @@
   @argument[iter]{a @class{gtk:tree-iter} iterator indicating the row to set
     the value for}
   @begin{short}
-    A callback function which should set the value of @arg{layout}'s cell
+    The callback function which should set the value of @arg{layout}'s cell
    renderer(s) as appropriate.
   @end{short}
   @begin[Warning]{dictionary}

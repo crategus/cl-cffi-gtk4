@@ -2459,13 +2459,14 @@ lambda (buffer)    :run-last
      (len :uint)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func buffer flags pos len)))
 
 #+(and gtk-4-16 liber-documentation)
 (setf (liber:alias-for-symbol 'text-buffer-commit-notify)
       "Callback"
       (liber:symbol-documentation 'text-buffer-commit-notify)
- "@version{#2025-07-27}
+ "@version{#2026-07-13}
   @syntax{lambda (buffer flags pos len)}
   @argument[buffer]{a @class{gtk:text-buffer} object being notified}
   @argument[flags]{a @sym{gtk:text-buffer-notify-flags} value for the type of
@@ -2474,39 +2475,43 @@ lambda (buffer)    :run-last
   @argument[len]{an unsigned integer for the length of the text operation
     in characters}
   @begin{short}
-    A notification callback used by the @fun{gtk:text-buffer-add-commit-notify}
-    function.
+    The notification callback function used by the
+    @fun{gtk:text-buffer-add-commit-notify} function.
   @end{short}
-  You may not modify the @class{gtk:text-buffer} object from a
-  @sym{gtk:text-buffer-commit-notify} callback function and that is enforced
-  by the @class{gtk:text-buffer} API.
+  You may not modify the @class{gtk:text-buffer} object from this callback
+  function and that is enforced by the @class{gtk:text-buffer} API.
 
-  The @sym{gtk:text-buffer-commit-notify} callback function may be used to be
-  notified about changes to the underlying text buffer right before or after the
-  changes are committed to the underlying B-Tree. This is useful if you want to
-  observe changes to the text buffer without other signal handlers potentially
-  modifying state on the way to the default signal handler.
+  This callback function may be used to be notified about changes to the
+  underlying text buffer right before or after the changes are committed to the
+  underlying B-Tree. This is useful if you want to observe changes to the text
+  buffer without other signal handlers potentially modifying state on the way
+  to the default signal handler.
 
-  When the @arg{flags} argument is @code{:before-insert}, the @arg{pos}
-  argument is set to the offset in characters from the start of the text buffer
-  where the insertion will occur. The @arg{len} argument is set to the number
-  of characters to be inserted. You may not yet retrieve the text until it has
-  been inserted. You may access the text from @code{:after-insert} using the
+  When the @arg{flags} argument is
+  @val[gtk:text-buffer-notify-flags]{:before-insert}, the @arg{pos} argument is
+  set to the offset in characters from the start of the text buffer where the
+  insertion will occur. The @arg{len} argument is set to the number of
+  characters to be inserted. You may not yet retrieve the text until it has been
+  inserted. You may access the text from
+  @val[gtk:text-buffer-notify-flags]{:after-insert} using the
   @fun{gtk:text-buffer-get-slice} function.
 
-  When the @arg{flags} argument is @code{:after-insert}, the @arg{pos} argument
-  is set to offset in characters where the insertion occurred and @arg{len} is
-  set to the number of characters inserted.
+  When the @arg{flags} argument is
+  @val[gtk:text-buffer-notify-flags]{:after-insert}, the @arg{pos} argument is
+  set to offset in characters where the insertion occurred and @arg{len} is set
+  to the number of characters inserted.
 
-  When the @arg{flags} argument is @code{:before-delete}, the @arg{pos} argument
-  is set to offset in characters where the deletion will occur and @arg{len} is
-  set to the number of characters that will be removed. You may still retrieve
-  the text from this handler using @arg{pos} and @arg{len}.
+  When the @arg{flags} argument is
+  @val[gtk:text-buffer-notify-flags]{:before-delete}, the @arg{pos} argument is
+  set to offset in characters where the deletion will occur and @arg{len} is set
+  to the number of characters that will be removed. You may still retrieve the
+  text from this handler using @arg{pos} and @arg{len}.
 
-  When the @arg{flags} argument is @code{:after-delete}, the @arg{len} argument
-  is set to zero to denote that the delete-range has already been committed to
-  the underlying B-Tree. You may no longer retrieve the text that has been
-  deleted from the text buffer.
+  When the @arg{flags} argument is
+  @val[gtk:text-buffer-notify-flags]{:after-delete}, the @arg{len} argument is
+  set to zero to denote that the delete-range has already been committed to the
+  underlying B-Tree. You may no longer retrieve the text that has been deleted
+  from the text buffer.
 
   Since 4.16
   @see-class{gtk:text-buffer}

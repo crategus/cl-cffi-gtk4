@@ -989,6 +989,7 @@ lambda (listbox)    :action :run-last
      (row (g:object list-box-row))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func listbox row)
       (return () :report "Return NIL" nil))))
@@ -997,12 +998,12 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-symbol 'list-box-foreach-func)
       "Callback"
       (liber:symbol-documentation 'list-box-foreach-func)
- "@version{2026-05-01}
+ "@version{2026-07-12}
   @syntax{lambda (listbox row)}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @begin{short}
-    A callback function used by the @fun{gtk:list-box-selected-foreach}
+    The callback function used by the @fun{gtk:list-box-selected-foreach}
     function.
   @end{short}
   It will be called on every selected child widget of the list box.
@@ -1165,6 +1166,7 @@ lambda (listbox)    :action :run-last
     ((row (g:object list-box-row))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func row)
       (return-true () :report "Return T" t)
@@ -1174,7 +1176,7 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-symbol 'list-box-filter-func)
       "Callback"
       (liber:symbol-documentation 'list-box-filter-func)
- "@version{2026-05-01}
+ "@version{2026-07-12}
   @syntax{lambda (row) => result}
   @argument[row]{a @class{gtk:list-box-row} widget that may be filtered}
   @argument[result]{@em{true} if the row should be visible, @em{false}
@@ -1266,6 +1268,7 @@ lambda (listbox)    :action :run-last
      (before (g:object list-box-row))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func row before)
       (return () :report "Return NIL" nil))))
@@ -1274,7 +1277,7 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-symbol 'list-box-update-header-func)
       "Callback"
       (liber:symbol-documentation 'list-box-update-header-func)
- "@version{#2026-05-01}
+ "@version{#2026-07-12}
   @syntax{lambda (row before)}
   @argument[row]{a @class{gtk:list-box-row} widget for the row to update}
   @argument[before]{a @class{gtk:list-box-row} widget before @arg{row}, or
@@ -1376,6 +1379,7 @@ lambda (listbox)    :action :run-last
      (row2 (g:object list-box-row))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func row1 row2)
       (return<0 () :report "Return -1" -1)
@@ -1386,15 +1390,15 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-symbol 'list-box-sort-func)
       "Callback"
       (liber:symbol-documentation 'list-box-sort-func)
- "@version{2026-05-01}
+ "@version{2026-07-12}
   @syntax{lambda (row1 row2) => result}
   @argument[row1]{a @class{gtk:list-box-row} widget for the first row}
   @argument[row2]{a @class{gtk:list-box-row} widget for the second row}
   @argument[result]{an integer that is < 0 if @arg{row1} should be before
     @arg{row2}, 0 if they are equal and > 0 otherwise}
   @begin{short}
-    The type of the callback function that compares two rows to determine which
-    should be first.
+    The callback function that compares two rows to determine which should be
+    first.
   @end{short}
   @see-class{gtk:list-box-row}
   @see-function{gtk:list-box-set-sort-func}")
@@ -1521,6 +1525,7 @@ lambda (listbox)    :action :run-last
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data))
         (object (cffi:convert-from-foreign item 'g:object)))
+    (declare (type function func))
     ;; We need to add a reference to ensure correct memory management.
     (g:object-ref (funcall func object))))
 
@@ -1528,7 +1533,7 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-symbol 'list-box-create-widget-func)
       "Callback"
       (liber:symbol-documentation 'list-box-create-widget-func)
- "@version{2026-05-01}
+ "@version{2026-07-12}
   @syntax{lambda (item) => result}
   @argument[item]{a @class{g:object} instance for the item from the model for
     which to create a widget for}

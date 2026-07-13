@@ -702,13 +702,14 @@ lambda (button)    :action
     ((button (g:object menu-button))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func button)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'menu-button-create-popup-func)
       "Callback"
       (liber:symbol-documentation 'menu-button-create-popup-func)
- "@version{2024-11-03}
+ "@version{2026-07-12}
   @syntax{lambda (button)}
   @argument[button]{a @class{gtk:menu-button} widget}
   @begin{short}

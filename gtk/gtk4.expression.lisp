@@ -432,17 +432,18 @@ this->item->name
 (cffi:defcallback expression-notify :void
     ((data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'expression-notify)
       "Callback"
       (liber:symbol-documentation 'expression-notify)
- "@version{2025-03-14}
+ "@version{2026-07-12}
   @syntax{lambda ()}
   @begin{short}
-    Callback called by the @fun{gtk:expression-watch} function when the
-    expression value changes.
+    The callback function called by the @fun{gtk:expression-watch} function
+    when the expression value changes.
   @end{short}
   @see-function{gtk:expression-watch}")
 

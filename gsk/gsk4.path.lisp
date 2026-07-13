@@ -1337,13 +1337,14 @@
      (weight :float)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func operation points n-points weight)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'path-foreach-func)
       "Callback"
       (liber:symbol-documentation 'path-foreach-func)
- "@version{#2025-08-02}
+ "@version{#2026-07-12}
   @syntax{lambda (operation points n-points weight)}
   @argument[operation]{a @sym{gsk:path-operation} value}
   @argument[points]{an array of @sym{graphene:point-t} instances}
@@ -1355,8 +1356,7 @@
     and not call the function again.
   @end{return}
   @begin{short}
-    Prototype of the callback function to iterate through the operations of a
-    path.
+    The callback function to iterate through the operations of a path.
   @end{short}
   For each operation, the callback function is given @arg{operation} itself,
   the points that the operation is applied to in @arg{points}, and a weight for

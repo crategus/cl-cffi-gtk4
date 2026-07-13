@@ -307,13 +307,14 @@
      (iter2 (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func model iter1 iter2)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-iter-compare-func)
       "Callback"
       (liber:symbol-documentation 'tree-iter-compare-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (model iter1 iter2) => result}
   @argument[model]{a @class{gtk:tree-model} object the comparison is within}
   @argument[iter1]{a @class{gtk:tree-iter} iterator in @arg{model}}
@@ -321,16 +322,14 @@
   @argument[result]{a negative integer, zero or a positive integer depending on
     whether @arg{iter1} sorts before, with or after @arg{iter2}}
   @begin{short}
-    The @sym{gtk:tree-iter-compare-func} callback function should return a
-    negative integer, zero, or a positive integer if @arg{iter1} sorts before
-    @arg{iter2}, @arg{iter1} sorts with @arg{iter2}, or @arg{iter1} sorts after
-    @arg{iter2} respectively.
+    This callback function should return a negative integer, zero, or a positive
+    integer if @arg{iter1} sorts before @arg{iter2}, @arg{iter1} sorts with
+    @arg{iter2}, or @arg{iter1} sorts after @arg{iter2} respectively.
   @end{short}
   If two iterators compare as equal, their order in the sorted model is
   undefined. To ensure that the @class{gtk:tree-sortable} object behaves as
-  expected, the @sym{gtk:tree-iter-compare-func} callback function must define
-  a partial order on the model, that is, it must be reflexive, antisymmetric
-  and transitive.
+  expected, this callback function must define a partial order on the model,
+  that is, it must be reflexive, antisymmetric and transitive.
   @begin[Warning]{dictionary}
     This callback function is deprecated since 4.20. There is no replacement.
   @end{dictionary}

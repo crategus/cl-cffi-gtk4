@@ -407,13 +407,14 @@
      (yhotspot (:pointer :int))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func cursor size scale width height xhotspot yhotspot)))
 
 #+(and gtk-4-16 liber-documentation)
 (setf (liber:alias-for-symbol 'cursor-texture-callback)
       "Callback"
       (liber:symbol-documentation 'cursor-texture-callback)
- "@version{2026-02-22}
+ "@version{2026-07-12}
   @syntax{lambda (cursor size scale width height xhotspot yhotspot) => texture}
   @argument[cursor]{a @class{gdk:cursor} object}
   @argument[size]{an integer for the nominal cursor size, in application pixels}
@@ -428,8 +429,9 @@
     location for the hotspot Y position, in application pixels}
   @argument[texture]{a new @class{gdk:texture} object}
   @begin{short}
-    The type of callback used by a dynamic @class{gdk:cursor} object to generate
-    a texture for the cursor image at the given @arg{size} and @arg{scale}.
+    The callback function used by a dynamic @class{gdk:cursor} object to
+    generate a texture for the cursor image at the given @arg{size} and
+    @arg{scale}.
   @end{short}
   The actual cursor size in application pixels may be different from
   @arg{size} x @arg{size}, and will be returned in @arg{width}, @arg{height}.

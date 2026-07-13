@@ -240,13 +240,14 @@
     ((item g:object)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func item)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'map-list-model-map-func)
       "Callback"
       (liber:symbol-documentation 'map-list-model-map-func)
- "@version{2025-03-18}
+ "@version{2026-07-12}
   @syntax{lambda (item) => result}
   @argument[item]{a @class{g:object} instance for the item to map}
   @argument[result]{a @class{g:object} instance for the item to map to, this

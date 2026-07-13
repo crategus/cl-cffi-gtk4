@@ -799,18 +799,20 @@ lambda (printer success)    :run-last
     ((printer (g:object printer))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func printer)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'printer-func)
       "Callback"
       (liber:symbol-documentation 'printer-func)
- "@version{2024-07-06}
+ "@version{2026-07-12}
   @syntax{lambda (printer) => result}
   @argument[widget]{a @class{gtk:printer} object}
   @argument[result]{@em{true} to stop the enumeration, @em{false} to continue}
   @begin{short}
-    The type of function passed to the @fun{gtk:enumerate-printers} function.
+    The type of callback function passed to the @fun{gtk:enumerate-printers}
+    function.
   @end{short}
   @see-class{gtk:printer}
   @see-function{gtk:enumerate-printers}")

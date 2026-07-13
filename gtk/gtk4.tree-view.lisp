@@ -1638,6 +1638,7 @@ lambda (view)    :action
      (next (g:object tree-view-column))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func view column prev next)
       (return () :report "Return NIL" nil))))
@@ -1646,7 +1647,7 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-column-drop-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-column-drop-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (view column prev next) => result}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[column]{a @class{gtk:tree-view-column} object being dragged}
@@ -1656,8 +1657,8 @@ lambda (view)    :action
     @arg{column}}
   @argument[result]{@em{true}, if @arg{column} can be dropped in this spot}
   @begin{short}
-    Callback function type for determining whether @arg{column} can be dropped
-    in a particular spot as determined by @arg{prev} and @arg{next}.
+    The xallback function type for determining whether @arg{column} can be
+    dropped in a particular spot as determined by @arg{prev} and @arg{next}.
   @end{short}
   In left to right locales, @arg{prev} is on the left of the potential drop
   spot, and @arg{next} is on the right. In right to left mode, this is reversed.
@@ -2081,18 +2082,19 @@ lambda (view)    :action
      (path (g:boxed tree-path))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func view path)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-view-mapping-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-mapping-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (view path)}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance that is expanded}
   @begin{short}
-    Callback function used for the @fun{gtk:tree-view-map-expanded-rows}
+    The callback function used for the @fun{gtk:tree-view-map-expanded-rows}
     function.
   @end{short}
   @begin[Warning]{dictionary}
@@ -2942,6 +2944,7 @@ lambda (view)    :action
    (iter (g:boxed tree-iter))
    (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func model column key iter)
       (return-true () :report "Return T" t)
@@ -2951,8 +2954,8 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-search-equal-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-search-equal-func)
- "@version{#2025-12-08}
-  @syntax{lambda (model column key iter data) => result}
+ "@version{#2026-07-12}
+  @syntax{lambda (model column key iter) => result}
   @argument[model]{a @class{gtk:tree-model} object being searched}
   @argument[column]{an integer for the search column set by the
     @fun{gtk:tree-view-search-column} function}
@@ -2961,7 +2964,7 @@ lambda (view)    :action
     @arg{model} that should be compared with @arg{key}}
   @argument[result]{@em{false}, if the row matches, @em{true} otherwise}
   @begin{short}
-    A callback function used for checking whether a row in model matches a
+    The callback function used for checking whether a row in model matches a
     search key string entered by the user.
   @end{short}
   Note the return value is reversed from what you would normally expect.
@@ -3066,6 +3069,7 @@ lambda (view)    :action
      (iter (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func model iter)
       (return-true () :report "Return T" t)
@@ -3075,14 +3079,14 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'tree-view-row-separator-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-row-separator-func)
- "@version{2025-12-08}
+ "@version{2026-07-12}
   @syntax{lambda (model iter) => result}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[iter]{a @class{gtk:tree-iter} instance pointing at a row in
     @arg{model}}
   @argument[result]{@em{true} if the row is a separator}
   @begin{short}
-    Callback function type for determining whether the row pointed to by
+    The callback function for determining whether the row pointed to by
     @arg{iter} should be rendered as a separator.
   @end{short}
   A common way to implement this is to have a boolean column in the model,

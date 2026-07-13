@@ -662,13 +662,14 @@ lambda (widget)    :run-last
    (iter (g:boxed tree-iter))
    (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func completion key iter)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'entry-completion-match-func)
       "Callback"
       (liber:symbol-documentation 'entry-completion-match-func)
- "@version{#2024-05-03}
+ "@version{#2026-07-12}
   @syntax{lambda (completion key iter) => result}
   @argument[completion]{a @class{gtk:entry-completion} object}
   @argument[key]{a string to match, normalized and case-folded}
@@ -676,7 +677,7 @@ lambda (widget)    :run-last
   @argument[result]{@em{true} if @arg{iter} should be displayed as a possible
     completion for @arg{key}}
   @begin{short}
-    A callback function which decides whether the row indicated by @arg{iter}
+    The callback function which decides whether the row indicated by @arg{iter}
     matches a given @code{key}, and should be displayed as a possible completion
     for @arg{key}.
   @end{short}

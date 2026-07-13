@@ -566,13 +566,14 @@
      (data :pointer))
   (let ((object (cffi:convert-from-foreign item 'g:object))
         (func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func object)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-list-model-create-model-func)
       "Callback"
       (liber:symbol-documentation 'tree-list-model-create-model-func)
- "@version{2025-06-20}
+ "@version{2026-07-12}
   @syntax{lambda (object) => result}
   @argument[object]{a @class{g:object} instance for the item that is being
     expanded}

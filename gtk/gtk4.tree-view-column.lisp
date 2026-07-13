@@ -1200,6 +1200,7 @@ lambda (column)    :run-last
      (iter (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func column renderer model iter)
       (return-from-tree-cell-data-func () :report "Return NIL" nil))))
@@ -1208,7 +1209,7 @@ lambda (column)    :run-last
 (setf (liber:alias-for-symbol 'tree-cell-data-func)
       "Callback"
       (liber:symbol-documentation 'tree-cell-data-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (column renderer model iter)}
   @argument[column]{a @class{gtk:tree-view-column} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object that is being rendered
@@ -1216,8 +1217,8 @@ lambda (column)    :run-last
   @argument[model]{a @class{gtk:tree-model} object being rendered}
   @argument[iter]{a @class{gtk:tree-iter} object for the current row rendered}
   @begin{short}
-    A function to set the properties of a cell instead of just using the
-    straight mapping between the cell and the model.
+    The callback function to set the properties of a cell instead of just using
+    the straight mapping between the cell and the model.
   @end{short}
   This is useful for customizing the cell renderer. For example, a function
   might get an integer from the tree model, and render it to the @code{\"text\"}

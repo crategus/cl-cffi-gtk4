@@ -290,13 +290,14 @@ lambda (area width height)    :run-last
      (height :int)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func area cr width height)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'drawing-area-draw-func)
       "Callback"
       (liber:symbol-documentation 'drawing-area-draw-func)
- "@version{2025-07-25}
+ "@version{2026-07-12}
   @syntax{lambda (area cr width height)}
   @argument[area]{a @class{gtk:drawing-area} widget}
   @argument[cr]{a @sym{cairo:context-t} instance to draw to}

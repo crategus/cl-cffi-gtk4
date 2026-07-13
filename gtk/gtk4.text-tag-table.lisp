@@ -230,17 +230,18 @@ lambda (table tag)    :run-last
     ((tag (g:object text-tag))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func tag)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'text-tag-table-foreach-func)
       "Callback"
       (liber:symbol-documentation 'text-tag-table-foreach-func)
- "@version{2024-07-02}
+ "@version{2026-07-12}
   @syntax{lambda (tag)}
   @argument[tag]{a @class{gtk:text-tag} object}
   @begin{short}
-    The type of callback function passed to the @fun{gtk:text-tag-table-foreach}
+    The callback function passed to the @fun{gtk:text-tag-table-foreach}
     function.
   @end{short}
   @see-class{gtk:text-tag-table}

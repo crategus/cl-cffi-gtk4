@@ -275,6 +275,7 @@
      (iter (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func model iter)
       (return-true () :report "Return T" t)
@@ -284,7 +285,7 @@
 (setf (liber:alias-for-symbol 'tree-model-filter-visible-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-visible-func)
- "@version{#2026-05-08}
+ "@version{#2026-07-12}
   @syntax{lambda (model iter) => result}
   @argument[model]{a child model of the @class{gtk:tree-model-filter} object}
   @argument[iter]{a @class{gtk:tree-iter} instance pointing to the row in model
@@ -292,7 +293,7 @@
   @argument[result]{a boolean whether the row indicated by @arg{iter} is
     visible}
   @begin{short}
-    A callback function which decides whether the row indicated by @arg{iter}
+    The callback function which decides whether the row indicated by @arg{iter}
     is visible.
   @end{short}
   @begin[Warning]{dictionary}
@@ -361,13 +362,14 @@
      (column :int)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func model iter value column)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-model-filter-modify-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-modify-func)
- "@version{#2026-05-08}
+ "@version{#2026-07-12}
   @syntax{lambda (model iter value column)}
   @argument[model]{a @class{gtk:tree-model-filter} object}
   @argument[iter]{a @class{gtk:tree-iter} instance pointing to the row whose
@@ -376,8 +378,8 @@
     the correct type for the column @arg{column}}
   @argument[column]{an integer for the column whose display value is determined}
   @begin{short}
-    A callback function which calculates display values from raw values in the
-    model.
+    The callback function which calculates display values from raw values in
+    the model.
   @end{short}
   It must fill @arg{value} with the display value for the column @arg{column}
   in the row indicated by @arg{iter}.

@@ -741,23 +741,24 @@ lambda (assistant page)    :run-last
     ((page :int)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func page)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'assistant-page-func)
       "Callback"
       (liber:symbol-documentation 'assistant-page-func)
- "@version{#2025-02-27}
+ "@version{#2026-07-12}
   @syntax{lambda (page) => result}
-  @argument[page]{an integer for the page number used to calculate the Next
+  @argument[page]{an integer for the page number used to calculate the next
     page}
   @argument[result]{an integer for the next page number}
   @begin{short}
-    A callback function used by the @fun{gtk:assistant-set-forward-page-func}
-    function to know which is the Next page given a current one.
+    The callback function used by the @fun{gtk:assistant-set-forward-page-func}
+    function to know which is the next page given a current one.
   @end{short}
-  It is called both for computing the Next page when the user presses the
-  Forward button and for handling the behavior of the Last button.
+  It is called both for computing the next page when the user presses the
+  forward button and for handling the behavior of the last button.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.

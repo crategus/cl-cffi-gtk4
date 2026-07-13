@@ -552,13 +552,14 @@ lambda (fontchooser fontname)    :run-first
      (face (g:object pango:font-face))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func family face)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'font-filter-func)
       "Callback"
       (liber:symbol-documentation 'font-filter-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (family face) => result}
   @argument[family]{a @class{pango:font-family} object}
   @argument[face]{a @class{pango:font-face} object belonging to @arg{family}}

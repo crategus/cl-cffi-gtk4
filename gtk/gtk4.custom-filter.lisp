@@ -114,13 +114,14 @@
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data))
         (object (cffi:convert-from-foreign item 'g:object)))
+    (declare (type function func))
     (funcall func object)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'custom-filter-func)
       "Callback"
       (liber:symbol-documentation 'custom-filter-func)
- "@version{2025-06-06}
+ "@version{2026-07-12}
   @syntax{lambda (item) => result}
   @argument[item]{a @class{g:object} instance for the item to be matched}
   @argument[result]{@em{true} to keep the item around}

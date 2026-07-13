@@ -191,6 +191,7 @@ lambda (selection)    :run-first
      (selected :boolean)
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func selection model path selected)
       (return-true () :report "Return T" t)
@@ -200,7 +201,7 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-symbol 'tree-selection-func)
       "Callback"
       (liber:symbol-documentation 'tree-selection-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (selection model path selected) => result}
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[model]{a @class{gtk:tree-model} object being viewed}
@@ -208,8 +209,9 @@ lambda (selection)    :run-first
   @argument[selected]{@em{true}, if the path is currently selected}
   @argument[result]{@em{true}, if the selection state of the row can be toggled}
   @begin{short}
-    A callback function used by the @fun{gtk:tree-selection-set-select-function}
-    function to filter whether or not a row may be selected.
+    The callback function used by the
+    @fun{gtk:tree-selection-set-select-function} function to filter whether or
+    not a row may be selected.
   @end{short}
   It is called whenever the selection state of a row might change. A return
   value of @em{true} indicates to selection that it is okay to change the
@@ -362,19 +364,20 @@ lambda (selection)    :run-first
      (iter (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (funcall func model path iter)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-selection-foreach-func)
       "Callback"
       (liber:symbol-documentation 'tree-selection-foreach-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (model path iter)}
   @argument[model]{a @class{gtk:tree-model} object being viewed}
   @argument[path]{a @class{gtk:tree-path} instance of a selected row}
   @argument[iter]{a @class{gtk:tree-iter} instance pointing to a selected row}
   @begin{short}
-    A callback function used by the @fun{gtk:tree-selection-selected-foreach}
+    The callback function used by the @fun{gtk:tree-selection-selected-foreach}
     function to map all selected rows.
   @end{short}
   It will be called on every selected row in the view.

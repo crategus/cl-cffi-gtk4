@@ -1749,6 +1749,7 @@ lambda (model path iter order)    :run-first
      (iter (g:boxed tree-iter))
      (data :pointer))
   (let ((func (glib:get-stable-pointer-value data)))
+    (declare (type function func))
     (restart-case
       (funcall func model path iter)
       (stop-tree-model-iteration () :report "Return T" t)
@@ -1758,15 +1759,15 @@ lambda (model path iter order)    :run-first
 (setf (liber:alias-for-symbol 'tree-model-foreach-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-foreach-func)
- "@version{#2025-12-08}
+ "@version{#2026-07-12}
   @syntax{lambda (model path iter) => result}
   @argument[model]{a @class{gtk:tree-model} object being iterated}
   @argument[path]{a current @class{gtk:tree-path} instance}
   @argument[iter]{a current @class{gtk:tree-iter} iterator}
   @argument[result]{@em{true} to stop iterating, @em{false} to continue}
   @begin{short}
-    Type of the callback function passed to the @fun{gtk:tree-model-foreach}
-    function to iterate over the rows in a tree model.
+    The callback function passed to the @fun{gtk:tree-model-foreach} function
+    to iterate over the rows in a tree model.
   @end{short}
   @begin[Warning]{dictionary}
     This callback function is deprecated since 4.20. There is no replacement.
