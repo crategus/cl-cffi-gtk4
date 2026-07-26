@@ -2,7 +2,7 @@
 ;;; gdk4.display-manager.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'display-manager 'type)
- "@version{2025-06-29}
+ "@version{2026-07-26}
   @begin{short}
     The purpose of the @class{gdk:display-manager} singleton object is to offer
     notification when displays appear or disappear or the default display
@@ -106,8 +106,7 @@ lambda (manager display)    :run-last
     @end{signal}
   @end{dictionary}
   @see-slot{gdk:display-manager-default-display}
-  @see-class{gdk:display}
-  @see-function{gdk:display-manager-get}")
+  @see-class{gdk:display}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accesor Details
@@ -126,15 +125,14 @@ lambda (manager display)    :run-last
 (setf (liber:alias-for-function 'display-manager-default-display)
       "Accessor"
       (documentation 'display-manager-default-display 'function)
- "@version{2025-09-29}
+ "@version{2026-07-26}
   @syntax{(gdk:display-manager-default-display object) => display}
   @syntax{(setf (gdk:display-manager-default-display object) display)}
   @argument[object]{a @class{gdk:display-manager} object}
   @argument[display]{a default @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:display-manager]{default-display} slot of the
-    @class{gdk:display-manager} class gets or sets the default
-    @class{gdk:display} object.
+    The accessor for the @slot[gdk:display-manager]{default-display} slot gets
+    or sets the default display.
   @end{short}
   Returns @code{nil} if there is no default display.
   @begin[Examples]{dictionary}
@@ -143,31 +141,39 @@ lambda (manager display)    :run-last
 => #<GDK:DISPLAY {1001F9A233@}>
     @end{pre}
   @end{dictionary}
-  @see-class{gdk:display}
-  @see-class{gdk:display-manager}")
+  @see-class{gdk:display-manager}
+  @see-class{gdk:display}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_manager_get
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_manager_get" display-manager-get)
-    (g:object display-manager)
- #+liber-documentation
- "@version{2024-07-10}
-  @return{The global @class{gdk:display-manager} singleton object.}
-  @begin{short}
-    Gets the @class{gdk:display-manager} singleton object.
-  @end{short}
-  When called for the first time, this function consults the @code{GDK_BACKEND}
-  environment variable to find out which of the supported GDK backends to use
-  in case GDK has been compiled with multiple backends.
-  @begin[Examples]{dictionary}
-    @begin{pre}
+;; The display manager is a singleton object, which is initialised once.
+
+(cffi:defcfun ("gdk_display_manager_get" %display-manager-get)
+    (g:object display-manager))
+
+(let (manager)
+  (defun display-manager-get ()
+   #+liber-documentation
+   "@version{2026-07-26}
+    @return{The global @class{gdk:display-manager} singleton object.}
+    @begin{short}
+      Gets the @class{gdk:display-manager} singleton object.
+    @end{short}
+    When called for the first time, this function consults the @code{GDK_BACKEND}
+    environment variable to find out which of the supported GDK backends to use
+    in case GDK has been compiled with multiple backends.
+    @begin[Examples]{dictionary}
+      @begin{pre}
 (gdk:display-manager-get)
 => #<GDK:DISPLAY-MANAGER {1001CFF103@}>
-    @end{pre}
-  @end{dictionary}
-  @see-class{gdk:display-manager}")
+      @end{pre}
+    @end{dictionary}
+    @see-class{gdk:display-manager}"
+    (unless manager
+      (setf manager (%display-manager-get)))
+    manager))
 
 (export 'display-manager-get)
 
@@ -178,12 +184,12 @@ lambda (manager display)    :run-last
 (cffi:defcfun ("gdk_display_manager_list_displays"
                display-manager-list-displays) (g:slist-t (g:object display))
  #+liber-documentation
- "@version{2024-07-10}
+ "@version{2026-07-26}
   @argument[manager]{a @class{gdk:display-manager} object}
   @return{The list of @class{gdk:display} objects.}
   @short{List all currently open displays.}
-  @see-class{gdk:display}
-  @see-class{gdk:display-manager}"
+  @see-class{gdk:display-manager}
+  @see-class{gdk:display}"
   (manager (g:object display-manager)))
 
 (export 'display-manager-list-displays)
@@ -195,7 +201,7 @@ lambda (manager display)    :run-last
 (cffi:defcfun ("gdk_display_manager_open_display" display-manager-open-display)
     (g:object display)
  #+liber-documentation
- "@version{2025-08-02}
+ "@version{2026-07-26}
   @argument[manager]{a @class{gdk:display-manager} object}
   @argument[name]{a string for the name of the display to open}
   @begin{return}
@@ -203,8 +209,8 @@ lambda (manager display)    :run-last
     opened.
   @end{return}
   @short{Opens a display.}
-  @see-class{gdk:display}
-  @see-class{gdk:display-manager}"
+  @see-class{gdk:display-manager}
+  @see-class{gdk:display}"
   (manager (g:object display-manager))
   (name :string))
 
