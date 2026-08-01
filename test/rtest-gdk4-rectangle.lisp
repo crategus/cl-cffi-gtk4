@@ -53,8 +53,10 @@
 
 (test gdk-rectangle-contains-point
   (let ((rect (gdk:rectangle-new :x 10 :y 10 :width 20 :height 20)))
-    (is-true (gdk:rectangle-contains-point rect 15 15))
-    (is-false (gdk:rectangle-contains-point rect 0 0))))
+    (is-true  (gdk:rectangle-contains-point rect 10 10))
+    (is-true  (gdk:rectangle-contains-point rect 15 15))
+    (is-false (gdk:rectangle-contains-point rect 0 0))
+    (is-true  (gdk:rectangle-contains-point rect 20 20))))
 
 ;;;     gdk_rectangle_equal
 
@@ -92,4 +94,4 @@
     (is (gdk:rectangle-equal (gdk:rectangle-new :x 10 :y 10 :width 10 :height 10)
                              (gdk:rectangle-union rect1 rect3)))))
 
-;;; 2024-07-04
+;;; 2026-07-30

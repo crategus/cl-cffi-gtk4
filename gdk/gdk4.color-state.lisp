@@ -2,7 +2,7 @@
 ;;; gdk4.color-state.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -42,6 +42,7 @@
 ;;;
 ;;;     gdk_color_state_create_cicp_params
 ;;;     gdk_color_state_equal
+;;;     gdk_color_state_equivalent                          Since 4.20
 ;;;     gdk_color_state_ref
 ;;;     gdk_color_state_unref
 ;;; ----------------------------------------------------------------------------
@@ -85,9 +86,45 @@
 ;;; gdk_color_state_get_oklab                               Since 4.18
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_color_state_get_oklab" color-state-oklab)
+    (g:boxed color-state :return)
+ #+liber-documentation
+ "@version{2026-07-31}
+  @begin{return}
+    The @class{gdk:color-state} instance for the @code{oklab} color space.
+  @end{return}
+  @begin{short}
+    Returns the color state object representing the @code{oklab} color space.
+  @end{short}
+  This is a perceptually uniform color state.
+
+  Since 4.18
+  @see-class{gdk:color-state}")
+
+(export 'color-state-oklab)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_color_state_get_oklch                               Since 4.18
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_color_state_get_oklch" color-state-oklch)
+    (g:boxed color-state :return)
+ #+liber-documentation
+ "@version{2026-07-31}
+  @begin{return}
+    The @class{gdk:color-state} instance for the @code{oklch} color space.
+  @end{return}
+  @begin{short}
+    Returns the color state object representing the @code{oklch} color space.
+  @end{short}
+  This is the polar variant of @code{oklab}, in which the hue is encoded as a
+  polar coordinate.
+
+  Since 4.18
+  @see-class{gdk:color-state}
+  @see-function{gdk:color-state-oklab}")
+
+(export 'color-state-oklch)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_color_state_get_rec2100_linear
@@ -96,7 +133,7 @@
 (cffi:defcfun ("gdk_color_state_get_rec2100_linear" color-state-rec2100-linear)
     (g:boxed color-state :return)
  #+liber-documentation
- "@version{2024-11-10}
+ "@version{2026-08-01}
   @return{The @class{gdk:color-state} instance for linearized rec2100.}
   @begin{short}
     Returns the color state object representing the linear rec2100 color space.
@@ -105,7 +142,7 @@
   linear transfer function. It is equivalent to the Cicp tuple 9/8/0/1. See
   for example the
   @url[https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-linear]{CSS HDR Module}
-  for details about this colorstate.
+  for details about this color state.
 
   Since 4.16
   @see-class{gdk:color-state}")
@@ -119,7 +156,7 @@
 (cffi:defcfun ("gdk_color_state_get_rec2100_pq" color-state-rec2100-pq)
     (g:boxed color-state :return)
  #+liber-documentation
- "@version{2024-11-10}
+ "@version{2026-08-01}
   @return{The @class{gdk:color-state} instance for rec2100-pq.}
   @begin{short}
     Returns the color state object representing the rec2100-pq color space.
@@ -129,7 +166,7 @@
   the Cicp tuple 9/16/0/1. See for example the
   @url[https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-pq]{CSS HDR Module}
   for details about
-  this colorstate.
+  this color state.
 
   Since 4.16
   @see-class{gdk:color-state}")
@@ -143,7 +180,7 @@
 (cffi:defcfun ("gdk_color_state_get_srgb" color-state-srgb)
     (g:boxed color-state :return)
  #+liber-documentation
- "@version{2024-11-10}
+ "@version{2026-08-01}
   @return{The @class{gdk:color-state} instance for sRGB.}
   @begin{short}
     Returns the color state object representing the sRGB color space.
@@ -152,7 +189,7 @@
   function defined by IEC 61966-2-1. It is equivalent to the Cicp tuple
   1/13/0/1. See for example the
   @url[https://www.w3.org/TR/css-color-4/#predefined-sRGB]{CSS HDR Module}
-  for details about this colorstate.
+  for details about this color state.
 
   Since 4.16
   @see-class{gdk:color-state}")
@@ -166,7 +203,7 @@
 (cffi:defcfun ("gdk_color_state_get_srgb_linear" color-state-srgb-linear)
     (g:boxed color-state :return)
  #+liber-documentation
- "@version{2024-11-10}
+ "@version{2026-08-01}
   @return{The @class{gdk:color-state} instance for linearized sRGB.}
   @begin{short}
     Returns the color state object representing the linearized sRGB color space.
@@ -174,7 +211,7 @@
   This color state uses the primaries defined by BT.709-6 and a linear transfer
   function. It is equivalent to the Cicp tuple 1/8/0/1. See for example the
   @url[https://www.w3.org/TR/css-color-4/#predefined-sRGB-linear]{CSS HDR Module}
-  for details about this colorstate.
+  for details about this color state.
 
   Since 4.16
   @see-class{gdk:color-state}")
@@ -188,11 +225,11 @@
 (cffi:defcfun ("gdk_color_state_create_cicp_params"
                color-state-create-cicp-params) (g:object cicp-params :return)
  #+liber-documentation
- "@version{2024-11-10}
-  @argument[color]{a @class{gdk:color-state} instance}
+ "@version{2026-08-01}
+  @argument[colorstate]{a @class{gdk:color-state} instance}
   @return{The new @class{gdk:cicp-params} object.}
   @begin{short}
-    Create a @class{gdk:cicp-params} object representing the colorstate.
+    Create a @class{gdk:cicp-params} object representing the color state.
   @end{short}
   It is not guaranteed that every @class{gdk:color-state} instance can be
   represented with Cicp parameters. If that is the case, this function returns
@@ -201,7 +238,7 @@
   Since 4.16
   @see-class{gdk:color-state}
   @see-class{gdk:cicp-params}"
-  (color (g:boxed color-state)))
+  (colorstate (g:boxed color-state)))
 
 (export 'color-state-create-cicp-params)
 
@@ -211,9 +248,9 @@
 
 (cffi:defcfun ("gdk_color_state_equal" color-state-equal) :boolean
  #+liber-documentation
- "@version{2024-11-10}
-  @argument[color1]{a @class{gdk:color-state} instance}
-  @argument[color2]{another @class{gdk:color-state} instance}
+ "@version{2026-08-01}
+  @argument[colorstate1]{a @class{gdk:color-state} instance}
+  @argument[colorstate2]{another @class{gdk:color-state} instance}
   @begin{short}
     Compares two color states for equality.
   @end{short}
@@ -223,9 +260,34 @@
 
   Since 4.16
   @see-class{gdk:color-state}"
-  (color1 (g:boxed color-state))
-  (color2 (g:boxed color-state)))
+  (colorstate1 (g:boxed color-state))
+  (colorstate2 (g:boxed color-state)))
 
 (export 'color-state-equal)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_color_state_equivalent                              Since 4.20
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_color_state_equivalent" color-state-equivalent) :boolean
+ #+liber-documentation
+ "@version{2026-08-01}
+  @argument[colorstate1]{a @class{gdk:color-state} instance}
+  @argument[colorstate2]{another @class{gdk:color-state} instance}
+  @return{@em{True} if the two color states are equivalent.}
+  @begin{short}
+    Compares two @class{gdk:color-state} instances for equivalence.
+  @end{short}
+  Two objects that represent the same color state should be equivalent, even
+  though they may not be equal in the sense of the @fun{gdk:color-state-equal}
+  function.
+
+  Since 4.20
+  @see-class{gdk:color-state}
+  @see-function{gdk:color-state-equal}"
+  (colorstate1 (g:boxed color-state))
+  (colorstate2 (g:boxed color-state)))
+
+(export 'color-state-equivalent)
 
 ;;; --- End of file gdk4.color-state.lisp --------------------------------------

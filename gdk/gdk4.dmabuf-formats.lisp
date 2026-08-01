@@ -2,7 +2,7 @@
 ;;; gdk4.dmabuf-formats.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,8 +37,8 @@
 ;;;     gdk_dmabuf-formats-equal
 ;;;     gdk_dmabuf-formats-get_format
 ;;;     gdk_dmabuf-formats-get_n_formats
-;;;     gdk_dmabuf-formats-ref
-;;;     gdk_dmabuf-formats-unref
+;;;     gdk_dmabuf-formats-ref                              not needed
+;;;     gdk_dmabuf-formats-unref                            not needed
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)

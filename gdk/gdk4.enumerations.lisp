@@ -2,7 +2,7 @@
 ;;; gdk4.enumerations.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -113,7 +113,7 @@
                 :hyper-mask
                 :meta-mask)
  #+liber-documentation
- "@version{2024-05-26}
+ "@version{2026-08-01}
   @variable-value{@code{'(:shift-mask
                 :lock-mask
                 :control-mask
@@ -164,14 +164,11 @@
 (setf (liber:alias-for-symbol 'modifier-type)
       "GFlags"
       (liber:symbol-documentation 'modifier-type)
- "@version{2025-06-30}
+ "@version{2026-08-01}
   @begin{declaration}
 (gobject:define-gflags \"GdkModifierType\" modifier-type
   (:export t
    :type-initializer \"gdk_modifier_type_get_type\")
-  #-gtk-4-14
-  (:none 0)
-  #+gtk-4-14
   (:no-modifier-mask 0)
   (:shift-mask   #.(ash 1 0))
   (:lock-mask    #.(ash 1 1))
@@ -218,6 +215,7 @@
   outside this enumeration. Your code should
   preserve and ignore them. You can use the @var{gdk:+modifier-mask+} value to
   remove all private values.
-  @see-class{gdk:event}")
+  @see-class{gdk:event}
+  @see-variable{gdk:+modifier-mask+}")
 
 ;;; --- End of file gdk4.enumerations.lisp -------------------------------------

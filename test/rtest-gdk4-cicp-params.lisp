@@ -62,29 +62,53 @@
              (glib-test:list-signals "GdkCicpParams")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkCicpParams" GDK:CICP-PARAMS
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_cicp_params_get_type")
-                       ((COLOR-PRIMARIES CICP-PARAMS-COLOR-PRIMARIES
-                         "color-primaries" "guint" T T)
-                        (MATRIX-COEFFICIENTS CICP-PARAMS-MATRIX-COEFFICIENTS
-                         "matrix-coefficients" "guint" T T)
-                        (RANGE CICP-PARAMS-RANGE "range" "GdkCicpRange" T T)
-                        (TRANSFER-FUNCTION CICP-PARAMS-TRANSFER-FUNCTION
-                         "transfer-function" "guint" T T)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_cicp_params_get_type")
+                      ((COLOR-PRIMARIES CICP-PARAMS-COLOR-PRIMARIES
+                        "color-primaries" "guint" T T)
+                       (MATRIX-COEFFICIENTS CICP-PARAMS-MATRIX-COEFFICIENTS
+                        "matrix-coefficients" "guint" T T)
+                       (RANGE CICP-PARAMS-RANGE "range" "GdkCicpRange" T T)
+                       (TRANSFER-FUNCTION CICP-PARAMS-TRANSFER-FUNCTION
+                        "transfer-function" "guint" T T)))
              (gobject:get-gtype-definition "GdkCicpParams"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     color-primaries
-;;;     matrix-coefficients
-;;;     range
-;;;     transfer-function
+(test gdk-cicp-params-properties
+  (glib-test:with-check-memory (params)
+    (is (typep (setf params (make-instance 'gdk:cicp-params)) 'gdk:cicp-params))
+    ;; Property COLOR-PRIMARIES
+    (is (= 2 (gdk:cicp-params-color-primaries params)))
+    ;; Property MATRIX-COEFFICIENTS
+    (is (= 2 (gdk:cicp-params-matrix-coefficients params)))
+    ;; Property RANGE
+    (is (eq :narrow (gdk:cicp-params-range params)))
+    ;; Property TRANSFER-FUNCTION
+    (is (= 2 (gdk:cicp-params-transfer-function params)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_cicp_params_new
+
+(test gdk-cicp-params-new
+  (glib-test:with-check-memory (params)
+    (is (typep (setf params (gdk:cicp-params-new)) 'gdk:cicp-params))))
+
 ;;;     gdk_cicp_params_build_color_state
 
-;;; 2024-11-10
+(test gdk-cicp-params-build-color-state
+  (glib-test:with-check-memory (params)
+    ;; Create ccip parameter
+    (is (typep (setf params (gdk:cicp-params-new)) 'gdk:cicp-params))
+    ;; Set ccip parameters
+    (is (= 1 (setf (gdk:cicp-params-color-primaries params) 1)))
+    (is (= 0 (setf (gdk:cicp-params-matrix-coefficients params) 0)))
+    (is (eq :full (setf (gdk:cicp-params-range params) :full)))
+    (is (= 13 (setf (gdk:cicp-params-transfer-function params) 13)))
+    ;; Create color state
+    (is (typep (gdk:cicp-params-build-color-state params) 'gdk:color-state))))
+
+;;; 2026-07-31

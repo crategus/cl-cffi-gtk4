@@ -2,7 +2,7 @@
 ;;; gdk4.keyval.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -41,6 +41,8 @@
 ;;;     gdk_keyval_is_upper
 ;;;     gdk_keyval_is_lower
 ;;;     gdk_keyval_to_unicode
+;;;     gdk_keyval_get_aliases                              Since 4.24
+;;;
 ;;;     gdk_unicode_to_keyval
 ;;; ----------------------------------------------------------------------------
 
@@ -52,7 +54,7 @@
 
 (cffi:defcfun ("gdk_keyval_name" keyval-name) :string
  #+liber-documentation
- "@version{2025-08-02}
+ "@version{2026-08-01}
   @argument[keyval]{an unsigned integer for the key value}
   @begin{return}
     The string containing the name of the key, or @code{nil} if @arg{keyval} is
@@ -63,6 +65,12 @@
   @end{short}
   The names are the same as those in the @file{gdk/gdkkeysyms.h} header file
   but without the leading @code{GDK_KEY_}.
+  @begin[Examples]{dictionary}
+    @begin{pre}
+(mapcar #'gdk:keyval-name '(60 61 62 63 64 65 66 67))
+=> (\"less\" \"equal\" \"greater\" \"question\" \"at\" \"A\" \"B\" \"C\")
+    @end{pre}
+  @end{dictionary}
   @see-function{gdk:keyval-from-name}"
   (keyval :uint))
 
@@ -85,6 +93,14 @@
   @end{short}
   The names are the same as those in the @file{gdk/gdkkeysyms.h} header file
   but without the leading @code{GDK_KEY_}.
+  @begin[Examples]{dictionary}
+    @begin{pre}
+(mapcar #'gdk:keyval-from-name
+        '(\"less\" \"equal\" \"greater\" \"question\" \"at\" \"A\" \"B\" \"C\"))
+=> (60 61 62 63 64 65 66 67)
+(gdk:keyval-from-name \"unknown\") => 16777215
+    @end{pre}
+  @end{dictionary}
   @see-function{gdk:keyval-name}"
   (name :string))
 
@@ -101,7 +117,7 @@
 
 (defun keyval-convert-case (keyval)
  #+liber-documentation
- "@version{2025-08-02}
+ "@version{2026-08-01}
   @syntax{(gdk:keyval-convert-case keyval) => lower, upper}
   @argument[keyval]{an unsigned integer for the key value}
   @argument[lower]{an unsigned integer for the lowercase version of
@@ -110,6 +126,13 @@
   @begin{short}
     Obtains the upper-case and lower-case versions of the key value.
   @end{short}
+  @begin[Examples]{dictionary}
+    @begin{pre}
+(mapcar #'gdk:keyval-name
+        (multiple-value-list (gdk:keyval-convert-case 65)))
+=> (\"a\" \"A\")
+    @end{pre}
+  @end{dictionary}
   @see-function{gdk:keyval-to-upper}
   @see-function{gdk:keyval-to-lower}"
   (cffi:with-foreign-objects ((lower :uint) (upper :uint))

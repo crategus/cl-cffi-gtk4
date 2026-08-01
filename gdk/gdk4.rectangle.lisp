@@ -2,7 +2,7 @@
 ;;; gdk4.rectangle.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,7 +63,7 @@
 (setf (liber:alias-for-class 'rectangle)
       "GBoxed"
       (documentation 'rectangle 'type)
- "@version{2025-06-30}
+ "@version{2026-07-30}
   @begin{declaration}
 (glib:define-gboxed-cstruct rectangle \"GdkRectangle\"
   (:export t
@@ -85,19 +85,16 @@
     The @class{gdk:rectangle} structure is a data type for representing
     rectangles.
   @end{short}
-  The @class{gdk:rectangle} structure is identical to the
-  @sym{cairo:rectangle-t} structure. Together with the @sym{cairo:region-t} data
-  type of Cairo, these are the central types for representing sets of pixels.
+  Together with the @sym{cairo:region-t} data type of Cairo, these are the
+  central types for representing sets of pixels.
 
   The intersection of two rectangles can be computed with the
   @fun{gdk:rectangle-intersect} function. To find the union of two rectangles
   use the @fun{gdk:rectangle-union} function.
 
   The @sym{cairo:region-t} type provided by Cairo is usually used for managing
-  non-rectangular clipping of graphical operations.
-
-  The Graphene library has a number of other data types for regions and volumes
-  in 2D and 3D.
+  non-rectangular clipping of graphical operations. The Graphene library has a
+  number of other data types for regions and volumes in 2D and 3D.
   @see-constructor{gdk:rectangle-new}
   @see-constructor{gdk:rectangle-copy}
   @see-slot{gdk:rectangle-x}
@@ -112,13 +109,13 @@
 (setf (liber:alias-for-function 'rectangle-x)
       "Accessor"
       (documentation 'rectangle-x 'function)
- "@version{2025-09-29}
+ "@version{2026-07-28}
   @syntax{(gdk:rectangle-x instance) => x}
   @syntax{(setf (gdk:rectangle-x instance) x)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[x]{an integer for the x coordinate of the rectangle}
   @begin{short}
-    The accessor for the @code{x} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{x} slot returns the x coordinate.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -128,13 +125,13 @@
 (setf (liber:alias-for-function 'rectangle-y)
       "Accessor"
       (documentation 'rectangle-y 'function)
- "@version{2025-09-29}
+ "@version{2026-07-28}
   @syntax{(gdk:rectangle-y instance) => y}
   @syntax{(setf (gdk:rectangle-y instance) y)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[y]{an integer for the y coordinate of the rectangle}
   @begin{short}
-    The accessor for the @code{y} slot of the @class{gdk:rectangle} structure.
+    The accessor for the @code{y} slot returns the y coordinate.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -144,14 +141,13 @@
 (setf (liber:alias-for-function 'rectangle-width)
       "Accessor"
       (documentation 'rectangle-width 'function)
- "@version{2025-09-29}
+ "@version{2026-07-28}
   @syntax{(gdk:rectangle-width instance) => width}
   @syntax{(setf (gdk:rectangle-width instance) width)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[width]{an integer for the width of the rectangle}
   @begin{short}
-    The accessor for the @code{width} slot of the @class{gdk:rectangle}
-    structure.
+    The accessor for the @code{width} slot returns the width.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -161,14 +157,13 @@
 (setf (liber:alias-for-function 'rectangle-height)
       "Accessor"
       (documentation 'rectangle-height 'function)
- "@version{2025-09-29}
+ "@version{2026-07-28}
   @syntax{(gdk:rectangle-height instance) => height}
   @syntax{(setf (gdk:rectangle-height instance) height)}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @argument[height]{an integer for the height of the rectangle}
   @begin{short}
-    The accessor for the @code{height} slot of the @class{gdk:rectangle}
-    structure.
+    The accessor for the @code{height} slot returns the height.
   @end{short}
   @see-class{gdk:rectangle}")
 
@@ -178,16 +173,17 @@
 
 (defun rectangle-new (&key (x 0) (y 0) (width 0) (height 0))
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-07-30}
   @argument[x]{an integer for the x coordinate of the top left corner of
     the rectangle}
   @argument[y]{an integer for the y coordinate of the top left corner of
     the rectangle}
   @argument[width]{an integer for the width of the rectangle}
   @argument[height]{an integer for the height of the rectangle}
+  @return{The newly created @class{gdk:rectangle} instance.}
   @begin{short}
-    Returns a @class{gdk:rectangle} instance for the initial values given to
-    @arg{x}, @arg{y}, @arg{width}, and @arg{height}.
+    Returns a rectangle for the initial values given to @arg{x}, @arg{y},
+    @arg{width}, and @arg{height}.
   @end{short}
   @see-class{gdk:rectangle}
   @see-function{gdk:rectangle-copy}"
@@ -201,8 +197,12 @@
 
 (defun rectangle-copy (instance)
  #+liber-documentation
- "@version{2024-07-09}
+ "@version{2026-07-30}
   @argument[instance]{a @class{gdk:rectangle} instance}
+  @begin{return}
+    The newly created @class{gdk:rectangle} instance for the copy of
+    @arg{instance}.
+  @end{return}
   @begin{short}
     Copy constructor of a @class{gdk:rectangle} structure.
   @end{short}
@@ -314,4 +314,4 @@
 
 (export 'rectangle-union)
 
-;;; --- End of file gdk4.rectangle.lisp -----------------------------------------
+;;; --- End of file gdk4.rectangle.lisp ----------------------------------------

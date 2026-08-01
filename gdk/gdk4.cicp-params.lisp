@@ -2,7 +2,7 @@
 ;;; gdk4.cicp-params.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
 (setf (liber:alias-for-symbol 'cicp-range)
       "GEnum"
       (liber:symbol-documentation 'cicp-range)
- "@version{2025-07-30}
+ "@version{2026-08-01}
   @begin{declaration}
 (gobject:define-genum \"GdkCicpRange\" cicp-range
   (:export t
@@ -82,8 +82,8 @@
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
-      @entry[:narrow]{The values use the range of 16-235 (for Y) and 16-240
-        for u and v.}
+      @entry[:narrow]{The values use the range between 16 and 235 for Y and
+        between 16 and 240 for U and V.}
       @entry[:full]{The values use the full range.}
     @end{simple-table}
   @end{values}
@@ -93,8 +93,8 @@
   @end{short}
 
   In digital broadcasting, it is common to reserve the lowest and highest
-  values. Typically the allowed values for the narrow range are 16-235 for Y and
-  16-240 for u,v (when dealing with YUV data).
+  values. When dealing with YUV data, the allowed values for the narrow range
+  are typically between 16 and 235 for Y and between 16 and 240 for U and V.
 
   Since 4.16
   @see-class{gdk:cicp-params}")
@@ -123,7 +123,7 @@
 
 #+liber-documentation
 (setf (documentation 'cicp-params 'type)
- "@version{2025-07-30}
+ "@version{2026-08-01}
   @begin{short}
    The @class{gdk:cicp-params} object contains the parameters that define a
    colorstate according to the
@@ -169,14 +169,14 @@
 (setf (liber:alias-for-function 'cicp-params-color-primaries)
       "Accessor"
       (documentation 'cicp-params-color-primaries 'function)
- "@version{#2025-08-02}
+ "@version{2026-07-31}
   @syntax{(gdk:cicp-params-color-primaries object) => primaries}
   @syntax{(setf (gdk:cicp-params-color-primaries object) primaries)}
   @argument[object]{a @class{gdk:cicp-params} object}
   @argument[primaries]{an unsigned integer for the color primaries value}
   @begin{short}
-    The accessor for the @slot[gdk:cicp-params]{color-primaries} slot of the
-    @class{gdk:cicp-params} class gets or sets the color primaries value.
+    The accessor for the @slot[gdk:cicp-params]{color-primaries} slot gets or
+    sets the color primaries value.
   @end{short}
 
   Supported values are:
@@ -198,22 +198,21 @@
                                                'cicp-params) t)
  "The @code{matrix-coefficients} property of type @code{:uint} (Read / Write)
   @br{}
-  The matrix coefficients (for YUV to RGB conversion). @br{}
+  The matrix coefficients for YUV to RGB conversion. @br{}
   Default value: 2")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cicp-params-matrix-coefficients)
       "Accessor"
       (documentation 'cicp-params-matrix-coefficients 'function)
- "@version{#2025-08-02}
+ "@version{2026-07-31}
   @syntax{(gdk:cicp-params-matrix-coefficients object) => coefficients}
   @syntax{(setf (gdk:cicp-params-matrix-coefficients object) coefficients)}
   @argument[object]{a @class{gdk:cicp-params} object}
   @argument[coefficients]{an unsigned integer for the matrix coefficients value}
   @begin{short}
-    The accessor for the @slot[gdk:cicp-params]{matrix-coefficients} slot of the
-    @class{gdk:cicp-params} class gets or sets the matrix coefficients of
-    @arg{object}.
+    The accessor for the @slot[gdk:cicp-params]{matrix-coefficients} slot gets
+    or sets the matrix coefficients of @arg{object}.
   @end{short}
 
   Supported values are:
@@ -236,14 +235,14 @@
 (setf (liber:alias-for-function 'cicp-params-range)
       "Accessor"
       (documentation 'cicp-params-range 'function)
- "@version{#2025-07-30}
+ "@version{2026-07-31}
   @syntax{(gdk:cicp-params-range object) => range}
   @syntax{(setf (gdk:cicp-params-range object) range)}
   @argument[object]{a @class{gdk:cicp-params} object}
   @argument[range]{a @sym{gdk:cicp-range} value}
   @begin{short}
-    The accessor for the @slot[gdk:cicp-params]{range} slot of the
-    @class{gdk:cicp-params} class gets or sets the range value of @arg{object}.
+    The accessor for the @slot[gdk:cicp-params]{range} slot gets or sets the
+    range value of @arg{object}.
   @end{short}
   @see-class{gdk:cicp-params}
   @see-symbol{gdk:cicp-range}")
@@ -262,15 +261,14 @@
 (setf (liber:alias-for-function 'cicp-params-transfer-function)
       "Accessor"
       (documentation 'cicp-params-transfer-function 'function)
- "@version{#2025-08-02}
+ "@version{2026-07-31}
   @syntax{(gdk:cicp-params-transfer-function object) => function}
   @syntax{(setf (gdk:cicp-params-transfer-function object) function)}
   @argument[object]{a @class{gdk:cicp-params} object}
   @argument[function]{an unsigned integer for the transfer function value}
   @begin{short}
-    The accessor for the @slot[gdk:cicp-params]{transfer-function} slot of the
-    @class{gdk:cicp-params} class gets or sets the transfer function value of
-    @arg{object}.
+    The accessor for the @slot[gdk:cicp-params]{transfer-function} slot gets or
+    sets the transfer function value of @arg{object}.
   @end{short}
 
   Supported values are:
@@ -293,7 +291,7 @@
 
 (defun cicp-params-new ()
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{2026-07-31}
   @return{The new @class{gdk:cicp-params} object.}
   @begin{short}
     Creates a new @class{gdk:cicp-params} object.
@@ -318,7 +316,7 @@
 
 (defun cicp-params-build-color-state (params)
  #+liber-documentation
- "@version{#2024-11-10}
+ "@version{2026-07-31}
   @argument[params]{a @class{gdk:cicp-params} object}
   @return{The newly allocated @class{gdk:color-state} instance.}
   @begin{short}
