@@ -66,7 +66,8 @@
 ;;;     default-display
 
 (test gdk-display-manager-properties
-  (glib-test:with-check-memory ((manager 2) (display 2) :strong 2)
+  (glib-test:with-check-memory ((manager 2))
+    (let (display)
       ;; Get singleton display manager
       (is (typep (setf manager
                        (gdk:display-manager-get)) 'gdk:display-manager))
@@ -77,7 +78,7 @@
       (is-false (setf (gdk:display-manager-default-display manager) nil))
       ;; Restore default display
       (is (eq display
-              (setf (gdk:display-manager-default-display manager) display)))))
+              (setf (gdk:display-manager-default-display manager) display))))))
 
 ;;; --- Functions --------------------------------------------------------------
 

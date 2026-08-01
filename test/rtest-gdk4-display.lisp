@@ -119,14 +119,22 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gdk-display-properties
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is-true (gdk:display-composited display))
-        (is (typep (gdk:display-dmabuf-formats display) 'gdk:dmabuf-formats))
-        (is-true (gdk:display-input-shapes display))
-        (is-true (gdk:display-rgba display))
-        (is-true (gdk:display-shadow-width display))))))
+  (let ((display (gdk:display-default)))
+    ;; Property COMPOSITED
+    (is-true (gdk:display-composited display))
+    (signals (error) (setf (gdk:display-composited display) nil))
+    ;; Property DMABUF-FORMATS
+    (is (typep (gdk:display-dmabuf-formats display) 'gdk:dmabuf-formats))
+    (signals (error) (setf (gdk:display-dmabuf-formats display) nil))
+    ;; Property INPUT-SHAPES
+    (is-true (gdk:display-input-shapes display))
+    (signals (error) (setf (gdk:display-input-shapes display) nil))
+    ;; Property RGBA
+    (is-true (gdk:display-rgba display))
+    (signals (error) (setf (gdk:display-rgba display) nil))
+    ;; Property SHADOW-WIDTH
+    (is-true (gdk:display-shadow-width display))
+    (signals (error) (setf (gdk:display-shadow-width display) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -143,37 +151,29 @@
         (is (typep (setf display (gdk:display-open name)) 'gdk:display))
         (is-false (eq display (gdk:display-default)))))))
 
-#+nil ;; No longer works for Windows?
-(test gdk-display-open
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let (display)
-        (is (typep (setf display
-                         (gdk:display-open "1\\WinSta0\\Default")) 'gdk:display))
-        (is (eq display (gdk:display-default)))))))
-
 ;;;     gdk_display_get_default
 
 (test gdk-display-default
- (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-        (is (typep (gdk:display-default) 'gdk:display)))))
+  (glib-test:with-check-memory ()
+    (is (typep (gdk:display-default) 'gdk:display))))
 
 ;;;     gdk_display_get_name
 
 #-windows
 (test gdk-display-name
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is (stringp (gdk:display-name display)))))))
+  (glib-test:with-check-memory ()
+    (is (stringp (gdk:display-name (gdk:display-default))))))
+
+#+crategus
+(test gdk-display-name.1
+  (glib-test:with-check-memory ()
+    (is (string= "wayland-0" (gdk:display-name (gdk:display-default))))))
 
 #+windows
 (test gdk-display-name
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is (string= "1\\WinSta0\\Default" (gdk:display-name display)))))))
+  (glib-test:with-check-memory ()
+    (is (string= "1\\WinSta0\\Default"
+                 (gdk:display-name (gdk:display-default))))))
 
 ;;;     gdk_display_device_is_grabbed
 
@@ -207,21 +207,17 @@
 
 (test gdk-display-beep
   (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is-false (gdk:display-beep display))))))
+    (glib-test:with-check-memory ()
+      (is-false (gdk:display-beep (gdk:display-default))))))
 
 ;;;     gdk_display_sync
 ;;;     gdk_display_flush
 ;;;     gdk_display_is_closed
 
 (test gdk-display-sync/flush/is-closed
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is-false (gdk:display-sync display))
-        (is-false (gdk:display-flush display))
-        (is-false (gdk:display-is-closed display))))))
+  (is-false (gdk:display-sync (gdk:display-default)))
+  (is-false (gdk:display-flush (gdk:display-default)))
+  (is-false (gdk:display-is-closed (gdk:display-default))))
 
 ;;;     gdk_display_close
 
@@ -232,22 +228,17 @@
 ;;;     gdk_display_supports_input_shapes
 
 (test gdk-display-is-rgba/composited/supports-input-shapes
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (:strong 1)
-      (let ((display (gdk:display-default)))
-        (is-true (gdk:display-is-rgba display))
-        (is-true (gdk:display-is-composited display))
-        (is-true (gdk:display-supports-input-shapes display))))))
+  (is-true (gdk:display-is-rgba (gdk:display-default)))
+  (is-true (gdk:display-is-composited (gdk:display-default)))
+  (is-true (gdk:display-supports-input-shapes (gdk:display-default))))
 
 ;;;     gdk_display_get_app_launch_context
 
 (test gdk-display-app-launch-context
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory (context :strong 1)
-      (let ((display (gdk:display-default)))
-        (is (typep (setf context
-                         (gdk:display-app-launch-context display))
-                   'gdk:app-launch-context))))))
+  (glib-test:with-check-memory (context)
+    (is (typep (setf context
+                     (gdk:display-app-launch-context (gdk:display-default)))
+                 'gdk:app-launch-context))))
 
 ;;;     gdk_display_notify_startup_complete                 Deprecated 4.10
 
@@ -255,10 +246,9 @@
 
 #-windows
 (test gdk-display-default-seat
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory ((seat 3) :strong 2)
-      (let ((display (gdk:display-default)))
-        (is (typep (setf seat (gdk:display-default-seat display)) 'gdk:seat))))))
+  (glib-test:with-check-memory ((seat 3) :strong 1)
+    (let ((display (gdk:display-default)))
+      (is (typep (setf seat (gdk:display-default-seat display)) 'gdk:seat)))))
 
 #+windows
 (test gdk-display-default-seat
@@ -386,4 +376,4 @@
 ;;;     gdk_display_prepare_gl                              Since 4.4
 ;;;     gdk_display_create_gl_context                       Since 4.6
 
-;;; 2025-09-18
+;;; 2026-07-28

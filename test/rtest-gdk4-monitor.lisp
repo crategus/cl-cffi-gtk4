@@ -77,32 +77,32 @@
              (glib-test:list-signals "GdkMonitor")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkMonitor" GDK:MONITOR
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_monitor_get_type")
-                       ((CONNECTOR MONITOR-CONNECTOR
-                         "connector" "gchararray" T NIL)
-                        (DESCRIPTION MONITOR-DESCRIPTION
-                         "description" "gchararray" T NIL)
-                        (DISPLAY MONITOR-DISPLAY
-                         "display" "GdkDisplay" T NIL)
-                        (GEOMETRY MONITOR-GEOMETRY
-                         "geometry" "GdkRectangle" T NIL)
-                        (HEIGHT-MM MONITOR-HEIGHT-MM
-                         "height-mm" "gint" T NIL)
-                        (MANUFACTURER MONITOR-MANUFACTURER
-                         "manufacturer" "gchararray" T NIL)
-                        (MODEL MONITOR-MODEL "model" "gchararray" T NIL)
-                        (REFRESH-RATE MONITOR-REFRESH-RATE
-                         "refresh-rate" "gint" T NIL)
-                        (SCALE MONITOR-SCALE "scale" "gdouble" T NIL)
-                        (SCALE-FACTOR MONITOR-SCALE-FACTOR
-                         "scale-factor" "gint" T NIL)
-                        (SUBPIXEL-LAYOUT MONITOR-SUBPIXEL-LAYOUT
-                         "subpixel-layout" "GdkSubpixelLayout" T NIL)
-                        (VALID MONITOR-VALID "valid" "gboolean" T NIL)
-                        (WIDTH-MM MONITOR-WIDTH-MM "width-mm" "gint" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_monitor_get_type")
+                      ((CONNECTOR MONITOR-CONNECTOR
+                        "connector" "gchararray" T NIL)
+                       (DESCRIPTION MONITOR-DESCRIPTION
+                        "description" "gchararray" T NIL)
+                       (DISPLAY MONITOR-DISPLAY
+                        "display" "GdkDisplay" T NIL)
+                       (GEOMETRY MONITOR-GEOMETRY
+                        "geometry" "GdkRectangle" T NIL)
+                       (HEIGHT-MM MONITOR-HEIGHT-MM
+                        "height-mm" "gint" T NIL)
+                       (MANUFACTURER MONITOR-MANUFACTURER
+                        "manufacturer" "gchararray" T NIL)
+                       (MODEL MONITOR-MODEL "model" "gchararray" T NIL)
+                       (REFRESH-RATE MONITOR-REFRESH-RATE
+                        "refresh-rate" "gint" T NIL)
+                       (SCALE MONITOR-SCALE "scale" "gdouble" T NIL)
+                       (SCALE-FACTOR MONITOR-SCALE-FACTOR
+                        "scale-factor" "gint" T NIL)
+                       (SUBPIXEL-LAYOUT MONITOR-SUBPIXEL-LAYOUT
+                        "subpixel-layout" "GdkSubpixelLayout" T NIL)
+                       (VALID MONITOR-VALID "valid" "gboolean" T NIL)
+                       (WIDTH-MM MONITOR-WIDTH-MM "width-mm" "gint" T NIL)))
              (gobject:get-gtype-definition "GdkMonitor"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -110,20 +110,25 @@
 ;;;     invalidate
 
 (test gdk-monitor-invalidate-signal
-  (let ((query (g:signal-query (g:signal-lookup "invalidate" "GdkMonitor"))))
-    (is (string= "invalidate" (g:signal-query-signal-name query)))
-    (is (string= "GdkMonitor" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "invalidate")
+         (gtype (g:gtype "GdkMonitor"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gdk-monitor-properties
-  (glib-test:with-check-memory (:strong 4)
+  (glib-test:with-check-memory (:strong 2)
     (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
       (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
       #-windows
@@ -156,8 +161,8 @@
 ;;;     gdk_monitor_is_valid
 
 (test gdk-monitor-is-valid
-  (glib-test:with-check-memory (:strong 4)
+  (glib-test:with-check-memory (:strong 2)
     (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
       (is-true (gdk:monitor-is-valid monitor)))))
 
-;;; 2025-2-1
+;;; 2026-07-31

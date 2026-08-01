@@ -2,7 +2,7 @@
 ;;; gdk4.seat.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -208,13 +208,13 @@ lambda (seat tool)    :run-last
 (setf (liber:alias-for-function 'seat-display)
       "Accessor"
       (documentation 'seat-display 'function)
- "@version{2025-09-29}
+ "@version{2026-07-28}
   @syntax{(gdk:seat-display object) => display}
   @argument[object]{a @class{gdk:seat} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:seat]{display} slot of the @class{gdk:seat}
-    class returns the display this seat belongs to.
+    The accessor for the @slot[gdk:seat]{display} slot returns the display this
+    seat belongs to.
   @end{short}
   @see-class{gdk:seat}
   @see-class{gdk:display}")
@@ -288,6 +288,7 @@ lambda (seat tool)    :run-last
     Returns the devices that match the given capabilities.
   @end{short}
   @see-class{gdk:seat}
+  @see-class{gdk:device}
   @see-symbol{gdk:seat-capabilities}"
   (seat (g:object seat))
   (capabilities seat-capabilities))
@@ -305,7 +306,7 @@ lambda (seat tool)    :run-last
   @argument[seat]{a @class{gdk:seat} object}
   @return{The list of @class{gdk:device-tool} objects.}
   @begin{short}
-    Returns all @class{gdk:device-tools} objects that are known to the
+    Returns all @class{gdk:device-tool} objects that are known to the
     application.
   @end{short}
   @see-class{gdk:seat}

@@ -2,7 +2,7 @@
 ;;; gdk4.device.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -338,7 +338,7 @@
   @begin{values}
     @begin[code]{simple-table}
       @entry[time]{an unsigned integer for the timestamp of the event}
-      @entry[flags]{an @symbol{gdk:axis-flags} value indicating what axes
+      @entry[flags]{a @symbol{gdk:axis-flags} value indicating what axes
         are present}
       @entry[axes]{an array for 12 double floats for the axis values}
     @end{simple-table}
@@ -360,10 +360,12 @@
 (setf (liber:alias-for-function 'time-coord-time)
       "Accessor"
       (documentation 'time-coord-time 'function)
- "@version{2026-02-21}
+ "@version{2026-08-01}
+  @syntax{(gdk:time-coord-time instance) => time}
+  @argument[instance]{a @class{gdk:time-coord} instance}
+  @argument[time]{an unsigned integer for the timestamp of the event}
   @begin{short}
-    The accessor for the @code{time} slot of the @symbol{gdk:time-coord}
-    structure.
+    The accessor for the @code{time} slot.
   @end{short}
   @see-symbol{gdk:time-coord}")
 
@@ -373,10 +375,13 @@
 (setf (liber:alias-for-function 'time-coord-flags)
       "Accessor"
       (documentation 'time-coord-flags 'function)
- "@version{2026-02-21}
+ "@version{2026-08-01}
+  @syntax{(gdk:time-coord-flags instance) => flags}
+  @argument[instance]{a @class{gdk:time-coord} instance}
+  @argument[flags]{@symbol{gdk:axis-flags} value indicating what axes are
+    present}
   @begin{short}
-    The accessor for the @code{flags} slot of the @symbol{gdk:time-coord}
-    structure.
+    The accessor for the @code{flags} slot.
   @end{short}
   @see-symbol{gdk:time-coord}")
 
@@ -386,10 +391,12 @@
 (setf (liber:alias-for-function 'time-coord-axes)
       "Accessor"
       (documentation 'time-coord-axes 'function)
- "@version{2026-02-21}
+ "@version{2026-08-01}
+  @syntax{(gdk:time-coord-axes instance) => axes}
+  @argument[instance]{a @class{gdk:time-coord} instance}
+  @argument[axes]{an array for 12 double floats for the axis values}
   @begin{short}
-    The accessor for the @code{axes} slot of the @symbol{gdk:time-coord}
-    structure.
+    The accessor for the @code{axes} slot.
   @end{short}
   @see-symbol{gdk:time-coord}")
 
@@ -463,10 +470,10 @@
 
 #+liber-documentation
 (setf (documentation 'device 'type)
- "@version{2025-06-29}
+ "@version{2026-08-01}
   @begin{short}
     The @class{gdk:device} object represents a single input device, such as a
-    keyboard, a mouse, a touchpad, etc.
+    keyboard, a mouse, a touchpad, and so on.
   @end{short}
   See the @class{gdk:seat} documentation for more information about the various
   kinds of devices, and their relationships.
@@ -491,7 +498,7 @@ lambda (device tool)    :run-last
       @end{pre}
       @begin[code]{simple-table}
         @entry[device]{The @class{gdk:device} object that changed.}
-        @entry[tool]{The new @class{gdk:device-tool} current device tool.}
+        @entry[tool]{The new @class{gdk:device-tool} device tool.}
       @end{simple-table}
       The signal is emitted on pen/eraser devices whenever tools enter or leave
       proximity.
@@ -535,14 +542,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-active-layout-index)
       "Accessor"
       (documentation 'device-active-layout-index 'function)
- "@version{2025-03-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-active-layout-index object) => index}
   @argument[object]{a @class{gdk:device} object}
   @argument[index]{an integer for the layout index of the active layout, or -1.}
   @begin{short}
-    The accessor for the @slot[gdk:device]{active-layout-index} slot of the
-    @class{gdk:device} class retrieves the index of the active layout of the
-    keyboard.
+    The accessor for the @slot[gdk:device]{active-layout-index} slot retrieves
+    the index of the active layout of the keyboard.
   @end{short}
   If there is no valid active layout for the device, this function will return
   -1. This is only relevant for keyboard devices.
@@ -562,14 +568,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-caps-lock-state)
       "Accessor"
       (documentation 'device-caps-lock-state 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-caps-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{a boolean whether the keyboard caps lock is on}
   @begin{short}
-   The accessor for the @slot[gdk:device]{caps-lock-state} slot of the
-    @class{gdk:device} class retrieves whether the Caps Lock modifier of the
-    keyboard is locked, if @arg{object} is a keyboard device.
+   The accessor for the @slot[gdk:device]{caps-lock-state} slot retrieves
+   whether the Caps Lock modifier of the keyboard is locked, if @arg{object}
+   is a keyboard device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -585,14 +591,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-direction)
       "Accessor"
       (documentation 'device-direction 'function)
- "@version{2025-07-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-direction object) => direction}
   @argument[object]{a @class{gdk:device} object}
   @argument[direction]{a @sym{pango:direction} value}
   @begin{short}
-    The accessor for the @slot[gdk:device]{direction} slot of the
-    @class{gdk:device} class returns the direction of the effective layout of
-    the keyboard, if @arg{object} is a keyboard device.
+    The accessor for the @slot[gdk:device]{direction} slot returns the
+    direction of the effective layout of the keyboard, if @arg{object} is a
+    keyboard device.
   @end{short}
   The direction of a layout is the direction of the majority of its symbols.
   @see-class{gdk:device}
@@ -610,13 +616,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-display)
       "Accessor"
       (documentation 'device-display 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-display object) => display}
   @argument[object]{a @class{gdk:device} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:device]{display} slot of the
-    @class{gdk:device} class returns the display to which the device pertains.
+    The accessor for the @slot[gdk:device]{display} slot returns the display to
+    which the device pertains.
   @end{short}
   @see-class{gdk:device}
   @see-class{gdk:display}")
@@ -633,16 +639,15 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-has-bidi-layouts)
       "Accessor"
       (documentation 'device-has-bidi-layouts 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-has-bidi-layouts object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if there are layouts with both directions,
     @em{false} otherwise}
   @begin{short}
-    The accessor for the @slot[gdk:device]{has-bidi-layouts} slot of the
-    @class{gdk:device} class determines if keyboard layouts for both
-    right-to-left and left-to-right languages are in use on the keyboard, if
-    @arg{object} is a keyboard device.
+    The accessor for the @slot[gdk:device]{has-bidi-layouts} slot determines if
+    keyboard layouts for both right-to-left and left-to-right languages are in
+    use on the keyboard, if @arg{object} is a keyboard device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -659,14 +664,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-has-cursor)
       "Accessor"
       (documentation 'device-has-cursor 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-has-cursor object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if the pointer follows device motion}
   @begin{short}
-    The accessor for the @slot[gdk:device]{has-cursor} slot of the
-    @class{gdk:device} class determines whether the pointer follows device
-    motion.
+    The accessor for the @slot[gdk:device]{has-cursor} slot determines whether
+    the pointer follows device motion.
   @end{short}
   This is not meaningful for keyboard devices, which do not have a pointer.
   @see-class{gdk:device}")
@@ -683,13 +687,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-layout-names)
       "Accessor"
       (documentation 'device-layout-names 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-layout-names object) => names}
   @argument[object]{a @class{gdk:device} object}
   @argument[names]{a list of strings for the layouts}
   @begin{short}
-    The accessor for the @slot[gdk:device]{layout-names} slot of the
-    @class{gdk:device} class retrieves the names of the layouts of the keyboard.
+    The accessor for the @slot[gdk:device]{layout-names} slot retrieves the
+    names of the layouts of the keyboard.
   @end{short}
   This is only relevant for keyboard devices.
 
@@ -700,23 +704,22 @@ lambda (device tool)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modifier-state" 'device) t)
- "The @code{modifier-state} property of type @sym{gdk:modifier-type} (Read)
-  @br{}
+ "The @code{modifier-state} property of type @sym{gdk:modifier-type} (Read)@br{}
   The modifier state of the keyboard.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'device-modifier-state)
       "Accessor"
       (documentation 'device-modifier-state 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-modifier-state object) => state}
   @argument[object]{a @class{gdk:device} object}
   @argument[state]{a @sym{gdk:modifier-type} value for the current modifier
     state}
   @begin{short}
-    The accessor for the @slot[gdk:device]{modifier-state} slot of the
-    @class{gdk:device} class retrieves the current modifier state of the
-    keyboard, if @arg{object} is a keyboard device.
+    The accessor for the @slot[gdk:device]{modifier-state} slot retrieves the
+    current modifier state of the keyboard, if @arg{object} is a keyboard
+    device.
   @end{short}
   @see-class{gdk:device}
   @see-symbol{gdk:modifier-type}")
@@ -733,13 +736,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-n-axes)
       "Accessor"
       (documentation 'device-n-axes 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-n-axes object) => n-axes}
   @argument[object]{a @class{gdk:device} object}
   @argument[n-axes]{an unsigned integer for the number of axes in the device}
   @begin{short}
-    The accessor for the @slot[gdk:device]{n-axes} slot of the
-    @class{gdk:device} class gets the number of axes in the device.
+    The accessor for the @slot[gdk:device]{n-axes} slot gets the number of axes
+    in the device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -756,14 +759,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-name)
       "Accessor"
       (documentation 'device-name 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-name object) => name}
   @argument[object]{a @class{gdk:device} object}
   @argument[name]{a string for the name of the device}
   @begin{short}
-    The accessor for the @slot[gdk:device]{name} slot of the @class{gdk:device}
-    class determines the name of the device, suitable for showing in a user
-    interface.
+    The accessor for the @slot[gdk:device]{name} slot determines the name of
+    the device, suitable for showing in a user interface.
   @end{short}
   @see-class{gdk:device}")
 
@@ -779,14 +781,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-num-lock-state)
       "Accessor"
       (documentation 'device-num-lock-state 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-num-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if Num Lock is on for the device}
   @begin{short}
-    The accessor for the @slot[gdk:device]{num-lock-state} slot of the
-    @class{gdk:device} class retrieves whether the Num Lock modifier of the
-    keyboard is locked, if @arg{object} is a keyboard device.
+    The accessor for the @slot[gdk:device]{num-lock-state} slot retrieves
+    whether the Num Lock modifier of the keyboard is locked, if @arg{object} is
+    a keyboard device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -804,14 +806,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-num-touches)
       "Accessor"
       (documentation 'device-num-touches 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-num-touches object) => num-touches}
   @argument[object]{a @class{gdk:device} object}
   @argument[num-touches]{an unsigned integer for the number of touch points}
   @begin{short}
-    The accessor for the @slot[gdk:device]{num-touches} slot of the
-    @class{gdk:device} class retrieves the number of touch points associated to
-    the device.
+    The accessor for the @slot[gdk:device]{num-touches} slot retrieves the
+    number of touch points associated to the device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -828,14 +829,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-product-id)
       "Accessor"
       (documentation 'device-product-id 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-product-id object) => product-id}
   @argument[object]{a @class{gdk:device} object}
   @argument[product-id]{a string for the product ID, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:device]{product-id} slot of the
-    @class{gdk:device} class returns the product ID of the device, or
-    @code{nil} if the information could not be obtained.
+    The accessor for the @slot[gdk:device]{product-id} slot returns the product
+    ID of the device, or @code{nil} if the information could not be obtained.
   @end{short}
   The ID is retrieved from the device, and is thus constant for it. See the
   @fun{gdk:device-vendor-id} function for more information.
@@ -854,14 +854,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-scroll-lock-state)
       "Accessor"
       (documentation 'device-scroll-lock-state 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-scroll-lock-id object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[scroll-lock-id]{@em{true} if Scroll Lock is on for the device}
   @begin{short}
-    The accessor for the @slot[gdk:device]{scroll-lock-state} slot of the
-    @class{gdk:device} class retrieves whether the Scroll Lock modifier of the
-    keyboard is locked, if @arg{object} is a keyboard device.
+    The accessor for the @slot[gdk:device]{scroll-lock-state} slot retrieves
+    whether the Scroll Lock modifier of the keyboard is locked, if @arg{object}
+    is a keyboard device.
   @end{short}
   @see-class{gdk:device}")
 
@@ -876,14 +876,14 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-seat)
       "Accessor"
       (documentation 'device-seat 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-seat object) => seat}
   @syntax{(setf (gdk:device-seat object) seat)}
   @argument[object]{a @class{gdk:device} object}
   @argument[seat]{a @class{gdk:seat} object}
   @begin{short}
-    The accessor for the @slot[gdk:device]{seat} slot of the @class{gdk:device}
-    class gets or sets the seat the device belongs to.
+    The accessor for the @slot[gdk:device]{seat} slot gets or sets the seat
+    the device belongs to.
   @end{short}
   @see-class{gdk:device}
   @see-class{gdk:seat}")
@@ -901,13 +901,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-source)
       "Accessor"
       (documentation 'device-source 'function)
- "@version{2025-07-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-source object) => source}
   @argument[object]{a @class{gdk:device} object}
   @argument[source]{a @sym{gdk:input-source} value}
   @begin{short}
-    The accessor for the @slot[gdk:device]{source} slot of the
-    @class{gdk:device} class determines the type of the device.
+    The accessor for the @slot[gdk:device]{source} slot determines the type of
+    the device.
   @end{short}
   @see-class{gdk:device}
   @see-symbol{gdk:input-source}")
@@ -923,13 +923,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-tool)
       "Accessor"
       (documentation 'device-tool 'function)
- "@version{2025-07-31}
+ "@version{2026-07-28}
   @syntax{(gdk:device-tool object) => tool}
   @argument[object]{a @class{gdk:device} object}
   @argument[tool]{a @sym{gdk:device-tool} object}
   @begin{short}
-    The accessor for the @slot[gdk:device]{tool} slot of the @class{gdk:device}
-    class retrieves the device tool associated to the device.
+    The accessor for the @slot[gdk:device]{tool} slot retrieves the device tool
+    associated to the device.
   @end{short}
   @see-class{gdk:device}
   @see-class{gdk:device-tool}")
@@ -947,14 +947,13 @@ lambda (device tool)    :run-last
 (setf (liber:alias-for-function 'device-vendor-id)
       "Accessor"
       (documentation 'device-vendor-id 'function)
- "@version{2025-08-01}
+ "@version{2026-07-28}
   @syntax{(gdk:device-vendor-id object) => vendor-id}
   @argument[object]{a @class{gdk:device} object}
   @argument[vendor-id]{a string for the vendor ID, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:device]{vendor-id} slot of the
-    @class{gdk:device} class returns the vendor ID of this device, or @code{nil}
-    if the information could not be obtained.
+    The accessor for the @slot[gdk:device]{vendor-id} slot returns the vendor
+    ID of this device, or @code{nil} if the information could not be obtained.
   @end{short}
   This ID is retrieved from the device, and is thus constant for it.
   @see-class{gdk:device}

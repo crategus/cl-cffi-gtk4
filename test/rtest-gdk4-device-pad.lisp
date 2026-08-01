@@ -70,4 +70,4 @@
 ;;;     gdk_device_pad_get_n_features
 ;;;     gdk_device_pad_get_feature_group
 
-;;; 2025-2-28
+;;; 2025-07-31

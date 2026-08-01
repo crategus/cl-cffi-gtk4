@@ -130,80 +130,6 @@
 
 ;;;     GdkDevice
 
-#-gtk-4-18
-(test gdk-device-class
-  ;; Check type
-  (is (g:type-is-object "GdkDevice"))
-  ;; Check registered name
-  (is (eq 'gdk:device
-          (glib:symbol-for-gtype "GdkDevice")))
-  ;; Check type initializer
-  (is (eq (g:gtype "GdkDevice")
-          (g:gtype (cffi:foreign-funcall "gdk_device_get_type" :size))))
-  ;; Check parent
-  (is (eq (g:gtype "GObject")
-          (g:type-parent "GdkDevice")))
-  ;; Check children
-  #-windows
-  (is (member "GdkWaylandDevice"
-              (glib-test:list-children "GdkDevice") :test #'string=))
-  #+windows
-  (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
-             (glib-test:list-children "GdkDevice")))
-  ;; Check interfaces
-  (is (equal '()
-             (glib-test:list-interfaces "GdkDevice")))
-  ;; Check properties
-  #-gtk-4-18
-  (is (equal '("caps-lock-state" "direction" "display" "has-bidi-layouts"
-               "has-cursor" "modifier-state" "n-axes" "name" "num-lock-state"
-               "num-touches" "product-id" "scroll-lock-state" "seat" "source"
-               "tool" "vendor-id")
-             (glib-test:list-properties "GdkDevice")))
-  #+gtk-4-18
-  (is (equal '("active-layout-index" "caps-lock-state" "direction" "display"
-               "has-bidi-layouts" "has-cursor" "layout-names" "modifier-state"
-               "n-axes" "name" "num-lock-state" "num-touches" "product-id"
-               "scroll-lock-state" "seat" "source" "tool" "vendor-id")
-             (glib-test:list-properties "GdkDevice")))
-  ;; Check signals
-  (is (equal '("changed" "tool-changed")
-             (glib-test:list-signals "GdkDevice")))
-  ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDevice" GDK:DEVICE
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_device_get_type")
-                       ((CAPS-LOCK-STATE DEVICE-CAPS-LOCK-STATE
-                         "caps-lock-state" "gboolean" T NIL)
-                        (DIRECTION DEVICE-DIRECTION
-                         "direction" "PangoDirection" T NIL)
-                        (DISPLAY DEVICE-DISPLAY "display" "GdkDisplay" T NIL)
-                        (HAS-BIDI-LAYOUTS DEVICE-HAS-BIDI-LAYOUTS
-                         "has-bidi-layouts" "gboolean" T NIL)
-                        (HAS-CURSOR DEVICE-HAS-CURSOR
-                         "has-cursor" "gboolean" T NIL)
-                        (MODIFIER-STATE DEVICE-MODIFIER-STATE
-                         "modifier-state" "GdkModifierType" T NIL)
-                        (N-AXES DEVICE-N-AXES "n-axes" "guint" T NIL)
-                        (NAME DEVICE-NAME "name" "gchararray" T NIL)
-                        (NUM-LOCK-STATE DEVICE-NUM-LOCK-STATE
-                         "num-lock-state" "gboolean" T NIL)
-                        (NUM-TOUCHES DEVICE-NUM-TOUCHES
-                         "num-touches" "guint" T NIL)
-                        (PRODUCT-ID DEVICE-PRODUCT-ID
-                         "product-id" "gchararray" T NIL)
-                        (SCROLL-LOCK-STATE DEVICE-SCROLL-LOCK-STATE
-                         "scroll-lock-state" "gboolean" T NIL)
-                        (SEAT DEVICE-SEAT "seat" "GdkSeat" T T)
-                        (SOURCE DEVICE-SOURCE "source" "GdkInputSource" T NIL)
-                        (TOOL DEVICE-TOOL "tool" "GdkDeviceTool" T NIL)
-                        (VENDOR-ID DEVICE-VENDOR-ID
-                         "vendor-id" "gchararray" T NIL)))
-             (gobject:get-gtype-definition "GdkDevice"))))
-
-#+gtk-4-18
 (test gdk-device-class
   ;; Check type
   (is (g:type-is-object "GdkDevice"))
@@ -276,33 +202,43 @@
 ;;;     changed
 
 (test gdk-device-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "changed" "GdkDevice"))))
-    (is (string= "changed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDevice" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "changed")
+         (gtype (g:gtype "GdkDevice"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     tool-changed
 
 (test gdk-device-tool-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "tool-changed" "GdkDevice"))))
-    (is (string= "tool-changed" (g:signal-query-signal-name query)))
-    (is (string= "GdkDevice" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "tool-changed")
+         (gtype (g:gtype "GdkDevice"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GdkDeviceTool")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gdk-device-properties.1
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let* ((seat (gdk:display-default-seat (gdk:display-default)))
            (device (gdk:seat-pointer seat)))
       (is-false (gdk:device-caps-lock-state device))
@@ -329,7 +265,7 @@
       (is-false (gdk:device-vendor-id device)))))
 
 (test gdk-device-properties.2
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let* ((seat (gdk:display-default-seat (gdk:display-default)))
            (device (gdk:seat-keyboard seat)))
       (is-false (gdk:device-caps-lock-state device))
@@ -357,7 +293,7 @@
 ;;;     gdk_device_get_surface_at_position
 
 (test gdk-device-surface-at-position
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let* ((seat (gdk:display-default-seat (gdk:display-default)))
            (device (gdk:seat-pointer seat)))
       (is-false (gdk:device-surface-at-position device)))))
@@ -365,15 +301,15 @@
 ;;;     gdk_device_get_timestamp                           Since 4.2
 
 (test gdk-device-timestamp.1
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let* ((seat (gdk:display-default-seat (gdk:display-default)))
            (device (gdk:seat-pointer seat)))
       (is (= 0 (gdk:device-timestamp device))))))
 
 (test gdk-device-timestamp.2
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let* ((seat (gdk:display-default-seat (gdk:display-default)))
            (device (gdk:seat-keyboard seat)))
       (is (= 0 (gdk:device-timestamp device))))))
 
-;;; 2025-3-31
+;;; 2026-07-30

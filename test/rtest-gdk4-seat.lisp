@@ -77,11 +77,11 @@
              (glib-test:list-signals "GdkSeat")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkSeat" GDK:SEAT
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_seat_get_type")
-                       ((DISPLAY SEAT-DISPLAY "display" "GdkDisplay" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_seat_get_type")
+                      ((DISPLAY SEAT-DISPLAY "display" "GdkDisplay" T NIL)))
              (gobject:get-gtype-definition "GdkSeat"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -89,23 +89,90 @@
 ;;;     display
 
 (test gdk-seat-properties
-  (glib-test:with-check-memory (:strong 2)
+  (glib-test:with-check-memory ()
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is (typep (gdk:seat-display seat) 'gdk:display)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     device-added
+
+(test gdk-seat-device-added-signal
+  (let* ((name "device-added")
+         (gtype (g:gtype "GdkSeat"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDevice")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     device-removed
+
+(test gdk-seat-device-removed-signal
+  (let* ((name "device-removed")
+         (gtype (g:gtype "GdkSeat"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDevice")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     tool-added
+
+(test gdk-seat-tool-added-signal
+  (let* ((name "tool-added")
+         (gtype (g:gtype "GdkSeat"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDeviceTool")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     tool-removed
+
+(test gdk-seat-tool-removed-signal
+  (let* ((name "tool-removed")
+         (gtype (g:gtype "GdkSeat"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkDeviceTool")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_seat_get_capabilities
 
 (test gdk-seat-capabilities
-  (glib-test:with-check-memory (:strong 2)
+  (glib-test:with-check-memory (:strong 1)
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is (equal '(:POINTER :KEYBOARD)
                  (gdk:seat-capabilities seat))))))
@@ -113,7 +180,7 @@
 ;;;     gdk_seat_get_pointer
 
 (test gdk-seat-pointer
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is (typep (gdk:seat-pointer seat) 'gdk:device))
       #-windows
@@ -126,7 +193,7 @@
 ;;;     gdk_seat_get_keyboard
 
 (test gdk-seat-keyboard
-  (glib-test:with-check-memory (:strong 3)
+  (glib-test:with-check-memory (:strong 2)
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is (typep (gdk:seat-keyboard seat) 'gdk:device))
       #-windows
@@ -139,7 +206,7 @@
 ;;;     gdk_seat_get_devices
 
 (test gdk-seat-devices
-  (glib-test:with-check-memory (:strong 4)
+  (glib-test:with-check-memory (:strong 3)
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is (every (lambda (x) (typep x 'gdk:device))
                  (gdk:seat-devices seat :all))))))
@@ -147,8 +214,8 @@
 ;;;     gdk_seat_get_tools
 
 (test gdk-seat-tools
-  (glib-test:with-check-memory (:strong 2)
+  (glib-test:with-check-memory (:strong 1)
     (let ((seat (gdk:display-default-seat (gdk:display-default))))
       (is-false (gdk:seat-tools seat)))))
 
-;;; 2024-12-20
+;;; 2026-07-31

@@ -2,7 +2,7 @@
 ;;; gdk4.monitor.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -234,14 +234,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-connector)
       "Accessor"
       (documentation 'monitor-connector 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-connector object) => connector}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[connector]{a string for the name of the connector}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{connector} slot of the
-    @class{gdk:monitor} class gets the name of the monitor's connector, if
-    available.
+    The accessor for the @slot[gdk:monitor]{connector} slot gets the name of
+    the monitor's connector, if available.
   @end{short}
   @see-class{gdk:monitor}")
 
@@ -258,14 +257,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-description)
       "Accessor"
       (documentation 'monitor-description 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-description object) => description}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[description]{a string for the monitor description}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{description} slot of the
-    @class{gdk:monitor} class gets a string describing the monitor, if
-    available.
+    The accessor for the @slot[gdk:monitor]{description} slot gets a string
+    describing the monitor, if available.
   @end{short}
   This can be used to identify a monitor in the UI.
 
@@ -284,14 +282,14 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-display)
       "Accessor"
       (documentation 'monitor-display 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-display object) => display}
   @syntax{(setf (gdk:monitor-display object) display)}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{display} slot of the
-    @class{gdk:monitor} class gets the display that this monitor belongs to.
+    The accessor for the @slot[gdk:monitor]{display} slot gets the display that
+    this monitor belongs to.
   @end{short}
   @see-class{gdk:monitor}
   @see-class{gdk:display}
@@ -308,14 +306,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-geometry)
       "Accessor"
       (documentation 'monitor-geometry 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-geometry object) => geometry}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[geometry]{a @class{gdk:rectangle} instance for the monitor geometry}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{geometry} slot of the
-    @class{gdk:monitor} class retrieves the size and position of an individual
-    monitor within the display coordinate space.
+    The accessor for the @slot[gdk:monitor]{geometry} slot retrieves the size
+    and position of an individual monitor within the display coordinate space.
   @end{short}
   The returned geometry is in \"application pixels\", not in \"device pixels\".
   See the @fun{gdk:monitor-scale-factor} function.
@@ -336,13 +333,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-height-mm)
       "Accessor"
       (documentation 'monitor-height-mm 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-height-mm object) => height}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[height]{an integer for physical height of the monitor}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{height-mm} slot of the
-    @class{gdk:monitor} class gets the height in millimeters of the monitor.
+    The accessor for the @slot[gdk:monitor]{height-mm} slot gets the height in
+    millimeters of the monitor.
   @end{short}
   @see-class{gdk:monitor}")
 
@@ -358,15 +355,14 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-manufacturer)
       "Accessor"
       (documentation 'monitor-manufacturer 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-manufacturer object) => manufacturer}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[manufacturer]{a string for the name of the manufacturer, or
     @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{manufacturer} slot of the
-    @class{gdk:monitor} class gets the name or PNP ID of the monitor's
-    manufacturer, if available.
+    The accessor for the @slot[gdk:monitor]{manufacturer} slot gets the name or
+    PNP ID of the monitor's manufacturer, if available.
   @end{short}
   Note that this value might also vary depending on actual display backend. PNP
   ID registry is located at @file{https://uefi.org/pnp_id_list}.
@@ -384,14 +380,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-model)
       "Accessor"
       (documentation 'monitor-model 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-model object) => model}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[model]{a string for the monitor model, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{model} slot of the
-    @class{gdk:monitor} class gets the string identifying the monitor model,
-    if available.
+    The accessor for the @slot[gdk:monitor]{model} slot gets the string
+    identifying the monitor model, if available.
   @end{short}
   @see-class{gdk:monitor}")
 
@@ -408,14 +403,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-refresh-rate)
       "Accessor"
       (documentation 'monitor-refresh-rate 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-refresh-rate object) => rate}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[rate]{an integer for the refresh rate in milli-Hertz, or 0}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{refresh-rate} slot of the
-    @class{gdk:monitor} class gets the refresh rate of the monitor, if
-    available.
+    The accessor for the @slot[gdk:monitor]{refresh-rate} slot gets the refresh
+    rate of the monitor, if available.
   @end{short}
   The value is in milli-Hertz, so a refresh rate of 60Hz is returned as 60000.
   @see-class{gdk:monitor}")
@@ -432,14 +426,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-scale)
       "Accessor"
       (documentation 'monitor-scale 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-scale object) => scale}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[scale]{a double float for the scale}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{scale} slot of the
-    @class{gdk:monitor} class gets the internal scale factor that maps from
-    monitor coordinates to device pixels.
+    The accessor for the @slot[gdk:monitor]{scale} slot gets the internal scale
+    factor that maps from monitor coordinates to device pixels.
   @end{short}
 
   This can be used if you want to create pixel based data for a particular
@@ -464,14 +457,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-scale-factor)
       "Accessor"
       (documentation 'monitor-scale-factor 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-scale-factor object) => scale}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[scale]{an integer for the scale factor}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{scale-factor} slot of the
-    @class{gdk:monitor} class gets the internal scale factor that maps from
-    monitor coordinates to the actual device pixels.
+    The accessor for the @slot[gdk:monitor]{scale-factor} slot gets the internal
+    scale factor that maps from monitor coordinates to the actual device pixels.
   @end{short}
   On traditional systems this is 1, but on very high density outputs this can
   be a higher value (often 2).
@@ -495,14 +487,14 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-subpixel-layout)
       "Accessor"
       (documentation 'monitor-subpixel-layout 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-subpixel-layout object) => layout}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[layout]{a @sym{gdk:subpixel-layout} value}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{subpixel-layout} slot of the
-    @class{gdk:monitor} class gets information about the layout of red, green
-    and blue primaries for each pixel in this monitor, if available.
+    The accessor for the @slot[gdk:monitor]{subpixel-layout} slot gets
+    information about the layout of red, green and blue primaries for each
+    pixel in this monitor, if available.
   @end{short}
   @see-class{gdk:monitor}
   @see-symbol{gdk:subpixel-layout}")
@@ -519,13 +511,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-valid)
       "Accessor"
       (documentation 'monitor-valid 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-valid object) => valid}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[valid]{an boolean whether the monitor is still valid}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{valid} slot of the
-    @class{gdk:monitor} class gets whether the monitor is still valid.
+    The accessor for the @slot[gdk:monitor]{valid} slot gets whether the
+    monitor is still valid.
   @end{short}
   @see-class{gdk:monitor}")
 
@@ -542,13 +534,13 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-width-mm)
       "Accessor"
       (documentation 'monitor-width-mm 'function)
- "@version{2026-04-14}
+ "@version{2026-07-30}
   @syntax{(gdk:monitor-width-mm object) => width}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[width]{an integer for physical width of the monitor}
   @begin{short}
-    The accessor for the @slot[gdk:monitor]{width-mm} slot of the
-    @class{gdk:monitor} class gets the width in millimeters of the monitor.
+    The accessor for the @slot[gdk:monitor]{width-mm} slot gets the width in
+    millimeters of the monitor.
   @end{short}
   @see-class{gdk:monitor}")
 

@@ -2,7 +2,7 @@
 ;;; gdk4.display.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -124,7 +124,7 @@
 
 #+liber-documentation
 (setf (documentation 'display 'type)
- "@version{2025-08-04}
+ "@version{2026-07-27}
   @begin{short}
     The @class{gdk:display} object is the GDK representation of a workstation.
   @end{short}
@@ -207,10 +207,7 @@ lambda (display setting)    :run-last
   @see-slot{gdk:display-rgba}
   @see-slot{gdk:display-shadow-width}
   @see-class{gdk:seat}
-  @see-class{gdk:monitor}
-  @see-function{gdk:display-default-seat}
-  @see-function{gdk:display-list-seats}
-  @see-function{gdk:display-monitor-at-surface}")
+  @see-class{gdk:monitor}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -227,15 +224,15 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-composited)
       "Accessor"
       (documentation 'display-composited 'function)
- "@version{2025-08-31}
+ "@version{2026-07-27}
   @syntax{(gdk:display-composited object) => composited}
   @argument[object]{a @class{gdk:display} object}
   @argument[composited]{@em{true} if the display properly composites the alpha
     channel}
   @begin{short}
-    The accessor for the @slot[gdk:display]{composited} slot of the
-    @class{gdk:display} class returns whether surfaces can reasonably be
-    expected to have their alpha channel drawn correctly on the screen.
+    The accessor for the @slot[gdk:display]{composited} slot returns whether
+    surfaces can reasonably be expected to have their alpha channel drawn
+    correctly on the screen.
   @end{short}
   Check with the @fun{gdk:display-is-rgba} function for whether the display
   supports an alpha channel.
@@ -257,7 +254,7 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-dmabuf-formats)
       "Accessor"
       (documentation 'display-dmabuf-formats 'function)
- "@version{2025-08-31}
+ "@version{2026-07-27}
   @syntax{(gdk:display-dmabuf-formats object) => formats}
   @argument[object]{a @class{gdk:display} object}
   @argument[formats]{a @class{gdk:dmabuf-formats} instance}
@@ -289,14 +286,13 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-input-shapes)
       "Accessor"
       (documentation 'display-input-shapes 'function)
- "@version{2025-08-31}
+ "@version{2026-07-27}
   @syntax{(gdk:display-input-shapes object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports input shapes}
   @begin{short}
-    The accessor for the @slot[gdk:display]{input-shapes} slot of the
-    @class{gdk:display} class returns @em{true} if the display supports input
-    shapes.
+    The accessor for the @slot[gdk:display]{input-shapes} slot returns
+    @em{true} if the display supports input shapes.
   @end{short}
   This means that the @fun{gdk:surface-set-input-region} function can be used
   to modify the input shape of surfaces on the display.
@@ -316,14 +312,13 @@ lambda (display setting)    :run-last
 (setf (liber:alias-for-function 'display-rgba)
       "Accessor"
       (documentation 'display-rgba 'function)
- "@version{2025-08-31}
+ "@version{2026-07-27}
   @syntax{(gdk:display-rgba object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports an alpha channel}
   @begin{short}
-    The accessor for the @slot[gdk:display]{rgba} slot of the
-    @class{gdk:display} class returns whether surfaces on the display are
-    created with an alpha channel.
+    The accessor for the @slot[gdk:display]{rgba} slot returns whether surfaces
+    on the display are created with an alpha channel.
   @end{short}
 
   Even if a @em{true} is returned, it is possible that the alpha channel of the
@@ -387,9 +382,17 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_default
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
+#+nil
+(let (display)
+  (defun display-default ()
+
+    (unless display
+      (setf display (%display-default)))
+    display))
+
+(defun display-default ()
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2026-07-26}
   @begin{return}
     The @class{gdk:display} object, or @code{nil} if there is no default
     display.
@@ -412,7 +415,8 @@ lambda (display setting)    :run-last
   @end{dictionary}
   @see-class{gdk:display}
   @see-function{gdk:display-manager-get}
-  @see-function{gdk:display-manager-default-display}")
+  @see-function{gdk:display-manager-default-display}"
+  (display-manager-default-display (display-manager-get)))
 
 (export 'display-default)
 
@@ -422,10 +426,16 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_get_name" display-name) :string
  #+liber-documentation
- "@version{2025-05-01}
+ "@version{2026-08-01}
   @argument[display]{a @class{gdk:display} object}
   @return{The string representing the display name.}
   @short{Gets the name of the display.}
+  @begin[Examples]{dictionary}
+    The name of the default display on Ubuntu 26.04
+    @begin{pre}
+(gdk:display-name (gdk:display-default)) => \"wayland-0\"
+    @end{pre}
+  @end{dictionary}
   @see-class{gdk:display}"
   (display (g:object display)))
 
@@ -867,8 +877,7 @@ lambda (display setting)    :run-last
     ID has been defined.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gdk:display-startup-notification-id} function is deprecated since
-    4.10. Do not use it in newly written code.
+    This function is deprecated since 4.10. Do not use it in newly written code.
   @end{dictionary}
   @see-class{gdk:display}"
   #+(and gtk-4-10 gtk-warn-deprecated)
@@ -905,7 +914,7 @@ lambda (display setting)    :run-last
   @argument[display]{a @class{gdk:display} object}
   @argument[keyval]{an unsigned integer for the keyval}
   @begin{return}
-    The list of integer for the grouped keycode/group/level combinations,
+    The list of integers for the grouped keycode/group/level combinations,
     or @code{nil}.
   @end{return}
   @begin{short}

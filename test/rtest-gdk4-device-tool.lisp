@@ -72,25 +72,26 @@
              (glib-test:list-signals "GdkDeviceTool")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDeviceTool" GDK:DEVICE-TOOL
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_device_tool_get_type")
-                       ((AXES DEVICE-TOOL-AXES "axes" "GdkAxisFlags" T NIL)
-                        (HARDWARE-ID DEVICE-TOOL-HARDWARE-ID
-                         "hardware-id" "guint64" T NIL)
-                        (SERIAL DEVICE-TOOL-SERIAL "serial" "guint64" T NIL)
-                        (TOOL-TYPE DEVICE-TOOL-TOOL-TYPE
-                         "tool-type" "GdkDeviceToolType" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_device_tool_get_type")
+                      ((AXES DEVICE-TOOL-AXES "axes" "GdkAxisFlags" T NIL)
+                       (HARDWARE-ID DEVICE-TOOL-HARDWARE-ID
+                        "hardware-id" "guint64" T NIL)
+                       (SERIAL DEVICE-TOOL-SERIAL "serial" "guint64" T NIL)
+                       (TOOL-TYPE DEVICE-TOOL-TOOL-TYPE
+                        "tool-type" "GdkDeviceToolType" T NIL)))
              (gobject:get-gtype-definition "GdkDeviceTool"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gdk-device-tool-properties
-  (let ((tool (make-instance 'gdk:device-tool)))
+  (glib-test:with-check-memory (tool)
+    (is (typep (setf tool (make-instance 'gdk:device-tool)) 'gdk:device-tool))
     (is-false (gdk:device-tool-axes tool))
     (is (= 0 (gdk:device-tool-hardware-id tool)))
     (is (= 0 (gdk:device-tool-serial tool)))
     (is (eq :unknown (gdk:device-tool-tool-type tool)))))
 
-;;; 2024-9-19
+;;; 2026-07-30
