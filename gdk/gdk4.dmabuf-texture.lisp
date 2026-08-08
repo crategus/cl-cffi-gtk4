@@ -2,7 +2,7 @@
 ;;; gdk4.dmabuf-texture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; Version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; Version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -34,6 +34,8 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gdk_dmabuf_texture_builder_get_color_state          Since 4.16
+;;;     gdk_dmabuf_texture_builder_set_color_state          Since 4.16
 ;;;     gdk_dmabuf_texture_builder_get_display
 ;;;     gdk_dmabuf_texture_builder_set_display
 ;;;     gdk_dmabuf_texture_builder_get_fourcc
@@ -66,6 +68,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     color-state                                         Since 4.16
 ;;;     display
 ;;;     fourcc
 ;;;     height
@@ -128,7 +131,10 @@
    :export t
    :interfaces ()
    :type-initializer "gdk_dmabuf_texture_builder_get_type")
-  ((display
+  ((color-state
+    dmabuf-texture-builder-color-state
+    "color-state" "GdkColorState" t t)
+   (display
     dmabuf-texture-builder-display
     "display" "GdkDisplay" t t)
    (fourcc
@@ -234,6 +240,36 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
+;;; --- gdk:dmabuf-texture-builder-color-state ---------------------------------
+
+#+(and gtk-4-16 liber-documentation)
+(setf (documentation (liber:slot-documentation "color-state"
+                                               'dmabuf-texture-builder) t)
+ "The @code{color-state} property of type @class{gdk:color-state} (Read / Write)
+  @br{}
+  The color state of the texture. Since 4.16")
+
+#+(and gtk-4-16 liber-documentation)
+(setf (liber:alias-for-function 'dmabuf-texture-builder-color-state)
+      "Accessor"
+      (documentation 'dmabuf-texture-builder-color-state 'function)
+ "@version{2026-08-08}
+  @syntax{(gdk:dmabuf-texture-builder-color-state object) => colorstate}
+  @syntax{(setf (gdk:dmabuf-texture-builder-color-state object) colorstate)}
+  @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
+  @argument[colorstate]{a @class{gdk:color-state} instance, or @code{nil}}
+  @begin{short}
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{color-state} slot
+    gets or sets the color state for the texture.
+  @end{short}
+  By default, the color state is @code{nil}. In that case, GTK will choose the
+  correct color state based on the format. If you do not know what color states
+  are available, this is probably the right thing.
+
+  Since 4.16
+  @see-class{gdk:dmabuf-texture-builder}
+  @see-class{gdk:color-state}")
+
 ;;; --- gdk:dmabuf-texture-builder-display -------------------------------------
 
 #+liber-documentation
@@ -246,15 +282,14 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-display)
       "Accessor"
       (documentation 'dmabuf-texture-builder-display 'function)
- "@version{2026-02-14}
+ "@version{2026-07-28}
   @syntax{(gdk:dmabuf-texture-builder-display object) => display}
   @syntax{(setf (gdk:dmabuf-texture-builder-display object) display)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{display} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the display that this
-    texture builder is associated with.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{display} slot gets
+    or sets the display that this texture builder is associated with.
   @end{short}
   The display is used to determine the supported dma-buf formats.
 
@@ -274,20 +309,17 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-fourcc)
       "Accessor"
       (documentation 'dmabuf-texture-builder-fourcc 'function)
- "@version{2026-02-14}
+ "@version{2026-08-08}
   @syntax{(gdk:dmabuf-texture-builder-fourcc object) => fourcc}
   @syntax{(setf (gdk:dmabuf-texture-builder-fourcc object) fourcc)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[fourcc]{an integer for the format of the texture or 0 to unset}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{fourcc} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the format of the
-    texture.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{fourcc} slot gets or
+    sets the format of the texture.
   @end{short}
   Returns 0 if the format was not set. The format is specified as a
-  @code{fourcc} code.
-
-  The format must be set before calling the
+  @code{fourcc} code. The format must be set before calling the
   @fun{gdk:dmabuf-texture-builder-build} function.
 
   Since 4.14
@@ -307,20 +339,17 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-height)
       "Accessor"
       (documentation 'dmabuf-texture-builder-height 'function)
- "@version{2026-02-14}
+ "@version{2026-08-08}
   @syntax{(gdk:dmabuf-texture-builder-height object) => height}
   @syntax{(setf (gdk:dmabuf-texture-builder-height object) height)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[height]{an integer for the height of the texture or 0 to unset}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{height} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the height of the
-    texture.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{height} slot gets or
+    sets the height of the texture.
   @end{short}
-  Returns 0 if the height was not set.
-
-  The height must be set before calling the
-  @fun{gdk:dmabuf-texture-builder-build} function.
+  Returns 0 if the height was not set. The height must be set before calling
+  the @fun{gdk:dmabuf-texture-builder-build} function.
 
   Since 4.14
   @see-class{gdk:dmabuf-texture-builder}
@@ -339,14 +368,14 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-modifier)
       "Accessor"
       (documentation 'dmabuf-texture-builder-modifier 'function)
- "@version{2026-02-14}
+ "@version{2026-07-28}
   @syntax{(gdk:dmabuf-texture-builder-modifier object) => modifier}
   @syntax{(setf (gdk:dmabuf-texture-builder-modifier object) modifier)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[modifier]{an integer for the modifier value}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{height} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the modifier value.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{height} slot gets or
+    sets the modifier value.
   @end{short}
 
   Since 4.14
@@ -365,14 +394,14 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-n-planes)
       "Accessor"
       (documentation 'dmabuf-texture-builder-n-planes 'function)
- "@version{2026-02-14}
+ "@version{2026-07-28}
   @syntax{(gdk:dmabuf-texture-builder-n-planes object) => n-planes}
   @syntax{(setf (gdk:dmabuf-texture-builder-n-planes object) n-planes)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[n-planes]{an integer for the number of planes}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{n-planes} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the number of planes.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{n-planes} slot gets
+    or sets the number of planes.
   @end{short}
 
   Since 4.14
@@ -392,17 +421,15 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-premultiplied)
       "Accessor"
       (documentation 'dmabuf-texture-builder-premultiplied 'function)
- "@version{2026-02-14}
+ "@version{2026-08-08}
   @syntax{(gdk:dmabuf-texture-builder-premultiplied object) => premultiplied}
   @syntax{(setf (gdk:dmabuf-texture-builder-premultiplied object) premultiplied)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[premultiplied]{a boolean whether the data is premultiplied}
   @begin{short}
     The accessor for the @slot[gdk:dmabuf-texture-builder]{premultiplied} slot
-    of the @class{gdk:dmabuf-texture-builder} class gets or sets whether the
-    data is premultiplied.
+    gets or sets whether the data is premultiplied.
   @end{short}
-
   Unless otherwise specified, all formats including alpha channels are assumed
   to be premultiplied.
 
@@ -423,15 +450,14 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-update-region)
       "Accessor"
       (documentation 'dmabuf-texture-builder-update-region 'function)
- "@version{2026-02-14}
+ "@version{2026-07-28}
   @syntax{(gdk:dmabuf-texture-builder-update-region object) => region}
   @syntax{(setf (gdk:dmabuf-texture-builder-update-region object) region)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[region]{a @sym{cairo:region-t} instance}
   @begin{short}
     The accessor for the @slot[gdk:dmabuf-texture-builder]{update-region} slot
-    of the @class{gdk:dmabuf-texture-builder} class gets or sets the region to
-    be updated by this texture.
+    gets or sets the region to be updated by this texture.
   @end{short}
   Together with the @slot[gdk:dmabuf-texture-builder]{update-texture} property
   this describes an update of a previous texture.
@@ -461,21 +487,19 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-update-texture)
       "Accessor"
       (documentation 'dmabuf-texture-builder-update-texture 'function)
- "@version{2026-02-14}
+ "@version{2026-08-08}
   @syntax{(gdk:dmabuf-texture-builder-update-texture object) => texture}
   @syntax{(setf (gdk:dmabuf-texture-builder-update-region object) texture)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[texture]{a @class{gdk:texture} object}
   @begin{short}
     The accessor for the @slot[gdk:dmabuf-texture-builder]{update-texture} slot
-    of the @class{gdk:dmabuf-texture-builder} class gets or sets the texture
-    to be updated by this texture.
+    gets or sets the texture to be updated by this texture.
   @end{short}
-  Returns @code{nil} if none was set.
-
-  See the @fun{gdk:dmabuf-texture-builder-update-region} function for an
-  explanation.
+  Returns @code{nil} if none was set. See the
+  @fun{gdk:dmabuf-texture-builder-update-region} function for an explanation.
   @see-class{gdk:dmabuf-texture-builder}
+  @see-class{gdk:texture}
   @see-function{gdk:dmabuf-texture-builder-update-region}")
 
 ;;; --- gdk:dmabuf-texture-builder-width ---------------------------------------
@@ -491,15 +515,14 @@
 (setf (liber:alias-for-function 'dmabuf-texture-builder-width)
       "Accessor"
       (documentation 'dmabuf-texture-builder-width 'function)
- "@version{2026-02-14}
+ "@version{2026-07-28}
   @syntax{(gdk:dmabuf-texture-builder-width object) => width}
   @syntax{(setf (gdk:dmabuf-texture-builder-width object) width)}
   @argument[object]{a @class{gdk:dmabuf-texture-builder} object}
   @argument[width]{an integer for the width of the texture or 0 to unset}
   @begin{short}
-    The accessor for the @slot[gdk:dmabuf-texture-builder]{width} slot of the
-    @class{gdk:dmabuf-texture-builder} class gets or sets the width of the
-    texture.
+    The accessor for the @slot[gdk:dmabuf-texture-builder]{width} slot gets or
+    sets the width of the texture.
   @end{short}
   Returns 0 if the width was not set.
 

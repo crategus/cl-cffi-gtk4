@@ -33,11 +33,11 @@
              (glib-test:list-signals "GdkDmabufTexture")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDmabufTexture" GDK:DMABUF-TEXTURE
-                       (:SUPERCLASS GDK:TEXTURE
-                        :EXPORT T
-                        :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
-                        :TYPE-INITIALIZER "gdk_dmabuf_texture_get_type")
-                       NIL)
+                      (:SUPERCLASS GDK:TEXTURE
+                       :EXPORT T
+                       :INTERFACES ("GIcon" "GLoadableIcon" "GdkPaintable")
+                       :TYPE-INITIALIZER "gdk_dmabuf_texture_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GdkDmabufTexture"))))
 
 ;;;     GdkDmabufTextureBuilder
@@ -71,34 +71,34 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkDmabufTextureBuilder"
                                       GDK:DMABUF-TEXTURE-BUILDER
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_dmabuf_texture_builder_get_type")
-                       ((COLOR-STATE DMABUF-TEXTURE-BUILDER-COLOR-STATE
-                         "color-state" "GdkColorState" T T)
-                        (DISPLAY DMABUF-TEXTURE-BUILDER-DISPLAY "display"
-                         "GdkDisplay" T T)
-                        (FOURCC DMABUF-TEXTURE-BUILDER-FOURCC "fourcc" "guint"
-                         T T)
-                        (HEIGHT DMABUF-TEXTURE-BUILDER-HEIGHT "height" "guint"
-                         T T)
-                        (MODIFIER DMABUF-TEXTURE-BUILDER-MODIFIER "modifier"
-                         "guint64" T T)
-                        (N-PLANES DMABUF-TEXTURE-BUILDER-N-PLANES "n-planes"
-                         "guint" T T)
-                        (PREMULTIPLIED DMABUF-TEXTURE-BUILDER-PREMULTIPLIED
-                         "premultiplied" "gboolean" T T)
-                        (UPDATE-REGION DMABUF-TEXTURE-BUILDER-UPDATE-REGION
-                         "update-region" "CairoRegion" T T)
-                        (UPDATE-TEXTURE DMABUF-TEXTURE-BUILDER-UPDATE-TEXTURE
-                         "update-texture" "GdkTexture" T T)
-                        (WIDTH DMABUF-TEXTURE-BUILDER-WIDTH "width" "guint" T
-                         T)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_dmabuf_texture_builder_get_type")
+                      ((COLOR-STATE DMABUF-TEXTURE-BUILDER-COLOR-STATE
+                        "color-state" "GdkColorState" T T)
+                       (DISPLAY DMABUF-TEXTURE-BUILDER-DISPLAY "display"
+                        "GdkDisplay" T T)
+                       (FOURCC DMABUF-TEXTURE-BUILDER-FOURCC "fourcc" "guint"
+                        T T)
+                       (HEIGHT DMABUF-TEXTURE-BUILDER-HEIGHT "height" "guint"
+                        T T)
+                       (MODIFIER DMABUF-TEXTURE-BUILDER-MODIFIER "modifier"
+                        "guint64" T T)
+                       (N-PLANES DMABUF-TEXTURE-BUILDER-N-PLANES "n-planes"
+                        "guint" T T)
+                       (PREMULTIPLIED DMABUF-TEXTURE-BUILDER-PREMULTIPLIED
+                        "premultiplied" "gboolean" T T)
+                       (UPDATE-REGION DMABUF-TEXTURE-BUILDER-UPDATE-REGION
+                        "update-region" "CairoRegion" T T)
+                       (UPDATE-TEXTURE DMABUF-TEXTURE-BUILDER-UPDATE-TEXTURE
+                        "update-texture" "GdkTexture" T T)
+                       (WIDTH DMABUF-TEXTURE-BUILDER-WIDTH "width" "guint" T T)))
              (gobject:get-gtype-definition "GdkDmabufTextureBuilder"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     color-state
 ;;;     display
 ;;;     fourcc
 ;;;     height
@@ -110,8 +110,9 @@
 ;;;     width
 
 (test gdk-dmabuf-texture-builder-properties
-  (glib-test:with-check-memory (builder :strong 1)
+  (glib-test:with-check-memory (builder)
     (setf builder (make-instance 'gdk:dmabuf-texture-builder))
+    (is-false (gdk:dmabuf-texture-builder-color-state builder))
     (is (eq (gdk:display-default)
             (gdk:dmabuf-texture-builder-display builder)))
     (is (= 0 (gdk:dmabuf-texture-builder-fourcc builder)))
@@ -164,4 +165,4 @@
 
     (is (typep (gdk:dmabuf-texture-builder-build builder) 'gdk:dmabuf-texture))))
 
-;;; 2026-02-14
+;;; 2026-08-08
