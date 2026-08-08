@@ -2,7 +2,7 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -49,18 +49,18 @@
 
 (cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
- "@version{2025-07-30}
+ "@version{2026-08-01}
   @argument[cr]{a @sym{cairo:context-t} instance}
-  @argument[rgba]{a @class{gdk:rgba} color}
+  @argument[rgba]{a @class{gdk:rgba} instance}
   @begin{short}
     Sets the specified @arg{rgba} color as the source color of the Cairo
     context.
   @end{short}
   @begin[Examples]{dictionary}
     This code fragment from the GTK Demo sets a draw function for a
-    @class{gtk:drawing-area} widget. The color is parsed to a @struct{gdk:rgba}
-    color and then set as the source color for the @fun{cairo:paint} operation
-    on the Cairo context.
+    @class{gtk:drawing-area} widget. The color is parsed to a @class{gdk:rgba}
+    instance and then set as the source color for the @fun{cairo:paint}
+    operation on the Cairo context.
     @begin{pre}
 (gtk:drawing-area-set-draw-func area
         (lambda (widget cr width height)
@@ -90,13 +90,13 @@
 
 (defun cairo-set-source-pixbuf (cr pixbuf x y)
  #+liber-documentation
- "@version{#2025-07-30}
+ "@version{#2026-08-08}
   @argument[cr]{a @sym{cairo:context-t} instance}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @argument[x]{a number coerced to a double float for the x coordinate to
-    place upper left corner of @arg{pixbuf}}
+    place the upper left corner of @arg{pixbuf}}
   @argument[y]{a number coerced to a double float for the y coordinate to
-    place upper left corner of @arg{pixbuf}}
+    place the upper left corner of @arg{pixbuf}}
   @begin{short}
     Sets the given @arg{pixbuf} as the source pattern for @arg{cr}.
   @end{short}
@@ -104,11 +104,14 @@
   @sym{cairo:extend-t} enumeration and is aligned so that the origin of the
   pixbuf is @code{(x,y)}.
   @begin[Warning]{dictionary}
-    This function is deprecated since 4.20.
+    This function is deprecated since 4.20. Use the
+    @fun{cairo:set-source-surface} and @fun{gdk:texture-download} functions.
   @end{dictionary}
   @see-symbol{cairo:context-t}
   @see-symbol{cairo:extend-t}
-  @see-class{gdk-pixbuf:pixbuf}"
+  @see-class{gdk-pixbuf:pixbuf}
+  @see-function{cairo:set-source-surface}
+  @see-function{gdk:texture-download}"
   #+(and gtk-4-20 gtk-warn-deprecated)
   (when gtk-init:*warn-deprecated*
     (warn "GDK:CAIRO-SET-SOURCE-PIXBUF is deprecated since 4.20."))
@@ -165,15 +168,15 @@
                cairo-region-create-from-surface)
     (:pointer (:struct cairo:region-t))
  #+liber-documentation
- "@version{#2025-07-30}
+ "@version{#2026-08-08}
   @argument[surface]{a @sym{cairo:surface-t} instance}
   @begin{return}
     The new @sym{cairo:region-t} instance, must be freed with the
     @fun{cairo:region-destroy} function.
   @end{return}
   @begin{short}
-    Creates region that describes covers the area where the given surface is
-    more than 50% opaque.
+    Creates a region that covers the area where the given surface is more than
+    50% opaque.
   @end{short}
   This function takes into account device offsets that might be set with
   the @setf{cairo:surface-device-offset} function.
