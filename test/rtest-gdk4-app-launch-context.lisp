@@ -106,4 +106,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; 2025-4-26
+;;; 2026-08-08

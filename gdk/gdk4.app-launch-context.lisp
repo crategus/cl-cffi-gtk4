@@ -2,7 +2,7 @@
 ;;; gdk4.app-launch-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -110,14 +110,13 @@
 (setf (liber:alias-for-function 'app-launch-context-display)
       "Accessor"
       (documentation 'app-launch-context-display 'function)
- "@version{2025-08-31}
+ "@version{2026-07-28}
   @syntax{(gdk:app-launch-context-display object) => display}
   @argument[object]{a @class{gdk:app-launch-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:app-launch-context]{display} slot of the
-    @class{gdk:app-launch-context} class returns the display that the launch
-    context is for.
+    The accessor for the @slot[gdk:app-launch-context]{display} slot returns
+    the display that the launch context is for.
   @end{short}
   @see-class{gdk:app-launch-context}
   @see-class{gdk:display}")
