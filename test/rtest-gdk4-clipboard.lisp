@@ -37,19 +37,21 @@
              (glib-test:list-signals "GdkClipboard")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkClipboard" GDK:CLIPBOARD
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_clipboard_get_type")
-                       ((CONTENT CLIPBOARD-CONTENT
-                         "content" "GdkContentProvider" T NIL)
-                        (DISPLAY CLIPBOARD-DISPLAY "display" "GdkDisplay" T NIL)
-                        (FORMATS CLIPBOARD-FORMATS
-                         "formats" "GdkContentFormats" T NIL)
-                        (LOCAL CLIPBOARD-LOCAL "local" "gboolean" T NIL)))
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_clipboard_get_type")
+                      ((CONTENT CLIPBOARD-CONTENT
+                        "content" "GdkContentProvider" T NIL)
+                       (DISPLAY CLIPBOARD-DISPLAY "display" "GdkDisplay" T NIL)
+                       (FORMATS CLIPBOARD-FORMATS
+                        "formats" "GdkContentFormats" T NIL)
+                       (LOCAL CLIPBOARD-LOCAL "local" "gboolean" T NIL)))
              (gobject:get-gtype-definition "GdkClipboard"))))
 
 ;;; --- Signals ----------------------------------------------------------------
+
+;;;     changed
 
 (test gdk-clipboard-changed-signal
   (let* ((name "changed")
@@ -71,64 +73,70 @@
 
 ;; Check properties of the default clipboard
 (test gdk-clipboard-properties.1
-  (let* ((display (gdk:display-default))
-         (clipboard (gdk:display-clipboard display)))
-    (is (typep display 'gdk:display))
-    (is (typep clipboard 'gdk:clipboard))
-    (is-true (gdk:clipboard-set-content clipboard nil))
-    (signals (error) (setf (gdk:clipboard-content clipboard) nil))
-    (is-false (gdk:clipboard-content clipboard))
-    (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
-    (signals (error) (setf (gdk:clipboard-formats clipboard) nil))
-    (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
-    (signals (error) (setf (gdk:clipboard-local clipboard) nil))
-    ;; The value is false in the second run of the testsuite.
-    (is-true (or (gdk:clipboard-local clipboard)
-                 (not (gdk:clipboard-local clipboard))))))
+  (glib-test:with-check-memory (:strong 1)
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default))))
+      ;; Clear clipboard
+      (is-true (gdk:clipboard-set-content clipboard nil))
+      ;; Property CONTENT
+      (is-false (gdk:clipboard-content clipboard))
+      (signals (error) (setf (gdk:clipboard-content clipboard) nil))
+      ;; Property DISPLAY
+      (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
+      (signals (error) (setf (gdk:clipboard-formats clipboard) nil))
+      ;; Property FORMATS
+      (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
+      (signals (error) (setf (gdk:clipboard-local clipboard) nil))
+      ;; Property LOCAL
+      (when *first-run-testsuite*
+        ;; The value is false in the second run of the testsuite
+        (is-true (gdk:clipboard-local clipboard)))
+      (signals (error) (setf (gdk:clipboard-local clipboard) nil)))))
 
 ;; Check primary clipboard
 (test gdk-clipboard-properties.2
-  (let* ((display (gdk:display-default))
-         (clipboard (gdk:display-primary-clipboard display)))
-    (is (typep display 'gdk:display))
-    (is (typep clipboard 'gdk:clipboard))
-    (is-true (gdk:clipboard-set-content clipboard nil))
-    (is-false (gdk:clipboard-content clipboard))
-    (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
-    (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
-    (when *first-run-testsuite*
-      (is-true (gdk:clipboard-local clipboard)))))
+  (glib-test:with-check-memory (:strong 1)
+    (let ((clipboard (gdk:display-primary-clipboard (gdk:display-default))))
+      ;; Clear clipboard
+      (is-true (gdk:clipboard-set-content clipboard nil))
+      ;; Property CONTENT
+      (is-false (gdk:clipboard-content clipboard))
+      ;; Property DISPLAY
+      (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
+      ;; Property FORMATS
+      (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
+      ;; Property LOCAL
+      (when *first-run-testsuite*
+        (is-true (gdk:clipboard-local clipboard))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_clipboard_is_local
 
 (test gdk-clipboard-is-local
-  (let* ((display (gdk:display-default))
-         (clipboard (gdk:display-clipboard display)))
-    (is-true (or (gdk:clipboard-is-local clipboard)
-                 (not (gdk:clipboard-is-local clipboard))))))
+  (glib-test:with-check-memory (:strong 1)
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default))))
+      (is-true (or (gdk:clipboard-is-local clipboard)
+                   (not (gdk:clipboard-is-local clipboard)))))))
 
 ;;;     gdk_clipboard_set_content
 
 (test gdk-clipboard-set-content.1
-  (let* ((display (gdk:display-default))
-         (clipboard (gdk:display-clipboard display)))
-    (is-true (gdk:clipboard-set-content clipboard nil))))
+  (glib-test:with-check-memory (:strong 1)
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default))))
+      (is-true (gdk:clipboard-set-content clipboard nil)))))
 
 (test gdk-clipboard-set-content.2
-  (let* ((display (gdk:display-default))
-         (clipboard (gdk:display-clipboard display))
-         (provider nil))
-    (cffi:with-foreign-object (gvalue '(:struct g:value))
-      (is (= 123 (g:value-set gvalue 123 "gint")))
-      (is (typep (setf provider
-                       (gdk:content-provider-new-for-value gvalue))
-                 'gdk:content-provider))
-      (is-true (gdk:clipboard-set-content clipboard provider))
-      (is (typep (gdk:clipboard-content clipboard) 'gdk:content-provider))
-      (is-true (gdk:clipboard-set-content clipboard nil))
-      (is-false (gdk:clipboard-content clipboard)))))
+  (glib-test:with-check-memory (provider :strong 1)
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default))))
+      (cffi:with-foreign-object (gvalue '(:struct g:value))
+        (is (= 123 (g:value-set gvalue 123 "gint")))
+        (is (typep (setf provider
+                         (gdk:content-provider-new-for-value gvalue))
+                   'gdk:content-provider))
+        (is-true (gdk:clipboard-set-content clipboard provider))
+        (is (typep (gdk:clipboard-content clipboard) 'gdk:content-provider))
+        (is-true (gdk:clipboard-set-content clipboard nil))
+        (is-false (gdk:clipboard-content clipboard))))))
 
 ;;;     gdk_clipboard_store_async
 ;;;     gdk_clipboard_store_finish
@@ -142,21 +150,16 @@
 ;;;     gdk_clipboard_read_text_async
 ;;;     gdk_clipboard_read_text_finish
 
-;; TODO: Check the memory usage for the clipboard
-
 (test gdk-clipboard-read-text-async
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory ((clipboard 4))
-      (let (content)
-        (is (typep (setf clipboard
-                         (gdk:display-clipboard (gdk:display-default)))
-                   'gdk:clipboard))
-        (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
-        ;; FIXME: Can we read the clipboard in the testsuite!
-        (gdk:clipboard-read-text-async clipboard nil
-            (lambda (source result)
-              (setf content (gdk:clipboard-read-text-finish source result))))
-        (is-false content)))))
+  (glib-test:with-check-memory ()
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default)))
+          content)
+      (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard."))
+      ;; FIXME: Can we read the clipboard in the testsuite!
+      (gdk:clipboard-read-text-async clipboard nil
+          (lambda (source result)
+            (setf content (gdk:clipboard-read-text-finish source result))))
+      (is-false content))))
 
 ;;;     gdk_clipboard_set
 ;;;     gdk_clipboard_set_valist
@@ -167,13 +170,10 @@
 ;; TODO: Check the memory usage for the clipboard
 
 (test gdk-clipboard-set-text
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory ((clipboard 4))
-      (is (typep (setf clipboard
-                       (gdk:display-clipboard (gdk:display-default)))
-                 'gdk:clipboard))
+  (glib-test:with-check-memory ()
+    (let ((clipboard (gdk:display-clipboard (gdk:display-default))))
       (is-false (gdk:clipboard-set-text clipboard "The text for the clipboard.")))))
 
 ;;;     gdk_clipboard_set_texture
 
-;;; 2026-02-04
+;;; 2026-07-30

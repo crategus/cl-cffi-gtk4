@@ -2,7 +2,7 @@
 ;;; gdk4.clipboard.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -109,7 +109,6 @@
     The @class{gdk:clipboard} object represents data shared between applications
     or inside an application.
   @end{short}
-
   To get a @class{gdk:clipboard} object, use the @fun{gdk:display-clipboard}
   or @fun{gdk:display-primary-clipboard} functions. You can find out about the
   data that is currently available in a clipboard using the
@@ -159,14 +158,13 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-content)
       "Accessor"
       (documentation 'clipboard-content 'function)
- "@version{2026-03-29}
+ "@version{2026-07-25}
   @syntax{(gdk:clipboard-content object) => content}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[content]{a @class{gdk:content-provider} instance}
   @begin{short}
-    The accessor for the @slot[gdk:clipboard]{content} slot of the
-    @class{gdk:clipboard} class returns the @class{gdk:content-provider} object
-    currently set on @arg{clipboard}.
+    The accessor for the @slot[gdk:clipboard]{content} slot returns the
+    @class{gdk:content-provider} object currently set on @arg{clipboard}.
   @end{short}
   If the clipboard is empty or its contents are not owned by the current
   process, @code{nil} will be returned.
@@ -190,14 +188,13 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-display)
       "Accessor"
       (documentation 'clipboard-display 'function)
- "@version{2026-03-29}
+ "@version{2026-07-25}
   @syntax{(gdk:clipboard-display object) => display}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:clipboard]{display} slot of the
-    @class{gdk:clipboard} class returns the display that the clipboard was
-    created for.
+    The accessor for the @slot[gdk:clipboard]{display} slot returns the display
+    that the clipboard was created for.
   @end{short}
   @see-class{gdk:clipboard}
   @see-class{gdk:display}")
@@ -213,14 +210,13 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-formats)
       "Accessor"
       (documentation 'clipboard-formats 'function)
- "@version{2026-03-29}
+ "@version{2026-07-25}
   @syntax{(gdk:clipboard-formats object) => formats}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{short}
-    The accessor for the @slot[gdk:clipboard]{formats} slot of the
-    @class{gdk:clipboard} class returns the formats that the clipboard can
-    provide its current contents in.
+    The accessor for the @slot[gdk:clipboard]{formats} slot returns the formats
+    that the clipboard can provide its current contents in.
   @end{short}
   @see-class{gdk:clipboard}
   @see-class{gdk:content-formats}")
@@ -237,14 +233,14 @@ lambda (clipboard)    :run-last
 (setf (liber:alias-for-function 'clipboard-local)
       "Accessor"
       (documentation 'clipboard-local 'function)
- "@version{2026-03-29}
+ "@version{2026-07-25}
   @syntax{(gdk:clipboard-local object) => local}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[local]{a boolean whether the contents of the clipboard are owned
     by this process}
   @begin{short}
-    The accessor for the @slot[gdk:clipboard]{local} slot of the
-    @class{gdk:clipboard} class returns whether the clipboard is local.
+    The accessor for the @slot[gdk:clipboard]{local} slot returns whether the
+    clipboard is local.
   @end{short}
   See also the @fun{gdk:clipboard-is-local} function.
   @see-class{gdk:clipboard}
@@ -553,9 +549,9 @@ lambda (clipboard)    :run-last
   @see-function{gdk:clipboard-read-value-async}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%clipboard-read-text-async clipboard
-                                   cancellable
-                                   (cffi:callback g:async-ready-callback)
-                                   ptr)))
+                                cancellable
+                                (cffi:callback g:async-ready-callback)
+                                ptr)))
 
 (export 'clipboard-read-text-async)
 
