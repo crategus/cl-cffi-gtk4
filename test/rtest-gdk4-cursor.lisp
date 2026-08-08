@@ -47,7 +47,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gdk-cursor-properties.1
-  (let ((cursor (make-instance 'gdk:cursor)))
+  (glib-test:with-check-memory (cursor)
+    (is (typep (setf cursor (make-instance 'gdk:cursor)) 'gdk:cursor))
     (is-false (gdk:cursor-fallback cursor))
     (is (= 0 (gdk:cursor-hotspot-x cursor)))
     (is (= 0 (gdk:cursor-hotspot-y cursor)))
@@ -55,44 +56,52 @@
     (is-false (gdk:cursor-texture cursor))))
 
 (test gdk-cursor-properties.2
-  (let* ((fallback (gdk:cursor-new-from-name "default"))
-         (cursor (gdk:cursor-new-from-name "help" fallback)))
-    (is (eq fallback (gdk:cursor-fallback cursor)))
-    (is (= 0 (gdk:cursor-hotspot-x cursor)))
-    (is (= 0 (gdk:cursor-hotspot-y cursor)))
-    (is (string= "help" (gdk:cursor-name cursor)))
-    (is-false (gdk:cursor-texture cursor))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (cursor (fallback 2) :strong 1)
+      (setf fallback (gdk:cursor-new-from-name "default"))
+      (setf cursor (gdk:cursor-new-from-name "help" fallback))
+      (is (eq fallback (gdk:cursor-fallback cursor)))
+      (is (= 0 (gdk:cursor-hotspot-x cursor)))
+      (is (= 0 (gdk:cursor-hotspot-y cursor)))
+      (is (string= "help" (gdk:cursor-name cursor)))
+      (is-false (gdk:cursor-texture cursor)))))
 
 (test gdk-cursor-properties.3
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (texture (gdk:texture-new-from-filename path))
-         (fallback (gdk:cursor-new-from-name "default"))
-         (cursor (gdk:cursor-new-from-texture texture 5 10 fallback)))
-    (is (eq fallback (gdk:cursor-fallback cursor)))
-    (is (=  5 (gdk:cursor-hotspot-x cursor)))
-    (is (= 10 (gdk:cursor-hotspot-y cursor)))
-    (is-false (gdk:cursor-name cursor))
-    (is (eq texture (gdk:cursor-texture cursor)))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (cursor (fallback 2) (texture 2) :strong 2)
+      (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+        (setf texture (gdk:texture-new-from-filename path))
+        (setf fallback (gdk:cursor-new-from-name "default"))
+        (setf cursor (gdk:cursor-new-from-texture texture 5 10 fallback))
+        (is (eq fallback (gdk:cursor-fallback cursor)))
+        (is (=  5 (gdk:cursor-hotspot-x cursor)))
+        (is (= 10 (gdk:cursor-hotspot-y cursor)))
+        (is-false (gdk:cursor-name cursor))
+        (is (eq texture (gdk:cursor-texture cursor)))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_cursor_new_from_texture
 
 (test gdk-cursor-new-from-texture
-  (let* ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png"))
-         (texture (gdk:texture-new-from-filename path))
-         (fallback (gdk:cursor-new-from-name "default")))
-    (is (typep (gdk:cursor-new-from-texture texture 0 0) 'gdk:cursor))
-    (is (typep (gdk:cursor-new-from-texture texture 0 0 nil) 'gdk:cursor))
-    (is (typep (gdk:cursor-new-from-texture texture 0 0 fallback) 'gdk:cursor))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((fallback 2) (texture 4) :strong 2)
+      (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+        (setf texture (gdk:texture-new-from-filename path))
+        (setf fallback (gdk:cursor-new-from-name "default"))
+        (is (typep (gdk:cursor-new-from-texture texture 0 0) 'gdk:cursor))
+        (is (typep (gdk:cursor-new-from-texture texture 0 0 nil) 'gdk:cursor))
+        (is (typep (gdk:cursor-new-from-texture texture 0 0 fallback) 'gdk:cursor))))))
 
 ;;;     gdk_cursor_new_from_name
 
 (test gdk-cursor-new-from-name
-  (let ((fallback (gdk:cursor-new-from-name "default")))
-    (is (typep (gdk:cursor-new-from-name "help") 'gdk:cursor))
-    (is (typep (gdk:cursor-new-from-name "help" nil) 'gdk:cursor))
-    (is (typep (gdk:cursor-new-from-name "help" fallback) 'gdk:cursor))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory ((fallback 2) :strong 1)
+      (setf fallback (gdk:cursor-new-from-name "default"))
+      (is (typep (gdk:cursor-new-from-name "help") 'gdk:cursor))
+      (is (typep (gdk:cursor-new-from-name "help" nil) 'gdk:cursor))
+      (is (typep (gdk:cursor-new-from-name "help" fallback) 'gdk:cursor)))))
 
 ;;;     gdk_cursor_new_from_callback
 
@@ -118,4 +127,4 @@
     (is (= 0 (gdk:cursor-hotspot-x cursor)))
     (is (= 0 (gdk:cursor-hotspot-y cursor)))))
 
-;;; 2026-02-22
+;;; 2026-08-08
