@@ -2,7 +2,7 @@
 ;;; gdk4.gl-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; See <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -38,10 +38,10 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gdk_gl_context_get_allowed_apis                    Since 4.6
-;;;     gdk_gl_context_set_allowed_apis                    Since 4.6
-;;;     gdk_gl_context_get_api                             Since 4.6
-;;;     gdk_gl_context_get_shared_context                  Deprecated 4.4
+;;;     gdk_gl_context_get_allowed_apis                     Since 4.6
+;;;     gdk_gl_context_set_allowed_apis                     Since 4.6
+;;;     gdk_gl_context_get_api                              Since 4.6
+;;;     gdk_gl_context_get_shared_context                   Deprecated 4.4
 ;;;
 ;;; Functions
 ;;;
@@ -54,10 +54,10 @@
 ;;;     gdk_gl_context_get_debug_enabled
 ;;;     gdk_gl_context_set_forward_compatible
 ;;;     gdk_gl_context_get_forward_compatible
-;;;     gdk_gl_context_set_use_es
+;;;     gdk_gl_context_set_use_es                           Depreacted 4.6
 ;;;     gdk_gl_context_get_use_es
 ;;;     gdk_gl_context_is_legacy
-;;;     gdk_gl_context_is_shared                           Since 4.4
+;;;     gdk_gl_context_is_shared                            Since 4.4
 ;;;     gdk_gl_context_realize
 ;;;     gdk_gl_context_make_current
 ;;;     gdk_gl_context_get_current
@@ -65,9 +65,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     allowed-apis                                       Since 4.6
-;;;     api                                                Since 4.6
-;;;     shared-context                                     Deprecated 4.4
+;;;     allowed-apis                                        Since 4.6
+;;;     api                                                 Since 4.6
+;;;     shared-context                                      Deprecated 4.4
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -215,14 +215,14 @@
 (setf (liber:alias-for-function 'gl-context-allowed-apis)
       "Accessor"
       (documentation 'gl-context-allowed-apis 'function)
- "@version{2026-02-05}
+ "@version{2026-07-30}
   @syntax{(gdk:gl-context-allowed-apis object) => apis}
   @syntax{(setf (gdk:gl-context-allowed-apis object) apis)}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[apis]{a @sym{gdk:gl-api} value}
   @begin{short}
-    The accessor for the @slot[gdk:gl-context]{allowed-apis} slot of the
-    @class{gdk:gl-context} class gets or sets the allowed APIs.
+    The accessor for the @slot[gdk:gl-context]{allowed-apis} slot gets or sets
+    the allowed APIs.
   @end{short}
   When the @fun{gdk:gl-context-realize} function is called, only the allowed
   APIs will be tried. If you set this to @val[gdk:gl-api]{:none}, realizing
@@ -250,13 +250,13 @@
 (setf (liber:alias-for-function 'gl-context-api)
       "Accessor"
       (documentation 'gl-context-api 'function)
- "@version{2026-02-05}
+ "@version{2026-07-30}
   @syntax{(gdk:gl-context-api object) => api}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[api]{a @sym{gdk:gl-api} value}
   @begin{short}
-    The accessor for the @slot[gdk:gl-context]{api} slot of the
-    @class{gdk:gl-context} class returns the API currently in use.
+    The accessor for the @slot[gdk:gl-context]{api} slot returns the API
+    currently in use.
   @end{short}
   If the renderer has not been realized yet, @val[gdk:gl-api]{:none} is
   returned.
@@ -278,14 +278,13 @@
 (setf (liber:alias-for-function 'gl-context-shared-context)
       "Accessor"
       (documentation 'gl-context-shared-context 'function)
- "@version{2026-02-05}
+ "@version{2026-07-30}
   @syntax{(gdk:gl-context-shared-context object) => context}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[context]{a @class{gdk:gl-context} object or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:gl-context]{shared-context} slot of the
-    @class{gdk:gl-context} class returns the GL context that this context share
-    data with.
+    The accessor for the @slot[gdk:gl-context]{shared-context} slot returns the
+    GL context that this context share data with.
   @end{short}
 
   Deprecated since 4.6

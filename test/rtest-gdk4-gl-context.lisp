@@ -81,7 +81,7 @@
 ;;;     shared-context                                     Deprecated 4.4
 
 (test gdk-gl-context-properties
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -90,7 +90,7 @@
     (is (equal '(:GL :GLES) (gdk:gl-context-allowed-apis context)))
     (is-false (gdk:gl-context-api context))
     (is-false (gdk:gl-context-shared-context context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -100,9 +100,9 @@
 ;;;     gdk_gl_context_get_version
 ;;;     gdk_gl_context_realize
 
-#+-windows
+#-windows
 (test gdk-gl-context-display/surface/version
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -112,7 +112,7 @@
     (is (eq *display-default* (gdk:gl-context-display context)))
     (is (eq surface (gdk:gl-context-surface context)))
     (is (= 3 (gdk:gl-context-version context)))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_set_required_version
@@ -120,7 +120,7 @@
 
 #-windows
 (test gdk-gl-context-required-version
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -132,14 +132,14 @@
     (is-true (gdk:gl-context-realize context))
     (is (equal '(3 2)
                (multiple-value-list (gdk:gl-context-required-version context))))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_set_debug_enabled
 ;;;     gdk_gl_context_get_debug_enabled
 
 (test gdk-gl-context-debug-enabled
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -148,14 +148,14 @@
     (is-true (setf (gdk:gl-context-debug-enabled context) t))
     (is-true (gdk:gl-context-realize context))
     (is-true (gdk:gl-context-debug-enabled context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_set_forward_compatible
 ;;;     gdk_gl_context_get_forward_compatible
 
 (test gdk-gl-context-forward-compatible
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -164,7 +164,7 @@
     (is-true (setf (gdk:gl-context-forward-compatible context) t))
     (is-true (gdk:gl-context-realize context))
     (is-true (gdk:gl-context-forward-compatible context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_set_use_es
@@ -172,7 +172,7 @@
 
 #-windows
 (test gdk-gl-context-use-es.1
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -180,11 +180,11 @@
                      (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
     (is-true (gdk:gl-context-use-es context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 (test gdk-gl-context-use-es.2
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -193,13 +193,13 @@
     (is (= 0 (setf (gdk:gl-context-use-es context) 0)))
     (is-true (gdk:gl-context-realize context))
     (is-false (gdk:gl-context-use-es context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_is_legacy
 
 (test gdk-gl-context-is-legacy
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -207,13 +207,13 @@
                      (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
     (is-false (gdk:gl-context-is-legacy context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_is_shared                           Since 4.4
 
 (test gdk-gl-context-is-shared
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -221,7 +221,7 @@
                      (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
     (is-true (gdk:gl-context-is-shared context context))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
 ;;;     gdk_gl_context_make_current
@@ -229,7 +229,7 @@
 ;;;     gdk_gl_context_clear_current
 
 (test gdk-gl-context-make/get/clear-current
-  (glib-test:with-check-memory ((surface 2) context :strong 2)
+  (glib-test:with-check-memory (context (surface 2) :strong 1)
     (is (typep (setf surface
                      (gdk:surface-new-toplevel *display-default*))
                'gdk:surface))
@@ -241,7 +241,7 @@
     (is (eq context (gdk:gl-context-current)))
     (is-false (gdk:gl-context-clear-current))
     (is-false (gdk:gl-context-current))
-    ;; Remove references
+    ;; Destroy surface
     (is-false (gdk:surface-destroy surface))))
 
-;;; 2026-02-05
+;;; 2026-08-09
