@@ -27,10 +27,10 @@
              (glib-test:list-signals "GdkPopup")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkPopup" GDK:POPUP
-                            (:EXPORT T
-                             :TYPE-INITIALIZER "gdk_popup_get_type")
-                            (AUTOHIDE POPUP-AUTOHIDE "autohide" "gboolean" T NIL)
-                            (PARENT POPUP-PARENT "parent" "GdkSurface" T NIL))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gdk_popup_get_type")
+                      (AUTOHIDE POPUP-AUTOHIDE "autohide" "gboolean" T NIL)
+                      (PARENT POPUP-PARENT "parent" "GdkSurface" T NIL))
              (gobject:get-gtype-definition "GdkPopup"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -46,4 +46,4 @@
 ;;;     gdk_popup_get_position_x
 ;;;     gdk_popup_get_position_y
 
-;;; 2024-9-18
+;;; 2026-08-09

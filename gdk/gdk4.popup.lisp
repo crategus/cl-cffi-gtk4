@@ -2,7 +2,7 @@
 ;;; gdk4.popup.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -107,15 +107,14 @@
 (setf (liber:alias-for-function 'popup-autohide)
       "Accessor"
       (documentation 'popup-autohide 'function)
- "@version{#2025-09-25}
+ "@version{#2026-07-30}
   @syntax{(gdk:popup-autohide object) => autohide}
   @syntax{(setf (gdk:popup-autohide object) autohide)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[autohide]{@em{True} if @arg{popup} will autohide.}
   @begin{short}
-    The accessor for the @slot[gdk:popup]{autohide} slot of the
-    @class{gdk:popup} class returns whether the popup is set to hide on outside
-    clicks.
+    The accessor for the @slot[gdk:popup]{autohide} slot returns whether the
+    popup is set to hide on outside clicks.
   @end{short}
   @see-class{gdk:popup}")
 
@@ -131,14 +130,14 @@
 (setf (liber:alias-for-function 'popup-parent)
       "Accessor"
       (documentation 'popup-parent 'function)
- "@version{#2025-08-31}
+ "@version{#2026-07-30}
   @syntax{(gdk:popup-parent object) => parent}
   @syntax{(setf (gdk:popup-parent object) parent)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[parent]{a @class{gdk:surface} parent surface}
   @begin{short}
-    The accessor for the @slot[gdk:popup]{parent} slot of the @class{gdk:popup}
-    class returns the parent surface of a popup.
+    The accessor for the @slot[gdk:popup]{parent} slot returns the parent
+    surface of a popup.
   @end{short}
   @see-class{gdk:popup}
   @see-class{gdk:surface}")
@@ -202,7 +201,8 @@
   The value returned may change after calling the @fun{gdk:popup-present}
   function, or after the @sig[gdk:surface]{layout} signal is emitted.
   @see-class{gdk:popup}
-  @see-symbol{gdk:gravity}"
+  @see-symbol{gdk:gravity}
+  @see-function{gdk:popup-present}"
   (popup (g:object popup)))
 
 (export 'popup-surface-anchor)
@@ -224,7 +224,8 @@
   The value returned may change after calling the @fun{gdk:popup-present}
   function, or after the @sig[gdk:surface]{layout} signal is emitted.
   @see-class{gdk:popup}
-  @see-symbol{gdk:gravity}"
+  @see-symbol{gdk:gravity}
+  @see-function{gdk:popup-present}"
   (popup (g:object popup)))
 
 (export 'popup-rect-anchor)
