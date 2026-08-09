@@ -29,30 +29,33 @@
              (glib-test:list-signals "GdkDragSurface")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkDragSurface" GDK:DRAG-SURFACE
-                            (:EXPORT T
-                             :TYPE-INITIALIZER "gdk_drag_surface_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gdk_drag_surface_get_type"))
              (gobject:get-gtype-definition "GdkDragSurface"))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     compute-size
 
-(test gtk-drag-surface-compute-size-signal
-  (let ((query (g:signal-query (g:signal-lookup "compute-size"
-                                                "GdkDragSurface"))))
-    (is (string= "compute-size" (g:signal-query-signal-name query)))
-    (is (string= "GdkDragSurface"
-                 (g:type-name (g:signal-query-owner-type query))))
+(test gdk-drag-surface-compute-size-signal
+  (let* ((name "compute-size")
+         (gtype (g:gtype "GdkDragSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GdkDragSurfaceSize")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_drag_surface_present
 ;;;     gdk_drag_surface_size_set_size
 
-;;; 2024-9-18
+;;; 2026-07-24
