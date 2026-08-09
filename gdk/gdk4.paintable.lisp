@@ -2,7 +2,7 @@
 ;;; gdk4.paintable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -339,8 +339,7 @@ lambda (paintable)    :run-last
   @see-function{gdk:paintable-get-current-image-impl}
   @see-function{gdk:paintable-get-flags-impl}
   @see-function{gdk:paintable-get-intrinsic-width-impl}
-  @see-function{gdk:paintable-get-intrinsic-height-impl}
-  @see-function{gdk:paintable-aspect-ratio}")
+  @see-function{gdk:paintable-get-intrinsic-height-impl}")
 
 (export 'paintable-vtable)
 
@@ -361,22 +360,20 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-snapshot-impl)
       "Method"
       (documentation 'paintable-snapshot-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-snapshot} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
   (error \"Paintable of type ~a  does not implement GDK:PAINTABLE-SNAPSHOT-IMPL\"
          (g:type-name (g:type-from-instance paintable))))
-    @end{pre}
-    This method must be implemented for a subclass which implements the
-    @class{gdk:paintable} interface. The default implementation signals an
-    error. See the @fun{gdk:paintable-snapshot} function for the syntax. The
-    @class{gdk:paintable} documentation shows a complete example of implementing
-    the interface.
-  @end{dictionary}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-snapshot} function.
+  @end{short}
+  This method must be implemented for a subclass which implements the
+  @class{gdk:paintable} interface. The default implementation signals an error.
+  See the @fun{gdk:paintable-snapshot} function for the syntax. The
+  @class{gdk:paintable} documentation shows a complete example of implementing
+  the interface.
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-snapshot}")
@@ -407,12 +404,8 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-get-current-image-impl)
       "Method"
       (documentation 'paintable-get-current-image-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-current-image} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-get-current-image-impl ((paintable paintable))
   (if (not (set-difference '(:static-size :static-contents)
                            (paintable-get-flags-impl paintable)))
@@ -430,12 +423,14 @@ lambda (paintable)    :run-last
             (cffi:foreign-funcall \"gtk_snapshot_free_to_paintable\"
                                   (g:object snapshot) snapshot
                                   :pointer (cffi:null-pointer)))))))
-    @end{pre}
-    The implementation of this method is not mandatory. The default
-    implementation returns the paintable itself, when it is a static paintable.
-    Otherwise, the default method returns an empty paintable or creates a
-    paintable for the intrinsic width and height.
-  @end{dictionary}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-current-image} function.
+  @end{short}
+  The implementation of this method is not mandatory. The default implementation
+  returns the paintable itself, when it is a static paintable. Otherwise, the
+  default method returns an empty paintable or creates a paintable for the
+  intrinsic width and height.
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-current-image}")
@@ -451,17 +446,15 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-get-flags-impl)
       "Method"
       (documentation 'paintable-get-flags-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-flags} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-get-flags-impl ((paintable paintable))
   '())
-    @end{pre}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-flags} function.
+  @end{short}
   The default method returns no flags set.
-  @end{dictionary}
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-flags}")
@@ -477,17 +470,15 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-get-intrinsic-width-impl)
       "Method"
       (documentation 'paintable-get-intrinsic-width-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-intrinsic-width} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-get-intrinsic-width-impl ((paintable paintable))
   0)
-    @end{pre}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-intrinsic-width} function.
+  @end{short}
   The default method returns 0 for the intrinsic width.
-  @end{dictionary}
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-intrinsic-width}")
@@ -503,24 +494,23 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-get-intrinsic-height-impl)
       "Method"
       (documentation 'paintable-get-intrinsic-height-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-intrinsic-height} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-get-intrinsic-height-impl ((paintable paintable))
   0)
-    @end{pre}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-intrinsic-height}
+    function.
+  @end{short}
   The default method returns 0 for the intrinsic height.
-  @end{dictionary}
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-intrinsic-height}")
 
 (export 'paintable-get-intrinsic-height-impl)
 
-;;; --- gdk:paintable-get-intrinsic-aspect-ration-impl -------------------------
+;;; --- gdk:paintable-get-intrinsic-aspect-ratio-impl --------------------------
 
 (defmethod paintable-get-intrinsic-aspect-ratio-impl ((paintable paintable))
   (let ((width (paintable-get-intrinsic-width-impl paintable))
@@ -533,22 +523,21 @@ lambda (paintable)    :run-last
 (setf (liber:alias-for-function 'paintable-get-intrinsic-aspect-ratio-impl)
       "Method"
       (documentation 'paintable-get-intrinsic-aspect-ratio-impl 'function)
- "@version{2025-05-09}
-  @begin{short}
-    Method called from the @fun{gdk:paintable-intrinsic-aspect-ratio} function.
-  @end{short}
-  @begin[Default method]{dictionary}
-    @begin{pre}
+ "@version{2026-08-09}
+  @begin{implementation}
 (defmethod paintable-get-intrinsic-aspect-ratio-impl ((paintable paintable))
   (let ((width (paintable-get-intrinsic-width-impl paintable))
         (height (paintable-get-intrinsic-height-impl paintable)))
     (if (or (<= width 0) (<= height 0))
         0.0d0
         (coerce (/ width height) 'double-float))))
-    @end{pre}
+  @end{implementation}
+  @begin{short}
+    Default method called from the @fun{gdk:paintable-intrinsic-aspect-ratio}
+    function.
+  @end{short}
   The default method returns 0.0d0 or the width to height ratio as a double
   float.
-  @end{dictionary}
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-vtable}
   @see-function{gdk:paintable-intrinsic-aspect-ratio}")

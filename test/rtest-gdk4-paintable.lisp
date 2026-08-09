@@ -23,15 +23,15 @@
   (is (equal '(1 2)
              (glib-test:list-flags-item-values "GdkPaintableFlags")))
   ;; Check nick names
-  (is (equal '("size" "contents")
+  (is (equal '("static-size" "static-contents")
              (glib-test:list-flags-item-nicks "GdkPaintableFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-GFLAGS "GdkPaintableFlags" GDK:PAINTABLE-FLAGS
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
                                        "gdk_paintable_flags_get_type")
-                                      (:SIZE 1)
-                                      (:CONTENTS 2))
+                                     (:STATIC-SIZE 1)
+                                     (:STATIC-CONTENTS 2))
              (gobject:get-gtype-definition "GdkPaintableFlags"))))
 
 ;;;     GdkSnapshot
@@ -62,11 +62,11 @@
              (glib-test:list-signals "GdkSnapshot")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GdkSnapshot" GDK:SNAPSHOT
-                       (:SUPERCLASS G:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_snapshot_get_type")
-                       NIL)
+                      (:SUPERCLASS G:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gdk_snapshot_get_type")
+                      NIL)
              (gobject:get-gtype-definition "GdkSnapshot"))))
 
 ;;;     GdkPaintable
@@ -91,8 +91,8 @@
              (glib-test:list-signals "GdkPaintable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GdkPaintable" GDK:PAINTABLE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gdk_paintable_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gdk_paintable_get_type"))
              (gobject:get-gtype-definition "GdkPaintable"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -106,28 +106,25 @@
 ;;;     gdk_paintable_snapshot
 
 ;;;     gdk_paintable_get_flags
-
-(test gdk-paintable-flags
-  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
-         (paintable (gdk:texture-new-from-filename path)))
-    (is (equal '(:static-size :static-contents)
-               (gdk:paintable-flags paintable)))))
-
 ;;;     gdk_paintable_get_intrinsic_width
 ;;;     gdk_paintable_get_intrinsic_height
 ;;;     gdk_paintable_get_intrinsic_aspect_ratio
 
 (test gdk-paintable-intrinsic-width/height/aspect-ratio
-  (let* ((path (glib-sys:sys-path "test/resource/ducky.png"))
-         (paintable (gdk:texture-new-from-filename path)))
-    (is (= 489 (gdk:paintable-intrinsic-width paintable)))
-    (is (= 537 (gdk:paintable-intrinsic-height paintable)))
-    (is (approx-equal 0.91061d0
-                      (gdk:paintable-intrinsic-aspect-ratio paintable)))))
+  (glib-test:with-check-memory (paintable)
+    (let ((path (glib-sys:sys-path "test/resource/ducky.png")))
+      (is (typep (setf paintable
+                       (gdk:texture-new-from-filename path)) 'gdk:paintable))
+      (is (equal '(:static-size :static-contents)
+                 (gdk:paintable-flags paintable)))
+      (is (= 489 (gdk:paintable-intrinsic-width paintable)))
+      (is (= 537 (gdk:paintable-intrinsic-height paintable)))
+      (is (approx-equal 0.91061d0
+                        (gdk:paintable-intrinsic-aspect-ratio paintable))))))
 
 ;;;     gdk_paintable_compute_concrete_size
 ;;;     gdk_paintable_invalidate_contents
 ;;;     gdk_paintable_invalidate_size
 ;;;     gdk_paintable_new_empty
 
-;;; 2024-9-19
+;;; 2026-08-09
