@@ -206,6 +206,40 @@
                                     (:SMOOTH 4))
              (gobject:get-gtype-definition "GdkScrollDirection"))))
 
+;;;     GdkScrollRelativeDirection
+
+(test gdk-scroll-relative-direction
+  ;; Check type
+  (is (g:type-is-enum "GdkScrollRelativeDirection"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GdkScrollRelativeDirection")
+          (g:gtype (cffi:foreign-funcall "gdk_scroll_relative_direction_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gdk:scroll-relative-direction
+          (glib:symbol-for-gtype "GdkScrollRelativeDirection")))
+  ;; Check names
+  (is (equal '("GDK_SCROLL_RELATIVE_DIRECTION_IDENTICAL"
+               "GDK_SCROLL_RELATIVE_DIRECTION_INVERTED"
+               "GDK_SCROLL_RELATIVE_DIRECTION_UNKNOWN")
+             (glib-test:list-enum-item-names "GdkScrollRelativeDirection")))
+  ;; Check values
+  (is (equal '(0 1 2)
+             (glib-test:list-enum-item-values "GdkScrollRelativeDirection")))
+  ;; Check nick names
+  (is (equal '("identical" "inverted" "unknown")
+             (glib-test:list-enum-item-nicks "GdkScrollRelativeDirection")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GdkScrollRelativeDirection"
+                                    GDK:SCROLL-RELATIVE-DIRECTION
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gdk_scroll_relative_direction_get_type")
+                                    (:IDENTICAL 0)
+                                    (:INVERTED 1)
+                                    (:UNKNOWN 2))
+             (gobject:get-gtype-definition "GdkScrollRelativeDirection"))))
+
 ;;;     GdkCrossingMode
 
 (test gdk-crossing-mode
@@ -401,4 +435,4 @@
 ;;;     gdk_events_get_center
 ;;;     gdk_events_get_distance
 
-;;; 2025-11-02
+;;; 2026-08-09

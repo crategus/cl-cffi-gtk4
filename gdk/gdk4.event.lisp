@@ -2,7 +2,7 @@
 ;;; gdk4.event.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,8 +47,9 @@
 ;;;     GdkKeyMatch
 ;;;     GdkTouchpadGesturePhase
 ;;;     GdkScrollDirection
+;;;     GdkScrollRelativeDirection                          Since 4.20
 ;;;     GdkCrossingMode
-;;;     GdkScrollUnit                                      Since 4.8
+;;;     GdkScrollUnit                                       Since 4.8
 ;;;     GdkNotifyType
 ;;;
 ;;;     GdkEventSequence
@@ -95,6 +96,7 @@
 ;;;     gdk_button_event_get_button
 ;;;
 ;;;     gdk_scroll_event_get_direction
+;;;     gdk_scroll_event_get_relative_direction             Since 4.20
 ;;;     gdk_scroll_event_get_deltas
 ;;;     gdk_scroll_event_is_stop
 ;;;     gdk_scroll_event_get_unit                           Since 4.8
@@ -585,6 +587,45 @@
   @short{Specifies the direction for a @class{gdk:scroll-event} event.}
   @see-class{gdk:scroll-event}
   @see-function{gdk:scroll-event-deltas}")
+
+;;; ----------------------------------------------------------------------------
+;;; GdkScrollRelativeDirection
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(gobject:define-genum "GdkScrollRelativeDirection" scroll-relative-direction
+  (:export t
+   :type-initializer "gdk_scroll_relative_direction_get_type")
+  (:identical 0)
+  (:inverted 1)
+  (:unknown 2))
+
+#+(and gtk-4-20 liber-documentation)
+(setf (liber:alias-for-symbol 'scroll-relative-direction)
+      "GEnum"
+      (liber:symbol-documentation 'scroll-relative-direction)
+ "@version{2026-08-09}
+  @begin{declaration}
+(gobject:define-genum \"GdkScrollRelativeDirection\" scroll-relative-direction
+  (:export t
+   :type-initializer \"gdk_scroll_relative_direction_get_type\")
+  (:identical 0)
+  (:inverted 1)
+  (:unknown 2))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:identival]{Physical motion and event motion are the same.}
+      @entry[:inverted]{Physical motion is inverted relative to event motion.}
+      @entry[:unkown]{Relative motion is unknown on this device or backend.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    Used in scroll events, to announce the direction relative to physical
+    motion.
+  @end{short}
+  Since 4.20
+  @see-class{gdk:scroll-event}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkCrossingMode
@@ -1319,6 +1360,31 @@
 (export 'scroll-event-direction)
 
 ;;; ----------------------------------------------------------------------------
+;;; gdk_scroll_event_get_relative_direction                 Since 4.20
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(cffi:defcfun ("gdk_scroll_event_get_relative_direction"
+               scroll-event-relative-direction) scroll-relative-direction
+ "@version{#2026-08-09}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    The @sym{gdk:scroll-relative-direction} value for the relative scroll
+    direction of @arg{event}.
+  @end{return}
+  @begin{short}
+    Extracts the direction relative to the physical motion.
+  @end{short}
+
+  Since 4.20
+  @see-class{gdk:event}
+  @see-symbol{gdk:scroll-relative-direction}"
+  (event event))
+
+#+gtk-4-20
+(export 'scroll-event-relative-direction)
+
+;;; ----------------------------------------------------------------------------
 ;;; gdk_scroll_event_get_deltas
 ;;; ----------------------------------------------------------------------------
 
@@ -1789,10 +1855,10 @@
 
 (cffi:defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
  #+liber-documentation
- "@version{#2025-09-26}
+ "@version{#2026-08-09}
   @argument[event]{a @class{gdk:event} instance}
   @return{The @class{gdk:drop} object.}
-  @short{Gets the @class{gdk:drop} object from a DND event.}
+  @short{Gets the @class{gdk:drop} object from a drag and drop event.}
   @see-class{gdk:event}
   @see-class{gdk:drop}"
   (event event))
