@@ -2,7 +2,7 @@
 ;;; gdk4.drop.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -96,10 +96,10 @@
 
 #+liber-documentation
 (setf (documentation 'drop 'type)
- "@version{#2025-07-31}
+ "@version{2026-08-09}
   @begin{short}
-    The @class{gdk:drop} object represents the target side of an ongoing DND
-    operation.
+    The @class{gdk:drop} object represents the target side of an ongoing drag
+    and drop operation.
   @end{short}
   Possible drop sites get informed about the status of the ongoing drag
   operation with events of @code{:enter}, @code{:leave}, @code{:motion} and
@@ -132,13 +132,13 @@
 (setf (liber:alias-for-function 'drop-actions)
       "Accessor"
       (documentation 'drop-actions 'function)
- "@version{#2025-07-31}
+ "@version{#2026-07-30}
   @syntax{(gdk:drop-actions object) => actions}
   @argument[object]{a @class{gdk:drop} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{actions} slot of the @class{gdk:drop}
-    class returns the possible actions for the drop object.
+    The accessor for the @slot[gdk:drop]{actions} slot returns the possible
+    actions for the drop object.
   @end{short}
   If this value contains multiple actions, that is, the
   @fun{gdk:drag-action-is-unique} function returns @em{false} for the result,
@@ -170,13 +170,13 @@
 (setf (liber:alias-for-function 'drop-device)
       "Accessor"
       (documentation 'drop-device 'function)
- "@version{#2025-09-29}
+ "@version{#2026-07-30}
   @syntax{(gdk:drop-device object) => device}
   @argument[object]{a @class{gdk:drop} object}
   @argument[device]{a @class{gdk:device} object performing the drop}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{device} slot of the @class{gdk:drop}
-    class returns the device performing the drop.
+    The accessor for the @slot[gdk:drop]{device} slot returns the device
+    performing the drop.
   @end{short}
   @see-class{gdk:drop}
   @see-class{gdk:device}")
@@ -192,13 +192,13 @@
 (setf (liber:alias-for-function 'drop-display)
       "Accessor"
       (documentation 'drop-display 'function)
- "@version{#2025-09-29}
+ "@version{#2026-07-30}
   @syntax{(gdk:drop-display object) => display}
   @argument[object]{a @class{gdk:drop} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{display} slot of the @class{gdk:drop}
-    class returns the display that @arg{drop} was created for.
+    The accessor for the @slot[gdk:drop]{display} slot returns the display that
+    @arg{drop} was created for.
   @end{short}
   @see-class{gdk:drop}
   @see-class{gdk:display}")
@@ -215,15 +215,15 @@
 (setf (liber:alias-for-function 'drop-drag)
       "Accessor"
       (documentation 'drop-drag 'function)
- "@version{#2024-09-29}
+ "@version{#2026-08-09}
   @syntax{(gdk:drop-drag object) => drag}
   @argument[object]{a @class{gdk:drop} object}
   @argument[drag]{a corresponding @class{gdk:drag} object}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{drag} slot of the @class{gdk:drop}
-    class returns the drag object that initiated the drop.
+    The accessor for the @slot[gdk:drop]{drag} slot returns the drag object
+    that initiated the drop.
   @end{short}
-  If this is an in-app drag-and-drop operation, returns the drag object that
+  If this is an in-app drag and drop operation, returns the drag object that
   corresponds to this drop. If it is not, @code{nil} is returned.
   @see-class{gdk:drop}
   @see-class{gdk:drag}")
@@ -240,14 +240,13 @@
 (setf (liber:alias-for-function 'drop-formats)
       "Accessor"
       (documentation 'drop-formats 'function)
- "@version{#2025-09-29}
+ "@version{#2026-07-30}
   @syntax{(gdk:drop-formats object) => formats}
   @argument[object]{a @class{gdk:drop} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{formats} slot of the @class{gdk:drop}
-    class returns the content formats that the drop offers the data to be read
-    in.
+    The accessor for the @slot[gdk:drop]{formats} slot returns the content
+    formats that the drop offers the data to be read in.
   @end{short}
   @see-class{gdk:drop}
   @see-class{gdk:content-formats}")
@@ -264,13 +263,13 @@
 (setf (liber:alias-for-function 'drop-surface)
       "Accessor"
       (documentation 'drop-surface 'function)
- "@version{#2025-09-29}
+ "@version{#2026-07-30}
   @syntax{(gdk:drop-surface object) => surface}
   @argument[object]{a @class{gdk:drop} object}
   @argument[surface]{a @class{gdk:surface} object performing the drop}
   @begin{short}
-    The accessor for the @slot[gdk:drop]{surface} slot of the @class{gdk:drop}
-    class returns the surface performing the drop.
+    The accessor for the @slot[gdk:drop]{surface} slot returns the surface
+    performing the drop.
   @end{short}
   @see-class{gdk:drop}
   @see-class{gdk:surface}")

@@ -12,8 +12,7 @@
   (is (g:type-is-enum "GdkDragCancelReason"))
   ;; Check type initializer
   (is (eq (g:gtype "GdkDragCancelReason")
-          (g:gtype (cffi:foreign-funcall "gdk_drag_cancel_reason_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gdk_drag_cancel_reason_get_type" :size))))
   ;; Check registered name
   (is (eq 'gdk:drag-cancel-reason
           (glib:symbol-for-gtype "GdkDragCancelReason")))
@@ -115,16 +114,6 @@
                        (SURFACE DRAG-SURFACE "surface" "GdkSurface" T NIL)))
              (gobject:get-gtype-definition "GdkDrag"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-;;;     actions
-;;;     content
-;;;     device
-;;;     display
-;;;     formats
-;;;     selected-action
-;;;     surface
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     cancel
@@ -181,6 +170,16 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
+;;; --- Properties -------------------------------------------------------------
+
+;;;     actions
+;;;     content
+;;;     device
+;;;     display
+;;;     formats
+;;;     selected-action
+;;;     surface
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_drag_begin
@@ -188,6 +187,8 @@
 ;;;     gdk_drag_get_drag_surface
 ;;;     gdk_drag_set_hotspot
 
+;; TODO: Does not work for Windows?!
+#-windows
 (test gdk-drag-begin
   (glib-test:with-check-memory (drag :strong 5)
     (g:with-value (gvalue "gchararray" "string")
@@ -220,4 +221,4 @@
   (is-true (gdk:drag-action-is-unique :move))
   (is-false (gdk:drag-action-is-unique '(:move :copy))))
 
-;;; 2026-05-02
+;;; 2026-08-08

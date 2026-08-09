@@ -2,7 +2,7 @@
 ;;; gdk4.drag.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -95,7 +95,7 @@
 (setf (liber:alias-for-symbol 'drag-cancel-reason)
       "GEnum"
       (liber:symbol-documentation 'drag-cancel-reason)
- "@version{2026-05-02}
+ "@version{2026-08-09}
   @begin{declaration}
 (gobject:define-genum \"GdkDragCancelReason\" drag-cancel-reason
   (:export t
@@ -112,8 +112,8 @@
     @end{simple-table}
   @end{values}
   @begin{short}
-    Used in the @class{gdk:drag} object to the reason of a cancelled Drag and
-    Drop operation.
+    Used in the @class{gdk:drag} object to the reason of a cancelled drag and
+    drop operation.
   @end{short}
   @see-class{gdk:drag}")
 
@@ -197,13 +197,13 @@
 
 #+liber-documentation
 (setf (documentation 'drag 'type)
- "@version{2026-05-02}
+ "@version{2026-08-09}
   @begin{short}
-    The @class{gdk:drag} object represents the source of an ongoing Drag and
-    Drop operation.
+    The @class{gdk:drag} object represents the source of an ongoing drag and
+    drop operation.
   @end{short}
   The @class{gdk:drag} object is created when a drag is started, and stays alive
-  for duration of the Drag and Drop operation. After a drag has been started
+  for duration of the drag and drop operation. After a drag has been started
   with the @fun{gdk:drag-begin} function, the caller gets informed about the
   status of the ongoing drag operation with signals on the @class{gdk:drag}
   object.
@@ -271,13 +271,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-actions)
       "Accessor"
       (documentation 'drag-actions 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-actions object) => actions}
   @argument[object]{a @class{gdk:drag} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{actions} slot of the @class{gdk:drag}
-    class determines the possible actions proposed by the drag source.
+    The accessor for the @slot[gdk:drag]{actions} slot determines the possible
+    actions proposed by the drag source.
   @end{short}
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}")
@@ -294,14 +294,14 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-content)
       "Accessor"
       (documentation 'drag-content 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-content object) => content}
   @argument[object]{a @class{gdk:drag} object}
   @argument[content]{a @class{gdk:content-provider} object associated to
     @arg{object}}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{content} slot of the @class{gdk:drag}
-    class returns the content provider associated to the drag object.
+    The accessor for the @slot[gdk:drag]{content} slot returns the content
+    provider associated to the drag object.
   @end{short}
   @see-class{gdk:drag}
   @see-class{gdk:content-provider}")
@@ -318,13 +318,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-device)
       "Accessor"
       (documentation 'drag-device 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-device object) => device}
   @argument[object]{a @class{gdk:drag} object}
   @argument[device]{a @class{gdk:device} object associated to @arg{object}}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{device} slot of the @class{gdk:drag}
-    class returns the device associated to the drag object.
+    The accessor for the @slot[gdk:drag]{device} slot returns the device
+    associated to the drag object.
   @end{short}
   @see-class{gdk:drag}
   @see-class{gdk:device}")
@@ -340,13 +340,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-display)
       "Accessor"
       (documentation 'drag-display 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-display object) => display}
   @argument[object]{a @class{gdk:drag} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{display} slot of the @class{gdk:drag}
-    class returns the display that the drag object was created for.
+    The accessor for the @slot[gdk:drag]{display} slot returns the display that
+    the drag object was created for.
   @end{short}
   @see-class{gdk:drag}
   @see-class{gdk:display}")
@@ -363,13 +363,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-formats)
       "Accessor"
       (documentation 'drag-formats 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-formats object) => formats}
   @argument[object]{a @class{gdk:drag} object}
   @argument[formats]{a @class{gdk:content-formats} object}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{formats} slot of the @class{gdk:drag}
-    class returns the formats supported by the drag object.
+    The accessor for the @slot[gdk:drag]{formats} slot returns the formats
+    supported by the drag object.
   @end{short}
   @see-class{gdk:drag}
   @see-class{gdk:content-formats}")
@@ -387,13 +387,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-selected-action)
       "Accessor"
       (documentation 'drag-selected-action 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-selected-action object) => action}
   @argument[object]{a @class{gdk:drag} object}
   @argument[action]{a @sym{gdk:drag-action} value}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{selected-action} slot of the
-    @class{gdk:drag} class determines the action chosen by the drag destination.
+    The accessor for the @slot[gdk:drag]{selected-action} slot determines the
+    action chosen by the drag destination.
   @end{short}
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}")
@@ -410,13 +410,13 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-surface)
       "Accessor"
       (documentation 'drag-surface 'function)
- "@version{2026-05-02}
+ "@version{2026-07-30}
   @syntax{(gdk:drag-surface object) => surface}
   @argument[object]{a @class{gdk:drag} object}
   @argument[surface]{a @class{gdk:surface} object where the drag originates}
   @begin{short}
-    The accessor for the @slot[gdk:drag]{surface} slot of the @class{gdk:drag}
-    class returns the surface where the drag originates.
+    The accessor for the @slot[gdk:drag]{surface} slot returns the surface
+    where the drag originates.
   @end{short}
   @see-class{gdk:drag}
   @see-class{gdk:surface}")
@@ -460,7 +460,7 @@ lambda (drag)    :run-last
 
 (defun drag-begin (surface device content actions dx dy)
  #+liber-documentation
- "@version{2026-05-02}
+ "@version{2026-08-09}
   @argument[surface]{a @class{gdk:surface} object for this drag object}
   @argument[device]{a @class{gdk:device} object that controls the drag object}
   @argument[content]{a @class{gdk:content-provider} object for the offered
@@ -480,7 +480,7 @@ lambda (drag)    :run-last
   @fun{gdk:drag-drag-surface} function.
 
   This function returns a reference to the @class{gdk:drag} object, but GTK
-  keeps its own reference as well, as long as the Drag and Drop operation is
+  keeps its own reference as well, as long as the drag and drop operation is
   going on.
 
   Note: If @arg{actions} include @val[gdk:drag-action]{:move}, you need to
@@ -553,19 +553,20 @@ lambda (drag)    :run-last
 
 (cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean
  #+liber-documentation
- "@version{2026-05-02}
+ "@version{2026-08-08}
   @argument[action]{a @sym{gdk:drag-action} value}
   @return{@em{True} if exactly one action was given.}
   @begin{short}
     Checks if @arg{action} represents a single action or if it includes
     multiple flags that can be selected from.
   @end{short}
-  When @arg{action} is @code{:none}, that is no action was given, @em{true} is
-  returned.
-  @begin{dictionary}
+  When @arg{action} is @val[gdk:drag-action]{:none}, that is no action was
+  given, @em{true} is returned.
+  @begin[Examples]{dictionary}
     @begin{pre}
 (gdk:drag-action-is-unique :move) => T
 (gdk:drag-action-is-unique '(:move :copy)) => NIL
+(gdk:drag-action-is-unique :none) => T
     @end{pre}
   @end{dictionary}
   @see-class{gdk:drag}
