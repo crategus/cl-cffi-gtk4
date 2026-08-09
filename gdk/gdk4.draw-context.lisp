@@ -2,7 +2,7 @@
 ;;; gdk4.draw-context.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -112,14 +112,13 @@
 (setf (liber:alias-for-function 'draw-context-display)
       "Accessor"
       (documentation 'draw-context-display 'function)
- "@version{2025-09-25}
+ "@version{2026-07-28}
   @syntax{(gdk:draw-context-display object) => display}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[display]{a @class{gdk:display} object or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:draw-context]{display} slot of the
-    @class{gdk:draw-context} class retrieves the display the draw context is
-    created for.
+    The accessor for the @slot[gdk:draw-context]{display} slot retrieves the
+    display the draw context is created for.
   @end{short}
   @see-class{gdk:draw-context}
   @see-class{gdk:display}")
@@ -136,14 +135,13 @@
 (setf (liber:alias-for-function 'draw-context-surface)
       "Accessor"
       (documentation 'draw-context-surface 'function)
- "@version{2025-09-25}
+ "@version{2026-07-28}
   @syntax{(gdk:draw-context-surface object) => surface}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[surface]{a @class{gdk:surface} object or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gdk:cairo-context]{surface} slot of the
-    @class{gdk:draw-context} class retrieves the surface used by the draw
-    context.
+    The accessor for the @slot[gdk:cairo-context]{surface} slot retrieves the
+    surface used by the draw context.
   @end{short}
   @see-class{gdk:draw-context}
   @see-class{gdk:surface}")
