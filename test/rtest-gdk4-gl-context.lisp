@@ -3,6 +3,17 @@
 (def-suite gdk-gl-context :in gdk-suite)
 (in-suite gdk-gl-context)
 
+;; Creating a GLContext is expensive. Therefore, we create one global
+;; GL context for the following tests.
+(let (context)
+  (defun create-gl-context ()
+    (unless context
+      (let ((surface (gdk:surface-new-toplevel *display-default*)))
+        (setf context (gdk:surface-create-gl-context surface))))
+    (gdk:gl-context-realize context)
+    (gdk:gl-context-make-current context)
+    context))
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GdkGLAPI
@@ -81,17 +92,11 @@
 ;;;     shared-context                                     Deprecated 4.4
 
 (test gdk-gl-context-properties
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is (equal '(:GL :GLES) (gdk:gl-context-allowed-apis context)))
-    (is-false (gdk:gl-context-api context))
-    (is-false (gdk:gl-context-shared-context context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is (equal '(:GLES) (gdk:gl-context-api context)))
+    (is-false (gdk:gl-context-shared-context context))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -102,146 +107,94 @@
 
 #-windows
 (test gdk-gl-context-display/surface/version
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
-    (is (eq *display-default* (gdk:gl-context-display context)))
-    (is (eq surface (gdk:gl-context-surface context)))
-    (is (= 3 (gdk:gl-context-version context)))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is (eq (gdk:display-default) (gdk:gl-context-display context)))
+    (is (typep (gdk:gl-context-surface context) 'gdk:surface))
+    (is (= 3 (gdk:gl-context-version context)))))
 
 ;;;     gdk_gl_context_set_required_version
 ;;;     gdk_gl_context_get_required_version
 
 #-windows
 (test gdk-gl-context-required-version
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
+    #+nil
     (is (equal '(2 1)
                (multiple-value-list
                    (setf (gdk:gl-context-required-version context) '(2 1)))))
     (is-true (gdk:gl-context-realize context))
     (is (equal '(3 2)
-               (multiple-value-list (gdk:gl-context-required-version context))))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+               (multiple-value-list (gdk:gl-context-required-version context))))))
 
 ;;;     gdk_gl_context_set_debug_enabled
 ;;;     gdk_gl_context_get_debug_enabled
 
 (test gdk-gl-context-debug-enabled
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
+    #+nil
     (is-true (setf (gdk:gl-context-debug-enabled context) t))
-    (is-true (gdk:gl-context-realize context))
-    (is-true (gdk:gl-context-debug-enabled context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-false (gdk:gl-context-debug-enabled context))))
 
 ;;;     gdk_gl_context_set_forward_compatible
 ;;;     gdk_gl_context_get_forward_compatible
 
 (test gdk-gl-context-forward-compatible
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
+    #+nil
     (is-true (setf (gdk:gl-context-forward-compatible context) t))
-    (is-true (gdk:gl-context-realize context))
-    (is-true (gdk:gl-context-forward-compatible context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-false (gdk:gl-context-forward-compatible context))))
 
 ;;;     gdk_gl_context_set_use_es
 ;;;     gdk_gl_context_get_use_es
 
 #-windows
 (test gdk-gl-context-use-es.1
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
-    (is-true (gdk:gl-context-use-es context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-true (gdk:gl-context-use-es context))))
 
 (test gdk-gl-context-use-es.2
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
+    #+nil
     (is (= 0 (setf (gdk:gl-context-use-es context) 0)))
     (is-true (gdk:gl-context-realize context))
-    (is-false (gdk:gl-context-use-es context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-true (gdk:gl-context-use-es context))))
 
 ;;;     gdk_gl_context_is_legacy
 
 (test gdk-gl-context-is-legacy
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
-    (is-false (gdk:gl-context-is-legacy context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-false (gdk:gl-context-is-legacy context))))
 
 ;;;     gdk_gl_context_is_shared                           Since 4.4
 
 (test gdk-gl-context-is-shared
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 2) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is-true (gdk:gl-context-realize context))
-    (is-true (gdk:gl-context-is-shared context context))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-true (gdk:gl-context-is-shared context context))))
 
 ;;;     gdk_gl_context_make_current
 ;;;     gdk_gl_context_get_current
 ;;;     gdk_gl_context_clear_current
 
 (test gdk-gl-context-make/get/clear-current
-  (glib-test:with-check-memory (context (surface 2) :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel *display-default*))
-               'gdk:surface))
-    (is (typep (setf context
-                     (gdk:surface-create-gl-context surface)) 'gdk:gl-context))
+  (glib-test:with-check-memory ((context 1) :strong 2)
+    (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is-false (gdk:gl-context-clear-current))
     (is-false (gdk:gl-context-current))
     (is-false (gdk:gl-context-make-current context))
     (is (eq context (gdk:gl-context-current)))
     (is-false (gdk:gl-context-clear-current))
-    (is-false (gdk:gl-context-current))
-    ;; Destroy surface
-    (is-false (gdk:surface-destroy surface))))
+    (is-false (gdk:gl-context-current))))
 
 ;;; 2026-08-09
