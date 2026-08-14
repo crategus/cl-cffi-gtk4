@@ -257,6 +257,7 @@
       @about-function{color-state-srgb-linear}
       @about-function{color-state-create-cicp-params}
       @about-function{color-state-equal}
+      @about-function{color-state-equivalent}
     @end{subsection}
     @begin[GdkCicpParams]{subsection}
       @about-symbol{cicp-range}
@@ -451,6 +452,7 @@
     @begin[GdkDmabufTexture]{subsection}
       @about-class{dmabuf-texture}
       @about-class{dmabuf-texture-builder}
+      @about-generic{dmabuf-texture-builder-color-state}
       @about-generic{dmabuf-texture-builder-display}
       @about-generic{dmabuf-texture-builder-fourcc}
       @about-generic{dmabuf-texture-builder-height}
@@ -774,6 +776,7 @@
       @about-symbol{key-match}
       @about-symbol{touchpad-gesture-phase}
       @about-symbol{scroll-direction}
+      @about-symbol{scroll-relative-direction}
       @about-symbol{crossing-mode}
       @about-symbol{scroll-unit}
       @about-symbol{notify-type}
@@ -803,6 +806,7 @@
       @about-function{button-event-button}
       @about-class{scroll-event}
       @about-function{scroll-event-direction}
+      @about-function{scroll-event-relative-direction}
       @about-function{scroll-event-deltas}
       @about-function{scroll-event-is-stop}
       @about-function{scroll-event-unit}
@@ -864,6 +868,7 @@
       @about-function{frame-timings-presentation-time}
       @about-function{frame-timings-refresh-interval}
       @about-function{frame-timings-predicted-presentation-time}
+      @about-function{frame-timings-result}
     @end{subsection}
     @begin[GdkFrameClock]{subsection}
       @about-symbol{frame-clock-phase}

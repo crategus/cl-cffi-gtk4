@@ -228,4 +228,4 @@
 ;;;     gdk_frame_clock_get_refresh_info
 ;;;     gdk_frame_clock_get_fps
 
-;;; 2025-1-3
+;;; 2025-01-03

@@ -38,4 +38,4 @@
       ;; Destroy window
       (is-false (gtk:window-destroy window)))))
 
-;;; 2025-3-1
+;;; 2025-03-01
