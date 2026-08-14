@@ -179,16 +179,11 @@
 
 #-windows
 (test gdk-display-device-is-grabbed
-  (when *first-run-testsuite*
-    (glib-test:with-check-memory ((seat 3) (keyboard 4) (pointer 4) :strong 4)
+    (glib-test:with-check-memory ((seat 3) :strong 3)
       (let ((display (gdk:display-default)))
         (setf seat (gdk:display-default-seat display))
-        (is-false (gdk:display-device-is-grabbed display
-                                                 (setf keyboard
-                                                       (gdk:seat-keyboard seat))))
-        (is-false (gdk:display-device-is-grabbed display
-                                                 (setf pointer
-                                                       (gdk:seat-pointer seat))))))))
+        (is-false (gdk:display-device-is-grabbed display (gdk:seat-keyboard seat)))
+        (is-false (gdk:display-device-is-grabbed display (gdk:seat-pointer seat))))))
 
 #+windows
 (test gdk-display-device-is-grabbed

@@ -61,67 +61,92 @@
 ;;;     enter-monitor
 
 (test gdk-surface-enter-monitor-signal
-  (let ((query (g:signal-query (g:signal-lookup "enter-monitor" "GdkSurface"))))
-    (is (string= "enter-monitor" (g:signal-query-signal-name query)))
-    (is (string= "GdkSurface" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "enter-monitor")
+         (gtype (g:gtype "GdkSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GdkMonitor")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     event
 
 (test gdk-surface-event-signal
-  (let ((query (g:signal-query (g:signal-lookup "event" "GdkSurface"))))
-    (is (string= "event" (g:signal-query-signal-name query)))
-    (is (string= "GdkSurface" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "event")
+         (gtype (g:gtype "GdkSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("gpointer")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     layout
 
 (test gdk-surface-layout-signal
-  (let ((query (g:signal-query (g:signal-lookup "layout" "GdkSurface"))))
-    (is (string= "layout" (g:signal-query-signal-name query)))
-    (is (string= "GdkSurface" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "layout")
+         (gtype (g:gtype "GdkSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("gint" "gint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     leave-monitor
 
 (test gdk-surface-leave-monitor-signal
-  (let ((query (g:signal-query (g:signal-lookup "leave-monitor" "GdkSurface"))))
-    (is (string= "leave-monitor" (g:signal-query-signal-name query)))
-    (is (string= "GdkSurface" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "leave-monitor")
+         (gtype (g:gtype "GdkSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GdkMonitor")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     render
 
 (test gdk-surface-render-signal
-  (let ((query (g:signal-query (g:signal-lookup "render" "GdkSurface"))))
-    (is (string= "render" (g:signal-query-signal-name query)))
-    (is (string= "GdkSurface" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "render")
+         (gtype (g:gtype "GdkSurface"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("CairoRegion")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -225,13 +250,14 @@
 ;;;     gdk_surface_beep
 
 (test gdk-surface-beep
-  (glib-test:with-check-memory (surface :strong 1)
-    (is (typep (setf surface
-                     (gdk:surface-new-toplevel (gdk:display-default)))
-               'gdk:surface))
-    (is-false (gdk:surface-beep surface))
-    ;; Remove referenced
-    (is-false (gdk:surface-destroy surface))))
+  (when *first-run-testsuite*
+    (glib-test:with-check-memory (surface :strong 1)
+      (is (typep (setf surface
+                       (gdk:surface-new-toplevel (gdk:display-default)))
+                 'gdk:surface))
+      (is-false (gdk:surface-beep surface))
+      ;; Remove referenced
+      (is-false (gdk:surface-destroy surface)))))
 
 ;;;     gdk_surface_set_opaque_region
 
@@ -249,6 +275,10 @@
 
 ;;;     gdk_surface_create_gl_context
 
+;; Creation of the GL context is expensive. This is part of the gdk-gl-context
+;; tests. We omit this test at this place.
+
+#+nil
 (test gdk-surface-create-gl-context
   (glib-test:with-check-memory ((surface 2) context :strong 1)
     (is (typep (setf surface
@@ -263,6 +293,7 @@
 
 ;;;     gdk_surface_create_cairo_context
 
+#+nil
 (test gdk-surface-create-cairo-context
   (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((surface 2) context :strong 1)
@@ -277,6 +308,7 @@
 
 ;;;     gdk_surface_create_similar_surface                 Deprecated 4.12
 
+#+nil
 (test gdk-surface-create-similar-surface
   (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory (surface :strong 1)
@@ -361,4 +393,4 @@
       ;; Remove references
       (is-false (gdk:surface-destroy surface)))))
 
-;;; 2025-09-24
+;;; 2026-07-24

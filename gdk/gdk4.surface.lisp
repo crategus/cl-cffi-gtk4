@@ -2,7 +2,7 @@
 ;;; gdk4.surface.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -227,14 +227,14 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-cursor)
       "Accessor"
       (documentation 'surface-cursor 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-cursor object) => cursor}
   @syntax{(setf (gdk:surface-cursor object) cursor)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[cursor]{a @class{gdk:cursor} object}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{cursor} slot of the
-    @class{gdk:surface} class gets or sets the mouse pointer for the surface.
+    The accessor for the @slot[gdk:surface]{cursor} slot gets or sets the mouse
+    pointer for the surface.
   @end{short}
   If the return value is @code{nil} then there is no custom cursor set on the
   specified surface, and it is using the cursor for its parent surface. Note
@@ -262,13 +262,13 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-display)
       "Accessor"
       (documentation 'surface-display 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-display object) => display}
   @argument[object]{a @class{gdk:surface} object}
   @argument[display]{a @class{gdk:display} object associated with @arg{surface}}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{display} slot of the
-    @class{gdk:surface} class returns the display associated with the surface.
+    The accessor for the @slot[gdk:surface]{display} slot returns the display
+    associated with the surface.
   @end{short}
   @see-class{gdk:surface}
   @see-class{gdk:display}")
@@ -285,13 +285,13 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-frame-clock)
       "Accessor"
       (documentation 'surface-frame-clock 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-frame-clock object) => clock}
   @argument[object]{a @class{gdk:surface} object}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{frame-clock} slot of the
-    @class{gdk:surface} class returns the frame clock for the surface.
+    The accessor for the @slot[gdk:surface]{frame-clock} slot returns the frame
+    clock for the surface.
   @end{short}
   The frame clock for a surface never changes unless the surface is reparented
   to a new toplevel surface.
@@ -311,13 +311,13 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-height)
       "Accessor"
       (documentation 'surface-height 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-height object) => height}
   @argument[object]{a @class{gdk:surface} object}
   @argument[width]{an integer for the height of the surface}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{height} slot of the
-    @class{gdk:surface} class returns the height of the given @arg{surface}.
+    The accessor for the @slot[gdk:surface]{height} slot returns the height of
+    the given @arg{surface}.
   @end{short}
   Surface size is reported in \"application pixels\", not \"device pixels\".
   See the @fun{gdk:surface-scale-factor} function.
@@ -336,14 +336,14 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-mapped)
       "Accessor"
       (documentation 'surface-mapped 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-mapped object) => mapped}
   @argument[object]{a @class{gdk:surface} object}
   @argument[mapped]{a boolean whether the surface has been mapped}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{mapped} slot of the
-    @class{gdk:surface} class checks whether the surface has been mapped with
-    the @fun{gdk:toplevel-present} or @fun{gdk:popup-present} functions.
+    The accessor for the @slot[gdk:surface]{mapped} slot checks whether the
+    surface has been mapped with the @fun{gdk:toplevel-present} or
+    @fun{gdk:popup-present} functions.
   @end{short}
   @see-class{gdk:surface}
   @see-function{gdk:toplevel-present}
@@ -361,14 +361,13 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-scale)
       "Accessor"
       (documentation 'surface-scale 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-scale object) => scale}
   @argument[object]{a @class{gdk:surface} object}
   @argument[scale]{a double float for the scale}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{scale} slot of the
-    @class{gdk:surface} class returns the internal scale that maps from surface
-    coordinates to the actual device pixels.
+    The accessor for the @slot[gdk:surface]{scale} slot returns the internal
+    scale that maps from surface coordinates to the actual device pixels.
   @end{short}
   When the scale is bigger than 1, the windowing system prefers to get buffers
   with a resolution that is bigger than the surface size, for example, to show
@@ -396,14 +395,14 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-scale-factor)
       "Accessor"
       (documentation 'surface-scale-factor 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-scale-factor object) => factor}
   @argument[object]{a @class{gdk:surface} object}
   @argument[factor]{an integer for the scale factor}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{scale-factor} slot of the
-    @class{gdk:surface} class returns the internal scale factor that maps from
-    surface coordinates to the actual device pixels.
+    The accessor for the @slot[gdk:surface]{scale-factor} slot returns the
+    internal scale factor that maps from surface coordinates to the actual
+    device pixels.
   @end{short}
   On traditional systems this is 1, but on very high density outputs this can
   be a higher value (often 2).
@@ -429,13 +428,13 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-width)
       "Accessor"
       (documentation 'surface-width 'function)
- "@version{2026-04-20}
+ "@version{2026-07-30}
   @syntax{(gdk:surface-width object) => width}
   @argument[object]{a @class{gdk:surface} object}
   @argument[width]{an integer for the width of the surface}
   @begin{short}
-    The accessor for the @slot[gdk:surface]{width} slot of the
-    @class{gdk:surface} class returns the width of the given @arg{surface}.
+    The accessor for the @slot[gdk:surface]{width} slot returns the width of
+    the given @arg{surface}.
   @end{short}
   Surface size is reported in \"application pixels\", not \"device pixels\".
   See the @fun{gdk:surface-scale-factor} function.

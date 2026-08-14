@@ -2,7 +2,7 @@
 ;;; gdk4.toplevel.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -473,14 +473,13 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-capabilities)
       "Accessor"
       (documentation 'toplevel-capabilities 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-capabilities object) => capabilities}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[capabilities]{a @sym{gdk:toplevel-capabilities} value}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{capabilities} slot of the
-    @class{gdk:toplevel} class returns the capabilities that are available for
-    this toplevel.
+    The accessor for the @slot[gdk:toplevel]{capabilities} slot returns the
+    capabilities that are available for this toplevel.
   @end{short}
 
   Since 4.20
@@ -499,14 +498,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-decorated)
       "Accessor"
       (documentation 'toplevel-decorated 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-decorated object) => decorated}
   @syntax{(setf (gdk:toplevel-decorated object) decorated)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[decorated]{a boolean whether to request decorations}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{decorated} slot of the
-    @class{gdk:toplevel} class gets or sets whether the toplevel is decorated.
+    The accessor for the @slot[gdk:toplevel]{decorated} slot gets or sets
+    whether the toplevel is decorated.
   @end{short}
   Setting @arg{decorated} to @em{false} hints the desktop environment that the
   surface has its own, client-side decorations and does not need to have window
@@ -525,14 +524,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-deletable)
       "Accessor"
       (documentation 'toplevel-deletable 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-deletable object) => deletable}
   @syntax{(setf (gdk:toplevel-deletable object) deletable)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[deletable]{a boolean whether to request a delete button}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{deletable} slot of the
-    @class{gdk:toplevel} class gets or sets whether the toplevel is deletable.
+    The accessor for the @slot[gdk:toplevel]{deletable} slot gets or sets
+    whether the toplevel is deletable.
   @end{short}
   Setting @arg{deletable} to @em{true} hints the desktop environment that it
   should offer the user a way to close the surface.
@@ -551,14 +550,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-fullscreen-mode)
       "Accessor"
       (documentation 'toplevel-fullscreen-mode 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-fullscreen-mode object) => mode}
   @syntax{(setf (gdk:toplevel-fullscreen-mode object) mode)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[mode]{a boolean for the fullscreen mode of the surface}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{fullscreen-mode} slot of the
-    @class{gdk:toplevel} class gets or sets the fullscreen mode of the toplevel.
+    The accessor for the @slot[gdk:toplevel]{fullscreen-mode} slot gets or sets
+    the fullscreen mode of the toplevel.
   @end{short}
   @see-class{gdk:toplevel}")
 
@@ -581,15 +580,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-gravity)
       "Accessor"
       (documentation 'toplevel-gravity 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-gravity object) => gravity}
   @syntax{(setf (gdk:toplevel-gravity object) gravity)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[gravity]{a @sym{gdk:gravity} value}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{gravity} slot of the
-    @class{gdk:toplevel} class gets or sets the gravity that is used when
-    changing the toplevel size programmatically.
+    The accessor for the @slot[gdk:toplevel]{gravity} slot gets or sets the
+    gravity that is used when changing the toplevel size programmatically.
   @end{short}
 
   Since 4.20
@@ -607,14 +605,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-icon-list)
       "Accessor"
       (documentation 'toplevel-icon-list 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-icon-list object) => surfaces}
   @syntax{(setf (gdk:toplevel-icon-list object) surfaces)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[surfaces]{a list of textures to use as icon, of different sizes}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{icon-list} slot of the
-    @class{gdk:toplevel} class gets or sets the list of icon textures.
+    The accessor for the @slot[gdk:toplevel]{icon-list} slot gets or sets the
+    list of icon textures.
   @end{short}
   One of these will be used to represent the surface in iconic form. The icon
   may be shown in window lists or task bars. Which icon size is shown depends on
@@ -636,14 +634,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-modal)
       "Accessor"
       (documentation 'toplevel-modal 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-modal object) => modal}
   @syntax{(setf (gdk:toplevel-modal object) modal)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[modal]{@em{true} if the surface is modal, @em{false} otherwise}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{modal} slot of the
-    @class{gdk:toplevel} class gets or sets whether the toplevel is modal.
+    The accessor for the @slot[gdk:toplevel]{modal} slot gets or sets whether
+    the toplevel is modal.
   @end{short}
   The application can use this hint to tell the window manager that a certain
   surface has modal behaviour. The window manager can use this information to
@@ -668,15 +666,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-shortcuts-inhibited)
       "Accessor"
       (documentation 'toplevel-shortcuts-inhibited 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-shortcuts-inhibited object) => inhibited}
   @syntax{(setf (gdk:toplevel-shortcuts-inhibited object) inhibited)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[inhibited]{a boolean whether keyboard shortcuts are inhibited}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{shortcuts-inhibited} slot of the
-    @class{gdk:toplevel} class gets or sets whether keyboard shortcuts are
-    inhibited.
+    The accessor for the @slot[gdk:toplevel]{shortcuts-inhibited} slot gets or
+    sets whether keyboard shortcuts are inhibited.
   @end{short}
   @see-class{gdk:toplevel}")
 
@@ -692,14 +689,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-startup-id)
       "Accessor"
       (documentation 'toplevel-startup-id 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-startup-id object) => startup-id}
   @syntax{(setf (gdk:toplevel-startup-id object) startup-id)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[startup-id]{a string for the startup notification identifier}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{startup-id} slot of the
-    @class{gdk:toplevel} class gets or sets the startup ID of the surface.
+    The accessor for the @slot[gdk:toplevel]{startup-id} slot gets or sets the
+    startup ID of the surface.
   @end{short}
   When using GTK, typically you should use the @fun{gtk:window-startup-id}
   function instead of this low-level function.
@@ -718,14 +715,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-state)
       "Accessor"
       (documentation 'toplevel-state 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-state object) => state}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[state]{a @sym{gdk:toplevel-state} value}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{state} slot of the
-    @class{gdk:toplevel} class gets the bitwise @code{OR} of the currently
-    active surface state flags from the @sym{gdk:toplevel-state} enumeration.
+    The accessor for the @slot[gdk:toplevel]{state} slot gets the bitwise
+    @code{OR} of the currently active surface state flags from the
+    @sym{gdk:toplevel-state} enumeration.
   @end{short}
   @see-class{gdk:toplevel}
   @see-symbol{gdk:toplevel-state}")
@@ -742,15 +739,15 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-title)
       "Accessor"
       (documentation 'toplevel-title 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-title object) => title}
   @syntax{(setf (gdk:toplevel-title object) title)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[state]{a string for the title of the surface}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{state} slot of the
-    @class{gdk:toplevel} class gets or sets the title of a toplevel surface, to
-    be displayed in the titlebar, in lists of windows, and so on.
+    The accessor for the @slot[gdk:toplevel]{state} slot gets or sets the title
+    of a toplevel surface, to be displayed in the titlebar, in lists of windows,
+    and so on.
   @end{short}
   @see-class{gdk:toplevel}")
 
@@ -766,14 +763,14 @@ lambda (toplevel size)    :run-last
 (setf (liber:alias-for-function 'toplevel-transient-for)
       "Accessor"
       (documentation 'toplevel-transient-for 'function)
- "@version{2026-01-19}
+ "@version{2026-07-30}
   @syntax{(gdk:toplevel-transient-for object) => parent}
   @syntax{(setf (gdk:toplevel-transient-for object) parent)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[parent]{a toplevel @class{gdk:surface} object}
   @begin{short}
-    The accessor for the @slot[gdk:toplevel]{transient-for} slot of the
-    @class{gdk:toplevel} class gets or sets the transient parent of the surface.
+    The accessor for the @slot[gdk:toplevel]{transient-for} slot gets or sets
+    the transient parent of the surface.
   @end{short}
   Indicates to the window manager that surface is a transient dialog associated
   with the application surface @arg{parent}. This allows the window manager to

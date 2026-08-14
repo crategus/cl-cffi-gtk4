@@ -14,4 +14,4 @@
 ;;;     gdk_toplevel_size_set_min_size
 ;;;     gdk_toplevel_size_set_shadow_width
 
-;;; 2024-1-9
+;;; 2024-01-09

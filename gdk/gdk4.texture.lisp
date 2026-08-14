@@ -2,7 +2,7 @@
 ;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,7 +47,7 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_texture_new_for_pixbuf
+;;;     gdk_texture_new_for_pixbuf                          Deprecated 4.20
 ;;;     gdk_texture_new_from_resource
 ;;;     gdk_texture_new_from_file
 ;;;     gdk_texture_new_from_filename                       Since 4.6
@@ -666,14 +666,13 @@
 (setf (liber:alias-for-function 'texture-color-state)
       "Accessor"
       (documentation 'texture-color-state 'function)
- "@version{2025-09-29}
+ "@version{2026-07-30}
   @syntax{(gdk:texture-color-state object) => state}
   @argument[object]{a @class{gdk:texture} object}
   @argument[state]{a @class{gdk:color-state} instance}
   @begin{short}
-    The accessor for the @slot[gdk:texture]{color-state} slot of the
-    @class{gdk:texture} class returns the color state associated with the
-    texture.
+    The accessor for the @slot[gdk:texture]{color-state} slot returns the color
+    state associated with the texture.
   @end{short}
 
   Since 4.16
@@ -694,13 +693,13 @@
 (setf (liber:alias-for-function 'texture-height)
       "Accessor"
       (documentation 'texture-height 'function)
- "@version{2025-08-04}
+ "@version{2026-07-30}
   @syntax{(gdk:texture-height object) => height}
   @argument[object]{a @class{gdk:texture} object}
   @argument[height]{an integer for the height of the texture}
   @begin{short}
-    The accessor for the @slot[gdk:texture]{height} slot of the
-    @class{gdk:texture} class returns the height of the texture, in pixels.
+    The accessor for the @slot[gdk:texture]{height} slot returns the height of
+    the texture, in pixels.
   @end{short}
   @see-class{gdk:texture}")
 
@@ -718,32 +717,41 @@
 (setf (liber:alias-for-function 'texture-width)
       "Accessor"
       (documentation 'texture-width 'function)
- "@version{2025-08-04}
+ "@version{2026-07-30}
   @syntax{(gdk:texture-width object) => width}
   @argument[object]{a @class{gdk:texture} object}
   @argument[width]{an integer for the width of the texture}
   @begin{short}
-    The accessor for the @slot[gdk:texture]{width} slot of the
-    @class{gdk:texture} class returns the width of the texture, in pixels.
+    The accessor for the @slot[gdk:texture]{width} slot returns the width of
+    the texture, in pixels.
   @end{short}
   @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_texture_new_for_pixbuf
+;;; gdk_texture_new_for_pixbuf                              Deprecated 4.20
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
+(cffi:defcfun ("gdk_texture_new_for_pixbuf" %texture-new-for-pixbuf)
     (g:object texture :return)
+  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+
+(defun texture-new-for-pixbuf (pixbuf)
  #+liber-documentation
- "@version{2025-03-11}
+ "@version{2026-08-09}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @return{The newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture object representing @arg{pixbuf}.
   @end{short}
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20.
+  @end{dictionary}
   @see-class{gdk:texture}
   @see-class{gdk-pixbuf:pixbuf}"
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  #+(and gtk-4-20 gtk-warn-deprecated)
+  (when gtk-init:*warn-deprecated*
+    (warn "GDK:TEXTURE-NEW-FOR-PIXBUF is deprecated since 4.20."))
+  (%texture-new-for-pixbuf pixbuf))
 
 (export 'texture-new-for-pixbuf)
 

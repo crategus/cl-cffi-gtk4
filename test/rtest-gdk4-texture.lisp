@@ -3,6 +3,10 @@
 (def-suite gdk-texture :in gdk-suite)
 (in-suite gdk-texture)
 
+;; TODO: Check the memory management more closely. Is the memory for the
+;; created textures being released correctly? In addition, check the memory
+;; management for the loaded resources.
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GDK_MEMORY_DEFAULT
@@ -318,6 +322,7 @@
 
 ;; TODO: Can we release the reference of the pixbuf from the texture
 
+#+nil
 (test gdk-texture-new-for-pixbuf
   (when *first-run-testsuite*
     (glib-test:with-check-memory ((pixbuf 2) texture :strong 1)
@@ -433,4 +438,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; 2026-02-05
+;;; 2026-08-14

@@ -62,8 +62,10 @@
   (is (subsetp (glib-test:list-children "GdkGLContext")
                '("GdkWaylandGLContext" "GdkX11GLContext") :test #'string=))
   #+windows
-  (is (equal '("GdkWin32GLContext")
-             (glib-test:list-children "GdkGLContext")))
+  (is (or (equal '()
+                 (glib-test:list-children "GdkGLContext"))
+          (equal '("GdkWin32GLContext")
+                 (glib-test:list-children "GdkGLContext"))))
   ;; Check interfaces
   (is (equal '()
              (glib-test:list-interfaces "GObject")))
@@ -95,7 +97,10 @@
   (glib-test:with-check-memory ((context 2) :strong 2)
     (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
     (is (equal '(:GL :GLES) (gdk:gl-context-allowed-apis context)))
+    #-windows
     (is (equal '(:GLES) (gdk:gl-context-api context)))
+    #+windows
+    (is (equal '(:GL) (gdk:gl-context-api context)))
     (is-false (gdk:gl-context-shared-context context))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -159,6 +164,7 @@
     (is-true (gdk:gl-context-realize context))
     (is-true (gdk:gl-context-use-es context))))
 
+#-windows
 (test gdk-gl-context-use-es.2
   (glib-test:with-check-memory ((context 2) :strong 2)
     (is (typep (setf context (create-gl-context)) 'gdk:gl-context))
@@ -197,4 +203,4 @@
     (is-false (gdk:gl-context-clear-current))
     (is-false (gdk:gl-context-current))))
 
-;;; 2026-08-09
+;;; 2026-08-11

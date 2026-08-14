@@ -139,4 +139,4 @@
     (is (equal '(1 2 3 4)
                (multiple-value-list (gdk:popup-layout-shadow-width layout))))))
 
-;;; 2024-9-18
+;;; 2024-09-18
