@@ -2,7 +2,7 @@
 ;;; gdk4.content-provider.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -244,6 +244,9 @@ lambda (provider)    :run-last
 ;;; gdk_content_provider_new_union
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Check the implemmentation again. Consider the case of taking ownership
+;; more generally.
+
 (cffi:defcfun ("gdk_content_provider_new_union" %content-provider-new-union)
     (g:object content-provider :return)
   (providers (:pointer (:pointer (g:object content-provider))))
@@ -277,7 +280,10 @@ lambda (provider)    :run-last
     @end{pre}
   @end{dictionary}
   @see-class{gdk:content-provider}"
-  (let ((data (apply 'vector (mapcar #'g:object-pointer providers))))
+  (let ((data (apply 'vector (mapcar #'g:object-pointer
+                                     ;; This function takes the ownerhship of
+                                     ;; of the object. We add a reference.
+                                     (mapcar #'g:object-ref providers)))))
     (cffi:with-foreign-array (pointer data `(:array (:pointer (g:object content-provider))
                                                     ,(length data)))
       (%content-provider-new-union pointer (length data)))))

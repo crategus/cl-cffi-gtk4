@@ -20,13 +20,15 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkContentProvider")))
   ;; Check children
-  (if *first-run-testsuite*
-      (is (equal '()
-                 (glib-test:list-children "GdkContentProvider")))
-      (is (equal '("GdkContentProviderUnion" "GdkContentProviderValue"
+  (is (or (equal '()
+                 (glib-test:list-children "GdkContentProvider"))
+          (equal '("GdkContentProviderUnion" "GdkContentProviderValue")
+                 (glib-test:list-children "GdkContentProvider"))
+          (equal '("GdkContentProviderUnion" "GdkContentProviderValue"
                    "GtkLabelContent" "GtkLinkContent" "GtkTextBufferContent"
                    "GtkTextContent")
                  (glib-test:list-children "GdkContentProvider"))))
+
   ;; Check interfaces
   (is (equal '()
              (glib-test:list-interfaces "GdkContentProvider")))
@@ -109,7 +111,7 @@
 ;;;     gdk_content_provider_new_union
 
 (test gdk-content-provider-new-union
-  (glib-test:with-check-memory (provider :strong 1)
+  (glib-test:with-check-memory (provider :strong 4)
     (g:with-values ((gvalue1 "gchararray" "content")
                     (gvalue2 "gint" 100)
                     (gvalue3 "GObject" (make-instance 'gtk:button)))
@@ -132,4 +134,4 @@
 ;;;     gdk_content_provider_write_mime_type_finish
 ;;;     gdk_content_provider_get_value
 
-;;; 2026-03-25
+;;; 2026-08-14

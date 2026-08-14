@@ -117,10 +117,8 @@
   (let ((first (gdk:content-formats-new "text/plain"))
         (second (gdk:content-formats-new "image/png")))
     (is-false (gdk:content-formats-match first second))
-    ;; FIXME: Does not return TRUE. What is wrong?
-;   (is-true (gdk:content-formats-match first
-;                                       (gdk:content-formats-union first second)))
-))
+    (is-true (gdk:content-formats-match first
+                                        (gdk:content-formats-union first second)))))
 
 ;;;     gdk_content_formats_match_gtype
 
@@ -140,10 +138,20 @@
   (let* ((first (gdk:content-formats-new "text/plain"))
          (second (gdk:content-formats-new "image/png"))
          (third (gdk:content-formats-union first second)))
-    ;; FIXME: Does not return FALSE. What is wrong?
-;   (is-false (gdk:content-formats-match-mime-type first second))
-    ;; FIXME: Does not return FALSE. What is wrong?
-;   (is-false (gdk:content-formats-match-mime-type second first))
+    ;; Check FIRST argument
+    (is-true (gdk:content-formats-contain-mime-type first "text/plain"))
+    (is (equal '("text/plain") (gdk:content-formats-mime-types first)))
+    ;; Check SECOND argument
+    (is-true (gdk:content-formats-contain-mime-type second "image/png"))
+    (is (equal '("image/png") (gdk:content-formats-mime-types second)))
+    ;; Check THIRD argument
+    (is-true (gdk:content-formats-contain-mime-type third "text/plain"))
+    (is-true (gdk:content-formats-contain-mime-type third "image/png"))
+    (is (equal '("text/plain" "image/png")
+               (gdk:content-formats-mime-types third)))
+    ;; Check function
+    (is-false (gdk:content-formats-match-mime-type first second))
+    (is-false (gdk:content-formats-match-mime-type second first))
     (is (string= "text/plain"
                  (gdk:content-formats-match-mime-type first third)))
     (is (string= "image/png"
@@ -167,7 +175,6 @@
 
 (test gdk-content-formats-union-serialize-gtypes
   (let ((formats (gdk:content-formats-new "text/plain" "image/png")))
-
     (is (string= "GdkTexture GdkPixbuf gchararray GskRenderNode text/plain image/png"
                  (gdk:content-formats-to-string
                    (gdk:content-formats-union-serialize-gtypes formats))))))
@@ -203,4 +210,4 @@
                  (gdk:content-formats-to-string
                    (gdk:content-formats-union-serialize-mime-types formats))))))
 
-;;; 2026-04-02
+;;; 2026-08-14

@@ -2,7 +2,7 @@
 ;;; gdk4.content-formats.lisp
 ;;;
 ;;; The documentation in this file is taken from the GDK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GDK library,
+;;; version 4.22 and modified to document the Lisp binding to the GDK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -179,7 +179,8 @@
 ;;; gdk_intern_mime_type
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_intern_mime_type" intern-mime-type) :string
+(cffi:defcfun ("gdk_intern_mime_type" intern-mime-type)
+    (:string :free-from-foreign nil)
  #+liber-documentation
  "@version{2026-01-20}
   @argument[str]{a string for the potential MIME type}
@@ -361,7 +362,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
-    g:strv-t
+    (g:strv-t :free-from-foreign nil)
   (formats (g:boxed content-formats))
   (n-mtypes :pointer))
 
@@ -384,10 +385,19 @@
 ;;; gdk_content_formats_union
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_content_formats_union" content-formats-union)
+;; The C function takes ownership of the first argument and modifies it.
+;; Therefore, we pass in a copy of the first argument.
+;;
+;; TODO: Improve the GLIB::BOXED-COPY function and consider to export it.
+
+(cffi:defcfun ("gdk_content_formats_union" %content-formats-union)
     (g:boxed content-formats :return)
+  (first (g:boxed content-formats))
+  (second (g:boxed content-formats)))
+
+(defun content-formats-union (first second)
  #+liber-documentation
- "@version{2026-01-20}
+ "@version{2026-08-14}
   @argument[first]{a @class{gdk:content-formats} instance to merge into}
   @argument[second]{a @class{gdk:content-formats} instance to merge from}
   @return{The new @class{gdk:content-formats} instance.}
@@ -396,8 +406,8 @@
     they had in @arg{second}.
   @end{short}
   @see-class{gdk:content-formats}"
-  (first (g:boxed content-formats))
-  (second (g:boxed content-formats)))
+  (let ((first (glib::boxed-copy "GdkContentFormats" (glib:pointer first))))
+    (%content-formats-union first second)))
 
 (export 'content-formats-union)
 
@@ -448,9 +458,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_match_mime_type"
-               content-formats-match-mime-type) (:string :free-from-foreign nil)
+               content-formats-match-mime-type) :string
  #+liber-documentation
- "@version{2026-04-02}
+ "@version{2026-08-14}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
   @begin{return}
@@ -510,7 +520,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
-               content-formats-union-serialize-gtypes) (g:boxed content-formats)
+               content-formats-union-serialize-gtypes)
+    (g:boxed content-formats :return)
  #+liber-documentation
  "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -531,7 +542,7 @@
 
 (cffi:defcfun ("gdk_content_formats_union_deserialize_gtypes"
                content-formats-union-deserialize-gtypes)
-    (g:boxed content-formats)
+    (g:boxed content-formats :return)
  #+liber-documentation
  "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -552,7 +563,7 @@
 
 (cffi:defcfun ("gdk_content_formats_union_serialize_mime_types"
                content-formats-union-serialize-mime-types)
-    (g:boxed content-formats)
+    (g:boxed content-formats :return)
  #+liber-documentation
  "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
@@ -573,7 +584,7 @@
 
 (cffi:defcfun ("gdk_content_formats_union_deserialize_mime_types"
                content-formats-union-deserialize-mime-types)
-    (g:boxed content-formats)
+    (g:boxed content-formats :return)
  #+liber-documentation
  "@version{2026-04-02}
   @argument[formats]{a @class{gdk:content-formats} instance}
