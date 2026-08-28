@@ -2,7 +2,7 @@
 ;;; gtk4.progress-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; cersion 4.20 and modified to document the Lisp binding to the GTK library,
+;;; cersion 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -198,15 +198,15 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-ellipsize)
       "Accessor"
       (documentation 'progress-bar-ellipsize 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-ellipsize object) => mode}
   @syntax{(setf (gtk:progress-bar-ellipsize object) mode)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[mode]{a value of the @sym{pango:ellipsize-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{ellipsize} slot of the
-    @class{gtk:progress-bar} class gets or sets the mode used to ellipsize the
-    text if there is not enough space to render the entire string.
+    The accessor for the @slot[gtk:progress-bar]{ellipsize} slot gets or sets
+    the mode used to ellipsize the text if there is not enough space to render
+    the entire string.
   @end{short}
   @see-class{gtk:progress-bar}
   @see-symbol{pango:ellipsize-mode}")
@@ -224,16 +224,15 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-fraction)
       "Accessor"
       (documentation 'progress-bar-fraction 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-fraction object) => fraction}
   @syntax{(setf (gtk:progress-bar-fraction object) fraction)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[fraction]{a number coerced to a double float for the fraction of
     the task that is been completed}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{fraction} slot of the
-    @class{gtk:progress-bar} class gets or sets the fraction of total work that
-    has been completed.
+    The accessor for the @slot[gtk:progress-bar]{fraction} slot gets or sets
+    the fraction of total work that has been completed.
   @end{short}
   The fraction should be between 0.0 and 1.0, inclusive.
   @see-class{gtk:progress-bar}")
@@ -250,15 +249,14 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-inverted)
       "Accessor"
       (documentation 'progress-bar-inverted 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-inverted object) => inverted}
   @syntax{(setf (gtk:progress-bar-inverted object) inverted)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[inverted]{@em{true} to invert the progress bar}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{inverted} slot of the
-    @class{gtk:progress-bar} class gets or sets the invert direction in which
-    the progess bar grows.
+    The accessor for the @slot[gtk:progress-bar]{inverted} slot gets or sets
+    the invert direction in which the progess bar grows.
   @end{short}
   Progress bars normally grow from top to bottom or left to right. Inverted
   progress bars grow in the opposite direction.
@@ -277,17 +275,16 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-pulse-step)
       "Accessor"
       (documentation 'progress-bar-pulse-step 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-pulse-step object) => step}
   @syntax{(setf (gtk:progress-bar-pulse-step object) step)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[step]{a number coerced to a double float for the fraction between
     0.0 and 1.0}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{pulse-step} slot of the
-    @class{gtk:progress-bar} class gets or sets the fraction of total progress
-    bar length to move the bouncing block for each call to the
-    @fun{gtk:progress-bar-pulse} function.
+    The accessor for the @slot[gtk:progress-bar]{pulse-step} slot gets or sets
+    the fraction of total progress bar length to move the bouncing block for
+    each call to the @fun{gtk:progress-bar-pulse} function.
   @end{short}
   The pulse step is a fraction from 0.0 to 1.0.
   @see-class{gtk:progress-bar}
@@ -312,15 +309,14 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-show-text)
       "Accessor"
       (documentation 'progress-bar-show-text 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-show-text object) => setting}
   @syntax{(setf (gtk:progress-bar-show-text object) setting)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[setting]{a boolean whether to show superimposed text}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{show-text} slot of the
-    @class{gtk:progress-bar} class gets or sets whether the progress bar will
-    show text superimposed over the progress bar.
+    The accessor for the @slot[gtk:progress-bar]{show-text} slot gets or sets
+    whether the progress bar will show text superimposed over the progress bar.
   @end{short}
   The shown text is either the value of the @slot[gtk:progress-bar]{text}
   property or, if that is @code{nil}, the @slot[gtk:progress-bar]{fraction}
@@ -346,15 +342,14 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-text)
       "Accessor"
       (documentation 'progress-bar-text 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:progress-bar-text object) => text}
   @syntax{(setf (gtk:progress-bar-text object) text)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[text]{a UTF-8 string}
   @begin{short}
-    The accessor for the @slot[gtk:progress-bar]{text} slot of the
-    @class{gtk:progress-bar} class gets or sets the text displayed superimposed
-    on the progress bar.
+    The accessor for the @slot[gtk:progress-bar]{text} slot gets or sets the
+    text displayed superimposed on the progress bar.
   @end{short}
   If the @arg{text} argument is @code{nil} and the
   @slot[gtk:progress-bar]{show-text} property is @em{true}, the current value

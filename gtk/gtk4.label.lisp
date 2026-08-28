@@ -2,7 +2,7 @@
 ;;; gtk4.label.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -150,6 +150,7 @@
   (:superclass widget
    :export t
    :interfaces ("GtkAccessibleText"
+                #+gtk-4-22 "GtkAccessibleHypertext"
                 "GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget")
@@ -526,14 +527,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-attributes)
       "Accessor"
       (documentation 'label-attributes 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-attributes object) => attrs}
   @syntax{(setf (gtk:label-attributes object) attrs)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[attrs]{a @class{pango:attr-list} instance}
   @begin{short}
-    The accessor for the @slot[gtk:label]{attributes} slot of the
-    @class{gtk:label} class gets or sets the attribute list on the label.
+    The accessor for the @slot[gtk:label]{attributes} slot gets or sets the
+    attribute list on the label.
   @end{short}
   The attributes in the list are applied to the label text.
 
@@ -580,14 +581,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-ellipsize)
       "Accessor"
       (documentation 'label-ellipsize 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-ellipsize object) => mode}
   @syntax{(setf (gtk:label-ellipsize object) mode)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[mode]{a value of the @sym{pango:ellipsize-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:label]{ellipsize} slot of the
-    @class{gtk:label} class gets or sets the mode used to ellipsize the label.
+    The accessor for the @slot[gtk:label]{ellipsize} slot gets or sets the mode
+    used to ellipsize the label.
   @end{short}
   Adds an ellipsis: \"...\", to the text if there is not enough space to render
   the entire string.
@@ -606,15 +607,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-extra-menu)
       "Accessor"
       (documentation 'label-extra-menu 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-extra-menu object) => menu}
   @syntax{(setf (gtk:label-extra-menu object) menu)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:label]{extra-menu} slot of the
-    @class{gtk:label} class gets or sets the menu model to add when constructing
-    the context menu for the label.
+    The accessor for the @slot[gtk:label]{extra-menu} slot gets or sets the
+    menu model to add when constructing the context menu for the label.
   @end{short}
   @see-class{gtk:label}
   @see-class{g:menu-model}")
@@ -634,15 +634,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-justify)
       "Accessor"
       (documentation 'label-justify 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-justify object) => justify}
   @syntax{(setf (gtk:label-justify object) justify)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[justify]{a value of the @sym{gtk:justification} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:label]{justify} slot of the @class{gtk:label}
-    class gets or sets the alignment of the lines in the text of the label
-    relative to each other.
+    The accessor for the @slot[gtk:label]{justify} slot gets or sets the
+    alignment of the lines in the text of the label relative to each other.
   @end{short}
 
   The @val[gtk:justification]{:left} value is the default value when the widget
@@ -667,15 +666,15 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-label)
       "Accessor"
       (documentation 'label-label 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-label object) => text}
   @syntax{(setf (gtk:label-label object) text)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[text]{a string for the text of the label}
   @begin{short}
-    The accessor for the @slot[gtk:label]{label} slot of the @class{gtk:label}
-    class gets or sets the text of the label widget including any embedded
-    underlines indicating mnemonics and Pango markup.
+    The accessor for the @slot[gtk:label]{label} slot gets or sets the text of
+    the label widget including any embedded underlines indicating mnemonics and
+    Pango markup.
   @end{short}
   The label is interpreted as including embedded underlines and/or Pango markup
   depending on the values of the @slot[gtk:label]{use-underline} and
@@ -703,15 +702,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-lines)
       "Accessor"
       (documentation 'label-lines 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-lines object) => lines}
   @syntax{(setf (gtk:label-lines object) lines)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[lines]{an integer for the desired number of lines, or -1}
   @begin{short}
-    The accessor for the @slot[gtk:label]{lines} slot of the @class{gtk:label}
-    class gets or sets the number of lines to which an ellipsized, wrapping
-    label should be limited.
+    The accessor for the @slot[gtk:label]{lines} slot gets or sets the number
+    of lines to which an ellipsized, wrapping label should be limited.
   @end{short}
   This has no effect if the label is not wrapping or ellipsized. Set this to -1
   if you do not want to limit the number of lines.
@@ -734,15 +732,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-max-width-chars)
       "Accessor"
       (documentation 'label-max-width-chars 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-max-width-chars object) => chars}
   @syntax{(setf (gtk:label-max-width-chars object) chars)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[chars]{an integer for the desired maximum width, in characters}
   @begin{short}
-    The accessor for the @slot[gtk:label]{max-width-chars} slot of the
-    @class{gtk:label} class gets or sets the maximum width of the label in
-    characters.
+    The accessor for the @slot[gtk:label]{max-width-chars} slot gets or sets
+    the maximum width of the label in characters.
   @end{short}
   @see-class{gtk:label}")
 
@@ -758,13 +755,13 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-keyval)
       "Accessor"
       (documentation 'label-mnemonic-keyval 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-mnemonic-keyval object) => keyval}
   @argument[object]{a @class{gtk:label} widget}
   @argument[keyval]{an unsigned integer for the keyval}
   @begin{short}
-    The accessor for the @slot[gtk:label]{mnemonic-keyval} slot of the
-    @class{gtk:label} class gets the mnemonic accelerator key for this label.
+    The accessor for the @slot[gtk:label]{mnemonic-keyval} slot gets the
+    mnemonic accelerator key for this label.
   @end{short}
   If there is no mnemonic set up it returns @code{#xffffff}.
   @begin[Examples]{dictionary}
@@ -788,15 +785,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-widget)
       "Accessor"
       (documentation 'label-mnemonic-widget 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-mnemonic-widget object) => widget}
   @syntax{(setf (gtk:label-mnemonic-widget object) widget)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[widget]{a @class{gtk:widget} target}
   @begin{short}
-    The accessor for the @slot[gtk:label]{mnemonic-widget} slot of the
-    @class{gtk:label} class gets or sets the target of the mnemonic of the
-    label.
+    The accessor for the @slot[gtk:label]{mnemonic-widget} slot gets or sets
+    the target of the mnemonic of the label.
   @end{short}
   Returns @code{nil} if none has been set and the default algorithm will be
   used.
@@ -840,16 +836,15 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-natural-wrap-mode)
       "Accessor"
       (documentation 'label-natural-wrap-mode 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-natural-wrap-mode object) => mode}
   @syntax{(setf (gtk:label-natural-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[mode]{a @sym{gtk:natural-wrap-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:label]{natural-wrap-mode} slot of the
-    @class{gtk:label} class gets or sets the line wrap mode used by the label.
+    The accessor for the @slot[gtk:label]{natural-wrap-mode} slot gets or sets
+    the line wrap mode used by the label.
   @end{short}
-
   This only affects the natural size requested, for the actual wrapping used,
   see the @slot[gtk:label]{wrap-mode} property.
 
@@ -869,15 +864,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-selectable)
       "Accessor"
       (documentation 'label-selectable 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-selectable object) => selectable}
   @syntax{(setf (gtk:label-selectable object) selectable)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[selectable]{@em{true} to allow selecting text in the label}
   @begin{short}
-    The accessor for the @slot[gtk:label]{selectable} slot of the
-    @class{gtk:label} class gets or sets wheter the label text can be selected
-    with the mouse.
+    The accessor for the @slot[gtk:label]{selectable} slot gets or sets wheter
+    the label text can be selected with the mouse.
   @end{short}
   Selectable labels allow the user to select text from the label for copy and
   paste.
@@ -900,15 +894,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-single-line-mode)
       "Accessor"
       (documentation 'label-single-line-mode 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-single-line-mode object) => mode}
   @syntax{(setf (gtk:label-single-line-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[mode]{@em{true} if the label should be in single line mode}
   @begin{short}
-    The accessor for the @slot[gtk:label]{single-line-mode} slot of the
-    @class{gtk:label} class gets or sets whether the label is in single line
-    mode.
+    The accessor for the @slot[gtk:label]{single-line-mode} slot gets or sets
+    whether the label is in single line mode.
   @end{short}
   @see-class{gtk:label}")
 
@@ -923,14 +916,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-tabs)
       "Accessor"
       (documentation 'label-tabs 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-tabs object) => tabs}
   @syntax{(setf (gtk:label-tabs object) tabs)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[tabs]{a @class{pango:tab-array} instance for the tabs}
   @begin{short}
-    The accessor for the @slot[gtk:label]{tabs} slot of the @class{gtk:label}
-    class gets or sets the default tab stops for paragraphs in the label.
+    The accessor for the @slot[gtk:label]{tabs} slot gets or sets the default
+    tab stops for paragraphs in the label.
   @end{short}
   The returned array will be @code{nil} if \"standard\" (8-space) tabs are used.
 
@@ -950,16 +943,16 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-markup)
       "Accessor"
       (documentation 'label-use-markup 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-use-markup object) => setting}
   @syntax{(setf (gtk:label-use-markup object) setting)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[setting]{@em{true} if the text of the label should be parsed for
     markup}
   @begin{short}
-    The accessor for the @slot[gtk:label]{use-markup} slot of the
-    @class{gtk:label} class gets or sets whether the text of the label is
-    interpreted as marked up with the Pango text markup language.
+    The accessor for the @slot[gtk:label]{use-markup} slot gets or sets whether
+    the text of the label is interpreted as marked up with the Pango text
+    markup language.
   @end{short}
   See the @fun{gtk:label-set-markup} function.
   @see-class{gtk:label}
@@ -978,15 +971,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-underline)
       "Accessor"
       (documentation 'label-use-underline 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-use-underline object) => setting}
   @syntax{(setf (gtk:label-use-underline object) setting)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[setting]{@em{true} if underlines in the text indicate mnemonics}
   @begin{short}
-    The accessor for the @slot[gtk:label]{use-underline} slot of the
-    @class{gtk:label} class gets or sets whether an embedded underline in the
-    label indicates a mnemonic.
+    The accessor for the @slot[gtk:label]{use-underline} slot gets or sets
+    whether an embedded underline in the label indicates a mnemonic.
   @end{short}
   If @em{true}, an underline in the text indicates the next character should be
   used for the mnemonic accelerator key.
@@ -1009,15 +1001,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-width-chars)
       "Accessor"
       (documentation 'label-width-chars 'function)
- "@version{2025-08-28}
+ "@version{2026-07-21}
   @syntax{(gtk:label-width-chars object) => chars}
   @syntax{(setf (gtk:label-width-chars object) chars)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[chars]{an integer for the new desired width, in characters}
   @begin{short}
-    The accessor for the @slot[gtk:label]{width-chars} slot of the
-    @class{gtk:label} class gets or sets the desired width of the label, in
-    characters.
+    The accessor for the @slot[gtk:label]{width-chars} slot gets or sets the
+    desired width of the label, in characters.
   @end{short}
   @see-class{gtk:label}")
 
@@ -1033,14 +1024,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap)
       "Accessor"
       (documentation 'label-wrap 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-wrap object) => wrap}
   @syntax{(setf (gtk:label-wrap object) wrap)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[wrap]{a boolean whether lines are wrapped}
   @begin{short}
-    The accessor for the @slot[gtk:label]{wrap} slot of the @class{gtk:label}
-    class whether lines are wrapped.
+    The accessor for the @slot[gtk:label]{wrap} slot gets or sets whether lines
+    are wrapped.
   @end{short}
   If set, wrap lines if the text becomes too wide.
   @see-class{gtk:label}")
@@ -1060,14 +1051,14 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap-mode)
       "Accessor"
       (documentation 'label-wrap-mode 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-wrap-mode object) => setting}
   @syntax{(setf (gtk:label-wrap-mode object) setting)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[setting]{a value of the @sym{pango:wrap-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:label]{wrap-mode} slot of the
-    @class{gtk:label} class gets or sets whether line wrapping is on.
+    The accessor for the @slot[gtk:label]{wrap-mode} slot gets or sets whether
+    line wrapping is on.
   @end{short}
   If line wrapping is on, see the @slot[gtk:label]{wrap} property, this controls
   how the line wrapping is done. The default is @val[pango:wrap-mode]{:word},
@@ -1092,16 +1083,15 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-xalign)
       "Accessor"
       (documentation 'label-xalign 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-xalign object) => xalign}
   @syntax{(setf (gtk:label-xalign object) xalign)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[xalign]{a number coerced to a single float for the horizontal
     alignment, between 0.0 and 1.0}
   @begin{short}
-    The accessor for the @slot[gtk:label]{xalign} slot of the @class{gtk:label}
-    class gets or sets the horizontal alignment of the label inside the size
-    allocation of the label.
+    The accessor for the @slot[gtk:label]{xalign} slot gets or sets the
+    horizontal alignment of the label inside the size allocation of the label.
   @end{short}
   @see-class{gtk:label}
   @see-function{gtk:label-yalign}
@@ -1123,16 +1113,15 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-yalign)
       "Accessor"
       (documentation 'label-yalign 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:label-yalign object) => yalign}
   @syntax{(setf (gtk:label-yalign object) yalign)}
   @argument[object]{a @class{gtk:label} widget}
   @argument[yalign]{a number coerced to a single float for the vertical
     alignment, between 0.0 and 1.0}
   @begin{short}
-    The accessor for the @slot[gtk:label]{yalign} slot of the @class{gtk:label}
-    class gets or sets the vertical alignment of the label text inside the size
-    allocation of the label.
+    The accessor for the @slot[gtk:label]{yalign} slot gets or sets the vertical
+    alignment of the label text inside the size allocation of the label.
   @end{short}
   @see-class{gtk:label}
   @see-function{gtk:label-yalign}
@@ -1436,5 +1425,22 @@ lambda (label step count extend)    :action
   (label (g:object label)))
 
 (export 'label-current-uri)
+
+;;; ----------------------------------------------------------------------------
+;;; Implementation of GtkAccessibleText for GtkLabel
+;;; ----------------------------------------------------------------------------
+
+;; TODO: This is the virtual method, that has been installed from the Lisp side.
+;; It is preferable to invoke the C virtual method instead. To do this, we need
+;; to improve the implementation of the GOBJECT:DEFINE-TABLE macro.
+
+(defmethod accessible-range-get-contents-impl
+           ((accessible label) start end)
+  (let* ((str (label-text accessible))
+         (len (length str)))
+    (setf start (max 0 (min start len)))
+    (setf end (max 0 (min end len)))
+    (when (< end start) (setf end start))
+    (g:bytes-new-from-string (subseq str start end))))
 
 ;;; --- End of file gtk4.label.lisp --------------------------------------------

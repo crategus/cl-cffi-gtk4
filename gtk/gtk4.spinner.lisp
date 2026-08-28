@@ -2,7 +2,7 @@
 ;;; gtk4.spinner.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -122,14 +122,14 @@
 (setf (liber:alias-for-function 'spinner-spinning)
       "Accessor"
       (documentation 'spinner-spinning 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:spinner-spinning object) => spinning}
   @syntax{(setf (gtk:spinner-spinning object) spinning)}
   @argument[object]{a @class{gtk:spinner} widget}
   @argument[spinning]{a boolean whether the spinner is spinning}
   @begin{short}
-    The accessor for the @slot[gtk:spinner]{spinning} slot of the
-    @class{gtk:spinner} class gets or sets whether the spinner is spinning.
+    The accessor for the @slot[gtk:spinner]{spinning} slot gets or sets whether
+    the spinner is spinning.
   @end{short}
   @see-class{gtk:spinner}")
 

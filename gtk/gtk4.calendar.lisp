@@ -2,7 +2,7 @@
 ;;; gtk4.calendar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -256,14 +256,14 @@ lambda (calendar)    :run-first
 #+gtk-4-20
 (defun calendar-date (object)
  #+liber-documentation
- "@version{2025-12-05}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-date object) => date}
   @syntax{(setf (gtk:calendar-date object) date)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[date]{an unsigned integer for the Lisp universal time}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{date} slot of the
-    @class{gtk:calendar} class gets or sets the date of the calendar.
+    The accessor for the @slot[gtk:calendar]{date} slot gets or sets the date
+    of the calendar.
   @end{short}
   The date represents the shown year, month and the selected day.
 
@@ -289,15 +289,15 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2025-12-05}
+ "@version{2026-07-21}
   @syntax{(gtk:calender-day object) => day}
   @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[day]{an integer for the selected day}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{day} slot of the
-    @class{gtk:calendar} class gets or sets the selected day as a number between
-    1 and 31, or 0 to unselect the currently selected day.
+    The accessor for the @slot[gtk:calendar]{day} slot gets or sets the
+    selected day as a number between 1 and 31, or 0 to unselect the currently
+    selected day.
   @end{short}
   This property gets initially set to the current day.
   @begin[Warning]{dictionary}
@@ -322,15 +322,14 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2025-12-05}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-month object) => month}
   @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[month]{an integer for the selected month}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{month} slot of the
-    @class{gtk:calendar} class gets or sets the selected month as a number
-    between 0 and 11.
+    The accessor for the @slot[gtk:calendar]{month} slot gets or sets the
+    selected month as a number between 0 and 11.
   @end{short}
   This property gets initially set to the current month.
   @begin[Warning]{dictionary}
@@ -353,14 +352,14 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-day-names)
       "Accessor"
       (documentation 'calendar-show-day-names 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-show-day-names object) => setting}
   @syntax{(setf (gtk:calendar-show-day-names object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether day names are displayed}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{show-day-names} slot of the
-    @class{gtk:calendar} class gets or sets whether day names are displayed.
+    The accessor for the @slot[gtk:calendar]{show-day-names} slot gets or sets
+    whether day names are displayed.
   @end{short}
   @see-class{gtk:calendar}")
 
@@ -376,14 +375,14 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-heading)
       "Accessor"
       (documentation 'calendar-show-heading 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-show-heading object) => setting}
   @syntax{(setf (gtk:calendar-show-heading object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether a heading is displayed}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{show-heading} slot of the
-    @class{gtk:calendar} class gets or sets whether a heading is displayed.
+    The accessor for the @slot[gtk:calendar]{show-heading} slot gets or sets
+    whether a heading is displayed.
   @end{short}
   @see-class{gtk:calendar}")
 
@@ -400,14 +399,14 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-week-numbers)
       "Accessor"
       (documentation 'calendar-show-week-numbers 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-show-week-numbers object) => setting}
   @syntax{(setf (gtk:calendar-show-week-numbers object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[setting]{a boolean whether week numbers are displayed}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{show-week-numbers} slot of the
-    @class{gtk:calendar} class gets or sets whether week numbers are displayed.
+    The accessor for the @slot[gtk:calendar]{show-week-numbers} slot gets or
+    sets whether week numbers are displayed.
   @end{short}
   @see-class{gtk:calendar}")
 
@@ -425,14 +424,14 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2025-12-05}
+ "@version{2026-07-21}
   @syntax{(gtk:calendar-year object) => year}
   @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[year]{an integer for the selected year}
   @begin{short}
-    The accessor for the @slot[gtk:calendar]{year} slot of the
-    @class{gtk:calendar} class gets or sets the selected year.
+    The accessor for the @slot[gtk:calendar]{year} slot gets or sets the
+    selected year.
   @end{short}
   This property gets initially set to the current year.
   @begin[Warning]{dictionary}

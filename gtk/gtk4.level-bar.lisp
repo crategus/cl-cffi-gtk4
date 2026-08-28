@@ -2,7 +2,7 @@
 ;;; gtk4.level-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -280,14 +280,14 @@ lambda (levelbar name)    :detailed
 (setf (liber:alias-for-function 'level-bar-inverted)
       "Accessor"
       (documentation 'level-bar-inverted 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:level-bar-inverted object) => inverted}
   @syntax{(setf (gtk:level-bar-inverted object) inverted)}
   @argument[object]{a @class{gtk:level-bar} widget}
   @argument[inverted]{@em{true} to invert the level bar}
   @begin{short}
-    The accessor for the @slot[gtk:level-bar]{inverted} slot of the
-    @class{gtk:level-bar} class sets or gets whether the level bar is inverted.
+    The accessor for the @slot[gtk:level-bar]{inverted} slot gets or sets
+    whether the level bar is inverted.
   @end{short}
   Level bars normally grow from top to bottom or left to right. Inverted level
   bars grow in the opposite direction.
@@ -307,15 +307,14 @@ lambda (levelbar name)    :detailed
 (setf (liber:alias-for-function 'level-bar-max-value)
       "Accessor"
       (documentation 'level-bar-max-value 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:level-bar-max-value object) => value}
   @syntax{(setf (gtk:level-bar-max-value object) value)}
   @argument[object]{a @class{gtk:level-bar} widget}
   @argument[value]{a number coerced to a double float for a positive value}
   @begin{short}
-    The accessor for the @slot[gtk:level-bar]{max-value} slot of the
-    @class{gtk:level-bar} class gets or sets the maximum value of the interval
-    that can be displayed by the level bar.
+    The accessor for the @slot[gtk:level-bar]{max-value} slot gets or sets the
+    maximum value of the interval that can be displayed by the level bar.
   @end{short}
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-min-value}")
@@ -334,15 +333,14 @@ lambda (levelbar name)    :detailed
 (setf (liber:alias-for-function 'level-bar-min-value)
       "Accessor"
       (documentation 'level-bar-min-value 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:level-bar-min-value object) => value}
   @syntax{(setf (gtk:level-bar-min-value object) value)}
   @argument[object]{a @class{gtk:level-bar} widget}
   @argument[value]{a number coerced to a double float for a positive value}
   @begin{short}
-    The accessor for the @slot[gtk:level-bar]{min-value} slot of the
-    @class{gtk:level-bar} class gets or sets the miminum value of the interval
-    that can be displayed by the level bar.
+    The accessor for the @slot[gtk:level-bar]{min-value} slot gets or sets the
+    miminum value of the interval that can be displayed by the level bar.
   @end{short}
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-max-value}")
@@ -367,15 +365,14 @@ lambda (levelbar name)    :detailed
 (setf (liber:alias-for-function 'level-bar-mode)
       "Accessor"
       (documentation 'level-bar-mode 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:level-bar-mode object) => mode}
   @syntax{(setf (gtk:level-bar-mode object) mode)}
   @argument[object]{a @class{gtk:level-bar} widget}
   @argument[mode]{a value of the @sym{gtk:level-bar-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:level-bar]{mode} slot of the
-    @class{gtk:level-bar} class gets or sets the way a level bar interprets the
-    value properties to draw the level fill area.
+    The accessor for the @slot[gtk:level-bar]{mode} slot gets or sets the way
+    a level bar interprets the value properties to draw the level fill area.
   @end{short}
   @see-class{gtk:level-bar}
   @see-symbol{gtk:level-bar-mode}")
@@ -393,7 +390,7 @@ lambda (levelbar name)    :detailed
 (setf (liber:alias-for-function 'level-bar-value)
       "Accessor"
       (documentation 'level-bar-value 'function)
- "@version{2025-08-04}
+ "@version{2026-07-21}
   @syntax{(gtk:level-bar-value object) >= value}
   @syntax{(setf (gtk:level-bar-value object) value)}
   @argument[object]{a @class{gtk:level-bar} widget}
@@ -401,9 +398,8 @@ lambda (levelbar name)    :detailed
     interval between the @slot[gtk:level-bar]{min-value} and
     @slot[gtk:level-bar]{max-value} values}
   @begin{short}
-    The accessor for the @slot[gtk:level-bar]{value} slot of the
-    @class{gtk:level-bar} class gets or sets the currently filled value of the
-    level bar.
+    The accessor for the @slot[gtk:level-bar]{value} slot gets or sets the
+    currently filled value of the level bar.
   @end{short}
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-min-value}
