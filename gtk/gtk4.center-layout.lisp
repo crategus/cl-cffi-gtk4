@@ -2,7 +2,7 @@
 ;;; gtk4.center-layout.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -115,15 +115,15 @@
 (setf (liber:alias-for-function 'center-layout-shrink-center-last)
       "Accessor"
       (documentation 'center-layout-shrink-center-last 'function)
- "@version{2025-08-01}
+ "@version{2026-07-20}
   @syntax{(gtk:center-layout-shrink-center-last object) => setting}
   @syntax{(setf (gtk:center-layout-shrink-center-last object) setting)}
   @argument[object]{a @class{gtk:center-layout} object}
   @argument[setting]{a boolean whether to shrink the center widget after others}
   @begin{short}
-    The accessor for the @slot[gtk:center-layout]{shrink-center-last} slot of
-    the @class{gtk:center-layout} class gets or sets whether @arg{object}
-    shrinks the center widget after other children.
+    The accessor for the @slot[gtk:center-layout]{shrink-center-last} slot
+    gets or sets whether @arg{object} shrinks the center widget after other
+    children.
   @end{short}
 
   By default, when there is no space to give all three children their natural

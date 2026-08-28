@@ -46,16 +46,16 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-fixed-layout-child-transform
-  (let ((fixed (make-instance 'gtk:fixed))
-        (button (make-instance 'gtk:button))
-        layout childlayout)
+  (glib-test:with-check-memory (layout childlayout fixed button)
+    (is (typep (setf fixed (make-instance 'gtk:fixed)) 'gtk:fixed))
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
     ;; Put button in the fixed widget
     (is-false (gtk:fixed-put fixed button 10 20))
     ;; Get Layout Manager and Layout Manager for child widget
-    (is (typep (setf layout (gtk:widget-layout-manager fixed))
-               'gtk:layout-manager))
+    (is (typep (setf layout
+                     (gtk:widget-layout-manager fixed)) 'gtk:layout-manager))
     (is (typep (setf childlayout
-                    (gtk:layout-manager-layout-child layout button))
+                     (gtk:layout-manager-layout-child layout button))
                'gtk:fixed-layout-child))
     (is (eq button (gtk:layout-child-child-widget childlayout)))
     (is (eq layout (gtk:layout-child-layout-manager childlayout)))
@@ -68,12 +68,7 @@
 
     (is-false (gtk:fixed-remove fixed button))
     (is-false (setf (gtk:widget-layout-manager button) nil))
-    (is-false (setf (gtk:widget-layout-manager fixed) nil))
-
-    (is (= 1 (g:object-ref-count fixed)))
-    (is (= 1 (g:object-ref-count button)))
-    (is (= 1 (g:object-ref-count layout)))
-    (is (= 1 (g:object-ref-count childlayout)))))
+    (is-false (setf (gtk:widget-layout-manager fixed) nil))))
 
 ;;;     GtkFixedLayout
 
@@ -115,6 +110,7 @@
 ;;;     gtk_fixed_layout_new
 
 (test gtk-fixed-layout-new
-  (is (typep (gtk:fixed-layout-new) 'gtk:fixed-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:fixed-layout-new)) 'gtk:fixed-layout))))
 
-;;; 2024-9-19
+;;; 2026-07-20

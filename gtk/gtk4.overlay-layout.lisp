@@ -2,7 +2,7 @@
 ;;; gtk4.overlay-layout.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -108,15 +108,14 @@
 (setf (liber:alias-for-function 'overlay-layout-child-clip-overlay)
       "Accessor"
       (documentation 'overlay-layout-child-clip-overlay 'function)
- "@version{#2025-08-03}
+ "@version{2026-07-20}
   @syntax{(gtk:overlay-layout-child-clip-overlay object) => clip}
   @syntax{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[clip]{a boolean whether the child widget is clipped}
   @begin{short}
-    The accessor for the @slot[gtk:overlay-layout-child]{clip-overlay} slot of
-    the @class{gtk:overlay-layout-child} class gets or sets whether the child
-    widget is clipped.
+    The accessor for the @slot[gtk:overlay-layout-child]{clip-overlay} slot
+    gets or sets whether the child widget is clipped.
   @end{short}
   @see-class{gtk:overlay-layout-child}")
 
@@ -134,15 +133,14 @@
 (setf (liber:alias-for-function 'overlay-layout-child-measure)
       "Accessor"
       (documentation 'overlay-layout-child-measure 'function)
- "@version{#2025-08-03}
+ "@version{2026-07-20}
   @syntax{(gtk:overlay-layout-child-measure object) => measure}
   @syntax{(setf (gtk:overlay-layout-child-measure object) measure)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[measure]{a boolean whether to measure the child widget}
   @begin{short}
-    The accessor for the @slot[gtk:overlay-layout-child]{measure} slot of the
-    @class{gtk:overlay-layout-child} class gets or sets whether the child widget
-    is measured.
+    The accessor for the @slot[gtk:overlay-layout-child]{measure} slot gets or
+    sets whether the child widget is measured.
   @end{short}
   @see-class{gtk:overlay-layout-child}")
 

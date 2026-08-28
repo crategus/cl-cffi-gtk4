@@ -15,8 +15,7 @@
           (glib:symbol-for-gtype "GtkConstraintGuide")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkConstraintGuide")
-          (g:gtype (cffi:foreign-funcall "gtk_constraint_guide_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_constraint_guide_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkConstraintGuide")))
@@ -59,7 +58,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-constraint-guide-properties
-  (let ((guide (make-instance 'gtk:constraint-guide)))
+  (glib-test:with-check-memory (guide)
+    (is (typep (setf guide
+                     (make-instance 'gtk:constraint-guide)) 'gtk:constraint-guide))
     (is (= 2147483647 (gtk:constraint-guide-max-height guide)))
     (is (= 2147483647 (gtk:constraint-guide-max-width guide)))
     (is (= 0 (gtk:constraint-guide-min-height guide)))
@@ -74,7 +75,8 @@
 ;;;     gtk_constraint_guide_new
 
 (test gtk-constraint-guide-new
-  (is (typep (gtk:constraint-guide-new) 'gtk:constraint-guide)))
+  (glib-test:with-check-memory (guide)
+    (is (typep (setf guide (gtk:constraint-guide-new)) 'gtk:constraint-guide))))
 
 ;;;     gtk_constraint_guide_set_min_size
 ;;;     gtk_constraint_guide_get_min_size
@@ -83,4 +85,4 @@
 ;;;     gtk_constraint_guide_set_max_size
 ;;;     gtk_constraint_guide_get_max_size
 
-;;; 2024-9-19
+;;; 2026-07-21

@@ -53,6 +53,26 @@
 ;;;     row
 ;;;     row-span
 
+(test gtk-grid-layout-child-properties
+  (glib-test:with-check-memory (layout childlayout grid button)
+    (is (typep (setf grid (gtk:grid-new)) 'gtk:grid))
+    (is (typep (setf button (gtk:button-new)) 'gtk:button))
+    (is-false (gtk:grid-attach grid button 1 2 3 4))
+    (is (typep (setf layout
+                     (gtk:widget-layout-manager grid)) 'gtk:grid-layout))
+    (is (typep (setf childlayout
+                     (gtk:layout-manager-layout-child layout button))
+               'gtk:grid-layout-child))
+    (is (= 1 (gtk:grid-layout-child-column childlayout)))
+    (is (= 3 (gtk:grid-layout-child-column-span childlayout)))
+    (is (= 2 (gtk:grid-layout-child-row childlayout)))
+    (is (= 4 (gtk:grid-layout-child-row-span childlayout)))
+    ;; Remove references
+    (is-false (gtk:grid-remove grid button))
+    (is-false (setf (gtk:widget-layout-manager button) nil))
+    (is-false (setf (gtk:widget-layout-manager grid) nil))))
+
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkGridLayout
@@ -103,7 +123,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-grid-layout-properties
-  (let ((layout (make-instance 'gtk:grid-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (make-instance 'gtk:grid-layout)) 'gtk:grid-layout))
     (is (= 0 (gtk:grid-layout-baseline-row layout)))
     (is-false (gtk:grid-layout-column-homogeneous layout))
     (is (= 0 (gtk:grid-layout-column-spacing layout)))
@@ -115,14 +136,16 @@
 ;;;     gtk_grid_layout_new
 
 (test gtk-grid-layout-new
-  (is (typep (gtk:grid-layout-new) 'gtk:grid-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:grid-layout-new)) 'gtk:grid-layout))))
 
 ;;;     gtk_grid_layout_set_row_baseline_position
 ;;;     gtk_grid_layout_get_row_baseline_position
 
 (test gtk-grid-layout-row-baseline-position
-  (let ((layout (gtk:grid-layout-new)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:grid-layout-new)) 'gtk:grid-layout))
     (is (eq :center (gtk:grid-layout-row-baseline-position layout 0)))
     (is (eq :top (setf (gtk:grid-layout-row-baseline-position layout 0) :top)))))
 
-;;; 2024-9-19
+;;; 2026-07-20

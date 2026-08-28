@@ -45,11 +45,13 @@
 ;;;      gtk_bin_layout_new
 
 (test gtk-bin-layout-new
-  (is (typep (gtk:bin-layout-new) 'gtk:bin-layout)))
+  (glib-test:with-check-memory (manager)
+    (is (typep (setf manager (gtk:bin-layout-new)) 'gtk:bin-layout))))
 
 (test gtk-bin-layout-for-button
-  (let* ((button (make-instance 'gtk:button)))
-    (is (typep (gtk:widget-layout-manager button) 'gtk:bin-layout))
+  (glib-test:with-check-memory (manager button)
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf manager (gtk:widget-layout-manager button)) 'gtk:bin-layout))
     (is-false (setf (gtk:widget-layout-manager button) nil))))
 
-;;; 2024-10-19
+;;; 2026-07-20

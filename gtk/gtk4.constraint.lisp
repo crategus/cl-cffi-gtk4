@@ -2,7 +2,7 @@
 ;;; gtk4.constraint.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -188,15 +188,14 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-constant)
       "Accessor"
       (documentation 'constraint-constant 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-constant object) => constant}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[constant]{a number coerced to a double float for the constant value
     to be added to the @slot[gtk:constraint]{source-attribute} property}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{constant} slot of the
-    @class{gtk:constraint} class retrieves the constant factor added to the
-    source attributes' value.
+    The accessor for the @slot[gtk:constraint]{constant} slot retrieves the
+    constant factor added to the source attributes' value.
   @end{short}
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -215,16 +214,15 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-multiplier)
       "Accessor"
       (documentation 'constraint-multiplier 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-multiplier object) => multiplier}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[multiplier]{a number coerced to a double float for the
     multiplication factor to be applied to the
     @slot[gtk:constraint]{source-attribute} property}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{multiplier} slot of the
-    @class{gtk:constraint} class retrieves the multiplication factor applied to
-    the source attribute's value.
+    The accessor for the @slot[gtk:constraint]{multiplier} slot retrieves the
+    multiplication factor applied to the source attribute's value.
   @end{short}
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -248,9 +246,8 @@ target.target_attr = source.source_attr × multiplier + constant
   @argument[relation]{a @sym{gtk:constraint-relation} value for the order
     relation between the terms of the constraint}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{relation} slot of the
-    @class{gtk:constraint} class retrieves the order relation between the terms
-    of the constraint.
+    The accessor for the @slot[gtk:constraint]{relation} slot retrieves the
+    order relation between the terms of the constraint.
   @end{short}
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-relation}")
@@ -269,14 +266,13 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-source)
       "Accessor"
       (documentation 'constraint-source 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-source object) => source}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[source]{a @class{gtk:constraint-target} object}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{source} slot of the
-    @class{gtk:constraint} class retrieves the @sym{gtk:constraint-target} value
-    used as the source for the constraint.
+    The accessor for the @slot[gtk:constraint]{source} slot retrieves the
+    @sym{gtk:constraint-target} value used as the source for the constraint.
   @end{short}
 
   If the @slot[gtk:constraint]{source} property is set to @code{nil}, the
@@ -300,16 +296,15 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-source-attribute)
       "Accessor"
       (documentation 'constraint-source-attribute 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-source-attribute object) => attribute}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[attribute]{a @sym{gtk:constraint-attribute} value for the
     attribute of the @slot[gtk:constraint]{source} property read by the
     constraint}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{source-attribute} slot of the
-    @class{gtk:constraint} class retrieves the attribute of the source to be
-    read by the constraint.
+    The accessor for the @slot[gtk:constraint]{source-attribute} slot retrieves
+    the attribute of the source to be read by the constraint.
   @end{short}
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}
@@ -331,13 +326,13 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-strength)
       "Accessor"
       (documentation 'constraint-strength 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-strength object) => strength}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[strength]{an integer for the strength of the constraint}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{source-attribute} slot of the
-    @class{gtk:constraint} class returns the strength of the constraint.
+    The accessor for the @slot[gtk:constraint]{source-attribute} slot returns
+    the strength of the constraint.
   @end{short}
   The strength can be expressed either using one of the values of the
   @sym{gtk:constraint-strength} enumeration, or any positive integer value.
@@ -358,14 +353,13 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-target)
       "Accessor"
       (documentation 'constraint-target 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-target object) => target}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[source]{a @class{gtk:constraint-target} object}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{target} slot of the
-    @class{gtk:constraint} class retrieves the @sym{gtk:constraint-target} value
-    used as the target for the constraint.
+    The accessor for the @slot[gtk:constraint]{target} slot retrieves the
+    @sym{gtk:constraint-target} value used as the target for the constraint.
   @end{short}
   If the @slot[gtk:constraint]{target} property is set to @code{nil}, the
   constraint will use the @class{gtk:constraint-layout} object of the widget.
@@ -388,15 +382,14 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (liber:alias-for-function 'constraint-target-attribute)
       "Accessor"
       (documentation 'constraint-target-attribute 'function)
- "@version{2025-08-03}
+ "@version{2026-07-21}
   @syntax{(gtk:constraint-target-attribute object) => attribute}
   @argument[object]{a @class{gtk:constraint} object}
   @argument[attribute]{a @sym{gtk:constraint-attribute} value for the attribute
     of the @slot[gtk:constraint]{target} property set by the constraint}
   @begin{short}
-    The accessor for the @slot[gtk:constraint]{target-attribute} slot of the
-    @class{gtk:constraint} class retrieves the attribute of the target to be set
-    by the constraint.
+    The accessor for the @slot[gtk:constraint]{target-attribute} slot retrieves
+    the attribute of the target to be set by the constraint.
   @end{short}
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}

@@ -31,8 +31,7 @@
   (is (equal '()
              (glib-test:list-signals "GtkConstraintTarget")))
   ;; Get interface definition
-  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkConstraintTarget"
-                                         GTK:CONSTRAINT-TARGET
+  (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkConstraintTarget" GTK:CONSTRAINT-TARGET
                       (:EXPORT T
                        :TYPE-INITIALIZER "gtk_constraint_target_get_type"))
              (gobject:get-gtype-definition "GtkConstraintTarget"))))
@@ -91,7 +90,7 @@
 
 (test gtk-constraint-properties
   (glib-test:with-check-memory (constraint)
-    (setf constraint (make-instance 'gtk:constraint))
+    (is (typep (setf constraint (make-instance 'gtk:constraint)) 'gtk:constraint))
     (is (= 0.0d0 (gtk:constraint-constant constraint)))
     (is (= 1.0d0 (gtk:constraint-multiplier constraint)))
     (is (eq :eq (gtk:constraint-relation constraint)))
@@ -107,8 +106,8 @@
 
 (test gtk-constraint-new
   (glib-test:with-check-memory (constraint button1 button2)
-    (setf button1 (make-instance 'gtk:button))
-    (setf button2 (make-instance 'gtk:button))
+    (is (typep (setf button1 (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf button2 (make-instance 'gtk:button)) 'gtk:button))
     (is (typep (setf constraint
                      (gtk:constraint-new button1
                                          :width
@@ -131,7 +130,7 @@
 
 (test gtk-constraint-new-constant
   (glib-test:with-check-memory (constraint button)
-    (setf button (make-instance 'gtk:button))
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
     (is (typep (setf constraint
                      (gtk:constraint-new-constant button
                                                   :width
@@ -153,7 +152,7 @@
 
 (test gtk-constraint-is
   (glib-test:with-check-memory (constraint button)
-    (setf button (make-instance 'gtk:button))
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
     (is (typep (setf constraint
                      (gtk:constraint-new-constant button
                                                   :width
@@ -164,4 +163,4 @@
     (is-false (gtk:constraint-is-attached constraint))
     (is-true (gtk:constraint-is-constant constraint))))
 
-;;; 2025-3-25
+;;; 2026-07-21

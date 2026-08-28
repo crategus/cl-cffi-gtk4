@@ -50,17 +50,19 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-box-layout-properties
-  (let ((manager (gtk:box-layout-new :horizontal)))
-    (is (= -1 (gtk:box-layout-baseline-child manager)))
-    (is (eq :center (gtk:box-layout-baseline-position manager)))
-    (is-false (gtk:box-layout-homogeneous manager))
-    (is (= 0 (gtk:box-layout-spacing manager)))))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:box-layout-new :horizontal)) 'gtk:box-layout))
+    (is (= -1 (gtk:box-layout-baseline-child layout)))
+    (is (eq :center (gtk:box-layout-baseline-position layout)))
+    (is-false (gtk:box-layout-homogeneous layout))
+    (is (= 0 (gtk:box-layout-spacing layout)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_box_layout_new
 
 (test gtk-box-layout-new
-  (is (typep (gtk:box-layout-new :horizontal) 'gtk:box-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:box-layout-new :horizontal)) 'gtk:box-layout))))
 
-;;; 2024-9-19
+;;; 2026-07-20

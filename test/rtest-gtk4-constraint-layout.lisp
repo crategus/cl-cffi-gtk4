@@ -56,8 +56,7 @@
           (glib:symbol-for-gtype "GtkConstraintLayout")))
   ;; Check type initializer
   (is (eq (g:gtype "GtkConstraintLayout")
-          (g:gtype (cffi:foreign-funcall "gtk_constraint_layout_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_constraint_layout_get_type" :size))))
   ;; Check parent
   (is (eq (g:gtype "GtkLayoutManager")
           (g:type-parent "GtkConstraintLayout")))
@@ -88,7 +87,9 @@
 ;;;     gtk_constraint_layout_new
 
 (test gtk-constraint-layout-new
-  (is (typep (gtk:constraint-layout-new) 'gtk:constraint-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout
+                     (gtk:constraint-layout-new)) 'gtk:constraint-layout))))
 
 ;;;     gtk_constraint_layout_add_constraint
 ;;;     gtk_constraint_layout_remove_constraint
@@ -100,4 +101,4 @@
 ;;;     gtk_constraint_layout_observe_constraints
 ;;;     gtk_constraint_layout_observe_guides
 
-;;; 2024-4-23
+;;; 2026-07-21

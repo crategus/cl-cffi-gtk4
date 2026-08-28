@@ -2,7 +2,7 @@
 ;;; gtk4.box-layout.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -136,15 +136,14 @@
 (setf (liber:alias-for-function 'box-layout-baseline-child)
       "Accessor"
       (documentation 'box-layout-baseline-child 'function)
- "@version{2025-08-01}
+ "@version{2026-07-20}
   @syntax{(gtk:box-layout-baseline-child object) => index}
   @syntax{(setf (gtk:box-layout-baseline-child object) index)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[index]{an integer for the child position, or -1}
   @begin{short}
-    The accessor for the @slot[gtk:box-layout]{baseline-child} slot of the
-    @class{gtk:box-layout} class gets or sets the index of the child that
-    determines the baseline in vertical layout.
+    The accessor for the @slot[gtk:box-layout]{baseline-child} slot gets or
+    sets the index of the child that determines the baseline in vertical layout.
   @end{short}
   @see-class{gtk:box-layout}")
 
@@ -165,17 +164,15 @@
 (setf (liber:alias-for-function 'box-layout-baseline-position)
       "Accessor"
       (documentation 'box-layout-baseline-position 'function)
- "@version{2025-08-01}
+ "@version{2026-07-20}
   @syntax{(gtk:box-layout-baseline-position object) => position}
   @syntax{(setf (gtk:box-layout-baseline-position object) position)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[position]{a @sym{gtk:baseline-position} value}
   @begin{short}
-    The accessor for the @slot[gtk:box-layout]{baseline-position} slot of the
-    @class{gtk:box-layout} class gets or sets the baseline position of a box
-    layout.
+    The accessor for the @slot[gtk:box-layout]{baseline-position} slot gets or
+    sets the baseline position of a box layout.
   @end{short}
-
   The baseline position affects only horizontal boxes with at least one
   baseline aligned child. If there is more vertical space available than
   requested, and the baseline is not allocated by the parent then the given
@@ -196,15 +193,14 @@
 (setf (liber:alias-for-function 'box-layout-homogeneous)
       "Accessor"
       (documentation 'box-layout-homogeneous 'function)
- "@version{2025-08-01}
+ "@version{2026-07-20}
   @syntax{(gtk:box-layout-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:box-layout-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[homogeneous]{@em{true} if the box layout is homogeneous}
   @begin{short}
-    The accessor for the @slot[gtk:box-layout]{homogeneous} slot of the
-    @class{gtk:box-layout} class gets or sets whether the box layout will
-    allocate the same size to all children.
+    The accessor for the @slot[gtk:box-layout]{homogeneous} slot gets or sets
+    whether the box layout will allocate the same size to all children.
   @end{short}
   @see-class{gtk:box-layout}")
 
@@ -222,15 +218,14 @@
 (setf (liber:alias-for-function 'box-layout-spacing)
       "Accessor"
       (documentation 'box-layout-spacing 'function)
- "@version{2025-08-12}
+ "@version{2026-07-20}
   @syntax{(gtk:box-layout-spacing object) => spacing}
   @syntax{(setf (gtk:box-layout-spacing object) spacing)}
   @argument[object]{a @class{gtk:box-layout} object}
   @argument[spacing]{an integer for the spacing of the box layout}
   @begin{short}
-    The accessor for the @slot[gtk:box-layout]{spacing} slot of the
-    @class{gtk:box-layout} class gets or sets the space that the box layout
-    puts between children.
+    The accessor for the @slot[gtk:box-layout]{spacing} slot gets or sets the
+    space that the box layout puts between children.
   @end{short}
   @see-class{gtk:box-layout}")
 

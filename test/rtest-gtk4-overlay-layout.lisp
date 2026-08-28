@@ -50,6 +50,23 @@
 ;;;     clip-overlay
 ;;;     measure
 
+(test gtk-overlay-child-properties
+  (glib-test:with-check-memory (layout childlayout overlay button)
+    (is (typep (setf overlay (gtk:overlay-new)) 'gtk:overlay))
+    (is (typep (setf button (gtk:button-new)) 'gtk:button))
+    (is-false (gtk:overlay-add-overlay overlay button))
+    (is (typep (setf layout
+                     (gtk:widget-layout-manager overlay)) 'gtk:overlay-layout))
+    (is (typep (setf childlayout
+                     (gtk:layout-manager-layout-child layout button))
+               'gtk:overlay-layout-child))
+    (is-false (gtk:overlay-layout-child-clip-overlay childlayout))
+    (is-false (gtk:overlay-layout-child-measure childlayout))
+    ;; Remove references
+    (is-false (gtk:overlay-remove-overlay overlay button))
+    (is-false (setf (gtk:widget-layout-manager button) nil))
+    (is-false (setf (gtk:widget-layout-manager overlay) nil))))
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkOverlayLayout
@@ -92,6 +109,7 @@
 ;;;     gtk_overlay_layout_new
 
 (test gtk-overlay-layout-new
-  (is (typep (gtk:overlay-layout-new) 'gtk:overlay-layout)))
+  (glib-test:with-check-memory (layout)
+    (is (typep (setf layout (gtk:overlay-layout-new)) 'gtk:overlay-layout))))
 
-;;; 2024-9-19
+;;; 2026-07-20

@@ -44,7 +44,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-center-layout-shrink-center-last
-  (let ((manager (make-instance 'gtk:center-layout)))
+  (glib-test:with-check-memory (manager)
+    (is (typep (setf manager
+                     (make-instance 'gtk:center-layout)) 'gtk:center-layout))
     (is-true (gtk:center-layout-shrink-center-last manager))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -52,7 +54,9 @@
 ;;;     gtk_center_layout_new
 
 (test gtk-center-layout-new
-  (is (typep (gtk:center-layout-new) 'gtk:center-layout)))
+  (glib-test:with-check-memory (manager)
+    (is (typep (setf manager
+                     (gtk:center-layout-new)) 'gtk:center-layout))))
 
 ;;;     gtk_center_layout_set_orientation
 ;;;     gtk_center_layout_get_orientation
@@ -66,15 +70,16 @@
 ;;;     gtk_center_layout_get_end_widget
 
 (test gtk-center-layout-widget
-  (let* ((start (make-instance 'gtk:button))
-         (center (make-instance 'gtk:button))
-         (end (make-instance 'gtk:button))
-         (box (make-instance 'gtk:center-box
-                             :start-widget start
-                             :center-widget center
-                             :end-widget end))
-         (layout (gtk:widget-layout-manager box)))
-    (is (typep layout 'gtk:center-layout))
+  (glib-test:with-check-memory (layout box start center end)
+    (is (typep (setf start (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf center (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf end (make-instance 'gtk:button)) 'gtk:button))
+    (is (typep (setf box (make-instance 'gtk:center-box
+                                        :start-widget start
+                                        :center-widget center
+                                        :end-widget end)) 'gtk:center-box))
+    (is (typep (setf layout
+                     (gtk:widget-layout-manager box)) 'gtk:center-layout))
     (is (eq :horizontal (gtk:center-layout-orientation layout)))
     (is (eq :center (gtk:center-layout-baseline-position layout)))
     (is (eq start (gtk:center-layout-start-widget layout)))
@@ -84,12 +89,6 @@
     (is-false (setf (gtk:center-box-start-widget box) nil))
     (is-false (setf (gtk:center-box-center-widget box) nil))
     (is-false (setf (gtk:center-box-end-widget box) nil))
-    (is-false (setf (gtk:widget-layout-manager box) nil))
+    (is-false (setf (gtk:widget-layout-manager box) nil))))
 
-    (is (= 1 (g:object-ref-count start)))
-    (is (= 1 (g:object-ref-count center)))
-    (is (= 1 (g:object-ref-count end)))
-    (is (= 1 (g:object-ref-count box)))
-    (is (= 1 (g:object-ref-count layout)))))
-
-;;; 2024-9-19
+;;; 2026-07-20

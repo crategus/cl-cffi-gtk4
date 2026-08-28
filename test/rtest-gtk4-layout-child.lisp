@@ -34,39 +34,34 @@
              (glib-test:list-signals "GtkLayoutChild")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkLayoutChild" GTK:LAYOUT-CHILD
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_layout_child_get_type")
-                       ((CHILD-WIDGET LAYOUT-CHILD-CHILD-WIDGET
-                         "child-widget" "GtkWidget" T NIL)
-                        (LAYOUT-MANAGER LAYOUT-CHILD-LAYOUT-MANAGER
-                         "layout-manager" "GtkLayoutManager" T NIL)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_layout_child_get_type")
+                      ((CHILD-WIDGET LAYOUT-CHILD-CHILD-WIDGET
+                        "child-widget" "GtkWidget" T NIL)
+                       (LAYOUT-MANAGER LAYOUT-CHILD-LAYOUT-MANAGER
+                        "layout-manager" "GtkLayoutManager" T NIL)))
              (gobject:get-gtype-definition "GtkLayoutChild"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-layout-child-properties
-  (let ((fixed (make-instance 'gtk:fixed))
-        (button (make-instance 'gtk:button))
-        manager childmanager)
+  (glib-test:with-check-memory (childmanager manager button fixed)
+    (is (typep (setf fixed (make-instance 'gtk:fixed)) 'gtk:fixed))
+    (is (typep (setf button (make-instance 'gtk:button)) 'gtk:button))
     ;; Put button in the fixed widget
     (is-false (gtk:fixed-put fixed button 0 0))
     ;; Get Layout Manager and Layout Manager for child widget
-    (is (typep (setf manager (gtk:widget-layout-manager fixed))
-               'gtk:layout-manager))
+    (is (typep (setf manager
+                     (gtk:widget-layout-manager fixed)) 'gtk:layout-manager))
     (is (typep (setf childmanager
                     (gtk:layout-manager-layout-child manager button))
                'gtk:layout-child))
     (is (eq button (gtk:layout-child-child-widget childmanager)))
     (is (eq manager (gtk:layout-child-layout-manager childmanager)))
-
+    ;; Remove references
     (is-false (gtk:fixed-remove fixed button))
-    (is-false (setf (gtk:widget-layout-manager fixed) nil))
+    (is-false (setf (gtk:widget-layout-manager fixed) nil))))
 
-    (is (= 1 (g:object-ref-count fixed)))
-    (is (= 1 (g:object-ref-count button)))
-    (is (= 1 (g:object-ref-count childmanager)))
-    (is (= 1 (g:object-ref-count manager)))))
-
-;;; 2024-10-19
+;;; 2026-07-20
