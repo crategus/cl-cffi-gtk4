@@ -245,15 +245,14 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-hints)
       "Accessor"
       (documentation 'im-context-input-hints 'function)
- "@version{2026-05-17}
+ "@version{2026-08-28}
   @syntax{(gtk:im-context-input-hints object) => hints}
   @syntax{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[hints]{a value of the @sym{gtk:input-hints} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:im-context]{input-hints} slot of the
-    @class{gtk:im-context} class gets or sets the hints for the text field
-    behaviour.
+    The accessor for the @slot[gtk:im-context]{input-hints} slot gets or sets
+    the hints for the text field behaviour.
   @end{short}
   @see-class{gtk:im-context}")
 
@@ -270,14 +269,14 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-purpose)
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
- "@version{2026-05-17}
+ "@version{2026-08-28}
   @syntax{(gtk:im-context-input-purpose object) => purpose}
   @syntax{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[purpose]{a value of the @sym{gtk:input-purpose} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:im-context]{input-purpose} slot of the
-    @class{gtk:im-context} class gets or sets the purpose of the text field.
+    The accessor for the @slot[gtk:im-context]{input-purpose} slot gets or sets
+    the purpose of the text field.
   @end{short}
   @see-class{gtk:im-context}")
 

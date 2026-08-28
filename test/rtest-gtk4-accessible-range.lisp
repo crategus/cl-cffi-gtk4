@@ -28,23 +28,15 @@
              (glib-test:list-signals "GtkAccessibleRange")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkAccessibleRange" GTK:ACCESSIBLE-RANGE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_accessible_range_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_accessible_range_get_type"))
              (gobject:get-gtype-definition "GtkAccessibleRange"))))
 
 ;;;     gtk_accessible_range_set_current_value
 
-;; FIXME: This function is not exported from the C library. The C function
-;; does nothing and returns TRUE. Consider to implement the virtual function
-;; for the interface from the Lisp side.
-
-#+nil
 (test gtk-accessible-range-set-current-value
-  (let ((range (make-instance 'gtk:range)))
-    (is (= 0 (gtk:range-value range)))
-    #+nil
-    (is-false (gtk:accessible-range-set-current-value range 100))
-    (is (= 0 (gtk:range-value range)))
-    (is (= 1 (g:object-ref-count range)))))
+  (glib-test:with-check-memory (range)
+    (setf range (make-instance 'gtk:range))
+    (is-true (gtk:accessible-range-set-current-value range 100))))
 
-;;; 2024-11-10
+;;; 2026-08-26

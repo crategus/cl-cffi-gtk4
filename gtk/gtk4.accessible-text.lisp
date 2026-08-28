@@ -2,7 +2,7 @@
 ;;; gtk4.accessible-text.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -39,12 +39,14 @@
 ;;;
 ;;;     gtk_accessible_text_get_attributes
 ;;;     gtk_accessible_text_get_caret_position
+;;;     gtk_accessible_text_set_caret_position              Since 4.22
 ;;;     gtk_accessible_text_get_contents
 ;;;     gtk_accessible_text_get_contents_at
 ;;;     gtk_accessible_text_get_default_attributes
 ;;;     gtk_accessible_text_get_extents                     Since 4.16
 ;;;     gtk_accessible_text_get_offset                      Since 4.16
 ;;;     gtk_accessible_text_get_selection
+;;;     gtk_accessible_text_set_selection                   Since 4.22
 ;;;
 ;;;     gtk_accessible_text_update_caret_position
 ;;;     gtk_accessible_text_update_contents
@@ -68,7 +70,7 @@
 (setf (liber:alias-for-symbol 'accessible-text-content-change)
       "GEnum"
       (liber:symbol-documentation 'accessible-text-content-change)
- "@version{2025-07-22}
+ "@version{2026-08-26}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTextContentChange\"
                       accessible-text-content-change
@@ -80,7 +82,7 @@
   @begin{values}
     @begin[code]{simple-table}
       @entry[:insert]{Contents change as the result of an insert operation.}
-      @entry[:remvve]{Contents change as the result of a remove operation.}
+      @entry[:remove]{Contents change as the result of a remove operation.}
     @end{simple-table}
   @end{values}
   @begin{short}
@@ -106,7 +108,7 @@
 (setf (liber:alias-for-symbol 'accessible-text-granularity)
       "GEnum"
       (liber:symbol-documentation 'accessible-text-granularity)
- "@version{2024-11-05}
+ "@version{2026-08-26}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTextGranularity\" accessible-text-granularity
   (:export t
@@ -118,7 +120,7 @@
   (:paragraph 4))
   @end{declaration}
   @begin{values}
-    @begin{tables}
+    @begin[code]{simple-table}
       @entry[:character]{Use the boundary between characters, including
         non-printing characters.}
       @entry[:word]{Use the boundary between words, starting from the beginning
@@ -131,7 +133,7 @@
       @entry[:paragraph]{Use the boundary between paragraphs, starting from the
         beginning of the current paragraph and ending at the beginning of the
         next paragraph.}
-    @end{tables}
+    @end{simple-table}
   @end{values}
   @begin{short}
     The granularity for queries about the text contents of a
@@ -189,29 +191,161 @@
   @see-symbol{gtk:accessible-property}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_text_get_attributes
-;;;
-;;; Retrieves the text attributes inside the accessible object.
-;;;
-;;; Since 4.14
+;;; GtkAccessibleText Inferface vtable
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-vtable ("GtkAccessibleText" accessible-text)
+  (:skip parent-instance (:struct g:type-interface))
+  ;; Methods of the GtkAccessibleText interface
+  (get-contents ((g:boxed g:bytes)
+                 (accessible (g:object accessible-text))
+                 (start :uint)
+                 (end :uint)))
+  (get-contents-at ((g:boxed g:bytes)
+                    (accessible (g:object accessible-text))
+                    (offset :uint)
+                    (granularity accessible-text-granularity)
+                    (start (:pointer :uint))
+                    (end (:pointer :uint))))
+  (get-caret-position (:uint
+                       (accessible (g:object accessible-text))))
+  (get-selection (:boolean
+                  (accessible (g:object accessible-text))
+                  (nranges (:pointer :size))
+                  (ranges :pointer))) ; array of GtkAccessibleTextRange values
+  (get-attributes (:boolean
+                   (accessible (g:object accessible-text))
+                   (offset :uint)
+                   (nranges (:pointer :size))
+                   (ranges :pointer) ; array of GtkAccessibleTextRange values
+                   (names :pointer) ; array of strings
+                   (values :pointer))) ; array of strings
+  (get-default-attributes (:void
+                           (accessible (g:object accessible-text))
+                           (names :pointer) ; array of strings
+                           (values :pointer))) ; array of strings
+  #+gtk-4-16
+  (get-extents (:boolean
+                (accessible (g:object accessible-text))
+                (start :uint)
+                (end :uint)
+                (extents (:pointer (:struct graphene:rect-t)))))
+  #+gtk-4-16
+  (get-offset (:boolean
+               (accessible (g:object accessible-text))
+               (point (:pointer (:struct graphene:point-t)))
+               (offset (:pointer :uint))))
+  #+gtk-4-22
+  (set-caret-position (:boolean
+                       (accessible (g:object accessible-text))
+                       (offset :uint)))
+  #+gtk-4-22
+  (set-selection (:boolean
+                  (accessible (g:object accessible-text))
+                  (i :size)
+                  (range :pointer)))) ; for GtkAccessibleTextRange value
+
+;;; ----------------------------------------------------------------------------
+;;; Default virtual methods for the GtkAccessbleText interface
+;;; ----------------------------------------------------------------------------
+
+;;; --- gtk:accessible-text-get-contents-impl ----------------------------------
+
+(defmethod accessible-text-get-contents-impl
+           ((accessible accessible-text) start end)
+  (declare (ignorable accessible start end))
+  (warn "gtk:accessible-range-get-contents-impl not implemented for ~a."
+        (g:type-name (g:type-from-instance accessible)))
+  nil)
+
+;;; --- gtk:accessible-text-get-contents-at-impl -------------------------------
+
+(defmethod accessible-text-get-contents-at-impl
+           ((accessible accessible-text) offset granularity start end)
+  (declare (ignorable offset granularity start end))
+  (warn "gtk:accessible-text-get-contents-at-impl not implemented for ~a."
+        (g:type-name (g:type-from-instance accessible)))
+  nil)
+
+;;; --- gtk:accessible-text-get-caret-postion-impl -----------------------------
+
+(defmethod accessible-text-get-caret-position-impl
+           ((accessible accessible-text))
+  (declare (ignorable accessible))
+  0)
+
+;;; --- gtk:accessible-text-get-selection-impl ---------------------------------
+
+(defmethod accessible-text-get-selection-impl
+           ((accessible accessible-text) nranges ranges)
+  (declare (ignorable accessible nranges ranges))
+  nil)
+
+;;; --- gtk:accessible-text-get-attributes-impl --------------------------------
+
+(defmethod accessible-text-get-attributes-impl
+           ((accessible accessible-text) offset nranges ranges names values)
+  (declare (ignorable accessible offset nranges names values))
+  nil)
+
+;;; --- gtk:accessible-text-get-default-attributes-impl ------------------------
+
+(defmethod accessible-text-get-default-attributes-impl
+           ((accessible accessible-text) names values)
+  (declare (ignorable accessible names values))
+  nil)
+
+;;; --- gtk:accessible-text-get-extents-impl -----------------------------------
+
+(defmethod accessible-text-get-extents-impl
+           ((accessible accessible-text) start end extents)
+  (declare (ignorable accessible start end extents))
+  nil)
+
+;;; --- gtk:accessible-text-get-offset-impl ------------------------------------
+
+(defmethod accessible-text-get-offset-impl
+           ((accessible accessible-text) point offset)
+  (declare (ignorable accessible point offset))
+  nil)
+
+;;; --- gtk:accessible-text-set-caret-position-impl ----------------------------
+
+(defmethod accessible-text-set-caret-position-impl
+           ((accessible accessible-text) offset)
+  (declare (ignorable accessible offset))
+  nil)
+
+;;; --- gtk:accessible-text-set-selection-impl ---------------------------------
+
+(defmethod accessible-text-set-selection-impl
+           ((accessible accessible-text) i range)
+  (declare (ignorable accessible i range))
+  nil)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_text_get_caret_position
+;;; gtk_accessible_text_set_caret_position                  Since 4.22
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_text_get_caret_position"
-               accessible-text-caret-position) :uint
+(defun (setf accessible-text-caret-position) (offset accessible)
+  (when (accessible-text-set-caret-position-impl accessible offset)
+    offset))
+
+(defun accessible-text-caret-position (accessible)
  #+liber-documentation
- "@version{#2025-07-19}
+ "@version{2026-08-27}
+  @syntax{(gtk:accessible-text-caret-position accessible) => offset}
+  @syntax{(setf (gtk:accessible-text-caret-position accessible) offset)}
   @argument[accessible]{a @class{gtk:accessible-text} object}
-  @return{The unsigned integer for the position of the caret, in characters.}
+  @argument[offset]{The unsigned integer for the position of the caret, in
+    characters.}
   @begin{short}
-    Retrieves the position of the caret inside the accessible object.
+    Gets or sets the position of the caret inside the accessible object.
   @end{short}
   Since 4.14
   @see-class{gtk:accessible-text}"
-  (accessible (g:object accessible-text)))
+  (accessible-text-get-caret-position-impl accessible))
 
 (export 'accessible-text-caret-position)
 
@@ -219,10 +353,9 @@
 ;;; gtk_accessible_text_get_contents
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_text_get_contents" accessible-text-contents)
-    (g:boxed g:bytes :return)
+(defun accessible-text-contents (accessible start end)
  #+liber-documentation
- "@version{#2026-04-26}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @argument[start]{an unsigned integer for the beginning of the range, in
     characters}
@@ -240,9 +373,7 @@
 
   Since 4.14
   @see-class{gtk:accessible-text}"
-  (accessible (g:object accessible-text))
-  (start :uint)
-  (end :uint))
+  (accessible-range-get-contents-impl accessible start end))
 
 (export 'accessible-text-contents)
 
@@ -250,17 +381,9 @@
 ;;; gtk_accessible_text_get_contents_at
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_text_get_contents_at"
-               %accessible-text-contents-at) (g:boxed g:bytes)
-  (accessible (g:object accessible-text))
-  (offset :uint)
-  (granularity accessible-text-granularity)
-  (start (:pointer :int))
-  (end (:pointer :int)))
-
 (defun accessible-text-contents-at (accessible offset granularity)
  #+liber-documentation
- "@version{#2025-07-19}
+ "@version{2026-08-27}
   @syntax{(gtk:accessible-text-contents-at accessible offset granularity)
      => start, end}
   @argument[accessible]{a @class{gtk:accessible-text} object}
@@ -279,41 +402,96 @@
   @see-class{gtk:accessible-text}
   @see-symbol{gtk:accessible-text-granularity}"
   (cffi:with-foreign-objects ((start :int) (end :int))
-    (let ((bytes (%accessible-text-contents-at accessible
-                                               offset
-                                               granularity
-                                               start
-                                               end)))
-    (values bytes
-            (cffi:mem-ref start :int)
-            (cffi:mem-ref end :int)))))
+    (let ((bytes (accessible-text-get-contents-at-impl accessible
+                                                       offset
+                                                       granularity
+                                                       start
+                                                       end)))
+      (when bytes
+        (values bytes
+                (cffi:mem-ref start :int)
+                (cffi:mem-ref end :int))))))
 
 (export 'accessible-text-contents-at)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_text_get_attributes
+;;; ----------------------------------------------------------------------------
+
+;; TODO: This is a sloppy implementation. Improve it and return the values.
+
+(defun accessible-text-attributes (accessible offset nranges ranges names values)
+ #+liber-documentation
+ "@version{2026-08-27}
+  @argument[accessible]{a @class{gtk:accessible-text} object}
+  @argument[offset]{an unsigned integer for the offset, in characters}
+  @argument[nranges]{an integer pointer for the number off attributes}
+  @argument[ranges]{a pointer for an array with the @code{GtkAccessibleRange}
+    instances}
+  @argument[names]{a pointer for an array with the names of the attributes
+    inside the accessible object}
+  @argument[values]{a pointer for a string array for the value of the attributes
+    inside the accessible object}
+  @return{@em{True} if the accessible object has at least one attribute.}
+  @begin{short}
+    Retrieves the text attributes inside the accessible object.
+  @end{short}
+  Each attribute is composed by: a range, a name and a value.
+
+  It is left to the implementation to determine the serialization format of the
+  value to a string. GTK provides support for various text attribute names and
+  values, but implementations of this interface are free to add their own
+  attributes.
+
+  If this function returns @em{true}, @arg{nranges} will be set to a value
+  greater than or equal to one, @arg{ranges} will be set to a newly allocated
+  array of @code{GtkAccessibleTextRange} instances.
+
+  Since 4.14
+  @see-class{gtk:accessbile-text}"
+  (accessible-text-get-attributes-impl accessible
+                                       offset nranges ranges names values))
+
+(export 'accessible-text-attributes)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_text_get_default_attributes
-;;;
-;;; Retrieves the default text attributes inside the accessible object.
-;;;
-;;; Since: 4.14
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_text_get_extents
-;;; ----------------------------------------------------------------------------
+;; TODO: This is a sloppy implementation. Improve it and return the values.
 
-#+gtk-4-16
-(cffi:defcfun ("gtk_accessible_text_get_extents" %accessible-text-extents)
-    :boolean
-  (accessible (g:object accessible-text))
-  (start :uint)
-  (end :uint)
-  (extents (:pointer (:struct graphene:rect-t))))
+(defun accessible-text-default-attributes (accessible names values)
+ #+liber-documentation
+ "@version{2026-08-27}
+  @argument[accessible]{a @class{gtk:accessible-text} object}
+  @argument[names]{a pointer for an array with the names of the default
+    attributes inside the accessible object}
+  @argument[values]{a pointer for an array with strings for the values of
+    the default attributes inside the accessible object}
+  @begin{short}
+    Retrieves the default text attributes inside the accessible object.
+  @end{short}
+  Each attribute is composed by: a name and a a value.
+
+  It is left to the implementation to determine the serialization format of the
+  value to a string. GTK provides support for various text attribute names and
+  values, but implementations of this interface are free to add their own
+  attributes.
+
+  Since 4.14
+  @see-class{gtk:accessible-text}"
+  (accessible-text-get-default-attributes-impl accessible names values))
+
+(export 'accessible-text-default-attributes)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_text_get_extents                         Since 4.16
+;;; ----------------------------------------------------------------------------
 
 #+gtk-4-16
 (defun accessible-text-extents (accessible start end extents)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @argument[start]{an unsigned integer for the start offset, in characters}
   @argument[end]{an unsigned integer for the end offset, in characters,}
@@ -329,27 +507,20 @@
   Since 4.16
   @see-class{gtk:accessible-text}
   @see-symbol{graphene:rect-t}"
-  (when (%accessible-text-extents accessible start end extents)
+  (when (accessible-text-get-extents-impl accessible start end extents)
     extents))
 
 #+gtk-4-16
 (export 'accessible-text-extents)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_text_get_offset
+;;; gtk_accessible_text_get_offset                          Since 4.16
 ;;; ----------------------------------------------------------------------------
-
-#+gtk-4-16
-(cffi:defcfun ("gtk_accessible_text_get_offset" %accessible-text-offset)
-    :boolean
-  (accessible (g:object accessible-text))
-  (point (:pointer (:struct graphene:point-t)))
-  (offset (:pointer :uint)))
 
 #+gtk-4-16
 (defun accessible-text-offset (accessible point)
  #+liber-documentation
- "@version{#2025-07-25}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @argument[point]{a @sym{graphene:point-t} instance}
   @return{The unsigned integer for the offset, if set, otherwise @code{nil}.}
@@ -360,7 +531,7 @@
   @see-class{gtk:accessible-text}
   @see-symbol{graphene:point-t}"
   (cffi:with-foreign-object (offset :uint)
-    (when (%accessible-text-offset accessible point offset)
+    (when (accessible-text-get-offset-impl accessible point offset)
       (cffi:mem-ref offset :uint))))
 
 #+gtk-4-16
@@ -368,11 +539,37 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_text_get_selection
-;;;
-;;; Retrieves the selection ranges in the accessible object.
-;;;
-;;; Since 4.14
+;;; gtk_accessible_text_set_selection                       Since 4.22
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: This is a sloppy implementation. Improve it and return the values.
+
+#+gtk-4-22
+(defun (setf accessible-text-selection) (range accessible nrange)
+  (when (accessible-text-set-selection-impl accessible nrange range)
+    range))
+
+#+gtk-4-22
+(defun accessible-text-selection (accessible nranges ranges)
+ #+liber-documentation
+ "@version{2026-08-27}
+  @argument[accessible]{a @class{gtk:accessible-text} object}
+  @argument[nranges]{a pointer for an integer with the number of selection
+    ranges}
+  @argument[ranges]{an array of @code{GtkAccessibleTextRange} instances}
+  @begin{short}
+    Gets or sets the selection ranges in the accessible object.
+  @end{short}
+  If this function returns true, @arg{nranges} will be set to a value greater
+  than or equal to one, and @arg{ranges} will be set to a newly allocated array
+  of @code{GtkAccessibleTextRange} instances.
+
+  Since 4.14
+  @see-class{gtk:accessible-text}"
+  (accessible-text-get-selection-impl accessible nranges ranges))
+
+#+gtk-4-22
+(export 'accessible-text-selection)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_text_update_caret_position
@@ -381,7 +578,7 @@
 (cffi:defcfun ("gtk_accessible_text_update_caret_position"
                accessible-text-update-caret-position) :void
  #+liber-documentation
- "@version{#2024-11-05}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @begin{short}
     Updates the position of the caret.
@@ -403,7 +600,7 @@
 (cffi:defcfun ("gtk_accessible_text_update_contents"
                accessible-text-update-contents) :void
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @argument[change]{a @sym{gtk:accessible-text-content-change} value for the
     type of change in the contents}
@@ -436,7 +633,7 @@
 (cffi:defcfun ("gtk_accessible_text_update_selection_bound"
                accessible-text-update-selection-bound) :void
  #+liber-documentation
- "@version{#2024-11-05}
+ "@version{2026-08-27}
   @argument[accessible]{a @class{gtk:accessible-text} object}
   @begin{short}
     Updates the boundary of the selection.

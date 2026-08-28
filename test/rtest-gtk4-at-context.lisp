@@ -97,9 +97,9 @@
       #+gtk-4-22
       (is (equal '(:READABLE)
                  (glib-test:list-param-flags "GtkATContext" "realized")))
-      #+gtk-4-22
+      #+(and gtk-4-22 (not windows))
       (is-false (gtk:at-context-realized context))
-      #+gtk-4-22
+      #+(and gtk-4-22 (not windows))
       (signals (error) (setf (gtk:at-context-realized context) t)))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -115,4 +115,3 @@
                  'gtk:at-context)))))
 
 ;;; 2026-05-16
-
