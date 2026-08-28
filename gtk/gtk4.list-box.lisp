@@ -2,7 +2,7 @@
 ;;; gtk4.list-box.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -230,15 +230,15 @@ lambda (row)    :action :run-first
 (setf (liber:alias-for-function 'list-box-row-activatable)
       "Accessor"
       (documentation 'list-box-row-activatable 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-row-activatable object) => activatable}
   @syntax{(setf (gtk:list-box-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[activatable]{@em{true} to mark the row as activatable}
   @begin{short}
-    The accessor for the @slot[gtk:list-box-row]{activatable} slot of the
-    @class{gtk:list-box-row} class gets or sets whether the
-    @sig[gtk:list-box]{row-activated} signal will be emitted for this row.
+    The accessor for the @slot[gtk:list-box-row]{activatable} slot gets or sets
+    whether the @sig[gtk:list-box]{row-activated} signal will be emitted for
+    this row.
   @end{short}
   @see-class{gtk:list-box-row}")
 
@@ -253,15 +253,14 @@ lambda (row)    :action :run-first
 (setf (liber:alias-for-function 'list-box-row-child)
       "Accessor"
       (documentation 'list-box-row-child 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-row-child object) => child}
   @syntax{(setf (gtk:list-box-row-child object) child)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:list-box-row]{child} slot of the
-    @class{gtk:list-box-row} class gets or sets the child widget of the list
-    box row.
+    The accessor for the @slot[gtk:list-box-row]{child} slot gets or sets the
+    child widget of the list box row.
   @end{short}
   @see-class{gtk:list-box-row}
   @see-class{gtk:widget}")
@@ -278,14 +277,14 @@ lambda (row)    :action :run-first
 (setf (liber:alias-for-function 'list-box-row-selectable)
       "Accessor"
       (documentation 'list-box-row-selectable 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-row-selectable object) => selectable}
   @syntax{(setf (gtk:list-box-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[selectable]{@em{true} to mark the row as selectable}
   @begin{short}
-    The accessor for the @slot[gtk:list-box-row]{selectable} slot of the
-    @class{gtk:list-box} class gets or sets whether this row can be selected.
+    The accessor for the @slot[gtk:list-box-row]{selectable} slot gets or sets
+    whether this row can be selected.
   @end{short}
   @see-class{gtk:list-box-row}")
 
@@ -632,15 +631,14 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-function 'list-box-accept-unpaired-release)
       "Accessor"
       (documentation 'list-box-accept-unpaired-release 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-accept-unpaired-release object) => setting}
   @syntax{(setf (gtk:list-box-accept-unpaired-release object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[setting]{a boolean whether to accept unpaired release}
   @begin{short}
-    The accessor for the @slot[gtk:list-box]{accept-unpaired-release} slot of
-    the @class{gtk:list-box} class gets or sets whether to accept unpaired
-    release events.
+    The accessor for the @slot[gtk:list-box]{accept-unpaired-release} slot gets
+    or sets whether to accept unpaired release events.
   @end{short}
   @see-class{gtk:list-box}")
 
@@ -659,16 +657,16 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-function 'list-box-activate-on-single-click)
       "Accessor"
       (documentation 'list-box-activate-on-single-click 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:list-box-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[setting]{a boolean whether to activate the row on a single click}
   @begin{short}
-    The accessor for the @slot[gtk:list-box]{activate-on-single-click} slot of
-    the @class{gtk:list-box} class gets or sets whether children can be
-    activated with a single click if @arg{setting} is @em{true}, or require a
-    double-click if @arg{setting} is @em{false}.
+    The accessor for the @slot[gtk:list-box]{activate-on-single-click} slot
+    gets or sets whether children can be activated with a single click if
+    @arg{setting} is @em{true}, or require a double-click if @arg{setting} is
+    @em{false}.
   @end{short}
   @see-class{gtk:list-box}")
 
@@ -685,14 +683,14 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-function 'list-box-selection-mode)
       "Accessor"
       (documentation 'list-box-selection-mode 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-selection-mode object) => mode}
   @syntax{(setf (gtk:list-box-selection-mode object) mode)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[mode]{a value of the @sym{gtk:selection-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:list-box]{selection-mode} slot of the
-    @class{gtk:list-box} class gets or sets the selection mode of the list box.
+    The accessor for the @slot[gtk:list-box]{selection-mode} slot gets or sets
+    the selection mode of the list box.
   @end{short}
   See the @sym{gtk:selection-mode} enumeration for details.
   @see-class{gtk:list-box}
@@ -711,15 +709,14 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-function 'list-box-show-separators)
       "Accessor"
       (documentation 'list-box-show-separators 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-show-separators object) => setting}
   @syntax{(setf (gtk:list-box-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[setting]{a boolean whether to show separators between rows}
   @begin{short}
-    The accessor for the @slot[gtk:list-box]{show-separators} slot of the
-    @class{gtk:list-box} class gets or sets whether the list box should show
-    separators between rows.
+    The accessor for the @slot[gtk:list-box]{show-separators} slot gets or sets
+    whether the list box should show separators between rows.
   @end{short}
   @see-class{gtk:list-box}")
 
@@ -736,15 +733,14 @@ lambda (listbox)    :action :run-last
 (setf (liber:alias-for-function 'list-box-tab-behavior)
       "Accessor"
       (documentation 'list-box-tab-behavior 'function)
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-tab-behavior object) => behavior}
   @syntax{(setf (gtk:list-box-tab-behavior object) behavior)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[behavior]{a @sym{gtk:list-tab-behavior} value}
   @begin{short}
-    The accessor for the @slot[gtk:list-box]{tab-behavior} slot of the
-    @class{gtk:list-box} class gets or sets the behavior of the @key{Tab} and
-    @key{Shift+Tab} keys.
+    The accessor for the @slot[gtk:list-box]{tab-behavior} slot gets or sets
+    the behavior of the @key{Tab} and @key{Shift+Tab} keys.
   @end{short}
 
   Since 4.18
@@ -1075,7 +1071,7 @@ lambda (listbox)    :action :run-last
 (cffi:defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
     (g:object adjustment)
  #+liber-documentation
- "@version{2026-05-01}
+ "@version{2026-07-13}
   @syntax{(gtk:list-box-adjustment listbox) => adjustment}
   @syntax{(setf (gtk:list-box-adjustment listbox) adjustment)}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1084,7 +1080,6 @@ lambda (listbox)    :action :run-last
     This function gets or sets the adjustment that the list box uses for
     vertical scrolling.
   @end{short}
-
   For instance, this is used to get the page size for @kbd{PageUp/Down} key
   handling. In the normal case when the list box is packed inside a
   @class{gtk:scrolled-window} widget the adjustment from that will be picked up

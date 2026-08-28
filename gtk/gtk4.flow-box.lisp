@@ -2,7 +2,7 @@
 ;;; gtk4.flow-box.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -220,15 +220,14 @@ lambda (child)    :action
 (setf (liber:alias-for-function 'flow-box-child-child)
       "Accessor"
       (documentation 'flow-box-child-child 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-child-child object) => child}
   @syntax{(setf (gtk:flow-box-child-child object) child)}
   @argument[object]{a @class{gtk:flow-box-child} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box-child]{child} slot of the
-    @class{gtk:flow-box-child} class gets or sets the child widget of the
-    flow box child.
+    The accessor for the @slot[gtk:flow-box-child]{child} slot gets or sets
+    the child widget of the flow box child.
   @end{short}
   @see-class{gtk:flow-box-child}
   @see-class{gtk:widget}")
@@ -363,7 +362,7 @@ lambda (child)    :action
 
 #+liber-documentation
 (setf (documentation 'flow-box 'type)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @begin{short}
     The @class{gtk:flow-box} widget positions child widgets in sequence
     according to its orientation.
@@ -393,6 +392,15 @@ lambda (child)    :action
   it via the @fun{gtk:flow-box-insert} function, and a
   @class{gtk:flow-box-child} widget will automatically be inserted between the
   flow box and the widget.
+  @begin[Shortcut and Gestures]{dictionary}
+    The following signals have default keybindings:
+    @begin{itemize}
+      @item{@sig[gtk:flow-box]{move-cursor}}
+      @item{@sig[gtk:flow-box]{select-all}}
+      @item{@sig[gtk:flow-box]{toggle-cursor-child}}
+      @item{@sig[gtk:flow-box]{unselect-all}}
+    @end{itemize}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 flowbox
@@ -540,15 +548,14 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-accept-unpaired-release)
       "Accessor"
       (documentation 'flow-box-accept-unpaired-release 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-accept-unpaired-release object) => setting}
   @syntax{(setf (gtk:flow-box-accept-unpaired-release object) setting)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[setting]{a boolean whether to accept an unpaired release event}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{accept-unpaired-release} slot of
-    the @class{gtk:flow-box} class gets or sets whether to accept an unpaired
-    release event.
+    The accessor for the @slot[gtk:flow-box]{accept-unpaired-release} slot
+    gets or sets whether to accept an unpaired release event.
   @end{short}
   @see-class{gtk:flow-box}")
 
@@ -567,16 +574,15 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-activate-on-single-click)
       "Accessor"
       (documentation 'flow-box-activate-on-single-click 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-activate-on-single-click object) => setting}
   @syntax{(setf (gtk:flow-box-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[setting]{@em{true} to emit the @sig[gtk:flow-box]{child-activated}
     signal on a single click}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{activate-on-single-click} slot of
-    the @class{gtk:flow-box} class gets or sets whether children activate on
-    single clicks.
+    The accessor for the @slot[gtk:flow-box]{activate-on-single-click} slot
+    gets or sets whether children activate on single clicks.
   @end{short}
   If the @arg{setting} argument is @em{true}, children will be activated when
   you click on them, otherwise you need to double click.
@@ -594,15 +600,14 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-column-spacing)
       "Accessor"
       (documentation 'flow-box-column-spacing 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-column-spacing object) => spacing}
   @syntax{(setf (gtk:flow-box-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[spacing]{an unsigned integer for the spacing to use}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{column-spacing} slot of the
-    @class{gtk:flow-box} class gets or sets the horizontal space to add between
-    children.
+    The accessor for the @slot[gtk:flow-box]{column-spacing} slot gets or sets
+    the horizontal space to add between children.
   @end{short}
   @see-class{gtk:flow-box}
   @see-function{gtk:flow-box-row-spacing}")
@@ -619,16 +624,15 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-homogeneous)
       "Accessor"
       (documentation 'flow-box-homogeneous 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-homogeneous object) => homogeneous}
   @syntax{(setf (gtk:flow-box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[homogeneous]{@em{true} to create equal allotments, @em{false} for
     variable allotments}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{homogeneous} slot of the
-    @class{gtk:flow-box} class gets or sets whether the flow box is homogeneous
-    - all children are the same size.
+    The accessor for the @slot[gtk:flow-box]{homogeneous} slot gets or sets
+    whether the flow box is homogeneous - all children are the same size.
   @end{short}
   @see-class{gtk:flow-box}")
 
@@ -647,16 +651,16 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-max-children-per-line)
       "Accessor"
       (documentation 'flow-box-max-children-per-line 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-max-children-per-line object) => max}
   @syntax{(setf (gtk:flow-box-max-children-per-line object) max)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[max]{an unsigned integer for the maximum number of children per
     line}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{max-children-per-line} slot of the
-    @class{gtk:flow-box} class gets or sets the maximum number of children per
-    line to request and allocate space for in the orientation of the flow box.
+    The accessor for the @slot[gtk:flow-box]{max-children-per-line} slot gets
+    or sets the maximum number of children per line to request and allocate
+    space for in the orientation of the flow box.
   @end{short}
 
   Setting the maximum number of children per line limits the overall natural
@@ -681,16 +685,16 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-min-children-per-line)
       "Accessor"
       (documentation 'flow-box-min-children-per-line 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-min-children-per-line object) => min}
   @syntax{(setf (gtk:flow-box-min-children-per-line object) min)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[min]{an unsigned integer for the minimum number of children per
     line}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{min-children-per-line} slot of the
-    @class{gtk:flow-box} class gets or sets the minimum number of children per
-    line in the orientation of the flow box before flowing.
+    The accessor for the @slot[gtk:flow-box]{min-children-per-line} slot gets
+    or sets the minimum number of children per line in the orientation of the
+    flow box before flowing.
   @end{short}
   @see-class{gtk:flow-box}
   @see-function{gtk:flow-box-max-children-per-line}")
@@ -707,15 +711,14 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-row-spacing)
       "Accessor"
       (documentation 'flow-box-row-spacing 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-row-spacing object) => spacing}
   @syntax{(setf (gtk:flow-box-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[spacing]{an unsigned integer for the spacing to use}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{row-spacing} slot of the
-    @class{gtk:flow-box} class gets or sets the vertical space to add between
-    children.
+    The accessor for the @slot[gtk:flow-box]{row-spacing} slot gets or sets
+    the vertical space to add between children.
   @end{short}
   @see-class{gtk:flow-box}
   @see-function{gtk:flow-box-column-spacing}")
@@ -733,14 +736,14 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-function 'flow-box-selection-mode)
       "Accessor"
       (documentation 'flow-box-selection-mode 'function)
- "@version{2025-07-29}
+ "@version{2026-07-14}
   @syntax{(gtk:flow-box-selection-mode object) => mode}
   @syntax{(setf (gtk:flow-box-selection-mode object) mode)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[mode]{a value of the @sym{gtk:selection-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:flow-box]{selection-mode} slot of the
-    @class{gtk:flow-box} class gets or sets the selection mode of the flow box.
+    The accessor for the @slot[gtk:flow-box]{selection-mode} slot gets or sets
+    the selection mode of the flow box.
   @end{short}
   @see-class{gtk:flow-box}
   @see-symbol{gtk:selection-mode}")

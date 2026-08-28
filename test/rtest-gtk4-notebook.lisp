@@ -106,47 +106,50 @@
              (glib-test:list-signals "GtkNotebookPage")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNotebookPage" GTK:NOTEBOOK-PAGE
-                       (:SUPERCLASS GOBJECT:OBJECT
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_notebook_page_get_type")
-                       ((CHILD NOTEBOOK-PAGE-CHILD "child" "GtkWidget" T NIL)
-                        (DETACHABLE NOTEBOOK-PAGE-DETACHABLE
-                         "detachable" "gboolean" T T)
-                        (MENU NOTEBOOK-PAGE-MENU "menu" "GtkWidget" T NIL)
-                        (MENU-LABEL NOTEBOOK-PAGE-MENU-LABEL
-                         "menu-label" "gchararray" T T)
-                        (POSITION NOTEBOOK-PAGE-POSITION "position" "gint" T T)
-                        (REORDERABLE NOTEBOOK-PAGE-REORDERABLE
-                         "reorderable" "gboolean" T T)
-                        (TAB NOTEBOOK-PAGE-TAB "tab" "GtkWidget" T NIL)
-                        (TAB-EXPAND NOTEBOOK-PAGE-TAB-EXPAND
-                         "tab-expand" "gboolean" T T)
-                        (TAB-FILL NOTEBOOK-PAGE-TAB-FILL
-                         "tab-fill" "gboolean" T T)
-                        (TAB-LABEL NOTEBOOK-PAGE-TAB-LABEL
-                         "tab-label" "gchararray" T T)))
+                      (:SUPERCLASS GOBJECT:OBJECT
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_notebook_page_get_type")
+                      ((CHILD NOTEBOOK-PAGE-CHILD "child" "GtkWidget" T NIL)
+                       (DETACHABLE NOTEBOOK-PAGE-DETACHABLE
+                        "detachable" "gboolean" T T)
+                       (MENU NOTEBOOK-PAGE-MENU "menu" "GtkWidget" T NIL)
+                       (MENU-LABEL NOTEBOOK-PAGE-MENU-LABEL
+                        "menu-label" "gchararray" T T)
+                       (POSITION NOTEBOOK-PAGE-POSITION "position" "gint" T T)
+                       (REORDERABLE NOTEBOOK-PAGE-REORDERABLE
+                        "reorderable" "gboolean" T T)
+                       (TAB NOTEBOOK-PAGE-TAB "tab" "GtkWidget" T NIL)
+                       (TAB-EXPAND NOTEBOOK-PAGE-TAB-EXPAND
+                        "tab-expand" "gboolean" T T)
+                       (TAB-FILL NOTEBOOK-PAGE-TAB-FILL
+                        "tab-fill" "gboolean" T T)
+                       (TAB-LABEL NOTEBOOK-PAGE-TAB-LABEL
+                        "tab-label" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkNotebookPage"))))
 
 ;;; --- Properties for GtkNotebookPage -----------------------------------------
 
 (test gtk-notebook-page-properties
-  (let* ((box (make-instance 'gtk:box))
-         (page (make-instance 'gtk:notebook-page
-                              :child box)))
+  (glib-test:with-check-memory (page (box 2) :strong 1)
+    (is (typep (setf box (make-instance 'gtk:box)) 'gtk:box))
+    (is (typep (setf page
+                     (make-instance 'gtk:notebook-page :child box))
+               'gtk:notebook-page))
     (is (eq box (gtk:notebook-page-child page)))
+    ;; Property CHILD is not writable
+    (signals (error) (setf (gtk:notebook-page-child page) nil))
     (is-false (gtk:notebook-page-detachable page))
     (is-false (gtk:notebook-page-menu page))
+    ;; Property MENU is not writable
+    (signals (error) (setf (gtk:notebook-page-menu page) nil))
     (is-false (gtk:notebook-page-menu-label page))
     (is (= 0 (gtk:notebook-page-position page)))
     (is-false (gtk:notebook-page-reorderable page))
     (is-false (gtk:notebook-page-tab page))
     (is-false (gtk:notebook-page-tab-expand page))
     (is-true (gtk:notebook-page-tab-fill page))
-    (is-false (gtk:notebook-page-tab-label page))
-    ;; Check memory management
-    (is (= 1 (g:object-ref-count page)))
-    (is (= 2 (g:object-ref-count box)))))
+    (is-false (gtk:notebook-page-tab-label page))))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -186,24 +189,24 @@
   (is (eq :GROUP (gtk:widget-class-accessible-role "GtkNotebook")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkNotebook" GTK:NOTEBOOK
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_notebook_get_type")
-                       ((ENABLE-POPUP NOTEBOOK-ENABLE-POPUP
-                         "enable-popup" "gboolean" T T)
-                        (GROUP-NAME NOTEBOOK-GROUP-NAME
-                         "group-name" "gchararray" T T)
-                        (PAGE NOTEBOOK-PAGE "page" "gint" T T)
-                        (PAGES NOTEBOOK-PAGES "pages" "GListModel" T NIL)
-                        (SCROLLABLE NOTEBOOK-SCROLLABLE
-                         "scrollable" "gboolean" T T)
-                        (SHOW-BORDER NOTEBOOK-SHOW-BORDER
-                         "show-border" "gboolean" T T)
-                        (SHOW-TABS NOTEBOOK-SHOW-TABS "show-tabs" "gboolean" T T)
-                        (TAB-POS NOTEBOOK-TAB-POS
-                         "tab-pos" "GtkPositionType" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_notebook_get_type")
+                      ((ENABLE-POPUP NOTEBOOK-ENABLE-POPUP
+                        "enable-popup" "gboolean" T T)
+                       (GROUP-NAME NOTEBOOK-GROUP-NAME
+                        "group-name" "gchararray" T T)
+                       (PAGE NOTEBOOK-PAGE "page" "gint" T T)
+                       (PAGES NOTEBOOK-PAGES "pages" "GListModel" T NIL)
+                       (SCROLLABLE NOTEBOOK-SCROLLABLE
+                        "scrollable" "gboolean" T T)
+                       (SHOW-BORDER NOTEBOOK-SHOW-BORDER
+                        "show-border" "gboolean" T T)
+                       (SHOW-TABS NOTEBOOK-SHOW-TABS "show-tabs" "gboolean" T T)
+                       (TAB-POS NOTEBOOK-TAB-POS
+                        "tab-pos" "GtkPositionType" T T)))
              (gobject:get-gtype-definition "GtkNotebook"))))
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -391,8 +394,9 @@
 ;;; --- Properties for GtkNotebook ---------------------------------------------
 
 (test gtk-notebook-properties
-  (let ((notebook (make-instance 'gtk:notebook))
-        (page (make-instance 'gtk:box)))
+  (glib-test:with-check-memory (notebook page)
+    (is (typep (setf notebook (make-instance 'gtk:notebook)) 'gtk:notebook))
+    (is (typep (setf page (make-instance 'gtk:box)) 'gtk:box))
     ;; Add a page to notebook
     (is (= 0 (gtk:notebook-add-page notebook page nil)))
     ;; Read the properties
@@ -409,70 +413,63 @@
     (is-false (gtk:notebook-remove-page notebook page))))
 
 (test gtk-notebook-pages
-  (let ((notebook (make-instance 'gtk:notebook))
-        (page1 (gtk:box-new))
-        (page2 (gtk:frame-new))
-        (page3 (gtk:paned-new))
-        (pages nil))
-    ;; Add first page to notebook
-    (is (= 1 (g:object-ref-count page1)))
-    (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
-    (is (= 4 (g:object-ref-count page1))) ; Value is 4 and not 2. Why?
-    ;; Add more pages to notebook
-    (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
-    (is (= 2 (gtk:notebook-add-page notebook page3 nil)))
-    ;; Retrieve list model
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (= 2 (g:object-ref-count pages)))
-    (is (eq (g:gtype "GtkNotebookPage") (g:list-model-item-type pages)))
-    (is (= 3 (g:list-model-n-items pages)))
-    ;; Retrieve notebook page from list model
-    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
-    (is (= 2 (g:object-ref-count (g:list-model-item pages 0))))
-    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
-    (is (eq page1 (gtk:notebook-page-child (g:list-model-item pages 0))))
-    (is (= 4 (g:object-ref-count
-                 (gtk:notebook-page-child (g:list-model-item pages 0)))))
-    (is (= 4 (g:object-ref-count page1)))
-    ;; Retrieve more notebook pages
-    (is (typep (g:list-model-item pages 1) 'gtk:notebook-page))
-    (is (typep (g:list-model-item pages 2) 'gtk:notebook-page))
+  (glib-test:with-check-memory (notebook (page1 2) (page2 2) (page3 2) :strong 4)
+    (is (typep (setf notebook (make-instance 'gtk:notebook)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf page2 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page3 (gtk:paned-new)) 'gtk:paned))
+    (let (pages)
+      ;; Add first page to notebook
+      (is (= 1 (g:object-ref-count page1)))
+      (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
+      (is (= 4 (g:object-ref-count page1))) ; Value is 4 and not 2. Why?
+      ;; Add more pages to notebook
+      (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
+      (is (= 2 (gtk:notebook-add-page notebook page3 nil)))
+      ;; Retrieve list model
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (= 2 (g:object-ref-count pages)))
+      (is (eq (g:gtype "GtkNotebookPage") (g:list-model-item-type pages)))
+      (is (= 3 (g:list-model-n-items pages)))
+      ;; Retrieve notebook page from list model
+      (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+      (is (= 2 (g:object-ref-count (g:list-model-item pages 0))))
+      (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
+      (is (eq page1 (gtk:notebook-page-child (g:list-model-item pages 0))))
+      (is (= 4 (g:object-ref-count
+                   (gtk:notebook-page-child (g:list-model-item pages 0)))))
+      (is (= 4 (g:object-ref-count page1)))
+      ;; Retrieve more notebook pages
+      (is (typep (g:list-model-item pages 1) 'gtk:notebook-page))
+      (is (typep (g:list-model-item pages 2) 'gtk:notebook-page))
 
-    (is-false (gtk:notebook-remove-page notebook page1))
-    (is-false (gtk:notebook-remove-page notebook page2))
-    (is-false (gtk:notebook-remove-page notebook page3))
+      (is-false (gtk:notebook-remove-page notebook page1))
+      (is-false (gtk:notebook-remove-page notebook page2))
+      (is-false (gtk:notebook-remove-page notebook page3))
 
-    (is (= 0 (g:list-model-n-items pages)))
-    ;; TODO: We have a strong reference to PAGES and PAGE1, PAGE2, PAGE3.
-    ;; Can we remove the strong references?
-    (is (= 2 (g:object-ref-count page1)))
-    (is (= 2 (g:object-ref-count page2)))
-    (is (= 2 (g:object-ref-count page3)))
-    (is (= 2 (g:object-ref-count pages)))
-    (is (= 1 (g:object-ref-count notebook)))))
+      (is (= 0 (g:list-model-n-items pages))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_notebook_new
 
 (test gtk-notebook-new
-  (is (typep (gtk:notebook-new) 'gtk:notebook))
-  (is (= 1 (g:object-ref-count (gtk:notebook-new))))
-  ;; Create with make-instance
-  (is (typep (make-instance 'gtk:notebook) 'gtk:notebook))
-  (is (= 1 (g:object-ref-count (make-instance 'gtk:notebook))))
-  ;; Create with g:object-new
-  (is (typep (g:object-new "GtkNotebook") 'gtk:notebook))
-  (is (= 1 (g:object-ref-count (g:object-new "GtkNotebook")))))
+  (glib-test:with-check-memory (notebook)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    ;; Create with make-instance
+    (is (typep (setf notebook (make-instance 'gtk:notebook)) 'gtk:notebook))
+    ;; Create with g:object-new
+    (is (typep (setf notebook (g:object-new "GtkNotebook")) 'gtk:notebook))))
 
 ;;;     gtk_notebook_get_n_pages
 ;;;     gtk_notebook_get_nth_page
 
 (test gtk-notebook-n-pages/nth-page
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:box-new))
-        (page3 (gtk:paned-new)))
+  (glib-test:with-check-memory (notebook page1 page2 page3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf page3 (gtk:paned-new)) 'gtk:paned))
     ;; Add pages to notebook
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
@@ -483,44 +480,38 @@
     (is (eq page1 (gtk:notebook-nth-page notebook 0)))
     (is (eq page2 (gtk:notebook-nth-page notebook 1)))
     (is (eq page3 (gtk:notebook-nth-page notebook 2)))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gtk:notebook-remove-page notebook page1))
     (is-false (gtk:notebook-remove-page notebook page2))
-    (is-false (gtk:notebook-remove-page notebook page3))
-    (is (= 1 (g:object-ref-count page1)))
-    (is (= 1 (g:object-ref-count page2)))
-    (is (= 1 (g:object-ref-count page3)))
-    (is (= 1 (g:object-ref-count notebook)))))
+    (is-false (gtk:notebook-remove-page notebook page3))))
 
 ;;;     gtk_notebook_page_num
 
 (test gtk-notebook-page-num
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:frame-new))
-        (label (gtk:label-new "label")))
+  (glib-test:with-check-memory (notebook page1 page2 (label 2) :strong 1)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
     ;; Add pages to notebook
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 label)))
     ;; Retrieve index from child widget
     (is (= 0 (gtk:notebook-page-num notebook page1)))
     (is (= 1 (gtk:notebook-page-num notebook page2)))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gtk:notebook-remove-page notebook page1))
-    (is-false (gtk:notebook-remove-page notebook page2))
-    (is (= 2 (g:object-ref-count label)))
-    (is (= 1 (g:object-ref-count page1)))
-    (is (= 1 (g:object-ref-count page2)))
-    (is (= 1 (g:object-ref-count notebook)))))
+    (is-false (gtk:notebook-remove-page notebook page2))))
 
 ;;;     gtk_notebook_get_current_page
 ;;;     gtk_notebook_set_current_page
 
 (test gtk-notebook-current-page
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:box-new))
-        (page3 (gtk:paned-new)))
+  (glib-test:with-check-memory (notebook page1 page2 page3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf page3 (gtk:paned-new)) 'gtk:paned))
     ;; Add pages to notebook
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
@@ -534,7 +525,7 @@
     (is (eq page2
             (gtk:notebook-nth-page notebook
                                    (gtk:notebook-current-page notebook))))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gtk:notebook-remove-page notebook page1))
     (is-false (gtk:notebook-remove-page notebook page2))
     (is-false (gtk:notebook-remove-page notebook page3))))
@@ -543,10 +534,11 @@
 ;;;     gtk_notebook_prev_page
 
 (test gtk-notebook-next/prev-page
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:box-new))
-        (page3 (gtk:paned-new)))
+  (glib-test:with-check-memory (notebook page1 page2 page3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf page3 (gtk:paned-new)) 'gtk:paned))
     ;; Add pages to notebook
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
@@ -560,7 +552,7 @@
     (is (= 1 (gtk:notebook-current-page notebook)))
     (is-false (gtk:notebook-prev-page notebook))
     (is (= 0 (gtk:notebook-current-page notebook)))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gtk:notebook-remove-page notebook page1))
     (is-false (gtk:notebook-remove-page notebook page2))
     (is-false (gtk:notebook-remove-page notebook page3))))
@@ -573,20 +565,22 @@
 ;;;     gtk_notebook_insert_page_menu
 
 (test gtk-notebook-add-page
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:box-new))
-        (page3 (gtk:paned-new))
-        (label1 (gtk:label-new "page1"))
-        (label2 (gtk:label-new "page2"))
-        (label3 (gtk:label-new "page3")))
+  (glib-test:with-check-memory (notebook page1 page2 page3
+                                (label1 2) (label2 2) (label3 2) :strong 3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf page3 (gtk:paned-new)) 'gtk:paned))
+    (is (typep (setf label1 (gtk:label-new "page1")) 'gtk:label))
+    (is (typep (setf label2 (gtk:label-new "page2")) 'gtk:label))
+    (is (typep (setf label3 (gtk:label-new "page3")) 'gtk:label))
     (is (= 0 (gtk:notebook-add-page notebook page1 label1)))
     (is (= 0 (gtk:notebook-add-page notebook page2 label2 :pos :start)))
     (is (= 2 (gtk:notebook-add-page notebook page3 label3 :pos :end)))
     (is (typep (gtk:notebook-nth-page notebook 0) 'gtk:box))
     (is (typep (gtk:notebook-nth-page notebook 1) 'gtk:frame))
     (is (typep (gtk:notebook-nth-page notebook 2) 'gtk:paned))
-    ;; Check memory management
+    ;; Remove references
     (is-false (gtk:notebook-remove-page notebook page1))
     (is-false (gtk:notebook-remove-page notebook page2))
     (is-false (gtk:notebook-remove-page notebook page3))))
@@ -594,10 +588,11 @@
 ;;;     gtk_notebook_remove_page
 
 (test gtk-notebook-remove-page
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:frame-new))
-        (label (gtk:label-new "label")))
+  (glib-test:with-check-memory (notebook page1 page2 (label 2) :strong 1)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
     (is (= 1 (g:object-ref-count page1)))
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 4 (g:object-ref-count page1)))
@@ -613,9 +608,10 @@
 ;;;     gtk_notebook_detach_tab
 
 (test gtk-notebook-detach-tab
-  (let ((notebook (gtk:notebook-new))
-         (page1 (gtk:frame-new))
-         (page2 (gtk:box-new)))
+  (glib-test:with-check-memory (notebook page1 page2)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
     (is (= 1 (g:object-ref-count page1)))
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 nil)))
@@ -629,10 +625,11 @@
 ;;;     gtk_notebook_reorder_child
 
 (test gtk-notebook-reorder-child
-  (let ((notebook (gtk:notebook-new))
-        (page1 (gtk:frame-new))
-        (page2 (gtk:frame-new))
-        (label (gtk:label-new "label")))
+  (glib-test:with-check-memory (notebook page1 page2 (label 2) :strong 1)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page1 (gtk:frame-new)) 'gtk:frame))
+    (is (typep (setf page2 (gtk:box-new)) 'gtk:box))
+    (is (typep (setf label (gtk:label-new "label")) 'gtk:label))
     (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
     (is (= 1 (gtk:notebook-add-page notebook page2 label)))
     (is-false (gtk:notebook-reorder-child notebook page2 0))
@@ -646,8 +643,9 @@
 ;;;     gtk_notebook_popup_disable
 
 (test gtk-notebook-popup-enable/disable
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new)))
+  (glib-test:with-check-memory (notebook page)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
     (is (= 0 (gtk:notebook-add-page notebook page nil)))
     (is-false (gtk:notebook-enable-popup notebook))
     (is-true (gtk:notebook-popup-enable notebook))
@@ -660,124 +658,132 @@
 ;;;     gtk_notebook_set_tab_detachable
 
 (test gtk-notebook-tab-detachable
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
-    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
-    (is-false (gtk:notebook-tab-detachable notebook page))
-    (is-false (gtk:notebook-page-detachable (g:list-model-item pages 0)))
-    (is-true (setf (gtk:notebook-tab-detachable notebook page) t))
-    (is-true (gtk:notebook-tab-detachable notebook page))
-    (is-true (gtk:notebook-page-detachable (g:list-model-item pages 0)))
+  (glib-test:with-check-memory (notebook (page 2) :strong 2)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+      (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
+      (is-false (gtk:notebook-tab-detachable notebook page))
+      (is-false (gtk:notebook-page-detachable (g:list-model-item pages 0)))
+      (is-true (setf (gtk:notebook-tab-detachable notebook page) t))
+      (is-true (gtk:notebook-tab-detachable notebook page))
+      (is-true (gtk:notebook-page-detachable (g:list-model-item pages 0)))
 
-    (is-false (gtk:notebook-remove-page notebook page))))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_get_tab_reorderable
 ;;;     gtk_notebook_set_tab_reorderable
 
 (test gtk-notebook-tab-reorderable
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
-    (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
-    (is-false (gtk:notebook-tab-reorderable notebook page))
-    (is-false (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
-    (is-true (setf (gtk:notebook-tab-reorderable notebook page) t))
-    (is-true (gtk:notebook-tab-reorderable notebook page))
-    (is-true (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
+  (glib-test:with-check-memory (notebook (page 2) :strong 2)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (typep (g:list-model-item pages 0) 'gtk:notebook-page))
+      (is (typep (gtk:notebook-page-child (g:list-model-item pages 0)) 'gtk:box))
+      (is-false (gtk:notebook-tab-reorderable notebook page))
+      (is-false (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
+      (is-true (setf (gtk:notebook-tab-reorderable notebook page) t))
+      (is-true (gtk:notebook-tab-reorderable notebook page))
+      (is-true (gtk:notebook-page-reorderable (g:list-model-item pages 0)))
 
-    (is-false (gtk:notebook-remove-page notebook page))))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_get_menu_label
 ;;;     gtk_notebook_set_menu_label
 
 (test gtk-notebook-menu-label
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (label (gtk:label-new "menu"))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
-    (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
+  (glib-test:with-check-memory (notebook (page 2) (label 2) :strong 3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (is (typep (setf label (gtk:label-new "menu")) 'gtk:label))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
+      (is (eq label (gtk:notebook-menu-label notebook page)))
+      (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
 
-    (is-false (gtk:notebook-remove-page notebook page))))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_get_menu_label_text
 ;;;     gtk_notebook_set_menu_label_text
 
 (test gtk-notebook-menu-label-text
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (label (gtk:label-new "no label"))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil :menu label)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (string= "menu"
-                 (setf (gtk:notebook-menu-label-text notebook page) "menu")))
-    (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
-    (is (string= "menu"
-                 (gtk:label-label
-                     (gtk:notebook-page-menu (g:list-model-item pages 0)))))
-    (is-false (gtk:notebook-remove-page notebook page))))
+  (glib-test:with-check-memory (notebook (page 2) label :strong 3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (is (typep (setf label (gtk:label-new "menu")) 'gtk:label))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil :menu label)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (string= "menu"
+                   (setf (gtk:notebook-menu-label-text notebook page) "menu")))
+      (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
+      (is (string= "menu"
+                   (gtk:label-label
+                       (gtk:notebook-page-menu (g:list-model-item pages 0)))))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 (test gtk-notebook-menu-label-text.2
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (string= "menu"
-                 (setf (gtk:notebook-menu-label-text notebook page) "menu")))
-    (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
-    ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-menu-label (g:list-model-item pages 0)))
-    (is-false (gtk:notebook-remove-page notebook page))))
+  (glib-test:with-check-memory (notebook (page 2) :strong 2)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (string= "menu"
+                   (setf (gtk:notebook-menu-label-text notebook page) "menu")))
+      (is (string= "menu" (gtk:notebook-menu-label-text notebook page)))
+      ;; FIXME: Should return the string, but returns nil
+      (is-false (gtk:notebook-page-menu-label (g:list-model-item pages 0)))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_get_tab_label
 ;;;     gtk_notebook_set_tab_label
 
 (test gtk-notebook-tab-label
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (label (gtk:label-new "tab"))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
-    (is (eq label (gtk:notebook-menu-label notebook page)))
-    (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
-    (is-false (gtk:notebook-remove-page notebook page))))
+  (glib-test:with-check-memory (notebook (page 2) (label 2) :strong 3)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (is (typep (setf label (gtk:label-new "tab")) 'gtk:label))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (eq label (setf (gtk:notebook-menu-label notebook page) label)))
+      (is (eq label (gtk:notebook-menu-label notebook page)))
+      (is (eq label (gtk:notebook-page-menu (g:list-model-item pages 0))))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_set_tab_label_text
 ;;;     gtk_notebook_get_tab_label_text
 
 (test gtk-notebook-tab-label-text
-  (let ((notebook (gtk:notebook-new))
-        (page (gtk:box-new))
-        (pages nil))
-    (is (= 0 (gtk:notebook-add-page notebook page nil)))
-    (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
-    (is (string= "tab"
-                 (setf (gtk:notebook-tab-label-text notebook page) "tab")))
-    (is (string= "tab" (gtk:notebook-tab-label-text notebook page)))
-    ;; FIXME: Should return the string, but returns nil
-    (is-false (gtk:notebook-page-tab-label (g:list-model-item pages 0)))
-    (is-false (gtk:notebook-remove-page notebook page))))
+  (glib-test:with-check-memory (notebook (page 2) :strong 2)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf page (gtk:box-new)) 'gtk:box))
+    (let (pages)
+      (is (= 0 (gtk:notebook-add-page notebook page nil)))
+      (is (typep (setf pages (gtk:notebook-pages notebook)) 'gtk:notebook-pages))
+      (is (string= "tab"
+                   (setf (gtk:notebook-tab-label-text notebook page) "tab")))
+      (is (string= "tab" (gtk:notebook-tab-label-text notebook page)))
+      ;; FIXME: Should return the string, but returns nil
+      (is-false (gtk:notebook-page-tab-label (g:list-model-item pages 0)))
+      (is-false (gtk:notebook-remove-page notebook page)))))
 
 ;;;     gtk_notebook_set_action_widget
 ;;;     gtk_notebook_get_action_widget
 
 (test gtk-notebook-action-widget
-  (let ((notebook (gtk:notebook-new))
-        (widget (gtk:button-new)))
+  (glib-test:with-check-memory (notebook widget)
+    (is (typep (setf notebook (gtk:notebook-new)) 'gtk:notebook))
+    (is (typep (setf widget (gtk:button-new)) 'gtk:button))
     (is-false (gtk:notebook-action-widget notebook :start))
     (is-false (gtk:notebook-action-widget notebook :end))
 
@@ -786,4 +792,4 @@
 
     (is-false (setf (gtk:notebook-action-widget notebook :start) nil))))
 
-;;; 2024-11-10
+;;; 2026-07-17

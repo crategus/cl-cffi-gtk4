@@ -2,7 +2,7 @@
 ;;; gtk4.expander.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -228,14 +228,14 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-child)
       "Accessor"
       (documentation 'expander-child 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-child object) => child}
   @syntax{(setf (gtk:expander-child object) child)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[child]{a @class{gtk:widget} child widget for the expander}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{child} slot of the
-    @class{gtk:expander} class sets the child widget for the expander.
+    The accessor for the @slot[gtk:expander]{child} slot gets or sets the
+    child widget for the expander.
   @end{short}
   @see-class{gtk:expander}
   @see-class{gtk:widget}")
@@ -253,15 +253,14 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-expanded)
       "Accessor"
       (documentation 'expander-expanded 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-expanded object) => expanded}
   @syntax{(setf (gtk:expander-expanded object) expanded)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[expanded]{a boolean whether the child widget is revealed}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{expanded} slot of the
-    @class{gtk:expander} class queries a @class{gtk:expander} widget and
-    returns its current state.
+    The accessor for the @slot[gtk:expander]{expanded} slot gets or sets
+    whether the expander has been opened to reveal the child widget.
   @end{short}
   Set to @em{true}, if you want the child widget to be revealed, and @em{false}
   if you want the child widget to be hidden.
@@ -280,15 +279,15 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-label)
       "Accessor"
       (documentation 'expander-label 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-label object) => label}
   @syntax{(setf (gtk:expander-label object) label)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[label]{a string for the text of the label of the expander}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{label} slot of the
-    @class{gtk:expander} class fetches the text from a label widget including
-    any embedded underlines indicating mnemonics and Pango markup.
+    The accessor for the @slot[gtk:expander]{label} slot gets or sets the text
+    of a label widget including any embedded underlines indicating mnemonics
+    and Pango markup.
   @end{short}
   If the label text has not been set the return value will be @code{nil}.
   @see-class{gtk:expander}
@@ -306,14 +305,14 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-label-widget)
       "Accessor"
       (documentation 'expander-label-widget 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-label-widget object) => widget}
   @syntax{(setf (gtk:expander-label-widget object) widget)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[widget]{a @class{gtk:widget} label widget}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{label-widget} slot of the
-    @class{gtk:expander} class gets or sets the label widget for the expander.
+    The accessor for the @slot[gtk:expander]{label-widget} slot gets or sets
+    the label widget for the expander.
   @end{short}
   This is the widget that will appear embedded alongside the expander arrow.
   @see-class{gtk:expander}
@@ -334,15 +333,15 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-resize-toplevel)
       "Accessor"
       (documentation 'expander-resize-toplevel 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-resize-toplevel object) => resize}
   @syntax{(setf (gtk:expander-resize-toplevel object) resize)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[resize]{a boolean whether to resize the toplevel}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{resize-toplevel} slot of the
-    @class{gtk:expander} class gets or sets whether the expander will resize
-    the toplevel widget containing the expander upon resizing and collpasing.
+    The accessor for the @slot[gtk:expander]{resize-toplevel} slot gets or sets
+    whether the expander will resize the toplevel widget containing the expander
+    upon resizing and collpasing.
   @end{short}
   @see-class{gtk:expander}")
 
@@ -359,16 +358,16 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-use-markup)
       "Accessor"
       (documentation 'expander-use-markup 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-use-markup object) => use-markup}
   @syntax{(setf (gtk:expander-use-markup object) use-markup)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[use-markup]{@em{true} if the text of the label should be parsed for
     markup}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{use-markup} slot of the
-    @class{gtk:expander} class gets or sets whether the text of the label is
-    interpreted as marked up with the Pango text markup language.
+    The accessor for the @slot[gtk:expander]{use-markup} slot gets or sets
+    whether the text of the label is interpreted as marked up with the Pango
+    text markup language.
   @end{short}
   @see-class{gtk:expander}")
 
@@ -386,16 +385,15 @@ lambda (expander)   :action
 (setf (liber:alias-for-function 'expander-use-underline)
       "Accessor"
       (documentation 'expander-use-underline 'function)
- "@version{2025-07-31}
+ "@version{2026-07-17}
   @syntax{(gtk:expander-use-underline object) => use-underline}
   @syntax{(setf (gtk:expander-use-underline object) use-underline)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[use-underline]{@em{true} if underlines in the text indicate
     mnemonics}
   @begin{short}
-    The accessor for the @slot[gtk:expander]{use-underline} slot of the
-    @class{gtk:expander} class returns whether an embedded underline in the
-    expander label indicates a mnemonic.
+    The accessor for the @slot[gtk:expander]{use-underline} slot gets or sets
+    whether an embedded underline in the expander label indicates a mnemonic.
   @end{short}
   If @em{true}, an underline in the text of the expander label indicates the
   next character should be used for the mnemonic accelerator key.

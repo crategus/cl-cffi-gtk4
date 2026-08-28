@@ -2,7 +2,7 @@
 ;;; gtk4.action-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -142,15 +142,14 @@ actionbar
 (setf (liber:alias-for-function 'action-bar-revealed)
       "Accessor"
       (documentation 'action-bar-revealed 'function)
- "@version{2025-07-31}
+ "@version{2026-07-15}
   @syntax{(gtk:action-bar-revealed object) => revealed}
   @syntax{(setf (gtk:action-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:action-bar} widget}
   @argument[revealed]{a boolean whether the action bar shows its contents}
   @begin{short}
-    The accessor for the @slot[gtk:action-bar]{revealed} slot of the
-    @class{gtk:action-bar} class gets or sets whether the action bar shows
-    its contents.
+    The accessor for the @slot[gtk:action-bar]{revealed} slot gets or sets
+    whether the action bar shows its contents.
   @end{short}
   Changing the @slot[gtk:action-bar]{revealed} property will make the action bar
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.

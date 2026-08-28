@@ -117,13 +117,35 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-revealer-properties
-  (glib-test:with-check-memory (revealer)
+  (glib-test:with-check-memory (revealer child)
     (setf revealer (make-instance 'gtk:revealer))
+    (setf child (gtk:button-new))
+    ;; Property CHILD
+    (is (equal '(:READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkRevealer" "child")))
     (is-false (gtk:revealer-child revealer))
+    (is (eq child (setf (gtk:revealer-child revealer) child)))
+    ;; Property CHILD-REVEALED
+    (is (equal '(:READABLE)
+               (glib-test:list-param-flags "GtkRevealer" "child-revealed")))
     (is-false (gtk:revealer-child-revealed revealer))
+    ;; Property REVEAL-CHILD
+    (is (equal '(:CONSTRUCT :READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkRevealer" "reveal-child")))
     (is-false (gtk:revealer-reveal-child revealer))
+    (is-true (setf (gtk:revealer-reveal-child revealer) t))
+    ;; Property TRANSITION-DURATION
+    (is (equal '(:CONSTRUCT :READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkRevealer" "transition-duration")))
     (is (= 250 (gtk:revealer-transition-duration revealer)))
-    (is (eq :slide-down (gtk:revealer-transition-type revealer)))))
+    (is (= 100 (setf (gtk:revealer-transition-duration revealer) 100)))
+    ;; Property TRANSITION-TYPE
+    (is (equal '(:CONSTRUCT :READABLE :WRITABLE)
+               (glib-test:list-param-flags "GtkRevealer" "transition-type")))
+    (is (eq :slide-down (gtk:revealer-transition-type revealer)))
+    (is (eq :swing-down (setf (gtk:revealer-transition-type revealer) :swing-down)))
+    ;; Remove references
+    (is-false (setf (gtk:revealer-child revealer) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -133,4 +155,4 @@
   (glib-test:with-check-memory (revealer)
     (is (typep (setf revealer (gtk:revealer-new)) 'gtk:revealer))))
 
-;;; 2026-05-14
+;;; 2026-05-23

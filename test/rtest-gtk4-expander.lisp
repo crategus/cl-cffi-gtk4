@@ -84,6 +84,7 @@
     (is (typep (setf expander (make-instance 'gtk:expander)) 'gtk:expander))
     (is-false (gtk:expander-child expander))
     (is-false (gtk:expander-expanded expander))
+    (is-true (setf (gtk:expander-expanded expander) t))
     (is-false (gtk:expander-label expander))
     (is-false (gtk:expander-label-widget expander))
     (is-false (gtk:expander-resize-toplevel expander))

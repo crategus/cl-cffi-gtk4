@@ -2,7 +2,7 @@
 ;;; gtk4.header-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -203,17 +203,16 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-decoration-layout)
       "Accessor"
       (documentation 'header-bar-decoration-layout 'function)
- "@version{2025-07-31}
+ "@version{2026-07-15}
   @syntax{(gtk:header-bar-decoration-layout object) => layout}
   @syntax{(setf (gtk:header-bar-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[layout]{a string for the decoration layout, or @code{nil} to unset
     the layout}
   @begin{short}
-    The accessor for the @slot[gtk:header-bar]{decoration-layout} slot of the
-    @class{gtk:header-bar} class gets or sets the decoration layout for the
-    header bar, overriding the @slot[gtk:settings]{gtk-decoration-layout}
-    setting.
+    The accessor for the @slot[gtk:header-bar]{decoration-layout} slot gets or
+    sets the decoration layout for the header bar, overriding the
+    @slot[gtk:settings]{gtk-decoration-layout} setting.
   @end{short}
 
   There can be valid reasons for overriding the setting, such as a header bar
@@ -250,15 +249,15 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-show-title-buttons)
       "Accessor"
       (documentation 'header-bar-show-title-buttons 'function)
- "@version{2025-07-31}
+ "@version{2026-07-15}
   @syntax{(gtk:header-bar-show-title-buttons object) => setting}
   @syntax{(setf (gtk:header-bar-show-title-buttons object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[setting]{@em{true} if title buttons are shown}
   @begin{short}
-    The accessor for the @slot[gtk:header-bar]{show-title-buttons} slot of the
-    @class{gtk:header-bar} class gets or sets whether the header bar shows the
-    standard window title buttons including Close, Maximize, and Minimize.
+    The accessor for the @slot[gtk:header-bar]{show-title-buttons} slot gets or
+    sets whether the header bar shows the standard window title buttons
+    including Close, Maximize, and Minimize.
   @end{short}
   @see-class{gtk:header-bar}")
 
@@ -268,23 +267,21 @@ headerbar
 (setf (documentation (liber:slot-documentation "title-widget" 'header-bar) t)
  "The @code{title-widget} property of type @class{gtk:widget} (Read / Write)
   @br{}
-  Title widget to display.")
+  The title widget to display.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'header-bar-title-widget)
       "Accessor"
       (documentation 'header-bar-title-widget 'function)
- "@version{2025-07-31}
+ "@version{2026-07-15}
   @syntax{(gtk:header-bar-title-widget object) => title}
   @syntax{(setf (gtk:header-bar-title-widget object) title)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[title]{a @class{gtk:widget} title widget for the header bar}
   @begin{short}
-    The accessor for the @slot[gtk:header-bar]{title-widget} slot of the
-    @class{gtk:header-bar} class gets or sets the title widget of the header
-    bar.
+    The accessor for the @slot[gtk:header-bar]{title-widget} slot gets or sets
+    the title widget of the header bar.
   @end{short}
-
   When set to @code{nil}, the header bar will display the title of the window
   it is contained in. The title should help a user identify the current view.
   To achieve the same style as the builtin title, use the @code{title} style
@@ -312,17 +309,15 @@ headerbar
 (setf (liber:alias-for-function 'header-bar-use-native-controls)
       "Accessor"
       (documentation 'header-bar-use-native-controls 'function)
- "@version{2025-07-31}
+ "@version{2026-07-15}
   @syntax{(gtk:header-bar-use-native-controls object) => setting}
   @syntax{(setf (gtk:header-bar-use-native-controls object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[setting]{@em{true} to show native controls}
   @begin{short}
-    The accessor for the @slot[gtk:header-bar]{use-native-controls} slot of the
-    @class{gtk:header-bar} class gets or sets whether this header bar shows
-    platform native window controls.
+    The accessor for the @slot[gtk:header-bar]{use-native-controls} slot gets
+    or sets whether this header bar shows platform native window controls.
   @end{short}
-
   This option shows the \"stoplight\" buttons on macOS. For Linux, this option
   has no effect. See also
   @url[https://docs.gtk.org/gtk4/osx.html?native-window-controls]{Using GTK on Apple macOS}.

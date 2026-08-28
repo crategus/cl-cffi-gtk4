@@ -2,7 +2,7 @@
 ;;; gtk4.stack-switcher.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -131,14 +131,14 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{2025-07-30}
+ "@version{2026-07-15}
   @syntax{(gtk:stack-switcher-stack object) => stack}
   @syntax{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
   @argument[stack]{a @class{gtk:stack} widget}
   @begin{short}
-    The accessor for the @slot[gtk:stack-switcher]{stack} slot of the
-    @class{gtk:stack-switcher} class gets or sets the stack to control.
+    The accessor for the @slot[gtk:stack-switcher]{stack} slot gets or sets
+    the stack to control.
   @end{short}
   @see-class{gtk:stack-switcher}
   @see-class{gtk:stack}")
