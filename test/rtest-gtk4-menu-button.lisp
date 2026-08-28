@@ -98,10 +98,29 @@
                         "use-underline" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkMenuButton"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+(test gtk-menu-button-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkMenuButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-menu-button-properties
-  (let ((button (make-instance 'gtk:menu-button)))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (make-instance 'gtk:menu-button)) 'gtk:menu-button))
     (is-false (gtk:menu-button-active button))
     (is-false (gtk:menu-button-always-show-arrow button))
     (is-false (gtk:menu-button-can-shrink button))
@@ -115,25 +134,13 @@
     (is-false (gtk:menu-button-primary button))
     (is-false (gtk:menu-button-use-underline button))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-(test gtk-menu-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkMenuButton"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkMenuButton" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:ACTION :RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_menu_button_new
 
 (test gtk-menu-button-new
-  (let ((button (gtk:menu-button-new)))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (gtk:menu-button-new)) 'gtk:menu-button))
     (is-false (gtk:menu-button-active button))
     (is-false (gtk:menu-button-always-show-arrow button))
     (is-false (gtk:menu-button-can-shrink button))
@@ -154,16 +161,17 @@
 ;;;     gtk_menu_button_set_create_popup_func
 
 (test gtk-menu-button-set-create-popup-func
-  (let ((button (gtk:menu-button-new))
-        (msg ""))
-    (is-false (gtk:menu-button-set-create-popup-func button
-                      (lambda (button)
-                        (is (eq (g:gtype "GtkMenuButton")
-                                (g:type-from-instance button)))
-                        (setf msg "Create popup function")
-                        gdk:+event-stop+)))
-    (is-false (gtk:menu-button-popup button))
-    (is (string= "Create popup function" msg))
-    (is-false (gtk:menu-button-popdown button))))
+  (glib-test:with-check-memory (button)
+    (let ((msg ""))
+      (is (typep (setf button (gtk:menu-button-new)) 'gtk:menu-button))
+      (is-false (gtk:menu-button-set-create-popup-func button
+                        (lambda (button)
+                          (is (eq (g:gtype "GtkMenuButton")
+                                  (g:type-from-instance button)))
+                          (setf msg "Create popup function")
+                          gdk:+event-stop+)))
+      (is-false (gtk:menu-button-popup button))
+      (is (string= "Create popup function" msg))
+      (is-false (gtk:menu-button-popdown button)))))
 
-;;; 2024-10-20
+;;; 2026-07-27

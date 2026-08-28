@@ -2,7 +2,7 @@
 ;;; gtk4.link-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -120,6 +120,21 @@
   behaviour can be overridden by connecting to the
   @sig[gtk:link-button]{activate-link} signal and returning @em{true} from the
   signal handler.
+  @begin[Shortcuts and Gestures]{dictionary}
+    The @class{gtk:link-button} implementation supports the following keyboard
+    shortcuts:
+    @begin{itemize}
+      @item{@kbd{Shift+F10} or @kbd{Menu} opens the context menu.}
+    @end{itemize}
+  @end{dictionary}
+  @begin[Actions]{dictionary}
+    The @class{gtk:link-button} implementation defines a set of built-in
+    actions:
+    @begin{itemize}
+      @item{@code{clipboard.copy} copies the url to the clipboard.}
+      @item{@code{menu.popup} opens the context menu.}
+    @end{itemize}
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:link-button} implementation has a single CSS node with name
     @code{button}. To differentiate it from a plain @class{gtk:button} widget,
@@ -169,15 +184,14 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-uri)
       "Accessor"
       (documentation 'link-button-uri 'function)
- "@version{2025-08-05}
+ "@version{2026-07-28}
   @syntax{(gtk:link-button-uri object) => uri}
   @syntax{(setf (gtk:link-button-uri object) uri)}
   @argument[object]{a @class{gtk:link-button} widget}
   @argument[uri]{a string for a valid URI}
   @begin{short}
-    The accessor for the @slot[gtk:link-button]{uri} slot of the
-    @class{gtk:link-button} class gets or sets the URI where the link button
-    points.
+    The accessor for the @slot[gtk:link-button]{uri} slot gets or sets the URI
+    where the link button points.
   @end{short}
   As a side-effect this unsets the visited state of the button.
   @see-class{gtk:link-button}")
@@ -195,17 +209,15 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-visited)
       "Accessor"
       (documentation 'link-button-visited 'function)
- "@version{2025-08-05}
+ "@version{2026-07-28}
   @syntax{(gtk:link-button-visited object) => visited}
   @syntax{(setf (gtk:link-button-visited object) visited)}
   @argument[object]{a @class{gtk:link-button} widget}
   @argument[visited]{a boolean for the \"visited\" state}
   @begin{short}
-    The accessor for the @slot[gtk:link-button]{visited} slot of the
-    @class{gtk:link-button} class gets or sets the \"visited\" state of the URI
-    where the link button points.
+    The accessor for the @slot[gtk:link-button]{visited} slot gets or sets the
+    \"visited\" state of the URI where the link button points.
   @end{short}
-
   The button becomes visited when it is clicked. If the URI is changed on the
   button, the visited state is unset again.
   @see-class{gtk:link-button}")

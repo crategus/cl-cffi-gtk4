@@ -52,7 +52,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-link-button-properties
-  (let ((button (make-instance 'gtk:link-button)))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (make-instance 'gtk:link-button)) 'gtk:link-button))
     (is-false (gtk:link-button-uri button))
     (is-false (gtk:link-button-visited button))))
 
@@ -79,15 +80,20 @@
 ;;;     gtk_link_button_new
 
 (test gtk-link-button-new
-  (let ((button (gtk:link-button-new "http://crategus.com")))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:link-button-new "http://crategus.com")) 'gtk:link-button))
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "http://crategus.com" (gtk:button-label button)))))
 
 ;;;     gtk_link_button_new_with_label
 
 (test gtk-link-button-new-with-label
-  (let ((button (gtk:link-button-new-with-label "http://crategus.com" "Label")))
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button
+                     (gtk:link-button-new-with-label "http://crategus.com" "Label"))
+               'gtk:link-button))
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "Label" (gtk:button-label button)))))
 
-;;; 2025-2-22
+;;; 2026-07-28

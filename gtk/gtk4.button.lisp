@@ -2,7 +2,7 @@
 ;;; gtk4.button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -210,15 +210,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-can-shrink)
       "Accessor"
       (documentation 'button-can-shrink 'function)
- "@version{2025-12-12}
+ "@version{2026-07-21}
   @syntax{(gtk:button-can-shrink object) => setting}
   @syntax{(setf (gtk:button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{a boolean whether the button can shrink}
   @begin{short}
-    The accessor for the @slot[gtk:button]{can-shrink} slot of the
-    @class{gtk:button} class gets or sets whether the button can be smaller
-    than the natural size of its contents.
+    The accessor for the @slot[gtk:button]{can-shrink} slot gets or sets
+    whether the button can be smaller than the natural size of its contents.
   @end{short}
   For text buttons, setting the @slot[gtk:button]{can-shrink} property to
   @em{true} will ellipsize the label. For icons and custom children, this
@@ -239,14 +238,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2025-12-12}
+ "@version{2026-07-21}
   @syntax{(gtk:button-child object) => child}
   @syntax{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:button]{child} slot of the @class{gtk:button}
-    class gets or sets the child widget of the button.
+    The accessor for the @slot[gtk:button]{child} slot gets or sets the child
+    widget of the button.
   @end{short}
 
   Note that by using this API, you take full responsibility for setting up the
@@ -289,14 +288,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-has-frame)
       "Accessor"
       (documentation 'button-has-frame 'function)
- "@version{2025-08-05}
+ "@version{2026-07-21}
   @syntax{(gtk:button-has-frame object) => setting}
   @syntax{(setf (gtk:button-has-frame object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{a boolean whether the button has a frame}
   @begin{short}
-    The accessor for the @slot[gtk:button]{has-frame} slot of the
-    @class{gtk:button} class gets or sets whether the button has a frame.
+    The accessor for the @slot[gtk:button]{has-frame} slot gets or sets
+    whether the button has a frame.
   @end{short}
   Buttons can have a flat appearance or a frame drawn around them.
   @see-class{gtk:button}")
@@ -313,15 +312,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-icon-name)
       "Accessor"
       (documentation 'button-icon-name 'function)
- "@version{2025-08-05}
+ "@version{2026-07-21}
   @syntax{(gtk:button-icon-name object) => name}
   @syntax{(setf (gtk:button-icon-name object) name)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[name]{a string for an icon name, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:button]{icon-name} slot of the
-    @class{gtk:button} class returns the icon name of the button, or adds a
-    @class{gtk:image} widget with the given icon name as a child widget.
+    The accessor for the @slot[gtk:button]{icon-name} slot returns the icon
+    name of the button, or adds a @class{gtk:image} widget with the given icon
+    name as a child widget.
   @end{short}
 
   If the icon name has not been set the return value will be @code{nil}. This
@@ -344,14 +343,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-label)
       "Accessor"
       (documentation 'button-label 'function)
- "@version{2025-08-05}
+ "@version{2026-07-21}
   @syntax{(gtk:button-label object) => label}
   @syntax{(setf (gtk:button-label object) label)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[label]{a string for the text of the label}
   @begin{short}
-    The accessor for the @slot[gtk:button]{label} slot of the @class{gtk:button}
-    class gets or sets the text from the label of the button.
+    The accessor for the @slot[gtk:button]{label} slot gets or sets the text
+    from the label of the button.
   @end{short}
   If the label text has not been set the return value will be @code{nil}. This
   will be the case if you create an empty button with the @fun{gtk:button-new}
@@ -372,15 +371,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-use-underline)
       "Accessor"
       (documentation 'button-use-underline 'function)
- "@version{2025-08-05}
+ "@version{2026-07-21}
   @syntax{(gtk:button-use-underline object) => setting}
   @syntax{(setf (gtk:button-use-underline object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{@em{true} if underlines in the text indicate mnemonics}
   @begin{short}
-    The accessor for the @slot[gtk:button]{use-underline} slot of the
-    @class{gtk:button} class gets or sets whether underlines are interpreted as
-    mnemonics.
+    The accessor for the @slot[gtk:button]{use-underline} slot gets or sets
+    whether underlines are interpreted as mnemonics.
   @end{short}
   If @em{true}, an underline in the text of the button label indicates the next
   character should be used for the mnemonic accelerator key.

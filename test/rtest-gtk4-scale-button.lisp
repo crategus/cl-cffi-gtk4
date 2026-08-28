@@ -54,65 +54,83 @@
                        (VALUE SCALE-BUTTON-VALUE "value" "gdouble" T T)))
              (gobject:get-gtype-definition "GtkScaleButton"))))
 
-;;; --- Properties -------------------------------------------------------------
-
-(test gtk-scale-button-properties
-  (let ((button (make-instance 'gtk:scale-button)))
-    (is-false (gtk:scale-button-active button))
-    (is (typep (gtk:scale-button-adjustment button) 'gtk:adjustment))
-    (is-false (gtk:scale-button-has-frame button))
-    (is-false (gtk:scale-button-icons button))
-    (is (= 0.0d0 (gtk:scale-button-value button)))))
-
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     popdown
 
 (test gtk-scale-button-popdown-signal
-  (let ((query (g:signal-query (g:signal-lookup "popdown" "GtkScaleButton"))))
-    (is (string= "popdown" (g:signal-query-signal-name query)))
-    (is (string= "GtkScaleButton" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "popdown")
+         (gtype (g:gtype "GtkScaleButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     popup
 
 (test gtk-scale-button-popup-signal
-  (let ((query (g:signal-query (g:signal-lookup "popup" "GtkScaleButton"))))
-    (is (string= "popup" (g:signal-query-signal-name query)))
-    (is (string= "GtkScaleButton" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "popup")
+         (gtype (g:gtype "GtkScaleButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     value-changed
 
 (test gtk-scale-button-value-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "value-changed" "GtkScaleButton"))))
-    (is (string= "value-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkScaleButton" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "value-changed")
+         (gtype (g:gtype "GtkScaleButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("gdouble")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;; --- Properties -------------------------------------------------------------
+
+(test gtk-scale-button-properties
+  (glib-test:with-check-memory (button)
+    (is (typep (setf button (make-instance 'gtk:scale-button)) 'gtk:scale-button))
+    (is-false (gtk:scale-button-active button))
+    (is (typep (gtk:scale-button-adjustment button) 'gtk:adjustment))
+    (is-false (gtk:scale-button-has-frame button))
+    (is-false (gtk:scale-button-icons button))
+    (is (= 0.0d0 (gtk:scale-button-value button)))
+    ;; Remove reference
+    (is-false (setf (gtk:scale-button-adjustment button) nil))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_scale_button_new
 
 (test gtk-scale-button-new
-  (let* ((button (gtk:scale-button-new 0 10 2 nil))
-         (adjustment (gtk:scale-button-adjustment button)))
-    (is (typep button 'gtk:scale-button))
+  (glib-test:with-check-memory (button adjustment)
+    (is (typep (setf button (gtk:scale-button-new 0 10 2 nil)) 'gtk:scale-button))
+    (is (typep (setf adjustment (gtk:scale-button-adjustment button)) 'gtk:adjustment))
     (is (= 0.0d0 (gtk:scale-button-value button)))
     (is (= 0.0d0 (gtk:adjustment-value adjustment)))
     (is (= 0.0d0 (gtk:adjustment-lower adjustment)))
@@ -120,26 +138,20 @@
     (is (= 2.0d0 (gtk:adjustment-step-increment adjustment)))
     (is (= 20.0d0 (gtk:adjustment-page-increment adjustment)))
     (is (= 0.0d0 (gtk:adjustment-page-size adjustment)))
-    ;; Check memory management
-    (is-false (setf (gtk:scale-button-adjustment button) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove reference
+    (is-false (setf (gtk:scale-button-adjustment button) nil))))
 
 ;;;     gtk_scale_button_get_popup
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
 (test gtk-scale-button-get
-  (let ((button (gtk:scale-button-new 1 10 0.5 nil))
-        button1 button2 popup)
+  (glib-test:with-check-memory (button (button1 3) (button2 3) (popup 3) :strong 3)
+    (is (typep (setf button (gtk:scale-button-new 1 10 0.5 nil)) 'gtk:scale-button))
     (is (typep (setf popup (gtk:scale-button-popup button)) 'gtk:popover))
     (is (typep (setf button1 (gtk:scale-button-plus-button button)) 'gtk:button))
     (is (typep (setf button2 (gtk:scale-button-minus-button button)) 'gtk:button))
-    ;; Check memory management
-    (is-false (setf (gtk:scale-button-adjustment button) nil))
-    (is (= 3 (g:object-ref-count popup)))
-    (is (= 3 (g:object-ref-count button1)))
-    (is (= 3 (g:object-ref-count button2)))
-    (is (= 1 (g:object-ref-count button)))))
+    ;; Remove reference
+    (is-false (setf (gtk:scale-button-adjustment button) nil))))
 
-;;; 2024-10-20
+;;; 2026-07-28

@@ -2,7 +2,7 @@
 ;;; gtk4.toggle-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -228,15 +228,14 @@ lambda (toggle)    :run-first
 (setf (liber:alias-for-function 'toggle-button-active)
       "Accessor"
       (documentation 'toggle-button-active 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:toggle-button-active object) => active}
   @syntax{(setf (gtk:toggle-button-active object) active)}
   @argument[object]{a @class{gtk:toggle-button} widget}
   @argument[active]{@em{true} if the toggle button should be pressed in}
   @begin{short}
-    The accessor for the @slot[gtk:toggle-button]{active} slot of the
-    @class{gtk:toggle-button} class gets or sets the status of the toggle
-    button.
+    The accessor for the @slot[gtk:toggle-button]{active} slot gets or sets the
+    status of the toggle button.
   @end{short}
   Returns @em{true} if the toggle button is pressed in and @em{false} if it is
   raised.
@@ -256,15 +255,14 @@ lambda (toggle)    :run-first
 (setf (liber:alias-for-function 'toggle-button-group)
       "Accessor"
       (documentation 'toggle-button-group 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(setf (gtk:toggle-button-group object) group)}
   @argument[object]{a @class{gtk:toggle-button} widget}
   @argument[group]{another @class{gtk:toggle-button} widget to form a group
     with}
   @begin{short}
-    The accessor for the @slot[gtk:toggle-button]{group} slot of the
-    @class{gtk:toggle-button} class adds @arg{object} to the group of
-    @arg{group}.
+    The accessor for the @slot[gtk:toggle-button]{group} slot adds @arg{object}
+    to the group of @arg{group}.
   @end{short}
   In a group of multiple toggle buttons, only one button can be active at a
   time.

@@ -2,7 +2,7 @@
 ;;; gtk4.check-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -266,15 +266,14 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-active)
       "Accessor"
       (documentation 'check-button-active 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:check-button-active object) => active}
   @syntax{(setf (gtk:check-button-active object) active)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[active]{a boolean whether the check button should be pressed in}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{active} slot of the
-    @class{gtk:check-button} class gets or sets whether the check button should
-    be pressed in.
+    The accessor for the @slot[gtk:check-button]{active} slot gets or sets
+    whether the check button should be pressed in.
   @end{short}
   Setting the @slot[gtk:check-button]{active} property to @em{true} will add
   the @val[gtk:state-flags]{:checked} state to both the check button and the
@@ -292,15 +291,14 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-child)
       "Accessor"
       (documentation 'check-button-child 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:check-button-child object) => child}
   @syntax{(setf (gtk:check-button-child object) child)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{child} slot of the
-    @class{gtk:check-button} class gets or sets the child widget of the check
-    button.
+    The accessor for the @slot[gtk:check-button]{child} slot gets or sets the
+    child widget of the check button.
   @end{short}
   Returns @code{nil} if the @slot[gtk:check-button]{label} property is set.
 
@@ -325,14 +323,13 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-group)
       "Accessor"
       (documentation 'check-button-group 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(setf (gtk:check-button-group object) group)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[group]{a @class{gtk:check-button} widget}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{group} slot of the
-    @class{gtk:check-button} class   Adds the check button to the group of
-    @arg{group}.
+    The accessor for the @slot[gtk:check-button]{group} slot adds the check
+    button to the group of @arg{group}.
   @end{short}
   In a group of multiple check buttons, only one button can be active at a time.
 
@@ -358,16 +355,15 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-inconsistent)
       "Accessor"
       (documentation 'check-button-inconsistent 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:check-button-inconsistent object) => inconsistent}
   @syntax{(setf (gtk:check-button-inconsistent object) inconsistent)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[inconsistent]{a boolean whether the check button is in an \"in
     between\" state}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{inconsistent} slot of the
-    @class{gtk:check-button} class gets or sets whether the check button is in
-    an \"in between\" state.
+    The accessor for the @slot[gtk:check-button]{inconsistent} slot gets or
+    sets whether the check button is in an \"in between\" state.
   @end{short}
 
   If the user has selected a range of elements, such as some text or
@@ -392,15 +388,14 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-label)
       "Accessor"
       (documentation 'check-button-label 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:check-button-label object) => label}
   @syntax{(setf (gtk:check-button-label object) label)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[label]{a string for the text of the label widget inside the button}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{label} slot of the
-    @class{gtk:check-button} class gets or sets the text of the label widget
-    inside the button.
+    The accessor for the @slot[gtk:check-button]{label} slot gets or sets the
+    text of the label widget inside the button.
   @end{short}
   Returns @code{nil} if the @slot[gtk:check-button]{child} property is set.
 
@@ -423,16 +418,15 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-use-underline)
       "Accessor"
       (documentation 'check-button-use-underline 'function)
- "@version{2025-08-05}
+ "@version{2026-07-24}
   @syntax{(gtk:check-button-use-underline object) => setting}
   @syntax{(setf (gtk:check-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[setting]{a boolean whether an underline in the text indicates the
     next character should be used for the mnemonic accelerator key}
   @begin{short}
-    The accessor for the @slot[gtk:check-button]{use-underline} slot of the
-    @class{gtk:check-button} class gets or sets whether underlines in the label
-    indicate mnemonics.
+    The accessor for the @slot[gtk:check-button]{use-underline} slot gets or
+    sets whether underlines in the label indicate mnemonics.
   @end{short}
 
   If the setting is @em{true}, an underscore character indicates a mnemonic

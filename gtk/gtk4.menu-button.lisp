@@ -305,15 +305,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-active)
       "Accessor"
       (documentation 'menu-button-active 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-active object) => active}
   @syntax{(setf (gtk:menu-button-active object) active)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[active]{a boolean whether the menu button is active}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{active} slot of the
-    @class{gtk:menu-button} class gets or sets whether the menu button is
-    active.
+    The accessor for the @slot[gtk:menu-button]{active} slot gets or sets
+    whether the menu button is active.
   @end{short}
 
   Since 4.10
@@ -334,16 +333,16 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-always-show-arrow)
       "Accessor"
       (documentation 'menu-button-always-show-arrow 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-always-show-arrow object) => setting}
   @syntax{(setf (gtk:menu-button-always-show-arrow object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether to show a dropdown arrow even when using
     an icon or a custom child}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{always-show-arrow} slot of the
-    @class{gtk:menu-button} class gets or sets whether to show a dropdown arrow
-    even when using an icon or a custom child.
+    The accessor for the @slot[gtk:menu-button]{always-show-arrow} slot gets or
+    sets whether to show a dropdown arrow even when using an icon or a custom
+    child.
   @end{short}
 
   Since 4.4
@@ -362,15 +361,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-can-shrink)
       "Accessor"
       (documentation 'menu-button-can-shrink 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-can-shrink object) => setting}
   @syntax{(setf (gtk:menu-button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the menu button can shrink}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{can-shrink} slot of the
-    @class{gtk:menu-button} class gets or sets whether the menu button can be
-    smaller than the natural size of its contents.
+    The accessor for the @slot[gtk:menu-button]{can-shrink} slot gets or sets
+    whether the menu button can be smaller than the natural size of its
+    contents.
   @end{short}
 
   For text menu buttons, setting the @slot[gtk:menu-button]{can-shrink} property
@@ -391,16 +390,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-child)
       "Accessor"
       (documentation 'menu-button-child 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-child object) => child}
   @syntax{(setf (gtk:menu-button-child object) child)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{child} slot of the
-    @class{gtk:menu-button} class gets or sets the child widget.
+    The accessor for the @slot[gtk:menu-button]{child} slot gets or sets the
+    child widget.
   @end{short}
-
   Setting a child widget resets the @slot[gtk:menu-button]{label} and
   @slot[gtk:menu-button]{icon-name} properties. If the
   @slot[gtk:menu-button]{always-show-arrow} property is set to @em{true} and
@@ -431,15 +429,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-direction)
       "Accessor"
       (documentation 'menu-button-direction 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-direction object) => direction}
   @syntax{(setf (gtk:menu-button-direction object) direction)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[direction]{a value of the @sym{gtk:arrow-type} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{direction} slot of the
-    @class{gtk:menu-button} class gets or sets the direction the popup will be
-    pointing at when popped up.
+    The accessor for the @slot[gtk:menu-button]{direction} slot gets or sets
+    the direction the popup will be pointing at when popped up.
   @end{short}
   The child widget will not be changed to an arrow if it was customized.
 
@@ -464,14 +461,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-has-frame)
       "Accessor"
       (documentation 'menu-button-has-frame 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-has-frame object) => setting}
   @syntax{(setf (gtk:menu-button-has-frame object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the button has a frame}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{has-frame} slot of the
-    @class{gtk:menu-button} class gets or sets whether the button has a frame.
+    The accessor for the @slot[gtk:menu-button]{has-frame} slot gets or sets
+    whether the button has a frame.
   @end{short}
   @see-class{gtk:menu-button}")
 
@@ -487,15 +484,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-icon-name)
       "Accessor"
       (documentation 'menu-button-icon-name 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-icon-name object) => name}
   @syntax{(setf (gtk:menu-button-icon-name object) name)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[name]{a string for the name of the icon}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{icon-name} slot of the
-    @class{gtk:menu-button} class gets or sets the name of the icon shown in
-    the button.
+    The accessor for the @slot[gtk:menu-button]{icon-name} slot gets or sets
+    the name of the icon shown in the button.
   @end{short}
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-label}")
@@ -512,14 +508,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-label)
       "Accessor"
       (documentation 'menu-button-label 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-label object) => label}
   @syntax{(setf (gtk:menu-button-label object) label)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[label]{a string for the label}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{label} slot of the
-    @class{gtk:menu-button} class gets or sets the label shown in the button.
+    The accessor for the @slot[gtk:menu-button]{label} slot gets or sets the
+    label shown in the button.
   @end{short}
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-icon-name}")
@@ -538,16 +534,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-menu-model)
       "Accessor"
       (documentation 'menu-button-menu-model 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-menu-model object) => model}
   @syntax{(setf (gtk:menu-button-menu-model object) model)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[model]{a @class{g:menu-model} object, or @code{nil} to unset and
     disable the button}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{menu-model} slot of the
-    @class{gtk:menu-button} class gets or sets the menu model used to generate
-    the popup.
+    The accessor for the @slot[gtk:menu-button]{menu-model} slot gets or sets
+    the menu model used to generate the popup.
   @end{short}
   Pass @code{nil} to dissociate any existing menu model and disable the button.
 
@@ -573,16 +568,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-popover)
       "Accessor"
       (documentation 'menu-button-popover 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-popover object) => popover}
   @syntax{(setf (gtk:menu-button-popover object) popover)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[popover]{a @class{gtk:popover} widget, or @code{nil} to unset and
     disable the button}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{popover} slot of the
-    @class{gtk:menu-button} class gets or sets the popover that pops out of the
-    button.
+    The accessor for the @slot[gtk:menu-button]{popover} slot gets or sets the
+    popover that pops out of the button.
   @end{short}
   If the button is not using a popover, this function returns @code{nil}. Pass
   @code{nil} to dissociate any existing popover and disable the button.
@@ -606,15 +600,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-primary)
       "Accessor"
       (documentation 'menu-button-primary 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-primary object) => setting}
   @syntax{(setf (gtk:menu-button-primary object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether the menu button acts as a primary menu}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{primary} slot of the
-    @class{gtk:menu-button} class gets or sets whether the menu button acts as
-    a primary menu.
+    The accessor for the @slot[gtk:menu-button]{primary} slot gets or sets
+    whether the menu button acts as a primary menu.
   @end{short}
   Primary menus can be opened with the @kbd{F10} key.
 
@@ -634,16 +627,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-use-underline)
       "Accessor"
       (documentation 'menu-button-use-underline 'function)
- "@version{2025-08-05}
+ "@version{2026-07-27}
   @syntax{(gtk:menu-button-use-underline object) => setting}
   @syntax{(setf (gtk:menu-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
   @argument[setting]{a boolean whether underlines in the text indicates
     mnemonics}
   @begin{short}
-    The accessor for the @slot[gtk:menu-button]{use-underline} slot of the
-    @class{gtk:menu-button} class gets or sets whether an embedded underline in
-    the text indicates a mnemonic.
+    The accessor for the @slot[gtk:menu-button]{use-underline} slot gets or
+    sets whether an embedded underline in the text indicates a mnemonic.
   @end{short}
   @see-class{gtk:menu-button}")
 

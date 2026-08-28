@@ -57,27 +57,41 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
+;;;     activate
+
 (test gtk-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkButton"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkButton" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     clicked
 
 (test gtk-button-clicked-signal
-  (let ((query (g:signal-query (g:signal-lookup "clicked" "GtkButton"))))
-    (is (string= "clicked" (g:signal-query-signal-name query)))
-    (is (string= "GtkButton" (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "clicked")
+         (gtype (g:gtype "GtkButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-FIRST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -147,4 +161,4 @@
     ;; Remove references
     (is-false (setf (gtk:button-child button) nil))))
 
-;;; 2025-05-30
+;;; 2026-07-24
