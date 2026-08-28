@@ -355,20 +355,20 @@ lambda (dialog response)    :run-last
   action area. For technical reasons, this property is declared as an integer
   property, use the value 1 for @em{true} or -1 for @em{false}. @br{}
   Allowed values: [-1, 1] @br{}
-  Default value: -1")
+  Default value: 0")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'dialog-use-header-bar)
       "Accessor"
       (documentation 'dialog-use-header-bar 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:dialog-use-header-bar object) => setting}
   @argument[object]{a @class{gtk:dialog} widget}
   @argument[setting]{@em{true} if the dialog uses a header bar}
   @begin{short}
-    The accessor for the @slot[gtk:dialog]{use-header-bar} slot of the
-    @class{gtk:dialog} class returns @em{true} if the dialog uses a header bar
-    for action buttons instead of the action area.
+    The accessor for the @slot[gtk:dialog]{use-header-bar} slot returns
+    @em{true} if the dialog uses a header bar for action buttons instead of
+    the action area.
   @end{short}
   For technical reasons, this property is declared as an integer property, use
   the value 1 for @em{true} or -1 for @em{false}.
@@ -498,7 +498,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_response" dialog-response) :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value of
     the @sym{gtk:response-type} enumeration}
@@ -524,7 +524,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_add_button" dialog-add-button) (g:object widget)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[text]{a string for the text of the button}
   @argument[response]{response ID for the button, which is a positive integer
@@ -558,7 +558,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-add-buttons (dialog &rest buttons)
  #+liber-documentation
- "@version{#2025-07-27}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[buttons]{pairs for a button text and the response ID, which is a
     positive integer or a value of the @sym{gtk:response-type} enumeration}
@@ -591,7 +591,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_add_action_widget" dialog-add-action-widget) :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[child]{an activatable @class{gtk:widget} object}
   @argument[response]{response ID for @arg{child}, which is a positive
@@ -627,7 +627,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_set_default_response" dialog-set-default-response)
     :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value
     of the @sym{gtk:response-type} enumeration}
@@ -655,7 +655,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_set_response_sensitive"
                dialog-set-response-sensitive) :void
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value
     of the @sym{gtk:response-type} enumeration}
@@ -686,7 +686,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_response_for_widget" dialog-response-for-widget)
     :int
  #+liber-documentation
- "@version{#2025-07-13}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[widget]{a @class{gtk:widget} object in the action area of
     @arg{dialog}}
@@ -720,7 +720,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_widget_for_response" dialog-widget-for-response)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-07-13}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, that is a positive integer or a value
     of the @sym{gtk:response-type} enumeration}
@@ -753,7 +753,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_get_content_area" dialog-content-area)
     (g:object widget)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @begin{return}
     The vertical @class{gtk:box} widget for the content area.
@@ -776,7 +776,7 @@ lambda (dialog response)    :run-last
 
 (cffi:defcfun ("gtk_dialog_get_header_bar" dialog-header-bar) (g:object widget)
  #+liber-documentation
- "@version{#2025-02-26}
+ "@version{2026-08-20}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @return{The @class{gtk:header-bar} widget.}
   @begin{short}

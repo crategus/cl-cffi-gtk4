@@ -33,8 +33,7 @@
   (is (equal '("activate")
              (glib-test:list-signals "GtkColorDialogButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorDialogButton"
-                                      GTK:COLOR-DIALOG-BUTTON
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorDialogButton" GTK:COLOR-DIALOG-BUTTON
                        (:SUPERCLASS GTK:WIDGET
                         :EXPORT T
                         :INTERFACES
@@ -44,6 +43,26 @@
                          "dialog" "GtkColorDialog" T T)
                         (RGBA COLOR-DIALOG-BUTTON-RGBA "rgba" "GdkRGBA" T T)))
              (gobject:get-gtype-definition "GtkColorDialogButton"))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate
+
+(test gtk-color-dialog-button-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkColorDialogButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -55,23 +74,6 @@
     (is-false (gtk:color-dialog-button-dialog button))
     (is (typep (gtk:color-dialog-button-rgba button) 'gdk:rgba))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate
-
-(test gtk-color-dialog-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate"
-                                                "GtkColorDialogButton"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkColorDialogButton"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:ACTION :RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_color_dialog_button_new
@@ -81,4 +83,4 @@
   (let ((dialog (make-instance 'gtk:color-dialog)))
     (is (typep (gtk:color-dialog-button-new dialog) 'gtk:color-dialog-button))))
 
-;;; 2024-9-20
+;;; 2026-07-24

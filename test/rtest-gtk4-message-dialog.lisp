@@ -29,14 +29,14 @@
              (glib-test:list-enum-item-nicks "GtkButtonsType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkButtonsType" GTK:BUTTONS-TYPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_buttons_type_get_type")
-                       (:NONE 0)
-                       (:OK 1)
-                       (:CLOSE 2)
-                       (:CANCEL 3)
-                       (:YES-NO 4)
-                       (:OK-CANCEL 5))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_buttons_type_get_type")
+                      (:NONE 0)
+                      (:OK 1)
+                      (:CLOSE 2)
+                      (:CANCEL 3)
+                      (:YES-NO 4)
+                      (:OK-CANCEL 5))
              (gobject:get-gtype-definition "GtkButtonsType"))))
 
 ;;;     GtkMessageDialog
@@ -101,24 +101,72 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-message-dialog-properties
-  (when *first-run-testsuite*
-    (let ((gtk-init:*warn-deprecated* nil))
-      (glib-test:with-check-memory (dialog :strong 1)
-        (setf dialog (make-instance 'gtk:message-dialog))
-        (is (typep  (gtk:message-dialog-message-area dialog) 'gtk:box))
-        (is (eq :info (gtk:message-dialog-message-type dialog)))
-        (is-false (gtk:message-dialog-secondary-text dialog))
-        (is-false (gtk:message-dialog-secondary-use-markup dialog))
-        (is (string= "" (gtk:message-dialog-text dialog)))
-        (is-false (gtk:message-dialog-use-markup dialog))
-        (is-false (gtk:window-destroy dialog))))))
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog :strong 1)
+      (setf dialog (make-instance 'gtk:message-dialog))
+      (is (typep  (gtk:message-dialog-message-area dialog) 'gtk:box))
+      (is (eq :info (gtk:message-dialog-message-type dialog)))
+      (is-false (gtk:message-dialog-secondary-text dialog))
+      (is-false (gtk:message-dialog-secondary-use-markup dialog))
+      (is (string= "" (gtk:message-dialog-text dialog)))
+      (is-false (gtk:message-dialog-use-markup dialog))
+      (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_message_dialog_new
+
+(test gtk-message-dialog-new
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog parent)
+      (setf parent (gtk:window-new))
+      (setf dialog
+            (gtk:message-dialog-new parent '(:modal) :info :ok "message"))
+      (is (string= "message" (gtk:message-dialog-text dialog)))
+      (is-false (gtk:message-dialog-use-markup dialog))
+      (is-false (gtk:message-dialog-secondary-text dialog))
+      (is-false (gtk:window-destroy dialog))
+      (is-false (gtk:window-destroy parent)))))
+
 ;;;     gtk_message_dialog_new_with_markup
+
+(test gtk-message-dialog-new-with-markup
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog parent)
+      (setf parent (gtk:window-new))
+      (setf dialog
+            (gtk:message-dialog-new-with-markup parent
+                                                '(:modal) :info :ok
+                                                "<b>message</b>"))
+      (is (string= "<b>message</b>" (gtk:message-dialog-text dialog)))
+      (is-true (gtk:message-dialog-use-markup dialog))
+      (is-false (gtk:message-dialog-secondary-text dialog))
+      (is-false (gtk:window-destroy dialog))
+      (is-false (gtk:window-destroy parent)))))
+
 ;;;     gtk_message_dialog_set_markup
 ;;;     gtk_message_dialog_format_secondary_text
 ;;;     gtk_message_dialog_format_secondary_markup
 
-;;; 2024-12-24
+(test gtk-message-dialog-format-secondary-text/markup
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog parent)
+      (setf parent (gtk:window-new))
+      (setf dialog
+            (gtk:message-dialog-new parent '(:modal) :info :ok ""))
+      (is (string= "<b>message</b>"
+                   (gtk:message-dialog-set-markup dialog "<b>message</b>")))
+      (is (string= "<b>message</b>" (gtk:message-dialog-text dialog)))
+      (is-true "<b>message</b>" (gtk:message-dialog-use-markup dialog))
+      (is (string= "message"
+                   (gtk:message-dialog-format-secondary-text dialog "message")))
+      (is (string= "message" (gtk:message-dialog-secondary-text dialog)))
+      (is-false (gtk:message-dialog-secondary-use-markup dialog))
+      (is (string= "message"
+                   (gtk:message-dialog-format-secondary-markup dialog "message")))
+      (is (string= "message" (gtk:message-dialog-secondary-text dialog)))
+      (is-true (gtk:message-dialog-secondary-use-markup dialog))
+      (is-false (gtk:window-destroy dialog))
+      (is-false (gtk:window-destroy parent)))))
+
+;;; 2026-08-20

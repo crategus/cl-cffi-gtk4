@@ -147,15 +147,14 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-gfile)
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
- "@version{2026-02-03}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-dialog-gfile object) => file}
   @syntax{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[file]{a @class{g:file} object}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser-dialog]{gfile} slot of the
-    @class{gtk:app-chooser-dialog} class gets the @class{g:file} object used by
-    the @class{gtk:app-chooser-dialog} widget.
+    The accessor for the @slot[gtk:app-chooser-dialog]{gfile} slot gets the
+    @class{g:file} object used by the @class{gtk:app-chooser-dialog} widget.
   @end{short}
   The dialog's content type will be guessed from the file, if present.
   @begin[Warning]{dictionary}
@@ -178,15 +177,14 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-heading)
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
- "@version{2026-02-03}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-dialog-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[heading]{a string containing Pango markup}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser-dialog]{heading} slot of the
-    @class{gtk:app-chooser-dialog} class get or sets the text to display at the
-    top of the dialog.
+    The accessor for the @slot[gtk:app-chooser-dialog]{heading} slot gets or
+    sets the text to display at the top of the dialog.
   @end{short}
   If the heading is not set, the dialog displays a default text.
   @begin[Warning]{dictionary}

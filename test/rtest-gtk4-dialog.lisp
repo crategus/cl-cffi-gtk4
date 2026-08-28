@@ -125,6 +125,8 @@
       (setf dialog (make-instance 'gtk:dialog))
       ;; The default value is not -1.
       (is (= 0 (gtk:dialog-use-header-bar dialog)))
+      ;; Property USE-HEADER-BAR ist not writable
+      (signals (error) (setf (gtk:dialog-use-header-bar dialog) 1))
       (is-false (gtk:window-destroy dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -139,43 +141,100 @@
 
 ;;;     gtk_dialog_new_with_buttons
 
-;; FIXME: Creates the following error messages after several runs and when
-;; destroying objects. This seems to be a general problem. We have this
-;; problem also for an GtkShortcutsWindow widget.
+;; Adds two references for the buttons
 
-;; GLib-GObject-CRITICAL **:
-;; g_signal_handlers_disconnect_matched:
-;; assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
-
-#+nil
 (test gtk-dialog-new-with-buttons
-  (when *first-run-testsuite*
-    (let* ((gtk-init:*warn-deprecated* nil))
-      (glib-test:with-check-memory (parent dialog :strong 2)
-        (is (typep (setf parent (gtk:window-new)) 'gtk:window))
-        (is (typep (setf dialog
-                         (gtk:dialog-new-with-buttons "My dialog"
-                                                      parent
-                                                      '(:modal
-                                                        :destroy-with-parent)
-                                                      "_OK"
-                                                      :accept
-                                                      "_Cancel"
-                                                      :reject))
-                   'gtk:dialog))
-      (is (string= "My dialog" (gtk:window-title dialog)))
-      (is-false (gtk:window-destroy parent))
-      (is-false (gtk:window-destroy dialog))))))
+  (let* ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (parent dialog :strong 2)
+      (is (typep (setf parent (gtk:window-new)) 'gtk:window))
+      (is (typep (setf dialog
+                       (gtk:dialog-new-with-buttons "My dialog"
+                                                    parent
+                                                    '(:modal
+                                                      :destroy-with-parent)
+                                                    "_OK"
+                                                    :accept
+                                                    "_Cancel"
+                                                    :reject))
+                 'gtk:dialog))
+    (is (string= "My dialog" (gtk:window-title dialog)))
+    (is-false (gtk:window-destroy dialog))
+    (is-false (gtk:window-destroy parent)))))
 
 ;;;     gtk_dialog_response
+
+(test gtk-dialog-response
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog)
+      (let (msg)
+        (setf dialog (gtk:dialog-new))
+        (g:signal-connect dialog "response"
+                          (lambda (widget response)
+                            (declare (ignore widget))
+                            (push response msg)
+                            (when (= -5 response)
+                              (gtk:window-destroy dialog))))
+        (is-false (gtk:dialog-response dialog :cancel))
+        (is-false (gtk:dialog-response dialog :ok))
+        (is (equal '(-5 -6) msg))))))
+
 ;;;     gtk_dialog_add_button
 ;;;     gtk_dialog_add_buttons
-;;;     gtk_dialog_add_action_widget
-;;;     gtk_dialog_set_default_response
-;;;     gtk_dialog_set_response_sensitive
 ;;;     gtk_dialog_get_response_for_widget
 ;;;     gtk_dialog_get_widget_for_response
+;;;     gtk_dialog_add_action_widget
+
+;; Adds 3 strong references for the buttons
+
+(test gtk-dialog-add-buttons
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog (button1 2) (button2 2) (button3 2) :strong 3)
+      (setf dialog (gtk:dialog-new))
+      (setf button3 (gtk:button-new))
+      (is-false (gtk:dialog-add-buttons dialog "_OK" :accept "_Cancel" :reject))
+      (is-false (gtk:dialog-add-action-widget dialog button3 :ok))
+      (is (typep (setf button1
+                       (gtk:dialog-widget-for-response dialog :accept)) 'gtk:button))
+      (is (typep (setf button2
+                       (gtk:dialog-widget-for-response dialog :reject)) 'gtk:button))
+      (is (eq button3 (gtk:dialog-widget-for-response dialog :ok)))
+      (is-false (gtk:dialog-widget-for-response dialog :cancel))
+      (is (= -3 (gtk:dialog-response-for-widget dialog button1)))
+      (is (= -2 (gtk:dialog-response-for-widget dialog button2)))
+      (is (= -5 (gtk:dialog-response-for-widget dialog button3)))
+      ;; Returns :NONE for a widget which is not in the action area
+      (is (= -1 (gtk:dialog-response-for-widget dialog (gtk:button-new))))
+      (gtk:window-destroy dialog))))
+
+;;;     gtk_dialog_set_default_response
+;;;     gtk_dialog_set_response_sensitive
+
+;; Adds 2 strong references or the buttons
+
+(test gtk-dialog-set-default-response/response-sensitive
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog :strong 2)
+      (setf dialog (gtk:dialog-new))
+      (is-false (gtk:dialog-add-buttons dialog "_OK" :accept "_Cancel" :reject))
+      (is-false (gtk:dialog-set-default-response dialog  :accept))
+      (is-false (gtk:dialog-set-default-response dialog :ok))
+      (is-false (gtk:dialog-set-response-sensitive dialog :accept t))
+      (is-false (gtk:dialog-set-response-sensitive dialog :reject nil))
+      (is-false (gtk:window-destroy dialog)))))
+
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; 2025-2-26
+;; Adds two strong references for the header bar and the content area
+
+(test gtk-dialog-content-area/header-bar
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (dialog :strong 2)
+      (setf dialog (make-instance 'gtk:dialog
+                                  :use-header-bar 1))
+      (is (typep (gtk:dialog-content-area dialog) 'gtk:box))
+      (is (= 1 (gtk:dialog-use-header-bar dialog)))
+      (is (typep (gtk:dialog-header-bar dialog) 'gtk:header-bar))
+      (gtk:window-destroy dialog))))
+
+;;; 2026-08-20

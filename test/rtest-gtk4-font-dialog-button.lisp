@@ -71,28 +71,47 @@
   ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFontDialogButton")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontDialogButton"
-                                      GTK:FONT-DIALOG-BUTTON
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_font_dialog_button_get_type")
-                       ((DIALOG FONT-DIALOG-BUTTON-DIALOG
-                         "dialog" "GtkFontDialog" T T)
-                        (FONT-DESC FONT-DIALOG-BUTTON-FONT-DESC
-                         "font-desc" "PangoFontDescription" T T)
-                        (FONT-FEATURES FONT-DIALOG-BUTTON-FONT-FEATURES
-                         "font-features" "gchararray" T T)
-                        (LANGUAGE FONT-DIALOG-BUTTON-LANGUAGE
-                         "language" "PangoLanguage" T T)
-                        (LEVEL FONT-DIALOG-BUTTON-LEVEL
-                         "level" "GtkFontLevel" T T)
-                        (USE-FONT FONT-DIALOG-BUTTON-USE-FONT
-                         "use-font" "gboolean" T T)
-                        (USE-SIZE FONT-DIALOG-BUTTON-USE-SIZE
-                         "use-size" "gboolean" T T)))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkFontDialogButton" GTK:FONT-DIALOG-BUTTON
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_font_dialog_button_get_type")
+                      ((DIALOG FONT-DIALOG-BUTTON-DIALOG
+                        "dialog" "GtkFontDialog" T T)
+                       (FONT-DESC FONT-DIALOG-BUTTON-FONT-DESC
+                        "font-desc" "PangoFontDescription" T T)
+                       (FONT-FEATURES FONT-DIALOG-BUTTON-FONT-FEATURES
+                        "font-features" "gchararray" T T)
+                       (LANGUAGE FONT-DIALOG-BUTTON-LANGUAGE
+                        "language" "PangoLanguage" T T)
+                       (LEVEL FONT-DIALOG-BUTTON-LEVEL
+                        "level" "GtkFontLevel" T T)
+                       (USE-FONT FONT-DIALOG-BUTTON-USE-FONT
+                        "use-font" "gboolean" T T)
+                       (USE-SIZE FONT-DIALOG-BUTTON-USE-SIZE
+                        "use-size" "gboolean" T T)))
              (gobject:get-gtype-definition "GtkFontDialogButton"))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate
+
+(test gtk-font-dialog-button-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkFontDialogButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -117,23 +136,6 @@
     (is-false (gtk:font-dialog-button-use-font button))
     (is-false (gtk:font-dialog-button-use-size button))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate
-
-(test gtk-font-dialog-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate"
-                                                "GtkFontDialogButton"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkFontDialogButton"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:ACTION :RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_font_dialog_button_new
@@ -150,4 +152,4 @@
                'gtk:font-dialog-button))
     (is-false (setf (gtk:font-dialog-button-dialog button) nil))))
 
-;;; 2026-01-09
+;;; 2026-07-24
