@@ -31,14 +31,15 @@
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-GENUM "GtkAssistantPageType"
                                     GTK:ASSISTANT-PAGE-TYPE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_assistant_page_type_get_type")
-                       (:CONTENT 0)
-                       (:INTRO 1)
-                       (:CONFIRM 2)
-                       (:SUMMARY 3)
-                       (:PROGRESS 4)
-                       (:CUSTOM 5))
+                                    (:EXPORT T
+                                     :TYPE-INITIALIZER
+                                     "gtk_assistant_page_type_get_type")
+                                    (:CONTENT 0)
+                                    (:INTRO 1)
+                                    (:CONFIRM 2)
+                                    (:SUMMARY 3)
+                                    (:PROGRESS 4)
+                                    (:CUSTOM 5))
              (gobject:get-gtype-definition "GtkAssistantPageType"))))
 
 ;;;     GtkAssistantPage

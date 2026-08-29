@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -252,14 +252,13 @@
 (setf (liber:alias-for-function 'assistant-page-child)
       "Accessor"
       (documentation 'assistant-page-child 'function)
- "@version{2025-08-13}
+ "@version{2026-08-20}
   @syntax{(gtk:assistant-page-child object) => page}
   @argument[object]{a @class{gtk:assistant-page} object}
   @argument[page]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:assistant-page]{child} slot of the
-    @class{gtk:assistant-page} class gets the child widget to which the page
-    belongs.
+    The accessor for the @slot[gtk:assistant-page]{child} slot gets the child
+    widget to which the page belongs.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:assistant-page} implementation is deprecated since 4.10.
@@ -449,14 +448,14 @@ lambda (assistant page)    :run-last
 (setf (liber:alias-for-function 'assistant-pages)
       "Accessor"
       (documentation 'assistant-pages 'function)
- "@version{2025-08-13}
+ "@version{2026-08-20}
   @syntax{(gtk:assistant-pages object) => pages}
   @syntax{(setf (gtk:assistant-pages object) pages)}
   @argument[object]{a @class{gtk:assistant} widget}
   @argument[pages]{a @class{g:list-model} object for the pages}
   @begin{short}
-    The accessor for the @slot[gtk:assistant]{pages} slot of the
-    @class{gtk:assistant} class gets a list model with the assistant pages.
+    The accessor for the @slot[gtk:assistant]{pages} slot gets a list model
+    with the assistant pages.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
@@ -481,15 +480,15 @@ lambda (assistant page)    :run-last
 (setf (liber:alias-for-function 'assistant-use-header-bar)
       "Accessor"
       (documentation 'assistant-use-header-bar 'function)
- "@version{2025-08-13}
+ "@version{2026-08-20}
   @syntax{(gtk:assistant-use-header-bar object) => setting}
   @syntax{(setf (gtk:assistant-use-header-bar object) setting)}
   @argument[object]{a @class{gtk:assistant} widget}
   @argument[setting]{@em{true} if the assistant uses a header bar}
   @begin{short}
-    The accessor for the @slot[gtk:assistant]{use-header-bar} slot of the
-    @class{gtk:assistant} class gets or sets whether the assistant uses a header
-    bar for action buttons instead of the action area.
+    The accessor for the @slot[gtk:assistant]{use-header-bar} slot gets or sets
+    whether the assistant uses a header bar for action buttons instead of the
+    action area.
   @end{short}
   For technical reasons, this property is declared as an integer property, use
   the value 1 for @em{true} or -1 for @em{false}.
@@ -559,7 +558,7 @@ lambda (assistant page)    :run-last
 
 (cffi:defcfun ("gtk_assistant_get_current_page" assistant-current-page) :int
  #+liber-documentation
- "@version{2025-02-27}
+ "@version{2026-08-20}
   @syntax{(gtk:assistant-current-page assistant) => index}
   @syntax{(setf (gtk:assistant-current-page assistant) index)}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -567,13 +566,11 @@ lambda (assistant page)    :run-last
     from 0, if negative, the last page will be used, if greater than the number
     of pages in the assistant, nothing will be done}
   @begin{short}
-    The @fun{gtk:assistant-current-page} function returns the page number of
-    the current page in the assistant.
+    Gets or sets the page number of the current page in the assistant.
   @end{short}
-  The @setf{gtk:assistant-current-page} function switches the page in the
-  assistant to @arg{index}. Note that this will only be necessary in custom
-  buttons, as the assistant flow can be set with the
-  @fun{gtk:assistant-set-forward-page-func} function.
+  Setting @arg{index} switches the page in the assistant to @arg{index}. Note
+  that this will only be necessary in custom buttons, as the assistant flow can
+  be set with the @fun{gtk:assistant-set-forward-page-func} function.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.
@@ -835,7 +832,7 @@ lambda (assistant page)    :run-last
   @argument[page]{a @class{gtk:widget} page of @arg{assistant}}
   @argument[ptype]{a value of the @sym{gtk:assistant-page-type} enumeration}
   @begin{short}
-    The page type determines the page behavior in the assistant.
+    Gets or sets the page behavior in the assistant.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
@@ -864,19 +861,17 @@ lambda (assistant page)    :run-last
 
 (cffi:defcfun ("gtk_assistant_get_page_title" assistant-page-title) :string
  #+liber-documentation
- "@version{2025-02-27}
+ "@version{2026-08-20}
   @syntax{(gtk:assistant-page-title assistant page) => title}
   @syntax{(setf (gtk:assistant-page-title assistant page) title)}
   @argument[assistant]{a @class{gtk:assistant} widget}
   @argument[page]{a @class{gtk:widget} page of @arg{assistant}}
   @argument[title]{a string for the new title for @arg{page}}
   @begin{short}
-    The @fun{gtk:assistant-page-title} function gets the title for the page in
-    the assistant.
+    Gets or sets the title for the page in the assistant.
   @end{short}
-  The @setf{gtk:assistant-page-title} function sets a title. The title is
-  displayed in the header area of the assistant when the page is the current
-  page.
+  The title is displayed in the header area of the assistant when the page is
+  the current page.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.
@@ -911,12 +906,10 @@ lambda (assistant page)    :run-last
   @argument[page]{a @class{gtk:widget} page of @arg{assistant}}
   @argument[complete]{a boolean for the completeness status of the page}
   @begin{short}
-    The @fun{gtk:assistant-page-complete} function gets whether the page is
-    complete.
+    Gets or sets whether the page contents are complete.
   @end{short}
-  The @setf{gtk:assistant-page-complete} function sets whether the page contents
-  are complete. This will make the assistant update the buttons state to be able
-  to continue the task.
+  This will make the assistant update the buttons state to be able to continue
+  the task.
   @begin[Warning]{dictionary}
     The @class{gtk:assistant} implementation is deprecated since 4.10. This
     widget will be removed in GTK 5.
