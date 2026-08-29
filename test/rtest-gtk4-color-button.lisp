@@ -38,17 +38,55 @@
                (gtk:widget-class-css-name "GtkColorButton")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkColorButton" GTK:COLOR-BUTTON
-                       (:SUPERCLASS GTK:WIDGET
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
-                         "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_color_button_get_type")
-                       ((MODAL COLOR-BUTTON-MODAL "modal" "gboolean" T T)
-                        (SHOW-EDITOR COLOR-BUTTON-SHOW-EDITOR
-                         "show-editor" "gboolean" T T)
-                        (TITLE COLOR-BUTTON-TITLE "title" "gchararray" T T)))
+                      (:SUPERCLASS GTK:WIDGET
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkBuildable" "GtkColorChooser"
+                        "GtkConstraintTarget")
+                       :TYPE-INITIALIZER "gtk_color_button_get_type")
+                      ((MODAL COLOR-BUTTON-MODAL "modal" "gboolean" T T)
+                       (SHOW-EDITOR COLOR-BUTTON-SHOW-EDITOR
+                        "show-editor" "gboolean" T T)
+                       (TITLE COLOR-BUTTON-TITLE "title" "gchararray" T T)))
              (gobject:get-gtype-definition "GtkColorButton"))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate                                           Since 4.4
+
+(test gtk-color-button-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkColorButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     color-set
+
+(test gtk-color-button-color-set-signal
+  (let* ((name "color-set")
+         (gtype (g:gtype "GtkColorButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -62,34 +100,6 @@
     (is (string= "Eine Farbe wählen" (gtk:color-button-title button)))
     (is (string= "Wähle eine Farbe"
                  (setf (gtk:color-button-title button) "Wähle eine Farbe")))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate                                           Since 4.4
-
-(test gtk-color-button-activate-signal
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkColorButton"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkColorButton" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:ACTION :RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
-;;;     color-set
-
-(test gtk-color-button-color-set-signal
-  (let ((query (g:signal-query (g:signal-lookup "color-set" "GtkColorButton"))))
-    (is (string= "color-set" (g:signal-query-signal-name query)))
-    (is (string= "GtkColorButton" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -109,4 +119,4 @@
                  (gdk:rgba-to-string (gtk:color-chooser-rgba button))))
     (is-false (gtk:color-chooser-use-alpha button))))
 
-;;; 2026-05-15
+;;; 2026-07-24

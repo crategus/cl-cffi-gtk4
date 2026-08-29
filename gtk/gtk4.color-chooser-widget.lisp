@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -157,15 +157,14 @@
 (setf (liber:alias-for-function 'color-chooser-widget-show-editor)
       "Accessor"
       (documentation 'color-chooser-widget-show-editor 'function)
- "@version{2025-09-29}
+ "@version{2026-08-28}
   @syntax{(gtk:color-chooser-widget-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-widget} widget}
   @argument[show-editor]{a boolean whether to show the single-color editor}
   @begin{short}
-    The accessor for the @slot[gtk:color-chooser-widget]{show-editor} slot of
-    the @class{gtk:color-chooser-widget} class gets or sets whether the color
-    chooser is showing the single-color editor.
+    The accessor for the @slot[gtk:color-chooser-widget]{show-editor} slot
+    gets or sets whether the color chooser is showing the single-color editor.
   @end{short}
   It can be set to switch the color chooser into single-color editing mode.
   @begin[Warning]{dictionary}

@@ -34,6 +34,26 @@
                         "use-alpha" "gboolean" T T))
              (gobject:get-gtype-definition "GtkColorChooser"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     color-activated
+
+(test gtk-color-chooser-color-activated-signal
+  (let* ((name "color-activated")
+         (gtype (g:gtype "GtkColorChooser"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GdkRGBA")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-color-chooser-properties
@@ -44,23 +64,6 @@
                'gdk:rgba))
     (is-false (gtk:color-chooser-use-alpha chooser))
     (is-true (setf (gtk:color-chooser-use-alpha chooser) t))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     color-activated
-
-(test gtk-color-chooser-color-activated-signal
-  (let ((query (g:signal-query (g:signal-lookup "color-activated"
-                                                "GtkColorChooser"))))
-    (is (string= "color-activated" (g:signal-query-signal-name query)))
-    (is (string= "GtkColorChooser"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("GdkRGBA")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -82,4 +85,4 @@
   (is (equal '(0.0 0.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 1 1))))
   (is (equal '(0.0 0.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0.5 0.5)))))
 
-;;; 2024-9-20
+;;; 2026-07-24

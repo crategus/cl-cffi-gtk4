@@ -214,15 +214,14 @@
 (setf (liber:alias-for-function 'color-chooser-dialog-show-editor)
       "Accessor"
       (documentation 'color-chooser-dialog-show-editor 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:color-chooser-dialog-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-dialog-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-dialog} widget}
   @argument[show-editor]{a boolean whether to show the single-color editor}
   @begin{short}
-    The accessor for the @slot[gtk:color-chooser-dialog]{show-editor} slot of
-    the @class{gtk:color-chooser-dialog} class gets or sets whether the color
-    chooser dialog is showing the single-color editor.
+    The accessor for the @slot[gtk:color-chooser-dialog]{show-editor} slot gets
+    or sets whether the color chooser dialog is showing the single-color editor.
   @end{short}
   It can be set to switch the color chooser into single-color editing mode.
   @begin[Warning]{dictionary}
