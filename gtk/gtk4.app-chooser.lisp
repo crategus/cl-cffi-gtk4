@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2025 Dieter Kaiser
+;;; Copyright (C) 2013 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,14 +123,13 @@
 (setf (liber:alias-for-function 'app-chooser-content-type)
       "Accessor"
       (documentation 'app-chooser-content-type 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-content-type object) => content-type}
   @argument[object]{a @class{gtk:app-chooser} object}
   @argument[content-type]{a string for the content type}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser]{content-type} slot of the
-    @class{gtk:app-chooser} interface returns the current value of the content
-    type.
+    The accessor for the @slot[gtk:app-chooser]{content-type} slot returns the
+    current value of the content type.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser} implementation is deprecated since 4.10.

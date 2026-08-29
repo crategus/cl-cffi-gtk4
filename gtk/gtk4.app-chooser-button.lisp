@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2025 Dieter Kaiser
+;;; Copyright (C) 2013 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -214,15 +214,14 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-heading)
       "Accessor"
       (documentation 'app-chooser-button-heading 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-button-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-button-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[heading]{a string containing Pango markup}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser-button]{heading} slot of the
-    @class{gtk:app-chooser-button} class gets or sets the text to display at the
-    top of the dialog.
+    The accessor for the @slot[gtk:app-chooser-button]{heading} slot gets or
+    sets the text to display at the top of the dialog.
   @end{short}
 
   If the heading is not set, the dialog displays a default text.
@@ -243,15 +242,14 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-modal)
       "Accessor"
       (documentation 'app-chooser-button-modal 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-button-modal object) => setting}
   @syntax{(setf (gtk:app-chooser-button-modal object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[setting]{a boolean whether the dialog is modal}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser-button]{modal} slot of the
-    @class{gtk:app-chooser-button} class gets or sets whether the dialog is
-    modal.
+    The accessor for the @slot[gtk:app-chooser-button]{modal} slot gets or sets
+    whether the dialog is modal.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
@@ -273,7 +271,7 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-default-item)
       "Accessor"
       (documentation 'app-chooser-button-show-default-item 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-button-show-default-item object) => setting}
   @syntax{(setf (gtk:app-chooser-button-show-default-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -281,8 +279,8 @@ lambda (button item)    :has-details
     application}
   @begin{short}
     The accessor for the @slot[gtk:app-chooser-button]{show-default-item} slot
-    of the @class{gtk:app-chooser-button} class gets or sets whether
-  the dropdown menu of the button should show the default application.
+    gets or sets whether the dropdown menu of the button should show the default
+    application.
   @end{short}
   The @fun{gtk:app-chooser-button-show-default-item} function returns whether
   the dropdown menu of the button should show the default application. The
@@ -309,17 +307,16 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-dialog-item)
       "Accessor"
       (documentation 'app-chooser-button-show-dialog-item 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:app-chooser-button-show-dialog-item object) => setting}
   @syntax{(setf (gtk:app-chooser-button-show-dialog-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[setting]{a boolean whether the dropdown menu shoult show a
     @class{gtk:app-chooser-dialog} widget}
   @begin{short}
-    The accessor for the @slot[gtk:app-chooser-button]{show-dialog-item} slot of
-    the @class{gtk:app-chooser-button} class gets or sets whether the dropdown
-    menu of the button should show an entry to trigger a
-    @class{gtk:app-chooser-dialog} widget.
+    The accessor for the @slot[gtk:app-chooser-button]{show-dialog-item} slot
+    gets or sets whether the dropdown menu of the button should show an entry
+    to trigger a @class{gtk:app-chooser-dialog} widget.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
