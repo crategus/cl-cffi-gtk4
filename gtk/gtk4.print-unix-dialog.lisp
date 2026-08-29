@@ -2,7 +2,7 @@
 ;;; gtk4.print-unix-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -281,15 +281,14 @@
 (setf (liber:alias-for-function 'print-unix-dialog-current-page)
       "Accessor"
       (documentation 'print-unix-dialog-current-page 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-current-page object) => page}
   @syntax{(setf (gtk:print-unix-dialog-current-page object) page)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[page]{an integer for the current page number}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{current-page} slot of the
-    @class{gtk:print-unix-dialog} class gets or sets the current page number of
-    the print dialog.
+    The accessor for the @slot[gtk:print-unix-dialog]{current-page} slot gets
+    or sets the current page number of the print dialog.
   @end{short}
   If @arg{page} is not -1, this enables the current page choice for the range
   of pages to print.
@@ -309,15 +308,14 @@
 (setf (liber:alias-for-function 'print-unix-dialog-embed-page-setup)
       "Accessor"
       (documentation 'print-unix-dialog-embed-page-setup 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-embed-page-setup object) => embed}
   @syntax{(setf (gtk:print-unix-dialog-embed-page-setup object) embed)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[embed]{a boolean whether embed page setup selection}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{embed-page-setup} slot of
-    the @class{gtk:print-unix-dialog} class gets or sets whether page setup
-    combos are embedded in the print dialog.
+    The accessor for the @slot[gtk:print-unix-dialog]{embed-page-setup} slot
+    gets or sets whether page setup combos are embedded in the print dialog.
   @end{short}
   @see-class{gtk:print-unix-dialog}")
 
@@ -334,15 +332,14 @@
 (setf (liber:alias-for-function 'print-unix-dialog-has-selection)
       "Accessor"
       (documentation 'print-unix-dialog-has-selection 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-has-selection object) => has-selection}
   @syntax{(setf (gtk:print-unix-dialog-has-selection object) has-selection)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[has-selection]{@em{true} indicates that a selection exists}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{has-selection} slot of the
-    @class{gtk:print-unix-dialog} class gets or sets whether the application has
-    a selection.
+    The accessor for the @slot[gtk:print-unix-dialog]{has-selection} slot gets
+    or sets whether the application has a selection.
   @end{short}
   @see-class{gtk:print-unix-dialog}")
 
@@ -359,7 +356,7 @@
 (setf (liber:alias-for-function 'print-unix-dialog-manual-capabilities)
       "Accessor"
       (documentation 'print-unix-dialog-manual-capabilities 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-manual-capabilities) => capabilities}
   @syntax{(setf (gtk:print-unix-dialog-manual-capabilities object) capabilities)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
@@ -367,8 +364,7 @@
     capabilities of the application}
   @begin{short}
     The accessor for the @slot[gtk:print-unix-dialog]{manual-capabilities} slot
-    of the @class{gtk:print-unix-dialog} class gets or sets the capabilities the
-    application can handle.
+    gets or sets the capabilities the application can handle.
   @end{short}
   This lets you specify the printing capabilities your application supports.
   For instance, if you can handle scaling the output then you pass the
@@ -391,15 +387,14 @@
 (setf (liber:alias-for-function 'print-unix-dialog-page-setup)
       "Accessor"
       (documentation 'print-unix-dialog-page-setup 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-page-setup) => setup}
   @syntax{(setf (gtk:print-unix-dialog-page-setup object) setup)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[setup]{a @class{gtk:page-setup} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{page-setup} slot of the
-    @class{gtk:print-unix-dialog} class gets or sets the page setup that is used
-    by the print dialog.
+    The accessor for the @slot[gtk:print-unix-dialog]{page-setup} slot gets or
+    sets the page setup that is used by the print dialog.
   @end{short}
   @see-class{gtk:print-unix-dialog}
   @see-class{gtk:page-setup}")
@@ -417,15 +412,15 @@
 (setf (liber:alias-for-function 'print-unix-dialog-print-settings)
       "Accessor"
       (documentation 'print-unix-dialog-print-settings 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-print-settings object) => settings}
   @syntax{(setf (gtk:print-unix-dialog-print-settings object) settings)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{print-settings} slot of
-    the @class{gtk:print-unix-dialog} class gets or sets the print settings that
-    represents the current values in the print dialog.
+    The accessor for the @slot[gtk:print-unix-dialog]{print-settings} slot gets
+    or sets the print settings that represents the current values in the print
+    dialog.
   @end{short}
   Typically, this is used to restore saved print settings from a previous print
   operation before the print dialog is shown.
@@ -445,14 +440,13 @@
 (setf (liber:alias-for-function 'print-unix-dialog-selected-printer)
       "Accessor"
       (documentation 'print-unix-dialog-selected-printer 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-selected-printer object) => printer}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[printer]{a @class{gtk:printer} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-unix-dialog]{selected-printer} slot of
-    the @class{gtk:print-unix-dialog} class returns the currently selected
-    printer.
+    The accessor for the @slot[gtk:print-unix-dialog]{selected-printer} slot
+    returns the currently selected printer.
   @end{short}
   @see-class{gtk:print-unix-dialog}
   @see-class{gtk:printer}")
@@ -471,15 +465,14 @@
 (setf (liber:alias-for-function 'print-unix-dialog-support-selection)
       "Accessor"
       (documentation 'print-unix-dialog-support-selection 'function)
- "@version{2026-05-03}
+ "@version{2026-08-29}
   @syntax{(gtk:print-unix-dialog-support-selection) => selection}
   @syntax{(setf (gtk:print-unix-dialog-support-selection object) selection)}
   @argument[object]{a @class{gtk:print-unix-dialog} widget}
   @argument[selection]{@em{true} to allow print selection}
   @begin{short}
     The accessor for the @slot[gtk:print-unix-dialog]{support-selection} slot
-    of the @class{gtk:print-unix-dialog} class gets or sets whether the print
-    dialog allows user to print a selection.
+    gets or sets whether the print dialog allows user to print a selection.
   @end{short}
   @see-class{gtk:print-unix-dialog}")
 

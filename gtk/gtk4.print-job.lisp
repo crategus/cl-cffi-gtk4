@@ -2,7 +2,7 @@
 ;;; gtk4.print-job.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -180,13 +180,13 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-page-setup)
       "Accessor"
       (documentation 'print-job-page-setup 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-page-setup object) => setup}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[setup]{a @class{gtk:page-setup} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-job]{page-setup} slot of the
-    @class{gtk:print-job} class returns the page setup.
+    The accessor for the @slot[gtk:print-job]{page-setup} slot returns the
+    page setup.
   @end{short}
   @see-class{gtk:print-job}
   @see-class{gtk:page-setup}")
@@ -203,13 +203,13 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-printer)
       "Accessor"
       (documentation 'print-job-printer 'function)
- "@version{2025-09-27}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-printer object) => printer}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[printer]{a @class{gtk:printer} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-job]{printer} of the
-    @class{gtk:print-job} class returns the printer to print the job to.
+    The accessor for the @slot[gtk:print-job]{printer} slot returns the
+    printer to print the job to.
   @end{short}
   @see-class{gtk:print-job}
   @see-class{gtk:printer}")
@@ -226,13 +226,13 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-settings)
       "Accessor"
       (documentation 'print-job-settings 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-settings object) => settings}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
-    The accessor for the @slot[gtk:print-job]{settings} slot of the
-    @class{gtk:print-job} class returns the print settings of the print job.
+    The accessor for the @slot[gtk:print-job]{settings} slot returns the print
+    settings of the print job.
   @end{short}
   @see-class{gtk:print-job}
   @see-class{gtk:print-settings}")
@@ -250,13 +250,13 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-title)
       "Accessor"
       (documentation 'print-job-title 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-title object) => title}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[title]{a string for the job title.}
   @begin{short}
-    The accessor for the @slot[gtk:print-job]{title} slot of the
-    @class{gtk:print-job} class returns the title of the print job.
+    The accessor for the @slot[gtk:print-job]{title} slot returns the title
+    of the print job.
   @end{short}
   @see-class{gtk:print-job}")
 
@@ -276,15 +276,14 @@ lambda (job)    :run-last
 (setf (liber:alias-for-function 'print-job-track-print-status)
       "Accessor"
       (documentation 'print-job-track-print-status 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-track-print-status object) => status}
   @syntax{(setf (gtk:print-job-track-print-status object) status)}
   @argument[object]{a @class{gtk:print-job} object}
   @argument[status]{@em{true} to track status after printing}
   @begin{short}
-    The accessor for the @slot[gtk:print-job]{track-print-status} slot of the
-    @class{gtk:print-job} class gets or sets whether print jobs will be tracked
-    after printing.
+    The accessor for the @slot[gtk:print-job]{track-print-status} slot gets or
+    sets whether print jobs will be tracked after printing.
   @end{short}
   If the @arg{status} argument is @em{true}, the print job will try to continue
   report on the status of the print job in the printer queues and printer.
@@ -494,17 +493,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_pages" print-job-pages) print-pages
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-pages job) => pages}
   @syntax{(setf (gtk:print-job-pages job) pages)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[pages]{a @sym{gtk:print-pages} setting}
   @begin{short}
-    The @fun{gtk:print-job-pages} function gets the pages setting for the print
-    job.
+    Gets or sets the pages setting for the print job.
   @end{short}
-  The @setf{gtk:print-job-pages} function sets the pages setting for the print
-  job.
   @see-class{gtk:print-job}
   @see-symbol{gtk:print-pages}"
   (job (g:object print-job)))
@@ -550,16 +546,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_page_set" print-job-page-set) page-set
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-page-set job) => page-set}
   @syntax{(setf (gtk:print-job-page-set job) page-set)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[page-set]{a @sym{gtk:page-set} setting}
   @begin{short}
-    The @fun{gtk:print-job-page-set} function gets the setting for the print
-    job.
+    Gets or sets the setting for the print job.
   @end{short}
-  The @setf{gtk:print-job-page-set} function sets the setting for the print job.
   @see-class{gtk:print-job}
   @see-symbol{gtk:page-set}"
   (job (g:object print-job)))
@@ -608,16 +602,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_scale" print-job-scale) :double
  #+liber-documentation
- "@version{2024-07-26}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-scale job) => scale}
   @syntax{(setf (gtk:print-job-scale job) scale)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[scale]{a number coerce to a double float for the scale}
   @begin{short}
-    The @fun{gtk:print-job-scale} function gets the scale for the print job,
-    where 1.0 means unscaled.
+    Gets or sets the scale for the print job, where 1.0 means unscaled.
   @end{short}
-  The @setf{gtk:print-job-scale} function sets the scale for the print job.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 
@@ -637,17 +629,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_n_up" print-job-n-up) :uint
  #+liber-documentation
- "@version{2024-07-27}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-n-up job) => n-up}
   @syntax{(setf (gtk:print-job-n-up job) n-up)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[n-up]{an unsigned integer for the n-up value}
   @begin{short}
-    The @fun{gtk:print-job-n-up} function gets the n-up setting for the print
-    job.
+    Gets or sets the n-up setting for the print job.
   @end{short}
-  The @setf{gtk:print-job-n-up} function sets the n-up setting for the print
-  job.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 
@@ -668,17 +657,14 @@ lambda (job)    :run-last
 (cffi:defcfun ("gtk_print_job_get_n_up_layout" print-job-n-up-layout)
     number-up-layout
  #+liber-documentation
- "@version{2025-07-27}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-n-up-layout job) => layout}
   @syntax{(setf (gtk:print-job-n-up-layout job) layout)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[layout]{a @sym{gtk:number-up-layout} value for the layout setting}
   @begin{short}
-    The @fun{gtk:print-job-n-up-layout} function gets the layout setting for
-    the print job.
+    Gets or sets the layout setting for the print job.
   @end{short}
-  The @setf{gtk:print-job-n-up-layout} function sets the layout setting for the
-  print job.
   @see-class{gtk:print-job}
   @see-symbol{gtk:number-up-layout}"
   (job (g:object print-job)))
@@ -699,17 +685,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_rotate" print-job-rotate) :boolean
  #+liber-documentation
- "@version{2024-07-07}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-rotate job) => rotate}
   @syntax{(setf (gtk:print-job-rotate job) rotate)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[rotate]{a boolean whether to print rotated}
   @begin{short}
-    The @fun{gtk:print-job-rotate} function gets whether the job is printed
-    rotated.
+    Gets or sets whether the job is printed rotated.
   @end{short}
-  The @setf{gtk:print-job-rotate} function sets whether the job is printed
-  rotated.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 
@@ -729,17 +712,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_collate" print-job-collate) :boolean
  #+liber-documentation
- "@version{2024-07-07}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-collate job) => collate}
   @syntax{(setf (gtk:print-job-collate job) collate)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[collate]{a boolean whether the job is printed collated}
   @begin{short}
-    The @fun{gtk:print-job-collate} function gets whether the job is printed
-    collated.
+    Gets or sets whether the job is printed collated.
   @end{short}
-  The @setf{gtk:print-job-collate} function sets whether the job is printed
-  collated.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 
@@ -759,17 +739,14 @@ lambda (job)    :run-last
 
 (cffi:defcfun ("gtk_print_job_get_reverse" print-job-reverse) :boolean
  #+liber-documentation
- "@version{2024-07-07}
+ "@version{2026-08-29}
   @syntax{(gtk:print-job-reverse job) => reverse}
   @syntax{(setf (gtk:print-job-reverse job) reverse)}
   @argument[job]{a @class{gtk:print-job} object}
   @argument[reverse]{a boolean whether the job is printed reversed}
   @begin{short}
-    The @fun{gtk:print-job-reverse} function gets whether the job is printed
-    reversed.
+    Gets or sets whether the job is printed reversed.
   @end{short}
-  The @setf{gtk:print-job-reverse} function sets whether the job is printed
-  reversed.
   @see-class{gtk:print-job}"
   (job (g:object print-job)))
 

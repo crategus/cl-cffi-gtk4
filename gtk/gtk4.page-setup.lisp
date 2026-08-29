@@ -2,7 +2,7 @@
 ;;; gtk4.page-setup.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; Version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; Version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -684,18 +684,22 @@
 ;;; gtk_page_setup_to_gvariant
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_page_setup_to_gvariant" page-setup-to-gvariant)
+(cffi:defcfun ("gtk_page_setup_to_gvariant" %page-setup-to-gvariant)
     (:pointer (:struct g:variant))
+  (setup (g:object page-setup)))
+
+(defun page-setup-to-gvariant (setup)
  #+liber-documentation
  "@version{2025-07-26}
   @argument[setup]{a @class{gtk:page-setup} object}
-  @return{The new @sym{g:variant} parameter of @code{a{sv@}} type.}
+  @return{The new @sym{g:variant} instance of @code{a{sv@}} type.}
   @begin{short}
     Serialize the page setup to a @code{a{sv@}} variant.
   @end{short}
   @see-class{gtk:page-setup}
   @see-symbol{g:variant}"
-  (setup (g:object page-setup)))
+  ;; Convert the result into a full reference
+  (g:variant-ref-sink (%page-setup-to-gvariant setup)))
 
 (export 'page-setup-to-gvariant)
 
