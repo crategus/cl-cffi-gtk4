@@ -2,7 +2,7 @@
 ;;; gtk4.actionable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -115,15 +115,14 @@
 (setf (liber:alias-for-function 'actionable-action-name)
       "Accessor"
       (documentation 'actionable-action-name 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:actionable-action-name object) => name}
   @syntax{(setf (gtk:actionable-action-name object) name)}
   @argument[object]{a @class{gtk:actionable} widget}
   @argument[name]{a string for the action name, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:actionable]{action-name} slot of the
-    @class{gtk:actionable} inferface gets or sets the name of the action with
-    which @arg{object} should be associated.
+    The accessor for the @slot[gtk:actionable]{action-name} slot gets or sets
+    the name of the action with which @arg{object} should be associated.
   @end{short}
   If the @arg{name} argument is @code{nil} then the widget will be unassociated
   from any previous action. Usually this function is used when the widget is
@@ -160,16 +159,15 @@
 (setf (liber:alias-for-function 'actionable-action-target)
       "Accessor"
       (documentation 'actionable-action-target 'function)
- "@version{2025-08-12}
+ "@version{2026-07-28}
   @syntax{(gtk:actionable-action-target object) => value}
   @syntax{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
   @argument[value]{a @sym{g:variant} parameter as the target value, or
     @code{cffi:null-pointer}}
   @begin{short}
-    The accessor for the @slot[gtk:actionable]{action-target} slot of the
-    @class{gtk:actionable} inferface gets or sets the current target value of
-    an actionable widget.
+    The accessor for the @slot[gtk:actionable]{action-target} slot gets or sets
+    the current target value of an actionable widget.
   @end{short}
   If the @arg{value} argument is a @code{cffi:null-pointer} then the target
   value is unset.

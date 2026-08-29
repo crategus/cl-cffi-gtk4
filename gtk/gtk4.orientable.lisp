@@ -2,7 +2,7 @@
 ;;; gtk4.orientable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -99,15 +99,14 @@
 (setf (liber:alias-for-function 'orientable-orientation)
       "Accessor"
       (documentation 'orientable-orientation 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:orientable-orientation object) => orientation}
   @syntax{(setf (gtk:orientable-orientation object) orientation)}
   @argument[object]{a @class{gtk:orientable} widget}
   @argument[orientation]{a value of the @sym{gtk:orientation} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:orientable]{orientation} slot of the
-    @class{gtk:orientable} interface get or sets the orientation of the
-    orientable widget.
+    The accessor for the @slot[gtk:orientable]{orientation} slot gets or sets
+    the orientation of the orientable widget.
   @end{short}
   @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}")
