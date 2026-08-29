@@ -2,7 +2,7 @@
 ;;; gtk4.directory-list.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -165,14 +165,14 @@
 (setf (liber:alias-for-function 'directory-list-attributes)
       "Accessor"
       (documentation 'directory-list-attributes 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-attributes object) => attributes}
   @syntax{(setf (gtk:directory-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[attributes]{a string for the attributes}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{attributes} slot of the
-    @class{gtk:directory-list} class gets or sets the attributes to query.
+    The accessor for the @slot[gtk:directory-list]{attributes} slot gets or
+    sets the attributes to query.
   @end{short}
   Setting the attributes starts the enumeration.
 
@@ -192,14 +192,14 @@
 (setf (liber:alias-for-function 'directory-list-error)
       "Accessor"
       (documentation 'directory-list-error 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-error object) => error}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[error]{a @class{glib:error} instance for the loading error or
   @code{nil} if loading finished successfully}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{error} slot of the
-    @class{gtk:directory-list} class gets the loading error, if any.
+    The accessor for the @slot[gtk:directory-list]{error} slot returns the
+    loading error, if any.
   @end{short}
 
   If an error occurs during the loading process, the loading process will finish
@@ -221,15 +221,14 @@
 (setf (liber:alias-for-function 'directory-list-file)
       "Accessor"
       (documentation 'directory-list-file 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-file object) => file}
   @syntax{(setf (gtk:directory-list-file object) file)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[file]{a @class{g:file} object to be enumerated}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{file} slot of the
-    @class{gtk:directory-list} class gets or sets the file whose children are
-    currently enumerated.
+    The accessor for the @slot[gtk:directory-list]{file} slot gets or sets the
+    file whose children are currently enumerated.
   @end{short}
   Setting the file starts the enumeration. If the @arg{file} argument is
   @code{nil}, the result will be an empty list.
@@ -249,15 +248,14 @@
 (setf (liber:alias-for-function 'directory-list-io-priority)
       "Accessor"
       (documentation 'directory-list-io-priority 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-io-priority object) => priority}
   @syntax{(setf (gtk:directory-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[priority]{an integer for the IO priority to use}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{io-priority} slot of the
-    @class{gtk:directory-list} class gets or sets the IO priority to use while
-    loading files.
+    The accessor for the @slot[gtk:directory-list]{io-priority} slot gets or
+    sets the IO priority to use while loading files.
   @end{short}
 
   Setting the priority while @arg{object} is loading will reprioritize the
@@ -281,14 +279,13 @@
 (setf (liber:alias-for-function 'directory-list-item-type)
       "Accessor"
       (documentation 'directory-list-item-type 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{item-type} slot of the
-    @class{gtk:directory-list} class returns the type of items in the list
-    model.
+    The accessor for the @slot[gtk:directory-list]{item-type} slot returns the
+    type of items in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -313,13 +310,13 @@
 (setf (liber:alias-for-function 'directory-list-loading)
       "Accessor"
       (documentation 'directory-list-loading 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-loading object) => loading}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{loading} slot of the
-    @class{gtk:directory-list} class returns whether files are being loaded.
+    The accessor for the @slot[gtk:directory-list]{loading} slot returns
+    whether files are being loaded.
   @end{short}
   @see-class{gtk:directory-list}")
 
@@ -335,15 +332,14 @@
 (setf (liber:alias-for-function 'directory-list-monitored)
       "Accessor"
       (documentation 'directory-list-monitored 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-monitored object) => monitored}
   @syntax{(setf (gtk:directory-list-monitored object) monitored)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[monitored]{@em{true} to monitor the directory for changes}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{monitored} slot of the
-    @class{gtk:directory-list} class gets or sets whether the directory list is
-    monitoring the directory for changes.
+    The accessor for the @slot[gtk:directory-list]{monitored} slot gets or sets
+    whether the directory list is monitoring the directory for changes.
   @end{short}
   If monitoring is enabled, the @sig[g:list-model]{items-changed} signal will
   be emitted when the directory contents change.
@@ -365,15 +361,14 @@
 (setf (liber:alias-for-function 'directory-list-n-items)
       "Accessor"
       (documentation 'directory-list-n-items 'function)
- "@version{2025-08-05}
+ "@version{2026-08-29}
   @syntax{(gtk:directory-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:directory-list]{n-items} slot of the
-    @class{gtk:directory-list} class returns the number of items contained in
-    the model.
+    The accessor for the @slot[gtk:directory-list]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
   @see-class{gtk:directory-list}
   @see-function{g:list-model-n-items}")

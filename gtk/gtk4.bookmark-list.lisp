@@ -2,7 +2,7 @@
 ;;; gtk4.bookmark-list.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -138,14 +138,14 @@
 (setf (liber:alias-for-function 'bookmark-list-attributes)
       "Accessor"
       (documentation 'bookmark-list-attributes 'function)
- "@version{2025-08-15}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-attributes object) => attributes}
   @syntax{(setf (gtk:bookmark-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[attributes]{a string for the attributes}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{attributes} slot of the
-    @class{gtk:bookmark-list} class gets or sets the attributes to query.
+    The accessor for the @slot[gtk:bookmark-list]{attributes} slot gets or sets
+    the attributes to query.
   @end{short}
 
   If the @arg{attributes} argument is @code{nil}, no attributes will be queried,
@@ -166,14 +166,13 @@
 (setf (liber:alias-for-function 'bookmark-list-filename)
       "Accessor"
       (documentation 'bookmark-list-filename 'function)
- "@version{2025-08-15}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-filename object) => filename}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[filename]{a string for the filename of the @file{.xbel} file}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{filename} slot of the
-    @class{gtk:bookmark-list} class returns the filename of the bookmark file
-    that the bookmark list is loading.
+    The accessor for the @slot[gtk:bookmark-list]{filename} slot returns the
+    filename of the bookmark file that the bookmark list is loading.
   @end{short}
   @begin[Notes]{dictionary}
     The default location of the bookmark file is
@@ -198,15 +197,14 @@
 (setf (liber:alias-for-function 'bookmark-list-io-priority)
       "Accessor"
       (documentation 'bookmark-list-io-priority 'function)
- "@version{2025-08-15}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-io-priority object) => priority}
   @syntax{(setf (gtk:bookmark-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[priority]{an integer for the IO priority to use}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{io-priority} slot of the
-    @class{gtk:bookmark-list} class gets or sets the IO priority while loading
-    files.
+    The accessor for the @slot[gtk:bookmark-list]{io-priority} slot gets or
+    sets the IO priority while loading files.
   @end{short}
   The default IO priority is the @var{g:+priority-default+} value.
   @see-class{gtk:bookmark-list}
@@ -223,14 +221,13 @@
 (setf (liber:alias-for-function 'bookmark-list-item-type)
       "Accessor"
       (documentation 'bookmark-list-item-type 'function)
- "@version{2025-08-15}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{item-type} slot of the
-    @class{gtk:bookmark-list} class gets the type of items contained in the
-    list model.
+    The accessor for the @slot[gtk:bookmark-list]{item-type} slot gets the type
+    of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -255,13 +252,13 @@
 (setf (liber:alias-for-function 'bookmark-list-loading)
       "Accessor"
       (documentation 'bookmark-list-loading 'function)
- "@version{2025-08-15}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-loading object) => loading}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{loading} slot of the
-    @class{gtk:bookmark-list} class gets whether files are being loaded.
+    The accessor for the @slot[gtk:bookmark-list]{loading} slot gets whether
+    files are being loaded.
   @end{short}
   @see-class{gtk:bookmark-list}")
 
@@ -277,15 +274,14 @@
 (setf (liber:alias-for-function 'bookmark-list-n-items)
       "Accessor"
       (documentation 'bookmark-list-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-19}
   @syntax{(gtk:bookmark-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:bookmark-list]{n-items} slot of the
-    @class{gtk:bookmark-list} class returns the number of items contained in
-    the model.
+    The accessor for the @slot[gtk:bookmark-list]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
   @see-class{gtk:bookmark-list}
   @see-function{g:list-model-n-items}")

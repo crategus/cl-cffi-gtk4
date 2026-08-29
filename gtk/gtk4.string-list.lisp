@@ -2,7 +2,7 @@
 ;;; gtk4.string-list.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -116,14 +116,13 @@
 (setf (liber:alias-for-function 'string-object-string)
       "Accessor"
       (documentation 'string-object-string 'function)
- "@version{2025-09-27}
+ "@version{2026-08-29}
   @syntax{(gtk:string-object-string object) => string}
   @argument[object]{a @class{gtk:string-object} object}
   @argument[string]{a string}
   @begin{short}
-    The accessor for the @slot[gtk:string-object]{string} slot of the
-    @class{gtk:string-object} class returns the string contained in a
-    @class{gtk:string-object} object.
+    The accessor for the @slot[gtk:string-object]{string} slot returns the
+    string contained in a @class{gtk:string-object} object.
   @end{short}
   @see-class{gtk:string-object}")
 
@@ -243,15 +242,14 @@
 (setf (liber:alias-for-function 'string-list-item-type)
       "Accessor"
       (documentation 'string-list-item-type 'function)
- "@version{2025-08-17}
+ "@version{2026-08-29}
   @syntax{(gtk:string-list-item-type object) => type}
   @syntax{(setf (gtk:string-list-item-type object) type)}
   @argument[object]{a @class{gtk:string-list} object}
   @argument[type]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:string-list]{item-type} slot of the
-    @class{gtk:string-list} class returns the type of items contained in the
-    string list.
+    The accessor for the @slot[gtk:string-list]{item-type} slot returns the
+    type of items contained in the string list.
   @end{short}
 
   Since 4.14
@@ -272,15 +270,14 @@
 (setf (liber:alias-for-function 'string-list-n-items)
       "Accessor"
       (documentation 'string-list-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-29}
   @syntax{(gtk:string-list-n-items object) => n-items}
   @syntax{(setf (gtk:string-list-n-items object) n-items)}
   @argument[object]{a @class{gtk:string-list} object}
   @argument[n-items]{an unsigned integer}
   @begin{short}
-    The accessor for the @slot[gtk:string-list]{n-items} slot of the
-    @class{gtk:string-list} class returns the number of items contained in the
-    string list.
+    The accessor for the @slot[gtk:string-list]{n-items} slot returns the
+    number of items contained in the string list.
   @end{short}
   @see-class{gtk:string-list}")
 
