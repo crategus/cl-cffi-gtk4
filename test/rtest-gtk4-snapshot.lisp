@@ -134,19 +134,16 @@
     (is-false (gtk:snapshot-to-node snapshot))))
 
 (test gtk-snapshot-to-node.2
-  (let ((filename "test/out/snapshot-draw-clock.png")
-        node)
-    (glib-test:with-check-memory (snapshot)
+  (glib-test:with-check-memory (snapshot)
+    (let ((filename "test/out/snapshot-draw-clock.png")
+          node)
       (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
       (is-false (draw-snapshot-clock snapshot 100 100))
       (is (cffi:pointerp (setf node (gtk:snapshot-to-node snapshot))))
       (cairo:with-context-for-image-surface (context :argb32 100 100)
         (gsk:render-node-draw node context)
-
         (cairo:surface-write-to-png (cairo:target context)
-                                    (glib-sys:sys-path filename))
-
-))))
+                                    (glib-sys:sys-path filename))))))
 
 ;;;     gtk_snapshot_to_paintable
 
@@ -203,34 +200,28 @@
           (path2 (glib-sys:sys-path "test/out/snapshot-push-color-matrix.png"))
           (builder (gsk:path-builder-new))
           node)
-
     (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-
     (graphene:with-objects ((vec3 graphene:vec3-t 0.0 0.0 1.0)
+                            (vec4 graphene:vec4-t  0.1 0.2 0.3 0.4)
+                            (bounds graphene:rect-t 0 0 100 100)
                             (matrix graphene:matrix-t 10.0 (vec3 graphene:vec3-t)))
-      (graphene:with-vec4 (vec 0.1 0.2 0.3 0.4)
-
-        (is-false (gtk:snapshot-push-color-matrix snapshot matrix vec))
-
-        (graphene:with-rect (bounds 0 0 100 100)
-          ;; Draw snapshot with push color-matrix
-          (is-false (gsk:path-builder-add-rect builder bounds))
-          (is-false (gtk:snapshot-append-fill snapshot
-                                              (gsk:path-builder-to-path builder)
-                                              :winding
-                                              (gdk:rgba-new :red 1 :alpha 1)))
-
-          (is-false (gtk:snapshot-pop snapshot))
-
-          ;; Store render node
-          (setf node (gtk:snapshot-to-node snapshot))
-          ;; Export render node to text file and image file
-          (is-true (gsk:render-node-write-to-file node path1))
-          (cairo:with-context-for-image-surface (context :argb32 100 100)
-            (gsk:render-node-draw node context)
-            (cairo:surface-write-to-png (cairo:target context) path2)
-            ;; Free render node
-            (gsk:render-node-unref node))))))))
+      (is-false (gtk:snapshot-push-color-matrix snapshot matrix vec4))
+      ;; Draw snapshot with push color-matrix
+      (is-false (gsk:path-builder-add-rect builder bounds))
+      (is-false (gtk:snapshot-append-fill snapshot
+                                          (gsk:path-builder-to-path builder)
+                                          :winding
+                                          (gdk:rgba-new :red 1 :alpha 1)))
+      (is-false (gtk:snapshot-pop snapshot))
+      ;; Store render node
+      (setf node (gtk:snapshot-to-node snapshot))
+      ;; Export render node to text file and image file
+      (is-true (gsk:render-node-write-to-file node path1))
+      (cairo:with-context-for-image-surface (context :argb32 100 100)
+        (gsk:render-node-draw node context)
+        (cairo:surface-write-to-png (cairo:target context) path2)
+        ;; Free render node
+        (gsk:render-node-unref node))))))
 
 ;;;     gtk_snapshot_push_repeat
 
@@ -243,7 +234,6 @@
       (is (typep (setf  texture
                         (gdk:texture-new-from-filename path1)) 'gdk:texture))
       (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-
       (graphene:with-rects ((bounds 0 0 400 400) (child-bounds 0 0 200 200))
         ;; Draw snapshot with push repeat
         (is-false (gtk:snapshot-push-repeat snapshot bounds child-bounds))
@@ -267,16 +257,12 @@
           (path2 (glib-sys:sys-path "test/out/snapshot-push-clip.png"))
           (color (gdk:rgba-parse "orange"))
           node)
-
     (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-
     (graphene:with-rect (bounds 10 10 80 80)
-
       ;; Draw snapshot with push clip
       (is-false (gtk:snapshot-push-clip snapshot bounds))
       (is-false (gtk:snapshot-append-color snapshot color bounds))
       (is-false (gtk:snapshot-pop snapshot))
-
       ;; Store render node
       (setf node (gtk:snapshot-to-node snapshot))
       ;; Export render node to text file and image file
@@ -295,16 +281,13 @@
           (path2 (glib-sys:sys-path "test/out/snapshot-push-rounded-clip.png"))
           (color (gdk:rgba-parse "orange"))
           node)
-
     (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-
     (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
       (graphene:with-rects ((rect -50 -50 120 120) (bounds 0 0 100 100))
         (gsk:rounded-rect-init-from-rect outline rect 50)
         (gtk:snapshot-push-rounded-clip snapshot outline)
         (gtk:snapshot-append-color snapshot color bounds)
         (gtk:snapshot-pop snapshot)
-
         ;; Store render node
         (setf node (gtk:snapshot-to-node snapshot))
         ;; Export render node to text file and image file
@@ -321,8 +304,6 @@
 
 ;;;     gtk_snapshot_push_shadow
 
-;; TODO: The output seems not to be corret
-
 (test gtk-snapshot-push-shadow
   (glib-test:with-check-memory (snapshot)
     (let* ((path1 (glib-sys:sys-path "test/out/snapshot-push-shadow.txt"))
@@ -330,20 +311,17 @@
            (red (gdk:rgba-new :red 1 :green 0 :blue 0 :alpha 1))
            (blue (gdk:rgba-parse "blue"))
            (green (gdk:rgba-parse "green"))
-           (black (gdk:rgba-parse "black"))
-           (shadows (list (list blue 10 10 5)
-                          (list green 20 20 6)
-                          (list black 30 30 7)))
+           (yellow (gdk:rgba-parse "yellow"))
+           (shadows (list (list green -20 -20 5)
+                          (list blue -5 -5 6)
+                          (list yellow 0 0 3)))
            node)
     (is (typep (setf snapshot (gtk:snapshot-new)) 'gtk:snapshot))
-
     (graphene:with-rect (bounds 10 10 80 80)
-
       ;; Draw snapshot with push shadow
       (gtk:snapshot-push-shadow snapshot shadows)
       (gtk:snapshot-append-color snapshot red bounds)
       (gtk:snapshot-pop snapshot)
-
       ;; Store render node
       (setf node (gtk:snapshot-to-node snapshot)))
       ;; Export render node to text file and image file
@@ -356,6 +334,7 @@
 
 ;;;     gtk_snapshot_push_debug
 ;;;     gtk_snapshot_push_gl_shader                         Deprecated 4.16
+
 ;;;     gtk_snapshot_push_mask                              Since 4.10
 
 ;;;     gtk_snapshot_push_fill                              Since 4.14
@@ -374,10 +353,8 @@
                                         :winding))
       (is-false (gtk:snapshot-append-color snapshot red rect))
       (is-false (gtk:snapshot-pop snapshot))
-
       (setf node (gtk:snapshot-to-node snapshot))
       (is-true (gsk:render-node-write-to-file node path1))
-
       (cairo:with-context-for-image-surface (context :argb32 100 100)
         (gsk:render-node-draw node context)
         (cairo:surface-write-to-png (cairo:target context)
@@ -409,7 +386,7 @@
 
 ;;;     gtk_snapshot_pop
 ;;;     gtk_snapshot_gl_shader_pop_texture                  Deprecated 4.16
-;;;
+
 ;;;     gtk_snapshot_save
 ;;;     gtk_snapshot_restore
 ;;;     gtk_snapshot_transform

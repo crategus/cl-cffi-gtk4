@@ -2,7 +2,7 @@
 ;;; gtk4.snapshot.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -53,14 +53,18 @@
 ;;;     gtk_snapshot_push_blend
 ;;;     gtk_snapshot_push_blur
 ;;;     gtk_snapshot_push_shadow
-;;;     gtk_snapshot_push_debug
-;;;     gtk_snapshot_push_gl_shader                        Deprecated 4.16
-;;;     gtk_snapshot_push_mask                             Since 4.10
-;;;     gtk_snapshot_push_fill                             Since 4.14
-;;;     gtk_snapshot_push_stroke                           Since 4.14
+;;;     gtk_snapshot_push_debug                             not implemented
+;;;     gtk_snapshot_push_gl_shader                         Deprecated 4.16
+;;;     gtk_snapshot_push_mask                              Since 4.10
+;;;     gtk_snapshot_push_fill                              Since 4.14
+;;;     gtk_snapshot_push_stroke                            Since 4.14
+;;;     gtk_snapshot_push_component_transfer                Since 4.20
+;;;     gtk_snapshot_push_composite                         Since 4.22
+;;;     gtk_snapshot_push_copy                              Since 4.22
+;;;     gtk_snapshot_push_isolation                         Since 4.22
 ;;;
 ;;;     gtk_snapshot_pop
-;;;     gtk_snapshot_gl_shader_pop_texture                 Deprecated 4.16
+;;;     gtk_snapshot_gl_shader_pop_texture                  Deprecated 4.16
 ;;;
 ;;;     gtk_snapshot_save
 ;;;     gtk_snapshot_restore
@@ -87,15 +91,16 @@
 ;;;     gtk_snapshot_append_outset_shadow
 ;;;     gtk_snapshot_append_radial_gradient
 ;;;     gtk_snapshot_append_repeating_radial_gradient
-;;;     gtk_snapshot_append_scaled_texture                 Since 4.10
-;;;     gtk_snapshot_append_fill                           Since 4.14
-;;;     gtk_snapshot_append_stroke                         Since 4.14
+;;;     gtk_snapshot_append_scaled_texture                  Since 4.10
+;;;     gtk_snapshot_append_fill                            Since 4.14
+;;;     gtk_snapshot_append_stroke                          Since 4.14
+;;;     gtk_snapshot_append_paste                           Since 4.22
 ;;;
-;;;     gtk_snapshot_render_insertion_cursor               Deprecated 4.10
-;;;     gtk_snapshot_render_background                     Deprecated 4.10
-;;;     gtk_snapshot_render_frame                          Deprecated 4.10
-;;;     gtk_snapshot_render_focus                          Deprecated 4.10
-;;;     gtk_snapshot_render_layout                         Deprecated 4.10
+;;;     gtk_snapshot_render_insertion_cursor                Deprecated 4.10
+;;;     gtk_snapshot_render_background                      Deprecated 4.10
+;;;     gtk_snapshot_render_frame                           Deprecated 4.10
+;;;     gtk_snapshot_render_focus                           Deprecated 4.10
+;;;     gtk_snapshot_render_layout                          Deprecated 4.10
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -119,7 +124,7 @@
 
 #+liber-documentation
 (setf (documentation 'snapshot 'type)
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @begin{short}
     The @class{gtk:snapshot} object is an auxiliary object that assists in
     creating @class{gsk:render-node} objects for widgets.
@@ -127,13 +132,19 @@
   It functions in a similar way to a Cairo context, and maintains a stack of
   render nodes and their associated transformations.
 
-  The node at the top of the stack is the the one that the snapshot functions
-  operate on. Use the @code{gtk:snapshot-push-...} functions and
-  @fun{gtk:snapshot-pop} function to change the current node.
+  The node at the top of the stack is the the one that the
+  @code{gtk:snapshot-append-...} functions operate on. Use the
+  @code{gtk:snapshot-push-...} functions and the @fun{gtk:snapshot-pop} function
+  to change the current node.
 
   The typical way to obtain a @class{gtk:snapshot} object is as an argument to
   the @fun{gtk:widget-snapshot} virtual function. If you need to create
   your own @class{gtk:snapshot} object, use the @fun{gtk:snapshot-new} function.
+
+  Note that the @class{gtk:snapshot} implementation applies some optimizations,
+  so the node it produces may not match the API calls 1:1. For example, it will
+  omit clip nodes if the child node is entirely contained within the clip
+  rectangle.
   @see-constructor{gtk:snapshot-new}
   @see-class{gdk:snapshot}
   @see-class{gsk:render-node}
@@ -147,7 +158,7 @@
 
 (defun snapshot-new ()
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @return{The newly allocated @class{gtk:snapshot} object.}
   @short{Creates a new @class{gtk:snapshot} object.}
   @see-class{gtk:snapshot}"
@@ -164,7 +175,7 @@
 
 (defun snapshot-to-node (snapshot)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{return}
     The constructed @class{gsk:render-node} instance or @code{nil} if there
@@ -173,10 +184,9 @@
   @begin{short}
     Returns the render node that was constructed by @arg{snapshot}.
   @end{short}
-  Note that this function may return @code{nil} if nothing has been added to the
-  snapshot or if its content does not produce pixels to be rendered.
-
-  After calling this function, it is no longer possible to add more nodes to
+  Note that this function may return @code{nil} if nothing has been added to
+  the snapshot or if its content does not produce pixels to be rendered. After
+  calling this function, it is no longer possible to add more nodes to
   @arg{snapshot}.
   @see-class{gtk:snapshot}
   @see-class{gsk:render-node}"
@@ -196,10 +206,11 @@
 
 (defun snapshot-to-paintable (snapshot &optional size)
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[size]{a @sym{graphene:size-t} instance for the size of the resulting
-    paintable or the @code{nil} default value to use the bounds of the snapshot}
+  @argument[size]{an optional @sym{graphene:size-t} instance for the size of
+    the resulting paintable or the @code{nil} default value to use the bounds
+    of the snapshot}
   @return{The new @class{gdk:paintable} object.}
   @begin{short}
     Returns a paintable encapsulating the render node that was constructed by
@@ -216,16 +227,11 @@
 (export 'snapshot-to-paintable)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_free_to_node
-;;;
-;;; Returns the node that was constructed by snapshot and frees snapshot.
+;;; gtk_snapshot_free_to_node                               not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_free_to_paintable
-;;;
-;;; Returns a paintable for the node that was constructed by snapshot and frees
-;;; snapshot.
+;;; gtk_snapshot_free_to_paintable                          not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -238,7 +244,7 @@
 
 (defun snapshot-push-opacity (snapshot opacity)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[opacity]{a number coerced to a double float for the opacity to use}
   @begin{short}
@@ -259,7 +265,7 @@
 (cffi:defcfun ("gtk_snapshot_push_color_matrix" snapshot-push-color-matrix)
     :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[matrix]{a @sym{graphene:matrix-t} instance for the color matrix to
     use}
@@ -274,10 +280,8 @@
 pixel = transpose(matrix) * pixel + offset
   @end{pre}
   for every pixel. The transformation operates on unpremultiplied colors, with
-  color components ordered R, G, B, A.
-
-  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
-  function.
+  color components ordered R, G, B, A. The image is recorded until the next
+  call to the @fun{gtk:snapshot-pop} function.
   @see-class{gtk:snapshot}
   @see-symbol{graphene:matrix-t}
   @see-symbol{graphene:vec4-t}
@@ -299,12 +303,13 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-repeat (snapshot bounds &optional child-bounds)
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds within
     which to repeat}
-  @argument[child-bounds]{a @sym{graphene:rect-t} instance for the bounds of
-    the child or @code{nil} to use the full size of the collected child node}
+  @argument[child-bounds]{an optional @sym{graphene:rect-t} instance for the
+    bounds of the child or @code{nil}, the default, to use the full size of the
+    collected child node}
   @begin{short}
     Creates a node that repeats the child node.
   @end{short}
@@ -324,7 +329,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_push_clip" snapshot-push-clip) :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to clip
     to}
@@ -348,7 +353,7 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_push_rounded_clip" snapshot-push-rounded-clip)
     :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @sym{gsk:rounded-rect} instance for the rounded rectangle
     to clip to}
@@ -375,7 +380,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-cross-fade (snapshot progress)
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[progress]{a number coerced to a double float for the progress
     between to 0.0 and 1.0}
@@ -384,10 +389,8 @@ pixel = transpose(matrix) * pixel + offset
   @end{short}
   Until the first call to the @fun{gtk:snapshot-pop} function, the start image
   will be @arg{snapshot}. After that call, the end image will be recorded until
-  the second call to the @fun{gtk:snapshot-pop} function.
-
-  Calling this function requires two subsequent calls to the
-  @fun{gtk:snapshot-pop} function.
+  the second call to the @fun{gtk:snapshot-pop} function. Calling this function
+  requires two subsequent calls to the @fun{gtk:snapshot-pop} function.
   @see-class{gtk:snapshot}
   @see-function{gtk:snapshot-pop}"
   (%snapshot-push-cross-fade snapshot (coerce progress 'double-float)))
@@ -400,7 +403,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_push_blend" snapshot-push-blend) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[mode]{a @sym{gsk:blend-mode} value to use}
   @begin{short}
@@ -409,9 +412,7 @@ pixel = transpose(matrix) * pixel + offset
   Until the first call to the @fun{gtk:snapshot-pop} function, the bottom image
   for the blend operation will be recorded. After that call, the top image to be
   blended will be recorded until the second call to the @fun{gtk:snapshot-pop}
-  function.
-
-  Calling this function requires two subsequent calls to the
+  function. Calling this function requires two subsequent calls to the
   @fun{gtk:snapshot-pop} function.
   @see-class{gtk:snapshot}
   @see-symbol{gsk:blend-mode}
@@ -431,7 +432,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-blur (snapshot radius)
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[radius]{a number coerced to a double float for the blur radius
     to use, must be postive}
@@ -457,7 +458,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-push-shadow (snapshot shadows)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[shadows]{a list of the form @code{'((color1 dx1 dy1 radius1)
     (color2 dx2 dy2 radius2) ...)} with the shadows to apply}
@@ -474,6 +475,7 @@ pixel = transpose(matrix) * pixel + offset
   The image is recorded until the next call to the @fun{gtk:snapshot-pop}
   function.
   @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
   @see-function{gtk:snapshot-pop}"
   (let ((n-shadows (length shadows))
         (cstruct-size (cffi:foreign-type-size '(:struct gdk::rgba-cstruct))))
@@ -493,13 +495,11 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-push-shadow)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_push_debug
-;;;
-;;; Inserts a debug node with a message.
+;;; gtk_snapshot_push_debug                                 not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_push_gl_shader                            Depreacted 4.16
+;;; gtk_snapshot_push_gl_shader                             Depreacted 4.16
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -509,7 +509,7 @@ pixel = transpose(matrix) * pixel + offset
 #+gtk-4-10
 (cffi:defcfun ("gtk_snapshot_push_mask" snapshot-push-mask) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[mode]{a @sym{gsk:mask-mode} value to use}
   @begin{short}
@@ -517,10 +517,8 @@ pixel = transpose(matrix) * pixel + offset
     for the mask operation will be recorded.
   @end{short}
   After that call, the source image will be recorded until the second call to
-  the @fun{gtk:snapshot-pop} function.
-
-  Calling this function requires two subsequent calls to the
-  @fun{gtk:snapshot-pop} function.
+  the @fun{gtk:snapshot-pop} function. Calling this function requires two
+  subsequent calls to the @fun{gtk:snapshot-pop} function.
 
   Since 4.10
   @see-class{gtk:snapshot}
@@ -533,13 +531,13 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-push-mask)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_push_fill
+;;; gtk_snapshot_push_fill                                  Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_push_fill" snapshot-push-fill) :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path describing the area
     to fill}
@@ -566,13 +564,13 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-push-fill)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_push_stroke
+;;; gtk_snapshot_push_stroke                                Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_push_stroke" snapshot-push-stroke) :void
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path to stroke}
   @argument[stroke]{a @class{gsk:stroke} instance for the stroke attributes}
@@ -581,13 +579,9 @@ pixel = transpose(matrix) * pixel + offset
     an image.
   @end{short}
   The image is recorded until the next call to the @fun{gtk:snapshot-pop}
-  function.
-
-  Note that the strokes are subject to the same transformation as everything
-  else, so uneven scaling will cause horizontal and vertical strokes to have
-  different widths.
-
-  If you want to stroke the path with a color, the
+  function. Note that the strokes are subject to the same transformation as
+  everything else, so uneven scaling will cause horizontal and vertical strokes
+  to have different widths. If you want to stroke the path with a color, the
   @fun{gtk:snapshot-append-stroke} function may be more convenient.
 
   Since 4.14
@@ -604,15 +598,134 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-push-stroke)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_push_component_transfer                    Since 4.20
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-20
+(cffi:defcfun ("gtk_snapshot_push_component_transfer"
+               snapshot-push-component-transfer) :void
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[red]{a @class{gsk:component-transfer} instance for the red
+    component}
+  @argument[green]{a @class{gsk:component-transfer} instance for the green
+    component}
+  @argument[blue]{a @class{gsk:component-transfer} instance for the blue
+    component}
+  @argument[alpha]{a @class{gsk:component-transfer} instance for the alpha
+    component}
+  @begin{short}
+    Modifies the colors of an image by applying a transfer function for each
+    component.
+  @end{short}
+  The transfer functions operate on unpremultiplied colors. The image is
+  recorded until the next call to the @fun{gtk:snapshot-pop} function.
+
+  Since 4.20
+  @see-class{gtk:snapshot}
+  @see-class{gsk:component-transfer}
+  @see-function{gtk:snapshot-pop}"
+  (snapshot (g:object snapshot))
+  (red (g:boxed gsk:component-transfer))
+  (green (g:boxed gsk:component-transfer))
+  (bue (g:boxed gsk:component-transfer))
+  (alpha (g:boxed gsk:component-transfer)))
+
+#+gtk-4-20
+(export 'snapshot-push-component-transfer)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_push_composite                             Since 4.22
+;;; ----------------------------------------------------------------------------
+
+#+(and gtk-4-22 (not windows))
+(cffi:defcfun ("gtk_snapshot_push_composite" snapshot-push-composite) :void
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[op]{a @symbol{gsk:porter-duff} value for the Porter/Duff compositing
+    operator to use}
+  @begin{short}
+    Until the first call to the @fun{gtk:snapshot-pop} function, the mask image
+    for the mask operation will be recorded.
+  @end{short}
+  After that call, the child image will be recorded until the second call to
+  the @fun{gtk:snapshot-pop} function. Calling this function requires 2
+  subsequent calls to @fun{gtk:snapshot-pop} function.
+
+  Since 4.22
+  @see-class{gtk:snaphot}
+  @see-symbol{gsk:porter-duff}
+  @see-function{gtk:snapshot-pop}"
+  (snaphshot (g:object snapshot))
+  (op gsk:porter-duff))
+
+#+(and gtk-4-22 (not windows))
+(export 'snapshot-push-composite)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_push_copy                                  Since 4.22
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-22
+(cffi:defcfun ("gtk_snapshot_push_copy" snapshot-push-copy) :void
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @begin{short}
+    Stores the current rendering state for later pasting via the
+    @fun{gtk:snapshot-append-paste} function.
+  @end{short}
+  Pasting is possible until the matching call to the @fun{gtk:snapshot-pop}
+  function.
+
+  Since 4.22
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-append-paste}
+  @see-function{gtk:snapshot-pop}"
+  (snapshot (g:object snapshot)))
+
+#+gtk-4-22
+(export 'snapshot-push-copy)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_push_isolation                             Since 4.22
+;;; ----------------------------------------------------------------------------
+
+#+(and gtk-4-22 (not windows))
+(cffi:defcfun ("gtk_snapshot_push_isolation" snapshot-push-isolation) :void
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[features]{a @symbol{gsk:isolation} value for features that are
+    isolated}
+  @begin{short}
+    Isolates the following drawing operations from previous ones.
+  @end{short}
+  You can express \"everything but these flags\" in a forward compatible way by
+  using bit math: @code{GSK_ISOLATION_ALL & ~(GSK_ISOLATION_BACKGROUND |
+  GSK_ISOLATION_COPY_PASTE)} will isolate everything but background and
+  copy/paste. For what isolation features exist, see the @symbol{gsk:isolation}
+  flags. Content is isolated until the next call to the @fun{gtk:snapshot-pop}
+  function.
+
+  Since 4.22
+  @see-class{gtk:snapshot}
+  @see-symbol{gsk:isolation}
+  @see-function{gtk:snapshot-pop}"
+  (snapshot (g:object snapshot))
+  (features gsk:isolation))
+
+#+(and gtk-4-22 (not windows))
+(export 'snapshot-push-isolation)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_pop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_pop" snapshot-pop) :void
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
-    Removes the top element from the stack of render nodes, and appends it to
+    Removes the top element from the stack of render nodes and appends it to
     the node underneath it.
   @end{short}
   @see-class{gtk:snapshot}"
@@ -630,20 +743,18 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_save" snapshot-save) :void
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Makes a copy of the current state of @arg{snapshot} and saves it on an
     internal stack.
   @end{short}
   When the @fun{gtk:snapshot-restore} function is called, the snapshot will be
-  restored to the saved state. Multiple calls to the @fun{gtk:snapshot-save}
-  function and the @fun{gtk:snapshot-restore} function can be nested. Each call
-  to the @fun{gtk:snapshot-restore} function restores the state from the
-  matching paired @fun{gtk:snapshot-save} function.
-
-  It is necessary to clear all saved states with corresponding calls to the
-  @fun{gtk:snapshot-restore} function.
+  restored to the saved state. Multiple calls to this function and the
+  @fun{gtk:snapshot-restore} function can be nested. Each call to the
+  @fun{gtk:snapshot-restore} function restores the state from the matching
+  paired @fun{gtk:snapshot-save} function. It is necessary to clear all saved
+  states with corresponding calls to the @fun{gtk:snapshot-restore} function.
   @see-class{gtk:snapshot}
   @see-function{gtk:snapshot-restore}"
   (snapshot (g:object snapshot)))
@@ -656,7 +767,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_restore" snapshot-restore) :void
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Restores @arg{snapshot} to the state saved by a preceding call to the
@@ -675,7 +786,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_transform" snapshot-transform) :void
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[transform]{a @class{gsk:transform} instance}
   @begin{short}
@@ -695,7 +806,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_transform_matrix" snapshot-transform-matrix) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[matrix]{a @sym{graphene:matrix-t} instance for the matrix to
     muliply the transform with}
@@ -716,7 +827,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_translate" snapshot-translate) :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[point]{a @sym{graphene:point-t} instance for the point to translate
     @arg{snapshot} by}
@@ -737,7 +848,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_translate_3d" snapshot-translate-3d) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[point]{a @sym{graphene:point3d-t} instance for the point to
     translate @arg{snapshot} by}
@@ -745,7 +856,7 @@ pixel = transpose(matrix) * pixel + offset
     Translates the coordinate system of the snapshot by @arg{point}.
   @end{short}
   @see-class{gtk:snapshot}
-  @see-symbol{graphene:point-t}"
+  @see-symbol{graphene:point3d-t}"
   (snapshot (g:object snapshot))
   (point (:pointer (:struct graphene:point3d-t))))
 
@@ -761,7 +872,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate (snapshot angle)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees (clockwise)}
@@ -772,8 +883,8 @@ pixel = transpose(matrix) * pixel + offset
   The rotation happens around the origin point of @code{(0,0)} in the  current
   coordinate system of the snapshot.
 
-  To rotate around axes other than the Z axis, use the
-  @fun{gsk:transform-rotate-3d} function.
+  Use the @fun{gtk:snapshot-rotate-3d} function to rotate around axes other
+  than the Z axis.
   @see-class{gtk:snapshot}
   @see-function{gtk:snapshot-rotate-3d}"
   (%snapshot-rotate snapshot (coerce angle 'single-float)))
@@ -791,7 +902,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate-3d (snapshot angle axis)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[angle]{a number coerced to a single float for the rotation angle,
     in degrees (clockwise)}
@@ -800,7 +911,7 @@ pixel = transpose(matrix) * pixel + offset
     Rotates the coordinate system of the snapshot by @arg{angle} degrees around
     @arg{axis}.
   @end{short}
-  For a rotation in 2D space, use the @fun{gtk:snapshot-rotate} function.
+  Use the @fun{gtk:snapshot-rotate} function for a rotation in 2D space.
   @see-class{gtk:snapshot}
   @see-symbol{graphene:vec3-t}
   @see-function{gtk:snapshot-rotate}"
@@ -819,7 +930,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale (snapshot xfactor yfactor)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the X axis}
@@ -849,7 +960,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale-3d (snapshot xfactor yfactor zfactor)
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[xfactor]{a number coerced to a single float for the scaling factor
     on the X axis}
@@ -879,7 +990,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-perspective (snapshot depth)
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[depth]{a number coerced to a single float for the distance of
     the @code{Z=0} plane}
@@ -900,7 +1011,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_node" snapshot-append-node) :void
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[node]{a @class{gsk:render-node} instance}
   @begin{short}
@@ -910,7 +1021,7 @@ pixel = transpose(matrix) * pixel + offset
   If @arg{snapshot} does not have a current node yet, @arg{node} will become
   the initial node.
   @see-class{gtk:snapshot}
-  @see-class{gsk-render-node}"
+  @see-class{gsk:render-node}"
   (snapshot (g:object snapshot))
   (node gsk:render-node))
 
@@ -923,7 +1034,7 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_append_cairo" snapshot-append-cairo)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the new
     node}
@@ -945,40 +1056,12 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-cairo)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_texture
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_snapshot_append_texture" snapshot-append-texture) :void
- #+liber-documentation
- "@version{2025-07-26}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[texture]{a @class{gdk:texture} object for the texture to render}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
-    new node}
-  @begin{short}
-    Creates a new render node drawing the texture into the given bounds and
-    appends it to the current render node of @arg{snapshot}.
-  @end{short}
-  If the texture needs to be scaled to fill bounds, linear filtering is used.
-  See the @fun{gtk:snapshot-append-scaled-texture} function if you need other
-  filtering, such as nearest-neighbour.
-  @see-class{gtk:snapshot}
-  @see-class{gdk:texture}
-  @see-symbol{graphene:rect-t}
-  @see-function{gtk:snapshot-append-scaled-texture}"
-  (snapshot (g:object snapshot))
-  (texture (g:object gdk:texture))
-  (bounds (:pointer (:struct graphene:rect-t))))
-
-(export 'snapshot-append-texture)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_color" snapshot-append-color) :void
  #+liber-documentation
- "@version{2025-08-23}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[color]{a @class{gdk:rgba} instance for the color to draw}
   @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the node}
@@ -1014,7 +1097,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_layout" snapshot-append-layout) :void
  #+liber-documentation
- "@version{#2025-02-12}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[layout]{a @class{pango:layout} instance to render}
   @argument[color]{a @class{gdk:rgba} instance for the foreground color to
@@ -1040,173 +1123,6 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_linear_gradient
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_snapshot_append_linear_gradient"
-               %snapshot-append-linear-gradient) :void
-  (snapshot (g:object snapshot))
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (start (:pointer (:struct graphene:point-t)))
-  (end (:pointer (:struct graphene:point-t)))
-  (stops :pointer)
-  (n-stops :size))
-
-(defun snapshot-append-linear-gradient (snapshot bounds start end stops)
- #+liber-documentation
- "@version{2025-07-26}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
-    render the linear gradient into}
-  @argument[start]{a @sym{graphene:point-t} instance for the point at which
-    the linear gradient will begin}
-  @argument[end]{a @sym{graphene:point-t} instance for the point at which
-    the linear gradient will finish}
-  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2
-    color2) ...)} with the offsets and colors defining the gradient}
-  @argument[offset]{a number coerced to a single float for the offset of the
-    color stop}
-  @argument[color]{a @class{gdk:rgba} instance for the color at the given
-    offset}
-  @begin{short}
-    Appends a linear gradient node with the given color stops to @arg{snapshot}.
-  @end{short}
-  @see-class{gtk:snapshot}
-  @see-symbol{graphene:rect-t}
-  @see-symbol{graphene:point-t}"
-  (let ((n-stops (length stops)))
-    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
-      (iter (for i from 0 below n-stops)
-            (for (offset color) in stops)
-            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
-            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                (cffi:inc-pointer ptr
-                                  (cffi:foreign-type-size :float))
-                'gdk:rgba))
-      (%snapshot-append-linear-gradient snapshot
-                                        bounds
-                                        start
-                                        end
-                                        stops-ptr
-                                        n-stops))))
-
-(export 'snapshot-append-linear-gradient)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_repeating_linear_gradient
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_snapshot_append_repeating_linear_gradient"
-               %snapshot-append-repeating-linear-gradient) :void
-  (snapshot (g:object snapshot))
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (start (:pointer (:struct graphene:point-t)))
-  (end (:pointer (:struct graphene:point-t)))
-  (stops :pointer)
-  (n-stops :size))
-
-(defun snapshot-append-repeating-linear-gradient (snapshot
-                                                  bounds start end stops)
- #+liber-documentation
- "@version{#2025-07-26}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
-    render the linear gradient into}
-  @argument[start]{a @sym{graphene:point-t} instance for the point at which
-    the linear gradient will begin}
-  @argument[end]{a @sym{graphene:point-t} instance for the point at which
-    the linear gradient will finish}
-  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
-    ...)} with the offsets and colors defining the gradient}
-  @argument[offset]{a number coerced to a single float for the offset of the
-    color stop}
-  @argument[color]{a @class{gdk:rgba} instance for the color at the given
-    offset}
-  @begin{short}
-    Appends a repeating linear gradient node with the given stops to
-    @arg{snapshot}.
-  @end{short}
-  @see-class{gtk:snapshot}
-  @see-symbol{graphene:rect-t}
-  @see-symbol{graphene:point-t}"
-  (let ((n-stops (length stops)))
-    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
-      (iter (for i from 0 below n-stops)
-            (for (offset color) in stops)
-            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
-            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                (cffi:inc-pointer ptr
-                                  (cffi:foreign-type-size :float))
-                'gdk:rgba))
-      (%snapshot-append-repeating-linear-gradient snapshot
-                                                  bounds
-                                                  start
-                                                  end
-                                                  stops-ptr
-                                                  n-stops))))
-
-(export 'snapshot-append-repeating-linear-gradient)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_conic_gradient
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_snapshot_append_conic_gradient"
-               %snapshot-append-conic-gradient) :void
-  (snapshot (g:object snapshot))
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (center (:pointer (:struct graphene:point-t)))
-  (rotation :float)
-  (stops :pointer)
-  (n-stops :size))
-
-(defun snapshot-append-conic-gradient (snapshot bounds center rotation stops)
- #+liber-documentation
- "@version{#2025-07-26}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
-    render node}
-  @argument[center]{a @sym{graphene:point-t} instance for the center of the
-    gradient}
-  @argument[rotation]{a number coerced to a single float for the rotation of
-    the gradient, in degrees}
-  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
-    ...)} with the offsets and colors defining the gradient}
-  @argument[offset]{a number coerced to a single float for the offset of the
-    color stop}
-  @argument[color]{a @class{gdk:rgba} instance for the color at the given
-    offset}
-  @begin{short}
-    Appends a conic gradient node with the given stops to @arg{snapshot}.
-  @end{short}
-  @see-class{gtk:snapshot}
-  @see-symbol{graphene:rect-t}
-  @see-symbol{graphene:point-t}"
-  (let ((n-stops (length stops)))
-    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
-      (iter (for i from 0 below n-stops)
-            (for (offset color) in stops)
-            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
-            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                (cffi:inc-pointer ptr
-                                  (cffi:foreign-type-size :float))
-                'gdk:rgba))
-      (%snapshot-append-conic-gradient snapshot
-                                       bounds
-                                       center
-                                       (coerce rotation 'single-float)
-                                       stops-ptr
-                                       n-stops))))
-
-(export 'snapshot-append-conic-gradient)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_border
 ;;; ----------------------------------------------------------------------------
 
@@ -1218,7 +1134,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-border (snapshot outline widths colors)
  #+liber-documentation
- "@version{2025-02-12}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
     border}
@@ -1247,6 +1163,318 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-border)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_append_linear_gradient
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_snapshot_append_linear_gradient"
+               %snapshot-append-linear-gradient) :void
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (start (:pointer (:struct graphene:point-t)))
+  (end (:pointer (:struct graphene:point-t)))
+  (stops :pointer)
+  (n-stops :size))
+
+(defun snapshot-append-linear-gradient (snapshot bounds start end stops)
+ #+liber-documentation
+ "@version{2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
+    render the linear gradient into}
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
+    the linear gradient will begin}
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
+    the linear gradient will finish}
+  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2
+    color2) ...)} with the offsets and colors defining the gradient}
+  @argument[offset]{a number coerced to a single float for the offset of the
+    color stop}
+  @argument[color]{a @class{gdk:rgba} instance for the color at the given
+    offset}
+  @begin{short}
+    Appends a linear gradient node with the given color stops to @arg{snapshot}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:point-t}"
+  (let ((n-stops (length stops)))
+    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in stops)
+            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%snapshot-append-linear-gradient snapshot
+                                        bounds
+                                        start
+                                        end
+                                        stops-ptr
+                                        n-stops))))
+
+(export 'snapshot-append-linear-gradient)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_append_repeating_linear_gradient
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_snapshot_append_repeating_linear_gradient"
+               %snapshot-append-repeating-linear-gradient) :void
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (start (:pointer (:struct graphene:point-t)))
+  (end (:pointer (:struct graphene:point-t)))
+  (stops :pointer)
+  (n-stops :size))
+
+(defun snapshot-append-repeating-linear-gradient (snapshot
+                                                  bounds start end stops)
+ #+liber-documentation
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
+    render the linear gradient into}
+  @argument[start]{a @sym{graphene:point-t} instance for the point at which
+    the linear gradient will begin}
+  @argument[end]{a @sym{graphene:point-t} instance for the point at which
+    the linear gradient will finish}
+  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
+    ...)} with the offsets and colors defining the gradient}
+  @argument[offset]{a number coerced to a single float for the offset of the
+    color stop}
+  @argument[color]{a @class{gdk:rgba} instance for the color at the given
+    offset}
+  @begin{short}
+    Appends a repeating linear gradient node with the given stops to
+    @arg{snapshot}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:point-t}"
+  (let ((n-stops (length stops)))
+    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in stops)
+            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%snapshot-append-repeating-linear-gradient snapshot
+                                                  bounds
+                                                  start
+                                                  end
+                                                  stops-ptr
+                                                  n-stops))))
+
+(export 'snapshot-append-repeating-linear-gradient)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_append_radial_gradient
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_snapshot_append_radial_gradient"
+               %snapshot-append-radial-gradient) :void
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (hradius :float)
+  (vradius :float)
+  (start :float)
+  (end :float)
+  (stops :pointer)
+  (n-stops :size))
+
+(defun snapshot-append-radial-gradient (snapshot
+                                        bounds
+                                        center
+                                        hradius vradius
+                                        start end stops)
+ #+liber-documentation
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
+    render the radial gradient into}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    radial gradient}
+  @argument[hradius]{a number coerced to a single float for the horizontal
+    radius}
+  @argument[vradius]{a number coerced to a single float for the vertical radius}
+  @argument[start]{a number coerced to a single float for the percentage >= 0
+    that defines the start of the radial gradient around @arg{center}}
+  @argument[end]{a number coerced to a single float for the percentage >= 0
+    that defines the end of the radial gradient around @arg{center}}
+  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
+    ...)} with the offsets and colors defining the gradient}
+  @argument[offset]{a number coerced to a single float for the offset of the
+    color stop}
+  @argument[color]{a @class{gdk:rgba} instance for the color at the given
+    offset}
+  @begin{short}
+    Appends a radial gradient node with the given stops to @arg{snapshot}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:point-t}"
+  (let ((n-stops (length stops)))
+    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in stops)
+            (for ptr = (cffi:mem-aptr stops-ptr
+                                      '(:struct gsk::%color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%snapshot-append-radial-gradient snapshot
+                                        bounds
+                                        center
+                                        (coerce hradius 'single-float)
+                                        (coerce vradius 'single-float)
+                                        (coerce start 'single-float)
+                                        (coerce end 'single-float)
+                                        stops-ptr
+                                        n-stops))))
+
+(export 'snapshot-append-radial-gradient)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_append_repeating_radial_gradient
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_snapshot_append_repeating_radial_gradient"
+               %snapshot-append-repeating-radial-gradient) :void
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (hradius :float)
+  (vradius :float)
+  (start :float)
+  (end :float)
+  (stops :pointer)
+  (n-stops :size))
+
+(defun snapshot-append-repeating-radial-gradient (snapshot
+                                                  bounds
+                                                  center
+                                                  hradius vradius
+                                                  start end
+                                                  stops)
+ #+liber-documentation
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
+    render the radial gradient into}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    radial gradient}
+  @argument[hradius]{a number coerced to a single float for the horizontal
+    radius}
+  @argument[vradius]{a number coerced to a single float for the vertical radius}
+  @argument[start]{a number coerced to a single float for the percentage >= 0
+    that defines the start of the radial gradient around @arg{center}}
+  @argument[end]{a number coerced to a single float for the percentage >= 0
+    that defines the end of the radial gradient around @arg{center}}
+  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
+    ...)} with the offsets and colors defining the gradient}
+  @argument[offset]{a number coerced to a single float for the offset of the
+    color stop}
+  @argument[color]{a @class{gdk:rgba} instance for the color at the given
+    offset}
+  @begin{short}
+    Appends a repeating radial gradient node with the given stops to
+    @arg{snapshot}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:point-t}"
+  (let ((n-stops (length stops)))
+    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in stops)
+            (for ptr = (cffi:mem-aptr stops-ptr
+                                      '(:struct gsk::%color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%snapshot-append-repeating-radial-gradient snapshot
+                                                  bounds
+                                                  center
+                                                  (coerce hradius 'single-float)
+                                                  (coerce vradius 'single-float)
+                                                  (coerce start 'single-float)
+                                                  (coerce end 'single-float)
+                                                  stops-ptr
+                                                  n-stops))))
+
+(export 'snapshot-append-repeating-radial-gradient)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_append_conic_gradient
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_snapshot_append_conic_gradient"
+               %snapshot-append-conic-gradient) :void
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (rotation :float)
+  (stops :pointer)
+  (n-stops :size))
+
+(defun snapshot-append-conic-gradient (snapshot bounds center rotation stops)
+ #+liber-documentation
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
+    render node}
+  @argument[center]{a @sym{graphene:point-t} instance for the center of the
+    gradient}
+  @argument[rotation]{a number coerced to a single float for the rotation of
+    the gradient, in degrees}
+  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
+    ...)} with the offsets and colors defining the gradient}
+  @argument[offset]{a number coerced to a single float for the offset of the
+    color stop}
+  @argument[color]{a @class{gdk:rgba} instance for the color at the given
+    offset}
+  @begin{short}
+    Appends a conic gradient node with the given stops to @arg{snapshot}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:point-t}"
+  (let ((n-stops (length stops)))
+    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in stops)
+            (for ptr = (cffi:mem-aptr stops-ptr '(:struct gsk::%color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%snapshot-append-conic-gradient snapshot
+                                       bounds
+                                       center
+                                       (coerce rotation 'single-float)
+                                       stops-ptr
+                                       n-stops))))
+
+(export 'snapshot-append-conic-gradient)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_inset_shadow
 ;;; ----------------------------------------------------------------------------
 
@@ -1262,7 +1490,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-inset-shadow (snapshot outline color dx dy spread radius)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
     border}
@@ -1311,7 +1539,7 @@ pixel = transpose(matrix) * pixel + offset
                                       dx dy
                                       spread radius)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[outline]{a @sym{gsk:rounded-rect} instance for the outline of the
     region surrounded by the shadow}
@@ -1341,158 +1569,42 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-outset-shadow)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_radial_gradient
+;;; gtk_snapshot_append_texture
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_append_radial_gradient"
-               %snapshot-append-radial-gradient) :void
-  (snapshot (g:object snapshot))
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (center (:pointer (:struct graphene:point-t)))
-  (hradius :float)
-  (vradius :float)
-  (start :float)
-  (end :float)
-  (stops :pointer)
-  (n-stops :size))
-
-(defun snapshot-append-radial-gradient (snapshot
-                                        bounds
-                                        center
-                                        hradius vradius
-                                        start end stops)
+(cffi:defcfun ("gtk_snapshot_append_texture" snapshot-append-texture) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
-    render the radial gradient into}
-  @argument[center]{a @sym{graphene:point-t} instance for the center of the
-    radial gradient}
-  @argument[hradius]{a number coerced to a single float for the horizontal
-    radius}
-  @argument[vradius]{a number coerced to a single float for the vertical radius}
-  @argument[start]{a number coerced to a single float for the percentage >= 0
-    that defines the start of the radial gradient around @arg{center}}
-  @argument[end]{a number coerced to a single float for the percentage >= 0
-    that defines the end of the radial gradient around @arg{center}}
-  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
-    ...)} with the offsets and colors defining the gradient}
-  @argument[offset]{a number coerced to a single float for the offset of the
-    color stop}
-  @argument[color]{a @class{gdk:rgba} instance for the color at the given
-    offset}
+  @argument[texture]{a @class{gdk:texture} object for the texture to render}
+  @argument[bounds]{a @sym{graphene:rect-t} instance for the bounds of the
+    new node}
   @begin{short}
-    Appends a radial gradient node with the given stops to @arg{snapshot}.
+    Creates a new render node drawing the texture into the given bounds and
+    appends it to the current render node of @arg{snapshot}.
   @end{short}
-  @see-class{gsk:linear-gradient-node}
+  If the texture needs to be scaled to fill bounds, linear filtering is used.
+  See the @fun{gtk:snapshot-append-scaled-texture} function if you need other
+  filtering, such as nearest-neighbour.
+  @see-class{gtk:snapshot}
+  @see-class{gdk:texture}
   @see-symbol{graphene:rect-t}
-  @see-symbol{graphene:point-t}"
-  (let ((n-stops (length stops)))
-    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
-      (iter (for i from 0 below n-stops)
-            (for (offset color) in stops)
-            (for ptr = (cffi:mem-aptr stops-ptr
-                                      '(:struct gsk::%color-stop) i))
-            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                (cffi:inc-pointer ptr
-                                  (cffi:foreign-type-size :float))
-                'gdk:rgba))
-      (%snapshot-append-radial-gradient snapshot
-                                        bounds
-                                        center
-                                        (coerce hradius 'single-float)
-                                        (coerce vradius 'single-float)
-                                        (coerce start 'single-float)
-                                        (coerce end 'single-float)
-                                        stops-ptr
-                                        n-stops))))
-
-(export 'snapshot-append-radial-gradient)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_repeating_radial_gradient
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_snapshot_append_repeating_radial_gradient"
-               %snapshot-append-repeating-radial-gradient) :void
+  @see-function{gtk:snapshot-append-scaled-texture}"
   (snapshot (g:object snapshot))
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (center (:pointer (:struct graphene:point-t)))
-  (hradius :float)
-  (vradius :float)
-  (start :float)
-  (end :float)
-  (stops :pointer)
-  (n-stops :size))
+  (texture (g:object gdk:texture))
+  (bounds (:pointer (:struct graphene:rect-t))))
 
-(defun snapshot-append-repeating-radial-gradient (snapshot
-                                                  bounds
-                                                  center
-                                                  hradius vradius
-                                                  start end
-                                                  stops)
- #+liber-documentation
- "@version{#2025-07-26}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[bounds]{a @sym{graphene:rect-t} instance for the rectangle to
-    render the radial gradient into}
-  @argument[center]{a @sym{graphene:point-t} instance for the center of the
-    radial gradient}
-  @argument[hradius]{a number coerced to a single float for the horizontal
-    radius}
-  @argument[vradius]{a number coerced to a single float for the vertical radius}
-  @argument[start]{a number coerced to a single float for the percentage >= 0
-    that defines the start of the radial gradient around @arg{center}}
-  @argument[end]{a number coerced to a single float for the percentage >= 0
-    that defines the end of the radial gradient around @arg{center}}
-  @argument[stops]{a list of the form @code{'((offset1 color1) (offset2 color2)
-    ...)} with the offsets and colors defining the gradient}
-  @argument[offset]{a number coerced to a single float for the offset of the
-    color stop}
-  @argument[color]{a @class{gdk:rgba} instance for the color at the given
-    offset}
-  @begin{short}
-    Appends a repeating radial gradient node with the given stops to
-    @arg{snapshot}.
-  @end{short}
-  @see-class{gsk:linear-gradient-node}
-  @see-symbol{graphene:rect-t}
-  @see-symbol{graphene:point-t}"
-  (let ((n-stops (length stops)))
-    (cffi:with-foreign-object (stops-ptr '(:struct gsk::%color-stop) n-stops)
-      (iter (for i from 0 below n-stops)
-            (for (offset color) in stops)
-            (for ptr = (cffi:mem-aptr stops-ptr
-                                      '(:struct gsk::%color-stop) i))
-            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
-            (glib::copy-boxed-slots-to-foreign
-                color
-                (cffi:inc-pointer ptr
-                                  (cffi:foreign-type-size :float))
-                'gdk:rgba))
-      (%snapshot-append-repeating-radial-gradient snapshot
-                                                  bounds
-                                                  center
-                                                  (coerce hradius 'single-float)
-                                                  (coerce vradius 'single-float)
-                                                  (coerce start 'single-float)
-                                                  (coerce end 'single-float)
-                                                  stops-ptr
-                                                  n-stops))))
-
-(export 'snapshot-append-repeating-radial-gradient)
+(export 'snapshot-append-texture)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_scaled_texture
+;;; gtk_snapshot_append_scaled_texture                      Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gtk_snapshot_append_scaled_texture"
                snapshot-append-scaled-texture) :void
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[texture]{a @class{gdk:texture} object for the texture to render}
   @argument[filter]{a @sym{gsk:scaling-filter} value for the filter to use}
@@ -1520,13 +1632,13 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-scaled-texture)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_fill
+;;; gtk_snapshot_append_fill                                Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_append_fill" snapshot-append-fill) :void
  #+liber-documentation
- "@version{2025-07-26}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path describing the area
     to fill}
@@ -1554,13 +1666,13 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-fill)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_append_stroke
+;;; gtk_snapshot_append_stroke                              Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-14
 (cffi:defcfun ("gtk_snapshot_append_stroke" snapshot-append-stroke) :void
  #+liber-documentation
- "@version{2025-03-01}
+ "@version{2026-05-22}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[path]{a @class{gsk:path} instance for the path to stroke}
   @argument[stroke]{a @class{gsk:stroke} instance for the stroke attributes}
@@ -1576,6 +1688,7 @@ pixel = transpose(matrix) * pixel + offset
   @see-class{gtk:snapshot}
   @see-class{gsk:path}
   @see-class{gsk:stroke}
+  @see-class{gdk:rgba}
   @see-function{gtk:snapshot-push-stroke}"
   (snapshot (g:object snapshot))
   (path (g:boxed gsk:path))
@@ -1586,50 +1699,52 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-append-stroke)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_render_insertion_cursor
-;;;
-;;; Draws a text caret using snapshot at the specified index of layout.
-;;;
-;;; Deprecated 4.10
+;;; gtk_snapshot_append_paste                               Since 4.22
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-22
+(cffi:defcfun ("gtk_snapshot_append_paste" snapshot-append-paste) :void
+ #+liber-documentation
+ "@version{#2026-05-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of the
+    new node}
+  @argument[nth]{an integer for the index of the copy, with 0 being the latest
+    copy, 1 being the copy before that, and so on.}
+  @begin{short}
+    Creates a new render node that pastes the contents copied by a previous call
+    to the @fun{gtk:snapshot-push-copy} function.
+  @end{short}
+
+  Since 4.22
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:rect-t}
+  @see-function{gtk:snapshot-push-copy}"
+  (snapshot (g:object snapshot))
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (nth :size))
+
+#+gtk-4-22
+(export 'snapshot-append-paste)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_snapshot_render_insertion_cursor                    Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_render_background
-;;;
-;;; Creates a render node for the CSS background according to context, and
-;;; appends it to the current node of snapshot, without changing the current
-;;; node.
-;;;
-;;; Deprecated 4.10
+;;; gtk_snapshot_render_background                          Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_render_frame
-;;;
-;;; Creates a render node for the CSS border according to context, and appends
-;;; it to the current node of snapshot, without changing the current node.
-;;;
-;;; Deprecated 4.10
+;;; gtk_snapshot_render_frame                               Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_render_focus
-;;;
-;;; Creates a render node for the focus outline according to context, and
-;;; appends it to the current node of snapshot, without changing the current
-;;; node.
-;;;
-;;; Deprecated 4.10
+;;; gtk_snapshot_render_focus                               Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_render_layout
-;;;
-;;; Creates a render node for rendering layout according to the style
-;;; information in context, and appends it to the current node of snapshot,
-;;; without changing the current node.
-;;;
-;;; Deprecated 4.10
+;;; gtk_snapshot_render_layout                              Deprecated 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.snapshot.lisp -----------------------------------------

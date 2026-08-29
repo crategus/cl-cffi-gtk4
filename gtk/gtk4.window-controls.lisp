@@ -2,7 +2,7 @@
 ;;; gtk4.window-controls.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -173,17 +173,16 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-decoration-layout)
       "Accessor"
       (documentation 'window-controls-decoration-layout 'function)
- "@version{2025-08-13}
+ "@version{2026-08-29}
   @syntax{(gtk:window-controls-decoration-layout object) => layout}
   @syntax{(setf (gtk:window-controls-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[layout]{a string for the decoration layout, or @code{nil} to unset
     the decoration layout}
   @begin{short}
-    The accessor for the @slot[gtk:window-controls]{decoration-layout} slot of
-    the @class{gtk:window-controls} class gets or sets the decoration layout for
-    the title buttons, overriding the @slot[gtk:settings]{gtk-decoration-layout}
-    setting.
+    The accessor for the @slot[gtk:window-controls]{decoration-layout} slot
+    gets or sets the decoration layout for the title buttons, overriding the
+    @slot[gtk:settings]{gtk-decoration-layout} setting.
   @end{short}
 
   The format of the string is button names, separated by commas. A colon
@@ -212,15 +211,14 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-empty)
       "Accessor"
       (documentation 'window-controls-empty 'function)
- "@version{2025-08-13}
+ "@version{2026-08-29}
   @syntax{(gtk:window-controls-empty object) => empty}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[empty]{@em{true} if the widget has window buttons, otherwise
     @em{false}}
   @begin{short}
-    The accessor for the @slot[gtk:window-controls]{empty} slot of the
-    @class{gtk:window-controls} class gets whether the widget has any window
-    buttons.
+    The accessor for the @slot[gtk:window-controls]{empty} slot gets whether
+    the widget has any window buttons.
   @end{short}
   @see-class{gtk:window-controls}")
 
@@ -236,15 +234,14 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-side)
       "Accessor"
       (documentation 'window-controls-side 'function)
- "@version{2025-08-13}
+ "@version{2026-08-29}
   @syntax{(gtk:window-controls-side object) => side}
   @syntax{(setf (gtk:window-controls-side object) side)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[side]{a @sym{gtk:pack-type} value}
   @begin{short}
-    The accessor for the @slot[gtk:window-controls]{side} slot of the
-    @class{gtk:window-controls} class gets or sets whether the widget shows
-    start or end side of the decoration layout.
+    The accessor for the @slot[gtk:window-controls]{side} slot gets or sets
+    whether the widget shows start or end side of the decoration layout.
   @end{short}
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
@@ -268,15 +265,15 @@ windowcontrols
 (setf (liber:alias-for-function 'window-controls-use-native-controls)
       "Accessor"
       (documentation 'window-controls-use-native-controls 'function)
- "@version{2025-08-13}
+ "@version{2026-08-29}
   @syntax{(gtk:window-controls-use-native-controls object) => setting}
   @syntax{(setf (gtk:window-controls-use-native-controls object) setting)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[setting]{@em{true} to show native controls}
   @begin{short}
-    The accessor for the @slot[gtk:window-controls]{use-native-controls} slot of
-    the @class{gtk:window-controls} class gets or sets whether to show platform
-    native Close/Minimize/Maximize buttons.
+    The accessor for the @slot[gtk:window-controls]{use-native-controls} slot
+    gets or sets whether to show platform native Close/Minimize/Maximize
+    buttons.
   @end{short}
   This option shows the \"stoplight\" buttons on macOS. For Linux, this option
   has no effect. See also

@@ -2,7 +2,7 @@
 ;;; gtk4.size-group.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -235,14 +235,14 @@
 (setf (liber:alias-for-function 'size-group-mode)
       "Accessor"
       (documentation 'size-group-mode 'function)
- "@version{2025-09-27}
+ "@version{2026-08-29}
   @syntax{(gtk:size-group-mode object) => mode}
   @syntax{(setf (gtk:size-group-mode object) mode)}
   @argument[object]{a @class{gtk:size-group} object}
   @argument[mode]{a @sym{gtk:size-group-mode} value to set for the size group}
   @begin{short}
-    The accessor for the @slot[gtk:size-group]{mode} slot of the
-    @class{gtk:size-group} class gets or sets the mode of the size group.
+    The accessor for the @slot[gtk:size-group]{mode} slot gets or sets the
+    mode of the size group.
   @end{short}
 
   The mode of the size group determines whether the widgets in the size group

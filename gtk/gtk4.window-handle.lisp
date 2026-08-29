@@ -2,7 +2,7 @@
 ;;; gtk4.window-handle.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -113,15 +113,14 @@
 (setf (liber:alias-for-function 'window-handle-child)
       "Accessor"
       (documentation 'window-handle-child 'function)
- "@version{2026-01-31}
+ "@version{2026-08-29}
   @syntax{(gtk:window-handle-child object) => child}
   @syntax{(setf (gtk:window-handle-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:window-handle]{child} slot of the
-    @class{gtk:window-handle} class gets or sets the child widget of the window
-    handle.
+    The accessor for the @slot[gtk:window-handle]{child} slot gets or sets the
+    child widget of the window handle.
   @end{short}
   @see-class{gtk:window}
   @see-class{gtk:widget}")

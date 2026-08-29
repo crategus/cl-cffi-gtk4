@@ -2,7 +2,7 @@
 ;;; gtk4.frame.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -166,14 +166,14 @@ frame
 (setf (liber:alias-for-function 'frame-child)
       "Accessor"
       (documentation 'frame-child 'function)
- "@version{2025-09-21}
+ "@version{2026-08-28}
   @syntax{(gtk:frame-child object) => child}
   @syntax{(setf (gtk:frame-child object) child)}
   @argument[object]{a @class{gtk:frame} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:frame]{child} slot of the @class{gtk:frame}
-    class gets or sets the child widget of the frame.
+    The accessor for the @slot[gtk:frame]{child} slot gets or sets the child
+    widget of the frame.
   @end{short}
   @see-class{gtk:frame}
   @see-class{gtk:widget}")
@@ -190,14 +190,14 @@ frame
 (setf (liber:alias-for-function 'frame-label)
       "Accessor"
       (documentation 'frame-label 'function)
- "@version{2025-09-21}
+ "@version{2026-08-28}
   @syntax{(gtk:frame-label object) => label}
   @syntax{(setf (gtk:frame-label object) label)}
   @argument[object]{a @class{gtk:frame} widget}
   @argument[label]{a string for the text to use as the label of the frame}
   @begin{short}
-    The accessor for the @slot[gtk:frame]{label} slot of the @class{gtk:frame}
-    class gets or sets the text in the label.
+    The accessor for the @slot[gtk:frame]{label} slot gets or sets the text in
+    the label.
   @end{short}
   Returns @code{nil} if there was no label widget or the label widget was not a
   @class{gtk:label} widget. If the @arg{label} argument is @code{nil}, the
@@ -222,14 +222,14 @@ frame
 (setf (liber:alias-for-function 'frame-label-widget)
       "Accessor"
       (documentation 'frame-label-widget 'function)
- "@version{2025-09-21}
+ "@version{2026-08-28}
   @syntax{(gtk:frame-label-widget object) => widget}
   @syntax{(setf (gtk:frame-label-widget object) widget)}
   @argument[object]{a @class{gtk:frame} widget}
   @argument[widget]{a @class{gtk:widget} label widget}
   @begin{short}
-    The accessor for the @slot[gtk:frame]{label-widget} slot of the
-    @class{gtk:frame} class gets or sets the label widget for the frame.
+    The accessor for the @slot[gtk:frame]{label-widget} slot gets or sets the
+    label widget for the frame.
   @end{short}
   This is the widget that will appear embedded in the top edge of the frame as
   a title.
@@ -250,16 +250,15 @@ frame
 (setf (liber:alias-for-function 'frame-label-xalign)
       "Accessor"
       (documentation 'frame-label-xalign 'function)
- "@version{2025-09-21}
+ "@version{2026-08-28}
   @syntax{(gtk:frame-label-xalign object) => xalign}
   @syntax{(setf (gtk:frame-label-xalign object) xalign)}
   @argument[object]{a @class{gtk:frame} widget}
   @argument[xalign]{a number coerced to a single float for the position of the
     label along the top edge of the widget}
   @begin{short}
-    The accessor for the @slot[gtk:frame]{label-xalign} slot of the
-    @class{gtk:frame} class gets or sets the x alignment of the label of the
-    frame.
+    The accessor for the @slot[gtk:frame]{label-xalign} slot gets or sets the
+    x alignment of the label of the frame.
   @end{short}
   The default value for a newly created frame is 0.0. A value of 0.0 represents
   left alignment, 1.0 represents right alignment. The change of the property is
@@ -302,13 +301,11 @@ frame
   @argument[align]{a single float for the position of the label along the top
     edge of the widget}
   @begin{short}
-    The @fun{gtk:frame-label-align} function retrieves the x alignment of the
-    label of the frame.
+    Gets or sets the x alignment of the label of the frame.
   @end{short}
-  The @setf{gtk:frame-label-align} function sets the x alignment. The default
-  value for a newly created frame is 0.0. A value of 0.0 represents left
-  alignment, 1.0 represents right alignment. The change of the
-  property is ignored if the value is not in the range of [0.0, 1.0].
+  The default value for a newly created frame is 0.0. A value of 0.0 represents
+  left alignment, 1.0 represents right alignment. The change of the property is
+  ignored if the value is not in the range of [0.0, 1.0].
   @begin[Notes]{dictionary}
     This function is a variant of the @fun{gtk:frame-label-xalign} function,
     which is the accessor function of the @slot[gtk:frame]{label-xalign}

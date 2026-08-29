@@ -2,7 +2,7 @@
 ;;; gtk4.widget-paintable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -117,15 +117,14 @@
 (setf (liber:alias-for-function 'widget-paintable-widget)
       "Accessor"
       (documentation 'widget-paintable-widget 'function)
- "@version{2026-01-31}
+ "@version{2026-08-29}
   @syntax{(gtk:widget-paintable-widget object) => widget}
   @syntax{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
   @argument[widget]{a @class{gtk:widget} object to observe or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:widget-paintable]{widget} slot of the
-    @class{gtk:widget-paintable} object gets or sets the widget that is
-    observed.
+    The accessor for the @slot[gtk:widget-paintable]{widget} slot gets or
+    sets the widget that is observed.
   @end{short}
   Returns @code{nil} if none.
   @see-class{gtk:widget-paintable}
